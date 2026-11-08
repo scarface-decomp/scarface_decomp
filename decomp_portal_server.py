@@ -840,25 +840,92 @@ def git_sync(user: str) -> dict:
 # Scripts tab
 # =========================================================================== #
 
-def script_files() -> List[dict]:
-    from cso_dso_dtr_decompiler import verify_and_decompile_cso_dso, verify_and_decompile_dtr
-    items = []
+SCRIPT_EXTS = (".cso", ".dso", ".dtr", ".cs")
+# Folders under binaries/scripts_and_data/ and what they hold. Retail scripts are the same files on
+# the Xbox and PS2 discs (docs/SCRIPTS.md), so either folder name means "retail".
+SCRIPT_VERSIONS = {
+    "xbox": "Retail game (Xbox; the PS2 disc has the same files)",
+    "ps2": "Retail game (PS2 disc; the Xbox disc has the same files)",
+    "pc": "PC game (installed copy)",
+    "prototype": "Xbox prototype, April 2006",
+    "uploads": "Files you loaded",
+}
+RETAIL_SCRIPT_DIRS = ("xbox", "ps2")
+_SCRIPT_INDEX: Dict[str, object] = {"key": None, "items": [], "versions": []}
+
+
+def _script_version(rel: Path) -> str:
+    return rel.parts[0] if len(rel.parts) > 1 else "uploads"
+
+
+def script_index() -> Tuple[List[dict], List[dict]]:
+    """Every script file under binaries/scripts_and_data/, without reading their contents in detail.
+
+    Files in a non-retail folder (the prototype) are compared with the retail copy at the same path:
+    'same', 'changed', or 'only here' (scripts that never shipped)."""
     if not SCRIPTS_DIR.exists():
-        return items
-    for p in sorted(SCRIPTS_DIR.rglob("*")):
-        ext = p.suffix.lower()
-        if not p.is_file() or ext not in (".cso", ".dso", ".dtr"):
-            continue
-        try:
-            raw = p.read_bytes()
-            res = verify_and_decompile_dtr(raw, p.name) if ext == ".dtr" else verify_and_decompile_cso_dso(raw, p.name)
-        except Exception as e:
-            res = {"ok": False, "error": str(e)}
-        if res.get("ok"):
-            items.append({"name": p.name, "ext": ext[1:].upper(), "format": res["format"], "size": res["size"],
-                          "opcode_count": res["opcode_count"], "disasm": res["disasm"],
-                          "decompiled_code": res["decompiled_code"]})
-    return items
+        return [], []
+    paths = [p for p in SCRIPTS_DIR.rglob("*") if p.is_file() and p.suffix.lower() in SCRIPT_EXTS]
+    key = tuple(sorted((str(p), p.stat().st_mtime_ns, p.stat().st_size) for p in paths))
+    if _SCRIPT_INDEX["key"] == key:
+        return _SCRIPT_INDEX["items"], _SCRIPT_INDEX["versions"]
+    retail: Dict[str, str] = {}
+    rows = []
+    for p in paths:
+        rel = p.relative_to(SCRIPTS_DIR)
+        version = _script_version(rel)
+        inner = "/".join(rel.parts[1:] if version != "uploads" or len(rel.parts) > 1 else rel.parts).lower()
+        digest = hashlib.sha1(p.read_bytes()).hexdigest()
+        if version in RETAIL_SCRIPT_DIRS:
+            retail.setdefault(inner, digest)
+        rows.append((p, rel, version, inner, digest))
+    items = []
+    counts: Counter = Counter()
+    for p, rel, version, inner, digest in rows:
+        compare = ""
+        if retail and version not in RETAIL_SCRIPT_DIRS and version != "uploads":
+            compare = "only here" if inner not in retail else ("same" if retail[inner] == digest else "changed")
+        counts[version] += 1
+        items.append({"path": rel.as_posix(), "name": p.name, "version": version, "ext": p.suffix[1:].upper(),
+                      "size": p.stat().st_size, "compare": compare})
+    order = list(SCRIPT_VERSIONS)
+    items.sort(key=lambda x: (order.index(x["version"]) if x["version"] in order else 9, x["path"].lower()))
+    versions = [{"id": v, "label": SCRIPT_VERSIONS.get(v, v), "count": counts[v]}
+                for v in sorted(counts, key=lambda v: order.index(v) if v in order else 9)]
+    _SCRIPT_INDEX.update(key=key, items=items, versions=versions)
+    return items, versions
+
+
+def script_detail(rel: str) -> dict:
+    """What one script file contains: the exact round-trip check, its strings and its bytecode."""
+    from cso_dso_dtr_decompiler import verify_and_decompile_cso_dso, verify_and_decompile_dtr
+    p = (SCRIPTS_DIR / rel).resolve()
+    if not rel or SCRIPTS_DIR.resolve() not in p.parents or not p.is_file() or p.suffix.lower() not in SCRIPT_EXTS:
+        return {"ok": False, "error": "No such script file."}
+    raw = p.read_bytes()
+    ext = p.suffix.lower()
+    if ext == ".cs":
+        text = raw.decode("latin-1")
+        return {"ok": True, "path": rel, "format": "TorqueScript source (plain text, left in the game files)",
+                "size": len(raw), "opcode_count": 0, "decompiled_code": text,
+                "disasm": "(plain source: nothing to disassemble)"}
+    try:
+        res = verify_and_decompile_dtr(raw, p.name) if ext == ".dtr" else verify_and_decompile_cso_dso(raw, p.name)
+    except Exception as e:  # noqa: BLE001 - one odd file shouldn't break the tab
+        res = {"ok": False, "error": str(e)}
+    if not res.get("ok"):
+        return {"ok": True, "path": rel, "format": "could not be read", "size": len(raw), "opcode_count": 0,
+                "decompiled_code": f"// {p.name}: {res.get('error')}", "disasm": ""}
+    return {"ok": True, "path": rel, "format": res["format"], "size": res["size"],
+            "opcode_count": res["opcode_count"], "disasm": res["disasm"], "decompiled_code": res["decompiled_code"]}
+
+
+def script_list_payload(selected: str = "") -> dict:
+    items, versions = script_index()
+    out = {"ok": True, "files": items, "versions": versions}
+    if selected:
+        out["selected"] = selected
+    return out
 
 
 def list_sources(full: bool = False) -> Dict[str, str]:
@@ -968,7 +1035,10 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": False, "error": "No such file."}, 404)
             return self._json({"ok": True, "name": name, "content": p.read_text(encoding="utf-8", errors="ignore")})
         if u.path == "/api/scripts":
-            return self._json({"ok": True, "files": script_files()})
+            return self._json(script_list_payload())
+        if u.path == "/api/script":
+            res = script_detail(q1("path"))
+            return self._json(res, 200 if res["ok"] else 404)
         if u.path == "/api/queue":
             try:
                 page = max(1, int(q1("page", "1")))
@@ -1224,9 +1294,9 @@ class Handler(BaseHTTPRequestHandler):
         res = verify_and_decompile_dtr(raw, name) if ext == ".dtr" else verify_and_decompile_cso_dso(raw, name)
         if not res.get("ok"):
             return self._json({"ok": False, "error": f"Could not parse {name}: {res.get('error')}"})
-        SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
-        (SCRIPTS_DIR / name).write_bytes(raw)
-        self._json({"ok": True, "files": script_files(), "selected": name})
+        (SCRIPTS_DIR / "uploads").mkdir(parents=True, exist_ok=True)
+        (SCRIPTS_DIR / "uploads" / name).write_bytes(raw)
+        self._json(script_list_payload("uploads/" + name))
 
 
 # =========================================================================== #

@@ -22,7 +22,7 @@ Checked on 2026-11-08 from the NTSC-U disc (SLUS-21111):
 | Format | 32-bit ELF, MIPS (the PS2's Emotion Engine), entry point `0x001A0008`, about 6.9 MB |
 | Compiler | Metrowerks CodeWarrior for PlayStation 2: the `.comment` section says `MW MIPS C Compiler (2.4.1.01)` |
 | Names | The symbol table is stripped. C++ class names are stored as plain text, which helps with naming. |
-| Scripts | `CEMENT.RCF` holds the compiled scripts. `python scripts/extract_scripts.py <PS2 .iso>` already extracts them, and the script tools here read them. |
+| Scripts | `CEMENT.RCF` holds the compiled scripts. `python scripts/extract_scripts.py <PS2 .iso>` already extracts them, and the script tools here read them. They are byte-identical to the Xbox disc's scripts. |
 
 To get the program out of your own disc image, open the `.iso` with 7-Zip (or any ISO tool) and
 copy `SLUS_211.11`. Keep it out of the repository: put it in `binaries/ps2/`, which Git ignores.

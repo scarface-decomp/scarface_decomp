@@ -548,6 +548,30 @@
     pre.code-view.err { display: none; color: var(--error); max-height: 200px; margin: 0; white-space: pre-wrap; }
     pre.code-view.fixed { height: 460px; max-height: 460px; }
     .file-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; max-height: 125px; overflow-y: auto; padding: 4px 2px; }
+    .script-browser { margin-bottom: 14px; }
+    .script-filters { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr) auto; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .script-filters .input-box { width: 100%; }
+    .script-list-count { color: var(--muted); font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
+    .script-list { max-height: 260px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-card-alt); }
+    .script-row { display: grid; grid-template-columns: 46px minmax(0, 1fr) auto auto; gap: 10px; align-items: center; width: 100%;
+                  text-align: left; background: none; border: 0; border-bottom: 1px solid var(--border); color: var(--text);
+                  padding: 7px 12px; font-family: var(--mono); font-size: 0.78rem; cursor: pointer; }
+    .script-row:last-child { border-bottom: 0; }
+    .script-row:hover { background: rgba(59, 130, 246, 0.08); }
+    .script-row.active { background: rgba(234, 179, 8, 0.12); color: var(--gold); }
+    .script-row .ext { color: var(--muted); }
+    .script-row .path { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .script-row .size { color: var(--muted); }
+    .script-tag { font-size: 0.68rem; padding: 2px 7px; border-radius: 999px; border: 1px solid var(--border); white-space: nowrap; }
+    .script-tag.only { color: #f0abfc; border-color: rgba(240, 171, 252, 0.45); }
+    .script-tag.changed { color: #fbbf24; border-color: rgba(251, 191, 36, 0.45); }
+    .script-tag.same { color: var(--muted); }
+    .script-list-empty { padding: 14px; color: var(--muted); font-size: 0.85rem; }
+    @media (max-width: 760px) {
+      .script-filters { grid-template-columns: 1fr; }
+      .script-row { grid-template-columns: 40px minmax(0, 1fr) auto; }
+      .script-row .size { display: none; }
+    }
     .file-pill { background: var(--bg-card-alt); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 6px 12px; font-family: var(--mono); font-size: 0.78rem; cursor: pointer; }
     .file-pill:hover { border-color: var(--blue); }
     .file-pill.active { border-color: var(--gold); color: var(--gold); background: rgba(234, 179, 8, 0.1); }
@@ -1062,7 +1086,16 @@
               </div>
             </div>
 
-            <div class="file-selector" id="script-file-pills"></div>
+            <div class="script-browser">
+              <div class="script-filters">
+                <label class="sr-only" for="script-version">Game version</label>
+                <select id="script-version" class="input-box" onchange="renderScriptList()"></select>
+                <label class="sr-only" for="script-search">Search scripts</label>
+                <input id="script-search" class="input-box" type="search" placeholder="Search by name or folder, e.g. missions" oninput="renderScriptList()" />
+                <span id="script-list-count" class="script-list-count"></span>
+              </div>
+              <div class="script-list" id="script-file-list" role="listbox" aria-label="Script files"></div>
+            </div>
 
             <div class="script-meta">
               <span id="script-meta-title" role="status" aria-live="polite">Select a .cso / .dso / .dtr file</span>
@@ -2785,13 +2818,40 @@
       const bytes = new Uint8Array(await file.arrayBuffer());
       const data = await postJson('/api/upload-script', { filename: file.name, hex_data: bytesToHex(bytes) });
       if (!data.ok) { mTitle.textContent = data.error || 'Parsing failed.'; return; }
-      SCRIPT_FILES = Array.isArray(data.files) ? data.files : [];
-      selectedScriptName = data.selected || (SCRIPT_FILES[0] && SCRIPT_FILES[0].name) || '';
-      setScriptCount();
-      renderVerifiedScripts();
+      applyScriptList(data);
+      if (data.selected) {
+        $('script-version').value = 'uploads';
+        $('script-search').value = '';
+        selectScript(data.selected);
+      }
     } catch (e) {
       mTitle.textContent = 'Upload error: ' + e.message;
     }
+  }
+
+  const SCRIPT_TAGS = { 'only here': ['only', 'Only in this version'], 'changed': ['changed', 'Changed from retail'], 'same': ['same', 'Same as retail'] };
+  let SCRIPT_VERSIONS = [];
+
+  function applyScriptList(data) {
+    SCRIPT_FILES = Array.isArray(data.files) ? data.files : [];
+    SCRIPT_VERSIONS = Array.isArray(data.versions) ? data.versions : [];
+    setScriptCount();
+    const sel = $('script-version');
+    const keep = sel.value;
+    sel.innerHTML = '';
+    const all = document.createElement('option');
+    all.value = 'ALL';
+    all.textContent = 'All versions (' + fmtInt(SCRIPT_FILES.length) + ' files)';
+    sel.appendChild(all);
+    SCRIPT_VERSIONS.forEach((v) => {
+      const o = document.createElement('option');
+      o.value = v.id;
+      o.textContent = v.label + ' (' + fmtInt(v.count) + ')';
+      sel.appendChild(o);
+    });
+    if (keep && Array.from(sel.options).some((o) => o.value === keep)) sel.value = keep;
+    else if (SCRIPT_VERSIONS.length) sel.value = SCRIPT_VERSIONS[0].id;
+    renderScriptList();
   }
 
   async function loadVerifiedScripts() {
@@ -2800,48 +2860,103 @@
       const data = await apiFetchJson('/api/scripts');
       if (mySeq !== scriptsLoadSeq) return;
       if (data.ok && Array.isArray(data.files)) {
-        SCRIPT_FILES = data.files;
-        setScriptCount();
-        if (!SCRIPT_FILES.some((x) => x.name === selectedScriptName)) {
-          selectedScriptName = SCRIPT_FILES.length ? SCRIPT_FILES[0].name : '';
+        applyScriptList(data);
+        if (!SCRIPT_FILES.some((x) => x.path === selectedScriptName)) {
+          const first = filteredScripts()[0];
+          if (first) selectScript(first.path); else showScriptDetail(null);
         }
-        renderVerifiedScripts();
       }
     } catch (e) {
       console.warn('Scripts load error:', e);
     }
   }
 
-  function renderVerifiedScripts() {
-    const pills = $('script-file-pills');
-    const decView = $('script-decompiled-view');
-    const disView = $('script-disasm-view');
-    const mTitle = $('script-meta-title');
-    const mStats = $('script-meta-stats');
+  function filteredScripts() {
+    const ver = $('script-version').value || 'ALL';
+    const q = ($('script-search').value || '').trim().toLowerCase();
+    return SCRIPT_FILES.filter((f) => (ver === 'ALL' || f.version === ver) && (!q || f.path.toLowerCase().includes(q)));
+  }
 
-    pills.innerHTML = '';
-    SCRIPT_FILES.forEach((item) => {
+  function renderScriptList() {
+    const list = $('script-file-list');
+    const rows = filteredScripts();
+    const ver = $('script-version').value || 'ALL';
+    const changed = rows.filter((f) => f.compare === 'changed').length;
+    const only = rows.filter((f) => f.compare === 'only here').length;
+    $('script-list-count').textContent = fmtInt(rows.length) + ' shown'
+      + (only ? ' • ' + fmtInt(only) + ' only here' : '') + (changed ? ' • ' + fmtInt(changed) + ' changed' : '');
+    list.innerHTML = '';
+    if (!rows.length) {
+      const empty = document.createElement('div');
+      empty.className = 'script-list-empty';
+      empty.textContent = SCRIPT_FILES.length ? 'No scripts match.'
+        : 'No script files yet. Copy them out of your game with: python scripts/extract_scripts.py (see docs/SCRIPTS.md), or load one file above.';
+      list.appendChild(empty);
+      return;
+    }
+    const frag = document.createDocumentFragment();
+    rows.forEach((f) => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'file-pill' + (item.name === selectedScriptName ? ' active' : '');
-      btn.textContent = '[' + (item.ext || '?') + '] ' + item.name + ' (' + fmtInt(item.size) + ' B)';
-      btn.addEventListener('click', () => { selectedScriptName = item.name; renderVerifiedScripts(); });
-      pills.appendChild(btn);
+      btn.className = 'script-row' + (f.path === selectedScriptName ? ' active' : '');
+      btn.setAttribute('role', 'option');
+      btn.setAttribute('aria-selected', f.path === selectedScriptName ? 'true' : 'false');
+      btn.dataset.path = f.path;
+      const ext = document.createElement('span'); ext.className = 'ext'; ext.textContent = f.ext;
+      const path = document.createElement('span'); path.className = 'path';
+      path.textContent = ver === 'ALL' ? f.path : f.path.split('/').slice(f.version === 'uploads' && f.path.indexOf('/') < 0 ? 0 : 1).join('/');
+      path.title = f.path;
+      const tagInfo = SCRIPT_TAGS[f.compare];
+      const tag = document.createElement('span');
+      if (tagInfo) { tag.className = 'script-tag ' + tagInfo[0]; tag.textContent = tagInfo[1]; }
+      const size = document.createElement('span'); size.className = 'size'; size.textContent = fmtInt(f.size) + ' B';
+      btn.append(ext, path, tag, size);
+      btn.addEventListener('click', () => selectScript(f.path));
+      frag.appendChild(btn);
     });
+    list.appendChild(frag);
+  }
 
-    const cur = SCRIPT_FILES.find((x) => x.name === selectedScriptName) || SCRIPT_FILES[0];
-    if (cur) {
-      mTitle.textContent = cur.name + (cur.format ? ' — ' + cur.format : '');
-      mStats.textContent = fmtInt(cur.size) + ' bytes • ' + fmtInt(cur.opcode_count) + ' instructions/chunks';
-      decView.textContent = cur.decompiled_code || '';
-      disView.textContent = cur.disasm || '';
-    } else {
-      mTitle.textContent = 'Load a .cso / .dso / .dtr file to begin.';
-      mStats.textContent = '';
-      decView.textContent = '';
-      disView.textContent = '';
+  let scriptDetailSeq = 0;
+  async function selectScript(path) {
+    selectedScriptName = path;
+    document.querySelectorAll('#script-file-list .script-row').forEach((b) => {
+      const on = b.dataset.path === path;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    if (!document.querySelector('#script-file-list .script-row.active')) renderScriptList();
+    const mySeq = ++scriptDetailSeq;
+    $('script-meta-title').textContent = 'Reading ' + path + '...';
+    try {
+      const data = await apiFetchJson('/api/script?path=' + encodeURIComponent(path));
+      if (mySeq !== scriptDetailSeq) return;
+      showScriptDetail(data.ok ? data : null, data.ok ? '' : (data.error || 'Could not read ' + path));
+    } catch (e) {
+      if (mySeq === scriptDetailSeq) showScriptDetail(null, 'Could not read ' + path + ': ' + e.message);
     }
   }
+
+  function showScriptDetail(cur, error) {
+    const mTitle = $('script-meta-title');
+    const mStats = $('script-meta-stats');
+    if (cur) {
+      const f = SCRIPT_FILES.find((x) => x.path === cur.path);
+      const tagInfo = f && SCRIPT_TAGS[f.compare];
+      mTitle.textContent = cur.path + (cur.format ? ' — ' + cur.format : '') + (tagInfo ? ' — ' + tagInfo[1].toLowerCase() : '');
+      mStats.textContent = fmtInt(cur.size) + ' bytes' + (cur.opcode_count ? ' • ' + fmtInt(cur.opcode_count) + ' instructions/chunks' : '');
+      $('script-decompiled-view').textContent = cur.decompiled_code || '';
+      $('script-disasm-view').textContent = cur.disasm || '';
+    } else {
+      mTitle.textContent = error || 'Load a .cso / .dso / .dtr file to begin.';
+      mStats.textContent = '';
+      $('script-decompiled-view').textContent = '';
+      $('script-disasm-view').textContent = '';
+    }
+  }
+
+  // kept for older callers
+  function renderVerifiedScripts() { renderScriptList(); }
 
   function copyDecompiledScript() {
     copyText($('script-decompiled-view').textContent, 'Copied decompiled script.');

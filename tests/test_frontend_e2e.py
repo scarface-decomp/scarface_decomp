@@ -373,3 +373,29 @@ def test_decompme_falls_back_to_the_server(page):
         page.click("#btn-decompme")
     info.value.wait_for_url("**/scratch/server1/claim?token=srv")
     assert [c for c in calls("/api/decompme") if c[1].get("create")]
+
+
+def test_scripts_by_game_version(page):
+    """Pick a version, search, open a file; prototype files say how they compare with retail."""
+    page.click("#nav-scripts")
+    page.wait_for_selector("#script-file-list .script-row")
+    opts = page.eval_on_selector_all("#script-version option", "os => os.map(o => o.value)")
+    assert opts[:3] == ["ALL", "xbox", "prototype"]          # plus "uploads" if another test loaded a file
+    assert page.input_value("#script-version") == "xbox"
+    assert page.locator("#script-file-list .script-row").count() == 2
+    page.wait_for_function("document.getElementById('script-meta-title').textContent.includes('xbox/scriptc/init.cso')")
+    page.select_option("#script-version", "prototype")
+    rows = page.locator("#script-file-list .script-row")
+    assert rows.count() == 3
+    tags = page.eval_on_selector_all("#script-file-list .script-tag", "ts => ts.map(t => t.textContent)")
+    assert sorted(t for t in tags if t) == ["Changed from retail", "Only in this version", "Same as retail"]
+    assert "only here" in page.text_content("#script-list-count")
+    page.fill("#script-search", "editor")
+    assert rows.count() == 1
+    rows.first.click()
+    page.wait_for_function("document.getElementById('script-decompiled-view').textContent.includes('cut from retail')")
+    assert "only in this version" in page.text_content("#script-meta-title")
+    total = page.text_content("#script-version option[value=ALL]")
+    assert f"({page.text_content('#side-scripts-count')} files)" in total
+    page.fill("#script-search", "nothing-like-this")
+    assert "No scripts match" in page.text_content("#script-file-list")

@@ -62,8 +62,30 @@ USERS: dict = {}
 AUDIT: list = []
 SOURCES = {"Original_Binary_Order_PC_1002.cpp": "// VERIFIED 1:1 MATCH\nvoid a() {}\n",
            "core/DriveThread.cpp": "// VERIFIED 1:1 MATCH\nvoid b() {}\n"}
-SCRIPTS = [{"name": "init.cso", "ext": "cso", "size": 128, "format": "TorqueScript bytecode",
-            "opcode_count": 12, "decompiled_code": "function init() {}", "disasm": "0000 FUNC_DECL"}]
+def _script(path, version, compare="", code="function init() {}"):
+    return {"path": path, "name": path.rsplit("/", 1)[-1], "version": version, "ext": path.rsplit(".", 1)[-1].upper(),
+            "size": 128, "compare": compare, "format": "TorqueScript bytecode", "opcode_count": 12,
+            "decompiled_code": code, "disasm": "0000 FUNC_DECL"}
+
+
+SCRIPTS = [_script("xbox/scriptc/init.cso", "xbox"), _script("xbox/scriptc/missions/mission_manager.cso", "xbox"),
+           _script("prototype/scriptc/init.cso", "prototype", "same"),
+           _script("prototype/scriptc/missions/mission_manager.cso", "prototype", "changed", "// older"),
+           _script("prototype/scriptc/editor.cso", "prototype", "only here", "// cut from retail")]
+SCRIPT_LABELS = {"xbox": "Retail game (Xbox; the PS2 disc has the same files)", "prototype": "Xbox prototype, April 2006",
+                 "uploads": "Files you loaded"}
+
+
+def script_list(selected=""):
+    keys = ("path", "name", "version", "ext", "size", "compare")
+    counts = {}
+    for s in SCRIPTS:
+        counts[s["version"]] = counts.get(s["version"], 0) + 1
+    out = {"ok": True, "files": [{k: s[k] for k in keys} for s in SCRIPTS],
+           "versions": [{"id": v, "label": SCRIPT_LABELS.get(v, v), "count": n} for v, n in counts.items()]}
+    if selected:
+        out["selected"] = selected
+    return out
 
 
 def now():
@@ -171,7 +193,11 @@ class Handler(BaseHTTPRequestHandler):
                 t = TASKS.get(q.get("id", ""))
                 return self._json({"ok": True, "task": public_task(t)} if t else {"ok": False, "error": "No such task."})
             if u.path == "/api/scripts":
-                return self._json({"ok": True, "files": SCRIPTS})
+                return self._json(script_list())
+            if u.path == "/api/script":
+                hit = next((x for x in SCRIPTS if x["path"] == q.get("path")), None)
+                return self._json({"ok": True, **hit} if hit else {"ok": False, "error": "No such script file."},
+                                  200 if hit else 404)
             if u.path == "/api/decompme":
                 t = TASKS.get(q.get("id", ""))
                 if not t:
@@ -329,10 +355,10 @@ class Handler(BaseHTTPRequestHandler):
             name = body.get("filename", "file.bin")
             size = len(body.get("hex_data", "")) // 2
             with LOCK:
-                SCRIPTS[:] = [s for s in SCRIPTS if s["name"] != name] + [{
-                    "name": name, "ext": name.rsplit(".", 1)[-1], "size": size, "format": "uploaded",
-                    "opcode_count": 1, "decompiled_code": f"// {name}", "disasm": "0000 ?"}]
-            return self._json({"ok": True, "files": SCRIPTS, "selected": name})
+                path = "uploads/" + name
+                SCRIPTS[:] = [s for s in SCRIPTS if s["path"] != path] + [
+                    {**_script(path, "uploads", code=f"// {name}"), "size": size, "format": "uploaded"}]
+            return self._json(script_list(path))
         self._json({"ok": False, "error": "not found"}, 404)
 
 
