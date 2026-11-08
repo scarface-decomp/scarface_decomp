@@ -4,8 +4,8 @@
 
 ## Checklist
 
-- [ ] `python scripts/reverify_all.py` ran, and `reports/reverify_report.md` shows the functions I claim as `VERIFIED`
+- [ ] `python portal/scripts/reverify_all.py` ran, and `reports/reverify_report.md` shows the functions I claim as `VERIFIED`
 - [ ] `python -m pytest -q tests` passes (if I changed tools, the server or the page)
 - [ ] Plain C++ only: no inline assembly, `_emit`, `naked` functions, section pragmas, or numbers standing in for 2006 addresses
-- [ ] Everything follows PROVENANCE.md: no leaked source, PDBs or names from unreleased builds
+- [ ] Everything follows docs/PROVENANCE.md: no leaked source, PDBs or names from unreleased builds
 - [ ] If an AI tool wrote code or comments, I say which one here and I have read and checked what it wrote

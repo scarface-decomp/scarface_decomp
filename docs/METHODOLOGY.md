@@ -1,8 +1,8 @@
 ﻿# Verification methodology
 
 This is the exact procedure behind every `VERIFIED` count in this project. The portal
-(`decomp_portal_server.py`), the command-line checker (`verify.py`) and the bulk re-verifier
-(`scripts/reverify_all.py`) all call the same code in `tools/msvc_verify.py`, so they cannot disagree.
+(`portal/decomp_portal_server.py`), the command-line checker (`portal/verify.py`) and the bulk re-verifier
+(`portal/scripts/reverify_all.py`) all call the same code in `portal/tools/msvc_verify.py`, so they cannot disagree.
 
 ## 1. Target binaries
 
@@ -37,22 +37,22 @@ executable, `.rdata` and `.data` included.
 * **decomp.me has the same compiler.** Its `msvc7.1` compiler (platform *Windows (9x/NT)*) gave 100%
   on two functions verified here before the reset, one PC (`CementLibrary::vfunc_05`, 39 B, `/G7`) and one Xbox
   (`sub_0001EF60`, 7 B), checked on 2026-11-08. It compiles as C unless `/TP` is passed, so the
-  portal's decomp.me button adds `/TP`. The target it sends is built by `tools/decompme.py`: the game's
+  portal's decomp.me button adds `/TP`. The target it sends is built by `portal/tools/decompme.py`: the game's
   bytes plus COFF relocations named `_sub_XXXXXXXX` / `_DAT_XXXXXXXX`, the same names MSVC gives
   `extern "C"` declarations. Those relocations were checked against MSVC's own for 243 verified
   functions (all offsets and types agree). A decomp.me score is a helper; the portal decides.
-* `scripts/setup_msvc71.py` installs `bin/`, `include/` and `lib/` from your own `VCToolkitSetup.exe`.
+* `portal/scripts/setup_msvc71.py` installs `bin/`, `include/` and `lib/` from your own `VCToolkitSetup.exe`.
   On Linux and macOS the compiler runs under Wine (32-bit prefix). `SCARFACE_MSVC_BIN` overrides the
   location.
 
 ## 3. Function boundaries
 
-Sizes are measured, never estimated. `tools/sf_binaries.py` walks the original function with Capstone
+Sizes are measured, never estimated. `portal/tools/sf_binaries.py` walks the original function with Capstone
 (recursive descent: every branch, conditional jump and switch jump table, including MSVC's byte index
 tables) and stops at returns, tail jumps and the next known function start. Known starts are call
 targets plus vtable entries found through the MSVC RTTI complete-object locators.
 
-The queue (`tools/queue_builder.py`, written to `reports/full_remaining_queue.json`) is rebuilt from the
+The queue (`portal/tools/queue_builder.py`, written to `reports/full_remaining_queue.json`) is rebuilt from the
 binaries, so a task's size is the real size of the original function. Virtual methods are named after
 their class and slot (`content::Stats::vfunc_03`); other functions are `sub_<address>`.
 
@@ -86,7 +86,7 @@ A submission counts only if all of the following hold:
    extern "C" char DAT_00439DA4;
    void* __cdecl sub_001CDC80(void) { return &DAT_00439DA4; }
    ```
-7. **Plain C++** (`tools/cpp_policy.py`, checked on the source and on the `/E` preprocessed output):
+7. **Plain C++** (`portal/tools/cpp_policy.py`, checked on the source and on the `/E` preprocessed output):
    no `__asm`/`_asm`, `_emit`, `__declspec(naked)`, `__declspec(allocate)`/`code_seg`, section or segment
    pragmas, `#pragma comment`, `#import`/`#using`, `__pragma`/`_Pragma`, or includes outside the project.
    `#pragma optimize` is allowed, but see the notes below before using it.
@@ -137,7 +137,7 @@ These were each confirmed by compiling variants and comparing against the game.
 
 ## 6. Re-verification
 
-`scripts/reverify_all.py` compiles every claim in `reconstructed_src/` (hand-written files and the
+`portal/scripts/reverify_all.py` compiles every claim in `reconstructed_src/` (hand-written files and the
 `imported/` sweep files) plus every portal-verified entry in the registry, applies the rule above, and
 rewrites `reports/verified_registry.json`, `reports/reverify_report.md` and the generated files
 (`Original_Binary_Order_*.cpp`, `pc/`, `xbox/`). Run it after changing a header, the verifier or the

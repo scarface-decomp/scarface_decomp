@@ -403,14 +403,14 @@
             browser with the same compiler. Change the C++ until it shows 100%, then paste it back into the portal.</li>
           <li><b>Verify it</b>Press <em>Compile &amp; Verify</em> to record it under your name. That needs the 2003
             compiler, installed once from your own <code>VCToolkitSetup.exe</code>:
-            <pre tabindex="0">python scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
+            <pre tabindex="0">python portal/scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
             No compiler? Post your 100% decomp.me link in a
             <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>
             and a maintainer will verify it and credit you.</li>
         </ol>
         <div class="links">
-          <a data-repo-link="/blob/main/CONTRIBUTING.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing guide</a>
-          <a data-repo-link="/blob/main/SCARFACE_DECOMP_AI_HANDOFF.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/SCARFACE_DECOMP_AI_HANDOFF.md" target="_blank" rel="noopener noreferrer">Using an AI assistant</a>
+          <a data-repo-link="/blob/main/docs/CONTRIBUTING.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing guide</a>
+          <a data-repo-link="/blob/main/docs/SCARFACE_DECOMP_AI_HANDOFF.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCARFACE_DECOMP_AI_HANDOFF.md" target="_blank" rel="noopener noreferrer">Using an AI assistant</a>
           <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">Ask a question</a>
         </div>
       </div>
@@ -441,7 +441,7 @@
           <details><summary>Is this allowed?</summary>
             <p>The repository contains only code written by contributors, under the GPL. It contains no game files, assets
               or compiler, and it isn't affiliated with the game's owners. The details are in
-              <a data-repo-link="/blob/main/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer">LEGAL.md</a>
+              <a data-repo-link="/blob/main/docs/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md" target="_blank" rel="noopener noreferrer">LEGAL.md</a>
               (not legal advice).</p></details>
           <details><summary>Can all of the game's code be read?</summary>
             <p>On Xbox, yes: every byte of the game code in <code>default.xbe</code> is plain machine code. On PC
@@ -526,9 +526,9 @@
         Not affiliated with or endorsed by the game's developer, publishers or rights holders. Code licensed under GPL-3.0-or-later.</div>
       <div class="links">
         <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a data-repo-link="/blob/main/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer">Legal</a>
+        <a data-repo-link="/blob/main/docs/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md" target="_blank" rel="noopener noreferrer">Legal</a>
         <a data-repo-link="/blob/main/LICENSE" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a>
-        <a data-repo-link="/blob/main/CREDITS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/CREDITS.md" target="_blank" rel="noopener noreferrer">Credits</a>
+        <a data-repo-link="/blob/main/docs/CREDITS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CREDITS.md" target="_blank" rel="noopener noreferrer">Credits</a>
         <span id="updated"></span>
       </div>
     </div>
@@ -867,7 +867,7 @@
       });
       if (window.console && console.log) {
         console.log('%cThe world is yours.', 'font: 28px Marcellus, Georgia, serif; color: #FF5BA7; text-shadow: 0 0 6px #FF5BA7;');
-        console.log('Reading the source? You would be good at this. Pick a function: ' + CFG.repoUrl + '/blob/main/CONTRIBUTING.md' +
+        console.log('Reading the source? You would be good at this. Pick a function: ' + CFG.repoUrl + '/blob/main/docs/CONTRIBUTING.md' +
                     '\n(And try the old up-up-down-down code on this page.)');
       }
     })();

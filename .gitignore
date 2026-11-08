@@ -16,6 +16,7 @@ workpacks/
 *.dtr
 
 # The Visual C++ Toolkit 2003 is not redistributable
+portal/tools/msvc71/
 tools/msvc71/
 
 # Contributor credentials (salted hashes, but still private)
@@ -35,11 +36,13 @@ reports/organized_4way_strings_master.txt
 *.tmp
 __pycache__/
 *.pyc
+portal/scripts/archive/
 scripts/archive/
 _to_delete/
 
 # Website data, copied in by the Cloudflare Pages build (see docs/README.md)
 docs/data/
 
-# Python packages for start_portal.sh
+# Python packages for the launchers (portal/.venv)
 .venv/
+.pytest_cache/

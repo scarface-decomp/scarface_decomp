@@ -22,7 +22,7 @@ Checked on 2026-11-08 from the NTSC-U disc (SLUS-21111):
 | Format | 32-bit ELF, MIPS (the PS2's Emotion Engine), entry point `0x001A0008`, about 6.9 MB |
 | Compiler | Metrowerks CodeWarrior for PlayStation 2: the `.comment` section says `MW MIPS C Compiler (2.4.1.01)` |
 | Names | The symbol table is stripped. C++ class names are stored as plain text, which helps with naming. |
-| Scripts | `CEMENT.RCF` holds the compiled scripts. `python scripts/extract_scripts.py <PS2 .iso>` already extracts them, and the script tools here read them. They are byte-identical to the Xbox disc's scripts. |
+| Scripts | `CEMENT.RCF` holds the compiled scripts. `python portal/scripts/extract_scripts.py <PS2 .iso>` already extracts them, and the script tools here read them. They are byte-identical to the Xbox disc's scripts. |
 
 To get the program out of your own disc image, open the `.iso` with 7-Zip (or any ISO tool) and
 copy `SLUS_211.11`. Keep it out of the repository: put it in `binaries/ps2/`, which Git ignores.
@@ -33,9 +33,9 @@ The same rules as the rest of the project, with PS2 tools:
 
 1. **The exact compiler.** CodeWarrior for PS2, version 2.4.1, and the flags the game used. Without that
    version, nothing can be matched byte for byte.
-2. **A function list.** Split the ELF into functions, as `tools/queue_builder.py` does for the x86 files.
+2. **A function list.** Split the ELF into functions, as `portal/tools/queue_builder.py` does for the x86 files.
 3. **A byte-exact check.** Compile the C++, compare length and bytes, check relocations, and allow no
-   inline assembly. That is what `tools/msvc_verify.py` does for x86.
+   inline assembly. That is what `portal/tools/msvc_verify.py` does for x86.
 
 Most of the game's C++ is the same source on every version, so C++ written for the Xbox build is a good
 starting point for the PS2 one. It still has to match the PS2 compiler's output on its own.

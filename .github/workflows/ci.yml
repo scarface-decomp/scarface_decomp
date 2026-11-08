@@ -20,13 +20,13 @@ jobs:
 
       - name: Install
         run: |
-          python -m pip install -r requirements.txt pytest playwright
+          python -m pip install -r portal/requirements.txt pytest playwright
           python -m playwright install --with-deps chromium
 
       - name: Repository consistency (registry, generated files, nothing forbidden tracked)
-        run: python scripts/check_repo.py
+        run: python portal/scripts/check_repo.py
 
       - name: Tests
         # Tests that need cl.exe 13.10.3052 or the game files skip themselves here; maintainers run
-        # them locally (python -m pytest -q tests) and re-verify with scripts/reverify_all.py.
-        run: python -m pytest -q tests
+        # them locally (python -m pytest -q portal/tests) and re-verify with portal/scripts/reverify_all.py.
+        run: python -m pytest -q portal/tests

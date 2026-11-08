@@ -30,8 +30,8 @@ From the PS2 disc's `CEMENT.RCF` (4,764 files), checked on 2026-11-08:
 
 | Step | Status |
 |---|---|
-| 1. Get the files out of your own copy | **Done**: `python scripts/extract_scripts.py <source>`, where the source is the Xbox `.7z` or disc image, the PS2 `.iso`, the prototype `.zip`, or `cement.rcf` from an installed PC game. Each version goes in its own folder under `binaries/scripts_and_data/` (never committed). The PC disc keeps its files inside `DATA*.CAB`, so for the PC use `cement.rcf` from the installed game. |
-| 2. Read the compiled format exactly and write it back byte for byte | **Done**: `tools/torque_dso.py`. All 635 compiled scripts round-trip exactly. The portal's Scripts tab uses it. |
+| 1. Get the files out of your own copy | **Done**: `python portal/scripts/extract_scripts.py <source>`, where the source is the Xbox `.7z` or disc image, the PS2 `.iso`, the prototype `.zip`, or `cement.rcf` from an installed PC game. Each version goes in its own folder under `binaries/scripts_and_data/` (never committed). The PC disc keeps its files inside `DATA*.CAB`, so for the PC use `cement.rcf` from the installed game. |
+| 2. Read the compiled format exactly and write it back byte for byte | **Done**: `portal/tools/torque_dso.py`. All 635 compiled scripts round-trip exactly. The portal's Scripts tab uses it. |
 | 3. Turn the bytecode into readable TorqueScript | Next. The opcode set is Scarface's own (83 opcodes, 0 to 85), documented by Broken Face. |
 | 4. Compile readable TorqueScript back to the original bytes, and only then count the script | To do. This is the script equivalent of Compile & Verify. |
 | 5. Work out what `.dtr` files are | To do (one file so far). |

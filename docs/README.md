@@ -18,7 +18,7 @@ on every push to `main`.
 
 ## Where its data comes from
 
-The page reads two files that the portal and `scripts/reverify_all.py` keep up to date:
+The page reads two files that the portal and `portal/scripts/reverify_all.py` keep up to date:
 `reports/progress.json` and `reports/verified_registry.json`. It looks for them in this order:
 
 1. `data/` next to the page. The Cloudflare Pages build copies the two files there on every push.
@@ -39,7 +39,7 @@ So every push to `main`, including the portal's **Sync Verified to GitHub**, upd
 ## Testing locally
 
 ```bash
-python -m pytest -q tests/test_site_e2e.py
+python -m pytest -q portal/tests/test_site_e2e.py
 ```
 
 Or serve it yourself: copy the two report files into `docs/data/` (ignored by git) and run

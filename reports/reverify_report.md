@@ -1,6 +1,6 @@
 # Re-verification report
 
-Generated 2026-11-08T11:07:58Z by `scripts/reverify_all.py` with **Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86**.
+Generated 2026-11-08T11:07:58Z by `portal/scripts/reverify_all.py` with **Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86**.
 
 A function counts as VERIFIED only with exact length and bytes, checked relocations, no hard-coded
 2006 addresses, and no inline assembly. Addresses are deduplicated across files.

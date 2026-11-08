@@ -6,11 +6,10 @@
 *.json linguist-generated
 *.txt  linguist-documentation
 *.md   linguist-documentation
-CMakeLists.txt linguist-vendored
+reconstructed_src/CMakeLists.txt linguist-vendored
 reports/** linguist-generated
-website_kit/** linguist-vendored
+portal/** linguist-vendored
 workpacks/** linguist-generated
-scripts/** linguist-vendored
 
 # Line endings for the portal launchers
 *.bat text eol=crlf

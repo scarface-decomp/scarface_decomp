@@ -1,6 +1,6 @@
 {
  "schema": "scarface_known_functions_v1",
- "note": "Start address and size of functions that matched exactly before the 2026-11-08 reset. No code: only where the functions are, so tools/queue_builder.py keeps them in the work queue.",
+ "note": "Start address and size of functions that matched exactly before the 2026-11-08 reset. No code: only where the functions are, so portal/tools/queue_builder.py keeps them in the work queue.",
  "functions": [
   {
    "bin": "pc",

@@ -14,7 +14,7 @@ against it doesn't count here. Everyone works on these files, and only these.
 | `game.xbe` | **Xbox prototype, April 20, 2006** (optional). Unreleased code, counted on its own row. | 4,854,976 bytes | `ecd980d0f25c444d263c968b8e4032e1707e0e684a422483890257ee12ec0384` |
 
 You need at least one of the first two. To check yours, start the portal, or run
-`python tools/game_files.py`, or in PowerShell: `Get-FileHash binaries\default.xbe`.
+`python portal/tools/game_files.py`, or in PowerShell: `Get-FileHash binaries\default.xbe`.
 
 ## Not accepted
 
@@ -37,21 +37,21 @@ only for that; none of its code is decompiled here.
 * Your own copies of the accepted files, in `binaries/` on your own computer.
 * Scripts copied out of your own copy, kept in `binaries/scripts_and_data/` on your computer.
 * C++ you wrote, names you worked out, notes, and links to decomp.me scratches.
-* AI tools, decomp.me, Ghidra and similar, as long as you say what you used ([PROVENANCE.md](../PROVENANCE.md)).
+* AI tools, decomp.me, Ghidra and similar, as long as you say what you used ([PROVENANCE.md](PROVENANCE.md)).
 
 **Not allowed**, anywhere in the project (GitHub, issues, pull requests, chat):
 
 * Game files: executables, disc images, archives, extracted scripts or assets, or links to download them.
 * The Visual C++ Toolkit's files.
-* Leaked or stolen source code, or names and structures taken from it ([PROVENANCE.md](../PROVENANCE.md)).
+* Leaked or stolen source code, or names and structures taken from it ([PROVENANCE.md](PROVENANCE.md)).
 * Matches made against any copy not listed above, or edits to `reports/verified_registry.json` by hand.
 
 ## How this is enforced
 
-* The portal, `verify.py`, the queue builder and `scripts/reverify_all.py` check each game file's
+* The portal, `portal/verify.py`, the queue builder and `portal/scripts/reverify_all.py` check each game file's
   SHA-256 and refuse one that isn't listed above. The portal shows what the file is (its version, build
   date and regions) and why it isn't used.
 * CI rejects a registry that was verified against any other game files, and any commit that contains
   game or compiler files.
-* Maintainers re-verify every submission with `scripts/reverify_all.py` on the accepted files before
+* Maintainers re-verify every submission with `portal/scripts/reverify_all.py` on the accepted files before
   merging.
