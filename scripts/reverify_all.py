@@ -504,6 +504,8 @@ def main() -> int:
         "rules": "exact length + bytes, checked relocations, no hard-coded addresses, genuine C++ policy",
         "entries": {},
     }
+    if load_old_registry().get("reset"):
+        registry["reset"] = load_old_registry()["reset"]      # keep the record of the 2026-11-08 restart
     for k, c in sorted(best.items()):
         if c.status == "VERIFIED":
             registry["entries"][k] = {

@@ -19,3 +19,9 @@ authors are credited in the commit history. Thank you.
   the [Halo 2 decompilation](https://github.com/kirklandsig/halo2-decompiled) (Xbox, MSVC 7.1) and
   [LEGO Island](https://github.com/isledecomp/isle) with its [reccmp](https://github.com/isledecomp/reccmp)
   tools (MSVC 4.2). No code was taken from them.
+* [decomp.me](https://decomp.me), which hosts the same compiler (`msvc7.1`) for working on functions in
+  the browser.
+* For the script and archive formats: the [STWIY ToolKit](https://github.com/STWIY/ToolKit) (layout of
+  `.rcf` archives), [Broken Face](https://github.com/sulzbals/BrokenFace) by sulzbals and Meth0d's
+  write-up on Scarface's compiled TorqueScript (layout of `.cso` / `.dso`). Their documentation was
+  read; no code was copied.

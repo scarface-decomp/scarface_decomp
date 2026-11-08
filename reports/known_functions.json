@@ -1,0 +1,7258 @@
+{
+ "schema": "scarface_known_functions_v1",
+ "note": "Start address and size of functions that matched exactly before the 2026-11-08 reset. No code: only where the functions are, so tools/queue_builder.py keeps them in the work queue.",
+ "functions": [
+  {
+   "bin": "pc",
+   "va": "0x006DDC60",
+   "size": 23,
+   "symbol": "ControllerInputPointDirectInput::vfunc_01",
+   "match": "vfunc_01@ControllerInputPointDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DDF60",
+   "size": 38,
+   "symbol": "ControllerDirectInput::vfunc_12",
+   "match": "vfunc_12@ControllerDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DDFA0",
+   "size": 38,
+   "symbol": "ControllerDirectInput::vfunc_17",
+   "match": "vfunc_17@ControllerDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DE000",
+   "size": 21,
+   "symbol": "ControllerDirectInput::vfunc_07",
+   "match": "vfunc_07@ControllerDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DE1D0",
+   "size": 36,
+   "symbol": "ControllerDirectInput::vfunc_03",
+   "match": "vfunc_03@ControllerDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DE590",
+   "size": 19,
+   "symbol": "ControllerSystemDirectInput::vfunc_12",
+   "match": "vfunc_12@ControllerSystemDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DE620",
+   "size": 44,
+   "symbol": "ControllerSystemDirectInput::vfunc_09",
+   "match": "vfunc_09@ControllerSystemDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DE650",
+   "size": 38,
+   "symbol": "ControllerSystemDirectInput::vfunc_05",
+   "match": "vfunc_05@ControllerSystemDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DE690",
+   "size": 36,
+   "symbol": "ControllerSystemDirectInput::vfunc_03",
+   "match": "vfunc_03@ControllerSystemDirectInput@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DEDF0",
+   "size": 1,
+   "symbol": "sub_006DEDF0",
+   "match": "pc_sub_006DEDF0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DF4A0",
+   "size": 5,
+   "symbol": "LoadSet::vfunc_00",
+   "match": "vfunc_00@LoadSet@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DF4C0",
+   "size": 24,
+   "symbol": "Platform::vfunc_04",
+   "match": "vfunc_04@Platform@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DF730",
+   "size": 26,
+   "symbol": "MemoryAllocatorMalloc::vfunc_04",
+   "match": "vfunc_04@MemoryAllocatorMalloc@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DF750",
+   "size": 15,
+   "symbol": "MemoryAllocatorMalloc::vfunc_05",
+   "match": "vfunc_05@MemoryAllocatorMalloc@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DF760",
+   "size": 21,
+   "symbol": "MemoryAllocatorMalloc::vfunc_07",
+   "match": "vfunc_07@MemoryAllocatorMalloc@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DF7C0",
+   "size": 22,
+   "symbol": "MemoryAllocatorMalloc::vfunc_08",
+   "match": "vfunc_08@MemoryAllocatorMalloc@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E0010",
+   "size": 5,
+   "symbol": "GameMemorySegmentCollection::vfunc_00",
+   "match": "vfunc_00@GameMemorySegmentCollection@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E0090",
+   "size": 36,
+   "symbol": "String::vfunc_04",
+   "match": "vfunc_04@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E01E0",
+   "size": 34,
+   "symbol": "String::vfunc_06",
+   "match": "vfunc_06@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E0250",
+   "size": 17,
+   "symbol": "String::vfunc_08",
+   "match": "vfunc_08@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E0430",
+   "size": 26,
+   "symbol": "String::vfunc_14",
+   "match": "vfunc_14@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E0490",
+   "size": 26,
+   "symbol": "String::vfunc_11",
+   "match": "vfunc_11@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E04B0",
+   "size": 22,
+   "symbol": "String::vfunc_19",
+   "match": "vfunc_19@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E04D0",
+   "size": 22,
+   "symbol": "String::vfunc_20",
+   "match": "vfunc_20@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E04F0",
+   "size": 20,
+   "symbol": "String::vfunc_22",
+   "match": "vfunc_22@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E0540",
+   "size": 36,
+   "symbol": "String::vfunc_03",
+   "match": "vfunc_03@String@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E09E0",
+   "size": 28,
+   "symbol": "MemoryDlAllocator::vfunc_06",
+   "match": "vfunc_06@MemoryDlAllocator@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E0A60",
+   "size": 36,
+   "symbol": "MemoryDlAllocator::vfunc_03",
+   "match": "vfunc_03@MemoryDlAllocator@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E1D40",
+   "size": 36,
+   "symbol": "MemorySmallDlAllocator::vfunc_03",
+   "match": "vfunc_03@MemorySmallDlAllocator@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E36A0",
+   "size": 18,
+   "symbol": "CompletionEventRequest::vfunc_01",
+   "match": "vfunc_01@CompletionEventRequest@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E36C0",
+   "size": 6,
+   "symbol": "core::CompletionEventRequest::vfunc_06",
+   "match": "pc_sub_006E36C0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3700",
+   "size": 18,
+   "symbol": "FileCompletionRequest::vfunc_01",
+   "match": "vfunc_01@FileCompletionRequest@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3760",
+   "size": 6,
+   "symbol": "core::DriveCompletionRequest::vfunc_06",
+   "match": "pc_sub_006E3760"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3C20",
+   "size": 6,
+   "symbol": "fight::VUpperBodyAnimStateCondition::?$ParamString::vfunc_01",
+   "match": "pc_sub_006E3C20"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3DD0",
+   "size": 6,
+   "symbol": "fight::VDirectionalGetHitCondition::?$ParamEnumConstList::vfunc_01",
+   "match": "pc_sub_006E3DD0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3E60",
+   "size": 6,
+   "symbol": "core::FileGetPositionRequest::vfunc_06",
+   "match": "pc_sub_006E3E60"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3EB0",
+   "size": 6,
+   "symbol": "DealerSpawnObject::vfunc_45",
+   "match": "pc_sub_006E3EB0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3F00",
+   "size": 6,
+   "symbol": "fight::VExitConditionTrack::?$ParamBranch::vfunc_01",
+   "match": "pc_sub_006E3F00"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3F60",
+   "size": 6,
+   "symbol": "core::DriveOpenRequest::vfunc_06",
+   "match": "pc_sub_006E3F60"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3FC0",
+   "size": 6,
+   "symbol": "core::DriveMediaRequest::vfunc_06",
+   "match": "pc_sub_006E3FC0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4010",
+   "size": 6,
+   "symbol": "GlanceAtOvertakingPed::vfunc_10",
+   "match": "pc_sub_006E4010"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4070",
+   "size": 6,
+   "symbol": "core::DriveCreateDirectoryRequest::vfunc_06",
+   "match": "pc_sub_006E4070"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E40D0",
+   "size": 6,
+   "symbol": "core::DriveDestroyDirectoryRequest::vfunc_06",
+   "match": "pc_sub_006E40D0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4150",
+   "size": 6,
+   "symbol": "GangSpawnObject::vfunc_45",
+   "match": "pc_sub_006E4150"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E41B0",
+   "size": 6,
+   "symbol": "core::DriveFindNextRequest::vfunc_06",
+   "match": "pc_sub_006E41B0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4200",
+   "size": 6,
+   "symbol": "core::DriveFindCloseRequest::vfunc_06",
+   "match": "pc_sub_006E4200"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4270",
+   "size": 6,
+   "symbol": "core::DriveFileDestroyRequest::vfunc_06",
+   "match": "pc_sub_006E4270"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E42C0",
+   "size": 6,
+   "symbol": "core::DriveCancelRequest::vfunc_06",
+   "match": "pc_sub_006E42C0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E42D0",
+   "size": 6,
+   "symbol": "core::DriveLockRequest::vfunc_06",
+   "match": "pc_sub_006E42D0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4D70",
+   "size": 12,
+   "symbol": "File::vfunc_00",
+   "match": "vfunc_00@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4D80",
+   "size": 12,
+   "symbol": "File::vfunc_01",
+   "match": "vfunc_01@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4F60",
+   "size": 36,
+   "symbol": "File::vfunc_10",
+   "match": "vfunc_10@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4F90",
+   "size": 36,
+   "symbol": "File::vfunc_11",
+   "match": "vfunc_11@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4FC0",
+   "size": 26,
+   "symbol": "File::vfunc_12",
+   "match": "vfunc_12@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E4FE0",
+   "size": 26,
+   "symbol": "File::vfunc_13",
+   "match": "vfunc_13@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5000",
+   "size": 26,
+   "symbol": "File::vfunc_14",
+   "match": "vfunc_14@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5020",
+   "size": 16,
+   "symbol": "File::vfunc_15",
+   "match": "vfunc_15@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5030",
+   "size": 7,
+   "symbol": "File::vfunc_16",
+   "match": "vfunc_16@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E50E0",
+   "size": 35,
+   "symbol": "File::vfunc_21",
+   "match": "vfunc_21@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5140",
+   "size": 29,
+   "symbol": "File::vfunc_23",
+   "match": "vfunc_23@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5160",
+   "size": 24,
+   "symbol": "File::vfunc_25",
+   "match": "vfunc_25@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E51C0",
+   "size": 13,
+   "symbol": "File::vfunc_31",
+   "match": "vfunc_31@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E54B0",
+   "size": 27,
+   "symbol": "File::AddRefLocked",
+   "match": "AddRefLocked@File@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5550",
+   "size": 12,
+   "symbol": "InstanceDrive::vfunc_00",
+   "match": "vfunc_00@InstanceDrive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5560",
+   "size": 12,
+   "symbol": "InstanceDrive::vfunc_01",
+   "match": "vfunc_01@InstanceDrive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E58B0",
+   "size": 26,
+   "symbol": "InstanceDrive::vfunc_12",
+   "match": "vfunc_12@InstanceDrive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E58D0",
+   "size": 16,
+   "symbol": "InstanceDrive::vfunc_13",
+   "match": "vfunc_13@InstanceDrive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E58E0",
+   "size": 26,
+   "symbol": "InstanceDrive::vfunc_14",
+   "match": "vfunc_14@InstanceDrive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5900",
+   "size": 26,
+   "symbol": "InstanceDrive::vfunc_15",
+   "match": "vfunc_15@InstanceDrive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5940",
+   "size": 26,
+   "symbol": "InstanceDrive::vfunc_17",
+   "match": "vfunc_17@InstanceDrive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5960",
+   "size": 26,
+   "symbol": "InstanceDriveExt::vfunc_18",
+   "match": "vfunc_18@InstanceDriveExt@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5A70",
+   "size": 35,
+   "symbol": "InstanceDriveExt::vfunc_22",
+   "match": "vfunc_22@InstanceDriveExt@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E5E50",
+   "size": 12,
+   "symbol": "InstanceDriveExt::vfunc_46",
+   "match": "vfunc_46@InstanceDriveExt@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E6070",
+   "size": 23,
+   "symbol": "Drive::vfunc_00",
+   "match": "vfunc_00@Drive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E6710",
+   "size": 11,
+   "symbol": "CementLibrary::vfunc_00",
+   "match": "vfunc_00@CementLibrary@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E6720",
+   "size": 12,
+   "symbol": "CementLibrary::vfunc_01",
+   "match": "vfunc_01@CementLibrary@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E6730",
+   "size": 39,
+   "symbol": "CementLibrary::vfunc_05",
+   "match": "vfunc_05@CementLibrary@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E6760",
+   "size": 10,
+   "symbol": "CementLibrary::vfunc_07",
+   "match": "vfunc_07@CementLibrary@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E6770",
+   "size": 23,
+   "symbol": "CementLibrary::vfunc_06",
+   "match": "vfunc_06@CementLibrary@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E6B50",
+   "size": 23,
+   "symbol": "CementLibrary::AddRefLocked10",
+   "match": "AddRefLocked10@CementLibrary@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E7480",
+   "size": 14,
+   "symbol": "Win32Drive::vfunc_00",
+   "match": "vfunc_00@Win32Drive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E7490",
+   "size": 14,
+   "symbol": "Win32Drive::vfunc_01",
+   "match": "vfunc_01@Win32Drive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E74A0",
+   "size": 7,
+   "symbol": "Win32Drive::vfunc_02",
+   "match": "vfunc_02@Win32Drive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E74D0",
+   "size": 29,
+   "symbol": "Win32Drive::vfunc_22",
+   "match": "vfunc_22@Win32Drive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E78B0",
+   "size": 36,
+   "symbol": "Win32Drive::vfunc_03",
+   "match": "vfunc_03@Win32Drive@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E7EB0",
+   "size": 11,
+   "symbol": "DriveThread::vfunc_00",
+   "match": "vfunc_00@DriveThread@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E7EC0",
+   "size": 11,
+   "symbol": "DriveThread::vfunc_01",
+   "match": "vfunc_01@DriveThread@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E8610",
+   "size": 36,
+   "symbol": "DriveThread::vfunc_03",
+   "match": "vfunc_03@DriveThread@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9E70",
+   "size": 27,
+   "symbol": "NISStreamDataLoader::vfunc_04",
+   "match": "vfunc_04@NISStreamDataLoader@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9E90",
+   "size": 31,
+   "symbol": "Stats::~Stats",
+   "match": "??_GStats@|??1Stats@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9F50",
+   "size": 6,
+   "symbol": "sub_006E9F50",
+   "match": "pc_sub_006E9F50"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EBDF0",
+   "size": 11,
+   "symbol": "OmHalStream::vfunc_10",
+   "match": "vfunc_10@OmHalStream@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EBFA0",
+   "size": 36,
+   "symbol": "OmHalStream::vfunc_08",
+   "match": "vfunc_08@OmHalStream@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EBFD0",
+   "size": 17,
+   "symbol": "OmHalStream::vfunc_09",
+   "match": "vfunc_09@OmHalStream@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EC020",
+   "size": 13,
+   "symbol": "OmHalStream::vfunc_03",
+   "match": "vfunc_03@OmHalStream@"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EE9B0",
+   "size": 6,
+   "symbol": "sub_006EE9B0",
+   "match": "pc_sub_006EE9B0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EEBF0",
+   "size": 6,
+   "symbol": "om::audio::VMix::?$EntityType::vfunc_03",
+   "match": "pc_sub_006EEBF0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EECB0",
+   "size": 6,
+   "symbol": "om::audio::VClip::?$EntityType::vfunc_03",
+   "match": "pc_sub_006EECB0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EEDE0",
+   "size": 6,
+   "symbol": "om::audio::VSequence::?$EntityType::vfunc_03",
+   "match": "pc_sub_006EEDE0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EF290",
+   "size": 6,
+   "symbol": "sub_006EF290",
+   "match": "pc_sub_006EF290"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006F0560",
+   "size": 6,
+   "symbol": "om::audio::VLayerTemplate::?$EntityType::vfunc_03",
+   "match": "pc_sub_006F0560"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006F67B0",
+   "size": 6,
+   "symbol": "om::audio::VListenerEffectWin32::?$EntityType::vfunc_03",
+   "match": "pc_sub_006F67B0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007048D0",
+   "size": 6,
+   "symbol": "pure3d::d3dErrorShader::vfunc_04",
+   "match": "pc_sub_007048D0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00704A40",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_16",
+   "match": "pc_sub_00704A40"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00704A50",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_17",
+   "match": "pc_sub_00704A50"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00704A60",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_18",
+   "match": "pc_sub_00704A60"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00704A70",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_19",
+   "match": "pc_sub_00704A70"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00704A80",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_04",
+   "match": "pc_sub_00704A80"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00705050",
+   "size": 6,
+   "symbol": "pure3d::d3dPointSpriteShader::vfunc_16",
+   "match": "pc_sub_00705050"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00705060",
+   "size": 6,
+   "symbol": "pure3d::d3dPointSpriteShader::vfunc_17",
+   "match": "pc_sub_00705060"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00705070",
+   "size": 6,
+   "symbol": "pure3d::d3dPointSpriteShader::vfunc_18",
+   "match": "pc_sub_00705070"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00705080",
+   "size": 6,
+   "symbol": "pure3d::d3dPointSpriteShader::vfunc_04",
+   "match": "pc_sub_00705080"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007053D0",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_16",
+   "match": "pc_sub_007053D0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007053E0",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_17",
+   "match": "pc_sub_007053E0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007053F0",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_18",
+   "match": "pc_sub_007053F0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00705400",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_19",
+   "match": "pc_sub_00705400"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00705410",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_04",
+   "match": "pc_sub_00705410"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00705430",
+   "size": 1,
+   "symbol": "sub_00705430",
+   "match": "pc_sub_00705430"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007066A0",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_04",
+   "match": "pc_sub_007066A0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00706B80",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_16",
+   "match": "pc_sub_00706B80"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00706B90",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_17",
+   "match": "pc_sub_00706B90"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00706BA0",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_18",
+   "match": "pc_sub_00706BA0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00706BB0",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_19",
+   "match": "pc_sub_00706BB0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707310",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_16",
+   "match": "pc_sub_00707310"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707320",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_17",
+   "match": "pc_sub_00707320"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707330",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_18",
+   "match": "pc_sub_00707330"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707340",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_19",
+   "match": "pc_sub_00707340"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707350",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_04",
+   "match": "pc_sub_00707350"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007073A0",
+   "size": 1,
+   "symbol": "sub_007073A0",
+   "match": "pc_sub_007073A0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707D80",
+   "size": 1,
+   "symbol": "sub_00707D80",
+   "match": "pc_sub_00707D80"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707EA0",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_04",
+   "match": "pc_sub_00707EA0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707EF0",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_16",
+   "match": "pc_sub_00707EF0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707F00",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_17",
+   "match": "pc_sub_00707F00"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707F10",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_18",
+   "match": "pc_sub_00707F10"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00707F20",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_19",
+   "match": "pc_sub_00707F20"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00708F50",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_16",
+   "match": "pc_sub_00708F50"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00708F60",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_17",
+   "match": "pc_sub_00708F60"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00708F70",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_18",
+   "match": "pc_sub_00708F70"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00708F80",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_19",
+   "match": "pc_sub_00708F80"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00708F90",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_04",
+   "match": "pc_sub_00708F90"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007090A0",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_16",
+   "match": "pc_sub_007090A0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007090B0",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_17",
+   "match": "pc_sub_007090B0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007090C0",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_18",
+   "match": "pc_sub_007090C0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007090D0",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_19",
+   "match": "pc_sub_007090D0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007090E0",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_04",
+   "match": "pc_sub_007090E0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00709370",
+   "size": 6,
+   "symbol": "pure3d::d3dDecalShader::vfunc_04",
+   "match": "pc_sub_00709370"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00709470",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_04",
+   "match": "pc_sub_00709470"
+  },
+  {
+   "bin": "pc",
+   "va": "0x007099F0",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_16",
+   "match": "pc_sub_007099F0"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00709A00",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_17",
+   "match": "pc_sub_00709A00"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00709A10",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_18",
+   "match": "pc_sub_00709A10"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00709A20",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_19",
+   "match": "pc_sub_00709A20"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0072C940",
+   "size": 1,
+   "symbol": "sub_0072C940",
+   "match": "pc_sub_0072C940"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0072CC00",
+   "size": 1,
+   "symbol": "sub_0072CC00",
+   "match": "pc_sub_0072CC00"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0072CC10",
+   "size": 1,
+   "symbol": "sub_0072CC10",
+   "match": "pc_sub_0072CC10"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0072CD30",
+   "size": 1,
+   "symbol": "sub_0072CD30",
+   "match": "pc_sub_0072CD30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00011170",
+   "size": 1,
+   "symbol": "sub_00011170",
+   "match": "sub_00011170"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000111A0",
+   "size": 6,
+   "symbol": "sub_000111A0",
+   "match": "sub_000111A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000123B0",
+   "size": 6,
+   "symbol": "CollisionBehaviourTypeGroup::vfunc_00",
+   "match": "sub_000123B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000173C0",
+   "size": 6,
+   "symbol": "CollisionSurfaceType::vfunc_00",
+   "match": "sub_000173C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0001E140",
+   "size": 6,
+   "symbol": "ActionMap::vfunc_00",
+   "match": "sub_0001E140"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0001E5D0",
+   "size": 6,
+   "symbol": "sub_0001E5D0",
+   "match": "sub_0001E5D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0001E630",
+   "size": 1,
+   "symbol": "sub_0001E630",
+   "match": "sub_0001E630"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0001EE90",
+   "size": 6,
+   "symbol": "sub_0001EE90",
+   "match": "sub_0001EE90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0001EEA0",
+   "size": 6,
+   "symbol": "sub_0001EEA0",
+   "match": "sub_0001EEA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0001EF60",
+   "size": 7,
+   "symbol": "sub_0001EF60",
+   "match": "sub_0001EF60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0001EF70",
+   "size": 7,
+   "symbol": "sub_0001EF70",
+   "match": "sub_0001EF70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00020B30",
+   "size": 6,
+   "symbol": "sub_00020B30",
+   "match": "sub_00020B30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00022610",
+   "size": 6,
+   "symbol": "sub_00022610",
+   "match": "sub_00022610"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00022710",
+   "size": 3,
+   "symbol": "CollisionBehaviourTypeGroup::vfunc_05",
+   "match": "sub_00022710"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00022980",
+   "size": 7,
+   "symbol": "FightTree::fight::VEnterExitScriptTrack::?$FightActionController::vfunc_17",
+   "match": "sub_00022980"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00022A00",
+   "size": 6,
+   "symbol": "fight::VTimedCharacterFightTrack::?$ParamString::vfunc_01",
+   "match": "sub_00022A00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00022A10",
+   "size": 6,
+   "symbol": "FEObject::vfunc_00",
+   "match": "sub_00022A10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00022D40",
+   "size": 6,
+   "symbol": "FETextObject::vfunc_00",
+   "match": "sub_00022D40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00022E50",
+   "size": 6,
+   "symbol": "FEBoxObject::vfunc_00",
+   "match": "sub_00022E50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023170",
+   "size": 6,
+   "symbol": "FEP3DObject::vfunc_00",
+   "match": "sub_00023170"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000231B0",
+   "size": 1,
+   "symbol": "sub_000231B0",
+   "match": "sub_000231B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000231E0",
+   "size": 6,
+   "symbol": "FESpriteObject::vfunc_00",
+   "match": "sub_000231E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023370",
+   "size": 6,
+   "symbol": "FERoundedRectangleObject::vfunc_00",
+   "match": "sub_00023370"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023B20",
+   "size": 6,
+   "symbol": "FEGroupObject::vfunc_00",
+   "match": "sub_00023B20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023BA0",
+   "size": 6,
+   "symbol": "FELayerObject::vfunc_00",
+   "match": "sub_00023BA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023BB0",
+   "size": 6,
+   "symbol": "FEPageObject::vfunc_00",
+   "match": "sub_00023BB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023BC0",
+   "size": 6,
+   "symbol": "FEScreenObject::vfunc_00",
+   "match": "sub_00023BC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023C00",
+   "size": 6,
+   "symbol": "FEProjectObject::vfunc_00",
+   "match": "sub_00023C00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023C80",
+   "size": 6,
+   "symbol": "sub_00023C80",
+   "match": "sub_00023C80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00023F20",
+   "size": 1,
+   "symbol": "sub_00023F20",
+   "match": "sub_00023F20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00024E40",
+   "size": 6,
+   "symbol": "sub_00024E40",
+   "match": "sub_00024E40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00026710",
+   "size": 6,
+   "symbol": "Graph::vfunc_00",
+   "match": "sub_00026710"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000272F0",
+   "size": 4,
+   "symbol": "AddressSpawnObject::vfunc_47",
+   "match": "sub_000272F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00027300",
+   "size": 6,
+   "symbol": "AITask_Chicken::vfunc_40",
+   "match": "sub_00027300"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00028FD0",
+   "size": 6,
+   "symbol": "GameGroup::vfunc_00",
+   "match": "sub_00028FD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000294A0",
+   "size": 6,
+   "symbol": "GameObject::vfunc_00",
+   "match": "sub_000294A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00029840",
+   "size": 6,
+   "symbol": "GameSet::vfunc_00",
+   "match": "sub_00029840"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00029F40",
+   "size": 14,
+   "symbol": "FEGroupObject::vfunc_26",
+   "match": "vfunc_26@FEGroupObject@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00029F80",
+   "size": 6,
+   "symbol": "GameSetObject::vfunc_00",
+   "match": "sub_00029F80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002A320",
+   "size": 6,
+   "symbol": "GameSimObject::vfunc_00",
+   "match": "sub_0002A320"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002A390",
+   "size": 14,
+   "symbol": "GameSimObjectBatchView::vfunc_63",
+   "match": "vfunc_63@GameSimObjectBatchView@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002A5C0",
+   "size": 6,
+   "symbol": "PositionObject::vfunc_00",
+   "match": "sub_0002A5C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002A670",
+   "size": 14,
+   "symbol": "PositionSetObject::vfunc_26",
+   "match": "vfunc_26@PositionSetObject@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002A720",
+   "size": 6,
+   "symbol": "PositionSetObject::vfunc_00",
+   "match": "sub_0002A720"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002A7E0",
+   "size": 6,
+   "symbol": "RCObject::vfunc_00",
+   "match": "sub_0002A7E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002A9B0",
+   "size": 6,
+   "symbol": "ScriptDeclarationGroup::vfunc_00",
+   "match": "sub_0002A9B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002A9D0",
+   "size": 6,
+   "symbol": "sub_0002A9D0",
+   "match": "sub_0002A9D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002AA40",
+   "size": 6,
+   "symbol": "SetDeclaration::vfunc_00",
+   "match": "sub_0002AA40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002AA70",
+   "size": 6,
+   "symbol": "ScriptDeclaration::vfunc_00",
+   "match": "sub_0002AA70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002AFD0",
+   "size": 6,
+   "symbol": "ScriptObject::vfunc_00",
+   "match": "sub_0002AFD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002B9F0",
+   "size": 1,
+   "symbol": "sub_0002B9F0",
+   "match": "sub_0002B9F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002CAD0",
+   "size": 6,
+   "symbol": "sub_0002CAD0",
+   "match": "sub_0002CAD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002D390",
+   "size": 6,
+   "symbol": "sub_0002D390",
+   "match": "sub_0002D390"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002D5B0",
+   "size": 6,
+   "symbol": "sub_0002D5B0",
+   "match": "sub_0002D5B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002D7B0",
+   "size": 6,
+   "symbol": "sub_0002D7B0",
+   "match": "sub_0002D7B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002E070",
+   "size": 6,
+   "symbol": "sub_0002E070",
+   "match": "sub_0002E070"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002E5C0",
+   "size": 6,
+   "symbol": "Template::vfunc_00",
+   "match": "sub_0002E5C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002E650",
+   "size": 6,
+   "symbol": "StreamedTemplate::vfunc_00",
+   "match": "sub_0002E650"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002E930",
+   "size": 6,
+   "symbol": "sub_0002E930",
+   "match": "sub_0002E930"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0002F890",
+   "size": 3,
+   "symbol": "sub_0002F890",
+   "match": "sub_0002F890"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000336C0",
+   "size": 14,
+   "symbol": "Path::vfunc_04",
+   "match": "vfunc_04@Path@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000351C0",
+   "size": 7,
+   "symbol": "sub_000351C0",
+   "match": "sub_000351C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000356A0",
+   "size": 1,
+   "symbol": "sub_000356A0",
+   "match": "sub_000356A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00036CD0",
+   "size": 1,
+   "symbol": "sub_00036CD0",
+   "match": "sub_00036CD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0003AEE0",
+   "size": 6,
+   "symbol": "sub_0003AEE0",
+   "match": "sub_0003AEE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0003D580",
+   "size": 1,
+   "symbol": "sub_0003D580",
+   "match": "sub_0003D580"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0003EBD0",
+   "size": 7,
+   "symbol": "sub_0003EBD0",
+   "match": "sub_0003EBD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000476A0",
+   "size": 1,
+   "symbol": "sub_000476A0",
+   "match": "sub_000476A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00047E70",
+   "size": 6,
+   "symbol": "sub_00047E70",
+   "match": "sub_00047E70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00047E80",
+   "size": 6,
+   "symbol": "sub_00047E80",
+   "match": "sub_00047E80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00047FE0",
+   "size": 1,
+   "symbol": "sub_00047FE0",
+   "match": "sub_00047FE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00048010",
+   "size": 1,
+   "symbol": "sub_00048010",
+   "match": "sub_00048010"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00048490",
+   "size": 1,
+   "symbol": "sub_00048490",
+   "match": "sub_00048490"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0004A760",
+   "size": 6,
+   "symbol": "pure3d::TargaHandler::vfunc_07",
+   "match": "sub_0004A760"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0004C770",
+   "size": 6,
+   "symbol": "pure3d::BMPHandler::vfunc_07",
+   "match": "sub_0004C770"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0004F3F0",
+   "size": 1,
+   "symbol": "sub_0004F3F0",
+   "match": "sub_0004F3F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00050020",
+   "size": 1,
+   "symbol": "sub_00050020",
+   "match": "sub_00050020"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00050BB0",
+   "size": 1,
+   "symbol": "sub_00050BB0",
+   "match": "sub_00050BB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000517E0",
+   "size": 6,
+   "symbol": "renderer::DecalPrimitive::vfunc_07",
+   "match": "sub_000517E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000517F0",
+   "size": 6,
+   "symbol": "renderer::DecalContainer::vfunc_25",
+   "match": "sub_000517F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000518D0",
+   "size": 7,
+   "symbol": "FightTree::fight::VEnterExitScriptTrack::?$FightActionController::vfunc_16",
+   "match": "sub_000518D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000518E0",
+   "size": 7,
+   "symbol": "renderer::DecalContainer::vfunc_21",
+   "match": "sub_000518E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00053470",
+   "size": 6,
+   "symbol": "renderer::InstancePrimitive::vfunc_07",
+   "match": "sub_00200000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00053480",
+   "size": 6,
+   "symbol": "renderer::InstanceContainer::vfunc_25",
+   "match": "sub_00053480"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000551F0",
+   "size": 6,
+   "symbol": "renderer::OceanPrimitive::vfunc_07",
+   "match": "sub_00020000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055240",
+   "size": 6,
+   "symbol": "renderer::OceanContainer::vfunc_25",
+   "match": "sub_00040000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00056610",
+   "size": 1,
+   "symbol": "sub_00056610",
+   "match": "sub_00056610"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000573D0",
+   "size": 1,
+   "symbol": "sub_000573D0",
+   "match": "sub_000573D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005A920",
+   "size": 6,
+   "symbol": "renderer::SkidmarkContainer::vfunc_25",
+   "match": "sub_0005A920"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005D7C0",
+   "size": 6,
+   "symbol": "renderer::VehicleContainer::vfunc_25",
+   "match": "sub_0005D7C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005D860",
+   "size": 1,
+   "symbol": "sub_0005D860",
+   "match": "sub_0005D860"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005F970",
+   "size": 6,
+   "symbol": "renderer::WakePrimitive::vfunc_07",
+   "match": "sub_00080000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005F980",
+   "size": 6,
+   "symbol": "renderer::WakeContainer::vfunc_25",
+   "match": "sub_00100000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00060B40",
+   "size": 6,
+   "symbol": "sub_00060B40",
+   "match": "sub_00060B40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00060C70",
+   "size": 6,
+   "symbol": "sub_00060C70",
+   "match": "sub_00060C70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00061630",
+   "size": 3,
+   "symbol": "sub_00061630",
+   "match": "sub_00061630"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000618E0",
+   "size": 6,
+   "symbol": "sub_000618E0",
+   "match": "sub_000618E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00063DA0",
+   "size": 1,
+   "symbol": "sub_00063DA0",
+   "match": "sub_00063DA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000643C0",
+   "size": 1,
+   "symbol": "sub_000643C0",
+   "match": "sub_000643C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000653B0",
+   "size": 6,
+   "symbol": "om::VGlobalVehicleSound::?$EntityType::vfunc_03",
+   "match": "sub_000653B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000653C0",
+   "size": 6,
+   "symbol": "om::VGlobalVehicleSound::?$EntityType::vfunc_02",
+   "match": "sub_000653C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065430",
+   "size": 6,
+   "symbol": "GlobalVehicleSound::vfunc_12",
+   "match": "sub_00065430"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000654F0",
+   "size": 6,
+   "symbol": "om::VCarSound::?$EntityType::vfunc_03",
+   "match": "sub_000654F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065500",
+   "size": 6,
+   "symbol": "om::VCarSound::?$EntityType::vfunc_02",
+   "match": "sub_00065500"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065580",
+   "size": 6,
+   "symbol": "CarSound::vfunc_12",
+   "match": "sub_00065580"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065670",
+   "size": 6,
+   "symbol": "om::VBoatSound::?$EntityType::vfunc_03",
+   "match": "sub_00065670"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065680",
+   "size": 6,
+   "symbol": "om::VBoatSound::?$EntityType::vfunc_02",
+   "match": "sub_00065680"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000656E0",
+   "size": 6,
+   "symbol": "BoatSound::vfunc_12",
+   "match": "sub_000656E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000657B0",
+   "size": 6,
+   "symbol": "om::VPlaneSound::?$EntityType::vfunc_03",
+   "match": "sub_000657B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000657C0",
+   "size": 6,
+   "symbol": "om::VPlaneSound::?$EntityType::vfunc_02",
+   "match": "sub_000657C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065820",
+   "size": 6,
+   "symbol": "PlaneSound::vfunc_12",
+   "match": "sub_00065820"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000658F0",
+   "size": 6,
+   "symbol": "om::VCollisionSound::?$EntityType::vfunc_03",
+   "match": "sub_000658F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065900",
+   "size": 6,
+   "symbol": "om::VCollisionSound::?$EntityType::vfunc_02",
+   "match": "sub_00065900"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065980",
+   "size": 6,
+   "symbol": "om::VFeHudSound::?$EntityType::vfunc_03",
+   "match": "sub_00065980"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065990",
+   "size": 6,
+   "symbol": "om::VFeHudSound::?$EntityType::vfunc_02",
+   "match": "sub_00065990"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000659F0",
+   "size": 6,
+   "symbol": "FeHudSound::vfunc_12",
+   "match": "sub_000659F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065AC0",
+   "size": 6,
+   "symbol": "om::VStatePropSound::?$EntityType::vfunc_03",
+   "match": "sub_00065AC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065AD0",
+   "size": 6,
+   "symbol": "om::VStatePropSound::?$EntityType::vfunc_02",
+   "match": "sub_00065AD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065B50",
+   "size": 6,
+   "symbol": "StatePropSound::vfunc_12",
+   "match": "sub_00065B50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065C40",
+   "size": 6,
+   "symbol": "om::VFirearmSound::?$EntityType::vfunc_03",
+   "match": "sub_00065C40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065C50",
+   "size": 6,
+   "symbol": "om::VFirearmSound::?$EntityType::vfunc_02",
+   "match": "sub_00065C50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065CD0",
+   "size": 6,
+   "symbol": "FirearmSound::vfunc_12",
+   "match": "sub_00065CD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065DC0",
+   "size": 6,
+   "symbol": "om::VSoundBank::?$EntityType::vfunc_03",
+   "match": "sub_00065DC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065DD0",
+   "size": 6,
+   "symbol": "om::VSoundBank::?$EntityType::vfunc_02",
+   "match": "sub_00065DD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065E50",
+   "size": 6,
+   "symbol": "om::VSoundDialogueText::?$EntityType::vfunc_03",
+   "match": "sub_00065E50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00065E60",
+   "size": 6,
+   "symbol": "om::VSoundDialogueText::?$EntityType::vfunc_02",
+   "match": "sub_00065E60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066860",
+   "size": 6,
+   "symbol": "SoundDialogueText::vfunc_12",
+   "match": "sub_00066860"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066960",
+   "size": 6,
+   "symbol": "SoundBank::vfunc_12",
+   "match": "sub_00066960"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066AC0",
+   "size": 6,
+   "symbol": "CollisionSound::vfunc_12",
+   "match": "sub_00066AC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066CC0",
+   "size": 6,
+   "symbol": "sub_00066CC0",
+   "match": "sub_00066CC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066CD0",
+   "size": 6,
+   "symbol": "sub_00066CD0",
+   "match": "sub_00066CD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066CE0",
+   "size": 6,
+   "symbol": "sub_00066CE0",
+   "match": "sub_00066CE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066CF0",
+   "size": 6,
+   "symbol": "sub_00066CF0",
+   "match": "sub_00066CF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D00",
+   "size": 6,
+   "symbol": "sub_00066D00",
+   "match": "sub_00066D00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D10",
+   "size": 6,
+   "symbol": "sub_00066D10",
+   "match": "sub_00066D10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D20",
+   "size": 6,
+   "symbol": "sub_00066D20",
+   "match": "sub_00066D20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D30",
+   "size": 6,
+   "symbol": "sub_00066D30",
+   "match": "sub_00066D30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D40",
+   "size": 6,
+   "symbol": "sub_00066D40",
+   "match": "sub_00066D40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D50",
+   "size": 6,
+   "symbol": "sub_00066D50",
+   "match": "sub_00066D50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D60",
+   "size": 6,
+   "symbol": "sub_00066D60",
+   "match": "sub_00066D60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D70",
+   "size": 6,
+   "symbol": "sub_00066D70",
+   "match": "sub_00066D70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D80",
+   "size": 6,
+   "symbol": "sub_00066D80",
+   "match": "sub_00066D80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066D90",
+   "size": 6,
+   "symbol": "sub_00066D90",
+   "match": "sub_00066D90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066DA0",
+   "size": 6,
+   "symbol": "sub_00066DA0",
+   "match": "sub_00066DA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066DB0",
+   "size": 6,
+   "symbol": "sub_00066DB0",
+   "match": "sub_00066DB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066DC0",
+   "size": 6,
+   "symbol": "sub_00066DC0",
+   "match": "sub_00066DC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066DD0",
+   "size": 6,
+   "symbol": "sub_00066DD0",
+   "match": "sub_00066DD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066DE0",
+   "size": 6,
+   "symbol": "sub_00066DE0",
+   "match": "sub_00066DE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066DF0",
+   "size": 6,
+   "symbol": "sub_00066DF0",
+   "match": "sub_00066DF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E00",
+   "size": 6,
+   "symbol": "sub_00066E00",
+   "match": "sub_00066E00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E10",
+   "size": 6,
+   "symbol": "sub_00066E10",
+   "match": "sub_00066E10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E20",
+   "size": 6,
+   "symbol": "sub_00066E20",
+   "match": "sub_00066E20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E30",
+   "size": 6,
+   "symbol": "sub_00066E30",
+   "match": "sub_00066E30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E40",
+   "size": 6,
+   "symbol": "sub_00066E40",
+   "match": "sub_00066E40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E50",
+   "size": 6,
+   "symbol": "sub_00066E50",
+   "match": "sub_00066E50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E60",
+   "size": 6,
+   "symbol": "sub_00066E60",
+   "match": "sub_00066E60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E70",
+   "size": 6,
+   "symbol": "sub_00066E70",
+   "match": "sub_00066E70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E80",
+   "size": 6,
+   "symbol": "sub_00066E80",
+   "match": "sub_00066E80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066E90",
+   "size": 6,
+   "symbol": "sub_00066E90",
+   "match": "sub_00066E90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066EA0",
+   "size": 6,
+   "symbol": "sub_00066EA0",
+   "match": "sub_00066EA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066EB0",
+   "size": 6,
+   "symbol": "sub_00066EB0",
+   "match": "sub_00066EB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066EC0",
+   "size": 6,
+   "symbol": "sub_00066EC0",
+   "match": "sub_00066EC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066ED0",
+   "size": 6,
+   "symbol": "sub_00066ED0",
+   "match": "sub_00066ED0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00066EE0",
+   "size": 6,
+   "symbol": "sub_00066EE0",
+   "match": "sub_00066EE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00067BA0",
+   "size": 1,
+   "symbol": "sub_00067BA0",
+   "match": "sub_00067BA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0006F990",
+   "size": 3,
+   "symbol": "EmpireHUD::IsModalHUD",
+   "match": "IsModalHUD@EmpireHUD@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0006F9A0",
+   "size": 6,
+   "symbol": "core::DriveFindNextRequest::vfunc_06",
+   "match": "sub_0006F9A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000711F0",
+   "size": 1,
+   "symbol": "sub_000711F0",
+   "match": "sub_000711F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000720A0",
+   "size": 3,
+   "symbol": "sub_000720A0",
+   "match": "sub_000720A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000721C0",
+   "size": 1,
+   "symbol": "sub_000721C0",
+   "match": "sub_000721C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00072260",
+   "size": 6,
+   "symbol": "sub_00072260",
+   "match": "sub_00072260"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000758D0",
+   "size": 6,
+   "symbol": "sub_000758D0",
+   "match": "sub_000758D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000758E0",
+   "size": 6,
+   "symbol": "sub_000758E0",
+   "match": "sub_000758E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00075970",
+   "size": 6,
+   "symbol": "sub_00075970",
+   "match": "sub_00075970"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000777A0",
+   "size": 6,
+   "symbol": "sub_000777A0",
+   "match": "sub_000777A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00079FC0",
+   "size": 3,
+   "symbol": "sub_00079FC0",
+   "match": "sub_00079FC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0007ABC0",
+   "size": 3,
+   "symbol": "sub_0007ABC0",
+   "match": "sub_0007ABC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0007ADC0",
+   "size": 6,
+   "symbol": "AITask_TauntResponse::vfunc_55",
+   "match": "sub_0007ADC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000827B0",
+   "size": 6,
+   "symbol": "sub_000827B0",
+   "match": "sub_000827B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00083950",
+   "size": 3,
+   "symbol": "sub_00083950",
+   "match": "sub_00083950"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00083F50",
+   "size": 3,
+   "symbol": "sub_00083F50",
+   "match": "sub_00083F50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00084070",
+   "size": 3,
+   "symbol": "sub_00084070",
+   "match": "sub_00084070"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000870D0",
+   "size": 6,
+   "symbol": "sub_000870D0",
+   "match": "sub_000870D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00088060",
+   "size": 1,
+   "symbol": "sub_00088060",
+   "match": "sub_00088060"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00088100",
+   "size": 6,
+   "symbol": "sub_00088100",
+   "match": "sub_00088100"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00088170",
+   "size": 3,
+   "symbol": "sub_00088170",
+   "match": "sub_00088170"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000903C0",
+   "size": 6,
+   "symbol": "sub_000903C0",
+   "match": "sub_000903C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00090410",
+   "size": 6,
+   "symbol": "sub_00090410",
+   "match": "sub_00090410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00090420",
+   "size": 6,
+   "symbol": "sub_00090420",
+   "match": "sub_00090420"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00090430",
+   "size": 6,
+   "symbol": "sub_00090430",
+   "match": "sub_00090430"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00090440",
+   "size": 6,
+   "symbol": "sub_00090440",
+   "match": "sub_00090440"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00090450",
+   "size": 6,
+   "symbol": "sub_00090450",
+   "match": "sub_00090450"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000905D0",
+   "size": 1,
+   "symbol": "sub_000905D0",
+   "match": "sub_000905D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00090660",
+   "size": 6,
+   "symbol": "sub_00090660",
+   "match": "sub_00090660"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00091B40",
+   "size": 6,
+   "symbol": "sub_00091B40",
+   "match": "sub_00091B40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00094C80",
+   "size": 6,
+   "symbol": "sub_00094C80",
+   "match": "sub_00094C80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00094CB0",
+   "size": 6,
+   "symbol": "VarietyFileBank::vfunc_00",
+   "match": "sub_00094CB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00094CF0",
+   "size": 6,
+   "symbol": "VarietyFile::vfunc_00",
+   "match": "sub_00094CF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00096480",
+   "size": 6,
+   "symbol": "VarietyDeclarationGroup::vfunc_00",
+   "match": "sub_00096480"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000964B0",
+   "size": 6,
+   "symbol": "VarietyObject::vfunc_00",
+   "match": "sub_000964B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00096510",
+   "size": 6,
+   "symbol": "VarietySlot::vfunc_00",
+   "match": "sub_00096510"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00097030",
+   "size": 3,
+   "symbol": "sub_00097030",
+   "match": "sub_00097030"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00097040",
+   "size": 6,
+   "symbol": "sub_00097040",
+   "match": "sub_00097040"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00097050",
+   "size": 6,
+   "symbol": "sub_00097050",
+   "match": "sub_00097050"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00098460",
+   "size": 1,
+   "symbol": "sub_00098460",
+   "match": "sub_00098460"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00098840",
+   "size": 3,
+   "symbol": "sub_00098840",
+   "match": "sub_00098840"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0009B110",
+   "size": 3,
+   "symbol": "sub_0009B110",
+   "match": "sub_0009B110"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000A4A50",
+   "size": 1,
+   "symbol": "sub_000A4A50",
+   "match": "sub_000A4A50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000AB000",
+   "size": 6,
+   "symbol": "sub_000AB000",
+   "match": "sub_000AB000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000AB1B0",
+   "size": 3,
+   "symbol": "sub_000AB1B0",
+   "match": "sub_000AB1B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000AB830",
+   "size": 7,
+   "symbol": "sub_000AB830",
+   "match": "sub_000AB830"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000B7EB0",
+   "size": 3,
+   "symbol": "Collidable::vfunc_05",
+   "match": "sub_000B7EB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000BCAD0",
+   "size": 7,
+   "symbol": "sub_000BCAD0",
+   "match": "sub_000BCAD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000C4730",
+   "size": 6,
+   "symbol": "ScriptContextProperties::vfunc_00",
+   "match": "sub_000C4730"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000C47A0",
+   "size": 6,
+   "symbol": "WeaponPickupContextProperties::vfunc_00",
+   "match": "sub_000C47A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000C6180",
+   "size": 6,
+   "symbol": "sub_000C6180",
+   "match": "sub_000C6180"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000C6FF0",
+   "size": 6,
+   "symbol": "SaveGameController::vfunc_00",
+   "match": "sub_000C6FF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000C7000",
+   "size": 6,
+   "symbol": "sub_000C7000",
+   "match": "sub_000C7000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000C7B10",
+   "size": 6,
+   "symbol": "SaveGameObject::vfunc_00",
+   "match": "sub_000C7B10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000CAA00",
+   "size": 6,
+   "symbol": "sub_000CAA00",
+   "match": "sub_000CAA00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000CFC10",
+   "size": 6,
+   "symbol": "sub_000CFC10",
+   "match": "sub_000CFC10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000D00A0",
+   "size": 3,
+   "symbol": "sub_000D00A0",
+   "match": "sub_000D00A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000D7FE0",
+   "size": 1,
+   "symbol": "sub_000D7FE0",
+   "match": "sub_000D7FE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000D8270",
+   "size": 7,
+   "symbol": "sub_000D8270",
+   "match": "sub_000D8270"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000D8280",
+   "size": 7,
+   "symbol": "sub_000D8280",
+   "match": "sub_000D8280"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000DD3D0",
+   "size": 3,
+   "symbol": "sub_000DD3D0",
+   "match": "sub_000DD3D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000DD480",
+   "size": 3,
+   "symbol": "sub_000DD480",
+   "match": "sub_000DD480"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000DD640",
+   "size": 6,
+   "symbol": "fight::VDirectionalGetHitCondition::?$ParamEnumConstList::vfunc_01",
+   "match": "sub_000DD640"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000DE370",
+   "size": 6,
+   "symbol": "sub_000DE370",
+   "match": "sub_000DE370"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E3560",
+   "size": 3,
+   "symbol": "sub_000E3560",
+   "match": "sub_000E3560"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E7360",
+   "size": 6,
+   "symbol": "Animation360Track::vfunc_33",
+   "match": "sub_000E7360"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E7500",
+   "size": 6,
+   "symbol": "AnimationTrack::vfunc_33",
+   "match": "sub_000E7500"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E78D0",
+   "size": 6,
+   "symbol": "AnimationRetargetingTrack::vfunc_33",
+   "match": "sub_000E78D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E7A50",
+   "size": 6,
+   "symbol": "fight::VAnimationRetargetingTrack::?$ParamVector::vfunc_01",
+   "match": "sub_000E7A50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E7F50",
+   "size": 6,
+   "symbol": "BlendTrack::vfunc_33",
+   "match": "sub_000E7F50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E80E0",
+   "size": 6,
+   "symbol": "CameraShakeTrack::vfunc_33",
+   "match": "sub_000E80E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E85B0",
+   "size": 6,
+   "symbol": "DismemberTrack::vfunc_33",
+   "match": "sub_000E85B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E89C0",
+   "size": 6,
+   "symbol": "DramaticCameraTrack::vfunc_33",
+   "match": "sub_000E89C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E9240",
+   "size": 6,
+   "symbol": "ExitConditionTrack::vfunc_33",
+   "match": "sub_000E9240"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E9300",
+   "size": 6,
+   "symbol": "fight::VExitConditionTrack::?$ParamBranch::vfunc_01",
+   "match": "sub_000E9300"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E9310",
+   "size": 6,
+   "symbol": "fight::VExitConditionTrack::?$ParamConditionGroup::vfunc_01",
+   "match": "sub_000E9310"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E9570",
+   "size": 6,
+   "symbol": "LayeredAnimationTrack::vfunc_33",
+   "match": "sub_000E9570"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E9A90",
+   "size": 1,
+   "symbol": "sub_000E9A90",
+   "match": "sub_000E9A90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000E9AD0",
+   "size": 1,
+   "symbol": "sub_000E9AD0",
+   "match": "sub_000E9AD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EB680",
+   "size": 6,
+   "symbol": "sub_000EB680",
+   "match": "sub_000EB680"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EECB0",
+   "size": 6,
+   "symbol": "sub_000EECB0",
+   "match": "sub_000EECB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EFC10",
+   "size": 6,
+   "symbol": "AIActionTreeCreatingTask::vfunc_00",
+   "match": "sub_000EFC10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EFCF0",
+   "size": 14,
+   "symbol": "GlanceAtOvertakingPed::vfunc_07",
+   "match": "vfunc_07@GlanceAtOvertakingPed@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EFD20",
+   "size": 7,
+   "symbol": "GlanceAtOvertakingPed::vfunc_08",
+   "match": "sub_000EFD20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EFD90",
+   "size": 7,
+   "symbol": "CheckOutToeToHead::vfunc_08",
+   "match": "sub_000EFD90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EFDB0",
+   "size": 7,
+   "symbol": "CheckOutToeToHead::vfunc_05",
+   "match": "sub_000EFDB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EFDE0",
+   "size": 14,
+   "symbol": "GlanceAbsentMindedly::vfunc_00",
+   "match": "vfunc_00@GlanceAbsentMindedly@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000EFE30",
+   "size": 6,
+   "symbol": "GlanceAtOvertakingPed::vfunc_10",
+   "match": "sub_000EFE30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000F0A70",
+   "size": 7,
+   "symbol": "GlanceAtVehicle::vfunc_08",
+   "match": "sub_000F0A70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000F1710",
+   "size": 3,
+   "symbol": "sub_000F1710",
+   "match": "sub_000F1710"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000F4EE0",
+   "size": 3,
+   "symbol": "sub_000F4EE0",
+   "match": "sub_000F4EE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00100210",
+   "size": 6,
+   "symbol": "AIBehavior::vfunc_00",
+   "match": "sub_00100210"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001041D0",
+   "size": 6,
+   "symbol": "AIStimulusTable::vfunc_00",
+   "match": "sub_001041D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00105020",
+   "size": 6,
+   "symbol": "AITask::vfunc_00",
+   "match": "sub_00105020"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00105880",
+   "size": 6,
+   "symbol": "AITask_BegForLife::vfunc_00",
+   "match": "sub_00105880"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00105D30",
+   "size": 6,
+   "symbol": "AITask_ChallengeTony::vfunc_00",
+   "match": "sub_00105D30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00106580",
+   "size": 6,
+   "symbol": "AITask_Chicken::vfunc_00",
+   "match": "sub_00106580"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001067A0",
+   "size": 1,
+   "symbol": "sub_001067A0",
+   "match": "sub_001067A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00106DA0",
+   "size": 6,
+   "symbol": "AITask_CodeAbstract::vfunc_00",
+   "match": "sub_00106DA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00107600",
+   "size": 6,
+   "symbol": "AITask_FleeFromPosition::vfunc_00",
+   "match": "sub_00107600"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001076B0",
+   "size": 6,
+   "symbol": "AITask_FleeWhenOutGunned::vfunc_00",
+   "match": "sub_001076B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00107770",
+   "size": 6,
+   "symbol": "AITask_FleeFromExplodingCar::vfunc_00",
+   "match": "sub_00107770"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00108BA0",
+   "size": 6,
+   "symbol": "AITask_IdleAction::vfunc_00",
+   "match": "sub_00108BA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001095A0",
+   "size": 6,
+   "symbol": "AITask_PedFlee::vfunc_00",
+   "match": "sub_001095A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001095B0",
+   "size": 7,
+   "symbol": "AITask_PedFlee[+76]::vfunc_03",
+   "match": "sub_001095B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001096A0",
+   "size": 6,
+   "symbol": "AITask_PedTraffic::vfunc_00",
+   "match": "sub_001096A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00109CA0",
+   "size": 6,
+   "symbol": "AITask_ReactToStaggeredStim::vfunc_00",
+   "match": "sub_00109CA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00109DE0",
+   "size": 6,
+   "symbol": "AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_00",
+   "match": "sub_00109DE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00109E00",
+   "size": 6,
+   "symbol": "AITask_SharkInteractWithSwimmer::vfunc_44",
+   "match": "sub_00109E00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00109E90",
+   "size": 6,
+   "symbol": "AITask_SharkInteractWithBoat::vfunc_44",
+   "match": "sub_00109E90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010A740",
+   "size": 6,
+   "symbol": "AITask_SharkInteractWithSwimmer::vfunc_00",
+   "match": "sub_0010A740"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010A7C0",
+   "size": 6,
+   "symbol": "AITask_SharkInteractWithBoat::vfunc_00",
+   "match": "sub_0010A7C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010A7F0",
+   "size": 6,
+   "symbol": "AITask_SharkWander::vfunc_00",
+   "match": "sub_0010A7F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010BDC0",
+   "size": 6,
+   "symbol": "AITask_Dummy::vfunc_00",
+   "match": "sub_0010BDC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010BDD0",
+   "size": 6,
+   "symbol": "AITask_Dummy::vfunc_40",
+   "match": "sub_0010BDD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010BE30",
+   "size": 6,
+   "symbol": "AITask_DummyInVehicle::vfunc_00",
+   "match": "sub_0010BE30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010BEE0",
+   "size": 6,
+   "symbol": "AITask_Engage::vfunc_00",
+   "match": "sub_0010BEE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010BF10",
+   "size": 6,
+   "symbol": "AITask_DestroyObject::vfunc_00",
+   "match": "sub_0010BF10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010BF90",
+   "size": 6,
+   "symbol": "AITask_Patrol::vfunc_00",
+   "match": "sub_0010BF90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010C180",
+   "size": 6,
+   "symbol": "sub_0010C180",
+   "match": "sub_0010C180"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010D290",
+   "size": 6,
+   "symbol": "AITask_BasicInVehicle::vfunc_00",
+   "match": "sub_0010D290"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010D2E0",
+   "size": 6,
+   "symbol": "AITask_InVehicle::vfunc_00",
+   "match": "sub_0010D2E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010D360",
+   "size": 6,
+   "symbol": "AITask_SlowDownCarForCorpses::vfunc_00",
+   "match": "sub_0010D360"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010E1A0",
+   "size": 6,
+   "symbol": "AITask_VehicleGetIn::vfunc_00",
+   "match": "sub_0010E1A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010E830",
+   "size": 6,
+   "symbol": "AITask_WaitWhenTonyIsNear::vfunc_00",
+   "match": "sub_0010E830"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010EC00",
+   "size": 6,
+   "symbol": "AttractPointTemplate::vfunc_00",
+   "match": "sub_0010EC00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010EF70",
+   "size": 6,
+   "symbol": "ActivityTemplate::vfunc_00",
+   "match": "sub_0010EF70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010F010",
+   "size": 6,
+   "symbol": "AttractPointTemplateGroup::vfunc_00",
+   "match": "sub_0010F010"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0010F1A0",
+   "size": 6,
+   "symbol": "AttractPoint::vfunc_00",
+   "match": "sub_0010F1A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00112E50",
+   "size": 6,
+   "symbol": "CoverObject::vfunc_00",
+   "match": "sub_00112E50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00115FA0",
+   "size": 6,
+   "symbol": "PathGroup::vfunc_00",
+   "match": "sub_00115FA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00119470",
+   "size": 3,
+   "symbol": "sub_00119470",
+   "match": "sub_00119470"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0011C920",
+   "size": 6,
+   "symbol": "AITask_IdleChatResponse::vfunc_00",
+   "match": "sub_0011C920"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0011C990",
+   "size": 6,
+   "symbol": "AITask_IdleChatInitiate::vfunc_00",
+   "match": "sub_0011C990"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0011C9F0",
+   "size": 6,
+   "symbol": "AITask_ProvokeAnotherPed::vfunc_00",
+   "match": "sub_0011C9F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00120910",
+   "size": 14,
+   "symbol": "AIActionCustomLogicalEffect::vfunc_03",
+   "match": "vfunc_03@AIActionCustomLogicalEffect@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00120E10",
+   "size": 1,
+   "symbol": "sub_00120E10",
+   "match": "sub_00120E10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00120F00",
+   "size": 14,
+   "symbol": "AIActionCancelPhysicalState::vfunc_06",
+   "match": "vfunc_06@AIActionCancelPhysicalState@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00121900",
+   "size": 14,
+   "symbol": "AIConditionCustom::Evaluate",
+   "match": "Evaluate@AIConditionCustom@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00121990",
+   "size": 14,
+   "symbol": "AIConditionNot::Evaluate",
+   "match": "Evaluate@AIConditionNot@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00123360",
+   "size": 6,
+   "symbol": "AITask_AvoidIncomingCar::vfunc_00",
+   "match": "sub_00123360"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00123420",
+   "size": 6,
+   "symbol": "AITask_NearlyHitByCar::vfunc_00",
+   "match": "sub_00123420"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00123710",
+   "size": 6,
+   "symbol": "AITask_BumpReflex::vfunc_00",
+   "match": "sub_00123710"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00123FB0",
+   "size": 6,
+   "symbol": "AITask_CopChallenge::vfunc_00",
+   "match": "sub_00123FB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00123FC0",
+   "size": 7,
+   "symbol": "AITask_CopChallenge[+88]::vfunc_03",
+   "match": "sub_00123FC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00125050",
+   "size": 6,
+   "symbol": "AITask_RunToAssistCorpse::vfunc_00",
+   "match": "sub_00125050"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00125060",
+   "size": 7,
+   "symbol": "DriversSmartCollection::vfunc_00",
+   "match": "sub_00125060"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00125110",
+   "size": 6,
+   "symbol": "AITask_GawkAtCorpse::vfunc_00",
+   "match": "sub_00125110"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00125120",
+   "size": 7,
+   "symbol": "AITask_GawkAtCorpse[+84]::vfunc_03",
+   "match": "sub_00125120"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001258C0",
+   "size": 6,
+   "symbol": "AITask_DealerAttractTony::vfunc_00",
+   "match": "sub_001258C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00125920",
+   "size": 6,
+   "symbol": "AITask_DealerWarnTony::vfunc_00",
+   "match": "sub_00125920"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00125930",
+   "size": 7,
+   "symbol": "AITask_DealerWarnTony[+92]::vfunc_03",
+   "match": "sub_00125930"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00125D40",
+   "size": 6,
+   "symbol": "AITask_FollowActor::vfunc_00",
+   "match": "sub_00125D40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00126030",
+   "size": 6,
+   "symbol": "AITask_ForcedIntimidation::vfunc_00",
+   "match": "sub_00126030"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00126070",
+   "size": 1,
+   "symbol": "sub_00126070",
+   "match": "sub_00126070"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001260D0",
+   "size": 6,
+   "symbol": "AITask_IdleChatInitiate::vfunc_60",
+   "match": "sub_001260D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001260E0",
+   "size": 6,
+   "symbol": "AITask_IdleChatInitiate::vfunc_61",
+   "match": "sub_001260E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00126130",
+   "size": 6,
+   "symbol": "sub_00126130",
+   "match": "sub_00126130"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00126140",
+   "size": 6,
+   "symbol": "AITask_ProvokeAnotherPed::vfunc_60",
+   "match": "sub_00126140"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00126150",
+   "size": 6,
+   "symbol": "AITask_ProvokeAnotherPed::vfunc_61",
+   "match": "sub_00126150"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001261A0",
+   "size": 6,
+   "symbol": "sub_001261A0",
+   "match": "sub_001261A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001262A0",
+   "size": 6,
+   "symbol": "AITask_ProvokeAnotherPed::vfunc_62",
+   "match": "sub_001262A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001262C0",
+   "size": 14,
+   "symbol": "AITask_IdleChatResponse::vfunc_49",
+   "match": "vfunc_49@AITask_IdleChatResponse@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00126450",
+   "size": 1,
+   "symbol": "sub_00126450",
+   "match": "sub_00126450"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00126520",
+   "size": 1,
+   "symbol": "sub_00126520",
+   "match": "sub_00126520"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00126670",
+   "size": 6,
+   "symbol": "AITask_IdleChatInitiate::vfunc_62",
+   "match": "sub_00126670"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001270E0",
+   "size": 6,
+   "symbol": "AITask_MonitorCustomLoopState::vfunc_47",
+   "match": "sub_001270E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001273C0",
+   "size": 6,
+   "symbol": "AITask_MonitorCustomLoopState::vfunc_00",
+   "match": "sub_001273C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00127400",
+   "size": 6,
+   "symbol": "sub_00127400",
+   "match": "sub_00127400"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001276A0",
+   "size": 6,
+   "symbol": "AITask_ReactToDangerReaction::vfunc_00",
+   "match": "sub_001276A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001276B0",
+   "size": 7,
+   "symbol": "AIActionTreeCreatingTask[+84]::vfunc_03",
+   "match": "sub_001276B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00127750",
+   "size": 6,
+   "symbol": "sub_00127750",
+   "match": "sub_00127750"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00128360",
+   "size": 6,
+   "symbol": "AITask_WatchDangerSource::vfunc_00",
+   "match": "sub_00128360"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001283E0",
+   "size": 6,
+   "symbol": "AITask_Cower::vfunc_00",
+   "match": "sub_001283E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00128490",
+   "size": 6,
+   "symbol": "AITask_PossibleMildInterest::vfunc_00",
+   "match": "sub_00128490"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001284A0",
+   "size": 3,
+   "symbol": "CollisionBehaviourTypeGroup::vfunc_27",
+   "match": "sub_001284A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00128510",
+   "size": 6,
+   "symbol": "AITask_ReactToVisibleGun::vfunc_00",
+   "match": "sub_00128510"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00128520",
+   "size": 7,
+   "symbol": "AITask_ReactToVisibleGun[+84]::vfunc_03",
+   "match": "sub_00128520"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001287E0",
+   "size": 6,
+   "symbol": "AITask_RecognizeTony::vfunc_00",
+   "match": "sub_001287E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00128A50",
+   "size": 1,
+   "symbol": "sub_00128A50",
+   "match": "sub_00128A50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00128A80",
+   "size": 6,
+   "symbol": "AITask_TauntResponse::vfunc_54",
+   "match": "sub_00128A80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00128B30",
+   "size": 6,
+   "symbol": "AITask_ProvokeResponse::vfunc_53",
+   "match": "sub_00128B30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00129430",
+   "size": 6,
+   "symbol": "AITask_TauntResponse::vfunc_00",
+   "match": "sub_00129430"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00129490",
+   "size": 6,
+   "symbol": "AITask_BumpApology::vfunc_00",
+   "match": "sub_00129490"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001294F0",
+   "size": 6,
+   "symbol": "AITask_ProvokeResponse::vfunc_00",
+   "match": "sub_001294F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00129A80",
+   "size": 6,
+   "symbol": "AITask_CarjackingResponse::vfunc_00",
+   "match": "sub_00129A80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0012A020",
+   "size": 6,
+   "symbol": "AITask_TauntTony::vfunc_00",
+   "match": "sub_0012A020"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0012A310",
+   "size": 6,
+   "symbol": "sub_0012A310",
+   "match": "sub_0012A310"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00131D00",
+   "size": 6,
+   "symbol": "AICommandSequencer::vfunc_00",
+   "match": "sub_00131D00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00134940",
+   "size": 3,
+   "symbol": "sub_00134940",
+   "match": "sub_00134940"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00138CD0",
+   "size": 6,
+   "symbol": "BoatAIBehaviour::vfunc_00",
+   "match": "sub_00138CD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0013BF70",
+   "size": 6,
+   "symbol": "BoatAITask::vfunc_00",
+   "match": "sub_0013BF70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0013C020",
+   "size": 6,
+   "symbol": "BoatAITask_CallForBoat::vfunc_00",
+   "match": "sub_0013C020"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0013CB90",
+   "size": 6,
+   "symbol": "BoatAITask_Enemy::vfunc_00",
+   "match": "sub_0013CB90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001416E0",
+   "size": 1,
+   "symbol": "sub_001416E0",
+   "match": "sub_001416E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00141C00",
+   "size": 6,
+   "symbol": "CarAIBehavior::vfunc_00",
+   "match": "sub_00141C00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001460C0",
+   "size": 6,
+   "symbol": "CarAITask::vfunc_00",
+   "match": "sub_001460C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001461B0",
+   "size": 6,
+   "symbol": "CarAITask_CallForCar::vfunc_00",
+   "match": "sub_001461B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00146D90",
+   "size": 6,
+   "symbol": "CarAITask_Enemy::vfunc_00",
+   "match": "sub_00146D90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00146DF0",
+   "size": 6,
+   "symbol": "CarAITask_Traffic::vfunc_00",
+   "match": "sub_00146DF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00146FA0",
+   "size": 6,
+   "symbol": "CarAITask_TrafficCop::vfunc_00",
+   "match": "sub_00146FA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00147880",
+   "size": 6,
+   "symbol": "HelicopterAIBehavior::vfunc_00",
+   "match": "sub_00147880"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00149810",
+   "size": 6,
+   "symbol": "HelicopterAITask::vfunc_00",
+   "match": "sub_00149810"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0014A250",
+   "size": 6,
+   "symbol": "VehicleAI::vfunc_00",
+   "match": "sub_0014A250"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0014A5E0",
+   "size": 6,
+   "symbol": "VehicleAITask::vfunc_00",
+   "match": "sub_0014A5E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0014A680",
+   "size": 6,
+   "symbol": "BoundarySphere::vfunc_00",
+   "match": "sub_0014A680"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0014A7F0",
+   "size": 6,
+   "symbol": "IntersectionObject::vfunc_00",
+   "match": "sub_0014A7F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0014CB70",
+   "size": 3,
+   "symbol": "sub_0014CB70",
+   "match": "sub_0014CB70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0014F2C0",
+   "size": 6,
+   "symbol": "BlendCamera::vfunc_00",
+   "match": "sub_0014F2C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0014FF10",
+   "size": 6,
+   "symbol": "CameraManager::vfunc_00",
+   "match": "sub_0014FF10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0014FFE0",
+   "size": 6,
+   "symbol": "sub_0014FFE0",
+   "match": "sub_0014FFE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00154530",
+   "size": 6,
+   "symbol": "GenericCharacterCamera::vfunc_00",
+   "match": "sub_00154530"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00154560",
+   "size": 1,
+   "symbol": "sub_00154560",
+   "match": "sub_00154560"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00157F20",
+   "size": 6,
+   "symbol": "GenericVehicleCamera::vfunc_00",
+   "match": "sub_00157F20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0015A700",
+   "size": 6,
+   "symbol": "NISCamera::vfunc_00",
+   "match": "sub_0015A700"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0015D510",
+   "size": 6,
+   "symbol": "sub_0015D510",
+   "match": "sub_0015D510"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0015D640",
+   "size": 6,
+   "symbol": "sub_0015D640",
+   "match": "sub_0015D640"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0015D680",
+   "size": 6,
+   "symbol": "sub_0015D680",
+   "match": "sub_0015D680"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0015D6A0",
+   "size": 6,
+   "symbol": "sub_0015D6A0",
+   "match": "sub_0015D6A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0015F730",
+   "size": 6,
+   "symbol": "AnimationLoaderObject::vfunc_00",
+   "match": "sub_0015F730"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0015FB00",
+   "size": 6,
+   "symbol": "DanceState::vfunc_00",
+   "match": "sub_0015FB00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0015FD00",
+   "size": 6,
+   "symbol": "Stamina::vfunc_00",
+   "match": "sub_0015FD00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001624C0",
+   "size": 7,
+   "symbol": "sub_001624C0",
+   "match": "sub_001624C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001624D0",
+   "size": 7,
+   "symbol": "sub_001624D0",
+   "match": "sub_001624D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00164760",
+   "size": 6,
+   "symbol": "sub_00164760",
+   "match": "sub_00164760"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00167CE0",
+   "size": 6,
+   "symbol": "CharacterObject::vfunc_00",
+   "match": "sub_00167CE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016E020",
+   "size": 6,
+   "symbol": "CivilianBase::vfunc_00",
+   "match": "sub_0016E020"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016E060",
+   "size": 6,
+   "symbol": "Civilian::vfunc_00",
+   "match": "sub_0016E060"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016E090",
+   "size": 6,
+   "symbol": "CivilianInterior::vfunc_00",
+   "match": "sub_0016E090"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016E0C0",
+   "size": 6,
+   "symbol": "DeadBody::vfunc_00",
+   "match": "sub_0016E0C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016E120",
+   "size": 6,
+   "symbol": "ScriptCharacter::vfunc_00",
+   "match": "sub_0016E120"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016E290",
+   "size": 6,
+   "symbol": "GangMember::vfunc_00",
+   "match": "sub_0016E290"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016E300",
+   "size": 6,
+   "symbol": "DWStreetDealer::vfunc_00",
+   "match": "sub_0016E300"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016F390",
+   "size": 6,
+   "symbol": "DWHenchman::vfunc_00",
+   "match": "sub_0016F390"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00171310",
+   "size": 6,
+   "symbol": "InventoryObject::vfunc_00",
+   "match": "sub_00171310"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00171360",
+   "size": 6,
+   "symbol": "InventoryType::vfunc_00",
+   "match": "sub_00171360"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001713B0",
+   "size": 6,
+   "symbol": "InventoryBox::vfunc_00",
+   "match": "sub_001713B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00171880",
+   "size": 6,
+   "symbol": "InventoryOwner::vfunc_00",
+   "match": "sub_00171880"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00177530",
+   "size": 6,
+   "symbol": "RageState::vfunc_00",
+   "match": "sub_00177530"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001881C0",
+   "size": 6,
+   "symbol": "FireObject::vfunc_00",
+   "match": "sub_001881C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001888E0",
+   "size": 6,
+   "symbol": "FireTemplate::vfunc_00",
+   "match": "sub_001888E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00189340",
+   "size": 6,
+   "symbol": "GroundObject::vfunc_00",
+   "match": "sub_00189340"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001898B0",
+   "size": 6,
+   "symbol": "BlackjackHUD::vfunc_00",
+   "match": "sub_001898B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0018B090",
+   "size": 7,
+   "symbol": "ExoticsHUD2::vfunc_41",
+   "match": "sub_0018B090"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0018B0A0",
+   "size": 6,
+   "symbol": "ExoticsHUD2::vfunc_00",
+   "match": "sub_0018B0A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0018C930",
+   "size": 6,
+   "symbol": "FightBettingHUD::vfunc_00",
+   "match": "sub_0018C930"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0018E690",
+   "size": 6,
+   "symbol": "GameOverHUD::vfunc_00",
+   "match": "sub_0018E690"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00190210",
+   "size": 6,
+   "symbol": "GenericWeaponHUD::vfunc_00",
+   "match": "sub_00190210"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001903C0",
+   "size": 6,
+   "symbol": "HitsHUD::vfunc_00",
+   "match": "sub_001903C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00190890",
+   "size": 6,
+   "symbol": "BusinessDetailHUD::vfunc_00",
+   "match": "sub_00190890"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00190A50",
+   "size": 6,
+   "symbol": "BusinessHUD::vfunc_00",
+   "match": "sub_00190A50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001918E0",
+   "size": 6,
+   "symbol": "HUDSubtitle::vfunc_00",
+   "match": "sub_001918E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00192420",
+   "size": 6,
+   "symbol": "HUDCallout2::vfunc_00",
+   "match": "sub_00192420"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00192910",
+   "size": 6,
+   "symbol": "HUDDebugInfo::vfunc_00",
+   "match": "sub_00192910"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00192A60",
+   "size": 1,
+   "symbol": "sub_00192A60",
+   "match": "sub_00192A60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00192AB0",
+   "size": 30,
+   "symbol": "EmpireHUD::~EmpireHUD",
+   "match": "??_GEmpireHUD@|??1EmpireHUD@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00192DA0",
+   "size": 6,
+   "symbol": "DrugWarsHUD::vfunc_00",
+   "match": "sub_00192DA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00193130",
+   "size": 6,
+   "symbol": "HUDElement2::vfunc_00",
+   "match": "sub_00193130"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00194100",
+   "size": 6,
+   "symbol": "EmpireHUD::GetClassRep",
+   "match": "GetClassRep@EmpireHUD@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00194110",
+   "size": 6,
+   "symbol": "ErrorHandlerHUD::vfunc_00",
+   "match": "sub_00194110"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00194CC0",
+   "size": 6,
+   "symbol": "HUDImageDisplay::vfunc_00",
+   "match": "sub_00194CC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00194D30",
+   "size": 6,
+   "symbol": "LaunderCashHUD::vfunc_00",
+   "match": "sub_00194D30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00195940",
+   "size": 3,
+   "symbol": "sub_00195940",
+   "match": "sub_00195940"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00198BA0",
+   "size": 6,
+   "symbol": "HUDMeterWithIcon::vfunc_00",
+   "match": "sub_00198BA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00199370",
+   "size": 6,
+   "symbol": "HUDBalls::vfunc_00",
+   "match": "sub_00199370"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00199510",
+   "size": 6,
+   "symbol": "HUDHeatMeter::vfunc_00",
+   "match": "sub_00199510"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019A130",
+   "size": 6,
+   "symbol": "HUDHealth::vfunc_00",
+   "match": "sub_0019A130"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019A630",
+   "size": 6,
+   "symbol": "HUDVisibilityRate::vfunc_00",
+   "match": "sub_0019A630"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019A6F0",
+   "size": 6,
+   "symbol": "HUDFrontMeter::vfunc_00",
+   "match": "sub_0019A6F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019A7D0",
+   "size": 6,
+   "symbol": "HUDNPCHealthMeter::vfunc_00",
+   "match": "sub_0019A7D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019B800",
+   "size": 6,
+   "symbol": "MissionCompleteHUD::vfunc_00",
+   "match": "sub_0019B800"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019B810",
+   "size": 7,
+   "symbol": "MissionCompleteHUD::vfunc_41",
+   "match": "sub_0019B810"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019DAD0",
+   "size": 6,
+   "symbol": "RepGainHUD::vfunc_00",
+   "match": "sub_0019DAD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019F050",
+   "size": 6,
+   "symbol": "HUDLoadingScreen::vfunc_00",
+   "match": "sub_0019F050"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019FCE0",
+   "size": 6,
+   "symbol": "HUDScreenFX::vfunc_00",
+   "match": "sub_0019FCE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A1E70",
+   "size": 6,
+   "symbol": "HUDTapePlayer::vfunc_00",
+   "match": "sub_001A1E70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A1E90",
+   "size": 6,
+   "symbol": "HUDTapePlayer::vfunc_63",
+   "match": "sub_001A1E90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A25E0",
+   "size": 6,
+   "symbol": "HUDTimer::vfunc_00",
+   "match": "sub_001A25E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A2A60",
+   "size": 6,
+   "symbol": "HUDTrackable::vfunc_00",
+   "match": "sub_001A2A60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A31F0",
+   "size": 6,
+   "symbol": "HUDCashReadout::vfunc_00",
+   "match": "sub_001A31F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A3230",
+   "size": 6,
+   "symbol": "HUDDrugsReadout::vfunc_00",
+   "match": "sub_001A3230"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A32C0",
+   "size": 6,
+   "symbol": "HUDMissionReadout::vfunc_00",
+   "match": "sub_001A32C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A3760",
+   "size": 6,
+   "symbol": "VehicleSelectionHUD::vfunc_00",
+   "match": "sub_001A3760"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A37A0",
+   "size": 6,
+   "symbol": "IntimidationHUD::vfunc_00",
+   "match": "sub_001A37A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A37B0",
+   "size": 7,
+   "symbol": "IntimidationHUD::vfunc_41",
+   "match": "sub_001A37B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A5030",
+   "size": 6,
+   "symbol": "InvSelectionHUD::vfunc_00",
+   "match": "sub_001A5030"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A5040",
+   "size": 6,
+   "symbol": "sub_001A5040",
+   "match": "sub_001A5040"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A5980",
+   "size": 6,
+   "symbol": "LockerWeaponHUD::vfunc_00",
+   "match": "sub_001A5980"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A64F0",
+   "size": 6,
+   "symbol": "MapHUD2::vfunc_00",
+   "match": "sub_001A64F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A8A70",
+   "size": 6,
+   "symbol": "sub_001A8A70",
+   "match": "sub_001A8A70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001AA980",
+   "size": 6,
+   "symbol": "GOPoint::vfunc_00",
+   "match": "sub_001AA980"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001AC080",
+   "size": 6,
+   "symbol": "PromptHUD::vfunc_00",
+   "match": "sub_001AC080"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001ACDF0",
+   "size": 6,
+   "symbol": "MiniHUDElement::vfunc_00",
+   "match": "sub_001ACDF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001ACF30",
+   "size": 14,
+   "symbol": "MissionFailHUD::UpdateFrame",
+   "match": "UpdateFrame@MissionFailHUD@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001AD250",
+   "size": 6,
+   "symbol": "MissionFailHUD::vfunc_00",
+   "match": "sub_001AD250"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001AD660",
+   "size": 6,
+   "symbol": "MissionHUD::vfunc_00",
+   "match": "sub_001AD660"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001B2FC0",
+   "size": 6,
+   "symbol": "LookTutorialHUD::vfunc_00",
+   "match": "sub_001B2FC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001BAEA0",
+   "size": 6,
+   "symbol": "PimpYourMansionHUD::vfunc_00",
+   "match": "sub_001BAEA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001BB070",
+   "size": 6,
+   "symbol": "PokerHUD::vfunc_00",
+   "match": "sub_001BB070"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001BC640",
+   "size": 6,
+   "symbol": "SatPhoneWeaponHUD::vfunc_00",
+   "match": "sub_001BC640"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001BFEA0",
+   "size": 6,
+   "symbol": "SlotMachineHUD::vfunc_00",
+   "match": "sub_001BFEA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C0690",
+   "size": 6,
+   "symbol": "StreetWeaponHUD::vfunc_00",
+   "match": "sub_001C0690"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C07E0",
+   "size": 6,
+   "symbol": "TargetHUD::vfunc_00",
+   "match": "sub_001C07E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C1BA0",
+   "size": 6,
+   "symbol": "TeleportHUD::vfunc_00",
+   "match": "sub_001C1BA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C21E0",
+   "size": 6,
+   "symbol": "ViceCopHUD::vfunc_00",
+   "match": "sub_001C21E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C2410",
+   "size": 6,
+   "symbol": "VisibilityHUD::vfunc_00",
+   "match": "sub_001C2410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C27B0",
+   "size": 6,
+   "symbol": "DistanceBubble::vfunc_00",
+   "match": "sub_001C27B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C2A10",
+   "size": 6,
+   "symbol": "WeaponHUD::vfunc_00",
+   "match": "sub_001C2A10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C3490",
+   "size": 6,
+   "symbol": "sub_001C3490",
+   "match": "sub_001C3490"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C3DD0",
+   "size": 6,
+   "symbol": "SystemDialogBox::vfunc_00",
+   "match": "sub_001C3DD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C5780",
+   "size": 6,
+   "symbol": "LoadObject::vfunc_00",
+   "match": "sub_001C5780"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C5D30",
+   "size": 6,
+   "symbol": "LoadPackage::vfunc_00",
+   "match": "sub_001C5D30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C8130",
+   "size": 6,
+   "symbol": "MissionGroup::vfunc_00",
+   "match": "sub_001C8130"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C8240",
+   "size": 6,
+   "symbol": "MissionStage::vfunc_00",
+   "match": "sub_001C8240"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C8C00",
+   "size": 6,
+   "symbol": "EnvironmentObject::vfunc_00",
+   "match": "sub_001C8C00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001C8DF0",
+   "size": 6,
+   "symbol": "OceanObject::vfunc_00",
+   "match": "sub_001C8DF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CA050",
+   "size": 6,
+   "symbol": "sub_001CA050",
+   "match": "sub_001CA050"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CA580",
+   "size": 6,
+   "symbol": "PauseMenu::vfunc_00",
+   "match": "sub_001CA580"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CA6D0",
+   "size": 6,
+   "symbol": "PauseMenuPage::vfunc_00",
+   "match": "sub_001CA6D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CAC10",
+   "size": 6,
+   "symbol": "PauseMenuPageController::vfunc_00",
+   "match": "sub_001CAC10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CB0A0",
+   "size": 6,
+   "symbol": "PauseMenuPageCredits::vfunc_00",
+   "match": "sub_001CB0A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CB460",
+   "size": 6,
+   "symbol": "PauseMenuPageDebug::vfunc_00",
+   "match": "sub_001CB460"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CB7E0",
+   "size": 6,
+   "symbol": "PauseMenuPageHome::vfunc_00",
+   "match": "sub_001CB7E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CBD20",
+   "size": 6,
+   "symbol": "PauseMenuPageMain::vfunc_00",
+   "match": "sub_001CBD20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CC240",
+   "size": 6,
+   "symbol": "PauseMenuPageOptions::vfunc_00",
+   "match": "sub_001CC240"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CC770",
+   "size": 6,
+   "symbol": "PauseMenuPageRewards::vfunc_00",
+   "match": "sub_001CC770"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CD4B0",
+   "size": 6,
+   "symbol": "PauseMenuPageSerialize::vfunc_00",
+   "match": "sub_001CD4B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CDC80",
+   "size": 6,
+   "symbol": "PauseMenuPageStats::vfunc_00",
+   "match": "sub_001CDC80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CEEC0",
+   "size": 6,
+   "symbol": "ShaftAndDiscMarker::vfunc_00",
+   "match": "sub_001CEEC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CF120",
+   "size": 6,
+   "symbol": "EffectsObject::vfunc_00",
+   "match": "sub_001CF120"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D04D0",
+   "size": 6,
+   "symbol": "InstanceObject::vfunc_00",
+   "match": "sub_001D04D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D12D0",
+   "size": 1,
+   "symbol": "sub_001D12D0",
+   "match": "sub_001D12D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D1FE0",
+   "size": 6,
+   "symbol": "LightingObject::vfunc_00",
+   "match": "sub_001D1FE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D20E0",
+   "size": 6,
+   "symbol": "ParticleEffectObject::vfunc_00",
+   "match": "sub_001D20E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D22A0",
+   "size": 6,
+   "symbol": "RainObject::vfunc_00",
+   "match": "sub_001D22A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D24F0",
+   "size": 6,
+   "symbol": "ShadowObject::vfunc_00",
+   "match": "sub_001D24F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D3800",
+   "size": 6,
+   "symbol": "sub_001D3800",
+   "match": "sub_001D3800"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D38A0",
+   "size": 6,
+   "symbol": "TODObject::vfunc_00",
+   "match": "sub_001D38A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D3C40",
+   "size": 6,
+   "symbol": "TraceFireObject::vfunc_00",
+   "match": "sub_001D3C40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D3CD0",
+   "size": 7,
+   "symbol": "sub_001D3CD0",
+   "match": "sub_001D3CD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D5170",
+   "size": 6,
+   "symbol": "VehicleRenderableObject::vfunc_00",
+   "match": "sub_001D5170"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D54F0",
+   "size": 6,
+   "symbol": "SkyObject::vfunc_00",
+   "match": "sub_001D54F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D6510",
+   "size": 6,
+   "symbol": "LocatableSoundObject::vfunc_00",
+   "match": "sub_001D6510"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D6C60",
+   "size": 6,
+   "symbol": "LocatableSoundTemplate::vfunc_00",
+   "match": "sub_001D6C60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D76E0",
+   "size": 1,
+   "symbol": "sub_001D76E0",
+   "match": "sub_001D76E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D7720",
+   "size": 1,
+   "symbol": "sub_001D7720",
+   "match": "sub_001D7720"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D7890",
+   "size": 6,
+   "symbol": "TapeTrackLibrary::vfunc_00",
+   "match": "sub_001D7890"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D7BE0",
+   "size": 6,
+   "symbol": "SoundLocationObject::vfunc_00",
+   "match": "sub_001D7BE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D7D10",
+   "size": 6,
+   "symbol": "SoundPoiObject::vfunc_00",
+   "match": "sub_001D7D10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D7FD0",
+   "size": 6,
+   "symbol": "SoundPoiTemplate::vfunc_00",
+   "match": "sub_001D7FD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D8030",
+   "size": 6,
+   "symbol": "TapeTrack::vfunc_00",
+   "match": "sub_001D8030"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D8090",
+   "size": 6,
+   "symbol": "TapeMixTape::vfunc_00",
+   "match": "sub_001D8090"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D8150",
+   "size": 6,
+   "symbol": "TapePlayer::vfunc_00",
+   "match": "sub_001D8150"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D8640",
+   "size": 6,
+   "symbol": "ZoneSoundObject::vfunc_00",
+   "match": "sub_001D8640"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D86C0",
+   "size": 6,
+   "symbol": "AddressSpawnObject::vfunc_00",
+   "match": "sub_001D86C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D8C30",
+   "size": 6,
+   "symbol": "AmbientSpawnObject::vfunc_00",
+   "match": "sub_001D8C30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D8FA0",
+   "size": 6,
+   "symbol": "CallForVehicleSpawnObject::vfunc_00",
+   "match": "sub_001D8FA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001D9B40",
+   "size": 6,
+   "symbol": "CharacterInVehicleSpawnObject::vfunc_00",
+   "match": "sub_001D9B40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001DA470",
+   "size": 6,
+   "symbol": "CopSpawnObject::vfunc_45",
+   "match": "sub_001DA470"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001DA510",
+   "size": 3,
+   "symbol": "sub_001DA510",
+   "match": "sub_001DA510"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001DAE20",
+   "size": 6,
+   "symbol": "CopSpawnObject::vfunc_00",
+   "match": "sub_001DAE20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001DEA80",
+   "size": 6,
+   "symbol": "DealerSpawnObject::vfunc_00",
+   "match": "sub_001DEA80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001DF190",
+   "size": 6,
+   "symbol": "EnemyCharacterGeneratorSpawnObject::vfunc_00",
+   "match": "sub_001DF190"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001DF360",
+   "size": 6,
+   "symbol": "EnemyVehicleGenerator::vfunc_00",
+   "match": "sub_001DF360"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001DFC30",
+   "size": 6,
+   "symbol": "GangNestSpawnObject::vfunc_00",
+   "match": "sub_001DFC30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E0120",
+   "size": 6,
+   "symbol": "GangSpawnObject::vfunc_00",
+   "match": "sub_001E0120"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E01C0",
+   "size": 3,
+   "symbol": "sub_001E01C0",
+   "match": "sub_001E01C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E0B70",
+   "size": 3,
+   "symbol": "FightTree::fight::VEnterExitScriptTrack::?$FightActionController::vfunc_31",
+   "match": "sub_001E0B70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E2800",
+   "size": 6,
+   "symbol": "GenericSpawnObject::vfunc_00",
+   "match": "sub_001E2800"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E3410",
+   "size": 6,
+   "symbol": "NestSpawnObject::vfunc_00",
+   "match": "sub_001E3410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E35B0",
+   "size": 6,
+   "symbol": "PersistentSpawnObject::vfunc_00",
+   "match": "sub_001E35B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E3610",
+   "size": 6,
+   "symbol": "PersistentVehicleSpawnObject::vfunc_00",
+   "match": "sub_001E3610"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E3A80",
+   "size": 6,
+   "symbol": "PickupSpawnObject::vfunc_00",
+   "match": "sub_001E3A80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E44B0",
+   "size": 6,
+   "symbol": "PropSpawnObject::vfunc_00",
+   "match": "sub_001E44B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E4AC0",
+   "size": 6,
+   "symbol": "RaceSpawner::vfunc_00",
+   "match": "sub_001E4AC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E50D0",
+   "size": 6,
+   "symbol": "ResourceLoader::vfunc_00",
+   "match": "sub_001E50D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001E5300",
+   "size": 6,
+   "symbol": "ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_00",
+   "match": "sub_001E5300"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EA050",
+   "size": 6,
+   "symbol": "sub_001EA050",
+   "match": "sub_001EA050"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EA4E0",
+   "size": 6,
+   "symbol": "SpawnTemplateGroup::vfunc_00",
+   "match": "sub_001EA4E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EA5A0",
+   "size": 6,
+   "symbol": "SpawnTriggerObject::vfunc_00",
+   "match": "sub_001EA5A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EA730",
+   "size": 3,
+   "symbol": "sub_001EA730",
+   "match": "sub_001EA730"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EA800",
+   "size": 6,
+   "symbol": "TriggeredSpawnObject::vfunc_00",
+   "match": "sub_001EA800"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EA880",
+   "size": 3,
+   "symbol": "sub_001EA880",
+   "match": "sub_001EA880"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EAE90",
+   "size": 6,
+   "symbol": "VehicleSpawnObject::vfunc_00",
+   "match": "sub_001EAE90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EAFD0",
+   "size": 6,
+   "symbol": "WorldAmbienceSpawnObject::vfunc_00",
+   "match": "sub_001EAFD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EBA10",
+   "size": 6,
+   "symbol": "ExplosionObject::vfunc_00",
+   "match": "sub_001EBA10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EBD20",
+   "size": 6,
+   "symbol": "GameObjectMover::vfunc_00",
+   "match": "sub_001EBD20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EC630",
+   "size": 6,
+   "symbol": "MeleeWeaponStateProp::vfunc_00",
+   "match": "sub_001EC630"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EC7C0",
+   "size": 6,
+   "symbol": "MortarObject::vfunc_00",
+   "match": "sub_001EC7C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EECB0",
+   "size": 6,
+   "symbol": "StatePropBehaviourTemplate::vfunc_00",
+   "match": "sub_001EECB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001EECE0",
+   "size": 6,
+   "symbol": "StatePropAttachmentObject::vfunc_00",
+   "match": "sub_001EECE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F2030",
+   "size": 6,
+   "symbol": "StatePropWaterCollisionTemplate::vfunc_00",
+   "match": "sub_001F2030"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F2070",
+   "size": 6,
+   "symbol": "StatePropDragTemplate::vfunc_00",
+   "match": "sub_001F2070"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F2140",
+   "size": 6,
+   "symbol": "StatePropSnapToWaterTemplate::vfunc_00",
+   "match": "sub_001F2140"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F27C0",
+   "size": 6,
+   "symbol": "VehicleWeaponStateProp::vfunc_00",
+   "match": "sub_001F27C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F28E0",
+   "size": 6,
+   "symbol": "WeaponPickup::vfunc_00",
+   "match": "sub_001F28E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F2B90",
+   "size": 14,
+   "symbol": "MeleeWeaponStateProp::IsIntact",
+   "match": "IsIntact@MeleeWeaponStateProp@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F3580",
+   "size": 6,
+   "symbol": "MountedWeaponStateProp::vfunc_00",
+   "match": "sub_001F3580"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F4CB0",
+   "size": 3,
+   "symbol": "sub_001F4CB0",
+   "match": "sub_001F4CB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F6240",
+   "size": 6,
+   "symbol": "Targeting::vfunc_00",
+   "match": "sub_001F6240"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F8560",
+   "size": 6,
+   "symbol": "TargetingHUDUpdater::vfunc_00",
+   "match": "sub_001F8560"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FAE70",
+   "size": 6,
+   "symbol": "CharacterTemplate::vfunc_00",
+   "match": "sub_001FAE70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FAF00",
+   "size": 6,
+   "symbol": "CharacterTunablesObject::vfunc_00",
+   "match": "sub_001FAF00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FB160",
+   "size": 6,
+   "symbol": "MainCharacterTemplate::vfunc_00",
+   "match": "sub_001FB160"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FB1E0",
+   "size": 6,
+   "symbol": "CharacterFightTreeTemplate::vfunc_00",
+   "match": "sub_001FB1E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FB1F0",
+   "size": 14,
+   "symbol": "CharacterFightTreeTemplate::vfunc_11",
+   "match": "vfunc_11@CharacterFightTreeTemplate@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FB230",
+   "size": 6,
+   "symbol": "CharacterDynamicAnimationTemplate::vfunc_00",
+   "match": "sub_001FB230"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FB4F0",
+   "size": 6,
+   "symbol": "CharacterSpeedsObject::vfunc_00",
+   "match": "sub_001FB4F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FB720",
+   "size": 6,
+   "symbol": "EffectsTemplate::vfunc_00",
+   "match": "sub_001FB720"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FBAD0",
+   "size": 6,
+   "symbol": "ExplosionTemplate::vfunc_00",
+   "match": "sub_001FBAD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FBEE0",
+   "size": 6,
+   "symbol": "LightingTemplate::vfunc_00",
+   "match": "sub_001FBEE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FBF60",
+   "size": 6,
+   "symbol": "MortarTemplate::vfunc_00",
+   "match": "sub_001FBF60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FC100",
+   "size": 6,
+   "symbol": "ParticleEffectTemplate::vfunc_00",
+   "match": "sub_001FC100"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FC190",
+   "size": 6,
+   "symbol": "SkidmarkTemplate::vfunc_00",
+   "match": "sub_001FC190"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FC2A0",
+   "size": 6,
+   "symbol": "RainTemplate::vfunc_00",
+   "match": "sub_001FC2A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FECF0",
+   "size": 6,
+   "symbol": "SkyTemplate::vfunc_00",
+   "match": "sub_001FECF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FED40",
+   "size": 6,
+   "symbol": "SpeedDataTemplate::vfunc_00",
+   "match": "sub_001FED40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FED90",
+   "size": 6,
+   "symbol": "TraceFireTemplate::vfunc_00",
+   "match": "sub_001FED90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FEE30",
+   "size": 6,
+   "symbol": "TrapezoidTemplate::vfunc_00",
+   "match": "sub_001FEE30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FEEC0",
+   "size": 1,
+   "symbol": "sub_001FEEC0",
+   "match": "sub_001FEEC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FEF40",
+   "size": 6,
+   "symbol": "VibeTemplate::vfunc_00",
+   "match": "sub_001FEF40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FF3B0",
+   "size": 6,
+   "symbol": "WakeTemplate::vfunc_00",
+   "match": "sub_001FF3B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FF470",
+   "size": 6,
+   "symbol": "WeaponDecalTemplate::vfunc_00",
+   "match": "sub_001FF470"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001FFC80",
+   "size": 6,
+   "symbol": "WeaponTemplate::vfunc_00",
+   "match": "sub_001FFC80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00200000",
+   "size": 6,
+   "symbol": "OceanTemplate::vfunc_00",
+   "match": "sub_00200000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00200050",
+   "size": 6,
+   "symbol": "OceanTuningTemplate::vfunc_00",
+   "match": "sub_00200050"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00200340",
+   "size": 6,
+   "symbol": "AirplaneArtTemplate::vfunc_00",
+   "match": "sub_00200340"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002006F0",
+   "size": 6,
+   "symbol": "AirplaneTemplate::vfunc_00",
+   "match": "sub_002006F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002008B0",
+   "size": 6,
+   "symbol": "VehicleDropObjectProperties::vfunc_00",
+   "match": "sub_002008B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00200AE0",
+   "size": 6,
+   "symbol": "BoatAITuneablesTemplate::vfunc_00",
+   "match": "sub_00200AE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00200BF0",
+   "size": 6,
+   "symbol": "BoatArtTemplate::vfunc_00",
+   "match": "sub_00200BF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00200D00",
+   "size": 6,
+   "symbol": "RandomWaterObjectTemplate::vfunc_00",
+   "match": "sub_00200D00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00200E00",
+   "size": 6,
+   "symbol": "BoatPhysicsTemplate::vfunc_00",
+   "match": "sub_00200E00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00200E40",
+   "size": 6,
+   "symbol": "BoatPitchClampProperties::vfunc_00",
+   "match": "sub_00200E40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002012F0",
+   "size": 6,
+   "symbol": "BoatTemplate::vfunc_00",
+   "match": "sub_002012F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00201670",
+   "size": 6,
+   "symbol": "BoatEnginePivotProperties::vfunc_00",
+   "match": "sub_00201670"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002016C0",
+   "size": 6,
+   "symbol": "BoatDamageProperties::vfunc_00",
+   "match": "sub_002016C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00201750",
+   "size": 6,
+   "symbol": "HelicopterArtTemplate::vfunc_00",
+   "match": "sub_00201750"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002017F0",
+   "size": 6,
+   "symbol": "HelicopterPhysicsTemplate::vfunc_00",
+   "match": "sub_002017F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00201890",
+   "size": 6,
+   "symbol": "HelicopterTemplate::vfunc_00",
+   "match": "sub_00201890"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020BE00",
+   "size": 6,
+   "symbol": "FourWheelerPhysicsTemplate::vfunc_00",
+   "match": "sub_0020BE00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020BE30",
+   "size": 6,
+   "symbol": "$03::?$ConcreteWheeledVehiclePhysicsTemplate::vfunc_00",
+   "match": "sub_0020BE30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020C480",
+   "size": 6,
+   "symbol": "VehicleAITuneablesTemplate::vfunc_00",
+   "match": "sub_0020C480"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020C4E0",
+   "size": 6,
+   "symbol": "VehicleShaderProperties::vfunc_00",
+   "match": "sub_0020C4E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020C520",
+   "size": 6,
+   "symbol": "VehicleTargetingLocatorProperties::vfunc_00",
+   "match": "sub_0020C520"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020C560",
+   "size": 6,
+   "symbol": "VehicleArtTemplate::vfunc_00",
+   "match": "sub_0020C560"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CA50",
+   "size": 14,
+   "symbol": "HelicopterArtTemplate::vfunc_10",
+   "match": "vfunc_10@HelicopterArtTemplate@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CA60",
+   "size": 14,
+   "symbol": "AirplaneArtTemplate::vfunc_11",
+   "match": "vfunc_11@AirplaneArtTemplate@"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CAC0",
+   "size": 6,
+   "symbol": "VehicleDamageTransmitProperties::vfunc_00",
+   "match": "sub_0020CAC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CB00",
+   "size": 6,
+   "symbol": "VehicleDamagePropagationProperties::vfunc_00",
+   "match": "sub_0020CB00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CB60",
+   "size": 6,
+   "symbol": "VehicleBehaviourTemplate::vfunc_00",
+   "match": "sub_0020CB60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CBB0",
+   "size": 6,
+   "symbol": "VehicleCharacterEntryTemplate::vfunc_00",
+   "match": "sub_0020CBB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CC80",
+   "size": 6,
+   "symbol": "VehicleMaterialProperties::vfunc_00",
+   "match": "sub_0020CC80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CCE0",
+   "size": 6,
+   "symbol": "VehicleSimpleThrustProperties::vfunc_00",
+   "match": "sub_0020CCE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CD40",
+   "size": 6,
+   "symbol": "VehicleDestroyPhysicsProperties::vfunc_00",
+   "match": "sub_0020CD40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CD80",
+   "size": 6,
+   "symbol": "VehicleSuspensionProperties::vfunc_00",
+   "match": "sub_0020CD80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020CDF0",
+   "size": 6,
+   "symbol": "VehicleSinkingProperties::vfunc_00",
+   "match": "sub_0020CDF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D110",
+   "size": 6,
+   "symbol": "VehiclePhysicsTemplate::vfunc_00",
+   "match": "sub_0020D110"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D1C0",
+   "size": 6,
+   "symbol": "VehicleInterpolatedFeedbackProperties::vfunc_00",
+   "match": "sub_0020D1C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D260",
+   "size": 6,
+   "symbol": "VehicleInWaterProperties::vfunc_00",
+   "match": "sub_0020D260"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D2C0",
+   "size": 6,
+   "symbol": "VehiclePropellerTemplate::vfunc_00",
+   "match": "sub_0020D2C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D350",
+   "size": 6,
+   "symbol": "AirplaneControlFeedbackTemplate::vfunc_00",
+   "match": "sub_0020D350"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D3E0",
+   "size": 6,
+   "symbol": "VehicleFlappingPhysicsProperties::vfunc_00",
+   "match": "sub_0020D3E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D410",
+   "size": 6,
+   "symbol": "VehicleFlappingCategoryProperties::vfunc_00",
+   "match": "sub_0020D410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D420",
+   "size": 6,
+   "symbol": "VehicleFlappingJointProperties::vfunc_00",
+   "match": "sub_0020D420"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D460",
+   "size": 6,
+   "symbol": "VehicleRenderMaskTemplate::vfunc_00",
+   "match": "sub_0020D460"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D4C0",
+   "size": 6,
+   "symbol": "VehicleSirenTemplate::vfunc_00",
+   "match": "sub_0020D4C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D560",
+   "size": 6,
+   "symbol": "VehicleMountedWeaponTemplate::vfunc_00",
+   "match": "sub_0020D560"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D5C0",
+   "size": 6,
+   "symbol": "VehicleFixedWeaponTemplate::vfunc_00",
+   "match": "sub_0020D5C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D620",
+   "size": 6,
+   "symbol": "VehicleZoneDamageProperties::vfunc_00",
+   "match": "sub_0020D620"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D650",
+   "size": 6,
+   "symbol": "VehicleZoneDamagePropertiesCollection::vfunc_00",
+   "match": "sub_0020D650"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D660",
+   "size": 6,
+   "symbol": "VehicleZonePhysicsProperties::vfunc_00",
+   "match": "sub_0020D660"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D670",
+   "size": 6,
+   "symbol": "VehicleZoneProperties::vfunc_00",
+   "match": "sub_0020D670"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D680",
+   "size": 6,
+   "symbol": "VehicleZoneMeshProperties::vfunc_00",
+   "match": "sub_0020D680"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020D690",
+   "size": 6,
+   "symbol": "VehicleZoneEffectProperties::vfunc_00",
+   "match": "sub_0020D690"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EA20",
+   "size": 6,
+   "symbol": "BoatZoneProperties::vfunc_00",
+   "match": "sub_0020EA20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EA80",
+   "size": 6,
+   "symbol": "AirplaneZoneProperties::vfunc_00",
+   "match": "sub_0020EA80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020ED70",
+   "size": 6,
+   "symbol": "VehicleControllerTemplate::vfunc_00",
+   "match": "sub_0020ED70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EDA0",
+   "size": 6,
+   "symbol": "VehicleTemplate::vfunc_00",
+   "match": "sub_0020EDA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EDF0",
+   "size": 6,
+   "symbol": "VehicleDamageProperties::vfunc_00",
+   "match": "sub_0020EDF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EE30",
+   "size": 6,
+   "symbol": "VehicleParticleTriggerProperties::vfunc_00",
+   "match": "sub_0020EE30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EE60",
+   "size": 6,
+   "symbol": "VehicleDamageEffectProperties::vfunc_00",
+   "match": "sub_0020EE60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EEA0",
+   "size": 6,
+   "symbol": "VehicleKamikazeProperties::vfunc_00",
+   "match": "sub_0020EEA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EF00",
+   "size": 6,
+   "symbol": "VehicleDamageScaleProperties::vfunc_00",
+   "match": "sub_0020EF00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EF60",
+   "size": 6,
+   "symbol": "VehicleCollisionImpulseScaleProperties::vfunc_00",
+   "match": "sub_0020EF60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EF90",
+   "size": 6,
+   "symbol": "VehicleCollisionResponseProperties::vfunc_00",
+   "match": "sub_0020EF90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EFA0",
+   "size": 6,
+   "symbol": "VehicleWaterSprayProperties::vfunc_00",
+   "match": "sub_0020EFA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EFB0",
+   "size": 6,
+   "symbol": "VehicleExhaustProperties::vfunc_00",
+   "match": "sub_0020EFB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020EFC0",
+   "size": 6,
+   "symbol": "VehicleSeveredPartEffectProperties::vfunc_00",
+   "match": "sub_0020EFC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020F000",
+   "size": 6,
+   "symbol": "VehicleDirtAccumulationProperties::vfunc_00",
+   "match": "sub_0020F000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020F030",
+   "size": 6,
+   "symbol": "VehicleCameraProperties::vfunc_00",
+   "match": "sub_0020F030"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020F1A0",
+   "size": 6,
+   "symbol": "VehicleCameraCategoryProperties::vfunc_00",
+   "match": "sub_0020F1A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0020F1F0",
+   "size": 6,
+   "symbol": "VehicleLightsTemplate::vfunc_00",
+   "match": "sub_0020F1F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00210FC0",
+   "size": 6,
+   "symbol": "WheeledVehicleArtTemplate::vfunc_00",
+   "match": "sub_00210FC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002111B0",
+   "size": 6,
+   "symbol": "WheelPlayerControlProperties::vfunc_00",
+   "match": "sub_002111B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00211210",
+   "size": 6,
+   "symbol": "WheeledVehicleCrashedPhysicsProperties::vfunc_00",
+   "match": "sub_00211210"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00211620",
+   "size": 6,
+   "symbol": "WheelDamageProperties::vfunc_00",
+   "match": "sub_00211620"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00211650",
+   "size": 6,
+   "symbol": "WheeledVehicleDamageProperties::vfunc_00",
+   "match": "sub_00211650"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002116D0",
+   "size": 6,
+   "symbol": "WheeledVehicleCoverProperties::vfunc_00",
+   "match": "sub_002116D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002116E0",
+   "size": 6,
+   "symbol": "WheeledVehicleTemplate::vfunc_00",
+   "match": "sub_002116E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00211730",
+   "size": 6,
+   "symbol": "WheeledVehicleLightsTemplate::vfunc_00",
+   "match": "sub_00211730"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00212040",
+   "size": 6,
+   "symbol": "StatePropPhysicsTemplate::vfunc_00",
+   "match": "sub_00212040"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002120E0",
+   "size": 6,
+   "symbol": "StatePropTemplate::vfunc_00",
+   "match": "sub_002120E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00212200",
+   "size": 6,
+   "symbol": "EffectCollectionTemplate::vfunc_00",
+   "match": "sub_00212200"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002126B0",
+   "size": 6,
+   "symbol": "TimerObject::vfunc_00",
+   "match": "sub_002126B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00212720",
+   "size": 6,
+   "symbol": "RoomTriggerObject::vfunc_00",
+   "match": "sub_00212720"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00212C10",
+   "size": 6,
+   "symbol": "MissionTriggerObject::vfunc_00",
+   "match": "sub_00212C10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00212E70",
+   "size": 6,
+   "symbol": "TriggerVolumeObject::vfunc_00",
+   "match": "sub_00212E70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00213250",
+   "size": 6,
+   "symbol": "LOSTriggerVolumeObject::vfunc_00",
+   "match": "sub_00213250"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00213430",
+   "size": 3,
+   "symbol": "FlowClient::vfunc_02",
+   "match": "sub_00213430"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00213570",
+   "size": 6,
+   "symbol": "AirplaneObject::vfunc_00",
+   "match": "sub_00213570"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00213AA0",
+   "size": 6,
+   "symbol": "WheeledVehicleObject::vfunc_00",
+   "match": "sub_00213AA0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00214C90",
+   "size": 6,
+   "symbol": "BoatObject::vfunc_00",
+   "match": "sub_00214C90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002157C0",
+   "size": 6,
+   "symbol": "HelicopterObject::vfunc_00",
+   "match": "sub_002157C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021A600",
+   "size": 6,
+   "symbol": "VehicleObject::vfunc_00",
+   "match": "sub_0021A600"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021C1B0",
+   "size": 6,
+   "symbol": "TrafficCar::vfunc_00",
+   "match": "sub_0021C1B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021C1D0",
+   "size": 6,
+   "symbol": "CubeVan::vfunc_00",
+   "match": "sub_0021C1D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021C260",
+   "size": 6,
+   "symbol": "ScriptCar::vfunc_00",
+   "match": "sub_0021C260"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021C690",
+   "size": 6,
+   "symbol": "DrivingRewardsObject::vfunc_00",
+   "match": "sub_0021C690"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021C710",
+   "size": 6,
+   "symbol": "BoatDrivingRewardsObject::vfunc_00",
+   "match": "sub_0021C710"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021C800",
+   "size": 6,
+   "symbol": "CarDrivingRewardsObject::vfunc_00",
+   "match": "sub_0021C800"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021D450",
+   "size": 6,
+   "symbol": "LightsVolumeObject::vfunc_00",
+   "match": "sub_0021D450"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021D780",
+   "size": 6,
+   "symbol": "WakeObject::vfunc_00",
+   "match": "sub_0021D780"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021D8F0",
+   "size": 6,
+   "symbol": "AddressManager::vfunc_00",
+   "match": "sub_0021D8F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021D900",
+   "size": 6,
+   "symbol": "sub_0021D900",
+   "match": "sub_0021D900"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021F410",
+   "size": 6,
+   "symbol": "AddressObject::vfunc_00",
+   "match": "sub_0021F410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021F6B0",
+   "size": 6,
+   "symbol": "sub_0021F6B0",
+   "match": "sub_0021F6B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021F6C0",
+   "size": 6,
+   "symbol": "sub_0021F6C0",
+   "match": "sub_0021F6C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021F870",
+   "size": 6,
+   "symbol": "sub_0021F870",
+   "match": "sub_0021F870"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021F910",
+   "size": 7,
+   "symbol": "sub_0021F910",
+   "match": "sub_0021F910"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021F920",
+   "size": 7,
+   "symbol": "sub_0021F920",
+   "match": "sub_0021F920"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021F980",
+   "size": 7,
+   "symbol": "sub_0021F980",
+   "match": "sub_0021F980"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021FA30",
+   "size": 6,
+   "symbol": "sub_0021FA30",
+   "match": "sub_0021FA30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021FB70",
+   "size": 1,
+   "symbol": "sub_0021FB70",
+   "match": "sub_0021FB70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021FBC0",
+   "size": 1,
+   "symbol": "sub_0021FBC0",
+   "match": "sub_0021FBC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0021FC40",
+   "size": 6,
+   "symbol": "sub_0021FC40",
+   "match": "sub_0021FC40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00220050",
+   "size": 3,
+   "symbol": "sub_00220050",
+   "match": "sub_00220050"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00223080",
+   "size": 6,
+   "symbol": "TurfTriggerObject::vfunc_00",
+   "match": "sub_00223080"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00223330",
+   "size": 6,
+   "symbol": "VisibilityTriggerObject::vfunc_00",
+   "match": "sub_00223330"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00223C10",
+   "size": 3,
+   "symbol": "sub_00223C10",
+   "match": "sub_00223C10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00223D20",
+   "size": 3,
+   "symbol": "sub_00223D20",
+   "match": "sub_00223D20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00223D60",
+   "size": 3,
+   "symbol": "sub_00223D60",
+   "match": "sub_00223D60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0022B410",
+   "size": 3,
+   "symbol": "sub_0022B410",
+   "match": "sub_0022B410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0022D6F0",
+   "size": 6,
+   "symbol": "sub_0022D6F0",
+   "match": "sub_0022D6F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002304E0",
+   "size": 1,
+   "symbol": "sub_002304E0",
+   "match": "sub_002304E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0023CA90",
+   "size": 3,
+   "symbol": "sub_0023CA90",
+   "match": "sub_0023CA90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00244410",
+   "size": 6,
+   "symbol": "sub_00244410",
+   "match": "sub_00244410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00245D00",
+   "size": 3,
+   "symbol": "sub_00245D00",
+   "match": "sub_00245D00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00246630",
+   "size": 1,
+   "symbol": "sub_00246630",
+   "match": "sub_00246630"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00247970",
+   "size": 6,
+   "symbol": "sub_00247970",
+   "match": "sub_00247970"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00247C10",
+   "size": 6,
+   "symbol": "core::ControllerXBox::vfunc_05",
+   "match": "sub_00247C10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00247C20",
+   "size": 6,
+   "symbol": "core::ControllerXBox::vfunc_06",
+   "match": "sub_00247C20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00247FC0",
+   "size": 6,
+   "symbol": "core::ControllerOutputPointXBox::vfunc_05",
+   "match": "sub_00247FC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00248800",
+   "size": 3,
+   "symbol": "sub_00248800",
+   "match": "sub_00248800"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00249110",
+   "size": 6,
+   "symbol": "sub_00249110",
+   "match": "sub_00249110"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0024E1E0",
+   "size": 6,
+   "symbol": "sub_0024E1E0",
+   "match": "sub_0024E1E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0024E1F0",
+   "size": 6,
+   "symbol": "sub_0024E1F0",
+   "match": "sub_0024E1F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0024E4A0",
+   "size": 6,
+   "symbol": "sub_0024E4A0",
+   "match": "sub_0024E4A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00250EB0",
+   "size": 6,
+   "symbol": "sub_00250EB0",
+   "match": "sub_00250EB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00251350",
+   "size": 6,
+   "symbol": "sub_00251350",
+   "match": "sub_00251350"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00253080",
+   "size": 6,
+   "symbol": "sub_00253080",
+   "match": "sub_00253080"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00255790",
+   "size": 6,
+   "symbol": "sub_00255790",
+   "match": "sub_00255790"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00262970",
+   "size": 6,
+   "symbol": "pure3d::PNGHandler::vfunc_07",
+   "match": "sub_00262970"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00262980",
+   "size": 6,
+   "symbol": "pure3d::RawImageHandler::vfunc_07",
+   "match": "sub_00262980"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00262990",
+   "size": 6,
+   "symbol": "pure3d::DXTNHandler::vfunc_07",
+   "match": "sub_00262990"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00263FD0",
+   "size": 7,
+   "symbol": "pure3d::d3dExtTODFactor::vfunc_14",
+   "match": "sub_00263FD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002660A0",
+   "size": 6,
+   "symbol": "pure3d::d3dContext::vfunc_96",
+   "match": "sub_002660A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002680D0",
+   "size": 6,
+   "symbol": "pure3d::d3dExtVisibilityTest::vfunc_01",
+   "match": "sub_002680D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0026D450",
+   "size": 6,
+   "symbol": "GangSpawnObject::vfunc_45",
+   "match": "sub_0026D450"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0026D930",
+   "size": 6,
+   "symbol": "DealerSpawnObject::vfunc_45",
+   "match": "sub_0026D930"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027A200",
+   "size": 6,
+   "symbol": "FourWheelerPhysicsTemplate[+796]::vfunc_00",
+   "match": "sub_0027A200"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002829C0",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_04",
+   "match": "sub_002829C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00282A10",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_15",
+   "match": "sub_00282A10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00282A20",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_16",
+   "match": "sub_00282A20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00282A30",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_17",
+   "match": "sub_00282A30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00282A40",
+   "size": 6,
+   "symbol": "pure3d::d3dVehicleShader::vfunc_18",
+   "match": "sub_00282A40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002870F0",
+   "size": 6,
+   "symbol": "pure3d::IntChannel::vfunc_02",
+   "match": "sub_002870F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002871F0",
+   "size": 6,
+   "symbol": "pure3d::Float1Channel::vfunc_02",
+   "match": "sub_002871F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002874F0",
+   "size": 6,
+   "symbol": "pure3d::Float2Channel::vfunc_02",
+   "match": "sub_002874F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002875D0",
+   "size": 6,
+   "symbol": "pure3d::VectorChannel::vfunc_02",
+   "match": "sub_002875D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00287A70",
+   "size": 6,
+   "symbol": "pure3d::RotationChannel::vfunc_02",
+   "match": "sub_00287A70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00287CC0",
+   "size": 6,
+   "symbol": "pure3d::StringChannel::vfunc_02",
+   "match": "sub_00287CC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00287CD0",
+   "size": 6,
+   "symbol": "pure3d::EntityChannel::vfunc_02",
+   "match": "sub_00287CD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00287D10",
+   "size": 6,
+   "symbol": "pure3d::BoolChannel::vfunc_02",
+   "match": "sub_00287D10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00287D70",
+   "size": 6,
+   "symbol": "pure3d::ColourChannel::vfunc_02",
+   "match": "sub_00287D70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0028D100",
+   "size": 6,
+   "symbol": "core::MemoryAllocatorMalloc::vfunc_12",
+   "match": "sub_0028D100"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00291560",
+   "size": 6,
+   "symbol": "sub_00291560",
+   "match": "sub_00291560"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00292A40",
+   "size": 6,
+   "symbol": "pure3d::PrimGroupStreamed::vfunc_07",
+   "match": "sub_00292A40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00292B80",
+   "size": 6,
+   "symbol": "pure3d::PrimGroupSkinnedStreamed::vfunc_07",
+   "match": "sub_00292B80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00292BD0",
+   "size": 6,
+   "symbol": "CallForVehicleSpawnObject::vfunc_45",
+   "match": "sub_00292BD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002957F0",
+   "size": 6,
+   "symbol": "pure3d::SpriteParticleEmitter::vfunc_17",
+   "match": "sub_002957F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002994D0",
+   "size": 3,
+   "symbol": "pure3d::pddiTexture::vfunc_20",
+   "match": "sub_002994D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00299DB0",
+   "size": 6,
+   "symbol": "pure3d::d3dTexture::vfunc_10",
+   "match": "sub_00299DB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029A2E0",
+   "size": 6,
+   "symbol": "pure3d::d3dShader::vfunc_23",
+   "match": "sub_0029A2E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029D5D0",
+   "size": 3,
+   "symbol": "pure3d::d3dContext::vfunc_13",
+   "match": "sub_0029D5D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029DA50",
+   "size": 1,
+   "symbol": "sub_0029DA50",
+   "match": "sub_0029DA50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029F440",
+   "size": 6,
+   "symbol": "pure3d::d3dFBEffectsShader::vfunc_04",
+   "match": "sub_0029F440"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029F570",
+   "size": 6,
+   "symbol": "pure3d::d3dFBEffectsShader::vfunc_18",
+   "match": "sub_0029F570"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029F580",
+   "size": 6,
+   "symbol": "pure3d::d3dFBEffectsShader::vfunc_17",
+   "match": "sub_0029F580"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029F590",
+   "size": 6,
+   "symbol": "pure3d::d3dFBEffectsShader::vfunc_16",
+   "match": "sub_0029F590"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029F700",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleShader::vfunc_16",
+   "match": "sub_0029F700"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029F710",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleShader::vfunc_17",
+   "match": "sub_0029F710"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029F720",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleShader::vfunc_18",
+   "match": "sub_0029F720"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029F730",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleShader::vfunc_04",
+   "match": "sub_0029F730"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A9290",
+   "size": 1,
+   "symbol": "CollisionBehaviourTypeGroup::vfunc_10",
+   "match": "sub_002A9290"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A98D0",
+   "size": 6,
+   "symbol": "core::CompletionEventRequest::vfunc_06",
+   "match": "sub_002A98D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A9970",
+   "size": 6,
+   "symbol": "core::DriveCompletionRequest::vfunc_06",
+   "match": "sub_002A9970"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA050",
+   "size": 6,
+   "symbol": "core::FileGetPositionRequest::vfunc_06",
+   "match": "sub_002AA050"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA150",
+   "size": 6,
+   "symbol": "core::DriveOpenRequest::vfunc_06",
+   "match": "sub_002AA150"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA1B0",
+   "size": 6,
+   "symbol": "core::DriveMediaRequest::vfunc_06",
+   "match": "sub_002AA1B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA250",
+   "size": 6,
+   "symbol": "core::DriveCreateDirectoryRequest::vfunc_06",
+   "match": "sub_002AA250"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA2B0",
+   "size": 6,
+   "symbol": "core::DriveDestroyDirectoryRequest::vfunc_06",
+   "match": "sub_002AA2B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA3C0",
+   "size": 6,
+   "symbol": "core::DriveFindCloseRequest::vfunc_06",
+   "match": "sub_002AA3C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA420",
+   "size": 6,
+   "symbol": "core::DriveFileDestroyRequest::vfunc_06",
+   "match": "sub_002AA420"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA470",
+   "size": 6,
+   "symbol": "core::DriveCancelRequest::vfunc_06",
+   "match": "sub_002AA470"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AA480",
+   "size": 6,
+   "symbol": "core::DriveLockRequest::vfunc_06",
+   "match": "sub_002AA480"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002AD8C0",
+   "size": 3,
+   "symbol": "pure3d::d3dPrimBufferStream::vfunc_15",
+   "match": "sub_002AD8C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002BF880",
+   "size": 6,
+   "symbol": "core::XboxSaveDrive[+220]::vfunc_01",
+   "match": "sub_002BF880"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C1C10",
+   "size": 6,
+   "symbol": "pure3d::d3dErrorShader::vfunc_04",
+   "match": "sub_002C1C10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C1EB0",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_15",
+   "match": "sub_002C1EB0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C1EC0",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_16",
+   "match": "sub_002C1EC0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C1ED0",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_17",
+   "match": "sub_002C1ED0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C1EE0",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_18",
+   "match": "sub_002C1EE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C1EF0",
+   "size": 6,
+   "symbol": "pure3d::d3dReflShader::vfunc_04",
+   "match": "sub_002C1EF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C23F0",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_15",
+   "match": "sub_002C23F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C2400",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_16",
+   "match": "sub_002C2400"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C2410",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_17",
+   "match": "sub_002C2410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C2420",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_18",
+   "match": "sub_002C2420"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C2430",
+   "size": 6,
+   "symbol": "pure3d::d3dLayeredShader::vfunc_04",
+   "match": "sub_002C2430"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3000",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_04",
+   "match": "sub_002C3000"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3030",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_23",
+   "match": "sub_002C3030"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C34C0",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_15",
+   "match": "sub_002C34C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C34D0",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_16",
+   "match": "sub_002C34D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C34E0",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_17",
+   "match": "sub_002C34E0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C34F0",
+   "size": 6,
+   "symbol": "pure3d::d3dSpecularShader::vfunc_18",
+   "match": "sub_002C34F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3C30",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_15",
+   "match": "sub_002C3C30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3C40",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_16",
+   "match": "sub_002C3C40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3C50",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_17",
+   "match": "sub_002C3C50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3C60",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_18",
+   "match": "sub_002C3C60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3C70",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowShader::vfunc_04",
+   "match": "sub_002C3C70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3E30",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleCBVLitShader::vfunc_15",
+   "match": "sub_002C3E30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3E40",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleCBVLitShader::vfunc_16",
+   "match": "sub_002C3E40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3E50",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleCBVLitShader::vfunc_17",
+   "match": "sub_002C3E50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3E60",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleCBVLitShader::vfunc_18",
+   "match": "sub_002C3E60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C3E70",
+   "size": 6,
+   "symbol": "pure3d::d3dSimpleCBVLitShader::vfunc_04",
+   "match": "sub_002C3E70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C4910",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_15",
+   "match": "sub_002C4910"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C4920",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_16",
+   "match": "sub_002C4920"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C4930",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_17",
+   "match": "sub_002C4930"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C4940",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_18",
+   "match": "sub_002C4940"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C4950",
+   "size": 6,
+   "symbol": "pure3d::d3dCharacterShader::vfunc_04",
+   "match": "sub_002C4950"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5400",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_15",
+   "match": "sub_002C5400"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5410",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_16",
+   "match": "sub_002C5410"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5420",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_17",
+   "match": "sub_002C5420"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5430",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_18",
+   "match": "sub_002C5430"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5440",
+   "size": 6,
+   "symbol": "pure3d::d3dShadowDecalShader::vfunc_04",
+   "match": "sub_002C5440"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5660",
+   "size": 6,
+   "symbol": "pure3d::d3dDecalShader::vfunc_04",
+   "match": "sub_002C5660"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C57A0",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_04",
+   "match": "sub_002C57A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C57B0",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_23",
+   "match": "sub_002C57B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5C10",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_15",
+   "match": "sub_002C5C10"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5C20",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_16",
+   "match": "sub_002C5C20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5C30",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_17",
+   "match": "sub_002C5C30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C5C40",
+   "size": 6,
+   "symbol": "pure3d::d3dVertexFadeShader::vfunc_18",
+   "match": "sub_002C5C40"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C6140",
+   "size": 6,
+   "symbol": "pure3d::d3dNightlightShader::vfunc_04",
+   "match": "sub_002C6140"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002C6320",
+   "size": 6,
+   "symbol": "pure3d::d3dNightlightShader::vfunc_23",
+   "match": "sub_002C6320"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002CC090",
+   "size": 1,
+   "symbol": "sub_002CC090",
+   "match": "sub_002CC090"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002CE340",
+   "size": 1,
+   "symbol": "sub_002CE340",
+   "match": "sub_002CE340"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002CFB30",
+   "size": 6,
+   "symbol": "audio::Sequence::vfunc_12",
+   "match": "sub_002CFB30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D0240",
+   "size": 6,
+   "symbol": "sub_002D0240",
+   "match": "sub_002D0240"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D05C0",
+   "size": 6,
+   "symbol": "sub_002D05C0",
+   "match": "sub_002D05C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D0DD0",
+   "size": 6,
+   "symbol": "sub_002D0DD0",
+   "match": "sub_002D0DD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D0FD0",
+   "size": 6,
+   "symbol": "om::audio::VMix::?$EntityType::vfunc_03",
+   "match": "sub_002D0FD0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D0FE0",
+   "size": 6,
+   "symbol": "om::audio::VMix::?$EntityType::vfunc_02",
+   "match": "sub_002D0FE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D1090",
+   "size": 6,
+   "symbol": "om::audio::VClip::?$EntityType::vfunc_03",
+   "match": "sub_002D1090"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D10A0",
+   "size": 6,
+   "symbol": "om::audio::VClip::?$EntityType::vfunc_02",
+   "match": "sub_002D10A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D1100",
+   "size": 6,
+   "symbol": "audio::Clip::vfunc_12",
+   "match": "sub_002D1100"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D11C0",
+   "size": 6,
+   "symbol": "om::audio::VSequence::?$EntityType::vfunc_03",
+   "match": "sub_002D11C0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D11D0",
+   "size": 6,
+   "symbol": "om::audio::VSequence::?$EntityType::vfunc_02",
+   "match": "sub_002D11D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D1670",
+   "size": 6,
+   "symbol": "sub_002D1670",
+   "match": "sub_002D1670"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D1D90",
+   "size": 6,
+   "symbol": "audio::LayerTemplate::vfunc_12",
+   "match": "sub_002D1D90"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D1E50",
+   "size": 6,
+   "symbol": "om::audio::VLayerTemplate::?$EntityType::vfunc_03",
+   "match": "sub_002D1E50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D1E60",
+   "size": 6,
+   "symbol": "om::audio::VLayerTemplate::?$EntityType::vfunc_02",
+   "match": "sub_002D1E60"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D2C30",
+   "size": 6,
+   "symbol": "sub_002D2C30",
+   "match": "sub_002D2C30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D57B0",
+   "size": 6,
+   "symbol": "sub_002D57B0",
+   "match": "sub_002D57B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D5930",
+   "size": 6,
+   "symbol": "fight::VTimedFightTrack::?$ParamFloatConstRange::vfunc_01",
+   "match": "sub_002D5930"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D69F0",
+   "size": 6,
+   "symbol": "renderer::DecalContainer::vfunc_07",
+   "match": "sub_002D69F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D7340",
+   "size": 6,
+   "symbol": "audio::Mix::vfunc_12",
+   "match": "sub_002D7340"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D8200",
+   "size": 3,
+   "symbol": "sub_002D8200",
+   "match": "sub_002D8200"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D8850",
+   "size": 6,
+   "symbol": "om::audio::VListenerEffectXBox::?$EntityType::vfunc_03",
+   "match": "sub_002D8850"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D8860",
+   "size": 6,
+   "symbol": "om::audio::VListenerEffectXBox::?$EntityType::vfunc_02",
+   "match": "sub_002D8860"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D88B0",
+   "size": 6,
+   "symbol": "audio::ListenerEffectXBox::vfunc_12",
+   "match": "sub_002D88B0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D8D80",
+   "size": 6,
+   "symbol": "audio::SeqEventNestTrack::vfunc_03",
+   "match": "sub_002D8D80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D92D0",
+   "size": 6,
+   "symbol": "audio::SeqEventChannelSendVolumes::vfunc_03",
+   "match": "sub_002D92D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D95F0",
+   "size": 6,
+   "symbol": "audio::SeqEventChannelSends::vfunc_03",
+   "match": "sub_002D95F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D98F0",
+   "size": 6,
+   "symbol": "audio::SeqEventCondition::vfunc_03",
+   "match": "sub_002D98F0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D9A80",
+   "size": 6,
+   "symbol": "audio::SeqEventConditionElse::vfunc_03",
+   "match": "sub_002D9A80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002D9D30",
+   "size": 6,
+   "symbol": "audio::SeqEventWait::vfunc_03",
+   "match": "sub_002D9D30"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DA1A0",
+   "size": 6,
+   "symbol": "audio::SeqEventWaitBeat::vfunc_03",
+   "match": "sub_002DA1A0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DA310",
+   "size": 6,
+   "symbol": "audio::SeqEventExpression::vfunc_03",
+   "match": "sub_002DA310"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DA620",
+   "size": 6,
+   "symbol": "audio::SeqEventStopTrack::vfunc_03",
+   "match": "sub_002DA620"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DAA20",
+   "size": 6,
+   "symbol": "audio::SeqEventPlayTrack::vfunc_03",
+   "match": "sub_002DAA20"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DAD00",
+   "size": 6,
+   "symbol": "audio::SeqEventChannelVolumes::vfunc_03",
+   "match": "sub_002DAD00"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DB420",
+   "size": 6,
+   "symbol": "audio::SeqEventVarVolumeRand::vfunc_03",
+   "match": "sub_002DB420"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DB640",
+   "size": 6,
+   "symbol": "audio::SeqEventVarVolume::vfunc_03",
+   "match": "sub_002DB640"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DB870",
+   "size": 6,
+   "symbol": "audio::SeqEventVarTempo::vfunc_03",
+   "match": "sub_002DB870"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DBA80",
+   "size": 6,
+   "symbol": "audio::SeqEventVarPosDist::vfunc_03",
+   "match": "sub_002DBA80"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DBC70",
+   "size": 6,
+   "symbol": "audio::SeqEventVarPitchRand::vfunc_03",
+   "match": "sub_002DBC70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DBE70",
+   "size": 6,
+   "symbol": "audio::SeqEventVarPitch::vfunc_03",
+   "match": "sub_002DBE70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DC200",
+   "size": 6,
+   "symbol": "audio::SeqEventStream::vfunc_03",
+   "match": "sub_002DC200"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DCB50",
+   "size": 6,
+   "symbol": "audio::SeqEventSilence::vfunc_03",
+   "match": "sub_002DCB50"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DCEE0",
+   "size": 6,
+   "symbol": "audio::SeqEventLogicRepeat::vfunc_03",
+   "match": "sub_002DCEE0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DD1D0",
+   "size": 6,
+   "symbol": "audio::SeqEventLogicOr::vfunc_03",
+   "match": "sub_002DD1D0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DD630",
+   "size": 6,
+   "symbol": "audio::SeqEventCrossFade::vfunc_03",
+   "match": "sub_002DD630"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002DDD70",
+   "size": 6,
+   "symbol": "audio::SeqEventClip::vfunc_03",
+   "match": "sub_002DDD70"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002EE720",
+   "size": 6,
+   "symbol": "sub_002EE720",
+   "match": "sub_002EE720"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002F0AF0",
+   "size": 1,
+   "symbol": "sub_002F0AF0",
+   "match": "sub_002F0AF0"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002FF74E",
+   "size": 13,
+   "symbol": "exception_xbox::what",
+   "match": "what@exception_xbox@"
+  }
+ ]
+}

@@ -100,8 +100,10 @@ def status_block(registry: dict) -> str:
         "| :--- | ---: | ---: | ---: |",
         f"| Verified functions | {by['pc']:,} | {by['xb']:,} | **{len(entries):,}** |",
         "",
-        f"{small:,} of them are under 10 bytes and the largest is {largest:,} bytes, so the medium and large "
-        "functions are where the work is.",
+        (f"{small:,} of them are under 10 bytes and the largest is {largest:,} bytes, so the medium and large "
+         "functions are where the work is." if entries else
+         "Nothing is verified yet: the count was reset on 2026-11-08 so every function is rebuilt and checked "
+         "again from scratch. Pick one in the portal and be the first."),
         STATUS_END,
     ]
     return "\n".join(lines)
@@ -139,7 +141,7 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
             contributors[e["verified_by"]] += 1
     out = {
         "schema": "scarface_progress_v1",
-        "updated_at": max(stamps) if stamps else "",
+        "updated_at": max(stamps) if stamps else (registry.get("reset") or {}).get("at", ""),
         "compiler": registry.get("compiler", ""),
         "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "total": len(entries),
                      "bytes": sum(int(e.get("size", 0)) for e in entries)},

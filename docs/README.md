@@ -1,7 +1,9 @@
 # Project website
 
-`docs/index.html` is the public project page: live progress, the verified functions with their code,
-and how to help. It has no build step and no dependencies.
+`docs/index.html` is the public project page, live at **https://scarface-decomp.pages.dev**: progress,
+the verified functions with their code, and how to help. It has no build step and no dependencies.
+It is hosted on the project's Cloudflare account (`scarface-decomp` Pages project), which rebuilds it
+on every push to `main`.
 
 ## Where its data comes from
 

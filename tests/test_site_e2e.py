@@ -15,8 +15,10 @@ from conftest import ROOT, launch_chromium
 
 sync_api = pytest.importorskip("playwright.sync_api")
 
-REG = json.loads((ROOT / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
-PROG = json.loads((ROOT / "reports" / "progress.json").read_text(encoding="utf-8"))
+# A fixed sample of verified functions (the live registry was reset to 0 on 2026-11-08 and starts empty).
+FIX = ROOT / "tests" / "fixtures" / "site"
+REG = json.loads((FIX / "verified_registry.json").read_text(encoding="utf-8"))
+PROG = json.loads((FIX / "progress.json").read_text(encoding="utf-8"))
 
 
 class Quiet(SimpleHTTPRequestHandler):
@@ -64,7 +66,7 @@ def site(tmp_path_factory):
         shutil.copy2(ROOT / "docs" / f, d / f)
     (d / "data").mkdir()
     for f in ("progress.json", "verified_registry.json"):
-        shutil.copy2(ROOT / "reports" / f, d / "data" / f)
+        shutil.copy2(FIX / f, d / "data" / f)
     srv, url = serve(d)
     yield d, url
     srv.shutdown()
@@ -180,7 +182,7 @@ def test_falls_back_when_data_folder_is_missing(tmp_path, browser):
     data_dir = tmp_path / "data_src"
     data_dir.mkdir()
     for f in ("progress.json", "verified_registry.json"):
-        shutil.copy2(ROOT / "reports" / f, data_dir / f)
+        shutil.copy2(FIX / f, data_dir / f)
     srv_page, page_url = serve(page_dir, SpaFallback)          # data/ answers with HTML + 200
     srv_data, data_url = serve(data_dir, Cors)
     local = page_url.replace("127.0.0.1", "localhost")
@@ -205,4 +207,42 @@ def test_data_param_ignored_off_localhost(site, browser):
     ctx, pg = open_page(browser, url + "?data=https://example.invalid/")
     # served from 127.0.0.1 (not "localhost"): the parameter is ignored and data/ is used
     pg.wait_for_function("document.getElementById('data-status').textContent.includes('latest deploy')")
+    ctx.close()
+
+
+def test_live_reports_and_empty_start(tmp_path, browser):
+    """The real reports/ files as the Cloudflare build copies them. Right after the reset that is 0%:
+    the page must say so plainly and point newcomers at the help section."""
+    reg = json.loads((ROOT / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
+    prog = json.loads((ROOT / "reports" / "progress.json").read_text(encoding="utf-8"))
+    d = tmp_path / "site"
+    (d / "data").mkdir(parents=True)
+    shutil.copy2(ROOT / "docs" / "index.html", d / "index.html")
+    for f in ("progress.json", "verified_registry.json"):
+        shutil.copy2(ROOT / "reports" / f, d / "data" / f)
+    srv, url = serve(d)
+    try:
+        ctx, pg = open_page(browser, url)
+        pg.wait_for_function("document.getElementById('data-status').textContent.includes('latest deploy')")
+        assert pg.text_content("#sb-verified") == f"{prog['verified']['total']:,}"
+        assert pg.text_content("#sb-total") == f"{prog['verified']['total'] + prog['queue']['total']:,}"
+        if not reg["entries"]:
+            assert pg.text_content("#claim") == "The world is 0% yours."
+            assert "Nothing rebuilt yet" in pg.text_content("#fn-list .empty")
+            assert pg.get_attribute("#fn-list .empty a", "href") == "#help"
+            assert "Your name could be first" in pg.text_content("#contrib-note")
+        assert pg.evaluate("document.getElementById('claim').classList.contains('on')")
+        assert not pg.errors, pg.errors
+        ctx.close()
+    finally:
+        srv.shutdown()
+
+
+def test_faq_opens_and_needs_no_script(site, browser):
+    _, url = site
+    ctx, pg = open_page(browser, url)
+    q = pg.locator("#questions details").first
+    assert not q.evaluate("d => d.open")
+    q.locator("summary").click()
+    assert q.evaluate("d => d.open") and pg.locator("#questions details[open] p").first.is_visible()
     ctx.close()

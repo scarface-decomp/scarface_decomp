@@ -2,8 +2,8 @@
 The real portal server (decomp_portal_server.py) with the real compiler, on a throwaway copy of the
 repository, so nothing in the working tree is touched. Skipped without cl.exe or default.xbe.
 
-One verified Xbox function (sub_001CDC80, 6 bytes) is taken out of the copy's registry and put back in
-its queue; the tests then claim it and verify it again through the HTTP API and in a browser.
+One Xbox function (sub_001CDC80, 6 bytes) is put at the front of the copy's queue (and taken out of its
+registry, if it is there); the tests then claim it and verify it through the HTTP API and in a browser.
 """
 import json
 import os
@@ -57,8 +57,7 @@ def portal(tmp_path_factory):
 
     reg_p = work / "reports" / "verified_registry.json"
     reg = json.loads(reg_p.read_text(encoding="utf-8"))
-    assert KEY in reg["entries"], "fixture function is not in the registry"
-    del reg["entries"][KEY]
+    reg["entries"].pop(KEY, None)
     reg_p.write_text(json.dumps(reg), encoding="utf-8")
     q_p = work / "reports" / "full_remaining_queue.json"
     queue = json.loads(q_p.read_text(encoding="utf-8")) if q_p.exists() else []

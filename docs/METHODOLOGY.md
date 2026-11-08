@@ -21,7 +21,8 @@ executable, `.rdata` and `.data` included.
 ## 2. Compiler
 
 * `cl.exe` **13.10.3052** (Microsoft Visual C++ Toolkit 2003, MSVC 7.1). The game's PE header says
-  linker 7.10 and it imports `MSVCR71.dll`. Every verified function so far matches with 13.10.3052.
+  linker 7.10 and it imports `MSVCR71.dll`. Before the 2026-11-08 reset, all 1,036 functions verified
+  then matched with 13.10.3052.
 * **Open question for the Xbox build.** `default.xbe` lists XDK 5849 libraries. The
   [Halo 2 decompilation](https://github.com/kirklandsig/halo2-decompiled), built with the same XDK,
   reports that its compiler is `cl` 13.10.3077 and that the game used `/LTCG` with `/O1` or `/O2` per
@@ -30,11 +31,11 @@ executable, `.rdata` and `.data` included.
   lawfully; it is not redistributable), with `/O1`, and look for signs of link-time code generation,
   such as functions that take arguments in registers other than `ecx`.
 * Default flags for every target: `/nologo /c /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4`.
-* PC only: when `/G6` does not match, the same code is tried with `/G7`. 14 of the 155 verified PC
-  functions need `/G7`. Xbox code is checked with `/G6` only (see the notes in section 5). The
+* PC only: when `/G6` does not match, the same code is tried with `/G7`. Before the reset, 14 of the 155 verified PC
+  functions needed `/G7`. Xbox code is checked with `/G6` only (see the notes in section 5). The
   registry stores the flags that matched.
 * **decomp.me has the same compiler.** Its `msvc7.1` compiler (platform *Windows (9x/NT)*) gave 100%
-  on two functions verified here, one PC (`CementLibrary::vfunc_05`, 39 B, `/G7`) and one Xbox
+  on two functions verified here before the reset, one PC (`CementLibrary::vfunc_05`, 39 B, `/G7`) and one Xbox
   (`sub_0001EF60`, 7 B), checked on 2026-11-08. It compiles as C unless `/TP` is passed, so the
   portal's decomp.me button adds `/TP`. The target it sends is built by `tools/decompme.py`: the game's
   bytes plus COFF relocations named `_sub_XXXXXXXX` / `_DAT_XXXXXXXX`, the same names MSVC gives

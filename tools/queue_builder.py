@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from msvc_verify import decorated_hint
-from sf_binaries import BinaryImage, collect_call_targets, function_extent
+from sf_binaries import BinaryImage, Extent, collect_call_targets, function_extent
 
 PC_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # Only this part of the retail PC .text is stored as plaintext (the rest is not readable code),
@@ -190,7 +190,11 @@ def tier(size: int) -> dict:
 
 
 def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = None,
-                verified_keys: Optional[Set[str]] = None, progress=None) -> List[dict]:
+                verified_keys: Optional[Set[str]] = None, progress=None,
+                known_functions: Optional[List[dict]] = None) -> List[dict]:
+    """known_functions: [{bin, va, size, symbol, match}] whose start and size were proven earlier by an
+    exact byte match (reports/known_functions.json). They are always queued, with that size, even where
+    the scanner alone would not find them (tiny stubs, starts inside padding)."""
     verified_keys = verified_keys or set()
     old_by_key = {}
     for t in old_queue or []:
@@ -204,19 +208,23 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
         img = BinaryImage(p)
         calls = collect_call_targets(img)
         vt = vtable_methods(img)
-        starts: Set[int] = set(vt) | {t["fva_int"] for k, t in old_by_key.items() if k.startswith(b + ":")}
+        kf = {int(f["va"], 16): f for f in (known_functions or []) if f.get("bin") == b}
+        starts: Set[int] = set(vt) | set(kf) | {t["fva_int"] for k, t in old_by_key.items() if k.startswith(b + ":")}
         if b == "xb":
             starts |= {c for c in calls}
         else:
             lo, hi = PC_PLAINTEXT
             starts = {s for s in starts | calls if lo <= s < hi}
-        known = set(calls) | set(vt)
+        known = set(calls) | set(vt) | set(kf)
         extents = {}
         for i, va in enumerate(sorted(starts)):
             sec = img.section_of(va)
             if not sec or not sec.is_code or sec.library:
                 continue                        # data, or Xbox XDK / Bink library code
             e = function_extent(img, va, known)
+            if va in kf:
+                e = Extent(va, int(kf[va]["size"]), True, "size proven by an earlier exact match",
+                           has_jump_table=e.has_jump_table if e.ok else False)
             if b == "pc" and e.ok and va + e.size > PC_PLAINTEXT[1]:
                 continue
             if e.ok and e.size >= 1:
@@ -243,6 +251,9 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                 sym = f"{cls}::vfunc_{slot:02d}"
                 match = rtti_match_hint(raw, f"vfunc_{slot:02d}") + "|" + decorated_hint(cls, f"vfunc_{slot:02d}")
                 hint = f"Virtual method of {cls} (vtable slot {slot}, offset +0x{slot * 4:02X})."
+            elif va in kf and kf[va].get("symbol"):
+                sym, match = kf[va]["symbol"], kf[va].get("match") or ""
+                hint = f"Matched before the 2026-11-08 reset; {e.size} bytes."
             else:
                 sym = old.get("symbol") if old.get("symbol") and not old.get("symbol", "").startswith("sub_") else f"sub_{va:08X}"
                 match = "" if "::" in sym else sym
@@ -279,7 +290,9 @@ def main() -> int:
     old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
     reg_path = root / "reports" / "verified_registry.json"
     verified = set(json.loads(reg_path.read_text(encoding="utf-8")).get("entries", {})) if reg_path.exists() else set()
-    tasks = build_queue(binaries, old, verified, progress=print)
+    kf_path = root / "reports" / "known_functions.json"
+    known = json.loads(kf_path.read_text(encoding="utf-8")).get("functions", []) if kf_path.exists() else []
+    tasks = build_queue(binaries, old, verified, progress=print, known_functions=known)
     tmp = out.with_suffix(".tmp")
     tmp.write_text(json.dumps(tasks, indent=1), encoding="utf-8")
     tmp.replace(out)
