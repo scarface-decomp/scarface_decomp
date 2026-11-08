@@ -10,7 +10,7 @@ This is the exact procedure behind every `VERIFIED` count in this project. The p
 | :--- | :--- | :--- | :--- |
 | `Scarface.exe` | Retail PC 1.00.2 | `0x00400000` | `0x006DDC00`–`0x0072EADC` only. The rest of the PC `.text` section is not stored as plain x86 code in the file, so it cannot be compared; those functions are worked from the Xbox build. |
 | `default.xbe` | Retail Xbox | `0x00010000` | `.text`, `0x00011000`–`0x0032947C`. The other code sections (`D3D`, `D3DX`, `XGRPH`, `DSOUND`, `WMADEC`, `BINK*`, `XPP`) are Microsoft XDK and RAD Bink library code, not game code, and are not in the queue. |
-| `game.xbe` | April 20, 2006 Xbox prototype | `0x00010000` | Optional bonus lane: queued and verified like the others (`--bin proto`), counted apart from the retail total. |
+| `game.xbe` | April 20, 2006 Xbox prototype | `0x00010000` | Optional, unreleased code: queued, verified and saved like the others (`--bin proto`, `reconstructed_src/proto/`), counted on its own row. |
 
 The registry records the SHA-256 of each binary it was verified against
 (`reports/verified_registry.json` → `binaries`).

@@ -100,7 +100,7 @@ def status_block(registry: dict) -> str:
         "| :--- | ---: | ---: | ---: |",
         f"| Verified functions | {by['pc']:,} | {by['xb']:,} | **{by['pc'] + by['xb']:,}** |",
         "",
-    ] + ([f"Plus {by['proto']:,} in the April 2006 Xbox prototype (`game.xbe`), a bonus that is not in the total.", ""]
+    ] + ([f"Plus {by['proto']:,} in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.", ""]
          if by["proto"] else []) + [
         (f"{small:,} of them are under 10 bytes and the largest is {largest:,} bytes, so the medium and large "
          "functions are where the work is." if entries else
@@ -145,7 +145,7 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         "schema": "scarface_progress_v1",
         "updated_at": max(stamps) if stamps else (registry.get("reset") or {}).get("at", ""),
         "compiler": registry.get("compiler", ""),
-        # "total" and "bytes" are the retail game (PC + Xbox); the April 2006 prototype is a bonus,
+        # "total" and "bytes" are the released game (PC + Xbox); the April 2006 prototype (unreleased code) is
         # counted only under "proto".
         "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "total": by["pc"] + by["xb"],
                      "bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] != "proto")},

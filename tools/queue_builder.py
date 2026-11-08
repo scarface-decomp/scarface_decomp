@@ -30,8 +30,8 @@ PC_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # so PC tasks are limited to it. Same bounds as the original index builder.
 PC_PLAINTEXT = (0x006DDC00, 0x0072EADC)
 XB_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
-# The April 20, 2006 Xbox prototype (game.xbe, optional). A bonus lane: its functions are queued and
-# verified like the others but counted apart from the retail game. About half of them have the same
+# The April 20, 2006 Xbox prototype (game.xbe, optional): unreleased code. Its functions are queued,
+# verified and saved like the others, and counted on their own row. About half of them have the same
 # machine code as a retail Xbox function, so look-alike porting fills those in as retail is matched.
 LANES = {"pc": ("pc_", "PC Scarface.exe", "PC "), "xb": ("xb_", "Shared Engine & Gameplay", ""),
          "proto": ("proto_", "Xbox Prototype (Apr 2006)", "Proto ")}

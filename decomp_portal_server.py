@@ -274,8 +274,8 @@ def task_key(t: dict) -> str:
 
 
 def progress() -> dict:
-    """The headline numbers are the retail game (PC + Xbox). The April 2006 prototype is a bonus lane,
-    counted on its own under "prototype"."""
+    """The headline numbers are the released game (PC + Xbox). The April 2006 prototype (unreleased code,
+    saved in the repository like everything else) is counted on its own under "prototype"."""
     entries = REGISTRY.get("entries", {})
     by_bin = Counter(e["bin"] for e in entries.values())
     retail = [e for e in entries.values() if e["bin"] != "proto"]
@@ -1259,7 +1259,7 @@ def main() -> None:
         print("               python tools/queue_builder.py")
     elif any(t["bin"] == "proto" for t in ALL_TASKS):
         pp = p["prototype"]
-        print(f"  Prototype  : {pp['matched']:,} / {pp['total']:,} (April 2006 Xbox build; a bonus, not in the total)")
+        print(f"  Prototype  : {pp['matched']:,} / {pp['total']:,} (April 2006 Xbox build, unreleased code; counted on its own)")
     print(f"  Maintainers: {', '.join(sorted(MAINTAINERS))}")
     print("=" * 78)
     if os.environ.get("SCARFACE_NO_BROWSER") != "1":

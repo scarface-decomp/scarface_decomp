@@ -7,7 +7,7 @@ is never uploaded, and Git ignores everything in it except this note.
 | :--- | :--- | :--- |
 | `default.xbe` | the retail Xbox disc | the Xbox functions (most of the work) |
 | `Scarface.exe` | PC version 1.00.2 (install the 1.00.2 patch first) | the PC functions |
-| `game.xbe` | the April 20, 2006 Xbox prototype | optional bonus functions |
+| `game.xbe` | the April 20, 2006 Xbox prototype | optional: unreleased code (its own lane) |
 
 You need at least one of the first two. Then start the portal: double-click `START_PORTAL.bat`
 (Windows) or run `sh start_portal.sh` (macOS, Linux). The first start takes a few minutes while it

@@ -61,8 +61,9 @@ The full procedure, with code generation notes for this compiler, is in
    (or `git clone` it).
 3. **Add your game files** to the `binaries` folder: `Scarface.exe` (PC 1.00.2) and/or `default.xbe`
    (Xbox). They never leave your computer. `game.xbe` (the April 20, 2006 Xbox prototype) is
-   optional: with it, the prototype's functions are added as a bonus lane, counted apart from the
-   retail total.
+   optional: with it, the prototype's functions are added too. The goal is the released game plus the
+   code that never shipped; prototype matches are saved in `reconstructed_src/proto/` and counted on
+   their own row.
 4. **Start the portal**: on Windows double-click **`START_PORTAL.bat`**; on macOS or Linux run
    `sh start_portal.sh`. It installs what it needs the first time and opens http://localhost:8085.
 5. **Pick a small function** and press **decomp.me**. It opens on [decomp.me](https://decomp.me), which

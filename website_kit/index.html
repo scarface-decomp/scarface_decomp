@@ -858,7 +858,7 @@
                   <option value="ALL">All Categories</option>
                   <option value="PC Scarface.exe">PC Scarface.exe</option>
                   <option value="Shared Engine">Shared Engine</option>
-                  <option value="Xbox Prototype">Xbox Prototype (Apr 2006, bonus)</option>
+                  <option value="Xbox Prototype">Xbox Prototype (Apr 2006, unreleased code)</option>
                   <option value="class not in retail">Prototype: classes cut from retail</option>
                   <option value="PARTIAL">Partially Done (Resume)</option>
                   <option value="UNCLAIMED">Unclaimed Only</option>
@@ -1439,7 +1439,7 @@
     const bb = prog.by_binary;
     $('live-by-binary').textContent = bb
       ? 'PC ' + fmtInt(bb.pc) + ' · Xbox ' + fmtInt(bb.xbox) +
-        (prog.prototype && Number(prog.prototype.total) > 0 ? ' · Prototype ' + fmtInt(prog.prototype.matched) + '/' + fmtInt(prog.prototype.total) + ' (bonus)' : '') +
+        (prog.prototype && Number(prog.prototype.total) > 0 ? ' · Prototype ' + fmtInt(prog.prototype.matched) + '/' + fmtInt(prog.prototype.total) + ' (unreleased code)' : '') +
         (prog.matched_bytes ? ' · ' + fmtInt(prog.matched_bytes) + ' bytes' : '') + (prog.compiler ? ' · ' + String(prog.compiler).replace(/^Microsoft \(R\) 32-bit C\/C\+\+ Optimizing Compiler /, '') : '')
       : '';
   }

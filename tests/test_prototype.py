@@ -1,4 +1,4 @@
-"""The April 20, 2006 Xbox prototype (binaries/game.xbe): a bonus lane, counted apart from the retail game,
+"""The April 20, 2006 Xbox prototype (binaries/game.xbe): unreleased code, counted on its own row,
 built with the same compiler and flags as retail."""
 from conftest import FLAGS, ROOT, needs_compiler
 import pytest

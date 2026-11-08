@@ -47,7 +47,7 @@ def status() -> int:
     if total:
         print(f" Progress           : {retail / total * 100:.2f}% of {total:,} indexed functions")
     if by_bin.get("proto", 0) or proto_left:
-        print(f" Xbox prototype     : {by_bin.get('proto', 0):,} of {by_bin.get('proto', 0) + proto_left:,} (bonus, not in the total)")
+        print(f" Xbox prototype     : {by_bin.get('proto', 0):,} of {by_bin.get('proto', 0) + proto_left:,} (unreleased code, counted on its own)")
     print(f" Verified bytes     : {sum(int(e.get('size', 0)) for e in entries.values()):,}")
     print("-" * 72)
     board = Counter((e.get("verified_by") or "Imported (unattributed)") for e in entries.values())
