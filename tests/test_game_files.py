@@ -141,7 +141,7 @@ def test_prepare_copies_a_file_from_a_subfolder_and_flags_other_builds(tmp_path)
     logs = []
     status = gf.prepare(b, logs.append)
     assert status["game.xbe"] == "ok" and status["default.xbe"] == "different"
-    assert any("not the Xbox retail game build" in l for l in logs)
+    assert any("NOT USED" in l for l in logs) and gf.refusal(b / "default.xbe")
 
 
 def test_prepare_with_nothing_says_what_to_add(tmp_path):

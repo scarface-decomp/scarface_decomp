@@ -319,8 +319,15 @@ def main() -> int:
     ap.add_argument("--out", default=str(root / "reports" / "full_remaining_queue.json"))
     args = ap.parse_args()
     out = Path(args.out)
-    binaries = {"pc": root / "binaries" / "Scarface.exe", "xb": root / "binaries" / "default.xbe",
-                "proto": root / "binaries" / "game.xbe"}
+    from game_files import refusal
+    binaries = {}
+    for b, name in (("pc", "Scarface.exe"), ("xb", "default.xbe"), ("proto", "game.xbe")):
+        p = root / "binaries" / name
+        problem = refusal(p) if p.exists() else None
+        if problem:
+            print(f"[!] NOT USED: {problem}")
+        elif p.exists():
+            binaries[b] = p
     old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
     reg_path = root / "reports" / "verified_registry.json"
     verified = set(json.loads(reg_path.read_text(encoding="utf-8")).get("entries", {})) if reg_path.exists() else set()

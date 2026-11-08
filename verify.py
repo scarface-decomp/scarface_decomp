@@ -61,6 +61,14 @@ def check(args) -> int:
     from msvc_verify import verify_submission, compiler_version
     from sf_binaries import BinaryImage, collect_call_targets, function_extent
     b = args.bin
+    if not BINARIES[b].exists():
+        print(f"binaries/{BINARIES[b].name} is missing; see binaries/README.md.")
+        return 2
+    from game_files import refusal
+    problem = refusal(BINARIES[b])
+    if problem:
+        print(problem)
+        return 2
     img = BinaryImage(BINARIES[b])
     va = int(args.va, 16)
     size = args.size

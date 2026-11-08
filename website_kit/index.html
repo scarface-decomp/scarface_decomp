@@ -548,6 +548,10 @@
     pre.code-view.err { display: none; color: var(--error); max-height: 200px; margin: 0; white-space: pre-wrap; }
     pre.code-view.fixed { height: 460px; max-height: 460px; }
     .file-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; max-height: 125px; overflow-y: auto; padding: 4px 2px; }
+    .binary-problems { border: 1px solid rgba(239, 68, 68, 0.55); background: rgba(239, 68, 68, 0.1); color: #fecaca;
+                       border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; font-size: 0.9rem; line-height: 1.5; }
+    .binary-problems strong { color: #fca5a5; display: block; margin-bottom: 4px; }
+    .binary-problems p { margin: 4px 0 0; }
     .script-browser { margin-bottom: 14px; }
     .script-filters { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr) auto; gap: 10px; align-items: center; margin-bottom: 8px; }
     .script-filters .input-box { width: 100%; }
@@ -744,6 +748,7 @@
 
       <main class="view-container">
         <h1 class="sr-only">Scarface decomp portal</h1>
+        <div id="binary-problems" class="binary-problems" role="alert" hidden></div>
         <!-- VIEW 1: DASHBOARD -->
         <section id="view-dashboard" class="view-pane active" aria-label="Dashboard">
           <div class="unencrypted-hero">
@@ -3126,6 +3131,7 @@
       updateHeader(STATE.progress);
       applyCounts(STATE);
       if (STATE.repo_url) applyRepoUrl(STATE.repo_url);
+      showBinaryProblems(STATE.binary_problems || {});
       markSourcesDirty();
       renderLeaderboard();
     } catch (e) {
@@ -3133,6 +3139,18 @@
       console.error('State load error:', e);
     }
     await Promise.all([loadVerifiedScripts(), loadQueuePage()]);
+  }
+
+  function showBinaryProblems(problems) {
+    const box = $('binary-problems');
+    const list = Object.values(problems);
+    box.hidden = !list.length;
+    box.innerHTML = '';
+    if (!list.length) return;
+    const head = document.createElement('strong');
+    head.textContent = list.length === 1 ? 'A game file in binaries/ is not used' : list.length + ' game files in binaries/ are not used';
+    box.appendChild(head);
+    list.forEach((msg) => { const p = document.createElement('p'); p.textContent = msg; box.appendChild(p); });
   }
 
   loadState();

@@ -47,6 +47,7 @@ import msvc_verify as MV  # noqa: E402
 from disasm_synth import disassemble, synthesize_cpp  # noqa: E402
 import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
+import game_files as GF  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 
@@ -120,11 +121,27 @@ def write_json(path: Path, obj) -> None:
     os.replace(tmp, path)
 
 
+BINARY_PROBLEMS: Dict[str, str] = {}    # lane -> why its file in binaries/ is refused
+
+
 def image_for(b: str) -> Optional[BinaryImage]:
+    """The game file for a lane, or None if it is missing or not the accepted US version
+    (docs/GAME_VERSIONS.md): matches against any other copy would not count."""
     if b not in _IMAGES:
         p = BINARIES.get(b)
-        _IMAGES[b] = BinaryImage(p) if p and p.exists() else None
+        img = None
+        if p and p.exists():
+            problem = GF.refusal(p)
+            if problem:
+                BINARY_PROBLEMS[b] = problem
+            else:
+                img = BinaryImage(p)
+        _IMAGES[b] = img
     return _IMAGES[b]
+
+
+def accepted_binaries() -> Dict[str, Path]:
+    return {b: p for b, p in BINARIES.items() if image_for(b)}
 
 
 def compiler_version() -> str:
@@ -318,10 +335,16 @@ def tier_meta(size: int) -> dict:
 def load_tasks() -> None:
     global ALL_TASKS, TASK_BY_ID
     tasks = read_json(QUEUE_JSON, None)
-    if not tasks:
-        print("[*] Building the work queue from the binaries (first run; takes a few minutes)...")
+    have = accepted_binaries()
+    missing_lanes = sorted(b for b in have if not any(t.get("bin") == b for t in tasks or []))
+    if not tasks or missing_lanes:
         from queue_builder import build_queue, seed_data
-        tasks = build_queue(BINARIES, None, set(REGISTRY["entries"]), progress=print, **seed_data(BASE_DIR))
+        if not tasks:
+            print("[*] Building the work queue from the game files (first run; takes a few minutes)...")
+        else:
+            names = ", ".join(BINARIES[b].name for b in missing_lanes)
+            print(f"[*] New game files found ({names}); adding their functions to the work queue (a few minutes)...")
+        tasks = build_queue(have, tasks, set(REGISTRY["entries"]), progress=print, **seed_data(BASE_DIR))
         write_json(QUEUE_JSON, tasks)
     if any("lookalikes" not in t for t in tasks if "fva_int" in t):
         images = {b: image_for(b) for b in ("pc", "xb", "proto") if image_for(b)}
@@ -1027,7 +1050,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"progress": progress(), "leaderboard": leaderboard(),
                                    "audit_log": read_json(AUDIT_JSON, []), "sources": list_sources(),
                                    "tier_counts": dict(tiers), "total_remaining_indexed": remaining,
-                                   "repo_url": REPO_URL, "lookalikes": lookalike_summary()})
+                                   "repo_url": REPO_URL, "lookalikes": lookalike_summary(),
+                                   "binary_problems": BINARY_PROBLEMS})
         if u.path == "/api/source":
             name = q1("name")
             p = (RECON_DIR / name).resolve()
@@ -1324,14 +1348,13 @@ def main() -> None:
     print(f"  Verified   : {p['matched_functions']:,} functions (PC {p['by_binary']['pc']:,}, Xbox {p['by_binary']['xbox']:,})")
     print(f"  Work queue : {sum(1 for t in ALL_TASKS if t['status'] != 'VERIFIED'):,} functions")
     print(f"  Look-alikes: {len(GROUPS):,} groups; a match in one is tried on the rest of its group")
-    if image_for("proto") and not any(t["bin"] == "proto" for t in ALL_TASKS):
-        print("  Prototype  : binaries/game.xbe is here but not in the queue yet. To add it (about 2 minutes):")
-        print("               python tools/queue_builder.py")
-    elif any(t["bin"] == "proto" for t in ALL_TASKS):
+    if any(t["bin"] == "proto" for t in ALL_TASKS):
         pp = p["prototype"]
         print(f"  Prototype  : {pp['matched']:,} / {pp['total']:,} (April 2006 Xbox build, unreleased code; counted on its own)")
     print(f"  Maintainers: {', '.join(sorted(MAINTAINERS))}")
     print("=" * 78)
+    for b, problem in BINARY_PROBLEMS.items():
+        print(f"[!] NOT USED: {problem}")
     if os.environ.get("SCARFACE_NO_BROWSER") != "1":
         if os.name == "nt":
             subprocess.Popen(["cmd", "/c", "start", url])

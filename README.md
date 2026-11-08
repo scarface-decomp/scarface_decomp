@@ -63,8 +63,9 @@ The full procedure, with code generation notes for this compiler, is in
    *Add python.exe to PATH* on the installer's first screen.
 2. **Download this project**: on GitHub press **Code**, then **Download ZIP**, and unzip it anywhere
    (or `git clone` it).
-3. **Add your game files** to the `binaries` folder: `Scarface.exe` (PC 1.00.2) and/or `default.xbe`
-   (Xbox). They never leave your computer. `game.xbe` (the April 20, 2006 Xbox prototype) is
+3. **Add your game files** to the `binaries` folder: `Scarface.exe` (PC, US version 1.00.2) and/or
+   `default.xbe` (Xbox, US disc). Only these exact US versions are accepted, and the portal checks:
+   see [docs/GAME_VERSIONS.md](docs/GAME_VERSIONS.md). They never leave your computer. `game.xbe` (the April 20, 2006 Xbox prototype) is
    optional: with it, the prototype's functions are added too. The goal is the released game plus the
    code that never shipped; prototype matches are saved in `reconstructed_src/proto/` and counted on
    their own row.
@@ -148,6 +149,7 @@ python tools/queue_builder.py      # rebuild the work queue from the binaries
 | `website_kit/index.html` | The portal's web page. |
 | `docs/index.html` | The public project website: live progress and every verified function (see `docs/README.md`). |
 | `docs/METHODOLOGY.md` | Verification rules and code generation notes. |
+| `docs/GAME_VERSIONS.md` | Which copies of the game are accepted (US versions only), with their SHA-256, and what may be shared. |
 | `docs/OTHER_VERSIONS.md` | The PS2 and Wii versions: what is known, and what a decomp of them would need. |
 | `SCARFACE_DECOMP_AI_HANDOFF.md`, `AGENTS.md` | Brief for AI assistants (served by the portal at `/download/ai-handoff`), and how an agent uses the portal API. |
 | `tests/` | Test suite (`python -m pytest -q tests/`). |

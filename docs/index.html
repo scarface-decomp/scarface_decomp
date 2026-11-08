@@ -394,8 +394,9 @@
           <li><b>Download the project</b>On <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>,
             press <em>Code</em>, then <em>Download ZIP</em>, and unzip it anywhere. If you use Git:
             <pre tabindex="0">git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></pre></li>
-          <li><b>Add your game files</b>Copy <code>Scarface.exe</code> (PC version 1.00.2) and/or <code>default.xbe</code>
-            (from the Xbox disc) into the project's <code>binaries</code> folder.</li>
+          <li><b>Add your game files</b>Copy <code>Scarface.exe</code> (US PC version 1.00.2) and/or <code>default.xbe</code>
+            (from the US Xbox disc) into the project's <code>binaries</code> folder. Only these US versions are accepted;
+            the portal checks.</li>
           <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
             <code>sh start_portal.sh</code>. Your browser opens the portal at <code>localhost:8085</code>.</li>
           <li><b>Pick a function and solve it</b>Choose a small one, then press <em>decomp.me</em>. It opens in your
@@ -429,6 +430,12 @@
           <details><summary>Do I need the game?</summary>
             <p>Yes. The project shares only the code people write, never the game. The portal reads your own copy
               (<code>Scarface.exe</code> 1.00.2 for PC or <code>default.xbe</code> from the Xbox disc) on your computer.</p></details>
+          <details><summary>Which version of the game do I need?</summary>
+            <p>The US versions, exactly: the US Xbox disc, and/or the US PC game with the official 1.00.2 patch installed.
+              Every function is matched against those exact files, and other versions have different code at different
+              addresses, so the portal won't use the unpatched PC 1.00, other regions' discs or edited files. The April 2006
+              Xbox prototype is an optional extra. The accepted files and how to check yours are in
+              <a data-repo-link="/blob/main/docs/GAME_VERSIONS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/GAME_VERSIONS.md" target="_blank" rel="noopener noreferrer">GAME_VERSIONS.md</a>.</p></details>
           <details><summary>Does it cost anything?</summary>
             <p>No. Python, the portal and decomp.me are free. The 2003 compiler was a free download from Microsoft.</p></details>
           <details><summary>Is this allowed?</summary>

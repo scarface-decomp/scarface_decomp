@@ -26,6 +26,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 from cpp_policy import check_genuine_cpp  # noqa: E402
 from registry_outputs import STATUS_END, STATUS_START, write_outputs  # noqa: E402
+from game_files import EXPECTED as ACCEPTED_GAME_FILES  # noqa: E402
 
 FORBIDDEN = ["*.exe", "*.xbe", "*.rcf", "*.bik", "*.iso", "*.7z", "*.zip", "*.obj", "*.pdb", "*.cso", "*.dso",
              "*.dtr", "tools/msvc71/*", "binaries/*", "private/*", "*contributor_tokens.json",
@@ -44,6 +45,12 @@ def check_registry(problems: list) -> dict:
     if not isinstance(entries, dict):
         problems.append("registry: 'entries' is missing")
         return reg
+    # The registry must have been verified against the accepted US game files (docs/GAME_VERSIONS.md).
+    for lane, info in (reg.get("binaries") or {}).items():
+        name, digest = (info or {}).get("file", ""), (info or {}).get("sha256", "")
+        if name not in ACCEPTED_GAME_FILES or digest not in ACCEPTED_GAME_FILES[name][0]:
+            problems.append(f"registry: verified against {name or lane} {digest[:12]}..., which is not an accepted "
+                            "game version (docs/GAME_VERSIONS.md)")
     for key, e in entries.items():
         where = f"registry {key}"
         if e.get("bin") not in ("pc", "xb", "proto"):

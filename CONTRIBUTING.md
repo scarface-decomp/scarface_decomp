@@ -79,8 +79,11 @@ place they include a run of the real portal on a throwaway copy of the repositor
   and `&DAT_00439DA4`. Rename them properly once you know what they are.
 * **Keep the game's behaviour on `main`**, bugs included. Fixes belong in modding forks or behind a
   clearly named option.
-* **No game files, no compiler files** in commits: `binaries/` and `tools/msvc71/` are ignored on
-  purpose. CI (`scripts/check_repo.py`) rejects them.
+* **US versions only.** Matches count only against the accepted files: the US Xbox disc's
+  `default.xbe`, the US PC `Scarface.exe` 1.00.2 and the April 2006 prototype. Other regions, the
+  unpatched PC 1.00 and edited files are refused. See [docs/GAME_VERSIONS.md](docs/GAME_VERSIONS.md).
+* **No game files, no compiler files** in commits, issues or chat: `binaries/` and `tools/msvc71/`
+  are ignored on purpose. CI (`scripts/check_repo.py`) rejects them.
 * **Bigger changes** to the tools, the verifier or the rules: open an issue first so they can be
   discussed.
 

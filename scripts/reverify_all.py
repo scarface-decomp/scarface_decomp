@@ -253,8 +253,13 @@ class Targets:
     def __init__(self):
         self.images: Dict[str, BinaryImage] = {}
         self.starts: Dict[str, set] = {}
+        from game_files import refusal
         for k, p in BINARIES.items():
             if p.exists():
+                problem = refusal(p)
+                if problem:
+                    print(f"[!] NOT USED: {problem}")
+                    continue
                 img = BinaryImage(p)
                 self.images[k] = img
                 self.starts[k] = collect_call_targets(img)

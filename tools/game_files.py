@@ -36,6 +36,8 @@ import zipfile
 from pathlib import Path
 from typing import Callable, Dict, Iterator, List, Optional, Tuple
 
+# The only copies the project accepts (docs/GAME_VERSIONS.md). Every function's address and bytes
+# come from these exact files, so a match only means something against them.
 # name -> (accepted sha256 values, what it is)
 # default.xbe: the file as it is on the disc (4,718,592 bytes), or the longer copy some tools write,
 # which pads it to the header's image size with bytes from the next file on the disc. Every section
@@ -43,13 +45,14 @@ from typing import Callable, Dict, Iterator, List, Optional, Tuple
 EXPECTED: Dict[str, Tuple[Tuple[str, ...], str]] = {
     "default.xbe": (("dbcf8a3df01f94b879a4a3e642a9f6c3ab5027cc31bdb0229f10e0c6d140b0d6",
                      "b15dd7cb1cda9cd2ada8d13709c6409e8ff8a824de1e449a12257c69cc1954a0"),
-                    "Xbox retail game (USA/Europe disc)"),
+                    "Xbox, US disc"),
     "Scarface.exe": (("1c1dd03ff81592acfa43c45f461fbdc4818503c739cd2f127e0a61fe6a6969c6",),
-                     "PC game, US version 1.00.2"),
+                     "PC, US version 1.00.2"),
     "game.xbe": (("ecd980d0f25c444d263c968b8e4032e1707e0e684a422483890257ee12ec0384",),
                  "Xbox prototype, April 20 2006"),
 }
 PC_EXE_SIZE = 8462848
+GUIDE = "docs/GAME_VERSIONS.md"
 REQUIRED_ONE_OF = ("default.xbe", "Scarface.exe")
 ARCHIVES = (".zip", ".7z")
 DISC_IMAGES = (".iso", ".xiso")
@@ -88,6 +91,52 @@ def check(path: Path) -> str:
     return "ok" if sha256_of(path) in EXPECTED[path.name][0] else "different"
 
 
+def describe(path: Path) -> str:
+    """What a game file says about itself (version, build date, region), for telling people why it
+    isn't the accepted one."""
+    import datetime
+    try:
+        data = path.read_bytes()
+    except OSError as e:
+        return f"unreadable ({e})"
+    size = f"{len(data):,} bytes"
+    if data[:4] == b"XBEH" and len(data) > 0x180:
+        try:
+            base, = struct.unpack_from("<I", data, 0x104)
+            built, = struct.unpack_from("<I", data, 0x114)
+            cert = struct.unpack_from("<I", data, 0x118)[0] - base
+            title_id, = struct.unpack_from("<I", data, cert + 8)
+            region, = struct.unpack_from("<I", data, cert + 0xA0)
+            disc, = struct.unpack_from("<I", data, cert + 0xAC)
+            regions = [n for bit, n in ((1, "North America"), (2, "Japan"), (4, "rest of the world")) if region & bit]
+            when = datetime.datetime.fromtimestamp(built, datetime.timezone.utc).strftime("%Y-%m-%d")
+            return (f"an Xbox program built {when}, title ID {title_id:08X}, disc version {disc}, "
+                    f"regions: {', '.join(regions) or 'none'}{' (debug build)' if region & 0x80000000 else ''}; {size}")
+        except struct.error:
+            return f"an Xbox program with a damaged header; {size}"
+    if data[:2] == b"MZ":
+        mark = "FileVersion".encode("utf-16le")
+        i = data.find(mark)
+        if i > 0:
+            raw = data[i + len(mark):i + len(mark) + 40].decode("utf-16le", "replace")
+            ver = "".join(ch for ch in raw.lstrip("\0").split("\0")[0] if ch.isdigit() or ch == ".").strip(".")
+            if ver:
+                return f"a Windows program, file version {ver}; {size}"
+        return f"a Windows program; {size}"
+    return f"not a game program; {size}"
+
+
+def refusal(path: Path) -> Optional[str]:
+    """None if the file is the accepted one (or isn't there); otherwise why it can't be used."""
+    path = Path(path)
+    if path.name not in EXPECTED or check(path) != "different":
+        return None
+    want = EXPECTED[path.name][1]
+    return (f"binaries/{path.name} is not the {want} copy this project uses. It is {describe(path)}. "
+            f"Other versions and regions have different code at different addresses, so matches made "
+            f"against it would not count. See {GUIDE} for the accepted versions.")
+
+
 def _place(dest: Path, data_or_src, log: Log, origin: str) -> None:
     """Write bytes (or copy a file) to dest atomically, then report how it compares."""
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -98,7 +147,7 @@ def _place(dest: Path, data_or_src, log: Log, origin: str) -> None:
         shutil.copyfile(data_or_src, part)
     os.replace(part, dest)
     state = check(dest)
-    note = "" if state == "ok" else "  (a different build from the one this project uses; see below)"
+    note = "" if state == "ok" else "  (not the accepted version; see below)"
     log(f"    + {dest.name}: taken from {origin}{note}")
 
 
@@ -502,8 +551,9 @@ def _report(status: Dict[str, str], bin_dir: Path, pc_disc, patch, log: Log) -> 
         if state == "ok":
             log(f"  {name:<13} ready ({what})")
         elif state == "different":
-            log(f"  {name:<13} found, but it is not the {what} build the project uses. Functions may")
-            log(f"  {'':<13} not line up; use the {what} build if you can.")
+            log(f"  {name:<13} NOT USED: it is not the {what} copy this project uses.")
+            log(f"  {'':<13} It is {describe(bin_dir / name)}.")
+            log(f"  {'':<13} Only the {what} copy is accepted; see {GUIDE}.")
     if all(status[n] == "missing" for n in REQUIRED_ONE_OF):
         log("")
         log("  No game files yet, so the portal has nothing to show.")
