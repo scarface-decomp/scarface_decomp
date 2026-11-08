@@ -40,6 +40,10 @@ naming classes and documenting the engine. You don't need to be an expert: the p
 function at a time, shows the original bytes and disassembly, and tells you exactly how close your
 C++ is. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
+**PS2 or Wii?** Those versions aren't in the portal yet, and anyone who wants to start a PS2 (or Wii)
+decomp is welcome to. The PS2 version has things the PC lacks, such as its own blood effects and
+explosion sounds. What we know so far and what it would take: [docs/OTHER_VERSIONS.md](docs/OTHER_VERSIONS.md).
+
 ## What "verified" means
 
 A function counts only when the compiled C++:
@@ -144,6 +148,7 @@ python tools/queue_builder.py      # rebuild the work queue from the binaries
 | `website_kit/index.html` | The portal's web page. |
 | `docs/index.html` | The public project website: live progress and every verified function (see `docs/README.md`). |
 | `docs/METHODOLOGY.md` | Verification rules and code generation notes. |
+| `docs/OTHER_VERSIONS.md` | The PS2 and Wii versions: what is known, and what a decomp of them would need. |
 | `SCARFACE_DECOMP_AI_HANDOFF.md`, `AGENTS.md` | Brief for AI assistants (served by the portal at `/download/ai-handoff`), and how an agent uses the portal API. |
 | `tests/` | Test suite (`python -m pytest -q tests/`). |
 
