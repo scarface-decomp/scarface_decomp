@@ -90,32 +90,7 @@ def find_relocations(code: bytes, va: int, image) -> List[Reloc]:
         elif lo <= value < hi and image.section_of(value) is not None:
             relocs[field_off] = Reloc(field_off, address_symbol(image, value), IMAGE_REL_I386_DIR32)
 
-    off = 0
-    while off < n:
-        if off in data_regions:
-            kind = data_regions[off]
-            nxt = min([s for s in data_regions if s > off] + [n])
-            if kind == "dword":
-                while off + 4 <= nxt:
-                    entry = struct.unpack_from("<I", code, off)[0]
-                    if not (va <= entry < end):
-                        break
-                    relocs[off] = Reloc(off, SECTION_SYMBOL, IMAGE_REL_I386_DIR32, entry - va)
-                    off += 4
-                if off < nxt and off not in data_regions:
-                    continue          # whatever follows the table is decoded again
-            else:
-                off = nxt
-            continue
-        insn = next(md.disasm(code[off:off + 16], va + off, 1), None)
-        if insn is None:
-            off += 1
-            continue
-        # An instruction that would run into a known table is really padding: stop at the table.
-        later = [s for s in data_regions if off < s < off + insn.size]
-        if later:
-            off = min(later)
-            continue
+    def analyze(insn, off: int) -> None:
         is_branch = insn.group(capstone.CS_GRP_JUMP) or insn.group(capstone.CS_GRP_CALL)
         for op in insn.operands:
             if op.type == X.X86_OP_IMM and insn.imm_size == 4 and insn.imm_offset:
@@ -137,7 +112,42 @@ def find_relocations(code: bytes, va: int, image) -> List[Reloc]:
                         data_regions.setdefault(t, "dword")      # jmp dword ptr [reg*4 + table]
                     elif op.size == 1:
                         data_regions.setdefault(t, "byte")       # movzx reg, byte ptr [reg + index]
-        off += insn.size
+
+    off = 0
+    while off < n:
+        if off in data_regions:
+            # Each table is read once: popping it means a "table" that turns out not to be one
+            # (its first entry points outside the function) is simply decoded as code instead.
+            kind = data_regions.pop(off)
+            nxt = min([s for s in data_regions if s > off] + [n])
+            if kind == "dword":
+                while off + 4 <= nxt:
+                    entry = struct.unpack_from("<I", code, off)[0]
+                    if not (va <= entry < end):
+                        break
+                    relocs[off] = Reloc(off, SECTION_SYMBOL, IMAGE_REL_I386_DIR32, entry - va)
+                    off += 4
+                if off < nxt and off not in data_regions:
+                    continue          # whatever follows the table is decoded again
+            else:
+                off = nxt
+            continue
+        # One disassembly pass until a table, an undecodable byte or the end (fast path).
+        stopped_at_region = False
+        for insn in md.disasm(code[off:], va + off):
+            # An instruction that would run into a known table is really padding: stop at the table.
+            later = [s for s in data_regions if off < s < off + insn.size]
+            if later:
+                off = min(later)
+                stopped_at_region = True
+                break
+            analyze(insn, off)
+            off += insn.size
+            if off in data_regions:
+                stopped_at_region = True
+                break
+        if not stopped_at_region and off < n:
+            off += 1                  # a byte Capstone cannot decode: step over it
     return [relocs[k] for k in sorted(relocs)]
 
 

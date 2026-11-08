@@ -55,3 +55,36 @@ def test_extract_scripts_cli(tmp_path, capsys):
     assert not (out / "art").exists()                           # only scripts are copied
     assert "3 of them scripts" in capsys.readouterr().out
     assert mod.main([str(tmp_path / "missing.rcf")]) == 1
+
+
+def tiny_iso(rcf: bytes) -> bytes:
+    """A minimal ISO 9660 image holding one file, CEMENT.RCF, enough for find_in_iso."""
+    S = 2048
+    def rec(name: bytes, lba: int, size: int, flags: int) -> bytes:
+        n = 33 + len(name) + (1 - len(name) % 2)
+        r = bytearray(n)
+        r[0] = n
+        struct.pack_into("<I", r, 2, lba); struct.pack_into(">I", r, 6, lba)
+        struct.pack_into("<I", r, 10, size); struct.pack_into(">I", r, 14, size)
+        r[25] = flags; r[32] = len(name); r[33:33 + len(name)] = name
+        return bytes(r)
+    root = rec(b"\0", 20, S, 2) + rec(b"\1", 20, S, 2) + rec(b"CEMENT.RCF;1", 21, len(rcf), 0)
+    img = bytearray(21 * S)
+    pvd = bytearray(S); pvd[0] = 1; pvd[1:6] = b"CD001"; pvd[156:156 + 34] = rec(b"\0", 20, S, 2)
+    img[16 * S:17 * S] = pvd
+    img[20 * S:20 * S + len(root)] = root
+    return bytes(img) + rcf
+
+
+def test_reads_cement_rcf_inside_a_disc_image(tmp_path):
+    p = tmp_path / "game.iso"
+    p.write_bytes(tiny_iso(R.build_rcf(FILES)))
+    arc = R.open_rcf(p)
+    assert [e.name for e in arc.find()] == [n for n, _ in FILES[:3]]
+    assert arc.read(arc.entries[1]) == FILES[1][1]
+    empty = tmp_path / "other.iso"
+    img = bytearray(tiny_iso(b""))
+    img[20 * 2048 + 34 * 2 + 33:20 * 2048 + 34 * 2 + 43] = b"OTHER.RCF;"
+    empty.write_bytes(bytes(img))
+    with pytest.raises(R.RcfError, match="no CEMENT.RCF"):
+        R.open_rcf(empty)

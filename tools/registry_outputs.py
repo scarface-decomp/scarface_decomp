@@ -98,8 +98,10 @@ def status_block(registry: dict) -> str:
         STATUS_START,
         "| | PC `Scarface.exe` 1.00.2 | Xbox `default.xbe` | Total |",
         "| :--- | ---: | ---: | ---: |",
-        f"| Verified functions | {by['pc']:,} | {by['xb']:,} | **{len(entries):,}** |",
+        f"| Verified functions | {by['pc']:,} | {by['xb']:,} | **{by['pc'] + by['xb']:,}** |",
         "",
+    ] + ([f"Plus {by['proto']:,} in the April 2006 Xbox prototype (`game.xbe`), a bonus that is not in the total.", ""]
+         if by["proto"] else []) + [
         (f"{small:,} of them are under 10 bytes and the largest is {largest:,} bytes, so the medium and large "
          "functions are where the work is." if entries else
          "Nothing is verified yet: the count was reset on 2026-11-08 so every function is rebuilt and checked "
@@ -143,9 +145,12 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         "schema": "scarface_progress_v1",
         "updated_at": max(stamps) if stamps else (registry.get("reset") or {}).get("at", ""),
         "compiler": registry.get("compiler", ""),
-        "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "total": len(entries),
-                     "bytes": sum(int(e.get("size", 0)) for e in entries)},
-        "size_buckets": {name: sum(1 for e in entries if lo <= int(e.get("size", 0)) < hi) for name, lo, hi in SIZE_BUCKETS},
+        # "total" and "bytes" are the retail game (PC + Xbox); the April 2006 prototype is a bonus,
+        # counted only under "proto".
+        "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "total": by["pc"] + by["xb"],
+                     "bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] != "proto")},
+        "size_buckets": {name: sum(1 for e in entries if e["bin"] != "proto" and lo <= int(e.get("size", 0)) < hi)
+                         for name, lo, hi in SIZE_BUCKETS},
         "contributors": dict(sorted(contributors.items(), key=lambda kv: (-kv[1], kv[0].lower()))),
         "unattributed": sum(1 for e in entries if not e.get("verified_by")),
         "queue": (previous or {}).get("queue"),
@@ -156,8 +161,10 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         tiers = defaultdict(int)
         for t in open_tasks:
             q[t.get("bin", "?")] += 1
-            tiers[t.get("tier", "?")] += 1
-        out["queue"] = {"pc": q["pc"], "xb": q["xb"], "total": len(open_tasks), "tiers": dict(sorted(tiers.items()))}
+            if t.get("bin") != "proto":
+                tiers[t.get("tier", "?")] += 1
+        out["queue"] = {"pc": q["pc"], "xb": q["xb"], "proto": q["proto"], "total": q["pc"] + q["xb"],
+                        "tiers": dict(sorted(tiers.items()))}
     return out
 
 

@@ -26,7 +26,8 @@ Nothing is verified yet: the count was reset on 2026-11-08 so every function is 
 
 Every number here is produced by the compiler, not typed by hand: `scripts/reverify_all.py` recompiles
 every claimed function with the real compiler, and the portal adds each new match the moment it
-verifies. The work queue holds the whole game, about 21,000 functions;
+verifies. The work queue holds every function that can be read: all of the Xbox version's game code
+and the readable tenth of PC 1.00.2 (the rest of the PC file is encrypted), about 21,000 functions;
 `python verify.py --status` prints the exact numbers, and `reports/reverify_report.md` lists every
 claimed function and why it does or does not count.
 
@@ -59,7 +60,9 @@ The full procedure, with code generation notes for this compiler, is in
 2. **Download this project**: on GitHub press **Code**, then **Download ZIP**, and unzip it anywhere
    (or `git clone` it).
 3. **Add your game files** to the `binaries` folder: `Scarface.exe` (PC 1.00.2) and/or `default.xbe`
-   (Xbox). `game.xbe` (April 2006 prototype) is optional. They never leave your computer.
+   (Xbox). They never leave your computer. `game.xbe` (the April 20, 2006 Xbox prototype) is
+   optional: with it, the prototype's functions are added as a bonus lane, counted apart from the
+   retail total.
 4. **Start the portal**: on Windows double-click **`START_PORTAL.bat`**; on macOS or Linux run
    `sh start_portal.sh`. It installs what it needs the first time and opens http://localhost:8085.
 5. **Pick a small function** and press **decomp.me**. It opens on [decomp.me](https://decomp.me), which
@@ -92,16 +95,21 @@ in `reports/verified_registry.json` under `binaries`.
 **In the portal** (http://localhost:8085): sign in with a handle and a PIN of at least 8 characters,
 claim a function from the queue, write the C++ (in the editor, on decomp.me, or with your own AI key),
 and press **Compile & Verify**. A match is recorded in `reports/verified_registry.json`, and the
-generated source files are rewritten. Manual start: `pip install -r requirements.txt`, then
+generated source files are rewritten. About 4,600 functions are look-alikes of another (the same
+machine code with different addresses); after a match the portal swaps the addresses and names into
+your code, verifies it on each look-alike and credits you for every exact match
+([tools/lookalikes.py](tools/lookalikes.py)). The queue lists one function of each group first. Manual start: `pip install -r requirements.txt`, then
 `python decomp_portal_server.py`.
 
-| Variable | Default | |
+| Variable | Default | What it does |
 | :--- | :--- | :--- |
 | `SCARFACE_HOST` | `127.0.0.1` | interface to listen on; the portal is local-only by default |
-| `SCARFACE_PORT` | `8085` | |
+| `SCARFACE_PORT` | `8085` | port the portal listens on |
 | `SCARFACE_MAINTAINERS` | `RRutherrfordd (Founder)` | handles allowed to use "Sync Verified to GitHub" |
 | `SCARFACE_NO_BROWSER` | unset | `1` stops it opening a browser |
 | `SCARFACE_DECOMPME_URL` | `https://decomp.me` | where the decomp.me button sends functions |
+| `SCARFACE_LOOKALIKE_MAX` | `1000` | how many look-alikes a new match is tried on |
+| `SCARFACE_MSVC_BIN` | `tools/msvc71/bin` | where `cl.exe` 13.10.3052 is, if not there |
 
 **From the command line**, with the same rules:
 
@@ -128,7 +136,7 @@ python tools/queue_builder.py      # rebuild the work queue from the binaries
 | `include/` | Shared headers. |
 | `reports/verified_registry.json` | The record of what is verified, with the code, flags and who verified it. |
 | `reports/reverify_report.md` | Every claimed function, its status and the reason. |
-| `tools/` | Verifier (`msvc_verify.py`), binary reader, queue builder, C++ policy, decomp.me export (`decompme.py`), script-format tools. |
+| `tools/` | Verifier (`msvc_verify.py`), binary reader, queue builder, C++ policy, decomp.me export (`decompme.py`), look-alike grouping (`lookalikes.py`), script-format tools (`torque_dso.py`, `rcf.py`). |
 | `START_PORTAL.bat`, `start_portal.sh` | Double-click (Windows) or `sh` (macOS, Linux) launchers for the portal. |
 | `scripts/extract_scripts.py`, `tools/rcf.py` | Copy the game's script files out of your own `cement.rcf` (see `docs/SCRIPTS.md`). |
 | `scripts/` | Compiler setup, re-verification, maintenance. |

@@ -21,6 +21,7 @@
   "queue": {
     "pc": 1516,
     "xb": 19565,
+    "proto": 17918,
     "total": 21081,
     "tiers": {
       "TIER_1_QUICK": 3735,

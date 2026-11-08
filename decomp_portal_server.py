@@ -25,6 +25,7 @@ import hashlib
 import hmac
 import json
 import os
+import queue as queue_mod
 import re
 import secrets
 import subprocess
@@ -45,6 +46,7 @@ sys.path.insert(0, str(BASE_DIR / "tools"))
 import msvc_verify as MV  # noqa: E402
 from disasm_synth import disassemble, synthesize_cpp  # noqa: E402
 import decompme as DME  # noqa: E402
+import lookalikes as LA  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 
@@ -82,6 +84,12 @@ REGISTRY: dict = {"entries": {}}
 _IMAGES: Dict[str, Optional[BinaryImage]] = {}
 _FAILS: Dict[str, List[float]] = {}
 _COMPILER: Dict[str, str] = {}
+GROUPS: Dict[str, List[dict]] = {}          # look-alike group id -> tasks (tools/lookalikes.py)
+BY_SYMBOL: Dict[str, List[dict]] = {}       # "Class::vfunc_NN" -> the same method in each build
+BUILD_NAMES = {"xb": "the retail Xbox game", "pc": "the PC game", "proto": "the April 2006 prototype"}
+PORT_STATUS: Dict[str, dict] = {}           # task id -> progress of carrying its match to its look-alikes
+PORT_JOBS: "queue_mod.Queue" = queue_mod.Queue()
+PORT_MAX = int(os.environ.get("SCARFACE_LOOKALIKE_MAX", "1000"))
 
 for d in (RECON_DIR, REPORTS_DIR, PRIVATE_DIR):
     d.mkdir(parents=True, exist_ok=True)
@@ -185,6 +193,9 @@ def _migrate_legacy_auth() -> None:
         print(f"[*] Moved {LEGACY_AUTH_JSON.name} to private/ (it must not be committed).")
 
 
+_HANDLE_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 _.\-()']{1,39}$")     # for new handles; old ones keep working
+
+
 def authenticate(user: str, pin: str, allow_register: bool = True) -> Tuple[bool, str]:
     user = (user or "").strip()
     pin = (pin or "").strip()
@@ -218,6 +229,9 @@ def authenticate(user: str, pin: str, allow_register: bool = True) -> Tuple[bool
             return True, "OK"
         if not allow_register:
             return False, "Unknown handle."
+        if not _HANDLE_RE.match(user):
+            return False, ("Handles use letters, numbers, spaces and _ . - ( ) ' and are 2-40 characters long, "
+                           "starting with a letter or number.")
         if len(pin) < MIN_NEW_PIN_LEN:
             return False, f"New handles need a PIN/password of at least {MIN_NEW_PIN_LEN} characters."
         auth[user] = _make_token(pin)
@@ -260,17 +274,23 @@ def task_key(t: dict) -> str:
 
 
 def progress() -> dict:
+    """The headline numbers are the retail game (PC + Xbox). The April 2006 prototype is a bonus lane,
+    counted on its own under "prototype"."""
     entries = REGISTRY.get("entries", {})
     by_bin = Counter(e["bin"] for e in entries.values())
-    remaining = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED")
-    total = remaining + len(entries)
+    retail = [e for e in entries.values() if e["bin"] != "proto"]
+    remaining = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] != "proto")
+    total = remaining + len(retail)
+    proto_left = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] == "proto")
+    proto_done = by_bin.get("proto", 0)
     return {
-        "matched_functions": len(entries),
+        "matched_functions": len(retail),
         "total_functions": total,
-        "matched_percent": round(len(entries) / total * 100.0, 2) if total else 0.0,
-        "matched_bytes": sum(int(e.get("size", 0)) for e in entries.values()),
-        "by_binary": {"pc": by_bin.get("pc", 0), "xbox": by_bin.get("xb", 0), "proto": by_bin.get("proto", 0)},
-        "total_label": "verified / (verified + functions in the work queue)",
+        "matched_percent": round(len(retail) / total * 100.0, 2) if total else 0.0,
+        "matched_bytes": sum(int(e.get("size", 0)) for e in retail),
+        "by_binary": {"pc": by_bin.get("pc", 0), "xbox": by_bin.get("xb", 0), "proto": proto_done},
+        "prototype": {"matched": proto_done, "total": proto_done + proto_left},
+        "total_label": "verified / (verified + functions in the work queue), retail PC and Xbox",
         "compiler": compiler_version(),
     }
 
@@ -300,9 +320,15 @@ def load_tasks() -> None:
     tasks = read_json(QUEUE_JSON, None)
     if not tasks:
         print("[*] Building the work queue from the binaries (first run; takes a few minutes)...")
-        from queue_builder import build_queue
-        tasks = build_queue(BINARIES, None, set(REGISTRY["entries"]), progress=print)
+        from queue_builder import build_queue, seed_data
+        tasks = build_queue(BINARIES, None, set(REGISTRY["entries"]), progress=print, **seed_data(BASE_DIR))
         write_json(QUEUE_JSON, tasks)
+    if any("lookalikes" not in t for t in tasks if "fva_int" in t):
+        images = {b: image_for(b) for b in ("pc", "xb", "proto") if image_for(b)}
+        if images:
+            print("[*] Grouping look-alike functions (once; about 15 seconds)...")
+            LA.annotate([t for t in tasks if "fva_int" in t], images)
+            write_json(QUEUE_JSON, tasks)
     verified = set(REGISTRY["entries"])
     out = []
     for t in tasks:
@@ -323,6 +349,15 @@ def load_tasks() -> None:
         out.append(t)
     ALL_TASKS = out
     TASK_BY_ID = {t["id"]: t for t in ALL_TASKS}
+    GROUPS.clear()
+    BY_SYMBOL.clear()
+    for t in ALL_TASKS:
+        if t.get("lookalike_group"):
+            GROUPS.setdefault(t["lookalike_group"], []).append(t)
+        if "::" in t["symbol"]:
+            BY_SYMBOL.setdefault(t["symbol"], []).append(t)
+    for same in BY_SYMBOL.values():
+        same.sort(key=lambda m: ("xb", "pc", "proto").index(m["bin"]) if m["bin"] in ("xb", "pc", "proto") else 9)
     overlay = read_json(OVERLAY_JSON, {})
     for tid, data in overlay.items():
         t = TASK_BY_ID.get(tid)
@@ -367,15 +402,70 @@ def target_bytes(t: dict) -> Optional[bytes]:
     return img.read(t["fva_int"], int(t["size"])) if img else None
 
 
+def relocs_for(t: dict) -> Optional[list]:
+    img = image_for(t["bin"])
+    code = img.read(t["fva_int"], int(t["size"])) if img else None
+    return LA.signature(code, t["fva_int"], img)[1] if code else None
+
+
+def lookalike_starter(t: dict) -> Tuple[str, str]:
+    """C++ from an already matched look-alike, rewritten for t: (code, id it came from) or ("", "")."""
+    mine = None
+    for m in LA.members(GROUPS, t):
+        e = REGISTRY["entries"].get(task_key(m)) if m["status"] == "VERIFIED" else None
+        if not e or not (e.get("code") or "").strip():
+            continue
+        if mine is None:
+            mine = relocs_for(t)
+            if mine is None:
+                return "", ""
+        theirs = relocs_for(m)
+        ported = LA.port_code(e["code"], m, theirs, t, mine) if theirs is not None else None
+        if ported:
+            return ported, m["id"]
+    return "", ""
+
+
+def counterparts(t: dict) -> List[dict]:
+    """The same class method in the other builds (retail Xbox, PC, prototype), whatever its code."""
+    return [m for m in BY_SYMBOL.get(t["symbol"], []) if m is not t and m["bin"] != t["bin"]] if "::" in t["symbol"] else []
+
+
+def counterpart_starter(t: dict) -> Tuple[str, str]:
+    """When the same method is already matched in another build but its code differs here, its C++ is
+    still the best place to start: (code, id it came from) or ("", "")."""
+    for m in counterparts(t):
+        e = REGISTRY["entries"].get(task_key(m)) if m["status"] == "VERIFIED" else None
+        if e and (e.get("code") or "").strip():
+            head = (f"// {t['symbol']} is already matched in {BUILD_NAMES.get(m['bin'], m['bin'])} ({m['va']}); this is\n"
+                    f"// that code. This build's machine code is different, so expect to change a few things.\n")
+            return head + e["code"].strip() + "\n", m["id"]
+    return "", ""
+
+
 def live_task(t: dict) -> dict:
     out = {k: v for k, v in t.items() if k not in ("best_cpp",)}
     tb = target_bytes(t)
     out["target_hex"] = " ".join(f"{b:02X}" for b in tb) if tb else ""
     out["disasm_lines"] = disassemble(tb) if tb else ["(binary not present in binaries/)"]
+    others = LA.members(GROUPS, t)
+    out["lookalikes"] = len(others)
+    out["lookalike_done"] = sum(1 for m in others if m["status"] == "VERIFIED")
+    out["lookalike_list"] = [{k: m[k] for k in ("id", "symbol", "va", "status")} for m in others[:12]]
+    out["counterparts"] = [{"id": m["id"], "build": BUILD_NAMES.get(m["bin"], m["bin"]), "va": m["va"],
+                            "status": m["status"]} for m in counterparts(t)]
     if (t.get("best_cpp") or "").strip():
         out["starter_cpp"] = t["best_cpp"]
     elif not (t.get("starter_cpp") or "").strip():
-        out["starter_cpp"] = synthesize_cpp(t["symbol"], t["va"], tb or b"", out["disasm_lines"])
+        code, src, kind = "", "", ""
+        if t["status"] != "VERIFIED" and out["lookalike_done"]:
+            code, src = lookalike_starter(t)
+            kind = "lookalike" if code else ""
+        if not code and t["status"] != "VERIFIED":
+            code, src = counterpart_starter(t)
+            kind = "counterpart" if code else ""
+        out["starter_cpp"] = code or synthesize_cpp(t["symbol"], t["va"], tb or b"", out["disasm_lines"])
+        out["starter_from"], out["starter_kind"] = src, kind
     out["server_now"] = now_ts()
     return out
 
@@ -398,7 +488,8 @@ def decompme_prepare(t: dict) -> dict:
 
 def queue_item(t: dict, n: int) -> dict:
     return {k: t.get(k) for k in ("id", "lane", "symbol", "va", "size", "tier", "tier_label", "est_label",
-                                   "lease_minutes", "status", "claimed_by", "best_matched_bytes", "best_pct", "best_by")} | {
+                                   "lease_minutes", "status", "claimed_by", "best_matched_bytes", "best_pct", "best_by",
+                                   "lookalikes")} | {
         "claim_remaining_sec": max(0, t.get("claim_expires_at", 0) - n) if t["status"] == "CLAIMED" else None}
 
 
@@ -446,7 +537,8 @@ def run_verify(t: dict, cpp_code: str) -> dict:
     return best
 
 
-def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict) -> None:
+def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, ported_from: str = "",
+                    write: bool = True) -> None:
     key = task_key(t)
     REGISTRY["entries"][key] = {
         "bin": t["bin"], "va": f"0x{t['fva_int']:08X}", "size": int(t["size"]), "symbol": t["symbol"],
@@ -455,9 +547,109 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict) -> 
         "verified_at": stamp(), "code": cpp_code.strip(),
         "note": f"{res.get('reloc_unverified', 0)} external relocation(s) unchecked" if res.get("reloc_unverified") else "",
     }
+    if ported_from:
+        REGISTRY["entries"][key]["ported_from"] = ported_from
+    if write:
+        save_registry()
+
+
+def save_registry() -> None:
     REGISTRY["compiler"] = compiler_version()
     write_json(REGISTRY_JSON, REGISTRY)
     write_outputs(REGISTRY, RECON_DIR)
+
+
+# =========================================================================== #
+# Look-alikes: carry a new match over to functions with the same machine code
+# =========================================================================== #
+
+def lookalike_summary() -> dict:
+    """How many functions are look-alikes of another one (so one match covers them)."""
+    return {"groups": len(GROUPS), "extra": sum(len(v) - 1 for v in GROUPS.values()), "functions": len(ALL_TASKS)}
+
+
+def _held_by_someone_else(m: dict, user: str) -> bool:
+    return (m["status"] == "CLAIMED" and m.get("claimed_by") not in ("", user)
+            and now_ts() < m.get("claim_expires_at", 0))
+
+
+def lookalike_targets(t: dict, user: str) -> List[dict]:
+    """Unmatched look-alikes of t that nobody else is working on right now."""
+    with STATE_LOCK:
+        return [m for m in LA.members(GROUPS, t)
+                if m["status"] != "VERIFIED" and not _held_by_someone_else(m, user)][:PORT_MAX]
+
+
+def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str) -> dict:
+    """Rewrite t's matched C++ for each look-alike, compile and verify it. Only exact matches whose
+    every address is checked are recorded, credited to the same person."""
+    targets = lookalike_targets(t, user)
+    st = PORT_STATUS.setdefault(t["id"], {})
+    st.update(running=True, total=len(targets), tried=0, matched=0, matched_ids=[])
+    src_relocs = relocs_for(t)
+    unsaved = 0
+    for m in targets:
+        dst_relocs = relocs_for(m)
+        ported = (LA.port_code(cpp_code, t, src_relocs, m, dst_relocs)
+                  if src_relocs is not None and dst_relocs is not None else None)
+        res = run_verify(m, ported) if ported else {"ok": False}
+        st["tried"] += 1
+        if not (res.get("ok") and res.get("verified") and not res.get("reloc_unverified")):
+            continue
+        with STATE_LOCK:
+            if m["status"] == "VERIFIED" or _held_by_someone_else(m, user):
+                continue
+            record_verified(m, ported, user, tool, res, ported_from=t["id"], write=False)
+            m.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
+            save_overlay(m)
+            st["matched"] += 1
+            st["matched_ids"].append(m["id"])
+            unsaved += 1
+            if unsaved >= 50:
+                save_registry()
+                unsaved = 0
+    with STATE_LOCK:
+        if unsaved:
+            save_registry()
+        if st["matched"]:
+            append_audit({"time": stamp(), "user": user, "action": "VERIFIED",
+                          "symbol": f"{st['matched']} look-alike(s) of {t['symbol']}", "va": t["va"],
+                          "bytes": "same code, own addresses"})
+            print(f"[+] {st['matched']} look-alike(s) of {t['symbol']} matched too -> {len(REGISTRY['entries'])} total")
+        st["running"] = False
+    return st
+
+
+def _port_worker() -> None:
+    while True:
+        job = PORT_JOBS.get()
+        try:
+            port_lookalikes(*job)
+        except Exception:  # keep the worker alive
+            import traceback
+            traceback.print_exc()
+            st = PORT_STATUS.get(job[0]["id"])
+            if st:
+                st["running"] = False
+        finally:
+            PORT_JOBS.task_done()
+
+
+_PORT_THREAD: List[threading.Thread] = []
+
+
+def queue_port(t: dict, cpp_code: str, user: str, tool: str) -> int:
+    """Start carrying t's match to its look-alikes in the background; returns how many will be tried."""
+    n = len(lookalike_targets(t, user))
+    if not n:
+        return 0
+    PORT_STATUS[t["id"]] = {"running": True, "total": n, "tried": 0, "matched": 0, "matched_ids": []}
+    if not _PORT_THREAD:
+        th = threading.Thread(target=_port_worker, name="lookalikes", daemon=True)
+        th.start()
+        _PORT_THREAD.append(th)
+    PORT_JOBS.put((t, cpp_code, user, tool))
+    return n
 
 
 # =========================================================================== #
@@ -504,6 +696,11 @@ def _err(status: int, raw: str, key: str) -> str:
     return f"HTTP {status}: {text}"
 
 
+def _rejects_temperature(st: int, raw: str) -> bool:
+    """Newer reasoning models only accept their default temperature and answer 400 when one is set."""
+    return st == 400 and "temperature" in raw.lower()
+
+
 def _openai_style(url: str, key: str, model: str, prompt: str, extra_headers: Optional[dict] = None) -> Tuple[bool, str, str]:
     body = {"model": model, "messages": [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}]}
     if not re.match(r"^o\d", model):
@@ -511,6 +708,9 @@ def _openai_style(url: str, key: str, model: str, prompt: str, extra_headers: Op
     headers = {"Authorization": f"Bearer {key}"} if key else {}
     headers.update(extra_headers or {})
     st, j, raw = _http_json(url, body, headers)
+    if "temperature" in body and _rejects_temperature(st, raw):
+        body.pop("temperature")
+        st, j, raw = _http_json(url, body, headers)
     if st != 200:
         return False, _err(st, raw, key), model
     try:
@@ -527,7 +727,11 @@ def _gemini(key: str, model: str, prompt: str) -> Tuple[bool, str, str]:
     hdr = {"x-goog-api-key": key}
 
     def call(m: str):
-        st, j, raw = _http_json(f"{base}/models/{urllib.parse.quote(m)}:generateContent", body, hdr)
+        url = f"{base}/models/{urllib.parse.quote(m)}:generateContent"
+        st, j, raw = _http_json(url, body, hdr)
+        if _rejects_temperature(st, raw) and body.get("generationConfig"):
+            body.pop("generationConfig")
+            st, j, raw = _http_json(url, body, hdr)
         if st == 200:
             parts = ((j.get("candidates") or [{}])[0].get("content") or {}).get("parts") or []
             return True, "".join(p.get("text", "") for p in parts), m, st
@@ -574,8 +778,11 @@ def ai_call(cfg: dict) -> dict:
         elif provider == "anthropic":
             body = {"model": model, "max_tokens": 8192, "system": SYSTEM_PROMPT, "temperature": 0.2,
                     "messages": [{"role": "user", "content": prompt}]}
-            st, j, raw = _http_json("https://api.anthropic.com/v1/messages", body,
-                                    {"x-api-key": key, "anthropic-version": "2023-06-01"})
+            hdrs = {"x-api-key": key, "anthropic-version": "2023-06-01"}
+            st, j, raw = _http_json("https://api.anthropic.com/v1/messages", body, hdrs)
+            if _rejects_temperature(st, raw):
+                body.pop("temperature")
+                st, j, raw = _http_json("https://api.anthropic.com/v1/messages", body, hdrs)
             if st != 200:
                 ok, text, used = False, _err(st, raw, key), model
             else:
@@ -709,8 +916,29 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"ok": False, "error": "Request body must be a JSON object."}, 400)
             return None
 
+    def _allowed(self) -> bool:
+        """The portal is for this computer's browser. Refuse requests that a web page on another site
+        makes through the visitor's browser (cross-site POSTs), and requests whose Host header names
+        some other site (DNS rebinding). Answers with 403 and returns False when refused."""
+        local = HOST in ("127.0.0.1", "localhost", "::1")
+        host = (self.headers.get("Host") or "").strip().lower()
+        hostname = host.rsplit(":", 1)[0] if not host.startswith("[") else host.split("]")[0] + "]"
+        if local and host and hostname not in ("127.0.0.1", "localhost", "[::1]"):
+            self._json({"ok": False, "error": "This portal only answers on localhost."}, 403)
+            return False
+        if self.command == "POST":
+            origin = (self.headers.get("Origin") or "").strip().lower()
+            site = (self.headers.get("Sec-Fetch-Site") or "").strip().lower()
+            ok_origin = not origin or urllib.parse.urlparse(origin).netloc == host
+            if site == "cross-site" or not ok_origin:
+                self._json({"ok": False, "error": "Requests from other websites are not accepted."}, 403)
+                return False
+        return True
+
     # ---------------------------------------------------------------- GET
     def do_GET(self):
+        if not self._allowed():
+            return
         expire_leases()
         u = urllib.parse.urlparse(self.path)
         qs = urllib.parse.parse_qs(u.query)
@@ -732,7 +960,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"progress": progress(), "leaderboard": leaderboard(),
                                    "audit_log": read_json(AUDIT_JSON, []), "sources": list_sources(),
                                    "tier_counts": dict(tiers), "total_remaining_indexed": remaining,
-                                   "repo_url": REPO_URL})
+                                   "repo_url": REPO_URL, "lookalikes": lookalike_summary()})
         if u.path == "/api/source":
             name = q1("name")
             p = (RECON_DIR / name).resolve()
@@ -765,7 +993,11 @@ class Handler(BaseHTTPRequestHandler):
                     if q and q not in t["symbol"].lower() and q not in t["va"].lower():
                         continue
                     items.append(t)
-                if sort_by == "SIZE_ASC":
+                if sort_by == "DEFAULT":
+                    # One function of each look-alike group first, biggest group first: matching it
+                    # also matches the rest of its group.
+                    items.sort(key=lambda x: -x.get("lookalikes", 0) if x.get("lookalike_rep") else 0)
+                elif sort_by == "SIZE_ASC":
                     items.sort(key=lambda x: x["size"])
                 elif sort_by == "SIZE_DESC":
                     items.sort(key=lambda x: -x["size"])
@@ -788,6 +1020,18 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json(decompme_prepare(t))
             except (ValueError, RuntimeError) as e:
                 return self._json({"ok": False, "error": str(e)}, 400)
+        if u.path == "/api/lookalikes":
+            with STATE_LOCK:
+                t = TASK_BY_ID.get(q1("id"))
+                if not t:
+                    return self._json({"ok": False, "error": "Function not found."}, 404)
+                st = dict(PORT_STATUS.get(t["id"], {"running": False, "total": 0, "tried": 0, "matched": 0,
+                                                     "matched_ids": []}))
+                others = LA.members(GROUPS, t)
+                st.update(ok=True, lookalikes=len(others),
+                          done=sum(1 for m in others if m["status"] == "VERIFIED"),
+                          progress=progress(), leaderboard=leaderboard())
+            return self._json(st)
         if u.path == "/api/task":
             with STATE_LOCK:
                 t = TASK_BY_ID.get(q1("id"))
@@ -799,6 +1043,8 @@ class Handler(BaseHTTPRequestHandler):
 
     # --------------------------------------------------------------- POST
     def do_POST(self):
+        if not self._allowed():
+            return
         expire_leases()
         body = self._body()
         if body is None:
@@ -915,6 +1161,8 @@ class Handler(BaseHTTPRequestHandler):
             out = dict(res)
             out.update(newly_promoted=newly, progress=progress(), leaderboard=leaderboard(), task=live_task(t),
                        target_hex=" ".join(f"{b:02X}" for b in (target_bytes(t) or b"")))
+        # Same machine code elsewhere: try this code there too (in the background, verified one by one).
+        out["lookalikes_queued"] = queue_port(t, code, user, tool) if newly and not res.get("reloc_unverified") else 0
         return self._json(out)
 
     def post_decompme(self, body):
@@ -1005,6 +1253,13 @@ def main() -> None:
     print(f"  Compiler   : {p['compiler']}")
     print(f"  Verified   : {p['matched_functions']:,} functions (PC {p['by_binary']['pc']:,}, Xbox {p['by_binary']['xbox']:,})")
     print(f"  Work queue : {sum(1 for t in ALL_TASKS if t['status'] != 'VERIFIED'):,} functions")
+    print(f"  Look-alikes: {len(GROUPS):,} groups; a match in one is tried on the rest of its group")
+    if image_for("proto") and not any(t["bin"] == "proto" for t in ALL_TASKS):
+        print("  Prototype  : binaries/game.xbe is here but not in the queue yet. To add it (about 2 minutes):")
+        print("               python tools/queue_builder.py")
+    elif any(t["bin"] == "proto" for t in ALL_TASKS):
+        pp = p["prototype"]
+        print(f"  Prototype  : {pp['matched']:,} / {pp['total']:,} (April 2006 Xbox build; a bonus, not in the total)")
     print(f"  Maintainers: {', '.join(sorted(MAINTAINERS))}")
     print("=" * 78)
     if os.environ.get("SCARFACE_NO_BROWSER") != "1":

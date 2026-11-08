@@ -246,3 +246,27 @@ def test_faq_opens_and_needs_no_script(site, browser):
     q.locator("summary").click()
     assert q.evaluate("d => d.open") and pg.locator("#questions details[open] p").first.is_visible()
     ctx.close()
+
+
+@pytest.mark.parametrize("width", [1280, 820, 375])
+def test_table_of_contents(site, browser, width):
+    """The contents bar lists every section at every width, its links land on the sections below the
+    sticky bar, and it marks the section being read."""
+    _, url = site
+    ctx, pg = open_page(browser, url, viewport=(width, 800))
+    pg.wait_for_selector("#fn-list .fn")
+    links = pg.eval_on_selector_all("#toc a", "as => as.map(a => a.getAttribute('href'))")
+    assert links == ["#how", "#progress", "#help", "#questions", "#functions"]
+    for href in links:
+        assert pg.evaluate(f"!!document.getElementById('{href[1:]}')")
+    assert pg.evaluate("document.documentElement.scrollWidth") <= width + 1
+    pg.evaluate("document.documentElement.style.scrollBehavior = 'auto'")
+    for href in ("#questions", "#progress"):
+        pg.locator(f'#toc a[href="{href}"]').scroll_into_view_if_needed()
+        pg.click(f'#toc a[href="{href}"]')
+        pg.wait_for_function(f"document.querySelector('#toc a[href=\"{href}\"]').getAttribute('aria-current') === 'true'")
+        bar = pg.evaluate("document.querySelector('.topbar').getBoundingClientRect().bottom")
+        top = pg.evaluate(f"document.getElementById('{href[1:]}').getBoundingClientRect().top")
+        assert bar - 2 <= top <= bar + 40, (href, bar, top)      # just below the bar, not hidden under it
+    assert pg.errors == []
+    ctx.close()

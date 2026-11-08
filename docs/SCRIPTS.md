@@ -7,15 +7,26 @@ files go with them. All of them are packed in `scriptc\` inside `cement.rcf`.
 They get the same treatment as the C++: a version people can read, which is only counted when it is
 proven to turn back into **exactly the same bytes** as the game's file. Nothing is counted on looks.
 
+## What's in the files
+
+From the PS2 disc's `CEMENT.RCF` (4,764 files), checked on 2026-11-08:
+
+* **400 `.cso` and 235 `.dso`**: compiled TorqueScript, all version 1. They include the PC's own
+  scripts (for example `scriptc\actionmaps_Win32.cso` next to `actionmaps_PS2.cso`).
+* **14 `.cs`**: plain TorqueScript source that was left in the archive, small level-art scripts
+  such as `Renderer_PropCreateBegin("tonymansion_04_shell.p3d", "1");`. Useful as known examples.
+* **1 `.dtr`**: `ai\common.dtr` (28 KB). Not a Pure3D chunk file; the format is still unknown, and
+  the name suggests AI decision trees.
+
 ## Where things stand
 
 | Step | Status |
 |---|---|
-| 1. Get the files out of your own `cement.rcf` | **Ready**: `python scripts/extract_scripts.py path\to\cement.rcf` writes them to `binaries/scripts_and_data/` (never committed). |
-| 2. Read the compiled format exactly (header, string and float tables, bytecode, identifier table) and write it back byte for byte | Started: `tools/script_formats.py` checks this round trip. It still has to be confirmed on the real files. |
-| 3. Turn the bytecode into readable TorqueScript | Needs the real files; the format is documented by Broken Face (see Credits). |
+| 1. Get the files out of your own copy | **Done**: `python scripts/extract_scripts.py <cement.rcf or the PS2 .iso> --out binaries/scripts_and_data/ps2` (never committed). The PC disc keeps its files inside `DATA*.CAB`; use `cement.rcf` from an installed copy. The Xbox `.7z` needs unpacking first. |
+| 2. Read the compiled format exactly and write it back byte for byte | **Done**: `tools/torque_dso.py`. All 635 compiled scripts round-trip exactly. The portal's Scripts tab uses it. |
+| 3. Turn the bytecode into readable TorqueScript | Next. The opcode set is Scarface's own (83 opcodes, 0 to 85), documented by Broken Face. |
 | 4. Compile readable TorqueScript back to the original bytes, and only then count the script | To do. This is the script equivalent of Compile & Verify. |
-| 5. Work out what `.dtr` files are | To do. The game refers to `.dtr` next to its script folders (`scriptc/`, `resources.ds`). |
+| 5. Work out what `.dtr` files are | To do (one file so far). |
 
 Why TorqueScript and not plain C++? The scripts were written in TorqueScript, so that is the only
 language that can be compiled back to the exact original bytes. It reads much like C++ (functions,
@@ -34,6 +45,5 @@ progress once step 4 exists.
 
 ## Help wanted
 
-* Run step 1 on your copy (PC, Xbox or PS2) and report how many files each kind has.
-* Compare the PC, Xbox and PS2 scripts: identical files can be done once.
+* Run step 1 on the PC and Xbox versions and compare with the PS2 files: identical files only need doing once.
 * Anyone who knows TorqueScript's compiler (Torque Game Engine 1.x) is especially welcome on step 4.

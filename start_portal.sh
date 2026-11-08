@@ -15,5 +15,6 @@ if [ ! -x .venv/bin/python ]; then
   python3 -m venv .venv || { echo "Could not create .venv. On Debian/Ubuntu: sudo apt install python3-venv"; exit 1; }
 fi
 .venv/bin/python -m pip install --quiet --disable-pip-version-check -r requirements.txt || exit 1
-echo "Starting the portal at http://localhost:8085 (Ctrl+C stops it)."
+echo "Starting the portal at http://localhost:${SCARFACE_PORT:-8085} (Ctrl+C stops it)."
+echo "The first start takes a few minutes while it lists every function in your game files."
 exec .venv/bin/python decomp_portal_server.py

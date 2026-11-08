@@ -8,7 +8,9 @@ Differences from the old index builder in decomp_portal_server.py:
   * no fixed target count (the old builder stopped at 20,753 - 2,769 = 17,984 tasks);
   * no invented addresses (the old "prototype" lane used fake VAs);
   * starts that fall inside another function are dropped unless something calls them;
-  * functions already in reports/verified_registry.json are left out.
+  * functions already in reports/verified_registry.json are left out;
+  * look-alikes (same machine code apart from addresses, tools/lookalikes.py) are grouped, so the
+    portal can show one of each group first and carry a match over to the rest.
 """
 
 from __future__ import annotations
@@ -19,6 +21,7 @@ import struct
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
+import lookalikes
 from msvc_verify import decorated_hint
 from sf_binaries import BinaryImage, Extent, collect_call_targets, function_extent
 
@@ -27,6 +30,11 @@ PC_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # so PC tasks are limited to it. Same bounds as the original index builder.
 PC_PLAINTEXT = (0x006DDC00, 0x0072EADC)
 XB_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+# The April 20, 2006 Xbox prototype (game.xbe, optional). A bonus lane: its functions are queued and
+# verified like the others but counted apart from the retail game. About half of them have the same
+# machine code as a retail Xbox function, so look-alike porting fills those in as retail is matched.
+LANES = {"pc": ("pc_", "PC Scarface.exe", "PC "), "xb": ("xb_", "Shared Engine & Gameplay", ""),
+         "proto": ("proto_", "Xbox Prototype (Apr 2006)", "Proto ")}
 
 
 _BUILTIN = {"X": "void", "D": "char", "C": "signed char", "E": "unsigned char", "F": "short",
@@ -189,28 +197,48 @@ def tier(size: int) -> dict:
     return {"tier": "TIER_4_LARGE", "tier_label": "Tier 4: Large (80+ B)", "est_label": "~60+ mins", "lease_minutes": 120}
 
 
+def seed_data(root: Path) -> dict:
+    """The tracked inputs that, with the game files, decide the queue: reports/known_functions.json and
+    reports/extra_function_starts.json. Pass as build_queue(..., **seed_data(root))."""
+    def load(name: str) -> dict:
+        p = root / "reports" / name
+        try:
+            return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+        except ValueError:
+            return {}
+    return {"known_functions": load("known_functions.json").get("functions", []),
+            "extra_starts": load("extra_function_starts.json").get("starts", {})}
+
+
 def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = None,
                 verified_keys: Optional[Set[str]] = None, progress=None,
-                known_functions: Optional[List[dict]] = None) -> List[dict]:
+                known_functions: Optional[List[dict]] = None,
+                extra_starts: Optional[Dict[str, List[str]]] = None) -> List[dict]:
     """known_functions: [{bin, va, size, symbol, match}] whose start and size were proven earlier by an
     exact byte match (reports/known_functions.json). They are always queued, with that size, even where
-    the scanner alone would not find them (tiny stubs, starts inside padding)."""
+    the scanner alone would not find them (tiny stubs, starts inside padding).
+    extra_starts: {bin: ["0x...", ...]} starts that calls and vtables do not reveal
+    (reports/extra_function_starts.json), so a fresh copy builds the same queue as an old one."""
     verified_keys = verified_keys or set()
     old_by_key = {}
     for t in old_queue or []:
-        if "fva_int" in t and t.get("bin") in ("pc", "xb"):
+        if "fva_int" in t and t.get("bin") in LANES:
             old_by_key[f"{t['bin']}:0x{t['fva_int']:08X}"] = t
     tasks: List[dict] = []
-    for b in ("pc", "xb"):
+    images: Dict[str, BinaryImage] = {}
+    classes: Dict[str, Set[str]] = {}
+    for b in LANES:
         p = binaries.get(b)
         if not p or not Path(p).exists():
             continue
-        img = BinaryImage(p)
+        img = images[b] = BinaryImage(p)
         calls = collect_call_targets(img)
         vt = vtable_methods(img)
+        classes[b] = {cls for cls, _slot, _raw in vt.values()}
         kf = {int(f["va"], 16): f for f in (known_functions or []) if f.get("bin") == b}
         starts: Set[int] = set(vt) | set(kf) | {t["fva_int"] for k, t in old_by_key.items() if k.startswith(b + ":")}
-        if b == "xb":
+        starts |= {int(v, 16) for v in (extra_starts or {}).get(b, [])}
+        if b != "pc":
             starts |= {c for c in calls}
         else:
             lo, hi = PC_PLAINTEXT
@@ -260,12 +288,12 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                 hint = "Called directly" if va in calls else "Found by scanning for function starts"
                 hint += f"; {e.size} bytes" + ("; contains a switch jump table" if e.has_jump_table else "") + "."
             t = {
-                "id": ("pc_" if b == "pc" else "xb_") + f"{va:08X}",
+                "id": LANES[b][0] + f"{va:08X}",
                 "bin": b,
-                "lane": "PC Scarface.exe" if b == "pc" else "Shared Engine & Gameplay",
+                "lane": LANES[b][1],
                 "symbol": sym,
                 "match_substr": match,
-                "va": (f"PC 0x{va:08X}" if b == "pc" else f"0x{va:08X}"),
+                "va": f"{LANES[b][2]}0x{va:08X}",
                 "fva_int": va,
                 "size": e.size,
                 "flags": PC_FLAGS if b == "pc" else XB_FLAGS,
@@ -273,8 +301,13 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                 "claimed_by": "",
                 "hint": hint,
             }
+            if b == "proto" and va in vt and "xb" in classes and vt[va][0] not in classes["xb"]:
+                # Its class has no virtual methods in the retail Xbox game: cut or renamed before release.
+                t["lane"] += ", class not in retail"
+                t["hint"] += " This class is not in the retail game (cut or renamed before release)."
             t.update(tier(e.size))
             tasks.append(t)
+    lookalikes.annotate(tasks, images, progress=progress)
     return tasks
 
 
@@ -286,13 +319,12 @@ def main() -> int:
     ap.add_argument("--out", default=str(root / "reports" / "full_remaining_queue.json"))
     args = ap.parse_args()
     out = Path(args.out)
-    binaries = {"pc": root / "binaries" / "Scarface.exe", "xb": root / "binaries" / "default.xbe"}
+    binaries = {"pc": root / "binaries" / "Scarface.exe", "xb": root / "binaries" / "default.xbe",
+                "proto": root / "binaries" / "game.xbe"}
     old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
     reg_path = root / "reports" / "verified_registry.json"
     verified = set(json.loads(reg_path.read_text(encoding="utf-8")).get("entries", {})) if reg_path.exists() else set()
-    kf_path = root / "reports" / "known_functions.json"
-    known = json.loads(kf_path.read_text(encoding="utf-8")).get("functions", []) if kf_path.exists() else []
-    tasks = build_queue(binaries, old, verified, progress=print, known_functions=known)
+    tasks = build_queue(binaries, old, verified, progress=print, **seed_data(root))
     tmp = out.with_suffix(".tmp")
     tmp.write_text(json.dumps(tasks, indent=1), encoding="utf-8")
     tmp.replace(out)
@@ -300,6 +332,9 @@ def main() -> int:
     for t in tasks:
         by[t["bin"]] = by.get(t["bin"], 0) + 1
     print(f"{len(tasks):,} tasks ({', '.join(f'{k}: {v:,}' for k, v in sorted(by.items()))}) -> {out}")
+    groups = sum(1 for t in tasks if t.get("lookalike_rep"))
+    covered = sum(1 for t in tasks if t.get("lookalikes") and not t.get("lookalike_rep"))
+    print(f"{groups:,} groups of look-alikes: matching one function of each also covers {covered:,} more")
     return 0
 
 

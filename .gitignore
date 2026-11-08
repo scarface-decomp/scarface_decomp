@@ -1,5 +1,6 @@
-# Game files and archives: never committed (bring your own copies)
-binaries/
+# Game files and archives: never committed (bring your own copies). Only the folder's README is.
+binaries/*
+!binaries/README.md
 source_archives/
 community_zips/
 workpacks/
@@ -9,6 +10,7 @@ workpacks/
 *.bik
 *.zip
 *.7z
+*.iso
 *.cso
 *.dso
 *.dtr

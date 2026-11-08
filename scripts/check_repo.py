@@ -111,6 +111,8 @@ def check_tracked(problems: list) -> None:
         return
     for f in out.stdout.splitlines():
         low = f.lower()
+        if low == "binaries/readme.md":
+            continue                                # the folder's instructions, not a game file
         if any(fnmatch.fnmatch(low, pat) for pat in FORBIDDEN):
             problems.append(f"tracked file must not be committed: {f}")
 

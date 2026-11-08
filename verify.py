@@ -32,17 +32,22 @@ def status() -> int:
     reg = json.loads(REGISTRY.read_text(encoding="utf-8")) if REGISTRY.exists() else {"entries": {}}
     entries = reg.get("entries", {})
     queue = json.loads(QUEUE.read_text(encoding="utf-8")) if QUEUE.exists() else []
-    remaining = sum(1 for t in queue if f"{t.get('bin')}:0x{t.get('fva_int', 0):08X}" not in entries)
+    open_tasks = [t for t in queue if f"{t.get('bin')}:0x{t.get('fva_int', 0):08X}" not in entries]
+    remaining = sum(1 for t in open_tasks if t.get("bin") != "proto")      # the retail game, as the portal counts it
+    proto_left = len(open_tasks) - remaining
     by_bin = Counter(e["bin"] for e in entries.values())
-    total = remaining + len(entries)
+    retail = by_bin.get("pc", 0) + by_bin.get("xb", 0)
+    total = remaining + retail
     print("=" * 72)
     print(" SCARFACE: THE WORLD IS YOURS — MATCHING DECOMP STATUS")
     print("=" * 72)
     print(f" Compiler           : {reg.get('compiler', 'unknown')}")
-    print(f" Verified functions : {len(entries):,}  (PC {by_bin.get('pc', 0):,}, Xbox {by_bin.get('xb', 0):,})")
+    print(f" Verified functions : {retail:,}  (PC {by_bin.get('pc', 0):,}, Xbox {by_bin.get('xb', 0):,})")
     print(f" Work queue         : {remaining:,} functions")
     if total:
-        print(f" Progress           : {len(entries) / total * 100:.2f}% of {total:,} indexed functions")
+        print(f" Progress           : {retail / total * 100:.2f}% of {total:,} indexed functions")
+    if by_bin.get("proto", 0) or proto_left:
+        print(f" Xbox prototype     : {by_bin.get('proto', 0):,} of {by_bin.get('proto', 0) + proto_left:,} (bonus, not in the total)")
     print(f" Verified bytes     : {sum(int(e.get('size', 0)) for e in entries.values()):,}")
     print("-" * 72)
     board = Counter((e.get("verified_by") or "Imported (unattributed)") for e in entries.values())

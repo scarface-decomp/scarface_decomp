@@ -27,7 +27,9 @@ may come from and how AI tools may be used.
      stores or logs it, and the browser keeps it only for the session unless you tick "Remember key".
 5. **Compile & Verify** (`Ctrl+Enter`). You get the matched byte count and a per-byte diff. When it
    matches, it is recorded in `reports/verified_registry.json` under your handle and the generated
-   files are rewritten.
+   files are rewritten. If the function has look-alikes (same machine code, other addresses; the
+   queue shows "+N look-alikes"), the portal then tries your code on each of them in the background
+   and credits you for every one that matches exactly. Pick those first: one match can count many times.
 6. If you stop, **Cancel & Save** keeps your best partial attempt for the next person.
 
 No compiler installed? You can still do steps 1 to 4 with decomp.me. Post the 100% decomp.me link in a

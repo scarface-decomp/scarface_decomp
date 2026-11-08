@@ -3,6 +3,10 @@
 Copy the game's script files out of your own cement.rcf, for the script work (docs/SCRIPTS.md).
 
     python scripts/extract_scripts.py "C:\\Games\\Scarface\\cement.rcf"
+    python scripts/extract_scripts.py "..\\source_archives\\SLUS_211.11.SCARFACEps2.iso" --out binaries\\scripts_and_data\\ps2
+
+Takes cement.rcf from an installed copy, or a disc image (.iso) that has CEMENT.RCF on it, like the
+PS2 disc. (The PC disc keeps its files inside DATA*.CAB, so use cement.rcf from the installed game.)
 
 Writes every .cso, .dso, .dtr (and any .cs / .ds source left in the archive) into binaries/scripts_and_data/,
 keeping the archive's folders, where the portal's Scripts tab finds them. binaries/ is never committed, so the files stay on your computer.
@@ -24,7 +28,7 @@ from rcf import SCRIPT_EXTENSIONS, RcfError, open_rcf, safe_output_path  # noqa:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("rcf", type=Path, help="path to cement.rcf from your own copy of the game")
+    ap.add_argument("rcf", type=Path, help="cement.rcf, or a disc image (.iso) with CEMENT.RCF on it")
     ap.add_argument("--out", type=Path, default=ROOT / "binaries" / "scripts_and_data")
     ap.add_argument("--list", action="store_true", help="list the script files without extracting")
     a = ap.parse_args(argv)

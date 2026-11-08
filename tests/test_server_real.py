@@ -72,7 +72,7 @@ def portal(tmp_path_factory):
     port = _free_port()
     import msvc_verify as MV
     env = dict(os.environ, SCARFACE_PORT=str(port), SCARFACE_NO_BROWSER="1", SCARFACE_MAINTAINERS="Maint",
-               SCARFACE_MSVC_BIN=str(MV.find_msvc71_bin()))
+               SCARFACE_MSVC_BIN=str(MV.find_msvc71_bin()), SCARFACE_LOOKALIKE_MAX="3")
     log = open(work / "server.log", "wb")
     proc = subprocess.Popen([sys.executable, "decomp_portal_server.py"], cwd=work, env=env, stdout=log,
                             stderr=subprocess.STDOUT)
@@ -198,9 +198,77 @@ def test_exact_match_is_recorded(portal):
     assert e["verified_by"] == "Alice" and e["source"] == "portal" and e["code"] == GOOD and e["match"] == "sub_001CDC80"
     out = (work / "reconstructed_src" / "Original_Binary_Order_Xbox.cpp").read_text(encoding="utf-8")
     assert "By: Alice" in out
-    assert get(portal, "/api/state")["leaderboard"].get("Alice") == 1
     _, again = post(portal, "/api/claim", {**BOB, "id": TID})
     assert not again["ok"] and "Already verified" in again["error"]
+
+    # sub_001CDC80 is `mov eax, offset DAT; ret`: hundreds of functions have the same code with their own
+    # address. The server tries Alice's code on (here, at most 3 of) them and records the ones that match.
+    assert res["lookalikes_queued"] == 3
+    for _ in range(240):
+        st = get(portal, f"/api/lookalikes?id={TID}")
+        if not st["running"]:
+            break
+        time.sleep(0.5)
+    assert st["ok"] and not st["running"] and st["tried"] == 3 and st["matched"] == 3, st
+    reg = json.loads((work / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
+    for mid in st["matched_ids"]:
+        task = get(portal, f"/api/task?id={mid}")["task"]
+        e = reg["entries"][f"{task['bin']}:0x{task['fva_int']:08X}"]
+        assert e["verified_by"] == "Alice" and e["ported_from"] == TID and task["status"] == "VERIFIED"
+        assert e["code"].startswith("// Same machine code as") and f"sub_{task['fva_int']:08X}" in e["code"]
+        assert "DAT_00439DA4" not in e["code"]           # each one points at its own global
+    assert get(portal, "/api/state")["leaderboard"].get("Alice") == 4
+    assert get(portal, "/api/state")["lookalikes"]["groups"] > 100
+
+
+def test_same_method_in_another_build_starts_from_the_match(portal):
+    """PauseMenuPageStats::vfunc_00 is in the prototype too. Once the retail one is matched, the prototype's
+    copy opens with that code (and says where it came from)."""
+    code, res = None, None
+    try:
+        res = get(portal, "/api/task?id=proto_00196800")
+    except urllib.error.HTTPError as e:
+        code = e.code
+    if code == 404:
+        pytest.skip("the prototype (binaries/game.xbe) is not in this queue")
+    t = res["task"]
+    assert any(c["id"] == TID and c["status"] == "VERIFIED" for c in t["counterparts"])
+    if t["status"] != "VERIFIED":
+        assert t["starter_from"] == TID and t["starter_kind"] == "counterpart"
+        assert "DAT_00439DA4" in t["starter_cpp"] and "already matched in the retail Xbox game" in t["starter_cpp"]
+
+
+def test_queue_shows_lookalike_groups_first(portal):
+    q = get(portal, "/api/queue?limit=20")
+    sizes = [i["lookalikes"] for i in q["items"]]
+    assert sizes[0] > 50 and sizes == sorted(sizes, reverse=True)
+
+
+def test_other_websites_and_hosts_are_refused(portal):
+    """A page on another site can make the visitor's browser POST to localhost; the portal refuses it.
+    So does a request whose Host header names another site (DNS rebinding)."""
+    code, res = post(portal, "/api/login", ALICE)
+    assert code == 200
+    req = urllib.request.Request(portal["base"] + "/api/login", data=json.dumps(ALICE).encode(), method="POST",
+                                 headers={"Content-Type": "text/plain", "Origin": "https://evil.example"})
+    try:
+        urllib.request.urlopen(req, timeout=30)
+        raise AssertionError("cross-site POST was accepted")
+    except urllib.error.HTTPError as e:
+        assert e.code == 403 and "other websites" in json.loads(e.read())["error"]
+    req = urllib.request.Request(portal["base"] + "/api/state", headers={"Host": "evil.example"})
+    try:
+        urllib.request.urlopen(req, timeout=30)
+        raise AssertionError("foreign Host header was accepted")
+    except urllib.error.HTTPError as e:
+        assert e.code == 403
+
+
+def test_new_handles_are_plain_names(portal):
+    code, res = post(portal, "/api/login", {"user": "<b>x</b>", "pin": "long-enough-pin"})
+    assert code == 403 and "Handles use" in res["error"]
+    code, res = post(portal, "/api/login", {"user": "Tony M. (Founder)", "pin": "long-enough-pin"})
+    assert code == 200 and res["ok"]
 
 
 def test_only_maintainers_can_push(portal):

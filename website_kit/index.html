@@ -434,6 +434,7 @@
     .q-top-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
     .q-sym-text { font-family: var(--mono); font-weight: 600; color: #fff; font-size: 0.79rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
     .q-meta { color: var(--muted); font-size: 0.73rem; margin-top: 3px; }
+    .lookalike-tag { color: var(--green); font-weight: 600; white-space: nowrap; }
     .empty-note { color: var(--muted); font-size: 0.82rem; padding: 12px 4px; }
     .status-pill { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-family: var(--mono); font-weight: 700; white-space: nowrap; flex-shrink: 0; }
     .st-UNCLAIMED { background: rgba(148, 163, 184, 0.14); color: var(--muted); }
@@ -476,8 +477,7 @@
     .chip.gold { color: var(--gold); }
     .chip.blue { color: var(--blue); font-weight: 600; }
 
-    .step-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; background: var(--bg-card-alt); border: 1px solid var(--border); padding: 12px; border-radius: 6px; margin: 12px 0; }
-    @media (max-width: 900px) { .step-bar { grid-template-columns: 1fr 1fr; } }
+    .step-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; background: var(--bg-card-alt); border: 1px solid var(--border); padding: 12px; border-radius: 6px; margin: 12px 0; }
     .step-col { display: flex; flex-direction: column; gap: 4px; }
     .step-lbl { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
     .step-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -655,7 +655,7 @@
             <span class="side-badge" id="total-rem-count" title="Functions remaining">—</span>
           </button>
           <button type="button" id="nav-scripts" class="side-btn view-nav" onclick="switchView('scripts')">
-            <span class="side-btn-left">&#x1F4DC; Scripts (.cso/.dtr)</span>
+            <span class="side-btn-left">&#x1F4DC; Game Scripts</span>
             <span class="side-badge" id="side-scripts-count">—</span>
           </button>
           <button type="button" id="nav-sources" class="side-btn view-nav" onclick="switchView('sources')">
@@ -697,7 +697,7 @@
             <span class="status-dot" aria-hidden="true"></span>
             <span id="server-status-text">CONNECTING…</span>
           </div>
-          <div class="topbar-pill hide-sm">UNENCRYPTED COVERAGE: <strong class="gold">99.4%</strong></div>
+          <div class="topbar-pill hide-sm" title="How much of each retail file's game code can be read">READABLE CODE: <strong class="gold">XBOX 100%</strong> · <strong>PC ~10%</strong></div>
           <div class="topbar-pill">VERIFIED: <strong id="top-verified-value">—</strong></div>
         </div>
 
@@ -724,13 +724,15 @@
           <div class="unencrypted-hero">
             <div>
               <h1 class="hero-scarface-title">SCARFACE: THE WORLD IS YOURS</h1>
-              <div class="unencrypted-badge-line">&#x1F525; 99.4% OF THE GAME'S COMPILED MACHINE CODE IS UNENCRYPTED</div>
+              <div class="unencrypted-badge-line">&#x1F525; ALL OF THE XBOX VERSION'S GAME CODE IS READABLE</div>
               <p class="hero-copy">
-                <strong>99.4% of Scarface's machine instructions and all 2,457 C++ class VTables are readable in plaintext</strong> across the retail PC and Xbox binaries. We need people (and your spare AI API credits) to help translate the remaining functions into genuine, human-readable C++ that compiles back to the exact original bytes.
+                <strong>Every byte of the retail Xbox game code (3.1 MB) can be read, and so can about a tenth of PC v1.00.2's.</strong> The rest of the PC file is encrypted, so PC functions are only handed out from the readable part; apart from each version's hardware-specific parts, the Xbox build runs the same game code. The names of 2,457 C++ classes can be read too.
+                We need people (and your spare AI API credits) to turn each function into genuine, human-readable C++ that compiles back to the exact original bytes.
+                Many functions are copies of each other: <strong>match one, and the portal tries your code on all its look-alikes for you.</strong>
               </p>
               <div class="hero-actions">
                 <button type="button" class="btn btn-ai" onclick="switchView('workbench')">Open Decompilation Workbench &rarr;</button>
-                <button type="button" class="btn btn-claim" onclick="switchView('scripts')">&#x1F4DC; .CSO / .DSO / .DTR Decompiler &rarr;</button>
+                <button type="button" class="btn btn-claim" onclick="switchView('scripts')">&#x1F4DC; Game Scripts (.cso / .dso) &rarr;</button>
                 <button type="button" class="btn btn-cancel" onclick="switchView('how')">Read How It Works</button>
               </div>
             </div>
@@ -753,16 +755,20 @@
               <div id="live-by-binary" class="hdr-note" style="margin:-8px 0 12px;"></div>
 
               <div class="feed-row">
-                <div class="feed-row-top"><span>Unencrypted Machine Code Coverage</span><span class="mono" style="color:var(--green);">99.4%</span></div>
-                <div class="feed-bar"><div class="feed-bar-fill" style="width:99.4%; background:var(--green);"></div></div>
+                <div class="feed-row-top"><span>Xbox game code you can read</span><span class="mono" style="color:var(--green);">100%</span></div>
+                <div class="feed-bar"><div class="feed-bar-fill" style="width:100%; background:var(--green);"></div></div>
               </div>
               <div class="feed-row">
-                <div class="feed-row-top"><span>Recovered C++ RTTI Classes &amp; VTables</span><span class="mono" style="color:var(--blue);">2,457 / 2,457 (100%)</span></div>
-                <div class="feed-bar"><div class="feed-bar-fill" style="width:100%; background:var(--blue);"></div></div>
+                <div class="feed-row-top"><span>PC v1.00.2 game code you can read (the rest is encrypted)</span><span class="mono" style="color:var(--gold);">~10%</span></div>
+                <div class="feed-bar"><div class="feed-bar-fill" style="width:10.3%; background:var(--gold);"></div></div>
               </div>
               <div class="feed-row">
-                <div class="feed-row-top"><span>Cross-Binary Class Parity (PC vs Xbox)</span><span class="mono" style="color:var(--gold);">2,421 / 2,457 (98.5%)</span></div>
-                <div class="feed-bar"><div class="feed-bar-fill" style="width:98.5%; background:var(--gold);"></div></div>
+                <div class="feed-row-top"><span>C++ class names found (PC · Xbox · in both)</span><span class="mono" style="color:var(--blue);">2,457 · 2,455 · 2,421</span></div>
+                <div class="feed-bar"><div class="feed-bar-fill" style="width:98.5%; background:var(--blue);"></div></div>
+              </div>
+              <div class="feed-row">
+                <div class="feed-row-top"><span>Functions that are look-alikes of another (matched for free)</span><span class="mono" style="color:var(--green);" id="feed-lookalikes">—</span></div>
+                <div class="feed-bar"><div class="feed-bar-fill" id="feed-lookalikes-bar" style="width:0%; background:var(--green);"></div></div>
               </div>
             </div>
 
@@ -852,7 +858,8 @@
                   <option value="ALL">All Categories</option>
                   <option value="PC Scarface.exe">PC Scarface.exe</option>
                   <option value="Shared Engine">Shared Engine</option>
-                  <option value="April 2006 Prototype">Prototype Cut Content</option>
+                  <option value="Xbox Prototype">Xbox Prototype (Apr 2006, bonus)</option>
+                  <option value="class not in retail">Prototype: classes cut from retail</option>
                   <option value="PARTIAL">Partially Done (Resume)</option>
                   <option value="UNCLAIMED">Unclaimed Only</option>
                   <option value="CLAIMED">Claimed Only</option>
@@ -871,7 +878,7 @@
               <div class="filter-row">
                 <label class="sr-only" for="sort-filter">Sort</label>
                 <select id="sort-filter" class="input-box" onchange="resetPageAndLoadQueue(true)">
-                  <option value="DEFAULT">Sort: Unfinished First</option>
+                  <option value="DEFAULT">Sort: Most look-alikes first (fastest)</option>
                   <option value="PARTIAL_FIRST">Sort: Partial Progress First</option>
                   <option value="SIZE_ASC">Sort: Smallest Size First</option>
                   <option value="SIZE_DESC">Sort: Largest Size First</option>
@@ -900,7 +907,7 @@
                     <option value="gemini">Google Gemini API</option>
                     <option value="openai">OpenAI API</option>
                     <option value="anthropic">Anthropic Claude API</option>
-                    <option value="argon">Argon / OpenRouter API</option>
+                    <option value="argon">OpenRouter API</option>
                     <option value="custom_api">Custom OpenAI-Compatible URL</option>
                     <option value="ollama">Local Ollama (127.0.0.1)</option>
                   </select>
@@ -1044,13 +1051,13 @@
           <div class="card">
             <div class="card-hdr">
               <div>
-                <h2 class="card-title lg">Script &amp; Data Resource Decompiler (<code>.cso</code> / <code>.dso</code> / <code>.dtr</code>)</h2>
-                <p class="card-sub">TorqueScript bytecode (<code>.cso</code> / <code>.dso</code>) and Pure3D DataChunk tables (<code>.dtr</code>) from your own copy of the game. Files you load are sent to this portal's server for parsing; raw game assets are never committed to GitHub.</p>
+                <h2 class="card-title lg">Game Scripts (<code>.cso</code> / <code>.dso</code> / <code>.dtr</code>)</h2>
+                <p class="card-sub">Compiled TorqueScript from your own copy of the game. Each file is read and rebuilt to check it comes back byte for byte; turning the bytecode into readable TorqueScript is the next step (<code>docs/SCRIPTS.md</code>). <code>.dtr</code> files are recognised, but their format isn't worked out yet. Files you load stay on this computer and are never committed to GitHub.</p>
               </div>
               <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <input type="file" id="local-script-input" accept=".cso,.dso,.dtr" style="display:none;" onchange="uploadLocalScriptFile(event)" />
                 <button type="button" class="btn-sm gold" onclick="document.getElementById('local-script-input').click()">+ Load Local .cso / .dso / .dtr File</button>
-                <span class="status-nominal neutral"><span class="status-dot" aria-hidden="true"></span>BOUNDS-CHECKED PARSER</span>
+                <span class="status-nominal neutral"><span class="status-dot" aria-hidden="true"></span>EXACT ROUND-TRIP CHECK</span>
               </div>
             </div>
 
@@ -1064,14 +1071,14 @@
             <div class="editor-split">
               <div>
                 <div class="editor-toolbar">
-                  <span class="pane-label green">Decompiled High-Level Script (.cs) / Struct Output</span>
-                  <button type="button" class="btn-sm" onclick="copyDecompiledScript()">Copy Decompiled Code</button>
+                  <span class="pane-label green">What the file contains</span>
+                  <button type="button" class="btn-sm" onclick="copyDecompiledScript()">Copy</button>
                 </div>
                 <pre id="script-decompiled-view" class="code-view fixed"></pre>
               </div>
               <div>
                 <div class="editor-toolbar">
-                  <span class="pane-label gold">Bytecode / Chunk Disassembly</span>
+                  <span class="pane-label gold">Bytecode listing</span>
                 </div>
                 <pre id="script-disasm-view" class="code-view fixed" style="color:#cbd5e1;"></pre>
               </div>
@@ -1106,8 +1113,8 @@
             <div class="how-pipeline">
               <div class="how-step-card">
                 <div class="how-step-num">Phase 01 • Ground Truth</div>
-                <h3>99.4% Unencrypted x86 Extraction</h3>
-                <p>Retail Xbox (<code>default.xbe</code>) is unencrypted and shares 2,421 of 2,457 C++ classes with Retail PC (<code>Scarface.exe</code> v1.00.2), which exposes all 2,457 RTTI VTables and 122 pages of plaintext <code>.text</code>. Each function's exact target instruction bytes are disassembled from the binaries.</p>
+                <h3>Readable x86 First</h3>
+                <p>All of the retail Xbox game code (<code>default.xbe</code>) can be read. Only about a tenth of PC v1.00.2's (<code>Scarface.exe</code>, 84 of 814 code pages) can; the rest is encrypted, so the queue only hands out PC functions from the readable part. The two builds share 2,421 C++ class names. Each function's exact bytes are disassembled from your own copy of the game, and functions with the same machine code are grouped as look-alikes, so one match can cover many.</p>
               </div>
               <div class="how-step-card">
                 <div class="how-step-num">Phase 02 • Translation</div>
@@ -1153,10 +1160,10 @@
   const MAX_SCRIPT_BYTES = 32 * 1024 * 1024;
   const AI_ATTEMPTS = 5;
   const PROVIDER_MODELS = {
-    gemini: ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-4-argon', 'gemini-3.1-flash-lite', 'CUSTOM'],
-    openai: ['gpt-4o', 'o3-mini', 'o1', 'gpt-4.1', 'gpt-4o-mini', 'CUSTOM'],
-    anthropic: ['claude-3-7-sonnet-latest', 'claude-3-5-sonnet-latest', 'claude-3-5-haiku-latest', 'CUSTOM'],
-    argon: ['argon-coder-v1', 'deepseek/deepseek-r1', 'anthropic/claude-3.7-sonnet', 'openai/gpt-4o', 'CUSTOM'],
+    gemini: ['gemini-3.8-flash', 'gemini-4-argon', 'gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-flash-latest', 'CUSTOM'],
+    openai: ['gpt-5.6-terra', 'gpt-5.6-sol', 'gpt-5.6-luna', 'CUSTOM'],
+    anthropic: ['claude-sonnet-5-5', 'claude-opus-5-5', 'claude-haiku-5-5', 'CUSTOM'],
+    argon: ['openrouter/auto', '~openai/gpt-latest', 'deepseek/deepseek-r1', 'CUSTOM'],
     custom_api: ['CUSTOM', 'deepseek-coder', 'deepseek-reasoner', 'llama-3.3-70b-versatile', 'gpt-4o'],
     ollama: ['qwen2.5-coder:32b', 'qwen2.5-coder:14b', 'deepseek-r1:14b', 'llama3.3', 'CUSTOM']
   };
@@ -1431,7 +1438,9 @@
     $('live-bar-outer').setAttribute('aria-valuenow', String(width));
     const bb = prog.by_binary;
     $('live-by-binary').textContent = bb
-      ? 'PC ' + fmtInt(bb.pc) + ' · Xbox ' + fmtInt(bb.xbox) + (prog.matched_bytes ? ' · ' + fmtInt(prog.matched_bytes) + ' bytes' : '') + (prog.compiler ? ' · ' + String(prog.compiler).replace(/^Microsoft \(R\) 32-bit C\/C\+\+ Optimizing Compiler /, '') : '')
+      ? 'PC ' + fmtInt(bb.pc) + ' · Xbox ' + fmtInt(bb.xbox) +
+        (prog.prototype && Number(prog.prototype.total) > 0 ? ' · Prototype ' + fmtInt(prog.prototype.matched) + '/' + fmtInt(prog.prototype.total) + ' (bonus)' : '') +
+        (prog.matched_bytes ? ' · ' + fmtInt(prog.matched_bytes) + ' bytes' : '') + (prog.compiler ? ' · ' + String(prog.compiler).replace(/^Microsoft \(R\) 32-bit C\/C\+\+ Optimizing Compiler /, '') : '')
       : '';
   }
 
@@ -1447,6 +1456,52 @@
       $('cnt-t3').textContent = fmtInt(tc.TIER_3_MEDIUM ?? 0);
       $('cnt-t4').textContent = fmtInt(tc.TIER_4_LARGE ?? 0);
     }
+    const la = s.lookalikes;
+    if (la && Number(la.functions) > 0) {
+      $('feed-lookalikes').textContent = fmtInt(la.extra) + ' of ' + fmtInt(la.functions) + ' (' + fmtInt(la.groups) + ' groups)';
+      $('feed-lookalikes-bar').style.width = Math.min(100, (Number(la.extra) / Number(la.functions)) * 100) + '%';
+    }
+  }
+
+  /* One plain sentence about the function's look-alikes for the workbench. */
+  function lookalikeNote(t) {
+    const n = Number(t.lookalikes) || 0;
+    let note = '';
+    if (n > 0) {
+      const done = Number(t.lookalike_done) || 0;
+      note = 'Same machine code as ' + fmtInt(n) + ' other function' + (n === 1 ? '' : 's') +
+        (done ? ' (' + fmtInt(done) + ' already matched)' : '') +
+        ': match this one and your code is tried on ' + (n === 1 ? 'it' : 'them') + ' too.';
+    }
+    const cps = Array.isArray(t.counterparts) ? t.counterparts : [];
+    if (cps.length) {
+      note += ' Also in ' + cps.map((c) => c.build + ' (' + c.id + (c.status === 'VERIFIED' ? ', matched' : '') + ')').join(' and ') + '.';
+    }
+    if (t.starter_from && t.starter_kind === 'counterpart') {
+      note += ' The starting code below is the matched code of ' + t.starter_from + ', the same function in another build. Its machine code differs a little here, so adjust it until it matches.';
+    } else if (t.starter_from) {
+      note += ' The starting code below is the matched code of ' + t.starter_from + ', with this function\'s addresses and names swapped in. Try Verify first.';
+    }
+    return note.trim();
+  }
+
+  /* After a match, follow the look-alikes being tried in the background and report how many matched. */
+  async function followLookalikes(id, total) {
+    for (let i = 0; i < 900; i++) {
+      await new Promise((r) => setTimeout(r, i < 5 ? 1000 : 2000));
+      let st;
+      try { st = await apiFetchJson('/api/lookalikes?id=' + encodeURIComponent(id)); } catch (e) { continue; }
+      if (st.progress) { STATE.progress = st.progress; updateHeader(st.progress); }
+      if (st.leaderboard) { STATE.leaderboard = st.leaderboard; renderLeaderboard(); }
+      const line = 'Look-alikes: ' + fmtInt(st.tried) + ' of ' + fmtInt(st.total || total) + ' tried, ' + fmtInt(st.matched) + ' matched with your code.';
+      if (currentTask && currentTask.id === id) setStatus((st.running ? 'VERIFIED. ' : 'VERIFIED. Done. ') + line, 'ok');
+      if (!st.running) {
+        refreshSideState();
+        if (typeof loadQueuePage === 'function') loadQueuePage();
+        return st;
+      }
+    }
+    return null;
   }
 
   /* Point every GitHub link at the repository the server reports (its "origin" remote). */
@@ -1621,18 +1676,27 @@
     saveAiSettings();
   }
 
+  function defaultModelFor(provider) {
+    const list = PROVIDER_MODELS[provider] || PROVIDER_MODELS.gemini;
+    return list.find((m) => m !== 'CUSTOM') || DEFAULT_MODEL;
+  }
+
   function getActiveModelName() {
     const sel = $('ai-model-select').value;
-    if (sel === 'CUSTOM') return $('ai-model-custom').value.trim() || DEFAULT_MODEL;
+    if (sel === 'CUSTOM') return $('ai-model-custom').value.trim() || defaultModelFor($('ai-provider').value);
     return sel;
   }
 
   function loadAiSettings() {
     let p = LS.get('sf_ai_provider', 'gemini');
     if (!PROVIDER_MODELS[p]) p = 'gemini';
-    let m = LS.get('sf_ai_model', DEFAULT_MODEL);
-    if (['gemini-2.5-pro', 'gemini-3.1-flash-preview', 'gemini-3.1-pro-preview', 'gemini-2.5-flash'].includes(m)) {
-      m = DEFAULT_MODEL;
+    let m = LS.get('sf_ai_model', '') || defaultModelFor(p);
+    // Model IDs that providers have retired since they were offered here: fall back to the provider's first one.
+    const RETIRED = ['gemini-2.5-pro', 'gemini-3.1-flash-preview', 'gemini-3.1-pro-preview', 'gemini-2.5-flash',
+      'gpt-4o', 'o3-mini', 'o1', 'gpt-4.1', 'gpt-4o-mini', 'claude-3-7-sonnet-latest', 'claude-3-5-sonnet-latest',
+      'claude-3-5-haiku-latest', 'argon-coder-v1', 'anthropic/claude-3.7-sonnet', 'openai/gpt-4o'];
+    if (RETIRED.includes(m)) {
+      m = (PROVIDER_MODELS[p] || PROVIDER_MODELS.gemini)[0];
       LS.set('sf_ai_model', m);
     }
     $('ai-provider').value = p;
@@ -1975,7 +2039,8 @@
           '<span class="status-pill st-' + pill.stClass + '">' + escHtml(pill.pillLabel) + '</span>' +
         '</div>' +
         '<div class="q-meta">' + escHtml(item.va) + ' • <strong>' + escHtml(item.size) + ' B</strong>' +
-          (item.est_label ? ' • ' + escHtml(item.est_label) : '') + '</div>';
+          (item.est_label ? ' • ' + escHtml(item.est_label) : '') +
+          (Number(item.lookalikes) > 0 ? ' • <span class="lookalike-tag" title="Functions with the same machine code. Match this one and your code is tried on them too.">+' + escHtml(item.lookalikes) + ' look-alike' + (Number(item.lookalikes) === 1 ? '' : 's') + '</span>' : '') + '</div>';
       div.addEventListener('click', () => selectTaskById(item.id));
       div.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTaskById(item.id); }
@@ -2068,7 +2133,7 @@
     $('wb-title').textContent = t.symbol + ' (' + t.va + ', ' + t.size + ' B) — [' + t.status + ']';
     $('wb-meta').textContent = [t.tier_label, t.est_label ? 'Est: ' + t.est_label : '', t.flags ? 'Compiler Flags: ' + t.flags : '']
       .filter(Boolean).join(' • ');
-    $('wb-hint').textContent = t.hint || '';
+    $('wb-hint').textContent = [t.hint || '', lookalikeNote(t)].filter(Boolean).join(' ');
     $('wb-target-hex').textContent = t.target_hex || '';
     const disLines = Array.isArray(t.disasm_lines) ? t.disasm_lines : [];
     $('wb-disasm-box').textContent = disLines.join(NL) || 'No disassembly lines.';
@@ -2372,8 +2437,10 @@
 
       if (data.is_exact) {
         setStatus(data.newly_promoted
-          ? 'VERIFIED: ' + data.matched_bytes + '/' + data.total_bytes + ' B match exactly. Added to the verified registry.'
+          ? 'VERIFIED: ' + data.matched_bytes + '/' + data.total_bytes + ' B match exactly. Added to the verified registry.' +
+            (Number(data.lookalikes_queued) > 0 ? ' Now trying your code on ' + fmtInt(data.lookalikes_queued) + ' look-alike' + (Number(data.lookalikes_queued) === 1 ? '' : 's') + '…' : '')
           : '100% MATCH (' + data.matched_bytes + '/' + data.total_bytes + ' B).', 'ok');
+        if (data.newly_promoted && Number(data.lookalikes_queued) > 0) followLookalikes(t.id, Number(data.lookalikes_queued));
       } else if (data.bytes_exact && Array.isArray(data.hardcoded_addresses) && data.hardcoded_addresses.length) {
         setStatus('Bytes match, but this hard-codes addresses from the 2006 binary (' + data.hardcoded_addresses.slice(0, 2).join('; ') +
           '). Name them instead, e.g. extern "C" char DAT_00439DA4; and use &DAT_00439DA4 in place of the number.', 'warn');
@@ -2836,7 +2903,7 @@
     if (allNames.length && !FULL_SOURCES[selectedFile]) loadFullSource(selectedFile);
     $('source-file-label').textContent = allNames.length ? 'File: reconstructed_src/' + selectedFile : 'File: —';
     const lineCnt = content ? content.split(NL).length : 0;
-    const verCnt = (content.match(/VERIFIED 1:1 MATCH/g) || []).length;
+    const verCnt = (content.match(/^\/\/ \[VERIFIED\] /gm) || []).length;
     $('source-file-stats').textContent = allNames.length ? verCnt + ' verified blocks • ' + fmtInt(lineCnt) + ' lines' : '';
   }
 

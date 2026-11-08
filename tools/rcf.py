@@ -86,7 +86,50 @@ class RcfArchive:
 
 
 def open_rcf(path: Path) -> RcfArchive:
-    return RcfArchive(open(path, "rb"))
+    """An .rcf file, or the CEMENT.RCF inside a disc image (.iso, ISO 9660, as on the PS2 disc)."""
+    f = open(path, "rb")
+    if path.suffix.lower() == ".iso":
+        hit = find_in_iso(f, "CEMENT.RCF")
+        if hit is None:
+            f.close()
+            raise RcfError("no CEMENT.RCF on this disc image (the PC disc keeps it inside DATA*.CAB; "
+                           "use cement.rcf from an installed copy instead)")
+        return RcfArchive(f, base=hit[0])
+    return RcfArchive(f)
+
+
+def find_in_iso(f: BinaryIO, name: str, sector: int = 2048):
+    """(byte offset, size) of a file anywhere in an ISO 9660 image, by file name; None if absent."""
+    f.seek(16 * sector)
+    pvd = f.read(sector)
+    if pvd[1:6] != b"CD001":
+        raise RcfError("not an ISO 9660 disc image")
+    want = name.upper()
+    todo = [(struct.unpack_from("<I", pvd, 158)[0], struct.unpack_from("<I", pvd, 166)[0])]
+    seen = set()
+    while todo:
+        lba, size = todo.pop()
+        if lba in seen or size > 64 * 1024 * 1024:
+            continue
+        seen.add(lba)
+        f.seek(lba * sector)
+        data = f.read(size)
+        i = 0
+        while i < len(data):
+            n = data[i]
+            if n == 0:
+                i = (i // sector + 1) * sector
+                continue
+            rec = data[i:i + n]
+            ext, sz, flags, nl = struct.unpack_from("<I", rec, 2)[0], struct.unpack_from("<I", rec, 10)[0], rec[25], rec[32]
+            ident = rec[33:33 + nl]
+            if ident not in (b"\0", b"\1"):
+                if flags & 2:
+                    todo.append((ext, sz))
+                elif ident.decode("latin-1").split(";")[0].upper() == want:
+                    return ext * sector, sz
+            i += n
+    return None
 
 
 def safe_output_path(root: Path, name: str) -> Optional[Path]:

@@ -24,8 +24,21 @@ if not exist "binaries\Scarface.exe" if not exist "binaries\default.xbe" (
   echo.
 )
 
+rem The portal's packages live in .venv inside this folder, so nothing is installed system-wide
+rem and no administrator rights are needed.
+if not exist ".venv\Scripts\python.exe" (
+  echo  Setting up the portal's Python packages ^(first run only^)...
+  %PY% -m venv .venv
+  if errorlevel 1 (
+    echo.
+    echo  Could not create the .venv folder. Reinstall Python from https://www.python.org/downloads/
+    echo  with the default options, then try again.
+    pause
+    exit /b 1
+  )
+)
 echo  Checking the Python packages the portal needs...
-%PY% -m pip install --quiet --disable-pip-version-check -r requirements.txt
+".venv\Scripts\python.exe" -m pip install --quiet --disable-pip-version-check -r requirements.txt
 if errorlevel 1 (
   echo.
   echo  Installing packages failed. Check your internet connection and try again.
@@ -33,8 +46,10 @@ if errorlevel 1 (
   exit /b 1
 )
 
-echo  Starting the portal. Your browser will open http://localhost:8085
+if not defined SCARFACE_PORT set "SCARFACE_PORT=8085"
+echo  Starting the portal. Your browser will open http://localhost:%SCARFACE_PORT%
+echo  The first start takes a few minutes while it lists every function in your game files.
 echo  Keep this window open while you work; close it to stop the portal.
 echo.
-%PY% decomp_portal_server.py
+".venv\Scripts\python.exe" decomp_portal_server.py
 pause
