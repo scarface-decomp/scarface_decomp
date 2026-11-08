@@ -132,9 +132,51 @@ def refusal(path: Path) -> Optional[str]:
     if path.name not in EXPECTED or check(path) != "different":
         return None
     want = EXPECTED[path.name][1]
-    return (f"binaries/{path.name} is not the {want} copy this project uses. It is {describe(path)}. "
-            f"Other versions and regions have different code at different addresses, so matches made "
-            f"against it would not count. See {GUIDE} for the accepted versions.")
+    msg = (f"binaries/{path.name} is not the {want} copy this project uses. It is {describe(path)}. "
+           f"Other versions and regions have different code at different addresses, so matches made "
+           f"against it would not count.")
+    patch = _patch_installer(path.parent) if path.name == "Scarface.exe" else None
+    if patch:
+        msg += (f" The patch ({patch.name}) is in the folder, but a patch file on its own changes nothing: "
+                f"run it to update your installed game, then copy the updated Scarface.exe from the game's "
+                f"install folder into binaries/.")
+    return msg + f" See {GUIDE} for the accepted versions."
+
+
+def _patch_installer(folder: Path) -> Optional[Path]:
+    """A PC patch installer sitting in the folder (e.g. 'Scarface 1.00.2 US Patch....exe'), if any."""
+    try:
+        return next((p for p in sorted(Path(folder).iterdir())
+                     if p.is_file() and p.suffix.lower() == ".exe" and "patch" in p.name.lower()), None)
+    except OSError:
+        return None
+
+
+def _pc_disc_in(folder: Path) -> Optional[Path]:
+    try:
+        return next((p for p in sorted(Path(folder).iterdir())
+                     if p.is_file() and p.suffix.lower() in DISC_IMAGES and _is_pc_disc(p)), None)
+    except OSError:
+        return None
+
+
+def pc_help(bin_dir: Path, log: Log = print) -> None:
+    """At portal start: if there is no usable Scarface.exe but the PC download or patch is in binaries/,
+    take a patched copy from the installed game if there is one, or say exactly what to do. A patch
+    installer or the PC disc image can't be used directly; the game has to be installed and patched."""
+    bin_dir = Path(bin_dir)
+    exe = bin_dir / "Scarface.exe"
+    if exe.exists():
+        return                                   # accepted, or refused with its own message
+    patch, disc = _patch_installer(bin_dir), _pc_disc_in(bin_dir)
+    if not (patch or disc):
+        return
+    hit = _installed_pc_exe()
+    if hit and check(hit) == "ok":
+        _place(exe, hit, log, f"your installed, patched game ({hit.parent})")
+        return
+    for line in _pc_steps(disc, patch):
+        log(line)
 
 
 def _place(dest: Path, data_or_src, log: Log, origin: str) -> None:
@@ -562,12 +604,21 @@ def _report(status: Dict[str, str], bin_dir: Path, pc_disc, patch, log: Log) -> 
         log("    - the PC game's Scarface.exe, version 1.00.2 (see below)")
     if status["Scarface.exe"] == "missing" and (pc_disc or patch):
         log("")
-        log("  For the PC functions, Scarface.exe has to come from an installed, patched game:")
-        log(f"    1. Install the game{' from ' + pc_disc.name if pc_disc else ''} (on Windows, double-click the .iso,")
-        log("       then run its setup).")
-        log(f"    2. Run the 1.00.2 patch{' (' + patch.name + ')' if patch else ''}.")
-        log("    3. Copy Scarface.exe from the game's install folder into the binaries folder.")
-        log("  The portal also checks Program Files for a patched copy each time it starts.")
+        for line in _pc_steps(pc_disc, patch):
+            log(line)
+
+
+def _pc_steps(pc_disc: Optional[Path], patch: Optional[Path]) -> List[str]:
+    return [
+        "  For the PC functions, Scarface.exe has to come from an installed, patched game. The disc image",
+        "  and the patch file can't be used as they are:",
+        f"    1. Install the game{' from ' + pc_disc.name if pc_disc else ''} (on Windows, double-click the .iso,",
+        "       then run its setup).",
+        f"    2. Run the 1.00.2 patch{' (' + patch.name + ')' if patch else ''} to update the installed game.",
+        "    3. Copy Scarface.exe from the game's install folder into the binaries folder.",
+        "  When this folder has the PC download or the patch in it, the portal also looks in Program Files",
+        "  for a patched copy each time it starts, and uses it if it finds one.",
+    ]
 
 
 def main() -> int:

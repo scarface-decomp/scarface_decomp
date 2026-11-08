@@ -152,3 +152,38 @@ def test_prepare_with_nothing_says_what_to_add(tmp_path):
     status = gf.prepare(b, logs.append)
     assert set(status.values()) == {"missing"}
     assert any("No game files yet" in l for l in logs)
+
+
+def test_patch_file_next_to_the_game_is_not_enough(tmp_path, monkeypatch):
+    """An unpatched Scarface.exe stays refused even with the 1.00.2 patch beside it; the message says to run it."""
+    b = tmp_path / "binaries"
+    b.mkdir()
+    (b / "Scarface.exe").write_bytes(b"MZ unpatched 1.00")
+    (b / "Scarface 1.00.2 US Patch-10-1-00-2-US.exe").write_bytes(b"MZ installer")
+    assert gf.check(b / "Scarface.exe") == "different"
+    msg = gf.refusal(b / "Scarface.exe")
+    assert "Scarface 1.00.2 US Patch" in msg and "changes nothing" in msg and "run it" in msg
+    # no Scarface.exe yet, only the patch and the PC disc: the portal says what to do at start
+    (b / "Scarface.exe").unlink()
+    pc = bytearray(0x9000)
+    pc[0x8001:0x8006] = b"CD001"
+    (b / "Scarface_Win_EN.iso").write_bytes(pc)
+    monkeypatch.setattr(gf, "_installed_pc_exe", lambda: None)
+    logs = []
+    gf.pc_help(b, logs.append)
+    text = "\n".join(logs)
+    assert "can't be used as they are" in text and "Run the 1.00.2 patch (Scarface 1.00.2 US Patch" in text
+    assert not (b / "Scarface.exe").exists()
+
+
+def test_installed_patched_game_is_picked_up(tmp_path, monkeypatch):
+    b = tmp_path / "binaries"
+    b.mkdir()
+    (b / "Scarface 1.00.2 US Patch.exe").write_bytes(b"MZ installer")
+    installed = tmp_path / "Program Files" / "Scarface" / "Scarface.exe"
+    installed.parent.mkdir(parents=True)
+    installed.write_bytes(b"patched")
+    monkeypatch.setitem(gf.EXPECTED, "Scarface.exe", ((__import__("hashlib").sha256(b"patched").hexdigest(),), "PC 1.00.2"))
+    monkeypatch.setattr(gf, "_installed_pc_exe", lambda: installed)
+    gf.pc_help(b, lambda m: None)
+    assert (b / "Scarface.exe").read_bytes() == b"patched"

@@ -20,7 +20,7 @@ You need at least one of the first two. To check yours, start the portal, or run
 
 | What | Why |
 | :--- | :--- |
-| **PC 1.00 without the patch**, or any other patch level | The patch replaced `Scarface.exe` with a newer build (linked November 16, 2006), so functions sit at different addresses and some changed. Supporting both would mean every PC function twice. If your copy is 1.00, install the official 1.00.2 patch and use that `Scarface.exe`. |
+| **PC 1.00 without the patch**, or any other patch level | The patch replaced `Scarface.exe` with a newer build (linked November 16, 2006), so functions sit at different addresses and some changed. Supporting both would mean every PC function twice. If your copy is 1.00, install the official 1.00.2 patch and use that `Scarface.exe`. Having the patch file in `binaries/` next to the game isn't enough: a patch file changes nothing until you run it on your installed game. The portal tells you this if it sees the patch there. |
 | **Any other Xbox disc or build** (other regions or languages, reprints with different files) | Only the US disc's `default.xbe` above. If you have a different disc, its file won't match the hashes and the portal won't use it. |
 | **Edited executables of any kind**: fan patches, remaster or "fixed" versions, widescreen or frame-rate fixes, trainers, repacks | They are no longer the game's original code. |
 | **PS2 and Wii versions** | They are different programs for different processors and compilers, so they can't be matched here. They are welcome as separate efforts: see [OTHER_VERSIONS.md](OTHER_VERSIONS.md). |
