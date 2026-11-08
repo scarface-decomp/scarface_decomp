@@ -233,7 +233,6 @@ def write_outputs(registry: dict, recon_dir: Path) -> List[str]:
 
 if __name__ == "__main__":
     import json
-    import sys
     root = Path(__file__).resolve().parent.parent
     reg = json.loads((root / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
     for p in write_outputs(reg, root / "reconstructed_src"):

@@ -1,6 +1,5 @@
 """The verifier end to end with the real cl.exe 13.10.3052 (skipped when it is not installed)."""
 import msvc_verify as MV
-import pytest
 
 from conftest import FLAGS, needs_compiler, needs_pc
 

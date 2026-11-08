@@ -1035,6 +1035,11 @@ class Handler(BaseHTTPRequestHandler):
         q1 = lambda k, d="": (qs.get(k) or [d])[0]  # noqa: E731
         if u.path in ("/", "/index.html"):
             return self._send(200, INDEX_HTML.read_bytes(), "text/html; charset=utf-8")
+        if u.path in ("/favicon.ico", "/favicon.svg"):     # browsers ask for it on their own
+            icon = BASE_DIR / "docs" / "favicon.svg"
+            if icon.exists():
+                return self._send(200, icon.read_bytes(), "image/svg+xml")
+            return self._send(204, b"", "image/svg+xml")
         if u.path == "/download/ai-handoff":
             data = HANDOFF_MD.read_bytes() if HANDOFF_MD.exists() else b"# AI handoff\n"
             return self._send(200, data, "text/markdown; charset=utf-8",

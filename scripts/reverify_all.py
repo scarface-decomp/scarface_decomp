@@ -25,14 +25,13 @@ from __future__ import annotations
 import argparse
 import concurrent.futures as cf
 import datetime as dt
-import hashlib
 import json
 import os
 import re
 import sys
 import threading
 from collections import Counter, defaultdict
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -545,7 +544,7 @@ def main() -> int:
     for st in STATUS_ORDER:
         lines.append(f"| {st} | {status_tot.get(st, 0):,} |")
     by_bin = Counter(c.bin for c in best.values() if c.status == "VERIFIED")
-    lines += ["", f"VERIFIED by binary: " + ", ".join(f"{k}: {v}" for k, v in sorted(by_bin.items())) or "none", ""]
+    lines += ["", "VERIFIED by binary: " + (", ".join(f"{k}: {v}" for k, v in sorted(by_bin.items())) or "none"), ""]
     lines += ["## By source file", "", "| File | " + " | ".join(STATUS_ORDER) + " |", "|---|" + "---|" * len(STATUS_ORDER)]
     for f in sorted(by_file):
         lines.append(f"| {f} | " + " | ".join(str(by_file[f].get(s, 0)) for s in STATUS_ORDER) + " |")

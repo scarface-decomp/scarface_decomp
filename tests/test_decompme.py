@@ -2,7 +2,6 @@
 tools/decompme.py: the target object sent to decomp.me must look exactly like the object MSVC writes
 for the same function, relocations included, or a correct guess would not score 100% there.
 """
-import base64
 import struct
 
 import pytest

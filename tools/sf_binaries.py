@@ -12,7 +12,7 @@ import hashlib
 import struct
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Set, Tuple
+from typing import List, Optional, Set, Tuple
 
 __all__ = ["Section", "BinaryImage", "function_extent", "collect_call_targets", "Extent"]
 

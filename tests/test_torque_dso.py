@@ -1,6 +1,4 @@
 """tools/torque_dso.py: Scarface's compiled TorqueScript must come apart and go back together exactly."""
-import struct
-from pathlib import Path
 
 import pytest
 

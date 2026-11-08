@@ -733,7 +733,7 @@
           <span class="contrib-label">Contributor:</span>
           <form id="auth-form-row" class="auth-form" onsubmit="event.preventDefault(); signInContributor();">
             <label class="sr-only" for="contrib-name">Handle</label>
-            <input id="contrib-name" class="input-box w-handle" placeholder="Handle" autocomplete="username" maxlength="64" />
+            <input id="contrib-name" type="text" class="input-box w-handle" placeholder="Handle" autocomplete="username" maxlength="64" />
             <label class="sr-only" for="contrib-pin">Password or PIN</label>
             <input id="contrib-pin" type="password" class="input-box w-pin" placeholder="Password / PIN" autocomplete="current-password" maxlength="128" />
             <button type="submit" class="btn-sm solid-gold">Sign In</button>
@@ -942,11 +942,11 @@
                     <option value="ollama">Local Ollama (127.0.0.1)</option>
                   </select>
                   <label class="sr-only" for="ai-custom-url">Custom API URL</label>
-                  <input id="ai-custom-url" class="input-box w-url" style="display:none;" placeholder="https://api.example.com/v1/chat/completions" oninput="saveAiSettings()" />
+                  <input id="ai-custom-url" type="url" class="input-box w-url" style="display:none;" placeholder="https://api.example.com/v1/chat/completions" oninput="saveAiSettings()" />
                   <label class="sr-only" for="ai-model-select">Model</label>
                   <select id="ai-model-select" class="input-box w-model" onchange="onModelSelectChange()"></select>
                   <label class="sr-only" for="ai-model-custom">Custom model ID</label>
-                  <input id="ai-model-custom" class="input-box w-model-custom" style="display:none;" placeholder="Type model ID..." oninput="saveAiSettings()" />
+                  <input id="ai-model-custom" type="text" class="input-box w-model-custom" style="display:none;" placeholder="Type model ID..." oninput="saveAiSettings()" />
                   <label class="sr-only" for="ai-key">API key</label>
                   <input id="ai-key" type="password" class="input-box w-key" placeholder="Paste API key" autocomplete="off" oninput="saveAiSettings()" />
                   <label class="remember-key" title="Off: the key is forgotten when you close this tab. On: it is stored in this browser until you clear it."><input type="checkbox" id="ai-remember-key" onchange="saveAiSettings()" /> Remember key</label>
@@ -955,7 +955,7 @@
                 <div class="ai-row attrib">
                   <div class="grow">
                     <label class="bar-label blue" for="contrib-tool-used">What AI / Tool Did You Use?</label>
-                    <input id="contrib-tool-used" class="input-box tool-input" placeholder="e.g. Manual C++, Claude, ChatGPT, DeepSeek, Ghidra..." maxlength="120" oninput="saveToolUsed()" />
+                    <input id="contrib-tool-used" type="text" class="input-box tool-input" placeholder="e.g. Manual C++, Claude, ChatGPT, DeepSeek, Ghidra..." maxlength="120" oninput="saveToolUsed()" />
                   </div>
                   <span class="hint-small">Stamped onto the verified .cpp &amp; Git commit</span>
                 </div>
@@ -2055,6 +2055,8 @@
     const list = $('queue-list');
     const prevScroll = list.scrollTop;
     list.innerHTML = '';
+    // A listbox must hold options; while there are none, the box is a status message instead.
+    list.setAttribute('role', PAGE_ITEMS.length ? 'listbox' : 'status');
     if (PAGE_ITEMS.length === 0) {
       const d = document.createElement('div');
       d.className = 'empty-note';
@@ -2891,6 +2893,7 @@
     $('script-list-count').textContent = fmtInt(rows.length) + ' shown'
       + (only ? ' • ' + fmtInt(only) + ' only here' : '') + (changed ? ' • ' + fmtInt(changed) + ' changed' : '');
     list.innerHTML = '';
+    list.setAttribute('role', rows.length ? 'listbox' : 'status');
     if (!rows.length) {
       const empty = document.createElement('div');
       empty.className = 'script-list-empty';

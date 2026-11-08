@@ -19,7 +19,7 @@ import json
 import re
 import struct
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 import lookalikes
 from msvc_verify import decorated_hint

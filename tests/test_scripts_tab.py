@@ -60,3 +60,4 @@ def test_detail_reads_one_file_and_refuses_paths_outside(server):
     assert bad["ok"] and bad["format"] == "could not be read"
     for path in ("../../decomp_portal_server.py", "xbox/art/notes.txt", "", "xbox/nothing.cso"):
         assert not server.script_detail(path)["ok"], path
+

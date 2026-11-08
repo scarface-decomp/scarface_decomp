@@ -123,6 +123,12 @@ def test_health_and_progress_come_from_the_registry(portal):
     assert "13.10.3052" in prog["compiler"]
 
 
+def test_accepted_game_files_and_no_stray_404s(portal):
+    assert get(portal, "/api/state")["binary_problems"] == {}       # the US files are accepted
+    with urllib.request.urlopen(portal["base"] + "/favicon.ico", timeout=30) as r:
+        assert r.status in (200, 204)                                # browsers ask for it on their own
+
+
 def test_login_rules(portal):
     assert post(portal, "/api/login", {"user": "Shorty", "pin": "1234"})[0] == 403       # new handles need 8+
     assert post(portal, "/api/login", ALICE) == (200, {"ok": True, "message": "Registered"})

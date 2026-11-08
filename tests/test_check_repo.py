@@ -21,7 +21,6 @@ def test_queue_seed_data_is_tracked_and_valid():
 def test_registry_from_another_game_version_is_rejected(tmp_path, monkeypatch):
     """A registry re-verified against a non-US or unpatched copy must not get through CI."""
     import json
-    import shutil
     from conftest import ROOT
     (tmp_path / "reports").mkdir()
     reg = json.loads((ROOT / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
