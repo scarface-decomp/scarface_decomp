@@ -1,0 +1,37 @@
+# Game files and archives: never committed (bring your own copies)
+binaries/
+source_archives/
+community_zips/
+workpacks/
+*.exe
+*.xbe
+*.rcf
+*.bik
+*.zip
+*.7z
+*.cso
+*.dso
+*.dtr
+
+# The Visual C++ Toolkit 2003 is not redistributable
+tools/msvc71/
+
+# Contributor credentials (salted hashes, but still private)
+private/
+reports/contributor_tokens.json
+
+# Local portal state: claims, partial attempts (each machine has its own)
+reports/task_progress_state.json
+
+# Rebuilt locally from the binaries by tools/queue_builder.py
+reports/full_remaining_queue.json
+reports/organized_4way_strings_master.txt
+
+# Build and scratch output
+*.obj
+*.pdb
+*.tmp
+__pycache__/
+*.pyc
+scripts/archive/
+_to_delete/

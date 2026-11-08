@@ -1,0 +1,3 @@
+# Python 3.9+
+capstone>=5.0      # required: function sizing, disassembly, hard-coded address check
+argon2-cffi>=21.3  # recommended: contributor PIN hashing (falls back to PBKDF2 without it)

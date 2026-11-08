@@ -1,0 +1,13 @@
+*.cpp linguist-detectable=true
+*.hpp linguist-detectable=true
+*.h   linguist-detectable=true
+*.py  linguist-vendored
+*.html linguist-vendored
+*.json linguist-generated
+*.txt  linguist-documentation
+*.md   linguist-documentation
+CMakeLists.txt linguist-vendored
+reports/** linguist-generated
+website_kit/** linguist-vendored
+workpacks/** linguist-generated
+scripts/** linguist-vendored
