@@ -19,6 +19,7 @@ reports/verified_registry.json — never from hard-coded numbers.
 
 from __future__ import annotations
 
+import base64
 import datetime as dt
 import hashlib
 import hmac
@@ -43,6 +44,7 @@ sys.path.insert(0, str(BASE_DIR / "tools"))
 
 import msvc_verify as MV  # noqa: E402
 from disasm_synth import disassemble, synthesize_cpp  # noqa: E402
+import decompme as DME  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 
@@ -326,7 +328,7 @@ def load_tasks() -> None:
         t = TASK_BY_ID.get(tid)
         if not t or t["status"] == "VERIFIED":
             continue
-        for k in ("status", "claimed_by", "claim_expires_at", "best_by", "best_cpp", "starter_cpp"):
+        for k in ("status", "claimed_by", "claim_expires_at", "best_by", "best_cpp", "starter_cpp", "decompme_slug"):
             if data.get(k) not in (None, ""):
                 t[k] = data[k]
         if data.get("scorer") == OVERLAY_SCORER:
@@ -344,6 +346,7 @@ def save_overlay(t: dict) -> None:
         "status": t["status"], "claimed_by": t.get("claimed_by", ""), "claim_expires_at": t.get("claim_expires_at", 0),
         "best_matched_bytes": t.get("best_matched_bytes", 0), "best_pct": t.get("best_pct", 0.0),
         "best_by": t.get("best_by", ""), "best_cpp": t.get("best_cpp", ""), "scorer": OVERLAY_SCORER,
+        "decompme_slug": t.get("decompme_slug", ""),
     }
     write_json(OVERLAY_JSON, overlay)
 
@@ -377,6 +380,22 @@ def live_task(t: dict) -> dict:
     return out
 
 
+_SLUG_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
+
+
+def decompme_prepare(t: dict) -> dict:
+    """Everything the page needs to create a decomp.me scratch for this function."""
+    img = image_for(t["bin"])
+    if img is None:
+        return {"ok": False, "error": f"binaries/{BINARIES[t['bin']].name} is missing, so there is nothing to send."}
+    starter = live_task(t).get("starter_cpp", "")
+    obj, fields = DME.prepare(img, t["fva_int"], int(t["size"]), t["symbol"], t["flags"], starter,
+                              [BASE_DIR / "include", RECON_DIR])
+    slug = t.get("decompme_slug", "")
+    return {"ok": True, "api": DME.DECOMPME_URL, "obj_b64": base64.b64encode(obj).decode("ascii"),
+            "fields": fields, "existing_url": f"{DME.DECOMPME_URL}/scratch/{slug}" if slug else ""}
+
+
 def queue_item(t: dict, n: int) -> dict:
     return {k: t.get(k) for k in ("id", "lane", "symbol", "va", "size", "tier", "tier_label", "est_label",
                                    "lease_minutes", "status", "claimed_by", "best_matched_bytes", "best_pct", "best_by")} | {
@@ -396,7 +415,16 @@ def flag_options(t: dict) -> List[str]:
     return opts
 
 
+NO_COMPILER_HELP = ("The 2003 compiler is not installed on this computer yet, so it can't verify here.\n"
+                    "Install it once from your own VCToolkitSetup.exe:\n"
+                    "    python scripts/setup_msvc71.py path/to/VCToolkitSetup.exe\n"
+                    "Or, if your code scores 100% on decomp.me, post the decomp.me link in a GitHub issue "
+                    "and a maintainer will verify it and credit you.")
+
+
 def run_verify(t: dict, cpp_code: str) -> dict:
+    if not MV.find_msvc71_bin():
+        return {"ok": False, "compiler_error": NO_COMPILER_HELP}
     tb = target_bytes(t)
     if tb is None:
         return {"ok": False, "compiler_error": f"binaries/{BINARIES[t['bin']].name} is missing, so there is nothing to compare against."}
@@ -573,7 +601,7 @@ def ai_call(cfg: dict) -> dict:
 # =========================================================================== #
 
 GIT_PATHS = ["reconstructed_src", "reports/verified_registry.json", "reports/reverify_report.md",
-             "reports/decomp_audit_log.json", "README.md"]
+             "reports/decomp_audit_log.json", "reports/progress.json", "README.md"]
 
 
 def git_sync(user: str) -> dict:
@@ -749,6 +777,17 @@ class Handler(BaseHTTPRequestHandler):
                 start = (page - 1) * limit
                 return self._json({"total": len(items), "page": page, "limit": limit,
                                    "items": [queue_item(t, n) for t in items[start:start + limit]]})
+        if u.path == "/api/decompme":
+            with STATE_LOCK:
+                t = TASK_BY_ID.get(q1("id"))
+                if t and q1("fresh") == "1":
+                    t["decompme_slug"] = ""
+            if not t:
+                return self._json({"ok": False, "error": "Function not found."}, 404)
+            try:
+                return self._json(decompme_prepare(t))
+            except (ValueError, RuntimeError) as e:
+                return self._json({"ok": False, "error": str(e)}, 400)
         if u.path == "/api/task":
             with STATE_LOCK:
                 t = TASK_BY_ID.get(q1("id"))
@@ -769,6 +808,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/login": self.post_login, "/api/claim": self.post_claim, "/api/cancel": self.post_cancel,
             "/api/verify": self.post_verify, "/api/fast-synthesize": self.post_synth, "/api/ai-proxy": self.post_ai,
             "/api/git-sync": self.post_git, "/api/upload-script": self.post_upload,
+            "/api/decompme": self.post_decompme,
         }.get(path)
         if not route:
             return self._json({"ok": False, "error": "Not found."}, 404)
@@ -877,6 +917,31 @@ class Handler(BaseHTTPRequestHandler):
                        target_hex=" ".join(f"{b:02X}" for b in (target_bytes(t) or b"")))
         return self._json(out)
 
+    def post_decompme(self, body):
+        """Remember a scratch the page created ({id, slug}), or create one from here ({id, create: true})
+        when the browser could not reach decomp.me itself."""
+        with STATE_LOCK:
+            t = TASK_BY_ID.get(body.get("id"))
+        if not t:
+            return self._json({"ok": False, "error": "Function not found."}, 404)
+        if body.get("create"):
+            prep = decompme_prepare(t)
+            if not prep.get("ok"):
+                return self._json(prep, 400)
+            res = DME.create_scratch(base64.b64decode(prep["obj_b64"]), prep["fields"])
+            if not res.get("ok"):
+                return self._json(res, 502)
+            slug = res["slug"]
+        else:
+            slug = str(body.get("slug", ""))
+            res = {"ok": True}
+        if not _SLUG_RE.match(slug):
+            return self._json({"ok": False, "error": "That does not look like a decomp.me scratch id."}, 400)
+        with STATE_LOCK:
+            t["decompme_slug"] = slug
+            save_overlay(t)
+        return self._json(res)
+
     def post_synth(self, body):
         with STATE_LOCK:
             t = TASK_BY_ID.get(body.get("id"))
@@ -929,7 +994,8 @@ def main() -> None:
     load_registry()
     load_tasks()
     if not MV.find_msvc71_bin():
-        print("[!] tools/msvc71/bin/cl.exe not found — compiling will fail until it is installed (see README).")
+        print("[!] The 2003 compiler is not installed yet. You can still browse functions and use decomp.me;")
+        print("    to verify here, run: python scripts/setup_msvc71.py path/to/VCToolkitSetup.exe")
     p = progress()
     url = f"http://{'localhost' if HOST in ('127.0.0.1', '0.0.0.0') else HOST}:{PORT}"
     print("=" * 78)
@@ -941,8 +1007,12 @@ def main() -> None:
     print(f"  Work queue : {sum(1 for t in ALL_TASKS if t['status'] != 'VERIFIED'):,} functions")
     print(f"  Maintainers: {', '.join(sorted(MAINTAINERS))}")
     print("=" * 78)
-    if os.name == "nt" and os.environ.get("SCARFACE_NO_BROWSER") != "1":
-        subprocess.Popen(["cmd", "/c", "start", url])
+    if os.environ.get("SCARFACE_NO_BROWSER") != "1":
+        if os.name == "nt":
+            subprocess.Popen(["cmd", "/c", "start", url])
+        else:
+            import webbrowser
+            threading.Timer(1.0, lambda: webbrowser.open(url)).start()
     ThreadingHTTPServer((HOST, PORT), Handler).serve_forever()
 
 

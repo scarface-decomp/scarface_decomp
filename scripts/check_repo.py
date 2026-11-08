@@ -72,8 +72,13 @@ def check_generated(reg: dict, problems: list) -> None:
     with tempfile.TemporaryDirectory(prefix="sf_check_") as tmp:
         troot = Path(tmp)
         (troot / "reconstructed_src").mkdir()
+        (troot / "reports").mkdir()
         shutil.copy2(ROOT / "README.md", troot / "README.md")
+        if (ROOT / "reports" / "progress.json").exists():
+            shutil.copy2(ROOT / "reports" / "progress.json", troot / "reports" / "progress.json")
         written = write_outputs(reg, troot / "reconstructed_src")
+        if not (ROOT / "reports" / "progress.json").exists():
+            problems.append("reports/progress.json is missing (run: python tools/registry_outputs.py)")
         for rel in written:
             got = troot / "reconstructed_src" / rel
             have = ROOT / "reconstructed_src" / rel

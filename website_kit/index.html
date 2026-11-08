@@ -385,6 +385,7 @@
     .btn:disabled, .btn-sm:disabled { opacity: 0.4; cursor: not-allowed; }
     .btn-claim { background: var(--gold); color: #090a0f; font-weight: 700; }
     .btn-ai { background: var(--crimson); color: #fff; font-weight: 700; }
+    .btn-dme { white-space: nowrap; background: transparent; color: var(--text, #eee); border: 1px solid currentColor; font-weight: 700; }
     .btn-verify { background: var(--green); color: #050507; font-weight: 700; }
     .btn-cancel { background: var(--bg-card-alt); color: #fff; border-color: var(--blue); }
     .btn-cancel-active { background: var(--crimson) !important; color: #fff !important; border-color: var(--gold) !important; }
@@ -941,8 +942,12 @@
                   <button type="button" id="btn-step1-claim" class="btn btn-claim" onclick="claimCurrentFunction()" disabled>1. Claim Function</button>
                 </div>
                 <div class="step-col">
-                  <span class="step-lbl">Step 2: Fast Solve / AI</span>
-                  <button type="button" id="btn-step2-ai" class="btn btn-ai" onclick="runAiAutoSolve()" disabled>2. Auto-Decompile</button>
+                  <span class="step-lbl">Step 2: Write the C++</span>
+                  <div class="step-pair">
+                    <button type="button" id="btn-step2-ai" class="btn btn-ai" onclick="runAiAutoSolve()" disabled>2. Auto-Decompile</button>
+                    <button type="button" id="btn-decompme" class="btn btn-dme" onclick="openOnDecompMe()" disabled
+                            title="Work on this function in your browser at decomp.me, with the same compiler">decomp.me &#x2197;</button>
+                  </div>
                 </div>
                 <div class="step-col">
                   <span class="step-lbl">Step 3: Test with cl.exe</span>
@@ -1180,6 +1185,7 @@
 
   let taskFetchSeq = 0;
   let claimInFlight = false;
+  let dmeInFlight = false;
   let queueLoadedOnce = false;
   let queueSeq = 0;
   let queueDebounce = null;
@@ -1775,6 +1781,7 @@
     [bClaim, bAi, bVerify, bCancel].forEach((b) => b.removeAttribute('title'));
 
     if (isBusy || autopilotRunning) {
+      $('btn-decompme').disabled = true;
       bClaim.disabled = true;
       bAi.disabled = true;
       bVerify.disabled = true;
@@ -1785,6 +1792,10 @@
     }
     bCancel.classList.remove('btn-cancel-active');
     bCancel.textContent = 'Cancel & Save';
+
+    const bDme = $('btn-decompme');
+    bDme.disabled = !t || dmeInFlight;
+    if (t) bDme.textContent = t.decompme_slug ? 'My decomp.me \u2197' : 'decomp.me \u2197';
 
     if (!t) {
       bClaim.disabled = bAi.disabled = bVerify.disabled = bCancel.disabled = true;
@@ -2117,6 +2128,84 @@
     }
     if (mySeq === taskFetchSeq) highlightRow(currentTask ? currentTask.id : null);
     return false;
+  }
+
+  /* ===================================================================
+   * decomp.me: work on the function in the browser with the same compiler
+   * =================================================================== */
+  function safeDecompMeUrl(api, url) {
+    try {
+      const a = new URL(api), u = new URL(url);
+      return (u.origin === a.origin && /^\/scratch\/[A-Za-z0-9_-]+(\/claim)?$/.test(u.pathname)) ? u.href : '';
+    } catch (e) { return ''; }
+  }
+
+  async function createScratchFromPage(prep) {
+    const fd = new FormData();
+    Object.keys(prep.fields).forEach((k) => fd.append(k, prep.fields[k]));
+    const bin = Uint8Array.from(atob(prep.obj_b64), (c) => c.charCodeAt(0));
+    fd.append('target_obj', new Blob([bin], { type: 'application/octet-stream' }), 'target.obj');
+    // Without cookies first (works whether or not you are signed in to decomp.me); with them second,
+    // in case decomp.me's bot check wants the cookie it gave this browser.
+    let r;
+    try {
+      r = await fetch(prep.api + '/api/scratch', { method: 'POST', body: fd, credentials: 'omit' });
+    } catch (e) {
+      r = await fetch(prep.api + '/api/scratch', { method: 'POST', body: fd, credentials: 'include' });
+    }
+    const d = await r.json();
+    if (!r.ok || !d || !/^[A-Za-z0-9_-]+$/.test(d.slug || '')) {
+      throw new Error((d && (d.detail || d.error)) || ('decomp.me answered HTTP ' + r.status));
+    }
+    const url = prep.api + '/scratch/' + d.slug;
+    return { ok: true, slug: d.slug, url: url,
+             claim_url: d.claim_token ? url + '/claim?token=' + encodeURIComponent(d.claim_token) : url };
+  }
+
+  async function openOnDecompMe(fresh) {
+    const t = currentTask;
+    if (!t || dmeInFlight) return;
+    dmeInFlight = true;
+    syncWorkflowButtons();
+    // Open the tab now, inside the click: browsers block tabs opened after waiting on the network.
+    let win = null;
+    try { win = window.open('', '_blank'); } catch (e) { win = null; }
+    if (win) {
+      try {
+        win.document.title = 'Sending to decomp.me...';
+        win.document.body.style.cssText = 'background:#0b0b0b;color:#eee;font:16px system-ui;padding:2em';
+        win.document.body.textContent = 'Sending ' + t.symbol + ' to decomp.me...';
+      } catch (e) { /* ignore */ }
+    }
+    try {
+      setStatus('Sending ' + t.symbol + ' to decomp.me...', 'info');
+      const prep = await apiFetchJson('/api/decompme?id=' + encodeURIComponent(t.id) + (fresh ? '&fresh=1' : ''));
+      if (!prep.ok) throw new Error(prep.error || 'could not prepare this function');
+      let url = prep.existing_url;
+      if (!url) {
+        let made = null, firstErr = '';
+        try { made = await createScratchFromPage(prep); } catch (e) { firstErr = e.message; }
+        if (made) {
+          postJson('/api/decompme', { id: t.id, slug: made.slug }).catch(() => {});
+        } else {
+          made = await postJson('/api/decompme', { id: t.id, create: true });   // ask the server to try instead
+          if (!made.ok) throw new Error(made.error || firstErr || 'decomp.me did not answer');
+        }
+        url = made.claim_url || made.url;
+        t.decompme_slug = made.slug;
+      }
+      url = safeDecompMeUrl(prep.api, url);
+      if (!url) throw new Error('decomp.me sent back an unexpected address');
+      if (win) { try { win.opener = null; } catch (e) { /* ignore */ } win.location.href = url; }
+      else window.open(url, '_blank', 'noopener');
+      setStatus('Opened on decomp.me. Change the C++ there until it shows 100%, then paste it into the editor here and press 3. Compile & Verify.', 'info');
+    } catch (e) {
+      if (win) { try { win.close(); } catch (e2) { /* ignore */ } }
+      setStatus('decomp.me: ' + e.message + '. Check your internet connection, open decomp.me once in this browser, then try again.', 'err');
+    } finally {
+      dmeInFlight = false;
+      syncWorkflowButtons();
+    }
   }
 
   /* ===================================================================

@@ -18,7 +18,7 @@ import os
 import re
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 BIN_INFO = {
     "pc": ("Original_Binary_Order_PC_1002.cpp", "pc", "Retail PC Scarface.exe v1.00.2"),
@@ -122,6 +122,66 @@ def update_readme(readme: Path, registry: dict) -> bool:
     return False
 
 
+SIZE_BUCKETS = [("1-9 B", 1, 10), ("10-19 B", 10, 20), ("20-39 B", 20, 40), ("40-79 B", 40, 80), ("80+ B", 80, 1 << 30)]
+
+
+def progress_summary(registry: dict, queue: Optional[list], previous: Optional[dict]) -> dict:
+    """Small summary for the website: verified counts from the registry, work-queue counts from the local
+    queue file when there is one (otherwise the last known numbers are kept)."""
+    entries = list(registry.get("entries", {}).values())
+    by = defaultdict(int)
+    for e in entries:
+        by[e["bin"]] += 1
+    stamps = [e.get("verified_at") or e.get("reverified_at") or "" for e in entries]
+    contributors = defaultdict(int)
+    for e in entries:
+        if e.get("verified_by"):
+            contributors[e["verified_by"]] += 1
+    out = {
+        "schema": "scarface_progress_v1",
+        "updated_at": max(stamps) if stamps else "",
+        "compiler": registry.get("compiler", ""),
+        "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "total": len(entries),
+                     "bytes": sum(int(e.get("size", 0)) for e in entries)},
+        "size_buckets": {name: sum(1 for e in entries if lo <= int(e.get("size", 0)) < hi) for name, lo, hi in SIZE_BUCKETS},
+        "contributors": dict(sorted(contributors.items(), key=lambda kv: (-kv[1], kv[0].lower()))),
+        "unattributed": sum(1 for e in entries if not e.get("verified_by")),
+        "queue": (previous or {}).get("queue"),
+    }
+    if queue is not None:
+        open_tasks = [t for t in queue if t.get("status") != "VERIFIED"]
+        q = defaultdict(int)
+        tiers = defaultdict(int)
+        for t in open_tasks:
+            q[t.get("bin", "?")] += 1
+            tiers[t.get("tier", "?")] += 1
+        out["queue"] = {"pc": q["pc"], "xb": q["xb"], "total": len(open_tasks), "tiers": dict(sorted(tiers.items()))}
+    return out
+
+
+def write_progress(registry: dict, reports_dir: Path) -> bool:
+    import json
+    path = reports_dir / "progress.json"
+    previous = None
+    try:
+        previous = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
+    queue = None
+    qpath = reports_dir / "full_remaining_queue.json"
+    if qpath.exists():
+        try:
+            queue = json.loads(qpath.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            queue = None
+    text = json.dumps(progress_summary(registry, queue, previous), indent=2) + "\n"
+    if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
+        return False
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    _write(path, text)
+    return True
+
+
 def write_outputs(registry: dict, recon_dir: Path) -> List[str]:
     """(Re)write all generated files. Returns the relative paths written."""
     entries: Dict[str, dict] = registry.get("entries", {})
@@ -157,6 +217,8 @@ def write_outputs(registry: dict, recon_dir: Path) -> List[str]:
                     _write(p, _header(f"{label}, {p.relative_to(recon_dir)} (0 verified)", compiler))
     if update_readme(recon_dir.parent / "README.md", registry):
         written.append("../README.md")
+    if write_progress(registry, recon_dir.parent / "reports"):
+        written.append("../reports/progress.json")
     return written
 
 

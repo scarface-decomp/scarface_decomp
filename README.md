@@ -1,4 +1,4 @@
-﻿# scarface_decomp
+# scarface_decomp
 
 ![Language](https://img.shields.io/badge/language-C%2B%2B-00599C?style=flat-square&logo=c%2B%2B)
 ![Compiler](https://img.shields.io/badge/compiler-MSVC%207.1%20(13.10.3052)-5C2D91?style=flat-square)
@@ -50,35 +50,48 @@ A function counts only when the compiled C++:
 The full procedure, with code generation notes for this compiler, is in
 [docs/METHODOLOGY.md](docs/METHODOLOGY.md).
 
-## Setup
+## Quick start (no experience needed)
 
-1. **Python 3.9 or newer**, then `pip install -r requirements.txt` (Capstone is required).
-2. **Game files** in `binaries/`: `Scarface.exe` (PC 1.00.2) and `default.xbe` (Xbox). `game.xbe` (April
-   2006 prototype) is optional. The SHA-256 of the files the registry was verified against is in
-   `reports/verified_registry.json` under `binaries`.
-3. **Compiler.** From your own `VCToolkitSetup.exe`:
+1. **Install Python 3** from [python.org](https://www.python.org/downloads/). On Windows, tick
+   *Add python.exe to PATH* on the installer's first screen.
+2. **Download this project**: on GitHub press **Code**, then **Download ZIP**, and unzip it anywhere
+   (or `git clone` it).
+3. **Add your game files** to the `binaries` folder: `Scarface.exe` (PC 1.00.2) and/or `default.xbe`
+   (Xbox). `game.xbe` (April 2006 prototype) is optional. They never leave your computer.
+4. **Start the portal**: on Windows double-click **`START_PORTAL.bat`**; on macOS or Linux run
+   `sh start_portal.sh`. It installs what it needs the first time and opens http://localhost:8085.
+5. **Pick a small function** and press **decomp.me**. It opens on [decomp.me](https://decomp.me), which
+   runs the same compiler in your browser. Change the C++ until it shows 100%, then paste it back into
+   the portal.
+6. **Press Compile & Verify** to record it under your name. That needs the compiler (below). No
+   compiler? Post your 100% decomp.me link in a [GitHub issue](../../issues/new) and a maintainer will
+   verify it and credit you.
 
-   ```bash
-   python scripts/setup_msvc71.py path/to/VCToolkitSetup.exe
-   ```
+Only the function you send leaves your computer: decomp.me receives that one function's bytes, the
+same as any decomp.me scratch. decomp.me's score is a helper; the portal's check is what counts.
 
-   This installs `cl.exe` 13.10.3052 with its headers and libraries into `tools/msvc71/`. On Windows it
-   runs natively. On Linux and macOS it runs under Wine with a 32-bit prefix, for example
-   `export WINEPREFIX=$HOME/.wine32 WINEARCH=win32 WINEDEBUG=-all` (extraction needs `msitools`).
-   Set `SCARFACE_MSVC_BIN` to use a compiler somewhere else. The Toolkit is not redistributable, so
-   `tools/msvc71/` is never committed.
+## The compiler
+
+From your own `VCToolkitSetup.exe` (Visual C++ Toolkit 2003):
+
+```bash
+python scripts/setup_msvc71.py path/to/VCToolkitSetup.exe
+```
+
+This installs `cl.exe` 13.10.3052 with its headers and libraries into `tools/msvc71/`. On Windows it
+runs natively. On Linux and macOS it runs under Wine with a 32-bit prefix, for example
+`export WINEPREFIX=$HOME/.wine32 WINEARCH=win32 WINEDEBUG=-all` (extraction needs `msitools`).
+Set `SCARFACE_MSVC_BIN` to use a compiler somewhere else. The Toolkit is not redistributable, so
+`tools/msvc71/` is never committed. The SHA-256 of the game files the registry was verified against is
+in `reports/verified_registry.json` under `binaries`.
 
 ## Working on functions
 
-**In the browser.** Start the portal and open http://localhost:8085:
-
-```bash
-python decomp_portal_server.py
-```
-
-Sign in with a handle and a PIN of at least 8 characters, claim a function from the queue, write C++
-(or ask your own AI key to draft it), and press **Compile & Verify**. A match is recorded in
-`reports/verified_registry.json`, and the generated source files are rewritten.
+**In the portal** (http://localhost:8085): sign in with a handle and a PIN of at least 8 characters,
+claim a function from the queue, write the C++ (in the editor, on decomp.me, or with your own AI key),
+and press **Compile & Verify**. A match is recorded in `reports/verified_registry.json`, and the
+generated source files are rewritten. Manual start: `pip install -r requirements.txt`, then
+`python decomp_portal_server.py`.
 
 | Variable | Default | |
 | :--- | :--- | :--- |
@@ -86,6 +99,7 @@ Sign in with a handle and a PIN of at least 8 characters, claim a function from 
 | `SCARFACE_PORT` | `8085` | |
 | `SCARFACE_MAINTAINERS` | `RRutherrfordd (Founder)` | handles allowed to use "Sync Verified to GitHub" |
 | `SCARFACE_NO_BROWSER` | unset | `1` stops it opening a browser |
+| `SCARFACE_DECOMPME_URL` | `https://decomp.me` | where the decomp.me button sends functions |
 
 **From the command line**, with the same rules:
 
@@ -112,9 +126,11 @@ python tools/queue_builder.py      # rebuild the work queue from the binaries
 | `include/` | Shared headers. |
 | `reports/verified_registry.json` | The record of what is verified, with the code, flags and who verified it. |
 | `reports/reverify_report.md` | Every claimed function, its status and the reason. |
-| `tools/` | Verifier (`msvc_verify.py`), binary reader, queue builder, C++ policy, script-format tools. |
+| `tools/` | Verifier (`msvc_verify.py`), binary reader, queue builder, C++ policy, decomp.me export (`decompme.py`), script-format tools. |
+| `START_PORTAL.bat`, `start_portal.sh` | Double-click (Windows) or `sh` (macOS, Linux) launchers for the portal. |
 | `scripts/` | Compiler setup, re-verification, maintenance. |
 | `website_kit/index.html` | The portal's web page. |
+| `docs/index.html` | The public project website: live progress and every verified function (see `docs/README.md`). |
 | `docs/METHODOLOGY.md` | Verification rules and code generation notes. |
 | `SCARFACE_DECOMP_AI_HANDOFF.md`, `AGENTS.md` | Brief for AI assistants (served by the portal at `/download/ai-handoff`), and how an agent uses the portal API. |
 | `tests/` | Test suite (`python -m pytest -q tests/`). |

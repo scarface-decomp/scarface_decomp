@@ -31,9 +31,9 @@ def server():
     srv.shutdown()
 
 
-def reset(lease_sec=900, no_login=False, legacy_claim=False, **delays):
+def reset(lease_sec=900, no_login=False, legacy_claim=False, dme_browser_fail=False, **delays):
     payload = {"delays": {"verify": 0.15, "ai": 0.25, "fast": 0.05, **delays}, "lease_sec": lease_sec,
-               "no_login": no_login, "legacy_claim": legacy_claim}
+               "no_login": no_login, "legacy_claim": legacy_claim, "dme_browser_fail": dme_browser_fail}
     req = urllib.request.Request(BASE + "__reset", data=json.dumps(payload).encode(),
                                  headers={"Content-Type": "application/json"}, method="POST")
     urllib.request.urlopen(req).read()
@@ -343,3 +343,33 @@ def test_wrong_pin_signs_out(page):
     page.click("#btn-step1-claim")
     page.wait_for_selector("#auth-form-row", state="visible")          # server rejected the PIN -> signed out
     assert "locked with a PIN" in page.text_content("#verify-status")
+
+
+def test_decompme_button_creates_scratch_then_reopens_it(page):
+    # No sign-in needed: anyone can look at a function on decomp.me.
+    with page.context.expect_page() as info:
+        page.click("#btn-decompme")
+    tab = info.value
+    tab.wait_for_url("**/scratch/mock1/claim?token=tokmock1")
+    assert len(mock.SCRATCHES) == 1
+    sent = mock.SCRATCHES[0]
+    assert sent["compiler"] == "msvc7.1" and sent["platform"] == "win32" and sent["has_target_obj"]
+    assert "starter for t0000" in sent["source_code"]
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('Opened on decomp.me')")
+    page.wait_for_function("document.getElementById('btn-decompme').textContent.includes('My decomp.me')")
+    assert [c for c in calls("/api/decompme") if c[1].get("slug") == "mock1"]
+    tab.close()
+    with page.context.expect_page() as info:                 # second click: same scratch, nothing new created
+        page.click("#btn-decompme")
+    info.value.wait_for_url("**/scratch/mock1")
+    assert len(mock.SCRATCHES) == 1
+
+
+def test_decompme_falls_back_to_the_server(page):
+    reset(dme_browser_fail=True)
+    page.reload()
+    page.wait_for_function("document.getElementById('wb-title').textContent.includes('Func')")
+    with page.context.expect_page() as info:
+        page.click("#btn-decompme")
+    info.value.wait_for_url("**/scratch/server1/claim?token=srv")
+    assert [c for c in calls("/api/decompme") if c[1].get("create")]

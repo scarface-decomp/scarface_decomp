@@ -150,6 +150,23 @@ def test_task_has_the_real_target_bytes(portal):
     assert t["target_hex"] == "B8 A4 9D 43 00 C3"
 
 
+def test_decompme_target_and_remembered_scratch(portal):
+    import base64
+    import msvc_verify as MV
+    prep = get(portal, f"/api/decompme?id={TID}")
+    assert prep["ok"] and prep["api"] == "https://decomp.me" and prep["existing_url"] == ""
+    assert prep["fields"]["compiler"] == "msvc7.1" and prep["fields"]["compiler_flags"].startswith("/TP ")
+    coff = MV.CoffObject(base64.b64decode(prep["obj_b64"]))
+    (fn,) = coff.functions()
+    assert fn.code == bytes.fromhex("B8 00 00 00 00 C3")             # the address became a relocation
+    assert [coff.symbols[si].name for _o, si, _t in fn.relocs] == ["_DAT_00439DA4"]
+    assert post(portal, "/api/decompme", {"id": TID, "slug": "../evil"})[0] == 400
+    assert post(portal, "/api/decompme", {"id": TID, "slug": "AbC12"}) == (200, {"ok": True})
+    assert get(portal, f"/api/decompme?id={TID}")["existing_url"] == "https://decomp.me/scratch/AbC12"
+    assert get(portal, f"/api/task?id={TID}")["task"]["decompme_slug"] == "AbC12"
+    assert get(portal, f"/api/decompme?id={TID}&fresh=1")["existing_url"] == ""
+
+
 def test_claims(portal):
     assert post(portal, "/api/verify", {**ALICE, "id": TID, "cpp_code": GOOD})[0] == 403   # claim first
     assert post(portal, "/api/claim", {**ALICE, "id": TID})[1]["ok"]

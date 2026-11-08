@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scarface: The World Is Yours, rebuilt by its fans</title>
+  <meta name="description" content="Fans are rebuilding the source code of Scarface: The World Is Yours (2006), one function at a time, with the compiler the game was made with. See the progress and help out, no experience needed." />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:title" content="Scarface: The World Is Yours, rebuilt by its fans" />
+  <meta property="og:description" content="The game's source code, rewritten piece by piece until it compiles to the exact same game. Open source; bring your own copy of the game." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Crect x='5' y='5' width='54' height='54' fill='none' stroke='%23C8A15A' stroke-width='2'/%3E%3Crect x='10' y='10' width='44' height='44' fill='none' stroke='%23C8A15A' stroke-width='1'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Futura,Century Gothic,sans-serif' font-size='32' fill='%23EFE6D4'%3ES%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Poiret+One&display=swap" rel="stylesheet">
+  <style>
+    /* Black lacquer, ivory, brass and one red: the mansion, kept quiet.
+       Poiret One (Miami art-deco lettering) for display only; Jost (Futura's geometry) for everything else. */
+    :root {
+      --black: #000000;
+      --ivory: #EFE6D4;
+      --smoke: #9C9385;
+      --brass: #C8A15A;
+      --brass-dim: #5E4C2C;
+      --line: #2A2520;
+      --red: #B3161E;
+      --red-deep: #8E0F14;
+      --panel: #0D0C0A;
+      --display: 'Poiret One', 'Futura', 'Century Gothic', sans-serif;
+      --sans: 'Jost', 'Futura', 'Century Gothic', 'Avenir Next', 'Segoe UI', sans-serif;
+      --mono: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace;
+      --col: 1080px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body { background: var(--black); color: var(--ivory); font-family: var(--sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--brass); text-underline-offset: 3px; }
+    a:hover { color: var(--ivory); }
+    :focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+    code, pre, .mono { font-family: var(--mono); }
+    code { font-size: 0.86em; color: var(--ivory); background: var(--panel); border: 1px solid var(--line); padding: 1px 6px; border-radius: 3px; overflow-wrap: anywhere; }
+    .wrap { max-width: var(--col); margin: 0 auto; padding: 0 28px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+    [hidden] { display: none !important; }
+
+    /* ---------- top bar ---------- */
+    .topbar { position: sticky; top: 0; z-index: 10; background: rgba(0,0,0,0.9); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+    .brand { font-family: var(--display); font-size: 1.45rem; color: var(--ivory); text-decoration: none; white-space: nowrap; letter-spacing: 0.02em; }
+    .brand:hover { color: var(--brass); }
+    .nav { display: flex; align-items: center; gap: 2px; }
+    .nav a { color: var(--smoke); text-decoration: none; font-size: 0.95rem; padding: 6px 12px; white-space: nowrap; }
+    .nav a:hover { color: var(--ivory); }
+    .nav a.gh { color: var(--ivory); border: 1px solid var(--brass-dim); border-radius: 3px; margin-left: 10px; }
+    .nav a.gh:hover { border-color: var(--brass); color: var(--brass); }
+
+    /* ---------- hero ---------- */
+    .hero .wrap { padding-top: 88px; padding-bottom: 80px; }
+    h1 { text-wrap: balance; font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 4.2vw, 2.9rem); line-height: 1.15; letter-spacing: 0.01em; }
+    .lede { color: var(--smoke); font-size: 1.15rem; max-width: 36em; margin-top: 10px; }
+    .claim { text-wrap: balance; font-family: var(--display); font-size: clamp(2.9rem, 9.5vw, 7.4rem); line-height: 1; letter-spacing: -0.01em; margin-top: 64px; }
+    .meter { position: relative; height: 3px; background: var(--line); margin-top: 28px; }
+    .meter > span { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--red); transition: width 1.4s cubic-bezier(.2,.7,.2,1); }
+    .count { margin-top: 14px; color: var(--ivory); font-size: 1.05rem; }
+    .facts { display: flex; flex-wrap: wrap; gap: 10px 40px; margin-top: 26px; }
+    .facts div { min-width: 0; }
+    .facts dt { color: var(--smoke); font-size: 0.86rem; }
+    .facts dd { font-size: 1.15rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+    .btn { display: inline-block; font: 500 1rem var(--sans); padding: 12px 22px; border-radius: 3px; text-decoration: none; cursor: pointer; border: 1px solid var(--brass-dim); color: var(--ivory); background: transparent; }
+    .btn:hover { border-color: var(--brass); color: var(--brass); }
+    .btn.primary { background: var(--red-deep); border-color: var(--red-deep); color: var(--ivory); }
+    .btn.primary:hover { background: var(--red); border-color: var(--red); color: var(--ivory); }
+    .status-line { margin-top: 22px; font-size: 0.85rem; color: var(--smoke); }
+    .status-line.err { color: #E7A39A; }
+
+    /* ---------- sections: a double brass rule, deco-style, marks each new part of the page ---------- */
+    section { border-top: 3px double var(--brass-dim); }
+    section > .wrap { padding-top: 72px; padding-bottom: 80px; }
+    h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 4.4vw, 3rem); line-height: 1.1; margin-bottom: 18px; }
+    h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+    .intro { color: var(--smoke); max-width: 38em; margin-bottom: 36px; }
+    .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; }
+    .prose p { max-width: 38em; }
+    .prose p + p { margin-top: 14px; }
+    .rules { list-style: none; margin-top: 30px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 32px; }
+    .rules li { border-top: 1px solid var(--line); padding-top: 14px; color: var(--smoke); font-size: 0.95rem; }
+    .rules li b { display: block; color: var(--ivory); font-weight: 600; margin-bottom: 2px; }
+    .small { font-size: 0.9rem; color: var(--smoke); margin-top: 28px; }
+
+    /* ---------- progress ---------- */
+    .builds { display: grid; gap: 26px; }
+    .build-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline; }
+    .build-row .name { font-weight: 600; }
+    .build-row .name span { color: var(--smoke); font-weight: 400; font-size: 0.9rem; margin-left: 8px; }
+    .build-row .pct { font-family: var(--display); font-size: 2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+    .build-row .meter { grid-column: 1 / -1; margin-top: 6px; }
+    .build-row .sub { grid-column: 1 / -1; color: var(--smoke); font-size: 0.9rem; }
+    .side h3 { margin-top: 0; }
+    .side + .side { margin-top: 40px; }
+    .side p { color: var(--smoke); font-size: 0.92rem; margin-bottom: 14px; }
+    .buckets { display: grid; gap: 8px; }
+    .bucket { display: grid; grid-template-columns: 74px minmax(0, 1fr) 56px; align-items: center; gap: 12px; font-size: 0.9rem; }
+    .bucket .lbl { color: var(--smoke); font-variant-numeric: tabular-nums; }
+    .bucket .track { height: 6px; background: var(--line); }
+    .bucket .track span { display: block; height: 100%; background: var(--brass); }
+    .bucket .val { text-align: right; font-variant-numeric: tabular-nums; }
+    .leaders { list-style: none; }
+    .leaders li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .leaders .who { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .leaders .n { color: var(--brass); font-variant-numeric: tabular-nums; }
+
+    /* ---------- steps (a real sequence, so numbered) ---------- */
+    ol.steps { list-style: none; counter-reset: s; display: grid; gap: 0; max-width: 46em; }
+    ol.steps li { counter-increment: s; position: relative; padding: 22px 0 22px 64px; border-top: 1px solid var(--line); min-width: 0; color: var(--smoke); }
+    ol.steps li:last-child { border-bottom: 1px solid var(--line); }
+    ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 14px; width: 40px; font-family: var(--display); font-size: 2.3rem; line-height: 1; color: var(--brass); text-align: center; }
+    ol.steps li b { display: block; color: var(--ivory); font-weight: 600; font-size: 1.05rem; margin-bottom: 4px; }
+    pre { background: var(--panel); border: 1px solid var(--line); border-radius: 3px; padding: 12px 14px; overflow-x: auto; font-size: 0.84rem; line-height: 1.55; color: var(--ivory); white-space: pre; max-width: 100%; }
+    ol.steps pre { margin-top: 10px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 36px; }
+
+    /* ---------- function browser ---------- */
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .toolbar input, .toolbar select { background: var(--panel); color: var(--ivory); border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; font: inherit; font-size: 0.95rem; }
+    .toolbar input { flex: 1 1 280px; min-width: 0; }
+    .toolbar input::placeholder { color: #6f685d; }
+    .toolbar input:focus, .toolbar select:focus { border-color: var(--brass-dim); }
+    .result-count { color: var(--smoke); font-size: 0.9rem; margin-bottom: 8px; }
+    .fn-list { border-top: 1px solid var(--line); }
+    .fn { border-bottom: 1px solid var(--line); }
+    .fn-head { width: 100%; display: grid; grid-template-columns: 52px 108px minmax(0, 1fr) 56px 16px; align-items: center; gap: 14px; padding: 12px 4px; background: none; border: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+    .fn-head:hover .fn-sym { color: var(--brass); }
+    .tag { font-size: 0.82rem; color: var(--smoke); }
+    .tag.pc { color: var(--ivory); }
+    .fn-va { font-family: var(--mono); font-size: 0.84rem; color: var(--smoke); }
+    .fn-sym { font-family: var(--mono); font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .fn-size { text-align: right; color: var(--smoke); font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+    .chev { color: var(--brass); transition: transform 0.15s; }
+    .fn.open .chev { transform: rotate(90deg); }
+    .fn-body { display: none; padding: 2px 4px 22px; }
+    .fn.open .fn-body { display: block; }
+    .meta { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 0.86rem; color: var(--smoke); margin-bottom: 10px; }
+    .meta b { color: var(--ivory); font-weight: 500; }
+    .code-box { position: relative; }
+    .copy { position: absolute; top: 8px; right: 8px; font: 500 0.8rem var(--sans); padding: 3px 10px; border-radius: 3px; background: var(--black); border: 1px solid var(--brass-dim); color: var(--ivory); cursor: pointer; }
+    .copy:hover { border-color: var(--brass); color: var(--brass); }
+    .fn-links { margin-top: 10px; font-size: 0.9rem; overflow-wrap: anywhere; }
+    .more { display: flex; justify-content: center; margin-top: 22px; }
+    .empty { padding: 30px 4px; color: var(--smoke); }
+
+    footer { border-top: 1px solid var(--line); }
+    footer .wrap { padding-top: 36px; padding-bottom: 52px; color: var(--smoke); font-size: 0.86rem; display: grid; gap: 12px; }
+    footer .links { margin-top: 0; }
+
+    @media (max-width: 900px) {
+      .split { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .nav a.opt { display: none; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      .wrap { padding: 0 18px; }
+      .hero .wrap { padding-top: 52px; padding-bottom: 56px; }
+      .claim { margin-top: 44px; }
+      .rules { grid-template-columns: minmax(0, 1fr); }
+      .fn-head { grid-template-columns: 40px minmax(0, 1fr) 48px 12px; gap: 10px; }
+      .fn-va { display: none; }
+      ol.steps li { padding-left: 48px; }
+      ol.steps li::before { width: 30px; font-size: 1.9rem; }
+      .facts { gap: 10px 28px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .meter > span { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top">Scarface decomp</a>
+      <nav class="nav" aria-label="Sections">
+        <a class="opt" href="#how">How it works</a>
+        <a class="opt" href="#progress">Progress</a>
+        <a class="opt" href="#help">Help out</a>
+        <a class="opt" href="#functions">Code</a>
+        <a class="gh" data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="wrap" aria-live="polite">
+        <h1>Scarface: The World Is Yours</h1>
+        <p class="lede">Fans rebuilding the 2006 game's source code, one function at a time, so it can be preserved, fixed and modded.</p>
+
+        <p class="claim" id="claim">The world is <span id="sb-pct">…</span> yours.</p>
+        <div class="meter" role="progressbar" aria-label="Share of the game rebuilt" aria-valuemin="0" aria-valuemax="100" id="sb-bar-outer"><span id="sb-bar"></span></div>
+        <p class="count"><span id="sb-verified">…</span> of <span id="sb-total">…</span> functions rebuilt so far.</p>
+
+        <dl class="facts">
+          <div><dt>PC version</dt><dd id="sb-pc">…</dd></div>
+          <div><dt>Xbox version</dt><dd id="sb-xb">…</dd></div>
+          <div><dt>Bytes matched</dt><dd id="sb-bytes">…</dd></div>
+          <div><dt>Compiler</dt><dd id="sb-compiler">cl.exe 13.10.3052</dd></div>
+        </dl>
+
+        <div class="cta">
+          <a class="btn primary" href="#help">Help rebuild it</a>
+          <a class="btn" data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">Source code on GitHub</a>
+        </div>
+        <p class="status-line" id="data-status">Loading the latest numbers…</p>
+      </div>
+    </div>
+
+    <section id="how" aria-labelledby="h-how">
+      <div class="wrap split">
+        <h2 id="h-how">How it works</h2>
+        <div class="prose">
+          <p>Every game starts as code written by people. A program called a compiler turns that code into the
+            machine code your PC or Xbox runs. Scarface's original code was never released.</p>
+          <p>So we write it again. Each small piece of the game, called a function, is rewritten in C++ and run
+            through the same compiler the developers used: Microsoft Visual C++ 7.1, from 2003. When the result
+            is identical to the game, byte for byte, that function is done. Nobody has to take anyone's word for
+            it: the compiler decides.</p>
+          <ul class="rules">
+            <li><b>Same bytes</b>Same length and same machine code as the original game.</li>
+            <li><b>Same connections</b>Every jump, call and variable points where the original did.</li>
+            <li><b>No shortcuts</b>Memory addresses from 2006 can't be typed in as numbers.</li>
+            <li><b>Real C++</b>No hidden assembly or tricks that just copy the bytes.</li>
+          </ul>
+          <p class="small">Full rules and compiler notes:
+            <a data-repo-link="/blob/main/docs/METHODOLOGY.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/METHODOLOGY.md" target="_blank" rel="noopener noreferrer">METHODOLOGY.md</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="progress" aria-labelledby="h-progress">
+      <div class="wrap split">
+        <div>
+          <h2 id="h-progress">Progress</h2>
+          <p class="intro">Most work happens on the Xbox version: it shares the engine with the PC version, and only
+            part of the PC game can be read as plain code.</p>
+          <div class="builds">
+            <div class="build-row">
+              <div class="name">PC <span>Scarface.exe 1.00.2</span></div>
+              <div class="pct" id="pc-big">…</div>
+              <div class="meter"><span id="pc-bar"></span></div>
+              <div class="sub" id="pc-sub"></div>
+            </div>
+            <div class="build-row">
+              <div class="name">Xbox <span>default.xbe</span></div>
+              <div class="pct" id="xb-big">…</div>
+              <div class="meter"><span id="xb-bar"></span></div>
+              <div class="sub" id="xb-sub"></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="side">
+            <h3>Rebuilt functions by size</h3>
+            <p>Small ones get done first. The bigger ones are where help is needed most.</p>
+            <div class="buckets" id="buckets"></div>
+          </div>
+          <div class="side">
+            <h3>People who helped</h3>
+            <p id="contrib-note">Everyone who rebuilds a function through the portal is credited here.</p>
+            <ul class="leaders" id="leaders"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="help" aria-labelledby="h-help">
+      <div class="wrap">
+        <h2 id="h-help">Help rebuild it</h2>
+        <p class="intro">You don't need to be an expert. If you can read a little C++, or want to learn, small functions
+          take minutes. You'll need your own copy of the game. Everything runs on your computer and your game files are
+          never uploaded.</p>
+        <ol class="steps">
+          <li><b>Install Python</b>Get Python 3 from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">python.org</a>.
+            On Windows, tick <em>Add python.exe to PATH</em> on the installer's first screen.</li>
+          <li><b>Download the project</b>On <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>,
+            press <em>Code</em>, then <em>Download ZIP</em>, and unzip it anywhere. If you use Git:
+            <pre>git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></pre></li>
+          <li><b>Add your game files</b>Copy <code>Scarface.exe</code> (PC version 1.00.2) and/or <code>default.xbe</code>
+            (from the Xbox disc) into the project's <code>binaries</code> folder.</li>
+          <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
+            <code>sh start_portal.sh</code>. Your browser opens the portal at <code>localhost:8085</code>.</li>
+          <li><b>Pick a function and solve it</b>Choose a small one, then press <em>decomp.me</em>. It opens in your
+            browser with the same compiler. Change the C++ until it shows 100%, then paste it back into the portal.</li>
+          <li><b>Verify it</b>Press <em>Compile &amp; Verify</em> to record it under your name. That needs the 2003
+            compiler, installed once from your own <code>VCToolkitSetup.exe</code>:
+            <pre>python scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
+            No compiler? Post your 100% decomp.me link in a
+            <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>
+            and a maintainer will verify it and credit you.</li>
+        </ol>
+        <div class="links">
+          <a data-repo-link="/blob/main/CONTRIBUTING.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing guide</a>
+          <a data-repo-link="/blob/main/SCARFACE_DECOMP_AI_HANDOFF.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/SCARFACE_DECOMP_AI_HANDOFF.md" target="_blank" rel="noopener noreferrer">Using an AI assistant</a>
+          <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">Ask a question</a>
+          <a data-repo-link="/blob/main/PROVENANCE.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/PROVENANCE.md" target="_blank" rel="noopener noreferrer">Where code may come from</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="functions" aria-labelledby="h-functions">
+      <div class="wrap">
+        <h2 id="h-functions">The code so far</h2>
+        <p class="intro">Every rebuilt function and its C++. Select one to read it.</p>
+        <div class="toolbar">
+          <label class="sr-only" for="q">Search functions</label>
+          <input id="q" type="search" placeholder="Search by name, address or file, e.g. DriveThread" autocomplete="off" />
+          <label class="sr-only" for="bin">Version</label>
+          <select id="bin">
+            <option value="all">PC and Xbox</option>
+            <option value="pc">PC only</option>
+            <option value="xb">Xbox only</option>
+          </select>
+          <label class="sr-only" for="sort">Sort</label>
+          <select id="sort">
+            <option value="addr">By address</option>
+            <option value="size">Largest first</option>
+            <option value="recent">Newest first</option>
+          </select>
+        </div>
+        <div class="result-count" id="count" aria-live="polite"></div>
+        <div class="fn-list" id="fn-list"><div class="empty">Loading…</div></div>
+        <div class="more"><button class="btn" id="more" type="button" hidden>Show more</button></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>Source code and tools only: no game files, assets, compiler or SDK files. Bring your own legally obtained copies.
+        Not affiliated with or endorsed by the game's developer, publishers or rights holders. Code licensed under GPL-3.0-or-later.</div>
+      <div class="links">
+        <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a data-repo-link="/blob/main/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer">Legal</a>
+        <a data-repo-link="/blob/main/LICENSE" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a>
+        <a data-repo-link="/blob/main/CREDITS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/CREDITS.md" target="_blank" rel="noopener noreferrer">Credits</a>
+        <span id="updated"></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // Where the numbers come from, in order:
+    //   1. data/ next to this page: the Cloudflare Pages build copies reports/progress.json and
+    //      reports/verified_registry.json there on every push;
+    //   2. the repository itself on raw.githubusercontent.com (GitHub Pages, or if 1 is missing).
+    // On a *.github.io address the repository is taken from the address. For local testing only,
+    // ?data=<base url> is honoured on localhost and replaces both.
+    var CFG = (function () {
+      var owner = 'scarface-decomp', repo = 'scarface_decomp', branch = 'main';
+      var host = location.hostname;
+      if (/\.github\.io$/i.test(host)) {
+        owner = host.split('.')[0];
+        var seg = location.pathname.split('/').filter(Boolean)[0];
+        if (seg) repo = seg;
+      }
+      var sources = ['data/', 'https://raw.githubusercontent.com/' + owner + '/' + repo + '/' + branch + '/reports/'];
+      var q = new URLSearchParams(location.search).get('data');
+      if (host === 'localhost' && q) sources = [q.replace(/\/?$/, '/')];
+      return { owner: owner, repo: repo, branch: branch, sources: sources, repoUrl: 'https://github.com/' + owner + '/' + repo };
+    })();
+
+    var $ = function (id) { return document.getElementById(id); };
+    var fmt = function (n) { return Number(n || 0).toLocaleString('en-US'); };
+    var pct = function (a, b) { return b > 0 ? (a / b) * 100 : 0; };
+    var fmtPct = function (p) { return p >= 10 ? p.toFixed(1) : p.toFixed(2); };
+    var BIN_LABEL = { pc: 'PC', xb: 'Xbox', proto: 'Proto' };
+
+    function applyRepoLinks() {
+      document.querySelectorAll('a[data-repo-link]').forEach(function (a) {
+        a.href = CFG.repoUrl + (a.getAttribute('data-repo-link') || '');
+      });
+      document.querySelectorAll('[data-repo-text="clone"]').forEach(function (el) { el.textContent = CFG.repoUrl + '.git'; });
+    }
+
+    function fetchJson(url) {
+      return fetch(url, { cache: 'no-cache' }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      }).then(function (text) {
+        return JSON.parse(text);      // an HTML fallback page (single-page-app routing) fails here
+      });
+    }
+
+    // Try each source in turn; remember which one worked so both files come from the same place.
+    var activeSource = null;
+    function getJson(name) {
+      var list = activeSource ? [activeSource] : CFG.sources;
+      var i = 0;
+      function next(err) {
+        if (i >= list.length) return Promise.reject(err || new Error(name + ' not found'));
+        var base = list[i++];
+        return fetchJson(base + name).then(function (data) { activeSource = base; return data; }, next);
+      }
+      return next();
+    }
+
+    function setBar(id, p) {
+      var el = $(id);
+      if (el) el.style.width = Math.max(0, Math.min(100, p)).toFixed(2) + '%';
+    }
+
+    // ------------------------------------------------------------------ progress
+    function renderProgress(prog, reg) {
+      var entries = reg ? Object.values(reg.entries || {}) : [];
+      var v = (prog && prog.verified) || { pc: 0, xb: 0, total: entries.length, bytes: 0 };
+      var q = (prog && prog.queue) || null;
+      var total = v.total + (q ? q.total : 0);
+      $('sb-verified').textContent = fmt(v.total);
+      $('sb-total').textContent = q ? fmt(total) : 'about 21,000';
+      var p = q ? pct(v.total, total) : 0;
+      if (q) {
+        $('sb-pct').textContent = fmtPct(p) + '%';
+      } else {
+        $('claim').textContent = 'The world is becoming yours.';
+      }
+      // let the browser paint the empty line first, so it visibly fills (the page's one animation)
+      requestAnimationFrame(function () { requestAnimationFrame(function () { setBar('sb-bar', p); }); });
+      $('sb-bar-outer').setAttribute('aria-valuenow', p.toFixed(2));
+      $('sb-pc').textContent = fmt(v.pc);
+      $('sb-xb').textContent = fmt(v.xb);
+      $('sb-bytes').textContent = fmt(v.bytes);
+      if (prog && prog.compiler) {
+        var m = String(prog.compiler).match(/Version\s+([\d.]+)/);
+        $('sb-compiler').textContent = m ? 'cl.exe ' + m[1] : prog.compiler;
+      }
+
+      ['pc', 'xb'].forEach(function (b) {
+        var done = v[b] || 0, left = q ? (q[b] || 0) : 0, all = done + left;
+        $(b + '-big').textContent = q ? fmtPct(pct(done, all)) + '%' : fmt(done);
+        setBar(b + '-bar', pct(done, all));
+        $(b + '-sub').textContent = fmt(done) + ' rebuilt' + (q ? ', ' + fmt(left) + ' to go' : '');
+      });
+
+      var buckets = (prog && prog.size_buckets) || {};
+      var max = Math.max.apply(null, Object.values(buckets).concat([1]));
+      var box = $('buckets');
+      box.textContent = '';
+      Object.keys(buckets).forEach(function (name) {
+        var row = document.createElement('div'); row.className = 'bucket';
+        var l = document.createElement('span'); l.className = 'lbl'; l.textContent = name;
+        var t = document.createElement('span'); t.className = 'track';
+        var s = document.createElement('span'); s.style.width = pct(buckets[name], max).toFixed(1) + '%'; t.appendChild(s);
+        var n = document.createElement('span'); n.className = 'val'; n.textContent = fmt(buckets[name]);
+        row.appendChild(l); row.appendChild(t); row.appendChild(n); box.appendChild(row);
+      });
+
+      var leaders = $('leaders');
+      leaders.textContent = '';
+      var people = Object.entries((prog && prog.contributors) || {});
+      people.slice(0, 12).forEach(function (kv) {
+        var li = document.createElement('li');
+        var w = document.createElement('span'); w.className = 'who'; w.textContent = kv[0];
+        var n = document.createElement('span'); n.className = 'n'; n.textContent = fmt(kv[1]);
+        li.appendChild(w); li.appendChild(n); leaders.appendChild(li);
+      });
+      var un = (prog && prog.unattributed) || 0;
+      $('contrib-note').textContent = people.length
+        ? 'Everyone who rebuilds a function through the portal is credited here.' + (un ? ' The first ' + fmt(un) + ' came from early bulk work and have no name on them.' : '')
+        : 'Nobody yet. Your name could be first.';
+      if (prog && prog.updated_at) $('updated').textContent = 'Numbers updated ' + prog.updated_at.replace('T', ' ').replace('Z', ' UTC');
+    }
+
+    // ------------------------------------------------------------------ functions
+    var ALL = [];
+    var shown = 0;
+    var PAGE = 40;
+    var filtered = [];
+
+    function sourcePath(e) {
+      if (!e.source || e.source === 'portal') {
+        return 'reconstructed_src/' + (e.bin === 'pc' ? 'Original_Binary_Order_PC_1002.cpp' : e.bin === 'xb' ? 'Original_Binary_Order_Xbox.cpp' : 'Original_Binary_Order_Proto.cpp');
+      }
+      return 'reconstructed_src/' + e.source;
+    }
+
+    function buildList(reg) {
+      ALL = Object.keys(reg.entries || {}).map(function (k) {
+        var e = reg.entries[k];
+        e.key = k;
+        e.vaNum = parseInt(e.va, 16) || 0;
+        e.hay = (e.symbol + ' ' + e.va + ' ' + (e.source || '') + ' ' + (e.verified_by || '')).toLowerCase();
+        e.when = e.verified_at || e.reverified_at || '';
+        return e;
+      });
+      applyFilter();
+    }
+
+    function applyFilter() {
+      var term = $('q').value.trim().toLowerCase();
+      var bin = $('bin').value;
+      var sort = $('sort').value;
+      filtered = ALL.filter(function (e) {
+        return (bin === 'all' || e.bin === bin) && (!term || e.hay.indexOf(term) !== -1);
+      });
+      filtered.sort(function (a, b) {
+        if (sort === 'size') return b.size - a.size || a.vaNum - b.vaNum;
+        if (sort === 'recent') return (b.when > a.when ? 1 : b.when < a.when ? -1 : 0) || a.vaNum - b.vaNum;
+        return (a.bin === b.bin ? 0 : a.bin === 'pc' ? -1 : 1) || a.vaNum - b.vaNum;
+      });
+      shown = 0;
+      $('fn-list').textContent = '';
+      renderMore();
+    }
+
+    function renderMore() {
+      var list = $('fn-list');
+      var slice = filtered.slice(shown, shown + PAGE);
+      if (!filtered.length) {
+        var em = document.createElement('div'); em.className = 'empty'; em.textContent = 'Nothing rebuilt matches that search yet.';
+        list.appendChild(em);
+      }
+      slice.forEach(function (e) { list.appendChild(row(e)); });
+      shown += slice.length;
+      $('count').textContent = fmt(filtered.length) + ' function' + (filtered.length === 1 ? '' : 's') + (shown < filtered.length ? ', showing ' + fmt(shown) : '');
+      $('more').hidden = shown >= filtered.length;
+    }
+
+    function row(e) {
+      var item = document.createElement('div'); item.className = 'fn';
+      var head = document.createElement('button'); head.type = 'button'; head.className = 'fn-head';
+      head.setAttribute('aria-expanded', 'false');
+      var tag = document.createElement('span'); tag.className = 'tag ' + e.bin; tag.textContent = BIN_LABEL[e.bin] || e.bin;
+      var va = document.createElement('span'); va.className = 'fn-va'; va.textContent = e.va;
+      var sym = document.createElement('span'); sym.className = 'fn-sym'; sym.textContent = e.symbol; sym.title = e.symbol;
+      var size = document.createElement('span'); size.className = 'fn-size'; size.textContent = e.size + ' B';
+      var chev = document.createElement('span'); chev.className = 'chev'; chev.setAttribute('aria-hidden', 'true'); chev.textContent = '›';
+      [tag, va, sym, size, chev].forEach(function (n) { head.appendChild(n); });
+      var body = document.createElement('div'); body.className = 'fn-body';
+      head.addEventListener('click', function () {
+        var open = item.classList.toggle('open');
+        head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open && !body.firstChild) fillBody(body, e);
+      });
+      item.appendChild(head); item.appendChild(body);
+      return item;
+    }
+
+    function metaItem(parent, label, value) {
+      var s = document.createElement('span');
+      s.appendChild(document.createTextNode(label + ' '));
+      var b = document.createElement('b'); b.textContent = value; s.appendChild(b);
+      parent.appendChild(s);
+    }
+
+    function fillBody(body, e) {
+      var meta = document.createElement('div'); meta.className = 'meta';
+      metaItem(meta, 'Address', e.va);
+      metaItem(meta, 'Size', e.size + ' bytes');
+      metaItem(meta, 'Compiler flags', e.flags || '');
+      metaItem(meta, 'Rebuilt by', e.verified_by || 'early bulk work');
+      if (e.tool_used) metaItem(meta, 'Tool', e.tool_used);
+      if (e.note) metaItem(meta, 'Note', e.note);
+      body.appendChild(meta);
+      var box = document.createElement('div'); box.className = 'code-box';
+      var pre = document.createElement('pre'); pre.textContent = (e.code || '').trim();
+      var copy = document.createElement('button'); copy.type = 'button'; copy.className = 'copy'; copy.textContent = 'Copy';
+      copy.addEventListener('click', function () {
+        var done = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1400); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(pre.textContent).then(done, function () {});
+      });
+      box.appendChild(pre); box.appendChild(copy);
+      body.appendChild(box);
+      var links = document.createElement('div'); links.className = 'fn-links';
+      var a = document.createElement('a');
+      a.href = CFG.repoUrl + '/blob/' + CFG.branch + '/' + sourcePath(e).split('/').map(encodeURIComponent).join('/');
+      a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.textContent = (e.excerpt ? 'Part of ' : 'Open ') + sourcePath(e) + ' on GitHub';
+      links.appendChild(a);
+      body.appendChild(links);
+    }
+
+    var t = null;
+    $('q').addEventListener('input', function () { clearTimeout(t); t = setTimeout(applyFilter, 160); });
+    $('bin').addEventListener('change', applyFilter);
+    $('sort').addEventListener('change', applyFilter);
+    $('more').addEventListener('click', renderMore);
+
+    // ------------------------------------------------------------------ load
+    applyRepoLinks();
+    function showUnavailable(err) {
+      var status = $('data-status');
+      status.className = 'status-line err';
+      status.textContent = 'The latest numbers could not be loaded (' + (err && err.message ? err.message : 'network error') + '). Try again in a minute.';
+      $('claim').textContent = 'The world is yours.';
+      var list = $('fn-list');
+      list.textContent = '';
+      var em = document.createElement('div'); em.className = 'empty'; em.textContent = 'The function list could not be loaded right now.';
+      list.appendChild(em);
+    }
+
+    getJson('verified_registry.json').then(function (reg) {
+      return getJson('progress.json').then(
+        function (prog) { return { reg: reg, prog: prog }; },
+        function () { return { reg: reg, prog: null }; });
+    }).then(function (d) {
+      renderProgress(d.prog, d.reg);
+      buildList(d.reg);
+      $('data-status').textContent = 'Live numbers from ' + CFG.owner + '/' + CFG.repo +
+        (activeSource === 'data/' ? ' (latest deploy)' : ' on GitHub') +
+        (d.prog ? '' : '; the summary file is missing, so only the function list is shown') + '.';
+    }, showUnavailable);
+  })();
+  </script>
+</body>
+</html>

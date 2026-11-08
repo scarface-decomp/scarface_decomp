@@ -7,7 +7,8 @@ Mock backend for website_kit/index.html, for front-end work without cl.exe or th
 
 It implements the same JSON endpoints the page calls (/api/state, /api/queue, /api/task,
 /api/login, /api/claim, /api/cancel, /api/verify, /api/fast-synthesize, /api/ai-proxy,
-/api/git-sync, /api/scripts, /api/upload-script) with fake data:
+/api/git-sync, /api/scripts, /api/upload-script, /api/decompme) with fake data. It also plays
+decomp.me (POST /api/scratch, GET /scratch/<slug>/claim) so the decomp.me button can be tested offline:
 
   * C++ containing MATCH_ALL verifies 100%; containing COMPILE_ERROR fails to compile.
   * The fake AI returns MATCH_ALL code for functions whose symbol contains "Easy".
@@ -28,7 +29,8 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "website_ki
 LOCK = threading.Lock()
 LEASE_SEC = 15 * 60
 DELAYS = {"verify": 0.15, "ai": 0.25, "fast": 0.05}
-CONFIG = {"lease_sec": LEASE_SEC, "no_login": False, "legacy_claim": False}
+CONFIG = {"lease_sec": LEASE_SEC, "no_login": False, "legacy_claim": False, "dme_browser_fail": False}
+SCRATCHES: list = []      # fields of each fake decomp.me scratch created
 CALLS: list = []          # (endpoint, payload-summary) for tests
 
 
@@ -48,6 +50,7 @@ def make_tasks(n=200):
             "flags": "/nologo /c /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4", "hint": "Mock function.",
             "target_hex": " ".join(f"{(i + k) & 0xFF:02X}" for k in range(size)),
             "disasm_lines": [f"{0x401000 + i * 0x40 + k:08X}  nop" for k in range(4)],
+            "decompme_slug": "",
             "starter_cpp": f"// starter for {tid}\nvoid Func{i:04d}() {{}}\n",
             "best_code": "",
         }
@@ -169,6 +172,25 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": True, "task": public_task(t)} if t else {"ok": False, "error": "No such task."})
             if u.path == "/api/scripts":
                 return self._json({"ok": True, "files": SCRIPTS})
+            if u.path == "/api/decompme":
+                t = TASKS.get(q.get("id", ""))
+                if not t:
+                    return self._json({"ok": False, "error": "Function not found."}, 404)
+                api = f"http://127.0.0.1:{self.server.server_address[1]}"
+                slug = "" if q.get("fresh") == "1" else t["decompme_slug"]
+                return self._json({"ok": True, "api": api, "obj_b64": "TAEAAA==",
+                                   "fields": {"name": t["symbol"], "compiler": "msvc7.1", "platform": "win32",
+                                              "compiler_flags": t["flags"], "source_code": t["starter_cpp"],
+                                              "context": "", "diff_label": ""},
+                                   "existing_url": f"{api}/scratch/{slug}" if slug else ""})
+            if u.path.startswith("/scratch/"):
+                data = b"<!doctype html><title>fake decomp.me</title><p>scratch</p>"
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html")
+                self.send_header("Content-Length", str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+                return
             if u.path == "/__calls":
                 return self._json(CALLS)
         self._json({"ok": False, "error": "not found"}, 404)
@@ -176,6 +198,23 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         u = urlparse(self.path)
         length = int(self.headers.get("Content-Length") or 0)
+        if u.path == "/api/scratch":            # fake decomp.me
+            raw = self.rfile.read(length)
+            with LOCK:
+                CALLS.append((u.path, {"bytes": len(raw)}))
+                if CONFIG["dme_browser_fail"]:
+                    return self._json({"detail": "Service unavailable"}, 503)
+                fields = {}
+                text = raw.decode("latin-1")
+                for name in ("compiler", "platform", "compiler_flags", "source_code"):
+                    key = f'name="{name}"\r\n\r\n'
+                    i = text.find(key)
+                    if i >= 0:
+                        fields[name] = text[i + len(key): text.find("\r\n--", i)]
+                fields["has_target_obj"] = 'name="target_obj"' in text
+                SCRATCHES.append(fields)
+                slug = f"mock{len(SCRATCHES)}"
+            return self._json({"slug": slug, "claim_token": "tok" + slug, "score": 10, "max_score": 100}, 201)
         body = json.loads(self.rfile.read(length) or b"{}")
         summary = {k: (v if k not in ("hex_data", "prompt", "cpp_code") else f"<{len(str(v))} chars>") for k, v in body.items()}
         with LOCK:
@@ -187,6 +226,8 @@ class Handler(BaseHTTPRequestHandler):
                 CONFIG["lease_sec"] = int(body.get("lease_sec", LEASE_SEC))
                 CONFIG["no_login"] = bool(body.get("no_login"))
                 CONFIG["legacy_claim"] = bool(body.get("legacy_claim"))
+                CONFIG["dme_browser_fail"] = bool(body.get("dme_browser_fail"))
+                SCRATCHES.clear()
             return self._json({"ok": True})
         if u.path == "/api/login" and CONFIG["no_login"]:
             self.send_error(404)          # like decomp_portal_server.py today
@@ -268,6 +309,19 @@ class Handler(BaseHTTPRequestHandler):
             easy = "EasyFunc" in prompt.split("Function:")[1].split("\n")[0] if "Function:" in prompt else False
             code = "// ai\nvoid f() { /* MATCH_ALL */ }" if easy else "// ai attempt\nvoid f() { int x = 1; }"
             return self._json({"ok": True, "reply": "Here you go:\n```cpp\n" + code + "\n```\n"})
+        if u.path == "/api/decompme":
+            with LOCK:
+                t = TASKS.get(body.get("id", ""))
+                if not t:
+                    return self._json({"ok": False, "error": "Function not found."}, 404)
+                if body.get("create"):
+                    api = f"http://127.0.0.1:{self.server.server_address[1]}"
+                    slug = "server1"
+                    t["decompme_slug"] = slug
+                    return self._json({"ok": True, "slug": slug, "url": f"{api}/scratch/{slug}",
+                                       "claim_url": f"{api}/scratch/{slug}/claim?token=srv"})
+                t["decompme_slug"] = str(body.get("slug", ""))
+                return self._json({"ok": True})
         if u.path == "/api/git-sync":
             user, err = auth(body)
             return self._json({"ok": not err, "message": "Pushed 0 files.", "error": err})

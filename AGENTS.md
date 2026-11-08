@@ -17,6 +17,8 @@ can record a function as verified. Every request that changes something needs th
 | Claim it | `POST /api/claim {"user", "pin", "id"}` | a timed lease; fails if someone else holds it |
 | Check code | `POST /api/verify {"user", "pin", "id", "cpp_code", "tool_used"}` | returns `matched_bytes`, `total_bytes`, `diff_details`, `verified` |
 | Give up | `POST /api/cancel {"user", "pin", "id", "cpp_code"}` | releases the claim and keeps your best partial attempt |
+| decomp.me target | `GET /api/decompme?id=<id>` | `obj_b64` (COFF target), `fields` for `POST https://decomp.me/api/scratch`, `existing_url` |
+| Remember a scratch | `POST /api/decompme {"id", "slug"}` | or `{"id", "create": true}` to have the portal create it |
 
 Without the portal, `python verify.py file.cpp --va 0x... --bin pc|xb --show-diff` applies the same
 rules but records nothing.

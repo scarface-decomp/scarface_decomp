@@ -33,6 +33,13 @@ executable, `.rdata` and `.data` included.
 * PC only: when `/G6` does not match, the same code is tried with `/G7`. 14 of the 155 verified PC
   functions need `/G7`. Xbox code is checked with `/G6` only (see the notes in section 5). The
   registry stores the flags that matched.
+* **decomp.me has the same compiler.** Its `msvc7.1` compiler (platform *Windows (9x/NT)*) gave 100%
+  on two functions verified here, one PC (`CementLibrary::vfunc_05`, 39 B, `/G7`) and one Xbox
+  (`sub_0001EF60`, 7 B), checked on 2026-11-08. It compiles as C unless `/TP` is passed, so the
+  portal's decomp.me button adds `/TP`. The target it sends is built by `tools/decompme.py`: the game's
+  bytes plus COFF relocations named `_sub_XXXXXXXX` / `_DAT_XXXXXXXX`, the same names MSVC gives
+  `extern "C"` declarations. Those relocations were checked against MSVC's own for 243 verified
+  functions (all offsets and types agree). A decomp.me score is a helper; the portal decides.
 * `scripts/setup_msvc71.py` installs `bin/`, `include/` and `lib/` from your own `VCToolkitSetup.exe`.
   On Linux and macOS the compiler runs under Wine (32-bit prefix). `SCARFACE_MSVC_BIN` overrides the
   location.

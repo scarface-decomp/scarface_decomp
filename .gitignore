@@ -35,3 +35,9 @@ __pycache__/
 *.pyc
 scripts/archive/
 _to_delete/
+
+# Website data, copied in by the Cloudflare Pages build (see docs/README.md)
+docs/data/
+
+# Python packages for start_portal.sh
+.venv/
