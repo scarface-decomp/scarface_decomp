@@ -21,6 +21,12 @@ REG = json.loads((FIX / "verified_registry.json").read_text(encoding="utf-8"))
 PROG = json.loads((FIX / "progress.json").read_text(encoding="utf-8"))
 
 
+# Everything the Cloudflare build serves from docs/ besides data/.
+STATIC = ("index.html", "404.html", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
+          "robots.txt", "sitemap.xml")
+SITE_URL = "https://scarface-decomp.pages.dev/"
+
+
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self, *a):
         pass
@@ -62,7 +68,7 @@ def serve(directory, handler=Quiet):
 def site(tmp_path_factory):
     """docs/ + data/ as the Cloudflare build produces it."""
     d = tmp_path_factory.mktemp("site")
-    for f in ("index.html", "404.html"):
+    for f in STATIC:
         shutil.copy2(ROOT / "docs" / f, d / f)
     (d / "data").mkdir()
     for f in ("progress.json", "verified_registry.json"):
@@ -269,4 +275,93 @@ def test_table_of_contents(site, browser, width):
         top = pg.evaluate(f"document.getElementById('{href[1:]}').getBoundingClientRect().top")
         assert bar - 2 <= top <= bar + 40, (href, bar, top)      # just below the bar, not hidden under it
     assert pg.errors == []
+    ctx.close()
+
+
+def _jpeg_size(data):
+    """Width and height from a JPEG's start-of-frame marker (no imaging library needed)."""
+    i = 2
+    while i < len(data):
+        marker, length = data[i + 1], int.from_bytes(data[i + 2:i + 4], "big")
+        if marker in (0xC0, 0xC1, 0xC2):
+            return int.from_bytes(data[i + 7:i + 9], "big"), int.from_bytes(data[i + 5:i + 7], "big")
+        i += 2 + length
+    raise AssertionError("no frame header in the JPEG")
+
+
+def test_share_preview_icons_and_crawler_files(site, browser):
+    """Links shared on Discord, Reddit or X show the preview image; icons and crawler files exist."""
+    d, url = site
+    ctx, pg = open_page(browser, url)
+    meta = pg.evaluate("""() => Object.fromEntries(Array.from(document.querySelectorAll('meta[property], meta[name]'))
+        .map(m => [m.getAttribute('property') || m.getAttribute('name'), m.content]))""")
+    assert meta["og:url"] == SITE_URL
+    assert pg.get_attribute('link[rel="canonical"]', "href") == SITE_URL
+    assert meta["twitter:card"] == "summary_large_image"
+    for key in ("og:image", "twitter:image"):
+        assert meta[key].startswith(SITE_URL)
+        name = meta[key][len(SITE_URL):]
+        assert (d / name).exists(), name
+    img = (d / meta["og:image"][len(SITE_URL):]).read_bytes()
+    assert _jpeg_size(img) == (int(meta["og:image:width"]), int(meta["og:image:height"])) == (1200, 630)
+    icons = pg.eval_on_selector_all('link[rel="icon"], link[rel="apple-touch-icon"]', "ls => ls.map(l => l.href)")
+    assert len(icons) == 3
+    for href in icons:
+        r = pg.request.get(href)
+        assert r.ok, href
+    robots = (d / "robots.txt").read_text()
+    assert f"Sitemap: {SITE_URL}sitemap.xml" in robots
+    assert f"<loc>{SITE_URL}</loc>" in (d / "sitemap.xml").read_text()
+    ctx.close()
+
+
+def test_skip_link_moves_focus_to_the_content(site, browser):
+    _, url = site
+    ctx, pg = open_page(browser, url)
+    pg.keyboard.press("Tab")
+    assert pg.evaluate("document.activeElement.className") == "skip"
+    box = pg.locator("a.skip").bounding_box()
+    assert box["y"] >= 0, "the skip link stays off screen when focused"
+    pg.keyboard.press("Enter")
+    pg.wait_for_function("document.activeElement.id === 'top'")
+    ctx.close()
+
+
+def test_404_page(site, browser):
+    _, url = site
+    ctx, pg = open_page(browser, url + "404.html")
+    assert "Ocean Drive" in pg.text_content("h1")
+    assert pg.get_attribute("a.btn.primary", "href") == "/"
+    assert pg.get_attribute('meta[name="robots"]', "content") == "noindex"
+    assert pg.evaluate("document.documentElement.scrollWidth") <= 1281
+    assert not pg.errors, pg.errors
+    ctx.close()
+
+
+@pytest.mark.parametrize("motion", ["no-preference", "reduce"])
+def test_rage_mode_easter_egg(site, browser, motion):
+    """Up up down down left right left right B A: a four-second neon sign, then the page is as it was."""
+    _, url = site
+    ctx = browser.new_context(viewport={"width": 1280, "height": 800}, reduced_motion=motion)
+    ctx.route("https://fonts.g*/**", lambda r: r.abort())
+    pg = ctx.new_page()
+    errors = []
+    pg.on("pageerror", lambda e: errors.append(str(e)))
+    pg.goto(url)
+    pg.wait_for_selector("#fn-list .fn")
+    for k in ("ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"):
+        pg.keyboard.press(k)
+    pg.wait_for_selector(".rage-sign.on")
+    assert "RAGE" in pg.text_content(".rage-sign")
+    shaking = pg.evaluate("getComputedStyle(document.querySelector('main')).animationName")
+    assert (shaking == "none") == (motion == "reduce")
+    pg.wait_for_selector(".rage-sign", state="detached", timeout=7000)
+    assert not pg.evaluate("document.querySelector('main').classList.contains('shake')")
+    # typing the same letters in the search box must not set it off
+    pg.click("#q")
+    for k in ("ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"):
+        pg.keyboard.press(k)
+    pg.wait_for_timeout(300)
+    assert pg.locator(".rage-sign").count() == 0
+    assert not errors, errors
     ctx.close()

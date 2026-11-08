@@ -6,7 +6,7 @@
   <title>SCARFACE DECOMP HUB — 1:1 C++ Verification Portal</title>
   <meta name="description" content="Community &amp; AI-assisted 1:1 matching C++ decompilation of Scarface: The World Is Yours (PC 1.00.2 &amp; Xbox), verified byte-for-byte with MSVC 7.10 (Visual C++ Toolkit 2003, cl.exe 13.10.3052)." />
   <meta name="theme-color" content="#0b0e14" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230b0e14' stroke='%23e11d48' stroke-width='4'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='30' fill='%23f8fafc'%3ESC%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='sun' gradientUnits='userSpaceOnUse' x1='0' y1='18' x2='0' y2='46'%3E%3Cstop offset='0' stop-color='%23FFC2DE'/%3E%3Cstop offset='.5' stop-color='%23FF5BA7'/%3E%3Cstop offset='1' stop-color='%23E0313A'/%3E%3C/linearGradient%3E%3CclipPath id='sky'%3E%3Crect width='64' height='46'/%3E%3C/clipPath%3E%3C/defs%3E%3Crect width='64' height='64' rx='13' fill='%2309070D'/%3E%3Cg clip-path='url(%23sky)'%3E%3Ccircle cx='32' cy='44' r='25' fill='url(%23sun)'/%3E%3Crect x='0' y='32' width='64' height='2.6' fill='%2309070D'/%3E%3Crect x='0' y='38.5' width='64' height='3.4' fill='%2309070D'/%3E%3C/g%3E%3Cpath d='M6 50.5 H58' stroke='%2348E0CF' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -437,7 +437,7 @@
     .lookalike-tag { color: var(--green); font-weight: 600; white-space: nowrap; }
     .empty-note { color: var(--muted); font-size: 0.82rem; padding: 12px 4px; }
     .status-pill { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-family: var(--mono); font-weight: 700; white-space: nowrap; flex-shrink: 0; }
-    .st-UNCLAIMED { background: rgba(148, 163, 184, 0.14); color: var(--muted); }
+    .st-UNCLAIMED { background: rgba(148, 163, 184, 0.14); color: #A9B6CA; }
     .st-CLAIMED { background: rgba(234, 179, 8, 0.2); color: var(--gold); border: 1px solid var(--gold); }
     .st-PARTIAL { background: rgba(56, 189, 248, 0.18); color: var(--blue); border: 1px solid var(--blue); }
     .st-VERIFIED { background: rgba(16, 185, 129, 0.18); color: var(--green); border: 1px solid var(--green); }
@@ -636,7 +636,7 @@
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
       <div>
-        <button type="button" class="brand-box" onclick="switchView('dashboard')" aria-label="Go to dashboard">
+        <button type="button" class="brand-box" onclick="switchView('dashboard')" title="Go to the dashboard">
           <span class="brand-logo" aria-hidden="true">SC</span>
           <span>
             <span class="brand-text-title" style="display:block;">SCARFACE HUB</span>
@@ -719,11 +719,12 @@
       </header>
 
       <main class="view-container">
+        <h1 class="sr-only">Scarface decomp portal</h1>
         <!-- VIEW 1: DASHBOARD -->
         <section id="view-dashboard" class="view-pane active" aria-label="Dashboard">
           <div class="unencrypted-hero">
             <div>
-              <h1 class="hero-scarface-title">SCARFACE: THE WORLD IS YOURS</h1>
+              <h2 class="hero-scarface-title">SCARFACE: THE WORLD IS YOURS</h2>
               <div class="unencrypted-badge-line">&#x1F525; ALL OF THE XBOX VERSION'S GAME CODE IS READABLE</div>
               <p class="hero-copy">
                 <strong>Every byte of the retail Xbox game code (3.1 MB) can be read, and so can about a tenth of PC v1.00.2's.</strong> The rest of the PC file is encrypted, so PC functions are only handed out from the readable part; apart from each version's hardware-specific parts, the Xbox build runs the same game code. The names of 2,457 C++ classes can be read too.

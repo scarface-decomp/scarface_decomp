@@ -4,23 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Page not found | Scarface decomp</title>
-  <meta name="theme-color" content="#000000" />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Poiret+One&display=swap" rel="stylesheet">
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#09070D" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #000; color: #EFE6D4;
-           font-family: Jost, Futura, 'Century Gothic', sans-serif; padding: 28px; }
-    main { max-width: 34em; }
-    h1 { font-family: 'Poiret One', Futura, 'Century Gothic', sans-serif; font-weight: 400; font-size: clamp(2.4rem, 8vw, 4.5rem);
-         line-height: 1.05; margin: 0 0 18px; }
-    p { color: #9C9385; font-size: 1.1rem; margin: 0; }
-    a { color: #C8A15A; text-underline-offset: 3px; }
-    a:hover { color: #EFE6D4; }
+    :root { --onyx: #09070D; --ivory: #F4EEE6; --mauve: #B6A8C9; --line: #2C2337; --red: #EA444D; --pink: #FF5BA7; --teal: #48E0CF; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body { min-height: 100vh; display: grid; place-items: center; padding: 32px 22px 150px; text-align: center; position: relative; overflow-x: hidden;
+           color: var(--ivory); font: 400 1.05rem/1.6 'Josefin Sans', Avenir, Futura, 'Century Gothic', sans-serif;
+           background: radial-gradient(ellipse 70% 55% at 50% 100%, rgba(255,91,167,0.2), transparent 70%),
+                       linear-gradient(180deg, var(--onyx) 0%, #140A1E 62%, #26102A 100%); }
+    main { position: relative; z-index: 1; max-width: 34em; }
+    .eyebrow { font-family: Marcellus, Georgia, serif; color: var(--red); letter-spacing: .22em; text-transform: uppercase; font-size: .95rem; margin: 0; }
+    /* A neon "404" with one tired tube in the middle. */
+    .neon { font-weight: 300; font-size: clamp(5.5rem, 24vw, 10rem); line-height: 1; margin: 18px 0 8px; color: #FFEAF4; letter-spacing: .06em;
+            text-shadow: 0 0 2px #fff, 0 0 10px var(--pink), 0 0 24px var(--pink), 0 0 48px rgba(255,91,167,.55); }
+    .neon .tired { animation: tired 5s infinite; }
+    @keyframes tired { 0%, 18%, 22%, 24%, 64%, 66%, 100% { opacity: 1; } 19%, 23%, 65% { opacity: .18; text-shadow: none; } }
+    h1 { font-weight: 400; font-size: clamp(1.45rem, 4.6vw, 2rem); line-height: 1.25; margin: 0 0 12px; }
+    p.why { color: var(--mauve); margin: 0; }
+    .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 30px; }
+    .btn { display: inline-block; font: 600 1rem 'Josefin Sans', sans-serif; letter-spacing: .04em; padding: 13px 24px 11px; border-radius: 999px;
+           text-decoration: none; border: 1px solid var(--line); color: var(--ivory); background: rgba(9,7,13,.6); }
+    .btn:hover { border-color: var(--teal); color: var(--teal); }
+    .btn.primary { background: var(--pink); border-color: var(--pink); color: #1C0612; box-shadow: 0 0 22px rgba(255,91,167,.45); }
+    .btn.primary:hover { background: #FF7AB8; border-color: #FF7AB8; color: #1C0612; }
+    a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+    .street { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; border-bottom: 4px solid #040207; }
+    .street::after { content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 1.2px; opacity: .8;
+                     background: linear-gradient(90deg, rgba(72,224,207,0), var(--pink), rgba(72,224,207,0)); }
+    .street svg { display: block; width: 100%; height: clamp(110px, 14vw, 170px); }
+    .street .sign { animation: tired 9s 2s infinite; }
+    @media (prefers-reduced-motion: reduce) { .neon .tired, .street .sign { animation: none; } }
   </style>
 </head>
 <body>
   <main>
-    <h1>Nothing here.</h1>
-    <p>This page doesn't exist. <a href="/">Back to the Scarface decomp</a>.</p>
+    <p class="eyebrow">Page not found</p>
+    <p class="neon" aria-hidden="true">4<span class="tired">0</span>4</p>
+    <h1>Wrong turn off Ocean Drive.</h1>
+    <p class="why">There's nothing at this address. The page may have moved, or the link has a typo.</p>
+    <div class="cta">
+      <a class="btn primary" href="/">Back to the main page</a>
+      <a class="btn" href="https://github.com/scarface-decomp/scarface_decomp" rel="noopener noreferrer">The code on GitHub</a>
+    </div>
   </main>
+
+  <!-- A quiet street: two palms and a shut shopfront by the water. Original artwork. -->
+  <div class="street" aria-hidden="true">
+    <svg viewBox="0 0 600 150" preserveAspectRatio="xMidYMax meet" focusable="false">
+      <defs>
+        <filter id="g" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <linearGradient id="door" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD27A" stop-opacity=".18"/><stop offset="1" stop-color="#FF5BA7" stop-opacity=".1"/></linearGradient>
+      </defs>
+      <path d="M218 150 V86 Q218 74 230 74 H370 Q382 74 382 86 V150 Z" fill="#040207" stroke="#2A1F36"/>
+      <path d="M228 90 H372" stroke="#48E0CF" stroke-width="1.4" fill="none" opacity=".85" filter="url(#g)"/>
+      <rect x="282" y="112" width="36" height="38" fill="url(#door)" stroke="#2A1F36"/>
+      <rect x="238" y="104" width="30" height="20" rx="2" fill="#0C0812" stroke="#2A1F36"/>
+      <rect x="332" y="104" width="30" height="20" rx="2" fill="#0C0812" stroke="#2A1F36"/>
+      <text x="300" y="68" font-size="15" fill="none" stroke="#FF5BA7" stroke-width="1" text-anchor="middle" letter-spacing="5"
+            font-family="Josefin Sans, Avenir, sans-serif" filter="url(#g)" class="sign">CLOSED</text>
+      <g fill="#040207">
+        <path d="M146 150 C148 112 156 80 160 64 L164 64 C160 80 154 112 154 150 Z"/>
+        <path d="M162 64 Q130 46 98 94 Q130 51 162 67 Z"/><path d="M162 64 Q134 36 106 56 Q134 41 162 67 Z"/>
+        <path d="M162 64 Q164 34 172 31 Q168 38 162 67 Z"/><path d="M162 64 Q190 36 218 56 Q190 41 162 67 Z"/>
+        <path d="M162 64 Q194 46 226 94 Q194 51 162 67 Z"/>
+        <path d="M446 150 C444 118 438 94 434 80 L438 80 C442 94 450 118 454 150 Z"/>
+        <path d="M436 80 Q408 64 380 104 Q408 69 436 83 Z"/><path d="M436 80 Q412 56 388 72 Q412 61 436 83 Z"/>
+        <path d="M436 80 Q438 54 446 51 Q442 58 436 83 Z"/><path d="M436 80 Q460 56 484 72 Q460 61 436 83 Z"/>
+        <path d="M436 80 Q464 64 492 104 Q464 69 436 83 Z"/>
+      </g>
+    </svg>
+  </div>
 </body>
 </html>

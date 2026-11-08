@@ -5,6 +5,17 @@ the verified functions with their code, and how to help. It has no build step an
 It is hosted on the project's Cloudflare account (`scarface-decomp` Pages project), which rebuilds it
 on every push to `main`.
 
+## What's in this folder
+
+| File | What it is |
+| :--- | :--- |
+| `index.html` | The page itself: markup, styles and script in one file. The skyline is inline SVG, drawn for this site. |
+| `404.html` | Shown by Cloudflare Pages for any address that doesn't exist. |
+| `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` | Browser and phone home-screen icons. |
+| `og.jpg` | The 1200 x 630 preview shown when the link is shared on Discord, Reddit, X and so on. |
+| `robots.txt`, `sitemap.xml` | For search engines. |
+| `*.md` | Project documents linked from the page and the README. |
+
 ## Where its data comes from
 
 The page reads two files that the portal and `scripts/reverify_all.py` keep up to date:
