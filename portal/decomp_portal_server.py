@@ -49,6 +49,7 @@ from disasm_synth import disassemble, synthesize_cpp  # noqa: E402
 import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
+import game_assets as GA  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
 import registry_outputs as RO  # noqa: E402
@@ -74,6 +75,8 @@ INDEX_HTML = PORTAL_DIR / "website_kit" / "index.html"
 HANDOFF_MD = BASE_DIR / "docs" / "SCARFACE_DECOMP_AI_HANDOFF.md"
 INCLUDE_DIR = RECON_DIR / "include"
 SCRIPTS_DIR = BASE_DIR / "binaries" / "scripts_and_data"
+# Sounds, textures, models, videos: copied out of the person's own game files, for their own use only
+GAME_FILES = GA.Job(BASE_DIR / "binaries")
 
 HOST = os.environ.get("SCARFACE_HOST", "127.0.0.1")
 PORT = int(os.environ.get("SCARFACE_PORT", "8085"))
@@ -1709,6 +1712,15 @@ class Handler(BaseHTTPRequestHandler):
                           done=sum(1 for m in others if m["status"] == "VERIFIED"),
                           progress=progress(), leaderboard=leaderboard())
             return self._json(st)
+        if u.path == "/api/game-files":
+            return self._json(dict(GAME_FILES.overview(), ok=True))
+        if u.path == "/api/game-files/list":
+            try:
+                offset, limit = max(0, int(q1("offset", "0"))), min(500, max(1, int(q1("limit", "200"))))
+            except ValueError:
+                return self._json({"ok": False, "error": "offset/limit must be numbers"}, 400)
+            res = GA.list_files(GAME_FILES.index(), q1("version"), q1("status"), q1("kind"), q1("q"), offset, limit)
+            return self._json(dict(res, ok=True))
         if u.path == "/api/task":
             with STATE_LOCK:
                 t = TASK_BY_ID.get(q1("id"))
@@ -1733,6 +1745,8 @@ class Handler(BaseHTTPRequestHandler):
             "/api/git-sync": self.post_git, "/api/upload-script": self.post_upload,
             "/api/submit": self.post_submit, "/api/import-submission": self.post_import,
             "/api/decompme": self.post_decompme,
+            "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
+            "/api/game-files/open": self.post_game_files_open,
         }.get(path)
         if not route:
             return self._json({"ok": False, "error": "Not found."}, 404)
@@ -1911,6 +1925,33 @@ class Handler(BaseHTTPRequestHandler):
                                "message": "Everything you matched is already on GitHub."})
         self._json({"ok": True, "mode": "file", "count": bundle["count"], "filename": submission_filename(user),
                     "bundle": bundle, "pending": bundle["count"]})
+
+    # Game files (sounds, textures, models, videos) from the person's own copies. No sign-in: it is their
+    # own computer and their own game; nothing is sent anywhere.
+    def post_game_files_start(self, body):
+        versions = body.get("versions")
+        if not isinstance(versions, list) or not all(isinstance(v, str) for v in versions):
+            return self._json({"ok": False, "error": "Pick at least one version."}, 400)
+        err = GAME_FILES.start(versions, str(body.get("mode", "")))
+        if err:
+            return self._json({"ok": False, "error": err}, 409 if "Already" in err else 400)
+        self._json({"ok": True, "status": dict(GAME_FILES.status)})
+
+    def post_game_files_stop(self, body):
+        GAME_FILES.stop()
+        self._json({"ok": True})
+
+    def post_game_files_open(self, body):
+        if HOST not in ("127.0.0.1", "localhost", "::1"):
+            return self._json({"ok": False, "error": "Folders can only be opened when the portal runs on this computer."}, 403)
+        folder = GAME_FILES.folder_for(str(body.get("folder", "")))
+        if folder is None:
+            return self._json({"ok": False, "error": "That folder isn't there yet."}, 404)
+        try:
+            GA.open_folder(folder)
+        except OSError as e:
+            return self._json({"ok": False, "error": f"Couldn't open the folder: {e}"}, 500)
+        self._json({"ok": True, "folder": GA._show_path(folder)})
 
     def post_import(self, body):
         user = self._auth(body)

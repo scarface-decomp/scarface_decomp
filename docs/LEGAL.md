@@ -14,6 +14,9 @@ reach the maintainers. It is not legal advice.
   products and are not redistributable. Contributors obtain and use their own copies lawfully; the
   project cannot provide them or help obtain them.
 * To check anything against the original game you need your own legally obtained copy of it.
+* The portal can copy the files out of your own copy of the game (sounds, textures, models, videos) for
+  your personal use. They are written to `binaries/game_files/` on your computer, which is never
+  committed. The project does not host or distribute them, and they must not be shared.
 * The project does not include, and will not accept, tools for bypassing copy protection.
 
 ## License

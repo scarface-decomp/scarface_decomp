@@ -22,7 +22,8 @@ may come from and how AI tools may be used.
 4. **Write the C++** in the editor. It starts with C++ written from the function's own machine code,
    with calls and globals already named for their addresses; for many small functions it matches as it is.
    * **decomp.me** (the backup when the compiler isn't installed or is acting up) opens the function on [decomp.me](https://decomp.me) with the same compiler
-     (`msvc7.1`, platform *Windows (9x/NT)*) and our flags. Its score updates as you type. Calls and
+     (`msvc7.1`, platform *Windows (9x/NT)*) and our flags, filed under the [Scarface preset](https://decomp.me/preset/266).
+     Its score updates as you type. Calls and
      globals show up as `_sub_XXXXXXXX` / `_DAT_XXXXXXXX`; declare them `extern "C"` with that name
      (`extern "C" int DAT_007A1234;`) and the names match. At 100%, paste the code back into the
      portal. Later clicks reopen the same scratch.

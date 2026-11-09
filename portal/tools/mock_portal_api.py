@@ -144,6 +144,74 @@ def auth(body):
 
 IMPORT: dict = {"running": False}
 
+# Game files (sounds, textures, models, videos): a fake run that takes about two seconds
+GF_KINDS = [{"id": "sounds", "label": "Sounds"}, {"id": "videos", "label": "Videos"},
+            {"id": "models", "label": "Models & textures"}, {"id": "scripts", "label": "Scripts & text"},
+            {"id": "other", "label": "Other"}]
+GF_VERSIONS = [
+    {"version": "xbox", "label": "Xbox", "found": True, "kind": "disc", "size": 3360096256,
+     "source": "Scarface - The World Is Yours (USA, Europe).7z (Scarface - The World Is Yours (USA, Europe).xiso.iso)"},
+    {"version": "pc", "label": "PC", "found": True, "kind": "pcdisc", "size": 2344373373,
+     "source": "Scarface-The-World-Is-Yours_Win_EN_ISO-Version.iso + Scarface-The-World-Is-Yours_Patch_Win_EN_Patch-v1002.exe"},
+    {"version": "ps2", "label": "PS2", "found": True, "kind": "disc", "size": 3791028224,
+     "source": "Scarface - The World Is Yours (ps2).7z (Scarface - The World Is Yours (USA).iso)"},
+    {"version": "prototype", "label": "Xbox 2006 prototype", "found": True, "kind": "zip", "size": 3789570048,
+     "source": "Scarface - The World Is Yours (Apr 20, 2006 prototype).zip"},
+]
+GF: dict = {"status": {"running": False, "phase": "", "done": 0, "total": 0, "files": 0, "label": "", "message": "",
+                       "error": ""}, "summary": None, "files": {}}
+
+
+def gf_fake_files(version):
+    rows = []
+    names = {"xbox": "cement.rcf/art/", "pc": "cement.rcf/art/", "ps2": "CEMENT.RCF/art/", "prototype": "art/"}[version]
+    for i in range(260):
+        st = "only" if i % 3 == 0 else ("changed" if i % 3 == 1 else "shared")
+        ext = [".rsd", ".p3d", ".bik", ".cso", ".dat"][i % 5]
+        kind = {".rsd": "sounds", ".p3d": "models", ".bik": "videos", ".cso": "scripts", ".dat": "other"}[ext]
+        path = f"{names}{kind}/{version}_{i:03d}{ext}"
+        rows.append({"path": path, "size": 1000 + i * 37, "status": st, "kind": kind,
+                     "placed": ("Shared/" if st == "shared" else "") + path})
+    return rows
+
+
+def gf_summary(mode):
+    out = {"mode": mode, "mode_label": "No duplicates" if mode == "unique" else "Every version complete",
+           "created": "2026-11-09 09:30", "versions": {}}
+    for v in GF_VERSIONS:
+        if not v["found"]:
+            continue
+        rows = gf_fake_files(v["version"])
+        GF["files"][v["version"]] = rows
+        s = {"label": v["label"], "source": v["source"], "files": len(rows), "bytes": sum(r["size"] for r in rows),
+             "only": 0, "changed": 0, "shared": 0, "own_bytes": 0, "kinds": {}}
+        for r in rows:
+            s[r["status"]] += 1
+            if r["status"] != "shared":
+                k = s["kinds"].setdefault(r["kind"], {"only": 0, "changed": 0})
+                k[r["status"]] += 1
+        out["versions"][v["version"]] = s
+    return out
+
+
+def gf_run(versions, mode):
+    total = sum(v["size"] for v in GF_VERSIONS if v["found"] and v["version"] in versions)
+    st = GF["status"]
+    for i in range(1, 11):
+        time.sleep(0.15)
+        with LOCK:
+            if st.get("stop"):
+                st.update(running=False, phase="stopped", stop=False,
+                          message="Stopped. Press Copy again to carry on where it left off.")
+                return
+            st.update(phase="reading", label="Xbox" if i < 5 else "PS2", done=total * i // 10, total=total, files=i * 1234)
+    with LOCK:
+        st.update(phase="placing")
+    time.sleep(0.2)
+    with LOCK:
+        GF["summary"] = gf_summary(mode)
+        st.update(running=False, phase="done", message="Done")
+
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *a):
@@ -181,6 +249,21 @@ class Handler(BaseHTTPRequestHandler):
                                    "maintainers": ["Founder"]})
             if u.path == "/api/import-status":
                 return self._json(IMPORT)
+            if u.path == "/api/game-files":
+                return self._json({"ok": True, "versions": GF_VERSIONS, "folder": "binaries/game_files",
+                                   "free": 128 * 2**30, "summary": GF["summary"],
+                                   "status": {k: v for k, v in GF["status"].items() if k != "stop"},
+                                   "notes": CONFIG.get("gf_notes", []),
+                                   "modes": [{"id": "unique", "label": "No duplicates"},
+                                             {"id": "every", "label": "Every version complete"}],
+                                   "kinds": GF_KINDS})
+            if u.path == "/api/game-files/list":
+                rows = GF["files"].get(q.get("version", ""), [])
+                st, kind, query = q.get("status", ""), q.get("kind", ""), q.get("q", "").lower()
+                rows = [r for r in rows if (not st or r["status"] == st or (st == "own" and r["status"] != "shared"))
+                        and (not kind or r["kind"] == kind) and (not query or query in r["path"].lower())]
+                off, lim = int(q.get("offset", 0)), int(q.get("limit", 200))
+                return self._json({"ok": True, "total": len(rows), "offset": off, "files": rows[off:off + lim]})
             if u.path == "/api/queue":
                 items = list(TASKS.values())
                 lane, tier, query = q.get("lane", "ALL"), q.get("tier", "ALL"), q.get("q", "").lower()
@@ -269,6 +352,10 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/__reset":
             with LOCK:
                 TASKS.clear(); TASKS.update(make_tasks()); USERS.clear(); AUDIT.clear(); CALLS.clear()
+                GF["status"] = {"running": False, "phase": "", "done": 0, "total": 0, "files": 0, "label": "",
+                                "message": "", "error": ""}
+                GF["summary"] = None
+                GF["files"] = {}
                 DELAYS.update(body.get("delays", {}))
                 CONFIG["lease_sec"] = int(body.get("lease_sec", LEASE_SEC))
                 CONFIG["no_login"] = bool(body.get("no_login"))
@@ -369,6 +456,23 @@ class Handler(BaseHTTPRequestHandler):
                                        "claim_url": f"{api}/scratch/{slug}/claim?token=srv"})
                 t["decompme_slug"] = str(body.get("slug", ""))
                 return self._json({"ok": True})
+        if u.path == "/api/game-files/start":
+            versions = body.get("versions") or []
+            if GF["status"].get("running"):
+                return self._json({"ok": False, "error": "Already copying the game's files. Wait for it to finish or press Stop."}, 409)
+            if not any(v["found"] and v["version"] in versions for v in GF_VERSIONS):
+                return self._json({"ok": False, "error": "None of those versions were found in binaries/."}, 400)
+            GF["status"].update(running=True, phase="preparing", done=0, total=0, files=0, error="", stop=False)
+            threading.Thread(target=gf_run, args=(versions, body.get("mode", "unique")), daemon=True).start()
+            return self._json({"ok": True, "status": {k: v for k, v in GF["status"].items() if k != "stop"}})
+        if u.path == "/api/game-files/stop":
+            GF["status"]["stop"] = True
+            return self._json({"ok": True})
+        if u.path == "/api/game-files/open":
+            folder = body.get("folder", "")
+            if folder not in ("", "shared", "xbox", "pc", "ps2", "prototype") or not GF["summary"]:
+                return self._json({"ok": False, "error": "That folder isn't there yet."}, 404)
+            return self._json({"ok": True, "folder": "binaries/game_files"})
         if u.path == "/api/submit":
             user, err = auth(body)
             if err:

@@ -109,7 +109,8 @@ functions on decomp.me and have a maintainer check them.
 function on [decomp.me](https://decomp.me), which runs the same compiler in your browser. Get it to 100%
 there and post the link in a [GitHub issue](../../issues/new) or in #help on [Discord](https://discord.gg/azvrtGBvau); a
 maintainer will verify it and credit you. Only that one function's bytes leave your computer, the same as any decomp.me scratch, and the
-portal's check is still the one that counts.
+portal's check is still the one that counts. Every scratch is filed under the [Scarface preset](https://decomp.me/preset/266),
+where everyone's can be found.
 
 ## The compiler
 
@@ -147,6 +148,7 @@ your code, verifies it on each look-alike and credits you for every exact match
 | `SCARFACE_MAINTAINERS` | `RRutherrfordd (Founder)` | handles allowed to use "Sync to GitHub" |
 | `SCARFACE_NO_BROWSER` | unset | `1` stops it opening a browser |
 | `SCARFACE_DECOMPME_URL` | `https://decomp.me` | where the decomp.me button sends functions |
+| `SCARFACE_DECOMPME_PRESET` | `266` | the decomp.me preset scratches are filed under ([Scarface's](https://decomp.me/preset/266)); `none` turns it off |
 | `SCARFACE_LOOKALIKE_MAX` | `1000` | how many look-alikes a new match is tried on |
 | `SCARFACE_MSVC_BIN` | `portal/tools/msvc71/bin` | where `cl.exe` (13.10.3052 or 13.10.3077) is, if not there |
 
@@ -163,6 +165,37 @@ python portal/verify.py my_func.cpp --va 0x006DE620 --bin pc
 python portal/scripts/reverify_all.py     # recheck every claim, rewrite the registry, report and generated files
 python portal/tools/queue_builder.py      # rebuild the work queue from the binaries
 ```
+
+## Game files for your own use
+
+The portal's **Game files** section copies everything out of your own copies of the game (sounds,
+textures and models, animations, videos, scripts, all of it) for modding and looking around. It reads
+the Xbox disc, the PS2 disc, the April 2006 prototype and the PC disc. Nothing needs installing: the PC
+disc image (`.iso`) is read as it is, its cabinet files unpacked and named by the disc's own installer
+database, and with the 1.00.2 patch in `binaries/` its `patch01.rcf` is added, as a patched install has
+it. The game's `.rcf` archives are unpacked too, including the ones packed inside them (that is where
+the dialogue is), each into a folder named after the archive.
+
+Choose a layout:
+
+* **No duplicates**: a file that is identical in several versions is copied once, into `Shared/`, and
+  each version's folder keeps only what is unique to it.
+* **Every version complete**: each version in its own folder.
+* **Best version of each file**: one copy of every file, in `Best/`. Where the versions have it in
+  different forms, the highest quality wins: sounds by sample rate, then channels, then codec; videos by
+  picture size; models and textures by texture size, then colour depth. That is mostly the PC's (Ogg
+  Vorbis sounds at 44.1 to 48 kHz, 1280x720 videos), the Xbox's 5.1 surround sounds and deeper colours,
+  and the prototype's bigger textures. `INDEX - Best.txt` says where each file came from and why.
+
+And how to arrange the folders: **as in the game**, or **by type** (Sounds, Textures, Models,
+Animations, Videos, Scripts & text, Other) with the game's folders inside. By type, sounds get their
+original names back (every sound stores the name it had on the developers' machines, so
+`art/sound/rsd/8/85657545f63b9543.rsd` becomes `art/sound/music/world_streams_mono/miami/dj/03.rsd`).
+
+The portal then lists, for each version, the files only it has and the ones it has in a different form.
+All four versions take about 12.4 GB without duplicates, the best versions about 4.4 GB. The files stay
+on your computer: `binaries/` is never committed, and they must not be shared. From the command line:
+`python portal/tools/game_assets.py --extract best --folders type`.
 
 ## What's in the folder
 
@@ -191,7 +224,7 @@ portal/               the portal itself and its tools (you don't need to open it
 | `docs/SCARFACE_DECOMP_AI_HANDOFF.md`, `docs/AGENTS.md` | Brief for AI assistants (served by the portal at `/download/ai-handoff`), and how an agent uses the portal API. |
 | `portal/decomp_portal_server.py`, `portal/website_kit/` | The portal: its server and its page. |
 | `portal/verify.py` | The command-line checker. |
-| `portal/tools/` | Verifier (`msvc_verify.py`), binary reader, queue builder, C++ policy, decomp.me export, look-alike grouping, game-file checks (`game_files.py`), script-format tools. |
+| `portal/tools/` | Verifier (`msvc_verify.py`), binary reader, queue builder, C++ policy, decomp.me export, look-alike grouping, game-file checks (`game_files.py`), copying the game's files out (`game_assets.py`, with `ms_cab.py` for the PC disc's cabinets), script-format tools. |
 | `portal/scripts/` | Compiler setup, script extraction, re-verification, repository checks. |
 | `portal/tests/` | Test suite (`python -m pytest -q portal/tests`). |
 

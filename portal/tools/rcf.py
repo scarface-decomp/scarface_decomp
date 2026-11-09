@@ -57,7 +57,8 @@ class RcfArchive:
         if not (0 < count < 1_000_000) or dir_off + 12 * count > self.file_size or names_off > self.file_size:
             raise RcfError(f"unexpected header (count={count}, directory at {dir_off}, names at {names_off})")
         table = self._read(dir_off, 12 * count)
-        directory = sorted((struct.unpack_from("<3I", table, 12 * i) for i in range(count)), key=lambda e: e[1])
+        # In name order: by where the data starts, and an empty file first when it starts where the next one does
+        directory = sorted((struct.unpack_from("<3I", table, 12 * i) for i in range(count)), key=lambda e: (e[1], e[2]))
         names = []
         pos = names_off + 8
         for _ in range(count):

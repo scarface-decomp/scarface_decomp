@@ -182,12 +182,14 @@ def test_scratch_source_has_one_header_and_unix_line_ends():
 def test_scratch_name_says_which_game_build(image):
     _obj, fields = D.prepare(image, FN, len(_code()), "core::Foo::Bar", FLAGS, "void f() {}", [], build="xb")
     assert fields["name"] == "Scarface (Xbox) core::Foo::Bar"
-    assert "preset" not in fields                     # until decomp.me has created the Scarface preset
+    assert fields["preset"] == "266"                  # filed under the Scarface preset on decomp.me
 
 
-def test_preset_is_sent_once_it_exists(monkeypatch):
+def test_preset_can_be_changed_or_turned_off(monkeypatch):
     monkeypatch.setattr(D, "PRESET_ID", "321")
     assert D.scratch_fields("n", FLAGS, "x", "")["preset"] == "321"
+    monkeypatch.setattr(D, "PRESET_ID", "none")
+    assert "preset" not in D.scratch_fields("n", FLAGS, "x", "")
 
 
 def test_target_names_calls_the_way_msvc_will():

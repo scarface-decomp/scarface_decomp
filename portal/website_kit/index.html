@@ -488,6 +488,61 @@
     .binary-problems p { margin: 4px 0 0; }
 
     /* ---------- Game scripts ---------- */
+    #view-gamefiles [hidden] { display: none; }
+    .gf-h { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; font-family: var(--sans); }
+    .gf-versions { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+    .gf-ver { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--border); border-radius: 2px; padding: 12px 14px 10px; background: var(--bg-card-alt); cursor: pointer; }
+    .gf-ver:has(input:checked) { border-color: rgba(234, 68, 77, 0.65); }
+    .gf-ver input { margin-top: 4px; accent-color: var(--blood); }
+    .gf-ver b { display: block; font-size: 0.95rem; }
+    .gf-ver .src { display: block; font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; margin-top: 2px; }
+    .gf-ver.missing { cursor: default; background: transparent; border-style: dashed; }
+    .gf-ver.missing b { color: var(--muted); }
+    .gf-notes { font-size: 0.84rem; color: var(--muted); margin: 8px 0 0; max-width: 62em; }
+    .gf-notes:empty { display: none; }
+    .gf-modes-set { border: 0; min-width: 0; margin-top: 20px; }
+    .gf-modes-set legend { margin-top: 0; }
+    .gf-modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+    .gf-mode { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--border); border-radius: 2px; padding: 12px 14px 10px; cursor: pointer; }
+    .gf-mode:has(input:checked) { border-color: rgba(234, 68, 77, 0.65); background: rgba(181, 18, 27, 0.08); }
+    .gf-mode input { margin-top: 4px; accent-color: var(--blood); }
+    .gf-mode b { display: block; font-size: 0.95rem; }
+    .gf-mode b + span { display: block; font-size: 0.84rem; color: var(--muted); margin-top: 2px; }
+    .gf-run { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+    .gf-space { font-size: 0.84rem; color: var(--muted); }
+    .gf-progress { margin-top: 16px; }
+    .gf-progress[hidden], .gf-more[hidden] { display: none; }
+    .gf-progress p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 8px; font-variant-numeric: tabular-nums; }
+    .gf-progress p.err { color: var(--error); }
+    .gf-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .gf-tab { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-strong); border-radius: 2px; padding: 7px 14px 5px; font-family: var(--sans); font-size: 0.86rem; font-weight: 600; cursor: pointer; }
+    .gf-tab[aria-selected="true"] { color: var(--text); border-color: var(--crimson); background: rgba(181, 18, 27, 0.12); }
+    .gf-totals { font-size: 0.88rem; color: var(--muted); margin-bottom: 10px; }
+    .gf-totals strong { color: var(--text); font-weight: 600; }
+    .gf-kinds { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-bottom: 12px; }
+    .gf-kind { border: 1px solid var(--border); border-radius: 2px; padding: 10px 12px 8px; background: var(--bg-card-alt); color: var(--text); font-family: var(--sans); text-align: left; cursor: pointer; }
+    .gf-kind strong { display: block; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+    .gf-kind span { font-size: 0.78rem; color: var(--muted); }
+    .gf-kind[aria-pressed="true"] { border-color: var(--crimson); }
+    .gf-filters { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr) auto; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .gf-filters .input-box { width: 100%; }
+    .gf-list { max-height: 440px; overflow-y: auto; border: 1px solid var(--border); border-radius: 2px; background: var(--bg-input); }
+    .gf-row { display: grid; grid-template-columns: minmax(0, 1fr) 130px 84px 96px; gap: 10px; padding: 6px 12px 4px; border-bottom: 1px solid var(--border-subtle); font-size: 0.84rem; align-items: baseline; }
+    .gf-row .p { font-family: var(--mono); font-size: 0.8rem; color: var(--text-secondary); overflow-wrap: anywhere; }
+    .gf-row .k, .gf-row .z { color: var(--muted); }
+    .gf-row .p .nm { display: block; color: var(--muted); font-size: 0.76rem; }
+    .gf-row .z { text-align: right; font-variant-numeric: tabular-nums; }
+    .gf-row .st { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+    .gf-row .st.only { color: var(--crimson); }
+    .gf-row .st.changed { color: var(--gold); }
+    .gf-row .st.shared { color: var(--muted); }
+    .gf-row .st.picked { color: var(--green); }
+    .gf-more { margin-top: 10px; }
+    @media (max-width: 720px) {
+      .gf-filters { grid-template-columns: 1fr; }
+      .gf-row { grid-template-columns: minmax(0, 1fr) 80px; }
+      .gf-row .k, .gf-row .st { display: none; }
+    }
     .script-browser { margin-bottom: 14px; }
     .script-filters { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr) auto; gap: 10px; align-items: center; margin-bottom: 8px; }
     .script-filters .input-box { width: 100%; }
@@ -714,11 +769,15 @@
             <span class="side-btn-left"><span class="n" aria-hidden="true">04</span>Source files</span>
             <span class="side-badge" id="side-files-count" title="C++ files">—</span>
           </button>
+          <button type="button" id="nav-gamefiles" class="side-btn view-nav" onclick="switchView('gamefiles')">
+            <span class="side-btn-left"><span class="n" aria-hidden="true">05</span>Game files</span>
+            <span class="side-badge" id="side-gamefiles-badge" title="Versions of the game found" hidden></span>
+          </button>
           <button type="button" id="nav-leaderboard" class="side-btn view-nav" onclick="switchView('leaderboard')">
-            <span class="side-btn-left"><span class="n" aria-hidden="true">05</span>Leaderboard</span>
+            <span class="side-btn-left"><span class="n" aria-hidden="true">06</span>Leaderboard</span>
           </button>
           <button type="button" id="nav-how" class="side-btn view-nav" onclick="switchView('how')">
-            <span class="side-btn-left"><span class="n" aria-hidden="true">06</span>How it works</span>
+            <span class="side-btn-left"><span class="n" aria-hidden="true">07</span>How it works</span>
           </button>
         </nav>
       </div>
@@ -1078,6 +1137,90 @@
           </div>
         </section>
 
+        <!-- VIEW 3C: GAME FILES (sounds, textures, models, videos from the person's own copies) -->
+        <section id="view-gamefiles" class="view-pane" aria-label="Game files">
+          <div class="card">
+            <div class="card-hdr">
+              <div>
+                <h2 class="card-title lg">Game files</h2>
+                <p class="card-sub">Copy the sounds, textures, models, videos and everything else out of your own copies of the game, into <code id="gf-folder">binaries/game_files/</code>. Every file goes in the folder it has inside the game. They're for your own use: they stay on this computer and are never uploaded or put on GitHub.</p>
+              </div>
+              <div class="hdr-actions">
+                <button type="button" class="btn-sm" id="gf-open-all" onclick="openGameFolder('')" hidden>Open the folder</button>
+              </div>
+            </div>
+
+            <h3 class="gf-h">Versions to copy</h3>
+            <div class="gf-versions" id="gf-versions" role="group" aria-label="Versions to copy"><p class="empty-note">Looking for your game files…</p></div>
+            <p class="gf-notes" id="gf-notes"></p>
+
+            <fieldset class="gf-modes-set">
+              <legend class="gf-h">Layout</legend>
+              <div class="gf-modes">
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="unique" checked onchange="updateGfSpace()" />
+                <span><b>No duplicates</b><span>A file that is exactly the same in several versions is copied once, into <code>Shared/</code>. Each version's folder then has only what is unique to it.</span></span></label>
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="every" onchange="updateGfSpace()" />
+                <span><b>Every version complete</b><span>Each version in its own folder with all of its files. Takes the most space.</span></span></label>
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="best" onchange="updateGfSpace()" />
+                <span><b>Best version of each file</b><span>One copy of every file, in <code>Best/</code>. Where the versions differ, the highest quality wins: the PC's 48 kHz sounds, its 1280&times;720 videos, the biggest textures. The index says where each came from.</span></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="gf-modes-set">
+              <legend class="gf-h">Folders</legend>
+              <div class="gf-modes">
+              <label class="gf-mode"><input type="radio" name="gf-folders" value="game" checked />
+                <span><b>As in the game</b><span>Every file in the folder it has inside the game.</span></span></label>
+              <label class="gf-mode"><input type="radio" name="gf-folders" value="type" />
+                <span><b>By type</b><span>Sounds, Textures, Models, Animations, Videos, Scripts &amp; text first, each with the game's folders inside.</span></span></label>
+              </div>
+            </fieldset>
+
+            <div class="gf-run">
+              <button type="button" class="btn primary" id="gf-start" onclick="startGameFiles()">Copy the game files</button>
+              <button type="button" class="btn-sm" id="gf-stop" onclick="stopGameFiles()" hidden>Stop</button>
+              <span class="gf-space" id="gf-space"></span>
+            </div>
+            <div class="gf-progress" id="gf-progress" hidden>
+              <div class="progress-bar-outer"><div class="progress-bar-inner" id="gf-bar"></div></div>
+              <p id="gf-progress-text" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="card" id="gf-result" hidden>
+            <div class="card-hdr">
+              <div>
+                <h2 class="card-title">What each version has</h2>
+                <p class="card-sub" id="gf-result-sub"></p>
+              </div>
+              <div class="hdr-actions">
+                <button type="button" class="btn-sm" id="gf-open-shared" onclick="openGameFolder('shared')" hidden>Open Shared</button>
+                <button type="button" class="btn-sm" id="gf-open-best" onclick="openGameFolder('best')" hidden>Open Best</button>
+                <button type="button" class="btn-sm" id="gf-open-version" onclick="openGameFolder(GF_TAB)">Open this version's folder</button>
+              </div>
+            </div>
+            <div class="gf-tabs" id="gf-tabs" role="tablist" aria-label="Versions"></div>
+            <p class="gf-totals" id="gf-totals"></p>
+            <div class="gf-kinds" id="gf-kinds"></div>
+            <div class="gf-filters">
+              <label class="sr-only" for="gf-status">Show</label>
+              <select id="gf-status" class="input-box" onchange="loadGfList()">
+                <option value="only">Only in this version</option>
+                <option value="changed">Different in this version</option>
+                <option value="own">Only here or different</option>
+                <option value="shared">The same in another version</option>
+                <option value="picked" id="gf-opt-picked" hidden>Picked for Best</option>
+                <option value="">All files</option>
+              </select>
+              <label class="sr-only" for="gf-search">Search files</label>
+              <input id="gf-search" class="input-box" type="search" placeholder="Search names, e.g. tony, dj or .bik" oninput="loadGfListSoon()" />
+              <span class="script-list-count" id="gf-count"></span>
+            </div>
+            <div class="gf-list" id="gf-list" role="list" aria-label="Files"></div>
+            <button type="button" class="btn-sm gf-more" id="gf-more" onclick="loadGfList(true)" hidden>Show more</button>
+          </div>
+        </section>
+
         <!-- VIEW 3B: SCRIPTS & DATA -->
         <section id="view-scripts" class="view-pane" aria-label="Script and data decompiler">
           <div class="card">
@@ -1201,7 +1344,7 @@
    * =================================================================== */
   const NL = '\n';
   const FENCE = String.fromCharCode(96).repeat(3);
-  const VIEWS = ['dashboard', 'workbench', 'scripts', 'sources', 'leaderboard', 'how'];
+  const VIEWS = ['dashboard', 'workbench', 'scripts', 'sources', 'gamefiles', 'leaderboard', 'how'];
   const STATUS_CLASSES = new Set(['UNCLAIMED', 'CLAIMED', 'PARTIAL', 'VERIFIED']);
   const DIFF_CLASSES = new Set(['match', 'linked', 'reloc', 'diff']);
   const MAX_SCRIPT_BYTES = 32 * 1024 * 1024;
@@ -1397,6 +1540,7 @@
     });
     if (viewName === 'scripts' && !opts.skipLoad) loadVerifiedScripts();
     if (viewName === 'sources' && sourcesDirty) renderSources();
+    if (viewName === 'gamefiles') loadGameFiles();
     closeSidebar();
     if (!opts.fromHash && location.hash !== '#' + viewName) {
       try { history.pushState(null, '', '#' + viewName); } catch (e) { /* file:// or sandboxed */ }
@@ -3005,6 +3149,253 @@
     options.forEach(([value, text]) => { const o = el('option', text); o.value = value; sel.appendChild(o); });
     fs.appendChild(sel);
     return fs;
+  }
+
+  /* ------------------------------------------------------------------
+   * Game files: sounds, textures, models and videos copied out of the
+   * person's own copies of the game (stays on this computer)
+   * ------------------------------------------------------------------ */
+  let GF_DATA = null;
+  let GF_TAB = '';
+  let GF_KIND = '';
+  let GF_OFFSET = 0;
+  let GF_POLL = 0;
+  let GF_SEARCH_T = 0;
+  let GF_LIST_SEQ = 0;
+  const GF_STATUS_WORDS = { only: 'only here', changed: 'different', shared: 'shared' };
+
+  function fmtBytes(n) {
+    const v = Number(n) || 0;
+    if (v >= 1073741824) return (v / 1073741824).toFixed(1) + ' GB';
+    if (v >= 1048576) return (v / 1048576).toFixed(1) + ' MB';
+    if (v >= 1024) return Math.round(v / 1024) + ' KB';
+    return v + ' bytes';
+  }
+
+  async function loadGameFiles() {
+    try {
+      GF_DATA = await apiFetchJson('/api/game-files');
+    } catch (e) {
+      $('gf-versions').textContent = '';
+      $('gf-notes').textContent = 'Couldn’t look for your game files: ' + e.message;
+      return;
+    }
+    renderGameFiles();
+    if (GF_DATA.status && GF_DATA.status.running) pollGameFiles();
+  }
+
+  function gfChosen() {
+    return Array.from(document.querySelectorAll('input[name="gf-version"]:checked')).map((i) => i.value);
+  }
+
+  function gfMode() {
+    const r = document.querySelector('input[name="gf-mode"]:checked');
+    return r ? r.value : 'unique';
+  }
+
+  function gfFolders() {
+    const r = document.querySelector('input[name="gf-folders"]:checked');
+    return r ? r.value : 'game';
+  }
+
+  function renderGameFiles() {
+    const d = GF_DATA || {};
+    const box = $('gf-versions');
+    const had = box.querySelector('input[name="gf-version"]') !== null;
+    const keep = new Set(gfChosen());
+    box.textContent = '';
+    (d.versions || []).forEach((v) => {
+      const lab = el('label', undefined, 'gf-ver' + (v.found ? '' : ' missing'));
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.name = 'gf-version';
+      cb.value = v.version;
+      cb.disabled = !v.found;
+      cb.checked = !!v.found && (had ? keep.has(v.version) : true);
+      cb.addEventListener('change', updateGfSpace);
+      lab.appendChild(cb);
+      const txt = el('span');
+      txt.appendChild(el('b', v.label));
+      txt.appendChild(el('span', v.found ? v.source + ' · ' + fmtBytes(v.size)
+        : (v.version === 'pc' ? 'Not found. Put the PC disc image (.iso) in binaries/: nothing needs installing.' : 'Not found in binaries/'), 'src'));
+      lab.appendChild(txt);
+      box.appendChild(lab);
+    });
+    $('gf-notes').textContent = (d.notes || []).filter((n) => !/^PC: not found/.test(n)).join(' ');
+    if (d.folder) $('gf-folder').textContent = d.folder + '/';
+    const found = (d.versions || []).filter((v) => v.found).length;
+    const badge = $('side-gamefiles-badge');
+    if (badge) { badge.hidden = !found; badge.textContent = String(found); }
+    $('gf-open-all').hidden = !d.summary;
+    renderGfStatus(d.status || {});
+    updateGfSpace();
+    renderGfResult();
+  }
+
+  function updateGfSpace() {
+    const d = GF_DATA || {};
+    const chosen = new Set(gfChosen());
+    const need = (d.versions || []).filter((v) => v.found && chosen.has(v.version)).reduce((a, v) => a + (v.size || 0), 0);
+    const parts = [];
+    if (need) parts.push((gfMode() === 'every' ? 'Needs about ' : 'Needs up to ') + fmtBytes(need) + (gfMode() === 'best' ? ' while copying' : ''));
+    if (d.free != null) parts.push(fmtBytes(d.free) + ' free on this drive');
+    if (d.summary) parts.push('copying again replaces what is in the folder (files you changed are kept)');
+    $('gf-space').textContent = parts.join(' · ');
+    $('gf-start').disabled = !chosen.size || !!(d.status && d.status.running);
+  }
+
+  function gfMessage(text, isError) {
+    $('gf-progress').hidden = false;
+    $('gf-progress-text').textContent = text;
+    $('gf-progress-text').classList.toggle('err', !!isError);
+  }
+
+  function renderGfStatus(st) {
+    const running = !!st.running;
+    $('gf-start').textContent = running ? 'Copying…' : 'Copy the game files';
+    $('gf-start').disabled = running || !gfChosen().length;
+    $('gf-stop').hidden = !running;
+    if (!st.phase) { $('gf-progress').hidden = true; return; }
+    const pct = st.total ? Math.min(100, (st.done / st.total) * 100) : 0;
+    let msg = '';
+    if (st.phase === 'preparing') msg = 'Getting ready…';
+    else if (st.phase === 'reading') msg = 'Reading ' + (st.label || 'the game') + ': ' + fmtBytes(st.done) + ' of ' + fmtBytes(st.total) + ' · ' + fmtInt(st.files) + ' files so far';
+    else if (st.phase === 'placing') msg = 'Putting every file in its place… (' + fmtInt(st.files) + ' files)';
+    else if (st.phase === 'done') msg = 'Done: ' + fmtInt(st.files) + ' files copied.';
+    else if (st.phase === 'stopped') msg = st.message || 'Stopped.';
+    else if (st.phase === 'error') msg = 'Couldn’t finish: ' + (st.error || 'unknown error') + '. Press Copy to try again: it carries on where it stopped.';
+    gfMessage(msg, st.phase === 'error');
+    $('gf-bar').style.width = (st.phase === 'done' || st.phase === 'placing' ? 100 : pct).toFixed(1) + '%';
+  }
+
+  function pollGameFiles() {
+    clearTimeout(GF_POLL);
+    GF_POLL = setTimeout(async () => {
+      let d;
+      try { d = await apiFetchJson('/api/game-files'); } catch (e) { pollGameFiles(); return; }
+      GF_DATA = d;
+      renderGfStatus(d.status || {});
+      if (d.status && d.status.running) { pollGameFiles(); return; }
+      renderGameFiles();
+      if (d.status && d.status.phase === 'done') toast('Your game files are copied.', 'ok');
+    }, 1000);
+  }
+
+  async function startGameFiles() {
+    const versions = gfChosen();
+    if (!versions.length) { gfMessage('Pick at least one version.', true); return; }
+    $('gf-start').disabled = true;
+    let res;
+    try { res = await postJson('/api/game-files/start', { versions: versions, mode: gfMode(), folders: gfFolders() }); } catch (e) { res = { ok: false, error: e.message }; }
+    if (!res.ok) {
+      gfMessage(res.error || 'Couldn’t start.', true);
+      updateGfSpace();
+      return;
+    }
+    if (GF_DATA) GF_DATA.status = res.status;
+    renderGfStatus(res.status || {});
+    pollGameFiles();
+  }
+
+  async function stopGameFiles() {
+    $('gf-stop').disabled = true;
+    try { await postJson('/api/game-files/stop', {}); } catch (e) { /* the next poll shows what happened */ }
+    $('gf-stop').disabled = false;
+  }
+
+  async function openGameFolder(which) {
+    let res;
+    try { res = await postJson('/api/game-files/open', { folder: which || '' }); } catch (e) { res = { ok: false, error: e.message }; }
+    if (!res.ok) toast(res.error || 'Couldn’t open the folder.', 'err');
+  }
+
+  function gfKindLabel(id) {
+    const k = ((GF_DATA || {}).kinds || []).find((x) => x.id === id);
+    return k ? k.label : id;
+  }
+
+  function renderGfResult() {
+    const s = (GF_DATA || {}).summary;
+    $('gf-result').hidden = !s;
+    if (!s) return;
+    const vers = Object.keys(s.versions || {});
+    if (!vers.includes(GF_TAB)) { GF_TAB = vers[0] || ''; GF_KIND = ''; }
+    let sub = s.mode_label + (s.folders === 'type' ? ', by type' : '') + ', copied ' + s.created + '.';
+    if (s.best) {
+      sub += ' Best/ has ' + fmtInt(s.best.files) + ' files: ' + Object.keys(s.best.from).filter((v) => s.best.from[v])
+        .map((v) => fmtInt(s.best.from[v]) + ' from ' + s.versions[v].label).join(', ') + '.';
+    }
+    $('gf-result-sub').textContent = sub + ' Pick a version to see the files only it has.';
+    $('gf-open-shared').hidden = s.mode !== 'unique';
+    $('gf-open-best').hidden = s.mode !== 'best';
+    $('gf-opt-picked').hidden = s.mode !== 'best';
+    if (s.mode !== 'best' && $('gf-status').value === 'picked') $('gf-status').value = 'only';
+    const tabs = $('gf-tabs');
+    tabs.textContent = '';
+    vers.forEach((v) => {
+      const b = el('button', s.versions[v].label, 'gf-tab');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', String(v === GF_TAB));
+      b.addEventListener('click', () => { GF_TAB = v; GF_KIND = ''; renderGfResult(); });
+      tabs.appendChild(b);
+    });
+    const info = s.versions[GF_TAB];
+    if (!info) return;
+    const t = $('gf-totals');
+    t.textContent = '';
+    t.appendChild(el('strong', fmtInt(info.files)));
+    t.appendChild(document.createTextNode(' files from ' + info.source + ': ' + fmtInt(info.only) + ' only in this version, '
+      + fmtInt(info.changed) + ' different in this version, ' + fmtInt(info.shared) + ' the same in another version.'));
+    const kinds = $('gf-kinds');
+    kinds.textContent = '';
+    ((GF_DATA || {}).kinds || []).forEach((k) => {
+      const c = (info.kinds || {})[k.id] || { only: 0, changed: 0 };
+      if (!c.only && !c.changed) return;
+      const b = el('button', undefined, 'gf-kind');
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(GF_KIND === k.id));
+      b.title = 'Show only ' + k.label.toLowerCase();
+      b.appendChild(el('strong', fmtInt(c.only)));
+      b.appendChild(el('span', k.label + ' only here' + (c.changed ? ' · ' + fmtInt(c.changed) + ' different' : '')));
+      b.addEventListener('click', () => { GF_KIND = GF_KIND === k.id ? '' : k.id; renderGfResult(); });
+      kinds.appendChild(b);
+    });
+    loadGfList();
+  }
+
+  function loadGfListSoon() {
+    clearTimeout(GF_SEARCH_T);
+    GF_SEARCH_T = setTimeout(() => loadGfList(), 250);
+  }
+
+  async function loadGfList(more) {
+    if (!GF_TAB) return;
+    const seq = ++GF_LIST_SEQ;
+    if (!more) GF_OFFSET = 0;
+    const params = new URLSearchParams({ version: GF_TAB, status: $('gf-status').value, kind: GF_KIND,
+      q: $('gf-search').value, offset: String(GF_OFFSET), limit: '200' });
+    let d;
+    try { d = await apiFetchJson('/api/game-files/list?' + params.toString()); } catch (e) { return; }
+    if (seq !== GF_LIST_SEQ) return;
+    const list = $('gf-list');
+    if (!more) list.textContent = '';
+    (d.files || []).forEach((f) => {
+      const row = el('div', undefined, 'gf-row');
+      row.setAttribute('role', 'listitem');
+      const p = el('span', f.path, 'p');
+      if (f.placed) p.title = 'In ' + f.placed + (f.quality ? ' (' + f.quality + ')' : '');
+      if (f.name) p.appendChild(el('span', f.name, 'nm'));
+      row.appendChild(p);
+      row.appendChild(el('span', gfKindLabel(f.kind), 'k'));
+      row.appendChild(el('span', fmtBytes(f.size), 'z'));
+      row.appendChild(el('span', f.picked ? 'best' : (GF_STATUS_WORDS[f.status] || f.status), 'st ' + (f.picked ? 'picked' : f.status)));
+      list.appendChild(row);
+    });
+    if (!list.children.length) list.appendChild(el('p', 'No files match.', 'empty-note'));
+    GF_OFFSET += (d.files || []).length;
+    $('gf-count').textContent = fmtInt(d.total) + (d.total === 1 ? ' file' : ' files');
+    $('gf-more').hidden = GF_OFFSET >= (d.total || 0);
   }
 
   function openDownload(kind) {

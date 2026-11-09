@@ -38,10 +38,10 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 DECOMPME_URL = os.environ.get("SCARFACE_DECOMPME_URL", "https://decomp.me").rstrip("/")
-# decomp.me groups a game's scratches under a "preset" that its staff create on request
-# (https://github.com/decompme/decomp.me/issues/2184). Put its number here once it exists, or set
-# SCARFACE_DECOMPME_PRESET; scratches are then filed under it.
-PRESET_ID = os.environ.get("SCARFACE_DECOMPME_PRESET", "").strip()
+# decomp.me groups a game's scratches under a "preset" (https://decomp.me/preset/266 is Scarface's,
+# asked for in https://github.com/decompme/decomp.me/issues/2184). Every scratch the portal makes is
+# filed under it; SCARFACE_DECOMPME_PRESET sets another one, or turns it off when set to "none".
+PRESET_ID = os.environ.get("SCARFACE_DECOMPME_PRESET", "266").strip()
 PROJECT_SITE = "https://scarface-decomp.pages.dev"
 BUILD_LABELS = {"pc": "PC", "xb": "Xbox", "proto": "Xbox prototype"}
 COMPILER = "msvc7.1"

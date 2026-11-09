@@ -613,3 +613,52 @@ def test_downloads_from_each_section(page):
     with page.expect_download() as dl:
         page.click("#sd-actions .btn.primary")
     assert dl.value.suggested_filename == "scarface-sources-all.zip"
+
+
+def test_game_files_copy_and_browse(page):
+    """Game files: the versions found are ticked, the PC says how to add it, a copy runs with progress,
+    then each version's own files can be listed and filtered."""
+    page.click("#nav-gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    assert page.eval_on_selector_all("input[name=gf-version]", "els => els.map(e => [e.value, e.checked, e.disabled])") == [
+        ["xbox", True, False], ["pc", True, False], ["ps2", True, False], ["prototype", True, False]]
+    assert "_ISO-Version.iso + " in page.text_content("#gf-versions")          # the PC disc, read without installing
+    assert page.text_content("#gf-notes") == ""
+    assert "Needs up to" in page.text_content("#gf-space") and "free on this drive" in page.text_content("#gf-space")
+    assert page.is_hidden("#gf-result")
+
+    page.uncheck("input[name=gf-version][value=ps2]")
+    page.uncheck("input[name=gf-version][value=pc]")
+    page.check("input[name=gf-mode][value=every]")
+    page.click("#gf-start")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Reading')")
+    assert page.is_disabled("#gf-start") and page.is_visible("#gf-stop")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
+    start = [c for c in calls("/api/game-files/start")][-1][1]
+    assert start == {"versions": ["xbox", "prototype"], "mode": "every"}
+
+    page.wait_for_selector("#gf-result:not([hidden]) .gf-tab")
+    assert page.eval_on_selector_all(".gf-tab", "els => els.map(e => e.textContent)") == ["Xbox", "PC", "PS2", "Xbox 2006 prototype"]
+    page.wait_for_function("document.querySelectorAll('#gf-list .gf-row').length > 0")
+    assert all(s == "only here" for s in page.eval_on_selector_all("#gf-list .st", "els => els.map(e => e.textContent)"))
+    page.click(".gf-tab:has-text('Xbox 2006 prototype')")
+    page.wait_for_function("document.querySelector('#gf-list .p').textContent.startsWith('art/')")
+    page.click(".gf-kind:has-text('Sounds')")
+    page.wait_for_function("[...document.querySelectorAll('#gf-list .p')].every(e => e.textContent.endsWith('.rsd'))")
+    page.select_option("#gf-status", "changed")
+    page.wait_for_function("[...document.querySelectorAll('#gf-list .st')].every(e => e.textContent === 'different')")
+    page.fill("#gf-search", "prototype_010")
+    page.wait_for_function("document.getElementById('gf-count').textContent === '1 file'")
+    page.click("#gf-open-version")
+    page.wait_for_timeout(200)
+    assert calls("/api/game-files/open")[-1][1] == {"folder": "prototype"}
+
+
+def test_game_files_stop(page):
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.click("#gf-start")
+    page.wait_for_selector("#gf-stop:not([hidden])")
+    page.click("#gf-stop")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Stopped')", timeout=10000)
+    assert page.is_enabled("#gf-start") and page.is_hidden("#gf-stop")

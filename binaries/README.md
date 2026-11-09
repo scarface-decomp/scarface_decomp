@@ -11,7 +11,9 @@ this folder is never uploaded, and Git ignores everything in it except this note
 | Xbox prototype, April 20, 2006 | `game.xbe`, or the `.zip` of its folder | optional: unreleased code (its own lane) |
 
 The portal also copies the game's scripts out of these into `scripts_and_data/<version>/` for its
-Game Scripts tab. The first start takes a few minutes while it reads the downloads and lists every
+Game Scripts tab. Its Game files section copies everything else too (sounds, models, videos) into
+`game_files/`, for your own use; for that it also reads the PS2 disc (the `.iso` or the `.7z` it came in)
+and the PC disc image (`.iso`, as it is: nothing needs installing). The first start takes a few minutes while it reads the downloads and lists every
 function; after that it starts quickly.
 
 Only these exact versions are accepted: other regions, the unpatched PC 1.00 and edited files are
