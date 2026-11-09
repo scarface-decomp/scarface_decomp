@@ -187,6 +187,7 @@
 
     /* ---------- help ---------- */
     .needs { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 0 auto 44px; list-style: none; }
+    .needs + .needs-note { margin: -30px auto 40px; max-width: 36em; }
     .needs li { border: 1px solid var(--line); border-radius: 2px; padding: 9px 18px 7px; font-size: 0.95rem; }
     .needs li b { color: var(--red); font-weight: 600; }
     ol.steps { list-style: none; counter-reset: s; display: grid; gap: 14px; max-width: var(--read); margin: 0 auto; }
@@ -430,7 +431,11 @@
           <li><b>Python 3</b> and <b>Git</b> (both free)</li>
           <li><b>Your copy</b> of the Xbox game</li>
           <li><b>About 10 minutes</b> to set up</li>
+          <li><b>Strongly recommended:</b> the 2003 compiler, <code>VCToolkitSetup.exe</code></li>
         </ul>
+        <p class="small needs-note">Set up the compiler if you can: the portal then checks your work on the spot and credits
+          you right away. Only if you can't get it working, use decomp.me in your browser and a maintainer checks it for you
+          (steps 4 and 7).</p>
         <ol class="steps">
           <li><b>Install Python</b>Get Python 3 from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">python.org</a>.
             On Windows, tick <em>Add python.exe to PATH</em> on the installer's first screen.</li>
@@ -448,16 +453,20 @@
             patch, and the game's scripts from all of them. Nothing has to be installed or unpacked first. The US Xbox disc
             is the one that matters: almost all of the work is there. The PC game and the April 2006 Xbox prototype are
             optional extras. Only the US versions are accepted; the portal checks.</li>
+          <li><b>Add the compiler (strongly recommended)</b>To check your work on your own computer, the portal needs the
+            compiler the game was made with, Microsoft's Visual C++ Toolkit 2003. Microsoft no longer offers it, so you need
+            your own copy of its installer, <code>VCToolkitSetup.exe</code>. Put it in the project folder and run this once:
+            <pre tabindex="0">python portal/scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
+            With it, every function you finish is checked and credited to you straight away, so set it up if you can. Only
+            skip this if you can't get it to work; step 7 says what to do then.</li>
           <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
             <code>sh start_portal.sh</code>. The first start takes a few minutes while it unpacks your files and lists
             every function; then your browser opens the portal at <code>localhost:8085</code>.</li>
-          <li><b>Pick a function and solve it</b>Sign in, then choose a small function and claim it. The editor starts you
+          <li><b>Pick a function and solve it</b>Sign in (the first time, just pick a name and a PIN), then choose a small function and claim it. The editor starts you
             off with a first draft of its C++, written from the game's machine code; for many small functions the draft
             already matches. If it doesn't, change it until it does.</li>
-          <li><b>Verify it</b>Press <em>Compile &amp; Verify</em> to record it under your name. That needs the 2003
-            compiler, installed once from your own <code>VCToolkitSetup.exe</code>:
-            <pre tabindex="0">python portal/scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
-            No compiler yet, or it's acting up? Press <em>decomp.me</em> in the portal instead: it runs the same compiler
+          <li><b>Verify it</b>Press <em>Compile &amp; Verify</em> to record it under your name (this uses the compiler from
+            step 4). No compiler, or it's acting up? Press <em>decomp.me</em> in the portal instead: it runs the same compiler
             in your browser. Get it to 100% there and post the link in a
             <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>
             or in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on Discord</a>, and a maintainer will verify it and credit you.</li>

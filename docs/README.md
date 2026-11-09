@@ -25,7 +25,7 @@ The page reads two files that the portal and `portal/scripts/reverify_all.py` ke
 2. The repository on `raw.githubusercontent.com`. That covers GitHub Pages, or a deploy without
    step 1.
 
-So every push to `main`, including the portal's **Sync Verified to GitHub**, updates the site.
+So every push to `main`, including the portal's **Sync to GitHub**, updates the site.
 
 ## Cloudflare Pages settings
 

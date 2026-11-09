@@ -66,6 +66,11 @@ The full procedure, with code generation notes for this compiler, is in
 
 ## Quick start (no experience needed)
 
+You need Python 3 and Git (both free), your own copy of the Xbox game, and about 10 minutes. We strongly
+recommend the 2003 compiler too, from your own `VCToolkitSetup.exe` ([below](#the-compiler)): with it, the
+portal checks your work on the spot and credits you right away. Only if you can't get it working, solve
+functions on decomp.me and have a maintainer check them.
+
 1. **Install Python 3** from [python.org](https://www.python.org/downloads/). On Windows, tick
    *Add python.exe to PATH* on the installer's first screen. Install **Git** too, from
    [git-scm.com](https://git-scm.com/downloads) (the default options are fine).
@@ -93,7 +98,8 @@ The full procedure, with code generation notes for this compiler, is in
 5. **Pick a small function.** The editor starts you off with C++ written from the game's own code
    (calls and globals already named for their addresses); for many small functions it matches as it is.
    Change it until it does.
-6. **Press Compile & Verify** to record it under your name. That needs the compiler (below).
+6. **Press Compile & Verify** to record it under your name. That needs the compiler ([below](#the-compiler));
+   set it up once, before you start.
 
 **Backup: decomp.me.** No compiler yet, or it's acting up? The portal's **decomp.me** button opens the
 function on [decomp.me](https://decomp.me), which runs the same compiler in your browser. Get it to 100%
@@ -134,7 +140,7 @@ your code, verifies it on each look-alike and credits you for every exact match
 | :--- | :--- | :--- |
 | `SCARFACE_HOST` | `127.0.0.1` | interface to listen on; the portal is local-only by default |
 | `SCARFACE_PORT` | `8085` | port the portal listens on |
-| `SCARFACE_MAINTAINERS` | `RRutherrfordd (Founder)` | handles allowed to use "Sync Verified to GitHub" |
+| `SCARFACE_MAINTAINERS` | `RRutherrfordd (Founder)` | handles allowed to use "Sync to GitHub" |
 | `SCARFACE_NO_BROWSER` | unset | `1` stops it opening a browser |
 | `SCARFACE_DECOMPME_URL` | `https://decomp.me` | where the decomp.me button sends functions |
 | `SCARFACE_LOOKALIKE_MAX` | `1000` | how many look-alikes a new match is tried on |

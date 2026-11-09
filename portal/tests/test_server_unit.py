@@ -105,3 +105,49 @@ def test_prototype_functions_also_in_retail_are_left_out_of_the_queue(S, monkeyp
     for t in tasks:
         t["in_retail"] = S.in_retail(t)
     assert [t["id"] for t in tasks if S.in_default_queue(t)] == ["xb1", "xb3", "proto5", "proto6", "proto7"]
+
+
+def test_earlier_matches_catch_up_on_their_look_alikes(S, monkeypatch, tmp_path):
+    """A retail match made before the prototype was added is tried on the prototype's identical copy at
+    startup, credited to whoever matched it. A failed try is not repeated at every start, unless the
+    match's code changes."""
+    def task(i, b, va):
+        return {"id": f"{b}_{va:08X}", "bin": b, "fva_int": va, "va": f"0x{va:08X}", "symbol": f"sub_{va:08X}",
+                "status": "UNCLAIMED", "lookalike_group": "g", "size": 8, "flags": "/O2"}
+    src, twin, other = task(1, "xb", 0x11000), task(2, "proto", 0x22000), task(3, "proto", 0x33000)
+    src["status"] = "VERIFIED"
+    reg = {"entries": {S.task_key(src): {"code": "int f() { return 1; }", "verified_by": "Ana", "tool_used": "by hand"}}}
+    monkeypatch.setattr(S, "REGISTRY", reg)
+    monkeypatch.setattr(S, "GROUPS", {"g": [src, twin, other]})
+    monkeypatch.setattr(S, "CATCHUP_JSON", tmp_path / "catchup.json")
+    monkeypatch.setattr(S.MV, "find_msvc71_bin", lambda: "cl")
+    monkeypatch.setattr(S, "relocs_for", lambda t: [])
+    monkeypatch.setattr(S.LA, "port_code", lambda code, *a: code)
+    monkeypatch.setattr(S, "save_overlay", lambda t: None)
+    monkeypatch.setattr(S, "save_registry", lambda: None)
+    monkeypatch.setattr(S, "append_audit", lambda e: None)
+    tries = []
+
+    def verify(m, code):
+        tries.append(m["id"])
+        return {"ok": True, "verified": m is twin, "matched_bytes": 8, "total_bytes": 8}
+    monkeypatch.setattr(S, "run_verify", verify)
+    jobs = []
+    monkeypatch.setattr(S, "queue_port", lambda t, code, user, tool, catchup=False, tried=None:
+                        jobs.append((t, code, user, tool, catchup)) or len(S.catchup_targets(t, code, user, tried or {})))
+
+    assert S.catch_up_lookalikes() == 2
+    S.port_lookalikes(*jobs[0])
+    assert sorted(tries) == sorted([twin["id"], other["id"]])
+    assert twin["status"] == "VERIFIED" and reg["entries"][S.task_key(twin)]["verified_by"] == "Ana"
+    assert reg["entries"][S.task_key(twin)]["ported_from"] == src["id"]
+
+    jobs.clear(); tries.clear()
+    assert S.catch_up_lookalikes() == 0                      # the failed try is remembered, not repeated
+    reg["entries"][S.task_key(src)]["code"] = "int f() { return 1; } // tidied"
+    jobs.clear()
+    assert S.catch_up_lookalikes() == 1                      # new code: worth another try
+    assert [m["id"] for m in S.catchup_targets(src, jobs[0][1], "Ana", S.read_json(S.CATCHUP_JSON, {}))] == [other["id"]]
+
+    monkeypatch.setattr(S.MV, "find_msvc71_bin", lambda: None)
+    assert S.catch_up_lookalikes() == 0          # nothing to compile with: nothing is tried or remembered

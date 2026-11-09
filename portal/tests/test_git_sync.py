@@ -1,4 +1,4 @@
-"""Sync Verified to GitHub: clear answers when the folder isn't a git clone or GitHub has moved on."""
+"""Sync to GitHub: clear answers when the folder isn't a git clone or GitHub has moved on."""
 import shutil
 import subprocess
 

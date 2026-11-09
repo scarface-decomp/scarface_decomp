@@ -14,8 +14,9 @@ may come from and how AI tools may be used.
 
 1. Start the portal: double-click `START_PORTAL.bat` (Windows) or run `sh start_portal.sh`
    (macOS, Linux). It opens http://localhost:8085.
-2. **Sign in** with a handle and a PIN of at least 8 characters. Handles are not case-sensitive. The
-   PIN is stored only as a salted hash on the machine running the portal.
+2. **Sign in** with a name and a PIN of at least 8 characters. There is no separate sign-up: the first
+   time you use a name, it is created. Names are not case-sensitive. The PIN is stored only as a salted
+   hash on the machine running the portal.
 3. **Claim** a function from the queue. A claim is a timed lease, from 15 minutes for tiny functions to
    2 hours for large ones; only you can submit or cancel it while it lasts.
 4. **Write the C++** in the editor. It starts with C++ written from the function's own machine code,
@@ -37,7 +38,7 @@ may come from and how AI tools may be used.
 No compiler installed, or it's acting up? You can still do steps 1 to 4 with decomp.me. Post the 100% decomp.me link in a
 GitHub issue or in #help on [Discord](https://discord.gg/azvrtGBvau), and a maintainer verifies it with the portal and credits you.
 
-Maintainers (`SCARFACE_MAINTAINERS`) publish verified work with **Sync Verified to GitHub**. It needs
+Maintainers (`SCARFACE_MAINTAINERS`) publish verified work with **Sync to GitHub** (in the portal's sidebar). It needs
 a folder that git knows about, made with `git clone`.
 
 ### Updating

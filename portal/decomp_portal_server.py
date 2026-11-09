@@ -8,7 +8,7 @@ Scarface: The World Is Yours — matching-decompilation portal server.
 Environment variables:
     SCARFACE_HOST         interface to listen on (default 127.0.0.1 — local only)
     SCARFACE_PORT         port (default 8085)
-    SCARFACE_MAINTAINERS  comma-separated handles allowed to use "Sync Verified to GitHub"
+    SCARFACE_MAINTAINERS  comma-separated handles allowed to use "Sync to GitHub"
     SCARFACE_NO_BROWSER   set to 1 to not open a browser on start
     SCARFACE_REPO_URL     GitHub page linked from the site (default: this checkout's "origin" remote)
 
@@ -611,10 +611,11 @@ NO_COMPILER_HELP = ("The 2003 compiler is not installed on this computer yet, so
 
 def run_verify(t: dict, cpp_code: str) -> dict:
     if not MV.find_msvc71_bin():
-        return {"ok": False, "compiler_error": NO_COMPILER_HELP}
+        return {"ok": False, "compiler_error": NO_COMPILER_HELP, "compiler_unavailable": True}
     tb = target_bytes(t)
     if tb is None:
-        return {"ok": False, "compiler_error": f"binaries/{BINARIES[t['bin']].name} is missing, so there is nothing to compare against."}
+        return {"ok": False, "compiler_unavailable": True,
+                "compiler_error": f"binaries/{BINARIES[t['bin']].name} is missing, so there is nothing to compare against."}
     best: Optional[dict] = None
     for flags in flag_options(t):
         res = MV.verify_submission(cpp_code, tb, flags, t.get("match_substr", ""), fn_va=t["fva_int"],
@@ -699,10 +700,26 @@ def lookalike_targets(t: dict, user: str) -> List[dict]:
                 if m["status"] != "VERIFIED" and not _held_by_someone_else(m, user)][:PORT_MAX]
 
 
-def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str) -> dict:
+CATCHUP_JSON = PRIVATE_DIR / "lookalike_catchup.json"   # this computer's earlier tries (gitignored)
+
+
+def _catchup_sig(t: dict, cpp_code: str) -> str:
+    """Which match was tried: a revised match (new code) is tried again."""
+    return hashlib.sha1((task_key(t) + "\n" + cpp_code.strip()).encode("utf-8")).hexdigest()[:16]
+
+
+def catchup_targets(t: dict, cpp_code: str, user: str, tried: dict) -> List[dict]:
+    sig = _catchup_sig(t, cpp_code)
+    return [m for m in lookalike_targets(t, user) if tried.get(task_key(m)) != sig]
+
+
+def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str, catchup: bool = False) -> dict:
     """Rewrite t's matched C++ for each look-alike, compile and verify it. Only exact matches whose
-    every address is checked are recorded, credited to the same person."""
-    targets = lookalike_targets(t, user)
+    every address is checked are recorded, credited to the same person. A catch-up run (an earlier match,
+    see catch_up_lookalikes) skips look-alikes this computer already tried with the same code."""
+    tried = read_json(CATCHUP_JSON, {}) if catchup and CATCHUP_JSON.exists() else {}
+    sig = _catchup_sig(t, cpp_code) if catchup else ""
+    targets = catchup_targets(t, cpp_code, user, tried) if catchup else lookalike_targets(t, user)
     st = PORT_STATUS.setdefault(t["id"], {})
     st.update(running=True, total=len(targets), tried=0, matched=0, matched_ids=[])
     src_relocs = relocs_for(t)
@@ -714,6 +731,8 @@ def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str) -> dict:
         res = run_verify(m, ported) if ported else {"ok": False}
         st["tried"] += 1
         if not (res.get("ok") and res.get("verified") and not res.get("reloc_unverified")):
+            if catchup and not res.get("compiler_unavailable"):
+                tried[task_key(m)] = sig
             continue
         with STATE_LOCK:
             if m["status"] == "VERIFIED" or _held_by_someone_else(m, user):
@@ -730,6 +749,11 @@ def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str) -> dict:
     with STATE_LOCK:
         if unsaved:
             save_registry()
+        if catchup and tried:
+            try:
+                write_json(CATCHUP_JSON, tried)
+            except OSError:
+                pass
         if st["matched"]:
             append_audit({"time": stamp(), "user": user, "action": "VERIFIED",
                           "symbol": f"{st['matched']} look-alike(s) of {t['symbol']}", "va": t["va"],
@@ -757,9 +781,9 @@ def _port_worker() -> None:
 _PORT_THREAD: List[threading.Thread] = []
 
 
-def queue_port(t: dict, cpp_code: str, user: str, tool: str) -> int:
+def queue_port(t: dict, cpp_code: str, user: str, tool: str, catchup: bool = False, tried: Optional[dict] = None) -> int:
     """Start carrying t's match to its look-alikes in the background; returns how many will be tried."""
-    n = len(lookalike_targets(t, user))
+    n = len(catchup_targets(t, cpp_code, user, tried or {}) if catchup else lookalike_targets(t, user))
     if not n:
         return 0
     PORT_STATUS[t["id"]] = {"running": True, "total": n, "tried": 0, "matched": 0, "matched_ids": []}
@@ -767,8 +791,33 @@ def queue_port(t: dict, cpp_code: str, user: str, tool: str) -> int:
         th = threading.Thread(target=_port_worker, name="lookalikes", daemon=True)
         th.start()
         _PORT_THREAD.append(th)
-    PORT_JOBS.put((t, cpp_code, user, tool))
+    PORT_JOBS.put((t, cpp_code, user, tool, catchup))
     return n
+
+
+def catch_up_lookalikes() -> int:
+    """A match only carries over to its look-alikes when it is made. Matches made before a look-alike was in
+    the queue (a game file added later, such as the prototype, or matches pulled from GitHub) never did, so
+    at startup each one is tried on its unmatched look-alikes in the background. That is how the
+    prototype's copies of retail code fill in by themselves. Returns how many functions will be tried."""
+    if not MV.find_msvc71_bin():
+        return 0
+    tried = read_json(CATCHUP_JSON, {}) if CATCHUP_JSON.exists() else {}
+    with STATE_LOCK:
+        sources = []
+        for members in GROUPS.values():
+            if all(m["status"] == "VERIFIED" for m in members):
+                continue
+            src = next((m for m in members if m["status"] == "VERIFIED"
+                        and ((REGISTRY["entries"].get(task_key(m)) or {}).get("code") or "").strip()), None)
+            if src:
+                sources.append(src)
+    total = 0
+    for t in sources:
+        e = REGISTRY["entries"][task_key(t)]
+        total += queue_port(t, e["code"], e.get("verified_by") or "Imported (unattributed)",
+                            e.get("tool_used") or "", catchup=True, tried=tried)
+    return total
 
 
 # =========================================================================== #
@@ -794,7 +843,15 @@ def _load_system_prompt() -> str:
 SYSTEM_PROMPT = _load_system_prompt()
 
 
-def _http_json(url: str, body: Optional[dict], headers: dict, timeout: int = 180) -> Tuple[int, dict, str]:
+AI_TIMEOUT = 300           # seconds per request: reasoning models can think for minutes on a big function
+OLLAMA_TIMEOUT = 900       # a model running on this computer can be much slower
+# Anthropic API version. In 2026-10-21 temperature/top_p/top_k were removed (sending one is a 400 on every model).
+ANTHROPIC_VERSION = "2026-10-21"
+ANTHROPIC_OLD_VERSION = "2023-06-01"
+TEST_PROMPT = "Reply with the single word OK."
+
+
+def _http_json(url: str, body: Optional[dict], headers: dict, timeout: int = AI_TIMEOUT) -> Tuple[int, dict, str]:
     data = json.dumps(body).encode() if body is not None else None
     req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json", **headers},
                                  method="POST" if body is not None else "GET")
@@ -810,9 +867,21 @@ def _http_json(url: str, body: Optional[dict], headers: dict, timeout: int = 180
             return e.code, {}, raw
 
 
+_HTTP_HINTS = {
+    401: "The API key was rejected. Check that you pasted the whole key.",
+    403: "This key can't use that model (or billing isn't set up for it).",
+    404: "Model not found. Check the model name.",
+    429: "Rate limit or quota reached. Wait a minute, or check your plan and billing.",
+    529: "The provider is overloaded right now. Try again in a minute.",
+}
+
+
 def _err(status: int, raw: str, key: str) -> str:
     text = raw[:300].replace(key, "***") if key else raw[:300]
-    return f"HTTP {status}: {text}"
+    hint = _HTTP_HINTS.get(status) or (_HTTP_HINTS[401] if status == 400 and "api key not valid" in raw.lower() else "")
+    if not hint and status >= 500:
+        hint = "The provider had a problem. Try again in a minute."
+    return f"{hint} (HTTP {status}: {text})" if hint else f"HTTP {status}: {text}"
 
 
 def _rejects_temperature(st: int, raw: str) -> bool:
@@ -820,41 +889,70 @@ def _rejects_temperature(st: int, raw: str) -> bool:
     return st == 400 and "temperature" in raw.lower()
 
 
-def _openai_style(url: str, key: str, model: str, prompt: str, extra_headers: Optional[dict] = None) -> Tuple[bool, str, str]:
-    body = {"model": model, "messages": [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}]}
-    if not re.match(r"^o\d", model):
+def _default_temperature_only(model: str) -> bool:
+    """OpenAI reasoning models (o-series, GPT-5 and later) take only their default temperature; leaving it out
+    saves a rejected request. Works for OpenRouter names too (openai/gpt-6.1-sol)."""
+    m = model.lower().rsplit("/", 1)[-1].lstrip("~")
+    return bool(re.match(r"^(o\d|gpt-([5-9]|\d\d))", m))
+
+
+def _no_text(reason: str) -> str:
+    reason = (reason or "").lower()
+    if reason in ("length", "max_tokens", "max_output_tokens"):
+        return "The model ran out of output space before it finished. Try again, or pick a model with more output."
+    if reason in ("refusal", "safety", "content_filter", "prohibited_content", "blocklist", "recitation"):
+        return f"The model declined to answer ({reason}). Try again or use another model."
+    return f"The model sent back no text ({reason or 'no reason given'}). Try again."
+
+
+def _openai_style(url: str, key: str, model: str, prompt: str, extra_headers: Optional[dict] = None,
+                  system: str = "", timeout: int = AI_TIMEOUT) -> Tuple[bool, str, str]:
+    msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
+    body = {"model": model, "messages": msgs}
+    if not _default_temperature_only(model):
         body["temperature"] = 0.2
     headers = {"Authorization": f"Bearer {key}"} if key else {}
     headers.update(extra_headers or {})
-    st, j, raw = _http_json(url, body, headers)
+    st, j, raw = _http_json(url, body, headers, timeout)
     if "temperature" in body and _rejects_temperature(st, raw):
         body.pop("temperature")
-        st, j, raw = _http_json(url, body, headers)
+        st, j, raw = _http_json(url, body, headers, timeout)
     if st != 200:
         return False, _err(st, raw, key), model
     try:
-        return True, j["choices"][0]["message"]["content"] or "", j.get("model", model)
+        choice = j["choices"][0]
+        msg = choice["message"]
     except Exception:
-        return False, "Unexpected response shape: " + raw[:200], model
+        return False, "Unexpected answer from the provider: " + (raw[:200].replace(key, "***") if key else raw[:200]), model
+    text = msg.get("content") or ""
+    if isinstance(text, list):                   # some compatible servers send content parts
+        text = "".join(part.get("text", "") for part in text if isinstance(part, dict))
+    if not str(text).strip():
+        return False, _no_text("refusal" if msg.get("refusal") else choice.get("finish_reason", "")), model
+    return True, text, j.get("model", model)
 
 
-def _gemini(key: str, model: str, prompt: str) -> Tuple[bool, str, str]:
+def _gemini(key: str, model: str, prompt: str, system: str = "") -> Tuple[bool, str, str]:
+    """Gemini 3 and later are meant to run at their default temperature (lower can make them loop), so none
+    is sent. A retired model name (404) is swapped for one the key can use."""
     base = "https://generativelanguage.googleapis.com/v1beta"
-    body = {"system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
-            "contents": [{"role": "user", "parts": [{"text": prompt}]}],
-            "generationConfig": {"temperature": 0.2}}
+    body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}]}
+    if system:
+        body["system_instruction"] = {"parts": [{"text": system}]}
     hdr = {"x-goog-api-key": key}
 
     def call(m: str):
         url = f"{base}/models/{urllib.parse.quote(m)}:generateContent"
         st, j, raw = _http_json(url, body, hdr)
-        if _rejects_temperature(st, raw) and body.get("generationConfig"):
-            body.pop("generationConfig")
-            st, j, raw = _http_json(url, body, hdr)
-        if st == 200:
-            parts = ((j.get("candidates") or [{}])[0].get("content") or {}).get("parts") or []
-            return True, "".join(p.get("text", "") for p in parts), m, st
-        return False, _err(st, raw, key), m, st
+        if st != 200:
+            return False, _err(st, raw, key), m, st
+        cand = (j.get("candidates") or [{}])[0]
+        parts = (cand.get("content") or {}).get("parts") or []
+        text = "".join(p.get("text", "") for p in parts if not p.get("thought"))
+        if not text.strip():
+            reason = cand.get("finishReason") or (j.get("promptFeedback") or {}).get("blockReason") or ""
+            return False, _no_text(str(reason)), m, st
+        return True, text, m, st
 
     m = model.replace("models/", "").strip()
     ok, text, used, st = call(m)
@@ -864,59 +962,97 @@ def _gemini(key: str, model: str, prompt: str) -> Tuple[bool, str, str]:
     if st2 == 200:
         names = [x["name"].replace("models/", "") for x in j2.get("models", [])
                  if "generateContent" in (x.get("supportedGenerationMethods") or []) and "gemini" in x.get("name", "")
-                 and not any(k in x.get("name", "") for k in ("image", "tts", "embedding"))]
+                 and not any(k in x.get("name", "") for k in ("image", "tts", "embedding", "live", "audio"))]
         for alt in names[:3]:
-            ok, text, used, _ = call(alt)
+            ok, alt_text, used, _ = call(alt)
             if ok:
-                return True, text, used
-    return False, text + f" (and no replacement model was found for '{m}')", m
+                return True, alt_text, used
+    return False, text + f" No replacement was found for '{m}'; pick another model.", m
+
+
+def _anthropic(key: str, model: str, prompt: str, system: str = "") -> Tuple[bool, str, str]:
+    body = {"model": model, "max_tokens": 16000, "messages": [{"role": "user", "content": prompt}]}
+    if system:
+        body["system"] = system
+    url = "https://api.anthropic.com/v1/messages"
+    hdrs = {"x-api-key": key, "anthropic-version": ANTHROPIC_VERSION}
+    st, j, raw = _http_json(url, body, hdrs)
+    if st == 400 and "anthropic-version" in raw.lower():      # an older API that doesn't know the new version
+        hdrs["anthropic-version"] = ANTHROPIC_OLD_VERSION
+        st, j, raw = _http_json(url, body, hdrs)
+    if st != 200:
+        return False, _err(st, raw, key), model
+    text = "".join(b.get("text", "") for b in j.get("content", []) if b.get("type") == "text")
+    if not text.strip():
+        return False, _no_text(j.get("stop_reason", "")), model
+    return True, text, j.get("model", model)
+
+
+def _ollama(model: str, prompt: str, system: str = "") -> Tuple[bool, str, str]:
+    msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
+    st, j, raw = _http_json("http://127.0.0.1:11434/api/chat",
+                            {"model": model, "stream": False, "options": {"temperature": 0.2}, "messages": msgs},
+                            {}, OLLAMA_TIMEOUT)
+    if st == 404:
+        return False, f"Ollama doesn't have '{model}' yet. Download it first: ollama pull {model}", model
+    if st != 200:
+        return False, _err(st, raw, ""), model
+    text = (j.get("message") or {}).get("content", "")
+    if not text.strip():
+        return False, _no_text(j.get("done_reason", "")), model
+    return True, text, j.get("model", model)
+
+
+def _chat_url(url: str) -> str:
+    """An OpenAI-compatible base URL ('https://host/v1') gets '/chat/completions' added; a full URL is kept."""
+    u = url.strip().rstrip("/")
+    if re.search(r"/chat/completions$", u):
+        return u
+    return u + ("/chat/completions" if re.search(r"/v\d+[a-z]*$", u) else "/v1/chat/completions")
 
 
 def ai_call(cfg: dict) -> dict:
     provider = (cfg.get("provider") or "").strip()
     model = (cfg.get("model") or "").strip()
     key = (cfg.get("api_key") or "").strip()
-    prompt = "Reply with the single word OK." if cfg.get("is_test") else (cfg.get("prompt") or "")
+    test = bool(cfg.get("is_test"))
+    prompt = TEST_PROMPT if test else (cfg.get("prompt") or "")
+    system = "" if test else SYSTEM_PROMPT          # the test only checks the key and the model, cheaply
     if not prompt:
         return {"ok": False, "error": "Empty prompt."}
-    if provider != "ollama" and not key:
+    if provider not in ("gemini", "openai", "argon", "custom_api", "anthropic", "ollama"):
+        return {"ok": False, "error": f"Unknown provider '{provider}'."}
+    if provider not in ("ollama", "custom_api") and not key:
         return {"ok": False, "error": "Paste an API key first."}
+    if provider == "custom_api" and not re.match(r"^https?://", (cfg.get("custom_url") or "").strip()):
+        return {"ok": False, "error": "Custom URL must start with http:// or https://"}
+    if not model and provider != "gemini":
+        return {"ok": False, "error": "Pick a model, or type its name."}
+    label = {"argon": "OpenRouter", "custom_api": "the custom URL", "ollama": "Ollama"}.get(provider, provider.title())
     try:
         if provider == "gemini":
-            ok, text, used = _gemini(key, model or "gemini-flash-latest", prompt)
+            ok, text, used = _gemini(key, model or "gemini-flash-latest", prompt, system)
         elif provider == "openai":
-            ok, text, used = _openai_style("https://api.openai.com/v1/chat/completions", key, model, prompt)
+            ok, text, used = _openai_style("https://api.openai.com/v1/chat/completions", key, model, prompt, system=system)
         elif provider == "argon":
             ok, text, used = _openai_style("https://openrouter.ai/api/v1/chat/completions", key, model, prompt,
-                                           {"X-Title": "Scarface Decomp Portal"})
+                                           {"X-Title": "Scarface Decomp Portal"}, system=system)
         elif provider == "custom_api":
-            url = (cfg.get("custom_url") or "").strip()
-            if not re.match(r"^https?://", url):
-                return {"ok": False, "error": "Custom URL must start with http:// or https://"}
-            ok, text, used = _openai_style(url, key, model, prompt)
+            ok, text, used = _openai_style(_chat_url(cfg["custom_url"]), key, model, prompt, system=system)
         elif provider == "anthropic":
-            body = {"model": model, "max_tokens": 8192, "system": SYSTEM_PROMPT, "temperature": 0.2,
-                    "messages": [{"role": "user", "content": prompt}]}
-            hdrs = {"x-api-key": key, "anthropic-version": "2023-06-01"}
-            st, j, raw = _http_json("https://api.anthropic.com/v1/messages", body, hdrs)
-            if _rejects_temperature(st, raw):
-                body.pop("temperature")
-                st, j, raw = _http_json("https://api.anthropic.com/v1/messages", body, hdrs)
-            if st != 200:
-                ok, text, used = False, _err(st, raw, key), model
-            else:
-                ok, used = True, j.get("model", model)
-                text = "".join(b.get("text", "") for b in j.get("content", []) if b.get("type") == "text")
-        elif provider == "ollama":
-            st, j, raw = _http_json("http://127.0.0.1:11434/api/chat",
-                                    {"model": model, "stream": False, "options": {"temperature": 0.2},
-                                     "messages": [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}]}, {})
-            ok, used = st == 200, model
-            text = (j.get("message") or {}).get("content", "") if ok else _err(st, raw, "")
+            ok, text, used = _anthropic(key, model, prompt, system)
         else:
-            return {"ok": False, "error": f"Unknown provider '{provider}'."}
+            ok, text, used = _ollama(model, prompt, system)
     except urllib.error.URLError as e:
-        return {"ok": False, "error": f"Could not reach {provider}: {getattr(e, 'reason', e)}"}
+        reason = getattr(e, "reason", e)
+        if isinstance(reason, TimeoutError):
+            return {"ok": False, "error": f"{label} took too long to answer. Try again, or pick a faster model."}
+        if provider == "ollama":
+            return {"ok": False, "error": "Could not reach Ollama on this computer (127.0.0.1:11434). "
+                                          "Is it running? Start it with: ollama serve"}
+        return {"ok": False, "error": f"Could not reach {label}: {reason}"}
+    except TimeoutError:
+        return {"ok": False, "error": f"{label} took too long to answer. Try again, or pick a faster model."}
     except Exception as e:  # never echo the key
         return {"ok": False, "error": f"{type(e).__name__}: {str(e).replace(key, '***') if key else e}"}
     return {"ok": True, "reply": text, "used_model": used} if ok else {"ok": False, "error": text}
@@ -1523,7 +1659,7 @@ class Handler(BaseHTTPRequestHandler):
         if not user:
             return
         if user not in MAINTAINERS:
-            return self._json({"ok": False, "error": "Only maintainers can push to GitHub (set SCARFACE_MAINTAINERS)."}, 403)
+            return self._json({"ok": False, "error": "Only maintainers can push to GitHub. To share your matches, open a pull request (docs/CONTRIBUTING.md) or post them in #help on Discord."}, 403)
         with STATE_LOCK:
             res = git_sync(user)
         self._json(res)
@@ -1595,6 +1731,10 @@ def main() -> None:
         print('    "Downloaded the ZIP?"), then update with: git pull')
     # Check the game's scripts in the background: the portal is usable meanwhile.
     threading.Thread(target=check_scripts, name="script-check", daemon=True).start()
+    n = catch_up_lookalikes()
+    if n:
+        print(f"[*] Trying earlier matches on {n:,} look-alike(s) in the background (for example the prototype's")
+        print("    copies of retail code); they are recorded as they match.")
     if os.environ.get("SCARFACE_NO_BROWSER") != "1":
         if os.name == "nt":
             subprocess.Popen(["cmd", "/c", "start", url])

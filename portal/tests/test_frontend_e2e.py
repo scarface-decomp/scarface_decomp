@@ -482,3 +482,38 @@ def test_still_loading_note_while_scripts_are_checked(browser):
     assert "10 of 10" in pg.text_content("#toast")
     assert not pg.errors, pg.errors
     ctx.close()
+
+
+def test_ai_feedback_always_describes_the_code_it_shows(page):
+    """Each AI prompt shows the best code so far. A failed attempt's errors come with that attempt's own code,
+    and a worse attempt is reported as dropped, with what is still wrong in the best code."""
+    sign_in(page)
+    prompts = []
+    replies = ["int bad(", "int good() { return 1; }", "int worse() { }", "int good() { return 1; }", "int good() { return 1; }"]
+
+    def ai(route):
+        prompts.append(json.loads(route.request.post_data)["prompt"])
+        code = replies[min(len(prompts), len(replies)) - 1]
+        route.fulfill(json={"ok": True, "reply": "```cpp\n" + code + "\n```", "used_model": "m"})
+
+    def verify(route):
+        code = json.loads(route.request.post_data)["cpp_code"]
+        if "bad(" in code:
+            return route.fulfill(json={"ok": False, "compiler_error": "error C2059: syntax error"})
+        got = 8 if "good" in code else 4
+        route.fulfill(json={"ok": True, "is_exact": False, "matched_bytes": got, "total_bytes": 12, "match_percent": got / 12 * 100,
+                            "diff_details": [{"idx": 9, "status": "diff", "target": "C3", "compiled": "90"}],
+                            "compiled_hex": "90 90"})
+
+    page.route("**/api/fast-synthesize", lambda r: r.fulfill(json={"ok": False}))
+    page.route("**/api/ai-proxy", ai)
+    page.route("**/api/verify", verify)
+    page.fill("#ai-key", "test-key")
+    page.click("#btn-step2-ai")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('Best after')", timeout=30000)
+    assert len(prompts) == 5
+    assert "did not compile. It was:" in prompts[1] and "int bad(" in prompts[1] and "C2059" in prompts[1]
+    assert "The current best C++ (attempt 2) compiled and matched 8/12" in prompts[2]
+    assert "int good() { return 1; }" in prompts[2].split("Current best C++")[1]
+    assert "Attempt 3 matched only 4/12 bytes" in prompts[3] and "The current best C++ (attempt 2)" in prompts[3]
+    assert "int good() { return 1; }" in page.input_value("#wb-editor")
