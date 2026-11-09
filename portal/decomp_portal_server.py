@@ -697,14 +697,26 @@ NO_COMPILER_HELP = ("The 2003 compiler is not installed on this computer yet, so
 
 
 PS2_UNREACHABLE = ("PS2 functions are compiled on decomp.me (the game's PS2 compiler can't be installed here), and "
-                   "decomp.me couldn't be reached from this computer: {why}\n"
-                   "Open decomp.me once in your browser and try again. Or work in the function's decomp.me scratch "
-                   "(the decomp.me button) and, when it shows 100%, post its link in a GitHub issue: a maintainer "
-                   "will verify it and credit you.")
+                   "decomp.me turns away programs that aren't a browser, so this goes through your browser: "
+                   "follow the steps that just opened. ({why})")
 
 
-def run_verify_ps2(t: dict, cpp_code: str) -> dict:
-    """Compile on decomp.me with the PS2 compiler, then compare the object with the game here."""
+def ps2_job(t: dict, cpp_code: str) -> dict:
+    """What the page's decomp.me connection has to do for a PS2 compile: make the function's scratch if it
+    has none, then compile the C++ there and send back the object."""
+    src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
+    job = {"slug": t.get("decompme_slug", ""),
+           "compile": {"compiler": PV.COMPILER, "compiler_flags": PV.FLAGS, "source_code": src.replace("\r\n", "\n"),
+                       "context": ctx.replace("\r\n", "\n"), "include_objects": True}}
+    if not job["slug"]:
+        job["create"] = {"json": ps2_scratch_fields(t, cpp_code)}
+    return job
+
+
+def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "") -> dict:
+    """Compile on decomp.me with the PS2 compiler, then compare the object with the game here. The object
+    comes either from here (when this computer can reach decomp.me's API) or from the page, which compiled
+    it through decomp.me in the browser (object_b64)."""
     violations = check_genuine_cpp(cpp_code)
     if violations:
         return {"ok": False, "compiler_error": format_violations(violations), "policy_violation": True}
@@ -712,22 +724,33 @@ def run_verify_ps2(t: dict, cpp_code: str) -> dict:
     if img is None or tb is None:
         return {"ok": False, "compiler_unavailable": True,
                 "compiler_error": "binaries/SLUS_211.11 is missing, so there is nothing to compare against."}
-    slug = t.get("decompme_slug", "")
-    if not slug:
-        made = PV.create_scratch(ps2_scratch_fields(t, cpp_code))
-        if not made.get("ok"):
-            return {"ok": False, "compiler_unavailable": True,
-                    "compiler_error": PS2_UNREACHABLE.format(why=made.get("error", ""))}
-        slug = made["slug"]
+    if slug and _SLUG_RE.match(slug) and slug != t.get("decompme_slug"):
         with STATE_LOCK:
             t["decompme_slug"] = slug
             save_overlay(t)
-    src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
-    res = PV.compile_on_decompme(slug, src, ctx)
+    if object_b64:
+        try:
+            res = {"ok": True, "object": base64.b64decode(object_b64), "output": ""}
+        except (ValueError, TypeError):
+            return {"ok": False, "compiler_error": "The page sent an object that could not be read."}
+    else:
+        slug = t.get("decompme_slug", "")
+        if not slug:
+            made = PV.create_scratch(ps2_scratch_fields(t, cpp_code))
+            if not made.get("ok"):
+                return {"ok": False, "compiler_unavailable": True, "need_browser": True, "job": ps2_job(t, cpp_code),
+                        "compiler_error": PS2_UNREACHABLE.format(why=made.get("error", ""))}
+            slug = made["slug"]
+            with STATE_LOCK:
+                t["decompme_slug"] = slug
+                save_overlay(t)
+        src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
+        res = PV.compile_on_decompme(slug, src, ctx)
     if not res.get("ok"):
         if res.get("compiler_error") is not None:
             return {"ok": False, "compiler_error": res["compiler_error"]}
-        return {"ok": False, "compiler_unavailable": True, "compiler_error": PS2_UNREACHABLE.format(why=res.get("error", ""))}
+        return {"ok": False, "compiler_unavailable": True, "need_browser": True, "job": ps2_job(t, cpp_code),
+                "compiler_error": PS2_UNREACHABLE.format(why=res.get("error", ""))}
     try:
         obj = PV.parse_object(res["object"])
     except (ValueError, IndexError, struct.error) as e:
@@ -745,9 +768,9 @@ def run_verify_ps2(t: dict, cpp_code: str) -> dict:
     return out
 
 
-def run_verify(t: dict, cpp_code: str) -> dict:
+def run_verify(t: dict, cpp_code: str, object_b64: str = "", slug: str = "") -> dict:
     if t["bin"] == "ps2":
-        return run_verify_ps2(t, cpp_code)
+        return run_verify_ps2(t, cpp_code, object_b64, slug)
     if not MV.find_msvc71_bin():
         return {"ok": False, "compiler_error": NO_COMPILER_HELP, "compiler_unavailable": True}
     tb = target_bytes(t)
@@ -1605,6 +1628,78 @@ def list_sources(full: bool = False) -> Dict[str, str]:
 # HTTP
 # =========================================================================== #
 
+# --------------------------------------------------------------------------- decomp.me through the browser
+# decomp.me turns away programs that aren't a browser, and its pages cut the link to windows opened from other
+# sites (Cross-Origin-Opener-Policy), so the person's own decomp.me tab does the calls: a bookmark clicked
+# there asks this portal for jobs (/api/dme-bridge/next), makes scratches and compiles on decomp.me, and sends
+# the results back (/api/dme-bridge/result). Only decomp.me's own pages may do that (CORS, by Origin).
+DME_BRIDGE_ORIGIN = os.environ.get("SCARFACE_DECOMPME_ORIGIN", "https://decomp.me").rstrip("/")
+BRIDGE_PATHS = ("/api/dme-bridge/next", "/api/dme-bridge/result")
+BRIDGE_POLL_SECONDS = 25
+BRIDGE_JOB_SECONDS = 180
+
+
+class Bridge:
+    def __init__(self):
+        self.cond = threading.Condition()
+        self.jobs: List[dict] = []
+        self.results: Dict[int, dict] = {}
+        self.taken: Dict[int, float] = {}
+        self.last_seen = 0.0
+        self.seq = 0
+
+    def connected(self) -> bool:
+        return time.time() - self.last_seen < BRIDGE_POLL_SECONDS + 15
+
+    def run(self, job: dict, timeout: Optional[float] = None) -> dict:
+        """Hand a job to the decomp.me tab and wait for its answer."""
+        timeout = BRIDGE_JOB_SECONDS if timeout is None else timeout
+        with self.cond:
+            self.seq += 1
+            jid = self.seq
+            self.jobs.append(dict(job, id=jid))
+            self.cond.notify_all()
+            end = time.time() + timeout
+            while jid not in self.results:
+                left = end - time.time()
+                if left <= 0:
+                    self.jobs = [j for j in self.jobs if j["id"] != jid]
+                    self.taken.pop(jid, None)
+                    return {"ok": False, "error": "your decomp.me tab didn't answer in time (is it still open?)"}
+                self.cond.wait(min(left, 1.0))
+            self.taken.pop(jid, None)
+            return self.results.pop(jid)
+
+    def next(self, wait: Optional[float] = None) -> Optional[dict]:
+        """The next job for the decomp.me tab, waiting up to `wait` seconds for one."""
+        wait = BRIDGE_POLL_SECONDS if wait is None else wait
+        with self.cond:
+            self.last_seen = time.time()
+            end = time.time() + wait
+            while not self.jobs:
+                left = end - time.time()
+                if left <= 0:
+                    return None
+                self.cond.wait(left)
+            job = self.jobs.pop(0)
+            self.taken[job["id"]] = time.time()
+            self.last_seen = time.time()
+            return job
+
+    def result(self, res: dict) -> bool:
+        with self.cond:
+            jid = res.get("id")
+            if not isinstance(jid, int) or jid not in self.taken:
+                return False
+            self.results[jid] = res
+            self.taken.pop(jid, None)
+            self.cond.notify_all()
+            return True
+
+
+BRIDGE = Bridge()
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "ScarfaceDecomp/2"
 
@@ -1685,6 +1780,9 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", ctype)
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
+        if urllib.parse.urlparse(getattr(self, "path", "")).path in BRIDGE_PATHS and self._bridge_origin():
+            self.send_header("Access-Control-Allow-Origin", DME_BRIDGE_ORIGIN)
+            self.send_header("Vary", "Origin")
         for k, v in (extra or {}).items():
             self.send_header(k, v)
         self.send_header("Content-Length", str(len(body)))
@@ -1730,10 +1828,34 @@ class Handler(BaseHTTPRequestHandler):
             origin = (self.headers.get("Origin") or "").strip().lower()
             site = (self.headers.get("Sec-Fetch-Site") or "").strip().lower()
             ok_origin = not origin or urllib.parse.urlparse(origin).netloc == host
+            if urllib.parse.urlparse(self.path).path in BRIDGE_PATHS and origin == DME_BRIDGE_ORIGIN.lower():
+                return True                       # decomp.me's own page, answering a job (see Bridge)
             if site == "cross-site" or not ok_origin:
                 self._json({"ok": False, "error": "Requests from other websites are not accepted."}, 403)
                 return False
         return True
+
+    def _bridge_origin(self) -> bool:
+        return (self.headers.get("Origin") or "").strip().rstrip("/").lower() == DME_BRIDGE_ORIGIN.lower()
+
+    def do_OPTIONS(self):
+        """CORS preflight, only for decomp.me asking about the bridge. Chrome also asks before a public site
+        may reach this computer (Private Network Access): say yes to decomp.me only."""
+        path = urllib.parse.urlparse(self.path).path
+        if path not in BRIDGE_PATHS or not self._bridge_origin():
+            self.send_response(403)
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return
+        self.send_response(204)
+        self.send_header("Access-Control-Allow-Origin", DME_BRIDGE_ORIGIN)
+        self.send_header("Access-Control-Allow-Methods", "GET, POST")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Private-Network", "true")
+        self.send_header("Access-Control-Max-Age", "600")
+        self.send_header("Vary", "Origin")
+        self.send_header("Content-Length", "0")
+        self.end_headers()
 
     # ---------------------------------------------------------------- GET
     def do_GET(self):
@@ -1864,6 +1986,12 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": False, "error": "offset/limit must be numbers"}, 400)
             res = GA.list_files(GAME_FILES.index(), q1("version"), q1("status"), q1("kind"), q1("q"), offset, limit)
             return self._json(dict(res, ok=True))
+        if u.path == "/api/dme-bridge/next":
+            if not self._bridge_origin():
+                return self._json({"ok": False, "error": "Only decomp.me's own page may ask for jobs."}, 403)
+            return self._json({"ok": True, "job": BRIDGE.next()})
+        if u.path == "/api/dme-bridge/status":
+            return self._json({"ok": True, "connected": BRIDGE.connected(), "origin": DME_BRIDGE_ORIGIN})
         if u.path == "/api/task":
             with STATE_LOCK:
                 t = TASK_BY_ID.get(q1("id"))
@@ -1890,6 +2018,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/decompme": self.post_decompme,
             "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
             "/api/game-files/open": self.post_game_files_open,
+            "/api/dme-bridge/run": self.post_bridge_run, "/api/dme-bridge/result": self.post_bridge_result,
         }.get(path)
         if not route:
             return self._json({"ok": False, "error": "Not found."}, 404)
@@ -1974,7 +2103,7 @@ class Handler(BaseHTTPRequestHandler):
             already = t["status"] == "VERIFIED"
             if not already and (t["status"] != "CLAIMED" or t.get("claimed_by") != user):
                 return self._json({"ok": False, "error": "Claim the function before compiling."}, 403)
-        res = run_verify(t, code)                           # compile outside the lock
+        res = run_verify(t, code, str(body.get("object_b64") or ""), str(body.get("slug") or ""))   # outside the lock
         if not res.get("ok"):
             return self._json(res)
         newly = False
@@ -2074,6 +2203,31 @@ class Handler(BaseHTTPRequestHandler):
 
     # Game files (sounds, textures, models, videos) from the person's own copies. No sign-in: it is their
     # own computer and their own game; nothing is sent anywhere.
+    def post_bridge_run(self, body):
+        """From the portal page: have the decomp.me tab make a scratch and/or compile, and wait for it."""
+        if self._bridge_origin():
+            return self._json({"ok": False, "error": "Not for decomp.me."}, 403)
+        job = body.get("job")
+        if not isinstance(job, dict) or not (job.get("create") or job.get("compile")):
+            return self._json({"ok": False, "error": "Nothing to do."}, 400)
+        if not BRIDGE.connected():
+            return self._json({"ok": False, "not_connected": True, "error": "Your decomp.me tab isn't connected."})
+        clean = {k: job[k] for k in ("slug", "create", "compile") if k in job}
+        self._json(BRIDGE.run(clean))
+
+    def post_bridge_result(self, body):
+        if not self._bridge_origin():
+            return self._json({"ok": False, "error": "Only decomp.me's own page may send results."}, 403)
+        res = {k: body.get(k) for k in ("id", "ok", "slug", "claim_token", "success", "compiler_output", "right_object", "error")
+               if k in body}
+        res["ok"] = bool(res.get("ok"))
+        for k in ("slug", "claim_token", "compiler_output", "right_object", "error"):
+            if k in res and not isinstance(res[k], str):
+                res[k] = ""
+        if res.get("slug") and not _SLUG_RE.match(res["slug"]):
+            res.update(ok=False, slug="", error="decomp.me sent back an odd scratch name")
+        self._json({"ok": BRIDGE.result(res)})
+
     def post_game_files_start(self, body):
         versions = body.get("versions")
         if not isinstance(versions, list) or not all(isinstance(v, str) for v in versions):

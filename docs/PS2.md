@@ -33,6 +33,23 @@ one. The portal's starting point for every PS2 function already declares them th
 The decomp.me button opens the function as a scratch there (target written as assembly), with the same
 compiler and flags. Its score is a helper: the portal's Compile & Verify is the check that counts.
 
+### decomp.me goes through your browser
+
+decomp.me turns away programs that aren't a browser (the portal gets `403 Forbidden`), and its pages cut
+the link to windows opened from other sites. So the portal asks a decomp.me tab of yours to do the calls.
+The first time a PS2 compile or a scratch needs it, the portal shows three steps:
+
+1. Drag the **Scarface → decomp.me** button to your bookmarks bar (once; again if the portal's address
+   changes).
+2. Open decomp.me and, if it asks, tick its "verify you are human" box yourself.
+3. Click the bookmark in that tab. If the browser asks whether decomp.me may reach apps on this device
+   (or your local network), allow it: that is how it reaches the portal on `127.0.0.1`.
+
+The tab then asks the portal for jobs, makes the scratch and compiles there, and sends the object back;
+the portal checks it against your `SLUS_211.11` as above. The portal answers only decomp.me's own pages
+(by their `Origin`), and only with the C++ and assembly of the function you are working on. Leave the
+tab open while you work; the dialog closes by itself once it is connected.
+
 ## How the compiler was worked out
 
 The program says `MW MIPS C Compiler (2.4.1.01)` in its `.comment` section, but five different builds write

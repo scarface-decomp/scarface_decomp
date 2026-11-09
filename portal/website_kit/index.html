@@ -2483,6 +2483,86 @@
   }
 
   /* ===================================================================
+   * decomp.me, through the browser. decomp.me answers only browsers (it turns away scripts), and its pages
+   * cut the link to windows opened from other sites, so a decomp.me tab of yours does the calls: a small
+   * bookmark ("Scarface → decomp.me"), clicked once in that tab, asks this portal for jobs, makes scratches
+   * and compiles there, and sends the results back. The portal only answers decomp.me's own pages.
+   * =================================================================== */
+  const DME_SITE = 'https://decomp.me';
+  function dmeBookmarklet() {
+    const portal = JSON.stringify(location.origin);
+    return "(function(){if(window.__sfBridge)return;window.__sfBridge=1;var P=" + portal + ";" +
+      "var note=document.createElement('div');" +
+      "note.style.cssText='position:fixed;z-index:99999;left:12px;bottom:12px;max-width:420px;padding:10px 14px;background:#111;color:#fff;font:14px system-ui;border:2px solid #e0262f;border-radius:6px';" +
+      "note.textContent='Scarface: connecting to the portal...';document.body.appendChild(note);" +
+      "async function run(j){var r={ok:true};var slug=j.slug;" +
+      "if(!slug&&j.create){var res;if(j.create.obj_b64){var fd=new FormData();for(var k in j.create.fields)fd.append(k,j.create.fields[k]);" +
+      "var bin=Uint8Array.from(atob(j.create.obj_b64),function(c){return c.charCodeAt(0)});fd.append('target_obj',new Blob([bin]),'target.obj');" +
+      "res=await fetch('/api/scratch',{method:'POST',body:fd})}else{res=await fetch('/api/scratch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(j.create.json)})}" +
+      "var d=await res.json();if(!d.slug)throw new Error('decomp.me: '+JSON.stringify(d).slice(0,300));slug=d.slug;r.claim_token=d.claim_token||''}" +
+      "r.slug=slug||'';if(j.compile){var c=await fetch('/api/scratch/'+slug+'/compile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(j.compile)});" +
+      "var e=await c.json();r.success=!!e.success;r.compiler_output=e.compiler_output||'';r.right_object=e.right_object||''}return r}" +
+      "async function loop(){for(;;){try{var q=await fetch(P+'/api/dme-bridge/next',{cache:'no-store'});var d=await q.json();" +
+      "note.textContent='Scarface: connected to the portal. Leave this tab open.';document.title='Scarface: connected';" +
+      "if(d.job){var r;try{r=await run(d.job)}catch(err){r={ok:false,error:String(err&&err.message||err)}}r.id=d.job.id;" +
+      "await fetch(P+'/api/dme-bridge/result',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(r)})}}" +
+      "catch(err){note.textContent='Scarface: can\\'t reach the portal at '+P+' ('+(err&&err.message||err)+'). Is START_PORTAL still running? Trying again...';" +
+      "await new Promise(function(f){setTimeout(f,5000)})}}}loop()})()";
+  }
+  const DME_HELP_TITLE = 'Connect decomp.me (once per session)';
+  let dmeWaiting = null;
+  async function dmeConnected() {
+    try { return !!(await apiFetchJson('/api/dme-bridge/status')).connected; } catch (e) { return false; }
+  }
+  function dmeHelp(onCancel) {
+    const mark = el('a', 'Scarface → decomp.me', 'btn');
+    mark.href = 'javascript:' + dmeBookmarklet();
+    mark.title = 'Drag this to your bookmarks bar';
+    mark.addEventListener('click', (e) => { e.preventDefault(); setStatus('Drag the button to your bookmarks bar, then click it in your decomp.me tab.', 'info'); });
+    const steps = el('ol');
+    ['Drag this button to your bookmarks bar (the first time, and again if the portal\'s address changes): ',
+     'Press Open decomp.me below. If decomp.me asks, tick its "verify you are human" box.',
+     'In the decomp.me tab, click the Scarface → decomp.me bookmark. If your browser asks whether decomp.me may reach apps on this device (or your local network), allow it: that is how it talks to the portal on this computer. This box closes by itself and the portal carries on.']
+      .forEach((text, i) => { const li = el('li', text); if (i === 0) li.appendChild(mark); steps.appendChild(li); });
+    showDialog(DME_HELP_TITLE, [
+      'decomp.me only answers browsers, so the portal uses a decomp.me tab of yours for this: the bookmark you click there lets it make scratches and compile for this page. Nothing else is shared.',
+      steps,
+    ], [
+      { label: 'Open decomp.me', primary: true, keepOpen: true, onClick: () => { window.open(DME_SITE + '/', '_blank', 'noopener'); } },
+      { label: 'Cancel', onClick: onCancel },
+    ]);
+  }
+  function dmeConnect() {
+    if (dmeWaiting) return dmeWaiting;
+    dmeWaiting = (async () => {
+      if (await dmeConnected()) return;
+      let cancelled = false;
+      dmeHelp(() => { cancelled = true; });
+      const until = Date.now() + 10 * 60 * 1000;
+      while (!cancelled && Date.now() < until) {
+        await new Promise((f) => setTimeout(f, 1500));
+        if (await dmeConnected()) {
+          const dlg = $('submit-dialog');
+          if (dlg && dlg.open && $('sd-title').textContent === DME_HELP_TITLE) dlg.close();
+          return;
+        }
+        const dlg = $('submit-dialog');
+        if (!dlg || !dlg.open || $('sd-title').textContent !== DME_HELP_TITLE) cancelled = true;
+      }
+      throw new Error(cancelled ? 'decomp.me was not connected' : 'decomp.me was not connected in time');
+    })().finally(() => { dmeWaiting = null; });
+    return dmeWaiting;
+  }
+  async function dmeRun(job) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      await dmeConnect();
+      const r = await postJson('/api/dme-bridge/run', { job: job });
+      if (!r.not_connected) return r;
+    }
+    throw new Error('your decomp.me tab is not connected');
+  }
+
+  /* ===================================================================
    * decomp.me: work on the function in the browser with the same compiler
    * =================================================================== */
   function safeDecompMeUrl(api, url) {
@@ -2551,8 +2631,26 @@
         if (made) {
           postJson('/api/decompme', { id: t.id, slug: made.slug }).catch(() => {});
         } else {
-          made = await postJson('/api/decompme', { id: t.id, create: true });   // ask the server to try instead
-          if (!made.ok) throw new Error(made.error || firstErr || 'decomp.me did not answer');
+          made = await postJson('/api/decompme', { id: t.id, create: true }).catch(() => ({ ok: false }));   // ask the server to try instead
+          if (!made.ok) {
+            // Neither this page nor the portal can call decomp.me: let a decomp.me tab of yours do it.
+            setStatus('Making the scratch through your decomp.me tab...', 'info');
+            const job = prep.json ? { create: { json: prep.json } } : { create: { fields: prep.fields, obj_b64: prep.obj_b64 } };
+            const r = await dmeRun(job);
+            if (!r.ok || !r.slug) throw new Error(r.error || 'decomp.me did not make the scratch');
+            postJson('/api/decompme', { id: t.id, slug: r.slug }).catch(() => {});
+            const base = prep.api + '/scratch/' + r.slug;
+            made = { ok: true, slug: r.slug, url: base,
+                     claim_url: r.claim_token ? base + '/claim?token=' + encodeURIComponent(r.claim_token) : base };
+            if (!win || win.closed) {
+              const link = safeDecompMeUrl(prep.api, made.claim_url);
+              t.decompme_slug = r.slug;
+              showDialog('Scratch ready on decomp.me', ['Your browser closed the tab this page had opened, so open the scratch from here.'],
+                [{ label: 'Open the scratch', primary: true, href: link }, { label: 'Close' }]);
+              setStatus('Made on decomp.me. Change the C++ there until it shows 100%, then paste it into the editor here and press 3. Compile & Verify.', 'info');
+              return;
+            }
+          }
         }
         url = made.claim_url || made.url;
         t.decompme_slug = made.slug;
@@ -2708,8 +2806,21 @@
     try {
       // keep_revision: a hand-made compile of an already verified function may replace its saved text
       // (cleaner names, comments) when it still matches exactly. AI loops never replace it.
-      const data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode }, creds(),
+      let data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode }, creds(),
         { tool_used: getToolUsed(), keep_revision: !fromLoop }), ctrl.signal);
+      if (data && data.need_browser && data.job && !fromLoop) {
+        // PS2: the portal can't call decomp.me itself, so the decomp.me window compiles and this page
+        // hands the object to the portal, which checks it against your copy of the game.
+        setStatus('Compiling on decomp.me through your decomp.me tab...', 'muted');
+        const r = await dmeRun(data.job);
+        if (!r.ok) throw new Error(r.error || 'decomp.me did not compile it');
+        if (!r.success || !r.right_object) {
+          data = { ok: false, compiler_error: r.compiler_output || 'The compiler did not produce an object.' };
+        } else {
+          data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode, object_b64: r.right_object, slug: r.slug || '' },
+            creds(), { tool_used: getToolUsed(), keep_revision: !fromLoop }), ctrl.signal);
+        }
+      }
       const stale = mySeq !== verifySeq || myGen !== runGen || !currentTask || currentTask.id !== t.id;
       if (stale) return { ok: false, stale: true };
 
