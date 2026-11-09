@@ -84,7 +84,9 @@ The full procedure, with code generation notes for this compiler, is in
    accepted, and the portal checks: see [docs/GAME_VERSIONS.md](docs/GAME_VERSIONS.md). Your files never
    leave your computer. The goal is the released game plus the
    code that never shipped; prototype matches are saved in `reconstructed_src/proto/` and counted on
-   their own row.
+   their own row. The work queue only lists the prototype's own code: functions that are also in the
+   released game are matched along with it (same code) or are older versions of it, so they wait in a
+   separate list ("Prototype: also in retail") instead.
 4. **Start the portal**: on Windows double-click **`START_PORTAL.bat`**; on macOS or Linux run
    `sh start_portal.sh`. The first time it installs what it needs, unpacks your files and lists every
    function (a few minutes), then opens http://localhost:8085.

@@ -396,6 +396,8 @@ def load_tasks() -> None:
             BY_SYMBOL.setdefault(t["symbol"], []).append(t)
     for same in BY_SYMBOL.values():
         same.sort(key=lambda m: ("xb", "pc", "proto").index(m["bin"]) if m["bin"] in ("xb", "pc", "proto") else 9)
+    for t in ALL_TASKS:
+        t["in_retail"] = in_retail(t)
     overlay = read_json(OVERLAY_JSON, {})
     for tid, data in overlay.items():
         t = TASK_BY_ID.get(tid)
@@ -505,6 +507,23 @@ def lookalike_starter(t: dict) -> Tuple[str, str]:
 def counterparts(t: dict) -> List[dict]:
     """The same class method in the other builds (retail Xbox, PC, prototype), whatever its code."""
     return [m for m in BY_SYMBOL.get(t["symbol"], []) if m is not t and m["bin"] != t["bin"]] if "::" in t["symbol"] else []
+
+
+def in_retail(t: dict) -> str:
+    """For a prototype function that is also in the released game: "code" when the machine code is the same
+    (matching the retail one matches this one too, through its look-alike group), "method" when the same class
+    method is in retail with different code (an older version of it). "" for everything else."""
+    if t["bin"] != "proto":
+        return ""
+    if any(m["bin"] != "proto" for m in LA.members(GROUPS, t)):
+        return "code"
+    return "method" if counterparts(t) else ""
+
+
+def in_default_queue(t: dict) -> bool:
+    """The queue lists the released game plus the prototype's own code. Prototype functions that are also in
+    retail are left out (lane PROTO_IN_RETAIL lists them), so nobody does the same function twice."""
+    return not t.get("in_retail")
 
 
 def counterpart_starter(t: dict) -> Tuple[str, str]:
@@ -1233,14 +1252,17 @@ class Handler(BaseHTTPRequestHandler):
                                "binaries": {k: bool(image_for(k)) for k in BINARIES}})
         if u.path == "/api/state":
             with STATE_LOCK:
-                tiers = Counter(t["tier"] for t in ALL_TASKS if t["status"] != "VERIFIED")
-                tiers["PARTIAL"] = sum(1 for t in ALL_TASKS if t["status"] == "PARTIAL")
-                remaining = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED")
+                listed = [t for t in ALL_TASKS if in_default_queue(t)]
+                tiers = Counter(t["tier"] for t in listed if t["status"] != "VERIFIED")
+                tiers["PARTIAL"] = sum(1 for t in listed if t["status"] == "PARTIAL")
+                remaining = sum(1 for t in listed if t["status"] != "VERIFIED")
+                copies = Counter(t["in_retail"] for t in ALL_TASKS if t.get("in_retail") and t["status"] != "VERIFIED")
                 return self._json({"progress": progress(), "leaderboard": leaderboard(),
                                    "audit_log": read_json(AUDIT_JSON, []), "sources": list_sources(),
                                    "tier_counts": dict(tiers), "total_remaining_indexed": remaining,
                                    "repo_url": REPO_URL, "lookalikes": lookalike_summary(),
-                                   "binary_problems": BINARY_PROBLEMS, "scripts": script_check_summary()})
+                                   "binary_problems": BINARY_PROBLEMS, "scripts": script_check_summary(),
+                                   "proto_in_retail": {"same_code": copies["code"], "same_method": copies["method"]}})
         if u.path == "/api/source":
             name = q1("name")
             p = (RECON_DIR / name).resolve()
@@ -1267,13 +1289,18 @@ class Handler(BaseHTTPRequestHandler):
                         continue
                     if lane == "PARTIAL" and not (st == "PARTIAL" or (t.get("best_matched_bytes", 0) > 0 and st != "VERIFIED")):
                         continue
-                    if lane not in ("ALL", "UNCLAIMED", "CLAIMED", "PARTIAL", "VERIFIED") and lane not in t["lane"]:
+                    if lane not in ("ALL", "UNCLAIMED", "CLAIMED", "PARTIAL", "VERIFIED", "PROTO_IN_RETAIL") and lane not in t["lane"]:
                         continue
                     if lane != "VERIFIED" and st == "VERIFIED" and sort_by != "VERIFIED_FIRST":
                         continue
                     if tier != "ALL" and t.get("tier") != tier:
                         continue
                     if q and q not in t["symbol"].lower() and q not in t["va"].lower():
+                        continue
+                    if lane == "PROTO_IN_RETAIL":
+                        if not t.get("in_retail"):
+                            continue
+                    elif not q and lane != "VERIFIED" and not in_default_queue(t):
                         continue
                     items.append(t)
                 if sort_by == "DEFAULT":
@@ -1548,11 +1575,16 @@ def main() -> None:
     print(f"  URL        : {url}")
     print(f"  Compiler   : {p['compiler']}")
     print(f"  Verified   : {p['matched_functions']:,} functions (PC {p['by_binary']['pc']:,}, Xbox {p['by_binary']['xbox']:,})")
-    print(f"  Work queue : {sum(1 for t in ALL_TASKS if t['status'] != 'VERIFIED'):,} functions")
+    print(f"  Work queue : {sum(1 for t in ALL_TASKS if t['status'] != 'VERIFIED' and in_default_queue(t)):,} functions")
     print(f"  Look-alikes: {len(GROUPS):,} groups; a match in one is tried on the rest of its group")
     if any(t["bin"] == "proto" for t in ALL_TASKS):
         pp = p["prototype"]
         print(f"  Prototype  : {pp['matched']:,} / {pp['total']:,} (April 2006 Xbox build, unreleased code; counted on its own)")
+        same = sum(1 for t in ALL_TASKS if t.get("in_retail") == "code")
+        older = sum(1 for t in ALL_TASKS if t.get("in_retail") == "method")
+        if same or older:
+            print(f"               {same:,} are the same code as retail (matched along with it) and {older:,} are older")
+            print("               versions of retail functions; both are left out of the work queue")
     print(f"  Maintainers: {', '.join(sorted(MAINTAINERS))}")
     print("=" * 78)
     for b, problem in BINARY_PROBLEMS.items():

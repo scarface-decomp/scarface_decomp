@@ -66,9 +66,25 @@ def page(browser):
     pg.errors = errors
     pg.goto(BASE + "#workbench")
     pg.wait_for_function("document.getElementById('wb-title').textContent.includes('Func')")
+    wait_until_loaded(pg)
     yield pg
     assert not errors, errors
     ctx.close()
+
+
+def wait_until_loaded(pg):
+    """The startup screen covers the page (and makes it inert) until the first data is in."""
+    pg.wait_for_function("!document.querySelector('.app-shell').hasAttribute('inert')")
+
+
+def fresh_page(browser, viewport=None):
+    ctx = browser.new_context(viewport=viewport or {"width": 1440, "height": 1000})
+    ctx.route("https://fonts.googleapis.com/**", lambda r: r.abort())
+    ctx.route("https://fonts.gstatic.com/**", lambda r: r.abort())
+    pg = ctx.new_page()
+    pg.errors = []
+    pg.on("pageerror", lambda e: pg.errors.append(str(e)))
+    return ctx, pg
 
 
 def sign_in(pg, user="Tester", pin="1234"):
@@ -246,6 +262,7 @@ def test_mobile_drawer(browser):
     pg.on("pageerror", lambda e: errors.append(str(e)))
     pg.goto(BASE)
     pg.wait_for_function("document.getElementById('server-status-text').textContent.includes('ONLINE')")
+    wait_until_loaded(pg)
     assert not pg.is_visible("#nav-dashboard")
     pg.click("#nav-toggle")
     pg.wait_for_selector("#nav-dashboard", state="visible")
@@ -399,3 +416,69 @@ def test_scripts_by_game_version(page):
     assert f"({page.text_content('#side-scripts-count')} files)" in total
     page.fill("#script-search", "nothing-like-this")
     assert "No scripts match" in page.text_content("#script-file-list")
+
+
+def test_startup_screen_stays_until_the_data_is_in(browser):
+    """While the queue is still loading, a startup screen covers the page and ticks off each step."""
+    reset()
+    ctx, pg = fresh_page(browser)
+    held, gate = [], {"open": False}
+    pg.route("**/api/queue*", lambda r: r.continue_() if gate["open"] else held.append(r))
+    pg.goto(BASE)
+    pg.wait_for_function("document.querySelector('#boot-steps li[data-step=state]').classList.contains('is-done')")
+    assert pg.is_visible("#boot-screen")
+    assert "not everything has loaded yet" in pg.text_content("#boot-sub")
+    assert "is-active" in pg.get_attribute("#boot-steps li[data-step=queue]", "class")
+    assert pg.evaluate("document.querySelector('.app-shell').hasAttribute('inert')")
+    assert held
+    gate["open"] = True
+    for r in held:
+        r.continue_()
+    pg.wait_for_selector("#boot-screen", state="detached")
+    assert not pg.evaluate("document.querySelector('.app-shell').hasAttribute('inert')")
+    assert "Func" in pg.text_content("#wb-title")
+    assert not pg.errors, pg.errors
+    ctx.close()
+
+
+def test_startup_screen_says_when_the_portal_does_not_answer(browser):
+    reset()
+    ctx, pg = fresh_page(browser)
+    pg.route("**/api/state", lambda r: r.abort())
+    pg.goto(BASE)
+    pg.wait_for_selector("#boot-retry", state="visible")
+    assert "Can't reach the portal" in pg.text_content("#boot-hint")
+    assert "is-fail" in pg.get_attribute("#boot-steps li[data-step=state]", "class")
+    pg.wait_for_timeout(400)
+    assert pg.is_visible("#boot-screen")                       # stays up: the user decides
+    pg.click("#boot-skip")
+    pg.wait_for_selector("#boot-screen", state="detached")
+    assert "OFFLINE" in pg.text_content("#server-status-text")
+    ctx.close()
+
+
+def test_still_loading_note_while_scripts_are_checked(browser):
+    """The game-script check runs after the portal starts; the top bar says so until it's done."""
+    reset()
+    ctx, pg = fresh_page(browser)
+    n = {"calls": 0}
+
+    def state(route):
+        resp = route.fetch()
+        body = resp.json()
+        n["calls"] += 1
+        running = n["calls"] <= 2
+        body["scripts"] = {"running": running, "versions": [
+            {"id": "xbox", "label": "Retail", "compiled": 10, "checked": 3 if running else 10, "exact": 3 if running else 10}]}
+        route.fulfill(response=resp, json=body)
+
+    pg.route("**/api/state", state)
+    pg.goto(BASE)
+    wait_until_loaded(pg)
+    pg.wait_for_selector("#bg-work", state="visible")
+    assert "STILL LOADING" in pg.text_content("#bg-work-text") and "3 / 10" in pg.text_content("#bg-work-text")
+    pg.wait_for_selector("#bg-work", state="hidden", timeout=15000)
+    pg.wait_for_function("document.getElementById('toast').textContent.includes('Everything is loaded')")
+    assert "10 of 10" in pg.text_content("#toast")
+    assert not pg.errors, pg.errors
+    ctx.close()

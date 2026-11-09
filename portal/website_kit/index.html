@@ -637,6 +637,63 @@
     .toast[data-kind="warn"] { border-left-color: var(--gold); }
     .toast[data-kind="err"] { border-left-color: var(--crimson); }
 
+    /* ---------- Startup screen: covers the page until its first data is in ---------- */
+    .boot-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(1100px 560px at 50% -12%, rgba(225, 29, 72, 0.12), transparent 62%), var(--bg-app);
+      transition: opacity 0.35s ease, visibility 0.35s;
+    }
+    .boot-screen.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+    .boot-card {
+      width: min(460px, 100%);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--crimson);
+      border-radius: 10px;
+      padding: 24px 26px 22px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      opacity: 0;
+      transform: translateY(6px);
+      animation: bootIn 0.3s ease 0.25s forwards;   /* a quick load never flashes the card */
+    }
+    @keyframes bootIn { to { opacity: 1; transform: none; } }
+    .boot-brand { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); }
+    .boot-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .boot-sub { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 16px; }
+    .boot-bar { height: 6px; background: #1a1f2e; border-radius: 99px; overflow: hidden; margin-bottom: 18px; }
+    .boot-bar > span { display: block; height: 100%; width: 4%; background: linear-gradient(90deg, var(--crimson), var(--gold)); border-radius: inherit; transition: width 0.3s ease; }
+    .boot-steps { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .boot-steps li { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: center; gap: 11px; font-size: 0.86rem; color: var(--muted); }
+    .boot-steps li.is-active { color: #fff; }
+    .boot-steps li.is-done { color: var(--text-secondary); }
+    .boot-steps li.is-fail { color: var(--error); }
+    .boot-ico { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; line-height: 1; }
+    .boot-steps li.is-active .boot-ico { border-color: rgba(234, 179, 8, 0.25); border-top-color: var(--gold); animation: spinRing 0.75s linear infinite; }
+    .boot-steps li.is-done .boot-ico { border-color: var(--green); background: var(--green); color: #04130d; }
+    .boot-steps li.is-done .boot-ico::before { content: "\2713"; }
+    .boot-steps li.is-fail .boot-ico { border-color: var(--crimson); background: var(--crimson); color: #fff; }
+    .boot-steps li.is-fail .boot-ico::before { content: "!"; }
+    .boot-note { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .boot-hint { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+    .boot-hint.is-err { color: var(--error); }
+    .boot-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .boot-screen [hidden] { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .boot-screen, .boot-bar > span { transition: none; }
+      .boot-card { animation-duration: 0.01s; }
+      .boot-steps li.is-active .boot-ico { animation: none; }
+    }
+
+    /* Topbar note while the portal still works in the background (the game-script check). */
+    #bg-work[hidden] { display: none; }
+    #bg-work .spinner-ring { width: 11px; height: 11px; margin-right: 0; border-color: rgba(56, 189, 248, 0.25); border-top-color: var(--blue); }
+
     /* ---------- Mobile: off-canvas sidebar ---------- */
     @media (max-width: 980px) {
       .app-shell { grid-template-columns: 1fr; }
@@ -663,6 +720,35 @@
   </style>
 </head>
 <body>
+
+  <!-- Startup screen: stays up until the first data has loaded, then fades out. -->
+  <div id="boot-screen" class="boot-screen">
+    <div class="boot-card" role="group" aria-labelledby="boot-title" aria-describedby="boot-sub">
+      <div class="boot-brand">
+        <span class="brand-logo" aria-hidden="true">SC</span>
+        <span>
+          <span class="brand-text-title" style="display:block;">SCARFACE HUB</span>
+          <span class="brand-text-sub" style="display:block;">1:1 C++ DECOMP PORTAL</span>
+        </span>
+      </div>
+      <h2 id="boot-title" class="boot-title">Loading the portal</h2>
+      <p id="boot-sub" class="boot-sub">Please wait, not everything has loaded yet. The portal opens by itself as soon as it's ready.</p>
+      <div class="boot-bar" id="boot-bar" role="progressbar" aria-label="Loading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="boot-bar-fill"></span></div>
+      <ol class="boot-steps" id="boot-steps">
+        <li data-step="state"><span class="boot-ico" aria-hidden="true"></span><span class="boot-lbl">Connecting to the portal</span><span class="boot-note"></span></li>
+        <li data-step="queue"><span class="boot-ico" aria-hidden="true"></span><span class="boot-lbl">Loading the work queue</span><span class="boot-note"></span></li>
+        <li data-step="task"><span class="boot-ico" aria-hidden="true"></span><span class="boot-lbl">Opening your function</span><span class="boot-note"></span></li>
+        <li data-step="scripts"><span class="boot-ico" aria-hidden="true"></span><span class="boot-lbl">Loading the game scripts</span><span class="boot-note"></span></li>
+      </ol>
+      <p class="sr-only" id="boot-live" aria-live="polite"></p>
+      <p class="boot-hint" id="boot-hint" hidden></p>
+      <div class="boot-actions" id="boot-actions" hidden>
+        <button type="button" class="btn-sm solid-gold" id="boot-retry" onclick="location.reload()" hidden>Try again</button>
+        <button type="button" class="btn-sm" id="boot-skip" onclick="bootFinish()">Continue anyway</button>
+      </div>
+    </div>
+  </div>
+  <noscript><style>.boot-screen { display: none; }</style></noscript>
 
   <div class="app-shell">
     <!-- LEFT SIDEBAR -->
@@ -729,6 +815,11 @@
           <div class="status-nominal is-pending" id="server-status" role="status">
             <span class="status-dot" aria-hidden="true"></span>
             <span id="server-status-text">CONNECTING…</span>
+          </div>
+          <div class="status-nominal neutral" id="bg-work" role="status" hidden
+               title="The portal is still checking the game scripts in the background. You can keep working; the results show up when it's done.">
+            <span class="spinner-ring" aria-hidden="true"></span>
+            <span id="bg-work-text">STILL LOADING…</span>
           </div>
           <div class="topbar-pill hide-sm" title="How much of each retail file's game code can be read">READABLE CODE: <strong class="gold">XBOX 100%</strong> · <strong>PC ~10%</strong></div>
           <div class="topbar-pill">VERIFIED: <strong id="top-verified-value">—</strong></div>
@@ -897,8 +988,9 @@
                   <option value="ALL">All Categories</option>
                   <option value="Shared Engine">Xbox default.xbe (most of the work)</option>
                   <option value="PC Scarface.exe">PC Scarface.exe</option>
-                  <option value="Xbox Prototype">Xbox Prototype (Apr 2006, unreleased code)</option>
+                  <option value="Xbox Prototype">Xbox Prototype (Apr 2006): code not in retail</option>
                   <option value="class not in retail">Prototype: classes cut from retail</option>
+                  <option value="PROTO_IN_RETAIL" title="Left out of the other lists: the same code is matched along with retail, and the rest are older versions of retail functions">Prototype: also in retail (left out elsewhere)</option>
                   <option value="PARTIAL">Partially Done (Resume)</option>
                   <option value="UNCLAIMED">Unclaimed Only</option>
                   <option value="CLAIMED">Claimed Only</option>
@@ -1523,6 +1615,38 @@
     if (sc.running) text += ' (checking…)';
     $('feed-scripts').textContent = text;
     $('feed-scripts-bar').style.width = (total ? Math.min(100, exact / total * 100) : 0) + '%';
+    updateBackgroundWork(sc);
+  }
+
+  /* The game-script check runs in the background after the portal starts. While it does, a note in the
+   * top bar says the portal is still loading; it is polled until done, then the 1:1 badges are refreshed. */
+  let bgWorkTimer = 0;
+  function updateBackgroundWork(sc) {
+    const el = $('bg-work');
+    const vs = Array.isArray(sc && sc.versions) ? sc.versions : [];
+    const total = vs.reduce((n, v) => n + (Number(v.compiled) || 0), 0);
+    if (sc && sc.running) {
+      const checked = vs.reduce((n, v) => n + (Number(v.checked) || 0), 0);
+      $('bg-work-text').textContent = 'STILL LOADING · GAME SCRIPTS ' + fmtInt(checked) + ' / ' + fmtInt(total);
+      el.hidden = false;
+      if (!bgWorkTimer) bgWorkTimer = setInterval(pollBackgroundWork, 3000);
+      return;
+    }
+    if (bgWorkTimer) { clearInterval(bgWorkTimer); bgWorkTimer = 0; }
+    if (!el.hidden) {                      // it was running and has just finished
+      el.hidden = true;
+      const exact = vs.reduce((n, v) => n + (Number(v.exact) || 0), 0);
+      toast('Everything is loaded: ' + fmtInt(exact) + ' of ' + fmtInt(total) + ' game scripts decompile 1:1.', 'ok');
+      loadVerifiedScripts();
+    }
+  }
+
+  async function pollBackgroundWork() {
+    try {
+      const s = await apiFetchJson('/api/state');
+      if (s && s.scripts) renderScriptCheck(s.scripts);
+      else updateBackgroundWork(null);
+    } catch (e) { /* the portal is restarting; try again on the next tick */ }
   }
 
   /* One plain sentence about the function's look-alikes for the workbench. */
@@ -2009,7 +2133,8 @@
     loadQueuePage();
   }
 
-  async function loadQueuePage() {
+  async function loadQueuePage(opts) {
+    opts = opts || {};
     const mySeq = ++queueSeq;
     const list = $('queue-list');
     list.setAttribute('aria-busy', 'true');
@@ -2032,6 +2157,7 @@
       $('btn-prev-page').disabled = currentPage <= 1;
       $('btn-next-page').disabled = currentPage >= maxPage;
       renderQueueList();
+      if (opts.onListed) opts.onListed(totalMatching);
 
       // Only auto-open a function when nothing is loaded yet; never replace work in progress.
       if (!currentTask && !workbenchLocked()) {
@@ -2039,13 +2165,15 @@
         if (selectedId) ok = await selectTaskById(selectedId, { quiet: true, skipConfirm: true });
         if (!ok && PAGE_ITEMS.length > 0) await selectTaskById(PAGE_ITEMS[0].id, { skipConfirm: true });
       }
+      return true;
     } catch (e) {
-      if (mySeq !== queueSeq) return;
+      if (mySeq !== queueSeq) return false;
       list.innerHTML = '';
       const d = document.createElement('div');
       d.className = 'empty-note';
       d.textContent = 'Could not load the queue: ' + e.message;
       list.appendChild(d);
+      return false;
     } finally {
       if (mySeq === queueSeq) list.removeAttribute('aria-busy');
     }
@@ -2912,17 +3040,19 @@
     const mySeq = ++scriptsLoadSeq;
     try {
       const data = await apiFetchJson('/api/scripts');
-      if (mySeq !== scriptsLoadSeq) return;
+      if (mySeq !== scriptsLoadSeq) return true;
       if (data.ok && Array.isArray(data.files)) {
         applyScriptList(data);
         if (!SCRIPT_FILES.some((x) => x.path === selectedScriptName)) {
           const first = filteredScripts()[0];
           if (first) selectScript(first.path); else showScriptDetail(null);
         }
+        return true;
       }
     } catch (e) {
       console.warn('Scripts load error:', e);
     }
+    return false;
   }
 
   function filteredScripts() {
@@ -3181,7 +3311,71 @@
     }
   });
 
+  /* ===================================================================
+   * Startup screen: covers the page until the first data is in, so nobody starts from half-loaded
+   * numbers. Each step ticks off as it loads; if the portal does not answer, it says so.
+   * =================================================================== */
+  const BOOT = { started: Date.now(), done: false, timers: [] };
+
+  function bootStep(id, state, note) {
+    if (BOOT.done) return;
+    const li = document.querySelector('#boot-steps li[data-step="' + id + '"]');
+    if (!li) return;
+    li.classList.remove('is-active', 'is-done', 'is-fail');
+    if (state) li.classList.add('is-' + state);
+    if (note !== undefined) li.querySelector('.boot-note').textContent = note;
+    const all = document.querySelectorAll('#boot-steps li');
+    const finished = document.querySelectorAll('#boot-steps li.is-done, #boot-steps li.is-fail').length;
+    const pct = Math.max(4, Math.round(finished / all.length * 100));
+    $('boot-bar-fill').style.width = pct + '%';
+    $('boot-bar').setAttribute('aria-valuenow', String(pct));
+    const active = document.querySelector('#boot-steps li.is-active .boot-lbl');
+    $('boot-live').textContent = active ? active.textContent + '…' : '';
+  }
+
+  function bootHint(text, isErr) {
+    const h = $('boot-hint');
+    h.textContent = text;
+    h.classList.toggle('is-err', !!isErr);
+    h.hidden = false;
+  }
+
+  function bootShowActions(retry) {
+    $('boot-retry').hidden = !retry;
+    $('boot-actions').hidden = false;
+  }
+
+  function bootStart() {
+    const shell = document.querySelector('.app-shell');
+    shell.setAttribute('inert', '');
+    shell.setAttribute('aria-busy', 'true');
+    BOOT.timers.push(setTimeout(() => {
+      bootHint(STATE.scripts && STATE.scripts.running
+        ? 'Taking a little longer than usual: the portal is checking the game scripts at the same time. That only happens after the scripts change.'
+        : 'Taking a little longer than usual. Large projects can need a few extra seconds on the first start.');
+    }, 8000));
+    BOOT.timers.push(setTimeout(() => bootShowActions(false), 15000));
+  }
+
+  function bootFinish() {
+    if (BOOT.done) return;
+    BOOT.done = true;
+    BOOT.timers.forEach(clearTimeout);
+    const shell = document.querySelector('.app-shell');
+    shell.removeAttribute('inert');
+    shell.removeAttribute('aria-busy');
+    const el = $('boot-screen');
+    if (!el) return;
+    // The card only appears after 250 ms; when it was on screen, let the last tick show before fading.
+    const pause = Date.now() - BOOT.started > 250 ? 300 : 0;
+    setTimeout(() => {
+      el.classList.add('is-done');
+      setTimeout(() => el.remove(), 400);
+    }, pause);
+  }
+
   async function loadState() {
+    bootStart();
     wireEditor();
     loadSession();
     loadAiSettings();
@@ -3190,6 +3384,8 @@
     syncWorkflowButtons();
     renderLeaderboard();
 
+    bootStep('state', 'active');
+    let online = false;
     try {
       const s = await apiFetchJson('/api/state');
       STATE = Object.assign({ progress: {}, leaderboard: {}, audit_log: [], sources: {}, tier_counts: {} }, s || {});
@@ -3200,11 +3396,28 @@
       showBinaryProblems(STATE.binary_problems || {});
       markSourcesDirty();
       renderLeaderboard();
+      online = true;
+      bootStep('state', 'done', 'online');
     } catch (e) {
       setServerStatus('offline');
       console.error('State load error:', e);
+      bootStep('state', 'fail', 'no answer');
+      bootHint('Can\'t reach the portal. Make sure the START_PORTAL window is still open, then try again.', true);
+      bootShowActions(true);
     }
-    await Promise.all([loadVerifiedScripts(), loadQueuePage()]);
+
+    if (online) { bootStep('queue', 'active'); bootStep('scripts', 'active'); }
+    const queue = loadQueuePage({
+      onListed: (n) => { bootStep('queue', 'done', fmtInt(n) + ' functions'); bootStep('task', 'active'); },
+    }).then((ok) => {
+      if (ok === false) { bootStep('queue', 'fail', 'not loaded'); bootStep('task', 'fail'); }
+      else bootStep('task', 'done', currentTask ? (currentTask.symbol || currentTask.id) : 'none open');
+    });
+    const scripts = loadVerifiedScripts().then((ok) => {
+      bootStep('scripts', ok ? 'done' : 'fail', ok ? fmtInt(SCRIPT_FILES.length) + ' files' : 'not loaded');
+    });
+    await Promise.all([queue, scripts]);
+    if (online) bootFinish();             // offline: the screen stays with Try again / Continue anyway
   }
 
   function showBinaryProblems(problems) {

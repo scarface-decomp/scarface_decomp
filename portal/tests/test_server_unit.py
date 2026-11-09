@@ -84,3 +84,24 @@ def test_old_queues_lose_their_non_functions_once(S, tmp_path, monkeypatch):
     assert S.read_json(tmp_path / "q.json", None) == kept
     (tmp_path / "q.json").unlink()
     assert S.drop_non_code(kept, verified=set()) is kept and not (tmp_path / "q.json").exists()  # checked once
+
+
+def test_prototype_functions_also_in_retail_are_left_out_of_the_queue(S, monkeypatch):
+    """The queue lists the released game plus the prototype's own code. A prototype function with the
+    same code as a retail one is matched along with it, and one with the same class method is an older
+    version of it; both only show up in their own lane, when searched for, or once verified."""
+    def task(i, b, symbol, group=""):
+        return {"id": f"{b}{i}", "bin": b, "symbol": symbol, "lookalike_group": group, "status": "UNCLAIMED"}
+    xb_same = task(1, "xb", "sub_00011000", "g1")
+    proto_same = task(2, "proto", "sub_00022000", "g1")
+    xb_method = task(3, "xb", "Car::Drive")
+    proto_method = task(4, "proto", "Car::Drive")
+    proto_own = task(5, "proto", "EditorTool::Draw")
+    proto_pair = [task(6, "proto", "sub_00033000", "g2"), task(7, "proto", "sub_00034000", "g2")]
+    tasks = [xb_same, proto_same, xb_method, proto_method, proto_own] + proto_pair
+    monkeypatch.setattr(S, "GROUPS", {"g1": [xb_same, proto_same], "g2": proto_pair})
+    monkeypatch.setattr(S, "BY_SYMBOL", {"Car::Drive": [xb_method, proto_method], "EditorTool::Draw": [proto_own]})
+    assert [S.in_retail(t) for t in tasks] == ["", "code", "", "method", "", "", ""]
+    for t in tasks:
+        t["in_retail"] = S.in_retail(t)
+    assert [t["id"] for t in tasks if S.in_default_queue(t)] == ["xb1", "xb3", "proto5", "proto6", "proto7"]
