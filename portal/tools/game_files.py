@@ -16,9 +16,12 @@ in binaries/ (and one folder down) and:
   * takes the file out of a .zip or .7z that holds it directly (the prototype .zip);
   * reads default.xbe straight out of an Xbox disc image (full Redump image or trimmed XISO),
     whether the image is loose or inside a .zip / .7z. Only the bytes needed are kept, so a
-    multi-gigabyte image never has to be unpacked to disk;
-  * explains the steps for the PC version, which has to be installed and patched first, and picks
-    up an installed, patched Scarface.exe from Program Files when it finds one.
+    multi-gigabyte image never has to be unpacked to disk. A .7z is read by sevenzip.py, which needs
+    nothing installed (7-Zip or py7zr are used only for unusual compression);
+  * takes Scarface.exe 1.00.2 out of the official 1.00.2 patch, which carries the whole file, so
+    the PC game doesn't have to be installed; a wrong Scarface.exe is moved aside (never deleted)
+    when the patch has the right one. It also picks up an installed, patched Scarface.exe from
+    Program Files when it finds one.
 
 Every file is checked against the SHA-256 of the build the project uses; a different build is kept
 but flagged, because the function addresses in the work queue would not line up.
@@ -31,10 +34,14 @@ import hashlib
 import os
 import shutil
 import struct
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
 from typing import Callable, Dict, Iterator, List, Optional, Tuple
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import sevenzip  # noqa: E402
 
 # The only copies the project accepts (docs/GAME_VERSIONS.md). Every function's address and bytes
 # come from these exact files, so a match only means something against them.
@@ -136,19 +143,41 @@ def refusal(path: Path) -> Optional[str]:
            f"Other versions and regions have different code at different addresses, so matches made "
            f"against it would not count.")
     patch = _patch_installer(path.parent) if path.name == "Scarface.exe" else None
-    if patch:
-        msg += (f" The patch ({patch.name}) is in the folder, but a patch file on its own changes nothing: "
-                f"run it to update your installed game, then copy the updated Scarface.exe from the game's "
-                f"install folder into binaries/.")
+    if patch and _exe_in_patch(patch):
+        msg += (f" The patch ({patch.name}) is in the folder and has the right Scarface.exe inside: start the "
+                f"portal again and it uses that one instead.")
+    elif patch:
+        msg += (f" The patch ({patch.name}) is in the folder, but it can't be read directly: run it to update "
+                f"your installed game, then copy the updated Scarface.exe from the game's install folder into "
+                f"binaries/.")
+    elif path.name == "Scarface.exe":
+        msg += (" Put the official 1.00.2 patch in binaries/ and start the portal again: it takes the right "
+                "Scarface.exe out of the patch.")
     return msg + f" See {GUIDE} for the accepted versions."
 
 
 def _patch_installer(folder: Path) -> Optional[Path]:
-    """A PC patch installer sitting in the folder (e.g. 'Scarface 1.00.2 US Patch....exe'), if any."""
+    """The PC game's patch sitting in the folder, if any: a program with Scarface.exe inside it (the
+    official 1.00.2 update, whatever it is called), or one named like a patch or update."""
     try:
-        return next((p for p in sorted(Path(folder).iterdir())
-                     if p.is_file() and p.suffix.lower() == ".exe" and "patch" in p.name.lower()), None)
+        exes = [p for p in sorted(Path(folder).iterdir()) if p.is_file() and p.suffix.lower() == ".exe"
+                and p.name.lower() != "scarface.exe"]
     except OSError:
+        return None
+    for p in exes:
+        if _exe_in_patch(p):
+            return p
+    return next((p for p in exes if "patch" in p.name.lower() or "update" in p.name.lower()), None)
+
+
+def _exe_in_patch(p: Path) -> Optional[str]:
+    """The name of Scarface.exe inside a patch program that carries a zip, or None."""
+    if not _is_zip(p) or p.suffix.lower() != ".exe":
+        return None
+    try:
+        with zipfile.ZipFile(p) as z:
+            return next((n for n in z.namelist() if Path(n).name.lower() == "scarface.exe"), None)
+    except (OSError, zipfile.BadZipFile):
         return None
 
 
@@ -161,22 +190,26 @@ def _pc_disc_in(folder: Path) -> Optional[Path]:
 
 
 def startup(bin_dir: Path, log: Log = print) -> bool:
-    """At portal start: when the Xbox game (or the prototype) is missing but its download is in binaries/
-    (a disc image, the .zip/.7z it came in, or the file one folder down), copy it out once. Says nothing
-    when there is nothing to do, so a set-up folder starts as quietly as before."""
+    """At portal start: when a game file is missing but its download is in binaries/ (a disc image, the
+    .zip/.7z it came in, the file one folder down, or the PC patch), copy it out once. Says nothing when
+    there is nothing to do, so a set-up folder starts as quietly as before."""
     bin_dir = Path(bin_dir)
     if not bin_dir.exists():
         return False
     need_xbox = check(bin_dir / "default.xbe") == "missing"
     need_proto = check(bin_dir / "game.xbe") == "missing"
-    if not (need_xbox or need_proto):
+    pc_state = check(bin_dir / "Scarface.exe")
+    patch = _patch_installer(bin_dir) if pc_state != "ok" else None
+    need_pc = bool(patch and _exe_in_patch(patch)) and (pc_state == "missing" or _patch_has_accepted_exe(patch))
+    if not (need_xbox or need_proto or need_pc):
         return False
     sources = _candidates(bin_dir)
     packed = [s for s in sources if s.name.lower().endswith(ARCHIVES + DISC_IMAGES) or s.parent != bin_dir]
-    if need_xbox and not packed:
-        return False                            # nothing to unpack; the banner below says what is missing
-    if not need_xbox and not any("proto" in str(s.relative_to(bin_dir)).lower() for s in packed):
-        return False                            # only the optional prototype is missing, and it isn't here
+    if not need_pc:
+        if need_xbox and not packed:
+            return False                        # nothing to unpack; the banner below says what is missing
+        if not need_xbox and not any("proto" in str(s.relative_to(bin_dir)).lower() for s in packed):
+            return False                        # only the optional prototype is missing, and it isn't here
     log("[*] Getting the game files out of the downloads in binaries/ (only needed once)...")
     prepare(bin_dir, log)                       # this also gives the PC steps when they apply
     return True
@@ -184,8 +217,9 @@ def startup(bin_dir: Path, log: Log = print) -> bool:
 
 def pc_help(bin_dir: Path, log: Log = print) -> None:
     """At portal start: if there is no usable Scarface.exe but the PC download or patch is in binaries/,
-    take a patched copy from the installed game if there is one, or say exactly what to do. A patch
-    installer or the PC disc image can't be used directly; the game has to be installed and patched."""
+    take a patched copy from the installed game if there is one, or say exactly what to do. The PC disc
+    image can't be used on its own (it holds the game before the 1.00.2 patch), and neither can a patch whose
+    Scarface.exe can't be read; then the game has to be installed and patched."""
     bin_dir = Path(bin_dir)
     exe = bin_dir / "Scarface.exe"
     if exe.exists():
@@ -373,10 +407,66 @@ def _progress(pos: int, total: int, shown: int, log: Log, what: str) -> int:
 # Archives
 # --------------------------------------------------------------------------- #
 
+def _is_zip(p: Path) -> bool:
+    """A .zip, or a program with a zip inside (like the PC game's 1.00.2 patch)."""
+    low = p.name.lower()
+    if low.endswith(".zip"):
+        return True
+    if low.endswith(".exe") and low != "scarface.exe":
+        try:
+            return zipfile.is_zipfile(p)
+        except OSError:
+            return False
+    return False
+
+
+def _is_archive(p: Path) -> bool:
+    return p.name.lower().endswith(".7z") or _is_zip(p)
+
+
+def _seven_zip_program() -> Optional[str]:
+    """The 7-Zip program, if it is installed (only needed for unusual .7z files)."""
+    for name in ("7z", "7za", "7zz"):
+        hit = shutil.which(name)
+        if hit:
+            return hit
+    for root in filter(None, {os.environ.get(k) for k in ("ProgramFiles", "ProgramFiles(x86)", "ProgramW6432")}):
+        exe = Path(root) / "7-Zip" / "7z.exe"
+        if exe.exists():
+            return str(exe)
+    return None
+
+
+NO_7Z = ("this .7z uses a kind of compression the portal can't read by itself; install 7-Zip "
+         "(7-zip.org) and start the portal again, or unpack the .7z and put the .iso in binaries/")
+
+
 def _members(archive: Path) -> List[Tuple[str, int]]:
-    if archive.suffix.lower() == ".zip":
+    if _is_zip(archive):
         with zipfile.ZipFile(archive) as z:
             return [(i.filename, i.file_size) for i in z.infolist() if not i.is_dir()]
+    try:
+        with sevenzip.SevenZip(archive) as z:
+            return z.members()
+    except sevenzip.Unsupported:
+        pass
+    exe = _seven_zip_program()
+    if exe:
+        out = subprocess.run([exe, "l", "-slt", "-ba", str(archive)], capture_output=True, text=True,
+                             errors="replace").stdout
+        found, name, size, is_dir = [], None, 0, False
+        for line in out.splitlines() + [""]:
+            if line.startswith("Path = "):
+                name = line[7:]
+            elif line.startswith("Size = "):
+                size = int(line[7:] or 0)
+            elif line.startswith("Attributes = ") and "D" in line[13:].split(" ")[0]:
+                is_dir = True
+            elif not line.strip() and name is not None:
+                if not is_dir:
+                    found.append((name.replace("\\", "/"), size))
+                name, size, is_dir = None, 0, False
+        return found
     py7zr = _py7zr()
     with py7zr.SevenZipFile(archive) as z:
         return [(i.filename, i.uncompressed) for i in z.list() if not i.is_directory]
@@ -387,14 +477,21 @@ def _py7zr():
         import py7zr  # noqa: F401
         return py7zr
     except ImportError:
-        raise RuntimeError("reading a .7z needs the py7zr package (pip install py7zr); "
-                           "or unpack it with 7-Zip first and put the .iso in binaries/")
+        raise RuntimeError(NO_7Z)
 
 
 def _read_member(archive: Path, member: str) -> bytes:
-    if archive.suffix.lower() == ".zip":
+    if _is_zip(archive):
         with zipfile.ZipFile(archive) as z:
             return z.read(member)
+    try:
+        with sevenzip.SevenZip(archive) as z:
+            return z.read(member)
+    except sevenzip.Unsupported:
+        pass
+    exe = _seven_zip_program()
+    if exe:
+        return subprocess.run([exe, "e", "-so", str(archive), member], capture_output=True).stdout
     py7zr = _py7zr()
     from py7zr.io import BytesIOFactory
     factory = BytesIOFactory(limit=256 << 20)
@@ -415,7 +512,7 @@ def _disc_in_archive(archive: Path, member: str, size: int, name: str, log: Log,
         sink = open(dest, "wb") if dest is not None else None
         try:
             stream = DiscStream(name, known, sink)
-            if archive.suffix.lower() == ".zip":
+            if _is_zip(archive):
                 with zipfile.ZipFile(archive) as z, z.open(member) as f:
                     _pull(stream, f, size, log, what)
             else:
@@ -435,6 +532,22 @@ def disc_images_in(archive: Path) -> List[Tuple[str, int]]:
 
 
 def _stream_7z(archive: Path, member: str, size: int, stream: DiscStream, log: Log, what: str) -> None:
+    try:
+        with sevenzip.SevenZip(archive) as z, z.open(member) as f:
+            _pull(stream, f, size, log, what)
+        return
+    except sevenzip.Unsupported:
+        pass
+    exe = _seven_zip_program()
+    if exe:
+        proc = subprocess.Popen([exe, "e", "-so", str(archive), member], stdout=subprocess.PIPE,
+                                stderr=subprocess.DEVNULL)
+        try:
+            _pull(stream, proc.stdout, size, log, what)
+        finally:
+            proc.kill()
+            proc.wait()
+        return
     py7zr = _py7zr()
     from py7zr.io import NullIO, Py7zIO, WriterFactory
 
@@ -533,15 +646,18 @@ def prepare(bin_dir: Path, log: Log = print) -> Dict[str, str]:
     """
     bin_dir = Path(bin_dir)
     status = {n: check(bin_dir / n) for n in EXPECTED}
+    patch = _patch_installer(bin_dir)
+    if status["Scarface.exe"] == "different" and patch and _patch_has_accepted_exe(patch):
+        aside = _free_name(bin_dir / "Scarface.exe.not-used")
+        os.replace(bin_dir / "Scarface.exe", aside)
+        log(f"    - Scarface.exe was not the accepted 1.00.2 copy; moved it to {aside.name}")
+        status["Scarface.exe"] = "missing"
     missing = [n for n, s in status.items() if s == "missing"]
-    pc_disc = patch = None
+    pc_disc = None
     if missing:
         sources = _candidates(bin_dir)
         for src in sources:
-            low = src.name.lower()
-            if low.endswith(".exe") and "patch" in low:
-                patch = src
-            if low.endswith(DISC_IMAGES) and _is_pc_disc(src):
+            if src.name.lower().endswith(DISC_IMAGES) and _is_pc_disc(src):
                 pc_disc = src
         for name in list(missing):
             got = _from_sources(name, sources, bin_dir, log)
@@ -557,6 +673,26 @@ def prepare(bin_dir: Path, log: Log = print) -> Dict[str, str]:
     return status
 
 
+def _patch_has_accepted_exe(patch: Path) -> bool:
+    member = _exe_in_patch(patch)
+    if not member:
+        return False
+    try:
+        data = _read_member(patch, member)
+    except Exception:  # noqa: BLE001
+        return False
+    return hashlib.sha256(data).hexdigest() in EXPECTED["Scarface.exe"][0]
+
+
+def _free_name(path: Path) -> Path:
+    if not path.exists():
+        return path
+    k = 2
+    while path.with_name(f"{path.name}.{k}").exists():
+        k += 1
+    return path.with_name(f"{path.name}.{k}")
+
+
 def _from_sources(name: str, sources: List[Path], bin_dir: Path, log: Log) -> bool:
     dest = bin_dir / name
     # 1. the file itself, one folder down (someone unzipped the prototype into binaries/)
@@ -564,9 +700,9 @@ def _from_sources(name: str, sources: List[Path], bin_dir: Path, log: Log) -> bo
         if src.name.lower() == name.lower() and src.parent != bin_dir:
             _place(dest, src, log, str(src.relative_to(bin_dir)))
             return True
-    # 2. an archive holding the file directly
+    # 2. an archive holding the file directly (for Scarface.exe, also the 1.00.2 patch)
     for src in sources:
-        if not src.name.lower().endswith(ARCHIVES):
+        if not _is_archive(src):
             continue
         try:
             members = _members(src)
@@ -593,7 +729,8 @@ def _from_sources(name: str, sources: List[Path], bin_dir: Path, log: Log) -> bo
             continue
         try:
             members = _members(src)
-        except Exception:  # noqa: BLE001
+        except Exception as e:  # noqa: BLE001
+            log(f"    ! could not open {src.name}: {e}")
             continue
         for member, size in members:
             if member.lower().endswith(DISC_IMAGES) and size >= MIN_DISC_IMAGE:
@@ -632,15 +769,17 @@ def _report(status: Dict[str, str], bin_dir: Path, pc_disc, patch, log: Log) -> 
 
 
 def _pc_steps(pc_disc: Optional[Path], patch: Optional[Path]) -> List[str]:
+    if not patch:
+        return [
+            "  For the PC functions (optional): put the official 1.00.2 patch in the binaries folder and",
+            "  start the portal again. It takes the right Scarface.exe straight out of the patch; nothing",
+            "  has to be installed. The PC disc image on its own only has the older 1.00 version.",
+        ]
     return [
-        "  For the PC functions, Scarface.exe has to come from an installed, patched game. The disc image",
-        "  and the patch file can't be used as they are:",
-        f"    1. Install the game{' from ' + pc_disc.name if pc_disc else ''} (on Windows, double-click the .iso,",
-        "       then run its setup).",
-        f"    2. Run the 1.00.2 patch{' (' + patch.name + ')' if patch else ''} to update the installed game.",
-        "    3. Copy Scarface.exe from the game's install folder into the binaries folder.",
-        "  When this folder has the PC download or the patch in it, the portal also looks in Program Files",
-        "  for a patched copy each time it starts, and uses it if it finds one.",
+        f"  For the PC functions (optional), Scarface.exe couldn't be read out of {patch.name}.",
+        "  Install the game, run the patch to update it, then copy Scarface.exe from the game's install",
+        "  folder into the binaries folder. The portal also looks in Program Files for a patched copy",
+        "  each time it starts, and uses it if it finds one.",
     ]
 
 

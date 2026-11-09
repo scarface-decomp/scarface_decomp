@@ -63,18 +63,20 @@ The full procedure, with code generation notes for this compiler, is in
    *Add python.exe to PATH* on the installer's first screen.
 2. **Download this project**: on GitHub press **Code**, then **Download ZIP**, and unzip it anywhere
    (or `git clone` it).
-3. **Add your game files** to the `binaries` folder: `default.xbe` from the US Xbox disc. That is
-   where almost all of the work is: the whole Xbox game can be read, while most of the PC file is
-   encrypted, and both run the same game code. Only have the disc image? Put the `.iso`, or the `.zip`
-   it came in, in `binaries` instead; the portal copies `default.xbe` out the first time it starts
-   (unpack a `.7z` with 7-Zip first). Optional extras: `Scarface.exe` (PC, US version 1.00.2, from the
-   folder the patched game is installed to) adds the PC-only functions, and `game.xbe` (the April 20,
-   2006 Xbox prototype) adds the prototype's. Only these exact US versions are accepted, and the portal
-   checks: see [docs/GAME_VERSIONS.md](docs/GAME_VERSIONS.md). They never leave your computer. The goal is the released game plus the
+3. **Add your game files**: put the game, or the downloads it came in, in the `binaries` folder.
+   The portal takes out what it needs when it starts, with nothing to install or unpack first:
+   `default.xbe` from the Xbox disc image (`.iso`, `.zip` or `.7z`), `Scarface.exe` from the official
+   PC 1.00.2 patch, `game.xbe` from the prototype's `.zip`, and the game's scripts from all of them
+   (see [binaries/README.md](binaries/README.md)). The US Xbox disc is the one that matters: the whole
+   Xbox game can be read, while most of the PC file is encrypted, and both run the same game code. The
+   PC game and the April 20, 2006 Xbox prototype are optional extras. Only the exact US versions are
+   accepted, and the portal checks: see [docs/GAME_VERSIONS.md](docs/GAME_VERSIONS.md). Your files never
+   leave your computer. The goal is the released game plus the
    code that never shipped; prototype matches are saved in `reconstructed_src/proto/` and counted on
    their own row.
 4. **Start the portal**: on Windows double-click **`START_PORTAL.bat`**; on macOS or Linux run
-   `sh start_portal.sh`. It installs what it needs the first time and opens http://localhost:8085.
+   `sh start_portal.sh`. The first time it installs what it needs, unpacks your files and lists every
+   function (a few minutes), then opens http://localhost:8085.
 5. **Pick a small function.** The editor starts you off with C++ written from the game's own code
    (calls and globals already named for their addresses); for many small functions it matches as it is.
    Change it until it does.

@@ -138,3 +138,43 @@ def test_extract_scripts_from_a_packed_xbox_disc_image(tmp_path):
     finally:
         gf.MIN_DISC_IMAGE = old
     assert (tmp_path / "xbox" / "scriptc" / "ai" / "gang.dso").read_bytes() == FILES[1][1]
+
+
+def test_portal_start_copies_the_scripts_out_once(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("extract_scripts", PORTAL / "scripts" / "extract_scripts.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    b = tmp_path / "binaries"
+    b.mkdir()
+    import zipfile
+    with zipfile.ZipFile(b / "Scarface (Apr 20, 2006 prototype).zip", "w") as z:
+        z.writestr("Scarface/scripts/ai/gang.cs", "function gang() {}")
+        z.writestr("Scarface/scriptc/ai/gang.dso", FILES[1][1])
+        z.writestr("Scarface/art/car.p3d", b"model")
+    (b / "readme.txt").write_text("not a game file")
+    logs = []
+    assert mod.auto_extract(b, logs.append) == 2
+    assert (b / "scripts_and_data" / "prototype" / "scriptc" / "ai" / "gang.dso").read_bytes() == FILES[1][1]
+    assert any("only needed once" in line for line in logs)
+    logs.clear()
+    assert mod.auto_extract(b, logs.append) == 0 and logs == []      # already done: nothing to say
+
+
+def test_portal_start_finishes_a_copy_that_was_cut_short(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("extract_scripts", PORTAL / "scripts" / "extract_scripts.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    b = tmp_path / "binaries"
+    b.mkdir()
+    import zipfile
+    with zipfile.ZipFile(b / "Scarface (Apr 20, 2006 prototype).zip", "w") as z:
+        z.writestr("Scarface/scripts/ai/gang.cs", "function gang() {}")
+        z.writestr("Scarface/scriptc/ai/gang.dso", FILES[1][1])
+    half = b / "scripts_and_data" / "prototype" / "scripts" / "ai"
+    half.mkdir(parents=True)
+    (half / "gang.cs").write_text("functi")          # the window was closed while this was being written
+    assert mod.auto_extract(b, lambda *_: None) == 2
+    assert (half / "gang.cs").read_text() == "function gang() {}"
+    assert (b / "scripts_and_data" / "prototype" / "scriptc" / "ai" / "gang.dso").is_file()

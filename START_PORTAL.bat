@@ -16,10 +16,14 @@ if not defined PY (
   exit /b 1
 )
 
-if not exist "binaries\Scarface.exe" if not exist "binaries\default.xbe" (
+rem Anything in binaries besides this note counts: the portal unpacks downloads by itself.
+set "HAVE_FILES="
+for /f "delims=" %%F in ('dir /b "binaries" 2^>nul ^| findstr /v /i /x "README.md scripts_and_data"') do set "HAVE_FILES=1"
+if not defined HAVE_FILES (
   echo.
-  echo  No game files yet. Copy Scarface.exe ^(US PC 1.00.2^) and/or default.xbe ^(US Xbox disc^)
-  echo  into the "binaries" folder next to this file, then start the portal again.
+  echo  No game files yet. Put the game, or the downloads it came in ^(the Xbox disc's .7z, .zip or
+  echo  .iso, and optionally the PC 1.00.2 patch^), in the "binaries" folder next to this file, then
+  echo  start the portal again. It takes out what it needs by itself.
   echo  The portal will still open, but it has nothing to show without them.
   echo.
 )
@@ -49,7 +53,7 @@ if errorlevel 1 (
 
 if not defined SCARFACE_PORT set "SCARFACE_PORT=8085"
 echo  Starting the portal. Your browser will open http://localhost:%SCARFACE_PORT%
-echo  The first start takes a few minutes while it lists every function in your game files.
+echo  The first start takes a few minutes while it unpacks your files and lists every function.
 echo  Keep this window open while you work; close it to stop the portal.
 echo.
 "portal\.venv\Scripts\python.exe" portal\decomp_portal_server.py

@@ -19,6 +19,9 @@ Each version goes in its own folder under binaries/scripts_and_data/ (xbox, ps2,
 where the portal's Game Scripts tab finds them and compares other versions with the retail game.
 binaries/ is never committed, so the files stay on your computer. Use --list to only show what is
 there, and --out to choose the folder yourself.
+
+You rarely need to run this by hand: each time the portal starts, auto_extract() does it for every
+game download in binaries/ whose scripts haven't been copied out yet.
 """
 
 from __future__ import annotations
@@ -39,19 +42,73 @@ from rcf import SCRIPT_EXTENSIONS, RcfError, open_rcf, safe_output_path  # noqa:
 import game_files as GF  # noqa: E402
 
 SCRIPTS_ROOT = ROOT / "binaries" / "scripts_and_data"
+DONE_MARK = ".copied"          # written last, so a copy cut short (window closed) is finished next start
 
 
 def guess_version(src: Path) -> str:
     low = src.name.lower()
     if "prototype" in low or "proto" in low:
         return "prototype"
-    if "xbox" in low or (low.endswith(GF.DISC_IMAGES) and GF._is_xbox_image(src)):
-        return "xbox"
     if "slus" in low or "ps2" in low:
         return "ps2"
+    if "xbox" in low or (low.endswith(GF.DISC_IMAGES) and GF._is_xbox_image(src)):
+        return "xbox"
     if low == "cement.rcf":
         return "pc"
+    if low.endswith(GF.ARCHIVES):
+        try:
+            if GF.disc_images_in(src):
+                return "xbox"           # the game's .7z/.zip downloads with a disc image inside are the Xbox disc
+        except Exception:  # noqa: BLE001 - an unreadable download is reported when it is used
+            pass
     return "other"
+
+
+def extract(src: Path, out: Path, log=print) -> int:
+    """Copy every script file in src into out. Returns how many were written."""
+    with tempfile.TemporaryDirectory() as tmp:
+        found = list(entries(src, Path(tmp)))
+        written = 0
+        for name, _, read in found:
+            dest = safe_output_path(out, name)
+            if dest is None:
+                log(f"  skipped unsafe name: {name!r}")
+                continue
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(read())
+            written += 1
+    return written
+
+
+def auto_extract(bin_dir: Path = ROOT / "binaries", log=print) -> int:
+    """At portal start: copy the scripts out of every game download in binaries/ whose version folder
+    under scripts_and_data/ has not been filled yet. Says nothing when there is nothing to do."""
+    bin_dir = Path(bin_dir)
+    if not bin_dir.is_dir():
+        return 0
+    rank = {".rcf": 0, ".iso": 1, ".xiso": 1, ".zip": 2, ".7z": 3}      # quickest source of a version first
+    sources = [p for p in bin_dir.iterdir() if p.is_file() and p.suffix.lower() in rank]
+    sources += [p for p in bin_dir.glob("*/cement.rcf") if p.parent.name != "scripts_and_data"]
+    total = 0
+    for src in sorted(sources, key=lambda p: (rank.get(p.suffix.lower(), 9), p.name.lower())):
+        version = guess_version(src)
+        if version == "other":
+            continue
+        out = bin_dir / "scripts_and_data" / version
+        done = out / DONE_MARK
+        if done.is_file():
+            continue                    # a copy that was stopped half way has no mark, so it is redone
+        log(f"[*] Copying the game's scripts out of {src.name} into binaries/scripts_and_data/{version}/ "
+            "(only needed once)...")
+        try:
+            n = extract(src, out, log)
+        except (RcfError, OSError, RuntimeError, zipfile.BadZipFile) as e:
+            log(f"    ! could not read the scripts from {src.name}: {e}")
+            continue
+        log(f"    + {n:,} script files")
+        done.write_text(f"{n} script files copied from {src.name}\n", encoding="utf-8")
+        total += n
+    return total
 
 
 def loose_scripts_in_zip(src: Path) -> List[Tuple[zipfile.ZipInfo, str]]:
@@ -113,28 +170,20 @@ def main(argv=None) -> int:
         print(f"Not found: {a.source}")
         return 1
     out = a.out or SCRIPTS_ROOT / guess_version(a.source)
-    with tempfile.TemporaryDirectory() as tmp:
-        try:
-            found = list(entries(a.source, Path(tmp)))
-        except (RcfError, OSError, RuntimeError, zipfile.BadZipFile) as e:
-            print(f"Could not read {a.source}: {e}")
-            return 1
-        kinds = collections.Counter(Path(n).suffix.lower() for n, _, _ in found)
-        print(f"{len(found):,} script files: " + ", ".join(f"{n} {k}" for k, n in sorted(kinds.items())))
+    try:
         if a.list:
+            with tempfile.TemporaryDirectory() as tmp:
+                found = list(entries(a.source, Path(tmp)))
+            kinds = collections.Counter(Path(n).suffix.lower() for n, _, _ in found)
+            print(f"{len(found):,} script files: " + ", ".join(f"{n} {k}" for k, n in sorted(kinds.items())))
             for name, size, _ in found:
                 print(f"  {size:>8,}  {name}")
             return 0
-        written = 0
-        for name, _, read in found:
-            dest = safe_output_path(out, name)
-            if dest is None:
-                print(f"  skipped unsafe name: {name!r}")
-                continue
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.write_bytes(read())
-            written += 1
-    print(f"Wrote {written:,} files to {out}")
+        written = extract(a.source, out)
+    except (RcfError, OSError, RuntimeError, zipfile.BadZipFile) as e:
+        print(f"Could not read {a.source}: {e}")
+        return 1
+    print(f"{written:,} script files written to {out}")
     return 0
 
 

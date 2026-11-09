@@ -123,8 +123,8 @@ def test_prepare_unpacks_the_usual_downloads(tmp_path):
     text = "\n".join(logs)
     assert status == {"default.xbe": "ok", "game.xbe": "ok", "Scarface.exe": "missing"}
     assert (b / "default.xbe").read_bytes() == XBE and (b / "game.xbe").read_bytes() == PROTO
-    assert "Install the game from Scarface_Win_EN_ISO-Version.iso" in text
-    assert "Run the 1.00.2 patch (Scarface 1.00.2 US Patch.exe)" in text
+    # a stand-in patch with nothing inside it: the portal says to install and patch instead
+    assert "couldn't be read out of Scarface 1.00.2 US Patch.exe" in text and "run the patch" in text
     assert not list(b.glob("*.part"))
     # the downloads are left alone, and a second run has nothing to do
     assert len(list(b.iterdir())) == 6
@@ -154,15 +154,15 @@ def test_prepare_with_nothing_says_what_to_add(tmp_path):
     assert any("No game files yet" in l for l in logs)
 
 
-def test_patch_file_next_to_the_game_is_not_enough(tmp_path, monkeypatch):
-    """An unpatched Scarface.exe stays refused even with the 1.00.2 patch beside it; the message says to run it."""
+def test_patch_that_cannot_be_read_says_to_install_it(tmp_path, monkeypatch):
+    """An unpatched Scarface.exe stays refused next to a patch file the portal can't read; it says what to do."""
     b = tmp_path / "binaries"
     b.mkdir()
     (b / "Scarface.exe").write_bytes(b"MZ unpatched 1.00")
     (b / "Scarface 1.00.2 US Patch-10-1-00-2-US.exe").write_bytes(b"MZ installer")
     assert gf.check(b / "Scarface.exe") == "different"
     msg = gf.refusal(b / "Scarface.exe")
-    assert "Scarface 1.00.2 US Patch" in msg and "changes nothing" in msg and "run it" in msg
+    assert "Scarface 1.00.2 US Patch" in msg and "can't be read directly" in msg and "run it" in msg
     # no Scarface.exe yet, only the patch and the PC disc: the portal says what to do at start
     (b / "Scarface.exe").unlink()
     pc = bytearray(0x9000)
@@ -172,7 +172,7 @@ def test_patch_file_next_to_the_game_is_not_enough(tmp_path, monkeypatch):
     logs = []
     gf.pc_help(b, logs.append)
     text = "\n".join(logs)
-    assert "can't be used as they are" in text and "Run the 1.00.2 patch (Scarface 1.00.2 US Patch" in text
+    assert "couldn't be read out of Scarface 1.00.2 US Patch" in text and "Install the game" in text
     assert not (b / "Scarface.exe").exists()
 
 
@@ -210,3 +210,62 @@ def test_portal_start_says_nothing_when_there_is_nothing_to_unpack(tmp_path):
     logs = []
     gf.startup(b, logs.append)
     assert logs == []
+
+
+def fake_patch(path: Path, exe: bytes) -> Path:
+    """A stand-in for the official 1.00.2 patch: a program with a zip of the update inside it."""
+    import io
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr("Patch.txt", "readme")
+        z.writestr("Scarface.exe", exe)
+    path.write_bytes(b"MZ" + b"\0" * 4000 + buf.getvalue())
+    return path
+
+
+def test_portal_start_takes_scarface_exe_out_of_the_patch(tmp_path, monkeypatch):
+    b = tmp_path / "binaries"
+    b.mkdir()
+    good = b"MZ the 1.00.2 game"
+    monkeypatch.setitem(gf.EXPECTED, "Scarface.exe", ((hashlib.sha256(good).hexdigest(),), "PC 1.00.2"))
+    monkeypatch.setattr(gf, "_installed_pc_exe", lambda: None)
+    fake_patch(b / "scarface_update_en_1001_1002.exe", good)
+    (b / "default.xbe").write_bytes(XBE)
+    (b / "game.xbe").write_bytes(PROTO)
+    logs = []
+    assert gf.startup(b, logs.append)
+    assert (b / "Scarface.exe").read_bytes() == good
+    logs.clear()
+    assert not gf.startup(b, logs.append) and logs == []        # done; nothing to say next time
+
+
+def test_a_wrong_scarface_exe_is_moved_aside_when_the_patch_has_the_right_one(tmp_path, monkeypatch):
+    b = tmp_path / "binaries"
+    b.mkdir()
+    good = b"MZ the 1.00.2 game"
+    monkeypatch.setitem(gf.EXPECTED, "Scarface.exe", ((hashlib.sha256(good).hexdigest(),), "PC 1.00.2"))
+    monkeypatch.setattr(gf, "_installed_pc_exe", lambda: None)
+    (b / "Scarface.exe").write_bytes(b"MZ unpatched 1.00")
+    fake_patch(b / "update.exe", good)
+    assert "right Scarface.exe inside" in gf.refusal(b / "Scarface.exe")
+    gf.startup(b, lambda m: None)
+    assert (b / "Scarface.exe").read_bytes() == good
+    assert (b / "Scarface.exe.not-used").read_bytes() == b"MZ unpatched 1.00"   # kept, never deleted
+
+
+def test_xbox_disc_in_a_7z_needs_nothing_installed(tmp_path, monkeypatch):
+    """The .7z is read by our own reader: no py7zr, no 7-Zip program."""
+    import shutil
+    import subprocess
+    seven = shutil.which("7z") or shutil.which("7za")
+    if not seven:
+        pytest.skip("the 7z program is needed to make the test archive")
+    b = tmp_path / "binaries"
+    b.mkdir()
+    (tmp_path / "Scarface - The World Is Yours (USA, Europe).iso").write_bytes(disc_image(base=0x40000))
+    subprocess.run([seven, "a", "-t7z", "-m0=LZMA", str(b / "Scarface (USA, Europe).7z"),
+                    str(tmp_path / "Scarface - The World Is Yours (USA, Europe).iso")], check=True, capture_output=True)
+    monkeypatch.setattr(gf, "_seven_zip_program", lambda: None)
+    monkeypatch.setattr(gf, "_py7zr", lambda: (_ for _ in ()).throw(RuntimeError("py7zr must not be needed")))
+    gf.startup(b, lambda m: None)
+    assert (b / "default.xbe").read_bytes() == XBE

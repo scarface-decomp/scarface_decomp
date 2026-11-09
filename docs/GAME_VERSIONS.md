@@ -16,7 +16,11 @@ against it doesn't count here. Everyone works on these files, and only these.
 Start with `default.xbe`: the whole Xbox game can be read, so almost all of the work is there.
 `Scarface.exe` is an optional extra for the PC-only functions (most of the PC file is encrypted, so
 only about 1,500 of its functions can be worked on), and `game.xbe` adds the prototype's. The portal
-also runs with only `Scarface.exe`, but then there is much less to do. To check yours, start the portal, or run
+also runs with only `Scarface.exe`, but then there is much less to do.
+
+You don't need the files on their own: the portal also takes them out of the downloads they came in,
+including `Scarface.exe` 1.00.2 from the official 1.00.2 patch, which carries the whole file (see
+[binaries/README.md](../binaries/README.md)). To check yours, start the portal, or run
 `python portal/tools/game_files.py`, or in PowerShell: `Get-FileHash binaries\default.xbe`.
 
 ## Not accepted

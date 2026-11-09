@@ -2898,7 +2898,7 @@
       const empty = document.createElement('div');
       empty.className = 'script-list-empty';
       empty.textContent = SCRIPT_FILES.length ? 'No scripts match.'
-        : 'No script files yet. Copy them out of your game with: python portal/scripts/extract_scripts.py (see docs/SCRIPTS.md), or load one file above.';
+        : 'No script files yet. Put the game (or its download: the .7z, .zip or .iso) in the binaries folder and start the portal again: it copies the scripts out by itself. Or load one file above.';
       list.appendChild(empty);
       return;
     }

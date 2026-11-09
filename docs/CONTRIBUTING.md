@@ -36,7 +36,24 @@ may come from and how AI tools may be used.
 No compiler installed, or it's acting up? You can still do steps 1 to 4 with decomp.me. Post the 100% decomp.me link in a
 GitHub issue and a maintainer verifies it with the portal and credits you.
 
-Maintainers (`SCARFACE_MAINTAINERS`) publish verified work with **Sync Verified to GitHub**.
+Maintainers (`SCARFACE_MAINTAINERS`) publish verified work with **Sync Verified to GitHub**. It needs
+a folder that git knows about, made with `git clone`.
+
+### Downloaded the ZIP?
+
+A ZIP download has no `.git` folder, so the Sync button can't push from it. To connect it once, open a
+terminal (PowerShell on Windows) in the project folder and run:
+
+```bash
+git init -b main
+git remote add origin https://github.com/scarface-decomp/scarface_decomp.git
+git fetch origin
+git reset origin/main
+git branch --set-upstream-to=origin/main
+```
+
+`git reset origin/main` leaves your files exactly as they are; afterwards `git status` lists only what
+you changed. Do this with a fresh download: files older than GitHub's would show up as changes.
 
 ## Without the portal
 

@@ -49,6 +49,8 @@ from disasm_synth import disassemble, synthesize_cpp  # noqa: E402
 import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
+sys.path.insert(0, str(PORTAL_DIR / "scripts"))
+import extract_scripts as ES  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 
@@ -850,12 +852,26 @@ GIT_PATHS = ["reconstructed_src", "reports/verified_registry.json", "reports/rev
              "reports/decomp_audit_log.json", "reports/progress.json", "README.md"]
 
 
-def git_sync(user: str) -> dict:
+NOT_A_CLONE = ("This folder isn't connected to GitHub: it was downloaded as a ZIP, so it has no .git folder. "
+               "Connect it once with the commands under \"Downloaded the ZIP?\" in docs/CONTRIBUTING.md, "
+               "then press Sync again.")
+PUSH_BEHIND = ("Saved here, but GitHub has newer changes than this folder. Run \"git pull\" in the project "
+               "folder, then press Sync again.")
+
+
+def _same_folder(a: str, b: Path) -> bool:
+    return os.path.normcase(os.path.realpath(a)) == os.path.normcase(os.path.realpath(str(b)))
+
+
+def git_sync(user: str, base: Path = BASE_DIR) -> dict:
     def run(args, timeout=120):
-        p = subprocess.run(["git"] + args, cwd=BASE_DIR, capture_output=True, text=True, timeout=timeout)
+        p = subprocess.run(["git"] + args, cwd=base, capture_output=True, text=True, timeout=timeout)
         return p.returncode, (p.stdout + p.stderr).strip()
     try:
-        rc, out = run(["add", "--"] + [p for p in GIT_PATHS if (BASE_DIR / p).exists()])
+        rc, top = run(["rev-parse", "--show-toplevel"])
+        if rc or not _same_folder(top, base):       # no .git here (a ZIP download), or a folder inside another repo
+            return {"ok": False, "error": NOT_A_CLONE}
+        rc, out = run(["add", "--"] + [p for p in GIT_PATHS if (base / p).exists()])
         if rc:
             return {"ok": False, "error": "git add failed: " + out[-400:]}
         rc, out = run(["diff", "--cached", "--quiet"])
@@ -866,6 +882,8 @@ def git_sync(user: str) -> dict:
         if rc:
             return {"ok": False, "error": "git commit failed: " + out[-400:]}
         rc, out = run(["push"], timeout=300)
+        if rc and ("fetch first" in out or "non-fast-forward" in out):
+            return {"ok": False, "error": PUSH_BEHIND}
         if rc:
             return {"ok": False, "error": "Committed locally, but git push failed: " + out[-400:]}
         return {"ok": True, "message": f"Pushed {n} verified functions to GitHub."}
@@ -1358,6 +1376,10 @@ def main() -> None:
     load_registry()
     if not GF.startup(BASE_DIR / "binaries"):
         GF.pc_help(BASE_DIR / "binaries")
+    try:
+        ES.auto_extract(BASE_DIR / "binaries")          # the game's scripts, for the Game Scripts tab
+    except Exception as e:  # noqa: BLE001 - the scripts are a bonus; never stop the portal over them
+        print(f"[!] Could not copy the game's scripts out: {e}")
     load_tasks()
     if not MV.find_msvc71_bin():
         print("[!] The 2003 compiler is not installed yet. You can still browse functions and use decomp.me;")
