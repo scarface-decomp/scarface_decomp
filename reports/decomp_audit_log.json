@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "time": "2026-11-09 07:59:06",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "7 look-alike(s) of sub_006DEDF0",
+    "va": "PC 0x006DEDF0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-09 07:59:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_006DEDF0",
+    "va": "PC 0x006DEDF0",
+    "bytes": "1/1 B"
+  }
+]
