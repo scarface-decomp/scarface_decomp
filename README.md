@@ -98,7 +98,9 @@ From your own `VCToolkitSetup.exe` (Visual C++ Toolkit 2003; Microsoft no longer
 python portal/scripts/setup_msvc71.py path/to/VCToolkitSetup.exe
 ```
 
-This installs `cl.exe` 13.10.3052 with its headers and libraries into `portal/tools/msvc71/`. On Windows it
+This installs the compiler with its headers and libraries into `portal/tools/msvc71/`. Either release of the
+Toolkit works: 1.0 (`cl.exe` 13.10.3052) or 1.01 (13.10.3077), which Microsoft only renumbered. The script says
+which one you have, and every verified match records it. On Windows it
 runs natively. On Linux and macOS it runs under Wine with a 32-bit prefix, for example
 `export WINEPREFIX=$HOME/.wine32 WINEARCH=win32 WINEDEBUG=-all` (extraction needs `msitools`).
 Set `SCARFACE_MSVC_BIN` to use a compiler somewhere else. The Toolkit is not redistributable, so
@@ -125,7 +127,7 @@ your code, verifies it on each look-alike and credits you for every exact match
 | `SCARFACE_NO_BROWSER` | unset | `1` stops it opening a browser |
 | `SCARFACE_DECOMPME_URL` | `https://decomp.me` | where the decomp.me button sends functions |
 | `SCARFACE_LOOKALIKE_MAX` | `1000` | how many look-alikes a new match is tried on |
-| `SCARFACE_MSVC_BIN` | `portal/tools/msvc71/bin` | where `cl.exe` 13.10.3052 is, if not there |
+| `SCARFACE_MSVC_BIN` | `portal/tools/msvc71/bin` | where `cl.exe` (13.10.3052 or 13.10.3077) is, if not there |
 
 **From the command line**, with the same rules:
 

@@ -23,6 +23,12 @@ executable, `.rdata` and `.data` included.
 * `cl.exe` **13.10.3052** (Microsoft Visual C++ Toolkit 2003, MSVC 7.1). The game's PE header says
   linker 7.10 and it imports `MSVCR71.dll`. Before the 2026-11-08 reset, all 1,036 functions verified
   then matched with 13.10.3052.
+* **Toolkit 1.01 (`cl.exe` 13.10.3077) is accepted too.** Microsoft released it in July 2004 to match the
+  build number of Visual Studio .NET 2003 and says it has no compilation-related behaviour changes from 1.0.
+  On 450 game functions (small and large), both builds gave the same result for every one. Each registry
+  entry records the build that verified it (`compiler`), so a difference can be traced if one ever appears.
+  Later compilers (Visual Studio .NET 2003 SP1's 13.10.6030, Visual C++ 2005 and newer) are refused by
+  `setup_msvc71.py`.
 * **Open question for the Xbox build.** `default.xbe` lists XDK 5849 libraries. The
   [Halo 2 decompilation](https://github.com/kirklandsig/halo2-decompiled), built with the same XDK,
   reports that its compiler is `cl` 13.10.3077 and that the game used `/LTCG` with `/O1` or `/O2` per

@@ -13,7 +13,7 @@ authors are credited in the commit history. Thank you.
 ## Tools and references
 
 * [Capstone](https://www.capstone-engine.org/) disassembler, used for function sizing and checks.
-* The Microsoft Visual C++ Toolkit 2003 (cl.exe 13.10.3052), which each contributor supplies.
+* The Microsoft Visual C++ Toolkit 2003 (cl.exe 13.10.3052 or 13.10.3077), which each contributor supplies.
 * Prior matching-decompilation projects whose methods informed this one, among them
   [fnv_decomp](https://github.com/momusdigital/fnv_decomp) (Fallout: New Vegas, MSVC),
   the [Halo 2 decompilation](https://github.com/kirklandsig/halo2-decompiled) (Xbox, MSVC 7.1) and

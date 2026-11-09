@@ -96,6 +96,27 @@ def compiler_version(bin_dir: Optional[Path] = None) -> str:
         return f"error: {e}"
 
 
+# The two releases of the Visual C++ Toolkit 2003. Microsoft: 1.01 only renumbered the compiler to match
+# Visual Studio .NET 2003, "no compilation-related behavior changes" (checked here on 450 game functions).
+TOOLKIT_BUILDS = {
+    "13.10.3052": "Visual C++ Toolkit 2003 1.0 (April 2004)",
+    "13.10.3077": "Visual C++ Toolkit 2003 1.01 (July 2004)",
+}
+_BUILD_CACHE: dict = {}
+
+
+def compiler_build(bin_dir: Optional[Path] = None) -> str:
+    """'13.10.3052' or '13.10.3077' (or whatever cl.exe reports; '' when there is none). Cached per folder."""
+    bin_dir = bin_dir or find_msvc71_bin()
+    if not bin_dir:
+        return ""
+    key = str(bin_dir)
+    if key not in _BUILD_CACHE:
+        m = re.search(r"Version (\d+\.\d+\.\d+)", compiler_version(bin_dir))
+        _BUILD_CACHE[key] = m.group(1) if m else ""
+    return _BUILD_CACHE[key]
+
+
 def _env(bin_dir: Path, include_dirs: Sequence[Path]) -> dict:
     env = os.environ.copy()
     env["PATH"] = str(bin_dir) + os.pathsep + env.get("PATH", "")

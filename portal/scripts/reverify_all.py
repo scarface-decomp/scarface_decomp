@@ -39,8 +39,8 @@ PORTAL = Path(__file__).resolve().parent.parent      # portal/
 ROOT = PORTAL.parent                                  # the project folder
 sys.path.insert(0, str(PORTAL / "tools"))
 
-from msvc_verify import (CoffObject, compare_function, compile_cpp, compiler_version,  # noqa: E402
-                         decorated_hint, find_msvc71_bin, select_function)
+from msvc_verify import (CoffObject, compare_function, compile_cpp, compiler_build,  # noqa: E402
+                         compiler_version, decorated_hint, find_msvc71_bin, select_function)
 from sf_binaries import BinaryImage, collect_call_targets, function_extent  # noqa: E402
 from queue_builder import PC_PLAINTEXT  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
@@ -414,6 +414,7 @@ def main() -> int:
         print("cl.exe not found in portal/tools/msvc71/bin", file=sys.stderr)
         return 2
     version = compiler_version()
+    build = compiler_build()
     print("Compiler:", version)
     T = Targets()
     print("Binaries:", ", ".join(f"{k}={v.path.name} ({v.sha256[:12]})" for k, v in T.images.items()))
@@ -516,7 +517,7 @@ def main() -> int:
             registry["entries"][k] = {
                 "bin": c.bin, "va": f"0x{c.va:08X}", "size": c.size, "symbol": c.symbol, "match": c.match,
                 "flags": c.flags, "source": c.source, "verified_by": c.attributed_to or "",
-                **c.extra, "reverified_at": now, "code": c.code or "", "note": c.detail,
+                **c.extra, "reverified_at": now, "compiler": build, "code": c.code or "", "note": c.detail,
             }
             if c.kind == "tu":
                 registry["entries"][k]["excerpt"] = True

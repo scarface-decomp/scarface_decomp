@@ -156,6 +156,13 @@ def compiler_version() -> str:
     return _COMPILER["v"]
 
 
+def compiler_build() -> str:
+    """'13.10.3052' or '13.10.3077': stored with each match, so a match made with either Toolkit release
+    can be told apart later."""
+    m = re.search(r"Version (\d+\.\d+\.\d+)", compiler_version())
+    return m.group(1) if m else ""
+
+
 # =========================================================================== #
 # Contributor handles + PINs (private/contributor_tokens.json, never committed)
 # =========================================================================== #
@@ -585,7 +592,7 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, por
         "bin": t["bin"], "va": f"0x{t['fva_int']:08X}", "size": int(t["size"]), "symbol": t["symbol"],
         "match": t.get("match_substr", ""),
         "flags": res.get("flags") or t["flags"], "source": "portal", "verified_by": user, "tool_used": tool,
-        "verified_at": stamp(), "code": cpp_code.strip(),
+        "verified_at": stamp(), "compiler": compiler_build(), "code": cpp_code.strip(),
         "note": f"{res.get('reloc_unverified', 0)} external relocation(s) unchecked" if res.get("reloc_unverified") else "",
     }
     if ported_from:

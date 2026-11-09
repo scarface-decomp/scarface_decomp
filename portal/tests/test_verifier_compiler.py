@@ -16,7 +16,8 @@ def compiled(src, match="", flags=FLAGS):
 
 
 def test_compiler_version():
-    assert "13.10.3052" in MV.compiler_version()
+    assert MV.compiler_build() in MV.TOOLKIT_BUILDS       # Toolkit 1.0 (13.10.3052) or 1.01 (13.10.3077)
+    assert MV.compiler_build() in MV.compiler_version()
 
 
 def test_identical_bytes_are_exact():

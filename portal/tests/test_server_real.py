@@ -204,6 +204,7 @@ def test_exact_match_is_recorded(portal):
     reg = json.loads((work / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
     e = reg["entries"][KEY]
     assert e["verified_by"] == "Alice" and e["source"] == "portal" and e["code"] == GOOD and e["match"] == "sub_001CDC80"
+    assert e["compiler"] in ("13.10.3052", "13.10.3077")      # which Toolkit release made the match
     out = (work / "reconstructed_src" / "Original_Binary_Order_Xbox.cpp").read_text(encoding="utf-8")
     assert "By: Alice" in out
     _, again = post(portal, "/api/claim", {**BOB, "id": TID})
@@ -292,6 +293,7 @@ def test_reverify_keeps_portal_entries(portal):
     assert r.returncode == 0, r.stdout[-2000:] + r.stderr[-2000:]
     reg = json.loads((work / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
     assert reg["entries"][KEY]["verified_by"] == "Alice"
+    assert reg["entries"][KEY]["compiler"] in ("13.10.3052", "13.10.3077")
 
 
 def test_page_against_real_server(portal):

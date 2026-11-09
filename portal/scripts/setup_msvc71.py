@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
-Install the Visual C++ Toolkit 2003 compiler (cl.exe 13.10.3052) into portal/tools/msvc71/ from the
-installer you already have, including the CRT/STL headers (include/) and libraries (lib/) that the
-old manual unpack left out.
+Install the Visual C++ Toolkit 2003 compiler into portal/tools/msvc71/ from the installer you already have,
+including the CRT/STL headers (include/) and libraries (lib/) that the old manual unpack left out.
+
+Both releases of the Toolkit work: 1.0 (cl.exe 13.10.3052) and 1.01 (cl.exe 13.10.3077). Microsoft only
+renumbered the compiler in 1.01, with no change to the code it generates. Each verified match records which
+one was used. Anything else (a later Visual Studio compiler, say) is refused: it makes different code.
 
     python portal/scripts/setup_msvc71.py source_archives/VCToolkitSetup.exe
 
@@ -85,6 +88,22 @@ def unpack_msi(msi: Path, out_dir: Path) -> Path:
     return hits[0].parent.parent                  # .../Microsoft Visual C++ Toolkit 2003
 
 
+TOOLKIT_BUILDS = {
+    "13.10.3052": "Visual C++ Toolkit 2003 1.0 (April 2004)",
+    "13.10.3077": "Visual C++ Toolkit 2003 1.01 (July 2004), same code generation as 1.0",
+}
+
+
+def file_version(path: Path) -> str:
+    """'13.10.3052' from the version resource of a Windows program, without running it."""
+    data = path.read_bytes()
+    i = data.find(b"\xBD\x04\xEF\xFE")                 # VS_FIXEDFILEINFO signature
+    if i < 0:
+        return ""
+    ms, ls = struct.unpack_from("<II", data, i + 8)
+    return f"{ms >> 16}.{ms & 0xFFFF}.{ls >> 16}"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("installer", nargs="?", default=str(ROOT / "source_archives" / "VCToolkitSetup.exe"))
@@ -96,6 +115,11 @@ def main() -> int:
         tmp = Path(tmp)
         msi = extract_msi(exe, tmp)
         tk = unpack_msi(msi, tmp)
+        build = file_version(tk / "bin" / "cl.exe")
+        if build not in TOOLKIT_BUILDS:
+            raise SystemExit(f"This installer's cl.exe is version {build or 'unknown'}, not the Visual C++ Toolkit 2003 "
+                             "(13.10.3052 or 13.10.3077). The game was built with that compiler; others make different code.")
+        print(f"cl.exe {build}: {TOOLKIT_BUILDS[build]}")
         DEST.mkdir(parents=True, exist_ok=True)
         for sub in ("bin", "include", "lib"):
             src = tk / sub
