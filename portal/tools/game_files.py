@@ -286,6 +286,33 @@ def _find_in_root(root: bytes, name: str) -> Optional[Tuple[int, int]]:
     return None
 
 
+# The PS2 disc is plain ISO 9660: its volume descriptor is at sector 16 and CEMENT.RCF sits in the root.
+ISO_PVD = 16 * SECTOR
+
+
+def _iso_root(desc: bytes) -> Optional[Tuple[int, int]]:
+    """Root directory (sector, size) from an ISO 9660 primary volume descriptor, or None."""
+    if len(desc) < 190 or desc[0] != 1 or desc[1:6] != b"CD001":
+        return None
+    return struct.unpack_from("<I", desc, 158)[0], struct.unpack_from("<I", desc, 166)[0]
+
+
+def _iso_find(table: bytes, name: str) -> Optional[Tuple[int, int]]:
+    """(sector, size) of a file in one ISO 9660 directory ("CEMENT.RCF;1" matches "cement.rcf")."""
+    pos = 0
+    while pos + 33 <= len(table):
+        n = table[pos]
+        if n == 0:                                    # records never cross a sector: skip to the next one
+            pos = (pos // SECTOR + 1) * SECTOR
+            continue
+        flags, nlen = table[pos + 25], table[pos + 32]
+        entry = table[pos + 33:pos + 33 + nlen].decode("latin-1").split(";")[0]
+        if not flags & 2 and entry.lower() == name.lower():
+            return struct.unpack_from("<I", table, pos + 2)[0], struct.unpack_from("<I", table, pos + 10)[0]
+        pos += n
+    return None
+
+
 def read_from_disc_file(path: Path, name: str = "default.xbe") -> Optional[bytes]:
     """Read one file from the root of an Xbox disc image on disk (random access, fast)."""
     with open(path, "rb") as f:
@@ -306,8 +333,9 @@ def read_from_disc_file(path: Path, name: str = "default.xbe") -> Optional[bytes
 
 class DiscStream:
     """
-    Takes an Xbox disc image as a stream of chunks, in order, and keeps only what is needed to read
-    one file from it: the volume descriptor, the root directory, then the file. Raises _Done as soon
+    Takes a disc image as a stream of chunks, in order, and keeps only what is needed to read one file
+    from its root: the volume descriptor, the root directory, then the file. Xbox images (XDVDFS) and
+    ISO 9660 images (the PS2 disc) both work. Raises _Done as soon
     as there is nothing left to wait for. If the directory or the file sits earlier in the image than
     the part that says where it is, `missed` is set and another pass, started with `known`, picks it
     up (at most three passes, and real discs need one).
@@ -327,7 +355,10 @@ class DiscStream:
             self._want("file", *self.known["file"])
         elif "root" in self.known:
             self._want("root", *self.known["root"])
+        elif "isoroot" in self.known:
+            self._want("isoroot", *self.known["isoroot"])
         else:
+            self._want("vdiso", ISO_PVD, ISO_PVD + SECTOR)
             for base in XDVDFS_BASES:
                 self._want(f"vd{base}", base + 32 * SECTOR, base + 33 * SECTOR)
 
@@ -365,7 +396,17 @@ class DiscStream:
             raise _Done()
 
     def _complete(self, label: str, data: bytes) -> None:
-        if label.startswith("vd"):
+        if label == "vdiso":
+            # Xbox images start with an ISO 9660 video partition too; its root just won't have the file,
+            # so the XDVDFS search goes on alongside.
+            root = _iso_root(data)
+            if root:
+                self._want("isoroot", root[0] * SECTOR, root[0] * SECTOR + root[1])
+        elif label == "isoroot":
+            hit = _iso_find(data, self.name)
+            if hit:
+                self._want("file", hit[0] * SECTOR, hit[0] * SECTOR + hit[1])
+        elif label.startswith("vd"):
             vol = _volume(data)
             if vol:
                 base = int(label[2:])

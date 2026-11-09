@@ -42,9 +42,14 @@ naming classes and documenting the engine. You don't need to be an expert: the p
 function at a time, shows the original bytes and disassembly, and tells you exactly how close your
 C++ is. See [CONTRIBUTING.md](docs/CONTRIBUTING.md) to get started.
 
-**PS2 or Wii?** Those versions aren't in the portal yet, and anyone who wants to start a PS2 (or Wii)
-decomp is welcome to. The PS2 version has things the PC lacks, such as its own blood effects and
-explosion sounds. What we know so far and what it would take: [docs/OTHER_VERSIONS.md](docs/OTHER_VERSIONS.md).
+**Game scripts:** all 635 of the game's compiled TorqueScript files (the same on PS2, Xbox and PC) and all
+864 of the April 2006 prototype's decompile to readable TorqueScript that compiles back to the identical
+file. See [docs/SCRIPTS.md](docs/SCRIPTS.md); the portal's Game Scripts tab shows them.
+
+**PS2 or Wii?** Their scripts are covered above. Their C++ isn't in the portal yet: it was built with other
+compilers, and anyone who wants to start a PS2 (or Wii) decomp is welcome to. The PS2 version has things the
+PC lacks, such as its own blood effects and explosion sounds. What we know so far and what it would take:
+[docs/OTHER_VERSIONS.md](docs/OTHER_VERSIONS.md).
 
 ## What "verified" means
 

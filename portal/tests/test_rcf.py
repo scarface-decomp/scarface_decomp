@@ -212,3 +212,18 @@ def test_archives_are_closed_before_the_temporary_folder_goes(tmp_path, monkeypa
     assert mod.extract(src, tmp_path / "xbox") == 3          # the three script files in FILES
     assert opened and not removed_while_open
     assert all(a.f.closed for a in opened)
+
+
+def test_extract_scripts_from_a_packed_ps2_disc_image(tmp_path, monkeypatch):
+    """The PS2 disc (ISO 9660, CEMENT.RCF in its root) inside a .7z/.zip is read the same way as the
+    Xbox one: streamed, without unpacking the image."""
+    import zipfile
+    import game_files as gf
+    monkeypatch.setattr(gf, "MIN_DISC_IMAGE", 1)
+    mod = _extract_mod()
+    src = tmp_path / "Scarface - The World Is Yours (ps2).zip"
+    with zipfile.ZipFile(src, "w") as z:
+        z.writestr("Scarface - The World Is Yours (USA).iso", tiny_iso(R.build_rcf(FILES)))
+    assert mod.guess_version(src) == "ps2"
+    assert mod.extract(src, tmp_path / "ps2") == 3
+    assert (tmp_path / "ps2" / "scriptc" / "ai" / "gang.dso").read_bytes() == FILES[1][1]

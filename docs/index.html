@@ -170,6 +170,8 @@
     .build-row .sub { grid-column: 1 / -1; color: var(--grey); font-size: 0.9rem; }
     .build-row.extra .name, .build-row.extra .pct { color: var(--grey); }
     .tube > span.full { width: 100%; }
+    #ps2-row .pct { font-size: 1.15rem; font-weight: 400; }
+    .build-row .sub a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     .side + .side { margin-top: 44px; }
     .side p { color: var(--grey); font-size: 0.94rem; margin-bottom: 14px; }
     .buckets { display: grid; gap: 9px; }
@@ -383,6 +385,16 @@
               <div class="pct" id="proto-big">…</div>
               <div class="tube"><span id="proto-bar"></span></div>
               <div class="sub" id="proto-sub"></div>
+            </div>
+            <div class="build-row extra" id="ps2-row">
+              <div class="name">PlayStation 2 <span>SLUS_211.11, open for anyone to start</span></div>
+              <div class="pct">Not started</div>
+              <div class="tube"><span></span></div>
+              <div class="sub">It has things the PC lacks, like its blood effects and its own explosion sounds. Its scripts
+                are already done (below); its C++ was built with a different compiler (Metrowerks CodeWarrior), so it needs
+                a setup of its own. Anyone can start it:
+                <a data-repo-link="/blob/main/docs/OTHER_VERSIONS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/OTHER_VERSIONS.md" target="_blank" rel="noopener noreferrer">what it would take</a>,
+                or say hi on <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>.</div>
             </div>
             <div class="build-row" id="scripts-row">
               <div class="name">Game scripts <span>same files on PS2, Xbox and PC</span></div>
