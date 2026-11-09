@@ -5,6 +5,7 @@ Generate the browsable source views from reports/verified_registry.json:
   reconstructed_src/Original_Binary_Order_PC_1002.cpp   every PC function, ascending address
   reconstructed_src/Original_Binary_Order_Xbox.cpp       every Xbox function, ascending address
   reconstructed_src/Original_Binary_Order_Proto.cpp      every function of the April 2006 prototype
+  reconstructed_src/Original_Binary_Order_PS2.cpp        every function of the PS2 game (SLUS_211.11)
   reconstructed_src/pc/<subsystem>/<Class>.cpp           the matched code grouped by class
   reconstructed_src/xbox/<subsystem>/<Class>.cpp
 
@@ -29,7 +30,10 @@ BIN_INFO = {
     "pc": ("Original_Binary_Order_PC_1002.cpp", "pc", "Retail PC Scarface.exe v1.00.2"),
     "xb": ("Original_Binary_Order_Xbox.cpp", "xbox", "Retail Xbox default.xbe"),
     "proto": ("Original_Binary_Order_Proto.cpp", "proto", "April 2006 prototype game.xbe"),
+    "ps2": ("Original_Binary_Order_PS2.cpp", "ps2", "Retail PS2 SLUS_211.11"),
 }
+# The PS2 game has its own compiler; everything else was built with Visual C++ 2003.
+BIN_COMPILER = {"ps2": "Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly)"}
 
 
 def classify_subsystem_and_class(sym: str):
@@ -123,6 +127,7 @@ def status_block(registry: dict) -> str:
     by = defaultdict(int)
     for e in entries:
         by[e["bin"]] += 1
+    entries = [e for e in entries if e["bin"] != "ps2"]           # the sizes below are x86 bytes
     small = sum(1 for e in entries if int(e.get("size", 0)) < 10)
     largest = max((int(e.get("size", 0)) for e in entries), default=0)
     lines = [
@@ -132,7 +137,8 @@ def status_block(registry: dict) -> str:
         f"| Verified functions | {by['xb']:,} | {by['pc']:,} | **{by['pc'] + by['xb']:,}** |",
         "",
     ] + ([f"Plus {by['proto']:,} in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.", ""]
-         if by["proto"] else []) + [
+         if by["proto"] else []) + ([f"Plus {by['ps2']:,} in the PS2 game (`SLUS_211.11`), built with its own compiler, counted on its own.", ""]
+         if by["ps2"] else []) + [
         (f"{small:,} of them are under 10 bytes and the largest is {largest:,} bytes, so the medium and large "
          "functions are where the work is." if entries else
          "Nothing is verified yet: the count was reset on 2026-11-08 so every function is rebuilt and checked "
@@ -176,11 +182,12 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         "schema": "scarface_progress_v1",
         "updated_at": max(stamps) if stamps else (registry.get("reset") or {}).get("at", ""),
         "compiler": registry.get("compiler", ""),
-        # "total" and "bytes" are the released game (PC + Xbox); the April 2006 prototype (unreleased code) is
-        # counted only under "proto".
-        "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "total": by["pc"] + by["xb"],
-                     "bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] != "proto")},
-        "size_buckets": {name: sum(1 for e in entries if e["bin"] != "proto" and lo <= int(e.get("size", 0)) < hi)
+        # "total" and "bytes" are the released game on PC + Xbox (one compiler); the April 2006 prototype
+        # (unreleased code) and the PS2 game (another compiler) are counted only under "proto" and "ps2".
+        "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "ps2": by["ps2"], "total": by["pc"] + by["xb"],
+                     "bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] in ("pc", "xb")),
+                     "ps2_bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] == "ps2")},
+        "size_buckets": {name: sum(1 for e in entries if e["bin"] in ("pc", "xb") and lo <= int(e.get("size", 0)) < hi)
                          for name, lo, hi in SIZE_BUCKETS},
         "contributors": dict(sorted(contributors.items(), key=lambda kv: (-kv[1], kv[0].lower()))),
         "unattributed": sum(1 for e in entries if not e.get("verified_by")),
@@ -192,9 +199,9 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         tiers = defaultdict(int)
         for t in open_tasks:
             q[t.get("bin", "?")] += 1
-            if t.get("bin") != "proto":
+            if t.get("bin") in ("pc", "xb"):
                 tiers[t.get("tier", "?")] += 1
-        out["queue"] = {"pc": q["pc"], "xb": q["xb"], "proto": q["proto"], "total": q["pc"] + q["xb"],
+        out["queue"] = {"pc": q["pc"], "xb": q["xb"], "proto": q["proto"], "ps2": q["ps2"], "total": q["pc"] + q["xb"],
                         "tiers": dict(sorted(tiers.items()))}
     return out
 
@@ -279,15 +286,16 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
         allfn = known.get(b)
         if not items and not allfn and not (recon_dir / fname).exists():
             continue
+        comp = BIN_COMPILER.get(b, compiler)
         if allfn:
             done = {va for va, _, _ in items}
             total = len(set(allfn) | done)
-            text = _header(f"{label}, {FULL_LISTING}", compiler, _progress_lines(len(items), total))
+            text = _header(f"{label}, {FULL_LISTING}", comp, _progress_lines(len(items), total))
             rows = sorted([(va, 0, k, e) for va, k, e in items] + [(va, 1, "", t) for va, t in allfn.items() if va not in done],
                           key=lambda r: (r[0], r[1]))
             text += "".join(_block(k, x) if kind == 0 else _todo(va, x) for va, kind, k, x in rows)
         else:
-            text = _header(f"{label}, verified functions in address order ({len(items)})", compiler)
+            text = _header(f"{label}, verified functions in address order ({len(items)})", comp)
             text += "".join(_block(k, e) for _, k, e in items)
         _write(recon_dir / fname, text)
         written.append(fname)
@@ -299,7 +307,7 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
         for (sub, cls), lst in groups.items():
             rel = Path(folder) / sub / f"{cls}.cpp"
             of = class_total.get((b, sub, cls), 0)
-            body = _header(f"{label}, {sub}/{cls}.cpp ({len(lst)} verified)", compiler,
+            body = _header(f"{label}, {sub}/{cls}.cpp ({len(lst)} verified)", comp,
                            _progress_lines(len(lst), max(of, len(lst)), fname) if of else "")
             body += "".join(_block(k, e) for _, k, e in sorted(lst))
             _write(recon_dir / rel, body)
@@ -309,7 +317,7 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
         if gen_root.exists():
             for p in gen_root.rglob("*.cpp"):
                 if p.resolve() not in keep and p.read_text(encoding="utf-8", errors="ignore").find("GENERATED from reports/verified_registry.json") != -1:
-                    _write(p, _header(f"{label}, {p.relative_to(recon_dir)} (0 verified)", compiler))
+                    _write(p, _header(f"{label}, {p.relative_to(recon_dir)} (0 verified)", comp))
     if update_readme(recon_dir.parent / "README.md", registry):
         written.append("../README.md")
     if write_progress(registry, recon_dir.parent / "reports"):

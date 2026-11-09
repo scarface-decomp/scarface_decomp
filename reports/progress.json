@@ -6,8 +6,10 @@
     "pc": 8,
     "xb": 0,
     "proto": 0,
+    "ps2": 0,
     "total": 8,
-    "bytes": 8
+    "bytes": 8,
+    "ps2_bytes": 0
   },
   "size_buckets": {
     "1-9 B": 8,
@@ -24,6 +26,7 @@
     "pc": 1516,
     "xb": 19534,
     "proto": 17904,
+    "ps2": 23567,
     "total": 21050,
     "tiers": {
       "TIER_1_QUICK": 3716,

@@ -940,6 +940,7 @@
                   <option value="ALL">Everything</option>
                   <option value="Shared Engine">Xbox game (most of the work)</option>
                   <option value="PC Scarface.exe">PC game</option>
+                  <option value="PS2 SLUS_211.11">PS2 game (its own compiler, checked through decomp.me)</option>
                   <option value="Xbox Prototype">Prototype: code not in the released game</option>
                   <option value="class not in retail">Prototype: classes cut from the game</option>
                   <option value="PROTO_IN_RETAIL" title="Left out of the other lists: the same code is matched along with retail, and the rest are older versions of retail functions">Prototype: also in the released game</option>
@@ -1648,6 +1649,7 @@
     const bb = prog.by_binary;
     $('live-by-binary').textContent = bb
       ? 'PC ' + fmtInt(bb.pc) + ' · Xbox ' + fmtInt(bb.xbox) +
+        (prog.ps2 && Number(prog.ps2.total) > 0 ? ' · PS2 ' + fmtInt(prog.ps2.matched) + '/' + fmtInt(prog.ps2.total) : '') +
         (prog.prototype && Number(prog.prototype.total) > 0 ? ' · Prototype ' + fmtInt(prog.prototype.matched) + '/' + fmtInt(prog.prototype.total) + ' (unreleased code)' : '') +
         (prog.matched_bytes ? ' · ' + fmtInt(prog.matched_bytes) + ' bytes' : '') + (prog.compiler ? ' · ' + compilerLabel(prog.compiler) : '')
       : '';
@@ -2415,7 +2417,8 @@
     LS.set('sf_last_task', t.id);
 
     $('wb-title').textContent = t.symbol + ' (' + t.va + ', ' + t.size + ' B) — [' + t.status + ']';
-    $('wb-meta').textContent = [t.tier_label, t.est_label ? 'Est: ' + t.est_label : '', t.flags ? 'Compiler Flags: ' + t.flags : '']
+    $('wb-meta').textContent = [t.tier_label, t.est_label ? 'Est: ' + t.est_label : '',
+      t.compiler_label ? 'Compiler: ' + t.compiler_label : (t.flags ? 'Compiler Flags: ' + t.flags : '')]
       .filter(Boolean).join(' • ');
     $('wb-hint').textContent = [t.hint || '', lookalikeNote(t)].filter(Boolean).join(' ');
     $('wb-target-hex').textContent = t.target_hex || '';
@@ -2490,6 +2493,17 @@
   }
 
   async function createScratchFromPage(prep) {
+    if (prep.json) {                                    // PS2: the target is assembly, sent as JSON
+      const r = await fetch(prep.api + '/api/scratch', { method: 'POST', body: JSON.stringify(prep.json),
+        headers: { 'Content-Type': 'application/json' }, credentials: 'omit' });
+      const d = await r.json();
+      if (!r.ok || !d || !/^[A-Za-z0-9_-]+$/.test(d.slug || '')) {
+        throw new Error((d && (d.detail || d.error)) || ('decomp.me answered HTTP ' + r.status));
+      }
+      const url = prep.api + '/scratch/' + d.slug;
+      return { ok: true, slug: d.slug, url: url,
+               claim_url: d.claim_token ? url + '/claim?token=' + encodeURIComponent(d.claim_token) : url };
+    }
     const fd = new FormData();
     Object.keys(prep.fields).forEach((k) => fd.append(k, prep.fields[k]));
     const bin = Uint8Array.from(atob(prep.obj_b64), (c) => c.charCodeAt(0));
@@ -2689,7 +2703,7 @@
     const ctrl = new AbortController();
     verifyAbortCtrl = ctrl;
     const cppCode = editorEl().value;
-    setStatus('Compiling with MSVC 7.10 cl.exe...', 'muted');
+    setStatus(t.bin === 'ps2' ? 'Compiling on decomp.me with the PS2 compiler (CodeWarrior)...' : 'Compiling with MSVC 7.10 cl.exe...', 'muted');
 
     try {
       // keep_revision: a hand-made compile of an already verified function may replace its saved text
@@ -2774,6 +2788,19 @@
 
   function buildAiPrompt(t, code, bestScore, history, feedback) {
     const disasmText = (Array.isArray(t.disasm_lines) ? t.disasm_lines : []).join(NL);
+    if (t.bin === 'ps2') {
+      return [
+        'Decompile this MIPS R5900 (PlayStation 2) function from Scarface: The World Is Yours (2006) into genuine, human-readable C++ that compiles byte-for-byte to the target with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me compiler ' + 'mwcps2-3.0.1b103-040528).',
+        'Function: ' + t.symbol + ' at ' + t.va + ' (' + t.size + ' bytes)',
+        'Compiler flags: ' + (t.flags || '-O3 -lang c++ -str readonly'),
+        'Name every called function and global after its address: extern "C" void func_XXXXXXXX(); extern int D_XXXXXXXX;',
+        'Target disassembly:' + NL + disasmText,
+        'Current best C++ (' + bestScore + '/' + t.size + ' bytes matched):' + NL + code,
+        history.length ? 'Previous attempts:' + NL + history.join(NL) : '',
+        feedback || '',
+        'RULES: Do not use asm, __asm__, or byte arrays. Write normal, readable C++ (classes, structs, methods, named members). Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block and nothing else.'
+      ].filter(Boolean).join(NL + NL);
+    }
     return [
       'Decompile this x86 function from Scarface: The World Is Yours (2006) into genuine, human-readable C++ that compiles byte-for-byte to the target with Microsoft Visual C++ 2003 (MSVC 7.1, cl.exe 13.10).',
       'Function: ' + t.symbol + ' at ' + t.va + ' (' + t.size + ' bytes)',
@@ -3406,7 +3433,7 @@
     const form = el('form', undefined, 'dl-form');
     form.addEventListener('submit', (e) => e.preventDefault());
     if (kind === 'functions') {
-      form.appendChild(picker('Game file', 'build', [['all', 'All game files'], ['xb', 'Xbox (most of the game)'], ['pc', 'PC'], ['proto', 'Xbox prototype (April 2006)']]));
+      form.appendChild(picker('Game file', 'build', [['all', 'All game files'], ['xb', 'Xbox (most of the game)'], ['pc', 'PC'], ['ps2', 'PS2'], ['proto', 'Xbox prototype (April 2006)']]));
     } else if (kind === 'scripts') {
       form.appendChild(picker('Version', 'version', [['all', 'All versions']].concat((SCRIPT_VERSIONS || []).map((v) => [v.id, v.label]))));
     }

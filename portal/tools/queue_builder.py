@@ -39,7 +39,11 @@ XB_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # verified and saved like the others, and counted on their own row. About half of them have the same
 # machine code as a retail Xbox function, so look-alike porting fills those in as retail is matched.
 LANES = {"pc": ("pc_", "PC Scarface.exe", "PC "), "xb": ("xb_", "Shared Engine & Gameplay", ""),
-         "proto": ("proto_", "Xbox Prototype (Apr 2006)", "Proto ")}
+         "proto": ("proto_", "Xbox Prototype (Apr 2006)", "Proto "),
+         "ps2": ("ps2_", "PS2 SLUS_211.11", "PS2 ")}
+# The PS2 game (SLUS_211.11) was built with Metrowerks CodeWarrior for PS2, not Visual C++: its functions are
+# compiled on decomp.me and compared here (portal/tools/ps2_verify.py, docs/PS2.md).
+PS2_FLAGS = "-O3 -lang c++ -str readonly"
 
 
 _BUILTIN = {"X": "void", "D": "char", "C": "signed char", "E": "unsigned char", "F": "short",
@@ -236,6 +240,8 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
         p = binaries.get(b)
         if not p or not Path(p).exists():
             continue
+        if b == "ps2":
+            continue                            # after the Xbox game: its functions name the PS2 ones
         img = images[b] = BinaryImage(p)
         calls = collect_call_targets(img)
         vt = vtable_methods(img)
@@ -313,8 +319,66 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                 t["hint"] += " This class is not in the retail game (cut or renamed before release)."
             t.update(tier(e.size))
             tasks.append(t)
+    p = binaries.get("ps2")
+    if p and Path(p).exists():
+        import ps2_binary
+        images["ps2"] = ps2_binary.Ps2Image(p)
+        tasks += ps2_tasks(images["ps2"], images.get("xb"), tasks, old_by_key, verified_keys,
+                           [int(v, 16) for v in (extra_starts or {}).get("ps2", [])], progress)
     lookalikes.annotate(tasks, images, progress=progress)
     return tasks
+
+
+def ps2_tasks(img, xbox_img, xbox_tasks: List[dict], old_by_key: Dict[str, dict], verified_keys: Set[str],
+              extra_starts: List[int], progress=None) -> List[dict]:
+    """The PS2 game's own functions (the GCC-built Sony libraries linked in are left out). Where a function
+    is the same as one in the Xbox game (portal/tools/ps2_pairing.py), it gets that function's name and a
+    pointer to it, so its C++ can be the starting point."""
+    import ps2_binary
+    funcs = ps2_binary.find_functions(img, extra_starts)
+    pairs = {}
+    if xbox_img is not None:
+        import ps2_pairing
+        if progress:
+            progress("ps2: pairing functions with the Xbox game")
+        pairs = ps2_pairing.pair(img, funcs, xbox_img, xbox_tasks, progress)
+    xbox_symbol = {t["fva_int"]: t["symbol"] for t in xbox_tasks if t.get("bin") == "xb"}
+    out = []
+    for va in sorted(funcs):
+        f = funcs[va]
+        if f.library or f.size < 4:
+            continue
+        key = f"ps2:0x{va:08X}"
+        if key in verified_keys:
+            continue
+        old = old_by_key.get(key, {})
+        pr = pairs.get(va)
+        sym = old.get("symbol") if old.get("symbol") and not old["symbol"].startswith("func_") else ""
+        if not sym and pr and pr.name:
+            sym = pr.name
+        if not sym and pr and pr.xbox_va is not None:
+            xs = xbox_symbol.get(pr.xbox_va, "")
+            sym = xs if "::" in xs else ""
+        sym = sym or ps2_binary.func_name(va)
+        hint = f.how[0].upper() + f.how[1:] + f"; {f.size} bytes"
+        if f.jump_table:
+            hint += "; contains a switch jump table"
+        hint += "."
+        if pr:
+            hint += f" Same function as {'Xbox 0x%08X' % pr.xbox_va if pr.xbox_va is not None else 'the one named here'}: {pr.why}."
+        t = {
+            "id": f"ps2_{va:08X}", "bin": "ps2", "lane": LANES["ps2"][1], "symbol": sym, "match_substr": "",
+            "va": f"PS2 0x{va:08X}", "fva_int": va, "size": f.size, "flags": PS2_FLAGS, "status": "UNCLAIMED",
+            "claimed_by": "", "hint": hint, "code_check": CODE_CHECK,
+        }
+        if pr and pr.xbox_va is not None:
+            t["xbox_twin"] = f"0x{pr.xbox_va:08X}"
+        t.update(tier(f.size))
+        out.append(t)
+    if progress:
+        named = sum(1 for t in out if not t["symbol"].startswith("func_"))
+        progress(f"ps2: {len(out):,} game functions ({named:,} named from the Xbox game)")
+    return out
 
 
 def main() -> int:
@@ -327,7 +391,7 @@ def main() -> int:
     out = Path(args.out)
     from game_files import refusal
     binaries = {}
-    for b, name in (("pc", "Scarface.exe"), ("xb", "default.xbe"), ("proto", "game.xbe")):
+    for b, name in (("pc", "Scarface.exe"), ("xb", "default.xbe"), ("proto", "game.xbe"), ("ps2", "SLUS_211.11")):
         p = root / "binaries" / name
         problem = refusal(p) if p.exists() else None
         if problem:

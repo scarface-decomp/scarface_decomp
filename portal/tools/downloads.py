@@ -16,9 +16,10 @@ from pathlib import Path
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 
 RULE = "=" * 100
-BUILD_ORDER = ("xb", "pc", "proto")
-BUILD_NAMES = {"xb": "Xbox (retail default.xbe)", "pc": "PC (Scarface.exe 1.00.2)", "proto": "Xbox prototype (April 2006 game.xbe)"}
-ONE_TO_ONE = ("Every [VERIFIED] function compiles with the game's own compiler (Visual C++ 2003) to exactly the "
+BUILD_ORDER = ("xb", "pc", "ps2", "proto")
+BUILD_NAMES = {"xb": "Xbox (retail default.xbe)", "pc": "PC (Scarface.exe 1.00.2)", "ps2": "PS2 (retail SLUS_211.11)",
+               "proto": "Xbox prototype (April 2006 game.xbe)"}
+ONE_TO_ONE = ("Every [VERIFIED] function compiles with the game's own compiler (Visual C++ 2003; CodeWarrior for the PS2) to exactly the "
               "bytes in the game file.")
 
 

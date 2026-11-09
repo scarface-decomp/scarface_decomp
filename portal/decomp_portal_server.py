@@ -28,6 +28,7 @@ import os
 import queue as queue_mod
 import re
 import secrets
+import struct
 import subprocess
 import sys
 import threading
@@ -55,11 +56,15 @@ import extract_scripts as ES  # noqa: E402
 import registry_outputs as RO  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
+import ps2_binary as PB  # noqa: E402
+import ps2_verify as PV  # noqa: E402
+from cpp_policy import check_genuine_cpp, format_violations  # noqa: E402
 
 BINARIES = {
     "pc": BASE_DIR / "binaries" / "Scarface.exe",
     "xb": BASE_DIR / "binaries" / "default.xbe",
     "proto": BASE_DIR / "binaries" / "game.xbe",
+    "ps2": BASE_DIR / "binaries" / "SLUS_211.11",
 }
 RECON_DIR = BASE_DIR / "reconstructed_src"
 REPORTS_DIR = BASE_DIR / "reports"
@@ -95,7 +100,9 @@ _FAILS: Dict[str, List[float]] = {}
 _COMPILER: Dict[str, str] = {}
 GROUPS: Dict[str, List[dict]] = {}          # look-alike group id -> tasks (portal/tools/lookalikes.py)
 BY_SYMBOL: Dict[str, List[dict]] = {}       # "Class::vfunc_NN" -> the same method in each build
-BUILD_NAMES = {"xb": "the retail Xbox game", "pc": "the PC game", "proto": "the April 2006 prototype"}
+PS2_BY_TWIN: Dict[int, List[dict]] = {}     # Xbox address -> PS2 functions paired with it
+BUILD_NAMES = {"xb": "the retail Xbox game", "pc": "the PC game", "proto": "the April 2006 prototype",
+               "ps2": "the PS2 game"}
 PORT_STATUS: Dict[str, dict] = {}           # task id -> progress of carrying its match to its look-alikes
 PORT_JOBS: "queue_mod.Queue" = queue_mod.Queue()
 PORT_MAX = int(os.environ.get("SCARFACE_LOOKALIKE_MAX", "1000"))
@@ -145,7 +152,7 @@ def image_for(b: str) -> Optional[BinaryImage]:
             if problem:
                 BINARY_PROBLEMS[b] = problem
             else:
-                img = BinaryImage(p)
+                img = PB.Ps2Image(p) if b == "ps2" else BinaryImage(p)
         _IMAGES[b] = img
     return _IMAGES[b]
 
@@ -308,12 +315,15 @@ def task_key(t: dict) -> str:
 
 
 def progress() -> dict:
-    """The headline numbers are the released game (PC + Xbox). The April 2006 prototype (unreleased code,
-    saved in the repository like everything else) is counted on its own under "prototype"."""
+    """The headline numbers are the released game on PC and Xbox (one compiler, one code base). The April 2006
+    prototype (unreleased code) and the PS2 game (another compiler) are counted on their own rows,
+    under "prototype" and "ps2"."""
     entries = REGISTRY.get("entries", {})
     by_bin = Counter(e["bin"] for e in entries.values())
-    retail = [e for e in entries.values() if e["bin"] != "proto"]
-    remaining = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] != "proto")
+    retail = [e for e in entries.values() if e["bin"] not in ("proto", "ps2")]
+    remaining = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] not in ("proto", "ps2"))
+    ps2_left = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] == "ps2")
+    ps2_done = by_bin.get("ps2", 0)
     total = remaining + len(retail)
     proto_left = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] == "proto")
     proto_done = by_bin.get("proto", 0)
@@ -322,8 +332,11 @@ def progress() -> dict:
         "total_functions": total,
         "matched_percent": round(len(retail) / total * 100.0, 2) if total else 0.0,
         "matched_bytes": sum(int(e.get("size", 0)) for e in retail),
-        "by_binary": {"pc": by_bin.get("pc", 0), "xbox": by_bin.get("xb", 0), "proto": proto_done},
+        "by_binary": {"pc": by_bin.get("pc", 0), "xbox": by_bin.get("xb", 0), "proto": proto_done, "ps2": ps2_done},
         "prototype": {"matched": proto_done, "total": proto_done + proto_left},
+        "ps2": {"matched": ps2_done, "total": ps2_done + ps2_left,
+                "matched_bytes": sum(int(e.get("size", 0)) for e in entries.values() if e["bin"] == "ps2"),
+                "compiler": PV.COMPILER},
         "total_label": "verified / (verified + functions in the work queue), retail PC and Xbox",
         "compiler": compiler_version(),
     }
@@ -364,7 +377,7 @@ def load_tasks() -> None:
         tasks = build_queue(have, tasks, set(REGISTRY["entries"]), progress=print, **seed_data(BASE_DIR))
         write_json(QUEUE_JSON, tasks)
     if any("lookalikes" not in t for t in tasks if "fva_int" in t):
-        images = {b: image_for(b) for b in ("pc", "xb", "proto") if image_for(b)}
+        images = {b: image_for(b) for b in ("pc", "xb", "proto", "ps2") if image_for(b)}
         if images:
             print("[*] Grouping look-alike functions (once; about 15 seconds)...")
             LA.annotate([t for t in tasks if "fva_int" in t], images)
@@ -392,13 +405,16 @@ def load_tasks() -> None:
     TASK_BY_ID = {t["id"]: t for t in ALL_TASKS}
     GROUPS.clear()
     BY_SYMBOL.clear()
+    PS2_BY_TWIN.clear()
     for t in ALL_TASKS:
+        if t.get("xbox_twin"):
+            PS2_BY_TWIN.setdefault(int(t["xbox_twin"], 16), []).append(t)
         if t.get("lookalike_group"):
             GROUPS.setdefault(t["lookalike_group"], []).append(t)
         if "::" in t["symbol"]:
             BY_SYMBOL.setdefault(t["symbol"], []).append(t)
     for same in BY_SYMBOL.values():
-        same.sort(key=lambda m: ("xb", "pc", "proto").index(m["bin"]) if m["bin"] in ("xb", "pc", "proto") else 9)
+        same.sort(key=lambda m: ("xb", "pc", "proto", "ps2").index(m["bin"]) if m["bin"] in ("xb", "pc", "proto", "ps2") else 9)
     for t in ALL_TASKS:
         t["in_retail"] = in_retail(t)
     overlay = read_json(OVERLAY_JSON, {})
@@ -422,7 +438,7 @@ def drop_non_code(tasks: List[dict], verified: set) -> List[dict]:
     """Queues built before a check existed can hold data that looked like a function start (a single
     `retf`, the middle of an instruction). No C++ can match those, so they are taken out, once."""
     from queue_builder import CODE_CHECK
-    todo = [t for t in tasks if "fva_int" in t and t.get("code_check", 0) < CODE_CHECK]
+    todo = [t for t in tasks if "fva_int" in t and t.get("code_check", 0) < CODE_CHECK and t.get("bin") != "ps2"]
     if not todo:
         return tasks
     from sf_binaries import not_compiled_reason
@@ -474,6 +490,8 @@ def target_bytes(t: dict) -> Optional[bytes]:
 
 def relocs_for(t: dict) -> Optional[list]:
     img = image_for(t["bin"])
+    if t["bin"] == "ps2":
+        return PB.as_relocs(img, t["fva_int"], int(t["size"])) if img else None
     code = img.read(t["fva_int"], int(t["size"])) if img else None
     return LA.signature(code, t["fva_int"], img)[1] if code else None
 
@@ -481,7 +499,7 @@ def relocs_for(t: dict) -> Optional[list]:
 def starter_relocs(t: dict, tb: Optional[bytes]) -> Optional[list]:
     """The function's relocations, so the starter names calls and globals (sub_/DAT_) instead of numbers."""
     img = image_for(t["bin"])
-    if img is None or not tb:
+    if img is None or not tb or t["bin"] == "ps2":
         return None
     try:
         return DME.find_relocations(tb, t["fva_int"], img)
@@ -508,8 +526,16 @@ def lookalike_starter(t: dict) -> Tuple[str, str]:
 
 
 def counterparts(t: dict) -> List[dict]:
-    """The same class method in the other builds (retail Xbox, PC, prototype), whatever its code."""
-    return [m for m in BY_SYMBOL.get(t["symbol"], []) if m is not t and m["bin"] != t["bin"]] if "::" in t["symbol"] else []
+    """The same class method in the other builds (retail Xbox, PC, prototype, PS2), whatever its code. A PS2
+    function paired with an Xbox one (portal/tools/ps2_pairing.py) has that one as its counterpart even
+    when neither has a name."""
+    out = [m for m in BY_SYMBOL.get(t["symbol"], []) if m is not t and m["bin"] != t["bin"]] if "::" in t["symbol"] else []
+    twin = TASK_BY_ID.get("xb_" + t["xbox_twin"][2:]) if t.get("xbox_twin") else None
+    if twin is not None and twin not in out:
+        out.insert(0, twin)
+    if t["bin"] == "xb":
+        out += [m for m in PS2_BY_TWIN.get(t["fva_int"], []) if m not in out]
+    return out
 
 
 def in_retail(t: dict) -> str:
@@ -525,8 +551,9 @@ def in_retail(t: dict) -> str:
 
 def in_default_queue(t: dict) -> bool:
     """The queue lists the released game plus the prototype's own code. Prototype functions that are also in
-    retail are left out (lane PROTO_IN_RETAIL lists them), so nobody does the same function twice."""
-    return not t.get("in_retail")
+    retail are left out (lane PROTO_IN_RETAIL lists them), so nobody does the same function twice. PS2
+    functions have their own lane (another compiler, checked through decomp.me)."""
+    return not t.get("in_retail") and t.get("bin") != "ps2"
 
 
 def counterpart_starter(t: dict) -> Tuple[str, str]:
@@ -537,15 +564,53 @@ def counterpart_starter(t: dict) -> Tuple[str, str]:
         if e and (e.get("code") or "").strip():
             head = (f"// {t['symbol']} is already matched in {BUILD_NAMES.get(m['bin'], m['bin'])} ({m['va']}); this is\n"
                     f"// that code. This build's machine code is different, so expect to change a few things.\n")
+            if t["bin"] == "ps2" or m["bin"] == "ps2":
+                head += ("// The PS2 game was built with another compiler (CodeWarrior, not Visual C++): the C++ is\n"
+                         "// the same source, but names, calls and globals may need other declarations.\n")
             return head + e["code"].strip() + "\n", m["id"]
     return "", ""
+
+
+def ps2_starter(t: dict) -> str:
+    """A first draft for a PS2 function: its address, how to build it, and declarations for what it uses,
+    named after their addresses (func_XXXXXXXX, D_XXXXXXXX) so the verifier can check every one."""
+    img = image_for("ps2")
+    va, size = t["fva_int"], int(t["size"])
+    calls, data = [], []
+    for r in (PB.references(img, va, size) if img else []):
+        if r.kind == "26" and r.address != va:
+            n = PB.func_name(r.address)
+            if n not in calls:
+                calls.append(n)
+        elif r.kind in ("lo", "gp"):
+            n = (PB.func_name if img.is_code(r.address) else PB.data_name)(r.address)
+            if n not in data and n not in calls:
+                data.append(n)
+    me = t["symbol"] if t["symbol"].startswith("func_") else PB.func_name(va)
+    lines = [f"// {t['symbol']} ({t['va']}, {size} bytes) from the PS2 game.",
+             f"// Compiled on decomp.me with {PV.COMPILER}, flags {PV.FLAGS}.",
+             "// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked."]
+    if "::" in t["symbol"]:
+        lines.append(f"// The Xbox game calls it {t['symbol']}; once that one is matched, its C++ is a better start.")
+    lines.append("")
+    lines += [f'extern "C" void {n}();' for n in calls]
+    lines += [f"extern int {n};" for n in data]
+    if calls or data:
+        lines.append("")
+    lines += [f'extern "C" void {me}() {{', "}", ""]
+    return "\n".join(lines)
 
 
 def live_task(t: dict) -> dict:
     out = {k: v for k, v in t.items() if k not in ("best_cpp",)}
     tb = target_bytes(t)
     out["target_hex"] = " ".join(f"{b:02X}" for b in tb) if tb else ""
-    out["disasm_lines"] = disassemble(tb) if tb else ["(binary not present in binaries/)"]
+    if t["bin"] == "ps2":
+        img = image_for("ps2")
+        out["disasm_lines"] = PB.disassembly_lines(img, t["fva_int"], int(t["size"])) if tb else ["(SLUS_211.11 is not in binaries/)"]
+        out["compiler_label"] = f"{PV.COMPILER} on decomp.me ({PV.FLAGS})"
+    else:
+        out["disasm_lines"] = disassemble(tb) if tb else ["(binary not present in binaries/)"]
     others = LA.members(GROUPS, t)
     out["lookalikes"] = len(others)
     out["lookalike_done"] = sum(1 for m in others if m["status"] == "VERIFIED")
@@ -562,6 +627,8 @@ def live_task(t: dict) -> dict:
         if not code and t["status"] != "VERIFIED":
             code, src = counterpart_starter(t)
             kind = "counterpart" if code else ""
+        if not code and t["bin"] == "ps2":
+            code = ps2_starter(t)
         out["starter_cpp"] = code or synthesize_cpp(t["symbol"], t["va"], tb or b"", out["disasm_lines"],
                                                     relocs=starter_relocs(t, tb))
         out["starter_from"], out["starter_kind"] = src, kind
@@ -572,11 +639,26 @@ def live_task(t: dict) -> dict:
 _SLUG_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
 
+def ps2_scratch_fields(t: dict, starter: str) -> dict:
+    img = image_for("ps2")
+    name = t["symbol"] if t["symbol"].startswith("func_") else PB.func_name(t["fva_int"])
+    asm = PB.function_asm(img, t["fva_int"], int(t["size"]), name)
+    src, ctx = DME._inline_project_includes(starter or "", [INCLUDE_DIR])
+    head = (f"// Scarface: The World Is Yours (PS2), {t['symbol']} at {t['va']}, {t['size']} bytes.\n"
+            f"// From {DME.PROJECT_SITE}: when this shows 100%, paste the C++ into the portal and press Compile & Verify.\n")
+    return PV.scratch_fields(f"Scarface (PS2) {t['symbol']}", asm, head + src, ctx, name,
+                             os.environ.get("SCARFACE_DECOMPME_PRESET_PS2", ""))
+
+
 def decompme_prepare(t: dict) -> dict:
     """Everything the page needs to create a decomp.me scratch for this function."""
     img = image_for(t["bin"])
     if img is None:
         return {"ok": False, "error": f"binaries/{BINARIES[t['bin']].name} is missing, so there is nothing to send."}
+    if t["bin"] == "ps2":
+        slug = t.get("decompme_slug", "")
+        return {"ok": True, "api": PV.DECOMPME_URL, "json": ps2_scratch_fields(t, live_task(t).get("starter_cpp", "")),
+                "existing_url": f"{PV.DECOMPME_URL}/scratch/{slug}" if slug else ""}
     starter = live_task(t).get("starter_cpp", "")
     obj, fields = DME.prepare(img, t["fva_int"], int(t["size"]), t["symbol"], t["flags"], starter,
                               [INCLUDE_DIR, RECON_DIR], build=t["bin"])
@@ -614,7 +696,58 @@ NO_COMPILER_HELP = ("The 2003 compiler is not installed on this computer yet, so
                     "and a maintainer will verify it and credit you.")
 
 
+PS2_UNREACHABLE = ("PS2 functions are compiled on decomp.me (the game's PS2 compiler can't be installed here), and "
+                   "decomp.me couldn't be reached from this computer: {why}\n"
+                   "Open decomp.me once in your browser and try again. Or work in the function's decomp.me scratch "
+                   "(the decomp.me button) and, when it shows 100%, post its link in a GitHub issue: a maintainer "
+                   "will verify it and credit you.")
+
+
+def run_verify_ps2(t: dict, cpp_code: str) -> dict:
+    """Compile on decomp.me with the PS2 compiler, then compare the object with the game here."""
+    violations = check_genuine_cpp(cpp_code)
+    if violations:
+        return {"ok": False, "compiler_error": format_violations(violations), "policy_violation": True}
+    img, tb = image_for("ps2"), target_bytes(t)
+    if img is None or tb is None:
+        return {"ok": False, "compiler_unavailable": True,
+                "compiler_error": "binaries/SLUS_211.11 is missing, so there is nothing to compare against."}
+    slug = t.get("decompme_slug", "")
+    if not slug:
+        made = PV.create_scratch(ps2_scratch_fields(t, cpp_code))
+        if not made.get("ok"):
+            return {"ok": False, "compiler_unavailable": True,
+                    "compiler_error": PS2_UNREACHABLE.format(why=made.get("error", ""))}
+        slug = made["slug"]
+        with STATE_LOCK:
+            t["decompme_slug"] = slug
+            save_overlay(t)
+    src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
+    res = PV.compile_on_decompme(slug, src, ctx)
+    if not res.get("ok"):
+        if res.get("compiler_error") is not None:
+            return {"ok": False, "compiler_error": res["compiler_error"]}
+        return {"ok": False, "compiler_unavailable": True, "compiler_error": PS2_UNREACHABLE.format(why=res.get("error", ""))}
+    try:
+        obj = PV.parse_object(res["object"])
+    except (ValueError, IndexError, struct.error) as e:
+        return {"ok": False, "compiler_error": f"Could not read the object decomp.me sent back: {e}"}
+    known = {e2["symbol"]: int(e2["va"], 16) for e2 in REGISTRY["entries"].values()
+             if e2.get("bin") == "ps2" and e2.get("symbol")}
+    fn, cmp = PV.best_function(tb, obj, t["fva_int"], img, known)
+    if fn is None:
+        return {"ok": False, "compiler_error": "The C++ compiled, but it has no function in it."}
+    out = {"ok": True, **cmp, "compiled_sym": obj.name_of(fn), "compiled_hex": " ".join(f"{b:02X}" for b in fn.data),
+           "flags": PV.FLAGS, "compiler_output": res.get("output", "")}
+    out["verified"] = bool(out["is_exact"] and not out.get("hardcoded_addresses"))
+    out["bytes_exact"] = out["is_exact"]
+    out["is_exact"] = out["verified"]
+    return out
+
+
 def run_verify(t: dict, cpp_code: str) -> dict:
+    if t["bin"] == "ps2":
+        return run_verify_ps2(t, cpp_code)
     if not MV.find_msvc71_bin():
         return {"ok": False, "compiler_error": NO_COMPILER_HELP, "compiler_unavailable": True}
     tb = target_bytes(t)
@@ -646,7 +779,7 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, por
         "bin": t["bin"], "va": f"0x{t['fva_int']:08X}", "size": int(t["size"]), "symbol": t["symbol"],
         "match": t.get("match_substr", ""),
         "flags": res.get("flags") or t["flags"], "source": "portal", "verified_by": user, "tool_used": tool,
-        "verified_at": stamp(), "compiler": compiler_build(), "code": cpp_code.strip(),
+        "verified_at": stamp(), "compiler": PV.COMPILER if t["bin"] == "ps2" else compiler_build(), "code": cpp_code.strip(),
         "note": f"{res.get('reloc_unverified', 0)} external relocation(s) unchecked" if res.get("reloc_unverified") else "",
     }
     if ported_from:
@@ -673,7 +806,7 @@ def revise_verified(t: dict, cpp_code: str, user: str, res: dict) -> bool:
         return False
     if res.get("reloc_unverified", 0) > _unchecked(e):
         return False
-    e.update(code=new, revised_by=user, revised_at=stamp(), compiler=compiler_build())
+    e.update(code=new, revised_by=user, revised_at=stamp(), compiler=PV.COMPILER if t["bin"] == "ps2" else compiler_build())
     save_registry()
     return True
 
@@ -733,7 +866,14 @@ def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str, catchup: bool 
         dst_relocs = relocs_for(m)
         ported = (LA.port_code(cpp_code, t, src_relocs, m, dst_relocs)
                   if src_relocs is not None and dst_relocs is not None else None)
-        res = run_verify(m, ported) if ported else {"ok": False}
+        if ported and m["bin"] == "ps2" and not src_relocs and not dst_relocs:
+            # No addresses in either: the two are the same bytes, and only the function's own name changed
+            # in the C++, so the compiled code is the same too. Nothing to send to decomp.me.
+            res = {"ok": True, "verified": True, "flags": PV.FLAGS, "reloc_unverified": 0}
+        else:
+            res = run_verify(m, ported) if ported else {"ok": False}
+            if m["bin"] == "ps2":
+                time.sleep(1.0)                      # decomp.me does the compiling: one a second
         st["tried"] += 1
         if not (res.get("ok") and res.get("verified") and not res.get("reloc_unverified")):
             if catchup and not res.get("compiler_unavailable"):
@@ -813,7 +953,7 @@ def catch_up_lookalikes() -> int:
         for members in GROUPS.values():
             if all(m["status"] == "VERIFIED" for m in members):
                 continue
-            src = next((m for m in members if m["status"] == "VERIFIED"
+            src = next((m for m in members if m["status"] == "VERIFIED" and m["bin"] != "ps2"
                         and ((REGISTRY["entries"].get(task_key(m)) or {}).get("code") or "").strip()), None)
             if src:
                 sources.append(src)
@@ -1670,7 +1810,8 @@ class Handler(BaseHTTPRequestHandler):
                     if lane == "PROTO_IN_RETAIL":
                         if not t.get("in_retail"):
                             continue
-                    elif not q and lane != "VERIFIED" and not in_default_queue(t):
+                    elif not q and lane != "VERIFIED" and not in_default_queue(t) and not (
+                            t["bin"] == "ps2" and lane != "ALL"):
                         continue
                     items.append(t)
                 if sort_by == "DEFAULT":
@@ -1876,7 +2017,10 @@ class Handler(BaseHTTPRequestHandler):
             prep = decompme_prepare(t)
             if not prep.get("ok"):
                 return self._json(prep, 400)
-            res = DME.create_scratch(base64.b64decode(prep["obj_b64"]), prep["fields"])
+            if t["bin"] == "ps2":
+                res = PV.create_scratch(prep["json"])
+            else:
+                res = DME.create_scratch(base64.b64decode(prep["obj_b64"]), prep["fields"])
             if not res.get("ok"):
                 return self._json(res, 502)
             slug = res["slug"]

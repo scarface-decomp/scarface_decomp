@@ -17,7 +17,7 @@ def test_prototype_is_counted_apart():
     queue = ([{"bin": "pc", "tier": "TIER_1_QUICK"}] * 2 + [{"bin": "xb", "tier": "TIER_1_QUICK"}] * 3
              + [{"bin": "proto", "tier": "TIER_4_LARGE"}] * 7)
     s = RO.progress_summary(reg, queue, None)
-    assert s["verified"] == {"pc": 1, "xb": 1, "proto": 2, "total": 2, "bytes": 16}
+    assert s["verified"] == {"pc": 1, "xb": 1, "proto": 2, "ps2": 0, "total": 2, "bytes": 16, "ps2_bytes": 0}
     assert s["queue"]["total"] == 5 and s["queue"]["proto"] == 7 and s["queue"]["tiers"] == {"TIER_1_QUICK": 5}
     block = RO.status_block(reg)
     assert "| Verified functions | 1 | 1 | **2** |" in block and "Plus 2 in the April 2006 Xbox prototype" in block

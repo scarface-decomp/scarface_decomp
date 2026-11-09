@@ -12,6 +12,7 @@ against it doesn't count here. Everyone works on these files, and only these.
 | | The same file as some tools copy it: padded to the size in its header with bytes from the next file on the disc. The code is identical, so it is accepted too. | 5,060,096 bytes | `b15dd7cb1cda9cd2ada8d13709c6409e8ff8a824de1e449a12257c69cc1954a0` |
 | `Scarface.exe` | **PC, US, version 1.00.2**: the US game with the official 1.00.2 patch installed. Its file version reads `1.0.0.2`. | 8,462,848 bytes | `1c1dd03ff81592acfa43c45f461fbdc4818503c739cd2f127e0a61fe6a6969c6` |
 | `game.xbe` | **Xbox prototype, April 20, 2006** (optional). Unreleased code, counted on its own row. | 4,854,976 bytes | `ecd980d0f25c444d263c968b8e4032e1707e0e684a422483890257ee12ec0384` |
+| `SLUS_211.11` | **PS2, US disc (SLUS-21111)** (optional). Its own compiler and its own row ([PS2.md](PS2.md)). The portal reads it out of the disc image. | 7,073,896 bytes | `42404f03867f507b9c86d77b179b0b354d7c775cb955648b7e0b9a91ac3d5781` |
 
 Start with `default.xbe`: the whole Xbox game can be read, so almost all of the work is there.
 `Scarface.exe` is an optional extra for the PC-only functions (most of the PC file is encrypted, so
@@ -30,12 +31,13 @@ including `Scarface.exe` 1.00.2 from the official 1.00.2 patch, which carries th
 | **PC 1.00 without the patch**, or any other patch level | The patch replaced `Scarface.exe` with a newer build (linked November 16, 2006), so functions sit at different addresses and some changed. Supporting both would mean every PC function twice. If your copy is 1.00, install the official 1.00.2 patch and use that `Scarface.exe`. Having the patch file in `binaries/` next to the game isn't enough: a patch file changes nothing until you run it on your installed game. The portal tells you this if it sees the patch there. |
 | **Any other Xbox disc or build** (other regions or languages, reprints with different files) | Only the US disc's `default.xbe` above. If you have a different disc, its file won't match the hashes and the portal won't use it. |
 | **Edited executables of any kind**: fan patches, remaster or "fixed" versions, widescreen or frame-rate fixes, trainers, repacks | They are no longer the game's original code. |
-| **PS2 and Wii versions** | They are different programs for different processors and compilers, so they can't be matched here. They are welcome as separate efforts: see [OTHER_VERSIONS.md](OTHER_VERSIONS.md). |
+| **Other PS2 discs** (other regions, the Greatest Hits reprint if its program differs) | Only the US disc's `SLUS_211.11` above. |
+| **The Wii version** | A different program for a different processor and compiler, so it can't be matched here yet. It is welcome as a separate effort: see [OTHER_VERSIONS.md](OTHER_VERSIONS.md). |
 | **Other prototypes or betas** | Only the April 20, 2006 build for now. If you have another one, open an issue to discuss it. Don't upload it. |
 
 The game's **scripts** (`.cso`/`.dso`) are the same files on the US Xbox and PS2 discs (checked file by
-file, see [SCRIPTS.md](SCRIPTS.md)), so either disc can be used to copy them out. The PS2 disc is used
-only for that; none of its code is decompiled here.
+file, see [SCRIPTS.md](SCRIPTS.md)), so either disc can be used to copy them out. The PS2 program itself
+is matched in its own lane, with its own compiler: see [PS2.md](PS2.md).
 
 ## What you may and may not share
 

@@ -7,6 +7,7 @@ The portal reads three files (see binaries/README.md):
     default.xbe    the retail Xbox game          (most of the work)
     Scarface.exe   the PC game, version 1.00.2   (the readable part of it)
     game.xbe       the April 20, 2006 Xbox prototype (optional, its own lane)
+    SLUS_211.11    the PS2 game, US disc (optional, its own lane; another compiler)
 
 People usually have these packed: the Xbox game as a disc image (.iso) inside a .7z, the prototype
 as a .zip of its folder, the PC game as an installer .iso plus the 1.00.2 patch. This module looks
@@ -18,6 +19,7 @@ in binaries/ (and one folder down) and:
     whether the image is loose or inside a .zip / .7z. Only the bytes needed are kept, so a
     multi-gigabyte image never has to be unpacked to disk. A .7z is read by sevenzip.py, which needs
     nothing installed (7-Zip or py7zr are used only for unusual compression);
+  * reads SLUS_211.11 straight out of the PS2 disc image (plain ISO 9660), loose or inside a .zip / .7z;
   * takes Scarface.exe 1.00.2 out of the official 1.00.2 patch, which carries the whole file, so
     the PC game doesn't have to be installed; a wrong Scarface.exe is moved aside (never deleted)
     when the patch has the right one. It also picks up an installed, patched Scarface.exe from
@@ -57,7 +59,10 @@ EXPECTED: Dict[str, Tuple[Tuple[str, ...], str]] = {
                      "PC, US version 1.00.2"),
     "game.xbe": (("ecd980d0f25c444d263c968b8e4032e1707e0e684a422483890257ee12ec0384",),
                  "Xbox prototype, April 20 2006"),
+    "SLUS_211.11": (("42404f03867f507b9c86d77b179b0b354d7c775cb955648b7e0b9a91ac3d5781",),
+                    "PS2, US disc (SLUS-21111)"),
 }
+PS2_PROGRAM = "SLUS_211.11"
 PC_EXE_SIZE = 8462848
 GUIDE = "docs/GAME_VERSIONS.md"
 REQUIRED_ONE_OF = ("default.xbe", "Scarface.exe")
@@ -121,6 +126,8 @@ def describe(path: Path) -> str:
                     f"regions: {', '.join(regions) or 'none'}{' (debug build)' if region & 0x80000000 else ''}; {size}")
         except struct.error:
             return f"an Xbox program with a damaged header; {size}"
+    if data[:4] == b"\x7fELF":
+        return f"a PlayStation 2 program; {size}"
     if data[:2] == b"MZ":
         mark = "FileVersion".encode("utf-16le")
         i = data.find(mark)
@@ -198,14 +205,15 @@ def startup(bin_dir: Path, log: Log = print) -> bool:
         return False
     need_xbox = check(bin_dir / "default.xbe") == "missing"
     need_proto = check(bin_dir / "game.xbe") == "missing"
+    need_ps2 = check(bin_dir / PS2_PROGRAM) == "missing" and bool(_ps2_sources(bin_dir))
     pc_state = check(bin_dir / "Scarface.exe")
     patch = _patch_installer(bin_dir) if pc_state != "ok" else None
     need_pc = bool(patch and _exe_in_patch(patch)) and (pc_state == "missing" or _patch_has_accepted_exe(patch))
-    if not (need_xbox or need_proto or need_pc):
+    if not (need_xbox or need_proto or need_pc or need_ps2):
         return False
     sources = _candidates(bin_dir)
     packed = [s for s in sources if s.name.lower().endswith(ARCHIVES + DISC_IMAGES) or s.parent != bin_dir]
-    if not need_pc:
+    if not need_pc and not need_ps2:
         if need_xbox and not packed:
             return False                        # nothing to unpack; the banner below says what is missing
         if not need_xbox and not any("proto" in str(s.relative_to(bin_dir)).lower() for s in packed):
@@ -341,7 +349,7 @@ class DiscStream:
     up (at most three passes, and real discs need one).
     """
 
-    def __init__(self, name: str, known: Optional[dict] = None, sink=None):
+    def __init__(self, name: str, known: Optional[dict] = None, sink=None, iso_only: bool = False):
         self.name = name
         self.sink = sink                      # a file to write the found file into, instead of memory
         self.written = 0
@@ -359,7 +367,7 @@ class DiscStream:
             self._want("isoroot", *self.known["isoroot"])
         else:
             self._want("vdiso", ISO_PVD, ISO_PVD + SECTOR)
-            for base in XDVDFS_BASES:
+            for base in () if iso_only else XDVDFS_BASES:
                 self._want(f"vd{base}", base + 32 * SECTOR, base + 33 * SECTOR)
 
     def _want(self, label: str, start: int, end: int) -> None:
@@ -542,7 +550,7 @@ def _read_member(archive: Path, member: str) -> bytes:
 
 
 def _disc_in_archive(archive: Path, member: str, size: int, name: str, log: Log,
-                     dest: Optional[Path] = None) -> Optional[bytes]:
+                     dest: Optional[Path] = None, iso_only: bool = False) -> Optional[bytes]:
     """Read `name` from the root of the disc image `member` inside a .zip/.7z. With `dest`, the file
     is written there as it streams past (for big files) and b'(written to file)' is returned."""
     what = f"{archive.name} \u2192 {Path(member).name}"
@@ -552,7 +560,7 @@ def _disc_in_archive(archive: Path, member: str, size: int, name: str, log: Log,
             log("      what it needs sits early in the image; reading it again from the start")
         sink = open(dest, "wb") if dest is not None else None
         try:
-            stream = DiscStream(name, known, sink)
+            stream = DiscStream(name, known, sink, iso_only=iso_only)
             if _is_zip(archive):
                 with zipfile.ZipFile(archive) as z, z.open(member) as f:
                     _pull(stream, f, size, log, what)
@@ -755,6 +763,8 @@ def _from_sources(name: str, sources: List[Path], bin_dir: Path, log: Log) -> bo
                 log(f"    unpacking {name} from {src.name}...")
                 _place(dest, _read_member(src, member), log, src.name)
                 return True
+    if name == PS2_PROGRAM:
+        return _ps2_from_sources(bin_dir, sources, log)
     if name != "default.xbe":
         return False
     # 3. an Xbox disc image, loose or inside an archive
@@ -784,6 +794,77 @@ def _from_sources(name: str, sources: List[Path], bin_dir: Path, log: Log) -> bo
                     data = None
                 if data:
                     _place(dest, data, log, f"{src.name} → {Path(member).name}")
+                    return True
+    return False
+
+
+def read_from_iso_file(path: Path, name: str) -> Optional[bytes]:
+    """Read one file from the root of a plain ISO 9660 disc image on disk (the PS2 disc)."""
+    try:
+        with open(path, "rb") as f:
+            f.seek(ISO_PVD)
+            root = _iso_root(f.read(SECTOR))
+            if not root:
+                return None
+            f.seek(root[0] * SECTOR)
+            hit = _iso_find(f.read(root[1]), name)
+            if not hit:
+                return None
+            f.seek(hit[0] * SECTOR)
+            data = f.read(hit[1])
+            return data if len(data) == hit[1] else None
+    except OSError:
+        return None
+
+
+def _ps2_sources(bin_dir: Path) -> List[Path]:
+    """Where the PS2 program can come from: binaries/ps2/SLUS_211.11, or a download named for the PS2."""
+    bin_dir = Path(bin_dir)
+    out = [p for p in (bin_dir / "ps2" / PS2_PROGRAM,) if p.is_file()]
+    try:
+        out += [p for p in sorted(bin_dir.iterdir()) if p.is_file() and "ps2" in p.name.lower()
+                and p.name.lower().endswith(ARCHIVES + DISC_IMAGES)]
+    except OSError:
+        pass
+    return out
+
+
+def _ps2_from_sources(bin_dir: Path, sources: List[Path], log: Log) -> bool:
+    dest = bin_dir / PS2_PROGRAM
+    loose = bin_dir / "ps2" / PS2_PROGRAM
+    if loose.is_file():
+        _place(dest, loose, log, "ps2/" + PS2_PROGRAM)
+        return True
+    # disc images: those named for the PS2 first, then any plain ISO 9660 image (only its root is read)
+    images = [s for s in sources if s.name.lower().endswith(DISC_IMAGES)]
+    archives = [s for s in sources if s.name.lower().endswith(ARCHIVES)]
+    named = lambda p: "ps2" not in p.name.lower()                      # noqa: E731 - sort key: PS2 ones first
+    for src in sorted(images, key=named):
+        if _is_xbox_image(src):
+            continue
+        data = read_from_iso_file(src, PS2_PROGRAM)
+        if data:
+            log(f"    reading {PS2_PROGRAM} from the disc image {src.name}...")
+            _place(dest, data, log, src.name)
+            return True
+    for src in sorted(archives, key=named):
+        if "ps2" not in src.name.lower():
+            continue                                  # never read through other games' discs looking for it
+        try:
+            members = _members(src)
+        except Exception as e:  # noqa: BLE001
+            log(f"    ! could not open {src.name}: {e}")
+            continue
+        for member, size in members:
+            if member.lower().endswith(DISC_IMAGES) and size >= MIN_DISC_IMAGE:
+                log(f"    reading {PS2_PROGRAM} from {Path(member).name} inside {src.name}")
+                try:
+                    data = _disc_in_archive(src, member, size, PS2_PROGRAM, log, iso_only=True)
+                except Exception as e:  # noqa: BLE001
+                    log(f"    ! could not read {src.name}: {e}")
+                    data = None
+                if data:
+                    _place(dest, data, log, f"{src.name} \u2192 {Path(member).name}")
                     return True
     return False
 

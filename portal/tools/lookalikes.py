@@ -80,7 +80,11 @@ def annotate(tasks: List[dict], images: Dict[str, object], progress=None) -> Dic
         code = img.read(t["fva_int"], int(t["size"])) if img is not None else None
         if not code:
             continue
-        shape, _ = signature(code, t["fva_int"], img)
+        if getattr(img, "kind", "") == "ps2":            # MIPS: its own address fields, never mixed with x86
+            import ps2_binary
+            shape = "ps2:" + ps2_binary.signature(img, t["fva_int"], int(t["size"]))[0]
+        else:
+            shape, _ = signature(code, t["fva_int"], img)
         groups[group_key(t, shape)].append(t)
         if progress and i and i % 5000 == 0:
             progress(f"look-alikes: {i:,}/{len(tasks):,}")
@@ -92,6 +96,7 @@ def annotate(tasks: List[dict], images: Dict[str, object], progress=None) -> Dic
             continue
         out[g] = members
         # Retail Xbox first (all of its code is readable), then PC, then the prototype; lowest address.
+        # (PS2 functions only ever group with PS2 functions.)
         rep = min(members, key=lambda m: (m["bin"] != "xb", m["bin"] == "proto", m["fva_int"]))
         for m in members:
             m["lookalike_group"] = g

@@ -2,7 +2,7 @@
 
 ![Language](https://img.shields.io/badge/language-C%2B%2B-00599C?style=flat-square&logo=c%2B%2B)
 ![Compiler](https://img.shields.io/badge/compiler-MSVC%207.1%20(13.10.3052%20or%203077)-5C2D91?style=flat-square)
-![Target](https://img.shields.io/badge/target-Xbox%20%2B%20PC%201.00.2-c90016?style=flat-square)
+![Target](https://img.shields.io/badge/target-Xbox%20%2B%20PC%201.00.2%20%2B%20PS2-c90016?style=flat-square)
 [![Discord](https://img.shields.io/badge/Discord-join%20us-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/azvrtGBvau)
 
 **Website and live progress: [scarface-decomp.pages.dev](https://scarface-decomp.pages.dev)** ·
@@ -46,10 +46,12 @@ C++ is. See [CONTRIBUTING.md](docs/CONTRIBUTING.md) to get started.
 864 of the April 2006 prototype's decompile to readable TorqueScript that compiles back to the identical
 file. See [docs/SCRIPTS.md](docs/SCRIPTS.md); the portal's Game Scripts tab shows them.
 
-**PS2 or Wii?** Their scripts are covered above. Their C++ isn't in the portal yet: it was built with other
-compilers, and anyone who wants to start a PS2 (or Wii) decomp is welcome to. The PS2 version has things the
-PC lacks, such as its own blood effects and explosion sounds. What we know so far and what it would take:
-[docs/OTHER_VERSIONS.md](docs/OTHER_VERSIONS.md).
+**PS2:** the PS2 game (`SLUS_211.11`) is in the portal as a fourth version. It was built with another
+compiler (Metrowerks CodeWarrior for PS2 3.0.1), which decomp.me runs: the portal compiles PS2 functions
+there and checks the result against your own copy, with the same rules. About 1,300 PS2 functions are
+paired with their Xbox twin, so a matched Xbox function gives its PS2 twin a head start. How the compiler
+was found and how it works: [docs/PS2.md](docs/PS2.md). The Wii version is still open for anyone to start
+([docs/OTHER_VERSIONS.md](docs/OTHER_VERSIONS.md)).
 
 ## What "verified" means
 
@@ -223,7 +225,7 @@ portal/               the portal itself and its tools (you don't need to open it
 | `reports/reverify_report.md` | Every claimed function, its status and the reason. |
 | `docs/index.html` | The public website: live progress and every verified function (see `docs/README.md`). |
 | `docs/CONTRIBUTING.md`, `docs/GAME_VERSIONS.md` | How to help, and which copies of the game are accepted. |
-| `docs/METHODOLOGY.md`, `docs/SCRIPTS.md`, `docs/OTHER_VERSIONS.md` | Verification rules, the game's scripts, the PS2 and Wii versions. |
+| `docs/METHODOLOGY.md`, `docs/SCRIPTS.md`, `docs/PS2.md`, `docs/OTHER_VERSIONS.md` | Verification rules, the game's scripts, the PS2 lane, the Wii version. |
 | `docs/LEGAL.md`, `docs/PROVENANCE.md`, `docs/CREDITS.md` | Legal notes, where code and names may come from, credits. |
 | `docs/SCARFACE_DECOMP_AI_HANDOFF.md`, `docs/AGENTS.md` | Brief for AI assistants (served by the portal at `/download/ai-handoff`), and how an agent uses the portal API. |
 | `portal/decomp_portal_server.py`, `portal/website_kit/` | The portal: its server and its page. |

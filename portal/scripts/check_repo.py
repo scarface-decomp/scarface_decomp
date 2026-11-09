@@ -54,13 +54,14 @@ def check_registry(problems: list) -> dict:
                             "game version (docs/GAME_VERSIONS.md)")
     for key, e in entries.items():
         where = f"registry {key}"
-        if e.get("bin") not in ("pc", "xb", "proto"):
+        if e.get("bin") not in ("pc", "xb", "proto", "ps2"):
             problems.append(f"{where}: unknown binary {e.get('bin')!r}")
         if not VA_RE.match(str(e.get("va", ""))) or key != f"{e.get('bin')}:{e.get('va')}":
             problems.append(f"{where}: key and address do not agree ({e.get('va')!r})")
         if not isinstance(e.get("size"), int) or e["size"] <= 0:
             problems.append(f"{where}: bad size {e.get('size')!r}")
-        if not str(e.get("flags", "")).startswith("/O2"):
+        want = "-O3" if e.get("bin") == "ps2" else "/O2"        # the PS2 game has its own compiler
+        if not str(e.get("flags", "")).startswith(want):
             problems.append(f"{where}: unexpected flags {e.get('flags')!r}")
         code = e.get("code") or ""
         if not code.strip():
@@ -103,7 +104,7 @@ def check_generated(reg: dict, problems: list) -> None:
             problems.append("README.md: status block markers are missing")
         # stale generated files that no longer correspond to any entry are blanked by write_outputs;
         # check that nothing generated exists in the repo that the registry would not write
-        for folder in ("pc", "xbox", "proto"):
+        for folder in ("pc", "xbox", "proto", "ps2"):
             for p in (ROOT / "reconstructed_src" / folder).rglob("*.cpp") if (ROOT / "reconstructed_src" / folder).exists() else []:
                 rel = p.relative_to(ROOT / "reconstructed_src").as_posix()
                 if "GENERATED from reports/verified_registry.json" in _norm(p)[:400] and rel not in written:

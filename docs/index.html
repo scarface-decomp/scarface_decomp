@@ -170,7 +170,6 @@
     .build-row .sub { grid-column: 1 / -1; color: var(--grey); font-size: 0.9rem; }
     .build-row.extra .name, .build-row.extra .pct { color: var(--grey); }
     .tube > span.full { width: 100%; }
-    #ps2-row .pct { font-size: 1.15rem; font-weight: 400; }
     .build-row .sub a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     .side + .side { margin-top: 44px; }
     .side p { color: var(--grey); font-size: 0.94rem; margin-bottom: 14px; }
@@ -351,6 +350,9 @@
             through the same compiler the developers used: Microsoft Visual C++ 7.1, from 2003. When the result
             is identical to the game, byte for byte, that function is done. Nobody has to take anyone's word for
             it: the compiler decides.</p>
+          <p>The PS2 version was built from the same code with a different compiler, Metrowerks CodeWarrior for PS2.
+            That one runs on decomp.me, so PS2 functions are compiled there and checked the same way, against your
+            own copy of the game.</p>
           <ul class="rules">
             <li><b>Same bytes</b>Same length and same machine code as the original game.</li>
             <li><b>Same connections</b>Every jump, call and variable points where the original did.</li>
@@ -389,14 +391,14 @@
               <div class="sub" id="proto-sub"></div>
             </div>
             <div class="build-row extra" id="ps2-row">
-              <div class="name">PlayStation 2 <span>SLUS_211.11, open for anyone to start</span></div>
-              <div class="pct">Not started</div>
-              <div class="tube"><span></span></div>
-              <div class="sub">It has things the PC lacks, like its blood effects and its own explosion sounds. Its scripts
-                are already done (below); its C++ was built with a different compiler (Metrowerks CodeWarrior), so it needs
-                a setup of its own. Anyone can start it:
-                <a data-repo-link="/blob/main/docs/OTHER_VERSIONS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/OTHER_VERSIONS.md" target="_blank" rel="noopener noreferrer">what it would take</a>,
-                or say hi on <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>.</div>
+              <div class="name">PlayStation 2 <span>SLUS_211.11, built with its own compiler</span></div>
+              <div class="pct" id="ps2-big">…</div>
+              <div class="tube"><span id="ps2-bar"></span></div>
+              <div class="sub" id="ps2-sub"></div>
+              <div class="sub">The same game built with Metrowerks CodeWarrior instead of Visual C++, so its functions are
+                compiled on decomp.me and checked against your own copy. It has things the PC lacks, like its blood
+                effects. How the compiler was found:
+                <a data-repo-link="/blob/main/docs/PS2.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/PS2.md" target="_blank" rel="noopener noreferrer">PS2.md</a>.</div>
             </div>
             <div class="build-row" id="scripts-row">
               <div class="name">Game scripts <span>same files on PS2, Xbox and PC</span></div>
@@ -716,7 +718,7 @@
 
       // The prototype (unreleased code) has its own row once it is in the queue; the headline is the released game.
       $('proto-row').hidden = !((v.proto || 0) + (q && q.proto ? q.proto : 0));
-      ['pc', 'xb', 'proto'].forEach(function (b) {
+      ['pc', 'xb', 'proto', 'ps2'].forEach(function (b) {
         var done = v[b] || 0, left = q ? (q[b] || 0) : 0, all = done + left;
         $(b + '-big').textContent = q ? fmtPct(pct(done, all)) + '%' : fmt(done);
         setBar(b + '-bar', pct(done, all));
