@@ -66,7 +66,8 @@
     .topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,10,10,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
     .topbar .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "brand toc gh";
                     align-items: center; gap: 16px; height: 66px; }
-    .brand { grid-area: brand; font-family: var(--title); font-size: 1.05rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); text-decoration: none; white-space: nowrap; }
+    .brand { grid-area: brand; display: inline-flex; align-items: center; gap: 10px; font-family: var(--title); font-size: 1.05rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); text-decoration: none; white-space: nowrap; }
+    .brand .mark { width: 27px; height: 26px; flex: none; }
     .brand:hover { color: var(--hot); }
     /* the table of contents: every section, always visible */
     .toc { grid-area: toc; display: flex; justify-content: flex-end; gap: 2px; overflow-x: auto; scrollbar-width: none; }
@@ -75,7 +76,8 @@
     .toc a:hover { color: var(--white); }
     .toc a[aria-current="true"] { color: var(--white); border-bottom-color: var(--blood); }
     .toc .n { font-family: var(--mono); font-size: 0.72rem; color: var(--red); margin-right: 6px; }
-    a.gh { grid-area: gh; color: var(--white); text-decoration: none; font-size: 0.92rem; white-space: nowrap; border: 1px solid #3A3A3A; border-radius: 2px; padding: 7px 16px; }
+    .ext { grid-area: gh; display: flex; gap: 8px; }
+    a.gh { color: var(--white); text-decoration: none; font-size: 0.92rem; white-space: nowrap; border: 1px solid #3A3A3A; border-radius: 2px; padding: 7px 16px; }
     a.gh:hover { border-color: var(--red); color: var(--white); }
 
     /* ---------- hero: the headline, the city, the shots ---------- */
@@ -264,6 +266,11 @@
       ol.steps li::before { left: 12px; width: 36px; font-size: 1.9rem; }
       .facts { gap: 10px 30px; }
       .brand { letter-spacing: 0.12em; font-size: 0.95rem; }
+      a.gh { padding: 6px 11px; }
+    }
+    @media (max-width: 520px) {
+      .brand .brand-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .brand .mark { width: 33px; height: 32px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -281,7 +288,7 @@
   <a class="skip" href="#top">Skip to the content</a>
   <header class="topbar">
     <div class="wrap">
-      <a class="brand" href="#top">Scarface Decomp</a>
+      <a class="brand" href="#top"><svg class="mark" viewBox="80 86 352 340" aria-hidden="true" focusable="false"><path d="M169.9 421Q125.5 421 105.9 398.9Q86.3 376.8 86.3 328.6V296.9H150.3V337.4Q150.3 348.6 153.8 355Q157.2 361.3 165.6 361.3Q174.5 361.3 177.9 356.2Q181.3 351 181.3 339.2Q181.3 324.3 178.3 314.3Q175.4 304.2 168.1 295.1Q160.8 286 147.9 273.9L118.9 246.2Q86.3 215.5 86.3 175.9Q86.3 134.5 105.5 112.7Q124.7 91 161.2 91Q205.8 91 224.5 114.8Q243.2 138.5 243.2 186.9H177.2V164.7Q177.2 158 173.5 154.3Q169.7 150.7 163.2 150.7Q155.5 150.7 151.9 155Q148.3 159.3 148.3 166.1Q148.3 172.9 152 180.9Q155.7 188.8 166.5 199.1L203.9 235Q215.2 245.7 224.6 257.6Q233.9 269.4 239.7 285.2Q245.4 300.9 245.4 323.6Q245.4 369.3 228.5 395.1Q211.7 421 169.9 421Z" fill="#F2EFEA"/><path d="M263.4 421V91H354.1Q389.7 91 407.7 110.8Q425.7 130.6 425.7 168.6V323.1Q425.7 370 409.3 395.5Q392.9 421 351.9 421ZM329.7 362.7H341.2Q359.4 362.7 359.4 345.1V174.8Q359.4 158.3 355 153.5Q350.6 148.8 337.1 148.8H329.7Z" fill="#E01E2B"/></svg><span class="brand-text">Scarface Decomp</span></a>
       <nav class="toc" id="toc" aria-label="On this page">
         <a href="#how"><span class="n" aria-hidden="true">01</span>How it works</a>
         <a href="#progress"><span class="n" aria-hidden="true">02</span>Progress</a>
@@ -289,7 +296,10 @@
         <a href="#questions"><span class="n" aria-hidden="true">04</span>Questions</a>
         <a href="#functions"><span class="n" aria-hidden="true">05</span>The code</a>
       </nav>
-      <a class="gh" data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <div class="ext">
+        <a class="gh" href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>
+        <a class="gh" data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
     </div>
   </header>
 
@@ -313,6 +323,7 @@
         <div class="cta">
           <a class="btn primary" href="#help">Start helping</a>
           <a class="btn" href="#how">How does this work?</a>
+          <a class="btn" href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Join the Discord</a>
         </div>
         <p class="status-line" id="data-status">Loading the latest numbers…</p>
         <noscript><p class="status-line">The live numbers and the function list need JavaScript. Everything else on this page works without it.</p></noscript>
@@ -421,10 +432,11 @@
             <pre tabindex="0">python portal/scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
             No compiler yet, or it's acting up? Press <em>decomp.me</em> in the portal instead: it runs the same compiler
             in your browser. Get it to 100% there and post the link in a
-            <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>,
-            and a maintainer will verify it and credit you.</li>
+            <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>
+            or in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on Discord</a>, and a maintainer will verify it and credit you.</li>
         </ol>
         <div class="links">
+          <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Join the Discord</a>
           <a data-repo-link="/blob/main/docs/CONTRIBUTING.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing guide</a>
           <a data-repo-link="/blob/main/docs/SCARFACE_DECOMP_AI_HANDOFF.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCARFACE_DECOMP_AI_HANDOFF.md" target="_blank" rel="noopener noreferrer">Using an AI assistant</a>
           <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">Ask a question</a>
@@ -506,8 +518,9 @@
               and all 635 of the released game's compiled scripts are already read and rebuilt byte for byte; turning them into readable TorqueScript is next. The plan is in
               <a data-repo-link="/blob/main/docs/SCRIPTS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCRIPTS.md" target="_blank" rel="noopener noreferrer">SCRIPTS.md</a>.</p></details>
           <details><summary>I'm stuck. Where do I ask?</summary>
-            <p>Open an <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">issue on GitHub</a>
-              with the function's address and what you tried. Near misses are useful too.</p></details>
+            <p>Ask in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on the Discord</a> (joining takes a short application, to keep bots
+              out), or open an <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">issue on GitHub</a>.
+              Include the function's address and what you tried. Near misses are useful too.</p></details>
         </div>
       </div>
     </section>
@@ -545,6 +558,7 @@
       <div>Source code and tools only: no game files, assets, compiler or SDK files. Bring your own legally obtained copies.
         Not affiliated with or endorsed by the game's developer, publishers or rights holders. Code licensed under GPL-3.0-or-later.</div>
       <div class="links">
+        <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>
         <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a data-repo-link="/blob/main/docs/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md" target="_blank" rel="noopener noreferrer">Legal</a>
         <a data-repo-link="/blob/main/LICENSE" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a>

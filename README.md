@@ -3,8 +3,10 @@
 ![Language](https://img.shields.io/badge/language-C%2B%2B-00599C?style=flat-square&logo=c%2B%2B)
 ![Compiler](https://img.shields.io/badge/compiler-MSVC%207.1%20(13.10.3052)-5C2D91?style=flat-square)
 ![Target](https://img.shields.io/badge/target-Xbox%20%2B%20PC%201.00.2-c90016?style=flat-square)
+[![Discord](https://img.shields.io/badge/Discord-join%20us-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/azvrtGBvau)
 
-**Website and live progress: [scarface-decomp.pages.dev](https://scarface-decomp.pages.dev)**
+**Website and live progress: [scarface-decomp.pages.dev](https://scarface-decomp.pages.dev)** ·
+**Questions and help: [Discord](https://discord.gg/azvrtGBvau)**
 
 A matching decompilation of **Scarface: The World Is Yours** (Radical Entertainment, 2006): C++ source
 that compiles, with the compiler the game was built with, to the same machine code as the game. It is
@@ -84,8 +86,8 @@ The full procedure, with code generation notes for this compiler, is in
 
 **Backup: decomp.me.** No compiler yet, or it's acting up? The portal's **decomp.me** button opens the
 function on [decomp.me](https://decomp.me), which runs the same compiler in your browser. Get it to 100%
-there and post the link in a [GitHub issue](../../issues/new); a maintainer will verify it and credit
-you. Only that one function's bytes leave your computer, the same as any decomp.me scratch, and the
+there and post the link in a [GitHub issue](../../issues/new) or in #help on [Discord](https://discord.gg/azvrtGBvau); a
+maintainer will verify it and credit you. Only that one function's bytes leave your computer, the same as any decomp.me scratch, and the
 portal's check is still the one that counts.
 
 ## The compiler

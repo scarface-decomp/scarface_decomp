@@ -3,7 +3,8 @@
 Thanks for helping. This is a community project and every contribution counts, whether it is one
 5-byte function, a better name or a page of notes. The goal is C++ that compiles to the game's exact
 machine code, so the one thing that matters is the compiler's verdict. New here? Follow the
-[quick start](../README.md#quick-start-no-experience-needed) first.
+[quick start](../README.md#quick-start-no-experience-needed) first, and ask anything in #help on
+[Discord](https://discord.gg/azvrtGBvau).
 
 By contributing you agree to license your work under the [GPL-3.0-or-later](../LICENSE) (see
 [LEGAL.md](LEGAL.md)) and to follow [PROVENANCE.md](PROVENANCE.md), which covers where code and names
@@ -34,7 +35,7 @@ may come from and how AI tools may be used.
 6. If you stop, **Cancel & Save** keeps your best partial attempt for the next person.
 
 No compiler installed, or it's acting up? You can still do steps 1 to 4 with decomp.me. Post the 100% decomp.me link in a
-GitHub issue and a maintainer verifies it with the portal and credits you.
+GitHub issue or in #help on [Discord](https://discord.gg/azvrtGBvau), and a maintainer verifies it with the portal and credits you.
 
 Maintainers (`SCARFACE_MAINTAINERS`) publish verified work with **Sync Verified to GitHub**. It needs
 a folder that git knows about, made with `git clone`.

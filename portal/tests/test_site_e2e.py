@@ -114,7 +114,8 @@ def test_scoreboard_and_progress(site, browser):
     assert pg.text_content("#sb-pc") == f"{v['pc']:,}" and pg.text_content("#sb-xb") == f"{v['xb']:,}"
     assert "13.10.3052" in pg.text_content("#sb-compiler")
     assert pg.locator("#buckets .bucket").count() == len(PROG["size_buckets"])
-    assert pg.get_attribute("a.gh", "href") == "https://github.com/scarface-decomp/scarface_decomp"
+    assert pg.get_attribute("a.gh[data-repo-link]", "href") == "https://github.com/scarface-decomp/scarface_decomp"
+    assert pg.get_attribute("a.gh:not([data-repo-link])", "href").startswith("https://discord.gg/")
     assert not pg.errors, pg.errors
     ctx.close()
 
