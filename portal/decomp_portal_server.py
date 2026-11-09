@@ -676,7 +676,7 @@ def revise_verified(t: dict, cpp_code: str, user: str, res: dict) -> bool:
 def save_registry() -> None:
     REGISTRY["compiler"] = compiler_version()
     write_json(REGISTRY_JSON, REGISTRY)
-    write_outputs(REGISTRY, RECON_DIR)
+    write_outputs(REGISTRY, RECON_DIR, queue=ALL_TASKS)
 
 
 # =========================================================================== #
@@ -1108,6 +1108,146 @@ def git_sync(user: str, base: Path = BASE_DIR) -> dict:
 
 
 # =========================================================================== #
+# Submitting work (everyone) and importing it (maintainers)
+# =========================================================================== #
+# Every match is saved in reports/verified_registry.json the moment it verifies, so closing the portal
+# loses nothing. "Submit your work" gets the matches that are not on GitHub yet to the project: a maintainer's
+# press commits and pushes them; anyone else's packs them into one file to post in the Discord or a GitHub
+# issue. A maintainer imports that file, which compiles every function again before it is added under the
+# name of whoever matched it.
+
+SUBMISSION_FORMAT = "scarface-decomp-submission"
+SUBMISSION_FIELDS = ("bin", "va", "size", "symbol", "flags", "verified_by", "tool_used", "verified_at", "code",
+                     "ported_from", "revised_by", "note")
+IMPORT_MAX = 20000
+_PUBLISHED: Dict[str, object] = {"head": None, "keys": frozenset()}
+IMPORT_STATUS: Dict[str, object] = {"running": False}
+
+
+def _git_head(base: Path = BASE_DIR) -> Optional[str]:
+    """The checked-out commit, read from .git without running git (cheap enough for every page refresh)."""
+    g = base / ".git"
+    try:
+        head = (g / "HEAD").read_text(encoding="utf-8").strip()
+        if not head.startswith("ref: "):
+            return head or None
+        ref = head[5:]
+        if (g / ref).exists():
+            return (g / ref).read_text(encoding="utf-8").strip() or None
+        if (g / "packed-refs").exists():
+            for line in (g / "packed-refs").read_text(encoding="utf-8").splitlines():
+                if line.endswith(" " + ref):
+                    return line.split(" ", 1)[0]
+    except OSError:
+        pass
+    return None
+
+
+def published_keys(base: Path = BASE_DIR) -> frozenset:
+    """Matches already on GitHub: the registry as of this folder's last commit."""
+    head = _git_head(base)
+    if head is None:
+        return frozenset()
+    if _PUBLISHED["head"] != head:
+        keys: frozenset = frozenset()
+        try:
+            p = subprocess.run(["git", "show", "HEAD:reports/verified_registry.json"], cwd=base,
+                               capture_output=True, timeout=60)
+            if p.returncode == 0:
+                keys = frozenset(json.loads(p.stdout.decode("utf-8")).get("entries", {}))
+        except (OSError, ValueError, subprocess.TimeoutExpired):
+            pass
+        _PUBLISHED.update(head=head, keys=keys)
+    return _PUBLISHED["keys"]  # type: ignore[return-value]
+
+
+def pending_keys() -> List[str]:
+    """Matches saved on this computer that are not on GitHub yet."""
+    pub = published_keys()
+    with STATE_LOCK:
+        return [k for k in REGISTRY.get("entries", {}) if k not in pub]
+
+
+def make_submission(user: str) -> dict:
+    with STATE_LOCK:
+        entries = {k: {f: e[f] for f in SUBMISSION_FIELDS if f in e}
+                   for k in pending_keys() for e in [REGISTRY["entries"][k]]
+                   if (e.get("code") or "").strip() and not e.get("excerpt")}
+    return {"format": SUBMISSION_FORMAT, "version": 1, "submitted_by": user, "created": stamp(),
+            "compiler": compiler_version(), "count": len(entries), "entries": entries}
+
+
+def submission_filename(user: str) -> str:
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", user).strip("-")[:40] or "contributor"
+    return f"scarface-submission-{slug}-{dt.datetime.now().strftime('%Y-%m-%d-%H%M')}.json"
+
+
+def import_submission(bundle: dict, importer: str) -> dict:
+    """Compile every function of a submission again, exactly as a match made here is checked, and add the ones
+    that match under the name of whoever matched them. Progress is in IMPORT_STATUS."""
+    st = IMPORT_STATUS
+    entries = bundle.get("entries") if isinstance(bundle, dict) else None
+    who_sent = str((bundle or {}).get("submitted_by") or "unknown")[:64] if isinstance(bundle, dict) else "unknown"
+    st.clear()
+    st.update(running=True, submitted_by=who_sent, total=len(entries) if isinstance(entries, dict) else 0,
+              done=0, added=0, already=0, failed=[], error="")
+    try:
+        if not isinstance(bundle, dict) or bundle.get("format") != SUBMISSION_FORMAT or not isinstance(entries, dict):
+            st["error"] = "That file is not a submission from the Scarface portal."
+            return st
+        with STATE_LOCK:
+            by_key = {task_key(t): t for t in ALL_TASKS}
+        added = 0
+        for key, e in list(entries.items())[:IMPORT_MAX]:
+            st["done"] += 1
+            e = e if isinstance(e, dict) else {}
+            t = by_key.get(str(key))
+            code = e.get("code") if isinstance(e.get("code"), str) else ""
+            who = str(e.get("verified_by") or who_sent)[:64]
+            tool = str(e.get("tool_used") or "")[:120]
+            name = str(e.get("symbol") or key)[:120]
+            if t is None:
+                st["failed"].append({"symbol": name, "reason": "not in this portal's function list (is that game file here?)"})
+                continue
+            if t["status"] == "VERIFIED":
+                st["already"] += 1
+                continue
+            if not code.strip() or len(code) > 200_000:
+                st["failed"].append({"symbol": t["symbol"], "reason": "no code"})
+                continue
+            res = run_verify(t, code)
+            if not (res.get("ok") and res.get("verified")):
+                why = (res.get("compiler_error") or res.get("error") or "").strip().splitlines()
+                st["failed"].append({"symbol": t["symbol"], "reason": why[0][:200] if why else
+                                     f"{res.get('matched_bytes', 0)} of {res.get('total_bytes', t['size'])} bytes match"})
+                continue
+            with STATE_LOCK:
+                if t["status"] == "VERIFIED":
+                    st["already"] += 1
+                    continue
+                record_verified(t, code, who, tool, res, write=False)
+                REGISTRY["entries"][task_key(t)].update(imported_by=importer, imported_at=stamp())
+                t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
+                save_overlay(t)
+                added += 1
+                st["added"] = added
+            if not res.get("reloc_unverified"):
+                queue_port(t, code, who, tool)
+        with STATE_LOCK:
+            if added:
+                save_registry()
+                append_audit({"time": stamp(), "user": importer, "action": "VERIFIED",
+                              "symbol": f"{added} function(s) submitted by {who_sent}", "va": "",
+                              "bytes": "checked again on import"})
+                print(f"[+] Imported {added} function(s) submitted by {who_sent} -> {len(REGISTRY['entries'])} total")
+    except Exception as ex:  # noqa: BLE001 - report it on the page instead of losing the thread
+        st["error"] = f"{type(ex).__name__}: {ex}"
+    finally:
+        st["running"] = False
+    return st
+
+
+# =========================================================================== #
 # Scripts tab
 # =========================================================================== #
 
@@ -1174,16 +1314,33 @@ def script_names(version: str) -> dict:
     """Readable names for the hashed identifiers in one version folder's scripts, recovered from the
     user's own game files (torque_script.names_for); worked out once per folder."""
     import torque_script as TS
-    folder = SCRIPTS_DIR / version if version != "uploads" else SCRIPTS_DIR
-    files = [p for p in folder.rglob("*") if p.is_file() and p.suffix.lower() in (".cso", ".dso", ".cs")] \
-        if folder.is_dir() else []
-    key = tuple(sorted((str(p), p.stat().st_size) for p in files))
+    if _SCRIPT_INDEX["key"] is None:
+        script_index()
+    key = _SCRIPT_INDEX["key"]                       # changes when script_index() sees the files change
     cached = _SCRIPT_NAMES.get(version)
     if cached and cached[0] == key:
         return cached[1]
+    folder = SCRIPTS_DIR / version if version != "uploads" else SCRIPTS_DIR
+    files = [p for p in folder.rglob("*") if p.is_file() and p.suffix.lower() in (".cso", ".dso", ".cs")] \
+        if folder.is_dir() else []
     names = TS.names_for(files, BASE_DIR / "binaries")
     _SCRIPT_NAMES[version] = (key, names)
     return names
+
+
+def script_text(rel: str) -> dict:
+    """Just the readable TorqueScript of one file, for downloads (the 1:1 check result is already known)."""
+    p = (SCRIPTS_DIR / rel).resolve()
+    if not rel or SCRIPTS_DIR.resolve() not in p.parents or not p.is_file():
+        return {"ok": False}
+    ext = p.suffix.lower()
+    if ext in (".cso", ".dso"):
+        import torque_script as TS
+        try:
+            return {"ok": True, "format": "TorqueScript", "decompiled_code": TS.decompile(p.read_bytes(), script_names(_script_version(Path(rel))))}
+        except Exception as e:  # noqa: BLE001 - one odd file shouldn't stop the download
+            return {"ok": True, "format": "could not be read", "decompiled_code": f"// {p.name}: {e}"}
+    return script_detail(rel)
 
 
 def script_detail(rel: str) -> dict:
@@ -1309,6 +1466,75 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):
         pass
 
+    def _download(self, kind: str, q1) -> None:
+        """/download/functions|scripts|sources?format=zip|txt&only=verified (&build=xb|pc|proto, &version=...)"""
+        import downloads as DL
+        fmt = "txt" if q1("format") == "txt" else "zip"
+        only = q1("only") == "verified"
+        day = dt.datetime.now().strftime("%Y-%m-%d")
+        tag = "verified-" if only else ""
+        if kind == "functions":
+            build = q1("build", "all")
+            builds = [b for b in DL.BUILD_ORDER if build in ("all", b)]
+            if not builds:
+                return self._json({"ok": False, "error": "Unknown game file."}, 400)
+            with STATE_LOCK:
+                reg = {"compiler": REGISTRY.get("compiler", ""), "entries": dict(REGISTRY.get("entries", {}))}
+                queue = list(ALL_TASKS)
+            counts = {b: (sum(1 for e in reg["entries"].values() if e.get("bin") == b),
+                          sum(1 for t in queue if t.get("bin") == b)) for b in builds}
+            if only and not any(c[0] for c in counts.values()):
+                return self._json({"ok": False, "error": "Nothing verified yet in that game file."}, 404)
+            files = DL.function_files(reg, queue, builds, only, write_outputs, RO.BIN_INFO, by_class=fmt == "zip")
+            readme = DL.functions_readme(builds, only, counts)
+            title = "SCARFACE: THE WORLD IS YOURS: DECOMPILED FUNCTIONS" + (" (VERIFIED ONLY)" if only else "")
+            name = f"scarface-functions-{tag}{'all' if build == 'all' else RO.BIN_INFO[build][1]}-{day}"
+        elif kind == "scripts":
+            version = q1("version", "all")
+            items, versions = script_index()
+            if not items:
+                return self._json({"ok": False, "error": "No game scripts here yet: they are copied out of your game files when the portal starts."}, 404)
+            import dtr_format as DTR
+
+            def dtr_exact(rel: str) -> bool:
+                try:
+                    return DTR.round_trip((SCRIPTS_DIR / rel).read_bytes())[0]
+                except Exception:  # noqa: BLE001
+                    return False
+            files, stats = DL.script_files(items, script_text, dict(_SCRIPT_CHECK["results"]), only,
+                                           None if version == "all" else [version], dtr_exact=dtr_exact)
+            if not files:
+                return self._json({"ok": False, "error": "No script files match that choice." +
+                                   (" The 1:1 check is still running; try again in a minute." if _SCRIPT_CHECK["running"] else "")}, 404)
+            readme = DL.scripts_readme(only, stats, [v["id"] for v in versions if version in ("all", v["id"])])
+            title = "SCARFACE: THE WORLD IS YOURS: GAME SCRIPTS AS TORQUESCRIPT" + (" (1:1 ONLY)" if only else "")
+            name = f"scarface-game-scripts-{tag}{version}-{day}"
+        else:
+            def regenerate() -> Dict[str, str]:
+                with STATE_LOCK:
+                    reg = {"compiler": REGISTRY.get("compiler", ""), "entries": dict(REGISTRY.get("entries", {}))}
+                files = DL.function_files(reg, [], DL.BUILD_ORDER, True, write_outputs, RO.BIN_INFO)
+                out = {}
+                for rel, text in files.items():           # back to reconstructed_src/ layout
+                    folder, rest = rel.split("/", 1)
+                    out[rest if rest.startswith("Original_Binary_Order") else folder + "/" + rest.replace("by_class/", "", 1)] = text
+                return out
+            files = DL.source_files(RECON_DIR, only, regenerate)
+            readme = ("Scarface: The World Is Yours: reconstructed_src/, the project's C++\n"
+                      f"Downloaded from the local portal on {DL.stamp()}.\n\n"
+                      "Original_Binary_Order_*.cpp: each game file's functions in address order (where they are in the game).\n"
+                      + ("Verified functions only.\n" if only else
+                         "Functions not matched yet are listed in their place as // [TODO] lines.\n")
+                      + "pc/, xbox/, proto/: the verified code grouped by class. include/: shared headers.\n\n" + DL.ONE_TO_ONE + "\n")
+            title = "SCARFACE: THE WORLD IS YOURS: SOURCE FILES (reconstructed_src)" + (" (VERIFIED ONLY)" if only else "")
+            name = f"scarface-source-files-{tag}{day}"
+        if fmt == "zip":
+            data = DL.to_zip({"README.txt": readme, **files}, name)
+            return self._send(200, data, "application/zip", {"Content-Disposition": f'attachment; filename="{name}.zip"'})
+        text = DL.to_txt(files, title, readme.splitlines())
+        return self._send(200, text.encode("utf-8"), "text/plain; charset=utf-8",
+                          {"Content-Disposition": f'attachment; filename="{name}.txt"'})
+
     def _send(self, code: int, body: bytes, ctype: str, extra: Optional[dict] = None):
         self.send_response(code)
         self.send_header("Content-Type", ctype)
@@ -1379,6 +1605,8 @@ class Handler(BaseHTTPRequestHandler):
             if icon.exists():
                 return self._send(200, icon.read_bytes(), "image/svg+xml")
             return self._send(204, b"", "image/svg+xml")
+        if u.path in ("/download/functions", "/download/scripts", "/download/sources"):
+            return self._download(u.path.rsplit("/", 1)[1], q1)
         if u.path == "/download/ai-handoff":
             data = HANDOFF_MD.read_bytes() if HANDOFF_MD.exists() else b"# AI handoff\n"
             return self._send(200, data, "text/markdown; charset=utf-8",
@@ -1398,7 +1626,8 @@ class Handler(BaseHTTPRequestHandler):
                                    "tier_counts": dict(tiers), "total_remaining_indexed": remaining,
                                    "repo_url": REPO_URL, "lookalikes": lookalike_summary(),
                                    "binary_problems": BINARY_PROBLEMS, "scripts": script_check_summary(),
-                                   "proto_in_retail": {"same_code": copies["code"], "same_method": copies["method"]}})
+                                   "proto_in_retail": {"same_code": copies["code"], "same_method": copies["method"]},
+                                   "pending": len(pending_keys()), "maintainers": sorted(MAINTAINERS)})
         if u.path == "/api/source":
             name = q1("name")
             p = (RECON_DIR / name).resolve()
@@ -1466,6 +1695,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json(decompme_prepare(t))
             except (ValueError, RuntimeError) as e:
                 return self._json({"ok": False, "error": str(e)}, 400)
+        if u.path == "/api/import-status":
+            return self._json(dict(IMPORT_STATUS, failed=list(IMPORT_STATUS.get("failed", []))[:200]))
         if u.path == "/api/lookalikes":
             with STATE_LOCK:
                 t = TASK_BY_ID.get(q1("id"))
@@ -1500,6 +1731,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/login": self.post_login, "/api/claim": self.post_claim, "/api/cancel": self.post_cancel,
             "/api/verify": self.post_verify, "/api/fast-synthesize": self.post_synth, "/api/ai-proxy": self.post_ai,
             "/api/git-sync": self.post_git, "/api/upload-script": self.post_upload,
+            "/api/submit": self.post_submit, "/api/import-submission": self.post_import,
             "/api/decompme": self.post_decompme,
         }.get(path)
         if not route:
@@ -1663,6 +1895,39 @@ class Handler(BaseHTTPRequestHandler):
         with STATE_LOCK:
             res = git_sync(user)
         self._json(res)
+
+    def post_submit(self, body):
+        """Maintainers: commit and push. Everyone else: one file with the matches not on GitHub yet."""
+        user = self._auth(body)
+        if not user:
+            return
+        if user in MAINTAINERS:
+            with STATE_LOCK:
+                res = git_sync(user)
+            return self._json(dict(res, mode="pushed", pending=len(pending_keys())))
+        bundle = make_submission(user)
+        if not bundle["count"]:
+            return self._json({"ok": True, "mode": "nothing", "pending": 0,
+                               "message": "Everything you matched is already on GitHub."})
+        self._json({"ok": True, "mode": "file", "count": bundle["count"], "filename": submission_filename(user),
+                    "bundle": bundle, "pending": bundle["count"]})
+
+    def post_import(self, body):
+        user = self._auth(body)
+        if not user:
+            return
+        if user not in MAINTAINERS:
+            return self._json({"ok": False, "error": "Only maintainers can import submissions."}, 403)
+        if not MV.find_msvc71_bin():
+            return self._json({"ok": False, "error": NO_COMPILER_HELP})
+        if IMPORT_STATUS.get("running"):
+            return self._json({"ok": False, "error": "A submission is already being imported."}, 409)
+        bundle = body.get("bundle")
+        n = len(bundle.get("entries") or {}) if isinstance(bundle, dict) and isinstance(bundle.get("entries"), dict) else 0
+        IMPORT_STATUS.clear()
+        IMPORT_STATUS.update(running=True, total=n, done=0, added=0, already=0, failed=[], error="")
+        threading.Thread(target=import_submission, args=(bundle, user), name="import", daemon=True).start()
+        self._json({"ok": True, "started": True, "total": n})
 
     def post_upload(self, body):
         from cso_dso_dtr_decompiler import verify_and_decompile_cso_dso, verify_and_decompile_dtr

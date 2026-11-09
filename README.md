@@ -100,6 +100,9 @@ functions on decomp.me and have a maintainer check them.
    Change it until it does.
 6. **Press Compile & Verify** to record it under your name. That needs the compiler ([below](#the-compiler));
    set it up once, before you start.
+7. **Press Submit your work** when you're done for now. Your matches are saved on your computer as you go, so
+   nothing is lost if you close the portal; submitting packs the new ones into one file to post in the Discord
+   or a GitHub issue, and a maintainer adds them under your name (every function is compiled again first).
 
 **Backup: decomp.me.** No compiler yet, or it's acting up? The portal's **decomp.me** button opens the
 function on [decomp.me](https://decomp.me), which runs the same compiler in your browser. Get it to 100%

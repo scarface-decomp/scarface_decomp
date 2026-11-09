@@ -136,6 +136,34 @@
     .gh-side-link.sync:not(:disabled):hover { background: var(--blood-hover); border-color: var(--blood-hover); }
     .gh-side-link:disabled { opacity: 0.55; cursor: not-allowed; }
 
+    .submit-box { display: flex; flex-direction: column; gap: 6px; padding-bottom: 6px; }
+    .submit-box [hidden] { display: none; }
+    .gh-side-link.sync { padding: 12px 12px 10px; font-size: 0.86rem; }
+    .submit-note { font-size: 0.8rem; color: var(--muted); text-align: center; line-height: 1.4; }
+    .submit-note.has-work { color: var(--text); }
+    .submit-note.has-work::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--crimson); margin-right: 6px; position: relative; top: -1px; }
+    .submit-strip { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border: 1px solid rgba(234, 68, 77, 0.5); border-left: 3px solid var(--blood); background: rgba(181, 18, 27, 0.10); border-radius: 2px; padding: 12px 14px; margin: -2px 0 14px; }
+    .submit-strip[hidden] { display: none; }
+    .submit-strip p { font-size: 0.92rem; color: var(--text-secondary); max-width: 60em; }
+    .submit-strip strong { color: var(--text); }
+    .sd-dialog { margin: auto; width: min(560px, calc(100vw - 32px)); background: var(--bg-card); color: var(--text); border: 1px solid var(--border); border-top: 3px solid var(--blood); border-radius: 2px; padding: 24px 26px 22px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6); }
+    .sd-dialog::backdrop { background: rgba(0, 0, 0, 0.65); }
+    .sd-title { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); margin-bottom: 12px; }
+    .sd-body p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+    .sd-body p + p, .sd-body p + ul, .sd-body ul + p { margin-top: 10px; }
+    .sd-body p.small { font-size: 0.86rem; color: var(--muted); }
+    .sd-body ul { margin-left: 18px; font-size: 0.86rem; color: var(--muted); max-height: 180px; overflow-y: auto; }
+    .sd-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; margin-top: 20px; }
+    .sd-actions a.btn { text-decoration: none; }
+    .masked { -webkit-text-security: disc; }
+    .dl-form { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+    .dl-form fieldset { border: 0; display: flex; flex-direction: column; gap: 7px; }
+    .dl-form legend { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .dl-form label { display: flex; align-items: baseline; gap: 9px; font-size: 0.92rem; color: var(--text-secondary); cursor: pointer; }
+    .dl-form input[type=radio] { accent-color: var(--blood); }
+    .dl-form select { width: 100%; }
+    .hdr-actions { display: flex; align-items: center; gap: 10px; }
+
     /* ---------- Top bar ---------- */
     .main-area { display: flex; flex-direction: column; min-width: 0; }
     .topbar {
@@ -696,7 +724,12 @@
       </div>
 
       <div class="sidebar-footer">
-        <button type="button" id="btn-git-sync" class="gh-side-link sync" onclick="manualGitSync()" title="Maintainers: commit and push the verified functions to GitHub">Sync to GitHub</button>
+        <div class="submit-box">
+          <button type="button" id="btn-git-sync" class="gh-side-link sync" onclick="submitWork()" title="Send your new matches to the project, credited to you">Submit your work</button>
+          <p class="submit-note" id="submit-note" role="status">Press when you're done for now</p>
+          <button type="button" id="btn-import" class="gh-side-link" onclick="document.getElementById('import-input').click()" hidden>Import a submission</button>
+          <input type="file" id="import-input" accept=".json,application/json" hidden onchange="importSubmission(event)" />
+        </div>
         <a href="https://github.com/scarface-decomp/scarface_decomp" data-repo-link="" target="_blank" rel="noopener noreferrer" class="gh-side-link">GitHub</a>
         <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer" class="gh-side-link">Discord</a>
       </div>
@@ -838,7 +871,8 @@
             <div class="card">
               <div class="card-hdr">
                 <h3 class="card-title">Functions</h3>
-                <span class="hdr-stat"><span id="queue-count">—</span> listed</span>
+                <span class="hdr-actions"><span class="hdr-stat"><span id="queue-count">—</span> listed</span>
+                  <button type="button" class="btn-sm" id="btn-dl-functions" onclick="openDownload('functions')" title="Download the functions in address order">Download</button></span>
               </div>
 
               <div class="filter-row">
@@ -875,7 +909,7 @@
                   <option value="VERIFIED_FIRST">Verified first</option>
                 </select>
                 <label class="sr-only" for="search-filter">Search</label>
-                <input id="search-filter" type="search" class="input-box" placeholder="Search name or address" oninput="syncSubFilterButtons(); resetPageAndLoadQueue()" />
+                <input id="search-filter" type="search" class="input-box" placeholder="Search name or address" autocomplete="off" oninput="syncSubFilterButtons(); resetPageAndLoadQueue()" />
               </div>
 
               <div id="queue-list" class="queue-scroll" role="listbox" aria-label="Function queue"></div>
@@ -908,7 +942,7 @@
                   <label class="sr-only" for="ai-model-custom">Custom model ID</label>
                   <input id="ai-model-custom" type="text" class="input-box w-model-custom" style="display:none;" placeholder="Model name" oninput="saveAiSettings()" />
                   <label class="sr-only" for="ai-key">API key</label>
-                  <input id="ai-key" type="password" class="input-box w-key" placeholder="Paste API key" autocomplete="off" oninput="saveAiSettings()" />
+                  <input id="ai-key" type="text" class="input-box w-key masked" placeholder="Paste API key" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="" data-bwignore="" data-form-type="other" oninput="saveAiSettings()" />
                   <label class="remember-key" title="Off: the key is forgotten when you close this tab. On: it is stored in this browser until you clear it."><input type="checkbox" id="ai-remember-key" onchange="saveAiSettings()" /> Remember key</label>
                   <button type="button" id="btn-test-api" class="btn-sm gold" onclick="testAiConnection()">Test</button>
                 </div>
@@ -957,6 +991,12 @@
                     <button type="button" id="btn-autopilot" class="btn btn-autopilot" onclick="toggleAutopilot()">Batch Run</button>
                   </div>
                 </div>
+              </div>
+
+              <div class="submit-strip" id="submit-strip" hidden>
+                <p><strong id="submit-strip-count">New matches</strong> <span id="submit-strip-verb">are</span> saved on this computer but not on GitHub yet.
+                  When you're done for now, submit your work so it is added to the project under your name.</p>
+                <button type="button" class="btn primary" onclick="submitWork()">Submit your work</button>
               </div>
 
               <div id="ai-activity-box" class="activity-box" role="status" aria-live="polite">
@@ -1026,6 +1066,7 @@
                 <label class="sr-only" for="source-file-filter">Filter files</label>
                 <input id="source-file-filter" type="search" class="input-box" style="width:210px;" placeholder="Filter files" oninput="renderSources()" />
                 <a href="https://github.com/scarface-decomp/scarface_decomp/tree/main/reconstructed_src" data-repo-link="/tree/main/reconstructed_src" target="_blank" rel="noopener noreferrer" class="btn-sm">On GitHub &rarr;</a>
+                <button type="button" class="btn-sm" id="btn-dl-sources" onclick="openDownload('sources')" title="Download reconstructed_src">Download</button>
               </div>
             </div>
             <div class="file-selector" id="file-pills"></div>
@@ -1048,6 +1089,7 @@
               <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <input type="file" id="local-script-input" accept=".cso,.dso,.dtr" style="display:none;" onchange="uploadLocalScriptFile(event)" />
                 <button type="button" class="btn-sm gold" onclick="document.getElementById('local-script-input').click()">Open a file…</button>
+                <button type="button" class="btn-sm" id="btn-dl-scripts" onclick="openDownload('scripts')" title="Download the scripts as TorqueScript, in the game's folders">Download</button>
               </div>
             </div>
 
@@ -1144,6 +1186,12 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="submit-dialog" class="sd-dialog" aria-labelledby="sd-title">
+    <h2 id="sd-title" class="sd-title"></h2>
+    <div id="sd-body" class="sd-body"></div>
+    <div id="sd-actions" class="sd-actions"></div>
+  </dialog>
 
   <script>
   'use strict';
@@ -1478,6 +1526,9 @@
       $('feed-lookalikes-bar').style.width = Math.min(100, (Number(la.extra) / Number(la.functions)) * 100) + '%';
     }
     if (s.scripts) renderScriptCheck(s.scripts);
+    if (s.pending !== undefined) STATE.pending = s.pending;
+    if (Array.isArray(s.maintainers)) STATE.maintainers = s.maintainers;
+    updateSubmitUI();
   }
 
   /* Dashboard: how many of the game's scripts decompile to TorqueScript that compiles back exactly. */
@@ -1620,6 +1671,7 @@
     $('auth-signed-in-row').style.display = session.signedIn ? 'flex' : 'none';
     $('contrib-label').hidden = session.signedIn;
     $('auth-user-label').textContent = session.signedIn ? session.user : '';
+    updateSubmitUI();
   }
 
   async function signInContributor() {
@@ -2526,7 +2578,7 @@
       else renderLeaderboard();
 
       if (data.is_exact) {
-        const where = data.saved_to ? ' Saved in ' + data.saved_to + '. Share it with Sync to GitHub (maintainers) or a pull request.' : '';
+        const where = (data.saved_to || data.newly_promoted) ? ' Saved on this computer. When you\'re done for now, press Submit your work.' : '';
         let msg;
         if (data.newly_promoted) {
           msg = 'VERIFIED: ' + data.matched_bytes + '/' + data.total_bytes + ' B match exactly.' + where +
@@ -2839,26 +2891,263 @@
   /* ===================================================================
    * GitHub sync
    * =================================================================== */
-  async function manualGitSync() {
+  /* ===================================================================
+   * Submitting work. Every match is saved on this computer the moment it verifies; this sends the ones
+   * that are not on GitHub yet to the project. Maintainers push them; anyone else gets one file to post
+   * in the Discord or a GitHub issue, which a maintainer imports (every function is compiled again).
+   * =================================================================== */
+  const DISCORD_URL = 'https://discord.gg/azvrtGBvau';
+
+  function isMaintainer() {
+    return !!session.signedIn && Array.isArray(STATE.maintainers) && STATE.maintainers.indexOf(session.user) !== -1;
+  }
+
+  function matchesText(n) { return fmtInt(n) + ' new match' + (n === 1 ? '' : 'es'); }
+
+  function updateSubmitUI() {
+    const n = Number(STATE.pending) || 0;
+    const note = $('submit-note');
+    if (!note) return;
+    note.textContent = n ? matchesText(n) + ' to submit' : (STATE.pending === undefined ? 'Press when you\'re done for now' : 'Everything is on GitHub');
+    note.classList.toggle('has-work', n > 0);
+    $('submit-strip').hidden = n === 0;
+    $('submit-strip-count').textContent = matchesText(n);
+    $('submit-strip-verb').textContent = n === 1 ? 'is' : 'are';
+    $('btn-import').hidden = !isMaintainer();
+  }
+
+  function el(tag, text, cls) {
+    const e = document.createElement(tag);
+    if (text !== undefined) e.textContent = text;
+    if (cls) e.className = cls;
+    return e;
+  }
+
+  /* body: strings or nodes (strings become paragraphs). actions: [{label, href, primary, onClick}] */
+  function showDialog(title, body, actions) {
+    const dlg = $('submit-dialog');
+    $('sd-title').textContent = title;
+    const b = $('sd-body');
+    b.innerHTML = '';
+    (body || []).forEach((x) => b.appendChild(typeof x === 'string' ? el('p', x) : x));
+    const acts = $('sd-actions');
+    acts.innerHTML = '';
+    (actions && actions.length ? actions : [{ label: 'Close', primary: true }]).forEach((act) => {
+      const btn = el(act.href ? 'a' : 'button', act.label, 'btn' + (act.primary ? ' primary' : ''));
+      if (act.href) { btn.href = act.href; btn.target = '_blank'; btn.rel = 'noopener noreferrer'; }
+      else btn.type = 'button';
+      btn.addEventListener('click', () => { if (act.onClick) act.onClick(); if (!act.keepOpen) dlg.close(); });
+      acts.appendChild(btn);
+    });
+    if (!dlg.open) { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } }
+  }
+
+  function downloadJson(name, obj) {
+    saveBlob(new Blob([JSON.stringify(obj, null, 1)], { type: 'application/json' }), name);
+  }
+
+  function saveBlob(blob, name) {
+    const url = URL.createObjectURL(blob);
+    const a = el('a');
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+  }
+
+  /* ===================================================================
+   * Downloads: the functions, the game scripts and the source files, as a .zip that keeps the original
+   * layout or as one organised .txt. Functions are in the order they are in the game file; scripts in the
+   * folders they have inside the game's archive.
+   * =================================================================== */
+  const DOWNLOADS = {
+    functions: {
+      title: 'Download functions',
+      intro: 'Each game file\'s functions in the order they are in the game (by address), so every function sits where it belongs.',
+      what: [['', 'Every function: the verified ones as C++, the rest marked in place as [TODO]'], ['verified', 'Verified functions only, still in address order']],
+    },
+    scripts: {
+      title: 'Download game scripts',
+      intro: 'The game\'s scripts as readable TorqueScript, in the same folders as inside the game. These come from your own copy of the game: keep them to yourself.',
+      what: [['', 'Every script (each file says whether it is proven 1:1)'], ['verified', 'Only scripts proven 1:1']],
+    },
+    sources: {
+      title: 'Download source files',
+      intro: 'The project\'s C++ folder (reconstructed_src), as on GitHub.',
+      what: [['', 'As on GitHub: unfinished functions marked in place as [TODO]'], ['verified', 'Verified functions only']],
+    },
+  };
+
+  function radios(legend, name, options) {
+    const fs = el('fieldset');
+    fs.appendChild(el('legend', legend));
+    options.forEach(([value, text], i) => {
+      const lab = el('label');
+      const r = el('input');
+      r.type = 'radio';
+      r.name = name;
+      r.value = value;
+      r.checked = i === 0;
+      lab.append(r, text);
+      fs.appendChild(lab);
+    });
+    return fs;
+  }
+
+  function picker(legend, name, options) {
+    const fs = el('fieldset');
+    fs.appendChild(el('legend', legend));
+    const sel = el('select');
+    sel.name = name;
+    sel.className = 'input-box';
+    options.forEach(([value, text]) => { const o = el('option', text); o.value = value; sel.appendChild(o); });
+    fs.appendChild(sel);
+    return fs;
+  }
+
+  function openDownload(kind) {
+    const cfg = DOWNLOADS[kind];
+    const form = el('form', undefined, 'dl-form');
+    form.addEventListener('submit', (e) => e.preventDefault());
+    if (kind === 'functions') {
+      form.appendChild(picker('Game file', 'build', [['all', 'All game files'], ['xb', 'Xbox (most of the game)'], ['pc', 'PC'], ['proto', 'Xbox prototype (April 2006)']]));
+    } else if (kind === 'scripts') {
+      form.appendChild(picker('Version', 'version', [['all', 'All versions']].concat((SCRIPT_VERSIONS || []).map((v) => [v.id, v.label]))));
+    }
+    form.appendChild(radios('What', 'only', cfg.what));
+    form.appendChild(radios('As', 'format', [['zip', 'A .zip folder, in the original layout'], ['txt', 'One .txt file, organised, with a table of contents']]));
+    const note = el('p', '', 'small');
+    note.id = 'dl-note';
+    note.setAttribute('role', 'status');
+    showDialog(cfg.title, [cfg.intro, form, note], [
+      { label: 'Download', primary: true, keepOpen: true, onClick: () => runDownload(kind, form) },
+      { label: 'Cancel' },
+    ]);
+  }
+
+  async function runDownload(kind, form) {
+    const note = $('dl-note');
+    const buttons = Array.from(document.querySelectorAll('#sd-actions .btn'));
+    const params = new URLSearchParams();
+    new FormData(form).forEach((v, k) => { if (v !== '') params.set(k, v); });
+    note.textContent = kind === 'scripts' ? 'Preparing… turning the scripts into text can take a minute.' : 'Preparing…';
+    buttons.forEach((b) => { b.disabled = true; });
+    try {
+      const res = await fetch('/download/' + kind + '?' + params.toString(), { credentials: 'same-origin' });
+      if (!res.ok) {
+        let msg = '';
+        try { msg = (await res.json()).error || ''; } catch (e) { /* not JSON */ }
+        note.textContent = msg || 'The download failed (HTTP ' + res.status + ').';
+        return;
+      }
+      const m = (res.headers.get('Content-Disposition') || '').match(/filename="([^"]+)"/);
+      const name = m ? m[1] : 'scarface-' + kind + (params.get('format') === 'txt' ? '.txt' : '.zip');
+      saveBlob(await res.blob(), name);
+      $('submit-dialog').close();
+      toast('Saved ' + name + ' to your Downloads folder.', 'ok');
+    } catch (e) {
+      note.textContent = 'The download failed: ' + e.message;
+    } finally {
+      buttons.forEach((b) => { b.disabled = false; });
+    }
+  }
+
+  function repoBase() { return String(STATE.repo_url || 'https://github.com/scarface-decomp/scarface_decomp').replace(/\/+$/, ''); }
+
+  async function submitWork() {
     const btn = $('btn-git-sync');
     if (btn.disabled) return;
-    if (!session.signedIn) { toast('Sign in to sync to GitHub.', 'warn'); setAuthMsg('Sign in to continue.', 'info'); $('contrib-name').focus(); return; }
+    if (!session.signedIn) {
+      toast('Sign in first (top right), then press Submit your work.', 'warn');
+      setAuthMsg('Sign in to continue.', 'info');
+      $('contrib-name').focus();
+      return;
+    }
+    const maint = isMaintainer();
     btn.disabled = true;
-    btn.textContent = 'Pushing to GitHub…';
+    btn.textContent = maint ? 'Sending to GitHub…' : 'Preparing your file…';
     try {
-      const data = await postJson('/api/git-sync', creds());
-      if (data.ok) {
-        btn.textContent = 'Synced to GitHub ✓';
-        toast(data.message || 'Synced to GitHub.', 'ok');
-      } else {
-        btn.textContent = 'Sync failed';
-        toast(data.error || 'Sync failed; check git status on the server.', 'err');
+      const data = await postJson('/api/submit', creds());
+      if (data.pending !== undefined) { STATE.pending = data.pending; updateSubmitUI(); }
+      if (!data.ok) {
+        showDialog('Not sent yet', [data.error || 'Something went wrong. Your matches are still saved on this computer.']);
+        return;
       }
+      if (data.mode === 'nothing') { toast(data.message || 'Everything you matched is already on GitHub.', 'ok'); return; }
+      if (data.mode === 'pushed') {
+        showDialog('Sent to GitHub', [data.message || 'Your matches are on GitHub.',
+          'The website shows the new numbers within a minute or two.']);
+        refreshSideState();
+        return;
+      }
+      downloadJson(data.filename, data.bundle);
+      const p1 = el('p');
+      p1.append('Your ' + matchesText(data.count) + (data.count === 1 ? ' was' : ' were') + ' saved as ', el('code', data.filename), ' in your Downloads folder.');
+      const title = encodeURIComponent('Submission: ' + matchesText(data.count) + ' from ' + session.user);
+      const text = encodeURIComponent('Attach the file ' + data.filename + ' here (drag it into this box).');
+      showDialog('Your work is ready to send', [
+        p1,
+        'To add it to the project, post that file in the Discord (#help) or attach it to a new GitHub issue. A maintainer compiles every function again with the same compiler and adds it under your name.',
+        el('p', 'Your matches also stay saved on this computer, so closing the portal never loses them. You can submit again at any time; anything already on GitHub is left out.', 'small'),
+      ], [
+        { label: 'Open the Discord', href: DISCORD_URL, primary: true },
+        { label: 'New GitHub issue', href: repoBase() + '/issues/new?title=' + title + '&body=' + text },
+        { label: 'Done' },
+      ]);
     } catch (e) {
-      btn.textContent = 'Sync error';
-      toast('Sync error: ' + e.message, 'err');
+      showDialog('Not sent yet', ['Error: ' + e.message + '. Your matches are still saved on this computer.']);
     } finally {
-      setTimeout(() => { btn.disabled = false; btn.textContent = 'Sync to GitHub'; }, 2500);
+      btn.disabled = false;
+      btn.textContent = 'Submit your work';
+    }
+  }
+
+  async function importSubmission(event) {
+    const input = event.target;
+    const file = input.files && input.files[0];
+    input.value = '';
+    if (!file) return;
+    let bundle;
+    try {
+      bundle = JSON.parse(await file.text());
+    } catch (e) {
+      showDialog('Not a submission file', ['That file could not be read as a submission: ' + e.message]);
+      return;
+    }
+    try {
+      const start = await postJson('/api/import-submission', Object.assign({ bundle: bundle }, creds()));
+      if (!start.ok) { showDialog('Could not import', [start.error || 'Import failed.']); return; }
+      const who = String(bundle.submitted_by || 'a contributor');
+      showDialog('Checking the submission', ['Compiling ' + fmtInt(start.total) + ' functions from ' + who + '…'], [{ label: 'Hide', keepOpen: false }]);
+      let st;
+      for (;;) {
+        await new Promise((r) => setTimeout(r, 1200));
+        st = await apiFetchJson('/api/import-status');
+        const body = $('sd-body');
+        if (st.running && body && $('submit-dialog').open) {
+          body.firstChild.textContent = 'Checked ' + fmtInt(st.done) + ' of ' + fmtInt(st.total) + ' functions from ' + who +
+            ': ' + fmtInt(st.added) + ' added, ' + fmtInt(st.already) + ' already matched, ' + fmtInt((st.failed || []).length) + ' did not match.';
+        }
+        if (!st.running) break;
+      }
+      if (st.error) { showDialog('Could not import', [st.error]); return; }
+      const parts = ['Added ' + fmtInt(st.added) + ' function' + (st.added === 1 ? '' : 's') + ' from ' + who + ', credited to them. ' +
+        fmtInt(st.already) + ' ' + (st.already === 1 ? 'was' : 'were') + ' already matched.'];
+      const failed = st.failed || [];
+      if (failed.length) {
+        parts.push(fmtInt(failed.length) + ' did not match here and were left out:');
+        const ul = el('ul');
+        failed.slice(0, 50).forEach((f) => ul.appendChild(el('li', f.symbol + ': ' + f.reason)));
+        parts.push(ul);
+      }
+      if (st.added) parts.push('Press Submit your work to send them to GitHub.');
+      showDialog('Submission imported', parts);
+      refreshSideState();
+      loadQueuePage();
+    } catch (e) {
+      showDialog('Could not import', ['Error: ' + e.message]);
     }
   }
 
@@ -3319,6 +3608,11 @@
     head.textContent = list.length === 1 ? 'A game file in binaries/ is not used' : list.length + ' game files in binaries/ are not used';
     box.appendChild(head);
     list.forEach((msg) => { const p = document.createElement('p'); p.textContent = msg; box.appendChild(p); });
+  }
+
+  if (!(window.CSS && CSS.supports && CSS.supports('-webkit-text-security', 'disc'))) {
+    const k = document.getElementById('ai-key');
+    if (k) { k.type = 'password'; k.setAttribute('autocomplete', 'new-password'); }
   }
 
   loadState();

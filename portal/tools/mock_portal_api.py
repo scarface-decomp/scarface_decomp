@@ -142,6 +142,9 @@ def auth(body):
     return user, None
 
 
+IMPORT: dict = {"running": False}
+
+
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
@@ -173,7 +176,11 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"progress": progress(), "leaderboard": leaderboard(), "audit_log": AUDIT[-50:][::-1],
                                    "sources": SOURCES, "tier_counts": tier_counts(),
                                    "total_remaining_indexed": sum(tier_counts().values()),
-                                   "repo_url": "https://github.com/example-org/scarface_decomp"})
+                                   "repo_url": "https://github.com/example-org/scarface_decomp",
+                                   "pending": sum(1 for t in TASKS.values() if t["status"] == "VERIFIED"),
+                                   "maintainers": ["Founder"]})
+            if u.path == "/api/import-status":
+                return self._json(IMPORT)
             if u.path == "/api/queue":
                 items = list(TASKS.values())
                 lane, tier, query = q.get("lane", "ALL"), q.get("tier", "ALL"), q.get("q", "").lower()
@@ -213,6 +220,20 @@ class Handler(BaseHTTPRequestHandler):
                 data = b"<!doctype html><title>fake decomp.me</title><p>scratch</p>"
                 self.send_response(200)
                 self.send_header("Content-Type", "text/html")
+                self.send_header("Content-Length", str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+                return
+            if u.path in ("/download/functions", "/download/scripts", "/download/sources"):
+                kind = u.path.rsplit("/", 1)[1]
+                if kind == "scripts" and q.get("only") == "verified" and q.get("version") == "prototype":
+                    return self._json({"ok": False, "error": "No script files match that choice."}, 404)
+                ext = "txt" if q.get("format") == "txt" else "zip"
+                name = f"scarface-{kind}-{'verified-' if q.get('only') == 'verified' else ''}{q.get('build') or q.get('version') or 'all'}.{ext}"
+                data = (f"// {kind}\n// [TODO] 0x00401000 core::Func0000 (12 B)\n").encode() if ext == "txt" else b"PK\x05\x06" + b"\0" * 18
+                self.send_response(200)
+                self.send_header("Content-Type", "text/plain; charset=utf-8" if ext == "txt" else "application/zip")
+                self.send_header("Content-Disposition", f'attachment; filename="{name}"')
                 self.send_header("Content-Length", str(len(data)))
                 self.end_headers()
                 self.wfile.write(data)
@@ -348,6 +369,28 @@ class Handler(BaseHTTPRequestHandler):
                                        "claim_url": f"{api}/scratch/{slug}/claim?token=srv"})
                 t["decompme_slug"] = str(body.get("slug", ""))
                 return self._json({"ok": True})
+        if u.path == "/api/submit":
+            user, err = auth(body)
+            if err:
+                return self._json({"ok": False, "error": err}, 403)
+            done = {t["id"]: {"symbol": t["symbol"], "code": t.get("best_cpp") or "int f();", "verified_by": user}
+                    for t in TASKS.values() if t["status"] == "VERIFIED"}
+            if user == "Founder":
+                return self._json({"ok": True, "mode": "pushed", "pending": 0, "message": f"Pushed {len(done)} verified functions to GitHub."})
+            if not done:
+                return self._json({"ok": True, "mode": "nothing", "pending": 0, "message": "Everything you matched is already on GitHub."})
+            return self._json({"ok": True, "mode": "file", "count": len(done), "pending": len(done),
+                               "filename": f"scarface-submission-{user}.json",
+                               "bundle": {"format": "scarface-decomp-submission", "submitted_by": user, "entries": done}})
+        if u.path == "/api/import-submission":
+            user, err = auth(body)
+            if err or user != "Founder":
+                return self._json({"ok": False, "error": err or "Only maintainers can import submissions."}, 403)
+            entries = (body.get("bundle") or {}).get("entries") or {}
+            IMPORT.clear()
+            IMPORT.update(running=False, total=len(entries), done=len(entries), added=max(0, len(entries) - 1),
+                          already=0, failed=[{"symbol": "core::Bad", "reason": "4 of 12 bytes match"}] if entries else [], error="")
+            return self._json({"ok": True, "started": True, "total": len(entries)})
         if u.path == "/api/git-sync":
             user, err = auth(body)
             return self._json({"ok": not err, "message": "Pushed 0 files.", "error": err})

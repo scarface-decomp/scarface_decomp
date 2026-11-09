@@ -2,10 +2,15 @@
 """
 Generate the browsable source views from reports/verified_registry.json:
 
-  reconstructed_src/Original_Binary_Order_PC_1002.cpp   PC functions, ascending address
-  reconstructed_src/Original_Binary_Order_Xbox.cpp       Xbox functions, ascending address
-  reconstructed_src/pc/<subsystem>/<Class>.cpp           same code grouped by class
+  reconstructed_src/Original_Binary_Order_PC_1002.cpp   every PC function, ascending address
+  reconstructed_src/Original_Binary_Order_Xbox.cpp       every Xbox function, ascending address
+  reconstructed_src/Original_Binary_Order_Proto.cpp      every function of the April 2006 prototype
+  reconstructed_src/pc/<subsystem>/<Class>.cpp           the matched code grouped by class
   reconstructed_src/xbox/<subsystem>/<Class>.cpp
+
+With the function list (the portal's queue), the address-order files hold every function of the game file:
+matched ones as their C++, the rest as one "// [TODO]" line each in their place, under a header that says
+how complete the file is. Without it (no game files here), they hold the matched functions only.
 
 These files are generated. Every block compiles on its own (that is how it was verified), so a
 whole file is NOT one translation unit. Edit the registry (via the portal or
@@ -75,12 +80,27 @@ def _block(key: str, e: dict) -> str:
     )
 
 
-def _header(title: str, compiler: str) -> str:
+def _todo(va: int, t: dict) -> str:
+    return f"// [TODO] 0x{va:08X} {t.get('symbol', '')} ({int(t.get('size', 0))} B)\n"
+
+
+def _progress_lines(done: int, total: int, fname: str = "") -> str:
+    pct = done / total * 100 if total else 0.0
+    if total and done >= total:
+        return f"// PROGRESS: COMPLETE. All {total:,} functions are matched.\n"
+    where = f"in {fname}" if fname else "below"
+    return (f"// PROGRESS: {done:,} of {total:,} functions matched ({pct:.2f}%). NOT COMPLETE YET.\n"
+            f"// The {total - done:,} still to do are listed in their place {where} as \"// [TODO] address name (size)\"\n"
+            "// lines, so you can see what is missing and where; matched ones are the C++ itself.\n")
+
+
+def _header(title: str, compiler: str, progress: str = "") -> str:
     return (
         "// ============================================================================\n"
         f"// SCARFACE: THE WORLD IS YOURS — {title}\n"
         "// GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.\n"
-        f"// Every block compiled byte-for-byte with {compiler}.\n"
+        f"{progress}"
+        f"// Every [VERIFIED] block compiled byte-for-byte with {compiler}.\n"
         "// Blocks marked 'excerpt' are cut from the named source file and are built from that file;\n"
         "// every other block compiles on its own. The file as a whole is not one translation unit.\n"
         "// ============================================================================\n\n"
@@ -202,20 +222,73 @@ def write_progress(registry: dict, reports_dir: Path) -> bool:
     return True
 
 
-def write_outputs(registry: dict, recon_dir: Path) -> List[str]:
-    """(Re)write all generated files. Returns the relative paths written."""
+_TODO_RE = re.compile(r"^// \[TODO\] 0x([0-9A-Fa-f]{8}) (.*) \((\d+) B\)$")
+_DONE_RE = re.compile(r"^// \[VERIFIED\] (.*) \((0x[0-9A-Fa-f]{8}), (\d+) B\)$")
+FULL_LISTING = "every function in address order"
+
+
+def known_from_files(recon_dir: Path) -> Dict[str, Dict[int, dict]]:
+    """The function list as the address-order files already have it (their [TODO] and [VERIFIED] lines), for
+    when the game files are not here: the regenerated files then keep every function in its place."""
+    out: Dict[str, Dict[int, dict]] = defaultdict(dict)
+    for b, (fname, _f, _l) in BIN_INFO.items():
+        path = recon_dir / fname
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if FULL_LISTING not in text[:600]:
+            continue
+        for line in text.splitlines():
+            m = _TODO_RE.match(line)
+            if m:
+                va, sym, size = int(m.group(1), 16), m.group(2), int(m.group(3))
+            else:
+                m = _DONE_RE.match(line)
+                if not m:
+                    continue
+                sym, va, size = m.group(1), int(m.group(2), 16), int(m.group(3))
+            out[b][va] = {"bin": b, "fva_int": va, "symbol": sym, "size": size}
+    return out
+
+
+def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
+                  known_from: Optional[Path] = None) -> List[str]:
+    """(Re)write all generated files. Returns the relative paths written. `queue`: every function of the game
+    files (the portal's tasks, matched or not); with it the address-order files list all of them. Without it,
+    the list is read from the address-order files in `known_from` (default: recon_dir)."""
     entries: Dict[str, dict] = registry.get("entries", {})
     compiler = registry.get("compiler", "MSVC 7.10")
     written: List[str] = []
     by_bin: Dict[str, List] = defaultdict(list)
     for k, e in entries.items():
         by_bin[e["bin"]].append((int(e["va"], 16), k, e))
+    known: Dict[str, Dict[int, dict]] = defaultdict(dict)
+    for t in queue or []:
+        if t.get("bin") in BIN_INFO and "fva_int" in t:
+            known[t["bin"]][int(t["fva_int"])] = t
+    if any(b not in known for b in BIN_INFO):
+        for b, fns in known_from_files(known_from or recon_dir).items():
+            if b not in known:
+                known[b] = fns
+    class_total: Dict[tuple, int] = defaultdict(int)
+    for b, fns in known.items():
+        for t in fns.values():
+            class_total[(b,) + classify_subsystem_and_class(t.get("symbol", ""))] += 1
     for b, (fname, folder, label) in BIN_INFO.items():
         items = sorted(by_bin.get(b, []))
-        if not items and not (recon_dir / fname).exists():
+        allfn = known.get(b)
+        if not items and not allfn and not (recon_dir / fname).exists():
             continue
-        text = _header(f"{label}, verified functions in address order ({len(items)})", compiler)
-        text += "".join(_block(k, e) for _, k, e in items)
+        if allfn:
+            done = {va for va, _, _ in items}
+            total = len(set(allfn) | done)
+            text = _header(f"{label}, {FULL_LISTING}", compiler, _progress_lines(len(items), total))
+            rows = sorted([(va, 0, k, e) for va, k, e in items] + [(va, 1, "", t) for va, t in allfn.items() if va not in done],
+                          key=lambda r: (r[0], r[1]))
+            text += "".join(_block(k, x) if kind == 0 else _todo(va, x) for va, kind, k, x in rows)
+        else:
+            text = _header(f"{label}, verified functions in address order ({len(items)})", compiler)
+            text += "".join(_block(k, e) for _, k, e in items)
         _write(recon_dir / fname, text)
         written.append(fname)
         groups: Dict[tuple, List] = defaultdict(list)
@@ -225,7 +298,9 @@ def write_outputs(registry: dict, recon_dir: Path) -> List[str]:
         keep = set()
         for (sub, cls), lst in groups.items():
             rel = Path(folder) / sub / f"{cls}.cpp"
-            body = _header(f"{label}, {sub}/{cls}.cpp ({len(lst)} verified)", compiler)
+            of = class_total.get((b, sub, cls), 0)
+            body = _header(f"{label}, {sub}/{cls}.cpp ({len(lst)} verified)", compiler,
+                           _progress_lines(len(lst), max(of, len(lst)), fname) if of else "")
             body += "".join(_block(k, e) for _, k, e in sorted(lst))
             _write(recon_dir / rel, body)
             keep.add((recon_dir / rel).resolve())
@@ -246,5 +321,7 @@ if __name__ == "__main__":
     import json
     root = Path(__file__).resolve().parents[2]           # the project folder
     reg = json.loads((root / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
-    for p in write_outputs(reg, root / "reconstructed_src"):
+    qfile = root / "reports" / "full_remaining_queue.json"          # every function; built from your game files
+    queue = json.loads(qfile.read_text(encoding="utf-8")) if qfile.exists() else None
+    for p in write_outputs(reg, root / "reconstructed_src", queue=queue):
         print("wrote reconstructed_src/" + p)

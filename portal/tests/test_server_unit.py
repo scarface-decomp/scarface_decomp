@@ -151,3 +151,42 @@ def test_earlier_matches_catch_up_on_their_look_alikes(S, monkeypatch, tmp_path)
 
     monkeypatch.setattr(S.MV, "find_msvc71_bin", lambda: None)
     assert S.catch_up_lookalikes() == 0          # nothing to compile with: nothing is tried or remembered
+
+
+def test_submissions_carry_only_new_matches_and_imports_check_each_one(S, monkeypatch, tmp_path):
+    """A contributor's file holds the matches that are not on GitHub yet; importing it compiles each one
+    again and adds only exact matches, credited to whoever made them."""
+    def task(va, status="UNCLAIMED"):
+        return {"id": f"xb_{va:08X}", "bin": "xb", "fva_int": va, "va": f"0x{va:08X}", "symbol": f"sub_{va:08X}",
+                "status": status, "size": 4, "flags": "/O2", "lookalike_group": ""}
+    a, b, c = task(0x1000, "VERIFIED"), task(0x2000, "VERIFIED"), task(0x3000)
+    reg = {"entries": {S.task_key(a): {"bin": "xb", "va": a["va"], "size": 4, "symbol": a["symbol"], "code": "int a();", "verified_by": "Bo"},
+                       S.task_key(b): {"bin": "xb", "va": b["va"], "size": 4, "symbol": b["symbol"], "code": "int b();", "verified_by": "Bo",
+                                       "tool_used": "by hand"}}}
+    monkeypatch.setattr(S, "REGISTRY", reg)
+    monkeypatch.setattr(S, "published_keys", lambda base=None: frozenset({S.task_key(a)}))
+    sub = S.make_submission("Bo")
+    assert sub["format"] == S.SUBMISSION_FORMAT and list(sub["entries"]) == [S.task_key(b)]
+    assert sub["entries"][S.task_key(b)]["code"] == "int b();" and "imported_by" not in sub["entries"][S.task_key(b)]
+    assert S.submission_filename("Bo the Great!").startswith("scarface-submission-Bo-the-Great-")
+
+    # import on a maintainer's portal: c is new and matches, a is already there, an unknown key and a miss fail
+    reg2 = {"entries": {S.task_key(a): reg["entries"][S.task_key(a)]}}
+    a2, c2, d2 = dict(a), dict(c), task(0x4000)
+    monkeypatch.setattr(S, "REGISTRY", reg2)
+    monkeypatch.setattr(S, "ALL_TASKS", [a2, c2, d2])
+    monkeypatch.setattr(S, "save_overlay", lambda t: None)
+    monkeypatch.setattr(S, "save_registry", lambda: None)
+    monkeypatch.setattr(S, "append_audit", lambda e: None)
+    monkeypatch.setattr(S, "queue_port", lambda *a, **k: 0)
+    monkeypatch.setattr(S, "run_verify", lambda t, code: {"ok": True, "verified": "good" in code, "matched_bytes": 4 if "good" in code else 2,
+                                                          "total_bytes": 4, "flags": "/O2"})
+    bundle = {"format": S.SUBMISSION_FORMAT, "submitted_by": "Cy", "entries": {
+        S.task_key(a): {"code": "good a"}, S.task_key(c2): {"code": "good c", "verified_by": "Cy", "tool_used": "AI"},
+        S.task_key(d2): {"code": "bad d"}, "xb:0x09999999": {"code": "good ?"}}}
+    st = S.import_submission(bundle, "Founder")
+    assert (st["added"], st["already"], len(st["failed"]), st["running"], st["error"]) == (1, 1, 2, False, "")
+    e = reg2["entries"][S.task_key(c2)]
+    assert e["verified_by"] == "Cy" and e["tool_used"] == "AI" and e["imported_by"] == "Founder" and c2["status"] == "VERIFIED"
+    assert d2["status"] == "UNCLAIMED"
+    assert S.import_submission({"entries": {}}, "Founder")["error"]          # not a submission file

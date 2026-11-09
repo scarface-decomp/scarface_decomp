@@ -517,3 +517,99 @@ def test_ai_feedback_always_describes_the_code_it_shows(page):
     assert "int good() { return 1; }" in prompts[2].split("Current best C++")[1]
     assert "Attempt 3 matched only 4/12 bytes" in prompts[3] and "The current best C++ (attempt 2)" in prompts[3]
     assert "int good() { return 1; }" in page.input_value("#wb-editor")
+
+
+def _match_one(pg):
+    pg.click("#btn-step1-claim")
+    pg.wait_for_function("document.getElementById('btn-step1-claim').textContent.includes('Claimed by You')")
+    pg.fill("#wb-editor", "void f() { /* MATCH_ALL */ }")
+    pg.focus("#wb-editor")
+    pg.keyboard.press("Control+Enter")
+    pg.wait_for_function("document.getElementById('verify-status').textContent.includes('VERIFIED')")
+
+
+def test_submit_your_work_gives_contributors_a_file(page):
+    """Anyone can submit: the button is always there, the workbench says when there is something to send,
+    and a contributor gets one file to post, with plain next steps."""
+    sign_in(page)
+    assert page.is_visible("#btn-git-sync") and "Submit your work" in page.text_content("#btn-git-sync")
+    assert not page.is_visible("#submit-strip") and not page.is_visible("#btn-import")
+    page.click("#btn-git-sync")
+    page.wait_for_function("document.getElementById('toast').textContent.includes('already on GitHub')")
+
+    _match_one(page)
+    assert "Submit your work" in page.text_content("#verify-status")
+    page.wait_for_selector("#submit-strip", state="visible")
+    assert "1 new match" in page.text_content("#submit-strip") and "1 new match" in page.text_content("#submit-note")
+    with page.expect_download() as dl:
+        page.click("#submit-strip button")
+    assert dl.value.suggested_filename == "scarface-submission-Tester.json"
+    page.wait_for_selector("#submit-dialog[open]")
+    body = page.text_content("#submit-dialog")
+    assert "ready to send" in body and "Downloads" in body and "under your name" in body and "never loses" in body
+    hrefs = page.eval_on_selector_all("#sd-actions a", "els => els.map(e => e.href)")
+    assert any("discord.gg" in h for h in hrefs) and any("/issues/new?title=" in h for h in hrefs)
+    page.click("#sd-actions button")
+    page.wait_for_selector("#submit-dialog[open]", state="detached")
+
+
+def test_maintainers_push_and_import(page, tmp_path):
+    sign_in(page, user="Founder")
+    page.wait_for_selector("#btn-import", state="visible")
+    _match_one(page)
+    page.click("#btn-git-sync")
+    page.wait_for_selector("#submit-dialog[open]")
+    assert "Sent to GitHub" in page.text_content("#sd-title")
+    page.click("#sd-actions button")
+
+    sub = tmp_path / "sub.json"
+    sub.write_text(json.dumps({"format": "scarface-decomp-submission", "submitted_by": "Alice",
+                               "entries": {"a": {"code": "x"}, "b": {"code": "y"}}}))
+    page.set_input_files("#import-input", str(sub))
+    page.wait_for_function("document.getElementById('sd-title').textContent.includes('Submission imported')")
+    text = page.text_content("#sd-body")
+    assert "Added 1 function from Alice" in text and "core::Bad" in text and "Submit your work" in text
+
+
+def test_the_ai_key_is_hidden_but_not_a_password_field(page):
+    """Browsers offered to save the key (and the search box) as a login; it is masked text instead."""
+    assert page.get_attribute("#ai-key", "type") == "text"
+    assert page.evaluate("getComputedStyle(document.getElementById('ai-key')).webkitTextSecurity") == "disc"
+    assert page.eval_on_selector_all("input[type=password]", "els => els.map(e => e.id)") == ["contrib-pin"]
+
+
+def test_downloads_from_each_section(page):
+    """Functions, game scripts and source files can each be downloaded, everything or verified only,
+    as a .zip in the original layout or as one .txt."""
+    page.click("#btn-dl-functions")
+    page.wait_for_selector("#submit-dialog[open]")
+    assert "address" in page.text_content("#sd-body")
+    page.select_option("#sd-body select[name=build]", "xb")
+    page.check("#sd-body input[name=only][value=verified]")
+    page.check("#sd-body input[name=format][value=txt]")
+    with page.expect_download() as dl:
+        page.click("#sd-actions .btn.primary")
+    assert dl.value.suggested_filename == "scarface-functions-verified-xb.txt"
+    page.wait_for_selector("#submit-dialog[open]", state="detached")
+    assert any(c[0] == "/download/functions" and c[1] == {"build": "xb", "only": "verified", "format": "txt"} for c in calls())
+
+    page.goto(BASE + "#scripts")
+    page.click("#btn-dl-scripts")
+    opts = page.eval_on_selector_all("#sd-body select[name=version] option", "els => els.map(e => e.value)")
+    assert opts[0] == "all" and "xbox" in opts
+    with page.expect_download() as dl:
+        page.click("#sd-actions .btn.primary")
+    assert dl.value.suggested_filename == "scarface-scripts-all.zip"
+
+    page.click("#btn-dl-scripts")
+    page.select_option("#sd-body select[name=version]", "prototype")
+    page.check("#sd-body input[name=only][value=verified]")
+    page.click("#sd-actions .btn.primary")
+    page.wait_for_function("document.getElementById('dl-note').textContent.includes('No script files match')")
+    page.click("#sd-actions .btn:not(.primary)")
+
+    page.goto(BASE + "#sources")
+    page.click("#btn-dl-sources")
+    with page.expect_download() as dl:
+        page.click("#sd-actions .btn.primary")
+    assert dl.value.suggested_filename == "scarface-sources-all.zip"

@@ -34,12 +34,21 @@ may come from and how AI tools may be used.
    queue shows "+N look-alikes"), the portal then tries your code on each of them in the background
    and credits you for every one that matches exactly. Pick those first: one match can count many times.
 6. If you stop, **Cancel & Save** keeps your best partial attempt for the next person.
+7. **Submit your work** when you're done for now (the red button in the sidebar; the workbench reminds you
+   when you have new matches). Nothing is lost if you close the portal first: every match is saved on your
+   computer the moment it verifies. Submitting packs the matches that are not on GitHub yet into one file
+   (it goes to your Downloads folder); post it in #help on [Discord](https://discord.gg/azvrtGBvau) or attach
+   it to a GitHub issue. A maintainer imports it, the portal compiles every function again, and each exact
+   match is added under your name.
 
 No compiler installed, or it's acting up? You can still do steps 1 to 4 with decomp.me. Post the 100% decomp.me link in a
 GitHub issue or in #help on [Discord](https://discord.gg/azvrtGBvau), and a maintainer verifies it with the portal and credits you.
 
-Maintainers (`SCARFACE_MAINTAINERS`) publish verified work with **Sync to GitHub** (in the portal's sidebar). It needs
-a folder that git knows about, made with `git clone`.
+Maintainers (`SCARFACE_MAINTAINERS`): **Submit your work** commits and pushes the verified functions to GitHub.
+It needs a folder that git knows about, made with `git clone`. To add a contributor's file, press **Import a
+submission** (under it, shown to maintainers only): every function in the file is compiled again, only exact
+matches are added, credited to whoever made them, and a list shows what did not match. Then press Submit your
+work to push them.
 
 ### Updating
 

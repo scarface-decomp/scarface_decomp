@@ -84,7 +84,8 @@ def check_generated(reg: dict, problems: list) -> None:
         shutil.copy2(ROOT / "README.md", troot / "README.md")
         if (ROOT / "reports" / "progress.json").exists():
             shutil.copy2(ROOT / "reports" / "progress.json", troot / "reports" / "progress.json")
-        written = write_outputs(reg, troot / "reconstructed_src")
+        # the function list comes from the committed files (CI has no game files)
+        written = write_outputs(reg, troot / "reconstructed_src", known_from=ROOT / "reconstructed_src")
         if not (ROOT / "reports" / "progress.json").exists():
             problems.append("reports/progress.json is missing (run: python portal/tools/registry_outputs.py)")
         for rel in written:
