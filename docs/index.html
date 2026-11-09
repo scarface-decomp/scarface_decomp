@@ -120,7 +120,7 @@
     .build-row .tube { grid-column: 1 / -1; margin: 8px 0 0; max-width: none; height: 6px; }
     .build-row .tube > span { transition-delay: 0s; }
     .build-row .sub { grid-column: 1 / -1; color: var(--mauve); font-size: 0.9rem; }
-    .build-row.bonus .name, .build-row.bonus .pct { color: var(--mauve); }
+    .build-row.extra .name, .build-row.extra .pct { color: var(--mauve); }
     .side + .side { margin-top: 44px; }
     .side p { color: var(--mauve); font-size: 0.94rem; margin-bottom: 14px; }
     .buckets { display: grid; gap: 9px; }
@@ -307,8 +307,8 @@
               <div class="tube"><span id="xb-bar"></span></div>
               <div class="sub" id="xb-sub"></div>
             </div>
-            <div class="build-row bonus" id="proto-row" hidden>
-              <div class="name">Bonus: Xbox prototype <span>game.xbe, April 2006</span></div>
+            <div class="build-row extra" id="proto-row" hidden>
+              <div class="name">Unreleased code: Xbox prototype <span>game.xbe, April 2006</span></div>
               <div class="pct" id="proto-big">…</div>
               <div class="tube"><span id="proto-bar"></span></div>
               <div class="sub" id="proto-sub"></div>
@@ -406,12 +406,14 @@
               compilers (the PS2 one with Metrowerks CodeWarrior for MIPS), so matching their code needs its own set of
               tools. The PS2 disc's compiled scripts are already used for the script work.</p></details>
           <details><summary>What about the Xbox prototype?</summary>
-            <p>The April 20, 2006 prototype (<code>game.xbe</code>) is in the portal as a bonus. All of its code can be
-              read too. About half of its 17,900 functions have the same machine code as a retail Xbox function, so
-              they get matched along with retail ones. The rest changed before release, or belong to classes the retail
-              game doesn't have, such as <code>PlaneCamera</code>, <code>MortarWeaponTemplate</code>,
-              <code>DebugCamera</code> and network debugging tools. Its count is shown on its own and isn't part of the
-              main percentage, because the goal is the game that shipped.</p></details>
+            <p>It's part of the goal: the game that shipped, plus the code that never shipped. The April 20, 2006
+              prototype (<code>game.xbe</code>) is in the portal, all of its code can be read, and every match is saved
+              in the repository like any other (<code>reconstructed_src/proto/</code>). About half of its 17,900
+              functions have the same machine code as a retail Xbox function, so they get matched along with retail
+              ones. The rest changed before release, or belong to classes the retail game doesn't have, such as
+              <code>PlaneCamera</code>, <code>MortarWeaponTemplate</code>, <code>DebugCamera</code> and network
+              debugging tools. Its progress has its own row, so the main percentage keeps measuring the released
+              game and isn't inflated by the copies it shares with it.</p></details>
           <details><summary>Why do some functions get done in batches?</summary>
             <p>Many functions are copies of each other with different addresses: the same template made for different
               classes, or the same function in the PC and Xbox versions. In the retail game, about 4,600 functions have such a look-alike.
@@ -562,7 +564,7 @@
         $('sb-compiler').textContent = m ? 'cl.exe ' + m[1] : prog.compiler;
       }
 
-      // The prototype is a bonus: shown on its own row once it is in the queue, never in the headline.
+      // The prototype (unreleased code) has its own row once it is in the queue; the headline is the released game.
       $('proto-row').hidden = !((v.proto || 0) + (q && q.proto ? q.proto : 0));
       ['pc', 'xb', 'proto'].forEach(function (b) {
         var done = v[b] || 0, left = q ? (q[b] || 0) : 0, all = done + left;
