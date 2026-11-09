@@ -10,8 +10,11 @@ one was used. Anything else (a later Visual Studio compiler, say) is refused: it
     python portal/scripts/setup_msvc71.py source_archives/VCToolkitSetup.exe
 
 How: the installer's payload is an InstallShield stream holding an .msi. Each file in the stream
-is obfuscated with a key derived from its file name; this script decodes the .msi and then
-extracts it with `msiexec /a` (Windows) or `msiextract` (Linux/macOS, package "msitools").
+is obfuscated with a key derived from its file name; this script decodes the .msi and then unpacks it.
+On Windows that is done by portal/tools/msi_reader.py with Windows' own expand.exe, not by running the
+installer or `msiexec /a`: the package starts InstallShield's 2004 script engine even for those, and it
+fails on Windows 10 and 11 (error 1603, or an "IDS_ERROR26" box). On Linux/macOS: `msiextract`
+(package "msitools").
 The compiler is not redistributed by this project; you need your own copy of the installer.
 """
 
@@ -29,6 +32,7 @@ from pathlib import Path
 PORTAL = Path(__file__).resolve().parent.parent      # portal/
 ROOT = PORTAL.parent                                  # the project folder
 DEST = PORTAL / "tools" / "msvc71"
+sys.path.insert(0, str(PORTAL / "tools"))
 MAGIC = bytes([0x13, 0x35, 0x86, 0x07])
 SWAP = bytes(((b >> 4) | (b << 4)) & 0xFF for b in range(256))
 MSI_NAME = b"Microsoft Visual C++ Toolkit 2003.msi"
@@ -77,7 +81,12 @@ def unpack_msi(msi: Path, out_dir: Path) -> Path:
     target = out_dir / "unpacked"
     target.mkdir()
     if os.name == "nt":
-        subprocess.run(["msiexec", "/a", str(msi), "/qn", f"TARGETDIR={target}"], check=True)
+        import msi_reader
+        try:
+            n = msi_reader.unpack(msi.read_bytes(), target)
+        except (RuntimeError, ValueError, KeyError, OSError) as e:
+            raise SystemExit(f"Could not unpack the compiler from the installer: {e}")
+        print(f"unpacked {n} files from the installer")
     else:
         if not shutil.which("msiextract"):
             raise SystemExit("Install msitools (e.g. `sudo apt install msitools`) for msiextract.")
