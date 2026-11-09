@@ -67,7 +67,8 @@ The full procedure, with code generation notes for this compiler, is in
 ## Quick start (no experience needed)
 
 You need Python 3 and Git (both free), your own copy of the Xbox game, and about 10 minutes. We strongly
-recommend the 2003 compiler too, from your own `VCToolkitSetup.exe` ([below](#the-compiler)): with it, the
+recommend Visual C++ Toolkit 2003 too (the compiler the game was made with), from your own `VCToolkitSetup.exe`
+([below](#the-compiler)): with it, the
 portal checks your work on the spot and credits you right away. Only if you can't get it working, solve
 functions on decomp.me and have a maintainer check them.
 
