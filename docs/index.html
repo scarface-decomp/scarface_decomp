@@ -396,7 +396,10 @@
             <pre tabindex="0">git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></pre></li>
           <li><b>Add your game files</b>Copy <code>Scarface.exe</code> (US PC version 1.00.2) and/or <code>default.xbe</code>
             (from the US Xbox disc) into the project's <code>binaries</code> folder. Only these US versions are accepted;
-            the portal checks.</li>
+            the portal checks. Use the files themselves, not the download they came in: <code>default.xbe</code> is inside
+            the Xbox disc image, and <code>Scarface.exe</code> is in the folder the PC game is installed to. The portal can't
+            open a <code>.iso</code>, <code>.7z</code> or <code>.zip</code>. Optional: <code>game.xbe</code> from the April 2006
+            Xbox prototype adds its unreleased code.</li>
           <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
             <code>sh start_portal.sh</code>. Your browser opens the portal at <code>localhost:8085</code>.</li>
           <li><b>Pick a function and solve it</b>Choose a small one, then press <em>decomp.me</em>. It opens in your
