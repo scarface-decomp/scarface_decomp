@@ -512,10 +512,12 @@
               When you match one, the portal swaps the addresses and names into your code, tries it on each look-alike
               with the real compiler, and credits you for every exact match. The portal lists these functions first.</p></details>
           <details><summary>What about the game's scripts?</summary>
-            <p>The game also runs compiled scripts (<code>.cso</code>, <code>.dso</code> and <code>.dtr</code> files), written
-              in TorqueScript, a C++-like language. They get the same treatment: a readable version that only counts once
-              it turns back into exactly the original bytes. The portal copies them out of your game when it starts,
-              and all 635 of the released game's compiled scripts are already read and rebuilt byte for byte; turning them into readable TorqueScript is next. The plan is in
+            <p>The game also runs compiled scripts (<code>.cso</code> and <code>.dso</code> files), written
+              in TorqueScript, a C++-like language. All 635 of the released game's compiled scripts now decompile to
+              readable TorqueScript that compiles back to the <strong>identical</strong> file, checked by a compiler that
+              lays the bytes out exactly as the game's did. The game stores names as hashes; about half are recovered as
+              real words so far. The AI's decision tree (<code>.dtr</code>) is decoded too, apart from the small programs
+              inside it. Details in
               <a data-repo-link="/blob/main/docs/SCRIPTS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCRIPTS.md" target="_blank" rel="noopener noreferrer">SCRIPTS.md</a>.</p></details>
           <details><summary>I'm stuck. Where do I ask?</summary>
             <p>Ask in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on the Discord</a> (joining takes a short application, to keep bots

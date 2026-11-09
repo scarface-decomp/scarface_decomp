@@ -25,3 +25,7 @@ authors are credited in the commit history. Thank you.
   `.rcf` archives), [Broken Face](https://github.com/sulzbals/BrokenFace) by sulzbals and Meth0d's
   write-up on Scarface's compiled TorqueScript (layout of `.cso` / `.dso`). Their documentation was
   read; no code was copied.
+* For compiling TorqueScript the way the game does: the code generator of
+  [Torque2D](https://github.com/TorqueGameEngines/Torque2D) (`astNodes.cc`, `compiler.cc`, MIT
+  licence), the open-source descendant of the engine Scarface's script compiler came from. It was read
+  to get the order of the string, number and name tables right; the Python compiler here is new code.

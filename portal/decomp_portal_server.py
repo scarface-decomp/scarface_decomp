@@ -51,6 +51,7 @@ import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
+import registry_outputs as RO  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 
@@ -366,6 +367,7 @@ def load_tasks() -> None:
             LA.annotate([t for t in tasks if "fva_int" in t], images)
             write_json(QUEUE_JSON, tasks)
     verified = set(REGISTRY["entries"])
+    tasks = drop_non_code(tasks, verified)
     out = []
     for t in tasks:
         if "fva_int" not in t or t.get("bin") not in BINARIES:
@@ -409,6 +411,33 @@ def load_tasks() -> None:
             t["status"] = "UNCLAIMED"
         if t["status"] == "PARTIAL" and not t.get("best_matched_bytes"):
             t["status"] = "UNCLAIMED"
+
+
+def drop_non_code(tasks: List[dict], verified: set) -> List[dict]:
+    """Queues built before a check existed can hold data that looked like a function start (a single
+    `retf`, the middle of an instruction). No C++ can match those, so they are taken out, once."""
+    from queue_builder import CODE_CHECK
+    todo = [t for t in tasks if "fva_int" in t and t.get("code_check", 0) < CODE_CHECK]
+    if not todo:
+        return tasks
+    from sf_binaries import not_compiled_reason
+    known = {f"{f['bin']}:0x{int(f['va'], 16):08X}"
+             for f in (read_json(REPORTS_DIR / "known_functions.json", {}) or {}).get("functions", [])
+             if isinstance(f, dict) and "va" in f and "bin" in f}
+    drop = set()
+    for t in todo:
+        img = image_for(t.get("bin"))
+        if img is None:
+            continue
+        key = task_key(t)
+        if key not in verified and key not in known and not_compiled_reason(img, t["fva_int"], int(t["size"])):
+            drop.add(id(t))
+        t["code_check"] = CODE_CHECK
+    kept = [t for t in tasks if id(t) not in drop]
+    if drop:
+        print(f"[*] Took {len(drop):,} non-functions (data the compiler could not have made) out of the work queue.")
+    write_json(QUEUE_JSON, kept)
+    return kept
 
 
 def save_overlay(t: dict) -> None:
@@ -599,6 +628,29 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, por
         REGISTRY["entries"][key]["ported_from"] = ported_from
     if write:
         save_registry()
+
+
+def _unchecked(e: dict) -> int:
+    m = re.match(r"(\d+) external relocation", e.get("note") or "")
+    return int(m.group(1)) if m else 0
+
+
+def revise_verified(t: dict, cpp_code: str, user: str, res: dict) -> bool:
+    """A verified function compiled again, exactly, from different code (names cleaned up, comments
+    added): keep the new text. Credit stays with whoever matched it first. Only for functions matched
+    in the portal (the others are rebuilt from their source files) and never when more addresses
+    would go unchecked."""
+    e = REGISTRY["entries"].get(task_key(t))
+    if not e or e.get("source") != "portal" or e.get("excerpt") or not res.get("verified"):
+        return False
+    new = cpp_code.strip()
+    if not new or new == (e.get("code") or "").strip():
+        return False
+    if res.get("reloc_unverified", 0) > _unchecked(e):
+        return False
+    e.update(code=new, revised_by=user, revised_at=stamp(), compiler=compiler_build())
+    save_registry()
+    return True
 
 
 def save_registry() -> None:
@@ -960,8 +1012,27 @@ def script_index() -> Tuple[List[dict], List[dict]]:
     return items, versions
 
 
+_SCRIPT_NAMES: Dict[str, Tuple[tuple, dict]] = {}
+
+
+def script_names(version: str) -> dict:
+    """Readable names for the hashed identifiers in one version folder's scripts, recovered from the
+    user's own game files (torque_script.names_for); worked out once per folder."""
+    import torque_script as TS
+    folder = SCRIPTS_DIR / version if version != "uploads" else SCRIPTS_DIR
+    files = [p for p in folder.rglob("*") if p.is_file() and p.suffix.lower() in (".cso", ".dso", ".cs")] \
+        if folder.is_dir() else []
+    key = tuple(sorted((str(p), p.stat().st_size) for p in files))
+    cached = _SCRIPT_NAMES.get(version)
+    if cached and cached[0] == key:
+        return cached[1]
+    names = TS.names_for(files, BASE_DIR / "binaries")
+    _SCRIPT_NAMES[version] = (key, names)
+    return names
+
+
 def script_detail(rel: str) -> dict:
-    """What one script file contains: the exact round-trip check, its strings and its bytecode."""
+    """One script file: readable TorqueScript checked byte for byte, and its instruction listing."""
     from cso_dso_dtr_decompiler import verify_and_decompile_cso_dso, verify_and_decompile_dtr
     p = (SCRIPTS_DIR / rel).resolve()
     if not rel or SCRIPTS_DIR.resolve() not in p.parents or not p.is_file() or p.suffix.lower() not in SCRIPT_EXTS:
@@ -974,7 +1045,10 @@ def script_detail(rel: str) -> dict:
                 "size": len(raw), "opcode_count": 0, "decompiled_code": text,
                 "disasm": "(plain source: nothing to disassemble)"}
     try:
-        res = verify_and_decompile_dtr(raw, p.name) if ext == ".dtr" else verify_and_decompile_cso_dso(raw, p.name)
+        if ext == ".dtr":
+            res = verify_and_decompile_dtr(raw, p.name, BASE_DIR / "binaries")
+        else:
+            res = verify_and_decompile_cso_dso(raw, p.name, script_names(_script_version(Path(rel))))
     except Exception as e:  # noqa: BLE001 - one odd file shouldn't break the tab
         res = {"ok": False, "error": str(e)}
     if not res.get("ok"):
@@ -1023,8 +1097,12 @@ class Handler(BaseHTTPRequestHandler):
         for k, v in (extra or {}).items():
             self.send_header(k, v)
         self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
+        try:
+            self.end_headers()
+            self.wfile.write(body)
+        except ConnectionError:
+            # The page stopped waiting (Stop & Save, a closed tab, a timeout). Nothing to report.
+            self.close_connection = True
 
     def _json(self, obj, code: int = 200):
         self._send(code, json.dumps(obj).encode(), "application/json; charset=utf-8")
@@ -1298,8 +1376,14 @@ class Handler(BaseHTTPRequestHandler):
                               "bytes": f"{t['size']}/{t['size']} B"})
                 newly = True
                 print(f"[+] VERIFIED by {user}: {t['symbol']} ({t['va']}) -> {len(REGISTRY['entries'])} total")
+            revised = bool(already and body.get("keep_revision") and revise_verified(t, code, user, res))
+            if revised:
+                append_audit({"time": stamp(), "user": user, "action": "REVISED", "symbol": t["symbol"], "va": t["va"]})
             out = dict(res)
-            out.update(newly_promoted=newly, progress=progress(), leaderboard=leaderboard(), task=live_task(t),
+            entry = REGISTRY["entries"].get(task_key(t))
+            out.update(newly_promoted=newly, revised=revised,
+                       saved_to=RO.entry_path(entry) if entry and t["status"] == "VERIFIED" else "",
+                       progress=progress(), leaderboard=leaderboard(), task=live_task(t),
                        target_hex=" ".join(f"{b:02X}" for b in (target_bytes(t) or b"")))
         # Same machine code elsewhere: try this code there too (in the background, verified one by one).
         out["lookalikes_queued"] = queue_port(t, code, user, tool) if newly and not res.get("reloc_unverified") else 0

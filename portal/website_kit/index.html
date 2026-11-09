@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SCARFACE DECOMP HUB — 1:1 C++ Verification Portal</title>
-  <meta name="description" content="Community &amp; AI-assisted 1:1 matching C++ decompilation of Scarface: The World Is Yours (PC 1.00.2 &amp; Xbox), verified byte-for-byte with MSVC 7.10 (Visual C++ Toolkit 2003, cl.exe 13.10.3052)." />
+  <meta name="description" content="Community &amp; AI-assisted 1:1 matching C++ decompilation of Scarface: The World Is Yours (PC 1.00.2 &amp; Xbox), verified byte-for-byte with MSVC 7.10 (Visual C++ Toolkit 2003, cl.exe 13.10)." />
   <meta name="theme-color" content="#0b0e14" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3Crect%20width='512'%20height='512'%20rx='96'%20fill='%230A0A0A'/%3E%3Cpath%20d='M169.9%20421Q125.5%20421%20105.9%20398.9Q86.3%20376.8%2086.3%20328.6V296.9H150.3V337.4Q150.3%20348.6%20153.8%20355Q157.2%20361.3%20165.6%20361.3Q174.5%20361.3%20177.9%20356.2Q181.3%20351%20181.3%20339.2Q181.3%20324.3%20178.3%20314.3Q175.4%20304.2%20168.1%20295.1Q160.8%20286%20147.9%20273.9L118.9%20246.2Q86.3%20215.5%2086.3%20175.9Q86.3%20134.5%20105.5%20112.7Q124.7%2091%20161.2%2091Q205.8%2091%20224.5%20114.8Q243.2%20138.5%20243.2%20186.9H177.2V164.7Q177.2%20158%20173.5%20154.3Q169.7%20150.7%20163.2%20150.7Q155.5%20150.7%20151.9%20155Q148.3%20159.3%20148.3%20166.1Q148.3%20172.9%20152%20180.9Q155.7%20188.8%20166.5%20199.1L203.9%20235Q215.2%20245.7%20224.6%20257.6Q233.9%20269.4%20239.7%20285.2Q245.4%20300.9%20245.4%20323.6Q245.4%20369.3%20228.5%20395.1Q211.7%20421%20169.9%20421Z'%20fill='%23F2EFEA'/%3E%3Cpath%20d='M263.4%20421V91H354.1Q389.7%2091%20407.7%20110.8Q425.7%20130.6%20425.7%20168.6V323.1Q425.7%20370%20409.3%20395.5Q392.9%20421%20351.9%20421ZM329.7%20362.7H341.2Q359.4%20362.7%20359.4%20345.1V174.8Q359.4%20158.3%20355%20153.5Q350.6%20148.8%20337.1%20148.8H329.7Z'%20fill='%23E01E2B'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -540,6 +540,7 @@
     .byte-tok { display: inline-block; padding: 1px 5px; margin: 1px; border-radius: 3px; }
     .b-match { background: rgba(16, 185, 129, 0.2); color: var(--green); }
     .b-reloc { background: rgba(56, 189, 248, 0.2); color: var(--blue); text-decoration: underline dotted; text-underline-offset: 3px; }
+    .b-linked { background: rgba(16, 185, 129, 0.2); color: var(--green); text-decoration: underline dotted; text-underline-offset: 3px; }
     .b-diff  { background: rgba(225, 29, 72, 0.55); color: #fff; font-weight: 700; outline: 1px solid #fff; outline-offset: -1px; }
     .diff-summary { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); margin-top: 6px; }
     .diff-summary b.m { color: var(--green); } .diff-summary b.r { color: var(--blue); } .diff-summary b.d { color: var(--error); }
@@ -1042,7 +1043,7 @@
                   </div>
 
                   <div id="diff-panel" class="panel" style="display:none;">
-                    <div class="panel-title blue">Byte Comparison — green: match · blue dotted: linker address · red outlined: mismatch</div>
+                    <div class="panel-title blue">Byte Comparison — green: match (dotted: an address the linker fills in, checked) · blue dotted: address not checked · red outlined: mismatch</div>
                     <div id="wb-diff-summary" class="diff-summary"></div>
                     <div id="wb-comp-hex" class="hex-box"></div>
                   </div>
@@ -1083,12 +1084,12 @@
             <div class="card-hdr">
               <div>
                 <h2 class="card-title lg">Game Scripts (<code>.cso</code> / <code>.dso</code> / <code>.dtr</code>)</h2>
-                <p class="card-sub">Compiled TorqueScript from your own copy of the game. Each file is read and rebuilt to check it comes back byte for byte; turning the bytecode into readable TorqueScript is the next step (<code>docs/SCRIPTS.md</code>). <code>.dtr</code> files are recognised, but their format isn't worked out yet. Files you load stay on this computer and are never committed to GitHub.</p>
+                <p class="card-sub">Compiled TorqueScript from your own copy of the game, decompiled to readable TorqueScript. Each one is compiled again the way the game's compiler does it, and only called exact when that gives back the identical file. The game stores names as hashes (<code>stx</code> + 8 letters); names found in your game files are shown as words. <code>.dtr</code> files are covered in <code>docs/SCRIPTS.md</code>. Files you load stay on this computer and are never committed to GitHub.</p>
               </div>
               <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <input type="file" id="local-script-input" accept=".cso,.dso,.dtr" style="display:none;" onchange="uploadLocalScriptFile(event)" />
                 <button type="button" class="btn-sm gold" onclick="document.getElementById('local-script-input').click()">+ Load Local .cso / .dso / .dtr File</button>
-                <span class="status-nominal neutral"><span class="status-dot" aria-hidden="true"></span>EXACT ROUND-TRIP CHECK</span>
+                <span class="status-nominal neutral"><span class="status-dot" aria-hidden="true"></span>CHECKED BYTE FOR BYTE</span>
               </div>
             </div>
 
@@ -1111,14 +1112,14 @@
             <div class="editor-split">
               <div>
                 <div class="editor-toolbar">
-                  <span class="pane-label green">What the file contains</span>
+                  <span class="pane-label green">TorqueScript</span>
                   <button type="button" class="btn-sm" onclick="copyDecompiledScript()">Copy</button>
                 </div>
                 <pre id="script-decompiled-view" class="code-view fixed"></pre>
               </div>
               <div>
                 <div class="editor-toolbar">
-                  <span class="pane-label gold">Bytecode listing</span>
+                  <span class="pane-label gold">Instructions</span>
                 </div>
                 <pre id="script-disasm-view" class="code-view fixed" style="color:#cbd5e1;"></pre>
               </div>
@@ -1164,7 +1165,7 @@
               <div class="how-step-card">
                 <div class="how-step-num">Phase 03 • Byte-Exact Proof</div>
                 <h3>Original-Era Compiler (MSVC 7.10)</h3>
-                <p>Every submission is compiled with the Visual C++ Toolkit 2003 (<code>cl.exe</code> 13.10.3052, MSVC 7.1) using the task's flags (usually <code>/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4</code>). The compiled function must have exactly the original's length and bytes; relocations must point where the original's do, and hard-coded 2006 addresses don't count.</p>
+                <p>Every submission is compiled with the Visual C++ Toolkit 2003 (<code>cl.exe</code> 13.10.3052 or 13.10.3077, MSVC 7.1) using the task's flags (usually <code>/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4</code>). The compiled function must have exactly the original's length and bytes; relocations must point where the original's do, and hard-coded 2006 addresses don't count.</p>
               </div>
               <div class="how-step-card">
                 <div class="how-step-num">Phase 04 • Dual GitHub Sync</div>
@@ -1196,7 +1197,7 @@
   const FENCE = String.fromCharCode(96).repeat(3);
   const VIEWS = ['dashboard', 'workbench', 'scripts', 'sources', 'leaderboard', 'how'];
   const STATUS_CLASSES = new Set(['UNCLAIMED', 'CLAIMED', 'PARTIAL', 'VERIFIED']);
-  const DIFF_CLASSES = new Set(['match', 'reloc', 'diff']);
+  const DIFF_CLASSES = new Set(['match', 'linked', 'reloc', 'diff']);
   const MAX_SCRIPT_BYTES = 32 * 1024 * 1024;
   const AI_ATTEMPTS = 5;
   const PROVIDER_MODELS = {
@@ -2128,21 +2129,35 @@
     }
     diffPanel.style.display = 'block';
     compBox.innerHTML = '';
-    const counts = { match: 0, reloc: 0, diff: 0 };
+    const counts = { match: 0, linked: 0, reloc: 0, diff: 0 };
     const frag = document.createDocumentFragment();
     diffDetails.forEach((d) => {
       const status = DIFF_CLASSES.has(d.status) ? d.status : 'diff';
       counts[status]++;
       const span = document.createElement('span');
       span.className = 'byte-tok b-' + status;
-      span.textContent = d.compiled;
-      span.title = 'Byte ' + d.idx + ': target=' + d.target + ', compiled=' + d.compiled;
+      if (status === 'linked') {
+        // The .obj holds a placeholder here; the linker writes the address, which was checked
+        // against the original. Show the byte the finished game will have.
+        span.textContent = d.target;
+        span.title = 'Byte ' + d.idx + ': ' + d.target + ', filled in by the linker'
+          + (d.symbol ? ' for ' + d.symbol : '') + (d.address ? ' (' + d.address + ')' : '')
+          + ', same as the original';
+      } else {
+        span.textContent = d.compiled;
+        span.title = 'Byte ' + d.idx + ': target=' + d.target + ', compiled=' + d.compiled
+          + (status === 'reloc' ? ' (address the linker fills in; not checked)' : '');
+      }
       frag.appendChild(span);
     });
     compBox.appendChild(frag);
     const summary = $('wb-diff-summary');
     summary.innerHTML = '';
-    [['m', counts.match + ' match'], ['r', counts.reloc + ' reloc'], ['d', counts.diff + ' mismatch']].forEach((pair, i) => {
+    const parts = [['m', (counts.match + counts.linked) + ' match'
+      + (counts.linked ? ' (' + counts.linked + ' linker-filled)' : '')]];
+    if (counts.reloc) parts.push(['r', counts.reloc + ' unchecked']);
+    parts.push(['d', counts.diff + ' mismatch']);
+    parts.forEach((pair, i) => {
       if (i) summary.appendChild(document.createTextNode(' · '));
       const b = document.createElement('b');
       b.className = pair[0];
@@ -2450,7 +2465,10 @@
     setStatus('Compiling with MSVC 7.10 cl.exe...', 'muted');
 
     try {
-      const data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode }, creds(), { tool_used: getToolUsed() }), ctrl.signal);
+      // keep_revision: a hand-made compile of an already verified function may replace its saved text
+      // (cleaner names, comments) when it still matches exactly. AI loops never replace it.
+      const data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode }, creds(),
+        { tool_used: getToolUsed(), keep_revision: !fromLoop }), ctrl.signal);
       const stale = mySeq !== verifySeq || myGen !== runGen || !currentTask || currentTask.id !== t.id;
       if (stale) return { ok: false, stale: true };
 
@@ -2478,10 +2496,17 @@
       else renderLeaderboard();
 
       if (data.is_exact) {
-        setStatus(data.newly_promoted
-          ? 'VERIFIED: ' + data.matched_bytes + '/' + data.total_bytes + ' B match exactly. Added to the verified registry.' +
-            (Number(data.lookalikes_queued) > 0 ? ' Now trying your code on ' + fmtInt(data.lookalikes_queued) + ' look-alike' + (Number(data.lookalikes_queued) === 1 ? '' : 's') + '…' : '')
-          : '100% MATCH (' + data.matched_bytes + '/' + data.total_bytes + ' B).', 'ok');
+        const where = data.saved_to ? ' Saved in ' + data.saved_to + '; press Sync Verified to GitHub to share it.' : '';
+        let msg;
+        if (data.newly_promoted) {
+          msg = 'VERIFIED: ' + data.matched_bytes + '/' + data.total_bytes + ' B match exactly.' + where +
+            (Number(data.lookalikes_queued) > 0 ? ' Now trying your code on ' + fmtInt(data.lookalikes_queued) + ' look-alike' + (Number(data.lookalikes_queued) === 1 ? '' : 's') + '…' : '');
+        } else if (data.revised) {
+          msg = '100% MATCH (' + data.matched_bytes + '/' + data.total_bytes + ' B). Your cleaned-up version replaced the saved one.' + where;
+        } else {
+          msg = '100% MATCH (' + data.matched_bytes + '/' + data.total_bytes + ' B).' + (data.saved_to ? ' Already saved in ' + data.saved_to + '.' : '');
+        }
+        setStatus(msg, 'ok');
         if (data.newly_promoted && Number(data.lookalikes_queued) > 0) followLookalikes(t.id, Number(data.lookalikes_queued));
       } else if (data.bytes_exact && Array.isArray(data.hardcoded_addresses) && data.hardcoded_addresses.length) {
         setStatus('Bytes match, but this hard-codes addresses from the 2006 binary (' + data.hardcoded_addresses.slice(0, 2).join('; ') +

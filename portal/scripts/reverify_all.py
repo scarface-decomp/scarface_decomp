@@ -456,7 +456,7 @@ def main() -> int:
             continue
         c = Claim("portal", e["bin"], int(e["va"], 16), e["symbol"], e["code"],
                   e.get("match") or match_from_symbol(e["symbol"]), int(e["size"]), e.get("verified_by", ""), "portal")
-        c.extra = {k: e[k] for k in ("verified_at", "tool_used") if k in e}
+        c.extra = {k: e[k] for k in ("verified_at", "tool_used", "ported_from", "revised_by", "revised_at") if k in e}
         singles.append(c)
 
     if args.limit:

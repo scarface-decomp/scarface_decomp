@@ -61,8 +61,10 @@ def test_listing_is_text_about_the_file():
 
 def test_portal_scripts_tab_uses_it():
     import cso_dso_dtr_decompiler as C
+    # sample() has the right layout but its codes are not a program: shown as tables, not as exact text
     r = C.verify_and_decompile_cso_dso(sample(), "x.cso")
-    assert r["ok"] and r["roundtrip_exact"] and r["opcode_count"] == 8
+    assert r["ok"] and not r["roundtrip_exact"] and r["opcode_count"] == 8
+    assert "could not be decompiled" in r["decompiled_code"] and "'Tony'" in r["decompiled_code"]
     assert not C.verify_and_decompile_cso_dso(b"\x01\x02\x03\x04" * 10, "t.cso")["ok"]
 
 

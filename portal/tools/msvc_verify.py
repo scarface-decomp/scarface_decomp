@@ -329,6 +329,15 @@ def address_named(name: str) -> Optional[int]:
     return int(m.group(1), 16) if m else None
 
 
+def source_name(name: str) -> str:
+    """The name as written in the C++: _DAT_0043A0C0 -> DAT_0043A0C0, ?DAT_0043A0C0@@3HA -> DAT_0043A0C0."""
+    if name.startswith("?"):
+        return name[1:].split("@", 1)[0] or name
+    if name.startswith("_") and not name.startswith("__"):
+        return name[1:]
+    return name
+
+
 def _split_scopes(qualified: str) -> List[str]:
     """'core::ConcreteClassRep<a::B>' -> ['core', 'ConcreteClassRep<a::B>'] (only top-level '::')."""
     parts, depth, cur, i = [], 0, "", 0
@@ -463,6 +472,7 @@ def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Op
     ext_seen: Dict[str, int] = {}
 
     reloc_slots = {}
+    linked_to: Dict[int, tuple] = {}
     for off, si, typ in fn.relocs:
         reloc_slots[off] = (si, typ)
 
@@ -550,6 +560,10 @@ def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Op
 
         if verdict == "ok":
             checked += 1
+            # Proven: the linker writes the same address the original has, so these bytes match.
+            for k in range(4):
+                status[off + k] = "linked"
+            linked_to[off] = (sym.name, orig_target)    # only reachable when the check above ran
         elif verdict == "bad":
             mismatch.append(why)
             for k in range(4):
@@ -567,10 +581,17 @@ def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Op
             st = "diff"
         elif st == "match" and t != c:
             st = "diff"
-        if st in ("match", "reloc") and i < n_t:
+        if st in ("match", "reloc", "linked") and i < n_t:
             matched += 1
-        details.append({"idx": i, "target": f"{t:02X}" if t is not None else "--",
-                        "compiled": f"{c:02X}" if c is not None else "--", "status": st})
+        d = {"idx": i, "target": f"{t:02X}" if t is not None else "--",
+             "compiled": f"{c:02X}" if c is not None else "--", "status": st}
+        if st == "linked":
+            slot = max(o for o in linked_to if o <= i)
+            name, va = linked_to[slot]
+            d["symbol"] = source_name(name)
+            if va is not None:
+                d["address"] = f"0x{va:08X}"
+        details.append(d)
     if n_c != n_t:
         notes.append(f"Compiled function is {n_c} bytes; the original is {n_t} bytes.")
     exact = n_c == n_t and matched == n_t and not mismatch

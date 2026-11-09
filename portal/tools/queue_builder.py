@@ -9,6 +9,8 @@ Differences from the old index builder in portal/decomp_portal_server.py:
   * no invented addresses (the old "prototype" lane used fake VAs);
   * starts that fall inside another function are dropped unless something calls them;
   * functions already in reports/verified_registry.json are left out;
+  * starts whose bytes the compiler could never have made (data, or the middle of an instruction:
+    sf_binaries.not_compiled_reason) are left out;
   * look-alikes (same machine code apart from addresses, portal/tools/lookalikes.py) are grouped, so the
     portal can show one of each group first and carry a match over to the rest.
 """
@@ -23,7 +25,10 @@ from typing import Dict, List, Optional, Set, Tuple
 
 import lookalikes
 from msvc_verify import decorated_hint
-from sf_binaries import BinaryImage, Extent, collect_call_targets, function_extent
+from sf_binaries import BinaryImage, Extent, collect_call_targets, function_extent, not_compiled_reason
+
+# Bumped when the checks that keep data out of the queue change; the portal re-checks older queues.
+CODE_CHECK = 1
 
 PC_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # Only this part of the retail PC .text is stored as plaintext (the rest is not readable code),
@@ -255,7 +260,7 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                            has_jump_table=e.has_jump_table if e.ok else False)
             if b == "pc" and e.ok and va + e.size > PC_PLAINTEXT[1]:
                 continue
-            if e.ok and e.size >= 1:
+            if e.ok and e.size >= 1 and (va in kf or not not_compiled_reason(img, va, e.size)):
                 extents[va] = e
             if progress and i % 2000 == 0:
                 progress(f"{b}: sized {i:,}/{len(starts):,} candidate starts")
@@ -300,6 +305,7 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                 "status": "UNCLAIMED",
                 "claimed_by": "",
                 "hint": hint,
+                "code_check": CODE_CHECK,
             }
             if b == "proto" and va in vt and "xb" in classes and vt[va][0] not in classes["xb"]:
                 # Its class has no virtual methods in the retail Xbox game: cut or renamed before release.

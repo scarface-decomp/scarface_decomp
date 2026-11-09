@@ -3,43 +3,56 @@
 Scripts tab of the portal: .cso / .dso (Scarface's compiled TorqueScript) and .dtr files from your
 own copy of the game.
 
-* .cso / .dso are read by portal/tools/torque_dso.py, which takes a file apart and rebuilds it byte for
-  byte. On all 635 compiled scripts in the PS2 release's cement.rcf the rebuild is exact. The tab
-  shows the strings, numbers and bytecode; turning the bytecode into readable TorqueScript is the
-  next step (docs/SCRIPTS.md). An older decoder that guessed with stock Torque opcode numbers was
-  removed: it failed on every real file.
-* .dtr: the format isn't worked out yet. Files that happen to be Pure3D-style chunk files are shown
-  as a chunk tree; anything else is reported as unknown.
+* .cso / .dso are decompiled to readable TorqueScript (portal/tools/torque_script.py), and the text is
+  compiled again with the same code generation as the game's compiler: the file is only called
+  decompiled when that gives back the identical bytes. All 635 compiled scripts on the PS2 disc do.
+  The game stores names hashed (stx + 8 letters); names recovered from the game's own files are shown
+  as words.
+* .dtr: Scarface's AI decision trees (portal/tools/dtr_format.py): the layout is decoded and rebuilt
+  byte for byte, and shown as the tree with its task names; the small programs inside are listed as
+  numbers (not decoded yet). Other chunk files are shown as a chunk tree.
 """
 
 from __future__ import annotations
 
 import sys
 from pathlib import Path
+from typing import Dict, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from script_formats import format_chunk_tree, walk_chunks  # noqa: E402
 import torque_dso as TD  # noqa: E402
+import torque_script as TS  # noqa: E402
+from torque_decompile import listing  # noqa: E402
 
-def verify_and_decompile_cso_dso(raw: bytes, filename: str = "script.cso") -> dict:
-    """Read a Scarface .cso/.dso exactly (portal/tools/torque_dso.py) and describe what it holds.
 
-    The old decoder here guessed with stock Torque opcode numbers and failed on every real file, so it
-    was replaced. This reports only what is proven: the exact round trip, the strings and the numbers.
-    Readable TorqueScript comes next (docs/SCRIPTS.md, step 3)."""
+def verify_and_decompile_cso_dso(raw: bytes, filename: str = "script.cso",
+                                 names: Optional[Dict[int, str]] = None) -> dict:
+    """Readable TorqueScript for a Scarface .cso/.dso, and whether it compiles back to these bytes.
+    names: recovered names ({key: word}, torque_script.names_for), or None to keep them hashed."""
     try:
         s = TD.parse(raw)
     except TD.DsoError as e:
         return {"ok": False, "error": f"Not a Scarface compiled script: {e}"}
-    exact, msg = TD.round_trip(raw)
+    try:
+        text, exact, msg = TS.check(raw, names)
+        code = TS.header(filename, text, exact, msg, names) + text
+        disasm = listing(s, names)
+        fmt = ("Compiled TorqueScript, decompiled: compiles back byte for byte" if exact
+               else f"Compiled TorqueScript, decompiled but NOT exact: {msg}")
+    except TS.ScriptError as e:
+        exact = False
+        code = f"// {filename}: could not be decompiled ({e}).\n\n" + TD.listing(raw, filename)
+        disasm = TD.hex_codes(s)
+        fmt = f"Compiled TorqueScript v{s.version} (not decompiled: {e})"
     return {
         "ok": True,
-        "format": f"Compiled TorqueScript v{s.version} ({'exact round trip' if exact else 'round trip FAILED: ' + msg})",
+        "format": fmt,
         "size": len(raw),
         "opcode_count": len(s.codes),
-        "disasm": TD.hex_codes(s),
-        "decompiled_code": TD.listing(raw, filename),
-        "complete": False,
+        "disasm": disasm,
+        "decompiled_code": code,
+        "complete": exact,
         "roundtrip_exact": exact,
     }
 
@@ -57,7 +70,30 @@ P3D_CHUNK_NAMES = {
 }
 
 
-def verify_and_decompile_dtr(raw: bytes, filename: str = "data.dtr") -> dict:
+def verify_and_decompile_dtr(raw: bytes, filename: str = "data.dtr", bin_dir: Optional[Path] = None) -> dict:
+    """An AI decision tree (portal/tools/dtr_format.py): its layout is decoded and rebuilt byte for byte;
+    the task names are recovered from the game's executables (bin_dir) by their hash."""
+    import dtr_format as DT
+    from torque_names import candidates, recover
+    try:
+        d = DT.parse(raw)
+    except DT.DtrError:
+        d = None
+    if d is not None:
+        exes = [(bin_dir / e).read_bytes() for e in TS.EXECUTABLES if bin_dir and (bin_dir / e).is_file()]
+        strings = [s.decode("latin-1") for s in d.strings.split(b"\0") if s]
+        names = recover({d.name_key} | {k for k, _ in d.tasks}, candidates(exes, strings + [filename.split(".")[0]]))
+        exact, msg = DT.round_trip(raw)
+        programs = "\n".join(f"#{i:<4} [{' '.join(str(w) for w in p)}]" for i, p in enumerate(d.programs))
+        return {
+            "ok": True,
+            "format": f"AI decision tree: layout decoded ({msg}); program words not decoded yet",
+            "size": len(raw),
+            "opcode_count": len(d.nodes),
+            "disasm": "// programs: [words]\n" + programs + "\n",
+            "decompiled_code": DT.describe(raw, filename, names),
+            "roundtrip_exact": exact,
+        }
     tree = walk_chunks(raw)
     if not tree["ok"]:
         return {"ok": False, "error": "The .dtr format isn't worked out yet (docs/SCRIPTS.md, step 5)."}

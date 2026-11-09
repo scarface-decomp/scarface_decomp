@@ -178,3 +178,37 @@ def test_portal_start_finishes_a_copy_that_was_cut_short(tmp_path):
     assert mod.auto_extract(b, lambda *_: None) == 2
     assert (half / "gang.cs").read_text() == "function gang() {}"
     assert (b / "scripts_and_data" / "prototype" / "scriptc" / "ai" / "gang.dso").is_file()
+
+
+def test_archives_are_closed_before_the_temporary_folder_goes(tmp_path, monkeypatch):
+    """On Windows an open file cannot be deleted (WinError 32), so the cement.rcf copied into the
+    temporary folder must be closed before that folder is removed."""
+    import zipfile
+    import game_files as gf
+    sys.path.insert(0, str(PORTAL / "tests"))
+    from test_game_files import disc_image
+    mod = _extract_mod()
+    opened = []
+    real_open = mod.open_rcf
+
+    def spy(path):
+        arc = real_open(path)
+        opened.append(arc)
+        return arc
+
+    removed_while_open = []
+    real_cleanup = mod.tempfile.TemporaryDirectory.cleanup
+
+    def cleanup(self):
+        removed_while_open.extend(a for a in opened if not a.f.closed)
+        return real_cleanup(self)
+
+    monkeypatch.setattr(mod, "open_rcf", spy)
+    monkeypatch.setattr(mod.tempfile.TemporaryDirectory, "cleanup", cleanup)
+    monkeypatch.setattr(gf, "MIN_DISC_IMAGE", 1)
+    src = tmp_path / "Scarface (XBOX).zip"
+    with zipfile.ZipFile(src, "w") as z:
+        z.writestr("Scarface (USA, Europe).iso", disc_image(data=R.build_rcf(FILES), name="cement.rcf"))
+    assert mod.extract(src, tmp_path / "xbox") == 3          # the three script files in FILES
+    assert opened and not removed_while_open
+    assert all(a.f.closed for a in opened)

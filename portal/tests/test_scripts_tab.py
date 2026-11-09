@@ -61,3 +61,15 @@ def test_detail_reads_one_file_and_refuses_paths_outside(server):
     for path in ("../../decomp_portal_server.py", "xbox/art/notes.txt", "", "xbox/nothing.cso"):
         assert not server.script_detail(path)["ok"], path
 
+
+
+def test_compiled_scripts_are_shown_as_torquescript_with_names(server):
+    import torque_script as TS
+    src = 'function Tony::greet(%this)\n{\n    echo("Tony says hi");\n}\n'
+    (server.SCRIPTS_DIR / "xbox" / "scriptc" / "tony.cso").write_bytes(TS.compile_text(src))
+    d = server.script_detail("xbox/scriptc/tony.cso")
+    assert d["ok"] and "byte for byte" in d["format"]
+    assert "function Tony::" in d["decompiled_code"]           # "Tony" is a word in the folder's strings
+    assert 'echo' in d["decompiled_code"] or "stx" in d["decompiled_code"]
+    assert "FUNC_DECL" in d["disasm"]
+    assert server.script_names("xbox") is server.script_names("xbox")     # worked out once per folder

@@ -200,6 +200,11 @@ def test_exact_match_is_recorded(portal):
     _, res = post(portal, "/api/verify", {**ALICE, "id": TID, "cpp_code": GOOD, "tool_used": "pytest"})
     assert res["ok"] and res["verified"] and res["newly_promoted"], res
     assert res["reloc_checked"] == 1 and not res["reloc_mismatch"]
+    # The checked address shows as matched bytes (green), with the value the linker writes.
+    linked = [d for d in res["diff_details"] if d["status"] == "linked"]
+    assert len(linked) == 4 and all(d["symbol"] == "DAT_00439DA4" and d["address"] == "0x00439DA4" for d in linked)
+    assert "".join(d["target"] for d in linked) == "A49D4300"
+    assert res["saved_to"].startswith("reconstructed_src/xbox/") and res["saved_to"].endswith(".cpp")
     work = portal["work"]
     reg = json.loads((work / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
     e = reg["entries"][KEY]
@@ -228,6 +233,24 @@ def test_exact_match_is_recorded(portal):
         assert "DAT_00439DA4" not in e["code"]           # each one points at its own global
     assert get(portal, "/api/state")["leaderboard"].get("Alice") == 4
     assert get(portal, "/api/state")["lookalikes"]["groups"] > 100
+
+
+def test_cleaned_up_version_replaces_the_saved_one(portal):
+    """After the match, a tidier version that still matches exactly is kept; credit stays with Alice."""
+    nicer = ('// Returns the stats page object.\nextern "C" char DAT_00439DA4;\n\n'
+             'void* __cdecl sub_001CDC80(void)\n{\n    return &DAT_00439DA4;\n}')
+    _, res = post(portal, "/api/verify", {**BOB, "id": TID, "cpp_code": nicer})          # AI loop: never kept
+    assert res["is_exact"] and not res["revised"]
+    _, res = post(portal, "/api/verify", {**BOB, "id": TID, "cpp_code": HARDCODED, "keep_revision": True})
+    assert not res["is_exact"] and not res["revised"]                                      # must still verify
+    _, res = post(portal, "/api/verify", {**BOB, "id": TID, "cpp_code": nicer, "keep_revision": True})
+    assert res["is_exact"] and res["revised"], res
+    work = portal["work"]
+    e = json.loads((work / "reports" / "verified_registry.json").read_text(encoding="utf-8"))["entries"][KEY]
+    assert e["code"] == nicer and e["verified_by"] == "Alice" and e["revised_by"] == "Bob"
+    out = (work / res["saved_to"]).read_text(encoding="utf-8")
+    assert "Cleaned up by: Bob" in out and "Returns the stats page object." in out
+    assert get(portal, "/api/state")["leaderboard"].get("Bob", 0) == 0
 
 
 def test_same_method_in_another_build_starts_from_the_match(portal):
@@ -292,7 +315,7 @@ def test_reverify_keeps_portal_entries(portal):
                        text=True, timeout=1800, env=portal["env"])
     assert r.returncode == 0, r.stdout[-2000:] + r.stderr[-2000:]
     reg = json.loads((work / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
-    assert reg["entries"][KEY]["verified_by"] == "Alice"
+    assert reg["entries"][KEY]["verified_by"] == "Alice" and reg["entries"][KEY]["revised_by"] == "Bob"
     assert reg["entries"][KEY]["compiler"] in ("13.10.3052", "13.10.3077")
 
 

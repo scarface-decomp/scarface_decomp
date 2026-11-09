@@ -73,6 +73,15 @@ class RcfArchive:
                 raise RcfError(f"{name}: data runs past the end of the archive")
             self.entries.append(RcfEntry(name, off, size, h, date))
 
+    def close(self) -> None:
+        self.f.close()
+
+    def __enter__(self) -> "RcfArchive":
+        return self
+
+    def __exit__(self, *exc) -> None:
+        self.close()
+
     def _read(self, off: int, n: int) -> bytes:
         self.f.seek(self.base + off)
         return self.f.read(n)
@@ -88,14 +97,17 @@ class RcfArchive:
 def open_rcf(path: Path) -> RcfArchive:
     """An .rcf file, or the CEMENT.RCF inside a disc image (.iso, ISO 9660, as on the PS2 disc)."""
     f = open(path, "rb")
-    if path.suffix.lower() == ".iso":
-        hit = find_in_iso(f, "CEMENT.RCF")
-        if hit is None:
-            f.close()
-            raise RcfError("no CEMENT.RCF on this disc image (the PC disc keeps it inside DATA*.CAB; "
-                           "use cement.rcf from an installed copy instead)")
-        return RcfArchive(f, base=hit[0])
-    return RcfArchive(f)
+    try:
+        if path.suffix.lower() == ".iso":
+            hit = find_in_iso(f, "CEMENT.RCF")
+            if hit is None:
+                raise RcfError("no CEMENT.RCF on this disc image (the PC disc keeps it inside DATA*.CAB; "
+                               "use cement.rcf from an installed copy instead)")
+            return RcfArchive(f, base=hit[0])
+        return RcfArchive(f)
+    except BaseException:
+        f.close()           # Windows cannot delete a file that is still open (WinError 32)
+        raise
 
 
 def find_in_iso(f: BinaryIO, name: str, sector: int = 2048):

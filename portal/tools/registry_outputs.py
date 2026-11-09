@@ -50,8 +50,19 @@ def classify_subsystem_and_class(sym: str):
     return "engine", cls_clean
 
 
+def entry_path(e: dict) -> str:
+    """Where write_outputs puts this entry, relative to the repository root."""
+    info = BIN_INFO.get(e.get("bin", ""))
+    if not info:
+        return ""
+    sub, cls = classify_subsystem_and_class(e.get("symbol", ""))
+    return f"reconstructed_src/{info[1]}/{sub}/{cls}.cpp"
+
+
 def _block(key: str, e: dict) -> str:
     by = e.get("verified_by") or "unattributed"
+    if e.get("revised_by"):
+        by += f" | Cleaned up by: {e['revised_by']}"
     note = f" | {e['note']}" if e.get("note") else ""
     if e.get("excerpt"):
         note += f" | excerpt from reconstructed_src/{e.get('source', '')}"

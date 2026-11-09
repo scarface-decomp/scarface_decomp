@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import contextlib
 import sys
 import tempfile
 import zipfile
@@ -66,8 +67,10 @@ def guess_version(src: Path) -> str:
 
 def extract(src: Path, out: Path, log=print) -> int:
     """Copy every script file in src into out. Returns how many were written."""
-    with tempfile.TemporaryDirectory() as tmp:
-        found = list(entries(src, Path(tmp)))
+    # The archives are closed (stack) before the temporary folder is removed: Windows refuses to
+    # delete a file that is still open.
+    with tempfile.TemporaryDirectory() as tmp, contextlib.ExitStack() as stack:
+        found = list(entries(src, Path(tmp), stack))
         written = 0
         for name, _, read in found:
             dest = safe_output_path(out, name)
@@ -137,13 +140,14 @@ def rcf_from_disc(src: Path, tmp: Path) -> Optional[Path]:
     return None
 
 
-def entries(src: Path, tmp: Path) -> Iterator[Tuple[str, int, callable]]:
-    """(name inside the game's files, size, read()) for every script file in src."""
+def entries(src: Path, tmp: Path, stack: contextlib.ExitStack) -> Iterator[Tuple[str, int, callable]]:
+    """(name inside the game's files, size, read()) for every script file in src. The files it opens
+    are closed when stack closes, so read() works until then."""
     low = src.name.lower()
     if low.endswith(".zip"):
         loose = loose_scripts_in_zip(src)
         if loose:
-            z = zipfile.ZipFile(src)
+            z = stack.enter_context(zipfile.ZipFile(src))
             for info, name in loose:
                 yield name, info.file_size, (lambda i=info: z.read(i))
             return
@@ -152,7 +156,7 @@ def entries(src: Path, tmp: Path) -> Iterator[Tuple[str, int, callable]]:
         if not rcf:
             raise RcfError(f"no cement.rcf found in {src.name}")
         src = rcf
-    arc = open_rcf(src)
+    arc = stack.enter_context(open_rcf(src))
     print(f"{src.name}: {len(arc.entries):,} files in the archive")
     for e in arc.find(SCRIPT_EXTENSIONS):
         yield e.name, e.size, (lambda e=e: arc.read(e))
@@ -172,8 +176,8 @@ def main(argv=None) -> int:
     out = a.out or SCRIPTS_ROOT / guess_version(a.source)
     try:
         if a.list:
-            with tempfile.TemporaryDirectory() as tmp:
-                found = list(entries(a.source, Path(tmp)))
+            with tempfile.TemporaryDirectory() as tmp, contextlib.ExitStack() as stack:
+                found = list(entries(a.source, Path(tmp), stack))
             kinds = collections.Counter(Path(n).suffix.lower() for n, _, _ in found)
             print(f"{len(found):,} script files: " + ", ".join(f"{n} {k}" for k, n in sorted(kinds.items())))
             for name, size, _ in found:

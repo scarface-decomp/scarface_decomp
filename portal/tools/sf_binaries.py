@@ -136,6 +136,65 @@ def _cs():
     return md
 
 
+# Instructions Visual C++ never generates from C++ in 32-bit code. Where one of them is reached from a
+# "function" start, the start is really data or the middle of an instruction, and no C++ can match it.
+NEVER_COMPILED = frozenset({
+    "retf", "iret", "iretd", "into", "bound", "arpl", "les", "lds", "lss", "lfs", "lgs", "daa", "das", "aaa",
+    "aas", "aam", "aad", "salc", "int1", "enter", "sal", "pushal", "popal"})
+# A path the compiler writes never stops right after one of these (it ends in ret, jmp or a call that
+# does not return). Running into padding or the end straight after one means the bytes are not code.
+_NOT_A_PATH_END = frozenset({"add", "adc", "sub", "sbb", "inc", "dec", "cmp", "test", "and", "or", "xor",
+                             "clc", "stc", "cmc", "hlt"})
+
+
+def not_compiled_reason(img: "BinaryImage", start: int, size: int) -> str:
+    """Why start..start+size cannot be a function the compiler made ("" when it can be). Follows the
+    code from the start the way it runs (jump tables are not followed, so their data is never read)."""
+    import capstone
+    from capstone import x86_const as X
+
+    blob = img.read(start, size)
+    if not blob or len(blob) < size:
+        return "no file data at this address"
+    end = start + size
+    md = _cs()
+    work = [start]
+    seen: Set[int] = set()
+    while work:
+        addr = work.pop()
+        if addr in seen or not (start <= addr < end):
+            continue
+        prev = None
+        for insn in md.disasm(blob[addr - start:], addr):
+            if insn.address in seen:
+                break
+            seen.add(insn.address)
+            mn = insn.mnemonic
+            if mn in NEVER_COMPILED:
+                return f"'{mn}' at +0x{insn.address - start:X}: the compiler never makes that, so these bytes are not a function"
+            if mn == "int3" or mn == "ret":
+                if mn == "int3" and prev is not None and prev.mnemonic in _NOT_A_PATH_END:
+                    return f"runs into padding after '{prev.mnemonic}' at +0x{prev.address - start:X}: not a function"
+                break
+            if insn.group(capstone.CS_GRP_JUMP):
+                op = insn.operands[0] if insn.operands else None
+                if op is not None and op.type == X.X86_OP_IMM:
+                    work.append(op.imm & 0xFFFFFFFF)
+                    if mn == "jmp":
+                        break
+                    prev = insn
+                    continue
+                break
+            prev = insn
+        else:
+            stop = prev.address + prev.size if prev is not None else addr
+            if stop < end:
+                return f"bytes at +0x{stop - start:X} are not an instruction: not a function"
+            if prev is not None and prev.mnemonic in _NOT_A_PATH_END:
+                return f"ends after '{prev.mnemonic}' without returning: not a function"
+    return ""
+
+
 def collect_call_targets(img: BinaryImage) -> Set[int]:
     """Targets of every E8 rel32 that lands inside an executable section (cheap byte scan, no decoding)."""
     targets: Set[int] = set()
