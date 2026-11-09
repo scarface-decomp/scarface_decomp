@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import secrets
 import struct
 import sys
@@ -37,6 +38,12 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 DECOMPME_URL = os.environ.get("SCARFACE_DECOMPME_URL", "https://decomp.me").rstrip("/")
+# decomp.me groups a game's scratches under a "preset" that its staff create on request
+# (https://github.com/decompme/decomp.me/issues/2184). Put its number here once it exists, or set
+# SCARFACE_DECOMPME_PRESET; scratches are then filed under it.
+PRESET_ID = os.environ.get("SCARFACE_DECOMPME_PRESET", "").strip()
+PROJECT_SITE = "https://scarface-decomp.pages.dev"
+BUILD_LABELS = {"pc": "PC", "xb": "Xbox", "proto": "Xbox prototype"}
 COMPILER = "msvc7.1"
 PLATFORM = "win32"
 USER_AGENT = "scarface-decomp-portal (+https://github.com/scarface-decomp/scarface_decomp)"
@@ -204,6 +211,73 @@ def build_target_object(code: bytes, relocs: List[Reloc], func_name: str) -> byt
     return bytes(out)
 
 
+_STDCALL_RE = re.compile(r'extern\s+"C"\s+[^;{}()]*?\b__stdcall\s+(\w+)\s*\(([^)]*)\)\s*;')
+
+
+def stdcall_names(source: str) -> Dict[str, str]:
+    """{"_sub_X": "_sub_X@8"} for each function the C++ declares extern "C" __stdcall.
+
+    MSVC names such a function `_name@<bytes of arguments>`. The target object has to use the same
+    name, or decomp.me marks the call as different even when the code is identical (the portal's own
+    check goes by address, so it accepts both)."""
+    out: Dict[str, str] = {}
+    for m in _STDCALL_RE.finditer(source or ""):
+        name, params = m.group(1), m.group(2).strip()
+        if params in ("", "void"):
+            n = 0
+        else:
+            n = sum(8 if re.search(r"\b(double|__int64|long\s+long)\b", q) and "*" not in q else 4
+                    for q in params.split(","))
+        out["_" + name] = f"_{name}@{n}"
+    return out
+
+
+_TYPE_CODES = {"void": "X", "int": "H", "bool": "_N", "char": "D", "signed char": "C", "unsigned char": "E",
+               "short": "F", "unsigned short": "G", "unsigned int": "I", "unsigned": "I", "long": "J",
+               "unsigned long": "K", "float": "M", "double": "N"}
+_METHOD_RE = re.compile(r"^\s*([A-Za-z_][\w ]*?)\s+((?:sub|FUN)_[0-9A-Fa-f]{8})\s*\(([^)]*)\)\s*;", re.M)
+
+
+def member_names(source: str) -> Dict[str, str]:
+    """{"_sub_X": "?sub_X@Object@@QAEXH@Z"} for address-named methods declared (not virtual) in the C++.
+
+    A call to a method links to its decorated C++ name. Giving the target the same name makes decomp.me
+    show 100% when the code is right; the portal's check goes by the address in the name either way.
+    Only plain declarations are understood (built-in types, classes in namespaces, no templates);
+    anything else keeps the plain name."""
+    out: Dict[str, str] = {}
+    seen: Dict[str, int] = {}
+    scopes: List[Tuple[str, str]] = []              # (kind, name) for each open brace
+    pending: Optional[Tuple[str, str]] = None
+    for line in (source or "").splitlines():
+        code = line.split("//", 1)[0]
+        for m in re.finditer(r"\b(namespace|class|struct)\s+([A-Za-z_]\w*)\s*(?=\{|$)", code):
+            pending = (m.group(1), m.group(2))
+        mm = _METHOD_RE.match(code)
+        if mm and scopes and scopes[-1][0] in ("class", "struct") and "virtual" not in mm.group(1) \
+                and all(k != "template" for k, _n in scopes):
+            ret, name, params = mm.group(1).strip(), mm.group(2), mm.group(3).strip()
+            seen[name] = seen.get(name, 0) + 1
+            types = [] if params in ("", "void") else [re.sub(r"\s+[A-Za-z_]\w*$", "", q.strip()) if len(q.split()) > 1
+                                                          and q.split()[-1] not in _TYPE_CODES else q.strip()
+                                                          for q in params.split(",")]
+            codes = [_TYPE_CODES.get(re.sub(r"\s+", " ", t)) for t in [ret] + types]
+            if all(codes):
+                where = "@".join(n for _k, n in reversed(scopes))
+                args = "".join(codes[1:]) + "@Z" if types else "XZ"
+                out["_" + name] = f"?{name}@{where}@@QAE{codes[0]}{args}"
+        if "template" in code and "<" in code:
+            pending = ("template", "")
+        for ch in code:
+            if ch == "{":
+                scopes.append(pending or ("block", ""))
+                pending = None
+            elif ch == "}" and scopes:
+                scopes.pop()
+    free = set(re.findall(r'extern\s+"C"[^;]*?\b((?:sub|FUN)_[0-9A-Fa-f]{8})\s*\(', source or ""))
+    return {k: v for k, v in out.items() if seen.get(k[1:]) == 1 and k[1:] not in free}
+
+
 def object_symbol_name(symbol: str, va: int) -> str:
     """A readable label for the target function (decomp.me shows it above the assembly)."""
     name = "".join(ch if ch.isalnum() or ch in "_:?$@<>~" else "_" for ch in (symbol or ""))
@@ -214,19 +288,30 @@ def object_symbol_name(symbol: str, va: int) -> str:
 # What the scratch starts with
 # --------------------------------------------------------------------------- #
 
-def scratch_source(symbol: str, va_label: str, starter_cpp: str) -> str:
+def scratch_source(symbol: str, va_label: str, starter_cpp: str, build: str = "") -> str:
+    """The C++ a scratch starts with: a short how-to, then the starter (or the best attempt so far)."""
+    where = f" ({BUILD_LABELS.get(build, build)})" if build else ""
     header = (
-        f"// Scarface: The World Is Yours - {symbol} ({va_label})\n"
+        f"// Scarface: The World Is Yours{where} - {symbol}\n"
+        f"// {va_label}. Project: {PROJECT_SITE}\n"
         "//\n"
-        "// Goal: change this C++ until decomp.me shows 100% (no red or yellow lines).\n"
-        "// Then copy it into your Scarface portal and press Verify there.\n"
+        "// Goal: edit the C++ until the diff shows 100%, then paste it into the\n"
+        "// Scarface portal and press Verify there (the portal's check is the one that counts).\n"
         "//\n"
-        "// Unknown globals and functions use their address as a name, declared extern \"C\":\n"
-        "//     extern \"C\" int  DAT_007A1234;        // a global at 0x007A1234\n"
-        "//     extern \"C\" void sub_00401000(void);  // a function at 0x00401000\n"
+        "// Functions and globals without a real name are named for their address:\n"
+        "//     extern \"C\" int  DAT_007A1234;        // the global at 0x007A1234\n"
+        "//     extern \"C\" void sub_00401000(void);  // the function at 0x00401000\n"
         "\n"
     )
-    return header + (starter_cpp or "").strip() + "\n"
+    lines = (starter_cpp or "").replace("\r\n", "\n").replace("\r", "\n").strip().split("\n")
+    # The portal's own starter opens with "// <symbol> (<address>, <n> bytes)" and a note: the
+    # header above says the same, so drop that block instead of showing it twice.
+    if symbol and lines and lines[0].startswith(f"// {symbol} ("):
+        while lines and lines[0].startswith("//"):
+            lines.pop(0)
+        while lines and not lines[0].strip():
+            lines.pop(0)
+    return header + "\n".join(lines).rstrip() + "\n"
 
 
 def _inline_project_includes(code: str, include_dirs: List[Path]) -> Tuple[str, str]:
@@ -268,8 +353,12 @@ def scratch_fields(name: str, flags: str, source: str, context: str) -> Dict[str
     # decomp.me compiles as C unless told otherwise; /TP makes it C++ like our own .cpp compiles.
     if "/TP" not in flags.split():
         flags = ("/TP " + flags).strip()
-    return {"name": name[:100], "compiler": COMPILER, "platform": PLATFORM,
-            "compiler_flags": flags, "source_code": source, "context": context, "diff_label": ""}
+    fields = {"name": name[:100], "compiler": COMPILER, "platform": PLATFORM,
+              "compiler_flags": flags, "source_code": source.replace("\r\n", "\n"),
+              "context": context.replace("\r\n", "\n"), "diff_label": ""}
+    if PRESET_ID.isdigit():
+        fields["preset"] = PRESET_ID
+    return fields
 
 
 def create_scratch(obj: bytes, fields: Dict[str, str], base_url: str = DECOMPME_URL, timeout: int = 60) -> dict:
@@ -299,15 +388,18 @@ def create_scratch(obj: bytes, fields: Dict[str, str], base_url: str = DECOMPME_
 
 
 def prepare(image, va: int, size: int, symbol: str, flags: str, starter_cpp: str,
-            include_dirs: Optional[List[Path]] = None) -> Tuple[bytes, Dict[str, str]]:
-    """The target object and the form fields for one function."""
+            include_dirs: Optional[List[Path]] = None, build: str = "") -> Tuple[bytes, Dict[str, str]]:
+    """The target object and the form fields for one function. build: "pc", "xb" or "proto"."""
     code = image.read(va, size)
     if code is None:
         raise ValueError(f"0x{va:08X}+{size} is outside the game file")
-    obj = build_target_object(code, find_relocations(code, va, image), object_symbol_name(symbol, va))
     src, ctx = _inline_project_includes(starter_cpp or "", include_dirs or [])
-    fields = scratch_fields(f"Scarface {symbol or f'sub_{va:08X}'}", flags,
-                            scratch_source(symbol, f"0x{va:08X}, {size} bytes", src), ctx)
+    rename = {**member_names(ctx + "\n" + src), **stdcall_names(src + "\n" + ctx)}
+    relocs = [Reloc(r.offset, rename.get(r.symbol, r.symbol), r.kind, r.addend) for r in find_relocations(code, va, image)]
+    obj = build_target_object(code, relocs, object_symbol_name(symbol, va))
+    where = f"({BUILD_LABELS.get(build, build)}) " if build else ""
+    fields = scratch_fields(f"Scarface {where}{symbol or f'sub_{va:08X}'}", flags,
+                            scratch_source(symbol, f"0x{va:08X}, {size} bytes", src, build), ctx)
     return obj, fields
 
 
@@ -331,7 +423,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     image = BinaryImage(path)
     va = int(a.va, 0)
     starter = a.source.read_text(encoding="utf-8") if a.source else f"void sub_{va:08X}(void)\n{{\n}}\n"
-    obj, fields = prepare(image, va, a.size, a.symbol, a.flags, starter, [here.parents[1] / "reconstructed_src" / "include"])
+    obj, fields = prepare(image, va, a.size, a.symbol, a.flags, starter,
+                          [here.parents[1] / "reconstructed_src" / "include"], build=a.bin)
     if a.obj:
         a.obj.write_bytes(obj)
         print(f"wrote {a.obj} ({len(obj)} bytes)")

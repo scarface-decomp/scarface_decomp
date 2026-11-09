@@ -166,3 +166,50 @@ def test_create_scratch_posts_the_form_and_returns_the_claim_link():
     assert b'name="compiler"\r\n\r\nmsvc7.1\r\n' in seen["body"] and b"\x4c\x01obj" in seen["body"]
     assert res == {"ok": True, "slug": "Ab12x", "url": f"{base}/scratch/Ab12x",
                    "claim_url": f"{base}/scratch/Ab12x/claim?token=tok", "score": 0, "max_score": 200}
+
+
+def test_scratch_source_has_one_header_and_unix_line_ends():
+    starter = "// core::Foo::Bar (PC 0x006E6730, 39 bytes)\r\n// Starter code written from the disassembly.\r\n\r\nvoid f() {}\r\n"
+    src = D.scratch_source("core::Foo::Bar", "0x006E6730, 39 bytes", starter, "pc")
+    assert src.startswith("// Scarface: The World Is Yours (PC) - core::Foo::Bar\n")
+    assert "Starter code written" not in src and src.count("core::Foo::Bar") == 1
+    assert "\r" not in src and src.endswith("void f() {}\n")
+    # someone's own code keeps its own comments
+    mine = D.scratch_source("core::Foo::Bar", "x", "// my notes\nvoid f() {}\n")
+    assert "// my notes" in mine
+
+
+def test_scratch_name_says_which_game_build(image):
+    _obj, fields = D.prepare(image, FN, len(_code()), "core::Foo::Bar", FLAGS, "void f() {}", [], build="xb")
+    assert fields["name"] == "Scarface (Xbox) core::Foo::Bar"
+    assert "preset" not in fields                     # until decomp.me has created the Scarface preset
+
+
+def test_preset_is_sent_once_it_exists(monkeypatch):
+    monkeypatch.setattr(D, "PRESET_ID", "321")
+    assert D.scratch_fields("n", FLAGS, "x", "")["preset"] == "321"
+
+
+def test_target_names_calls_the_way_msvc_will():
+    src = """
+extern "C" bool __stdcall sub_006F5760(int);
+extern "C" int __stdcall sub_00401000(double, int);
+extern "C" void __cdecl sub_00402000(void);
+struct Object
+{
+    void sub_00403000(int, float);
+    bool sub_00404000();
+};
+namespace audio {
+class Track
+{
+public:
+    virtual void vfunc_00();
+    int sub_00405000(int);
+};
+}
+"""
+    assert D.stdcall_names(src) == {"_sub_006F5760": "_sub_006F5760@4", "_sub_00401000": "_sub_00401000@12"}
+    assert D.member_names(src) == {"_sub_00403000": "?sub_00403000@Object@@QAEXHM@Z",
+                                   "_sub_00404000": "?sub_00404000@Object@@QAE_NXZ",
+                                   "_sub_00405000": "?sub_00405000@Track@audio@@QAEHH@Z"}

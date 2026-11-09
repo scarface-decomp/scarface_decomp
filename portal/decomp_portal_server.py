@@ -435,6 +435,17 @@ def relocs_for(t: dict) -> Optional[list]:
     return LA.signature(code, t["fva_int"], img)[1] if code else None
 
 
+def starter_relocs(t: dict, tb: Optional[bytes]) -> Optional[list]:
+    """The function's relocations, so the starter names calls and globals (sub_/DAT_) instead of numbers."""
+    img = image_for(t["bin"])
+    if img is None or not tb:
+        return None
+    try:
+        return DME.find_relocations(tb, t["fva_int"], img)
+    except Exception:            # Capstone missing or an odd function: the starter still works without them
+        return None
+
+
 def lookalike_starter(t: dict) -> Tuple[str, str]:
     """C++ from an already matched look-alike, rewritten for t: (code, id it came from) or ("", "")."""
     mine = None
@@ -491,7 +502,8 @@ def live_task(t: dict) -> dict:
         if not code and t["status"] != "VERIFIED":
             code, src = counterpart_starter(t)
             kind = "counterpart" if code else ""
-        out["starter_cpp"] = code or synthesize_cpp(t["symbol"], t["va"], tb or b"", out["disasm_lines"])
+        out["starter_cpp"] = code or synthesize_cpp(t["symbol"], t["va"], tb or b"", out["disasm_lines"],
+                                                    relocs=starter_relocs(t, tb))
         out["starter_from"], out["starter_kind"] = src, kind
     out["server_now"] = now_ts()
     return out
@@ -507,7 +519,7 @@ def decompme_prepare(t: dict) -> dict:
         return {"ok": False, "error": f"binaries/{BINARIES[t['bin']].name} is missing, so there is nothing to send."}
     starter = live_task(t).get("starter_cpp", "")
     obj, fields = DME.prepare(img, t["fva_int"], int(t["size"]), t["symbol"], t["flags"], starter,
-                              [INCLUDE_DIR, RECON_DIR])
+                              [INCLUDE_DIR, RECON_DIR], build=t["bin"])
     slug = t.get("decompme_slug", "")
     return {"ok": True, "api": DME.DECOMPME_URL, "obj_b64": base64.b64encode(obj).decode("ascii"),
             "fields": fields, "existing_url": f"{DME.DECOMPME_URL}/scratch/{slug}" if slug else ""}
@@ -1299,7 +1311,8 @@ class Handler(BaseHTTPRequestHandler):
             if not t:
                 return self._json({"ok": False, "error": "Function not found."}, 404)
             tb = target_bytes(t) or b""
-        return self._json({"ok": True, "cpp_code": synthesize_cpp(t["symbol"], t["va"], tb, disassemble(tb))})
+        return self._json({"ok": True, "cpp_code": synthesize_cpp(t["symbol"], t["va"], tb, disassemble(tb),
+                                                                 relocs=starter_relocs(t, tb))})
 
     def post_ai(self, body):
         self._json(ai_call(body))

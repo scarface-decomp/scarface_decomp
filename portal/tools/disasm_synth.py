@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import re
 import struct
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 
 R32 = ["eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"]
 R8 = ["al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"]
@@ -27,7 +27,7 @@ def _norm_mem(op: str) -> str:
     """'dword ptr [esp + 4]' -> '[esp+0x4]' (keeps 'byte ptr' etc. only for immediate stores)."""
     def fix(m):
         inner = m.group(1).replace(" ", "")
-        inner = re.sub(r"(?<=[+\-\[])(\d+)(?=[\]+\-*])", lambda d: hex(int(d.group(1))), inner)
+        inner = re.sub(r"(?:(?<=[+\-])|^)(\d+)(?=$|[+\-*])", lambda d: hex(int(d.group(1))), inner)
         inner = re.sub(r"0x0+([0-9a-f])", r"0x\1", inner)
         return "[" + inner + "]"
     return re.sub(r"\[([^\]]+)\]", fix, op)
@@ -41,7 +41,10 @@ def disassemble(code: bytes, base: int = 0) -> List[str]:
         end = 0
         for insn in md.disasm(code, 0):
             ops = insn.op_str
-            ops = re.sub(r"\b(dword|word|byte|qword|tbyte) ptr (?=\[)", lambda m: "" if "," in ops and not re.search(r",\s*(0x[0-9a-f]+|\d+)$", ops) else m.group(0), ops)
+            # Size prefixes are dropped where a register already gives the size, but kept for
+            # movzx/movsx and stores of a constant, where they are the only clue.
+            keep = insn.mnemonic in ("movzx", "movsx") or "," not in ops or re.search(r",\s*(0x[0-9a-f]+|\d+)$", ops)
+            ops = re.sub(r"\b(dword|word|byte|qword|tbyte) ptr (?=\[)", lambda m: m.group(0) if keep else "", ops)
             ops = _norm_mem(ops)
             hx = " ".join(f"{b:02X}" for b in insn.bytes)
             out.append(f"+{insn.address:02X}: {hx:<20} | {insn.mnemonic} {ops}".rstrip())
@@ -169,136 +172,20 @@ def sanitize_class_and_method(sym: str) -> Tuple[str, str, List[str]]:
     return cls, meth, ns
 
 
-def _num(s: str) -> int:
-    return int(s, 0)
-
-
-def synthesize_cpp(symbol: str, va: str, target: bytes, disasm: List[str]) -> str:
+def synthesize_cpp(symbol: str, va: str, target: bytes, disasm: List[str], relocs=None) -> str:
     """
-    Produce compilable starter C++ from the target's instructions. It is a starting point for a
-    human or an AI, not a decompiler: field types default to int and callee signatures are guesses.
+    Compilable starter C++ for one function, written from its instructions (see starter_synth.py).
+    relocs: the function's relocations (decompme.find_relocations), so calls and globals get their
+    sub_XXXXXXXX / DAT_XXXXXXXX names instead of numbers. Without them, call targets are still named
+    from the disassembly but data addresses stay numbers.
     """
-    n = len(target)
-    cls, meth, ns = sanitize_class_and_method(symbol)
-    is_method = bool(cls)
-    ins = [ln.split("|", 1)[1].strip() for ln in disasm if "|" in ln]
-
-    # Calling convention / arguments from the return instruction and stack reads.
-    argc = 0
-    m = re.search(r"\bret 0x([0-9a-f]+)$", ins[-1]) if ins else None
-    if m:
-        argc = int(m.group(1), 16) // 4
-    else:
-        offs = [int(x, 16) for l in ins for x in re.findall(r"\[esp\+0x([0-9a-f]+)\]", l)]
-        pushes = 0
-        for l in ins:
-            if l.startswith("push"):
-                pushes += 1
-            if re.search(r"\[esp\+0x", l):
-                break
-        offs = [o - 4 * pushes for o in offs]
-        if offs:
-            argc = max(0, max(o for o in offs if 0 < o <= 0x40) // 4) if any(0 < o <= 0x40 for o in offs) else 0
-    params = ", ".join(f"int a{i + 1}" for i in range(argc))
-
-    fields: Dict[int, str] = {}
-    this_regs = {"ecx"} if is_method else set()
-    reg: Dict[str, str] = {}
-    stmts: List[str] = []
-    externs: List[str] = []
-    ret_expr = None
-    calls = 0
-
-    def field(off: int, typ: str = "int") -> str:
-        fields.setdefault(off, typ)
-        return f"m_Field{off:02X}"
-
-    for l in ins:
-        mm = re.match(r"mov (e\w\w), (e\w\w)$", l)
-        if mm:
-            dst, src = mm.groups()
-            if src in this_regs:
-                this_regs.add(dst)
-            reg[dst] = reg.get(src, src)
-            continue
-        mm = re.match(r"mov (e\w\w), \[esp\+0x([0-9a-f]+)\]$", l)
-        if mm:
-            idx = max(1, int(mm.group(2), 16) // 4)
-            reg[mm.group(1)] = f"a{min(idx, argc) if argc else idx}"
-            continue
-        mm = re.match(r"(mov|lea) (e\w\w), \[(e\w\w)\+0x([0-9a-f]+)\]$", l)
-        if mm and mm.group(3) in this_regs:
-            off = int(mm.group(4), 16)
-            name = field(off)
-            reg[mm.group(2)] = ("&" if mm.group(1) == "lea" else "") + name
-            continue
-        mm = re.match(r"mov \[(e\w\w)\+0x([0-9a-f]+)\], (e\w\w)$", l)
-        if mm and mm.group(1) in this_regs:
-            stmts.append(f"    {field(int(mm.group(2), 16))} = {reg.get(mm.group(3), '0')};")
-            continue
-        mm = re.match(r"mov (dword|byte) ptr \[(e\w\w)\+0x([0-9a-f]+)\], (0x[0-9a-f]+|\d+)$", l)
-        if mm and mm.group(2) in this_regs:
-            v = _num(mm.group(4))
-            if mm.group(1) == "dword" and v >= 0x80000000:
-                v -= 1 << 32
-            stmts.append(f"    {field(int(mm.group(3), 16), 'char' if mm.group(1) == 'byte' else 'int')} = {v};")
-            continue
-        mm = re.match(r"xor (e\w\w), \1$", l)
-        if mm:
-            reg[mm.group(1)] = "0"
-            continue
-        mm = re.match(r"mov (e\w\w), (0x[0-9a-f]+|\d+)$", l)
-        if mm:
-            reg[mm.group(1)] = str(_num(mm.group(2)))
-            continue
-        if l.startswith("call"):
-            fn = f"Callee{calls:02d}"
-            calls += 1
-            externs.append(f"int __cdecl {fn}(...);  // TODO: real name/signature (target is a relocation)")
-            stmts.append(f"    {fn}();")
-            reg["eax"] = f"{fn}()"
-            continue
-    if any(re.match(r"(mov|xor|or|lea) eax", l) for l in ins) or reg.get("eax", "").startswith("Callee"):
-        ret_expr = reg.get("eax")
-    if ins and ins[-1].startswith("jmp") and not stmts:
-        externs.append("void __cdecl TailCallee();  // TODO: tail-call target")
-        stmts.append("    TailCallee();")
-
-    ret_type = "int" if ret_expr not in (None, "") else "void"
-    if ret_expr in ("this",) and is_method:
-        ret_type = f"{cls}*"
-    if ret_type != "void":
-        stmts.append(f"    return {ret_expr};")
-    elif not stmts:
-        stmts.append("    return;")
-
-    hdr = [f"// {symbol} ({va}, {n} bytes)",
-           "// Starter code generated from the disassembly. Field names/types and callee signatures are guesses;",
-           "// rename and retype them as you work it out. Only the C++ below is compiled.", ""]
-    body = []
-    open_ns = "".join(f"namespace {x} {{ " for x in ns)
-    close_ns = " ".join("}" for _ in ns)
-    if externs:
-        body += externs + [""]
-    if is_method:
-        decl = [f"class {cls} {{", "public:"]
-        decl.append("    virtual " + f"{ret_type} {meth}({params});")
-        if fields:
-            last = 0
-            for off in sorted(fields):
-                if off < 4:
-                    continue
-                if off > last + 4 and off - (last + 4) > 0:
-                    pad = off - max(4, last + 4)
-                    if pad > 0:
-                        decl.append(f"    char m_pad{max(4, last + 4):02X}[0x{pad:X}];")
-                decl.append(f"    {fields[off]} m_Field{off:02X}; // +0x{off:02X}")
-                last = off
-        decl.append("};")
-        body += decl + ["", f"{ret_type} {cls}::{meth}({params}) {{"] + stmts + ["}"]
-    else:
-        body += [f"{ret_type} __cdecl {meth}({params}) {{"] + stmts + ["}"]
-    text = "\n".join(body)
-    if ns:
-        text = open_ns + "\n" + text + "\n" + close_ns
-    return "\n".join(hdr) + text + "\n"
+    from starter_synth import synthesize
+    try:
+        return synthesize(symbol, va, target, disasm, relocs)
+    except Exception as e:                                   # a starter must never break the page
+        cls, meth, ns = sanitize_class_and_method(symbol)
+        return (f"// {symbol} ({va}, {len(target)} bytes)\n"
+                f"// The starter generator could not follow this function ({type(e).__name__}); write it from the\n"
+                "// disassembly.\n\n"
+                + (f"class {cls} {{ public: void {meth}(); }};\n\nvoid {cls}::{meth}()\n{{\n}}\n" if cls
+                   else f"void __cdecl {meth}(void)\n{{\n}}\n"))
