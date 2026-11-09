@@ -169,6 +169,7 @@
     .build-row .tube > span { transition-delay: 0s; }
     .build-row .sub { grid-column: 1 / -1; color: var(--grey); font-size: 0.9rem; }
     .build-row.extra .name, .build-row.extra .pct { color: var(--grey); }
+    .tube > span.full { width: 100%; }
     .side + .side { margin-top: 44px; }
     .side p { color: var(--grey); font-size: 0.94rem; margin-bottom: 14px; }
     .buckets { display: grid; gap: 9px; }
@@ -317,6 +318,7 @@
           <div><dt>Xbox version</dt><dd id="sb-xb">…</dd></div>
           <div><dt>PC version</dt><dd id="sb-pc">…</dd></div>
           <div><dt>Bytes matched</dt><dd id="sb-bytes">…</dd></div>
+          <div><dt>Game scripts</dt><dd>635 / 635</dd></div>
           <div><dt>Compiler</dt><dd id="sb-compiler">cl.exe 13.10.3052</dd></div>
         </dl>
 
@@ -381,6 +383,14 @@
               <div class="pct" id="proto-big">…</div>
               <div class="tube"><span id="proto-bar"></span></div>
               <div class="sub" id="proto-sub"></div>
+            </div>
+            <div class="build-row" id="scripts-row">
+              <div class="name">Game scripts <span>same files on PS2, Xbox and PC</span></div>
+              <div class="pct">100%</div>
+              <div class="tube"><span class="full"></span></div>
+              <div class="sub">All 635 compiled scripts decompile to readable TorqueScript that compiles back to the
+                identical file, and so do the April 2006 prototype's 864. About half of the names, which the game stores
+                as hashes, are recovered so far.</div>
             </div>
           </div>
           <div>
@@ -489,14 +499,16 @@
               <a data-repo-link="/blob/main/docs/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md" target="_blank" rel="noopener noreferrer">LEGAL.md</a>
               (not legal advice).</p></details>
           <details><summary>What about the PlayStation 2 and Wii versions?</summary>
-            <p>They aren't in the portal yet, and anyone who wants to start on them is welcome to. The PS2 version is
-              the one most worth doing: it has things the PC version lacks, such as its blood effects on clothing and
-              skin and its own explosion sounds. Its program runs on the PS2's MIPS processor and was built with
-              Metrowerks CodeWarrior for PlayStation 2, not Microsoft's compiler, so it needs its own matching setup
-              with that compiler. The Wii version mostly changed the controls and some tuning, so there's less in it
-              that the others don't have, but it's open too. What we know so far, and what a PS2 setup would need, is in
-              <a data-repo-link="/blob/main/docs/OTHER_VERSIONS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/OTHER_VERSIONS.md" target="_blank" rel="noopener noreferrer">OTHER_VERSIONS.md</a>.
-              The PS2 disc's compiled scripts are already used for the script work.</p></details>
+            <p><b>The PS2's scripts are done:</b> its compiled scripts are the same files as the Xbox's, and every one of
+              them decompiles to readable TorqueScript that compiles back to the identical file. Load your PS2 disc image
+              into the portal and its Game Scripts tab shows them.</p>
+            <p>The PS2's C++ code is a different matter. Its program runs on the PS2's MIPS processor and was built with
+              Metrowerks CodeWarrior for PlayStation 2, not Microsoft's compiler, so matching it needs that compiler and
+              its own setup, which nobody has started yet. It's the version most worth doing: it has things the PC version
+              lacks, such as its blood effects on clothing and skin and its own explosion sounds. The Wii version mostly
+              changed the controls and some tuning, so there's less in it that the others don't have, but it's open too.
+              What we know so far, and what a PS2 setup would need, is in
+              <a data-repo-link="/blob/main/docs/OTHER_VERSIONS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/OTHER_VERSIONS.md" target="_blank" rel="noopener noreferrer">OTHER_VERSIONS.md</a>.</p></details>
           <details><summary>What about the Xbox prototype?</summary>
             <p>It's part of the goal: the game that shipped, plus the code that never shipped. The April 20, 2006
               prototype (<code>game.xbe</code>) is in the portal, all of its code can be read, and every match is saved
@@ -513,9 +525,10 @@
               with the real compiler, and credits you for every exact match. The portal lists these functions first.</p></details>
           <details><summary>What about the game's scripts?</summary>
             <p>The game also runs compiled scripts (<code>.cso</code> and <code>.dso</code> files), written
-              in TorqueScript, a C++-like language. All 635 of the released game's compiled scripts now decompile to
-              readable TorqueScript that compiles back to the <strong>identical</strong> file, checked by a compiler that
-              lays the bytes out exactly as the game's did. The game stores names as hashes; about half are recovered as
+              in TorqueScript, a C++-like language. All 635 of the released game's compiled scripts (the same files on
+              PS2, Xbox and PC) and all 864 of the April 2006 prototype's now decompile to readable TorqueScript that
+              compiles back to the <strong>identical</strong> file, checked by a compiler that lays the bytes out exactly
+              as the game's did. The game stores names as hashes; about half are recovered as
               real words so far. The AI's decision tree (<code>.dtr</code>) is decoded too, apart from the small programs
               inside it. Details in
               <a data-repo-link="/blob/main/docs/SCRIPTS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCRIPTS.md" target="_blank" rel="noopener noreferrer">SCRIPTS.md</a>.</p></details>

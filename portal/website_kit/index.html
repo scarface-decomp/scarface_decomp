@@ -571,6 +571,9 @@
     .script-tag.only { color: #f0abfc; border-color: rgba(240, 171, 252, 0.45); }
     .script-tag.changed { color: #fbbf24; border-color: rgba(251, 191, 36, 0.45); }
     .script-tag.same { color: var(--muted); }
+    .script-tag.exact { color: var(--green); border-color: rgba(16, 185, 129, 0.45); }
+    .script-tag.notexact { color: var(--error); border-color: rgba(225, 29, 72, 0.45); }
+    .script-row .tags { display: flex; gap: 4px; }
     .script-list-empty { padding: 14px; color: var(--muted); font-size: 0.85rem; }
     @media (max-width: 760px) {
       .script-filters { grid-template-columns: 1fr; }
@@ -801,6 +804,10 @@
               <div class="feed-row">
                 <div class="feed-row-top"><span>Functions that are look-alikes of another (matched for free)</span><span class="mono" style="color:var(--green);" id="feed-lookalikes">—</span></div>
                 <div class="feed-bar"><div class="feed-bar-fill" id="feed-lookalikes-bar" style="width:0%; background:var(--green);"></div></div>
+              </div>
+              <div class="feed-row">
+                <div class="feed-row-top"><span>Game scripts as readable TorqueScript, compiled back byte for byte</span><span class="mono" style="color:var(--green);" id="feed-scripts">—</span></div>
+                <div class="feed-bar"><div class="feed-bar-fill" id="feed-scripts-bar" style="width:0%; background:var(--green);"></div></div>
               </div>
             </div>
 
@@ -1502,6 +1509,20 @@
       $('feed-lookalikes').textContent = fmtInt(la.extra) + ' of ' + fmtInt(la.functions) + ' (' + fmtInt(la.groups) + ' groups)';
       $('feed-lookalikes-bar').style.width = Math.min(100, (Number(la.extra) / Number(la.functions)) * 100) + '%';
     }
+    if (s.scripts) renderScriptCheck(s.scripts);
+  }
+
+  /* Dashboard: how many of the game's scripts decompile to TorqueScript that compiles back exactly. */
+  const SCRIPT_VERSION_SHORT = { xbox: 'Xbox', ps2: 'PS2', pc: 'PC', prototype: 'Prototype', uploads: 'Loaded' };
+  function renderScriptCheck(sc) {
+    const vs = Array.isArray(sc.versions) ? sc.versions : [];
+    const total = vs.reduce((n, v) => n + (Number(v.compiled) || 0), 0);
+    const exact = vs.reduce((n, v) => n + (Number(v.exact) || 0), 0);
+    let text = vs.length ? vs.map((v) => (SCRIPT_VERSION_SHORT[v.id] || v.id) + ' ' + fmtInt(v.exact) + ' / ' + fmtInt(v.compiled)).join(' · ')
+      : 'no scripts yet';
+    if (sc.running) text += ' (checking…)';
+    $('feed-scripts').textContent = text;
+    $('feed-scripts-bar').style.width = (total ? Math.min(100, exact / total * 100) : 0) + '%';
   }
 
   /* One plain sentence about the function's look-alikes for the workbench. */
@@ -2916,8 +2937,11 @@
     const ver = $('script-version').value || 'ALL';
     const changed = rows.filter((f) => f.compare === 'changed').length;
     const only = rows.filter((f) => f.compare === 'only here').length;
+    const compiled = rows.filter((f) => f.ext === 'CSO' || f.ext === 'DSO');
+    const exact = compiled.filter((f) => f.exact === true).length;
     $('script-list-count').textContent = fmtInt(rows.length) + ' shown'
-      + (only ? ' • ' + fmtInt(only) + ' only here' : '') + (changed ? ' • ' + fmtInt(changed) + ' changed' : '');
+      + (only ? ' • ' + fmtInt(only) + ' only here' : '') + (changed ? ' • ' + fmtInt(changed) + ' changed' : '')
+      + (compiled.length ? ' • ' + fmtInt(exact) + ' of ' + fmtInt(compiled.length) + ' compiled ones 1:1' : '');
     list.innerHTML = '';
     list.setAttribute('role', rows.length ? 'listbox' : 'status');
     if (!rows.length) {
@@ -2940,11 +2964,24 @@
       const path = document.createElement('span'); path.className = 'path';
       path.textContent = ver === 'ALL' ? f.path : f.path.split('/').slice(f.version === 'uploads' && f.path.indexOf('/') < 0 ? 0 : 1).join('/');
       path.title = f.path;
+      const tags = document.createElement('span');
+      tags.className = 'tags';
       const tagInfo = SCRIPT_TAGS[f.compare];
-      const tag = document.createElement('span');
-      if (tagInfo) { tag.className = 'script-tag ' + tagInfo[0]; tag.textContent = tagInfo[1]; }
+      if (tagInfo) {
+        const tag = document.createElement('span');
+        tag.className = 'script-tag ' + tagInfo[0]; tag.textContent = tagInfo[1];
+        tags.appendChild(tag);
+      }
+      if (f.exact === true || f.exact === false) {
+        const ex = document.createElement('span');
+        ex.className = 'script-tag ' + (f.exact ? 'exact' : 'notexact');
+        ex.textContent = f.exact ? '1:1' : 'not 1:1';
+        ex.title = f.exact ? 'Decompiles to TorqueScript that compiles back byte for byte'
+          : 'The decompiled text does not compile back to the same bytes yet';
+        tags.appendChild(ex);
+      }
       const size = document.createElement('span'); size.className = 'size'; size.textContent = fmtInt(f.size) + ' B';
-      btn.append(ext, path, tag, size);
+      btn.append(ext, path, tags, size);
       btn.addEventListener('click', () => selectScript(f.path));
       frag.appendChild(btn);
     });

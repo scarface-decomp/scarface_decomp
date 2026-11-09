@@ -2,8 +2,11 @@
 
 This project matches the **Xbox** and **PC** builds (and the April 2006 Xbox prototype), because they
 were all built with the same Microsoft compiler that the portal runs. The **PlayStation 2** and **Wii**
-versions were built for other processors with other compilers, so they need their own setup. Nobody
+versions were built for other processors with other compilers, so their C++ needs its own setup. Nobody
 has started one yet. If you want to, you're welcome: open an issue on GitHub so others can join in.
+
+The PS2's **scripts** are already covered: they are the same files as the Xbox's, and all of them
+decompile to TorqueScript that compiles back byte for byte.
 
 ## Why the PS2 version is worth it
 
@@ -22,7 +25,7 @@ Checked on 2026-11-08 from the NTSC-U disc (SLUS-21111):
 | Format | 32-bit ELF, MIPS (the PS2's Emotion Engine), entry point `0x001A0008`, about 6.9 MB |
 | Compiler | Metrowerks CodeWarrior for PlayStation 2: the `.comment` section says `MW MIPS C Compiler (2.4.1.01)` |
 | Names | The symbol table is stripped. C++ class names are stored as plain text, which helps with naming. |
-| Scripts | `CEMENT.RCF` holds the compiled scripts. `python portal/scripts/extract_scripts.py <PS2 .iso>` already extracts them, and the script tools here read them. They are byte-identical to the Xbox disc's scripts. |
+| Scripts | **Done.** `CEMENT.RCF` holds the compiled scripts, byte-identical to the Xbox disc's. The portal copies them out of your PS2 `.iso` (or `python portal/scripts/extract_scripts.py <PS2 .iso>`), and all 635 decompile to readable TorqueScript that compiles back byte for byte (`docs/SCRIPTS.md`). |
 
 To get the program out of your own disc image, open the `.iso` with 7-Zip (or any ISO tool) and
 copy `SLUS_211.11`. Keep it out of the repository: put it in `binaries/ps2/`, which Git ignores.

@@ -1058,9 +1058,74 @@ def script_detail(rel: str) -> dict:
             "opcode_count": res["opcode_count"], "disasm": res["disasm"], "decompiled_code": res["decompiled_code"]}
 
 
+# ---------------------------------------------------------------------------
+# Every script checked once: decompiled, compiled again, compared. Results are kept per file (size and
+# modification time) in binaries/scripts_and_data/.decompile_check.json (never committed), so a file is
+# only checked again when it changes.
+SCRIPT_CHECK_FILE = SCRIPTS_DIR / ".decompile_check.json"
+_SCRIPT_CHECK: Dict[str, object] = {"running": False, "results": {}}
+
+
+def _check_key(p: Path) -> list:
+    st = p.stat()
+    return [st.st_size, st.st_mtime_ns]
+
+
+def check_scripts(verbose: bool = True) -> dict:
+    """Decompile and recompile every .cso/.dso under binaries/scripts_and_data/; {path: exact}."""
+    import torque_script as TS
+    cache = read_json(SCRIPT_CHECK_FILE, {}) if SCRIPT_CHECK_FILE.exists() else {}
+    results: Dict[str, bool] = {}
+    _SCRIPT_CHECK["running"] = True
+    try:
+        items, versions = script_index()
+        for v in versions:
+            files = [i for i in items if i["version"] == v["id"] and i["ext"] in ("CSO", "DSO")]
+            todo = [i for i in files if (cache.get(i["path"]) or [None])[:2] != _check_key(SCRIPTS_DIR / i["path"])]
+            names = script_names(v["id"]) if todo else {}
+            for i in files:
+                p = SCRIPTS_DIR / i["path"]
+                hit = cache.get(i["path"])
+                if hit and hit[:2] == _check_key(p):
+                    results[i["path"]] = bool(hit[2])
+                    continue
+                try:
+                    ok = TS.check(p.read_bytes(), names)[1]
+                except Exception:  # noqa: BLE001 - one odd file is a "no", not a crash
+                    ok = False
+                results[i["path"]] = ok
+                cache[i["path"]] = _check_key(p) + [ok]
+                _SCRIPT_CHECK["results"] = dict(results)
+            if verbose and files:
+                n = sum(1 for i in files if results.get(i["path"]))
+                print(f"[*] Game scripts, {v['label']}: {n:,} of {len(files):,} decompile to TorqueScript "
+                      "that compiles back byte for byte")
+        if SCRIPTS_DIR.is_dir():
+            write_json(SCRIPT_CHECK_FILE, {k: v for k, v in cache.items() if k in results})
+    finally:
+        _SCRIPT_CHECK["results"] = results
+        _SCRIPT_CHECK["running"] = False
+    return results
+
+
+def script_check_summary() -> dict:
+    """{"running": bool, "versions": [{id, label, compiled, checked, exact}]} for the dashboard."""
+    items, versions = script_index()
+    res = _SCRIPT_CHECK["results"]
+    out = []
+    for v in versions:
+        files = [i["path"] for i in items if i["version"] == v["id"] and i["ext"] in ("CSO", "DSO")]
+        if files:
+            out.append({"id": v["id"], "label": v["label"], "compiled": len(files),
+                        "checked": sum(1 for f in files if f in res), "exact": sum(1 for f in files if res.get(f))})
+    return {"running": bool(_SCRIPT_CHECK["running"]), "versions": out}
+
+
 def script_list_payload(selected: str = "") -> dict:
     items, versions = script_index()
-    out = {"ok": True, "files": items, "versions": versions}
+    res = _SCRIPT_CHECK["results"]
+    items = [dict(i, exact=res.get(i["path"])) for i in items]
+    out = {"ok": True, "files": items, "versions": versions, "check": script_check_summary()}
     if selected:
         out["selected"] = selected
     return out
@@ -1175,7 +1240,7 @@ class Handler(BaseHTTPRequestHandler):
                                    "audit_log": read_json(AUDIT_JSON, []), "sources": list_sources(),
                                    "tier_counts": dict(tiers), "total_remaining_indexed": remaining,
                                    "repo_url": REPO_URL, "lookalikes": lookalike_summary(),
-                                   "binary_problems": BINARY_PROBLEMS})
+                                   "binary_problems": BINARY_PROBLEMS, "scripts": script_check_summary()})
         if u.path == "/api/source":
             name = q1("name")
             p = (RECON_DIR / name).resolve()
@@ -1492,6 +1557,8 @@ def main() -> None:
     print("=" * 78)
     for b, problem in BINARY_PROBLEMS.items():
         print(f"[!] NOT USED: {problem}")
+    # Check the game's scripts in the background: the portal is usable meanwhile.
+    threading.Thread(target=check_scripts, name="script-check", daemon=True).start()
     if os.environ.get("SCARFACE_NO_BROWSER") != "1":
         if os.name == "nt":
             subprocess.Popen(["cmd", "/c", "start", url])

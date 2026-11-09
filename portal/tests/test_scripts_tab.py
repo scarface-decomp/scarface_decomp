@@ -73,3 +73,21 @@ def test_compiled_scripts_are_shown_as_torquescript_with_names(server):
     assert 'echo' in d["decompiled_code"] or "stx" in d["decompiled_code"]
     assert "FUNC_DECL" in d["disasm"]
     assert server.script_names("xbox") is server.script_names("xbox")     # worked out once per folder
+
+
+def test_every_script_is_checked_once_and_counted(server, monkeypatch):
+    import torque_script as TS
+    (server.SCRIPTS_DIR / "xbox" / "scriptc" / "tony.cso").write_bytes(TS.compile_text('$a = "Tony";\n'))
+    monkeypatch.setattr(server, "SCRIPT_CHECK_FILE", server.SCRIPTS_DIR / ".decompile_check.json")
+    monkeypatch.setitem(server._SCRIPT_INDEX, "key", None)
+    res = server.check_scripts(verbose=False)
+    assert res["xbox/scriptc/tony.cso"] is True and res["xbox/scriptc/a.cso"] is False   # a.cso is not a script
+    xbox = {v["id"]: v for v in server.script_check_summary()["versions"]}["xbox"]
+    assert (xbox["compiled"], xbox["checked"], xbox["exact"]) == (3, 3, 1)
+    files = {f["path"]: f for f in server.script_list_payload()["files"]}
+    assert files["xbox/scriptc/tony.cso"]["exact"] is True and files["xbox/ai/common.dtr"]["exact"] is None
+
+    def boom(*a, **k):
+        raise AssertionError("checked again although nothing changed")
+    monkeypatch.setattr(TS, "check", boom)
+    assert server.check_scripts(verbose=False) == res                 # from the saved results
