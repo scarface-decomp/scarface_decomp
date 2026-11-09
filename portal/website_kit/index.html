@@ -1158,11 +1158,11 @@
               <legend class="gf-h">Layout</legend>
               <div class="gf-modes">
               <label class="gf-mode"><input type="radio" name="gf-mode" value="unique" checked onchange="updateGfSpace()" />
-                <span><b>No duplicates</b><span>A file that is exactly the same in several versions is copied once, into <code>Shared/</code>. Each version's folder then has only what is unique to it.</span></span></label>
+                <span><b>No duplicates</b><span>A file that is exactly the same in several versions is copied once, into <code>Shared/</code>. What only one version has gets its own folder, <code>Exclusive to</code> that version.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="every" onchange="updateGfSpace()" />
                 <span><b>Every version complete</b><span>Each version in its own folder with all of its files. Takes the most space.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="best" onchange="updateGfSpace()" />
-                <span><b>Best version of each file</b><span>One copy of every file, in <code>Best/</code>. Where the versions differ, the highest quality wins: the PC's 48 kHz sounds, its 1280&times;720 videos, the biggest textures. The index says where each came from.</span></span></label>
+                <span><b>Best version of each file</b><span>One copy of everything the versions share, in <code>Best/</code>, the highest quality winning: the PC's 48 kHz sounds, its 1280&times;720 videos, the biggest textures. What only one version has gets its own <code>Exclusive to</code> folder.</span></span></label>
               </div>
             </fieldset>
 
@@ -1172,7 +1172,7 @@
               <label class="gf-mode"><input type="radio" name="gf-folders" value="game" checked />
                 <span><b>As in the game</b><span>Every file in the folder it has inside the game.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-folders" value="type" />
-                <span><b>By type</b><span>Sounds, Textures, Models, Animations, Videos, Scripts &amp; text first, each with the game's folders inside.</span></span></label>
+                <span><b>By type</b><span>Each folder, including each version's exclusives, sorted into Sounds, Textures, Models, Animations, Videos and Scripts &amp; text, with the game's folders inside. Sounds get their original names.</span></span></label>
               </div>
             </fieldset>
 
@@ -1196,6 +1196,7 @@
               <div class="hdr-actions">
                 <button type="button" class="btn-sm" id="gf-open-shared" onclick="openGameFolder('shared')" hidden>Open Shared</button>
                 <button type="button" class="btn-sm" id="gf-open-best" onclick="openGameFolder('best')" hidden>Open Best</button>
+                <button type="button" class="btn-sm" id="gf-open-only" onclick="openGameFolder('only:' + GF_TAB)">Open its exclusives</button>
                 <button type="button" class="btn-sm" id="gf-open-version" onclick="openGameFolder(GF_TAB)">Open this version's folder</button>
               </div>
             </div>
@@ -3342,6 +3343,8 @@
     });
     const info = s.versions[GF_TAB];
     if (!info) return;
+    $('gf-open-only').hidden = s.mode === 'every' || !info.only;
+    $('gf-open-version').hidden = s.mode === 'best' || (s.mode === 'unique' && !info.changed);
     const t = $('gf-totals');
     t.textContent = '';
     t.appendChild(el('strong', fmtInt(info.files)));

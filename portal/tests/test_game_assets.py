@@ -170,11 +170,13 @@ def test_no_duplicates_layout(tmp_path):
     assert sum(1 for data in files.values() if data == SOUND) == 1
     # each version's folder: only what is its own
     assert files["Xbox 2006 prototype/art/models/car.p3d"] == CAR_PROTO
-    assert "Xbox 2006 prototype/art/cut/protoonly.p3d" in files
+    assert "Exclusive to Xbox 2006 prototype/art/cut/protoonly.p3d" in files
     assert "Xbox 2006 prototype/art/sound/hello.rsd" not in files
     assert files["PS2/CEMENT.RCF/art/sound/hello.rsd"] == SOUND_PS2
-    assert files["PS2/MOVIES/INTRO.PSS"].startswith(b"PSS")
-    assert "Xbox/default.xbe" in files and "PC/Scarface.exe" in files and "PC/cement.rcf/art/pc/mouse.p3d" in files
+    assert files["Exclusive to PS2/MOVIES/INTRO.PSS"].startswith(b"PSS")
+    assert "Exclusive to Xbox/default.xbe" in files and "Exclusive to PC/Scarface.exe" in files
+    assert "Exclusive to PC/cement.rcf/art/pc/mouse.p3d" in files
+    assert not any(k.startswith(("Xbox/", "PC/")) for k in files)          # nothing they have in another form
     assert not any(k.startswith("Xbox/cement.rcf/art/sound") for k in files)
     # what each file is
     xb, ps2, proto = rows(index, "xbox"), rows(index, "ps2"), rows(index, "prototype")
@@ -184,9 +186,9 @@ def test_no_duplicates_layout(tmp_path):
     assert proto["art/movies/intro.bik"][3:5] == ["shared", "Shared/media/intro.bik"]
     # nothing escapes the folder, empty files and two names for the same data are kept
     assert not (tmp_path / "evil.txt").exists() and not (b / "evil.txt").exists()
-    assert files["Xbox/cement.rcf/escape.txt"] == b"no"
+    assert files["Exclusive to Xbox/cement.rcf/escape.txt"] == b"no"
     assert files["Shared/media/copy.bik"] == MOVIE
-    assert files["Xbox/empty.txt"] == b""
+    assert files["Exclusive to Xbox/empty.txt"] == b""
     # what people read, and no work files left behind
     assert "Shared/" in files["README.txt"].decode() and "ONLY IN THIS VERSION" in files["INDEX - Xbox 2006 prototype.txt"].decode()
     assert not (out / ".work").exists()
@@ -221,7 +223,7 @@ def test_changing_layout_reuses_the_files(tmp_path, monkeypatch):
 def test_an_edited_file_makes_its_version_be_read_again(tmp_path, monkeypatch):
     b = make_binaries(tmp_path)
     GA.run(["prototype", "pc"], "unique", b, log=lambda m: None)
-    edited = b / "game_files" / "Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d"
+    edited = b / "game_files" / "Exclusive to Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d"
     edited.write_bytes(b"my own mod")
     read = []
     real = dict(GA.READERS)
@@ -230,8 +232,8 @@ def test_an_edited_file_makes_its_version_be_read_again(tmp_path, monkeypatch):
     GA.run(["prototype", "pc"], "unique", b, log=lambda m: None)
     assert read == ["zip"]                     # the prototype again; the PC folder was reused
     out = b / "game_files"
-    assert (out / "Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d").read_bytes() == b"P3D\xff cut scene"
-    assert (out / "Changed by you" / "Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d").read_bytes() == b"my own mod"
+    assert (out / "Exclusive to Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d").read_bytes() == b"P3D\xff cut scene"
+    assert (out / "Changed by you" / "Exclusive to Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d").read_bytes() == b"my own mod"
 
 
 def test_stopped_run_carries_on(tmp_path):
@@ -535,8 +537,8 @@ def test_best_picks_the_highest_quality_of_each_file():
     assert got["movies.rcf/art/movies/intro.bik"][0] == "pc"                                       # 1280x720
     assert got["art/car.p3d"] == ("prototype", "Best/art/car.p3d")                                 # bigger textures
     assert got["patch01.rcf/scriptc/a.cso"] == ("pc", "Best/scriptc/a.cso")                        # the patched script
-    assert got["art/cut/only.p3d"][0] == "prototype"
-    assert all(place.startswith("Best/") for _sha, place in places)
+    assert got["art/cut/only.p3d"] == ("prototype", "Exclusive to Xbox 2006 prototype/art/cut/only.p3d")
+    assert all(place.startswith(("Best/", "Exclusive to ")) for _sha, place in places)
     assert len(places) == len({place.lower() for _sha, place in places}) == 7     # the same bytes once
     # every version's rows say where the chosen copy is
     assert {r[0]: r[4] for r in rows["ps2"]} == {"SOUND.RCF/art/sound/rsd/a/x.rsd": "Best/art/sound/rsd/a/x.rsd"}
@@ -560,10 +562,11 @@ def test_by_type_folders_and_best_end_to_end(tmp_path):
     files = read_all(b / "game_files")
     out = b / "game_files"
     assert files["Best/art/sound/hello.rsd"] == SOUND and "Best/art/models/car.p3d" in files
+    assert files["Exclusive to Xbox 2006 prototype/art/cut/protoonly.p3d"] == b"P3D\xff cut scene"
     assert not any(k.startswith(("Shared/", "Xbox/", "PC/")) for k in files)
     assert "from " in files["INDEX - Best.txt"].decode()
     summ = GA.summary(index)
-    assert summ["best"]["files"] == sum(1 for k in files if k.startswith("Best/"))
+    assert summ["best"]["files"] == sum(1 for k in files if k.startswith(("Best/", "Exclusive to ")))
     assert GA.list_files(index, "pc", status="picked")["total"] == summ["best"]["from"]["pc"]
     # back to every version complete: what Best left out is read again, and nothing is mistaken for an edit
     GA.run(list(GA.VERSIONS), "every", b, log=lambda m: None)
@@ -646,3 +649,18 @@ def test_by_type_names_sounds_by_their_original_names(tmp_path):
     listed = GA.list_files(index, "xbox", query="hello_01")
     assert listed["total"] == 1 and listed["files"][0]["name"] == "art/sound/localised/english/vocal/tony/hello_01.rsd"
     assert "[art/sound/localised/english/vocal/tony/hello_01.rsd]" in files["INDEX - Xbox.txt"].decode()
+
+
+def test_each_versions_exclusives_by_type(tmp_path):
+    """What only one version has, in its own folder, sorted by type."""
+    b = make_binaries(tmp_path)
+    GA.run(list(GA.VERSIONS), "best", b, log=lambda m: None, folders="type")
+    files = read_all(b / "game_files")
+    assert files["Exclusive to Xbox 2006 prototype/Models/art/cut/protoonly.p3d"] == b"P3D\xff cut scene"
+    assert "Exclusive to PS2/Videos/MOVIES/INTRO.PSS" in files
+    assert "Exclusive to PC/Models/art/pc/mouse.p3d" in files
+    assert files["Best/Sounds/art/sound/hello.rsd"] == SOUND
+    readme = files["README.txt"].decode()
+    assert "Exclusive to Xbox 2006 prototype/" in readme and "what only the" in readme
+    job = GA.Job(b, log=lambda m: None)
+    assert job.folder_for("only:prototype") == b / "game_files" / "Exclusive to Xbox 2006 prototype"

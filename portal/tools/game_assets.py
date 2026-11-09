@@ -14,13 +14,14 @@ Files packed in .rcf archives are unpacked into a folder named after the archive
 Three layouts:
 
   unique   no duplicates. A file that is exactly the same in two or more versions is written once,
-           in Shared/. Each version's folder keeps only what is unique to it: files only that
-           version has, and files that version has in a different form.
+           in Shared/. What only one version has goes in its own folder, Exclusive to <version>/,
+           and the files a version has in a different form from the others in <version>/.
   every    every version complete in its own folder.
-  best     one copy of every file, in Best/: where the versions have it in different forms, the
-           highest-quality one (sounds: sample rate, then channels, then codec; videos: picture
-           size; models and textures: texture size, then colour depth). Ties go to PC, Xbox, PS2,
-           then the prototype, and the 1.00.2 patch's files win over the ones they replace.
+  best     one copy of every file the versions share, in Best/: where they have it in different
+           forms, the highest-quality one (sounds: sample rate, then channels, then codec; videos:
+           picture size; models and textures: texture size, then colour depth). Ties go to PC,
+           Xbox, PS2, then the prototype, and the 1.00.2 patch's files win over the ones they
+           replace. What only one version has goes in Exclusive to <version>/.
 
 And two ways to arrange the folders: as in the game, or by type first (Sounds, Textures, Models,
 Animations, Videos, Scripts & text, Other), each keeping the game's own folders below that. Pure3D
@@ -85,6 +86,11 @@ MODE_LABELS = {"unique": "No duplicates", "every": "Every version complete", "be
 FOLDERS = ("game", "type")
 FOLDER_LABELS = {"game": "As in the game", "type": "By type"}
 BEST = "Best"
+
+
+def exclusive(version: str) -> str:
+    """The folder for what only this version has."""
+    return f"Exclusive to {LABELS[version]}"
 PREFER = ("pc", "xbox", "ps2", "prototype")     # who wins a tie in quality
 P3D_MAGIC = b"P3D\xff"
 P3D_SNIFF_MAX = 64 << 20                         # bigger .p3d files are not looked inside
@@ -1209,7 +1215,9 @@ def plan(catalogs: Dict[str, List[list]], mode: str, folders: str = "game"
             if mode == "every":
                 placed, written = take_free(sha, where(LABELS[v], path, facts)), 1
             elif mode == "unique":
-                if status != "shared":
+                if status == "only":
+                    placed, written = take_free(sha, where(exclusive(v), path, facts)), 1
+                elif status == "changed":
                     placed, written = take_free(sha, where(LABELS[v], path, facts)), 1
                 elif v == owners[0]:
                     placed = take(sha, where(SHARED, path, facts))
@@ -1231,10 +1239,11 @@ def plan(catalogs: Dict[str, List[list]], mode: str, folders: str = "game"
         for _key, cands in groups.items():
             v, i = max(cands, key=score)
             row = result[v][i]
+            top = exclusive(v) if all(result[cv][ci][3] == "only" for cv, ci in cands) else BEST
             if row[2] in sha_place:                    # the same bytes are already there under another name
                 place = sha_place[row[2]]
             else:
-                place = take_free(row[2], where(BEST, game_path(row[0]), row[5]))
+                place = take_free(row[2], where(top, game_path(row[0]), row[5]))
                 sha_place[row[2]] = place
                 row[6] = 1
             for cv, ci in cands:
@@ -1325,7 +1334,7 @@ def _remove_layout(out: Path, old: dict, log: Log) -> None:
                     os.remove(_os(p))
                 except OSError:
                     pass
-    for name in [SHARED, BEST] + list(LABELS.values()):
+    for name in [SHARED, BEST] + list(LABELS.values()) + [exclusive(v) for v in LABELS]:
         top = out / name
         if top.is_dir():
             for dirpath, _dirs, _files in sorted(os.walk(_os(top)), key=lambda t: -len(t[0])):
@@ -1541,15 +1550,18 @@ def write_readmes(out: Path, index: dict) -> None:
     ]
     if mode == "unique":
         lines += [f"  {SHARED}/  files that are exactly the same in two or more versions, kept once"]
-        for s in summ["versions"].values():
-            lines.append(f"  {s['label']}/  only what is unique to the {s['label']} version")
+        for v, s in summ["versions"].items():
+            lines.append(f"  {exclusive(v)}/  what only the {s['label']} version has ({s['only']:,} files)")
+            lines.append(f"  {s['label']}/  files the {s['label']} version has in a different form from the others")
     elif mode == "best":
-        lines += [f"  {BEST}/  one copy of every file. Where the versions have it in different forms, the",
+        lines += [f"  {BEST}/  one copy of every file the versions share. Where they have it in different forms, the",
                   "         highest-quality one: sounds by sample rate, then channels, then codec; videos by",
                   "         picture size; models and textures by texture size, then colour depth. Ties go to",
                   "         PC, Xbox, PS2, then the prototype, and the 1.00.2 patch's files win."]
         for v, n in summ.get("best", {}).get("from", {}).items():
             lines.append(f"         {n:>7,} from {LABELS.get(v, v)}")
+        for v, s in summ["versions"].items():
+            lines.append(f"  {exclusive(v)}/  what only the {s['label']} version has ({s['only']:,} files)")
     else:
         for s in summ["versions"].values():
             lines.append(f"  {s['label']}/  the whole {s['label']} version")
@@ -1608,6 +1620,7 @@ def write_readmes(out: Path, index: dict) -> None:
         (out / f"INDEX - {label}.txt").write_text("\n".join(text), encoding="utf-8")
     if mode == "best":
         text = ["Best/: where each file came from, and the other versions' forms of it", ""]
+        best_rows = {k: c for k, c in best_rows.items() if k.startswith(BEST + "/")}
         for place in sorted(best_rows, key=str.lower):
             cands = best_rows[place]
             pick = next(((v, r) for v, r in cands if _written(r)), cands[0])
@@ -1726,6 +1739,8 @@ class Job:
             p = out / SHARED
         elif version == "best":
             p = out / BEST
+        elif version.startswith("only:") and version[5:] in LABELS:
+            p = out / exclusive(version[5:])
         elif version in LABELS:
             p = out / LABELS[version]
         else:

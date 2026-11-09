@@ -175,13 +175,17 @@ def gf_fake_files(version):
     return rows
 
 
-def gf_summary(mode):
-    out = {"mode": mode, "mode_label": "No duplicates" if mode == "unique" else "Every version complete",
+def gf_summary(mode, folders="game"):
+    labels = {"unique": "No duplicates", "every": "Every version complete", "best": "Best version of each file"}
+    out = {"mode": mode, "mode_label": labels.get(mode, mode), "folders": folders,
            "created": "2026-11-09 09:30", "versions": {}}
     for v in GF_VERSIONS:
         if not v["found"]:
             continue
         rows = gf_fake_files(v["version"])
+        for i, r in enumerate(rows):
+            r["picked"] = mode == "best" and (v["version"] == "pc" or r["status"] == "only")
+            r["quality"] = "Ogg Vorbis, 48,000 Hz, mono" if r["kind"] == "sounds" else ""
         GF["files"][v["version"]] = rows
         s = {"label": v["label"], "source": v["source"], "files": len(rows), "bytes": sum(r["size"] for r in rows),
              "only": 0, "changed": 0, "shared": 0, "own_bytes": 0, "kinds": {}}
@@ -190,11 +194,15 @@ def gf_summary(mode):
             if r["status"] != "shared":
                 k = s["kinds"].setdefault(r["kind"], {"only": 0, "changed": 0})
                 k[r["status"]] += 1
+        s["picked"] = sum(1 for r in rows if r["picked"])
         out["versions"][v["version"]] = s
+    if mode == "best":
+        out["best"] = {"files": sum(x["picked"] for x in out["versions"].values()),
+                       "from": {k: x["picked"] for k, x in out["versions"].items()}}
     return out
 
 
-def gf_run(versions, mode):
+def gf_run(versions, mode, folders="game"):
     total = sum(v["size"] for v in GF_VERSIONS if v["found"] and v["version"] in versions)
     st = GF["status"]
     for i in range(1, 11):
@@ -209,7 +217,7 @@ def gf_run(versions, mode):
         st.update(phase="placing")
     time.sleep(0.2)
     with LOCK:
-        GF["summary"] = gf_summary(mode)
+        GF["summary"] = gf_summary(mode, folders)
         st.update(running=False, phase="done", message="Done")
 
 
@@ -260,7 +268,8 @@ class Handler(BaseHTTPRequestHandler):
             if u.path == "/api/game-files/list":
                 rows = GF["files"].get(q.get("version", ""), [])
                 st, kind, query = q.get("status", ""), q.get("kind", ""), q.get("q", "").lower()
-                rows = [r for r in rows if (not st or r["status"] == st or (st == "own" and r["status"] != "shared"))
+                rows = [r for r in rows if (not st or r["status"] == st or (st == "own" and r["status"] != "shared")
+                                            or (st == "picked" and r.get("picked")))
                         and (not kind or r["kind"] == kind) and (not query or query in r["path"].lower())]
                 off, lim = int(q.get("offset", 0)), int(q.get("limit", 200))
                 return self._json({"ok": True, "total": len(rows), "offset": off, "files": rows[off:off + lim]})
@@ -463,14 +472,16 @@ class Handler(BaseHTTPRequestHandler):
             if not any(v["found"] and v["version"] in versions for v in GF_VERSIONS):
                 return self._json({"ok": False, "error": "None of those versions were found in binaries/."}, 400)
             GF["status"].update(running=True, phase="preparing", done=0, total=0, files=0, error="", stop=False)
-            threading.Thread(target=gf_run, args=(versions, body.get("mode", "unique")), daemon=True).start()
+            threading.Thread(target=gf_run, args=(versions, body.get("mode", "unique"), body.get("folders", "game")),
+                             daemon=True).start()
             return self._json({"ok": True, "status": {k: v for k, v in GF["status"].items() if k != "stop"}})
         if u.path == "/api/game-files/stop":
             GF["status"]["stop"] = True
             return self._json({"ok": True})
         if u.path == "/api/game-files/open":
             folder = body.get("folder", "")
-            if folder not in ("", "shared", "xbox", "pc", "ps2", "prototype") or not GF["summary"]:
+            known = ("", "shared", "best", "xbox", "pc", "ps2", "prototype")
+            if (folder not in known and not (folder.startswith("only:") and folder[5:] in known)) or not GF["summary"]:
                 return self._json({"ok": False, "error": "That folder isn't there yet."}, 404)
             return self._json({"ok": True, "folder": "binaries/game_files"})
         if u.path == "/api/submit":

@@ -635,7 +635,7 @@ def test_game_files_copy_and_browse(page):
     assert page.is_disabled("#gf-start") and page.is_visible("#gf-stop")
     page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
     start = [c for c in calls("/api/game-files/start")][-1][1]
-    assert start == {"versions": ["xbox", "prototype"], "mode": "every"}
+    assert start == {"versions": ["xbox", "prototype"], "mode": "every", "folders": "game"}
 
     page.wait_for_selector("#gf-result:not([hidden]) .gf-tab")
     assert page.eval_on_selector_all(".gf-tab", "els => els.map(e => e.textContent)") == ["Xbox", "PC", "PS2", "Xbox 2006 prototype"]
@@ -662,3 +662,28 @@ def test_game_files_stop(page):
     page.click("#gf-stop")
     page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Stopped')", timeout=10000)
     assert page.is_enabled("#gf-start") and page.is_hidden("#gf-stop")
+
+
+def test_game_files_best_version_by_type(page):
+    """The best version of each file, sorted by type: the choice reaches the server, then Best/ can be
+    opened and each version's picks listed."""
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.check("input[name=gf-mode][value=best]")
+    page.check("input[name=gf-folders][value=type]")
+    page.click("#gf-start")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
+    assert calls("/api/game-files/start")[-1][1] == {"versions": ["xbox", "pc", "ps2", "prototype"], "mode": "best", "folders": "type"}
+    page.wait_for_selector("#gf-result:not([hidden]) .gf-tab")
+    assert "Best/ has" in page.text_content("#gf-result-sub") and "from PC" in page.text_content("#gf-result-sub")
+    assert page.is_visible("#gf-open-best") and page.is_hidden("#gf-open-shared")
+    page.click(".gf-tab:has-text('PC')")
+    page.select_option("#gf-status", "picked")
+    page.wait_for_function("[...document.querySelectorAll('#gf-list .st')].length > 0 && [...document.querySelectorAll('#gf-list .st')].every(e => e.textContent === 'best')")
+    page.click("#gf-open-best")
+    page.wait_for_timeout(200)
+    assert calls("/api/game-files/open")[-1][1] == {"folder": "best"}
+    assert page.is_hidden("#gf-open-version")                  # Best has no per-version folder, only exclusives
+    page.click("#gf-open-only")
+    page.wait_for_timeout(200)
+    assert calls("/api/game-files/open")[-1][1] == {"folder": "only:pc"}

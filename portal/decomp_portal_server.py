@@ -1932,7 +1932,7 @@ class Handler(BaseHTTPRequestHandler):
         versions = body.get("versions")
         if not isinstance(versions, list) or not all(isinstance(v, str) for v in versions):
             return self._json({"ok": False, "error": "Pick at least one version."}, 400)
-        err = GAME_FILES.start(versions, str(body.get("mode", "")))
+        err = GAME_FILES.start(versions, str(body.get("mode", "")), str(body.get("folders") or "game"))
         if err:
             return self._json({"ok": False, "error": err}, 409 if "Already" in err else 400)
         self._json({"ok": True, "status": dict(GAME_FILES.status)})
