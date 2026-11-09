@@ -71,15 +71,16 @@ The full procedure, with code generation notes for this compiler, is in
    their own row.
 4. **Start the portal**: on Windows double-click **`START_PORTAL.bat`**; on macOS or Linux run
    `sh start_portal.sh`. It installs what it needs the first time and opens http://localhost:8085.
-5. **Pick a small function** and press **decomp.me**. It opens on [decomp.me](https://decomp.me), which
-   runs the same compiler in your browser. Change the C++ until it shows 100%, then paste it back into
-   the portal.
-6. **Press Compile & Verify** to record it under your name. That needs the compiler (below). No
-   compiler? Post your 100% decomp.me link in a [GitHub issue](../../issues/new) and a maintainer will
-   verify it and credit you.
+5. **Pick a small function.** The editor starts you off with C++ written from the game's own code
+   (calls and globals already named for their addresses); for many small functions it matches as it is.
+   Change it until it does.
+6. **Press Compile & Verify** to record it under your name. That needs the compiler (below).
 
-Only the function you send leaves your computer: decomp.me receives that one function's bytes, the
-same as any decomp.me scratch. decomp.me's score is a helper; the portal's check is what counts.
+**Backup: decomp.me.** No compiler yet, or it's acting up? The portal's **decomp.me** button opens the
+function on [decomp.me](https://decomp.me), which runs the same compiler in your browser. Get it to 100%
+there and post the link in a [GitHub issue](../../issues/new); a maintainer will verify it and credit
+you. Only that one function's bytes leave your computer, the same as any decomp.me scratch, and the
+portal's check is still the one that counts.
 
 ## The compiler
 

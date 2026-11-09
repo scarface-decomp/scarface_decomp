@@ -17,13 +17,14 @@ may come from and how AI tools may be used.
    PIN is stored only as a salted hash on the machine running the portal.
 3. **Claim** a function from the queue. A claim is a timed lease, from 15 minutes for tiny functions to
    2 hours for large ones; only you can submit or cancel it while it lasts.
-4. **Write the C++** in the editor, on decomp.me, or draft it with your own AI key.
-   * **decomp.me** opens the function on [decomp.me](https://decomp.me) with the same compiler
+4. **Write the C++** in the editor. It starts with C++ written from the function's own machine code,
+   with calls and globals already named for their addresses; for many small functions it matches as it is.
+   * **decomp.me** (the backup when the compiler isn't installed or is acting up) opens the function on [decomp.me](https://decomp.me) with the same compiler
      (`msvc7.1`, platform *Windows (9x/NT)*) and our flags. Its score updates as you type. Calls and
      globals show up as `_sub_XXXXXXXX` / `_DAT_XXXXXXXX`; declare them `extern "C"` with that name
      (`extern "C" int DAT_007A1234;`) and the names match. At 100%, paste the code back into the
      portal. Later clicks reopen the same scratch.
-   * **AI**: the key goes from your browser through the portal to the provider; the portal never
+   * **AI**: you can also draft it with your own AI key. The key goes from your browser through the portal to the provider; the portal never
      stores or logs it, and the browser keeps it only for the session unless you tick "Remember key".
 5. **Compile & Verify** (`Ctrl+Enter`). You get the matched byte count and a per-byte diff. When it
    matches, it is recorded in `reports/verified_registry.json` under your handle and the generated
@@ -32,7 +33,7 @@ may come from and how AI tools may be used.
    and credits you for every one that matches exactly. Pick those first: one match can count many times.
 6. If you stop, **Cancel & Save** keeps your best partial attempt for the next person.
 
-No compiler installed? You can still do steps 1 to 4 with decomp.me. Post the 100% decomp.me link in a
+No compiler installed, or it's acting up? You can still do steps 1 to 4 with decomp.me. Post the 100% decomp.me link in a
 GitHub issue and a maintainer verifies it with the portal and credits you.
 
 Maintainers (`SCARFACE_MAINTAINERS`) publish verified work with **Sync Verified to GitHub**.

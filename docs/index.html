@@ -412,18 +412,18 @@
             Xbox prototype adds its unreleased code.</li>
           <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
             <code>sh start_portal.sh</code>. Your browser opens the portal at <code>localhost:8085</code>.</li>
-          <li><b>Pick a function and solve it</b>Choose a small one, then press <em>decomp.me</em>. It opens on
-            <a href="https://decomp.me/u/RogiPogee" target="_blank" rel="noopener noreferrer">decomp.me</a> with the same compiler. Change the C++ until it shows 100%, then paste it back into the portal.</li>
+          <li><b>Pick a function and solve it</b>Choose a small one. The editor starts you off with C++ written from the
+            game's own code, and for many small functions that already matches. Change it until it does.</li>
           <li><b>Verify it</b>Press <em>Compile &amp; Verify</em> to record it under your name. That needs the 2003
             compiler, installed once from your own <code>VCToolkitSetup.exe</code>:
             <pre tabindex="0">python portal/scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
-            No compiler? Post your 100% decomp.me link in a
-            <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>
+            No compiler yet, or it's acting up? Press <em>decomp.me</em> in the portal instead: it runs the same compiler
+            in your browser. Get it to 100% there and post the link in a
+            <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>,
             and a maintainer will verify it and credit you.</li>
         </ol>
         <div class="links">
           <a data-repo-link="/blob/main/docs/CONTRIBUTING.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing guide</a>
-          <a href="https://decomp.me/u/RogiPogee" target="_blank" rel="noopener noreferrer">Scarface on decomp.me</a>
           <a data-repo-link="/blob/main/docs/SCARFACE_DECOMP_AI_HANDOFF.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCARFACE_DECOMP_AI_HANDOFF.md" target="_blank" rel="noopener noreferrer">Using an AI assistant</a>
           <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">Ask a question</a>
         </div>
@@ -440,14 +440,10 @@
               money to your empire. The game has about 21,000 of them. Many are only a few lines long.</p></details>
           <details><summary>Do I need to know C++?</summary>
             <p>A little helps, but you can learn as you go. The smallest functions are a line or two, the portal writes a
-              starting guess for you, and decomp.me shows exactly which instructions still differ.</p></details>
+              starting guess for you, and <em>Compile &amp; Verify</em> shows exactly which bytes still differ.</p></details>
           <details><summary>Do I need the game?</summary>
-            <p>For the portal, yes. The project shares only the code people write, never the game. The portal reads your own
-              copy (<code>Scarface.exe</code> 1.00.2 for PC or <code>default.xbe</code> from the Xbox disc) on your computer.</p>
-            <p>Without the game you can still help with the functions already on
-              <a href="https://decomp.me/u/RogiPogee" target="_blank" rel="noopener noreferrer">decomp.me</a>: open one, press <em>Fork</em> to get your own copy, change the C++ until it shows 100%, and
-              post your link in a
-              <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>.</p></details>
+            <p>Yes. The project shares only the code people write, never the game. The portal reads your own copy
+              (<code>Scarface.exe</code> 1.00.2 for PC or <code>default.xbe</code> from the Xbox disc) on your computer.</p></details>
           <details><summary>Which version of the game do I need?</summary>
             <p>The US versions, exactly: the US Xbox disc, and/or the US PC game with the official 1.00.2 patch installed.
               Every function is matched against those exact files, and other versions have different code at different
@@ -544,7 +540,6 @@
         Not affiliated with or endorsed by the game's developer, publishers or rights holders. Code licensed under GPL-3.0-or-later.</div>
       <div class="links">
         <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://decomp.me/u/RogiPogee" target="_blank" rel="noopener noreferrer">decomp.me</a>
         <a data-repo-link="/blob/main/docs/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md" target="_blank" rel="noopener noreferrer">Legal</a>
         <a data-repo-link="/blob/main/LICENSE" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a>
         <a data-repo-link="/blob/main/docs/CREDITS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CREDITS.md" target="_blank" rel="noopener noreferrer">Credits</a>
