@@ -65,10 +65,12 @@ The full procedure, with code generation notes for this compiler, is in
    (or `git clone` it).
 3. **Add your game files** to the `binaries` folder: `default.xbe` from the US Xbox disc. That is
    where almost all of the work is: the whole Xbox game can be read, while most of the PC file is
-   encrypted, and both run the same game code. Optional extras: `Scarface.exe` (PC, US version 1.00.2)
-   adds the PC-only functions, and `game.xbe` (the April 20, 2006 Xbox prototype) adds the prototype's.
-   Only these exact US versions are accepted, and the portal checks: see
-   [docs/GAME_VERSIONS.md](docs/GAME_VERSIONS.md). They never leave your computer. The goal is the released game plus the
+   encrypted, and both run the same game code. Only have the disc image? Put the `.iso`, or the `.zip`
+   it came in, in `binaries` instead; the portal copies `default.xbe` out the first time it starts
+   (unpack a `.7z` with 7-Zip first). Optional extras: `Scarface.exe` (PC, US version 1.00.2, from the
+   folder the patched game is installed to) adds the PC-only functions, and `game.xbe` (the April 20,
+   2006 Xbox prototype) adds the prototype's. Only these exact US versions are accepted, and the portal
+   checks: see [docs/GAME_VERSIONS.md](docs/GAME_VERSIONS.md). They never leave your computer. The goal is the released game plus the
    code that never shipped; prototype matches are saved in `reconstructed_src/proto/` and counted on
    their own row.
 4. **Start the portal**: on Windows double-click **`START_PORTAL.bat`**; on macOS or Linux run
@@ -86,7 +88,7 @@ portal's check is still the one that counts.
 
 ## The compiler
 
-From your own `VCToolkitSetup.exe` (Visual C++ Toolkit 2003):
+From your own `VCToolkitSetup.exe` (Visual C++ Toolkit 2003; Microsoft no longer offers it for download):
 
 ```bash
 python portal/scripts/setup_msvc71.py path/to/VCToolkitSetup.exe
@@ -102,7 +104,8 @@ in `reports/verified_registry.json` under `binaries`.
 ## Working on functions
 
 **In the portal** (http://localhost:8085): sign in with a handle and a PIN of at least 8 characters,
-claim a function from the queue, write the C++ (in the editor, on decomp.me, or with your own AI key),
+claim a function from the queue, write the C++ in the editor (it starts with a draft written from the
+function's machine code; you can also use your own AI key, or decomp.me if the compiler isn't set up),
 and press **Compile & Verify**. A match is recorded in `reports/verified_registry.json`, and the
 generated source files are rewritten. About 4,600 functions are look-alikes of another (the same
 machine code with different addresses); after a match the portal swaps the addresses and names into
@@ -123,8 +126,8 @@ your code, verifies it on each look-alike and credits you for every exact match
 **From the command line**, with the same rules:
 
 ```bash
-python portal/verify.py my_func.cpp --va 0x006DE620 --bin pc
 python portal/verify.py my_func.cpp --va 0x00011F20 --bin xb --match vfunc_03@Collidable@ --show-diff
+python portal/verify.py my_func.cpp --va 0x006DE620 --bin pc
 ```
 
 **Maintenance:**

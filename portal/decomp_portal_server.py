@@ -1356,7 +1356,8 @@ def main() -> None:
         sys.exit("Capstone is required (function sizes, disassembly, address checks): pip install -r portal/requirements.txt")
     _migrate_legacy_auth()
     load_registry()
-    GF.pc_help(BASE_DIR / "binaries")
+    if not GF.startup(BASE_DIR / "binaries"):
+        GF.pc_help(BASE_DIR / "binaries")
     load_tasks()
     if not MV.find_msvc71_bin():
         print("[!] The 2003 compiler is not installed yet. You can still browse functions and use decomp.me;")

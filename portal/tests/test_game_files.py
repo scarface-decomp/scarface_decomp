@@ -187,3 +187,26 @@ def test_installed_patched_game_is_picked_up(tmp_path, monkeypatch):
     monkeypatch.setattr(gf, "_installed_pc_exe", lambda: installed)
     gf.pc_help(b, lambda m: None)
     assert (b / "Scarface.exe").read_bytes() == b"patched"
+
+
+def test_portal_start_unpacks_the_xbox_disc_once_and_is_quiet_after(tmp_path):
+    b = tmp_path / "binaries"
+    b.mkdir()
+    with zipfile.ZipFile(b / "Scarface (Xbox).zip", "w") as z:
+        z.writestr("Scarface - The World Is Yours (USA, Europe).iso", disc_image())
+    logs = []
+    gf.startup(b, logs.append)
+    assert (b / "default.xbe").read_bytes() == XBE
+    assert logs and "only needed once" in logs[0]
+    logs.clear()
+    gf.startup(b, logs.append)          # default.xbe is there now; only the optional prototype is missing
+    assert logs == []
+
+
+def test_portal_start_says_nothing_when_there_is_nothing_to_unpack(tmp_path):
+    b = tmp_path / "binaries"
+    b.mkdir()
+    (b / "README.md").write_text("x")
+    logs = []
+    gf.startup(b, logs.append)
+    assert logs == []

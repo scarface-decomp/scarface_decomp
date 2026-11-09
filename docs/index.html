@@ -170,7 +170,7 @@
     .side + .side { margin-top: 44px; }
     .side p { color: var(--grey); font-size: 0.94rem; margin-bottom: 14px; }
     .buckets { display: grid; gap: 9px; }
-    .bucket { display: grid; grid-template-columns: 76px minmax(0, 1fr) 56px; align-items: center; gap: 12px; font-size: 0.92rem; }
+    .bucket { display: grid; grid-template-columns: 96px minmax(0, 1fr) 56px; align-items: center; gap: 12px; font-size: 0.92rem; }
     .bucket .lbl { color: var(--grey); font-variant-numeric: tabular-nums; }
     .bucket .track { height: 6px; background: #1C1C1C; overflow: hidden; }
     .bucket .track span { display: block; height: 100%; background: var(--blood); }
@@ -337,7 +337,7 @@
           <ul class="rules">
             <li><b>Same bytes</b>Same length and same machine code as the original game.</li>
             <li><b>Same connections</b>Every jump, call and variable points where the original did.</li>
-            <li><b>No shortcuts</b>Memory addresses from 2006 can't be typed in as numbers.</li>
+            <li><b>No shortcuts</b>Code refers to other functions and data by name, never by a raw memory address.</li>
             <li><b>Real C++</b>No hidden assembly or tricks that just copy the bytes.</li>
           </ul>
           <p class="small">The full rules: <a data-repo-link="/blob/main/docs/METHODOLOGY.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/METHODOLOGY.md" target="_blank" rel="noopener noreferrer">METHODOLOGY.md</a></p>
@@ -348,9 +348,9 @@
     <section id="progress" class="alt" aria-labelledby="h-progress">
       <div class="wrap">
         <h2 id="h-progress">Progress</h2>
-        <p class="intro">All of the Xbox version's game code can be read. Only about a tenth of the PC version's can; the rest
-          of the PC file is encrypted. So most work happens on the Xbox version: apart from the parts each version has for its
-          own hardware, it runs the same game code.</p>
+        <p class="intro">All of the Xbox version's game code can be read, but only about a tenth of the PC version's: the rest
+          of the PC file is encrypted. So the work happens mostly on the Xbox version, which runs the same game code apart from
+          the parts for its own hardware.</p>
         <div class="two">
           <div>
             <div class="build-row">
@@ -395,7 +395,7 @@
           minutes. Everything runs on your computer and your game files are never uploaded.</p>
         <ul class="needs">
           <li><b>Python 3</b> (free)</li>
-          <li><b>Your copy</b> of the game</li>
+          <li><b>Your copy</b> of the Xbox game</li>
           <li><b>About 10 minutes</b> to set up</li>
         </ul>
         <ol class="steps">
@@ -404,17 +404,17 @@
           <li><b>Download the project</b>On <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>,
             press <em>Code</em>, then <em>Download ZIP</em>, and unzip it anywhere. If you use Git:
             <pre tabindex="0">git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></pre></li>
-          <li><b>Add your game files</b>Copy <code>default.xbe</code> from the US Xbox disc into the project's
-            <code>binaries</code> folder: almost all of the work is there. Two optional extras: <code>Scarface.exe</code>
-            (US PC version 1.00.2) adds the PC-only functions, and <code>game.xbe</code> from the April 2006 Xbox prototype
-            adds its unreleased code. Only these US versions are accepted; the portal checks. Use the files themselves, not
-            the download they came in: <code>default.xbe</code> is inside the Xbox disc image, and <code>Scarface.exe</code>
-            is in the folder the patched PC game is installed to. The portal can't open a <code>.iso</code>,
-            <code>.7z</code> or <code>.zip</code>.</li>
+          <li><b>Add your game files</b>Put <code>default.xbe</code> from the US Xbox disc in the project's
+            <code>binaries</code> folder: almost all of the work is there. Only have the disc image? Put the <code>.iso</code>,
+            or the <code>.zip</code> it came in, there instead, and the portal copies <code>default.xbe</code> out the first
+            time it starts (unpack a <code>.7z</code> with 7-Zip first). Optional: <code>Scarface.exe</code> from the patched
+            US PC game's install folder adds the PC-only functions, and <code>game.xbe</code> from the April 2006 Xbox
+            prototype adds code that never shipped. Only these US versions are accepted; the portal checks.</li>
           <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
             <code>sh start_portal.sh</code>. Your browser opens the portal at <code>localhost:8085</code>.</li>
-          <li><b>Pick a function and solve it</b>Choose a small one. The editor starts you off with C++ written from the
-            game's own code, and for many small functions that already matches. Change it until it does.</li>
+          <li><b>Pick a function and solve it</b>Sign in, then choose a small function and claim it. The editor starts you
+            off with a first draft of its C++, written from the game's machine code; for many small functions the draft
+            already matches. If it doesn't, change it until it does.</li>
           <li><b>Verify it</b>Press <em>Compile &amp; Verify</em> to record it under your name. That needs the 2003
             compiler, installed once from your own <code>VCToolkitSetup.exe</code>:
             <pre tabindex="0">python portal/scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
@@ -454,22 +454,11 @@
               <a data-repo-link="/blob/main/docs/GAME_VERSIONS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/GAME_VERSIONS.md" target="_blank" rel="noopener noreferrer">GAME_VERSIONS.md</a>.</p></details>
           <details><summary>I play on PC. Why is the Xbox version the main one?</summary>
             <p>Because both versions are the same game, built from the same C++ with the same compiler, and only the Xbox
-              one can be read in full. Most of the PC file is encrypted, so only about 1,500 of its functions can be worked
-              on, against about 19,500 on Xbox. Every Xbox function that gets rebuilt is the same code the PC version runs;
-              only the parts that talk to each machine's hardware (graphics, controls, sound, saving) differ. Rebuilding
-              from the Xbox version gets the whole game's code, and a PC build can follow from it later.</p></details>
-          <details><summary>Does it cost anything?</summary>
-            <p>No. Python, the portal and decomp.me are free. The 2003 compiler was a free download from Microsoft.</p></details>
-          <details><summary>Is this allowed?</summary>
-            <p>The repository contains only code written by contributors, under the GPL. It contains no game files, assets
-              or compiler, and it isn't affiliated with the game's owners. The details are in
-              <a data-repo-link="/blob/main/docs/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md" target="_blank" rel="noopener noreferrer">LEGAL.md</a>
-              (not legal advice).</p></details>
-          <details><summary>Can all of the game's code be read?</summary>
-            <p>On Xbox, yes: every byte of the game code in <code>default.xbe</code> is plain machine code. On PC
-              (<code>Scarface.exe</code> 1.00.2), only about a tenth is (84 of its 814 code pages); the rest is encrypted
-              in the file, so the portal only hands out PC functions from the readable part. The Xbox version runs the same game code; only
-              the parts for each machine's hardware differ (see the next question).</p></details>
+              one can be read in full. Every byte of game code in <code>default.xbe</code> is plain machine code. In the PC's
+              <code>Scarface.exe</code> 1.00.2, only about a tenth is (84 of its 814 code pages); the rest is encrypted in the
+              file. That leaves about 1,500 PC functions to work on, against about 19,500 on Xbox. Almost all of the game's
+              code is shared, so rebuilding the Xbox version rebuilds most of the game; the next answer covers the parts each
+              version has to itself.</p></details>
           <details><summary>Doesn't the Xbox version run differently from the PC version?</summary>
             <p>Only where the hardware differs. Of the game's C++ classes, 2,421 are in both versions. The Xbox has 34 of its
               own, mostly for its controller, saving, sound and graphics; the PC has 36 of its own, mostly keyboard and
@@ -478,6 +467,14 @@
               PC class methods that can be read, 456 have exactly the same code as on Xbox and 176 differ. So the Xbox work
               rebuilds the shared game, and the PC-only parts still have to come from the PC version. About 90 of the PC-only
               class methods can be read; the rest of the PC-only code is in the encrypted part.</p></details>
+          <details><summary>Does it cost anything?</summary>
+            <p>No. Python, the portal and decomp.me are free. The 2003 compiler was a free download from Microsoft; it isn't
+              offered any more, so you need your own copy of its installer, <code>VCToolkitSetup.exe</code>.</p></details>
+          <details><summary>Is this allowed?</summary>
+            <p>The repository contains only code written by contributors, under the GPL. It contains no game files, assets
+              or compiler, and it isn't affiliated with the game's owners. The details are in
+              <a data-repo-link="/blob/main/docs/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md" target="_blank" rel="noopener noreferrer">LEGAL.md</a>
+              (not legal advice).</p></details>
           <details><summary>What about the PlayStation 2 and Wii versions?</summary>
             <p>They aren't in the portal yet, and anyone who wants to start on them is welcome to. The PS2 version is
               the one most worth doing: it has things the PC version lacks, such as its blood effects on clothing and
@@ -504,8 +501,8 @@
           <details><summary>What about the game's scripts?</summary>
             <p>The game also runs compiled scripts (<code>.cso</code>, <code>.dso</code> and <code>.dtr</code> files), written
               in TorqueScript, a C++-like language. They get the same treatment: a readable version that only counts once
-              it turns back into exactly the original bytes. So far all 635 compiled scripts are read and rebuilt byte
-              for byte; turning them into readable TorqueScript is next. The plan is in
+              it turns back into exactly the original bytes. So far all 635 of the released game's compiled scripts are read
+              and rebuilt byte for byte; turning them into readable TorqueScript is next. The plan is in
               <a data-repo-link="/blob/main/docs/SCRIPTS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCRIPTS.md" target="_blank" rel="noopener noreferrer">SCRIPTS.md</a>.</p></details>
           <details><summary>I'm stuck. Where do I ask?</summary>
             <p>Open an <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">issue on GitHub</a>
@@ -662,7 +659,8 @@
       box.textContent = '';
       Object.keys(buckets).forEach(function (name) {
         var row = document.createElement('div'); row.className = 'bucket';
-        var l = document.createElement('span'); l.className = 'lbl'; l.textContent = name;
+        var l = document.createElement('span'); l.className = 'lbl';
+        l.textContent = name.replace(/^(\d+)-(\d+)/, '$1\u2013$2').replace(/ B$/, ' bytes');
         var t = document.createElement('span'); t.className = 'track';
         var s = document.createElement('span'); s.style.width = pct(buckets[name], max).toFixed(1) + '%'; t.appendChild(s);
         var n = document.createElement('span'); n.className = 'val'; n.textContent = fmt(buckets[name]);

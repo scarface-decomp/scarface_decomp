@@ -160,6 +160,28 @@ def _pc_disc_in(folder: Path) -> Optional[Path]:
         return None
 
 
+def startup(bin_dir: Path, log: Log = print) -> bool:
+    """At portal start: when the Xbox game (or the prototype) is missing but its download is in binaries/
+    (a disc image, the .zip/.7z it came in, or the file one folder down), copy it out once. Says nothing
+    when there is nothing to do, so a set-up folder starts as quietly as before."""
+    bin_dir = Path(bin_dir)
+    if not bin_dir.exists():
+        return False
+    need_xbox = check(bin_dir / "default.xbe") == "missing"
+    need_proto = check(bin_dir / "game.xbe") == "missing"
+    if not (need_xbox or need_proto):
+        return False
+    sources = _candidates(bin_dir)
+    packed = [s for s in sources if s.name.lower().endswith(ARCHIVES + DISC_IMAGES) or s.parent != bin_dir]
+    if need_xbox and not packed:
+        return False                            # nothing to unpack; the banner below says what is missing
+    if not need_xbox and not any("proto" in str(s.relative_to(bin_dir)).lower() for s in packed):
+        return False                            # only the optional prototype is missing, and it isn't here
+    log("[*] Getting the game files out of the downloads in binaries/ (only needed once)...")
+    prepare(bin_dir, log)                       # this also gives the PC steps when they apply
+    return True
+
+
 def pc_help(bin_dir: Path, log: Log = print) -> None:
     """At portal start: if there is no usable Scarface.exe but the PC download or patch is in binaries/,
     take a patched copy from the installed game if there is one, or say exactly what to do. A patch
@@ -365,7 +387,8 @@ def _py7zr():
         import py7zr  # noqa: F401
         return py7zr
     except ImportError:
-        raise RuntimeError("reading .7z files needs the py7zr package: pip install -r portal/requirements.txt")
+        raise RuntimeError("reading a .7z needs the py7zr package (pip install py7zr); "
+                           "or unpack it with 7-Zip first and put the .iso in binaries/")
 
 
 def _read_member(archive: Path, member: str) -> bytes:
