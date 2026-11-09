@@ -1557,6 +1557,10 @@ def main() -> None:
     print("=" * 78)
     for b, problem in BINARY_PROBLEMS.items():
         print(f"[!] NOT USED: {problem}")
+    if not (BASE_DIR / ".git").exists():
+        print("[!] This folder was downloaded as a ZIP, not with git clone. Don't update it with a new ZIP: that")
+        print("    would replace your verified functions. Connect it to Git once (docs/CONTRIBUTING.md,")
+        print('    "Downloaded the ZIP?"), then update with: git pull')
     # Check the game's scripts in the background: the portal is usable meanwhile.
     threading.Thread(target=check_scripts, name="script-check", daemon=True).start()
     if os.environ.get("SCARFACE_NO_BROWSER") != "1":

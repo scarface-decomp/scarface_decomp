@@ -40,6 +40,13 @@ GitHub issue or in #help on [Discord](https://discord.gg/azvrtGBvau), and a main
 Maintainers (`SCARFACE_MAINTAINERS`) publish verified work with **Sync Verified to GitHub**. It needs
 a folder that git knows about, made with `git clone`.
 
+### Updating
+
+In a folder made with `git clone`, run `git pull`. It brings in the new code and keeps your verified
+functions, claims and partial attempts (they live in `reports/`). Don't download a fresh ZIP over your
+folder or replace it: anything not yet synced to GitHub would be lost. If you must, copy
+`reports/verified_registry.json` out first and put it back afterwards.
+
 ### Downloaded the ZIP?
 
 A ZIP download has no `.git` folder, so the Sync button can't push from it. To connect it once, open a
