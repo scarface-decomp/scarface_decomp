@@ -50,6 +50,7 @@ from disasm_synth import disassemble, synthesize_cpp  # noqa: E402
 import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
+import media as MEDIA  # noqa: E402
 import game_assets as GA  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
@@ -1992,6 +1993,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": True, "job": BRIDGE.next()})
         if u.path == "/api/dme-bridge/status":
             return self._json({"ok": True, "connected": BRIDGE.connected(), "origin": DME_BRIDGE_ORIGIN})
+        if u.path in ("/api/game-files/sound", "/api/game-files/pictures", "/api/game-files/picture"):
+            return self.get_game_file_preview(u.path.rsplit("/", 1)[1], q1)
         if u.path == "/api/task":
             with STATE_LOCK:
                 t = TASK_BY_ID.get(q1("id"))
@@ -2227,6 +2230,37 @@ class Handler(BaseHTTPRequestHandler):
         if res.get("slug") and not _SLUG_RE.match(res["slug"]):
             res.update(ok=False, slug="", error="decomp.me sent back an odd scratch name")
         self._json({"ok": BRIDGE.result(res)})
+
+    def get_game_file_preview(self, what: str, q1) -> None:
+        """Play a sound or show a texture from the person's own copied game files. Only for a browser on this
+        computer, and only for pages of the portal itself: the files are theirs, not something to serve on."""
+        peer = (self.client_address[0] if self.client_address else "").split("%")[0]
+        if peer not in ("127.0.0.1", "::1", "::ffff:127.0.0.1"):
+            return self._json({"ok": False, "error": "Previews only work on the computer the portal runs on."}, 403)
+        if (self.headers.get("Sec-Fetch-Site") or "").strip().lower() == "cross-site":
+            return self._json({"ok": False, "error": "Requests from other websites are not accepted."}, 403)
+        path = GAME_FILES.file_path(q1("version"), q1("path"))
+        if path is None:
+            return self._json({"ok": False, "error": "That file isn't in your copied game files (copy them first)."}, 404)
+        try:
+            data = path.read_bytes()
+            if what == "sound":
+                body, mime, ext = MEDIA.playable(data)
+                name = re.sub(r'[^A-Za-z0-9._-]', "_", Path(q1("path").replace("\\", "/")).stem) + ext
+                return self._send(200, body, mime, {"Content-Disposition": f'inline; filename="{name}"'})
+            if what == "pictures":
+                return self._json({"ok": True, "pictures": [
+                    {"i": i, "name": t.name, "width": t.width, "height": t.height, "kind": t.kind}
+                    for i, t in enumerate(MEDIA.textures(data))]})
+            try:
+                i = int(q1("i", "0"))
+            except ValueError:
+                return self._json({"ok": False, "error": "i must be a number"}, 400)
+            return self._send(200, MEDIA.texture_png(data, i), "image/png")
+        except MEDIA.MediaError as e:
+            return self._json({"ok": False, "error": str(e)}, 415)
+        except OSError as e:
+            return self._json({"ok": False, "error": f"Couldn't read the file: {e}"}, 500)
 
     def post_game_files_start(self, body):
         versions = body.get("versions")

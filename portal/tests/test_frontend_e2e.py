@@ -654,6 +654,33 @@ def test_game_files_copy_and_browse(page):
     assert calls("/api/game-files/open")[-1][1] == {"folder": "prototype"}
 
 
+def test_game_files_previews(page):
+    """A copied sound plays in the page and a .p3d shows its pictures; both toggle closed again."""
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.click("#gf-start")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
+    page.wait_for_selector("#gf-result:not([hidden]) .gf-tab")
+    page.wait_for_function("document.querySelectorAll('#gf-list .gf-row').length > 0")
+    buttons = page.eval_on_selector_all("#gf-list .gf-row", "rows => rows.slice(0, 5).map(r => [r.querySelector('.p').firstChild.textContent.split('.').pop(), (r.querySelector('.a button') || {}).textContent || ''])")
+    assert dict(buttons) == {"rsd": "Play", "p3d": "Pictures", "bik": "", "cso": "", "dat": ""}
+
+    page.click("#gf-list .gf-row:has-text('.rsd') .a button")
+    page.wait_for_selector("#gf-list .gf-prev audio")
+    page.wait_for_function("document.querySelector('#gf-list .gf-prev audio').readyState >= 1")
+    assert page.eval_on_selector("#gf-list .gf-prev audio", "a => a.duration") == pytest.approx(0.2, abs=0.01)
+    assert page.get_attribute("#gf-list .gf-row:has-text('.rsd') .a button", "aria-expanded") == "true"
+    page.click("#gf-list .gf-row:has-text('.rsd') .a button")
+    assert page.query_selector("#gf-list .gf-prev") is None
+
+    page.click("#gf-list .gf-row:has-text('.p3d') .a button")
+    page.wait_for_function("[...document.querySelectorAll('#gf-list .gf-pic img')].length === 2 && [...document.querySelectorAll('#gf-list .gf-pic img')].every(i => i.complete && i.naturalWidth > 0)")
+    assert page.eval_on_selector_all("#gf-list .gf-pic img", "els => els.map(e => e.naturalWidth)") == [8, 16]
+    assert page.eval_on_selector_all("#gf-list .gf-pic figcaption", "els => els.map(e => e.textContent)") == ["wall.bmp · 8×8", "sign.tga · 16×8"]
+    sound = [c for c in calls("/api/game-files/sound")][-1][1]
+    assert set(sound) == {"version", "path"} and sound["path"].endswith(".rsd")
+
+
 def test_game_files_stop(page):
     page.goto(BASE + "#gamefiles")
     page.wait_for_selector("#gf-versions .gf-ver")

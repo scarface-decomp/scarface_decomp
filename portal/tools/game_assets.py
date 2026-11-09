@@ -1730,6 +1730,9 @@ class Job:
             "kinds": [{"id": k, "label": KIND_LABELS[k]} for k in [k for k, _, _ in KINDS] + ["other"]],
         }
 
+    def file_path(self, version: str, path: str) -> Optional[Path]:
+        return file_on_disk(out_dir(self.bin_dir), self.index(), version, path)
+
     def folder_for(self, version: str) -> Optional[Path]:
         """The folder to open: a version's, Shared/ ('shared') or the whole output ('') - if it exists."""
         out = out_dir(self.bin_dir)
@@ -1746,6 +1749,22 @@ class Job:
         else:
             return None
         return p if p.is_dir() else None
+
+
+def file_on_disk(out: Path, index: Optional[dict], version: str, path: str, max_size: int = 256 << 20) -> Optional[Path]:
+    """Where one of a version's files was copied to, for previewing it in the portal. None when the file isn't
+    in the list, wasn't copied, has changed size since, or is too big to preview."""
+    for row in ((index or {}).get("versions", {}).get(version) or {}).get("files", []):
+        if row[0] != path:
+            continue
+        if not row[4] or row[1] > max_size:
+            return None
+        p = safe_output_path(out, row[4])
+        try:
+            return p if p is not None and p.is_file() and p.stat().st_size == row[1] else None
+        except OSError:
+            return None
+    return None
 
 
 def _reusable_bytes(index: Optional[dict]) -> int:

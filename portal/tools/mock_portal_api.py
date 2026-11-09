@@ -20,6 +20,8 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import struct
+import sys
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -233,6 +235,30 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
+    def _bytes(self, data, ctype):
+        self.send_response(200)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+    def _game_file_preview(self, what, q):
+        """Made-up previews: a short tone for sounds, two small pictures for .p3d files."""
+        import math
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import media
+        row = next((r for r in GF["files"].get(q.get("version", ""), []) if r["path"] == q.get("path")), None)
+        if not row:
+            return self._json({"ok": False, "error": "That file isn't in your copied game files (copy them first)."}, 404)
+        if what == "sound":
+            pcm = b"".join(struct.pack("<h", int(8000 * math.sin(i / 8))) for i in range(4410))
+            return self._bytes(media._wav(pcm, 1, 22050), "audio/wav")
+        if what == "pictures":
+            return self._json({"ok": True, "pictures": [{"i": 0, "name": "wall.bmp", "width": 8, "height": 8, "kind": "p3di"},
+                                                        {"i": 1, "name": "sign.tga", "width": 16, "height": 8, "kind": "dds"}]})
+        w = 8 if q.get("i") == "0" else 16
+        return self._bytes(media.png(w, 8, bytes([200, 30, 30, 255]) * (w * 8)), "image/png")
+
     def do_GET(self):
         u = urlparse(self.path)
         q = {k: v[0] for k, v in parse_qs(u.query).items()}
@@ -273,6 +299,8 @@ class Handler(BaseHTTPRequestHandler):
                         and (not kind or r["kind"] == kind) and (not query or query in r["path"].lower())]
                 off, lim = int(q.get("offset", 0)), int(q.get("limit", 200))
                 return self._json({"ok": True, "total": len(rows), "offset": off, "files": rows[off:off + lim]})
+            if u.path in ("/api/game-files/sound", "/api/game-files/pictures", "/api/game-files/picture"):
+                return self._game_file_preview(u.path.rsplit("/", 1)[1], q)
             if u.path == "/api/queue":
                 items = list(TASKS.values())
                 lane, tier, query = q.get("lane", "ALL"), q.get("tier", "ALL"), q.get("q", "").lower()

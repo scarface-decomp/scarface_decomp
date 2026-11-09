@@ -538,9 +538,21 @@
     .gf-row .st.shared { color: var(--muted); }
     .gf-row .st.picked { color: var(--green); }
     .gf-more { margin-top: 10px; }
+    .gf-row { grid-template-columns: minmax(0, 1fr) 130px 84px 96px 84px; }
+    .gf-row .a { text-align: right; }
+    .gf-row .a .btn-sm { padding: 2px 8px; font-size: 0.74rem; }
+    .gf-prev { padding: 10px 12px 12px; border-bottom: 1px solid var(--border-subtle); background: var(--bg-card-alt); }
+    .gf-prev audio { width: 100%; max-width: 520px; display: block; }
+    .gf-prev .small { margin: 6px 0 0; }
+    .gf-pics { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; }
+    .gf-pic { margin: 0; }
+    .gf-pic a { display: flex; align-items: center; justify-content: center; height: 128px; border: 1px solid var(--border); border-radius: 2px;
+      background: repeating-conic-gradient(#2a2a2a 0% 25%, #3a3a3a 0% 50%) 50% / 16px 16px; }
+    .gf-pic img { max-width: 100%; max-height: 126px; image-rendering: auto; }
+    .gf-pic figcaption { font-size: 0.72rem; color: var(--muted); margin-top: 4px; overflow-wrap: anywhere; }
     @media (max-width: 720px) {
       .gf-filters { grid-template-columns: 1fr; }
-      .gf-row { grid-template-columns: minmax(0, 1fr) 80px; }
+      .gf-row { grid-template-columns: minmax(0, 1fr) 80px 72px; }
       .gf-row .k, .gf-row .st { display: none; }
     }
     .script-browser { margin-bottom: 14px; }
@@ -3531,12 +3543,121 @@
       row.appendChild(el('span', gfKindLabel(f.kind), 'k'));
       row.appendChild(el('span', fmtBytes(f.size), 'z'));
       row.appendChild(el('span', f.picked ? 'best' : (GF_STATUS_WORDS[f.status] || f.status), 'st ' + (f.picked ? 'picked' : f.status)));
+      const act = el('span', undefined, 'a');
+      const look = f.placed ? gfPreviewKind(f.path) : '';
+      if (look) {
+        const b = el('button', look === 'sound' ? 'Play' : 'Pictures', 'btn-sm');
+        b.type = 'button';
+        b.setAttribute('aria-expanded', 'false');
+        b.setAttribute('aria-label', (look === 'sound' ? 'Play ' : 'Show the pictures in ') + f.path);
+        b.addEventListener('click', () => gfTogglePreview(row, b, look, GF_TAB, f.path));
+        act.appendChild(b);
+      }
+      row.appendChild(act);
       list.appendChild(row);
     });
     if (!list.children.length) list.appendChild(el('p', 'No files match.', 'empty-note'));
     GF_OFFSET += (d.files || []).length;
     $('gf-count').textContent = fmtInt(d.total) + (d.total === 1 ? ' file' : ' files');
     $('gf-more').hidden = GF_OFFSET >= (d.total || 0);
+  }
+
+  /* Previews of the person's own copied files: sounds play in the page, Pure3D files show their pictures.
+     The portal decodes the console formats (Xbox ADPCM, PS2 VAG, PS2 and Xbox textures) on this computer. */
+  function gfPreviewKind(path) {
+    const ext = (path.match(/\.[^./\\]+$/) || [''])[0].toLowerCase();
+    if (ext === '.rsd' || ext === '.ogg' || ext === '.wav') return 'sound';
+    if (ext === '.p3d' || ext === '.png' || ext === '.dds') return 'pictures';
+    return '';
+  }
+
+  function gfFileUrl(what, version, path, extra) {
+    return '/api/game-files/' + what + '?' + new URLSearchParams(Object.assign({ version: version, path: path }, extra || {})).toString();
+  }
+
+  async function gfErrorText(url) {
+    try {
+      const res = await fetch(url, { credentials: 'same-origin' });
+      if (res.ok) return '';            // the file is fine: the browser can't play its format (Xbox WMA)
+      const d = await res.json();
+      return d.error || 'This file can\'t be previewed.';
+    } catch (e) { return 'This file can\'t be previewed.'; }
+  }
+
+  function gfTogglePreview(row, btn, look, version, path) {
+    const next = row.nextElementSibling;
+    if (next && next.classList.contains('gf-prev')) {
+      next.querySelectorAll('audio').forEach((a) => a.pause());
+      next.remove();
+      btn.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    const box = el('div', undefined, 'gf-prev');
+    row.after(box);
+    btn.setAttribute('aria-expanded', 'true');
+    if (look === 'sound') {
+      const url = gfFileUrl('sound', version, path);
+      const audio = el('audio');
+      audio.controls = true;
+      audio.preload = 'auto';
+      audio.src = url;
+      audio.setAttribute('aria-label', path);
+      audio.addEventListener('error', async () => {
+        const msg = await gfErrorText(url);
+        box.textContent = '';
+        const p = el('p', msg, 'small');
+        if (!msg) {
+          p.textContent = 'Your browser can\'t play this format. ';
+          const a = el('a', 'Save it');
+          a.href = url;
+          a.download = '';
+          p.appendChild(a);
+          p.appendChild(document.createTextNode(' and open it in a media player.'));
+        }
+        box.appendChild(p);
+      });
+      box.appendChild(audio);
+      box.appendChild(el('p', 'Decoded on this computer from your own copy of the game.', 'small'));
+      audio.play().catch(() => {});
+      return;
+    }
+    box.appendChild(el('p', 'Looking for pictures…', 'small'));
+    gfShowPictures(box, version, path);
+  }
+
+  async function gfShowPictures(box, version, path, all) {
+    let d;
+    try { d = await apiFetchJson(gfFileUrl('pictures', version, path)); }
+    catch (e) { box.textContent = ''; box.appendChild(el('p', 'Couldn\'t read it: ' + e.message, 'small')); return; }
+    box.textContent = '';
+    const pics = d.pictures || [];
+    if (!pics.length) { box.appendChild(el('p', 'No pictures in this file (it holds models, animations or other data).', 'small')); return; }
+    const LIMIT = 48;
+    const grid = el('div', undefined, 'gf-pics');
+    pics.slice(0, all ? pics.length : LIMIT).forEach((t) => {
+      const fig = el('figure', undefined, 'gf-pic');
+      const a = el('a');
+      a.href = gfFileUrl('picture', version, path, { i: String(t.i) });
+      a.target = '_blank';
+      a.rel = 'noopener';
+      const img = el('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.src = a.href;
+      img.alt = (t.name || 'Picture ' + (t.i + 1)) + ', ' + t.width + ' by ' + t.height;
+      img.addEventListener('error', () => { a.replaceChildren(el('span', 'Can\'t show this format', 'small')); });
+      a.appendChild(img);
+      fig.appendChild(a);
+      fig.appendChild(el('figcaption', (t.name || '#' + (t.i + 1)) + ' · ' + t.width + '×' + t.height));
+      grid.appendChild(fig);
+    });
+    box.appendChild(grid);
+    if (!all && pics.length > LIMIT) {
+      const more = el('button', 'Show all ' + fmtInt(pics.length) + ' pictures', 'btn-sm gf-more');
+      more.type = 'button';
+      more.addEventListener('click', () => gfShowPictures(box, version, path, true));
+      box.appendChild(more);
+    }
   }
 
   function openDownload(kind) {

@@ -199,7 +199,11 @@ original names back (every sound stores the name it had on the developers' machi
 `art/sound/rsd/8/85657545f63b9543.rsd` becomes `art/sound/music/world_streams_mono/miami/dj/03.rsd`).
 
 The portal then lists, for each version, the files only it has and the ones it has in a different form.
-All four versions take about 12.4 GB without duplicates, the best versions about 4.4 GB. The files stay
+Sounds play right in the list (**Play**) and Pure3D files show the pictures inside them (**Pictures**),
+in every version's own format: the PC's Ogg and PNG, the Xbox's ADPCM and DXT, and the PS2's VAG and its
+palette pictures, which the portal puts back in order from the PS2 graphics chip's block layout. That is
+all decoded on your computer, only for a browser on that computer (Xbox WMA music can be saved and played
+in a media player). All four versions take about 12.4 GB without duplicates, the best versions about 4.4 GB. The files stay
 on your computer: `binaries/` is never committed, and they must not be shared. From the command line:
 `python portal/tools/game_assets.py --extract best --folders type`.
 
