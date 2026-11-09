@@ -96,9 +96,9 @@ def status_block(registry: dict) -> str:
     largest = max((int(e.get("size", 0)) for e in entries), default=0)
     lines = [
         STATUS_START,
-        "| | PC `Scarface.exe` 1.00.2 | Xbox `default.xbe` | Total |",
+        "| | Xbox `default.xbe` | PC `Scarface.exe` 1.00.2 | Total |",
         "| :--- | ---: | ---: | ---: |",
-        f"| Verified functions | {by['pc']:,} | {by['xb']:,} | **{by['pc'] + by['xb']:,}** |",
+        f"| Verified functions | {by['xb']:,} | {by['pc']:,} | **{by['pc'] + by['xb']:,}** |",
         "",
     ] + ([f"Plus {by['proto']:,} in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.", ""]
          if by["proto"] else []) + [

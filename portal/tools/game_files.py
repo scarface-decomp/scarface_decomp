@@ -599,9 +599,9 @@ def _report(status: Dict[str, str], bin_dir: Path, pc_disc, patch, log: Log) -> 
     if all(status[n] == "missing" for n in REQUIRED_ONE_OF):
         log("")
         log("  No game files yet, so the portal has nothing to show.")
-        log("  Put any of these in the binaries folder and start the portal again:")
-        log("    - the Xbox game: default.xbe, or the Xbox disc image (.iso, or the .7z / .zip it came in)")
-        log("    - the PC game's Scarface.exe, version 1.00.2 (see below)")
+        log("  Put the Xbox game in the binaries folder and start the portal again: default.xbe, or the")
+        log("  Xbox disc image (.iso, or the .7z / .zip it came in). That is where almost all of the work is.")
+        log("  Optional: the PC game's Scarface.exe, version 1.00.2 (see below), for the PC-only functions.")
     if status["Scarface.exe"] == "missing" and (pc_disc or patch):
         log("")
         for line in _pc_steps(pc_disc, patch):

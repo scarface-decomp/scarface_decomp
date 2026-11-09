@@ -13,7 +13,10 @@ against it doesn't count here. Everyone works on these files, and only these.
 | `Scarface.exe` | **PC, US, version 1.00.2**: the US game with the official 1.00.2 patch installed. Its file version reads `1.0.0.2`. | 8,462,848 bytes | `1c1dd03ff81592acfa43c45f461fbdc4818503c739cd2f127e0a61fe6a6969c6` |
 | `game.xbe` | **Xbox prototype, April 20, 2006** (optional). Unreleased code, counted on its own row. | 4,854,976 bytes | `ecd980d0f25c444d263c968b8e4032e1707e0e684a422483890257ee12ec0384` |
 
-You need at least one of the first two. To check yours, start the portal, or run
+Start with `default.xbe`: the whole Xbox game can be read, so almost all of the work is there.
+`Scarface.exe` is an optional extra for the PC-only functions (most of the PC file is encrypted, so
+only about 1,500 of its functions can be worked on), and `game.xbe` adds the prototype's. The portal
+also runs with only `Scarface.exe`, but then there is much less to do. To check yours, start the portal, or run
 `python portal/tools/game_files.py`, or in PowerShell: `Get-FileHash binaries\default.xbe`.
 
 ## Not accepted

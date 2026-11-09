@@ -304,8 +304,8 @@
         <p class="count"><span id="sb-verified">…</span> of <span id="sb-total">…</span> functions rebuilt so far.</p>
 
         <dl class="facts">
-          <div><dt>PC version</dt><dd id="sb-pc">…</dd></div>
           <div><dt>Xbox version</dt><dd id="sb-xb">…</dd></div>
+          <div><dt>PC version</dt><dd id="sb-pc">…</dd></div>
           <div><dt>Bytes matched</dt><dd id="sb-bytes">…</dd></div>
           <div><dt>Compiler</dt><dd id="sb-compiler">cl.exe 13.10.3052</dd></div>
         </dl>
@@ -354,16 +354,16 @@
         <div class="two">
           <div>
             <div class="build-row">
-              <div class="name">PC <span>Scarface.exe 1.00.2</span></div>
-              <div class="pct" id="pc-big">…</div>
-              <div class="tube"><span id="pc-bar"></span></div>
-              <div class="sub" id="pc-sub"></div>
-            </div>
-            <div class="build-row">
               <div class="name">Xbox <span>default.xbe</span></div>
               <div class="pct" id="xb-big">…</div>
               <div class="tube"><span id="xb-bar"></span></div>
               <div class="sub" id="xb-sub"></div>
+            </div>
+            <div class="build-row">
+              <div class="name">PC <span>Scarface.exe 1.00.2</span></div>
+              <div class="pct" id="pc-big">…</div>
+              <div class="tube"><span id="pc-bar"></span></div>
+              <div class="sub" id="pc-sub"></div>
             </div>
             <div class="build-row extra" id="proto-row" hidden>
               <div class="name">Unreleased code: Xbox prototype <span>game.xbe, April 2006</span></div>
@@ -404,12 +404,13 @@
           <li><b>Download the project</b>On <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>,
             press <em>Code</em>, then <em>Download ZIP</em>, and unzip it anywhere. If you use Git:
             <pre tabindex="0">git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></pre></li>
-          <li><b>Add your game files</b>Copy <code>Scarface.exe</code> (US PC version 1.00.2) and/or <code>default.xbe</code>
-            (from the US Xbox disc) into the project's <code>binaries</code> folder. Only these US versions are accepted;
-            the portal checks. Use the files themselves, not the download they came in: <code>default.xbe</code> is inside
-            the Xbox disc image, and <code>Scarface.exe</code> is in the folder the PC game is installed to. The portal can't
-            open a <code>.iso</code>, <code>.7z</code> or <code>.zip</code>. Optional: <code>game.xbe</code> from the April 2006
-            Xbox prototype adds its unreleased code.</li>
+          <li><b>Add your game files</b>Copy <code>default.xbe</code> from the US Xbox disc into the project's
+            <code>binaries</code> folder: almost all of the work is there. Two optional extras: <code>Scarface.exe</code>
+            (US PC version 1.00.2) adds the PC-only functions, and <code>game.xbe</code> from the April 2006 Xbox prototype
+            adds its unreleased code. Only these US versions are accepted; the portal checks. Use the files themselves, not
+            the download they came in: <code>default.xbe</code> is inside the Xbox disc image, and <code>Scarface.exe</code>
+            is in the folder the patched PC game is installed to. The portal can't open a <code>.iso</code>,
+            <code>.7z</code> or <code>.zip</code>.</li>
           <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
             <code>sh start_portal.sh</code>. Your browser opens the portal at <code>localhost:8085</code>.</li>
           <li><b>Pick a function and solve it</b>Choose a small one. The editor starts you off with C++ written from the
@@ -443,13 +444,20 @@
               starting guess for you, and <em>Compile &amp; Verify</em> shows exactly which bytes still differ.</p></details>
           <details><summary>Do I need the game?</summary>
             <p>Yes. The project shares only the code people write, never the game. The portal reads your own copy
-              (<code>Scarface.exe</code> 1.00.2 for PC or <code>default.xbe</code> from the Xbox disc) on your computer.</p></details>
+              (<code>default.xbe</code> from the Xbox disc, and <code>Scarface.exe</code> 1.00.2 if you have the PC game) on
+              your computer.</p></details>
           <details><summary>Which version of the game do I need?</summary>
-            <p>The US versions, exactly: the US Xbox disc, and/or the US PC game with the official 1.00.2 patch installed.
-              Every function is matched against those exact files, and other versions have different code at different
-              addresses, so the portal won't use the unpatched PC 1.00, other regions' discs or edited files. The April 2006
-              Xbox prototype is an optional extra. The accepted files and how to check yours are in
+            <p>The US Xbox disc, exactly: that's where almost all of the work is. The US PC game with the official 1.00.2
+              patch installed and the April 2006 Xbox prototype are optional extras. Every function is matched against those
+              exact files, and other versions have different code at different addresses, so the portal won't use the
+              unpatched PC 1.00, other regions' discs or edited files. The accepted files and how to check yours are in
               <a data-repo-link="/blob/main/docs/GAME_VERSIONS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/GAME_VERSIONS.md" target="_blank" rel="noopener noreferrer">GAME_VERSIONS.md</a>.</p></details>
+          <details><summary>I play on PC. Why is the Xbox version the main one?</summary>
+            <p>Because both versions are the same game, built from the same C++ with the same compiler, and only the Xbox
+              one can be read in full. Most of the PC file is encrypted, so only about 1,500 of its functions can be worked
+              on, against about 19,500 on Xbox. Every Xbox function that gets rebuilt is the same code the PC version runs;
+              only the parts that talk to each machine's hardware (graphics, controls, sound, saving) differ. Rebuilding
+              from the Xbox version gets the whole game's code, and a PC build can follow from it later.</p></details>
           <details><summary>Does it cost anything?</summary>
             <p>No. Python, the portal and decomp.me are free. The 2003 compiler was a free download from Microsoft.</p></details>
           <details><summary>Is this allowed?</summary>
@@ -516,8 +524,8 @@
           <label class="sr-only" for="bin">Version</label>
           <select id="bin">
             <option value="all">All versions</option>
-            <option value="pc">PC only</option>
             <option value="xb">Xbox only</option>
+            <option value="pc">PC only</option>
             <option value="proto">Xbox prototype</option>
           </select>
           <label class="sr-only" for="sort">Sort</label>
