@@ -606,8 +606,10 @@ def flag_options(t: dict) -> List[str]:
 
 
 NO_COMPILER_HELP = ("The 2003 compiler is not installed on this computer yet, so it can't verify here.\n"
-                    "Install it once from your own VCToolkitSetup.exe:\n"
-                    "    python portal/scripts/setup_msvc71.py path/to/VCToolkitSetup.exe\n"
+                    "Install it once from your own VCToolkitSetup.exe: put it in the project folder, open a\n"
+                    "terminal there (in File Explorer, type powershell in the folder's address bar and press\n"
+                    "Enter) and run:\n"
+                    "    python portal/scripts/setup_msvc71.py VCToolkitSetup.exe\n"
                     "Or, if your code scores 100% on decomp.me, post the decomp.me link in a GitHub issue "
                     "and a maintainer will verify it and credit you.")
 
@@ -2008,7 +2010,8 @@ def main() -> None:
     load_tasks()
     if not MV.find_msvc71_bin():
         print("[!] The 2003 compiler is not installed yet. You can still browse functions and use decomp.me;")
-        print("    to verify here, run: python portal/scripts/setup_msvc71.py path/to/VCToolkitSetup.exe")
+        print("    to verify here, put VCToolkitSetup.exe in the project folder and run, from that folder:")
+        print("    python portal/scripts/setup_msvc71.py VCToolkitSetup.exe")
     p = progress()
     url = f"http://{'localhost' if HOST in ('127.0.0.1', '0.0.0.0') else HOST}:{PORT}"
     print("=" * 78)

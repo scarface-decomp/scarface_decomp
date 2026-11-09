@@ -457,8 +457,15 @@
             optional extras. Only the US versions are accepted; the portal checks.</li>
           <li><b>Add the compiler (strongly recommended)</b>To check your work on your own computer, the portal needs the
             compiler the game was made with, Microsoft's Visual C++ Toolkit 2003. Microsoft no longer offers it, so you need
-            your own copy of its installer, <code>VCToolkitSetup.exe</code>. Put it in the project folder and run this once:
+            your own copy of its installer, <code>VCToolkitSetup.exe</code>. Put it in the project folder (the
+            <code>scarface_decomp</code> folder Git made in step 2), then open a terminal in that folder. On Windows: open
+            the folder in File Explorer, click the address bar at the top, type <code>powershell</code> and press Enter
+            (on Windows 11 you can also right-click an empty spot in the folder and choose <em>Open in Terminal</em>).
+            Still have the window from step 2? Type <code>cd scarface_decomp</code> in it instead. On Mac or Linux, open
+            Terminal and type <code>cd</code>, a space, and the folder's path. Then run this once:
             <pre tabindex="0">python portal/scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
+            It says <em>Done</em> when the compiler is ready. On Mac or Linux, use <code>python3</code> instead of
+            <code>python</code>.
             With it, every function you finish is checked and credited to you straight away, so set it up if you can. Only
             skip this if you can't get it to work; step 7 says what to do then.</li>
           <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run

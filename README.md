@@ -114,10 +114,14 @@ where everyone's can be found.
 
 ## The compiler
 
-From your own `VCToolkitSetup.exe` (Visual C++ Toolkit 2003; Microsoft no longer offers it for download):
+From your own `VCToolkitSetup.exe` (Visual C++ Toolkit 2003; Microsoft no longer offers it for download).
+Put it in the project folder (`scarface_decomp`), open a terminal there, and run the command below once.
+On Windows: open the folder in File Explorer, click the address bar, type `powershell` and press Enter (or,
+on Windows 11, right-click an empty spot in the folder and choose *Open in Terminal*). On macOS or Linux:
+open Terminal, `cd` to the folder, and use `python3` instead of `python`. It prints `Done` when it's ready.
 
 ```bash
-python portal/scripts/setup_msvc71.py path/to/VCToolkitSetup.exe
+python portal/scripts/setup_msvc71.py VCToolkitSetup.exe
 ```
 
 This installs the compiler with its headers and libraries into `portal/tools/msvc71/`. Either release of the
