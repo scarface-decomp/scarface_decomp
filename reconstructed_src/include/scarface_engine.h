@@ -1,7 +1,7 @@
 #pragma once
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS (1.00.2) — MASTER ENGINE TYPES & MACROS
-// Target compiler: MSVC 7.1 (Visual C++ Toolkit 2003, cl.exe 13.10.3052)
+// Target compiler: MSVC 7.1 (Visual C++ Toolkit 2003, cl.exe 13.10.3052 or 13.10.3077)
 // ============================================================================
 
 #if defined(_MSC_VER) && _MSC_VER < 1600

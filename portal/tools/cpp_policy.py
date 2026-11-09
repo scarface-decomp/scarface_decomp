@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Genuine-C++ submission policy for the Scarface decomp portal (MSVC 7.1, cl.exe 13.10.3052).
+Genuine-C++ submission policy for the Scarface decomp portal (MSVC 7.1, cl.exe 13.10.3052 or 13.10.3077).
 
 Drop-in replacement for the comment stripping + keyword check at the top of
 ``compile_and_verify_cpp()`` in ``portal/decomp_portal_server.py``.

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(scarface_decomp LANGUAGES CXX)
 
 # Verification does not go through CMake: portal/scripts/reverify_all.py, portal/verify.py and the portal compile
-# each function with cl.exe 13.10.3052 and compare it with the game. This target only lets an IDE index
+# each function with cl.exe 13.10.3052 or 13.10.3077 and compare it with the game. This target only lets an IDE index
 # the hand-written translation units. The generated files (Original_Binary_Order_*.cpp, pc/, xbox/) are
 # collections of separately compiled blocks, and imported/ holds one-line sweep stubs, so neither is
 # part of it.

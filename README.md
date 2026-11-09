@@ -1,7 +1,7 @@
 # scarface_decomp
 
 ![Language](https://img.shields.io/badge/language-C%2B%2B-00599C?style=flat-square&logo=c%2B%2B)
-![Compiler](https://img.shields.io/badge/compiler-MSVC%207.1%20(13.10.3052)-5C2D91?style=flat-square)
+![Compiler](https://img.shields.io/badge/compiler-MSVC%207.1%20(13.10.3052%20or%203077)-5C2D91?style=flat-square)
 ![Target](https://img.shields.io/badge/target-Xbox%20%2B%20PC%201.00.2-c90016?style=flat-square)
 [![Discord](https://img.shields.io/badge/Discord-join%20us-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/azvrtGBvau)
 
