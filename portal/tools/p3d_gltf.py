@@ -56,6 +56,9 @@ COMPOSITE, COMPOSITE_PROP = 0x123000, 0x123001
 ANIMATION, ANIM_GROUP_LIST, ANIM_GROUP = 0x121000, 0x121002, 0x121001
 CAMERA, FRAME_CONTROLLER = 0x2200, 0x121201
 WORLD_GEO, STATE_PROP = 0x8800003, 0x8800005
+STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY = 0x0802000D, 0x0802000E, 0x08020002
+EXPORT_VERSION = 2                     # 2: props as they start (no broken or far-away parts on top)
+_LOD_PART = re.compile(r"lod\d*(shape\d*)?$", re.I)
 SCRIPT_OBJECT, OBJECT_PROPERTY, OBJECT_BINARY = 0x9900190, 0x9900192, 0x9900194
 VECTOR_CHANNELS = (0x121102, 0x121103, 0x121104)
 SHADOW_PARTS = 0x20 | 0x40           # a composite part's kind: 1 a model, 0x20 a shadow mesh, 0x40 a shadow skin
@@ -447,13 +450,38 @@ def composite_prop(data: bytes, c: p3d.Chunk) -> Tuple[str, int, int]:
 
 def chunk_name(data: bytes, c: p3d.Chunk) -> str:
     s, _ = c.body
-    if c.id in (COMPOSITE, ANIMATION):
+    if c.id in (COMPOSITE, ANIMATION, STATE_PROP_DATA):
         s += 4                                           # a version first
     return _text(data, s)[0]
 
 
 KINDS = {MESH: "mesh", SKIN: "skin", SHADER: "shader", SKELETON: "skeleton", COMPOSITE: "composite",
-         STATE_PROP: "stateprop"}
+         STATE_PROP: "stateprop", STATE_PROP_DATA: "propstates"}
+
+
+def prop_states(data: bytes, c: p3d.Chunk) -> List[Tuple[str, Dict[str, bool]]]:
+    """A State Prop Data chunk's states, in order: (state name, {part name (lower case): shown}). The
+    first is how the prop starts ("idle"); later ones are what it becomes ("final", "damage1"): a crate
+    gone, a bin dented (its DamageShape shown, its InstanceShape hidden)."""
+    out = []
+    for st in c.children:
+        if st.id != PROP_STATE:
+            continue
+        name = _text(data, st.body[0])[0]
+        shown = {}
+        for v in st.children:
+            if v.id == PROP_VISIBILITY:
+                part, p = _text(data, v.body[0])
+                shown[part.lower()] = bool(struct.unpack_from("<I", data, p)[0])
+        out.append((name, shown))
+    return out
+
+
+def lod_parts(parts: Sequence[str]) -> set:
+    """The low-detail stand-ins (storeInterior2LODShape beside storeInterior2InstanceShape) a composite
+    carries for far away, when it has a part that isn't one."""
+    low = {p.lower() for p in parts if _LOD_PART.search(p)}
+    return low if len(low) < len(parts) else set()
 
 
 class Library:
@@ -830,13 +858,42 @@ class Builder:
 
     # models
 
-    def composite(self, ref: Ref, parent: Optional[int] = None, label: str = "", **place) -> int:
+    def states_of(self, ref: Ref, name: str) -> List[Tuple[str, Dict[str, bool]]]:
+        """The states of the prop a composite drawable is the model of (none for most)."""
+        cache = self.__dict__.setdefault("_states", {})
+        key = id(ref.chunk)
+        if key not in cache:
+            cache[key] = self._states_of(ref, name)
+        return cache[key]
+
+    def _states_of(self, ref: Ref, name: str) -> List[Tuple[str, Dict[str, bool]]]:
+        data = self.lib.find("propstates", name, (ref.source,))
+        if data is None:
+            for refs in self.lib.named["stateprop"].values():
+                for sp in refs:
+                    p = _text(sp.data, sp.chunk.body[0])[1]
+                    if _text(sp.data, p)[0].lower() == name.lower():
+                        data = self.lib.find("propstates", sp.name, (sp.source,))
+                        break
+                if data is not None:
+                    break
+        return prop_states(data.data, data.chunk) if data is not None else []
+
+    def composite(self, ref: Ref, parent: Optional[int] = None, label: str = "", state: int = 0, **place) -> int:
         """A composite drawable: its skeleton's joints, with each part (a mesh or a skin) on its joint.
-        Its skeleton and parts are looked for in its own file first."""
+        Its skeleton and parts are looked for in its own file first. Only the parts shown in the prop's
+        state are put in (the first state: how the game starts it, before anything breaks it), and only the
+        full-detail ones: the low-detail stand-ins for far away are left out."""
         r = p3d._R(ref.data, *ref.chunk.body)
         r.u32()
         name, skel_name = r.text(), r.text()
         own = (ref.source,)
+        parts = [composite_prop(ref.data, k) for k in ref.chunk.children if k.id == COMPOSITE_PROP]
+        hidden = lod_parts([p for p, kind, _j in parts if not kind & SHADOW_PARTS])
+        states = self.states_of(ref, name)
+        if states:
+            shown = states[min(state, len(states) - 1)][1]
+            hidden |= {p for p, on in shown.items() if not on}
         sref = self.lib.find("skeleton", skel_name, own)
         if sref:
             copy = self.skeleton(sref, parent, label or name)
@@ -850,8 +907,8 @@ class Builder:
             if k.id != COMPOSITE_PROP:
                 continue
             part, kind, joint = composite_prop(ref.data, k)
-            if kind & SHADOW_PARTS:
-                continue                                        # shadow volumes: not something to look at
+            if kind & SHADOW_PARTS or part.lower() in hidden:
+                continue                                        # shadow volumes, far-away and broken versions
             at = copy.order[joint] if copy and 0 <= joint < len(copy.order) else top
             mref = self.lib.find("mesh", part, own)
             if mref:
@@ -1258,6 +1315,11 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
             if not wanted and not _has_model(lib, ref):
                 continue
             tops.append((name, b.composite(ref)))
+            states = b.states_of(ref, name)                     # what it becomes: beside it, kept apart
+            for i, (state, shown) in enumerate(states[1:], 1):
+                if shown != states[0][1] and any(shown.values()):
+                    label = f"{name} ({state})"
+                    tops.append((label, b.composite(ref, label=label, state=i)))
         for ref in lib.main_chunks(MESH):
             name = ref.name
             if (wanted and name.lower() not in wanted) or (not wanted and name.lower() in parts):

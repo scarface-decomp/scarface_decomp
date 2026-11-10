@@ -2155,7 +2155,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": True, "areas": [dict(a, files=len(a["files"])) for a in found],
                                "city": dict(BLENDER.status),
                                "city_files": len(list(BLENDER.folder(q1("version")).glob("*.glb")))
-                               if q1("version") in GA.LABELS else 0})
+                               if q1("version") in GA.LABELS else 0,
+                               "city_current": q1("version") in GA.LABELS and BX.city_current(BLENDER.folder(q1("version")))})
         if u.path == "/api/game-files/blender":
             return self._json(dict(BLENDER.status, ok=True))
         if u.path == "/api/game-files/list":

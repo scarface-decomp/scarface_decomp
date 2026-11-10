@@ -267,7 +267,9 @@ joints. A gun, a car, a placed tree and each part of a map are one.
 | `0x00123000` | Composite Drawable | u32 version (0), name, skeleton name, u32 number of parts; the parts follow |
 | `0x00123001` | Composite Drawable Part | u32 0, u32 0, the drawable's name, u32 kind (1 a model; `0x20` a shadow mesh, `0x40` a shadow skin), u32 the joint it hangs on |
 | `0x08800005` | State Prop | name, the composite drawable's name |
-| `0x0802000D` | State Prop Data | the prop's states and what each shows and runs, in sub-chunks `0x08020002` to `0x0802000E` (not written up yet) |
+| `0x0802000D` | State Prop Data | u32 version (4), name, drawable name, u32 1, u32 number of states; holds `0x08020008` (name and value properties: `name`, `visibility`) and one `0x0802000E` per state |
+| `0x0802000E` | Prop State | the state's name (`idle`, `final`, `damage1`, `shake`, `open` ...), then 36 bytes not worked out; holds one `0x08020002` per part |
+| `0x08020002` | Part Visibility | the part's name (a composite drawable part), u32 shown (1) or hidden (0) in this state |
 
 A part's mesh is in its joint's space: the joint's world matrix times the vertex.
 
@@ -345,6 +347,13 @@ vectors, *scale x rotation*, then puts the position in the last row; the rotatio
 builds from three angles (`0x243020`: about X first, then Y, then Z) given minus the X angle, minus the Y
 angle and the Z angle. Placed this way the samples' street lamps, bus stops, parking meters and trees
 line up with the roads and pavements in the areas' own geometry.
+
+A placed prop's composite drawable holds every look it can have. Most have a full-detail part
+(`garbageCanBInstanceShape`) and a low-detail one for far away (`...LODShape`), both shown in its first
+state: the game picks between them by distance. Props that can break have a damaged part too
+(`garbageCanBDamageShape`, `garagePostIBShape`), hidden in the first state (`idle`) and shown in a later
+one (`final`) while the whole one is hidden. The exports show each prop as its first state has it, at full
+detail; a prop's file opened on its own also gets each later state's look beside it, named after the state.
 
 Traffic, pedestrians and mission cars aren't models placed in the files: the game spawns them while it runs,
 at spawn objects the areas do place (`worldambiencespawnobject`, `enemycharactergeneratorspawnobject`, ...).

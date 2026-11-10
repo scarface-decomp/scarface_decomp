@@ -3690,6 +3690,10 @@
     GFB_CITY_FILES = d.city_files || 0;
     if (GFB_CITY_FILES) GFB_CITY_VERSION = GF_TAB;
     renderGfCity(d.city || {});
+    if (GFB_CITY_FILES && !d.city_current && !(d.city || {}).running) {
+      $('gfb-city-bl-status').classList.remove('err');
+      $('gfb-city-bl-status').textContent = 'The city in binaries/blender/ was exported before props came in whole and at full detail: press Export the city again.';
+    }
     gfShowBlenderApp();
   }
 

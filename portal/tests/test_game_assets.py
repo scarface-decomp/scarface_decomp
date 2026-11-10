@@ -280,6 +280,9 @@ def test_copying_again_with_the_same_choices_does_nothing(tmp_path, monkeypatch)
     assert read_all(b / "game_files") == before
     job = GA.Job(b, log=lambda m: None)
     assert "Already copied" in job.start(list(GA.VERSIONS), "pc")
+    assert job.start(list(GA.VERSIONS), "pc", check=True) is None     # a check looks, finds it all there
+    job._thread.join(30)
+    assert job.status["phase"] == "done" and job.status["message"] == "Already copied"
     assert job.overview()["copy"] == {"versions": list(GA.VERSIONS), "mode": "pc", "folders": "game",
                                       "created": first["created"], "current": True}
     monkeypatch.setattr(GA, "READERS", readers)

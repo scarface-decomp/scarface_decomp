@@ -527,7 +527,10 @@ def test_the_whole_city_one_file_per_area(tmp_path):
         job._thread.join(10)
     finally:
         GA.out_dir = real_out
-    assert sorted(p.name for p in (tmp_path / "blender" / "PC").iterdir()) == ["a_01.glb", "b_02.glb"]
+    assert sorted(p.name for p in (tmp_path / "blender" / "PC").iterdir()) == ["a_01.glb", "b_02.glb", "made_by.txt"]
+    assert BX.city_current(tmp_path / "blender" / "PC")                       # made by this exporter
+    (tmp_path / "blender" / "PC" / "made_by.txt").unlink()
+    assert not BX.city_current(tmp_path / "blender" / "PC")                   # one from before: export again
     assert job.status["written"] == 2 and job.status["done"] == 2 and not job.status["running"]
     assert BX.CityJob(tmp_path).start("pc", {"versions": {}}).startswith("None of the city")
     assert BX.CityJob(tmp_path).start("wii", index) == "Pick a version."
@@ -777,3 +780,59 @@ def test_the_blender_script_imports_and_saves(tmp_path, monkeypatch):
     script = open(args[2], encoding="utf-8").read()
     compile(script, "open_in_blender.py", "exec")                                       # valid Python for Blender
     assert "import_scene.gltf" in script and "save_as_mainfile" in script and "a.glb" in script
+
+
+# --------------------------------------------------------------------------- props: how they start, and what they become
+
+def state_prop(name, states):
+    """A State Prop Data chunk (0x0802000D): states as (state name, [(part, shown)])."""
+    kids = chunk(0x08020008, text("name") + text(name))
+    for sname, shown in states:
+        vis = b"".join(chunk(0x08020002, text(p) + struct.pack("<I", int(on))) for p, on in shown)
+        kids += chunk(0x0802000E, text(sname) + bytes(36), vis)
+    return chunk(0x0802000D, struct.pack("<I", 4) + text(name) + text(name) + struct.pack("<II", 1, len(states)), kids)
+
+
+def bin_prop():
+    rig = skeleton("bin", [("bin", 0, (0, 0, 0)), ("binInstance", 0, (0, 0, 0)), ("binLOD", 1, (0, 0, 0)),
+                           ("binDamage", 0, (0, 0, 0))])
+    parts = [("binInstanceShape", 1, 1), ("binLODShape", 1, 2), ("binDamageShape", 1, 3)]
+    return p3d(rig, mesh("binInstanceShape"), mesh("binLODShape"), mesh("binDamageShape"),
+               composite("bin", "bin", parts),
+               state_prop("bin", [("idle", [("binInstanceShape", True), ("binLODShape", True), ("binDamageShape", False)]),
+                                  ("final", [("binInstanceShape", False), ("binLODShape", False), ("binDamageShape", True)])]),
+               chunk(0x8800005, text("bin") + text("bin")))
+
+
+def shapes_under(doc, top):
+    out, todo = [], [top]
+    while todo:
+        n = doc["nodes"][todo.pop()]
+        if "mesh" in n:
+            out.append(n["name"])
+        todo += n.get("children", [])
+    return sorted(out)
+
+
+def test_a_prop_comes_in_as_it_starts_and_its_broken_self_beside_it():
+    glb, report = export(bin_prop())
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    assert report.models == ["bin", "bin (final)"]
+    tops = {doc["nodes"][i]["name"]: i for i in doc["scenes"][0]["nodes"]}
+    assert shapes_under(doc, tops["bin"]) == ["binInstanceShape"]              # not the far-away or the dented one
+    assert shapes_under(doc, tops["bin (final)"]) == ["binDamageShape"]
+
+
+def test_a_placed_prop_in_a_map_is_whole_and_detailed():
+    glb, report = export(area("w_a_shell", objects=[("bin", [record(1.0, 0.0, 1.0)])]), lib=[("x_region_D.p3d", bin_prop())],
+                         map_mode=True)
+    doc, _ = read_glb(glb)
+    placed = next(i for i, n in enumerate(doc["nodes"]) if n["name"] == "bin")
+    assert report.placed == 1 and shapes_under(doc, placed) == ["binInstanceShape"]
+
+
+def test_lod_parts():
+    assert G.lod_parts(["treeInstanceShape", "treeLODShape", "fenceBushALODShape1"]) == {"treelodshape", "fencebushalodshape1"}
+    assert G.lod_parts(["farHillLODShape"]) == set()                       # nothing else to show: kept
+    assert G.lod_parts(["clodhopperShape"]) == set()

@@ -293,6 +293,8 @@ class CityJob:
                     self.status["bytes"] += len(glb)
                 self.status["done"] += 1
                 time.sleep(0)
+            if not self._stop.is_set():
+                (dest / CITY_MADE).write_text(str(P3G.EXPORT_VERSION), encoding="utf-8")
         except (OSError, P3G.p3d.P3dError) as e:
             self.status["error"] = f"{type(e).__name__}: {e}"
         finally:
@@ -302,6 +304,16 @@ class CityJob:
 # --------------------------------------------------------------------------- the person's own Blender
 
 BLENDER_PATH_FILE = "blender_path.txt"           # binaries/blender/: where blender.exe is, if it isn't found
+CITY_MADE = "made_by.txt"                        # binaries/blender/<version>/: which exporter made the city
+
+
+def city_current(folder: Path) -> bool:
+    """Whether the city in folder was exported by this version of the exporter (not one from before props
+    came in whole and at full detail)."""
+    try:
+        return int((folder / CITY_MADE).read_text(encoding="utf-8").strip()) >= P3G.EXPORT_VERSION
+    except (OSError, ValueError):
+        return False
 OPENED = "Opened"                                # binaries/blender/<version>/Opened/: single files and areas
 
 OPEN_SCRIPT = r"""

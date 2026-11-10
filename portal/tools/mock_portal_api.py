@@ -352,7 +352,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self._bytes(b"\0\0\0\x18ftypmp42", "video/mp4")
             if u.path == "/api/game-files/areas":
                 return self._json({"ok": True, "areas": GF_AREAS if GF["summary"] else [], "city": dict(BLENDER),
-                                   "city_files": BLENDER["written"]})
+                                   "city_files": BLENDER["written"], "city_current": True})
             if u.path == "/api/game-files/blender":
                 return self._json(dict(BLENDER, ok=True))
             if u.path == "/api/game-files/model":
