@@ -68,7 +68,7 @@ GUIDE = "docs/GAME_VERSIONS.md"
 REQUIRED_ONE_OF = ("default.xbe", "Scarface.exe")
 ARCHIVES = (".zip", ".7z")
 DISC_IMAGES = (".iso", ".xiso")
-SKIP_DIRS = {"scripts_and_data", "ps2", "wii", "_unpacked"}
+SKIP_DIRS = {"scripts_and_data", "ps2", "wii", "_unpacked", "ps2_overlays"}
 
 XBOX_MAGIC = b"MICROSOFT*XBOX*MEDIA"
 # Where the game's file system starts inside the image: trimmed XISO, then full XGD1/XGD2/XGD3 images.

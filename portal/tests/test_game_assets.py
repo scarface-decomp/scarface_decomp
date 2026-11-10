@@ -146,6 +146,14 @@ def test_finds_every_version(tmp_path):
     assert not notes
 
 
+def test_the_copied_ps2_overlays_are_not_taken_for_the_ps2_game(tmp_path):
+    b = make_binaries(tmp_path)
+    (b / "ps2_overlays").mkdir()
+    (b / "ps2_overlays" / "PauseMenuOverlayf.bin").write_bytes(b"MWo3" + bytes(60))
+    found, _ = GA.find_sources(b)
+    assert found["ps2"].kind == "disc"
+
+
 def test_an_unknown_disc_image_is_reported(tmp_path):
     b = tmp_path / "binaries"
     b.mkdir()
