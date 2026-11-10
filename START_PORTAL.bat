@@ -16,17 +16,9 @@ if not defined PY (
   exit /b 1
 )
 
-rem Anything in binaries besides this note counts: the portal unpacks downloads by itself.
-set "HAVE_FILES="
-for /f "delims=" %%F in ('dir /b "binaries" 2^>nul ^| findstr /v /i /x "README.md scripts_and_data"') do set "HAVE_FILES=1"
-if not defined HAVE_FILES (
-  echo.
-  echo  No game files yet. Put the game, or the downloads it came in ^(the Xbox disc's .7z, .zip or
-  echo  .iso, and optionally the PC 1.00.2 patch^), in the "binaries" folder next to this file, then
-  echo  start the portal again. It takes out what it needs by itself.
-  echo  The portal will still open, but it has nothing to show without them.
-  echo.
-)
+rem A quick setup check: says only what needs fixing (game files, compiler, port). The full report,
+rem with how to fix each thing: python portal\doctor.py
+%PY% portal\doctor.py --startup
 
 rem The portal's packages live in portal\.venv, so nothing is installed system-wide and no
 rem administrator rights are needed.

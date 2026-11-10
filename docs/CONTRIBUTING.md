@@ -66,6 +66,20 @@ already matched; posts start with the next new match. Anyone can also follow
 [`feed.xml`](https://scarface-decomp.pages.dev/feed.xml), an Atom feed of new matches, with a feed reader or a
 Discord feed bot.
 
+### Something not working?
+
+Run this in the project folder (`python3` on macOS and Linux):
+
+```
+python portal/doctor.py
+```
+
+It checks Python, Git, your game files (and whether each is the accepted version), the compiler (with a
+one-line test compile), the portal's port and whether decomp.me answers, and says how to fix each problem.
+It changes nothing. Asking for help? `python portal/doctor.py --share` prints the same without your user name
+or folders, ready to paste into #help on Discord. `START_PORTAL` runs a quick version every time it starts and
+shows only what needs fixing.
+
 ### Updating
 
 In a folder made with `git clone`, run `git pull`. It brings in the new code and keeps your verified

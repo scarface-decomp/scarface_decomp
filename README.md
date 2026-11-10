@@ -98,7 +98,9 @@ functions on decomp.me and have a maintainer check them.
    separate list ("Prototype: also in retail") instead.
 4. **Start the portal**: on Windows double-click **`START_PORTAL.bat`**; on macOS or Linux run
    `sh start_portal.sh`. The first time it installs what it needs, unpacks your files and lists every
-   function (a few minutes), then opens http://localhost:8085.
+   function (a few minutes), then opens http://localhost:8085. Something not working? Run
+   `python portal/doctor.py` in the project folder: it checks Python, Git, your game files, the compiler and
+   the portal's port, and says how to fix each problem (`--share` gives a copy that's safe to paste in #help).
 5. **Pick a small function.** The editor starts you off with C++ written from the game's own code
    (calls and globals already named for their addresses); for many small functions it matches as it is.
    Change it until it does.

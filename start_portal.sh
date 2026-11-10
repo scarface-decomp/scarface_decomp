@@ -7,10 +7,8 @@ if ! command -v python3 >/dev/null 2>&1; then
   echo "Python 3 is not installed. Get it from https://www.python.org/downloads/ or your package manager."
   exit 1
 fi
-if [ -z "$(ls binaries 2>/dev/null | grep -v -x -e README.md -e scripts_and_data)" ]; then
-  echo "No game files yet: put the game, or the downloads it came in (the Xbox disc's .7z, .zip or .iso,"
-  echo "and optionally the PC 1.00.2 patch), in binaries/ and start again. The portal unpacks them itself."
-fi
+# A quick setup check: says only what needs fixing. The full report: python3 portal/doctor.py
+python3 portal/doctor.py --startup
 export PYTHONDONTWRITEBYTECODE=1
 if [ ! -x portal/.venv/bin/python ]; then
   echo "Setting up the portal's Python packages (first run only)..."

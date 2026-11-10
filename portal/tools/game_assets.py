@@ -522,9 +522,11 @@ class _Prefetch:
         self.thread.start()
 
     def _run(self) -> None:
+        size = 256 << 10                   # small at first: a quick look at a disc's start unpacks little
         try:
             while not self.stopping.is_set():
-                block = self.f.read(self.BLOCK)
+                block = self.f.read(size)
+                size = min(size * 2, self.BLOCK)
                 self._put(block)
                 if not block:
                     return
