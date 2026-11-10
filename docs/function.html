@@ -24,7 +24,6 @@
       --sans: 'Josefin Sans', 'Avant Garde', 'Century Gothic', 'Futura', 'Segoe UI', sans-serif;
       --mono: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace;
       /* code colours: muted on black, each readable (4.5:1 or more) */
-      --c-kw: #E58A8F; --c-type: #8FB8E8; --c-str: #B9D98C; --c-num: #E8C07A; --c-com: #8C8C8C; --c-pre: #C9A0E8; --c-fn: #F2EFEA;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
@@ -63,25 +62,7 @@
     .btns { display: flex; gap: 8px; }
     .btn { font: 600 0.82rem var(--sans); letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 14px 5px; border-radius: 2px; border: 1px solid #4A4A4A; background: none; color: var(--white); cursor: pointer; text-decoration: none; }
     .btn:hover { border-color: var(--white); color: var(--white); }
-    .code { background: #050505; border: 1px solid var(--line); border-radius: 2px; overflow-x: auto; font-family: var(--mono); font-size: 0.86rem; line-height: 1.65; }
-    .code table { border-collapse: collapse; min-width: 100%; }
-    .code td { padding: 0 14px; vertical-align: top; white-space: pre; }
-    .code td.n { width: 1%; color: #5E5E5E; text-align: right; user-select: none; padding-right: 10px; border-right: 1px solid var(--line); }
-    .code tr:first-child td { padding-top: 12px; }
-    .code tr:last-child td { padding-bottom: 12px; }
-    .tk-kw { color: var(--c-kw); }
-    .tk-type { color: var(--c-type); }
-    .tk-str { color: var(--c-str); }
-    .tk-num { color: var(--c-num); }
-    .tk-com { color: var(--c-com); font-style: italic; }
-    .tk-pre { color: var(--c-pre); }
-    .tk-ref { text-decoration: underline dotted #6A6A6A; text-underline-offset: 3px; }
-    a.tk-ref { color: inherit; text-decoration: underline solid var(--blood); }
-    a.tk-ref:hover { color: var(--hot); }
-    .how { color: var(--grey); font-size: 0.9rem; margin-top: 10px; }
-    .views { display: inline-flex; border: 1px solid #4A4A4A; border-radius: 2px; margin-right: 6px; }
-    .views button { font: 600 0.78rem var(--sans); letter-spacing: 0.04em; padding: 6px 12px 4px; background: none; border: none; color: var(--grey); cursor: pointer; }
-    .views button[aria-pressed="true"] { background: rgba(181,18,27,0.25); color: var(--white); }
+    .how { color: var(--grey); font-size: 0.9rem; margin-top: 10px; overflow-wrap: anywhere; }
     .refs li.s { display: block; color: var(--grey); }
     .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 34px; margin-top: 40px; }
     .cols h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
@@ -143,24 +124,17 @@
         <div class="code-head">
           <h2>The C++</h2>
           <div class="btns">
-            <div class="views" role="group" aria-label="How to show it">
-              <button type="button" id="view-tidy" aria-pressed="true">Tidied</button>
-              <button type="button" id="view-exact" aria-pressed="false">As verified</button>
-            </div>
-            <button class="btn" type="button" id="copy">Copy</button>
-            <a class="btn" id="download" download>Download</a>
+            <a class="btn" id="code-link" target="_blank" rel="noopener noreferrer">Read it on GitHub</a>
           </div>
         </div>
-        <div class="code" id="code" tabindex="0" role="region" aria-label="The function's C++"></div>
-        <p class="how" id="view-note"></p>
+        <p class="how" id="code-where"></p>
         <p class="how">Written by a person, not taken from the game: the project shares only the C++ people write, never the game's own
-          code. Comments and names don't change the bytes it compiles to, so they can always be made clearer. Underlined names are
-          other functions and data; the solid ones are rebuilt too and open their page.</p>
+          code. The code lives on GitHub with every other rebuilt function; this page is what's known about it.</p>
 
         <div class="cols">
           <section aria-labelledby="h-uses">
             <h2 id="h-uses">What it uses</h2>
-            <p>Other functions and data this one refers to.</p>
+            <p>Other functions and data its code refers to.</p>
             <ul class="refs" id="uses"></ul>
           </section>
           <section aria-labelledby="h-used">

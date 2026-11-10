@@ -13,6 +13,9 @@ With the function list (the portal's queue), the address-order files hold every 
 matched ones as their C++, the rest as one "// [TODO]" line each in their place, under a header that says
 how complete the file is. Without it (no game files here), they hold the matched functions only.
 
+Also docs/feed.xml (the newest matches) and docs/functions.json (the website's list of rebuilt functions:
+no code, which stays on GitHub; see site_functions).
+
 These files are generated. Every block compiles on its own (that is how it was verified), so a
 whole file is NOT one translation unit. Edit the registry (via the portal or
 portal/scripts/reverify_all.py), not these files.
@@ -274,6 +277,84 @@ def write_feed(registry: dict, docs_dir: Path) -> bool:
     return True
 
 
+# --------------------------------------------------------------------------- the website's function list
+# docs/functions.json is what the website reads for its list of rebuilt functions and their pages. It has no
+# code: the code lives on GitHub, and each function links to its own lines there (in its class's file, which
+# is far smaller than the address-order file). So the site stays quick however many functions are rebuilt.
+_SITE_LEAVE_OUT = ("code", "match")
+# Names made from an address (the same pattern as docs/js/function.js): another function or a global.
+_ADDRESS_NAME = re.compile(r"^(?:sub|func|FUN|DAT|D|PTR|LAB|thunk)_[0-9A-Fa-f]{6,8}$")
+_CODE_NOISE = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'|^[ \t]*#[^\n]*', re.S | re.M)
+_WORD = re.compile(r"[A-Za-z_]\w*(?:::[A-Za-z_~]\w*)*")      # a name, with its class if written Class::name
+
+
+def code_refs(e: dict, same_bin_symbols: set) -> List[str]:
+    """The other functions and data a function's code names: names made from an address, and the names of
+    other rebuilt functions of its version. (What the website lists under "What it uses".)"""
+    code = _CODE_NOISE.sub(" ", str(e.get("code") or ""))
+    own = str(e.get("symbol") or "")
+    own_va = str(e.get("va") or "").upper().replace("0X", "")[-8:]
+    out = set()
+    for name in _WORD.findall(code):
+        for w in {name, name.rsplit("::", 1)[-1]}:
+            if w == own or w == own.rsplit("::", 1)[-1]:
+                continue
+            if _ADDRESS_NAME.match(w):
+                if ("00000000" + w.split("_", 1)[1].upper())[-8:] != own_va:
+                    out.add(w)
+            elif w in same_bin_symbols:
+                out.add(w)
+    return sorted(out)
+
+
+def site_functions(registry: dict, places: Optional[Dict[str, tuple]] = None) -> dict:
+    """places: key -> (file, first line, last line) of each function's block on GitHub (write_outputs)."""
+    entries = registry.get("entries", {})
+    symbols: Dict[str, set] = defaultdict(set)
+    for e in entries.values():
+        symbols[e.get("bin", "")].add(str(e.get("symbol") or ""))
+    out = {}
+    for k in sorted(entries):
+        e = entries[k]
+        row = {f: v for f, v in e.items() if f not in _SITE_LEAVE_OUT and v not in ("", None)}
+        if row.get("source") == "portal":
+            row.pop("source")
+        where = (places or {}).get(k)
+        if where:
+            row["file"], row["lines"] = where[0], [where[1], where[2]]
+        refs = code_refs(e, symbols[e.get("bin", "")])
+        if refs:
+            row["refs"] = refs
+        out[k] = row
+    head = {"schema": "scarface_site_functions_v1",
+            "about": "Every rebuilt function, for the website: no code (that is on GitHub, at file and lines). "
+                     "Generated from reports/verified_registry.json by portal/tools/registry_outputs.py.",
+            "repo": REPO}
+    if registry.get("reset"):
+        head["reset"] = registry["reset"]
+    return dict(head, entries=out)
+
+
+def site_functions_json(registry: dict, places: Optional[Dict[str, tuple]] = None) -> str:
+    """Compact, with one function per line so changes read well in git."""
+    import json
+    data = site_functions(registry, places)
+    entries = data.pop("entries")
+    head = json.dumps(data, ensure_ascii=False, separators=(",", ":"))[:-1]
+    rows = [json.dumps(k, ensure_ascii=False) + ":" + json.dumps(v, ensure_ascii=False, separators=(",", ":"))
+            for k, v in entries.items()]
+    return head + ',"entries":{' + ("\n" + ",\n".join(rows) + "\n" if rows else "") + "}}\n"
+
+
+def write_site_functions(registry: dict, docs_dir: Path, places: Optional[Dict[str, tuple]] = None) -> bool:
+    path = docs_dir / "functions.json"
+    text = site_functions_json(registry, places)
+    if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
+        return False
+    _write(path, text)
+    return True
+
+
 def write_progress(registry: dict, reports_dir: Path) -> bool:
     import json
     path = reports_dir / "progress.json"
@@ -334,6 +415,7 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
     entries: Dict[str, dict] = registry.get("entries", {})
     compiler = registry.get("compiler", "MSVC 7.10")
     written: List[str] = []
+    places: Dict[str, tuple] = {}          # key -> (file, first line, last line), for the website
     by_bin: Dict[str, List] = defaultdict(list)
     for k, e in entries.items():
         by_bin[e["bin"]].append((int(e["va"], 16), k, e))
@@ -377,7 +459,12 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
             of = class_total.get((b, sub, cls), 0)
             body = _header(f"{label}, {sub}/{cls}.cpp ({len(lst)} verified)", comp,
                            _progress_lines(len(lst), max(of, len(lst)), fname) if of else "")
-            body += "".join(_block(k, e) for _, k, e in sorted(lst))
+            line = body.count("\n") + 1
+            for _, k, e in sorted(lst):
+                block = _block(k, e)
+                places[k] = ("reconstructed_src/" + str(rel).replace("\\", "/"), line, line + block.rstrip("\n").count("\n"))
+                line += block.count("\n")
+                body += block
             _write(recon_dir / rel, body)
             keep.add((recon_dir / rel).resolve())
             written.append(str(rel).replace("\\", "/"))
@@ -392,6 +479,8 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
         written.append("../reports/progress.json")
     if write_feed(registry, recon_dir.parent / "docs"):
         written.append("../docs/feed.xml")
+    if write_site_functions(registry, recon_dir.parent / "docs", places):
+        written.append("../docs/functions.json")
     return written
 
 

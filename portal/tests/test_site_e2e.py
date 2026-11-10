@@ -16,6 +16,8 @@ import pytest
 
 from conftest import PORTAL, ROOT, launch_chromium
 
+import registry_outputs as RO
+
 sync_api = pytest.importorskip("playwright.sync_api")
 
 # A fixed sample of verified functions (the live registry was reset to 0 on 2026-11-08 and starts empty).
@@ -43,6 +45,15 @@ def copy_docs(d, names=STATIC, headers=True):
             shutil.copytree(src, d / a, dirs_exist_ok=True)
         else:
             shutil.copy2(src, d / a)
+
+
+def put_list(d, reg):
+    """functions.json beside the page, as registry_outputs.py makes it from this registry: no code, and each
+    function's file and lines on GitHub."""
+    gen = d.parent / (d.name + "-generated")
+    (gen / "reconstructed_src").mkdir(parents=True, exist_ok=True)
+    RO.write_outputs(reg, gen / "reconstructed_src")
+    shutil.copy2(gen / "docs" / "functions.json", d / "functions.json")
 
 
 def cloudflare_headers(directory, path):
@@ -113,8 +124,8 @@ def site(tmp_path_factory):
     d = tmp_path_factory.mktemp("site")
     copy_docs(d)
     (d / "data").mkdir()
-    for f in ("progress.json", "verified_registry.json"):
-        shutil.copy2(FIX / f, d / "data" / f)
+    shutil.copy2(FIX / "progress.json", d / "data" / "progress.json")
+    put_list(d, REG)
     srv, url = serve(d)
     yield d, url
     srv.shutdown()
@@ -177,10 +188,9 @@ def test_function_browser_search_filter_and_code(site, browser):
     pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
     assert not pg.is_visible("#more")                                   # nothing more to show
     pg.click("#fn-list .fn-head")
-    code = pg.text_content("#fn-list .fn pre")
-    assert "DriveThread::vfunc_00" in code and "ResolveDescA" in code
-    link = pg.get_attribute("#fn-list .fn-links a:not(.own)", "href")
-    assert link.startswith("https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/")
+    assert pg.locator("#fn-list .fn pre").count() == 0                     # the code is on GitHub, not here
+    link = pg.get_attribute("#fn-list .fn-links a.code-link", "href")
+    assert re.match(r"^https://github\.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/core/DriveThread\.cpp#L\d+-L\d+$", link), link
 
     pg.fill("#q", "")
     pg.select_option("#bin", "pc")
@@ -195,18 +205,25 @@ def test_function_browser_search_filter_and_code(site, browser):
     ctx.close()
 
 
-def test_code_is_shown_as_text_not_html(site, browser):
-    """Code contains < > & (templates, comparisons, address-of); it must never be parsed as HTML."""
-    _, url = site
-    key, entry = next((k, e) for k, e in REG["entries"].items() if "&DAT_" in e["code"])
-    ctx, pg = open_page(browser, url)
-    pg.wait_for_selector("#fn-list .fn")
-    pg.fill("#q", entry["va"].lower())
-    pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
-    pg.click("#fn-list .fn-head")
-    assert pg.text_content("#fn-list .fn pre") == entry["code"].strip()
-    assert pg.locator("#fn-list .fn pre *").count() == 0
-    ctx.close()
+def test_the_list_has_no_code_and_points_at_each_functions_lines(tmp_path):
+    """docs/functions.json, the site's list: every rebuilt function, none of their code (that stays on GitHub), and
+    for each the file and lines its block takes in the generated sources, which is where the site links."""
+    d = tmp_path / "site"
+    d.mkdir()
+    put_list(d, REG)
+    data = json.loads((d / "functions.json").read_text(encoding="utf-8"))
+    assert set(data["entries"]) == set(REG["entries"])
+    assert not any("code" in e or "match" in e for e in data["entries"].values())
+    gen = tmp_path / "site-generated"
+    for key, e in list(data["entries"].items())[:40]:
+        lines = (gen / e["file"]).read_text(encoding="utf-8").split("\n")
+        first, last = e["lines"]
+        block = lines[first - 1:last]
+        assert block[0].startswith("// =====") and block[1] == f"// [VERIFIED] {REG['entries'][key]['symbol']} ({e['va']}, {e['size']} B)"
+        assert block[-1].strip() == REG["entries"][key]["code"].strip().split("\n")[-1].strip()
+    sym = next(e for e in data["entries"].values() if e["symbol"] == "CollisionBehaviourTypeGroup::vfunc_00")
+    assert sym["refs"] == ["DAT_004191A0"]                                    # what its code uses, not itself
+    assert len((d / "functions.json").read_bytes()) < len((FIX / "verified_registry.json").read_bytes())
 
 
 def test_mobile_layout(site, browser):
@@ -232,8 +249,8 @@ def test_falls_back_when_data_folder_is_missing(tmp_path, browser):
     copy_docs(page_dir, ("index.html",), headers=False)
     data_dir = tmp_path / "data_src"
     data_dir.mkdir()
-    for f in ("progress.json", "verified_registry.json"):
-        shutil.copy2(FIX / f, data_dir / f)
+    shutil.copy2(FIX / "progress.json", data_dir / "progress.json")
+    put_list(data_dir, REG)
     srv_page, page_url = serve(page_dir, SpaFallback)          # data/ answers with HTML + 200
     srv_data, data_url = serve(data_dir, Cors)
     local = page_url.replace("127.0.0.1", "localhost")
@@ -269,8 +286,8 @@ def test_live_reports_and_empty_start(tmp_path, browser):
     d = tmp_path / "site"
     (d / "data").mkdir(parents=True)
     copy_docs(d, ("index.html",))
-    for f in ("progress.json", "verified_registry.json"):
-        shutil.copy2(ROOT / "reports" / f, d / "data" / f)
+    shutil.copy2(ROOT / "reports" / "progress.json", d / "data" / "progress.json")
+    shutil.copy2(ROOT / "docs" / "functions.json", d / "functions.json")          # the committed list
     srv, url = serve(d)
     try:
         ctx, pg = open_page(browser, url)
@@ -543,7 +560,7 @@ def test_good_first_functions_on_the_site(tmp_path, browser):
                                   {"id": "pc_006DE000", "bin": "pc", "va": "PC 0x006DE000", "symbol": "Obj::vfunc_02", "size": 6,
                                    "why": "the game's class information names it", "kind": "named"}])
     (d / "data" / "progress.json").write_text(json.dumps(prog), encoding="utf-8")
-    shutil.copy2(FIX / "verified_registry.json", d / "data" / "verified_registry.json")
+    put_list(d, REG)
     srv, url = serve(d)
     try:
         ctx, pg = open_page(browser, url)
@@ -575,7 +592,7 @@ def test_matched_over_time_chart(tmp_path, browser):
     for i, (b, day) in enumerate([("xb", 1), ("xb", 2), ("pc", 2), ("ps2", 3), ("xb", 3), ("proto", 1)]):
         reg["entries"][f"{b}:0x{i:08X}"] = {"bin": b, "va": f"0x{i:08X}", "size": 8, "symbol": f"sub_{i:08X}",
                                              "code": "void f() {}", "flags": "/O2", "verified_at": f"2026-11-0{day} 12:00:00"}
-    (d / "data" / "verified_registry.json").write_text(json.dumps(reg), encoding="utf-8")
+    put_list(d, reg)
     (d / "data" / "progress.json").write_text(json.dumps(PROG), encoding="utf-8")
     srv, url = serve(d)
     try:
@@ -602,8 +619,8 @@ def test_matched_over_time_chart(tmp_path, browser):
 
 
 def test_function_pages(site, browser):
-    """Each rebuilt function has its own page: its C++ tidied for reading (or exactly as verified), what it
-    uses, its neighbours, and a link from the main page's list."""
+    """Each rebuilt function has its own page: what's known about it, a link to its C++ on GitHub (its exact lines),
+    what it uses, its neighbours, and a link from the main page's list."""
     _, url = site
     ctx, pg = open_page(browser, url)
     pg.wait_for_selector("#fn-list .fn")
@@ -617,11 +634,10 @@ def test_function_pages(site, browser):
     assert pg.title().startswith("CollisionBehaviourTypeGroup::vfunc_00 (Xbox)")
     facts = dict(pg.eval_on_selector_all("#facts div", "ds => ds.map(d => [d.querySelector('dt').textContent, d.querySelector('dd').textContent])"))
     assert facts["Address"] == "0x000123B0" and facts["Size"] == "6 bytes" and facts["Version"] == "Xbox (default.xbe)"
-    lines = pg.eval_on_selector_all("#code tr td:last-child", "ts => ts.map(t => t.textContent)")
-    assert lines == ['extern "C" char DAT_004191A0;', 'void* __cdecl sub_000123B0(void) {', '    return &DAT_004191A0;', '}']
-    assert pg.get_attribute("#view-tidy", "aria-pressed") == "true"
-    pg.click("#view-exact")
-    assert pg.locator("#code tr").count() == 1 and "Exactly the text" in pg.text_content("#view-note")
+    link = pg.get_attribute("#code-link", "href")
+    assert re.match(r"^https://github\.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/xbox/\w+/CollisionBehaviourTypeGroup\.cpp#L\d+-L\d+$", link), link
+    assert re.match(r"^In reconstructed_src/xbox/\w+/CollisionBehaviourTypeGroup\.cpp, lines \d+\u2013\d+\.$", pg.text_content("#code-where"))
+    assert pg.locator("#code").count() == 0                                  # no code on the site
     assert pg.text_content("#uses li code") == "DAT_004191A0"
     nxt = pg.get_attribute("#pager a.next", "href")
     assert nxt.startswith("function.html?f=xb%3A")
@@ -645,7 +661,7 @@ def test_what_it_does_on_the_site(tmp_path, browser):
     (d / "data").mkdir()
     reg = json.loads(json.dumps(REG))
     reg["entries"]["xb:0x000123B0"].update(what="Says which collision group <b>this</b> is", what_by="Alice")
-    (d / "data" / "verified_registry.json").write_text(json.dumps(reg), encoding="utf-8")
+    put_list(d, reg)
     shutil.copy2(FIX / "progress.json", d / "data" / "progress.json")
     srv, url = serve(d)
     try:

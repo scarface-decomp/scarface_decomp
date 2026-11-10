@@ -2,8 +2,11 @@
 (function () {
   'use strict';
   var REPO = 'scarface-decomp/scarface_decomp', BRANCH = 'main';
-  var RAW = 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/reports/';
-  var SOURCES = ['data/', RAW];
+  var RAW = 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/';
+  var SOURCES = ['data/', RAW + 'reports/'];
+  // The list of rebuilt functions (portal/tools/registry_outputs.py): beside this page, or in the repository's docs/.
+  // It has no code; each function links to its own lines on GitHub.
+  var SITE = ['', RAW + 'docs/'];
   // ps2pause, ps2exotics, ...: the PS2 program's code overlays (portal/tools/ps2_overlay.py)
   var BIN = { xb: 'Xbox', pc: 'PC 1.00.2', proto: 'Xbox prototype (April 2006)', ps2: 'PS2',
               ps2pause: 'PS2 pause menu', ps2exotics: 'PS2 exotics shop', ps2modals: 'PS2 business screens',
@@ -20,11 +23,11 @@
     if (cls) e.className = cls;
     return e;
   }
-  function getJson(name) {
-    var i = 0;
+  function getJson(name, sources) {
+    var list = sources || SOURCES, i = 0;
     function next() {
-      if (i >= SOURCES.length) return Promise.reject(new Error(name + ' not found'));
-      var url = SOURCES[i++] + name;
+      if (i >= list.length) return Promise.reject(new Error(name + ' not found'));
+      var url = list[i++] + name;
       return fetch(url, { cache: 'no-cache' }).then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.text();
@@ -34,111 +37,8 @@
   }
   function pageUrl(key) { return 'function.html?f=' + encodeURIComponent(key); }
 
-  // ------------------------------------------------------------------ the C++, coloured
-  var KEYWORDS = ('alignas alignof asm auto break case catch class const const_cast constexpr continue default delete do ' +
-    'dynamic_cast else enum explicit export extern false for friend goto if inline mutable namespace new noexcept nullptr ' +
-    'operator private protected public register reinterpret_cast return sizeof static static_cast struct switch template this ' +
-    'throw true try typedef typeid typename union using virtual volatile while __cdecl __stdcall __fastcall __thiscall').split(' ');
-  var TYPES = ('void bool char short int long float double signed unsigned wchar_t size_t int8_t int16_t int32_t int64_t ' +
-    'uint8_t uint16_t uint32_t uint64_t BYTE WORD DWORD BOOL').split(' ');
-  var KW = {}, TY = {};
-  KEYWORDS.forEach(function (k) { KW[k] = 1; });
-  TYPES.forEach(function (k) { TY[k] = 1; });
-  var TOKEN = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*')|(^[ \t]*#[^\n]*)|(\b0x[0-9A-Fa-f]+[uUlL]*\b|\b\d+(?:\.\d+)?[fFuUlL]*\b)|([A-Za-z_]\w*)/gm;
+  // Names made from an address: another function or a global (the same pattern as registry_outputs.py).
   var ADDRESS_NAME = /^(?:sub|func|FUN|DAT|D|PTR|LAB|thunk)_[0-9A-Fa-f]{6,8}$/;
-
-  // Split the code into lines of coloured pieces (all text, never HTML); names that are other functions or
-  // data are collected, and linked when they are rebuilt too.
-  function colour(code, linkFor) {
-    var lines = [[]], used = {};
-    function push(text, cls, href, title) {
-      var parts = text.split('\n');
-      parts.forEach(function (p, i) {
-        if (i) lines.push([]);
-        if (p) lines[lines.length - 1].push({ t: p, c: cls, href: href, title: title });
-      });
-    }
-    var last = 0, m;
-    TOKEN.lastIndex = 0;
-    while ((m = TOKEN.exec(code))) {
-      if (m.index > last) push(code.slice(last, m.index));
-      var t = m[0];
-      if (m[1]) push(t, 'tk-com');
-      else if (m[2]) push(t, 'tk-str');
-      else if (m[3]) push(t, 'tk-pre');
-      else if (m[4]) push(t, 'tk-num');
-      else if (KW[t]) push(t, 'tk-kw');
-      else if (TY[t]) push(t, 'tk-type');
-      else {
-        var ref = linkFor(t);
-        if (ref) { used[t] = ref; push(t, 'tk-ref', ref.href, ref.title); }
-        else push(t);
-      }
-      last = TOKEN.lastIndex;
-    }
-    if (last < code.length) push(code.slice(last));
-    return { lines: lines, used: used };
-  }
-
-  // ------------------------------------------------------------------ tidied for reading
-  // Only the spacing changes: a line break after each statement and around each block, and indents by
-  // depth. Strings, comments and everything else stay as they are, and the result is checked to have the
-  // very same pieces in the same order (spacing never changes what C++ compiles to). Code that is laid out
-  // already is left alone.
-  var PIECE = /(\s*)(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'|[A-Za-z0-9_$.]+|\S)/g;
-  function pieces(code) {
-    var out = [], m, line = true;
-    PIECE.lastIndex = 0;
-    while ((m = PIECE.exec(code))) {
-      var ws = m[1], t = m[2];
-      if (t === '#' && (line || /\n/.test(ws) || !out.length)) {          // a preprocessor line, whole
-        var end = code.indexOf('\n', PIECE.lastIndex);
-        end = end < 0 ? code.length : end;
-        t += code.slice(PIECE.lastIndex, end);
-        PIECE.lastIndex = end;
-      }
-      out.push({ ws: ws, t: t });
-      line = false;
-    }
-    return out;
-  }
-  function needsTidy(code) {
-    return code.split('\n').some(function (l) { return l.length > 100 || /\{[^}\n]*;[^\n]*\}/.test(l); });
-  }
-  function tidy(code) {
-    var ps = pieces(code), out = '', depth = 0, paren = 0, braces = [], br = 0, prev = '';
-    ps.forEach(function (p, i) {
-      var t = p.t, sep, closed = false;
-      var blank = (p.ws.match(/\n/g) || []).length > 1;
-      if (!i) sep = '';
-      else if (br) sep = br > 1 || blank ? '\n\n' : '\n';
-      else sep = /\n/.test(p.ws) ? (blank ? '\n\n' : '\n') : (p.ws ? ' ' : '');
-      if (t === '}') {
-        closed = braces.pop();
-        if (closed) { depth = Math.max(0, depth - 1); if (!/\n/.test(sep)) sep = '\n'; }
-      }
-      if (prev === '}' && /^(else|while|;|,|\))$/.test(t)) sep = p.ws ? ' ' : '';
-      if (i && prev !== '{' && /^\/[\/*]/.test(t) && !/\n/.test(p.ws)) sep = ' ';   // a comment stays on its line
-      if (/\n/.test(sep)) sep += new Array(depth + 1).join('    ');
-      out += sep + t;
-      br = 0;
-      if (t === '(' || t === '[') paren++;
-      else if (t === ')' || t === ']') paren = Math.max(0, paren - 1);
-      else if (t === '{') {
-        var inline = paren > 0 || /^(=|,|\(|return|\{)$/.test(prev);
-        braces.push(!inline);
-        if (!inline) { depth++; br = 1; }
-      } else if (t === '}') {
-        if (closed) br = depth === 0 ? 2 : 1;               // a blank line after a whole function
-      } else if (t === ';' && paren === 0) br = 1;
-      if (t.slice(0, 2) === '//' || t.charAt(0) === '#') br = Math.max(br, 1);   // these end at the line's end
-      prev = t;
-    });
-    // the check: the same pieces, in the same order
-    var a = ps.map(function (p) { return p.t; }), b = pieces(out).map(function (p) { return p.t; });
-    if (a.length !== b.length || a.some(function (t, i) { return t !== b[i]; })) return null;
-    return out;
-  }
 
   function render(reg, key, names) {
     var entries = reg.entries || {};
@@ -209,55 +109,18 @@
     if (src) fact('In the repository', src, 'https://github.com/' + REPO + '/blob/' + BRANCH + '/' + src.split('/').map(encodeURIComponent).join('/'));
     if (e.note) { $('note').hidden = false; $('note-text').textContent = ' ' + e.note; }
 
-    // the code: tidied for reading when it is crammed together, or exactly as it was verified
-    var exact = String(e.code || '').replace(/\r\n/g, '\n').replace(/\s+$/, '');
-    var tidied = needsTidy(exact) ? tidy(exact) : null;
-    var file = (sym.replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '') || 'function') + '_' + String(e.va).replace(/^.*\s|^0x/gi, '') + '.cpp';
-    var shown = '', blobUrl = '';
-    var c = colour(exact, linkFor);
-    function draw(useTidy) {
-      shown = useTidy && tidied ? tidied : exact;
-      var lines = colour(shown, linkFor).lines, table = el('table');
-      lines.forEach(function (line, i) {
-        var tr = el('tr'), n = el('td', String(i + 1), 'n'), td = el('td');
-        n.setAttribute('aria-hidden', 'true');
-        line.forEach(function (p) {
-          var node;
-          if (p.href) { node = el('a', p.t, p.c); node.href = p.href; }
-          else if (p.c) node = el('span', p.t, p.c);
-          else node = document.createTextNode(p.t);
-          if (p.title && node.setAttribute) node.setAttribute('title', p.title);
-          td.appendChild(node);
-        });
-        tr.appendChild(n); tr.appendChild(td); table.appendChild(tr);
-      });
-      $('code').textContent = '';
-      $('code').appendChild(table);
-      $('view-tidy').setAttribute('aria-pressed', shown === tidied ? 'true' : 'false');
-      $('view-exact').setAttribute('aria-pressed', shown === tidied ? 'false' : 'true');
-      $('view-note').textContent = shown === tidied
-        ? 'Tidied for reading: only the line breaks and indents differ from the text that was verified, so it compiles to the same bytes.'
-        : 'Exactly the text that was compiled and verified.';
-      if (blobUrl) URL.revokeObjectURL(blobUrl);
-      blobUrl = URL.createObjectURL(new Blob([shown + '\n'], { type: 'text/plain' }));
-      $('download').href = blobUrl;
-      $('download').setAttribute('download', file);
-    }
-    $('view-tidy').parentNode.hidden = !tidied;
-    $('view-tidy').addEventListener('click', function () { draw(true); });
-    $('view-exact').addEventListener('click', function () { draw(false); });
-    draw(true);
-    $('copy').addEventListener('click', function () {
-      var b = $('copy');
-      if (navigator.clipboard) navigator.clipboard.writeText(shown + '\n').then(function () {
-        b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1400);
-      }, function () {});
-    });
+    // the code: on GitHub, at the lines of its block in its class's file
+    var path = sourcePath(e);
+    var url = 'https://github.com/' + REPO + '/blob/' + BRANCH + '/' + path.split('/').map(encodeURIComponent).join('/') +
+      (e.lines && e.lines.length === 2 ? '#L' + e.lines[0] + '-L' + e.lines[1] : '');
+    $('code-link').href = url;
+    $('code-where').textContent = 'In ' + path + (e.lines ? ', lines ' + e.lines[0] + '\u2013' + e.lines[1] : '') + '.';
 
     // what it uses, and what uses it
     var uses = $('uses');
-    Object.keys(c.used).sort().forEach(function (word) {
-      var r = c.used[word], li = el('li'), cd = el('code');
+    (e.refs || []).forEach(function (word) {
+      var r = linkFor(word), li = el('li'), cd = el('code');
+      if (!r) return;
       if (r.key) { var a = el('a', word); a.href = r.href; cd.appendChild(a); li.appendChild(cd); li.appendChild(el('span', 'rebuilt', 's')); }
       else {
         cd.textContent = word; li.appendChild(cd); li.appendChild(el('span', 'not rebuilt yet', 's'));
@@ -273,8 +136,8 @@
     Object.keys(entries).forEach(function (k) {
       var x = entries[k];
       if (k === key || x.bin !== e.bin) return;
-      var text = String(x.code || '');
-      if (own.some(function (n) { return n.length >= 8 && new RegExp('\\b' + n.replace(/[^\w]/g, '\\$&') + '\\b').test(text); })) {
+      var refs = x.refs || [];
+      if (own.some(function (n) { return (n.length >= 8 || n.indexOf('::') > 0) && refs.indexOf(n) >= 0; })) {
         var li = el('li'), cd = el('code'), a = el('a', x.symbol);
         a.href = pageUrl(k); cd.appendChild(a); li.appendChild(cd); li.appendChild(el('span', x.va, 's'));
         used.appendChild(li);
@@ -301,6 +164,7 @@
 
   // the file it is in (the same as the main page's list)
   function sourcePath(e) {
+    if (e.file) return e.file;
     var files = { pc: 'Original_Binary_Order_PC_1002.cpp', xb: 'Original_Binary_Order_Xbox.cpp',
                   proto: 'Original_Binary_Order_Proto.cpp', ps2: 'Original_Binary_Order_PS2.cpp',
                   ps2pause: 'Original_Binary_Order_PS2_PauseMenu.cpp', ps2exotics: 'Original_Binary_Order_PS2_Exotics.cpp',
@@ -311,7 +175,7 @@
   }
 
   var key = new URLSearchParams(location.search).get('f') || '';
-  getJson('verified_registry.json').then(function (reg) {
+  getJson('functions.json', SITE).then(function (reg) {
     return getJson('names.json').then(function (n) { return [reg, (n && n.names) || {}]; }, function () { return [reg, {}]; });
   }).then(function (r) { render(r[0], key, r[1]); }, function () {
     $('loading').textContent = 'Couldn\'t load the list of rebuilt functions. Try again in a moment.';

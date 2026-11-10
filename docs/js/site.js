@@ -3,11 +3,12 @@
   'use strict';
 
   // Where the numbers come from, in order:
-  //   1. data/ next to this page: the Cloudflare Pages build copies reports/progress.json and
-  //      reports/verified_registry.json there on every push;
+  //   1. data/ next to this page: the Cloudflare Pages build copies reports/progress.json there on every push;
   //   2. the repository itself on raw.githubusercontent.com (GitHub Pages, or if 1 is missing).
-  // On a *.github.io address the repository is taken from the address. For local testing only,
-  // ?data=<base url> is honoured on localhost and replaces both.
+  // The list of rebuilt functions is functions.json beside this page (made by portal/tools/registry_outputs.py),
+  // or the repository's docs/ folder. It has no code: each function links to its lines on GitHub, so the page
+  // stays quick however many functions are rebuilt. On a *.github.io address the repository is taken from the
+  // address. For local testing only, ?data=<base url> is honoured on localhost and replaces all of them.
   var CFG = (function () {
     var owner = 'scarface-decomp', repo = 'scarface_decomp', branch = 'main';
     var host = location.hostname;
@@ -16,10 +17,11 @@
       var seg = location.pathname.split('/').filter(Boolean)[0];
       if (seg) repo = seg;
     }
-    var sources = ['data/', 'https://raw.githubusercontent.com/' + owner + '/' + repo + '/' + branch + '/reports/'];
+    var raw = 'https://raw.githubusercontent.com/' + owner + '/' + repo + '/' + branch + '/';
+    var sources = ['data/', raw + 'reports/'], site = ['', raw + 'docs/'];
     var q = new URLSearchParams(location.search).get('data');
-    if (host === 'localhost' && q) sources = [q.replace(/\/?$/, '/')];
-    return { owner: owner, repo: repo, branch: branch, sources: sources, repoUrl: 'https://github.com/' + owner + '/' + repo };
+    if (host === 'localhost' && q) sources = site = [q.replace(/\/?$/, '/')];
+    return { owner: owner, repo: repo, branch: branch, sources: sources, site: site, repoUrl: 'https://github.com/' + owner + '/' + repo };
   })();
 
   var $ = function (id) { return document.getElementById(id); };
@@ -52,15 +54,15 @@
     });
   }
 
-  // Try each source in turn; remember which one worked so both files come from the same place.
+  // Try each source in turn.
   var activeSource = null;
-  function getJson(name) {
-    var list = activeSource ? [activeSource] : CFG.sources;
+  function getJson(name, sources) {
+    var list = sources || CFG.sources;
     var i = 0;
     function next(err) {
       if (i >= list.length) return Promise.reject(err || new Error(name + ' not found'));
       var base = list[i++];
-      return fetchJson(base + name).then(function (data) { activeSource = base; return data; }, next);
+      return fetchJson(base + name).then(function (data) { if (!sources) activeSource = base; return data; }, next);
     }
     return next();
   }
@@ -386,10 +388,17 @@
   var filtered = [];
 
   function sourcePath(e) {
+    if (e.file) return e.file;
     if (!e.source || e.source === 'portal') {
       return 'reconstructed_src/' + (SOURCE_FILE[e.bin] || 'Original_Binary_Order_Proto.cpp');
     }
     return 'reconstructed_src/' + e.source;
+  }
+
+  // The function's own lines on GitHub (its class's file, at the lines of its block).
+  function codeUrl(e) {
+    var u = CFG.repoUrl + '/blob/' + CFG.branch + '/' + sourcePath(e).split('/').map(encodeURIComponent).join('/');
+    return e.lines && e.lines.length === 2 ? u + '#L' + e.lines[0] + '-L' + e.lines[1] : u;
   }
 
   function buildList(reg) {
@@ -485,27 +494,20 @@
     if (e.tool_used) metaItem(meta, 'Tool', e.tool_used);
     if (e.note) metaItem(meta, 'Note', e.note);
     body.appendChild(meta);
-    var box = document.createElement('div'); box.className = 'code-box';
-    var pre = document.createElement('pre'); pre.tabIndex = 0; pre.textContent = (e.code || '').trim();
-    var copy = document.createElement('button'); copy.type = 'button'; copy.className = 'copy'; copy.textContent = 'Copy';
-    copy.addEventListener('click', function () {
-      var done = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1400); };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(pre.textContent).then(done, function () {});
-    });
-    box.appendChild(pre); box.appendChild(copy);
-    body.appendChild(box);
     var links = document.createElement('div'); links.className = 'fn-links';
     var a = document.createElement('a');
-    a.href = CFG.repoUrl + '/blob/' + CFG.branch + '/' + sourcePath(e).split('/').map(encodeURIComponent).join('/');
+    a.href = codeUrl(e);
+    a.className = 'code-link';
     a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.textContent = (e.excerpt ? 'Part of ' : 'Open ') + sourcePath(e) + ' on GitHub';
+    a.textContent = 'Read its C++ on GitHub';
+    a.title = sourcePath(e) + (e.lines ? ', lines ' + e.lines[0] + '\u2013' + e.lines[1] : '');
     var own = document.createElement('a');
     own.href = 'function.html?f=' + encodeURIComponent(e.key);
     own.className = 'own';
     own.textContent = 'Its own page';
-    links.appendChild(own);
-    links.appendChild(document.createTextNode(' · '));
     links.appendChild(a);
+    links.appendChild(document.createTextNode(' · '));
+    links.appendChild(own);
     body.appendChild(links);
   }
 
@@ -554,11 +556,13 @@
 
   // ------------------------------------------------------------------ load
   applyRepoLinks();
-  function showUnavailable(err) {
+  // haveNumbers: the scoreboard loaded, only the list of functions didn't.
+  function showUnavailable(err, haveNumbers) {
     var status = $('data-status');
     status.className = 'status-line err';
-    status.textContent = 'The latest numbers could not be loaded (' + (err && err.message ? err.message : 'network error') + '). Try again in a minute.';
-    $('claim').textContent = 'The world is yours.';
+    status.textContent = (haveNumbers ? 'The list of rebuilt functions' : 'The latest numbers') + ' could not be loaded (' +
+      (err && err.message ? err.message : 'network error') + '). Try again in a minute.';
+    if (!haveNumbers) $('claim').textContent = 'The world is yours.';
     var list = $('fn-list');
     list.textContent = '';
     var em = document.createElement('div'); em.className = 'empty'; em.textContent = 'The function list could not be loaded right now.';
@@ -601,17 +605,22 @@
     }
   })();
 
-  getJson('verified_registry.json').then(function (reg) {
-    return getJson('progress.json').then(
-      function (prog) { return { reg: reg, prog: prog }; },
-      function () { return { reg: reg, prog: null }; });
-  }).then(function (d) {
-    renderProgress(d.prog, d.reg);
-    renderHistory(d.reg);
-    renderGoodFirst(d.prog);
-    buildList(d.reg);
-    $('data-status').textContent = 'Live numbers from ' + CFG.owner + '/' + CFG.repo +
-      (activeSource === 'data/' ? ' (latest deploy)' : ' on GitHub') +
-      (d.prog ? '' : '; the summary file is missing, so only the function list is shown') + '.';
-  }, showUnavailable);
+  // The scoreboard first (a small file), then the list of rebuilt functions, which doesn't hold it up.
+  var progress = getJson('progress.json').then(function (prog) {
+    renderProgress(prog, null);
+    renderGoodFirst(prog);
+    return prog;
+  }, function () { return null; });
+  getJson('functions.json', CFG.site).then(function (reg) {
+    return progress.then(function (prog) {
+      if (!prog) renderProgress(null, reg);
+      renderHistory(reg);
+      buildList(reg);
+      $('data-status').textContent = 'Live numbers from ' + CFG.owner + '/' + CFG.repo +
+        (!prog || activeSource === 'data/' ? ' (latest deploy)' : ' on GitHub') +
+        (prog ? '' : '; the summary file is missing, so only the function list is shown') + '.';
+    });
+  }, function (err) {
+    progress.then(function (prog) { showUnavailable(err, !!prog); });
+  });
 })();

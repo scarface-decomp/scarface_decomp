@@ -269,10 +269,9 @@
     .fn.open .fn-body { display: block; }
     .meta { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 0.86rem; color: var(--grey); margin-bottom: 10px; }
     .meta b { color: var(--white); font-weight: 600; }
-    .code-box { position: relative; }
-    .copy { position: absolute; top: 8px; right: 8px; font: 600 0.78rem var(--sans); padding: 5px 12px 3px; border-radius: 2px; background: var(--black); border: 1px solid var(--line); color: var(--white); cursor: pointer; }
-    .copy:hover { border-color: var(--red); color: var(--white); }
-    .fn-links { margin-top: 10px; font-size: 0.9rem; overflow-wrap: anywhere; }
+    .fn-links { margin-top: 12px; font-size: 0.9rem; overflow-wrap: anywhere; }
+    .fn-links .code-link { display: inline-block; font-weight: 600; padding: 6px 14px 4px; border: 1px solid var(--blood); border-radius: 2px; text-decoration: none; color: var(--white); }
+    .fn-links .code-link:hover, .fn-links .code-link:focus-visible { background: var(--blood); }
     .fn-what { font-size: 1rem; margin-bottom: 8px; }
     .more { display: flex; justify-content: center; margin-top: 24px; }
     .empty { padding: 34px 6px; color: var(--grey); text-align: center; }
@@ -676,7 +675,7 @@
     <section id="functions" aria-labelledby="h-functions">
       <div class="wrap">
         <h2 id="h-functions">The code so far</h2>
-        <p class="intro">Every rebuilt function and its C++. Select one to read it.</p>
+        <p class="intro">Every rebuilt function. Select one to see who rebuilt it and what it does, and to read its C++ on GitHub.</p>
         <div class="toolbar">
           <label class="sr-only" for="q">Search functions</label>
           <input id="q" type="search" placeholder="Search by name, address or file, e.g. DriveThread" autocomplete="off" />

@@ -1402,8 +1402,10 @@ def ai_call(cfg: dict) -> dict:
 # Git sync (maintainers only)
 # =========================================================================== #
 
+# docs/feed.xml and docs/functions.json are made from the registry too (registry_outputs.py): the website's feed
+# and its list of rebuilt functions, so they go up with every sync.
 GIT_PATHS = ["reconstructed_src", "reports/verified_registry.json", "reports/reverify_report.md",
-             "reports/decomp_audit_log.json", "reports/progress.json", "README.md"]
+             "reports/decomp_audit_log.json", "reports/progress.json", "README.md", "docs/feed.xml", "docs/functions.json"]
 
 
 NOT_A_CLONE = ("This folder isn't connected to GitHub: it was downloaded as a ZIP, so it has no .git folder. "
