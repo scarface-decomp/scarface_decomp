@@ -190,3 +190,65 @@ def test_submissions_carry_only_new_matches_and_imports_check_each_one(S, monkey
     assert e["verified_by"] == "Cy" and e["tool_used"] == "AI" and e["imported_by"] == "Founder" and c2["status"] == "VERIFIED"
     assert d2["status"] == "UNCLAIMED"
     assert S.import_submission({"entries": {}}, "Founder")["error"]          # not a submission file
+
+
+# --------------------------------------------------------------------------- "what it does"
+
+@pytest.fixture
+def described(S, monkeypatch):
+    """A registry with one rebuilt function and the task list around it; nothing is written to disk."""
+    reg = {"entries": {"xb:0x00011000": {"bin": "xb", "va": "0x00011000", "size": 6, "symbol": "Car::Lights",
+                                         "flags": "/O2", "verified_by": "Alice", "code": "void f() {}"}}}
+    tasks = [{"id": "xb_00011000", "bin": "xb", "fva_int": 0x11000, "va": "0x00011000", "size": 6, "symbol": "Car::Lights",
+              "status": "VERIFIED", "flags": "/O2"},
+             {"id": "xb_00011010", "bin": "xb", "fva_int": 0x11010, "va": "0x00011010", "size": 8, "symbol": "sub_00011010",
+              "status": "UNCLAIMED", "flags": "/O2"}]
+    monkeypatch.setattr(S, "REGISTRY", reg)
+    monkeypatch.setattr(S, "ALL_TASKS", tasks)
+    monkeypatch.setattr(S, "TASK_BY_ID", {t["id"]: t for t in tasks})
+    monkeypatch.setattr(S, "save_registry", lambda: None)
+    return reg, tasks
+
+
+def test_what_is_one_short_line(S):
+    assert S.clean_what("  Turns the\n headlights\x00 on  ") == "Turns the headlights on"
+    assert len(S.clean_what("x" * 500)) == S.WHAT_MAX
+    assert S.clean_what(None) == "" and S.clean_what(42) == ""
+
+
+def test_describing_a_rebuilt_function(S, described):
+    reg, tasks = described
+    assert "Only rebuilt functions" in S.describe_verified(tasks[1], "Something", "Bob")
+    assert S.describe_verified(tasks[0], "Turns the car's lights on", "Bob") is None
+    e = reg["entries"]["xb:0x00011000"]
+    assert e["what"] == "Turns the car's lights on" and e["what_by"] == "Bob"
+    assert S.live_task(tasks[0])["what"] == "Turns the car's lights on"
+    assert S.describe_verified(tasks[0], "  ", "Bob") is None and "what" not in e         # cleared
+
+
+def test_descriptions_travel_in_submissions(S, described, monkeypatch):
+    reg, tasks = described
+    monkeypatch.setattr(S, "published_keys", lambda base=None: frozenset(reg["entries"]))
+    monkeypatch.setitem(S._PUBLISHED, "what", {"xb:0x00011000": ""})
+    S.describe_verified(tasks[0], "Turns the car's lights on", "Bob")
+    bundle = S.make_submission("Bob")
+    assert bundle["count"] == 1 and bundle["entries"] == {}
+    assert bundle["descriptions"] == {"xb:0x00011000": {"what": "Turns the car's lights on", "what_by": "Bob"}}
+    # a maintainer imports it elsewhere: the text only, nothing to compile
+    reg["entries"]["xb:0x00011000"].pop("what")
+    monkeypatch.setattr(S, "append_audit", lambda *a: None)
+    st = S.import_submission(dict(bundle, descriptions={"xb:0x00011000": {"what": "Turns the car's lights on\n", "what_by": "Bob"},
+                                                        "xb:0x0FFFFFFF": {"what": "nobody", "what_by": "Eve"}}), "Maint")
+    assert st["described"] == 1 and not st["error"]
+    assert reg["entries"]["xb:0x00011000"]["what"] == "Turns the car's lights on"
+    assert reg["entries"]["xb:0x00011000"]["what_by"] == "Bob"
+
+
+def test_what_reaches_the_generated_files_and_the_feed(S):
+    import registry_outputs as RO
+    e = {"bin": "xb", "va": "0x00011000", "size": 6, "symbol": "Car::Lights", "flags": "/O2", "verified_by": "Alice",
+         "code": "void f() {}", "what": "Turns the car's lights on", "verified_at": "2026-11-10 10:00:00"}
+    assert "// What it does: Turns the car's lights on\n" in RO._block("xb:0x00011000", e)
+    assert "What it does" not in RO._block("xb:0x00011000", dict(e, what=""))
+    assert "<summary>Turns the car&apos;s lights on 0x00011000" in RO.feed_xml({"entries": {"xb:0x00011000": e}}) or \
+        "<summary>Turns the car's lights on 0x00011000" in RO.feed_xml({"entries": {"xb:0x00011000": e}})

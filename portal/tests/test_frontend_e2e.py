@@ -166,6 +166,28 @@ def test_exact_match_promotes(page):
     assert "VERIFIED" in page.text_content(".queue-item.selected .status-pill")
 
 
+def test_what_it_does(page):
+    """A one-line plain-English description goes with the match, and a rebuilt function's can be changed."""
+    sign_in(page)
+    page.click("#btn-step1-claim")
+    page.wait_for_function("document.getElementById('btn-step1-claim').textContent.includes('Claimed by You')")
+    assert page.is_hidden("#wb-what-save") and "when it verifies" in page.text_content("#wb-what-note")
+    page.fill("#wb-what", "  Turns the   headlights on ")
+    page.fill("#wb-editor", "void f() { /* MATCH_ALL */ }")
+    page.click("#btn-step3-verify")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('VERIFIED')")
+    assert [c for c in calls("/api/verify")][-1][1]["what"] == "Turns the   headlights on"
+    page.wait_for_function("document.getElementById('wb-what-note').textContent.startsWith('Written by Tester')")
+    assert page.input_value("#wb-what") == "Turns the headlights on"
+    assert page.is_visible("#wb-what-save") and page.is_disabled("#wb-what-save")
+    page.fill("#wb-what", "Turns the car's headlights on or off")
+    assert page.is_enabled("#wb-what-save")
+    page.click("#wb-what-save")
+    page.wait_for_function("document.getElementById('verify-status').textContent.startsWith('Saved.')")
+    assert calls("/api/describe")[-1][1]["what"] == "Turns the car's headlights on or off"
+    assert page.is_disabled("#wb-what-save")
+
+
 def test_switching_with_unsaved_edits_asks_first(page):
     page.fill("#wb-editor", "// unsaved")
     first_title = page.text_content("#wb-title")

@@ -405,6 +405,12 @@
     .wb-title { font-family: var(--mono); font-size: 1rem; font-weight: 600; color: var(--text); word-break: break-all; }
     .wb-meta { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
     .q-why { font-size: 0.76rem; color: var(--green); margin-top: 2px; }
+    .wb-what { margin-top: 8px; max-width: 640px; }
+    .wb-what label { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 3px; }
+    .wb-what-line { display: flex; gap: 8px; }
+    .wb-what-line .input-box { flex: 1; min-width: 0; font-size: 0.86rem; padding: 6px 10px; }
+    .wb-what .hint-small { display: block; margin-top: 3px; }
+    .wb-what [hidden] { display: none !important; }
     .wb-hint { font-size: 0.88rem; color: var(--text-secondary); margin-top: 6px; }
     .wb-chips { display: flex; gap: 8px; flex-wrap: wrap; }
     .chip { border: 1px solid var(--border); padding: 5px 10px 3px; border-radius: 2px; font-size: 0.8rem; white-space: nowrap; }
@@ -1034,6 +1040,15 @@
                   <div id="wb-title" class="wb-title">Loading function...</div>
                   <div id="wb-meta" class="wb-meta"></div>
                   <div id="wb-name" class="wb-meta"></div>
+                  <div class="wb-what" id="wb-what-row">
+                    <label for="wb-what">What it does, in plain English (one line)</label>
+                    <div class="wb-what-line">
+                      <input id="wb-what" class="input-box" maxlength="160" autocomplete="off"
+                             placeholder="e.g. Turns the car's headlights on or off" oninput="whatDraft()" />
+                      <button type="button" class="btn-sm" id="wb-what-save" onclick="saveWhat()" hidden>Save</button>
+                    </div>
+                    <span class="hint-small" id="wb-what-note"></span>
+                  </div>
                   <div id="wb-hint" class="wb-hint"></div>
                 </div>
                 <div class="wb-chips">
@@ -2437,6 +2452,7 @@
       t.compiler_label ? 'Compiler: ' + t.compiler_label : (t.flags ? 'Compiler Flags: ' + t.flags : '')]
       .filter(Boolean).join(' • ');
     renderKnownName(t);
+    renderWhat(t);
     $('wb-hint').textContent = [t.hint || '', lookalikeNote(t)].filter(Boolean).join(' ');
     $('wb-target-hex').textContent = t.target_hex || '';
     const disLines = Array.isArray(t.disasm_lines) ? t.disasm_lines : [];
@@ -2823,7 +2839,8 @@
     try {
       // keep_revision: a hand-made compile of an already verified function may replace its saved text
       // (cleaner names, comments) when it still matches exactly. AI loops never replace it.
-      let data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode }, creds(),
+      const what = (WHAT_DRAFTS[t.id] !== undefined ? WHAT_DRAFTS[t.id] : '').trim();
+      let data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode, what: what }, creds(),
         { tool_used: getToolUsed(), keep_revision: !fromLoop }), ctrl.signal);
       if (data && data.need_browser && data.job && !fromLoop) {
         // PS2: the portal can't call decomp.me itself, so the decomp.me window compiles and this page
@@ -2834,7 +2851,7 @@
         if (!r.success || !r.right_object) {
           data = { ok: false, compiler_error: r.compiler_output || 'The compiler did not produce an object.' };
         } else {
-          data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode, object_b64: r.right_object, slug: r.slug || '' },
+          data = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: cppCode, what: what, object_b64: r.right_object, slug: r.slug || '' },
             creds(), { tool_used: getToolUsed(), keep_revision: !fromLoop }), ctrl.signal);
         }
       }
@@ -2868,6 +2885,11 @@
         const where = (data.saved_to || data.newly_promoted) ? ' Saved on this computer. When you\'re done for now, press Submit your work.' : '';
         let msg;
         if (data.newly_promoted) {
+          delete WHAT_DRAFTS[t.id];
+          if (data.task) {
+            Object.assign(t, { what: data.task.what || '', what_by: data.task.what_by || '', status: data.task.status });
+            if (currentTask && currentTask.id === t.id) renderWhat(t);
+          }
           msg = 'VERIFIED: ' + data.matched_bytes + '/' + data.total_bytes + ' B match exactly.' + where +
             (Number(data.lookalikes_queued) > 0 ? ' Now trying your code on ' + fmtInt(data.lookalikes_queued) + ' look-alike' + (Number(data.lookalikes_queued) === 1 ? '' : 's') + '…' : '');
         } else if (data.revised) {
@@ -3712,6 +3734,45 @@
     }
   }
 
+  /* What a function does, in one plain-English line. For a function being worked on it is kept here and saved
+     with the match; for a rebuilt one, Save stores it (credited to you) and Submit your work sends it on. */
+  const WHAT_DRAFTS = {};
+  function renderWhat(t) {
+    const box = $('wb-what'), note = $('wb-what-note'), save = $('wb-what-save');
+    const verified = t.status === 'VERIFIED';
+    if (document.activeElement !== box || box.dataset.id !== t.id) {
+      box.value = WHAT_DRAFTS[t.id] !== undefined ? WHAT_DRAFTS[t.id] : (t.what || '');
+    }
+    box.dataset.id = t.id;
+    save.hidden = !verified;
+    save.disabled = !verified || box.value.trim() === (t.what || '');
+    note.textContent = verified
+      ? (t.what ? 'Written by ' + (t.what_by || 'whoever rebuilt it') + '. Shown on the function\'s page on the website.' : 'Not described yet: say what it does, then Save.')
+      : 'Saved with your match when it verifies, and shown on the website.';
+  }
+  function whatDraft() {
+    const box = $('wb-what');
+    if (!currentTask || box.dataset.id !== currentTask.id) return;
+    WHAT_DRAFTS[currentTask.id] = box.value;
+    $('wb-what-save').disabled = currentTask.status !== 'VERIFIED' || box.value.trim() === (currentTask.what || '');
+  }
+  async function saveWhat() {
+    const t = currentTask;
+    if (!t) return;
+    if (!session.user) { setStatus('Sign in to describe a function.', 'err'); return; }
+    try {
+      const d = await postJson('/api/describe', Object.assign({ id: t.id, what: $('wb-what').value }, creds()));
+      if (!d.ok) throw new Error(d.error || 'not saved');
+      delete WHAT_DRAFTS[t.id];
+      Object.assign(t, { what: d.task.what || '', what_by: d.task.what_by || '' });
+      renderWhat(t);
+      setStatus('Saved. Submit your work when you\'re done, and it goes to GitHub with your name.', 'ok');
+      refreshSideState();
+    } catch (e) {
+      setStatus('Could not save the description: ' + e.message, 'err');
+    }
+  }
+
   /* Names people worked out for functions that aren't matched yet (reports/names.json), and a way to
      suggest one: a GitHub issue with the function filled in, which a maintainer adds to the list. */
   function renderKnownName(t) {
@@ -3822,7 +3883,8 @@
         failed.slice(0, 50).forEach((f) => ul.appendChild(el('li', f.symbol + ': ' + f.reason)));
         parts.push(ul);
       }
-      if (st.added) parts.push('Press Submit your work to send them to GitHub.');
+      if (st.described) parts.push(fmtInt(st.described) + ' description' + (st.described === 1 ? '' : 's') + ' of rebuilt functions added too.');
+      if (st.added || st.described) parts.push('Press Submit your work to send them to GitHub.');
       showDialog('Submission imported', parts);
       refreshSideState();
       loadQueuePage();

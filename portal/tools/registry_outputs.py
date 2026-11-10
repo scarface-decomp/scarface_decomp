@@ -76,10 +76,12 @@ def _block(key: str, e: dict) -> str:
     note = f" | {e['note']}" if e.get("note") else ""
     if e.get("excerpt"):
         note += f" | excerpt from reconstructed_src/{e.get('source', '')}"
+    what = " ".join(str(e.get("what") or "").split())
     return (
         "// ============================================================================\n"
         f"// [VERIFIED] {e['symbol']} ({e['va']}, {e['size']} B)\n"
         f"// By: {by} | Flags: {e.get('flags', '')}{note}\n"
+        + (f"// What it does: {what}\n" if what else "") +
         "// ============================================================================\n"
         f"{(e.get('code') or '').strip()}\n\n"
     )
@@ -238,7 +240,8 @@ def feed_xml(registry: dict) -> str:
         where = BIN_WORD.get(e["bin"], e["bin"])
         size = int(e.get("size", 0))
         title = f"{e['symbol']} ({where}, {size} byte{'' if size == 1 else 's'}) by {who}"
-        summary = f"{e['va']} in the {where} version, matched byte for byte with its original."
+        what = " ".join(str(e.get("what") or "").split())
+        summary = (what + " " if what else "") + f"{e['va']} in the {where} version, matched byte for byte with its original."
         link = f"{SITE}function.html?f={urllib.parse.quote(key, safe='')}"
         out += ["  <entry>",
                 f"    <title>{escape(title)}</title>",

@@ -273,6 +273,7 @@
     .copy { position: absolute; top: 8px; right: 8px; font: 600 0.78rem var(--sans); padding: 5px 12px 3px; border-radius: 2px; background: var(--black); border: 1px solid var(--line); color: var(--white); cursor: pointer; }
     .copy:hover { border-color: var(--red); color: var(--white); }
     .fn-links { margin-top: 10px; font-size: 0.9rem; overflow-wrap: anywhere; }
+    .fn-what { font-size: 1rem; margin-bottom: 8px; }
     .more { display: flex; justify-content: center; margin-top: 24px; }
     .empty { padding: 34px 6px; color: var(--grey); text-align: center; }
 
@@ -1104,7 +1105,7 @@
         var e = reg.entries[k];
         e.key = k;
         e.vaNum = parseInt(e.va, 16) || 0;
-        e.hay = (e.symbol + ' ' + e.va + ' ' + (e.source || '') + ' ' + (e.verified_by || '')).toLowerCase();
+        e.hay = (e.symbol + ' ' + e.va + ' ' + (e.source || '') + ' ' + (e.verified_by || '') + ' ' + (e.what || '')).toLowerCase();
         e.when = e.verified_at || e.reverified_at || '';
         return e;
       });
@@ -1177,6 +1178,11 @@
     }
 
     function fillBody(body, e) {
+      if (e.what) {
+        var what = document.createElement('p'); what.className = 'fn-what';
+        what.textContent = e.what;
+        body.appendChild(what);
+      }
       var meta = document.createElement('div'); meta.className = 'meta';
       metaItem(meta, 'Address', e.va);
       metaItem(meta, 'Size', e.size + ' bytes');

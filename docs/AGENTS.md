@@ -15,7 +15,8 @@ can record a function as verified. Every request that changes something needs th
 | Find work | `GET /api/queue?tier=TIER_1_QUICK&page=1&limit=80` | also `q=` (symbol or address), `sort=SIZE_ASC` |
 | Read a task | `GET /api/task?id=<id>` | `target_hex`, `disasm_lines`, `size`, `symbol`, `starter_cpp` |
 | Claim it | `POST /api/claim {"user", "pin", "id"}` | a timed lease; fails if someone else holds it |
-| Check code | `POST /api/verify {"user", "pin", "id", "cpp_code", "tool_used"}` | returns `matched_bytes`, `total_bytes`, `diff_details`, `verified` |
+| Check code | `POST /api/verify {"user", "pin", "id", "cpp_code", "tool_used", "what"}` | returns `matched_bytes`, `total_bytes`, `diff_details`, `verified`; `what` (optional) is a one-line, plain-English description saved with a new match |
+| Describe a rebuilt function | `POST /api/describe {"user", "pin", "id", "what"}` | sets or clears its one-line description (at most 160 characters), credited to you |
 | Give up | `POST /api/cancel {"user", "pin", "id", "cpp_code"}` | releases the claim and keeps your best partial attempt |
 | decomp.me target | `GET /api/decompme?id=<id>` | `obj_b64` (COFF target), `fields` for `POST https://decomp.me/api/scratch`, `existing_url` |
 | Remember a scratch | `POST /api/decompme {"id", "slug"}` | or `{"id", "create": true}` to have the portal create it |

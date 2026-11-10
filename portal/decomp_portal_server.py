@@ -624,6 +624,9 @@ def community_name(t: dict) -> Optional[dict]:
 
 def live_task(t: dict) -> dict:
     out = {k: v for k, v in t.items() if k not in ("best_cpp",)}
+    entry = REGISTRY["entries"].get(task_key(t)) if t.get("status") == "VERIFIED" else None
+    if entry and entry.get("what"):
+        out["what"], out["what_by"] = entry["what"], entry.get("what_by") or entry.get("verified_by", "")
     named = community_name(t) if t.get("status") != "VERIFIED" else None
     if named:
         out["known_name"] = {"name": named["name"], "by": str(named.get("by", "")), "why": str(named.get("why", ""))}
@@ -819,8 +822,19 @@ def run_verify(t: dict, cpp_code: str, object_b64: str = "", slug: str = "") -> 
     return best
 
 
+WHAT_MAX = 160
+
+
+def clean_what(text) -> str:
+    """A function's one-line, plain-English description: one line of ordinary text, at most WHAT_MAX characters."""
+    if not isinstance(text, str):
+        return ""
+    text = re.sub(r"[\x00-\x1f\x7f]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()[:WHAT_MAX]
+
+
 def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, ported_from: str = "",
-                    write: bool = True) -> None:
+                    write: bool = True, what: str = "") -> None:
     key = task_key(t)
     REGISTRY["entries"][key] = {
         "bin": t["bin"], "va": f"0x{t['fva_int']:08X}", "size": int(t["size"]), "symbol": t["symbol"],
@@ -831,8 +845,27 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, por
     }
     if ported_from:
         REGISTRY["entries"][key]["ported_from"] = ported_from
+    if clean_what(what):
+        REGISTRY["entries"][key]["what"] = clean_what(what)
     if write:
         save_registry()
+
+
+def describe_verified(t: dict, what: str, user: str) -> Optional[str]:
+    """Set (or clear) what a verified function does. Returns an error, or None."""
+    e = REGISTRY["entries"].get(task_key(t))
+    if not e:
+        return "Only rebuilt functions can be described here: write it when you verify the function."
+    what = clean_what(what)
+    if what == (e.get("what") or ""):
+        return None
+    if what:
+        e.update(what=what, what_by=user, what_at=stamp())
+    else:
+        for k in ("what", "what_by", "what_at"):
+            e.pop(k, None)
+    save_registry()
+    return None
 
 
 def _unchecked(e: dict) -> int:
@@ -1328,9 +1361,9 @@ def git_sync(user: str, base: Path = BASE_DIR) -> dict:
 
 SUBMISSION_FORMAT = "scarface-decomp-submission"
 SUBMISSION_FIELDS = ("bin", "va", "size", "symbol", "flags", "verified_by", "tool_used", "verified_at", "code",
-                     "ported_from", "revised_by", "note")
+                     "ported_from", "revised_by", "note", "what", "what_by")
 IMPORT_MAX = 20000
-_PUBLISHED: Dict[str, object] = {"head": None, "keys": frozenset()}
+_PUBLISHED: Dict[str, object] = {"head": None, "keys": frozenset(), "what": {}}
 IMPORT_STATUS: Dict[str, object] = {"running": False}
 
 
@@ -1360,15 +1393,28 @@ def published_keys(base: Path = BASE_DIR) -> frozenset:
         return frozenset()
     if _PUBLISHED["head"] != head:
         keys: frozenset = frozenset()
+        what: Dict[str, str] = {}
         try:
             p = subprocess.run(["git", "show", "HEAD:reports/verified_registry.json"], cwd=base,
                                capture_output=True, timeout=60)
             if p.returncode == 0:
-                keys = frozenset(json.loads(p.stdout.decode("utf-8")).get("entries", {}))
+                entries = json.loads(p.stdout.decode("utf-8")).get("entries", {})
+                keys = frozenset(entries)
+                what = {k: e.get("what", "") for k, e in entries.items() if isinstance(e, dict)}
         except (OSError, ValueError, subprocess.TimeoutExpired):
             pass
-        _PUBLISHED.update(head=head, keys=keys)
+        _PUBLISHED.update(head=head, keys=keys, what=what)
     return _PUBLISHED["keys"]  # type: ignore[return-value]
+
+
+def pending_descriptions() -> Dict[str, dict]:
+    """Descriptions written here for functions already on GitHub, not on GitHub yet."""
+    pub = published_keys()
+    old = _PUBLISHED.get("what") or {}
+    with STATE_LOCK:
+        return {k: {"what": e.get("what", ""), "what_by": e.get("what_by", "")}
+                for k, e in REGISTRY.get("entries", {}).items()
+                if k in pub and (e.get("what") or "") != (old.get(k) or "")}
 
 
 def pending_keys() -> List[str]:
@@ -1383,8 +1429,10 @@ def make_submission(user: str) -> dict:
         entries = {k: {f: e[f] for f in SUBMISSION_FIELDS if f in e}
                    for k in pending_keys() for e in [REGISTRY["entries"][k]]
                    if (e.get("code") or "").strip() and not e.get("excerpt")}
+    described = pending_descriptions()
     return {"format": SUBMISSION_FORMAT, "version": 1, "submitted_by": user, "created": stamp(),
-            "compiler": compiler_version(), "count": len(entries), "entries": entries}
+            "compiler": compiler_version(), "count": len(entries) + len(described), "entries": entries,
+            "descriptions": described}
 
 
 def submission_filename(user: str) -> str:
@@ -1435,16 +1483,30 @@ def import_submission(bundle: dict, importer: str) -> dict:
                 if t["status"] == "VERIFIED":
                     st["already"] += 1
                     continue
-                record_verified(t, code, who, tool, res, write=False)
+                record_verified(t, code, who, tool, res, write=False, what=clean_what(e.get("what")))
                 REGISTRY["entries"][task_key(t)].update(imported_by=importer, imported_at=stamp())
+                if REGISTRY["entries"][task_key(t)].get("what") and e.get("what_by"):
+                    REGISTRY["entries"][task_key(t)]["what_by"] = str(e["what_by"])[:64]
                 t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
                 save_overlay(t)
                 added += 1
                 st["added"] = added
             if not res.get("reloc_unverified"):
                 queue_port(t, code, who, tool)
+        # descriptions of functions that are rebuilt already: text only, nothing to compile
+        described = 0
+        notes = bundle.get("descriptions") if isinstance(bundle.get("descriptions"), dict) else {}
         with STATE_LOCK:
-            if added:
+            for key, d in list(notes.items())[:IMPORT_MAX]:
+                e = REGISTRY["entries"].get(str(key))
+                what = clean_what((d or {}).get("what")) if isinstance(d, dict) else ""
+                if not e or not what or what == e.get("what"):
+                    continue
+                e.update(what=what, what_by=str(d.get("what_by") or who_sent)[:64], what_at=stamp())
+                described += 1
+            st["described"] = described
+        with STATE_LOCK:
+            if added or described:
                 save_registry()
                 append_audit({"time": stamp(), "user": importer, "action": "VERIFIED",
                               "symbol": f"{added} function(s) submitted by {who_sent}", "va": "",
@@ -1936,7 +1998,7 @@ class Handler(BaseHTTPRequestHandler):
                                    "repo_url": REPO_URL, "lookalikes": lookalike_summary(),
                                    "binary_problems": BINARY_PROBLEMS, "scripts": script_check_summary(),
                                    "proto_in_retail": {"same_code": copies["code"], "same_method": copies["method"]},
-                                   "pending": len(pending_keys()), "maintainers": sorted(MAINTAINERS)})
+                                   "pending": len(pending_keys()) + len(pending_descriptions()), "maintainers": sorted(MAINTAINERS)})
         if u.path == "/api/source":
             name = q1("name")
             p = (RECON_DIR / name).resolve()
@@ -2075,6 +2137,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
             "/api/game-files/open": self.post_game_files_open,
             "/api/dme-bridge/run": self.post_bridge_run, "/api/dme-bridge/result": self.post_bridge_result,
+            "/api/describe": self.post_describe,
         }.get(path)
         if not route:
             return self._json({"ok": False, "error": "Not found."}, 404)
@@ -2171,7 +2234,7 @@ class Handler(BaseHTTPRequestHandler):
                          best_cpp=code, best_diff_details=res["diff_details"])
                 save_overlay(t)
             if res["verified"] and not already:
-                record_verified(t, code, user, tool, res)
+                record_verified(t, code, user, tool, res, what=clean_what(body.get("what")))
                 t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
                 save_overlay(t)
                 append_audit({"time": stamp(), "user": user, "action": "VERIFIED", "symbol": t["symbol"], "va": t["va"],
@@ -2249,7 +2312,7 @@ class Handler(BaseHTTPRequestHandler):
         if user in MAINTAINERS:
             with STATE_LOCK:
                 res = git_sync(user)
-            return self._json(dict(res, mode="pushed", pending=len(pending_keys())))
+            return self._json(dict(res, mode="pushed", pending=len(pending_keys()) + len(pending_descriptions())))
         bundle = make_submission(user)
         if not bundle["count"]:
             return self._json({"ok": True, "mode": "nothing", "pending": 0,
@@ -2259,6 +2322,22 @@ class Handler(BaseHTTPRequestHandler):
 
     # Game files (sounds, textures, models, videos) from the person's own copies. No sign-in: it is their
     # own computer and their own game; nothing is sent anywhere.
+    def post_describe(self, body):
+        """What a rebuilt function does, in one plain-English line (anyone signed in; credited to them)."""
+        user = self._auth(body)
+        if not user:
+            return
+        with STATE_LOCK:
+            t = TASK_BY_ID.get(body.get("id"))
+            if not t:
+                return self._json({"ok": False, "error": "Function not found."}, 404)
+            err = describe_verified(t, body.get("what"), user)
+            if err:
+                return self._json({"ok": False, "error": err}, 409)
+            append_audit({"time": stamp(), "user": user, "action": "DESCRIBED", "symbol": t["symbol"], "va": t["va"]})
+            task = live_task(t)
+        self._json({"ok": True, "task": task, "pending": len(pending_keys()) + len(pending_descriptions())})
+
     def post_bridge_run(self, body):
         """From the portal page: have the decomp.me tab make a scratch and/or compile, and wait for it."""
         if self._bridge_origin():

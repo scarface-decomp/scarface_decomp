@@ -31,6 +31,10 @@ may come from and how AI tools may be used.
      portal. Later clicks reopen the same scratch.
    * **AI**: you can also draft it with your own AI key. The key goes from your browser through the portal to the provider; the portal never
      stores or logs it, and the browser keeps it only for the session unless you tick "Remember key".
+   * **What it does**: under the function's name, say in one plain-English line what the function does
+     ("Turns the car's headlights on or off"). It is saved with your match and leads the function's page on
+     the website, so people who don't read C++ can follow along. A careful guess is fine; say so. You can
+     add or improve the line for any rebuilt function later: type it and press **Save**, then Submit your work.
 5. **Compile & Verify** (`Ctrl+Enter`). You get the matched byte count and a per-byte diff. When it
    matches, it is recorded in `reports/verified_registry.json` under your handle and the generated
    files are rewritten. If the function has look-alikes (same machine code, other addresses; the

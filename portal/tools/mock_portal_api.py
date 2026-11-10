@@ -466,6 +466,8 @@ class Handler(BaseHTTPRequestHandler):
                     t["best_matched_bytes"], t["best_pct"], t["best_code"], t["best_diff_details"] = matched, round(matched / size * 100, 1), code, diff
                 if exact and t["status"] != "VERIFIED":
                     t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
+                    if str(body.get("what") or "").strip():
+                        t.update(what=" ".join(str(body["what"]).split())[:160], what_by=user)
                     AUDIT.append({"action": "VERIFIED", "symbol": t["symbol"], "user": user, "va": t["va"],
                                   "bytes": f"{size}/{size} B", "time": time.strftime("%H:%M:%S")})
                     promoted = True
@@ -474,6 +476,16 @@ class Handler(BaseHTTPRequestHandler):
                                    "compiled_hex": " ".join(d["compiled"] for d in diff), "progress": progress(),
                                    "leaderboard": leaderboard(), "sources": SOURCES, "task": public_task(t),
                                    "newly_promoted": promoted})
+        if u.path == "/api/describe":
+            with LOCK:
+                user, err = auth(body)
+                t = TASKS.get(body.get("id"))
+                if err or not t:
+                    return self._json({"ok": False, "error": err or "No such task."})
+                if t["status"] != "VERIFIED":
+                    return self._json({"ok": False, "error": "Only rebuilt functions can be described here."}, 409)
+                t.update(what=" ".join(str(body.get("what") or "").split())[:160], what_by=user)
+                return self._json({"ok": True, "task": public_task(t), "pending": 1})
         if u.path == "/api/fast-synthesize":
             time.sleep(DELAYS["fast"])
             t = TASKS.get(body.get("id"))

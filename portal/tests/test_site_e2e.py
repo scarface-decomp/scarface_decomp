@@ -523,3 +523,32 @@ def test_function_pages(site, browser):
     pg.wait_for_selector("#fn:not([hidden])")
     assert pg.evaluate("document.documentElement.scrollWidth") <= 376                 # nothing wider than a phone
     ctx.close()
+
+
+def test_what_it_does_on_the_site(tmp_path, browser):
+    """A function's plain-English line leads its page, shows in the list, and can be searched for."""
+    d = tmp_path / "site"
+    d.mkdir()
+    for f in STATIC:
+        shutil.copy2(ROOT / "docs" / f, d / f)
+    (d / "data").mkdir()
+    reg = json.loads(json.dumps(REG))
+    reg["entries"]["xb:0x000123B0"].update(what="Says which collision group <b>this</b> is", what_by="Alice")
+    (d / "data" / "verified_registry.json").write_text(json.dumps(reg), encoding="utf-8")
+    shutil.copy2(FIX / "progress.json", d / "data" / "progress.json")
+    srv, url = serve(d)
+    try:
+        ctx, pg = open_page(browser, url)
+        pg.wait_for_selector("#fn-list .fn")
+        pg.fill("#q", "collision group")
+        pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
+        pg.click("#fn-list .fn-head")
+        assert pg.text_content("#fn-list .fn-what") == "Says which collision group <b>this</b> is"     # text, never HTML
+        pg.goto(url + "function.html?f=xb%3A0x000123B0")
+        pg.wait_for_selector("#fn:not([hidden])")
+        assert pg.text_content("#what") == "Says which collision group <b>this</b> isIn plain English, by Alice"
+        assert pg.get_attribute('meta[name="description"]', "content") == "Says which collision group <b>this</b> is"
+        assert not pg.errors, pg.errors
+        ctx.close()
+    finally:
+        srv.shutdown()

@@ -65,6 +65,9 @@ def check_registry(problems: list) -> dict:
         want = "-O3" if e.get("bin") == "ps2" else "/O2"        # the PS2 game has its own compiler
         if not str(e.get("flags", "")).startswith(want):
             problems.append(f"{where}: unexpected flags {e.get('flags')!r}")
+        what = e.get("what")
+        if what is not None and (not isinstance(what, str) or len(what) > 160 or "\n" in what or what != what.strip()):
+            problems.append(f"{where}: 'what' must be one line of at most 160 characters")
         code = e.get("code") or ""
         if not code.strip():
             problems.append(f"{where}: no code recorded")

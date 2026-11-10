@@ -46,10 +46,11 @@ def webhook_url(base: Path) -> Optional[str]:
     return url if WEBHOOK_RE.match(url) else None
 
 
-def _plain(text: str) -> str:
-    """A handle as plain text in Discord: no formatting, no mentions."""
-    text = re.sub(r"([\\*_~`|>#\[\]()])", r"\\\1", str(text))
-    return text.replace("@", "@​")[:60]
+def _plain(text: str, limit: int = 60) -> str:
+    """Text as plain text in Discord: no formatting, no mentions."""
+    text = " ".join(str(text).split())[:limit]
+    text = re.sub(r"([\\*_~`|>#\[\]()])", r"\\\1", text)
+    return text.replace("@", "@\u200b")
 
 
 def message(new: List[dict], done: int, total: int, good: List[dict]) -> str:
@@ -61,8 +62,9 @@ def message(new: List[dict], done: int, total: int, good: List[dict]) -> str:
         size = int(e.get("size", 0))
         who = _plain(e.get("verified_by") or "unattributed")
         sym = str(e.get("symbol", "")).replace("`", "'")
+        what = f": {_plain(e['what'], 90)}" if e.get("what") else ""
         lines.append(f"• `{sym}` ({BIN_WORD.get(e.get('bin'), e.get('bin'))} {e.get('va', '')}, "
-                     f"{size} byte{'' if size == 1 else 's'}) by {who}")
+                     f"{size} byte{'' if size == 1 else 's'}) by {who}{what}")
     if n > MAX_LINES:
         lines.append(f"…and {n - MAX_LINES:,} more.")
     if good:
