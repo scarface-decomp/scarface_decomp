@@ -192,14 +192,16 @@ used `0x4500` and `0x4501` for these.
 | `0x00121104` | Vector3DOF Channel | u32 version, 4 characters parameter (`TRAN`), u32 keys, u16 frame numbers, 3 floats per key |
 | `0x00121102`, `0x00121103` | Vector1DOF, Vector2DOF Channel | u32 version, parameter, u16 mapping (which components move), 3 floats constants (the rest), u32 keys, u16 frames, 1 or 2 floats per key |
 | `0x00121105` | Quaternion Channel | u32 version (1), parameter (`ROT`), u32 keys, u16 frames, 4 floats per key: x, y, z, w |
-| `0x00121112` | Compressed Quaternion Channel2 | the same header, then x, y, z as signed 16-bit numbers over 32,767 (PS2) |
-| `0x00121114` | no name known (`p3d.py` says Byte Quaternion Channel) | the same header, then x, y, z as signed bytes over 127 (PS2; about 1% precision) |
+| `0x00121112` | Compressed Quaternion Channel2 | the same header, then x, y, z as signed 16-bit numbers over 32,767 (Xbox and PS2) |
+| `0x00121114` | no name known (`p3d.py` says Byte Quaternion Channel) | the same header, then x, y, z as signed bytes over 127 (Xbox and PS2; about 1% precision) |
 | `0x00121110` | Channel Interpolation Mode | u32 version, u32 interpolate (-1: yes) |
 
-In the two PS2 forms the rotation is turned so that w is not negative, and w is worked out as
-`sqrt(1 - x² - y² - z²)`. The PS2 also keeps fewer keys (in `GEN_Conv_Motion_Toward.p3d` the PC has 23
-rotation keys for the pelvis, the PS2 18); at the keys they share, the rotations agree within the stored
-precision.
+The PC keeps every rotation as four floats. The Xbox and the PS2 use the two compressed forms instead,
+choosing per joint, and keep fewer keys: in `GEN_Conv_Motion_Toward.p3d` the PC has 509 keys, the Xbox
+460 (all at frames the PC has keys too) and the PS2 fewer again (the pelvis: 23, 23 and 18). In the
+compressed forms the rotation is turned so that w is not negative, and w is worked out as
+`sqrt(1 - x² - y² - z²)`. Against the PC's rotations at the same frames, the 16-bit form is within 0.1
+degree; the bytes are rounded towards zero (about one step low), a few degrees at worst.
 
 ### Ids seen but not worked out
 
