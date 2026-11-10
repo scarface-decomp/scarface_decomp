@@ -12,6 +12,7 @@ Sounds are Radical's .rsd files: a 2 KB header, then the audio in the platform's
               so it is offered as a .wma for your own player
     XADP      Xbox: Xbox ADPCM (IMA ADPCM in 36-byte blocks per channel), decoded to WAV here
     VAG       PS2: PS2 ADPCM (16-byte frames of 28 samples), decoded to WAV here
+    RADP      Xbox prototype: Radical's IMA ADPCM (20-byte blocks per channel), decoded to WAV here
     PCM       16-bit PCM, wrapped as WAV
 
 Textures live in Pure3D (.p3d) files: a Texture chunk (0x19000) holds Image chunks (0x19001) whose Image
@@ -43,7 +44,7 @@ IMA_STEP = [7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 21, 23, 25, 28, 31, 34, 37,
             18500, 20350, 22385, 24623, 27086, 29794, 32767]
 IMA_INDEX = [-1, -1, -1, -1, 2, 4, 6, 8, -1, -1, -1, -1, 2, 4, 6, 8]
 VAG_COEF = [(0, 0), (60, 0), (115, -52), (98, -55), (122, -60)]
-VAG_STEREO_INTERLEAVE = 0x800          # RSD6 VAG with two channels: 2 KB of one, then 2 KB of the other
+VAG_STEREO_INTERLEAVE = 0x10           # RSD6 VAG with two channels: one 16-byte frame of each in turn
 MAX_SECONDS = 15 * 60                  # longer than this is not decoded for previewing
 
 
@@ -118,6 +119,49 @@ def decode_xbox_adpcm(body: bytes, channels: int) -> bytes:
     return bytes(out)
 
 
+@functools.lru_cache(maxsize=1)
+def _radp_table() -> Tuple[Tuple[int, ...], Tuple[int, ...]]:
+    """For each (step index, nibble): the signed change to the sample, and the next step index."""
+    diffs, nexts = [], []
+    for index in range(89):
+        step = IMA_STEP[index]
+        for nib in range(16):
+            d = ((2 * (nib & 7) + 1) * step) >> 3
+            diffs.append(-d if nib & 8 else d)
+            nexts.append(min(88, max(0, index + IMA_INDEX[nib])))
+    return tuple(diffs), tuple(nexts)
+
+
+def decode_radp(body: bytes, channels: int) -> bytes:
+    """Radical's IMA ADPCM ("RADP", the Xbox prototype's sounds). Blocks of 20 bytes per channel: for each
+    channel an int16 step index and an int16 sample, then 16 rows of one byte per channel; each row gives
+    every channel its low nibble, then every channel its high nibble (32 samples per channel per block).
+    Matches FFmpeg's adpcm_ima_rad decoder."""
+    if channels not in (1, 2):
+        raise MediaError(f"Radical ADPCM with {channels} channels")
+    diffs, nexts = _radp_table()
+    block = 20 * channels
+    out = []
+    for b in range(0, len(body) - block + 1, block):
+        state = []
+        for c in range(channels):
+            index, pred = struct.unpack_from("<hh", body, b + 4 * c)
+            state.append([pred, min(88, max(0, index))])
+        o = b + 4 * channels
+        for _row in range(16):
+            row = body[o:o + channels]
+            o += channels
+            for shift in (0, 4):
+                for c in range(channels):
+                    s = state[c]
+                    k = (s[1] << 4) | ((row[c] >> shift) & 15)
+                    p = s[0] + diffs[k]
+                    s[0] = -32768 if p < -32768 else 32767 if p > 32767 else p
+                    s[1] = nexts[k]
+                    out.append(s[0])
+    return struct.pack(f"<{len(out)}h", *out)
+
+
 def _vag_channel(body: bytes) -> List[int]:
     out: List[int] = []
     h1 = h2 = 0
@@ -140,7 +184,8 @@ def _vag_channel(body: bytes) -> List[int]:
 
 
 def decode_vag(body: bytes, channels: int) -> bytes:
-    """PS2 ADPCM. Two channels are stored in alternating 2 KB blocks."""
+    """PS2 ADPCM. Two channels take turns frame by frame (16 bytes of the left, 16 of the right, ...);
+    checked against the PC versions of the same music and of the movies' sound."""
     if channels == 1:
         return b"".join(struct.pack("<h", s) for s in _vag_channel(body))
     if channels != 2:
@@ -176,6 +221,8 @@ def playable(data: bytes) -> Tuple[bytes, str, str]:
         return _wav(decode_xbox_adpcm(body, ch), ch, rate), "audio/wav", ".wav"
     if codec == "VAG":
         return _wav(decode_vag(body, ch), ch, rate), "audio/wav", ".wav"
+    if codec == "RADP":
+        return _wav(decode_radp(body, ch), ch, rate), "audio/wav", ".wav"
     if codec in ("PCM", "PCMB"):
         pcm = body if codec == "PCM" else b"".join(body[i:i + 2][::-1] for i in range(0, len(body) - 1, 2))
         return _wav(pcm[:len(pcm) // (2 * ch) * 2 * ch], ch, rate), "audio/wav", ".wav"

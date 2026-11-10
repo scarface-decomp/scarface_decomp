@@ -133,9 +133,9 @@ back.
 | `OOGV` | PC | an Ogg Vorbis stream (44.1 to 48 kHz) |
 | `XADP` | Xbox | Xbox IMA ADPCM: per channel, 36-byte blocks (s16 first sample, u8 step index, u8 0, then 32 bytes = 64 samples, low nibble first). With two channels both 4-byte headers come first, then 4-byte runs of each channel in turn |
 | `WMA ` | Xbox | 8 bytes, then a Windows Media Audio (ASF) file; its own header has the real sample rate (the RSD field doesn't) |
-| `VAG ` | PS2 | Sony ADPCM: 16-byte frames (shift and filter, flags, 14 bytes = 28 samples); flag 7 ends the sound. Two-channel sounds are read as 0x800-byte blocks of each channel in turn (not yet checked against a stereo sample) |
+| `VAG ` | PS2 | Sony ADPCM: 16-byte frames (shift and filter, flags, 14 bytes = 28 samples); flag 7 ends the sound. With two channels the frames take turns: one of the left, one of the right (checked against the PC's music and movies) |
 | `PCM ` | | plain 16-bit samples |
-| `RADP` | Xbox prototype | Radical's own ADPCM, at 24,000 Hz in the prototype's speech: not described yet |
+| `RADP` | Xbox prototype | Radical's IMA ADPCM, every sound in the prototype (mostly 24,000 Hz): blocks of 20 bytes per channel. Each channel's s16 step index and s16 sample come first, then 16 rows of one byte per channel; a row gives every channel its low nibble, then every channel its high nibble (32 samples per channel per block). The usual IMA tables, with each step's change `((2 x (nibble & 7) + 1) x step) >> 3` |
 
 ## Videos (`.bik`)
 

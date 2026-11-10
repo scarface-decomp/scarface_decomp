@@ -87,6 +87,13 @@ def test_ps2_vag_frames():
     assert rise[:3] == [28672, 26880, 25200]
 
 
+def test_ps2_vag_stereo_takes_turns_frame_by_frame():
+    left = bytes([0x0C, 0x00]) + bytes([0x11] * 14)            # every sample 1
+    right = bytes([0x0C, 0x00]) + bytes([0x22] * 14)           # every sample 2
+    pcm = media.decode_vag((left + right) * 3, 2)
+    assert struct.unpack(f"<{28 * 3 * 2}h", pcm) == (1, 2) * (28 * 3)
+
+
 def test_ps2_vag_through_playable():
     frames = bytes([0x0C, 0x00]) + bytes([0x11] * 14)
     body, mime, ext = media.playable(rsd(b"VAG\0", 1, 22050, frames * 4))
@@ -106,6 +113,48 @@ def test_xbox_adpcm_block():
     assert all(b >= a for a, b in zip(climb, climb[1:])) and climb[-1] == 32767
     with pytest.raises(media.MediaError):
         media.decode_xbox_adpcm(block, 3)
+
+
+def test_radical_adpcm_mono_block():
+    # Step index 0 (step 7): nibble 0 moves by (1 * 7) >> 3 = 0, so the sound holds at 1000 for 32 samples.
+    still = struct.pack("<hh", 0, 1000) + bytes(16)
+    assert struct.unpack("<32h", media.decode_radp(still, 1)) == (1000,) * 32
+    # Nibble 1 is +(3 * 7) >> 3 = +2 and nibble 9 is -2; the index stays at 0. Low nibble first.
+    wobble = struct.pack("<hh", 0, 1000) + bytes([0x91] * 16)
+    assert struct.unpack("<32h", media.decode_radp(wobble, 1)) == (1002, 1000) * 16
+    # Each block starts again from its own header; a short tail is ignored.
+    two = media.decode_radp(wobble + struct.pack("<hh", 0, -5) + bytes(16) + b"\x01\x02", 1)
+    assert struct.unpack("<64h", two)[32:] == (-5,) * 32
+
+
+def test_radical_adpcm_step_index_and_clamping():
+    # Index 10 (step 19), nibble 7: +(15 * 19) >> 3 = +35, and the index moves up by 8.
+    block = struct.pack("<hh", 10, 0) + bytes([0x07]) + bytes(15)
+    first = struct.unpack("<32h", media.decode_radp(block, 1))[0]
+    assert first == 35
+    # A header index past 88 is treated as 88, and the samples stop at the 16-bit limits.
+    loud = struct.unpack("<32h", media.decode_radp(struct.pack("<hh", 200, 32000) + bytes([0x77] * 16), 1))
+    assert loud == (32767,) * 32
+    quiet = struct.unpack("<32h", media.decode_radp(struct.pack("<hh", 88, -32000) + bytes([0xFF] * 16), 1))
+    assert quiet == (-32768,) * 32
+
+
+def test_radical_adpcm_stereo_rows():
+    # Both headers first, then rows of one byte per channel: left low, right low, left high, right high.
+    block = struct.pack("<hhhh", 0, 100, 0, -100) + bytes([0x91, 0x19] * 16)
+    frames = struct.unpack("<64h", media.decode_radp(block, 2))
+    assert frames[:4] == (102, -102, 100, -100)
+    assert frames == (102, -102, 100, -100) * 16
+    with pytest.raises(media.MediaError):
+        media.decode_radp(block, 3)
+
+
+def test_radical_adpcm_through_playable():
+    block = struct.pack("<hhhh", 0, 100, 0, -100) + bytes([0x91, 0x19] * 16)
+    data, mime, ext = media.playable(rsd(b"RADP", 2, 24000, block * 3))
+    assert (mime, ext) == ("audio/wav", ".wav")
+    with wave.open(io.BytesIO(data)) as w:
+        assert (w.getnchannels(), w.getframerate(), w.getnframes()) == (2, 24000, 96)
 
 
 def test_unknown_sounds_are_refused():
