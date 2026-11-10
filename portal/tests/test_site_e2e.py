@@ -175,32 +175,13 @@ def test_scoreboard_and_progress(site, browser):
     ctx.close()
 
 
-def test_function_browser_search_filter_and_code(site, browser):
+def test_the_main_page_has_no_code_list(site, browser):
+    """The code is on GitHub; the main page has the numbers, the chart and how to help, not a list of functions."""
     _, url = site
     ctx, pg = open_page(browser, url)
-    pg.wait_for_selector("#fn-list .fn")
-    assert pg.text_content("#count").startswith(f"{len(REG['entries']):,} functions")
-    assert pg.locator("#fn-list .fn").count() == 40                     # first page
-    pg.click("#more")
-    assert pg.locator("#fn-list .fn").count() == 80
-
-    pg.fill("#q", "DriveThread::vfunc_00")
-    pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
-    assert not pg.is_visible("#more")                                   # nothing more to show
-    pg.click("#fn-list .fn-head")
-    assert pg.locator("#fn-list .fn pre").count() == 0                     # the code is on GitHub, not here
-    link = pg.get_attribute("#fn-list .fn-links a.code-link", "href")
-    assert re.match(r"^https://github\.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/core/DriveThread\.cpp#L\d+-L\d+$", link), link
-
-    pg.fill("#q", "")
-    pg.select_option("#bin", "pc")
-    pg.wait_for_function(f"document.getElementById('count').textContent.startsWith('{PROG['verified']['pc']:,} functions')")
-    pg.select_option("#sort", "size")
-    first_size = pg.text_content("#fn-list .fn .fn-size")
-    assert first_size == f"{max(e['size'] for e in REG['entries'].values() if e['bin'] == 'pc')} B"
-
-    pg.fill("#q", "no-such-function-xyz")
-    pg.wait_for_selector("#fn-list .empty")
+    pg.wait_for_function("document.getElementById('data-status').textContent.includes('Live numbers')")
+    assert pg.locator("#functions, #fn-list, #q").count() == 0
+    assert pg.locator("#history:not([hidden])").count() == 1                 # the chart still reads the list file
     assert not pg.errors, pg.errors
     ctx.close()
 
@@ -229,15 +210,10 @@ def test_the_list_has_no_code_and_points_at_each_functions_lines(tmp_path):
 def test_mobile_layout(site, browser):
     _, url = site
     ctx, pg = open_page(browser, url, viewport=(375, 812))
-    pg.wait_for_selector("#fn-list .fn")
+    pg.wait_for_function("document.getElementById('data-status').textContent.includes('Live numbers')")
     width = pg.evaluate("document.documentElement.scrollWidth")
     assert width <= 376, f"page scrolls sideways on a phone ({width}px)"
     assert pg.is_visible("a.gh")
-    pg.fill("#q", "DriveThread::vfunc_00")
-    pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
-    pg.click("#fn-list .fn-head")
-    box = pg.locator("#fn-list .fn-links a:not(.own)").bounding_box()
-    assert box["x"] + box["width"] <= 375, "the GitHub link runs off the screen"
     ctx.close()
 
 
@@ -296,8 +272,6 @@ def test_live_reports_and_empty_start(tmp_path, browser):
         assert pg.text_content("#sb-total") == f"{prog['verified']['total'] + prog['queue']['total']:,}"
         if not reg["entries"]:
             assert pg.text_content("#claim") == "The world is 0% yours."
-            assert "Nothing rebuilt yet" in pg.text_content("#fn-list .empty")
-            assert pg.get_attribute("#fn-list .empty a", "href") == "#help"
             assert "Your name could be first" in pg.text_content("#contrib-note")
         assert pg.evaluate("document.getElementById('claim').classList.contains('on')")
         assert not pg.errors, pg.errors
@@ -322,9 +296,9 @@ def test_table_of_contents(site, browser, width):
     sticky bar, and it marks the section being read."""
     _, url = site
     ctx, pg = open_page(browser, url, viewport=(width, 800))
-    pg.wait_for_selector("#fn-list .fn")
+    pg.wait_for_function("document.getElementById('data-status').textContent.includes('Live numbers')")
     links = pg.eval_on_selector_all("#toc a", "as => as.map(a => a.getAttribute('href'))")
-    assert links == ["#how", "#progress", "#help", "#questions", "#functions", "#reference"]
+    assert links == ["#how", "#progress", "#help", "#questions", "#reference"]
     for href in links:
         assert pg.evaluate(f"!!document.getElementById('{href[1:]}')")
     assert pg.evaluate("document.documentElement.scrollWidth") <= width + 1
@@ -480,7 +454,7 @@ def test_rage_mode_easter_egg(site, browser, motion):
     errors = []
     pg.on("pageerror", lambda e: errors.append(str(e)))
     pg.goto(url)
-    pg.wait_for_selector("#fn-list .fn")
+    pg.wait_for_function("document.getElementById('data-status').textContent.includes('Live numbers')")
     for k in ("ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"):
         pg.keyboard.press(k)
     pg.wait_for_selector(".rage-sign.on")
@@ -489,8 +463,9 @@ def test_rage_mode_easter_egg(site, browser, motion):
     assert (shaking == "none") == (motion == "reduce")
     pg.wait_for_selector(".rage-sign", state="detached", timeout=7000)
     assert not pg.evaluate("document.querySelector('main').classList.contains('shake')")
-    # typing the same letters in the search box must not set it off
-    pg.click("#q")
+    # typing the same letters in a text box must not set it off
+    pg.evaluate("document.body.appendChild(Object.assign(document.createElement('input'), {id: 'typing'}))")
+    pg.click("#typing")
     for k in ("ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"):
         pg.keyboard.press(k)
     pg.wait_for_timeout(300)
@@ -573,7 +548,7 @@ def test_good_first_functions_on_the_site(tmp_path, browser):
         ctx, pg = open_page(browser, url.replace("127.0.0.1", "localhost"))   # the fixture has no list
         (d / "data" / "progress.json").write_text(json.dumps(PROG), encoding="utf-8")
         pg.reload()
-        pg.wait_for_selector("#fn-list .fn")
+        pg.wait_for_function("document.getElementById('data-status').textContent.includes('Live numbers')")
         assert pg.is_hidden("#good-first-box")
         assert not pg.errors, pg.errors
         ctx.close()
@@ -620,15 +595,9 @@ def test_matched_over_time_chart(tmp_path, browser):
 
 def test_function_pages(site, browser):
     """Each rebuilt function has its own page: what's known about it, a link to its C++ on GitHub (its exact lines),
-    what it uses, its neighbours, and a link from the main page's list."""
+    what it uses, and its neighbours. The feed of new matches links to these pages."""
     _, url = site
-    ctx, pg = open_page(browser, url)
-    pg.wait_for_selector("#fn-list .fn")
-    pg.fill("#q", "CollisionBehaviourTypeGroup::vfunc_00")
-    pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
-    pg.click("#fn-list .fn-head")
-    assert pg.get_attribute("#fn-list .fn-links a.own", "href") == "function.html?f=xb%3A0x000123B0"
-    pg.click("#fn-list .fn-links a.own")
+    ctx, pg = open_page(browser, url + "function.html?f=xb%3A0x000123B0")
     pg.wait_for_selector("#fn:not([hidden])")
     assert pg.text_content("#name") == "vfunc_00" and pg.text_content("#cls") == "CollisionBehaviourTypeGroup::"
     assert pg.title().startswith("CollisionBehaviourTypeGroup::vfunc_00 (Xbox)")
@@ -654,7 +623,7 @@ def test_function_pages(site, browser):
 
 
 def test_what_it_does_on_the_site(tmp_path, browser):
-    """A function's plain-English line leads its page, shows in the list, and can be searched for."""
+    """A function's plain-English line leads its page, as text (never HTML)."""
     d = tmp_path / "site"
     d.mkdir()
     copy_docs(d)
@@ -665,13 +634,7 @@ def test_what_it_does_on_the_site(tmp_path, browser):
     shutil.copy2(FIX / "progress.json", d / "data" / "progress.json")
     srv, url = serve(d)
     try:
-        ctx, pg = open_page(browser, url)
-        pg.wait_for_selector("#fn-list .fn")
-        pg.fill("#q", "collision group")
-        pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
-        pg.click("#fn-list .fn-head")
-        assert pg.text_content("#fn-list .fn-what") == "Says which collision group <b>this</b> is"     # text, never HTML
-        pg.goto(url + "function.html?f=xb%3A0x000123B0")
+        ctx, pg = open_page(browser, url + "function.html?f=xb%3A0x000123B0")
         pg.wait_for_selector("#fn:not([hidden])")
         assert pg.text_content("#what") == "Says which collision group <b>this</b> isIn plain English, by Alice"
         assert pg.get_attribute('meta[name="description"]', "content") == "Says which collision group <b>this</b> is"

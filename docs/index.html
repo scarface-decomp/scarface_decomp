@@ -247,34 +247,6 @@
     .faq details[open] summary::after { content: '\2212'; }
     .faq details p { color: var(--grey); padding: 0 0 20px; }
 
-    /* ---------- code browser ---------- */
-    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-    .toolbar input, .toolbar select { background: #050505; color: var(--white); border: 1px solid var(--line); border-radius: 2px; padding: 11px 18px 9px; font: inherit; font-size: 0.95rem; }
-    .toolbar input { flex: 1 1 280px; min-width: 0; }
-    .toolbar input::placeholder { color: #8A8A8A; }
-    .toolbar input:focus, .toolbar select:focus { border-color: var(--red); }
-    .result-count { color: var(--grey); font-size: 0.9rem; margin-bottom: 8px; }
-    .fn-list { border-top: 1px solid var(--line); }
-    .fn { border-bottom: 1px solid var(--line); }
-    .fn-head { width: 100%; display: grid; grid-template-columns: 52px 108px minmax(0, 1fr) 56px 16px; align-items: center; gap: 14px; padding: 13px 6px 11px; background: none; border: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
-    .fn-head:hover .fn-sym { color: var(--red); }
-    .tag { font-size: 0.82rem; color: var(--grey); }
-    .tag.pc { color: var(--white); font-weight: 600; }
-    .fn-va { font-family: var(--mono); font-size: 0.82rem; color: var(--grey); }
-    .fn-sym { font-family: var(--mono); font-size: 0.86rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .fn-size { text-align: right; color: var(--grey); font-size: 0.88rem; font-variant-numeric: tabular-nums; }
-    .chev { color: var(--red); transition: transform 0.15s; }
-    .fn.open .chev { transform: rotate(90deg); }
-    .fn-body { display: none; padding: 2px 6px 22px; }
-    .fn.open .fn-body { display: block; }
-    .meta { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 0.86rem; color: var(--grey); margin-bottom: 10px; }
-    .meta b { color: var(--white); font-weight: 600; }
-    .fn-links { margin-top: 12px; font-size: 0.9rem; overflow-wrap: anywhere; }
-    .fn-links .code-link { display: inline-block; font-weight: 600; padding: 6px 14px 4px; border: 1px solid var(--blood); border-radius: 2px; text-decoration: none; color: var(--white); }
-    .fn-links .code-link:hover, .fn-links .code-link:focus-visible { background: var(--blood); }
-    .fn-what { font-size: 1rem; margin-bottom: 8px; }
-    .more { display: flex; justify-content: center; margin-top: 24px; }
-    .empty { padding: 34px 6px; color: var(--grey); text-align: center; }
 
     footer { border-top: 3px solid var(--blood); }
     footer .wrap { padding-top: 38px; padding-bottom: 54px; color: var(--grey); font-size: 0.86rem; display: grid; gap: 14px; text-align: center; }
@@ -302,8 +274,6 @@
       .hole.h2, .hole.h3 { display: none; }
       .claim { margin-top: 40px; }
       .rules { grid-template-columns: minmax(0, 1fr); }
-      .fn-head { grid-template-columns: 40px minmax(0, 1fr) 48px 12px; gap: 10px; }
-      .fn-va { display: none; }
       ol.steps li { padding: 20px 18px 20px 62px; }
       ol.steps li::before { left: 12px; width: 36px; font-size: 1.9rem; }
       .facts { gap: 10px 30px; }
@@ -336,8 +306,7 @@
         <a href="#progress"><span class="n" aria-hidden="true">02</span>Progress</a>
         <a href="#help"><span class="n" aria-hidden="true">03</span>Start helping</a>
         <a href="#questions"><span class="n" aria-hidden="true">04</span>Questions</a>
-        <a href="#functions"><span class="n" aria-hidden="true">05</span>The code</a>
-        <a href="#reference"><span class="n" aria-hidden="true">06</span>Reference</a>
+        <a href="#reference"><span class="n" aria-hidden="true">05</span>Reference</a>
       </nav>
       <div class="ext">
         <a class="gh" href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>
@@ -672,33 +641,6 @@
       </div>
     </section>
 
-    <section id="functions" aria-labelledby="h-functions">
-      <div class="wrap">
-        <h2 id="h-functions">The code so far</h2>
-        <p class="intro">Every rebuilt function. Select one to see who rebuilt it and what it does, and to read its C++ on GitHub.</p>
-        <div class="toolbar">
-          <label class="sr-only" for="q">Search functions</label>
-          <input id="q" type="search" placeholder="Search by name, address or file, e.g. DriveThread" autocomplete="off" />
-          <label class="sr-only" for="bin">Version</label>
-          <select id="bin">
-            <option value="all">All versions</option>
-            <option value="xb">Xbox only</option>
-            <option value="pc">PC only</option>
-            <option value="proto">Xbox prototype</option>
-            <option value="ps2">PS2</option>
-          </select>
-          <label class="sr-only" for="sort">Sort</label>
-          <select id="sort">
-            <option value="addr">By address</option>
-            <option value="size">Largest first</option>
-            <option value="recent">Newest first</option>
-          </select>
-        </div>
-        <div class="result-count" id="count" aria-live="polite"></div>
-        <div class="fn-list" id="fn-list"><div class="empty">Loading…</div></div>
-        <div class="more"><button class="btn" id="more" type="button" hidden>Show more</button></div>
-      </div>
-    </section>
 
     <section id="reference" class="alt" aria-labelledby="h-reference">
       <div class="wrap">

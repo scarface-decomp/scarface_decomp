@@ -5,9 +5,8 @@
   // Where the numbers come from, in order:
   //   1. data/ next to this page: the Cloudflare Pages build copies reports/progress.json there on every push;
   //   2. the repository itself on raw.githubusercontent.com (GitHub Pages, or if 1 is missing).
-  // The list of rebuilt functions is functions.json beside this page (made by portal/tools/registry_outputs.py),
-  // or the repository's docs/ folder. It has no code: each function links to its lines on GitHub, so the page
-  // stays quick however many functions are rebuilt. On a *.github.io address the repository is taken from the
+  // The chart of matches over time reads functions.json beside this page (made by portal/tools/registry_outputs.py),
+  // or the repository's docs/ folder. The code itself is only on GitHub. On a *.github.io address the repository is taken from the
   // address. For local testing only, ?data=<base url> is honoured on localhost and replaces all of them.
   var CFG = (function () {
     var owner = 'scarface-decomp', repo = 'scarface_decomp', branch = 'main';
@@ -32,11 +31,6 @@
   // The PS2 program's code overlays (ps2pause, ps2exotics, ...) count as the PS2 version.
   var PS2_BINS = ['ps2', 'ps2pause', 'ps2exotics', 'ps2modals', 'ps2modals1', 'ps2modals2', 'ps2games'];
   PS2_BINS.forEach(function (b) { if (!BIN_LABEL[b]) BIN_LABEL[b] = 'PS2'; });
-  var SOURCE_FILE = { pc: 'Original_Binary_Order_PC_1002.cpp', xb: 'Original_Binary_Order_Xbox.cpp',
-                      proto: 'Original_Binary_Order_Proto.cpp', ps2: 'Original_Binary_Order_PS2.cpp',
-                      ps2pause: 'Original_Binary_Order_PS2_PauseMenu.cpp', ps2exotics: 'Original_Binary_Order_PS2_Exotics.cpp',
-                      ps2modals: 'Original_Binary_Order_PS2_Modals.cpp', ps2modals1: 'Original_Binary_Order_PS2_Modals1.cpp',
-                      ps2modals2: 'Original_Binary_Order_PS2_Modals2.cpp', ps2games: 'Original_Binary_Order_PS2_MiniGames.cpp' };
 
   function applyRepoLinks() {
     document.querySelectorAll('a[data-repo-link]').forEach(function (a) {
@@ -381,142 +375,6 @@
     if (prog && prog.updated_at) $('updated').textContent = 'Numbers updated ' + prog.updated_at.replace('T', ' ').replace('Z', ' UTC');
   }
 
-  // ------------------------------------------------------------------ functions
-  var ALL = [];
-  var shown = 0;
-  var PAGE = 40;
-  var filtered = [];
-
-  function sourcePath(e) {
-    if (e.file) return e.file;
-    if (!e.source || e.source === 'portal') {
-      return 'reconstructed_src/' + (SOURCE_FILE[e.bin] || 'Original_Binary_Order_Proto.cpp');
-    }
-    return 'reconstructed_src/' + e.source;
-  }
-
-  // The function's own lines on GitHub (its class's file, at the lines of its block).
-  function codeUrl(e) {
-    var u = CFG.repoUrl + '/blob/' + CFG.branch + '/' + sourcePath(e).split('/').map(encodeURIComponent).join('/');
-    return e.lines && e.lines.length === 2 ? u + '#L' + e.lines[0] + '-L' + e.lines[1] : u;
-  }
-
-  function buildList(reg) {
-    ALL = Object.keys(reg.entries || {}).map(function (k) {
-      var e = reg.entries[k];
-      e.key = k;
-      e.vaNum = parseInt(e.va, 16) || 0;
-      e.hay = (e.symbol + ' ' + e.va + ' ' + (e.source || '') + ' ' + (e.verified_by || '') + ' ' + (e.what || '')).toLowerCase();
-      e.when = e.verified_at || e.reverified_at || '';
-      return e;
-    });
-    applyFilter();
-  }
-
-  function applyFilter() {
-    var term = $('q').value.trim().toLowerCase();
-    var bin = $('bin').value;
-    var sort = $('sort').value;
-    filtered = ALL.filter(function (e) {
-      return (bin === 'all' || e.bin === bin || (bin === 'ps2' && PS2_BINS.indexOf(e.bin) >= 0)) &&
-        (!term || e.hay.indexOf(term) !== -1);
-    });
-    filtered.sort(function (a, b) {
-      if (sort === 'size') return b.size - a.size || a.vaNum - b.vaNum;
-      if (sort === 'recent') return (b.when > a.when ? 1 : b.when < a.when ? -1 : 0) || a.vaNum - b.vaNum;
-      var order = { pc: 0, xb: 1, proto: 2 };
-      PS2_BINS.forEach(function (b, i) { order[b] = 3 + i; });
-      return ((order[a.bin] || 0) - (order[b.bin] || 0)) || a.vaNum - b.vaNum;
-    });
-    shown = 0;
-    $('fn-list').textContent = '';
-    renderMore();
-  }
-
-  function renderMore() {
-    var list = $('fn-list');
-    var slice = filtered.slice(shown, shown + PAGE);
-    if (!filtered.length) {
-      var em = document.createElement('div'); em.className = 'empty';
-      if (ALL.length) {
-        em.textContent = 'Nothing rebuilt matches that search yet.';
-      } else {
-        em.appendChild(document.createTextNode('Nothing rebuilt yet. The first function could be yours: '));
-        var go = document.createElement('a'); go.href = '#help'; go.textContent = 'start helping';
-        em.appendChild(go); em.appendChild(document.createTextNode('.'));
-      }
-      list.appendChild(em);
-    }
-    slice.forEach(function (e) { list.appendChild(row(e)); });
-    shown += slice.length;
-    $('count').textContent = fmt(filtered.length) + ' function' + (filtered.length === 1 ? '' : 's') + (shown < filtered.length ? ', showing ' + fmt(shown) : '');
-    $('more').hidden = shown >= filtered.length;
-  }
-
-  function row(e) {
-    var item = document.createElement('div'); item.className = 'fn';
-    var head = document.createElement('button'); head.type = 'button'; head.className = 'fn-head';
-    head.setAttribute('aria-expanded', 'false');
-    var tag = document.createElement('span'); tag.className = 'tag ' + e.bin; tag.textContent = BIN_LABEL[e.bin] || e.bin;
-    var va = document.createElement('span'); va.className = 'fn-va'; va.textContent = e.va;
-    var sym = document.createElement('span'); sym.className = 'fn-sym'; sym.textContent = e.symbol; sym.title = e.symbol;
-    var size = document.createElement('span'); size.className = 'fn-size'; size.textContent = e.size + ' B';
-    var chev = document.createElement('span'); chev.className = 'chev'; chev.setAttribute('aria-hidden', 'true'); chev.textContent = '›';
-    [tag, va, sym, size, chev].forEach(function (n) { head.appendChild(n); });
-    var body = document.createElement('div'); body.className = 'fn-body';
-    head.addEventListener('click', function () {
-      var open = item.classList.toggle('open');
-      head.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (open && !body.firstChild) fillBody(body, e);
-    });
-    item.appendChild(head); item.appendChild(body);
-    return item;
-  }
-
-  function metaItem(parent, label, value) {
-    var s = document.createElement('span');
-    s.appendChild(document.createTextNode(label + ' '));
-    var b = document.createElement('b'); b.textContent = value; s.appendChild(b);
-    parent.appendChild(s);
-  }
-
-  function fillBody(body, e) {
-    if (e.what) {
-      var what = document.createElement('p'); what.className = 'fn-what';
-      what.textContent = e.what;
-      body.appendChild(what);
-    }
-    var meta = document.createElement('div'); meta.className = 'meta';
-    metaItem(meta, 'Address', e.va);
-    metaItem(meta, 'Size', e.size + ' bytes');
-    metaItem(meta, 'Compiler flags', e.flags || '');
-    metaItem(meta, 'Rebuilt by', e.verified_by || 'early bulk work');
-    if (e.tool_used) metaItem(meta, 'Tool', e.tool_used);
-    if (e.note) metaItem(meta, 'Note', e.note);
-    body.appendChild(meta);
-    var links = document.createElement('div'); links.className = 'fn-links';
-    var a = document.createElement('a');
-    a.href = codeUrl(e);
-    a.className = 'code-link';
-    a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.textContent = 'Read its C++ on GitHub';
-    a.title = sourcePath(e) + (e.lines ? ', lines ' + e.lines[0] + '\u2013' + e.lines[1] : '');
-    var own = document.createElement('a');
-    own.href = 'function.html?f=' + encodeURIComponent(e.key);
-    own.className = 'own';
-    own.textContent = 'Its own page';
-    links.appendChild(a);
-    links.appendChild(document.createTextNode(' · '));
-    links.appendChild(own);
-    body.appendChild(links);
-  }
-
-  var t = null;
-  $('q').addEventListener('input', function () { clearTimeout(t); t = setTimeout(applyFilter, 160); });
-  $('bin').addEventListener('change', applyFilter);
-  $('sort').addEventListener('change', applyFilter);
-  $('more').addEventListener('click', renderMore);
-
   // ------------------------------------------------------------------ contents
   // Mark the section being read, and keep its link in view in the phone-width scrolling row.
   (function () {
@@ -560,13 +418,9 @@
   function showUnavailable(err, haveNumbers) {
     var status = $('data-status');
     status.className = 'status-line err';
-    status.textContent = (haveNumbers ? 'The list of rebuilt functions' : 'The latest numbers') + ' could not be loaded (' +
+    status.textContent = (haveNumbers ? 'The chart of matches over time' : 'The latest numbers') + ' could not be loaded (' +
       (err && err.message ? err.message : 'network error') + '). Try again in a minute.';
     if (!haveNumbers) $('claim').textContent = 'The world is yours.';
-    var list = $('fn-list');
-    list.textContent = '';
-    var em = document.createElement('div'); em.className = 'empty'; em.textContent = 'The function list could not be loaded right now.';
-    list.appendChild(em);
   }
 
   // ------------------------------------------------------------------ for the curious
@@ -605,7 +459,7 @@
     }
   })();
 
-  // The scoreboard first (a small file), then the list of rebuilt functions, which doesn't hold it up.
+  // The scoreboard first (a small file), then the chart of matches over time, which doesn't hold it up.
   var progress = getJson('progress.json').then(function (prog) {
     renderProgress(prog, null);
     renderGoodFirst(prog);
@@ -615,10 +469,9 @@
     return progress.then(function (prog) {
       if (!prog) renderProgress(null, reg);
       renderHistory(reg);
-      buildList(reg);
       $('data-status').textContent = 'Live numbers from ' + CFG.owner + '/' + CFG.repo +
         (!prog || activeSource === 'data/' ? ' (latest deploy)' : ' on GitHub') +
-        (prog ? '' : '; the summary file is missing, so only the function list is shown') + '.';
+        (prog ? '' : '; the summary file is missing, so only the chart is shown') + '.';
     });
   }, function (err) {
     progress.then(function (prog) { showUnavailable(err, !!prog); });
