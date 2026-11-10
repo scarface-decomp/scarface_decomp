@@ -188,6 +188,33 @@
     .leaders .who { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .leaders .n { color: var(--red); font-variant-numeric: tabular-nums; }
 
+    /* ---------- matched over time ---------- */
+    .history { margin-top: 64px; --s-released: #EA444D; --s-ps2: #3987e5; --s-proto: #199e70; --grid: #2A2A2A; --axis: #383835; }
+    .history figcaption p { color: var(--grey); font-size: 0.94rem; margin-bottom: 12px; }
+    .h-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 22px; margin-bottom: 8px; font-size: 0.9rem; color: var(--grey); }
+    .h-legend li { display: inline-flex; align-items: center; gap: 8px; }
+    .h-key { display: inline-block; width: 16px; height: 2px; border-radius: 1px; }
+    .h-plot { position: relative; }
+    .h-plot svg { display: block; max-width: 100%; overflow: visible; }
+    .h-plot svg:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+    .h-plot .tick { fill: var(--grey); font: 12px var(--sans); font-variant-numeric: tabular-nums; }
+    .h-plot .end { fill: var(--white); font: 600 13px var(--sans); }
+    .h-plot .end-sub { fill: var(--grey); font: 12px var(--sans); }
+    .h-tip { position: absolute; top: 0; pointer-events: none; background: #050505; border: 1px solid var(--line); border-radius: 4px;
+             padding: 8px 12px 6px; font-size: 0.86rem; line-height: 1.5; white-space: nowrap; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+    .h-tip .d { color: var(--grey); font-size: 0.8rem; }
+    .h-tip .r { display: flex; align-items: center; gap: 8px; }
+    .h-tip .r b { font-weight: 600; color: var(--white); font-variant-numeric: tabular-nums; }
+    .h-tip .r span { color: var(--grey); }
+    .h-table { margin-top: 14px; font-size: 0.9rem; }
+    .h-table summary { cursor: pointer; color: var(--grey); }
+    .h-table summary:hover { color: var(--white); }
+    .h-scroll { max-height: 320px; overflow: auto; margin-top: 8px; }
+    .h-table table { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .h-table th, .h-table td { padding: 6px 14px 4px 0; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+    .h-table th:first-child, .h-table td:first-child { text-align: left; }
+    .h-table th { color: var(--grey); font-weight: 400; }
+
     /* ---------- help ---------- */
     .needs { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 0 auto 44px; list-style: none; }
     .needs + .needs-note { margin: -30px auto 40px; max-width: 36em; }
@@ -435,6 +462,23 @@
             </div>
           </div>
         </div>
+
+        <figure class="history" id="history" hidden>
+          <figcaption>
+            <h3>Matched over time</h3>
+            <p id="history-sub">Functions matched each day since the checks started again from scratch on 8 November 2026.</p>
+          </figcaption>
+          <ul class="h-legend" id="history-legend" aria-label="Lines"></ul>
+          <div class="h-plot" id="history-plot">
+            <svg id="history-svg" tabindex="0" role="img" aria-describedby="history-sub"></svg>
+            <div class="h-tip" id="history-tip" hidden></div>
+          </div>
+          <p class="sr-only" id="history-live" aria-live="polite"></p>
+          <details class="h-table">
+            <summary>Show the numbers</summary>
+            <div class="h-scroll"><table id="history-table"></table></div>
+          </details>
+        </figure>
       </div>
     </section>
 
@@ -732,6 +776,228 @@
     }
 
     // ------------------------------------------------------------------ progress
+    // ------------------------------------------------------------------ matched over time
+    // Drawn from the registry itself: every match carries the time it was verified, so the line for a day is
+    // how many of today's matches had been verified by its end. Lines: the released game (Xbox and PC, the
+    // headline), the PS2 and the prototype, each only once it has a match. Colours are fixed per line.
+    var HISTORY_LINES = [
+      { id: 'released', label: 'Released game (Xbox + PC)', bins: ['xb', 'pc'], color: 'var(--s-released)' },
+      { id: 'ps2', label: 'PS2', bins: ['ps2'], color: 'var(--s-ps2)' },
+      { id: 'proto', label: 'Xbox prototype', bins: ['proto'], color: 'var(--s-proto)' }
+    ];
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    function dayOf(stamp) {
+      var m = /^(\d{4})-(\d\d)-(\d\d)/.exec(stamp || '');
+      return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) / 86400000 : null;
+    }
+    function dayLabel(day, withYear) {
+      var d = new Date(day * 86400000);
+      return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + (withYear ? ' ' + d.getUTCFullYear() : '');
+    }
+    // The top of the scale: four equal steps of a whole, round number (1, 2, 5, 10, 20, 25, 50, ...).
+    function niceStep(top) {
+      var raw = Math.max(1, top / 4), p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p;
+      return Math.max(1, (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p);
+    }
+    function historySeries(reg) {
+      var entries = Object.values((reg && reg.entries) || {});
+      var start = dayOf(reg && reg.reset && reg.reset.date);
+      var days = entries.map(function (e) { return dayOf(e.verified_at || e.reverified_at); }).filter(function (d) { return d !== null; });
+      var today = Math.floor(Date.now() / 86400000);
+      if (start === null) start = days.length ? Math.min.apply(null, days) : today;
+      var end = Math.max(today, days.length ? Math.max.apply(null, days) : start, start);
+      var lines = HISTORY_LINES.map(function (l) {
+        var perDay = {}, total = 0;
+        entries.forEach(function (e) {
+          if (l.bins.indexOf(e.bin) < 0) return;
+          var d = dayOf(e.verified_at || e.reverified_at);
+          d = d === null ? start : Math.max(d, start);
+          perDay[d] = (perDay[d] || 0) + 1;
+          total++;
+        });
+        var run = 0, values = [];
+        for (var d = start; d <= end; d++) { run += perDay[d] || 0; values.push(run); }
+        return { line: l, values: values, total: total };
+      }).filter(function (s) { return s.total > 0; });
+      return { start: start, end: end, lines: lines };
+    }
+
+    function svgEl(name, attrs, parent) {
+      var e = document.createElementNS('http://www.w3.org/2000/svg', name);
+      Object.keys(attrs || {}).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+
+    var historyReg = null, historyWidth = 0;
+    window.addEventListener('resize', function () {
+      var w = $('history-plot') && $('history-plot').clientWidth;
+      if (historyReg && w && Math.abs(w - historyWidth) > 8) renderHistory(historyReg);
+    });
+
+    function renderHistory(reg) {
+      historyReg = reg;
+      var h = historySeries(reg);
+      if (!h.lines.length) return;                       // the chart starts with the first match
+      $('history').hidden = false;
+      historyWidth = $('history-plot').clientWidth;
+      var n = h.end - h.start + 1;
+      var multi = h.lines.length > 1;
+      $('history-sub').textContent = (multi ? 'Functions matched in each version' : 'Functions matched in the released game (Xbox and PC)') +
+        ', counted from the day each was verified, since the checks started again from scratch on ' + dayLabel(h.start, true) + '.';
+
+      // the legend: only when there are two or more lines (one line is named by the text above)
+      var legend = $('history-legend');
+      legend.textContent = '';
+      legend.hidden = !multi;
+      h.lines.forEach(function (s) {
+        var li = document.createElement('li');
+        var key = document.createElement('span');
+        key.className = 'h-key';
+        key.style.background = s.line.color;
+        li.appendChild(key);
+        li.appendChild(document.createTextNode(s.line.label));
+        legend.appendChild(li);
+      });
+
+      // drawn at the size it is shown, so the text stays readable on a phone (redrawn when that changes)
+      var svg = $('history-svg');
+      var W = Math.max(300, Math.round($('history-plot').clientWidth || 1040));
+      var narrow = W < 640;
+      var H = narrow ? 240 : 300, M = { t: 14, r: narrow ? 74 : 150, b: 34, l: narrow ? 40 : 52 };
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', H);
+      svg.textContent = '';
+      var top = Math.max.apply(null, h.lines.map(function (s) { return s.values[s.values.length - 1]; }));
+      var ystep = niceStep(top), ymax = ystep * 4;
+      var x = function (i) { return M.l + (n > 1 ? i * (W - M.l - M.r) / (n - 1) : (W - M.l - M.r) / 2); };
+      var y = function (v) { return H - M.b - v / ymax * (H - M.t - M.b); };
+
+      // recessive grid: hairlines, four steps, clean numbers
+      for (var k = 0; k <= 4; k++) {
+        var val = ystep * k;
+        svgEl('line', { x1: M.l, x2: W - M.r, y1: y(val), y2: y(val), stroke: k ? 'var(--grid)' : 'var(--axis)', 'stroke-width': 1 }, svg);
+        var t = svgEl('text', { x: M.l - 10, y: y(val) + 4, 'text-anchor': 'end', class: 'tick' }, svg);
+        t.textContent = val >= 10000 ? fmt(val / 1000) + 'K' : fmt(val);
+      }
+      // dates along the bottom: about five, never crowded
+      var step = Math.max(1, Math.ceil((n - 1) / (narrow ? 3 : 5)));
+      for (var i = 0; i < n; i += step) {
+        var dt = svgEl('text', { x: x(i), y: H - 10, 'text-anchor': n === 1 ? 'middle' : i === 0 ? 'start' : 'middle', class: 'tick' }, svg);
+        dt.textContent = dayLabel(h.start + i, i === 0);
+      }
+      if ((n - 1) % step !== 0 && n > 1) {
+        var last = svgEl('text', { x: x(n - 1), y: H - 10, 'text-anchor': 'end', class: 'tick' }, svg);
+        last.textContent = dayLabel(h.end, false);
+      }
+
+      // the lines (2px, round), then an end dot with a surface ring and a direct label
+      var ends = [];
+      h.lines.forEach(function (s) {
+        var d = s.values.map(function (v, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1); }).join(' ');
+        if (n > 1) svgEl('path', { d: d, fill: 'none', stroke: s.line.color, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+        var v = s.values[n - 1];
+        svgEl('circle', { cx: x(n - 1), cy: y(v), r: 5, fill: s.line.color, stroke: '#121212', 'stroke-width': 2 }, svg);
+        ends.push({ s: s, y: y(v), v: v });
+      });
+      // direct labels at the line ends, unless two would collide (then the legend and the tooltip carry them)
+      ends.sort(function (a, b) { return a.y - b.y; });
+      var clash = ends.some(function (e, i) { return i && e.y - ends[i - 1].y < 30; });
+      if (!clash) {
+        ends.forEach(function (e) {
+          var tv = svgEl('text', { x: x(n - 1) + 12, y: e.y - 1, class: 'end' }, svg);
+          tv.textContent = fmt(e.v);
+          var tn = svgEl('text', { x: x(n - 1) + 12, y: e.y + 14, class: 'end-sub' }, svg);
+          tn.textContent = multi ? e.s.line.label.replace(' (Xbox + PC)', '').replace('Xbox prototype', 'Prototype') : 'functions';
+        });
+      }
+
+      // hover and keyboard: a crosshair that snaps to the nearest day, one tooltip with every line
+      var cross = svgEl('line', { y1: M.t, y2: H - M.b, stroke: 'var(--grey)', 'stroke-width': 1, visibility: 'hidden' }, svg);
+      var dots = h.lines.map(function (s) {
+        return svgEl('circle', { r: 4, fill: s.line.color, stroke: '#121212', 'stroke-width': 2, visibility: 'hidden' }, svg);
+      });
+      var hit = svgEl('rect', { x: M.l - 8, y: 0, width: W - M.l - M.r + 16, height: H, fill: 'transparent' }, svg);
+      var tip = $('history-tip');
+      var at = n - 1;
+      function show(i) {
+        at = Math.max(0, Math.min(n - 1, i));
+        cross.setAttribute('x1', x(at)); cross.setAttribute('x2', x(at)); cross.setAttribute('visibility', 'visible');
+        h.lines.forEach(function (s, j) {
+          dots[j].setAttribute('cx', x(at)); dots[j].setAttribute('cy', y(s.values[at])); dots[j].setAttribute('visibility', 'visible');
+        });
+        tip.textContent = '';
+        var head = document.createElement('div');
+        head.className = 'd';
+        head.textContent = dayLabel(h.start + at, true);
+        tip.appendChild(head);
+        var spoken = [head.textContent];
+        h.lines.forEach(function (s) {
+          var r = document.createElement('div');
+          r.className = 'r';
+          var key = document.createElement('span');
+          key.className = 'h-key';
+          key.style.background = s.line.color;
+          var b = document.createElement('b');
+          b.textContent = fmt(s.values[at]);
+          var name = document.createElement('span');
+          name.textContent = s.line.label;
+          r.appendChild(key); r.appendChild(b); r.appendChild(name);
+          tip.appendChild(r);
+          spoken.push(s.line.label + ': ' + fmt(s.values[at]));
+        });
+        tip.hidden = false;
+        var box = svg.getBoundingClientRect(), scale = box.width / W;
+        var px = x(at) * scale, tw = tip.offsetWidth;
+        tip.style.left = Math.max(0, Math.min(box.width - tw, px + (px + 14 + tw > box.width ? -tw - 14 : 14))) + 'px';
+        tip.style.top = (M.t * scale) + 'px';
+        $('history-live').textContent = spoken.join(', ');
+      }
+      function hide() {
+        cross.setAttribute('visibility', 'hidden');
+        dots.forEach(function (d) { d.setAttribute('visibility', 'hidden'); });
+        tip.hidden = true;
+      }
+      function nearest(ev) {
+        var box = svg.getBoundingClientRect();
+        var px = (ev.clientX - box.left) / box.width * W;
+        return n > 1 ? Math.round((px - M.l) / ((W - M.l - M.r) / (n - 1))) : 0;
+      }
+      hit.addEventListener('pointermove', function (ev) { show(nearest(ev)); });
+      hit.addEventListener('pointerleave', hide);
+      svg.addEventListener('focus', function () { show(at); });
+      svg.addEventListener('blur', hide);
+      svg.addEventListener('keydown', function (ev) {
+        var moves = { ArrowLeft: -1, ArrowRight: 1, Home: -n, End: n };
+        if (!(ev.key in moves)) return;
+        ev.preventDefault();
+        show(at + moves[ev.key]);
+      });
+      svg.setAttribute('aria-label', 'Line chart of functions matched over time. ' + h.lines.map(function (s) {
+        return s.line.label + ': ' + fmt(s.values[n - 1]);
+      }).join('; ') + '. Use the left and right arrow keys to read each day.');
+
+      // the same numbers as a table: the first day, every day something changed, and today
+      var table = $('history-table');
+      table.textContent = '';
+      var thead = document.createElement('thead'), hr = document.createElement('tr');
+      ['Day'].concat(h.lines.map(function (s) { return s.line.label; })).forEach(function (t) {
+        var th = document.createElement('th'); th.scope = 'col'; th.textContent = t; hr.appendChild(th);
+      });
+      thead.appendChild(hr); table.appendChild(thead);
+      var tbody = document.createElement('tbody');
+      for (var di = n - 1; di >= 0; di--) {
+        var changed = di === 0 || di === n - 1 || h.lines.some(function (s) { return s.values[di] !== s.values[di - 1]; });
+        if (!changed) continue;
+        var tr = document.createElement('tr');
+        var td0 = document.createElement('th'); td0.scope = 'row'; td0.textContent = dayLabel(h.start + di, true); tr.appendChild(td0);
+        h.lines.forEach(function (s) { var td = document.createElement('td'); td.textContent = fmt(s.values[di]); tr.appendChild(td); });
+        tbody.appendChild(tr);
+      }
+      table.appendChild(tbody);
+    }
+
     // Small functions with a head start, picked by portal/tools/good_first.py from the work queue.
     function renderGoodFirst(prog) {
       var picks = (prog && prog.good_first) || [];
@@ -1033,6 +1299,7 @@
         function () { return { reg: reg, prog: null }; });
     }).then(function (d) {
       renderProgress(d.prog, d.reg);
+      renderHistory(d.reg);
       renderGoodFirst(d.prog);
       buildList(d.reg);
       $('data-status').textContent = 'Live numbers from ' + CFG.owner + '/' + CFG.repo +

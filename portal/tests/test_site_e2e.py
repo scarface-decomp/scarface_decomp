@@ -381,6 +381,7 @@ def test_reference_section_and_versions_page(tmp_path, browser):
         refs = pg.eval_on_selector_all("#reference .refs a", "as => as.map(a => a.getAttribute('href'))")
         assert refs[2] == "versions.html" and any(h.endswith("docs/FORMATS.md") for h in refs)
         assert any(h.endswith("docs/NAMES.md") for h in refs)
+        ctx.route("https://raw.githubusercontent.com/**", lambda r: r.abort())   # nor in the repository
         pg.goto(url + "versions.html")
         pg.wait_for_selector("#missing:not([hidden])")               # no report on this made-up site yet
         assert "version_report.py --scan" in pg.text_content("#missing")
@@ -444,6 +445,44 @@ def test_good_first_functions_on_the_site(tmp_path, browser):
         pg.reload()
         pg.wait_for_selector("#fn-list .fn")
         assert pg.is_hidden("#good-first-box")
+        assert not pg.errors, pg.errors
+        ctx.close()
+    finally:
+        srv.shutdown()
+
+
+def test_matched_over_time_chart(tmp_path, browser):
+    """Progress: a line per version with matches, from the restart to today, read by hovering, by the
+    arrow keys, or as a table."""
+    d = tmp_path / "site"
+    d.mkdir()
+    for f in STATIC:
+        shutil.copy2(ROOT / "docs" / f, d / f)
+    (d / "data").mkdir()
+    reg = {"schema": REG["schema"], "reset": {"date": "2026-11-01"}, "entries": {}}
+    for i, (b, day) in enumerate([("xb", 1), ("xb", 2), ("pc", 2), ("ps2", 3), ("xb", 3), ("proto", 1)]):
+        reg["entries"][f"{b}:0x{i:08X}"] = {"bin": b, "va": f"0x{i:08X}", "size": 8, "symbol": f"sub_{i:08X}",
+                                             "code": "void f() {}", "flags": "/O2", "verified_at": f"2026-11-0{day} 12:00:00"}
+    (d / "data" / "verified_registry.json").write_text(json.dumps(reg), encoding="utf-8")
+    (d / "data" / "progress.json").write_text(json.dumps(PROG), encoding="utf-8")
+    srv, url = serve(d)
+    try:
+        ctx, pg = open_page(browser, url)
+        pg.wait_for_selector("#history:not([hidden]) path")
+        assert pg.locator("#history-svg path").count() == 3
+        assert pg.eval_on_selector_all("#history-legend li", "ls => ls.map(l => l.textContent)") == \
+            ["Released game (Xbox + PC)", "PS2", "Xbox prototype"]
+        pg.focus("#history-svg")
+        pg.keyboard.press("Home")
+        assert pg.text_content("#history-live") == "1 Nov 2026, Released game (Xbox + PC): 1, PS2: 0, Xbox prototype: 1"
+        pg.keyboard.press("ArrowRight")
+        pg.keyboard.press("ArrowRight")
+        assert pg.text_content("#history-live") == "3 Nov 2026, Released game (Xbox + PC): 4, PS2: 1, Xbox prototype: 1"
+        assert pg.is_visible("#history-tip")
+        rows = pg.eval_on_selector_all("#history-table tbody tr", "rs => rs.map(r => [...r.cells].map(c => c.textContent))")
+        assert rows[-1] == ["1 Nov 2026", "1", "0", "1"] and ["3 Nov 2026", "4", "1", "1"] in rows
+        ticks = pg.eval_on_selector_all("#history-svg .tick", "ts => ts.map(t => t.textContent)")
+        assert ticks[:5] == ["0", "1", "2", "3", "4"]                                # whole functions only
         assert not pg.errors, pg.errors
         ctx.close()
     finally:
