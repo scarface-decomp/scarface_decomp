@@ -5,9 +5,9 @@ skins, skeletons, shaders, textures and animations, and the models as .obj files
 
     python portal/tools/p3d.py FILE.p3d                 the chunk tree, with each known chunk's fields
     python portal/tools/p3d.py FILE.p3d --depth 2       only the first two levels
-    python portal/tools/p3d.py FILE.p3d --obj OUT.obj   the meshes and skins as a Wavefront .obj
-                                                        (PC and Xbox files; the PS2's are packed for its
-                                                        vector unit, see docs/FORMATS.md)
+    python portal/tools/p3d.py FILE.p3d --obj OUT.obj   the meshes and skins as a Wavefront .obj (plain
+                                                        geometry; p3d_gltf.py writes textured scenes with
+                                                        skeletons, animations and maps for Blender)
 
 A file is "P3D" 0xFF, u32 12, u32 file size, then chunks: u32 id, u32 size of the chunk's own data (with
 these 12 bytes), u32 size with its sub-chunks, the data, then the sub-chunks. Text is a u8 length (padded
@@ -37,11 +37,11 @@ NAMES: Dict[int, str] = {
     0x10008: "Colour List", 0x1000A: "Index List", 0x1000B: "Matrix List", 0x1000C: "Weight List",
     0x1000D: "Matrix Palette", 0x10010: "Packed Normal List", 0x10011: "Vertex Shader",
     0x10012: "Memory Image Vertex List", 0x10013: "Memory Image Index List",
-    0x10014: "Memory Image Vertex Description", 0x10017: "Render Status", 0x10019: "Shadow Skin (?)",
-    0x1001B: "Topology (?)", 0x10020: "Primitive Group", 0x10021: "Vertex Precision (?)",
+    0x10014: "Memory Image Vertex Description", 0x10017: "Render Status", 0x1001B: "Topology (?)",
+    0x1001C: "Extra Colour List (?)",
+    0x10020: "Primitive Group", 0x10021: "Vertex Precision (?)",
     0x11000: "Shader", 0x11002: "Shader Texture Parameter", 0x11003: "Shader Integer Parameter",
     0x11004: "Shader Float Parameter", 0x11005: "Shader Colour Parameter",
-    0x14000: "Old Locator",
     0x18000: "Frontend Project", 0x18001: "Frontend Screen", 0x18002: "Frontend Page",
     0x18009: "Frontend Polygon", 0x1800C: "Frontend String Hard Coded",
     0x19000: "Texture", 0x19001: "Image", 0x19002: "Image Data", 0x19005: "Sprite",
@@ -56,7 +56,27 @@ NAMES: Dict[int, str] = {
     0x121111: "Compressed Quaternion Channel", 0x121112: "Compressed Quaternion Channel2",
     0x121114: "Byte Quaternion Channel (?)",
     0x121200: "Old Frame Controller", 0x121201: "Frame Controller",
+    # Named after the classes that load them in the Xbox game (default.xbe's run-time type names), so
+    # these are the game's own names: docs/FORMATS.md has the list and where each was found.
+    0x2200: "Camera", 0x2380: "Light Group", 0x13000: "Light", 0x14000: "Locator", 0x17006: "Billboard",
+    0x1001A: "Shadow Mesh", 0x10019: "Shadow Skin", 0x1580C: "Particle System",
+    0x1800D: "Text Bible", 0x21000: "Expression", 0x21001: "Expression Group", 0x21002: "Expression Mixer",
+    0x22002: "Image Font", 0x121202: "Multi Controller",
+    0x123000: "Composite Drawable", 0x123001: "Composite Drawable Part",
+    0x7010000: "Collision Object", 0x7011000: "Rigid Body", 0x7010025: "World Collision Object",
+    0x8011000: "Nav Mesh", 0x8011005: "Road Graph", 0x802000D: "State Prop Data",
+    0x8800000: "Character", 0x8800001: "Vehicle", 0x8800002: "Sky", 0x8800003: "World Geometry",
+    0x8800004: "Zone Package", 0x8800005: "State Prop", 0x8800007: "Light Group (game)", 0x8800008: "Shadow",
+    0x880000A: "Occluder", 0x8800100: "Stream Package", 0x8800101: "Stream Trigger", 0x8800102: "NIS Package",
+    0x8800104: "Script File", 0x8800105: "Load Package", 0x8800108: "Cement Header", 0x8800112: "Load Package Name",
+    0x8800113: "NIS Stream Data", 0x8800114: "NIS Stream Partition Info", 0x8800150: "CV Load Object",
+    0x8800160: "Traffic Config", 0x8800161: "Subzone Traffic Trigger", 0x8800180: "Script Object",
+    0x8800181: "Game Group", 0x8800201: "Water Dock", 0x8800202: "Water Obstacle", 0x8800203: "Water Shallow Area",
+    0x9900190: "Script Object Data", 0x9900191: "Game Group Data", 0x9900192: "Script Object Property (?)",
+    0x9900194: "Script Object Property Value (?)",
 }
+for _cid in range(0x1005002, 0x100500C):
+    NAMES[_cid] = "Sound Entity"
 
 PRIMITIVES = {0: "triangle list", 1: "triangle strip", 2: "line list", 3: "line strip", 4: "points"}
 VERTEX_BITS = ((0x2000, "position"), (0x0010, "normal"), (0x0020, "colour"), (0x0080, "matrix indices"),
@@ -296,6 +316,61 @@ def _one_u32(r: _R) -> dict:
     return {"value": r.u32()}
 
 
+def _composite(r: _R) -> dict:
+    return {"version": r.u32(), "name": r.text(), "skeleton": r.text(), "parts": r.u32()}
+
+
+def _composite_part(r: _R) -> dict:
+    r.u32()
+    r.u32()
+    name = r.text()
+    kind = r.u32()
+    return {"drawable": name, "kind": {1: "model", 0x20: "shadow mesh", 0x40: "shadow skin"}.get(kind, kind),
+            "joint": r.u32()}
+
+
+def _two_names(r: _R) -> dict:
+    return {"name": r.text(), "drawable": r.text()}
+
+
+def _world_geo(r: _R) -> dict:
+    return {"name": r.text(), "composite drawable": r.text(), "flags": r.u32()}
+
+
+def _zone(r: _R) -> dict:
+    name, n = r.text(), r.u32()
+    return {"name": name, "world geometry": [r.text() for _ in range(n) if r.left() > 0]}
+
+
+def _name_only(r: _R) -> dict:
+    return {"name": r.text()}
+
+
+def _script_object(r: _R) -> dict:
+    return {"file": r.text(), "name": r.text(), "class": r.text()}
+
+
+def _game_group(r: _R) -> dict:
+    return {"file": r.text(), "name": r.text(), "class": r.text(), "count": r.u32()}
+
+
+def _object_property(r: _R) -> dict:
+    name, kind = r.text(), r.u32()
+    if kind == 0:
+        return {"name": name, "value": r.text()}
+    return {"name": name, "type": kind}
+
+
+def _property_value(r: _R) -> dict:
+    """An instance object's "instanceposition": twelve 32-bit values (see p3d_gltf.instance_trs)."""
+    if r.left() < 48:
+        return {"bytes": r.left()}
+    x, y, z = r.floats(3)
+    v = [r.u32() for _ in range(9)]
+    return {"position": (round(x, 3), round(y / 100, 2), round(z, 3)), "angles": tuple(v[0:3]),
+            "scale": round((v[3] | v[4] << 6 | v[5] << 12) / 1000, 3) if v[6] else tuple(round(a * 0.05, 2) for a in v[3:6])}
+
+
 FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x7000: _history,
     0x10000: _mesh, 0x10001: _skin, 0x10020: _prim_group, 0x10003: _box, 0x10004: _sphere,
@@ -307,6 +382,9 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x23000: _skeleton, 0x23001: _joint,
     0x121000: _animation, 0x121002: _anim_count, 0x121006: _anim_count, 0x121007: _channel_count,
     0x121001: _group, 0x121110: _interp,
+    0x123000: _composite, 0x123001: _composite_part, 0x8800003: _world_geo, 0x8800004: _zone,
+    0x8800005: _two_names, 0x8800112: _name_only, 0x9900190: _script_object, 0x9900191: _game_group,
+    0x9900192: _object_property, 0x9900194: _property_value,
 }
 for _cid in (0x121100, 0x121101, 0x121104) + QUATERNION_CHANNELS:
     FIELDS[_cid] = _channel
@@ -371,39 +449,14 @@ def _triangles(indices: List[int], prim: int) -> List[Tuple[int, int, int]]:
     return out
 
 
-def primitive_geometry(data: bytes, pg: Chunk) -> Optional[Tuple[List[tuple], List[Tuple[int, int, int]]]]:
-    """(positions, triangles) of a primitive group stored as plain lists (PC, some Xbox) or as an Xbox
-    memory image (a vertex buffer that starts each vertex with its position, and 16-bit indices).
-    None for the PS2's vector-unit packets."""
-    info = fields(data, pg)
-    n, prim = info.get("vertices", 0), next((k for k, v in PRIMITIVES.items() if v == info.get("primitive")), -1)
-    pos_c, idx_c = pg.find(0x10005), pg.find(0x1000A)
-    if pos_c and idx_c:
-        s, _ = pos_c.body
-        count = struct.unpack_from("<I", data, s)[0]
-        flat = struct.unpack_from(f"<{3 * count}f", data, s + 4)
-        positions = [flat[i:i + 3] for i in range(0, len(flat), 3)]
-        s, _ = idx_c.body
-        k = struct.unpack_from("<I", data, s)[0]
-        indices = list(struct.unpack_from(f"<{k}I", data, s + 4))
-        return positions, _triangles(indices, prim)
-    vb, ib = pg.find(0x10012), pg.find(0x10013)
-    if vb and ib and n:
-        s, _ = vb.body
-        size = struct.unpack_from("<I", data, s + 8)[0]
-        if size % n:
-            return None
-        stride = size // n
-        positions = [struct.unpack_from("<3f", data, s + 12 + i * stride) for i in range(n)]
-        s, _ = ib.body
-        size = struct.unpack_from("<I", data, s + 8)[0]
-        indices = list(struct.unpack_from(f"<{size // 2}H", data, s + 12))
-        return positions, _triangles(indices, prim)
-    return None
+def _gltf():
+    import p3d_gltf                      # reads the Xbox's and the PS2's vertex data too; it imports this module
+    return p3d_gltf
 
 
 def to_obj(data: bytes) -> str:
-    """Every mesh and skin in the file as Wavefront .obj text (positions and faces), one object each."""
+    """Every mesh and skin in the file as Wavefront .obj text (positions and faces), one object each, from
+    the PC's lists, the Xbox's vertex buffers or the PS2's vertex packets."""
     lines = ["# from a Pure3D file by portal/tools/p3d.py"]
     base = 1
     for c in walk(read_tree(data)):
@@ -412,11 +465,14 @@ def to_obj(data: bytes) -> str:
         name = fields(data, c).get("name", "mesh")
         lines.append(f"o {name}")
         for pg in (k for k in c.children if k.id == 0x10020):
-            geo = primitive_geometry(data, pg)
-            if not geo:
-                lines.append(f"# {fields(data, pg).get('shader', '')}: stored for the PS2's vector unit, left out")
+            try:
+                g = _gltf().geometry(data, pg)
+            except (struct.error, IndexError, ValueError):
+                g = None
+            if not g:
+                lines.append(f"# {fields(data, pg).get('shader', '')}: in a form not read, left out")
                 continue
-            positions, tris = geo
+            positions, tris = g.positions, g.triangles
             lines.append(f"g {name}_{fields(data, pg).get('shader', '')}")
             lines += [f"v {x:.6f} {y:.6f} {z:.6f}" for x, y, z in positions]
             lines += [f"f {a + base} {b + base} {cc + base}" for a, b, cc in tris]

@@ -3584,6 +3584,14 @@
         b.addEventListener('click', () => gfTogglePreview(row, b, look, GF_TAB, f.path));
         act.appendChild(b);
       }
+      if (f.placed && /\.p3d$/i.test(f.path)) {
+        const m = el('a', 'Blender', 'btn-sm');
+        m.href = gfFileUrl('model', GF_TAB, f.path);
+        m.setAttribute('download', '');
+        m.title = 'Download as a glTF scene (.glb): File > Import > glTF 2.0 in Blender. A map area comes with what is placed on it.';
+        m.setAttribute('aria-label', 'Download ' + f.path + ' for Blender');
+        act.appendChild(m);
+      }
       row.appendChild(act);
       list.appendChild(row);
     });

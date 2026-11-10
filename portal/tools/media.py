@@ -23,7 +23,7 @@ Data chunk (0x19002) is the picture:
     PS2       Pure3D's own "P3DI" image with a palette (formats 11/12: 4- or 8-bit), decoded to PNG here
 
     sound_info(data) / playable(data) -> (bytes, mime type, file extension)
-    textures(data) -> [Texture] / texture_png(data, index) -> PNG bytes
+    textures(data) -> [Texture] / texture_png(data, index) or picture_png(data, texture) -> PNG bytes
 """
 
 from __future__ import annotations
@@ -480,10 +480,17 @@ def _ps2_order(w: int, h: int, bpp: int) -> Optional[Tuple[int, ...]]:
     return tuple(order)
 
 
+def _ps2_swizzled(w: int, h: int, bpp: int) -> bool:
+    """Which PS2 pictures are stored in the GS's block order: every square one, and 8-bit ones at least
+    128 x 64 (one 8-bit GS page). Smaller 8-bit ones that aren't square (mipmap levels such as 64 x 32)
+    and 4-bit ones that aren't square are stored row by row."""
+    return w == h or (bpp == 8 and w >= 128 and h >= 64)
+
+
 def decode_p3di(img: bytes) -> Tuple[int, int, bytes]:
     """Pure3D's PS2 picture: "P3DI", u32, width, height, bits per pixel, palette bytes, pixel bytes, then the
-    palette (RGBA, alpha 0-128) and the pixels (4-bit: two to a byte, low nibble first). Square textures are
-    stored in the GS's block order (see _ps2_order), others row by row. Rows are stored bottom-up."""
+    palette (RGBA, alpha 0-128) and the pixels (4-bit: two to a byte, low nibble first). Square textures (and
+    big 8-bit ones, see _ps2_swizzled) are stored in the GS's block order (see _ps2_order), others row by row. Rows are stored bottom-up."""
     if img[:4] != b"P3DI" or len(img) < 28:
         raise MediaError("not a P3DI picture")
     _k, w, h, bpp, pal_size, pix_size = struct.unpack_from("<6I", img, 4)
@@ -507,7 +514,7 @@ def decode_p3di(img: bytes) -> Tuple[int, int, bytes]:
         idx = [(pix[i >> 1] >> (4 * (i & 1))) & 15 if (i >> 1) < len(pix) else 0 for i in range(w * h)]
     else:
         idx = list(pix[:w * h]) + [0] * max(0, w * h - len(pix))
-    order = _ps2_order(w, h, bpp) if w == h else None
+    order = _ps2_order(w, h, bpp) if _ps2_swizzled(w, h, bpp) else None
     if order:
         idx = [idx[j] for j in order]
     blank = b"\0\0\0\0"
@@ -526,7 +533,11 @@ def texture_png(data: bytes, index: int) -> bytes:
     texs = textures(data)
     if not 0 <= index < len(texs):
         raise MediaError("no such picture in this file")
-    t = texs[index]
+    return picture_png(data, texs[index])
+
+
+def picture_png(data: bytes, t: Texture) -> bytes:
+    """A picture found by textures(), as PNG, top row first."""
     body = data[t.offset:t.offset + t.size]
     if t.kind == "png":
         return body

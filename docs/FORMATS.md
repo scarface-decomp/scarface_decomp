@@ -12,7 +12,7 @@ All numbers are little-endian unless a section says otherwise. Offsets are in he
 | [Disc images](#disc-images-and-installers) | `.iso`, `.xiso` | all | `portal/tools/game_assets.py`, `game_files.py` |
 | [PC installer](#disc-images-and-installers) | `SCARFACE.MSI`, `Data1.cab` | PC | `msi_reader.py`, `ms_cab.py` |
 | [Cement archives](#cement-archives-rcf) | `.rcf` | all | `rcf.py`, `game_assets.py` |
-| [Pure3D](#pure3d-p3d) | `.p3d` | all | `p3d.py` (chunks, models to .obj), `game_assets.py` (contents), `media.py` (pictures) |
+| [Pure3D](#pure3d-p3d) | `.p3d` | all | `p3d.py` (chunks, models to .obj), `p3d_gltf.py` (models, animations and maps to glTF for Blender), `game_assets.py` (contents), `media.py` (pictures) |
 | [Pictures in Pure3D](#pictures) | PNG, DDS, P3DI | PC, Xbox, PS2 | `media.py` |
 | [Sounds](#sounds-rsd) | `.rsd` | all | `game_assets.py` (facts), `media.py` (playing) |
 | [Videos](#videos-bik) | `.bik` | Xbox and PC (Bink) | `game_assets.py` (Bink picture size) |
@@ -86,7 +86,10 @@ A reader can skip any chunk it doesn't know by its third size. Ids the portal us
 | `0x00121000` | Animation | animation data (the file is filed under Animations when it has no mesh) |
 
 `portal/tools/p3d.py FILE.p3d` prints any file's chunk tree with every chunk below named and its fields
-read, and `--obj OUT.obj` writes its meshes and skins for Blender and other 3D programs.
+read, and `--obj OUT.obj` writes its meshes and skins as plain geometry. `portal/tools/p3d_gltf.py` writes
+whole scenes as glTF (`.glb`), which Blender opens with File > Import > glTF 2.0: textured models,
+characters with their skeletons, skin weights and animations, guns and cars with their moving parts, and
+map areas with everything placed on them ([Exporting to Blender](#exporting-to-blender)).
 
 ### Pictures
 
@@ -111,13 +114,14 @@ The Image chunk's *format* says how its Image Data is stored, and it differs per
 A 256-colour palette is in the PS2 graphics chip's CSM1 order: in each run of 32 colours, colours 8-15
 and 16-23 swap places.
 
-**Square** PS2 pictures are also stored in the graphics chip's own block order, ready to be sent to it as
+**Square** PS2 pictures, and 8-bit ones of at least 128 x 64 (one GS page), are also stored in the graphics chip's own block order, ready to be sent to it as
 32-bit data (PSMCT32) and read back as 8-bit (PSMT8) or 4-bit (PSMT4) pixels. To show one, work out where
 the chip would read each pixel: send the data as a PSMCT32 picture of width/2 x height/2 (8-bit) or
 width/2 x height/4 (4-bit), then read pixel (x, y) at its PSMT8 or PSMT4 address. The page, block and
 column tables are the ones in Sony's GS manual (and in emulators such as PCSX2); `media.py` has them
-written out. Pictures that aren't square are stored row by row. All 66 PS2 pictures in the samples
-checked follow these rules and match the PC versions of the same textures.
+written out. The rest (4-bit pictures that aren't square, and small 8-bit ones such as a 64 x 32 mipmap
+level) are stored row by row. All 65 PS2 pictures in the samples that have a PC twin follow these rules:
+decoded this way each matches the PC picture of the same name, and decoded the other way it doesn't.
 
 ### Models: meshes and skins
 
@@ -160,15 +164,46 @@ The same model is stored three ways:
 * **PC**: plain lists (positions, normals, packed normals, UVs, indices, and for skins the matrix list,
   weight list and palette).
 * **Xbox**: a memory image for meshes. `0x00010012` holds the vertices as the Xbox's graphics chip reads
-  them, each starting with its position as 3 floats (24 bytes a vertex for `0x2011`: position, a packed
-  normal, UV), and `0x00010013` holds u16 indices. Skins keep the PC's plain lists.
-* **PS2**: only a memory image: `0x00010012` is a ready-made VIF packet for the vector unit's
-  microprogram. The vertices come in batches of up to 54. Each batch starts with a 4-quadword header (its
-  first word is the vertex count; the third quadword holds the scale of the positions and of the normals,
-  1/127; the fourth is a GIF tag), then each vertex takes five quadwords, one per attribute: UVs as 2
-  floats, the normal as 3 signed bytes, the position as 3 signed 16-bit numbers (times the scale), and for
-  skins four matrix offsets (palette index x 4) and four 16-bit weights (4096 = 1). The index count is 0:
-  each batch is drawn as it comes.
+  them and `0x00010013` holds u16 indices (both after three u32: `0x20001`, 0, the size in bytes). A
+  vertex is the position (3 floats), then the normal if the vertex type has one (a packed u32, Direct3D's
+  NORMPACKED3: x and y in 11 signed bits, z in 10), the colour if it has one (u32, ARGB), one more u32
+  colour for each of the bits `0x4000` and `0x10000` (the PC keeps these in `0x0001001C` lists: u32 count,
+  u32 channel, a u32 per vertex), each UV set (2 floats), and on vehicles (vertex type bit `0x100000`) two
+  more vectors (6 floats). Skins keep the PC's plain lists.
+* **PS2**: only a memory image: `0x00010012` (after three u32: `0x100008`, the number of quadwords, the
+  size) is a ready-made VIF packet for the vector unit's microprogram. See
+  [PS2 vertex packets](#ps2-vertex-packets).
+
+#### PS2 vertex packets
+
+The vertices come in batches of up to 72 (54 for skins), each its own triangle strip. A batch is a run of
+VIF codes: an UNPACK of four quadwords (V4-32) to address 0, the header, then a STCYCL whose CL is the
+number of quadwords per vertex, then one UNPACK per attribute, starting at address 4 (STMASK, STCOL,
+STMOD and STROW fill the parts the data doesn't).
+
+```
+header   u32 vertex count, u32 flags, two VU addresses
+         4 floats: the batch's bounding sphere (centre and radius)
+         4 floats: the scales: positions, normals (1/127), then UVs (see below)
+         the GIF tag
+```
+
+The attributes, in this order, one quadword each:
+
+| Attribute | Stored as | Value |
+| :--- | :--- | :--- |
+| each UV set | V2-32 floats, or V2-16 | 16-bit numbers times a scale: the header's fourth for the first UV set and its third for the second; on vehicles the second for the first set and the fourth for the second |
+| colour | V4-8 (128 is full), or V4-5 (5-5-5-1 bits) | |
+| normal | V3-8 over 127, or V3-32 floats | on vehicles two more vectors come before it |
+| position | V3-32 floats, or V3-16 or V3-8 | 8- and 16-bit numbers times the header's first scale |
+| matrices (skins) | V4-8 unsigned | palette index x 4 |
+| weights (skins) | V4-16 | the first weight over 4096; each next one over 4096 times the weight before it (0.6, 0.2, 0.2 is stored as 2458, 1365, 4096) |
+
+The lowest bit of a vertex's U (the float's bits, or the 16-bit number) is set when the triangle that
+ends at that vertex is not drawn: the strip starts again there, as the PC's strips do with repeated
+indices. Triangles alternate in direction along the strip, counting from the batch's first vertex; the
+even ones turn the same way as the PC's. Decoded this way, the PS2's character, car and map samples match
+the PC's positions, UVs, colours, joints and weights.
 
 ### Skeletons
 
@@ -190,7 +225,7 @@ used `0x4500` and `0x4501` for these.
 | `0x00121002` | Animation Group List | u32 version, u32 number of groups |
 | `0x00121001` | Animation Group | u32 version, name (a joint's name), u32 group id (the joint's number), u32 number of channels |
 | `0x00121104` | Vector3DOF Channel | u32 version, 4 characters parameter (`TRAN`), u32 keys, u16 frame numbers, 3 floats per key |
-| `0x00121102`, `0x00121103` | Vector1DOF, Vector2DOF Channel | u32 version, parameter, u16 mapping (which components move), 3 floats constants (the rest), u32 keys, u16 frames, 1 or 2 floats per key |
+| `0x00121102`, `0x00121103` | Vector1DOF, Vector2DOF Channel | u32 version, parameter, u16 mapping, 3 floats constants, u32 keys, u16 frames, 1 or 2 floats per key. For one moving component the mapping says which (0 x, 1 y, 2 z); for two it says which one stays at its constant |
 | `0x00121105` | Quaternion Channel | u32 version (1), parameter (`ROT`), u32 keys, u16 frames, 4 floats per key: x, y, z, w |
 | `0x00121112` | Compressed Quaternion Channel2 | the same header, then x, y, z as signed 16-bit numbers over 32,767 (Xbox and PS2) |
 | `0x00121114` | no name known (`p3d.py` says Byte Quaternion Channel) | the same header, then x, y, z as signed bytes over 127 (Xbox and PS2; about 1% precision) |
@@ -203,13 +238,134 @@ compressed forms the rotation is turned so that w is not negative, and w is work
 `sqrt(1 - x² - y² - z²)`. Against the PC's rotations at the same frames, the 16-bit form is within 0.1
 degree; the bytes are rounded towards zero (about one step low), a few degrees at worst.
 
+### Which way round
+
+Pure3D is left-handed with Y up (like Direct3D): a character faces -Z with its left side at +X, and
+text on signs reads correctly only when that is kept. glTF and Blender are right-handed, so `p3d_gltf.py`
+mirrors Z (a position's z, a rotation's x and y) and turns every triangle round to keep it facing out.
+UVs have V running up from the bottom of the picture, so V is flipped too.
+
+### Composite drawables
+
+Most things the game draws are composite drawables: a skeleton and the meshes (or skins) hung on its
+joints. A gun, a car, a placed tree and each part of a map are one.
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x00123000` | Composite Drawable | u32 version (0), name, skeleton name, u32 number of parts; the parts follow |
+| `0x00123001` | Composite Drawable Part | u32 0, u32 0, the drawable's name, u32 kind (1 a model; `0x20` a shadow mesh, `0x40` a shadow skin), u32 the joint it hangs on |
+| `0x08800005` | State Prop | name, the composite drawable's name |
+| `0x0802000D` | State Prop Data | the prop's states and what each shows and runs, in sub-chunks `0x08020002` to `0x0802000E` (not written up yet) |
+
+A part's mesh is in its joint's space: the joint's world matrix times the vertex.
+
+### The game's loaders
+
+The game reads each kind of chunk with a loader object, and the Xbox program still has their class names
+(run-time type information). Each loader's constructor stores the chunk id it handles
+(`mov dword ptr [reg+8], id`), so the program names the chunks itself:
+
+| Id | Loader | Id | Loader |
+| :--- | :--- | :--- | :--- |
+| `0x08800000` | `renderer::CharacterLoader` | `0x08800100` | `StreamPackage` |
+| `0x08800001` | `VehicleLoader` | `0x08800101` | `StreamTrigger` |
+| `0x08800002` | `SkyLoader` | `0x08800102` | `NISPackage` |
+| `0x08800003` | `WorldGeoLoader` | `0x08800104` | `ScriptFileChunk` |
+| `0x08800004` | `ZonePkgLoader` | `0x08800105` | `LoadPackageChunk` |
+| `0x08800005` | `SFStatePropLoader` | `0x08800108` | `Cement` |
+| `0x08800007` | `SFLightGroupLoader` | `0x08800112` | `LoadPackageIdentifier` |
+| `0x08800008` | `ShadowLoader` | `0x08800113`, `0x08800114` | `NISStreamData`, `NISStreamPartitionInfo` |
+| `0x0880000A` | `occlude::OccluderLoader` | `0x08800150` | `CVLoadObject` |
+| `0x08800160`, `0x08800161` | `TrafficConfig`, `SubzoneTrafficTrigger` | `0x08800180`, `0x08800181` | `ScriptObject`, `GameGroup` |
+| `0x09900190`, `0x09900191` | `ScriptObjectData`, `GameGroupData` | `0x08800201` to `0x08800203` | `WaterData` (dock, obstacle, shallow area) |
+| `0x08011000`, `0x08011005` | `NavMesh`, `RoadGraph` | `0x07010000`, `0x07011000`, `0x07010025` | `ravenphysics` collision object, rigid body, world collision object |
+| `0x0802000D` | `prop::StatePropData` | `0x00123000` | `CompositeDrawable` |
+| `0x0001001A`, `0x00010019` | `ShadowMesh`, `ShadowSkin` | `0x0001580C`, `0x00017006` | `ParticleSystem`, `Billboard` |
+| `0x00002200`, `0x00013000`, `0x00002380`, `0x00014000` | camera, light, light group, locator | `0x00021000` to `0x00021002` | expression loaders |
+| `0x00022000`, `0x00022002` | texture font, image font | `0x00121201`, `0x00121202` | frame controller, multi controller |
+| `0x00018000`, `0x0001800D`, `0x00019005` | frontend project, text bible, sprite | `0x01005002` to `0x0100500B` | sound entities |
+
+`p3d.py` names every chunk in this list.
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x08800000` | Character | name, the skin's name, then nine u32 (3 in every file seen) |
+| `0x08800001` | Vehicle | name, its composite drawable, its low-detail composite drawable, the paint shaders' names, then three u32 |
+
+### Maps
+
+The city is cut into areas (`packages/z04/<area>_shell.p3d`, `_detail.p3d`, `_detailB.p3d`...), which
+the game streams in and out, plus files shared by many areas: a region's shaders and textures
+(`<region>_region.p3d`) and the models its areas place (`<region>_region_D.p3d`), the shaders and models
+used everywhere (`miami_lod.p3d`, `miami_lod_D.p3d`), and `Common.p3d`. Each area's shaders are named
+after what they do, for example `GlobalShader_g_hedge.tga_simple_blmd1_mcbv0_lit1_alpha1_atst1_alum1_2sid0`
+(the texture, the shader kind, then blend mode, colour-by-vertex, lit, alpha, alpha test, luminance and
+two-sided flags); the `RegionShader_` ones live in the area's region file.
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x08800003` | World Geometry | name, the composite drawable's name, u32 flags (5 for every underwater part seen, 3 for the low-detail city, else 0). The composite's joints sit at world positions and each mesh (`collapsedMesh_...`) hangs on one |
+| `0x08800004` | Zone Package | the area's name, u32 count, that many World Geometry names |
+| `0x08800112` | Load Package Name | the file's own package name |
+| `0x09900191` | Game Group Data | the script file (`objects.ds`), the group's name, its class (`gamegroup`), u32 1; its objects follow |
+| `0x09900190` | Script Object Data | the script file, the object's name, its class (`instanceobject`, `missiontriggerobject`, `shadowobject`, ...); its properties follow |
+| `0x09900192` | Script Object Property | name, u32 type: 0 for text (then the text, for example `position` = `-1928.0890 5.5734810 -943.42900`), 2 for binary (then u32 3 and a `0x09900194` sub-chunk) |
+
+**Placed objects.** Trees, lamps, benches, signs and the like are *instance objects*: a Script Object
+of class `instanceobject` whose `modelname` names the model (a composite drawable or state prop, found by
+name with letter case ignored, in the area itself, its region's `_D` file or `miami_lod_D.p3d`) and whose
+`instanceposition` properties each place one copy. Each is a binary value (`0x09900194`) of twelve
+32-bit numbers:
+
+```
+0x00  float x, float y (in centimetres), float z
+0x0C  u32 x angle, u32 y angle, u32 z angle (degrees)
+0x18  u32 a, u32 b, u32 c (6 bits each), u32 same (1: one scale for all three axes)
+0x28  u32 d (4 bits: 0 is 1.0, else d/15, passed on with the model), u32 e (4 bits, 0 in every file seen)
+```
+
+The game packs this into bit fields as it loads it (`default.xbe` `0x677B0`), so it keeps the height as
+a 16-bit number of centimetres and the X and Z angles in steps of 2 degrees (the Y angle, the heading, in
+whole degrees). The scale is `(a + b*64 + c*4096) / 1000` on all axes when *same* is set, else
+`a/20, b/20, c/20` per axis. The text form of the same property (`x y z ax ay az scale...`, read at
+`0x1D0820`) ends up in the same fields. To draw a copy the game (`0x8C540`, `0x53E50`) builds, for row
+vectors, *scale x rotation*, then puts the position in the last row; the rotation is the one Pure3D
+builds from three angles (`0x243020`: about X first, then Y, then Z) given minus the X angle, minus the Y
+angle and the Z angle. Placed this way the samples' street lamps, bus stops, parking meters and trees
+line up with the roads and pavements in the areas' own geometry.
+
+Traffic, pedestrians and mission cars aren't models placed in the files: the game spawns them while it runs,
+at spawn objects the areas do place (`worldambiencespawnobject`, `enemycharactergeneratorspawnobject`, ...).
+
+### Exporting to Blender
+
+```
+python portal/tools/p3d_gltf.py tony.glb  packages/characters/pc/MCP_BlackSuitTony.p3d --anim art/animations/GEN_Conv_Motion_Toward.p3d
+python portal/tools/p3d_gltf.py car.glb   art/vehicles/cabriolet.p3d
+python portal/tools/p3d_gltf.py guns.glb  art/stateprops/weapons_test/guns.p3d
+python portal/tools/p3d_gltf.py area.glb  "packages/z04/stripmall_01_*.p3d" --map
+python portal/tools/p3d_gltf.py miami/    packages/z04 --map --split
+```
+
+In the portal's Game files list, **Blender** next to a copied `.p3d` file does the same for that one file
+(a map area gets its region's and the city's shared files from the same folder). Then in Blender:
+File > Import > glTF 2.0. Characters come with their skeleton as an armature, their skin
+weights and each animation (from `--anim` files or the file itself) as an action. Several models in one
+file (the 28 guns of `guns.p3d`) are set out side by side. With `--map` each area comes in at its place
+in the city, with its placed objects; the shared files the areas need (regions, `miami_lod`, `Common`) are
+read from the same folder unless `--library` says where. `--split` writes one `.glb` per area, which line
+up when imported together; the low-detail city in `miami_lod.p3d` is left out next to real areas unless
+`--lod` is given. PC, Xbox and PS2 files all work; textures are decoded on your computer.
+
+Left out for now: lights, particles and light flares, shadow volumes, collision shapes and state-prop
+animations' callbacks.
+
 ### Ids seen but not worked out
 
 `0x00010021` (u32 0, then seven u32: 32 on the PC and Xbox, 8 or 16 on the PS2, perhaps the bits each
 kind of vertex data is stored in), `0x0001001D` (u32 1, 3, 1, 0 in every mesh), `0x00122000` (u32 0 and a
-float, 0.5 or 0), `0x00121008` (u32 2), `0x00121402` (u32 0, 0), `0x00123000` with `0x00123001`,
-`0x08020002` to `0x0802000E` (state props in *Hit & Run*), `0x088xxxxx`, `0x099001xx`, `0x01000001`,
-`0x0100500A`.
+float, 0.5 or 0), `0x00121008` (u32 2), `0x00121402` (u32 0, 0), `0x01000001`, the fields of the loaders'
+chunks not written up above.
 
 ## Sounds (`.rsd`)
 
@@ -323,9 +479,9 @@ open one in a hex editor, compare the versions (the [version differences](VERSIO
 what you find. Known gaps:
 
 * the Pure3D ids under [Ids seen but not worked out](#ids-seen-but-not-worked-out);
-* the PS2's vector-unit packets in full (which attributes plain meshes carry, how a batch's strip is
-  started), so that `p3d.py --obj` can draw PS2 models too;
-* the seven u32 of `0x00010014` and the two u32 before each memory image's size.
+* the seven u32 of `0x00010014`, and what the PS2 header's flags word and the vehicles' two extra vectors
+  per vertex are (tangents, most likely);
+* lights (`0x00013000` and its sub-chunks), so map exports can carry them.
 
 ## Credits and sources
 
@@ -338,7 +494,11 @@ what you find. Known gaps:
   (with chunk structures by Lucas Cardellini): the names of most chunks, and the older layouts these
   build on.
 * The PS2's VIF command set, as documented for emulators such as PCSX2, to read the vector-unit packets.
+* The [glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html) (Khronos), which
+  `p3d_gltf.py` writes.
 
 The rest was worked out from the game files and checked against the other versions of the same files: the
 `RADP` speech against the PC's Ogg Vorbis copies, the PS2's stereo music and movie sound against the PC's,
-the movies' pictures by decoding them, and the PS2 rotations against the PC's.
+the movies' pictures by decoding them, the PS2 rotations against the PC's, the Xbox and PS2 vertex data
+against the PC's lists, and the chunk names and the placement records against the Xbox program's own
+loaders.

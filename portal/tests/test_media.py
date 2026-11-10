@@ -272,6 +272,17 @@ def test_ps2_non_square_pictures_are_row_by_row():
     assert rgba[:4] == bytes([24, 24, 24, 255]) and rgba[-4:] == bytes([7, 7, 7, 255])
 
 
+def test_big_8bit_ps2_pictures_that_arent_square_are_in_block_order_too():
+    w, h = 128, 64
+    picture = [(x // 2 + y) % 256 for y in range(h) for x in range(w)]
+    stored = _store(media._ps2_order(w, h, 8), picture)
+    palette = b"".join(bytes([i, i, i, 0x80]) for i in range(256))
+    stored_palette = b"".join(palette[media._ps2_csm1(i) * 4:media._ps2_csm1(i) * 4 + 4] for i in range(256))
+    _w, _h, rgba = media.decode_p3di(p3di(w, h, 8, stored_palette, bytes(stored)))
+    assert rgba[:4 * w:4] == bytes(picture[(h - 1) * w:])                   # bottom row first
+    assert not media._ps2_swizzled(64, 32, 8) and not media._ps2_swizzled(256, 128, 4)
+
+
 def test_odd_ps2_pictures_are_refused():
     with pytest.raises(media.MediaError):
         media.decode_p3di(p3di(0, 4, 8, b"", b""))

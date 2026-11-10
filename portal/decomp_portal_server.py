@@ -54,6 +54,7 @@ import names as NAMES  # noqa: E402
 import good_first as GOOD  # noqa: E402
 import discord_feed as DISCORD  # noqa: E402
 import media as MEDIA  # noqa: E402
+import p3d_gltf as P3G  # noqa: E402
 import game_assets as GA  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
@@ -2123,7 +2124,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": True, "job": BRIDGE.next()})
         if u.path == "/api/dme-bridge/status":
             return self._json({"ok": True, "connected": BRIDGE.connected(), "origin": DME_BRIDGE_ORIGIN})
-        if u.path in ("/api/game-files/sound", "/api/game-files/pictures", "/api/game-files/picture"):
+        if u.path in ("/api/game-files/sound", "/api/game-files/pictures", "/api/game-files/picture",
+                      "/api/game-files/model"):
             return self.get_game_file_preview(u.path.rsplit("/", 1)[1], q1)
         if u.path == "/api/task":
             with STATE_LOCK:
@@ -2379,8 +2381,9 @@ class Handler(BaseHTTPRequestHandler):
         self._json({"ok": BRIDGE.result(res)})
 
     def get_game_file_preview(self, what: str, q1) -> None:
-        """Play a sound or show a texture from the person's own copied game files. Only for a browser on this
-        computer, and only for pages of the portal itself: the files are theirs, not something to serve on."""
+        """Play a sound, show a texture or hand over a model as a .glb for Blender, from the person's own copied
+        game files. Only for a browser on this computer, and only for pages of the portal itself: the files are
+        theirs, not something to serve on."""
         peer = (self.client_address[0] if self.client_address else "").split("%")[0]
         if peer not in ("127.0.0.1", "::1", "::ffff:127.0.0.1"):
             return self._json({"ok": False, "error": "Previews only work on the computer the portal runs on."}, 403)
@@ -2395,6 +2398,8 @@ class Handler(BaseHTTPRequestHandler):
                 body, mime, ext = MEDIA.playable(data)
                 name = re.sub(r'[^A-Za-z0-9._-]', "_", Path(q1("path").replace("\\", "/")).stem) + ext
                 return self._send(200, body, mime, {"Content-Disposition": f'inline; filename="{name}"'})
+            if what == "model":
+                return self._send_model(q1("version"), q1("path"), path, data)
             if what == "pictures":
                 return self._json({"ok": True, "pictures": [
                     {"i": i, "name": t.name, "width": t.width, "height": t.height, "kind": t.kind}
@@ -2408,6 +2413,28 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": str(e)}, 415)
         except OSError as e:
             return self._json({"ok": False, "error": f"Couldn't read the file: {e}"}, 500)
+
+    def _send_model(self, version: str, game_path: str, path: Path, data: bytes) -> None:
+        """A copied .p3d file as a glTF scene (.glb) for Blender. A map area also gets its region's and the
+        city's shared files from the same folder, for its textures and the models placed on it."""
+        lib = P3G.Library()
+        try:
+            src = lib.add(path.name, data, main=True)
+        except P3G.p3d.P3dError as e:
+            return self._json({"ok": False, "error": str(e)}, 415)
+        is_map = bool(P3G._world_geo(lib, src) or P3G.instance_objects(src))
+        if is_map:
+            for f in GAME_FILES.files_beside(version, game_path, P3G.MAP_LIBRARY):
+                try:
+                    lib.add(f.name, f.read_bytes(), main=False)
+                except (OSError, P3G.p3d.P3dError):
+                    pass
+        try:
+            glb, _report = P3G.export(lib, map_mode=is_map)
+        except P3G.ExportError as e:
+            return self._json({"ok": False, "error": f"Nothing to show in Blender: {e}."}, 415)
+        name = re.sub(r'[^A-Za-z0-9._-]', "_", Path(game_path.replace("\\", "/")).stem) + ".glb"
+        self._send(200, glb, "model/gltf-binary", {"Content-Disposition": f'attachment; filename="{name}"'})
 
     def post_game_files_start(self, body):
         versions = body.get("versions")

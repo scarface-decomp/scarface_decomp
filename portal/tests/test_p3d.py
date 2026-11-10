@@ -158,5 +158,5 @@ def test_obj_from_plain_lists_and_an_xbox_memory_image():
     assert lines.count("v 1.000000 1.000000 0.000000") == 2
     assert "f 1 2 3" in lines                              # the list
     assert "f 5 6 7" in lines and "f 7 6 8" in lines       # the strip, numbered after the first four vertices
-    assert any("vector unit" in line for line in lines)    # the PS2 group is named, not drawn
+    assert any("left out" in line for line in lines)       # a group it can't read is named, not drawn
     assert len(vb) == stride * len(QUAD)

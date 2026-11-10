@@ -43,6 +43,7 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import fnmatch
 import hashlib
 import heapq
 import io
@@ -1878,6 +1879,9 @@ class Job:
     def file_path(self, version: str, path: str) -> Optional[Path]:
         return file_on_disk(out_dir(self.bin_dir), self.index(), version, path)
 
+    def files_beside(self, version: str, path: str, patterns: Tuple[str, ...]) -> List[Path]:
+        return files_beside(out_dir(self.bin_dir), self.index(), version, path, patterns)
+
     def folder_for(self, version: str) -> Optional[Path]:
         """The folder to open: a version's, Shared/ ('shared') or the whole output ('') - if it exists."""
         out = out_dir(self.bin_dir)
@@ -1910,6 +1914,23 @@ def file_on_disk(out: Path, index: Optional[dict], version: str, path: str, max_
         except OSError:
             return None
     return None
+
+
+def files_beside(out: Path, index: Optional[dict], version: str, path: str, patterns: Tuple[str, ...]) -> List[Path]:
+    """The copied files in the same game folder as path whose names match one of the patterns (letter case
+    ignored), for tools that need a file's neighbours (a map area's region and shared files)."""
+    folder = path.rsplit("/", 1)[0].lower() + "/" if "/" in path else ""
+    want = tuple(p.lower() for p in patterns)
+    found = []
+    for row in ((index or {}).get("versions", {}).get(version) or {}).get("files", []):
+        low = row[0].lower()
+        if row[0] == path or not low.startswith(folder) or "/" in low[len(folder):]:
+            continue
+        if any(fnmatch.fnmatchcase(low[len(folder):], p) for p in want):
+            p = file_on_disk(out, index, version, row[0])
+            if p is not None:
+                found.append(p)
+    return found
 
 
 def _reusable_bytes(index: Optional[dict]) -> int:
