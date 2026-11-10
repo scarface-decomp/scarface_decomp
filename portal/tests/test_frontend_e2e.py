@@ -732,10 +732,11 @@ def test_game_files_in_blender(page):
     city, then opens its folder."""
     page.goto(BASE + "#gamefiles")
     page.wait_for_selector("#gf-versions .gf-ver")
-    assert page.is_hidden("#gf-blender")
+    assert page.is_visible("#gfb-need") and page.is_hidden("#gfb-tools")      # nothing copied yet: copy first
     page.click("#gf-start")
     page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
-    page.wait_for_selector("#gf-blender:not([hidden])")
+    page.wait_for_selector("#gfb-tools:not([hidden])")
+    assert page.is_hidden("#gfb-need")
     page.wait_for_function("document.querySelectorAll('#gf-list .gf-row').length > 0")
     link = page.get_attribute("#gf-list .gf-row:has-text('.p3d') .a a", "href")
     assert link.startswith("/api/game-files/model?") and "path=" in link
@@ -767,6 +768,21 @@ def test_game_files_stop(page):
     page.click("#gf-stop")
     page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Stopped')", timeout=10000)
     assert page.is_enabled("#gf-start") and page.is_hidden("#gf-stop")
+
+
+def test_game_files_one_click_for_blender(page):
+    """"Copy everything, PC first": every version found, the PC-first layout, as in the game, in one click."""
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.wait_for_selector("#gf-quick:not([hidden])")
+    page.uncheck("input[name=gf-version][value=ps2]")
+    page.check("input[name=gf-mode][value=best]")
+    page.check("input[name=gf-folders][value=type]")
+    page.click("#gf-quick-start")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
+    assert calls("/api/game-files/start")[-1][1] == {"versions": ["xbox", "pc", "ps2", "prototype"], "mode": "pc",
+                                                      "folders": "game"}
+    assert page.is_checked("input[name=gf-mode][value=pc]")
 
 
 def test_game_files_pc_first(page):

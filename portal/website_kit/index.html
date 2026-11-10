@@ -558,6 +558,10 @@
     .gf-pic img { max-width: 100%; max-height: 126px; image-rendering: auto; }
     .gf-pic figcaption { font-size: 0.72rem; color: var(--muted); margin-top: 4px; overflow-wrap: anywhere; }
     .gfb-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .gf-quick { display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap;
+      border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin: 4px 0 18px; }
+    .gf-quick > div { flex: 1 1 320px; display: flex; flex-direction: column; gap: 4px; }
+    .gf-quick span { color: var(--muted); font-size: 0.9rem; }
     .gfb-row select { min-width: 260px; max-width: 100%; }
     .gfb-row a.btn-sm[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
     .gf-notes.err { color: var(--error); }
@@ -1186,6 +1190,14 @@
               </div>
             </div>
 
+            <div class="gf-quick" id="gf-quick" hidden>
+              <div>
+                <b>The quick way</b>
+                <span>The whole PC version, and from the Xbox, PS2 and prototype only what the PC doesn't have. Every map area, character, gun and car is then ready for Blender.</span>
+              </div>
+              <button type="button" class="btn primary" id="gf-quick-start" onclick="startGfForBlender()">Copy everything, PC first</button>
+            </div>
+
             <h3 class="gf-h">Versions to copy</h3>
             <div class="gf-versions" id="gf-versions" role="group" aria-label="Versions to copy"><p class="empty-note">Looking for your game files…</p></div>
             <p class="gf-notes" id="gf-notes"></p>
@@ -1267,6 +1279,11 @@
                 <p class="card-sub">The game's models and map as glTF scenes (<code>.glb</code>) made from the files you copied: in Blender, File &gt; Import &gt; glTF 2.0. Characters come with their skeletons and skin weights, cars with their moving parts, and map areas with the trees, lamps, benches and signs the game places on them. For a single file, use <b>Blender</b> next to it in the list above.</p>
               </div>
             </div>
+            <div class="gfb-need" id="gfb-need" hidden>
+              <p class="gf-notes">First the game files need copying from your game: the PC version, with what only the other versions have.</p>
+              <div class="gf-run"><button type="button" class="btn primary" id="gfb-copy" onclick="startGfForBlender()">Copy the game files for Blender</button></div>
+            </div>
+            <div id="gfb-tools">
             <h3 class="gf-h">A map area</h3>
             <div class="gfb-row">
               <label class="sr-only" for="gfb-area">Map area</label>
@@ -1282,6 +1299,7 @@
               <button type="button" class="btn-sm" id="gfb-city-open" onclick="openGameFolder('blender:' + GFB_CITY_VERSION)" hidden>Open the folder</button>
             </div>
             <p class="gf-notes" id="gfb-city-status" role="status" aria-live="polite"></p>
+            </div>
           </div>
         </section>
 
@@ -3440,6 +3458,7 @@
     const badge = $('side-gamefiles-badge');
     if (badge) { badge.hidden = !found; badge.textContent = String(found); }
     $('gf-open-all').hidden = !d.summary;
+    $('gf-quick').hidden = !found;
     renderGfStatus(d.status || {});
     updateGfSpace();
     renderGfResult();
@@ -3467,6 +3486,8 @@
     const running = !!st.running;
     $('gf-start').textContent = running ? 'Copying…' : 'Copy the game files';
     $('gf-start').disabled = running || !gfChosen().length;
+    $('gf-quick-start').disabled = running;
+    $('gfb-copy').disabled = running;
     $('gf-stop').hidden = !running;
     if (!st.phase) { $('gf-progress').hidden = true; return; }
     const pct = st.total ? Math.min(100, (st.done / st.total) * 100) : 0;
@@ -3508,6 +3529,17 @@
     if (GF_DATA) GF_DATA.status = res.status;
     renderGfStatus(res.status || {});
     pollGameFiles();
+  }
+
+  /* One click: every version found, the PC first, as in the game (what the Blender exports want). */
+  function startGfForBlender() {
+    document.querySelectorAll('input[name="gf-version"]').forEach((cb) => { if (!cb.disabled) cb.checked = true; });
+    const mode = document.querySelector('input[name="gf-mode"][value="pc"]');
+    const folders = document.querySelector('input[name="gf-folders"][value="game"]');
+    if (mode) mode.checked = true;
+    if (folders) folders.checked = true;
+    updateGfSpace();
+    startGameFiles();
   }
 
   async function stopGameFiles() {
@@ -3620,7 +3652,9 @@
   function renderGfResult() {
     const s = (GF_DATA || {}).summary;
     $('gf-result').hidden = !s;
-    $('gf-blender').hidden = !s;
+    $('gf-blender').hidden = !s && !((GF_DATA || {}).versions || []).some((v) => v.found);
+    $('gfb-need').hidden = !!s;
+    $('gfb-tools').hidden = !s;
     if (!s) return;
     const vers = Object.keys(s.versions || {});
     if (!vers.includes(GF_TAB)) { GF_TAB = vers[0] || ''; GF_KIND = ''; }

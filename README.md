@@ -201,7 +201,8 @@ Choose a layout:
   is there), and from the Xbox, PS2 and prototype only what the PC doesn't have: what only one of them
   has in its `Exclusive to` folder, and what several of them have, once, in `Not on the PC/`. The PC's
   copies are the best for models, textures and animations, so this is the one for
-  [Blender](docs/FORMATS.md#exporting-to-blender).
+  [Blender](docs/FORMATS.md#exporting-to-blender): **Copy everything, PC first** at the top of the Game
+  files tab does it in one click.
 
 And how to arrange the folders: **as in the game**, or **by type** (Sounds, Textures, Models,
 Animations, Videos, Scripts & text, Other) with the game's folders inside. By type, sounds get their

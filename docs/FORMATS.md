@@ -347,7 +347,8 @@ python portal/tools/p3d_gltf.py area.glb  "packages/z04/stripmall_01_*.p3d" --ma
 python portal/tools/p3d_gltf.py miami/    packages/z04 --map --split
 ```
 
-The portal does the same from the game files you copied (its Game files tab): **Blender** next to any
+The portal does the same from the game files you copied (its Game files tab; **Copy everything, PC first**
+copies them the way these exports like best): **Blender** next to any
 `.p3d` file gives that file (a character with the game's animations from `art/animations`, a map file with
 what its region places on it), and the **In Blender** box gives a whole map area in one scene, or the
 whole city, one file per area, in `binaries/blender/`. Then in Blender: File > Import > glTF 2.0. Characters come with their skeleton as an armature, their skin
