@@ -229,6 +229,8 @@
     pre { background: #050505; border: 1px solid var(--line); border-radius: 2px; padding: 12px 14px; overflow-x: auto; font-size: 0.82rem;
           line-height: 1.6; color: var(--white); white-space: pre; max-width: 100%; }
     ol.steps pre { margin-top: 10px; }
+    ol.steps .aside { display: block; margin-top: 12px; font-size: 0.84rem; line-height: 1.6; color: #8E8E8E; }
+    ol.steps .aside code { font-size: 0.78rem; }
     .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 30px; margin-top: 40px; }
     .good-first { max-width: var(--read); margin: 30px auto 0; border: 1px solid var(--line); border-left: 3px solid var(--blood); border-radius: 2px; padding: 20px 24px; }
     .good-first p { color: var(--grey); font-size: 0.94rem; margin-bottom: 10px; }
@@ -504,11 +506,12 @@
           <li><b>Get the project with Git</b>Install Git from <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">git-scm.com</a>
             (the default options are fine), open a terminal (PowerShell on Windows) where you want the folder, and run:
             <pre tabindex="0">git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></pre>
-            To update later, run <code>git pull</code> in that folder: it keeps everything you've done. Don't want Git?
-            On <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
-            press <em>Code</em>, then <em>Download ZIP</em>. But a new ZIP replaces your work when you update, so copy
-            <code>reports\verified_registry.json</code> out first, or connect the folder to Git with the steps in
-            <a data-repo-link="/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a>.</li>
+            To update later, run <code>git pull</code> in that folder: it keeps everything you've done.
+            <span class="aside">Rather not use Git? On <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+            press <em>Code</em>, then <em>Download ZIP</em>. It works, but it can get more complicated later: there's no
+            one-command update, and a new ZIP replaces your work, so copy <code>reports\verified_registry.json</code> out
+            before each update (or connect the folder to Git afterwards with the steps in
+            <a data-repo-link="/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a>).</span></li>
           <li><b>Add your game files</b>Put the game, or the downloads it came in, in the project's <code>binaries</code>
             folder. The portal takes out what it needs when it starts: <code>default.xbe</code> from the Xbox disc image
             (<code>.iso</code>, <code>.zip</code> or <code>.7z</code>), <code>Scarface.exe</code> from the official 1.00.2 PC

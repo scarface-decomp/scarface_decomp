@@ -79,9 +79,10 @@ functions on decomp.me and have a maintainer check them.
    [git-scm.com](https://git-scm.com/downloads) (the default options are fine).
 2. **Get this project with Git**: open a terminal (PowerShell on Windows) where you want the folder and run
    `git clone https://github.com/scarface-decomp/scarface_decomp.git`. To update later, run `git pull` in
-   that folder: it keeps your work. (No Git? Press **Code**, then **Download ZIP** on GitHub. A new ZIP
-   replaces your work when you update, so copy `reports/verified_registry.json` out first, or connect the
-   folder to Git: [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md#downloaded-the-zip).)
+   that folder: it keeps your work. (Rather not use Git? Press **Code**, then **Download ZIP** on GitHub.
+   It works, but it gets more complicated later: there's no one-command update, and a new ZIP replaces your
+   work, so copy `reports/verified_registry.json` out first, or connect the folder to Git:
+   [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md#downloaded-the-zip).)
 3. **Add your game files**: put the game, or the downloads it came in, in the `binaries` folder.
    The portal takes out what it needs when it starts, with nothing to install or unpack first:
    `default.xbe` from the Xbox disc image (`.iso`, `.zip` or `.7z`), `Scarface.exe` from the official
