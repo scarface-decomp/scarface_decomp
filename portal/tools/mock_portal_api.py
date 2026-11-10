@@ -196,7 +196,8 @@ def gf_fake_files(version):
 
 
 def gf_summary(mode, folders="game"):
-    labels = {"unique": "No duplicates", "every": "Every version complete", "best": "Best version of each file"}
+    labels = {"unique": "No duplicates", "every": "Every version complete", "best": "Best version of each file",
+              "pc": "The PC first, then what only the others have"}
     out = {"mode": mode, "mode_label": labels.get(mode, mode), "folders": folders,
            "created": "2026-11-09 09:30", "versions": {}}
     for v in GF_VERSIONS:
@@ -204,7 +205,7 @@ def gf_summary(mode, folders="game"):
             continue
         rows = gf_fake_files(v["version"])
         for i, r in enumerate(rows):
-            r["picked"] = mode == "best" and (v["version"] == "pc" or r["status"] == "only")
+            r["picked"] = mode in ("best", "pc") and (v["version"] == "pc" or r["status"] == "only")
             r["quality"] = "Ogg Vorbis, 48,000 Hz, mono" if r["kind"] == "sounds" else ""
         GF["files"][v["version"]] = rows
         s = {"label": v["label"], "source": v["source"], "files": len(rows), "bytes": sum(r["size"] for r in rows),
@@ -216,9 +217,9 @@ def gf_summary(mode, folders="game"):
                 k[r["status"]] += 1
         s["picked"] = sum(1 for r in rows if r["picked"])
         out["versions"][v["version"]] = s
-    if mode == "best":
-        out["best"] = {"files": sum(x["picked"] for x in out["versions"].values()),
-                       "from": {k: x["picked"] for k, x in out["versions"].items()}}
+    if mode in ("best", "pc"):
+        out["best" if mode == "best" else "pc_first"] = {"files": sum(x["picked"] for x in out["versions"].values()),
+                                                         "from": {k: x["picked"] for k, x in out["versions"].items()}}
     return out
 
 
@@ -559,7 +560,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": True, "folder": "binaries/blender"})
         if u.path == "/api/game-files/open":
             folder = body.get("folder", "")
-            known = ("", "shared", "best", "xbox", "pc", "ps2", "prototype")
+            known = ("", "shared", "best", "notpc", "xbox", "pc", "ps2", "prototype")
             if (folder not in known and not (folder.startswith("only:") and folder[5:] in known)) or not GF["summary"]:
                 return self._json({"ok": False, "error": "That folder isn't there yet."}, 404)
             return self._json({"ok": True, "folder": "binaries/game_files"})

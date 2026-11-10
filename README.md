@@ -197,6 +197,11 @@ Choose a layout:
   picture size; models and textures by texture size, then colour depth. That is mostly the PC's (Ogg
   Vorbis sounds at 44.1 to 48 kHz, 1280x720 videos), the Xbox's 5.1 surround sounds and deeper colours,
   and the prototype's bigger textures. `INDEX - Best.txt` says where each file came from and why.
+* **The PC first, then what only the others have**: the whole PC version in `PC/` (patched, if the patch
+  is there), and from the Xbox, PS2 and prototype only what the PC doesn't have: what only one of them
+  has in its `Exclusive to` folder, and what several of them have, once, in `Not on the PC/`. The PC's
+  copies are the best for models, textures and animations, so this is the one for
+  [Blender](docs/FORMATS.md#exporting-to-blender).
 
 And how to arrange the folders: **as in the game**, or **by type** (Sounds, Textures, Models,
 Animations, Videos, Scripts & text, Other) with the game's folders inside. By type, sounds get their

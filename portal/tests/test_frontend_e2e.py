@@ -769,6 +769,30 @@ def test_game_files_stop(page):
     assert page.is_enabled("#gf-start") and page.is_hidden("#gf-stop")
 
 
+def test_game_files_pc_first(page):
+    """The PC first, then what only the others have: the choice reaches the server, PC/ and Not on the PC/ can be
+    opened, and the other versions only offer their exclusives."""
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.check("input[name=gf-mode][value=pc]")
+    page.click("#gf-start")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
+    assert calls("/api/game-files/start")[-1][1]["mode"] == "pc"
+    page.wait_for_selector("#gf-result:not([hidden]) .gf-tab")
+    sub = page.text_content("#gf-result-sub")
+    assert "The PC first" in sub and "PC/ has the PC's" in sub and "came from Xbox" in sub
+    assert page.is_visible("#gf-open-notpc") and page.is_hidden("#gf-open-best")
+    page.click(".gf-tab:has-text('PC')")
+    assert page.is_visible("#gf-open-version") and page.is_hidden("#gf-open-only")
+    page.select_option("#gf-status", "picked")
+    page.wait_for_function("[...document.querySelectorAll('#gf-list .st')].length > 0 && [...document.querySelectorAll('#gf-list .st')].every(e => e.textContent === 'copied')")
+    page.click("#gf-open-notpc")
+    page.wait_for_timeout(200)
+    assert calls("/api/game-files/open")[-1][1] == {"folder": "notpc"}
+    page.click(".gf-tab:has-text('PS2')")
+    assert page.is_hidden("#gf-open-version")
+
+
 def test_game_files_best_version_by_type(page):
     """The best version of each file, sorted by type: the choice reaches the server, then Best/ can be
     opened and each version's picks listed."""

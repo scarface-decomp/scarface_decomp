@@ -1199,6 +1199,8 @@
                 <span><b>Every version complete</b><span>Each version in its own folder with all of its files. Takes the most space.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="best" onchange="updateGfSpace()" />
                 <span><b>Best version of each file</b><span>One copy of everything the versions share, in <code>Best/</code>, the highest quality winning: the PC's 48 kHz sounds, its 1280&times;720 videos, the biggest textures. What only one version has gets its own <code>Exclusive to</code> folder.</span></span></label>
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="pc" onchange="updateGfSpace()" />
+                <span><b>The PC first, then what only the others have</b><span>The whole PC version in <code>PC/</code>, and from the others only what the PC doesn't have: each one's own in its <code>Exclusive to</code> folder, what several of them have once in <code>Not on the PC/</code>. The PC's models, textures and animations are the best for Blender.</span></span></label>
               </div>
             </fieldset>
 
@@ -1232,6 +1234,7 @@
               <div class="hdr-actions">
                 <button type="button" class="btn-sm" id="gf-open-shared" onclick="openGameFolder('shared')" hidden>Open Shared</button>
                 <button type="button" class="btn-sm" id="gf-open-best" onclick="openGameFolder('best')" hidden>Open Best</button>
+                <button type="button" class="btn-sm" id="gf-open-notpc" onclick="openGameFolder('notpc')" hidden>Open Not on the PC</button>
                 <button type="button" class="btn-sm" id="gf-open-only" onclick="openGameFolder('only:' + GF_TAB)">Open its exclusives</button>
                 <button type="button" class="btn-sm" id="gf-open-version" onclick="openGameFolder(GF_TAB)">Open this version's folder</button>
               </div>
@@ -3447,7 +3450,7 @@
     const chosen = new Set(gfChosen());
     const need = (d.versions || []).filter((v) => v.found && chosen.has(v.version)).reduce((a, v) => a + (v.size || 0), 0);
     const parts = [];
-    if (need) parts.push((gfMode() === 'every' ? 'Needs about ' : 'Needs up to ') + fmtBytes(need) + (gfMode() === 'best' ? ' while copying' : ''));
+    if (need) parts.push((gfMode() === 'every' ? 'Needs about ' : 'Needs up to ') + fmtBytes(need) + (gfMode() === 'best' || gfMode() === 'pc' ? ' while copying' : ''));
     if (d.free != null) parts.push(fmtBytes(d.free) + ' free on this drive');
     if (d.summary) parts.push('copying again replaces what is in the folder (files you changed are kept)');
     $('gf-space').textContent = parts.join(' · ');
@@ -3628,11 +3631,20 @@
       sub += ' Best/ has ' + fmtInt(s.best.files) + ' files: ' + Object.keys(s.best.from).filter((v) => s.best.from[v])
         .map((v) => fmtInt(s.best.from[v]) + ' from ' + s.versions[v].label).join(', ') + '.';
     }
+    if (s.pc_first) {
+      const from = s.pc_first.from || {};
+      const others = Object.keys(from).filter((v) => v !== 'pc' && from[v]);
+      sub += ' PC/ has the PC\'s ' + fmtInt(from.pc || 0) + ' files'
+        + (others.length ? '; what it doesn\'t have came from ' + others.map((v) => s.versions[v].label + ' (' + fmtInt(from[v]) + ')').join(', ') : '')
+        + '.';
+    }
     $('gf-result-sub').textContent = sub + ' Pick a version to see the files only it has.';
     $('gf-open-shared').hidden = s.mode !== 'unique';
     $('gf-open-best').hidden = s.mode !== 'best';
-    $('gf-opt-picked').hidden = s.mode !== 'best';
-    if (s.mode !== 'best' && $('gf-status').value === 'picked') $('gf-status').value = 'only';
+    $('gf-open-notpc').hidden = s.mode !== 'pc';
+    $('gf-opt-picked').hidden = s.mode !== 'best' && s.mode !== 'pc';
+    $('gf-opt-picked').textContent = s.mode === 'pc' ? 'Copied from this version' : 'Picked for Best';
+    if (s.mode !== 'best' && s.mode !== 'pc' && $('gf-status').value === 'picked') $('gf-status').value = 'only';
     const tabs = $('gf-tabs');
     tabs.textContent = '';
     vers.forEach((v) => {
@@ -3645,8 +3657,8 @@
     });
     const info = s.versions[GF_TAB];
     if (!info) return;
-    $('gf-open-only').hidden = s.mode === 'every' || !info.only;
-    $('gf-open-version').hidden = s.mode === 'best' || (s.mode === 'unique' && !info.changed);
+    $('gf-open-only').hidden = s.mode === 'every' || !info.only || (s.mode === 'pc' && GF_TAB === 'pc');
+    $('gf-open-version').hidden = s.mode === 'best' || (s.mode === 'unique' && !info.changed) || (s.mode === 'pc' && GF_TAB !== 'pc');
     const t = $('gf-totals');
     t.textContent = '';
     t.appendChild(el('strong', fmtInt(info.files)));
@@ -3694,7 +3706,8 @@
       row.appendChild(p);
       row.appendChild(el('span', gfKindLabel(f.kind), 'k'));
       row.appendChild(el('span', fmtBytes(f.size), 'z'));
-      row.appendChild(el('span', f.picked ? 'best' : (GF_STATUS_WORDS[f.status] || f.status), 'st ' + (f.picked ? 'picked' : f.status)));
+      const pickWord = ((GF_DATA || {}).summary || {}).mode === 'pc' ? 'copied' : 'best';
+      row.appendChild(el('span', f.picked ? pickWord : (GF_STATUS_WORDS[f.status] || f.status), 'st ' + (f.picked ? 'picked' : f.status)));
       const act = el('span', undefined, 'a');
       const look = f.placed ? gfPreviewKind(f.path) : '';
       if (look) {

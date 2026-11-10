@@ -554,6 +554,40 @@ def test_best_picks_the_highest_quality_of_each_file():
     assert {r[0]: r[4] for r in rows["ps2"]} == {"SOUND.RCF/art/sound/rsd/a/x.rsd": "Best/art/sound/rsd/a/x.rsd"}
 
 
+def test_pc_first_takes_the_pcs_copy_and_only_what_the_pc_lacks():
+    cats = best_catalogs()
+    cats["xbox"].append(["cement.rcf/art/xbox_only.p3d", 10, "xo", {"p3d": "models"}])
+    cats["ps2"].append(["CEMENT.RCF/art/consoles.p3d", 10, "con-ps2", {"p3d": "models", "tex": 10, "bits": 40}])
+    cats["xbox"].append(["cement.rcf/art/consoles.p3d", 10, "con-xb", {"p3d": "models", "tex": 99, "bits": 40}])
+    rows, places = GA.plan(cats, "pc")
+    got = picked(rows)
+    assert got["sound2.rcf/art/sound/rsd/a/x.rsd"] == ("pc", "PC/art/sound/rsd/a/x.rsd")
+    assert got["sound2.rcf/art/sound/rsd/b/5.rsd"][0] == "pc"               # even where the Xbox's is 5.1
+    assert got["cement.rcf/art/car.p3d"] == ("pc", "PC/art/car.p3d")          # even where the prototype's is bigger
+    assert got["patch01.rcf/scriptc/a.cso"] == ("pc", "PC/scriptc/a.cso")     # patched
+    assert got["art/cut/only.p3d"] == ("prototype", "Exclusive to Xbox 2006 prototype/art/cut/only.p3d")
+    assert got["cement.rcf/art/xbox_only.p3d"] == ("xbox", "Exclusive to Xbox/art/xbox_only.p3d")
+    assert got["cement.rcf/art/consoles.p3d"] == ("xbox", "Not on the PC/art/consoles.p3d")   # the better of the two
+    assert not any(v != "pc" and place.startswith("PC/") for v, place in got.values())
+    assert {p.split("/")[0] for _s, p in places} == {"PC", "Exclusive to Xbox", "Exclusive to Xbox 2006 prototype",
+                                                     "Not on the PC"}
+
+
+def test_pc_first_end_to_end(tmp_path):
+    b = make_binaries(tmp_path)
+    index = GA.run(list(GA.VERSIONS), "pc", b, log=lambda m: None)
+    files = read_all(b / "game_files")
+    assert "PC/art/models/car.p3d" in files and "PC/Scarface.exe" in files
+    assert files["Not on the PC/art/sound/hello.rsd"] == SOUND                # the consoles have it, the PC doesn't
+    assert files["Exclusive to Xbox 2006 prototype/art/cut/protoonly.p3d"] == b"P3D\xff cut scene"
+    assert not any(k.startswith(("Shared/", "Best/", "Xbox/")) for k in files)
+    summ = GA.summary(index)
+    assert summ["mode_label"] == "The PC first, then what only the others have"
+    assert summ["pc_first"]["from"]["pc"] == GA.list_files(index, "pc", status="picked")["total"] > 0
+    assert "Not on the PC/" in files["README.txt"].decode()
+    assert GA.Job(b).folder_for("pc") == b / "game_files" / "PC"
+
+
 def test_best_by_type():
     _rows, places = GA.plan(best_catalogs(), "best", "type")
     names = {p for _s, p in places}

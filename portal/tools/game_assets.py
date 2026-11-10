@@ -11,7 +11,7 @@ patch01.rcf from the official 1.00.2 patch is added when the patch is in binarie
 Files packed in .rcf archives are unpacked into a folder named after the archive
 (cement.rcf/art/...), so every file keeps its place.
 
-Three layouts:
+Four layouts:
 
   unique   no duplicates. A file that is exactly the same in two or more versions is written once,
            in Shared/. What only one version has goes in its own folder, Exclusive to <version>/,
@@ -22,6 +22,10 @@ Three layouts:
            picture size; models and textures: texture size, then colour depth). Ties go to PC,
            Xbox, PS2, then the prototype, and the 1.00.2 patch's files win over the ones they
            replace. What only one version has goes in Exclusive to <version>/.
+  pc       the PC first: the whole PC version in PC/ (with the 1.00.2 patch's files where it
+           changes one), then only what the PC doesn't have from the others: what only one of
+           them has in Exclusive to <version>/, and what two or more of them have, once (the
+           highest-quality copy), in Not on the PC/.
 
 And two ways to arrange the folders: as in the game, or by type first (Sounds, Textures, Models,
 Animations, Videos, Scripts & text, Other), each keeping the game's own folders below that. Pure3D
@@ -31,7 +35,7 @@ The output goes in binaries/game_files/. binaries/ is in .gitignore, so these fi
 committed or uploaded: they stay on this computer, for your own use.
 
     python portal/tools/game_assets.py                    # the versions found
-    python portal/tools/game_assets.py --extract unique   # or: --extract every
+    python portal/tools/game_assets.py --extract unique   # or: --extract every, best, pc
 
 How it reads: a disc image is read front to back once, even inside a .7z (which can only be read in
 order). Directories and .rcf archive tables are read as they go past, and each file is copied when
@@ -83,11 +87,13 @@ VERSIONS = ("xbox", "pc", "ps2", "prototype")
 LABELS = {"xbox": "Xbox", "pc": "PC", "ps2": "PS2", "prototype": "Xbox 2006 prototype"}
 SHARED = "Shared"
 CHANGED_BY_YOU = "Changed by you"
-MODES = ("unique", "every", "best")
-MODE_LABELS = {"unique": "No duplicates", "every": "Every version complete", "best": "Best version of each file"}
+MODES = ("unique", "every", "best", "pc")
+MODE_LABELS = {"unique": "No duplicates", "every": "Every version complete", "best": "Best version of each file",
+               "pc": "The PC first, then what only the others have"}
 FOLDERS = ("game", "type")
 FOLDER_LABELS = {"game": "As in the game", "type": "By type"}
 BEST = "Best"
+NOT_ON_PC = "Not on the PC"        # the PC-first layout: files two or more other versions have, but not the PC
 
 
 def exclusive(version: str) -> str:
@@ -1372,7 +1378,7 @@ def plan(catalogs: Dict[str, List[list]], mode: str, folders: str = "game"
                         placed = take_free(sha, where(LABELS[v], path, facts))
                     written = 1
             result[v].append([path, size, sha, status, placed, facts, written])
-    if mode == "best":
+    if mode in ("best", "pc"):
         groups: Dict[str, List[Tuple[str, int]]] = {}
         for v in order:
             for i, row in enumerate(result[v]):
@@ -1382,11 +1388,16 @@ def plan(catalogs: Dict[str, List[list]], mode: str, folders: str = "game"
         def score(c: Tuple[str, int]) -> tuple:
             v, i = c
             path, size, _sha, _st, _pl, facts, _w = result[v][i]
-            return (quality(facts), _is_patch(path), -PREFER.index(v) if v in PREFER else -99, size)
+            first = (v == "pc",) if mode == "pc" else ()       # PC first: the PC's copy whenever it has one
+            return first + (quality(facts), _is_patch(path), -PREFER.index(v) if v in PREFER else -99, size)
         for _key, cands in groups.items():
             v, i = max(cands, key=score)
             row = result[v][i]
-            top = exclusive(v) if all(result[cv][ci][3] == "only" for cv, ci in cands) else BEST
+            only = all(result[cv][ci][3] == "only" for cv, ci in cands)
+            if mode == "pc":
+                top = LABELS["pc"] if v == "pc" else exclusive(v) if only else NOT_ON_PC
+            else:
+                top = exclusive(v) if only else BEST
             if row[2] in sha_place:                    # the same bytes are already there under another name
                 place = sha_place[row[2]]
             else:
@@ -1650,7 +1661,7 @@ def summary(index: Optional[dict]) -> Optional[dict]:
         for row in files:
             path, size, _sha, st = row[:4]
             s[st] += 1
-            if mode == "best" and _written(row):
+            if mode in ("best", "pc") and _written(row):
                 s["picked"] += 1
             if st != "shared":
                 s["own_bytes"] += size
@@ -1660,16 +1671,18 @@ def summary(index: Optional[dict]) -> Optional[dict]:
         out["versions"][v] = s
     if mode == "best":
         out["best"] = {"files": best_total, "from": {v: x["picked"] for v, x in out["versions"].items()}}
+    elif mode == "pc":
+        out["pc_first"] = {"files": best_total, "from": {v: x["picked"] for v, x in out["versions"].items()}}
     return out
 
 
 def list_files(index: Optional[dict], version: str, status: str = "", kind: str = "", query: str = "",
                offset: int = 0, limit: int = 200) -> dict:
     """A page of one version's files, for the portal's list. status 'picked': the ones this version gave
-    to the Best layout."""
+    to the Best (or PC-first) layout."""
     rows = ((index or {}).get("versions", {}).get(version) or {}).get("files", [])
     q = query.strip().lower()
-    best = (index or {}).get("mode") == "best"
+    best = (index or {}).get("mode") in ("best", "pc")
     hits = [r for r in rows
             if (not status or r[3] == status or (status == "own" and r[3] != "shared")
                 or (status == "picked" and best and _written(r)))
@@ -1709,6 +1722,18 @@ def write_readmes(out: Path, index: dict) -> None:
             lines.append(f"         {n:>7,} from {LABELS.get(v, v)}")
         for v, s in summ["versions"].items():
             lines.append(f"  {exclusive(v)}/  what only the {s['label']} version has ({s['only']:,} files)")
+    elif mode == "pc":
+        picked = summ.get("pc_first", {}).get("from", {})
+        lines += [f"  {LABELS['pc']}/  the whole PC version ({picked.get('pc', 0):,} files, with the 1.00.2 patch's files"
+                  " where it changes one)"]
+        for v, s in summ["versions"].items():
+            if v != "pc":
+                lines.append(f"  {exclusive(v)}/  what only the {s['label']} version has ({s['only']:,} files)")
+        lines += [f"  {NOT_ON_PC}/  what two or more of the other versions have but the PC doesn't, once (the",
+                  "         highest-quality copy, as in the Best layout)"]
+        for v, n in picked.items():
+            if v != "pc" and n:
+                lines.append(f"         {n:>7,} files in all from {LABELS.get(v, v)}")
     else:
         for s in summ["versions"].values():
             lines.append(f"  {s['label']}/  the whole {s['label']} version")
@@ -1718,9 +1743,9 @@ def write_readmes(out: Path, index: dict) -> None:
                   "the folders the file has inside the game."]
     else:
         lines += ["Every file keeps the folder it has inside the game."]
-    if mode == "best":
-        lines += ["In Best/ the .rcf archive a file is packed in is left out of its path: it is where the game",
-                  "looks for it (each version packs its files into different archives)."]
+    if mode in ("best", "pc"):
+        lines += ["The .rcf archive a file is packed in is left out of its path: it is where the game looks",
+                  "for it (each version packs its files into different archives)."]
     else:
         lines += ["Files that the game packs in .rcf archives are in a folder named after the archive (for",
                   "example cement.rcf/)."]
@@ -1892,6 +1917,8 @@ class Job:
             p = out / SHARED
         elif version == "best":
             p = out / BEST
+        elif version == "notpc":
+            p = out / NOT_ON_PC
         elif version.startswith("only:") and version[5:] in LABELS:
             p = out / exclusive(version[5:])
         elif version in LABELS:
