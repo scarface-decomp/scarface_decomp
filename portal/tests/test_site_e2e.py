@@ -22,7 +22,7 @@ PROG = json.loads((FIX / "progress.json").read_text(encoding="utf-8"))
 
 
 # Everything the Cloudflare build serves from docs/ besides data/.
-STATIC = ("index.html", "404.html", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
+STATIC = ("index.html", "404.html", "versions.html", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
           "robots.txt", "sitemap.xml")
 SITE_URL = "https://scarface-decomp.pages.dev/"
 
@@ -263,7 +263,7 @@ def test_table_of_contents(site, browser, width):
     ctx, pg = open_page(browser, url, viewport=(width, 800))
     pg.wait_for_selector("#fn-list .fn")
     links = pg.eval_on_selector_all("#toc a", "as => as.map(a => a.getAttribute('href'))")
-    assert links == ["#how", "#progress", "#help", "#questions", "#functions"]
+    assert links == ["#how", "#progress", "#help", "#questions", "#functions", "#reference"]
     for href in links:
         assert pg.evaluate(f"!!document.getElementById('{href[1:]}')")
     assert pg.evaluate("document.documentElement.scrollWidth") <= width + 1
@@ -366,3 +366,45 @@ def test_rage_mode_easter_egg(site, browser, motion):
     assert pg.locator(".rage-sign").count() == 0
     assert not errors, errors
     ctx.close()
+
+
+def test_reference_section_and_versions_page(tmp_path, browser):
+    """The Reference section links the formats guide, the names, the versions page and the scripts; the
+    versions page shows the comparison (from a made-up report), or how to make it when there is none."""
+    d = tmp_path / "site"
+    d.mkdir()
+    for f in STATIC:
+        shutil.copy2(ROOT / "docs" / f, d / f)
+    srv, url = serve(d)
+    try:
+        ctx, pg = open_page(browser, url)
+        refs = pg.eval_on_selector_all("#reference .refs a", "as => as.map(a => a.getAttribute('href'))")
+        assert refs[2] == "versions.html" and any(h.endswith("docs/FORMATS.md") for h in refs)
+        assert any(h.endswith("docs/NAMES.md") for h in refs)
+        pg.goto(url + "versions.html")
+        pg.wait_for_selector("#missing:not([hidden])")               # no report on this made-up site yet
+        assert "version_report.py --scan" in pg.text_content("#missing")
+
+        report = {"schema": "scarface_versions_v1", "generated": "2026-11-10",
+                  "kinds": {"sounds": "Sounds", "models": "Models", "videos": "Videos", "other": "Other"},
+                  "versions": [{"id": "xbox", "label": "Xbox", "files": 3, "bytes": 3000, "only": 1, "changed": 1, "shared": 1, "kinds": {}},
+                               {"id": "ps2", "label": "PS2", "files": 2, "bytes": 2048, "only": 1, "changed": 1, "shared": 0, "kinds": {}}],
+                  "only": {"xbox": [["media/intro.bik", 1000, "videos", "640x480 video"]],
+                           "ps2": [["MOVIES/INTRO.PSS", 2000, "other", ""]]},
+                  "changed": [["art/sound/hello.rsd", "sounds", [["xbox", 900, "Xbox ADPCM, 44,100 Hz, 5.1 surround"],
+                                                                  ["ps2", 48, "PS2 ADPCM, 22,050 Hz, mono"]]]]}
+        (d / "versions.json").write_text(json.dumps(report), encoding="utf-8")
+        pg.goto(url + "versions.html?again#ps2")          # a new load (a hash alone would not reload)
+        pg.wait_for_selector("#report:not([hidden]) .row")
+        assert pg.eval_on_selector_all("#summary th", "ths => ths.map(t => t.textContent)") == ["Xbox", "PS2"]
+        assert pg.text_content("#rows .row .p") == "MOVIES/INTRO.PSS"           # the tab from the address
+        pg.click(".tab:has-text('Xbox')")
+        assert pg.text_content("#rows .row .p") == "media/intro.bik" and "640x480" in pg.text_content("#rows .row .d")
+        pg.select_option("#what", "changed")
+        assert "PS2: 48 bytes, PS2 ADPCM" in pg.text_content("#rows .row ul")
+        pg.fill("#q", "nothing like this")
+        pg.wait_for_function("document.getElementById('count').textContent.startsWith('0 files')")
+        assert not pg.errors, pg.errors
+        ctx.close()
+    finally:
+        srv.shutdown()

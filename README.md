@@ -230,6 +230,7 @@ portal/               the portal itself and its tools (you don't need to open it
 | `docs/index.html` | The public website: live progress and every verified function (see `docs/README.md`). |
 | `docs/CONTRIBUTING.md`, `docs/GAME_VERSIONS.md` | How to help, and which copies of the game are accepted. |
 | `docs/METHODOLOGY.md`, `docs/SCRIPTS.md`, `docs/PS2.md`, `docs/OTHER_VERSIONS.md` | Verification rules, the game's scripts, the PS2 lane, the Wii version. |
+| `docs/FORMATS.md`, `docs/NAMES.md`, `docs/VERSIONS.md` | The game's file formats; function names for Ghidra and IDA; what differs between the versions. |
 | `docs/LEGAL.md`, `docs/PROVENANCE.md`, `docs/CREDITS.md` | Legal notes, where code and names may come from, credits. |
 | `docs/SCARFACE_DECOMP_AI_HANDOFF.md`, `docs/AGENTS.md` | Brief for AI assistants (served by the portal at `/download/ai-handoff`), and how an agent uses the portal API. |
 | `portal/decomp_portal_server.py`, `portal/website_kit/` | The portal: its server and its page. |

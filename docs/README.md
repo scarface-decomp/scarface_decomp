@@ -13,6 +13,7 @@ on every push to `main`.
 | `404.html` | Shown by Cloudflare Pages for any address that doesn't exist. |
 | `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` | Browser and phone home-screen icons. |
 | `og.jpg` | The 1200 x 630 preview shown when the link is shared on Discord, Reddit, X and so on. |
+| `versions.html`, `versions.json` | What differs between the versions: the page, and its data (made by `portal/tools/version_report.py`, names only). |
 | `robots.txt`, `sitemap.xml` | For search engines. |
 | `*.md` | Project documents linked from the page and the README. |
 

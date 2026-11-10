@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What differs between the versions | Scarface decomp</title>
+  <meta name="description" content="Every file the Xbox, PC, PS2 and April 2006 prototype versions of Scarface: The World Is Yours have that the others don't, and the ones they have in another form. Names only." />
+  <meta name="theme-color" content="#0A0A0A" />
+  <meta property="og:title" content="What differs between the versions of Scarface: The World Is Yours" />
+  <meta property="og:description" content="Xbox, PC, PS2 and the April 2006 prototype, compared file by file. Names only." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scarface-decomp.pages.dev/versions.html" />
+  <meta property="og:image" content="https://scarface-decomp.pages.dev/og.jpg" />
+  <link rel="canonical" href="https://scarface-decomp.pages.dev/versions.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's look (index.html): black, white and blood red. */
+    :root {
+      --black: #0A0A0A; --panel: #121212; --white: #F2EFEA; --grey: #A6A6A6; --line: #2A2A2A;
+      --red: #EA444D; --blood: #B5121B; --hot: #FF3B45;
+      --title: 'Marcellus', 'Friz Quadrata', 'Optima', Georgia, serif;
+      --sans: 'Josefin Sans', 'Avant Garde', 'Century Gothic', 'Futura', 'Segoe UI', sans-serif;
+      --mono: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--red); text-underline-offset: 4px; }
+    a:hover { color: var(--hot); }
+    :focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+    code { font-family: var(--mono); font-size: 0.82em; background: var(--panel); border: 1px solid var(--line); padding: 1px 6px; border-radius: 4px; }
+    [hidden] { display: none !important; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,10,10,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+    .brand { font-family: var(--title); font-size: 1.02rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); text-decoration: none; white-space: nowrap; }
+    .nav { display: flex; gap: 8px; }
+    .nav a { color: var(--white); text-decoration: none; font-size: 0.9rem; border: 1px solid #3A3A3A; border-radius: 2px; padding: 6px 14px; white-space: nowrap; }
+    .nav a:hover { border-color: var(--white); color: var(--white); }
+    main .wrap { padding-top: 64px; padding-bottom: 80px; }
+    h1 { font-family: var(--title); font-weight: 400; color: var(--red); text-transform: uppercase; letter-spacing: 0.14em; font-size: clamp(1.4rem, 3.4vw, 2rem); line-height: 1.25; text-align: center; margin-bottom: 14px; }
+    .intro { color: var(--grey); max-width: 40em; margin: 0 auto 40px; text-align: center; }
+    .note { color: var(--grey); font-size: 0.9rem; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { padding: 10px 12px 8px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: var(--grey); font-weight: 400; font-size: 0.86rem; }
+    .scroll { overflow-x: auto; margin-bottom: 14px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 48px 0 14px; }
+    .tab { background: none; color: var(--grey); border: 1px solid var(--line); border-radius: 2px; padding: 8px 16px 6px; font: inherit; font-size: 0.95rem; cursor: pointer; }
+    .tab[aria-selected="true"] { color: var(--white); border-color: var(--blood); background: rgba(181,18,27,0.12); }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+    .toolbar input, .toolbar select { background: #050505; color: var(--white); border: 1px solid var(--line); border-radius: 2px; padding: 10px 14px 8px; font: inherit; font-size: 0.93rem; }
+    .toolbar input { flex: 1 1 260px; min-width: 0; }
+    .toolbar input:focus, .toolbar select:focus { border-color: var(--red); }
+    .count { color: var(--grey); font-size: 0.88rem; margin-bottom: 6px; }
+    .rows { border-top: 1px solid var(--line); }
+    .row { display: grid; grid-template-columns: minmax(0, 1fr) 110px 90px; gap: 4px 14px; padding: 9px 4px 7px; border-bottom: 1px solid var(--line); font-size: 0.9rem; align-items: baseline; }
+    .row .p { font-family: var(--mono); font-size: 0.82rem; overflow-wrap: anywhere; }
+    .row .d { grid-column: 1 / -1; color: var(--grey); font-size: 0.84rem; }
+    .row .k, .row .z { color: var(--grey); }
+    .row .z { text-align: right; }
+    .row ul { grid-column: 1 / -1; list-style: none; color: var(--grey); font-size: 0.84rem; }
+    .row ul b { color: var(--white); font-weight: 600; }
+    .more { display: flex; justify-content: center; margin-top: 18px; }
+    .btn { font: 600 0.92rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase; padding: 11px 22px 9px; border-radius: 2px; border: 1px solid #4A4A4A; background: none; color: var(--white); cursor: pointer; }
+    .btn:hover { border-color: var(--white); }
+    .empty { padding: 34px 6px; color: var(--grey); text-align: center; }
+    footer { border-top: 3px solid var(--blood); }
+    footer .wrap { padding-top: 30px; padding-bottom: 44px; color: var(--grey); font-size: 0.86rem; text-align: center; }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 18px; }
+      .row { grid-template-columns: minmax(0, 1fr) 80px; }
+      .row .k { display: none; }
+      .nav a.opt { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="./">Scarface Decomp</a>
+      <nav class="nav" aria-label="Site">
+        <a href="./">Main page</a>
+        <a class="opt" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md" target="_blank" rel="noopener noreferrer">File formats</a>
+        <a href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <h1>What differs between the versions</h1>
+      <p class="intro">Every file of the Xbox, PC, PS2 and April 2006 prototype releases, compared. A file is <b>only here</b> when no
+        other version has it, and <b>different</b> when another version has it in another form. Names, sizes and descriptions only:
+        nothing from the files themselves.</p>
+
+      <div id="loading" class="empty">Loading…</div>
+      <div id="missing" class="empty" hidden>
+        <p>The comparison hasn't been made yet. Anyone with their own copies of the versions can make it:</p>
+        <p style="margin-top:10px"><code>python portal/tools/version_report.py --scan</code></p>
+      </div>
+
+      <div id="report" hidden>
+        <div class="scroll">
+          <table aria-label="Each version's files">
+            <thead><tr><th scope="col">Version</th><th scope="col">Files</th><th scope="col">Size</th><th scope="col">Only here</th><th scope="col">Different</th><th scope="col">The same</th></tr></thead>
+            <tbody id="summary"></tbody>
+          </table>
+        </div>
+        <p class="note" id="made"></p>
+
+        <div class="tabs" role="tablist" aria-label="Version" id="tabs"></div>
+        <div class="toolbar">
+          <select id="what" aria-label="Which files">
+            <option value="only">Only in this version</option>
+            <option value="changed">In another form elsewhere</option>
+          </select>
+          <select id="kind" aria-label="Type"><option value="">Every type</option></select>
+          <input id="q" type="search" placeholder="Search names, e.g. tony, .bik or music" autocomplete="off" aria-label="Search names" />
+        </div>
+        <div class="count" id="count" aria-live="polite"></div>
+        <div class="rows" id="rows"></div>
+        <div class="more"><button class="btn" id="more" type="button" hidden>Show more</button></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">Made by <code>portal/tools/version_report.py</code> from the contributors' own copies of the game. No game files are
+      shared here. Not affiliated with the game's developer, publishers or rights holders.</div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+    var SOURCES = ['versions.json', 'https://raw.githubusercontent.com/scarface-decomp/scarface_decomp/main/docs/versions.json'];
+    var PAGE = 200;
+    var $ = function (id) { return document.getElementById(id); };
+    var fmt = function (n) { return Number(n || 0).toLocaleString('en-US'); };
+    var R = null, tab = '', shown = 0, list = [];
+
+    function size(n) {
+      var units = ['bytes', 'KB', 'MB', 'GB'], i = 0;
+      while (n >= 1024 && i < units.length - 1) { n /= 1024; i++; }
+      return i === 0 ? fmt(n) + ' bytes' : n.toFixed(1) + ' ' + units[i];
+    }
+    function el(tag, text, cls) {
+      var e = document.createElement(tag);
+      if (text !== undefined) e.textContent = text;
+      if (cls) e.className = cls;
+      return e;
+    }
+    function load(i) {
+      if (i >= SOURCES.length) return Promise.reject(new Error('not found'));
+      return fetch(SOURCES[i], { cache: 'no-cache' }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      }).then(function (d) {
+        if (!d || d.schema !== 'scarface_versions_v1') throw new Error('not the report');
+        return d;
+      }).catch(function () { return load(i + 1); });
+    }
+    function label(v) {
+      for (var i = 0; i < R.versions.length; i++) if (R.versions[i].id === v) return R.versions[i].label;
+      return v;
+    }
+
+    function render() {
+      var body = $('summary');
+      R.versions.forEach(function (v) {
+        var tr = el('tr');
+        [v.label, fmt(v.files), size(v.bytes), fmt(v.only), fmt(v.changed), fmt(v.shared)].forEach(function (t, i) {
+          tr.appendChild(el(i === 0 ? 'th' : 'td', t));
+        });
+        tr.firstChild.setAttribute('scope', 'row');
+        body.appendChild(tr);
+      });
+      $('made').textContent = 'Compared on ' + R.generated + '.';
+      Object.keys(R.kinds).forEach(function (k) {
+        var o = el('option', R.kinds[k]);
+        o.value = k;
+        $('kind').appendChild(o);
+      });
+      R.versions.forEach(function (v, i) {
+        var b = el('button', v.label, 'tab');
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.addEventListener('click', function () { pick(v.id); });
+        $('tabs').appendChild(b);
+        if (i === 0) tab = v.id;
+      });
+      var want = (location.hash || '').slice(1);
+      if (want && R.versions.some(function (v) { return v.id === want; })) tab = want;
+      pick(tab);
+    }
+
+    function pick(v) {
+      tab = v;
+      Array.prototype.forEach.call($('tabs').children, function (b, i) {
+        b.setAttribute('aria-selected', R.versions[i].id === v ? 'true' : 'false');
+      });
+      if (history.replaceState) history.replaceState(null, '', '#' + v);
+      filter();
+    }
+
+    function filter() {
+      var what = $('what').value, kind = $('kind').value, q = $('q').value.trim().toLowerCase();
+      if (what === 'only') {
+        list = (R.only[tab] || []).filter(function (f) {
+          return (!kind || f[2] === kind) && (!q || f[0].toLowerCase().indexOf(q) >= 0 || (f[3] || '').toLowerCase().indexOf(q) >= 0);
+        });
+      } else {
+        list = (R.changed || []).filter(function (c) {
+          var mine = c[2].some(function (x) { return x[0] === tab; });
+          var text = (c[0] + ' ' + c[2].map(function (x) { return x[2]; }).join(' ')).toLowerCase();
+          return mine && (!kind || c[1] === kind) && (!q || text.indexOf(q) >= 0);
+        });
+      }
+      $('rows').textContent = '';
+      shown = 0;
+      more();
+    }
+
+    function more() {
+      var box = $('rows'), what = $('what').value;
+      list.slice(shown, shown + PAGE).forEach(function (f) {
+        var row = el('div', undefined, 'row');
+        if (what === 'only') {
+          row.appendChild(el('span', f[0], 'p'));
+          row.appendChild(el('span', R.kinds[f[2]] || f[2], 'k'));
+          row.appendChild(el('span', size(f[1]), 'z'));
+          if (f[3]) row.appendChild(el('span', f[3], 'd'));
+        } else {
+          row.appendChild(el('span', f[0], 'p'));
+          row.appendChild(el('span', R.kinds[f[1]] || f[1], 'k'));
+          row.appendChild(el('span', '', 'z'));
+          var ul = el('ul');
+          f[2].forEach(function (x) {
+            var li = el('li');
+            li.appendChild(el('b', label(x[0])));
+            li.appendChild(document.createTextNode(': ' + size(x[1]) + (x[2] ? ', ' + x[2] : '')));
+            ul.appendChild(li);
+          });
+          row.appendChild(ul);
+        }
+        box.appendChild(row);
+      });
+      shown = Math.min(list.length, shown + PAGE);
+      if (!list.length) box.appendChild(el('div', 'Nothing matches.', 'empty'));
+      $('count').textContent = fmt(list.length) + (list.length === 1 ? ' file' : ' files') + (shown < list.length ? ', showing ' + fmt(shown) : '');
+      $('more').hidden = shown >= list.length;
+    }
+
+    var timer = null;
+    $('q').addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(filter, 200); });
+    $('what').addEventListener('change', filter);
+    $('kind').addEventListener('change', filter);
+    $('more').addEventListener('click', more);
+
+    load(0).then(function (d) {
+      R = d;
+      $('loading').hidden = true;
+      $('report').hidden = false;
+      render();
+    }, function () {
+      $('loading').hidden = true;
+      $('missing').hidden = false;
+    });
+  })();
+  </script>
+</body>
+</html>

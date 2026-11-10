@@ -157,6 +157,9 @@
     .rules li { border: 1px solid var(--line); border-left: 3px solid var(--blood); border-radius: 2px; padding: 18px 20px; background: rgba(255,255,255,0.02); color: var(--grey); font-size: 0.96rem; }
     .rules li b { display: block; color: var(--white); font-weight: 600; margin-bottom: 2px; }
     .small { font-size: 0.9rem; color: var(--grey); margin-top: 26px; text-align: center; }
+    .refs { margin-top: 0; }
+    .refs li b a { color: var(--white); text-decoration-color: var(--blood); }
+    .refs li b a:hover { color: var(--hot); }
 
     /* ---------- progress ---------- */
     .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; }
@@ -242,7 +245,8 @@
     footer .wrap { padding-top: 38px; padding-bottom: 54px; color: var(--grey); font-size: 0.86rem; display: grid; gap: 14px; text-align: center; }
     footer .links { margin-top: 0; }
 
-    @media (max-width: 980px) {
+    .topbar .wrap { max-width: 1360px; }
+    @media (max-width: 1320px) {
       /* the contents move to their own scrolling row under the name */
       html { scroll-padding-top: 118px; }
       .topbar .wrap { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "brand gh" "toc toc"; height: auto; gap: 6px 16px; padding-top: 10px; }
@@ -298,6 +302,7 @@
         <a href="#help"><span class="n" aria-hidden="true">03</span>Start helping</a>
         <a href="#questions"><span class="n" aria-hidden="true">04</span>Questions</a>
         <a href="#functions"><span class="n" aria-hidden="true">05</span>The code</a>
+        <a href="#reference"><span class="n" aria-hidden="true">06</span>Reference</a>
       </nav>
       <div class="ext">
         <a class="gh" href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>
@@ -512,7 +517,7 @@
               your computer.</p></details>
           <details><summary>Which version of the game do I need?</summary>
             <p>The US Xbox disc, exactly: that's where almost all of the work is. The US PC game with the official 1.00.2
-              patch installed and the April 2006 Xbox prototype are optional extras. Every function is matched against those
+              patch installed, the US PS2 disc and the April 2006 Xbox prototype are optional extras. Every function is matched against those
               exact files, and other versions have different code at different addresses, so the portal won't use the
               unpatched PC 1.00, other regions' discs or edited files. The accepted files and how to check yours are in
               <a data-repo-link="/blob/main/docs/GAME_VERSIONS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/GAME_VERSIONS.md" target="_blank" rel="noopener noreferrer">GAME_VERSIONS.md</a>.</p></details>
@@ -605,6 +610,28 @@
         <div class="result-count" id="count" aria-live="polite"></div>
         <div class="fn-list" id="fn-list"><div class="empty">Loading…</div></div>
         <div class="more"><button class="btn" id="more" type="button" hidden>Show more</button></div>
+      </div>
+    </section>
+
+    <section id="reference" class="alt" aria-labelledby="h-reference">
+      <div class="wrap">
+        <h2 id="h-reference">Reference</h2>
+        <p class="intro">What the project has worked out about the game so far. Useful for modding and research as much as for
+          rebuilding the code.</p>
+        <ul class="rules refs">
+          <li><b><a data-repo-link="/blob/main/docs/FORMATS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md" target="_blank" rel="noopener noreferrer">The game's file formats</a></b>
+            How the archives (<code>.rcf</code>), models and textures (Pure3D), sounds (<code>.rsd</code>), videos and scripts are
+            laid out on each version, and which of the project's tools read them.</li>
+          <li><b><a data-repo-link="/blob/main/docs/NAMES.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/NAMES.md" target="_blank" rel="noopener noreferrer">Function names for Ghidra and IDA</a></b>
+            Where every function starts and ends on all four versions, the names found so far, and two scripts that load them
+            into your own project.</li>
+          <li><b><a href="versions.html">What differs between the versions</a></b>
+            Every file the Xbox, PC, PS2 and prototype releases have that the others don't, and the ones they have in another
+            form. Searchable; names only.</li>
+          <li><b><a data-repo-link="/blob/main/docs/SCRIPTS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCRIPTS.md" target="_blank" rel="noopener noreferrer">The game's scripts</a></b>
+            All of the game's compiled TorqueScript and the prototype's, decompiled to readable script that compiles back to the
+            identical files.</li>
+        </ul>
       </div>
     </section>
   </main>

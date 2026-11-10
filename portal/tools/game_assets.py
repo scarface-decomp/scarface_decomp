@@ -1145,6 +1145,83 @@ class _Collect(Sink):
         self.status["files"] += 1
 
 
+class _ListSink(Sink):
+    """Only lists each file: [path, size, sha, facts], with nothing written (for comparing versions)."""
+
+    def __init__(self, files: List[list], status: dict):
+        self.files, self.status = files, status
+        self.facts: Dict[str, Optional[dict]] = {}
+
+    def file(self, path: str, size: int, chunks: Iterable[bytes]) -> str:
+        want = _sniff_wants(path, size)
+        seen = bytearray()
+        h, n = hashlib.sha1(), 0
+        for piece in chunks:
+            h.update(piece)
+            n += len(piece)
+            if want < 0:
+                seen.extend(piece)
+            elif len(seen) < want:
+                seen.extend(piece[:want - len(seen)])
+        sha = h.hexdigest()
+        facts = sniff(path, bytes(seen)) if want else None
+        self.facts[sha] = facts
+        self.files.append([path, n, sha, facts])
+        self.status["files"] += 1
+        return sha
+
+    def same(self, path: str, size: int, sha: str) -> None:
+        self.files.append([path, size, sha, self.facts.get(sha)])
+        self.status["files"] += 1
+
+
+CATALOGS = "catalogs"
+
+
+def list_versions(versions: List[str], bin_dir: Path = BIN_DIR, status: Optional[Status] = None,
+                  stop: Callable[[], bool] = lambda: False, log: Log = print,
+                  sources: Optional[Dict[str, Source]] = None) -> Dict[str, List[list]]:
+    """Read the chosen versions and list their files ([path, size, sha, facts]) without copying anything.
+    The lists are kept in binaries/game_files/catalogs/ and reused while the game files stay the same."""
+    status = status if status is not None else new_status()
+    if sources is None:
+        sources, _notes = find_sources(bin_dir)
+    chosen = [v for v in VERSIONS if v in versions and v in sources]
+    folder = out_dir(bin_dir) / CATALOGS
+    folder.mkdir(parents=True, exist_ok=True)
+    status.update(running=True, phase="listing", error="", message="", versions=chosen, started=time.time(),
+                  finished=0, done=0, files=0, total=sum(sources[v].size for v in chosen))
+    out: Dict[str, List[list]] = {}
+    done_before = 0
+    for v in chosen:
+        src = sources[v]
+        path = folder / f"catalog-{v}.json"
+        try:
+            with open(path, encoding="utf-8") as f:
+                cat = json.load(f)
+            if cat.get("complete") and cat.get("signature") == src.signature():
+                out[v] = cat["files"]
+                log(f"[=] {src.label}: already listed ({len(out[v]):,} files)")
+                done_before += src.size
+                continue
+        except (OSError, ValueError):
+            pass
+        log(f"[*] {src.label}: listing {src.name} ...")
+        status.update(version=v, label=src.label, message=f"Listing {src.label}")
+        files: List[list] = []
+
+        def progress(pos: int, base=done_before, cap=src.size) -> None:
+            status["done"] = base + min(pos, cap) if cap else base
+
+        READERS[src.kind](src, _ListSink(files, status), progress, stop, log)
+        _write_json(path, {"signature": src.signature(), "complete": True, "files": files})
+        out[v] = files
+        done_before += src.size
+        log(f"    + {len(files):,} files")
+    status.update(running=False, phase="done", finished=time.time(), message="Done")
+    return out
+
+
 def _safe_rel(place: str) -> bool:
     parts = place.split("/")
     return all(p not in ("", ".", "..") and ":" not in p and "\\" not in p for p in parts)
@@ -1807,6 +1884,7 @@ def open_folder(path: Path) -> None:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--extract", choices=MODES, help="copy the files out in this layout")
+    ap.add_argument("--list", action="store_true", help="only list each version's files (for portal/tools/version_report.py)")
     ap.add_argument("--folders", choices=FOLDERS, default="game", help="as in the game, or by type first")
     ap.add_argument("--versions", default=",".join(VERSIONS), help="which versions (default: all found)")
     ap.add_argument("--bin", type=Path, default=BIN_DIR, help="the folder with your game files")
@@ -1817,6 +1895,10 @@ def main(argv=None) -> int:
         print(f"  {LABELS[v]:22} {s.name + '  (' + _fmt_bytes(s.size) + ')' if s else 'not found'}")
     for n in notes:
         print(f"  note: {n}")
+    if a.list:
+        list_versions([v.strip() for v in a.versions.split(",")], a.bin, log=print, sources=sources)
+        print(f"Lists written to {out_dir(a.bin) / CATALOGS}")
+        return 0
     if not a.extract:
         return 0
     status = new_status()
