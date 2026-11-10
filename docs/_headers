@@ -1,0 +1,21 @@
+# Response headers for every page and file of the site. Cloudflare Pages reads this file from the
+# build output (docs/) and adds these headers; GitHub Pages and `python -m http.server` ignore it.
+#
+# Content-Security-Policy: the browser runs only the site's own scripts (docs/js/), loads fonts,
+# styles and pictures only from the site itself, and reads data only from the site and from
+# raw.githubusercontent.com (the fallback for data/, see docs/README.md). Nothing may put the site
+# in a frame, so it can't be dressed up inside another page. If you add a script, a font or another
+# address the pages read from, add it here too, or browsers will refuse it.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://raw.githubusercontent.com; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# The fonts never change; let browsers keep them for a day. (Scripts aren't kept: a new page
+# must never run with yesterday's script.)
+/fonts/*
+  Cache-Control: public, max-age=86400

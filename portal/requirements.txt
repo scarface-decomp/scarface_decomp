@@ -1,3 +1,11 @@
-# Python 3.9+
-capstone>=5.0      # required: function sizing, disassembly, hard-coded address check
-argon2-cffi>=21.3  # recommended: contributor PIN hashing (falls back to PBKDF2 without it)
+# Python 3.9+. Exact versions, the packages these depend on included, so a new release (or a hijacked one)
+# never reaches a contributor's computer until someone here has looked at it and changed the number.
+# START_PORTAL.bat and start_portal.sh install them as ready-made wheels only (--only-binary), so installing
+# runs no package's own setup code. To update: change a number, run the tests, commit.
+capstone==5.0.9                                   # required: function sizing, disassembly, hard-coded address check
+argon2-cffi==25.1.0                               # recommended: contributor PIN hashing (falls back to PBKDF2 without it)
+argon2-cffi-bindings==25.1.0 ; python_version < "3.10"
+argon2-cffi-bindings==26.1.0 ; python_version >= "3.10"
+cffi==2.0.0 ; python_version < "3.10"
+cffi==2.1.1 ; python_version >= "3.10"
+pycparser==2.23

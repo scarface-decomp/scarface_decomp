@@ -29,3 +29,8 @@ authors are credited in the commit history. Thank you.
   [Torque2D](https://github.com/TorqueGameEngines/Torque2D) (`astNodes.cc`, `compiler.cc`, MIT
   licence), the open-source descendant of the engine Scarface's script compiler came from. It was read
   to get the order of the string, number and name tables right; the Python compiler here is new code.
+* The fonts of the website and the portal: [Anton](https://github.com/googlefonts/AntonFont) (The Anton
+  Project Authors), [Josefin Sans](https://github.com/ThomasJockin/JosefinSansFont-master) (The Josefin
+  Sans Project Authors) and Marcellus (Brian J. Bonislawsky, Astigmatic), each under the SIL Open Font
+  License 1.1, in the files packaged by [Fontsource](https://fontsource.org). They are in `docs/fonts/`
+  with their licences, so no page loads anything from a font site.

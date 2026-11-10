@@ -11,7 +11,8 @@ It implements the same JSON endpoints the page calls (/api/state, /api/queue, /a
 decomp.me (POST /api/scratch, GET /scratch/<slug>/claim) so the decomp.me button can be tested offline:
 
   * C++ containing MATCH_ALL verifies 100%; containing COMPILE_ERROR fails to compile.
-  * The fake AI returns MATCH_ALL code for functions whose symbol contains "Easy".
+  * The fake AI returns MATCH_ALL code for functions whose symbol contains "Easy"; for the others it
+    gives up (GIVE UP:) once it has made three tries.
   * Login accepts any handle; the first PIN used for a handle becomes its PIN.
 """
 
@@ -28,6 +29,11 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "website_kit"))
+FONTS = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "docs", "fonts"))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import web_security as WS  # noqa: E402  (the real portal's headers, so the tests run the page under them)
+
+PAGE_CSP = WS.page_policy(("https://decomp.me",))
 LOCK = threading.Lock()
 LEASE_SEC = 15 * 60
 DELAYS = {"verify": 0.15, "ai": 0.25, "fast": 0.05}
@@ -258,6 +264,17 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
+    def send_header(self, keyword, value):
+        if keyword.lower() == "content-type":
+            self._ctype = value
+        super().send_header(keyword, value)
+
+    def end_headers(self):
+        for k, v in WS.headers(getattr(self, "_ctype", ""), PAGE_CSP, shared=urlparse(self.path).path.startswith("/api/dme-bridge/")):
+            super().send_header(k, v)
+        self._ctype = ""
+        super().end_headers()
+
     def _json(self, obj, code=200):
         data = json.dumps(obj).encode()
         self.send_response(code)
@@ -305,6 +322,9 @@ class Handler(BaseHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(data)
                 return
+            if u.path.startswith("/fonts/") and os.path.basename(u.path) in os.listdir(FONTS):
+                with open(os.path.join(FONTS, os.path.basename(u.path)), "rb") as f:
+                    return self._bytes(f.read(), "text/css" if u.path.endswith(".css") else "font/woff2")
             if u.path == "/api/state":
                 return self._json({"progress": progress(), "leaderboard": leaderboard(), "audit_log": AUDIT[-50:][::-1],
                                    "sources": SOURCES, "tier_counts": tier_counts(),
@@ -575,6 +595,8 @@ class Handler(BaseHTTPRequestHandler):
             time.sleep(DELAYS["ai"])
             prompt = body.get("prompt", "")
             easy = "EasyFunc" in prompt.split("Function:")[1].split("\n")[0] if "Function:" in prompt else False
+            if not easy and "Attempt 3:" in prompt:      # like a real model: it decides it can't get closer
+                return self._json({"ok": True, "reply": "GIVE UP: the mock can't get any closer."})
             code = "// ai\nvoid f() { /* MATCH_ALL */ }" if easy else "// ai attempt\nvoid f() { int x = 1; }"
             return self._json({"ok": True, "reply": "Here you go:\n```cpp\n" + code + "\n```\n"})
         if u.path == "/api/decompme":

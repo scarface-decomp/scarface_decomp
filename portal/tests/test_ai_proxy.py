@@ -79,7 +79,8 @@ def test_anthropic_uses_the_current_api_version_without_temperature(S, monkeypat
     body, hdr = calls[0]["body"], calls[0]["headers"]
     assert hdr["x-api-key"] == "k" and hdr["anthropic-version"] == "2026-10-21"
     assert not {"temperature", "top_p", "top_k"} & set(body) and body["system"] == S.SYSTEM_PROMPT
-    assert body["max_tokens"] >= 8192
+    assert body["max_tokens"] >= 32000                       # thinking counts toward it
+    assert body["thinking"] == {"type": "adaptive"} and body["output_config"] == {"effort": "high"}
 
 
 def test_anthropic_falls_back_to_the_old_version_if_needed(S, monkeypatch):
@@ -97,7 +98,8 @@ def test_gemini_sends_no_temperature_and_skips_thoughts(S, monkeypatch):
         (200, {"candidates": [{"content": {"parts": [{"text": "thinking...", "thought": True}, {"text": "hi"}]}}]})]))
     res = S.ai_call({"provider": "gemini", "api_key": "g", "model": "gemini-3.8-flash", "prompt": "p"})
     assert res == {"ok": True, "reply": "hi", "used_model": "gemini-3.8-flash"}
-    assert "generationConfig" not in calls[0]["body"] and calls[0]["url"].endswith("gemini-3.8-flash:generateContent")
+    assert calls[0]["body"]["generationConfig"] == {"thinkingConfig": {"thinkingLevel": "high"}}   # no temperature
+    assert calls[0]["url"].endswith("gemini-3.8-flash:generateContent")
     assert calls[0]["headers"]["x-goog-api-key"] == "g" and "key=" not in calls[0]["url"]
 
 
@@ -188,3 +190,57 @@ def test_input_checks(S):
     assert "Empty prompt" in S.ai_call({"provider": "openai", "api_key": "k"})["error"]
     assert "http" in S.ai_call({"provider": "custom_api", "api_key": "k", "prompt": "p", "custom_url": "file:///x"})["error"]
     assert "Pick a model" in S.ai_call({"provider": "openai", "api_key": "k", "prompt": "p"})["error"]
+
+
+# --- High reasoning: every provider is asked for it, and a model that refuses it is asked again without ---------
+
+def test_every_provider_asks_for_high_reasoning(S, monkeypatch):
+    calls = []
+    monkeypatch.setattr(S, "_http_json", fake_http(calls, [(200, chat("ok"))] * 3 + [(200, {"message": {"content": "ok"}})] * 2))
+    S.ai_call({"provider": "openai", "api_key": "k", "model": "gpt-6-astra", "prompt": "p"})
+    S.ai_call({"provider": "argon", "api_key": "k", "model": "anthropic/claude-fable-5.2", "prompt": "p"})
+    S.ai_call({"provider": "custom_api", "api_key": "k", "model": "deepseek-reasoner", "prompt": "p",
+               "custom_url": "https://api.deepseek.com/v1"})
+    S.ai_call({"provider": "ollama", "model": "gpt-oss:20b", "prompt": "p"})
+    S.ai_call({"provider": "ollama", "model": "qwen3-coder:30b", "prompt": "p"})
+    assert calls[0]["body"]["reasoning_effort"] == "high"
+    assert calls[1]["body"]["reasoning"] == {"effort": "high"} and calls[1]["body"]["model"] == "anthropic/claude-fable-5.2"
+    assert calls[2]["body"]["reasoning_effort"] == "high"
+    assert calls[3]["body"]["think"] == "high" and calls[4]["body"]["think"] is True
+    assert S.REASONING == "high"
+
+
+def test_old_openai_models_get_no_reasoning_effort(S, monkeypatch):
+    calls = []
+    monkeypatch.setattr(S, "_http_json", fake_http(calls, [(200, chat("ok", "gpt-4.1"))]))
+    S.ai_call({"provider": "openai", "api_key": "k", "model": "gpt-4.1", "prompt": "p"})
+    assert "reasoning_effort" not in calls[0]["body"]
+
+
+@pytest.mark.parametrize("provider,model,field,refusal,ok_answer", [
+    ("custom_api", "llama-3.3-70b", "reasoning_effort", {"error": {"message": "Unrecognized request argument: reasoning_effort"}}, chat("ok")),
+    ("argon", "meta-llama/llama-4", "reasoning", {"error": {"message": "This model does not support reasoning"}}, chat("ok")),
+    ("anthropic", "claude-3-haiku", "thinking", {"error": {"message": "thinking: adaptive thinking is not supported on this model"}},
+     {"content": [{"type": "text", "text": "ok"}]}),
+    ("gemini", "gemini-2.0-flash", "generationConfig", {"error": {"message": "Thinking level is not supported for this model."}},
+     {"candidates": [{"content": {"parts": [{"text": "ok"}]}}]}),
+    ("ollama", "llama3", "think", {"error": "\"llama3\" does not support thinking"}, {"message": {"content": "ok"}}),
+])
+def test_a_model_that_refuses_the_reasoning_setting_is_asked_again_without(S, monkeypatch, provider, model, field, refusal, ok_answer):
+    calls = []
+    monkeypatch.setattr(S, "_http_json", fake_http(calls, [(400, refusal), (200, ok_answer)]))
+    res = S.ai_call({"provider": provider, "api_key": "k", "model": model, "prompt": "p", "custom_url": "https://x.io/v1"})
+    assert res["ok"] and res["reply"] == "ok", res
+    assert len(calls) == 2 and field in calls[0]["body"] and field not in calls[1]["body"]
+    if provider == "anthropic":
+        assert "output_config" not in calls[1]["body"] and calls[1]["body"]["max_tokens"] == 16000
+
+
+def test_the_connection_test_uses_the_default_reasoning(S, monkeypatch):
+    """The Test button checks the key and the model; it shouldn't pay for a long think."""
+    calls = []
+    monkeypatch.setattr(S, "_http_json", fake_http(calls, [(200, chat("OK"))] * 2 + [(200, {"content": [{"type": "text", "text": "OK"}]})]))
+    for prov, model in (("openai", "gpt-6-astra"), ("argon", "openrouter/auto"), ("anthropic", "claude-fable-5-2")):
+        S.ai_call({"provider": prov, "api_key": "k", "model": model, "prompt": "Ping", "is_test": True})
+    for c in calls:
+        assert not {"reasoning_effort", "reasoning", "thinking", "output_config"} & set(c["body"]), c["body"]

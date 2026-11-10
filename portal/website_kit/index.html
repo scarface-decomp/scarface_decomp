@@ -7,9 +7,7 @@
   <meta name="description" content="Community &amp; AI-assisted 1:1 matching C++ decompilation of Scarface: The World Is Yours (PC 1.00.2 &amp; Xbox), verified byte-for-byte with MSVC 7.10 (Visual C++ Toolkit 2003, cl.exe 13.10)." />
   <meta name="theme-color" content="#0A0A0A" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3Crect%20width='512'%20height='512'%20rx='96'%20fill='%230A0A0A'/%3E%3Cpath%20d='M169.9%20421Q125.5%20421%20105.9%20398.9Q86.3%20376.8%2086.3%20328.6V296.9H150.3V337.4Q150.3%20348.6%20153.8%20355Q157.2%20361.3%20165.6%20361.3Q174.5%20361.3%20177.9%20356.2Q181.3%20351%20181.3%20339.2Q181.3%20324.3%20178.3%20314.3Q175.4%20304.2%20168.1%20295.1Q160.8%20286%20147.9%20273.9L118.9%20246.2Q86.3%20215.5%2086.3%20175.9Q86.3%20134.5%20105.5%20112.7Q124.7%2091%20161.2%2091Q205.8%2091%20224.5%20114.8Q243.2%20138.5%20243.2%20186.9H177.2V164.7Q177.2%20158%20173.5%20154.3Q169.7%20150.7%20163.2%20150.7Q155.5%20150.7%20151.9%20155Q148.3%20159.3%20148.3%20166.1Q148.3%20172.9%20152%20180.9Q155.7%20188.8%20166.5%20199.1L203.9%20235Q215.2%20245.7%20224.6%20257.6Q233.9%20269.4%20239.7%20285.2Q245.4%20300.9%20245.4%20323.6Q245.4%20369.3%20228.5%20395.1Q211.7%20421%20169.9%20421Z'%20fill='%23F2EFEA'/%3E%3Cpath%20d='M263.4%20421V91H354.1Q389.7%2091%20407.7%20110.8Q425.7%20130.6%20425.7%20168.6V323.1Q425.7%20370%20409.3%20395.5Q392.9%20421%20351.9%20421ZM329.7%20362.7H341.2Q359.4%20362.7%20359.4%20345.1V174.8Q359.4%20158.3%20355%20153.5Q350.6%20148.8%20337.1%20148.8H329.7Z'%20fill='%23E01E2B'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Josefin+Sans:wght@300;400;600;700&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts/fonts.css">
   <style>
     /* The website's look (docs/index.html): black, ivory and blood red. Titles in Marcellus, the big number in
        Anton, everything else in Josefin Sans, code in the system's monospace font. Green only ever means
@@ -396,6 +394,7 @@
     .bar-label.blue { color: var(--muted); }
     .remember-key { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--muted); cursor: pointer; user-select: none; }
     .remember-key input { accent-color: var(--blood); }
+    .remember-key .w-tries { width: 6.5em; padding: 4px 6px; }
     .w-url { width: 220px; }
     .w-model { width: 190px; }
     .w-model-custom { width: 150px; }
@@ -1046,6 +1045,7 @@
                   <label class="sr-only" for="ai-key">API key</label>
                   <input id="ai-key" type="text" class="input-box w-key masked" placeholder="Paste API key" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="" data-bwignore="" data-form-type="other" oninput="saveAiSettings()" />
                   <label class="remember-key" title="Off: the key is forgotten when you close this tab. On: it is stored in this browser until you clear it."><input type="checkbox" id="ai-remember-key" onchange="saveAiSettings()" /> Remember key</label>
+                  <label class="remember-key" title="Empty: no limit. The AI keeps trying until it matches or says it can't get closer, and every try is compiled and checked. Each try is one request on your key, so set a number to cap what a run can cost.">Stop after <input id="ai-max-tries" type="number" min="1" step="1" class="input-box w-tries" placeholder="no limit" inputmode="numeric" oninput="saveAiSettings()" /> tries</label>
                   <button type="button" id="btn-test-api" class="btn-sm gold" onclick="testAiConnection()">Test</button>
                 </div>
                 <div class="ai-row attrib">
@@ -1473,13 +1473,19 @@
   const STATUS_CLASSES = new Set(['UNCLAIMED', 'CLAIMED', 'PARTIAL', 'VERIFIED']);
   const DIFF_CLASSES = new Set(['match', 'linked', 'reloc', 'diff']);
   const MAX_SCRIPT_BYTES = 32 * 1024 * 1024;
-  const AI_ATTEMPTS = 5;
+  // An AI run has no fixed number of tries: the AI keeps going until it matches or says it can't get closer
+  // (see aiGaveUp). "Stop after" in the AI bar sets a limit for anyone who wants one.
+  const AI_HISTORY_SHOWN = 40;         // earlier tries beyond this are summed up in one line of the prompt
   const PROVIDER_MODELS = {
-    // Model IDs as each provider lists them (checked November 2026). The first one is the default.
+    // Model IDs as each provider lists them (checked 10 November 2026). The first one is the default.
+    // Every request asks for high reasoning (decomp_portal_server.REASONING).
     gemini: ['gemini-3.8-flash', 'gemini-4-argon', 'gemini-3.6-flash', 'gemini-3.5-flash-lite', 'gemini-flash-latest', 'CUSTOM'],
     openai: ['gpt-6.1-sol', 'gpt-6-astra', 'gpt-6.1-terra', 'gpt-6-luna', 'CUSTOM'],
-    anthropic: ['claude-sonnet-5-5', 'claude-opus-5-5', 'claude-fable-5-1', 'claude-haiku-5-5', 'CUSTOM'],
-    argon: ['openrouter/auto', '~openai/gpt-latest', '~anthropic/claude-opus-latest', 'CUSTOM'],
+    anthropic: ['claude-sonnet-5-5', 'claude-fable-5-2', 'claude-opus-5-5', 'claude-fable-5-1', 'claude-haiku-5-5', 'CUSTOM'],
+    argon: ['openrouter/auto', 'anthropic/claude-fable-5.2', 'openai/gpt-6-astra', 'openai/gpt-6.1-sol', 'google/gemini-4-argon',
+            'google/gemini-3.8-flash', 'anthropic/claude-opus-5.5', 'anthropic/claude-sonnet-5.5', 'x-ai/grok-4.7',
+            'deepseek/deepseek-v4-pro', 'moonshotai/kimi-k3.1-pro', 'qwen/qwen3-coder-next',
+            '~anthropic/claude-fable-latest', '~openai/gpt-astra-latest', 'CUSTOM'],
     custom_api: ['CUSTOM', 'deepseek-chat', 'deepseek-reasoner'],
     ollama: ['qwen3-coder:30b', 'qwen2.5-coder:14b', 'deepseek-r1:14b', 'CUSTOM']
   };
@@ -2085,7 +2091,7 @@
     // Model IDs that providers have retired since they were offered here: fall back to the provider's first one.
     const RETIRED = ['gemini-2.5-pro', 'gemini-3.1-flash-preview', 'gemini-3.1-pro-preview', 'gemini-2.5-flash',
       'gpt-4o', 'o3-mini', 'o1', 'gpt-4.1', 'gpt-4o-mini', 'claude-3-7-sonnet-latest', 'claude-3-5-sonnet-latest',
-      'claude-3-5-haiku-latest', 'argon-coder-v1', 'anthropic/claude-3.7-sonnet', 'openai/gpt-4o'];
+      'claude-3-5-haiku-latest', 'argon-coder-v1', 'anthropic/claude-3.7-sonnet', 'openai/gpt-4o', '~openai/gpt-latest'];
     if (RETIRED.includes(m)) {
       m = (PROVIDER_MODELS[p] || PROVIDER_MODELS.gemini)[0];
       LS.set('sf_ai_model', m);
@@ -2099,12 +2105,14 @@
     urlBox.value = LS.get('sf_ai_custom_url', '');
     urlBox.style.display = p === 'custom_api' ? 'inline-block' : 'none';
     $('contrib-tool-used').value = LS.get('sf_tool_used', '');
+    $('ai-max-tries').value = LS.get('sf_ai_max_tries', '');
   }
 
   function saveAiSettings() {
     LS.set('sf_ai_provider', $('ai-provider').value);
     LS.set('sf_ai_model', getActiveModelName());
     LS.set('sf_ai_custom_url', $('ai-custom-url').value);
+    LS.set('sf_ai_max_tries', $('ai-max-tries').value);
     const key = $('ai-key').value;
     if ($('ai-remember-key').checked) {
       LS.set('sf_ai_key', key);
@@ -2122,6 +2130,21 @@
       api_key: $('ai-key').value.trim(),
       custom_url: $('ai-custom-url').value.trim()
     };
+  }
+
+  /* The person's limit on tries for one function, or 0 for none. */
+  function aiTryCap() {
+    const n = parseInt(($('ai-max-tries') || {}).value, 10);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  }
+
+  /* How the AI ends a run itself: a reply with no code block, starting a line with GIVE UP. Returns the reason
+     it gave ('' for none), or null when the reply isn't that. */
+  function aiGaveUp(reply) {
+    const text = String(reply || '');
+    if (text.includes(FENCE)) return null;
+    const m = text.match(/^\s*\**\s*GIVE UP\b[\s:.,*-]*(.*)$/im);
+    return m ? m[1].replace(/\*+$/, '').trim().slice(0, 200) : null;
   }
 
   function saveToolUsed() { LS.set('sf_tool_used', $('contrib-tool-used').value); }
@@ -3032,8 +3055,15 @@
     return first !== null ? first : text.trim();
   }
 
-  function buildAiPrompt(t, code, bestScore, history, feedback) {
+  function buildAiPrompt(t, code, bestScore, history, feedback, run) {
     const disasmText = (Array.isArray(t.disasm_lines) ? t.disasm_lines : []).join(NL);
+    const past = history.length > AI_HISTORY_SHOWN
+      ? ['(' + (history.length - AI_HISTORY_SHOWN) + ' earlier attempts not shown)'].concat(history.slice(-AI_HISTORY_SHOWN)) : history;
+    // In an Auto-Decompile run the AI decides how many tries it takes; a copied prompt is a single answer.
+    const loop = run ? 'HOW THIS RUN WORKS: you decide how many tries this takes. There is no limit' +
+      (run.cap ? ' other than the ' + run.cap + ' the person set (this is try ' + run.attempt + ')' : ' (this is try ' + run.attempt + ')') +
+      '. Every reply is one try: it is compiled with the exact compiler and compared with the target byte for byte, and the next message shows you the result. ' +
+      'Keep trying while you can still get closer. When you are sure you can\'t improve on the current best C++, reply with a single line starting GIVE UP: and the reason, and no code.' : '';
     if (isPs2(t.bin)) {
       return [
         'Decompile this MIPS R5900 (PlayStation 2) function from Scarface: The World Is Yours (2006) into genuine, human-readable C++ that compiles byte-for-byte to the target with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me compiler ' + 'mwcps2-3.0.1b103-040528).',
@@ -3042,9 +3072,10 @@
         'Name every called function and global after its address: extern "C" void func_XXXXXXXX(); extern int D_XXXXXXXX;',
         'Target disassembly:' + NL + disasmText,
         'Current best C++ (' + bestScore + '/' + t.size + ' bytes matched):' + NL + code,
-        history.length ? 'Previous attempts:' + NL + history.join(NL) : '',
+        past.length ? 'Previous attempts:' + NL + past.join(NL) : '',
         feedback || '',
-        'RULES: Do not use asm, __asm__, or byte arrays. Write normal, readable C++ (classes, structs, methods, named members). Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block and nothing else.'
+        'RULES: Do not use asm, __asm__, or byte arrays. Write normal, readable C++ (classes, structs, methods, named members). Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block and nothing else.',
+        loop
       ].filter(Boolean).join(NL + NL);
     }
     return [
@@ -3054,9 +3085,10 @@
       'Target machine code bytes: ' + t.target_hex,
       'Target disassembly:' + NL + disasmText,
       'Current best C++ (' + bestScore + '/' + t.size + ' bytes matched):' + NL + code,
-      history.length ? 'Previous attempts:' + NL + history.join(NL) : '',
+      past.length ? 'Previous attempts:' + NL + past.join(NL) : '',
       feedback || '',
-      'RULES: Do not use __asm, _asm, _emit, __declspec(naked), #pragma code_seg/data_seg/section, __declspec(allocate), or byte arrays. Write normal, readable C++ (classes, structs, methods, named members). Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block and nothing else.'
+      'RULES: Do not use __asm, _asm, _emit, __declspec(naked), #pragma code_seg/data_seg/section, __declspec(allocate), or byte arrays. Write normal, readable C++ (classes, structs, methods, named members). Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block and nothing else.',
+      loop
     ].filter(Boolean).join(NL + NL);
   }
 
@@ -3162,21 +3194,34 @@
       const cfg = getAiConfig();
       if (cfg.provider !== 'ollama' && !cfg.api_key) {
         editorEl().value = activeRun.bestCode;
-        setStatus('Local synthesizer reached ' + bestScore + '/' + t.size + ' B. To run the ' + AI_ATTEMPTS + '-attempt AI loop, paste an API key above (or use Copy AI Prompt).', 'warn');
+        setStatus('Local synthesizer reached ' + bestScore + '/' + t.size + ' B. To let an AI keep trying, paste an API key above (or use Copy AI Prompt).', 'warn');
         return 'NO_KEY';
       }
 
       const history = [];
+      const tried = new Map();             // code already compiled -> how it did, so a repeat isn't compiled again
       let feedback = bestFeedback;
-      for (let attempt = 1; attempt <= AI_ATTEMPTS; attempt++) {
+      const cap = aiTryCap();              // 0: no limit, the AI decides when to stop
+      const tries = (n) => n + (n === 1 ? ' try' : ' tries');
+      // Not a limit on tries: a model that keeps answering without new code isn't trying any more.
+      const STUCK = 5;
+      let stuck = 0;
+      const giveUpStuck = () => {
+        editorEl().value = activeRun.bestCode;
+        setStatus('The AI sent no new code ' + STUCK + ' times in a row, so the run stopped. Best: ' + bestScore + '/' + t.size +
+          ' B. Your best checkpoint is kept on the server.', 'warn');
+        return false;
+      };
+      for (let attempt = 1; !cap || attempt <= cap; attempt++) {
         if (cancelled()) return false;
-        const pct = Math.min(95, 45 + attempt * 10);
-        $('btn-step2-ai').textContent = 'AI Attempt ' + attempt + '/' + AI_ATTEMPTS + '...';
-        updateActivityMonitor('Querying ' + cfg.model + ' (attempt ' + attempt + '/' + AI_ATTEMPTS + ')...', 'Sending disassembly to ' + cfg.model + '...', pct);
+        const pct = Math.round(45 + 50 * attempt / (attempt + 4));
+        const of = cap ? '/' + cap : '';
+        $('btn-step2-ai').textContent = 'AI Attempt ' + attempt + of + '...';
+        updateActivityMonitor('Querying ' + cfg.model + ' (try ' + attempt + of + ', high reasoning)...', 'Sending disassembly to ' + cfg.model + '...', pct);
 
         let reply;
         try {
-          reply = await callUserAiApi(buildAiPrompt(t, activeRun.bestCode, bestScore, history, feedback), signal);
+          reply = await callUserAiApi(buildAiPrompt(t, activeRun.bestCode, bestScore, history, feedback, { attempt: attempt, cap: cap }), signal);
         } catch (err) {
           if (cancelled() || err.name === 'AbortError') return false;
           editorEl().value = activeRun.bestCode;
@@ -3185,15 +3230,34 @@
         }
         if (cancelled()) return false;
 
+        const why = aiGaveUp(reply);
+        if (why !== null) {
+          editorEl().value = activeRun.bestCode;
+          setStatus('The AI stopped after ' + tries(attempt - 1) + (why ? ': "' + why + '"' : '') + '. Best: ' + bestScore + '/' + t.size +
+            ' B. Your best checkpoint is kept on the server.', 'warn');
+          updateActivityMonitor(null, 'The AI gave up on try ' + attempt + (why ? ': ' + why : '') + '.');
+          return false;
+        }
         const candidate = extractCppBlock(reply);
         if (!candidate) {
           history.push('Attempt ' + attempt + ': no C++ code block returned.');
           feedback = '';
+          if (++stuck >= STUCK) return giveUpStuck();
           continue;
         }
+        const seen = tried.get(candidate.trim());
+        if (seen) {
+          history.push('Attempt ' + attempt + ': the same code as attempt ' + seen.attempt + ' (' + seen.result + ').');
+          feedback = 'Attempt ' + attempt + ' was exactly the code of attempt ' + seen.attempt + ', which ' + seen.result +
+            '. Change something, or reply GIVE UP: if you can\'t get closer.' + (bestFeedback ? NL + bestFeedback : '');
+          updateActivityMonitor(null, 'Try ' + attempt + ': the same code as try ' + seen.attempt + '; not compiled again.');
+          if (++stuck >= STUCK) return giveUpStuck();
+          continue;
+        }
+        stuck = 0;
         editorEl().value = candidate;
         updateDirtyDot();
-        updateActivityMonitor('Compiling attempt ' + attempt + '/' + AI_ATTEMPTS + ' with cl.exe...', 'Checking compiled bytes...', pct + 5);
+        updateActivityMonitor('Compiling try ' + attempt + of + '...', 'Checking compiled bytes...', Math.min(97, pct + 2));
         const r = await verifyCurrentFunction({ fromLoop: true, gen: myGen });
         if (cancelled()) return false;
 
@@ -3207,12 +3271,14 @@
           // The failed code is not the code the next prompt shows, so include it with the compiler's errors.
           const errText = String((r && (r.compiler_error || r.error)) || 'unknown error').slice(0, 2000);
           history.push('Attempt ' + attempt + ': did not compile.');
+          tried.set(candidate.trim(), { attempt: attempt, result: 'did not compile' });
           feedback = 'Attempt ' + attempt + ' did not compile. It was:' + NL + FENCE + 'cpp' + NL + candidate.slice(0, 6000) + NL + FENCE +
             NL + 'Compiler output:' + NL + errText + (bestFeedback ? NL + NL + 'The best C++ above still stands. ' + bestFeedback : '');
           editorEl().value = activeRun.bestCode;
         } else {
           const got = Number(r.matched_bytes) || 0;
           history.push('Attempt ' + attempt + ': ' + got + '/' + r.total_bytes + ' bytes.');
+          tried.set(candidate.trim(), { attempt: attempt, result: 'matched ' + got + '/' + r.total_bytes + ' bytes' });
           if (got >= bestScore) {
             bestScore = got;
             activeRun.bestCode = candidate;
@@ -3228,7 +3294,7 @@
         }
       }
       editorEl().value = activeRun.bestCode;
-      setStatus('Best after ' + AI_ATTEMPTS + ' AI attempts: ' + bestScore + '/' + t.size + ' B. Your best checkpoint is kept on the server.', 'warn');
+      setStatus('Best after ' + tries(cap) + ' (your limit): ' + bestScore + '/' + t.size + ' B. Your best checkpoint is kept on the server.', 'warn');
       return false;
     } finally {
       if (myGen === runGen) {
@@ -3263,7 +3329,9 @@
     const cfg = getAiConfig();
     const hasKey = cfg.provider === 'ollama' || !!cfg.api_key;
     const costNote = hasKey
-      ? ' Each unsolved function can use up to ' + AI_ATTEMPTS + ' requests to ' + cfg.provider + ' (' + cfg.model + ') on your key.'
+      ? (aiTryCap() ? ' Each unsolved function can use up to ' + aiTryCap() + ' requests to ' + cfg.provider + ' (' + cfg.model + ') on your key.'
+         : ' There is no limit on tries: the AI keeps going on each function until it matches or says it can\'t get closer, ' +
+           'and every try is one request to ' + cfg.provider + ' (' + cfg.model + ') on your key. Set "Stop after" to cap it.')
       : ' No API key is set, so only the local synthesizer will run.';
     if (!confirm('Batch Run will process ' + queue.length + ' functions on this page.' + costNote + ' Continue?')) return;
     if (editorDirty() && !confirm('Discard unsaved editor changes for ' + (currentTask ? currentTask.symbol : 'the current function') + '?')) return;

@@ -35,10 +35,13 @@ if not exist "portal\.venv\Scripts\python.exe" (
   )
 )
 echo  Checking the Python packages the portal needs...
-"portal\.venv\Scripts\python.exe" -m pip install --quiet --disable-pip-version-check -r portal\requirements.txt
+rem Exact versions (portal\requirements.txt), as ready-made wheels only: installing runs no package's setup code.
+"portal\.venv\Scripts\python.exe" -m pip install --quiet --disable-pip-version-check --only-binary :all: -r portal\requirements.txt
 if errorlevel 1 (
   echo.
   echo  Installing packages failed. Check your internet connection and try again.
+  echo  If it says no matching distribution, your Python is newer or older than the packages support:
+  echo  install Python 3.12 or 3.13 from https://www.python.org/downloads/ and try again.
   pause
   exit /b 1
 )

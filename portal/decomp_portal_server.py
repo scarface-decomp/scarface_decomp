@@ -59,6 +59,7 @@ import blender_export as BX  # noqa: E402
 import movies as MOVIES  # noqa: E402
 import textures as TEXTURES  # noqa: E402
 import game_assets as GA  # noqa: E402
+import web_security as WS  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
 import registry_outputs as RO  # noqa: E402
@@ -1143,8 +1144,12 @@ def _load_system_prompt() -> str:
 SYSTEM_PROMPT = _load_system_prompt()
 
 
-AI_TIMEOUT = 300           # seconds per request: reasoning models can think for minutes on a big function
-OLLAMA_TIMEOUT = 900       # a model running on this computer can be much slower
+AI_TIMEOUT = 900           # seconds per request: at high reasoning a model can think for many minutes on a big function
+OLLAMA_TIMEOUT = 1200      # a model running on this computer can be much slower
+# Every provider is asked to reason at this level (the connection test is left at the model's default, to stay
+# cheap). A model that doesn't take the setting gets the same request again without it.
+REASONING = "high"
+ANTHROPIC_MAX_TOKENS = 64000   # thinking counts toward max_tokens, so high effort needs room
 # Anthropic API version. In 2026-10-21 temperature/top_p/top_k were removed (sending one is a 400 on every model).
 ANTHROPIC_VERSION = "2026-10-21"
 ANTHROPIC_OLD_VERSION = "2023-06-01"
@@ -1206,16 +1211,24 @@ def _no_text(reason: str) -> str:
 
 
 def _openai_style(url: str, key: str, model: str, prompt: str, extra_headers: Optional[dict] = None,
-                  system: str = "", timeout: int = AI_TIMEOUT) -> Tuple[bool, str, str]:
+                  system: str = "", timeout: int = AI_TIMEOUT, reasoning: Optional[dict] = None) -> Tuple[bool, str, str]:
+    """reasoning: extra body fields that ask for more thinking ({"reasoning_effort": "high"} on OpenAI and
+    compatible servers, {"reasoning": {"effort": "high"}} on OpenRouter). Dropped again if the server refuses them."""
     msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
-    body = {"model": model, "messages": msgs}
+    body = {"model": model, "messages": msgs, **(reasoning or {})}
     if not _default_temperature_only(model):
         body["temperature"] = 0.2
     headers = {"Authorization": f"Bearer {key}"} if key else {}
     headers.update(extra_headers or {})
     st, j, raw = _http_json(url, body, headers, timeout)
-    if "temperature" in body and _rejects_temperature(st, raw):
-        body.pop("temperature")
+    for _ in range(2):
+        if "temperature" in body and _rejects_temperature(st, raw):
+            body.pop("temperature")
+        elif reasoning and st in (400, 422) and any(k in body for k in reasoning):
+            for k in reasoning:               # an older or non-reasoning model that doesn't take the setting
+                body.pop(k, None)
+        else:
+            break
         st, j, raw = _http_json(url, body, headers, timeout)
     if st != 200:
         return False, _err(st, raw, key), model
@@ -1232,9 +1245,10 @@ def _openai_style(url: str, key: str, model: str, prompt: str, extra_headers: Op
     return True, text, j.get("model", model)
 
 
-def _gemini(key: str, model: str, prompt: str, system: str = "") -> Tuple[bool, str, str]:
+def _gemini(key: str, model: str, prompt: str, system: str = "", reasoning: str = "") -> Tuple[bool, str, str]:
     """Gemini 3 and later are meant to run at their default temperature (lower can make them loop), so none
-    is sent. A retired model name (404) is swapped for one the key can use."""
+    is sent. reasoning sets the thinking level (dropped for a model that refuses it). A retired model name (404)
+    is swapped for one the key can use."""
     base = "https://generativelanguage.googleapis.com/v1beta"
     body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}]}
     if system:
@@ -1243,7 +1257,10 @@ def _gemini(key: str, model: str, prompt: str, system: str = "") -> Tuple[bool, 
 
     def call(m: str):
         url = f"{base}/models/{urllib.parse.quote(m)}:generateContent"
-        st, j, raw = _http_json(url, body, hdr)
+        b = dict(body, generationConfig={"thinkingConfig": {"thinkingLevel": reasoning}}) if reasoning else body
+        st, j, raw = _http_json(url, b, hdr)
+        if reasoning and st == 400 and "think" in raw.lower():     # a model without thinking levels
+            st, j, raw = _http_json(url, body, hdr)
         if st != 200:
             return False, _err(st, raw, key), m, st
         cand = (j.get("candidates") or [{}])[0]
@@ -1270,15 +1287,25 @@ def _gemini(key: str, model: str, prompt: str, system: str = "") -> Tuple[bool, 
     return False, text + f" No replacement was found for '{m}'; pick another model.", m
 
 
-def _anthropic(key: str, model: str, prompt: str, system: str = "") -> Tuple[bool, str, str]:
+def _anthropic(key: str, model: str, prompt: str, system: str = "", reasoning: str = "") -> Tuple[bool, str, str]:
+    """reasoning: the effort level, with adaptive thinking (Claude 4.6 and later). An older model that doesn't take
+    them gets the request again without."""
     body = {"model": model, "max_tokens": 16000, "messages": [{"role": "user", "content": prompt}]}
     if system:
         body["system"] = system
+    if reasoning:
+        body.update(max_tokens=ANTHROPIC_MAX_TOKENS, thinking={"type": "adaptive"}, output_config={"effort": reasoning})
     url = "https://api.anthropic.com/v1/messages"
     hdrs = {"x-api-key": key, "anthropic-version": ANTHROPIC_VERSION}
     st, j, raw = _http_json(url, body, hdrs)
     if st == 400 and "anthropic-version" in raw.lower():      # an older API that doesn't know the new version
         hdrs["anthropic-version"] = ANTHROPIC_OLD_VERSION
+        st, j, raw = _http_json(url, body, hdrs)
+    low = raw.lower()
+    if reasoning and st == 400 and any(w in low for w in ("thinking", "effort", "output_config", "max_tokens")):
+        for k in ("thinking", "output_config"):
+            body.pop(k, None)
+        body["max_tokens"] = 16000
         st, j, raw = _http_json(url, body, hdrs)
     if st != 200:
         return False, _err(st, raw, key), model
@@ -1288,11 +1315,18 @@ def _anthropic(key: str, model: str, prompt: str, system: str = "") -> Tuple[boo
     return True, text, j.get("model", model)
 
 
-def _ollama(model: str, prompt: str, system: str = "") -> Tuple[bool, str, str]:
+def _ollama(model: str, prompt: str, system: str = "", reasoning: str = "") -> Tuple[bool, str, str]:
+    """reasoning turns thinking on: gpt-oss models take a level, the other thinking models only on/off. A model
+    that can't think gets the request again without it."""
     msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
-    st, j, raw = _http_json("http://127.0.0.1:11434/api/chat",
-                            {"model": model, "stream": False, "options": {"temperature": 0.2}, "messages": msgs},
-                            {}, OLLAMA_TIMEOUT)
+    body = {"model": model, "stream": False, "options": {"temperature": 0.2}, "messages": msgs}
+    if reasoning:
+        body["think"] = reasoning if "gpt-oss" in model.lower() else True
+    url = "http://127.0.0.1:11434/api/chat"
+    st, j, raw = _http_json(url, body, {}, OLLAMA_TIMEOUT)
+    if reasoning and st == 400 and "think" in raw.lower():
+        body.pop("think")
+        st, j, raw = _http_json(url, body, {}, OLLAMA_TIMEOUT)
     if st == 404:
         return False, f"Ollama doesn't have '{model}' yet. Download it first: ollama pull {model}", model
     if st != 200:
@@ -1329,20 +1363,26 @@ def ai_call(cfg: dict) -> dict:
     if not model and provider != "gemini":
         return {"ok": False, "error": "Pick a model, or type its name."}
     label = {"argon": "OpenRouter", "custom_api": "the custom URL", "ollama": "Ollama"}.get(provider, provider.title())
+    effort = "" if test else REASONING
     try:
         if provider == "gemini":
-            ok, text, used = _gemini(key, model or "gemini-flash-latest", prompt, system)
+            ok, text, used = _gemini(key, model or "gemini-flash-latest", prompt, system, effort)
         elif provider == "openai":
-            ok, text, used = _openai_style("https://api.openai.com/v1/chat/completions", key, model, prompt, system=system)
+            # Only reasoning models take reasoning_effort; an older one (gpt-4.1) would refuse the request.
+            r = {"reasoning_effort": effort} if effort and _default_temperature_only(model) else None
+            ok, text, used = _openai_style("https://api.openai.com/v1/chat/completions", key, model, prompt,
+                                           system=system, reasoning=r)
         elif provider == "argon":
             ok, text, used = _openai_style("https://openrouter.ai/api/v1/chat/completions", key, model, prompt,
-                                           {"X-Title": "Scarface Decomp Portal"}, system=system)
+                                           {"X-Title": "Scarface Decomp Portal"}, system=system,
+                                           reasoning={"reasoning": {"effort": effort}} if effort else None)
         elif provider == "custom_api":
-            ok, text, used = _openai_style(_chat_url(cfg["custom_url"]), key, model, prompt, system=system)
+            ok, text, used = _openai_style(_chat_url(cfg["custom_url"]), key, model, prompt, system=system,
+                                           reasoning={"reasoning_effort": effort} if effort else None)
         elif provider == "anthropic":
-            ok, text, used = _anthropic(key, model, prompt, system)
+            ok, text, used = _anthropic(key, model, prompt, system, effort)
         else:
-            ok, text, used = _ollama(model, prompt, system)
+            ok, text, used = _ollama(model, prompt, system, effort)
     except urllib.error.URLError as e:
         reason = getattr(e, "reason", e)
         if isinstance(reason, TimeoutError):
@@ -1814,6 +1854,11 @@ def list_sources(full: bool = False) -> Dict[str, str]:
 # the results back (/api/dme-bridge/result). Only decomp.me's own pages may do that (CORS, by Origin).
 DME_BRIDGE_ORIGIN = os.environ.get("SCARFACE_DECOMPME_ORIGIN", "https://decomp.me").rstrip("/")
 BRIDGE_PATHS = ("/api/dme-bridge/next", "/api/dme-bridge/result")
+# The page's Content-Security-Policy (see tools/web_security.py): it may call the portal and decomp.me only.
+PAGE_CSP = WS.page_policy((DME.DECOMPME_URL, PV.DECOMPME_URL, DME_BRIDGE_ORIGIN))
+# The site's fonts (docs/fonts/), served here too so the portal needs no font site.
+FONTS_DIR = BASE_DIR / "docs" / "fonts"
+FONT_FILE = re.compile(r"^/fonts/([a-z0-9-]+\.(?:css|woff2))$")
 BRIDGE_POLL_SECONDS = 25
 BRIDGE_JOB_SECONDS = 180
 
@@ -1884,6 +1929,20 @@ class Handler(BaseHTTPRequestHandler):
 
     def log_message(self, fmt, *args):
         pass
+
+    def send_header(self, keyword, value):
+        if keyword.lower() == "content-type":
+            self._ctype = value
+        super().send_header(keyword, value)
+
+    def end_headers(self):
+        """Every answer gets the security headers (tools/web_security.py): no framing, and a policy that fits
+        what it is."""
+        path = urllib.parse.urlparse(getattr(self, "path", "")).path
+        for k, v in WS.headers(getattr(self, "_ctype", ""), PAGE_CSP, shared=path in BRIDGE_PATHS):
+            super().send_header(k, v)
+        self._ctype = ""
+        super().end_headers()
 
     def _download(self, kind: str, q1) -> None:
         """/download/functions|scripts|sources?format=zip|txt&only=verified (&build=xb|pc|proto, &version=...)"""
@@ -1958,7 +2017,6 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(code)
         self.send_header("Content-Type", ctype)
         self.send_header("Cache-Control", "no-store")
-        self.send_header("X-Content-Type-Options", "nosniff")
         if urllib.parse.urlparse(getattr(self, "path", "")).path in BRIDGE_PATHS and self._bridge_origin():
             self.send_header("Access-Control-Allow-Origin", DME_BRIDGE_ORIGIN)
             self.send_header("Vary", "Origin")
@@ -2003,6 +2061,11 @@ class Handler(BaseHTTPRequestHandler):
         if local and host and hostname not in ("127.0.0.1", "localhost", "[::1]"):
             self._json({"ok": False, "error": "This portal only answers on localhost."}, 403)
             return False
+        path = urllib.parse.urlparse(self.path).path
+        if WS.refuse_cross_site_get(self.command, path, self.headers.get("Sec-Fetch-Site", ""),
+                                    self.headers.get("Sec-Fetch-Mode", ""), path in BRIDGE_PATHS and self._bridge_origin()):
+            self._json({"ok": False, "error": "Requests from other websites are not accepted."}, 403)
+            return False
         if self.command == "POST":
             origin = (self.headers.get("Origin") or "").strip().lower()
             site = (self.headers.get("Sec-Fetch-Site") or "").strip().lower()
@@ -2046,6 +2109,12 @@ class Handler(BaseHTTPRequestHandler):
         q1 = lambda k, d="": (qs.get(k) or [d])[0]  # noqa: E731
         if u.path in ("/", "/index.html"):
             return self._send(200, INDEX_HTML.read_bytes(), "text/html; charset=utf-8")
+        m = FONT_FILE.match(u.path)
+        if m:
+            f = FONTS_DIR / m.group(1)
+            if not f.is_file():
+                return self._send(404, b"", "text/plain")
+            return self._send(200, f.read_bytes(), "text/css; charset=utf-8" if f.suffix == ".css" else "font/woff2")
         if u.path in ("/favicon.ico", "/favicon.svg"):     # browsers ask for it on their own
             icon = BASE_DIR / "docs" / "favicon.svg"
             if icon.exists():
@@ -2567,7 +2636,6 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", ctype)
         self.send_header("Accept-Ranges", "bytes")
         self.send_header("Cache-Control", "no-store")
-        self.send_header("X-Content-Type-Options", "nosniff")
         if code == 206:
             self.send_header("Content-Range", f"bytes {start}-{end}/{total}")
         self.send_header("Content-Length", str(end - start + 1))

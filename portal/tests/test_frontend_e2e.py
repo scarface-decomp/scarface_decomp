@@ -59,7 +59,7 @@ def browser(server):
 @pytest.fixture
 def page(browser):
     reset()
-    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000}, bypass_csp=True)   # see test_page_runs_under_its_policy
     # No internet in CI: block Google Fonts so failures don't pollute the console.
     ctx.route("https://fonts.googleapis.com/**", lambda r: r.abort())
     ctx.route("https://fonts.gstatic.com/**", lambda r: r.abort())
@@ -82,7 +82,7 @@ def wait_until_loaded(pg):
 
 
 def fresh_page(browser, viewport=None):
-    ctx = browser.new_context(viewport=viewport or {"width": 1440, "height": 1000})
+    ctx = browser.new_context(viewport=viewport or {"width": 1440, "height": 1000}, bypass_csp=True)
     ctx.route("https://fonts.googleapis.com/**", lambda r: r.abort())
     ctx.route("https://fonts.gstatic.com/**", lambda r: r.abort())
     pg = ctx.new_page()
@@ -280,7 +280,7 @@ def test_hash_routing_and_back_button(page):
 
 def test_mobile_drawer(browser):
     reset()
-    ctx = browser.new_context(viewport={"width": 390, "height": 844})
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, bypass_csp=True)
     ctx.route("https://fonts.googleapis.com/**", lambda r: r.abort())
     ctx.route("https://fonts.gstatic.com/**", lambda r: r.abort())
     pg = ctx.new_page()
@@ -538,16 +538,19 @@ def test_ai_feedback_always_describes_the_code_it_shows(page):
     """Each AI prompt shows the best code so far. A failed attempt's errors come with that attempt's own code,
     and a worse attempt is reported as dropped, with what is still wrong in the best code."""
     sign_in(page)
-    prompts = []
-    replies = ["int bad(", "int good() { return 1; }", "int worse() { }", "int good() { return 1; }", "int good() { return 1; }"]
+    prompts, compiled = [], []
+    # The AI decides how many tries it takes: here five, the fourth a repeat of the second, then it gives up.
+    replies = ["int bad(", "int good() { return 1; }", "int worse() { }", "int good() { return 1; }", "GIVE UP: I can't get closer."]
 
     def ai(route):
         prompts.append(json.loads(route.request.post_data)["prompt"])
         code = replies[min(len(prompts), len(replies)) - 1]
-        route.fulfill(json={"ok": True, "reply": "```cpp\n" + code + "\n```", "used_model": "m"})
+        reply = code if code.startswith("GIVE UP") else "```cpp\n" + code + "\n```"
+        route.fulfill(json={"ok": True, "reply": reply, "used_model": "m"})
 
     def verify(route):
         code = json.loads(route.request.post_data)["cpp_code"]
+        compiled.append(code)
         if "bad(" in code:
             return route.fulfill(json={"ok": False, "compiler_error": "error C2059: syntax error"})
         got = 8 if "good" in code else 4
@@ -560,13 +563,59 @@ def test_ai_feedback_always_describes_the_code_it_shows(page):
     page.route("**/api/verify", verify)
     page.fill("#ai-key", "test-key")
     page.click("#btn-step2-ai")
-    page.wait_for_function("document.getElementById('verify-status').textContent.includes('Best after')", timeout=30000)
-    assert len(prompts) == 5
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('The AI stopped')", timeout=30000)
+    assert len(prompts) == 5 and len(compiled) == 3            # the repeated code wasn't compiled again
+    assert 'The AI stopped after 4 tries: "I can\'t get closer."' in status(page)
+    assert "There is no limit (this is try 1)" in prompts[0] and "GIVE UP:" in prompts[0]
+    assert "Attempt 4 was exactly the code of attempt 2, which matched 8/12 bytes" in prompts[4]
     assert "did not compile. It was:" in prompts[1] and "int bad(" in prompts[1] and "C2059" in prompts[1]
     assert "The current best C++ (attempt 2) compiled and matched 8/12" in prompts[2]
     assert "int good() { return 1; }" in prompts[2].split("Current best C++")[1]
     assert "Attempt 3 matched only 4/12 bytes" in prompts[3] and "The current best C++ (attempt 2)" in prompts[3]
     assert "int good() { return 1; }" in page.input_value("#wb-editor")
+
+
+def test_ai_run_stops_at_the_persons_limit(page):
+    """With "Stop after" set, a run ends there even if the AI would go on."""
+    sign_in(page)
+    prompts = []
+
+    def ai(route):
+        prompts.append(json.loads(route.request.post_data)["prompt"])
+        route.fulfill(json={"ok": True, "reply": "```cpp\nint f() { return %d; }\n```" % len(prompts), "used_model": "m"})
+
+    page.route("**/api/fast-synthesize", lambda r: r.fulfill(json={"ok": False}))
+    page.route("**/api/ai-proxy", ai)
+    page.route("**/api/verify", lambda r: r.fulfill(json={"ok": True, "is_exact": False, "matched_bytes": 2, "total_bytes": 12,
+                                                           "match_percent": 16.7, "diff_details": [], "compiled_hex": "90"}))
+    page.fill("#ai-key", "test-key")
+    page.fill("#ai-max-tries", "2")
+    page.click("#btn-step2-ai")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('your limit')", timeout=30000)
+    assert len(prompts) == 2 and "other than the 2 the person set (this is try 2)" in prompts[1]
+    assert "Best after 2 tries (your limit)" in status(page)
+    page.reload()
+    assert page.input_value("#ai-max-tries") == "2"            # kept for next time
+    page.fill("#ai-max-tries", "")
+
+
+def test_ai_run_ends_when_the_ai_sends_no_new_code(page):
+    """No limit on tries, but a model that only repeats itself isn't trying any more."""
+    sign_in(page)
+    prompts = []
+
+    def ai(route):
+        prompts.append(1)
+        route.fulfill(json={"ok": True, "reply": "```cpp\nint f() { return 1; }\n```", "used_model": "m"})
+
+    page.route("**/api/fast-synthesize", lambda r: r.fulfill(json={"ok": False}))
+    page.route("**/api/ai-proxy", ai)
+    page.route("**/api/verify", lambda r: r.fulfill(json={"ok": True, "is_exact": False, "matched_bytes": 2, "total_bytes": 12,
+                                                           "match_percent": 16.7, "diff_details": [], "compiled_hex": "90"}))
+    page.fill("#ai-key", "test-key")
+    page.click("#btn-step2-ai")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('no new code')", timeout=30000)
+    assert len(prompts) == 6                                    # one compiled, then five repeats
 
 
 def _match_one(pg):
@@ -1022,3 +1071,48 @@ def test_game_files_best_version_by_type(page):
     page.click("#gf-open-only")
     page.wait_for_timeout(200)
     assert calls("/api/game-files/open")[-1][1] == {"folder": "only:pc"}
+
+
+def test_page_runs_under_its_policy(browser):
+    """The portal's Content-Security-Policy (tools/web_security.py) with nothing set aside: the page loads, its
+    views and the workbench work, and the browser refuses nothing. (The other tests set the policy aside because
+    Playwright's wait_for_function runs its check with eval, which the policy refuses.)"""
+    reset()
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    ctx.add_init_script("window.__refused = []; document.addEventListener('securitypolicyviolation',"
+                        " e => window.__refused.push(e.violatedDirective + ' ' + e.blockedURI));")
+    outside = []
+    ctx.on("request", lambda r: outside.append(r.url) if not r.url.startswith(BASE) and not r.url.startswith(("data:", "blob:")) else None)
+    pg = ctx.new_page()
+    errors = []
+    pg.on("pageerror", lambda e: errors.append(str(e)))
+    resp = pg.goto(BASE)
+    csp = resp.headers["content-security-policy"]
+    assert "frame-ancestors 'none'" in csp and "object-src 'none'" in csp and resp.headers["x-frame-options"] == "DENY"
+    for _ in range(100):
+        if "ONLINE" in (pg.text_content("#server-status-text") or "") and "Func" in (pg.text_content("#wb-title") or ""):
+            break
+        time.sleep(0.1)
+    assert "Func" in pg.text_content("#wb-title")
+    for view in ("dashboard", "scripts", "leaderboard", "how", "gamefiles", "sources", "workbench"):
+        pg.click("#nav-" + view)
+        time.sleep(0.3)
+    fams = pg.evaluate("document.fonts.ready.then(() => [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family))")
+    assert any("Josefin Sans" in f for f in fams), fams
+    assert pg.evaluate("window.__refused") == [], pg.evaluate("window.__refused")
+    assert not errors, errors
+    assert not [u for u in outside if "fonts.g" in u], outside
+    ctx.close()
+
+
+def test_other_sites_cant_frame_or_read_the_portal(browser):
+    reset()
+    ctx = browser.new_context()
+    pg = ctx.new_page()
+    pg.set_content(f'<iframe src="{BASE}" width="800" height="600"></iframe>')
+    time.sleep(0.6)
+    assert not pg.frames[1].url.startswith(BASE.rstrip("/"))        # refused: the browser shows its error page
+    with urllib.request.urlopen(BASE + "api/state") as r:           # nor embed its answers in their pages
+        assert r.headers["Cross-Origin-Resource-Policy"] == "same-origin" and r.headers["X-Frame-Options"] == "DENY"
+        assert "default-src 'none'" in r.headers["Content-Security-Policy"]
+    ctx.close()

@@ -4,9 +4,12 @@ the page plus data/ copied from reports/. Also checks the fallbacks: no data/ fo
 answers unknown paths with the HTML page (single-page-app routing).
 """
 import json
+import re
 import shutil
 import threading
+import time
 from functools import partial
+from pathlib import Path
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 import pytest
@@ -24,12 +27,52 @@ PROG = json.loads((FIX / "progress.json").read_text(encoding="utf-8"))
 # Everything the Cloudflare build serves from docs/ besides data/.
 STATIC = ("index.html", "404.html", "versions.html", "function.html", "feed.xml", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
           "robots.txt", "sitemap.xml")
+# Folders and files every page needs beside it: its script, the fonts, and the headers Cloudflare adds.
+ASSETS = ("js", "fonts", "_headers")
 SITE_URL = "https://scarface-decomp.pages.dev/"
+
+
+def copy_docs(d, names=STATIC, headers=True):
+    """docs/ files into d, with the script and fonts folders. headers=False leaves out _headers, for tests
+    that read data from a stand-in address the site's Content-Security-Policy (rightly) doesn't allow."""
+    for f in names:
+        shutil.copy2(ROOT / "docs" / f, d / f)
+    for a in ASSETS if headers else ASSETS[:2]:
+        src = ROOT / "docs" / a
+        if src.is_dir():
+            shutil.copytree(src, d / a, dirs_exist_ok=True)
+        else:
+            shutil.copy2(src, d / a)
+
+
+def cloudflare_headers(directory, path):
+    """The headers docs/_headers gives this path, the way Cloudflare Pages applies them."""
+    f = directory / "_headers"
+    if not f.exists():
+        return []
+    out, rule = [], None
+    for line in f.read_text(encoding="utf-8").splitlines():
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        if not line[0].isspace():
+            rule = line.strip()
+            continue
+        pat = rule.rstrip("*")
+        if rule == path or (rule.endswith("*") and path.startswith(pat)):
+            k, v = line.strip().split(":", 1)
+            out.append((k.strip(), v.strip()))
+    return out
 
 
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self, *a):
         pass
+
+    def end_headers(self):
+        for k, v in cloudflare_headers(Path(self.directory), self.path.split("?", 1)[0]):
+            if k.lower() != "strict-transport-security":
+                self.send_header(k, v)
+        super().end_headers()
 
 
 class Cors(Quiet):
@@ -68,8 +111,7 @@ def serve(directory, handler=Quiet):
 def site(tmp_path_factory):
     """docs/ + data/ as the Cloudflare build produces it."""
     d = tmp_path_factory.mktemp("site")
-    for f in STATIC:
-        shutil.copy2(ROOT / "docs" / f, d / f)
+    copy_docs(d)
     (d / "data").mkdir()
     for f in ("progress.json", "verified_registry.json"):
         shutil.copy2(FIX / f, d / "data" / f)
@@ -87,7 +129,9 @@ def browser():
 
 
 def open_page(browser, url, viewport=(1280, 900)):
-    ctx = browser.new_context(viewport={"width": viewport[0], "height": viewport[1]})
+    # Playwright's wait_for_function() runs its check with eval, which the site's policy (rightly) refuses, so
+    # these tests set the policy aside; test_security_headers_hold_on_every_page checks every page under it.
+    ctx = browser.new_context(viewport={"width": viewport[0], "height": viewport[1]}, bypass_csp=True)
     ctx.route("https://fonts.googleapis.com/**", lambda r: r.abort())
     ctx.route("https://fonts.gstatic.com/**", lambda r: r.abort())
     pg = ctx.new_page()
@@ -185,7 +229,7 @@ def test_falls_back_when_data_folder_is_missing(tmp_path, browser):
     here (it is only honoured on localhost)."""
     page_dir = tmp_path / "page"
     page_dir.mkdir()
-    shutil.copy2(ROOT / "docs" / "index.html", page_dir / "index.html")
+    copy_docs(page_dir, ("index.html",), headers=False)
     data_dir = tmp_path / "data_src"
     data_dir.mkdir()
     for f in ("progress.json", "verified_registry.json"):
@@ -224,7 +268,7 @@ def test_live_reports_and_empty_start(tmp_path, browser):
     prog = json.loads((ROOT / "reports" / "progress.json").read_text(encoding="utf-8"))
     d = tmp_path / "site"
     (d / "data").mkdir(parents=True)
-    shutil.copy2(ROOT / "docs" / "index.html", d / "index.html")
+    copy_docs(d, ("index.html",))
     for f in ("progress.json", "verified_registry.json"):
         shutil.copy2(ROOT / "reports" / f, d / "data" / f)
     srv, url = serve(d)
@@ -339,11 +383,81 @@ def test_404_page(site, browser):
     ctx.close()
 
 
+SITE_PAGES = ("index.html", "function.html", "versions.html", "404.html")
+
+
+def test_pages_have_no_inline_script_or_google_fonts():
+    """The Content-Security-Policy in docs/_headers runs only the site's own script files, so a <script>
+    with code in it, or an onclick= attribute, would silently stop working on the live site."""
+    for page in SITE_PAGES:
+        html = (ROOT / "docs" / page).read_text(encoding="utf-8")
+        assert not re.search(r"<script(?![^>]*\bsrc=)[^>]*>", html), f"{page}: inline <script> (move it to docs/js/)"
+        assert not re.search(r"<[a-zA-Z][^>]*\son[a-z]+\s*=", html), f"{page}: inline event handler (use addEventListener)"
+        assert "fonts.googleapis" not in html and "fonts.gstatic" not in html, f"{page}: fonts come from docs/fonts/"
+        for src in re.findall(r'<script[^>]*\bsrc="([^"]+)"', html):
+            assert (ROOT / "docs" / src.lstrip("/")).is_file(), f"{page}: {src} is missing"
+    css = (ROOT / "docs" / "fonts" / "fonts.css").read_text(encoding="utf-8")
+    for name in re.findall(r"url\(([^)]+)\)", css):
+        assert (ROOT / "docs" / "fonts" / name).read_bytes()[:4] == b"wOF2", name
+    for lic in ("OFL-anton.txt", "OFL-josefin-sans.txt", "OFL-marcellus.txt"):
+        assert "SIL OPEN FONT LICENSE" in (ROOT / "docs" / "fonts" / lic).read_text(encoding="utf-8")
+
+
+def test_security_headers_hold_on_every_page(site, browser):
+    """Served with docs/_headers applied, as Cloudflare does: each page works with nothing refused by the
+    policy, the fonts load from the site itself, and nothing is fetched from Google."""
+    d, url = site
+    rules = dict(cloudflare_headers(d, "/index.html"))
+    csp = rules["Content-Security-Policy"]
+    for part in ("default-src 'self'", "script-src 'self';", "frame-ancestors 'none'", "object-src 'none'",
+                 "base-uri 'none'", "connect-src 'self' https://raw.githubusercontent.com"):
+        assert part in csp, part
+    assert "unsafe-inline" not in csp.split("script-src", 1)[1].split(";", 1)[0]
+    assert rules["X-Frame-Options"] == "DENY" and rules["X-Content-Type-Options"] == "nosniff"
+    key = next(iter(REG["entries"]))
+    for page in ("", "function.html?f=" + key.replace("_", ":0x", 1).upper().replace("0X", "0x"), "versions.html", "404.html"):
+        ctx = browser.new_context()
+        outside = []
+        ctx.on("request", lambda r: outside.append(r.url) if not r.url.startswith(url) and not r.url.startswith("data:") else None)
+        ctx.add_init_script("window.__refused = []; document.addEventListener('securitypolicyviolation',"
+                            " e => window.__refused.push(e.violatedDirective + ' ' + e.blockedURI));")
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        resp = pg.goto(url + page)
+        assert "frame-ancestors 'none'" in resp.headers.get("content-security-policy", "")
+        pg.wait_for_load_state("networkidle")
+        if page == "":                                     # the script ran: the numbers are on the page
+            for _ in range(50):
+                if "latest deploy" in (pg.text_content("#data-status") or ""):
+                    break
+                time.sleep(0.1)
+            assert pg.text_content("#sb-verified") == f"{PROG['verified']['total']:,}"
+        fams = pg.evaluate("document.fonts.ready.then(() => [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family))")
+        assert pg.evaluate("window.__refused") == [], (page, pg.evaluate("window.__refused"))
+        assert not errors, (page, errors)
+        assert not [u for u in outside if "fonts.g" in u], outside
+        assert any("Josefin Sans" in f for f in fams), (page, fams)
+        ctx.close()
+
+
+def test_site_refuses_to_be_framed(site, browser):
+    """Another site can't show these pages inside a frame of its own (clickjacking, look-alike pages)."""
+    _, url = site
+    ctx = browser.new_context()
+    pg = ctx.new_page()
+    pg.set_content(f'<iframe src="{url}" width="800" height="600"></iframe>')
+    pg.wait_for_timeout(500)
+    child = pg.frames[1]
+    assert not child.url.startswith(url) or "Scarface" not in (child.evaluate("document.title") if child.url.startswith(url) else "")
+    ctx.close()
+
+
 @pytest.mark.parametrize("motion", ["no-preference", "reduce"])
 def test_rage_mode_easter_egg(site, browser, motion):
     """Up up down down left right left right B A: a four-second neon sign, then the page is as it was."""
     _, url = site
-    ctx = browser.new_context(viewport={"width": 1280, "height": 800}, reduced_motion=motion)
+    ctx = browser.new_context(viewport={"width": 1280, "height": 800}, reduced_motion=motion, bypass_csp=True)
     ctx.route("https://fonts.g*/**", lambda r: r.abort())
     pg = ctx.new_page()
     errors = []
@@ -373,8 +487,7 @@ def test_reference_section_and_versions_page(tmp_path, browser):
     versions page shows the comparison (from a made-up report), or how to make it when there is none."""
     d = tmp_path / "site"
     d.mkdir()
-    for f in STATIC:
-        shutil.copy2(ROOT / "docs" / f, d / f)
+    copy_docs(d)
     srv, url = serve(d)
     try:
         ctx, pg = open_page(browser, url)
@@ -423,8 +536,7 @@ def test_good_first_functions_on_the_site(tmp_path, browser):
     """Start helping lists a few good first functions from progress.json; without any, nothing shows."""
     d = tmp_path / "site"
     d.mkdir()
-    for f in STATIC:
-        shutil.copy2(ROOT / "docs" / f, d / f)
+    copy_docs(d)
     (d / "data").mkdir()
     prog = dict(PROG, good_first=[{"id": "xb_00011170", "bin": "xb", "va": "0x00011170", "symbol": "sub_00011170", "size": 1,
                                    "why": "it was matched before the reset, so it can be done", "kind": "matched_before"},
@@ -457,8 +569,7 @@ def test_matched_over_time_chart(tmp_path, browser):
     arrow keys, or as a table."""
     d = tmp_path / "site"
     d.mkdir()
-    for f in STATIC:
-        shutil.copy2(ROOT / "docs" / f, d / f)
+    copy_docs(d)
     (d / "data").mkdir()
     reg = {"schema": REG["schema"], "reset": {"date": "2026-11-01"}, "entries": {}}
     for i, (b, day) in enumerate([("xb", 1), ("xb", 2), ("pc", 2), ("ps2", 3), ("xb", 3), ("proto", 1)]):
@@ -530,8 +641,7 @@ def test_what_it_does_on_the_site(tmp_path, browser):
     """A function's plain-English line leads its page, shows in the list, and can be searched for."""
     d = tmp_path / "site"
     d.mkdir()
-    for f in STATIC:
-        shutil.copy2(ROOT / "docs" / f, d / f)
+    copy_docs(d)
     (d / "data").mkdir()
     reg = json.loads(json.dumps(REG))
     reg["entries"]["xb:0x000123B0"].update(what="Says which collision group <b>this</b> is", what_by="Alice")

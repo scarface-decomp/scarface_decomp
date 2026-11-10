@@ -1,7 +1,7 @@
 # Project website
 
 `docs/index.html` is the public project page, live at **https://scarface-decomp.pages.dev**: progress,
-the verified functions with their code, and how to help. It has no build step and no dependencies.
+the verified functions with their code, and how to help. It has no build step and no dependencies, and apart from its data fallback (below) it loads nothing from other sites.
 It is hosted on the project's Cloudflare account (`scarface-decomp` Pages project), which rebuilds it
 on every push to `main`.
 
@@ -9,7 +9,10 @@ on every push to `main`.
 
 | File | What it is |
 | :--- | :--- |
-| `index.html` | The page itself: markup, styles and script in one file. The skyline is inline SVG, drawn for this site. |
+| `index.html` | The page itself: markup and styles. The skyline is inline SVG, drawn for this site. |
+| `js/` | Each page's script (`site.js` for `index.html`, `function.js`, `versions.js`). Pages have no inline script or `onclick=`, because the security policy in `_headers` refuses them. |
+| `fonts/` | The fonts (Anton, Josefin Sans, Marcellus; SIL Open Font License, licences beside them) and `fonts.css`. The portal serves the same files. |
+| `_headers` | The response headers Cloudflare Pages adds to every file: a Content-Security-Policy (only the site's own scripts, fonts and pictures; data only from the site and raw.githubusercontent.com), no framing by other sites, and a few more. Add any new outside address the pages need here, or browsers refuse it. |
 | `404.html` | Shown by Cloudflare Pages for any address that doesn't exist. |
 | `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` | Browser and phone home-screen icons. |
 | `og.jpg` | The 1200 x 630 preview shown when the link is shared on Discord, Reddit, X and so on. |
