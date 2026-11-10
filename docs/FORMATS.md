@@ -15,7 +15,7 @@ All numbers are little-endian unless a section says otherwise. Offsets are in he
 | [Pure3D](#pure3d-p3d) | `.p3d` | all | `game_assets.py` (contents), `media.py` (pictures) |
 | [Pictures in Pure3D](#pictures) | PNG, DDS, P3DI | PC, Xbox, PS2 | `media.py` |
 | [Sounds](#sounds-rsd) | `.rsd` | all | `game_assets.py` (facts), `media.py` (playing) |
-| [Videos](#videos-bik) | `.bik` | Xbox, PC | `game_assets.py` (picture size) |
+| [Videos](#videos-bik) | `.bik`, `.rmv` | Xbox and PC (Bink), PS2 (`.rmv`) | `game_assets.py` (Bink picture size) |
 | [Compiled scripts](#scripts-cso-dso-dtr) | `.cso`, `.dso` | all | `torque_dso.py` and friends ([SCRIPTS.md](SCRIPTS.md)) |
 | [AI decision trees](#scripts-cso-dso-dtr) | `.dtr` | all | `dtr_format.py` |
 | [Programs](#programs) | `default.xbe`, `Scarface.exe`, `SLUS_211.11` | all | `sf_binaries.py`, `ps2_binary.py` |
@@ -135,7 +135,7 @@ back.
 | `WMA ` | Xbox | 8 bytes, then a Windows Media Audio (ASF) file; its own header has the real sample rate (the RSD field doesn't) |
 | `VAG ` | PS2 | Sony ADPCM: 16-byte frames (shift and filter, flags, 14 bytes = 28 samples); flag 7 ends the sound. Two-channel sounds are read as 0x800-byte blocks of each channel in turn (not yet checked against a stereo sample) |
 | `PCM ` | | plain 16-bit samples |
-| `RADP` | | Radical's own ADPCM: recognised by the portal's file lists, not described yet |
+| `RADP` | Xbox prototype | Radical's own ADPCM, at 24,000 Hz in the prototype's speech: not described yet |
 
 ## Videos (`.bik`)
 
@@ -143,6 +143,9 @@ Bink videos (RAD Game Tools): `BIK` + a version letter, u32 file size - 8, u32 f
 frame size, u32 frame count again, then u32 width and u32 height at `0x14` and `0x18`. The PC's are
 1280x720, and the Xbox program carries RAD's Bink library (its `BINK*` sections). Play them with RAD
 Video Tools or a player that supports Bink (ffmpeg reads Bink 1).
+
+The PS2 has no Bink videos: its movies are `.rmv` files in `MOVIES.RCF` (`prologue.rmv`, `radical.rmv`,
+...), a format not described yet.
 
 ## Scripts (`.cso`, `.dso`, `.dtr`)
 
@@ -170,4 +173,9 @@ task's class.
 
 Anything the portal's Game files list puts under *Other* is a format nobody has written up here yet:
 open one in a hex editor, compare the versions (the [version differences](VERSIONS.md) help), and add
-what you find.
+what you find. Known gaps:
+
+* the PS2's `.rmv` movies and its front-end overlays (`CEMENT.RCF/Overlays/FrontEnd/*.bin`, an `f`, `r` and `t` file for
+  each);
+* the prototype's `RADP` sounds;
+* the Pure3D chunks for meshes, skins and animations (only their ids are used so far).

@@ -48,6 +48,7 @@ import heapq
 import io
 import json
 import os
+import queue as queue_mod
 import shutil
 import struct
 import subprocess
@@ -242,7 +243,8 @@ def describe(info: Optional[dict]) -> str:
         codec = {"OOGV": "Ogg Vorbis", "XADP": "Xbox ADPCM", "RADP": "Radical ADPCM", "VAG": "PS2 ADPCM",
                  "WMA": "WMA", "PCM": "PCM"}.get(info.get("codec"), info.get("codec"))
         kbps = f" {info['kbps']} kbps" if info.get("kbps") else ""
-        return f"{codec}{kbps}, {info.get('rate') or 0:,} Hz, {ch}"
+        rate = f", {info['rate']:,} Hz" if info.get("rate") else ""
+        return f"{codec}{kbps}{rate}, {ch}"
     if "w" in info:
         return f"{info['w']}x{info['h']} video"
     if "tex" in info:
@@ -506,6 +508,62 @@ def find_sources(bin_dir: Path = BIN_DIR, installed_pc: bool = True) -> Tuple[Di
 # Reading
 # --------------------------------------------------------------------------- #
 
+class _Prefetch:
+    """Reads a packed member ahead on a second thread, so unpacking it (zlib and lzma let other threads run
+    while they work) overlaps with the hashing and reading of tables here. A file object: read(n), close()."""
+
+    BLOCK = 8 << 20
+
+    def __init__(self, f, depth: int = 4):
+        self.f, self.q = f, queue_mod.Queue(depth)
+        self.buf, self.off, self.done, self.err = b"", 0, False, None
+        self.stopping = threading.Event()
+        self.thread = threading.Thread(target=self._run, name="prefetch", daemon=True)
+        self.thread.start()
+
+    def _run(self) -> None:
+        try:
+            while not self.stopping.is_set():
+                block = self.f.read(self.BLOCK)
+                self._put(block)
+                if not block:
+                    return
+        except BaseException as e:  # noqa: BLE001 - handed to the reader
+            self.err = e
+            self._put(b"")
+
+    def _put(self, block: bytes) -> None:
+        while not self.stopping.is_set():
+            try:
+                self.q.put(block, timeout=0.2)
+                return
+            except queue_mod.Full:
+                continue
+
+    def read(self, n: int = -1) -> bytes:
+        out = []
+        while n != 0:
+            if self.off >= len(self.buf):
+                if self.done:
+                    break
+                self.buf, self.off = self.q.get(), 0
+                if not self.buf:
+                    self.done = True
+                    if self.err is not None:
+                        raise self.err
+                    break
+            take = self.buf[self.off:] if n < 0 else self.buf[self.off:self.off + n]
+            self.off += len(take)
+            out.append(take)
+            if n > 0:
+                n -= len(take)
+        return b"".join(out)
+
+    def close(self) -> None:
+        self.stopping.set()
+        self.thread.join(timeout=10)
+
+
 class _open_stream:
     """The disc image as a file object read front to back: a loose file, a .zip member, or a .7z
     member (read with the built-in reader, or the 7-Zip program for unusual compression)."""
@@ -523,14 +581,16 @@ class _open_stream:
             z = zipfile.ZipFile(self.path)
             self._close.append(z.close)
             f = z.open(self.member)
-            self._close.insert(0, f.close)
-            return f, False
+            ahead = _Prefetch(f)
+            self._close[:0] = [ahead.close, f.close]
+            return ahead, False
         try:
             z = sevenzip.SevenZip(self.path)
             self._close.append(z.close)
             f = z.open(self.member)
-            self._close.insert(0, f.close)
-            return f, False
+            ahead = _Prefetch(f)
+            self._close[:0] = [ahead.close, f.close]
+            return ahead, False
         except sevenzip.Unsupported:
             self.__exit__()
             exe = GF._seven_zip_program()

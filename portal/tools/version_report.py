@@ -25,6 +25,7 @@ import game_assets as GA
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = "scarface_versions_v1"
 STATUSES = ("only", "changed", "shared")
+FULL_LIST = 250                   # a version with no more exclusives than this has them all listed here
 
 
 def catalogs_from_disk(bin_dir: Path) -> Dict[str, List[list]]:
@@ -46,9 +47,13 @@ def catalogs_from_disk(bin_dir: Path) -> Dict[str, List[list]]:
     return out
 
 
+def _name(path: str, facts: Optional[dict]) -> str:
+    """A sound's original name (sounds are stored under a hash of it)."""
+    return GA.sound_name(facts) if path.lower().endswith(".rsd") else ""
+
+
 def _desc(path: str, facts: Optional[dict]) -> str:
-    text = GA.describe(facts)
-    name = GA.sound_name(facts) if path.lower().endswith(".rsd") else ""
+    text, name = GA.describe(facts), _name(path, facts)
     return f"{name} ({text})" if name and text else (name or text)
 
 
@@ -68,7 +73,7 @@ def build(catalogs: Dict[str, List[list]], today: Optional[str] = None) -> dict:
             if status == "only":
                 kinds[k]["bytes_only"] += size
             key = GA.compare_key(path)
-            by_key[key].setdefault(v, [size, k, _desc(path, facts)])
+            by_key[key].setdefault(v, [size, k, GA.describe(facts), _name(path, facts)])
             if status == "changed":
                 changed_keys.add(key)
         counts = Counter(row[3] for row in r)
@@ -80,8 +85,9 @@ def build(catalogs: Dict[str, List[list]], today: Optional[str] = None) -> dict:
     diff = []
     for key in sorted(changed_keys):
         per = by_key[key]
-        kind = next(iter(per.values()))[1]
-        diff.append([key, kind, [[v, per[v][0], per[v][2]] for v in GA.VERSIONS if v in per]])
+        first = next(iter(per.values()))
+        name = next((per[v][3] for v in GA.VERSIONS if v in per and per[v][3]), "")
+        diff.append([key, first[1], name, [[v, per[v][0], per[v][2]] for v in GA.VERSIONS if v in per]])
     return {"schema": SCHEMA, "generated": today or dt.date.today().isoformat(),
             "kinds": {k: GA.KIND_LABELS[k] for k in sorted(GA.KIND_LABELS, key=_kind_order)},
             "versions": versions, "only": only, "changed": diff}
@@ -150,21 +156,46 @@ def markdown(report: dict) -> str:
         files = report["only"].get(v["id"], [])
         if not files:
             continue
-        out += ["", f"## Only in the {v['label']} version", "",
-                f"{len(files):,} files. Where most of them are:", ""]
-        out += [f"* `{folder}`: {n:,}" for folder, n in _top_folders([f[0] for f in files])]
+        out += ["", f"## Only in the {v['label']} version", ""]
+        if len(files) <= FULL_LIST:
+            out += [f"{len(files):,} files:", "", "| File | Type | Size | What |", "| :--- | :--- | ---: | :--- |"]
+            out += [f"| `{f[0]}` | {labels.get(f[2], f[2])} | {_size(f[1])} | {f[3].replace('|', '/').replace('*', chr(92) + '*')} |" for f in files]
+        else:
+            out += [f"{len(files):,} files. Where most of them are:", ""]
+            out += [f"* `{folder}`: {n:,}" for folder, n in _top_folders([f[0] for f in files], 12)]
     out += ["", "## Making this page", "",
             "With your own copies of the versions in `binaries/` ([GAME_VERSIONS.md](GAME_VERSIONS.md)):", "",
             "```", "python portal/tools/version_report.py --scan", "```", "",
             "It reads every version (this takes a while), keeps the lists in `binaries/game_files/catalogs/`",
-            "(never committed), and writes this file and `docs/versions.json`.", ""]
+            "(never committed), and writes this file, `docs/versions.json` and `docs/versions-changed.json`.", ""]
     return "\n".join(out)
 
 
+def _lines(obj) -> str:
+    """JSON with one list entry per line, so a new comparison shows in git as the lines that changed."""
+    def dump(v) -> str:
+        return json.dumps(v, separators=(",", ":"), ensure_ascii=False)
+
+    def value(v, depth: int) -> str:
+        if isinstance(v, dict) and depth < 2:
+            inner = ",\n".join(f"{dump(k)}:{value(x, depth + 1)}" for k, x in v.items())
+            return "{\n" + inner + "\n}"
+        if isinstance(v, list) and v and depth <= 2:
+            return "[\n" + ",\n".join(dump(x) for x in v) + "\n]"
+        return dump(v)
+    return value(obj, 0) + "\n"
+
+
 def write(report: dict, docs: Path) -> List[Path]:
-    (docs / "versions.json").write_text(json.dumps(report, separators=(",", ":")) + "\n", encoding="utf-8")
+    """VERSIONS.md, versions.json (the page's summary and exclusives) and versions-changed.json (every file
+    that differs, which the page loads when asked: it is the big one)."""
+    small = {k: v for k, v in report.items() if k != "changed"}
+    small["changed_file"] = "versions-changed.json"
+    (docs / "versions.json").write_text(_lines(small), encoding="utf-8", newline="\n")
+    (docs / "versions-changed.json").write_text(_lines({"schema": SCHEMA, "generated": report["generated"],
+                                                        "changed": report["changed"]}), encoding="utf-8", newline="\n")
     (docs / "VERSIONS.md").write_text(markdown(report), encoding="utf-8", newline="\n")
-    return [docs / "VERSIONS.md", docs / "versions.json"]
+    return [docs / "VERSIONS.md", docs / "versions.json", docs / "versions-changed.json"]
 
 
 def main(argv=None) -> int:

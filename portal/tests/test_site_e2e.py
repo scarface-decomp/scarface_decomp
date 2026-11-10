@@ -391,9 +391,12 @@ def test_reference_section_and_versions_page(tmp_path, browser):
                                {"id": "ps2", "label": "PS2", "files": 2, "bytes": 2048, "only": 1, "changed": 1, "shared": 0, "kinds": {}}],
                   "only": {"xbox": [["media/intro.bik", 1000, "videos", "640x480 video"]],
                            "ps2": [["MOVIES/INTRO.PSS", 2000, "other", ""]]},
-                  "changed": [["art/sound/hello.rsd", "sounds", [["xbox", 900, "Xbox ADPCM, 44,100 Hz, 5.1 surround"],
-                                                                  ["ps2", 48, "PS2 ADPCM, 22,050 Hz, mono"]]]]}
+                  "changed_file": "versions-changed.json"}
+        changed = {"schema": "scarface_versions_v1", "generated": "2026-11-10",
+                   "changed": [["art/sound/rsd/1/hello.rsd", "sounds", "art/sound/music/hello.rsd",
+                                [["xbox", 900, "Xbox ADPCM, 44,100 Hz, 5.1 surround"], ["ps2", 48, "PS2 ADPCM, 22,050 Hz, mono"]]]]}
         (d / "versions.json").write_text(json.dumps(report), encoding="utf-8")
+        (d / "versions-changed.json").write_text(json.dumps(changed), encoding="utf-8")
         pg.goto(url + "versions.html?again#ps2")          # a new load (a hash alone would not reload)
         pg.wait_for_selector("#report:not([hidden]) .row")
         assert pg.eval_on_selector_all("#summary th", "ths => ths.map(t => t.textContent)") == ["Xbox", "PS2"]
@@ -401,7 +404,11 @@ def test_reference_section_and_versions_page(tmp_path, browser):
         pg.click(".tab:has-text('Xbox')")
         assert pg.text_content("#rows .row .p") == "media/intro.bik" and "640x480" in pg.text_content("#rows .row .d")
         pg.select_option("#what", "changed")
+        pg.wait_for_selector("#rows .row ul")
         assert "PS2: 48 bytes, PS2 ADPCM" in pg.text_content("#rows .row ul")
+        assert pg.text_content("#rows .row .d") == "art/sound/music/hello.rsd"
+        pg.fill("#q", "music/hello")
+        pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 file')")
         pg.fill("#q", "nothing like this")
         pg.wait_for_function("document.getElementById('count').textContent.startsWith('0 files')")
         assert not pg.errors, pg.errors

@@ -34,8 +34,8 @@ def test_report_from_the_lists(tmp_path):
     assert "art/cut/protoonly.p3d" in only_proto
     assert "Scarface.exe" in [f[0] for f in report["only"]["pc"]]
     sound = next(d for d in report["changed"] if d[0] == "art/sound/hello.rsd")
-    assert sound[1] == "sounds" and [x[0] for x in sound[2]] == ["xbox", "ps2", "prototype"]
-    assert any("Hz" in x[2] for x in sound[2])
+    assert sound[1] == "sounds" and [x[0] for x in sound[3]] == ["xbox", "ps2", "prototype"]
+    assert any("Hz" in x[2] for x in sound[3])
     # names and descriptions only: no hashes, no contents
     text = json.dumps(report)
     for rows in GA.plan(VR.catalogs_from_disk(b), "unique")[0].values():
@@ -54,7 +54,9 @@ def test_markdown_and_files(tmp_path):
     md = (docs / "VERSIONS.md").read_text(encoding="utf-8")
     assert md.startswith("# What differs between the versions") and "| Xbox 2006 prototype |" in md
     assert "## Only in the PS2 version" in md and "2026-11-10" in md
-    assert json.loads((docs / "versions.json").read_text(encoding="utf-8"))["schema"] == VR.SCHEMA
+    small = json.loads((docs / "versions.json").read_text(encoding="utf-8"))
+    assert small["schema"] == VR.SCHEMA and "changed" not in small and small["changed_file"] == "versions-changed.json"
+    assert json.loads((docs / "versions-changed.json").read_text(encoding="utf-8"))["changed"] == report["changed"]
 
 
 def test_report_from_an_earlier_copy(tmp_path):

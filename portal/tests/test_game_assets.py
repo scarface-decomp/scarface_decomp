@@ -664,3 +664,27 @@ def test_each_versions_exclusives_by_type(tmp_path):
     assert "Exclusive to Xbox 2006 prototype/" in readme and "what only the" in readme
     job = GA.Job(b, log=lambda m: None)
     assert job.folder_for("only:prototype") == b / "game_files" / "Exclusive to Xbox 2006 prototype"
+
+
+def test_prefetch_reads_ahead_in_order(tmp_path):
+    """Packed disc images are unpacked on a second thread; what comes out is the same, in order."""
+    import io
+    data = bytes(range(256)) * 80_000                      # 20 MB: a few blocks
+    ahead = GA._Prefetch(io.BytesIO(data))
+    got, sizes = [], [1, 1000, GA._Prefetch.BLOCK, 3, 5_000_000, 0, 7]
+    for n in sizes:
+        got.append(ahead.read(n))
+    got.append(ahead.read())
+    assert b"".join(got) == data and [len(g) for g in got[:5]] == sizes[:5]
+    assert ahead.read(10) == b""
+    ahead.close()
+
+    class Broken:
+        def read(self, n):
+            raise OSError("bad block")
+    with pytest.raises(OSError, match="bad block"):
+        GA._Prefetch(Broken()).read(10)
+    early = GA._Prefetch(io.BytesIO(data), depth=1)       # closed before the end: the thread stops
+    early.read(10)
+    early.close()
+    assert not early.thread.is_alive()

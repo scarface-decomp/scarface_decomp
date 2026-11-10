@@ -138,11 +138,11 @@
   <script>
   (function () {
     'use strict';
-    var SOURCES = ['versions.json', 'https://raw.githubusercontent.com/scarface-decomp/scarface_decomp/main/docs/versions.json'];
+    var BASES = ['', 'https://raw.githubusercontent.com/scarface-decomp/scarface_decomp/main/docs/'];
     var PAGE = 200;
     var $ = function (id) { return document.getElementById(id); };
     var fmt = function (n) { return Number(n || 0).toLocaleString('en-US'); };
-    var R = null, tab = '', shown = 0, list = [];
+    var R = null, base = '', changed = null, tab = '', shown = 0, list = [];
 
     function size(n) {
       var units = ['bytes', 'KB', 'MB', 'GB'], i = 0;
@@ -155,15 +155,25 @@
       if (cls) e.className = cls;
       return e;
     }
-    function load(i) {
-      if (i >= SOURCES.length) return Promise.reject(new Error('not found'));
-      return fetch(SOURCES[i], { cache: 'no-cache' }).then(function (r) {
+    function get(url) {
+      return fetch(url, { cache: 'no-cache' }).then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
       }).then(function (d) {
         if (!d || d.schema !== 'scarface_versions_v1') throw new Error('not the report');
         return d;
-      }).catch(function () { return load(i + 1); });
+      });
+    }
+    // The summary from next to this page, or else from the repository; the big list of files that differ
+    // comes from the same place, when someone asks for it.
+    function load(i) {
+      if (i >= BASES.length) return Promise.reject(new Error('not found'));
+      return get(BASES[i] + 'versions.json').then(function (d) { base = BASES[i]; return d; },
+                                                    function () { return load(i + 1); });
+    }
+    function loadChanged() {
+      if (changed) return Promise.resolve(changed);
+      return get(base + (R.changed_file || 'versions-changed.json')).then(function (d) { changed = d.changed || []; return changed; });
     }
     function label(v) {
       for (var i = 0; i < R.versions.length; i++) if (R.versions[i].id === v) return R.versions[i].label;
@@ -210,15 +220,22 @@
 
     function filter() {
       var what = $('what').value, kind = $('kind').value, q = $('q').value.trim().toLowerCase();
+      if (what === 'changed' && !changed) {
+        $('rows').textContent = '';
+        $('more').hidden = true;
+        $('count').textContent = 'Loading the files that differ…';
+        loadChanged().then(filter, function () { $('count').textContent = 'Couldn\'t load the list of files that differ.'; });
+        return;
+      }
       if (what === 'only') {
         list = (R.only[tab] || []).filter(function (f) {
           return (!kind || f[2] === kind) && (!q || f[0].toLowerCase().indexOf(q) >= 0 || (f[3] || '').toLowerCase().indexOf(q) >= 0);
         });
       } else {
-        list = (R.changed || []).filter(function (c) {
-          var mine = c[2].some(function (x) { return x[0] === tab; });
-          var text = (c[0] + ' ' + c[2].map(function (x) { return x[2]; }).join(' ')).toLowerCase();
-          return mine && (!kind || c[1] === kind) && (!q || text.indexOf(q) >= 0);
+        list = changed.filter(function (c) {
+          var mine = c[3].some(function (x) { return x[0] === tab; });
+          if (!mine || (kind && c[1] !== kind)) return false;
+          return !q || (c[0] + ' ' + c[2] + ' ' + c[3].map(function (x) { return x[2]; }).join(' ')).toLowerCase().indexOf(q) >= 0;
         });
       }
       $('rows').textContent = '';
@@ -239,8 +256,9 @@
           row.appendChild(el('span', f[0], 'p'));
           row.appendChild(el('span', R.kinds[f[1]] || f[1], 'k'));
           row.appendChild(el('span', '', 'z'));
+          if (f[2]) row.appendChild(el('span', f[2], 'd'));
           var ul = el('ul');
-          f[2].forEach(function (x) {
+          f[3].forEach(function (x) {
             var li = el('li');
             li.appendChild(el('b', label(x[0])));
             li.appendChild(document.createTextNode(': ' + size(x[1]) + (x[2] ? ', ' + x[2] : '')));
