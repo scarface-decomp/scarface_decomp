@@ -382,6 +382,19 @@ def test_decompme_button_creates_scratch_then_reopens_it(page):
     assert len(mock.SCRATCHES) == 1
 
 
+def test_suggest_a_name_link(page):
+    """Under the function's name: a GitHub issue with the function filled in, for suggesting a name."""
+    page.wait_for_function("document.getElementById('wb-title').textContent.includes('Func')")
+    href = page.get_attribute("#wb-name a", "href")
+    assert "/issues/new?" in href and "labels=name" in href
+    from urllib.parse import parse_qs, urlparse
+    q = parse_qs(urlparse(href).query)
+    title = page.text_content("#wb-title")
+    assert q["title"][0].startswith("Name for ") and q["title"][0].split()[-1] in title
+    assert "Suggested name:" in q["body"][0]
+    assert page.get_attribute("#wb-name a", "target") == "_blank"
+
+
 def test_decompme_falls_back_to_the_server(page):
     reset(dme_browser_fail=True)
     page.reload()

@@ -1,0 +1,5 @@
+{
+  "schema": "scarface_names_v1",
+  "note": "Names people worked out for functions that aren't matched yet. See docs/NAMES.md. Keys: version:address. Checked by portal/scripts/check_repo.py.",
+  "names": {}
+}

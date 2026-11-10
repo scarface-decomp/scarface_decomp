@@ -28,6 +28,8 @@ sys.path.insert(0, str(PORTAL / "tools"))
 from cpp_policy import check_genuine_cpp  # noqa: E402
 from registry_outputs import STATUS_END, STATUS_START, write_outputs  # noqa: E402
 from game_files import EXPECTED as ACCEPTED_GAME_FILES  # noqa: E402
+import names as NAMES  # noqa: E402
+from registry_outputs import known_from_files  # noqa: E402
 
 FORBIDDEN = ["*.exe", "*.xbe", "*.rcf", "*.bik", "*.iso", "*.7z", "*.zip", "*.obj", "*.pdb", "*.cso", "*.dso",
              "*.dtr", "tools/msvc71/*", "portal/tools/msvc71/*", "binaries/*", "private/*", "portal/private/*", "*contributor_tokens.json",
@@ -112,6 +114,15 @@ def check_generated(reg: dict, problems: list) -> None:
                         problems.append(f"generated file has no registry entries: reconstructed_src/{rel}")
 
 
+def check_names(problems: list) -> None:
+    """reports/names.json: well-formed, and every name at an address where a function starts."""
+    path = ROOT / "reports" / "names.json"
+    if not path.exists():
+        return
+    known = {b: set(fns) for b, fns in known_from_files(ROOT / "reconstructed_src").items()}
+    problems.extend(NAMES.problems(NAMES.load(path), known))
+
+
 def check_tracked(problems: list) -> None:
     try:
         out = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True, timeout=60)
@@ -131,6 +142,7 @@ def main() -> int:
     problems: list = []
     reg = check_registry(problems)
     check_generated(reg, problems)
+    check_names(problems)
     check_tracked(problems)
     n = len(reg.get("entries", {})) if reg else 0
     if problems:

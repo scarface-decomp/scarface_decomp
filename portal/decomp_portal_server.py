@@ -50,6 +50,7 @@ from disasm_synth import disassemble, synthesize_cpp  # noqa: E402
 import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
+import names as NAMES  # noqa: E402
 import media as MEDIA  # noqa: E402
 import game_assets as GA  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
@@ -602,8 +603,28 @@ def ps2_starter(t: dict) -> str:
     return "\n".join(lines)
 
 
+_NAMES_CACHE: list = [None, {}]
+
+
+def community_name(t: dict) -> Optional[dict]:
+    """A name people worked out for this function (reports/names.json), re-read when the file changes."""
+    path = REPORTS_DIR / "names.json"
+    try:
+        mtime = path.stat().st_mtime
+    except OSError:
+        return None
+    if _NAMES_CACHE[0] != mtime:
+        names = NAMES.load(path).get("names", {})
+        _NAMES_CACHE[:] = [mtime, names if isinstance(names, dict) else {}]
+    info = _NAMES_CACHE[1].get(NAMES.key_for(t))
+    return info if isinstance(info, dict) and isinstance(info.get("name"), str) else None
+
+
 def live_task(t: dict) -> dict:
     out = {k: v for k, v in t.items() if k not in ("best_cpp",)}
+    named = community_name(t) if t.get("status") != "VERIFIED" else None
+    if named:
+        out["known_name"] = {"name": named["name"], "by": str(named.get("by", "")), "why": str(named.get("why", ""))}
     tb = target_bytes(t)
     out["target_hex"] = " ".join(f"{b:02X}" for b in tb) if tb else ""
     if t["bin"] == "ps2":

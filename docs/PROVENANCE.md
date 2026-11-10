@@ -6,7 +6,7 @@ rules for what may go into the repository.
 ## Allowed sources
 
 * **The retail files you own**, in the accepted versions only ([docs/GAME_VERSIONS.md](GAME_VERSIONS.md)):
-  the US PC `Scarface.exe` 1.00.2, the US Xbox disc's `default.xbe`, and the April 2006 prototype `game.xbe`. Their machine code, RTTI type names, vtables and strings are what the project
+  the US PC `Scarface.exe` 1.00.2, the US Xbox disc's `default.xbe`, the US PS2 disc's `SLUS_211.11`, and the April 2006 prototype `game.xbe`. Their machine code, RTTI type names, vtables and strings are what the project
   reconstructs.
 * **Your own analysis:** disassembly, debugger sessions, notes, and names you chose because of what
   the code does.

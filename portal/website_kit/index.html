@@ -1031,6 +1031,7 @@
                 <div style="min-width:0;">
                   <div id="wb-title" class="wb-title">Loading function...</div>
                   <div id="wb-meta" class="wb-meta"></div>
+                  <div id="wb-name" class="wb-meta"></div>
                   <div id="wb-hint" class="wb-hint"></div>
                 </div>
                 <div class="wb-chips">
@@ -2432,6 +2433,7 @@
     $('wb-meta').textContent = [t.tier_label, t.est_label ? 'Est: ' + t.est_label : '',
       t.compiler_label ? 'Compiler: ' + t.compiler_label : (t.flags ? 'Compiler Flags: ' + t.flags : '')]
       .filter(Boolean).join(' • ');
+    renderKnownName(t);
     $('wb-hint').textContent = [t.hint || '', lookalikeNote(t)].filter(Boolean).join(' ');
     $('wb-target-hex').textContent = t.target_hex || '';
     const disLines = Array.isArray(t.disasm_lines) ? t.disasm_lines : [];
@@ -3705,6 +3707,28 @@
     } finally {
       buttons.forEach((b) => { b.disabled = false; });
     }
+  }
+
+  /* Names people worked out for functions that aren't matched yet (reports/names.json), and a way to
+     suggest one: a GitHub issue with the function filled in, which a maintainer adds to the list. */
+  function renderKnownName(t) {
+    const box = $('wb-name');
+    box.textContent = '';
+    if (t.known_name && t.known_name.name) {
+      box.appendChild(document.createTextNode('Probably '));
+      box.appendChild(el('code', t.known_name.name));
+      box.appendChild(document.createTextNode((t.known_name.by ? ' (named by ' + t.known_name.by + ')' : '') + '. '));
+      if (t.known_name.why) box.title = t.known_name.why;
+    }
+    if (t.status === 'VERIFIED') return;
+    const a = el('a', t.known_name ? 'Suggest a better name' : 'Know what this does? Suggest a name');
+    const body = 'Function: `' + t.symbol + '` at ' + t.va + ' (' + t.size + ' B)\n\n' +
+      'Suggested name: \n\nWhat shows it (strings it uses, what calls it, the matching PC/Xbox function, ...): \n\n' +
+      '(Names come from the game\'s class information, strings or what the code does, never from leaked symbols: docs/PROVENANCE.md.)\n';
+    a.href = repoBase() + '/issues/new?' + new URLSearchParams({ title: 'Name for ' + t.va + ' ' + t.symbol, body: body, labels: 'name' }).toString();
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    box.appendChild(a);
   }
 
   function repoBase() { return String(STATE.repo_url || 'https://github.com/scarface-decomp/scarface_decomp').replace(/\/+$/, ''); }

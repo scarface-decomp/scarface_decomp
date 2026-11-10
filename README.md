@@ -235,7 +235,7 @@ portal/               the portal itself and its tools (you don't need to open it
 | `portal/decomp_portal_server.py`, `portal/website_kit/` | The portal: its server and its page. |
 | `portal/verify.py` | The command-line checker. |
 | `portal/tools/` | Verifier (`msvc_verify.py`), binary reader, queue builder, C++ policy, decomp.me export, look-alike grouping, game-file checks (`game_files.py`), copying the game's files out (`game_assets.py`, with `ms_cab.py` for the PC disc's cabinets), script-format tools. |
-| `portal/scripts/` | Compiler setup, script extraction, re-verification, repository checks. |
+| `portal/scripts/` | Compiler setup, script extraction, re-verification, repository checks, and the Ghidra and IDA name scripts. |
 | `portal/tests/` | Test suite (`python -m pytest -q portal/tests`). |
 
 Contributing: see [CONTRIBUTING.md](docs/CONTRIBUTING.md).
