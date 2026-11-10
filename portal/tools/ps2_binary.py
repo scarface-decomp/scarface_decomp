@@ -83,6 +83,42 @@ class Ps2Image:
         lo = min(s.va for s in segs)
         hi = max(s.va + s.memsz for s in segs if s.va < 0x01000000)      # leave out the scratchpad (0x70000000)
         self.lo, self.hi = lo, hi
+        self._extra_code: List[Tuple[int, int]] = []     # code that is not this image's own (see with_overlay)
+        self._scan = segs                                 # segments searched for stored function addresses
+
+    @classmethod
+    def with_overlay(cls, base: "Ps2Image", overlay: bytes, name: str = "") -> "Ps2Image":
+        """The program with one of its code overlays loaded at the overlay's address (CEMENT.RCF/Overlays,
+        portal/tools/ps2_overlay.py). The overlay's code is this image's own code: find_functions() finds
+        its functions only. Calls and data references can still reach the program's functions and globals,
+        so they get the same func_/D_ names as in the program."""
+        if overlay[:4] != b"MWo3" or len(overlay) < 0x40:
+            raise ValueError(f"{name or 'overlay'}: not a CodeWarrior overlay (MWo3)")
+        load, text, _data, bss = struct.unpack_from("<4I", overlay, 8)
+        img = cls.__new__(cls)
+        img.path = Path(name or "overlay.bin")
+        img.data = base.data + overlay
+        img.sha256 = hashlib.sha256(overlay).hexdigest()
+        img.entry = base.entry
+        seg = Segment(load, len(base.data), len(overlay), len(overlay) + bss, 7)
+        img.segments = [seg] + [s for s in base.segments if s.filesz]
+        img._main = seg
+        img._lib_segment = base._lib_segment
+        start, end = load + 0x40, load + 0x40 + text
+        while start < end and not overlay[start - load:start - load + 16].strip(b"\0"):
+            start += 16                                   # the code section starts with zero padding
+        img.code_start, img.code_end = start, end
+        img.gp = base.gp
+        img.lo, img.hi = min(base.lo, load), max(base.hi, load + len(overlay) + bss)
+        img._extra_code = [(base.code_start, base.code_end)]
+        # The overlays were linked together with the program, whose data holds their virtual tables: look
+        # for stored function addresses there too (only the ones that start a function in this overlay count).
+        m = base._main
+        code = base.code_end - m.va
+        data = Segment(base.code_end, m.off + code, m.filesz - code, m.memsz - code, m.flags)
+        img._scan = [seg, data] + [s for s in base.segments if s.filesz and s not in (m, base._lib_segment)]
+        img.base = base
+        return img
 
     # -- reading ---------------------------------------------------------------
     def segment_of(self, va: int) -> Optional[Segment]:
@@ -114,7 +150,7 @@ class Ps2Image:
 
     def is_code(self, va: int) -> bool:
         """Code anywhere in the program: the game's, or the start-up code and libraries in front of it."""
-        if self.is_game_code(va):
+        if self.is_game_code(va) or any(lo <= va < hi for lo, hi in self._extra_code):
             return True
         s = self.segment_of(va)
         return bool(s and s.is_exec and s is not self._main and s.va < self.code_start
@@ -216,11 +252,11 @@ def jump_tables(img: Ps2Image) -> Dict[int, int]:
     return out
 
 
-def call_targets(img: Ps2Image) -> Tuple[Set[int], Set[int]]:
-    """(jal targets, j targets) inside the game code, from every executable segment."""
+def call_targets(img: Ps2Image, segments: Optional[List[Segment]] = None) -> Tuple[Set[int], Set[int]]:
+    """(jal targets, j targets) inside the game code, from every executable segment (or the ones given)."""
     calls: Set[int] = set()
     jumps: Set[int] = set()
-    for s in img.segments:
+    for s in img.segments if segments is None else segments:
         if not s.is_exec or not s.filesz:
             continue
         w = struct.unpack_from(f"<{s.filesz // 4}I", img.data, s.off)
@@ -234,6 +270,20 @@ def call_targets(img: Ps2Image) -> Tuple[Set[int], Set[int]]:
     return calls, jumps
 
 
+def _after_a_return(w: Tuple[int, ...], k: int) -> bool:
+    """Stricter than _after_function_end: index k follows a `jr`/`j` and its delay slot, with only zero
+    padding in between (a `nop` inside a function doesn't count)."""
+    j = k - 1
+    while j >= 0 and w[j] == 0:
+        j -= 1
+    if j < 0:
+        return True
+    for i in (j, j - 1):                                  # the jump itself, or the one before its delay slot
+        if i >= 0 and decode(w[i], 0).kind in ("jr", "jump") and i + 1 < k:
+            return True
+    return False
+
+
 def data_pointers(img: Ps2Image, tables: Optional[Dict[int, int]] = None) -> Set[int]:
     """Addresses of code stored in the data: virtual function tables and callback tables. Switch jump
     tables are left out (their entries are places inside a function), and so is anything that doesn't
@@ -244,7 +294,7 @@ def data_pointers(img: Ps2Image, tables: Optional[Dict[int, int]] = None) -> Set
     for t, n in tables.items():
         in_table.update(range(t, t + 4 * n, 4))
     out: Set[int] = set()
-    for s in img.segments:
+    for s in img._scan:
         if not s.filesz:
             continue
         lo = s.off
@@ -255,12 +305,15 @@ def data_pointers(img: Ps2Image, tables: Optional[Dict[int, int]] = None) -> Set
         if n <= 0:
             continue
         seg_va = s.va + (lo - s.off)
+        # An overlay's virtual tables are in the program's data, among those of the other overlays, which
+        # load at the same addresses: an address from there only counts where a function ends right before.
+        shared = s is not img._main and img._extra_code
         for idx, x in enumerate(struct.unpack_from(f"<{n}I", img.data, lo)):
             if seg_va + 4 * idx in in_table:
                 continue
             if img.is_game_code(x) and x % 16 == 0:          # CodeWarrior aligns functions to 16 bytes
                 k = (x - base) // 4
-                if _after_function_end(w, k):
+                if _after_a_return(w, k) if shared else _after_function_end(w, k):
                     out.add(x)
     return out
 
@@ -302,7 +355,16 @@ def _extent(w: Tuple[int, ...], base: int, start: int, limit: int) -> Tuple[int,
 def find_functions(img: Ps2Image, extra_starts: Iterable[int] = ()) -> Dict[int, Func]:
     base, w = _code_words(img)
     limit_all = img.code_end
-    calls, jumps = call_targets(img)
+    if img._extra_code:
+        # An overlay (Ps2Image.with_overlay): the program calls into all six overlays at the same addresses,
+        # so its calls only count where a function ends right before; the overlay's own calls always do.
+        calls, jumps = call_targets(img, [img._main])
+        pc, pj = call_targets(img, [s for s in img.segments if s is not img._main])
+        ok = lambda t: base <= t < limit_all and _after_a_return(w, (t - base) // 4)      # noqa: E731
+        calls |= {t for t in pc if ok(t)}
+        jumps |= {t for t in pj if ok(t)}
+    else:
+        calls, jumps = call_targets(img)
     ptrs = data_pointers(img)
     starts: Dict[int, str] = {}
     for t in sorted(ptrs):
@@ -316,6 +378,7 @@ def find_functions(img: Ps2Image, extra_starts: Iterable[int] = ()) -> Dict[int,
         if img.is_game_code(t):
             starts.setdefault(t, "listed in reports/extra_function_starts.json")
     starts.setdefault(base, "start of the code")
+    starts = {va: how for va, how in starts.items() if base <= va < limit_all}
     funcs: Dict[int, Func] = {}
     order = sorted(starts)
     i = 0
@@ -331,7 +394,8 @@ def find_functions(img: Ps2Image, extra_starts: Iterable[int] = ()) -> Dict[int,
                 end -= 4
             if decode(w[(end - 4 - base) // 4], end - 4).has_delay_slot:
                 end += 4
-        funcs[va] = Func(va, end - va, library=likely, jump_table=jt, called=va in calls, how=starts[va])
+        if any(w[(va - base) // 4:(end - base) // 4]):          # all zeros is padding, never a function
+            funcs[va] = Func(va, end - va, library=likely, jump_table=jt, called=va in calls, how=starts[va])
         # whatever starts after this function's end and before the next known one is a function too
         k = (end - base) // 4
         while k < (nxt - base) // 4 and w[k] == 0:

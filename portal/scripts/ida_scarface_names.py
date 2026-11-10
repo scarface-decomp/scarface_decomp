@@ -3,8 +3,8 @@ Name Scarface's functions in IDA: every function the project knows (its start an
 so far (from the game's own class information, the PS2-to-Xbox pairing, verified matches and names people
 worked out), applied to the database you have open.
 
-Use: File > Script file... and pick this file, with default.xbe, game.xbe, Scarface.exe (1.00.2) or
-SLUS_211.11 loaded. It asks for your copy of the repository (any file in it, for example README.md).
+Use: File > Script file... and pick this file, with default.xbe, game.xbe, Scarface.exe (1.00.2), SLUS_211.11
+or a PS2 overlay's ELF file (portal/tools/ps2_overlay.py --elf) loaded. It asks for your copy of the repository (any file in it, for example README.md).
 IDA 7.4 or later (IDAPython 3). Names with "::" are kept when IDA accepts them; otherwise IDA puts "_" in
 place of what it doesn't accept. See docs/NAMES.md.
 """
@@ -20,6 +20,13 @@ VERSIONS = [
     ("PC 1.00.2 (Scarface.exe)", "Original_Binary_Order_PC_1002.cpp", "pc", ("scarface.exe", ".exe")),
     ("PS2 (SLUS_211.11)", "Original_Binary_Order_PS2.cpp", "ps2", ("slus_211.11", "slus")),
     ("Xbox prototype, April 2006 (game.xbe)", "Original_Binary_Order_Proto.cpp", "proto", ("game.xbe",)),
+    # the PS2 program's code overlays, opened as the ELF files portal/tools/ps2_overlay.py --elf writes
+    ("PS2 pause menu overlay (PauseMenuOverlayf)", "Original_Binary_Order_PS2_PauseMenu.cpp", "ps2pause", ("pausemenuoverlayf",)),
+    ("PS2 exotics shop overlay (ExoticsOverlayf)", "Original_Binary_Order_PS2_Exotics.cpp", "ps2exotics", ("exoticsoverlayf",)),
+    ("PS2 business screens overlay (ModalsOverlayf)", "Original_Binary_Order_PS2_Modals.cpp", "ps2modals", ("modalsoverlayf",)),
+    ("PS2 empire and mansion screens overlay (ModalsOverlay1f)", "Original_Binary_Order_PS2_Modals1.cpp", "ps2modals1", ("modalsoverlay1f",)),
+    ("PS2 weapon screens overlay (ModalsOverlay2f)", "Original_Binary_Order_PS2_Modals2.cpp", "ps2modals2", ("modalsoverlay2f",)),
+    ("PS2 gambling mini-games overlay (MiniGamesOverlayf)", "Original_Binary_Order_PS2_MiniGames.cpp", "ps2games", ("minigamesoverlayf",)),
 ]
 TODO_RE = re.compile(r"^// \[TODO\] 0x([0-9A-Fa-f]{8}) (.*) \((\d+) B\)$")
 DONE_RE = re.compile(r"^// \[VERIFIED\] (.*) \((0x[0-9A-Fa-f]{8}), (\d+) B\)$")

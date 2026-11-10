@@ -10,7 +10,8 @@ portal shows them next to the function. Once a function is matched, the name it 
     {"schema": "scarface_names_v1",
      "names": {"xb:0x0011E4A0": {"name": "Weapon::Reload", "by": "handle", "why": "what shows it"}}}
 
-Keys are the registry's: a version (pc, xb, proto, ps2) and the function's address. Names are C++ names:
+Keys are the registry's: a version (pc, xb, proto, ps2, or a PS2 overlay such as ps2pause) and the function's
+address. Names are C++ names:
 letters, digits and _, parts joined by ::, templates in <>. Add one with a pull request (docs/NAMES.md),
 or suggest it from the portal and a maintainer adds it.
 """
@@ -22,9 +23,11 @@ import re
 from pathlib import Path
 from typing import Dict, List, Optional
 
+import ps2_overlay
+
 SCHEMA = "scarface_names_v1"
-BINS = ("pc", "xb", "proto", "ps2")
-KEY_RE = re.compile(r"^(pc|xb|proto|ps2):0x[0-9A-F]{8}$")
+BINS = ("pc", "xb", "proto", "ps2") + ps2_overlay.BINS
+KEY_RE = re.compile(r"^(" + "|".join(BINS) + r"):0x[0-9A-F]{8}$")
 PART = r"[A-Za-z_][A-Za-z0-9_]*(?:<[A-Za-z0-9_:<>, *&]+>)?"
 NAME_RE = re.compile(rf"^(?:{PART}::)*(?:{PART}|operator\S{{1,3}}|~{PART})$")
 DEFAULT_RE = re.compile(r"^(sub|func|FUN|thunk)_[0-9A-Fa-f]+$")
@@ -55,7 +58,8 @@ def problems(data: dict, known: Optional[Dict[str, set]] = None) -> List[str]:
     for key, info in names.items():
         where = f"reports/names.json {key}"
         if not KEY_RE.match(key):
-            out.append(f"{where}: keys look like xb:0x0011E4A0 (pc, xb, proto or ps2, then 8 upper-case hex digits)")
+            out.append(f"{where}: keys look like xb:0x0011E4A0 (pc, xb, proto, ps2 or a PS2 overlay such as "
+                       "ps2pause, then 8 upper-case hex digits)")
             continue
         if not isinstance(info, dict):
             out.append(f"{where}: must be an object with name, by and why")

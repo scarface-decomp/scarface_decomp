@@ -6,6 +6,7 @@ Command-line verifier: same rules as the portal, for people who work in their ow
     python portal/verify.py my_func.cpp --va 0x006DE620 --bin pc
     python portal/verify.py my_func.cpp --va 0x00011F20 --bin xb --match vfunc_03@Collidable@ --show-diff
     python portal/verify.py my_func.cpp --va 0x003DD090 --bin ps2 [--scratch SLUG]
+    python portal/verify.py my_func.cpp --va 0x00845500 --bin ps2pause      (a PS2 overlay: ps2pause, ps2exotics, ...)
 
 PS2 functions are compiled on decomp.me (the PS2 compiler can't be installed here) and compared here;
 --scratch names any PS2 scratch to compile through, otherwise one is created for the function.
@@ -26,8 +27,11 @@ PORTAL = Path(__file__).resolve().parent
 ROOT = PORTAL.parent                      # the project folder
 sys.path.insert(0, str(PORTAL / "tools"))
 
+import ps2_overlay as PO  # noqa: E402
+
 BINARIES = {"pc": ROOT / "binaries" / "Scarface.exe", "xb": ROOT / "binaries" / "default.xbe",
-            "proto": ROOT / "binaries" / "game.xbe", "ps2": ROOT / "binaries" / "SLUS_211.11"}
+            "proto": ROOT / "binaries" / "game.xbe", "ps2": ROOT / "binaries" / "SLUS_211.11",
+            **{o.bin: PO.path_for(ROOT / "binaries", o.bin) for o in PO.OVERLAYS}}
 REGISTRY = ROOT / "reports" / "verified_registry.json"
 QUEUE = ROOT / "reports" / "full_remaining_queue.json"
 DEFAULT_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
@@ -40,8 +44,8 @@ def status() -> int:
     open_tasks = [t for t in queue if f"{t.get('bin')}:0x{t.get('fva_int', 0):08X}" not in entries]
     remaining = sum(1 for t in open_tasks if t.get("bin") in ("pc", "xb"))   # the released game on PC + Xbox
     proto_left = sum(1 for t in open_tasks if t.get("bin") == "proto")
-    ps2_left = sum(1 for t in open_tasks if t.get("bin") == "ps2")
-    by_bin = Counter(e["bin"] for e in entries.values())
+    ps2_left = sum(1 for t in open_tasks if PO.is_ps2(t.get("bin")))
+    by_bin = Counter("ps2" if PO.is_ps2(e["bin"]) else e["bin"] for e in entries.values())
     retail = by_bin.get("pc", 0) + by_bin.get("xb", 0)
     total = remaining + retail
     print("=" * 72)
@@ -56,7 +60,7 @@ def status() -> int:
         print(f" PS2                : {by_bin.get('ps2', 0):,} of {by_bin.get('ps2', 0) + ps2_left:,} (own compiler, checked on decomp.me)")
     if by_bin.get("proto", 0) or proto_left:
         print(f" Xbox prototype     : {by_bin.get('proto', 0):,} of {by_bin.get('proto', 0) + proto_left:,} (unreleased code, counted on its own)")
-    print(f" Verified bytes     : {sum(int(e.get('size', 0)) for e in entries.values() if e['bin'] != 'ps2'):,}")
+    print(f" Verified bytes     : {sum(int(e.get('size', 0)) for e in entries.values() if not PO.is_ps2(e['bin'])):,}")
     print("-" * 72)
     board = Counter((e.get("verified_by") or "Imported (unattributed)") for e in entries.values())
     for i, (u, n) in enumerate(board.most_common(10), 1):
@@ -78,11 +82,22 @@ def check_ps2(args) -> int:
         print(problem)
         return 2
     img = PB.Ps2Image(BINARIES["ps2"])
+    b = args.bin
+    if b != "ps2":                                  # an overlay: the program with it loaded
+        path = BINARIES[b]
+        if not path.exists():
+            print(f"binaries/{PO.FOLDER}/{path.name} is missing: the portal copies it out of your PS2 disc when it starts.")
+            return 2
+        problem = PO.refusal(path, b)
+        if problem:
+            print(problem)
+            return 2
+        img = PB.Ps2Image.with_overlay(img, path.read_bytes(), path.name)
     va = int(args.va, 16)
     size = args.size
     if QUEUE.exists() and not size:
         for t in json.loads(QUEUE.read_text(encoding="utf-8")):
-            if t.get("bin") == "ps2" and t.get("fva_int") == va:
+            if t.get("bin") == b and t.get("fva_int") == va:
                 size = int(t["size"])
                 break
     if not size:
@@ -105,7 +120,7 @@ def check_ps2(args) -> int:
             return 2
         slug = made["slug"]
         print(f"Created {made['url']}")
-    print(f"{PV.COMPILER} on decomp.me, flags {PV.FLAGS}\nTarget ps2:0x{va:08X}, {size} bytes")
+    print(f"{PV.COMPILER} on decomp.me, flags {PV.FLAGS}\nTarget {b}:0x{va:08X}, {size} bytes")
     res = PV.compile_on_decompme(slug, code)
     if not res.get("ok"):
         print("\n" + (res.get("compiler_error") or res.get("error") or "compile failed"))
@@ -128,7 +143,7 @@ def check_ps2(args) -> int:
 
 
 def check(args) -> int:
-    if args.bin == "ps2":
+    if PO.is_ps2(args.bin):
         return check_ps2(args)
     from msvc_verify import verify_submission, compiler_version
     from sf_binaries import BinaryImage, collect_call_targets, function_extent

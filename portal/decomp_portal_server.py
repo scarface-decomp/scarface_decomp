@@ -61,6 +61,7 @@ import registry_outputs as RO  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 import ps2_binary as PB  # noqa: E402
+import ps2_overlay as PO  # noqa: E402
 import ps2_verify as PV  # noqa: E402
 from cpp_policy import check_genuine_cpp, format_violations  # noqa: E402
 
@@ -69,6 +70,8 @@ BINARIES = {
     "xb": BASE_DIR / "binaries" / "default.xbe",
     "proto": BASE_DIR / "binaries" / "game.xbe",
     "ps2": BASE_DIR / "binaries" / "SLUS_211.11",
+    # the PS2 program's code overlays, copied out of the PS2 disc at start (portal/scripts/extract_scripts.py)
+    **{o.bin: PO.path_for(BASE_DIR / "binaries", o.bin) for o in PO.OVERLAYS},
 }
 RECON_DIR = BASE_DIR / "reconstructed_src"
 REPORTS_DIR = BASE_DIR / "reports"
@@ -106,7 +109,8 @@ GROUPS: Dict[str, List[dict]] = {}          # look-alike group id -> tasks (port
 BY_SYMBOL: Dict[str, List[dict]] = {}       # "Class::vfunc_NN" -> the same method in each build
 PS2_BY_TWIN: Dict[int, List[dict]] = {}     # Xbox address -> PS2 functions paired with it
 BUILD_NAMES = {"xb": "the retail Xbox game", "pc": "the PC game", "proto": "the April 2006 prototype",
-               "ps2": "the PS2 game"}
+               "ps2": "the PS2 game", **{b: PO.describe_bin(b) for b in PO.BINS}}
+BIN_ORDER = ("xb", "pc", "proto", "ps2") + PO.BINS
 PORT_STATUS: Dict[str, dict] = {}           # task id -> progress of carrying its match to its look-alikes
 PORT_JOBS: "queue_mod.Queue" = queue_mod.Queue()
 PORT_MAX = int(os.environ.get("SCARFACE_LOOKALIKE_MAX", "1000"))
@@ -151,7 +155,14 @@ def image_for(b: str) -> Optional[BinaryImage]:
     if b not in _IMAGES:
         p = BINARIES.get(b)
         img = None
-        if p and p.exists():
+        if b in PO.BY_BIN:                  # an overlay: the PS2 program with it loaded
+            base = image_for("ps2")
+            problem = PO.refusal(p, b) if p else None
+            if problem:
+                BINARY_PROBLEMS[b] = problem
+            elif base is not None and p.exists():
+                img = PB.Ps2Image.with_overlay(base, p.read_bytes(), p.name)
+        elif p and p.exists():
             problem = GF.refusal(p)
             if problem:
                 BINARY_PROBLEMS[b] = problem
@@ -324,10 +335,10 @@ def progress() -> dict:
     under "prototype" and "ps2"."""
     entries = REGISTRY.get("entries", {})
     by_bin = Counter(e["bin"] for e in entries.values())
-    retail = [e for e in entries.values() if e["bin"] not in ("proto", "ps2")]
-    remaining = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] not in ("proto", "ps2"))
-    ps2_left = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] == "ps2")
-    ps2_done = by_bin.get("ps2", 0)
+    retail = [e for e in entries.values() if e["bin"] != "proto" and not PO.is_ps2(e["bin"])]
+    remaining = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] != "proto" and not PO.is_ps2(t["bin"]))
+    ps2_left = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and PO.is_ps2(t["bin"]))
+    ps2_done = sum(n for b, n in by_bin.items() if PO.is_ps2(b))       # the program and its overlays
     total = remaining + len(retail)
     proto_left = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] == "proto")
     proto_done = by_bin.get("proto", 0)
@@ -339,7 +350,7 @@ def progress() -> dict:
         "by_binary": {"pc": by_bin.get("pc", 0), "xbox": by_bin.get("xb", 0), "proto": proto_done, "ps2": ps2_done},
         "prototype": {"matched": proto_done, "total": proto_done + proto_left},
         "ps2": {"matched": ps2_done, "total": ps2_done + ps2_left,
-                "matched_bytes": sum(int(e.get("size", 0)) for e in entries.values() if e["bin"] == "ps2"),
+                "matched_bytes": sum(int(e.get("size", 0)) for e in entries.values() if PO.is_ps2(e["bin"])),
                 "compiler": PV.COMPILER},
         "total_label": "verified / (verified + functions in the work queue), retail PC and Xbox",
         "compiler": compiler_version(),
@@ -381,7 +392,7 @@ def load_tasks() -> None:
         tasks = build_queue(have, tasks, set(REGISTRY["entries"]), progress=print, **seed_data(BASE_DIR))
         write_json(QUEUE_JSON, tasks)
     if any("lookalikes" not in t for t in tasks if "fva_int" in t):
-        images = {b: image_for(b) for b in ("pc", "xb", "proto", "ps2") if image_for(b)}
+        images = {b: image_for(b) for b in BIN_ORDER if image_for(b)}
         if images:
             print("[*] Grouping look-alike functions (once; about 15 seconds)...")
             LA.annotate([t for t in tasks if "fva_int" in t], images)
@@ -418,7 +429,7 @@ def load_tasks() -> None:
         if "::" in t["symbol"]:
             BY_SYMBOL.setdefault(t["symbol"], []).append(t)
     for same in BY_SYMBOL.values():
-        same.sort(key=lambda m: ("xb", "pc", "proto", "ps2").index(m["bin"]) if m["bin"] in ("xb", "pc", "proto", "ps2") else 9)
+        same.sort(key=lambda m: BIN_ORDER.index(m["bin"]) if m["bin"] in BIN_ORDER else 99)
     for t in ALL_TASKS:
         t["in_retail"] = in_retail(t)
     overlay = read_json(OVERLAY_JSON, {})
@@ -442,7 +453,7 @@ def drop_non_code(tasks: List[dict], verified: set) -> List[dict]:
     """Queues built before a check existed can hold data that looked like a function start (a single
     `retf`, the middle of an instruction). No C++ can match those, so they are taken out, once."""
     from queue_builder import CODE_CHECK
-    todo = [t for t in tasks if "fva_int" in t and t.get("code_check", 0) < CODE_CHECK and t.get("bin") != "ps2"]
+    todo = [t for t in tasks if "fva_int" in t and t.get("code_check", 0) < CODE_CHECK and not PO.is_ps2(t.get("bin"))]
     if not todo:
         return tasks
     from sf_binaries import not_compiled_reason
@@ -494,7 +505,7 @@ def target_bytes(t: dict) -> Optional[bytes]:
 
 def relocs_for(t: dict) -> Optional[list]:
     img = image_for(t["bin"])
-    if t["bin"] == "ps2":
+    if PO.is_ps2(t["bin"]):
         return PB.as_relocs(img, t["fva_int"], int(t["size"])) if img else None
     code = img.read(t["fva_int"], int(t["size"])) if img else None
     return LA.signature(code, t["fva_int"], img)[1] if code else None
@@ -503,7 +514,7 @@ def relocs_for(t: dict) -> Optional[list]:
 def starter_relocs(t: dict, tb: Optional[bytes]) -> Optional[list]:
     """The function's relocations, so the starter names calls and globals (sub_/DAT_) instead of numbers."""
     img = image_for(t["bin"])
-    if img is None or not tb or t["bin"] == "ps2":
+    if img is None or not tb or PO.is_ps2(t["bin"]):
         return None
     try:
         return DME.find_relocations(tb, t["fva_int"], img)
@@ -557,7 +568,7 @@ def in_default_queue(t: dict) -> bool:
     """The queue lists the released game plus the prototype's own code. Prototype functions that are also in
     retail are left out (lane PROTO_IN_RETAIL lists them), so nobody does the same function twice. PS2
     functions have their own lane (another compiler, checked through decomp.me)."""
-    return not t.get("in_retail") and t.get("bin") != "ps2"
+    return not t.get("in_retail") and not PO.is_ps2(t.get("bin"))
 
 
 def counterpart_starter(t: dict) -> Tuple[str, str]:
@@ -568,7 +579,7 @@ def counterpart_starter(t: dict) -> Tuple[str, str]:
         if e and (e.get("code") or "").strip():
             head = (f"// {t['symbol']} is already matched in {BUILD_NAMES.get(m['bin'], m['bin'])} ({m['va']}); this is\n"
                     f"// that code. This build's machine code is different, so expect to change a few things.\n")
-            if t["bin"] == "ps2" or m["bin"] == "ps2":
+            if PO.is_ps2(t["bin"]) or PO.is_ps2(m["bin"]):
                 head += ("// The PS2 game was built with another compiler (CodeWarrior, not Visual C++): the C++ is\n"
                          "// the same source, but names, calls and globals may need other declarations.\n")
             return head + e["code"].strip() + "\n", m["id"]
@@ -578,7 +589,7 @@ def counterpart_starter(t: dict) -> Tuple[str, str]:
 def ps2_starter(t: dict) -> str:
     """A first draft for a PS2 function: its address, how to build it, and declarations for what it uses,
     named after their addresses (func_XXXXXXXX, D_XXXXXXXX) so the verifier can check every one."""
-    img = image_for("ps2")
+    img = image_for(t["bin"])
     va, size = t["fva_int"], int(t["size"])
     calls, data = [], []
     for r in (PB.references(img, va, size) if img else []):
@@ -591,7 +602,7 @@ def ps2_starter(t: dict) -> str:
             if n not in data and n not in calls:
                 data.append(n)
     me = t["symbol"] if t["symbol"].startswith("func_") else PB.func_name(va)
-    lines = [f"// {t['symbol']} ({t['va']}, {size} bytes) from the PS2 game.",
+    lines = [f"// {t['symbol']} ({t['va']}, {size} bytes) from {PO.describe_bin(t['bin'])}.",
              f"// Compiled on decomp.me with {PV.COMPILER}, flags {PV.FLAGS}.",
              "// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked."]
     if "::" in t["symbol"]:
@@ -632,9 +643,11 @@ def live_task(t: dict) -> dict:
         out["known_name"] = {"name": named["name"], "by": str(named.get("by", "")), "why": str(named.get("why", ""))}
     tb = target_bytes(t)
     out["target_hex"] = " ".join(f"{b:02X}" for b in tb) if tb else ""
-    if t["bin"] == "ps2":
-        img = image_for("ps2")
-        out["disasm_lines"] = PB.disassembly_lines(img, t["fva_int"], int(t["size"])) if tb else ["(SLUS_211.11 is not in binaries/)"]
+    if PO.is_ps2(t["bin"]):
+        img = image_for(t["bin"])
+        missing = "SLUS_211.11" if t["bin"] == "ps2" else f"SLUS_211.11 or {PO.FOLDER}/{PO.BY_BIN[t['bin']].file}"
+        out["disasm_lines"] = (PB.disassembly_lines(img, t["fva_int"], int(t["size"])) if tb
+                               else [f"({missing} is not in binaries/)"])
         out["compiler_label"] = f"{PV.COMPILER} on decomp.me ({PV.FLAGS})"
     else:
         out["disasm_lines"] = disassemble(tb) if tb else ["(binary not present in binaries/)"]
@@ -654,7 +667,7 @@ def live_task(t: dict) -> dict:
         if not code and t["status"] != "VERIFIED":
             code, src = counterpart_starter(t)
             kind = "counterpart" if code else ""
-        if not code and t["bin"] == "ps2":
+        if not code and PO.is_ps2(t["bin"]):
             code = ps2_starter(t)
         out["starter_cpp"] = code or synthesize_cpp(t["symbol"], t["va"], tb or b"", out["disasm_lines"],
                                                     relocs=starter_relocs(t, tb))
@@ -667,11 +680,12 @@ _SLUG_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
 
 def ps2_scratch_fields(t: dict, starter: str) -> dict:
-    img = image_for("ps2")
+    img = image_for(t["bin"])
     name = t["symbol"] if t["symbol"].startswith("func_") else PB.func_name(t["fva_int"])
     asm = PB.function_asm(img, t["fva_int"], int(t["size"]), name)
     src, ctx = DME._inline_project_includes(starter or "", [INCLUDE_DIR])
-    head = (f"// Scarface: The World Is Yours (PS2), {t['symbol']} at {t['va']}, {t['size']} bytes.\n"
+    where = "" if t["bin"] == "ps2" else f", {PO.BY_BIN[t['bin']].label} overlay"
+    head = (f"// Scarface: The World Is Yours (PS2{where}), {t['symbol']} at {t['va']}, {t['size']} bytes.\n"
             f"// From {DME.PROJECT_SITE}: when this shows 100%, paste the C++ into the portal and press Compile & Verify.\n")
     return PV.scratch_fields(f"Scarface (PS2) {t['symbol']}", asm, head + src, ctx, name,
                              os.environ.get("SCARFACE_DECOMPME_PRESET_PS2", ""))
@@ -682,7 +696,7 @@ def decompme_prepare(t: dict) -> dict:
     img = image_for(t["bin"])
     if img is None:
         return {"ok": False, "error": f"binaries/{BINARIES[t['bin']].name} is missing, so there is nothing to send."}
-    if t["bin"] == "ps2":
+    if PO.is_ps2(t["bin"]):
         slug = t.get("decompme_slug", "")
         return {"ok": True, "api": PV.DECOMPME_URL, "json": ps2_scratch_fields(t, live_task(t).get("starter_cpp", "")),
                 "existing_url": f"{PV.DECOMPME_URL}/scratch/{slug}" if slug else ""}
@@ -747,10 +761,11 @@ def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "")
     violations = check_genuine_cpp(cpp_code)
     if violations:
         return {"ok": False, "compiler_error": format_violations(violations), "policy_violation": True}
-    img, tb = image_for("ps2"), target_bytes(t)
+    img, tb = image_for(t["bin"]), target_bytes(t)
     if img is None or tb is None:
+        missing = "SLUS_211.11" if t["bin"] == "ps2" else f"SLUS_211.11 or {PO.FOLDER}/{PO.BY_BIN[t['bin']].file}"
         return {"ok": False, "compiler_unavailable": True,
-                "compiler_error": "binaries/SLUS_211.11 is missing, so there is nothing to compare against."}
+                "compiler_error": f"binaries/{missing} is missing, so there is nothing to compare against."}
     if slug and _SLUG_RE.match(slug) and slug != t.get("decompme_slug"):
         with STATE_LOCK:
             t["decompme_slug"] = slug
@@ -783,7 +798,7 @@ def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "")
     except (ValueError, IndexError, struct.error) as e:
         return {"ok": False, "compiler_error": f"Could not read the object decomp.me sent back: {e}"}
     known = {e2["symbol"]: int(e2["va"], 16) for e2 in REGISTRY["entries"].values()
-             if e2.get("bin") == "ps2" and e2.get("symbol")}
+             if e2.get("bin") in ("ps2", t["bin"]) and e2.get("symbol")}     # the program's, and its own overlay's
     fn, cmp = PV.best_function(tb, obj, t["fva_int"], img, known)
     if fn is None:
         return {"ok": False, "compiler_error": "The C++ compiled, but it has no function in it."}
@@ -796,7 +811,7 @@ def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "")
 
 
 def run_verify(t: dict, cpp_code: str, object_b64: str = "", slug: str = "") -> dict:
-    if t["bin"] == "ps2":
+    if PO.is_ps2(t["bin"]):
         return run_verify_ps2(t, cpp_code, object_b64, slug)
     if not MV.find_msvc71_bin():
         return {"ok": False, "compiler_error": NO_COMPILER_HELP, "compiler_unavailable": True}
@@ -840,7 +855,7 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, por
         "bin": t["bin"], "va": f"0x{t['fva_int']:08X}", "size": int(t["size"]), "symbol": t["symbol"],
         "match": t.get("match_substr", ""),
         "flags": res.get("flags") or t["flags"], "source": "portal", "verified_by": user, "tool_used": tool,
-        "verified_at": stamp(), "compiler": PV.COMPILER if t["bin"] == "ps2" else compiler_build(), "code": cpp_code.strip(),
+        "verified_at": stamp(), "compiler": PV.COMPILER if PO.is_ps2(t["bin"]) else compiler_build(), "code": cpp_code.strip(),
         "note": f"{res.get('reloc_unverified', 0)} external relocation(s) unchecked" if res.get("reloc_unverified") else "",
     }
     if ported_from:
@@ -886,7 +901,7 @@ def revise_verified(t: dict, cpp_code: str, user: str, res: dict) -> bool:
         return False
     if res.get("reloc_unverified", 0) > _unchecked(e):
         return False
-    e.update(code=new, revised_by=user, revised_at=stamp(), compiler=PV.COMPILER if t["bin"] == "ps2" else compiler_build())
+    e.update(code=new, revised_by=user, revised_at=stamp(), compiler=PV.COMPILER if PO.is_ps2(t["bin"]) else compiler_build())
     save_registry()
     return True
 
@@ -946,13 +961,13 @@ def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str, catchup: bool 
         dst_relocs = relocs_for(m)
         ported = (LA.port_code(cpp_code, t, src_relocs, m, dst_relocs)
                   if src_relocs is not None and dst_relocs is not None else None)
-        if ported and m["bin"] == "ps2" and not src_relocs and not dst_relocs:
+        if ported and PO.is_ps2(m["bin"]) and not src_relocs and not dst_relocs:
             # No addresses in either: the two are the same bytes, and only the function's own name changed
             # in the C++, so the compiled code is the same too. Nothing to send to decomp.me.
             res = {"ok": True, "verified": True, "flags": PV.FLAGS, "reloc_unverified": 0}
         else:
             res = run_verify(m, ported) if ported else {"ok": False}
-            if m["bin"] == "ps2":
+            if PO.is_ps2(m["bin"]):
                 time.sleep(1.0)                      # decomp.me does the compiling: one a second
         st["tried"] += 1
         if not (res.get("ok") and res.get("verified") and not res.get("reloc_unverified")):
@@ -1033,7 +1048,7 @@ def catch_up_lookalikes() -> int:
         for members in GROUPS.values():
             if all(m["status"] == "VERIFIED" for m in members):
                 continue
-            src = next((m for m in members if m["status"] == "VERIFIED" and m["bin"] != "ps2"
+            src = next((m for m in members if m["status"] == "VERIFIED" and not PO.is_ps2(m["bin"])
                         and ((REGISTRY["entries"].get(task_key(m)) or {}).get("code") or "").strip()), None)
             if src:
                 sources.append(src)
@@ -1819,7 +1834,7 @@ class Handler(BaseHTTPRequestHandler):
         tag = "verified-" if only else ""
         if kind == "functions":
             build = q1("build", "all")
-            builds = [b for b in DL.BUILD_ORDER if build in ("all", b)]
+            builds = [b for b in DL.BUILD_ORDER if build in ("all", b) or (build == "ps2" and PO.is_ps2(b))]
             if not builds:
                 return self._json({"ok": False, "error": "Unknown game file."}, 400)
             with STATE_LOCK:
@@ -2049,7 +2064,7 @@ class Handler(BaseHTTPRequestHandler):
                         if not t.get("in_retail"):
                             continue
                     elif not q and lane != "VERIFIED" and not in_default_queue(t) and not (
-                            t["bin"] == "ps2" and lane != "ALL"):
+                            PO.is_ps2(t["bin"]) and lane != "ALL"):
                         continue
                     items.append(t)
                 if sort_by == "DEFAULT":
@@ -2265,7 +2280,7 @@ class Handler(BaseHTTPRequestHandler):
             prep = decompme_prepare(t)
             if not prep.get("ok"):
                 return self._json(prep, 400)
-            if t["bin"] == "ps2":
+            if PO.is_ps2(t["bin"]):
                 res = PV.create_scratch(prep["json"])
             else:
                 res = DME.create_scratch(base64.b64decode(prep["obj_b64"]), prep["fields"])

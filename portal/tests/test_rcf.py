@@ -227,3 +227,32 @@ def test_extract_scripts_from_a_packed_ps2_disc_image(tmp_path, monkeypatch):
     assert mod.guess_version(src) == "ps2"
     assert mod.extract(src, tmp_path / "ps2") == 3
     assert (tmp_path / "ps2" / "scriptc" / "ai" / "gang.dso").read_bytes() == FILES[1][1]
+
+
+def test_ps2_disc_gives_its_code_overlays_too(tmp_path):
+    """From the PS2 disc the portal also keeps the six overlays the program loads (only the retail "f" build)."""
+    mod = _extract_mod()
+    files = FILES + [("Overlays\\FrontEnd\\PauseMenuOverlayf.bin", b"MWo3 pause f"),
+                     ("Overlays\\FrontEnd\\PauseMenuOverlayr.bin", b"MWo3 pause r"),
+                     ("Overlays\\FrontEnd\\ModalsOverlay1f.bin", b"MWo3 modals 1"),
+                     ("Overlays\\FrontEnd\\empty.txt", b"")]
+    b = tmp_path / "binaries"
+    b.mkdir()
+    (b / "Scarface (ps2).iso").write_bytes(tiny_iso(R.build_rcf(files)))
+    logs = []
+    assert mod.auto_extract(b, logs.append) == 3
+    kept = b / "ps2_overlays"
+    assert sorted(p.name for p in kept.glob("*.bin")) == ["ModalsOverlay1f.bin", "PauseMenuOverlayf.bin"]
+    assert (kept / "PauseMenuOverlayf.bin").read_bytes() == b"MWo3 pause f"
+    assert not list((b / "scripts_and_data" / "ps2").rglob("*.bin"))      # not among the scripts
+    logs.clear()
+    assert mod.auto_extract(b, logs.append) == 0 and logs == []      # a disc without all six isn't read again
+    # One of them gone (or a copy made before overlays were kept): the next start fetches just them.
+    (kept / "PauseMenuOverlayf.bin").unlink()
+    assert mod.auto_extract(b, logs.append) == 0
+    assert (kept / "PauseMenuOverlayf.bin").exists() and any("code overlays" in line for line in logs)
+    (kept / ".copied").unlink()
+    logs.clear()
+    assert mod.auto_extract(b, logs.append) == 0 and any("code overlays" in line for line in logs)
+    assert mod.overlay_of("Overlays\\FrontEnd\\ExoticsOverlayf.bin") == "ExoticsOverlayf.bin"
+    assert mod.overlay_of("art\\ExoticsOverlayf.bin") is None and mod.overlay_of("Overlays\\FrontEnd\\x.bin") is None

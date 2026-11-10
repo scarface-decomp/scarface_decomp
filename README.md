@@ -49,8 +49,10 @@ file. See [docs/SCRIPTS.md](docs/SCRIPTS.md); the portal's Game Scripts tab show
 **PS2:** the PS2 game (`SLUS_211.11`) is in the portal as a fourth version. It was built with another
 compiler (Metrowerks CodeWarrior for PS2 3.0.1), which decomp.me runs: the portal compiles PS2 functions
 there and checks the result against your own copy, with the same rules. About 1,300 PS2 functions are
-paired with their Xbox twin, so a matched Xbox function gives its PS2 twin a head start. How the compiler
-was found and how it works: [docs/PS2.md](docs/PS2.md). The Wii version is still open for anyone to start
+paired with their Xbox twin, so a matched Xbox function gives its PS2 twin a head start. Its menus that
+load when needed (pause menu, shops, business screens, gambling) are in too: 730 functions in six code
+overlays the portal copies off the disc. How the compiler was found and how it works:
+[docs/PS2.md](docs/PS2.md). The Wii version is still open for anyone to start
 ([docs/OTHER_VERSIONS.md](docs/OTHER_VERSIONS.md)).
 
 ## What "verified" means

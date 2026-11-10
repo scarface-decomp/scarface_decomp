@@ -25,12 +25,15 @@ import urllib.request
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
 
+import ps2_overlay
+
 ENV = "SCARFACE_DISCORD_WEBHOOK"
 URL_FILE = Path("portal") / "private" / "discord_webhook.txt"
 STATE_FILE = Path("portal") / "private" / "discord_announced.json"
 WEBHOOK_RE = re.compile(r"^https://(?:(?:ptb|canary)\.)?discord(?:app)?\.com/api/webhooks/\d+/[A-Za-z0-9_-]+$")
 SITE = "https://scarface-decomp.pages.dev/"
-BIN_WORD = {"pc": "PC", "xb": "Xbox", "proto": "Xbox prototype", "ps2": "PS2"}
+BIN_WORD = {"pc": "PC", "xb": "Xbox", "proto": "Xbox prototype", "ps2": "PS2",
+            **{o.bin: f"PS2 {o.label} overlay" for o in ps2_overlay.OVERLAYS}}
 MAX_LINES = 15
 LIMIT = 1900                                  # Discord allows 2,000 characters a message
 

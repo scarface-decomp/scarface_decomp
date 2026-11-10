@@ -17,6 +17,8 @@ Takes any of:
 
 Each version goes in its own folder under binaries/scripts_and_data/ (xbox, ps2, pc, prototype),
 where the portal's Game Scripts tab finds them and compares other versions with the retail game.
+From the PS2 disc it also copies the six code overlays the program loads (CEMENT.RCF/Overlays/FrontEnd)
+into binaries/ps2_overlays/, for the PS2 work queue (portal/tools/ps2_overlay.py).
 binaries/ is never committed, so the files stay on your computer. Use --list to only show what is
 there, and --out to choose the folder yourself.
 
@@ -41,6 +43,7 @@ sys.path.insert(0, str(PORTAL / "tools"))
 
 from rcf import SCRIPT_EXTENSIONS, RcfError, open_rcf, safe_output_path  # noqa: E402
 import game_files as GF  # noqa: E402
+import ps2_overlay as PO  # noqa: E402
 
 SCRIPTS_ROOT = ROOT / "binaries" / "scripts_and_data"
 DONE_MARK = ".copied"          # written last, so a copy cut short (window closed) is finished next start
@@ -65,14 +68,33 @@ def guess_version(src: Path) -> str:
     return "other"
 
 
-def extract(src: Path, out: Path, log=print) -> int:
-    """Copy every script file in src into out. Returns how many were written."""
+def overlay_of(name: str) -> Optional[str]:
+    """The file name an archive member is kept under in binaries/ps2_overlays/, when it is one of the PS2
+    program's overlays (portal/tools/ps2_overlay.py); None for everything else."""
+    low = name.replace("\\", "/").lower()
+    base = low.rsplit("/", 1)[-1]
+    if low.endswith(PO.DISC_FOLDER + base) and base in PO.BY_FILE:
+        return PO.BY_FILE[base].file
+    return None
+
+
+def extract(src: Path, out: Path, log=print, overlays: Optional[Path] = None, scripts: bool = True) -> int:
+    """Copy every script file in src into out. With `overlays`, the PS2 program's code overlays in src go
+    there too (scripts=False: only them). Returns how many script files were written."""
     # The archives are closed (stack) before the temporary folder is removed: Windows refuses to
     # delete a file that is still open.
     with tempfile.TemporaryDirectory() as tmp, contextlib.ExitStack() as stack:
-        found = list(entries(src, Path(tmp), stack))
+        found = list(entries(src, Path(tmp), stack, overlays=overlays is not None))
         written = 0
         for name, _, read in found:
+            keep = overlay_of(name)
+            if keep:
+                if overlays is not None:
+                    overlays.mkdir(parents=True, exist_ok=True)
+                    (overlays / keep).write_bytes(read())
+                continue
+            if not scripts:
+                continue
             dest = safe_output_path(out, name)
             if dest is None:
                 log(f"  skipped unsafe name: {name!r}")
@@ -81,6 +103,24 @@ def extract(src: Path, out: Path, log=print) -> int:
             dest.write_bytes(read())
             written += 1
     return written
+
+
+def overlays_wanted(bin_dir: Path) -> bool:
+    """True until the overlays were copied once (binaries/ps2_overlays/.copied lists them), and again when
+    one of those is gone."""
+    folder = Path(bin_dir) / PO.FOLDER
+    mark = folder / DONE_MARK
+    if not mark.is_file():
+        return True
+    return any(not (folder / n).is_file() for n in mark.read_text(encoding="utf-8").split() if n in
+               {o.file for o in PO.OVERLAYS})
+
+
+def _mark_overlays(folder: Path, src: Path) -> int:
+    have = [o.file for o in PO.OVERLAYS if (folder / o.file).is_file()]
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / DONE_MARK).write_text("\n".join(have + [f"(copied from {src.name})"]) + "\n", encoding="utf-8")
+    return len(have)
 
 
 def auto_extract(bin_dir: Path = ROOT / "binaries", log=print) -> int:
@@ -99,16 +139,29 @@ def auto_extract(bin_dir: Path = ROOT / "binaries", log=print) -> int:
             continue
         out = bin_dir / "scripts_and_data" / version
         done = out / DONE_MARK
+        overlays = bin_dir / PO.FOLDER if version == "ps2" and overlays_wanted(bin_dir) else None
         if done.is_file():
-            continue                    # a copy that was stopped half way has no mark, so it is redone
+            if overlays is None:
+                continue                # a copy that was stopped half way has no mark, so it is redone
+            log(f"[*] Copying the PS2 program's code overlays out of {src.name} into binaries/{PO.FOLDER}/ "
+                "(only needed once)...")
+            try:
+                extract(src, out, log, overlays=overlays, scripts=False)
+            except (RcfError, OSError, RuntimeError, zipfile.BadZipFile) as e:
+                log(f"    ! could not read the overlays from {src.name}: {e}")
+                continue
+            log(f"    + {_mark_overlays(overlays, src)} overlays")
+            continue
         log(f"[*] Copying the game's scripts out of {src.name} into binaries/scripts_and_data/{version}/ "
             "(only needed once)...")
         try:
-            n = extract(src, out, log)
+            n = extract(src, out, log, overlays=overlays)
         except (RcfError, OSError, RuntimeError, zipfile.BadZipFile) as e:
             log(f"    ! could not read the scripts from {src.name}: {e}")
             continue
         log(f"    + {n:,} script files")
+        if overlays is not None:
+            log(f"    + {_mark_overlays(overlays, src)} code overlays (binaries/{PO.FOLDER}/)")
         done.write_text(f"{n} script files copied from {src.name}\n", encoding="utf-8")
         total += n
     return total
@@ -140,9 +193,10 @@ def rcf_from_disc(src: Path, tmp: Path) -> Optional[Path]:
     return None
 
 
-def entries(src: Path, tmp: Path, stack: contextlib.ExitStack) -> Iterator[Tuple[str, int, callable]]:
-    """(name inside the game's files, size, read()) for every script file in src. The files it opens
-    are closed when stack closes, so read() works until then."""
+def entries(src: Path, tmp: Path, stack: contextlib.ExitStack,
+            overlays: bool = False) -> Iterator[Tuple[str, int, callable]]:
+    """(name inside the game's files, size, read()) for every script file in src (and with `overlays`, the
+    PS2 program's code overlays). The files it opens are closed when stack closes, so read() works until then."""
     low = src.name.lower()
     if low.endswith(".zip"):
         loose = loose_scripts_in_zip(src)
@@ -160,6 +214,10 @@ def entries(src: Path, tmp: Path, stack: contextlib.ExitStack) -> Iterator[Tuple
     print(f"{src.name}: {len(arc.entries):,} files in the archive")
     for e in arc.find(SCRIPT_EXTENSIONS):
         yield e.name, e.size, (lambda e=e: arc.read(e))
+    if overlays:
+        for e in arc.entries:
+            if overlay_of(e.name):
+                yield e.name, e.size, (lambda e=e: arc.read(e))
 
 
 def main(argv=None) -> int:

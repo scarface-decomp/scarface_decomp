@@ -79,6 +79,9 @@ def test_names_file_checks():
                                                                  "why": "plays reload.rsd and resets the clip"}}}
     assert NAMES.problems(good, {"xb": {0x111C0}}) == []
     assert NAMES.problems({"schema": NAMES.SCHEMA, "names": {"xb:0x000111C0": {"name": "audio::Seq<int>::~Seq", "by": "A", "why": "destroys the sequence"}}}) == []
+    overlay = {"schema": NAMES.SCHEMA, "names": {"ps2pause:0x00845500": {"name": "PauseMenu::Init", "by": "A",
+                                                                         "why": "sets up the pause menu's pages"}}}
+    assert NAMES.problems(overlay, {"ps2pause": {0x845500}}) == []          # a PS2 overlay's function
     bad = {"schema": "x", "names": {
         "xb:0x111c0": {"name": "A::b", "by": "x", "why": "long enough reason"},
         "xb:0x000111C0": {"name": "has space", "by": "", "why": "short"},

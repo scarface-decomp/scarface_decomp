@@ -361,3 +361,107 @@ def test_portal_verifies_a_ps2_function_through_decomp_me(monkeypatch, tmp_path)
     monkeypatch.setattr(PV, "compile_on_decompme", lambda slug, src, ctx="": {"ok": False, "unreachable": True, "error": "403"})
     down = server.run_verify(t, "int x;")
     assert not down["ok"] and down["compiler_unavailable"] and "decomp.me" in down["compiler_error"]
+
+
+# --------------------------------------------------------------------------- code overlays
+
+OV_LOAD = 0x00200000
+
+
+def make_overlay(name=b"PauseMenu.bin") -> bytes:
+    """A CodeWarrior overlay (MWo3) for the little program above: 0x40 bytes of zeros, then a function that
+    calls the program's f2 and the overlay's own second function, which reads a string in the overlay."""
+    code = bytearray(0x40)
+    code += asm_words(
+        0x27BDFFF0, 0xFFBF0000,
+        0x0C040010, 0x00000000,                          # jal 0x00100040 (the program's f2)
+        0x0C080030, 0x00000000,                          # jal 0x002000C0 (below)
+        0xDFBF0000, 0x03E00008, 0x27BD0010)
+    code = code.ljust(0x80, b"\0")
+    code += asm_words(0x3C020020, 0x24420100, 0x03E00008, 0x00000000)   # la $v0, 0x00200100; return
+    code = code.ljust(0xC0, b"\0")
+    data = b"pause\0".ljust(0x10, b"\0")
+    head = b"MWo3" + struct.pack("<7I", 7, OV_LOAD, len(code), len(data), 0, 0, 0) + name.ljust(0x20, b"\0")
+    return head + bytes(code) + data
+
+
+def test_overlay_image_has_its_own_functions_and_the_programs_names(img):
+    ov = PB.Ps2Image.with_overlay(img, make_overlay(), "PauseMenuOverlayf.bin")
+    funcs = PB.find_functions(ov)
+    assert {va: f.size for va, f in funcs.items()} == {OV_LOAD + 0x80: 0x24, OV_LOAD + 0xC0: 0x10}
+    assert funcs[OV_LOAD + 0xC0].called and not funcs[OV_LOAD + 0x80].library
+    assert ov.is_code(CODE_VA + 0x40) and ov.is_code(OV_LOAD + 0x80) and not ov.is_game_code(CODE_VA + 0x40)
+    asm = PB.function_asm(ov, OV_LOAD + 0x80, 0x24)
+    assert "jal func_00100040" in asm and "jal func_002000C0" in asm
+    assert "%hi(D_00200100)" in PB.function_asm(ov, OV_LOAD + 0xC0, 0x10)
+    assert ov.read(OV_LOAD, 4) == b"MWo3" and ov.gp == img.gp
+    assert PB.find_functions(img).keys().isdisjoint(funcs)      # the program alone doesn't see them
+    with pytest.raises(ValueError):
+        PB.Ps2Image.with_overlay(img, b"ELF" + bytes(100))
+
+
+def test_overlay_functions_get_their_own_lane(tmp_path):
+    import queue_builder as QB
+    slus = make_elf(tmp_path / "SLUS_211.11")
+    ov = tmp_path / "PauseMenuOverlayf.bin"
+    ov.write_bytes(make_overlay())
+    tasks = QB.build_queue({"ps2": slus, "ps2pause": ov}, None, {f"ps2pause:0x{OV_LOAD + 0xC0:08X}"})
+    mine = [t for t in tasks if t["bin"] == "ps2pause"]
+    assert [t["fva_int"] for t in mine] == [OV_LOAD + 0x80]     # the other one is verified already
+    t = mine[0]
+    assert (t["id"], t["lane"], t["flags"]) == (f"ps2pause_{OV_LOAD + 0x80:08X}", "PS2 overlay: pause menu", PV.FLAGS)
+    assert "pause menu overlay (PauseMenuOverlayf.bin)" in t["hint"]
+    assert any(t["bin"] == "ps2" for t in tasks)                # the program's own are still there
+    assert QB.build_queue({"ps2pause": ov}, None, set()) == []  # an overlay means nothing without the program
+
+
+def test_overlay_copies_are_checked_and_counted_as_the_ps2(tmp_path, monkeypatch):
+    import dataclasses
+    import ps2_overlay as PO
+    import registry_outputs as RO
+    p = tmp_path / "PauseMenuOverlayf.bin"
+    p.write_bytes(make_overlay())
+    assert PO.refusal(p, "ps2pause") and "US PS2 disc" in PO.refusal(p, "ps2pause")
+    monkeypatch.setitem(PO.BY_BIN, "ps2pause", dataclasses.replace(PO.BY_BIN["ps2pause"], sha256=PO.sha256_of(p)))
+    assert PO.refusal(p, "ps2pause") is None and PO.refusal(tmp_path / "missing.bin", "ps2pause") is None
+    assert PO.is_ps2("ps2") and PO.is_ps2("ps2games") and not PO.is_ps2("proto") and not PO.is_ps2(None)
+    reg = {"entries": {"ps2:0x00100040": {"bin": "ps2", "size": 20, "va": "0x00100040"},
+                       "ps2pause:0x00200080": {"bin": "ps2pause", "size": 36, "va": "0x00200080"},
+                       "xb:0x00011000": {"bin": "xb", "size": 8, "va": "0x00011000"}}}
+    queue = [{"bin": "ps2modals", "status": "UNCLAIMED"}, {"bin": "ps2", "status": "UNCLAIMED"}]
+    s = RO.progress_summary(reg, queue, None)
+    assert (s["verified"]["ps2"], s["verified"]["ps2_bytes"], s["verified"]["total"]) == (2, 56, 1)
+    assert s["queue"]["ps2"] == 2
+    assert "Plus 2 in the PS2 game" in RO.status_block(reg)
+    assert RO.BIN_INFO["ps2pause"][0] == "Original_Binary_Order_PS2_PauseMenu.cpp"
+
+
+def test_portal_reads_an_overlay_with_the_program(tmp_path, monkeypatch):
+    import dataclasses
+    import importlib
+    import sys
+    import ps2_overlay as PO
+    sys.path.insert(0, str(PORTAL))
+    server = importlib.import_module("decomp_portal_server")
+    slus = make_elf(tmp_path / "SLUS_211.11")
+    ov = tmp_path / "PauseMenuOverlayf.bin"
+    ov.write_bytes(make_overlay())
+    monkeypatch.setitem(PO.BY_BIN, "ps2pause", dataclasses.replace(PO.BY_BIN["ps2pause"], sha256=PO.sha256_of(ov)))
+    monkeypatch.setitem(server.BINARIES, "ps2", slus)
+    monkeypatch.setitem(server.BINARIES, "ps2pause", ov)
+    monkeypatch.setattr(server.GF, "refusal", lambda p: None)
+    monkeypatch.setattr(server, "_IMAGES", {})
+    img = server.image_for("ps2pause")
+    assert img is not None and img.read(OV_LOAD + 0x80, 4) == struct.pack("<I", 0x27BDFFF0)
+    t = {"id": "ps2pause_00200080", "bin": "ps2pause", "fva_int": OV_LOAD + 0x80, "size": 0x24, "status": "UNCLAIMED",
+         "symbol": "func_00200080", "va": "PS2 0x00200080", "flags": PV.FLAGS, "lane": "PS2 overlay: pause menu"}
+    assert not server.in_default_queue(t)
+    starter = server.ps2_starter(t)
+    assert "pause menu overlay" in starter and 'extern "C" void func_00100040();' in starter
+    live = server.live_task(t)
+    assert live["disasm_lines"][0].startswith("00200080") and PV.COMPILER in live["compiler_label"]
+    assert "pause menu overlay" in live["starter_cpp"]
+    assert server.ps2_scratch_fields(t, starter)["target_asm"].startswith("glabel func_00200080")
+    monkeypatch.setattr(server, "_IMAGES", {})
+    monkeypatch.setitem(server.BINARIES, "ps2", tmp_path / "missing")
+    assert server.image_for("ps2pause") is None                 # no program, no overlay

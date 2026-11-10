@@ -27,14 +27,22 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional
 
+import ps2_overlay
+
 BIN_INFO = {
     "pc": ("Original_Binary_Order_PC_1002.cpp", "pc", "Retail PC Scarface.exe v1.00.2"),
     "xb": ("Original_Binary_Order_Xbox.cpp", "xbox", "Retail Xbox default.xbe"),
     "proto": ("Original_Binary_Order_Proto.cpp", "proto", "April 2006 prototype game.xbe"),
     "ps2": ("Original_Binary_Order_PS2.cpp", "ps2", "Retail PS2 SLUS_211.11"),
 }
+# The PS2 program's code overlays: one file each, as they all load at the same addresses.
+for _o in ps2_overlay.OVERLAYS:
+    _stem = _o.file[:-len("f.bin")].replace("Overlay", "")          # ModalsOverlay1f.bin -> Modals1
+    BIN_INFO[_o.bin] = (f"Original_Binary_Order_PS2_{_stem}.cpp", _o.bin.replace("ps2", "ps2_", 1),
+                        f"Retail PS2 overlay {_o.file} ({_o.label}), loaded at 0x845480")
+PS2_CODEWARRIOR = "Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly)"
 # The PS2 game has its own compiler; everything else was built with Visual C++ 2003.
-BIN_COMPILER = {"ps2": "Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly)"}
+BIN_COMPILER = {b: PS2_CODEWARRIOR for b in ("ps2",) + ps2_overlay.BINS}
 
 
 def classify_subsystem_and_class(sym: str):
@@ -130,7 +138,8 @@ def status_block(registry: dict) -> str:
     by = defaultdict(int)
     for e in entries:
         by[e["bin"]] += 1
-    entries = [e for e in entries if e["bin"] != "ps2"]           # the sizes below are x86 bytes
+    ps2 = sum(n for b, n in by.items() if ps2_overlay.is_ps2(b))
+    entries = [e for e in entries if not ps2_overlay.is_ps2(e["bin"])]        # the sizes below are x86 bytes
     small = sum(1 for e in entries if int(e.get("size", 0)) < 10)
     largest = max((int(e.get("size", 0)) for e in entries), default=0)
     lines = [
@@ -140,8 +149,9 @@ def status_block(registry: dict) -> str:
         f"| Verified functions | {by['xb']:,} | {by['pc']:,} | **{by['pc'] + by['xb']:,}** |",
         "",
     ] + ([f"Plus {by['proto']:,} in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.", ""]
-         if by["proto"] else []) + ([f"Plus {by['ps2']:,} in the PS2 game (`SLUS_211.11`), built with its own compiler, counted on its own.", ""]
-         if by["ps2"] else []) + [
+         if by["proto"] else []) + ([f"Plus {ps2:,} in the PS2 game (`SLUS_211.11` and its overlays), built with its own "
+                                     "compiler, counted on its own.", ""]
+         if ps2 else []) + [
         (f"{small:,} of them are under 10 bytes and the largest is {largest:,} bytes, so the medium and large "
          "functions are where the work is." if entries else
          "Nothing is verified yet: the count was reset on 2026-11-08 so every function is rebuilt and checked "
@@ -175,7 +185,7 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
     entries = list(registry.get("entries", {}).values())
     by = defaultdict(int)
     for e in entries:
-        by[e["bin"]] += 1
+        by["ps2" if ps2_overlay.is_ps2(e["bin"]) else e["bin"]] += 1         # the PS2 overlays count as the PS2
     stamps = [e.get("verified_at") or e.get("reverified_at") or "" for e in entries]
     contributors = defaultdict(int)
     for e in entries:
@@ -189,7 +199,7 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         # (unreleased code) and the PS2 game (another compiler) are counted only under "proto" and "ps2".
         "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "ps2": by["ps2"], "total": by["pc"] + by["xb"],
                      "bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] in ("pc", "xb")),
-                     "ps2_bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] == "ps2")},
+                     "ps2_bytes": sum(int(e.get("size", 0)) for e in entries if ps2_overlay.is_ps2(e["bin"]))},
         "size_buckets": {name: sum(1 for e in entries if e["bin"] in ("pc", "xb") and lo <= int(e.get("size", 0)) < hi)
                          for name, lo, hi in SIZE_BUCKETS},
         "contributors": dict(sorted(contributors.items(), key=lambda kv: (-kv[1], kv[0].lower()))),
@@ -201,7 +211,7 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         q = defaultdict(int)
         tiers = defaultdict(int)
         for t in open_tasks:
-            q[t.get("bin", "?")] += 1
+            q["ps2" if ps2_overlay.is_ps2(t.get("bin")) else t.get("bin", "?")] += 1
             if t.get("bin") in ("pc", "xb"):
                 tiers[t.get("tier", "?")] += 1
         out["queue"] = {"pc": q["pc"], "xb": q["xb"], "proto": q["proto"], "ps2": q["ps2"], "total": q["pc"] + q["xb"],
@@ -214,7 +224,8 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
 SITE = "https://scarface-decomp.pages.dev/"
 REPO = "https://github.com/scarface-decomp/scarface_decomp"
 FEED_ENTRIES = 50
-BIN_WORD = {"pc": "PC", "xb": "Xbox", "proto": "Xbox prototype", "ps2": "PS2"}
+BIN_WORD = {"pc": "PC", "xb": "Xbox", "proto": "Xbox prototype", "ps2": "PS2",
+            **{o.bin: f"PS2 {o.label} overlay" for o in ps2_overlay.OVERLAYS}}
 
 
 def feed_xml(registry: dict) -> str:

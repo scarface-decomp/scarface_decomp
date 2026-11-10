@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 The PS2's code overlays: CEMENT.RCF/Overlays/FrontEnd/*.bin, extra program code (front-end screens: the
-pause menu, the exotics shop, the modal pop-ups, the mini-games) that SLUS_211.11 loads at run time. They are
-CodeWarrior overlay files ("MWo3"); the whole file, header and all, is copied to its load address.
+pause menu, the exotics shop, the business, empire and weapon screens, the gambling mini-games) that
+SLUS_211.11 loads at run time. They are CodeWarrior overlay files ("MWo3"); the whole file, header and all,
+is copied to its load address.
 
     0x00  "MWo3"
     0x04  u32 overlay number (6 to 11)
@@ -18,7 +19,12 @@ Each overlay comes in three builds: <name>f.bin, <name>r.bin and <name>t.bin. On
 retail program: every call they make lands on a function start in SLUS_211.11, which also lists one empty
 segment for each of them at 0x845480 with exactly their size. The "r" and "t" builds load elsewhere and
 call other addresses: they belong to other builds of the program, probably Radical's "release" and "tune"
-configurations.
+configurations. The program was linked together with its overlays: their virtual tables are in its data,
+and it calls into them directly.
+
+The portal copies the six "f" overlays out of your PS2 disc (binaries/ps2_overlays/) and lists their
+functions in the work queue, each overlay on its own lane (OVERLAYS below), checked against the program
+with that overlay loaded (ps2_binary.Ps2Image.with_overlay).
 
     python portal/tools/ps2_overlay.py FILE.bin ...                    what each header says
     python portal/tools/ps2_overlay.py FILE.bin --check SLUS_211.11    how many of its calls land on functions
@@ -31,15 +37,75 @@ Your own copies, on your own computer; standard library only.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import struct
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 MAGIC = b"MWo3"
 HEADER = 0x40
 E_FLAGS_R5900 = 0x20924001          # what SLUS_211.11 has
+
+
+@dataclass(frozen=True)
+class Known:
+    """One of the six overlays the retail program loads, as the portal's work queue lists it."""
+    bin: str                         # its lane in the queue and its key in reports/verified_registry.json
+    file: str                        # its name on the disc, in CEMENT.RCF/Overlays/FrontEnd/
+    label: str                       # what it is, in words
+    sha256: str                      # the retail US disc's copy (docs/GAME_VERSIONS.md)
+
+
+OVERLAYS: Tuple[Known, ...] = (
+    Known("ps2pause", "PauseMenuOverlayf.bin", "pause menu",
+          "6b14237b541bf2733949ea87b37340f84deee9694c5ed355d667c28283690618"),
+    Known("ps2exotics", "ExoticsOverlayf.bin", "exotics shop",
+          "d310690986a4a5f6395580764917a08b2fdc2da689d91609b70bae72ef753614"),
+    Known("ps2modals", "ModalsOverlayf.bin", "business screens",
+          "327e0f391e61c728eed2f09da6880c2378f368f56791bc10a2b67af5049295f2"),
+    Known("ps2modals1", "ModalsOverlay1f.bin", "empire and mansion screens",
+          "d4ea255589d9678b44d64d0d88473d8dbe2469e40b262b353bf836409e2db1f6"),
+    Known("ps2modals2", "ModalsOverlay2f.bin", "weapon screens",
+          "dbfdc8947d1e9eef58e56524cf0375dd91ab8db0d7482e20089768ba97f825a9"),
+    Known("ps2games", "MiniGamesOverlayf.bin", "gambling mini-games",
+          "e5a7f8856c285a459fb8b94a35fda8a9c26e0be1b5900b2c7dcc1538962afefc"),
+)
+BY_BIN: Dict[str, Known] = {o.bin: o for o in OVERLAYS}
+BY_FILE: Dict[str, Known] = {o.file.lower(): o for o in OVERLAYS}
+BINS: Tuple[str, ...] = tuple(o.bin for o in OVERLAYS)
+FOLDER = "ps2_overlays"              # binaries/ps2_overlays/<file>: where the portal keeps them
+DISC_FOLDER = "overlays/frontend/"   # their folder in CEMENT.RCF (lower case, / for \\)
+
+
+def is_ps2(b: Optional[str]) -> bool:
+    """The PS2 program or one of its overlays: one compiler (CodeWarrior), checked through decomp.me."""
+    return b == "ps2" or b in BY_BIN
+
+
+def describe_bin(b: str) -> str:
+    """'the PS2 game' or 'the PS2 game's pause menu overlay'."""
+    o = BY_BIN.get(b)
+    return f"the PS2 game's {o.label} overlay" if o else "the PS2 game"
+
+
+def path_for(bin_dir: Path, b: str) -> Path:
+    return Path(bin_dir) / FOLDER / BY_BIN[b].file
+
+
+def sha256_of(path: Path) -> str:
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def refusal(path: Path, b: str) -> Optional[str]:
+    """None if the file is the retail copy (or isn't there); otherwise why it can't be used."""
+    path = Path(path)
+    if not path.exists() or sha256_of(path) == BY_BIN[b].sha256:
+        return None
+    return (f"binaries/{FOLDER}/{path.name} is not the copy from the US PS2 disc this project uses, so matches "
+            f"against it would not count. Delete it and the portal copies the right one out of your PS2 disc "
+            f"the next time it starts.")
 
 
 class OverlayError(ValueError):

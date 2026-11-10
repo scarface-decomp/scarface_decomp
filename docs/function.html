@@ -188,8 +188,14 @@
     var REPO = 'scarface-decomp/scarface_decomp', BRANCH = 'main';
     var RAW = 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/reports/';
     var SOURCES = ['data/', RAW];
-    var BIN = { xb: 'Xbox', pc: 'PC 1.00.2', proto: 'Xbox prototype (April 2006)', ps2: 'PS2' };
-    var FILE = { xb: 'default.xbe', pc: 'Scarface.exe', proto: 'game.xbe', ps2: 'SLUS_211.11' };
+    // ps2pause, ps2exotics, ...: the PS2 program's code overlays (portal/tools/ps2_overlay.py)
+    var BIN = { xb: 'Xbox', pc: 'PC 1.00.2', proto: 'Xbox prototype (April 2006)', ps2: 'PS2',
+                ps2pause: 'PS2 pause menu', ps2exotics: 'PS2 exotics shop', ps2modals: 'PS2 business screens',
+                ps2modals1: 'PS2 empire and mansion screens', ps2modals2: 'PS2 weapon screens',
+                ps2games: 'PS2 gambling mini-games' };
+    var FILE = { xb: 'default.xbe', pc: 'Scarface.exe', proto: 'game.xbe', ps2: 'SLUS_211.11',
+                 ps2pause: 'PauseMenuOverlayf.bin', ps2exotics: 'ExoticsOverlayf.bin', ps2modals: 'ModalsOverlayf.bin',
+                 ps2modals1: 'ModalsOverlay1f.bin', ps2modals2: 'ModalsOverlay2f.bin', ps2games: 'MiniGamesOverlayf.bin' };
     var $ = function (id) { return document.getElementById(id); };
     var fmt = function (n) { return Number(n || 0).toLocaleString('en-US'); };
     function el(tag, text, cls) {
@@ -381,7 +387,7 @@
       if (e.verified_at) fact('Verified', String(e.verified_at).slice(0, 10));
       if (e.revised_by) fact('Cleaned up by', e.revised_by);
       if (e.tool_used) fact('Helped by', e.tool_used);
-      fact('Compiler', (e.bin === 'ps2' ? 'CodeWarrior for PS2 3.0.1' : 'Visual C++ ' + (e.compiler || '7.10')));
+      fact('Compiler', (/^ps2/.test(e.bin) ? 'CodeWarrior for PS2 3.0.1' : 'Visual C++ ' + (e.compiler || '7.10')));
       fact('Flags', e.flags || '');
       var src = sourcePath(e);
       if (src) fact('In the repository', src, 'https://github.com/' + REPO + '/blob/' + BRANCH + '/' + src.split('/').map(encodeURIComponent).join('/'));
@@ -480,7 +486,10 @@
     // the file it is in (the same as the main page's list)
     function sourcePath(e) {
       var files = { pc: 'Original_Binary_Order_PC_1002.cpp', xb: 'Original_Binary_Order_Xbox.cpp',
-                    proto: 'Original_Binary_Order_Proto.cpp', ps2: 'Original_Binary_Order_PS2.cpp' };
+                    proto: 'Original_Binary_Order_Proto.cpp', ps2: 'Original_Binary_Order_PS2.cpp',
+                    ps2pause: 'Original_Binary_Order_PS2_PauseMenu.cpp', ps2exotics: 'Original_Binary_Order_PS2_Exotics.cpp',
+                    ps2modals: 'Original_Binary_Order_PS2_Modals.cpp', ps2modals1: 'Original_Binary_Order_PS2_Modals1.cpp',
+                    ps2modals2: 'Original_Binary_Order_PS2_Modals2.cpp', ps2games: 'Original_Binary_Order_PS2_MiniGames.cpp' };
       if (!e.source || e.source === 'portal') return files[e.bin] ? 'reconstructed_src/' + files[e.bin] : '';
       return 'reconstructed_src/' + e.source;
     }

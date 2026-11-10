@@ -747,6 +747,14 @@
     var pct = function (a, b) { return b > 0 ? (a / b) * 100 : 0; };
     var fmtPct = function (p) { return p === 0 ? '0' : p >= 10 ? p.toFixed(1) : p.toFixed(2); };
     var BIN_LABEL = { pc: 'PC', xb: 'Xbox', proto: 'Proto', ps2: 'PS2' };
+    // The PS2 program's code overlays (ps2pause, ps2exotics, ...) count as the PS2 version.
+    var PS2_BINS = ['ps2', 'ps2pause', 'ps2exotics', 'ps2modals', 'ps2modals1', 'ps2modals2', 'ps2games'];
+    PS2_BINS.forEach(function (b) { if (!BIN_LABEL[b]) BIN_LABEL[b] = 'PS2'; });
+    var SOURCE_FILE = { pc: 'Original_Binary_Order_PC_1002.cpp', xb: 'Original_Binary_Order_Xbox.cpp',
+                        proto: 'Original_Binary_Order_Proto.cpp', ps2: 'Original_Binary_Order_PS2.cpp',
+                        ps2pause: 'Original_Binary_Order_PS2_PauseMenu.cpp', ps2exotics: 'Original_Binary_Order_PS2_Exotics.cpp',
+                        ps2modals: 'Original_Binary_Order_PS2_Modals.cpp', ps2modals1: 'Original_Binary_Order_PS2_Modals1.cpp',
+                        ps2modals2: 'Original_Binary_Order_PS2_Modals2.cpp', ps2games: 'Original_Binary_Order_PS2_MiniGames.cpp' };
 
     function applyRepoLinks() {
       document.querySelectorAll('a[data-repo-link]').forEach(function (a) {
@@ -789,7 +797,7 @@
     // headline), the PS2 and the prototype, each only once it has a match. Colours are fixed per line.
     var HISTORY_LINES = [
       { id: 'released', label: 'Released game (Xbox + PC)', bins: ['xb', 'pc'], color: 'var(--s-released)' },
-      { id: 'ps2', label: 'PS2', bins: ['ps2'], color: 'var(--s-ps2)' },
+      { id: 'ps2', label: 'PS2', bins: PS2_BINS, color: 'var(--s-ps2)' },
       { id: 'proto', label: 'Xbox prototype', bins: ['proto'], color: 'var(--s-proto)' }
     ];
     var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -1099,8 +1107,7 @@
 
     function sourcePath(e) {
       if (!e.source || e.source === 'portal') {
-        return 'reconstructed_src/' + (e.bin === 'pc' ? 'Original_Binary_Order_PC_1002.cpp' : e.bin === 'xb' ? 'Original_Binary_Order_Xbox.cpp' :
-          e.bin === 'ps2' ? 'Original_Binary_Order_PS2.cpp' : 'Original_Binary_Order_Proto.cpp');
+        return 'reconstructed_src/' + (SOURCE_FILE[e.bin] || 'Original_Binary_Order_Proto.cpp');
       }
       return 'reconstructed_src/' + e.source;
     }
@@ -1122,12 +1129,14 @@
       var bin = $('bin').value;
       var sort = $('sort').value;
       filtered = ALL.filter(function (e) {
-        return (bin === 'all' || e.bin === bin) && (!term || e.hay.indexOf(term) !== -1);
+        return (bin === 'all' || e.bin === bin || (bin === 'ps2' && PS2_BINS.indexOf(e.bin) >= 0)) &&
+          (!term || e.hay.indexOf(term) !== -1);
       });
       filtered.sort(function (a, b) {
         if (sort === 'size') return b.size - a.size || a.vaNum - b.vaNum;
         if (sort === 'recent') return (b.when > a.when ? 1 : b.when < a.when ? -1 : 0) || a.vaNum - b.vaNum;
-        var order = { pc: 0, xb: 1, proto: 2, ps2: 3 };
+        var order = { pc: 0, xb: 1, proto: 2 };
+        PS2_BINS.forEach(function (b, i) { order[b] = 3 + i; });
         return ((order[a.bin] || 0) - (order[b.bin] || 0)) || a.vaNum - b.vaNum;
       });
       shown = 0;

@@ -3,10 +3,11 @@
 # people worked out), applied to the program you have open.
 #
 # Use: Window > Script Manager > "Manage Script Directories", add this folder (portal/scripts), then run
-# ghidra_scarface_names.py on default.xbe, game.xbe, Scarface.exe (1.00.2) or SLUS_211.11. It asks for your
-# copy of the repository (the folder with reconstructed_src/ in it). Nothing is changed outside the program.
+# ghidra_scarface_names.py on default.xbe, game.xbe, Scarface.exe (1.00.2), SLUS_211.11 or a PS2 overlay's ELF
+# file (portal/tools/ps2_overlay.py --elf). It asks for your copy of the repository (the folder with
+# reconstructed_src/ in it). Nothing is changed outside the program.
 # Works in Ghidra's Jython (Python 2.7) and in PyGhidra (Python 3). Headless: -postScript
-# ghidra_scarface_names.py <repository folder> [xb|pc|ps2|proto]. See docs/NAMES.md.
+# ghidra_scarface_names.py <repository folder> [xb|pc|ps2|proto|ps2pause|...]. See docs/NAMES.md.
 #
 #@author Scarface decomp project
 #@category Scarface
@@ -23,6 +24,13 @@ VERSIONS = [
     ("PC 1.00.2 (Scarface.exe)", "Original_Binary_Order_PC_1002.cpp", "pc", ("scarface.exe", ".exe")),
     ("PS2 (SLUS_211.11)", "Original_Binary_Order_PS2.cpp", "ps2", ("slus_211.11", "slus")),
     ("Xbox prototype, April 2006 (game.xbe)", "Original_Binary_Order_Proto.cpp", "proto", ("game.xbe",)),
+    # the PS2 program's code overlays, opened as the ELF files portal/tools/ps2_overlay.py --elf writes
+    ("PS2 pause menu overlay (PauseMenuOverlayf)", "Original_Binary_Order_PS2_PauseMenu.cpp", "ps2pause", ("pausemenuoverlayf",)),
+    ("PS2 exotics shop overlay (ExoticsOverlayf)", "Original_Binary_Order_PS2_Exotics.cpp", "ps2exotics", ("exoticsoverlayf",)),
+    ("PS2 business screens overlay (ModalsOverlayf)", "Original_Binary_Order_PS2_Modals.cpp", "ps2modals", ("modalsoverlayf",)),
+    ("PS2 empire and mansion screens overlay (ModalsOverlay1f)", "Original_Binary_Order_PS2_Modals1.cpp", "ps2modals1", ("modalsoverlay1f",)),
+    ("PS2 weapon screens overlay (ModalsOverlay2f)", "Original_Binary_Order_PS2_Modals2.cpp", "ps2modals2", ("modalsoverlay2f",)),
+    ("PS2 gambling mini-games overlay (MiniGamesOverlayf)", "Original_Binary_Order_PS2_MiniGames.cpp", "ps2games", ("minigamesoverlayf",)),
 ]
 TODO_RE = re.compile(r"^// \[TODO\] 0x([0-9A-Fa-f]{8}) (.*) \((\d+) B\)$")
 DONE_RE = re.compile(r"^// \[VERIFIED\] (.*) \((0x[0-9A-Fa-f]{8}), (\d+) B\)$")

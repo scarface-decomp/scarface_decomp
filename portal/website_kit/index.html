@@ -961,6 +961,7 @@
                   <option value="Shared Engine">Xbox game (most of the work)</option>
                   <option value="PC Scarface.exe">PC game</option>
                   <option value="PS2 SLUS_211.11">PS2 game (its own compiler, checked through decomp.me)</option>
+                  <option value="PS2 overlay" title="Code the PS2 game loads when it needs it: the pause menu, the exotics shop, the business, empire and weapon screens, and the gambling mini-games">PS2 menus (overlays loaded when needed)</option>
                   <option value="Xbox Prototype">Prototype: code not in the released game</option>
                   <option value="class not in retail">Prototype: classes cut from the game</option>
                   <option value="PROTO_IN_RETAIL" title="Left out of the other lists: the same code is matched along with retail, and the rest are older versions of retail functions">Prototype: also in the released game</option>
@@ -1461,6 +1462,9 @@
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
   }
+
+  // The PS2 program (ps2) or one of its code overlays (ps2pause, ps2exotics, ...): CodeWarrior, through decomp.me.
+  function isPs2(bin) { return /^ps2/.test(String(bin || '')); }
 
   function fmtInt(n) {
     const v = Number(n);
@@ -2834,7 +2838,7 @@
     const ctrl = new AbortController();
     verifyAbortCtrl = ctrl;
     const cppCode = editorEl().value;
-    setStatus(t.bin === 'ps2' ? 'Compiling on decomp.me with the PS2 compiler (CodeWarrior)...' : 'Compiling with MSVC 7.10 cl.exe...', 'muted');
+    setStatus(isPs2(t.bin) ? 'Compiling on decomp.me with the PS2 compiler (CodeWarrior)...' : 'Compiling with MSVC 7.10 cl.exe...', 'muted');
 
     try {
       // keep_revision: a hand-made compile of an already verified function may replace its saved text
@@ -2938,7 +2942,7 @@
 
   function buildAiPrompt(t, code, bestScore, history, feedback) {
     const disasmText = (Array.isArray(t.disasm_lines) ? t.disasm_lines : []).join(NL);
-    if (t.bin === 'ps2') {
+    if (isPs2(t.bin)) {
       return [
         'Decompile this MIPS R5900 (PlayStation 2) function from Scarface: The World Is Yours (2006) into genuine, human-readable C++ that compiles byte-for-byte to the target with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me compiler ' + 'mwcps2-3.0.1b103-040528).',
         'Function: ' + t.symbol + ' at ' + t.va + ' (' + t.size + ' bytes)',
@@ -3692,7 +3696,7 @@
     const form = el('form', undefined, 'dl-form');
     form.addEventListener('submit', (e) => e.preventDefault());
     if (kind === 'functions') {
-      form.appendChild(picker('Game file', 'build', [['all', 'All game files'], ['xb', 'Xbox (most of the game)'], ['pc', 'PC'], ['ps2', 'PS2'], ['proto', 'Xbox prototype (April 2006)']]));
+      form.appendChild(picker('Game file', 'build', [['all', 'All game files'], ['xb', 'Xbox (most of the game)'], ['pc', 'PC'], ['ps2', 'PS2 (with its overlays)'], ['proto', 'Xbox prototype (April 2006)']]));
     } else if (kind === 'scripts') {
       form.appendChild(picker('Version', 'version', [['all', 'All versions']].concat((SCRIPT_VERSIONS || []).map((v) => [v.id, v.label]))));
     }

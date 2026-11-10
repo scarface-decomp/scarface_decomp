@@ -13,6 +13,12 @@ against it doesn't count here. Everyone works on these files, and only these.
 | `Scarface.exe` | **PC, US, version 1.00.2**: the US game with the official 1.00.2 patch installed. Its file version reads `1.0.0.2`. | 8,462,848 bytes | `1c1dd03ff81592acfa43c45f461fbdc4818503c739cd2f127e0a61fe6a6969c6` |
 | `game.xbe` | **Xbox prototype, April 20, 2006** (optional). Unreleased code, counted on its own row. | 4,854,976 bytes | `ecd980d0f25c444d263c968b8e4032e1707e0e684a422483890257ee12ec0384` |
 | `SLUS_211.11` | **PS2, US disc (SLUS-21111)** (optional). Its own compiler and its own row ([PS2.md](PS2.md)). The portal reads it out of the disc image. | 7,073,896 bytes | `42404f03867f507b9c86d77b179b0b354d7c775cb955648b7e0b9a91ac3d5781` |
+| `PauseMenuOverlayf.bin` | PS2 code overlay: the pause menu (optional; copied out of the PS2 disc's `CEMENT.RCF` with the scripts). | 35,328 bytes | `6b14237b541bf2733949ea87b37340f84deee9694c5ed355d667c28283690618` |
+| `ExoticsOverlayf.bin` | PS2 code overlay: the exotics shop (optional; copied out of the PS2 disc's `CEMENT.RCF` with the scripts). | 30,976 bytes | `d310690986a4a5f6395580764917a08b2fdc2da689d91609b70bae72ef753614` |
+| `ModalsOverlayf.bin` | PS2 code overlay: the business screens (optional; copied out of the PS2 disc's `CEMENT.RCF` with the scripts). | 38,400 bytes | `327e0f391e61c728eed2f09da6880c2378f368f56791bc10a2b67af5049295f2` |
+| `ModalsOverlay1f.bin` | PS2 code overlay: the empire and mansion screens (optional; copied out of the PS2 disc's `CEMENT.RCF` with the scripts). | 26,880 bytes | `d4ea255589d9678b44d64d0d88473d8dbe2469e40b262b353bf836409e2db1f6` |
+| `ModalsOverlay2f.bin` | PS2 code overlay: the weapon screens (optional; copied out of the PS2 disc's `CEMENT.RCF` with the scripts). | 29,440 bytes | `dbfdc8947d1e9eef58e56524cf0375dd91ab8db0d7482e20089768ba97f825a9` |
+| `MiniGamesOverlayf.bin` | PS2 code overlay: the gambling mini-games (optional; copied out of the PS2 disc's `CEMENT.RCF` with the scripts). | 34,816 bytes | `e5a7f8856c285a459fb8b94a35fda8a9c26e0be1b5900b2c7dcc1538962afefc` |
 
 Start with `default.xbe`: the whole Xbox game can be read, so almost all of the work is there.
 `Scarface.exe` is an optional extra for the PC-only functions (most of the PC file is encrypted, so

@@ -74,35 +74,45 @@ def _unique(sets: Dict[int, FrozenSet[str]]) -> Dict[FrozenSet[str], int]:
 
 
 def _vtable_runs(img: P.Ps2Image, funcs: Dict[int, P.Func]) -> List[List[int]]:
-    """Runs of two or more function addresses in a row in the data: virtual tables (and other tables)."""
-    s = img._main
-    lo = s.off + (img.code_end - s.va)
-    n = (s.off + s.filesz - lo) // 4
-    words = struct.unpack_from(f"<{n}I", img.data, lo) if n > 0 else ()
-    runs, cur = [], []
-    for x in words:
-        if x in funcs:
-            cur.append(x)
-        else:
-            if len(cur) >= 2:
-                runs.append(cur)
-            cur = []
-    if len(cur) >= 2:
-        runs.append(cur)
+    """Runs of two or more function addresses in a row in the data: virtual tables (and other tables). For a
+    code overlay that includes the program's data, where the overlays' virtual tables are."""
+    runs = []
+    for s in getattr(img, "_scan", [img._main]):
+        if not s.filesz:
+            continue
+        lo = s.off + (img.code_end - s.va) if s is img._main else s.off
+        n = (s.off + s.filesz - lo) // 4
+        words = struct.unpack_from(f"<{n}I", img.data, lo) if n > 0 else ()
+        cur: List[int] = []
+        for x in words:
+            if x in funcs:
+                cur.append(x)
+            else:
+                if len(cur) >= 2:
+                    runs.append(cur)
+                cur = []
+        if len(cur) >= 2:
+            runs.append(cur)
     return runs
 
 
 def pair(ps2_img: P.Ps2Image, ps2_funcs: Dict[int, P.Func], xbox_img, xbox_tasks: Iterable[dict],
-         progress=None) -> Dict[int, Pair]:
+         progress=None, cache: Optional[dict] = None) -> Dict[int, Pair]:
+    """cache: a dict to keep what was read from the Xbox game in, so pairing the PS2 program and then each
+    of its overlays reads the Xbox game once."""
     from queue_builder import vtable_methods
-    xtasks = [t for t in xbox_tasks if t.get("bin") == "xb"]
-    xsets = {}
-    for i, t in enumerate(xtasks):
-        s = xbox_strings(xbox_img, t)
-        if s:
-            xsets[t["fva_int"]] = s
-        if progress and i and i % 5000 == 0:
-            progress(f"ps2 pairing: read the text of {i:,}/{len(xtasks):,} Xbox functions")
+    cache = {} if cache is None else cache
+    if "xsets" not in cache:
+        xtasks = [t for t in xbox_tasks if t.get("bin") == "xb"]
+        xsets = {}
+        for i, t in enumerate(xtasks):
+            s = xbox_strings(xbox_img, t)
+            if s:
+                xsets[t["fva_int"]] = s
+            if progress and i and i % 5000 == 0:
+                progress(f"ps2 pairing: read the text of {i:,}/{len(xtasks):,} Xbox functions")
+        cache["xsets"] = xsets
+    xsets = cache["xsets"]
     psets = {}
     for va, f in ps2_funcs.items():
         if not f.library:
@@ -123,7 +133,9 @@ def pair(ps2_img: P.Ps2Image, ps2_funcs: Dict[int, P.Func], xbox_img, xbox_tasks
             p.name = own[0]
             p.why = (p.why + "; " if p.why else "") + f'it names itself in a message ("{own[0]}")'
     # virtual tables
-    vt = vtable_methods(xbox_img)                       # Xbox function -> (class, slot, raw RTTI name)
+    if "vt" not in cache:
+        cache["vt"] = vtable_methods(xbox_img)
+    vt = cache["vt"]                                    # Xbox function -> (class, slot, raw RTTI name)
     by_class: Dict[str, Dict[int, int]] = defaultdict(dict)
     for fva, (cls, slot, _raw) in vt.items():
         by_class[cls].setdefault(slot, fva)

@@ -305,10 +305,14 @@ Each comes in three builds, `<name>f.bin`, `r.bin` and `t.bin`. Only the **f** o
 program: all of their 3,097 calls into it land on the start of one of its functions (the r and t builds
 hit almost none and load at other addresses), and `SLUS_211.11` itself has one empty segment for each at
 `0x845480`, exactly the size of the f file. The r and t builds were made for other builds of the program,
-probably Radical's "release" and "tune" configurations. The six f overlays hold about 690 functions that
-are not in `SLUS_211.11`. `portal/tools/ps2_overlay.py` shows the headers, counts the calls that land on
-functions (`--check binaries/SLUS_211.11`) and writes each overlay as an ELF file Ghidra, IDA or objdump
-open at the right address (`--elf FOLDER`).
+probably Radical's "release" and "tune" configurations. The program was linked together with its
+overlays: their virtual tables are in its data, and it calls into them directly.
+
+The six f overlays hold 730 functions that are not in `SLUS_211.11`; the portal copies them out of the
+PS2 disc and puts those functions in the work queue ([PS2.md](PS2.md#the-overlays)).
+`portal/tools/ps2_overlay.py` shows the headers, counts the calls that land on functions
+(`--check binaries/SLUS_211.11`) and writes each overlay as an ELF file Ghidra, IDA or objdump open at the
+right address (`--elf FOLDER`).
 
 [GAME_VERSIONS.md](GAME_VERSIONS.md) lists the exact copies (with their SHA-256) the project works from.
 

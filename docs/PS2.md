@@ -99,15 +99,38 @@ matched too. `-str readonly` is what puts string literals where the game has the
   shape that makes the compiler do it, tell everyone.
 * **Thunks.** Short `j` stubs at the start of some functions are made by the compiler for classes with more
   than one base class; they come from the class definitions, not from a function of their own.
-* **Overlays.** The game loads extra code from `CEMENT.RCF/Overlays/FrontEnd/` at run time: six
-  CodeWarrior overlays (pause menu, exotics shop, pop-ups, mini-games) with about 690 functions between
-  them. Use the `...f.bin` builds, the ones that fit `SLUS_211.11` (the `r` and `t` builds belong to other
-  builds of the program); `portal/tools/ps2_overlay.py --elf FOLDER` turns each into an ELF file that
-  Ghidra, IDA and objdump open at its load address, `0x845480`. They all share that address, so open
-  each one on its own next to `SLUS_211.11`. Layout in [FORMATS.md](FORMATS.md#ps2-code-overlays). Only
-  `SLUS_211.11` itself is in the queue so far.
+* **Overlays.** The game loads extra code from `CEMENT.RCF/Overlays/FrontEnd/` when it needs it: six
+  CodeWarrior overlays with 730 functions between them (below).
 * **One instruction form.** `sqrt.s` reads its operand from a field GNU as doesn't write, so in listings
   for decomp.me it is written as `.word`. The bytes are the same.
+
+## The overlays
+
+Some of the front end isn't in `SLUS_211.11` at all: the game keeps it in six code overlays on the disc
+(`CEMENT.RCF/Overlays/FrontEnd/`) and loads one at `0x845480` when it needs it. The portal copies the six
+`...f.bin` files (the build that fits the retail program; layout in
+[FORMATS.md](FORMATS.md#ps2-code-overlays)) out of your PS2 disc into `binaries/ps2_overlays/` when it
+starts, together with the scripts, and their functions go in the work queue under **PS2 menus**:
+
+| Lane | File | Functions | What is in it |
+| :--- | :--- | ---: | :--- |
+| PS2 overlay: pause menu | `PauseMenuOverlayf.bin` | 191 | `PauseMenu` and its pages (options, controller, stats, rewards, credits) |
+| PS2 overlay: exotics shop | `ExoticsOverlayf.bin` | 115 | `ExoticsHUD2`, `MissionCompleteHUD`, `RepGainHUD` |
+| PS2 overlay: business screens | `ModalsOverlayf.bin` | 124 | `DrugWarsHUD`, `BusinessHUD`, `VehicleSelectionHUD`, `ViceCopHUD` |
+| PS2 overlay: empire and mansion screens | `ModalsOverlay1f.bin` | 102 | `EmpireHUD`, `PimpYourMansionHUD`, `LookTutorialHUD` |
+| PS2 overlay: weapon screens | `ModalsOverlay2f.bin` | 70 | `GenericWeaponHUD` and its locker, street and phone panels |
+| PS2 overlay: gambling mini-games | `MiniGamesOverlayf.bin` | 128 | `FightBettingHUD`, `BlackjackHUD`, `PokerHUD`, `SlotMachineHUD` |
+
+They are checked like the rest of the PS2 game, against the program with that overlay loaded: calls into
+the program are `func_XXXXXXXX` and its globals `D_XXXXXXXX` as usual, and the overlay's own functions
+and data have addresses from `0x845480` on. All six use the same addresses, so a function's key says
+which overlay it is in (`ps2pause:0x00845830`). As with the program, functions are paired with the Xbox
+game's where the text they use or their place in a virtual table gives it away (the program was linked
+together with its overlays, so their virtual tables are in `SLUS_211.11`'s data): about 130 of them, about
+70 with a name.
+
+To look at one in Ghidra, IDA or objdump, `portal/tools/ps2_overlay.py --elf FOLDER binaries/ps2_overlays/*.bin`
+writes each as an ELF file that opens at its load address; open it next to `SLUS_211.11`.
 
 ## Files
 

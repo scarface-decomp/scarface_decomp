@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
 import lookalikes
+import ps2_overlay
 from msvc_verify import decorated_hint
 from sf_binaries import BinaryImage, Extent, collect_call_targets, function_extent, not_compiled_reason
 
@@ -41,6 +42,10 @@ XB_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 LANES = {"pc": ("pc_", "PC Scarface.exe", "PC "), "xb": ("xb_", "Shared Engine & Gameplay", ""),
          "proto": ("proto_", "Xbox Prototype (Apr 2006)", "Proto "),
          "ps2": ("ps2_", "PS2 SLUS_211.11", "PS2 ")}
+# The PS2 program's code overlays (CEMENT.RCF/Overlays/FrontEnd, portal/tools/ps2_overlay.py): code the
+# program loads at 0x845480 when it needs it. Each has its own lane, as they all share those addresses.
+for _o in ps2_overlay.OVERLAYS:
+    LANES[_o.bin] = (_o.bin + "_", f"PS2 overlay: {_o.label}", "PS2 ")
 # The PS2 game (SLUS_211.11) was built with Metrowerks CodeWarrior for PS2, not Visual C++: its functions are
 # compiled on decomp.me and compared here (portal/tools/ps2_verify.py, docs/PS2.md).
 PS2_FLAGS = "-O3 -lang c++ -str readonly"
@@ -240,7 +245,7 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
         p = binaries.get(b)
         if not p or not Path(p).exists():
             continue
-        if b == "ps2":
+        if ps2_overlay.is_ps2(b):
             continue                            # after the Xbox game: its functions name the PS2 ones
         img = images[b] = BinaryImage(p)
         calls = collect_call_targets(img)
@@ -323,32 +328,44 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
     if p and Path(p).exists():
         import ps2_binary
         images["ps2"] = ps2_binary.Ps2Image(p)
-        tasks += ps2_tasks(images["ps2"], images.get("xb"), tasks, old_by_key, verified_keys,
-                           [int(v, 16) for v in (extra_starts or {}).get("ps2", [])], progress)
+        xbox_tasks = list(tasks)
+        cache: dict = {}
+        tasks += ps2_tasks(images["ps2"], images.get("xb"), xbox_tasks, old_by_key, verified_keys,
+                           [int(v, 16) for v in (extra_starts or {}).get("ps2", [])], progress, cache=cache)
+        for o in ps2_overlay.OVERLAYS:
+            op = binaries.get(o.bin)
+            if not op or not Path(op).exists():
+                continue
+            images[o.bin] = ps2_binary.Ps2Image.with_overlay(images["ps2"], Path(op).read_bytes(), o.file)
+            tasks += ps2_tasks(images[o.bin], images.get("xb"), xbox_tasks, old_by_key, verified_keys,
+                               [int(v, 16) for v in (extra_starts or {}).get(o.bin, [])], progress, b=o.bin,
+                               cache=cache)
     lookalikes.annotate(tasks, images, progress=progress)
     return tasks
 
 
 def ps2_tasks(img, xbox_img, xbox_tasks: List[dict], old_by_key: Dict[str, dict], verified_keys: Set[str],
-              extra_starts: List[int], progress=None) -> List[dict]:
-    """The PS2 game's own functions (the GCC-built Sony libraries linked in are left out). Where a function
-    is the same as one in the Xbox game (portal/tools/ps2_pairing.py), it gets that function's name and a
-    pointer to it, so its C++ can be the starting point."""
+              extra_starts: List[int], progress=None, b: str = "ps2", cache: Optional[dict] = None) -> List[dict]:
+    """The PS2 game's own functions (the GCC-built Sony libraries linked in are left out), or one overlay's
+    (b: its lane, img: the program with that overlay loaded). Where a function is the same as one in the
+    Xbox game (portal/tools/ps2_pairing.py), it gets that function's name and a pointer to it, so its C++
+    can be the starting point."""
     import ps2_binary
     funcs = ps2_binary.find_functions(img, extra_starts)
     pairs = {}
     if xbox_img is not None:
         import ps2_pairing
         if progress:
-            progress("ps2: pairing functions with the Xbox game")
-        pairs = ps2_pairing.pair(img, funcs, xbox_img, xbox_tasks, progress)
+            progress(f"{b}: pairing functions with the Xbox game")
+        pairs = ps2_pairing.pair(img, funcs, xbox_img, xbox_tasks, progress, cache=cache)
+    overlay = ps2_overlay.BY_BIN.get(b)
     xbox_symbol = {t["fva_int"]: t["symbol"] for t in xbox_tasks if t.get("bin") == "xb"}
     out = []
     for va in sorted(funcs):
         f = funcs[va]
         if f.library or f.size < 4:
             continue
-        key = f"ps2:0x{va:08X}"
+        key = f"{b}:0x{va:08X}"
         if key in verified_keys:
             continue
         old = old_by_key.get(key, {})
@@ -364,10 +381,13 @@ def ps2_tasks(img, xbox_img, xbox_tasks: List[dict], old_by_key: Dict[str, dict]
         if f.jump_table:
             hint += "; contains a switch jump table"
         hint += "."
+        if overlay:
+            hint += (f" It is in the {overlay.label} overlay ({overlay.file}), which the game loads at"
+                     f" 0x{img._main.va:08X} when it needs it.")
         if pr:
             hint += f" Same function as {'Xbox 0x%08X' % pr.xbox_va if pr.xbox_va is not None else 'the one named here'}: {pr.why}."
         t = {
-            "id": f"ps2_{va:08X}", "bin": "ps2", "lane": LANES["ps2"][1], "symbol": sym, "match_substr": "",
+            "id": f"{b}_{va:08X}", "bin": b, "lane": LANES[b][1], "symbol": sym, "match_substr": "",
             "va": f"PS2 0x{va:08X}", "fva_int": va, "size": f.size, "flags": PS2_FLAGS, "status": "UNCLAIMED",
             "claimed_by": "", "hint": hint, "code_check": CODE_CHECK,
         }
@@ -377,7 +397,7 @@ def ps2_tasks(img, xbox_img, xbox_tasks: List[dict], old_by_key: Dict[str, dict]
         out.append(t)
     if progress:
         named = sum(1 for t in out if not t["symbol"].startswith("func_"))
-        progress(f"ps2: {len(out):,} game functions ({named:,} named from the Xbox game)")
+        progress(f"{b}: {len(out):,} game functions ({named:,} named from the Xbox game)")
     return out
 
 
@@ -398,6 +418,13 @@ def main() -> int:
             print(f"[!] NOT USED: {problem}")
         elif p.exists():
             binaries[b] = p
+    for o in ps2_overlay.OVERLAYS:
+        p = ps2_overlay.path_for(root / "binaries", o.bin)
+        problem = ps2_overlay.refusal(p, o.bin)
+        if problem:
+            print(f"[!] NOT USED: {problem}")
+        elif p.exists() and "ps2" in binaries:
+            binaries[o.bin] = p
     old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
     reg_path = root / "reports" / "verified_registry.json"
     verified = set(json.loads(reg_path.read_text(encoding="utf-8")).get("entries", {})) if reg_path.exists() else set()
