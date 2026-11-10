@@ -13,7 +13,7 @@
 "versions":[
 {"id":"xbox","label":"Xbox","files":69751,"bytes":3250769794,"only":172,"changed":35210,"shared":34369,"kinds":{"sounds":{"only":169,"changed":32206,"shared":0,"bytes_only":615378032},"textures":{"only":0,"changed":41,"shared":1,"bytes_only":0},"models":{"only":0,"changed":1122,"shared":65,"bytes_only":0},"animations":{"only":0,"changed":1063,"shared":6,"bytes_only":0},"videos":{"only":0,"changed":4,"shared":2,"bytes_only":0},"scripts":{"only":0,"changed":1,"shared":33803,"bytes_only":0},"other":{"only":3,"changed":773,"shared":492,"bytes_only":4732928}}},
 {"id":"pc","label":"PC","files":69626,"bytes":2804165082,"only":10,"changed":35363,"shared":34253,"kinds":{"sounds":{"only":1,"changed":32225,"shared":0,"bytes_only":2366006},"textures":{"only":0,"changed":41,"shared":0,"bytes_only":0},"models":{"only":0,"changed":1139,"shared":48,"bytes_only":0},"animations":{"only":0,"changed":1063,"shared":6,"bytes_only":0},"videos":{"only":0,"changed":4,"shared":2,"bytes_only":0},"scripts":{"only":0,"changed":93,"shared":33727,"bytes_only":0},"other":{"only":9,"changed":798,"shared":470,"bytes_only":2671501}}},
-{"id":"ps2","label":"PS2","files":69543,"bytes":3662542962,"only":39,"changed":35269,"shared":34235,"kinds":{"sounds":{"only":1,"changed":32206,"shared":0,"bytes_only":117376},"textures":{"only":0,"changed":41,"shared":0,"bytes_only":0},"models":{"only":0,"changed":1177,"shared":9,"bytes_only":0},"animations":{"only":1,"changed":1063,"shared":6,"bytes_only":2336},"scripts":{"only":0,"changed":1,"shared":33736,"bytes_only":0},"other":{"only":37,"changed":781,"shared":484,"bytes_only":564434005}}},
+{"id":"ps2","label":"PS2","files":69543,"bytes":3662542962,"only":39,"changed":35269,"shared":34235,"kinds":{"sounds":{"only":1,"changed":32206,"shared":0,"bytes_only":117376},"textures":{"only":0,"changed":41,"shared":0,"bytes_only":0},"models":{"only":0,"changed":1177,"shared":9,"bytes_only":0},"animations":{"only":1,"changed":1063,"shared":6,"bytes_only":2336},"videos":{"only":7,"changed":0,"shared":0,"bytes_only":556257888},"scripts":{"only":0,"changed":1,"shared":33736,"bytes_only":0},"other":{"only":30,"changed":781,"shared":484,"bytes_only":8176117}}},
 {"id":"prototype","label":"Xbox 2006 prototype","files":38765,"bytes":3789895541,"only":3927,"changed":34798,"shared":40,"kinds":{"sounds":{"only":1774,"changed":31280,"shared":0,"bytes_only":652422072},"textures":{"only":4,"changed":32,"shared":1,"bytes_only":1165572},"models":{"only":271,"changed":953,"shared":30,"bytes_only":65816704},"animations":{"only":997,"changed":897,"shared":3,"bytes_only":33797658},"videos":{"only":4,"changed":1,"shared":0,"bytes_only":145330952},"scripts":{"only":465,"changed":843,"shared":1,"bytes_only":2056747},"other":{"only":412,"changed":792,"shared":5,"bytes_only":13818701}}}
 ],
 "only":{
@@ -233,13 +233,13 @@
 ["IRX/PADMAN.IRX",43813,"other",""],
 ["IRX/SDRDRV.IRX",9161,"other",""],
 ["IRX/SIO2MAN.IRX",6641,"other",""],
-["MOVIES.RCF/art/movies/dolby.rmv",3526816,"other",""],
-["MOVIES.RCF/art/movies/dvd.rmv",55199296,"other",""],
-["MOVIES.RCF/art/movies/prologue.rmv",234564800,"other",""],
-["MOVIES.RCF/art/movies/prologue_wide.rmv",239164608,"other",""],
-["MOVIES.RCF/art/movies/radical.rmv",17207648,"other",""],
-["MOVIES.RCF/art/movies/sierra.rmv",3311744,"other",""],
-["MOVIES.RCF/art/movies/thx.rmv",3282976,"other",""],
+["MOVIES.RCF/art/movies/dolby.rmv",3526816,"videos",""],
+["MOVIES.RCF/art/movies/dvd.rmv",55199296,"videos",""],
+["MOVIES.RCF/art/movies/prologue.rmv",234564800,"videos",""],
+["MOVIES.RCF/art/movies/prologue_wide.rmv",239164608,"videos",""],
+["MOVIES.RCF/art/movies/radical.rmv",17207648,"videos",""],
+["MOVIES.RCF/art/movies/sierra.rmv",3311744,"videos",""],
+["MOVIES.RCF/art/movies/thx.rmv",3282976,"videos",""],
 ["SLUS_211.11",7073896,"other",""],
 ["SOUND.RCF/art/sound/rsd/9/93caea0c3208a609.rsd",117376,"sounds","art/sound/localised/english/nis/ps2_finals/pal_mnis_s14_intro_diaz_motors_00.rsd (PS2 ADPCM, 24,000 Hz, stereo)"],
 ["SYSTEM.CNF",56,"other",""]

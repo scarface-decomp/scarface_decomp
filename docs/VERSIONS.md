@@ -25,9 +25,9 @@ they are packed in and upper or lower case.
 | Textures |  |  |  | 4 (1.1 MB) |
 | Models |  |  |  | 271 (62.8 MB) |
 | Animations |  |  | 1 (2.3 KB) | 997 (32.2 MB) |
-| Videos |  |  |  | 4 (138.6 MB) |
+| Videos |  |  | 7 (530.5 MB) | 4 (138.6 MB) |
 | Scripts & text |  |  |  | 465 (2.0 MB) |
-| Other | 3 (4.5 MB) | 9 (2.5 MB) | 37 (538.3 MB) | 412 (13.2 MB) |
+| Other | 3 (4.5 MB) | 9 (2.5 MB) | 30 (7.8 MB) | 412 (13.2 MB) |
 
 ## Different in another version, by type
 
@@ -272,13 +272,13 @@ they are packed in and upper or lower case.
 | `IRX/PADMAN.IRX` | Other | 42.8 KB |  |
 | `IRX/SDRDRV.IRX` | Other | 8.9 KB |  |
 | `IRX/SIO2MAN.IRX` | Other | 6.5 KB |  |
-| `MOVIES.RCF/art/movies/dolby.rmv` | Other | 3.4 MB |  |
-| `MOVIES.RCF/art/movies/dvd.rmv` | Other | 52.6 MB |  |
-| `MOVIES.RCF/art/movies/prologue.rmv` | Other | 223.7 MB |  |
-| `MOVIES.RCF/art/movies/prologue_wide.rmv` | Other | 228.1 MB |  |
-| `MOVIES.RCF/art/movies/radical.rmv` | Other | 16.4 MB |  |
-| `MOVIES.RCF/art/movies/sierra.rmv` | Other | 3.2 MB |  |
-| `MOVIES.RCF/art/movies/thx.rmv` | Other | 3.1 MB |  |
+| `MOVIES.RCF/art/movies/dolby.rmv` | Videos | 3.4 MB |  |
+| `MOVIES.RCF/art/movies/dvd.rmv` | Videos | 52.6 MB |  |
+| `MOVIES.RCF/art/movies/prologue.rmv` | Videos | 223.7 MB |  |
+| `MOVIES.RCF/art/movies/prologue_wide.rmv` | Videos | 228.1 MB |  |
+| `MOVIES.RCF/art/movies/radical.rmv` | Videos | 16.4 MB |  |
+| `MOVIES.RCF/art/movies/sierra.rmv` | Videos | 3.2 MB |  |
+| `MOVIES.RCF/art/movies/thx.rmv` | Videos | 3.1 MB |  |
 | `SLUS_211.11` | Other | 6.7 MB |  |
 | `SOUND.RCF/art/sound/rsd/9/93caea0c3208a609.rsd` | Sounds | 114.6 KB | art/sound/localised/english/nis/ps2_finals/pal_mnis_s14_intro_diaz_motors_00.rsd (PS2 ADPCM, 24,000 Hz, stereo) |
 | `SYSTEM.CNF` | Other | 56 bytes |  |
