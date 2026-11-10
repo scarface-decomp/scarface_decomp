@@ -99,8 +99,13 @@ matched too. `-str readonly` is what puts string literals where the game has the
   shape that makes the compiler do it, tell everyone.
 * **Thunks.** Short `j` stubs at the start of some functions are made by the compiler for classes with more
   than one base class; they come from the class definitions, not from a function of their own.
-* **Overlays.** The game loads extra code from `Overlays/` on the disc at run time. Only `SLUS_211.11`
-  itself is in the queue.
+* **Overlays.** The game loads extra code from `CEMENT.RCF/Overlays/FrontEnd/` at run time: six
+  CodeWarrior overlays (pause menu, exotics shop, pop-ups, mini-games) with about 690 functions between
+  them. Use the `...f.bin` builds, the ones that fit `SLUS_211.11` (the `r` and `t` builds belong to other
+  builds of the program); `portal/tools/ps2_overlay.py --elf FOLDER` turns each into an ELF file that
+  Ghidra, IDA and objdump open at its load address, `0x845480`. They all share that address, so open
+  each one on its own next to `SLUS_211.11`. Layout in [FORMATS.md](FORMATS.md#ps2-code-overlays). Only
+  `SLUS_211.11` itself is in the queue so far.
 * **One instruction form.** `sqrt.s` reads its operand from a field GNU as doesn't write, so in listings
   for decomp.me it is written as `.word`. The bytes are the same.
 
@@ -110,6 +115,7 @@ matched too. `-str readonly` is what puts string literals where the game has the
 | :--- | :--- |
 | `portal/tools/ps2_mips.py` | MIPS R5900 decoder and disassembler (GNU syntax) |
 | `portal/tools/ps2_binary.py` | reading the program, finding functions, address fields, listings for decomp.me |
+| `portal/tools/ps2_overlay.py` | the front-end overlays: their headers, which build fits, ELF files for Ghidra and IDA |
 | `portal/tools/ps2_pairing.py` | pairing PS2 functions with Xbox ones (text and virtual tables) |
 | `portal/tools/ps2_verify.py` | reading decomp.me's objects, the byte and address checks, decomp.me calls |
 | `portal/verify.py --bin ps2` | the same check from the command line (`--scratch SLUG` to compile through a given scratch) |

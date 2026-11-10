@@ -493,6 +493,8 @@ def p3d(*children):
 def test_sniff_says_what_a_file_is_and_how_good():
     assert GA.sniff("a.rsd", b"RSD6OOGV" + struct.pack("<3I", 2, 16, 48000) + bytes(20)) == {"codec": "OOGV", "ch": 2, "rate": 48000}
     assert GA.sniff("m.bik", b"BIKi" + bytes(16) + struct.pack("<II", 1280, 720)) == {"w": 1280, "h": 720}
+    assert GA.sniff("m.rmv", b"rmvps212" + struct.pack("<HH", 640, 336)) == {"w": 640, "h": 336}
+    assert GA.kind_of("MOVIES.RCF/art/movies/m.rmv") == "videos"
     model = p3d(chunk(0x10000, b"mesh"), texture(b"skin", 256, 128, 32))
     assert GA.sniff("art/car.p3d", model) == {"p3d": "models", "tex": 256 * 128, "bits": 256 * 128 * 32}
     assert GA.sniff("frontend/hud.p3d", p3d(texture(b"hud", 64, 64, 8)))["p3d"] == "textures"

@@ -109,7 +109,7 @@ KINDS = (
     ("textures", "Textures", (".dds", ".tga", ".png", ".bmp", ".jpg", ".xpr", ".tm2", ".tx2")),
     ("models", "Models", (".p3d",)),             # a .p3d holding no mesh is sorted by what it does hold
     ("animations", "Animations", ()),
-    ("videos", "Videos", (".bik", ".xmv", ".pss", ".wmv", ".sfd", ".mpg", ".m2v")),
+    ("videos", "Videos", (".bik", ".rmv", ".xmv", ".pss", ".wmv", ".sfd", ".mpg", ".m2v")),
     ("scripts", "Scripts & text", (".cso", ".dso", ".cs", ".ds", ".dtr", ".fsc", ".txt", ".xml", ".ini",
                                    ".cfg", ".csv")),
 )
@@ -188,7 +188,9 @@ def _sniff_wants(path: str, size: int) -> int:
     low = path.lower()
     if low.endswith(".p3d"):
         return -1 if size <= P3D_SNIFF_MAX else 0
-    return RSD_SNIFF if low.endswith(".rsd") else 64 if low.endswith(".bik") else 0
+    if low.endswith(".rsd"):
+        return RSD_SNIFF
+    return {".bik": 64, ".rmv": 16}.get(low[-4:], 0)                # a video's header
 
 
 def sniff(path: str, data: bytes) -> Optional[dict]:
@@ -212,6 +214,9 @@ def sniff(path: str, data: bytes) -> Optional[dict]:
             return out
         if low.endswith(".bik") and data[:3] == b"BIK" and len(data) >= 28:
             w, h = struct.unpack_from("<II", data, 20)
+            return {"w": w, "h": h}
+        if low.endswith(".rmv") and data[:8] == b"rmvps212" and len(data) >= 12:     # the PS2's movies
+            w, h = struct.unpack_from("<HH", data, 8)
             return {"w": w, "h": h}
         if low.endswith(".p3d"):
             return _p3d_info(path, data)

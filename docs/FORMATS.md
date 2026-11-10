@@ -12,13 +12,15 @@ All numbers are little-endian unless a section says otherwise. Offsets are in he
 | [Disc images](#disc-images-and-installers) | `.iso`, `.xiso` | all | `portal/tools/game_assets.py`, `game_files.py` |
 | [PC installer](#disc-images-and-installers) | `SCARFACE.MSI`, `Data1.cab` | PC | `msi_reader.py`, `ms_cab.py` |
 | [Cement archives](#cement-archives-rcf) | `.rcf` | all | `rcf.py`, `game_assets.py` |
-| [Pure3D](#pure3d-p3d) | `.p3d` | all | `game_assets.py` (contents), `media.py` (pictures) |
+| [Pure3D](#pure3d-p3d) | `.p3d` | all | `p3d.py` (chunks, models to .obj), `game_assets.py` (contents), `media.py` (pictures) |
 | [Pictures in Pure3D](#pictures) | PNG, DDS, P3DI | PC, Xbox, PS2 | `media.py` |
 | [Sounds](#sounds-rsd) | `.rsd` | all | `game_assets.py` (facts), `media.py` (playing) |
-| [Videos](#videos-bik) | `.bik`, `.rmv` | Xbox and PC (Bink), PS2 (`.rmv`) | `game_assets.py` (Bink picture size) |
+| [Videos](#videos-bik) | `.bik` | Xbox and PC (Bink) | `game_assets.py` (Bink picture size) |
+| [PS2 movies](#ps2-movies-rmv) | `.rmv` | PS2 | `rmv.py` (to an `.ipu` picture and a `.wav`) |
 | [Compiled scripts](#scripts-cso-dso-dtr) | `.cso`, `.dso` | all | `torque_dso.py` and friends ([SCRIPTS.md](SCRIPTS.md)) |
 | [AI decision trees](#scripts-cso-dso-dtr) | `.dtr` | all | `dtr_format.py` |
 | [Programs](#programs) | `default.xbe`, `Scarface.exe`, `SLUS_211.11` | all | `sf_binaries.py`, `ps2_binary.py` |
+| [PS2 code overlays](#ps2-code-overlays) | `Overlays/FrontEnd/*.bin` | PS2 | `ps2_overlay.py` |
 
 Something missing or wrong? Open an issue or a pull request. A format counts as described here once a
 tool in `portal/tools/` reads it and the tests check it on made-up files.
@@ -83,6 +85,9 @@ A reader can skip any chunk it doesn't know by its third size. Ids the portal us
 | `0x00019002` | Image Data | u32 size, then the picture in the format below |
 | `0x00121000` | Animation | animation data (the file is filed under Animations when it has no mesh) |
 
+`portal/tools/p3d.py FILE.p3d` prints any file's chunk tree with every chunk below named and its fields
+read, and `--obj OUT.obj` writes its meshes and skins for Blender and other 3D programs.
+
 ### Pictures
 
 The Image chunk's *format* says how its Image Data is stored, and it differs per version:
@@ -114,6 +119,96 @@ column tables are the ones in Sony's GS manual (and in emulators such as PCSX2);
 written out. Pictures that aren't square are stored row by row. All 66 PS2 pictures in the samples
 checked follow these rules and match the PC versions of the same textures.
 
+### Models: meshes and skins
+
+Most chunks keep the layouts Radical used in *The Simpsons: Hit & Run* (see the Donut Team's notes in the
+credits below), with a newer primitive group and skeleton. Text is a u8 length, padded so the next field
+stays 4-byte aligned, then the characters with NULs after them.
+
+| Id | Chunk | Data, then sub-chunks |
+| :--- | :--- | :--- |
+| `0x00010000` | Mesh | name, u32 version, u32 number of primitive groups |
+| `0x00010001` | Skin | name, u32 version (3), skeleton name, u32 number of primitive groups |
+| `0x00010020` | Primitive Group | u32 version, shader name, u32 primitive type, u32 vertex type, u32 vertices, u32 indices, u32 matrices, u32 *memory image* (1 when the vertices are in a ready-made buffer, below), u32 1, u32 0, u32 0 |
+| `0x00010005` | Position List | u32 count, count x 3 floats |
+| `0x00010006` | Normal List | u32 count, count x 3 floats |
+| `0x00010010` | Packed Normal List | u32 count, one byte per vertex, probably an index into a fixed table of 256 directions: vertices with the same byte have float normals within about 12 degrees of each other |
+| `0x00010007` | UV List | u32 count, u32 channel, count x 2 floats |
+| `0x00010008` | Colour List | u32 count, a u32 colour per vertex |
+| `0x0001000A` | Index List | u32 count, u32 indices |
+| `0x0001000B` | Matrix List | u32 count, four one-byte matrix palette indices per vertex, **last byte first**: byte 3 goes with the first weight, byte 2 with the second, and so on |
+| `0x0001000C` | Weight List | u32 count, 3 floats per vertex (the fourth weight is 1 minus the others) |
+| `0x0001000D` | Matrix Palette | u32 count, u32 skeleton joint numbers: the matrix list's indices point into this |
+| `0x00010011` | Vertex Shader | a name (empty in every file seen) |
+| `0x00010012` | Memory Image Vertex List | u32, u32, u32 size, then a vertex buffer as the console uses it (below) |
+| `0x00010013` | Memory Image Index List | u32, u32, u32 size, then u16 indices (Xbox) |
+| `0x00010014` | Memory Image Vertex Description | seven u32 (PS2 skins) |
+| `0x00010003` | Bounding Box | 3 floats minimum, 3 floats maximum |
+| `0x00010004` | Bounding Sphere | 3 floats centre, float radius |
+| `0x00010017` | Render Status | u32 (1 in every file seen) |
+| `0x00010019` | Shadow Skin | probably a low-detail copy of the skin for shadows: position, matrix and weight lists and a `0x0001001B` chunk |
+
+*Primitive type*: 0 triangle list, 1 triangle strip (one strip, joined by repeated indices), 2 line list,
+3 line strip, 4 points. *Vertex type* is a set of bits: `0x2000` position, `0x0010` normal, `0x0020`
+colour, `0x0080` matrix indices, `0x0100` weights, and the low four bits the number of UV sets (`0x2011`:
+positions, normals and one UV set; `0x2191`: a skin's). The Donut Team's list has no names for
+`0x00010012` to `0x00010014`, `0x00010019`, `0x00010020`, `0x00023000` or `0x00023001`; the names here are
+descriptive ones of ours.
+
+The same model is stored three ways:
+
+* **PC**: plain lists (positions, normals, packed normals, UVs, indices, and for skins the matrix list,
+  weight list and palette).
+* **Xbox**: a memory image for meshes. `0x00010012` holds the vertices as the Xbox's graphics chip reads
+  them, each starting with its position as 3 floats (24 bytes a vertex for `0x2011`: position, a packed
+  normal, UV), and `0x00010013` holds u16 indices. Skins keep the PC's plain lists.
+* **PS2**: only a memory image: `0x00010012` is a ready-made VIF packet for the vector unit's
+  microprogram. The vertices come in batches of up to 54. Each batch starts with a 4-quadword header (its
+  first word is the vertex count; the third quadword holds the scale of the positions and of the normals,
+  1/127; the fourth is a GIF tag), then each vertex takes five quadwords, one per attribute: UVs as 2
+  floats, the normal as 3 signed bytes, the position as 3 signed 16-bit numbers (times the scale), and for
+  skins four matrix offsets (palette index x 4) and four 16-bit weights (4096 = 1). The index count is 0:
+  each batch is drawn as it comes.
+
+### Skeletons
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x00023000` | Skeleton | name, u32 version, u32 number of joints, u32 0, u32 0; the joints follow as sub-chunks |
+| `0x00023001` | Skeleton Joint | name, u32 parent (its own number for the first), then a 4x4 float matrix: the rest pose relative to the parent, rows, translation in the last row |
+
+A joint's place in the world is its matrix times its parent's (row vectors). *The Simpsons: Hit & Run*
+used `0x4500` and `0x4501` for these.
+
+### Animations
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x00121000` | Animation | u32 version, name, 4 characters type (`PTRN`: moves a skeleton), float frames, float frame rate (30), u32 cyclic |
+| `0x00121006` | Animation Header | u32 version, u32 number of groups; holds Channel Counts |
+| `0x00121007` | Animation Channel Count | u32 version, u32 the id of a channel type, u32 how many channels of it, then u16 key counts, one per channel |
+| `0x00121002` | Animation Group List | u32 version, u32 number of groups |
+| `0x00121001` | Animation Group | u32 version, name (a joint's name), u32 group id (the joint's number), u32 number of channels |
+| `0x00121104` | Vector3DOF Channel | u32 version, 4 characters parameter (`TRAN`), u32 keys, u16 frame numbers, 3 floats per key |
+| `0x00121102`, `0x00121103` | Vector1DOF, Vector2DOF Channel | u32 version, parameter, u16 mapping (which components move), 3 floats constants (the rest), u32 keys, u16 frames, 1 or 2 floats per key |
+| `0x00121105` | Quaternion Channel | u32 version (1), parameter (`ROT`), u32 keys, u16 frames, 4 floats per key: x, y, z, w |
+| `0x00121112` | Compressed Quaternion Channel2 | the same header, then x, y, z as signed 16-bit numbers over 32,767 (PS2) |
+| `0x00121114` | no name known (`p3d.py` says Byte Quaternion Channel) | the same header, then x, y, z as signed bytes over 127 (PS2; about 1% precision) |
+| `0x00121110` | Channel Interpolation Mode | u32 version, u32 interpolate (-1: yes) |
+
+In the two PS2 forms the rotation is turned so that w is not negative, and w is worked out as
+`sqrt(1 - x² - y² - z²)`. The PS2 also keeps fewer keys (in `GEN_Conv_Motion_Toward.p3d` the PC has 23
+rotation keys for the pelvis, the PS2 18); at the keys they share, the rotations agree within the stored
+precision.
+
+### Ids seen but not worked out
+
+`0x00010021` (u32 0, then seven u32: 32 on the PC and Xbox, 8 or 16 on the PS2, perhaps the bits each
+kind of vertex data is stored in), `0x0001001D` (u32 1, 3, 1, 0 in every mesh), `0x00122000` (u32 0 and a
+float, 0.5 or 0), `0x00121008` (u32 2), `0x00121402` (u32 0, 0), `0x00123000` with `0x00123001`,
+`0x08020002` to `0x0802000E` (state props in *Hit & Run*), `0x088xxxxx`, `0x099001xx`, `0x01000001`,
+`0x0100500A`.
+
 ## Sounds (`.rsd`)
 
 Radical sound files. Most sit at `art/sound/rsd/<x>/<16 hex digits>.rsd`, named by a hash, but each one
@@ -144,8 +239,29 @@ frame size, u32 frame count again, then u32 width and u32 height at `0x14` and `
 1280x720, and the Xbox program carries RAD's Bink library (its `BINK*` sections). Play them with RAD
 Video Tools or a player that supports Bink (ffmpeg reads Bink 1).
 
-The PS2 has no Bink videos: its movies are `.rmv` files in `MOVIES.RCF` (`prologue.rmv`, `radical.rmv`,
-...), a format not described yet.
+The PS2 has no Bink videos: its movies are `.rmv` files (below).
+
+## PS2 movies (`.rmv`)
+
+Radical's "RadMovie" files in `MOVIES.RCF` (`prologue.rmv`, `radical.rmv`, `sierra.rmv`, ...): a 2 KB
+header, the picture as a raw PS2 IPU stream, then the sound as an ordinary `.rsd` file.
+
+```
+0x00  "rmvps212"
+0x08  u16 width, u16 height, u32 frames, u32 file size
+0x14  u32 where the picture starts (0x800)
+0x18  u32 number of sound tracks (1 in every movie on the disc)
+0x1C  16 x u32  where each sound track starts (the picture ends at the first)
+0x5C  16 x u32  each sound track's size
+0x9C  u32 frames per second x 100 (2997)
+      0xAD bytes to 0x800, and after the picture to the next 2 KB
+```
+
+The pictures are 640x336, or 640x240 for `prologue.rmv`, at 29.97 frames a second, and the sound is a
+stereo `VAG` `.rsd` at 48,000 Hz. The IPU stream is what the PS2's IPU (its MPEG-2 decoding chip) reads:
+the same as Sony's `.ipu` files without their 16-byte header (`ipum`, u32 size, u16 width, u16 height,
+u32 frames), which FFmpeg reads. `portal/tools/rmv.py` writes the `.ipu` file (with that header) and the
+sound as `.rsd` and `.wav`, and prints the FFmpeg command that turns them into an `.mp4`.
 
 ## Scripts (`.cso`, `.dso`, `.dtr`)
 
@@ -167,6 +283,31 @@ task's class.
 | `Scarface.exe` | PC 1.00.2 | Windows PE, x86, MSVC 7.1 |
 | `SLUS_211.11` | PS2 | ELF for the Emotion Engine (MIPS R5900), CodeWarrior; see [PS2.md](PS2.md) |
 
+### PS2 code overlays
+
+`CEMENT.RCF/Overlays/FrontEnd/*.bin` are more program code: the front end's pause menu, exotics shop,
+pop-ups and mini-game screens, which `SLUS_211.11` loads when it needs them. They are CodeWarrior overlay
+files, copied whole (header included) to their load address:
+
+```
+0x00  "MWo3"
+0x04  u32 overlay number (6 to 11)
+0x08  u32 load address of byte 0 of the file
+0x0C  u32 code size, u32 data size, u32 bss size: the code starts at 0x40 (with 0x40 zero bytes first),
+      the data follows it, and header + code + data is the whole file
+0x18  u32 start and end address of the list of static constructors to call after loading
+0x20  the overlay's name, NUL-terminated (32 bytes)
+```
+
+Each comes in three builds, `<name>f.bin`, `r.bin` and `t.bin`. Only the **f** ones fit the retail
+program: all of their 3,097 calls into it land on the start of one of its functions (the r and t builds
+hit almost none and load at other addresses), and `SLUS_211.11` itself has one empty segment for each at
+`0x845480`, exactly the size of the f file. The r and t builds were made for other builds of the program,
+probably Radical's "release" and "tune" configurations. The six f overlays hold about 690 functions that
+are not in `SLUS_211.11`. `portal/tools/ps2_overlay.py` shows the headers, counts the calls that land on
+functions (`--check binaries/SLUS_211.11`) and writes each overlay as an ELF file Ghidra, IDA or objdump
+open at the right address (`--elf FOLDER`).
+
 [GAME_VERSIONS.md](GAME_VERSIONS.md) lists the exact copies (with their SHA-256) the project works from.
 
 ## Not yet described
@@ -175,7 +316,23 @@ Anything the portal's Game files list puts under *Other* is a format nobody has 
 open one in a hex editor, compare the versions (the [version differences](VERSIONS.md) help), and add
 what you find. Known gaps:
 
-* the PS2's `.rmv` movies and its front-end overlays (`CEMENT.RCF/Overlays/FrontEnd/*.bin`, an `f`, `r` and `t` file for
-  each);
-* the prototype's `RADP` sounds;
-* the Pure3D chunks for meshes, skins and animations (only their ids are used so far).
+* the Pure3D ids under [Ids seen but not worked out](#ids-seen-but-not-worked-out);
+* the PS2's vector-unit packets in full (which attributes plain meshes carry, how a batch's strip is
+  started), so that `p3d.py --obj` can draw PS2 models too;
+* the seven u32 of `0x00010014` and the two u32 before each memory image's size.
+
+## Credits and sources
+
+* [FFmpeg](https://ffmpeg.org/): James Almer's `adpcm_ima_rad` decoder and `rsd` demuxer (2013), which
+  play `RADP` sounds; `media.py`'s decoder gives the same samples on the prototype's files. Paul B Mahol's
+  IPU decoder and demuxer (2020) play the movies' pictures once `rmv.py` has written them out.
+* The [Donut Team](https://docs.donutteam.com/docs/Pure3DFiles/ChunkTypes/AllChunkTypes)'s Pure3D chunk
+  list, and the *Hit & Run* chunk work behind Proddy's (Hampo's)
+  [NetP3DLib](https://github.com/Hampo/NetP3DLib) and [LuaP3DLib](https://github.com/Hampo/LuaP3DLib)
+  (with chunk structures by Lucas Cardellini): the names of most chunks, and the older layouts these
+  build on.
+* The PS2's VIF command set, as documented for emulators such as PCSX2, to read the vector-unit packets.
+
+The rest was worked out from the game files and checked against the other versions of the same files: the
+`RADP` speech against the PC's Ogg Vorbis copies, the PS2's stereo music and movie sound against the PC's,
+the movies' pictures by decoding them, and the PS2 rotations against the PC's.
