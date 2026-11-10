@@ -22,7 +22,7 @@ PROG = json.loads((FIX / "progress.json").read_text(encoding="utf-8"))
 
 
 # Everything the Cloudflare build serves from docs/ besides data/.
-STATIC = ("index.html", "404.html", "versions.html", "feed.xml", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
+STATIC = ("index.html", "404.html", "versions.html", "function.html", "feed.xml", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
           "robots.txt", "sitemap.xml")
 SITE_URL = "https://scarface-decomp.pages.dev/"
 
@@ -135,7 +135,7 @@ def test_function_browser_search_filter_and_code(site, browser):
     pg.click("#fn-list .fn-head")
     code = pg.text_content("#fn-list .fn pre")
     assert "DriveThread::vfunc_00" in code and "ResolveDescA" in code
-    link = pg.get_attribute("#fn-list .fn-links a", "href")
+    link = pg.get_attribute("#fn-list .fn-links a:not(.own)", "href")
     assert link.startswith("https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/")
 
     pg.fill("#q", "")
@@ -175,7 +175,7 @@ def test_mobile_layout(site, browser):
     pg.fill("#q", "DriveThread::vfunc_00")
     pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
     pg.click("#fn-list .fn-head")
-    box = pg.locator("#fn-list .fn-links a").bounding_box()
+    box = pg.locator("#fn-list .fn-links a:not(.own)").bounding_box()
     assert box["x"] + box["width"] <= 375, "the GitHub link runs off the screen"
     ctx.close()
 
@@ -487,3 +487,39 @@ def test_matched_over_time_chart(tmp_path, browser):
         ctx.close()
     finally:
         srv.shutdown()
+
+
+def test_function_pages(site, browser):
+    """Each rebuilt function has its own page: its C++ tidied for reading (or exactly as verified), what it
+    uses, its neighbours, and a link from the main page's list."""
+    _, url = site
+    ctx, pg = open_page(browser, url)
+    pg.wait_for_selector("#fn-list .fn")
+    pg.fill("#q", "CollisionBehaviourTypeGroup::vfunc_00")
+    pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 function')")
+    pg.click("#fn-list .fn-head")
+    assert pg.get_attribute("#fn-list .fn-links a.own", "href") == "function.html?f=xb%3A0x000123B0"
+    pg.click("#fn-list .fn-links a.own")
+    pg.wait_for_selector("#fn:not([hidden])")
+    assert pg.text_content("#name") == "vfunc_00" and pg.text_content("#cls") == "CollisionBehaviourTypeGroup::"
+    assert pg.title().startswith("CollisionBehaviourTypeGroup::vfunc_00 (Xbox)")
+    facts = dict(pg.eval_on_selector_all("#facts div", "ds => ds.map(d => [d.querySelector('dt').textContent, d.querySelector('dd').textContent])"))
+    assert facts["Address"] == "0x000123B0" and facts["Size"] == "6 bytes" and facts["Version"] == "Xbox (default.xbe)"
+    lines = pg.eval_on_selector_all("#code tr td:last-child", "ts => ts.map(t => t.textContent)")
+    assert lines == ['extern "C" char DAT_004191A0;', 'void* __cdecl sub_000123B0(void) {', '    return &DAT_004191A0;', '}']
+    assert pg.get_attribute("#view-tidy", "aria-pressed") == "true"
+    pg.click("#view-exact")
+    assert pg.locator("#code tr").count() == 1 and "Exactly the text" in pg.text_content("#view-note")
+    assert pg.text_content("#uses li code") == "DAT_004191A0"
+    nxt = pg.get_attribute("#pager a.next", "href")
+    assert nxt.startswith("function.html?f=xb%3A")
+    pg.click("#pager a.next")
+    pg.wait_for_function("document.getElementById('name').textContent !== 'vfunc_00'")
+    pg.goto(url + "function.html?f=xb:0xDEADBEEF")
+    pg.wait_for_selector("#missing:not([hidden])")
+    assert not pg.errors, pg.errors
+    ctx.close()
+    ctx, pg = open_page(browser, url + "function.html?f=xb%3A0x000123B0", viewport=(375, 800))
+    pg.wait_for_selector("#fn:not([hidden])")
+    assert pg.evaluate("document.documentElement.scrollWidth") <= 376                 # nothing wider than a phone
+    ctx.close()

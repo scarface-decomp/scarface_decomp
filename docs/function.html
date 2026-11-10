@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A rebuilt function | Scarface decomp</title>
+  <meta name="description" content="One function of Scarface: The World Is Yours, rebuilt in C++ that compiles to exactly the same bytes as the original." />
+  <meta name="theme-color" content="#0A0A0A" />
+  <meta property="og:title" content="A rebuilt function of Scarface: The World Is Yours" />
+  <meta property="og:description" content="Rebuilt by fans in C++ that compiles to exactly the same bytes as the original game." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://scarface-decomp.pages.dev/og.jpg" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's look (index.html): black, white and blood red. */
+    :root {
+      --black: #0A0A0A; --panel: #121212; --white: #F2EFEA; --grey: #A6A6A6; --line: #2A2A2A;
+      --red: #EA444D; --blood: #B5121B; --hot: #FF3B45;
+      --title: 'Marcellus', 'Friz Quadrata', 'Optima', Georgia, serif;
+      --sans: 'Josefin Sans', 'Avant Garde', 'Century Gothic', 'Futura', 'Segoe UI', sans-serif;
+      --mono: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace;
+      /* code colours: muted on black, each readable (4.5:1 or more) */
+      --c-kw: #E58A8F; --c-type: #8FB8E8; --c-str: #B9D98C; --c-num: #E8C07A; --c-com: #8C8C8C; --c-pre: #C9A0E8; --c-fn: #F2EFEA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--red); text-underline-offset: 4px; }
+    a:hover { color: var(--hot); }
+    :focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+    code { font-family: var(--mono); font-size: 0.86em; }
+    [hidden] { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,10,10,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+    .brand { font-family: var(--title); font-size: 1.02rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); text-decoration: none; white-space: nowrap; }
+    .nav { display: flex; gap: 8px; }
+    .nav a { color: var(--white); text-decoration: none; font-size: 0.9rem; border: 1px solid #3A3A3A; border-radius: 2px; padding: 6px 14px; white-space: nowrap; }
+    .nav a:hover { border-color: var(--white); color: var(--white); }
+    main .wrap { padding-top: 40px; padding-bottom: 80px; }
+    .crumbs { font-size: 0.88rem; color: var(--grey); margin-bottom: 18px; }
+    .crumbs a { color: var(--grey); }
+    .crumbs a:hover { color: var(--white); }
+    .cls { font-family: var(--mono); color: var(--grey); font-size: 0.95rem; overflow-wrap: anywhere; }
+    h1 { font-family: var(--mono); font-weight: 600; font-size: clamp(1.4rem, 3.6vw, 2.1rem); line-height: 1.25; overflow-wrap: anywhere; margin-bottom: 6px; }
+    .verified { display: inline-flex; align-items: center; gap: 8px; color: var(--grey); font-size: 0.95rem; margin-bottom: 26px; }
+    .verified b { color: var(--white); font-weight: 600; }
+    .verified svg { flex: none; }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px 24px; margin-bottom: 30px; }
+    .facts div { border-left: 2px solid var(--line); padding-left: 12px; }
+    .facts dt { color: var(--grey); font-size: 0.82rem; }
+    .facts dd { font-size: 0.98rem; overflow-wrap: anywhere; }
+    .note { border-left: 3px solid var(--blood); padding: 12px 16px; background: rgba(255,255,255,0.03); margin-bottom: 26px; color: var(--white); }
+    .note b { display: block; color: var(--grey); font-weight: 400; font-size: 0.82rem; }
+    .code-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .code-head h2 { font-size: 1.05rem; font-weight: 600; }
+    .btns { display: flex; gap: 8px; }
+    .btn { font: 600 0.82rem var(--sans); letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 14px 5px; border-radius: 2px; border: 1px solid #4A4A4A; background: none; color: var(--white); cursor: pointer; text-decoration: none; }
+    .btn:hover { border-color: var(--white); color: var(--white); }
+    .code { background: #050505; border: 1px solid var(--line); border-radius: 2px; overflow-x: auto; font-family: var(--mono); font-size: 0.86rem; line-height: 1.65; }
+    .code table { border-collapse: collapse; min-width: 100%; }
+    .code td { padding: 0 14px; vertical-align: top; white-space: pre; }
+    .code td.n { width: 1%; color: #5E5E5E; text-align: right; user-select: none; padding-right: 10px; border-right: 1px solid var(--line); }
+    .code tr:first-child td { padding-top: 12px; }
+    .code tr:last-child td { padding-bottom: 12px; }
+    .tk-kw { color: var(--c-kw); }
+    .tk-type { color: var(--c-type); }
+    .tk-str { color: var(--c-str); }
+    .tk-num { color: var(--c-num); }
+    .tk-com { color: var(--c-com); font-style: italic; }
+    .tk-pre { color: var(--c-pre); }
+    .tk-ref { text-decoration: underline dotted #6A6A6A; text-underline-offset: 3px; }
+    a.tk-ref { color: inherit; text-decoration: underline solid var(--blood); }
+    a.tk-ref:hover { color: var(--hot); }
+    .how { color: var(--grey); font-size: 0.9rem; margin-top: 10px; }
+    .views { display: inline-flex; border: 1px solid #4A4A4A; border-radius: 2px; margin-right: 6px; }
+    .views button { font: 600 0.78rem var(--sans); letter-spacing: 0.04em; padding: 6px 12px 4px; background: none; border: none; color: var(--grey); cursor: pointer; }
+    .views button[aria-pressed="true"] { background: rgba(181,18,27,0.25); color: var(--white); }
+    .refs li.s { display: block; color: var(--grey); }
+    .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 34px; margin-top: 40px; }
+    .cols h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+    .cols p { color: var(--grey); font-size: 0.9rem; margin-bottom: 10px; }
+    .refs { list-style: none; border-top: 1px solid var(--line); }
+    .refs li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 8px 2px 6px; border-bottom: 1px solid var(--line); font-size: 0.9rem; }
+    .refs li code { overflow-wrap: anywhere; }
+    .refs li .s { color: var(--grey); font-size: 0.84rem; white-space: nowrap; }
+    .refs li .w { grid-column: 1 / -1; color: var(--grey); font-size: 0.84rem; }
+    .pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.92rem; }
+    .pager a { max-width: 48%; overflow-wrap: anywhere; }
+    .pager .next { text-align: right; margin-left: auto; }
+    .pager small { display: block; color: var(--grey); }
+    .empty { padding: 60px 6px; color: var(--grey); text-align: center; }
+    footer { border-top: 3px solid var(--blood); }
+    footer .wrap { padding-top: 30px; padding-bottom: 44px; color: var(--grey); font-size: 0.86rem; text-align: center; }
+    @media (max-width: 760px) {
+      .wrap { padding: 0 18px; }
+      .cols { grid-template-columns: minmax(0, 1fr); }
+      .nav a.opt { display: none; }
+      .code-head { flex-wrap: wrap; }
+    }
+    @media (max-width: 480px) {
+      .brand { font-size: 0.88rem; letter-spacing: 0.1em; }
+      .nav a { padding: 5px 10px; font-size: 0.84rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="./">Scarface Decomp</a>
+      <nav class="nav" aria-label="Site">
+        <a href="./#functions">All the code</a>
+        <a class="opt" href="./#help">Start helping</a>
+        <a href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <div id="loading" class="empty">Loading…</div>
+      <div id="missing" class="empty" hidden>
+        <p>No rebuilt function has that address (yet).</p>
+        <p style="margin-top:10px"><a href="./#functions">See all the rebuilt functions</a> or <a href="./#help">rebuild this one</a>.</p>
+      </div>
+
+      <article id="fn" hidden>
+        <nav class="crumbs" aria-label="You are here"><a href="./">Main page</a> › <a href="./#functions">The code</a> › <span id="crumb-ver"></span></nav>
+        <div class="cls" id="cls"></div>
+        <h1 id="name"></h1>
+        <p class="verified"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="#B5121B"/><path d="M5 9.4l2.6 2.5L13 6.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Compiles to <b>exactly the same bytes</b> as the original game, checked with the game's own compiler.</span></p>
+        <dl class="facts" id="facts"></dl>
+        <div class="note" id="note" hidden><b>Note from whoever rebuilt it</b><span id="note-text"></span></div>
+
+        <div class="code-head">
+          <h2>The C++</h2>
+          <div class="btns">
+            <div class="views" role="group" aria-label="How to show it">
+              <button type="button" id="view-tidy" aria-pressed="true">Tidied</button>
+              <button type="button" id="view-exact" aria-pressed="false">As verified</button>
+            </div>
+            <button class="btn" type="button" id="copy">Copy</button>
+            <a class="btn" id="download" download>Download</a>
+          </div>
+        </div>
+        <div class="code" id="code" tabindex="0" role="region" aria-label="The function's C++"></div>
+        <p class="how" id="view-note"></p>
+        <p class="how">Written by a person, not taken from the game: the project shares only the C++ people write, never the game's own
+          code. Comments and names don't change the bytes it compiles to, so they can always be made clearer. Underlined names are
+          other functions and data; the solid ones are rebuilt too and open their page.</p>
+
+        <div class="cols">
+          <section aria-labelledby="h-uses">
+            <h2 id="h-uses">What it uses</h2>
+            <p>Other functions and data this one refers to.</p>
+            <ul class="refs" id="uses"></ul>
+          </section>
+          <section aria-labelledby="h-used">
+            <h2 id="h-used">Used by</h2>
+            <p>Rebuilt functions that refer to this one.</p>
+            <ul class="refs" id="used"></ul>
+          </section>
+        </div>
+
+        <nav class="pager" aria-label="Neighbouring functions" id="pager"></nav>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">Source code only: no game files. Not affiliated with the game's developer, publishers or rights holders.
+      Code licensed under GPL-3.0-or-later.</div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+    var REPO = 'scarface-decomp/scarface_decomp', BRANCH = 'main';
+    var RAW = 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/reports/';
+    var SOURCES = ['data/', RAW];
+    var BIN = { xb: 'Xbox', pc: 'PC 1.00.2', proto: 'Xbox prototype (April 2006)', ps2: 'PS2' };
+    var FILE = { xb: 'default.xbe', pc: 'Scarface.exe', proto: 'game.xbe', ps2: 'SLUS_211.11' };
+    var $ = function (id) { return document.getElementById(id); };
+    var fmt = function (n) { return Number(n || 0).toLocaleString('en-US'); };
+    function el(tag, text, cls) {
+      var e = document.createElement(tag);
+      if (text !== undefined) e.textContent = text;
+      if (cls) e.className = cls;
+      return e;
+    }
+    function getJson(name) {
+      var i = 0;
+      function next() {
+        if (i >= SOURCES.length) return Promise.reject(new Error(name + ' not found'));
+        var url = SOURCES[i++] + name;
+        return fetch(url, { cache: 'no-cache' }).then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.text();
+        }).then(function (t) { return JSON.parse(t); }).catch(next);
+      }
+      return next();
+    }
+    function pageUrl(key) { return 'function.html?f=' + encodeURIComponent(key); }
+
+    // ------------------------------------------------------------------ the C++, coloured
+    var KEYWORDS = ('alignas alignof asm auto break case catch class const const_cast constexpr continue default delete do ' +
+      'dynamic_cast else enum explicit export extern false for friend goto if inline mutable namespace new noexcept nullptr ' +
+      'operator private protected public register reinterpret_cast return sizeof static static_cast struct switch template this ' +
+      'throw true try typedef typeid typename union using virtual volatile while __cdecl __stdcall __fastcall __thiscall').split(' ');
+    var TYPES = ('void bool char short int long float double signed unsigned wchar_t size_t int8_t int16_t int32_t int64_t ' +
+      'uint8_t uint16_t uint32_t uint64_t BYTE WORD DWORD BOOL').split(' ');
+    var KW = {}, TY = {};
+    KEYWORDS.forEach(function (k) { KW[k] = 1; });
+    TYPES.forEach(function (k) { TY[k] = 1; });
+    var TOKEN = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*')|(^[ \t]*#[^\n]*)|(\b0x[0-9A-Fa-f]+[uUlL]*\b|\b\d+(?:\.\d+)?[fFuUlL]*\b)|([A-Za-z_]\w*)/gm;
+    var ADDRESS_NAME = /^(?:sub|func|FUN|DAT|D|PTR|LAB|thunk)_[0-9A-Fa-f]{6,8}$/;
+
+    // Split the code into lines of coloured pieces (all text, never HTML); names that are other functions or
+    // data are collected, and linked when they are rebuilt too.
+    function colour(code, linkFor) {
+      var lines = [[]], used = {};
+      function push(text, cls, href, title) {
+        var parts = text.split('\n');
+        parts.forEach(function (p, i) {
+          if (i) lines.push([]);
+          if (p) lines[lines.length - 1].push({ t: p, c: cls, href: href, title: title });
+        });
+      }
+      var last = 0, m;
+      TOKEN.lastIndex = 0;
+      while ((m = TOKEN.exec(code))) {
+        if (m.index > last) push(code.slice(last, m.index));
+        var t = m[0];
+        if (m[1]) push(t, 'tk-com');
+        else if (m[2]) push(t, 'tk-str');
+        else if (m[3]) push(t, 'tk-pre');
+        else if (m[4]) push(t, 'tk-num');
+        else if (KW[t]) push(t, 'tk-kw');
+        else if (TY[t]) push(t, 'tk-type');
+        else {
+          var ref = linkFor(t);
+          if (ref) { used[t] = ref; push(t, 'tk-ref', ref.href, ref.title); }
+          else push(t);
+        }
+        last = TOKEN.lastIndex;
+      }
+      if (last < code.length) push(code.slice(last));
+      return { lines: lines, used: used };
+    }
+
+    // ------------------------------------------------------------------ tidied for reading
+    // Only the spacing changes: a line break after each statement and around each block, and indents by
+    // depth. Strings, comments and everything else stay as they are, and the result is checked to have the
+    // very same pieces in the same order (spacing never changes what C++ compiles to). Code that is laid out
+    // already is left alone.
+    var PIECE = /(\s*)(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'|[A-Za-z0-9_$.]+|\S)/g;
+    function pieces(code) {
+      var out = [], m, line = true;
+      PIECE.lastIndex = 0;
+      while ((m = PIECE.exec(code))) {
+        var ws = m[1], t = m[2];
+        if (t === '#' && (line || /\n/.test(ws) || !out.length)) {          // a preprocessor line, whole
+          var end = code.indexOf('\n', PIECE.lastIndex);
+          end = end < 0 ? code.length : end;
+          t += code.slice(PIECE.lastIndex, end);
+          PIECE.lastIndex = end;
+        }
+        out.push({ ws: ws, t: t });
+        line = false;
+      }
+      return out;
+    }
+    function needsTidy(code) {
+      return code.split('\n').some(function (l) { return l.length > 100 || /\{[^}\n]*;[^\n]*\}/.test(l); });
+    }
+    function tidy(code) {
+      var ps = pieces(code), out = '', depth = 0, paren = 0, braces = [], br = 0, prev = '';
+      ps.forEach(function (p, i) {
+        var t = p.t, sep, closed = false;
+        var blank = (p.ws.match(/\n/g) || []).length > 1;
+        if (!i) sep = '';
+        else if (br) sep = br > 1 || blank ? '\n\n' : '\n';
+        else sep = /\n/.test(p.ws) ? (blank ? '\n\n' : '\n') : (p.ws ? ' ' : '');
+        if (t === '}') {
+          closed = braces.pop();
+          if (closed) { depth = Math.max(0, depth - 1); if (!/\n/.test(sep)) sep = '\n'; }
+        }
+        if (prev === '}' && /^(else|while|;|,|\))$/.test(t)) sep = p.ws ? ' ' : '';
+        if (i && prev !== '{' && /^\/[\/*]/.test(t) && !/\n/.test(p.ws)) sep = ' ';   // a comment stays on its line
+        if (/\n/.test(sep)) sep += new Array(depth + 1).join('    ');
+        out += sep + t;
+        br = 0;
+        if (t === '(' || t === '[') paren++;
+        else if (t === ')' || t === ']') paren = Math.max(0, paren - 1);
+        else if (t === '{') {
+          var inline = paren > 0 || /^(=|,|\(|return|\{)$/.test(prev);
+          braces.push(!inline);
+          if (!inline) { depth++; br = 1; }
+        } else if (t === '}') {
+          if (closed) br = depth === 0 ? 2 : 1;               // a blank line after a whole function
+        } else if (t === ';' && paren === 0) br = 1;
+        if (t.slice(0, 2) === '//' || t.charAt(0) === '#') br = Math.max(br, 1);   // these end at the line's end
+        prev = t;
+      });
+      // the check: the same pieces, in the same order
+      var a = ps.map(function (p) { return p.t; }), b = pieces(out).map(function (p) { return p.t; });
+      if (a.length !== b.length || a.some(function (t, i) { return t !== b[i]; })) return null;
+      return out;
+    }
+
+    function render(reg, key, names) {
+      var entries = reg.entries || {};
+      var e = entries[key];
+      if (!e) { $('loading').hidden = true; $('missing').hidden = false; return; }
+
+      // what every rebuilt function is called, per version, to link names in the code
+      var bySymbol = {}, byAddr = {};
+      Object.keys(entries).forEach(function (k) {
+        var x = entries[k];
+        if (x.bin === e.bin) byAddr[String(x.va).replace(/^.*\s/, '').replace(/^0X/i, '0x').toUpperCase().replace(/^0X/, '0x')] = k;
+        if (x.bin === e.bin) bySymbol[x.symbol] = k;
+        var short = x.symbol.replace(/^.*::/, '');
+        if (x.bin === e.bin && /^(sub|func)_/.test(short)) bySymbol[short] = k;
+      });
+      function linkFor(word) {
+        if (word === e.symbol) return null;
+        var hit = bySymbol[word];
+        if (hit && hit !== key) return { href: pageUrl(hit), title: 'Rebuilt: ' + entries[hit].symbol, key: hit };
+        if (ADDRESS_NAME.test(word)) {
+          var addr = '0x' + ('00000000' + word.replace(/^[A-Za-z]+_/, '').toUpperCase()).slice(-8);
+          if (addr === String(e.va).toUpperCase().replace(/^0X/, '0x').replace(/^.*\s/, '')) return null;   // itself
+          var at = byAddr[addr];
+          if (at && at !== key) return { href: pageUrl(at), title: 'Rebuilt: ' + entries[at].symbol, key: at };
+          var known = names[e.bin + ':' + addr];
+          return { title: known ? 'Probably ' + known.name + ' (not rebuilt yet)' : 'Not rebuilt yet', known: known, addr: addr };
+        }
+        return null;
+      }
+
+      // name: class and function
+      var sym = e.symbol || '';
+      var cut = sym.lastIndexOf('::');
+      $('cls').textContent = cut > 0 ? sym.slice(0, cut) + '::' : '';
+      $('name').textContent = cut > 0 ? sym.slice(cut + 2) : sym;
+      document.title = sym + ' (' + (BIN[e.bin] || e.bin) + ') | Scarface decomp';
+      $('crumb-ver').textContent = BIN[e.bin] || e.bin;
+      var canon = document.createElement('link');
+      canon.rel = 'canonical';
+      canon.href = 'https://scarface-decomp.pages.dev/' + pageUrl(key);
+      document.head.appendChild(canon);
+
+      var facts = $('facts');
+      function fact(label, value, href) {
+        var d = el('div'), dt = el('dt', label), dd = el('dd');
+        if (href) { var a = el('a', value); a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; dd.appendChild(a); }
+        else dd.textContent = value;
+        d.appendChild(dt); d.appendChild(dd); facts.appendChild(d);
+      }
+      fact('Version', (BIN[e.bin] || e.bin) + ' (' + (FILE[e.bin] || '') + ')');
+      fact('Address', e.va);
+      fact('Size', fmt(e.size) + (Number(e.size) === 1 ? ' byte' : ' bytes'));
+      fact('Rebuilt by', e.verified_by || 'early bulk work');
+      if (e.verified_at) fact('Verified', String(e.verified_at).slice(0, 10));
+      if (e.revised_by) fact('Cleaned up by', e.revised_by);
+      if (e.tool_used) fact('Helped by', e.tool_used);
+      fact('Compiler', (e.bin === 'ps2' ? 'CodeWarrior for PS2 3.0.1' : 'Visual C++ ' + (e.compiler || '7.10')));
+      fact('Flags', e.flags || '');
+      var src = sourcePath(e);
+      if (src) fact('In the repository', src, 'https://github.com/' + REPO + '/blob/' + BRANCH + '/' + src.split('/').map(encodeURIComponent).join('/'));
+      if (e.note) { $('note').hidden = false; $('note-text').textContent = ' ' + e.note; }
+
+      // the code: tidied for reading when it is crammed together, or exactly as it was verified
+      var exact = String(e.code || '').replace(/\r\n/g, '\n').replace(/\s+$/, '');
+      var tidied = needsTidy(exact) ? tidy(exact) : null;
+      var file = (sym.replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '') || 'function') + '_' + String(e.va).replace(/^.*\s|^0x/gi, '') + '.cpp';
+      var shown = '', blobUrl = '';
+      var c = colour(exact, linkFor);
+      function draw(useTidy) {
+        shown = useTidy && tidied ? tidied : exact;
+        var lines = colour(shown, linkFor).lines, table = el('table');
+        lines.forEach(function (line, i) {
+          var tr = el('tr'), n = el('td', String(i + 1), 'n'), td = el('td');
+          n.setAttribute('aria-hidden', 'true');
+          line.forEach(function (p) {
+            var node;
+            if (p.href) { node = el('a', p.t, p.c); node.href = p.href; }
+            else if (p.c) node = el('span', p.t, p.c);
+            else node = document.createTextNode(p.t);
+            if (p.title && node.setAttribute) node.setAttribute('title', p.title);
+            td.appendChild(node);
+          });
+          tr.appendChild(n); tr.appendChild(td); table.appendChild(tr);
+        });
+        $('code').textContent = '';
+        $('code').appendChild(table);
+        $('view-tidy').setAttribute('aria-pressed', shown === tidied ? 'true' : 'false');
+        $('view-exact').setAttribute('aria-pressed', shown === tidied ? 'false' : 'true');
+        $('view-note').textContent = shown === tidied
+          ? 'Tidied for reading: only the line breaks and indents differ from the text that was verified, so it compiles to the same bytes.'
+          : 'Exactly the text that was compiled and verified.';
+        if (blobUrl) URL.revokeObjectURL(blobUrl);
+        blobUrl = URL.createObjectURL(new Blob([shown + '\n'], { type: 'text/plain' }));
+        $('download').href = blobUrl;
+        $('download').setAttribute('download', file);
+      }
+      $('view-tidy').parentNode.hidden = !tidied;
+      $('view-tidy').addEventListener('click', function () { draw(true); });
+      $('view-exact').addEventListener('click', function () { draw(false); });
+      draw(true);
+      $('copy').addEventListener('click', function () {
+        var b = $('copy');
+        if (navigator.clipboard) navigator.clipboard.writeText(shown + '\n').then(function () {
+          b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1400);
+        }, function () {});
+      });
+
+      // what it uses, and what uses it
+      var uses = $('uses');
+      Object.keys(c.used).sort().forEach(function (word) {
+        var r = c.used[word], li = el('li'), cd = el('code');
+        if (r.key) { var a = el('a', word); a.href = r.href; cd.appendChild(a); li.appendChild(cd); li.appendChild(el('span', 'rebuilt', 's')); }
+        else {
+          cd.textContent = word; li.appendChild(cd); li.appendChild(el('span', 'not rebuilt yet', 's'));
+          if (r.known) li.appendChild(el('span', 'Probably ' + r.known.name + (r.known.by ? ' (named by ' + r.known.by + ')' : ''), 'w'));
+        }
+        uses.appendChild(li);
+      });
+      if (!uses.children.length) uses.appendChild(el('li', 'Nothing else: it stands on its own.', 's'));
+      var used = $('used');
+      var own = [sym];
+      var shortName = sym.replace(/^.*::/, '');
+      if (/^(sub|func)_/.test(shortName)) own.push(shortName);
+      Object.keys(entries).forEach(function (k) {
+        var x = entries[k];
+        if (k === key || x.bin !== e.bin) return;
+        var text = String(x.code || '');
+        if (own.some(function (n) { return n.length >= 8 && new RegExp('\\b' + n.replace(/[^\w]/g, '\\$&') + '\\b').test(text); })) {
+          var li = el('li'), cd = el('code'), a = el('a', x.symbol);
+          a.href = pageUrl(k); cd.appendChild(a); li.appendChild(cd); li.appendChild(el('span', x.va, 's'));
+          used.appendChild(li);
+        }
+      });
+      if (!used.children.length) used.appendChild(el('li', 'No rebuilt function refers to it yet.', 's'));
+
+      // neighbours by address in the same version
+      var same = Object.keys(entries).filter(function (k) { return entries[k].bin === e.bin; })
+        .sort(function (a, b) { return parseInt(entries[a].va, 16) - parseInt(entries[b].va, 16); });
+      var at = same.indexOf(key), pager = $('pager');
+      [[at - 1, 'prev', '‹ Before it'], [at + 1, 'next', 'After it ›']].forEach(function (p) {
+        if (p[0] < 0 || p[0] >= same.length) return;
+        var k = same[p[0]], a = el('a', '', p[1]);
+        a.href = pageUrl(k);
+        a.appendChild(el('small', p[2] + ' in ' + (BIN[e.bin] || e.bin)));
+        a.appendChild(el('code', entries[k].symbol));
+        pager.appendChild(a);
+      });
+
+      $('loading').hidden = true;
+      $('fn').hidden = false;
+    }
+
+    // the file it is in (the same as the main page's list)
+    function sourcePath(e) {
+      var files = { pc: 'Original_Binary_Order_PC_1002.cpp', xb: 'Original_Binary_Order_Xbox.cpp',
+                    proto: 'Original_Binary_Order_Proto.cpp', ps2: 'Original_Binary_Order_PS2.cpp' };
+      if (!e.source || e.source === 'portal') return files[e.bin] ? 'reconstructed_src/' + files[e.bin] : '';
+      return 'reconstructed_src/' + e.source;
+    }
+
+    var key = new URLSearchParams(location.search).get('f') || '';
+    getJson('verified_registry.json').then(function (reg) {
+      return getJson('names.json').then(function (n) { return [reg, (n && n.names) || {}]; }, function () { return [reg, {}]; });
+    }).then(function (r) { render(r[0], key, r[1]); }, function () {
+      $('loading').textContent = 'Couldn\'t load the list of rebuilt functions. Try again in a moment.';
+    });
+  })();
+  </script>
+</body>
+</html>

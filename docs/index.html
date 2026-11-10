@@ -657,6 +657,7 @@
             <option value="xb">Xbox only</option>
             <option value="pc">PC only</option>
             <option value="proto">Xbox prototype</option>
+            <option value="ps2">PS2</option>
           </select>
           <label class="sr-only" for="sort">Sort</label>
           <select id="sort">
@@ -739,7 +740,7 @@
     var fmt = function (n) { return Number(n || 0).toLocaleString('en-US'); };
     var pct = function (a, b) { return b > 0 ? (a / b) * 100 : 0; };
     var fmtPct = function (p) { return p === 0 ? '0' : p >= 10 ? p.toFixed(1) : p.toFixed(2); };
-    var BIN_LABEL = { pc: 'PC', xb: 'Xbox', proto: 'Proto' };
+    var BIN_LABEL = { pc: 'PC', xb: 'Xbox', proto: 'Proto', ps2: 'PS2' };
 
     function applyRepoLinks() {
       document.querySelectorAll('a[data-repo-link]').forEach(function (a) {
@@ -1092,7 +1093,8 @@
 
     function sourcePath(e) {
       if (!e.source || e.source === 'portal') {
-        return 'reconstructed_src/' + (e.bin === 'pc' ? 'Original_Binary_Order_PC_1002.cpp' : e.bin === 'xb' ? 'Original_Binary_Order_Xbox.cpp' : 'Original_Binary_Order_Proto.cpp');
+        return 'reconstructed_src/' + (e.bin === 'pc' ? 'Original_Binary_Order_PC_1002.cpp' : e.bin === 'xb' ? 'Original_Binary_Order_Xbox.cpp' :
+          e.bin === 'ps2' ? 'Original_Binary_Order_PS2.cpp' : 'Original_Binary_Order_Proto.cpp');
       }
       return 'reconstructed_src/' + e.source;
     }
@@ -1119,7 +1121,7 @@
       filtered.sort(function (a, b) {
         if (sort === 'size') return b.size - a.size || a.vaNum - b.vaNum;
         if (sort === 'recent') return (b.when > a.when ? 1 : b.when < a.when ? -1 : 0) || a.vaNum - b.vaNum;
-        var order = { pc: 0, xb: 1, proto: 2 };
+        var order = { pc: 0, xb: 1, proto: 2, ps2: 3 };
         return ((order[a.bin] || 0) - (order[b.bin] || 0)) || a.vaNum - b.vaNum;
       });
       shown = 0;
@@ -1197,6 +1199,12 @@
       a.href = CFG.repoUrl + '/blob/' + CFG.branch + '/' + sourcePath(e).split('/').map(encodeURIComponent).join('/');
       a.target = '_blank'; a.rel = 'noopener noreferrer';
       a.textContent = (e.excerpt ? 'Part of ' : 'Open ') + sourcePath(e) + ' on GitHub';
+      var own = document.createElement('a');
+      own.href = 'function.html?f=' + encodeURIComponent(e.key);
+      own.className = 'own';
+      own.textContent = 'Its own page';
+      links.appendChild(own);
+      links.appendChild(document.createTextNode(' · '));
       links.appendChild(a);
       body.appendChild(links);
     }

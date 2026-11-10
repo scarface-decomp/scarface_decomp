@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import os
 import re
+import urllib.parse
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -238,8 +239,7 @@ def feed_xml(registry: dict) -> str:
         size = int(e.get("size", 0))
         title = f"{e['symbol']} ({where}, {size} byte{'' if size == 1 else 's'}) by {who}"
         summary = f"{e['va']} in the {where} version, matched byte for byte with its original."
-        path = entry_path(e)
-        link = f"{REPO}/blob/main/{path}" if path else SITE
+        link = f"{SITE}function.html?f={urllib.parse.quote(key, safe='')}"
         out += ["  <entry>",
                 f"    <title>{escape(title)}</title>",
                 f'    <link href="{escape(link)}"/>',

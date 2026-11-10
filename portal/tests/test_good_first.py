@@ -132,7 +132,7 @@ def test_feed_of_new_matches():
     first = entries[0]
     assert first.getElementsByTagName("title")[0].firstChild.data == "A<int>::f59& (Xbox, 8 bytes) by Alice"
     assert first.getElementsByTagName("updated")[0].firstChild.data == "2026-11-10T10:59:00Z"
-    assert first.getElementsByTagName("link")[0].getAttribute("href").startswith(RO.REPO + "/blob/main/reconstructed_src/xbox/")
+    assert first.getElementsByTagName("link")[0].getAttribute("href") == RO.SITE + "function.html?f=xb%3A0x0000003B"
     assert doc.getElementsByTagName("updated")[0].firstChild.data == "2026-11-10T10:59:00Z"
     assert "<entry>" not in RO.feed_xml({"entries": {}})
 
