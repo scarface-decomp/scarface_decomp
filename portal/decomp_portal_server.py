@@ -56,6 +56,7 @@ import discord_feed as DISCORD  # noqa: E402
 import media as MEDIA  # noqa: E402
 import p3d_gltf as P3G  # noqa: E402
 import blender_export as BX  # noqa: E402
+import movies as MOVIES  # noqa: E402
 import game_assets as GA  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
@@ -92,6 +93,36 @@ SCRIPTS_DIR = BASE_DIR / "binaries" / "scripts_and_data"
 # Sounds, textures, models, videos: copied out of the person's own game files, for their own use only
 GAME_FILES = GA.Job(BASE_DIR / "binaries")
 BLENDER = BX.CityJob(BASE_DIR / "binaries")
+
+
+class _Kept:
+    """The last few decoded sounds (or made movies), up to a size, the most recently used kept."""
+
+    def __init__(self, limit: int):
+        self.limit, self.size, self._items, self._lock = limit, 0, {}, threading.Lock()
+
+    def get(self, key):
+        with self._lock:
+            hit = self._items.pop(key, None)
+            if hit is not None:
+                self._items[key] = hit                  # most recently used last
+            return hit[0] if hit is not None else None
+
+    def put(self, key, value, size: int) -> None:
+        with self._lock:
+            old = self._items.pop(key, None)
+            if old is not None:
+                self.size -= old[1]
+            self._items[key] = (value, size)
+            self.size += size
+            while self.size > self.limit and len(self._items) > 1:
+                _k, (_v, n) = next(iter(self._items.items()))
+                del self._items[_k]
+                self.size -= n
+
+
+SOUNDS = _Kept(400 << 20)
+MOVIES_JOB = MOVIES.MovieJob(BASE_DIR / "binaries")
 # a copy moves the files the city export reads: never both at once
 GAME_FILES.busy = lambda: ("The city is being exported for Blender from your copied files. Wait for it to "
                            "finish, or stop it, then copy." if BLENDER.running else "")
@@ -2122,7 +2153,9 @@ class Handler(BaseHTTPRequestHandler):
             out = GA.out_dir(GAME_FILES.bin_dir)
             found = BX.areas(out, GAME_FILES.index(), q1("version"))
             return self._json({"ok": True, "areas": [dict(a, files=len(a["files"])) for a in found],
-                               "city": dict(BLENDER.status)})
+                               "city": dict(BLENDER.status),
+                               "city_files": len(list(BLENDER.folder(q1("version")).glob("*.glb")))
+                               if q1("version") in GA.LABELS else 0})
         if u.path == "/api/game-files/blender":
             return self._json(dict(BLENDER.status, ok=True))
         if u.path == "/api/game-files/list":
@@ -2138,8 +2171,12 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": True, "job": BRIDGE.next()})
         if u.path == "/api/dme-bridge/status":
             return self._json({"ok": True, "connected": BRIDGE.connected(), "origin": DME_BRIDGE_ORIGIN})
+        if u.path == "/api/game-files/blender-app":
+            exe = BX.find_blender(GAME_FILES.bin_dir)
+            return self._json({"ok": True, "found": exe is not None, "path": str(exe) if exe else ""})
         if u.path in ("/api/game-files/sound", "/api/game-files/pictures", "/api/game-files/picture",
-                      "/api/game-files/model"):
+                      "/api/game-files/model", "/api/game-files/inspect", "/api/game-files/subtitles",
+                      "/api/game-files/movie", "/api/game-files/movie-status"):
             return self.get_game_file_preview(u.path.rsplit("/", 1)[1], q1)
         if u.path == "/api/task":
             with STATE_LOCK:
@@ -2168,6 +2205,10 @@ class Handler(BaseHTTPRequestHandler):
             "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
             "/api/game-files/blender": self.post_game_files_blender,
             "/api/game-files/blender-stop": self.post_game_files_blender_stop,
+            "/api/game-files/open-in-blender": self.post_game_files_open_in_blender,
+            "/api/game-files/blender-path": self.post_game_files_blender_path,
+            "/api/game-files/movie": self.post_game_files_movie,
+            "/api/game-files/ffmpeg-path": self.post_game_files_ffmpeg_path,
             "/api/game-files/open": self.post_game_files_open,
             "/api/dme-bridge/run": self.post_bridge_run, "/api/dme-bridge/result": self.post_bridge_result,
             "/api/describe": self.post_describe,
@@ -2407,7 +2448,24 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": "Requests from other websites are not accepted."}, 403)
         if what == "model" and q1("area"):
             return self._send_area(q1("version"), q1("area"))
+        if what == "subtitles":                       # what is said in a sound, from its subtitle file
+            sub = GA.companion(GAME_FILES.index(), q1("version"), q1("path"))
+            p = GAME_FILES.file_path(q1("version"), sub) if sub else None
+            try:
+                lines = MEDIA.subtitles(p.read_bytes()) if p is not None else []
+            except OSError:
+                lines = []
+            return self._json({"ok": True, "lines": [{"language": a, "text": b} for a, b in lines]})
         path = GAME_FILES.file_path(q1("version"), q1("path"))
+        if path is not None and what == "sound":
+            return self._send_sound(path, q1("path"))
+        if path is not None and what == "movie-status":
+            return self._json(dict(MOVIES_JOB.status(path), ok=True))
+        if path is not None and what == "movie":
+            made = MOVIES_JOB.ready(path)
+            if made is None:
+                return self._json({"ok": False, "error": "That movie isn't made into a video yet."}, 404)
+            return self._send_file_ranged(made, "video/mp4")
         if path is None:
             if GAME_FILES.running:
                 return self._json({"ok": False, "error": "Your game files are being copied: that one isn't "
@@ -2415,10 +2473,11 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": "That file isn't in your copied game files (copy them first)."}, 404)
         try:
             data = path.read_bytes()
-            if what == "sound":
-                body, mime, ext = MEDIA.playable(data)
-                name = re.sub(r'[^A-Za-z0-9._-]', "_", Path(q1("path").replace("\\", "/")).stem) + ext
-                return self._send(200, body, mime, {"Content-Disposition": f'inline; filename="{name}"'})
+            if what == "inspect":
+                info = BX.inspect(data)
+                if info["lines"]:
+                    info["sound"] = GA.companion(GAME_FILES.index(), q1("version"), q1("path")) or ""
+                return self._json(dict(info, ok=True))
             if what == "model":
                 return self._send_model(q1("version"), q1("path"), path, data)
             if what == "pictures":
@@ -2434,6 +2493,79 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": str(e)}, 415)
         except OSError as e:
             return self._json({"ok": False, "error": f"Couldn't read the file: {e}"}, 500)
+
+    def _send_sound(self, path: Path, game_path: str) -> None:
+        """A sound the browser can play, from a part of it on when the player asks (so you can skip ahead).
+        Decoded once and kept for a while: skipping asks for the same sound again from another point."""
+        try:
+            st = path.stat()
+            key = (str(path), st.st_mtime_ns, st.st_size)
+            hit = SOUNDS.get(key)
+            if hit is None:
+                hit = MEDIA.playable(path.read_bytes())
+                SOUNDS.put(key, hit, len(hit[0]))
+        except MEDIA.MediaError as e:
+            return self._json({"ok": False, "error": f"Can't play it: {e}."}, 415)
+        except OSError as e:
+            return self._json({"ok": False, "error": f"Couldn't read the file: {e}"}, 500)
+        body, mime, ext = hit
+        name = re.sub(r'[^A-Za-z0-9._-]', "_", Path(game_path.replace("\\", "/")).stem) + ext
+        self._send_ranged(body, mime, {"Content-Disposition": f'inline; filename="{name}"'})
+
+    def _send_file_ranged(self, path: Path, ctype: str) -> None:
+        """A file from disk, or the part a Range header asks for, read as it is sent (movies are big)."""
+        try:
+            total = path.stat().st_size
+        except OSError:
+            return self._json({"ok": False, "error": "That video went missing."}, 404)
+        start, end, code = 0, total - 1, 200
+        m = re.fullmatch(r"\s*bytes=(\d*)-(\d*)\s*", self.headers.get("Range") or "")
+        if m and (m.group(1) or m.group(2)):
+            if m.group(1):
+                start = int(m.group(1))
+                end = min(int(m.group(2)), total - 1) if m.group(2) else total - 1
+            else:
+                start = max(0, total - int(m.group(2)))
+            if start >= total or end < start:
+                return self._send(416, b"", ctype, {"Content-Range": f"bytes */{total}", "Accept-Ranges": "bytes"})
+            code = 206
+        self.send_response(code)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Accept-Ranges", "bytes")
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        if code == 206:
+            self.send_header("Content-Range", f"bytes {start}-{end}/{total}")
+        self.send_header("Content-Length", str(end - start + 1))
+        try:
+            self.end_headers()
+            with open(path, "rb") as f:
+                f.seek(start)
+                left = end - start + 1
+                while left > 0:
+                    piece = f.read(min(1 << 20, left))
+                    if not piece:
+                        break
+                    self.wfile.write(piece)
+                    left -= len(piece)
+        except (ConnectionError, OSError):
+            self.close_connection = True
+
+    def _send_ranged(self, body: bytes, ctype: str, extra: Optional[dict] = None) -> None:
+        """The whole of body, or the part a Range header asks for (what media players need to seek)."""
+        extra = dict(extra or {}, **{"Accept-Ranges": "bytes"})
+        total = len(body)
+        m = re.fullmatch(r"\s*bytes=(\d*)-(\d*)\s*", self.headers.get("Range") or "")
+        if not m or not (m.group(1) or m.group(2)):
+            return self._send(200, body, ctype, extra)
+        if m.group(1):
+            start = int(m.group(1))
+            end = min(int(m.group(2)), total - 1) if m.group(2) else total - 1
+        else:
+            start, end = max(0, total - int(m.group(2))), total - 1
+        if start >= total or end < start:
+            return self._send(416, b"", ctype, dict(extra, **{"Content-Range": f"bytes */{total}"}))
+        self._send(206, body[start:end + 1], ctype, dict(extra, **{"Content-Range": f"bytes {start}-{end}/{total}"}))
 
     def _send_model(self, version: str, game_path: str, path: Path, data: bytes) -> None:
         """A copied .p3d file as a glTF scene (.glb) for Blender. A map area also gets its region's and the city's
@@ -2465,6 +2597,83 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": err}, 409 if "Already" in err or "being" in err else 400)
         self._json(dict(BLENDER.status, ok=True))
 
+    def _local_only(self) -> bool:
+        peer = (self.client_address[0] if self.client_address else "").split("%")[0]
+        if HOST not in ("127.0.0.1", "localhost", "::1") or peer not in ("127.0.0.1", "::1", "::ffff:127.0.0.1"):
+            self._json({"ok": False, "error": "That only works on the computer the portal runs on."}, 403)
+            return False
+        return True
+
+    def post_game_files_open_in_blender(self, body):
+        """Make the scene (a copied file, a map area, or the city exported before) and start the person's own
+        Blender with it imported; Blender saves it as a .blend beside the .glb for next time."""
+        if not self._local_only():
+            return
+        version = str(body.get("version", ""))
+        if version not in GA.LABELS:
+            return self._json({"ok": False, "error": "Pick a version."}, 400)
+        exe = BX.find_blender(GAME_FILES.bin_dir)
+        if exe is None:
+            return self._json({"ok": False, "need_blender": True, "error": "Couldn't find Blender on this computer. "
+                               "Install it from blender.org, or tell the portal where blender.exe is."}, 404)
+        folder = BLENDER.folder(version)
+        out = GA.out_dir(GAME_FILES.bin_dir)
+        try:
+            if body.get("city"):
+                files = sorted(folder.glob("*.glb"))
+                if not files:
+                    return self._json({"ok": False, "error": "Export the city first: then it opens as one scene."}, 404)
+                glbs, save = files, folder / f"{GA.LABELS[version]} city.blend"
+            elif body.get("area"):
+                key = str(body["area"])
+                glb, _r = BX.area_glb(out, GAME_FILES.index(), version, key)
+                name = re.sub(r'[^A-Za-z0-9._-]', "_", key.rsplit("/", 1)[-1])
+                glbs, save = [folder / BX.OPENED / f"{name}.glb"], folder / BX.OPENED / f"{name}.blend"
+                glbs[0].parent.mkdir(parents=True, exist_ok=True)
+                glbs[0].write_bytes(glb)
+            else:
+                game_path = str(body.get("path", ""))
+                path = GAME_FILES.file_path(version, game_path)
+                if path is None:
+                    return self._json({"ok": False, "error": "That file isn't in your copied game files."}, 404)
+                glb, _r = BX.model_glb(out, GAME_FILES.index(), version, game_path, path.read_bytes())
+                name = re.sub(r'[^A-Za-z0-9._-]', "_", Path(game_path.replace("\\", "/")).stem)
+                glbs, save = [folder / BX.OPENED / f"{name}.glb"], folder / BX.OPENED / f"{name}.blend"
+                glbs[0].parent.mkdir(parents=True, exist_ok=True)
+                glbs[0].write_bytes(glb)
+            BX.open_in_blender(exe, glbs, save, GAME_FILES.bin_dir / BX.OUT_NAME / "_scripts")
+        except P3G.ExportError as e:
+            return self._json({"ok": False, "error": f"Nothing to show in Blender: {e}."}, 415)
+        except (OSError, P3G.p3d.P3dError) as e:
+            return self._json({"ok": False, "error": f"Couldn't open it in Blender: {e}"}, 500)
+        self._json({"ok": True, "blender": str(exe), "saved": GA._show_path(save), "files": len(glbs)})
+
+    def post_game_files_movie(self, body):
+        """Start making a movie into a video the browser plays (once; it is kept)."""
+        if not self._local_only():
+            return
+        path = GAME_FILES.file_path(str(body.get("version", "")), str(body.get("path", "")))
+        if path is None:
+            return self._json({"ok": False, "error": "That file isn't in your copied game files."}, 404)
+        st = MOVIES_JOB.start(path)
+        self._json(dict(st, ok=st.get("state") != "error"), 200 if st.get("state") != "error" else 424)
+
+    def post_game_files_ffmpeg_path(self, body):
+        if not self._local_only():
+            return
+        err = MOVIES.remember_ffmpeg(GAME_FILES.bin_dir, str(body.get("path", "")))
+        if err:
+            return self._json({"ok": False, "error": err}, 400)
+        self._json({"ok": True})
+
+    def post_game_files_blender_path(self, body):
+        if not self._local_only():
+            return
+        err = BX.remember_blender(GAME_FILES.bin_dir, str(body.get("path", "")))
+        if err:
+            return self._json({"ok": False, "error": err}, 400)
+        self._json({"ok": True, "path": str(BX.find_blender(GAME_FILES.bin_dir) or "")})
+
     def post_game_files_blender_stop(self, body):
         BLENDER.stop()
         self._json({"ok": True})
@@ -2473,7 +2682,8 @@ class Handler(BaseHTTPRequestHandler):
         versions = body.get("versions")
         if not isinstance(versions, list) or not all(isinstance(v, str) for v in versions):
             return self._json({"ok": False, "error": "Pick at least one version."}, 400)
-        err = GAME_FILES.start(versions, str(body.get("mode", "")), str(body.get("folders") or "game"))
+        err = GAME_FILES.start(versions, str(body.get("mode", "")), str(body.get("folders") or "game"),
+                               check=bool(body.get("check")))
         if err:
             return self._json({"ok": False, "error": err, "up_to_date": err.startswith("Already copied")},
                               409 if "Already" in err or "being" in err else 400)

@@ -230,6 +230,18 @@ used `0x4500` and `0x4501` for these.
 | `0x00121112` | Compressed Quaternion Channel2 | the same header, then x, y, z as signed 16-bit numbers over 32,767 (Xbox and PS2) |
 | `0x00121114` | no name known (`p3d.py` says Byte Quaternion Channel) | the same header, then x, y, z as signed bytes over 127 (Xbox and PS2; about 1% precision) |
 | `0x00121110` | Channel Interpolation Mode | u32 version, u32 interpolate (-1: yes) |
+| `0x00121100` | Float1 Channel | u32 version, parameter, u32 keys, u16 frames, 1 float per key |
+| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`CAM`, `PTRN` ...), `ANIM`, two u32, then the name of what it drives (a camera) and the animation it plays |
+| `0x00002200` | Camera | name, u32 version (2), float field of view (radians, across the picture), float aspect, float near and far clip, then position, look direction and up (3 floats each) |
+
+Every person in the game has the same 27-joint skeleton (`character_root`, `pelvis`, `hip_l` ...), so
+the animations in `art/animations` fit any of them; the portal shows them on Tony.
+
+A camera's move (`frontend/prebuilt/*.p3d`, the cutscenes) is an animation of type `CAM` played on the
+camera by a frame controller. Its groups have Vector channels `TRAN` (position), `LOOK` (the direction it
+looks, a unit vector) and `UP`, and Float1 channels `FOV`, `NCLP` and `FCLP` (near and far clip), `DFFD`
+and `DFFS` (depth of field). Exported, the camera looks the way glTF wants (down its -Z, Y up), turned
+from `LOOK` and `UP` at each of their keys.
 
 The PC keeps every rotation as four floats. The Xbox and the PS2 use the two compressed forms instead,
 choosing per joint, and keep fewer keys: in `GEN_Conv_Motion_Toward.p3d` the PC has 509 keys, the Xbox
@@ -348,10 +360,14 @@ python portal/tools/p3d_gltf.py miami/    packages/z04 --map --split
 ```
 
 The portal does the same from the game files you copied (its Game files tab; **Copy everything, PC first**
-copies them the way these exports like best): **Blender** next to any
-`.p3d` file gives that file (a character with the game's animations from `art/animations`, a map file with
-what its region places on it), and the **In Blender** box gives a whole map area in one scene, or the
-whole city, one file per area, in `binaries/blender/`. Then in Blender: File > Import > glTF 2.0. Characters come with their skeleton as an armature, their skin
+copies them the way these exports like best): **Open** next to any `.p3d` file says what it holds and
+offers what fits it (a character with the game's animations from `art/animations`, a file of animations
+shown on Tony, a camera with its move, a map file with what its region places on it), and the **In
+Blender** box gives a whole map area in one scene, or the whole city, one file per area, in
+`binaries/blender/`. **Open in Blender** starts your own Blender with the scene imported and saves it as a
+`.blend` beside it; the whole city opens as one scene, every area at its place. A `.glb` you download goes
+in with File > Import > glTF 2.0: double-clicked, Blender tries to open it as a `.blend` and says it isn't
+a valid Blender file. Characters come with their skeleton as an armature, their skin
 weights and each animation (from `--anim` files or the file itself) as an action. Several models in one
 file (the 28 guns of `guns.p3d`) are set out side by side. With `--map` each area comes in at its place
 in the city, with its placed objects; the shared files the areas need (regions, `miami_lod`, `Common`) are
@@ -386,18 +402,26 @@ back.
 | Codec | Version | Data at `0x800` |
 | :--- | :--- | :--- |
 | `OOGV` | PC | an Ogg Vorbis stream (44.1 to 48 kHz) |
-| `XADP` | Xbox | Xbox IMA ADPCM: per channel, 36-byte blocks (s16 first sample, u8 step index, u8 0, then 32 bytes = 64 samples, low nibble first). With two channels both 4-byte headers come first, then 4-byte runs of each channel in turn |
+| `XADP` | Xbox | Xbox IMA ADPCM: per channel, 36-byte blocks (s16 first sample, u8 step index, u8 0, then 32 bytes = 64 samples, low nibble first). With more channels every 4-byte header comes first, then 4-byte runs of each channel in turn. The cutscenes' sound has six channels: 5.1 (front left and right, centre, low frequency, back left and right) |
 | `WMA ` | Xbox | 8 bytes, then a Windows Media Audio (ASF) file; its own header has the real sample rate (the RSD field doesn't) |
 | `VAG ` | PS2 | Sony ADPCM: 16-byte frames (shift and filter, flags, 14 bytes = 28 samples); flag 7 ends the sound. With two channels the frames take turns: one of the left, one of the right (checked against the PC's music and movies) |
 | `PCM ` | | plain 16-bit samples |
 | `RADP` | Xbox prototype | Radical's IMA ADPCM, every sound in the prototype (mostly 24,000 Hz): blocks of 20 bytes per channel. Each channel's s16 step index and s16 sample come first, then 16 rows of one byte per channel; a row gives every channel its low nibble, then every channel its high nibble (32 samples per channel per block). The usual IMA tables, with each step's change `((2 x (nibble & 7) + 1) x step) >> 3` |
+
+## Subtitles (`art/subtitles/<x>/<name>.p3d`)
+
+What each line of speech says, in a Pure3D file named like its sound (`art/sound/rsd/<x>/<name>.rsd`).
+One `0x0100500A` chunk per language: u32 length and the language's name (`English`), ended and padded
+to 4 bytes, two s32 (-1), u32 the length of the text in UTF-16 units, then the text (UTF-16). The portal
+shows them under the sound they go with.
 
 ## Videos (`.bik`)
 
 Bink videos (RAD Game Tools): `BIK` + a version letter, u32 file size - 8, u32 frame count, u32 largest
 frame size, u32 frame count again, then u32 width and u32 height at `0x14` and `0x18`. The PC's are
 1280x720, and the Xbox program carries RAD's Bink library (its `BINK*` sections). Play them with RAD
-Video Tools or a player that supports Bink (ffmpeg reads Bink 1).
+Video Tools or a player that supports Bink (ffmpeg reads Bink 1). The portal's **Watch** makes each movie
+(and the PS2's `.rmv`) into an MP4 once, with your own FFmpeg, and plays it in the page.
 
 The PS2 has no Bink videos: its movies are `.rmv` files (below).
 

@@ -31,11 +31,13 @@ def server():
     srv.shutdown()
 
 
-def reset(lease_sec=900, no_login=False, legacy_claim=False, dme_browser_fail=False, gf_missing=False,
-          gf_interrupted=False, **delays):
+GF_FLAGS = ("gf_missing", "gf_interrupted", "no_blender", "no_ffmpeg", "model_error")
+
+
+def reset(lease_sec=900, no_login=False, legacy_claim=False, dme_browser_fail=False, **delays):
+    flags = {k: delays.pop(k) for k in GF_FLAGS if k in delays}
     payload = {"delays": {"verify": 0.15, "ai": 0.25, "fast": 0.05, **delays}, "lease_sec": lease_sec,
-               "no_login": no_login, "legacy_claim": legacy_claim, "dme_browser_fail": dme_browser_fail,
-               "gf_missing": gf_missing, "gf_interrupted": gf_interrupted}
+               "no_login": no_login, "legacy_claim": legacy_claim, "dme_browser_fail": dme_browser_fail, **flags}
     req = urllib.request.Request(BASE + "__reset", data=json.dumps(payload).encode(),
                                  headers={"Content-Type": "application/json"}, method="POST")
     urllib.request.urlopen(req).read()
@@ -711,17 +713,23 @@ def test_game_files_previews(page):
     page.wait_for_selector("#gf-result:not([hidden]) .gf-tab")
     page.wait_for_function("document.querySelectorAll('#gf-list .gf-row').length > 0")
     buttons = page.eval_on_selector_all("#gf-list .gf-row", "rows => rows.slice(0, 5).map(r => [r.querySelector('.p').firstChild.textContent.split('.').pop(), (r.querySelector('.a button') || {}).textContent || ''])")
-    assert dict(buttons) == {"rsd": "Play", "p3d": "Pictures", "bik": "", "cso": "", "dat": ""}
+    assert dict(buttons) == {"rsd": "Play", "p3d": "Open", "bik": "Watch", "cso": "", "dat": ""}
 
     page.click("#gf-list .gf-row:has-text('.rsd') .a button")
     page.wait_for_selector("#gf-list .gf-prev audio")
+    page.wait_for_selector("#gf-list .gf-prev .gf-line")                     # the words, from its subtitles
+    assert page.text_content("#gf-list .gf-prev .gf-line") == "Say hello to my little friend!"
     page.wait_for_function("document.querySelector('#gf-list .gf-prev audio').readyState >= 1")
     assert page.eval_on_selector("#gf-list .gf-prev audio", "a => a.duration") == pytest.approx(0.2, abs=0.01)
     assert page.get_attribute("#gf-list .gf-row:has-text('.rsd') .a button", "aria-expanded") == "true"
     page.click("#gf-list .gf-row:has-text('.rsd') .a button")
     assert page.query_selector("#gf-list .gf-prev") is None
 
-    page.click("#gf-list .gf-row:has-text('.p3d') .a button")
+    page.click("#gf-list .gf-row:has-text('_006.p3d') .a button")
+    page.wait_for_selector("#gf-list .gf-prev .gf-what")
+    assert page.text_content("#gf-list .gf-prev .gf-what") == "1 model; 2 pictures."
+    assert page.eval_on_selector_all("#gf-list .gf-prev .gf-bl button", "bs => bs.map(b => b.textContent)") == [
+        "Open in Blender", "Download .glb"]
     page.wait_for_function("[...document.querySelectorAll('#gf-list .gf-pic img')].length === 2 && [...document.querySelectorAll('#gf-list .gf-pic img')].every(i => i.complete && i.naturalWidth > 0)")
     assert page.eval_on_selector_all("#gf-list .gf-pic img", "els => els.map(e => e.naturalWidth)") == [8, 16]
     assert page.eval_on_selector_all("#gf-list .gf-pic figcaption", "els => els.map(e => e.textContent)") == ["wall.bmp · 8×8", "sign.tga · 16×8"]
@@ -740,26 +748,107 @@ def test_game_files_in_blender(page):
     page.wait_for_selector("#gfb-tools:not([hidden])")
     assert page.is_hidden("#gfb-need")
     page.wait_for_function("document.querySelectorAll('#gf-list .gf-row').length > 0")
-    link = page.get_attribute("#gf-list .gf-row:has-text('.p3d') .a a", "href")
-    assert link.startswith("/api/game-files/model?") and "path=" in link
+    page.click("#gf-list .gf-row:has-text('_006.p3d') .a button")
+    page.wait_for_selector("#gf-list .gf-prev .gf-bl")
+    with page.expect_download() as dl:
+        page.click("#gf-list .gf-prev .gf-bl button:has-text('Download .glb')")
+    assert dl.value.suggested_filename.endswith(".glb")
+    assert calls("/api/game-files/model")[-1][1]["path"].endswith("_006.p3d")
+    assert "File > Import > glTF 2.0" in page.text_content("#gf-list .gf-prev p[role=status]")
+    page.click("#gf-list .gf-prev .gf-bl button:has-text('Open in Blender')")
+    page.wait_for_function("document.querySelector('#gf-list .gf-prev p[role=status]').textContent.startsWith('Blender is opening it')")
+    assert "Opened/" in page.text_content("#gf-list .gf-prev p[role=status]")
+    assert "Blender 4.2" in page.text_content("#gfb-app")
     page.wait_for_function("document.querySelectorAll('#gfb-area option').length === 3")
     assert page.eval_on_selector_all("#gfb-area optgroup", "gs => gs.map(g => g.label)") == ["The city", "Interiors"]
-    href = page.get_attribute("#gfb-area-dl", "href")
-    assert "area=z04%2Fstripmall_01" in href and "model?" in href
     page.select_option("#gfb-area", "azones/donutshop_01")
-    assert "area=azones%2Fdonutshop_01" in page.get_attribute("#gfb-area-dl", "href")
     with page.expect_download() as dl:
         page.click("#gfb-area-dl")
-    assert dl.value.url.endswith("area=azones%2Fdonutshop_01") or "area=azones%2Fdonutshop_01" in dl.value.url
+    assert dl.value.suggested_filename == "donutshop_01.glb" or dl.value.suggested_filename.endswith(".glb")
+    assert calls("/api/game-files/model")[-1][1]["area"] == "azones/donutshop_01"
+    page.click("#gfb-area-open")
+    page.wait_for_function("document.getElementById('gfb-area-status').textContent.startsWith('Blender is opening it')")
+    assert calls("/api/game-files/open-in-blender")[-1][1]["area"] == "azones/donutshop_01"
+    assert page.is_hidden("#gfb-city-blender")                               # nothing exported yet
     page.click("#gfb-city")
     page.wait_for_selector("#gfb-city-stop:not([hidden])")
     page.wait_for_function("document.getElementById('gfb-city-status').textContent.includes('3 areas written')",
                            timeout=10000)
     assert page.is_visible("#gfb-city-open") and page.is_enabled("#gfb-city")
+    page.click("#gfb-city-blender")                                            # the whole city, joined up
+    page.wait_for_function("document.getElementById('gfb-city-bl-status').textContent.includes('(3 areas)')")
+    assert calls("/api/game-files/open-in-blender")[-1][1]["city"] is True
     page.click("#gfb-city-open")
     page.wait_for_timeout(200)
     tab = [c[1] for c in calls("/api/game-files/blender") if "version" in (c[1] or {})][-1]["version"]
     assert calls("/api/game-files/open")[-1][1] == {"folder": "blender:" + tab}
+
+
+def _gf_copied(page):
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.click("#gf-start")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
+    page.wait_for_function("document.querySelectorAll('#gf-list .gf-row').length > 0")
+
+
+def test_game_files_blender_not_found_asks_where_it_is(page):
+    reset(no_blender=True)
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('_006.p3d') .a button")
+    page.click("#gf-list .gf-prev .gf-bl button:has-text('Open in Blender')")
+    page.wait_for_selector("#gf-list .gf-prev .gf-where")
+    status = "#gf-list .gf-prev p[role=status]"
+    assert "Couldn't find Blender" in page.text_content(status)
+    page.fill("#gf-list .gf-where input", "C:\\Games\\notepad.exe")
+    page.click("#gf-list .gf-where button")
+    page.wait_for_function(f"document.querySelector('{status}').textContent.startsWith(\"That isn't Blender\")")
+    page.fill("#gf-list .gf-where input", "D:\\Tools\\Blender\\blender.exe")
+    page.click("#gf-list .gf-where button")
+    page.wait_for_function(f"document.querySelector('{status}').textContent.startsWith('Blender is opening it')")
+    assert page.query_selector("#gf-list .gf-where") is None
+    assert calls("/api/game-files/blender-path")[-1][1] == {"path": "D:\\Tools\\Blender\\blender.exe"}
+
+
+def test_game_files_a_failed_export_says_why_on_the_page(page):
+    reset(model_error=True)
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('_006.p3d') .a button")
+    page.click("#gf-list .gf-prev .gf-bl button:has-text('Download .glb')")
+    page.wait_for_function("document.querySelector('#gf-list .gf-prev p[role=status]').textContent.startsWith('Nothing to show')")
+    assert page.eval_on_selector("#gf-list .gf-prev p[role=status]", "p => p.classList.contains('err')")
+
+
+def test_game_files_subtitles_and_their_sound(page):
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('_021.p3d') .a button")
+    page.wait_for_selector("#gf-list .gf-prev .gf-line")
+    assert page.text_content("#gf-list .gf-prev .gf-what").startswith("Subtitles")
+    assert page.query_selector("#gf-list .gf-prev .gf-bl") is None            # nothing for Blender
+    page.click("#gf-list .gf-prev button:has-text('Play the sound')")
+    page.wait_for_selector("#gf-list .gf-prev audio")
+    assert calls("/api/game-files/sound")[-1][1]["path"].endswith("sounds/xbox_020.rsd")
+
+
+def test_game_files_movies_play_in_the_page(page):
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('.bik') .a button")
+    page.wait_for_function("document.querySelector('#gf-list .gf-prev p[role=status]').textContent.includes('%')",
+                           timeout=5000)
+    page.wait_for_selector("#gf-list .gf-prev video", timeout=10000)
+    assert "/api/game-files/movie?" in page.get_attribute("#gf-list .gf-prev video", "src")
+    assert "kept for next time" in page.text_content("#gf-list .gf-prev p[role=status]")
+
+
+def test_game_files_movies_without_ffmpeg_say_how_to_get_it(page):
+    reset(no_ffmpeg=True)
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('.bik') .a button")
+    page.wait_for_selector("#gf-list .gf-prev .gf-where")
+    assert "FFmpeg" in page.text_content("#gf-list .gf-prev p[role=status]")
+    page.fill("#gf-list .gf-where input", "C:\\ffmpeg\\bin\\ffmpeg.exe")
+    page.click("#gf-list .gf-where button")
+    page.wait_for_selector("#gf-list .gf-prev video", timeout=10000)
 
 
 def test_game_files_stop(page):
@@ -794,7 +883,8 @@ def test_game_files_no_copying_twice(page):
     assert "Already copied like this" in _gf_text(page, "#gf-space")
     assert page.is_enabled("#gf-quick-start") and page.is_visible("#gf-check")
     page.click("#gf-check")                                     # every file there: nothing to do
-    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Every file is there')")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Already copied: every file')",
+                           timeout=10000)
     assert len(calls("/api/game-files/start")) == 2 and page.is_disabled("#gf-start")
     page.check("input[name=gf-mode][value=every]")
     assert _gf_text(page, "#gf-start") == "Copy again with these choices" and page.is_hidden("#gf-check")

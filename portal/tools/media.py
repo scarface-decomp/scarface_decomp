@@ -10,7 +10,8 @@ Sounds are Radical's .rsd files: a 2 KB header, then the audio in the platform's
     OOGV      PC: an Ogg Vorbis stream; browsers play it as it is
     WMA       Xbox music and score: 8 bytes, then an ASF (Windows Media) file; browsers don't play WMA,
               so it is offered as a .wma for your own player
-    XADP      Xbox: Xbox ADPCM (IMA ADPCM in 36-byte blocks per channel), decoded to WAV here
+    XADP      Xbox: Xbox ADPCM (IMA ADPCM in 36-byte blocks per channel), decoded to WAV here; the
+              cutscenes' six channels are mixed down to stereo
     VAG       PS2: PS2 ADPCM (16-byte frames of 28 samples), decoded to WAV here
     RADP      Xbox prototype: Radical's IMA ADPCM (20-byte blocks per channel), decoded to WAV here
     PCM       16-bit PCM, wrapped as WAV
@@ -28,9 +29,11 @@ Data chunk (0x19002) is the picture:
 
 from __future__ import annotations
 
+import array
 import functools
 import io
 import struct
+import sys
 import wave
 import zlib
 from dataclasses import dataclass
@@ -81,42 +84,101 @@ def _clamp16(v: int) -> int:
     return -32768 if v < -32768 else 32767 if v > 32767 else v
 
 
+@functools.lru_cache(maxsize=1)
+def _xadp_table() -> Tuple[Tuple[int, ...], Tuple[int, ...]]:
+    """For each (step index, nibble): the signed change to the sample, and the next step index."""
+    diffs, nexts = [], []
+    for index in range(89):
+        step = IMA_STEP[index]
+        for nib in range(16):
+            d = step >> 3
+            if nib & 1:
+                d += step >> 2
+            if nib & 2:
+                d += step >> 1
+            if nib & 4:
+                d += step
+            diffs.append(-d if nib & 8 else d)
+            nexts.append(min(88, max(0, index + IMA_INDEX[nib])))
+    return tuple(diffs), tuple(nexts)
+
+
 def decode_xbox_adpcm(body: bytes, channels: int) -> bytes:
-    """Xbox ADPCM: per channel, 36-byte blocks (int16 predictor, u8 step index, u8 0, then 32 bytes = 64
-    samples, low nibble first). With two channels the headers come first and then 4-byte runs alternate."""
-    if channels not in (1, 2):
+    """Xbox ADPCM: blocks of 36 bytes per channel. First each channel's header (int16 predictor, u8 step
+    index, u8 0), then 4-byte runs (8 samples, low nibble first) taking turns channel by channel, eight runs
+    each: 64 samples per channel per block. Any number of channels (the cutscenes' sound has six)."""
+    if not 1 <= channels <= 8:
         raise MediaError(f"Xbox ADPCM with {channels} channels")
+    diffs, nexts = _xadp_table()
     block = 36 * channels
-    out = bytearray()
-    for b in range(0, len(body) - block + 1, block):
-        blk = body[b:b + block]
-        chans = []
+    blocks = len(body) // block
+    out = array.array("h", bytes(2 * 64 * channels * blocks))
+    for b in range(blocks):
+        base = b * block
+        first = b * 64 * channels
         for c in range(channels):
-            pred, index = struct.unpack_from("<hB", blk, 4 * c)
-            index = min(index, 88)
-            nibbles = bytearray()
-            for k in range(8):                                 # eight 4-byte runs per channel
-                o = 4 * channels + 4 * (k * channels + c)
-                nibbles += blk[o:o + 4]
-            samples = []
-            for byte in nibbles:
-                for nib in (byte & 15, byte >> 4):
-                    step = IMA_STEP[index]
-                    diff = step >> 3
-                    if nib & 1:
-                        diff += step >> 2
-                    if nib & 2:
-                        diff += step >> 1
-                    if nib & 4:
-                        diff += step
-                    pred = _clamp16(pred - diff if nib & 8 else pred + diff)
-                    index = min(88, max(0, index + IMA_INDEX[nib]))
-                    samples.append(pred)
-            chans.append(samples)
-        for i in range(64):
-            for c in range(channels):
-                out += struct.pack("<h", chans[c][i])
-    return bytes(out)
+            pred, index = struct.unpack_from("<hB", body, base + 4 * c)
+            if index > 88:
+                index = 88
+            pos = first + c
+            for k in range(8):
+                o = base + 4 * channels + 4 * (k * channels + c)
+                for byte in body[o:o + 4]:
+                    t = (index << 4) | (byte & 15)
+                    pred += diffs[t]
+                    pred = -32768 if pred < -32768 else 32767 if pred > 32767 else pred
+                    index = nexts[t]
+                    out[pos] = pred
+                    pos += channels
+                    t = (index << 4) | (byte >> 4)
+                    pred += diffs[t]
+                    pred = -32768 if pred < -32768 else 32767 if pred > 32767 else pred
+                    index = nexts[t]
+                    out[pos] = pred
+                    pos += channels
+    if sys.byteorder == "big":
+        out.byteswap()
+    return out.tobytes()
+
+
+# Where each channel goes when more than two are mixed down for the browser, in the WAVE order (front
+# left, front right, centre, low frequency, back left, back right, side left, side right): (left, right)
+_MIX = {3: [(1, 0), (0, 1), (.7071, .7071)],
+        4: [(1, 0), (0, 1), (.7071, 0), (0, .7071)],
+        5: [(1, 0), (0, 1), (.7071, .7071), (.7071, 0), (0, .7071)],
+        6: [(1, 0), (0, 1), (.7071, .7071), (0, 0), (.7071, 0), (0, .7071)],
+        7: [(1, 0), (0, 1), (.7071, .7071), (0, 0), (.7071, 0), (0, .7071), (.5, .5)],
+        8: [(1, 0), (0, 1), (.7071, .7071), (0, 0), (.7071, 0), (0, .7071), (.7071, 0), (0, .7071)]}
+
+
+def downmix(pcm: bytes, channels: int) -> bytes:
+    """16-bit PCM with 3 to 8 channels as stereo, as loud as it can be without clipping."""
+    if channels <= 2:
+        return pcm
+    src = array.array("h")
+    src.frombytes(pcm[:len(pcm) // (2 * channels) * 2 * channels])
+    if sys.byteorder == "big":
+        src.byteswap()
+    mix = _MIX.get(channels) or [((1.0, 0.0) if c % 2 == 0 else (0.0, 1.0)) for c in range(channels)]
+    frames = len(src) // channels
+    left = [0.0] * frames
+    right = [0.0] * frames
+    for c, (gl, gr) in enumerate(mix):
+        if not gl and not gr:
+            continue
+        col = src[c::channels]
+        if gl:
+            left = [a + gl * v for a, v in zip(left, col)]
+        if gr:
+            right = [a + gr * v for a, v in zip(right, col)]
+    peak = max(max(map(abs, left), default=0), max(map(abs, right), default=0), 1.0)
+    scale = min(1.0, 32767 / peak)
+    out = array.array("h", bytes(4 * frames))
+    out[0::2] = array.array("h", (int(v * scale) for v in left))
+    out[1::2] = array.array("h", (int(v * scale) for v in right))
+    if sys.byteorder == "big":
+        out.byteswap()
+    return out.tobytes()
 
 
 @functools.lru_cache(maxsize=1)
@@ -218,6 +280,8 @@ def playable(data: bytes) -> Tuple[bytes, str, str]:
     if rate and len(body) / max(1, rate * ch) > MAX_SECONDS * 0.6:
         raise MediaError("too long to preview")
     if codec == "XADP":
+        if ch > 2:                                      # browsers are surest with stereo
+            return _wav(downmix(decode_xbox_adpcm(body, ch), ch), 2, rate), "audio/wav", ".wav"
         return _wav(decode_xbox_adpcm(body, ch), ch, rate), "audio/wav", ".wav"
     if codec == "VAG":
         return _wav(decode_vag(body, ch), ch, rate), "audio/wav", ".wav"
@@ -227,6 +291,38 @@ def playable(data: bytes) -> Tuple[bytes, str, str]:
         pcm = body if codec == "PCM" else b"".join(body[i:i + 2][::-1] for i in range(0, len(body) - 1, 2))
         return _wav(pcm[:len(pcm) // (2 * ch) * 2 * ch], ch, rate), "audio/wav", ".wav"
     raise MediaError(f"the {info['codec']} codec can't be previewed")
+
+
+# --------------------------------------------------------------------------- subtitles
+
+SUBTITLE = 0x0100500A
+
+
+def subtitles(data: bytes) -> List[Tuple[str, str]]:
+    """The lines a subtitle file (art/subtitles/<x>/<name>.p3d, named like the sound it goes with) holds:
+    [(language, text)]. Each is a 0x0100500A chunk: the language (u32 length, then the letters, ended and
+    padded to 4 bytes), two numbers (-1), the length of the text in UTF-16 units, then the text."""
+    out: List[Tuple[str, str]] = []
+    if data[:4] != b"P3D\xff":
+        return out
+    p, end = 12, min(len(data), struct.unpack_from("<I", data, 8)[0] if len(data) >= 12 else 0)
+    while p + 12 <= end:
+        cid, head, size = struct.unpack_from("<3I", data, p)
+        if size < 12 or p + size > len(data):
+            break
+        if cid == SUBTITLE:
+            try:
+                q = p + 12
+                n = struct.unpack_from("<I", data, q)[0]
+                lang = data[q + 4:q + 4 + n].split(b"\0")[0].decode("latin-1")
+                q += 4 + ((n + 4) & ~3)
+                count = struct.unpack_from("<I", data, q + 8)[0]
+                text = data[q + 12:q + 12 + 2 * count].decode("utf-16-le", "replace")
+                out.append((lang, " ".join(text.replace("\0", " ").split())))
+            except (struct.error, UnicodeDecodeError):
+                pass
+        p += size
+    return out
 
 
 # --------------------------------------------------------------------------- textures

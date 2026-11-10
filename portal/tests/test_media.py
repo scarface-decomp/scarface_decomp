@@ -112,7 +112,20 @@ def test_xbox_adpcm_block():
     climb = struct.unpack("<64h", media.decode_xbox_adpcm(struct.pack("<hBB", 0, 0, 0) + bytes([0x77] * 32), 1))
     assert all(b >= a for a, b in zip(climb, climb[1:])) and climb[-1] == 32767
     with pytest.raises(media.MediaError):
-        media.decode_xbox_adpcm(block, 3)
+        media.decode_xbox_adpcm(block, 9)
+
+
+def test_xbox_adpcm_six_channels_and_the_stereo_mix():
+    # The cutscenes' sound: six headers, then 4-byte runs channel by channel. Each channel holds its own level.
+    levels = [1000, -1000, 2000, 30000, 400, -400]
+    block = b"".join(struct.pack("<hBB", v, 0, 0) for v in levels) + bytes(32 * 6)
+    pcm = struct.unpack(f"<{64 * 6}h", media.decode_xbox_adpcm(block, 6))
+    assert pcm[:6] == tuple(levels) and pcm[-6:] == tuple(levels)
+    stereo = struct.unpack("<128h", media.downmix(bytes(struct.pack(f"<{64 * 6}h", *pcm)), 6))
+    # left = front left + 0.7071 centre + 0.7071 back left; the low frequency channel is left out
+    assert stereo[:2] == (int(1000 + 0.7071 * 2000 + 0.7071 * 400), int(-1000 + 0.7071 * 2000 - 0.7071 * 400))
+    body = media.playable(b"RSD6XADP" + struct.pack("<3I", 6, 16, 48000) + bytes(0x800 - 20) + block * 10)
+    assert body[1] == "audio/wav" and body[0][22] == 2                # played as stereo
 
 
 def test_radical_adpcm_mono_block():
@@ -312,9 +325,11 @@ def test_portal_previews_only_copied_files_for_this_computer(monkeypatch, tmp_pa
     class Fake:
         client_address = ("127.0.0.1", 5)
         headers = {}
+        _send_sound = server.Handler._send_sound
+        _send_ranged = server.Handler._send_ranged
 
         def _send(self, code, body, ctype, extra=None):
-            sent.append((code, ctype, body))
+            sent.append((code, ctype, body, extra or {}))
 
         def _json(self, obj, code=200):
             sent.append((code, "json", obj))
@@ -326,9 +341,14 @@ def test_portal_previews_only_copied_files_for_this_computer(monkeypatch, tmp_pa
         server.Handler.get_game_file_preview(f, what, lambda k, d="": q.get(k, d))
         return sent[-1]
 
-    code, ctype, body = ask("sound", version="pc", path="art/x.rsd")
-    assert code == 200 and ctype == "audio/wav" and body[:4] == b"RIFF"
-    code, _, obj = ask("pictures", version="ps2", path="art/t.p3d")
+    code, ctype, body, extra = ask("sound", version="pc", path="art/x.rsd")
+    assert code == 200 and ctype == "audio/wav" and body[:4] == b"RIFF" and extra["Accept-Ranges"] == "bytes"
+    # the player skips ahead: only that part, from the decoded sound kept from the first time
+    code, _, part, extra = ask("sound", headers={"Range": "bytes=40-"}, version="pc", path="art/x.rsd")
+    assert code == 206 and part == body[40:] and extra["Content-Range"] == f"bytes 40-{len(body) - 1}/{len(body)}"
+    assert ask("sound", headers={"Range": "bytes=-4"}, version="pc", path="art/x.rsd")[2] == body[-4:]
+    assert ask("sound", headers={"Range": "bytes=999-"}, version="pc", path="art/x.rsd")[0] == 416
+    code, _, obj = ask("pictures", version="ps2", path="art/t.p3d")[:3]
     assert obj["pictures"] == [{"i": 0, "name": "w.bmp", "width": 1, "height": 1, "kind": "png"}]
     assert ask("picture", version="ps2", path="art/t.p3d", i="0")[1] == "image/png"
     assert ask("picture", version="ps2", path="art/t.p3d", i="9")[0] == 415

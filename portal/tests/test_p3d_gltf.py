@@ -560,3 +560,220 @@ def test_portal_hands_over_a_whole_area(monkeypatch, tmp_path):
     assert code == 200 and ctype == "model/gltf-binary" and 'filename="a_01.glb"' in extra["Content-Disposition"]
     server.Handler.get_game_file_preview(Fake(), "model", lambda k, d="": {"version": "pc", "area": "z04/zz"}.get(k, d))
     assert sent[-1][0] == 404 and "isn't in your copied game files" in sent[-1][2]["error"]
+
+
+# --------------------------------------------------------------------------- cameras
+
+def check_references(doc, binc):
+    """Every index in the document points at something that is there, and every accessor fits its view."""
+    n = {k: len(doc.get(k, [])) for k in ("nodes", "meshes", "cameras", "skins", "accessors", "bufferViews",
+                                          "materials", "textures", "images")}
+    for node in doc["nodes"]:
+        for k, total in (("mesh", n["meshes"]), ("camera", n["cameras"]), ("skin", n["skins"])):
+            assert node.get(k, 0) < max(total, 1)
+        assert all(c < n["nodes"] for c in node.get("children", []))
+    width = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4, "MAT4": 16}
+    for acc in doc["accessors"]:
+        view = doc["bufferViews"][acc["bufferView"]]
+        size = {5126: 4, 5125: 4, 5123: 2, 5121: 1}[acc["componentType"]] * width[acc["type"]]
+        assert acc.get("byteOffset", 0) + acc["count"] * size <= view["byteLength"]
+        assert view["byteOffset"] + view["byteLength"] <= len(binc)
+    for a in doc.get("animations", []):
+        for ch in a["channels"]:
+            assert ch["target"]["node"] < n["nodes"] and ch["sampler"] < len(a["samplers"])
+        for s in a["samplers"]:
+            times = [t for (t,) in values(doc, binc, s["input"])]
+            assert times == sorted(set(times))                                # rising
+            assert doc["accessors"][s["input"]]["count"] == doc["accessors"][s["output"]]["count"]
+
+
+def camera_file(name, fov, position, look, up, moves=None):
+    """A Camera chunk, and its move: (parameter, chunk id, [(frame, value)]) channels, played by a frame
+    controller as in frontend/prebuilt/*.p3d."""
+    cam = chunk(0x2200, text(name) + struct.pack("<I13f", 2, fov, 1.0, 0.1, 1000.0, *position, *look, *up))
+    if not moves:
+        return p3d(cam)
+    group = b""
+    for param, cid, keys in moves:
+        frames = struct.pack(f"<{len(keys)}H", *[f for f, _ in keys])
+        frames += b"\0" * (-len(frames) % 4)
+        width = 3 if cid == 0x121104 else 1
+        vals = b"".join(struct.pack(f"<{width}f", *v) for _, v in keys)
+        group += chunk(cid, struct.pack("<I", 0) + param.encode().ljust(4, b"\0") + struct.pack("<I", len(keys))
+                       + frames + vals)
+    anim = chunk(0x121000, struct.pack("<I", 0) + text("CAM_" + name) + b"CAM\0" + struct.pack("<ffI", 60.0, 30.0, 0),
+                 chunk(0x121002, struct.pack("<II", 0, 1),
+                       chunk(0x121001, struct.pack("<I", 0) + text("CAM_" + name) + struct.pack("<II", 0, len(moves)),
+                             group)))
+    fc = chunk(0x121201, struct.pack("<I", 1) + text("CAM_" + name) + b"CAM\0ANIM" + struct.pack("<fI", 0, 1)
+               + text(name) + text("CAM_" + name))
+    return p3d(anim, cam, fc)
+
+
+def test_a_camera_and_its_move():
+    # the end of the game: looking down at Tony and rising (frontend/prebuilt/TonyEndGameCam.p3d)
+    down = (0.0, -1.0, 0.0)
+    glb, report = export(camera_file("cameraShape1", math.radians(40), (0, 3, -1), down, (0, 0, 1), [
+        ("TRAN", 0x121104, [(0, (0, 3, -1)), (30, (0, 6, -1))]),
+        ("LOOK", 0x121104, [(0, down), (60, (0, 0, 1))]),
+        ("UP", 0x121104, [(0, (0, 0, 1)), (30, (0, 0, 1)), (60, (0, 1, 0))]),
+        ("FOV", 0x121100, [(0, (0.7,))])]))
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    assert report.models == ["cameraShape1"] and report.animations == ["CAM_cameraShape1"]
+    cam = doc["cameras"][0]
+    assert cam["type"] == "perspective" and cam["perspective"]["yfov"] == pytest.approx(
+        2 * math.atan(math.tan(math.radians(20)) * 3 / 4))                  # the game's 40 degrees across, 4:3
+    node = doc["nodes"][0]
+    assert node["camera"] == 0 and node["translation"] == pytest.approx([0, 3, 1])     # Z mirrored
+
+    def forward(q):                                                  # where a glTF camera looks: its -Z
+        x, y, z, w = q
+        return (-(2 * (x * z + w * y)), -(2 * (y * z - w * x)), -(1 - 2 * (x * x + y * y)))
+    assert forward(node["rotation"]) == pytest.approx((0, -1, 0), abs=1e-6)
+    a = doc["animations"][0]
+    paths = {ch["target"]["path"]: a["samplers"][ch["sampler"]] for ch in a["channels"]}
+    assert set(paths) == {"translation", "rotation"}
+    assert values(doc, binc, paths["translation"]["output"])[-1] == pytest.approx((0, 6, 1))
+    rot = paths["rotation"]
+    assert [t for (t,) in values(doc, binc, rot["input"])] == pytest.approx([0, 1, 2])   # LOOK's and UP's keys
+    assert forward(values(doc, binc, rot["output"])[-1]) == pytest.approx((0, 0, -1), abs=1e-6)  # +Z mirrored
+
+
+def test_a_camera_without_a_move_and_a_one_axis_move():
+    glb, _ = export(camera_file("TestCam1", 0.7, (2, 0.1, 2), (0, 0, 1), (0, 1, 0)))
+    doc, binc = read_glb(glb)
+    assert "animations" not in doc and doc["nodes"][0]["translation"] == pytest.approx([2, 0.1, -2])
+    assert G.camera_rotation((0, 0, 1), (0, 1, 0)) == pytest.approx((0, 0, 0, 1), abs=1e-6)   # the game's +Z is -Z
+    assert all(math.isfinite(v) for v in G.camera_rotation((0, 1, 0), (0, 1, 0)))  # looking straight up
+
+
+# --------------------------------------------------------------------------- what a file holds, and Blender
+
+def _server(monkeypatch, tmp_path, files):
+    import importlib
+    import sys
+    from conftest import PORTAL
+    sys.path.insert(0, str(PORTAL))
+    server = importlib.import_module("decomp_portal_server")
+    out, index = copied_game(tmp_path, files)
+    monkeypatch.setattr(server.GA, "out_dir", lambda bin_dir=None: out)
+    monkeypatch.setattr(server.GAME_FILES, "index", lambda: index)
+    monkeypatch.setattr(server.GAME_FILES, "bin_dir", tmp_path)
+    monkeypatch.setattr(server.BLENDER, "bin_dir", tmp_path)
+    monkeypatch.setattr(server, "HOST", "127.0.0.1")
+    return server, out, index
+
+
+def _subtitle(text, language="English"):
+    lang = language.encode()
+    body = struct.pack("<I", len(lang)) + lang + b"\0" * (((len(lang) + 4) & ~3) - len(lang))
+    utf16 = text.encode("utf-16-le") + b"\0\0"
+    return p3d(chunk(media.SUBTITLE, body + struct.pack("<iiI", -1, -1, len(utf16) // 2) + utf16))
+
+
+def test_what_a_file_holds(monkeypatch, tmp_path):
+    import blender_export as BX
+    rig = skeleton("rig", [("character_root", 0, (0, 0, 0)), ("pelvis", 0, (0, 1.0, 0))])
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    tony = p3d(rig, skin_chunk(tri, [0, 1, 2], [(1.0, 0, 0)] * 3, [0] * 3, [0, 1]))
+    moves = p3d(animation("GEN_WA_Bench_Order", [("pelvis", [(0, (0, 0, 0, 1)), (30, (0, 0.6, 0, 0.8))])]))
+    files = {"cement.rcf/art/characters/pc/MCP_BlackSuitTony.p3d": tony,
+             "cement.rcf/art/animations/WA_Sitting.p3d": moves,
+             "frontend.rcf/frontend/prebuilt/TonyEndGameCam.p3d": camera_file("cam", 0.6, (0, 3, 0), (0, -1, 0), (0, 0, 1)),
+             "sound2.rcf/art/subtitles/f/f7ca25caf057c712.p3d": _subtitle("You want a war with me?"),
+             "sound2.rcf/art/sound/rsd/f/f7ca25caf057c712.rsd": b"RSD6PCM " + bytes(0x800)}
+    assert BX.inspect(moves)["what"].startswith("1 animation (shown on Tony")
+    assert BX.inspect(files["frontend.rcf/frontend/prebuilt/TonyEndGameCam.p3d"])["kind"] == "camera"
+    info = BX.inspect(files["sound2.rcf/art/subtitles/f/f7ca25caf057c712.p3d"])
+    assert info["kind"] == "subtitles" and not info["blender"] and info["lines"] == [
+        {"language": "English", "text": "You want a war with me?"}]
+    assert BX.inspect(b"P3D\xff" + bytes(8))["blender"] is False
+    server, out, index = _server(monkeypatch, tmp_path, files)
+    sent = []
+
+    class Fake:
+        client_address = ("127.0.0.1", 5)
+        headers = {}
+        _send_model = server.Handler._send_model
+
+        def _send(self, code, body, ctype, extra=None):
+            sent.append((code, ctype, body))
+
+        def _json(self, obj, code=200):
+            sent.append((code, "json", obj))
+
+    def ask(what, **q):
+        server.Handler.get_game_file_preview(Fake(), what, lambda k, d="": q.get(k, d))
+        return sent[-1]
+    got = ask("inspect", version="pc", path="sound2.rcf/art/subtitles/f/f7ca25caf057c712.p3d")[2]
+    assert got["sound"] == "sound2.rcf/art/sound/rsd/f/f7ca25caf057c712.rsd"           # the sound it goes with
+    got = ask("subtitles", version="pc", path="sound2.rcf/art/sound/rsd/f/f7ca25caf057c712.rsd")[2]
+    assert got["lines"][0]["text"] == "You want a war with me?"
+    assert ask("subtitles", version="pc", path="sound2.rcf/art/sound/rsd/0/nothing.rsd")[2]["lines"] == []
+    # an animation file comes with Tony to show it on; a camera file is a camera
+    code, ctype, body = ask("model", version="pc", path="cement.rcf/art/animations/WA_Sitting.p3d")
+    doc, _ = read_glb(body)
+    assert code == 200 and [a["name"] for a in doc["animations"]] == ["GEN_WA_Bench_Order"]
+    assert any(n.get("skin") is not None for n in doc["nodes"])
+    code, _, body = ask("model", version="pc", path="frontend.rcf/frontend/prebuilt/TonyEndGameCam.p3d")
+    assert code == 200 and read_glb(body)[0]["cameras"][0]["name"] == "cam"
+
+
+def test_open_in_blender(monkeypatch, tmp_path):
+    import blender_export as BX
+    server, out, index = _server(monkeypatch, tmp_path, city_files())
+    launched = []
+    monkeypatch.setattr(server.BX, "open_in_blender", lambda exe, files, save, work: launched.append((exe, files, save)))
+    sent = []
+
+    class Fake:
+        client_address = ("127.0.0.1", 5)
+        headers = {}
+        _local_only = server.Handler._local_only
+
+        def _json(self, obj, code=200):
+            sent.append((code, obj))
+
+    def post(**body):
+        server.Handler.post_game_files_open_in_blender(Fake(), body)
+        return sent[-1]
+    monkeypatch.setattr(server.BX, "find_blender", lambda bin_dir: None)
+    code, obj = post(version="pc", path="cement.rcf/art/box.p3d")
+    assert code == 404 and obj["need_blender"] and not launched
+    exe = tmp_path / "Blender 4.2" / "blender.exe"
+    exe.parent.mkdir()
+    exe.write_bytes(b"MZ")
+    monkeypatch.setattr(server.BX, "find_blender", lambda bin_dir: exe)
+    code, obj = post(version="pc", path="cement.rcf/art/box.p3d")
+    assert code == 200 and obj["saved"].endswith("Opened/box.blend")
+    glb = launched[-1][1][0]
+    assert glb.name == "box.glb" and read_glb(glb.read_bytes())[0]["nodes"][0]["name"] == "box"
+    code, obj = post(version="pc", area="z04/a_01")
+    assert code == 200 and launched[-1][1][0].name == "a_01.glb"
+    assert post(version="pc", city=True)[0] == 404                                     # nothing exported yet
+    (tmp_path / "blender" / "PC").mkdir(parents=True, exist_ok=True)
+    for n in ("a_01", "b_02"):
+        (tmp_path / "blender" / "PC" / f"{n}.glb").write_bytes(b"glTF")
+    code, obj = post(version="pc", city=True)
+    assert code == 200 and obj["files"] == 2 and launched[-1][2].name == "PC city.blend"
+    Fake.client_address = ("192.168.1.9", 5)
+    assert post(version="pc", city=True)[0] == 403
+    # where Blender is, when it isn't found
+    assert BX.remember_blender(tmp_path, str(tmp_path / "nope.exe"))
+    assert BX.remember_blender(tmp_path, str(exe.parent)) is None
+    monkeypatch.setattr(BX.shutil, "which", lambda name: None)
+    assert BX.find_blender(tmp_path) == exe
+
+
+def test_the_blender_script_imports_and_saves(tmp_path, monkeypatch):
+    import blender_export as BX
+    started = []
+    monkeypatch.setattr(BX.subprocess, "Popen", lambda args, **kw: started.append(args))
+    BX.open_in_blender(tmp_path / "blender.exe", [tmp_path / "a.glb", tmp_path / "b.glb"], tmp_path / "city.blend",
+                       tmp_path / "_scripts")
+    args = started[-1]
+    assert args[0].endswith("blender.exe") and args[1] == "--python"
+    script = open(args[2], encoding="utf-8").read()
+    compile(script, "open_in_blender.py", "exec")                                       # valid Python for Blender
+    assert "import_scene.gltf" in script and "save_as_mainfile" in script and "a.glb" in script

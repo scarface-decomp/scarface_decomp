@@ -2031,8 +2031,9 @@ class Job:
     def running(self) -> bool:
         return bool(self._thread and self._thread.is_alive())
 
-    def start(self, versions: List[str], mode: str, folders: str = "game") -> Optional[str]:
-        """None when started, or why not."""
+    def start(self, versions: List[str], mode: str, folders: str = "game", check: bool = False) -> Optional[str]:
+        """None when started, or why not. A copy with the same choices as the last one only starts with check:
+        it then looks at every file and puts back the ones that went missing (or says they're all there)."""
         with self._lock:
             if self.running:
                 return "Already copying the game's files. Wait for it to finish or press Stop."
@@ -2049,10 +2050,10 @@ class Job:
                 if why:
                     return why
             index = self.index()
-            if (same_settings(index, sources, chosen, mode, folders)       # then look at every file (a few seconds)
-                    and up_to_date(index, what_is_there(out_dir(self.bin_dir), index), sources, chosen, mode, folders)):
-                return ("Already copied with these choices, and every file is still there: there's nothing to "
-                        "copy. Pick other versions or another layout to copy them differently.")
+            cut = (out_dir(self.bin_dir) / WORK / PLACING).is_file()
+            if not check and not cut and same_settings(index, sources, chosen, mode, folders):
+                return ("Already copied with these choices: there's nothing to copy. To put back files that went "
+                        "missing, press Check for missing files.")
             need = sum(sources[v].size for v in chosen) - _reusable_bytes(index)
             free = _free_space(self.bin_dir)
             if free is not None and free < need * 1.05:
@@ -2159,6 +2160,30 @@ def file_on_disk(out: Path, index: Optional[dict], version: str, path: str, max_
             return p if p is not None and p.is_file() and p.stat().st_size == row[1] else None
         except OSError:
             return None
+    return None
+
+
+_PAIRS: Dict[Tuple[int, str], Dict[str, Dict[str, str]]] = {}
+
+
+def companion(index: Optional[dict], version: str, path: str) -> Optional[str]:
+    """A sound's subtitle file, or a subtitle file's sound: art/sound/rsd/<x>/<name>.rsd and
+    art/subtitles/<x>/<name>.p3d go together (in whichever archive)."""
+    key = (id(index), version)
+    pairs = _PAIRS.get(key)
+    if pairs is None:
+        _PAIRS.clear()                               # one index at a time is plenty
+        pairs = {"rsd": {}, "p3d": {}}
+        for row in ((index or {}).get("versions", {}).get(version) or {}).get("files", []):
+            low = row[0].lower()
+            for kind, marker in (("rsd", "/art/sound/rsd/"), ("p3d", "/art/subtitles/")):
+                if marker in "/" + low and low.endswith("." + kind):
+                    pairs[kind][low.rsplit("/", 2)[-2] + "/" + low.rsplit("/", 1)[-1][:-4]] = row[0]
+        _PAIRS[key] = pairs
+    low = path.lower()
+    for kind, other in (("rsd", "p3d"), ("p3d", "rsd")):
+        if low.endswith("." + kind) and "/" in low:
+            return pairs[other].get(low.rsplit("/", 2)[-2] + "/" + low.rsplit("/", 1)[-1][:-4])
     return None
 
 

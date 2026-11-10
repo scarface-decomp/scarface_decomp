@@ -12,12 +12,21 @@ finds the files.
                                         places (packages/dzones/*_dzone.p3d)
     area_glb(out, index, version, key)  one area as a .glb
     CityJob                             every city area, in the background
+    inspect(data)                       what a .p3d holds, in words, and whether Blender can show it
+    find_blender(bin_dir) / open_in_blender(exe, files, save)
+                                        start the person's own Blender with .glb files imported, saving
+                                        a .blend beside them (a .glb double-clicked makes Blender try to
+                                        open it as a .blend: "not a valid Blender file")
 
 Your own copies, on your own computer; standard library only.
 """
 
 from __future__ import annotations
 
+import os
+import shutil
+import subprocess
+import sys
 import threading
 import time
 from pathlib import Path
@@ -92,6 +101,13 @@ def model_glb(out: Path, index: Optional[dict], version: str, game_path: str, da
                 lib.add(f.name, f.read_bytes(), main=False)
             except (OSError, P3G.p3d.P3dError):
                 pass
+    elif _moves_only(src):
+        actor = stand_in(out, index, version)          # the people's animations, on Tony
+        if actor is not None:
+            try:
+                lib.add(actor.name, actor.read_bytes(), main=True)
+            except (OSError, P3G.p3d.P3dError):
+                pass
     elif any(c.id == P3G.SKIN for c in src.chunks):
         for f in animations(out, index, version):
             try:
@@ -100,6 +116,94 @@ def model_glb(out: Path, index: Optional[dict], version: str, game_path: str, da
                 continue
             anims += [P3G.Ref(extra, c) for c in extra.chunks if c.id == P3G.ANIMATION]
     return P3G.export(lib, map_mode=is_map, anims=anims)
+
+
+MODEL_CHUNKS = (P3G.SKIN, P3G.COMPOSITE, P3G.MESH)
+STAND_INS = ("art/characters/pc/mcp_blacksuittony.p3d", "art/characters/npc/chartemp_npc_blacksuittony.p3d")
+
+
+def _moves_only(src: "P3G.Source") -> bool:
+    """Animations for people (not a camera's), and nothing to show them on."""
+    if any(c.id in MODEL_CHUNKS for c in src.chunks):
+        return False
+    return any(c.id == P3G.ANIMATION and (P3G.p3d.fields(src.data, c).get("type") or "").upper() != "CAM"
+               for c in src.chunks)
+
+
+def stand_in(out: Path, index: Optional[dict], version: str) -> Optional[Path]:
+    """Tony, for showing the people's animations on (every person in the game has the same 27 joints)."""
+    rows = _rows(index, version)
+    for want in STAND_INS:
+        for row in rows:
+            if row[0].lower().endswith(want):
+                p = GA.file_on_disk(out, index, version, row[0])
+                if p is not None:
+                    return p
+    return None
+
+
+def inspect(data: bytes) -> dict:
+    """What a .p3d holds, for the portal: {what (in words), kind, pictures, blender, lines}."""
+    import media as MEDIA
+    try:
+        lib = P3G.Library()
+        src = lib.add("file.p3d", data)
+    except P3G.p3d.P3dError as e:
+        return {"kind": "unknown", "what": f"Not a Pure3D file the portal can read ({e}).", "pictures": 0,
+                "blender": False, "lines": []}
+    count: Dict[int, int] = {}
+    for c in P3G.p3d.walk(src.chunks):
+        count[c.id] = count.get(c.id, 0) + 1
+    top = {}
+    for c in src.chunks:
+        top[c.id] = top.get(c.id, 0) + 1
+    pictures = count.get(0x19000, 0)
+    lines = MEDIA.subtitles(data) if top.get(MEDIA.SUBTITLE) else []
+    moves = cams = 0
+    for c in src.chunks:
+        if c.id == P3G.ANIMATION:
+            if (P3G.p3d.fields(data, c).get("type") or "").upper() == "CAM":
+                cams += 1
+            else:
+                moves += 1
+    cameras = top.get(P3G.CAMERA, 0)
+    world, placed = P3G._world_geo(lib, src), sum(len(r) for _m, r in P3G.instance_objects(src))
+    skins, comps, meshes = top.get(P3G.SKIN, 0), top.get(P3G.COMPOSITE, 0), top.get(P3G.MESH, 0)
+
+    def n(k: int, one: str, many: str) -> str:
+        return f"{k:,} {one if k == 1 else many}"
+    parts, kind = [], "other"
+    if lines:
+        kind = "subtitles"
+        parts.append("Subtitles: the words of the sound with the same name")
+    elif world or placed:
+        kind = "map"
+        parts.append("A map area" + (": its buildings and ground" if world else "")
+                     + (f", and {n(placed, 'object', 'objects')} placed on it" if placed else ""))
+    elif skins:
+        kind = "character"
+        parts.append(n(skins, "character (or other skinned model) with its skeleton",
+                       "characters (or other skinned models) with their skeletons"))
+    elif comps or meshes:
+        kind = "models"
+        parts.append(n(comps or meshes, "model", "models"))
+    if cameras:
+        kind = kind if kind != "other" else "camera"
+        parts.append(n(cameras, "camera", "cameras") + (" with its move" if cams == 1 and cameras == 1 else
+                                                       f" and {n(cams, 'camera move', 'camera moves')}" if cams else ""))
+    if moves:
+        kind = kind if kind != "other" else "animations"
+        parts.append(n(moves, "animation", "animations")
+                     + (" (shown on Tony: everyone in the game has the same skeleton)" if kind == "animations" else ""))
+    if pictures:
+        kind = kind if kind != "other" else "pictures"
+        parts.append(n(pictures, "picture", "pictures"))
+    if not parts:
+        parts.append("Game data with nothing to show: " + ", ".join(
+            sorted({P3G.p3d.NAMES.get(c.id, hex(c.id)) for c in src.chunks})[:6]))
+    blender = bool(world or placed or skins or comps or meshes or cameras or moves)
+    return {"kind": kind, "what": "; ".join(parts) + ".", "pictures": pictures, "blender": blender,
+            "lines": [{"language": lang, "text": text} for lang, text in lines]}
 
 
 def area_glb(out: Path, index: Optional[dict], version: str, key: str,
@@ -193,3 +297,140 @@ class CityJob:
             self.status["error"] = f"{type(e).__name__}: {e}"
         finally:
             self.status.update(running=False, area="")
+
+
+# --------------------------------------------------------------------------- the person's own Blender
+
+BLENDER_PATH_FILE = "blender_path.txt"           # binaries/blender/: where blender.exe is, if it isn't found
+OPENED = "Opened"                                # binaries/blender/<version>/Opened/: single files and areas
+
+OPEN_SCRIPT = r"""
+# Made by the Scarface decomp portal: import the game's scenes, then save them as a .blend beside them.
+import bpy
+FILES = %(files)r
+SAVE = %(save)r
+bpy.ops.wm.read_homefile(use_empty=True)
+for f in FILES:
+    try:
+        bpy.ops.import_scene.gltf(filepath=f)
+    except Exception as e:  # one area that won't come in shouldn't stop the rest
+        print("Couldn't import", f, e)
+scene = bpy.context.scene
+ends = [a.frame_range[1] for a in bpy.data.actions]
+if ends:
+    scene.frame_start, scene.frame_end = 0, int(max(ends))
+cams = [o for o in scene.objects if o.type == "CAMERA"]
+if cams and scene.camera is None:
+    scene.camera = cams[0]
+for screen in bpy.data.screens:
+    for area in screen.areas:
+        for space in area.spaces:
+            if space.type == "VIEW_3D":
+                space.clip_start, space.clip_end = 0.05, 50000.0
+try:
+    for window in bpy.context.window_manager.windows:
+        for area in window.screen.areas:
+            if area.type == "VIEW_3D":
+                region = next(r for r in area.regions if r.type == "WINDOW")
+                with bpy.context.temp_override(window=window, area=area, region=region):
+                    bpy.ops.view3d.view_all()
+except Exception:
+    pass
+if SAVE:
+    try:
+        bpy.ops.wm.save_as_mainfile(filepath=SAVE)
+    except Exception as e:
+        print("Couldn't save", SAVE, e)
+"""
+
+
+def _versioned(p: Path) -> tuple:
+    digits = "".join(ch if ch.isdigit() else " " for ch in p.parent.name).split()
+    return tuple(int(d) for d in digits)
+
+
+def _from_registry() -> List[Path]:
+    """Where Windows opens .blend files with (the Blender installer sets this)."""
+    if os.name != "nt":
+        return []
+    try:
+        import winreg
+    except ImportError:
+        return []
+    found = []
+    for root, key in ((winreg.HKEY_CLASSES_ROOT, r"blendfile\shell\open\command"),
+                      (winreg.HKEY_CURRENT_USER, r"Software\Classes\blendfile\shell\open\command")):
+        try:
+            with winreg.OpenKey(root, key) as k:
+                cmd = str(winreg.QueryValue(k, None) or "")
+        except OSError:
+            continue
+        exe = cmd.split('"')[1] if cmd.startswith('"') else cmd.split(" ")[0]
+        if exe:
+            found.append(Path(exe))
+    return found
+
+
+def find_blender(bin_dir: Path) -> Optional[Path]:
+    """The person's Blender: the one they told the portal about, $BLENDER, on the PATH, the one .blend
+    files open with, or the newest in the usual places."""
+    tries: List[Path] = []
+    try:
+        told = (bin_dir / OUT_NAME / BLENDER_PATH_FILE).read_text(encoding="utf-8").strip().strip('"')
+        if told:
+            tries.append(Path(told))
+    except OSError:
+        pass
+    if os.environ.get("BLENDER"):
+        tries.append(Path(os.environ["BLENDER"]))
+    which = shutil.which("blender")
+    if which:
+        tries.append(Path(which))
+    tries += _from_registry()
+    if os.name == "nt":
+        for base in {os.environ.get("ProgramFiles", r"C:\Program Files"), os.environ.get("ProgramW6432", r"C:\Program Files")}:
+            tries += sorted(Path(base, "Blender Foundation").glob("Blender*/blender.exe"), key=_versioned, reverse=True)
+        for base in (os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)"), os.environ.get("ProgramFiles", "")):
+            if base:
+                tries.append(Path(base, "Steam", "steamapps", "common", "Blender", "blender.exe"))
+        local = os.environ.get("LOCALAPPDATA")
+        if local:
+            tries.append(Path(local, "Microsoft", "WindowsApps", "blender.exe"))
+    elif sys.platform == "darwin":
+        tries.append(Path("/Applications/Blender.app/Contents/MacOS/Blender"))
+    else:
+        tries += [Path("/snap/bin/blender"), Path("/usr/bin/blender"), Path("/usr/local/bin/blender")]
+    for t in tries:
+        try:
+            if t.is_file():
+                return t.with_name("blender.exe") if t.name.lower() == "blender-launcher.exe" and \
+                    t.with_name("blender.exe").is_file() else t
+        except OSError:
+            continue
+    return None
+
+
+def remember_blender(bin_dir: Path, exe: str) -> Optional[str]:
+    """Keep where the person's Blender is. None when kept, or why not."""
+    exe = exe.strip().strip('"')
+    p = Path(exe)
+    if p.is_dir():
+        p = next((p / n for n in ("blender.exe", "blender", "Blender") if (p / n).is_file()), p / "blender.exe")
+    if not p.is_file() or "blender" not in p.name.lower():
+        return "That isn't Blender: pick blender.exe in the folder Blender is installed in."
+    (bin_dir / OUT_NAME).mkdir(parents=True, exist_ok=True)
+    (bin_dir / OUT_NAME / BLENDER_PATH_FILE).write_text(str(p), encoding="utf-8")
+    return None
+
+
+def open_in_blender(exe: Path, files: List[Path], save: Optional[Path], work: Path) -> None:
+    """Start Blender (not waiting for it) with the .glb files imported into a new scene, saved as save."""
+    work.mkdir(parents=True, exist_ok=True)
+    script = work / "open_in_blender.py"
+    script.write_text(OPEN_SCRIPT % {"files": [str(f.resolve()) for f in files],
+                                     "save": str(save.resolve()) if save else None}, encoding="utf-8")
+    flags = 0
+    if os.name == "nt":
+        flags = getattr(subprocess, "DETACHED_PROCESS", 0) | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+    subprocess.Popen([str(exe), "--python", str(script)], cwd=str(work), stdin=subprocess.DEVNULL,
+                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, close_fds=True, creationflags=flags)

@@ -54,6 +54,7 @@ import p3d  # noqa: E402
 MESH, SKIN, PRIM_GROUP, SHADER, SKELETON, JOINT = 0x10000, 0x10001, 0x10020, 0x11000, 0x23000, 0x23001
 COMPOSITE, COMPOSITE_PROP = 0x123000, 0x123001
 ANIMATION, ANIM_GROUP_LIST, ANIM_GROUP = 0x121000, 0x121002, 0x121001
+CAMERA, FRAME_CONTROLLER = 0x2200, 0x121201
 WORLD_GEO, STATE_PROP = 0x8800003, 0x8800005
 SCRIPT_OBJECT, OBJECT_PROPERTY, OBJECT_BINARY = 0x9900190, 0x9900192, 0x9900194
 VECTOR_CHANNELS = (0x121102, 0x121103, 0x121104)
@@ -602,7 +603,7 @@ class Gltf:
         return len(self.doc["accessors"]) - 1
 
     def add(self, key: str, item: dict) -> int:
-        self.doc[key].append(item)
+        self.doc.setdefault(key, []).append(item)
         return len(self.doc[key]) - 1
 
     def node(self, name: str, parent: Optional[int] = None, **kw) -> int:
@@ -882,6 +883,74 @@ class Builder:
         self.skin(ref, copy, copy.group)  # type: ignore[attr-defined]
         return copy.group  # type: ignore[attr-defined]
 
+    # cameras
+
+    def camera(self, ref: Ref, anim: Optional[Ref] = None) -> int:
+        """A camera node (glTF looks down -Z), moved and turned by its animation if it has one."""
+        cam = camera_chunk(ref.data, ref.chunk)
+        aspect = 4 / 3                                       # the game's screen
+        yfov = 2 * math.atan(math.tan(max(0.01, min(3.0, cam["fov"])) / 2) / aspect)
+        ci = self.g.add("cameras", {"name": cam["name"], "type": "perspective", "perspective": {
+            "aspectRatio": aspect, "yfov": yfov, "znear": max(0.001, cam["near"]),
+            "zfar": max(cam["far"], cam["near"] + 1)}})
+        node = self.g.node(cam["name"] or "camera", None, camera=ci, translation=pos(cam["position"]),
+                           rotation=camera_rotation(cam["look"], cam["up"]))
+        if anim is not None:
+            self.camera_animation(anim, node)
+        self.report.models.append(cam["name"] or "camera")
+        return node
+
+    def camera_animation(self, ref: Ref, node: int) -> bool:
+        data, c = ref.data, ref.chunk
+        info = p3d.fields(data, c)
+        rate = info.get("frame rate") or 30.0
+        keys: Dict[str, Tuple[List[int], List[tuple]]] = {}
+        for ch in p3d.walk(c.children):
+            if ch.id in VECTOR_CHANNELS:
+                try:
+                    param, frames, vals = _vector_keys(data, ch)
+                except (p3d.P3dError, struct.error, IndexError, KeyError):
+                    continue
+                if frames:
+                    keys[param] = (frames, vals)
+        channels, samplers = [], []
+
+        def add(times: List[float], out: List[tuple], kind: str, path: str) -> None:
+            samplers.append({"input": self.g.accessor([(t,) for t in times], "SCALAR", bounds=True),
+                             "output": self.g.accessor(out, kind), "interpolation": "LINEAR"})
+            channels.append({"sampler": len(samplers) - 1, "target": {"node": node, "path": path}})
+
+        def rising(frames: List[int]) -> List[int]:
+            out, last = [], -1
+            for f in frames:
+                if f > last:
+                    out.append(f)
+                    last = f
+            return out
+
+        if "TRAN" in keys:
+            frames, vals = keys["TRAN"]
+            fs = rising(frames)
+            add([f / rate for f in fs], [pos(_at(frames, vals, f)) for f in fs], "VEC3", "translation")
+        if "LOOK" in keys:
+            look = keys["LOOK"]
+            up = keys.get("UP", ([0], [(0.0, 1.0, 0.0)]))
+            fs = rising(sorted(set(look[0]) | set(up[0])))
+            out, prev = [], None
+            for f in fs:
+                q = camera_rotation(_at(*look, f), _at(*up, f))
+                if prev and sum(a * b for a, b in zip(q, prev)) < 0:
+                    q = tuple(-a for a in q)
+                out.append(q)
+                prev = q
+            add([f / rate for f in fs], out, "VEC4", "rotation")
+        if not channels:
+            return False
+        self.g.add("animations", {"name": info.get("name") or "camera", "channels": channels, "samplers": samplers})
+        self.report.animations.append(info.get("name") or "camera")
+        return True
+
+
     # animations
 
     def animation(self, ref: Ref) -> bool:
@@ -925,18 +994,7 @@ class Builder:
                     if param not in ("TRAN", "TRA"):
                         continue
                     path, kind = "translation", "VEC3"
-                    full = values
-                    if ch.id in (0x121102, 0x121103):
-                        f = p3d.fields(data, ch)
-                        mapping, const = f["mapping"], f["constants"]
-                        moving = [mapping] if ch.id == 0x121102 else [i for i in range(3) if i != mapping]
-                        full = []
-                        for v in values:
-                            xyz = list(const)
-                            for i, val in zip(moving, v):
-                                xyz[i] = val
-                            full.append(tuple(xyz))
-                    out = [pos(v) for v in full]
+                    out = [pos(v) for v in _vector_keys(data, ch)[2]]
                 keep, last = [], -1
                 for i, f in enumerate(frames):                       # glTF wants the times to rise
                     if f > last:
@@ -951,6 +1009,100 @@ class Builder:
         self.g.add("animations", {"name": info.get("name") or "animation", "channels": channels, "samplers": samplers})
         self.report.animations.append(info.get("name") or "animation")
         return True
+
+
+def _vector_keys(data: bytes, ch: p3d.Chunk) -> Tuple[str, List[int], List[Vec3]]:
+    """A vector channel's (parameter, key frames, x y z per key): a Vector1DOF or Vector2DOF channel's
+    moving components put back with its constants."""
+    param, frames, values = p3d.channel_keys(data, ch)
+    if ch.id not in (0x121102, 0x121103):
+        return param, frames, [tuple(v) for v in values]  # type: ignore[misc]
+    f = p3d.fields(data, ch)
+    mapping, const = f["mapping"], f["constants"]
+    moving = [mapping] if ch.id == 0x121102 else [i for i in range(3) if i != mapping]
+    full = []
+    for v in values:
+        xyz = list(const)
+        for i, val in zip(moving, v):
+            xyz[i] = val
+        full.append(tuple(xyz))
+    return param, frames, full  # type: ignore[return-value]
+
+
+def _at(frames: List[int], values: List[tuple], f: float) -> tuple:
+    """A channel's value at frame f, in a straight line between its keys (held before the first and after
+    the last)."""
+    if f <= frames[0] or len(frames) == 1:
+        return values[0]
+    for i in range(1, len(frames)):
+        if f <= frames[i]:
+            a, b = frames[i - 1], frames[i]
+            t = (f - a) / (b - a) if b > a else 1.0
+            return tuple(x + (y - x) * t for x, y in zip(values[i - 1], values[i]))
+    return values[-1]
+
+
+def _cross(a: Sequence[float], b: Sequence[float]) -> Vec3:
+    return (a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0])
+
+
+def camera_rotation(look: Sequence[float], up: Sequence[float]) -> Quat:
+    """glTF's rotation for a camera looking along look (a direction, Pure3D's space) with up above it: a
+    glTF camera looks down its -Z with +Y up."""
+    z = _unit(tuple(-v for v in pos(look)))                              # type: ignore[arg-type]
+    x = _cross(pos(up), z)
+    if math.sqrt(sum(v * v for v in x)) < 1e-9:                          # looking straight along up
+        x = _cross((0.0, 0.0, 1.0) if abs(z[1]) > 0.9 else (0.0, 1.0, 0.0), z)
+    x = _unit(x)
+    y = _cross(z, x)
+    return _quat_from_rows([[x[0], y[0], z[0]], [x[1], y[1], z[1]], [x[2], y[2], z[2]]])
+
+
+def frame_controller(data: bytes, c: p3d.Chunk) -> Tuple[str, str, str]:
+    """A Frame Controller (0x121201): (its type, what it drives, the animation it plays). Version, name,
+    type (CAM, PTRN ...), "ANIM", two numbers, then the driven object's name and the animation's."""
+    _name, p = _text(data, c.body[0] + 4)
+    kind = data[p:p + 4].rstrip(b"\0").decode("latin-1")
+    target, p = _text(data, p + 16)
+    anim, _p = _text(data, p)
+    return kind, target.rstrip("\0"), anim.rstrip("\0")
+
+
+def _cameras(lib: "Library", b: "Builder") -> set:
+    """Every camera in the main files, with the animation its frame controller plays (or the file's only
+    camera animation). Returns those animations, so they aren't tried on skeletons."""
+    cams = list(lib.main_chunks(CAMERA))
+    moves = {}
+    for ref in lib.main_chunks(ANIMATION):
+        if (p3d.fields(ref.data, ref.chunk).get("type") or "").upper() == "CAM":
+            moves[ref.name.lower()] = ref
+    links = {}
+    for ref in lib.main_chunks(FRAME_CONTROLLER):
+        try:
+            kind, target, anim = frame_controller(ref.data, ref.chunk)
+        except (struct.error, IndexError, UnicodeDecodeError):
+            continue
+        if kind.upper() == "CAM":
+            links[target.lower()] = anim.lower()
+    for ref in cams:
+        try:
+            name = camera_chunk(ref.data, ref.chunk)["name"].lower()
+        except (struct.error, IndexError):
+            continue
+        anim = moves.get(links.get(name, "")) or moves.get("cam_" + name)
+        if anim is None and len(moves) == 1 and len(cams) == 1:
+            anim = next(iter(moves.values()))
+        b.camera(ref, anim)
+    return {id(r.chunk) for r in moves.values()}
+
+
+def camera_chunk(data: bytes, c: p3d.Chunk) -> dict:
+    """A Camera chunk (0x2200): name, version, field of view (radians, across), aspect, near and far
+    clip, position, look direction and up."""
+    name, p = _text(data, c.body[0])
+    v = struct.unpack_from("<I13f", data, p)
+    return {"name": name, "fov": v[1], "aspect": v[2], "near": v[3], "far": v[4],
+            "position": v[5:8], "look": v[8:11], "up": v[11:14]}
 
 
 def _unit(v: Vec3) -> Vec3:
@@ -1115,7 +1267,10 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
                 tops.append((name, b.g.node(name, None, mesh=mesh)))
         _lay_out(b, tops)
         b.report.models = [n for n, _ in tops]
+    camera_moves = _cameras(lib, b) if not map_mode else set()
     for ref in list(anims) + list(lib.main_chunks(ANIMATION)):
+        if id(ref.chunk) in camera_moves:
+            continue
         if not b.animation(ref):
             b.report.unmatched_animations += 1
     if not b.g.doc["scenes"][0]["nodes"]:

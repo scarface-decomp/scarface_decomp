@@ -552,6 +552,12 @@
     .gf-row .a .btn-sm { padding: 2px 8px; font-size: 0.74rem; }
     .gf-prev { padding: 10px 12px 12px; border-bottom: 1px solid var(--border-subtle); background: var(--bg-card-alt); }
     .gf-prev audio { width: 100%; max-width: 520px; display: block; }
+    .gf-prev .gf-what { margin: 0 0 8px; color: var(--text-secondary); }
+    .gf-prev .gf-line { margin: 8px 0; padding: 8px 12px; border-left: 3px solid var(--blood); background: var(--bg-card); max-width: 72ch; line-height: 1.5; }
+    .gf-bl { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0 0; }
+    .gf-where { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0 0; }
+    .gf-prev .gf-video { display: block; width: 100%; max-width: 960px; background: #000; margin: 0 0 6px; }
+    .gf-where .input-box { flex: 1 1 360px; }
     .gf-prev .small { margin: 6px 0 0; }
     .gf-pics { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; }
     .gf-pic { margin: 0; }
@@ -1279,7 +1285,8 @@
             <div class="card-hdr">
               <div>
                 <h2 class="card-title">In Blender</h2>
-                <p class="card-sub">The game's models and map as glTF scenes (<code>.glb</code>) made from the files you copied: in Blender, File &gt; Import &gt; glTF 2.0. Characters come with their skeletons and skin weights, cars with their moving parts, and map areas with the trees, lamps, benches and signs the game places on them. For a single file, use <b>Blender</b> next to it in the list above.</p>
+                <p class="card-sub">The game's models and map as scenes made from the files you copied. <b>Open in Blender</b> starts your Blender with the scene already in, and saves it as a <code>.blend</code> you can double-click next time. A downloaded <code>.glb</code> goes in with File &gt; Import &gt; glTF 2.0 (double-clicking a <code>.glb</code> makes Blender try to open it as a <code>.blend</code>: "not a valid Blender file"). Characters come with their skeletons and the game's animations, cameras with their moves, and map areas with the trees, lamps, benches and signs the game places on them. For a single file, use <b>Open</b> next to it in the list above.</p>
+                <p class="gf-notes" id="gfb-app" role="status"></p>
               </div>
             </div>
             <div class="gfb-need" id="gfb-need" hidden>
@@ -1291,17 +1298,21 @@
             <div class="gfb-row">
               <label class="sr-only" for="gfb-area">Map area</label>
               <select id="gfb-area" class="input-box" onchange="updateGfAreaLink()"></select>
-              <a class="btn-sm" id="gfb-area-dl" download aria-disabled="true">Download the area</a>
+              <button type="button" class="btn-sm" id="gfb-area-open" onclick="gfOpenArea()">Open in Blender</button>
+              <button type="button" class="btn-sm" id="gfb-area-dl" onclick="gfDownloadArea()">Download .glb</button>
             </div>
             <p class="gf-notes" id="gfb-area-note">Its shell and detail files in one scene, with the textures and placed models from its region.</p>
+            <p class="gf-notes" id="gfb-area-status" role="status" aria-live="polite"></p>
             <h3 class="gf-h">The whole city</h3>
-            <p class="gf-notes">Every area of the city, one <code>.glb</code> each, into <code>binaries/blender/</code> under the version's name. Select them all in Blender's import window: each comes in at its place in the city.</p>
+            <p class="gf-notes">Every area of the city, one <code>.glb</code> each, into <code>binaries/blender/</code> under the version's name, each at its place in the city. Then <b>Open the whole city in Blender</b> brings them all into one scene, joined up, and saves it as one <code>.blend</code>.</p>
             <div class="gf-run">
               <button type="button" class="btn" id="gfb-city" onclick="startGfCity()">Export the city</button>
               <button type="button" class="btn-sm" id="gfb-city-stop" onclick="stopGfCity()" hidden>Stop</button>
+              <button type="button" class="btn" id="gfb-city-blender" onclick="gfOpenCity()" hidden>Open the whole city in Blender</button>
               <button type="button" class="btn-sm" id="gfb-city-open" onclick="openGameFolder('blender:' + GFB_CITY_VERSION)" hidden>Open the folder</button>
             </div>
             <p class="gf-notes" id="gfb-city-status" role="status" aria-live="polite"></p>
+            <p class="gf-notes" id="gfb-city-bl-status" role="status" aria-live="polite"></p>
             </div>
           </div>
         </section>
@@ -3593,7 +3604,7 @@
       renderGfStatus(d.status || {});
       if (d.status && d.status.running) { pollGameFiles(); return; }
       renderGameFiles();
-      if (d.status && d.status.phase === 'done') toast('Your game files are copied.', 'ok');
+      if (d.status && d.status.phase === 'done') toast(d.status.message === 'Already copied' ? 'Every file is there.' : 'Your game files are copied.', 'ok');
     }, 1000);
   }
 
@@ -3606,10 +3617,12 @@
     gfDisarm();
     ['gf-start', 'gf-quick-start', 'gf-check', 'gfb-copy'].forEach((id) => { $(id).disabled = true; });
     let res;
-    try { res = await postJson('/api/game-files/start', { versions: versions, mode: gfMode(), folders: gfFolders() }); } catch (e) { res = { ok: false, error: e.message }; }
+    const body = { versions: versions, mode: gfMode(), folders: gfFolders() };
+    if (check) body.check = true;
+    try { res = await postJson('/api/game-files/start', body); } catch (e) { res = { ok: false, error: e.message }; }
     $('gf-check').disabled = false;
     if (!res.ok) {
-      if (res.up_to_date) gfMessage('Every file is there: there’s nothing to copy.');
+      if (res.up_to_date) gfMessage('Already copied with these choices: there’s nothing to copy.');
       else gfMessage(res.error || 'Couldn’t start.', true);
       updateGfSpace();
       return;
@@ -3645,6 +3658,7 @@
   let GFB_AREAS_FOR = null;
   let GFB_CITY_VERSION = '';
   let GFB_CITY_T = null;
+  let GFB_CITY_FILES = 0;
 
   async function loadGfAreas(key) {
     GFB_AREAS_FOR = key;              // the version and when its files were copied: a new copy lists again
@@ -3673,20 +3687,174 @@
       sel.appendChild(o);
     }
     updateGfAreaLink();
+    GFB_CITY_FILES = d.city_files || 0;
+    if (GFB_CITY_FILES) GFB_CITY_VERSION = GF_TAB;
     renderGfCity(d.city || {});
+    gfShowBlenderApp();
   }
 
   function updateGfAreaLink() {
     const key = $('gfb-area').value;
-    const a = $('gfb-area-dl');
-    if (key) {
-      a.href = gfFileUrl('model', GF_TAB, '', { area: key });
-      a.removeAttribute('aria-disabled');
-      a.setAttribute('aria-label', 'Download ' + key + ' for Blender');
-    } else {
-      a.removeAttribute('href');
-      a.setAttribute('aria-disabled', 'true');
+    $('gfb-area-open').disabled = !key;
+    $('gfb-area-dl').disabled = !key;
+    $('gfb-area-status').textContent = '';
+  }
+
+  function gfOpenArea() {
+    const key = $('gfb-area').value;
+    if (key) gfOpenInBlender({ area: key }, $('gfb-area-status'));
+  }
+
+  function gfDownloadArea() {
+    const key = $('gfb-area').value;
+    if (key) gfDownloadGlb(gfFileUrl('model', GF_TAB, '', { area: key }), key.split('/').pop() + '.glb', $('gfb-area-status'));
+  }
+
+  function gfOpenCity() {
+    gfOpenInBlender({ city: true }, $('gfb-city-bl-status'));
+  }
+
+  async function gfShowBlenderApp() {
+    let d;
+    try { d = await apiFetchJson('/api/game-files/blender-app'); } catch (e) { return; }
+    const p = $('gfb-app');
+    p.textContent = d.found ? 'Your Blender: ' + d.path : 'Blender wasn’t found on this computer. Get it free from blender.org; if it’s installed somewhere unusual, Open in Blender asks where.';
+  }
+
+  /* Open in Blender: the portal makes the scene and starts your own Blender with it imported, saved as a
+     .blend beside it. A downloaded .glb has to go in with File > Import > glTF 2.0. */
+  async function gfOpenInBlender(target, status) {
+    status.classList.remove('err');
+    status.textContent = target.city ? 'Starting Blender with every area of the city. Bringing the whole city in takes Blender a few minutes.'
+      : 'Making the scene and starting Blender…';
+    let res;
+    try { res = await postJson('/api/game-files/open-in-blender', Object.assign({ version: GF_TAB }, target)); }
+    catch (e) { res = { ok: false, error: e.message }; }
+    if (res.ok) {
+      status.textContent = 'Blender is opening it' + (target.city ? ' (' + fmtInt(res.files) + ' areas)' : '') + '. It’s saved as ' + res.saved + ' too: next time, double-click that.';
+      return;
     }
+    status.classList.add('err');
+    status.textContent = res.error || 'Couldn’t open Blender.';
+    if (res.need_blender) gfAskForBlender(status, () => gfOpenInBlender(target, status));
+  }
+
+  function gfAskForBlender(after, retry) {
+    gfAskForPath(after, 'Where is blender.exe?', 'C:\\Program Files\\Blender Foundation\\Blender 4.2\\blender.exe',
+      'Use this Blender', '/api/game-files/blender-path', () => { gfShowBlenderApp(); retry(); });
+  }
+
+  /* Asks where a program is when the portal can't find it, keeps the answer, then tries again. */
+  function gfAskForPath(after, label, placeholder, button, endpoint, retry) {
+    const next = after.nextElementSibling;
+    if (next && next.classList.contains('gf-where')) return;
+    const form = el('form', undefined, 'gf-where');
+    const id = 'gfw-' + Math.random().toString(36).slice(2);
+    const lab = el('label', label, 'small');
+    lab.htmlFor = id;
+    const inp = el('input', undefined, 'input-box');
+    inp.id = id;
+    inp.placeholder = placeholder;
+    const btn = el('button', button, 'btn-sm');
+    btn.type = 'submit';
+    form.append(lab, inp, btn);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      let res;
+      try { res = await postJson(endpoint, { path: inp.value }); } catch (er) { res = { ok: false, error: er.message }; }
+      if (!res.ok) { after.classList.add('err'); after.textContent = res.error || 'That isn’t it.'; return; }
+      form.remove();
+      retry();
+    });
+    after.after(form);
+  }
+
+  /* A movie: Bink and the PS2's movies are made into a video the browser plays, once, with FFmpeg. */
+  async function gfShowMovie(box, version, path) {
+    box.textContent = '';
+    const st = el('p', 'Getting the movie ready…', 'small');
+    st.setAttribute('role', 'status');
+    box.appendChild(st);
+    const show = () => {
+      const video = el('video', undefined, 'gf-video');
+      video.controls = true;
+      video.preload = 'metadata';
+      video.src = gfFileUrl('movie', version, path);
+      video.setAttribute('aria-label', path);
+      box.prepend(video);
+      st.classList.remove('err');
+      st.textContent = 'Made into a video on this computer from your own copy of the game (kept for next time).';
+    };
+    const start = async () => {
+      let d;
+      try { d = await postJson('/api/game-files/movie', { version: version, path: path }); } catch (e) { d = { ok: false, error: e.message }; }
+      if (d.state === 'done') { show(); return; }
+      if (!d.ok) {
+        st.classList.add('err');
+        st.textContent = d.error || 'Couldn’t make the video.';
+        if (d.need_ffmpeg) {
+          gfAskForPath(st, 'Or, where is ffmpeg.exe?', 'C:\\ffmpeg\\bin\\ffmpeg.exe', 'Use this FFmpeg',
+            '/api/game-files/ffmpeg-path', start);
+          const again = el('button', 'Try again', 'btn-sm');
+          again.type = 'button';
+          again.addEventListener('click', () => { box.querySelectorAll('.gf-where, button').forEach((n) => n.remove()); start(); });
+          box.appendChild(again);
+        }
+        return;
+      }
+      poll();
+    };
+    const poll = async () => {
+      if (!box.isConnected) return;
+      let d;
+      try { d = await apiFetchJson(gfFileUrl('movie-status', version, path)); } catch (e) { setTimeout(poll, 2000); return; }
+      if (d.state === 'done') { show(); return; }
+      if (d.state === 'error') { st.classList.add('err'); st.textContent = d.error || 'Couldn’t make the video.'; return; }
+      st.textContent = d.state === 'waiting' ? 'Waiting for the movie before it to be made…'
+        : 'Making it into a video your browser plays: ' + Math.round((d.progress || 0) * 100) + '% (only the first time)';
+      setTimeout(poll, 1000);
+    };
+    start();
+  }
+
+  async function gfDownloadGlb(url, fallbackName, status) {
+    status.classList.remove('err');
+    status.textContent = 'Making the .glb…';
+    let res;
+    try { res = await fetch(url, { credentials: 'same-origin' }); }
+    catch (e) { status.classList.add('err'); status.textContent = 'Can’t reach the portal. Is the START_PORTAL window still open?'; return; }
+    if (!res.ok) {
+      let msg = 'Couldn’t make it.';
+      try { msg = (await res.json()).error || msg; } catch (e) { /* not JSON */ }
+      status.classList.add('err');
+      status.textContent = msg;
+      return;
+    }
+    const blob = await res.blob();
+    const m = (res.headers.get('Content-Disposition') || '').match(/filename="([^"]+)"/);
+    const name = m ? m[1] : fallbackName;
+    const a = el('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+    status.textContent = 'Saved ' + name + ' (' + fmtBytes(blob.size) + '). In Blender: File > Import > glTF 2.0 (double-clicking a .glb won’t open it).';
+  }
+
+  function gfBlenderActions(box, target, name) {
+    const row = el('div', undefined, 'gf-bl');
+    const open = el('button', 'Open in Blender', 'btn-sm');
+    open.type = 'button';
+    const dl = el('button', 'Download .glb', 'btn-sm');
+    dl.type = 'button';
+    const st = el('p', '', 'small');
+    st.setAttribute('role', 'status');
+    open.addEventListener('click', () => gfOpenInBlender(target, st));
+    dl.addEventListener('click', () => gfDownloadGlb(gfFileUrl('model', GF_TAB, target.path || ''), name, st));
+    row.append(open, dl);
+    box.append(row, st);
   }
 
   function renderGfCity(st) {
@@ -3695,6 +3863,7 @@
     $('gfb-city-stop').hidden = !running;
     if (st.version) GFB_CITY_VERSION = st.version;
     $('gfb-city-open').hidden = running || !st.written;
+    $('gfb-city-blender').hidden = running || !(st.written || GFB_CITY_FILES);
     const p = $('gfb-city-status');
     p.classList.toggle('err', !!st.error);
     if (running) {
@@ -3838,20 +4007,14 @@
       const act = el('span', undefined, 'a');
       const look = f.placed ? gfPreviewKind(f.path) : '';
       if (look) {
-        const b = el('button', look === 'sound' ? 'Play' : 'Pictures', 'btn-sm');
+        const words = { sound: ['Play', 'Play '], p3d: ['Open', 'See what is in '], pictures: ['Pictures', 'Show the picture in '],
+          movie: ['Watch', 'Watch '] }[look];
+        const b = el('button', words[0], 'btn-sm');
         b.type = 'button';
         b.setAttribute('aria-expanded', 'false');
-        b.setAttribute('aria-label', (look === 'sound' ? 'Play ' : 'Show the pictures in ') + f.path);
+        b.setAttribute('aria-label', words[1] + f.path);
         b.addEventListener('click', () => gfTogglePreview(row, b, look, GF_TAB, f.path));
         act.appendChild(b);
-      }
-      if (f.placed && /\.p3d$/i.test(f.path)) {
-        const m = el('a', 'Blender', 'btn-sm');
-        m.href = gfFileUrl('model', GF_TAB, f.path);
-        m.setAttribute('download', '');
-        m.title = 'Download as a glTF scene (.glb): File > Import > glTF 2.0 in Blender. A map area comes with what is placed on it.';
-        m.setAttribute('aria-label', 'Download ' + f.path + ' for Blender');
-        act.appendChild(m);
       }
       row.appendChild(act);
       list.appendChild(row);
@@ -3867,9 +4030,13 @@
   function gfPreviewKind(path) {
     const ext = (path.match(/\.[^./\\]+$/) || [''])[0].toLowerCase();
     if (ext === '.rsd' || ext === '.ogg' || ext === '.wav') return 'sound';
-    if (ext === '.p3d' || ext === '.png' || ext === '.dds') return 'pictures';
+    if (ext === '.p3d') return 'p3d';
+    if (ext === '.png' || ext === '.dds') return 'pictures';
+    if (GF_MOVIE_EXTS.includes(ext)) return 'movie';
     return '';
   }
+
+  const GF_MOVIE_EXTS = ['.bik', '.pss', '.xmv', '.wmv', '.mpg', '.mpeg', '.avi', '.mp4', '.webm'];
 
   function gfFileUrl(what, version, path, extra) {
     return '/api/game-files/' + what + '?' + new URLSearchParams(Object.assign({ version: version, path: path }, extra || {})).toString();
@@ -3887,7 +4054,7 @@
   function gfTogglePreview(row, btn, look, version, path) {
     const next = row.nextElementSibling;
     if (next && next.classList.contains('gf-prev')) {
-      next.querySelectorAll('audio').forEach((a) => a.pause());
+      next.querySelectorAll('audio, video').forEach((a) => a.pause());
       next.remove();
       btn.setAttribute('aria-expanded', 'false');
       return;
@@ -3896,33 +4063,75 @@
     row.after(box);
     btn.setAttribute('aria-expanded', 'true');
     if (look === 'sound') {
-      const url = gfFileUrl('sound', version, path);
-      const audio = el('audio');
-      audio.controls = true;
-      audio.preload = 'auto';
-      audio.src = url;
-      audio.setAttribute('aria-label', path);
-      audio.addEventListener('error', async () => {
-        const msg = await gfErrorText(url);
-        box.textContent = '';
-        const p = el('p', msg, 'small');
-        if (!msg) {
-          p.textContent = 'Your browser can\'t play this format. ';
-          const a = el('a', 'Save it');
-          a.href = url;
-          a.download = '';
-          p.appendChild(a);
-          p.appendChild(document.createTextNode(' and open it in a media player.'));
-        }
-        box.appendChild(p);
-      });
-      box.appendChild(audio);
-      box.appendChild(el('p', 'Decoded on this computer from your own copy of the game.', 'small'));
-      audio.play().catch(() => {});
+      gfSoundPlayer(box, version, path);
+      return;
+    }
+    if (look === 'p3d') {
+      box.appendChild(el('p', 'Looking inside…', 'small'));
+      gfShowInside(box, version, path);
+      return;
+    }
+    if (look === 'movie') {
+      gfShowMovie(box, version, path);
       return;
     }
     box.appendChild(el('p', 'Looking for pictures…', 'small'));
     gfShowPictures(box, version, path);
+  }
+
+  /* A sound, with the words it says when the game has subtitles for it. */
+  function gfSoundPlayer(box, version, path) {
+    const url = gfFileUrl('sound', version, path);
+    const audio = el('audio');
+    audio.controls = true;
+    audio.preload = 'auto';
+    audio.src = url;
+    audio.setAttribute('aria-label', path);
+    audio.addEventListener('error', async () => {
+      const msg = await gfErrorText(url);
+      box.textContent = '';
+      const p = el('p', msg, 'small');
+      if (!msg) {
+        p.textContent = 'Your browser can\'t play this format. ';
+        const a = el('a', 'Save it');
+        a.href = url;
+        a.download = '';
+        p.appendChild(a);
+        p.appendChild(document.createTextNode(' and open it in a media player.'));
+      }
+      box.appendChild(p);
+    });
+    box.appendChild(audio);
+    const note = el('p', 'Decoded on this computer from your own copy of the game.', 'small');
+    box.appendChild(note);
+    audio.play().catch(() => {});
+    apiFetchJson(gfFileUrl('subtitles', version, path)).then((d) => {
+      (d.lines || []).forEach((l) => note.before(el('blockquote', l.text, 'gf-line')));
+    }).catch(() => {});
+  }
+
+  /* What a Pure3D file holds, and what can be done with it: pictures, subtitles, Blender. */
+  async function gfShowInside(box, version, path) {
+    let d;
+    try { d = await apiFetchJson(gfFileUrl('inspect', version, path)); }
+    catch (e) { box.textContent = ''; box.appendChild(el('p', 'Couldn’t read it: ' + e.message, 'small')); return; }
+    box.textContent = '';
+    if (!d.ok) { box.appendChild(el('p', d.error || 'Couldn’t read it.', 'small')); return; }
+    box.appendChild(el('p', d.what, 'gf-what'));
+    (d.lines || []).forEach((l) => box.appendChild(el('blockquote', l.text, 'gf-line')));
+    if (d.sound) {
+      const play = el('button', 'Play the sound it goes with', 'btn-sm');
+      play.type = 'button';
+      const spot = el('div');
+      play.addEventListener('click', () => { play.remove(); gfSoundPlayer(spot, version, d.sound); });
+      box.append(play, spot);
+    }
+    if (d.blender) gfBlenderActions(box, { path: path }, path.split('/').pop().replace(/\.p3d$/i, '') + '.glb');
+    if (d.pictures) {
+      const pics = el('div');
+      box.appendChild(pics);
+      gfShowPictures(pics, version, path);
+    }
   }
 
   async function gfShowPictures(box, version, path, all) {

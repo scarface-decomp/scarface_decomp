@@ -643,10 +643,13 @@
           <details><summary>Can I open the game's models and map in Blender?</summary>
             <p>Yes, from your own copy of the game. In the portal's Game files tab, press <b>Copy everything, PC first</b>
               (the PC's files are the best for this, and the other versions add what the PC doesn't have), then press
-              <b>Blender</b> next to any model, or pick a map area or the whole city in the <b>In Blender</b> box. You get glTF
-              scenes (<code>.glb</code>) that Blender opens with File &gt; Import &gt; glTF 2.0: characters with their
-              skeletons, skin weights and animations, guns, cars with their moving parts, and each part of the city with the
-              trees, lamps, benches and signs the game places on it, at their places. The Xbox, PC and PS2 files all work. Traffic
+              <b>Open</b> next to any model, or pick a map area or the whole city in the <b>In Blender</b> box, and press
+              <b>Open in Blender</b>: your Blender starts with the scene in it and saves it as a <code>.blend</code>. A downloaded
+              <code>.glb</code> goes in with File &gt; Import &gt; glTF 2.0 (double-clicking one makes Blender say it isn't a
+              valid Blender file). You get characters with their skeletons, skin weights and animations, the game's cameras
+              with their moves, guns, cars with their moving parts, and each part of the city with the
+              trees, lamps, benches and signs the game places on it, at their places; the whole city opens as one scene.
+              The Xbox, PC and PS2 files all work. Traffic
               and pedestrians aren't in the files: the game spawns them as it runs. How the models, animations and map are
               stored, and how to do it from the command line, is in
               <a data-repo-link="/blob/main/docs/FORMATS.md#exporting-to-blender" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#exporting-to-blender" target="_blank" rel="noopener noreferrer">FORMATS.md</a>.

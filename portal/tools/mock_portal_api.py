@@ -161,7 +161,8 @@ GF_VERSIONS = [
      "source": "Scarface - The World Is Yours (Apr 20, 2006 prototype).zip"},
 ]
 GF: dict = {"status": {"running": False, "phase": "", "done": 0, "total": 0, "files": 0, "label": "", "message": "",
-                       "error": ""}, "summary": None, "files": {}, "copy": None}
+                       "error": ""}, "summary": None, "files": {}, "copy": None, "movies": {}}
+GF_LINE = "Say hello to my little friend!"
 BLENDER: dict = {"running": False, "version": "", "done": 0, "total": 0, "area": "", "error": "", "written": 0,
                  "bytes": 0, "folder": ""}
 GF_AREAS = [{"key": "z04/stripmall_01", "name": "stripmall_01", "place": "z04", "files": 3},
@@ -223,9 +224,14 @@ def gf_summary(mode, folders="game"):
     return out
 
 
-def gf_run(versions, mode, folders="game"):
+def gf_run(versions, mode, folders="game", all_there=False):
     total = sum(v["size"] for v in GF_VERSIONS if v["found"] and v["version"] in versions)
     st = GF["status"]
+    if all_there:                         # a check of a copy with nothing missing
+        time.sleep(1.2)
+        with LOCK:
+            st.update(running=False, phase="done", message="Already copied", files=4000)
+        return
     for i in range(1, 11):
         time.sleep(0.15)
         with LOCK:
@@ -326,11 +332,32 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": True, "total": len(rows), "offset": off, "files": rows[off:off + lim]})
             if u.path in ("/api/game-files/sound", "/api/game-files/pictures", "/api/game-files/picture"):
                 return self._game_file_preview(u.path.rsplit("/", 1)[1], q)
+            if u.path == "/api/game-files/inspect":
+                if q.get("path", "").endswith("_021.p3d"):                       # a subtitle file and its sound
+                    return self._json({"ok": True, "kind": "subtitles", "what": "Subtitles: the words of the sound "
+                                       "with the same name.", "pictures": 0, "blender": False,
+                                       "lines": [{"language": "English", "text": GF_LINE}],
+                                       "sound": q["path"].replace("models/", "sounds/").replace("_021.p3d", "_020.rsd")})
+                return self._json({"ok": True, "kind": "models", "what": "1 model; 2 pictures.", "pictures": 2,
+                                   "blender": True, "lines": []})
+            if u.path == "/api/game-files/subtitles":
+                return self._json({"ok": True, "lines": [{"language": "English", "text": GF_LINE}]})
+            if u.path == "/api/game-files/blender-app":
+                return self._json({"ok": True, "found": CONFIG.get("blender", True),
+                                   "path": "C:\\Program Files\\Blender Foundation\\Blender 4.2\\blender.exe"
+                                   if CONFIG.get("blender", True) else ""})
+            if u.path == "/api/game-files/movie-status":
+                return self._json(dict(GF["movies"].get(q.get("path", ""), {"state": "none", "progress": 0}), ok=True))
+            if u.path == "/api/game-files/movie":
+                return self._bytes(b"\0\0\0\x18ftypmp42", "video/mp4")
             if u.path == "/api/game-files/areas":
-                return self._json({"ok": True, "areas": GF_AREAS if GF["summary"] else [], "city": dict(BLENDER)})
+                return self._json({"ok": True, "areas": GF_AREAS if GF["summary"] else [], "city": dict(BLENDER),
+                                   "city_files": BLENDER["written"]})
             if u.path == "/api/game-files/blender":
                 return self._json(dict(BLENDER, ok=True))
             if u.path == "/api/game-files/model":
+                if CONFIG.get("model_error"):
+                    return self._json({"ok": False, "error": "Nothing to show in Blender: nothing in these files to export."}, 415)
                 return self._bytes(b"glTF" + bytes(8), "model/gltf-binary")
             if u.path == "/api/queue":
                 items = list(TASKS.values())
@@ -431,6 +458,10 @@ class Handler(BaseHTTPRequestHandler):
                 GF["summary"] = None
                 GF["files"] = {}
                 GF["copy"] = None
+                GF["movies"] = {}
+                CONFIG["blender"] = not body.get("no_blender")
+                CONFIG["ffmpeg"] = not body.get("no_ffmpeg")
+                CONFIG["model_error"] = bool(body.get("model_error"))
                 CONFIG["gf_missing"] = bool(body.get("gf_missing"))
                 CONFIG["gf_interrupted"] = bool(body.get("gf_interrupted"))
                 DELAYS.update(body.get("delays", {}))
@@ -552,15 +583,18 @@ class Handler(BaseHTTPRequestHandler):
             if not any(v["found"] and v["version"] in versions for v in GF_VERSIONS):
                 return self._json({"ok": False, "error": "None of those versions were found in binaries/."}, 400)
             had = GF["copy"]
-            if (had and not CONFIG.get("gf_missing") and had["mode"] == body.get("mode")
-                    and had["folders"] == (body.get("folders") or "game")
-                    and sorted(had["versions"]) == sorted(v["version"] for v in GF_VERSIONS if v["found"] and v["version"] in versions)):
-                return self._json({"ok": False, "up_to_date": True, "error": "Already copied with these choices, and "
-                                   "every file is still there: there's nothing to copy."}, 409)
+            same = (had and had["mode"] == body.get("mode") and had["folders"] == (body.get("folders") or "game")
+                    and sorted(had["versions"]) == sorted(v["version"] for v in GF_VERSIONS
+                                                          if v["found"] and v["version"] in versions))
+            if same and not body.get("check") and not CONFIG.get("gf_interrupted"):
+                return self._json({"ok": False, "up_to_date": True, "error": "Already copied with these choices: "
+                                   "there's nothing to copy."}, 409)
             CONFIG["gf_interrupted"] = False
-            GF["status"].update(running=True, phase="preparing", done=0, total=0, files=0, error="", stop=False)
-            threading.Thread(target=gf_run, args=(versions, body.get("mode", "unique"), body.get("folders", "game")),
-                             daemon=True).start()
+            GF["status"].update(running=True, phase="preparing", done=0, total=0, files=0, error="", stop=False,
+                                message="")
+            all_there = same and not CONFIG.get("gf_missing")
+            threading.Thread(target=gf_run, args=(versions, body.get("mode", "unique"), body.get("folders", "game"),
+                                                  all_there), daemon=True).start()
             return self._json({"ok": True, "status": {k: v for k, v in GF["status"].items() if k != "stop"}})
         if u.path == "/api/game-files/stop":
             GF["status"]["stop"] = True
@@ -571,6 +605,37 @@ class Handler(BaseHTTPRequestHandler):
             threading.Thread(target=blender_run, args=(str(body.get("version", "")),), daemon=True).start()
             return self._json(dict(BLENDER, ok=True, running=True, total=3))
         if u.path == "/api/game-files/blender-stop":
+            return self._json({"ok": True})
+        if u.path == "/api/game-files/open-in-blender":
+            if not CONFIG.get("blender", True):
+                return self._json({"ok": False, "need_blender": True, "error": "Couldn't find Blender on this computer. "
+                                   "Install it from blender.org, or tell the portal where blender.exe is."}, 404)
+            name = "PC city" if body.get("city") else (body.get("area") or body.get("path") or "x").split("/")[-1].split(".")[0]
+            return self._json({"ok": True, "blender": "blender.exe", "files": 3 if body.get("city") else 1,
+                               "saved": f"binaries/blender/PC/{'' if body.get('city') else 'Opened/'}{name}.blend"})
+        if u.path == "/api/game-files/blender-path":
+            if "blender" not in str(body.get("path", "")).lower():
+                return self._json({"ok": False, "error": "That isn't Blender: pick blender.exe in the folder Blender is installed in."}, 400)
+            CONFIG["blender"] = True
+            return self._json({"ok": True, "path": body["path"]})
+        if u.path == "/api/game-files/movie":
+            if not CONFIG.get("ffmpeg", True):
+                return self._json({"ok": False, "state": "error", "need_ffmpeg": True, "error": "Movies need FFmpeg, "
+                                   "a free video tool."}, 424)
+            path = str(body.get("path", ""))
+            GF["movies"][path] = {"state": "converting", "progress": 0.0}
+
+            def make():
+                for i in range(1, 4):
+                    time.sleep(0.4)
+                    GF["movies"][path] = {"state": "converting", "progress": i / 4}
+                GF["movies"][path] = {"state": "done", "progress": 1.0}
+            threading.Thread(target=make, daemon=True).start()
+            return self._json({"ok": True, "state": "converting", "progress": 0.0})
+        if u.path == "/api/game-files/ffmpeg-path":
+            if "ffmpeg" not in str(body.get("path", "")).lower():
+                return self._json({"ok": False, "error": "That isn't FFmpeg."}, 400)
+            CONFIG["ffmpeg"] = True
             return self._json({"ok": True})
         if u.path == "/api/game-files/open" and str(body.get("folder", "")).startswith("blender:"):
             return self._json({"ok": True, "folder": "binaries/blender"})
