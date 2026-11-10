@@ -557,6 +557,10 @@
       background: repeating-conic-gradient(#2a2a2a 0% 25%, #3a3a3a 0% 50%) 50% / 16px 16px; }
     .gf-pic img { max-width: 100%; max-height: 126px; image-rendering: auto; }
     .gf-pic figcaption { font-size: 0.72rem; color: var(--muted); margin-top: 4px; overflow-wrap: anywhere; }
+    .gfb-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .gfb-row select { min-width: 260px; max-width: 100%; }
+    .gfb-row a.btn-sm[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+    .gf-notes.err { color: var(--error); }
     @media (max-width: 720px) {
       .gf-filters { grid-template-columns: 1fr; }
       .gf-row { grid-template-columns: minmax(0, 1fr) 80px 72px; }
@@ -1251,6 +1255,30 @@
             </div>
             <div class="gf-list" id="gf-list" role="list" aria-label="Files"></div>
             <button type="button" class="btn-sm gf-more" id="gf-more" onclick="loadGfList(true)" hidden>Show more</button>
+          </div>
+
+          <div class="card" id="gf-blender" hidden>
+            <div class="card-hdr">
+              <div>
+                <h2 class="card-title">In Blender</h2>
+                <p class="card-sub">The game's models and map as glTF scenes (<code>.glb</code>) made from the files you copied: in Blender, File &gt; Import &gt; glTF 2.0. Characters come with their skeletons and skin weights, cars with their moving parts, and map areas with the trees, lamps, benches and signs the game places on them. For a single file, use <b>Blender</b> next to it in the list above.</p>
+              </div>
+            </div>
+            <h3 class="gf-h">A map area</h3>
+            <div class="gfb-row">
+              <label class="sr-only" for="gfb-area">Map area</label>
+              <select id="gfb-area" class="input-box" onchange="updateGfAreaLink()"></select>
+              <a class="btn-sm" id="gfb-area-dl" download aria-disabled="true">Download the area</a>
+            </div>
+            <p class="gf-notes" id="gfb-area-note">Its shell and detail files in one scene, with the textures and placed models from its region.</p>
+            <h3 class="gf-h">The whole city</h3>
+            <p class="gf-notes">Every area of the city, one <code>.glb</code> each, into <code>binaries/blender/</code> under the version's name. Select them all in Blender's import window: each comes in at its place in the city.</p>
+            <div class="gf-run">
+              <button type="button" class="btn" id="gfb-city" onclick="startGfCity()">Export the city</button>
+              <button type="button" class="btn-sm" id="gfb-city-stop" onclick="stopGfCity()" hidden>Stop</button>
+              <button type="button" class="btn-sm" id="gfb-city-open" onclick="openGameFolder('blender:' + GFB_CITY_VERSION)" hidden>Open the folder</button>
+            </div>
+            <p class="gf-notes" id="gfb-city-status" role="status" aria-live="polite"></p>
           </div>
         </section>
 
@@ -3485,6 +3513,96 @@
     $('gf-stop').disabled = false;
   }
 
+  /* Blender: a whole map area as one .glb, or every area of the city into binaries/blender/<version>/. */
+  let GFB_AREAS_FOR = null;
+  let GFB_CITY_VERSION = '';
+  let GFB_CITY_T = null;
+
+  async function loadGfAreas(key) {
+    GFB_AREAS_FOR = key;              // the version and when its files were copied: a new copy lists again
+    const sel = $('gfb-area');
+    let d;
+    try { d = await apiFetchJson('/api/game-files/areas?' + new URLSearchParams({ version: GF_TAB }).toString()); }
+    catch (e) { d = { areas: [] }; }
+    if (GFB_AREAS_FOR !== key) return;
+    sel.textContent = '';
+    const groups = { z04: 'The city', azones: 'Interiors', dzones: 'Places that change' };
+    Object.keys(groups).forEach((place) => {
+      const list = (d.areas || []).filter((a) => a.place === place);
+      if (!list.length) return;
+      const g = el('optgroup');
+      g.label = groups[place];
+      list.forEach((a) => {
+        const o = el('option', a.name + (a.files > 1 ? ' (' + a.files + ' files)' : ''));
+        o.value = a.key;
+        g.appendChild(o);
+      });
+      sel.appendChild(g);
+    });
+    if (!sel.options.length) {
+      const o = el('option', 'No map areas copied for this version');
+      o.value = '';
+      sel.appendChild(o);
+    }
+    updateGfAreaLink();
+    renderGfCity(d.city || {});
+  }
+
+  function updateGfAreaLink() {
+    const key = $('gfb-area').value;
+    const a = $('gfb-area-dl');
+    if (key) {
+      a.href = gfFileUrl('model', GF_TAB, '', { area: key });
+      a.removeAttribute('aria-disabled');
+      a.setAttribute('aria-label', 'Download ' + key + ' for Blender');
+    } else {
+      a.removeAttribute('href');
+      a.setAttribute('aria-disabled', 'true');
+    }
+  }
+
+  function renderGfCity(st) {
+    const running = !!st.running;
+    $('gfb-city').disabled = running;
+    $('gfb-city-stop').hidden = !running;
+    if (st.version) GFB_CITY_VERSION = st.version;
+    $('gfb-city-open').hidden = running || !st.written;
+    const p = $('gfb-city-status');
+    p.classList.toggle('err', !!st.error);
+    if (running) {
+      p.textContent = 'Exporting ' + (st.area || '…') + ': ' + fmtInt(st.done) + ' of ' + fmtInt(st.total) + ' areas done.';
+    } else if (st.total) {
+      p.textContent = (st.error ? st.error + ' ' : '') + fmtInt(st.written) + ' areas written to ' + st.folder + ' ('
+        + fmtBytes(st.bytes) + ').';
+    } else {
+      p.textContent = '';
+    }
+    clearTimeout(GFB_CITY_T);
+    if (running) GFB_CITY_T = setTimeout(pollGfCity, 1500);
+  }
+
+  async function pollGfCity() {
+    let st;
+    try { st = await apiFetchJson('/api/game-files/blender'); } catch (e) { return; }
+    renderGfCity(st);
+  }
+
+  async function startGfCity() {
+    $('gfb-city').disabled = true;
+    let res;
+    try { res = await postJson('/api/game-files/blender', { version: GF_TAB }); } catch (e) { res = { ok: false, error: e.message }; }
+    if (!res.ok) {
+      $('gfb-city').disabled = false;
+      toast(res.error || 'Couldn’t start.', 'err');
+      return;
+    }
+    renderGfCity(res);
+  }
+
+  async function stopGfCity() {
+    try { await postJson('/api/game-files/blender-stop', {}); } catch (e) { /* the next poll shows it */ }
+  }
+
   async function openGameFolder(which) {
     let res;
     try { res = await postJson('/api/game-files/open', { folder: which || '' }); } catch (e) { res = { ok: false, error: e.message }; }
@@ -3499,9 +3617,12 @@
   function renderGfResult() {
     const s = (GF_DATA || {}).summary;
     $('gf-result').hidden = !s;
+    $('gf-blender').hidden = !s;
     if (!s) return;
     const vers = Object.keys(s.versions || {});
     if (!vers.includes(GF_TAB)) { GF_TAB = vers[0] || ''; GF_KIND = ''; }
+    const areasKey = GF_TAB + '|' + (s.created || '');
+    if (GFB_AREAS_FOR !== areasKey) loadGfAreas(areasKey);
     let sub = s.mode_label + (s.folders === 'type' ? ', by type' : '') + ', copied ' + s.created + '.';
     if (s.best) {
       sub += ' Best/ has ' + fmtInt(s.best.files) + ' files: ' + Object.keys(s.best.from).filter((v) => s.best.from[v])

@@ -118,7 +118,8 @@ KIND_LABELS = dict([(k, label) for k, label, _ in KINDS] + [("other", "Other")])
 _KIND_OF_EXT = {ext: k for k, _, exts in KINDS for ext in exts}
 
 SKIP_DIRS = {"scripts_and_data", OUT_NAME, "_unpacked", "_to_delete",
-             "ps2_overlays"}               # the PS2 code overlays copied out by extract_scripts.py, not a game
+             "ps2_overlays",               # the PS2 code overlays copied out by extract_scripts.py, not a game
+             "blender"}                    # the map exports blender_export.py writes
 PC_DISC_NOTE = ("put the PC disc image (.iso) in binaries/ as it is: the portal reads it without installing "
                 "anything. An installed game folder works too.")
 PC_IN_ARCHIVE_NOTE = ("this looks like the PC disc packed in a .zip/.7z: unpack the .iso into binaries/ and the "

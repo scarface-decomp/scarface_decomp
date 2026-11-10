@@ -640,6 +640,16 @@
               real words so far. The AI's decision tree (<code>.dtr</code>) is decoded too, apart from the small programs
               inside it. Details in
               <a data-repo-link="/blob/main/docs/SCRIPTS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCRIPTS.md" target="_blank" rel="noopener noreferrer">SCRIPTS.md</a>.</p></details>
+          <details><summary>Can I open the game's models and map in Blender?</summary>
+            <p>Yes, from your own copy of the game. Copy the game files in the portal (its Game files tab), then press
+              <b>Blender</b> next to any model, or pick a map area or the whole city in the <b>In Blender</b> box. You get glTF
+              scenes (<code>.glb</code>) that Blender opens with File &gt; Import &gt; glTF 2.0: characters with their
+              skeletons, skin weights and animations, guns, cars with their moving parts, and each part of the city with the
+              trees, lamps, benches and signs the game places on it, at their places. The Xbox, PC and PS2 files all work. Traffic
+              and pedestrians aren't in the files: the game spawns them as it runs. How the models, animations and map are
+              stored, and how to do it from the command line, is in
+              <a data-repo-link="/blob/main/docs/FORMATS.md#exporting-to-blender" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#exporting-to-blender" target="_blank" rel="noopener noreferrer">FORMATS.md</a>.
+              Nothing from the game is ever uploaded or shared: the scenes are made on your computer.</p></details>
           <details><summary>I'm stuck. Where do I ask?</summary>
             <p>Ask in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on the Discord</a> (joining takes a short application, to keep bots
               out), or open an <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">issue on GitHub</a>.
@@ -696,6 +706,10 @@
           <li><b><a data-repo-link="/blob/main/docs/SCRIPTS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCRIPTS.md" target="_blank" rel="noopener noreferrer">The game's scripts</a></b>
             All of the game's compiled TorqueScript and the prototype's, decompiled to readable script that compiles back to the
             identical files.</li>
+          <li><b><a data-repo-link="/blob/main/docs/FORMATS.md#maps" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#maps" target="_blank" rel="noopener noreferrer">The map, and everything placed on it</a></b>
+            How the city is cut into areas, how each placed tree, lamp and sign is stored (worked out from the game's own
+            loader), and the names the game gives its data, read from the Xbox program. With your own copy, the portal turns
+            any area, the whole city, the characters, guns and cars into <a data-repo-link="/blob/main/docs/FORMATS.md#exporting-to-blender" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#exporting-to-blender" target="_blank" rel="noopener noreferrer">scenes for Blender</a>.</li>
         </ul>
       </div>
     </section>

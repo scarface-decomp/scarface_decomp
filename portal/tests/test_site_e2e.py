@@ -381,6 +381,7 @@ def test_reference_section_and_versions_page(tmp_path, browser):
         refs = pg.eval_on_selector_all("#reference .refs a", "as => as.map(a => a.getAttribute('href'))")
         assert refs[2] == "versions.html" and any(h.endswith("docs/FORMATS.md") for h in refs)
         assert any(h.endswith("docs/NAMES.md") for h in refs)
+        assert any(h.endswith("docs/FORMATS.md#maps") for h in refs) and any(h.endswith("#exporting-to-blender") for h in refs)
         ctx.route("https://raw.githubusercontent.com/**", lambda r: r.abort())   # nor in the repository
         pg.goto(url + "versions.html")
         pg.wait_for_selector("#missing:not([hidden])")               # no report on this made-up site yet

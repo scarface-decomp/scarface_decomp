@@ -426,26 +426,22 @@ def test_portal_hands_over_a_copied_file_for_blender(monkeypatch, tmp_path):
     from conftest import PORTAL
     sys.path.insert(0, str(PORTAL))
     server = importlib.import_module("decomp_portal_server")
-    shell = tmp_path / "a_shell.p3d"
-    shell.write_bytes(area("shells_a", objects=[("treep", [record(10.0, 0.0, 20.0)])]))
-    box = tmp_path / "box.p3d"
-    box.write_bytes(p3d(mesh("box")))
-    _reg, reg_d = region("x", 1.0)
-    (tmp_path / "x_region_D.p3d").write_bytes(reg_d)
-    files = {("pc", "cement.rcf/packages/z04/a_shell.p3d"): shell, ("pc", "cement.rcf/art/box.p3d"): box}
-    monkeypatch.setattr(server.GAME_FILES, "file_path", lambda v, p: files.get((v, p)))
-    asked = []
-
-    def beside(v, p, patterns):
-        asked.append((v, p))
-        return [tmp_path / "x_region_D.p3d"]
-    monkeypatch.setattr(server.GAME_FILES, "files_beside", beside)
+    files = city_files()
+    rig = skeleton("rig", [("Root", 0, (0, 0, 0)), ("Hip", 0, (0, 1.0, 0.5))])
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    files["cement.rcf/packages/characters/pc/tony.p3d"] = p3d(rig, skin_chunk(tri, [0, 1, 2], [(1.0, 0, 0)] * 3,
+                                                                             [0] * 3, [0, 1]))
+    files["cement.rcf/art/animations/GEN_Wave.p3d"] = p3d(animation("Wave", [("Hip", [(0, (0, 0, 0, 1))])]))
+    out, index = copied_game(tmp_path, files)
+    monkeypatch.setattr(server.GA, "out_dir", lambda bin_dir=None: out)
+    monkeypatch.setattr(server.GAME_FILES, "index", lambda: index)
     sent = []
 
     class Fake:
         client_address = ("127.0.0.1", 5)
         headers = {}
         _send_model = server.Handler._send_model
+        _send_area = server.Handler._send_area
 
         def _send(self, code, body, ctype, extra=None):
             sent.append((code, ctype, body, extra))
@@ -459,11 +455,12 @@ def test_portal_hands_over_a_copied_file_for_blender(monkeypatch, tmp_path):
 
     code, ctype, body, extra = ask(version="pc", path="cement.rcf/art/box.p3d")
     assert code == 200 and ctype == "model/gltf-binary" and 'filename="box.glb"' in extra["Content-Disposition"]
-    assert read_glb(body)[0]["nodes"][0]["name"] == "box" and not asked
-    code, _, body, _ = ask(version="pc", path="cement.rcf/packages/z04/a_shell.p3d")
+    assert read_glb(body)[0]["nodes"][0]["name"] == "box"
+    code, _, body, _ = ask(version="pc", path="cement.rcf/packages/z04/a_01_shell.p3d")
     doc, _ = read_glb(body)
     assert code == 200 and any(n["name"] == "treep" for n in doc["nodes"])      # placed from the region's _D file
-    assert asked == [("pc", "cement.rcf/packages/z04/a_shell.p3d")]
+    code, _, body, _ = ask(version="pc", path="cement.rcf/packages/characters/pc/tony.p3d")
+    assert [a["name"] for a in read_glb(body)[0]["animations"]] == ["Wave"]     # the game's animations come along
     assert ask(version="pc", path="cement.rcf/nope.p3d")[0] == 404
 
 
@@ -478,3 +475,88 @@ def test_files_beside_a_copied_file(tmp_path):
     index = {"versions": {"pc": {"files": rows}}}
     found = GA.files_beside(tmp_path, index, "pc", "cement.rcf/packages/z04/a_shell.p3d", ("*_region.p3d", "*_REGION_d.p3d"))
     assert [p.name for p in found] == ["x_region.p3d", "x_region_D.p3d"]
+
+
+# --------------------------------------------------------------------------- whole areas and the whole city
+
+def copied_game(tmp_path, files):
+    """A copied PC version: {game path: bytes} -> (out dir, index)."""
+    out = tmp_path / "game_files"
+    rows = []
+    for path, data in files.items():
+        place = "PC/" + path
+        (out / place).parent.mkdir(parents=True, exist_ok=True)
+        (out / place).write_bytes(data)
+        rows.append([path, len(data), "s", "only", place, None, 1])
+    return out, {"versions": {"pc": {"files": rows}}}
+
+
+def city_files():
+    _reg, reg_d = region("x", 1.0)
+    z = "cement.rcf/packages/z04/"
+    return {z + "a_01_shell.p3d": area("w_a_shell", objects=[("treep", [record(1.0, 0.0, 1.0)])]),
+            z + "a_01_detail.p3d": area("w_a_detail"),
+            z + "b_02_shell.p3d": area("w_b"),
+            z + "x_region_D.p3d": reg_d,
+            z + "miami_lod.p3d": area("low_LOD"),
+            "cement.rcf/packages/azones/shop_01_pocket.p3d": area("w_shop"),
+            "cement.rcf/art/box.p3d": p3d(mesh("box"))}
+
+
+def test_map_areas_in_the_copied_files(tmp_path):
+    import blender_export as BX
+    out, index = copied_game(tmp_path, city_files())
+    found = BX.areas(out, index, "pc")
+    assert [(a["key"], len(a["files"])) for a in found] == [("z04/a_01", 2), ("z04/b_02", 1), ("azones/shop_01", 1)]
+    glb, report = BX.area_glb(out, index, "pc", "z04/a_01")
+    doc, _ = read_glb(glb)
+    assert sorted(report.models) == ["w_a_detail", "w_a_shell"] and report.placed == 1      # the tree from x_region_D
+    with pytest.raises(G.ExportError):
+        BX.area_glb(out, index, "pc", "z04/nowhere")
+
+
+def test_the_whole_city_one_file_per_area(tmp_path):
+    import blender_export as BX
+    out, index = copied_game(tmp_path, city_files())
+    job = BX.CityJob(tmp_path)
+    import game_assets as GA
+    real_out = GA.out_dir
+    GA.out_dir = lambda bin_dir=None: out
+    try:
+        assert job.start("pc", index) is None
+        job._thread.join(10)
+    finally:
+        GA.out_dir = real_out
+    assert sorted(p.name for p in (tmp_path / "blender" / "PC").iterdir()) == ["a_01.glb", "b_02.glb"]
+    assert job.status["written"] == 2 and job.status["done"] == 2 and not job.status["running"]
+    assert BX.CityJob(tmp_path).start("pc", {"versions": {}}).startswith("None of the city")
+    assert BX.CityJob(tmp_path).start("wii", index) == "Pick a version."
+
+
+def test_portal_hands_over_a_whole_area(monkeypatch, tmp_path):
+    import importlib
+    import sys
+    from conftest import PORTAL
+    sys.path.insert(0, str(PORTAL))
+    server = importlib.import_module("decomp_portal_server")
+    out, index = copied_game(tmp_path, city_files())
+    monkeypatch.setattr(server.GA, "out_dir", lambda bin_dir=None: out)
+    monkeypatch.setattr(server.GAME_FILES, "index", lambda: index)
+    sent = []
+
+    class Fake:
+        client_address = ("127.0.0.1", 5)
+        headers = {}
+        _send_area = server.Handler._send_area
+
+        def _send(self, code, body, ctype, extra=None):
+            sent.append((code, ctype, body, extra))
+
+        def _json(self, obj, code=200):
+            sent.append((code, "json", obj, None))
+
+    server.Handler.get_game_file_preview(Fake(), "model", lambda k, d="": {"version": "pc", "area": "z04/a_01"}.get(k, d))
+    code, ctype, body, extra = sent[-1]
+    assert code == 200 and ctype == "model/gltf-binary" and 'filename="a_01.glb"' in extra["Content-Disposition"]
+    server.Handler.get_game_file_preview(Fake(), "model", lambda k, d="": {"version": "pc", "area": "z04/zz"}.get(k, d))
+    assert sent[-1][0] == 404 and "isn't in your copied game files" in sent[-1][2]["error"]

@@ -466,10 +466,14 @@ class Library:
         self.pictures: Dict[str, Tuple[Source, media.Texture]] = {}
         self.parsed = parsed if parsed is not None else {}     # id(data) -> (chunks, pictures), shared by exports
 
-    def add(self, label: str, data: bytes, main: bool = True) -> Source:
-        if id(data) not in self.parsed:
-            self.parsed[id(data)] = (data, p3d.read_tree(data), media.textures(data))
-        _same, chunks, pictures = self.parsed[id(data)]
+    def add(self, label: str, data: bytes, main: bool = True, keep: bool = True) -> Source:
+        """keep: remember the parsed tree for the next Library sharing `parsed` (for files used again)."""
+        if id(data) in self.parsed:
+            _same, chunks, pictures = self.parsed[id(data)]
+        else:
+            chunks, pictures = p3d.read_tree(data), media.textures(data)
+            if keep:
+                self.parsed[id(data)] = (data, chunks, pictures)        # holding data keeps its id unique
         src = Source(label, data, main, chunks)
         self.sources.append(src)
         for c in chunks:

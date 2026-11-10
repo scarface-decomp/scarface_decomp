@@ -209,9 +209,10 @@ in every version's own format: the PC's Ogg and PNG, the Xbox's ADPCM and DXT, a
 palette pictures, which the portal puts back in order from the PS2 graphics chip's block layout. That is
 all decoded on your computer, only for a browser on that computer (Xbox WMA music can be saved and played
 in a media player). **Blender** saves a Pure3D file as a glTF scene (`.glb`, File > Import > glTF 2.0):
-characters with their skeletons and skin weights, guns, cars with their moving parts, and map areas with
-the trees, lamps and benches the game places on them, on any version. `portal/tools/p3d_gltf.py` does the
-same from the command line, with animations, several areas at once, or the whole city
+characters with their skeletons, skin weights and the game's animations, guns, cars with their moving parts,
+and map areas with the trees, lamps and benches the game places on them, on any version. The **In Blender**
+box does a whole map area at once, or the whole city into `binaries/blender/`, one file per area that line
+up when imported together; `portal/tools/p3d_gltf.py` does it all from the command line
 ([FORMATS.md](docs/FORMATS.md#exporting-to-blender)). All four versions take about 12.4 GB without duplicates, the best versions about 4.4 GB. The files stay
 on your computer: `binaries/` is never committed, and they must not be shared. From the command line:
 `python portal/tools/game_assets.py --extract best --folders type`.

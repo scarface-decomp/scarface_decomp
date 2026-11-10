@@ -162,6 +162,24 @@ GF_VERSIONS = [
 ]
 GF: dict = {"status": {"running": False, "phase": "", "done": 0, "total": 0, "files": 0, "label": "", "message": "",
                        "error": ""}, "summary": None, "files": {}}
+BLENDER: dict = {"running": False, "version": "", "done": 0, "total": 0, "area": "", "error": "", "written": 0,
+                 "bytes": 0, "folder": ""}
+GF_AREAS = [{"key": "z04/stripmall_01", "name": "stripmall_01", "place": "z04", "files": 3},
+            {"key": "z04/havana_01", "name": "havana_01", "place": "z04", "files": 2},
+            {"key": "azones/donutshop_01", "name": "donutshop_01", "place": "azones", "files": 1}]
+
+
+def blender_run(version):
+    """A made-up city export: three areas, a moment each."""
+    BLENDER.update(running=True, version=version, done=0, total=3, written=0, bytes=0, error="",
+                   folder=f"binaries/blender/{version.upper()}")
+    for a in GF_AREAS[:2] + [{"name": "bridge_01"}]:
+        BLENDER["area"] = a["name"]
+        time.sleep(0.25)
+        BLENDER["done"] += 1
+        BLENDER["written"] += 1
+        BLENDER["bytes"] += 4 << 20
+    BLENDER.update(running=False, area="")
 
 
 def gf_fake_files(version):
@@ -301,6 +319,12 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": True, "total": len(rows), "offset": off, "files": rows[off:off + lim]})
             if u.path in ("/api/game-files/sound", "/api/game-files/pictures", "/api/game-files/picture"):
                 return self._game_file_preview(u.path.rsplit("/", 1)[1], q)
+            if u.path == "/api/game-files/areas":
+                return self._json({"ok": True, "areas": GF_AREAS if GF["summary"] else [], "city": dict(BLENDER)})
+            if u.path == "/api/game-files/blender":
+                return self._json(dict(BLENDER, ok=True))
+            if u.path == "/api/game-files/model":
+                return self._bytes(b"glTF" + bytes(8), "model/gltf-binary")
             if u.path == "/api/queue":
                 items = list(TASKS.values())
                 lane, tier, query = q.get("lane", "ALL"), q.get("tier", "ALL"), q.get("q", "").lower()
@@ -524,6 +548,15 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/api/game-files/stop":
             GF["status"]["stop"] = True
             return self._json({"ok": True})
+        if u.path == "/api/game-files/blender":
+            if BLENDER["running"]:
+                return self._json({"ok": False, "error": "Already exporting the city."}, 409)
+            threading.Thread(target=blender_run, args=(str(body.get("version", "")),), daemon=True).start()
+            return self._json(dict(BLENDER, ok=True, running=True, total=3))
+        if u.path == "/api/game-files/blender-stop":
+            return self._json({"ok": True})
+        if u.path == "/api/game-files/open" and str(body.get("folder", "")).startswith("blender:"):
+            return self._json({"ok": True, "folder": "binaries/blender"})
         if u.path == "/api/game-files/open":
             folder = body.get("folder", "")
             known = ("", "shared", "best", "xbox", "pc", "ps2", "prototype")

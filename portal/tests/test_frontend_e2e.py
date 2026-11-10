@@ -727,6 +727,38 @@ def test_game_files_previews(page):
     assert set(sound) == {"version", "path"} and sound["path"].endswith(".rsd")
 
 
+def test_game_files_in_blender(page):
+    """Copied .p3d files get a Blender download; the In Blender box downloads a whole map area and exports the
+    city, then opens its folder."""
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    assert page.is_hidden("#gf-blender")
+    page.click("#gf-start")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
+    page.wait_for_selector("#gf-blender:not([hidden])")
+    page.wait_for_function("document.querySelectorAll('#gf-list .gf-row').length > 0")
+    link = page.get_attribute("#gf-list .gf-row:has-text('.p3d') .a a", "href")
+    assert link.startswith("/api/game-files/model?") and "path=" in link
+    page.wait_for_function("document.querySelectorAll('#gfb-area option').length === 3")
+    assert page.eval_on_selector_all("#gfb-area optgroup", "gs => gs.map(g => g.label)") == ["The city", "Interiors"]
+    href = page.get_attribute("#gfb-area-dl", "href")
+    assert "area=z04%2Fstripmall_01" in href and "model?" in href
+    page.select_option("#gfb-area", "azones/donutshop_01")
+    assert "area=azones%2Fdonutshop_01" in page.get_attribute("#gfb-area-dl", "href")
+    with page.expect_download() as dl:
+        page.click("#gfb-area-dl")
+    assert dl.value.url.endswith("area=azones%2Fdonutshop_01") or "area=azones%2Fdonutshop_01" in dl.value.url
+    page.click("#gfb-city")
+    page.wait_for_selector("#gfb-city-stop:not([hidden])")
+    page.wait_for_function("document.getElementById('gfb-city-status').textContent.includes('3 areas written')",
+                           timeout=10000)
+    assert page.is_visible("#gfb-city-open") and page.is_enabled("#gfb-city")
+    page.click("#gfb-city-open")
+    page.wait_for_timeout(200)
+    tab = [c[1] for c in calls("/api/game-files/blender") if "version" in (c[1] or {})][-1]["version"]
+    assert calls("/api/game-files/open")[-1][1] == {"folder": "blender:" + tab}
+
+
 def test_game_files_stop(page):
     page.goto(BASE + "#gamefiles")
     page.wait_for_selector("#gf-versions .gf-ver")

@@ -55,6 +55,7 @@ import good_first as GOOD  # noqa: E402
 import discord_feed as DISCORD  # noqa: E402
 import media as MEDIA  # noqa: E402
 import p3d_gltf as P3G  # noqa: E402
+import blender_export as BX  # noqa: E402
 import game_assets as GA  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
@@ -90,6 +91,7 @@ INCLUDE_DIR = RECON_DIR / "include"
 SCRIPTS_DIR = BASE_DIR / "binaries" / "scripts_and_data"
 # Sounds, textures, models, videos: copied out of the person's own game files, for their own use only
 GAME_FILES = GA.Job(BASE_DIR / "binaries")
+BLENDER = BX.CityJob(BASE_DIR / "binaries")
 
 HOST = os.environ.get("SCARFACE_HOST", "127.0.0.1")
 PORT = int(os.environ.get("SCARFACE_PORT", "8085"))
@@ -2111,6 +2113,13 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(st)
         if u.path == "/api/game-files":
             return self._json(dict(GAME_FILES.overview(), ok=True))
+        if u.path == "/api/game-files/areas":
+            out = GA.out_dir(GAME_FILES.bin_dir)
+            found = BX.areas(out, GAME_FILES.index(), q1("version"))
+            return self._json({"ok": True, "areas": [dict(a, files=len(a["files"])) for a in found],
+                               "city": dict(BLENDER.status)})
+        if u.path == "/api/game-files/blender":
+            return self._json(dict(BLENDER.status, ok=True))
         if u.path == "/api/game-files/list":
             try:
                 offset, limit = max(0, int(q1("offset", "0"))), min(500, max(1, int(q1("limit", "200"))))
@@ -2152,6 +2161,8 @@ class Handler(BaseHTTPRequestHandler):
             "/api/submit": self.post_submit, "/api/import-submission": self.post_import,
             "/api/decompme": self.post_decompme,
             "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
+            "/api/game-files/blender": self.post_game_files_blender,
+            "/api/game-files/blender-stop": self.post_game_files_blender_stop,
             "/api/game-files/open": self.post_game_files_open,
             "/api/dme-bridge/run": self.post_bridge_run, "/api/dme-bridge/result": self.post_bridge_result,
             "/api/describe": self.post_describe,
@@ -2389,6 +2400,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": "Previews only work on the computer the portal runs on."}, 403)
         if (self.headers.get("Sec-Fetch-Site") or "").strip().lower() == "cross-site":
             return self._json({"ok": False, "error": "Requests from other websites are not accepted."}, 403)
+        if what == "model" and q1("area"):
+            return self._send_area(q1("version"), q1("area"))
         path = GAME_FILES.file_path(q1("version"), q1("path"))
         if path is None:
             return self._json({"ok": False, "error": "That file isn't in your copied game files (copy them first)."}, 404)
@@ -2415,26 +2428,38 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": f"Couldn't read the file: {e}"}, 500)
 
     def _send_model(self, version: str, game_path: str, path: Path, data: bytes) -> None:
-        """A copied .p3d file as a glTF scene (.glb) for Blender. A map area also gets its region's and the
-        city's shared files from the same folder, for its textures and the models placed on it."""
-        lib = P3G.Library()
+        """A copied .p3d file as a glTF scene (.glb) for Blender. A map area also gets its region's and the city's
+        shared files from the same folder; a character gets the game's animations."""
         try:
-            src = lib.add(path.name, data, main=True)
+            glb, _report = BX.model_glb(GA.out_dir(GAME_FILES.bin_dir), GAME_FILES.index(), version, game_path, data)
         except P3G.p3d.P3dError as e:
             return self._json({"ok": False, "error": str(e)}, 415)
-        is_map = bool(P3G._world_geo(lib, src) or P3G.instance_objects(src))
-        if is_map:
-            for f in GAME_FILES.files_beside(version, game_path, P3G.MAP_LIBRARY):
-                try:
-                    lib.add(f.name, f.read_bytes(), main=False)
-                except (OSError, P3G.p3d.P3dError):
-                    pass
-        try:
-            glb, _report = P3G.export(lib, map_mode=is_map)
         except P3G.ExportError as e:
             return self._json({"ok": False, "error": f"Nothing to show in Blender: {e}."}, 415)
         name = re.sub(r'[^A-Za-z0-9._-]', "_", Path(game_path.replace("\\", "/")).stem) + ".glb"
         self._send(200, glb, "model/gltf-binary", {"Content-Disposition": f'attachment; filename="{name}"'})
+
+    def _send_area(self, version: str, key: str) -> None:
+        """A whole map area (its shell and detail files) as one .glb."""
+        try:
+            glb, _report = BX.area_glb(GA.out_dir(GAME_FILES.bin_dir), GAME_FILES.index(), version, key)
+        except P3G.ExportError as e:
+            return self._json({"ok": False, "error": f"{str(e)[:1].upper()}{str(e)[1:]}."}, 404)
+        except (OSError, P3G.p3d.P3dError) as e:
+            return self._json({"ok": False, "error": f"Couldn't read the area's files: {e}"}, 500)
+        name = re.sub(r'[^A-Za-z0-9._-]', "_", key.rsplit("/", 1)[-1]) + ".glb"
+        self._send(200, glb, "model/gltf-binary", {"Content-Disposition": f'attachment; filename="{name}"'})
+
+    def post_game_files_blender(self, body):
+        """Every map area of the city as .glb files in binaries/blender/<version>/."""
+        err = BLENDER.start(str(body.get("version", "")), GAME_FILES.index())
+        if err:
+            return self._json({"ok": False, "error": err}, 409 if "Already" in err else 400)
+        self._json(dict(BLENDER.status, ok=True))
+
+    def post_game_files_blender_stop(self, body):
+        BLENDER.stop()
+        self._json({"ok": True})
 
     def post_game_files_start(self, body):
         versions = body.get("versions")
@@ -2452,7 +2477,12 @@ class Handler(BaseHTTPRequestHandler):
     def post_game_files_open(self, body):
         if HOST not in ("127.0.0.1", "localhost", "::1"):
             return self._json({"ok": False, "error": "Folders can only be opened when the portal runs on this computer."}, 403)
-        folder = GAME_FILES.folder_for(str(body.get("folder", "")))
+        which = str(body.get("folder", ""))
+        if which.startswith("blender:"):
+            folder = BLENDER.folder(which[8:])
+            folder = folder if folder.is_dir() else None
+        else:
+            folder = GAME_FILES.folder_for(which)
         if folder is None:
             return self._json({"ok": False, "error": "That folder isn't there yet."}, 404)
         try:
