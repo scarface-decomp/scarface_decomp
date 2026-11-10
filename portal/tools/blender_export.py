@@ -212,23 +212,57 @@ def area_glb(out: Path, index: Optional[dict], version: str, key: str,
     area = next((a for a in areas(out, index, version) if a["key"] == key), None)
     if area is None:
         raise P3G.ExportError("that map area isn't in your copied game files")
-    lib = P3G.Library(parsed)
+    files = []
     for path in area["files"]:
         p = GA.file_on_disk(out, index, version, path)
         if p is not None:
-            lib.add(p.name, p.read_bytes(), main=True, keep=False)
+            files.append((p.name, p.read_bytes()))
     if library is None:
         library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
-    mine = {Path(f).name.lower() for f in area["files"]}
+    return area_from_files(files, library, parsed)
+
+
+def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, bytes]],
+                    parsed: Optional[dict] = None) -> Tuple[bytes, "P3G.Report"]:
+    """A map area's .glb from its own files and the shared ones (names and bytes)."""
+    lib = P3G.Library(parsed)
+    for name, data in files:
+        lib.add(name, data, main=True, keep=False)
+    mine = {n.lower() for n, _d in files}
     for name, data in library:
         if name.lower() not in mine:
             lib.add(name, data, main=False)
     return P3G.export(lib, map_mode=True)
 
 
+def workers_wanted(use_cores: bool = True) -> int:
+    """How many processes to export with: one per processor core but one (left for everything else), at
+    most 8 (each holds the shared map files)."""
+    return max(1, min(8, (os.cpu_count() or 2) - 1)) if use_cores else 1
+
+
+def city_worker(job_file: str) -> int:
+    """A worker process of the city export: the areas in job_file (JSON: library [[name, path]], areas
+    [{name, files: [[name, path]], dest}]), each written to its dest; a line of JSON per area on stdout."""
+    import json
+    job = json.loads(Path(job_file).read_text(encoding="utf-8"))
+    library = [(n, Path(p).read_bytes()) for n, p in job["library"]]
+    parsed: dict = {}
+    for area in job["areas"]:
+        try:
+            files = [(n, Path(p).read_bytes()) for n, p in area["files"]]
+            glb, _r = area_from_files(files, library, parsed)
+            Path(area["dest"]).write_bytes(glb)
+            print(json.dumps({"area": area["name"], "bytes": len(glb)}), flush=True)
+        except (P3G.ExportError, OSError, P3G.p3d.P3dError) as e:
+            print(json.dumps({"area": area["name"], "error": str(e)}), flush=True)
+    return 0
+
+
 class CityJob:
     """Every city area of one version, one .glb each, into binaries/blender/<version>/, in a background
-    thread. Areas line up when imported together."""
+    thread. Areas line up when imported together. With use_cores, several worker processes share the
+    areas (city_worker), one per processor core but one."""
 
     def __init__(self, bin_dir: Path):
         self.bin_dir = bin_dir
@@ -238,6 +272,7 @@ class CityJob:
         self._stop = threading.Event()
         self._lock = threading.Lock()
         self.busy: Optional[Callable[[], str]] = None      # something else that mustn't run with this (why, or "")
+        self.use_cores: Callable[[], bool] = lambda: True
 
     @property
     def running(self) -> bool:
@@ -263,7 +298,8 @@ class CityJob:
                 return "None of the city's map areas are in your copied game files for that version: copy them first."
             self._stop.clear()
             self.status.update(running=True, version=version, done=0, total=len(todo), area="", error="", written=0,
-                               bytes=0, folder=GA._show_path(self.folder(version)))
+                               bytes=0, folder=GA._show_path(self.folder(version)),
+                               workers=min(len(todo), workers_wanted(self.use_cores())))
             self._thread = threading.Thread(target=self._run, args=(version, index, todo), daemon=True)
             self._thread.start()
             return None
@@ -276,6 +312,11 @@ class CityJob:
         dest = self.folder(version)
         try:
             dest.mkdir(parents=True, exist_ok=True)
+            if self.status.get("workers", 1) > 1:
+                self._run_parallel(out, index, version, todo, dest)
+                if not self._stop.is_set():
+                    (dest / CITY_MADE).write_text(str(P3G.EXPORT_VERSION), encoding="utf-8")
+                return
             library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
             parsed: dict = {}
             for area in todo:
@@ -299,6 +340,75 @@ class CityJob:
             self.status["error"] = f"{type(e).__name__}: {e}"
         finally:
             self.status.update(running=False, area="")
+
+    def _run_parallel(self, out: Path, index: Optional[dict], version: str, todo: List[dict], dest: Path) -> None:
+        """The areas shared out between worker processes (python blender_export.py --city-worker job.json)."""
+        import json
+        n = self.status["workers"]
+        library = [[p.name, str(p)] for p in _library(out, index, version)]
+        jobs: List[List[dict]] = [[] for _ in range(n)]
+        for i, area in enumerate(sorted(todo, key=lambda a: -len(a["files"]))):     # big ones first, spread out
+            files = []
+            for path in area["files"]:
+                p = GA.file_on_disk(out, index, version, path)
+                if p is not None:
+                    files.append([p.name, str(p)])
+            jobs[i % n].append({"name": area["name"], "files": files, "dest": str(dest / (area["name"] + ".glb"))})
+        work = self.bin_dir / OUT_NAME / "_scripts"
+        work.mkdir(parents=True, exist_ok=True)
+        flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
+        procs = []
+        for i, areas_ in enumerate(jobs):
+            if not areas_:
+                continue
+            job = work / f"city_job_{i}.json"
+            job.write_text(json.dumps({"library": library, "areas": areas_}), encoding="utf-8")
+            procs.append(subprocess.Popen([sys.executable, str(Path(__file__).resolve()), "--city-worker", str(job)],
+                                          stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL,
+                                          text=True, creationflags=flags))
+        lock = threading.Lock()
+
+        def follow(proc: subprocess.Popen) -> None:
+            for line in proc.stdout:
+                try:
+                    got = json.loads(line)
+                except ValueError:
+                    continue
+                with lock:
+                    self.status["area"] = got.get("area", "")
+                    self.status["done"] += 1
+                    if got.get("bytes"):
+                        self.status["written"] += 1
+                        self.status["bytes"] += got["bytes"]
+        readers = [threading.Thread(target=follow, args=(p,), daemon=True) for p in procs]
+        for t in readers:
+            t.start()
+        while any(p.poll() is None for p in procs):
+            if self._stop.is_set():
+                for p in procs:
+                    p.kill()
+                self.status["error"] = "Stopped."
+                break
+            time.sleep(0.2)
+        for t in readers:
+            t.join(5)
+        for job in work.glob("city_job_*.json"):
+            try:
+                job.unlink()
+            except OSError:
+                pass
+
+
+def main(argv=None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--city-worker", metavar="JOB", help="(used by the portal) export the areas in a job file")
+    a = ap.parse_args(argv)
+    if a.city_worker:
+        return city_worker(a.city_worker)
+    ap.print_help()
+    return 0
+
 
 
 # --------------------------------------------------------------------------- the person's own Blender
@@ -446,3 +556,7 @@ def open_in_blender(exe: Path, files: List[Path], save: Optional[Path], work: Pa
         flags = getattr(subprocess, "DETACHED_PROCESS", 0) | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
     subprocess.Popen([str(exe), "--python", str(script)], cwd=str(work), stdin=subprocess.DEVNULL,
                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, close_fds=True, creationflags=flags)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

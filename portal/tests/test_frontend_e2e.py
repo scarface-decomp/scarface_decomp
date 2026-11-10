@@ -712,8 +712,18 @@ def test_game_files_previews(page):
     page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
     page.wait_for_selector("#gf-result:not([hidden]) .gf-tab")
     page.wait_for_function("document.querySelectorAll('#gf-list .gf-row').length > 0")
-    buttons = page.eval_on_selector_all("#gf-list .gf-row", "rows => rows.slice(0, 5).map(r => [r.querySelector('.p').firstChild.textContent.split('.').pop(), (r.querySelector('.a button') || {}).textContent || ''])")
+    buttons = page.eval_on_selector_all("#gf-list .gf-row", "rows => rows.map(r => [r.querySelector('.p').firstChild.textContent.split('.').pop(), (r.querySelector('.a button') || {}).textContent || ''])")
     assert dict(buttons) == {"rsd": "Play", "p3d": "Open", "bik": "Watch", "cso": "", "dat": ""}
+    # sorted by what they are, under a heading for each kind with how many there are
+    heads = page.eval_on_selector_all("#gf-list .gf-group", "hs => hs.map(h => h.firstChild.textContent)")
+    assert heads == ["Sounds", "Models & textures", "Videos", "Scripts & text", "Other"]
+    assert page.text_content("#gf-list .gf-group span").endswith(" files")
+    page.select_option("#gf-kind-pick", "videos")
+    page.wait_for_function("document.querySelectorAll('#gf-list .gf-group').length === 1")
+    assert calls("/api/game-files/list")[-1][1]["kind"] == "videos"
+    assert page.get_attribute(".gf-kind[aria-pressed=true]", "title") == "Show only videos"
+    page.select_option("#gf-kind-pick", "")
+    page.wait_for_function("document.querySelectorAll('#gf-list .gf-group').length === 5")
 
     page.click("#gf-list .gf-row:has-text('.rsd') .a button")
     page.wait_for_selector("#gf-list .gf-prev audio")
@@ -849,6 +859,30 @@ def test_game_files_movies_without_ffmpeg_say_how_to_get_it(page):
     page.fill("#gf-list .gf-where input", "C:\\ffmpeg\\bin\\ffmpeg.exe")
     page.click("#gf-list .gf-where button")
     page.wait_for_selector("#gf-list .gf-prev video", timeout=10000)
+
+
+def test_game_files_every_texture(page):
+    _gf_copied(page)
+    page.wait_for_selector("#gf-textures:not([hidden])")
+    page.click("#gft-start")
+    page.wait_for_function("document.getElementById('gft-status').textContent.startsWith('The PC')")
+    assert page.is_visible("#gft-stop")
+    page.wait_for_function("document.getElementById('gft-status').textContent.startsWith('Done')", timeout=10000)
+    assert "7 sharper from another version, 172 that only other versions have" in page.text_content("#gft-status")
+    page.click("#gft-open")
+    page.wait_for_timeout(200)
+    assert calls("/api/game-files/open")[-1][1] == {"folder": "textures"}
+
+
+def test_game_files_speed(page):
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-speed:not([hidden])")
+    assert "Use all 8 processor cores" in page.text_content("#gf-cores-text")
+    assert "NVIDIA" in page.text_content("#gf-gpu-text")
+    assert page.is_checked("#gf-use-cores") and page.is_checked("#gf-use-gpu")
+    page.uncheck("#gf-use-cores")
+    page.wait_for_timeout(200)
+    assert calls("/api/game-files/speed")[-1][1] == {"use_cores": False, "use_gpu": True}
 
 
 def test_game_files_stop(page):

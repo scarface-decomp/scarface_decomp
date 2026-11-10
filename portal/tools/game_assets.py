@@ -125,7 +125,9 @@ _KIND_OF_EXT = {ext: k for k, _, exts in KINDS for ext in exts}
 
 SKIP_DIRS = {"scripts_and_data", OUT_NAME, "_unpacked", "_to_delete",
              "ps2_overlays",               # the PS2 code overlays copied out by extract_scripts.py, not a game
-             "blender"}                    # the map exports blender_export.py writes
+             "blender",                    # the map exports blender_export.py writes
+             "textures",                   # the pictures textures.py writes
+             "previews"}                   # the movies made playable (movies.py)
 PC_DISC_NOTE = ("put the PC disc image (.iso) in binaries/ as it is: the portal reads it without installing "
                 "anything. An installed game folder works too.")
 PC_IN_ARCHIVE_NOTE = ("this looks like the PC disc packed in a .zip/.7z: unpack the .iso into binaries/ and the "
@@ -1151,6 +1153,9 @@ READERS = {"disc": read_disc, "zip": read_zip, "folder": read_folder, "pcdisc": 
 # Storing by content, then placing
 # --------------------------------------------------------------------------- #
 
+SMALL_FILE = 1 << 20          # files up to this size are read into memory and fingerprinted before writing
+
+
 class Store:
     """Files kept by the SHA-1 of their bytes, so one that several versions share is written once."""
 
@@ -1163,6 +1168,25 @@ class Store:
 
     def has(self, sha: str) -> bool:
         return os.path.isfile(_os(self.path(sha)))
+
+    def put_bytes(self, data: bytes, keep: Callable[[str], bool] = lambda sha: True) -> Tuple[str, int]:
+        """Store a small file held in memory: its SHA-1 first, then it's written only if the store doesn't
+        have it (a file another version has too is never written twice) and keep(sha) wants it."""
+        sha = hashlib.sha1(data).hexdigest()
+        dest = self.path(sha)
+        if keep(sha) and not os.path.isfile(_os(dest)):
+            os.makedirs(_os(dest.parent), exist_ok=True)
+            part = _os(dest) + f".{os.getpid()}.part"           # whole or not there, even if cut off
+            with open(part, "wb") as out:
+                out.write(data)
+            try:
+                os.replace(part, _os(dest))
+            except PermissionError:                             # another reader stored it at that moment
+                try:
+                    os.remove(part)
+                except OSError:
+                    pass
+        return sha, len(data)
 
     def put(self, chunks: Iterable[bytes], keep: Callable[[str], bool] = lambda sha: True) -> Tuple[str, int]:
         """Store a file's bytes; with keep, only when keep(sha) says it's wanted (the hash is known only at
@@ -1181,7 +1205,10 @@ class Store:
                 os.remove(tmp)
             else:
                 os.makedirs(_os(dest.parent), exist_ok=True)
-                os.replace(tmp, _os(dest))
+                try:
+                    os.replace(tmp, _os(dest))
+                except PermissionError:                         # another reader stored it at that moment
+                    os.remove(tmp)
             return sha, n
         except BaseException:
             try:
@@ -1200,6 +1227,14 @@ class _Collect(Sink):
 
     def file(self, path: str, size: int, chunks: Iterable[bytes]) -> str:
         want = _sniff_wants(path, size)
+        if size <= SMALL_FILE:                              # 99% of the game's files: in memory
+            data = b"".join(chunks)
+            sha, n = self.store.put_bytes(data, self.keep)
+            facts = sniff(path, data if want < 0 else data[:want]) if want else None
+            self.facts[sha] = facts
+            self.files.append([path, n, sha, facts])
+            self.status["files"] += 1
+            return sha
         seen = bytearray()
 
         def tee():
@@ -1606,9 +1641,128 @@ def new_status() -> Status:
                   message="", error="", started=0, finished=0, mode="", versions=[], placed=0, to_place=0)
 
 
+def fast_drive(path: Path, tries: int = 24) -> bool:
+    """Whether the drive a file is on answers reads at random places quickly (an SSD) or slowly (a hard
+    drive, whose head has to move): reading several discs at once only pays on the first."""
+    try:
+        size = path.stat().st_size
+        if size < (64 << 20):
+            return True
+        import random
+        rng = random.Random(size)
+        took = []
+        fd = os.open(_os(path), os.O_RDONLY | getattr(os, "O_BINARY", 0))
+        try:
+            for _ in range(tries):
+                os.lseek(fd, rng.randrange(0, size - 4096) & ~4095, 0)
+                t = time.perf_counter()
+                os.read(fd, 4096)
+                took.append(time.perf_counter() - t)
+        finally:
+            os.close(fd)
+        return sorted(took)[len(took) // 2] < 0.002          # a hard drive takes 5 to 15 ms a read
+    except OSError:
+        return False
+
+
+def _source_json(src: Source) -> dict:
+    return {"version": src.version, "path": str(src.path), "kind": src.kind, "member": src.member, "size": src.size,
+            "fs": src.fs, "extra": src.extra}
+
+
+def read_one(job_file: str) -> int:
+    """A reader process of a copy (python game_assets.py --read-one job.json): one version into the shared
+    store, its list of files into catalog-<version>.json; progress as lines of JSON on stdout."""
+    job = json.loads(Path(job_file).read_text(encoding="utf-8"))
+    d = job["source"]
+    src = Source(d["version"], Path(d["path"]), d["kind"], d["member"], d["size"], d["fs"], d["extra"])
+    work = Path(job["work"])
+    skip = set(json.loads(Path(job["skip"]).read_text(encoding="utf-8")))
+    status = {"files": 0}
+    files: List[list] = []
+    last = [0.0]
+
+    def say(**kw) -> None:
+        print(json.dumps(kw), flush=True)
+
+    def progress(pos: int) -> None:
+        if time.time() - last[0] > 0.4:
+            last[0] = time.time()
+            say(done=pos, files=status["files"])
+    READERS[src.kind](src, _Collect(Store(work / "store"), files, status, lambda sha: sha not in skip), progress,
+                      lambda: False, lambda m: say(log=m))
+    _write_json(work / f"catalog-{src.version}.json", {"signature": src.signature(), "complete": True, "files": files})
+    say(done=src.size, files=status["files"], finished=True)
+    return 0
+
+
+def _read_side_by_side(vs: List[str], sources: Dict[str, Source], work: Path, skip: set, status: Status,
+                       stop: Callable[[], bool], log: Log) -> None:
+    """Read several versions at once, one process each (each on its own processor core)."""
+    (work / "store").mkdir(parents=True, exist_ok=True)
+    skip_file = work / "skip.json"
+    _write_json(skip_file, sorted(skip))
+    flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
+    base_done, base_files = status["done"], status["files"]
+    seen: Dict[str, Tuple[int, int]] = {v: (0, 0) for v in vs}
+    errors: Dict[str, List[str]] = {v: [] for v in vs}
+    procs: Dict[str, subprocess.Popen] = {}
+    status.update(phase="reading", version="", label=", ".join(sources[v].label for v in vs),
+                  message="Reading " + ", ".join(sources[v].name for v in vs) + " at the same time")
+    log(f"[*] reading {', '.join(sources[v].label for v in vs)} at the same time, one per processor core")
+    for v in vs:
+        job = work / f"read-{v}.json"
+        _write_json(job, {"source": _source_json(sources[v]), "work": str(work), "skip": str(skip_file)})
+        procs[v] = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), "--read-one", str(job)],
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL,
+                                    text=True, creationflags=flags)
+
+    def follow(v: str) -> None:
+        for line in procs[v].stdout:
+            try:
+                got = json.loads(line)
+            except ValueError:
+                continue
+            if "log" in got:
+                log(got["log"])
+            elif "done" in got:
+                seen[v] = (got["done"], got.get("files", 0))
+
+    def drain(v: str) -> None:
+        errors[v].extend(procs[v].stderr.readlines())
+    threads = [threading.Thread(target=f, args=(v,), daemon=True) for v in vs for f in (follow, drain)]
+    for t in threads:
+        t.start()
+    try:
+        while any(p.poll() is None for p in procs.values()):
+            if stop():
+                raise Stopped()
+            status["done"] = base_done + sum(d for d, _f in seen.values())
+            status["files"] = base_files + sum(f for _d, f in seen.values())
+            time.sleep(0.2)
+    finally:
+        for p in procs.values():
+            if p.poll() is None:
+                p.kill()
+        for t in threads:
+            t.join(5)
+        for v in vs:
+            for f in (work / f"read-{v}.json", skip_file):
+                try:
+                    f.unlink()
+                except OSError:
+                    pass
+    status["done"] = base_done + sum(sources[v].size for v in vs)
+    status["files"] = base_files + sum(f for _d, f in seen.values())
+    bad = [v for v in vs if procs[v].returncode != 0]
+    if bad:
+        tail = " ".join(x.strip() for x in errors[bad[0]][-3:])[-300:]
+        raise RuntimeError(f"reading {sources[bad[0]].label} stopped: {tail or 'no reason given'}")
+
+
 def run(versions: List[str], mode: str, bin_dir: Path = BIN_DIR, status: Optional[Status] = None,
         stop: Callable[[], bool] = lambda: False, log: Log = print,
-        sources: Optional[Dict[str, Source]] = None, folders: str = "game") -> dict:
+        sources: Optional[Dict[str, Source]] = None, folders: str = "game", side_by_side: bool = False) -> dict:
     """Read the chosen versions and write them out in the chosen layout. Returns the index.
 
     The last copy stays as it is while the game is read: only at the end, when every file is at hand, are
@@ -1665,7 +1819,18 @@ def run(versions: List[str], mode: str, bin_dir: Path = BIN_DIR, status: Optiona
         if cat is not None:
             log(f"[=] {sources[v].label}: already read ({len(cat):,} files)")
             catalogs[v] = cat
-    read([v for v in chosen if v not in catalogs], lambda sha: sha not in there.by_sha)
+    first = [v for v in chosen if v not in catalogs]
+    if side_by_side and len(first) > 1:                  # one process per version, on a fast drive
+        status["total"] += sum(sources[v].size for v in first)
+        _read_side_by_side(first, sources, work, set(there.by_sha), status, stop, log)
+        for v in first:
+            cat = _catalog_read(work, sources[v])
+            if cat is None:
+                raise RuntimeError(f"reading {sources[v].label} didn't finish")
+            catalogs[v] = cat
+            log(f"    + {sources[v].label}: {len(cat):,} files")
+    else:
+        read(first, lambda sha: sha not in there.by_sha)
 
     # 2. Where everything goes, and the files no copy has any more: read from the fewest versions
     def unavailable(places: List[Tuple[str, str]]) -> set:
@@ -1868,24 +2033,47 @@ def summary(index: Optional[dict]) -> Optional[dict]:
     return out
 
 
+KIND_ORDER = [k for k, _, _ in KINDS] + ["other"]
+_LISTS: Dict[tuple, List[list]] = {}
+
+
 def list_files(index: Optional[dict], version: str, status: str = "", kind: str = "", query: str = "",
                offset: int = 0, limit: int = 200) -> dict:
-    """A page of one version's files, for the portal's list. status 'picked': the ones this version gave
-    to the Best (or PC-first) layout."""
-    rows = ((index or {}).get("versions", {}).get(version) or {}).get("files", [])
-    q = query.strip().lower()
+    """A page of one version's files, for the portal's list, sorted by what they are (sounds, textures,
+    models, animations, videos, scripts & text, other), then by name. status 'picked': the ones this
+    version gave to the Best (or PC-first) layout. kinds: how many of the files found are of each kind."""
+    key = (id(index), (index or {}).get("created"), version, status, kind, query.strip().lower())
+    hits = _LISTS.get(key)
+    if hits is None:
+        rows = ((index or {}).get("versions", {}).get(version) or {}).get("files", [])
+        q = query.strip().lower()
+        best = (index or {}).get("mode") in ("best", "pc")
+        hits = []
+        for r in rows:
+            if status and not (r[3] == status or (status == "own" and r[3] != "shared")
+                               or (status == "picked" and best and _written(r))):
+                continue
+            k = kind_of(r[0], _facts(r))
+            if kind and k != kind:
+                continue
+            name = sound_name(_facts(r))
+            if q and q not in r[0].lower() and q not in name.lower():
+                continue
+            hits.append([KIND_ORDER.index(k) if k in KIND_ORDER else len(KIND_ORDER), (name or r[0]).lower(), k, r])
+        hits.sort(key=lambda h: (h[0], h[1]))
+        if len(_LISTS) > 8:
+            _LISTS.clear()
+        _LISTS[key] = hits
     best = (index or {}).get("mode") in ("best", "pc")
-    hits = [r for r in rows
-            if (not status or r[3] == status or (status == "own" and r[3] != "shared")
-                or (status == "picked" and best and _written(r)))
-            and (not kind or kind_of(r[0], _facts(r)) == kind)
-            and (not q or q in r[0].lower() or q in sound_name(_facts(r)).lower())]
+    kinds: Dict[str, int] = {}
+    for h in hits:
+        kinds[h[2]] = kinds.get(h[2], 0) + 1
     page = hits[offset:offset + limit]
-    return {"total": len(hits), "offset": offset,
-            "files": [{"path": r[0], "size": r[1], "status": r[3], "kind": kind_of(r[0], _facts(r)), "placed": r[4],
+    return {"total": len(hits), "offset": offset, "kinds": kinds,
+            "files": [{"path": r[0], "size": r[1], "status": r[3], "kind": k, "placed": r[4],
                        "picked": bool(best and _written(r)), "quality": describe(_facts(r)),
                        "name": sound_name(_facts(r))}
-                      for r in page]}
+                      for _o, _n, k, r in page]}
 
 
 def write_readmes(out: Path, index: dict) -> None:
@@ -2014,6 +2202,7 @@ class Job:
         self._lock = threading.Lock()
         self._index_cache: Tuple[tuple, Optional[dict]] = ((), None)
         self.busy: Optional[Callable[[], str]] = None      # something else that mustn't run with a copy (why, or "")
+        self.use_cores: Callable[[], bool] = lambda: True     # the speed setting: read versions side by side
         self._sources_cache: Tuple[tuple, Optional[Tuple[Dict[str, Source], List[str]]]] = ((), None)
 
     def sources(self) -> Tuple[Dict[str, Source], List[str]]:
@@ -2070,9 +2259,18 @@ class Job:
         """Stop reading. Putting files in place, the short last part, always finishes."""
         self._stop.set()
 
+    def side_by_side(self, versions: List[str], sources: Dict[str, Source]) -> bool:
+        """Read the versions at the same time: when the speed setting allows it, there's more than one
+        processor core, and the discs are on a fast drive (an SSD)."""
+        if not self.use_cores() or (os.cpu_count() or 1) < 2:
+            return False
+        discs = [sources[v].path for v in versions if v in sources and sources[v].path.is_file()]
+        return bool(discs) and fast_drive(max(discs, key=lambda p: p.stat().st_size))
+
     def _run(self, versions: List[str], mode: str, sources: Dict[str, Source], folders: str = "game") -> None:
         try:
-            run(versions, mode, self.bin_dir, self.status, self._stop.is_set, self.log, sources, folders)
+            run(versions, mode, self.bin_dir, self.status, self._stop.is_set, self.log, sources, folders,
+                side_by_side=self.side_by_side(versions, sources))
         except Stopped:
             self.status.update(running=False, phase="stopped", finished=time.time(),
                                message=("Stopped. Your last copy is as it was. Press Copy again to carry on "
@@ -2248,7 +2446,11 @@ def main(argv=None) -> int:
     ap.add_argument("--folders", choices=FOLDERS, default="game", help="as in the game, or by type first")
     ap.add_argument("--versions", default=",".join(VERSIONS), help="which versions (default: all found)")
     ap.add_argument("--bin", type=Path, default=BIN_DIR, help="the folder with your game files")
+    ap.add_argument("--side-by-side", action="store_true", help="read the versions at the same time (fast drives)")
+    ap.add_argument("--read-one", metavar="JOB", help=argparse.SUPPRESS)       # a reader process of a copy
     a = ap.parse_args(argv)
+    if a.read_one:
+        return read_one(a.read_one)
     sources, notes = find_sources(a.bin)
     for v in VERSIONS:
         s = sources.get(v)
@@ -2273,7 +2475,8 @@ def main(argv=None) -> int:
             print(f"      {status['done'] / max(1, status['total']):.0%}  {status['files']:,} files", flush=True)
         return False
 
-    index = run([v.strip() for v in a.versions.split(",")], a.extract, a.bin, status, stop, log, sources, a.folders)
+    index = run([v.strip() for v in a.versions.split(",")], a.extract, a.bin, status, stop, log, sources, a.folders,
+                side_by_side=a.side_by_side)
     for v, s in (summary(index) or {}).get("versions", {}).items():
         print(f"  {s['label']:22} {s['files']:>7,} files: {s['only']:,} only here, {s['changed']:,} different, "
               f"{s['shared']:,} shared")

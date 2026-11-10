@@ -27,7 +27,7 @@ import sys
 import tempfile
 import threading
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rmv as RMV  # noqa: E402
@@ -116,6 +116,36 @@ def encoders(ffmpeg: Path) -> set:
 _NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
 
 
+GPU_ENCODERS = (("h264_nvenc", "NVIDIA", ["-preset", "p4", "-rc", "vbr", "-cq", "21", "-b:v", "0", "-pix_fmt", "yuv420p"]),
+                ("h264_qsv", "Intel", ["-global_quality", "21", "-pix_fmt", "nv12"]),
+                ("h264_amf", "AMD", ["-quality", "balanced", "-rc", "cqp", "-qp_i", "21", "-qp_p", "21", "-pix_fmt", "yuv420p"]))
+_GPU: Dict[str, Optional[tuple]] = {}
+
+
+def graphics_card(ffmpeg: Optional[Path]) -> Optional[tuple]:
+    """The graphics card's H.264 encoder this FFmpeg can use, (encoder, maker, options), or None: each one
+    FFmpeg was built with is tried on a moment of black picture (the build has it even with no such card)."""
+    if ffmpeg is None:
+        return None
+    key = str(ffmpeg)
+    if key not in _GPU:
+        _GPU[key] = None
+        have = encoders(ffmpeg)
+        for enc, maker, opts in GPU_ENCODERS:
+            if enc not in have:
+                continue
+            try:
+                r = subprocess.run([str(ffmpeg), "-hide_banner", "-nostdin", "-f", "lavfi", "-i",
+                                    "color=c=black:s=256x144:d=0.2", "-frames:v", "4", "-c:v", enc, *opts, "-f", "null",
+                                    "-"], capture_output=True, timeout=20, creationflags=_NO_WINDOW)
+            except (OSError, subprocess.SubprocessError):
+                continue
+            if r.returncode == 0:
+                _GPU[key] = (enc, maker, opts)
+                break
+    return _GPU[key]
+
+
 def video_args(have: set) -> List[str]:
     """H.264 (what every browser plays) with the first encoder this FFmpeg has: x264 at a quick setting,
     Windows' own (Media Foundation), or OpenH264."""
@@ -133,6 +163,7 @@ class MovieJob:
 
     def __init__(self, bin_dir: Path):
         self.bin_dir = bin_dir
+        self.use_gpu = lambda: True
         self._lock = threading.Lock()
         self._turn = threading.Lock()                     # one FFmpeg at a time
         self._state: Dict[str, dict] = {}
@@ -179,25 +210,15 @@ class MovieJob:
             try:
                 self._set(out, state="converting", progress=0.0)
                 inputs, sound, frames, shape = self._inputs(src, tmp_dir)
-                args = video_args(encoders(ffmpeg)) + shape
+                gpu = graphics_card(ffmpeg) if self.use_gpu() else None
+                tries = ([["-c:v", gpu[0], *gpu[2]]] if gpu else []) + [video_args(encoders(ffmpeg))]
                 part = tmp_dir / "out.mp4"
-                cmd = [str(ffmpeg), "-hide_banner", "-nostdin", "-y", *inputs, "-map", "0:v:0", "-map", sound,
-                       *args, "-c:a", "aac", "-b:a", "160k", "-ac", "2", "-movflags", "+faststart",
-                       "-progress", "pipe:1", "-nostats", str(part)]
-                proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
-                                        creationflags=_NO_WINDOW)
-                err: List[str] = []
-                drain = threading.Thread(target=lambda: err.extend(proc.stderr.readlines()), daemon=True)
-                drain.start()
-                for line in proc.stdout:
-                    if line.startswith("frame=") and frames:
-                        try:
-                            self._set(out, progress=min(0.99, int(line[6:].strip() or 0) / frames))
-                        except ValueError:
-                            pass
-                code = proc.wait()
-                drain.join(5)
-                if code != 0 or not part.is_file():
+                for n, args in enumerate(tries):                     # the graphics card, then the processor
+                    self._set(out, encoder=gpu[1] if gpu and n == 0 else "processor")
+                    code, err = self._ffmpeg(ffmpeg, inputs, sound, args + shape, part, out, frames)
+                    if code == 0 and part.is_file():
+                        break
+                else:
                     tail = " ".join(x.strip() for x in err[-3:]) or f"FFmpeg stopped ({code})"
                     raise MovieError(tail[-300:])
                 out.parent.mkdir(parents=True, exist_ok=True)
@@ -207,6 +228,26 @@ class MovieJob:
                 self._set(out, state="error", error=f"Couldn't make the video: {e}")
             finally:
                 shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    def _ffmpeg(self, ffmpeg: Path, inputs: List[str], sound: str, args: List[str], part: Path, out: Path,
+                frames: int):
+        cmd = [str(ffmpeg), "-hide_banner", "-nostdin", "-y", *inputs, "-map", "0:v:0", "-map", sound,
+               *args, "-c:a", "aac", "-b:a", "160k", "-ac", "2", "-movflags", "+faststart",
+               "-progress", "pipe:1", "-nostats", str(part)]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+                                creationflags=_NO_WINDOW)
+        err: List[str] = []
+        drain = threading.Thread(target=lambda: err.extend(proc.stderr.readlines()), daemon=True)
+        drain.start()
+        for line in proc.stdout:
+            if line.startswith("frame=") and frames:
+                try:
+                    self._set(out, progress=min(0.99, int(line[6:].strip() or 0) / frames))
+                except ValueError:
+                    pass
+        code = proc.wait()
+        drain.join(5)
+        return code, err
 
     def _tmp_root(self) -> Path:
         root = self.bin_dir / PREVIEWS / "tmp"

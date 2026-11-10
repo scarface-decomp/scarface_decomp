@@ -57,6 +57,7 @@ import media as MEDIA  # noqa: E402
 import p3d_gltf as P3G  # noqa: E402
 import blender_export as BX  # noqa: E402
 import movies as MOVIES  # noqa: E402
+import textures as TEXTURES  # noqa: E402
 import game_assets as GA  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
@@ -123,11 +124,31 @@ class _Kept:
 
 SOUNDS = _Kept(400 << 20)
 MOVIES_JOB = MOVIES.MovieJob(BASE_DIR / "binaries")
-# a copy moves the files the city export reads: never both at once
+TEXTURE_JOB = TEXTURES.TextureJob(BASE_DIR / "binaries")
+SPEED_FILE = BASE_DIR / "binaries" / "portal_speed.json"
+
+
+def speed_settings() -> dict:
+    """The Speed switches (binaries/portal_speed.json): every processor core, and the graphics card."""
+    try:
+        d = json.loads(SPEED_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        d = {}
+    return {"cores": d.get("cores") is not False, "gpu": d.get("gpu") is not False}
+
+
+GAME_FILES.use_cores = lambda: speed_settings()["cores"]
+BLENDER.use_cores = lambda: speed_settings()["cores"]
+MOVIES_JOB.use_gpu = lambda: speed_settings()["gpu"]
+# a copy moves the files the exports read: never at the same time
 GAME_FILES.busy = lambda: ("The city is being exported for Blender from your copied files. Wait for it to "
-                           "finish, or stop it, then copy." if BLENDER.running else "")
+                           "finish, or stop it, then copy." if BLENDER.running else
+                           "The textures are being exported from your copied files. Wait for that to finish, "
+                           "or stop it, then copy." if TEXTURE_JOB.running else "")
 BLENDER.busy = lambda: ("Your game files are being copied. Export the city when that's done."
                         if GAME_FILES.running else "")
+TEXTURE_JOB.busy = lambda: ("Your game files are being copied. Export the textures when that's done."
+                            if GAME_FILES.running else "")
 
 HOST = os.environ.get("SCARFACE_HOST", "127.0.0.1")
 PORT = int(os.environ.get("SCARFACE_PORT", "8085"))
@@ -2159,6 +2180,15 @@ class Handler(BaseHTTPRequestHandler):
                                "city_current": q1("version") in GA.LABELS and BX.city_current(BLENDER.folder(q1("version")))})
         if u.path == "/api/game-files/blender":
             return self._json(dict(BLENDER.status, ok=True))
+        if u.path == "/api/game-files/textures":
+            return self._json(dict(TEXTURE_JOB.status, ok=True, made=(TEXTURE_JOB.folder() / "INDEX.txt").is_file()))
+        if u.path == "/api/game-files/speed":
+            ffmpeg = MOVIES.find_ffmpeg(GAME_FILES.bin_dir)
+            card = MOVIES.graphics_card(ffmpeg)
+            st = speed_settings()
+            return self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "cores": os.cpu_count() or 1,
+                               "workers": BX.workers_wanted(True), "ffmpeg": ffmpeg is not None,
+                               "gpu": card[1] if card else ""})
         if u.path == "/api/game-files/list":
             try:
                 offset, limit = max(0, int(q1("offset", "0"))), min(500, max(1, int(q1("limit", "200"))))
@@ -2209,6 +2239,9 @@ class Handler(BaseHTTPRequestHandler):
             "/api/game-files/open-in-blender": self.post_game_files_open_in_blender,
             "/api/game-files/blender-path": self.post_game_files_blender_path,
             "/api/game-files/movie": self.post_game_files_movie,
+            "/api/game-files/textures": self.post_game_files_textures,
+            "/api/game-files/speed": self.post_game_files_speed,
+            "/api/game-files/textures-stop": self.post_game_files_textures_stop,
             "/api/game-files/ffmpeg-path": self.post_game_files_ffmpeg_path,
             "/api/game-files/open": self.post_game_files_open,
             "/api/dme-bridge/run": self.post_bridge_run, "/api/dme-bridge/result": self.post_bridge_result,
@@ -2659,6 +2692,30 @@ class Handler(BaseHTTPRequestHandler):
         st = MOVIES_JOB.start(path)
         self._json(dict(st, ok=st.get("state") != "error"), 200 if st.get("state") != "error" else 424)
 
+    def post_game_files_textures(self, body):
+        """Every texture as a .png, into binaries/textures/ (PC first; see portal/tools/textures.py)."""
+        sources, _notes = GAME_FILES.sources()
+        err = TEXTURE_JOB.start(GAME_FILES.index(), sources)
+        if err:
+            return self._json({"ok": False, "error": err}, 409 if "Already" in err or "being" in err else 400)
+        self._json(dict(TEXTURE_JOB.status, ok=True))
+
+    def post_game_files_speed(self, body):
+        st = speed_settings()
+        for k, field in (("cores", "use_cores"), ("gpu", "use_gpu")):
+            if isinstance(body.get(field), bool):
+                st[k] = body[field]
+        try:
+            SPEED_FILE.parent.mkdir(parents=True, exist_ok=True)
+            SPEED_FILE.write_text(json.dumps(st), encoding="utf-8")
+        except OSError as e:
+            return self._json({"ok": False, "error": f"Couldn't keep the setting: {e}"}, 500)
+        self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"]})
+
+    def post_game_files_textures_stop(self, body):
+        TEXTURE_JOB.stop()
+        self._json({"ok": True})
+
     def post_game_files_ffmpeg_path(self, body):
         if not self._local_only():
             return
@@ -2701,6 +2758,8 @@ class Handler(BaseHTTPRequestHandler):
         if which.startswith("blender:"):
             folder = BLENDER.folder(which[8:])
             folder = folder if folder.is_dir() else None
+        elif which == "textures":
+            folder = TEXTURE_JOB.folder() if TEXTURE_JOB.folder().is_dir() else None
         else:
             folder = GAME_FILES.folder_for(which)
         if folder is None:

@@ -61,3 +61,44 @@ def test_a_whole_conversion(tmp_path, monkeypatch):
     assert made.parent == tmp_path / "previews" / "movies"
     assert job.start(movie)["state"] == "done"                                        # kept: not made twice
     assert not list((tmp_path / "previews" / "tmp").iterdir())                       # nothing left behind
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg"), reason="FFmpeg isn't installed here")
+def test_a_graphics_card_that_fails_falls_back_to_the_processor(tmp_path, monkeypatch):
+    movie = tmp_path / "radical.bik"
+    movie.write_bytes(b"BIKi" + struct.pack("<II", 100, 10) + bytes(40))
+    monkeypatch.setattr(M.MovieJob, "_inputs", lambda self, src, tmp: (
+        ["-f", "lavfi", "-i", "testsrc=duration=1:size=64x48:rate=10"], "0:a:0?", 10, []))
+    monkeypatch.setattr(M, "graphics_card", lambda ffmpeg: ("h264_no_such_card", "Made-up", []))
+    job = M.MovieJob(tmp_path)
+    job.start(movie)
+    for _ in range(300):
+        if job.status(movie)["state"] in ("done", "error"):
+            break
+        time.sleep(0.1)
+    assert job.status(movie)["state"] == "done" and job.ready(movie) is not None
+    assert job._state[str(job.target(movie))]["encoder"] == "processor"
+
+
+def test_no_graphics_card_check_without_ffmpeg():
+    assert M.graphics_card(None) is None
+
+
+def test_the_speed_switches_are_kept(tmp_path, monkeypatch):
+    import importlib
+    import sys
+    from conftest import PORTAL
+    sys.path.insert(0, str(PORTAL))
+    server = importlib.import_module("decomp_portal_server")
+    monkeypatch.setattr(server, "SPEED_FILE", tmp_path / "portal_speed.json")
+    sent = []
+
+    class Fake:
+        def _json(self, obj, code=200):
+            sent.append((code, obj))
+    assert server.speed_settings() == {"cores": True, "gpu": True}               # both on to start with
+    server.Handler.post_game_files_speed(Fake(), {"use_cores": False})
+    assert sent[-1][1]["use_cores"] is False and server.speed_settings() == {"cores": False, "gpu": True}
+    assert server.GAME_FILES.use_cores() is False and server.BLENDER.use_cores() is False
+    server.Handler.post_game_files_speed(Fake(), {"use_gpu": False, "use_cores": "yes"})   # not a yes/no: kept
+    assert server.speed_settings() == {"cores": False, "gpu": False} and server.MOVIES_JOB.use_gpu() is False

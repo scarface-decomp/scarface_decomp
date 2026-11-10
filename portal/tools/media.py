@@ -632,6 +632,137 @@ def texture_png(data: bytes, index: int) -> bytes:
     return picture_png(data, texs[index])
 
 
+def decode_png(png_bytes: bytes) -> Tuple[int, int, bytes]:
+    """A PNG's pixels as RGBA, top row first: 8-bit grey, RGB, palette, grey+alpha and RGBA, not
+    interlaced (what the PC's textures are)."""
+    if png_bytes[:8] != b"\x89PNG\r\n\x1a\n":
+        raise MediaError("not a PNG picture")
+    p, idat, plte, trns = 8, bytearray(), b"", b""
+    w = h = depth = ctype = interlace = 0
+    while p + 8 <= len(png_bytes):
+        n, kind = struct.unpack_from(">I4s", png_bytes, p)
+        body = png_bytes[p + 8:p + 8 + n]
+        if kind == b"IHDR":
+            w, h, depth, ctype, _c, _f, interlace = struct.unpack(">IIBBBBB", body[:13])
+        elif kind == b"PLTE":
+            plte = body
+        elif kind == b"tRNS":
+            trns = body
+        elif kind == b"IDAT":
+            idat += body
+        elif kind == b"IEND":
+            break
+        p += 12 + n
+    packed = ctype in (0, 3) and depth in (1, 2, 4)
+    if (depth != 8 and not packed) or interlace or ctype not in (0, 2, 3, 4, 6):
+        raise MediaError(f"PNG pictures with {depth}-bit colour type {ctype} can't be read here")
+    bpp = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}[ctype]
+    raw = zlib.decompress(bytes(idat))
+    stride = (w * depth + 7) // 8 if packed else w * bpp
+    rows, prev = [], bytearray(stride)
+    for y in range(h):
+        f = raw[y * (stride + 1)]
+        cur = bytearray(raw[y * (stride + 1) + 1:(y + 1) * (stride + 1)])
+        if f == 1:
+            for i in range(bpp, stride):
+                cur[i] = (cur[i] + cur[i - bpp]) & 255
+        elif f == 2:
+            for i in range(stride):
+                cur[i] = (cur[i] + prev[i]) & 255
+        elif f == 3:
+            for i in range(stride):
+                cur[i] = (cur[i] + (((cur[i - bpp] if i >= bpp else 0) + prev[i]) >> 1)) & 255
+        elif f == 4:
+            for i in range(stride):
+                a = cur[i - bpp] if i >= bpp else 0
+                b, c = prev[i], (prev[i - bpp] if i >= bpp else 0)
+                pa, pb, pc = abs(b - c), abs(a - c), abs(a + b - 2 * c)
+                cur[i] = (cur[i] + (a if pa <= pb and pa <= pc else b if pb <= pc else c)) & 255
+        prev = cur
+        if packed:                                  # 1, 2 or 4 bits a pixel, high bits first
+            per, mask = 8 // depth, (1 << depth) - 1
+            cur = bytearray((cur[x // per] >> (8 - depth * (x % per + 1))) & mask for x in range(w))
+            if ctype == 0:
+                cur = bytearray(v * 255 // mask for v in cur)
+        rows.append(cur)
+    out = bytearray(w * h * 4)
+    o = 0
+    for row in rows:
+        for x in range(w):
+            if ctype == 6:
+                out[o:o + 4] = row[4 * x:4 * x + 4]
+            elif ctype == 2:
+                out[o:o + 4] = bytes(row[3 * x:3 * x + 3]) + b"\xff"
+            elif ctype == 3:
+                i = row[x]
+                out[o:o + 4] = bytes(plte[3 * i:3 * i + 3]) + bytes([trns[i] if i < len(trns) else 255])
+            elif ctype == 0:
+                out[o:o + 4] = bytes([row[x]] * 3) + b"\xff"
+            else:
+                out[o:o + 4] = bytes([row[2 * x]] * 3) + bytes([row[2 * x + 1]])
+            o += 4
+    return w, h, bytes(out)
+
+
+def pixels(data: bytes, t: Texture) -> Tuple[int, int, bytes]:
+    """A picture found by textures() as RGBA, top row first, the way picture_png() shows it."""
+    body = data[t.offset:t.offset + t.size]
+    if t.kind == "png":
+        return decode_png(body)
+    if t.kind == "dds":
+        w, h, rgba = decode_dds(body)
+        return w, h, _flip(rgba, w, h)
+    if t.kind == "p3di":
+        return decode_p3di(body)
+    raise MediaError(f"picture format {t.format} can't be read")
+
+
+def _thumb(w: int, h: int, rgba: bytes, n: int = 16) -> List[float]:
+    """An n x n grey thumbnail (each cell the average of its part of the picture, laid over grey)."""
+    out = []
+    for ty in range(n):
+        y0, y1 = ty * h // n, max(ty * h // n + 1, (ty + 1) * h // n)
+        for tx in range(n):
+            x0, x1 = tx * w // n, max(tx * w // n + 1, (tx + 1) * w // n)
+            total = count = 0
+            for y in range(y0, min(y1, h)):
+                o = (y * w + x0) * 4
+                for _x in range(x0, min(x1, w)):
+                    r, g, b, a = rgba[o], rgba[o + 1], rgba[o + 2], rgba[o + 3]
+                    grey = (299 * r + 587 * g + 114 * b) / 1000
+                    total += (grey * a + 60 * (255 - a)) / 255
+                    count += 1
+                    o += 4
+            out.append(total / count if count else 60.0)
+    return out
+
+
+def likeness(a: Tuple[int, int, bytes], b: Tuple[int, int, bytes]) -> float:
+    """How alike two pictures are, whatever their sizes and however much lighter or darker one is: the
+    correlation of their grey thumbnails, 1 the same picture, 0 or less nothing alike. The same art at
+    two resolutions scores above 0.9; different pictures under one name, below 0.2."""
+    n = thumb_size(a[0], a[1], b[0], b[1])
+    return correlate(_thumb(*a, n=n), _thumb(*b, n=n))
+
+
+def thumb_size(*sides: int) -> int:
+    return max(4, min([16] + list(sides)))
+
+
+def thumb(w: int, h: int, rgba: bytes, n: int) -> List[float]:
+    return _thumb(w, h, rgba, n)
+
+
+def correlate(x: List[float], y: List[float]) -> float:
+    mx, my = sum(x) / len(x), sum(y) / len(y)
+    sxy = sum((p - mx) * (q - my) for p, q in zip(x, y))
+    sx = sum((p - mx) ** 2 for p in x) ** 0.5
+    sy = sum((q - my) ** 2 for q in y) ** 0.5
+    if sx < 1e-6 or sy < 1e-6:                     # a flat colour: alike if the colours are
+        return 1.0 if abs(mx - my) < 8 else 0.0
+    return sxy / (sx * sy)
+
+
 def picture_png(data: bytes, t: Texture) -> bytes:
     """A picture found by textures(), as PNG, top row first."""
     body = data[t.offset:t.offset + t.size]

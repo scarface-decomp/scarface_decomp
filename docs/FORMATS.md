@@ -123,6 +123,16 @@ written out. The rest (4-bit pictures that aren't square, and small 8-bit ones s
 level) are stored row by row. All 65 PS2 pictures in the samples that have a PC twin follow these rules:
 decoded this way each matches the PC picture of the same name, and decoded the other way it doesn't.
 
+Across the versions, by name (3,568 different texture names on the PC, 3,243 in the 2006 prototype): the
+Xbox's textures are the same size as the PC's (smaller in 7 files), the PS2's the same or smaller, and the
+prototype has 2,866 the same size, 92 smaller, 48 bigger and 237 the PC doesn't have. Of the 48 bigger,
+the world textures (`garbageBagA.bmp`, `r_ind_stone_1.tga`, `l_pedro_books_vhs.tga` ...) are the same
+picture at twice the resolution: shrunk to the PC's size they match it (`media.likeness()` 0.99 and up),
+the PC's being a halved copy. The menu icons (`MIcon01.png`, `ammo_pistol.tga` ...) and
+`lbank_carpet002.bmp` are different pictures under the same name (0.2 and below). Per file, the
+prototype's maps often hold more textures than the PC's: the final game keeps them in shared region files
+instead. `portal/tools/textures.py` writes every texture out on these terms.
+
 ### Models: meshes and skins
 
 Most chunks keep the layouts Radical used in *The Simpsons: Hit & Run* (see the Donut Team's notes in the

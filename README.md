@@ -196,7 +196,8 @@ Choose a layout:
   different forms, the highest quality wins: sounds by sample rate, then channels, then codec; videos by
   picture size; models and textures by texture size, then colour depth. That is mostly the PC's (Ogg
   Vorbis sounds at 44.1 to 48 kHz, 1280x720 videos), the Xbox's 5.1 surround sounds and deeper colours,
-  and the prototype's bigger textures. `INDEX - Best.txt` says where each file came from and why.
+  and some of the prototype's map files (they hold more textures: mostly ones the final game keeps in
+  shared files instead). `INDEX - Best.txt` says where each file came from and why.
 * **The PC first, then what only the others have**: the whole PC version in `PC/` (patched, if the patch
   is there), and from the Xbox, PS2 and prototype only what the PC doesn't have: what only one of them
   has in its `Exclusive to` folder, and what several of them have, once, in `Not on the PC/`. The PC's
@@ -209,17 +210,36 @@ Animations, Videos, Scripts & text, Other) with the game's folders inside. By ty
 original names back (every sound stores the name it had on the developers' machines, so
 `art/sound/rsd/8/85657545f63b9543.rsd` becomes `art/sound/music/world_streams_mono/miami/dj/03.rsd`).
 
-The portal then lists, for each version, the files only it has and the ones it has in a different form.
-Sounds play right in the list (**Play**) and Pure3D files show the pictures inside them (**Pictures**),
-in every version's own format: the PC's Ogg and PNG, the Xbox's ADPCM and DXT, and the PS2's VAG and its
+The portal then lists, for each version, the files only it has and the ones it has in a different form,
+sorted by type (sounds, textures, models, animations, videos, scripts and text) under a heading for each.
+Sounds play right in the list (**Play**, with their subtitles), movies too (**Watch**: Bink and the PS2's
+movies are made playable once with your own FFmpeg), and **Open** on a Pure3D file says what it holds and
+offers what fits: its pictures, its subtitle text, or Blender. Every version's own formats are decoded:
+the PC's Ogg and PNG, the Xbox's ADPCM (the cutscenes' 5.1 too) and DXT, and the PS2's VAG and its
 palette pictures, which the portal puts back in order from the PS2 graphics chip's block layout. That is
-all decoded on your computer, only for a browser on that computer (Xbox WMA music can be saved and played
-in a media player). **Blender** saves a Pure3D file as a glTF scene (`.glb`, File > Import > glTF 2.0):
-characters with their skeletons, skin weights and the game's animations, guns, cars with their moving parts,
-and map areas with the trees, lamps and benches the game places on them, on any version. The **In Blender**
-box does a whole map area at once, or the whole city into `binaries/blender/`, one file per area that line
-up when imported together; `portal/tools/p3d_gltf.py` does it all from the command line
-([FORMATS.md](docs/FORMATS.md#exporting-to-blender)). All four versions take about 12.4 GB without duplicates, the best versions about 4.4 GB. The files stay
+all done on your computer, only for a browser on that computer (Xbox WMA music can be saved and played
+in a media player). **Open in Blender** starts your Blender with a file as a scene (and saves it as a
+`.blend`): characters with their skeletons, skin weights and the game's animations, cameras with their
+moves, guns, cars with their moving parts, and map areas with the trees, lamps and benches the game places
+on them, as the game first shows them, on any version. The **In Blender** box does a whole map area at
+once, or the whole city into `binaries/blender/`, one file per area, then opens it all as one scene;
+`portal/tools/p3d_gltf.py` does it from the command line
+([FORMATS.md](docs/FORMATS.md#exporting-to-blender)).
+
+**Export every texture** writes all the game's textures out as `.png` into `binaries/textures/`: the PC's,
+in a folder named after the file each is in, then what only the other versions have in their own
+`Exclusive to` folders. Where another version has the same picture at a higher resolution, that one is
+used: checked against all of them, the Xbox's textures are the same size as the PC's, the PS2's the same
+or smaller, and 48 of the 2006 prototype's are bigger, of which the world textures (a garbage bag, stone,
+metal, a shelf of tapes) are the same pictures at twice the size, and the menu icons and a carpet are
+different pictures under the same name, so those go in the prototype's own folder.
+
+**Speed**: with every processor core on, a copy reads the versions at the same time, one process each,
+when the discs are on a fast drive (an SSD; on a hard drive that would be slower, so it doesn't), and
+the city export does several areas at once. Small files (99% of them) are fingerprinted before they are
+written, so a file several versions share is written once. With your graphics card on, movies are made
+playable on it (NVIDIA, Intel or AMD, through FFmpeg). Copying itself can't use a graphics card: it's
+reading, fingerprinting and writing files. All four versions take about 12.4 GB without duplicates, the best versions about 4.4 GB. The files stay
 on your computer: `binaries/` is never committed, and they must not be shared. From the command line:
 `python portal/tools/game_assets.py --extract best --folders type`.
 

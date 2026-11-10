@@ -399,6 +399,12 @@ def test_summary_and_lists(tmp_path):
     page = GA.list_files(index, "prototype", status="own", kind="models")
     assert {f["path"] for f in page["files"]} == {"art/models/car.p3d", "art/cut/protoonly.p3d"}
     assert GA.list_files(index, "prototype", query="CUT")["total"] == 1
+    every = GA.list_files(index, "prototype")                     # sorted by what they are, then by name
+    kinds = [f["kind"] for f in every["files"]]
+    assert kinds == sorted(kinds, key=GA.KIND_ORDER.index) and every["kinds"]["sounds"] == 1
+    assert sum(every["kinds"].values()) == every["total"]
+    names = [f["path"] for f in every["files"] if f["kind"] == "models"]
+    assert names == sorted(names, key=str.lower)
 
 
 def test_shared_place_taken_by_other_bytes_falls_back_to_the_version_folders():
@@ -839,3 +845,43 @@ def test_prefetch_reads_ahead_in_order(tmp_path):
     early.read(10)
     early.close()
     assert not early.thread.is_alive()
+
+
+def test_versions_read_side_by_side_make_the_same_copy(tmp_path):
+    one, two = tmp_path / "one", tmp_path / "two"
+    one.mkdir()
+    two.mkdir()
+    b1, b2 = make_binaries(one), make_binaries(two)
+    i1 = GA.run(list(GA.VERSIONS), "unique", b1, log=lambda m: None)
+    logs = []
+    i2 = GA.run(list(GA.VERSIONS), "unique", b2, log=logs.append, side_by_side=True)
+    assert any("at the same time" in m for m in logs)
+    assert read_all(b1 / "game_files") == read_all(b2 / "game_files")
+    for v in GA.VERSIONS:
+        assert i1["versions"][v]["files"] == i2["versions"][v]["files"]
+    assert not (b2 / "game_files" / ".work").exists()
+
+
+def test_a_reader_process_that_fails_says_why(tmp_path, monkeypatch):
+    b = make_binaries(tmp_path)
+    sources, _ = GA.find_sources(b)
+    sources["ps2"].path = tmp_path / "gone.iso"                  # the disc went missing
+    with pytest.raises(RuntimeError, match="reading PS2 stopped"):
+        GA.run(list(GA.VERSIONS), "unique", b, log=lambda m: None, sources=sources, side_by_side=True)
+
+
+def test_fast_drive(tmp_path):
+    small = tmp_path / "small.iso"
+    small.write_bytes(bytes(1000))
+    assert GA.fast_drive(small) is True                          # too small to tell: no harm either way
+    assert GA.fast_drive(tmp_path / "missing.iso") is False
+
+
+def test_stop_ends_the_reader_processes(tmp_path):
+    b = make_binaries(tmp_path)
+    with pytest.raises(GA.Stopped):
+        GA.run(list(GA.VERSIONS), "unique", b, log=lambda m: None, side_by_side=True, stop=lambda: True)
+    assert not (b / "game_files" / ".index.json").exists()
+    assert not list((b / "game_files" / ".work").glob("read-*.json"))
+    GA.run(list(GA.VERSIONS), "unique", b, log=lambda m: None, side_by_side=True)     # and carries on after
+    assert read_all(b / "game_files")["Shared/cement.rcf/art/sound/hello.rsd"] == SOUND

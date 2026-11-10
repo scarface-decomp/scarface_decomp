@@ -836,3 +836,23 @@ def test_lod_parts():
     assert G.lod_parts(["treeInstanceShape", "treeLODShape", "fenceBushALODShape1"]) == {"treelodshape", "fencebushalodshape1"}
     assert G.lod_parts(["farHillLODShape"]) == set()                       # nothing else to show: kept
     assert G.lod_parts(["clodhopperShape"]) == set()
+
+
+def test_the_city_on_several_cores_is_the_same(tmp_path, monkeypatch):
+    import blender_export as BX
+    import game_assets as GA
+    out, index = copied_game(tmp_path, city_files())
+    monkeypatch.setattr(GA, "out_dir", lambda bin_dir=None: out)
+    assert BX.workers_wanted(False) == 1 and 1 <= BX.workers_wanted(True) <= 8
+    made = {}
+    for cores, n in ((False, 1), (True, 2)):
+        monkeypatch.setattr(BX, "workers_wanted", lambda use_cores=True, n=n: n)
+        job = BX.CityJob(tmp_path)
+        job.use_cores = lambda cores=cores: cores
+        assert job.start("pc", index) is None
+        job._thread.join(60)
+        assert job.status["workers"] == n and job.status["written"] == 2 and job.status["done"] == 2
+        made[n] = {p.name: p.read_bytes() for p in (tmp_path / "blender" / "PC").glob("*.glb")}
+        assert BX.city_current(tmp_path / "blender" / "PC")
+    assert made[1] == made[2] and sorted(made[2]) == ["a_01.glb", "b_02.glb"]
+    assert not list((tmp_path / "blender" / "_scripts").glob("city_job_*.json"))       # tidied up

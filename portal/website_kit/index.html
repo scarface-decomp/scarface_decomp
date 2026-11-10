@@ -533,7 +533,9 @@
     .gf-kind strong { display: block; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
     .gf-kind span { font-size: 0.78rem; color: var(--muted); }
     .gf-kind[aria-pressed="true"] { border-color: var(--crimson); }
-    .gf-filters { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr) auto; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .gf-filters { display: grid; grid-template-columns: minmax(0, 230px) minmax(0, 180px) minmax(0, 1fr) auto; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .gf-group { padding: 10px 12px 6px; border-bottom: 1px solid var(--border); background: var(--bg-card); font-family: var(--serif); letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.82rem; color: var(--crimson); position: sticky; top: 0; z-index: 1; }
+    .gf-group span { color: var(--muted); text-transform: none; letter-spacing: 0; font-family: var(--sans); margin-left: 8px; }
     .gf-filters .input-box { width: 100%; }
     .gf-list { max-height: 440px; overflow-y: auto; border: 1px solid var(--border); border-radius: 2px; background: var(--bg-input); }
     .gf-row { display: grid; grid-template-columns: minmax(0, 1fr) 130px 84px 96px; gap: 10px; padding: 6px 12px 4px; border-bottom: 1px solid var(--border-subtle); font-size: 0.84rem; align-items: baseline; }
@@ -556,6 +558,9 @@
     .gf-prev .gf-line { margin: 8px 0; padding: 8px 12px; border-left: 3px solid var(--blood); background: var(--bg-card); max-width: 72ch; line-height: 1.5; }
     .gf-bl { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0 0; }
     .gf-where { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0 0; }
+    .gf-speed { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+    .gf-check { display: flex; gap: 8px; align-items: flex-start; color: var(--text-secondary); font-size: 0.9rem; }
+    .gf-check input { margin-top: 3px; }
     .gf-prev .gf-video { display: block; width: 100%; max-width: 960px; background: #000; margin: 0 0 6px; }
     .gf-where .input-box { flex: 1 1 360px; }
     .gf-prev .small { margin: 6px 0 0; }
@@ -1244,6 +1249,11 @@
               <div class="progress-bar-outer"><div class="progress-bar-inner" id="gf-bar"></div></div>
               <p id="gf-progress-text" role="status" aria-live="polite"></p>
             </div>
+            <div class="gf-speed" id="gf-speed" hidden>
+              <h3 class="gf-h">Speed</h3>
+              <label class="gf-check"><input type="checkbox" id="gf-use-cores" onchange="saveGfSpeed()" /> <span id="gf-cores-text">Use every processor core</span></label>
+              <label class="gf-check"><input type="checkbox" id="gf-use-gpu" onchange="saveGfSpeed()" /> <span id="gf-gpu-text">Use the graphics card for movies</span></label>
+            </div>
           </div>
 
           <div class="card" id="gf-result" hidden>
@@ -1273,12 +1283,31 @@
                 <option value="picked" id="gf-opt-picked" hidden>Picked for Best</option>
                 <option value="">All files</option>
               </select>
+              <label class="sr-only" for="gf-kind-pick">Type</label>
+              <select id="gf-kind-pick" class="input-box" onchange="GF_KIND = this.value; renderGfResult()">
+                <option value="">All types</option>
+              </select>
               <label class="sr-only" for="gf-search">Search files</label>
               <input id="gf-search" class="input-box" type="search" placeholder="Search names, e.g. tony, dj or .bik" oninput="loadGfListSoon()" />
               <span class="script-list-count" id="gf-count"></span>
             </div>
             <div class="gf-list" id="gf-list" role="list" aria-label="Files"></div>
             <button type="button" class="btn-sm gf-more" id="gf-more" onclick="loadGfList(true)" hidden>Show more</button>
+          </div>
+
+          <div class="card" id="gf-textures" hidden>
+            <div class="card-hdr">
+              <div>
+                <h2 class="card-title">Every texture as a picture</h2>
+                <p class="card-sub">The game keeps its textures inside its <code>.p3d</code> files: each model, map area and menu carries its own. This writes every one out as a <code>.png</code> into <code>binaries/textures/</code>: the PC's, in a folder named after the file it is in, then what only the other versions have, in their own <b>Exclusive to</b> folders. Where another version has the same picture at a higher resolution (some of the 2006 prototype's world textures, at twice the size) that one is used; the prototype's bigger menu icons are different pictures, so they go in its own folder. <code>INDEX.txt</code> says what came from where.</p>
+              </div>
+            </div>
+            <div class="gf-run">
+              <button type="button" class="btn" id="gft-start" onclick="startGfTextures()">Export every texture</button>
+              <button type="button" class="btn-sm" id="gft-stop" onclick="stopGfTextures()" hidden>Stop</button>
+              <button type="button" class="btn-sm" id="gft-open" onclick="openGameFolder('textures')" hidden>Open the folder</button>
+            </div>
+            <p class="gf-notes" id="gft-status" role="status" aria-live="polite"></p>
           </div>
 
           <div class="card" id="gf-blender" hidden>
@@ -3403,6 +3432,7 @@
   let GF_DATA = null;
   let GF_TAB = '';
   let GF_KIND = '';
+  let GF_LAST_GROUP = '';
   let GF_OFFSET = 0;
   let GF_POLL = 0;
   let GF_SEARCH_T = 0;
@@ -3417,7 +3447,33 @@
     return v + ' bytes';
   }
 
+  /* Speed: every processor core (copying the versions side by side, the city export), the graphics card
+     (making movies playable). */
+  async function loadGfSpeed() {
+    let d;
+    try { d = await apiFetchJson('/api/game-files/speed'); } catch (e) { return; }
+    if (!d.ok) return;
+    $('gf-speed').hidden = false;
+    $('gf-use-cores').checked = !!d.use_cores;
+    $('gf-cores-text').textContent = 'Use all ' + fmtInt(d.cores) + ' processor cores: copy the versions at the same time '
+      + '(when the discs are on a fast drive, an SSD) and export the city ' + fmtInt(d.workers) + ' areas at a time.';
+    const gpu = $('gf-use-gpu');
+    gpu.checked = !!d.use_gpu && !!d.gpu;
+    gpu.disabled = !d.gpu;
+    $('gf-gpu-text').textContent = d.gpu ? 'Use the graphics card (' + d.gpu + ') to make movies playable; the processor does it if the card can’t.'
+      : d.ffmpeg ? 'No graphics card FFmpeg can use was found: movies are made by the processor. (Copying the game files can’t use a graphics card.)'
+      : 'Movies need FFmpeg; with it, a graphics card can make them faster. (Copying the game files can’t use a graphics card.)';
+  }
+
+  async function saveGfSpeed() {
+    let res;
+    try { res = await postJson('/api/game-files/speed', { use_cores: $('gf-use-cores').checked, use_gpu: $('gf-use-gpu').checked }); }
+    catch (e) { res = { ok: false, error: e.message }; }
+    if (!res.ok) toast(res.error || 'Couldn’t keep the setting.', 'err');
+  }
+
   async function loadGameFiles() {
+    loadGfSpeed();
     try {
       GF_DATA = await apiFetchJson('/api/game-files');
     } catch (e) {
@@ -3900,6 +3956,57 @@
     renderGfCity(res);
   }
 
+  /* Every texture as a .png (binaries/textures/). */
+  let GFT_T = null;
+  let GFT_LOADED = false;
+
+  function renderGfTextures(st) {
+    const running = !!st.running;
+    $('gft-start').disabled = running;
+    $('gft-stop').hidden = !running;
+    $('gft-open').hidden = running || !(st.made || st.phase === 'done');
+    const p = $('gft-status');
+    p.classList.toggle('err', st.phase === 'error');
+    const n = fmtInt(st.written || 0) + ' pictures so far';
+    const msg = {
+      starting: 'Starting…',
+      main: 'The ' + st.label + '\'s textures: ' + fmtInt(st.done) + ' of ' + fmtInt(st.total) + ' files (' + n + ')',
+      other: 'Comparing the ' + st.label + '\'s textures: ' + fmtInt(st.done) + ' of ' + fmtInt(st.total) + ' files',
+      disc: 'Reading the ' + st.label + '\'s files with textures from its disc: ' + fmtBytes(st.read) + ' of ' + fmtBytes(st.to_read),
+      writing: 'Adding the sharper ones and what only the other versions have…',
+      done: 'Done: ' + fmtInt(st.written) + ' pictures in ' + (st.folder || 'binaries/textures') + '/. ' + fmtInt(st.sharper)
+        + ' sharper from another version, ' + fmtInt(st.extra) + ' that only other versions have.',
+      stopped: 'Stopped.',
+      error: 'Couldn’t finish: ' + (st.error || 'unknown error'),
+    }[st.phase];
+    p.textContent = msg || (st.made ? 'Exported before: open the folder, or export again after a new copy.' : '');
+    clearTimeout(GFT_T);
+    if (running) GFT_T = setTimeout(pollGfTextures, 1000);
+  }
+
+  async function pollGfTextures() {
+    let st;
+    try { st = await apiFetchJson('/api/game-files/textures'); } catch (e) { return; }
+    renderGfTextures(st);
+  }
+
+  async function startGfTextures() {
+    $('gft-start').disabled = true;
+    let res;
+    try { res = await postJson('/api/game-files/textures', {}); } catch (e) { res = { ok: false, error: e.message }; }
+    if (!res.ok) {
+      $('gft-start').disabled = false;
+      $('gft-status').classList.add('err');
+      $('gft-status').textContent = res.error || 'Couldn’t start.';
+      return;
+    }
+    renderGfTextures(res);
+  }
+
+  async function stopGfTextures() {
+    try { await postJson('/api/game-files/textures-stop', {}); } catch (e) { /* the next look shows it */ }
+  }
+
   async function stopGfCity() {
     try { await postJson('/api/game-files/blender-stop', {}); } catch (e) { /* the next poll shows it */ }
   }
@@ -3921,7 +4028,9 @@
     $('gf-blender').hidden = !s && !((GF_DATA || {}).versions || []).some((v) => v.found);
     $('gfb-need').hidden = !!s;
     $('gfb-tools').hidden = !s;
+    $('gf-textures').hidden = !s;
     if (!s) return;
+    if (!GFT_LOADED) { GFT_LOADED = true; pollGfTextures(); }
     const vers = Object.keys(s.versions || {});
     if (!vers.includes(GF_TAB)) { GF_TAB = vers[0] || ''; GF_KIND = ''; }
     const areasKey = GF_TAB + '|' + (s.created || '');
@@ -3964,6 +4073,11 @@
     t.appendChild(el('strong', fmtInt(info.files)));
     t.appendChild(document.createTextNode(' files from ' + info.source + ': ' + fmtInt(info.only) + ' only in this version, '
       + fmtInt(info.changed) + ' different in this version, ' + fmtInt(info.shared) + ' the same in another version.'));
+    const pick = $('gf-kind-pick');
+    if (pick.options.length < 2) {
+      ((GF_DATA || {}).kinds || []).forEach((k) => { const o = el('option', k.label); o.value = k.id; pick.appendChild(o); });
+    }
+    pick.value = GF_KIND;
     const kinds = $('gf-kinds');
     kinds.textContent = '';
     ((GF_DATA || {}).kinds || []).forEach((k) => {
@@ -3996,8 +4110,15 @@
     try { d = await apiFetchJson('/api/game-files/list?' + params.toString()); } catch (e) { return; }
     if (seq !== GF_LIST_SEQ) return;
     const list = $('gf-list');
-    if (!more) list.textContent = '';
+    if (!more) { list.textContent = ''; GF_LAST_GROUP = ''; }
     (d.files || []).forEach((f) => {
+      if (f.kind !== GF_LAST_GROUP) {                 // the list comes sorted by kind: a heading for each
+        GF_LAST_GROUP = f.kind;
+        const head = el('div', gfKindLabel(f.kind), 'gf-group');
+        head.setAttribute('role', 'listitem');
+        head.appendChild(el('span', fmtInt((d.kinds || {})[f.kind] || 0) + ((d.kinds || {})[f.kind] === 1 ? ' file' : ' files')));
+        list.appendChild(head);
+      }
       const row = el('div', undefined, 'gf-row');
       row.setAttribute('role', 'listitem');
       const p = el('span', f.path, 'p');

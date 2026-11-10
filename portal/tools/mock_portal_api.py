@@ -161,7 +161,8 @@ GF_VERSIONS = [
      "source": "Scarface - The World Is Yours (Apr 20, 2006 prototype).zip"},
 ]
 GF: dict = {"status": {"running": False, "phase": "", "done": 0, "total": 0, "files": 0, "label": "", "message": "",
-                       "error": ""}, "summary": None, "files": {}, "copy": None, "movies": {}}
+                       "error": ""}, "summary": None, "files": {}, "copy": None, "movies": {},
+      "textures": {"running": False, "phase": "", "written": 0, "made": False}, "speed": {"cores": True, "gpu": True}}
 GF_LINE = "Say hello to my little friend!"
 BLENDER: dict = {"running": False, "version": "", "done": 0, "total": 0, "area": "", "error": "", "written": 0,
                  "bytes": 0, "folder": ""}
@@ -328,8 +329,14 @@ class Handler(BaseHTTPRequestHandler):
                 rows = [r for r in rows if (not st or r["status"] == st or (st == "own" and r["status"] != "shared")
                                             or (st == "picked" and r.get("picked")))
                         and (not kind or r["kind"] == kind) and (not query or query in r["path"].lower())]
+                order = ["sounds", "textures", "models", "animations", "videos", "scripts", "other"]
+                rows = sorted(rows, key=lambda r: (order.index(r["kind"]) if r["kind"] in order else 9, r["path"]))
+                kinds = {}
+                for r in rows:
+                    kinds[r["kind"]] = kinds.get(r["kind"], 0) + 1
                 off, lim = int(q.get("offset", 0)), int(q.get("limit", 200))
-                return self._json({"ok": True, "total": len(rows), "offset": off, "files": rows[off:off + lim]})
+                return self._json({"ok": True, "total": len(rows), "offset": off, "kinds": kinds,
+                                   "files": rows[off:off + lim]})
             if u.path in ("/api/game-files/sound", "/api/game-files/pictures", "/api/game-files/picture"):
                 return self._game_file_preview(u.path.rsplit("/", 1)[1], q)
             if u.path == "/api/game-files/inspect":
@@ -355,6 +362,11 @@ class Handler(BaseHTTPRequestHandler):
                                    "city_files": BLENDER["written"], "city_current": True})
             if u.path == "/api/game-files/blender":
                 return self._json(dict(BLENDER, ok=True))
+            if u.path == "/api/game-files/textures":
+                return self._json(dict(GF["textures"], ok=True))
+            if u.path == "/api/game-files/speed":
+                return self._json({"ok": True, "use_cores": GF["speed"]["cores"], "use_gpu": GF["speed"]["gpu"],
+                                   "cores": 8, "workers": 7, "ffmpeg": True, "gpu": "NVIDIA"})
             if u.path == "/api/game-files/model":
                 if CONFIG.get("model_error"):
                     return self._json({"ok": False, "error": "Nothing to show in Blender: nothing in these files to export."}, 415)
@@ -459,6 +471,8 @@ class Handler(BaseHTTPRequestHandler):
                 GF["files"] = {}
                 GF["copy"] = None
                 GF["movies"] = {}
+                GF["textures"] = {"running": False, "phase": "", "written": 0, "made": False}
+                GF["speed"] = {"cores": True, "gpu": True}
                 CONFIG["blender"] = not body.get("no_blender")
                 CONFIG["ffmpeg"] = not body.get("no_ffmpeg")
                 CONFIG["model_error"] = bool(body.get("model_error"))
@@ -632,6 +646,25 @@ class Handler(BaseHTTPRequestHandler):
                 GF["movies"][path] = {"state": "done", "progress": 1.0}
             threading.Thread(target=make, daemon=True).start()
             return self._json({"ok": True, "state": "converting", "progress": 0.0})
+        if u.path == "/api/game-files/textures":
+            st = GF["textures"]
+            if st.get("running"):
+                return self._json({"ok": False, "error": "Already exporting the textures."}, 409)
+
+            def run():
+                for phase, label, total in (("main", "PC", 4), ("other", "Xbox 2006 prototype", 2), ("writing", "", 1)):
+                    for i in range(total):
+                        st.update(phase=phase, label=label, done=i, total=total, written=st["written"] + 50)
+                        time.sleep(0.5)
+                st.update(running=False, phase="done", sharper=7, extra=172, made=True)
+            st.update(running=True, phase="starting", written=0, done=0, total=0, error="", folder="binaries/textures")
+            threading.Thread(target=run, daemon=True).start()
+            return self._json(dict(st, ok=True))
+        if u.path == "/api/game-files/speed":
+            GF["speed"].update(cores=bool(body.get("use_cores")), gpu=bool(body.get("use_gpu")))
+            return self._json({"ok": True})
+        if u.path == "/api/game-files/textures-stop":
+            return self._json({"ok": True})
         if u.path == "/api/game-files/ffmpeg-path":
             if "ffmpeg" not in str(body.get("path", "")).lower():
                 return self._json({"ok": False, "error": "That isn't FFmpeg."}, 400)
@@ -641,7 +674,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": True, "folder": "binaries/blender"})
         if u.path == "/api/game-files/open":
             folder = body.get("folder", "")
-            known = ("", "shared", "best", "notpc", "xbox", "pc", "ps2", "prototype")
+            known = ("", "shared", "best", "notpc", "xbox", "pc", "ps2", "prototype", "textures")
             if (folder not in known and not (folder.startswith("only:") and folder[5:] in known)) or not GF["summary"]:
                 return self._json({"ok": False, "error": "That folder isn't there yet."}, 404)
             return self._json({"ok": True, "folder": "binaries/game_files"})
