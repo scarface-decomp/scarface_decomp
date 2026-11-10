@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Scarface decomp: new matches</title>
+  <subtitle>Functions of Scarface: The World Is Yours rebuilt in C++ that compiles to the exact same bytes.</subtitle>
+  <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
+  <link href="https://scarface-decomp.pages.dev/"/>
+  <id>tag:scarface-decomp.pages.dev,2026:matches</id>
+  <updated>2026-11-09T07:59:06Z</updated>
+  <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>sub_0072CD30 (PC, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/engine/GlobalFunctions.cpp"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x0072CD30</id>
+    <updated>2026-11-09T07:59:06Z</updated>
+    <summary>0x0072CD30 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0072CC10 (PC, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/engine/GlobalFunctions.cpp"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x0072CC10</id>
+    <updated>2026-11-09T07:59:06Z</updated>
+    <summary>0x0072CC10 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0072CC00 (PC, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/engine/GlobalFunctions.cpp"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x0072CC00</id>
+    <updated>2026-11-09T07:59:06Z</updated>
+    <summary>0x0072CC00 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0072C940 (PC, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/engine/GlobalFunctions.cpp"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x0072C940</id>
+    <updated>2026-11-09T07:59:06Z</updated>
+    <summary>0x0072C940 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00707D80 (PC, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/engine/GlobalFunctions.cpp"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x00707D80</id>
+    <updated>2026-11-09T07:59:05Z</updated>
+    <summary>0x00707D80 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_007073A0 (PC, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/engine/GlobalFunctions.cpp"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x007073A0</id>
+    <updated>2026-11-09T07:59:05Z</updated>
+    <summary>0x007073A0 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00705430 (PC, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/engine/GlobalFunctions.cpp"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x00705430</id>
+    <updated>2026-11-09T07:59:05Z</updated>
+    <summary>0x00705430 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_006DEDF0 (PC, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://github.com/scarface-decomp/scarface_decomp/blob/main/reconstructed_src/pc/engine/GlobalFunctions.cpp"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006DEDF0</id>
+    <updated>2026-11-09T07:59:05Z</updated>
+    <summary>0x006DEDF0 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+</feed>

@@ -404,6 +404,7 @@
     .wb-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
     .wb-title { font-family: var(--mono); font-size: 1rem; font-weight: 600; color: var(--text); word-break: break-all; }
     .wb-meta { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+    .q-why { font-size: 0.76rem; color: var(--green); margin-top: 2px; }
     .wb-hint { font-size: 0.88rem; color: var(--text-secondary); margin-top: 6px; }
     .wb-chips { display: flex; gap: 8px; flex-wrap: wrap; }
     .chip { border: 1px solid var(--border); padding: 5px 10px 3px; border-radius: 2px; font-size: 0.8rem; white-space: nowrap; }
@@ -950,6 +951,7 @@
                 <label class="sr-only" for="lane-filter">Category</label>
                 <select id="lane-filter" class="input-box" onchange="resetPageAndLoadQueue(true)">
                   <option value="ALL">Everything</option>
+                  <option value="GOOD_FIRST" title="Small Xbox and PC functions with a head start: a matched look-alike, matched before, or named">Good first functions</option>
                   <option value="Shared Engine">Xbox game (most of the work)</option>
                   <option value="PC Scarface.exe">PC game</option>
                   <option value="PS2 SLUS_211.11">PS2 game (its own compiler, checked through decomp.me)</option>
@@ -2325,7 +2327,8 @@
         '</div>' +
         '<div class="q-meta">' + escHtml(item.va) + ' • <strong>' + escHtml(item.size) + ' B</strong>' +
           (item.est_label ? ' • ' + escHtml(item.est_label) : '') +
-          (Number(item.lookalikes) > 0 ? ' • <span class="lookalike-tag" title="Functions with the same machine code. Match this one and your code is tried on them too.">+' + escHtml(item.lookalikes) + ' look-alike' + (Number(item.lookalikes) === 1 ? '' : 's') + '</span>' : '') + '</div>';
+          (Number(item.lookalikes) > 0 ? ' • <span class="lookalike-tag" title="Functions with the same machine code. Match this one and your code is tried on them too.">+' + escHtml(item.lookalikes) + ' look-alike' + (Number(item.lookalikes) === 1 ? '' : 's') + '</span>' : '') + '</div>' +
+        (item.good_first ? '<div class="q-why">Good first: ' + escHtml(item.good_first) + '</div>' : '');
       div.addEventListener('click', () => selectTaskById(item.id));
       div.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTaskById(item.id); }

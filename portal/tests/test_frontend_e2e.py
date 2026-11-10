@@ -395,6 +395,17 @@ def test_suggest_a_name_link(page):
     assert page.get_attribute("#wb-name a", "target") == "_blank"
 
 
+def test_good_first_functions_list(page):
+    """The queue's "Good first functions" choice lists small ones with a head start, and says why."""
+    page.wait_for_function("document.getElementById('wb-title').textContent.includes('Func')")
+    page.select_option("#lane-filter", "GOOD_FIRST")
+    page.wait_for_function("document.querySelectorAll('#queue-list .q-why').length > 0")
+    syms = page.eval_on_selector_all("#queue-list .q-sym-text", "els => els.map(e => e.textContent)")
+    assert syms and all("Easy" in s for s in syms)
+    assert page.text_content("#queue-list .q-why").startswith("Good first: ")
+    assert calls("/api/queue")[-1][1]["lane"] == "GOOD_FIRST"
+
+
 def test_decompme_falls_back_to_the_server(page):
     reset(dme_browser_fail=True)
     page.reload()

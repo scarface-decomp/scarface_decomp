@@ -306,6 +306,11 @@ class Handler(BaseHTTPRequestHandler):
                 lane, tier, query = q.get("lane", "ALL"), q.get("tier", "ALL"), q.get("q", "").lower()
                 if lane in ("UNCLAIMED", "CLAIMED", "VERIFIED", "PARTIAL"):
                     items = [t for t in items if t["status"] == lane]
+                why = {}
+                if lane == "GOOD_FIRST":               # the "Easy" ones that fit stand in for the real picks
+                    why = {t["id"]: "the game's class information names it" for t in items
+                           if "Easy" in t["symbol"] and t["size"] <= 32 and t["status"] == "UNCLAIMED"}
+                    items = [t for t in items if t["id"] in why]
                 if tier != "ALL":
                     items = [t for t in items if t["tier"] == tier]
                 if query:
@@ -314,7 +319,8 @@ class Handler(BaseHTTPRequestHandler):
                 sl = items[(page - 1) * limit: page * limit]
                 return self._json({"total": len(items), "items": [
                     {**{k: t[k] for k in ("id", "symbol", "va", "size", "status", "claimed_by", "best_matched_bytes", "best_pct", "est_label")},
-                     "claim_remaining_sec": max(0, t["claim_expires_at"] - now()) if t["status"] == "CLAIMED" else None}
+                     "claim_remaining_sec": max(0, t["claim_expires_at"] - now()) if t["status"] == "CLAIMED" else None,
+                     **({"good_first": why[t["id"]]} if t["id"] in why else {})}
                     for t in sl]})
             if u.path == "/api/task":
                 t = TASKS.get(q.get("id", ""))

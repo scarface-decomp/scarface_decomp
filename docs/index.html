@@ -20,6 +20,7 @@
   <meta name="twitter:description" content="The game's source code, rewritten piece by piece until it compiles to the exact same game." />
   <meta name="twitter:image" content="https://scarface-decomp.pages.dev/og.jpg" />
   <link rel="canonical" href="https://scarface-decomp.pages.dev/" />
+  <link rel="alternate" type="application/atom+xml" title="Scarface decomp: new matches" href="feed.xml" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -202,6 +203,13 @@
           line-height: 1.6; color: var(--white); white-space: pre; max-width: 100%; }
     ol.steps pre { margin-top: 10px; }
     .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 30px; margin-top: 40px; }
+    .good-first { max-width: var(--read); margin: 30px auto 0; border: 1px solid var(--line); border-left: 3px solid var(--blood); border-radius: 2px; padding: 20px 24px; }
+    .good-first p { color: var(--grey); font-size: 0.94rem; margin-bottom: 10px; }
+    .good-first ol { list-style: none; display: grid; gap: 6px; }
+    .good-first li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 14px; font-size: 0.92rem; }
+    .good-first li code { justify-self: start; }
+    .good-first li .w { color: var(--grey); font-size: 0.86rem; grid-column: 1 / -1; }
+    .good-first li .s { color: var(--grey); font-variant-numeric: tabular-nums; }
 
     /* ---------- questions ---------- */
     .faq { max-width: var(--read); margin: 0 auto; }
@@ -491,6 +499,12 @@
             the new ones in one file: post it in the Discord or a GitHub issue, and a maintainer adds them under your name
             after compiling each one again.</li>
         </ol>
+        <div class="good-first" id="good-first-box" hidden>
+          <h3>Good first functions</h3>
+          <p>Small ones with a head start. In the portal, choose <em>Good first functions</em> above the list, or search for
+            the name.</p>
+          <ol id="good-first"></ol>
+        </div>
         <div class="links">
           <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Join the Discord</a>
           <a data-repo-link="/blob/main/docs/CONTRIBUTING.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing guide</a>
@@ -647,6 +661,7 @@
         <a data-repo-link="/blob/main/docs/LEGAL.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md" target="_blank" rel="noopener noreferrer">Legal</a>
         <a data-repo-link="/blob/main/LICENSE" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a>
         <a data-repo-link="/blob/main/docs/CREDITS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CREDITS.md" target="_blank" rel="noopener noreferrer">Credits</a>
+        <a href="feed.xml" title="An Atom feed of new matches, for feed readers and Discord feed bots">New matches feed</a>
         <span id="updated"></span>
       </div>
     </div>
@@ -717,6 +732,27 @@
     }
 
     // ------------------------------------------------------------------ progress
+    // Small functions with a head start, picked by portal/tools/good_first.py from the work queue.
+    function renderGoodFirst(prog) {
+      var picks = (prog && prog.good_first) || [];
+      var list = $('good-first');
+      if (!list || !picks.length) return;
+      picks.slice(0, 8).forEach(function (p) {
+        var li = document.createElement('li');
+        var code = document.createElement('code');
+        code.textContent = p.symbol;
+        var size = document.createElement('span');
+        size.className = 's';
+        size.textContent = (BIN_LABEL[p.bin] || p.bin) + ', ' + fmt(p.size) + (p.size === 1 ? ' byte' : ' bytes');
+        var why = document.createElement('span');
+        why.className = 'w';
+        why.textContent = p.why;
+        li.appendChild(code); li.appendChild(size); li.appendChild(why);
+        list.appendChild(li);
+      });
+      $('good-first-box').hidden = false;
+    }
+
     function renderProgress(prog, reg) {
       var entries = reg ? Object.values(reg.entries || {}) : [];
       var v = (prog && prog.verified) || { pc: 0, xb: 0, total: entries.length, bytes: 0 };
@@ -997,6 +1033,7 @@
         function () { return { reg: reg, prog: null }; });
     }).then(function (d) {
       renderProgress(d.prog, d.reg);
+      renderGoodFirst(d.prog);
       buildList(d.reg);
       $('data-status').textContent = 'Live numbers from ' + CFG.owner + '/' + CFG.repo +
         (activeSource === 'data/' ? ' (latest deploy)' : ' on GitHub') +

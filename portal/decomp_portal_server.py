@@ -51,6 +51,8 @@ import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
 import names as NAMES  # noqa: E402
+import good_first as GOOD  # noqa: E402
+import discord_feed as DISCORD  # noqa: E402
 import media as MEDIA  # noqa: E402
 import game_assets as GA  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
@@ -1267,6 +1269,23 @@ def _same_folder(a: str, b: Path) -> bool:
     return os.path.normcase(os.path.realpath(a)) == os.path.normcase(os.path.realpath(str(b)))
 
 
+def announce_on_discord() -> dict:
+    """After a push: post the new matches to the Discord webhook set up on this computer, if any
+    (portal/tools/discord_feed.py). Never fails the push."""
+    try:
+        with STATE_LOCK:
+            main = [t for t in ALL_TASKS if t["bin"] in ("pc", "xb")]
+            done = sum(1 for t in main if t["status"] == "VERIFIED")
+            good = GOOD.rank(ALL_TASKS, 3)
+            registry = {"entries": dict(REGISTRY.get("entries", {}))}
+        res = DISCORD.announce_new(BASE_DIR, registry, done, len(main), good)
+    except Exception as e:  # noqa: BLE001 - a Discord problem must not break syncing
+        res = {"skipped": f"error: {e}"}
+    if res.get("posted"):
+        print(f"[discord] posted {res['posted']} new match(es)")
+    return res
+
+
 def git_sync(user: str, base: Path = BASE_DIR) -> dict:
     def run(args, timeout=120):
         p = subprocess.run(["git"] + args, cwd=base, capture_output=True, text=True, timeout=timeout)
@@ -1290,6 +1309,7 @@ def git_sync(user: str, base: Path = BASE_DIR) -> dict:
             return {"ok": False, "error": PUSH_BEHIND}
         if rc:
             return {"ok": False, "error": "Committed locally, but git push failed: " + out[-400:]}
+        threading.Thread(target=announce_on_discord, name="discord", daemon=True).start()
         return {"ok": True, "message": f"Pushed {n} verified functions to GitHub."}
     except FileNotFoundError:
         return {"ok": False, "error": "git is not installed or not on PATH."}
@@ -1937,6 +1957,18 @@ class Handler(BaseHTTPRequestHandler):
             lane, tier, sort_by, q = q1("lane", "ALL"), q1("tier", "ALL"), q1("sort", "DEFAULT"), q1("q").strip().lower()
             with STATE_LOCK:
                 items = []
+                if lane == "GOOD_FIRST":
+                    picks = {p["id"]: p["why"] for p in GOOD.rank(ALL_TASKS)}
+                    for t in ALL_TASKS:
+                        if t["id"] in picks and (tier == "ALL" or t.get("tier") == tier) and (
+                                not q or q in t["symbol"].lower() or q in t["va"].lower()):
+                            items.append(dict(t, good_first=picks[t["id"]]))
+                    order = list(picks)
+                    items.sort(key=lambda x: order.index(x["id"]))
+                    n = now_ts()
+                    start = (page - 1) * limit
+                    return self._json({"total": len(items), "page": page, "limit": limit,
+                                       "items": [dict(queue_item(t, n), good_first=t["good_first"]) for t in items[start:start + limit]]})
                 for t in ALL_TASKS:
                     st = t["status"]
                     if lane in ("UNCLAIMED", "CLAIMED", "VERIFIED") and st != lane:

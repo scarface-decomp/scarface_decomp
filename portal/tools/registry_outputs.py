@@ -203,7 +203,61 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
                 tiers[t.get("tier", "?")] += 1
         out["queue"] = {"pc": q["pc"], "xb": q["xb"], "proto": q["proto"], "ps2": q["ps2"], "total": q["pc"] + q["xb"],
                         "tiers": dict(sorted(tiers.items()))}
+    import good_first
+    out["good_first"] = good_first.for_site(queue, registry, (previous or {}).get("good_first"))
     return out
+
+
+SITE = "https://scarface-decomp.pages.dev/"
+REPO = "https://github.com/scarface-decomp/scarface_decomp"
+FEED_ENTRIES = 50
+BIN_WORD = {"pc": "PC", "xb": "Xbox", "proto": "Xbox prototype", "ps2": "PS2"}
+
+
+def feed_xml(registry: dict) -> str:
+    """An Atom feed of the newest matches (docs/feed.xml), for feed readers and Discord feed bots."""
+    from xml.sax.saxutils import escape
+
+    def stamp(e: dict) -> str:
+        t = (e.get("verified_at") or e.get("reverified_at") or "").strip()
+        return (t.replace(" ", "T") + "Z") if re.match(r"^\d{4}-\d\d-\d\d \d\d:\d\d:\d\d$", t) else "2026-11-08T00:00:00Z"
+    entries = sorted(registry.get("entries", {}).items(), key=lambda kv: (stamp(kv[1]), kv[0]), reverse=True)[:FEED_ENTRIES]
+    updated = stamp(entries[0][1]) if entries else "2026-11-08T00:00:00Z"
+    out = ['<?xml version="1.0" encoding="utf-8"?>',
+           '<feed xmlns="http://www.w3.org/2005/Atom">',
+           "  <title>Scarface decomp: new matches</title>",
+           "  <subtitle>Functions of Scarface: The World Is Yours rebuilt in C++ that compiles to the exact same bytes.</subtitle>",
+           f'  <link href="{SITE}feed.xml" rel="self"/>',
+           f'  <link href="{SITE}"/>',
+           "  <id>tag:scarface-decomp.pages.dev,2026:matches</id>",
+           f"  <updated>{updated}</updated>",
+           "  <author><name>Scarface decomp contributors</name></author>"]
+    for key, e in entries:
+        who = e.get("verified_by") or "unattributed"
+        where = BIN_WORD.get(e["bin"], e["bin"])
+        size = int(e.get("size", 0))
+        title = f"{e['symbol']} ({where}, {size} byte{'' if size == 1 else 's'}) by {who}"
+        summary = f"{e['va']} in the {where} version, matched byte for byte with its original."
+        path = entry_path(e)
+        link = f"{REPO}/blob/main/{path}" if path else SITE
+        out += ["  <entry>",
+                f"    <title>{escape(title)}</title>",
+                f'    <link href="{escape(link)}"/>',
+                f"    <id>tag:scarface-decomp.pages.dev,2026:{escape(key)}</id>",
+                f"    <updated>{stamp(e)}</updated>",
+                f"    <summary>{escape(summary)}</summary>",
+                "  </entry>"]
+    out.append("</feed>")
+    return "\n".join(out) + "\n"
+
+
+def write_feed(registry: dict, docs_dir: Path) -> bool:
+    path = docs_dir / "feed.xml"
+    text = feed_xml(registry)
+    if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
+        return False
+    _write(path, text)
+    return True
 
 
 def write_progress(registry: dict, reports_dir: Path) -> bool:
@@ -322,6 +376,8 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
         written.append("../README.md")
     if write_progress(registry, recon_dir.parent / "reports"):
         written.append("../reports/progress.json")
+    if write_feed(registry, recon_dir.parent / "docs"):
+        written.append("../docs/feed.xml")
     return written
 
 

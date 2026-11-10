@@ -17,7 +17,9 @@ may come from and how AI tools may be used.
 2. **Sign in** with a name and a PIN of at least 8 characters. There is no separate sign-up: the first
    time you use a name, it is created. Names are not case-sensitive. The PIN is stored only as a salted
    hash on the machine running the portal.
-3. **Claim** a function from the queue. A claim is a timed lease, from 15 minutes for tiny functions to
+3. **Claim** a function from the queue. New here? Choose **Good first functions** above the list: small
+   ones with a head start (a look-alike already matched, matched before, or named), with the reason shown.
+   A claim is a timed lease, from 15 minutes for tiny functions to
    2 hours for large ones; only you can submit or cancel it while it lasts.
 4. **Write the C++** in the editor. It starts with C++ written from the function's own machine code,
    with calls and globals already named for their addresses; for many small functions it matches as it is.
@@ -50,6 +52,15 @@ It needs a folder that git knows about, made with `git clone`. To add a contribu
 submission** (under it, shown to maintainers only): every function in the file is compiled again, only exact
 matches are added, credited to whoever made them, and a list shows what did not match. Then press Submit your
 work to push them.
+
+**Announcing new matches on Discord** (maintainers): after each push, the portal can post the new matches,
+the progress and three good first functions to a Discord channel. In Discord, open *Server Settings >
+Integrations > Webhooks*, make a webhook for the channel and copy its URL; then either set the environment
+variable `SCARFACE_DISCORD_WEBHOOK` to it, or save it as `portal/private/discord_webhook.txt` (that folder is
+never committed). Treat the URL like a password. The first push after setting it up only notes what is
+already matched; posts start with the next new match. Anyone can also follow
+[`feed.xml`](https://scarface-decomp.pages.dev/feed.xml), an Atom feed of new matches, with a feed reader or a
+Discord feed bot.
 
 ### Updating
 

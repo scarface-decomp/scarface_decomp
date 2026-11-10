@@ -22,7 +22,7 @@ PROG = json.loads((FIX / "progress.json").read_text(encoding="utf-8"))
 
 
 # Everything the Cloudflare build serves from docs/ besides data/.
-STATIC = ("index.html", "404.html", "versions.html", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
+STATIC = ("index.html", "404.html", "versions.html", "feed.xml", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
           "robots.txt", "sitemap.xml")
 SITE_URL = "https://scarface-decomp.pages.dev/"
 
@@ -411,6 +411,39 @@ def test_reference_section_and_versions_page(tmp_path, browser):
         pg.wait_for_function("document.getElementById('count').textContent.startsWith('1 file')")
         pg.fill("#q", "nothing like this")
         pg.wait_for_function("document.getElementById('count').textContent.startsWith('0 files')")
+        assert not pg.errors, pg.errors
+        ctx.close()
+    finally:
+        srv.shutdown()
+
+
+def test_good_first_functions_on_the_site(tmp_path, browser):
+    """Start helping lists a few good first functions from progress.json; without any, nothing shows."""
+    d = tmp_path / "site"
+    d.mkdir()
+    for f in STATIC:
+        shutil.copy2(ROOT / "docs" / f, d / f)
+    (d / "data").mkdir()
+    prog = dict(PROG, good_first=[{"id": "xb_00011170", "bin": "xb", "va": "0x00011170", "symbol": "sub_00011170", "size": 1,
+                                   "why": "it was matched before the reset, so it can be done", "kind": "matched_before"},
+                                  {"id": "pc_006DE000", "bin": "pc", "va": "PC 0x006DE000", "symbol": "Obj::vfunc_02", "size": 6,
+                                   "why": "the game's class information names it", "kind": "named"}])
+    (d / "data" / "progress.json").write_text(json.dumps(prog), encoding="utf-8")
+    shutil.copy2(FIX / "verified_registry.json", d / "data" / "verified_registry.json")
+    srv, url = serve(d)
+    try:
+        ctx, pg = open_page(browser, url)
+        pg.wait_for_selector("#good-first-box:not([hidden]) li")
+        rows = pg.eval_on_selector_all("#good-first li", "ls => ls.map(l => l.innerText.replace(/\\s+/g, ' ').trim())")
+        assert rows[0].startswith("sub_00011170 Xbox, 1 byte it was matched before") and "PC, 6 bytes" in rows[1]
+        assert pg.get_attribute('link[rel="alternate"]', "href") == "feed.xml"
+        assert pg.request.get(url + "feed.xml").ok
+        ctx.close()
+        ctx, pg = open_page(browser, url.replace("127.0.0.1", "localhost"))   # the fixture has no list
+        (d / "data" / "progress.json").write_text(json.dumps(PROG), encoding="utf-8")
+        pg.reload()
+        pg.wait_for_selector("#fn-list .fn")
+        assert pg.is_hidden("#good-first-box")
         assert not pg.errors, pg.errors
         ctx.close()
     finally:

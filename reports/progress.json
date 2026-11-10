@@ -34,5 +34,97 @@
       "TIER_3_MEDIUM": 5056,
       "TIER_4_LARGE": 8597
     }
-  }
+  },
+  "good_first": [
+    {
+      "id": "xb_00011170",
+      "bin": "xb",
+      "va": "0x00011170",
+      "symbol": "sub_00011170",
+      "size": 1,
+      "why": "it was matched before the reset, so it can be done",
+      "kind": "matched_before"
+    },
+    {
+      "id": "xb_0002F890",
+      "bin": "xb",
+      "va": "0x0002F890",
+      "symbol": "sub_0002F890",
+      "size": 3,
+      "why": "it was matched before the reset, so it can be done",
+      "kind": "matched_before"
+    },
+    {
+      "id": "xb_00079FC0",
+      "bin": "xb",
+      "va": "0x00079FC0",
+      "symbol": "sub_00079FC0",
+      "size": 3,
+      "why": "it was matched before the reset, so it can be done",
+      "kind": "matched_before"
+    },
+    {
+      "id": "xb_002AD8C0",
+      "bin": "xb",
+      "va": "0x002AD8C0",
+      "symbol": "pure3d::d3dPrimBufferStream::vfunc_15",
+      "size": 3,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_0017E6E0",
+      "bin": "xb",
+      "va": "0x0017E6E0",
+      "symbol": "sub_0017E6E0",
+      "size": 4,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_001DE0E0",
+      "bin": "xb",
+      "va": "0x001DE0E0",
+      "symbol": "GameMemorySegmentCollection::vfunc_02",
+      "size": 4,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002A9290",
+      "bin": "xb",
+      "va": "0x002A9290",
+      "symbol": "CollisionBehaviourTypeGroup::vfunc_10",
+      "size": 1,
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_00022710",
+      "bin": "xb",
+      "va": "0x00022710",
+      "symbol": "CollisionBehaviourTypeGroup::vfunc_05",
+      "size": 3,
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_00022720",
+      "bin": "xb",
+      "va": "0x00022720",
+      "symbol": "Collidable::vfunc_04",
+      "size": 3,
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_000DD3D0",
+      "bin": "xb",
+      "va": "0x000DD3D0",
+      "symbol": "sub_000DD3D0",
+      "size": 3,
+      "why": "it was matched before the reset, so it can be done",
+      "kind": "matched_before"
+    }
+  ]
 }
