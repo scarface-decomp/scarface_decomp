@@ -331,6 +331,8 @@
     .btn:disabled, .btn-sm:disabled { opacity: 0.4; cursor: not-allowed; }
     .btn.primary, .btn-claim, .btn-verify { background: var(--blood); border-color: var(--blood); color: #fff; }
     .btn.primary:not(:disabled):hover, .btn-claim:not(:disabled):hover, .btn-verify:not(:disabled):hover { background: var(--blood-hover); border-color: var(--blood-hover); }
+    .btn.primary.armed { background: var(--bg-card); border-color: var(--gold); color: var(--gold); }
+    .btn.primary.armed:not(:disabled):hover { background: var(--bg-card-alt); border-color: var(--gold); }
     .btn-ai { border-color: rgba(234, 68, 77, 0.65); }
     .btn-ai:not(:disabled):hover { border-color: var(--hot); background: rgba(181, 18, 27, 0.14); }
     .btn-dme { white-space: nowrap; }
@@ -1195,7 +1197,7 @@
                 <b>The quick way</b>
                 <span>The whole PC version, and from the Xbox, PS2 and prototype only what the PC doesn't have. Every map area, character, gun and car is then ready for Blender.</span>
               </div>
-              <button type="button" class="btn primary" id="gf-quick-start" onclick="startGfForBlender()">Copy everything, PC first</button>
+              <button type="button" class="btn primary" id="gf-quick-start" onclick="startGfForBlender('gf-quick-start')">Copy everything, PC first</button>
             </div>
 
             <h3 class="gf-h">Versions to copy</h3>
@@ -1205,13 +1207,13 @@
             <fieldset class="gf-modes-set">
               <legend class="gf-h">Layout</legend>
               <div class="gf-modes">
-              <label class="gf-mode"><input type="radio" name="gf-mode" value="unique" checked onchange="updateGfSpace()" />
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="unique" checked onchange="gfChoicesChanged()" />
                 <span><b>No duplicates</b><span>A file that is exactly the same in several versions is copied once, into <code>Shared/</code>. What only one version has gets its own folder, <code>Exclusive to</code> that version.</span></span></label>
-              <label class="gf-mode"><input type="radio" name="gf-mode" value="every" onchange="updateGfSpace()" />
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="every" onchange="gfChoicesChanged()" />
                 <span><b>Every version complete</b><span>Each version in its own folder with all of its files. Takes the most space.</span></span></label>
-              <label class="gf-mode"><input type="radio" name="gf-mode" value="best" onchange="updateGfSpace()" />
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="best" onchange="gfChoicesChanged()" />
                 <span><b>Best version of each file</b><span>One copy of everything the versions share, in <code>Best/</code>, the highest quality winning: the PC's 48 kHz sounds, its 1280&times;720 videos, the biggest textures. What only one version has gets its own <code>Exclusive to</code> folder.</span></span></label>
-              <label class="gf-mode"><input type="radio" name="gf-mode" value="pc" onchange="updateGfSpace()" />
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="pc" onchange="gfChoicesChanged()" />
                 <span><b>The PC first, then what only the others have</b><span>The whole PC version in <code>PC/</code>, and from the others only what the PC doesn't have: each one's own in its <code>Exclusive to</code> folder, what several of them have once in <code>Not on the PC/</code>. The PC's models, textures and animations are the best for Blender.</span></span></label>
               </div>
             </fieldset>
@@ -1219,15 +1221,16 @@
             <fieldset class="gf-modes-set">
               <legend class="gf-h">Folders</legend>
               <div class="gf-modes">
-              <label class="gf-mode"><input type="radio" name="gf-folders" value="game" checked />
+              <label class="gf-mode"><input type="radio" name="gf-folders" value="game" checked onchange="gfChoicesChanged()" />
                 <span><b>As in the game</b><span>Every file in the folder it has inside the game.</span></span></label>
-              <label class="gf-mode"><input type="radio" name="gf-folders" value="type" />
+              <label class="gf-mode"><input type="radio" name="gf-folders" value="type" onchange="gfChoicesChanged()" />
                 <span><b>By type</b><span>Each folder, including each version's exclusives, sorted into Sounds, Textures, Models, Animations, Videos and Scripts &amp; text, with the game's folders inside. Sounds get their original names.</span></span></label>
               </div>
             </fieldset>
 
             <div class="gf-run">
-              <button type="button" class="btn primary" id="gf-start" onclick="startGameFiles()">Copy the game files</button>
+              <button type="button" class="btn primary" id="gf-start" onclick="startGameFiles('gf-start')">Copy the game files</button>
+              <button type="button" class="btn-sm" id="gf-check" onclick="checkGameFiles()" hidden>Check for missing files</button>
               <button type="button" class="btn-sm" id="gf-stop" onclick="stopGameFiles()" hidden>Stop</button>
               <span class="gf-space" id="gf-space"></span>
             </div>
@@ -1281,7 +1284,7 @@
             </div>
             <div class="gfb-need" id="gfb-need" hidden>
               <p class="gf-notes">First the game files need copying from your game: the PC version, with what only the other versions have.</p>
-              <div class="gf-run"><button type="button" class="btn primary" id="gfb-copy" onclick="startGfForBlender()">Copy the game files for Blender</button></div>
+              <div class="gf-run"><button type="button" class="btn primary" id="gfb-copy" onclick="startGfForBlender('gfb-copy')">Copy the game files for Blender</button></div>
             </div>
             <div id="gfb-tools">
             <h3 class="gf-h">A map area</h3>
@@ -3443,7 +3446,7 @@
       cb.value = v.version;
       cb.disabled = !v.found;
       cb.checked = !!v.found && (had ? keep.has(v.version) : true);
-      cb.addEventListener('change', updateGfSpace);
+      cb.addEventListener('change', gfChoicesChanged);
       lab.appendChild(cb);
       const txt = el('span');
       txt.appendChild(el('b', v.label));
@@ -3471,9 +3474,85 @@
     const parts = [];
     if (need) parts.push((gfMode() === 'every' ? 'Needs about ' : 'Needs up to ') + fmtBytes(need) + (gfMode() === 'best' || gfMode() === 'pc' ? ' while copying' : ''));
     if (d.free != null) parts.push(fmtBytes(d.free) + ' free on this drive');
-    if (d.summary) parts.push('copying again replaces what is in the folder (files you changed are kept)');
+    const state = gfCopyState(gfCurrentChoices());
+    if (state === 'same') parts.splice(0, parts.length, 'Already copied like this on ' + d.copy.created + ': there’s nothing to copy again');
+    else if (state === 'other') parts.push((d.copy.current ? '' : 'your game files changed since the last copy · ')
+      + 'copying again changes your copy to these choices: until it’s done your copy stays as it is, and files you changed are kept');
     $('gf-space').textContent = parts.join(' · ');
-    $('gf-start').disabled = !chosen.size || !!(d.status && d.status.running);
+    renderGfButtons();
+  }
+
+  /* The buttons can't start a copy that would change nothing, and replacing a copy takes a second press. */
+  let GF_ARMED = '';
+  let GF_ARM_T = null;
+
+  function gfCurrentChoices() { return { versions: gfChosen(), mode: gfMode(), folders: gfFolders() }; }
+
+  function gfQuickChoices() {
+    return { versions: ((GF_DATA || {}).versions || []).filter((v) => v.found).map((v) => v.version), mode: 'pc', folders: 'game' };
+  }
+
+  /* 'none': nothing copied yet · 'same': already copied like this · 'other': copying changes the copy ·
+     'cut': a copy was cut off while it was moving files */
+  function gfCopyState(c) {
+    const d = GF_DATA || {};
+    if (d.interrupted) return 'cut';
+    const had = d.copy;
+    if (!had) return 'none';
+    const same = had.current && had.mode === c.mode && had.folders === c.folders
+      && had.versions.slice().sort().join(',') === c.versions.slice().sort().join(',');
+    return same ? 'same' : 'other';
+  }
+
+  function gfChoicesChanged() {
+    gfDisarm();
+    updateGfSpace();
+  }
+
+  function gfArm(btn) {
+    GF_ARMED = btn;
+    clearTimeout(GF_ARM_T);
+    GF_ARM_T = setTimeout(() => { gfDisarm(); renderGfStatus((GF_DATA || {}).status || {}); }, 8000);
+    const s = (GF_DATA || {}).summary || {};
+    gfMessage('This replaces your copy (' + [s.mode_label, s.folders_label].filter(Boolean).join(', ').toLowerCase()
+      + ') with the new choices. Your copy stays as it is until the new one is ready, and files you changed are kept. Press the button again to go ahead.');
+    renderGfButtons();
+  }
+
+  function gfDisarm() {
+    if (!GF_ARMED) return;
+    GF_ARMED = '';
+    clearTimeout(GF_ARM_T);
+    renderGfButtons();
+  }
+
+  function renderGfButtons() {
+    const d = GF_DATA || {};
+    const st = d.status || {};
+    const running = !!st.running;
+    const mine = gfCopyState(gfCurrentChoices());
+    const quick = gfCopyState(gfQuickChoices());
+    const start = $('gf-start');
+    const qs = $('gf-quick-start');
+    if (running) { start.textContent = 'Copying…'; start.disabled = true; }
+    else if (GF_ARMED === 'gf-start') { start.textContent = 'Press again to replace your copy'; start.disabled = false; }
+    else if (mine === 'same') { start.textContent = 'Copied ✓'; start.disabled = true; }
+    else {
+      start.textContent = mine === 'cut' ? 'Finish the copy' : mine === 'other' ? 'Copy again with these choices' : 'Copy the game files';
+      start.disabled = !gfChosen().length;
+    }
+    if (running) { qs.textContent = 'Copying…'; qs.disabled = true; }
+    else if (GF_ARMED === 'gf-quick-start') { qs.textContent = 'Press again to replace your copy'; qs.disabled = false; }
+    else if (quick === 'same') { qs.textContent = 'Copied ✓'; qs.disabled = true; }
+    else { qs.textContent = quick === 'cut' ? 'Finish the copy' : 'Copy everything, PC first'; qs.disabled = false; }
+    start.classList.toggle('armed', GF_ARMED === 'gf-start');
+    qs.classList.toggle('armed', GF_ARMED === 'gf-quick-start');
+    $('gf-check').hidden = running || mine !== 'same';
+    $('gfb-copy').disabled = running;
+    const stop = $('gf-stop');
+    stop.hidden = !running;
+    stop.disabled = st.phase === 'placing';
+    stop.title = st.phase === 'placing' ? 'Moving the files can’t be stopped halfway. It’s nearly done.' : '';
   }
 
   function gfMessage(text, isError) {
@@ -3483,23 +3562,26 @@
   }
 
   function renderGfStatus(st) {
-    const running = !!st.running;
-    $('gf-start').textContent = running ? 'Copying…' : 'Copy the game files';
-    $('gf-start').disabled = running || !gfChosen().length;
-    $('gf-quick-start').disabled = running;
-    $('gfb-copy').disabled = running;
-    $('gf-stop').hidden = !running;
-    if (!st.phase) { $('gf-progress').hidden = true; return; }
+    renderGfButtons();
+    if (!st.phase) {
+      if ((GF_DATA || {}).interrupted) {
+        gfMessage('The last copy was cut off while it was moving files into place. Press Finish the copy: it carries on from there.');
+      } else if (!GF_ARMED) {
+        $('gf-progress').hidden = true;
+      }
+      return;
+    }
     const pct = st.total ? Math.min(100, (st.done / st.total) * 100) : 0;
     let msg = '';
-    if (st.phase === 'preparing') msg = 'Getting ready…';
+    if (st.phase === 'preparing') msg = 'Getting ready: looking at your last copy…';
     else if (st.phase === 'reading') msg = 'Reading ' + (st.label || 'the game') + ': ' + fmtBytes(st.done) + ' of ' + fmtBytes(st.total) + ' · ' + fmtInt(st.files) + ' files so far';
-    else if (st.phase === 'placing') msg = 'Putting every file in its place… (' + fmtInt(st.files) + ' files)';
-    else if (st.phase === 'done') msg = 'Done: ' + fmtInt(st.files) + ' files copied.';
+    else if (st.phase === 'placing') msg = 'Putting the files in place' + (st.to_place ? ': ' + fmtInt(st.placed) + ' of ' + fmtInt(st.to_place) : '…') + '. Nearly done, and this part can’t be stopped halfway.';
+    else if (st.phase === 'done') msg = st.message === 'Already copied' ? 'Already copied: every file is there.' : 'Done: ' + fmtInt(st.files) + ' files copied.';
     else if (st.phase === 'stopped') msg = st.message || 'Stopped.';
     else if (st.phase === 'error') msg = 'Couldn’t finish: ' + (st.error || 'unknown error') + '. Press Copy to try again: it carries on where it stopped.';
     gfMessage(msg, st.phase === 'error');
-    $('gf-bar').style.width = (st.phase === 'done' || st.phase === 'placing' ? 100 : pct).toFixed(1) + '%';
+    const placed = st.to_place ? Math.min(100, (st.placed / st.to_place) * 100) : 100;
+    $('gf-bar').style.width = (st.phase === 'done' ? 100 : st.phase === 'placing' ? placed : pct).toFixed(1) + '%';
   }
 
   function pollGameFiles() {
@@ -3515,14 +3597,20 @@
     }, 1000);
   }
 
-  async function startGameFiles() {
+  async function startGameFiles(btn, check) {
     const versions = gfChosen();
     if (!versions.length) { gfMessage('Pick at least one version.', true); return; }
-    $('gf-start').disabled = true;
+    const state = gfCopyState(gfCurrentChoices());
+    if (!check && state === 'same') { renderGfButtons(); return; }
+    if (!check && state === 'other' && GF_ARMED !== btn) { gfArm(btn); return; }
+    gfDisarm();
+    ['gf-start', 'gf-quick-start', 'gf-check', 'gfb-copy'].forEach((id) => { $(id).disabled = true; });
     let res;
     try { res = await postJson('/api/game-files/start', { versions: versions, mode: gfMode(), folders: gfFolders() }); } catch (e) { res = { ok: false, error: e.message }; }
+    $('gf-check').disabled = false;
     if (!res.ok) {
-      gfMessage(res.error || 'Couldn’t start.', true);
+      if (res.up_to_date) gfMessage('Every file is there: there’s nothing to copy.');
+      else gfMessage(res.error || 'Couldn’t start.', true);
       updateGfSpace();
       return;
     }
@@ -3531,15 +3619,20 @@
     pollGameFiles();
   }
 
+  /* Puts back the files missing from a copy made with these same choices (nothing else is touched). */
+  function checkGameFiles() {
+    startGameFiles('gf-check', true);
+  }
+
   /* One click: every version found, the PC first, as in the game (what the Blender exports want). */
-  function startGfForBlender() {
+  function startGfForBlender(btn) {
     document.querySelectorAll('input[name="gf-version"]').forEach((cb) => { if (!cb.disabled) cb.checked = true; });
     const mode = document.querySelector('input[name="gf-mode"][value="pc"]');
     const folders = document.querySelector('input[name="gf-folders"][value="game"]');
     if (mode) mode.checked = true;
     if (folders) folders.checked = true;
     updateGfSpace();
-    startGameFiles();
+    startGameFiles(btn || 'gf-quick-start');
   }
 
   async function stopGameFiles() {

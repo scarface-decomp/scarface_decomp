@@ -21,7 +21,7 @@ from __future__ import annotations
 import threading
 import time
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
 import game_assets as GA
 import p3d_gltf as P3G
@@ -133,6 +133,11 @@ class CityJob:
         self._thread: Optional[threading.Thread] = None
         self._stop = threading.Event()
         self._lock = threading.Lock()
+        self.busy: Optional[Callable[[], str]] = None      # something else that mustn't run with this (why, or "")
+
+    @property
+    def running(self) -> bool:
+        return bool(self._thread and self._thread.is_alive())
 
     def folder(self, version: str = "") -> Path:
         base = self.bin_dir / OUT_NAME
@@ -141,8 +146,11 @@ class CityJob:
     def start(self, version: str, index: Optional[dict]) -> Optional[str]:
         """None when started, or why not."""
         with self._lock:
-            if self._thread and self._thread.is_alive():
+            if self.running:
                 return "Already exporting the city. Wait for it to finish or press Stop."
+            why = self.busy() if self.busy is not None else ""
+            if why:
+                return why
             if version not in GA.LABELS:
                 return "Pick a version."
             out = GA.out_dir(self.bin_dir)

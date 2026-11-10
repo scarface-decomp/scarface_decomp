@@ -161,7 +161,7 @@ GF_VERSIONS = [
      "source": "Scarface - The World Is Yours (Apr 20, 2006 prototype).zip"},
 ]
 GF: dict = {"status": {"running": False, "phase": "", "done": 0, "total": 0, "files": 0, "label": "", "message": "",
-                       "error": ""}, "summary": None, "files": {}}
+                       "error": ""}, "summary": None, "files": {}, "copy": None}
 BLENDER: dict = {"running": False, "version": "", "done": 0, "total": 0, "area": "", "error": "", "written": 0,
                  "bytes": 0, "folder": ""}
 GF_AREAS = [{"key": "z04/stripmall_01", "name": "stripmall_01", "place": "z04", "files": 3},
@@ -235,10 +235,15 @@ def gf_run(versions, mode, folders="game"):
                 return
             st.update(phase="reading", label="Xbox" if i < 5 else "PS2", done=total * i // 10, total=total, files=i * 1234)
     with LOCK:
-        st.update(phase="placing")
-    time.sleep(0.2)
+        st.update(phase="placing", placed=0, to_place=4000)
+    for i in range(1, 5):
+        time.sleep(0.4)                       # long enough for the page's once-a-second look to see it
+        with LOCK:
+            st["placed"] = i * 1000
     with LOCK:
         GF["summary"] = gf_summary(mode, folders)
+        GF["copy"] = {"versions": [v["version"] for v in GF_VERSIONS if v["found"] and v["version"] in versions],
+                      "mode": mode, "folders": folders, "created": GF["summary"]["created"], "current": True}
         st.update(running=False, phase="done", message="Done")
 
 
@@ -304,7 +309,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json(IMPORT)
             if u.path == "/api/game-files":
                 return self._json({"ok": True, "versions": GF_VERSIONS, "folder": "binaries/game_files",
-                                   "free": 128 * 2**30, "summary": GF["summary"],
+                                   "free": 128 * 2**30, "summary": GF["summary"], "copy": GF["copy"],
+                                   "interrupted": bool(CONFIG.get("gf_interrupted")),
                                    "status": {k: v for k, v in GF["status"].items() if k != "stop"},
                                    "notes": CONFIG.get("gf_notes", []),
                                    "modes": [{"id": "unique", "label": "No duplicates"},
@@ -424,6 +430,9 @@ class Handler(BaseHTTPRequestHandler):
                                 "message": "", "error": ""}
                 GF["summary"] = None
                 GF["files"] = {}
+                GF["copy"] = None
+                CONFIG["gf_missing"] = bool(body.get("gf_missing"))
+                CONFIG["gf_interrupted"] = bool(body.get("gf_interrupted"))
                 DELAYS.update(body.get("delays", {}))
                 CONFIG["lease_sec"] = int(body.get("lease_sec", LEASE_SEC))
                 CONFIG["no_login"] = bool(body.get("no_login"))
@@ -542,6 +551,13 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": False, "error": "Already copying the game's files. Wait for it to finish or press Stop."}, 409)
             if not any(v["found"] and v["version"] in versions for v in GF_VERSIONS):
                 return self._json({"ok": False, "error": "None of those versions were found in binaries/."}, 400)
+            had = GF["copy"]
+            if (had and not CONFIG.get("gf_missing") and had["mode"] == body.get("mode")
+                    and had["folders"] == (body.get("folders") or "game")
+                    and sorted(had["versions"]) == sorted(v["version"] for v in GF_VERSIONS if v["found"] and v["version"] in versions)):
+                return self._json({"ok": False, "up_to_date": True, "error": "Already copied with these choices, and "
+                                   "every file is still there: there's nothing to copy."}, 409)
+            CONFIG["gf_interrupted"] = False
             GF["status"].update(running=True, phase="preparing", done=0, total=0, files=0, error="", stop=False)
             threading.Thread(target=gf_run, args=(versions, body.get("mode", "unique"), body.get("folders", "game")),
                              daemon=True).start()

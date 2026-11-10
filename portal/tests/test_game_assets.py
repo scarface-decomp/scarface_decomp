@@ -228,20 +228,27 @@ def test_changing_layout_reuses_the_files(tmp_path, monkeypatch):
     assert not any(k.startswith("Xbox/cement.rcf/art/sound") for k in files)
 
 
-def test_an_edited_file_makes_its_version_be_read_again(tmp_path, monkeypatch):
+def test_an_edited_file_stays_until_its_place_is_needed(tmp_path, monkeypatch):
     b = make_binaries(tmp_path)
     GA.run(["prototype", "pc"], "unique", b, log=lambda m: None)
-    edited = b / "game_files" / "Exclusive to Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d"
+    out = b / "game_files"
+    edited = out / "Exclusive to Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d"
     edited.write_bytes(b"my own mod")
     read = []
     real = dict(GA.READERS)
     monkeypatch.setattr(GA, "READERS", {k: (lambda *a, k=k, **kw: (read.append(k), real[k](*a, **kw))[1])
                                         for k in real})
     GA.run(["prototype", "pc"], "unique", b, log=lambda m: None)
-    assert read == ["zip"]                     # the prototype again; the PC folder was reused
-    out = b / "game_files"
-    assert (out / "Exclusive to Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d").read_bytes() == b"P3D\xff cut scene"
+    assert read == [] and edited.read_bytes() == b"my own mod"      # the same choices: nothing to do
+    (out / "Exclusive to PC" / "cement.rcf" / "art" / "pc" / "mouse.p3d").unlink()
+    GA.run(["prototype", "pc"], "unique", b, log=lambda m: None)    # one file gone: only the PC read again
+    assert read == ["folder"] and edited.read_bytes() == b"my own mod"
+    assert (out / "Exclusive to PC" / "cement.rcf" / "art" / "pc" / "mouse.p3d").read_bytes() == b"P3Dmouse"
+    GA.run(["prototype", "pc"], "every", b, log=lambda m: None)     # its place moves: the original is needed
+    assert read == ["folder", "zip"]
+    assert (out / "Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d").read_bytes() == b"P3D\xff cut scene"
     assert (out / "Changed by you" / "Exclusive to Xbox 2006 prototype" / "art" / "cut" / "protoonly.p3d").read_bytes() == b"my own mod"
+    assert not edited.exists()
 
 
 def test_stopped_run_carries_on(tmp_path):
@@ -256,6 +263,103 @@ def test_stopped_run_carries_on(tmp_path):
     assert (b / "game_files" / ".work").is_dir()
     GA.run(list(GA.VERSIONS), "unique", b, log=lambda m: None)
     assert read_all(b / "game_files")["Shared/cement.rcf/art/sound/hello.rsd"] == SOUND
+
+
+def _no_reading(monkeypatch):
+    def must_not_read(*a, **k):
+        raise AssertionError("the game was read again")
+    monkeypatch.setattr(GA, "READERS", {k: must_not_read for k in GA.READERS})
+
+
+def test_copying_again_with_the_same_choices_does_nothing(tmp_path, monkeypatch):
+    b = make_binaries(tmp_path)
+    first = GA.run(list(GA.VERSIONS), "pc", b, log=lambda m: None)
+    before, readers = read_all(b / "game_files"), GA.READERS
+    _no_reading(monkeypatch)
+    assert GA.run(list(GA.VERSIONS), "pc", b, log=lambda m: None) == first
+    assert read_all(b / "game_files") == before
+    job = GA.Job(b, log=lambda m: None)
+    assert "Already copied" in job.start(list(GA.VERSIONS), "pc")
+    assert job.overview()["copy"] == {"versions": list(GA.VERSIONS), "mode": "pc", "folders": "game",
+                                      "created": first["created"], "current": True}
+    monkeypatch.setattr(GA, "READERS", readers)
+    assert job.start(list(GA.VERSIONS), "every") is None              # other choices: allowed
+    job._thread.join(30)
+    assert job.overview()["copy"]["mode"] == "every"
+
+
+def test_a_stopped_copy_leaves_the_last_one_as_it_was(tmp_path):
+    b = make_binaries(tmp_path)
+    GA.run(["pc"], "every", b, log=lambda m: None)
+    out = b / "game_files"
+    before, index = read_all(out), (out / ".index.json").read_bytes()
+    calls = [0]
+
+    def stop():
+        calls[0] += 1
+        return calls[0] > 25
+    with pytest.raises(GA.Stopped):
+        GA.run(list(GA.VERSIONS), "unique", b, stop=stop, log=lambda m: None)
+    assert read_all(out) == before and (out / ".index.json").read_bytes() == index
+    job = GA.Job(b, log=lambda m: None)
+    assert job.file_path("pc", "cement.rcf/art/pc/mouse.p3d").read_bytes() == b"P3Dmouse"
+    GA.run(list(GA.VERSIONS), "unique", b, log=lambda m: None)       # carries on, then the new layout
+    assert read_all(out)["Exclusive to PC/cement.rcf/art/pc/mouse.p3d"] == b"P3Dmouse"
+    assert not (out / "PC").exists() and not (out / "Changed by you").exists()
+
+
+def test_a_copy_cut_off_while_moving_files_finishes_next_time(tmp_path, monkeypatch):
+    b = make_binaries(tmp_path)
+    GA.run(list(GA.VERSIONS), "unique", b, log=lambda m: None)
+    out = b / "game_files"
+    real, n = GA.os.replace, [0]
+
+    def flaky(src, dst):
+        n[0] += 1
+        if n[0] > 9:
+            raise OSError("the computer went off")
+        return real(src, dst)
+    monkeypatch.setattr(GA.os, "replace", flaky)
+    with pytest.raises(OSError):
+        GA.run(list(GA.VERSIONS), "every", b, log=lambda m: None)
+    monkeypatch.setattr(GA.os, "replace", real)
+    job = GA.Job(b, log=lambda m: None)
+    assert job.overview()["interrupted"] is True
+    _no_reading(monkeypatch)
+    GA.run(list(GA.VERSIONS), "every", b, log=lambda m: None)
+    files = read_all(out)
+    assert files["Xbox 2006 prototype/art/sound/hello.rsd"] == SOUND == files["Xbox/cement.rcf/art/sound/hello.rsd"]
+    assert files["PC/cement.rcf/art/pc/mouse.p3d"] == b"P3Dmouse"
+    assert not any(k.startswith(("Shared/", "Exclusive to ", "Changed by you/")) for k in files)
+    assert not (out / ".work").exists() and job.overview()["interrupted"] is False
+
+
+def test_from_pc_first_to_every_version_reads_only_what_is_missing(tmp_path, monkeypatch):
+    b = make_binaries(tmp_path)
+    GA.run(list(GA.VERSIONS), "pc", b, log=lambda m: None)
+    read = []
+    real = dict(GA.READERS)
+    monkeypatch.setattr(GA, "READERS", {k: (lambda *a, k=k, **kw: (read.append(k), real[k](*a, **kw))[1])
+                                        for k in real})
+    GA.run(list(GA.VERSIONS), "every", b, log=lambda m: None)
+    assert "folder" not in read                 # the PC's files were all in PC/ already
+    files = read_all(b / "game_files")
+    assert files["Xbox 2006 prototype/art/models/car.p3d"] == CAR_PROTO and files["PC/cement.rcf/art/models/car.p3d"] == CAR
+
+
+def test_previews_work_while_files_are_being_moved(tmp_path):
+    b = make_binaries(tmp_path)
+    GA.run(["pc"], "every", b, log=lambda m: None)
+    out = b / "game_files"
+    job = GA.Job(b, log=lambda m: None)
+    placed = out / "PC" / "cement.rcf" / "art" / "pc" / "mouse.p3d"
+    import hashlib
+    sha = hashlib.sha1(b"P3Dmouse").hexdigest()
+    (out / ".work" / "store" / sha[:2]).mkdir(parents=True)
+    placed.replace(out / ".work" / "store" / sha[:2] / sha)          # in the store, as while placing
+    assert job.file_path("pc", "cement.rcf/art/pc/mouse.p3d") is None
+    job._thread = type("Busy", (), {"is_alive": lambda self: True})()
+    assert job.file_path("pc", "cement.rcf/art/pc/mouse.p3d").read_bytes() == b"P3Dmouse"
 
 
 def test_a_directory_stored_before_the_disc_header_takes_a_second_pass(tmp_path):

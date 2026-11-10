@@ -1164,7 +1164,9 @@ class Store:
     def has(self, sha: str) -> bool:
         return os.path.isfile(_os(self.path(sha)))
 
-    def put(self, chunks: Iterable[bytes]) -> Tuple[str, int]:
+    def put(self, chunks: Iterable[bytes], keep: Callable[[str], bool] = lambda sha: True) -> Tuple[str, int]:
+        """Store a file's bytes; with keep, only when keep(sha) says it's wanted (the hash is known only at
+        the end, so the bytes go to a temporary file first)."""
         h, n = hashlib.sha1(), 0
         fd, tmp = tempfile.mkstemp(dir=_os(self.root / "tmp"))
         try:
@@ -1175,7 +1177,7 @@ class Store:
                     n += len(piece)
             sha = h.hexdigest()
             dest = self.path(sha)
-            if os.path.isfile(_os(dest)):
+            if os.path.isfile(_os(dest)) or not keep(sha):
                 os.remove(tmp)
             else:
                 os.makedirs(_os(dest.parent), exist_ok=True)
@@ -1190,10 +1192,10 @@ class Store:
 
 
 class _Collect(Sink):
-    """Stores each file, and notes what sniff() says about it: [path, size, sha, facts]."""
+    """Stores each file (the ones keep(sha) wants), and notes what sniff() says about it: [path, size, sha, facts]."""
 
-    def __init__(self, store: Store, files: List[list], status: dict):
-        self.store, self.files, self.status = store, files, status
+    def __init__(self, store: Store, files: List[list], status: dict, keep: Callable[[str], bool] = lambda sha: True):
+        self.store, self.files, self.status, self.keep = store, files, status, keep
         self.facts: Dict[str, Optional[dict]] = {}
 
     def file(self, path: str, size: int, chunks: Iterable[bytes]) -> str:
@@ -1207,7 +1209,7 @@ class _Collect(Sink):
                 elif len(seen) < want:
                     seen.extend(piece[:want - len(seen)])
                 yield piece
-        sha, n = self.store.put(tee() if want else chunks)
+        sha, n = self.store.put(tee() if want else chunks, self.keep)
         facts = sniff(path, bytes(seen)) if want else None
         self.facts[sha] = facts
         self.files.append([path, n, sha, facts])
@@ -1403,7 +1405,7 @@ def plan(catalogs: Dict[str, List[list]], mode: str, folders: str = "game"
             else:
                 place = take_free(row[2], where(top, game_path(row[0]), row[5]))
                 sha_place[row[2]] = place
-                row[6] = 1
+                row[6] = 1 if place else 0                 # a name that would leave the folder: never written
             for cv, ci in cands:
                 result[cv][ci][4] = place
     elif mode == "unique":
@@ -1439,72 +1441,119 @@ def load_index(out: Path) -> Optional[dict]:
         return None
 
 
-def _gather_previous(out: Path, store: Store, work: Path, log: Log) -> None:
-    """Move the files of an earlier run back into the store, so a new layout needs no reading. A file
-    that was changed since it was copied out is moved to Changed by you/ instead, and a version with a
-    file that isn't there any more (or was left out of a Best layout) is read again."""
-    old = load_index(out)
-    if not old:
-        return
-    stamps = old.get("stamps", {})
-    versions = old.get("versions", {})
-    moved_aside = 0
-    for info in versions.values():
+PLACING = "placing.json"              # in .work/ while files are being put in place: what goes where
+PLACED = "placed.txt"                 # ... and how many of those are done
+
+
+class There:
+    """What the last copy left in the folder: the files still as they were copied (by place), the ones
+    changed since (a mod?), and how many are gone."""
+
+    def __init__(self) -> None:
+        self.good: Dict[str, Tuple[str, Path]] = {}     # place -> (sha, path), still as copied
+        self.changed: Dict[str, Tuple[Path, str, Optional[int]]] = {}   # place -> (path, sha copied, stamp)
+        self.by_sha: Dict[str, Path] = {}               # sha -> a good file with those bytes
+        self.missing = 0                                # places of the last copy with nothing there
+        self.cut = False                                # a copy was cut off while putting files in place
+
+    def _good(self, place: str, sha: str, p: Path) -> None:
+        self.good[place] = (sha, p)
+        self.changed.pop(place, None)
+        self.by_sha.setdefault(sha, p)
+
+
+def _size(p: Optional[Path]) -> int:
+    try:
+        return os.stat(_os(p)).st_size if p is not None and os.path.isfile(_os(p)) else -1
+    except OSError:
+        return -1
+
+
+def _place_path(out: Path, place: str) -> Optional[Path]:
+    """Where a place from a copy's index is (they were checked to stay in the folder when they were made)."""
+    return out.joinpath(*place.split("/")) if place and _safe_rel(place) else None
+
+
+def what_is_there(out: Path, index: Optional[dict]) -> There:
+    """Look at every file the last copy wrote (one stat each). A copy that was cut off while putting files
+    in place left a list of where it was putting them: what it had put there counts as copied too."""
+    there = There()
+    work = out / WORK
+    try:
+        with open(work / PLACING, encoding="utf-8") as f:
+            cut = json.load(f).get("places", [])
+        there.cut = True
+    except (OSError, ValueError, AttributeError):
+        cut = []
+    try:
+        done = int((work / PLACED).read_text().strip() or 0)
+    except (OSError, ValueError):
+        done = 0
+    cut_at: Dict[str, Tuple[str, int]] = {}
+    for i, (sha, place, size) in enumerate(cut):
+        p = _place_path(out, place)
+        if i < done:                              # surely put there: it's the new file
+            if _size(p) == size:
+                there._good(place, sha, p)
+        else:
+            cut_at[place] = (sha, size)
+    stamps = (index or {}).get("stamps", {})
+    for info in (index or {}).get("versions", {}).values():
         for row in info.get("files", []):
-            _path, size, sha, _status, placed = row[:5]
+            placed = row[4]
             written = row[6] if len(row) > 6 else 1       # older indexes: every placed row was written
-            if not placed or not written or store.has(sha):
+            if not placed or not written or placed in there.good or placed in there.changed:
                 continue
-            p = safe_output_path(out, placed)
+            p = _place_path(out, placed)
             try:
                 st = os.stat(_os(p)) if p is not None else None
             except OSError:
                 st = None
             if st is None:
+                if placed not in cut_at:
+                    there.missing += 1
                 continue
-            if st.st_size != size or (placed in stamps and int(st.st_mtime) != stamps[placed]):
-                # changed since it was copied out (a mod?): kept, out of the way of the new copy
-                aside = safe_output_path(out / CHANGED_BY_YOU, placed)
-                if aside is not None:
-                    os.makedirs(_os(aside.parent), exist_ok=True)
-                    os.replace(_os(p), _os(aside))
-                    moved_aside += 1
-                continue
-            os.makedirs(_os(store.path(sha).parent), exist_ok=True)
-            os.replace(_os(p), _os(store.path(sha)))
-    for v, info in versions.items():
-        files = [row for row in info.get("files", []) if row[4]]      # rows never written have no place
-        if info.get("signature") and all(store.has(row[2]) for row in files):
-            _write_json(work / f"catalog-{v}.json", {"signature": info["signature"], "complete": True,
-                                                     "files": [r[:3] + [r[5] if len(r) > 5 else None] for r in files]})
-    if moved_aside:
-        log(f"    {moved_aside:,} file(s) you changed since the last copy were moved to {CHANGED_BY_YOU}/")
-    _remove_layout(out, old, log)
+            if st.st_size == row[1] and (placed not in stamps or int(st.st_mtime) == stamps[placed]):
+                there._good(placed, row[2], p)
+            elif placed in cut_at and st.st_size == cut_at[placed][1]:
+                there._good(placed, cut_at[placed][0], p)          # the cut-off copy got this far
+            else:
+                there.changed[placed] = (p, row[2], stamps.get(placed))
+    for place, (sha, size) in cut_at.items():
+        if place not in there.good and place not in there.changed:
+            p = _place_path(out, place)
+            if _size(p) == size:
+                there._good(place, sha, p)
+    return there
 
 
-def _remove_layout(out: Path, old: dict, log: Log) -> None:
-    """Remove what an earlier run wrote (and only that), then the folders it left empty."""
-    for info in old.get("versions", {}).values():
-        for row in info.get("files", []):
-            p = safe_output_path(out, row[4]) if row[4] else None
-            if p is not None:
-                try:
-                    os.remove(_os(p))
-                except OSError:
-                    pass
-    for name in [SHARED, BEST] + list(LABELS.values()) + [exclusive(v) for v in LABELS]:
-        top = out / name
-        if top.is_dir():
-            for dirpath, _dirs, _files in sorted(os.walk(_os(top)), key=lambda t: -len(t[0])):
-                try:
-                    os.rmdir(dirpath)
-                except OSError:
-                    pass
-    for f in list(out.glob("INDEX - *.txt")) + [out / "README.txt", out / INDEX_JSON]:
-        try:
-            f.unlink()
-        except OSError:
-            pass
+def up_to_date(index: Optional[dict], there: There, sources: Dict[str, Source], versions: List[str],
+               mode: str, folders: str) -> bool:
+    """The last copy was made with these choices from these same game files, and every file is still there
+    (files changed since count as there: they're yours)."""
+    return same_settings(index, sources, versions, mode, folders) and not there.cut and not there.missing
+
+
+def same_settings(index: Optional[dict], sources: Dict[str, Source], versions: List[str], mode: str,
+                  folders: str) -> bool:
+    """The last copy was made with these choices, from these same game files."""
+    if not index or index.get("mode") != mode or index.get("folders", "game") != folders:
+        return False
+    had = index.get("versions", {})
+    if set(had) != set(versions):
+        return False
+    return all(v in sources and had[v].get("signature") == sources[v].signature() for v in versions)
+
+
+def same_choices(index: Optional[dict], sources: Dict[str, Source]) -> Optional[dict]:
+    """What the last copy was made with, for the portal's buttons, and whether the game files it came from
+    are still the same."""
+    if not index:
+        return None
+    had = index.get("versions", {})
+    return {"versions": [v for v in VERSIONS if v in had], "mode": index.get("mode", ""),
+            "folders": index.get("folders", "game"), "created": index.get("created", ""),
+            "current": all(v in sources and had[v].get("signature") == sources[v].signature() for v in had)}
 
 
 def _write_json(path: Path, data) -> None:
@@ -1515,7 +1564,16 @@ def _write_json(path: Path, data) -> None:
     os.replace(tmp, path)
 
 
-def _catalog_ok(work: Path, src: Source, store: Store) -> Optional[List[list]]:
+def _catalog_from_index(index: Optional[dict], src: Source) -> Optional[List[list]]:
+    """A version's list of files from the last copy, if it was made from these same game files."""
+    info = (index or {}).get("versions", {}).get(src.version)
+    if not info or info.get("signature") != src.signature():
+        return None
+    return [[r[0], r[1], r[2], r[5] if len(r) > 5 else None] for r in info.get("files", [])]
+
+
+def _catalog_read(work: Path, src: Source) -> Optional[List[list]]:
+    """A version's list of files from a copy that stopped after reading it."""
     try:
         with open(work / f"catalog-{src.version}.json", encoding="utf-8") as f:
             cat = json.load(f)
@@ -1523,10 +1581,20 @@ def _catalog_ok(work: Path, src: Source, store: Store) -> Optional[List[list]]:
         return None
     if not cat.get("complete") or cat.get("signature") != src.signature():
         return None
-    files = cat.get("files", [])
-    if all(store.has(row[2]) for row in files):
-        return files
-    return None
+    return cat.get("files", [])
+
+
+def _readers_for(missing: set, catalogs: Dict[str, List[list]], sources: Dict[str, Source]) -> List[str]:
+    """The fewest versions to read again for the files no copy has any more (the smaller disc on a tie)."""
+    shas = {v: {r[2] for r in rows} for v, rows in catalogs.items()}
+    left, pick = set(missing), []
+    while left:
+        v = max(shas, key=lambda v: (len(left & shas[v]), -sources[v].size))
+        if not left & shas[v]:
+            break
+        pick.append(v)
+        left -= shas[v]
+    return pick
 
 
 class Status(dict):
@@ -1535,13 +1603,17 @@ class Status(dict):
 
 def new_status() -> Status:
     return Status(running=False, phase="", version="", label="", done=0, total=0, files=0,
-                  message="", error="", started=0, finished=0, mode="", versions=[])
+                  message="", error="", started=0, finished=0, mode="", versions=[], placed=0, to_place=0)
 
 
 def run(versions: List[str], mode: str, bin_dir: Path = BIN_DIR, status: Optional[Status] = None,
         stop: Callable[[], bool] = lambda: False, log: Log = print,
         sources: Optional[Dict[str, Source]] = None, folders: str = "game") -> dict:
-    """Read the chosen versions and write them out in the chosen layout. Returns the index."""
+    """Read the chosen versions and write them out in the chosen layout. Returns the index.
+
+    The last copy stays as it is while the game is read: only at the end, when every file is at hand, are
+    files moved, and that part can't be stopped halfway. Files already where they belong are left alone,
+    and only what no copy has any more is read from the game again."""
     if mode not in MODES:
         raise ValueError(f"mode must be one of {MODES}")
     if folders not in FOLDERS:
@@ -1555,68 +1627,170 @@ def run(versions: List[str], mode: str, bin_dir: Path = BIN_DIR, status: Optiona
     out = out_dir(bin_dir)
     work = out / WORK
     out.mkdir(parents=True, exist_ok=True)
+    status.update(running=True, phase="preparing", error="", message="Looking at your last copy", mode=mode,
+                  versions=chosen, started=time.time(), finished=0, done=0, files=0, placed=0, to_place=0, total=0)
+    old = load_index(out)
+    there = what_is_there(out, old)
+    if up_to_date(old, there, sources, chosen, mode, folders):
+        log("[=] Already copied with these choices, and every file is still there: nothing to do.")
+        status.update(running=False, phase="done", finished=time.time(), files=sum(
+            len(i.get("files", [])) for i in old["versions"].values()), message="Already copied")
+        return old
     store = Store(work / "store")
-    status.update(running=True, phase="preparing", error="", message="", mode=mode, versions=chosen,
-                  started=time.time(), finished=0, done=0, files=0,
-                  total=sum(sources[v].size for v in chosen))
-    _gather_previous(out, store, work, log)
 
+    def read(vs: List[str], keep: Callable[[str], bool]) -> None:
+        status["total"] += sum(sources[v].size for v in vs)
+        for v in vs:
+            if stop():
+                raise Stopped()
+            src = sources[v]
+            status.update(phase="reading", version=v, label=src.label, message=f"Reading {src.label} from {src.name}")
+            log(f"[*] {src.label}: reading {src.name} ...")
+            files: List[list] = []
+            base = status["done"]
+
+            def progress(pos: int, base=base, cap=src.size) -> None:
+                status["done"] = base + min(pos, cap) if cap else base
+
+            READERS[src.kind](src, _Collect(store, files, status, keep), progress, stop, log)
+            _write_json(work / f"catalog-{v}.json", {"signature": src.signature(), "complete": True, "files": files})
+            catalogs[v] = files
+            status["done"] = base + src.size
+            log(f"    + {len(files):,} files")
+
+    # 1. Each version's list of files: from the last copy, from a copy that stopped, or read now
     catalogs: Dict[str, List[list]] = {}
-    done_before = 0
     for v in chosen:
-        src = sources[v]
-        status.update(phase="reading", version=v, label=src.label,
-                      message=f"Reading {src.label} from {src.name}")
-        cached = _catalog_ok(work, src, store)
-        if cached is not None:
-            log(f"[=] {src.label}: already read ({len(cached):,} files)")
-            catalogs[v] = cached
-            done_before += src.size
-            status.update(done=done_before, files=status["files"] + len(cached))
-            continue
-        log(f"[*] {src.label}: reading {src.name} ...")
-        files: List[list] = []
-        sink = _Collect(store, files, status)
+        cat = _catalog_from_index(old, sources[v]) or _catalog_read(work, sources[v])
+        if cat is not None:
+            log(f"[=] {sources[v].label}: already read ({len(cat):,} files)")
+            catalogs[v] = cat
+    read([v for v in chosen if v not in catalogs], lambda sha: sha not in there.by_sha)
 
-        def progress(pos: int, base=done_before, cap=src.size) -> None:
-            status["done"] = base + min(pos, cap) if cap else base
+    # 2. Where everything goes, and the files no copy has any more: read from the fewest versions
+    def unavailable(places: List[Tuple[str, str]]) -> set:
+        stays = _yours(there, places)
+        return {sha for sha, p in places if p not in stays and sha not in there.by_sha and not store.has(sha)}
 
-        READERS[src.kind](src, sink, progress, stop, log)
-        _write_json(work / f"catalog-{v}.json", {"signature": src.signature(), "complete": True, "files": files})
-        catalogs[v] = files
-        done_before += src.size
-        status["done"] = done_before
-        log(f"    + {len(files):,} files")
+    rows, places = plan(catalogs, mode, folders)
+    missing = unavailable(places)
+    if missing:
+        again = _readers_for(missing, catalogs, sources)
+        log(f"[*] {len(missing):,} file(s) aren't in the folder any more: reading {', '.join(sources[v].label for v in again)} again")
+        read(again, lambda sha: sha in missing)
+        rows, places = plan(catalogs, mode, folders)
+        lost = unavailable(places)
+        if lost:
+            raise RuntimeError(f"{len(lost):,} file(s) couldn't be found in the game any more")
+    if stop():
+        raise Stopped()
 
-    status.update(phase="placing", version="", label="", message="Putting every file in its place")
-    index = place(out, store, catalogs, sources, mode, log, stop, folders)
+    # 3. Everything in its place: from here on there is no stopping halfway
+    status.update(phase="placing", version="", label="", message="Putting every file in its place",
+                  files=sum(len(c) for c in catalogs.values()))
+    index = _put_in_place(out, store, rows, places, there, sources, mode, folders, log, status)
     shutil.rmtree(_os(work), ignore_errors=True)
     status.update(running=False, phase="done", finished=time.time(), message="Done")
     return index
 
 
-def place(out: Path, store: Store, catalogs: Dict[str, List[list]], sources: Dict[str, Source], mode: str,
-          log: Log = print, stop: Callable[[], bool] = lambda: False, folders: str = "game") -> dict:
-    """Move every stored file to its place (copies where one file has several places), then write the
-    index files."""
-    rows, places = plan(catalogs, mode, folders)
+def _yours(there: There, places: List[Tuple[str, str]]) -> Dict[str, Optional[int]]:
+    """The files you changed that stay where they are: the file they were made from still goes there."""
+    new_at = dict((place, sha) for sha, place in places)
+    return {place: stamp for place, (_p, sha, stamp) in there.changed.items() if new_at.get(place) == sha}
+
+
+def _aside(out: Path, place: str, p: Path) -> bool:
+    """Move a file out of the way, into Changed by you/, without covering one already there."""
+    dest = safe_output_path(out / CHANGED_BY_YOU, place)
+    if dest is None:
+        return False
+    n, cand = 2, dest
+    while os.path.exists(_os(cand)):
+        stem, dot, ext = dest.name.rpartition(".")
+        cand = dest.with_name(f"{stem} ({n}).{ext}" if dot else f"{dest.name} ({n})")
+        n += 1
+    os.makedirs(_os(cand.parent), exist_ok=True)
+    os.replace(_os(p), _os(cand))
+    return True
+
+
+def _put_in_place(out: Path, store: Store, rows: Dict[str, List[list]], places: List[Tuple[str, str]],
+                  there: There, sources: Dict[str, Source], mode: str, folders: str, log: Log,
+                  status: Status) -> dict:
+    """Move the files into the new layout. What is already where it belongs stays; the last copy's other
+    files go back to the store (or away, if nothing needs them); files you changed go to Changed by you/.
+    A list of what goes where is kept in .work/ until the end, so a copy cut off here (the portal closed,
+    the computer off) carries on next time without reading the game again."""
+    work = out / WORK
+    sizes = {r[2]: r[1] for v in rows for r in rows[v]}
+    _write_json(work / PLACING, {"places": [[sha, place, sizes.get(sha, 0)] for sha, place in places]})
+    (work / PLACED).write_text("0")
+    new_at = dict((place, sha) for sha, place in places)
+    keep = {place for place, (sha, _p) in there.good.items() if new_at.get(place) == sha}
+    yours = _yours(there, places)
     first: Dict[str, Path] = {}
+    for place in keep:
+        first.setdefault(there.good[place][0], there.good[place][1])
+    moved_aside = 0
+    for place, (p, _sha, _stamp) in there.changed.items():
+        if place in yours:
+            continue
+        try:
+            moved_aside += _aside(out, place, p)
+        except OSError:
+            pass
+    for place, (sha, p) in there.good.items():
+        if place in keep:
+            continue
+        try:
+            if sha in sizes and sha not in first and not store.has(sha):
+                os.makedirs(_os(store.path(sha).parent), exist_ok=True)
+                os.replace(_os(p), _os(store.path(sha)))
+            else:
+                os.remove(_os(p))
+        except OSError:
+            pass
+    status.update(placed=0, to_place=len(places))
     stamps: Dict[str, int] = {}
-    for sha, place_rel in places:
-        if stop():
-            raise Stopped()
+    reused = 0
+    for i, (sha, place_rel) in enumerate(places):
         dest = safe_output_path(out, place_rel)
         if dest is None:
             log(f"      ! skipped a file with an unsafe name: {place_rel!r}")
             continue
-        os.makedirs(_os(dest.parent), exist_ok=True)
-        if sha in first:
-            shutil.copyfile(_os(first[sha]), _os(dest))
+        if place_rel in yours:
+            if yours[place_rel] is not None:
+                stamps[place_rel] = yours[place_rel]           # still seen as changed by you next time
         else:
-            os.replace(_os(store.path(sha)), _os(dest))
-            first[sha] = dest
+            if place_rel in keep:
+                reused += 1
+            else:
+                if os.path.isfile(_os(dest)):          # not one of ours: kept, out of the way
+                    moved_aside += _aside(out, place_rel, dest)
+                os.makedirs(_os(dest.parent), exist_ok=True)
+                if sha in first:
+                    shutil.copyfile(_os(first[sha]), _os(dest))
+                else:
+                    os.replace(_os(store.path(sha)), _os(dest))
+                    first[sha] = dest
+            try:
+                stamps[place_rel] = int(os.stat(_os(dest)).st_mtime)
+            except OSError:
+                pass
+        if (i + 1) % 500 == 0 or i + 1 == len(places):
+            status["placed"] = i + 1
+            (work / PLACED).write_text(str(i + 1))
+    if moved_aside:
+        log(f"    {moved_aside:,} file(s) you changed or added were moved to {CHANGED_BY_YOU}/")
+    if yours:
+        log(f"    {len(yours):,} file(s) you changed were left as they are")
+    if reused:
+        log(f"    {reused:,} file(s) were already in place")
+    _remove_empty_folders(out)
+    for f in out.glob("INDEX - *.txt"):
         try:
-            stamps[place_rel] = int(os.stat(_os(dest)).st_mtime)
+            f.unlink()
         except OSError:
             pass
     index = {
@@ -1628,7 +1802,25 @@ def place(out: Path, store: Store, catalogs: Dict[str, List[list]], sources: Dic
     }
     _write_json(out / INDEX_JSON, index)
     write_readmes(out, index)
+    for f in (PLACING, PLACED):
+        try:
+            (work / f).unlink()
+        except OSError:
+            pass
     return index
+
+
+def _remove_empty_folders(out: Path) -> None:
+    """The layout folders a copy left empty (never Changed by you/ or anything else of yours)."""
+    for name in [SHARED, BEST, NOT_ON_PC] + list(LABELS.values()) + [exclusive(v) for v in LABELS]:
+        top = out / name
+        if top.is_dir():
+            for dirpath, _dirs, _files in sorted(os.walk(_os(top)), key=lambda t: -len(t[0])):
+                try:
+                    os.rmdir(dirpath)
+                except OSError:
+                    pass
+
 
 
 # --------------------------------------------------------------------------- #
@@ -1820,7 +2012,8 @@ class Job:
         self._stop = threading.Event()
         self._thread: Optional[threading.Thread] = None
         self._lock = threading.Lock()
-        self._index_cache: Tuple[float, Optional[dict]] = (-1.0, None)
+        self._index_cache: Tuple[tuple, Optional[dict]] = ((), None)
+        self.busy: Optional[Callable[[], str]] = None      # something else that mustn't run with a copy (why, or "")
         self._sources_cache: Tuple[tuple, Optional[Tuple[Dict[str, Source], List[str]]]] = ((), None)
 
     def sources(self) -> Tuple[Dict[str, Source], List[str]]:
@@ -1851,7 +2044,16 @@ class Job:
                 return "Pick a layout."
             if folders not in FOLDERS:
                 return "Pick how to arrange the folders."
-            need = sum(sources[v].size for v in chosen) - _reusable_bytes(self.index())
+            if self.busy is not None:
+                why = self.busy()
+                if why:
+                    return why
+            index = self.index()
+            if (same_settings(index, sources, chosen, mode, folders)       # then look at every file (a few seconds)
+                    and up_to_date(index, what_is_there(out_dir(self.bin_dir), index), sources, chosen, mode, folders)):
+                return ("Already copied with these choices, and every file is still there: there's nothing to "
+                        "copy. Pick other versions or another layout to copy them differently.")
+            need = sum(sources[v].size for v in chosen) - _reusable_bytes(index)
             free = _free_space(self.bin_dir)
             if free is not None and free < need * 1.05:
                 return (f"Not enough free space: this needs up to {_fmt_bytes(need)} and the drive has "
@@ -1864,6 +2066,7 @@ class Job:
             return None
 
     def stop(self) -> None:
+        """Stop reading. Putting files in place, the short last part, always finishes."""
         self._stop.set()
 
     def _run(self, versions: List[str], mode: str, sources: Dict[str, Source], folders: str = "game") -> None:
@@ -1871,7 +2074,9 @@ class Job:
             run(versions, mode, self.bin_dir, self.status, self._stop.is_set, self.log, sources, folders)
         except Stopped:
             self.status.update(running=False, phase="stopped", finished=time.time(),
-                               message="Stopped. Press Copy again to carry on where it left off.")
+                               message=("Stopped. Your last copy is as it was. Press Copy again to carry on "
+                                        "where it left off." if self.index() else
+                                        "Stopped. Press Copy again to carry on where it left off."))
         except Exception as e:  # noqa: BLE001 - shown in the portal
             import traceback
             traceback.print_exc()
@@ -1882,11 +2087,12 @@ class Job:
     def index(self) -> Optional[dict]:
         p = out_dir(self.bin_dir) / INDEX_JSON
         try:
-            mtime = p.stat().st_mtime
+            st = p.stat()
         except OSError:
             return None
-        if self._index_cache[0] != mtime:
-            self._index_cache = (mtime, load_index(out_dir(self.bin_dir)))
+        key = (st.st_mtime_ns, st.st_size, st.st_ino)      # a new index is a new file (written, then swapped in)
+        if self._index_cache[0] != key:
+            self._index_cache = (key, load_index(out_dir(self.bin_dir)))
         return self._index_cache[1]
 
     def overview(self) -> dict:
@@ -1897,13 +2103,25 @@ class Job:
                          else {"version": v, "label": LABELS[v], "found": False} for v in VERSIONS],
             "notes": notes, "folder": _show_path(out), "free": _free_space(self.bin_dir),
             "summary": summary(self.index()), "status": dict(self.status),
+            "copy": same_choices(self.index(), sources),
+            "interrupted": not self.running and (out / WORK / PLACING).is_file(),
             "modes": [{"id": m, "label": MODE_LABELS[m]} for m in MODES],
             "folders": [{"id": f, "label": FOLDER_LABELS[f]} for f in FOLDERS],
             "kinds": [{"id": k, "label": KIND_LABELS[k]} for k in [k for k, _, _ in KINDS] + ["other"]],
         }
 
     def file_path(self, version: str, path: str) -> Optional[Path]:
-        return file_on_disk(out_dir(self.bin_dir), self.index(), version, path)
+        """Where a copied file is. While a copy is putting files in place, one waiting in the store."""
+        out, index = out_dir(self.bin_dir), self.index()
+        found = file_on_disk(out, index, version, path)
+        if found is None and self.running:
+            for row in ((index or {}).get("versions", {}).get(version) or {}).get("files", []):
+                if row[0] == path:
+                    p = Store.__new__(Store)
+                    p.root = out / WORK / "store"
+                    q = p.path(row[2])
+                    return q if _size(q) == row[1] else None
+        return found
 
     def files_beside(self, version: str, path: str, patterns: Tuple[str, ...]) -> List[Path]:
         return files_beside(out_dir(self.bin_dir), self.index(), version, path, patterns)

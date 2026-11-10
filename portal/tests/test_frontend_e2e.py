@@ -31,9 +31,11 @@ def server():
     srv.shutdown()
 
 
-def reset(lease_sec=900, no_login=False, legacy_claim=False, dme_browser_fail=False, **delays):
+def reset(lease_sec=900, no_login=False, legacy_claim=False, dme_browser_fail=False, gf_missing=False,
+          gf_interrupted=False, **delays):
     payload = {"delays": {"verify": 0.15, "ai": 0.25, "fast": 0.05, **delays}, "lease_sec": lease_sec,
-               "no_login": no_login, "legacy_claim": legacy_claim, "dme_browser_fail": dme_browser_fail}
+               "no_login": no_login, "legacy_claim": legacy_claim, "dme_browser_fail": dme_browser_fail,
+               "gf_missing": gf_missing, "gf_interrupted": gf_interrupted}
     req = urllib.request.Request(BASE + "__reset", data=json.dumps(payload).encode(),
                                  headers={"Content-Type": "application/json"}, method="POST")
     urllib.request.urlopen(req).read()
@@ -768,6 +770,70 @@ def test_game_files_stop(page):
     page.click("#gf-stop")
     page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Stopped')", timeout=10000)
     assert page.is_enabled("#gf-start") and page.is_hidden("#gf-stop")
+
+
+def _gf_text(page, sel):
+    return page.text_content(sel).strip()
+
+
+def _gf_done(page):
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Done')", timeout=10000)
+
+
+def test_game_files_no_copying_twice(page):
+    """Copied once with these choices: the button says so and can't copy again; other choices take a second
+    press; Stop can't cut the move into place in half."""
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.click("#gf-start")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Putting')"
+                           " && document.getElementById('gf-stop').disabled", timeout=10000)
+    assert "can’t be stopped" in _gf_text(page, "#gf-progress-text")
+    _gf_done(page)
+    assert _gf_text(page, "#gf-start") == "Copied ✓" and page.is_disabled("#gf-start")
+    assert "Already copied like this" in _gf_text(page, "#gf-space")
+    assert page.is_enabled("#gf-quick-start") and page.is_visible("#gf-check")
+    page.click("#gf-check")                                     # every file there: nothing to do
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Every file is there')")
+    assert len(calls("/api/game-files/start")) == 2 and page.is_disabled("#gf-start")
+    page.check("input[name=gf-mode][value=every]")
+    assert _gf_text(page, "#gf-start") == "Copy again with these choices" and page.is_hidden("#gf-check")
+    page.click("#gf-start")
+    assert _gf_text(page, "#gf-start") == "Press again to replace your copy"
+    assert "stays as it is until the new one is ready" in _gf_text(page, "#gf-progress-text")
+    assert len(calls("/api/game-files/start")) == 2
+    page.click("#gf-start")
+    _gf_done(page)
+    assert calls("/api/game-files/start")[-1][1]["mode"] == "every" and _gf_text(page, "#gf-start") == "Copied ✓"
+    page.click("#gf-quick-start")                               # a copy exists: the quick button asks too
+    assert _gf_text(page, "#gf-quick-start") == "Press again to replace your copy"
+    page.check("input[name=gf-folders][value=type]")            # changing a choice takes the question back
+    assert _gf_text(page, "#gf-quick-start") == "Copy everything, PC first"
+    assert len(calls("/api/game-files/start")) == 3
+
+
+def test_game_files_missing_files_are_put_back(page):
+    reset(gf_missing=True)
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.click("#gf-start")
+    _gf_done(page)
+    page.click("#gf-check")
+    page.wait_for_selector("#gf-stop:not([hidden])")
+    _gf_done(page)
+    assert len(calls("/api/game-files/start")) == 2
+
+
+def test_game_files_a_cut_off_copy_can_be_finished(page):
+    reset(gf_interrupted=True)
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('The last copy was cut off')")
+    assert _gf_text(page, "#gf-start") == "Finish the copy" and page.is_enabled("#gf-start")
+    assert _gf_text(page, "#gf-quick-start") == "Finish the copy"
+    page.click("#gf-start")
+    _gf_done(page)
+    assert _gf_text(page, "#gf-start") == "Copied ✓"
 
 
 def test_game_files_one_click_for_blender(page):

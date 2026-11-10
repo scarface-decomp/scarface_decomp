@@ -92,6 +92,11 @@ SCRIPTS_DIR = BASE_DIR / "binaries" / "scripts_and_data"
 # Sounds, textures, models, videos: copied out of the person's own game files, for their own use only
 GAME_FILES = GA.Job(BASE_DIR / "binaries")
 BLENDER = BX.CityJob(BASE_DIR / "binaries")
+# a copy moves the files the city export reads: never both at once
+GAME_FILES.busy = lambda: ("The city is being exported for Blender from your copied files. Wait for it to "
+                           "finish, or stop it, then copy." if BLENDER.running else "")
+BLENDER.busy = lambda: ("Your game files are being copied. Export the city when that's done."
+                        if GAME_FILES.running else "")
 
 HOST = os.environ.get("SCARFACE_HOST", "127.0.0.1")
 PORT = int(os.environ.get("SCARFACE_PORT", "8085"))
@@ -2404,6 +2409,9 @@ class Handler(BaseHTTPRequestHandler):
             return self._send_area(q1("version"), q1("area"))
         path = GAME_FILES.file_path(q1("version"), q1("path"))
         if path is None:
+            if GAME_FILES.running:
+                return self._json({"ok": False, "error": "Your game files are being copied: that one isn't "
+                                   "ready yet. Try again when the copy is done."}, 409)
             return self._json({"ok": False, "error": "That file isn't in your copied game files (copy them first)."}, 404)
         try:
             data = path.read_bytes()
@@ -2454,7 +2462,7 @@ class Handler(BaseHTTPRequestHandler):
         """Every map area of the city as .glb files in binaries/blender/<version>/."""
         err = BLENDER.start(str(body.get("version", "")), GAME_FILES.index())
         if err:
-            return self._json({"ok": False, "error": err}, 409 if "Already" in err else 400)
+            return self._json({"ok": False, "error": err}, 409 if "Already" in err or "being" in err else 400)
         self._json(dict(BLENDER.status, ok=True))
 
     def post_game_files_blender_stop(self, body):
@@ -2467,7 +2475,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": "Pick at least one version."}, 400)
         err = GAME_FILES.start(versions, str(body.get("mode", "")), str(body.get("folders") or "game"))
         if err:
-            return self._json({"ok": False, "error": err}, 409 if "Already" in err else 400)
+            return self._json({"ok": False, "error": err, "up_to_date": err.startswith("Already copied")},
+                              409 if "Already" in err or "being" in err else 400)
         self._json({"ok": True, "status": dict(GAME_FILES.status)})
 
     def post_game_files_stop(self, body):
