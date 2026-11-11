@@ -5,356 +5,356 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-10T23:54:19Z</updated>
+  <updated>2026-11-11T00:00:23Z</updated>
   <author><name>Scarface decomp contributors</name></author>
   <entry>
-    <title>sub_001FC000 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001FC000"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001FC000</id>
-    <updated>2026-11-10T23:54:19Z</updated>
-    <summary>0x001FC000 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>CollisionBehaviourTypeGroup::vfunc_11 (Xbox prototype, 1 byte) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001B7A10"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001B7A10</id>
+    <updated>2026-11-11T00:00:23Z</updated>
+    <summary>0x001B7A10 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_001FB8B0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001FB8B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001FB8B0</id>
-    <updated>2026-11-10T23:54:18Z</updated>
-    <summary>0x001FB8B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Entity&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002447D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002447D0</id>
+    <updated>2026-11-10T23:59:50Z</updated>
+    <summary>0x002447D0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00164080 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00164080"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00164080</id>
-    <updated>2026-11-10T23:54:17Z</updated>
-    <summary>0x00164080 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::DrawableContainer&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002286A0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002286A0</id>
+    <updated>2026-11-10T23:59:50Z</updated>
+    <summary>0x002286A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00164020 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00164020"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00164020</id>
-    <updated>2026-11-10T23:54:09Z</updated>
-    <summary>0x00164020 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::ShadowMeshBuffer&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00228680"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00228680</id>
+    <updated>2026-11-10T23:59:50Z</updated>
+    <summary>0x00228680 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163F70 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163F70"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163F70</id>
-    <updated>2026-11-10T23:54:08Z</updated>
-    <summary>0x00163F70 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::ShadowSkin&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00228660"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00228660</id>
+    <updated>2026-11-10T23:59:49Z</updated>
+    <summary>0x00228660 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163EF0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163EF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163EF0</id>
-    <updated>2026-11-10T23:54:07Z</updated>
-    <summary>0x00163EF0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::ShadowMesh&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00228640"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00228640</id>
+    <updated>2026-11-10T23:59:48Z</updated>
+    <summary>0x00228640 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163EC0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163EC0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163EC0</id>
-    <updated>2026-11-10T23:54:06Z</updated>
-    <summary>0x00163EC0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::BillboardObject&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00226370"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00226370</id>
+    <updated>2026-11-10T23:59:47Z</updated>
+    <summary>0x00226370 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163E50 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163E50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163E50</id>
-    <updated>2026-11-10T23:54:05Z</updated>
-    <summary>0x00163E50 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Light&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00226350"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00226350</id>
+    <updated>2026-11-10T23:59:47Z</updated>
+    <summary>0x00226350 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163E00 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163E00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163E00</id>
-    <updated>2026-11-10T23:54:04Z</updated>
-    <summary>0x00163E00 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::VectorCamera&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00226330"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00226330</id>
+    <updated>2026-11-10T23:59:46Z</updated>
+    <summary>0x00226330 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163DB0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163DB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163DB0</id>
-    <updated>2026-11-10T23:54:03Z</updated>
-    <summary>0x00163DB0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::ShaderAnimationController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00224850"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00224850</id>
+    <updated>2026-11-10T23:59:46Z</updated>
+    <summary>0x00224850 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163D10 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163D10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163D10</id>
-    <updated>2026-11-10T23:54:01Z</updated>
-    <summary>0x00163D10 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::VertexAnimController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00224830"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00224830</id>
+    <updated>2026-11-10T23:59:46Z</updated>
+    <summary>0x00224830 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163C70 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163C70"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163C70</id>
-    <updated>2026-11-10T23:54:00Z</updated>
-    <summary>0x00163C70 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::ParticleController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00224810"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00224810</id>
+    <updated>2026-11-10T23:59:46Z</updated>
+    <summary>0x00224810 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163BC0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163BC0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163BC0</id>
-    <updated>2026-11-10T23:53:59Z</updated>
-    <summary>0x00163BC0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::BillboardQuadGroupAnimationController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002247F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002247F0</id>
+    <updated>2026-11-10T23:59:44Z</updated>
+    <summary>0x002247F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163B30 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163B30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163B30</id>
-    <updated>2026-11-10T23:53:58Z</updated>
-    <summary>0x00163B30 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::TextureAnimationController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002247D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002247D0</id>
+    <updated>2026-11-10T23:59:43Z</updated>
+    <summary>0x002247D0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163AD0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163AD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163AD0</id>
-    <updated>2026-11-10T23:53:57Z</updated>
-    <summary>0x00163AD0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::CompDrawVisibilityAnimationController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002247B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002247B0</id>
+    <updated>2026-11-10T23:59:43Z</updated>
+    <summary>0x002247B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163A40 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163A40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163A40</id>
-    <updated>2026-11-10T23:53:56Z</updated>
-    <summary>0x00163A40 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::PoseAnimationController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00224790"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00224790</id>
+    <updated>2026-11-10T23:59:43Z</updated>
+    <summary>0x00224790 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_001639B0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001639B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001639B0</id>
-    <updated>2026-11-10T23:53:55Z</updated>
-    <summary>0x001639B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::ExpressionAnimationController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00224770"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00224770</id>
+    <updated>2026-11-10T23:59:43Z</updated>
+    <summary>0x00224770 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163920 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163920"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163920</id>
-    <updated>2026-11-10T23:53:54Z</updated>
-    <summary>0x00163920 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::CameraAnimationController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00224750"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00224750</id>
+    <updated>2026-11-10T23:59:43Z</updated>
+    <summary>0x00224750 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163870 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163870"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163870</id>
-    <updated>2026-11-10T23:53:52Z</updated>
-    <summary>0x00163870 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::ExpressionGroup&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00221380"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00221380</id>
+    <updated>2026-11-10T23:59:43Z</updated>
+    <summary>0x00221380 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_001637E0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001637E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001637E0</id>
-    <updated>2026-11-10T23:53:51Z</updated>
-    <summary>0x001637E0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::FrameController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00207F40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00207F40</id>
+    <updated>2026-11-10T23:59:42Z</updated>
+    <summary>0x00207F40 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163750 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163750"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163750</id>
-    <updated>2026-11-10T23:53:50Z</updated>
-    <summary>0x00163750 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Font&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002066A0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002066A0</id>
+    <updated>2026-11-10T23:59:41Z</updated>
+    <summary>0x002066A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_001636C0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001636C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001636C0</id>
-    <updated>2026-11-10T23:53:49Z</updated>
-    <summary>0x001636C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Locator&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001D70C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001D70C0</id>
+    <updated>2026-11-10T23:59:36Z</updated>
+    <summary>0x001D70C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163630 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163630"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163630</id>
-    <updated>2026-11-10T23:53:48Z</updated>
-    <summary>0x00163630 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Camera&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0017D150"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0017D150</id>
+    <updated>2026-11-10T23:59:36Z</updated>
+    <summary>0x0017D150 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_001635B0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001635B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001635B0</id>
-    <updated>2026-11-10T23:53:46Z</updated>
-    <summary>0x001635B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::VertexOffsetExpressionMixer&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0015E3F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0015E3F0</id>
+    <updated>2026-11-10T23:59:35Z</updated>
+    <summary>0x0015E3F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163550 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163550"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163550</id>
-    <updated>2026-11-10T23:53:45Z</updated>
-    <summary>0x00163550 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Animation&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000C6EB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000C6EB0</id>
+    <updated>2026-11-10T23:59:35Z</updated>
+    <summary>0x000C6EB0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_001634B0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001634B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001634B0</id>
-    <updated>2026-11-10T23:53:44Z</updated>
-    <summary>0x001634B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Skeleton&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0009D0B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0009D0B0</id>
+    <updated>2026-11-10T23:59:34Z</updated>
+    <summary>0x0009D0B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163410 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163410"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163410</id>
-    <updated>2026-11-10T23:53:43Z</updated>
-    <summary>0x00163410 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;audio::Clip&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00077500"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00077500</id>
+    <updated>2026-11-10T23:59:33Z</updated>
+    <summary>0x00077500 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00163380 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00163380"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00163380</id>
-    <updated>2026-11-10T23:53:42Z</updated>
-    <summary>0x00163380 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;audio::Mix&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0006DE00"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0006DE00</id>
+    <updated>2026-11-10T23:59:33Z</updated>
+    <summary>0x0006DE00 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D7760 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D7760"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D7760</id>
-    <updated>2026-11-10T23:53:41Z</updated>
-    <summary>0x000D7760 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::LightAnimationController&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0004BFD0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0004BFD0</id>
+    <updated>2026-11-10T23:59:33Z</updated>
+    <summary>0x0004BFD0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D76A0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D76A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D76A0</id>
-    <updated>2026-11-10T23:53:40Z</updated>
-    <summary>0x000D76A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::PolySkin&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00049450"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00049450</id>
+    <updated>2026-11-10T23:59:33Z</updated>
+    <summary>0x00049450 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D75E0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D75E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D75E0</id>
-    <updated>2026-11-10T23:53:39Z</updated>
-    <summary>0x000D75E0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;renderer::ShadowRenderable&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000431C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000431C0</id>
+    <updated>2026-11-10T23:59:33Z</updated>
+    <summary>0x000431C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D6EF0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D6EF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D6EF0</id>
-    <updated>2026-11-10T23:53:38Z</updated>
-    <summary>0x000D6EF0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Geometry&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000431A0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000431A0</id>
+    <updated>2026-11-10T23:59:32Z</updated>
+    <summary>0x000431A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D6B60 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D6B60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D6B60</id>
-    <updated>2026-11-10T23:53:37Z</updated>
-    <summary>0x000D6B60 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::ParticleSystem&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00043180"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00043180</id>
+    <updated>2026-11-10T23:59:32Z</updated>
+    <summary>0x00043180 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D63A0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D63A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D63A0</id>
-    <updated>2026-11-10T23:53:36Z</updated>
-    <summary>0x000D63A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::LightGroup&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00043160"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00043160</id>
+    <updated>2026-11-10T23:59:31Z</updated>
+    <summary>0x00043160 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D5F90 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D5F90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D5F90</id>
-    <updated>2026-11-10T23:53:35Z</updated>
-    <summary>0x000D5F90 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Texture&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00043140"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00043140</id>
+    <updated>2026-11-10T23:59:30Z</updated>
+    <summary>0x00043140 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D5C60 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D5C60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D5C60</id>
-    <updated>2026-11-10T23:53:34Z</updated>
-    <summary>0x000D5C60 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;renderer::SkyRenderable&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00043120"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00043120</id>
+    <updated>2026-11-10T23:59:30Z</updated>
+    <summary>0x00043120 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D5AD0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D5AD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D5AD0</id>
-    <updated>2026-11-10T23:53:32Z</updated>
-    <summary>0x000D5AD0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;renderer::PropRenderable&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00043100"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00043100</id>
+    <updated>2026-11-10T23:59:30Z</updated>
+    <summary>0x00043100 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D58A0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D58A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D58A0</id>
-    <updated>2026-11-10T23:53:31Z</updated>
-    <summary>0x000D58A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;renderer::ZonePkgRenderable&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000430E0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000430E0</id>
+    <updated>2026-11-10T23:59:29Z</updated>
+    <summary>0x000430E0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D5220 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D5220"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D5220</id>
-    <updated>2026-11-10T23:53:30Z</updated>
-    <summary>0x000D5220 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;renderer::CharacterRenderable&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000430C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000430C0</id>
+    <updated>2026-11-10T23:59:28Z</updated>
+    <summary>0x000430C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D4E80 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D4E80"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D4E80</id>
-    <updated>2026-11-10T23:53:29Z</updated>
-    <summary>0x000D4E80 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;renderer::VehicleRenderable&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000430A0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000430A0</id>
+    <updated>2026-11-10T23:59:27Z</updated>
+    <summary>0x000430A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000D4CF0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D4CF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D4CF0</id>
-    <updated>2026-11-10T23:53:24Z</updated>
-    <summary>0x000D4CF0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::CompositeDrawable&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00043080"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00043080</id>
+    <updated>2026-11-10T23:59:26Z</updated>
+    <summary>0x00043080 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000CB5C0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000CB5C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000CB5C0</id>
-    <updated>2026-11-10T23:53:22Z</updated>
-    <summary>0x000CB5C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Shader&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00043060"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00043060</id>
+    <updated>2026-11-10T23:59:26Z</updated>
+    <summary>0x00043060 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000CB560 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000CB560"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000CB560</id>
-    <updated>2026-11-10T23:53:22Z</updated>
-    <summary>0x000CB560 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;renderer::StatePropRenderable&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00043020"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00043020</id>
+    <updated>2026-11-10T23:59:25Z</updated>
+    <summary>0x00043020 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_000CB500 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000CB500"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000CB500</id>
-    <updated>2026-11-10T23:53:20Z</updated>
-    <summary>0x000CB500 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::DrawableHierarchy&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00039560"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00039560</id>
+    <updated>2026-11-10T23:59:25Z</updated>
+    <summary>0x00039560 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_0023E750 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0023E750"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0023E750</id>
-    <updated>2026-11-10T23:53:19Z</updated>
-    <summary>0x0023E750 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::SpriteObject&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00023A10"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00023A10</id>
+    <updated>2026-11-10T23:59:24Z</updated>
+    <summary>0x00023A10 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_0023DED0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0023DED0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0023DED0</id>
-    <updated>2026-11-10T23:53:18Z</updated>
-    <summary>0x0023DED0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Locator&gt;::vfunc_00 (Xbox, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001D0A60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001D0A60</id>
+    <updated>2026-11-10T23:59:23Z</updated>
+    <summary>0x001D0A60 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00185D60 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185D60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185D60</id>
-    <updated>2026-11-10T23:53:17Z</updated>
-    <summary>0x00185D60 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::Camera&gt;::vfunc_00 (Xbox, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001A6F30"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001A6F30</id>
+    <updated>2026-11-10T23:59:23Z</updated>
+    <summary>0x001A6F30 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00185D00 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185D00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185D00</id>
-    <updated>2026-11-10T23:53:16Z</updated>
-    <summary>0x00185D00 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;fight::Branch&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0001FF40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0001FF40</id>
+    <updated>2026-11-10T23:59:23Z</updated>
+    <summary>0x0001FF40 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00185C50 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185C50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185C50</id>
-    <updated>2026-11-10T23:53:15Z</updated>
-    <summary>0x00185C50 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;ravenphysics::CollisionObject&gt;::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000144A0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000144A0</id>
+    <updated>2026-11-10T23:59:23Z</updated>
+    <summary>0x000144A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00185BB0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185BB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185BB0</id>
-    <updated>2026-11-10T23:53:14Z</updated>
-    <summary>0x00185BB0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>content::LoadInventory::DynamicCaster&lt;pure3d::VertexOffsetExpressionMixer&gt;::vfunc_00 (Xbox, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0017EEA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0017EEA0</id>
+    <updated>2026-11-10T23:59:22Z</updated>
+    <summary>0x0017EEA0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

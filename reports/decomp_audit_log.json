@@ -1,5 +1,53 @@
 [
   {
+    "time": "2026-11-11 00:00:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CollisionBehaviourTypeGroup::vfunc_10",
+    "va": "0x002A9290",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:59:54",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "70 look-alike(s) of content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00",
+    "va": "0x00013900",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:59:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "71 look-alike(s) of SoundManager::SoundPlayerHandle::vfunc_00",
+    "va": "0x00077F00",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:58:10",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "64 look-alike(s) of SoundEntityLoader::vfunc_04",
+    "va": "0x00064FA0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:56:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "86 look-alike(s) of SpeedCondition::vfunc_08",
+    "va": "0x000DD280",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:55:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "17 look-alike(s) of core::MemoryAllocatorMalloc::vfunc_12",
+    "va": "0x0028D100",
+    "bytes": "same code, own addresses"
+  },
+  {
     "time": "2026-11-10 23:54:23",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",

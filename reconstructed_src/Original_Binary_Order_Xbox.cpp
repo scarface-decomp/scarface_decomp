@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1,320 of 19,534 functions matched (6.76%). NOT COMPLETE YET.
-// The 18,214 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 1,449 of 19,534 functions matched (7.42%). NOT COMPLETE YET.
+// The 18,085 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -857,7 +857,35 @@ int __cdecl sub_00020B30(void)
 // [TODO] 0x00022130 sub_00022130 (25 B)
 // [TODO] 0x00022150 sub_00022150 (82 B)
 // [TODO] 0x000221B0 sub_000221B0 (26 B)
-// [TODO] 0x000221D0 content::LoadInventory::DynamicCaster<fight::Branch>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<fight::Branch>::vfunc_00 (0x000221D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<fight::Branch>::vfunc_00 (0x000221D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041A1C0[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace fight { class Branch; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<fight::Branch>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041A1C0, 0);
+}
+
 // [TODO] 0x000221F0 sub_000221F0 (570 B)
 // [TODO] 0x00022430 sub_00022430 (149 B)
 // [TODO] 0x000224D0 sub_000224D0 (9 B)
@@ -1775,7 +1803,35 @@ template <> void ConcreteClassRep<FEP3DObject>::vfunc_02()
 // [TODO] 0x00025AD0 sub_00025AD0 (36 B)
 // [TODO] 0x00025B00 sub_00025B00 (225 B)
 // [TODO] 0x00025BF0 sub_00025BF0 (94 B)
-// [TODO] 0x00025C50 content::LoadInventory::DynamicCaster<pure3d::SpriteObject>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::SpriteObject>::vfunc_00 (0x00025C50, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::SpriteObject>::vfunc_00 (0x00025C50, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041AFFC[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class SpriteObject; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::SpriteObject>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041AFFC, 0);
+}
+
 // [TODO] 0x00025C70 sub_00025C70 (575 B)
 // [TODO] 0x00025EB0 sub_00025EB0 (197 B)
 // [TODO] 0x00025F80 sub_00025F80 (144 B)
@@ -3657,7 +3713,35 @@ void __cdecl sub_0003D580(void)
 // [TODO] 0x0003DAD0 sub_0003DAD0 (42 B)
 // [TODO] 0x0003DB00 sub_0003DB00 (34 B)
 // [TODO] 0x0003DB30 sub_0003DB30 (123 B)
-// [TODO] 0x0003DBB0 content::LoadInventory::DynamicCaster<pure3d::DrawableHierarchy>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::DrawableHierarchy>::vfunc_00 (0x0003DBB0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::DrawableHierarchy>::vfunc_00 (0x0003DBB0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041C738[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class DrawableHierarchy; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::DrawableHierarchy>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041C738, 0);
+}
+
 // [TODO] 0x0003DBD0 sub_0003DBD0 (33 B)
 // [TODO] 0x0003DC00 sub_0003DC00 (1764 B)
 // [TODO] 0x0003E2F0 sub_0003E2F0 (216 B)
@@ -4106,18 +4190,326 @@ void Class_00049870::sub_00049870()
 // [TODO] 0x00049A90 sub_00049A90 (77 B)
 // [TODO] 0x00049AE0 sub_00049AE0 (27 B)
 // [TODO] 0x00049B00 sub_00049B00 (27 B)
-// [TODO] 0x00049B20 content::LoadInventory::DynamicCaster<renderer::StatePropRenderable>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<renderer::StatePropRenderable>::vfunc_00 (0x00049B20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<renderer::StatePropRenderable>::vfunc_00 (0x00049B20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041CEC4[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace renderer { class StatePropRenderable; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<renderer::StatePropRenderable>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041CEC4, 0);
+}
+
 // [TODO] 0x00049B40 content::LoadInventory::DynamicCaster<pure3d::prop::StatePropData>::vfunc_00 (30 B)
-// [TODO] 0x00049B60 content::LoadInventory::DynamicCaster<pure3d::Shader>::vfunc_00 (30 B)
-// [TODO] 0x00049B80 content::LoadInventory::DynamicCaster<pure3d::CompositeDrawable>::vfunc_00 (30 B)
-// [TODO] 0x00049BA0 content::LoadInventory::DynamicCaster<renderer::VehicleRenderable>::vfunc_00 (30 B)
-// [TODO] 0x00049BC0 content::LoadInventory::DynamicCaster<renderer::CharacterRenderable>::vfunc_00 (30 B)
-// [TODO] 0x00049BE0 content::LoadInventory::DynamicCaster<renderer::ZonePkgRenderable>::vfunc_00 (30 B)
-// [TODO] 0x00049C00 content::LoadInventory::DynamicCaster<renderer::SkyRenderable>::vfunc_00 (30 B)
-// [TODO] 0x00049C20 content::LoadInventory::DynamicCaster<pure3d::Texture>::vfunc_00 (30 B)
-// [TODO] 0x00049C40 content::LoadInventory::DynamicCaster<pure3d::LightGroup>::vfunc_00 (30 B)
-// [TODO] 0x00049C60 content::LoadInventory::DynamicCaster<pure3d::ParticleSystem>::vfunc_00 (30 B)
-// [TODO] 0x00049C80 content::LoadInventory::DynamicCaster<renderer::ShadowRenderable>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::Shader>::vfunc_00 (0x00049B60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::Shader>::vfunc_00 (0x00049B60, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041CF18[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class Shader; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::Shader>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041CF18, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::CompositeDrawable>::vfunc_00 (0x00049B80, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::CompositeDrawable>::vfunc_00 (0x00049B80, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041CF34[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class CompositeDrawable; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::CompositeDrawable>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041CF34, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<renderer::VehicleRenderable>::vfunc_00 (0x00049BA0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<renderer::VehicleRenderable>::vfunc_00 (0x00049BA0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041CF5C[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace renderer { class VehicleRenderable; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<renderer::VehicleRenderable>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041CF5C, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<renderer::CharacterRenderable>::vfunc_00 (0x00049BC0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<renderer::CharacterRenderable>::vfunc_00 (0x00049BC0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041CF88[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace renderer { class CharacterRenderable; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<renderer::CharacterRenderable>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041CF88, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<renderer::ZonePkgRenderable>::vfunc_00 (0x00049BE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<renderer::ZonePkgRenderable>::vfunc_00 (0x00049BE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041CFB4[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace renderer { class ZonePkgRenderable; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<renderer::ZonePkgRenderable>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041CFB4, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<renderer::SkyRenderable>::vfunc_00 (0x00049C00, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<renderer::SkyRenderable>::vfunc_00 (0x00049C00, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041D008[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace renderer { class SkyRenderable; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<renderer::SkyRenderable>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041D008, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::Texture>::vfunc_00 (0x00049C20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::Texture>::vfunc_00 (0x00049C20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041D030[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class Texture; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::Texture>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041D030, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::LightGroup>::vfunc_00 (0x00049C40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::LightGroup>::vfunc_00 (0x00049C40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041D050[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class LightGroup; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::LightGroup>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041D050, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::ParticleSystem>::vfunc_00 (0x00049C60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::ParticleSystem>::vfunc_00 (0x00049C60, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041C760[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class ParticleSystem; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::ParticleSystem>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041C760, 0);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<renderer::ShadowRenderable>::vfunc_00 (0x00049C80, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<renderer::ShadowRenderable>::vfunc_00 (0x00049C80, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041D070[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace renderer { class ShadowRenderable; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<renderer::ShadowRenderable>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041D070, 0);
+}
+
 // [TODO] 0x00049CA0 sub_00049CA0 (38 B)
 // [TODO] 0x00049CD0 sub_00049CD0 (85 B)
 // ============================================================================
@@ -4202,7 +4594,35 @@ TraceFireHandle* TraceFireHandle::vfunc_00(int a1)
 // [TODO] 0x0004A580 sub_0004A580 (166 B)
 // [TODO] 0x0004A630 sub_0004A630 (51 B)
 // [TODO] 0x0004A670 sub_0004A670 (207 B)
-// [TODO] 0x0004A740 content::LoadInventory::DynamicCaster<pure3d::Geometry>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::Geometry>::vfunc_00 (0x0004A740, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::Geometry>::vfunc_00 (0x0004A740, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041D130[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class Geometry; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::Geometry>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041D130, 0);
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::TargaHandler::vfunc_07 (0x0004A760, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -4480,7 +4900,35 @@ void __cdecl sub_00050BB0(void)
 // [TODO] 0x00050FC0 sub_00050FC0 (81 B)
 // [TODO] 0x00051020 renderer::CharacterRenderable::vfunc_09 (246 B)
 // [TODO] 0x00051120 sub_00051120 (108 B)
-// [TODO] 0x00051190 content::LoadInventory::DynamicCaster<pure3d::PolySkin>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::PolySkin>::vfunc_00 (0x00051190, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::PolySkin>::vfunc_00 (0x00051190, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041D390[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class PolySkin; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::PolySkin>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041D390, 0);
+}
+
 // ============================================================================
 // [VERIFIED] renderer::CharacterRenderable::vfunc_03 (0x000511B0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -4715,7 +5163,35 @@ InstancePrimitive* InstancePrimitive::vfunc_03(int a1)
 // [TODO] 0x00054840 sub_00054840 (64 B)
 // [TODO] 0x00054880 sub_00054880 (97 B)
 // [TODO] 0x000548F0 sub_000548F0 (88 B)
-// [TODO] 0x00054950 content::LoadInventory::DynamicCaster<pure3d::LightAnimationController>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::LightAnimationController>::vfunc_00 (0x00054950, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::LightAnimationController>::vfunc_00 (0x00054950, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041D680[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class LightAnimationController; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::LightAnimationController>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041D680, 0);
+}
+
 // [TODO] 0x00054970 sub_00054970 (103 B)
 // [TODO] 0x000549E0 sub_000549E0 (229 B)
 // [TODO] 0x00054AD0 sub_00054AD0 (111 B)
@@ -4906,7 +5382,35 @@ OceanPrimitive* OceanPrimitive::vfunc_03(int a1)
 // [TODO] 0x00055FE0 sub_00055FE0 (85 B)
 // [TODO] 0x00056040 renderer::ZonePkgRenderable::vfunc_08 (73 B)
 // [TODO] 0x00056090 sub_00056090 (329 B)
-// [TODO] 0x000561E0 content::LoadInventory::DynamicCaster<renderer::WorldGeoRenderable>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<renderer::WorldGeoRenderable>::vfunc_00 (0x000561E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<renderer::WorldGeoRenderable>::vfunc_00 (0x000561E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041D834[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace renderer { class WorldGeoRenderable; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<renderer::WorldGeoRenderable>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041D834, 0);
+}
+
 // ============================================================================
 // [VERIFIED] renderer::WorldGeoRenderable::vfunc_03 (0x00056200, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9140,7 +9644,35 @@ void Class_000A6EF0::sub_000A6EF0()
 // [TODO] 0x000A8F40 sub_000A8F40 (112 B)
 // [TODO] 0x000A8FB0 sub_000A8FB0 (62 B)
 // [TODO] 0x000A8FF0 sub_000A8FF0 (66 B)
-// [TODO] 0x000A9040 content::LoadInventory::DynamicCaster<pure3d::Skeleton>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::Skeleton>::vfunc_00 (0x000A9040, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::Skeleton>::vfunc_00 (0x000A9040, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_00424118[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class Skeleton; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::Skeleton>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_00424118, 0);
+}
+
 // [TODO] 0x000A9060 sub_000A9060 (243 B)
 // [TODO] 0x000A9160 sub_000A9160 (33 B)
 // [TODO] 0x000A9190 sub_000A9190 (67 B)
@@ -10681,7 +11213,35 @@ NISPartition* NISPartition::vfunc_00(int a1)
 // [TODO] 0x000D18F0 sub_000D18F0 (122 B)
 // [TODO] 0x000D1970 sub_000D1970 (80 B)
 // [TODO] 0x000D19C0 sub_000D19C0 (89 B)
-// [TODO] 0x000D1A20 content::LoadInventory::DynamicCaster<pure3d::ShadowSkin>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::ShadowSkin>::vfunc_00 (0x000D1A20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::ShadowSkin>::vfunc_00 (0x000D1A20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_00424DCC[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class ShadowSkin; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::ShadowSkin>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_00424DCC, 0);
+}
+
 // [TODO] 0x000D1A40 sub_000D1A40 (165 B)
 // [TODO] 0x000D1AF0 sub_000D1AF0 (559 B)
 // [TODO] 0x000D1D20 sub_000D1D20 (293 B)
@@ -10830,7 +11390,35 @@ void __cdecl sub_000D7FE0(void)
 // [TODO] 0x000D8A30 sub_000D8A30 (72 B)
 // [TODO] 0x000D8A80 sub_000D8A80 (11 B)
 // [TODO] 0x000D8A90 sub_000D8A90 (15 B)
-// [TODO] 0x000D8AA0 content::LoadInventory::DynamicCaster<pure3d::Animation>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::Animation>::vfunc_00 (0x000D8AA0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::Animation>::vfunc_00 (0x000D8AA0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_00424FF0[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class Animation; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::Animation>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_00424FF0, 0);
+}
+
 // [TODO] 0x000D8AC0 sub_000D8AC0 (29 B)
 // [TODO] 0x000D8AE0 sub_000D8AE0 (55 B)
 // [TODO] 0x000D8B20 sub_000D8B20 (248 B)
@@ -10992,7 +11580,37 @@ void __cdecl sub_000DD2C0(void)
     sub_0023EAD0((int)DAT_0048775C, (int)DAT_00487760);
 }
 
-// [TODO] 0x000DD2E0 DistanceToTargetCondition::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] DistanceToTargetCondition::vfunc_08 (0x000DD2E0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// DistanceToTargetCondition::vfunc_08 (0x000DD2E0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048775C;
+
+class DistanceToTargetCondition
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int DistanceToTargetCondition::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048775C + (a1 * 4));
+}
+
 // [TODO] 0x000DD2F0 sub_000DD2F0 (33 B)
 // ============================================================================
 // [VERIFIED] sub_000DD320 (0x000DD320, 19 B)
@@ -11013,7 +11631,37 @@ void __cdecl sub_000DD320(void)
     sub_0023EAD0((int)DAT_00487764, (int)DAT_00487768);
 }
 
-// [TODO] 0x000DD340 WeaponGroupCondition::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] WeaponGroupCondition::vfunc_08 (0x000DD340, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// WeaponGroupCondition::vfunc_08 (0x000DD340, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00487764;
+
+class WeaponGroupCondition
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int WeaponGroupCondition::vfunc_08(int a1)
+{
+    return *(int*)(DAT_00487764 + (a1 * 4));
+}
+
 // [TODO] 0x000DD350 sub_000DD350 (25 B)
 // [TODO] 0x000DD370 sub_000DD370 (31 B)
 // [TODO] 0x000DD390 AnimationStateCondition::vfunc_08 (25 B)
@@ -13249,7 +13897,37 @@ void __cdecl sub_000E7370(void)
     sub_0023EAD0((int)DAT_0048785C, (int)DAT_00487860);
 }
 
-// [TODO] 0x000E7390 Animation360Track::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] Animation360Track::vfunc_08 (0x000E7390, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// Animation360Track::vfunc_08 (0x000E7390, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048785C;
+
+class Animation360Track
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int Animation360Track::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048785C + (a1 * 4));
+}
+
 // [TODO] 0x000E73A0 Animation360Track::vfunc_20 (42 B)
 // [TODO] 0x000E73D0 Animation360Track::vfunc_22 (39 B)
 // [TODO] 0x000E7400 Animation360Track::vfunc_03 (46 B)
@@ -13276,7 +13954,37 @@ void __cdecl sub_000E7510(void)
     sub_0023EAD0((int)DAT_00487868, (int)DAT_0048786C);
 }
 
-// [TODO] 0x000E7530 AnimationTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] AnimationTrack::vfunc_08 (0x000E7530, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// AnimationTrack::vfunc_08 (0x000E7530, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00487868;
+
+class AnimationTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int AnimationTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_00487868 + (a1 * 4));
+}
+
 // [TODO] 0x000E7540 AnimationTrack::vfunc_20 (45 B)
 // [TODO] 0x000E7570 sub_000E7570 (16 B)
 // [TODO] 0x000E7580 sub_000E7580 (16 B)
@@ -13308,7 +14016,37 @@ void __cdecl sub_000E78A0(void)
     sub_0023EAD0((int)DAT_00487870, (int)DAT_00487874);
 }
 
-// [TODO] 0x000E78C0 AnimationRetargetingTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] AnimationRetargetingTrack::vfunc_08 (0x000E78C0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// AnimationRetargetingTrack::vfunc_08 (0x000E78C0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00487870;
+
+class AnimationRetargetingTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int AnimationRetargetingTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_00487870 + (a1 * 4));
+}
+
 // [TODO] 0x000E78D0 AnimationRetargetingTrack::vfunc_33 (6 B)
 // [TODO] 0x000E78E0 sub_000E78E0 (4 B)
 // [TODO] 0x000E78F0 sub_000E78F0 (12 B)
@@ -13376,7 +14114,37 @@ void __cdecl sub_000E7D80(void)
     sub_0023EAD0((int)DAT_0048787C, (int)DAT_00487880);
 }
 
-// [TODO] 0x000E7DA0 AnimationRewinderTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] AnimationRewinderTrack::vfunc_08 (0x000E7DA0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// AnimationRewinderTrack::vfunc_08 (0x000E7DA0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048787C;
+
+class AnimationRewinderTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int AnimationRewinderTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048787C + (a1 * 4));
+}
+
 // ============================================================================
 // [VERIFIED] AnimationRewinderTrack::vfunc_03 (0x000E7DB0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -13430,7 +14198,37 @@ void __cdecl sub_000E7F60(void)
     sub_0023EAD0((int)DAT_00487888, (int)DAT_0048788C);
 }
 
-// [TODO] 0x000E7F80 BlendTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] BlendTrack::vfunc_08 (0x000E7F80, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// BlendTrack::vfunc_08 (0x000E7F80, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00487888;
+
+class BlendTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int BlendTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_00487888 + (a1 * 4));
+}
+
 // [TODO] 0x000E7F90 BlendTrack::vfunc_20 (42 B)
 // ============================================================================
 // [VERIFIED] BlendTrack::vfunc_03 (0x000E7FC0, 36 B)
@@ -13487,7 +14285,37 @@ void __cdecl sub_000E80F0(void)
     sub_0023EAD0((int)DAT_00487894, (int)DAT_00487898);
 }
 
-// [TODO] 0x000E8110 CameraShakeTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] CameraShakeTrack::vfunc_08 (0x000E8110, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// CameraShakeTrack::vfunc_08 (0x000E8110, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00487894;
+
+class CameraShakeTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int CameraShakeTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_00487894 + (a1 * 4));
+}
+
 // [TODO] 0x000E8120 CameraShakeTrack::vfunc_20 (46 B)
 // ============================================================================
 // [VERIFIED] CameraShakeTrack::vfunc_03 (0x000E8150, 36 B)
@@ -13542,7 +14370,37 @@ void __cdecl sub_000E8350(void)
     sub_0023EAD0((int)DAT_0048789C, (int)DAT_004878A0);
 }
 
-// [TODO] 0x000E8370 JointCollisionTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] JointCollisionTrack::vfunc_08 (0x000E8370, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// JointCollisionTrack::vfunc_08 (0x000E8370, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048789C;
+
+class JointCollisionTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int JointCollisionTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048789C + (a1 * 4));
+}
+
 // [TODO] 0x000E8380 JointCollisionTrack::vfunc_20 (46 B)
 // [TODO] 0x000E83B0 JointCollisionTrack::vfunc_24 (30 B)
 // [TODO] 0x000E83D0 JointCollisionTrack::vfunc_26 (74 B)
@@ -13569,7 +14427,37 @@ void __cdecl sub_000E8550(void)
     sub_0023EAD0((int)DAT_004878A8, (int)DAT_004878AC);
 }
 
-// [TODO] 0x000E8570 DismemberTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] DismemberTrack::vfunc_08 (0x000E8570, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// DismemberTrack::vfunc_08 (0x000E8570, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004878A8;
+
+class DismemberTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int DismemberTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_004878A8 + (a1 * 4));
+}
+
 // [TODO] 0x000E8580 DismemberTrack::vfunc_20 (42 B)
 // [TODO] 0x000E85B0 DismemberTrack::vfunc_33 (6 B)
 // [TODO] 0x000E85C0 sub_000E85C0 (30 B)
@@ -13622,7 +14510,37 @@ void __cdecl sub_000E89D0(void)
     sub_0023EAD0((int)DAT_004878B4, (int)DAT_004878B8);
 }
 
-// [TODO] 0x000E89F0 DramaticCameraTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] DramaticCameraTrack::vfunc_08 (0x000E89F0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// DramaticCameraTrack::vfunc_08 (0x000E89F0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004878B4;
+
+class DramaticCameraTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int DramaticCameraTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_004878B4 + (a1 * 4));
+}
+
 // [TODO] 0x000E8A00 DramaticCameraTrack::vfunc_20 (46 B)
 // [TODO] 0x000E8A30 sub_000E8A30 (28 B)
 // [TODO] 0x000E8A50 sub_000E8A50 (32 B)
@@ -13654,7 +14572,37 @@ void __cdecl sub_000E9190(void)
     sub_0023EAD0((int)DAT_004878BC, (int)DAT_004878C0);
 }
 
-// [TODO] 0x000E91B0 ExitConditionTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] ExitConditionTrack::vfunc_08 (0x000E91B0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// ExitConditionTrack::vfunc_08 (0x000E91B0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004878BC;
+
+class ExitConditionTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int ExitConditionTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_004878BC + (a1 * 4));
+}
+
 // [TODO] 0x000E91C0 sub_000E91C0 (78 B)
 // [TODO] 0x000E9210 ExitConditionTrack::vfunc_23 (4 B)
 // [TODO] 0x000E9220 ExitConditionTrack::vfunc_24 (16 B)
@@ -13687,7 +14635,37 @@ void __cdecl sub_000E9580(void)
     sub_0023EAD0((int)DAT_004878CC, (int)DAT_004878D0);
 }
 
-// [TODO] 0x000E95A0 LayeredAnimationTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] LayeredAnimationTrack::vfunc_08 (0x000E95A0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// LayeredAnimationTrack::vfunc_08 (0x000E95A0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004878CC;
+
+class LayeredAnimationTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int LayeredAnimationTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_004878CC + (a1 * 4));
+}
+
 // [TODO] 0x000E95B0 LayeredAnimationTrack::vfunc_20 (42 B)
 // [TODO] 0x000E95E0 sub_000E95E0 (4 B)
 // [TODO] 0x000E95F0 sub_000E95F0 (30 B)
@@ -13824,7 +14802,37 @@ void __cdecl sub_000E9C60(void)
     sub_0023EAD0((int)DAT_004879AC, (int)DAT_004879B0);
 }
 
-// [TODO] 0x000E9C80 SoundPlayTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] SoundPlayTrack::vfunc_08 (0x000E9C80, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// SoundPlayTrack::vfunc_08 (0x000E9C80, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004879AC;
+
+class SoundPlayTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int SoundPlayTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_004879AC + (a1 * 4));
+}
+
 // [TODO] 0x000E9C90 sub_000E9C90 (33 B)
 // [TODO] 0x000E9CC0 sub_000E9CC0 (14 B)
 // [TODO] 0x000E9CD0 sub_000E9CD0 (8 B)
@@ -13848,7 +14856,37 @@ void __cdecl sub_000E9D10(void)
     sub_0023EAD0((int)DAT_004879B4, (int)DAT_004879B8);
 }
 
-// [TODO] 0x000E9D30 SoundCueTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] SoundCueTrack::vfunc_08 (0x000E9D30, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// SoundCueTrack::vfunc_08 (0x000E9D30, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004879B4;
+
+class SoundCueTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int SoundCueTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_004879B4 + (a1 * 4));
+}
+
 // [TODO] 0x000E9D40 sub_000E9D40 (33 B)
 // [TODO] 0x000E9D70 sub_000E9D70 (14 B)
 // [TODO] 0x000E9D80 SoundCueTrack::vfunc_20 (46 B)
@@ -13871,7 +14909,37 @@ void __cdecl sub_000E9DB0(void)
     sub_0023EAD0((int)DAT_004879BC, (int)DAT_004879C0);
 }
 
-// [TODO] 0x000E9DD0 SoundFadeTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] SoundFadeTrack::vfunc_08 (0x000E9DD0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// SoundFadeTrack::vfunc_08 (0x000E9DD0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004879BC;
+
+class SoundFadeTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int SoundFadeTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_004879BC + (a1 * 4));
+}
+
 // [TODO] 0x000E9DE0 sub_000E9DE0 (49 B)
 // [TODO] 0x000E9E20 sub_000E9E20 (4 B)
 // [TODO] 0x000E9E30 sub_000E9E30 (31 B)
@@ -15210,7 +16278,33 @@ void Class_001096D0::sub_001096D0()
 // [TODO] 0x00109720 sub_00109720 (81 B)
 // [TODO] 0x00109780 AITask_PedFlee::vfunc_37 (202 B)
 // [TODO] 0x00109850 AITask_PedFlee::vfunc_41 (172 B)
-// [TODO] 0x00109900 AITask_ReactToStaggeredStim::vfunc_37 (5 B)
+// ============================================================================
+// [VERIFIED] AITask_ReactToStaggeredStim::vfunc_37 (0x00109900, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ReactToStaggeredStim::vfunc_37 (0x00109900, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00106610(void);
+
+class AITask_ReactToStaggeredStim
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_37();
+};
+
+void AITask_ReactToStaggeredStim::vfunc_37()
+{
+    sub_00106610();
+}
+
 // [TODO] 0x00109910 AITask_ReactToStaggeredStim::vfunc_39 (73 B)
 // [TODO] 0x00109960 AITask_ReactToStaggeredStim::vfunc_40 (502 B)
 // [TODO] 0x00109B60 AITask_ReactToStaggeredStim::vfunc_41 (262 B)
@@ -15285,7 +16379,33 @@ void* AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_00()
 // [TODO] 0x0010A280 sub_0010A280 (103 B)
 // [TODO] 0x0010A2F0 sub_0010A2F0 (286 B)
 // [TODO] 0x0010A410 sub_0010A410 (430 B)
-// [TODO] 0x0010A5C0 AITask_SharkInteractWithBoat::vfunc_48 (5 B)
+// ============================================================================
+// [VERIFIED] AITask_SharkInteractWithBoat::vfunc_48 (0x0010A5C0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_SharkInteractWithBoat::vfunc_48 (0x0010A5C0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0010A2F0(void);
+
+class AITask_SharkInteractWithBoat
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_48();
+};
+
+void AITask_SharkInteractWithBoat::vfunc_48()
+{
+    sub_0010A2F0();
+}
+
 // [TODO] 0x0010A5D0 sub_0010A5D0 (60 B)
 // [TODO] 0x0010A610 sub_0010A610 (126 B)
 // [TODO] 0x0010A690 sub_0010A690 (87 B)
@@ -18255,7 +19375,33 @@ void* AITask_IdleChatInitiate::vfunc_00()
     return DAT_00429268;
 }
 
-// [TODO] 0x0011C9A0 AITask_IdleChatInitiate::vfunc_57 (5 B)
+// ============================================================================
+// [VERIFIED] AITask_IdleChatInitiate::vfunc_57 (0x0011C9A0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_IdleChatInitiate::vfunc_57 (0x0011C9A0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00126130(void);
+
+class AITask_IdleChatInitiate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_57();
+};
+
+void AITask_IdleChatInitiate::vfunc_57()
+{
+    sub_00126130();
+}
+
 // [TODO] 0x0011C9B0 ConcreteClassRep<AITask_ProvokeAnotherPed>::vfunc_01 (62 B)
 // ============================================================================
 // [VERIFIED] AITask_ProvokeAnotherPed::vfunc_00 (0x0011C9F0, 6 B)
@@ -18280,7 +19426,33 @@ void* AITask_ProvokeAnotherPed::vfunc_00()
     return DAT_00429294;
 }
 
-// [TODO] 0x0011CA00 AITask_ProvokeAnotherPed::vfunc_57 (5 B)
+// ============================================================================
+// [VERIFIED] AITask_ProvokeAnotherPed::vfunc_57 (0x0011CA00, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ProvokeAnotherPed::vfunc_57 (0x0011CA00, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001261A0(void);
+
+class AITask_ProvokeAnotherPed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_57();
+};
+
+void AITask_ProvokeAnotherPed::vfunc_57()
+{
+    sub_001261A0();
+}
+
 // [TODO] 0x0011CA10 AITask_CodeAbstract::vfunc_01 (40 B)
 // [TODO] 0x0011CA40 sub_0011CA40 (23 B)
 // [TODO] 0x0011CA60 sub_0011CA60 (22 B)
@@ -19028,7 +20200,33 @@ void* AITask_GawkAtCorpse::vfunc_00()
 // [TODO] 0x001253D0 AITask_DealerAttractTony::vfunc_00 (47 B)
 // [TODO] 0x00125400 AITask_DealerAttractTony::vfunc_47 (56 B)
 // [TODO] 0x00125440 AITask_DealerAttractTony::vfunc_53 (56 B)
-// [TODO] 0x00125480 AITask_DealerWarnTony::vfunc_47 (5 B)
+// ============================================================================
+// [VERIFIED] AITask_DealerWarnTony::vfunc_47 (0x00125480, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_DealerWarnTony::vfunc_47 (0x00125480, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00127B70(void);
+
+class AITask_DealerWarnTony
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_47();
+};
+
+void AITask_DealerWarnTony::vfunc_47()
+{
+    sub_00127B70();
+}
+
 // [TODO] 0x00125490 AITask_DealerWarnTony::vfunc_53 (56 B)
 // [TODO] 0x001254D0 AITask_DealerWarnTony::vfunc_49 (25 B)
 // [TODO] 0x001254F0 AITask_DealerWarnTony::vfunc_50 (25 B)
@@ -19216,7 +20414,33 @@ void* AITask_ProvokeAnotherPed::vfunc_61()
 // [TODO] 0x001261A0 sub_001261A0 (6 B)
 // [TODO] 0x001261B0 AITask_ProvokeAnotherPed::vfunc_52 (237 B)
 // [TODO] 0x001262A0 AITask_ProvokeAnotherPed::vfunc_62 (6 B)
-// [TODO] 0x001262B0 AITask_ProvokeAnotherPed::vfunc_58 (5 B)
+// ============================================================================
+// [VERIFIED] AITask_ProvokeAnotherPed::vfunc_58 (0x001262B0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ProvokeAnotherPed::vfunc_58 (0x001262B0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00128CC0(void);
+
+class AITask_ProvokeAnotherPed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_58();
+};
+
+void AITask_ProvokeAnotherPed::vfunc_58()
+{
+    sub_00128CC0();
+}
+
 // [TODO] 0x001262C0 AITask_IdleChatResponse::vfunc_49 (14 B)
 // [TODO] 0x001262D0 AITask_IdleChatResponse::vfunc_52 (128 B)
 // [TODO] 0x00126350 AITask_IdleChatResponse::vfunc_23 (26 B)
@@ -19265,7 +20489,33 @@ void __cdecl sub_00126520(void)
 // [TODO] 0x00126CF0 sub_00126CF0 (270 B)
 // [TODO] 0x00126E00 AITask_IdleChatResponse::vfunc_44 (59 B)
 // [TODO] 0x00126E40 AITask_IdleChatInitiate::vfunc_45 (104 B)
-// [TODO] 0x00126EB0 AITask_IdleChatInitiate::vfunc_56 (5 B)
+// ============================================================================
+// [VERIFIED] AITask_IdleChatInitiate::vfunc_56 (0x00126EB0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_IdleChatInitiate::vfunc_56 (0x00126EB0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00126CF0(void);
+
+class AITask_IdleChatInitiate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_56();
+};
+
+void AITask_IdleChatInitiate::vfunc_56()
+{
+    sub_00126CF0();
+}
+
 // [TODO] 0x00126EC0 sub_00126EC0 (38 B)
 // [TODO] 0x00126EF0 sub_00126EF0 (53 B)
 // [TODO] 0x00126F30 sub_00126F30 (74 B)
@@ -20481,7 +21731,33 @@ void* BoatAITask_Enemy::vfunc_00()
 // [TODO] 0x0013CE10 BoatAITask_Enemy::vfunc_30 (41 B)
 // [TODO] 0x0013CE40 BoatAITask_Enemy::vfunc_33 (24 B)
 // [TODO] 0x0013CE60 sub_0013CE60 (26 B)
-// [TODO] 0x0013CE80 CarAIBehavior::vfunc_32 (5 B)
+// ============================================================================
+// [VERIFIED] CarAIBehavior::vfunc_32 (0x0013CE80, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAIBehavior::vfunc_32 (0x0013CE80, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00104E10(void);
+
+class CarAIBehavior
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_32();
+};
+
+void CarAIBehavior::vfunc_32()
+{
+    sub_00104E10();
+}
+
 // [TODO] 0x0013CE90 CarAIBehavior::vfunc_36 (104 B)
 // [TODO] 0x0013CF00 sub_0013CF00 (59 B)
 // [TODO] 0x0013CF40 sub_0013CF40 (11 B)
@@ -21550,7 +22826,33 @@ BoundarySphere* BoundarySphere::vfunc_01(int a1)
 
 // [TODO] 0x0014A6F0 ConcreteClassRep<BoundarySphere>::vfunc_01 (42 B)
 // [TODO] 0x0014A720 ConcreteClassRep<BoundarySphere>::vfunc_02 (58 B)
-// [TODO] 0x0014A760 IntersectionObject::vfunc_30 (5 B)
+// ============================================================================
+// [VERIFIED] IntersectionObject::vfunc_30 (0x0014A760, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// IntersectionObject::vfunc_30 (0x0014A760, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00029610(void);
+
+class IntersectionObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_30();
+};
+
+void IntersectionObject::vfunc_30()
+{
+    sub_00029610();
+}
+
 // [TODO] 0x0014A770 sub_0014A770 (29 B)
 // [TODO] 0x0014A790 sub_0014A790 (81 B)
 // ============================================================================
@@ -22137,7 +23439,33 @@ GenericVehicleCamera* GenericVehicleCamera::vfunc_01(int a1)
 // [TODO] 0x001586B0 GenericVehicleCamera::vfunc_04 (41 B)
 // [TODO] 0x001586E0 sub_001586E0 (137 B)
 // [TODO] 0x00158770 GenericVehicleCamera::vfunc_39 (474 B)
-// [TODO] 0x00158950 GenericVehicleCamera::vfunc_40 (5 B)
+// ============================================================================
+// [VERIFIED] GenericVehicleCamera::vfunc_40 (0x00158950, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GenericVehicleCamera::vfunc_40 (0x00158950, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00158480(void);
+
+class GenericVehicleCamera
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_40();
+};
+
+void GenericVehicleCamera::vfunc_40()
+{
+    sub_00158480();
+}
+
 // [TODO] 0x00158960 sub_00158960 (243 B)
 // [TODO] 0x00158A60 GenericVehicleCamera::vfunc_08 (6903 B)
 // [TODO] 0x0015A560 sub_0015A560 (14 B)
@@ -23269,7 +24597,33 @@ void* CivilianBase::vfunc_00()
     return DAT_00430D44;
 }
 
-// [TODO] 0x0016E030 CivilianBase::vfunc_67 (5 B)
+// ============================================================================
+// [VERIFIED] CivilianBase::vfunc_67 (0x0016E030, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CivilianBase::vfunc_67 (0x0016E030, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0016B310(void);
+
+class CivilianBase
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_67();
+};
+
+void CivilianBase::vfunc_67()
+{
+    sub_0016B310();
+}
+
 // [TODO] 0x0016E040 sub_0016E040 (32 B)
 // ============================================================================
 // [VERIFIED] Civilian::vfunc_00 (0x0016E060, 6 B)
@@ -24397,7 +25751,35 @@ template <> void ConcreteClassRep<RageState>::vfunc_02()
 // [TODO] 0x0017EE20 sub_0017EE20 (46 B)
 // [TODO] 0x0017EE50 sub_0017EE50 (38 B)
 // [TODO] 0x0017EE80 content::LoadInventory::DynamicCaster<NISStreamData>::vfunc_00 (30 B)
-// [TODO] 0x0017EEA0 content::LoadInventory::DynamicCaster<pure3d::VertexOffsetExpressionMixer>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::VertexOffsetExpressionMixer>::vfunc_00 (0x0017EEA0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::VertexOffsetExpressionMixer>::vfunc_00 (0x0017EEA0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_00431C5C[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class VertexOffsetExpressionMixer; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::VertexOffsetExpressionMixer>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_00431C5C, 0);
+}
+
 // [TODO] 0x0017EEC0 sub_0017EEC0 (344 B)
 // [TODO] 0x0017F020 sub_0017F020 (138 B)
 // [TODO] 0x0017F0B0 NISCharacterDamageAction::vfunc_03 (57 B)
@@ -26255,7 +27637,37 @@ void __cdecl sub_00184F20(void)
     sub_0023EAD0((int)DAT_0048BFF0, (int)DAT_0048BFF4);
 }
 
-// [TODO] 0x00184F40 NISCharacterDamageTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISCharacterDamageTrack::vfunc_08 (0x00184F40, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCharacterDamageTrack::vfunc_08 (0x00184F40, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048BFF0;
+
+class NISCharacterDamageTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISCharacterDamageTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048BFF0 + (a1 * 4));
+}
+
 // [TODO] 0x00184F50 sub_00184F50 (52 B)
 // [TODO] 0x00184F90 NISCharacterDamageTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26277,7 +27689,37 @@ void __cdecl sub_00184FC0(void)
     sub_0023EAD0((int)DAT_0048BFF8, (int)DAT_0048BFFC);
 }
 
-// [TODO] 0x00184FE0 NISVehiclePropertyTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISVehiclePropertyTrack::vfunc_08 (0x00184FE0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISVehiclePropertyTrack::vfunc_08 (0x00184FE0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048BFF8;
+
+class NISVehiclePropertyTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISVehiclePropertyTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048BFF8 + (a1 * 4));
+}
+
 // [TODO] 0x00184FF0 sub_00184FF0 (39 B)
 // [TODO] 0x00185020 NISVehiclePropertyTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26299,7 +27741,37 @@ void __cdecl sub_00185050(void)
     sub_0023EAD0((int)DAT_0048C000, (int)DAT_0048C004);
 }
 
-// [TODO] 0x00185070 NISFadeTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISFadeTrack::vfunc_08 (0x00185070, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISFadeTrack::vfunc_08 (0x00185070, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C000;
+
+class NISFadeTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISFadeTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C000 + (a1 * 4));
+}
+
 // [TODO] 0x00185080 sub_00185080 (60 B)
 // [TODO] 0x001850C0 NISFadeTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26321,7 +27793,37 @@ void __cdecl sub_001850F0(void)
     sub_0023EAD0((int)DAT_0048C008, (int)DAT_0048C00C);
 }
 
-// [TODO] 0x00185110 NISCharacterEffectTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISCharacterEffectTrack::vfunc_08 (0x00185110, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCharacterEffectTrack::vfunc_08 (0x00185110, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C008;
+
+class NISCharacterEffectTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISCharacterEffectTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C008 + (a1 * 4));
+}
+
 // [TODO] 0x00185120 sub_00185120 (64 B)
 // [TODO] 0x00185160 NISCharacterEffectTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26343,7 +27845,37 @@ void __cdecl sub_00185190(void)
     sub_0023EAD0((int)DAT_0048C010, (int)DAT_0048C014);
 }
 
-// [TODO] 0x001851B0 NISCharacterAttachTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISCharacterAttachTrack::vfunc_08 (0x001851B0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCharacterAttachTrack::vfunc_08 (0x001851B0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C010;
+
+class NISCharacterAttachTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISCharacterAttachTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C010 + (a1 * 4));
+}
+
 // [TODO] 0x001851C0 NISCharacterAttachTrack::vfunc_20 (46 B)
 // ============================================================================
 // [VERIFIED] sub_001851F0 (0x001851F0, 19 B)
@@ -26364,7 +27896,37 @@ void __cdecl sub_001851F0(void)
     sub_0023EAD0((int)DAT_0048C018, (int)DAT_0048C01C);
 }
 
-// [TODO] 0x00185210 NISStatePropSpawnTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISStatePropSpawnTrack::vfunc_08 (0x00185210, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISStatePropSpawnTrack::vfunc_08 (0x00185210, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C018;
+
+class NISStatePropSpawnTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISStatePropSpawnTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C018 + (a1 * 4));
+}
+
 // [TODO] 0x00185220 NISStatePropSpawnTrack::vfunc_20 (46 B)
 // [TODO] 0x00185250 sub_00185250 (27 B)
 // ============================================================================
@@ -26386,7 +27948,37 @@ void __cdecl sub_00185270(void)
     sub_0023EAD0((int)DAT_0048C020, (int)DAT_0048C024);
 }
 
-// [TODO] 0x00185290 NISStatePropStateTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISStatePropStateTrack::vfunc_08 (0x00185290, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISStatePropStateTrack::vfunc_08 (0x00185290, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C020;
+
+class NISStatePropStateTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISStatePropStateTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C020 + (a1 * 4));
+}
+
 // [TODO] 0x001852A0 sub_001852A0 (44 B)
 // [TODO] 0x001852D0 NISStatePropStateTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26408,7 +28000,37 @@ void __cdecl sub_00185300(void)
     sub_0023EAD0((int)DAT_0048C028, (int)DAT_0048C02C);
 }
 
-// [TODO] 0x00185320 NISCharacterVisibilityTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISCharacterVisibilityTrack::vfunc_08 (0x00185320, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCharacterVisibilityTrack::vfunc_08 (0x00185320, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C028;
+
+class NISCharacterVisibilityTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISCharacterVisibilityTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C028 + (a1 * 4));
+}
+
 // [TODO] 0x00185330 sub_00185330 (35 B)
 // [TODO] 0x00185360 NISCharacterVisibilityTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26430,7 +28052,37 @@ void __cdecl sub_00185390(void)
     sub_0023EAD0((int)DAT_0048C030, (int)DAT_0048C034);
 }
 
-// [TODO] 0x001853B0 NISWeaponAttachTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISWeaponAttachTrack::vfunc_08 (0x001853B0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISWeaponAttachTrack::vfunc_08 (0x001853B0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C030;
+
+class NISWeaponAttachTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISWeaponAttachTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C030 + (a1 * 4));
+}
+
 // [TODO] 0x001853C0 sub_001853C0 (44 B)
 // [TODO] 0x001853F0 NISWeaponAttachTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26452,7 +28104,37 @@ void __cdecl sub_00185420(void)
     sub_0023EAD0((int)DAT_0048C038, (int)DAT_0048C03C);
 }
 
-// [TODO] 0x00185440 NISWeaponFireTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISWeaponFireTrack::vfunc_08 (0x00185440, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISWeaponFireTrack::vfunc_08 (0x00185440, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C038;
+
+class NISWeaponFireTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISWeaponFireTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C038 + (a1 * 4));
+}
+
 // [TODO] 0x00185450 sub_00185450 (35 B)
 // [TODO] 0x00185480 NISWeaponFireTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26474,7 +28156,37 @@ void __cdecl sub_001854B0(void)
     sub_0023EAD0((int)DAT_0048C040, (int)DAT_0048C044);
 }
 
-// [TODO] 0x001854D0 NISRenderableTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISRenderableTrack::vfunc_08 (0x001854D0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISRenderableTrack::vfunc_08 (0x001854D0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C040;
+
+class NISRenderableTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISRenderableTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C040 + (a1 * 4));
+}
+
 // [TODO] 0x001854E0 sub_001854E0 (38 B)
 // [TODO] 0x00185510 NISRenderableTrack::vfunc_20 (46 B)
 // [TODO] 0x00185540 sub_00185540 (27 B)
@@ -26497,7 +28209,37 @@ void __cdecl sub_00185560(void)
     sub_0023EAD0((int)DAT_0048C048, (int)DAT_0048C04C);
 }
 
-// [TODO] 0x00185580 NISRenderableAnimationTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISRenderableAnimationTrack::vfunc_08 (0x00185580, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISRenderableAnimationTrack::vfunc_08 (0x00185580, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C048;
+
+class NISRenderableAnimationTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISRenderableAnimationTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C048 + (a1 * 4));
+}
+
 // [TODO] 0x00185590 sub_00185590 (44 B)
 // [TODO] 0x001855C0 NISRenderableAnimationTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26519,7 +28261,37 @@ void __cdecl sub_001855F0(void)
     sub_0023EAD0((int)DAT_0048C050, (int)DAT_0048C054);
 }
 
-// [TODO] 0x00185610 NISVehicleAnimationTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISVehicleAnimationTrack::vfunc_08 (0x00185610, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISVehicleAnimationTrack::vfunc_08 (0x00185610, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C050;
+
+class NISVehicleAnimationTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISVehicleAnimationTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C050 + (a1 * 4));
+}
+
 // [TODO] 0x00185620 sub_00185620 (44 B)
 // [TODO] 0x00185650 NISVehicleAnimationTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26541,7 +28313,37 @@ void __cdecl sub_00185680(void)
     sub_0023EAD0((int)DAT_0048C058, (int)DAT_0048C05C);
 }
 
-// [TODO] 0x001856A0 NISActivateVehicleTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISActivateVehicleTrack::vfunc_08 (0x001856A0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISActivateVehicleTrack::vfunc_08 (0x001856A0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C058;
+
+class NISActivateVehicleTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISActivateVehicleTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C058 + (a1 * 4));
+}
+
 // [TODO] 0x001856B0 sub_001856B0 (45 B)
 // [TODO] 0x001856E0 NISActivateVehicleTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26563,7 +28365,37 @@ void __cdecl sub_00185710(void)
     sub_0023EAD0((int)DAT_0048C060, (int)DAT_0048C064);
 }
 
-// [TODO] 0x00185730 NISObjectPositionTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISObjectPositionTrack::vfunc_08 (0x00185730, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISObjectPositionTrack::vfunc_08 (0x00185730, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C060;
+
+class NISObjectPositionTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISObjectPositionTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C060 + (a1 * 4));
+}
+
 // [TODO] 0x00185740 NISObjectPositionTrack::vfunc_20 (46 B)
 // ============================================================================
 // [VERIFIED] sub_00185770 (0x00185770, 19 B)
@@ -26584,7 +28416,37 @@ void __cdecl sub_00185770(void)
     sub_0023EAD0((int)DAT_0048C068, (int)DAT_0048C06C);
 }
 
-// [TODO] 0x00185790 NISCharacterAnimationTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISCharacterAnimationTrack::vfunc_08 (0x00185790, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCharacterAnimationTrack::vfunc_08 (0x00185790, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C068;
+
+class NISCharacterAnimationTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISCharacterAnimationTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C068 + (a1 * 4));
+}
+
 // [TODO] 0x001857A0 sub_001857A0 (44 B)
 // [TODO] 0x001857D0 NISCharacterAnimationTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26606,7 +28468,37 @@ void __cdecl sub_00185800(void)
     sub_0023EAD0((int)DAT_0048C070, (int)DAT_0048C074);
 }
 
-// [TODO] 0x00185820 NISSwapModelTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISSwapModelTrack::vfunc_08 (0x00185820, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISSwapModelTrack::vfunc_08 (0x00185820, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C070;
+
+class NISSwapModelTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISSwapModelTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C070 + (a1 * 4));
+}
+
 // [TODO] 0x00185830 sub_00185830 (35 B)
 // [TODO] 0x00185860 NISSwapModelTrack::vfunc_20 (46 B)
 // [TODO] 0x00185890 sub_00185890 (24 B)
@@ -26629,7 +28521,37 @@ void __cdecl sub_001858B0(void)
     sub_0023EAD0((int)DAT_0048C078, (int)DAT_0048C07C);
 }
 
-// [TODO] 0x001858D0 NISExpAnimationTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISExpAnimationTrack::vfunc_08 (0x001858D0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISExpAnimationTrack::vfunc_08 (0x001858D0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C078;
+
+class NISExpAnimationTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISExpAnimationTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C078 + (a1 * 4));
+}
+
 // [TODO] 0x001858E0 sub_001858E0 (57 B)
 // [TODO] 0x00185920 NISExpAnimationTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -26651,7 +28573,37 @@ void __cdecl sub_00185950(void)
     sub_0023EAD0((int)DAT_0048C080, (int)DAT_0048C084);
 }
 
-// [TODO] 0x00185970 NISResourceLoaderTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISResourceLoaderTrack::vfunc_08 (0x00185970, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISResourceLoaderTrack::vfunc_08 (0x00185970, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C080;
+
+class NISResourceLoaderTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISResourceLoaderTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C080 + (a1 * 4));
+}
+
 // [TODO] 0x00185980 sub_00185980 (26 B)
 // [TODO] 0x001859A0 NISResourceLoaderTrack::vfunc_20 (46 B)
 // [TODO] 0x001859D0 sub_001859D0 (77 B)
@@ -26675,7 +28627,37 @@ void __cdecl sub_00185A40(void)
     sub_0023EAD0((int)DAT_0048C088, (int)DAT_0048C08C);
 }
 
-// [TODO] 0x00185A60 NISCameraAnimationTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISCameraAnimationTrack::vfunc_08 (0x00185A60, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCameraAnimationTrack::vfunc_08 (0x00185A60, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C088;
+
+class NISCameraAnimationTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISCameraAnimationTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C088 + (a1 * 4));
+}
+
 // [TODO] 0x00185A70 sub_00185A70 (31 B)
 // ============================================================================
 // [VERIFIED] sub_00185A90 (0x00185A90, 19 B)
@@ -26696,7 +28678,37 @@ void __cdecl sub_00185A90(void)
     sub_0023EAD0((int)DAT_0048C090, (int)DAT_0048C094);
 }
 
-// [TODO] 0x00185AB0 NISDeleteCharacterTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISDeleteCharacterTrack::vfunc_08 (0x00185AB0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISDeleteCharacterTrack::vfunc_08 (0x00185AB0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C090;
+
+class NISDeleteCharacterTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISDeleteCharacterTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C090 + (a1 * 4));
+}
+
 // [TODO] 0x00185AC0 sub_00185AC0 (31 B)
 // ============================================================================
 // [VERIFIED] sub_00185AE0 (0x00185AE0, 19 B)
@@ -26717,7 +28729,37 @@ void __cdecl sub_00185AE0(void)
     sub_0023EAD0((int)DAT_0048C098, (int)DAT_0048C09C);
 }
 
-// [TODO] 0x00185B00 NISDeleteScriptObjectTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISDeleteScriptObjectTrack::vfunc_08 (0x00185B00, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISDeleteScriptObjectTrack::vfunc_08 (0x00185B00, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C098;
+
+class NISDeleteScriptObjectTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISDeleteScriptObjectTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C098 + (a1 * 4));
+}
+
 // [TODO] 0x00185B10 sub_00185B10 (31 B)
 // [TODO] 0x00185B30 NISDeleteCharacterTrack::vfunc_20 (17 B)
 // ============================================================================
@@ -26739,7 +28781,37 @@ void __cdecl sub_00185B50(void)
     sub_0023EAD0((int)DAT_0048C0A0, (int)DAT_0048C0A4);
 }
 
-// [TODO] 0x00185B70 NISCharacterPositionTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISCharacterPositionTrack::vfunc_08 (0x00185B70, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCharacterPositionTrack::vfunc_08 (0x00185B70, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C0A0;
+
+class NISCharacterPositionTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISCharacterPositionTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C0A0 + (a1 * 4));
+}
+
 // ============================================================================
 // [VERIFIED] sub_00185B80 (0x00185B80, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -26759,7 +28831,37 @@ void __cdecl sub_00185B80(void)
     sub_0023EAD0((int)DAT_0048C0A8, (int)DAT_0048C0AC);
 }
 
-// [TODO] 0x00185BA0 NISHoldCameraPositionTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISHoldCameraPositionTrack::vfunc_08 (0x00185BA0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISHoldCameraPositionTrack::vfunc_08 (0x00185BA0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C0A8;
+
+class NISHoldCameraPositionTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISHoldCameraPositionTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C0A8 + (a1 * 4));
+}
+
 // ============================================================================
 // [VERIFIED] sub_00185BB0 (0x00185BB0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -26779,7 +28881,37 @@ void __cdecl sub_00185BB0(void)
     sub_0023EAD0((int)DAT_0048C0B0, (int)DAT_0048C0B4);
 }
 
-// [TODO] 0x00185BD0 NISScriptFunctionCallTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISScriptFunctionCallTrack::vfunc_08 (0x00185BD0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISScriptFunctionCallTrack::vfunc_08 (0x00185BD0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C0B0;
+
+class NISScriptFunctionCallTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISScriptFunctionCallTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C0B0 + (a1 * 4));
+}
+
 // [TODO] 0x00185BE0 sub_00185BE0 (22 B)
 // [TODO] 0x00185C00 NISScriptFunctionCallTrack::vfunc_20 (46 B)
 // [TODO] 0x00185C30 sub_00185C30 (27 B)
@@ -26802,7 +28934,37 @@ void __cdecl sub_00185C50(void)
     sub_0023EAD0((int)DAT_0048C0B8, (int)DAT_0048C0BC);
 }
 
-// [TODO] 0x00185C70 NISSequenceCueTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISSequenceCueTrack::vfunc_08 (0x00185C70, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISSequenceCueTrack::vfunc_08 (0x00185C70, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C0B8;
+
+class NISSequenceCueTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISSequenceCueTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C0B8 + (a1 * 4));
+}
+
 // [TODO] 0x00185C80 NISSequenceCueTrack::vfunc_20 (46 B)
 // [TODO] 0x00185CB0 sub_00185CB0 (18 B)
 // [TODO] 0x00185CD0 NISSequencePlayTrack::vfunc_20 (46 B)
@@ -26825,7 +28987,37 @@ void __cdecl sub_00185D00(void)
     sub_0023EAD0((int)DAT_0048C0C0, (int)DAT_0048C0C4);
 }
 
-// [TODO] 0x00185D20 NISSequenceBranchTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISSequenceBranchTrack::vfunc_08 (0x00185D20, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISSequenceBranchTrack::vfunc_08 (0x00185D20, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C0C0;
+
+class NISSequenceBranchTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISSequenceBranchTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C0C0 + (a1 * 4));
+}
+
 // [TODO] 0x00185D30 NISSequenceBranchTrack::vfunc_20 (46 B)
 // ============================================================================
 // [VERIFIED] sub_00185D60 (0x00185D60, 19 B)
@@ -26846,7 +29038,37 @@ void __cdecl sub_00185D60(void)
     sub_0023EAD0((int)DAT_0048C0C8, (int)DAT_0048C0CC);
 }
 
-// [TODO] 0x00185D80 NISDriveWorldStreamerTrack::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] NISDriveWorldStreamerTrack::vfunc_08 (0x00185D80, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SpeedCondition::vfunc_08 (0x000DD280), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISDriveWorldStreamerTrack::vfunc_08 (0x00185D80, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048C0C8;
+
+class NISDriveWorldStreamerTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int NISDriveWorldStreamerTrack::vfunc_08(int a1)
+{
+    return *(int*)(DAT_0048C0C8 + (a1 * 4));
+}
+
 // [TODO] 0x00185D90 sub_00185D90 (22 B)
 // [TODO] 0x00185DB0 NISDriveWorldStreamerTrack::vfunc_20 (46 B)
 // [TODO] 0x00185DE0 sub_00185DE0 (26 B)
@@ -27335,7 +29557,33 @@ void* GroundObject::vfunc_00()
     return DAT_00434074;
 }
 
-// [TODO] 0x00189350 GroundObject::vfunc_39 (5 B)
+// ============================================================================
+// [VERIFIED] GroundObject::vfunc_39 (0x00189350, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GroundObject::vfunc_39 (0x00189350, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0002A7C0(void);
+
+class GroundObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_39();
+};
+
+void GroundObject::vfunc_39()
+{
+    sub_0002A7C0();
+}
+
 // [TODO] 0x00189360 sub_00189360 (92 B)
 // [TODO] 0x001893C0 sub_001893C0 (96 B)
 // [TODO] 0x00189420 GroundObject::vfunc_17 (65 B)
@@ -28111,7 +30359,33 @@ void* HUDElement2::vfunc_00()
 // [TODO] 0x00193DE0 ExoticsHUD2::vfunc_37 (402 B)
 // [TODO] 0x00193F80 sub_00193F80 (22 B)
 // [TODO] 0x00193FA0 HUDElement2::vfunc_01 (43 B)
-// [TODO] 0x00193FD0 BusinessDetailHUD::vfunc_29 (5 B)
+// ============================================================================
+// [VERIFIED] BusinessDetailHUD::vfunc_29 (0x00193FD0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BusinessDetailHUD::vfunc_29 (0x00193FD0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00193150(void);
+
+class BusinessDetailHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_29();
+};
+
+void BusinessDetailHUD::vfunc_29()
+{
+    sub_00193150();
+}
+
 // [TODO] 0x00193FE0 EmpireHUD::vfunc_35 (107 B)
 // [TODO] 0x00194050 EmpireHUD::vfunc_36 (23 B)
 // [TODO] 0x00194070 EmpireHUD::vfunc_00 (41 B)
@@ -28455,7 +30729,33 @@ void* HUDHeatMeter::vfunc_00()
     return DAT_00436B5C;
 }
 
-// [TODO] 0x00199520 HUDHeatMeter::vfunc_29 (5 B)
+// ============================================================================
+// [VERIFIED] HUDHeatMeter::vfunc_29 (0x00199520, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDHeatMeter::vfunc_29 (0x00199520, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00198BC0(void);
+
+class HUDHeatMeter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_29();
+};
+
+void HUDHeatMeter::vfunc_29()
+{
+    sub_00198BC0();
+}
+
 // [TODO] 0x00199530 HUDHeatMeter::vfunc_59 (303 B)
 // [TODO] 0x00199660 sub_00199660 (24 B)
 // [TODO] 0x00199680 HUDHeatMeter::vfunc_62 (63 B)
@@ -29400,7 +31700,33 @@ void* IntimidationHUD::vfunc_00()
 
 // [TODO] 0x001A37B0 IntimidationHUD::vfunc_41 (7 B)
 // [TODO] 0x001A37C0 IntimidationHUD::vfunc_46 (29 B)
-// [TODO] 0x001A37E0 IntimidationHUD::vfunc_47 (5 B)
+// ============================================================================
+// [VERIFIED] IntimidationHUD::vfunc_47 (0x001A37E0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// IntimidationHUD::vfunc_47 (0x001A37E0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00193500(void);
+
+class IntimidationHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_47();
+};
+
+void IntimidationHUD::vfunc_47()
+{
+    sub_00193500();
+}
+
 // [TODO] 0x001A37F0 IntimidationHUD::vfunc_37 (23 B)
 // [TODO] 0x001A3810 sub_001A3810 (84 B)
 // [TODO] 0x001A3870 sub_001A3870 (8 B)
@@ -29576,7 +31902,33 @@ HUDMap2RestoreData* HUDMap2RestoreData::vfunc_00(int a1)
 // [TODO] 0x001A5B80 HUDSubtitle::vfunc_04 (24 B)
 // [TODO] 0x001A5BA0 sub_001A5BA0 (53 B)
 // [TODO] 0x001A5BE0 sub_001A5BE0 (725 B)
-// [TODO] 0x001A5EC0 MapHUD2::vfunc_30 (5 B)
+// ============================================================================
+// [VERIFIED] MapHUD2::vfunc_30 (0x001A5EC0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MapHUD2::vfunc_30 (0x001A5EC0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00193370(void);
+
+class MapHUD2
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_30();
+};
+
+void MapHUD2::vfunc_30()
+{
+    sub_00193370();
+}
+
 // [TODO] 0x001A5ED0 MapHUD2::vfunc_31 (61 B)
 // [TODO] 0x001A5F10 sub_001A5F10 (93 B)
 // [TODO] 0x001A5F70 sub_001A5F70 (32 B)
@@ -29618,7 +31970,35 @@ void* MapHUD2::vfunc_00()
 // [TODO] 0x001A6CF0 sub_001A6CF0 (167 B)
 // [TODO] 0x001A6DA0 sub_001A6DA0 (156 B)
 // [TODO] 0x001A6E40 sub_001A6E40 (240 B)
-// [TODO] 0x001A6F30 content::LoadInventory::DynamicCaster<pure3d::Camera>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::Camera>::vfunc_00 (0x001A6F30, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::Camera>::vfunc_00 (0x001A6F30, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041A57C[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class Camera; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::Camera>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041A57C, 0);
+}
+
 // ============================================================================
 // [VERIFIED] MapHUD2::vfunc_01 (0x001A6F50, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -29856,7 +32236,33 @@ MiniHUDElement* MiniHUDElement::vfunc_01(int a1)
     return this;
 }
 
-// [TODO] 0x001ACE70 MissionFailHUD::vfunc_46 (5 B)
+// ============================================================================
+// [VERIFIED] MissionFailHUD::vfunc_46 (0x001ACE70, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionFailHUD::vfunc_46 (0x001ACE70, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00193C60(void);
+
+class MissionFailHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_46();
+};
+
+void MissionFailHUD::vfunc_46()
+{
+    sub_00193C60();
+}
+
 // [TODO] 0x001ACE80 MissionFailHUD::vfunc_47 (53 B)
 // [TODO] 0x001ACEC0 MissionFailHUD::vfunc_35 (107 B)
 // [TODO] 0x001ACF30 MissionFailHUD::vfunc_54 (14 B)
@@ -30719,7 +33125,33 @@ void* SlotMachineHUD::vfunc_00()
     return DAT_00437D30;
 }
 
-// [TODO] 0x001BFEB0 BlackjackHUD::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] BlackjackHUD::vfunc_04 (0x001BFEB0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BlackjackHUD::vfunc_04 (0x001BFEB0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0002AA90(void);
+
+class BlackjackHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void BlackjackHUD::vfunc_04()
+{
+    sub_0002AA90();
+}
+
 // [TODO] 0x001BFEC0 SlotMachineHUD::vfunc_30 (346 B)
 // [TODO] 0x001C0020 sub_001C0020 (65 B)
 // [TODO] 0x001C0070 sub_001C0070 (50 B)
@@ -30830,7 +33262,33 @@ void* TeleportHUD::vfunc_00()
     return DAT_00437E90;
 }
 
-// [TODO] 0x001C1BB0 GenericWeaponHUD::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] GenericWeaponHUD::vfunc_04 (0x001C1BB0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GenericWeaponHUD::vfunc_04 (0x001C1BB0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00193190(void);
+
+class GenericWeaponHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void GenericWeaponHUD::vfunc_04()
+{
+    sub_00193190();
+}
+
 // [TODO] 0x001C1BC0 TeleportHUD::vfunc_29 (49 B)
 // [TODO] 0x001C1C00 TeleportHUD::vfunc_00 (41 B)
 // [TODO] 0x001C1C30 TeleportHUD::vfunc_35 (107 B)
@@ -32336,7 +34794,35 @@ void* InstanceObject::vfunc_00()
 // [TODO] 0x001D0820 sub_001D0820 (382 B)
 // [TODO] 0x001D09A0 sub_001D09A0 (37 B)
 // [TODO] 0x001D09D0 sub_001D09D0 (138 B)
-// [TODO] 0x001D0A60 content::LoadInventory::DynamicCaster<pure3d::Locator>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::Locator>::vfunc_00 (0x001D0A60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::DynamicCaster<pure3d::Locator>::vfunc_00 (0x001D0A60, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0043A438[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d { class Locator; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<pure3d::Locator>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0043A438, 0);
+}
+
 // [TODO] 0x001D0A80 sub_001D0A80 (87 B)
 // [TODO] 0x001D0AF0 sub_001D0AF0 (115 B)
 // [TODO] 0x001D0B70 sub_001D0B70 (134 B)
@@ -33953,7 +36439,33 @@ void* CharacterInVehicleSpawnObject::vfunc_00()
 // [TODO] 0x001D9EB0 CharacterInVehicleSpawnObject::vfunc_42 (72 B)
 // [TODO] 0x001D9F00 CharacterInVehicleSpawnObject::vfunc_01 (43 B)
 // [TODO] 0x001D9F30 CharacterInVehicleSpawnObject::vfunc_38 (499 B)
-// [TODO] 0x001DA130 CopSpawnObject::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] CopSpawnObject::vfunc_04 (0x001DA130, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CopSpawnObject::vfunc_04 (0x001DA130, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001EA030(void);
+
+class CopSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void CopSpawnObject::vfunc_04()
+{
+    sub_001EA030();
+}
+
 // [TODO] 0x001DA140 CopSpawnObject::vfunc_40 (354 B)
 // [TODO] 0x001DA2B0 CopSpawnObject::vfunc_41 (315 B)
 // [TODO] 0x001DA3F0 sub_001DA3F0 (50 B)
@@ -34206,7 +36718,33 @@ void* GangNestSpawnObject::vfunc_00()
     return DAT_0043D8BC;
 }
 
-// [TODO] 0x001DFC40 GangNestSpawnObject::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] GangNestSpawnObject::vfunc_04 (0x001DFC40, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GangNestSpawnObject::vfunc_04 (0x001DFC40, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001E3440(void);
+
+class GangNestSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void GangNestSpawnObject::vfunc_04()
+{
+    sub_001E3440();
+}
+
 // [TODO] 0x001DFC50 GangNestSpawnObject::vfunc_35 (24 B)
 // ============================================================================
 // [VERIFIED] GangNestSpawnObject::vfunc_01 (0x001DFCC0, 36 B)
@@ -35680,7 +38218,33 @@ void* MeleeWeaponStateProp::vfunc_00()
 }
 
 // [TODO] 0x001EC640 MeleeWeaponStateProp::vfunc_72 (49 B)
-// [TODO] 0x001EC680 MeleeWeaponStateProp::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] MeleeWeaponStateProp::vfunc_04 (0x001EC680, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MeleeWeaponStateProp::vfunc_04 (0x001EC680, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F0C80(void);
+
+class MeleeWeaponStateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void MeleeWeaponStateProp::vfunc_04()
+{
+    sub_001F0C80();
+}
+
 // [TODO] 0x001EC690 MeleeWeaponStateProp::vfunc_01 (46 B)
 // [TODO] 0x001EC6C0 MortarObject::vfunc_05 (57 B)
 // [TODO] 0x001EC700 MortarObject::vfunc_64 (47 B)
@@ -35725,7 +38289,33 @@ void* MortarObject::vfunc_00()
 // [TODO] 0x001ED4C0 M16MortarWeaponStateProp::vfunc_76 (31 B)
 // [TODO] 0x001ED4E0 MortarWeaponStateProp::vfunc_04 (119 B)
 // [TODO] 0x001ED560 MortarWeaponStateProp::vfunc_01 (46 B)
-// [TODO] 0x001ED590 M16MortarWeaponStateProp::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] M16MortarWeaponStateProp::vfunc_04 (0x001ED590, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// M16MortarWeaponStateProp::vfunc_04 (0x001ED590, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001ED4E0(void);
+
+class M16MortarWeaponStateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void M16MortarWeaponStateProp::vfunc_04()
+{
+    sub_001ED4E0();
+}
+
 // [TODO] 0x001ED5A0 sub_001ED5A0 (70 B)
 // [TODO] 0x001ED5F0 sub_001ED5F0 (70 B)
 // [TODO] 0x001ED640 AK47ShotgunWeaponStateProp::vfunc_72 (15 B)
@@ -36480,9 +39070,87 @@ void* VehicleWeaponStateProp::vfunc_00()
     return DAT_0043E7D4;
 }
 
-// [TODO] 0x001F27D0 ShotgunWeaponStateProp::vfunc_04 (5 B)
-// [TODO] 0x001F27E0 M16MortarWeaponStateProp::vfunc_72 (5 B)
-// [TODO] 0x001F27F0 VehicleWeaponStateProp::vfunc_73 (5 B)
+// ============================================================================
+// [VERIFIED] ShotgunWeaponStateProp::vfunc_04 (0x001F27D0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ShotgunWeaponStateProp::vfunc_04 (0x001F27D0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F3160(void);
+
+class ShotgunWeaponStateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void ShotgunWeaponStateProp::vfunc_04()
+{
+    sub_001F3160();
+}
+
+// ============================================================================
+// [VERIFIED] M16MortarWeaponStateProp::vfunc_72 (0x001F27E0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// M16MortarWeaponStateProp::vfunc_72 (0x001F27E0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001ED640(void);
+
+class M16MortarWeaponStateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_72();
+};
+
+void M16MortarWeaponStateProp::vfunc_72()
+{
+    sub_001ED640();
+}
+
+// ============================================================================
+// [VERIFIED] VehicleWeaponStateProp::vfunc_73 (0x001F27F0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleWeaponStateProp::vfunc_73 (0x001F27F0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F5360(void);
+
+class VehicleWeaponStateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_73();
+};
+
+void VehicleWeaponStateProp::vfunc_73()
+{
+    sub_001F5360();
+}
+
 // [TODO] 0x001F2800 VehicleWeaponStateProp::vfunc_01 (46 B)
 // [TODO] 0x001F2830 sub_001F2830 (87 B)
 // [TODO] 0x001F2890 sub_001F2890 (74 B)
@@ -36565,7 +39233,33 @@ StatePropObject* StatePropObject::vfunc_01(int a1)
 // [TODO] 0x001F2BA0 sub_001F2BA0 (28 B)
 // [TODO] 0x001F2BC0 sub_001F2BC0 (10 B)
 // [TODO] 0x001F2BD0 sub_001F2BD0 (7 B)
-// [TODO] 0x001F2BE0 MountedWeaponStateProp::vfunc_32 (5 B)
+// ============================================================================
+// [VERIFIED] MountedWeaponStateProp::vfunc_32 (0x001F2BE0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MountedWeaponStateProp::vfunc_32 (0x001F2BE0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F1420(void);
+
+class MountedWeaponStateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_32();
+};
+
+void MountedWeaponStateProp::vfunc_32()
+{
+    sub_001F1420();
+}
+
 // [TODO] 0x001F2BF0 sub_001F2BF0 (13 B)
 // [TODO] 0x001F2C00 sub_001F2C00 (103 B)
 // [TODO] 0x001F2C70 sub_001F2C70 (203 B)
@@ -38781,7 +41475,33 @@ void* HelicopterArtTemplate::vfunc_00()
     return DAT_00443D48;
 }
 
-// [TODO] 0x00201760 HelicopterArtTemplate::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] HelicopterArtTemplate::vfunc_04 (0x00201760, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HelicopterArtTemplate::vfunc_04 (0x00201760, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0020C840(void);
+
+class HelicopterArtTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void HelicopterArtTemplate::vfunc_04()
+{
+    sub_0020C840();
+}
+
 // ============================================================================
 // [VERIFIED] HelicopterArtTemplate::vfunc_01 (0x00201770, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -41201,7 +43921,33 @@ template <> void ConcreteClassRep<WheeledVehicleCoverProperties>::vfunc_02()
 
 // [TODO] 0x0020C3D0 ConcreteClassRep<WheeledVehicleTemplate>::vfunc_01 (45 B)
 // [TODO] 0x0020C400 ConcreteClassRep<WheeledVehicleTemplate>::vfunc_02 (64 B)
-// [TODO] 0x0020C440 FEGroupObject::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] FEGroupObject::vfunc_04 (0x0020C440, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FEGroupObject::vfunc_04 (0x0020C440, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0002B700(void);
+
+class FEGroupObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void FEGroupObject::vfunc_04()
+{
+    sub_0002B700();
+}
+
 // [TODO] 0x0020C450 sub_0020C450 (42 B)
 // ============================================================================
 // [VERIFIED] VehicleAITuneablesTemplate::vfunc_00 (0x0020C480, 6 B)
@@ -44061,7 +46807,33 @@ void* MissionTriggerObject::vfunc_00()
     return DAT_0044C0C0;
 }
 
-// [TODO] 0x00212C20 MissionTriggerObject::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] MissionTriggerObject::vfunc_04 (0x00212C20, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionTriggerObject::vfunc_04 (0x00212C20, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00212FB0(void);
+
+class MissionTriggerObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void MissionTriggerObject::vfunc_04()
+{
+    sub_00212FB0();
+}
+
 // ============================================================================
 // [VERIFIED] MissionTriggerObject::vfunc_01 (0x00212C30, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -45003,7 +47775,33 @@ void* TrafficCar::vfunc_00()
     return DAT_0044CC08;
 }
 
-// [TODO] 0x0021C1C0 TrafficCar::vfunc_64 (5 B)
+// ============================================================================
+// [VERIFIED] TrafficCar::vfunc_64 (0x0021C1C0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TrafficCar::vfunc_64 (0x0021C1C0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002144B0(void);
+
+class TrafficCar
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_64();
+};
+
+void TrafficCar::vfunc_64()
+{
+    sub_002144B0();
+}
+
 // ============================================================================
 // [VERIFIED] CubeVan::vfunc_00 (0x0021C1D0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -45155,7 +47953,33 @@ ScriptCar* ScriptCar::vfunc_01(int a1)
 }
 
 // [TODO] 0x0021C4F0 DrivingRewardsObject::vfunc_04 (83 B)
-// [TODO] 0x0021C550 BoatDrivingRewardsObject::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] BoatDrivingRewardsObject::vfunc_04 (0x0021C550, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatDrivingRewardsObject::vfunc_04 (0x0021C550, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0021C4F0(void);
+
+class BoatDrivingRewardsObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void BoatDrivingRewardsObject::vfunc_04()
+{
+    sub_0021C4F0();
+}
+
 // [TODO] 0x0021C560 CarDrivingRewardsObject::vfunc_04 (39 B)
 // [TODO] 0x0021C590 sub_0021C590 (252 B)
 // ============================================================================
@@ -52520,7 +55344,39 @@ void __cdecl sub_002CE340(void)
 // [TODO] 0x002CEA30 sub_002CEA30 (13 B)
 // [TODO] 0x002CEA40 sub_002CEA40 (19 B)
 // [TODO] 0x002CEA70 sub_002CEA70 (25 B)
-// [TODO] 0x002CEA90 om::EntityLoader::vfunc_03 (36 B)
+// ============================================================================
+// [VERIFIED] om::EntityLoader::vfunc_03 (0x002CEA90, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// om::EntityLoader::vfunc_03 (0x002CEA90, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039E22C[];
+extern "C" char DAT_004630FC[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace om {
+
+class EntityLoader
+{
+public:
+    virtual EntityLoader* vfunc_03(int a1);
+};
+
+EntityLoader* EntityLoader::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0039E22C;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004630FC, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002CEAC0 om::EntityLoader::vfunc_04 (245 B)
 // [TODO] 0x002CEBC0 sub_002CEBC0 (13 B)
 // [TODO] 0x002CEBD0 sub_002CEBD0 (19 B)
@@ -52566,7 +55422,45 @@ void __cdecl sub_002CE340(void)
 // [TODO] 0x002CFA20 sub_002CFA20 (85 B)
 // [TODO] 0x002CFA80 om::Allocator::vfunc_00 (31 B)
 // [TODO] 0x002CFAA0 sub_002CFAA0 (75 B)
-// [TODO] 0x002CFB30 audio::Sequence::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::Sequence::vfunc_12 (0x002CFB30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::Sequence::vfunc_12 (0x002CFB30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00476364;
+
+namespace audio {
+
+class Sequence
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int Sequence::vfunc_12()
+{
+    return DAT_00476364;
+}
+
+}
+
 // [TODO] 0x002CFB40 sub_002CFB40 (8 B)
 // [TODO] 0x002CFB50 sub_002CFB50 (16 B)
 // [TODO] 0x002CFB60 sub_002CFB60 (102 B)
@@ -52701,7 +55595,45 @@ int __cdecl sub_002D0DD0(void)
 // [TODO] 0x002D1090 om::EntityType<audio::Clip>::vfunc_03 (6 B)
 // [TODO] 0x002D10A0 om::EntityType<audio::Clip>::vfunc_02 (6 B)
 // [TODO] 0x002D10B0 om::EntityType<audio::Clip>::vfunc_01 (69 B)
-// [TODO] 0x002D1100 audio::Clip::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::Clip::vfunc_12 (0x002D1100, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::Clip::vfunc_12 (0x002D1100, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004BFF58;
+
+namespace audio {
+
+class Clip
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int Clip::vfunc_12()
+{
+    return DAT_004BFF58;
+}
+
+}
+
 // [TODO] 0x002D1110 audio::Clip::vfunc_03 (61 B)
 // [TODO] 0x002D1150 sub_002D1150 (102 B)
 // [TODO] 0x002D11C0 om::EntityType<audio::Sequence>::vfunc_03 (6 B)
@@ -52721,7 +55653,45 @@ int __cdecl sub_002D0DD0(void)
 // [TODO] 0x002D1A40 sub_002D1A40 (540 B)
 // [TODO] 0x002D1CC0 om::MetaType<audio::LayerTemplate>::vfunc_00 (36 B)
 // [TODO] 0x002D1CF0 audio::LayerTemplate::vfunc_06 (45 B)
-// [TODO] 0x002D1D90 audio::LayerTemplate::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::LayerTemplate::vfunc_12 (0x002D1D90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::LayerTemplate::vfunc_12 (0x002D1D90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00476368;
+
+namespace audio {
+
+class LayerTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int LayerTemplate::vfunc_12()
+{
+    return DAT_00476368;
+}
+
+}
+
 // [TODO] 0x002D1DA0 sub_002D1DA0 (58 B)
 // [TODO] 0x002D1DE0 sub_002D1DE0 (102 B)
 // [TODO] 0x002D1E50 om::EntityType<audio::LayerTemplate>::vfunc_03 (6 B)
@@ -52976,7 +55946,45 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x002D7260 sub_002D7260 (19 B)
 // [TODO] 0x002D7280 sub_002D7280 (55 B)
 // [TODO] 0x002D72C0 sub_002D72C0 (55 B)
-// [TODO] 0x002D7340 audio::Mix::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::Mix::vfunc_12 (0x002D7340, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::Mix::vfunc_12 (0x002D7340, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00476394;
+
+namespace audio {
+
+class Mix
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int Mix::vfunc_12()
+{
+    return DAT_00476394;
+}
+
+}
+
 // [TODO] 0x002D7350 sub_002D7350 (38 B)
 // [TODO] 0x002D7380 sub_002D7380 (38 B)
 // [TODO] 0x002D73B0 sub_002D73B0 (38 B)
@@ -53052,7 +56060,45 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002D8850 om::EntityType<audio::ListenerEffectXBox>::vfunc_03 (6 B)
 // [TODO] 0x002D8860 om::EntityType<audio::ListenerEffectXBox>::vfunc_02 (6 B)
 // [TODO] 0x002D8870 om::EntityType<audio::ListenerEffectXBox>::vfunc_01 (62 B)
-// [TODO] 0x002D88B0 audio::ListenerEffectXBox::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::ListenerEffectXBox::vfunc_12 (0x002D88B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::ListenerEffectXBox::vfunc_12 (0x002D88B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00476398;
+
+namespace audio {
+
+class ListenerEffectXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int ListenerEffectXBox::vfunc_12()
+{
+    return DAT_00476398;
+}
+
+}
+
 // [TODO] 0x002D88C0 audio::ListenerEffectXBox::vfunc_03 (61 B)
 // [TODO] 0x002D8900 sub_002D8900 (1021 B)
 // [TODO] 0x002D8D00 audio::SeqEventNestTrack::vfunc_01 (52 B)
@@ -53063,10 +56109,74 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002D8E20 sub_002D8E20 (116 B)
 // [TODO] 0x002D8EA0 audio::SeqEventNestTrack::vfunc_02 (130 B)
 // [TODO] 0x002D8F30 audio::SeqAction::vfunc_00 (31 B)
-// [TODO] 0x002D8F50 audio::SeqActionChannelSendVolumes::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelSendVolumes::vfunc_00 (0x002D8F50, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionChannelSendVolumes::vfunc_00 (0x002D8F50, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00463EBC[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionChannelSendVolumes
+{
+public:
+    virtual SeqActionChannelSendVolumes* vfunc_00(int a1);
+};
+
+SeqActionChannelSendVolumes* SeqActionChannelSendVolumes::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00463EBC, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002D8F80 om::DynBehaviour::vfunc_00 (31 B)
 // [TODO] 0x002D8FA0 audio::SeqEventChannelSendVolumes::vfunc_02 (67 B)
-// [TODO] 0x002D8FF0 audio::ChannelSendVolumeFadeBehaviour::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::ChannelSendVolumeFadeBehaviour::vfunc_00 (0x002D8FF0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::ChannelSendVolumeFadeBehaviour::vfunc_00 (0x002D8FF0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E0810[];
+extern "C" char DAT_00463EC4[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class ChannelSendVolumeFadeBehaviour
+{
+public:
+    virtual ChannelSendVolumeFadeBehaviour* vfunc_00(int a1);
+};
+
+ChannelSendVolumeFadeBehaviour* ChannelSendVolumeFadeBehaviour::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E0810;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00463EC4, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002D9020 audio::ChannelSendVolumeFadeBehaviour::vfunc_01 (395 B)
 // [TODO] 0x002D91B0 sub_002D91B0 (58 B)
 // [TODO] 0x002D91F0 sub_002D91F0 (116 B)
@@ -53078,7 +56188,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002D9460 sub_002D9460 (64 B)
 // [TODO] 0x002D94A0 audio::SeqEventChannelSendVolumes::vfunc_01 (88 B)
 // [TODO] 0x002D9500 audio::SeqEventChannelSendVolumes::vfunc_00 (86 B)
-// [TODO] 0x002D9560 audio::SeqActionChannelSends::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelSends::vfunc_00 (0x002D9560, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionChannelSends::vfunc_00 (0x002D9560, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00463F78[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionChannelSends
+{
+public:
+    virtual SeqActionChannelSends* vfunc_00(int a1);
+};
+
+SeqActionChannelSends* SeqActionChannelSends::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00463F78, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002D95F0 audio::SeqEventChannelSends::vfunc_03 (6 B)
 // [TODO] 0x002D9600 audio::SeqEventChannelSends::vfunc_04 (35 B)
 // [TODO] 0x002D9630 audio::SeqEventChannelSends::vfunc_00 (72 B)
@@ -53094,7 +56236,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002D98C0 audio::SeqEventConditionElse::vfunc_00 (47 B)
 // [TODO] 0x002D98F0 audio::SeqEventCondition::vfunc_03 (6 B)
 // [TODO] 0x002D9900 audio::SeqEventCondition::vfunc_04 (72 B)
-// [TODO] 0x002D9950 audio::SeqCommandCondition::vfunc_01 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqCommandCondition::vfunc_01 (0x002D9950, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqCommandCondition::vfunc_01 (0x002D9950, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E0954[];
+extern "C" char DAT_004640B4[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqCommandCondition
+{
+public:
+    virtual SeqCommandCondition* vfunc_01(int a1);
+};
+
+SeqCommandCondition* SeqCommandCondition::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_003E0954;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004640B4, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002D9980 sub_002D9980 (116 B)
 // [TODO] 0x002D9A00 sub_002D9A00 (116 B)
 // [TODO] 0x002D9A80 audio::SeqEventConditionElse::vfunc_03 (6 B)
@@ -53109,7 +56283,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002D9D20 audio::SeqActionWait::vfunc_04 (15 B)
 // [TODO] 0x002D9D30 audio::SeqEventWait::vfunc_03 (6 B)
 // [TODO] 0x002D9D40 audio::SeqEventWait::vfunc_04 (45 B)
-// [TODO] 0x002D9D70 audio::SeqActionWait::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionWait::vfunc_00 (0x002D9D70, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWait::vfunc_00 (0x002D9D70, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_0046414C[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionWait
+{
+public:
+    virtual SeqActionWait* vfunc_00(int a1);
+};
+
+SeqActionWait* SeqActionWait::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_0046414C, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002D9DA0 audio::SeqActionWait::vfunc_05 (232 B)
 // [TODO] 0x002D9E90 audio::SeqEventType<audio::SeqEventWait>::vfunc_01 (88 B)
 // [TODO] 0x002D9EF0 sub_002D9EF0 (116 B)
@@ -53117,7 +56323,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002D9FC0 audio::SeqActionWaitBeat::vfunc_03 (15 B)
 // [TODO] 0x002D9FD0 audio::SeqActionWaitBeat::vfunc_04 (15 B)
 // [TODO] 0x002D9FE0 audio::SeqEventWaitBeat::vfunc_00 (65 B)
-// [TODO] 0x002DA030 audio::SeqActionWaitBeat::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionWaitBeat::vfunc_00 (0x002DA030, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWaitBeat::vfunc_00 (0x002DA030, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_004641F0[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionWaitBeat
+{
+public:
+    virtual SeqActionWaitBeat* vfunc_00(int a1);
+};
+
+SeqActionWaitBeat* SeqActionWaitBeat::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004641F0, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DA060 audio::SeqActionWaitBeat::vfunc_05 (93 B)
 // [TODO] 0x002DA0C0 sub_002DA0C0 (116 B)
 // [TODO] 0x002DA1A0 audio::SeqEventWaitBeat::vfunc_03 (6 B)
@@ -53126,7 +56364,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DA230 audio::SeqEventWaitBeat::vfunc_02 (73 B)
 // [TODO] 0x002DA280 audio::SeqEventType<audio::SeqEventWaitBeat>::vfunc_01 (27 B)
 // [TODO] 0x002DA2A0 audio::SeqActionWaitBeat::vfunc_02 (60 B)
-// [TODO] 0x002DA2E0 audio::SeqActionExpression::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionExpression::vfunc_00 (0x002DA2E0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionExpression::vfunc_00 (0x002DA2E0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00464294[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionExpression
+{
+public:
+    virtual SeqActionExpression* vfunc_00(int a1);
+};
+
+SeqActionExpression* SeqActionExpression::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464294, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DA310 audio::SeqEventExpression::vfunc_03 (6 B)
 // [TODO] 0x002DA320 audio::SeqEventExpression::vfunc_04 (45 B)
 // [TODO] 0x002DA350 audio::SeqEventExpression::vfunc_02 (67 B)
@@ -53137,26 +56407,154 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DA590 audio::SeqEventStopTrack::vfunc_00 (103 B)
 // [TODO] 0x002DA600 audio::SeqEventType<audio::SeqEventStopTrack>::vfunc_01 (27 B)
 // [TODO] 0x002DA620 audio::SeqEventStopTrack::vfunc_03 (6 B)
-// [TODO] 0x002DA630 audio::SeqActionStopTrack::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionStopTrack::vfunc_00 (0x002DA630, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionStopTrack::vfunc_00 (0x002DA630, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00464338[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionStopTrack
+{
+public:
+    virtual SeqActionStopTrack* vfunc_00(int a1);
+};
+
+SeqActionStopTrack* SeqActionStopTrack::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464338, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DA660 audio::SeqEventStopTrack::vfunc_04 (45 B)
 // [TODO] 0x002DA690 audio::SeqEventStopTrack::vfunc_02 (67 B)
 // [TODO] 0x002DA6E0 sub_002DA6E0 (116 B)
 // [TODO] 0x002DA760 audio::SeqActionStopTrack::vfunc_06 (347 B)
 // [TODO] 0x002DA8C0 audio::SeqEventPlayTrack::vfunc_01 (105 B)
 // [TODO] 0x002DA930 audio::SeqEventPlayTrack::vfunc_00 (103 B)
-// [TODO] 0x002DA9A0 audio::SeqActionPlayTrack::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionPlayTrack::vfunc_00 (0x002DA9A0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionPlayTrack::vfunc_00 (0x002DA9A0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_004643DC[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionPlayTrack
+{
+public:
+    virtual SeqActionPlayTrack* vfunc_00(int a1);
+};
+
+SeqActionPlayTrack* SeqActionPlayTrack::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004643DC, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DAA20 audio::SeqEventPlayTrack::vfunc_03 (6 B)
 // [TODO] 0x002DAA30 audio::SeqEventPlayTrack::vfunc_04 (45 B)
 // [TODO] 0x002DAA60 audio::SeqEventPlayTrack::vfunc_02 (67 B)
 // [TODO] 0x002DAAB0 audio::SeqActionPlayTrack::vfunc_06 (188 B)
 // [TODO] 0x002DAB70 audio::SeqEventType<audio::SeqEventPlayTrack>::vfunc_01 (27 B)
 // [TODO] 0x002DAB90 sub_002DAB90 (116 B)
-// [TODO] 0x002DAC10 audio::SeqActionChannelVolumes::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelVolumes::vfunc_00 (0x002DAC10, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionChannelVolumes::vfunc_00 (0x002DAC10, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_004644C0[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionChannelVolumes
+{
+public:
+    virtual SeqActionChannelVolumes* vfunc_00(int a1);
+};
+
+SeqActionChannelVolumes* SeqActionChannelVolumes::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004644C0, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DAC40 sub_002DAC40 (83 B)
 // [TODO] 0x002DAD00 audio::SeqEventChannelVolumes::vfunc_03 (6 B)
 // [TODO] 0x002DAD10 audio::SeqEventChannelVolumes::vfunc_04 (35 B)
 // [TODO] 0x002DAD40 audio::SeqEventChannelVolumes::vfunc_02 (67 B)
-// [TODO] 0x002DAD90 audio::ChannelVolumeFadeBehaviour::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::ChannelVolumeFadeBehaviour::vfunc_00 (0x002DAD90, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::ChannelVolumeFadeBehaviour::vfunc_00 (0x002DAD90, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E0810[];
+extern "C" char DAT_004644C8[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class ChannelVolumeFadeBehaviour
+{
+public:
+    virtual ChannelVolumeFadeBehaviour* vfunc_00(int a1);
+};
+
+ChannelVolumeFadeBehaviour* ChannelVolumeFadeBehaviour::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E0810;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004644C8, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DADC0 audio::ChannelVolumeFadeBehaviour::vfunc_01 (755 B)
 // [TODO] 0x002DB0C0 audio::SeqEventType<audio::SeqEventChannelVolumes>::vfunc_01 (27 B)
 // [TODO] 0x002DB0E0 sub_002DB0E0 (53 B)
@@ -53167,7 +56565,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DB2A0 audio::SeqActionChannelVolumes::vfunc_06 (180 B)
 // [TODO] 0x002DB360 audio::SeqEventVarVolumeRand::vfunc_01 (49 B)
 // [TODO] 0x002DB3A0 audio::SeqEventVarVolumeRand::vfunc_00 (69 B)
-// [TODO] 0x002DB3F0 audio::SeqActionVarVolumeRand::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarVolumeRand::vfunc_00 (0x002DB3F0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarVolumeRand::vfunc_00 (0x002DB3F0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00464578[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionVarVolumeRand
+{
+public:
+    virtual SeqActionVarVolumeRand* vfunc_00(int a1);
+};
+
+SeqActionVarVolumeRand* SeqActionVarVolumeRand::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464578, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DB420 audio::SeqEventVarVolumeRand::vfunc_03 (6 B)
 // [TODO] 0x002DB430 audio::SeqEventVarVolumeRand::vfunc_04 (35 B)
 // [TODO] 0x002DB460 audio::SeqEventVarVolumeRand::vfunc_02 (67 B)
@@ -53176,7 +56606,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DB530 sub_002DB530 (116 B)
 // [TODO] 0x002DB5B0 audio::SeqEventVarVolume::vfunc_01 (52 B)
 // [TODO] 0x002DB5F0 audio::SeqEventVarVolume::vfunc_00 (32 B)
-// [TODO] 0x002DB610 audio::SeqActionVarVolume::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarVolume::vfunc_00 (0x002DB610, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarVolume::vfunc_00 (0x002DB610, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_0046461C[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionVarVolume
+{
+public:
+    virtual SeqActionVarVolume* vfunc_00(int a1);
+};
+
+SeqActionVarVolume* SeqActionVarVolume::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_0046461C, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DB640 audio::SeqEventVarVolume::vfunc_03 (6 B)
 // [TODO] 0x002DB650 audio::SeqEventVarVolume::vfunc_04 (35 B)
 // [TODO] 0x002DB680 audio::SeqEventVarVolume::vfunc_02 (67 B)
@@ -53185,7 +56647,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DB720 sub_002DB720 (116 B)
 // [TODO] 0x002DB7A0 audio::SeqEventVarTempo::vfunc_01 (65 B)
 // [TODO] 0x002DB7F0 audio::SeqEventVarTempo::vfunc_00 (65 B)
-// [TODO] 0x002DB840 audio::SeqActionVarTempo::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarTempo::vfunc_00 (0x002DB840, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarTempo::vfunc_00 (0x002DB840, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_004646C0[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionVarTempo
+{
+public:
+    virtual SeqActionVarTempo* vfunc_00(int a1);
+};
+
+SeqActionVarTempo* SeqActionVarTempo::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004646C0, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DB870 audio::SeqEventVarTempo::vfunc_03 (6 B)
 // [TODO] 0x002DB880 audio::SeqEventVarTempo::vfunc_04 (35 B)
 // [TODO] 0x002DB8B0 audio::SeqEventVarTempo::vfunc_02 (67 B)
@@ -53194,7 +56688,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DB970 sub_002DB970 (116 B)
 // [TODO] 0x002DB9F0 audio::SeqEventVarPosDist::vfunc_01 (48 B)
 // [TODO] 0x002DBA20 audio::SeqEventVarPosDist::vfunc_00 (48 B)
-// [TODO] 0x002DBA50 audio::SeqActionVarPosDist::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarPosDist::vfunc_00 (0x002DBA50, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarPosDist::vfunc_00 (0x002DBA50, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00464764[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionVarPosDist
+{
+public:
+    virtual SeqActionVarPosDist* vfunc_00(int a1);
+};
+
+SeqActionVarPosDist* SeqActionVarPosDist::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464764, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DBA80 audio::SeqEventVarPosDist::vfunc_03 (6 B)
 // [TODO] 0x002DBA90 audio::SeqEventVarPosDist::vfunc_04 (35 B)
 // [TODO] 0x002DBAC0 audio::SeqEventVarPosDist::vfunc_02 (67 B)
@@ -53202,7 +56728,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DBB30 audio::SeqEventType<audio::SeqEventVarPosDist>::vfunc_01 (55 B)
 // [TODO] 0x002DBB70 sub_002DBB70 (116 B)
 // [TODO] 0x002DBBF0 audio::SeqEventVarPitchRand::vfunc_01 (69 B)
-// [TODO] 0x002DBC40 audio::SeqActionVarPitchRand::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarPitchRand::vfunc_00 (0x002DBC40, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarPitchRand::vfunc_00 (0x002DBC40, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00464818[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionVarPitchRand
+{
+public:
+    virtual SeqActionVarPitchRand* vfunc_00(int a1);
+};
+
+SeqActionVarPitchRand* SeqActionVarPitchRand::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464818, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DBC70 audio::SeqEventVarPitchRand::vfunc_03 (6 B)
 // [TODO] 0x002DBC80 audio::SeqEventVarPitchRand::vfunc_04 (35 B)
 // [TODO] 0x002DBCB0 audio::SeqEventVarPitchRand::vfunc_02 (67 B)
@@ -53210,7 +56768,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DBD40 audio::SeqEventType<audio::SeqEventVarPitchRand>::vfunc_01 (55 B)
 // [TODO] 0x002DBD80 sub_002DBD80 (116 B)
 // [TODO] 0x002DBE00 audio::SeqEventVarPitch::vfunc_00 (52 B)
-// [TODO] 0x002DBE40 audio::SeqActionVarPitch::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarPitch::vfunc_00 (0x002DBE40, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarPitch::vfunc_00 (0x002DBE40, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_004648BC[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionVarPitch
+{
+public:
+    virtual SeqActionVarPitch* vfunc_00(int a1);
+};
+
+SeqActionVarPitch* SeqActionVarPitch::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004648BC, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DBE70 audio::SeqEventVarPitch::vfunc_03 (6 B)
 // [TODO] 0x002DBE80 audio::SeqEventVarPitch::vfunc_04 (35 B)
 // [TODO] 0x002DBEB0 audio::SeqEventVarPitch::vfunc_02 (67 B)
@@ -53226,7 +56816,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DC110 sub_002DC110 (227 B)
 // [TODO] 0x002DC200 audio::SeqEventStream::vfunc_03 (6 B)
 // [TODO] 0x002DC210 audio::SeqEventStream::vfunc_04 (35 B)
-// [TODO] 0x002DC240 audio::SeqActionStream::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionStream::vfunc_00 (0x002DC240, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionStream::vfunc_00 (0x002DC240, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00464930[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionStream
+{
+public:
+    virtual SeqActionStream* vfunc_00(int a1);
+};
+
+SeqActionStream* SeqActionStream::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464930, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DC270 sub_002DC270 (119 B)
 // [TODO] 0x002DC2F0 audio::SeqEventType<audio::SeqEventStream>::vfunc_01 (49 B)
 // [TODO] 0x002DC330 sub_002DC330 (116 B)
@@ -53239,7 +56861,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DCAF0 audio::SeqActionSilence::vfunc_05 (86 B)
 // [TODO] 0x002DCB50 audio::SeqEventSilence::vfunc_03 (6 B)
 // [TODO] 0x002DCB60 audio::SeqEventSilence::vfunc_04 (35 B)
-// [TODO] 0x002DCB90 audio::SeqActionSilence::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionSilence::vfunc_00 (0x002DCB90, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionSilence::vfunc_00 (0x002DCB90, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_004649CC[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionSilence
+{
+public:
+    virtual SeqActionSilence* vfunc_00(int a1);
+};
+
+SeqActionSilence* SeqActionSilence::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_004649CC, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DCBC0 audio::SeqEventType<audio::SeqEventSilence>::vfunc_01 (55 B)
 // [TODO] 0x002DCC00 sub_002DCC00 (116 B)
 // [TODO] 0x002DCC80 audio::SeqEventSilence::vfunc_02 (112 B)
@@ -53250,13 +56904,77 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DCEB0 audio::SeqEventLogicRepeat::vfunc_04 (35 B)
 // [TODO] 0x002DCEE0 audio::SeqEventLogicRepeat::vfunc_03 (6 B)
 // [TODO] 0x002DCEF0 sub_002DCEF0 (118 B)
-// [TODO] 0x002DCF70 audio::SeqCommandLogicRepeat::vfunc_01 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqCommandLogicRepeat::vfunc_01 (0x002DCF70, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqCommandLogicRepeat::vfunc_01 (0x002DCF70, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E0954[];
+extern "C" char DAT_00464A78[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqCommandLogicRepeat
+{
+public:
+    virtual SeqCommandLogicRepeat* vfunc_01(int a1);
+};
+
+SeqCommandLogicRepeat* SeqCommandLogicRepeat::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_003E0954;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464A78, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DCFA0 audio::SeqCommandLogicRepeat::vfunc_00 (113 B)
 // [TODO] 0x002DD020 audio::SeqEventType<audio::SeqEventLogicRepeat>::vfunc_01 (63 B)
 // [TODO] 0x002DD060 audio::SeqEventLogicRepeat::vfunc_02 (58 B)
 // [TODO] 0x002DD0A0 audio::SeqEventLogicOr::vfunc_01 (64 B)
 // [TODO] 0x002DD0E0 audio::SeqEventLogicOr::vfunc_00 (64 B)
-// [TODO] 0x002DD120 audio::SeqCommandLogicOr::vfunc_01 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqCommandLogicOr::vfunc_01 (0x002DD120, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqCommandLogicOr::vfunc_01 (0x002DD120, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E0954[];
+extern "C" char DAT_00464B14[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqCommandLogicOr
+{
+public:
+    virtual SeqCommandLogicOr* vfunc_01(int a1);
+};
+
+SeqCommandLogicOr* SeqCommandLogicOr::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_003E0954;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464B14, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DD150 sub_002DD150 (116 B)
 // [TODO] 0x002DD1D0 audio::SeqEventLogicOr::vfunc_03 (6 B)
 // [TODO] 0x002DD1E0 audio::SeqEventLogicOr::vfunc_04 (35 B)
@@ -53266,7 +56984,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DD3A0 audio::SeqActionCrossFade::vfunc_04 (40 B)
 // [TODO] 0x002DD3D0 sub_002DD3D0 (86 B)
 // [TODO] 0x002DD430 audio::SeqEventCrossFade::vfunc_00 (192 B)
-// [TODO] 0x002DD4F0 audio::SeqActionCrossFade::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionCrossFade::vfunc_00 (0x002DD4F0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionCrossFade::vfunc_00 (0x002DD4F0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00464BB8[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionCrossFade
+{
+public:
+    virtual SeqActionCrossFade* vfunc_00(int a1);
+};
+
+SeqActionCrossFade* SeqActionCrossFade::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464BB8, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DD520 sub_002DD520 (116 B)
 // [TODO] 0x002DD630 audio::SeqEventCrossFade::vfunc_03 (6 B)
 // [TODO] 0x002DD640 audio::SeqEventCrossFade::vfunc_04 (53 B)
@@ -53284,7 +57034,39 @@ void Class_002D7F60::sub_002D7F60()
 // [TODO] 0x002DDC90 sub_002DDC90 (213 B)
 // [TODO] 0x002DDD70 audio::SeqEventClip::vfunc_03 (6 B)
 // [TODO] 0x002DDD80 audio::SeqEventClip::vfunc_04 (35 B)
-// [TODO] 0x002DDDB0 audio::SeqActionClip::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionClip::vfunc_00 (0x002DDDB0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionClip::vfunc_00 (0x002DDDB0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003E07F4[];
+extern "C" char DAT_00464C2C[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace audio {
+
+class SeqActionClip
+{
+public:
+    virtual SeqActionClip* vfunc_00(int a1);
+};
+
+SeqActionClip* SeqActionClip::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003E07F4;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_00464C2C, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002DDDE0 sub_002DDDE0 (922 B)
 // [TODO] 0x002DE180 sub_002DE180 (119 B)
 // [TODO] 0x002DE200 audio::SeqEventType<audio::SeqEventClip>::vfunc_01 (53 B)

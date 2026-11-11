@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, fe/MapHUD2.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, fe/MapHUD2.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 7 functions matched (14.29%). NOT COMPLETE YET.
-// The 6 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 7 functions matched (28.57%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -30,5 +30,32 @@ public:
 void* MapHUD2::vfunc_00()
 {
     return DAT_00411704;
+}
+
+// ============================================================================
+// [VERIFIED] MapHUD2::vfunc_28 (0x0017C860, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MapHUD2::vfunc_28 (0x0017C860, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0016E200(void);
+
+class MapHUD2
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_28();
+};
+
+void MapHUD2::vfunc_28()
+{
+    sub_0016E200();
 }
 

@@ -1,13 +1,40 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/MissionFailHUD.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/MissionFailHUD.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 11 functions matched (9.09%). NOT COMPLETE YET.
-// The 10 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 11 functions matched (18.18%). NOT COMPLETE YET.
+// The 9 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] MissionFailHUD::vfunc_46 (0x001ACE70, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionFailHUD::vfunc_46 (0x001ACE70, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00193C60(void);
+
+class MissionFailHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_46();
+};
+
+void MissionFailHUD::vfunc_46()
+{
+    sub_00193C60();
+}
 
 // ============================================================================
 // [VERIFIED] MissionFailHUD::vfunc_00 (0x001AD250, 6 B)

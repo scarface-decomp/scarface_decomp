@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 62 of 1,516 functions matched (4.09%). NOT COMPLETE YET.
-// The 1,454 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 92 of 1,516 functions matched (6.07%). NOT COMPLETE YET.
+// The 1,424 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -136,7 +136,45 @@ int __cdecl sub_006DF490(void)
 // [TODO] 0x006DF780 sub_006DF780 (55 B)
 // [TODO] 0x006DF7C0 core::MemoryAllocatorMalloc::vfunc_08 (22 B)
 // [TODO] 0x006DF7E0 pure3d::pddiDisplay::vfunc_09 (5 B)
-// [TODO] 0x006DF7F0 core::MemoryAllocatorMalloc::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] core::MemoryAllocatorMalloc::vfunc_12 (0x006DF7F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::MemoryAllocatorMalloc::vfunc_12 (0x006DF7F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085AF08;
+
+namespace core {
+
+class MemoryAllocatorMalloc
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int MemoryAllocatorMalloc::vfunc_12()
+{
+    return DAT_0085AF08;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_006DF960 (0x006DF960, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -694,7 +732,39 @@ void Class_006E9810::sub_006E9810()
 // [TODO] 0x006EC620 sub_006EC620 (6 B)
 // [TODO] 0x006EC630 sub_006EC630 (19 B)
 // [TODO] 0x006EC650 sub_006EC650 (25 B)
-// [TODO] 0x006EC670 om::EntityLoader::vfunc_03 (36 B)
+// ============================================================================
+// [VERIFIED] om::EntityLoader::vfunc_03 (0x006EC670, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// om::EntityLoader::vfunc_03 (0x006EC670, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_007F6474[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace om {
+
+class EntityLoader
+{
+public:
+    virtual EntityLoader* vfunc_03(int a1);
+};
+
+EntityLoader* EntityLoader::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0073523C;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F6474, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006EC6A0 om::EntityLoader::vfunc_04 (245 B)
 // [TODO] 0x006EC7A0 sub_006EC7A0 (6 B)
 // [TODO] 0x006EC7B0 sub_006EC7B0 (19 B)
@@ -728,7 +798,45 @@ void Class_006E9810::sub_006E9810()
 // [TODO] 0x006ED440 om::Entity::vfunc_03 (51 B)
 // [TODO] 0x006ED490 GlobalVehicleSound::vfunc_04 (109 B)
 // [TODO] 0x006ED500 sub_006ED500 (75 B)
-// [TODO] 0x006ED590 audio::Sequence::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::Sequence::vfunc_12 (0x006ED590, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::Sequence::vfunc_12 (0x006ED590, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00811D78;
+
+namespace audio {
+
+class Sequence
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int Sequence::vfunc_12()
+{
+    return DAT_00811D78;
+}
+
+}
+
 // [TODO] 0x006ED5A0 sub_006ED5A0 (8 B)
 // [TODO] 0x006ED5B0 sub_006ED5B0 (16 B)
 // [TODO] 0x006ED5C0 sub_006ED5C0 (102 B)
@@ -890,7 +998,45 @@ void Class_006EE9F0::sub_006EE9F0()
 // [TODO] 0x006EECB0 om::EntityType<audio::Clip>::vfunc_03 (6 B)
 // [TODO] 0x006EECC0 om::EntityType<audio::Clip>::vfunc_02 (6 B)
 // [TODO] 0x006EECD0 om::EntityType<audio::Clip>::vfunc_01 (69 B)
-// [TODO] 0x006EED20 audio::Clip::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::Clip::vfunc_12 (0x006EED20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::Clip::vfunc_12 (0x006EED20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085CED0;
+
+namespace audio {
+
+class Clip
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int Clip::vfunc_12()
+{
+    return DAT_0085CED0;
+}
+
+}
+
 // [TODO] 0x006EED30 audio::Clip::vfunc_03 (61 B)
 // [TODO] 0x006EED70 sub_006EED70 (102 B)
 // [TODO] 0x006EEDE0 om::EntityType<audio::Sequence>::vfunc_03 (6 B)
@@ -934,7 +1080,45 @@ void Class_006EE9F0::sub_006EE9F0()
 // [TODO] 0x006F0210 sub_006F0210 (445 B)
 // [TODO] 0x006F03D0 om::MetaType<audio::LayerTemplate>::vfunc_00 (36 B)
 // [TODO] 0x006F0400 audio::LayerTemplate::vfunc_06 (45 B)
-// [TODO] 0x006F04A0 audio::LayerTemplate::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::LayerTemplate::vfunc_12 (0x006F04A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::LayerTemplate::vfunc_12 (0x006F04A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00811D7C;
+
+namespace audio {
+
+class LayerTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int LayerTemplate::vfunc_12()
+{
+    return DAT_00811D7C;
+}
+
+}
+
 // [TODO] 0x006F04B0 sub_006F04B0 (58 B)
 // [TODO] 0x006F04F0 sub_006F04F0 (102 B)
 // [TODO] 0x006F0560 om::EntityType<audio::LayerTemplate>::vfunc_03 (6 B)
@@ -1157,7 +1341,45 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F5F80 sub_006F5F80 (19 B)
 // [TODO] 0x006F5FA0 sub_006F5FA0 (53 B)
 // [TODO] 0x006F5FE0 sub_006F5FE0 (53 B)
-// [TODO] 0x006F6060 audio::Mix::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::Mix::vfunc_12 (0x006F6060, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::Mix::vfunc_12 (0x006F6060, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00811DA8;
+
+namespace audio {
+
+class Mix
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int Mix::vfunc_12()
+{
+    return DAT_00811DA8;
+}
+
+}
+
 // [TODO] 0x006F6070 sub_006F6070 (38 B)
 // [TODO] 0x006F60A0 sub_006F60A0 (38 B)
 // [TODO] 0x006F60D0 sub_006F60D0 (38 B)
@@ -1179,7 +1401,45 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F67C0 om::EntityType<audio::ListenerEffectWin32>::vfunc_02 (6 B)
 // [TODO] 0x006F67D0 om::EntityType<audio::Mix>::vfunc_00 (30 B)
 // [TODO] 0x006F67F0 om::EntityType<audio::ListenerEffectWin32>::vfunc_01 (62 B)
-// [TODO] 0x006F6830 audio::ListenerEffectWin32::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] audio::ListenerEffectWin32::vfunc_12 (0x006F6830, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::ListenerEffectWin32::vfunc_12 (0x006F6830, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00811DAC;
+
+namespace audio {
+
+class ListenerEffectWin32
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int ListenerEffectWin32::vfunc_12()
+{
+    return DAT_00811DAC;
+}
+
+}
+
 // [TODO] 0x006F6840 audio::ListenerEffectWin32::vfunc_03 (61 B)
 // [TODO] 0x006F6880 sub_006F6880 (155 B)
 // [TODO] 0x006F6920 audio::SeqEventNestTrack::vfunc_00 (52 B)
@@ -1189,10 +1449,74 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F6A00 sub_006F6A00 (116 B)
 // [TODO] 0x006F6A80 audio::SeqEventNestTrack::vfunc_02 (130 B)
 // [TODO] 0x006F6B10 audio::SeqAction::vfunc_00 (31 B)
-// [TODO] 0x006F6B30 audio::SeqActionChannelSendVolumes::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelSendVolumes::vfunc_00 (0x006F6B30, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionChannelSendVolumes::vfunc_00 (0x006F6B30, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7144[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionChannelSendVolumes
+{
+public:
+    virtual SeqActionChannelSendVolumes* vfunc_00(int a1);
+};
+
+SeqActionChannelSendVolumes* SeqActionChannelSendVolumes::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7144, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F6B60 om::DynBehaviour::vfunc_00 (31 B)
 // [TODO] 0x006F6B80 audio::SeqEventChannelSendVolumes::vfunc_02 (67 B)
-// [TODO] 0x006F6BD0 audio::ChannelSendVolumeFadeBehaviour::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::ChannelSendVolumeFadeBehaviour::vfunc_00 (0x006F6BD0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::ChannelSendVolumeFadeBehaviour::vfunc_00 (0x006F6BD0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F9C[];
+extern "C" char DAT_007F714C[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class ChannelSendVolumeFadeBehaviour
+{
+public:
+    virtual ChannelSendVolumeFadeBehaviour* vfunc_00(int a1);
+};
+
+ChannelSendVolumeFadeBehaviour* ChannelSendVolumeFadeBehaviour::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F9C;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F714C, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F6C00 audio::ChannelSendVolumeFadeBehaviour::vfunc_01 (403 B)
 // [TODO] 0x006F6DA0 sub_006F6DA0 (58 B)
 // [TODO] 0x006F6DE0 sub_006F6DE0 (116 B)
@@ -1204,7 +1528,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F7050 sub_006F7050 (68 B)
 // [TODO] 0x006F70A0 audio::SeqEventChannelSendVolumes::vfunc_01 (88 B)
 // [TODO] 0x006F7100 audio::SeqEventChannelSendVolumes::vfunc_00 (86 B)
-// [TODO] 0x006F7160 audio::SeqActionChannelSends::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelSends::vfunc_00 (0x006F7160, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionChannelSends::vfunc_00 (0x006F7160, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7200[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionChannelSends
+{
+public:
+    virtual SeqActionChannelSends* vfunc_00(int a1);
+};
+
+SeqActionChannelSends* SeqActionChannelSends::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7200, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F71F0 audio::SeqEventChannelSends::vfunc_03 (6 B)
 // [TODO] 0x006F7200 audio::SeqEventChannelSends::vfunc_04 (35 B)
 // [TODO] 0x006F7230 audio::SeqEventChannelSends::vfunc_00 (72 B)
@@ -1220,7 +1576,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F74C0 audio::SeqEventConditionElse::vfunc_00 (47 B)
 // [TODO] 0x006F74F0 audio::SeqEventCondition::vfunc_03 (6 B)
 // [TODO] 0x006F7500 audio::SeqEventCondition::vfunc_04 (72 B)
-// [TODO] 0x006F7550 audio::SeqCommandCondition::vfunc_01 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqCommandCondition::vfunc_01 (0x006F7550, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqCommandCondition::vfunc_01 (0x006F7550, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007730E0[];
+extern "C" char DAT_007F733C[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqCommandCondition
+{
+public:
+    virtual SeqCommandCondition* vfunc_01(int a1);
+};
+
+SeqCommandCondition* SeqCommandCondition::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_007730E0;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F733C, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F7580 sub_006F7580 (116 B)
 // [TODO] 0x006F7600 sub_006F7600 (116 B)
 // [TODO] 0x006F7680 audio::SeqEventConditionElse::vfunc_03 (6 B)
@@ -1235,13 +1623,77 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F7920 audio::SeqActionWait::vfunc_04 (15 B)
 // [TODO] 0x006F7930 audio::SeqEventWait::vfunc_03 (6 B)
 // [TODO] 0x006F7940 audio::SeqEventWait::vfunc_04 (45 B)
-// [TODO] 0x006F7970 audio::SeqActionWait::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionWait::vfunc_00 (0x006F7970, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWait::vfunc_00 (0x006F7970, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F73D4[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionWait
+{
+public:
+    virtual SeqActionWait* vfunc_00(int a1);
+};
+
+SeqActionWait* SeqActionWait::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F73D4, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F79A0 audio::SeqActionWait::vfunc_05 (232 B)
 // [TODO] 0x006F7A90 audio::SeqEventType<audio::SeqEventWait>::vfunc_01 (88 B)
 // [TODO] 0x006F7AF0 sub_006F7AF0 (116 B)
 // [TODO] 0x006F7B70 audio::SeqEventWait::vfunc_02 (67 B)
 // [TODO] 0x006F7BC0 audio::SeqEventWaitBeat::vfunc_00 (65 B)
-// [TODO] 0x006F7C10 audio::SeqActionWaitBeat::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionWaitBeat::vfunc_00 (0x006F7C10, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWaitBeat::vfunc_00 (0x006F7C10, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7478[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionWaitBeat
+{
+public:
+    virtual SeqActionWaitBeat* vfunc_00(int a1);
+};
+
+SeqActionWaitBeat* SeqActionWaitBeat::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7478, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F7C40 audio::SeqActionWaitBeat::vfunc_05 (93 B)
 // [TODO] 0x006F7CA0 sub_006F7CA0 (116 B)
 // [TODO] 0x006F7D80 audio::SeqEventWaitBeat::vfunc_03 (6 B)
@@ -1251,7 +1703,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F7E60 audio::SeqEventType<audio::SeqEventWaitBeat>::vfunc_01 (27 B)
 // [TODO] 0x006F7E80 audio::SeqActionWaitBeat::vfunc_02 (60 B)
 // [TODO] 0x006F7EC0 audio::SeqEventNestTrack::vfunc_01 (52 B)
-// [TODO] 0x006F7F00 audio::SeqActionExpression::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionExpression::vfunc_00 (0x006F7F00, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionExpression::vfunc_00 (0x006F7F00, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F751C[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionExpression
+{
+public:
+    virtual SeqActionExpression* vfunc_00(int a1);
+};
+
+SeqActionExpression* SeqActionExpression::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F751C, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F7F30 audio::SeqEventExpression::vfunc_03 (6 B)
 // [TODO] 0x006F7F40 audio::SeqEventExpression::vfunc_04 (45 B)
 // [TODO] 0x006F7F70 audio::SeqEventExpression::vfunc_02 (67 B)
@@ -1262,7 +1746,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F81B0 audio::SeqEventStopTrack::vfunc_00 (103 B)
 // [TODO] 0x006F8220 audio::SeqEventType<audio::SeqEventStopTrack>::vfunc_01 (27 B)
 // [TODO] 0x006F8240 audio::SeqEventStopTrack::vfunc_03 (6 B)
-// [TODO] 0x006F8250 audio::SeqActionStopTrack::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionStopTrack::vfunc_00 (0x006F8250, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionStopTrack::vfunc_00 (0x006F8250, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F75C0[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionStopTrack
+{
+public:
+    virtual SeqActionStopTrack* vfunc_00(int a1);
+};
+
+SeqActionStopTrack* SeqActionStopTrack::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F75C0, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F8280 audio::SeqEventStopTrack::vfunc_04 (45 B)
 // [TODO] 0x006F82B0 audio::SeqEventStopTrack::vfunc_02 (67 B)
 // [TODO] 0x006F8300 audio::SeqEventType<audio::SeqEventNestTrack>::vfunc_00 (30 B)
@@ -1270,19 +1786,115 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F83A0 audio::SeqActionStopTrack::vfunc_06 (335 B)
 // [TODO] 0x006F84F0 audio::SeqEventPlayTrack::vfunc_01 (103 B)
 // [TODO] 0x006F8560 audio::SeqEventPlayTrack::vfunc_00 (103 B)
-// [TODO] 0x006F85D0 audio::SeqActionPlayTrack::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionPlayTrack::vfunc_00 (0x006F85D0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionPlayTrack::vfunc_00 (0x006F85D0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7664[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionPlayTrack
+{
+public:
+    virtual SeqActionPlayTrack* vfunc_00(int a1);
+};
+
+SeqActionPlayTrack* SeqActionPlayTrack::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7664, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F8650 audio::SeqEventPlayTrack::vfunc_03 (6 B)
 // [TODO] 0x006F8660 audio::SeqEventPlayTrack::vfunc_04 (45 B)
 // [TODO] 0x006F8690 audio::SeqEventPlayTrack::vfunc_02 (67 B)
 // [TODO] 0x006F86E0 audio::SeqActionPlayTrack::vfunc_06 (187 B)
 // [TODO] 0x006F87A0 audio::SeqEventType<audio::SeqEventPlayTrack>::vfunc_01 (27 B)
 // [TODO] 0x006F87C0 sub_006F87C0 (116 B)
-// [TODO] 0x006F8840 audio::SeqActionChannelVolumes::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelVolumes::vfunc_00 (0x006F8840, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionChannelVolumes::vfunc_00 (0x006F8840, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7748[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionChannelVolumes
+{
+public:
+    virtual SeqActionChannelVolumes* vfunc_00(int a1);
+};
+
+SeqActionChannelVolumes* SeqActionChannelVolumes::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7748, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F8870 sub_006F8870 (83 B)
 // [TODO] 0x006F8930 audio::SeqEventChannelVolumes::vfunc_03 (6 B)
 // [TODO] 0x006F8940 audio::SeqEventChannelVolumes::vfunc_04 (35 B)
 // [TODO] 0x006F8970 audio::SeqEventChannelVolumes::vfunc_02 (67 B)
-// [TODO] 0x006F89C0 audio::ChannelVolumeFadeBehaviour::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::ChannelVolumeFadeBehaviour::vfunc_00 (0x006F89C0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::ChannelVolumeFadeBehaviour::vfunc_00 (0x006F89C0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F9C[];
+extern "C" char DAT_007F7750[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class ChannelVolumeFadeBehaviour
+{
+public:
+    virtual ChannelVolumeFadeBehaviour* vfunc_00(int a1);
+};
+
+ChannelVolumeFadeBehaviour* ChannelVolumeFadeBehaviour::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F9C;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7750, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F89F0 audio::ChannelVolumeFadeBehaviour::vfunc_01 (771 B)
 // [TODO] 0x006F8D00 audio::SeqEventType<audio::SeqEventChannelVolumes>::vfunc_01 (27 B)
 // [TODO] 0x006F8D20 sub_006F8D20 (53 B)
@@ -1293,7 +1905,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F8EE0 audio::SeqActionChannelVolumes::vfunc_06 (180 B)
 // [TODO] 0x006F8FA0 audio::SeqEventVarVolumeRand::vfunc_01 (49 B)
 // [TODO] 0x006F8FE0 audio::SeqEventVarVolumeRand::vfunc_00 (69 B)
-// [TODO] 0x006F9030 audio::SeqActionVarVolumeRand::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarVolumeRand::vfunc_00 (0x006F9030, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarVolumeRand::vfunc_00 (0x006F9030, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7800[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionVarVolumeRand
+{
+public:
+    virtual SeqActionVarVolumeRand* vfunc_00(int a1);
+};
+
+SeqActionVarVolumeRand* SeqActionVarVolumeRand::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7800, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F9060 audio::SeqEventVarVolumeRand::vfunc_03 (6 B)
 // [TODO] 0x006F9070 audio::SeqEventVarVolumeRand::vfunc_04 (35 B)
 // [TODO] 0x006F90A0 audio::SeqEventVarVolumeRand::vfunc_02 (67 B)
@@ -1302,7 +1946,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F9170 sub_006F9170 (116 B)
 // [TODO] 0x006F91F0 audio::SeqEventVarVolume::vfunc_01 (52 B)
 // [TODO] 0x006F9230 audio::SeqEventVarVolume::vfunc_00 (32 B)
-// [TODO] 0x006F9250 audio::SeqActionVarVolume::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarVolume::vfunc_00 (0x006F9250, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarVolume::vfunc_00 (0x006F9250, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F78A4[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionVarVolume
+{
+public:
+    virtual SeqActionVarVolume* vfunc_00(int a1);
+};
+
+SeqActionVarVolume* SeqActionVarVolume::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F78A4, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F9280 audio::SeqEventVarVolume::vfunc_03 (6 B)
 // [TODO] 0x006F9290 audio::SeqEventVarVolume::vfunc_04 (35 B)
 // [TODO] 0x006F92C0 audio::SeqEventVarVolume::vfunc_02 (67 B)
@@ -1311,7 +1987,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F9360 sub_006F9360 (116 B)
 // [TODO] 0x006F93E0 audio::SeqEventVarTempo::vfunc_01 (65 B)
 // [TODO] 0x006F9430 audio::SeqEventVarTempo::vfunc_00 (65 B)
-// [TODO] 0x006F9480 audio::SeqActionVarTempo::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarTempo::vfunc_00 (0x006F9480, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarTempo::vfunc_00 (0x006F9480, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7948[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionVarTempo
+{
+public:
+    virtual SeqActionVarTempo* vfunc_00(int a1);
+};
+
+SeqActionVarTempo* SeqActionVarTempo::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7948, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F94B0 audio::SeqEventVarTempo::vfunc_03 (6 B)
 // [TODO] 0x006F94C0 audio::SeqEventVarTempo::vfunc_04 (35 B)
 // [TODO] 0x006F94F0 audio::SeqEventVarTempo::vfunc_02 (67 B)
@@ -1320,7 +2028,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F95B0 sub_006F95B0 (116 B)
 // [TODO] 0x006F9630 audio::SeqEventVarPosDist::vfunc_01 (48 B)
 // [TODO] 0x006F9660 audio::SeqEventVarPosDist::vfunc_00 (48 B)
-// [TODO] 0x006F9690 audio::SeqActionVarPosDist::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarPosDist::vfunc_00 (0x006F9690, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarPosDist::vfunc_00 (0x006F9690, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F79EC[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionVarPosDist
+{
+public:
+    virtual SeqActionVarPosDist* vfunc_00(int a1);
+};
+
+SeqActionVarPosDist* SeqActionVarPosDist::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F79EC, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F96C0 audio::SeqEventVarPosDist::vfunc_03 (6 B)
 // [TODO] 0x006F96D0 audio::SeqEventVarPosDist::vfunc_04 (35 B)
 // [TODO] 0x006F9700 audio::SeqEventVarPosDist::vfunc_02 (67 B)
@@ -1328,7 +2068,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F9770 audio::SeqEventType<audio::SeqEventVarPosDist>::vfunc_01 (55 B)
 // [TODO] 0x006F97B0 sub_006F97B0 (116 B)
 // [TODO] 0x006F9830 audio::SeqEventVarPitchRand::vfunc_01 (69 B)
-// [TODO] 0x006F9880 audio::SeqActionVarPitchRand::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarPitchRand::vfunc_00 (0x006F9880, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarPitchRand::vfunc_00 (0x006F9880, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7AA0[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionVarPitchRand
+{
+public:
+    virtual SeqActionVarPitchRand* vfunc_00(int a1);
+};
+
+SeqActionVarPitchRand* SeqActionVarPitchRand::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7AA0, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F98B0 audio::SeqEventVarPitchRand::vfunc_03 (6 B)
 // [TODO] 0x006F98C0 audio::SeqEventVarPitchRand::vfunc_04 (35 B)
 // [TODO] 0x006F98F0 audio::SeqEventVarPitchRand::vfunc_02 (67 B)
@@ -1336,7 +2108,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F9980 audio::SeqEventType<audio::SeqEventVarPitchRand>::vfunc_01 (55 B)
 // [TODO] 0x006F99C0 sub_006F99C0 (116 B)
 // [TODO] 0x006F9A40 audio::SeqEventVarPitch::vfunc_00 (52 B)
-// [TODO] 0x006F9A80 audio::SeqActionVarPitch::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionVarPitch::vfunc_00 (0x006F9A80, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionVarPitch::vfunc_00 (0x006F9A80, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7B44[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionVarPitch
+{
+public:
+    virtual SeqActionVarPitch* vfunc_00(int a1);
+};
+
+SeqActionVarPitch* SeqActionVarPitch::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7B44, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F9AB0 audio::SeqEventVarPitch::vfunc_03 (6 B)
 // [TODO] 0x006F9AC0 audio::SeqEventVarPitch::vfunc_04 (35 B)
 // [TODO] 0x006F9AF0 audio::SeqEventVarPitch::vfunc_02 (67 B)
@@ -1351,7 +2155,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006F9D20 sub_006F9D20 (247 B)
 // [TODO] 0x006F9E20 audio::SeqEventStream::vfunc_03 (6 B)
 // [TODO] 0x006F9E30 audio::SeqEventStream::vfunc_04 (35 B)
-// [TODO] 0x006F9E60 audio::SeqActionStream::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionStream::vfunc_00 (0x006F9E60, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionStream::vfunc_00 (0x006F9E60, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7BB8[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionStream
+{
+public:
+    virtual SeqActionStream* vfunc_00(int a1);
+};
+
+SeqActionStream* SeqActionStream::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7BB8, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F9E90 sub_006F9E90 (119 B)
 // [TODO] 0x006F9F10 audio::SeqEventType<audio::SeqEventStream>::vfunc_01 (49 B)
 // [TODO] 0x006F9F50 sub_006F9F50 (116 B)
@@ -1366,7 +2202,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006FA6C0 audio::SeqActionSilence::vfunc_05 (113 B)
 // [TODO] 0x006FA740 audio::SeqEventSilence::vfunc_03 (6 B)
 // [TODO] 0x006FA750 audio::SeqEventSilence::vfunc_04 (35 B)
-// [TODO] 0x006FA780 audio::SeqActionSilence::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionSilence::vfunc_00 (0x006FA780, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionSilence::vfunc_00 (0x006FA780, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7C54[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionSilence
+{
+public:
+    virtual SeqActionSilence* vfunc_00(int a1);
+};
+
+SeqActionSilence* SeqActionSilence::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7C54, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006FA7B0 audio::SeqEventType<audio::SeqEventSilence>::vfunc_01 (55 B)
 // [TODO] 0x006FA7F0 sub_006FA7F0 (116 B)
 // [TODO] 0x006FA870 audio::SeqEventSilence::vfunc_02 (112 B)
@@ -1377,13 +2245,77 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006FAAA0 audio::SeqEventLogicRepeat::vfunc_04 (35 B)
 // [TODO] 0x006FAAD0 audio::SeqEventLogicRepeat::vfunc_03 (6 B)
 // [TODO] 0x006FAAE0 sub_006FAAE0 (116 B)
-// [TODO] 0x006FAB60 audio::SeqCommandLogicRepeat::vfunc_01 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqCommandLogicRepeat::vfunc_01 (0x006FAB60, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqCommandLogicRepeat::vfunc_01 (0x006FAB60, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007730E0[];
+extern "C" char DAT_007F7D00[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqCommandLogicRepeat
+{
+public:
+    virtual SeqCommandLogicRepeat* vfunc_01(int a1);
+};
+
+SeqCommandLogicRepeat* SeqCommandLogicRepeat::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_007730E0;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7D00, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006FAB90 audio::SeqCommandLogicRepeat::vfunc_00 (114 B)
 // [TODO] 0x006FAC10 audio::SeqEventType<audio::SeqEventLogicRepeat>::vfunc_01 (63 B)
 // [TODO] 0x006FAC50 audio::SeqEventLogicRepeat::vfunc_02 (58 B)
 // [TODO] 0x006FAC90 audio::SeqEventLogicOr::vfunc_01 (64 B)
 // [TODO] 0x006FACD0 audio::SeqEventLogicOr::vfunc_00 (64 B)
-// [TODO] 0x006FAD10 audio::SeqCommandLogicOr::vfunc_01 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqCommandLogicOr::vfunc_01 (0x006FAD10, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqCommandLogicOr::vfunc_01 (0x006FAD10, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007730E0[];
+extern "C" char DAT_007F7D9C[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqCommandLogicOr
+{
+public:
+    virtual SeqCommandLogicOr* vfunc_01(int a1);
+};
+
+SeqCommandLogicOr* SeqCommandLogicOr::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_007730E0;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7D9C, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006FAD40 sub_006FAD40 (116 B)
 // [TODO] 0x006FADC0 audio::SeqEventLogicOr::vfunc_03 (6 B)
 // [TODO] 0x006FADD0 audio::SeqEventLogicOr::vfunc_04 (35 B)
@@ -1393,7 +2325,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006FAFB0 audio::SeqActionCrossFade::vfunc_04 (40 B)
 // [TODO] 0x006FAFE0 sub_006FAFE0 (86 B)
 // [TODO] 0x006FB040 audio::SeqEventCrossFade::vfunc_00 (192 B)
-// [TODO] 0x006FB100 audio::SeqActionCrossFade::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionCrossFade::vfunc_00 (0x006FB100, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionCrossFade::vfunc_00 (0x006FB100, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7E40[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionCrossFade
+{
+public:
+    virtual SeqActionCrossFade* vfunc_00(int a1);
+};
+
+SeqActionCrossFade* SeqActionCrossFade::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7E40, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006FB130 sub_006FB130 (116 B)
 // [TODO] 0x006FB240 audio::SeqEventCrossFade::vfunc_03 (6 B)
 // [TODO] 0x006FB250 audio::SeqEventCrossFade::vfunc_04 (53 B)
@@ -1411,7 +2375,39 @@ SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
 // [TODO] 0x006FB890 sub_006FB890 (217 B)
 // [TODO] 0x006FB970 audio::SeqEventClip::vfunc_03 (6 B)
 // [TODO] 0x006FB980 audio::SeqEventClip::vfunc_04 (35 B)
-// [TODO] 0x006FB9B0 audio::SeqActionClip::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionClip::vfunc_00 (0x006FB9B0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionClip::vfunc_00 (0x006FB9B0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772F80[];
+extern "C" char DAT_007F7EB4[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class SeqActionClip
+{
+public:
+    virtual SeqActionClip* vfunc_00(int a1);
+};
+
+SeqActionClip* SeqActionClip::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772F80;
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F7EB4, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006FB9E0 sub_006FB9E0 (380 B)
 // [TODO] 0x006FBB60 sub_006FBB60 (119 B)
 // [TODO] 0x006FBBE0 audio::SeqEventType<audio::SeqEventClip>::vfunc_01 (53 B)
