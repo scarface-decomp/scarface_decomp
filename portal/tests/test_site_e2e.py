@@ -28,7 +28,7 @@ PROG = json.loads((FIX / "progress.json").read_text(encoding="utf-8"))
 
 # Everything the Cloudflare build serves from docs/ besides data/.
 STATIC = ("index.html", "404.html", "versions.html", "function.html", "feed.xml", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
-          "robots.txt", "sitemap.xml")
+          "robots.txt", "sitemap.xml", "scarface-setup.bat")
 # Folders and files every page needs beside it: its script, the fonts, and the headers Cloudflare adds.
 ASSETS = ("js", "fonts", "_headers")
 SITE_URL = "https://scarface-decomp.pages.dev/"
@@ -660,3 +660,23 @@ def test_what_it_does_on_the_site(tmp_path, browser):
         ctx.close()
     finally:
         srv.shutdown()
+
+
+def test_the_windows_setup_file(tmp_path):
+    """One file to download and double-click: it is on the site, comes down as a file (not shown as text), is a
+    proper Windows batch file, and does only what the page says: winget for exactly Python and Git, this
+    project's own address, then the project's launcher. No administrator rights, nothing fetched and run."""
+    text = (ROOT / "docs" / "scarface-setup.bat").read_bytes()
+    assert b"\r\n" in text and b"\n" not in text.replace(b"\r\n", b"") and text.isascii()
+    bat = text.decode()
+    assert "winget install -e --id Python.Python.3.13 --source winget" in bat
+    assert "winget install -e --id Git.Git --source winget" in bat
+    assert 'git clone https://github.com/scarface-decomp/scarface_decomp.git "%PROJ%"' in bat
+    assert 'call "%PROJ%\\START_PORTAL.bat"' in bat and "pull --ff-only" in bat
+    low = bat.lower()
+    for never in ("runas", "invoke-webrequest", "curl ", "bitsadmin", "iex", "del ", "rmdir", "reg add", "http://"):
+        assert never not in low, never
+    copy_docs(tmp_path)
+    assert ("Content-Disposition", 'attachment; filename="scarface-setup.bat"') in cloudflare_headers(tmp_path, "/scarface-setup.bat")
+    page = (ROOT / "docs" / "index.html").read_text(encoding="utf-8")
+    assert '<a href="scarface-setup.bat" download>' in page and page.count("<li><b>", page.index('class="steps"'), page.index("</ol>", page.index('class="steps"'))) == 4

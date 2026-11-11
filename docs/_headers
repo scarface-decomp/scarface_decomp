@@ -19,3 +19,7 @@
 # must never run with yesterday's script.)
 /fonts/*
   Cache-Control: public, max-age=86400
+
+# The Windows setup file is for downloading, not for showing.
+/scarface-setup.bat
+  Content-Disposition: attachment; filename="scarface-setup.bat"

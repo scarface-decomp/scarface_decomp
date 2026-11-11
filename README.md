@@ -78,6 +78,10 @@ recommend Visual C++ Toolkit 2003 too (the compiler the game was made with), fro
 portal checks your work on the spot and credits you right away. Only if you can't get it working, solve
 functions on decomp.me and have a maintainer check them.
 
+**On Windows, the short way:** download [scarface-setup.bat](https://scarface-decomp.pages.dev/scarface-setup.bat)
+and double-click it. It installs Python and Git if they are missing, puts the project on your Desktop and
+starts the portal; it replaces steps 1, 2 and 5 below.
+
 1. **Install Python 3** from [python.org](https://www.python.org/downloads/). On Windows, tick
    *Add python.exe to PATH* on the installer's first screen. Install **Git** too, from
    [git-scm.com](https://git-scm.com/downloads) (the default options are fine).

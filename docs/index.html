@@ -462,26 +462,29 @@
           <li><b>About 10 minutes</b> to set up</li>
           <li><b>Strongly recommended:</b> Visual C++ Toolkit 2003 (<code>VCToolkitSetup.exe</code>)</li>
         </ul>
-        <p class="small needs-note">Five steps, and the portal does the setting up. Have the compiler's installer if you can: the portal then checks
-          your work on the spot and credits you right away; without it, a maintainer checks it for you (step 3). The game and the compiler are the only two things the project can't give you: they belong to
+        <p class="small needs-note">Four steps, and one file does the setting up. Have the compiler's installer if you can: the portal then checks
+          your work on the spot and credits you right away; without it, a maintainer checks it for you (step 2). The game and the compiler are the only two things the project can't give you: they belong to
           their owners, so they are never on GitHub.</p>
         <ol class="steps">
-          <li><b>Install Python and Git</b>Get Python 3 from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">python.org</a>
-            (on Windows, tick <em>Add python.exe to PATH</em> on the installer's first screen) and Git from
-            <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">git-scm.com</a> (the default options are fine).</li>
-          <li><b>Get the project</b>Open a terminal (PowerShell on Windows) where you want the folder, and run:
-            <pre tabindex="0">git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></pre>
-            To update later, run <code>git pull</code> in that folder: it keeps everything you've done.
-            <span class="aside">Rather not use Git? On <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
-            press <em>Code</em>, then <em>Download ZIP</em>. It works, but there's no one-command update, and a new ZIP
-            replaces your work, so copy <code>reports\verified_registry.json</code> out before each update (or connect the
-            folder to Git afterwards with the steps in
-            <a data-repo-link="/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a>).</span></li>
+          <li><b>Run the setup file</b>On Windows, download <a href="scarface-setup.bat" download>scarface-setup.bat</a>
+            and double-click it. It installs Python and Git if you don't have them, puts the project in a
+            <code>scarface_decomp</code> folder on your Desktop, opens it for the next step, and then starts the portal.
+            Run it again any time to update. Windows may ask whether to run a downloaded file: choose <em>More info</em>,
+            then <em>Run anyway</em>; it is plain text, so you can read it first.
+            <span class="aside">On Mac or Linux, or to do it by hand: install Python 3 from
+            <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">python.org</a> and Git from
+            <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">git-scm.com</a>, then run
+            <code>git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></code>
+            in a terminal, and <code>git pull</code> in that folder to update later. Rather not use Git? On
+            <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+            press <em>Code</em>, then <em>Download ZIP</em>; see
+            <a data-repo-link="/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a>
+            for how to update one.</span></li>
           <li><b>Drop in your two files</b>Put your game in the project's <code>binaries</code> folder, just as you
             have it: the US Xbox disc image (<code>.iso</code>, <code>.zip</code> or <code>.7z</code>) is the one that
             matters, and the PC game with its 1.00.2 patch is an optional extra. Put the compiler's installer,
             <code>VCToolkitSetup.exe</code> (Microsoft's Visual C++ Toolkit 2003, which the game was built with), in the
-            project folder itself. Nothing has to be installed, unpacked or typed: the next step does all of it.
+            project folder itself (or leave it in your Downloads folder). Nothing has to be installed, unpacked or typed.
             <span class="aside">Where to find them: the game is yours to bring, from your own disc. Microsoft gave the
             Toolkit away for free and no longer offers it; the Internet Archive keeps
             <a href="https://archive.org/details/microsoft-visual-c-toolkit-2003" target="_blank" rel="noopener noreferrer">a copy of <code>VCToolkitSetup.exe</code></a>.
@@ -494,7 +497,8 @@
             or in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on Discord</a>;
             your scratch is filed under the <a href="https://decomp.me/preset/266" target="_blank" rel="noopener noreferrer">Scarface preset</a>
             and a maintainer verifies it and credits you.</span></li>
-          <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
+          <li><b>Start the portal</b>Back in the setup window, press a key and it starts. From then on, double-click
+            <code>START_PORTAL.bat</code> in the project folder. On Mac or Linux, run
             <code>sh start_portal.sh</code>. The first start takes a few minutes: it installs what it needs, sets up the
             compiler, checks and unpacks your game and lists every function. Then your browser opens the portal at
             <code>localhost:8085</code>. Only the US versions of the game are accepted; it tells you if something is off.</li>
