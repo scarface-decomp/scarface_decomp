@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1,286 of 17,904 functions matched (7.18%). NOT COMPLETE YET.
-// The 16,618 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 1,326 of 17,904 functions matched (7.41%). NOT COMPLETE YET.
+// The 16,578 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -11664,7 +11664,25 @@ void __cdecl sub_000D4CF0(void)
 // [TODO] 0x000D4DB0 sub_000D4DB0 (95 B)
 // [TODO] 0x000D4E10 sub_000D4E10 (90 B)
 // [TODO] 0x000D4E70 AnimationTrack::vfunc_33 (6 B)
-// [TODO] 0x000D4E80 sub_000D4E80 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D4E80 (0x000D4E80, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D4E80 (0x000D4E80, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459F68[];
+extern "C" char DAT_00459F6C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D4E80(void)
+{
+    sub_001FC310((int)DAT_00459F68, (int)DAT_00459F6C);
+}
+
 // [TODO] 0x000D4EA0 AnimationTrack::vfunc_08 (16 B)
 // [TODO] 0x000D4EB0 AnimationTrack::vfunc_20 (45 B)
 // [TODO] 0x000D4EE0 sub_000D4EE0 (5 B)
@@ -11674,7 +11692,25 @@ void __cdecl sub_000D4CF0(void)
 // [TODO] 0x000D4F70 AnimationTrack::vfunc_03 (46 B)
 // [TODO] 0x000D4FA0 fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_05 (30 B)
 // [TODO] 0x000D4FC0 sub_000D4FC0 (604 B)
-// [TODO] 0x000D5220 sub_000D5220 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D5220 (0x000D5220, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D5220 (0x000D5220, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459F70[];
+extern "C" char DAT_00459F74[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D5220(void)
+{
+    sub_001FC310((int)DAT_00459F70, (int)DAT_00459F74);
+}
+
 // [TODO] 0x000D5240 AnimationRetargetingTrack::vfunc_08 (16 B)
 // [TODO] 0x000D5250 AnimationRetargetingTrack::vfunc_33 (6 B)
 // [TODO] 0x000D5260 sub_000D5260 (4 B)
@@ -11693,7 +11729,25 @@ void __cdecl sub_000D4CF0(void)
 // [TODO] 0x000D5450 AnimationRetargetingTrack::vfunc_03 (62 B)
 // [TODO] 0x000D54C0 sub_000D54C0 (910 B)
 // [TODO] 0x000D5850 sub_000D5850 (75 B)
-// [TODO] 0x000D58A0 sub_000D58A0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D58A0 (0x000D58A0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D58A0 (0x000D58A0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459F7C[];
+extern "C" char DAT_00459F80[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D58A0(void)
+{
+    sub_001FC310((int)DAT_00459F7C, (int)DAT_00459F80);
+}
+
 // [TODO] 0x000D58C0 AnimationRewinderTrack::vfunc_08 (16 B)
 // [TODO] 0x000D58D0 sub_000D58D0 (4 B)
 // [TODO] 0x000D58F0 pure3d::MultiController::vfunc_13 (4 B)
@@ -11732,7 +11786,25 @@ AnimationRewinderTrack* AnimationRewinderTrack::vfunc_03(int a1)
 // [TODO] 0x000D5950 sub_000D5950 (307 B)
 // [TODO] 0x000D5A90 sub_000D5A90 (36 B)
 // [TODO] 0x000D5AC0 BlendTrack::vfunc_33 (6 B)
-// [TODO] 0x000D5AD0 sub_000D5AD0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D5AD0 (0x000D5AD0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D5AD0 (0x000D5AD0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459F88[];
+extern "C" char DAT_00459F8C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D5AD0(void)
+{
+    sub_001FC310((int)DAT_00459F88, (int)DAT_00459F8C);
+}
+
 // [TODO] 0x000D5AF0 BlendTrack::vfunc_08 (16 B)
 // [TODO] 0x000D5B00 BlendTrack::vfunc_20 (42 B)
 // [TODO] 0x000D5B30 ExitConditionTrack::vfunc_23 (4 B)
@@ -11771,7 +11843,25 @@ BlendTrack* BlendTrack::vfunc_03(int a1)
 // [TODO] 0x000D5B80 sub_000D5B80 (158 B)
 // [TODO] 0x000D5C20 sub_000D5C20 (43 B)
 // [TODO] 0x000D5C50 CameraShakeTrack::vfunc_33 (6 B)
-// [TODO] 0x000D5C60 sub_000D5C60 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D5C60 (0x000D5C60, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D5C60 (0x000D5C60, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459F94[];
+extern "C" char DAT_00459F98[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D5C60(void)
+{
+    sub_001FC310((int)DAT_00459F94, (int)DAT_00459F98);
+}
+
 // [TODO] 0x000D5C80 CameraShakeTrack::vfunc_08 (16 B)
 // [TODO] 0x000D5C90 CameraShakeTrack::vfunc_20 (46 B)
 // ============================================================================
@@ -11813,7 +11903,25 @@ CameraShakeTrack* CameraShakeTrack::vfunc_03(int a1)
 // [TODO] 0x000D5F00 JointCollisionTrack::vfunc_20 (46 B)
 // [TODO] 0x000D5F30 AnimationTrack::vfunc_27 (4 B)
 // [TODO] 0x000D5F40 JointCollisionTrack::vfunc_03 (46 B)
-// [TODO] 0x000D5F90 sub_000D5F90 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D5F90 (0x000D5F90, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D5F90 (0x000D5F90, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459FAC[];
+extern "C" char DAT_00459FB0[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D5F90(void)
+{
+    sub_001FC310((int)DAT_00459FAC, (int)DAT_00459FB0);
+}
+
 // [TODO] 0x000D5FB0 DismemberTrack::vfunc_08 (16 B)
 // [TODO] 0x000D5FC0 DismemberTrack::vfunc_20 (42 B)
 // [TODO] 0x000D5FF0 DismemberTrack::vfunc_33 (6 B)
@@ -11823,7 +11931,25 @@ CameraShakeTrack* CameraShakeTrack::vfunc_03(int a1)
 // [TODO] 0x000D60C0 sub_000D60C0 (372 B)
 // [TODO] 0x000D62C0 sub_000D62C0 (4 B)
 // [TODO] 0x000D6390 DramaticCameraTrack::vfunc_33 (6 B)
-// [TODO] 0x000D63A0 sub_000D63A0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D63A0 (0x000D63A0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D63A0 (0x000D63A0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459FB8[];
+extern "C" char DAT_00459FBC[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D63A0(void)
+{
+    sub_001FC310((int)DAT_00459FB8, (int)DAT_00459FBC);
+}
+
 // [TODO] 0x000D63C0 DramaticCameraTrack::vfunc_08 (16 B)
 // [TODO] 0x000D63D0 DramaticCameraTrack::vfunc_20 (46 B)
 // [TODO] 0x000D6400 sub_000D6400 (28 B)
@@ -11835,7 +11961,25 @@ CameraShakeTrack* CameraShakeTrack::vfunc_03(int a1)
 // [TODO] 0x000D6570 DramaticCameraTrack::vfunc_03 (63 B)
 // [TODO] 0x000D65B0 CameraShakeTrack::vfunc_18 (13 B)
 // [TODO] 0x000D65C0 sub_000D65C0 (1429 B)
-// [TODO] 0x000D6B60 sub_000D6B60 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D6B60 (0x000D6B60, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D6B60 (0x000D6B60, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459FC0[];
+extern "C" char DAT_00459FC4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D6B60(void)
+{
+    sub_001FC310((int)DAT_00459FC0, (int)DAT_00459FC4);
+}
+
 // [TODO] 0x000D6B80 ExitConditionTrack::vfunc_08 (16 B)
 // [TODO] 0x000D6B90 sub_000D6B90 (74 B)
 // [TODO] 0x000D6BE0 ExitConditionTrack::vfunc_26 (16 B)
@@ -11849,7 +11993,25 @@ CameraShakeTrack* CameraShakeTrack::vfunc_03(int a1)
 // [TODO] 0x000D6CC0 sub_000D6CC0 (460 B)
 // [TODO] 0x000D6E90 sub_000D6E90 (70 B)
 // [TODO] 0x000D6EE0 LayeredAnimationTrack::vfunc_33 (6 B)
-// [TODO] 0x000D6EF0 sub_000D6EF0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D6EF0 (0x000D6EF0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D6EF0 (0x000D6EF0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459FD0[];
+extern "C" char DAT_00459FD4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D6EF0(void)
+{
+    sub_001FC310((int)DAT_00459FD0, (int)DAT_00459FD4);
+}
+
 // [TODO] 0x000D6F10 LayeredAnimationTrack::vfunc_08 (16 B)
 // [TODO] 0x000D6F20 LayeredAnimationTrack::vfunc_20 (42 B)
 // [TODO] 0x000D6F60 sub_000D6F60 (30 B)
@@ -11937,18 +12099,72 @@ ExecScriptFunctionTrack* ExecScriptFunctionTrack::vfunc_03(int a1)
     return this;
 }
 
-// [TODO] 0x000D75E0 sub_000D75E0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D75E0 (0x000D75E0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D75E0 (0x000D75E0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045A0B0[];
+extern "C" char DAT_0045A0B4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D75E0(void)
+{
+    sub_001FC310((int)DAT_0045A0B0, (int)DAT_0045A0B4);
+}
+
 // [TODO] 0x000D7600 SoundPlayTrack::vfunc_08 (16 B)
 // [TODO] 0x000D7610 sub_000D7610 (33 B)
 // [TODO] 0x000D7640 FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_16 (7 B)
 // [TODO] 0x000D7660 sub_000D7660 (8 B)
 // [TODO] 0x000D7670 SoundPlayTrack::vfunc_20 (46 B)
-// [TODO] 0x000D76A0 sub_000D76A0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D76A0 (0x000D76A0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D76A0 (0x000D76A0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045A0B8[];
+extern "C" char DAT_0045A0BC[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D76A0(void)
+{
+    sub_001FC310((int)DAT_0045A0B8, (int)DAT_0045A0BC);
+}
+
 // [TODO] 0x000D76C0 SoundCueTrack::vfunc_08 (16 B)
 // [TODO] 0x000D76D0 sub_000D76D0 (33 B)
 // [TODO] 0x000D7700 FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_17 (7 B)
 // [TODO] 0x000D7730 SoundCueTrack::vfunc_20 (46 B)
-// [TODO] 0x000D7760 sub_000D7760 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D7760 (0x000D7760, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D7760 (0x000D7760, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045A0C0[];
+extern "C" char DAT_0045A0C4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D7760(void)
+{
+    sub_001FC310((int)DAT_0045A0C0, (int)DAT_0045A0C4);
+}
+
 // [TODO] 0x000D7780 SoundFadeTrack::vfunc_08 (16 B)
 // [TODO] 0x000D7790 sub_000D7790 (49 B)
 // [TODO] 0x000D77D0 sub_000D77D0 (4 B)
@@ -23902,101 +24118,569 @@ template <> fight::TrackFactoryTemplate<NISWeaponFireTrack>* fight::TrackFactory
 }
 
 // [TODO] 0x00162570 fight::TrackFactoryTemplate<NISWeaponFireTrack>::vfunc_07 (52 B)
-// [TODO] 0x00163380 sub_00163380 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163380 (0x00163380, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163380 (0x00163380, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DE68[];
+extern "C" char DAT_0045DE6C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163380(void)
+{
+    sub_001FC310((int)DAT_0045DE68, (int)DAT_0045DE6C);
+}
+
 // [TODO] 0x001633A0 NISVehiclePropertyTrack::vfunc_08 (16 B)
 // [TODO] 0x001633B0 sub_001633B0 (39 B)
 // [TODO] 0x001633E0 NISVehiclePropertyTrack::vfunc_20 (46 B)
-// [TODO] 0x00163410 sub_00163410 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163410 (0x00163410, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163410 (0x00163410, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DE70[];
+extern "C" char DAT_0045DE74[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163410(void)
+{
+    sub_001FC310((int)DAT_0045DE70, (int)DAT_0045DE74);
+}
+
 // [TODO] 0x00163430 NISFadeTrack::vfunc_08 (16 B)
 // [TODO] 0x00163440 sub_00163440 (60 B)
 // [TODO] 0x00163480 NISFadeTrack::vfunc_20 (46 B)
-// [TODO] 0x001634B0 sub_001634B0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_001634B0 (0x001634B0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001634B0 (0x001634B0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DE78[];
+extern "C" char DAT_0045DE7C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_001634B0(void)
+{
+    sub_001FC310((int)DAT_0045DE78, (int)DAT_0045DE7C);
+}
+
 // [TODO] 0x001634D0 NISCharacterEffectTrack::vfunc_08 (16 B)
 // [TODO] 0x001634E0 sub_001634E0 (64 B)
 // [TODO] 0x00163520 NISCharacterEffectTrack::vfunc_20 (46 B)
-// [TODO] 0x00163550 sub_00163550 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163550 (0x00163550, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163550 (0x00163550, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DE80[];
+extern "C" char DAT_0045DE84[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163550(void)
+{
+    sub_001FC310((int)DAT_0045DE80, (int)DAT_0045DE84);
+}
+
 // [TODO] 0x00163570 NISCharacterAttachTrack::vfunc_08 (16 B)
 // [TODO] 0x00163580 NISCharacterAttachTrack::vfunc_20 (46 B)
-// [TODO] 0x001635B0 sub_001635B0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_001635B0 (0x001635B0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001635B0 (0x001635B0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DE88[];
+extern "C" char DAT_0045DE8C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_001635B0(void)
+{
+    sub_001FC310((int)DAT_0045DE88, (int)DAT_0045DE8C);
+}
+
 // [TODO] 0x001635D0 NISStatePropSpawnTrack::vfunc_08 (16 B)
 // [TODO] 0x001635E0 NISStatePropSpawnTrack::vfunc_20 (46 B)
-// [TODO] 0x00163630 sub_00163630 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163630 (0x00163630, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163630 (0x00163630, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DE90[];
+extern "C" char DAT_0045DE94[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163630(void)
+{
+    sub_001FC310((int)DAT_0045DE90, (int)DAT_0045DE94);
+}
+
 // [TODO] 0x00163650 NISStatePropStateTrack::vfunc_08 (16 B)
 // [TODO] 0x00163660 sub_00163660 (44 B)
 // [TODO] 0x00163690 NISStatePropStateTrack::vfunc_20 (46 B)
-// [TODO] 0x001636C0 sub_001636C0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_001636C0 (0x001636C0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001636C0 (0x001636C0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DE98[];
+extern "C" char DAT_0045DE9C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_001636C0(void)
+{
+    sub_001FC310((int)DAT_0045DE98, (int)DAT_0045DE9C);
+}
+
 // [TODO] 0x001636E0 NISCharacterVisibilityTrack::vfunc_08 (16 B)
 // [TODO] 0x001636F0 sub_001636F0 (35 B)
 // [TODO] 0x00163720 NISCharacterVisibilityTrack::vfunc_20 (46 B)
-// [TODO] 0x00163750 sub_00163750 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163750 (0x00163750, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163750 (0x00163750, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEA0[];
+extern "C" char DAT_0045DEA4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163750(void)
+{
+    sub_001FC310((int)DAT_0045DEA0, (int)DAT_0045DEA4);
+}
+
 // [TODO] 0x00163770 NISWeaponAttachTrack::vfunc_08 (16 B)
 // [TODO] 0x00163780 sub_00163780 (44 B)
 // [TODO] 0x001637B0 NISWeaponAttachTrack::vfunc_20 (46 B)
-// [TODO] 0x001637E0 sub_001637E0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_001637E0 (0x001637E0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001637E0 (0x001637E0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEA8[];
+extern "C" char DAT_0045DEAC[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_001637E0(void)
+{
+    sub_001FC310((int)DAT_0045DEA8, (int)DAT_0045DEAC);
+}
+
 // [TODO] 0x00163800 NISWeaponFireTrack::vfunc_08 (16 B)
 // [TODO] 0x00163810 sub_00163810 (35 B)
 // [TODO] 0x00163840 NISWeaponFireTrack::vfunc_20 (46 B)
-// [TODO] 0x00163870 sub_00163870 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163870 (0x00163870, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163870 (0x00163870, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEB0[];
+extern "C" char DAT_0045DEB4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163870(void)
+{
+    sub_001FC310((int)DAT_0045DEB0, (int)DAT_0045DEB4);
+}
+
 // [TODO] 0x00163890 NISRenderableTrack::vfunc_08 (16 B)
 // [TODO] 0x001638A0 sub_001638A0 (38 B)
 // [TODO] 0x001638D0 NISRenderableTrack::vfunc_20 (46 B)
-// [TODO] 0x00163920 sub_00163920 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163920 (0x00163920, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163920 (0x00163920, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEB8[];
+extern "C" char DAT_0045DEBC[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163920(void)
+{
+    sub_001FC310((int)DAT_0045DEB8, (int)DAT_0045DEBC);
+}
+
 // [TODO] 0x00163940 NISRenderableAnimationTrack::vfunc_08 (16 B)
 // [TODO] 0x00163950 sub_00163950 (44 B)
 // [TODO] 0x00163980 NISRenderableAnimationTrack::vfunc_20 (46 B)
-// [TODO] 0x001639B0 sub_001639B0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_001639B0 (0x001639B0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001639B0 (0x001639B0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEC0[];
+extern "C" char DAT_0045DEC4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_001639B0(void)
+{
+    sub_001FC310((int)DAT_0045DEC0, (int)DAT_0045DEC4);
+}
+
 // [TODO] 0x001639D0 NISVehicleAnimationTrack::vfunc_08 (16 B)
 // [TODO] 0x001639E0 sub_001639E0 (44 B)
 // [TODO] 0x00163A10 NISVehicleAnimationTrack::vfunc_20 (46 B)
-// [TODO] 0x00163A40 sub_00163A40 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163A40 (0x00163A40, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163A40 (0x00163A40, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEC8[];
+extern "C" char DAT_0045DECC[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163A40(void)
+{
+    sub_001FC310((int)DAT_0045DEC8, (int)DAT_0045DECC);
+}
+
 // [TODO] 0x00163A60 NISActivateVehicleTrack::vfunc_08 (16 B)
 // [TODO] 0x00163A70 sub_00163A70 (38 B)
 // [TODO] 0x00163AA0 NISActivateVehicleTrack::vfunc_20 (46 B)
-// [TODO] 0x00163AD0 sub_00163AD0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163AD0 (0x00163AD0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163AD0 (0x00163AD0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DED0[];
+extern "C" char DAT_0045DED4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163AD0(void)
+{
+    sub_001FC310((int)DAT_0045DED0, (int)DAT_0045DED4);
+}
+
 // [TODO] 0x00163AF0 NISObjectPositionTrack::vfunc_08 (16 B)
 // [TODO] 0x00163B00 NISObjectPositionTrack::vfunc_20 (46 B)
-// [TODO] 0x00163B30 sub_00163B30 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163B30 (0x00163B30, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163B30 (0x00163B30, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DED8[];
+extern "C" char DAT_0045DEDC[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163B30(void)
+{
+    sub_001FC310((int)DAT_0045DED8, (int)DAT_0045DEDC);
+}
+
 // [TODO] 0x00163B50 NISCharacterAnimationTrack::vfunc_08 (16 B)
 // [TODO] 0x00163B60 sub_00163B60 (44 B)
 // [TODO] 0x00163B90 NISCharacterAnimationTrack::vfunc_20 (46 B)
-// [TODO] 0x00163BC0 sub_00163BC0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163BC0 (0x00163BC0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163BC0 (0x00163BC0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEE0[];
+extern "C" char DAT_0045DEE4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163BC0(void)
+{
+    sub_001FC310((int)DAT_0045DEE0, (int)DAT_0045DEE4);
+}
+
 // [TODO] 0x00163BE0 NISSwapModelTrack::vfunc_08 (16 B)
 // [TODO] 0x00163BF0 sub_00163BF0 (35 B)
 // [TODO] 0x00163C20 NISSwapModelTrack::vfunc_20 (46 B)
 // [TODO] 0x00163C50 sub_00163C50 (24 B)
-// [TODO] 0x00163C70 sub_00163C70 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163C70 (0x00163C70, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163C70 (0x00163C70, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEE8[];
+extern "C" char DAT_0045DEEC[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163C70(void)
+{
+    sub_001FC310((int)DAT_0045DEE8, (int)DAT_0045DEEC);
+}
+
 // [TODO] 0x00163C90 NISExpAnimationTrack::vfunc_08 (16 B)
 // [TODO] 0x00163CA0 sub_00163CA0 (57 B)
 // [TODO] 0x00163CE0 NISExpAnimationTrack::vfunc_20 (46 B)
-// [TODO] 0x00163D10 sub_00163D10 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163D10 (0x00163D10, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163D10 (0x00163D10, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEF0[];
+extern "C" char DAT_0045DEF4[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163D10(void)
+{
+    sub_001FC310((int)DAT_0045DEF0, (int)DAT_0045DEF4);
+}
+
 // [TODO] 0x00163D30 NISResourceLoaderTrack::vfunc_08 (16 B)
 // [TODO] 0x00163D40 sub_00163D40 (26 B)
 // [TODO] 0x00163D60 NISResourceLoaderTrack::vfunc_20 (46 B)
-// [TODO] 0x00163DB0 sub_00163DB0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163DB0 (0x00163DB0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163DB0 (0x00163DB0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DEF8[];
+extern "C" char DAT_0045DEFC[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163DB0(void)
+{
+    sub_001FC310((int)DAT_0045DEF8, (int)DAT_0045DEFC);
+}
+
 // [TODO] 0x00163DD0 NISCameraAnimationTrack::vfunc_08 (16 B)
 // [TODO] 0x00163DE0 sub_00163DE0 (31 B)
-// [TODO] 0x00163E00 sub_00163E00 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163E00 (0x00163E00, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163E00 (0x00163E00, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DF00[];
+extern "C" char DAT_0045DF04[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163E00(void)
+{
+    sub_001FC310((int)DAT_0045DF00, (int)DAT_0045DF04);
+}
+
 // [TODO] 0x00163E20 NISDeleteCharacterTrack::vfunc_08 (16 B)
 // [TODO] 0x00163E30 sub_00163E30 (31 B)
-// [TODO] 0x00163E50 sub_00163E50 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163E50 (0x00163E50, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163E50 (0x00163E50, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DF08[];
+extern "C" char DAT_0045DF0C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163E50(void)
+{
+    sub_001FC310((int)DAT_0045DF08, (int)DAT_0045DF0C);
+}
+
 // [TODO] 0x00163E70 NISDeleteScriptObjectTrack::vfunc_08 (16 B)
 // [TODO] 0x00163E80 sub_00163E80 (31 B)
 // [TODO] 0x00163EA0 NISDeleteCharacterTrack::vfunc_20 (17 B)
-// [TODO] 0x00163EC0 sub_00163EC0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163EC0 (0x00163EC0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163EC0 (0x00163EC0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DF10[];
+extern "C" char DAT_0045DF14[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163EC0(void)
+{
+    sub_001FC310((int)DAT_0045DF10, (int)DAT_0045DF14);
+}
+
 // [TODO] 0x00163EE0 NISCharacterPositionTrack::vfunc_08 (16 B)
-// [TODO] 0x00163EF0 sub_00163EF0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163EF0 (0x00163EF0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163EF0 (0x00163EF0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DF18[];
+extern "C" char DAT_0045DF1C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163EF0(void)
+{
+    sub_001FC310((int)DAT_0045DF18, (int)DAT_0045DF1C);
+}
+
 // [TODO] 0x00163F10 NISScriptFunctionCallTrack::vfunc_08 (16 B)
 // [TODO] 0x00163F20 sub_00163F20 (22 B)
 // [TODO] 0x00163F40 NISScriptFunctionCallTrack::vfunc_20 (46 B)
-// [TODO] 0x00163F70 sub_00163F70 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00163F70 (0x00163F70, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00163F70 (0x00163F70, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DF20[];
+extern "C" char DAT_0045DF24[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00163F70(void)
+{
+    sub_001FC310((int)DAT_0045DF20, (int)DAT_0045DF24);
+}
+
 // [TODO] 0x00163F90 NISSequenceCueTrack::vfunc_08 (16 B)
 // [TODO] 0x00163FA0 NISSequenceCueTrack::vfunc_20 (46 B)
 // [TODO] 0x00163FD0 sub_00163FD0 (18 B)
 // [TODO] 0x00163FF0 NISSequencePlayTrack::vfunc_20 (46 B)
-// [TODO] 0x00164020 sub_00164020 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00164020 (0x00164020, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00164020 (0x00164020, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DF28[];
+extern "C" char DAT_0045DF2C[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00164020(void)
+{
+    sub_001FC310((int)DAT_0045DF28, (int)DAT_0045DF2C);
+}
+
 // [TODO] 0x00164040 NISSequenceBranchTrack::vfunc_08 (16 B)
 // [TODO] 0x00164050 NISSequenceBranchTrack::vfunc_20 (46 B)
-// [TODO] 0x00164080 sub_00164080 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00164080 (0x00164080, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00164080 (0x00164080, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045DF30[];
+extern "C" char DAT_0045DF34[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_00164080(void)
+{
+    sub_001FC310((int)DAT_0045DF30, (int)DAT_0045DF34);
+}
+
 // [TODO] 0x001640A0 NISDriveWorldStreamerTrack::vfunc_08 (16 B)
 // [TODO] 0x001640B0 sub_001640B0 (22 B)
 // [TODO] 0x001640D0 NISDriveWorldStreamerTrack::vfunc_20 (46 B)
@@ -43679,7 +44363,25 @@ Node* Node::vfunc_03(int a1)
 // [TODO] 0x001FB680 fight::Bank::vfunc_11 (66 B)
 // [TODO] 0x001FB6D0 fight::Bank::vfunc_12 (92 B)
 // [TODO] 0x001FB730 fight::Bank::vfunc_13 (260 B)
-// [TODO] 0x001FB8B0 sub_001FB8B0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_001FB8B0 (0x001FB8B0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001FB8B0 (0x001FB8B0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0046390C[];
+extern "C" char DAT_00463910[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_001FB8B0(void)
+{
+    sub_001FC310((int)DAT_0046390C, (int)DAT_00463910);
+}
+
 // [TODO] 0x001FB8D0 fight::MaybeCondition::vfunc_08 (16 B)
 // [TODO] 0x001FB8E0 fight::MaybeCondition::vfunc_15 (74 B)
 // [TODO] 0x001FB930 fight::MaybeCondition::vfunc_03 (36 B)
@@ -43709,7 +44411,25 @@ Node* Node::vfunc_03(int a1)
 // [TODO] 0x001FBF60 FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_21 (79 B)
 // [TODO] 0x001FBFB0 sub_001FBFB0 (32 B)
 // [TODO] 0x001FBFD0 fight::Track::vfunc_03 (36 B)
-// [TODO] 0x001FC000 sub_001FC000 (19 B)
+// ============================================================================
+// [VERIFIED] sub_001FC000 (0x001FC000, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001FC000 (0x001FC000, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00463B24[];
+extern "C" char DAT_00463B28[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_001FC000(void)
+{
+    sub_001FC310((int)DAT_00463B24, (int)DAT_00463B28);
+}
+
 // [TODO] 0x001FC020 FightTree::FightActionController<fight::SequenceTrack>::vfunc_08 (16 B)
 // [TODO] 0x001FC030 sub_001FC030 (41 B)
 // [TODO] 0x001FC060 sub_001FC060 (33 B)

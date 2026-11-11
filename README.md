@@ -23,7 +23,7 @@ meant for modding research, engine bug fixing and preservation.
 | :--- | ---: | ---: | ---: |
 | Verified functions | 1,320 | 62 | **1,382** |
 
-Plus 1,286 in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.
+Plus 1,326 in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.
 
 1,264 of them are under 10 bytes and the largest is 43 bytes, so the medium and large functions are where the work is.
 <!-- status:end -->
