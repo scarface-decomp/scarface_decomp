@@ -1,25 +1,25 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-10 23:20:40",
+  "updated_at": "2026-11-10 23:35:54",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 8,
-    "xb": 414,
-    "proto": 405,
+    "xb": 892,
+    "proto": 799,
     "ps2": 0,
-    "total": 422,
-    "bytes": 2738,
+    "total": 900,
+    "bytes": 17652,
     "ps2_bytes": 0
   },
   "size_buckets": {
-    "1-9 B": 412,
+    "1-9 B": 466,
     "10-19 B": 2,
-    "20-39 B": 7,
+    "20-39 B": 431,
     "40-79 B": 1,
     "80+ B": 0
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 827
+    "RRutherrfordd (Founder)": 1699
   },
   "unattributed": 0,
   "queue": {
@@ -37,15 +37,6 @@
   },
   "good_first": [
     {
-      "id": "xb_00011170",
-      "bin": "xb",
-      "va": "0x00011170",
-      "symbol": "sub_00011170",
-      "size": 1,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
-    {
       "id": "xb_0002F890",
       "bin": "xb",
       "va": "0x0002F890",
@@ -59,6 +50,15 @@
       "bin": "xb",
       "va": "0x00079FC0",
       "symbol": "sub_00079FC0",
+      "size": 3,
+      "why": "it was matched before the reset, so it can be done",
+      "kind": "matched_before"
+    },
+    {
+      "id": "xb_000DD3D0",
+      "bin": "xb",
+      "va": "0x000DD3D0",
+      "symbol": "sub_000DD3D0",
       "size": 3,
       "why": "it was matched before the reset, so it can be done",
       "kind": "matched_before"
@@ -91,15 +91,6 @@
       "kind": "group"
     },
     {
-      "id": "xb_002A9290",
-      "bin": "xb",
-      "va": "0x002A9290",
-      "symbol": "CollisionBehaviourTypeGroup::vfunc_10",
-      "size": 1,
-      "why": "the game's class information names it",
-      "kind": "named"
-    },
-    {
       "id": "xb_00022710",
       "bin": "xb",
       "va": "0x00022710",
@@ -118,10 +109,19 @@
       "kind": "named"
     },
     {
-      "id": "xb_000DD3D0",
+      "id": "xb_0006F990",
       "bin": "xb",
-      "va": "0x000DD3D0",
-      "symbol": "sub_000DD3D0",
+      "va": "0x0006F990",
+      "symbol": "core::IMemoryAllocator::vfunc_13",
+      "size": 3,
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_000720A0",
+      "bin": "xb",
+      "va": "0x000720A0",
+      "symbol": "sub_000720A0",
       "size": 3,
       "why": "it was matched before the reset, so it can be done",
       "kind": "matched_before"
