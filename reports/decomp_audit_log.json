@@ -1,5 +1,45 @@
 [
   {
+    "time": "2026-11-11 03:33:18",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "13 look-alike(s) of sub_00702F18",
+    "va": "PC 0x00702F18",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-11 03:33:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00702F18",
+    "va": "PC 0x00702F18",
+    "bytes": "3/3 B"
+  },
+  {
+    "time": "2026-11-11 03:31:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "63 look-alike(s) of sub_0007F7F0",
+    "va": "0x0007F7F0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-11 03:31:06",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0007F7F0",
+    "va": "0x0007F7F0",
+    "bytes": "13/13 B"
+  },
+  {
+    "time": "2026-11-11 03:31:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "PARTIAL",
+    "symbol": "fight::Branch::vfunc_03",
+    "va": "0x0023B160",
+    "bytes": "1/33 B"
+  },
+  {
     "time": "2026-11-11 00:00:26",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",

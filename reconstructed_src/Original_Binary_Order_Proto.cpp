@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1,476 of 17,904 functions matched (8.24%). NOT COMPLETE YET.
-// The 16,428 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 1,505 of 17,904 functions matched (8.41%). NOT COMPLETE YET.
+// The 16,399 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -6356,7 +6356,31 @@ void Class_0006EC40::sub_0006EC40()
 // [TODO] 0x0006F5CD sub_0006F5CD (113 B)
 // [TODO] 0x0006F658 sub_0006F658 (313 B)
 // [TODO] 0x0006F66F sub_0006F66F (290 B)
-// [TODO] 0x0006F7A0 sub_0006F7A0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_0006F7A0 (0x0006F7A0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0006F7A0 (0x0006F7A0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004537BC[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_0006F7A0
+{
+public:
+    void sub_0006F7A0(int a1);
+};
+
+void Class_0006F7A0::sub_0006F7A0(int a1)
+{
+    a1 = (int)DAT_004537BC;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x0006F7B0 sub_0006F7B0 (646 B)
 // [TODO] 0x0006FA40 sub_0006FA40 (186 B)
 // [TODO] 0x0006FB00 sub_0006FB00 (276 B)
@@ -6433,11 +6457,59 @@ void Class_0006EC40::sub_0006EC40()
 // [TODO] 0x00073ED0 sub_00073ED0 (203 B)
 // [TODO] 0x00073FA0 sub_00073FA0 (171 B)
 // [TODO] 0x00074050 sub_00074050 (102 B)
-// [TODO] 0x000740C0 sub_000740C0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_000740C0 (0x000740C0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000740C0 (0x000740C0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004538EC[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_000740C0
+{
+public:
+    void sub_000740C0(int a1);
+};
+
+void Class_000740C0::sub_000740C0(int a1)
+{
+    a1 = (int)DAT_004538EC;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x000740D0 sub_000740D0 (72 B)
 // [TODO] 0x00074120 sub_00074120 (91 B)
 // [TODO] 0x00074180 CollisionSoundPlayer::vfunc_00 (35 B)
-// [TODO] 0x000741B0 sub_000741B0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_000741B0 (0x000741B0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000741B0 (0x000741B0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00453904[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_000741B0
+{
+public:
+    void sub_000741B0(int a1);
+};
+
+void Class_000741B0::sub_000741B0(int a1)
+{
+    a1 = (int)DAT_00453904;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x000741C0 sub_000741C0 (72 B)
 // [TODO] 0x00074210 sub_00074210 (61 B)
 // [TODO] 0x00074250 sub_00074250 (61 B)
@@ -6483,13 +6555,61 @@ void Class_0006EC40::sub_0006EC40()
 // [TODO] 0x00075540 content::LoadInventory::DynamicCaster<FirearmSound>::vfunc_00 (30 B)
 // [TODO] 0x00075560 sub_00075560 (474 B)
 // [TODO] 0x00075740 sub_00075740 (116 B)
-// [TODO] 0x000757C0 sub_000757C0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_000757C0 (0x000757C0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000757C0 (0x000757C0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00453930[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_000757C0
+{
+public:
+    void sub_000757C0(int a1);
+};
+
+void Class_000757C0::sub_000757C0(int a1)
+{
+    a1 = (int)DAT_00453930;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x000757D0 sub_000757D0 (456 B)
 // [TODO] 0x000759A0 sub_000759A0 (186 B)
 // [TODO] 0x00075A60 sub_00075A60 (155 B)
 // [TODO] 0x00075B00 PlaneSoundPlayer::vfunc_00 (35 B)
 // [TODO] 0x00075B30 sub_00075B30 (1509 B)
-// [TODO] 0x00076120 sub_00076120 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00076120 (0x00076120, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00076120 (0x00076120, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0045394C[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00076120
+{
+public:
+    void sub_00076120(int a1);
+};
+
+void Class_00076120::sub_00076120(int a1)
+{
+    a1 = (int)DAT_0045394C;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00076130 sub_00076130 (19 B)
 // [TODO] 0x00076150 sub_00076150 (43 B)
 // [TODO] 0x00076180 sub_00076180 (127 B)
@@ -6545,7 +6665,31 @@ int __cdecl sub_00077140(void)
 // [TODO] 0x000771A0 sub_000771A0 (97 B)
 // [TODO] 0x00077210 SoundAllocator::StreamPlayerAllocator::vfunc_02 (31 B)
 // [TODO] 0x00077230 sub_00077230 (70 B)
-// [TODO] 0x00077280 sub_00077280 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00077280 (0x00077280, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00077280 (0x00077280, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004539BC[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00077280
+{
+public:
+    void sub_00077280(int a1);
+};
+
+void Class_00077280::sub_00077280(int a1)
+{
+    a1 = (int)DAT_004539BC;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00077290 sub_00077290 (63 B)
 // [TODO] 0x000772D0 sub_000772D0 (65 B)
 // [TODO] 0x00077320 sub_00077320 (61 B)
@@ -55528,7 +55672,31 @@ void* d3dShadowDecalShader::vfunc_18()
 // [TODO] 0x00291270 sub_00291270 (101 B)
 // [TODO] 0x002912E0 sub_002912E0 (99 B)
 // [TODO] 0x00291350 sub_00291350 (105 B)
-// [TODO] 0x002913C0 sub_002913C0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_002913C0 (0x002913C0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002913C0 (0x002913C0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490AE8[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_002913C0
+{
+public:
+    void sub_002913C0(int a1);
+};
+
+void Class_002913C0::sub_002913C0(int a1)
+{
+    a1 = (int)DAT_00490AE8;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x002913D0 sub_002913D0 (19 B)
 // [TODO] 0x00291400 sub_00291400 (25 B)
 // ============================================================================
@@ -55565,12 +55733,108 @@ EntityLoader* EntityLoader::vfunc_03(int a1)
 }
 
 // [TODO] 0x00291450 om::EntityLoader::vfunc_04 (223 B)
-// [TODO] 0x00291530 sub_00291530 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00291530 (0x00291530, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00291530 (0x00291530, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490B00[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00291530
+{
+public:
+    void sub_00291530(int a1);
+};
+
+void Class_00291530::sub_00291530(int a1)
+{
+    a1 = (int)DAT_00490B00;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00291540 sub_00291540 (19 B)
-// [TODO] 0x00291560 sub_00291560 (13 B)
-// [TODO] 0x00291570 sub_00291570 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00291560 (0x00291560, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00291560 (0x00291560, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490B14[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00291560
+{
+public:
+    void sub_00291560(int a1);
+};
+
+void Class_00291560::sub_00291560(int a1)
+{
+    a1 = (int)DAT_00490B14;
+    sub_00293590(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00291570 (0x00291570, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00291570 (0x00291570, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490B28[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00291570
+{
+public:
+    void sub_00291570(int a1);
+};
+
+void Class_00291570::sub_00291570(int a1)
+{
+    a1 = (int)DAT_00490B28;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00291580 sub_00291580 (19 B)
-// [TODO] 0x002915A0 sub_002915A0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_002915A0 (0x002915A0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002915A0 (0x002915A0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490B3C[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_002915A0
+{
+public:
+    void sub_002915A0(int a1);
+};
+
+void Class_002915A0::sub_002915A0(int a1)
+{
+    a1 = (int)DAT_00490B3C;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x002915B0 sub_002915B0 (19 B)
 // [TODO] 0x002915D0 sub_002915D0 (222 B)
 // ============================================================================
@@ -55636,7 +55900,31 @@ void Class_00291B30::sub_00291B30()
 // [TODO] 0x00291C30 sub_00291C30 (99 B)
 // [TODO] 0x00291CA0 sub_00291CA0 (124 B)
 // [TODO] 0x00291D20 sub_00291D20 (65 B)
-// [TODO] 0x00291D70 sub_00291D70 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00291D70 (0x00291D70, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00291D70 (0x00291D70, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490B64[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00291D70
+{
+public:
+    void sub_00291D70(int a1);
+};
+
+void Class_00291D70::sub_00291D70(int a1)
+{
+    a1 = (int)DAT_00490B64;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00291D80 sub_00291D80 (19 B)
 // [TODO] 0x00291DA0 sub_00291DA0 (144 B)
 // [TODO] 0x00291E30 sub_00291E30 (127 B)
@@ -55776,7 +56064,31 @@ int Sequence::vfunc_14()
 // [TODO] 0x002948D0 sub_002948D0 (162 B)
 // [TODO] 0x00294980 audio::Sequence::vfunc_05 (170 B)
 // [TODO] 0x00294A30 audio::Sequence::vfunc_08 (71 B)
-// [TODO] 0x00294A80 sub_00294A80 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00294A80 (0x00294A80, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00294A80 (0x00294A80, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490C2C[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00294A80
+{
+public:
+    void sub_00294A80(int a1);
+};
+
+void Class_00294A80::sub_00294A80(int a1)
+{
+    a1 = (int)DAT_00490C2C;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00294A90 sub_00294A90 (19 B)
 // ============================================================================
 // [VERIFIED] sub_00294AB0 (0x00294AB0, 6 B)
@@ -55866,7 +56178,31 @@ int Clip::vfunc_14()
 // [TODO] 0x002958A0 sub_002958A0 (16 B)
 // [TODO] 0x002958B0 sub_002958B0 (198 B)
 // [TODO] 0x00295980 sub_00295980 (534 B)
-// [TODO] 0x00295BA0 sub_00295BA0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00295BA0 (0x00295BA0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00295BA0 (0x00295BA0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490CC8[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00295BA0
+{
+public:
+    void sub_00295BA0(int a1);
+};
+
+void Class_00295BA0::sub_00295BA0(int a1)
+{
+    a1 = (int)DAT_00490CC8;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00295BB0 sub_00295BB0 (19 B)
 // [TODO] 0x00295BD0 sub_00295BD0 (168 B)
 // [TODO] 0x00295CA0 sub_00295CA0 (6 B)
@@ -55878,7 +56214,31 @@ int Clip::vfunc_14()
 // [TODO] 0x00295ED0 sub_00295ED0 (208 B)
 // [TODO] 0x00295FA0 sub_00295FA0 (285 B)
 // [TODO] 0x002960C0 sub_002960C0 (540 B)
-// [TODO] 0x00296350 sub_00296350 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00296350 (0x00296350, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00296350 (0x00296350, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490D00[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00296350
+{
+public:
+    void sub_00296350(int a1);
+};
+
+void Class_00296350::sub_00296350(int a1)
+{
+    a1 = (int)DAT_00490D00;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00296360 sub_00296360 (19 B)
 // [TODO] 0x00296380 audio::StreamPlayerAllocator::vfunc_00 (34 B)
 // [TODO] 0x002963B0 audio::StreamPlayerAllocator::vfunc_01 (14 B)
@@ -55921,7 +56281,31 @@ int Clip::vfunc_14()
 // [TODO] 0x00296F60 sub_00296F60 (603 B)
 // [TODO] 0x002971C0 sub_002971C0 (439 B)
 // [TODO] 0x00297380 sub_00297380 (172 B)
-// [TODO] 0x00297430 sub_00297430 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00297430 (0x00297430, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00297430 (0x00297430, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490D14[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00297430
+{
+public:
+    void sub_00297430(int a1);
+};
+
+void Class_00297430::sub_00297430(int a1)
+{
+    a1 = (int)DAT_00490D14;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00297440 sub_00297440 (19 B)
 // [TODO] 0x00297460 sub_00297460 (16 B)
 // [TODO] 0x00297470 sub_00297470 (24 B)
@@ -56031,7 +56415,31 @@ int __cdecl sub_00298900(void)
 // [TODO] 0x00298970 sub_00298970 (37 B)
 // [TODO] 0x002989A0 sub_002989A0 (56 B)
 // [TODO] 0x002989E0 sub_002989E0 (58 B)
-// [TODO] 0x00298A20 sub_00298A20 (13 B)
+// ============================================================================
+// [VERIFIED] sub_00298A20 (0x00298A20, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00298A20 (0x00298A20, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490D5C[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_00298A20
+{
+public:
+    void sub_00298A20(int a1);
+};
+
+void Class_00298A20::sub_00298A20(int a1)
+{
+    a1 = (int)DAT_00490D5C;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x00298A30 audio::OmHalStream::vfunc_10 (11 B)
 // [TODO] 0x00298A40 core::DriveCreateDirectoryRequest::vfunc_05 (4 B)
 // [TODO] 0x00298A50 audio::OmHalStream::vfunc_07 (183 B)
@@ -56165,8 +56573,56 @@ int __cdecl sub_00298900(void)
 // [TODO] 0x0029C520 sub_0029C520 (43 B)
 // [TODO] 0x0029C550 sub_0029C550 (178 B)
 // [TODO] 0x0029C610 sub_0029C610 (62 B)
-// [TODO] 0x0029C6A0 sub_0029C6A0 (13 B)
-// [TODO] 0x0029C6B0 sub_0029C6B0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_0029C6A0 (0x0029C6A0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0029C6A0 (0x0029C6A0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490DB4[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_0029C6A0
+{
+public:
+    void sub_0029C6A0(int a1);
+};
+
+void Class_0029C6A0::sub_0029C6A0(int a1)
+{
+    a1 = (int)DAT_00490DB4;
+    sub_00293590(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029C6B0 (0x0029C6B0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0029C6B0 (0x0029C6B0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490DC8[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_0029C6B0
+{
+public:
+    void sub_0029C6B0(int a1);
+};
+
+void Class_0029C6B0::sub_0029C6B0(int a1)
+{
+    a1 = (int)DAT_00490DC8;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x0029C6C0 sub_0029C6C0 (30 B)
 // [TODO] 0x0029C6E0 sub_0029C6E0 (33 B)
 // [TODO] 0x0029C710 sub_0029C710 (177 B)
@@ -56294,7 +56750,31 @@ int Mix::vfunc_14()
 // [TODO] 0x0029EE70 audio::SeqEventTypeBase::vfunc_00 (61 B)
 // [TODO] 0x0029EEB0 sub_0029EEB0 (32 B)
 // [TODO] 0x0029EED0 audio::SeqEventContainer::vfunc_06 (53 B)
-// [TODO] 0x0029EF10 sub_0029EF10 (13 B)
+// ============================================================================
+// [VERIFIED] sub_0029EF10 (0x0029EF10, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0029EF10 (0x0029EF10, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490E98[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_0029EF10
+{
+public:
+    void sub_0029EF10(int a1);
+};
+
+void Class_0029EF10::sub_0029EF10(int a1)
+{
+    a1 = (int)DAT_00490E98;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x0029EF20 sub_0029EF20 (19 B)
 // [TODO] 0x0029EF40 sub_0029EF40 (59 B)
 // [TODO] 0x0029EF80 sub_0029EF80 (119 B)
@@ -56308,7 +56788,31 @@ int Mix::vfunc_14()
 // [TODO] 0x0029F5B0 om::Command1<void, float>::vfunc_00 (31 B)
 // [TODO] 0x0029F5D0 om::Command1<void, const om::String&>::vfunc_00 (31 B)
 // [TODO] 0x0029F5F0 om::Command0<void>::vfunc_00 (31 B)
-// [TODO] 0x0029F610 sub_0029F610 (13 B)
+// ============================================================================
+// [VERIFIED] sub_0029F610 (0x0029F610, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0029F610 (0x0029F610, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490EC4[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_0029F610
+{
+public:
+    void sub_0029F610(int a1);
+};
+
+void Class_0029F610::sub_0029F610(int a1)
+{
+    a1 = (int)DAT_00490EC4;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x0029F620 sub_0029F620 (237 B)
 // [TODO] 0x0029F710 sub_0029F710 (117 B)
 // [TODO] 0x0029F790 sub_0029F790 (117 B)
@@ -56321,7 +56825,31 @@ int Mix::vfunc_14()
 // [TODO] 0x0029FE50 sub_0029FE50 (64 B)
 // [TODO] 0x0029FE90 om::RmiRpc::vfunc_00 (35 B)
 // [TODO] 0x0029FEC0 om::RmiRpc::vfunc_01 (217 B)
-// [TODO] 0x0029FFA0 sub_0029FFA0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_0029FFA0 (0x0029FFA0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0029FFA0 (0x0029FFA0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00490F04[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_0029FFA0
+{
+public:
+    void sub_0029FFA0(int a1);
+};
+
+void Class_0029FFA0::sub_0029FFA0(int a1)
+{
+    a1 = (int)DAT_00490F04;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x0029FFB0 sub_0029FFB0 (30 B)
 // [TODO] 0x0029FFD0 om::MetaType<audio::ListenerEffectXBox>::vfunc_00 (36 B)
 // [TODO] 0x002A0000 sub_002A0000 (102 B)
@@ -57510,15 +58038,135 @@ SeqActionClip* SeqActionClip::vfunc_00(int a1)
 // [TODO] 0x002AC350 sub_002AC350 (133 B)
 // [TODO] 0x002AC3E0 sub_002AC3E0 (42 B)
 // [TODO] 0x002AC410 sub_002AC410 (155 B)
-// [TODO] 0x002AC4B0 sub_002AC4B0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_002AC4B0 (0x002AC4B0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AC4B0 (0x002AC4B0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004913F4[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_002AC4B0
+{
+public:
+    void sub_002AC4B0(int a1);
+};
+
+void Class_002AC4B0::sub_002AC4B0(int a1)
+{
+    a1 = (int)DAT_004913F4;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x002AC4C0 sub_002AC4C0 (19 B)
-// [TODO] 0x002AC4E0 sub_002AC4E0 (13 B)
-// [TODO] 0x002AC4F0 sub_002AC4F0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_002AC4E0 (0x002AC4E0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AC4E0 (0x002AC4E0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00491408[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_002AC4E0
+{
+public:
+    void sub_002AC4E0(int a1);
+};
+
+void Class_002AC4E0::sub_002AC4E0(int a1)
+{
+    a1 = (int)DAT_00491408;
+    sub_00293590(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC4F0 (0x002AC4F0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AC4F0 (0x002AC4F0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0049141C[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_002AC4F0
+{
+public:
+    void sub_002AC4F0(int a1);
+};
+
+void Class_002AC4F0::sub_002AC4F0(int a1)
+{
+    a1 = (int)DAT_0049141C;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x002AC500 sub_002AC500 (290 B)
 // [TODO] 0x002AC630 sub_002AC630 (77 B)
-// [TODO] 0x002AC680 sub_002AC680 (13 B)
+// ============================================================================
+// [VERIFIED] sub_002AC680 (0x002AC680, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AC680 (0x002AC680, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00491430[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_002AC680
+{
+public:
+    void sub_002AC680(int a1);
+};
+
+void Class_002AC680::sub_002AC680(int a1)
+{
+    a1 = (int)DAT_00491430;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x002AC690 sub_002AC690 (19 B)
-// [TODO] 0x002AC6B0 sub_002AC6B0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_002AC6B0 (0x002AC6B0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AC6B0 (0x002AC6B0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00491444[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_002AC6B0
+{
+public:
+    void sub_002AC6B0(int a1);
+};
+
+void Class_002AC6B0::sub_002AC6B0(int a1)
+{
+    a1 = (int)DAT_00491444;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x002AC6C0 sub_002AC6C0 (19 B)
 // [TODO] 0x002AC6E0 sub_002AC6E0 (167 B)
 // [TODO] 0x002AC790 sub_002AC790 (80 B)
@@ -57571,7 +58219,31 @@ SeqActionClip* SeqActionClip::vfunc_00(int a1)
 // [TODO] 0x002ADA90 sub_002ADA90 (20 B)
 // [TODO] 0x002ADAB0 sub_002ADAB0 (60 B)
 // [TODO] 0x002ADAF0 sub_002ADAF0 (125 B)
-// [TODO] 0x002ADB70 sub_002ADB70 (13 B)
+// ============================================================================
+// [VERIFIED] sub_002ADB70 (0x002ADB70, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0007F7F0 (0x0007F7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002ADB70 (0x002ADB70, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00491494[];
+extern "C" void __stdcall sub_00293590(int);
+
+class Class_002ADB70
+{
+public:
+    void sub_002ADB70(int a1);
+};
+
+void Class_002ADB70::sub_002ADB70(int a1)
+{
+    a1 = (int)DAT_00491494;
+    sub_00293590(a1);
+}
+
 // [TODO] 0x002ADB80 sub_002ADB80 (19 B)
 // [TODO] 0x002ADBA0 sub_002ADBA0 (30 B)
 // [TODO] 0x002ADBC0 sub_002ADBC0 (125 B)
@@ -58407,7 +59079,21 @@ void Class_002C96FE::sub_002C96FE()
 // [TODO] 0x002D5BC5 sub_002D5BC5 (22 B)
 // [TODO] 0x002D5BEB sub_002D5BEB (97 B)
 // [TODO] 0x002D5CB0 sub_002D5CB0 (221 B)
-// [TODO] 0x002D5D8D sub_002D5D8D (3 B)
+// ============================================================================
+// [VERIFIED] sub_002D5D8D (0x002D5D8D, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002D5D8D (PC 0x002D5D8D, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_002D5D8D(void)
+{
+    return 0;
+}
+
 // [TODO] 0x002D5D90 sub_002D5D90 (1143 B)
 // [TODO] 0x002D6207 sub_002D6207 (108 B)
 // [TODO] 0x002D6273 sub_002D6273 (55 B)
