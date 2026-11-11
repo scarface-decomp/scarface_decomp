@@ -107,6 +107,25 @@ def test_prototype_functions_also_in_retail_are_left_out_of_the_queue(S, monkeyp
     assert [t["id"] for t in tasks if S.in_default_queue(t)] == ["xb1", "xb3", "proto5", "proto6", "proto7"]
 
 
+def test_progress_without_the_game_isnt_100_percent(S, monkeypatch):
+    """A fresh clone with no game in binaries/ has no work queue. The matched functions are then not "all
+    there are": the totals come from the project's own lists, and the portal says the game is missing."""
+    monkeypatch.setattr(S, "REGISTRY", {"entries": {
+        "xb:0x00011000": {"bin": "xb", "size": 10}, "xb:0x00011010": {"bin": "xb", "size": 6},
+        "pc:0x00700000": {"bin": "pc", "size": 4}, "proto:0x00012000": {"bin": "proto", "size": 2}}})
+    monkeypatch.setattr(S, "ALL_TASKS", [])
+    monkeypatch.setattr(S, "accepted_binaries", lambda: {})
+    monkeypatch.setattr(S, "_LISTED", {"xb": 100, "pc": 20, "proto": 50, "": 0})
+    p = S.progress()
+    assert (p["matched_functions"], p["total_functions"], p["matched_percent"]) == (3, 120, 2.5)
+    assert p["no_game"] is True and p["prototype"] == {"matched": 1, "total": 50}
+    # with the Xbox game here, its own queue counts; the PC's still comes from the lists
+    monkeypatch.setattr(S, "accepted_binaries", lambda: {"xb": "default.xbe"})
+    monkeypatch.setattr(S, "ALL_TASKS", [{"bin": "xb", "status": "UNCLAIMED"}] * 7 + [{"bin": "xb", "status": "VERIFIED"}] * 2)
+    p = S.progress()
+    assert p["no_game"] is False and p["total_functions"] == 2 + 7 + 20
+
+
 def test_how_many_look_alikes_are_still_to_try(S, monkeypatch):
     """What the page shows beside the count of new matches, which keeps rising while this is above zero."""
     monkeypatch.setattr(S, "PORT_STATUS", {"a": {"running": True, "total": 67, "tried": 60},

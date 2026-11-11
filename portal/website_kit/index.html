@@ -1783,7 +1783,9 @@
     const label = hasCounts ? fmtInt(m) + ' / ' + fmtInt(t) + ' (' + fmtPct(p) + '%)' : '—';
 
     $('live-badge').textContent = hasCounts
-      ? fmtInt(m) + ' of ' + fmtInt(t) + ' functions of the released game matched so far.' : '—';
+      ? fmtInt(m) + ' of ' + fmtInt(t) + ' functions of the released game matched so far.'
+        + (prog.no_game ? ' Your game isn’t here yet: put the US Xbox disc image in the binaries folder and start the portal again to get functions to work on.' : '')
+      : '—';
     $('claim-pct').textContent = Number.isFinite(p) ? fmtPct(p) + '%' : '0%';
     $('live-pct-label').textContent = label;
     $('top-verified-value').textContent = label;

@@ -400,6 +400,22 @@ def task_key(t: dict) -> str:
     return f"{t['bin']}:0x{t['fva_int']:08X}"
 
 
+_LISTED: Dict[str, int] = {}
+
+
+def listed_totals() -> Dict[str, int]:
+    """How many functions each version has, from the project's own lists (reconstructed_src/). The count for a
+    version whose game file isn't in binaries/: its functions aren't in the work queue then, and without
+    this the matched ones would look like all there are ("1,590 of 1,590, 100%")."""
+    if not _LISTED:
+        try:
+            _LISTED.update({b: len(fns) for b, fns in RO.known_from_files(RECON_DIR).items()})
+        except Exception:  # noqa: BLE001 - the lists are a help, never a reason not to start
+            pass
+        _LISTED.setdefault("", 0)
+    return _LISTED
+
+
 def progress() -> dict:
     """The headline numbers are the released game on PC and Xbox (one compiler, one code base). The April 2006
     prototype (unreleased code) and the PS2 game (another compiler) are counted on their own rows,
@@ -407,14 +423,22 @@ def progress() -> dict:
     entries = REGISTRY.get("entries", {})
     by_bin = Counter(e["bin"] for e in entries.values())
     retail = [e for e in entries.values() if e["bin"] != "proto" and not PO.is_ps2(e["bin"])]
-    remaining = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] != "proto" and not PO.is_ps2(t["bin"]))
+    left = Counter(t["bin"] for t in ALL_TASKS if t["status"] != "VERIFIED")
+    have = set(accepted_binaries())
+    missing = [b for b in ("xb", "pc") if b not in have]
+    # a version whose game file isn't here still has all its functions: count them from the project's lists
+    for b in ("xb", "pc", "proto"):
+        if b not in have and not left.get(b):
+            left[b] = max(0, listed_totals().get(b, 0) - by_bin.get(b, 0))
+    remaining = sum(n for b, n in left.items() if b != "proto" and not PO.is_ps2(b))
     ps2_left = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and PO.is_ps2(t["bin"]))
     ps2_done = sum(n for b, n in by_bin.items() if PO.is_ps2(b))       # the program and its overlays
     total = remaining + len(retail)
-    proto_left = sum(1 for t in ALL_TASKS if t["status"] != "VERIFIED" and t["bin"] == "proto")
+    proto_left = left.get("proto", 0)
     proto_done = by_bin.get("proto", 0)
     return {
         "matched_functions": len(retail),
+        "no_game": "xb" in missing,         # nothing to work on until the Xbox game is in binaries/
         "total_functions": total,
         "matched_percent": round(len(retail) / total * 100.0, 2) if total else 0.0,
         "matched_bytes": sum(int(e.get("size", 0)) for e in retail),
@@ -2956,6 +2980,9 @@ def main() -> None:
     print(f"  Compiler   : {p['compiler']}")
     print(f"  Verified   : {p['matched_functions']:,} functions (PC {p['by_binary']['pc']:,}, Xbox {p['by_binary']['xbox']:,})")
     print(f"  Work queue : {sum(1 for t in ALL_TASKS if t['status'] != 'VERIFIED' and in_default_queue(t)):,} functions")
+    if p.get("no_game"):
+        print("  NO GAME YET: put the US Xbox disc image (.iso, .zip or .7z) in the binaries folder and start the")
+        print("               portal again. Until then there is nothing to work on (docs/GAME_VERSIONS.md).")
     print(f"  Look-alikes: {len(GROUPS):,} groups; a match in one is tried on the rest of its group")
     if any(t["bin"] == "proto" for t in ALL_TASKS):
         pp = p["prototype"]
