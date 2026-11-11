@@ -1,10 +1,10 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 0 of 19,534 functions matched (0.00%). NOT COMPLETE YET.
-// The 19,534 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 414 of 19,534 functions matched (2.12%). NOT COMPLETE YET.
+// The 19,120 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
-// Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3077 for 80x86.
+// Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
@@ -16,9 +16,69 @@
 // [TODO] 0x000111B0 sub_000111B0 (399 B)
 // [TODO] 0x00011340 sub_00011340 (141 B)
 // [TODO] 0x000113D0 ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_01 (45 B)
-// [TODO] 0x00011400 ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004191C0;
+extern "C" int DAT_004191C4;
+extern "C" char DAT_0041BDC0[];
+extern "C" int DAT_0041BDE0;
+extern "C" void __cdecl sub_00070520(int, int);
+
+class CollisionBehaviourTypeGroup;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02()
+{
+    sub_00070520(DAT_0041BDE0, DAT_004191C0);
+    DAT_004191C4 = (int)DAT_0041BDC0;
+}
+
 // [TODO] 0x00011420 ConcreteClassRep<CollisionSurfaceType>::vfunc_01 (42 B)
-// [TODO] 0x00011450 ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (36 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (0x00011450, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (0x00011450, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004191EC;
+extern "C" int DAT_004191F0;
+extern "C" char DAT_0041BDC0[];
+extern "C" int DAT_0041BDE0;
+extern "C" void __cdecl sub_000111B0(void);
+extern "C" void __cdecl sub_00070520(int, int);
+
+class CollisionSurfaceType;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<CollisionSurfaceType>::vfunc_02()
+{
+    sub_00070520(DAT_0041BDE0, DAT_004191EC);
+    DAT_004191F0 = (int)DAT_0041BDC0;
+    sub_000111B0();
+}
+
 // [TODO] 0x00011480 CScript::Function1<void, ScriptObject*>::vfunc_00 (19 B)
 // [TODO] 0x000114A0 sub_000114A0 (84 B)
 // [TODO] 0x00011500 CScript::Function2<void, const char*, const char*>::vfunc_00 (29 B)
@@ -54,7 +114,35 @@
 // [TODO] 0x00011D70 sub_00011D70 (246 B)
 // [TODO] 0x00011E70 sub_00011E70 (100 B)
 // [TODO] 0x00011EE0 sub_00011EE0 (62 B)
-// [TODO] 0x00011F20 Collidable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] Collidable::vfunc_03 (0x00011F20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Collidable::vfunc_03 (0x00011F20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00011E70(void);
+extern "C" void __cdecl sub_0023F7A0(int);
+
+class Collidable
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Collidable* vfunc_03(int a1);
+};
+
+Collidable* Collidable::vfunc_03(int a1)
+{
+    sub_00011E70();
+    if (a1 & 1) {
+        sub_0023F7A0((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00011F40 sub_00011F40 (46 B)
 // [TODO] 0x00011F70 sub_00011F70 (29 B)
 // [TODO] 0x00011F90 FlowClient::vfunc_00 (30 B)
@@ -76,7 +164,27 @@
 // [TODO] 0x00012250 sub_00012250 (113 B)
 // [TODO] 0x000122D0 sub_000122D0 (169 B)
 // [TODO] 0x00012380 sub_00012380 (48 B)
-// [TODO] 0x000123B0 CollisionBehaviourTypeGroup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004191A0[];
+
+class CollisionBehaviourTypeGroup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CollisionBehaviourTypeGroup::vfunc_00()
+{
+    return DAT_004191A0;
+}
+
 // [TODO] 0x000123C0 sub_000123C0 (96 B)
 // [TODO] 0x00012420 sub_00012420 (26 B)
 // [TODO] 0x00012440 sub_00012440 (9 B)
@@ -120,9 +228,63 @@
 // [TODO] 0x000137B0 sub_000137B0 (24 B)
 // [TODO] 0x000137D0 sub_000137D0 (24 B)
 // [TODO] 0x000137F0 sub_000137F0 (75 B)
-// [TODO] 0x00013840 CollisionBehaviourTypeGroup::vfunc_01 (36 B)
+// ============================================================================
+// [VERIFIED] CollisionBehaviourTypeGroup::vfunc_01 (0x00013840, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// CollisionBehaviourTypeGroup::vfunc_01 (0x00013840, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039D5DC[];
+extern "C" void __cdecl sub_00027600(int);
+extern "C" void __cdecl sub_0002C720(void);
+
+class CollisionBehaviourTypeGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual CollisionBehaviourTypeGroup* vfunc_01(int a1);
+};
+
+CollisionBehaviourTypeGroup* CollisionBehaviourTypeGroup::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_0039D5DC;
+    sub_0002C720();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00013870 sub_00013870 (135 B)
-// [TODO] 0x00013900 content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004194F4[];
+extern "C" char DAT_0041970C[];
+extern "C" void __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace ravenphysics { class CollisionObject; }
+
+namespace content { namespace LoadInventory { 
+template <class T0> class DynamicCaster
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+} }
+
+template <> void content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00(int a1)
+{
+    sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041970C, 0);
+}
+
 // [TODO] 0x00013920 sub_00013920 (244 B)
 // [TODO] 0x00013A20 sub_00013A20 (120 B)
 // [TODO] 0x00013AA0 sub_00013AA0 (55 B)
@@ -159,7 +321,36 @@
 // [TODO] 0x00015F50 sub_00015F50 (119 B)
 // [TODO] 0x00015FD0 sub_00015FD0 (90 B)
 // [TODO] 0x00016030 sub_00016030 (37 B)
-// [TODO] 0x00016060 CollisionManager::CollisionManagerFlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000153B0(void);
+extern "C" void __cdecl sub_00027600(int);
+
+namespace CollisionManager {
+
+class CollisionManagerFlowClient
+{
+public:
+    virtual CollisionManagerFlowClient* vfunc_00(int a1);
+};
+
+CollisionManagerFlowClient* CollisionManagerFlowClient::vfunc_00(int a1)
+{
+    sub_000153B0();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00016080 sub_00016080 (68 B)
 // [TODO] 0x000160D0 sub_000160D0 (27 B)
 // [TODO] 0x000160F0 sub_000160F0 (113 B)
@@ -176,7 +367,29 @@
 // [TODO] 0x00016AA0 CollisionManager::CollisionManagerFlowClient::vfunc_02 (1103 B)
 // [TODO] 0x00016EF0 sub_00016EF0 (336 B)
 // [TODO] 0x00017040 sub_00017040 (885 B)
-// [TODO] 0x000173C0 CollisionSurfaceType::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CollisionSurfaceType::vfunc_00 (0x000173C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CollisionSurfaceType::vfunc_00 (0x000173C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004191CC[];
+
+class CollisionSurfaceType
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CollisionSurfaceType::vfunc_00()
+{
+    return DAT_004191CC;
+}
+
 // [TODO] 0x000173D0 sub_000173D0 (20 B)
 // [TODO] 0x000173F0 sub_000173F0 (81 B)
 // [TODO] 0x00017450 CollisionSurfaceType::vfunc_01 (36 B)
@@ -295,7 +508,29 @@
 // [TODO] 0x0001DFA0 sub_0001DFA0 (50 B)
 // [TODO] 0x0001DFE0 sub_0001DFE0 (273 B)
 // [TODO] 0x0001E100 sub_0001E100 (58 B)
-// [TODO] 0x0001E140 ActionMap::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ActionMap::vfunc_00 (0x0001E140, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ActionMap::vfunc_00 (0x0001E140, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00419FEC[];
+
+class ActionMap
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ActionMap::vfunc_00()
+{
+    return DAT_00419FEC;
+}
+
 // [TODO] 0x0001E150 sub_0001E150 (150 B)
 // [TODO] 0x0001E1F0 sub_0001E1F0 (56 B)
 // [TODO] 0x0001E230 sub_0001E230 (56 B)
@@ -308,7 +543,21 @@
 // [TODO] 0x0001E560 sub_0001E560 (43 B)
 // [TODO] 0x0001E590 sub_0001E590 (41 B)
 // [TODO] 0x0001E5C0 sub_0001E5C0 (10 B)
-// [TODO] 0x0001E5D0 sub_0001E5D0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0001E5D0 (0x0001E5D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_0001E5D0 (0x0001E5D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00419E48;
+
+int __cdecl sub_0001E5D0(void)
+{
+    return DAT_00419E48;
+}
+
 // [TODO] 0x0001E5E0 sub_0001E5E0 (81 B)
 // [TODO] 0x0001E630 sub_0001E630 (1 B)
 // [TODO] 0x0001E640 sub_0001E640 (48 B)
@@ -480,7 +729,29 @@
 // [TODO] 0x000229C0 sub_000229C0 (37 B)
 // [TODO] 0x000229F0 sub_000229F0 (5 B)
 // [TODO] 0x00022A00 fight::ParamString<TimedCharacterFightTrack>::vfunc_01 (6 B)
-// [TODO] 0x00022A10 FEObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FEObject::vfunc_00 (0x00022A10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FEObject::vfunc_00 (0x00022A10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041AB38[];
+
+class FEObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FEObject::vfunc_00()
+{
+    return DAT_0041AB38;
+}
+
 // [TODO] 0x00022A20 FEObject::vfunc_30 (17 B)
 // [TODO] 0x00022A40 FEObject::vfunc_35 (26 B)
 // [TODO] 0x00022A60 FEObject::vfunc_36 (50 B)
@@ -490,7 +761,29 @@
 // [TODO] 0x00022B80 FEObject::vfunc_37 (21 B)
 // [TODO] 0x00022BA0 FEObject::vfunc_38 (8 B)
 // [TODO] 0x00022BB0 sub_00022BB0 (385 B)
-// [TODO] 0x00022D40 FETextObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FETextObject::vfunc_00 (0x00022D40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FETextObject::vfunc_00 (0x00022D40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041AC40[];
+
+class FETextObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FETextObject::vfunc_00()
+{
+    return DAT_0041AC40;
+}
+
 // [TODO] 0x00022D50 FETextObject::vfunc_33 (35 B)
 // [TODO] 0x00022D80 FETextObject::vfunc_45 (8 B)
 // [TODO] 0x00022D90 FETextObject::vfunc_35 (35 B)
@@ -498,7 +791,29 @@
 // [TODO] 0x00022DD0 FETextObject::vfunc_43 (29 B)
 // [TODO] 0x00022DF0 FETextObject::vfunc_47 (38 B)
 // [TODO] 0x00022E20 FETextObject::vfunc_44 (46 B)
-// [TODO] 0x00022E50 FEBoxObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FEBoxObject::vfunc_00 (0x00022E50, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FEBoxObject::vfunc_00 (0x00022E50, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041AC6C[];
+
+class FEBoxObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FEBoxObject::vfunc_00()
+{
+    return DAT_0041AC6C;
+}
+
 // [TODO] 0x00022E60 sub_00022E60 (217 B)
 // [TODO] 0x00022F40 FEBoxObject::vfunc_34 (25 B)
 // [TODO] 0x00022F60 FEBoxObject::vfunc_36 (25 B)
@@ -509,12 +824,56 @@
 // [TODO] 0x000230E0 sub_000230E0 (52 B)
 // [TODO] 0x00023120 sub_00023120 (45 B)
 // [TODO] 0x00023150 sub_00023150 (29 B)
-// [TODO] 0x00023170 FEP3DObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FEP3DObject::vfunc_00 (0x00023170, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FEP3DObject::vfunc_00 (0x00023170, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041ACC4[];
+
+class FEP3DObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FEP3DObject::vfunc_00()
+{
+    return DAT_0041ACC4;
+}
+
 // [TODO] 0x00023180 FEMeshBroadcast::vfunc_07 (22 B)
 // [TODO] 0x000231A0 FEMeshBroadcast::vfunc_06 (17 B)
 // [TODO] 0x000231B0 sub_000231B0 (1 B)
 // [TODO] 0x000231C0 FEMeshBroadcast::vfunc_08 (22 B)
-// [TODO] 0x000231E0 FESpriteObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FESpriteObject::vfunc_00 (0x000231E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FESpriteObject::vfunc_00 (0x000231E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041AC98[];
+
+class FESpriteObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FESpriteObject::vfunc_00()
+{
+    return DAT_0041AC98;
+}
+
 // [TODO] 0x000231F0 FEObject::vfunc_01 (36 B)
 // [TODO] 0x00023220 sub_00023220 (55 B)
 // [TODO] 0x00023260 sub_00023260 (43 B)
@@ -523,7 +882,29 @@
 // [TODO] 0x000232F0 sub_000232F0 (45 B)
 // [TODO] 0x00023320 sub_00023320 (29 B)
 // [TODO] 0x00023340 sub_00023340 (44 B)
-// [TODO] 0x00023370 FERoundedRectangleObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FERoundedRectangleObject::vfunc_00 (0x00023370, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FERoundedRectangleObject::vfunc_00 (0x00023370, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041ACF0[];
+
+class FERoundedRectangleObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FERoundedRectangleObject::vfunc_00()
+{
+    return DAT_0041ACF0;
+}
+
 // [TODO] 0x00023380 sub_00023380 (55 B)
 // [TODO] 0x000233C0 FEObject::vfunc_29 (64 B)
 // [TODO] 0x00023400 FEObject::vfunc_31 (66 B)
@@ -546,16 +927,126 @@
 // [TODO] 0x000239C0 sub_000239C0 (67 B)
 // [TODO] 0x00023A10 sub_00023A10 (125 B)
 // [TODO] 0x00023A90 sub_00023A90 (136 B)
-// [TODO] 0x00023B20 FEGroupObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FEGroupObject::vfunc_00 (0x00023B20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FEGroupObject::vfunc_00 (0x00023B20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041AB64[];
+
+class FEGroupObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FEGroupObject::vfunc_00()
+{
+    return DAT_0041AB64;
+}
+
 // [TODO] 0x00023B30 FEGroupObject::vfunc_32 (21 B)
 // [TODO] 0x00023B50 FEGroupObject::vfunc_33 (17 B)
 // [TODO] 0x00023B70 FEGroupObject::vfunc_17 (21 B)
 // [TODO] 0x00023B90 FEGroupObject::vfunc_34 (15 B)
-// [TODO] 0x00023BA0 FELayerObject::vfunc_00 (6 B)
-// [TODO] 0x00023BB0 FEPageObject::vfunc_00 (6 B)
-// [TODO] 0x00023BC0 FEScreenObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FELayerObject::vfunc_00 (0x00023BA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FELayerObject::vfunc_00 (0x00023BA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041ABBC[];
+
+class FELayerObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FELayerObject::vfunc_00()
+{
+    return DAT_0041ABBC;
+}
+
+// ============================================================================
+// [VERIFIED] FEPageObject::vfunc_00 (0x00023BB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FEPageObject::vfunc_00 (0x00023BB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041ABE8[];
+
+class FEPageObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FEPageObject::vfunc_00()
+{
+    return DAT_0041ABE8;
+}
+
+// ============================================================================
+// [VERIFIED] FEScreenObject::vfunc_00 (0x00023BC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FEScreenObject::vfunc_00 (0x00023BC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041AC14[];
+
+class FEScreenObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FEScreenObject::vfunc_00()
+{
+    return DAT_0041AC14;
+}
+
 // [TODO] 0x00023BD0 sub_00023BD0 (41 B)
-// [TODO] 0x00023C00 FEProjectObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FEProjectObject::vfunc_00 (0x00023C00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FEProjectObject::vfunc_00 (0x00023C00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041AB90[];
+
+class FEProjectObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FEProjectObject::vfunc_00()
+{
+    return DAT_0041AB90;
+}
+
 // [TODO] 0x00023C10 FEProjectObject::vfunc_01 (36 B)
 // [TODO] 0x00023C40 sub_00023C40 (63 B)
 // [TODO] 0x00023C80 sub_00023C80 (6 B)
@@ -563,7 +1054,27 @@
 // [TODO] 0x00023CC0 sub_00023CC0 (47 B)
 // [TODO] 0x00023CF0 sub_00023CF0 (46 B)
 // [TODO] 0x00023D20 sub_00023D20 (18 B)
-// [TODO] 0x00023D40 sub_00023D40 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00023D40 (0x00023D40, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_00023D40 (0x00023D40, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024DF70(void);
+
+class Class_00023D40
+{
+public:
+    void sub_00023D40();
+};
+
+void Class_00023D40::sub_00023D40()
+{
+    sub_0024DF70();
+}
+
 // [TODO] 0x00023D50 sub_00023D50 (356 B)
 // [TODO] 0x00023EC0 sub_00023EC0 (16 B)
 // [TODO] 0x00023ED0 sub_00023ED0 (25 B)
@@ -661,7 +1172,29 @@
 // [TODO] 0x00026500 sub_00026500 (417 B)
 // [TODO] 0x000266B0 sub_000266B0 (32 B)
 // [TODO] 0x000266D0 sub_000266D0 (52 B)
-// [TODO] 0x00026710 Graph::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] Graph::vfunc_00 (0x00026710, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// Graph::vfunc_00 (0x00026710, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041B05C[];
+
+class Graph
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* Graph::vfunc_00()
+{
+    return DAT_0041B05C;
+}
+
 // [TODO] 0x00026720 sub_00026720 (28 B)
 // [TODO] 0x00026740 sub_00026740 (19 B)
 // [TODO] 0x00026760 Graph::vfunc_01 (54 B)
@@ -759,7 +1292,29 @@
 // [TODO] 0x00028E80 MovieFlowClient::vfunc_01 (235 B)
 // [TODO] 0x00028F70 sub_00028F70 (42 B)
 // [TODO] 0x00028FA0 sub_00028FA0 (37 B)
-// [TODO] 0x00028FD0 GameGroup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GameGroup::vfunc_00 (0x00028FD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameGroup::vfunc_00 (0x00028FD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041B5EC[];
+
+class GameGroup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GameGroup::vfunc_00()
+{
+    return DAT_0041B5EC;
+}
+
 // [TODO] 0x00028FE0 FEGroupObject::vfunc_29 (128 B)
 // [TODO] 0x00029060 FEGroupObject::vfunc_30 (46 B)
 // [TODO] 0x00029090 sub_00029090 (46 B)
@@ -775,7 +1330,29 @@
 // [TODO] 0x00029420 sub_00029420 (21 B)
 // [TODO] 0x00029440 sub_00029440 (8 B)
 // [TODO] 0x00029450 sub_00029450 (65 B)
-// [TODO] 0x000294A0 GameObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GameObject::vfunc_00 (0x000294A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameObject::vfunc_00 (0x000294A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041B6B4[];
+
+class GameObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GameObject::vfunc_00()
+{
+    return DAT_0041B6B4;
+}
+
 // [TODO] 0x000294B0 GameObject::vfunc_10 (5 B)
 // [TODO] 0x000294C0 GameObject::vfunc_11 (5 B)
 // [TODO] 0x000294D0 GameObject::vfunc_19 (24 B)
@@ -792,7 +1369,29 @@
 // [TODO] 0x00029790 sub_00029790 (30 B)
 // [TODO] 0x000297B0 sub_000297B0 (32 B)
 // [TODO] 0x000297D0 sub_000297D0 (99 B)
-// [TODO] 0x00029840 GameSet::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GameSet::vfunc_00 (0x00029840, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameSet::vfunc_00 (0x00029840, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041B7A8[];
+
+class GameSet
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GameSet::vfunc_00()
+{
+    return DAT_0041B7A8;
+}
+
 // [TODO] 0x00029850 sub_00029850 (83 B)
 // [TODO] 0x000298B0 GameSet::vfunc_30 (34 B)
 // [TODO] 0x000298E0 FEGroupObject::vfunc_31 (38 B)
@@ -819,7 +1418,29 @@
 // [TODO] 0x00029F40 FEGroupObject::vfunc_26 (14 B)
 // [TODO] 0x00029F50 FEGroupObject::vfunc_27 (15 B)
 // [TODO] 0x00029F60 FEGroupObject::vfunc_28 (24 B)
-// [TODO] 0x00029F80 GameSetObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GameSetObject::vfunc_00 (0x00029F80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameSetObject::vfunc_00 (0x00029F80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041B86C[];
+
+class GameSetObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GameSetObject::vfunc_00()
+{
+    return DAT_0041B86C;
+}
+
 // [TODO] 0x00029F90 sub_00029F90 (30 B)
 // [TODO] 0x00029FB0 GameSetObject::vfunc_01 (51 B)
 // [TODO] 0x00029FF0 GameSimObject::vfunc_05 (73 B)
@@ -838,7 +1459,29 @@
 // [TODO] 0x0002A250 sub_0002A250 (35 B)
 // [TODO] 0x0002A280 sub_0002A280 (21 B)
 // [TODO] 0x0002A2A0 sub_0002A2A0 (126 B)
-// [TODO] 0x0002A320 GameSimObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GameSimObject::vfunc_00 (0x0002A320, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameSimObject::vfunc_00 (0x0002A320, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041B8B8[];
+
+class GameSimObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GameSimObject::vfunc_00()
+{
+    return DAT_0041B8B8;
+}
+
 // [TODO] 0x0002A330 GameSimObject::vfunc_46 (11 B)
 // [TODO] 0x0002A340 GameSimObject::vfunc_53 (28 B)
 // [TODO] 0x0002A360 GameSimObject::vfunc_54 (12 B)
@@ -851,7 +1494,29 @@
 // [TODO] 0x0002A550 sub_0002A550 (33 B)
 // [TODO] 0x0002A580 sub_0002A580 (17 B)
 // [TODO] 0x0002A5A0 GameSimObject::vfunc_01 (30 B)
-// [TODO] 0x0002A5C0 PositionObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PositionObject::vfunc_00 (0x0002A5C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PositionObject::vfunc_00 (0x0002A5C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041BA30[];
+
+class PositionObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PositionObject::vfunc_00()
+{
+    return DAT_0041BA30;
+}
+
 // [TODO] 0x0002A5D0 PositionObject::vfunc_01 (36 B)
 // [TODO] 0x0002A600 PositionSetObject::vfunc_23 (23 B)
 // [TODO] 0x0002A620 PositionSetObject::vfunc_24 (23 B)
@@ -862,27 +1527,137 @@
 // [TODO] 0x0002A6B0 PositionObject::vfunc_29 (24 B)
 // [TODO] 0x0002A6D0 sub_0002A6D0 (32 B)
 // [TODO] 0x0002A6F0 sub_0002A6F0 (46 B)
-// [TODO] 0x0002A720 PositionSetObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PositionSetObject::vfunc_00 (0x0002A720, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PositionSetObject::vfunc_00 (0x0002A720, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041BA5C[];
+
+class PositionSetObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PositionSetObject::vfunc_00()
+{
+    return DAT_0041BA5C;
+}
+
 // [TODO] 0x0002A730 PositionSetObject::vfunc_01 (57 B)
 // [TODO] 0x0002A770 sub_0002A770 (79 B)
 // [TODO] 0x0002A7C0 RCObject::vfunc_39 (7 B)
 // [TODO] 0x0002A7D0 RCObject::vfunc_40 (7 B)
-// [TODO] 0x0002A7E0 RCObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] RCObject::vfunc_00 (0x0002A7E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// RCObject::vfunc_00 (0x0002A7E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041BB30[];
+
+class RCObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* RCObject::vfunc_00()
+{
+    return DAT_0041BB30;
+}
+
 // [TODO] 0x0002A7F0 sub_0002A7F0 (111 B)
 // [TODO] 0x0002A860 RCObject::vfunc_01 (30 B)
 // [TODO] 0x0002A880 RCObject::vfunc_29 (74 B)
 // [TODO] 0x0002A8D0 RCObject::vfunc_30 (63 B)
 // [TODO] 0x0002A910 RCObject::vfunc_32 (63 B)
 // [TODO] 0x0002A950 sub_0002A950 (88 B)
-// [TODO] 0x0002A9B0 ScriptDeclarationGroup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ScriptDeclarationGroup::vfunc_00 (0x0002A9B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScriptDeclarationGroup::vfunc_00 (0x0002A9B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041BC04[];
+
+class ScriptDeclarationGroup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ScriptDeclarationGroup::vfunc_00()
+{
+    return DAT_0041BC04;
+}
+
 // [TODO] 0x0002A9C0 sub_0002A9C0 (11 B)
 // [TODO] 0x0002A9D0 sub_0002A9D0 (6 B)
 // [TODO] 0x0002A9E0 ScriptDeclarationGroup::vfunc_04 (27 B)
 // [TODO] 0x0002AA00 ScriptDeclarationGroup::vfunc_06 (46 B)
 // [TODO] 0x0002AA30 sub_0002AA30 (11 B)
-// [TODO] 0x0002AA40 SetDeclaration::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SetDeclaration::vfunc_00 (0x0002AA40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SetDeclaration::vfunc_00 (0x0002AA40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041BC30[];
+
+class SetDeclaration
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SetDeclaration::vfunc_00()
+{
+    return DAT_0041BC30;
+}
+
 // [TODO] 0x0002AA50 sub_0002AA50 (32 B)
-// [TODO] 0x0002AA70 ScriptDeclaration::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ScriptDeclaration::vfunc_00 (0x0002AA70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScriptDeclaration::vfunc_00 (0x0002AA70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041BC5C[];
+
+class ScriptDeclaration
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ScriptDeclaration::vfunc_00()
+{
+    return DAT_0041BC5C;
+}
+
 // [TODO] 0x0002AA80 sub_0002AA80 (11 B)
 // [TODO] 0x0002AA90 ScriptDeclaration::vfunc_04 (24 B)
 // [TODO] 0x0002AAB0 ScriptDeclaration::vfunc_06 (16 B)
@@ -906,7 +1681,29 @@
 // [TODO] 0x0002AED0 sub_0002AED0 (59 B)
 // [TODO] 0x0002AF10 sub_0002AF10 (75 B)
 // [TODO] 0x0002AF60 sub_0002AF60 (102 B)
-// [TODO] 0x0002AFD0 ScriptObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ScriptObject::vfunc_00 (0x0002AFD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScriptObject::vfunc_00 (0x0002AFD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041BDC0[];
+
+class ScriptObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ScriptObject::vfunc_00()
+{
+    return DAT_0041BDC0;
+}
+
 // [TODO] 0x0002AFE0 CollisionBehaviourTypeGroup::vfunc_03 (121 B)
 // [TODO] 0x0002B060 sub_0002B060 (45 B)
 // [TODO] 0x0002B090 sub_0002B090 (144 B)
@@ -1045,10 +1842,54 @@
 // [TODO] 0x0002E500 ConcreteClassRep<StreamedTemplate>::vfunc_01 (42 B)
 // [TODO] 0x0002E530 ConcreteClassRep<StreamedTemplate>::vfunc_02 (58 B)
 // [TODO] 0x0002E570 ConcreteClassRep<Template>::vfunc_01 (65 B)
-// [TODO] 0x0002E5C0 Template::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] Template::vfunc_00 (0x0002E5C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// Template::vfunc_00 (0x0002E5C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041C010[];
+
+class Template
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* Template::vfunc_00()
+{
+    return DAT_0041C010;
+}
+
 // [TODO] 0x0002E5D0 ConcreteClassRep<Template>::vfunc_02 (32 B)
 // [TODO] 0x0002E5F0 sub_0002E5F0 (92 B)
-// [TODO] 0x0002E650 StreamedTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StreamedTemplate::vfunc_00 (0x0002E650, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StreamedTemplate::vfunc_00 (0x0002E650, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0041BF9C[];
+
+class StreamedTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StreamedTemplate::vfunc_00()
+{
+    return DAT_0041BF9C;
+}
+
 // [TODO] 0x0002E660 sub_0002E660 (11 B)
 // [TODO] 0x0002E670 sub_0002E670 (12 B)
 // [TODO] 0x0002E680 sub_0002E680 (8 B)
@@ -1647,7 +2488,38 @@
 // [TODO] 0x0004A630 sub_0004A630 (51 B)
 // [TODO] 0x0004A670 sub_0004A670 (207 B)
 // [TODO] 0x0004A740 content::LoadInventory::DynamicCaster<pure3d::Geometry>::vfunc_00 (30 B)
-// [TODO] 0x0004A760 pure3d::TargaHandler::vfunc_07 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::TargaHandler::vfunc_07 (0x0004A760, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::TargaHandler::vfunc_07 (0x0004A760, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A0520[];
+
+namespace pure3d {
+
+class TargaHandler
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* TargaHandler::vfunc_07()
+{
+    return DAT_003A0520;
+}
+
+}
+
 // [TODO] 0x0004A770 GameSimObject::vfunc_55 (5 B)
 // [TODO] 0x0004A780 pure3d::TargaHandler::vfunc_14 (10 B)
 // [TODO] 0x0004A790 sub_0004A790 (604 B)
@@ -2280,7 +3152,31 @@
 // [TODO] 0x00064C90 sub_00064C90 (42 B)
 // [TODO] 0x00064CC0 sub_00064CC0 (38 B)
 // [TODO] 0x00064CF0 ScriptFileHandler::vfunc_04 (673 B)
-// [TODO] 0x00064FA0 SoundEntityLoader::vfunc_04 (5 B)
+// ============================================================================
+// [VERIFIED] SoundEntityLoader::vfunc_04 (0x00064FA0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// SoundEntityLoader::vfunc_04 (0x00064FA0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002CEAC0(void);
+
+class SoundEntityLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+void SoundEntityLoader::vfunc_04()
+{
+    sub_002CEAC0();
+}
+
 // [TODO] 0x00064FB0 om::MetaType<GlobalVehicleSound>::vfunc_00 (36 B)
 // [TODO] 0x00064FE0 om::MetaType<CarSound>::vfunc_00 (36 B)
 // [TODO] 0x00065010 om::MetaType<BoatSound>::vfunc_00 (36 B)
@@ -2922,7 +3818,37 @@
 // [TODO] 0x00077EB0 sub_00077EB0 (6 B)
 // [TODO] 0x00077EC0 sub_00077EC0 (30 B)
 // [TODO] 0x00077EE0 om::DynAttr::vfunc_00 (31 B)
-// [TODO] 0x00077F00 SoundManager::SoundPlayerHandle::vfunc_00 (36 B)
+// ============================================================================
+// [VERIFIED] SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A32BC[];
+extern "C" char DAT_0042262C[];
+extern "C" void __cdecl sub_002CF980(int, int);
+
+namespace SoundManager {
+
+class SoundPlayerHandle
+{
+public:
+    virtual SoundPlayerHandle* vfunc_00(int a1);
+};
+
+SoundPlayerHandle* SoundPlayerHandle::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_003A32BC;
+    if (a1 & 1) {
+        sub_002CF980((int)DAT_0042262C, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00077F30 sub_00077F30 (388 B)
 // [TODO] 0x000780C0 sub_000780C0 (76 B)
 // [TODO] 0x00078110 sub_00078110 (26 B)
@@ -3648,9 +4574,53 @@
 // [TODO] 0x00094C40 sub_00094C40 (42 B)
 // [TODO] 0x00094C80 sub_00094C80 (6 B)
 // [TODO] 0x00094C90 VarietySlotManager::vfunc_02 (18 B)
-// [TODO] 0x00094CB0 VarietyFileBank::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VarietyFileBank::vfunc_00 (0x00094CB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VarietyFileBank::vfunc_00 (0x00094CB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004234A4[];
+
+class VarietyFileBank
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VarietyFileBank::vfunc_00()
+{
+    return DAT_004234A4;
+}
+
 // [TODO] 0x00094CC0 VarietyFileBank::vfunc_04 (48 B)
-// [TODO] 0x00094CF0 VarietyFile::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VarietyFile::vfunc_00 (0x00094CF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VarietyFile::vfunc_00 (0x00094CF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004234D0[];
+
+class VarietyFile
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VarietyFile::vfunc_00()
+{
+    return DAT_004234D0;
+}
+
 // [TODO] 0x00094D00 VarietyFile::vfunc_04 (33 B)
 // [TODO] 0x00094D30 VarietySystem::vfunc_00 (31 B)
 // [TODO] 0x00094D50 sub_00094D50 (223 B)
@@ -3690,12 +4660,78 @@
 // [TODO] 0x000963B0 sub_000963B0 (128 B)
 // [TODO] 0x00096430 sub_00096430 (44 B)
 // [TODO] 0x00096460 VarietySlotManager::vfunc_00 (30 B)
-// [TODO] 0x00096480 VarietyDeclarationGroup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VarietyDeclarationGroup::vfunc_00 (0x00096480, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VarietyDeclarationGroup::vfunc_00 (0x00096480, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00423654[];
+
+class VarietyDeclarationGroup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VarietyDeclarationGroup::vfunc_00()
+{
+    return DAT_00423654;
+}
+
 // [TODO] 0x00096490 VarietyDeclarationGroup::vfunc_32 (29 B)
-// [TODO] 0x000964B0 VarietyObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VarietyObject::vfunc_00 (0x000964B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VarietyObject::vfunc_00 (0x000964B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004235FC[];
+
+class VarietyObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VarietyObject::vfunc_00()
+{
+    return DAT_004235FC;
+}
+
 // [TODO] 0x000964C0 VarietyObject::vfunc_32 (59 B)
 // [TODO] 0x00096500 VarietyObject::vfunc_33 (11 B)
-// [TODO] 0x00096510 VarietySlot::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VarietySlot::vfunc_00 (0x00096510, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VarietySlot::vfunc_00 (0x00096510, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00423628[];
+
+class VarietySlot
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VarietySlot::vfunc_00()
+{
+    return DAT_00423628;
+}
+
 // [TODO] 0x00096520 VarietySlot::vfunc_29 (65 B)
 // [TODO] 0x00096570 VarietySlot::vfunc_30 (88 B)
 // [TODO] 0x000965D0 VarietyDeclarationGroup::vfunc_01 (36 B)
@@ -4813,10 +5849,54 @@
 // [TODO] 0x000C45E0 sub_000C45E0 (94 B)
 // [TODO] 0x000C4640 sub_000C4640 (111 B)
 // [TODO] 0x000C46B0 sub_000C46B0 (118 B)
-// [TODO] 0x000C4730 ScriptContextProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ScriptContextProperties::vfunc_00 (0x000C4730, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScriptContextProperties::vfunc_00 (0x000C4730, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00424574[];
+
+class ScriptContextProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ScriptContextProperties::vfunc_00()
+{
+    return DAT_00424574;
+}
+
 // [TODO] 0x000C4740 sub_000C4740 (59 B)
 // [TODO] 0x000C4780 sub_000C4780 (32 B)
-// [TODO] 0x000C47A0 WeaponPickupContextProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WeaponPickupContextProperties::vfunc_00 (0x000C47A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WeaponPickupContextProperties::vfunc_00 (0x000C47A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004245A0[];
+
+class WeaponPickupContextProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WeaponPickupContextProperties::vfunc_00()
+{
+    return DAT_004245A0;
+}
+
 // [TODO] 0x000C47B0 sub_000C47B0 (61 B)
 // [TODO] 0x000C47F0 WeaponPickupContextProperties::vfunc_29 (544 B)
 // [TODO] 0x000C4A10 sub_000C4A10 (166 B)
@@ -4919,7 +5999,29 @@
 // [TODO] 0x000C6F00 sub_000C6F00 (8 B)
 // [TODO] 0x000C6F10 sub_000C6F10 (132 B)
 // [TODO] 0x000C6FA0 SaveGameObject::vfunc_00 (65 B)
-// [TODO] 0x000C6FF0 SaveGameController::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SaveGameController::vfunc_00 (0x000C6FF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SaveGameController::vfunc_00 (0x000C6FF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00424834[];
+
+class SaveGameController
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SaveGameController::vfunc_00()
+{
+    return DAT_00424834;
+}
+
 // [TODO] 0x000C7000 sub_000C7000 (6 B)
 // [TODO] 0x000C7010 sub_000C7010 (109 B)
 // [TODO] 0x000C7080 sub_000C7080 (149 B)
@@ -4942,7 +6044,29 @@
 // [TODO] 0x000C79A0 sub_000C79A0 (28 B)
 // [TODO] 0x000C79C0 sub_000C79C0 (173 B)
 // [TODO] 0x000C7A70 sub_000C7A70 (152 B)
-// [TODO] 0x000C7B10 SaveGameObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SaveGameObject::vfunc_00 (0x000C7B10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SaveGameObject::vfunc_00 (0x000C7B10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00424808[];
+
+class SaveGameObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SaveGameObject::vfunc_00()
+{
+    return DAT_00424808;
+}
+
 // [TODO] 0x000C7B20 sub_000C7B20 (115 B)
 // [TODO] 0x000C7BA0 SaveGameObject::vfunc_01 (319 B)
 // [TODO] 0x000C7CE0 sub_000C7CE0 (138 B)
@@ -5476,8 +6600,52 @@
 // [TODO] 0x000DD200 MeleeGetHitDirectionCondition::vfunc_08 (25 B)
 // [TODO] 0x000DD220 sub_000DD220 (25 B)
 // [TODO] 0x000DD240 MeleeGetHitTypeCondition::vfunc_08 (25 B)
-// [TODO] 0x000DD260 sub_000DD260 (19 B)
-// [TODO] 0x000DD280 SpeedCondition::vfunc_08 (16 B)
+// ============================================================================
+// [VERIFIED] sub_000DD260 (0x000DD260, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_000DD260 (0x000DD260, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00487754[];
+extern "C" char DAT_00487758[];
+extern "C" void __cdecl sub_0023EAD0(int, int);
+
+void __cdecl sub_000DD260(void)
+{
+    sub_0023EAD0((int)DAT_00487754, (int)DAT_00487758);
+}
+
+// ============================================================================
+// [VERIFIED] SpeedCondition::vfunc_08 (0x000DD280, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// SpeedCondition::vfunc_08 (0x000DD280, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00487754;
+
+class SpeedCondition
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+};
+
+int SpeedCondition::vfunc_08(int a1)
+{
+    return *(int*)(DAT_00487754 + (a1 * 4));
+}
+
 // [TODO] 0x000DD290 sub_000DD290 (33 B)
 // [TODO] 0x000DD2C0 sub_000DD2C0 (19 B)
 // [TODO] 0x000DD2E0 DistanceToTargetCondition::vfunc_08 (16 B)
@@ -5555,7 +6723,43 @@
 // [TODO] 0x000DE380 sub_000DE380 (155 B)
 // [TODO] 0x000DE420 sub_000DE420 (133 B)
 // [TODO] 0x000DE4B0 fight::ConditionFactory::vfunc_03 (30 B)
-// [TODO] 0x000DE4D0 fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A6FC8[];
+extern "C" void __cdecl sub_0023F7A0(int);
+extern "C" void __cdecl sub_002A9290(void);
+
+class AnimationStateCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<AnimationStateCondition>* vfunc_03(int a1);
+    void sub_00239ED0();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<AnimationStateCondition>* fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003A6FC8;
+    sub_002A9290();
+    sub_00239ED0();
+    if (a1 & 1) {
+        sub_0023F7A0((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000DE500 fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_07 (52 B)
 // [TODO] 0x000DE540 fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>::vfunc_03 (43 B)
 // [TODO] 0x000DE570 fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>::vfunc_07 (52 B)
@@ -6133,7 +7337,29 @@
 // [TODO] 0x000EFAF0 sub_000EFAF0 (57 B)
 // [TODO] 0x000EFB30 sub_000EFB30 (30 B)
 // [TODO] 0x000EFB50 sub_000EFB50 (178 B)
-// [TODO] 0x000EFC10 AIActionTreeCreatingTask::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AIActionTreeCreatingTask::vfunc_00 (0x000EFC10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIActionTreeCreatingTask::vfunc_00 (0x000EFC10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004290DC[];
+
+class AIActionTreeCreatingTask
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AIActionTreeCreatingTask::vfunc_00()
+{
+    return DAT_004290DC;
+}
+
 // [TODO] 0x000EFC20 AIActionTreeCreatingTask::vfunc_01 (30 B)
 // [TODO] 0x000EFC40 sub_000EFC40 (111 B)
 // [TODO] 0x000EFCB0 PedestriansSmartCollection::vfunc_01 (17 B)
@@ -6361,7 +7587,29 @@
 // [TODO] 0x000FFF50 sub_000FFF50 (199 B)
 // [TODO] 0x00100020 sub_00100020 (80 B)
 // [TODO] 0x00100070 sub_00100070 (408 B)
-// [TODO] 0x00100210 AIBehavior::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AIBehavior::vfunc_00 (0x00100210, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIBehavior::vfunc_00 (0x00100210, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428944[];
+
+class AIBehavior
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AIBehavior::vfunc_00()
+{
+    return DAT_00428944;
+}
+
 // [TODO] 0x00100220 sub_00100220 (908 B)
 // [TODO] 0x001005B0 sub_001005B0 (724 B)
 // [TODO] 0x00100890 sub_00100890 (2271 B)
@@ -6431,7 +7679,29 @@
 // [TODO] 0x00104090 sub_00104090 (130 B)
 // [TODO] 0x00104120 sub_00104120 (21 B)
 // [TODO] 0x00104140 sub_00104140 (133 B)
-// [TODO] 0x001041D0 AIStimulusTable::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AIStimulusTable::vfunc_00 (0x001041D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIStimulusTable::vfunc_00 (0x001041D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428970[];
+
+class AIStimulusTable
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AIStimulusTable::vfunc_00()
+{
+    return DAT_00428970;
+}
+
 // [TODO] 0x001041E0 sub_001041E0 (369 B)
 // [TODO] 0x00104360 sub_00104360 (33 B)
 // [TODO] 0x00104390 sub_00104390 (225 B)
@@ -6463,14 +7733,58 @@
 // [TODO] 0x00104FC0 sub_00104FC0 (13 B)
 // [TODO] 0x00104FD0 sub_00104FD0 (13 B)
 // [TODO] 0x00104FE0 sub_00104FE0 (62 B)
-// [TODO] 0x00105020 AITask::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask::vfunc_00 (0x00105020, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask::vfunc_00 (0x00105020, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428E74[];
+
+class AITask
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask::vfunc_00()
+{
+    return DAT_00428E74;
+}
+
 // [TODO] 0x00105030 AITask_BegForLife::vfunc_38 (27 B)
 // [TODO] 0x00105050 AITask_BegForLife::vfunc_37 (94 B)
 // [TODO] 0x001050B0 AITask_BegForLife::vfunc_39 (153 B)
 // [TODO] 0x00105150 AITask_BegForLife::vfunc_41 (423 B)
 // [TODO] 0x00105300 AITask_BegForLife::vfunc_40 (1284 B)
 // [TODO] 0x00105810 sub_00105810 (109 B)
-// [TODO] 0x00105880 AITask_BegForLife::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_BegForLife::vfunc_00 (0x00105880, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_BegForLife::vfunc_00 (0x00105880, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429604[];
+
+class AITask_BegForLife
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_BegForLife::vfunc_00()
+{
+    return DAT_00429604;
+}
+
 // [TODO] 0x00105890 sub_00105890 (118 B)
 // [TODO] 0x00105910 AITask_BegForLife::vfunc_01 (30 B)
 // [TODO] 0x00105930 AITask_ChallengeTony::vfunc_38 (24 B)
@@ -6479,7 +7793,29 @@
 // [TODO] 0x001059F0 AITask_ChallengeTony::vfunc_40 (202 B)
 // [TODO] 0x00105AC0 AITask_ChallengeTony::vfunc_41 (562 B)
 // [TODO] 0x00105D00 sub_00105D00 (40 B)
-// [TODO] 0x00105D30 AITask_ChallengeTony::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ChallengeTony::vfunc_00 (0x00105D30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ChallengeTony::vfunc_00 (0x00105D30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004291E4[];
+
+class AITask_ChallengeTony
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_ChallengeTony::vfunc_00()
+{
+    return DAT_004291E4;
+}
+
 // [TODO] 0x00105D40 AITask_ChallengeTony::vfunc_01 (65 B)
 // [TODO] 0x00105D90 sub_00105D90 (93 B)
 // [TODO] 0x00105DF0 AITask_Chicken::vfunc_37 (73 B)
@@ -6489,7 +7825,29 @@
 // [TODO] 0x00106200 sub_00106200 (333 B)
 // [TODO] 0x00106350 AITask_Chicken::vfunc_41 (474 B)
 // [TODO] 0x00106540 sub_00106540 (64 B)
-// [TODO] 0x00106580 AITask_Chicken::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_Chicken::vfunc_00 (0x00106580, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_Chicken::vfunc_00 (0x00106580, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429738[];
+
+class AITask_Chicken
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_Chicken::vfunc_00()
+{
+    return DAT_00429738;
+}
+
 // [TODO] 0x00106590 AIActionTreeCreatingTask::vfunc_30 (36 B)
 // [TODO] 0x001065C0 AIActionTreeCreatingTask::vfunc_31 (12 B)
 // [TODO] 0x001065D0 sub_001065D0 (43 B)
@@ -6518,7 +7876,29 @@
 // [TODO] 0x00106CB0 sub_00106CB0 (38 B)
 // [TODO] 0x00106CE0 sub_00106CE0 (27 B)
 // [TODO] 0x00106D00 sub_00106D00 (155 B)
-// [TODO] 0x00106DA0 AITask_CodeAbstract::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_CodeAbstract::vfunc_00 (0x00106DA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_CodeAbstract::vfunc_00 (0x00106DA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428EA0[];
+
+class AITask_CodeAbstract
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_CodeAbstract::vfunc_00()
+{
+    return DAT_00428EA0;
+}
+
 // [TODO] 0x00106DB0 AITask_FleeFromPosition::vfunc_39 (8 B)
 // [TODO] 0x00106DC0 AITask_FleeFromPosition::vfunc_37 (8 B)
 // [TODO] 0x00106DD0 AITask_FleeWhenOutGunned::vfunc_39 (19 B)
@@ -6532,11 +7912,77 @@
 // [TODO] 0x001074B0 AITask_FleeWhenOutGunned::vfunc_37 (111 B)
 // [TODO] 0x00107520 AITask_FleeFromPosition::vfunc_40 (137 B)
 // [TODO] 0x001075B0 sub_001075B0 (76 B)
-// [TODO] 0x00107600 AITask_FleeFromPosition::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_FleeFromPosition::vfunc_00 (0x00107600, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_FleeFromPosition::vfunc_00 (0x00107600, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429688[];
+
+class AITask_FleeFromPosition
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_FleeFromPosition::vfunc_00()
+{
+    return DAT_00429688;
+}
+
 // [TODO] 0x00107610 sub_00107610 (153 B)
-// [TODO] 0x001076B0 AITask_FleeWhenOutGunned::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_FleeWhenOutGunned::vfunc_00 (0x001076B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_FleeWhenOutGunned::vfunc_00 (0x001076B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004296B4[];
+
+class AITask_FleeWhenOutGunned
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_FleeWhenOutGunned::vfunc_00()
+{
+    return DAT_004296B4;
+}
+
 // [TODO] 0x001076C0 sub_001076C0 (161 B)
-// [TODO] 0x00107770 AITask_FleeFromExplodingCar::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_FleeFromExplodingCar::vfunc_00 (0x00107770, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_FleeFromExplodingCar::vfunc_00 (0x00107770, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042965C[];
+
+class AITask_FleeFromExplodingCar
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_FleeFromExplodingCar::vfunc_00()
+{
+    return DAT_0042965C;
+}
+
 // [TODO] 0x00107780 AITask_FleeFromExplodingCar::vfunc_01 (51 B)
 // [TODO] 0x001077C0 AITask_FleeWhenOutGunned::vfunc_01 (30 B)
 // [TODO] 0x001077E0 sub_001077E0 (103 B)
@@ -6565,7 +8011,29 @@
 // [TODO] 0x001087C0 AITask_IdleAction::vfunc_41 (730 B)
 // [TODO] 0x00108AA0 sub_00108AA0 (32 B)
 // [TODO] 0x00108AC0 sub_00108AC0 (215 B)
-// [TODO] 0x00108BA0 AITask_IdleAction::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_IdleAction::vfunc_00 (0x00108BA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_IdleAction::vfunc_00 (0x00108BA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429108[];
+
+class AITask_IdleAction
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_IdleAction::vfunc_00()
+{
+    return DAT_00429108;
+}
+
 // [TODO] 0x00108BB0 AITask_IdleAction::vfunc_01 (43 B)
 // [TODO] 0x00108BE0 AITask_PedTraffic::vfunc_39 (16 B)
 // [TODO] 0x00108BF0 sub_00108BF0 (17 B)
@@ -6588,12 +8056,56 @@
 // [TODO] 0x00109480 sub_00109480 (85 B)
 // [TODO] 0x001094E0 sub_001094E0 (67 B)
 // [TODO] 0x00109530 sub_00109530 (101 B)
-// [TODO] 0x001095A0 AITask_PedFlee::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_PedFlee::vfunc_00 (0x001095A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_PedFlee::vfunc_00 (0x001095A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004294FC[];
+
+class AITask_PedFlee
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_PedFlee::vfunc_00()
+{
+    return DAT_004294FC;
+}
+
 // [TODO] 0x001095B0 AITask_PedFlee::vfunc_03 (7 B)
 // [TODO] 0x001095C0 AITask_PedFlee::vfunc_39 (99 B)
 // [TODO] 0x00109630 sub_00109630 (71 B)
 // [TODO] 0x00109680 sub_00109680 (32 B)
-// [TODO] 0x001096A0 AITask_PedTraffic::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_PedTraffic::vfunc_00 (0x001096A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_PedTraffic::vfunc_00 (0x001096A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004294D0[];
+
+class AITask_PedTraffic
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_PedTraffic::vfunc_00()
+{
+    return DAT_004294D0;
+}
+
 // [TODO] 0x001096B0 AITask_Chicken::vfunc_01 (30 B)
 // [TODO] 0x001096D0 sub_001096D0 (5 B)
 // [TODO] 0x001096E0 AITask_PedFlee::vfunc_01 (51 B)
@@ -6605,13 +8117,57 @@
 // [TODO] 0x00109960 AITask_ReactToStaggeredStim::vfunc_40 (502 B)
 // [TODO] 0x00109B60 AITask_ReactToStaggeredStim::vfunc_41 (262 B)
 // [TODO] 0x00109C70 sub_00109C70 (36 B)
-// [TODO] 0x00109CA0 AITask_ReactToStaggeredStim::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ReactToStaggeredStim::vfunc_00 (0x00109CA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ReactToStaggeredStim::vfunc_00 (0x00109CA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429210[];
+
+class AITask_ReactToStaggeredStim
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_ReactToStaggeredStim::vfunc_00()
+{
+    return DAT_00429210;
+}
+
 // [TODO] 0x00109CB0 AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_37 (37 B)
 // [TODO] 0x00109CE0 AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_39 (37 B)
 // [TODO] 0x00109D10 AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_40 (108 B)
 // [TODO] 0x00109D80 AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_41 (42 B)
 // [TODO] 0x00109DB0 sub_00109DB0 (36 B)
-// [TODO] 0x00109DE0 AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_00 (0x00109DE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_00 (0x00109DE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429554[];
+
+class AITask_ReactToStaggeredStimInStationaryVehicle
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_00()
+{
+    return DAT_00429554;
+}
+
 // [TODO] 0x00109DF0 AITask_SharkInteractWithSwimmer::vfunc_46 (9 B)
 // [TODO] 0x00109E00 AITask_SharkInteractWithSwimmer::vfunc_44 (6 B)
 // [TODO] 0x00109E10 AITask_SharkInteractWithSwimmer::vfunc_47 (35 B)
@@ -6636,12 +8192,78 @@
 // [TODO] 0x0010A610 sub_0010A610 (126 B)
 // [TODO] 0x0010A690 sub_0010A690 (87 B)
 // [TODO] 0x0010A6F0 sub_0010A6F0 (78 B)
-// [TODO] 0x0010A740 AITask_SharkInteractWithSwimmer::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_SharkInteractWithSwimmer::vfunc_00 (0x0010A740, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_SharkInteractWithSwimmer::vfunc_00 (0x0010A740, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004297BC[];
+
+class AITask_SharkInteractWithSwimmer
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_SharkInteractWithSwimmer::vfunc_00()
+{
+    return DAT_004297BC;
+}
+
 // [TODO] 0x0010A750 AITask_SharkInteractWithSwimmer::vfunc_48 (28 B)
 // [TODO] 0x0010A770 sub_0010A770 (70 B)
-// [TODO] 0x0010A7C0 AITask_SharkInteractWithBoat::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_SharkInteractWithBoat::vfunc_00 (0x0010A7C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_SharkInteractWithBoat::vfunc_00 (0x0010A7C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004297E8[];
+
+class AITask_SharkInteractWithBoat
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_SharkInteractWithBoat::vfunc_00()
+{
+    return DAT_004297E8;
+}
+
 // [TODO] 0x0010A7D0 sub_0010A7D0 (32 B)
-// [TODO] 0x0010A7F0 AITask_SharkWander::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_SharkWander::vfunc_00 (0x0010A7F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_SharkWander::vfunc_00 (0x0010A7F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429764[];
+
+class AITask_SharkWander
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_SharkWander::vfunc_00()
+{
+    return DAT_00429764;
+}
+
 // [TODO] 0x0010A800 AITask_SharkInteractWithSwimmer::vfunc_39 (13 B)
 // [TODO] 0x0010A810 AITask_SharkInteractWithSwimmer::vfunc_41 (187 B)
 // [TODO] 0x0010A8D0 sub_0010A8D0 (238 B)
@@ -6662,16 +8284,126 @@
 // [TODO] 0x0010B7D0 AITask_DestroyObject::vfunc_40 (132 B)
 // [TODO] 0x0010B860 AITask_Patrol::vfunc_37 (327 B)
 // [TODO] 0x0010B9B0 AITask_Patrol::vfunc_41 (1037 B)
-// [TODO] 0x0010BDC0 AITask_Dummy::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_Dummy::vfunc_00 (0x0010BDC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_Dummy::vfunc_00 (0x0010BDC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042944C[];
+
+class AITask_Dummy
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_Dummy::vfunc_00()
+{
+    return DAT_0042944C;
+}
+
 // [TODO] 0x0010BDD0 AITask_Dummy::vfunc_40 (6 B)
 // [TODO] 0x0010BDE0 sub_0010BDE0 (78 B)
-// [TODO] 0x0010BE30 AITask_DummyInVehicle::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_DummyInVehicle::vfunc_00 (0x0010BE30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_DummyInVehicle::vfunc_00 (0x0010BE30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429478[];
+
+class AITask_DummyInVehicle
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_DummyInVehicle::vfunc_00()
+{
+    return DAT_00429478;
+}
+
 // [TODO] 0x0010BE40 sub_0010BE40 (156 B)
-// [TODO] 0x0010BEE0 AITask_Engage::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_Engage::vfunc_00 (0x0010BEE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_Engage::vfunc_00 (0x0010BEE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428ECC[];
+
+class AITask_Engage
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_Engage::vfunc_00()
+{
+    return DAT_00428ECC;
+}
+
 // [TODO] 0x0010BEF0 sub_0010BEF0 (32 B)
-// [TODO] 0x0010BF10 AITask_DestroyObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_DestroyObject::vfunc_00 (0x0010BF10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_DestroyObject::vfunc_00 (0x0010BF10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428EF8[];
+
+class AITask_DestroyObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_DestroyObject::vfunc_00()
+{
+    return DAT_00428EF8;
+}
+
 // [TODO] 0x0010BF20 sub_0010BF20 (106 B)
-// [TODO] 0x0010BF90 AITask_Patrol::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_Patrol::vfunc_00 (0x0010BF90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_Patrol::vfunc_00 (0x0010BF90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428F24[];
+
+class AITask_Patrol
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_Patrol::vfunc_00()
+{
+    return DAT_00428F24;
+}
+
 // [TODO] 0x0010BFA0 sub_0010BFA0 (32 B)
 // [TODO] 0x0010BFC0 AITask_Dummy::vfunc_01 (65 B)
 // [TODO] 0x0010C010 sub_0010C010 (82 B)
@@ -6704,12 +8436,78 @@
 // [TODO] 0x0010D160 AITask_SlowDownCarForCorpses::vfunc_45 (73 B)
 // [TODO] 0x0010D1B0 AITask_SlowDownCarForCorpses::vfunc_48 (159 B)
 // [TODO] 0x0010D250 sub_0010D250 (61 B)
-// [TODO] 0x0010D290 AITask_BasicInVehicle::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_BasicInVehicle::vfunc_00 (0x0010D290, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_BasicInVehicle::vfunc_00 (0x0010D290, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429580[];
+
+class AITask_BasicInVehicle
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_BasicInVehicle::vfunc_00()
+{
+    return DAT_00429580;
+}
+
 // [TODO] 0x0010D2A0 sub_0010D2A0 (53 B)
-// [TODO] 0x0010D2E0 AITask_InVehicle::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_InVehicle::vfunc_00 (0x0010D2E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_InVehicle::vfunc_00 (0x0010D2E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004294A4[];
+
+class AITask_InVehicle
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_InVehicle::vfunc_00()
+{
+    return DAT_004294A4;
+}
+
 // [TODO] 0x0010D2F0 AITask_BasicInVehicle::vfunc_01 (48 B)
 // [TODO] 0x0010D320 sub_0010D320 (54 B)
-// [TODO] 0x0010D360 AITask_SlowDownCarForCorpses::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_SlowDownCarForCorpses::vfunc_00 (0x0010D360, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_SlowDownCarForCorpses::vfunc_00 (0x0010D360, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004295AC[];
+
+class AITask_SlowDownCarForCorpses
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_SlowDownCarForCorpses::vfunc_00()
+{
+    return DAT_004295AC;
+}
+
 // [TODO] 0x0010D370 sub_0010D370 (72 B)
 // [TODO] 0x0010D3C0 sub_0010D3C0 (10 B)
 // [TODO] 0x0010D3D0 sub_0010D3D0 (39 B)
@@ -6723,7 +8521,29 @@
 // [TODO] 0x0010DA00 sub_0010DA00 (235 B)
 // [TODO] 0x0010DAF0 AITask_VehicleGetIn::vfunc_41 (1161 B)
 // [TODO] 0x0010DF80 sub_0010DF80 (530 B)
-// [TODO] 0x0010E1A0 AITask_VehicleGetIn::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_VehicleGetIn::vfunc_00 (0x0010E1A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_VehicleGetIn::vfunc_00 (0x0010E1A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004290B0[];
+
+class AITask_VehicleGetIn
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_VehicleGetIn::vfunc_00()
+{
+    return DAT_004290B0;
+}
+
 // [TODO] 0x0010E1B0 AITask_VehicleGetIn::vfunc_40 (449 B)
 // [TODO] 0x0010E380 sub_0010E380 (52 B)
 // [TODO] 0x0010E3C0 AITask_VehicleGetIn::vfunc_01 (65 B)
@@ -6732,7 +8552,29 @@
 // [TODO] 0x0010E470 AITask_WaitWhenTonyIsNear::vfunc_39 (62 B)
 // [TODO] 0x0010E4B0 AITask_WaitWhenTonyIsNear::vfunc_40 (277 B)
 // [TODO] 0x0010E5D0 AITask_WaitWhenTonyIsNear::vfunc_41 (594 B)
-// [TODO] 0x0010E830 AITask_WaitWhenTonyIsNear::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_WaitWhenTonyIsNear::vfunc_00 (0x0010E830, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_WaitWhenTonyIsNear::vfunc_00 (0x0010E830, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429084[];
+
+class AITask_WaitWhenTonyIsNear
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_WaitWhenTonyIsNear::vfunc_00()
+{
+    return DAT_00429084;
+}
+
 // [TODO] 0x0010E840 sub_0010E840 (43 B)
 // [TODO] 0x0010E870 AITask_WaitWhenTonyIsNear::vfunc_01 (65 B)
 // [TODO] 0x0010E8C0 sub_0010E8C0 (18 B)
@@ -6745,7 +8587,29 @@
 // [TODO] 0x0010EB00 sub_0010EB00 (24 B)
 // [TODO] 0x0010EB20 sub_0010EB20 (85 B)
 // [TODO] 0x0010EB80 sub_0010EB80 (124 B)
-// [TODO] 0x0010EC00 AttractPointTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AttractPointTemplate::vfunc_00 (0x0010EC00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AttractPointTemplate::vfunc_00 (0x0010EC00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042918C[];
+
+class AttractPointTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AttractPointTemplate::vfunc_00()
+{
+    return DAT_0042918C;
+}
+
 // [TODO] 0x0010EC10 sub_0010EC10 (14 B)
 // [TODO] 0x0010EC20 sub_0010EC20 (14 B)
 // [TODO] 0x0010EC30 sub_0010EC30 (19 B)
@@ -6770,15 +8634,81 @@
 // [TODO] 0x0010EEA0 sub_0010EEA0 (88 B)
 // [TODO] 0x0010EF00 sub_0010EF00 (35 B)
 // [TODO] 0x0010EF30 sub_0010EF30 (52 B)
-// [TODO] 0x0010EF70 ActivityTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ActivityTemplate::vfunc_00 (0x0010EF70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ActivityTemplate::vfunc_00 (0x0010EF70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429134[];
+
+class ActivityTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ActivityTemplate::vfunc_00()
+{
+    return DAT_00429134;
+}
+
 // [TODO] 0x0010EF80 ActivityTemplate::vfunc_01 (48 B)
 // [TODO] 0x0010EFB0 sub_0010EFB0 (29 B)
 // [TODO] 0x0010EFD0 sub_0010EFD0 (57 B)
-// [TODO] 0x0010F010 AttractPointTemplateGroup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AttractPointTemplateGroup::vfunc_00 (0x0010F010, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AttractPointTemplateGroup::vfunc_00 (0x0010F010, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429160[];
+
+class AttractPointTemplateGroup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AttractPointTemplateGroup::vfunc_00()
+{
+    return DAT_00429160;
+}
+
 // [TODO] 0x0010F020 sub_0010F020 (29 B)
 // [TODO] 0x0010F040 sub_0010F040 (225 B)
 // [TODO] 0x0010F130 sub_0010F130 (98 B)
-// [TODO] 0x0010F1A0 AttractPoint::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AttractPoint::vfunc_00 (0x0010F1A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AttractPoint::vfunc_00 (0x0010F1A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004291B8[];
+
+class AttractPoint
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AttractPoint::vfunc_00()
+{
+    return DAT_004291B8;
+}
+
 // [TODO] 0x0010F1B0 sub_0010F1B0 (88 B)
 // [TODO] 0x0010F210 sub_0010F210 (178 B)
 // [TODO] 0x0010F2D0 sub_0010F2D0 (13 B)
@@ -6900,7 +8830,29 @@
 // [TODO] 0x00112D50 sub_00112D50 (123 B)
 // [TODO] 0x00112DD0 CoverManager::vfunc_00 (80 B)
 // [TODO] 0x00112E20 sub_00112E20 (37 B)
-// [TODO] 0x00112E50 CoverObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CoverObject::vfunc_00 (0x00112E50, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CoverObject::vfunc_00 (0x00112E50, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042B010[];
+
+class CoverObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CoverObject::vfunc_00()
+{
+    return DAT_0042B010;
+}
+
 // [TODO] 0x00112E60 sub_00112E60 (35 B)
 // [TODO] 0x00112E90 sub_00112E90 (40 B)
 // [TODO] 0x00112EC0 sub_00112EC0 (35 B)
@@ -6991,7 +8943,29 @@
 // [TODO] 0x00115EC0 sub_00115EC0 (83 B)
 // [TODO] 0x00115F20 sub_00115F20 (21 B)
 // [TODO] 0x00115F40 sub_00115F40 (85 B)
-// [TODO] 0x00115FA0 PathGroup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PathGroup::vfunc_00 (0x00115FA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PathGroup::vfunc_00 (0x00115FA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004286FC[];
+
+class PathGroup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PathGroup::vfunc_00()
+{
+    return DAT_004286FC;
+}
+
 // [TODO] 0x00115FB0 PathGroup::vfunc_13 (397 B)
 // [TODO] 0x00116140 ConcreteClassRep<PathGroup>::vfunc_01 (42 B)
 // [TODO] 0x00116170 PathGroup::vfunc_01 (48 B)
@@ -7222,13 +9196,79 @@
 // [TODO] 0x0011C840 ConcreteClassRep<AITask_ForcedIntimidation>::vfunc_02 (70 B)
 // [TODO] 0x0011C890 ConcreteClassRep<AITask_TauntResponse>::vfunc_02 (36 B)
 // [TODO] 0x0011C8C0 ConcreteClassRep<AITask_IdleChatResponse>::vfunc_01 (82 B)
-// [TODO] 0x0011C920 AITask_IdleChatResponse::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_IdleChatResponse::vfunc_00 (0x0011C920, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_IdleChatResponse::vfunc_00 (0x0011C920, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042923C[];
+
+class AITask_IdleChatResponse
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_IdleChatResponse::vfunc_00()
+{
+    return DAT_0042923C;
+}
+
 // [TODO] 0x0011C930 AITask_IdleChatResponse::vfunc_01 (30 B)
 // [TODO] 0x0011C950 ConcreteClassRep<AITask_IdleChatInitiate>::vfunc_01 (62 B)
-// [TODO] 0x0011C990 AITask_IdleChatInitiate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_IdleChatInitiate::vfunc_00 (0x0011C990, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_IdleChatInitiate::vfunc_00 (0x0011C990, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429268[];
+
+class AITask_IdleChatInitiate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_IdleChatInitiate::vfunc_00()
+{
+    return DAT_00429268;
+}
+
 // [TODO] 0x0011C9A0 AITask_IdleChatInitiate::vfunc_57 (5 B)
 // [TODO] 0x0011C9B0 ConcreteClassRep<AITask_ProvokeAnotherPed>::vfunc_01 (62 B)
-// [TODO] 0x0011C9F0 AITask_ProvokeAnotherPed::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ProvokeAnotherPed::vfunc_00 (0x0011C9F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ProvokeAnotherPed::vfunc_00 (0x0011C9F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429294[];
+
+class AITask_ProvokeAnotherPed
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_ProvokeAnotherPed::vfunc_00()
+{
+    return DAT_00429294;
+}
+
 // [TODO] 0x0011CA00 AITask_ProvokeAnotherPed::vfunc_57 (5 B)
 // [TODO] 0x0011CA10 AITask_CodeAbstract::vfunc_01 (40 B)
 // [TODO] 0x0011CA40 sub_0011CA40 (23 B)
@@ -7549,17 +9589,83 @@
 // [TODO] 0x00123210 AITask_AvoidIncomingCar::vfunc_45 (110 B)
 // [TODO] 0x00123280 AITask_FleeFromPosition::vfunc_01 (59 B)
 // [TODO] 0x001232C0 sub_001232C0 (158 B)
-// [TODO] 0x00123360 AITask_AvoidIncomingCar::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_AvoidIncomingCar::vfunc_00 (0x00123360, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_AvoidIncomingCar::vfunc_00 (0x00123360, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428F7C[];
+
+class AITask_AvoidIncomingCar
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_AvoidIncomingCar::vfunc_00()
+{
+    return DAT_00428F7C;
+}
+
 // [TODO] 0x00123370 AITask_AvoidIncomingCar::vfunc_01 (40 B)
 // [TODO] 0x001233A0 sub_001233A0 (119 B)
-// [TODO] 0x00123420 AITask_NearlyHitByCar::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_NearlyHitByCar::vfunc_00 (0x00123420, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_NearlyHitByCar::vfunc_00 (0x00123420, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428FA8[];
+
+class AITask_NearlyHitByCar
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_NearlyHitByCar::vfunc_00()
+{
+    return DAT_00428FA8;
+}
+
 // [TODO] 0x00123430 AITask_NearlyHitByCar::vfunc_01 (40 B)
 // [TODO] 0x00123460 AITask_BumpReflex::vfunc_49 (22 B)
 // [TODO] 0x00123480 AITask_BumpReflex::vfunc_45 (225 B)
 // [TODO] 0x00123570 AITask_BumpReflex::vfunc_47 (56 B)
 // [TODO] 0x001235B0 AITask_BumpReflex::vfunc_48 (257 B)
 // [TODO] 0x001236C0 sub_001236C0 (80 B)
-// [TODO] 0x00123710 AITask_BumpReflex::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_BumpReflex::vfunc_00 (0x00123710, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_BumpReflex::vfunc_00 (0x00123710, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429000[];
+
+class AITask_BumpReflex
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_BumpReflex::vfunc_00()
+{
+    return DAT_00429000;
+}
+
 // [TODO] 0x00123720 AITask_CopChallenge::vfunc_44 (8 B)
 // [TODO] 0x00123730 AITask_CopChallenge::vfunc_50 (39 B)
 // [TODO] 0x00123760 AITask_CopChallenge::vfunc_00 (4 B)
@@ -7572,7 +9678,29 @@
 // [TODO] 0x00123B60 AITask_CopChallenge::vfunc_46 (302 B)
 // [TODO] 0x00123C90 AITask_CopChallenge::vfunc_48 (658 B)
 // [TODO] 0x00123F30 sub_00123F30 (114 B)
-// [TODO] 0x00123FB0 AITask_CopChallenge::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_CopChallenge::vfunc_00 (0x00123FB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_CopChallenge::vfunc_00 (0x00123FB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004293F4[];
+
+class AITask_CopChallenge
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_CopChallenge::vfunc_00()
+{
+    return DAT_004293F4;
+}
+
 // [TODO] 0x00123FC0 AITask_CopChallenge::vfunc_03 (7 B)
 // [TODO] 0x00123FD0 sub_00123FD0 (91 B)
 // [TODO] 0x00124030 PedHasBeaconInFrontHemisphereFilter::vfunc_00 (16 B)
@@ -7606,11 +9734,55 @@
 // [TODO] 0x00124EB0 sub_00124EB0 (301 B)
 // [TODO] 0x00124FE0 sub_00124FE0 (44 B)
 // [TODO] 0x00125010 sub_00125010 (54 B)
-// [TODO] 0x00125050 AITask_RunToAssistCorpse::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_RunToAssistCorpse::vfunc_00 (0x00125050, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_RunToAssistCorpse::vfunc_00 (0x00125050, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429058[];
+
+class AITask_RunToAssistCorpse
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_RunToAssistCorpse::vfunc_00()
+{
+    return DAT_00429058;
+}
+
 // [TODO] 0x00125060 DriversSmartCollection::vfunc_00 (7 B)
 // [TODO] 0x00125070 sub_00125070 (84 B)
 // [TODO] 0x001250D0 sub_001250D0 (54 B)
-// [TODO] 0x00125110 AITask_GawkAtCorpse::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_GawkAtCorpse::vfunc_00 (0x00125110, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_GawkAtCorpse::vfunc_00 (0x00125110, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042902C[];
+
+class AITask_GawkAtCorpse
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_GawkAtCorpse::vfunc_00()
+{
+    return DAT_0042902C;
+}
+
 // [TODO] 0x00125120 AITask_GawkAtCorpse::vfunc_03 (7 B)
 // [TODO] 0x00125130 sub_00125130 (25 B)
 // [TODO] 0x00125150 sub_00125150 (203 B)
@@ -7631,9 +9803,53 @@
 // [TODO] 0x00125650 AITask_DealerAttractTony::vfunc_52 (219 B)
 // [TODO] 0x00125730 AITask_DealerWarnTony::vfunc_52 (324 B)
 // [TODO] 0x00125880 sub_00125880 (53 B)
-// [TODO] 0x001258C0 AITask_DealerAttractTony::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_DealerAttractTony::vfunc_00 (0x001258C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_DealerAttractTony::vfunc_00 (0x001258C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004296E0[];
+
+class AITask_DealerAttractTony
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_DealerAttractTony::vfunc_00()
+{
+    return DAT_004296E0;
+}
+
 // [TODO] 0x001258D0 sub_001258D0 (67 B)
-// [TODO] 0x00125920 AITask_DealerWarnTony::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_DealerWarnTony::vfunc_00 (0x00125920, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_DealerWarnTony::vfunc_00 (0x00125920, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042970C[];
+
+class AITask_DealerWarnTony
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_DealerWarnTony::vfunc_00()
+{
+    return DAT_0042970C;
+}
+
 // [TODO] 0x00125930 AITask_DealerWarnTony::vfunc_03 (7 B)
 // [TODO] 0x00125940 sub_00125940 (39 B)
 // [TODO] 0x00125970 AITask_FollowActor::vfunc_39 (9 B)
@@ -7641,7 +9857,29 @@
 // [TODO] 0x00125A70 AITask_FollowActor::vfunc_37 (55 B)
 // [TODO] 0x00125AB0 AITask_FollowActor::vfunc_41 (568 B)
 // [TODO] 0x00125CF0 sub_00125CF0 (72 B)
-// [TODO] 0x00125D40 AITask_FollowActor::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_FollowActor::vfunc_00 (0x00125D40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_FollowActor::vfunc_00 (0x00125D40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004292EC[];
+
+class AITask_FollowActor
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_FollowActor::vfunc_00()
+{
+    return DAT_004292EC;
+}
+
 // [TODO] 0x00125D50 AITask_ForcedIntimidation::vfunc_44 (5 B)
 // [TODO] 0x00125D60 AITask_ForcedIntimidation::vfunc_49 (73 B)
 // [TODO] 0x00125DB0 AITask_ForcedIntimidation::vfunc_50 (31 B)
@@ -7649,7 +9887,29 @@
 // [TODO] 0x00125EE0 sub_00125EE0 (104 B)
 // [TODO] 0x00125F50 AITask_ForcedIntimidation::vfunc_48 (173 B)
 // [TODO] 0x00126000 sub_00126000 (46 B)
-// [TODO] 0x00126030 AITask_ForcedIntimidation::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ForcedIntimidation::vfunc_00 (0x00126030, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ForcedIntimidation::vfunc_00 (0x00126030, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429420[];
+
+class AITask_ForcedIntimidation
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_ForcedIntimidation::vfunc_00()
+{
+    return DAT_00429420;
+}
+
 // [TODO] 0x00126040 AITask_IdleChatResponse::vfunc_00 (17 B)
 // [TODO] 0x00126060 AITask_IdleChatResponse::vfunc_50 (17 B)
 // [TODO] 0x00126070 sub_00126070 (1 B)
@@ -7657,11 +9917,55 @@
 // [TODO] 0x00126090 AITask_IdleChatInitiate::vfunc_44 (11 B)
 // [TODO] 0x001260A0 AITask_IdleChatInitiate::vfunc_55 (43 B)
 // [TODO] 0x001260D0 AITask_IdleChatInitiate::vfunc_60 (6 B)
-// [TODO] 0x001260E0 AITask_IdleChatInitiate::vfunc_61 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_IdleChatInitiate::vfunc_61 (0x001260E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_IdleChatInitiate::vfunc_61 (0x001260E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003AF34C[];
+
+class AITask_IdleChatInitiate
+{
+public:
+    virtual void* vfunc_61();
+};
+
+void* AITask_IdleChatInitiate::vfunc_61()
+{
+    return DAT_003AF34C;
+}
+
 // [TODO] 0x001260F0 AITask_IdleChatInitiate::vfunc_47 (56 B)
 // [TODO] 0x00126130 sub_00126130 (6 B)
 // [TODO] 0x00126140 AITask_ProvokeAnotherPed::vfunc_60 (6 B)
-// [TODO] 0x00126150 AITask_ProvokeAnotherPed::vfunc_61 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ProvokeAnotherPed::vfunc_61 (0x00126150, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ProvokeAnotherPed::vfunc_61 (0x00126150, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003AAB10[];
+
+class AITask_ProvokeAnotherPed
+{
+public:
+    virtual void* vfunc_61();
+};
+
+void* AITask_ProvokeAnotherPed::vfunc_61()
+{
+    return DAT_003AAB10;
+}
+
 // [TODO] 0x00126160 AITask_ProvokeAnotherPed::vfunc_47 (56 B)
 // [TODO] 0x001261A0 sub_001261A0 (6 B)
 // [TODO] 0x001261B0 AITask_ProvokeAnotherPed::vfunc_52 (237 B)
@@ -7707,7 +10011,29 @@
 // [TODO] 0x00127140 AITask_MonitorCustomLoopState::vfunc_44 (214 B)
 // [TODO] 0x00127220 AITask_MonitorCustomLoopState::vfunc_41 (301 B)
 // [TODO] 0x00127350 sub_00127350 (102 B)
-// [TODO] 0x001273C0 AITask_MonitorCustomLoopState::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_MonitorCustomLoopState::vfunc_00 (0x001273C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_MonitorCustomLoopState::vfunc_00 (0x001273C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429630[];
+
+class AITask_MonitorCustomLoopState
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_MonitorCustomLoopState::vfunc_00()
+{
+    return DAT_00429630;
+}
+
 // [TODO] 0x001273D0 AITask_MonitorCustomLoopState::vfunc_01 (43 B)
 // [TODO] 0x00127400 sub_00127400 (6 B)
 // [TODO] 0x00127410 AITask_ReactToDangerReaction::vfunc_45 (26 B)
@@ -7718,7 +10044,29 @@
 // [TODO] 0x001274D0 AITask_ReactToDangerReaction::vfunc_48 (316 B)
 // [TODO] 0x00127610 AITask_ReactToDangerReaction::vfunc_02 (36 B)
 // [TODO] 0x00127640 sub_00127640 (89 B)
-// [TODO] 0x001276A0 AITask_ReactToDangerReaction::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ReactToDangerReaction::vfunc_00 (0x001276A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ReactToDangerReaction::vfunc_00 (0x001276A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004295D8[];
+
+class AITask_ReactToDangerReaction
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_ReactToDangerReaction::vfunc_00()
+{
+    return DAT_004295D8;
+}
+
 // [TODO] 0x001276B0 AIActionTreeCreatingTask::vfunc_03 (7 B)
 // [TODO] 0x001276C0 AITask_ReactToVisibleGun::vfunc_02 (20 B)
 // [TODO] 0x001276E0 AITask_ReactToVisibleGun::vfunc_49 (56 B)
@@ -7751,14 +10099,102 @@
 // [TODO] 0x001280B0 AITask_Cower::vfunc_02 (246 B)
 // [TODO] 0x001281B0 AITask_PossibleMildInterest::vfunc_45 (241 B)
 // [TODO] 0x001282B0 sub_001282B0 (163 B)
-// [TODO] 0x00128360 AITask_WatchDangerSource::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_WatchDangerSource::vfunc_00 (0x00128360, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_WatchDangerSource::vfunc_00 (0x00128360, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429370[];
+
+class AITask_WatchDangerSource
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_WatchDangerSource::vfunc_00()
+{
+    return DAT_00429370;
+}
+
 // [TODO] 0x00128370 sub_00128370 (98 B)
-// [TODO] 0x001283E0 AITask_Cower::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_Cower::vfunc_00 (0x001283E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_Cower::vfunc_00 (0x001283E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042939C[];
+
+class AITask_Cower
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_Cower::vfunc_00()
+{
+    return DAT_0042939C;
+}
+
 // [TODO] 0x001283F0 sub_001283F0 (150 B)
-// [TODO] 0x00128490 AITask_PossibleMildInterest::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_PossibleMildInterest::vfunc_00 (0x00128490, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_PossibleMildInterest::vfunc_00 (0x00128490, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429814[];
+
+class AITask_PossibleMildInterest
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_PossibleMildInterest::vfunc_00()
+{
+    return DAT_00429814;
+}
+
 // [TODO] 0x001284A0 CollisionBehaviourTypeGroup::vfunc_27 (3 B)
 // [TODO] 0x001284B0 sub_001284B0 (94 B)
-// [TODO] 0x00128510 AITask_ReactToVisibleGun::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ReactToVisibleGun::vfunc_00 (0x00128510, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ReactToVisibleGun::vfunc_00 (0x00128510, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429344[];
+
+class AITask_ReactToVisibleGun
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_ReactToVisibleGun::vfunc_00()
+{
+    return DAT_00429344;
+}
+
 // [TODO] 0x00128520 AITask_ReactToVisibleGun::vfunc_03 (7 B)
 // [TODO] 0x00128530 AITask_ReactToVisibleGun::vfunc_01 (51 B)
 // [TODO] 0x00128570 AITask_CopChallenge::vfunc_01 (51 B)
@@ -7768,7 +10204,29 @@
 // [TODO] 0x001286B0 sub_001286B0 (28 B)
 // [TODO] 0x001286D0 AITask_RecognizeTony::vfunc_48 (231 B)
 // [TODO] 0x001287C0 sub_001287C0 (32 B)
-// [TODO] 0x001287E0 AITask_RecognizeTony::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_RecognizeTony::vfunc_00 (0x001287E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_RecognizeTony::vfunc_00 (0x001287E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004293C8[];
+
+class AITask_RecognizeTony
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_RecognizeTony::vfunc_00()
+{
+    return DAT_004293C8;
+}
+
 // [TODO] 0x001287F0 sub_001287F0 (68 B)
 // [TODO] 0x00128840 sub_00128840 (61 B)
 // [TODO] 0x00128880 AITask_RecognizeTony::vfunc_44 (79 B)
@@ -7780,12 +10238,56 @@
 // [TODO] 0x00128A50 sub_00128A50 (1 B)
 // [TODO] 0x00128A60 AITask_TauntResponse::vfunc_50 (7 B)
 // [TODO] 0x00128A70 sub_00128A70 (14 B)
-// [TODO] 0x00128A80 AITask_TauntResponse::vfunc_54 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_TauntResponse::vfunc_54 (0x00128A80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_TauntResponse::vfunc_54 (0x00128A80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A3594[];
+
+class AITask_TauntResponse
+{
+public:
+    virtual void* vfunc_54();
+};
+
+void* AITask_TauntResponse::vfunc_54()
+{
+    return DAT_003A3594;
+}
+
 // [TODO] 0x00128A90 AITask_TauntResponse::vfunc_52 (41 B)
 // [TODO] 0x00128AC0 AITask_TauntResponse::vfunc_00 (21 B)
 // [TODO] 0x00128AE0 AITask_BumpApology::vfunc_47 (56 B)
 // [TODO] 0x00128B20 AITask_BumpApology::vfunc_53 (12 B)
-// [TODO] 0x00128B30 AITask_ProvokeResponse::vfunc_53 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ProvokeResponse::vfunc_53 (0x00128B30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ProvokeResponse::vfunc_53 (0x00128B30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003AAF88[];
+
+class AITask_ProvokeResponse
+{
+public:
+    virtual void* vfunc_53();
+};
+
+void* AITask_ProvokeResponse::vfunc_53()
+{
+    return DAT_003AAF88;
+}
+
 // [TODO] 0x00128B40 AISimpleAnimAndDialogueReaction::vfunc_45 (149 B)
 // [TODO] 0x00128BE0 AITask_TauntResponse::vfunc_47 (56 B)
 // [TODO] 0x00128C20 AITask_TauntResponse::vfunc_58 (93 B)
@@ -7797,11 +10299,77 @@
 // [TODO] 0x001290A0 sub_001290A0 (665 B)
 // [TODO] 0x00129340 sub_00129340 (58 B)
 // [TODO] 0x00129380 sub_00129380 (163 B)
-// [TODO] 0x00129430 AITask_TauntResponse::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_TauntResponse::vfunc_00 (0x00129430, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_TauntResponse::vfunc_00 (0x00129430, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428F50[];
+
+class AITask_TauntResponse
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_TauntResponse::vfunc_00()
+{
+    return DAT_00428F50;
+}
+
 // [TODO] 0x00129440 sub_00129440 (66 B)
-// [TODO] 0x00129490 AITask_BumpApology::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_BumpApology::vfunc_00 (0x00129490, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_BumpApology::vfunc_00 (0x00129490, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00428FD4[];
+
+class AITask_BumpApology
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_BumpApology::vfunc_00()
+{
+    return DAT_00428FD4;
+}
+
 // [TODO] 0x001294A0 sub_001294A0 (66 B)
-// [TODO] 0x001294F0 AITask_ProvokeResponse::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_ProvokeResponse::vfunc_00 (0x001294F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_ProvokeResponse::vfunc_00 (0x001294F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004292C0[];
+
+class AITask_ProvokeResponse
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_ProvokeResponse::vfunc_00()
+{
+    return DAT_004292C0;
+}
+
 // [TODO] 0x00129500 AISimpleAnimAndDialogueReaction::vfunc_01 (79 B)
 // [TODO] 0x00129550 AITask_TauntResponse::vfunc_01 (43 B)
 // [TODO] 0x00129580 AITask_BumpApology::vfunc_01 (43 B)
@@ -7819,7 +10387,29 @@
 // [TODO] 0x00129870 AITask_CarjackingResponse::vfunc_50 (24 B)
 // [TODO] 0x00129890 AITask_CarjackingResponse::vfunc_48 (402 B)
 // [TODO] 0x00129A30 sub_00129A30 (78 B)
-// [TODO] 0x00129A80 AITask_CarjackingResponse::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_CarjackingResponse::vfunc_00 (0x00129A80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_CarjackingResponse::vfunc_00 (0x00129A80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429528[];
+
+class AITask_CarjackingResponse
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_CarjackingResponse::vfunc_00()
+{
+    return DAT_00429528;
+}
+
 // [TODO] 0x00129A90 AITask_CarjackingResponse::vfunc_01 (48 B)
 // [TODO] 0x00129AC0 AITask_TauntTony::vfunc_44 (45 B)
 // [TODO] 0x00129AF0 sub_00129AF0 (51 B)
@@ -7830,7 +10420,29 @@
 // [TODO] 0x00129CB0 AITask_TauntTony::vfunc_49 (53 B)
 // [TODO] 0x00129CF0 AITask_TauntTony::vfunc_48 (736 B)
 // [TODO] 0x00129FD0 sub_00129FD0 (80 B)
-// [TODO] 0x0012A020 AITask_TauntTony::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AITask_TauntTony::vfunc_00 (0x0012A020, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_TauntTony::vfunc_00 (0x0012A020, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00429318[];
+
+class AITask_TauntTony
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AITask_TauntTony::vfunc_00()
+{
+    return DAT_00429318;
+}
+
 // [TODO] 0x0012A030 sub_0012A030 (68 B)
 // [TODO] 0x0012A080 sub_0012A080 (107 B)
 // [TODO] 0x0012A0F0 AITask_TauntTony::vfunc_45 (485 B)
@@ -7986,7 +10598,29 @@
 // [TODO] 0x00131A60 sub_00131A60 (256 B)
 // [TODO] 0x00131B60 sub_00131B60 (241 B)
 // [TODO] 0x00131C60 sub_00131C60 (146 B)
-// [TODO] 0x00131D00 AICommandSequencer::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AICommandSequencer::vfunc_00 (0x00131D00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AICommandSequencer::vfunc_00 (0x00131D00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042D7B8[];
+
+class AICommandSequencer
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AICommandSequencer::vfunc_00()
+{
+    return DAT_0042D7B8;
+}
+
 // [TODO] 0x00131D10 sub_00131D10 (8 B)
 // [TODO] 0x00131D20 sub_00131D20 (208 B)
 // [TODO] 0x00131DF0 sub_00131DF0 (218 B)
@@ -8251,7 +10885,29 @@
 // [TODO] 0x00138BB0 AICommandWaits::Wait_InVehicle::vfunc_01 (156 B)
 // [TODO] 0x00138C50 AICommandWaits::Wait_NumAttackers::vfunc_01 (92 B)
 // [TODO] 0x00138CB0 AICommandWaits::Wait_SeeCharacterWeapon::vfunc_03 (30 B)
-// [TODO] 0x00138CD0 BoatAIBehaviour::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatAIBehaviour::vfunc_00 (0x00138CD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatAIBehaviour::vfunc_00 (0x00138CD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042DDA4[];
+
+class BoatAIBehaviour
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatAIBehaviour::vfunc_00()
+{
+    return DAT_0042DDA4;
+}
+
 // [TODO] 0x00138CE0 BoatAIBehaviour::vfunc_38 (31 B)
 // [TODO] 0x00138D00 BoatAIBehaviour::vfunc_36 (41 B)
 // [TODO] 0x00138D30 sub_00138D30 (63 B)
@@ -8283,11 +10939,55 @@
 // [TODO] 0x0013BC50 sub_0013BC50 (147 B)
 // [TODO] 0x0013BCF0 BoatAIBehaviour::vfunc_30 (572 B)
 // [TODO] 0x0013BF30 sub_0013BF30 (52 B)
-// [TODO] 0x0013BF70 BoatAITask::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatAITask::vfunc_00 (0x0013BF70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatAITask::vfunc_00 (0x0013BF70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042DDE0[];
+
+class BoatAITask
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatAITask::vfunc_00()
+{
+    return DAT_0042DDE0;
+}
+
 // [TODO] 0x0013BF80 BoatAITask::vfunc_29 (59 B)
 // [TODO] 0x0013BFC0 BoatAITask::vfunc_31 (11 B)
 // [TODO] 0x0013BFD0 sub_0013BFD0 (70 B)
-// [TODO] 0x0013C020 BoatAITask_CallForBoat::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatAITask_CallForBoat::vfunc_00 (0x0013C020, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatAITask_CallForBoat::vfunc_00 (0x0013C020, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042DE38[];
+
+class BoatAITask_CallForBoat
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatAITask_CallForBoat::vfunc_00()
+{
+    return DAT_0042DE38;
+}
+
 // [TODO] 0x0013C030 BoatAITask::vfunc_01 (30 B)
 // [TODO] 0x0013C050 BoatAITask_CallForBoat::vfunc_31 (31 B)
 // [TODO] 0x0013C070 BoatAITask_CallForBoat::vfunc_33 (377 B)
@@ -8300,7 +11000,29 @@
 // [TODO] 0x0013CB00 sub_0013CB00 (10 B)
 // [TODO] 0x0013CB10 sub_0013CB10 (10 B)
 // [TODO] 0x0013CB20 sub_0013CB20 (107 B)
-// [TODO] 0x0013CB90 BoatAITask_Enemy::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatAITask_Enemy::vfunc_00 (0x0013CB90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatAITask_Enemy::vfunc_00 (0x0013CB90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042DE0C[];
+
+class BoatAITask_Enemy
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatAITask_Enemy::vfunc_00()
+{
+    return DAT_0042DE0C;
+}
+
 // [TODO] 0x0013CBA0 BoatAITask_Enemy::vfunc_31 (60 B)
 // [TODO] 0x0013CBE0 sub_0013CBE0 (264 B)
 // [TODO] 0x0013CCF0 sub_0013CCF0 (27 B)
@@ -8359,7 +11081,29 @@
 // [TODO] 0x001416F0 sub_001416F0 (122 B)
 // [TODO] 0x00141770 sub_00141770 (473 B)
 // [TODO] 0x00141950 sub_00141950 (684 B)
-// [TODO] 0x00141C00 CarAIBehavior::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CarAIBehavior::vfunc_00 (0x00141C00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAIBehavior::vfunc_00 (0x00141C00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042DF3C[];
+
+class CarAIBehavior
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CarAIBehavior::vfunc_00()
+{
+    return DAT_0042DF3C;
+}
+
 // [TODO] 0x00141C10 sub_00141C10 (98 B)
 // [TODO] 0x00141C80 CarAIBehavior::vfunc_19 (1062 B)
 // [TODO] 0x001420B0 CarAIBehavior::vfunc_31 (48 B)
@@ -8383,12 +11127,56 @@
 // [TODO] 0x00145C90 sub_00145C90 (184 B)
 // [TODO] 0x00145D50 CarAIBehavior::vfunc_30 (856 B)
 // [TODO] 0x001460B0 sub_001460B0 (11 B)
-// [TODO] 0x001460C0 CarAITask::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CarAITask::vfunc_00 (0x001460C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAITask::vfunc_00 (0x001460C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E0AC[];
+
+class CarAITask
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CarAITask::vfunc_00()
+{
+    return DAT_0042E0AC;
+}
+
 // [TODO] 0x001460D0 CarAITask::vfunc_01 (36 B)
 // [TODO] 0x00146100 CarAITask::vfunc_29 (59 B)
 // [TODO] 0x00146140 sub_00146140 (62 B)
 // [TODO] 0x00146180 sub_00146180 (40 B)
-// [TODO] 0x001461B0 CarAITask_CallForCar::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CarAITask_CallForCar::vfunc_00 (0x001461B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAITask_CallForCar::vfunc_00 (0x001461B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E130[];
+
+class CarAITask_CallForCar
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CarAITask_CallForCar::vfunc_00()
+{
+    return DAT_0042E130;
+}
+
 // [TODO] 0x001461C0 CarAITask_CallForCar::vfunc_30 (67 B)
 // [TODO] 0x00146210 CarAITask_CallForCar::vfunc_31 (26 B)
 // [TODO] 0x00146230 CarAITask_CallForCar::vfunc_32 (489 B)
@@ -8413,16 +11201,82 @@
 // [TODO] 0x00146BB0 CarAITask_Enemy::vfunc_33 (168 B)
 // [TODO] 0x00146C60 CarAITask_Enemy::vfunc_34 (71 B)
 // [TODO] 0x00146CB0 sub_00146CB0 (219 B)
-// [TODO] 0x00146D90 CarAITask_Enemy::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CarAITask_Enemy::vfunc_00 (0x00146D90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAITask_Enemy::vfunc_00 (0x00146D90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E15C[];
+
+class CarAITask_Enemy
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CarAITask_Enemy::vfunc_00()
+{
+    return DAT_0042E15C;
+}
+
 // [TODO] 0x00146DA0 CarAITask_CallForCar::vfunc_01 (30 B)
 // [TODO] 0x00146DC0 sub_00146DC0 (40 B)
-// [TODO] 0x00146DF0 CarAITask_Traffic::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CarAITask_Traffic::vfunc_00 (0x00146DF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAITask_Traffic::vfunc_00 (0x00146DF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E0D8[];
+
+class CarAITask_Traffic
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CarAITask_Traffic::vfunc_00()
+{
+    return DAT_0042E0D8;
+}
+
 // [TODO] 0x00146E00 CarAITask_Traffic::vfunc_32 (9 B)
 // [TODO] 0x00146E10 CarAITask_Traffic::vfunc_01 (36 B)
 // [TODO] 0x00146E40 CarAITask_Traffic::vfunc_33 (212 B)
 // [TODO] 0x00146F20 CarAITask_Traffic::vfunc_30 (62 B)
 // [TODO] 0x00146F60 sub_00146F60 (60 B)
-// [TODO] 0x00146FA0 CarAITask_TrafficCop::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CarAITask_TrafficCop::vfunc_00 (0x00146FA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAITask_TrafficCop::vfunc_00 (0x00146FA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E104[];
+
+class CarAITask_TrafficCop
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CarAITask_TrafficCop::vfunc_00()
+{
+    return DAT_0042E104;
+}
+
 // [TODO] 0x00146FB0 CarAITask_TrafficCop::vfunc_32 (121 B)
 // [TODO] 0x00147030 CarAITask_TrafficCop::vfunc_30 (106 B)
 // [TODO] 0x001470A0 CarAITask_TrafficCop::vfunc_31 (48 B)
@@ -8430,7 +11284,29 @@
 // [TODO] 0x001472E0 CarAITask_TrafficCop::vfunc_33 (1251 B)
 // [TODO] 0x001477D0 HelicopterAIBehavior::vfunc_36 (41 B)
 // [TODO] 0x00147800 sub_00147800 (117 B)
-// [TODO] 0x00147880 HelicopterAIBehavior::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HelicopterAIBehavior::vfunc_00 (0x00147880, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HelicopterAIBehavior::vfunc_00 (0x00147880, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E1C4[];
+
+class HelicopterAIBehavior
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HelicopterAIBehavior::vfunc_00()
+{
+    return DAT_0042E1C4;
+}
+
 // [TODO] 0x00147890 HelicopterAIBehavior::vfunc_01 (30 B)
 // [TODO] 0x001478B0 sub_001478B0 (51 B)
 // [TODO] 0x001478F0 HelicopterAIBehavior::vfunc_37 (65 B)
@@ -8444,7 +11320,29 @@
 // [TODO] 0x00149740 sub_00149740 (22 B)
 // [TODO] 0x00149760 sub_00149760 (10 B)
 // [TODO] 0x00149770 sub_00149770 (147 B)
-// [TODO] 0x00149810 HelicopterAITask::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HelicopterAITask::vfunc_00 (0x00149810, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HelicopterAITask::vfunc_00 (0x00149810, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E228[];
+
+class HelicopterAITask
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HelicopterAITask::vfunc_00()
+{
+    return DAT_0042E228;
+}
+
 // [TODO] 0x00149820 HelicopterAITask::vfunc_32 (45 B)
 // [TODO] 0x00149850 HelicopterAITask::vfunc_30 (88 B)
 // [TODO] 0x001498B0 HelicopterAITask::vfunc_31 (47 B)
@@ -8490,7 +11388,29 @@
 // [TODO] 0x0014A180 sub_0014A180 (93 B)
 // [TODO] 0x0014A1E0 ConcreteClassRep<VehicleAITask>::vfunc_02 (36 B)
 // [TODO] 0x0014A210 sub_0014A210 (60 B)
-// [TODO] 0x0014A250 VehicleAI::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleAI::vfunc_00 (0x0014A250, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleAI::vfunc_00 (0x0014A250, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E2AC[];
+
+class VehicleAI
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleAI::vfunc_00()
+{
+    return DAT_0042E2AC;
+}
+
 // [TODO] 0x0014A260 sub_0014A260 (11 B)
 // [TODO] 0x0014A270 GameSimObject::vfunc_57 (5 B)
 // [TODO] 0x0014A280 sub_0014A280 (244 B)
@@ -8499,12 +11419,56 @@
 // [TODO] 0x0014A3E0 sub_0014A3E0 (61 B)
 // [TODO] 0x0014A420 sub_0014A420 (390 B)
 // [TODO] 0x0014A5B0 sub_0014A5B0 (40 B)
-// [TODO] 0x0014A5E0 VehicleAITask::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleAITask::vfunc_00 (0x0014A5E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleAITask::vfunc_00 (0x0014A5E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E334[];
+
+class VehicleAITask
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleAITask::vfunc_00()
+{
+    return DAT_0042E334;
+}
+
 // [TODO] 0x0014A5F0 sub_0014A5F0 (11 B)
 // [TODO] 0x0014A600 VehicleAITask::vfunc_01 (36 B)
 // [TODO] 0x0014A630 VehicleAITask::vfunc_29 (25 B)
 // [TODO] 0x0014A650 sub_0014A650 (41 B)
-// [TODO] 0x0014A680 BoundarySphere::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoundarySphere::vfunc_00 (0x0014A680, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoundarySphere::vfunc_00 (0x0014A680, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E3DC[];
+
+class BoundarySphere
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoundarySphere::vfunc_00()
+{
+    return DAT_0042E3DC;
+}
+
 // [TODO] 0x0014A690 sub_0014A690 (45 B)
 // [TODO] 0x0014A6C0 BoundarySphere::vfunc_01 (36 B)
 // [TODO] 0x0014A6F0 ConcreteClassRep<BoundarySphere>::vfunc_01 (42 B)
@@ -8512,7 +11476,29 @@
 // [TODO] 0x0014A760 IntersectionObject::vfunc_30 (5 B)
 // [TODO] 0x0014A770 sub_0014A770 (29 B)
 // [TODO] 0x0014A790 sub_0014A790 (81 B)
-// [TODO] 0x0014A7F0 IntersectionObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] IntersectionObject::vfunc_00 (0x0014A7F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// IntersectionObject::vfunc_00 (0x0014A7F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E40C[];
+
+class IntersectionObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* IntersectionObject::vfunc_00()
+{
+    return DAT_0042E40C;
+}
+
 // [TODO] 0x0014A800 sub_0014A800 (864 B)
 // [TODO] 0x0014AB60 sub_0014AB60 (141 B)
 // [TODO] 0x0014ABF0 sub_0014ABF0 (511 B)
@@ -8584,7 +11570,29 @@
 // [TODO] 0x0014F210 sub_0014F210 (15 B)
 // [TODO] 0x0014F220 BlendCamera::vfunc_39 (69 B)
 // [TODO] 0x0014F270 BlendCamera::vfunc_43 (69 B)
-// [TODO] 0x0014F2C0 BlendCamera::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BlendCamera::vfunc_00 (0x0014F2C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BlendCamera::vfunc_00 (0x0014F2C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E904[];
+
+class BlendCamera
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BlendCamera::vfunc_00()
+{
+    return DAT_0042E904;
+}
+
 // [TODO] 0x0014F2D0 CollisionBehaviourTypeGroup::vfunc_28 (5 B)
 // [TODO] 0x0014F2E0 sub_0014F2E0 (132 B)
 // [TODO] 0x0014F370 sub_0014F370 (84 B)
@@ -8599,7 +11607,29 @@
 // [TODO] 0x0014FDC0 sub_0014FDC0 (108 B)
 // [TODO] 0x0014FE30 sub_0014FE30 (108 B)
 // [TODO] 0x0014FEA0 sub_0014FEA0 (108 B)
-// [TODO] 0x0014FF10 CameraManager::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CameraManager::vfunc_00 (0x0014FF10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CameraManager::vfunc_00 (0x0014FF10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042E7D4[];
+
+class CameraManager
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CameraManager::vfunc_00()
+{
+    return DAT_0042E7D4;
+}
+
 // [TODO] 0x0014FF20 sub_0014FF20 (7 B)
 // [TODO] 0x0014FF30 sub_0014FF30 (26 B)
 // [TODO] 0x0014FF50 sub_0014FF50 (16 B)
@@ -8682,7 +11712,29 @@
 // [TODO] 0x001541E0 sub_001541E0 (632 B)
 // [TODO] 0x00154460 DramaticCamera::vfunc_44 (83 B)
 // [TODO] 0x001544C0 sub_001544C0 (109 B)
-// [TODO] 0x00154530 GenericCharacterCamera::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GenericCharacterCamera::vfunc_00 (0x00154530, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GenericCharacterCamera::vfunc_00 (0x00154530, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042EA4C[];
+
+class GenericCharacterCamera
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GenericCharacterCamera::vfunc_00()
+{
+    return DAT_0042EA4C;
+}
+
 // [TODO] 0x00154540 sub_00154540 (7 B)
 // [TODO] 0x00154550 sub_00154550 (17 B)
 // [TODO] 0x00154560 sub_00154560 (1 B)
@@ -8729,7 +11781,29 @@
 // [TODO] 0x00157340 sub_00157340 (488 B)
 // [TODO] 0x00157530 GenericCharacterCamera::vfunc_08 (896 B)
 // [TODO] 0x001578B0 GenericCharacterCamera::vfunc_09 (1644 B)
-// [TODO] 0x00157F20 GenericVehicleCamera::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GenericVehicleCamera::vfunc_00 (0x00157F20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GenericVehicleCamera::vfunc_00 (0x00157F20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042EFB4[];
+
+class GenericVehicleCamera
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GenericVehicleCamera::vfunc_00()
+{
+    return DAT_0042EFB4;
+}
+
 // [TODO] 0x00157F30 sub_00157F30 (80 B)
 // [TODO] 0x00157F80 GenericVehicleCamera::vfunc_43 (40 B)
 // [TODO] 0x00157FB0 GenericVehicleCamera::vfunc_44 (33 B)
@@ -8757,7 +11831,29 @@
 // [TODO] 0x0015A660 sub_0015A660 (13 B)
 // [TODO] 0x0015A670 NISCamera::vfunc_44 (33 B)
 // [TODO] 0x0015A6A0 sub_0015A6A0 (92 B)
-// [TODO] 0x0015A700 NISCamera::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] NISCamera::vfunc_00 (0x0015A700, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCamera::vfunc_00 (0x0015A700, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042F19C[];
+
+class NISCamera
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* NISCamera::vfunc_00()
+{
+    return DAT_0042F19C;
+}
+
 // [TODO] 0x0015A710 NISCamera::vfunc_41 (7 B)
 // [TODO] 0x0015A720 sub_0015A720 (81 B)
 // [TODO] 0x0015A780 sub_0015A780 (84 B)
@@ -8873,7 +11969,29 @@
 // [TODO] 0x0015EF60 sub_0015EF60 (570 B)
 // [TODO] 0x0015F1A0 ActionState::vfunc_08 (536 B)
 // [TODO] 0x0015F3C0 WallCover::vfunc_08 (872 B)
-// [TODO] 0x0015F730 AnimationLoaderObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AnimationLoaderObject::vfunc_00 (0x0015F730, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AnimationLoaderObject::vfunc_00 (0x0015F730, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042F2B8[];
+
+class AnimationLoaderObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AnimationLoaderObject::vfunc_00()
+{
+    return DAT_0042F2B8;
+}
+
 // [TODO] 0x0015F740 sub_0015F740 (15 B)
 // [TODO] 0x0015F750 sub_0015F750 (66 B)
 // [TODO] 0x0015F7A0 AnimationLoaderObject::vfunc_01 (36 B)
@@ -8885,7 +12003,29 @@
 // [TODO] 0x0015FA20 sub_0015FA20 (97 B)
 // [TODO] 0x0015FA90 sub_0015FA90 (55 B)
 // [TODO] 0x0015FAD0 sub_0015FAD0 (40 B)
-// [TODO] 0x0015FB00 DanceState::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] DanceState::vfunc_00 (0x0015FB00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DanceState::vfunc_00 (0x0015FB00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042F92C[];
+
+class DanceState
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* DanceState::vfunc_00()
+{
+    return DAT_0042F92C;
+}
+
 // [TODO] 0x0015FB10 sub_0015FB10 (10 B)
 // [TODO] 0x0015FB20 sub_0015FB20 (4 B)
 // [TODO] 0x0015FB30 sub_0015FB30 (30 B)
@@ -8895,7 +12035,29 @@
 // [TODO] 0x0015FC20 sub_0015FC20 (40 B)
 // [TODO] 0x0015FC50 sub_0015FC50 (81 B)
 // [TODO] 0x0015FCB0 sub_0015FCB0 (76 B)
-// [TODO] 0x0015FD00 Stamina::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] Stamina::vfunc_00 (0x0015FD00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// Stamina::vfunc_00 (0x0015FD00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042F958[];
+
+class Stamina
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* Stamina::vfunc_00()
+{
+    return DAT_0042F958;
+}
+
 // [TODO] 0x0015FD10 sub_0015FD10 (62 B)
 // [TODO] 0x0015FD50 DanceState::vfunc_01 (36 B)
 // [TODO] 0x0015FD80 sub_0015FD80 (17 B)
@@ -9256,7 +12418,29 @@
 // [TODO] 0x001676A0 sub_001676A0 (16 B)
 // [TODO] 0x001676B0 sub_001676B0 (548 B)
 // [TODO] 0x001678E0 sub_001678E0 (1024 B)
-// [TODO] 0x00167CE0 CharacterObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x00167CE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterObject::vfunc_00 (0x00167CE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004304FC[];
+
+class CharacterObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CharacterObject::vfunc_00()
+{
+    return DAT_004304FC;
+}
+
 // [TODO] 0x00167CF0 CharacterObject::vfunc_44 (17 B)
 // [TODO] 0x00167D10 CharacterObject::vfunc_45 (7 B)
 // [TODO] 0x00167D20 CharacterObject::vfunc_51 (13 B)
@@ -9336,27 +12520,181 @@
 // [TODO] 0x0016DF20 sub_0016DF20 (67 B)
 // [TODO] 0x0016DF70 sub_0016DF70 (135 B)
 // [TODO] 0x0016E000 sub_0016E000 (32 B)
-// [TODO] 0x0016E020 CivilianBase::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CivilianBase::vfunc_00 (0x0016E020, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CivilianBase::vfunc_00 (0x0016E020, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430D44[];
+
+class CivilianBase
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CivilianBase::vfunc_00()
+{
+    return DAT_00430D44;
+}
+
 // [TODO] 0x0016E030 CivilianBase::vfunc_67 (5 B)
 // [TODO] 0x0016E040 sub_0016E040 (32 B)
-// [TODO] 0x0016E060 Civilian::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] Civilian::vfunc_00 (0x0016E060, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// Civilian::vfunc_00 (0x0016E060, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430D70[];
+
+class Civilian
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* Civilian::vfunc_00()
+{
+    return DAT_00430D70;
+}
+
 // [TODO] 0x0016E070 sub_0016E070 (32 B)
-// [TODO] 0x0016E090 CivilianInterior::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CivilianInterior::vfunc_00 (0x0016E090, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CivilianInterior::vfunc_00 (0x0016E090, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430D9C[];
+
+class CivilianInterior
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CivilianInterior::vfunc_00()
+{
+    return DAT_00430D9C;
+}
+
 // [TODO] 0x0016E0A0 sub_0016E0A0 (32 B)
-// [TODO] 0x0016E0C0 DeadBody::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] DeadBody::vfunc_00 (0x0016E0C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DeadBody::vfunc_00 (0x0016E0C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430DC8[];
+
+class DeadBody
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* DeadBody::vfunc_00()
+{
+    return DAT_00430DC8;
+}
+
 // [TODO] 0x0016E0D0 DeadBody::vfunc_14 (26 B)
 // [TODO] 0x0016E0F0 sub_0016E0F0 (39 B)
-// [TODO] 0x0016E120 ScriptCharacter::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ScriptCharacter::vfunc_00 (0x0016E120, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScriptCharacter::vfunc_00 (0x0016E120, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430DF4[];
+
+class ScriptCharacter
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ScriptCharacter::vfunc_00()
+{
+    return DAT_00430DF4;
+}
+
 // [TODO] 0x0016E130 ScriptCharacter::vfunc_13 (22 B)
 // [TODO] 0x0016E150 sub_0016E150 (22 B)
 // [TODO] 0x0016E170 DWHenchman::vfunc_70 (46 B)
 // [TODO] 0x0016E1A0 sub_0016E1A0 (236 B)
-// [TODO] 0x0016E290 GangMember::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GangMember::vfunc_00 (0x0016E290, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GangMember::vfunc_00 (0x0016E290, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430E4C[];
+
+class GangMember
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GangMember::vfunc_00()
+{
+    return DAT_00430E4C;
+}
+
 // [TODO] 0x0016E2A0 sub_0016E2A0 (7 B)
 // [TODO] 0x0016E2B0 sub_0016E2B0 (13 B)
 // [TODO] 0x0016E2C0 sub_0016E2C0 (7 B)
 // [TODO] 0x0016E2D0 sub_0016E2D0 (39 B)
-// [TODO] 0x0016E300 DWStreetDealer::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] DWStreetDealer::vfunc_00 (0x0016E300, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DWStreetDealer::vfunc_00 (0x0016E300, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430E78[];
+
+class DWStreetDealer
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* DWStreetDealer::vfunc_00()
+{
+    return DAT_00430E78;
+}
+
 // [TODO] 0x0016E310 sub_0016E310 (136 B)
 // [TODO] 0x0016E3A0 Civilian::vfunc_73 (149 B)
 // [TODO] 0x0016E440 DeadBody::vfunc_13 (170 B)
@@ -9378,7 +12716,29 @@
 // [TODO] 0x0016F140 CivilianBase::vfunc_13 (385 B)
 // [TODO] 0x0016F2D0 CivilianInterior::vfunc_13 (76 B)
 // [TODO] 0x0016F320 sub_0016F320 (107 B)
-// [TODO] 0x0016F390 DWHenchman::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] DWHenchman::vfunc_00 (0x0016F390, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DWHenchman::vfunc_00 (0x0016F390, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430E20[];
+
+class DWHenchman
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* DWHenchman::vfunc_00()
+{
+    return DAT_00430E20;
+}
+
 // [TODO] 0x0016F3A0 DWHenchman::vfunc_64 (53 B)
 // [TODO] 0x0016F3E0 sub_0016F3E0 (40 B)
 // [TODO] 0x0016F410 GangMember::vfunc_13 (692 B)
@@ -9406,11 +12766,77 @@
 // [TODO] 0x00171230 sub_00171230 (104 B)
 // [TODO] 0x001712A0 sub_001712A0 (44 B)
 // [TODO] 0x001712D0 sub_001712D0 (53 B)
-// [TODO] 0x00171310 InventoryObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] InventoryObject::vfunc_00 (0x00171310, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// InventoryObject::vfunc_00 (0x00171310, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00431410[];
+
+class InventoryObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* InventoryObject::vfunc_00()
+{
+    return DAT_00431410;
+}
+
 // [TODO] 0x00171320 sub_00171320 (64 B)
-// [TODO] 0x00171360 InventoryType::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] InventoryType::vfunc_00 (0x00171360, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// InventoryType::vfunc_00 (0x00171360, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043143C[];
+
+class InventoryType
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* InventoryType::vfunc_00()
+{
+    return DAT_0043143C;
+}
+
 // [TODO] 0x00171370 sub_00171370 (63 B)
-// [TODO] 0x001713B0 InventoryBox::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] InventoryBox::vfunc_00 (0x001713B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// InventoryBox::vfunc_00 (0x001713B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00431468[];
+
+class InventoryBox
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* InventoryBox::vfunc_00()
+{
+    return DAT_00431468;
+}
+
 // [TODO] 0x001713C0 sub_001713C0 (242 B)
 // [TODO] 0x001714C0 InventoryType::vfunc_01 (30 B)
 // [TODO] 0x001714E0 sub_001714E0 (93 B)
@@ -9420,7 +12846,29 @@
 // [TODO] 0x001717D0 sub_001717D0 (63 B)
 // [TODO] 0x00171810 sub_00171810 (51 B)
 // [TODO] 0x00171850 sub_00171850 (42 B)
-// [TODO] 0x00171880 InventoryOwner::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] InventoryOwner::vfunc_00 (0x00171880, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// InventoryOwner::vfunc_00 (0x00171880, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004315EC[];
+
+class InventoryOwner
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* InventoryOwner::vfunc_00()
+{
+    return DAT_004315EC;
+}
+
 // [TODO] 0x00171890 sub_00171890 (34 B)
 // [TODO] 0x001718C0 sub_001718C0 (67 B)
 // [TODO] 0x00171910 sub_00171910 (447 B)
@@ -9517,7 +12965,29 @@
 // [TODO] 0x001772F0 sub_001772F0 (192 B)
 // [TODO] 0x001773B0 sub_001773B0 (383 B)
 // [TODO] 0x00177478 sub_00177478 (183 B)
-// [TODO] 0x00177530 RageState::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] RageState::vfunc_00 (0x00177530, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// RageState::vfunc_00 (0x00177530, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004316A8[];
+
+class RageState
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* RageState::vfunc_00()
+{
+    return DAT_004316A8;
+}
+
 // [TODO] 0x00177540 sub_00177540 (29 B)
 // [TODO] 0x00177560 sub_00177560 (30 B)
 // [TODO] 0x00177580 sub_00177580 (30 B)
@@ -10203,7 +13673,29 @@
 // [TODO] 0x00188050 sub_00188050 (81 B)
 // [TODO] 0x00188110 sub_00188110 (61 B)
 // [TODO] 0x00188160 sub_00188160 (91 B)
-// [TODO] 0x001881C0 FireObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FireObject::vfunc_00 (0x001881C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FireObject::vfunc_00 (0x001881C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433ECC[];
+
+class FireObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FireObject::vfunc_00()
+{
+    return DAT_00433ECC;
+}
+
 // [TODO] 0x001881D0 FireObject::vfunc_04 (94 B)
 // [TODO] 0x00188310 FireObject::vfunc_29 (81 B)
 // [TODO] 0x00188370 FireObject::vfunc_30 (70 B)
@@ -10216,7 +13708,29 @@
 // [TODO] 0x00188810 sub_00188810 (80 B)
 // [TODO] 0x00188860 FireObject::vfunc_01 (51 B)
 // [TODO] 0x001888A0 sub_001888A0 (50 B)
-// [TODO] 0x001888E0 FireTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FireTemplate::vfunc_00 (0x001888E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FireTemplate::vfunc_00 (0x001888E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433FB0[];
+
+class FireTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FireTemplate::vfunc_00()
+{
+    return DAT_00433FB0;
+}
+
 // [TODO] 0x001888F0 FireTemplate::vfunc_10 (27 B)
 // [TODO] 0x00188910 FireTemplate::vfunc_11 (24 B)
 // [TODO] 0x00188930 FireTemplate::vfunc_01 (52 B)
@@ -10236,7 +13750,29 @@
 // [TODO] 0x00189010 sub_00189010 (537 B)
 // [TODO] 0x00189230 sub_00189230 (214 B)
 // [TODO] 0x00189310 sub_00189310 (47 B)
-// [TODO] 0x00189340 GroundObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GroundObject::vfunc_00 (0x00189340, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GroundObject::vfunc_00 (0x00189340, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00434074[];
+
+class GroundObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GroundObject::vfunc_00()
+{
+    return DAT_00434074;
+}
+
 // [TODO] 0x00189350 GroundObject::vfunc_39 (5 B)
 // [TODO] 0x00189360 sub_00189360 (92 B)
 // [TODO] 0x001893C0 sub_001893C0 (96 B)
@@ -10250,7 +13786,29 @@
 // [TODO] 0x00189730 ConcreteClassRep<GroundObject>::vfunc_01 (45 B)
 // [TODO] 0x00189760 ConcreteClassRep<GroundObject>::vfunc_02 (32 B)
 // [TODO] 0x00189780 sub_00189780 (295 B)
-// [TODO] 0x001898B0 BlackjackHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BlackjackHUD::vfunc_00 (0x001898B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BlackjackHUD::vfunc_00 (0x001898B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00435E84[];
+
+class BlackjackHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BlackjackHUD::vfunc_00()
+{
+    return DAT_00435E84;
+}
+
 // [TODO] 0x001898C0 sub_001898C0 (134 B)
 // [TODO] 0x00189950 sub_00189950 (95 B)
 // [TODO] 0x001899B0 sub_001899B0 (207 B)
@@ -10268,7 +13826,29 @@
 // [TODO] 0x0018AF80 sub_0018AF80 (99 B)
 // [TODO] 0x0018AFF0 sub_0018AFF0 (156 B)
 // [TODO] 0x0018B090 ExoticsHUD2::vfunc_41 (7 B)
-// [TODO] 0x0018B0A0 ExoticsHUD2::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x0018B0A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ExoticsHUD2::vfunc_00 (0x0018B0A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00435F74[];
+
+class ExoticsHUD2
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ExoticsHUD2::vfunc_00()
+{
+    return DAT_00435F74;
+}
+
 // [TODO] 0x0018B0B0 ExoticsHUD2::vfunc_29 (293 B)
 // [TODO] 0x0018B1E0 ExoticsHUD2::vfunc_04 (43 B)
 // [TODO] 0x0018B210 ExoticsHUD2::vfunc_54 (121 B)
@@ -10302,7 +13882,29 @@
 // [TODO] 0x0018C690 sub_0018C690 (8 B)
 // [TODO] 0x0018C6A0 sub_0018C6A0 (473 B)
 // [TODO] 0x0018C880 sub_0018C880 (171 B)
-// [TODO] 0x0018C930 FightBettingHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FightBettingHUD::vfunc_00 (0x0018C930, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FightBettingHUD::vfunc_00 (0x0018C930, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436020[];
+
+class FightBettingHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FightBettingHUD::vfunc_00()
+{
+    return DAT_00436020;
+}
+
 // [TODO] 0x0018C940 FightBettingHUD::vfunc_00 (267 B)
 // [TODO] 0x0018CA50 FightBettingHUD::vfunc_01 (259 B)
 // [TODO] 0x0018CB60 sub_0018CB60 (92 B)
@@ -10337,7 +13939,29 @@
 // [TODO] 0x0018E570 sub_0018E570 (54 B)
 // [TODO] 0x0018E5B0 sub_0018E5B0 (54 B)
 // [TODO] 0x0018E5F0 sub_0018E5F0 (155 B)
-// [TODO] 0x0018E690 GameOverHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GameOverHUD::vfunc_00 (0x0018E690, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameOverHUD::vfunc_00 (0x0018E690, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436094[];
+
+class GameOverHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GameOverHUD::vfunc_00()
+{
+    return DAT_00436094;
+}
+
 // [TODO] 0x0018E6A0 GameOverHUD::vfunc_44 (536 B)
 // [TODO] 0x0018E8C0 GameOverHUD::vfunc_45 (295 B)
 // [TODO] 0x0018E9F0 sub_0018E9F0 (245 B)
@@ -10388,11 +14012,55 @@
 // [TODO] 0x0018FF80 GenericTextScroller::vfunc_03 (65 B)
 // [TODO] 0x0018FFD0 GenericWeaponHUD::vfunc_29 (338 B)
 // [TODO] 0x00190130 sub_00190130 (218 B)
-// [TODO] 0x00190210 GenericWeaponHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GenericWeaponHUD::vfunc_00 (0x00190210, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GenericWeaponHUD::vfunc_00 (0x00190210, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043613C[];
+
+class GenericWeaponHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GenericWeaponHUD::vfunc_00()
+{
+    return DAT_0043613C;
+}
+
 // [TODO] 0x00190220 sub_00190220 (139 B)
 // [TODO] 0x001902B0 GenericWeaponHUD::vfunc_54 (230 B)
 // [TODO] 0x001903A0 GenericWeaponHUD::vfunc_01 (30 B)
-// [TODO] 0x001903C0 HitsHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HitsHUD::vfunc_00 (0x001903C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HitsHUD::vfunc_00 (0x001903C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004362FC[];
+
+class HitsHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HitsHUD::vfunc_00()
+{
+    return DAT_004362FC;
+}
+
 // [TODO] 0x001903D0 HitsHUD::vfunc_29 (132 B)
 // [TODO] 0x00190460 HitsHUD::vfunc_04 (42 B)
 // [TODO] 0x00190490 HitsHUD::vfunc_54 (108 B)
@@ -10408,13 +14076,57 @@
 // [TODO] 0x00190800 BusinessHUD::vfunc_50 (34 B)
 // [TODO] 0x00190830 BusinessHUD::vfunc_51 (32 B)
 // [TODO] 0x00190850 sub_00190850 (57 B)
-// [TODO] 0x00190890 BusinessDetailHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BusinessDetailHUD::vfunc_00 (0x00190890, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BusinessDetailHUD::vfunc_00 (0x00190890, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436398[];
+
+class BusinessDetailHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BusinessDetailHUD::vfunc_00()
+{
+    return DAT_00436398;
+}
+
 // [TODO] 0x001908A0 BusinessDetailHUD::vfunc_32 (72 B)
 // [TODO] 0x001908F0 BusinessDetailHUD::vfunc_35 (107 B)
 // [TODO] 0x00190960 BusinessDetailHUD::vfunc_00 (56 B)
 // [TODO] 0x001909A0 BusinessDetailHUD::vfunc_36 (80 B)
 // [TODO] 0x001909F0 sub_001909F0 (83 B)
-// [TODO] 0x00190A50 BusinessHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BusinessHUD::vfunc_00 (0x00190A50, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BusinessHUD::vfunc_00 (0x00190A50, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043636C[];
+
+class BusinessHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BusinessHUD::vfunc_00()
+{
+    return DAT_0043636C;
+}
+
 // [TODO] 0x00190A60 sub_00190A60 (227 B)
 // [TODO] 0x00190B50 HUDCallout2::vfunc_04 (140 B)
 // [TODO] 0x00190BE0 sub_00190BE0 (57 B)
@@ -10433,21 +14145,87 @@
 // [TODO] 0x001915A0 sub_001915A0 (188 B)
 // [TODO] 0x00191660 sub_00191660 (147 B)
 // [TODO] 0x00191700 sub_00191700 (471 B)
-// [TODO] 0x001918E0 HUDSubtitle::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDSubtitle::vfunc_00 (0x001918E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDSubtitle::vfunc_00 (0x001918E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004364D4[];
+
+class HUDSubtitle
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDSubtitle::vfunc_00()
+{
+    return DAT_004364D4;
+}
+
 // [TODO] 0x001918F0 sub_001918F0 (246 B)
 // [TODO] 0x001919F0 sub_001919F0 (1444 B)
 // [TODO] 0x00191FA0 sub_00191FA0 (115 B)
 // [TODO] 0x00192020 sub_00192020 (205 B)
 // [TODO] 0x001920F0 HUDSubtitle::vfunc_01 (59 B)
 // [TODO] 0x00192130 sub_00192130 (743 B)
-// [TODO] 0x00192420 HUDCallout2::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDCallout2::vfunc_00 (0x00192420, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDCallout2::vfunc_00 (0x00192420, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004364A8[];
+
+class HUDCallout2
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDCallout2::vfunc_00()
+{
+    return DAT_004364A8;
+}
+
 // [TODO] 0x00192430 HUDCallout2::vfunc_54 (332 B)
 // [TODO] 0x00192580 sub_00192580 (80 B)
 // [TODO] 0x001925D0 sub_001925D0 (118 B)
 // [TODO] 0x00192650 HUDCallout2::vfunc_01 (76 B)
 // [TODO] 0x001926A0 sub_001926A0 (517 B)
 // [TODO] 0x001928B0 sub_001928B0 (85 B)
-// [TODO] 0x00192910 HUDDebugInfo::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDDebugInfo::vfunc_00 (0x00192910, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDDebugInfo::vfunc_00 (0x00192910, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436594[];
+
+class HUDDebugInfo
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDDebugInfo::vfunc_00()
+{
+    return DAT_00436594;
+}
+
 // [TODO] 0x00192920 HUDDebugInfo::vfunc_29 (93 B)
 // [TODO] 0x00192980 HUDDebugInfo::vfunc_04 (71 B)
 // [TODO] 0x001929D0 sub_001929D0 (145 B)
@@ -10459,7 +14237,29 @@
 // [TODO] 0x00192C60 sub_00192C60 (116 B)
 // [TODO] 0x00192CE0 HUDDebugInfo::vfunc_54 (84 B)
 // [TODO] 0x00192D40 sub_00192D40 (86 B)
-// [TODO] 0x00192DA0 DrugWarsHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] DrugWarsHUD::vfunc_00 (0x00192DA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DrugWarsHUD::vfunc_00 (0x00192DA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004365D4[];
+
+class DrugWarsHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* DrugWarsHUD::vfunc_00()
+{
+    return DAT_004365D4;
+}
+
 // [TODO] 0x00192DB0 DrugWarsHUD::vfunc_29 (183 B)
 // [TODO] 0x00192E70 DrugWarsHUD::vfunc_54 (128 B)
 // [TODO] 0x00192EF0 DrugWarsHUD::vfunc_35 (107 B)
@@ -10471,7 +14271,29 @@
 // [TODO] 0x001930A0 sub_001930A0 (18 B)
 // [TODO] 0x001930C0 sub_001930C0 (7 B)
 // [TODO] 0x001930D0 sub_001930D0 (94 B)
-// [TODO] 0x00193130 HUDElement2::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDElement2::vfunc_00 (0x00193130, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDElement2::vfunc_00 (0x00193130, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436664[];
+
+class HUDElement2
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDElement2::vfunc_00()
+{
+    return DAT_00436664;
+}
+
 // [TODO] 0x00193140 sub_00193140 (12 B)
 // [TODO] 0x00193150 HUDCallout2::vfunc_29 (50 B)
 // [TODO] 0x00193190 GameOverHUD::vfunc_04 (99 B)
@@ -10510,8 +14332,52 @@
 // [TODO] 0x00194050 EmpireHUD::vfunc_36 (23 B)
 // [TODO] 0x00194070 EmpireHUD::vfunc_00 (41 B)
 // [TODO] 0x001940A0 sub_001940A0 (84 B)
-// [TODO] 0x00194100 EmpireHUD::vfunc_00 (6 B)
-// [TODO] 0x00194110 ErrorHandlerHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] EmpireHUD::vfunc_00 (0x00194100, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// EmpireHUD::vfunc_00 (0x00194100, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004366E4[];
+
+class EmpireHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* EmpireHUD::vfunc_00()
+{
+    return DAT_004366E4;
+}
+
+// ============================================================================
+// [VERIFIED] ErrorHandlerHUD::vfunc_00 (0x00194110, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ErrorHandlerHUD::vfunc_00 (0x00194110, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436774[];
+
+class ErrorHandlerHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ErrorHandlerHUD::vfunc_00()
+{
+    return DAT_00436774;
+}
+
 // [TODO] 0x00194120 ErrorHandlerHUD::vfunc_35 (180 B)
 // [TODO] 0x001941E0 ErrorHandlerHUD::vfunc_04 (26 B)
 // [TODO] 0x00194200 sub_00194200 (195 B)
@@ -10529,9 +14395,53 @@
 // [TODO] 0x00194AF0 HUDImageDisplay::vfunc_61 (196 B)
 // [TODO] 0x00194BC0 HUDImageDisplay::vfunc_44 (83 B)
 // [TODO] 0x00194C20 sub_00194C20 (157 B)
-// [TODO] 0x00194CC0 HUDImageDisplay::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDImageDisplay::vfunc_00 (0x00194CC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDImageDisplay::vfunc_00 (0x00194CC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004367D4[];
+
+class HUDImageDisplay
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDImageDisplay::vfunc_00()
+{
+    return DAT_004367D4;
+}
+
 // [TODO] 0x00194CD0 HUDImageDisplay::vfunc_01 (86 B)
-// [TODO] 0x00194D30 LaunderCashHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LaunderCashHUD::vfunc_00 (0x00194D30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LaunderCashHUD::vfunc_00 (0x00194D30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436818[];
+
+class LaunderCashHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LaunderCashHUD::vfunc_00()
+{
+    return DAT_00436818;
+}
+
 // [TODO] 0x00194D40 LaunderCashHUD::vfunc_29 (174 B)
 // [TODO] 0x00194DF0 LaunderCashHUD::vfunc_00 (157 B)
 // [TODO] 0x00194E90 LaunderCashHUD::vfunc_35 (107 B)
@@ -10640,7 +14550,29 @@
 // [TODO] 0x00198AD0 sub_00198AD0 (125 B)
 // [TODO] 0x00198B50 GenericMenuClient::vfunc_07 (15 B)
 // [TODO] 0x00198B60 GenericMenuClient::vfunc_00 (63 B)
-// [TODO] 0x00198BA0 HUDMeterWithIcon::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDMeterWithIcon::vfunc_00 (0x00198BA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDMeterWithIcon::vfunc_00 (0x00198BA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436AAC[];
+
+class HUDMeterWithIcon
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDMeterWithIcon::vfunc_00()
+{
+    return DAT_00436AAC;
+}
+
 // [TODO] 0x00198BB0 HUDMeterWithIcon::vfunc_59 (8 B)
 // [TODO] 0x00198BC0 HUDMeterWithIcon::vfunc_29 (117 B)
 // [TODO] 0x00198C40 HUDMeterWithIcon::vfunc_54 (63 B)
@@ -10659,12 +14591,56 @@
 // [TODO] 0x00199240 sub_00199240 (153 B)
 // [TODO] 0x001992E0 sub_001992E0 (58 B)
 // [TODO] 0x00199320 sub_00199320 (79 B)
-// [TODO] 0x00199370 HUDBalls::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDBalls::vfunc_00 (0x00199370, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDBalls::vfunc_00 (0x00199370, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436AD8[];
+
+class HUDBalls
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDBalls::vfunc_00()
+{
+    return DAT_00436AD8;
+}
+
 // [TODO] 0x00199380 HUDBalls::vfunc_54 (127 B)
 // [TODO] 0x00199400 HUDBalls::vfunc_00 (87 B)
 // [TODO] 0x00199460 HUDVisibilityRate::vfunc_54 (81 B)
 // [TODO] 0x001994C0 sub_001994C0 (79 B)
-// [TODO] 0x00199510 HUDHeatMeter::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDHeatMeter::vfunc_00 (0x00199510, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDHeatMeter::vfunc_00 (0x00199510, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436B5C[];
+
+class HUDHeatMeter
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDHeatMeter::vfunc_00()
+{
+    return DAT_00436B5C;
+}
+
 // [TODO] 0x00199520 HUDHeatMeter::vfunc_29 (5 B)
 // [TODO] 0x00199530 HUDHeatMeter::vfunc_59 (303 B)
 // [TODO] 0x00199660 sub_00199660 (24 B)
@@ -10690,7 +14666,29 @@
 // [TODO] 0x00199F40 sub_00199F40 (156 B)
 // [TODO] 0x00199FE0 sub_00199FE0 (117 B)
 // [TODO] 0x0019A060 sub_0019A060 (195 B)
-// [TODO] 0x0019A130 HUDHealth::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDHealth::vfunc_00 (0x0019A130, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDHealth::vfunc_00 (0x0019A130, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436B04[];
+
+class HUDHealth
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDHealth::vfunc_00()
+{
+    return DAT_00436B04;
+}
+
 // [TODO] 0x0019A140 sub_0019A140 (146 B)
 // [TODO] 0x0019A1E0 HUDHealth::vfunc_54 (394 B)
 // [TODO] 0x0019A370 sub_0019A370 (355 B)
@@ -10698,14 +14696,80 @@
 // [TODO] 0x0019A500 HUDBalls::vfunc_59 (125 B)
 // [TODO] 0x0019A580 HUDBalls::vfunc_62 (120 B)
 // [TODO] 0x0019A600 sub_0019A600 (39 B)
-// [TODO] 0x0019A630 HUDVisibilityRate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDVisibilityRate::vfunc_00 (0x0019A630, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDVisibilityRate::vfunc_00 (0x0019A630, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436B30[];
+
+class HUDVisibilityRate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDVisibilityRate::vfunc_00()
+{
+    return DAT_00436B30;
+}
+
 // [TODO] 0x0019A640 sub_0019A640 (94 B)
 // [TODO] 0x0019A6A0 HUDHeatMeter::vfunc_01 (30 B)
 // [TODO] 0x0019A6C0 sub_0019A6C0 (39 B)
-// [TODO] 0x0019A6F0 HUDFrontMeter::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDFrontMeter::vfunc_00 (0x0019A6F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDFrontMeter::vfunc_00 (0x0019A6F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436B88[];
+
+class HUDFrontMeter
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDFrontMeter::vfunc_00()
+{
+    return DAT_00436B88;
+}
+
 // [TODO] 0x0019A700 HUDNPCHealthRestoreData::vfunc_00 (36 B)
 // [TODO] 0x0019A730 sub_0019A730 (159 B)
-// [TODO] 0x0019A7D0 HUDNPCHealthMeter::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDNPCHealthMeter::vfunc_00 (0x0019A7D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDNPCHealthMeter::vfunc_00 (0x0019A7D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436BB4[];
+
+class HUDNPCHealthMeter
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDNPCHealthMeter::vfunc_00()
+{
+    return DAT_00436BB4;
+}
+
 // [TODO] 0x0019A7E0 HUDMeterWithIcon::vfunc_01 (58 B)
 // [TODO] 0x0019A820 HUDNPCHealthMeter::vfunc_30 (168 B)
 // [TODO] 0x0019A8D0 HUDNPCHealthMeter::vfunc_31 (232 B)
@@ -10719,7 +14783,29 @@
 // [TODO] 0x0019B3B0 sub_0019B3B0 (317 B)
 // [TODO] 0x0019B4F0 HUDHeatMeter::vfunc_54 (527 B)
 // [TODO] 0x0019B700 sub_0019B700 (243 B)
-// [TODO] 0x0019B800 MissionCompleteHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MissionCompleteHUD::vfunc_00 (0x0019B800, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionCompleteHUD::vfunc_00 (0x0019B800, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436E04[];
+
+class MissionCompleteHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MissionCompleteHUD::vfunc_00()
+{
+    return DAT_00436E04;
+}
+
 // [TODO] 0x0019B810 MissionCompleteHUD::vfunc_41 (7 B)
 // [TODO] 0x0019B820 MissionCompleteHUD::vfunc_45 (279 B)
 // [TODO] 0x0019B940 sub_0019B940 (161 B)
@@ -10757,7 +14843,29 @@
 // [TODO] 0x0019D600 sub_0019D600 (322 B)
 // [TODO] 0x0019D750 NumericTextField::vfunc_01 (722 B)
 // [TODO] 0x0019DA30 NumericTextField::vfunc_03 (150 B)
-// [TODO] 0x0019DAD0 RepGainHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] RepGainHUD::vfunc_00 (0x0019DAD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// RepGainHUD::vfunc_00 (0x0019DAD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436E7C[];
+
+class RepGainHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* RepGainHUD::vfunc_00()
+{
+    return DAT_00436E7C;
+}
+
 // [TODO] 0x0019DAE0 RepGainHUD::vfunc_29 (218 B)
 // [TODO] 0x0019DBC0 RepGainHUD::vfunc_04 (126 B)
 // [TODO] 0x0019DC40 RepGainHUD::vfunc_51 (37 B)
@@ -10782,7 +14890,29 @@
 // [TODO] 0x0019EEE0 HUDLoadingScreen::vfunc_00 (120 B)
 // [TODO] 0x0019EF60 sub_0019EF60 (114 B)
 // [TODO] 0x0019EFE0 sub_0019EFE0 (101 B)
-// [TODO] 0x0019F050 HUDLoadingScreen::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDLoadingScreen::vfunc_00 (0x0019F050, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDLoadingScreen::vfunc_00 (0x0019F050, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436F10[];
+
+class HUDLoadingScreen
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDLoadingScreen::vfunc_00()
+{
+    return DAT_00436F10;
+}
+
 // [TODO] 0x0019F060 HUDLoadingScreen::vfunc_54 (530 B)
 // [TODO] 0x0019F280 sub_0019F280 (698 B)
 // [TODO] 0x0019F540 HUDLoadingScreen::vfunc_44 (221 B)
@@ -10799,7 +14929,29 @@
 // [TODO] 0x0019FBC0 sub_0019FBC0 (37 B)
 // [TODO] 0x0019FBF0 sub_0019FBF0 (12 B)
 // [TODO] 0x0019FC00 sub_0019FC00 (222 B)
-// [TODO] 0x0019FCE0 HUDScreenFX::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDScreenFX::vfunc_00 (0x0019FCE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDScreenFX::vfunc_00 (0x0019FCE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436F78[];
+
+class HUDScreenFX
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDScreenFX::vfunc_00()
+{
+    return DAT_00436F78;
+}
+
 // [TODO] 0x0019FCF0 sub_0019FCF0 (102 B)
 // [TODO] 0x0019FD60 HUDScreenFX::vfunc_37 (51 B)
 // [TODO] 0x0019FDA0 HUDScreenFX::vfunc_44 (165 B)
@@ -10831,7 +14983,29 @@
 // [TODO] 0x001A1970 HUDTapePlayer::vfunc_61 (122 B)
 // [TODO] 0x001A19F0 sub_001A19F0 (962 B)
 // [TODO] 0x001A1DC0 sub_001A1DC0 (162 B)
-// [TODO] 0x001A1E70 HUDTapePlayer::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDTapePlayer::vfunc_00 (0x001A1E70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDTapePlayer::vfunc_00 (0x001A1E70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437130[];
+
+class HUDTapePlayer
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDTapePlayer::vfunc_00()
+{
+    return DAT_00437130;
+}
+
 // [TODO] 0x001A1E80 HUDTapePlayer::vfunc_62 (15 B)
 // [TODO] 0x001A1E90 HUDTapePlayer::vfunc_63 (6 B)
 // [TODO] 0x001A1EA0 sub_001A1EA0 (167 B)
@@ -10850,14 +15024,58 @@
 // [TODO] 0x001A2470 sub_001A2470 (208 B)
 // [TODO] 0x001A2540 HUDTimerRestoreData::vfunc_00 (36 B)
 // [TODO] 0x001A2570 sub_001A2570 (112 B)
-// [TODO] 0x001A25E0 HUDTimer::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDTimer::vfunc_00 (0x001A25E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDTimer::vfunc_00 (0x001A25E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004371C0[];
+
+class HUDTimer
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDTimer::vfunc_00()
+{
+    return DAT_004371C0;
+}
+
 // [TODO] 0x001A25F0 sub_001A25F0 (120 B)
 // [TODO] 0x001A2670 HUDTimer::vfunc_44 (299 B)
 // [TODO] 0x001A27A0 HUDTimer::vfunc_00 (29 B)
 // [TODO] 0x001A27C0 HUDTimer::vfunc_54 (551 B)
 // [TODO] 0x001A29F0 HUDTimer::vfunc_01 (30 B)
 // [TODO] 0x001A2A10 sub_001A2A10 (79 B)
-// [TODO] 0x001A2A60 HUDTrackable::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDTrackable::vfunc_00 (0x001A2A60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDTrackable::vfunc_00 (0x001A2A60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437204[];
+
+class HUDTrackable
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDTrackable::vfunc_00()
+{
+    return DAT_00437204;
+}
+
 // [TODO] 0x001A2A70 HUDTrackable::vfunc_04 (74 B)
 // [TODO] 0x001A2AC0 HUDTrackable::vfunc_54 (126 B)
 // [TODO] 0x001A2B40 HUDTrackable::vfunc_45 (83 B)
@@ -10876,12 +15094,78 @@
 // [TODO] 0x001A3110 HUDTrackable::vfunc_44 (123 B)
 // [TODO] 0x001A3190 HUDTrackable::vfunc_59 (33 B)
 // [TODO] 0x001A31C0 sub_001A31C0 (39 B)
-// [TODO] 0x001A31F0 HUDCashReadout::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDCashReadout::vfunc_00 (0x001A31F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDCashReadout::vfunc_00 (0x001A31F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437230[];
+
+class HUDCashReadout
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDCashReadout::vfunc_00()
+{
+    return DAT_00437230;
+}
+
 // [TODO] 0x001A3200 sub_001A3200 (39 B)
-// [TODO] 0x001A3230 HUDDrugsReadout::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDDrugsReadout::vfunc_00 (0x001A3230, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDDrugsReadout::vfunc_00 (0x001A3230, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043725C[];
+
+class HUDDrugsReadout
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDDrugsReadout::vfunc_00()
+{
+    return DAT_0043725C;
+}
+
 // [TODO] 0x001A3240 HUDMissionReadoutRestoreData::vfunc_00 (36 B)
 // [TODO] 0x001A3270 sub_001A3270 (71 B)
-// [TODO] 0x001A32C0 HUDMissionReadout::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HUDMissionReadout::vfunc_00 (0x001A32C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDMissionReadout::vfunc_00 (0x001A32C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437288[];
+
+class HUDMissionReadout
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HUDMissionReadout::vfunc_00()
+{
+    return DAT_00437288;
+}
+
 // [TODO] 0x001A32D0 HUDTrackable::vfunc_01 (30 B)
 // [TODO] 0x001A32F0 HUDMissionReadout::vfunc_29 (59 B)
 // [TODO] 0x001A3330 HUDMissionReadout::vfunc_00 (101 B)
@@ -10893,9 +15177,53 @@
 // [TODO] 0x001A35F0 VehicleSelectionHUD::vfunc_35 (107 B)
 // [TODO] 0x001A3660 VehicleSelectionHUD::vfunc_00 (60 B)
 // [TODO] 0x001A36A0 sub_001A36A0 (180 B)
-// [TODO] 0x001A3760 VehicleSelectionHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleSelectionHUD::vfunc_00 (0x001A3760, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleSelectionHUD::vfunc_00 (0x001A3760, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004373E8[];
+
+class VehicleSelectionHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleSelectionHUD::vfunc_00()
+{
+    return DAT_004373E8;
+}
+
 // [TODO] 0x001A3770 VehicleSelectionHUD::vfunc_01 (40 B)
-// [TODO] 0x001A37A0 IntimidationHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] IntimidationHUD::vfunc_00 (0x001A37A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// IntimidationHUD::vfunc_00 (0x001A37A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004374EC[];
+
+class IntimidationHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* IntimidationHUD::vfunc_00()
+{
+    return DAT_004374EC;
+}
+
 // [TODO] 0x001A37B0 IntimidationHUD::vfunc_41 (7 B)
 // [TODO] 0x001A37C0 IntimidationHUD::vfunc_46 (29 B)
 // [TODO] 0x001A37E0 IntimidationHUD::vfunc_47 (5 B)
@@ -10920,7 +15248,29 @@
 // [TODO] 0x001A4A10 sub_001A4A10 (422 B)
 // [TODO] 0x001A4BC0 IntimidationHUD::vfunc_54 (1002 B)
 // [TODO] 0x001A4FB0 sub_001A4FB0 (115 B)
-// [TODO] 0x001A5030 InvSelectionHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] InvSelectionHUD::vfunc_00 (0x001A5030, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// InvSelectionHUD::vfunc_00 (0x001A5030, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043768C[];
+
+class InvSelectionHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* InvSelectionHUD::vfunc_00()
+{
+    return DAT_0043768C;
+}
+
 // [TODO] 0x001A5040 sub_001A5040 (6 B)
 // [TODO] 0x001A5050 InvSelectionHUD::vfunc_29 (61 B)
 // [TODO] 0x001A5090 InvSelectionHUD::vfunc_54 (110 B)
@@ -10944,7 +15294,29 @@
 // [TODO] 0x001A5620 sub_001A5620 (304 B)
 // [TODO] 0x001A5750 InvSelectionHUD::vfunc_44 (315 B)
 // [TODO] 0x001A5890 InvSelectionHUD::vfunc_45 (237 B)
-// [TODO] 0x001A5980 LockerWeaponHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LockerWeaponHUD::vfunc_00 (0x001A5980, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LockerWeaponHUD::vfunc_00 (0x001A5980, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004361C0[];
+
+class LockerWeaponHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LockerWeaponHUD::vfunc_00()
+{
+    return DAT_004361C0;
+}
+
 // [TODO] 0x001A5990 LockerWeaponHUD::vfunc_35 (113 B)
 // [TODO] 0x001A5A10 LockerWeaponHUD::vfunc_00 (67 B)
 // [TODO] 0x001A5A60 sub_001A5A60 (66 B)
@@ -10965,7 +15337,29 @@
 // [TODO] 0x001A62C0 sub_001A62C0 (45 B)
 // [TODO] 0x001A62F0 sub_001A62F0 (62 B)
 // [TODO] 0x001A6330 sub_001A6330 (437 B)
-// [TODO] 0x001A64F0 MapHUD2::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MapHUD2::vfunc_00 (0x001A64F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MapHUD2::vfunc_00 (0x001A64F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004378BC[];
+
+class MapHUD2
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MapHUD2::vfunc_00()
+{
+    return DAT_004378BC;
+}
+
 // [TODO] 0x001A6500 sub_001A6500 (141 B)
 // [TODO] 0x001A6590 MapHUD2::vfunc_29 (459 B)
 // [TODO] 0x001A6760 sub_001A6760 (171 B)
@@ -11022,7 +15416,29 @@
 // [TODO] 0x001AA860 sub_001AA860 (50 B)
 // [TODO] 0x001AA8A0 sub_001AA8A0 (43 B)
 // [TODO] 0x001AA8D0 sub_001AA8D0 (167 B)
-// [TODO] 0x001AA980 GOPoint::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GOPoint::vfunc_00 (0x001AA980, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GOPoint::vfunc_00 (0x001AA980, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437890[];
+
+class GOPoint
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GOPoint::vfunc_00()
+{
+    return DAT_00437890;
+}
+
 // [TODO] 0x001AA990 sub_001AA990 (89 B)
 // [TODO] 0x001AA9F0 sub_001AA9F0 (202 B)
 // [TODO] 0x001AAAC0 sub_001AAAC0 (278 B)
@@ -11046,7 +15462,29 @@
 // [TODO] 0x001ABAC0 GOPoint::vfunc_01 (72 B)
 // [TODO] 0x001ABB10 sub_001ABB10 (1190 B)
 // [TODO] 0x001ABFE0 sub_001ABFE0 (151 B)
-// [TODO] 0x001AC080 PromptHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PromptHUD::vfunc_00 (0x001AC080, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PromptHUD::vfunc_00 (0x001AC080, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437A48[];
+
+class PromptHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PromptHUD::vfunc_00()
+{
+    return DAT_00437A48;
+}
+
 // [TODO] 0x001AC090 sub_001AC090 (69 B)
 // [TODO] 0x001AC0E0 PromptHUD::vfunc_29 (119 B)
 // [TODO] 0x001AC160 PromptHUD::vfunc_04 (37 B)
@@ -11066,7 +15504,29 @@
 // [TODO] 0x001ACAE0 sub_001ACAE0 (292 B)
 // [TODO] 0x001ACC10 sub_001ACC10 (224 B)
 // [TODO] 0x001ACDC0 sub_001ACDC0 (40 B)
-// [TODO] 0x001ACDF0 MiniHUDElement::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MiniHUDElement::vfunc_00 (0x001ACDF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MiniHUDElement::vfunc_00 (0x001ACDF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437AE0[];
+
+class MiniHUDElement
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MiniHUDElement::vfunc_00()
+{
+    return DAT_00437AE0;
+}
+
 // [TODO] 0x001ACE00 sub_001ACE00 (11 B)
 // [TODO] 0x001ACE10 MiniHUDElement::vfunc_29 (33 B)
 // [TODO] 0x001ACE40 MiniHUDElement::vfunc_01 (36 B)
@@ -11078,14 +15538,58 @@
 // [TODO] 0x001ACF60 MissionFailHUD::vfunc_00 (114 B)
 // [TODO] 0x001ACFE0 sub_001ACFE0 (242 B)
 // [TODO] 0x001AD1D0 sub_001AD1D0 (115 B)
-// [TODO] 0x001AD250 MissionFailHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MissionFailHUD::vfunc_00 (0x001AD250, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionFailHUD::vfunc_00 (0x001AD250, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437B24[];
+
+class MissionFailHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MissionFailHUD::vfunc_00()
+{
+    return DAT_00437B24;
+}
+
 // [TODO] 0x001AD260 MissionFailHUD::vfunc_29 (177 B)
 // [TODO] 0x001AD320 MissionFailHUD::vfunc_44 (247 B)
 // [TODO] 0x001AD420 MissionFailHUD::vfunc_45 (296 B)
 // [TODO] 0x001AD550 sub_001AD550 (78 B)
 // [TODO] 0x001AD5A0 MissionFailHUD::vfunc_01 (87 B)
 // [TODO] 0x001AD600 sub_001AD600 (93 B)
-// [TODO] 0x001AD660 MissionHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MissionHUD::vfunc_00 (0x001AD660, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionHUD::vfunc_00 (0x001AD660, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437BCC[];
+
+class MissionHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MissionHUD::vfunc_00()
+{
+    return DAT_00437BCC;
+}
+
 // [TODO] 0x001AD670 MissionHUD::vfunc_29 (78 B)
 // [TODO] 0x001AD6C0 MissionHUD::vfunc_04 (57 B)
 // [TODO] 0x001AD700 sub_001AD700 (202 B)
@@ -11185,7 +15689,29 @@
 // [TODO] 0x001B2DE0 sub_001B2DE0 (173 B)
 // [TODO] 0x001B2E90 sub_001B2E90 (251 B)
 // [TODO] 0x001B2F90 sub_001B2F90 (34 B)
-// [TODO] 0x001B2FC0 LookTutorialHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LookTutorialHUD::vfunc_00 (0x001B2FC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LookTutorialHUD::vfunc_00 (0x001B2FC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436890[];
+
+class LookTutorialHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LookTutorialHUD::vfunc_00()
+{
+    return DAT_00436890;
+}
+
 // [TODO] 0x001B2FD0 LookTutorialHUD::vfunc_30 (72 B)
 // [TODO] 0x001B3020 sub_001B3020 (123 B)
 // [TODO] 0x001B30A0 sub_001B30A0 (131 B)
@@ -11307,11 +15833,55 @@
 // [TODO] 0x001BAD90 PimpYourMansionHUD::vfunc_54 (91 B)
 // [TODO] 0x001BADF0 PimpYourMansionHUD::vfunc_00 (37 B)
 // [TODO] 0x001BAE20 sub_001BAE20 (117 B)
-// [TODO] 0x001BAEA0 PimpYourMansionHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PimpYourMansionHUD::vfunc_00 (0x001BAEA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PimpYourMansionHUD::vfunc_00 (0x001BAEA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437C44[];
+
+class PimpYourMansionHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PimpYourMansionHUD::vfunc_00()
+{
+    return DAT_00437C44;
+}
+
 // [TODO] 0x001BAEB0 sub_001BAEB0 (103 B)
 // [TODO] 0x001BAF20 PimpYourMansionHUD::vfunc_01 (30 B)
 // [TODO] 0x001BAF40 sub_001BAF40 (290 B)
-// [TODO] 0x001BB070 PokerHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PokerHUD::vfunc_00 (0x001BB070, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PokerHUD::vfunc_00 (0x001BB070, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437CBC[];
+
+class PokerHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PokerHUD::vfunc_00()
+{
+    return DAT_00437CBC;
+}
+
 // [TODO] 0x001BB080 sub_001BB080 (121 B)
 // [TODO] 0x001BB100 sub_001BB100 (148 B)
 // [TODO] 0x001BB1A0 sub_001BB1A0 (147 B)
@@ -11335,7 +15905,29 @@
 // [TODO] 0x001BC150 PokerHUD::vfunc_32 (749 B)
 // [TODO] 0x001BC440 sub_001BC440 (404 B)
 // [TODO] 0x001BC5E0 sub_001BC5E0 (96 B)
-// [TODO] 0x001BC640 SatPhoneWeaponHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SatPhoneWeaponHUD::vfunc_00 (0x001BC640, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SatPhoneWeaponHUD::vfunc_00 (0x001BC640, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436194[];
+
+class SatPhoneWeaponHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SatPhoneWeaponHUD::vfunc_00()
+{
+    return DAT_00436194;
+}
+
 // [TODO] 0x001BC650 SatPhoneWeaponHUD::vfunc_35 (113 B)
 // [TODO] 0x001BC6D0 SatPhoneWeaponHUD::vfunc_00 (47 B)
 // [TODO] 0x001BC700 sub_001BC700 (66 B)
@@ -11453,7 +16045,29 @@
 // [TODO] 0x001BFD70 ConcreteClassRep<WeaponHUD>::vfunc_01 (45 B)
 // [TODO] 0x001BFDA0 ConcreteClassRep<WeaponHUD>::vfunc_02 (39 B)
 // [TODO] 0x001BFDD0 sub_001BFDD0 (207 B)
-// [TODO] 0x001BFEA0 SlotMachineHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SlotMachineHUD::vfunc_00 (0x001BFEA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SlotMachineHUD::vfunc_00 (0x001BFEA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437D30[];
+
+class SlotMachineHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SlotMachineHUD::vfunc_00()
+{
+    return DAT_00437D30;
+}
+
 // [TODO] 0x001BFEB0 BlackjackHUD::vfunc_04 (5 B)
 // [TODO] 0x001BFEC0 SlotMachineHUD::vfunc_30 (346 B)
 // [TODO] 0x001C0020 sub_001C0020 (65 B)
@@ -11465,12 +16079,56 @@
 // [TODO] 0x001C03B0 sub_001C03B0 (250 B)
 // [TODO] 0x001C04B0 sub_001C04B0 (448 B)
 // [TODO] 0x001C0670 sub_001C0670 (28 B)
-// [TODO] 0x001C0690 StreetWeaponHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StreetWeaponHUD::vfunc_00 (0x001C0690, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StreetWeaponHUD::vfunc_00 (0x001C0690, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00436168[];
+
+class StreetWeaponHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StreetWeaponHUD::vfunc_00()
+{
+    return DAT_00436168;
+}
+
 // [TODO] 0x001C06A0 StreetWeaponHUD::vfunc_35 (113 B)
 // [TODO] 0x001C0720 StreetWeaponHUD::vfunc_00 (47 B)
 // [TODO] 0x001C0750 sub_001C0750 (66 B)
 // [TODO] 0x001C07A0 StreetWeaponHUD::vfunc_01 (53 B)
-// [TODO] 0x001C07E0 TargetHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TargetHUD::vfunc_00 (0x001C07E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TargetHUD::vfunc_00 (0x001C07E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437DC0[];
+
+class TargetHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TargetHUD::vfunc_00()
+{
+    return DAT_00437DC0;
+}
+
 // [TODO] 0x001C07F0 TargetHUD::vfunc_29 (336 B)
 // [TODO] 0x001C0940 sub_001C0940 (51 B)
 // [TODO] 0x001C0980 sub_001C0980 (79 B)
@@ -11498,7 +16156,29 @@
 // [TODO] 0x001C18B0 TargetHUD::vfunc_04 (120 B)
 // [TODO] 0x001C1930 TargetHUD::vfunc_00 (444 B)
 // [TODO] 0x001C1AF0 TargetHUD::vfunc_44 (176 B)
-// [TODO] 0x001C1BA0 TeleportHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TeleportHUD::vfunc_00 (0x001C1BA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TeleportHUD::vfunc_00 (0x001C1BA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437E90[];
+
+class TeleportHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TeleportHUD::vfunc_00()
+{
+    return DAT_00437E90;
+}
+
 // [TODO] 0x001C1BB0 GenericWeaponHUD::vfunc_04 (5 B)
 // [TODO] 0x001C1BC0 TeleportHUD::vfunc_29 (49 B)
 // [TODO] 0x001C1C00 TeleportHUD::vfunc_00 (41 B)
@@ -11510,7 +16190,29 @@
 // [TODO] 0x001C1E90 sub_001C1E90 (97 B)
 // [TODO] 0x001C1F00 TeleportHUD::vfunc_01 (57 B)
 // [TODO] 0x001C2180 sub_001C2180 (83 B)
-// [TODO] 0x001C21E0 ViceCopHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ViceCopHUD::vfunc_00 (0x001C21E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ViceCopHUD::vfunc_00 (0x001C21E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437F00[];
+
+class ViceCopHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ViceCopHUD::vfunc_00()
+{
+    return DAT_00437F00;
+}
+
 // [TODO] 0x001C21F0 ViceCopHUD::vfunc_29 (29 B)
 // [TODO] 0x001C2210 ViceCopHUD::vfunc_54 (63 B)
 // [TODO] 0x001C2250 ViceCopHUD::vfunc_35 (107 B)
@@ -11519,7 +16221,29 @@
 // [TODO] 0x001C2350 sub_001C2350 (89 B)
 // [TODO] 0x001C23B0 ViceCopHUD::vfunc_01 (30 B)
 // [TODO] 0x001C23D0 sub_001C23D0 (52 B)
-// [TODO] 0x001C2410 VisibilityHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VisibilityHUD::vfunc_00 (0x001C2410, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VisibilityHUD::vfunc_00 (0x001C2410, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00437FE0[];
+
+class VisibilityHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VisibilityHUD::vfunc_00()
+{
+    return DAT_00437FE0;
+}
+
 // [TODO] 0x001C2420 VisibilityHUD::vfunc_29 (39 B)
 // [TODO] 0x001C2450 VisibilityHUD::vfunc_04 (46 B)
 // [TODO] 0x001C2480 VisibilityHUD::vfunc_30 (40 B)
@@ -11537,13 +16261,57 @@
 // [TODO] 0x001C26E0 HUDVisibilityRestoreData::vfunc_00 (36 B)
 // [TODO] 0x001C2710 VisibilityHUD::vfunc_44 (75 B)
 // [TODO] 0x001C2760 sub_001C2760 (71 B)
-// [TODO] 0x001C27B0 DistanceBubble::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] DistanceBubble::vfunc_00 (0x001C27B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DistanceBubble::vfunc_00 (0x001C27B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043800C[];
+
+class DistanceBubble
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* DistanceBubble::vfunc_00()
+{
+    return DAT_0043800C;
+}
+
 // [TODO] 0x001C27C0 DistanceBubble::vfunc_30 (148 B)
 // [TODO] 0x001C2860 DistanceBubble::vfunc_31 (106 B)
 // [TODO] 0x001C28D0 DistanceBubble::vfunc_32 (81 B)
 // [TODO] 0x001C2930 DistanceBubble::vfunc_37 (152 B)
 // [TODO] 0x001C29D0 HUDDistanceBubbleRestoreData::vfunc_00 (54 B)
-// [TODO] 0x001C2A10 WeaponHUD::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WeaponHUD::vfunc_00 (0x001C2A10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WeaponHUD::vfunc_00 (0x001C2A10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00438068[];
+
+class WeaponHUD
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WeaponHUD::vfunc_00()
+{
+    return DAT_00438068;
+}
+
 // [TODO] 0x001C2A20 WeaponHUD::vfunc_29 (166 B)
 // [TODO] 0x001C2AD0 WeaponHUD::vfunc_04 (54 B)
 // [TODO] 0x001C2B10 WeaponHUD::vfunc_45 (188 B)
@@ -11575,7 +16343,29 @@
 // [TODO] 0x001C3A80 sub_001C3A80 (273 B)
 // [TODO] 0x001C3BA0 sub_001C3BA0 (131 B)
 // [TODO] 0x001C3C30 sub_001C3C30 (401 B)
-// [TODO] 0x001C3DD0 SystemDialogBox::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SystemDialogBox::vfunc_00 (0x001C3DD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SystemDialogBox::vfunc_00 (0x001C3DD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043847C[];
+
+class SystemDialogBox
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SystemDialogBox::vfunc_00()
+{
+    return DAT_0043847C;
+}
+
 // [TODO] 0x001C3DE0 sub_001C3DE0 (326 B)
 // [TODO] 0x001C3F30 sub_001C3F30 (236 B)
 // [TODO] 0x001C4020 SystemDialogBox::vfunc_01 (65 B)
@@ -11627,7 +16417,29 @@
 // [TODO] 0x001C56B0 sub_001C56B0 (114 B)
 // [TODO] 0x001C5730 sub_001C5730 (17 B)
 // [TODO] 0x001C5750 sub_001C5750 (46 B)
-// [TODO] 0x001C5780 LoadObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LoadObject::vfunc_00 (0x001C5780, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LoadObject::vfunc_00 (0x001C5780, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043879C[];
+
+class LoadObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LoadObject::vfunc_00()
+{
+    return DAT_0043879C;
+}
+
 // [TODO] 0x001C5790 LoadObject::vfunc_04 (38 B)
 // [TODO] 0x001C57C0 LoadObject::vfunc_01 (36 B)
 // [TODO] 0x001C57F0 sub_001C57F0 (292 B)
@@ -11642,7 +16454,29 @@
 // [TODO] 0x001C5C00 sub_001C5C00 (70 B)
 // [TODO] 0x001C5C50 sub_001C5C50 (122 B)
 // [TODO] 0x001C5CD0 sub_001C5CD0 (95 B)
-// [TODO] 0x001C5D30 LoadPackage::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LoadPackage::vfunc_00 (0x001C5D30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LoadPackage::vfunc_00 (0x001C5D30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043883C[];
+
+class LoadPackage
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LoadPackage::vfunc_00()
+{
+    return DAT_0043883C;
+}
+
 // [TODO] 0x001C5D40 sub_001C5D40 (29 B)
 // [TODO] 0x001C5D60 sub_001C5D60 (56 B)
 // [TODO] 0x001C5DA0 LoadPackage::vfunc_00 (284 B)
@@ -11703,11 +16537,55 @@
 // [TODO] 0x001C7EF0 sub_001C7EF0 (391 B)
 // [TODO] 0x001C80A0 sub_001C80A0 (1520 B)
 // [TODO] 0x001C80E0 sub_001C80E0 (70 B)
-// [TODO] 0x001C8130 MissionGroup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MissionGroup::vfunc_00 (0x001C8130, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionGroup::vfunc_00 (0x001C8130, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00438ADC[];
+
+class MissionGroup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MissionGroup::vfunc_00()
+{
+    return DAT_00438ADC;
+}
+
 // [TODO] 0x001C8140 sub_001C8140 (10 B)
 // [TODO] 0x001C8150 MissionGroup::vfunc_01 (36 B)
 // [TODO] 0x001C8180 sub_001C8180 (186 B)
-// [TODO] 0x001C8240 MissionStage::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MissionStage::vfunc_00 (0x001C8240, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionStage::vfunc_00 (0x001C8240, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00438B08[];
+
+class MissionStage
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MissionStage::vfunc_00()
+{
+    return DAT_00438B08;
+}
+
 // [TODO] 0x001C8250 MissionStage::vfunc_01 (76 B)
 // [TODO] 0x001C82A0 sub_001C82A0 (101 B)
 // [TODO] 0x001C8310 sub_001C8310 (230 B)
@@ -11718,12 +16596,56 @@
 // [TODO] 0x001C8900 sub_001C8900 (114 B)
 // [TODO] 0x001C8BA0 ConcreteClassRep<MissionGroup>::vfunc_02 (36 B)
 // [TODO] 0x001C8BD0 ConcreteClassRep<MissionStage>::vfunc_02 (36 B)
-// [TODO] 0x001C8C00 EnvironmentObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] EnvironmentObject::vfunc_00 (0x001C8C00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// EnvironmentObject::vfunc_00 (0x001C8C00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043943C[];
+
+class EnvironmentObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* EnvironmentObject::vfunc_00()
+{
+    return DAT_0043943C;
+}
+
 // [TODO] 0x001C8C30 EnvironmentObject::vfunc_01 (36 B)
 // [TODO] 0x001C8C60 EnvironmentObject::vfunc_04 (94 B)
 // [TODO] 0x001C8CC0 sub_001C8CC0 (78 B)
 // [TODO] 0x001C8D10 sub_001C8D10 (218 B)
-// [TODO] 0x001C8DF0 OceanObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] OceanObject::vfunc_00 (0x001C8DF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// OceanObject::vfunc_00 (0x001C8DF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043949C[];
+
+class OceanObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* OceanObject::vfunc_00()
+{
+    return DAT_0043949C;
+}
+
 // [TODO] 0x001C8E00 sub_001C8E00 (22 B)
 // [TODO] 0x001C8E20 sub_001C8E20 (22 B)
 // [TODO] 0x001C8E40 sub_001C8E40 (11 B)
@@ -11748,11 +16670,55 @@
 // [TODO] 0x001CA3C0 PauseMenu::vfunc_45 (140 B)
 // [TODO] 0x001CA450 sub_001CA450 (82 B)
 // [TODO] 0x001CA4B0 sub_001CA4B0 (206 B)
-// [TODO] 0x001CA580 PauseMenu::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenu::vfunc_00 (0x001CA580, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenu::vfunc_00 (0x001CA580, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439CF4[];
+
+class PauseMenu
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenu::vfunc_00()
+{
+    return DAT_00439CF4;
+}
+
 // [TODO] 0x001CA590 sub_001CA590 (200 B)
 // [TODO] 0x001CA660 PauseMenu::vfunc_01 (30 B)
 // [TODO] 0x001CA680 sub_001CA680 (70 B)
-// [TODO] 0x001CA6D0 PauseMenuPage::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPage::vfunc_00 (0x001CA6D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPage::vfunc_00 (0x001CA6D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439D20[];
+
+class PauseMenuPage
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPage::vfunc_00()
+{
+    return DAT_00439D20;
+}
+
 // [TODO] 0x001CA6E0 PauseMenuPage::vfunc_04 (53 B)
 // [TODO] 0x001CA720 PauseMenuPage::vfunc_54 (65 B)
 // [TODO] 0x001CA770 PauseMenuPage::vfunc_44 (125 B)
@@ -11772,7 +16738,29 @@
 // [TODO] 0x001CAB60 PauseMenuPage::PauseMenuPageItem::vfunc_02 (91 B)
 // [TODO] 0x001CABC0 PauseMenuPage::vfunc_01 (30 B)
 // [TODO] 0x001CABE0 sub_001CABE0 (39 B)
-// [TODO] 0x001CAC10 PauseMenuPageController::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageController::vfunc_00 (0x001CAC10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageController::vfunc_00 (0x001CAC10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439E80[];
+
+class PauseMenuPageController
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageController::vfunc_00()
+{
+    return DAT_00439E80;
+}
+
 // [TODO] 0x001CAC20 PauseMenuPageController::vfunc_63 (28 B)
 // [TODO] 0x001CAC40 PauseMenuPageController::vfunc_61 (45 B)
 // [TODO] 0x001CAC70 PauseMenuPageController::vfunc_62 (45 B)
@@ -11780,7 +16768,29 @@
 // [TODO] 0x001CADD0 PauseMenuPageController::vfunc_44 (539 B)
 // [TODO] 0x001CAFF0 PauseMenuPageController::PauseMenuPageControllerItem::vfunc_01 (102 B)
 // [TODO] 0x001CB060 sub_001CB060 (60 B)
-// [TODO] 0x001CB0A0 PauseMenuPageCredits::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageCredits::vfunc_00 (0x001CB0A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageCredits::vfunc_00 (0x001CB0A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439E54[];
+
+class PauseMenuPageCredits
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageCredits::vfunc_00()
+{
+    return DAT_00439E54;
+}
+
 // [TODO] 0x001CB0B0 PauseMenuPageCredits::vfunc_59 (54 B)
 // [TODO] 0x001CB0F0 PauseMenuPageCredits::vfunc_60 (54 B)
 // [TODO] 0x001CB130 PauseMenuPageCredits::vfunc_01 (43 B)
@@ -11788,14 +16798,58 @@
 // [TODO] 0x001CB220 PauseMenuPageCredits::vfunc_44 (371 B)
 // [TODO] 0x001CB3A0 PauseMenuPageCredits::vfunc_54 (137 B)
 // [TODO] 0x001CB430 sub_001CB430 (39 B)
-// [TODO] 0x001CB460 PauseMenuPageDebug::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageDebug::vfunc_00 (0x001CB460, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageDebug::vfunc_00 (0x001CB460, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439EAC[];
+
+class PauseMenuPageDebug
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageDebug::vfunc_00()
+{
+    return DAT_00439EAC;
+}
+
 // [TODO] 0x001CB470 PauseMenuPageDebug::vfunc_63 (51 B)
 // [TODO] 0x001CB4B0 PauseMenuPageDebug::vfunc_61 (60 B)
 // [TODO] 0x001CB4F0 PauseMenuPageDebug::vfunc_62 (60 B)
 // [TODO] 0x001CB530 PauseMenuPageDebug::PauseMenuPageDebugItem::vfunc_05 (122 B)
 // [TODO] 0x001CB5B0 PauseMenuPageDebug::vfunc_44 (454 B)
 // [TODO] 0x001CB780 sub_001CB780 (83 B)
-// [TODO] 0x001CB7E0 PauseMenuPageHome::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageHome::vfunc_00 (0x001CB7E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageHome::vfunc_00 (0x001CB7E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439D4C[];
+
+class PauseMenuPageHome
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageHome::vfunc_00()
+{
+    return DAT_00439D4C;
+}
+
 // [TODO] 0x001CB7F0 PauseMenuPageHome::vfunc_63 (106 B)
 // [TODO] 0x001CB860 sub_001CB860 (150 B)
 // [TODO] 0x001CB900 InvSelectionHUD::InvMenuItem::vfunc_01 (44 B)
@@ -11805,7 +16859,29 @@
 // [TODO] 0x001CB9B0 sub_001CB9B0 (158 B)
 // [TODO] 0x001CBA50 PauseMenuPageHome::vfunc_44 (627 B)
 // [TODO] 0x001CBCD0 PauseMenuPageHome::PauseMenuPageHomeItem::vfunc_00 (70 B)
-// [TODO] 0x001CBD20 PauseMenuPageMain::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageMain::vfunc_00 (0x001CBD20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageMain::vfunc_00 (0x001CBD20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439D78[];
+
+class PauseMenuPageMain
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageMain::vfunc_00()
+{
+    return DAT_00439D78;
+}
+
 // [TODO] 0x001CBD30 PauseMenuPageMain::vfunc_29 (55 B)
 // [TODO] 0x001CBD70 PauseMenuPageMain::vfunc_35 (107 B)
 // [TODO] 0x001CBDE0 PauseMenuPageMain::vfunc_44 (765 B)
@@ -11814,7 +16890,29 @@
 // [TODO] 0x001CC160 sub_001CC160 (91 B)
 // [TODO] 0x001CC1C0 PauseMenuPageMain::vfunc_01 (50 B)
 // [TODO] 0x001CC200 sub_001CC200 (54 B)
-// [TODO] 0x001CC240 PauseMenuPageOptions::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageOptions::vfunc_00 (0x001CC240, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageOptions::vfunc_00 (0x001CC240, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439DFC[];
+
+class PauseMenuPageOptions
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageOptions::vfunc_00()
+{
+    return DAT_00439DFC;
+}
+
 // [TODO] 0x001CC250 PauseMenuPageOptions::vfunc_54 (98 B)
 // [TODO] 0x001CC2C0 PauseMenuPageOptions::vfunc_63 (42 B)
 // [TODO] 0x001CC2F0 PauseMenuPageOptions::vfunc_61 (72 B)
@@ -11823,7 +16921,29 @@
 // [TODO] 0x001CC3B0 PauseMenuPageOptions::PauseMenuPageOptionsItem::vfunc_05 (343 B)
 // [TODO] 0x001CC510 PauseMenuPageOptions::vfunc_44 (530 B)
 // [TODO] 0x001CC730 sub_001CC730 (62 B)
-// [TODO] 0x001CC770 PauseMenuPageRewards::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageRewards::vfunc_00 (0x001CC770, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageRewards::vfunc_00 (0x001CC770, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439DD0[];
+
+class PauseMenuPageRewards
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageRewards::vfunc_00()
+{
+    return DAT_00439DD0;
+}
+
 // [TODO] 0x001CC780 PauseMenuPageRewards::vfunc_45 (49 B)
 // [TODO] 0x001CC7C0 sub_001CC7C0 (170 B)
 // [TODO] 0x001CC870 sub_001CC870 (71 B)
@@ -11848,7 +16968,29 @@
 // [TODO] 0x001CD370 PauseMenuPageRewards::PauseMenuPageCheatItem::vfunc_01 (90 B)
 // [TODO] 0x001CD3D0 PauseMenuPageRewards::PauseMenuPageCheatItem::vfunc_02 (112 B)
 // [TODO] 0x001CD440 sub_001CD440 (101 B)
-// [TODO] 0x001CD4B0 PauseMenuPageSerialize::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageSerialize::vfunc_00 (0x001CD4B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageSerialize::vfunc_00 (0x001CD4B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439E28[];
+
+class PauseMenuPageSerialize
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageSerialize::vfunc_00()
+{
+    return DAT_00439E28;
+}
+
 // [TODO] 0x001CD4C0 PauseMenuPageSerialize::vfunc_45 (69 B)
 // [TODO] 0x001CD510 PauseMenuPageSerialize::vfunc_59 (54 B)
 // [TODO] 0x001CD550 PauseMenuPageSerialize::vfunc_60 (54 B)
@@ -11859,7 +17001,29 @@
 // [TODO] 0x001CD8A0 sub_001CD8A0 (371 B)
 // [TODO] 0x001CDA20 PauseMenuPageSerialize::vfunc_54 (553 B)
 // [TODO] 0x001CDC50 sub_001CDC50 (39 B)
-// [TODO] 0x001CDC80 PauseMenuPageStats::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageStats::vfunc_00 (0x001CDC80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPageStats::vfunc_00 (0x001CDC80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00439DA4[];
+
+class PauseMenuPageStats
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PauseMenuPageStats::vfunc_00()
+{
+    return DAT_00439DA4;
+}
+
 // [TODO] 0x001CDC90 PauseMenuPageStats::PauseMenuPageStatsItem::vfunc_05 (383 B)
 // [TODO] 0x001CDE10 PauseMenuPageStats::vfunc_44 (454 B)
 // [TODO] 0x001CE0F0 ConcreteClassRep<PauseMenuPage>::vfunc_01 (42 B)
@@ -11894,19 +17058,85 @@
 // [TODO] 0x001CEB90 sub_001CEB90 (107 B)
 // [TODO] 0x001CEC00 sub_001CEC00 (134 B)
 // [TODO] 0x001CEC90 sub_001CEC90 (96 B)
-// [TODO] 0x001CECF0 PoiMarkerObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PoiMarkerObject::vfunc_00 (0x001CECF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PoiMarkerObject::vfunc_00 (0x001CECF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043A1F8[];
+
+class PoiMarkerObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PoiMarkerObject::vfunc_00()
+{
+    return DAT_0043A1F8;
+}
+
 // [TODO] 0x001CED00 sub_001CED00 (106 B)
 // [TODO] 0x001CED70 sub_001CED70 (85 B)
 // [TODO] 0x001CEDD0 sub_001CEDD0 (165 B)
 // [TODO] 0x001CEE80 sub_001CEE80 (62 B)
-// [TODO] 0x001CEEC0 ShaftAndDiscMarker::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ShaftAndDiscMarker::vfunc_00 (0x001CEEC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ShaftAndDiscMarker::vfunc_00 (0x001CEEC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043A224[];
+
+class ShaftAndDiscMarker
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ShaftAndDiscMarker::vfunc_00()
+{
+    return DAT_0043A224;
+}
+
 // [TODO] 0x001CEED0 PoiMarkerObject::vfunc_01 (30 B)
 // [TODO] 0x001CEEF0 PoiMarkerManager::vfunc_00 (30 B)
 // [TODO] 0x001CF030 ConcreteClassRep<PoiMarkerObject>::vfunc_01 (45 B)
 // [TODO] 0x001CF060 ConcreteClassRep<PoiMarkerObject>::vfunc_02 (36 B)
 // [TODO] 0x001CF090 ConcreteClassRep<ShaftAndDiscMarker>::vfunc_01 (45 B)
 // [TODO] 0x001CF0C0 ConcreteClassRep<ShaftAndDiscMarker>::vfunc_02 (90 B)
-// [TODO] 0x001CF120 EffectsObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] EffectsObject::vfunc_00 (0x001CF120, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// EffectsObject::vfunc_00 (0x001CF120, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043A54C[];
+
+class EffectsObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* EffectsObject::vfunc_00()
+{
+    return DAT_0043A54C;
+}
+
 // [TODO] 0x001CF130 sub_001CF130 (52 B)
 // [TODO] 0x001CF170 sub_001CF170 (77 B)
 // [TODO] 0x001CF1C0 sub_001CF1C0 (206 B)
@@ -11926,7 +17156,29 @@
 // [TODO] 0x001CFF10 EffectsObject::vfunc_04 (286 B)
 // [TODO] 0x001D0030 EffectsObject::vfunc_09 (993 B)
 // [TODO] 0x001D0420 sub_001D0420 (162 B)
-// [TODO] 0x001D04D0 InstanceObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] InstanceObject::vfunc_00 (0x001D04D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// InstanceObject::vfunc_00 (0x001D04D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043A730[];
+
+class InstanceObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* InstanceObject::vfunc_00()
+{
+    return DAT_0043A730;
+}
+
 // [TODO] 0x001D0540 sub_001D0540 (83 B)
 // [TODO] 0x001D05A0 sub_001D05A0 (97 B)
 // [TODO] 0x001D0610 sub_001D0610 (39 B)
@@ -11958,19 +17210,107 @@
 // [TODO] 0x001D1ED0 InstanceObject::vfunc_04 (93 B)
 // [TODO] 0x001D1F30 sub_001D1F30 (120 B)
 // [TODO] 0x001D1FB0 sub_001D1FB0 (42 B)
-// [TODO] 0x001D1FE0 LightingObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LightingObject::vfunc_00 (0x001D1FE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LightingObject::vfunc_00 (0x001D1FE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043A85C[];
+
+class LightingObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LightingObject::vfunc_00()
+{
+    return DAT_0043A85C;
+}
+
 // [TODO] 0x001D1FF0 LightingObject::vfunc_01 (36 B)
 // [TODO] 0x001D2020 LightingObject::vfunc_04 (188 B)
-// [TODO] 0x001D20E0 ParticleEffectObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ParticleEffectObject::vfunc_00 (0x001D20E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ParticleEffectObject::vfunc_00 (0x001D20E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043A8C8[];
+
+class ParticleEffectObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ParticleEffectObject::vfunc_00()
+{
+    return DAT_0043A8C8;
+}
+
 // [TODO] 0x001D20F0 ParticleEffectObject::vfunc_04 (149 B)
 // [TODO] 0x001D21B0 sub_001D21B0 (81 B)
 // [TODO] 0x001D2210 ParticleEffectObject::vfunc_01 (36 B)
-// [TODO] 0x001D22A0 RainObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] RainObject::vfunc_00 (0x001D22A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// RainObject::vfunc_00 (0x001D22A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043A960[];
+
+class RainObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* RainObject::vfunc_00()
+{
+    return DAT_0043A960;
+}
+
 // [TODO] 0x001D22B0 RainObject::vfunc_04 (304 B)
 // [TODO] 0x001D23E0 sub_001D23E0 (52 B)
 // [TODO] 0x001D2420 sub_001D2420 (133 B)
 // [TODO] 0x001D24B0 RainObject::vfunc_01 (62 B)
-// [TODO] 0x001D24F0 ShadowObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ShadowObject::vfunc_00 (0x001D24F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ShadowObject::vfunc_00 (0x001D24F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043ABA8[];
+
+class ShadowObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ShadowObject::vfunc_00()
+{
+    return DAT_0043ABA8;
+}
+
 // [TODO] 0x001D2500 ShadowObject::vfunc_04 (139 B)
 // [TODO] 0x001D2590 sub_001D2590 (81 B)
 // [TODO] 0x001D25F0 ShadowObject::vfunc_01 (36 B)
@@ -11995,7 +17335,29 @@
 // [TODO] 0x001D3800 sub_001D3800 (6 B)
 // [TODO] 0x001D3810 sub_001D3810 (61 B)
 // [TODO] 0x001D3850 sub_001D3850 (79 B)
-// [TODO] 0x001D38A0 TODObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TODObject::vfunc_00 (0x001D38A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TODObject::vfunc_00 (0x001D38A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043ACA8[];
+
+class TODObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TODObject::vfunc_00()
+{
+    return DAT_0043ACA8;
+}
+
 // [TODO] 0x001D38B0 sub_001D38B0 (14 B)
 // [TODO] 0x001D38C0 sub_001D38C0 (14 B)
 // [TODO] 0x001D38D0 sub_001D38D0 (40 B)
@@ -12007,7 +17369,29 @@
 // [TODO] 0x001D39D0 sub_001D39D0 (246 B)
 // [TODO] 0x001D3AD0 TODObject::vfunc_01 (46 B)
 // [TODO] 0x001D3B00 TODObject::vfunc_04 (314 B)
-// [TODO] 0x001D3C40 TraceFireObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TraceFireObject::vfunc_00 (0x001D3C40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TraceFireObject::vfunc_00 (0x001D3C40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B078[];
+
+class TraceFireObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TraceFireObject::vfunc_00()
+{
+    return DAT_0043B078;
+}
+
 // [TODO] 0x001D3C50 sub_001D3C50 (17 B)
 // [TODO] 0x001D3C70 sub_001D3C70 (17 B)
 // [TODO] 0x001D3C90 sub_001D3C90 (7 B)
@@ -12036,14 +17420,58 @@
 // [TODO] 0x001D4CD0 sub_001D4CD0 (762 B)
 // [TODO] 0x001D4FD0 TraceFireObject::vfunc_15 (274 B)
 // [TODO] 0x001D50F0 TraceFireObject::vfunc_16 (114 B)
-// [TODO] 0x001D5170 VehicleRenderableObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleRenderableObject::vfunc_00 (0x001D5170, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleRenderableObject::vfunc_00 (0x001D5170, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B1F8[];
+
+class VehicleRenderableObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleRenderableObject::vfunc_00()
+{
+    return DAT_0043B1F8;
+}
+
 // [TODO] 0x001D5180 sub_001D5180 (201 B)
 // [TODO] 0x001D5250 VehicleRenderableObject::vfunc_01 (36 B)
 // [TODO] 0x001D5280 VehicleRenderableObject::vfunc_04 (449 B)
 // [TODO] 0x001D5450 ConcreteClassRep<SkyObject>::vfunc_01 (45 B)
 // [TODO] 0x001D5480 ConcreteClassRep<SkyObject>::vfunc_02 (64 B)
 // [TODO] 0x001D54C0 sub_001D54C0 (42 B)
-// [TODO] 0x001D54F0 SkyObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SkyObject::vfunc_00 (0x001D54F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SkyObject::vfunc_00 (0x001D54F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B2D0[];
+
+class SkyObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SkyObject::vfunc_00()
+{
+    return DAT_0043B2D0;
+}
+
 // [TODO] 0x001D5500 SkyObject::vfunc_04 (177 B)
 // [TODO] 0x001D55C0 SkyObject::vfunc_01 (36 B)
 // [TODO] 0x001D55F0 sub_001D55F0 (3959 B)
@@ -12068,7 +17496,29 @@
 // [TODO] 0x001D5DA0 sub_001D5DA0 (1498 B)
 // [TODO] 0x001D6380 sub_001D6380 (126 B)
 // [TODO] 0x001D6490 sub_001D6490 (120 B)
-// [TODO] 0x001D6510 LocatableSoundObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LocatableSoundObject::vfunc_00 (0x001D6510, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LocatableSoundObject::vfunc_00 (0x001D6510, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B49C[];
+
+class LocatableSoundObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LocatableSoundObject::vfunc_00()
+{
+    return DAT_0043B49C;
+}
+
 // [TODO] 0x001D6520 LocatableSoundObject::vfunc_41 (7 B)
 // [TODO] 0x001D6530 sub_001D6530 (28 B)
 // [TODO] 0x001D6570 sub_001D6570 (144 B)
@@ -12079,7 +17529,29 @@
 // [TODO] 0x001D67D0 LocatableSoundObject::vfunc_04 (286 B)
 // [TODO] 0x001D68F0 LocatableSoundObject::vfunc_08 (812 B)
 // [TODO] 0x001D6C20 sub_001D6C20 (59 B)
-// [TODO] 0x001D6C60 LocatableSoundTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LocatableSoundTemplate::vfunc_00 (0x001D6C60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LocatableSoundTemplate::vfunc_00 (0x001D6C60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B530[];
+
+class LocatableSoundTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LocatableSoundTemplate::vfunc_00()
+{
+    return DAT_0043B530;
+}
+
 // [TODO] 0x001D6D20 ConcreteClassRep<LocatableSoundObject>::vfunc_01 (45 B)
 // [TODO] 0x001D6E00 ConcreteClassRep<LocatableSoundObject>::vfunc_02 (36 B)
 // [TODO] 0x001D6EA0 ConcreteClassRep<LocatableSoundTemplate>::vfunc_01 (42 B)
@@ -12100,7 +17572,29 @@
 // [TODO] 0x001D77E0 ConcreteClassRep<TapeMixTape>::vfunc_02 (36 B)
 // [TODO] 0x001D7810 ConcreteClassRep<TapeTrackLibrary>::vfunc_02 (32 B)
 // [TODO] 0x001D7830 ConcreteClassRep<TapeTrackLibrary>::vfunc_01 (87 B)
-// [TODO] 0x001D7890 TapeTrackLibrary::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TapeTrackLibrary::vfunc_00 (0x001D7890, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TapeTrackLibrary::vfunc_00 (0x001D7890, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B9A8[];
+
+class TapeTrackLibrary
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TapeTrackLibrary::vfunc_00()
+{
+    return DAT_0043B9A8;
+}
+
 // [TODO] 0x001D78A0 TapeTrackLibrary::vfunc_01 (43 B)
 // [TODO] 0x001D78D0 TapeTrackLibrary::vfunc_00 (5 B)
 // [TODO] 0x001D78E0 TapeTrackLibrary::vfunc_03 (4 B)
@@ -12112,27 +17606,159 @@
 // [TODO] 0x001D79E0 sub_001D79E0 (347 B)
 // [TODO] 0x001D7B40 sub_001D7B40 (38 B)
 // [TODO] 0x001D7B70 sub_001D7B70 (112 B)
-// [TODO] 0x001D7BE0 SoundLocationObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SoundLocationObject::vfunc_00 (0x001D7BE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SoundLocationObject::vfunc_00 (0x001D7BE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B5E0[];
+
+class SoundLocationObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SoundLocationObject::vfunc_00()
+{
+    return DAT_0043B5E0;
+}
+
 // [TODO] 0x001D7BF0 sub_001D7BF0 (83 B)
 // [TODO] 0x001D7C50 SoundLocationObject::vfunc_04 (34 B)
 // [TODO] 0x001D7C80 SoundLocationObject::vfunc_01 (30 B)
 // [TODO] 0x001D7CA0 sub_001D7CA0 (42 B)
 // [TODO] 0x001D7CD0 sub_001D7CD0 (50 B)
-// [TODO] 0x001D7D10 SoundPoiObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SoundPoiObject::vfunc_00 (0x001D7D10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SoundPoiObject::vfunc_00 (0x001D7D10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B690[];
+
+class SoundPoiObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SoundPoiObject::vfunc_00()
+{
+    return DAT_0043B690;
+}
+
 // [TODO] 0x001D7D20 sub_001D7D20 (338 B)
 // [TODO] 0x001D7E80 sub_001D7E80 (89 B)
 // [TODO] 0x001D7EE0 SoundPoiObject::vfunc_01 (84 B)
 // [TODO] 0x001D7F40 SoundPoiObject::vfunc_04 (57 B)
 // [TODO] 0x001D7F80 sub_001D7F80 (75 B)
-// [TODO] 0x001D7FD0 SoundPoiTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SoundPoiTemplate::vfunc_00 (0x001D7FD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SoundPoiTemplate::vfunc_00 (0x001D7FD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B790[];
+
+class SoundPoiTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SoundPoiTemplate::vfunc_00()
+{
+    return DAT_0043B790;
+}
+
 // [TODO] 0x001D7FE0 Template::vfunc_10 (5 B)
 // [TODO] 0x001D7FF0 sub_001D7FF0 (52 B)
-// [TODO] 0x001D8030 TapeTrack::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TapeTrack::vfunc_00 (0x001D8030, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TapeTrack::vfunc_00 (0x001D8030, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B97C[];
+
+class TapeTrack
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TapeTrack::vfunc_00()
+{
+    return DAT_0043B97C;
+}
+
 // [TODO] 0x001D8040 sub_001D8040 (67 B)
-// [TODO] 0x001D8090 TapeMixTape::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TapeMixTape::vfunc_00 (0x001D8090, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TapeMixTape::vfunc_00 (0x001D8090, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043B9D4[];
+
+class TapeMixTape
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TapeMixTape::vfunc_00()
+{
+    return DAT_0043B9D4;
+}
+
 // [TODO] 0x001D80A0 TapeMixTape::vfunc_00 (70 B)
 // [TODO] 0x001D80F0 sub_001D80F0 (88 B)
-// [TODO] 0x001D8150 TapePlayer::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TapePlayer::vfunc_00 (0x001D8150, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TapePlayer::vfunc_00 (0x001D8150, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043BA00[];
+
+class TapePlayer
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TapePlayer::vfunc_00()
+{
+    return DAT_0043BA00;
+}
+
 // [TODO] 0x001D81F0 sub_001D81F0 (38 B)
 // [TODO] 0x001D8220 sub_001D8220 (35 B)
 // [TODO] 0x001D8250 TapeMixTape::vfunc_03 (4 B)
@@ -12146,10 +17772,54 @@
 // [TODO] 0x001D84F0 TapeTrackLibrary::vfunc_02 (71 B)
 // [TODO] 0x001D8540 sub_001D8540 (202 B)
 // [TODO] 0x001D8610 sub_001D8610 (40 B)
-// [TODO] 0x001D8640 ZoneSoundObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ZoneSoundObject::vfunc_00 (0x001D8640, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ZoneSoundObject::vfunc_00 (0x001D8640, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043BC6C[];
+
+class ZoneSoundObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ZoneSoundObject::vfunc_00()
+{
+    return DAT_0043BC6C;
+}
+
 // [TODO] 0x001D8650 ZoneSoundObject::vfunc_04 (56 B)
 // [TODO] 0x001D8690 ZoneSoundObject::vfunc_01 (48 B)
-// [TODO] 0x001D86C0 AddressSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AddressSpawnObject::vfunc_00 (0x001D86C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AddressSpawnObject::vfunc_00 (0x001D86C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D9C4[];
+
+class AddressSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AddressSpawnObject::vfunc_00()
+{
+    return DAT_0043D9C4;
+}
+
 // [TODO] 0x001D86D0 sub_001D86D0 (162 B)
 // [TODO] 0x001D8780 AddressSpawnObject::vfunc_01 (36 B)
 // [TODO] 0x001D87B0 AddressSpawnObject::vfunc_49 (418 B)
@@ -12157,11 +17827,55 @@
 // [TODO] 0x001D89A0 AddressSpawnObject::vfunc_51 (33 B)
 // [TODO] 0x001D89D0 AddressSpawnObject::vfunc_50 (414 B)
 // [TODO] 0x001D8BB0 sub_001D8BB0 (120 B)
-// [TODO] 0x001D8C30 AmbientSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AmbientSpawnObject::vfunc_00 (0x001D8C30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AmbientSpawnObject::vfunc_00 (0x001D8C30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DA48[];
+
+class AmbientSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AmbientSpawnObject::vfunc_00()
+{
+    return DAT_0043DA48;
+}
+
 // [TODO] 0x001D8C40 AmbientSpawnObject::vfunc_01 (36 B)
 // [TODO] 0x001D8C70 AmbientSpawnObject::vfunc_50 (686 B)
 // [TODO] 0x001D8F50 sub_001D8F50 (77 B)
-// [TODO] 0x001D8FA0 CallForVehicleSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CallForVehicleSpawnObject::vfunc_00 (0x001D8FA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CallForVehicleSpawnObject::vfunc_00 (0x001D8FA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DAF8[];
+
+class CallForVehicleSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CallForVehicleSpawnObject::vfunc_00()
+{
+    return DAT_0043DAF8;
+}
+
 // [TODO] 0x001D8FB0 CallForVehicleSpawnObject::vfunc_39 (9 B)
 // [TODO] 0x001D8FC0 CallForVehicleSpawnObject::vfunc_37 (41 B)
 // [TODO] 0x001D8FF0 CallForVehicleSpawnObject::vfunc_04 (104 B)
@@ -12175,7 +17889,29 @@
 // [TODO] 0x001D99D0 sub_001D99D0 (31 B)
 // [TODO] 0x001D99F0 sub_001D99F0 (41 B)
 // [TODO] 0x001D9A20 sub_001D9A20 (288 B)
-// [TODO] 0x001D9B40 CharacterInVehicleSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CharacterInVehicleSpawnObject::vfunc_00 (0x001D9B40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterInVehicleSpawnObject::vfunc_00 (0x001D9B40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D9F0[];
+
+class CharacterInVehicleSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CharacterInVehicleSpawnObject::vfunc_00()
+{
+    return DAT_0043D9F0;
+}
+
 // [TODO] 0x001D9B50 CharacterInVehicleSpawnObject::vfunc_04 (211 B)
 // [TODO] 0x001D9C30 sub_001D9C30 (246 B)
 // [TODO] 0x001D9D30 CharacterInVehicleSpawnObject::vfunc_40 (382 B)
@@ -12192,7 +17928,29 @@
 // [TODO] 0x001DA520 sub_001DA520 (188 B)
 // [TODO] 0x001DA5E0 sub_001DA5E0 (49 B)
 // [TODO] 0x001DA620 sub_001DA620 (2037 B)
-// [TODO] 0x001DAE20 CopSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CopSpawnObject::vfunc_00 (0x001DAE20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CopSpawnObject::vfunc_00 (0x001DAE20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DB24[];
+
+class CopSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CopSpawnObject::vfunc_00()
+{
+    return DAT_0043DB24;
+}
+
 // [TODO] 0x001DAE30 sub_001DAE30 (391 B)
 // [TODO] 0x001DAFC0 sub_001DAFC0 (366 B)
 // [TODO] 0x001DB130 sub_001DB130 (366 B)
@@ -12242,7 +18000,29 @@
 // [TODO] 0x001DE9C0 sub_001DE9C0 (10 B)
 // [TODO] 0x001DE9D0 sub_001DE9D0 (6 B)
 // [TODO] 0x001DE9E0 sub_001DE9E0 (147 B)
-// [TODO] 0x001DEA80 DealerSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] DealerSpawnObject::vfunc_00 (0x001DEA80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DealerSpawnObject::vfunc_00 (0x001DEA80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DB7C[];
+
+class DealerSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* DealerSpawnObject::vfunc_00()
+{
+    return DAT_0043DB7C;
+}
+
 // [TODO] 0x001DEA90 sub_001DEA90 (87 B)
 // [TODO] 0x001DEAF0 sub_001DEAF0 (283 B)
 // [TODO] 0x001DEC10 sub_001DEC10 (117 B)
@@ -12250,11 +18030,55 @@
 // [TODO] 0x001DECC0 DealerSpawnObject::vfunc_38 (1111 B)
 // [TODO] 0x001DF120 DealerSpawnObject::vfunc_41 (38 B)
 // [TODO] 0x001DF150 sub_001DF150 (54 B)
-// [TODO] 0x001DF190 EnemyCharacterGeneratorSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] EnemyCharacterGeneratorSpawnObject::vfunc_00 (0x001DF190, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// EnemyCharacterGeneratorSpawnObject::vfunc_00 (0x001DF190, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D940[];
+
+class EnemyCharacterGeneratorSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* EnemyCharacterGeneratorSpawnObject::vfunc_00()
+{
+    return DAT_0043D940;
+}
+
 // [TODO] 0x001DF1A0 EnemyCharacterGeneratorSpawnObject::vfunc_01 (36 B)
 // [TODO] 0x001DF1D0 EnemyCharacterGeneratorSpawnObject::vfunc_52 (259 B)
 // [TODO] 0x001DF2E0 sub_001DF2E0 (125 B)
-// [TODO] 0x001DF360 EnemyVehicleGenerator::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] EnemyVehicleGenerator::vfunc_00 (0x001DF360, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// EnemyVehicleGenerator::vfunc_00 (0x001DF360, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D96C[];
+
+class EnemyVehicleGenerator
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* EnemyVehicleGenerator::vfunc_00()
+{
+    return DAT_0043D96C;
+}
+
 // [TODO] 0x001DF370 EnemyVehicleGenerator::vfunc_56 (53 B)
 // [TODO] 0x001DF3B0 EnemyVehicleGenerator::vfunc_01 (36 B)
 // [TODO] 0x001DF3E0 EnemyVehicleGenerator::vfunc_50 (104 B)
@@ -12264,7 +18088,29 @@
 // [TODO] 0x001DFAA0 EnemyVehicleGenerator::vfunc_53 (114 B)
 // [TODO] 0x001DFB20 EnemyVehicleGenerator::vfunc_49 (199 B)
 // [TODO] 0x001DFBF0 sub_001DFBF0 (64 B)
-// [TODO] 0x001DFC30 GangNestSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GangNestSpawnObject::vfunc_00 (0x001DFC30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GangNestSpawnObject::vfunc_00 (0x001DFC30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D8BC[];
+
+class GangNestSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GangNestSpawnObject::vfunc_00()
+{
+    return DAT_0043D8BC;
+}
+
 // [TODO] 0x001DFC40 GangNestSpawnObject::vfunc_04 (5 B)
 // [TODO] 0x001DFC50 GangNestSpawnObject::vfunc_35 (24 B)
 // [TODO] 0x001DFCC0 GangNestSpawnObject::vfunc_01 (36 B)
@@ -12272,7 +18118,29 @@
 // [TODO] 0x001DFD50 GangNestSpawnObject::vfunc_33 (137 B)
 // [TODO] 0x001DFDE0 GangNestSpawnObject::vfunc_34 (497 B)
 // [TODO] 0x001E0080 sub_001E0080 (148 B)
-// [TODO] 0x001E0120 GangSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GangSpawnObject::vfunc_00 (0x001E0120, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GangSpawnObject::vfunc_00 (0x001E0120, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DB50[];
+
+class GangSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GangSpawnObject::vfunc_00()
+{
+    return DAT_0043DB50;
+}
+
 // [TODO] 0x001E0130 GangSpawnObject::vfunc_37 (79 B)
 // [TODO] 0x001E0180 GangSpawnObject::vfunc_40 (67 B)
 // [TODO] 0x001E01C0 sub_001E01C0 (3 B)
@@ -12320,12 +18188,56 @@
 // [TODO] 0x001E2460 AddressSpawnObject::vfunc_37 (32 B)
 // [TODO] 0x001E2480 sub_001E2480 (553 B)
 // [TODO] 0x001E2770 sub_001E2770 (134 B)
-// [TODO] 0x001E2800 GenericSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GenericSpawnObject::vfunc_00 (0x001E2800, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GenericSpawnObject::vfunc_00 (0x001E2800, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D8E8[];
+
+class GenericSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GenericSpawnObject::vfunc_00()
+{
+    return DAT_0043D8E8;
+}
+
 // [TODO] 0x001E2810 sub_001E2810 (878 B)
 // [TODO] 0x001E2B80 sub_001E2B80 (190 B)
 // [TODO] 0x001E2C40 AddressSpawnObject::vfunc_38 (1856 B)
 // [TODO] 0x001E33C0 sub_001E33C0 (77 B)
-// [TODO] 0x001E3410 NestSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] NestSpawnObject::vfunc_00 (0x001E3410, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// NestSpawnObject::vfunc_00 (0x001E3410, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D890[];
+
+class NestSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* NestSpawnObject::vfunc_00()
+{
+    return DAT_0043D890;
+}
+
 // [TODO] 0x001E3420 sub_001E3420 (29 B)
 // [TODO] 0x001E3440 NestSpawnObject::vfunc_04 (31 B)
 // [TODO] 0x001E3460 GangNestSpawnObject::vfunc_29 (29 B)
@@ -12333,10 +18245,54 @@
 // [TODO] 0x001E34B0 sub_001E34B0 (4 B)
 // [TODO] 0x001E34C0 NestSpawnObject::vfunc_01 (50 B)
 // [TODO] 0x001E3500 sub_001E3500 (163 B)
-// [TODO] 0x001E35B0 PersistentSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PersistentSpawnObject::vfunc_00 (0x001E35B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PersistentSpawnObject::vfunc_00 (0x001E35B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DAA0[];
+
+class PersistentSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PersistentSpawnObject::vfunc_00()
+{
+    return DAT_0043DAA0;
+}
+
 // [TODO] 0x001E35C0 PersistentSpawnObject::vfunc_43 (7 B)
 // [TODO] 0x001E35D0 sub_001E35D0 (50 B)
-// [TODO] 0x001E3610 PersistentVehicleSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PersistentVehicleSpawnObject::vfunc_00 (0x001E3610, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PersistentVehicleSpawnObject::vfunc_00 (0x001E3610, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DACC[];
+
+class PersistentVehicleSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PersistentVehicleSpawnObject::vfunc_00()
+{
+    return DAT_0043DACC;
+}
+
 // [TODO] 0x001E3620 PersistentVehicleSpawnObject::vfunc_57 (64 B)
 // [TODO] 0x001E3660 PersistentVehicleSpawnObject::vfunc_53 (74 B)
 // [TODO] 0x001E36B0 GenericSpawnObject::vfunc_01 (30 B)
@@ -12347,7 +18303,29 @@
 // [TODO] 0x001E3880 PersistentSpawnObject::vfunc_51 (228 B)
 // [TODO] 0x001E3970 sub_001E3970 (154 B)
 // [TODO] 0x001E3A10 sub_001E3A10 (106 B)
-// [TODO] 0x001E3A80 PickupSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PickupSpawnObject::vfunc_00 (0x001E3A80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PickupSpawnObject::vfunc_00 (0x001E3A80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D864[];
+
+class PickupSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PickupSpawnObject::vfunc_00()
+{
+    return DAT_0043D864;
+}
+
 // [TODO] 0x001E3A90 PickupSpawnObject::vfunc_39 (9 B)
 // [TODO] 0x001E3AA0 sub_001E3AA0 (53 B)
 // [TODO] 0x001E3AE0 PickupSpawnObject::vfunc_01 (79 B)
@@ -12369,7 +18347,29 @@
 // [TODO] 0x001E42E0 sub_001E42E0 (101 B)
 // [TODO] 0x001E4350 sub_001E4350 (145 B)
 // [TODO] 0x001E43F0 sub_001E43F0 (178 B)
-// [TODO] 0x001E44B0 PropSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] PropSpawnObject::vfunc_00 (0x001E44B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// PropSpawnObject::vfunc_00 (0x001E44B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043C2B0[];
+
+class PropSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* PropSpawnObject::vfunc_00()
+{
+    return DAT_0043C2B0;
+}
+
 // [TODO] 0x001E44C0 sub_001E44C0 (235 B)
 // [TODO] 0x001E45B0 sub_001E45B0 (140 B)
 // [TODO] 0x001E4650 PropSpawnObject::vfunc_41 (100 B)
@@ -12381,20 +18381,86 @@
 // [TODO] 0x001E4920 sub_001E4920 (214 B)
 // [TODO] 0x001E4A00 PropSpawnObject::vfunc_01 (30 B)
 // [TODO] 0x001E4A20 PropSpawnObject::vfunc_04 (154 B)
-// [TODO] 0x001E4AC0 RaceSpawner::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] RaceSpawner::vfunc_00 (0x001E4AC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// RaceSpawner::vfunc_00 (0x001E4AC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D998[];
+
+class RaceSpawner
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* RaceSpawner::vfunc_00()
+{
+    return DAT_0043D998;
+}
+
 // [TODO] 0x001E4AD0 sub_001E4AD0 (134 B)
 // [TODO] 0x001E4B60 RaceSpawner::vfunc_01 (36 B)
 // [TODO] 0x001E4B90 RaceSpawner::vfunc_56 (203 B)
 // [TODO] 0x001E4C60 RaceSpawner::vfunc_50 (1083 B)
 // [TODO] 0x001E50A0 sub_001E50A0 (43 B)
-// [TODO] 0x001E50D0 ResourceLoader::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ResourceLoader::vfunc_00 (0x001E50D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ResourceLoader::vfunc_00 (0x001E50D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DBA8[];
+
+class ResourceLoader
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ResourceLoader::vfunc_00()
+{
+    return DAT_0043DBA8;
+}
+
 // [TODO] 0x001E50E0 ResourceLoader::vfunc_42 (40 B)
 // [TODO] 0x001E5110 sub_001E5110 (70 B)
 // [TODO] 0x001E5160 ResourceLoader::vfunc_37 (63 B)
 // [TODO] 0x001E51A0 ResourceLoader::vfunc_38 (120 B)
 // [TODO] 0x001E5250 ResourceLoader::vfunc_01 (30 B)
 // [TODO] 0x001E5270 sub_001E5270 (142 B)
-// [TODO] 0x001E5300 ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_00 (0x001E5300, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_00 (0x001E5300, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DA74[];
+
+class ScatteredEnemyCharacterGeneratorSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_00()
+{
+    return DAT_0043DA74;
+}
+
 // [TODO] 0x001E5310 ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_39 (9 B)
 // [TODO] 0x001E5320 ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_42 (56 B)
 // [TODO] 0x001E5370 sub_001E5370 (91 B)
@@ -12500,16 +18566,82 @@
 // [TODO] 0x001EA230 sub_001EA230 (189 B)
 // [TODO] 0x001EA2F0 sub_001EA2F0 (367 B)
 // [TODO] 0x001EA460 sub_001EA460 (120 B)
-// [TODO] 0x001EA4E0 SpawnTemplateGroup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SpawnTemplateGroup::vfunc_00 (0x001EA4E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SpawnTemplateGroup::vfunc_00 (0x001EA4E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DBD4[];
+
+class SpawnTemplateGroup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SpawnTemplateGroup::vfunc_00()
+{
+    return DAT_0043DBD4;
+}
+
 // [TODO] 0x001EA530 SpawnTemplateGroup::vfunc_01 (57 B)
 // [TODO] 0x001EA570 sub_001EA570 (39 B)
-// [TODO] 0x001EA5A0 SpawnTriggerObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SpawnTriggerObject::vfunc_00 (0x001EA5A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SpawnTriggerObject::vfunc_00 (0x001EA5A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DC2C[];
+
+class SpawnTriggerObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SpawnTriggerObject::vfunc_00()
+{
+    return DAT_0043DC2C;
+}
+
 // [TODO] 0x001EA5B0 sub_001EA5B0 (50 B)
 // [TODO] 0x001EA5F0 SpawnTriggerObject::vfunc_04 (323 B)
 // [TODO] 0x001EA730 sub_001EA730 (3 B)
 // [TODO] 0x001EA740 SpawnTriggerObject::vfunc_01 (70 B)
 // [TODO] 0x001EA790 sub_001EA790 (100 B)
-// [TODO] 0x001EA800 TriggeredSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TriggeredSpawnObject::vfunc_00 (0x001EA800, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TriggeredSpawnObject::vfunc_00 (0x001EA800, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DA1C[];
+
+class TriggeredSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TriggeredSpawnObject::vfunc_00()
+{
+    return DAT_0043DA1C;
+}
+
 // [TODO] 0x001EA810 TriggeredSpawnObject::vfunc_51 (9 B)
 // [TODO] 0x001EA820 TriggeredSpawnObject::vfunc_56 (44 B)
 // [TODO] 0x001EA860 TriggeredSpawnObject::vfunc_39 (35 B)
@@ -12527,11 +18659,55 @@
 // [TODO] 0x001EAD30 VehicleSpawnObject::vfunc_56 (43 B)
 // [TODO] 0x001EAD60 sub_001EAD60 (87 B)
 // [TODO] 0x001EADC0 sub_001EADC0 (206 B)
-// [TODO] 0x001EAE90 VehicleSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleSpawnObject::vfunc_00 (0x001EAE90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleSpawnObject::vfunc_00 (0x001EAE90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DC00[];
+
+class VehicleSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleSpawnObject::vfunc_00()
+{
+    return DAT_0043DC00;
+}
+
 // [TODO] 0x001EAEA0 VehicleSpawnObject::vfunc_43 (7 B)
 // [TODO] 0x001EAED0 VehicleSpawnObject::vfunc_01 (65 B)
 // [TODO] 0x001EAF20 sub_001EAF20 (168 B)
-// [TODO] 0x001EAFD0 WorldAmbienceSpawnObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WorldAmbienceSpawnObject::vfunc_00 (0x001EAFD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WorldAmbienceSpawnObject::vfunc_00 (0x001EAFD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043D914[];
+
+class WorldAmbienceSpawnObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WorldAmbienceSpawnObject::vfunc_00()
+{
+    return DAT_0043D914;
+}
+
 // [TODO] 0x001EAFE0 WorldAmbienceSpawnObject::vfunc_46 (12 B)
 // [TODO] 0x001EAFF0 WorldAmbienceSpawnObject::vfunc_47 (12 B)
 // [TODO] 0x001EB000 WorldAmbienceSpawnObject::vfunc_04 (53 B)
@@ -12550,7 +18726,29 @@
 // [TODO] 0x001EB8E0 WorldAmbienceSpawnObject::vfunc_01 (85 B)
 // [TODO] 0x001EB940 ExplosionObject::vfunc_08 (42 B)
 // [TODO] 0x001EB970 sub_001EB970 (145 B)
-// [TODO] 0x001EBA10 ExplosionObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ExplosionObject::vfunc_00 (0x001EBA10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ExplosionObject::vfunc_00 (0x001EBA10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043DF28[];
+
+class ExplosionObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ExplosionObject::vfunc_00()
+{
+    return DAT_0043DF28;
+}
+
 // [TODO] 0x001EBA20 sub_001EBA20 (87 B)
 // [TODO] 0x001EBA80 sub_001EBA80 (248 B)
 // [TODO] 0x001EBB80 ExplosionObject::vfunc_01 (30 B)
@@ -12559,21 +18757,87 @@
 // [TODO] 0x001EBBF0 ExplosionObject::vfunc_32 (29 B)
 // [TODO] 0x001EBC40 sub_001EBC40 (87 B)
 // [TODO] 0x001EBCA0 sub_001EBCA0 (115 B)
-// [TODO] 0x001EBD20 GameObjectMover::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GameObjectMover::vfunc_00 (0x001EBD20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameObjectMover::vfunc_00 (0x001EBD20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E0E4[];
+
+class GameObjectMover
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* GameObjectMover::vfunc_00()
+{
+    return DAT_0043E0E4;
+}
+
 // [TODO] 0x001EBD40 sub_001EBD40 (21 B)
 // [TODO] 0x001EBD90 sub_001EBD90 (250 B)
 // [TODO] 0x001EBE90 GameObjectMover::vfunc_01 (67 B)
 // [TODO] 0x001EBEE0 GameObjectMover::vfunc_09 (892 B)
 // [TODO] 0x001EC410 sub_001EC410 (334 B)
 // [TODO] 0x001EC600 sub_001EC600 (42 B)
-// [TODO] 0x001EC630 MeleeWeaponStateProp::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MeleeWeaponStateProp::vfunc_00 (0x001EC630, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MeleeWeaponStateProp::vfunc_00 (0x001EC630, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043EA88[];
+
+class MeleeWeaponStateProp
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MeleeWeaponStateProp::vfunc_00()
+{
+    return DAT_0043EA88;
+}
+
 // [TODO] 0x001EC640 MeleeWeaponStateProp::vfunc_72 (49 B)
 // [TODO] 0x001EC680 MeleeWeaponStateProp::vfunc_04 (5 B)
 // [TODO] 0x001EC690 MeleeWeaponStateProp::vfunc_01 (46 B)
 // [TODO] 0x001EC6C0 MortarObject::vfunc_05 (57 B)
 // [TODO] 0x001EC700 MortarObject::vfunc_64 (47 B)
 // [TODO] 0x001EC730 sub_001EC730 (133 B)
-// [TODO] 0x001EC7C0 MortarObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MortarObject::vfunc_00 (0x001EC7C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MortarObject::vfunc_00 (0x001EC7C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E4C8[];
+
+class MortarObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MortarObject::vfunc_00()
+{
+    return DAT_0043E4C8;
+}
+
 // [TODO] 0x001EC7D0 MortarObject::vfunc_04 (87 B)
 // [TODO] 0x001EC830 sub_001EC830 (216 B)
 // [TODO] 0x001EC910 sub_001EC910 (11 B)
@@ -12631,9 +18895,53 @@
 // [TODO] 0x001EEC30 ConcreteClassRep<MountedWeaponStateProp>::vfunc_01 (45 B)
 // [TODO] 0x001EEC60 ConcreteClassRep<MountedWeaponStateProp>::vfunc_02 (26 B)
 // [TODO] 0x001EEC80 sub_001EEC80 (42 B)
-// [TODO] 0x001EECB0 StatePropBehaviourTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StatePropBehaviourTemplate::vfunc_00 (0x001EECB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropBehaviourTemplate::vfunc_00 (0x001EECB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E150[];
+
+class StatePropBehaviourTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StatePropBehaviourTemplate::vfunc_00()
+{
+    return DAT_0043E150;
+}
+
 // [TODO] 0x001EECC0 StatePropDynamicBehaviourProvider::vfunc_00 (31 B)
-// [TODO] 0x001EECE0 StatePropAttachmentObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StatePropAttachmentObject::vfunc_00 (0x001EECE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropAttachmentObject::vfunc_00 (0x001EECE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E49C[];
+
+class StatePropAttachmentObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StatePropAttachmentObject::vfunc_00()
+{
+    return DAT_0043E49C;
+}
+
 // [TODO] 0x001EECF0 StatePropObject::vfunc_64 (64 B)
 // [TODO] 0x001EED30 MeleeWeaponStateProp::vfunc_03 (34 B)
 // [TODO] 0x001EED60 MeleeWeaponStateProp::vfunc_06 (34 B)
@@ -12726,13 +19034,79 @@
 // [TODO] 0x001F1ED0 sub_001F1ED0 (260 B)
 // [TODO] 0x001F1FE0 StatePropDragBehaviour::vfunc_00 (36 B)
 // [TODO] 0x001F2010 StatePropWaterCollisionBehaviour::vfunc_02 (18 B)
-// [TODO] 0x001F2030 StatePropWaterCollisionTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StatePropWaterCollisionTemplate::vfunc_00 (0x001F2030, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropWaterCollisionTemplate::vfunc_00 (0x001F2030, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E714[];
+
+class StatePropWaterCollisionTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StatePropWaterCollisionTemplate::vfunc_00()
+{
+    return DAT_0043E714;
+}
+
 // [TODO] 0x001F2040 sub_001F2040 (40 B)
-// [TODO] 0x001F2070 StatePropDragTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StatePropDragTemplate::vfunc_00 (0x001F2070, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropDragTemplate::vfunc_00 (0x001F2070, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E740[];
+
+class StatePropDragTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StatePropDragTemplate::vfunc_00()
+{
+    return DAT_0043E740;
+}
+
 // [TODO] 0x001F2080 StatePropDragTemplate::vfunc_29 (91 B)
 // [TODO] 0x001F20E0 StatePropSnapToWaterBehaviour::vfunc_00 (36 B)
 // [TODO] 0x001F2110 sub_001F2110 (40 B)
-// [TODO] 0x001F2140 StatePropSnapToWaterTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StatePropSnapToWaterTemplate::vfunc_00 (0x001F2140, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropSnapToWaterTemplate::vfunc_00 (0x001F2140, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E76C[];
+
+class StatePropSnapToWaterTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StatePropSnapToWaterTemplate::vfunc_00()
+{
+    return DAT_0043E76C;
+}
+
 // [TODO] 0x001F2150 StatePropSnapToWaterTemplate::vfunc_29 (99 B)
 // [TODO] 0x001F21C0 StatePropWaterCollisionBehaviour::vfunc_00 (36 B)
 // [TODO] 0x001F21F0 StatePropWaterCollisionTemplate::vfunc_01 (36 B)
@@ -12744,14 +19118,58 @@
 // [TODO] 0x001F2570 sub_001F2570 (58 B)
 // [TODO] 0x001F25B0 StatePropSnapToWaterBehaviour::vfunc_04 (465 B)
 // [TODO] 0x001F2790 sub_001F2790 (42 B)
-// [TODO] 0x001F27C0 VehicleWeaponStateProp::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleWeaponStateProp::vfunc_00 (0x001F27C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleWeaponStateProp::vfunc_00 (0x001F27C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E7D4[];
+
+class VehicleWeaponStateProp
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleWeaponStateProp::vfunc_00()
+{
+    return DAT_0043E7D4;
+}
+
 // [TODO] 0x001F27D0 ShotgunWeaponStateProp::vfunc_04 (5 B)
 // [TODO] 0x001F27E0 M16MortarWeaponStateProp::vfunc_72 (5 B)
 // [TODO] 0x001F27F0 VehicleWeaponStateProp::vfunc_73 (5 B)
 // [TODO] 0x001F2800 VehicleWeaponStateProp::vfunc_01 (46 B)
 // [TODO] 0x001F2830 sub_001F2830 (87 B)
 // [TODO] 0x001F2890 sub_001F2890 (74 B)
-// [TODO] 0x001F28E0 WeaponPickup::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WeaponPickup::vfunc_00 (0x001F28E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WeaponPickup::vfunc_00 (0x001F28E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043E818[];
+
+class WeaponPickup
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WeaponPickup::vfunc_00()
+{
+    return DAT_0043E818;
+}
+
 // [TODO] 0x001F28F0 StatePropObject::vfunc_01 (30 B)
 // [TODO] 0x001F2910 WeaponPickup::vfunc_13 (104 B)
 // [TODO] 0x001F2980 sub_001F2980 (16 B)
@@ -12802,7 +19220,29 @@
 // [TODO] 0x001F34A0 sub_001F34A0 (56 B)
 // [TODO] 0x001F34E0 sub_001F34E0 (56 B)
 // [TODO] 0x001F3520 sub_001F3520 (88 B)
-// [TODO] 0x001F3580 MountedWeaponStateProp::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MountedWeaponStateProp::vfunc_00 (0x001F3580, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MountedWeaponStateProp::vfunc_00 (0x001F3580, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043EAB4[];
+
+class MountedWeaponStateProp
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MountedWeaponStateProp::vfunc_00()
+{
+    return DAT_0043EAB4;
+}
+
 // [TODO] 0x001F3590 MountedWeaponStateProp::vfunc_04 (131 B)
 // [TODO] 0x001F3640 sub_001F3640 (141 B)
 // [TODO] 0x001F36D0 sub_001F36D0 (472 B)
@@ -12847,7 +19287,29 @@
 // [TODO] 0x001F61B0 ConcreteClassRep<TargetingHUDUpdater>::vfunc_02 (36 B)
 // [TODO] 0x001F61E0 ConcreteClassRep<Targeting>::vfunc_01 (45 B)
 // [TODO] 0x001F6210 ConcreteClassRep<Targeting>::vfunc_02 (36 B)
-// [TODO] 0x001F6240 Targeting::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] Targeting::vfunc_00 (0x001F6240, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// Targeting::vfunc_00 (0x001F6240, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043EFAC[];
+
+class Targeting
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* Targeting::vfunc_00()
+{
+    return DAT_0043EFAC;
+}
+
 // [TODO] 0x001F6250 Targeting::vfunc_09 (46 B)
 // [TODO] 0x001F6280 sub_001F6280 (64 B)
 // [TODO] 0x001F62C0 sub_001F62C0 (7 B)
@@ -12891,7 +19353,29 @@
 // [TODO] 0x001F84D0 sub_001F84D0 (40 B)
 // [TODO] 0x001F8500 sub_001F8500 (40 B)
 // [TODO] 0x001F8530 sub_001F8530 (40 B)
-// [TODO] 0x001F8560 TargetingHUDUpdater::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TargetingHUDUpdater::vfunc_00 (0x001F8560, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TargetingHUDUpdater::vfunc_00 (0x001F8560, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043EFD8[];
+
+class TargetingHUDUpdater
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TargetingHUDUpdater::vfunc_00()
+{
+    return DAT_0043EFD8;
+}
+
 // [TODO] 0x001F8570 sub_001F8570 (5 B)
 // [TODO] 0x001F8580 sub_001F8580 (39 B)
 // [TODO] 0x001F85B0 sub_001F85B0 (409 B)
@@ -12930,35 +19414,211 @@
 // [TODO] 0x001FA770 sub_001FA770 (228 B)
 // [TODO] 0x001FA860 sub_001FA860 (730 B)
 // [TODO] 0x001FAB40 sub_001FAB40 (803 B)
-// [TODO] 0x001FAE70 CharacterTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CharacterTemplate::vfunc_00 (0x001FAE70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterTemplate::vfunc_00 (0x001FAE70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FA28[];
+
+class CharacterTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CharacterTemplate::vfunc_00()
+{
+    return DAT_0043FA28;
+}
+
 // [TODO] 0x001FAE80 CharacterTemplate::vfunc_04 (43 B)
 // [TODO] 0x001FAEB0 CharacterTemplate::vfunc_11 (18 B)
 // [TODO] 0x001FAED0 sub_001FAED0 (40 B)
-// [TODO] 0x001FAF00 CharacterTunablesObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CharacterTunablesObject::vfunc_00 (0x001FAF00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterTunablesObject::vfunc_00 (0x001FAF00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FAD8[];
+
+class CharacterTunablesObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CharacterTunablesObject::vfunc_00()
+{
+    return DAT_0043FAD8;
+}
+
 // [TODO] 0x001FAF10 sub_001FAF10 (279 B)
 // [TODO] 0x001FB030 sub_001FB030 (247 B)
 // [TODO] 0x001FB130 sub_001FB130 (46 B)
-// [TODO] 0x001FB160 MainCharacterTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MainCharacterTemplate::vfunc_00 (0x001FB160, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MainCharacterTemplate::vfunc_00 (0x001FB160, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FA54[];
+
+class MainCharacterTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MainCharacterTemplate::vfunc_00()
+{
+    return DAT_0043FA54;
+}
+
 // [TODO] 0x001FB170 CharacterTemplate::vfunc_01 (46 B)
 // [TODO] 0x001FB1A0 sub_001FB1A0 (61 B)
-// [TODO] 0x001FB1E0 CharacterFightTreeTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CharacterFightTreeTemplate::vfunc_00 (0x001FB1E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterFightTreeTemplate::vfunc_00 (0x001FB1E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FA80[];
+
+class CharacterFightTreeTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CharacterFightTreeTemplate::vfunc_00()
+{
+    return DAT_0043FA80;
+}
+
 // [TODO] 0x001FB1F0 CharacterFightTreeTemplate::vfunc_11 (14 B)
 // [TODO] 0x001FB200 sub_001FB200 (46 B)
-// [TODO] 0x001FB230 CharacterDynamicAnimationTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CharacterDynamicAnimationTemplate::vfunc_00 (0x001FB230, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterDynamicAnimationTemplate::vfunc_00 (0x001FB230, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FAAC[];
+
+class CharacterDynamicAnimationTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CharacterDynamicAnimationTemplate::vfunc_00()
+{
+    return DAT_0043FAAC;
+}
+
 // [TODO] 0x001FB240 CharacterDynamicAnimationTemplate::vfunc_11 (19 B)
 // [TODO] 0x001FB260 CharacterTunablesObject::vfunc_01 (46 B)
 // [TODO] 0x001FB290 sub_001FB290 (595 B)
-// [TODO] 0x001FB4F0 CharacterSpeedsObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CharacterSpeedsObject::vfunc_00 (0x001FB4F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterSpeedsObject::vfunc_00 (0x001FB4F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FB04[];
+
+class CharacterSpeedsObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CharacterSpeedsObject::vfunc_00()
+{
+    return DAT_0043FB04;
+}
+
 // [TODO] 0x001FB500 CharacterFightTreeTemplate::vfunc_01 (50 B)
 // [TODO] 0x001FB540 CharacterTemplate::vfunc_10 (169 B)
 // [TODO] 0x001FB5F0 CharacterFightTreeTemplate::vfunc_10 (104 B)
 // [TODO] 0x001FB660 CharacterDynamicAnimationTemplate::vfunc_10 (57 B)
 // [TODO] 0x001FB6A0 sub_001FB6A0 (118 B)
-// [TODO] 0x001FB720 EffectsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] EffectsTemplate::vfunc_00 (0x001FB720, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// EffectsTemplate::vfunc_00 (0x001FB720, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FCE8[];
+
+class EffectsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* EffectsTemplate::vfunc_00()
+{
+    return DAT_0043FCE8;
+}
+
 // [TODO] 0x001FB730 EffectsTemplate::vfunc_10 (536 B)
 // [TODO] 0x001FB950 EffectsTemplate::vfunc_11 (279 B)
 // [TODO] 0x001FBA70 sub_001FBA70 (88 B)
-// [TODO] 0x001FBAD0 ExplosionTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ExplosionTemplate::vfunc_00 (0x001FBAD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ExplosionTemplate::vfunc_00 (0x001FBAD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FD90[];
+
+class ExplosionTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ExplosionTemplate::vfunc_00()
+{
+    return DAT_0043FD90;
+}
+
 // [TODO] 0x001FBAE0 sub_001FBAE0 (164 B)
 // [TODO] 0x001FBB90 sub_001FBB90 (165 B)
 // [TODO] 0x001FBC40 ExplosionTemplate::vfunc_01 (52 B)
@@ -12967,23 +19627,133 @@
 // [TODO] 0x001FBE20 ExplosionTemplate::vfunc_04 (46 B)
 // [TODO] 0x001FBE50 ExplosionTemplate::vfunc_10 (69 B)
 // [TODO] 0x001FBEA0 sub_001FBEA0 (52 B)
-// [TODO] 0x001FBEE0 LightingTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LightingTemplate::vfunc_00 (0x001FBEE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LightingTemplate::vfunc_00 (0x001FBEE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0043FF94[];
+
+class LightingTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LightingTemplate::vfunc_00()
+{
+    return DAT_0043FF94;
+}
+
 // [TODO] 0x001FBEF0 sub_001FBEF0 (97 B)
-// [TODO] 0x001FBF60 MortarTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MortarTemplate::vfunc_00 (0x001FBF60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MortarTemplate::vfunc_00 (0x001FBF60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004400A0[];
+
+class MortarTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MortarTemplate::vfunc_00()
+{
+    return DAT_004400A0;
+}
+
 // [TODO] 0x001FBF70 sub_001FBF70 (275 B)
 // [TODO] 0x001FC090 MortarTemplate::vfunc_01 (36 B)
 // [TODO] 0x001FC0C0 sub_001FC0C0 (50 B)
-// [TODO] 0x001FC100 ParticleEffectTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ParticleEffectTemplate::vfunc_00 (0x001FC100, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ParticleEffectTemplate::vfunc_00 (0x001FC100, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00440180[];
+
+class ParticleEffectTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ParticleEffectTemplate::vfunc_00()
+{
+    return DAT_00440180;
+}
+
 // [TODO] 0x001FC110 ParticleEffectTemplate::vfunc_10 (20 B)
 // [TODO] 0x001FC130 ParticleEffectTemplate::vfunc_11 (17 B)
 // [TODO] 0x001FC150 sub_001FC150 (50 B)
-// [TODO] 0x001FC190 SkidmarkTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SkidmarkTemplate::vfunc_00 (0x001FC190, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SkidmarkTemplate::vfunc_00 (0x001FC190, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004401AC[];
+
+class SkidmarkTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SkidmarkTemplate::vfunc_00()
+{
+    return DAT_004401AC;
+}
+
 // [TODO] 0x001FC1A0 SkidmarkTemplate::vfunc_10 (20 B)
 // [TODO] 0x001FC1C0 SkidmarkTemplate::vfunc_11 (17 B)
 // [TODO] 0x001FC1E0 ParticleEffectTemplate::vfunc_01 (52 B)
 // [TODO] 0x001FC220 SkidmarkTemplate::vfunc_01 (52 B)
 // [TODO] 0x001FC260 sub_001FC260 (55 B)
-// [TODO] 0x001FC2A0 RainTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] RainTemplate::vfunc_00 (0x001FC2A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// RainTemplate::vfunc_00 (0x001FC2A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00440258[];
+
+class RainTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* RainTemplate::vfunc_00()
+{
+    return DAT_00440258;
+}
+
 // [TODO] 0x001FCC80 ConcreteClassRep<CharacterTemplate>::vfunc_01 (45 B)
 // [TODO] 0x001FCCB0 ConcreteClassRep<CharacterTemplate>::vfunc_02 (36 B)
 // [TODO] 0x001FCCE0 ConcreteClassRep<MainCharacterTemplate>::vfunc_01 (45 B)
@@ -13028,31 +19798,185 @@
 // [TODO] 0x001FEC50 ConcreteClassRep<WeaponTemplate>::vfunc_01 (45 B)
 // [TODO] 0x001FEC80 ConcreteClassRep<WeaponTemplate>::vfunc_02 (36 B)
 // [TODO] 0x001FECB0 sub_001FECB0 (49 B)
-// [TODO] 0x001FECF0 SkyTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SkyTemplate::vfunc_00 (0x001FECF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SkyTemplate::vfunc_00 (0x001FECF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004402D0[];
+
+class SkyTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SkyTemplate::vfunc_00()
+{
+    return DAT_004402D0;
+}
+
 // [TODO] 0x001FED00 sub_001FED00 (57 B)
-// [TODO] 0x001FED40 SpeedDataTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SpeedDataTemplate::vfunc_00 (0x001FED40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// SpeedDataTemplate::vfunc_00 (0x001FED40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044042C[];
+
+class SpeedDataTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* SpeedDataTemplate::vfunc_00()
+{
+    return DAT_0044042C;
+}
+
 // [TODO] 0x001FED50 sub_001FED50 (55 B)
-// [TODO] 0x001FED90 TraceFireTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TraceFireTemplate::vfunc_00 (0x001FED90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TraceFireTemplate::vfunc_00 (0x001FED90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004404BC[];
+
+class TraceFireTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TraceFireTemplate::vfunc_00()
+{
+    return DAT_004404BC;
+}
+
 // [TODO] 0x001FEDA0 TraceFireTemplate::vfunc_10 (34 B)
 // [TODO] 0x001FEDD0 sub_001FEDD0 (86 B)
-// [TODO] 0x001FEE30 TrapezoidTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TrapezoidTemplate::vfunc_00 (0x001FEE30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TrapezoidTemplate::vfunc_00 (0x001FEE30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00440550[];
+
+class TrapezoidTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TrapezoidTemplate::vfunc_00()
+{
+    return DAT_00440550;
+}
+
 // [TODO] 0x001FEE40 sub_001FEE40 (96 B)
 // [TODO] 0x001FEEA0 sub_001FEEA0 (33 B)
 // [TODO] 0x001FEEC0 sub_001FEEC0 (1 B)
 // [TODO] 0x001FEED0 sub_001FEED0 (9 B)
 // [TODO] 0x001FEEE0 sub_001FEEE0 (92 B)
-// [TODO] 0x001FEF40 VibeTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VibeTemplate::vfunc_00 (0x001FEF40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VibeTemplate::vfunc_00 (0x001FEF40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00440614[];
+
+class VibeTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VibeTemplate::vfunc_00()
+{
+    return DAT_00440614;
+}
+
 // [TODO] 0x001FEF50 sub_001FEF50 (162 B)
 // [TODO] 0x001FF000 sub_001FF000 (566 B)
 // [TODO] 0x001FF240 sub_001FF240 (232 B)
 // [TODO] 0x001FF330 sub_001FF330 (56 B)
 // [TODO] 0x001FF370 sub_001FF370 (50 B)
-// [TODO] 0x001FF3B0 WakeTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WakeTemplate::vfunc_00 (0x001FF3B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WakeTemplate::vfunc_00 (0x001FF3B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00440684[];
+
+class WakeTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WakeTemplate::vfunc_00()
+{
+    return DAT_00440684;
+}
+
 // [TODO] 0x001FF3C0 WakeTemplate::vfunc_10 (13 B)
 // [TODO] 0x001FF3D0 WakeTemplate::vfunc_11 (11 B)
 // [TODO] 0x001FF3E0 sub_001FF3E0 (12 B)
 // [TODO] 0x001FF3F0 sub_001FF3F0 (113 B)
-// [TODO] 0x001FF470 WeaponDecalTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WeaponDecalTemplate::vfunc_00 (0x001FF470, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WeaponDecalTemplate::vfunc_00 (0x001FF470, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00440BA8[];
+
+class WeaponDecalTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WeaponDecalTemplate::vfunc_00()
+{
+    return DAT_00440BA8;
+}
+
 // [TODO] 0x001FF480 WeaponDecalTemplate::vfunc_10 (166 B)
 // [TODO] 0x001FF530 WeaponDecalTemplate::vfunc_11 (91 B)
 // [TODO] 0x001FF590 sub_001FF590 (181 B)
@@ -13061,57 +19985,321 @@
 // [TODO] 0x001FFA60 sub_001FFA60 (13 B)
 // [TODO] 0x001FFA70 sub_001FFA70 (13 B)
 // [TODO] 0x001FFA80 sub_001FFA80 (509 B)
-// [TODO] 0x001FFC80 WeaponTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WeaponTemplate::vfunc_00 (0x001FFC80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WeaponTemplate::vfunc_00 (0x001FFC80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00440CC8[];
+
+class WeaponTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WeaponTemplate::vfunc_00()
+{
+    return DAT_00440CC8;
+}
+
 // [TODO] 0x001FFC90 WeaponTemplate::vfunc_04 (162 B)
 // [TODO] 0x001FFD40 WeaponTemplate::vfunc_29 (454 B)
 // [TODO] 0x001FFF10 sub_001FFF10 (170 B)
 // [TODO] 0x001FFFC0 sub_001FFFC0 (58 B)
-// [TODO] 0x00200000 OceanTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] OceanTemplate::vfunc_00 (0x00200000, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// OceanTemplate::vfunc_00 (0x00200000, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004414A8[];
+
+class OceanTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* OceanTemplate::vfunc_00()
+{
+    return DAT_004414A8;
+}
+
 // [TODO] 0x00200010 Template::vfunc_11 (5 B)
 // [TODO] 0x00200020 sub_00200020 (42 B)
-// [TODO] 0x00200050 OceanTuningTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] OceanTuningTemplate::vfunc_00 (0x00200050, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// OceanTuningTemplate::vfunc_00 (0x00200050, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004415F8[];
+
+class OceanTuningTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* OceanTuningTemplate::vfunc_00()
+{
+    return DAT_004415F8;
+}
+
 // [TODO] 0x00200060 OceanTuningTemplate::vfunc_04 (53 B)
 // [TODO] 0x00200130 ConcreteClassRep<OceanTemplate>::vfunc_01 (42 B)
 // [TODO] 0x00200160 ConcreteClassRep<OceanTemplate>::vfunc_02 (36 B)
 // [TODO] 0x002002E0 ConcreteClassRep<OceanTuningTemplate>::vfunc_01 (42 B)
 // [TODO] 0x00200310 ConcreteClassRep<OceanTuningTemplate>::vfunc_02 (36 B)
-// [TODO] 0x00200340 AirplaneArtTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AirplaneArtTemplate::vfunc_00 (0x00200340, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AirplaneArtTemplate::vfunc_00 (0x00200340, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00441A00[];
+
+class AirplaneArtTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AirplaneArtTemplate::vfunc_00()
+{
+    return DAT_00441A00;
+}
+
 // [TODO] 0x00200350 AirplaneArtTemplate::vfunc_01 (36 B)
 // [TODO] 0x00200380 sub_00200380 (103 B)
 // [TODO] 0x002003F0 sub_002003F0 (57 B)
 // [TODO] 0x00200430 AirplaneArtTemplate::vfunc_04 (31 B)
 // [TODO] 0x00200450 AirplaneArtTemplate::vfunc_10 (16 B)
-// [TODO] 0x00200460 AirplanePhysicsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AirplanePhysicsTemplate::vfunc_00 (0x00200460, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AirplanePhysicsTemplate::vfunc_00 (0x00200460, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00442094[];
+
+class AirplanePhysicsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AirplanePhysicsTemplate::vfunc_00()
+{
+    return DAT_00442094;
+}
+
 // [TODO] 0x00200470 AirplanePhysicsTemplate::vfunc_01 (49 B)
 // [TODO] 0x002004B0 AirplanePhysicsTemplate::vfunc_04 (278 B)
 // [TODO] 0x002005D0 sub_002005D0 (283 B)
-// [TODO] 0x002006F0 AirplaneTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AirplaneTemplate::vfunc_00 (0x002006F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AirplaneTemplate::vfunc_00 (0x002006F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004421A8[];
+
+class AirplaneTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AirplaneTemplate::vfunc_00()
+{
+    return DAT_004421A8;
+}
+
 // [TODO] 0x00200700 VehicleDropObjectProperties::vfunc_04 (35 B)
 // [TODO] 0x00200730 AirplaneTemplate::vfunc_01 (36 B)
 // [TODO] 0x00200760 AirplaneTemplate::vfunc_04 (219 B)
 // [TODO] 0x00200840 sub_00200840 (106 B)
-// [TODO] 0x002008B0 VehicleDropObjectProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleDropObjectProperties::vfunc_00 (0x002008B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleDropObjectProperties::vfunc_00 (0x002008B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004421D4[];
+
+class VehicleDropObjectProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleDropObjectProperties::vfunc_00()
+{
+    return DAT_004421D4;
+}
+
 // [TODO] 0x002008C0 sub_002008C0 (330 B)
 // [TODO] 0x00200A10 sub_00200A10 (63 B)
 // [TODO] 0x00200A50 sub_00200A50 (136 B)
-// [TODO] 0x00200AE0 BoatAITuneablesTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatAITuneablesTemplate::vfunc_00 (0x00200AE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatAITuneablesTemplate::vfunc_00 (0x00200AE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004422F0[];
+
+class BoatAITuneablesTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatAITuneablesTemplate::vfunc_00()
+{
+    return DAT_004422F0;
+}
+
 // [TODO] 0x00200AF0 BoatAITuneablesTemplate::vfunc_01 (36 B)
 // [TODO] 0x00200B20 sub_00200B20 (207 B)
-// [TODO] 0x00200BF0 BoatArtTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatArtTemplate::vfunc_00 (0x00200BF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatArtTemplate::vfunc_00 (0x00200BF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004424D4[];
+
+class BoatArtTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatArtTemplate::vfunc_00()
+{
+    return DAT_004424D4;
+}
+
 // [TODO] 0x00200C00 RandomWaterObjectTemplate::vfunc_04 (25 B)
 // [TODO] 0x00200C20 BoatArtTemplate::vfunc_01 (36 B)
 // [TODO] 0x00200C50 sub_00200C50 (103 B)
 // [TODO] 0x00200CC0 sub_00200CC0 (50 B)
-// [TODO] 0x00200D00 RandomWaterObjectTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] RandomWaterObjectTemplate::vfunc_00 (0x00200D00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// RandomWaterObjectTemplate::vfunc_00 (0x00200D00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00442500[];
+
+class RandomWaterObjectTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* RandomWaterObjectTemplate::vfunc_00()
+{
+    return DAT_00442500;
+}
+
 // [TODO] 0x00200D10 RandomWaterObjectTemplate::vfunc_10 (20 B)
 // [TODO] 0x00200D30 RandomWaterObjectTemplate::vfunc_11 (17 B)
 // [TODO] 0x00200D50 sub_00200D50 (57 B)
 // [TODO] 0x00200D90 BoatArtTemplate::vfunc_04 (31 B)
 // [TODO] 0x00200DB0 BoatArtTemplate::vfunc_10 (16 B)
 // [TODO] 0x00200DC0 RandomWaterObjectTemplate::vfunc_01 (52 B)
-// [TODO] 0x00200E00 BoatPhysicsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatPhysicsTemplate::vfunc_00 (0x00200E00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatPhysicsTemplate::vfunc_00 (0x00200E00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00442554[];
+
+class BoatPhysicsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatPhysicsTemplate::vfunc_00()
+{
+    return DAT_00442554;
+}
+
 // [TODO] 0x00200E10 sub_00200E10 (40 B)
-// [TODO] 0x00200E40 BoatPitchClampProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatPitchClampProperties::vfunc_00 (0x00200E40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatPitchClampProperties::vfunc_00 (0x00200E40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00442580[];
+
+class BoatPitchClampProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatPitchClampProperties::vfunc_00()
+{
+    return DAT_00442580;
+}
+
 // [TODO] 0x00200E50 BoatPitchClampProperties::vfunc_04 (25 B)
 // [TODO] 0x00200E70 BoatPhysicsTemplate::vfunc_01 (36 B)
 // [TODO] 0x00200EA0 sub_00200EA0 (127 B)
@@ -13120,7 +20308,29 @@
 // [TODO] 0x00201020 sub_00201020 (299 B)
 // [TODO] 0x00201150 sub_00201150 (372 B)
 // [TODO] 0x002012D0 BoatPhysicsTemplate::vfunc_04 (24 B)
-// [TODO] 0x002012F0 BoatTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatTemplate::vfunc_00 (0x002012F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatTemplate::vfunc_00 (0x002012F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00443CE0[];
+
+class BoatTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatTemplate::vfunc_00()
+{
+    return DAT_00443CE0;
+}
+
 // [TODO] 0x00201300 BoatTemplate::vfunc_11 (29 B)
 // [TODO] 0x00201320 BoatEnginePivotProperties::vfunc_04 (131 B)
 // [TODO] 0x002013B0 BoatDamageProperties::vfunc_04 (138 B)
@@ -13128,21 +20338,131 @@
 // [TODO] 0x00201470 BoatTemplate::vfunc_04 (325 B)
 // [TODO] 0x002015C0 BoatTemplate::vfunc_10 (67 B)
 // [TODO] 0x00201610 sub_00201610 (88 B)
-// [TODO] 0x00201670 BoatEnginePivotProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatEnginePivotProperties::vfunc_00 (0x00201670, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatEnginePivotProperties::vfunc_00 (0x00201670, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00443C88[];
+
+class BoatEnginePivotProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatEnginePivotProperties::vfunc_00()
+{
+    return DAT_00443C88;
+}
+
 // [TODO] 0x00201680 sub_00201680 (57 B)
-// [TODO] 0x002016C0 BoatDamageProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatDamageProperties::vfunc_00 (0x002016C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatDamageProperties::vfunc_00 (0x002016C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00443CB4[];
+
+class BoatDamageProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatDamageProperties::vfunc_00()
+{
+    return DAT_00443CB4;
+}
+
 // [TODO] 0x002016D0 BoatDamageProperties::vfunc_01 (30 B)
 // [TODO] 0x002016F0 sub_002016F0 (63 B)
 // [TODO] 0x00201730 sub_00201730 (32 B)
-// [TODO] 0x00201750 HelicopterArtTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HelicopterArtTemplate::vfunc_00 (0x00201750, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HelicopterArtTemplate::vfunc_00 (0x00201750, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00443D48[];
+
+class HelicopterArtTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HelicopterArtTemplate::vfunc_00()
+{
+    return DAT_00443D48;
+}
+
 // [TODO] 0x00201760 HelicopterArtTemplate::vfunc_04 (5 B)
 // [TODO] 0x00201770 HelicopterArtTemplate::vfunc_01 (36 B)
 // [TODO] 0x002017A0 sub_002017A0 (76 B)
-// [TODO] 0x002017F0 HelicopterPhysicsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HelicopterPhysicsTemplate::vfunc_00 (0x002017F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HelicopterPhysicsTemplate::vfunc_00 (0x002017F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00444020[];
+
+class HelicopterPhysicsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HelicopterPhysicsTemplate::vfunc_00()
+{
+    return DAT_00444020;
+}
+
 // [TODO] 0x00201800 HelicopterPhysicsTemplate::vfunc_04 (36 B)
 // [TODO] 0x00201830 HelicopterPhysicsTemplate::vfunc_01 (36 B)
 // [TODO] 0x00201860 sub_00201860 (43 B)
-// [TODO] 0x00201890 HelicopterTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HelicopterTemplate::vfunc_00 (0x00201890, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HelicopterTemplate::vfunc_00 (0x00201890, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00444084[];
+
+class HelicopterTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HelicopterTemplate::vfunc_00()
+{
+    return DAT_00444084;
+}
+
 // [TODO] 0x002018A0 HelicopterTemplate::vfunc_01 (36 B)
 // [TODO] 0x002018D0 HelicopterTemplate::vfunc_04 (89 B)
 // [TODO] 0x00201930 ConcreteClassRep<AirplaneArtTemplate>::vfunc_01 (45 B)
@@ -13280,7 +20600,29 @@
 // [TODO] 0x0020BD50 ConcreteClassRep<WheeledVehiclePhysicsTemplate>::vfunc_02 (36 B)
 // [TODO] 0x0020BD80 ConcreteClassRep<FourWheelerPhysicsTemplate>::vfunc_02 (36 B)
 // [TODO] 0x0020BDB0 ConcreteClassRep<FourWheelerPhysicsTemplate>::vfunc_01 (68 B)
-// [TODO] 0x0020BE00 FourWheelerPhysicsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] FourWheelerPhysicsTemplate::vfunc_00 (0x0020BE00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// FourWheelerPhysicsTemplate::vfunc_00 (0x0020BE00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044AC60[];
+
+class FourWheelerPhysicsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* FourWheelerPhysicsTemplate::vfunc_00()
+{
+    return DAT_0044AC60;
+}
+
 // [TODO] 0x0020BE10 FourWheelerPhysicsTemplate::vfunc_01 (22 B)
 // [TODO] 0x0020BE30 ConcreteWheeledVehiclePhysicsTemplate<4>::vfunc_00 (6 B)
 // [TODO] 0x0020BE40 FourWheelerPhysicsTemplate::vfunc_01 (46 B)
@@ -13301,14 +20643,102 @@
 // [TODO] 0x0020C400 ConcreteClassRep<WheeledVehicleTemplate>::vfunc_02 (64 B)
 // [TODO] 0x0020C440 FEGroupObject::vfunc_04 (5 B)
 // [TODO] 0x0020C450 sub_0020C450 (42 B)
-// [TODO] 0x0020C480 VehicleAITuneablesTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleAITuneablesTemplate::vfunc_00 (0x0020C480, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleAITuneablesTemplate::vfunc_00 (0x0020C480, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004440F0[];
+
+class VehicleAITuneablesTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleAITuneablesTemplate::vfunc_00()
+{
+    return DAT_004440F0;
+}
+
 // [TODO] 0x0020C490 sub_0020C490 (11 B)
 // [TODO] 0x0020C4A0 sub_0020C4A0 (50 B)
-// [TODO] 0x0020C4E0 VehicleShaderProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleShaderProperties::vfunc_00 (0x0020C4E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleShaderProperties::vfunc_00 (0x0020C4E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00444558[];
+
+class VehicleShaderProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleShaderProperties::vfunc_00()
+{
+    return DAT_00444558;
+}
+
 // [TODO] 0x0020C4F0 sub_0020C4F0 (40 B)
-// [TODO] 0x0020C520 VehicleTargetingLocatorProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleTargetingLocatorProperties::vfunc_00 (0x0020C520, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleTargetingLocatorProperties::vfunc_00 (0x0020C520, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004445B0[];
+
+class VehicleTargetingLocatorProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleTargetingLocatorProperties::vfunc_00()
+{
+    return DAT_004445B0;
+}
+
 // [TODO] 0x0020C530 sub_0020C530 (39 B)
-// [TODO] 0x0020C560 VehicleArtTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleArtTemplate::vfunc_00 (0x0020C560, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleArtTemplate::vfunc_00 (0x0020C560, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00444584[];
+
+class VehicleArtTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleArtTemplate::vfunc_00()
+{
+    return DAT_00444584;
+}
+
 // [TODO] 0x0020C570 sub_0020C570 (257 B)
 // [TODO] 0x0020C680 sub_0020C680 (143 B)
 // [TODO] 0x0020C710 VehicleTargetingLocatorProperties::vfunc_01 (36 B)
@@ -13319,30 +20749,228 @@
 // [TODO] 0x0020CA60 AirplaneArtTemplate::vfunc_11 (14 B)
 // [TODO] 0x0020CA70 VehicleCharacterEntryTemplate::vfunc_04 (25 B)
 // [TODO] 0x0020CA90 sub_0020CA90 (40 B)
-// [TODO] 0x0020CAC0 VehicleDamageTransmitProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleDamageTransmitProperties::vfunc_00 (0x0020CAC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleDamageTransmitProperties::vfunc_00 (0x0020CAC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004446C0[];
+
+class VehicleDamageTransmitProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleDamageTransmitProperties::vfunc_00()
+{
+    return DAT_004446C0;
+}
+
 // [TODO] 0x0020CAD0 sub_0020CAD0 (40 B)
-// [TODO] 0x0020CB00 VehicleDamagePropagationProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleDamagePropagationProperties::vfunc_00 (0x0020CB00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleDamagePropagationProperties::vfunc_00 (0x0020CB00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004446EC[];
+
+class VehicleDamagePropagationProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleDamagePropagationProperties::vfunc_00()
+{
+    return DAT_004446EC;
+}
+
 // [TODO] 0x0020CB10 VehicleDamagePropagationProperties::vfunc_04 (25 B)
 // [TODO] 0x0020CB30 sub_0020CB30 (42 B)
-// [TODO] 0x0020CB60 VehicleBehaviourTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleBehaviourTemplate::vfunc_00 (0x0020CB60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleBehaviourTemplate::vfunc_00 (0x0020CB60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00444668[];
+
+class VehicleBehaviourTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleBehaviourTemplate::vfunc_00()
+{
+    return DAT_00444668;
+}
+
 // [TODO] 0x0020CB70 sub_0020CB70 (50 B)
-// [TODO] 0x0020CBB0 VehicleCharacterEntryTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleCharacterEntryTemplate::vfunc_00 (0x0020CBB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleCharacterEntryTemplate::vfunc_00 (0x0020CBB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00444694[];
+
+class VehicleCharacterEntryTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleCharacterEntryTemplate::vfunc_00()
+{
+    return DAT_00444694;
+}
+
 // [TODO] 0x0020CBC0 VehicleDamageTransmitProperties::vfunc_01 (46 B)
 // [TODO] 0x0020CBF0 VehicleDamagePropagationProperties::vfunc_01 (46 B)
 // [TODO] 0x0020CC20 Template::vfunc_01 (36 B)
 // [TODO] 0x0020CC50 sub_0020CC50 (40 B)
-// [TODO] 0x0020CC80 VehicleMaterialProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleMaterialProperties::vfunc_00 (0x0020CC80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleMaterialProperties::vfunc_00 (0x0020CC80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00445C6C[];
+
+class VehicleMaterialProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleMaterialProperties::vfunc_00()
+{
+    return DAT_00445C6C;
+}
+
 // [TODO] 0x0020CC90 VehicleMaterialProperties::vfunc_04 (25 B)
 // [TODO] 0x0020CCB0 sub_0020CCB0 (40 B)
-// [TODO] 0x0020CCE0 VehicleSimpleThrustProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleSimpleThrustProperties::vfunc_00 (0x0020CCE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleSimpleThrustProperties::vfunc_00 (0x0020CCE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00445C98[];
+
+class VehicleSimpleThrustProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleSimpleThrustProperties::vfunc_00()
+{
+    return DAT_00445C98;
+}
+
 // [TODO] 0x0020CCF0 VehicleSimpleThrustProperties::vfunc_04 (25 B)
 // [TODO] 0x0020CD10 sub_0020CD10 (40 B)
-// [TODO] 0x0020CD40 VehicleDestroyPhysicsProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleDestroyPhysicsProperties::vfunc_00 (0x0020CD40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleDestroyPhysicsProperties::vfunc_00 (0x0020CD40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00445CC4[];
+
+class VehicleDestroyPhysicsProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleDestroyPhysicsProperties::vfunc_00()
+{
+    return DAT_00445CC4;
+}
+
 // [TODO] 0x0020CD50 sub_0020CD50 (40 B)
-// [TODO] 0x0020CD80 VehicleSuspensionProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleSuspensionProperties::vfunc_00 (0x0020CD80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleSuspensionProperties::vfunc_00 (0x0020CD80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00445CF0[];
+
+class VehicleSuspensionProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleSuspensionProperties::vfunc_00()
+{
+    return DAT_00445CF0;
+}
+
 // [TODO] 0x0020CD90 VehicleSuspensionProperties::vfunc_04 (25 B)
 // [TODO] 0x0020CDC0 sub_0020CDC0 (40 B)
-// [TODO] 0x0020CDF0 VehicleSinkingProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleSinkingProperties::vfunc_00 (0x0020CDF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleSinkingProperties::vfunc_00 (0x0020CDF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00445D48[];
+
+class VehicleSinkingProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleSinkingProperties::vfunc_00()
+{
+    return DAT_00445D48;
+}
+
 // [TODO] 0x0020CE00 VehicleSinkingProperties::vfunc_04 (25 B)
 // [TODO] 0x0020CE20 VehicleMaterialProperties::vfunc_01 (36 B)
 // [TODO] 0x0020CE50 VehicleSimpleThrustProperties::vfunc_01 (36 B)
@@ -13352,45 +20980,441 @@
 // [TODO] 0x0020CFB0 sub_0020CFB0 (127 B)
 // [TODO] 0x0020D030 sub_0020D030 (127 B)
 // [TODO] 0x0020D0B0 sub_0020D0B0 (93 B)
-// [TODO] 0x0020D110 VehiclePhysicsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehiclePhysicsTemplate::vfunc_00 (0x0020D110, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehiclePhysicsTemplate::vfunc_00 (0x0020D110, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00445C40[];
+
+class VehiclePhysicsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehiclePhysicsTemplate::vfunc_00()
+{
+    return DAT_00445C40;
+}
+
 // [TODO] 0x0020D120 VehiclePhysicsTemplate::vfunc_04 (94 B)
 // [TODO] 0x0020D180 sub_0020D180 (54 B)
-// [TODO] 0x0020D1C0 VehicleInterpolatedFeedbackProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleInterpolatedFeedbackProperties::vfunc_00 (0x0020D1C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleInterpolatedFeedbackProperties::vfunc_00 (0x0020D1C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00445D1C[];
+
+class VehicleInterpolatedFeedbackProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleInterpolatedFeedbackProperties::vfunc_00()
+{
+    return DAT_00445D1C;
+}
+
 // [TODO] 0x0020D1D0 VehicleInterpolatedFeedbackProperties::vfunc_04 (73 B)
 // [TODO] 0x0020D220 sub_0020D220 (54 B)
-// [TODO] 0x0020D260 VehicleInWaterProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleInWaterProperties::vfunc_00 (0x0020D260, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleInWaterProperties::vfunc_00 (0x0020D260, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00445D74[];
+
+class VehicleInWaterProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleInWaterProperties::vfunc_00()
+{
+    return DAT_00445D74;
+}
+
 // [TODO] 0x0020D270 VehicleInWaterProperties::vfunc_04 (73 B)
-// [TODO] 0x0020D2C0 VehiclePropellerTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehiclePropellerTemplate::vfunc_00 (0x0020D2C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehiclePropellerTemplate::vfunc_00 (0x0020D2C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447718[];
+
+class VehiclePropellerTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehiclePropellerTemplate::vfunc_00()
+{
+    return DAT_00447718;
+}
+
 // [TODO] 0x0020D2D0 VehiclePropellerTemplate::vfunc_31 (78 B)
 // [TODO] 0x0020D320 sub_0020D320 (40 B)
-// [TODO] 0x0020D350 AirplaneControlFeedbackTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AirplaneControlFeedbackTemplate::vfunc_00 (0x0020D350, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AirplaneControlFeedbackTemplate::vfunc_00 (0x0020D350, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447744[];
+
+class AirplaneControlFeedbackTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AirplaneControlFeedbackTemplate::vfunc_00()
+{
+    return DAT_00447744;
+}
+
 // [TODO] 0x0020D360 AirplaneControlFeedbackTemplate::vfunc_04 (25 B)
 // [TODO] 0x0020D380 AirplaneControlFeedbackTemplate::vfunc_29 (26 B)
 // [TODO] 0x0020D3A0 AirplaneControlFeedbackTemplate::vfunc_30 (8 B)
 // [TODO] 0x0020D3B0 sub_0020D3B0 (40 B)
-// [TODO] 0x0020D3E0 VehicleFlappingPhysicsProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleFlappingPhysicsProperties::vfunc_00 (0x0020D3E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleFlappingPhysicsProperties::vfunc_00 (0x0020D3E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447770[];
+
+class VehicleFlappingPhysicsProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleFlappingPhysicsProperties::vfunc_00()
+{
+    return DAT_00447770;
+}
+
 // [TODO] 0x0020D3F0 VehicleFlappingPhysicsProperties::vfunc_04 (25 B)
-// [TODO] 0x0020D410 VehicleFlappingCategoryProperties::vfunc_00 (6 B)
-// [TODO] 0x0020D420 VehicleFlappingJointProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleFlappingCategoryProperties::vfunc_00 (0x0020D410, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleFlappingCategoryProperties::vfunc_00 (0x0020D410, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044779C[];
+
+class VehicleFlappingCategoryProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleFlappingCategoryProperties::vfunc_00()
+{
+    return DAT_0044779C;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleFlappingJointProperties::vfunc_00 (0x0020D420, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleFlappingJointProperties::vfunc_00 (0x0020D420, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004477C8[];
+
+class VehicleFlappingJointProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleFlappingJointProperties::vfunc_00()
+{
+    return DAT_004477C8;
+}
+
 // [TODO] 0x0020D430 sub_0020D430 (48 B)
-// [TODO] 0x0020D460 VehicleRenderMaskTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleRenderMaskTemplate::vfunc_00 (0x0020D460, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleRenderMaskTemplate::vfunc_00 (0x0020D460, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004477F4[];
+
+class VehicleRenderMaskTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleRenderMaskTemplate::vfunc_00()
+{
+    return DAT_004477F4;
+}
+
 // [TODO] 0x0020D470 VehicleRenderMaskTemplate::vfunc_31 (78 B)
-// [TODO] 0x0020D4C0 VehicleSirenTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleSirenTemplate::vfunc_00 (0x0020D4C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleSirenTemplate::vfunc_00 (0x0020D4C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447820[];
+
+class VehicleSirenTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleSirenTemplate::vfunc_00()
+{
+    return DAT_00447820;
+}
+
 // [TODO] 0x0020D4D0 VehicleSirenTemplate::vfunc_31 (76 B)
 // [TODO] 0x0020D520 sub_0020D520 (61 B)
-// [TODO] 0x0020D560 VehicleMountedWeaponTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleMountedWeaponTemplate::vfunc_00 (0x0020D560, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleMountedWeaponTemplate::vfunc_00 (0x0020D560, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044784C[];
+
+class VehicleMountedWeaponTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleMountedWeaponTemplate::vfunc_00()
+{
+    return DAT_0044784C;
+}
+
 // [TODO] 0x0020D570 VehicleMountedWeaponTemplate::vfunc_32 (29 B)
 // [TODO] 0x0020D590 sub_0020D590 (48 B)
-// [TODO] 0x0020D5C0 VehicleFixedWeaponTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleFixedWeaponTemplate::vfunc_00 (0x0020D5C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleFixedWeaponTemplate::vfunc_00 (0x0020D5C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447878[];
+
+class VehicleFixedWeaponTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleFixedWeaponTemplate::vfunc_00()
+{
+    return DAT_00447878;
+}
+
 // [TODO] 0x0020D5D0 VehicleFixedWeaponTemplate::vfunc_32 (29 B)
 // [TODO] 0x0020D5F0 sub_0020D5F0 (40 B)
-// [TODO] 0x0020D620 VehicleZoneDamageProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleZoneDamageProperties::vfunc_00 (0x0020D620, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleZoneDamageProperties::vfunc_00 (0x0020D620, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004478A4[];
+
+class VehicleZoneDamageProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleZoneDamageProperties::vfunc_00()
+{
+    return DAT_004478A4;
+}
+
 // [TODO] 0x0020D630 VehicleZoneDamageProperties::vfunc_04 (25 B)
-// [TODO] 0x0020D650 VehicleZoneDamagePropertiesCollection::vfunc_00 (6 B)
-// [TODO] 0x0020D660 VehicleZonePhysicsProperties::vfunc_00 (6 B)
-// [TODO] 0x0020D670 VehicleZoneProperties::vfunc_00 (6 B)
-// [TODO] 0x0020D680 VehicleZoneMeshProperties::vfunc_00 (6 B)
-// [TODO] 0x0020D690 VehicleZoneEffectProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleZoneDamagePropertiesCollection::vfunc_00 (0x0020D650, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleZoneDamagePropertiesCollection::vfunc_00 (0x0020D650, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004478D0[];
+
+class VehicleZoneDamagePropertiesCollection
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleZoneDamagePropertiesCollection::vfunc_00()
+{
+    return DAT_004478D0;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleZonePhysicsProperties::vfunc_00 (0x0020D660, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleZonePhysicsProperties::vfunc_00 (0x0020D660, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004478FC[];
+
+class VehicleZonePhysicsProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleZonePhysicsProperties::vfunc_00()
+{
+    return DAT_004478FC;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleZoneProperties::vfunc_00 (0x0020D670, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleZoneProperties::vfunc_00 (0x0020D670, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447928[];
+
+class VehicleZoneProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleZoneProperties::vfunc_00()
+{
+    return DAT_00447928;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleZoneMeshProperties::vfunc_00 (0x0020D680, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleZoneMeshProperties::vfunc_00 (0x0020D680, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004479AC[];
+
+class VehicleZoneMeshProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleZoneMeshProperties::vfunc_00()
+{
+    return DAT_004479AC;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleZoneEffectProperties::vfunc_00 (0x0020D690, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleZoneEffectProperties::vfunc_00 (0x0020D690, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004479D8[];
+
+class VehicleZoneEffectProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleZoneEffectProperties::vfunc_00()
+{
+    return DAT_004479D8;
+}
+
 // [TODO] 0x0020D6A0 VehiclePropellerTemplate::vfunc_01 (46 B)
 // [TODO] 0x0020D6D0 VehiclePropellerTemplate::vfunc_04 (63 B)
 // [TODO] 0x0020D710 VehiclePropellerTemplate::vfunc_29 (70 B)
@@ -13446,45 +21470,441 @@
 // [TODO] 0x0020E960 VehicleZoneProperties::vfunc_29 (69 B)
 // [TODO] 0x0020E9B0 VehicleZoneProperties::vfunc_30 (58 B)
 // [TODO] 0x0020E9F0 sub_0020E9F0 (40 B)
-// [TODO] 0x0020EA20 BoatZoneProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatZoneProperties::vfunc_00 (0x0020EA20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatZoneProperties::vfunc_00 (0x0020EA20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447954[];
+
+class BoatZoneProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatZoneProperties::vfunc_00()
+{
+    return DAT_00447954;
+}
+
 // [TODO] 0x0020EA30 BoatZoneProperties::vfunc_04 (25 B)
 // [TODO] 0x0020EA50 sub_0020EA50 (40 B)
-// [TODO] 0x0020EA80 AirplaneZoneProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AirplaneZoneProperties::vfunc_00 (0x0020EA80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AirplaneZoneProperties::vfunc_00 (0x0020EA80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447980[];
+
+class AirplaneZoneProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AirplaneZoneProperties::vfunc_00()
+{
+    return DAT_00447980;
+}
+
 // [TODO] 0x0020EA90 AirplaneZoneProperties::vfunc_04 (25 B)
 // [TODO] 0x0020EAB0 sub_0020EAB0 (71 B)
 // [TODO] 0x0020EB00 AirplaneFlapControlBehaviour::vfunc_03 (541 B)
 // [TODO] 0x0020ED20 VehicleLightsTemplate::vfunc_04 (25 B)
 // [TODO] 0x0020ED40 sub_0020ED40 (40 B)
-// [TODO] 0x0020ED70 VehicleControllerTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleControllerTemplate::vfunc_00 (0x0020ED70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleControllerTemplate::vfunc_00 (0x0020ED70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447A88[];
+
+class VehicleControllerTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleControllerTemplate::vfunc_00()
+{
+    return DAT_00447A88;
+}
+
 // [TODO] 0x0020ED80 sub_0020ED80 (25 B)
-// [TODO] 0x0020EDA0 VehicleTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleTemplate::vfunc_00 (0x0020EDA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleTemplate::vfunc_00 (0x0020EDA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447AB4[];
+
+class VehicleTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleTemplate::vfunc_00()
+{
+    return DAT_00447AB4;
+}
+
 // [TODO] 0x0020EDD0 sub_0020EDD0 (25 B)
-// [TODO] 0x0020EDF0 VehicleDamageProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleDamageProperties::vfunc_00 (0x0020EDF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleDamageProperties::vfunc_00 (0x0020EDF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447AE0[];
+
+class VehicleDamageProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleDamageProperties::vfunc_00()
+{
+    return DAT_00447AE0;
+}
+
 // [TODO] 0x0020EE00 sub_0020EE00 (40 B)
-// [TODO] 0x0020EE30 VehicleParticleTriggerProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleParticleTriggerProperties::vfunc_00 (0x0020EE30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleParticleTriggerProperties::vfunc_00 (0x0020EE30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447B0C[];
+
+class VehicleParticleTriggerProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleParticleTriggerProperties::vfunc_00()
+{
+    return DAT_00447B0C;
+}
+
 // [TODO] 0x0020EE40 VehicleParticleTriggerProperties::vfunc_04 (25 B)
-// [TODO] 0x0020EE60 VehicleDamageEffectProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleDamageEffectProperties::vfunc_00 (0x0020EE60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleDamageEffectProperties::vfunc_00 (0x0020EE60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447B38[];
+
+class VehicleDamageEffectProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleDamageEffectProperties::vfunc_00()
+{
+    return DAT_00447B38;
+}
+
 // [TODO] 0x0020EE70 sub_0020EE70 (40 B)
-// [TODO] 0x0020EEA0 VehicleKamikazeProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleKamikazeProperties::vfunc_00 (0x0020EEA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleKamikazeProperties::vfunc_00 (0x0020EEA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447B6C[];
+
+class VehicleKamikazeProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleKamikazeProperties::vfunc_00()
+{
+    return DAT_00447B6C;
+}
+
 // [TODO] 0x0020EEB0 VehicleKamikazeProperties::vfunc_04 (25 B)
 // [TODO] 0x0020EED0 sub_0020EED0 (40 B)
-// [TODO] 0x0020EF00 VehicleDamageScaleProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleDamageScaleProperties::vfunc_00 (0x0020EF00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleDamageScaleProperties::vfunc_00 (0x0020EF00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447B98[];
+
+class VehicleDamageScaleProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleDamageScaleProperties::vfunc_00()
+{
+    return DAT_00447B98;
+}
+
 // [TODO] 0x0020EF10 VehicleDamageTransmitProperties::vfunc_04 (25 B)
 // [TODO] 0x0020EF30 sub_0020EF30 (40 B)
-// [TODO] 0x0020EF60 VehicleCollisionImpulseScaleProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleCollisionImpulseScaleProperties::vfunc_00 (0x0020EF60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleCollisionImpulseScaleProperties::vfunc_00 (0x0020EF60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447BC4[];
+
+class VehicleCollisionImpulseScaleProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleCollisionImpulseScaleProperties::vfunc_00()
+{
+    return DAT_00447BC4;
+}
+
 // [TODO] 0x0020EF70 VehicleCollisionImpulseScaleProperties::vfunc_04 (25 B)
-// [TODO] 0x0020EF90 VehicleCollisionResponseProperties::vfunc_00 (6 B)
-// [TODO] 0x0020EFA0 VehicleWaterSprayProperties::vfunc_00 (6 B)
-// [TODO] 0x0020EFB0 VehicleExhaustProperties::vfunc_00 (6 B)
-// [TODO] 0x0020EFC0 VehicleSeveredPartEffectProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleCollisionResponseProperties::vfunc_00 (0x0020EF90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleCollisionResponseProperties::vfunc_00 (0x0020EF90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447BF0[];
+
+class VehicleCollisionResponseProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleCollisionResponseProperties::vfunc_00()
+{
+    return DAT_00447BF0;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleWaterSprayProperties::vfunc_00 (0x0020EFA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleWaterSprayProperties::vfunc_00 (0x0020EFA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447C1C[];
+
+class VehicleWaterSprayProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleWaterSprayProperties::vfunc_00()
+{
+    return DAT_00447C1C;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleExhaustProperties::vfunc_00 (0x0020EFB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleExhaustProperties::vfunc_00 (0x0020EFB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447C48[];
+
+class VehicleExhaustProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleExhaustProperties::vfunc_00()
+{
+    return DAT_00447C48;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleSeveredPartEffectProperties::vfunc_00 (0x0020EFC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleSeveredPartEffectProperties::vfunc_00 (0x0020EFC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447C74[];
+
+class VehicleSeveredPartEffectProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleSeveredPartEffectProperties::vfunc_00()
+{
+    return DAT_00447C74;
+}
+
 // [TODO] 0x0020EFD0 sub_0020EFD0 (40 B)
-// [TODO] 0x0020F000 VehicleDirtAccumulationProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleDirtAccumulationProperties::vfunc_00 (0x0020F000, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleDirtAccumulationProperties::vfunc_00 (0x0020F000, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447CA0[];
+
+class VehicleDirtAccumulationProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleDirtAccumulationProperties::vfunc_00()
+{
+    return DAT_00447CA0;
+}
+
 // [TODO] 0x0020F010 VehicleDirtAccumulationProperties::vfunc_04 (25 B)
-// [TODO] 0x0020F030 VehicleCameraProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleCameraProperties::vfunc_00 (0x0020F030, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleCameraProperties::vfunc_00 (0x0020F030, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447CCC[];
+
+class VehicleCameraProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleCameraProperties::vfunc_00()
+{
+    return DAT_00447CCC;
+}
+
 // [TODO] 0x0020F040 sub_0020F040 (339 B)
-// [TODO] 0x0020F1A0 VehicleCameraCategoryProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleCameraCategoryProperties::vfunc_00 (0x0020F1A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleCameraCategoryProperties::vfunc_00 (0x0020F1A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447CF8[];
+
+class VehicleCameraCategoryProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleCameraCategoryProperties::vfunc_00()
+{
+    return DAT_00447CF8;
+}
+
 // [TODO] 0x0020F1B0 sub_0020F1B0 (50 B)
-// [TODO] 0x0020F1F0 VehicleLightsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleLightsTemplate::vfunc_00 (0x0020F1F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleLightsTemplate::vfunc_00 (0x0020F1F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00447A5C[];
+
+class VehicleLightsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleLightsTemplate::vfunc_00()
+{
+    return DAT_00447A5C;
+}
+
 // [TODO] 0x0020F200 VehicleControllerTemplate::vfunc_01 (36 B)
 // [TODO] 0x0020F230 VehicleTemplate::vfunc_01 (46 B)
 // [TODO] 0x0020F260 AirplaneTemplate::vfunc_11 (113 B)
@@ -13537,17 +21957,83 @@
 // [TODO] 0x00210E90 sub_00210E90 (81 B)
 // [TODO] 0x00210EF0 VehicleCameraProperties::vfunc_04 (86 B)
 // [TODO] 0x00210F50 sub_00210F50 (108 B)
-// [TODO] 0x00210FC0 WheeledVehicleArtTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WheeledVehicleArtTemplate::vfunc_00 (0x00210FC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheeledVehicleArtTemplate::vfunc_00 (0x00210FC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004497E8[];
+
+class WheeledVehicleArtTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheeledVehicleArtTemplate::vfunc_00()
+{
+    return DAT_004497E8;
+}
+
 // [TODO] 0x00210FD0 WheeledVehicleArtTemplate::vfunc_04 (172 B)
 // [TODO] 0x00211080 sub_00211080 (37 B)
 // [TODO] 0x002110B0 WheeledVehicleArtTemplate::vfunc_01 (71 B)
 // [TODO] 0x00211100 sub_00211100 (104 B)
 // [TODO] 0x00211170 sub_00211170 (11 B)
 // [TODO] 0x00211180 sub_00211180 (40 B)
-// [TODO] 0x002111B0 WheelPlayerControlProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WheelPlayerControlProperties::vfunc_00 (0x002111B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheelPlayerControlProperties::vfunc_00 (0x002111B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044ACB8[];
+
+class WheelPlayerControlProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheelPlayerControlProperties::vfunc_00()
+{
+    return DAT_0044ACB8;
+}
+
 // [TODO] 0x002111C0 WheelPlayerControlProperties::vfunc_04 (25 B)
 // [TODO] 0x002111E0 sub_002111E0 (40 B)
-// [TODO] 0x00211210 WheeledVehicleCrashedPhysicsProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WheeledVehicleCrashedPhysicsProperties::vfunc_00 (0x00211210, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheeledVehicleCrashedPhysicsProperties::vfunc_00 (0x00211210, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044ACE4[];
+
+class WheeledVehicleCrashedPhysicsProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheeledVehicleCrashedPhysicsProperties::vfunc_00()
+{
+    return DAT_0044ACE4;
+}
+
 // [TODO] 0x00211220 WheeledVehiclePhysicsTemplate::vfunc_01 (36 B)
 // [TODO] 0x00211250 WheelDamageProperties::vfunc_04 (116 B)
 // [TODO] 0x002112D0 sub_002112D0 (127 B)
@@ -13556,14 +22042,124 @@
 // [TODO] 0x00211450 sub_00211450 (114 B)
 // [TODO] 0x002114D0 FourWheelerPhysicsTemplate::vfunc_04 (283 B)
 // [TODO] 0x002115F0 sub_002115F0 (48 B)
-// [TODO] 0x00211620 WheelDamageProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WheelDamageProperties::vfunc_00 (0x00211620, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheelDamageProperties::vfunc_00 (0x00211620, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044AC8C[];
+
+class WheelDamageProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheelDamageProperties::vfunc_00()
+{
+    return DAT_0044AC8C;
+}
+
 // [TODO] 0x00211630 WheeledVehicleLightsTemplate::vfunc_04 (25 B)
-// [TODO] 0x00211650 WheeledVehicleDamageProperties::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WheeledVehicleDamageProperties::vfunc_00 (0x00211650, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheeledVehicleDamageProperties::vfunc_00 (0x00211650, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044B024[];
+
+class WheeledVehicleDamageProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheeledVehicleDamageProperties::vfunc_00()
+{
+    return DAT_0044B024;
+}
+
 // [TODO] 0x00211660 sub_00211660 (97 B)
-// [TODO] 0x002116D0 WheeledVehicleCoverProperties::vfunc_00 (6 B)
-// [TODO] 0x002116E0 WheeledVehicleTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WheeledVehicleCoverProperties::vfunc_00 (0x002116D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheeledVehicleCoverProperties::vfunc_00 (0x002116D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044B050[];
+
+class WheeledVehicleCoverProperties
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheeledVehicleCoverProperties::vfunc_00()
+{
+    return DAT_0044B050;
+}
+
+// ============================================================================
+// [VERIFIED] WheeledVehicleTemplate::vfunc_00 (0x002116E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheeledVehicleTemplate::vfunc_00 (0x002116E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044B07C[];
+
+class WheeledVehicleTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheeledVehicleTemplate::vfunc_00()
+{
+    return DAT_0044B07C;
+}
+
 // [TODO] 0x002116F0 sub_002116F0 (50 B)
-// [TODO] 0x00211730 WheeledVehicleLightsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WheeledVehicleLightsTemplate::vfunc_00 (0x00211730, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheeledVehicleLightsTemplate::vfunc_00 (0x00211730, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044AFF8[];
+
+class WheeledVehicleLightsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheeledVehicleLightsTemplate::vfunc_00()
+{
+    return DAT_0044AFF8;
+}
+
 // [TODO] 0x00211740 WheeledVehicleDamageProperties::vfunc_01 (36 B)
 // [TODO] 0x00211770 ScriptObject::vfunc_01 (30 B)
 // [TODO] 0x00211790 WheeledVehicleTemplate::vfunc_01 (36 B)
@@ -13584,16 +22180,82 @@
 // [TODO] 0x00211FA0 ConcreteClassRep<EffectCollectionTemplate>::vfunc_02 (58 B)
 // [TODO] 0x00211FE0 StatePropPhysicsTemplate::vfunc_04 (25 B)
 // [TODO] 0x00212000 sub_00212000 (51 B)
-// [TODO] 0x00212040 StatePropPhysicsTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StatePropPhysicsTemplate::vfunc_00 (0x00212040, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropPhysicsTemplate::vfunc_00 (0x00212040, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044BA28[];
+
+class StatePropPhysicsTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StatePropPhysicsTemplate::vfunc_00()
+{
+    return DAT_0044BA28;
+}
+
 // [TODO] 0x00212050 StatePropPhysicsTemplate::vfunc_01 (52 B)
 // [TODO] 0x00212090 MortarTemplate::vfunc_04 (25 B)
 // [TODO] 0x002120B0 sub_002120B0 (7 B)
 // [TODO] 0x002120C0 sub_002120C0 (31 B)
-// [TODO] 0x002120E0 StatePropTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] StatePropTemplate::vfunc_00 (0x002120E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropTemplate::vfunc_00 (0x002120E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044BA6C[];
+
+class StatePropTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* StatePropTemplate::vfunc_00()
+{
+    return DAT_0044BA6C;
+}
+
 // [TODO] 0x002120F0 MortarTemplate::vfunc_11 (131 B)
 // [TODO] 0x00212180 sub_00212180 (74 B)
 // [TODO] 0x002121D0 sub_002121D0 (46 B)
-// [TODO] 0x00212200 EffectCollectionTemplate::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] EffectCollectionTemplate::vfunc_00 (0x00212200, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// EffectCollectionTemplate::vfunc_00 (0x00212200, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044BAA0[];
+
+class EffectCollectionTemplate
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* EffectCollectionTemplate::vfunc_00()
+{
+    return DAT_0044BAA0;
+}
+
 // [TODO] 0x00212210 EffectCollectionTemplate::vfunc_11 (38 B)
 // [TODO] 0x00212240 sub_00212240 (74 B)
 // [TODO] 0x00212290 sub_00212290 (240 B)
@@ -13604,10 +22266,54 @@
 // [TODO] 0x00212610 ConcreteClassRep<TimerObject>::vfunc_01 (42 B)
 // [TODO] 0x00212640 ConcreteClassRep<TimerObject>::vfunc_02 (36 B)
 // [TODO] 0x00212670 sub_00212670 (50 B)
-// [TODO] 0x002126B0 TimerObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TimerObject::vfunc_00 (0x002126B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TimerObject::vfunc_00 (0x002126B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044BD18[];
+
+class TimerObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TimerObject::vfunc_00()
+{
+    return DAT_0044BD18;
+}
+
 // [TODO] 0x002126C0 TimerObject::vfunc_01 (36 B)
 // [TODO] 0x002126F0 sub_002126F0 (43 B)
-// [TODO] 0x00212720 RoomTriggerObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] RoomTriggerObject::vfunc_00 (0x00212720, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// RoomTriggerObject::vfunc_00 (0x00212720, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044BDE0[];
+
+class RoomTriggerObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* RoomTriggerObject::vfunc_00()
+{
+    return DAT_0044BDE0;
+}
+
 // [TODO] 0x002127C0 sub_002127C0 (8 B)
 // [TODO] 0x002127D0 RoomTriggerObject::vfunc_01 (61 B)
 // [TODO] 0x00212840 RoomTriggerObject::vfunc_04 (374 B)
@@ -13617,13 +22323,57 @@
 // [TODO] 0x00212B70 ConcreteClassRep<LOSTriggerVolumeObject>::vfunc_01 (45 B)
 // [TODO] 0x00212BA0 ConcreteClassRep<LOSTriggerVolumeObject>::vfunc_02 (36 B)
 // [TODO] 0x00212BD0 ConcreteClassRep<MissionTriggerObject>::vfunc_01 (50 B)
-// [TODO] 0x00212C10 MissionTriggerObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] MissionTriggerObject::vfunc_00 (0x00212C10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionTriggerObject::vfunc_00 (0x00212C10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044C0C0[];
+
+class MissionTriggerObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* MissionTriggerObject::vfunc_00()
+{
+    return DAT_0044C0C0;
+}
+
 // [TODO] 0x00212C20 MissionTriggerObject::vfunc_04 (5 B)
 // [TODO] 0x00212C30 MissionTriggerObject::vfunc_01 (36 B)
 // [TODO] 0x00212C60 ConcreteClassRep<MissionTriggerObject>::vfunc_02 (32 B)
 // [TODO] 0x00212E10 ConcreteClassRep<TriggerVolumeObject>::vfunc_02 (36 B)
 // [TODO] 0x00212E40 sub_00212E40 (40 B)
-// [TODO] 0x00212E70 TriggerVolumeObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TriggerVolumeObject::vfunc_00 (0x00212E70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TriggerVolumeObject::vfunc_00 (0x00212E70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044C068[];
+
+class TriggerVolumeObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TriggerVolumeObject::vfunc_00()
+{
+    return DAT_0044C068;
+}
+
 // [TODO] 0x00212E80 MissionTriggerObject::vfunc_30 (32 B)
 // [TODO] 0x00212EA0 MissionTriggerObject::vfunc_32 (32 B)
 // [TODO] 0x00212EF0 sub_00212EF0 (80 B)
@@ -13632,7 +22382,29 @@
 // [TODO] 0x00212FB0 TriggerVolumeObject::vfunc_04 (226 B)
 // [TODO] 0x00213130 sub_00213130 (171 B)
 // [TODO] 0x002131E0 sub_002131E0 (102 B)
-// [TODO] 0x00213250 LOSTriggerVolumeObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LOSTriggerVolumeObject::vfunc_00 (0x00213250, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LOSTriggerVolumeObject::vfunc_00 (0x00213250, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044C094[];
+
+class LOSTriggerVolumeObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LOSTriggerVolumeObject::vfunc_00()
+{
+    return DAT_0044C094;
+}
+
 // [TODO] 0x00213260 LOSTriggerVolumeObject::vfunc_04 (29 B)
 // [TODO] 0x00213300 sub_00213300 (141 B)
 // [TODO] 0x00213390 sub_00213390 (118 B)
@@ -13647,7 +22419,29 @@
 // [TODO] 0x00213530 AirplaneObject::vfunc_45 (7 B)
 // [TODO] 0x00213540 AirplaneObject::vfunc_51 (28 B)
 // [TODO] 0x00213560 AirplaneObject::vfunc_50 (12 B)
-// [TODO] 0x00213570 AirplaneObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AirplaneObject::vfunc_00 (0x00213570, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AirplaneObject::vfunc_00 (0x00213570, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044C230[];
+
+class AirplaneObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AirplaneObject::vfunc_00()
+{
+    return DAT_0044C230;
+}
+
 // [TODO] 0x00213580 sub_00213580 (101 B)
 // [TODO] 0x002135F0 ActiveAirplaneObject::vfunc_00 (60 B)
 // [TODO] 0x00213630 sub_00213630 (84 B)
@@ -13659,7 +22453,29 @@
 // [TODO] 0x002139F0 ActiveWheeledVehicleObject::vfunc_18 (47 B)
 // [TODO] 0x00213A20 ActiveWheeledVehicleObject::vfunc_19 (31 B)
 // [TODO] 0x00213A40 sub_00213A40 (93 B)
-// [TODO] 0x00213AA0 WheeledVehicleObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WheeledVehicleObject::vfunc_00 (0x00213AA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WheeledVehicleObject::vfunc_00 (0x00213AA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044C288[];
+
+class WheeledVehicleObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WheeledVehicleObject::vfunc_00()
+{
+    return DAT_0044C288;
+}
+
 // [TODO] 0x00213AB0 sub_00213AB0 (11 B)
 // [TODO] 0x00213AC0 ConcreteSurfaceTypeTranslator::vfunc_00 (34 B)
 // [TODO] 0x00213AF0 ConcreteSurfaceTypeTranslator::vfunc_01 (34 B)
@@ -13690,7 +22506,29 @@
 // [TODO] 0x00214BF0 ActiveBoatObject::vfunc_19 (31 B)
 // [TODO] 0x00214C10 sub_00214C10 (35 B)
 // [TODO] 0x00214C40 sub_00214C40 (68 B)
-// [TODO] 0x00214C90 BoatObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatObject::vfunc_00 (0x00214C90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatObject::vfunc_00 (0x00214C90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044C374[];
+
+class BoatObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatObject::vfunc_00()
+{
+    return DAT_0044C374;
+}
+
 // [TODO] 0x00214CA0 sub_00214CA0 (94 B)
 // [TODO] 0x00214D00 ActiveBoatObject::vfunc_00 (60 B)
 // [TODO] 0x00214D40 ActiveBoatObject::vfunc_01 (103 B)
@@ -13709,7 +22547,29 @@
 // [TODO] 0x00215710 ActiveHelicopterObject::vfunc_18 (47 B)
 // [TODO] 0x00215740 ActiveHelicopterObject::vfunc_09 (72 B)
 // [TODO] 0x00215790 sub_00215790 (42 B)
-// [TODO] 0x002157C0 HelicopterObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] HelicopterObject::vfunc_00 (0x002157C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// HelicopterObject::vfunc_00 (0x002157C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044C3D8[];
+
+class HelicopterObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* HelicopterObject::vfunc_00()
+{
+    return DAT_0044C3D8;
+}
+
 // [TODO] 0x002157D0 sub_002157D0 (101 B)
 // [TODO] 0x0021582A sub_0021582A (11 B)
 // [TODO] 0x00215840 ActiveHelicopterObject::vfunc_00 (60 B)
@@ -13853,7 +22713,29 @@
 // [TODO] 0x0021A310 sub_0021A310 (56 B)
 // [TODO] 0x0021A350 sub_0021A350 (77 B)
 // [TODO] 0x0021A560 sub_0021A560 (156 B)
-// [TODO] 0x0021A600 VehicleObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VehicleObject::vfunc_00 (0x0021A600, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleObject::vfunc_00 (0x0021A600, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044C808[];
+
+class VehicleObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VehicleObject::vfunc_00()
+{
+    return DAT_0044C808;
+}
+
 // [TODO] 0x0021A610 sub_0021A610 (114 B)
 // [TODO] 0x0021A690 AirplaneObject::vfunc_33 (130 B)
 // [TODO] 0x0021A720 sub_0021A720 (111 B)
@@ -13890,16 +22772,82 @@
 // [TODO] 0x0021BFA0 ActiveHelicopterObject::vfunc_17 (170 B)
 // [TODO] 0x0021C050 ActiveBoatObject::vfunc_17 (319 B)
 // [TODO] 0x0021C190 sub_0021C190 (32 B)
-// [TODO] 0x0021C1B0 TrafficCar::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TrafficCar::vfunc_00 (0x0021C1B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TrafficCar::vfunc_00 (0x0021C1B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044CC08[];
+
+class TrafficCar
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TrafficCar::vfunc_00()
+{
+    return DAT_0044CC08;
+}
+
 // [TODO] 0x0021C1C0 TrafficCar::vfunc_64 (5 B)
-// [TODO] 0x0021C1D0 CubeVan::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CubeVan::vfunc_00 (0x0021C1D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CubeVan::vfunc_00 (0x0021C1D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044CC34[];
+
+class CubeVan
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CubeVan::vfunc_00()
+{
+    return DAT_0044CC34;
+}
+
 // [TODO] 0x0021C1E0 sub_0021C1E0 (7 B)
 // [TODO] 0x0021C1F0 sub_0021C1F0 (7 B)
 // [TODO] 0x0021C200 sub_0021C200 (7 B)
 // [TODO] 0x0021C210 sub_0021C210 (16 B)
 // [TODO] 0x0021C220 sub_0021C220 (21 B)
 // [TODO] 0x0021C240 sub_0021C240 (32 B)
-// [TODO] 0x0021C260 ScriptCar::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] ScriptCar::vfunc_00 (0x0021C260, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScriptCar::vfunc_00 (0x0021C260, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044CC60[];
+
+class ScriptCar
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* ScriptCar::vfunc_00()
+{
+    return DAT_0044CC60;
+}
+
 // [TODO] 0x0021C270 TrafficCar::vfunc_01 (36 B)
 // [TODO] 0x0021C2A0 TrafficCar::vfunc_65 (89 B)
 // [TODO] 0x0021C300 sub_0021C300 (82 B)
@@ -13912,12 +22860,78 @@
 // [TODO] 0x0021C550 BoatDrivingRewardsObject::vfunc_04 (5 B)
 // [TODO] 0x0021C560 CarDrivingRewardsObject::vfunc_04 (39 B)
 // [TODO] 0x0021C590 sub_0021C590 (252 B)
-// [TODO] 0x0021C690 DrivingRewardsObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] DrivingRewardsObject::vfunc_00 (0x0021C690, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DrivingRewardsObject::vfunc_00 (0x0021C690, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044D438[];
+
+class DrivingRewardsObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* DrivingRewardsObject::vfunc_00()
+{
+    return DAT_0044D438;
+}
+
 // [TODO] 0x0021C6A0 sub_0021C6A0 (98 B)
-// [TODO] 0x0021C710 BoatDrivingRewardsObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] BoatDrivingRewardsObject::vfunc_00 (0x0021C710, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatDrivingRewardsObject::vfunc_00 (0x0021C710, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044D464[];
+
+class BoatDrivingRewardsObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* BoatDrivingRewardsObject::vfunc_00()
+{
+    return DAT_0044D464;
+}
+
 // [TODO] 0x0021C720 sub_0021C720 (87 B)
 // [TODO] 0x0021C780 sub_0021C780 (121 B)
-// [TODO] 0x0021C800 CarDrivingRewardsObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] CarDrivingRewardsObject::vfunc_00 (0x0021C800, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarDrivingRewardsObject::vfunc_00 (0x0021C800, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044D490[];
+
+class CarDrivingRewardsObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* CarDrivingRewardsObject::vfunc_00()
+{
+    return DAT_0044D490;
+}
+
 // [TODO] 0x0021C810 sub_0021C810 (87 B)
 // [TODO] 0x0021C870 DrivingRewardsObject::vfunc_01 (91 B)
 // [TODO] 0x0021C8D0 BoatDrivingRewardsObject::vfunc_01 (30 B)
@@ -13935,7 +22949,29 @@
 // [TODO] 0x0021D3C0 ConcreteClassRep<CarDrivingRewardsObject>::vfunc_01 (45 B)
 // [TODO] 0x0021D3F0 ConcreteClassRep<CarDrivingRewardsObject>::vfunc_02 (36 B)
 // [TODO] 0x0021D420 sub_0021D420 (39 B)
-// [TODO] 0x0021D450 LightsVolumeObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] LightsVolumeObject::vfunc_00 (0x0021D450, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// LightsVolumeObject::vfunc_00 (0x0021D450, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044D518[];
+
+class LightsVolumeObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* LightsVolumeObject::vfunc_00()
+{
+    return DAT_0044D518;
+}
+
 // [TODO] 0x0021D460 LightsVolumeObject::vfunc_04 (456 B)
 // [TODO] 0x0021D630 LightsVolumeObject::vfunc_01 (89 B)
 // [TODO] 0x0021D690 ConcreteClassRep<LightsVolumeObject>::vfunc_01 (42 B)
@@ -13943,12 +22979,56 @@
 // [TODO] 0x0021D6E0 ConcreteClassRep<WakeObject>::vfunc_01 (45 B)
 // [TODO] 0x0021D710 ConcreteClassRep<WakeObject>::vfunc_02 (64 B)
 // [TODO] 0x0021D750 sub_0021D750 (42 B)
-// [TODO] 0x0021D780 WakeObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] WakeObject::vfunc_00 (0x0021D780, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WakeObject::vfunc_00 (0x0021D780, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044D584[];
+
+class WakeObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* WakeObject::vfunc_00()
+{
+    return DAT_0044D584;
+}
+
 // [TODO] 0x0021D790 WakeObject::vfunc_01 (36 B)
 // [TODO] 0x0021D7C0 WakeObject::vfunc_29 (40 B)
 // [TODO] 0x0021D7F0 WakeObject::vfunc_04 (182 B)
 // [TODO] 0x0021D8B0 sub_0021D8B0 (63 B)
-// [TODO] 0x0021D8F0 AddressManager::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AddressManager::vfunc_00 (0x0021D8F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AddressManager::vfunc_00 (0x0021D8F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044D720[];
+
+class AddressManager
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AddressManager::vfunc_00()
+{
+    return DAT_0044D720;
+}
+
 // [TODO] 0x0021D900 sub_0021D900 (6 B)
 // [TODO] 0x0021D910 sub_0021D910 (39 B)
 // [TODO] 0x0021D940 sub_0021D940 (71 B)
@@ -13974,7 +23054,29 @@
 // [TODO] 0x0021F290 sub_0021F290 (236 B)
 // [TODO] 0x0021F380 sub_0021F380 (77 B)
 // [TODO] 0x0021F3D0 sub_0021F3D0 (61 B)
-// [TODO] 0x0021F410 AddressObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] AddressObject::vfunc_00 (0x0021F410, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AddressObject::vfunc_00 (0x0021F410, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044D87C[];
+
+class AddressObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* AddressObject::vfunc_00()
+{
+    return DAT_0044D87C;
+}
+
 // [TODO] 0x0021F420 AddressObject::vfunc_04 (62 B)
 // [TODO] 0x0021F460 sub_0021F460 (103 B)
 // [TODO] 0x0021F4D0 AddressObject::vfunc_01 (57 B)
@@ -14062,11 +23164,55 @@
 // [TODO] 0x00222F90 ConcreteClassRep<VisibilityTriggerObject>::vfunc_01 (42 B)
 // [TODO] 0x00223020 ConcreteClassRep<VisibilityTriggerObject>::vfunc_02 (36 B)
 // [TODO] 0x00223050 sub_00223050 (46 B)
-// [TODO] 0x00223080 TurfTriggerObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] TurfTriggerObject::vfunc_00 (0x00223080, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// TurfTriggerObject::vfunc_00 (0x00223080, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044DD70[];
+
+class TurfTriggerObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* TurfTriggerObject::vfunc_00()
+{
+    return DAT_0044DD70;
+}
+
 // [TODO] 0x002230D0 TurfTriggerObject::vfunc_01 (61 B)
 // [TODO] 0x00223160 TurfTriggerObject::vfunc_04 (408 B)
 // [TODO] 0x00223300 sub_00223300 (48 B)
-// [TODO] 0x00223330 VisibilityTriggerObject::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] VisibilityTriggerObject::vfunc_00 (0x00223330, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// VisibilityTriggerObject::vfunc_00 (0x00223330, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0044DE2C[];
+
+class VisibilityTriggerObject
+{
+public:
+    virtual void* vfunc_00();
+};
+
+void* VisibilityTriggerObject::vfunc_00()
+{
+    return DAT_0044DE2C;
+}
+
 // [TODO] 0x00223390 VisibilityTriggerObject::vfunc_01 (61 B)
 // [TODO] 0x00223430 VisibilityTriggerObject::vfunc_04 (408 B)
 // [TODO] 0x002235D0 GenericMenuClient::vfunc_08 (13 B)
@@ -16604,7 +25750,43 @@
 // [TODO] 0x0028D090 sub_0028D090 (54 B)
 // [TODO] 0x0028D0D0 core::MemoryAllocatorMalloc::vfunc_08 (21 B)
 // [TODO] 0x0028D0F0 core::MemoryAllocatorMalloc::vfunc_10 (5 B)
-// [TODO] 0x0028D100 core::MemoryAllocatorMalloc::vfunc_12 (6 B)
+// ============================================================================
+// [VERIFIED] core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::MemoryAllocatorMalloc::vfunc_12 (0x0028D100, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004BC298;
+
+namespace core {
+
+class MemoryAllocatorMalloc
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int MemoryAllocatorMalloc::vfunc_12()
+{
+    return DAT_004BC298;
+}
+
+}
+
 // [TODO] 0x0028D110 sub_0028D110 (51 B)
 // [TODO] 0x0028D150 core::ControllerBuffer::vfunc_01 (13 B)
 // [TODO] 0x0028D160 core::ControllerBuffer::vfunc_04 (20 B)
