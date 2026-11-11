@@ -135,12 +135,22 @@ def speed_settings() -> dict:
         d = json.loads(SPEED_FILE.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         d = {}
-    return {"cores": d.get("cores") is not False, "gpu": d.get("gpu") is not False}
+    return {"cores": d.get("cores") is not False, "gpu": d.get("gpu") is not False, "xbox_look": d.get("xbox_look") is True}
+
+
+def apply_texture_look(on: bool) -> None:
+    """Exports for Blender give PC textures the Xbox's tones when on. Kept in the environment so the city
+    export's helper processes, started from this one, do the same."""
+    if on:
+        os.environ[BX.P3G.LOOK_ENV] = "xbox"
+    else:
+        os.environ.pop(BX.P3G.LOOK_ENV, None)
 
 
 GAME_FILES.use_cores = lambda: speed_settings()["cores"]
 BLENDER.use_cores = lambda: speed_settings()["cores"]
 MOVIES_JOB.use_gpu = lambda: speed_settings()["gpu"]
+apply_texture_look(speed_settings()["xbox_look"])
 # a copy moves the files the exports read: never at the same time
 GAME_FILES.busy = lambda: ("The city is being exported for Blender from your copied files. Wait for it to "
                            "finish, or stop it, then copy." if BLENDER.running else
@@ -2279,7 +2289,8 @@ class Handler(BaseHTTPRequestHandler):
             ffmpeg = MOVIES.find_ffmpeg(GAME_FILES.bin_dir)
             card = MOVIES.graphics_card(ffmpeg)
             st = speed_settings()
-            return self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "cores": os.cpu_count() or 1,
+            return self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "xbox_look": st["xbox_look"],
+                               "cores": os.cpu_count() or 1,
                                "workers": BX.workers_wanted(True), "ffmpeg": ffmpeg is not None,
                                "gpu": card[1] if card else ""})
         if u.path == "/api/game-files/list":
@@ -2800,7 +2811,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def post_game_files_speed(self, body):
         st = speed_settings()
-        for k, field in (("cores", "use_cores"), ("gpu", "use_gpu")):
+        for k, field in (("cores", "use_cores"), ("gpu", "use_gpu"), ("xbox_look", "xbox_look")):
             if isinstance(body.get(field), bool):
                 st[k] = body[field]
         try:
@@ -2808,7 +2819,8 @@ class Handler(BaseHTTPRequestHandler):
             SPEED_FILE.write_text(json.dumps(st), encoding="utf-8")
         except OSError as e:
             return self._json({"ok": False, "error": f"Couldn't keep the setting: {e}"}, 500)
-        self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"]})
+        apply_texture_look(st["xbox_look"])
+        self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "xbox_look": st["xbox_look"]})
 
     def post_game_files_textures_stop(self, body):
         TEXTURE_JOB.stop()

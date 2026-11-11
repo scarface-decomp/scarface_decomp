@@ -763,6 +763,38 @@ def correlate(x: List[float], y: List[float]) -> float:
     return sxy / (sx * sy)
 
 
+# The Xbox's textures are the PC's with darker mid-tones: measured on 5,511 textures both versions have,
+# one curve (the same for red, green and blue, black and white staying put) takes a PC texture to within
+# 4 levels of 255 of the Xbox's copy for 98% of them. It is a gamma of 1.33: 64 -> 41, 128 -> 102, 192 -> 175.
+XBOX_GAMMA = 1.33
+XBOX_CURVE = bytes(round(255 * (i / 255) ** XBOX_GAMMA) for i in range(256))
+
+
+def xbox_look(png_bytes: bytes) -> bytes:
+    """A PC texture (a PNG) with the Xbox's tones: the same pixels through XBOX_CURVE, transparency untouched.
+    A picture with a palette only has its palette changed, so it stays exactly as sharp and as small."""
+    if png_bytes[:8] != b"\x89PNG\r\n\x1a\n" or len(png_bytes) < 33:
+        return png_bytes
+    if png_bytes[25] == 3:                                   # colour type 3: a palette
+        out, p = bytearray(png_bytes[:8]), 8
+        while p + 12 <= len(png_bytes):
+            n = struct.unpack_from(">I", png_bytes, p)[0]
+            kind, body = png_bytes[p + 4:p + 8], png_bytes[p + 8:p + 8 + n]
+            if kind == b"PLTE":
+                body = body.translate(XBOX_CURVE)
+            out += struct.pack(">I", len(body)) + kind + body + struct.pack(">I", zlib.crc32(kind + body) & 0xFFFFFFFF)
+            p += 12 + n
+        return bytes(out)
+    try:
+        w, h, rgba = decode_png(png_bytes)
+    except (MediaError, struct.error, ValueError, IndexError, zlib.error):
+        return png_bytes
+    px = bytearray(rgba)
+    for ch in range(3):
+        px[ch::4] = rgba[ch::4].translate(XBOX_CURVE)
+    return png(w, h, bytes(px))
+
+
 def picture_png(data: bytes, t: Texture) -> bytes:
     """A picture found by textures(), as PNG, top row first."""
     body = data[t.offset:t.offset + t.size]

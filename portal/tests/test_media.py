@@ -370,3 +370,24 @@ def test_file_on_disk_stays_inside_the_copy(tmp_path):
     assert GA.file_on_disk(tmp_path, index, "xbox", "art/c.rsd") is None       # changed since
     assert GA.file_on_disk(tmp_path, index, "xbox", "art/d.rsd") is None       # never copied
     assert GA.file_on_disk(tmp_path, index, "pc", "art/a.rsd") is None
+
+
+def test_xbox_look_darkens_the_mid_tones_and_keeps_the_rest():
+    """PC textures with the Xbox's tones: one curve on red, green and blue (64 -> 41, 128 -> 102, 192 -> 175, as
+    measured between the two versions), black, white and transparency untouched; a palette picture only has
+    its palette changed."""
+    import struct
+    import zlib
+    assert [media.XBOX_CURVE[v] for v in (0, 64, 128, 192, 255)] == [0, 41, 102, 175, 255]
+    rgba = bytes([64, 128, 192, 77, 0, 255, 128, 255])
+    w, h, out = media.decode_png(media.xbox_look(media.png(2, 1, rgba)))
+    assert (w, h) == (2, 1) and out == bytes([41, 102, 175, 77, 0, 255, 102, 255])
+
+    def chunk(kind, body):
+        return struct.pack(">I", len(body)) + kind + body + struct.pack(">I", zlib.crc32(kind + body) & 0xFFFFFFFF)
+    pal = (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 2, 1, 8, 3, 0, 0, 0))
+           + chunk(b"PLTE", bytes([64, 128, 192, 255, 255, 255])) + chunk(b"IDAT", zlib.compress(b"\0\0\1")) + chunk(b"IEND", b""))
+    new = media.xbox_look(pal)
+    assert len(new) == len(pal) and new != pal
+    assert media.decode_png(new)[2] == bytes([41, 102, 175, 255, 255, 255, 255, 255])
+    assert media.xbox_look(b"not a picture") == b"not a picture"

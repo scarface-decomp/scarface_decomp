@@ -96,9 +96,19 @@ def test_the_speed_switches_are_kept(tmp_path, monkeypatch):
     class Fake:
         def _json(self, obj, code=200):
             sent.append((code, obj))
-    assert server.speed_settings() == {"cores": True, "gpu": True}               # both on to start with
+    assert server.speed_settings() == {"cores": True, "gpu": True, "xbox_look": False}    # the look is off to start with
     server.Handler.post_game_files_speed(Fake(), {"use_cores": False})
-    assert sent[-1][1]["use_cores"] is False and server.speed_settings() == {"cores": False, "gpu": True}
+    assert sent[-1][1]["use_cores"] is False and server.speed_settings() == {"cores": False, "gpu": True, "xbox_look": False}
     assert server.GAME_FILES.use_cores() is False and server.BLENDER.use_cores() is False
     server.Handler.post_game_files_speed(Fake(), {"use_gpu": False, "use_cores": "yes"})   # not a yes/no: kept
-    assert server.speed_settings() == {"cores": False, "gpu": False} and server.MOVIES_JOB.use_gpu() is False
+    assert server.speed_settings() == {"cores": False, "gpu": False, "xbox_look": False} and server.MOVIES_JOB.use_gpu() is False
+    # Xbox tones for the PC's textures: kept with the others, and handed to the exporter (and the helper
+    # processes it starts) through the environment
+    monkeypatch.delenv(server.BX.P3G.LOOK_ENV, raising=False)
+    server.Handler.post_game_files_speed(Fake(), {"xbox_look": True})
+    assert sent[-1][1]["xbox_look"] is True and server.speed_settings()["xbox_look"] is True
+    assert server.BX.texture_look() == "xbox" and server.BX._made_by().endswith(" xbox")
+    (tmp_path / "made_by.txt").write_text(str(server.BX.P3G.EXPORT_VERSION), encoding="utf-8")
+    assert not server.BX.city_current(tmp_path)                    # a city exported with the other look is redone
+    server.Handler.post_game_files_speed(Fake(), {"xbox_look": False})
+    assert server.BX.texture_look() == "" and server.BX.city_current(tmp_path)

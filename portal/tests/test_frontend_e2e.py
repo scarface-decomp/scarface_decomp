@@ -974,7 +974,7 @@ def test_game_files_speed(page):
     assert page.is_checked("#gf-use-cores") and page.is_checked("#gf-use-gpu")
     page.uncheck("#gf-use-cores")
     page.wait_for_timeout(200)
-    assert calls("/api/game-files/speed")[-1][1] == {"use_cores": False, "use_gpu": True}
+    assert calls("/api/game-files/speed")[-1][1] == {"use_cores": False, "use_gpu": True, "xbox_look": False}
 
 
 def test_game_files_stop(page):

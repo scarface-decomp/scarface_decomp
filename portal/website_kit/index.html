@@ -1329,6 +1329,7 @@
               <select id="gfb-version" class="input-box" onchange="gfPickBlenderVersion()"></select>
             </div>
             <p class="gf-notes" id="gfb-version-note" role="status"></p>
+            <label class="gf-check"><input type="checkbox" id="gfb-xbox-look" onchange="saveGfSpeed()" /> <span>Xbox tones on the PC's textures: the same pictures with the darker mid-tones the Xbox version has. Off, they are exactly as the PC stores them (brighter). Export or open again after changing this.</span></label>
             <h3 class="gf-h">A map area</h3>
             <div class="gfb-row">
               <label class="sr-only" for="gfb-area">Map area</label>
@@ -3536,6 +3537,7 @@
     if (!d.ok) return;
     $('gf-speed').hidden = false;
     $('gf-use-cores').checked = !!d.use_cores;
+    $('gfb-xbox-look').checked = !!d.xbox_look;
     $('gf-cores-text').textContent = 'Use all ' + fmtInt(d.cores) + ' processor cores: copy the versions at the same time '
       + '(when the discs are on a fast drive, an SSD) and export the city ' + fmtInt(d.workers) + ' areas at a time.';
     const gpu = $('gf-use-gpu');
@@ -3548,7 +3550,7 @@
 
   async function saveGfSpeed() {
     let res;
-    try { res = await postJson('/api/game-files/speed', { use_cores: $('gf-use-cores').checked, use_gpu: $('gf-use-gpu').checked }); }
+    try { res = await postJson('/api/game-files/speed', { use_cores: $('gf-use-cores').checked, use_gpu: $('gf-use-gpu').checked, xbox_look: $('gfb-xbox-look').checked }); }
     catch (e) { res = { ok: false, error: e.message }; }
     if (!res.ok) toast(res.error || 'Couldn’t keep the setting.', 'err');
   }

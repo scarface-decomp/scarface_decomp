@@ -353,7 +353,7 @@ class CityJob:
             if self.status.get("workers", 1) > 1:
                 self._run_parallel(out, index, version, todo, dest)
                 if not self._stop.is_set():
-                    (dest / CITY_MADE).write_text(str(P3G.EXPORT_VERSION), encoding="utf-8")
+                    (dest / CITY_MADE).write_text(_made_by(), encoding="utf-8")
                 return
             library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
             parsed: dict = {}
@@ -373,7 +373,7 @@ class CityJob:
                 self.status["done"] += 1
                 time.sleep(0)
             if not self._stop.is_set():
-                (dest / CITY_MADE).write_text(str(P3G.EXPORT_VERSION), encoding="utf-8")
+                (dest / CITY_MADE).write_text(_made_by(), encoding="utf-8")
         except (OSError, P3G.p3d.P3dError) as e:
             self.status["error"] = f"{type(e).__name__}: {e}"
         finally:
@@ -459,9 +459,19 @@ def city_current(folder: Path) -> bool:
     """Whether the city in folder was exported by this version of the exporter (not one from before props
     came in whole and at full detail)."""
     try:
-        return int((folder / CITY_MADE).read_text(encoding="utf-8").strip()) >= P3G.EXPORT_VERSION
-    except (OSError, ValueError):
+        made = (folder / CITY_MADE).read_text(encoding="utf-8").split()
+        return int(made[0]) >= P3G.EXPORT_VERSION and (made[1:2] == ["xbox"]) == (texture_look() == "xbox")
+    except (OSError, ValueError, IndexError):
         return False
+
+
+def texture_look() -> str:
+    """"xbox" when PC textures are exported with the Xbox's tones, else ""."""
+    return "xbox" if os.environ.get(P3G.LOOK_ENV) == "xbox" else ""
+
+
+def _made_by() -> str:
+    return str(P3G.EXPORT_VERSION) + (" xbox" if texture_look() else "")
 OPENED = "Opened"                                # binaries/blender/<version>/Opened/: single files and areas
 
 OPEN_SCRIPT = r"""

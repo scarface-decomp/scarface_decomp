@@ -39,6 +39,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import re
 import struct
 import sys
@@ -57,6 +58,7 @@ ANIMATION, ANIM_GROUP_LIST, ANIM_GROUP = 0x121000, 0x121002, 0x121001
 CAMERA, FRAME_CONTROLLER = 0x2200, 0x121201
 WORLD_GEO, STATE_PROP = 0x8800003, 0x8800005
 STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY = 0x0802000D, 0x0802000E, 0x08020002
+LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
 EXPORT_VERSION = 2                     # 2: props as they start (no broken or far-away parts on top)
 _LOD_PART = re.compile(r"lod\d*(shape\d*)?$", re.I)
 SCRIPT_OBJECT, OBJECT_PROPERTY, OBJECT_BINARY = 0x9900190, 0x9900192, 0x9900194
@@ -735,6 +737,8 @@ class Builder:
                 png = media.picture_png(found[0].data, found[1])
             except (media.MediaError, struct.error, ValueError, IndexError):
                 png = None
+            if png and found[1].kind == "png" and os.environ.get(LOOK_ENV) == "xbox":
+                png = media.xbox_look(png)       # the PC keeps its textures as PNGs; the consoles' are left alone
             if png:
                 if self.sampler is None:
                     self.sampler = self.g.add("samplers", {"magFilter": 9729, "minFilter": 9987,
