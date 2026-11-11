@@ -131,15 +131,53 @@ def _moves_only(src: "P3G.Source") -> bool:
 
 
 def stand_in(out: Path, index: Optional[dict], version: str) -> Optional[Path]:
-    """Tony, for showing the people's animations on (every person in the game has the same 27 joints)."""
-    rows = _rows(index, version)
-    for want in STAND_INS:
-        for row in rows:
-            if row[0].lower().endswith(want):
-                p = GA.file_on_disk(out, index, version, row[0])
-                if p is not None:
-                    return p
+    """Tony, for showing the people's animations on (every person in the game has the same 27 joints). From
+    this version's copied files, or another's: a copy that keeps only what one version has (The PC first,
+    No duplicates) leaves the others without him, and their animations would have nobody to play on."""
+    others = [v for v in GA.PREFER if v != version and v in (index or {}).get("versions", {})]
+    for v in [version] + others:
+        rows = _rows(index, v)
+        for want in STAND_INS:
+            for row in rows:
+                if row[0].lower().endswith(want):
+                    p = GA.file_on_disk(out, index, v, row[0])
+                    if p is not None:
+                        return p
     return None
+
+
+CHECK_MAX = 16 << 20        # bigger files aren't tried ahead of time: Open in Blender says so if they can't be shown
+
+
+def cant_show(out: Path, index: Optional[dict], version: str, game_path: str, data: bytes) -> str:
+    """Why Open in Blender would have nothing to show for this copied file, or "" when it would work (or the
+    file is a map area or too big to try ahead of time). The portal asks before it offers the button."""
+    if len(data) > CHECK_MAX:
+        return ""
+    try:
+        lib = P3G.Library()
+        src = lib.add(Path(game_path).name, data, main=True)
+        if P3G._world_geo(lib, src) or P3G.instance_objects(src):
+            return ""
+        if _moves_only(src):
+            if stand_in(out, index, version) is None:
+                return ("Animations with nobody to show them on: Tony's model isn't among your copied files. "
+                        "Copy the PC version's files and they play on him.")
+            return ""
+        P3G.export(lib)
+    except P3G.ExportError:
+        label = GA.LABELS.get(version, version)
+        return (f"Blender has nothing to show from the {label}'s copy of this file: its models are stored in a form "
+                "the portal can't turn into a scene yet. Try the same file under another version.")
+    except (P3G.p3d.P3dError, ValueError, KeyError, IndexError):
+        return ""
+    return ""
+
+
+def city_counts(out: Path, index: Optional[dict]) -> Dict[str, int]:
+    """How many city areas each version's copied files hold: {version: areas}."""
+    return {v: sum(1 for a in areas(out, index, v) if a["place"] == "z04")
+            for v in (index or {}).get("versions", {})}
 
 
 def inspect(data: bytes) -> dict:
@@ -428,41 +466,86 @@ OPENED = "Opened"                                # binaries/blender/<version>/Op
 
 OPEN_SCRIPT = r"""
 # Made by the Scarface decomp portal: import the game's scenes, then save them as a .blend beside them.
-import bpy
+#
+# The import runs once Blender's window is up, inside that window. Run straight from --python (and after
+# reloading the start-up file), Blender's own importer had no window to work in: a map came in, but anything
+# with a skeleton stopped half-way and left only the importer's helper ball (an "Icosphere") in the scene.
+import bpy, traceback
 FILES = %(files)r
 SAVE = %(save)r
-bpy.ops.wm.read_homefile(use_empty=True)
-for f in FILES:
+NOTE = (SAVE or (FILES[0] if FILES else "scene")) + ".import-error.txt"
+
+
+def bring_in():
+    for o in list(bpy.data.objects):            # the start-up cube, light and camera
+        bpy.data.objects.remove(o, do_unlink=True)
+    problems = []
+    for f in FILES:
+        try:
+            try:                                 # no helper ball for the bones (Blender 4.2 and later)
+                bpy.ops.import_scene.gltf(filepath=f, disable_bone_shape=True)
+            except TypeError:
+                bpy.ops.import_scene.gltf(filepath=f)
+        except Exception:  # one area that won't come in shouldn't stop the rest
+            problems.append(f + "\n" + traceback.format_exc())
+    scene = bpy.context.scene
+    ends = [a.frame_range[1] for a in bpy.data.actions]
+    if ends:
+        scene.frame_start, scene.frame_end = 0, int(max(ends))
+    cams = [o for o in scene.objects if o.type == "CAMERA"]
+    if cams and scene.camera is None:
+        scene.camera = cams[0]
+    for screen in bpy.data.screens:
+        for area in screen.areas:
+            for space in area.spaces:
+                if space.type == "VIEW_3D":
+                    space.clip_start, space.clip_end = 0.05, 50000.0
     try:
-        bpy.ops.import_scene.gltf(filepath=f)
-    except Exception as e:  # one area that won't come in shouldn't stop the rest
-        print("Couldn't import", f, e)
-scene = bpy.context.scene
-ends = [a.frame_range[1] for a in bpy.data.actions]
-if ends:
-    scene.frame_start, scene.frame_end = 0, int(max(ends))
-cams = [o for o in scene.objects if o.type == "CAMERA"]
-if cams and scene.camera is None:
-    scene.camera = cams[0]
-for screen in bpy.data.screens:
-    for area in screen.areas:
-        for space in area.spaces:
-            if space.type == "VIEW_3D":
-                space.clip_start, space.clip_end = 0.05, 50000.0
-try:
-    for window in bpy.context.window_manager.windows:
-        for area in window.screen.areas:
-            if area.type == "VIEW_3D":
-                region = next(r for r in area.regions if r.type == "WINDOW")
-                with bpy.context.temp_override(window=window, area=area, region=region):
-                    bpy.ops.view3d.view_all()
-except Exception:
-    pass
-if SAVE:
+        bpy.ops.view3d.view_all()
+    except Exception:
+        pass
+    shown = [o for o in scene.objects if o.type in ("MESH", "ARMATURE", "CAMERA", "EMPTY")]
+    if problems or not shown:
+        try:
+            with open(NOTE, "w", encoding="utf-8") as out:
+                out.write("Blender " + bpy.app.version_string + " couldn't bring this in.\n\n" + "\n".join(problems))
+        except OSError:
+            pass
+    if SAVE and shown:                           # never save a scene with nothing of the game in it
+        try:
+            bpy.ops.wm.save_as_mainfile(filepath=SAVE)
+        except Exception as e:
+            print("Couldn't save", SAVE, e)
+
+
+def in_the_window():
+    wm = bpy.context.window_manager
+    win = bpy.context.window or (wm.windows[0] if wm and wm.windows else None)
+    if win is None:
+        return bring_in()
+    where = {"window": win}
+    area = next((a for a in win.screen.areas if a.type == "VIEW_3D"), None)
+    if area is not None:
+        where["area"] = area
+        region = next((r for r in area.regions if r.type == "WINDOW"), None)
+        if region is not None:
+            where["region"] = region
+    with bpy.context.temp_override(**where):
+        bring_in()
+
+
+def later():
     try:
-        bpy.ops.wm.save_as_mainfile(filepath=SAVE)
-    except Exception as e:
-        print("Couldn't save", SAVE, e)
+        in_the_window()
+    except Exception:
+        traceback.print_exc()
+    return None                                  # once
+
+
+if bpy.app.background:
+    bring_in()
+else:
+    bpy.app.timers.register(later, first_interval=0.5)
 """
 
 

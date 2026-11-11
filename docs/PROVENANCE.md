@@ -25,8 +25,10 @@ If you are unsure where something came from, leave it out and ask in an issue.
 
 ## Names
 
-Function and class names come from RTTI in the retail binaries, from strings the code uses, or from
-what the code does. A guessed name is fine; say it is a guess in a comment if it is not obvious. Names
+Function and class names come from RTTI in the retail binaries, from strings the code uses (the names
+the game registers its script commands under among them), or from what the code does. A name another
+project published under a licence that allows it may be used when it is checked against the code and the
+project is named as its source (`by` in `reports/names.json`, and in [CREDITS.md](CREDITS.md)). A guessed name is fine; say it is a guess in a comment if it is not obvious. Names
 are never taken from unreleased builds' debug data.
 
 ## AI tools

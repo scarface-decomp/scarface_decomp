@@ -331,6 +331,7 @@ class Handler(BaseHTTPRequestHandler):
                                    "total_remaining_indexed": sum(tier_counts().values()),
                                    "repo_url": "https://github.com/example-org/scarface_decomp",
                                    "pending": sum(1 for t in TASKS.values() if t["status"] == "VERIFIED"),
+                                   "porting": CONFIG.get("porting", 0),
                                    "maintainers": ["Founder"]})
             if u.path == "/api/import-status":
                 return self._json(IMPORT)
@@ -365,6 +366,10 @@ class Handler(BaseHTTPRequestHandler):
                                        "with the same name.", "pictures": 0, "blender": False,
                                        "lines": [{"language": "English", "text": GF_LINE}],
                                        "sound": q["path"].replace("models/", "sounds/").replace("_021.p3d", "_020.rsd")})
+                if CONFIG.get("cant_show"):                     # this copy has nothing Blender can show
+                    return self._json({"ok": True, "kind": "models", "what": "1 model.", "pictures": 0, "blender": False,
+                                       "blender_why": "Blender has nothing to show from the Xbox's copy of this file.",
+                                       "lines": []})
                 return self._json({"ok": True, "kind": "models", "what": "1 model; 2 pictures.", "pictures": 2,
                                    "blender": True, "lines": []})
             if u.path == "/api/game-files/subtitles":
@@ -378,7 +383,11 @@ class Handler(BaseHTTPRequestHandler):
             if u.path == "/api/game-files/movie":
                 return self._bytes(b"\0\0\0\x18ftypmp42", "video/mp4")
             if u.path == "/api/game-files/areas":
+                vers = list((GF["summary"] or {}).get("versions", {}))
+                counts = {v: (3 if not CONFIG.get("partial_city") or i == 0 else 2 - i if i < 3 else 0)
+                          for i, v in enumerate(vers)}                     # a copy that keeps the first version whole
                 return self._json({"ok": True, "areas": GF_AREAS if GF["summary"] else [], "city": dict(BLENDER),
+                                   "city_by_version": counts,
                                    "city_files": BLENDER["written"], "city_current": True})
             if u.path == "/api/game-files/blender":
                 return self._json(dict(BLENDER, ok=True))
@@ -496,6 +505,9 @@ class Handler(BaseHTTPRequestHandler):
                 CONFIG["blender"] = not body.get("no_blender")
                 CONFIG["ffmpeg"] = not body.get("no_ffmpeg")
                 CONFIG["model_error"] = bool(body.get("model_error"))
+                CONFIG["partial_city"] = bool(body.get("partial_city"))
+                CONFIG["cant_show"] = bool(body.get("cant_show"))
+                CONFIG["porting"] = int(body.get("porting") or 0)
                 CONFIG["gf_missing"] = bool(body.get("gf_missing"))
                 CONFIG["gf_interrupted"] = bool(body.get("gf_interrupted"))
                 DELAYS.update(body.get("delays", {}))

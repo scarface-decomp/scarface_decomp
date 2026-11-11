@@ -31,7 +31,8 @@ def server():
     srv.shutdown()
 
 
-GF_FLAGS = ("gf_missing", "gf_interrupted", "no_blender", "no_ffmpeg", "model_error")
+GF_FLAGS = ("gf_missing", "gf_interrupted", "no_blender", "no_ffmpeg", "model_error", "partial_city", "cant_show",
+            "porting")
 
 
 def reset(lease_sec=900, no_login=False, legacy_claim=False, dme_browser_fail=False, **delays):
@@ -876,6 +877,48 @@ def test_game_files_a_failed_export_says_why_on_the_page(page):
     page.click("#gf-list .gf-prev .gf-bl button:has-text('Download .glb')")
     page.wait_for_function("document.querySelector('#gf-list .gf-prev p[role=status]').textContent.startsWith('Nothing to show')")
     assert page.eval_on_selector("#gf-list .gf-prev p[role=status]", "p => p.classList.contains('err')")
+
+
+def test_blender_version_is_picked_beside_the_tools_and_says_what_each_has(page):
+    """The Blender tools have their own version picker (the same choice as the tabs). When the copy kept only
+    what one version has, the others say how little of the city they hold, and a version with none of it
+    doesn't offer to export it."""
+    reset(partial_city=True)
+    _gf_copied(page)
+    page.wait_for_function("document.querySelectorAll('#gfb-version option').length > 1")
+    labels = page.eval_on_selector_all("#gfb-version option", "os => os.map(o => o.textContent)")
+    values = page.eval_on_selector_all("#gfb-version option", "os => os.map(o => o.value)")
+    assert "the whole city, 3 areas" in labels[0] and "only 1 area of its own" in labels[1]
+    assert page.input_value("#gfb-version") == values[0] and page.text_content("#gfb-version-note") == ""
+    assert page.is_visible("#gfb-city")
+    page.select_option("#gfb-version", values[1])                              # the same as pressing its tab
+    page.wait_for_function("document.getElementById('gfb-version-note').textContent.includes('not its whole city')")
+    assert page.eval_on_selector("#gf-tabs .gf-tab[aria-selected=true]", "b => b.textContent") in labels[1]
+    assert "Every version complete" in page.text_content("#gfb-version-note") and page.is_visible("#gfb-city")
+    if len(values) > 2:
+        page.select_option("#gfb-version", values[2])
+        page.wait_for_function("document.getElementById('gfb-version-note').textContent.includes('no city to export here')")
+        assert page.is_hidden("#gfb-city")
+
+
+def test_no_blender_button_for_a_file_this_copy_cant_show(page):
+    reset(cant_show=True)
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('_006.p3d') .a button")
+    page.wait_for_function("document.querySelector('#gf-list .gf-prev').textContent.includes('nothing to show from the Xbox')")
+    assert page.query_selector("#gf-list .gf-prev .gf-bl") is None             # no button that could only fail
+
+
+def test_new_matches_say_when_lookalikes_are_still_being_tried(page):
+    """The count of new matches keeps rising after a batch while each match is tried on the functions with the
+    same code. The page says so, so it doesn't look like something is stuck."""
+    reset(porting=41)
+    page.goto(BASE)
+    page.wait_for_function("document.getElementById('submit-note').textContent.includes('still trying 41 look-alikes')")
+    reset()
+    page.reload()
+    page.wait_for_function("document.getElementById('submit-note').textContent.length > 0")
+    assert "look-alike" not in page.text_content("#submit-note")
 
 
 def test_game_files_subtitles_and_their_sound(page):

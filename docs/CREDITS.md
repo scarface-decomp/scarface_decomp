@@ -25,6 +25,18 @@ authors are credited in the commit history. Thank you.
   `.rcf` archives), [Broken Face](https://github.com/sulzbals/BrokenFace) by sulzbals and Meth0d's
   write-up on Scarface's compiled TorqueScript (layout of `.cso` / `.dso`). Their documentation was
   read; no code was copied.
+* For how the PC game works inside: [SilentPatch for Scarface](https://github.com/CookiePLMonster/SilentPatchScarface)
+  by Silent (CookiePLMonster) and his [write-up](https://silentsblog.com/2020/03/29/silentpatch-scarface/)
+  (how the renderer keeps its vertex and index buffers), [RCFRedirect](https://github.com/GangstaTeam/RCFRedirect)
+  by GangstaTeam (where the game opens files from its `.rcf` archives) and
+  [ScarfaceHook](https://github.com/ermaccer/scarfacehook) by ermaccer (which functions move the camera,
+  create cars and people, set the time of day). They were read as references for what functions do and
+  what they are called; no code was copied. Names that come from them say so in `reports/names.json`:
+  `core::CementLibrary::OpenFileByHash` and the file-name hash it works with are RCFRedirect's. The
+  game's script commands (`DBChangeDirtyCash`, `CVM_SetMainCharacterPackage` and some 800 more) are
+  named in the game's own program, but it was ScarfaceHook and
+  [ScarfaceEX](https://www.moddb.com/mods/scarfaceex), which call them, that showed they were there to
+  be read ([NAMES.md](NAMES.md)).
 * For compiling TorqueScript the way the game does: the code generator of
   [Torque2D](https://github.com/TorqueGameEngines/Torque2D) (`astNodes.cc`, `compiler.cc`, MIT
   licence), the open-source descendant of the engine Scarface's script compiler came from. It was read

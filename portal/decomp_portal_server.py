@@ -973,6 +973,18 @@ def save_registry() -> None:
     write_outputs(REGISTRY, RECON_DIR, queue=ALL_TASKS)
 
 
+def refresh_outputs() -> None:
+    """Rewrite the generated files as this version of the portal writes them, before they are committed. They
+    are otherwise written when a match is saved, so right after an update the ones on disk are still the
+    older portal's: committing those failed the check on GitHub (a file the update added, such as
+    docs/sitemap.xml, missing or out of date). A problem here never stops the push."""
+    try:
+        write_outputs(REGISTRY, RECON_DIR, queue=ALL_TASKS)
+    except Exception:  # noqa: BLE001
+        import traceback
+        traceback.print_exc()
+
+
 # =========================================================================== #
 # Look-alikes: carry a new match over to functions with the same machine code
 # =========================================================================== #
@@ -1080,6 +1092,13 @@ def _port_worker() -> None:
 
 
 _PORT_THREAD: List[threading.Thread] = []
+
+
+def porting_left() -> int:
+    """How many look-alikes the background worker still has to try. While this is above zero the count of
+    new matches can keep rising with nobody pressing anything: each one that matches is a new match."""
+    return sum(max(0, int(st.get("total", 0)) - int(st.get("tried", 0)))
+               for st in list(PORT_STATUS.values()) if st.get("running"))
 
 
 def queue_port(t: dict, cpp_code: str, user: str, tool: str, catchup: bool = False, tried: Optional[dict] = None) -> int:
@@ -1405,7 +1424,8 @@ def ai_call(cfg: dict) -> dict:
 # docs/feed.xml and docs/functions.json are made from the registry too (registry_outputs.py): the website's feed
 # and its list of rebuilt functions, so they go up with every sync.
 GIT_PATHS = ["reconstructed_src", "reports/verified_registry.json", "reports/reverify_report.md",
-             "reports/decomp_audit_log.json", "reports/progress.json", "README.md", "docs/feed.xml", "docs/functions.json"]
+             "reports/decomp_audit_log.json", "reports/progress.json", "README.md", "docs/feed.xml", "docs/functions.json",
+             "docs/sitemap.xml"]
 
 
 NOT_A_CLONE = ("This folder isn't connected to GitHub: it was downloaded as a ZIP, so it has no .git folder. "
@@ -2144,7 +2164,8 @@ class Handler(BaseHTTPRequestHandler):
                                    "repo_url": REPO_URL, "lookalikes": lookalike_summary(),
                                    "binary_problems": BINARY_PROBLEMS, "scripts": script_check_summary(),
                                    "proto_in_retail": {"same_code": copies["code"], "same_method": copies["method"]},
-                                   "pending": len(pending_keys()) + len(pending_descriptions()), "maintainers": sorted(MAINTAINERS)})
+                                   "pending": len(pending_keys()) + len(pending_descriptions()), "porting": porting_left(),
+                                   "maintainers": sorted(MAINTAINERS)})
         if u.path == "/api/source":
             name = q1("name")
             p = (RECON_DIR / name).resolve()
@@ -2245,6 +2266,7 @@ class Handler(BaseHTTPRequestHandler):
             out = GA.out_dir(GAME_FILES.bin_dir)
             found = BX.areas(out, GAME_FILES.index(), q1("version"))
             return self._json({"ok": True, "areas": [dict(a, files=len(a["files"])) for a in found],
+                               "city_by_version": BX.city_counts(out, GAME_FILES.index()),
                                "city": dict(BLENDER.status),
                                "city_files": len(list(BLENDER.folder(q1("version")).glob("*.glb")))
                                if q1("version") in GA.LABELS else 0,
@@ -2480,6 +2502,7 @@ class Handler(BaseHTTPRequestHandler):
         if user not in MAINTAINERS:
             return self._json({"ok": False, "error": "Only maintainers can push to GitHub. To share your matches, open a pull request (docs/CONTRIBUTING.md) or post them in #help on Discord."}, 403)
         with STATE_LOCK:
+            refresh_outputs()
             res = git_sync(user)
         self._json(res)
 
@@ -2490,6 +2513,7 @@ class Handler(BaseHTTPRequestHandler):
             return
         if user in MAINTAINERS:
             with STATE_LOCK:
+                refresh_outputs()
                 res = git_sync(user)
             return self._json(dict(res, mode="pushed", pending=len(pending_keys()) + len(pending_descriptions())))
         bundle = make_submission(user)
@@ -2580,6 +2604,10 @@ class Handler(BaseHTTPRequestHandler):
             data = path.read_bytes()
             if what == "inspect":
                 info = BX.inspect(data)
+                if info["blender"]:            # only offer Blender what this copy can really show
+                    why = BX.cant_show(GA.out_dir(GAME_FILES.bin_dir), GAME_FILES.index(), q1("version"), q1("path"), data)
+                    if why:
+                        info.update(blender=False, blender_why=why)
                 if info["lines"]:
                     info["sound"] = GA.companion(GAME_FILES.index(), q1("version"), q1("path")) or ""
                 return self._json(dict(info, ok=True))

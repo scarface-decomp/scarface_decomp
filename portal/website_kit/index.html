@@ -575,6 +575,7 @@
     .gf-quick > div { flex: 1 1 320px; display: flex; flex-direction: column; gap: 4px; }
     .gf-quick span { color: var(--muted); font-size: 0.9rem; }
     .gfb-row select { min-width: 260px; max-width: 100%; }
+    .gfb-pick label { font-weight: 600; }
     .gfb-row a.btn-sm[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
     .gf-notes.err { color: var(--error); }
     @media (max-width: 720px) {
@@ -1107,7 +1108,7 @@
 
               <div class="submit-strip" id="submit-strip" hidden>
                 <p><strong id="submit-strip-count">New matches</strong> <span id="submit-strip-verb">are</span> saved on this computer but not on GitHub yet.
-                  When you're done for now, submit your work so it is added to the project under your name.</p>
+                  When you're done for now, submit your work so it is added to the project under your name.<span id="submit-strip-more"></span></p>
                 <button type="button" class="btn primary" onclick="submitWork()">Submit your work</button>
               </div>
 
@@ -1225,7 +1226,7 @@
               <label class="gf-mode"><input type="radio" name="gf-mode" value="best" onchange="gfChoicesChanged()" />
                 <span><b>Best version of each file</b><span>One copy of everything the versions share, in <code>Best/</code>, the highest quality winning: the PC's 48 kHz sounds, its 1280&times;720 videos, the biggest textures. What only one version has gets its own <code>Exclusive to</code> folder.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="pc" onchange="gfChoicesChanged()" />
-                <span><b>The PC first, then what only the others have</b><span>The whole PC version in <code>PC/</code>, and from the others only what the PC doesn't have: each one's own in its <code>Exclusive to</code> folder, what several of them have once in <code>Not on the PC/</code>. The PC's models, textures and animations are the best for Blender.</span></span></label>
+                <span><b>The PC first, then what only the others have</b><span>The whole PC version in <code>PC/</code>, and from the others only what the PC doesn't have: each one's own in its <code>Exclusive to</code> folder, what several of them have once in <code>Not on the PC/</code>. The PC's models and animations are the ones Blender shows best. The Xbox keeps many of the same textures with deeper colours: <b>Every texture as a picture</b> takes the better copy of each.</span></span></label>
               </div>
             </fieldset>
 
@@ -1323,6 +1324,11 @@
               <div class="gf-run"><button type="button" class="btn primary" id="gfb-copy" onclick="startGfForBlender('gfb-copy')">Copy the game files for Blender</button></div>
             </div>
             <div id="gfb-tools">
+            <div class="gfb-row gfb-pick">
+              <label for="gfb-version">Version</label>
+              <select id="gfb-version" class="input-box" onchange="gfPickBlenderVersion()"></select>
+            </div>
+            <p class="gf-notes" id="gfb-version-note" role="status"></p>
             <h3 class="gf-h">A map area</h3>
             <div class="gfb-row">
               <label class="sr-only" for="gfb-area">Map area</label>
@@ -1806,6 +1812,7 @@
     }
     if (s.scripts) renderScriptCheck(s.scripts);
     if (s.pending !== undefined) STATE.pending = s.pending;
+    STATE.porting = Number(s.porting) || 0;
     if (Array.isArray(s.maintainers)) STATE.maintainers = s.maintainers;
     updateSubmitUI();
   }
@@ -3395,6 +3402,12 @@
     const note = $('submit-note');
     if (!note) return;
     note.textContent = n ? matchesText(n) + ' to submit' : (STATE.pending === undefined ? 'Press when you\'re done for now' : 'Everything is on GitHub');
+    // Each match is tried on the functions with the same code, in the background: that is why the count can
+    // keep rising after a batch has finished.
+    const left = Number(STATE.porting) || 0;
+    if (left) note.textContent += ' · still trying ' + fmtInt(left) + ' look-alike' + (left === 1 ? '' : 's');
+    const more = $('submit-strip-more');
+    if (more) more.textContent = left ? ' The portal is still trying your matches on ' + fmtInt(left) + ' look-alike function' + (left === 1 ? '' : 's') + ', so this number can keep rising by itself.' : '';
     note.classList.toggle('has-work', n > 0);
     $('submit-strip').hidden = n === 0;
     $('submit-strip-count').textContent = matchesText(n);
@@ -3530,7 +3543,7 @@
     gpu.disabled = !d.gpu;
     $('gf-gpu-text').textContent = d.gpu ? 'Use the graphics card (' + d.gpu + ') to make movies playable; the processor does it if the card can’t.'
       : d.ffmpeg ? 'No graphics card FFmpeg can use was found: movies are made by the processor. (Copying the game files can’t use a graphics card.)'
-      : 'Movies need FFmpeg; with it, a graphics card can make them faster. (Copying the game files can’t use a graphics card.)';
+      : 'Movies need FFmpeg, a free program. On Windows, open PowerShell and run:  winget install Gyan.FFmpeg  then close this page\'s START_PORTAL window and start it again: the portal finds it by itself. With it, a graphics card can make movies faster. (Copying the game files can’t use a graphics card.)';
   }
 
   async function saveGfSpeed() {
@@ -3810,6 +3823,7 @@
       o.value = '';
       sel.appendChild(o);
     }
+    renderGfBlenderVersions(d.city_by_version);
     updateGfAreaLink();
     GFB_CITY_FILES = d.city_files || 0;
     if (GFB_CITY_FILES) GFB_CITY_VERSION = GF_TAB;
@@ -3819,6 +3833,45 @@
       $('gfb-city-bl-status').textContent = 'The city in binaries/blender/ was exported before props came in whole and at full detail: press Export the city again.';
     }
     gfShowBlenderApp();
+  }
+
+  /* Which version the Blender tools work on, beside them (the same choice as the tabs above the list), with how
+     much of the city each version's copy holds. A copy that keeps only what one version has (No duplicates, Best,
+     The PC first) leaves the others a few areas, not a city: say so, and don't offer what can't work. */
+  function renderGfBlenderVersions(counts) {
+    const s = (GF_DATA || {}).summary || {};
+    const sel = $('gfb-version');
+    const vers = Object.keys(s.versions || {});
+    const known = !!counts;
+    counts = counts || {};
+    const most = Math.max(0, ...vers.map((v) => Number(counts[v]) || 0));
+    sel.textContent = '';
+    vers.forEach((v) => {
+      const n = Number(counts[v]) || 0;
+      const what = !n ? 'no city areas in this copy' : n >= most ? 'the whole city, ' + fmtInt(n) + ' areas'
+        : 'only ' + fmtInt(n) + ' area' + (n === 1 ? '' : 's') + ' of its own';
+      const o = el('option', s.versions[v].label + (known ? ': ' + what : ''));
+      o.value = v;
+      sel.appendChild(o);
+    });
+    sel.value = GF_TAB;
+    const mine = Number(counts[GF_TAB]) || 0;
+    const partial = known && mine < most && s.mode && s.mode !== 'every';
+    const label = (s.versions[GF_TAB] || {}).label || 'This version';
+    $('gfb-version-note').textContent = partial
+      ? 'Your copy (' + (s.mode_label || s.mode) + ') keeps from the ' + label + ' only the files no other version has the same, so there '
+        + (mine ? (mine === 1 ? 'is 1 area' : 'are ' + fmtInt(mine) + ' areas') + ' here, not its whole city' : 'is no city to export here')
+        + '. For the ' + label + '\'s whole city, copy again with Every version complete.'
+      : '';
+    $('gfb-city').hidden = known && !mine;
+  }
+
+  function gfPickBlenderVersion() {
+    const v = $('gfb-version').value;
+    if (!v || v === GF_TAB) return;
+    GF_TAB = v;
+    GF_KIND = '';
+    renderGfResult();
   }
 
   function updateGfAreaLink() {
@@ -4320,6 +4373,7 @@
       box.append(play, spot);
     }
     if (d.blender) gfBlenderActions(box, { path: path }, path.split('/').pop().replace(/\.p3d$/i, '') + '.glb');
+    else if (d.blender_why) box.appendChild(el('p', d.blender_why, 'small'));
     if (d.pictures) {
       const pics = el('div');
       box.appendChild(pics);

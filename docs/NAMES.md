@@ -6,10 +6,10 @@ with the functions found and named instead of from scratch.
 
 | Version | Functions | Named so far |
 | :--- | ---: | ---: |
-| Xbox `default.xbe` | 19,534 | 6,763 |
-| Xbox prototype `game.xbe` (April 2006) | 17,904 | 6,762 |
+| Xbox `default.xbe` | 19,534 | 7,160 |
+| Xbox prototype `game.xbe` (April 2006) | 17,904 | 6,764 |
 | PS2 `SLUS_211.11` | 23,567 | 843 |
-| PC `Scarface.exe` 1.00.2 (the part that isn't encrypted, see [GAME_VERSIONS.md](GAME_VERSIONS.md)) | 1,516 | 766 |
+| PC `Scarface.exe` 1.00.2 (the part that isn't encrypted, see [GAME_VERSIONS.md](GAME_VERSIONS.md)) | 1,516 | 768 |
 
 (As of November 2026. The counts grow with every match and every name added; the lists themselves are
 the address-order files in [`reconstructed_src/`](../reconstructed_src).)
@@ -24,7 +24,18 @@ the address-order files in [`reconstructed_src/`](../reconstructed_src).)
   the Xbox's by the strings only the two of them use and by matching places in their tables of virtual
   functions, and get the Xbox name ([PS2.md](PS2.md)).
 * **Matches.** A verified function has the name it was matched with.
-* **People.** Names worked out by hand are in [`reports/names.json`](../reports/names.json).
+* **The game's script commands.** Every command a script can call (`GetGameTime()`,
+  `%tony.AddHealth(...)`) is a function the program registers under that name when it starts, so the
+  program itself says which function is which. `portal/tools/script_commands.py` reads the 820
+  registrations out of `default.xbe` and names the function behind each one `Script::<Command>` (or
+  `Script::<Class>_<Command>`): 397 functions on the Xbox so far that the queue only knew by address.
+  That these commands exist was known from the modding scene first: ScarfaceHook and ScarfaceEX call
+  them by name ([CREDITS.md](CREDITS.md)).
+* **Published research.** A name another project worked out and published under a licence that allows
+  it, with the project named in `by`, and checked against the code: so far the PC's
+  `core::CementLibrary::OpenFileByHash`, from RCFRedirect.
+* **People.** Names worked out by hand are in [`reports/names.json`](../reports/names.json), with the
+  two kinds above.
 
 Everything else keeps an address name: `sub_00011010` (Xbox, PC, prototype) or `func_00390320` (PS2).
 

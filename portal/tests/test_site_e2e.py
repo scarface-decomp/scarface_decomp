@@ -290,6 +290,24 @@ def test_faq_opens_and_needs_no_script(site, browser):
     ctx.close()
 
 
+@pytest.mark.parametrize("page, says, link", [
+    ("function.html?f=xb%3A0x00011000", "needs JavaScript to show the function", "/tree/main/reconstructed_src"),
+    ("versions.html", "comparison needs JavaScript", "/blob/main/docs/VERSIONS.md"),
+])
+def test_pages_say_so_when_scripts_are_off(site, browser, page, says, link):
+    """With JavaScript off, the function and versions pages say what they need and where the same thing is on
+    GitHub, instead of "Loading…" forever. The site's own policy stays on: the message needs no script."""
+    _, url = site
+    ctx = browser.new_context(java_script_enabled=False)
+    pg = ctx.new_page()
+    pg.goto(url + page)
+    note = pg.locator("noscript .empty")
+    assert says in note.inner_text() and note.is_visible()
+    assert note.locator("a").get_attribute("href").endswith(link)
+    assert not pg.locator("#loading").is_visible()
+    ctx.close()
+
+
 @pytest.mark.parametrize("width", [1280, 820, 375])
 def test_table_of_contents(site, browser, width):
     """The contents bar lists every section at every width, its links land on the sections below the

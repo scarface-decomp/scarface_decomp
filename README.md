@@ -203,7 +203,8 @@ Choose a layout:
 * **The PC first, then what only the others have**: the whole PC version in `PC/` (patched, if the patch
   is there), and from the Xbox, PS2 and prototype only what the PC doesn't have: what only one of them
   has in its `Exclusive to` folder, and what several of them have, once, in `Not on the PC/`. The PC's
-  copies are the best for models, textures and animations, so this is the one for
+  copies are the ones Blender shows best for models and animations (the Xbox keeps many of the same
+  textures with deeper colours, which the texture export takes), so this is the one for
   [Blender](docs/FORMATS.md#exporting-to-blender): **Copy everything, PC first** at the top of the Game
   files tab does it in one click.
 

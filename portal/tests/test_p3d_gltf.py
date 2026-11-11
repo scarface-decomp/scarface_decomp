@@ -723,6 +723,42 @@ def test_what_a_file_holds(monkeypatch, tmp_path):
     assert code == 200 and read_glb(body)[0]["cameras"][0]["name"] == "cam"
 
 
+def test_blender_is_only_offered_what_this_copy_can_show(monkeypatch, tmp_path):
+    """Open in Blender isn't offered for a file it would answer "nothing to export" for. A copy that keeps from
+    a version only what the others don't have (The PC first) leaves it without Tony: its animations borrow
+    him from another version, and without him anywhere the page says why instead of showing the button."""
+    import blender_export as BX
+    rig = skeleton("rig", [("character_root", 0, (0, 0, 0)), ("pelvis", 0, (0, 1.0, 0))])
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    tony = p3d(rig, skin_chunk(tri, [0, 1, 2], [(1.0, 0, 0)] * 3, [0] * 3, [0, 1]))
+    moves = p3d(animation("XB_Only_Dance", [("pelvis", [(0, (0, 0, 0, 1)), (30, (0, 0.6, 0, 0.8))])]))
+    empty = p3d(chunk(0x10000, text("nothing_in_it") + struct.pack("<II", 0, 0)))      # a mesh with no geometry
+    out, index = copied_game(tmp_path, {"cement.rcf/art/characters/pc/MCP_BlackSuitTony.p3d": tony})
+    place = "Exclusive to Xbox/art/animations/XB.p3d"
+    (out / place).parent.mkdir(parents=True)
+    (out / place).write_bytes(moves)
+    index["versions"]["xbox"] = {"files": [["cement.rcf/art/animations/XB.p3d", len(moves), "s", "only", place, None, 1]]}
+    assert BX.stand_in(out, index, "xbox").name == "MCP_BlackSuitTony.p3d"              # the PC's Tony
+    assert BX.cant_show(out, index, "xbox", "cement.rcf/art/animations/XB.p3d", moves) == ""
+    glb, _ = BX.model_glb(out, index, "xbox", "cement.rcf/art/animations/XB.p3d", moves)
+    assert [a["name"] for a in read_glb(glb)[0]["animations"]] == ["XB_Only_Dance"]
+    del index["versions"]["pc"]
+    assert "Tony's model isn't among your copied files" in BX.cant_show(out, index, "xbox", "x/XB.p3d", moves)
+    assert BX.cant_show(out, index, "pc", "x/tony.p3d", tony) == ""
+    why = BX.cant_show(out, index, "xbox", "x/empty.p3d", empty)
+    assert BX.inspect(empty)["blender"] and "nothing to show from the Xbox's copy" in why
+    assert BX.cant_show(out, index, "pc", "x/big.p3d", empty + bytes(BX.CHECK_MAX)) == ""   # not tried ahead of time
+
+
+def test_how_much_of_the_city_each_version_has(tmp_path):
+    import blender_export as BX
+    out, index = copied_game(tmp_path, city_files())
+    index["versions"]["xbox"] = {"files": [["cement.rcf/packages/z04/s_09_shell.p3d", 10, "s", "only", "Exclusive to Xbox/s.p3d", None, 1],
+                                           ["cement.rcf/packages/z04/t_10_shell.p3d", 10, "s", "changed", "", None, 1]]}
+    index["versions"]["ps2"] = {"files": []}
+    assert BX.city_counts(out, index) == {"pc": 2, "xbox": 1, "ps2": 0}                 # a file not copied isn't an area
+
+
 def test_open_in_blender(monkeypatch, tmp_path):
     import blender_export as BX
     server, out, index = _server(monkeypatch, tmp_path, city_files())
@@ -780,6 +816,10 @@ def test_the_blender_script_imports_and_saves(tmp_path, monkeypatch):
     script = open(args[2], encoding="utf-8").read()
     compile(script, "open_in_blender.py", "exec")                                       # valid Python for Blender
     assert "import_scene.gltf" in script and "save_as_mainfile" in script and "a.glb" in script
+    # the import waits for Blender's window and runs inside it (a skeleton needs one), without the helper ball
+    assert "bpy.app.timers.register(later" in script and "temp_override" in script
+    assert "disable_bone_shape=True" in script and "read_homefile" not in script
+    assert ".import-error.txt" in script and "if SAVE and shown" in script
 
 
 # --------------------------------------------------------------------------- props: how they start, and what they become

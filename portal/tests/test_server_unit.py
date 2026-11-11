@@ -107,6 +107,16 @@ def test_prototype_functions_also_in_retail_are_left_out_of_the_queue(S, monkeyp
     assert [t["id"] for t in tasks if S.in_default_queue(t)] == ["xb1", "xb3", "proto5", "proto6", "proto7"]
 
 
+def test_how_many_look_alikes_are_still_to_try(S, monkeypatch):
+    """What the page shows beside the count of new matches, which keeps rising while this is above zero."""
+    monkeypatch.setattr(S, "PORT_STATUS", {"a": {"running": True, "total": 67, "tried": 60},
+                                           "b": {"running": False, "total": 9, "tried": 2},     # finished or failed
+                                           "c": {"running": True, "total": 5, "tried": 5}})
+    assert S.porting_left() == 7
+    monkeypatch.setattr(S, "PORT_STATUS", {})
+    assert S.porting_left() == 0
+
+
 def test_earlier_matches_catch_up_on_their_look_alikes(S, monkeypatch, tmp_path):
     """A retail match made before the prototype was added is tried on the prototype's identical copy at
     startup, credited to whoever matched it. A failed try is not repeated at every start, unless the

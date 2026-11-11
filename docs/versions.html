@@ -81,6 +81,7 @@
       .nav a.opt { display: none; }
     }
   </style>
+  <noscript><style>#loading { display: none; }</style></noscript>
 </head>
 <body>
   <header class="topbar">
@@ -102,6 +103,7 @@
         nothing from the files themselves.</p>
 
       <div id="loading" class="empty">Loading…</div>
+      <noscript><div class="empty">This comparison needs JavaScript. Without it, the same lists are in <a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/VERSIONS.md">VERSIONS.md on GitHub</a>.</div></noscript>
       <div id="missing" class="empty" hidden>
         <p>The comparison hasn't been made yet. Anyone with their own copies of the versions can make it:</p>
         <p style="margin-top:10px"><code>python portal/tools/version_report.py --scan</code></p>

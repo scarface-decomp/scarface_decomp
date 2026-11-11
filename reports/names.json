@@ -1,5 +1,2011 @@
 {
   "schema": "scarface_names_v1",
   "note": "Names people worked out for functions that aren't matched yet. See docs/NAMES.md. Keys: version:address. Checked by portal/scripts/check_repo.py.",
-  "names": {}
+  "names": {
+    "pc:0x006E6D90": {
+      "name": "core::CementLibrary::OpenFileByHash",
+      "by": "RCFRedirect by GangstaTeam (MIT licence), checked against the code",
+      "why": "RCFRedirect calls this address as CementLibrary's open-file function: it takes a file-name hash and a place for the file, looks the hash up in the archive's table and opens the file, and returns false when the archive doesn't have it."
+    },
+    "pc:0x006E6F80": {
+      "name": "core::CementLibrary::OpenFile",
+      "by": "Read from the code; the hash function it calls is the one RCFRedirect by GangstaTeam names",
+      "why": "Skips a leading backslash in the file name, hashes the name (0x006DCC70, the file-name hash RCFRedirect uses) and hands the hash to OpenFileByHash at 0x006E6D90."
+    },
+    "proto:0x0005D070": {
+      "name": "Script::GetFileLine",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x002E1AD0 registers this function as the script command GetFileLine (0 arguments)."
+    },
+    "proto:0x0029A110": {
+      "name": "Script::VehicleObject_GetVehicleType",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x002EB450 registers this function as the script command VehicleObject::GetVehicleType (0 arguments)."
+    },
+    "xb:0x00011180": {
+      "name": "Script::LOSSetBehaviourTypeGroup",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00311900 registers this function as the script command LOSSetBehaviourTypeGroup (1 argument)."
+    },
+    "xb:0x00011340": {
+      "name": "Script::CastWorldLOS",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003118A0 registers this function as the script command CastWorldLOS (2 arguments). Also registered as CastLOS."
+    },
+    "xb:0x00018EA0": {
+      "name": "Script::CCB_ClearBumped",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00311D60 registers this function as the script command CCB_ClearBumped (0 arguments)."
+    },
+    "xb:0x00020860": {
+      "name": "Script::ActionMap_BindKey",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312180 registers this function as the script command ActionMap::BindKey (3 to 4 arguments)."
+    },
+    "xb:0x000208B0": {
+      "name": "Script::ActionMap_BindBlockingKey",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003121A0 registers this function as the script command ActionMap::BindBlockingKey (3 to 4 arguments)."
+    },
+    "xb:0x00020900": {
+      "name": "Script::ActionMap_BindKeysWithTimer",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003121C0 registers this function as the script command ActionMap::BindKeysWithTimer (3 to 4 arguments)."
+    },
+    "xb:0x00020960": {
+      "name": "Script::ActionMap_BindFunction",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003121E0 registers this function as the script command ActionMap::BindFunction (3 arguments)."
+    },
+    "xb:0x00020990": {
+      "name": "Script::ActionMap_BindCommand",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312200 registers this function as the script command ActionMap::BindCommand (3 to 4 arguments)."
+    },
+    "xb:0x000209E0": {
+      "name": "Script::ActionMap_Push",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312220 registers this function as the script command ActionMap::Push (0 arguments)."
+    },
+    "xb:0x000209F0": {
+      "name": "Script::ActionMap_Pop",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312240 registers this function as the script command ActionMap::Pop (0 arguments)."
+    },
+    "xb:0x00020A00": {
+      "name": "Script::ActionMap_IsPushed",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312260 registers this function as the script command ActionMap::IsPushed (0 arguments)."
+    },
+    "xb:0x00020AA0": {
+      "name": "Script::SetAnalogDeadZone",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312280 registers this function as the script command SetAnalogDeadZone (1 argument)."
+    },
+    "xb:0x00024A50": {
+      "name": "Script::CreateScroobyProject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312500 registers this function as the script command CreateScroobyProject (4 to 5 arguments)."
+    },
+    "xb:0x00024AA0": {
+      "name": "Script::SetLoaderAllocator",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312520 registers this function as the script command SetLoaderAllocator (1 argument)."
+    },
+    "xb:0x00024AB0": {
+      "name": "Script::SetFontInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312540 registers this function as the script command SetFontInventory (1 argument)."
+    },
+    "xb:0x00024AC0": {
+      "name": "Script::GenerateFormattedNumericString",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312560 registers this function as the script command GenerateFormattedNumericString (3 arguments)."
+    },
+    "xb:0x00024AF0": {
+      "name": "Script::AllocateMemoryForPMGTextbibles",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312580 registers this function as the script command AllocateMemoryForPMGTextbibles (2 arguments)."
+    },
+    "xb:0x00024B40": {
+      "name": "Script::SetTextbibleToSpecialLoad",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003125C0 registers this function as the script command SetTextbibleToSpecialLoad (2 arguments)."
+    },
+    "xb:0x00024B60": {
+      "name": "Script::AddTextbibleEntryToLoad",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003125E0 registers this function as the script command AddTextbibleEntryToLoad (2 arguments)."
+    },
+    "xb:0x00024BB0": {
+      "name": "Script::GetNumTextbibleEntriesToLoad",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312600 registers this function as the script command GetNumTextbibleEntriesToLoad (1 argument)."
+    },
+    "xb:0x00024BE0": {
+      "name": "Script::RemoveTextbibleSpecialStringData",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312620 registers this function as the script command RemoveTextbibleSpecialStringData (0 to 1 arguments)."
+    },
+    "xb:0x00024C30": {
+      "name": "Script::GetCurrentLanguage",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312640 registers this function as the script command GetCurrentLanguage (0 arguments)."
+    },
+    "xb:0x00024C50": {
+      "name": "Script::TBE_To_Text",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312660 registers this function as the script command TBE_To_Text (1 argument)."
+    },
+    "xb:0x00024D50": {
+      "name": "Script::FEBoxObject_SetTriPosition",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312680 registers this function as the script command FEBoxObject::SetTriPosition (2 arguments)."
+    },
+    "xb:0x00024D80": {
+      "name": "Script::FEBoxObject_SetPosition",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003126A0 registers this function as the script command FEBoxObject::SetPosition (2 arguments)."
+    },
+    "xb:0x00024DC0": {
+      "name": "Script::FESpriteObject_SetCurrentItem",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003126C0 registers this function as the script command FESpriteObject::SetCurrentItem (1 argument)."
+    },
+    "xb:0x00024DE0": {
+      "name": "Script::FETextObject_SetText",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003126E0 registers this function as the script command FETextObject::SetText (1 to 2 arguments)."
+    },
+    "xb:0x00024E20": {
+      "name": "Script::FETextObject_ClearTextItems",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312700 registers this function as the script command FETextObject::ClearTextItems (0 arguments)."
+    },
+    "xb:0x00024E30": {
+      "name": "Script::DestroyScroobyProject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312720 registers this function as the script command DestroyScroobyProject (1 argument)."
+    },
+    "xb:0x00026820": {
+      "name": "Script::Graph_AddKey",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312760 registers this function as the script command Graph::AddKey (1 argument)."
+    },
+    "xb:0x00026850": {
+      "name": "Script::Graph_SetMaxNumKeys",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312780 registers this function as the script command Graph::SetMaxNumKeys (1 argument)."
+    },
+    "xb:0x0002CE80": {
+      "name": "Script::GameGroup_Recurse",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312870 registers this function as the script command GameGroup::Recurse (1 to 8 arguments)."
+    },
+    "xb:0x0002D330": {
+      "name": "Script::GameObject_SetPosition",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003128B0 registers this function as the script command GameObject::SetPosition (1 argument). Also registered as PositionObject::SetPosition."
+    },
+    "xb:0x0002D360": {
+      "name": "Script::GameObject_SetDirection",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003128D0 registers this function as the script command GameObject::SetDirection (1 argument)."
+    },
+    "xb:0x0002D4F0": {
+      "name": "Script::GameSet_Add",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312930 registers this function as the script command GameSet::Add (1 argument)."
+    },
+    "xb:0x0002D520": {
+      "name": "Script::GameSet_Remove",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312950 registers this function as the script command GameSet::Remove (1 argument)."
+    },
+    "xb:0x0002D5C0": {
+      "name": "Script::GameSet_Find",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312990 registers this function as the script command GameSet::Find (1 argument)."
+    },
+    "xb:0x0002D610": {
+      "name": "Script::GameSet_Size",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003129D0 registers this function as the script command GameSet::Size (0 arguments)."
+    },
+    "xb:0x0002D660": {
+      "name": "Script::GameSet_GetObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312910 registers this function as the script command GameSet::GetObject (1 argument)."
+    },
+    "xb:0x0002D6A0": {
+      "name": "Script::GameSet_GetMemberUsingIndex",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003129B0 registers this function as the script command GameSet::GetMemberUsingIndex (1 argument)."
+    },
+    "xb:0x0002D780": {
+      "name": "Script::GameSimObject_SetInvincible",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312A50 registers this function as the script command GameSimObject::SetInvincible (1 argument)."
+    },
+    "xb:0x0002DCE0": {
+      "name": "Script::ScriptObject_Delete",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312B70 registers this function as the script command ScriptObject::Delete (0 arguments)."
+    },
+    "xb:0x0002DCF0": {
+      "name": "Script::ScriptObject_ApplyChanges",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312B90 registers this function as the script command ScriptObject::ApplyChanges (0 to 1 arguments)."
+    },
+    "xb:0x0002DD30": {
+      "name": "Script::ScriptObject_RelinkNamespaces",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312BB0 registers this function as the script command ScriptObject::RelinkNamespaces (0 arguments)."
+    },
+    "xb:0x0002DD40": {
+      "name": "Script::ScriptObject_IsA",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312C30 registers this function as the script command ScriptObject::IsA (1 argument)."
+    },
+    "xb:0x0002DD60": {
+      "name": "Script::ScriptObject_ExportAttribute",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312C50 registers this function as the script command ScriptObject::ExportAttribute (1 to 3 arguments)."
+    },
+    "xb:0x0002DDB0": {
+      "name": "Script::ScriptObject_SetSubZone",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312C70 registers this function as the script command ScriptObject::SetSubZone (1 argument)."
+    },
+    "xb:0x0002DDD0": {
+      "name": "Script::ScriptObject_Recurse",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312C90 registers this function as the script command ScriptObject::Recurse (1 to 8 arguments)."
+    },
+    "xb:0x0002E040": {
+      "name": "Script::ScriptObject_SetDataField",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312CB0 registers this function as the script command ScriptObject::SetDataField (2 arguments)."
+    },
+    "xb:0x0002E0C0": {
+      "name": "Script::ScriptObject_GetID",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312BD0 registers this function as the script command ScriptObject::GetID (0 arguments)."
+    },
+    "xb:0x0002E0D0": {
+      "name": "Script::ScriptObject_GetParentGroup",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312BF0 registers this function as the script command ScriptObject::GetParentGroup (0 arguments)."
+    },
+    "xb:0x0002E0F0": {
+      "name": "Script::ScriptObject_GetClass",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312C10 registers this function as the script command ScriptObject::GetClass (0 arguments)."
+    },
+    "xb:0x0002EB20": {
+      "name": "Script::OptionManager_ParseCommandLineInput",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312D30 registers this function as the script command OptionManager_ParseCommandLineInput (1 argument)."
+    },
+    "xb:0x0002EB30": {
+      "name": "Script::OptionManager_GetMemoryMode",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312D50 registers this function as the script command OptionManager_GetMemoryMode (0 arguments)."
+    },
+    "xb:0x0002EB50": {
+      "name": "Script::OptionManager_GetInvertStatus",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00312D70 registers this function as the script command OptionManager_GetInvertStatus (1 argument)."
+    },
+    "xb:0x0003D6C0": {
+      "name": "Script::RoadGraph_ShowHintsToDestination",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313070 registers this function as the script command RoadGraph_ShowHintsToDestination (2 to 3 arguments)."
+    },
+    "xb:0x0003D770": {
+      "name": "Script::RoadGraph_StopHints",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313090 registers this function as the script command RoadGraph_StopHints (0 arguments)."
+    },
+    "xb:0x0003D780": {
+      "name": "Script::RoadGraph_ShowRaceHUD",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003130B0 registers this function as the script command RoadGraph_ShowRaceHUD (1 argument)."
+    },
+    "xb:0x0003D7B0": {
+      "name": "Script::RoadGraph_SetArrivedAtDestinationCallback",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003130D0 registers this function as the script command RoadGraph_SetArrivedAtDestinationCallback (1 argument)."
+    },
+    "xb:0x0003D7D0": {
+      "name": "Script::RoadGraph_SetLapCompletedCallback",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003130F0 registers this function as the script command RoadGraph_SetLapCompletedCallback (1 argument)."
+    },
+    "xb:0x0003D7F0": {
+      "name": "Script::RoadGraph_ShowHintsWithPath",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313050 registers this function as the script command RoadGraph_ShowHintsWithPath (2 arguments)."
+    },
+    "xb:0x0003D840": {
+      "name": "Script::WorldFadeIn_Enable",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313110 registers this function as the script command WorldFadeIn_Enable (1 argument)."
+    },
+    "xb:0x0003D860": {
+      "name": "Script::TakeScreenShot",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313130 registers this function as the script command TakeScreenShot (0 to 3 arguments)."
+    },
+    "xb:0x0003D920": {
+      "name": "Script::DisplayExteriors_Enable",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313150 registers this function as the script command DisplayExteriors_Enable (1 argument)."
+    },
+    "xb:0x0003D940": {
+      "name": "Script::DisplayInteriors_Enable",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313170 registers this function as the script command DisplayInteriors_Enable (1 argument)."
+    },
+    "xb:0x0003D960": {
+      "name": "Script::TimeOfDay_Enable",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313190 registers this function as the script command TimeOfDay_Enable (1 argument)."
+    },
+    "xb:0x0003D980": {
+      "name": "Script::Widescreen_Enable",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003131B0 registers this function as the script command Widescreen_Enable (1 argument)."
+    },
+    "xb:0x0003D9B0": {
+      "name": "Script::HDTV_Enable",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003131F0 registers this function as the script command HDTV_Enable (1 argument)."
+    },
+    "xb:0x0003D9E0": {
+      "name": "Script::TriggerAmbientEffect",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313230 registers this function as the script command TriggerAmbientEffect (4 arguments)."
+    },
+    "xb:0x0004E190": {
+      "name": "Script::SRC_SetNumLayers",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003132E0 registers this function as the script command SRC_SetNumLayers (1 argument)."
+    },
+    "xb:0x0004E1F0": {
+      "name": "Script::SRC_SetOffset",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313300 registers this function as the script command SRC_SetOffset (3 arguments)."
+    },
+    "xb:0x0004E270": {
+      "name": "Script::SRC_SetLayerVisible",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313320 registers this function as the script command SRC_SetLayerVisible (2 arguments)."
+    },
+    "xb:0x0004E2E0": {
+      "name": "Script::SRC_SetLayerScale",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313340 registers this function as the script command SRC_SetLayerScale (5 arguments)."
+    },
+    "xb:0x000604B0": {
+      "name": "Script::LoadResource",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313550 registers this function as the script command LoadResource (4 arguments)."
+    },
+    "xb:0x00060530": {
+      "name": "Script::LoadScriptResource",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313570 registers this function as the script command LoadScriptResource (4 arguments)."
+    },
+    "xb:0x000605A0": {
+      "name": "Script::IsLoadingComplete",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313590 registers this function as the script command IsLoadingComplete (0 to 1 arguments)."
+    },
+    "xb:0x000605E0": {
+      "name": "Script::ResourceListCreate",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003135B0 registers this function as the script command ResourceListCreate (3 arguments)."
+    },
+    "xb:0x00060610": {
+      "name": "Script::ResourceListSetLoadCompleteCallback",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003135D0 registers this function as the script command ResourceListSetLoadCompleteCallback (2 to 8 arguments)."
+    },
+    "xb:0x00060740": {
+      "name": "Script::ResourceListAddResource",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003135F0 registers this function as the script command ResourceListAddResource (2 arguments)."
+    },
+    "xb:0x00060760": {
+      "name": "Script::ResourceListLoad",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313610 registers this function as the script command ResourceListLoad (1 argument)."
+    },
+    "xb:0x00060780": {
+      "name": "Script::ResourceListRemove",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313630 registers this function as the script command ResourceListRemove (1 argument)."
+    },
+    "xb:0x000607A0": {
+      "name": "Script::CreateInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313650 registers this function as the script command CreateInventory (1 to 2 arguments)."
+    },
+    "xb:0x000607D0": {
+      "name": "Script::DestroyInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313670 registers this function as the script command DestroyInventory (1 argument)."
+    },
+    "xb:0x000607E0": {
+      "name": "Script::SetMaximumProcessingTime",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313690 registers this function as the script command SetMaximumProcessingTime (1 argument)."
+    },
+    "xb:0x00060800": {
+      "name": "Script::EnableStartGameLoad",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003136B0 registers this function as the script command EnableStartGameLoad (1 argument)."
+    },
+    "xb:0x00060820": {
+      "name": "Script::LoadDZoneInCode",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003136D0 registers this function as the script command LoadDZoneInCode (1 argument)."
+    },
+    "xb:0x00060840": {
+      "name": "Script::LoadAZoneInCode",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003136F0 registers this function as the script command LoadAZoneInCode (1 argument)."
+    },
+    "xb:0x00060880": {
+      "name": "Script::GetResourceId",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313750 registers this function as the script command GetResourceId (1 argument)."
+    },
+    "xb:0x000608A0": {
+      "name": "Script::GetInventoryId",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313770 registers this function as the script command GetInventoryId (1 argument)."
+    },
+    "xb:0x000608C0": {
+      "name": "Script::IsResourceLoadComplete",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313790 registers this function as the script command IsResourceLoadComplete (2 arguments)."
+    },
+    "xb:0x000689A0": {
+      "name": "Script::RemoveCodeBlock",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003138E0 registers this function as the script command RemoveCodeBlock (1 argument)."
+    },
+    "xb:0x000689D0": {
+      "name": "Script::CodeBlockExists",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313900 registers this function as the script command CodeBlockExists (1 argument)."
+    },
+    "xb:0x00068A00": {
+      "name": "Script::ExecScript",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313920 registers this function as the script command ExecScript (2 to 3 arguments)."
+    },
+    "xb:0x00068A30": {
+      "name": "Script::ReExecScript",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313940 registers this function as the script command ReExecScript (1 argument)."
+    },
+    "xb:0x00068A60": {
+      "name": "Script::LinkToNamespace",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313960 registers this function as the script command LinkToNamespace (1 argument)."
+    },
+    "xb:0x00068AF0": {
+      "name": "Script::GetFileLine",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003139C0 registers this function as the script command GetFileLine (0 arguments)."
+    },
+    "xb:0x00068B00": {
+      "name": "Script::DelayedEval",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313A60 registers this function as the script command DelayedEval (1 argument)."
+    },
+    "xb:0x00068B10": {
+      "name": "Script::Schedule",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313A80 registers this function as the script command Schedule (2 to 62 arguments)."
+    },
+    "xb:0x00068C10": {
+      "name": "Script::ScheduleAlways",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313AA0 registers this function as the script command ScheduleAlways (2 to 62 arguments)."
+    },
+    "xb:0x00068D10": {
+      "name": "Script::Cancel",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313AC0 registers this function as the script command Cancel (1 argument)."
+    },
+    "xb:0x00068D30": {
+      "name": "Script::IsEventPending",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313AE0 registers this function as the script command IsEventPending (1 argument)."
+    },
+    "xb:0x00068D80": {
+      "name": "Script::StartScriptSection",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313B60 registers this function as the script command StartScriptSection (1 argument)."
+    },
+    "xb:0x00068DA0": {
+      "name": "Script::EndScriptSection",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313BA0 registers this function as the script command EndScriptSection (1 argument)."
+    },
+    "xb:0x00070B30": {
+      "name": "Script::isFunction",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313BC0 registers this function as the script command isFunction (1 argument)."
+    },
+    "xb:0x00070C60": {
+      "name": "Script::ltrim",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313D20 registers this function as the script command ltrim (1 argument)."
+    },
+    "xb:0x00070CE0": {
+      "name": "Script::getWordCount",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313E80 registers this function as the script command getWordCount (1 argument)."
+    },
+    "xb:0x00070D00": {
+      "name": "Script::getFieldCount",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313F20 registers this function as the script command getFieldCount (1 argument)."
+    },
+    "xb:0x00070D20": {
+      "name": "Script::getRecordCount",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313FC0 registers this function as the script command getRecordCount (1 argument)."
+    },
+    "xb:0x00070D60": {
+      "name": "Script::eval",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003140C0 registers this function as the script command eval (1 argument)."
+    },
+    "xb:0x00070D80": {
+      "name": "Script::deleteVariables",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003140E0 registers this function as the script command deleteVariables (1 argument)."
+    },
+    "xb:0x00070DA0": {
+      "name": "Script::NextToken",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314120 registers this function as the script command NextToken (3 arguments)."
+    },
+    "xb:0x00070E40": {
+      "name": "Script::SetNewObjectParentGroup",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313BE0 registers this function as the script command SetNewObjectParentGroup (1 argument)."
+    },
+    "xb:0x00070E80": {
+      "name": "Script::GetNewObjectParentGroup",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313C00 registers this function as the script command GetNewObjectParentGroup (0 arguments)."
+    },
+    "xb:0x00070E90": {
+      "name": "Script::GetLastRootObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313C20 registers this function as the script command GetLastRootObject (0 arguments)."
+    },
+    "xb:0x00070EA0": {
+      "name": "Script::strcmp",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313C40 registers this function as the script command strcmp (2 arguments)."
+    },
+    "xb:0x00070EF0": {
+      "name": "Script::stricmp",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313C60 registers this function as the script command stricmp (2 arguments)."
+    },
+    "xb:0x00070F10": {
+      "name": "Script::strncmp",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313C80 registers this function as the script command strncmp (3 arguments)."
+    },
+    "xb:0x00070F40": {
+      "name": "Script::strnicmp",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313CA0 registers this function as the script command strnicmp (3 arguments)."
+    },
+    "xb:0x00070F70": {
+      "name": "Script::strlen",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313CC0 registers this function as the script command strlen (1 argument)."
+    },
+    "xb:0x00070F90": {
+      "name": "Script::strstr",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313CE0 registers this function as the script command strstr (2 arguments)."
+    },
+    "xb:0x00070FC0": {
+      "name": "Script::strpos",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313D00 registers this function as the script command strpos (2 to 3 arguments)."
+    },
+    "xb:0x00071050": {
+      "name": "Script::rtrim",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313D40 registers this function as the script command rtrim (1 argument)."
+    },
+    "xb:0x000710B0": {
+      "name": "Script::trim",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313D60 registers this function as the script command trim (1 argument)."
+    },
+    "xb:0x00071120": {
+      "name": "Script::stripChars",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313D80 registers this function as the script command stripChars (2 arguments)."
+    },
+    "xb:0x000711D0": {
+      "name": "Script::strchr",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313DA0 registers this function as the script command strchr (2 arguments)."
+    },
+    "xb:0x00071200": {
+      "name": "Script::strreplace",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313DC0 registers this function as the script command strreplace (3 arguments)."
+    },
+    "xb:0x00071330": {
+      "name": "Script::getSubStr",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313DE0 registers this function as the script command getSubStr (3 arguments)."
+    },
+    "xb:0x000716A0": {
+      "name": "Script::getWord",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313E00 registers this function as the script command getWord (2 arguments)."
+    },
+    "xb:0x000716D0": {
+      "name": "Script::getWords",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313E20 registers this function as the script command getWords (2 to 3 arguments)."
+    },
+    "xb:0x00071720": {
+      "name": "Script::setWord",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313E40 registers this function as the script command setWord (3 arguments)."
+    },
+    "xb:0x00071750": {
+      "name": "Script::removeWord",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313E60 registers this function as the script command removeWord (2 arguments)."
+    },
+    "xb:0x00071780": {
+      "name": "Script::getField",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313EA0 registers this function as the script command getField (2 arguments)."
+    },
+    "xb:0x000717B0": {
+      "name": "Script::getFields",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313EC0 registers this function as the script command getFields (2 to 3 arguments)."
+    },
+    "xb:0x00071800": {
+      "name": "Script::setField",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313EE0 registers this function as the script command setField (3 arguments)."
+    },
+    "xb:0x00071830": {
+      "name": "Script::removeField",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313F00 registers this function as the script command removeField (2 arguments)."
+    },
+    "xb:0x00071860": {
+      "name": "Script::getRecord",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313F40 registers this function as the script command getRecord (2 arguments)."
+    },
+    "xb:0x00071890": {
+      "name": "Script::getRecords",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313F60 registers this function as the script command getRecords (2 to 3 arguments)."
+    },
+    "xb:0x000718E0": {
+      "name": "Script::setRecord",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313F80 registers this function as the script command setRecord (3 arguments)."
+    },
+    "xb:0x00071910": {
+      "name": "Script::removeRecord",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313FA0 registers this function as the script command removeRecord (2 arguments)."
+    },
+    "xb:0x00071940": {
+      "name": "Script::firstWord",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00313FE0 registers this function as the script command firstWord (1 argument)."
+    },
+    "xb:0x000719A0": {
+      "name": "Script::restWords",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314000 registers this function as the script command restWords (1 argument)."
+    },
+    "xb:0x000719F0": {
+      "name": "Script::detag",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314020 registers this function as the script command detag (1 argument)."
+    },
+    "xb:0x00071A50": {
+      "name": "Script::getTag",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314040 registers this function as the script command getTag (1 argument)."
+    },
+    "xb:0x00071AC0": {
+      "name": "Script::expandEscape",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314060 registers this function as the script command expandEscape (1 argument)."
+    },
+    "xb:0x00071B00": {
+      "name": "Script::collapseEscape",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314080 registers this function as the script command collapseEscape (1 argument)."
+    },
+    "xb:0x00071B50": {
+      "name": "Script::trace",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314100 registers this function as the script command trace (1 argument)."
+    },
+    "xb:0x00071B90": {
+      "name": "Script::setLogMode",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314140 registers this function as the script command setLogMode (1 argument)."
+    },
+    "xb:0x00072760": {
+      "name": "Script::backtrace",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003141E0 registers this function as the script command backtrace (0 arguments)."
+    },
+    "xb:0x00076F10": {
+      "name": "Script::CompositionPlayerInitialize",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314230 registers this function as the script command CompositionPlayerInitialize (1 argument)."
+    },
+    "xb:0x00076F20": {
+      "name": "Script::SoundManagerSetOutputMode",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314270 registers this function as the script command SoundManagerSetOutputMode (1 argument)."
+    },
+    "xb:0x00076FA0": {
+      "name": "Script::SoundManagerGetOutputMode",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314290 registers this function as the script command SoundManagerGetOutputMode (0 arguments)."
+    },
+    "xb:0x00076FD0": {
+      "name": "Script::FeHudRequestMenuSound",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003142B0 registers this function as the script command FeHudRequestMenuSound (1 argument)."
+    },
+    "xb:0x00076FE0": {
+      "name": "Script::FeHudRequestHudSound",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003142D0 registers this function as the script command FeHudRequestHudSound (1 argument)."
+    },
+    "xb:0x00076FF0": {
+      "name": "Script::SoundSetFaderValue",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003142F0 registers this function as the script command SoundSetFaderValue (2 arguments)."
+    },
+    "xb:0x00077050": {
+      "name": "Script::SoundGetFaderValue",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314310 registers this function as the script command SoundGetFaderValue (1 argument)."
+    },
+    "xb:0x000770A0": {
+      "name": "Script::SoundFadeinMix",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314330 registers this function as the script command SoundFadeinMix (1 to 4 arguments)."
+    },
+    "xb:0x00077130": {
+      "name": "Script::SoundFadeoutMix",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314350 registers this function as the script command SoundFadeoutMix (1 to 4 arguments)."
+    },
+    "xb:0x000771B0": {
+      "name": "Script::SoundGetCharacterPoiIndex",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314370 registers this function as the script command SoundGetCharacterPoiIndex (1 argument)."
+    },
+    "xb:0x000771E0": {
+      "name": "Script::SoundSetPOIConversationCompleteStatus",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314390 registers this function as the script command SoundSetPOIConversationCompleteStatus (2 arguments)."
+    },
+    "xb:0x00077210": {
+      "name": "Script::SoundGetPOIConversationCompleteStatus",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003143B0 registers this function as the script command SoundGetPOIConversationCompleteStatus (1 argument)."
+    },
+    "xb:0x00077270": {
+      "name": "Script::SoundDisableMusic",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314490 registers this function as the script command SoundDisableMusic (1 argument)."
+    },
+    "xb:0x00077290": {
+      "name": "Script::SoundDisableAmbience",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003144B0 registers this function as the script command SoundDisableAmbience (1 argument)."
+    },
+    "xb:0x000772B0": {
+      "name": "Script::SoundDisableClips",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003144D0 registers this function as the script command SoundDisableClips (1 argument)."
+    },
+    "xb:0x00077340": {
+      "name": "Script::SoundManagerSetReverb",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314250 registers this function as the script command SoundManagerSetReverb (1 to 4 arguments)."
+    },
+    "xb:0x00077410": {
+      "name": "Script::GlobalSoundPlay",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314410 registers this function as the script command GlobalSoundPlay (2 to 5 arguments)."
+    },
+    "xb:0x000774E0": {
+      "name": "Script::GlobalSoundIsPlaying",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314430 registers this function as the script command GlobalSoundIsPlaying (2 arguments)."
+    },
+    "xb:0x00077540": {
+      "name": "Script::GlobalSoundRequestMusic",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003144F0 registers this function as the script command GlobalSoundRequestMusic (5 to 7 arguments)."
+    },
+    "xb:0x00077630": {
+      "name": "Script::GlobalSoundSetMusicBase",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314510 registers this function as the script command GlobalSoundSetMusicBase (5 arguments)."
+    },
+    "xb:0x0008D3E0": {
+      "name": "Script::SPM_TargetVolumeClear",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314980 registers this function as the script command SPM_TargetVolumeClear (0 arguments)."
+    },
+    "xb:0x0008F1E0": {
+      "name": "Script::SPM_TargetVolumeAddToGroup",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003149A0 registers this function as the script command SPM_TargetVolumeAddToGroup (1 to 2 arguments)."
+    },
+    "xb:0x0008FB10": {
+      "name": "Script::PushStreamerObjectOfInterest",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003149F0 registers this function as the script command PushStreamerObjectOfInterest (1 argument)."
+    },
+    "xb:0x0008FB30": {
+      "name": "Script::PopStreamerObjectOfInterest",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314A10 registers this function as the script command PopStreamerObjectOfInterest (1 argument)."
+    },
+    "xb:0x0008FB60": {
+      "name": "Script::Slot_Create",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314A50 registers this function as the script command Slot_Create (3 to 4 arguments)."
+    },
+    "xb:0x0008FBC0": {
+      "name": "Script::Slot_Destroy",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314A70 registers this function as the script command Slot_Destroy (1 argument)."
+    },
+    "xb:0x0008FBF0": {
+      "name": "Script::GetCodeOverlayPriority",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314AD0 registers this function as the script command GetCodeOverlayPriority (0 arguments)."
+    },
+    "xb:0x0008FC00": {
+      "name": "Script::GetUIInteractionPriority",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314AF0 registers this function as the script command GetUIInteractionPriority (0 arguments)."
+    },
+    "xb:0x0008FC10": {
+      "name": "Script::GetMissionCriticalPriority",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314B10 registers this function as the script command GetMissionCriticalPriority (0 arguments)."
+    },
+    "xb:0x0008FC40": {
+      "name": "Script::GetSubzoneName",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314BB0 registers this function as the script command GetSubzoneName (1 argument)."
+    },
+    "xb:0x0008FC60": {
+      "name": "Script::AddMemoryHack",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314BD0 registers this function as the script command AddMemoryHack (0 arguments)."
+    },
+    "xb:0x0008FC90": {
+      "name": "Script::RemoveMemoryHack",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314BF0 registers this function as the script command RemoveMemoryHack (0 arguments)."
+    },
+    "xb:0x0008FCE0": {
+      "name": "Script::FindSubzoneByPoint",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314B50 registers this function as the script command FindSubzoneByPoint (1 argument)."
+    },
+    "xb:0x00098BF0": {
+      "name": "Script::Floor",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314DA0 registers this function as the script command Floor (1 argument)."
+    },
+    "xb:0x00098C10": {
+      "name": "Script::Ceiling",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314DC0 registers this function as the script command Ceiling (1 argument)."
+    },
+    "xb:0x00098C40": {
+      "name": "Script::VectorMultiply",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314DE0 registers this function as the script command VectorMultiply (2 arguments)."
+    },
+    "xb:0x00098CA0": {
+      "name": "Script::VectorVectorMultiply",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314E00 registers this function as the script command VectorVectorMultiply (2 arguments)."
+    },
+    "xb:0x00098D40": {
+      "name": "Script::VectorGetX",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314E20 registers this function as the script command VectorGetX (1 argument)."
+    },
+    "xb:0x00098D60": {
+      "name": "Script::VectorGetZ",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314E40 registers this function as the script command VectorGetZ (1 argument)."
+    },
+    "xb:0x00098D80": {
+      "name": "Script::VectorSetX",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314E60 registers this function as the script command VectorSetX (2 arguments)."
+    },
+    "xb:0x00098DC0": {
+      "name": "Script::VectorSetY",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314E80 registers this function as the script command VectorSetY (2 arguments)."
+    },
+    "xb:0x00098E00": {
+      "name": "Script::VectorSetZ",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314EA0 registers this function as the script command VectorSetZ (2 arguments)."
+    },
+    "xb:0x00098F20": {
+      "name": "Script::VectorIsEqual",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00314EC0 registers this function as the script command VectorIsEqual (2 arguments)."
+    },
+    "xb:0x000C9F00": {
+      "name": "Script::SaveGameController_SaveGame",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315320 registers this function as the script command SaveGameController::SaveGame (1 to 4 arguments)."
+    },
+    "xb:0x000C9F70": {
+      "name": "Script::SaveGameController_LoadGame",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315340 registers this function as the script command SaveGameController::LoadGame (1 to 4 arguments)."
+    },
+    "xb:0x000C9FE0": {
+      "name": "Script::SaveGameController_EnforceReleaseAssert",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315360 registers this function as the script command SaveGameController::EnforceReleaseAssert (1 argument)."
+    },
+    "xb:0x000CA020": {
+      "name": "Script::SaveGameController_ResetRegisteredHandlers",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315380 registers this function as the script command SaveGameController::ResetRegisteredHandlers (0 arguments)."
+    },
+    "xb:0x000CA030": {
+      "name": "Script::SaveGameController_CanWeSave",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003153A0 registers this function as the script command SaveGameController::CanWeSave (1 argument)."
+    },
+    "xb:0x000CA050": {
+      "name": "Script::SaveGameController_SetMissionStatus",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003153C0 registers this function as the script command SaveGameController::SetMissionStatus (1 argument)."
+    },
+    "xb:0x000CA070": {
+      "name": "Script::SaveGameController_ActivateQueue",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003153E0 registers this function as the script command SaveGameController::ActivateQueue (2 arguments)."
+    },
+    "xb:0x000CA670": {
+      "name": "Script::SubtitleManager_QueingFMVSubtitles",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315400 registers this function as the script command SubtitleManager_QueingFMVSubtitles (1 argument)."
+    },
+    "xb:0x000CA6A0": {
+      "name": "Script::SubtitleManager_LocalisedDialogueEvent",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315420 registers this function as the script command SubtitleManager_LocalisedDialogueEvent (3 to 4 arguments)."
+    },
+    "xb:0x000CA720": {
+      "name": "Script::SubtitleManager_TriggerDialogueEvent",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315440 registers this function as the script command SubtitleManager_TriggerDialogueEvent (3 to 4 arguments)."
+    },
+    "xb:0x000CA770": {
+      "name": "Script::SubtitleManager_SetIsSubtitleEnabled",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315460 registers this function as the script command SubtitleManager_SetIsSubtitleEnabled (1 argument)."
+    },
+    "xb:0x000CED20": {
+      "name": "Script::CancelNIS",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003155A0 registers this function as the script command CancelNIS (0 arguments)."
+    },
+    "xb:0x000CED30": {
+      "name": "Script::DelayNISStart",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003155E0 registers this function as the script command DelayNISStart (1 argument)."
+    },
+    "xb:0x000CED60": {
+      "name": "Script::NISIsPlaying",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315600 registers this function as the script command NISIsPlaying (0 arguments)."
+    },
+    "xb:0x000CED80": {
+      "name": "Script::CallAnyNISActivate",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315620 registers this function as the script command CallAnyNISActivate (1 argument)."
+    },
+    "xb:0x000CEDB0": {
+      "name": "Script::CallAnyNISChangeCounter",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315640 registers this function as the script command CallAnyNISChangeCounter (1 argument)."
+    },
+    "xb:0x000CEDE0": {
+      "name": "Script::CallAnyNISGetCurrent",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315660 registers this function as the script command CallAnyNISGetCurrent (0 arguments)."
+    },
+    "xb:0x000CEDF0": {
+      "name": "Script::SetNISEffectOverride",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315680 registers this function as the script command SetNISEffectOverride (1 argument)."
+    },
+    "xb:0x000CEE10": {
+      "name": "Script::PlayNIS",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003155C0 registers this function as the script command PlayNIS (1 to 12 arguments)."
+    },
+    "xb:0x000D9830": {
+      "name": "Script::SetMaxNPCTwoHandedWeaponUpperBodyTwistAngles",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315DB0 registers this function as the script command SetMaxNPCTwoHandedWeaponUpperBodyTwistAngles (2 arguments)."
+    },
+    "xb:0x000D9880": {
+      "name": "Script::SetMaxNPCOneHandedWeaponUpperBodyTwistAngles",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00315DD0 registers this function as the script command SetMaxNPCOneHandedWeaponUpperBodyTwistAngles (2 arguments)."
+    },
+    "xb:0x000EA4C0": {
+      "name": "Script::GameShutdown",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316340 registers this function as the script command GameShutdown (0 to 0 arguments)."
+    },
+    "xb:0x000EA4D0": {
+      "name": "Script::Set_gPauseGame",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316360 registers this function as the script command Set_gPauseGame (1 to 2 arguments)."
+    },
+    "xb:0x000EA530": {
+      "name": "Script::Is_gPauseGame",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316380 registers this function as the script command Is_gPauseGame (0 to 0 arguments)."
+    },
+    "xb:0x000EB580": {
+      "name": "Script::ToggleSlowMotion",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003163A0 registers this function as the script command ToggleSlowMotion (0 arguments)."
+    },
+    "xb:0x000EB5B0": {
+      "name": "Script::GetEngineTime",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003163C0 registers this function as the script command GetEngineTime (0 arguments)."
+    },
+    "xb:0x000EB5C0": {
+      "name": "Script::GetGameTime",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003163E0 registers this function as the script command GetGameTime (0 arguments)."
+    },
+    "xb:0x000EB5D0": {
+      "name": "Script::PushTimeScale",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316400 registers this function as the script command PushTimeScale (1 argument)."
+    },
+    "xb:0x000EB5F0": {
+      "name": "Script::PopTimeScale",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316420 registers this function as the script command PopTimeScale (0 arguments)."
+    },
+    "xb:0x000EB600": {
+      "name": "Script::FreezeGame",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316440 registers this function as the script command FreezeGame (1 argument)."
+    },
+    "xb:0x000EB620": {
+      "name": "Script::ToggleFreezeGame",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316460 registers this function as the script command ToggleFreezeGame (0 arguments)."
+    },
+    "xb:0x000EB640": {
+      "name": "Script::UnFreezeForOneFrame",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316480 registers this function as the script command UnFreezeForOneFrame (0 arguments)."
+    },
+    "xb:0x000EB650": {
+      "name": "Script::SetSlowMotionUpdate",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003164A0 registers this function as the script command SetSlowMotionUpdate (1 argument)."
+    },
+    "xb:0x000EE8A0": {
+      "name": "Script::DBPostFloat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003164F0 registers this function as the script command DBPostFloat (2 to 3 arguments)."
+    },
+    "xb:0x000EE900": {
+      "name": "Script::DBPostInt",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316510 registers this function as the script command DBPostInt (2 to 3 arguments)."
+    },
+    "xb:0x000EE960": {
+      "name": "Script::DBGetAsFloat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316530 registers this function as the script command DBGetAsFloat (1 to 2 arguments)."
+    },
+    "xb:0x000EE9C0": {
+      "name": "Script::DBGetAsInt",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316550 registers this function as the script command DBGetAsInt (1 to 2 arguments)."
+    },
+    "xb:0x000EEA20": {
+      "name": "Script::DBChangeInt",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316570 registers this function as the script command DBChangeInt (3 arguments)."
+    },
+    "xb:0x000EEA60": {
+      "name": "Script::DBChangeFloat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316590 registers this function as the script command DBChangeFloat (3 arguments)."
+    },
+    "xb:0x000EEAA0": {
+      "name": "Script::DBChangeBalls",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003165B0 registers this function as the script command DBChangeBalls (1 argument)."
+    },
+    "xb:0x000EEAC0": {
+      "name": "Script::DBChangeCopHeat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003165D0 registers this function as the script command DBChangeCopHeat (1 argument)."
+    },
+    "xb:0x000EEAE0": {
+      "name": "Script::DBChangeGangHeat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003165F0 registers this function as the script command DBChangeGangHeat (1 argument)."
+    },
+    "xb:0x000EEB00": {
+      "name": "Script::DBChangeProduct",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316610 registers this function as the script command DBChangeProduct (1 argument)."
+    },
+    "xb:0x000EEB20": {
+      "name": "Script::DBChangeVehicleProduct",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316630 registers this function as the script command DBChangeVehicleProduct (1 argument)."
+    },
+    "xb:0x000EEB40": {
+      "name": "Script::DBChangeCleanCash",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316650 registers this function as the script command DBChangeCleanCash (1 argument)."
+    },
+    "xb:0x000EEB60": {
+      "name": "Script::DBChangeDirtyCash",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316670 registers this function as the script command DBChangeDirtyCash (1 argument)."
+    },
+    "xb:0x000EEB80": {
+      "name": "Script::DBChangeReputationPoints",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316690 registers this function as the script command DBChangeReputationPoints (2 arguments)."
+    },
+    "xb:0x000EEBF0": {
+      "name": "Script::DBSetTotalSkilledPoints",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316730 registers this function as the script command DBSetTotalSkilledPoints (1 argument)."
+    },
+    "xb:0x000EEC10": {
+      "name": "Script::DBSetTotalMissionPoints",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316750 registers this function as the script command DBSetTotalMissionPoints (1 argument)."
+    },
+    "xb:0x000EEC30": {
+      "name": "Script::DBSetTotalExoticsPoints",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316770 registers this function as the script command DBSetTotalExoticsPoints (1 argument)."
+    },
+    "xb:0x000EEC80": {
+      "name": "Script::DBSetReputationLevel",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003167F0 registers this function as the script command DBSetReputationLevel (1 argument)."
+    },
+    "xb:0x001152F0": {
+      "name": "Script::HenchmanManager_GetFollowTony",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316980 registers this function as the script command HenchmanManager_GetFollowTony (0 arguments)."
+    },
+    "xb:0x00115300": {
+      "name": "Script::HenchmanManager_SetFollowTony",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003169A0 registers this function as the script command HenchmanManager_SetFollowTony (1 argument)."
+    },
+    "xb:0x00115320": {
+      "name": "Script::HenchmanManager_GetNumAttackingEnemiesNearby",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003169C0 registers this function as the script command HenchmanManager_GetNumAttackingEnemiesNearby (0 arguments)."
+    },
+    "xb:0x00119930": {
+      "name": "Script::SetAIAttacksEnabled",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316A40 registers this function as the script command SetAIAttacksEnabled (1 argument)."
+    },
+    "xb:0x00119950": {
+      "name": "Script::AIStimulusTable_AddEvent",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316A80 registers this function as the script command AIStimulusTable::AddEvent (6 to 8 arguments)."
+    },
+    "xb:0x001199E0": {
+      "name": "Script::AIStimulusTable_DefineDefaultOverrideTables",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316AA0 registers this function as the script command AIStimulusTable::DefineDefaultOverrideTables (1 argument)."
+    },
+    "xb:0x00119A00": {
+      "name": "Script::AIStimulusTable_DetectsStimulus",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316AC0 registers this function as the script command AIStimulusTable::DetectsStimulus (1 argument)."
+    },
+    "xb:0x00119A20": {
+      "name": "Script::AIStimulusTable_AddBasicEvent",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316AE0 registers this function as the script command AIStimulusTable::AddBasicEvent (2 arguments)."
+    },
+    "xb:0x00119A50": {
+      "name": "Script::AIStimulusTable_AddBasicEventWithReactData",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316B00 registers this function as the script command AIStimulusTable::AddBasicEventWithReactData (3 arguments)."
+    },
+    "xb:0x00119AC0": {
+      "name": "Script::AISenseEventNotifyAll",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00316A20 registers this function as the script command AISenseEventNotifyAll (4 to 6 arguments)."
+    },
+    "xb:0x0011CB50": {
+      "name": "Script::CoverObject_GetCharacterTargetPosition",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317240 registers this function as the script command CoverObject::GetCharacterTargetPosition (0 arguments)."
+    },
+    "xb:0x0011CED0": {
+      "name": "Script::NME_SetDefinedTunablesCount",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317280 registers this function as the script command NME_SetDefinedTunablesCount (1 argument)."
+    },
+    "xb:0x0011CF00": {
+      "name": "Script::NME_AddDefinedTunables",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003172A0 registers this function as the script command NME_AddDefinedTunables (2 arguments)."
+    },
+    "xb:0x0011CF20": {
+      "name": "Script::NME_SetAIDef",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003172C0 registers this function as the script command NME_SetAIDef (3 arguments)."
+    },
+    "xb:0x0011CF50": {
+      "name": "Script::NME_SetWeaponPickerWeights",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317320 registers this function as the script command NME_SetWeaponPickerWeights (1 argument)."
+    },
+    "xb:0x0011CF70": {
+      "name": "Script::PickElementFromWeightedStringList",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317360 registers this function as the script command PickElementFromWeightedStringList (1 argument)."
+    },
+    "xb:0x0011CF90": {
+      "name": "Script::NME_SetTunables",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003172E0 registers this function as the script command NME_SetTunables (1 argument)."
+    },
+    "xb:0x0011CFC0": {
+      "name": "Script::NME_SetWeaponTunables",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317300 registers this function as the script command NME_SetWeaponTunables (2 arguments)."
+    },
+    "xb:0x0011D000": {
+      "name": "Script::NME_CreateInitialWeapon",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317340 registers this function as the script command NME_CreateInitialWeapon (1 argument)."
+    },
+    "xb:0x0011D030": {
+      "name": "Script::TSM_NewTargetSet",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317380 registers this function as the script command TSM_NewTargetSet (1 argument)."
+    },
+    "xb:0x0011D060": {
+      "name": "Script::TSM_AddTargetSetFilter",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003173A0 registers this function as the script command TSM_AddTargetSetFilter (4 to 8 arguments)."
+    },
+    "xb:0x0011D130": {
+      "name": "Script::TSM_Cleanup",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003173C0 registers this function as the script command TSM_Cleanup (0 arguments)."
+    },
+    "xb:0x00149C20": {
+      "name": "Script::CanCallForBoat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317500 registers this function as the script command CanCallForBoat (2 arguments)."
+    },
+    "xb:0x0015C360": {
+      "name": "Script::CameraManager_Request_NISCameraMode",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317850 registers this function as the script command CameraManager::Request_NISCameraMode (1 to 4 arguments)."
+    },
+    "xb:0x0015C490": {
+      "name": "Script::CameraManager_SetCameraShake",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317870 registers this function as the script command CameraManager::SetCameraShake (4 to 5 arguments)."
+    },
+    "xb:0x0015C550": {
+      "name": "Script::CameraManager_SetFinishedCallback",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003178B0 registers this function as the script command CameraManager::SetFinishedCallback (1 argument)."
+    },
+    "xb:0x0015C580": {
+      "name": "Script::CameraManager_Request_ObjectControl",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317890 registers this function as the script command CameraManager::Request_ObjectControl (1 argument)."
+    },
+    "xb:0x0015C6C0": {
+      "name": "Script::CameraObject_GetFOVDegrees",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003178F0 registers this function as the script command CameraObject::GetFOVDegrees (0 arguments)."
+    },
+    "xb:0x0015C6D0": {
+      "name": "Script::CameraObject_SetFOVDegrees",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317910 registers this function as the script command CameraObject::SetFOVDegrees (1 argument)."
+    },
+    "xb:0x0015C700": {
+      "name": "Script::CameraObject_SetFacingDirection",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317930 registers this function as the script command CameraObject::SetFacingDirection (1 argument)."
+    },
+    "xb:0x0015C730": {
+      "name": "Script::CameraObject_SetCameraTransition",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317970 registers this function as the script command CameraObject::SetCameraTransition (4 arguments)."
+    },
+    "xb:0x0015C780": {
+      "name": "Script::CameraObject_SetActionMap",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317950 registers this function as the script command CameraObject::SetActionMap (1 argument)."
+    },
+    "xb:0x0015C7F0": {
+      "name": "Script::GenericCharacterCamera_AcquireTarget",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003179F0 registers this function as the script command GenericCharacterCamera::AcquireTarget (1 argument)."
+    },
+    "xb:0x0015C840": {
+      "name": "Script::GenericCharacterCamera_ReleaseTarget",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317A10 registers this function as the script command GenericCharacterCamera::ReleaseTarget (0 arguments)."
+    },
+    "xb:0x0015C850": {
+      "name": "Script::GenericCharacterCamera_RecenterCamera",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317A30 registers this function as the script command GenericCharacterCamera::RecenterCamera (0 arguments)."
+    },
+    "xb:0x0015CEE0": {
+      "name": "Script::GenericCharacterCamera_SnapToObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003179B0 registers this function as the script command GenericCharacterCamera::SnapToObject (1 argument)."
+    },
+    "xb:0x0015CF20": {
+      "name": "Script::GenericCharacterCamera_SetActionMap",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003179D0 registers this function as the script command GenericCharacterCamera::SetActionMap (1 argument)."
+    },
+    "xb:0x0015D0C0": {
+      "name": "Script::NISCamera_Clear",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317A90 registers this function as the script command NISCamera::Clear (0 arguments)."
+    },
+    "xb:0x0015D0D0": {
+      "name": "Script::NISCamera_Extend",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317AB0 registers this function as the script command NISCamera::Extend (0 arguments)."
+    },
+    "xb:0x0015D0E0": {
+      "name": "Script::NISCamera_SetCameraPosition",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317AD0 registers this function as the script command NISCamera::SetCameraPosition (1 argument)."
+    },
+    "xb:0x0015D110": {
+      "name": "Script::NISCamera_SetTargetPosition",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317AF0 registers this function as the script command NISCamera::SetTargetPosition (1 argument)."
+    },
+    "xb:0x0015D140": {
+      "name": "Script::NISCamera_SetCameraObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317B10 registers this function as the script command NISCamera::SetCameraObject (5 arguments)."
+    },
+    "xb:0x0015D1B0": {
+      "name": "Script::NISCamera_SetTargetObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317B30 registers this function as the script command NISCamera::SetTargetObject (5 arguments)."
+    },
+    "xb:0x0015D220": {
+      "name": "Script::NISCamera_AttachCameraToObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317B50 registers this function as the script command NISCamera::AttachCameraToObject (5 arguments)."
+    },
+    "xb:0x0015D290": {
+      "name": "Script::NISCamera_FrameTwoPositions",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317B70 registers this function as the script command NISCamera::FrameTwoPositions (3 arguments)."
+    },
+    "xb:0x0015D2E0": {
+      "name": "Script::NISCamera_SetOrbit",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317B90 registers this function as the script command NISCamera::SetOrbit (2 arguments)."
+    },
+    "xb:0x0015D320": {
+      "name": "Script::NISCamera_SetCameraAnimation",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317BB0 registers this function as the script command NISCamera::SetCameraAnimation (1 argument)."
+    },
+    "xb:0x0015D340": {
+      "name": "Script::NISCamera_SetAnimationParams",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317BD0 registers this function as the script command NISCamera::SetAnimationParams (5 arguments)."
+    },
+    "xb:0x0015D3C0": {
+      "name": "Script::NISCamera_SetCameraFOV",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317BF0 registers this function as the script command NISCamera::SetCameraFOV (1 argument)."
+    },
+    "xb:0x0015D3F0": {
+      "name": "Script::NISCamera_SelectCamera2",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317C10 registers this function as the script command NISCamera::SelectCamera2 (0 arguments)."
+    },
+    "xb:0x0015D400": {
+      "name": "Script::NISCamera_SetBlend",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317C30 registers this function as the script command NISCamera::SetBlend (2 arguments)."
+    },
+    "xb:0x0015D430": {
+      "name": "Script::NISCamera_SetCollision",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317C50 registers this function as the script command NISCamera::SetCollision (1 argument)."
+    },
+    "xb:0x0015D460": {
+      "name": "Script::NISCamera_Start",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317C70 registers this function as the script command NISCamera::Start (0 arguments)."
+    },
+    "xb:0x0015F740": {
+      "name": "Script::AnimationLoaderObject_IsLoaded",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317D10 registers this function as the script command AnimationLoaderObject::IsLoaded (0 arguments)."
+    },
+    "xb:0x0015F7D0": {
+      "name": "Script::PEG_AnimationResourceLoading",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317D30 registers this function as the script command PEG_AnimationResourceLoading (0 arguments)."
+    },
+    "xb:0x001614C0": {
+      "name": "Script::SetCharacterContextsEnabled",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317DF0 registers this function as the script command SetCharacterContextsEnabled (1 argument)."
+    },
+    "xb:0x001618F0": {
+      "name": "Script::SetPlayerGameObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317DD0 registers this function as the script command SetPlayerGameObject (1 argument)."
+    },
+    "xb:0x0016E150": {
+      "name": "Script::SetFitnessHenchmen",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00317FA0 registers this function as the script command SetFitnessHenchmen (1 argument)."
+    },
+    "xb:0x00177DE0": {
+      "name": "Script::DanceState_EnterDanceVolume",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318220 registers this function as the script command DanceState::EnterDanceVolume (1 argument)."
+    },
+    "xb:0x00177E80": {
+      "name": "Script::LaunchTonyTauntFromScript",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318260 registers this function as the script command LaunchTonyTauntFromScript (0 arguments)."
+    },
+    "xb:0x00177FF0": {
+      "name": "Script::CharacterObject_ClearLastVehicle",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003182E0 registers this function as the script command CharacterObject::ClearLastVehicle (0 arguments)."
+    },
+    "xb:0x00178000": {
+      "name": "Script::CharacterObject_BeKickedOutOfCar",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318300 registers this function as the script command CharacterObject::BeKickedOutOfCar (0 arguments)."
+    },
+    "xb:0x00178020": {
+      "name": "Script::CharacterObject_CreateSplash",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318320 registers this function as the script command CharacterObject::CreateSplash (0 arguments)."
+    },
+    "xb:0x00178040": {
+      "name": "Script::CharacterObject_CreateBloodPool",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318340 registers this function as the script command CharacterObject::CreateBloodPool (0 arguments)."
+    },
+    "xb:0x00178060": {
+      "name": "Script::CharacterObject_InitializeOpenDoorTimer",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318360 registers this function as the script command CharacterObject::InitializeOpenDoorTimer (0 arguments)."
+    },
+    "xb:0x00178080": {
+      "name": "Script::CharacterObject_InitializeCloseDoorTimer",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318380 registers this function as the script command CharacterObject::InitializeCloseDoorTimer (0 arguments)."
+    },
+    "xb:0x001780A0": {
+      "name": "Script::CharacterObject_GetRemainingVocalMs",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318400 registers this function as the script command CharacterObject::GetRemainingVocalMs (0 arguments)."
+    },
+    "xb:0x001780B0": {
+      "name": "Script::CharacterObject_HasSample",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318420 registers this function as the script command CharacterObject::HasSample (1 argument)."
+    },
+    "xb:0x001780D0": {
+      "name": "Script::CharacterObject_RequestAnimation",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318440 registers this function as the script command CharacterObject::RequestAnimation (1 to 2 arguments)."
+    },
+    "xb:0x00178140": {
+      "name": "Script::CharacterObject_SetVisible",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318460 registers this function as the script command CharacterObject::SetVisible (1 argument)."
+    },
+    "xb:0x00178170": {
+      "name": "Script::CharacterObject_GetVehicleID",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318480 registers this function as the script command CharacterObject::GetVehicleID (0 arguments)."
+    },
+    "xb:0x00178180": {
+      "name": "Script::CharacterObject_GetLastVehicleID",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003184A0 registers this function as the script command CharacterObject::GetLastVehicleID (0 arguments)."
+    },
+    "xb:0x00178190": {
+      "name": "Script::CharacterObject_GetOnKilledVehicleID",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003184C0 registers this function as the script command CharacterObject::GetOnKilledVehicleID (0 arguments)."
+    },
+    "xb:0x001781A0": {
+      "name": "Script::CharacterObject_EnterVehicleLowLevel",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003184E0 registers this function as the script command CharacterObject::EnterVehicleLowLevel (1 argument)."
+    },
+    "xb:0x001781C0": {
+      "name": "Script::CharacterObject_IsCharacterInCar",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318500 registers this function as the script command CharacterObject::IsCharacterInCar (0 arguments)."
+    },
+    "xb:0x001781D0": {
+      "name": "Script::CharacterObject_IsCharacterSeatedInVehicle",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318520 registers this function as the script command CharacterObject::IsCharacterSeatedInVehicle (0 arguments)."
+    },
+    "xb:0x001781E0": {
+      "name": "Script::CharacterObject_IsCharacterInBoat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318540 registers this function as the script command CharacterObject::IsCharacterInBoat (0 arguments)."
+    },
+    "xb:0x001781F0": {
+      "name": "Script::CharacterObject_EndRailShooter",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318580 registers this function as the script command CharacterObject::EndRailShooter (0 arguments)."
+    },
+    "xb:0x00178200": {
+      "name": "Script::CharacterObject_SetWalkingOnLandContext",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003185A0 registers this function as the script command CharacterObject::SetWalkingOnLandContext (0 arguments)."
+    },
+    "xb:0x00178210": {
+      "name": "Script::CharacterObject_ExitVehicle",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003185C0 registers this function as the script command CharacterObject::ExitVehicle (0 arguments)."
+    },
+    "xb:0x00178220": {
+      "name": "Script::CharacterObject_MaxAmmoCode",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003185E0 registers this function as the script command CharacterObject::MaxAmmoCode (0 arguments)."
+    },
+    "xb:0x00178230": {
+      "name": "Script::CharacterObject_InfiniteAmmo",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318600 registers this function as the script command CharacterObject::InfiniteAmmo (1 argument)."
+    },
+    "xb:0x00178250": {
+      "name": "Script::CharacterObject_IsMainCharacter",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318620 registers this function as the script command CharacterObject::IsMainCharacter (0 arguments)."
+    },
+    "xb:0x00178270": {
+      "name": "Script::CharacterObject_IsCharacterInDangerousVehicleState",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318640 registers this function as the script command CharacterObject::IsCharacterInDangerousVehicleState (0 arguments)."
+    },
+    "xb:0x00178290": {
+      "name": "Script::CharacterObject_GetAnimationPriority",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318660 registers this function as the script command CharacterObject::GetAnimationPriority (0 arguments)."
+    },
+    "xb:0x001782A0": {
+      "name": "Script::CharacterObject_GetAnimationRequestID",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318680 registers this function as the script command CharacterObject::GetAnimationRequestID (0 arguments)."
+    },
+    "xb:0x001782B0": {
+      "name": "Script::CharacterObject_DetachObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003186C0 registers this function as the script command CharacterObject::DetachObject (1 argument)."
+    },
+    "xb:0x00178300": {
+      "name": "Script::CharacterObject_GetAttachedObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003186E0 registers this function as the script command CharacterObject::GetAttachedObject (1 argument)."
+    },
+    "xb:0x00178350": {
+      "name": "Script::CharacterObject_AddWeaponTemplateToInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318740 registers this function as the script command CharacterObject::AddWeaponTemplateToInventory (1 to 2 arguments)."
+    },
+    "xb:0x001783B0": {
+      "name": "Script::CharacterObject_RemoveWeaponFromInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318760 registers this function as the script command CharacterObject::RemoveWeaponFromInventory (1 argument)."
+    },
+    "xb:0x001783D0": {
+      "name": "Script::CharacterObject_IsInCombat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003187C0 registers this function as the script command CharacterObject::IsInCombat (0 arguments)."
+    },
+    "xb:0x001783E0": {
+      "name": "Script::CharacterObject_OnDyingFinished",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003187E0 registers this function as the script command CharacterObject::OnDyingFinished (0 arguments)."
+    },
+    "xb:0x001783F0": {
+      "name": "Script::CharacterObject_SetAlertStatus",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318800 registers this function as the script command CharacterObject::SetAlertStatus (1 to 2 arguments)."
+    },
+    "xb:0x00178440": {
+      "name": "Script::CharacterObject_SetDisabled",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318820 registers this function as the script command CharacterObject::SetDisabled (1 argument)."
+    },
+    "xb:0x00178460": {
+      "name": "Script::CharacterObject_SetImmuneToExecution",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318840 registers this function as the script command CharacterObject::SetImmuneToExecution (1 argument)."
+    },
+    "xb:0x00178490": {
+      "name": "Script::CharacterObject_GetAlertStatus",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318860 registers this function as the script command CharacterObject::GetAlertStatus (0 arguments)."
+    },
+    "xb:0x001784A0": {
+      "name": "Script::CharacterObject_AddHealth",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318880 registers this function as the script command CharacterObject::AddHealth (1 argument)."
+    },
+    "xb:0x001784C0": {
+      "name": "Script::CharacterObject_FireWeapon",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003188C0 registers this function as the script command CharacterObject::FireWeapon (0 arguments)."
+    },
+    "xb:0x00178500": {
+      "name": "Script::CharacterObject_SetKnockedDown",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003188E0 registers this function as the script command CharacterObject::SetKnockedDown (1 argument)."
+    },
+    "xb:0x00178530": {
+      "name": "Script::CharacterObject_SetCanCounterMeleeAttack",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318900 registers this function as the script command CharacterObject::SetCanCounterMeleeAttack (1 argument)."
+    },
+    "xb:0x00178560": {
+      "name": "Script::CharacterObject_HealthChanged",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318940 registers this function as the script command CharacterObject::HealthChanged (0 arguments)."
+    },
+    "xb:0x00178570": {
+      "name": "Script::CharacterObject_KillMe",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318960 registers this function as the script command CharacterObject::KillMe (0 arguments)."
+    },
+    "xb:0x001785B0": {
+      "name": "Script::CharacterObject_RequestCellPhoneRing",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318980 registers this function as the script command CharacterObject::RequestCellPhoneRing (0 to 1 arguments)."
+    },
+    "xb:0x001785E0": {
+      "name": "Script::CharacterObject_RequestCellPhoneEnd",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003189A0 registers this function as the script command CharacterObject::RequestCellPhoneEnd (0 arguments)."
+    },
+    "xb:0x001785F0": {
+      "name": "Script::CharacterObject_SetConversationType",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003189C0 registers this function as the script command CharacterObject::SetConversationType (1 argument)."
+    },
+    "xb:0x00178670": {
+      "name": "Script::CharacterObject_IsSuppressingTonyDialogue",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003189E0 registers this function as the script command CharacterObject::IsSuppressingTonyDialogue (0 arguments)."
+    },
+    "xb:0x00178680": {
+      "name": "Script::CharacterObject_IsSniping",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318A00 registers this function as the script command CharacterObject::IsSniping (0 arguments)."
+    },
+    "xb:0x00178690": {
+      "name": "Script::CharacterObject_GetCharacterTemplateName",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318A40 registers this function as the script command CharacterObject::GetCharacterTemplateName (0 arguments)."
+    },
+    "xb:0x001786B0": {
+      "name": "Script::CharacterObject_FadeAndDelete",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318A60 registers this function as the script command CharacterObject::FadeAndDelete (0 arguments)."
+    },
+    "xb:0x001786E0": {
+      "name": "Script::CharacterObject_UseTargetSet",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318A80 registers this function as the script command CharacterObject::UseTargetSet (2 arguments)."
+    },
+    "xb:0x00178710": {
+      "name": "Script::CharacterObject_RecognizesTony",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318AA0 registers this function as the script command CharacterObject::RecognizesTony (0 arguments)."
+    },
+    "xb:0x00178720": {
+      "name": "Script::CharacterObject_PlayCarjackCopRadio",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318AC0 registers this function as the script command CharacterObject::PlayCarjackCopRadio (2 arguments)."
+    },
+    "xb:0x00178750": {
+      "name": "Script::CharacterObject_SetAmbientCollision",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318B00 registers this function as the script command CharacterObject::SetAmbientCollision (0 to 1 arguments)."
+    },
+    "xb:0x00178760": {
+      "name": "Script::CharacterObject_IsWallCoverAvailable",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318B20 registers this function as the script command CharacterObject::IsWallCoverAvailable (0 arguments)."
+    },
+    "xb:0x00178770": {
+      "name": "Script::CharacterObject_SetCharacterVisible",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318B40 registers this function as the script command CharacterObject::SetCharacterVisible (1 argument)."
+    },
+    "xb:0x001787A0": {
+      "name": "Script::CharacterObject_SetSpawnUsage",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318B60 registers this function as the script command CharacterObject::SetSpawnUsage (1 argument)."
+    },
+    "xb:0x001787D0": {
+      "name": "Script::CharacterObject_SetIsShoveable",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318B80 registers this function as the script command CharacterObject::SetIsShoveable (1 argument)."
+    },
+    "xb:0x001787F0": {
+      "name": "Script::CharacterObject_SetOverrideCullDistance",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318BA0 registers this function as the script command CharacterObject::SetOverrideCullDistance (1 argument)."
+    },
+    "xb:0x00178810": {
+      "name": "Script::CharacterObject_IsWithinTimeOfDayParameters",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318BC0 registers this function as the script command CharacterObject::IsWithinTimeOfDayParameters (1 argument)."
+    },
+    "xb:0x00178830": {
+      "name": "Script::CharacterObject_SetTimeOfDayParameters",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318BE0 registers this function as the script command CharacterObject::SetTimeOfDayParameters (2 arguments)."
+    },
+    "xb:0x00178860": {
+      "name": "Script::CharacterObject_SyncInventoryToAllWeapons",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318C40 registers this function as the script command CharacterObject::SyncInventoryToAllWeapons (0 arguments)."
+    },
+    "xb:0x00178870": {
+      "name": "Script::CharacterObject_SyncAllWeaponsToInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318C60 registers this function as the script command CharacterObject::SyncAllWeaponsToInventory (0 to 1 arguments)."
+    },
+    "xb:0x00178930": {
+      "name": "Script::CharacterObject_FixVehicleSeat",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003183A0 registers this function as the script command CharacterObject::FixVehicleSeat (1 to 2 arguments)."
+    },
+    "xb:0x00178BB0": {
+      "name": "Script::CharacterObject_RequestVocal",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003183C0 registers this function as the script command CharacterObject::RequestVocal (2 to 9 arguments)."
+    },
+    "xb:0x00178C00": {
+      "name": "Script::CharacterObject_RequestVocalAfterTargetFinished",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003183E0 registers this function as the script command CharacterObject::RequestVocalAfterTargetFinished (3 to 9 arguments)."
+    },
+    "xb:0x00178CA0": {
+      "name": "Script::CharacterObject_StartRailShooter",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318560 registers this function as the script command CharacterObject::StartRailShooter (2 arguments)."
+    },
+    "xb:0x00178CF0": {
+      "name": "Script::CharacterObject_AttachObject",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003186A0 registers this function as the script command CharacterObject::AttachObject (4 arguments)."
+    },
+    "xb:0x00178E10": {
+      "name": "Script::CharacterObject_SetActionMap",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318700 registers this function as the script command CharacterObject::SetActionMap (1 argument)."
+    },
+    "xb:0x00178E60": {
+      "name": "Script::CharacterObject_SwitchToWeaponType",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318720 registers this function as the script command CharacterObject::SwitchToWeaponType (1 to 2 arguments)."
+    },
+    "xb:0x00178EE0": {
+      "name": "Script::CharacterObject_GetCurrentWeapon",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318780 registers this function as the script command CharacterObject::GetCurrentWeapon (0 arguments)."
+    },
+    "xb:0x00178F00": {
+      "name": "Script::CharacterObject_GetCurrentDrawnWeapon",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003187A0 registers this function as the script command CharacterObject::GetCurrentDrawnWeapon (0 arguments)."
+    },
+    "xb:0x00178F20": {
+      "name": "Script::CharacterObject_ApplyDamage",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003188A0 registers this function as the script command CharacterObject::ApplyDamage (1 to 2 arguments)."
+    },
+    "xb:0x00178F70": {
+      "name": "Script::CharacterObject_ApplyDamageToGrappleCharacter",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318920 registers this function as the script command CharacterObject::ApplyDamageToGrappleCharacter (1 to 2 arguments)."
+    },
+    "xb:0x00179050": {
+      "name": "Script::CharacterObject_GetCharacterTemplate",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318A20 registers this function as the script command CharacterObject::GetCharacterTemplate (0 arguments)."
+    },
+    "xb:0x00179070": {
+      "name": "Script::CharacterObject_SpawnPickup",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318C00 registers this function as the script command CharacterObject::SpawnPickup (3 to 5 arguments)."
+    },
+    "xb:0x001790E0": {
+      "name": "Script::CharacterObject_SyncWeaponToInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318C20 registers this function as the script command CharacterObject::SyncWeaponToInventory (2 arguments)."
+    },
+    "xb:0x00179DE0": {
+      "name": "Script::ScriptCharacter_SetNeedsMissionManagerHooks",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318D20 registers this function as the script command ScriptCharacter::SetNeedsMissionManagerHooks (1 argument)."
+    },
+    "xb:0x00179E00": {
+      "name": "Script::DWHenchman_IsAIOverriddenByScript",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318D60 registers this function as the script command DWHenchman::IsAIOverriddenByScript (0 arguments)."
+    },
+    "xb:0x0017A6B0": {
+      "name": "Script::InventoryBox_GetCountOfType",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318F00 registers this function as the script command InventoryBox::GetCountOfType (1 argument)."
+    },
+    "xb:0x0017A6D0": {
+      "name": "Script::InventoryBox_GetMaxCountOfType",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318F20 registers this function as the script command InventoryBox::GetMaxCountOfType (1 argument)."
+    },
+    "xb:0x0017A6F0": {
+      "name": "Script::InventoryBox_PRIVATE_INV_ADD",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318F40 registers this function as the script command InventoryBox::PRIVATE_INV_ADD (3 arguments)."
+    },
+    "xb:0x0017A720": {
+      "name": "Script::InventoryBox_GetWeightOfType",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318F80 registers this function as the script command InventoryBox::GetWeightOfType (1 argument)."
+    },
+    "xb:0x0017A740": {
+      "name": "Script::InventoryBox_GetWeightCapacity",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318FA0 registers this function as the script command InventoryBox::GetWeightCapacity (1 argument)."
+    },
+    "xb:0x0017A760": {
+      "name": "Script::InventoryBox_GetInventoryType",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318F60 registers this function as the script command InventoryBox::GetInventoryType (1 argument)."
+    },
+    "xb:0x0017A910": {
+      "name": "Script::InventoryOwner_AddToInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00318FE0 registers this function as the script command InventoryOwner::AddToInventory (1 to 3 arguments)."
+    },
+    "xb:0x0017A9B0": {
+      "name": "Script::InventoryOwner_RemoveFromInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00319000 registers this function as the script command InventoryOwner::RemoveFromInventory (1 to 2 arguments)."
+    },
+    "xb:0x0017AA30": {
+      "name": "Script::InventoryOwner_GetCountInInventory",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00319020 registers this function as the script command InventoryOwner::GetCountInInventory (1 argument)."
+    },
+    "xb:0x0017AC20": {
+      "name": "Script::RageState_StartBlindRage",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00319080 registers this function as the script command RageState::StartBlindRage (0 arguments)."
+    },
+    "xb:0x0017AC30": {
+      "name": "Script::RageState_EndBlindRage",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003190A0 registers this function as the script command RageState::EndBlindRage (0 arguments)."
+    },
+    "xb:0x00189660": {
+      "name": "Script::EnableCollisionDebugDrawables",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x00319480 registers this function as the script command EnableCollisionDebugDrawables (0 to 1 arguments)."
+    },
+    "xb:0x00189680": {
+      "name": "Script::SetGroundCollisionSurfaceVisible",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003194A0 registers this function as the script command SetGroundCollisionSurfaceVisible (0 to 1 arguments)."
+    },
+    "xb:0x001896C0": {
+      "name": "Script::SetGroundCollisionWireframeVisible",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003194C0 registers this function as the script command SetGroundCollisionWireframeVisible (0 to 1 arguments)."
+    },
+    "xb:0x00189700": {
+      "name": "Script::SetGroundVisible",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003194E0 registers this function as the script command SetGroundVisible (0 to 1 arguments)."
+    },
+    "xb:0x00195610": {
+      "name": "Script::ResetLookTutorial",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003195A0 registers this function as the script command ResetLookTutorial (0 arguments)."
+    },
+    "xb:0x00195630": {
+      "name": "Script::AdvanceTutorialState",
+      "by": "the game's own script command table (portal/tools/script_commands.py)",
+      "why": "The start-up code at 0x003195C0 registers this function as the script command AdvanceTutorialState (0 arguments)."
+    }
+  }
 }

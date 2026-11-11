@@ -137,8 +137,51 @@ def test_feed_of_new_matches():
     assert "<entry>" not in RO.feed_xml({"entries": {}})
 
 
+def test_sitemap_lists_the_pages_and_every_function():
+    """docs/sitemap.xml: the two pages, then each rebuilt function's own page with the day it was matched."""
+    reg = {"entries": {f"xb:0x{i:08X}": entry(i) for i in (3, 1, 2)}}
+    reg["entries"]["pc:0x00000009"] = dict(entry(9), bin="pc", verified_at="")
+    doc = xml.dom.minidom.parseString(RO.sitemap_xml(reg))
+    urls = doc.getElementsByTagName("url")
+    locs = [u.getElementsByTagName("loc")[0].firstChild.data for u in urls]
+    assert locs == [RO.SITE, RO.SITE + "versions.html", RO.SITE + "function.html?f=pc%3A0x00000009"] + [
+        RO.SITE + f"function.html?f=xb%3A0x0000000{i}" for i in (1, 2, 3)]
+    days = [[m.firstChild.data for m in u.getElementsByTagName("lastmod")] for u in urls]
+    assert days == [[], [], []] + [["2026-11-10"]] * 3                 # no date known: none claimed
+    assert RO.sitemap_xml({"entries": {}}).count("<url>") == 2
+
+
+def test_the_repository_sitemap_is_current():
+    from conftest import ROOT
+    reg = json.loads((ROOT / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
+    assert (ROOT / "docs" / "sitemap.xml").read_text(encoding="utf-8").replace("\r\n", "\n") == RO.sitemap_xml(reg)
+
+
 @pytest.mark.parametrize("name", ["feed.xml"])
 def test_the_repository_feed_is_current(name):
     from conftest import ROOT
     reg = json.loads((ROOT / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
     assert (ROOT / "docs" / name).read_text(encoding="utf-8").replace("\r\n", "\n") == RO.feed_xml(reg)
+
+
+def test_class_totals_are_the_same_from_the_queue_and_from_the_files(tmp_path):
+    """A matched function the queue no longer lists still counts in its class's "N of M", so the files the
+    portal writes (from the queue) are the files check_repo.py expects (from the committed lists): they
+    differed by exactly those functions, which failed the check on GitHub after a sync."""
+    def e(va, symbol):
+        return {"bin": "pc", "va": f"0x{va:08X}", "symbol": symbol, "size": 4, "flags": "/O2", "verified_by": "Alice",
+                "code": "void f() {}\n", "verified_at": "2026-11-10 10:00:00"}
+    reg = {"entries": {"pc:0x00700000": e(0x700000, "sub_00700000"), "pc:0x00700010": e(0x700010, "sub_00700010")}}
+    queue = [{"bin": "pc", "fva_int": 0x700000, "va": "0x00700000", "symbol": "sub_00700000", "size": 4},
+             {"bin": "pc", "fva_int": 0x700020, "va": "0x00700020", "symbol": "sub_00700020", "size": 4}]   # not 0x700010
+    a, b = tmp_path / "from_queue", tmp_path / "from_files"
+    for d in (a, b):
+        (d / "reconstructed_src").mkdir(parents=True)
+        (d / "reports").mkdir()
+        (d / "docs").mkdir()
+    RO.write_outputs(reg, a / "reconstructed_src", queue=queue)
+    rel = next(p.relative_to(a) for p in (a / "reconstructed_src" / "pc").rglob("*.cpp"))
+    text = (a / rel).read_text(encoding="utf-8")
+    assert "2 of 3 functions matched" in text                       # the two matched and the one still to do
+    RO.write_outputs(reg, b / "reconstructed_src", known_from=a / "reconstructed_src")
+    assert (b / rel).read_text(encoding="utf-8") == text

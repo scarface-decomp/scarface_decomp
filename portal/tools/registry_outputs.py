@@ -13,7 +13,7 @@ With the function list (the portal's queue), the address-order files hold every 
 matched ones as their C++, the rest as one "// [TODO]" line each in their place, under a header that says
 how complete the file is. Without it (no game files here), they hold the matched functions only.
 
-Also docs/feed.xml (the newest matches) and docs/functions.json (the website's list of rebuilt functions:
+Also docs/feed.xml (the newest matches), docs/sitemap.xml (for search engines) and docs/functions.json (the website's list of rebuilt functions:
 no code, which stays on GitHub; see site_functions).
 
 These files are generated. Every block compiles on its own (that is how it was verified), so a
@@ -277,6 +277,35 @@ def write_feed(registry: dict, docs_dir: Path) -> bool:
     return True
 
 
+def sitemap_xml(registry: dict) -> str:
+    """docs/sitemap.xml, for search engines: the two pages everyone starts from, then a page per rebuilt
+    function (function.html?f=...), with the day it was matched. Sorted by address, so it only changes when
+    the registry does."""
+    from xml.sax.saxutils import escape
+
+    out = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+           "  <url>", f"    <loc>{SITE}</loc>", "    <changefreq>daily</changefreq>", "  </url>",
+           "  <url>", f"    <loc>{SITE}versions.html</loc>", "    <changefreq>weekly</changefreq>", "  </url>"]
+    for key, e in sorted(registry.get("entries", {}).items()):
+        day = str(e.get("verified_at") or e.get("reverified_at") or "")[:10]
+        out += ["  <url>", f"    <loc>{escape(SITE + 'function.html?f=' + urllib.parse.quote(key, safe=''))}</loc>"]
+        if re.match(r"^\d{4}-\d\d-\d\d$", day):
+            out.append(f"    <lastmod>{day}</lastmod>")
+        out.append("  </url>")
+    out.append("</urlset>")
+    return "\n".join(out) + "\n"
+
+
+def write_sitemap(registry: dict, docs_dir: Path) -> bool:
+    path = docs_dir / "sitemap.xml"
+    text = sitemap_xml(registry)
+    if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
+        return False
+    _write(path, text)
+    return True
+
+
 # --------------------------------------------------------------------------- the website's function list
 # docs/functions.json is what the website reads for its list of rebuilt functions and their pages. It has no
 # code: the code lives on GitHub, and each function links to its own lines there (in its class's file, which
@@ -427,10 +456,18 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
         for b, fns in known_from_files(known_from or recon_dir).items():
             if b not in known:
                 known[b] = fns
+    # How many functions each class has. A matched function counts under the name it was matched with (the
+    # one its class file is filed under), whether or not the queue still lists it: the count is then the
+    # same from the queue (the portal) and from the committed files (check_repo.py, which has no game files).
+    matched_as = {(b, va): e.get("symbol", "") for b, lst in by_bin.items() for va, _k, e in lst}
     class_total: Dict[tuple, int] = defaultdict(int)
-    for b, fns in known.items():
-        for t in fns.values():
-            class_total[(b,) + classify_subsystem_and_class(t.get("symbol", ""))] += 1
+    for b in set(known) | set(by_bin):
+        fns = known.get(b) or {}
+        if not fns:
+            continue
+        for va in set(fns) | {va for va, _k, _e in by_bin.get(b, [])}:
+            symbol = matched_as.get((b, va)) or (fns.get(va) or {}).get("symbol", "")
+            class_total[(b,) + classify_subsystem_and_class(symbol)] += 1
     for b, (fname, folder, label) in BIN_INFO.items():
         items = sorted(by_bin.get(b, []))
         allfn = known.get(b)
@@ -481,6 +518,8 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
         written.append("../docs/feed.xml")
     if write_site_functions(registry, recon_dir.parent / "docs", places):
         written.append("../docs/functions.json")
+    if write_sitemap(registry, recon_dir.parent / "docs"):
+        written.append("../docs/sitemap.xml")
     return written
 
 
