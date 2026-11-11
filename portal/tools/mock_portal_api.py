@@ -260,6 +260,38 @@ def gf_run(versions, mode, folders="game", all_there=False):
         st.update(running=False, phase="done", message="Done")
 
 
+def small_glb() -> bytes:
+    """A real little model for the page's 3D view: one textured, bright red triangle and one see-through one."""
+    import media
+    png = media.png(2, 2, bytes([255, 40, 40, 255] * 4))
+    pos = struct.pack("<9f", -1, 0, 0, 1, 0, 0, 0, 1.5, 0)
+    uv = struct.pack("<6f", 0, 0, 1, 0, 0.5, 1)
+    idx = struct.pack("<3H", 0, 1, 2) + b"\0\0"
+    parts, views, off = [], [], 0
+    for blob in (pos, uv, idx, png):
+        views.append({"buffer": 0, "byteOffset": off, "byteLength": len(blob)})
+        blob += b"\0" * (-len(blob) % 4)
+        parts.append(blob)
+        off += len(blob)
+    views[2]["byteLength"] = 6
+    doc = {"asset": {"version": "2.0"}, "scene": 0, "scenes": [{"nodes": [0, 1]}],
+           "nodes": [{"name": "wall", "mesh": 0}, {"name": "glass", "mesh": 1, "translation": [0, 0, 0.5]}],
+           "meshes": [{"primitives": [{"attributes": {"POSITION": 0, "TEXCOORD_0": 1}, "indices": 2, "material": 0}]},
+                      {"primitives": [{"attributes": {"POSITION": 0}, "indices": 2, "material": 1}]}],
+           "materials": [{"doubleSided": True, "pbrMetallicRoughness": {"baseColorTexture": {"index": 0}}},
+                         {"doubleSided": True, "alphaMode": "BLEND", "pbrMetallicRoughness": {"baseColorFactor": [1, 1, 1, 0.1]}}],
+           "textures": [{"source": 0}], "images": [{"mimeType": "image/png", "bufferView": 3}],
+           "accessors": [{"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3", "min": [-1, 0, 0], "max": [1, 1.5, 0]},
+                         {"bufferView": 1, "componentType": 5126, "count": 3, "type": "VEC2"},
+                         {"bufferView": 2, "componentType": 5123, "count": 3, "type": "SCALAR"}],
+           "bufferViews": views, "buffers": [{"byteLength": off}]}
+    js = json.dumps(doc).encode()
+    js += b" " * (-len(js) % 4)
+    body = b"".join(parts)
+    return (b"glTF" + struct.pack("<II", 2, 28 + len(js) + len(body)) + struct.pack("<I", len(js)) + b"JSON" + js
+            + struct.pack("<I", len(body)) + b"BIN\0" + body)
+
+
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
@@ -399,7 +431,7 @@ class Handler(BaseHTTPRequestHandler):
             if u.path == "/api/game-files/model":
                 if CONFIG.get("model_error"):
                     return self._json({"ok": False, "error": "Nothing to show in Blender: nothing in these files to export."}, 415)
-                return self._bytes(b"glTF" + bytes(8), "model/gltf-binary")
+                return self._bytes(b"glTF" + bytes(8) if CONFIG.get("bad_glb") else small_glb(), "model/gltf-binary")
             if u.path == "/api/queue":
                 items = list(TASKS.values())
                 lane, tier, query = q.get("lane", "ALL"), q.get("tier", "ALL"), q.get("q", "").lower()
@@ -506,6 +538,7 @@ class Handler(BaseHTTPRequestHandler):
                 CONFIG["ffmpeg"] = not body.get("no_ffmpeg")
                 CONFIG["model_error"] = bool(body.get("model_error"))
                 CONFIG["partial_city"] = bool(body.get("partial_city"))
+                CONFIG["bad_glb"] = bool(body.get("bad_glb"))
                 CONFIG["cant_show"] = bool(body.get("cant_show"))
                 CONFIG["porting"] = int(body.get("porting") or 0)
                 CONFIG["gf_missing"] = bool(body.get("gf_missing"))

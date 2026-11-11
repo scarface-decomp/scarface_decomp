@@ -31,7 +31,7 @@ def server():
     srv.shutdown()
 
 
-GF_FLAGS = ("gf_missing", "gf_interrupted", "no_blender", "no_ffmpeg", "model_error", "partial_city", "cant_show",
+GF_FLAGS = ("gf_missing", "gf_interrupted", "no_blender", "no_ffmpeg", "model_error", "partial_city", "cant_show", "bad_glb",
             "porting")
 
 
@@ -788,7 +788,7 @@ def test_game_files_previews(page):
     page.click("#gf-list .gf-row:has-text('_006.p3d') .a button")
     page.wait_for_selector("#gf-list .gf-prev .gf-what")
     assert page.text_content("#gf-list .gf-prev .gf-what") == "1 model; 2 pictures."
-    assert page.eval_on_selector_all("#gf-list .gf-prev .gf-bl button", "bs => bs.map(b => b.textContent)") == [
+    assert page.eval_on_selector_all("#gf-list .gf-prev .gf-bl button", "bs => bs.map(b => b.textContent)") == ["View here", 
         "Open in Blender", "Download .glb"]
     page.wait_for_function("[...document.querySelectorAll('#gf-list .gf-pic img')].length === 2 && [...document.querySelectorAll('#gf-list .gf-pic img')].every(i => i.complete && i.naturalWidth > 0)")
     assert page.eval_on_selector_all("#gf-list .gf-pic img", "els => els.map(e => e.naturalWidth)") == [8, 16]
@@ -877,6 +877,47 @@ def test_game_files_a_failed_export_says_why_on_the_page(page):
     page.click("#gf-list .gf-prev .gf-bl button:has-text('Download .glb')")
     page.wait_for_function("document.querySelector('#gf-list .gf-prev p[role=status]').textContent.startsWith('Nothing to show')")
     assert page.eval_on_selector("#gf-list .gf-prev p[role=status]", "p => p.classList.contains('err')")
+
+
+def test_a_model_opens_in_the_portals_own_3d_view(page):
+    """View here: the same .glb Blender would get, drawn in the page. The picture really is the model (its red
+    texture is on screen), the mouse turns it, and Esc closes it and frees the graphics memory."""
+    import media
+    reset()
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('_006.p3d') .a button")
+    page.click("#gf-list .gf-prev .gf-bl button:has-text('View here')")
+    page.wait_for_function("!document.getElementById('viewer').hidden && document.getElementById('viewer-info').textContent.includes('triangles')")
+    assert page.text_content("#viewer-info").startswith("2 parts · 2 triangles")
+    page.wait_for_timeout(300)
+    w, h, rgba = media.decode_png(page.locator("#viewer-canvas").screenshot())
+    px = [rgba[i:i + 3] for i in range(0, len(rgba), 4 * 7)]
+    red = sum(1 for r, g, b in px if r > 150 and g < 110 and b < 110)
+    assert red > len(px) * 0.02, "the textured triangle isn't on screen"
+    box = page.locator("#viewer-canvas").bounding_box()
+    page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+    page.mouse.down()
+    page.mouse.move(box["x"] + box["width"] / 2 + 260, box["y"] + box["height"] / 2, steps=4)
+    page.mouse.up()
+    page.wait_for_timeout(200)
+    assert media.decode_png(page.locator("#viewer-canvas").screenshot())[2] != rgba        # it turned
+    page.keyboard.press("Escape")
+    assert page.is_hidden("#viewer")
+    # a map area has the button too
+    page.wait_for_function("document.querySelectorAll('#gfb-area option').length > 0")
+    page.click("#gfb-area-view")
+    page.wait_for_function("!document.getElementById('viewer').hidden && document.getElementById('viewer-info').textContent.includes('triangles')")
+    page.click("#viewer-close")
+    assert page.is_hidden("#viewer")
+
+
+def test_the_3d_view_says_so_when_it_cant_show_a_file(page):
+    reset(bad_glb=True)
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('_006.p3d') .a button")
+    page.click("#gf-list .gf-prev .gf-bl button:has-text('View here')")
+    page.wait_for_function("document.querySelector('#gf-list .gf-prev p[role=status]').textContent.includes('Open in Blender still works')")
+    assert page.is_hidden("#viewer")
 
 
 def test_blender_version_is_picked_beside_the_tools_and_says_what_each_has(page):

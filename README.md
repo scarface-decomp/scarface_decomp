@@ -221,7 +221,8 @@ offers what fits: its pictures, its subtitle text, or Blender. Every version's o
 the PC's Ogg and PNG, the Xbox's ADPCM (the cutscenes' 5.1 too) and DXT, and the PS2's VAG and its
 palette pictures, which the portal puts back in order from the PS2 graphics chip's block layout. That is
 all done on your computer, only for a browser on that computer (Xbox WMA music can be saved and played
-in a media player). **Open in Blender** starts your Blender with a file as a scene (and saves it as a
+in a media player). **View here** shows a model or a map area in the page itself, to turn and fly
+through, with nothing to install. **Open in Blender** starts your Blender with a file as a scene (and saves it as a
 `.blend`): characters with their skeletons, skin weights and the game's animations, cameras with their
 moves, guns, cars with their moving parts, and map areas with the trees, lamps and benches the game places
 on them, as the game first shows them, on any version. The **In Blender** box does a whole map area at
