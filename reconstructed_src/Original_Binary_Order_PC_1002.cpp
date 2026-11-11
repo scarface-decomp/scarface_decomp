@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 8 of 1,516 functions matched (0.53%). NOT COMPLETE YET.
-// The 1,508 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 62 of 1,516 functions matched (4.09%). NOT COMPLETE YET.
+// The 1,454 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -43,7 +43,29 @@
 // [TODO] 0x006DE930 sub_006DE930 (43 B)
 // [TODO] 0x006DEBB0 sub_006DEBB0 (35 B)
 // [TODO] 0x006DEBE0 sub_006DEBE0 (20 B)
-// [TODO] 0x006DEC00 sub_006DEC00 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006DEC00 (0x006DEC00, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006DEC00 (0x006DEC00, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0041135C(void);
+
+class Class_006DEC00
+{
+public:
+    void sub_006DEC00();
+};
+
+void Class_006DEC00::sub_006DEC00()
+{
+    sub_0041135C();
+}
+
 // [TODO] 0x006DEC30 sub_006DEC30 (84 B)
 // [TODO] 0x006DEC90 sub_006DEC90 (24 B)
 // [TODO] 0x006DECB0 sub_006DECB0 (118 B)
@@ -81,7 +103,23 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006DF3E0 sub_006DF3E0 (14 B)
 // [TODO] 0x006DF3F0 sub_006DF3F0 (23 B)
 // [TODO] 0x006DF430 sub_006DF430 (81 B)
-// [TODO] 0x006DF490 sub_006DF490 (6 B)
+// ============================================================================
+// [VERIFIED] sub_006DF490 (0x006DF490, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006DF490 (0x006DF490, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085AEF4;
+
+int __cdecl sub_006DF490(void)
+{
+    return DAT_0085AEF4;
+}
+
 // [TODO] 0x006DF4A0 LoadSet::vfunc_00 (5 B)
 // [TODO] 0x006DF4B0 core::Platform::vfunc_01 (5 B)
 // [TODO] 0x006DF4C0 core::Platform::vfunc_04 (24 B)
@@ -99,8 +137,46 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006DF7C0 core::MemoryAllocatorMalloc::vfunc_08 (22 B)
 // [TODO] 0x006DF7E0 pure3d::pddiDisplay::vfunc_09 (5 B)
 // [TODO] 0x006DF7F0 core::MemoryAllocatorMalloc::vfunc_12 (6 B)
-// [TODO] 0x006DF960 sub_006DF960 (6 B)
-// [TODO] 0x006DF970 sub_006DF970 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006DF960 (0x006DF960, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006DF960 (0x006DF960, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085CD34;
+
+int __cdecl sub_006DF960(void)
+{
+    return DAT_0085CD34;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006DF970 (0x006DF970, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006DF970 (0x006DF970, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0042C0C6(void);
+
+class Class_006DF970
+{
+public:
+    void sub_006DF970();
+};
+
+void Class_006DF970::sub_006DF970()
+{
+    sub_0042C0C6();
+}
+
 // [TODO] 0x006DF9E0 sub_006DF9E0 (191 B)
 // [TODO] 0x006DFAA0 sub_006DFAA0 (8 B)
 // [TODO] 0x006DFB40 sub_006DFB40 (370 B)
@@ -475,9 +551,53 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006E9650 sub_006E9650 (6 B)
 // [TODO] 0x006E9660 sub_006E9660 (234 B)
 // [TODO] 0x006E9750 sub_006E9750 (98 B)
-// [TODO] 0x006E97D0 sub_006E97D0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006E97D0 (0x006E97D0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E97D0 (0x006E97D0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0043CE00(void);
+
+class Class_006E97D0
+{
+public:
+    void sub_006E97D0();
+};
+
+void Class_006E97D0::sub_006E97D0()
+{
+    sub_0043CE00();
+}
+
 // [TODO] 0x006E97E0 sub_006E97E0 (40 B)
-// [TODO] 0x006E9810 sub_006E9810 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006E9810 (0x006E9810, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E9810 (0x006E9810, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0043CE70(void);
+
+class Class_006E9810
+{
+public:
+    void sub_006E9810();
+};
+
+void Class_006E9810::sub_006E9810()
+{
+    sub_0043CE70();
+}
+
 // [TODO] 0x006E9820 GameMemorySegmentCollection::vfunc_02 (4 B)
 // [TODO] 0x006E9830 sub_006E9830 (17 B)
 // [TODO] 0x006E9850 content::LoadInventory::vfunc_04 (126 B)
@@ -625,7 +745,29 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006ED9A0 sub_006ED9A0 (143 B)
 // [TODO] 0x006EDA30 audio::Sequence::vfunc_06 (110 B)
 // [TODO] 0x006EDB60 sub_006EDB60 (12 B)
-// [TODO] 0x006EDCA0 sub_006EDCA0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006EDCA0 (0x006EDCA0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EDCA0 (0x006EDCA0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_004897A5(void);
+
+class Class_006EDCA0
+{
+public:
+    void sub_006EDCA0();
+};
+
+void Class_006EDCA0::sub_006EDCA0()
+{
+    sub_004897A5();
+}
+
 // [TODO] 0x006EDCB0 sub_006EDCB0 (18 B)
 // [TODO] 0x006EDCD0 sub_006EDCD0 (36 B)
 // [TODO] 0x006EDD00 sub_006EDD00 (64 B)
@@ -644,7 +786,23 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006EDFD0 sub_006EDFD0 (19 B)
 // [TODO] 0x006EDFF0 audio::MixerMix::vfunc_00 (5 B)
 // [TODO] 0x006EE000 audio::MixerMix::vfunc_01 (23 B)
-// [TODO] 0x006EE040 sub_006EE040 (6 B)
+// ============================================================================
+// [VERIFIED] sub_006EE040 (0x006EE040, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EE040 (0x006EE040, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085CEB0;
+
+int __cdecl sub_006EE040(void)
+{
+    return DAT_0085CEB0;
+}
+
 // [TODO] 0x006EE050 sub_006EE050 (5 B)
 // [TODO] 0x006EE060 sub_006EE060 (15 B)
 // [TODO] 0x006EE070 sub_006EE070 (13 B)
@@ -661,7 +819,29 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006EE4A0 sub_006EE4A0 (71 B)
 // [TODO] 0x006EE4F0 sub_006EE4F0 (60 B)
 // [TODO] 0x006EE530 sub_006EE530 (56 B)
-// [TODO] 0x006EE570 sub_006EE570 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006EE570 (0x006EE570, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EE570 (0x006EE570, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006EE3B0(void);
+
+class Class_006EE570
+{
+public:
+    void sub_006EE570();
+};
+
+void Class_006EE570::sub_006EE570()
+{
+    sub_006EE3B0();
+}
+
 // [TODO] 0x006EE580 sub_006EE580 (118 B)
 // [TODO] 0x006EE600 sub_006EE600 (114 B)
 // [TODO] 0x006EE680 sub_006EE680 (99 B)
@@ -675,7 +855,29 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006EE990 om::Allocator::vfunc_00 (31 B)
 // [TODO] 0x006EE9B0 sub_006EE9B0 (6 B)
 // [TODO] 0x006EE9D0 sub_006EE9D0 (19 B)
-// [TODO] 0x006EE9F0 sub_006EE9F0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006EE9F0 (0x006EE9F0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EE9F0 (0x006EE9F0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00424301(void);
+
+class Class_006EE9F0
+{
+public:
+    void sub_006EE9F0();
+};
+
+void Class_006EE9F0::sub_006EE9F0()
+{
+    sub_00424301();
+}
+
 // [TODO] 0x006EEAC0 om::MetaType<audio::SeqEvent>::vfunc_00 (36 B)
 // [TODO] 0x006EEAF0 om::MetaType<audio::Mix>::vfunc_00 (36 B)
 // [TODO] 0x006EEB20 om::MetaType<audio::Clip>::vfunc_00 (36 B)
@@ -914,7 +1116,38 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006F5BB0 sub_006F5BB0 (21 B)
 // [TODO] 0x006F5C10 audio::SeqEventTypeBase::vfunc_00 (61 B)
 // [TODO] 0x006F5C50 sub_006F5C50 (61 B)
-// [TODO] 0x006F5C90 audio::SeqEventContainer::vfunc_04 (30 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventContainer::vfunc_04 (0x006F5C90, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqEventContainer::vfunc_04 (0x006F5C90, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006F5C50(void);
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace audio {
+
+class SeqEventContainer
+{
+public:
+    virtual SeqEventContainer* vfunc_04(int a1);
+};
+
+SeqEventContainer* SeqEventContainer::vfunc_04(int a1)
+{
+    sub_006F5C50();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F5CB0 sub_006F5CB0 (13 B)
 // [TODO] 0x006F5CC0 sub_006F5CC0 (19 B)
 // [TODO] 0x006F5CE0 sub_006F5CE0 (130 B)
@@ -1255,7 +1488,29 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x006FF7B0 sub_006FF7B0 (35 B)
 // [TODO] 0x006FF8A0 sub_006FF8A0 (134 B)
 // [TODO] 0x006FF930 sub_006FF930 (14 B)
-// [TODO] 0x006FFB20 sub_006FFB20 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006FFB20 (0x006FFB20, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006FFB20 (0x006FFB20, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00490965(void);
+
+class Class_006FFB20
+{
+public:
+    void sub_006FFB20();
+};
+
+void Class_006FFB20::sub_006FFB20()
+{
+    sub_00490965();
+}
+
 // [TODO] 0x007001D0 sub_007001D0 (13 B)
 // [TODO] 0x007001E0 sub_007001E0 (19 B)
 // [TODO] 0x00700200 FETextObject::vfunc_46 (4 B)
@@ -1281,7 +1536,29 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x00700D20 sub_00700D20 (104 B)
 // [TODO] 0x00700D90 sub_00700D90 (131 B)
 // [TODO] 0x00700E20 sub_00700E20 (139 B)
-// [TODO] 0x00700EE0 sub_00700EE0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00700EE0 (0x00700EE0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00700EE0 (0x00700EE0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00700EB0(void);
+
+class Class_00700EE0
+{
+public:
+    void sub_00700EE0();
+};
+
+void Class_00700EE0::sub_00700EE0()
+{
+    sub_00700EB0();
+}
+
 // [TODO] 0x00700EF0 sub_00700EF0 (16 B)
 // [TODO] 0x00700F00 sub_00700F00 (18 B)
 // [TODO] 0x00700F20 sub_00700F20 (12 B)
@@ -1329,7 +1606,29 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x00702780 type_info::vfunc_00 (75 B)
 // [TODO] 0x007027CC sub_007027CC (6 B)
 // [TODO] 0x007027E6 fight::ConditionFactory::vfunc_07 (6 B)
-// [TODO] 0x00702810 sub_00702810 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00702810 (0x00702810, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00702810 (0x00702810, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0041EA26(void);
+
+class Class_00702810
+{
+public:
+    void sub_00702810();
+};
+
+void Class_00702810::sub_00702810()
+{
+    sub_0041EA26();
+}
+
 // [TODO] 0x0070284D sub_0070284D (74 B)
 // [TODO] 0x00702897 sub_00702897 (24 B)
 // [TODO] 0x007028AF sub_007028AF (47 B)
@@ -1343,7 +1642,29 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x00702D90 sub_00702D90 (117 B)
 // [TODO] 0x00702E06 sub_00702E06 (6 B)
 // [TODO] 0x00702E0C sub_00702E0C (6 B)
-// [TODO] 0x00702E14 sub_00702E14 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00702E14 (0x00702E14, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00702E14 (0x00702E14, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0049AB8F(void);
+
+class Class_00702E14
+{
+public:
+    void sub_00702E14();
+};
+
+void Class_00702E14::sub_00702E14()
+{
+    sub_0049AB8F();
+}
+
 // [TODO] 0x00702E4F sub_00702E4F (17 B)
 // [TODO] 0x00702E66 sub_00702E66 (6 B)
 // [TODO] 0x00702E6C sub_00702E6C (6 B)
@@ -1365,7 +1686,38 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x007034D0 pure3d::d3dDevice::vfunc_15 (112 B)
 // [TODO] 0x00703540 pure3d::d3dDevice::vfunc_12 (22 B)
 // [TODO] 0x00703560 sub_00703560 (47 B)
-// [TODO] 0x00703590 pure3d::d3dDevice::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dDevice::vfunc_03 (0x00703590, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dDevice::vfunc_03 (0x00703590, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00702F70(void);
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dDevice
+{
+public:
+    virtual d3dDevice* vfunc_03(int a1);
+};
+
+d3dDevice* d3dDevice::vfunc_03(int a1)
+{
+    sub_00702F70();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00703610 pure3d::pddiPrimBuffer::vfunc_03 (36 B)
 // [TODO] 0x00703640 sub_00703640 (72 B)
 // [TODO] 0x00703690 sub_00703690 (276 B)
@@ -1388,7 +1740,38 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x00703DD0 pure3d::d3dPrimBufferStream::vfunc_24 (5 B)
 // [TODO] 0x00703DE0 sub_00703DE0 (9 B)
 // [TODO] 0x00703F80 sub_00703F80 (77 B)
-// [TODO] 0x00703FD0 pure3d::d3dPrimBuffer::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBuffer::vfunc_03 (0x00703FD0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPrimBuffer::vfunc_03 (0x00703FD0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703850(void);
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dPrimBuffer
+{
+public:
+    virtual d3dPrimBuffer* vfunc_03(int a1);
+};
+
+d3dPrimBuffer* d3dPrimBuffer::vfunc_03(int a1)
+{
+    sub_00703850();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00703FF0 sub_00703FF0 (119 B)
 // [TODO] 0x00704070 pure3d::d3dPrimBufferStream::vfunc_00 (48 B)
 // [TODO] 0x007040A0 pure3d::d3dPrimBufferStream::vfunc_01 (263 B)
@@ -1411,29 +1794,392 @@ void __cdecl sub_006DEDF0(void)
 // [TODO] 0x007048E0 sub_007048E0 (50 B)
 // [TODO] 0x00704920 pure3d::d3dErrorShader::vfunc_15 (226 B)
 // [TODO] 0x00704A10 sub_00704A10 (36 B)
-// [TODO] 0x00704A40 pure3d::d3dReflShader::vfunc_16 (6 B)
-// [TODO] 0x00704A50 pure3d::d3dReflShader::vfunc_17 (6 B)
-// [TODO] 0x00704A60 pure3d::d3dReflShader::vfunc_18 (6 B)
-// [TODO] 0x00704A70 pure3d::d3dReflShader::vfunc_19 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_16 (0x00704A40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_16 (0x00704A40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FB7F0[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dReflShader::vfunc_16()
+{
+    return DAT_007FB7F0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_17 (0x00704A50, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_17 (0x00704A50, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FB718[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dReflShader::vfunc_17()
+{
+    return DAT_007FB718;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_18 (0x00704A60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_18 (0x00704A60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FB6D0[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dReflShader::vfunc_18()
+{
+    return DAT_007FB6D0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_19 (0x00704A70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_19 (0x00704A70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FB838[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_19();
+};
+
+void* d3dReflShader::vfunc_19()
+{
+    return DAT_007FB838;
+}
+
+}
+
 // [TODO] 0x00704A80 pure3d::d3dReflShader::vfunc_04 (6 B)
 // [TODO] 0x00704A90 pure3d::d3dReflShader::vfunc_13 (164 B)
 // [TODO] 0x00704B40 pure3d::d3dReflShader::vfunc_14 (156 B)
 // [TODO] 0x00704BE0 sub_00704BE0 (49 B)
 // [TODO] 0x00704C20 pure3d::d3dReflShader::vfunc_03 (68 B)
 // [TODO] 0x00704C70 pure3d::d3dReflShader::vfunc_15 (977 B)
-// [TODO] 0x00705050 pure3d::d3dPointSpriteShader::vfunc_16 (6 B)
-// [TODO] 0x00705060 pure3d::d3dPointSpriteShader::vfunc_17 (6 B)
-// [TODO] 0x00705070 pure3d::d3dPointSpriteShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_16 (0x00705050, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPointSpriteShader::vfunc_16 (0x00705050, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FB9D8[];
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dPointSpriteShader::vfunc_16()
+{
+    return DAT_007FB9D8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_17 (0x00705060, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPointSpriteShader::vfunc_17 (0x00705060, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBA08[];
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dPointSpriteShader::vfunc_17()
+{
+    return DAT_007FBA08;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_18 (0x00705070, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPointSpriteShader::vfunc_18 (0x00705070, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FB918[];
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dPointSpriteShader::vfunc_18()
+{
+    return DAT_007FB918;
+}
+
+}
+
 // [TODO] 0x00705080 pure3d::d3dPointSpriteShader::vfunc_04 (6 B)
 // [TODO] 0x00705090 pure3d::d3dPointSpriteShader::vfunc_14 (54 B)
 // [TODO] 0x007050F0 sub_007050F0 (102 B)
 // [TODO] 0x00705160 pure3d::d3dPointSpriteShader::vfunc_03 (53 B)
 // [TODO] 0x007051A0 pure3d::d3dPointSpriteShader::vfunc_15 (446 B)
 // [TODO] 0x00705360 sub_00705360 (111 B)
-// [TODO] 0x007053D0 pure3d::d3dLayeredShader::vfunc_16 (6 B)
-// [TODO] 0x007053E0 pure3d::d3dLayeredShader::vfunc_17 (6 B)
-// [TODO] 0x007053F0 pure3d::d3dLayeredShader::vfunc_18 (6 B)
-// [TODO] 0x00705400 pure3d::d3dLayeredShader::vfunc_19 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_16 (0x007053D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_16 (0x007053D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBC28[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dLayeredShader::vfunc_16()
+{
+    return DAT_007FBC28;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_17 (0x007053E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_17 (0x007053E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBC70[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dLayeredShader::vfunc_17()
+{
+    return DAT_007FBC70;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_18 (0x007053F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_18 (0x007053F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBB50[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dLayeredShader::vfunc_18()
+{
+    return DAT_007FBB50;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_19 (0x00705400, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_19 (0x00705400, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBBB0[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_19();
+};
+
+void* d3dLayeredShader::vfunc_19()
+{
+    return DAT_007FBBB0;
+}
+
+}
+
 // [TODO] 0x00705410 pure3d::d3dLayeredShader::vfunc_04 (6 B)
 // [TODO] 0x00705420 pure3d::d3dLayeredShader::vfunc_24 (17 B)
 // ============================================================================
@@ -1463,19 +2209,314 @@ void __cdecl sub_00705430(void)
 // [TODO] 0x007066A0 pure3d::d3dSpecularShader::vfunc_04 (6 B)
 // [TODO] 0x007066B0 sub_007066B0 (1058 B)
 // [TODO] 0x00706AE0 sub_00706AE0 (147 B)
-// [TODO] 0x00706B80 pure3d::d3dSpecularShader::vfunc_16 (6 B)
-// [TODO] 0x00706B90 pure3d::d3dSpecularShader::vfunc_17 (6 B)
-// [TODO] 0x00706BA0 pure3d::d3dSpecularShader::vfunc_18 (6 B)
-// [TODO] 0x00706BB0 pure3d::d3dSpecularShader::vfunc_19 (6 B)
-// [TODO] 0x00706BC0 pure3d::d3dSpecularShader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_16 (0x00706B80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_16 (0x00706B80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBFA0[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dSpecularShader::vfunc_16()
+{
+    return DAT_007FBFA0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_17 (0x00706B90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_17 (0x00706B90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBE98[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dSpecularShader::vfunc_17()
+{
+    return DAT_007FBE98;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_18 (0x00706BA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_18 (0x00706BA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBE50[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dSpecularShader::vfunc_18()
+{
+    return DAT_007FBE50;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_19 (0x00706BB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_19 (0x00706BB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FBF40[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_19();
+};
+
+void* d3dSpecularShader::vfunc_19()
+{
+    return DAT_007FBF40;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_03 (0x00706BC0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_03 (0x00706BC0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0065B580(void);
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual d3dSpecularShader* vfunc_03(int a1);
+};
+
+d3dSpecularShader* d3dSpecularShader::vfunc_03(int a1)
+{
+    sub_0065B580();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00706BE0 pure3d::d3dSpecularShader::vfunc_15 (683 B)
 // [TODO] 0x00706D62 pure3d::BMPHandler::vfunc_17 (297 B)
 // [TODO] 0x00706E90 sub_00706E90 (1067 B)
 // [TODO] 0x007072C0 pure3d::d3dSpecularShader::vfunc_25 (77 B)
-// [TODO] 0x00707310 pure3d::d3dCharacterShader::vfunc_16 (6 B)
-// [TODO] 0x00707320 pure3d::d3dCharacterShader::vfunc_17 (6 B)
-// [TODO] 0x00707330 pure3d::d3dCharacterShader::vfunc_18 (6 B)
-// [TODO] 0x00707340 pure3d::d3dCharacterShader::vfunc_19 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_16 (0x00707310, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_16 (0x00707310, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC198[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dCharacterShader::vfunc_16()
+{
+    return DAT_007FC198;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_17 (0x00707320, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_17 (0x00707320, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC0C0[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dCharacterShader::vfunc_17()
+{
+    return DAT_007FC0C0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_18 (0x00707330, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_18 (0x00707330, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC078[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dCharacterShader::vfunc_18()
+{
+    return DAT_007FC078;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_19 (0x00707340, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_19 (0x00707340, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0085D760[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_19();
+};
+
+void* d3dCharacterShader::vfunc_19()
+{
+    return DAT_0085D760;
+}
+
+}
+
 // [TODO] 0x00707350 pure3d::d3dCharacterShader::vfunc_04 (6 B)
 // [TODO] 0x00707360 pure3d::d3dShader::vfunc_22 (38 B)
 // [TODO] 0x00707390 pure3d::d3dCharacterShader::vfunc_24 (17 B)
@@ -1518,10 +2559,142 @@ void __cdecl sub_00707D80(void)
 // [TODO] 0x00707EA0 pure3d::d3dVehicleShader::vfunc_04 (6 B)
 // [TODO] 0x00707EB0 pure3d::d3dVehicleShader::vfunc_36 (35 B)
 // [TODO] 0x00707EE0 pure3d::d3dVehicleShader::vfunc_37 (15 B)
-// [TODO] 0x00707EF0 pure3d::d3dVehicleShader::vfunc_16 (6 B)
-// [TODO] 0x00707F00 pure3d::d3dVehicleShader::vfunc_17 (6 B)
-// [TODO] 0x00707F10 pure3d::d3dVehicleShader::vfunc_18 (6 B)
-// [TODO] 0x00707F20 pure3d::d3dVehicleShader::vfunc_19 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_16 (0x00707EF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_16 (0x00707EF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC550[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dVehicleShader::vfunc_16()
+{
+    return DAT_007FC550;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_17 (0x00707F00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_17 (0x00707F00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC4C0[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dVehicleShader::vfunc_17()
+{
+    return DAT_007FC4C0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_18 (0x00707F10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_18 (0x00707F10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC418[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dVehicleShader::vfunc_18()
+{
+    return DAT_007FC418;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_19 (0x00707F20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_19 (0x00707F20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC508[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_19();
+};
+
+void* d3dVehicleShader::vfunc_19()
+{
+    return DAT_007FC508;
+}
+
+}
+
 // [TODO] 0x00707F30 pure3d::d3dVehicleShader::vfunc_26 (463 B)
 // [TODO] 0x00708100 pure3d::d3dVehicleShader::vfunc_31 (13 B)
 // [TODO] 0x00708110 pure3d::d3dVehicleShader::vfunc_30 (13 B)
@@ -1533,21 +2706,316 @@ void __cdecl sub_00707D80(void)
 // [TODO] 0x007082E0 pure3d::d3dVehicleShader::vfunc_35 (104 B)
 // [TODO] 0x00708350 sub_00708350 (1058 B)
 // [TODO] 0x007087B0 sub_007087B0 (255 B)
-// [TODO] 0x007088B0 pure3d::d3dVehicleShader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_03 (0x007088B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_03 (0x007088B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00707E60(void);
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual d3dVehicleShader* vfunc_03(int a1);
+};
+
+d3dVehicleShader* d3dVehicleShader::vfunc_03(int a1)
+{
+    sub_00707E60();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x007088D0 pure3d::d3dVehicleShader::vfunc_15 (292 B)
 // [TODO] 0x00708A00 pure3d::d3dVehicleShader::vfunc_25 (1058 B)
-// [TODO] 0x00708F50 pure3d::d3dShadowShader::vfunc_16 (6 B)
-// [TODO] 0x00708F60 pure3d::d3dShadowShader::vfunc_17 (6 B)
-// [TODO] 0x00708F70 pure3d::d3dShadowShader::vfunc_18 (6 B)
-// [TODO] 0x00708F80 pure3d::d3dShadowShader::vfunc_19 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_16 (0x00708F50, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_16 (0x00708F50, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC7E0[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dShadowShader::vfunc_16()
+{
+    return DAT_007FC7E0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_17 (0x00708F60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_17 (0x00708F60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC690[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dShadowShader::vfunc_17()
+{
+    return DAT_007FC690;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_18 (0x00708F70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_18 (0x00708F70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC648[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dShadowShader::vfunc_18()
+{
+    return DAT_007FC648;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_19 (0x00708F80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_19 (0x00708F80, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC768[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_19();
+};
+
+void* d3dShadowShader::vfunc_19()
+{
+    return DAT_007FC768;
+}
+
+}
+
 // [TODO] 0x00708F90 pure3d::d3dShadowShader::vfunc_04 (6 B)
 // [TODO] 0x00708FA0 pure3d::d3dShadowShader::vfunc_15 (136 B)
 // [TODO] 0x00709030 sub_00709030 (44 B)
 // [TODO] 0x00709060 pure3d::d3dShadowShader::vfunc_03 (53 B)
-// [TODO] 0x007090A0 pure3d::d3dShadowDecalShader::vfunc_16 (6 B)
-// [TODO] 0x007090B0 pure3d::d3dShadowDecalShader::vfunc_17 (6 B)
-// [TODO] 0x007090C0 pure3d::d3dShadowDecalShader::vfunc_18 (6 B)
-// [TODO] 0x007090D0 pure3d::d3dShadowDecalShader::vfunc_19 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_16 (0x007090A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_16 (0x007090A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC968[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dShadowDecalShader::vfunc_16()
+{
+    return DAT_007FC968;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_17 (0x007090B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_17 (0x007090B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC890[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dShadowDecalShader::vfunc_17()
+{
+    return DAT_007FC890;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_18 (0x007090C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_18 (0x007090C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FC848[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dShadowDecalShader::vfunc_18()
+{
+    return DAT_007FC848;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_19 (0x007090D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_19 (0x007090D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0085D788[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_19();
+};
+
+void* d3dShadowDecalShader::vfunc_19()
+{
+    return DAT_0085D788;
+}
+
+}
+
 // [TODO] 0x007090E0 pure3d::d3dShadowDecalShader::vfunc_04 (6 B)
 // [TODO] 0x007090F0 pure3d::d3dShadowDecalShader::vfunc_14 (23 B)
 // [TODO] 0x00709110 sub_00709110 (83 B)
@@ -1563,10 +3031,142 @@ void __cdecl sub_00707D80(void)
 // [TODO] 0x007094B0 pure3d::d3dVertexFadeShader::vfunc_24 (20 B)
 // [TODO] 0x007094D0 sub_007094D0 (1239 B)
 // [TODO] 0x007099B0 sub_007099B0 (63 B)
-// [TODO] 0x007099F0 pure3d::d3dVertexFadeShader::vfunc_16 (6 B)
-// [TODO] 0x00709A00 pure3d::d3dVertexFadeShader::vfunc_17 (6 B)
-// [TODO] 0x00709A10 pure3d::d3dVertexFadeShader::vfunc_18 (6 B)
-// [TODO] 0x00709A20 pure3d::d3dVertexFadeShader::vfunc_19 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_16 (0x007099F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVertexFadeShader::vfunc_16 (0x007099F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FCAF8[];
+
+namespace pure3d {
+
+class d3dVertexFadeShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dVertexFadeShader::vfunc_16()
+{
+    return DAT_007FCAF8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_17 (0x00709A00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVertexFadeShader::vfunc_17 (0x00709A00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FCA50[];
+
+namespace pure3d {
+
+class d3dVertexFadeShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dVertexFadeShader::vfunc_17()
+{
+    return DAT_007FCA50;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_18 (0x00709A10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVertexFadeShader::vfunc_18 (0x00709A10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FCB70[];
+
+namespace pure3d {
+
+class d3dVertexFadeShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dVertexFadeShader::vfunc_18()
+{
+    return DAT_007FCB70;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_19 (0x00709A20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVertexFadeShader::vfunc_19 (0x00709A20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007FCB28[];
+
+namespace pure3d {
+
+class d3dVertexFadeShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_19();
+};
+
+void* d3dVertexFadeShader::vfunc_19()
+{
+    return DAT_007FCB28;
+}
+
+}
+
 // [TODO] 0x00709A30 pure3d::d3dVertexFadeShader::vfunc_15 (629 B)
 // [TODO] 0x00709CB0 sub_00709CB0 (740 B)
 // [TODO] 0x00709FA0 pure3d::d3dVertexFadeShader::vfunc_25 (66 B)

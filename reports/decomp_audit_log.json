@@ -1,5 +1,61 @@
 [
   {
+    "time": "2026-11-10 23:52:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "119 look-alike(s) of sub_00023D40",
+    "va": "0x00023D40",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:50:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "127 look-alike(s) of sub_0001E5D0",
+    "va": "0x0001E5D0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:47:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "132 look-alike(s) of CollisionManager::CollisionManagerFlowClient::vfunc_00",
+    "va": "0x00016060",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:45:41",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "143 look-alike(s) of fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03",
+    "va": "0x000DE4D0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:42:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "147 look-alike(s) of pure3d::TargaHandler::vfunc_07",
+    "va": "0x0004A760",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:40:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "197 look-alike(s) of Collidable::vfunc_03",
+    "va": "0x00011F20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-10 23:37:09",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "204 look-alike(s) of ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02",
+    "va": "0x00011400",
+    "bytes": "same code, own addresses"
+  },
+  {
     "time": "2026-11-10 23:34:19",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",

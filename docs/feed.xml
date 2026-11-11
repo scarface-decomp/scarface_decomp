@@ -5,356 +5,356 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-10T23:35:54Z</updated>
+  <updated>2026-11-10T23:53:24Z</updated>
   <author><name>Scarface decomp contributors</name></author>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_BumpReflex&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001007D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001007D0</id>
-    <updated>2026-11-10T23:35:54Z</updated>
-    <summary>0x001007D0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000D4CF0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000D4CF0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000D4CF0</id>
+    <updated>2026-11-10T23:53:24Z</updated>
+    <summary>0x000D4CF0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_NearlyHitByCar&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100780"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100780</id>
-    <updated>2026-11-10T23:35:54Z</updated>
-    <summary>0x00100780 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000CB5C0 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000CB5C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000CB5C0</id>
+    <updated>2026-11-10T23:53:22Z</updated>
+    <summary>0x000CB5C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_AvoidIncomingCar&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100730"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100730</id>
-    <updated>2026-11-10T23:35:54Z</updated>
-    <summary>0x00100730 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000CB560 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000CB560"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000CB560</id>
+    <updated>2026-11-10T23:53:22Z</updated>
+    <summary>0x000CB560 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_VehicleGetIn&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100650"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100650</id>
-    <updated>2026-11-10T23:35:54Z</updated>
-    <summary>0x00100650 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000CB500 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000CB500"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000CB500</id>
+    <updated>2026-11-10T23:53:20Z</updated>
+    <summary>0x000CB500 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_SlowDownCarForCorpses&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100600"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100600</id>
-    <updated>2026-11-10T23:35:54Z</updated>
-    <summary>0x00100600 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_0023E750 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0023E750"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0023E750</id>
+    <updated>2026-11-10T23:53:19Z</updated>
+    <summary>0x0023E750 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_BasicInVehicle&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001005B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001005B0</id>
-    <updated>2026-11-10T23:35:54Z</updated>
-    <summary>0x001005B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_0023DED0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0023DED0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0023DED0</id>
+    <updated>2026-11-10T23:53:18Z</updated>
+    <summary>0x0023DED0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_InVehicle&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100560"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100560</id>
-    <updated>2026-11-10T23:35:53Z</updated>
-    <summary>0x00100560 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185D60 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185D60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185D60</id>
+    <updated>2026-11-10T23:53:17Z</updated>
+    <summary>0x00185D60 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_RunToAssistCorpse&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100510"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100510</id>
-    <updated>2026-11-10T23:35:52Z</updated>
-    <summary>0x00100510 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185D00 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185D00"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185D00</id>
+    <updated>2026-11-10T23:53:16Z</updated>
+    <summary>0x00185D00 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_GawkAtCorpse&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001004C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001004C0</id>
-    <updated>2026-11-10T23:35:51Z</updated>
-    <summary>0x001004C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185C50 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185C50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185C50</id>
+    <updated>2026-11-10T23:53:15Z</updated>
+    <summary>0x00185C50 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_DestroyObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100410"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100410</id>
-    <updated>2026-11-10T23:35:50Z</updated>
-    <summary>0x00100410 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185BB0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185BB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185BB0</id>
+    <updated>2026-11-10T23:53:14Z</updated>
+    <summary>0x00185BB0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_DummyInVehicle&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100390"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100390</id>
-    <updated>2026-11-10T23:35:49Z</updated>
-    <summary>0x00100390 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185B80 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185B80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185B80</id>
+    <updated>2026-11-10T23:53:13Z</updated>
+    <summary>0x00185B80 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_Dummy&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100340"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100340</id>
-    <updated>2026-11-10T23:35:48Z</updated>
-    <summary>0x00100340 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185B50 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185B50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185B50</id>
+    <updated>2026-11-10T23:53:12Z</updated>
+    <summary>0x00185B50 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_Chicken&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001002F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001002F0</id>
-    <updated>2026-11-10T23:35:48Z</updated>
-    <summary>0x001002F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185AE0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185AE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185AE0</id>
+    <updated>2026-11-10T23:53:11Z</updated>
+    <summary>0x00185AE0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_SharkInteractWithBoat&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001002A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001002A0</id>
-    <updated>2026-11-10T23:35:47Z</updated>
-    <summary>0x001002A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185A90 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185A90"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185A90</id>
+    <updated>2026-11-10T23:53:10Z</updated>
+    <summary>0x00185A90 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_SharkInteractWithSwimmer&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100250"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100250</id>
-    <updated>2026-11-10T23:35:46Z</updated>
-    <summary>0x00100250 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185A40 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185A40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185A40</id>
+    <updated>2026-11-10T23:53:09Z</updated>
+    <summary>0x00185A40 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>SemiConcreteClassRep&lt;AITask_SharkAbstractWithTarget&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100200"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100200</id>
-    <updated>2026-11-10T23:35:45Z</updated>
-    <summary>0x00100200 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185950 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185950"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185950</id>
+    <updated>2026-11-10T23:53:08Z</updated>
+    <summary>0x00185950 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_SharkWander&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001001E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001001E0</id>
-    <updated>2026-11-10T23:35:45Z</updated>
-    <summary>0x001001E0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001858B0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001858B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001858B0</id>
+    <updated>2026-11-10T23:53:07Z</updated>
+    <summary>0x001858B0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_ReactToStaggeredStimInStationaryVehicle&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100190"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100190</id>
-    <updated>2026-11-10T23:35:45Z</updated>
-    <summary>0x00100190 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185800 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185800"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185800</id>
+    <updated>2026-11-10T23:53:06Z</updated>
+    <summary>0x00185800 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_ReactToStaggeredStim&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100140"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100140</id>
-    <updated>2026-11-10T23:35:44Z</updated>
-    <summary>0x00100140 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185770 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185770"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185770</id>
+    <updated>2026-11-10T23:53:04Z</updated>
+    <summary>0x00185770 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_PedFlee&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001000F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001000F0</id>
-    <updated>2026-11-10T23:35:43Z</updated>
-    <summary>0x001000F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185710 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185710"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185710</id>
+    <updated>2026-11-10T23:53:03Z</updated>
+    <summary>0x00185710 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_PedTraffic&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001000A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001000A0</id>
-    <updated>2026-11-10T23:35:43Z</updated>
-    <summary>0x001000A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185680 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185680"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185680</id>
+    <updated>2026-11-10T23:53:02Z</updated>
+    <summary>0x00185680 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AttractPoint&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00100020"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00100020</id>
-    <updated>2026-11-10T23:35:42Z</updated>
-    <summary>0x00100020 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001855F0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001855F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001855F0</id>
+    <updated>2026-11-10T23:53:01Z</updated>
+    <summary>0x001855F0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_FleeWhenOutGunned&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000FFF40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000FFF40</id>
-    <updated>2026-11-10T23:35:41Z</updated>
-    <summary>0x000FFF40 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185560 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185560"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185560</id>
+    <updated>2026-11-10T23:53:00Z</updated>
+    <summary>0x00185560 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_FleeFromPosition&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000FFEF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000FFEF0</id>
-    <updated>2026-11-10T23:35:41Z</updated>
-    <summary>0x000FFEF0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001854B0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001854B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001854B0</id>
+    <updated>2026-11-10T23:52:59Z</updated>
+    <summary>0x001854B0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_FleeFromExplodingCar&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000FFEA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000FFEA0</id>
-    <updated>2026-11-10T23:35:41Z</updated>
-    <summary>0x000FFEA0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185420 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185420"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185420</id>
+    <updated>2026-11-10T23:52:58Z</updated>
+    <summary>0x00185420 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_ChallengeTony&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000FFE50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000FFE50</id>
-    <updated>2026-11-10T23:35:40Z</updated>
-    <summary>0x000FFE50 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185390 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185390"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185390</id>
+    <updated>2026-11-10T23:52:57Z</updated>
+    <summary>0x00185390 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;AITask_BegForLife&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000FFE00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000FFE00</id>
-    <updated>2026-11-10T23:35:40Z</updated>
-    <summary>0x000FFE00 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185300 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185300"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185300</id>
+    <updated>2026-11-10T23:52:57Z</updated>
+    <summary>0x00185300 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;VarietySlot&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008AF40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008AF40</id>
-    <updated>2026-11-10T23:35:39Z</updated>
-    <summary>0x0008AF40 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185270 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185270"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185270</id>
+    <updated>2026-11-10T23:52:56Z</updated>
+    <summary>0x00185270 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;VarietyObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008AEE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008AEE0</id>
-    <updated>2026-11-10T23:35:38Z</updated>
-    <summary>0x0008AEE0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001851F0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001851F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001851F0</id>
+    <updated>2026-11-10T23:52:55Z</updated>
+    <summary>0x001851F0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;VarietyDeclarationGroup&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008AE80"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008AE80</id>
-    <updated>2026-11-10T23:35:37Z</updated>
-    <summary>0x0008AE80 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185190 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185190"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185190</id>
+    <updated>2026-11-10T23:52:54Z</updated>
+    <summary>0x00185190 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;VarietyFile&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00089EE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00089EE0</id>
-    <updated>2026-11-10T23:35:37Z</updated>
-    <summary>0x00089EE0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001850F0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001850F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001850F0</id>
+    <updated>2026-11-10T23:52:53Z</updated>
+    <summary>0x001850F0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;VarietyFileBank&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00089E80"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00089E80</id>
-    <updated>2026-11-10T23:35:37Z</updated>
-    <summary>0x00089E80 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00185050 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00185050"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00185050</id>
+    <updated>2026-11-10T23:52:52Z</updated>
+    <summary>0x00185050 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;Template&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0002BB60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0002BB60</id>
-    <updated>2026-11-10T23:35:37Z</updated>
-    <summary>0x0002BB60 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00184FC0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00184FC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00184FC0</id>
+    <updated>2026-11-10T23:52:51Z</updated>
+    <summary>0x00184FC0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;StreamedTemplate&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0002BAD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0002BAD0</id>
-    <updated>2026-11-10T23:35:36Z</updated>
-    <summary>0x0002BAD0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00184F20 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00184F20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00184F20</id>
+    <updated>2026-11-10T23:52:51Z</updated>
+    <summary>0x00184F20 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;ScriptDeclaration&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0002B2C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0002B2C0</id>
-    <updated>2026-11-10T23:35:35Z</updated>
-    <summary>0x0002B2C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E9DB0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E9DB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E9DB0</id>
+    <updated>2026-11-10T23:52:50Z</updated>
+    <summary>0x000E9DB0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;SetDeclaration&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0002B270"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0002B270</id>
-    <updated>2026-11-10T23:35:34Z</updated>
-    <summary>0x0002B270 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E9D10 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E9D10"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E9D10</id>
+    <updated>2026-11-10T23:52:50Z</updated>
+    <summary>0x000E9D10 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;ScriptDeclarationGroup&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0002B220"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0002B220</id>
-    <updated>2026-11-10T23:35:34Z</updated>
-    <summary>0x0002B220 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E9C60 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E9C60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E9C60</id>
+    <updated>2026-11-10T23:52:49Z</updated>
+    <summary>0x000E9C60 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;RCObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0002B1D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0002B1D0</id>
-    <updated>2026-11-10T23:35:34Z</updated>
-    <summary>0x0002B1D0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E9580 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E9580"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E9580</id>
+    <updated>2026-11-10T23:52:49Z</updated>
+    <summary>0x000E9580 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;GameSetObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0002AD60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0002AD60</id>
-    <updated>2026-11-10T23:35:33Z</updated>
-    <summary>0x0002AD60 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E9190 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E9190"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E9190</id>
+    <updated>2026-11-10T23:52:48Z</updated>
+    <summary>0x000E9190 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;FEP3DObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00023510"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00023510</id>
-    <updated>2026-11-10T23:35:32Z</updated>
-    <summary>0x00023510 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E89D0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E89D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E89D0</id>
+    <updated>2026-11-10T23:52:46Z</updated>
+    <summary>0x000E89D0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;FERoundedRectangleObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000234B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000234B0</id>
-    <updated>2026-11-10T23:35:31Z</updated>
-    <summary>0x000234B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E8550 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E8550"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E8550</id>
+    <updated>2026-11-10T23:52:45Z</updated>
+    <summary>0x000E8550 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;FESpriteObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00023450"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00023450</id>
-    <updated>2026-11-10T23:35:31Z</updated>
-    <summary>0x00023450 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E8350 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E8350"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E8350</id>
+    <updated>2026-11-10T23:52:44Z</updated>
+    <summary>0x000E8350 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;FETextObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00023380"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00023380</id>
-    <updated>2026-11-10T23:35:31Z</updated>
-    <summary>0x00023380 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E80F0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E80F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E80F0</id>
+    <updated>2026-11-10T23:52:44Z</updated>
+    <summary>0x000E80F0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;FEProjectObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00023320"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00023320</id>
-    <updated>2026-11-10T23:35:31Z</updated>
-    <summary>0x00023320 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E7F60 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E7F60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E7F60</id>
+    <updated>2026-11-10T23:52:44Z</updated>
+    <summary>0x000E7F60 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;FEScreenObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000232C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000232C0</id>
-    <updated>2026-11-10T23:35:31Z</updated>
-    <summary>0x000232C0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E7D80 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E7D80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E7D80</id>
+    <updated>2026-11-10T23:52:44Z</updated>
+    <summary>0x000E7D80 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;FEPageObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00023260"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00023260</id>
-    <updated>2026-11-10T23:35:30Z</updated>
-    <summary>0x00023260 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E78A0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E78A0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E78A0</id>
+    <updated>2026-11-10T23:52:43Z</updated>
+    <summary>0x000E78A0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;FELayerObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00023200"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00023200</id>
-    <updated>2026-11-10T23:35:30Z</updated>
-    <summary>0x00023200 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E7510 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E7510"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E7510</id>
+    <updated>2026-11-10T23:52:42Z</updated>
+    <summary>0x000E7510 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;MenuObject&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000231A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000231A0</id>
-    <updated>2026-11-10T23:35:30Z</updated>
-    <summary>0x000231A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000E7370 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000E7370"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000E7370</id>
+    <updated>2026-11-10T23:52:41Z</updated>
+    <summary>0x000E7370 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;CollisionBehaviourTypeGroup&gt;::vfunc_02 (Xbox prototype, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00011910"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00011910</id>
-    <updated>2026-11-10T23:35:29Z</updated>
-    <summary>0x00011910 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_000DD320 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000DD320"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000DD320</id>
+    <updated>2026-11-10T23:52:35Z</updated>
+    <summary>0x000DD320 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>ConcreteClassRep&lt;LightsVolumeObject&gt;::vfunc_02 (Xbox, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0021D6C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0021D6C0</id>
-    <updated>2026-11-10T23:35:28Z</updated>
-    <summary>0x0021D6C0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_000DD2C0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000DD2C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000DD2C0</id>
+    <updated>2026-11-10T23:52:34Z</updated>
+    <summary>0x000DD2C0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

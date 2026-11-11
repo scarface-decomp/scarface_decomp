@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 799 of 17,904 functions matched (4.46%). NOT COMPLETE YET.
-// The 17,105 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 1,286 of 17,904 functions matched (7.18%). NOT COMPLETE YET.
+// The 16,618 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -114,10 +114,70 @@ template <> void ConcreteClassRep<CollisionSurfaceType>::vfunc_02()
 // [TODO] 0x00012200 sub_00012200 (246 B)
 // [TODO] 0x00012300 sub_00012300 (166 B)
 // [TODO] 0x000123B0 sub_000123B0 (62 B)
-// [TODO] 0x000123F0 Collidable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] Collidable::vfunc_03 (0x000123F0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// Collidable::vfunc_03 (0x000123F0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00012300(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+class Collidable
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Collidable* vfunc_03(int a1);
+};
+
+Collidable* Collidable::vfunc_03(int a1)
+{
+    sub_00012300();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00012410 sub_00012410 (46 B)
 // [TODO] 0x00012440 sub_00012440 (29 B)
-// [TODO] 0x00012460 FlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] FlowClient::vfunc_00 (0x00012460, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// FlowClient::vfunc_00 (0x00012460, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000D7D00(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class FlowClient
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual FlowClient* vfunc_00(int a1);
+};
+
+FlowClient* FlowClient::vfunc_00(int a1)
+{
+    sub_000D7D00();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00012480 sub_00012480 (22 B)
 // [TODO] 0x000124A0 sub_000124A0 (81 B)
 // [TODO] 0x00012500 sub_00012500 (93 B)
@@ -263,7 +323,38 @@ CollisionBehaviourTypeGroup* CollisionBehaviourTypeGroup::vfunc_01(int a1)
 // [TODO] 0x000162C0 sub_000162C0 (1076 B)
 // [TODO] 0x00016700 sub_00016700 (119 B)
 // [TODO] 0x00016780 sub_00016780 (90 B)
-// [TODO] 0x00016810 CollisionManager::CollisionManagerFlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016810, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016810, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00015CC0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace CollisionManager {
+
+class CollisionManagerFlowClient
+{
+public:
+    virtual CollisionManagerFlowClient* vfunc_00(int a1);
+};
+
+CollisionManagerFlowClient* CollisionManagerFlowClient::vfunc_00(int a1)
+{
+    sub_00015CC0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00016830 sub_00016830 (211 B)
 // [TODO] 0x00016910 sub_00016910 (69 B)
 // [TODO] 0x00016960 sub_00016960 (234 B)
@@ -471,7 +562,37 @@ void* ActionMap::vfunc_00()
 // [TODO] 0x0001D350 sub_0001D350 (169 B)
 // [TODO] 0x0001D400 sub_0001D400 (84 B)
 // [TODO] 0x0001D460 sub_0001D460 (104 B)
-// [TODO] 0x0001D4D0 ActionMap::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] ActionMap::vfunc_01 (0x0001D4D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ActionMap::vfunc_01 (0x0001D4D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0001D2A0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ActionMap
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ActionMap* vfunc_01(int a1);
+};
+
+ActionMap* ActionMap::vfunc_01(int a1)
+{
+    sub_0001D2A0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0001D4F0 sub_0001D4F0 (49 B)
 // [TODO] 0x0001D530 sub_0001D530 (43 B)
 // [TODO] 0x0001D560 sub_0001D560 (41 B)
@@ -512,7 +633,23 @@ void* ActionMap::vfunc_00()
 // [TODO] 0x0001E8B0 ConcreteClassRep<ActionMap>::vfunc_01 (40 B)
 // [TODO] 0x0001E8E0 ConcreteClassRep<ActionMap>::vfunc_02 (26 B)
 // [TODO] 0x0001E970 sub_0001E970 (25 B)
-// [TODO] 0x0001E990 sub_0001E990 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0001E990 (0x0001E990, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0001E990 (0x0001E990, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_003F4F54;
+
+int __cdecl sub_0001E990(void)
+{
+    return DAT_003F4F54;
+}
+
 // [TODO] 0x0001E9A0 sub_0001E9A0 (108 B)
 // [TODO] 0x0001EA10 sub_0001EA10 (63 B)
 // [TODO] 0x0001EA50 sub_0001EA50 (14 B)
@@ -582,9 +719,56 @@ void* ActionMap::vfunc_00()
 // [TODO] 0x000200E0 sub_000200E0 (149 B)
 // [TODO] 0x00020180 sub_00020180 (69 B)
 // [TODO] 0x000201D0 sub_000201D0 (195 B)
-// [TODO] 0x000202A0 sub_000202A0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000202A0 (0x000202A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000202A0 (0x000202A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004469FC;
+
+int __cdecl sub_000202A0(void)
+{
+    return DAT_004469FC;
+}
+
 // [TODO] 0x000202B0 sub_000202B0 (10 B)
-// [TODO] 0x000202C0 fight::TrackFactory::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactory::vfunc_03 (0x000202C0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactory::vfunc_03 (0x000202C0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001FBF30(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace fight {
+
+class TrackFactory
+{
+public:
+    virtual TrackFactory* vfunc_03(int a1);
+};
+
+TrackFactory* TrackFactory::vfunc_03(int a1)
+{
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x000202E0 fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_03 (43 B)
 // [TODO] 0x00020310 fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_07 (61 B)
 // [TODO] 0x00020350 FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_19 (18 B)
@@ -1513,7 +1697,29 @@ void* Graph::vfunc_00()
 // [TODO] 0x00025180 MemoryManager::GameHeapCreator::vfunc_01 (40 B)
 // [TODO] 0x000251B0 sub_000251B0 (145 B)
 // [TODO] 0x000251FD sub_000251FD (68 B)
-// [TODO] 0x00025250 sub_00025250 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00025250 (0x00025250, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00025250 (0x00025250, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00024EC0(void);
+
+class Class_00025250
+{
+public:
+    void sub_00025250();
+};
+
+void Class_00025250::sub_00025250()
+{
+    sub_00024EC0();
+}
+
 // [TODO] 0x00025260 MemoryManager::Allocator::vfunc_03 (31 B)
 // [TODO] 0x00025280 sub_00025280 (72 B)
 // [TODO] 0x000252D0 sub_000252D0 (260 B)
@@ -1529,7 +1735,37 @@ void* Graph::vfunc_00()
 // [TODO] 0x000266F0 sub_000266F0 (143 B)
 // [TODO] 0x00026780 sub_00026780 (105 B)
 // [TODO] 0x000267F0 MovieFlowClient::vfunc_01 (318 B)
-// [TODO] 0x00026960 MovieFlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] MovieFlowClient::vfunc_00 (0x00026960, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// MovieFlowClient::vfunc_00 (0x00026960, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00026780(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class MovieFlowClient
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual MovieFlowClient* vfunc_00(int a1);
+};
+
+MovieFlowClient* MovieFlowClient::vfunc_00(int a1)
+{
+    sub_00026780();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00026980 sub_00026980 (32 B)
 // [TODO] 0x000269A0 sub_000269A0 (37 B)
 // ============================================================================
@@ -1642,7 +1878,37 @@ void* GameSet::vfunc_00()
 // [TODO] 0x00027590 GameSetBasicIterator::vfunc_00 (62 B)
 // [TODO] 0x000275D0 sub_000275D0 (79 B)
 // [TODO] 0x00027620 GameSet::vfunc_27 (105 B)
-// [TODO] 0x00027690 GameSet::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] GameSet::vfunc_01 (0x00027690, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameSet::vfunc_01 (0x00027690, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000275D0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class GameSet
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual GameSet* vfunc_01(int a1);
+};
+
+GameSet* GameSet::vfunc_01(int a1)
+{
+    sub_000275D0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000276B0 sub_000276B0 (46 B)
 // [TODO] 0x000276E0 sub_000276E0 (51 B)
 // [TODO] 0x00027720 FEGroupObject::vfunc_21 (23 B)
@@ -1716,7 +1982,37 @@ void* GameSimObject::vfunc_00()
 // [TODO] 0x00027B40 GameSimObject::vfunc_05 (302 B)
 // [TODO] 0x00027C70 sub_00027C70 (27 B)
 // [TODO] 0x00027C90 sub_00027C90 (33 B)
-// [TODO] 0x00027CE0 GameSimObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] GameSimObject::vfunc_01 (0x00027CE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameSimObject::vfunc_01 (0x00027CE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00027AE0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class GameSimObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual GameSimObject* vfunc_01(int a1);
+};
+
+GameSimObject* GameSimObject::vfunc_01(int a1)
+{
+    sub_00027AE0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00027D00 sub_00027D00 (79 B)
 // [TODO] 0x00027D50 RCObject::vfunc_35 (7 B)
 // [TODO] 0x00027D60 RCObject::vfunc_36 (7 B)
@@ -1744,7 +2040,37 @@ void* RCObject::vfunc_00()
 }
 
 // [TODO] 0x00027D80 sub_00027D80 (114 B)
-// [TODO] 0x00027E00 RCObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] RCObject::vfunc_01 (0x00027E00, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// RCObject::vfunc_01 (0x00027E00, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00027D00(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class RCObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual RCObject* vfunc_01(int a1);
+};
+
+RCObject* RCObject::vfunc_01(int a1)
+{
+    sub_00027D00();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00027E20 RCObject::vfunc_27 (74 B)
 // [TODO] 0x00027E70 RCObject::vfunc_28 (63 B)
 // [TODO] 0x00027EB0 RCObject::vfunc_30 (63 B)
@@ -1773,7 +2099,23 @@ void* ScriptDeclarationGroup::vfunc_00()
 }
 
 // [TODO] 0x00027F50 sub_00027F50 (11 B)
-// [TODO] 0x00027F60 sub_00027F60 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00027F60 (0x00027F60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00027F60 (0x00027F60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004493DC;
+
+int __cdecl sub_00027F60(void)
+{
+    return DAT_004493DC;
+}
+
 // [TODO] 0x00027F70 ScriptDeclarationGroup::vfunc_05 (24 B)
 // [TODO] 0x00027F90 ScriptDeclarationGroup::vfunc_07 (43 B)
 // [TODO] 0x00027FC0 sub_00027FC0 (11 B)
@@ -1928,7 +2270,37 @@ ScriptDeclaration* ScriptDeclaration::vfunc_01(int a1)
 // [TODO] 0x000281E0 sub_000281E0 (106 B)
 // [TODO] 0x00028250 CollisionBehaviourTypeGroup::vfunc_23 (46 B)
 // [TODO] 0x00028280 sub_00028280 (39 B)
-// [TODO] 0x000282B0 ConsoleObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] ConsoleObject::vfunc_01 (0x000282B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConsoleObject::vfunc_01 (0x000282B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00068D30(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ConsoleObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConsoleObject* vfunc_01(int a1);
+};
+
+ConsoleObject* ConsoleObject::vfunc_01(int a1)
+{
+    sub_00068D30();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000282D0 sub_000282D0 (82 B)
 // [TODO] 0x00028330 sub_00028330 (74 B)
 // [TODO] 0x00028380 sub_00028380 (83 B)
@@ -2007,7 +2379,23 @@ void* ScriptObject::vfunc_00()
 // [TODO] 0x00029EE0 sub_00029EE0 (49 B)
 // [TODO] 0x00029F20 sub_00029F20 (76 B)
 // [TODO] 0x00029F70 sub_00029F70 (51 B)
-// [TODO] 0x00029FB0 sub_00029FB0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00029FB0 (0x00029FB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00029FB0 (0x00029FB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00449518;
+
+int __cdecl sub_00029FB0(void)
+{
+    return DAT_00449518;
+}
+
 // [TODO] 0x00029FC0 ScriptObjectEntity<StreamedTemplate>::vfunc_03 (30 B)
 // [TODO] 0x00029FE0 sub_00029FE0 (65 B)
 // [TODO] 0x0002A030 sub_0002A030 (101 B)
@@ -2425,14 +2813,46 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 
 // [TODO] 0x0002BC60 sub_0002BC60 (170 B)
 // [TODO] 0x0002BD40 sub_0002BD40 (100 B)
-// [TODO] 0x0002BE70 sub_0002BE70 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0002BE70 (0x0002BE70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0002BE70 (0x0002BE70, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00449AE0;
+
+int __cdecl sub_0002BE70(void)
+{
+    return DAT_00449AE0;
+}
+
 // [TODO] 0x0002BF60 sub_0002BF60 (6 B)
 // [TODO] 0x0002BF70 sub_0002BF70 (10 B)
 // [TODO] 0x0002BF90 sub_0002BF90 (6 B)
 // [TODO] 0x0002BFA0 sub_0002BFA0 (10 B)
 // [TODO] 0x0002BFE0 sub_0002BFE0 (27 B)
 // [TODO] 0x0002C020 sub_0002C020 (6 B)
-// [TODO] 0x0002C050 sub_0002C050 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0002C050 (0x0002C050, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0002C050 (0x0002C050, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004498B8;
+
+int __cdecl sub_0002C050(void)
+{
+    return DAT_004498B8;
+}
+
 // [TODO] 0x0002C060 sub_0002C060 (41 B)
 // [TODO] 0x0002C100 sub_0002C100 (81 B)
 // [TODO] 0x0002C160 sub_0002C160 (105 B)
@@ -2476,7 +2896,37 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0002D3B0 sub_0002D3B0 (44 B)
 // [TODO] 0x0002D3E0 sub_0002D3E0 (99 B)
 // [TODO] 0x0002D450 sub_0002D450 (47 B)
-// [TODO] 0x0002D480 NavMesh::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] NavMesh::vfunc_03 (0x0002D480, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// NavMesh::vfunc_03 (0x0002D480, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0002CED0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+class NavMesh
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual NavMesh* vfunc_03(int a1);
+};
+
+NavMesh* NavMesh::vfunc_03(int a1)
+{
+    sub_0002CED0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0002D4A0 sub_0002D4A0 (269 B)
 // [TODO] 0x0002D5B0 sub_0002D5B0 (355 B)
 // [TODO] 0x0002D720 sub_0002D720 (399 B)
@@ -2526,12 +2976,72 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00030CB0 sub_00030CB0 (124 B)
 // [TODO] 0x00030D30 sub_00030D30 (171 B)
 // [TODO] 0x00030DE0 sub_00030DE0 (244 B)
-// [TODO] 0x00030EE0 Path::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] Path::vfunc_00 (0x00030EE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// Path::vfunc_00 (0x00030EE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00030BB0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class Path
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Path* vfunc_00(int a1);
+};
+
+Path* Path::vfunc_00(int a1)
+{
+    sub_00030BB0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00030F00 sub_00030F00 (251 B)
 // [TODO] 0x00031000 Path::vfunc_03 (34 B)
 // [TODO] 0x00031030 sub_00031030 (41 B)
 // [TODO] 0x00031060 sub_00031060 (164 B)
-// [TODO] 0x00031110 RoadPath::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] RoadPath::vfunc_00 (0x00031110, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// RoadPath::vfunc_00 (0x00031110, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00030CB0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class RoadPath
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual RoadPath* vfunc_00(int a1);
+};
+
+RoadPath* RoadPath::vfunc_00(int a1)
+{
+    sub_00030CB0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00031130 sub_00031130 (298 B)
 // [TODO] 0x00031260 sub_00031260 (52 B)
 // [TODO] 0x000312A0 sub_000312A0 (44 B)
@@ -2592,7 +3102,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x000349D0 sub_000349D0 (98 B)
 // [TODO] 0x00034A70 sub_00034A70 (194 B)
 // [TODO] 0x00034B40 sub_00034B40 (387 B)
-// [TODO] 0x00034CD0 PathManager::PathManagerFlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] PathManager::PathManagerFlowClient::vfunc_00 (0x00034CD0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// PathManager::PathManagerFlowClient::vfunc_00 (0x00034CD0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00034A70(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace PathManager {
+
+class PathManagerFlowClient
+{
+public:
+    virtual PathManagerFlowClient* vfunc_00(int a1);
+};
+
+PathManagerFlowClient* PathManagerFlowClient::vfunc_00(int a1)
+{
+    sub_00034A70();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00034CF0 sub_00034CF0 (1379 B)
 // [TODO] 0x00035260 sub_00035260 (1355 B)
 // [TODO] 0x000357B0 sub_000357B0 (1487 B)
@@ -2603,7 +3144,23 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00036BD0 sub_00036BD0 (97 B)
 // [TODO] 0x00036C40 sub_00036C40 (116 B)
 // [TODO] 0x00036CC0 sub_00036CC0 (40 B)
-// [TODO] 0x00036CF0 sub_00036CF0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00036CF0 (0x00036CF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00036CF0 (0x00036CF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00449EE4;
+
+int __cdecl sub_00036CF0(void)
+{
+    return DAT_00449EE4;
+}
+
 // [TODO] 0x00036D00 sub_00036D00 (28 B)
 // [TODO] 0x00036D20 sub_00036D20 (64 B)
 // [TODO] 0x00036D60 sub_00036D60 (51 B)
@@ -2622,7 +3179,37 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x000384B0 sub_000384B0 (1177 B)
 // [TODO] 0x00038950 sub_00038950 (490 B)
 // [TODO] 0x00038B40 RoadGraphLoader::vfunc_06 (45 B)
-// [TODO] 0x00038B70 RoadGraph::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] RoadGraph::vfunc_03 (0x00038B70, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// RoadGraph::vfunc_03 (0x00038B70, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000371E0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+class RoadGraph
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual RoadGraph* vfunc_03(int a1);
+};
+
+RoadGraph* RoadGraph::vfunc_03(int a1)
+{
+    sub_000371E0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00038F50 sub_00038F50 (215 B)
 // [TODO] 0x00039030 sub_00039030 (44 B)
 // [TODO] 0x00039060 sub_00039060 (27 B)
@@ -2706,7 +3293,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0003E2A0 renderer::Display_List::vfunc_07 (63 B)
 // [TODO] 0x0003E2E0 renderer::Display_List::vfunc_08 (1276 B)
 // [TODO] 0x0003E7E0 sub_0003E7E0 (51 B)
-// [TODO] 0x0003E820 renderer::DisplayListPrimitive::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::DisplayListPrimitive::vfunc_03 (0x0003E820, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::DisplayListPrimitive::vfunc_03 (0x0003E820, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0003BEF0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace renderer {
+
+class DisplayListPrimitive
+{
+public:
+    virtual DisplayListPrimitive* vfunc_03(int a1);
+};
+
+DisplayListPrimitive* DisplayListPrimitive::vfunc_03(int a1)
+{
+    sub_0003BEF0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0003E840 sub_0003E840 (427 B)
 // [TODO] 0x0003E9F0 sub_0003E9F0 (578 B)
 // [TODO] 0x0003EC40 sub_0003EC40 (303 B)
@@ -2742,8 +3360,40 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00040C90 sub_00040C90 (20 B)
 // [TODO] 0x00040CB0 sub_00040CB0 (11 B)
 // [TODO] 0x00040CC0 sub_00040CC0 (11 B)
-// [TODO] 0x00040CD0 sub_00040CD0 (6 B)
-// [TODO] 0x00040CE0 sub_00040CE0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00040CD0 (0x00040CD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00040CD0 (0x00040CD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044A370;
+
+int __cdecl sub_00040CD0(void)
+{
+    return DAT_0044A370;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00040CE0 (0x00040CE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00040CE0 (0x00040CE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044A374;
+
+int __cdecl sub_00040CE0(void)
+{
+    return DAT_0044A374;
+}
+
 // [TODO] 0x00040CF0 sub_00040CF0 (29 B)
 // [TODO] 0x00040D10 sub_00040D10 (16 B)
 // [TODO] 0x00040D20 sub_00040D20 (25 B)
@@ -2846,10 +3496,72 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x000425F0 sub_000425F0 (27 B)
 // [TODO] 0x00042610 renderer::VehiclePrimitive::vfunc_10 (38 B)
 // [TODO] 0x00042640 sub_00042640 (85 B)
-// [TODO] 0x000426A0 renderer::DecalsHandle::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::DecalsHandle::vfunc_00 (0x000426A0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::DecalsHandle::vfunc_00 (0x000426A0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000426C0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace renderer {
+
+class DecalsHandle
+{
+public:
+    virtual DecalsHandle* vfunc_00(int a1);
+};
+
+DecalsHandle* DecalsHandle::vfunc_00(int a1)
+{
+    sub_000426C0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x000426C0 sub_000426C0 (43 B)
 // [TODO] 0x000426F0 sub_000426F0 (85 B)
-// [TODO] 0x00042750 renderer::TraceFireHandle::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::TraceFireHandle::vfunc_00 (0x00042750, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::TraceFireHandle::vfunc_00 (0x00042750, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00042770(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace renderer {
+
+class TraceFireHandle
+{
+public:
+    virtual TraceFireHandle* vfunc_00(int a1);
+};
+
+TraceFireHandle* TraceFireHandle::vfunc_00(int a1)
+{
+    sub_00042770();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00042770 sub_00042770 (43 B)
 // [TODO] 0x000427A0 sub_000427A0 (611 B)
 // [TODO] 0x00042A10 sub_00042A10 (418 B)
@@ -2880,7 +3592,40 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00043180 content::LoadInventory::DynamicCaster<pure3d::ParticleSystem>::vfunc_00 (30 B)
 // [TODO] 0x000431A0 content::LoadInventory::DynamicCaster<pure3d::Geometry>::vfunc_00 (30 B)
 // [TODO] 0x000431C0 content::LoadInventory::DynamicCaster<renderer::ShadowRenderable>::vfunc_00 (30 B)
-// [TODO] 0x000431E0 pure3d::TargaHandler::vfunc_07 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::TargaHandler::vfunc_07 (0x000431E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::TargaHandler::vfunc_07 (0x000431E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0037F838[];
+
+namespace pure3d {
+
+class TargaHandler
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* TargaHandler::vfunc_07()
+{
+    return DAT_0037F838;
+}
+
+}
+
 // [TODO] 0x000431F0 GameSimObject::vfunc_43 (5 B)
 // [TODO] 0x00043200 sub_00043200 (604 B)
 // [TODO] 0x00043460 renderer::RenderFlowClient::vfunc_02 (533 B)
@@ -2917,7 +3662,40 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00044E40 sub_00044E40 (200 B)
 // [TODO] 0x00044F10 sub_00044F10 (149 B)
 // [TODO] 0x000450B0 sub_000450B0 (76 B)
-// [TODO] 0x00045100 pure3d::BMPHandler::vfunc_07 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::BMPHandler::vfunc_07 (0x00045100, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::BMPHandler::vfunc_07 (0x00045100, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0037F8B0[];
+
+namespace pure3d {
+
+class BMPHandler
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* BMPHandler::vfunc_07()
+{
+    return DAT_0037F8B0;
+}
+
+}
+
 // [TODO] 0x00045130 pure3d::IgnoreLoader::vfunc_06 (56 B)
 // [TODO] 0x00045170 sub_00045170 (64 B)
 // [TODO] 0x00045920 renderer::RenderManager::vfunc_00 (52 B)
@@ -2937,7 +3715,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00046200 renderer::GamePlayScene::vfunc_01 (83 B)
 // [TODO] 0x00046260 renderer::GamePlayScene::vfunc_02 (78 B)
 // [TODO] 0x000462B0 sub_000462B0 (96 B)
-// [TODO] 0x00046310 renderer::Scene::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::Scene::vfunc_00 (0x00046310, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::Scene::vfunc_00 (0x00046310, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000462B0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace renderer {
+
+class Scene
+{
+public:
+    virtual Scene* vfunc_00(int a1);
+};
+
+Scene* Scene::vfunc_00(int a1)
+{
+    sub_000462B0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00046330 renderer::GamePlayScene::vfunc_00 (57 B)
 // [TODO] 0x00046370 sub_00046370 (98 B)
 // [TODO] 0x000463E0 sub_000463E0 (108 B)
@@ -3005,7 +3814,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x000492F0 renderer::CharacterRenderable::vfunc_09 (231 B)
 // [TODO] 0x000493E0 sub_000493E0 (108 B)
 // [TODO] 0x00049450 content::LoadInventory::DynamicCaster<pure3d::PolySkin>::vfunc_00 (30 B)
-// [TODO] 0x00049470 renderer::CharacterRenderable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::CharacterRenderable::vfunc_03 (0x00049470, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::CharacterRenderable::vfunc_03 (0x00049470, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00049290(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class CharacterRenderable
+{
+public:
+    virtual CharacterRenderable* vfunc_03(int a1);
+};
+
+CharacterRenderable* CharacterRenderable::vfunc_03(int a1)
+{
+    sub_00049290();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00049490 sub_00049490 (27 B)
 // [TODO] 0x000494B0 GameGroupLoader::vfunc_03 (31 B)
 // [TODO] 0x000494D0 sub_000494D0 (39 B)
@@ -3013,7 +3853,40 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00049820 renderer::DecalPrimitive::COceanDecalDrawable::vfunc_02 (52 B)
 // [TODO] 0x00049930 sub_00049930 (95 B)
 // [TODO] 0x00049990 sub_00049990 (108 B)
-// [TODO] 0x00049A60 renderer::DecalPrimitive::vfunc_07 (6 B)
+// ============================================================================
+// [VERIFIED] renderer::DecalPrimitive::vfunc_07 (0x00049A60, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::DecalPrimitive::vfunc_07 (0x00049A60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00400000[];
+
+namespace renderer {
+
+class DecalPrimitive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* DecalPrimitive::vfunc_07()
+{
+    return DAT_00400000;
+}
+
+}
+
 // [TODO] 0x00049A70 sub_00049A70 (10 B)
 // [TODO] 0x00049A80 renderer::DecalRenderable::vfunc_11 (16 B)
 // [TODO] 0x00049A90 sub_00049A90 (59 B)
@@ -3032,7 +3905,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0004A5F0 sub_0004A5F0 (107 B)
 // [TODO] 0x0004A660 renderer::DecalPrimitive::CDecalDrawable::vfunc_00 (50 B)
 // [TODO] 0x0004A6A0 renderer::DecalPrimitive::CStaticDecalDrawable::vfunc_00 (75 B)
-// [TODO] 0x0004A6F0 renderer::DecalPrimitive::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::DecalPrimitive::vfunc_03 (0x0004A6F0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::DecalPrimitive::vfunc_03 (0x0004A6F0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0004A180(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class DecalPrimitive
+{
+public:
+    virtual DecalPrimitive* vfunc_03(int a1);
+};
+
+DecalPrimitive* DecalPrimitive::vfunc_03(int a1)
+{
+    sub_0004A180();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0004A710 sub_0004A710 (421 B)
 // [TODO] 0x0004A8C0 sub_0004A8C0 (428 B)
 // [TODO] 0x0004AA70 sub_0004AA70 (555 B)
@@ -3048,7 +3952,40 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0004B5E0 sub_0004B5E0 (156 B)
 // [TODO] 0x0004B620 sub_0004B620 (92 B)
 // [TODO] 0x0004B680 sub_0004B680 (26 B)
-// [TODO] 0x0004B6A0 renderer::InstancePrimitive::vfunc_07 (6 B)
+// ============================================================================
+// [VERIFIED] renderer::InstancePrimitive::vfunc_07 (0x0004B6A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::InstancePrimitive::vfunc_07 (0x0004B6A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00200000[];
+
+namespace renderer {
+
+class InstancePrimitive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* InstancePrimitive::vfunc_07()
+{
+    return DAT_00200000;
+}
+
+}
+
 // [TODO] 0x0004B6B0 renderer::InstanceContainer::vfunc_23 (6 B)
 // [TODO] 0x0004B6C0 sub_0004B6C0 (318 B)
 // [TODO] 0x0004B800 sub_0004B800 (424 B)
@@ -3073,7 +4010,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0004C150 sub_0004C150 (111 B)
 // [TODO] 0x0004C1C0 sub_0004C1C0 (73 B)
 // [TODO] 0x0004C210 sub_0004C210 (309 B)
-// [TODO] 0x0004C350 renderer::LightingRenderable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::LightingRenderable::vfunc_03 (0x0004C350, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::LightingRenderable::vfunc_03 (0x0004C350, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0004C150(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class LightingRenderable
+{
+public:
+    virtual LightingRenderable* vfunc_03(int a1);
+};
+
+LightingRenderable* LightingRenderable::vfunc_03(int a1)
+{
+    sub_0004C150();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0004C370 sub_0004C370 (27 B)
 // [TODO] 0x0004C390 renderer::SFLightGroupLoader::vfunc_06 (448 B)
 // [TODO] 0x0004C550 renderer::MaskRenderable::vfunc_03 (36 B)
@@ -3086,14 +4054,111 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0004C6A0 renderer::NISRenderable::vfunc_03 (36 B)
 // [TODO] 0x0004C6D0 renderer::NISRenderable::vfunc_09 (231 B)
 // [TODO] 0x0004C7C0 renderer::OceanPrimitive::vfunc_08 (13 B)
-// [TODO] 0x0004C7D0 renderer::OceanPrimitive::vfunc_07 (6 B)
+// ============================================================================
+// [VERIFIED] renderer::OceanPrimitive::vfunc_07 (0x0004C7D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::OceanPrimitive::vfunc_07 (0x0004C7D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00020000[];
+
+namespace renderer {
+
+class OceanPrimitive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* OceanPrimitive::vfunc_07()
+{
+    return DAT_00020000;
+}
+
+}
+
 // [TODO] 0x0004C7E0 renderer::OceanPrimitive::vfunc_13 (38 B)
-// [TODO] 0x0004C810 renderer::OceanContainer::vfunc_23 (6 B)
+// ============================================================================
+// [VERIFIED] renderer::OceanContainer::vfunc_23 (0x0004C810, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::OceanContainer::vfunc_23 (0x0004C810, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00040000[];
+
+namespace renderer {
+
+class OceanContainer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_23();
+};
+
+void* OceanContainer::vfunc_23()
+{
+    return DAT_00040000;
+}
+
+}
+
 // [TODO] 0x0004C820 renderer::InstanceRenderable::vfunc_10 (5 B)
 // [TODO] 0x0004C830 sub_0004C830 (161 B)
 // [TODO] 0x0004C8E0 sub_0004C8E0 (81 B)
 // [TODO] 0x0004C940 renderer::OceanContainer::vfunc_03 (36 B)
-// [TODO] 0x0004C970 renderer::OceanPrimitive::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::OceanPrimitive::vfunc_03 (0x0004C970, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::OceanPrimitive::vfunc_03 (0x0004C970, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0004C8E0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class OceanPrimitive
+{
+public:
+    virtual OceanPrimitive* vfunc_03(int a1);
+};
+
+OceanPrimitive* OceanPrimitive::vfunc_03(int a1)
+{
+    sub_0004C8E0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0004C990 sub_0004C990 (85 B)
 // [TODO] 0x0004C9F0 sub_0004C9F0 (132 B)
 // [TODO] 0x0004CA80 renderer::OceanRenderable::vfunc_03 (63 B)
@@ -3125,7 +4190,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0004D620 sub_0004D620 (107 B)
 // [TODO] 0x0004D621 sub_0004D621 (106 B)
 // [TODO] 0x0004D690 sub_0004D690 (27 B)
-// [TODO] 0x0004D6B0 renderer::ZonePkgRenderable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::ZonePkgRenderable::vfunc_03 (0x0004D6B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::ZonePkgRenderable::vfunc_03 (0x0004D6B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0004D620(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class ZonePkgRenderable
+{
+public:
+    virtual ZonePkgRenderable* vfunc_03(int a1);
+};
+
+ZonePkgRenderable* ZonePkgRenderable::vfunc_03(int a1)
+{
+    sub_0004D620();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0004D6D0 sub_0004D6D0 (39 B)
 // [TODO] 0x0004D700 renderer::PropLoader::vfunc_06 (1301 B)
 // [TODO] 0x0004DC20 renderer::ZonePkgLoader::vfunc_06 (612 B)
@@ -3137,7 +4233,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0004E1A0 sub_0004E1A0 (157 B)
 // [TODO] 0x0004E240 sub_0004E240 (19 B)
 // [TODO] 0x0004E260 sub_0004E260 (538 B)
-// [TODO] 0x0004E480 renderer::RainRenderable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::RainRenderable::vfunc_03 (0x0004E480, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::RainRenderable::vfunc_03 (0x0004E480, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0004DFB0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class RainRenderable
+{
+public:
+    virtual RainRenderable* vfunc_03(int a1);
+};
+
+RainRenderable* RainRenderable::vfunc_03(int a1)
+{
+    sub_0004DFB0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0004E4A0 sub_0004E4A0 (838 B)
 // [TODO] 0x0004E7F0 sub_0004E7F0 (113 B)
 // [TODO] 0x0004E870 renderer::RainRenderable::vfunc_09 (379 B)
@@ -3164,7 +4291,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0004F4B0 sub_0004F4B0 (93 B)
 // [TODO] 0x0004F510 sub_0004F510 (250 B)
 // [TODO] 0x0004F610 sub_0004F610 (182 B)
-// [TODO] 0x0004F6D0 renderer::Renderable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::Renderable::vfunc_03 (0x0004F6D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::Renderable::vfunc_03 (0x0004F6D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0004F610(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class Renderable
+{
+public:
+    virtual Renderable* vfunc_03(int a1);
+};
+
+Renderable* Renderable::vfunc_03(int a1)
+{
+    sub_0004F610();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0004F6F0 sub_0004F6F0 (284 B)
 // [TODO] 0x0004F810 sub_0004F810 (153 B)
 // [TODO] 0x0004F8B0 renderer::ShadowRenderable::vfunc_09 (8 B)
@@ -3231,7 +4389,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00052970 sub_00052970 (86 B)
 // [TODO] 0x000529D0 sub_000529D0 (499 B)
 // [TODO] 0x00052BD0 sub_00052BD0 (178 B)
-// [TODO] 0x00052C90 renderer::TraceFireRenderable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::TraceFireRenderable::vfunc_03 (0x00052C90, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::TraceFireRenderable::vfunc_03 (0x00052C90, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00052970(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class TraceFireRenderable
+{
+public:
+    virtual TraceFireRenderable* vfunc_03(int a1);
+};
+
+TraceFireRenderable* TraceFireRenderable::vfunc_03(int a1)
+{
+    sub_00052970();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00052CB0 renderer::TraceFireRenderable::vfunc_11 (407 B)
 // [TODO] 0x00052E50 sub_00052E50 (480 B)
 // [TODO] 0x00053030 renderer::TraceFireRenderable::vfunc_09 (84 B)
@@ -3255,14 +4444,76 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x000536F0 sub_000536F0 (142 B)
 // [TODO] 0x00053780 sub_00053780 (15 B)
 // [TODO] 0x00053790 sub_00053790 (534 B)
-// [TODO] 0x000539B0 renderer::VehiclePrimitive::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::VehiclePrimitive::vfunc_03 (0x000539B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::VehiclePrimitive::vfunc_03 (0x000539B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00053340(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class VehiclePrimitive
+{
+public:
+    virtual VehiclePrimitive* vfunc_03(int a1);
+};
+
+VehiclePrimitive* VehiclePrimitive::vfunc_03(int a1)
+{
+    sub_00053340();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x000539D0 renderer::VehicleContainer::vfunc_03 (88 B)
 // [TODO] 0x00053A30 sub_00053A30 (64 B)
 // [TODO] 0x00053A70 sub_00053A70 (79 B)
 // [TODO] 0x00053AC0 sub_00053AC0 (82 B)
 // [TODO] 0x00053B20 sub_00053B20 (62 B)
 // [TODO] 0x00053B60 sub_00053B60 (57 B)
-// [TODO] 0x00053BA0 renderer::VehicleRenderable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::VehicleRenderable::vfunc_03 (0x00053BA0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::VehicleRenderable::vfunc_03 (0x00053BA0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000536F0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace renderer {
+
+class VehicleRenderable
+{
+public:
+    virtual VehicleRenderable* vfunc_03(int a1);
+};
+
+VehicleRenderable* VehicleRenderable::vfunc_03(int a1)
+{
+    sub_000536F0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00053BC0 sub_00053BC0 (81 B)
 // [TODO] 0x00053C20 sub_00053C20 (93 B)
 // [TODO] 0x00053C80 sub_00053C80 (24 B)
@@ -3277,8 +4528,74 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00054450 sub_00054450 (815 B)
 // [TODO] 0x00054780 sub_00054780 (978 B)
 // [TODO] 0x00054B60 renderer::VehicleLoader::vfunc_06 (1330 B)
-// [TODO] 0x000550A0 renderer::WakePrimitive::vfunc_07 (6 B)
-// [TODO] 0x000550B0 renderer::WakeContainer::vfunc_23 (6 B)
+// ============================================================================
+// [VERIFIED] renderer::WakePrimitive::vfunc_07 (0x000550A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::WakePrimitive::vfunc_07 (0x000550A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00080000[];
+
+namespace renderer {
+
+class WakePrimitive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* WakePrimitive::vfunc_07()
+{
+    return DAT_00080000;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] renderer::WakeContainer::vfunc_23 (0x000550B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// renderer::WakeContainer::vfunc_23 (0x000550B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00100000[];
+
+namespace renderer {
+
+class WakeContainer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_23();
+};
+
+void* WakeContainer::vfunc_23()
+{
+    return DAT_00100000;
+}
+
+}
+
 // [TODO] 0x000550C0 Collidable::vfunc_05 (3 B)
 // [TODO] 0x000550D0 sub_000550D0 (58 B)
 // [TODO] 0x00055110 renderer::WakePrimitive::vfunc_08 (456 B)
@@ -3295,11 +4612,43 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00055BA0 sub_00055BA0 (27 B)
 // [TODO] 0x00055BC0 renderer::WakeRenderable::vfunc_09 (27 B)
 // [TODO] 0x00055FF0 DecisionTreeFileHandler::vfunc_04 (626 B)
-// [TODO] 0x00056270 sub_00056270 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00056270 (0x00056270, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00056270 (0x00056270, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044A984;
+
+int __cdecl sub_00056270(void)
+{
+    return DAT_0044A984;
+}
+
 // [TODO] 0x00056280 sub_00056280 (295 B)
 // [TODO] 0x000563B0 sub_000563B0 (73 B)
 // [TODO] 0x00056400 sub_00056400 (14 B)
-// [TODO] 0x00056410 sub_00056410 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00056410 (0x00056410, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00056410 (0x00056410, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044A988;
+
+int __cdecl sub_00056410(void)
+{
+    return DAT_0044A988;
+}
+
 // [TODO] 0x00056420 Collidable::vfunc_00 (4 B)
 // [TODO] 0x00056430 CementLoadTracker::vfunc_01 (20 B)
 // [TODO] 0x00056450 Collidable::vfunc_02 (4 B)
@@ -3309,7 +4658,37 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00056600 sub_00056600 (164 B)
 // [TODO] 0x000566B0 CementLoadTracker::vfunc_03 (59 B)
 // [TODO] 0x000566F0 sub_000566F0 (496 B)
-// [TODO] 0x000568E0 DriveManager::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] DriveManager::vfunc_01 (0x000568E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// DriveManager::vfunc_01 (0x000568E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00056480(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class DriveManager
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual DriveManager* vfunc_01(int a1);
+};
+
+DriveManager* DriveManager::vfunc_01(int a1)
+{
+    sub_00056480();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00056900 CementLoader::vfunc_06 (636 B)
 // [TODO] 0x00056B80 sub_00056B80 (27 B)
 // [TODO] 0x00056BA0 sub_00056BA0 (42 B)
@@ -3322,7 +4701,23 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00056F80 sub_00056F80 (133 B)
 // [TODO] 0x00057010 sub_00057010 (107 B)
 // [TODO] 0x00057080 sub_00057080 (204 B)
-// [TODO] 0x00057150 sub_00057150 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00057150 (0x00057150, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00057150 (0x00057150, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044ADD0;
+
+int __cdecl sub_00057150(void)
+{
+    return DAT_0044ADD0;
+}
+
 // [TODO] 0x00057160 sub_00057160 (10 B)
 // [TODO] 0x00057170 LoadSet::vfunc_00 (4 B)
 // [TODO] 0x00057180 LoadSet::vfunc_01 (13 B)
@@ -3357,17 +4752,171 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00058AA0 sub_00058AA0 (36 B)
 // [TODO] 0x00058AD0 sub_00058AD0 (21 B)
 // [TODO] 0x00058AF0 sub_00058AF0 (21 B)
-// [TODO] 0x00058B10 sub_00058B10 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00058B10 (0x00058B10, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00058B10 (0x00058B10, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00056F40(void);
+
+class Class_00058B10
+{
+public:
+    void sub_00058B10();
+};
+
+void Class_00058B10::sub_00058B10()
+{
+    sub_00056F40();
+}
+
 // [TODO] 0x00058B20 sub_00058B20 (28 B)
-// [TODO] 0x00058B40 sub_00058B40 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00058B40 (0x00058B40, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00058B40 (0x00058B40, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00056DA0(void);
+
+class Class_00058B40
+{
+public:
+    void sub_00058B40();
+};
+
+void Class_00058B40::sub_00058B40()
+{
+    sub_00056DA0();
+}
+
 // [TODO] 0x00058B50 sub_00058B50 (28 B)
 // [TODO] 0x00058B70 sub_00058B70 (22 B)
-// [TODO] 0x00058B90 sub_00058B90 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00058B90 (0x00058B90, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00058B90 (0x00058B90, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00056DF0(void);
+
+class Class_00058B90
+{
+public:
+    void sub_00058B90();
+};
+
+void Class_00058B90::sub_00058B90()
+{
+    sub_00056DF0();
+}
+
 // [TODO] 0x00058BA0 sub_00058BA0 (22 B)
-// [TODO] 0x00058BC0 sub_00058BC0 (5 B)
-// [TODO] 0x00058BD0 sub_00058BD0 (5 B)
-// [TODO] 0x00058BE0 sub_00058BE0 (5 B)
-// [TODO] 0x00058BF0 sub_00058BF0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00058BC0 (0x00058BC0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00058BC0 (0x00058BC0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000587B0(void);
+
+class Class_00058BC0
+{
+public:
+    void sub_00058BC0();
+};
+
+void Class_00058BC0::sub_00058BC0()
+{
+    sub_000587B0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00058BD0 (0x00058BD0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00058BD0 (0x00058BD0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00057F00(void);
+
+class Class_00058BD0
+{
+public:
+    void sub_00058BD0();
+};
+
+void Class_00058BD0::sub_00058BD0()
+{
+    sub_00057F00();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00058BE0 (0x00058BE0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00058BE0 (0x00058BE0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00057F70(void);
+
+class Class_00058BE0
+{
+public:
+    void sub_00058BE0();
+};
+
+void Class_00058BE0::sub_00058BE0()
+{
+    sub_00057F70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00058BF0 (0x00058BF0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00058BF0 (0x00058BF0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00058020(void);
+
+class Class_00058BF0
+{
+public:
+    void sub_00058BF0();
+};
+
+void Class_00058BF0::sub_00058BF0()
+{
+    sub_00058020();
+}
+
 // [TODO] 0x00058C00 sub_00058C00 (422 B)
 // [TODO] 0x00058DB0 sub_00058DB0 (256 B)
 // [TODO] 0x00058EB0 sub_00058EB0 (88 B)
@@ -3400,7 +4949,38 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00059BF0 sub_00059BF0 (96 B)
 // [TODO] 0x00059C50 sub_00059C50 (97 B)
 // [TODO] 0x00059CC0 sub_00059CC0 (65 B)
-// [TODO] 0x00059D10 ResourceManager::ResourceManagerFlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] ResourceManager::ResourceManagerFlowClient::vfunc_00 (0x00059D10, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// ResourceManager::ResourceManagerFlowClient::vfunc_00 (0x00059D10, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00059850(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace ResourceManager {
+
+class ResourceManagerFlowClient
+{
+public:
+    virtual ResourceManagerFlowClient* vfunc_00(int a1);
+};
+
+ResourceManagerFlowClient* ResourceManagerFlowClient::vfunc_00(int a1)
+{
+    sub_00059850();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00059D30 sub_00059D30 (123 B)
 // [TODO] 0x00059DB0 sub_00059DB0 (154 B)
 // [TODO] 0x00059E50 sub_00059E50 (114 B)
@@ -3522,7 +5102,29 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0005CC10 sub_0005CC10 (47 B)
 // [TODO] 0x0005CE70 sub_0005CE70 (39 B)
 // [TODO] 0x0005CEA0 sub_0005CEA0 (430 B)
-// [TODO] 0x0005D070 sub_0005D070 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0005D070 (0x0005D070, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0005D070 (0x0005D070, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00065640(void);
+
+class Class_0005D070
+{
+public:
+    void sub_0005D070();
+};
+
+void Class_0005D070::sub_0005D070()
+{
+    sub_00065640();
+}
+
 // [TODO] 0x0005D120 content::LoadInventory::DynamicCaster<ScriptFileObject>::vfunc_00 (30 B)
 // [TODO] 0x0005D140 sub_0005D140 (54 B)
 // [TODO] 0x0005D180 sub_0005D180 (69 B)
@@ -3760,7 +5362,23 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00067A30 sub_00067A30 (67 B)
 // [TODO] 0x00067A80 sub_00067A80 (5 B)
 // [TODO] 0x00067A90 sub_00067A90 (39 B)
-// [TODO] 0x00067AC0 sub_00067AC0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00067AC0 (0x00067AC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00067AC0 (0x00067AC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044FE58;
+
+int __cdecl sub_00067AC0(void)
+{
+    return DAT_0044FE58;
+}
+
 // [TODO] 0x00067AD0 sub_00067AD0 (157 B)
 // [TODO] 0x00067B70 sub_00067B70 (258 B)
 // [TODO] 0x00067C80 sub_00067C80 (80 B)
@@ -3801,7 +5419,40 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00068F50 sub_00068F50 (216 B)
 // [TODO] 0x00069030 sub_00069030 (254 B)
 // [TODO] 0x00069130 sub_00069130 (112 B)
-// [TODO] 0x00069330 pure3d::d3dShader::vfunc_23 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShader::vfunc_23 (0x00069330, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShader::vfunc_23 (0x00069330, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0037CD30[];
+
+namespace pure3d {
+
+class d3dShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_23();
+};
+
+void* d3dShader::vfunc_23()
+{
+    return DAT_0037CD30;
+}
+
+}
+
 // [TODO] 0x000693C0 sub_000693C0 (142 B)
 // [TODO] 0x00069770 sub_00069770 (146 B)
 // [TODO] 0x00069810 sub_00069810 (131 B)
@@ -3809,7 +5460,29 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00069F40 sub_00069F40 (18 B)
 // [TODO] 0x00069F60 sub_00069F60 (108 B)
 // [TODO] 0x00069FD0 sub_00069FD0 (56 B)
-// [TODO] 0x0006A010 sub_0006A010 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0006A010 (0x0006A010, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0006A010 (0x0006A010, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00069FD0(void);
+
+class Class_0006A010
+{
+public:
+    void sub_0006A010();
+};
+
+void Class_0006A010::sub_0006A010()
+{
+    sub_00069FD0();
+}
+
 // [TODO] 0x0006A020 sub_0006A020 (172 B)
 // [TODO] 0x0006A0D0 sub_0006A0D0 (3864 B)
 // [TODO] 0x0006AFF0 sub_0006AFF0 (70 B)
@@ -3820,8 +5493,40 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0006B130 MemStream::vfunc_02 (130 B)
 // [TODO] 0x0006B1C0 MemStream::vfunc_00 (51 B)
 // [TODO] 0x0006B200 sub_0006B200 (38 B)
-// [TODO] 0x0006B230 sub_0006B230 (6 B)
-// [TODO] 0x0006B240 sub_0006B240 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0006B230 (0x0006B230, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0006B230 (0x0006B230, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00450F94;
+
+int __cdecl sub_0006B230(void)
+{
+    return DAT_00450F94;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0006B240 (0x0006B240, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0006B240 (0x0006B240, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00452FAC;
+
+int __cdecl sub_0006B240(void)
+{
+    return DAT_00452FAC;
+}
+
 // [TODO] 0x0006B250 sub_0006B250 (40 B)
 // [TODO] 0x0006B280 sub_0006B280 (31 B)
 // [TODO] 0x0006B2E0 sub_0006B2E0 (273 B)
@@ -3847,11 +5552,77 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0006C3B0 sub_0006C3B0 (140 B)
 // [TODO] 0x0006C8E0 sub_0006C8E0 (75 B)
 // [TODO] 0x0006C930 sub_0006C930 (99 B)
-// [TODO] 0x0006D050 sub_0006D050 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0006D050 (0x0006D050, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0006D050 (0x0006D050, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002916B0(void);
+
+class Class_0006D050
+{
+public:
+    void sub_0006D050();
+};
+
+void Class_0006D050::sub_0006D050()
+{
+    sub_002916B0();
+}
+
 // [TODO] 0x0006D060 sub_0006D060 (12 B)
 // [TODO] 0x0006D070 sub_0006D070 (20 B)
-// [TODO] 0x0006D090 sub_0006D090 (5 B)
-// [TODO] 0x0006D0A0 sub_0006D0A0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0006D090 (0x0006D090, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0006D090 (0x0006D090, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00295C80(void);
+
+class Class_0006D090
+{
+public:
+    void sub_0006D090();
+};
+
+void Class_0006D090::sub_0006D090()
+{
+    sub_00295C80();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0006D0A0 (0x0006D0A0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0006D0A0 (0x0006D0A0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00295CB0(void);
+
+class Class_0006D0A0
+{
+public:
+    void sub_0006D0A0();
+};
+
+void Class_0006D0A0::sub_0006D0A0()
+{
+    sub_00295CB0();
+}
+
 // [TODO] 0x0006D0B0 sub_0006D0B0 (68 B)
 // [TODO] 0x0006D100 sub_0006D100 (38 B)
 // [TODO] 0x0006D130 sub_0006D130 (62 B)
@@ -3923,7 +5694,29 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0006E9A0 sub_0006E9A0 (266 B)
 // [TODO] 0x0006EAB0 sub_0006EAB0 (246 B)
 // [TODO] 0x0006EBB0 sub_0006EBB0 (142 B)
-// [TODO] 0x0006EC40 sub_0006EC40 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0006EC40 (0x0006EC40, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0006EC40 (0x0006EC40, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0006E940(void);
+
+class Class_0006EC40
+{
+public:
+    void sub_0006EC40();
+};
+
+void Class_0006EC40::sub_0006EC40()
+{
+    sub_0006E940();
+}
+
 // [TODO] 0x0006EC50 sub_0006EC50 (106 B)
 // [TODO] 0x0006ECC0 sub_0006ECC0 (182 B)
 // [TODO] 0x0006ED80 sub_0006ED80 (187 B)
@@ -4112,7 +5905,23 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00077090 sub_00077090 (77 B)
 // [TODO] 0x000770E0 sub_000770E0 (59 B)
 // [TODO] 0x00077120 sub_00077120 (28 B)
-// [TODO] 0x00077140 sub_00077140 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00077140 (0x00077140, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00077140 (0x00077140, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00453980;
+
+int __cdecl sub_00077140(void)
+{
+    return DAT_00453980;
+}
+
 // [TODO] 0x00077150 SoundAllocator::StreamPlayerAllocator::vfunc_00 (47 B)
 // [TODO] 0x00077180 SoundAllocator::StreamPlayerAllocator::vfunc_01 (22 B)
 // [TODO] 0x000771A0 sub_000771A0 (97 B)
@@ -4308,7 +6117,23 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0007DC20 sub_0007DC20 (49 B)
 // [TODO] 0x0007DC60 sub_0007DC60 (24 B)
 // [TODO] 0x0007DC80 sub_0007DC80 (24 B)
-// [TODO] 0x0007DCA0 sub_0007DCA0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0007DCA0 (0x0007DCA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0007DCA0 (0x0007DCA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_003FDC58;
+
+int __cdecl sub_0007DCA0(void)
+{
+    return DAT_003FDC58;
+}
+
 // [TODO] 0x0007DCB0 sub_0007DCB0 (18 B)
 // [TODO] 0x0007DCD0 sub_0007DCD0 (17 B)
 // [TODO] 0x0007DCF0 sub_0007DCF0 (35 B)
@@ -4372,7 +6197,29 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x0007F610 sub_0007F610 (254 B)
 // [TODO] 0x0007F710 sub_0007F710 (62 B)
 // [TODO] 0x0007F750 StatePropEngine::vfunc_00 (42 B)
-// [TODO] 0x0007F9C0 sub_0007F9C0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0007F9C0 (0x0007F9C0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0007F9C0 (0x0007F9C0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0007F780(void);
+
+class Class_0007F9C0
+{
+public:
+    void sub_0007F9C0();
+};
+
+void Class_0007F9C0::sub_0007F9C0()
+{
+    sub_0007F780();
+}
+
 // [TODO] 0x0007F9D0 StatePropEngine::vfunc_00 (62 B)
 // [TODO] 0x0007FA10 sub_0007FA10 (7 B)
 // [TODO] 0x0007FA20 sub_0007FA20 (33 B)
@@ -4442,7 +6289,37 @@ StreamedTemplate* StreamedTemplate::vfunc_01(int a1)
 // [TODO] 0x00083C70 sub_00083C70 (85 B)
 // [TODO] 0x00083CD0 sub_00083CD0 (251 B)
 // [TODO] 0x00083DD0 sub_00083DD0 (1951 B)
-// [TODO] 0x00084570 StatePropManagerFlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] StatePropManagerFlowClient::vfunc_00 (0x00084570, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropManagerFlowClient::vfunc_00 (0x00084570, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00083C70(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class StatePropManagerFlowClient
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual StatePropManagerFlowClient* vfunc_00(int a1);
+};
+
+StatePropManagerFlowClient* StatePropManagerFlowClient::vfunc_00(int a1)
+{
+    sub_00083C70();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00084590 sub_00084590 (269 B)
 // [TODO] 0x000846A0 StatePropManagerFlowClient::vfunc_02 (477 B)
 // ============================================================================
@@ -4500,14 +6377,110 @@ PropAttachToObjectBehaviour* PropAttachToObjectBehaviour::vfunc_00(int a1)
 // [TODO] 0x00085110 sub_00085110 (77 B)
 // [TODO] 0x00085160 sub_00085160 (146 B)
 // [TODO] 0x00085220 sub_00085220 (139 B)
-// [TODO] 0x000852B0 sub_000852B0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000852B0 (0x000852B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000852B0 (0x000852B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00453F04;
+
+int __cdecl sub_000852B0(void)
+{
+    return DAT_00453F04;
+}
+
 // [TODO] 0x000852C0 sub_000852C0 (36 B)
 // [TODO] 0x000852F0 sub_000852F0 (6 B)
-// [TODO] 0x00085300 sub_00085300 (6 B)
-// [TODO] 0x00085310 sub_00085310 (6 B)
-// [TODO] 0x00085320 sub_00085320 (6 B)
-// [TODO] 0x00085330 sub_00085330 (6 B)
-// [TODO] 0x00085340 sub_00085340 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00085300 (0x00085300, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00085300 (0x00085300, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00453F14;
+
+int __cdecl sub_00085300(void)
+{
+    return DAT_00453F14;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00085310 (0x00085310, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00085310 (0x00085310, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00453F18;
+
+int __cdecl sub_00085310(void)
+{
+    return DAT_00453F18;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00085320 (0x00085320, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00085320 (0x00085320, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00453F20;
+
+int __cdecl sub_00085320(void)
+{
+    return DAT_00453F20;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00085330 (0x00085330, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00085330 (0x00085330, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_003FE024;
+
+int __cdecl sub_00085330(void)
+{
+    return DAT_003FE024;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00085340 (0x00085340, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00085340 (0x00085340, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00453F00;
+
+int __cdecl sub_00085340(void)
+{
+    return DAT_00453F00;
+}
+
 // [TODO] 0x00085350 sub_00085350 (8 B)
 // [TODO] 0x00085360 sub_00085360 (10 B)
 // [TODO] 0x00085370 sub_00085370 (100 B)
@@ -4565,7 +6538,23 @@ StreamManagerFlowClient* StreamManagerFlowClient::vfunc_00(int a1)
 // [TODO] 0x000862D0 StreamManagerFlowClient::vfunc_01 (77 B)
 // [TODO] 0x00086320 StreamManagerFlowClient::vfunc_02 (65 B)
 // [TODO] 0x00086370 StreamManagerFlowClient::vfunc_03 (357 B)
-// [TODO] 0x000865C0 sub_000865C0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000865C0 (0x000865C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000865C0 (0x000865C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00453F50;
+
+int __cdecl sub_000865C0(void)
+{
+    return DAT_00453F50;
+}
+
 // [TODO] 0x000865D0 sub_000865D0 (97 B)
 // [TODO] 0x00086640 sub_00086640 (126 B)
 // [TODO] 0x000866C0 sub_000866C0 (185 B)
@@ -4630,7 +6619,23 @@ StreamManagerFlowClient* StreamManagerFlowClient::vfunc_00(int a1)
 // [TODO] 0x00088F40 sub_00088F40 (27 B)
 // [TODO] 0x00088F60 StreamTriggerLoader::vfunc_06 (1094 B)
 // [TODO] 0x000893B0 sub_000893B0 (42 B)
-// [TODO] 0x000893F0 sub_000893F0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000893F0 (0x000893F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000893F0 (0x000893F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045417C;
+
+int __cdecl sub_000893F0(void)
+{
+    return DAT_0045417C;
+}
+
 // ============================================================================
 // [VERIFIED] VarietyFileBank::vfunc_00 (0x00089400, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -4838,7 +6843,37 @@ template <> void ConcreteClassRep<VarietyFile>::vfunc_02()
 // [TODO] 0x0008AAC0 sub_0008AAC0 (61 B)
 // [TODO] 0x0008AB00 sub_0008AB00 (138 B)
 // [TODO] 0x0008AB90 sub_0008AB90 (128 B)
-// [TODO] 0x0008AC40 VarietySlotManager::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] VarietySlotManager::vfunc_00 (0x0008AC40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// VarietySlotManager::vfunc_00 (0x0008AC40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0008AB90(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class VarietySlotManager
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VarietySlotManager* vfunc_00(int a1);
+};
+
+VarietySlotManager* VarietySlotManager::vfunc_00(int a1)
+{
+    sub_0008AB90();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] VarietyDeclarationGroup::vfunc_00 (0x0008AC60, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -5118,8 +7153,40 @@ template <> void ConcreteClassRep<VarietySlot>::vfunc_02()
 // [TODO] 0x0008B61C sub_0008B61C (154 B)
 // [TODO] 0x0008B6C0 sub_0008B6C0 (391 B)
 // [TODO] 0x0008B850 sub_0008B850 (35 B)
-// [TODO] 0x0008B880 sub_0008B880 (6 B)
-// [TODO] 0x0008B890 sub_0008B890 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0008B880 (0x0008B880, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0008B880 (0x0008B880, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004541A0;
+
+int __cdecl sub_0008B880(void)
+{
+    return DAT_004541A0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008B890 (0x0008B890, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0008B890 (0x0008B890, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_003FE3A4;
+
+int __cdecl sub_0008B890(void)
+{
+    return DAT_003FE3A4;
+}
+
 // [TODO] 0x0008B8A0 sub_0008B8A0 (35 B)
 // [TODO] 0x0008B8D0 sub_0008B8D0 (27 B)
 // [TODO] 0x0008B8F0 sub_0008B8F0 (90 B)
@@ -5132,7 +7199,38 @@ template <> void ConcreteClassRep<VarietySlot>::vfunc_02()
 // [TODO] 0x0008BF30 sub_0008BF30 (129 B)
 // [TODO] 0x0008BFC0 sub_0008BFC0 (146 B)
 // [TODO] 0x0008C090 sub_0008C090 (198 B)
-// [TODO] 0x0008C160 TriggerManager::TriggerManagerFlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] TriggerManager::TriggerManagerFlowClient::vfunc_00 (0x0008C160, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// TriggerManager::TriggerManagerFlowClient::vfunc_00 (0x0008C160, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0008C090(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace TriggerManager {
+
+class TriggerManagerFlowClient
+{
+public:
+    virtual TriggerManagerFlowClient* vfunc_00(int a1);
+};
+
+TriggerManagerFlowClient* TriggerManagerFlowClient::vfunc_00(int a1)
+{
+    sub_0008C090();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0008C180 sub_0008C180 (20 B)
 // [TODO] 0x0008C1A0 sub_0008C1A0 (32 B)
 // [TODO] 0x0008C1C0 sub_0008C1C0 (68 B)
@@ -5313,7 +7411,37 @@ TimeSlicer* TimeSlicer::vfunc_00(int a1)
 // [TODO] 0x000906B0 sub_000906B0 (351 B)
 // [TODO] 0x00090810 AirplaneLocomotion::vfunc_12 (93 B)
 // [TODO] 0x00090870 sub_00090870 (275 B)
-// [TODO] 0x00090990 AirplaneLocomotion::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] AirplaneLocomotion::vfunc_00 (0x00090990, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AirplaneLocomotion::vfunc_00 (0x00090990, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0008FE90(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AirplaneLocomotion
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AirplaneLocomotion* vfunc_00(int a1);
+};
+
+AirplaneLocomotion* AirplaneLocomotion::vfunc_00(int a1)
+{
+    sub_0008FE90();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000909B0 AirplaneLocomotion::vfunc_02 (133 B)
 // [TODO] 0x00090A40 sub_00090A40 (693 B)
 // [TODO] 0x00090D00 sub_00090D00 (149 B)
@@ -5576,7 +7704,29 @@ HelicopterLocomotion* HelicopterLocomotion::vfunc_00(int a1)
 // [TODO] 0x0009AFA0 sub_0009AFA0 (42 B)
 // [TODO] 0x0009AFD0 sub_0009AFD0 (8 B)
 // [TODO] 0x0009AFE0 sub_0009AFE0 (50 B)
-// [TODO] 0x0009B020 sub_0009B020 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0009B020 (0x0009B020, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0009B020 (0x0009B020, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0007D210(void);
+
+class Class_0009B020
+{
+public:
+    void sub_0009B020();
+};
+
+void Class_0009B020::sub_0009B020()
+{
+    sub_0007D210();
+}
+
 // [TODO] 0x0009B030 sub_0009B030 (15 B)
 // [TODO] 0x0009B040 sub_0009B040 (43 B)
 // [TODO] 0x0009B070 sub_0009B070 (46 B)
@@ -5686,8 +7836,40 @@ HelicopterLocomotion* HelicopterLocomotion::vfunc_00(int a1)
 // [TODO] 0x0009ED40 sub_0009ED40 (70 B)
 // [TODO] 0x0009ED90 sub_0009ED90 (44 B)
 // [TODO] 0x0009EDE0 sub_0009EDE0 (330 B)
-// [TODO] 0x0009EF90 sub_0009EF90 (6 B)
-// [TODO] 0x0009EFA0 sub_0009EFA0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0009EF90 (0x0009EF90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0009EF90 (0x0009EF90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_003FEF50;
+
+int __cdecl sub_0009EF90(void)
+{
+    return DAT_003FEF50;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009EFA0 (0x0009EFA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0009EFA0 (0x0009EFA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_003FEF60;
+
+int __cdecl sub_0009EFA0(void)
+{
+    return DAT_003FEF60;
+}
+
 // [TODO] 0x0009EFB0 sub_0009EFB0 (43 B)
 // [TODO] 0x0009EFE0 sub_0009EFE0 (7 B)
 // [TODO] 0x0009EFF0 sub_0009EFF0 (18 B)
@@ -5768,7 +7950,29 @@ HelicopterLocomotion* HelicopterLocomotion::vfunc_00(int a1)
 // [TODO] 0x000A10B0 sub_000A10B0 (620 B)
 // [TODO] 0x000A1320 sub_000A1320 (82 B)
 // [TODO] 0x000A1380 sub_000A1380 (309 B)
-// [TODO] 0x000A14C0 sub_000A14C0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_000A14C0 (0x000A14C0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000A14C0 (0x000A14C0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000A03A0(void);
+
+class Class_000A14C0
+{
+public:
+    void sub_000A14C0();
+};
+
+void Class_000A14C0::sub_000A14C0()
+{
+    sub_000A03A0();
+}
+
 // [TODO] 0x000A14D0 sub_000A14D0 (116 B)
 // [TODO] 0x000A1550 sub_000A1550 (83 B)
 // [TODO] 0x000A15B0 sub_000A15B0 (16 B)
@@ -5799,7 +8003,29 @@ HelicopterLocomotion* HelicopterLocomotion::vfunc_00(int a1)
 // [TODO] 0x000A30B0 sub_000A30B0 (1716 B)
 // [TODO] 0x000A3770 sub_000A3770 (999 B)
 // [TODO] 0x000A3F30 sub_000A3F30 (95 B)
-// [TODO] 0x000A3F90 sub_000A3F90 (5 B)
+// ============================================================================
+// [VERIFIED] sub_000A3F90 (0x000A3F90, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000A3F90 (0x000A3F90, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000A3B60(void);
+
+class Class_000A3F90
+{
+public:
+    void sub_000A3F90();
+};
+
+void Class_000A3F90::sub_000A3F90()
+{
+    sub_000A3B60();
+}
+
 // [TODO] 0x000A3FA0 sub_000A3FA0 (16 B)
 // [TODO] 0x000A3FB0 sub_000A3FB0 (505 B)
 // [TODO] 0x000A41B0 sub_000A41B0 (363 B)
@@ -5918,7 +8144,37 @@ VehiclePropAttachmentBehaviour* VehiclePropAttachmentBehaviour::vfunc_00(int a1)
 // [TODO] 0x000A9B80 sub_000A9B80 (122 B)
 // [TODO] 0x000A9C00 sub_000A9C00 (91 B)
 // [TODO] 0x000A9C60 sub_000A9C60 (313 B)
-// [TODO] 0x000A9DA0 VehicleZoneControlBehaviour::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] VehicleZoneControlBehaviour::vfunc_01 (0x000A9DA0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleZoneControlBehaviour::vfunc_01 (0x000A9DA0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000A9670(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class VehicleZoneControlBehaviour
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VehicleZoneControlBehaviour* vfunc_01(int a1);
+};
+
+VehicleZoneControlBehaviour* VehicleZoneControlBehaviour::vfunc_01(int a1)
+{
+    sub_000A9670();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000A9DC0 sub_000A9DC0 (285 B)
 // [TODO] 0x000A9EE0 sub_000A9EE0 (471 B)
 // [TODO] 0x000AA0C0 VehicleZoneControlBehaviour::vfunc_00 (377 B)
@@ -6295,7 +8551,23 @@ void* ScriptContextProperties::vfunc_00()
 // [TODO] 0x000B84A0 sub_000B84A0 (150 B)
 // [TODO] 0x000B8540 sub_000B8540 (166 B)
 // [TODO] 0x000B85F0 sub_000B85F0 (80 B)
-// [TODO] 0x000B8640 sub_000B8640 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000B8640 (0x000B8640, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000B8640 (0x000B8640, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00459500;
+
+int __cdecl sub_000B8640(void)
+{
+    return DAT_00459500;
+}
+
 // [TODO] 0x000B8650 sub_000B8650 (55 B)
 // [TODO] 0x000B8690 sub_000B8690 (93 B)
 // [TODO] 0x000B86F0 sub_000B86F0 (88 B)
@@ -6385,7 +8657,23 @@ void* SaveGameController::vfunc_00()
     return DAT_003FF558;
 }
 
-// [TODO] 0x000B9340 sub_000B9340 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000B9340 (0x000B9340, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000B9340 (0x000B9340, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00459518;
+
+int __cdecl sub_000B9340(void)
+{
+    return DAT_00459518;
+}
+
 // [TODO] 0x000B9350 sub_000B9350 (38 B)
 // [TODO] 0x000B9380 sub_000B9380 (8 B)
 // [TODO] 0x000B93B0 sub_000B93B0 (8 B)
@@ -6437,11 +8725,63 @@ void* SaveGameObject::vfunc_00()
 // [TODO] 0x000BA000 sub_000BA000 (68 B)
 // [TODO] 0x000BA050 sub_000BA050 (68 B)
 // [TODO] 0x000BA0A0 sub_000BA0A0 (163 B)
-// [TODO] 0x000BA150 sub_000BA150 (5 B)
+// ============================================================================
+// [VERIFIED] sub_000BA150 (0x000BA150, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000BA150 (0x000BA150, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000BA0A0(void);
+
+class Class_000BA150
+{
+public:
+    void sub_000BA150();
+};
+
+void Class_000BA150::sub_000BA150()
+{
+    sub_000BA0A0();
+}
+
 // [TODO] 0x000BA160 sub_000BA160 (58 B)
 // [TODO] 0x000BA1A0 sub_000BA1A0 (75 B)
 // [TODO] 0x000BA1F0 sub_000BA1F0 (67 B)
-// [TODO] 0x000BA240 SaveGameObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] SaveGameObject::vfunc_01 (0x000BA240, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// SaveGameObject::vfunc_01 (0x000BA240, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000B99A0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class SaveGameObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual SaveGameObject* vfunc_01(int a1);
+};
+
+SaveGameObject* SaveGameObject::vfunc_01(int a1)
+{
+    sub_000B99A0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000BA260 SaveGameObject::vfunc_02 (173 B)
 // [TODO] 0x000BA310 sub_000BA310 (237 B)
 // [TODO] 0x000BA400 sub_000BA400 (66 B)
@@ -6480,7 +8820,38 @@ void* SaveGameObject::vfunc_00()
 // [TODO] 0x000BB8D0 SubtitleManager::SubtitleFlowClient::vfunc_02 (58 B)
 // [TODO] 0x000BB910 sub_000BB910 (187 B)
 // [TODO] 0x000BB9D0 sub_000BB9D0 (623 B)
-// [TODO] 0x000BBC40 SubtitleManager::SubtitleFlowClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] SubtitleManager::SubtitleFlowClient::vfunc_00 (0x000BBC40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// SubtitleManager::SubtitleFlowClient::vfunc_00 (0x000BBC40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000BB910(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace SubtitleManager {
+
+class SubtitleFlowClient
+{
+public:
+    virtual SubtitleFlowClient* vfunc_00(int a1);
+};
+
+SubtitleFlowClient* SubtitleFlowClient::vfunc_00(int a1)
+{
+    sub_000BB910();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x000BBC90 sub_000BBC90 (126 B)
 // [TODO] 0x000BBD10 sub_000BBD10 (99 B)
 // [TODO] 0x000BBD90 sub_000BBD90 (20 B)
@@ -6506,14 +8877,74 @@ void* SaveGameObject::vfunc_00()
 // [TODO] 0x000BC9E0 sub_000BC9E0 (104 B)
 // [TODO] 0x000BCA50 sub_000BCA50 (71 B)
 // [TODO] 0x000BCAA0 sub_000BCAA0 (78 B)
-// [TODO] 0x000BCAF0 NISStreamDataLoader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] NISStreamDataLoader::vfunc_03 (0x000BCAF0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISStreamDataLoader::vfunc_03 (0x000BCAF0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F7E30(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+class NISStreamDataLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual NISStreamDataLoader* vfunc_03(int a1);
+};
+
+NISStreamDataLoader* NISStreamDataLoader::vfunc_03(int a1)
+{
+    sub_001F7E30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000BCB10 sub_000BCB10 (122 B)
 // [TODO] 0x000BCB90 sub_000BCB90 (660 B)
 // [TODO] 0x000BCE30 sub_000BCE30 (561 B)
 // [TODO] 0x000BD070 sub_000BD070 (175 B)
 // [TODO] 0x000BD120 NISManager::vfunc_02 (116 B)
 // [TODO] 0x000BD1A0 NISManager::vfunc_03 (146 B)
-// [TODO] 0x000BD270 NISManager::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] NISManager::vfunc_00 (0x000BD270, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISManager::vfunc_00 (0x000BD270, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000BD070(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class NISManager
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual NISManager* vfunc_00(int a1);
+};
+
+NISManager* NISManager::vfunc_00(int a1)
+{
+    sub_000BD070();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000BD290 NISPackageLoader::vfunc_06 (97 B)
 // [TODO] 0x000BD300 NISPackage::vfunc_00 (7 B)
 // [TODO] 0x000BD310 NISPackage::vfunc_01 (27 B)
@@ -6523,7 +8954,37 @@ void* SaveGameObject::vfunc_00()
 // [TODO] 0x000BD480 sub_000BD480 (817 B)
 // [TODO] 0x000BD7C0 sub_000BD7C0 (206 B)
 // [TODO] 0x000BD890 sub_000BD890 (194 B)
-// [TODO] 0x000BD960 NISPackage::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] NISPackage::vfunc_03 (0x000BD960, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISPackage::vfunc_03 (0x000BD960, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000BD7C0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class NISPackage
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual NISPackage* vfunc_03(int a1);
+};
+
+NISPackage* NISPackage::vfunc_03(int a1)
+{
+    sub_000BD7C0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000BD980 sub_000BD980 (412 B)
 // [TODO] 0x000BDB20 sub_000BDB20 (164 B)
 // [TODO] 0x000BDBD0 sub_000BDBD0 (15 B)
@@ -6540,7 +9001,37 @@ void* SaveGameObject::vfunc_00()
 // [TODO] 0x000BDFE0 sub_000BDFE0 (287 B)
 // [TODO] 0x000BE100 sub_000BE100 (121 B)
 // [TODO] 0x000BE180 sub_000BE180 (95 B)
-// [TODO] 0x000BE1E0 NISPartition::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] NISPartition::vfunc_00 (0x000BE1E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISPartition::vfunc_00 (0x000BE1E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000BE180(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class NISPartition
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual NISPartition* vfunc_00(int a1);
+};
+
+NISPartition* NISPartition::vfunc_00(int a1)
+{
+    sub_000BE180();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000BE200 sub_000BE200 (44 B)
 // [TODO] 0x000BE230 sub_000BE230 (14 B)
 // [TODO] 0x000BE240 sub_000BE240 (7 B)
@@ -6697,7 +9188,23 @@ void* SaveGameObject::vfunc_00()
 // [TODO] 0x000C6420 sub_000C6420 (67 B)
 // [TODO] 0x000C6470 sub_000C6470 (51 B)
 // [TODO] 0x000C64B0 sub_000C64B0 (7 B)
-// [TODO] 0x000C64C0 sub_000C64C0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000C64C0 (0x000C64C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000C64C0 (0x000C64C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00459CD8;
+
+int __cdecl sub_000C64C0(void)
+{
+    return DAT_00459CD8;
+}
+
 // [TODO] 0x000C64D0 sub_000C64D0 (16 B)
 // [TODO] 0x000C64E0 sub_000C64E0 (24 B)
 // [TODO] 0x000C6500 sub_000C6500 (19 B)
@@ -6829,13 +9336,67 @@ void* SaveGameObject::vfunc_00()
 // [TODO] 0x000CB4A0 MeleeGetHitDirectionCondition::vfunc_08 (25 B)
 // [TODO] 0x000CB4C0 sub_000CB4C0 (25 B)
 // [TODO] 0x000CB4E0 MeleeGetHitTypeCondition::vfunc_08 (25 B)
-// [TODO] 0x000CB500 sub_000CB500 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000CB500 (0x000CB500, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000CB500 (0x000CB500, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459E54[];
+extern "C" char DAT_00459E58[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000CB500(void)
+{
+    sub_001FC310((int)DAT_00459E54, (int)DAT_00459E58);
+}
+
 // [TODO] 0x000CB520 SpeedCondition::vfunc_08 (16 B)
 // [TODO] 0x000CB530 sub_000CB530 (33 B)
-// [TODO] 0x000CB560 sub_000CB560 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000CB560 (0x000CB560, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000CB560 (0x000CB560, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459E5C[];
+extern "C" char DAT_00459E60[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000CB560(void)
+{
+    sub_001FC310((int)DAT_00459E5C, (int)DAT_00459E60);
+}
+
 // [TODO] 0x000CB580 DistanceToTargetCondition::vfunc_08 (16 B)
 // [TODO] 0x000CB590 sub_000CB590 (33 B)
-// [TODO] 0x000CB5C0 sub_000CB5C0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000CB5C0 (0x000CB5C0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000CB5C0 (0x000CB5C0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459E64[];
+extern "C" char DAT_00459E68[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000CB5C0(void)
+{
+    sub_001FC310((int)DAT_00459E64, (int)DAT_00459E68);
+}
+
 // [TODO] 0x000CB5E0 WeaponGroupCondition::vfunc_08 (16 B)
 // [TODO] 0x000CB5F0 sub_000CB5F0 (25 B)
 // [TODO] 0x000CB620 sub_000CB620 (31 B)
@@ -7323,80 +9884,1517 @@ ButtonEventCondition* ButtonEventCondition::vfunc_03(int a1)
 // [TODO] 0x000CC5A0 sub_000CC5A0 (8 B)
 // [TODO] 0x000CC5B0 sub_000CC5B0 (155 B)
 // [TODO] 0x000CC650 sub_000CC650 (133 B)
-// [TODO] 0x000CC6E0 fight::ConditionFactory::vfunc_03 (30 B)
-// [TODO] 0x000CC700 fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactory::vfunc_03 (0x000CC6E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactory::vfunc_03 (0x000CC6E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F7900(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace fight {
+
+class ConditionFactory
+{
+public:
+    virtual ConditionFactory* vfunc_03(int a1);
+};
+
+ConditionFactory* ConditionFactory::vfunc_03(int a1)
+{
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000CC700, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000CC700, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00385F68[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class AnimationStateCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<AnimationStateCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<AnimationStateCondition>* fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00385F68;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CC730 fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CC770 fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>::vfunc_03 (0x000CC770, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>::vfunc_03 (0x000CC770, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00385F8C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class UpperBodyAnimStateCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<UpperBodyAnimStateCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>* fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00385F8C;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CC7A0 fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CC7E0 fight::ConditionFactoryTemplate<CharacterTypeCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<CharacterTypeCondition>::vfunc_03 (0x000CC7E0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<CharacterTypeCondition>::vfunc_03 (0x000CC7E0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00385FB0[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class CharacterTypeCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<CharacterTypeCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<CharacterTypeCondition>* fight::ConditionFactoryTemplate<CharacterTypeCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00385FB0;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CC810 fight::ConditionFactoryTemplate<CharacterTypeCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CC850 fight::ConditionFactoryTemplate<LocomotionTypeCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<LocomotionTypeCondition>::vfunc_03 (0x000CC850, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<LocomotionTypeCondition>::vfunc_03 (0x000CC850, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00385FD4[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class LocomotionTypeCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<LocomotionTypeCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<LocomotionTypeCondition>* fight::ConditionFactoryTemplate<LocomotionTypeCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00385FD4;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CC880 fight::ConditionFactoryTemplate<LocomotionTypeCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CC8C0 fight::ConditionFactoryTemplate<ConversationTypeCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<ConversationTypeCondition>::vfunc_03 (0x000CC8C0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<ConversationTypeCondition>::vfunc_03 (0x000CC8C0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00385FF8[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class ConversationTypeCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<ConversationTypeCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<ConversationTypeCondition>* fight::ConditionFactoryTemplate<ConversationTypeCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00385FF8;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CC8F0 fight::ConditionFactoryTemplate<ConversationTypeCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CC930 fight::ConditionFactoryTemplate<AlertStatusCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<AlertStatusCondition>::vfunc_03 (0x000CC930, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<AlertStatusCondition>::vfunc_03 (0x000CC930, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038601C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class AlertStatusCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<AlertStatusCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<AlertStatusCondition>* fight::ConditionFactoryTemplate<AlertStatusCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0038601C;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CC960 fight::ConditionFactoryTemplate<AlertStatusCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CC9A0 fight::ConditionFactoryTemplate<IsCrouchingCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<IsCrouchingCondition>::vfunc_03 (0x000CC9A0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<IsCrouchingCondition>::vfunc_03 (0x000CC9A0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386040[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class IsCrouchingCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<IsCrouchingCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<IsCrouchingCondition>* fight::ConditionFactoryTemplate<IsCrouchingCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386040;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CC9D0 fight::ConditionFactoryTemplate<IsCrouchingCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCA10 fight::ConditionFactoryTemplate<IsCrouchRunCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<IsCrouchRunCondition>::vfunc_03 (0x000CCA10, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<IsCrouchRunCondition>::vfunc_03 (0x000CCA10, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386064[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class IsCrouchRunCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<IsCrouchRunCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<IsCrouchRunCondition>* fight::ConditionFactoryTemplate<IsCrouchRunCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386064;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCA40 fight::ConditionFactoryTemplate<IsCrouchRunCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCA80 fight::ConditionFactoryTemplate<IsInjuredCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<IsInjuredCondition>::vfunc_03 (0x000CCA80, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<IsInjuredCondition>::vfunc_03 (0x000CCA80, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386088[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class IsInjuredCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<IsInjuredCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<IsInjuredCondition>* fight::ConditionFactoryTemplate<IsInjuredCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386088;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCAB0 fight::ConditionFactoryTemplate<IsInjuredCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCAF0 fight::ConditionFactoryTemplate<IsWeaponRaised>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<IsWeaponRaised>::vfunc_03 (0x000CCAF0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<IsWeaponRaised>::vfunc_03 (0x000CCAF0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003860AC[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class IsWeaponRaised;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<IsWeaponRaised>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<IsWeaponRaised>* fight::ConditionFactoryTemplate<IsWeaponRaised>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003860AC;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCB20 fight::ConditionFactoryTemplate<IsWeaponRaised>::vfunc_07 (52 B)
-// [TODO] 0x000CCB60 fight::ConditionFactoryTemplate<IsRageMode>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<IsRageMode>::vfunc_03 (0x000CCB60, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<IsRageMode>::vfunc_03 (0x000CCB60, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003860D0[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class IsRageMode;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<IsRageMode>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<IsRageMode>* fight::ConditionFactoryTemplate<IsRageMode>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003860D0;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCB90 fight::ConditionFactoryTemplate<IsRageMode>::vfunc_07 (52 B)
-// [TODO] 0x000CCBD0 fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_03 (0x000CCBD0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_03 (0x000CCBD0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003860F4[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class DirectionalGetHitCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<DirectionalGetHitCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<DirectionalGetHitCondition>* fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003860F4;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCC00 fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCC40 fight::ConditionFactoryTemplate<DistanceToTargetCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<DistanceToTargetCondition>::vfunc_03 (0x000CCC40, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<DistanceToTargetCondition>::vfunc_03 (0x000CCC40, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386118[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000CB560(void);
+
+class DistanceToTargetCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<DistanceToTargetCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<DistanceToTargetCondition>* fight::ConditionFactoryTemplate<DistanceToTargetCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386118;
+    sub_000CB560();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCC70 fight::ConditionFactoryTemplate<DistanceToTargetCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCCB0 fight::ConditionFactoryTemplate<WeaponGroupCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<WeaponGroupCondition>::vfunc_03 (0x000CCCB0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<WeaponGroupCondition>::vfunc_03 (0x000CCCB0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038613C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000CB5C0(void);
+
+class WeaponGroupCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<WeaponGroupCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<WeaponGroupCondition>* fight::ConditionFactoryTemplate<WeaponGroupCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0038613C;
+    sub_000CB5C0();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCCE0 fight::ConditionFactoryTemplate<WeaponGroupCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCD20 fight::ConditionFactoryTemplate<ButtonEventCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<ButtonEventCondition>::vfunc_03 (0x000CCD20, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<ButtonEventCondition>::vfunc_03 (0x000CCD20, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386160[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class ButtonEventCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<ButtonEventCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<ButtonEventCondition>* fight::ConditionFactoryTemplate<ButtonEventCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386160;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCD50 fight::ConditionFactoryTemplate<ButtonEventCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCD90 fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>::vfunc_03 (0x000CCD90, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>::vfunc_03 (0x000CCD90, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386184[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class MeleeAttackDirectionCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<MeleeAttackDirectionCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>* fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386184;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCDC0 fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCE00 fight::ConditionFactoryTemplate<MeleeGetHitTypeCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<MeleeGetHitTypeCondition>::vfunc_03 (0x000CCE00, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<MeleeGetHitTypeCondition>::vfunc_03 (0x000CCE00, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003861A8[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class MeleeGetHitTypeCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<MeleeGetHitTypeCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<MeleeGetHitTypeCondition>* fight::ConditionFactoryTemplate<MeleeGetHitTypeCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003861A8;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCE30 fight::ConditionFactoryTemplate<MeleeGetHitTypeCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCE70 fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>::vfunc_03 (0x000CCE70, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>::vfunc_03 (0x000CCE70, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003861CC[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class MeleeGetHitDirectionCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<MeleeGetHitDirectionCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>* fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003861CC;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCEA0 fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCEE0 fight::ConditionFactoryTemplate<SpeedCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<SpeedCondition>::vfunc_03 (0x000CCEE0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<SpeedCondition>::vfunc_03 (0x000CCEE0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003861F0[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000CB500(void);
+
+class SpeedCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<SpeedCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<SpeedCondition>* fight::ConditionFactoryTemplate<SpeedCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003861F0;
+    sub_000CB500();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCF10 fight::ConditionFactoryTemplate<SpeedCondition>::vfunc_07 (52 B)
-// [TODO] 0x000CCF50 fight::TrackFactoryTemplate<AnimationTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<AnimationTrack>::vfunc_03 (0x000CCF50, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<AnimationTrack>::vfunc_03 (0x000CCF50, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386214[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D4E80(void);
+
+class AnimationTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<AnimationTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<AnimationTrack>* fight::TrackFactoryTemplate<AnimationTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386214;
+    sub_000D4E80();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCF80 fight::TrackFactoryTemplate<AnimationTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CCFC0 fight::TrackFactoryTemplate<Animation360Track>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<Animation360Track>::vfunc_03 (0x000CCFC0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<Animation360Track>::vfunc_03 (0x000CCFC0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386238[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D4CF0(void);
+
+class Animation360Track;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<Animation360Track>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<Animation360Track>* fight::TrackFactoryTemplate<Animation360Track>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386238;
+    sub_000D4CF0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CCFF0 fight::TrackFactoryTemplate<Animation360Track>::vfunc_07 (52 B)
-// [TODO] 0x000CD030 fight::TrackFactoryTemplate<AnimationRewinderTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<AnimationRewinderTrack>::vfunc_03 (0x000CD030, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<AnimationRewinderTrack>::vfunc_03 (0x000CD030, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038625C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D58A0(void);
+
+class AnimationRewinderTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<AnimationRewinderTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<AnimationRewinderTrack>* fight::TrackFactoryTemplate<AnimationRewinderTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0038625C;
+    sub_000D58A0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD060 fight::TrackFactoryTemplate<AnimationRewinderTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD0A0 fight::TrackFactoryTemplate<LayeredAnimationTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<LayeredAnimationTrack>::vfunc_03 (0x000CD0A0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<LayeredAnimationTrack>::vfunc_03 (0x000CD0A0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386280[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D6EF0(void);
+
+class LayeredAnimationTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<LayeredAnimationTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<LayeredAnimationTrack>* fight::TrackFactoryTemplate<LayeredAnimationTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386280;
+    sub_000D6EF0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD0D0 fight::TrackFactoryTemplate<LayeredAnimationTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD110 fight::TrackFactoryTemplate<BlendTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<BlendTrack>::vfunc_03 (0x000CD110, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<BlendTrack>::vfunc_03 (0x000CD110, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003862A4[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D5AD0(void);
+
+class BlendTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<BlendTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<BlendTrack>* fight::TrackFactoryTemplate<BlendTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003862A4;
+    sub_000D5AD0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD140 fight::TrackFactoryTemplate<BlendTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD180 fight::TrackFactoryTemplate<JointCollisionTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<JointCollisionTrack>::vfunc_03 (0x000CD180, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<JointCollisionTrack>::vfunc_03 (0x000CD180, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003862C8[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class JointCollisionTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<JointCollisionTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<JointCollisionTrack>* fight::TrackFactoryTemplate<JointCollisionTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003862C8;
+    sub_001B7A10();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD1B0 fight::TrackFactoryTemplate<JointCollisionTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD1F0 fight::TrackFactoryTemplate<LocomotionTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<LocomotionTrack>::vfunc_03 (0x000CD1F0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<LocomotionTrack>::vfunc_03 (0x000CD1F0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003862EC[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class LocomotionTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<LocomotionTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<LocomotionTrack>* fight::TrackFactoryTemplate<LocomotionTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003862EC;
+    sub_001B7A10();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD220 fight::TrackFactoryTemplate<LocomotionTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD260 fight::TrackFactoryTemplate<LocomotionAnimDataTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<LocomotionAnimDataTrack>::vfunc_03 (0x000CD260, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<LocomotionAnimDataTrack>::vfunc_03 (0x000CD260, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386310[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class LocomotionAnimDataTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<LocomotionAnimDataTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<LocomotionAnimDataTrack>* fight::TrackFactoryTemplate<LocomotionAnimDataTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386310;
+    sub_001B7A10();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD290 fight::TrackFactoryTemplate<LocomotionAnimDataTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD2D0 fight::TrackFactoryTemplate<AnimationRetargetingTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<AnimationRetargetingTrack>::vfunc_03 (0x000CD2D0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<AnimationRetargetingTrack>::vfunc_03 (0x000CD2D0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386334[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D5220(void);
+
+class AnimationRetargetingTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<AnimationRetargetingTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<AnimationRetargetingTrack>* fight::TrackFactoryTemplate<AnimationRetargetingTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386334;
+    sub_000D5220();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD300 fight::TrackFactoryTemplate<AnimationRetargetingTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD340 fight::TrackFactoryTemplate<DismemberTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<DismemberTrack>::vfunc_03 (0x000CD340, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<DismemberTrack>::vfunc_03 (0x000CD340, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386358[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D5F90(void);
+
+class DismemberTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<DismemberTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<DismemberTrack>* fight::TrackFactoryTemplate<DismemberTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386358;
+    sub_000D5F90();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD370 fight::TrackFactoryTemplate<DismemberTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD3B0 fight::TrackFactoryTemplate<ExecScriptFunctionTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<ExecScriptFunctionTrack>::vfunc_03 (0x000CD3B0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<ExecScriptFunctionTrack>::vfunc_03 (0x000CD3B0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038637C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class ExecScriptFunctionTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<ExecScriptFunctionTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<ExecScriptFunctionTrack>* fight::TrackFactoryTemplate<ExecScriptFunctionTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0038637C;
+    sub_001B7A10();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD3E0 fight::TrackFactoryTemplate<ExecScriptFunctionTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD420 fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_03 (0x000CD420, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_03 (0x000CD420, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003863A0[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D6B60(void);
+
+class ExitConditionTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<ExitConditionTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<ExitConditionTrack>* fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003863A0;
+    sub_000D6B60();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD450 fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD490 fight::TrackFactoryTemplate<SoundCueTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<SoundCueTrack>::vfunc_03 (0x000CD490, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<SoundCueTrack>::vfunc_03 (0x000CD490, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003863C4[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D76A0(void);
+
+class SoundCueTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<SoundCueTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<SoundCueTrack>* fight::TrackFactoryTemplate<SoundCueTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003863C4;
+    sub_000D76A0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD4C0 fight::TrackFactoryTemplate<SoundCueTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD500 fight::TrackFactoryTemplate<SoundPlayTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<SoundPlayTrack>::vfunc_03 (0x000CD500, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<SoundPlayTrack>::vfunc_03 (0x000CD500, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003863E8[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D75E0(void);
+
+class SoundPlayTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<SoundPlayTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<SoundPlayTrack>* fight::TrackFactoryTemplate<SoundPlayTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003863E8;
+    sub_000D75E0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD530 fight::TrackFactoryTemplate<SoundPlayTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD570 fight::TrackFactoryTemplate<SoundFadeTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<SoundFadeTrack>::vfunc_03 (0x000CD570, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<SoundFadeTrack>::vfunc_03 (0x000CD570, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038640C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D7760(void);
+
+class SoundFadeTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<SoundFadeTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<SoundFadeTrack>* fight::TrackFactoryTemplate<SoundFadeTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0038640C;
+    sub_000D7760();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD5A0 fight::TrackFactoryTemplate<SoundFadeTrack>::vfunc_07 (55 B)
-// [TODO] 0x000CD5E0 fight::TrackFactoryTemplate<TargetAnimationTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<TargetAnimationTrack>::vfunc_03 (0x000CD5E0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<TargetAnimationTrack>::vfunc_03 (0x000CD5E0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386430[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class TargetAnimationTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<TargetAnimationTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<TargetAnimationTrack>* fight::TrackFactoryTemplate<TargetAnimationTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386430;
+    sub_001B7A10();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD610 fight::TrackFactoryTemplate<TargetAnimationTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD650 fight::TrackFactoryTemplate<CameraShakeTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<CameraShakeTrack>::vfunc_03 (0x000CD650, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<CameraShakeTrack>::vfunc_03 (0x000CD650, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386454[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D5C60(void);
+
+class CameraShakeTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<CameraShakeTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<CameraShakeTrack>* fight::TrackFactoryTemplate<CameraShakeTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386454;
+    sub_000D5C60();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD680 fight::TrackFactoryTemplate<CameraShakeTrack>::vfunc_07 (52 B)
-// [TODO] 0x000CD6C0 fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_03 (0x000CD6C0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_03 (0x000CD6C0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00386478[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_000D63A0(void);
+
+class DramaticCameraTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<DramaticCameraTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<DramaticCameraTrack>* fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00386478;
+    sub_000D63A0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000CD6F0 fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_07 (52 B)
 // [TODO] 0x000CD730 sub_000CD730 (1838 B)
 // [TODO] 0x000CDE60 sub_000CDE60 (1742 B)
@@ -7473,7 +11471,37 @@ SubAction* SubAction::vfunc_03(int a1)
 // [TODO] 0x000D0330 sub_000D0330 (80 B)
 // [TODO] 0x000D0380 AnimationAction::vfunc_06 (528 B)
 // [TODO] 0x000D0590 sub_000D0590 (100 B)
-// [TODO] 0x000D0600 AnimationAction::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] AnimationAction::vfunc_03 (0x000D0600, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AnimationAction::vfunc_03 (0x000D0600, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000D0330(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AnimationAction
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AnimationAction* vfunc_03(int a1);
+};
+
+AnimationAction* AnimationAction::vfunc_03(int a1)
+{
+    sub_000D0330();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000D0620 AnimationAction::vfunc_11 (1426 B)
 // [TODO] 0x000D0BC0 AnimationRetargetingAction::vfunc_07 (49 B)
 // [TODO] 0x000D0C00 FunctionDeclStmtNode::vfunc_02 (10 B)
@@ -7521,7 +11549,23 @@ SubAction* SubAction::vfunc_03(int a1)
 // [TODO] 0x000D30E0 LayeredAnimationAction::vfunc_07 (8 B)
 // [TODO] 0x000D30F0 sub_000D30F0 (77 B)
 // [TODO] 0x000D3140 LayeredAnimationAction::vfunc_03 (57 B)
-// [TODO] 0x000D3180 sub_000D3180 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000D3180 (0x000D3180, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D3180 (0x000D3180, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00459F48;
+
+int __cdecl sub_000D3180(void)
+{
+    return DAT_00459F48;
+}
+
 // [TODO] 0x000D31E0 LocomotionAction::vfunc_07 (73 B)
 // [TODO] 0x000D3230 LocomotionAction::vfunc_04 (69 B)
 // [TODO] 0x000D3280 sub_000D3280 (89 B)
@@ -7559,12 +11603,60 @@ SubAction* SubAction::vfunc_03(int a1)
 // [TODO] 0x000D48C0 sub_000D48C0 (177 B)
 // [TODO] 0x000D4980 sub_000D4980 (259 B)
 // [TODO] 0x000D4A90 sub_000D4A90 (75 B)
-// [TODO] 0x000D4AE0 TargetAnimationSet::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] TargetAnimationSet::vfunc_03 (0x000D4AE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// TargetAnimationSet::vfunc_03 (0x000D4AE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000D4870(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+class TargetAnimationSet
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TargetAnimationSet* vfunc_03(int a1);
+};
+
+TargetAnimationSet* TargetAnimationSet::vfunc_03(int a1)
+{
+    sub_000D4870();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000D4B00 sub_000D4B00 (106 B)
 // [TODO] 0x000D4B70 sub_000D4B70 (336 B)
 // [TODO] 0x000D4CC0 sub_000D4CC0 (32 B)
 // [TODO] 0x000D4CE0 Animation360Track::vfunc_33 (6 B)
-// [TODO] 0x000D4CF0 sub_000D4CF0 (19 B)
+// ============================================================================
+// [VERIFIED] sub_000D4CF0 (0x000D4CF0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DD260 (0x000DD260), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D4CF0 (0x000D4CF0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00459F5C[];
+extern "C" char DAT_00459F60[];
+extern "C" void __cdecl sub_001FC310(int, int);
+
+void __cdecl sub_000D4CF0(void)
+{
+    sub_001FC310((int)DAT_00459F5C, (int)DAT_00459F60);
+}
+
 // [TODO] 0x000D4D10 Animation360Track::vfunc_08 (16 B)
 // [TODO] 0x000D4D20 Animation360Track::vfunc_20 (42 B)
 // [TODO] 0x000D4D50 Animation360Track::vfunc_22 (36 B)
@@ -7959,7 +12051,23 @@ TargetAnimationTrack* TargetAnimationTrack::vfunc_03(int a1)
 // [TODO] 0x000D8D30 sub_000D8D30 (32 B)
 // [TODO] 0x000D8D50 sub_000D8D50 (252 B)
 // [TODO] 0x000D8E50 sub_000D8E50 (72 B)
-// [TODO] 0x000D8FA0 sub_000D8FA0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000D8FA0 (0x000D8FA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000D8FA0 (0x000D8FA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045B4FC;
+
+int __cdecl sub_000D8FA0(void)
+{
+    return DAT_0045B4FC;
+}
+
 // [TODO] 0x000D8FB0 sub_000D8FB0 (7242 B)
 // [TODO] 0x000D8FC0 sub_000D8FC0 (7276 B)
 // [TODO] 0x000D8FD0 sub_000D8FD0 (62 B)
@@ -7982,7 +12090,37 @@ TargetAnimationTrack* TargetAnimationTrack::vfunc_03(int a1)
 // [TODO] 0x000D99E0 sub_000D99E0 (75 B)
 // [TODO] 0x000D9A30 sub_000D9A30 (79 B)
 // [TODO] 0x000D9A80 sub_000D9A80 (132 B)
-// [TODO] 0x000D9B10 DataBroker::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] DataBroker::vfunc_00 (0x000D9B10, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// DataBroker::vfunc_00 (0x000D9B10, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000D98B0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class DataBroker
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual DataBroker* vfunc_00(int a1);
+};
+
+DataBroker* DataBroker::vfunc_00(int a1)
+{
+    sub_000D98B0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000D9B30 sub_000D9B30 (19 B)
 // [TODO] 0x000D9B50 sub_000D9B50 (38 B)
 // [TODO] 0x000D9B80 sub_000D9B80 (238 B)
@@ -8014,7 +12152,23 @@ TargetAnimationTrack* TargetAnimationTrack::vfunc_03(int a1)
 // [TODO] 0x000DAB90 GameDatabase::vfunc_00 (59 B)
 // [TODO] 0x000DAC30 sub_000DAC30 (2068 B)
 // [TODO] 0x000DB850 sub_000DB850 (11 B)
-// [TODO] 0x000DB860 sub_000DB860 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000DB860 (0x000DB860, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000DB860 (0x000DB860, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045B950;
+
+int __cdecl sub_000DB860(void)
+{
+    return DAT_0045B950;
+}
+
 // [TODO] 0x000DB870 sub_000DB870 (19 B)
 // [TODO] 0x000DB890 sub_000DB890 (92 B)
 // [TODO] 0x000DB8F0 WeaponStreamingClient::vfunc_02 (26 B)
@@ -8024,7 +12178,37 @@ TargetAnimationTrack* TargetAnimationTrack::vfunc_03(int a1)
 // [TODO] 0x000DBB90 sub_000DBB90 (92 B)
 // [TODO] 0x000DBBF0 WeaponAnimationSlotCommunicator::vfunc_01 (439 B)
 // [TODO] 0x000DBDB0 sub_000DBDB0 (167 B)
-// [TODO] 0x000DBE60 WeaponStreamingClient::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] WeaponStreamingClient::vfunc_00 (0x000DBE60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// WeaponStreamingClient::vfunc_00 (0x000DBE60, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000DBB90(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class WeaponStreamingClient
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual WeaponStreamingClient* vfunc_00(int a1);
+};
+
+WeaponStreamingClient* WeaponStreamingClient::vfunc_00(int a1)
+{
+    sub_000DBB90();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000DBE80 sub_000DBE80 (21 B)
 // [TODO] 0x000DBEA0 sub_000DBEA0 (37 B)
 // [TODO] 0x000DBED0 sub_000DBED0 (8 B)
@@ -8062,7 +12246,37 @@ void* AIActionTreeCreatingTask::vfunc_00()
     return DAT_00403D18;
 }
 
-// [TODO] 0x000DC4E0 AIActionTreeCreatingTask::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AIActionTreeCreatingTask::vfunc_01 (0x000DC4E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIActionTreeCreatingTask::vfunc_01 (0x000DC4E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000DC500(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AIActionTreeCreatingTask
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AIActionTreeCreatingTask* vfunc_01(int a1);
+};
+
+AIActionTreeCreatingTask* AIActionTreeCreatingTask::vfunc_01(int a1)
+{
+    sub_000DC500();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000DC500 sub_000DC500 (77 B)
 // [TODO] 0x000DC550 PedestriansSmartCollection::vfunc_01 (17 B)
 // [TODO] 0x000DC570 DriversSmartCollection::vfunc_01 (18 B)
@@ -8263,7 +12477,29 @@ void* AIActionTreeCreatingTask::vfunc_00()
 // [TODO] 0x000E8390 sub_000E8390 (425 B)
 // [TODO] 0x000E8540 sub_000E8540 (465 B)
 // [TODO] 0x000E8720 sub_000E8720 (2869 B)
-// [TODO] 0x000E9260 sub_000E9260 (5 B)
+// ============================================================================
+// [VERIFIED] sub_000E9260 (0x000E9260, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000E9260 (0x000E9260, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000E8540(void);
+
+class Class_000E9260
+{
+public:
+    void sub_000E9260();
+};
+
+void Class_000E9260::sub_000E9260()
+{
+    sub_000E8540();
+}
+
 // [TODO] 0x000E9270 sub_000E9270 (112 B)
 // [TODO] 0x000E92E0 sub_000E92E0 (2823 B)
 // [TODO] 0x000E9DF0 sub_000E9DF0 (265 B)
@@ -8295,7 +12531,37 @@ void* AIBehavior::vfunc_00()
 }
 
 // [TODO] 0x000EA6B0 sub_000EA6B0 (2085 B)
-// [TODO] 0x000EAEE0 AIBehavior::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AIBehavior::vfunc_01 (0x000EAEE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIBehavior::vfunc_01 (0x000EAEE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000EA510(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AIBehavior
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AIBehavior* vfunc_01(int a1);
+};
+
+AIBehavior* AIBehavior::vfunc_01(int a1)
+{
+    sub_000EA510();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000EAF00 sub_000EAF00 (614 B)
 // [TODO] 0x000EB170 sub_000EB170 (379 B)
 // [TODO] 0x000EB2F0 sub_000EB2F0 (220 B)
@@ -8383,7 +12649,37 @@ void* AIStimulusTable::vfunc_00()
 // [TODO] 0x000EE000 sub_000EE000 (136 B)
 // [TODO] 0x000EE090 sub_000EE090 (262 B)
 // [TODO] 0x000EE1A0 sub_000EE1A0 (117 B)
-// [TODO] 0x000EE220 AIStimulusTable::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AIStimulusTable::vfunc_01 (0x000EE220, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIStimulusTable::vfunc_01 (0x000EE220, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000EDC40(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AIStimulusTable
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AIStimulusTable* vfunc_01(int a1);
+};
+
+AIStimulusTable* AIStimulusTable::vfunc_01(int a1)
+{
+    sub_000EDC40();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000EE240 sub_000EE240 (30 B)
 // [TODO] 0x000EE260 sub_000EE260 (60 B)
 // [TODO] 0x000EE2A0 sub_000EE2A0 (17 B)
@@ -8655,7 +12951,37 @@ void* AITask_FleeFromExplodingCar::vfunc_00()
 
 // [TODO] 0x000F0DA0 AITask_FleeFromExplodingCar::vfunc_01 (51 B)
 // [TODO] 0x000F0DE0 AITask_FleeFromPosition::vfunc_01 (59 B)
-// [TODO] 0x000F0E20 AITask_FleeWhenOutGunned::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AITask_FleeWhenOutGunned::vfunc_01 (0x000F0E20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_FleeWhenOutGunned::vfunc_01 (0x000F0E20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000F0E40(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AITask_FleeWhenOutGunned
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AITask_FleeWhenOutGunned* vfunc_01(int a1);
+};
+
+AITask_FleeWhenOutGunned* AITask_FleeWhenOutGunned::vfunc_01(int a1)
+{
+    sub_000F0E40();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000F0E40 sub_000F0E40 (103 B)
 // [TODO] 0x000F0EB0 AITask_IdleAction::vfunc_39 (71 B)
 // [TODO] 0x000F0F00 AITask_IdleAction::vfunc_34 (11 B)
@@ -8773,7 +13099,29 @@ void* AITask_PedTraffic::vfunc_00()
     return DAT_00404138;
 }
 
-// [TODO] 0x000F2930 sub_000F2930 (5 B)
+// ============================================================================
+// [VERIFIED] sub_000F2930 (0x000F2930, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000F2930 (0x000F2930, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000F26E0(void);
+
+class Class_000F2930
+{
+public:
+    void sub_000F2930();
+};
+
+void Class_000F2930::sub_000F2930()
+{
+    sub_000F26E0();
+}
+
 // [TODO] 0x000F2940 AITask_PedFlee::vfunc_01 (51 B)
 // [TODO] 0x000F2980 sub_000F2980 (81 B)
 // [TODO] 0x000F29E0 AITask_PedFlee::vfunc_34 (287 B)
@@ -8927,7 +13275,37 @@ void* AITask_SharkWander::vfunc_00()
 // [TODO] 0x000F3920 AITask_SharkInteractWithSwimmer::vfunc_36 (13 B)
 // [TODO] 0x000F3930 AITask_SharkInteractWithSwimmer::vfunc_38 (187 B)
 // [TODO] 0x000F39F0 sub_000F39F0 (239 B)
-// [TODO] 0x000F3AE0 AITask_Chicken::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AITask_Chicken::vfunc_01 (0x000F3AE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_Chicken::vfunc_01 (0x000F3AE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000DC430(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AITask_Chicken
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AITask_Chicken* vfunc_01(int a1);
+};
+
+AITask_Chicken* AITask_Chicken::vfunc_01(int a1)
+{
+    sub_000DC430();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000F3B00 sub_000F3B00 (117 B)
 // [TODO] 0x000F3B80 AITask_SharkInteractWithSwimmer::vfunc_37 (44 B)
 // [TODO] 0x000F3BB0 AITask_Patrol::vfunc_35 (16 B)
@@ -9068,7 +13446,23 @@ void* AITask_DummyInVehicle::vfunc_00()
 // [TODO] 0x000F5120 AITask_Engage::vfunc_01 (65 B)
 // [TODO] 0x000F5170 AITask_DestroyObject::vfunc_01 (65 B)
 // [TODO] 0x000F51C0 AITask_Patrol::vfunc_01 (73 B)
-// [TODO] 0x000F5210 sub_000F5210 (6 B)
+// ============================================================================
+// [VERIFIED] sub_000F5210 (0x000F5210, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000F5210 (0x000F5210, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045BB50;
+
+int __cdecl sub_000F5210(void)
+{
+    return DAT_0045BB50;
+}
+
 // [TODO] 0x000F5220 sub_000F5220 (91 B)
 // [TODO] 0x000F5280 sub_000F5280 (177 B)
 // [TODO] 0x000F5340 sub_000F5340 (59 B)
@@ -9353,7 +13747,29 @@ void* AttractPoint::vfunc_00()
 // [TODO] 0x000F7C90 sub_000F7C90 (172 B)
 // [TODO] 0x000F7D40 sub_000F7D40 (61 B)
 // [TODO] 0x000F7D80 sub_000F7D80 (19 B)
-// [TODO] 0x000F7DA0 sub_000F7DA0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_000F7DA0 (0x000F7DA0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000F7DA0 (0x000F7DA0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00027270(void);
+
+class Class_000F7DA0
+{
+public:
+    void sub_000F7DA0();
+};
+
+void Class_000F7DA0::sub_000F7DA0()
+{
+    sub_00027270();
+}
+
 // [TODO] 0x000F7DE0 sub_000F7DE0 (39 B)
 // [TODO] 0x000F7E70 sub_000F7E70 (54 B)
 // [TODO] 0x000F7EB0 sub_000F7EB0 (157 B)
@@ -9395,7 +13811,37 @@ void* AttractPoint::vfunc_00()
 // [TODO] 0x000F91A0 sub_000F91A0 (101 B)
 // [TODO] 0x000F9210 sub_000F9210 (117 B)
 // [TODO] 0x000F9290 sub_000F9290 (176 B)
-// [TODO] 0x000F9340 AttractPoint::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AttractPoint::vfunc_01 (0x000F9340, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AttractPoint::vfunc_01 (0x000F9340, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000F8C60(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AttractPoint
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AttractPoint* vfunc_01(int a1);
+};
+
+AttractPoint* AttractPoint::vfunc_01(int a1)
+{
+    sub_000F8C60();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x000F9360 sub_000F9360 (148 B)
 // [TODO] 0x000F9400 sub_000F9400 (20 B)
 // [TODO] 0x000F9420 sub_000F9420 (239 B)
@@ -10698,9 +15144,71 @@ template <> void ConcreteClassRep<AITask_BumpReflex>::vfunc_02()
 // [TODO] 0x001007F0 ConcreteClassRep<AITask_CopChallenge>::vfunc_01 (43 B)
 // [TODO] 0x00100820 ConcreteClassRep<AITask_CopChallenge>::vfunc_02 (61 B)
 // [TODO] 0x00100860 ConcreteClassRep<AITask_DealerAttractTony>::vfunc_01 (40 B)
-// [TODO] 0x00100890 ConcreteClassRep<AITask_DealerAttractTony>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_DealerAttractTony>::vfunc_02 (0x00100890, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_DealerAttractTony>::vfunc_02 (0x00100890, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040436C;
+extern "C" int DAT_00404370;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_DealerAttractTony;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_DealerAttractTony>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_0040436C);
+    DAT_00404370 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x001008B0 ConcreteClassRep<AITask_DealerWarnTony>::vfunc_01 (40 B)
-// [TODO] 0x001008E0 ConcreteClassRep<AITask_DealerWarnTony>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_DealerWarnTony>::vfunc_02 (0x001008E0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_DealerWarnTony>::vfunc_02 (0x001008E0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00404398;
+extern "C" int DAT_0040439C;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_DealerWarnTony;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_DealerWarnTony>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00404398);
+    DAT_0040439C = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100900 ConcreteClassRep<AITask_FollowActor>::vfunc_01 (40 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AITask_FollowActor>::vfunc_02 (0x00100930, 36 B)
@@ -10737,32 +15245,466 @@ template <> void ConcreteClassRep<AITask_FollowActor>::vfunc_02()
 }
 
 // [TODO] 0x00100960 ConcreteClassRep<AITask_ForcedIntimidation>::vfunc_01 (40 B)
-// [TODO] 0x00100990 ConcreteClassRep<AITask_IdleChatInitiate>::vfunc_02 (32 B)
-// [TODO] 0x001009B0 ConcreteClassRep<AITask_ProvokeAnotherPed>::vfunc_02 (32 B)
-// [TODO] 0x001009D0 ConcreteClassRep<AITask_IdleChatResponse>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_IdleChatInitiate>::vfunc_02 (0x00100990, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_IdleChatInitiate>::vfunc_02 (0x00100990, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00403EC8;
+extern "C" int DAT_00403ECC;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_IdleChatInitiate;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_IdleChatInitiate>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00403EC8);
+    DAT_00403ECC = (int)DAT_00403ADC;
+}
+
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_ProvokeAnotherPed>::vfunc_02 (0x001009B0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_ProvokeAnotherPed>::vfunc_02 (0x001009B0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00403EF4;
+extern "C" int DAT_00403EF8;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_ProvokeAnotherPed;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_ProvokeAnotherPed>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00403EF4);
+    DAT_00403EF8 = (int)DAT_00403ADC;
+}
+
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_IdleChatResponse>::vfunc_02 (0x001009D0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_IdleChatResponse>::vfunc_02 (0x001009D0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00403E9C;
+extern "C" int DAT_00403EA0;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_IdleChatResponse;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_IdleChatResponse>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00403E9C);
+    DAT_00403EA0 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x001009F0 ConcreteClassRep<AITask_MonitorCustomLoopState>::vfunc_01 (43 B)
-// [TODO] 0x00100A20 ConcreteClassRep<AITask_MonitorCustomLoopState>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_MonitorCustomLoopState>::vfunc_02 (0x00100A20, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_MonitorCustomLoopState>::vfunc_02 (0x00100A20, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004042BC;
+extern "C" int DAT_004042C0;
+extern "C" char DAT_00403D18[];
+extern "C" int DAT_00403D3C;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_MonitorCustomLoopState;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_MonitorCustomLoopState>::vfunc_02()
+{
+    sub_000660D0(DAT_00403D3C, DAT_004042BC);
+    DAT_004042C0 = (int)DAT_00403D18;
+}
+
 // [TODO] 0x00100A40 ConcreteClassRep<AITask_ReactToVisibleGun>::vfunc_01 (43 B)
-// [TODO] 0x00100A70 ConcreteClassRep<AITask_ReactToVisibleGun>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_ReactToVisibleGun>::vfunc_02 (0x00100A70, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_ReactToVisibleGun>::vfunc_02 (0x00100A70, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00403FD0;
+extern "C" int DAT_00403FD4;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_ReactToVisibleGun;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_ReactToVisibleGun>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00403FD0);
+    DAT_00403FD4 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100A90 ConcreteClassRep<AITask_WatchDangerSource>::vfunc_01 (43 B)
-// [TODO] 0x00100AC0 ConcreteClassRep<AITask_WatchDangerSource>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_WatchDangerSource>::vfunc_02 (0x00100AC0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_WatchDangerSource>::vfunc_02 (0x00100AC0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00403FFC;
+extern "C" int DAT_00404000;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_WatchDangerSource;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_WatchDangerSource>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00403FFC);
+    DAT_00404000 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100AE0 ConcreteClassRep<AITask_Cower>::vfunc_01 (43 B)
-// [TODO] 0x00100B10 ConcreteClassRep<AITask_Cower>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_Cower>::vfunc_02 (0x00100B10, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_Cower>::vfunc_02 (0x00100B10, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00404028;
+extern "C" int DAT_0040402C;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_Cower;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_Cower>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00404028);
+    DAT_0040402C = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100B30 ConcreteClassRep<AITask_PossibleMildInterest>::vfunc_01 (43 B)
-// [TODO] 0x00100B60 ConcreteClassRep<AITask_PossibleMildInterest>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_PossibleMildInterest>::vfunc_02 (0x00100B60, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_PossibleMildInterest>::vfunc_02 (0x00100B60, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004044A0;
+extern "C" int DAT_004044A4;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_PossibleMildInterest;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_PossibleMildInterest>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_004044A0);
+    DAT_004044A4 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100B80 ConcreteClassRep<AITask_RecognizeTony>::vfunc_01 (40 B)
-// [TODO] 0x00100BB0 ConcreteClassRep<AITask_RecognizeTony>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_RecognizeTony>::vfunc_02 (0x00100BB0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_RecognizeTony>::vfunc_02 (0x00100BB0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00404054;
+extern "C" int DAT_00404058;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_RecognizeTony;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_RecognizeTony>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00404054);
+    DAT_00404058 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100BD0 ConcreteClassRep<AITask_TauntResponse>::vfunc_01 (43 B)
 // [TODO] 0x00100C00 ConcreteClassRep<AITask_BumpApology>::vfunc_01 (43 B)
-// [TODO] 0x00100C30 ConcreteClassRep<AITask_BumpApology>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_BumpApology>::vfunc_02 (0x00100C30, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_BumpApology>::vfunc_02 (0x00100C30, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00403C34;
+extern "C" int DAT_00403C38;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_BumpApology;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_BumpApology>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00403C34);
+    DAT_00403C38 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100C50 ConcreteClassRep<AITask_ProvokeResponse>::vfunc_01 (43 B)
-// [TODO] 0x00100C80 ConcreteClassRep<AITask_ProvokeResponse>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_ProvokeResponse>::vfunc_02 (0x00100C80, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_ProvokeResponse>::vfunc_02 (0x00100C80, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00403F20;
+extern "C" int DAT_00403F24;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_ProvokeResponse;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_ProvokeResponse>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00403F20);
+    DAT_00403F24 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100CA0 ConcreteClassRep<AITask_ReactToDangerReaction>::vfunc_01 (40 B)
-// [TODO] 0x00100CD0 ConcreteClassRep<AITask_ReactToDangerReaction>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_ReactToDangerReaction>::vfunc_02 (0x00100CD0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_ReactToDangerReaction>::vfunc_02 (0x00100CD0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00404264;
+extern "C" int DAT_00404268;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_ReactToDangerReaction;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_ReactToDangerReaction>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00404264);
+    DAT_00404268 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100CF0 ConcreteClassRep<AITask_CarjackingResponse>::vfunc_01 (43 B)
-// [TODO] 0x00100D20 ConcreteClassRep<AITask_CarjackingResponse>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_CarjackingResponse>::vfunc_02 (0x00100D20, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_CarjackingResponse>::vfunc_02 (0x00100D20, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004041B4;
+extern "C" int DAT_004041B8;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_CarjackingResponse;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_CarjackingResponse>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_004041B4);
+    DAT_004041B8 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100D40 ConcreteClassRep<AITask_TauntTony>::vfunc_01 (43 B)
-// [TODO] 0x00100D70 ConcreteClassRep<AITask_TauntTony>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_TauntTony>::vfunc_02 (0x00100D70, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AITask_TauntTony>::vfunc_02 (0x00100D70, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00403FA4;
+extern "C" int DAT_00403FA8;
+extern "C" char DAT_00403ADC[];
+extern "C" int DAT_00403B00;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AITask_TauntTony;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_TauntTony>::vfunc_02()
+{
+    sub_000660D0(DAT_00403B00, DAT_00403FA4);
+    DAT_00403FA8 = (int)DAT_00403ADC;
+}
+
 // [TODO] 0x00100D90 CScript::Method1<void, int>::vfunc_00 (20 B)
 // [TODO] 0x00100DB0 CScript::Function4<void, ScriptObject*, const char*, const char*, bool>::vfunc_00 (59 B)
 // [TODO] 0x00100DF0 sub_00100DF0 (84 B)
@@ -11039,7 +15981,37 @@ void* AITask_IdleChatResponse::vfunc_00()
     return DAT_00403E78;
 }
 
-// [TODO] 0x00101A40 AITask_IdleChatResponse::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AITask_IdleChatResponse::vfunc_01 (0x00101A40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_IdleChatResponse::vfunc_01 (0x00101A40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0010B530(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AITask_IdleChatResponse
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AITask_IdleChatResponse* vfunc_01(int a1);
+};
+
+AITask_IdleChatResponse* AITask_IdleChatResponse::vfunc_01(int a1)
+{
+    sub_0010B530();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00101A60 ConcreteClassRep<AITask_IdleChatInitiate>::vfunc_01 (60 B)
 // ============================================================================
 // [VERIFIED] AITask_IdleChatInitiate::vfunc_00 (0x00101AA0, 6 B)
@@ -11128,7 +16100,37 @@ template <> void ConcreteClassRep<CoverObject>::vfunc_02()
 
 // [TODO] 0x001020D0 sub_001020D0 (52 B)
 // [TODO] 0x00102110 sub_00102110 (57 B)
-// [TODO] 0x00102150 TargetSet::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] TargetSet::vfunc_01 (0x00102150, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// TargetSet::vfunc_01 (0x00102150, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00102110(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class TargetSet
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TargetSet* vfunc_01(int a1);
+};
+
+TargetSet* TargetSet::vfunc_01(int a1)
+{
+    sub_00102110();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00102170 sub_00102170 (558 B)
 // [TODO] 0x001023A0 TargetSetManager::vfunc_00 (31 B)
 // [TODO] 0x001023C0 sub_001023C0 (143 B)
@@ -11153,7 +16155,37 @@ template <> void ConcreteClassRep<CoverObject>::vfunc_02()
 // [TODO] 0x00102C80 AIStimulusDetectorScriptEvent::vfunc_03 (41 B)
 // [TODO] 0x00102CB0 sub_00102CB0 (52 B)
 // [TODO] 0x00102CF0 AIStimulusDetector::vfunc_00 (64 B)
-// [TODO] 0x00102D30 AIStimulusDetectorBasicType::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] AIStimulusDetectorBasicType::vfunc_00 (0x00102D30, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIStimulusDetectorBasicType::vfunc_00 (0x00102D30, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00102BA0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AIStimulusDetectorBasicType
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AIStimulusDetectorBasicType* vfunc_00(int a1);
+};
+
+AIStimulusDetectorBasicType* AIStimulusDetectorBasicType::vfunc_00(int a1)
+{
+    sub_00102BA0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00102D50 sub_00102D50 (46 B)
 // [TODO] 0x00102D80 AIFullStimulusMonitor::vfunc_02 (35 B)
 // [TODO] 0x00102DB0 sub_00102DB0 (54 B)
@@ -11251,9 +16283,69 @@ template <> void ConcreteClassRep<CoverObject>::vfunc_02()
 // [TODO] 0x00104C80 AIActionOrConditional::vfunc_03 (85 B)
 // [TODO] 0x00104CE0 AIActionUnary::vfunc_00 (50 B)
 // [TODO] 0x00104D20 AIActionStrengthenInvariant::vfunc_01 (33 B)
-// [TODO] 0x00104D50 AIActionRepeatFinite::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] AIActionRepeatFinite::vfunc_00 (0x00104D50, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIActionRepeatFinite::vfunc_00 (0x00104D50, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001047C0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AIActionRepeatFinite
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AIActionRepeatFinite* vfunc_00(int a1);
+};
+
+AIActionRepeatFinite* AIActionRepeatFinite::vfunc_00(int a1)
+{
+    sub_001047C0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00104D70 AIActionSkipIfFail::vfunc_01 (18 B)
-// [TODO] 0x00104D90 AIActionMeansEndAction::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] AIActionMeansEndAction::vfunc_00 (0x00104D90, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIActionMeansEndAction::vfunc_00 (0x00104D90, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001042B0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AIActionMeansEndAction
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AIActionMeansEndAction* vfunc_00(int a1);
+};
+
+AIActionMeansEndAction* AIActionMeansEndAction::vfunc_00(int a1)
+{
+    sub_001042B0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00104DB0 sub_00104DB0 (91 B)
 // [TODO] 0x00104E10 sub_00104E10 (45 B)
 // [TODO] 0x00104E40 sub_00104E40 (76 B)
@@ -11384,9 +16476,69 @@ template <> void ConcreteClassRep<CoverObject>::vfunc_02()
 // [TODO] 0x00106DF0 sub_00106DF0 (83 B)
 // [TODO] 0x00106E50 sub_00106E50 (118 B)
 // [TODO] 0x00106ED0 AIConditionUnary::vfunc_03 (50 B)
-// [TODO] 0x00106F10 AIConditionNot::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] AIConditionNot::vfunc_03 (0x00106F10, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIConditionNot::vfunc_03 (0x00106F10, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00106520(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AIConditionNot
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AIConditionNot* vfunc_03(int a1);
+};
+
+AIConditionNot* AIConditionNot::vfunc_03(int a1)
+{
+    sub_00106520();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00106F30 AIConditionBinary::vfunc_03 (69 B)
-// [TODO] 0x00106F80 AIConditionAnd::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] AIConditionAnd::vfunc_03 (0x00106F80, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AIConditionAnd::vfunc_03 (0x00106F80, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00106790(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AIConditionAnd
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AIConditionAnd* vfunc_03(int a1);
+};
+
+AIConditionAnd* AIConditionAnd::vfunc_03(int a1)
+{
+    sub_00106790();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00106FA0 AITask_ApproachAndFaceActor::vfunc_45 (132 B)
 // [TODO] 0x00107030 sub_00107030 (60 B)
 // ============================================================================
@@ -12290,7 +17442,23 @@ void* AITask_TauntTony::vfunc_00()
 // [TODO] 0x0010E510 sub_0010E510 (107 B)
 // [TODO] 0x0010E580 AITask_TauntTony::vfunc_42 (538 B)
 // [TODO] 0x0010E7A0 sub_0010E7A0 (46 B)
-// [TODO] 0x0010E7D0 sub_0010E7D0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0010E7D0 (0x0010E7D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0010E7D0 (0x0010E7D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045C1C0;
+
+int __cdecl sub_0010E7D0(void)
+{
+    return DAT_0045C1C0;
+}
+
 // [TODO] 0x0010E7E0 sub_0010E7E0 (57 B)
 // [TODO] 0x0010E820 sub_0010E820 (187 B)
 // [TODO] 0x0010E8E0 sub_0010E8E0 (52 B)
@@ -12736,10 +17904,72 @@ template <> void ConcreteClassRep<AICommandSequencer>::vfunc_02()
 // [TODO] 0x0011DC70 AICommandWaits::Wait_DistanceFromPosition::vfunc_01 (101 B)
 // [TODO] 0x0011DCE0 AICommandWaits::Wait_FacingObject::vfunc_01 (251 B)
 // [TODO] 0x0011DDE0 AICommandWaits::Wait_FacingPosition::vfunc_01 (176 B)
-// [TODO] 0x0011DE90 AICommandWaits::Wait_HearGunShot::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] AICommandWaits::Wait_HearGunShot::vfunc_03 (0x0011DE90, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// AICommandWaits::Wait_HearGunShot::vfunc_03 (0x0011DE90, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0011D740(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace AICommandWaits {
+
+class Wait_HearGunShot
+{
+public:
+    virtual Wait_HearGunShot* vfunc_03(int a1);
+};
+
+Wait_HearGunShot* Wait_HearGunShot::vfunc_03(int a1)
+{
+    sub_0011D740();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0011DEB0 AICommandWaits::Wait_InVehicle::vfunc_01 (156 B)
 // [TODO] 0x0011DF50 AICommandWaits::Wait_NumAttackers::vfunc_01 (92 B)
-// [TODO] 0x0011DFB0 AICommandWaits::Wait_SeeCharacterWeapon::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] AICommandWaits::Wait_SeeCharacterWeapon::vfunc_03 (0x0011DFB0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// AICommandWaits::Wait_SeeCharacterWeapon::vfunc_03 (0x0011DFB0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0011D990(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace AICommandWaits {
+
+class Wait_SeeCharacterWeapon
+{
+public:
+    virtual Wait_SeeCharacterWeapon* vfunc_03(int a1);
+};
+
+Wait_SeeCharacterWeapon* Wait_SeeCharacterWeapon::vfunc_03(int a1)
+{
+    sub_0011D990();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] BoatAIBehaviour::vfunc_00 (0x0011DFD0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -12871,7 +18101,37 @@ void* BoatAITask_CallForBoat::vfunc_00()
     return DAT_0040909C;
 }
 
-// [TODO] 0x00121190 BoatAITask::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] BoatAITask::vfunc_01 (0x00121190, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatAITask::vfunc_01 (0x00121190, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0012DC20(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class BoatAITask
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual BoatAITask* vfunc_01(int a1);
+};
+
+BoatAITask* BoatAITask::vfunc_01(int a1)
+{
+    sub_0012DC20();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001211B0 sub_001211B0 (266 B)
 // [TODO] 0x001212C0 sub_001212C0 (562 B)
 // [TODO] 0x00121500 sub_00121500 (371 B)
@@ -13020,7 +18280,37 @@ void* CarAIBehavior::vfunc_00()
 // [TODO] 0x00128430 sub_00128430 (762 B)
 // [TODO] 0x00128730 sub_00128730 (886 B)
 // [TODO] 0x00128AB0 sub_00128AB0 (1838 B)
-// [TODO] 0x001291E0 CarAIBehavior::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] CarAIBehavior::vfunc_01 (0x001291E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAIBehavior::vfunc_01 (0x001291E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001262A0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class CarAIBehavior
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CarAIBehavior* vfunc_01(int a1);
+};
+
+CarAIBehavior* CarAIBehavior::vfunc_01(int a1)
+{
+    sub_001262A0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00129200 CarAIBehavior::vfunc_33 (265 B)
 // [TODO] 0x00129310 sub_00129310 (117 B)
 // [TODO] 0x00129390 sub_00129390 (79 B)
@@ -13111,7 +18401,37 @@ void* CarAITask_CallForCar::vfunc_00()
 }
 
 // [TODO] 0x00129F00 CarAITask_CallForCar::vfunc_28 (61 B)
-// [TODO] 0x00129F40 CarAITask_CallForCar::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] CarAITask_CallForCar::vfunc_01 (0x00129F40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarAITask_CallForCar::vfunc_01 (0x00129F40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00129DD0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class CarAITask_CallForCar
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CarAITask_CallForCar* vfunc_01(int a1);
+};
+
+CarAITask_CallForCar* CarAITask_CallForCar::vfunc_01(int a1)
+{
+    sub_00129DD0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00129F60 CarAITask_CallForCar::vfunc_30 (424 B)
 // [TODO] 0x0012A110 CarAITask_Enemy::vfunc_29 (18 B)
 // [TODO] 0x0012A130 sub_0012A130 (22 B)
@@ -13269,7 +18589,37 @@ void* HelicopterAIBehavior::vfunc_00()
     return DAT_0040947C;
 }
 
-// [TODO] 0x0012B480 HelicopterAIBehavior::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] HelicopterAIBehavior::vfunc_01 (0x0012B480, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// HelicopterAIBehavior::vfunc_01 (0x0012B480, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0012DA30(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class HelicopterAIBehavior
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual HelicopterAIBehavior* vfunc_01(int a1);
+};
+
+HelicopterAIBehavior* HelicopterAIBehavior::vfunc_01(int a1)
+{
+    sub_0012DA30();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0012B4A0 sub_0012B4A0 (51 B)
 // [TODO] 0x0012B4E0 HelicopterAIBehavior::vfunc_35 (65 B)
 // [TODO] 0x0012B530 sub_0012B530 (1326 B)
@@ -13316,22 +18666,239 @@ void* HelicopterAITask::vfunc_00()
 // [TODO] 0x0012D210 sub_0012D210 (59 B)
 // [TODO] 0x0012D250 HelicopterAITask::vfunc_31 (138 B)
 // [TODO] 0x0012D2E0 ConcreteClassRep<BoatAIBehaviour>::vfunc_01 (43 B)
-// [TODO] 0x0012D310 ConcreteClassRep<BoatAIBehaviour>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<BoatAIBehaviour>::vfunc_02 (0x0012D310, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<BoatAIBehaviour>::vfunc_02 (0x0012D310, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00409000;
+extern "C" int DAT_00409004;
+extern "C" char DAT_00409564[];
+extern "C" int DAT_00409588;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class BoatAIBehaviour;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<BoatAIBehaviour>::vfunc_02()
+{
+    sub_000660D0(DAT_00409588, DAT_00409000);
+    DAT_00409004 = (int)DAT_00409564;
+}
+
 // [TODO] 0x0012D370 sub_0012D370 (25 B)
 // [TODO] 0x0012D390 ConcreteClassRep<BoatAITask>::vfunc_01 (40 B)
-// [TODO] 0x0012D3C0 ConcreteClassRep<BoatAITask>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<BoatAITask>::vfunc_02 (0x0012D3C0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<BoatAITask>::vfunc_02 (0x0012D3C0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040903C;
+extern "C" int DAT_00409040;
+extern "C" char DAT_004095A8[];
+extern "C" int DAT_004095CC;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class BoatAITask;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<BoatAITask>::vfunc_02()
+{
+    sub_000660D0(DAT_004095CC, DAT_0040903C);
+    DAT_00409040 = (int)DAT_004095A8;
+}
+
 // [TODO] 0x0012D3E0 ConcreteClassRep<BoatAITask_CallForBoat>::vfunc_01 (40 B)
-// [TODO] 0x0012D410 ConcreteClassRep<BoatAITask_CallForBoat>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<BoatAITask_CallForBoat>::vfunc_02 (0x0012D410, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<BoatAITask_CallForBoat>::vfunc_02 (0x0012D410, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004090C0;
+extern "C" int DAT_004090C4;
+extern "C" char DAT_00409018[];
+extern "C" int DAT_0040903C;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class BoatAITask_CallForBoat;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<BoatAITask_CallForBoat>::vfunc_02()
+{
+    sub_000660D0(DAT_0040903C, DAT_004090C0);
+    DAT_004090C4 = (int)DAT_00409018;
+}
+
 // [TODO] 0x0012D430 ConcreteClassRep<BoatAITask_Enemy>::vfunc_01 (40 B)
-// [TODO] 0x0012D460 ConcreteClassRep<BoatAITask_Enemy>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<BoatAITask_Enemy>::vfunc_02 (0x0012D460, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<BoatAITask_Enemy>::vfunc_02 (0x0012D460, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00409068;
+extern "C" int DAT_0040906C;
+extern "C" char DAT_00409018[];
+extern "C" int DAT_0040903C;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class BoatAITask_Enemy;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<BoatAITask_Enemy>::vfunc_02()
+{
+    sub_000660D0(DAT_0040903C, DAT_00409068);
+    DAT_0040906C = (int)DAT_00409018;
+}
+
 // [TODO] 0x0012D480 ConcreteClassRep<BoatAITask_Traffic>::vfunc_01 (40 B)
-// [TODO] 0x0012D4B0 ConcreteClassRep<BoatAITask_Traffic>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<BoatAITask_Traffic>::vfunc_02 (0x0012D4B0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<BoatAITask_Traffic>::vfunc_02 (0x0012D4B0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00409094;
+extern "C" int DAT_00409098;
+extern "C" char DAT_00409018[];
+extern "C" int DAT_0040903C;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class BoatAITask_Traffic;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<BoatAITask_Traffic>::vfunc_02()
+{
+    sub_000660D0(DAT_0040903C, DAT_00409094);
+    DAT_00409098 = (int)DAT_00409018;
+}
+
 // [TODO] 0x0012D4D0 ConcreteClassRep<CarAIBehavior>::vfunc_01 (43 B)
-// [TODO] 0x0012D500 ConcreteClassRep<CarAIBehavior>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<CarAIBehavior>::vfunc_02 (0x0012D500, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<CarAIBehavior>::vfunc_02 (0x0012D500, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004091FC;
+extern "C" int DAT_00409200;
+extern "C" char DAT_00409564[];
+extern "C" int DAT_00409588;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class CarAIBehavior;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<CarAIBehavior>::vfunc_02()
+{
+    sub_000660D0(DAT_00409588, DAT_004091FC);
+    DAT_00409200 = (int)DAT_00409564;
+}
+
 // [TODO] 0x0012D580 sub_0012D580 (30 B)
 // [TODO] 0x0012D5A0 ConcreteClassRep<CarAITask>::vfunc_01 (40 B)
 // [TODO] 0x0012D5D0 ConcreteClassRep<CarAITask_Traffic>::vfunc_01 (40 B)
-// [TODO] 0x0012D600 ConcreteClassRep<CarAITask_Traffic>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<CarAITask_Traffic>::vfunc_02 (0x0012D600, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<CarAITask_Traffic>::vfunc_02 (0x0012D600, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004093B4;
+extern "C" int DAT_004093B8;
+extern "C" char DAT_00409364[];
+extern "C" int DAT_00409388;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class CarAITask_Traffic;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<CarAITask_Traffic>::vfunc_02()
+{
+    sub_000660D0(DAT_00409388, DAT_004093B4);
+    DAT_004093B8 = (int)DAT_00409364;
+}
+
 // [TODO] 0x0012D620 ConcreteClassRep<CarAITask_TrafficCop>::vfunc_01 (40 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<CarAITask_TrafficCop>::vfunc_02 (0x0012D650, 36 B)
@@ -13370,13 +18937,106 @@ template <> void ConcreteClassRep<CarAITask_TrafficCop>::vfunc_02()
 // [TODO] 0x0012D680 ConcreteClassRep<CarAITask_CallForCar>::vfunc_01 (40 B)
 // [TODO] 0x0012D6B0 ConcreteClassRep<CarAITask_CallForCar>::vfunc_02 (58 B)
 // [TODO] 0x0012D6F0 ConcreteClassRep<CarAITask_Enemy>::vfunc_01 (43 B)
-// [TODO] 0x0012D720 ConcreteClassRep<CarAITask_Enemy>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<CarAITask_Enemy>::vfunc_02 (0x0012D720, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<CarAITask_Enemy>::vfunc_02 (0x0012D720, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00409438;
+extern "C" int DAT_0040943C;
+extern "C" char DAT_00409364[];
+extern "C" int DAT_00409388;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class CarAITask_Enemy;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<CarAITask_Enemy>::vfunc_02()
+{
+    sub_000660D0(DAT_00409388, DAT_00409438);
+    DAT_0040943C = (int)DAT_00409364;
+}
+
 // [TODO] 0x0012D740 ConcreteClassRep<CarAITask>::vfunc_02 (66 B)
 // [TODO] 0x0012D790 ConcreteClassRep<HelicopterAIBehavior>::vfunc_01 (40 B)
-// [TODO] 0x0012D7C0 ConcreteClassRep<HelicopterAIBehavior>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<HelicopterAIBehavior>::vfunc_02 (0x0012D7C0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<HelicopterAIBehavior>::vfunc_02 (0x0012D7C0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004094A0;
+extern "C" int DAT_004094A4;
+extern "C" char DAT_00409564[];
+extern "C" int DAT_00409588;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class HelicopterAIBehavior;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<HelicopterAIBehavior>::vfunc_02()
+{
+    sub_000660D0(DAT_00409588, DAT_004094A0);
+    DAT_004094A4 = (int)DAT_00409564;
+}
+
 // [TODO] 0x0012D7E0 sub_0012D7E0 (10 B)
 // [TODO] 0x0012D7F0 ConcreteClassRep<HelicopterAITask>::vfunc_01 (40 B)
-// [TODO] 0x0012D820 ConcreteClassRep<HelicopterAITask>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<HelicopterAITask>::vfunc_02 (0x0012D820, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<HelicopterAITask>::vfunc_02 (0x0012D820, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00409504;
+extern "C" int DAT_00409508;
+extern "C" char DAT_004095A8[];
+extern "C" int DAT_004095CC;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class HelicopterAITask;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<HelicopterAITask>::vfunc_02()
+{
+    sub_000660D0(DAT_004095CC, DAT_00409504);
+    DAT_00409508 = (int)DAT_004095A8;
+}
+
 // [TODO] 0x0012D828 sub_0012D828 (24 B)
 // [TODO] 0x0012D840 ConcreteClassRep<VehicleAI>::vfunc_01 (40 B)
 // [TODO] 0x0012D870 ConcreteClassRep<VehicleAI>::vfunc_02 (92 B)
@@ -13620,7 +19280,37 @@ void* IntersectionObject::vfunc_00()
 // [TODO] 0x0012E220 sub_0012E220 (511 B)
 // [TODO] 0x0012E420 sub_0012E420 (236 B)
 // [TODO] 0x0012E510 sub_0012E510 (624 B)
-// [TODO] 0x0012E780 IntersectionObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] IntersectionObject::vfunc_01 (0x0012E780, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// IntersectionObject::vfunc_01 (0x0012E780, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0012DDB0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class IntersectionObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual IntersectionObject* vfunc_01(int a1);
+};
+
+IntersectionObject* IntersectionObject::vfunc_01(int a1)
+{
+    sub_0012DDB0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0012E7A0 sub_0012E7A0 (86 B)
 // [TODO] 0x0012E800 IntersectionObject::vfunc_05 (1912 B)
 // [TODO] 0x0012EF80 sub_0012EF80 (407 B)
@@ -13670,7 +19360,37 @@ template <> void ConcreteClassRep<IntersectionObject>::vfunc_02()
 // [TODO] 0x0012F690 sub_0012F690 (268 B)
 // [TODO] 0x0012F7A0 sub_0012F7A0 (349 B)
 // [TODO] 0x0012F900 sub_0012F900 (388 B)
-// [TODO] 0x0012FA90 ShallowWater::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] ShallowWater::vfunc_03 (0x0012FA90, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ShallowWater::vfunc_03 (0x0012FA90, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0012F4A0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+class ShallowWater
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ShallowWater* vfunc_03(int a1);
+};
+
+ShallowWater* ShallowWater::vfunc_03(int a1)
+{
+    sub_0012F4A0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0012FAB0 sub_0012FAB0 (367 B)
 // [TODO] 0x0012FC20 sub_0012FC20 (54 B)
 // [TODO] 0x0012FC80 sub_0012FC80 (56 B)
@@ -13778,7 +19498,23 @@ void* CameraManager::vfunc_00()
     return DAT_00409B78;
 }
 
-// [TODO] 0x00133750 sub_00133750 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00133750 (0x00133750, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00133750 (0x00133750, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045C3F4;
+
+int __cdecl sub_00133750(void)
+{
+    return DAT_0045C3F4;
+}
+
 // [TODO] 0x00133760 sub_00133760 (7 B)
 // [TODO] 0x00133770 sub_00133770 (26 B)
 // [TODO] 0x00133790 sub_00133790 (7 B)
@@ -13954,7 +19690,37 @@ DebugCamera* DebugCamera::vfunc_01(int a1)
 // [TODO] 0x00138370 sub_00138370 (72 B)
 // [TODO] 0x001383C0 DramaticCamera::vfunc_10 (674 B)
 // [TODO] 0x00138670 sub_00138670 (316 B)
-// [TODO] 0x001387B0 DramaticCamera::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] DramaticCamera::vfunc_01 (0x001387B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// DramaticCamera::vfunc_01 (0x001387B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00138210(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class DramaticCamera
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual DramaticCamera* vfunc_01(int a1);
+};
+
+DramaticCamera* DramaticCamera::vfunc_01(int a1)
+{
+    sub_00138210();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001387D0 sub_001387D0 (1740 B)
 // [TODO] 0x00138EA0 sub_00138EA0 (632 B)
 // [TODO] 0x00139120 DramaticCamera::vfunc_41 (83 B)
@@ -14172,7 +19938,37 @@ void* NISCamera::vfunc_00()
 // [TODO] 0x0013FB60 sub_0013FB60 (249 B)
 // [TODO] 0x0013FC60 sub_0013FC60 (267 B)
 // [TODO] 0x0013FD70 sub_0013FD70 (92 B)
-// [TODO] 0x0013FDD0 NISCamera::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] NISCamera::vfunc_01 (0x0013FDD0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISCamera::vfunc_01 (0x0013FDD0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0013F4D0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class NISCamera
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual NISCamera* vfunc_01(int a1);
+};
+
+NISCamera* NISCamera::vfunc_01(int a1)
+{
+    sub_0013F4D0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0013FDF0 sub_0013FDF0 (346 B)
 // [TODO] 0x0013FF50 sub_0013FF50 (741 B)
 // [TODO] 0x00140240 sub_00140240 (925 B)
@@ -14416,7 +20212,38 @@ template <> void ConcreteClassRep<GenericVehicleCamera>::vfunc_02()
 }
 
 // [TODO] 0x00142A70 ConcreteClassRep<NISCamera>::vfunc_01 (43 B)
-// [TODO] 0x00142AA0 ConcreteClassRep<NISCamera>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<NISCamera>::vfunc_02 (0x00142AA0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<NISCamera>::vfunc_02 (0x00142AA0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040A600;
+extern "C" int DAT_0040A604;
+extern "C" char DAT_00409CB4[];
+extern "C" int DAT_00409CD8;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class NISCamera;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<NISCamera>::vfunc_02()
+{
+    sub_000660D0(DAT_00409CD8, DAT_0040A600);
+    DAT_0040A604 = (int)DAT_00409CB4;
+}
+
 // [TODO] 0x00142C30 ConcreteClassRep<PlaneCamera>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<PlaneCamera>::vfunc_02 (0x00142C60, 36 B)
@@ -14583,7 +20410,29 @@ WallCover* WallCover::vfunc_01(int a1)
 // [TODO] 0x001430B4 sub_001430B4 (62 B)
 // [TODO] 0x00143100 sub_00143100 (60 B)
 // [TODO] 0x00143140 sub_00143140 (125 B)
-// [TODO] 0x001431C0 sub_001431C0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_001431C0 (0x001431C0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001431C0 (0x001431C0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00142DF0(void);
+
+class Class_001431C0
+{
+public:
+    void sub_001431C0();
+};
+
+void Class_001431C0::sub_001431C0()
+{
+    sub_00142DF0();
+}
+
 // [TODO] 0x001431D0 sub_001431D0 (17 B)
 // [TODO] 0x001431F0 sub_001431F0 (242 B)
 // [TODO] 0x001432F0 sub_001432F0 (192 B)
@@ -14657,7 +20506,38 @@ AnimationLoaderObject* AnimationLoaderObject::vfunc_01(int a1)
 }
 
 // [TODO] 0x00144A80 ConcreteClassRep<AnimationLoaderObject>::vfunc_01 (65 B)
-// [TODO] 0x00144AD0 ConcreteClassRep<AnimationLoaderObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AnimationLoaderObject>::vfunc_02 (0x00144AD0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AnimationLoaderObject>::vfunc_02 (0x00144AD0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040A868;
+extern "C" int DAT_0040A86C;
+extern "C" char DAT_003F6D24[];
+extern "C" int DAT_003F6D48;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AnimationLoaderObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AnimationLoaderObject>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6D48, DAT_0040A868);
+    DAT_0040A86C = (int)DAT_003F6D24;
+}
+
 // [TODO] 0x00144AF0 AnimationLoaderObject::vfunc_15 (155 B)
 // [TODO] 0x00144B90 AnimationLoaderObject::vfunc_05 (236 B)
 // [TODO] 0x00144C80 sub_00144C80 (97 B)
@@ -14777,7 +20657,37 @@ DanceState* DanceState::vfunc_01(int a1)
 // [TODO] 0x00145220 sub_00145220 (333 B)
 // [TODO] 0x00145370 sub_00145370 (155 B)
 // [TODO] 0x00145410 sub_00145410 (157 B)
-// [TODO] 0x001454B0 GameObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] GameObject::vfunc_01 (0x001454B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameObject::vfunc_01 (0x001454B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000277E0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class GameObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual GameObject* vfunc_01(int a1);
+};
+
+GameObject* GameObject::vfunc_01(int a1)
+{
+    sub_000277E0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001454D0 Stamina::vfunc_09 (135 B)
 // [TODO] 0x00145560 sub_00145560 (17 B)
 // [TODO] 0x00145580 sub_00145580 (74 B)
@@ -14903,7 +20813,38 @@ CellPhoneState* CellPhoneState::vfunc_01(int a1)
 // [TODO] 0x00145E20 CellPhoneState::vfunc_09 (139 B)
 // [TODO] 0x00145FE0 sub_00145FE0 (17 B)
 // [TODO] 0x00146000 ConcreteClassRep<CellPhoneState>::vfunc_01 (60 B)
-// [TODO] 0x00146040 ConcreteClassRep<CellPhoneState>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<CellPhoneState>::vfunc_02 (0x00146040, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<CellPhoneState>::vfunc_02 (0x00146040, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040A9D0;
+extern "C" int DAT_0040A9D4;
+extern "C" char DAT_003F68D0[];
+extern "C" int DAT_003F68F4;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class CellPhoneState;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<CellPhoneState>::vfunc_02()
+{
+    sub_000660D0(DAT_003F68F4, DAT_0040A9D0);
+    DAT_0040A9D4 = (int)DAT_003F68D0;
+}
+
 // [TODO] 0x00146060 sub_00146060 (7 B)
 // [TODO] 0x00146070 sub_00146070 (36 B)
 // [TODO] 0x001460A0 sub_001460A0 (17 B)
@@ -15063,7 +21004,23 @@ void* CharacterObject::vfunc_00()
 // [TODO] 0x001482A0 sub_001482A0 (7 B)
 // [TODO] 0x001482B0 sub_001482B0 (26 B)
 // [TODO] 0x001482D0 sub_001482D0 (10 B)
-// [TODO] 0x001482E0 sub_001482E0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_001482E0 (0x001482E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001482E0 (0x001482E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045CC88;
+
+int __cdecl sub_001482E0(void)
+{
+    return DAT_0045CC88;
+}
+
 // [TODO] 0x001483C0 sub_001483C0 (22 B)
 // [TODO] 0x001483E0 sub_001483E0 (105 B)
 // [TODO] 0x00148450 sub_00148450 (11 B)
@@ -15096,7 +21053,37 @@ void* CharacterObject::vfunc_00()
 // [TODO] 0x001487B0 sub_001487B0 (13 B)
 // [TODO] 0x001487C0 sub_001487C0 (80 B)
 // [TODO] 0x00148810 sub_00148810 (91 B)
-// [TODO] 0x00148870 CharacterObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_01 (0x00148870, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterObject::vfunc_01 (0x00148870, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001472B0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class CharacterObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CharacterObject* vfunc_01(int a1);
+};
+
+CharacterObject* CharacterObject::vfunc_01(int a1)
+{
+    sub_001472B0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00148890 CharacterObject::vfunc_11 (19 B)
 // [TODO] 0x001488B0 CharacterObject::vfunc_12 (19 B)
 // [TODO] 0x001488D0 CharacterObject::vfunc_38 (56 B)
@@ -15579,7 +21566,38 @@ void* RageState::vfunc_00()
 // [TODO] 0x00157930 RageState::vfunc_09 (560 B)
 // [TODO] 0x00157A66 sub_00157A66 (13 B)
 // [TODO] 0x00157C00 ConcreteClassRep<ActionState>::vfunc_01 (40 B)
-// [TODO] 0x00157C30 ConcreteClassRep<ActionState>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<ActionState>::vfunc_02 (0x00157C30, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<ActionState>::vfunc_02 (0x00157C30, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040ADC8;
+extern "C" int DAT_0040ADCC;
+extern "C" char DAT_003F68D0[];
+extern "C" int DAT_003F68F4;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class ActionState;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<ActionState>::vfunc_02()
+{
+    sub_000660D0(DAT_003F68F4, DAT_0040ADC8);
+    DAT_0040ADCC = (int)DAT_003F68D0;
+}
+
 // [TODO] 0x00157C50 ConcreteClassRep<WallCover>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<WallCover>::vfunc_02 (0x00157C80, 36 B)
@@ -15616,9 +21634,71 @@ template <> void ConcreteClassRep<WallCover>::vfunc_02()
 }
 
 // [TODO] 0x00157D50 ConcreteClassRep<DanceState>::vfunc_01 (40 B)
-// [TODO] 0x00157D80 ConcreteClassRep<DanceState>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<DanceState>::vfunc_02 (0x00157D80, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<DanceState>::vfunc_02 (0x00157D80, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040AEE0;
+extern "C" int DAT_0040AEE4;
+extern "C" char DAT_003F68D0[];
+extern "C" int DAT_003F68F4;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class DanceState;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<DanceState>::vfunc_02()
+{
+    sub_000660D0(DAT_003F68F4, DAT_0040AEE0);
+    DAT_0040AEE4 = (int)DAT_003F68D0;
+}
+
 // [TODO] 0x00157DA0 ConcreteClassRep<PlayerHeadTracking>::vfunc_01 (40 B)
-// [TODO] 0x00157DD0 ConcreteClassRep<PlayerHeadTracking>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<PlayerHeadTracking>::vfunc_02 (0x00157DD0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<PlayerHeadTracking>::vfunc_02 (0x00157DD0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040AF0C;
+extern "C" int DAT_0040AF10;
+extern "C" char DAT_003F68D0[];
+extern "C" int DAT_003F68F4;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class PlayerHeadTracking;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<PlayerHeadTracking>::vfunc_02()
+{
+    sub_000660D0(DAT_003F68F4, DAT_0040AF0C);
+    DAT_0040AF10 = (int)DAT_003F68D0;
+}
+
 // [TODO] 0x00157DF0 ConcreteClassRep<Stamina>::vfunc_01 (40 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<Stamina>::vfunc_02 (0x00157E20, 36 B)
@@ -15655,7 +21735,38 @@ template <> void ConcreteClassRep<Stamina>::vfunc_02()
 }
 
 // [TODO] 0x00157E50 ConcreteClassRep<CameraState>::vfunc_01 (40 B)
-// [TODO] 0x00157E80 ConcreteClassRep<CameraState>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<CameraState>::vfunc_02 (0x00157E80, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<CameraState>::vfunc_02 (0x00157E80, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040B064;
+extern "C" int DAT_0040B068;
+extern "C" char DAT_003F68D0[];
+extern "C" int DAT_003F68F4;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class CameraState;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<CameraState>::vfunc_02()
+{
+    sub_000660D0(DAT_003F68F4, DAT_0040B064);
+    DAT_0040B068 = (int)DAT_003F68D0;
+}
+
 // [TODO] 0x00158840 sub_00158840 (39 B)
 // [TODO] 0x001589E0 sub_001589E0 (508 B)
 // [TODO] 0x00159060 ConcreteClassRep<CharacterObject>::vfunc_01 (43 B)
@@ -16138,9 +22249,69 @@ void* SniperState::vfunc_00()
 // [TODO] 0x0015FA50 NISCharacterVisibilityAction::vfunc_06 (8 B)
 // [TODO] 0x0015FA60 NISWeaponAttachAction::vfunc_06 (8 B)
 // [TODO] 0x0015FA70 NISWeaponFireAction::vfunc_06 (29 B)
-// [TODO] 0x0015FA90 NISVehicleAnimationAction::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] NISVehicleAnimationAction::vfunc_03 (0x0015FA90, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISVehicleAnimationAction::vfunc_03 (0x0015FA90, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0015F040(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class NISVehicleAnimationAction
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual NISVehicleAnimationAction* vfunc_03(int a1);
+};
+
+NISVehicleAnimationAction* NISVehicleAnimationAction::vfunc_03(int a1)
+{
+    sub_0015F040();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0015FAB0 NISScriptFunctionCallAction::vfunc_03 (57 B)
-// [TODO] 0x0015FAF0 NISExpAnimationAction::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] NISExpAnimationAction::vfunc_03 (0x0015FAF0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISExpAnimationAction::vfunc_03 (0x0015FAF0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0015F670(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class NISExpAnimationAction
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual NISExpAnimationAction* vfunc_03(int a1);
+};
+
+NISExpAnimationAction* NISExpAnimationAction::vfunc_03(int a1)
+{
+    sub_0015F670();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0015FB10 NISSwapModelAction::vfunc_03 (57 B)
 // [TODO] 0x0015FB50 NISResourceLoaderAction::vfunc_03 (64 B)
 // [TODO] 0x0015FB90 NISSequenceBranchAction::vfunc_06 (36 B)
@@ -16371,73 +22542,1365 @@ GameFightContext* GameFightContext::vfunc_03(int a1)
 
 // [TODO] 0x00161670 sub_00161670 (8 B)
 // [TODO] 0x00161680 sub_00161680 (66 B)
-// [TODO] 0x001616D0 fight::ConditionFactoryTemplate<DamageJointCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<DamageJointCondition>::vfunc_03 (0x001616D0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<DamageJointCondition>::vfunc_03 (0x001616D0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003943C4[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class DamageJointCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<DamageJointCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<DamageJointCondition>* fight::ConditionFactoryTemplate<DamageJointCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003943C4;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161700 fight::ConditionFactoryTemplate<DamageJointCondition>::vfunc_07 (52 B)
-// [TODO] 0x00161740 fight::ConditionFactoryTemplate<AreFeetOnGround>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<AreFeetOnGround>::vfunc_03 (0x00161740, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<AreFeetOnGround>::vfunc_03 (0x00161740, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003943E8[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class AreFeetOnGround;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<AreFeetOnGround>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<AreFeetOnGround>* fight::ConditionFactoryTemplate<AreFeetOnGround>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003943E8;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161770 fight::ConditionFactoryTemplate<AreFeetOnGround>::vfunc_07 (52 B)
-// [TODO] 0x001617B0 fight::ConditionFactoryTemplate<IsMainCharacterCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<IsMainCharacterCondition>::vfunc_03 (0x001617B0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<IsMainCharacterCondition>::vfunc_03 (0x001617B0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039440C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class IsMainCharacterCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<IsMainCharacterCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<IsMainCharacterCondition>* fight::ConditionFactoryTemplate<IsMainCharacterCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0039440C;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001617E0 fight::ConditionFactoryTemplate<IsMainCharacterCondition>::vfunc_07 (52 B)
-// [TODO] 0x00161820 fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>::vfunc_03 (0x00161820, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>::vfunc_03 (0x00161820, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394430[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class IsFemaleCharacterCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<IsFemaleCharacterCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>* fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394430;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161850 fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>::vfunc_07 (52 B)
-// [TODO] 0x00161890 fight::ConditionFactoryTemplate<WeaponCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<WeaponCondition>::vfunc_03 (0x00161890, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<WeaponCondition>::vfunc_03 (0x00161890, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394454[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class WeaponCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<WeaponCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<WeaponCondition>* fight::ConditionFactoryTemplate<WeaponCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394454;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001618C0 fight::ConditionFactoryTemplate<WeaponCondition>::vfunc_07 (52 B)
-// [TODO] 0x00161900 fight::ConditionFactoryTemplate<DamageWeaponCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<DamageWeaponCondition>::vfunc_03 (0x00161900, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<DamageWeaponCondition>::vfunc_03 (0x00161900, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394478[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class DamageWeaponCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<DamageWeaponCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<DamageWeaponCondition>* fight::ConditionFactoryTemplate<DamageWeaponCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394478;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161930 fight::ConditionFactoryTemplate<DamageWeaponCondition>::vfunc_07 (52 B)
-// [TODO] 0x00161970 fight::ConditionFactoryTemplate<CheckCameraCondition>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<CheckCameraCondition>::vfunc_03 (0x00161970, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ConditionFactoryTemplate<CheckCameraCondition>::vfunc_03 (0x00161970, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039449C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class CheckCameraCondition;
+
+namespace fight { 
+template <class T0> class ConditionFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ConditionFactoryTemplate<CheckCameraCondition>* vfunc_03(int a1);
+    void sub_001F7900();
+};
+}
+
+template <> fight::ConditionFactoryTemplate<CheckCameraCondition>* fight::ConditionFactoryTemplate<CheckCameraCondition>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0039449C;
+    sub_001B7A10();
+    sub_001F7900();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001619A0 fight::ConditionFactoryTemplate<CheckCameraCondition>::vfunc_07 (52 B)
-// [TODO] 0x001619E0 fight::TrackFactoryTemplate<NISActivateVehicleTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISActivateVehicleTrack>::vfunc_03 (0x001619E0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISActivateVehicleTrack>::vfunc_03 (0x001619E0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003944C0[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163A40(void);
+
+class NISActivateVehicleTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISActivateVehicleTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISActivateVehicleTrack>* fight::TrackFactoryTemplate<NISActivateVehicleTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003944C0;
+    sub_00163A40();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161A10 fight::TrackFactoryTemplate<NISActivateVehicleTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161A50 fight::TrackFactoryTemplate<NISCameraAnimationTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISCameraAnimationTrack>::vfunc_03 (0x00161A50, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISCameraAnimationTrack>::vfunc_03 (0x00161A50, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003944E4[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163DB0(void);
+
+class NISCameraAnimationTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISCameraAnimationTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISCameraAnimationTrack>* fight::TrackFactoryTemplate<NISCameraAnimationTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003944E4;
+    sub_00163DB0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161A80 fight::TrackFactoryTemplate<NISCameraAnimationTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161AC0 fight::TrackFactoryTemplate<NISCharacterAttachTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISCharacterAttachTrack>::vfunc_03 (0x00161AC0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISCharacterAttachTrack>::vfunc_03 (0x00161AC0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394508[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163550(void);
+
+class NISCharacterAttachTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISCharacterAttachTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISCharacterAttachTrack>* fight::TrackFactoryTemplate<NISCharacterAttachTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394508;
+    sub_00163550();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161AF0 fight::TrackFactoryTemplate<NISCharacterAttachTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161B30 fight::TrackFactoryTemplate<NISCharacterAnimationTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISCharacterAnimationTrack>::vfunc_03 (0x00161B30, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISCharacterAnimationTrack>::vfunc_03 (0x00161B30, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039452C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163B30(void);
+
+class NISCharacterAnimationTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISCharacterAnimationTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISCharacterAnimationTrack>* fight::TrackFactoryTemplate<NISCharacterAnimationTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0039452C;
+    sub_00163B30();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161B60 fight::TrackFactoryTemplate<NISCharacterAnimationTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161BA0 fight::TrackFactoryTemplate<NISCharacterEffectTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISCharacterEffectTrack>::vfunc_03 (0x00161BA0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISCharacterEffectTrack>::vfunc_03 (0x00161BA0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394550[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001634B0(void);
+
+class NISCharacterEffectTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISCharacterEffectTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISCharacterEffectTrack>* fight::TrackFactoryTemplate<NISCharacterEffectTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394550;
+    sub_001634B0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161BD0 fight::TrackFactoryTemplate<NISCharacterEffectTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161C10 fight::TrackFactoryTemplate<NISCharacterPositionTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISCharacterPositionTrack>::vfunc_03 (0x00161C10, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISCharacterPositionTrack>::vfunc_03 (0x00161C10, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394574[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163EC0(void);
+
+class NISCharacterPositionTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISCharacterPositionTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISCharacterPositionTrack>* fight::TrackFactoryTemplate<NISCharacterPositionTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394574;
+    sub_00163EC0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161C40 fight::TrackFactoryTemplate<NISCharacterPositionTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161C80 fight::TrackFactoryTemplate<NISCharacterVisibilityTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISCharacterVisibilityTrack>::vfunc_03 (0x00161C80, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISCharacterVisibilityTrack>::vfunc_03 (0x00161C80, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394598[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001636C0(void);
+
+class NISCharacterVisibilityTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISCharacterVisibilityTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISCharacterVisibilityTrack>* fight::TrackFactoryTemplate<NISCharacterVisibilityTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394598;
+    sub_001636C0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161CB0 fight::TrackFactoryTemplate<NISCharacterVisibilityTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161CF0 fight::TrackFactoryTemplate<NISDeleteCharacterTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISDeleteCharacterTrack>::vfunc_03 (0x00161CF0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISDeleteCharacterTrack>::vfunc_03 (0x00161CF0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003945BC[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163E00(void);
+
+class NISDeleteCharacterTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISDeleteCharacterTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISDeleteCharacterTrack>* fight::TrackFactoryTemplate<NISDeleteCharacterTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003945BC;
+    sub_00163E00();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161D20 fight::TrackFactoryTemplate<NISDeleteCharacterTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161D60 fight::TrackFactoryTemplate<NISDeleteScriptObjectTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISDeleteScriptObjectTrack>::vfunc_03 (0x00161D60, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISDeleteScriptObjectTrack>::vfunc_03 (0x00161D60, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003945E0[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163E50(void);
+
+class NISDeleteScriptObjectTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISDeleteScriptObjectTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISDeleteScriptObjectTrack>* fight::TrackFactoryTemplate<NISDeleteScriptObjectTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003945E0;
+    sub_00163E50();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161D90 fight::TrackFactoryTemplate<NISDeleteScriptObjectTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161DD0 fight::TrackFactoryTemplate<NISDriveWorldStreamerTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISDriveWorldStreamerTrack>::vfunc_03 (0x00161DD0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISDriveWorldStreamerTrack>::vfunc_03 (0x00161DD0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394604[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00164080(void);
+
+class NISDriveWorldStreamerTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISDriveWorldStreamerTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISDriveWorldStreamerTrack>* fight::TrackFactoryTemplate<NISDriveWorldStreamerTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394604;
+    sub_00164080();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161E00 fight::TrackFactoryTemplate<NISDriveWorldStreamerTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161E40 fight::TrackFactoryTemplate<NISExpAnimationTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISExpAnimationTrack>::vfunc_03 (0x00161E40, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISExpAnimationTrack>::vfunc_03 (0x00161E40, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394628[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163C70(void);
+
+class NISExpAnimationTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISExpAnimationTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISExpAnimationTrack>* fight::TrackFactoryTemplate<NISExpAnimationTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394628;
+    sub_00163C70();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161E70 fight::TrackFactoryTemplate<NISExpAnimationTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161EB0 fight::TrackFactoryTemplate<NISFadeTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISFadeTrack>::vfunc_03 (0x00161EB0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISFadeTrack>::vfunc_03 (0x00161EB0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039464C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163410(void);
+
+class NISFadeTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISFadeTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISFadeTrack>* fight::TrackFactoryTemplate<NISFadeTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0039464C;
+    sub_00163410();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161EE0 fight::TrackFactoryTemplate<NISFadeTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161F20 fight::TrackFactoryTemplate<NISObjectPositionTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISObjectPositionTrack>::vfunc_03 (0x00161F20, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISObjectPositionTrack>::vfunc_03 (0x00161F20, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394670[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163AD0(void);
+
+class NISObjectPositionTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISObjectPositionTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISObjectPositionTrack>* fight::TrackFactoryTemplate<NISObjectPositionTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394670;
+    sub_00163AD0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161F50 fight::TrackFactoryTemplate<NISObjectPositionTrack>::vfunc_07 (52 B)
-// [TODO] 0x00161F90 fight::TrackFactoryTemplate<NISRenderableAnimationTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISRenderableAnimationTrack>::vfunc_03 (0x00161F90, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISRenderableAnimationTrack>::vfunc_03 (0x00161F90, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394694[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163920(void);
+
+class NISRenderableAnimationTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISRenderableAnimationTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISRenderableAnimationTrack>* fight::TrackFactoryTemplate<NISRenderableAnimationTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394694;
+    sub_00163920();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00161FC0 fight::TrackFactoryTemplate<NISRenderableAnimationTrack>::vfunc_07 (52 B)
-// [TODO] 0x00162000 fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_03 (0x00162000, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_03 (0x00162000, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003946B8[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163870(void);
+
+class NISRenderableTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISRenderableTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISRenderableTrack>* fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003946B8;
+    sub_00163870();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162030 fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_07 (55 B)
-// [TODO] 0x00162070 fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_03 (0x00162070, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_03 (0x00162070, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003946DC[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163D10(void);
+
+class NISResourceLoaderTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISResourceLoaderTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISResourceLoaderTrack>* fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003946DC;
+    sub_00163D10();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001620A0 fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_07 (55 B)
-// [TODO] 0x001620E0 fight::TrackFactoryTemplate<NISScriptFunctionCallTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISScriptFunctionCallTrack>::vfunc_03 (0x001620E0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISScriptFunctionCallTrack>::vfunc_03 (0x001620E0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394700[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163EF0(void);
+
+class NISScriptFunctionCallTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISScriptFunctionCallTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISScriptFunctionCallTrack>* fight::TrackFactoryTemplate<NISScriptFunctionCallTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394700;
+    sub_00163EF0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162110 fight::TrackFactoryTemplate<NISScriptFunctionCallTrack>::vfunc_07 (52 B)
-// [TODO] 0x00162150 fight::TrackFactoryTemplate<NISSequenceBranchTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISSequenceBranchTrack>::vfunc_03 (0x00162150, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISSequenceBranchTrack>::vfunc_03 (0x00162150, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394724[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00164020(void);
+
+class NISSequenceBranchTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISSequenceBranchTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISSequenceBranchTrack>* fight::TrackFactoryTemplate<NISSequenceBranchTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394724;
+    sub_00164020();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162180 fight::TrackFactoryTemplate<NISSequenceBranchTrack>::vfunc_07 (52 B)
-// [TODO] 0x001621C0 fight::TrackFactoryTemplate<NISStatePropStateTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISStatePropStateTrack>::vfunc_03 (0x001621C0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISStatePropStateTrack>::vfunc_03 (0x001621C0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394748[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163630(void);
+
+class NISStatePropStateTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISStatePropStateTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISStatePropStateTrack>* fight::TrackFactoryTemplate<NISStatePropStateTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394748;
+    sub_00163630();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001621F0 fight::TrackFactoryTemplate<NISStatePropStateTrack>::vfunc_07 (52 B)
-// [TODO] 0x00162230 fight::TrackFactoryTemplate<NISSequenceCueTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISSequenceCueTrack>::vfunc_03 (0x00162230, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISSequenceCueTrack>::vfunc_03 (0x00162230, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039476C[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163F70(void);
+
+class NISSequenceCueTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISSequenceCueTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISSequenceCueTrack>* fight::TrackFactoryTemplate<NISSequenceCueTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_0039476C;
+    sub_00163F70();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162260 fight::TrackFactoryTemplate<NISSequenceCueTrack>::vfunc_07 (52 B)
-// [TODO] 0x001622A0 fight::TrackFactoryTemplate<NISSequencePlayTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISSequencePlayTrack>::vfunc_03 (0x001622A0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISSequencePlayTrack>::vfunc_03 (0x001622A0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394790[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001B7A10(void);
+
+class NISSequencePlayTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISSequencePlayTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISSequencePlayTrack>* fight::TrackFactoryTemplate<NISSequencePlayTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394790;
+    sub_001B7A10();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001622D0 fight::TrackFactoryTemplate<NISSequencePlayTrack>::vfunc_07 (52 B)
-// [TODO] 0x00162310 fight::TrackFactoryTemplate<NISStatePropSpawnTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISStatePropSpawnTrack>::vfunc_03 (0x00162310, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISStatePropSpawnTrack>::vfunc_03 (0x00162310, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003947B4[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001635B0(void);
+
+class NISStatePropSpawnTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISStatePropSpawnTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISStatePropSpawnTrack>* fight::TrackFactoryTemplate<NISStatePropSpawnTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003947B4;
+    sub_001635B0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162340 fight::TrackFactoryTemplate<NISStatePropSpawnTrack>::vfunc_07 (55 B)
-// [TODO] 0x00162380 fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_03 (0x00162380, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_03 (0x00162380, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003947D8[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163BC0(void);
+
+class NISSwapModelTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISSwapModelTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISSwapModelTrack>* fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003947D8;
+    sub_00163BC0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001623B0 fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_07 (52 B)
-// [TODO] 0x001623F0 fight::TrackFactoryTemplate<NISVehicleAnimationTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISVehicleAnimationTrack>::vfunc_03 (0x001623F0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISVehicleAnimationTrack>::vfunc_03 (0x001623F0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003947FC[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001639B0(void);
+
+class NISVehicleAnimationTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISVehicleAnimationTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISVehicleAnimationTrack>* fight::TrackFactoryTemplate<NISVehicleAnimationTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003947FC;
+    sub_001639B0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162420 fight::TrackFactoryTemplate<NISVehicleAnimationTrack>::vfunc_07 (52 B)
-// [TODO] 0x00162460 fight::TrackFactoryTemplate<NISVehiclePropertyTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISVehiclePropertyTrack>::vfunc_03 (0x00162460, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISVehiclePropertyTrack>::vfunc_03 (0x00162460, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394820[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163380(void);
+
+class NISVehiclePropertyTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISVehiclePropertyTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISVehiclePropertyTrack>* fight::TrackFactoryTemplate<NISVehiclePropertyTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394820;
+    sub_00163380();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162490 fight::TrackFactoryTemplate<NISVehiclePropertyTrack>::vfunc_07 (52 B)
-// [TODO] 0x001624D0 fight::TrackFactoryTemplate<NISWeaponAttachTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISWeaponAttachTrack>::vfunc_03 (0x001624D0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISWeaponAttachTrack>::vfunc_03 (0x001624D0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394844[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_00163750(void);
+
+class NISWeaponAttachTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISWeaponAttachTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISWeaponAttachTrack>* fight::TrackFactoryTemplate<NISWeaponAttachTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394844;
+    sub_00163750();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162500 fight::TrackFactoryTemplate<NISWeaponAttachTrack>::vfunc_07 (52 B)
-// [TODO] 0x00162540 fight::TrackFactoryTemplate<NISWeaponFireTrack>::vfunc_03 (43 B)
+// ============================================================================
+// [VERIFIED] fight::TrackFactoryTemplate<NISWeaponFireTrack>::vfunc_03 (0x00162540, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::TrackFactoryTemplate<NISWeaponFireTrack>::vfunc_03 (0x00162540, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00394868[];
+extern "C" void __cdecl sub_001FCF60(int);
+extern "C" void __cdecl sub_001637E0(void);
+
+class NISWeaponFireTrack;
+
+namespace fight { 
+template <class T0> class TrackFactoryTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TrackFactoryTemplate<NISWeaponFireTrack>* vfunc_03(int a1);
+    void sub_001FBF30();
+};
+}
+
+template <> fight::TrackFactoryTemplate<NISWeaponFireTrack>* fight::TrackFactoryTemplate<NISWeaponFireTrack>::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00394868;
+    sub_001637E0();
+    sub_001FBF30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00162570 fight::TrackFactoryTemplate<NISWeaponFireTrack>::vfunc_07 (52 B)
 // [TODO] 0x00163380 sub_00163380 (19 B)
 // [TODO] 0x001633A0 NISVehiclePropertyTrack::vfunc_08 (16 B)
@@ -16984,7 +24447,38 @@ void* GroundObject::vfunc_00()
 // [TODO] 0x00167160 GroundObject::vfunc_01 (78 B)
 // [TODO] 0x001671B0 GroundObject::vfunc_05 (401 B)
 // [TODO] 0x001673F0 ConcreteClassRep<GroundObject>::vfunc_01 (43 B)
-// [TODO] 0x00167420 ConcreteClassRep<GroundObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<GroundObject>::vfunc_02 (0x00167420, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<GroundObject>::vfunc_02 (0x00167420, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0040F0C4;
+extern "C" int DAT_0040F0C8;
+extern "C" char DAT_003F6A9C[];
+extern "C" int DAT_003F6AC0;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class GroundObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<GroundObject>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6AC0, DAT_0040F0C4);
+    DAT_0040F0C8 = (int)DAT_003F6A9C;
+}
+
 // [TODO] 0x00167440 sub_00167440 (91 B)
 // ============================================================================
 // [VERIFIED] BlackjackHUD::vfunc_00 (0x001674A0, 6 B)
@@ -17012,7 +24506,37 @@ void* BlackjackHUD::vfunc_00()
 // [TODO] 0x001674B0 BlackjackHUD::vfunc_28 (80 B)
 // [TODO] 0x00167500 sub_00167500 (222 B)
 // [TODO] 0x00167650 sub_00167650 (258 B)
-// [TODO] 0x00167760 BlackjackHUD::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] BlackjackHUD::vfunc_01 (0x00167760, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// BlackjackHUD::vfunc_01 (0x00167760, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00167440(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class BlackjackHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual BlackjackHUD* vfunc_01(int a1);
+};
+
+BlackjackHUD* BlackjackHUD::vfunc_01(int a1)
+{
+    sub_00167440();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00167780 sub_00167780 (214 B)
 // [TODO] 0x00167860 sub_00167860 (211 B)
 // [TODO] 0x00167940 sub_00167940 (104 B)
@@ -17062,10 +24586,71 @@ void* ExoticsHUD2::vfunc_00()
 // [TODO] 0x00168F10 ExoticsHUD2::vfunc_39 (193 B)
 // [TODO] 0x00168FE0 sub_00168FE0 (291 B)
 // [TODO] 0x00169110 sub_00169110 (291 B)
-// [TODO] 0x00169250 ExoticsHUD2::ExoticsHUDMenuItem::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::ExoticsHUDMenuItem::vfunc_00 (0x00169250, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// ExoticsHUD2::ExoticsHUDMenuItem::vfunc_00 (0x00169250, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0016FA10(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace ExoticsHUD2 {
+
+class ExoticsHUDMenuItem
+{
+public:
+    virtual ExoticsHUDMenuItem* vfunc_00(int a1);
+};
+
+ExoticsHUDMenuItem* ExoticsHUDMenuItem::vfunc_00(int a1)
+{
+    sub_0016FA10();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00169270 ExoticsHUD2::ExoticsHUDMenuItem::vfunc_01 (111 B)
 // [TODO] 0x001692E0 ExoticsHUD2::ExoticsHUDMenuItem::vfunc_02 (159 B)
-// [TODO] 0x00169380 ExoticsHUD2::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_01 (0x00169380, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ExoticsHUD2::vfunc_01 (0x00169380, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00168D40(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ExoticsHUD2
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ExoticsHUD2* vfunc_01(int a1);
+};
+
+ExoticsHUD2* ExoticsHUD2::vfunc_01(int a1)
+{
+    sub_00168D40();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001693A0 ExoticsHUD2::vfunc_38 (869 B)
 // [TODO] 0x00169710 ExoticsHUD2::vfunc_00 (11 B)
 // [TODO] 0x00169720 ExoticsHUD2::vfunc_01 (11 B)
@@ -17100,7 +24685,37 @@ void* FightBettingHUD::vfunc_00()
 // [TODO] 0x00169F40 sub_00169F40 (76 B)
 // [TODO] 0x00169F90 sub_00169F90 (96 B)
 // [TODO] 0x00169FF0 sub_00169FF0 (1186 B)
-// [TODO] 0x0016A4A0 FightBettingHUD::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] FightBettingHUD::vfunc_01 (0x0016A4A0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// FightBettingHUD::vfunc_01 (0x0016A4A0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00169B80(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class FightBettingHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual FightBettingHUD* vfunc_01(int a1);
+};
+
+FightBettingHUD* FightBettingHUD::vfunc_01(int a1)
+{
+    sub_00169B80();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0016A4C0 FightBettingHUD::vfunc_00 (18 B)
 // [TODO] 0x0016A4E0 FightBettingHUD::vfunc_28 (240 B)
 // [TODO] 0x0016A700 sub_0016A700 (137 B)
@@ -17263,7 +24878,37 @@ void* BusinessHUD::vfunc_00()
     return DAT_004101E8;
 }
 
-// [TODO] 0x0016C2B0 BusinessDetailHUD::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] BusinessDetailHUD::vfunc_01 (0x0016C2B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// BusinessDetailHUD::vfunc_01 (0x0016C2B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0016E130(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class BusinessDetailHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual BusinessDetailHUD* vfunc_01(int a1);
+};
+
+BusinessDetailHUD* BusinessDetailHUD::vfunc_01(int a1)
+{
+    sub_0016E130();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0016C2D0 sub_0016C2D0 (227 B)
 // [TODO] 0x0016C3C0 HUDCallout2::vfunc_05 (71 B)
 // [TODO] 0x0016C410 sub_0016C410 (36 B)
@@ -17395,7 +25040,37 @@ void* DrugWarsHUD::vfunc_00()
 // [TODO] 0x0016DEE0 DrugWarsHUD::vfunc_32 (105 B)
 // [TODO] 0x0016DF50 DrugWarsHUD::vfunc_00 (61 B)
 // [TODO] 0x0016DF90 sub_0016DF90 (182 B)
-// [TODO] 0x0016E050 DrugWarsHUD::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] DrugWarsHUD::vfunc_01 (0x0016E050, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// DrugWarsHUD::vfunc_01 (0x0016E050, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0016DCF0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class DrugWarsHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual DrugWarsHUD* vfunc_01(int a1);
+};
+
+DrugWarsHUD* DrugWarsHUD::vfunc_01(int a1)
+{
+    sub_0016DCF0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0016E070 sub_0016E070 (18 B)
 // [TODO] 0x0016E090 sub_0016E090 (25 B)
 // [TODO] 0x0016E0B0 sub_0016E0B0 (18 B)
@@ -17525,7 +25200,37 @@ void* HUDImageDisplay::vfunc_00()
 // [TODO] 0x0016F590 sub_0016F590 (204 B)
 // [TODO] 0x0016F660 sub_0016F660 (118 B)
 // [TODO] 0x0016F6E0 sub_0016F6E0 (110 B)
-// [TODO] 0x0016F780 HUDManager2::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] HUDManager2::vfunc_00 (0x0016F780, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDManager2::vfunc_00 (0x0016F780, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0016F660(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class HUDManager2
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual HUDManager2* vfunc_00(int a1);
+};
+
+HUDManager2* HUDManager2::vfunc_00(int a1)
+{
+    sub_0016F660();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0016F7A0 sub_0016F7A0 (189 B)
 // [TODO] 0x0016F860 sub_0016F860 (106 B)
 // [TODO] 0x0016F8D0 sub_0016F8D0 (124 B)
@@ -17858,7 +25563,37 @@ void* MissionCompleteHUD::vfunc_00()
 // [TODO] 0x001727A0 ScriptDeclaration::vfunc_05 (24 B)
 // [TODO] 0x001727C0 MissionCompleteHUD::vfunc_39 (177 B)
 // [TODO] 0x00172BA0 sub_00172BA0 (69 B)
-// [TODO] 0x00172BF0 MissionCompleteHUD::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] MissionCompleteHUD::vfunc_01 (0x00172BF0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// MissionCompleteHUD::vfunc_01 (0x00172BF0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001726C0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class MissionCompleteHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual MissionCompleteHUD* vfunc_01(int a1);
+};
+
+MissionCompleteHUD* MissionCompleteHUD::vfunc_01(int a1)
+{
+    sub_001726C0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00172C10 sub_00172C10 (185 B)
 // [TODO] 0x00172CD0 MissionCompleteHUD::vfunc_38 (956 B)
 // [TODO] 0x001731C0 sub_001731C0 (164 B)
@@ -18063,7 +25798,37 @@ void* HUDTapePlayer::vfunc_00()
 // [TODO] 0x001766C0 sub_001766C0 (504 B)
 // [TODO] 0x001768C0 HUDTapePlayer::HUDTapePlayerMenuItem::vfunc_01 (111 B)
 // [TODO] 0x00176930 HUDTapePlayer::HUDTapePlayerMenuItem::vfunc_02 (159 B)
-// [TODO] 0x001769D0 HUDTapePlayer::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] HUDTapePlayer::vfunc_01 (0x001769D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDTapePlayer::vfunc_01 (0x001769D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00176200(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class HUDTapePlayer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual HUDTapePlayer* vfunc_01(int a1);
+};
+
+HUDTapePlayer* HUDTapePlayer::vfunc_01(int a1)
+{
+    sub_00176200();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001769F0 HUDTapePlayer::vfunc_38 (1644 B)
 // [TODO] 0x00177060 sub_00177060 (108 B)
 // [TODO] 0x001770D0 sub_001770D0 (571 B)
@@ -18237,7 +26002,37 @@ void* HUDCashReadout::vfunc_00()
 // [TODO] 0x00178640 HUDTrackable::vfunc_38 (111 B)
 // [TODO] 0x001786B0 HUDTrackable::vfunc_44 (33 B)
 // [TODO] 0x001786E0 sub_001786E0 (46 B)
-// [TODO] 0x00178710 HUDCashReadout::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] HUDCashReadout::vfunc_01 (0x00178710, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDCashReadout::vfunc_01 (0x00178710, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00177FC0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class HUDCashReadout
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual HUDCashReadout* vfunc_01(int a1);
+};
+
+HUDCashReadout* HUDCashReadout::vfunc_01(int a1)
+{
+    sub_00177FC0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00178730 HUDCashReadout::vfunc_00 (141 B)
 // [TODO] 0x001787C0 HUDCashReadout::vfunc_38 (211 B)
 // [TODO] 0x001788A0 sub_001788A0 (39 B)
@@ -18264,7 +26059,37 @@ void* HUDDrugsReadout::vfunc_00()
     return DAT_00410EB0;
 }
 
-// [TODO] 0x001788E0 HUDDrugsReadout::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] HUDDrugsReadout::vfunc_01 (0x001788E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDDrugsReadout::vfunc_01 (0x001788E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00177E00(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class HUDDrugsReadout
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual HUDDrugsReadout* vfunc_01(int a1);
+};
+
+HUDDrugsReadout* HUDDrugsReadout::vfunc_01(int a1)
+{
+    sub_00177E00();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] HUDMissionReadoutRestoreData::vfunc_00 (0x00178900, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -18515,7 +26340,23 @@ void* InvSelectionHUD::vfunc_00()
     return DAT_0041154C;
 }
 
-// [TODO] 0x0017BA20 sub_0017BA20 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0017BA20 (0x0017BA20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0017BA20 (0x0017BA20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045E824;
+
+int __cdecl sub_0017BA20(void)
+{
+    return DAT_0045E824;
+}
+
 // [TODO] 0x0017BA30 HUDTapePlayer::vfunc_05 (5 B)
 // [TODO] 0x0017BBA0 InvSelectionHUD::vfunc_27 (16 B)
 // [TODO] 0x0017BBB0 InvSelectionHUD::vfunc_28 (24 B)
@@ -18617,7 +26458,23 @@ void* MapHUD2::vfunc_00()
 // [TODO] 0x0017E360 sub_0017E360 (66 B)
 // [TODO] 0x0017E3B0 sub_0017E3B0 (18 B)
 // [TODO] 0x0017E3D0 sub_0017E3D0 (8 B)
-// [TODO] 0x0017E3E0 sub_0017E3E0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0017E3E0 (0x0017E3E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0017E3E0 (0x0017E3E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045E860;
+
+int __cdecl sub_0017E3E0(void)
+{
+    return DAT_0045E860;
+}
+
 // [TODO] 0x0017E3F0 sub_0017E3F0 (15 B)
 // [TODO] 0x0017E400 sub_0017E400 (27 B)
 // [TODO] 0x0017E420 sub_0017E420 (2187 B)
@@ -19112,7 +26969,37 @@ void* PimpYourMansionHUD::vfunc_00()
 }
 
 // [TODO] 0x00188120 sub_00188120 (103 B)
-// [TODO] 0x00188190 PimpYourMansionHUD::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] PimpYourMansionHUD::vfunc_01 (0x00188190, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PimpYourMansionHUD::vfunc_01 (0x00188190, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00188120(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PimpYourMansionHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PimpYourMansionHUD* vfunc_01(int a1);
+};
+
+PimpYourMansionHUD* PimpYourMansionHUD::vfunc_01(int a1)
+{
+    sub_00188120();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001881B0 sub_001881B0 (117 B)
 // ============================================================================
 // [VERIFIED] PokerHUD::vfunc_00 (0x00188230, 6 B)
@@ -19147,7 +27034,37 @@ void* PokerHUD::vfunc_00()
 // [TODO] 0x00188730 sub_00188730 (124 B)
 // [TODO] 0x00188776 sub_00188776 (44 B)
 // [TODO] 0x001887B0 sub_001887B0 (293 B)
-// [TODO] 0x001888E0 PokerHUD::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] PokerHUD::vfunc_01 (0x001888E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PokerHUD::vfunc_01 (0x001888E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001881B0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PokerHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PokerHUD* vfunc_01(int a1);
+};
+
+PokerHUD* PokerHUD::vfunc_01(int a1)
+{
+    sub_001881B0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00188900 sub_00188900 (201 B)
 // [TODO] 0x001889D0 sub_001889D0 (236 B)
 // [TODO] 0x00188AC0 sub_00188AC0 (203 B)
@@ -19453,7 +27370,38 @@ template <> void ConcreteClassRep<InventoryHUD>::vfunc_02()
 // [TODO] 0x0018C3C0 ConcreteClassRep<ViceCopHUD>::vfunc_01 (40 B)
 // [TODO] 0x0018C3F0 ConcreteClassRep<ViceCopHUD>::vfunc_02 (68 B)
 // [TODO] 0x0018C440 ConcreteClassRep<VisibilityHUD>::vfunc_01 (40 B)
-// [TODO] 0x0018C470 ConcreteClassRep<VisibilityHUD>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<VisibilityHUD>::vfunc_02 (0x0018C470, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<VisibilityHUD>::vfunc_02 (0x0018C470, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00411D78;
+extern "C" int DAT_00411D7C;
+extern "C" char DAT_0041052C[];
+extern "C" int DAT_00410550;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class VisibilityHUD;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<VisibilityHUD>::vfunc_02()
+{
+    sub_000660D0(DAT_00410550, DAT_00411D78);
+    DAT_00411D7C = (int)DAT_0041052C;
+}
+
 // [TODO] 0x0018C490 ConcreteClassRep<DistanceBubble>::vfunc_01 (40 B)
 // [TODO] 0x0018C4C0 ConcreteClassRep<DistanceBubble>::vfunc_02 (58 B)
 // [TODO] 0x0018C500 ConcreteClassRep<WeaponHUD>::vfunc_01 (43 B)
@@ -19804,7 +27752,23 @@ template <> void ConcreteClassRep<SystemDialogBox>::vfunc_02()
     sub_0018ECC0();
 }
 
-// [TODO] 0x0018ED90 sub_0018ED90 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0018ED90 (0x0018ED90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0018ED90 (0x0018ED90, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045FF5C;
+
+int __cdecl sub_0018ED90(void)
+{
+    return DAT_0045FF5C;
+}
+
 // [TODO] 0x0018EDA0 sub_0018EDA0 (126 B)
 // ============================================================================
 // [VERIFIED] SystemDialogBox::vfunc_00 (0x0018EE20, 6 B)
@@ -19842,7 +27806,37 @@ void* SystemDialogBox::vfunc_00()
 // [TODO] 0x0018F420 sub_0018F420 (74 B)
 // [TODO] 0x0018F470 sub_0018F470 (234 B)
 // [TODO] 0x0018F560 sub_0018F560 (141 B)
-// [TODO] 0x0018F5F0 SystemDialogBox::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] SystemDialogBox::vfunc_01 (0x0018F5F0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// SystemDialogBox::vfunc_01 (0x0018F5F0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0018F420(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class SystemDialogBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual SystemDialogBox* vfunc_01(int a1);
+};
+
+SystemDialogBox* SystemDialogBox::vfunc_01(int a1)
+{
+    sub_0018F420();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0018F610 SystemDialogBox::vfunc_30 (138 B)
 // [TODO] 0x0018F6A0 sub_0018F6A0 (55 B)
 // [TODO] 0x0018F6E0 sub_0018F6E0 (25 B)
@@ -19966,7 +27960,37 @@ void* LoadPackage::vfunc_00()
 // [TODO] 0x00190E50 LoadPackage::vfunc_01 (127 B)
 // [TODO] 0x00190ED0 LoadPackage::vfunc_07 (16 B)
 // [TODO] 0x00190EE0 sub_00190EE0 (137 B)
-// [TODO] 0x00190F70 LoadPackage::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] LoadPackage::vfunc_01 (0x00190F70, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// LoadPackage::vfunc_01 (0x00190F70, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00190EE0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class LoadPackage
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LoadPackage* vfunc_01(int a1);
+};
+
+LoadPackage* LoadPackage::vfunc_01(int a1)
+{
+    sub_00190EE0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00190F90 LoadPackageIdentifierLoader::vfunc_06 (162 B)
 // [TODO] 0x00191040 LoadPackageChunkLoader::vfunc_06 (1028 B)
 // [TODO] 0x00191450 sub_00191450 (27 B)
@@ -20306,7 +28330,23 @@ template <> void ConcreteClassRep<OceanObject>::vfunc_02()
     sub_00193670();
 }
 
-// [TODO] 0x00193880 sub_00193880 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00193880 (0x00193880, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00193880 (0x00193880, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00460118;
+
+int __cdecl sub_00193880(void)
+{
+    return DAT_00460118;
+}
+
 // [TODO] 0x00193890 PauseMenu::vfunc_27 (54 B)
 // [TODO] 0x001938D0 PauseMenu::vfunc_31 (107 B)
 // [TODO] 0x00193940 sub_00193940 (69 B)
@@ -20341,7 +28381,37 @@ void* PauseMenu::vfunc_00()
 }
 
 // [TODO] 0x00193D60 sub_00193D60 (191 B)
-// [TODO] 0x00193E20 PauseMenu::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] PauseMenu::vfunc_01 (0x00193E20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenu::vfunc_01 (0x00193E20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00193D60(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PauseMenu
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PauseMenu* vfunc_01(int a1);
+};
+
+PauseMenu* PauseMenu::vfunc_01(int a1)
+{
+    sub_00193D60();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00193E40 sub_00193E40 (70 B)
 // ============================================================================
 // [VERIFIED] PauseMenuPage::vfunc_00 (0x00193E90, 6 B)
@@ -20648,7 +28718,37 @@ void* PauseMenuPageStats::vfunc_00()
 }
 
 // [TODO] 0x00196810 PauseMenuPageStats::PauseMenuPageStatsItem::vfunc_05 (96 B)
-// [TODO] 0x00196870 PauseMenuPage::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPage::vfunc_01 (0x00196870, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PauseMenuPage::vfunc_01 (0x00196870, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00194180(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PauseMenuPage
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PauseMenuPage* vfunc_01(int a1);
+};
+
+PauseMenuPage* PauseMenuPage::vfunc_01(int a1)
+{
+    sub_00194180();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x00196890 PauseMenuPageStats::vfunc_38 (468 B)
 // [TODO] 0x00196B70 ConcreteClassRep<PauseMenuPage>::vfunc_01 (40 B)
 // [TODO] 0x00196BA0 ConcreteClassRep<PauseMenuPage>::vfunc_02 (26 B)
@@ -20732,8 +28832,68 @@ void* ShaftAndDiscMarker::vfunc_00()
     return DAT_00413900;
 }
 
-// [TODO] 0x00197790 PoiMarkerObject::vfunc_01 (30 B)
-// [TODO] 0x001977B0 PoiMarkerManager::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] PoiMarkerObject::vfunc_01 (0x00197790, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PoiMarkerObject::vfunc_01 (0x00197790, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00197550(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PoiMarkerObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PoiMarkerObject* vfunc_01(int a1);
+};
+
+PoiMarkerObject* PoiMarkerObject::vfunc_01(int a1)
+{
+    sub_00197550();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] PoiMarkerManager::vfunc_00 (0x001977B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PoiMarkerManager::vfunc_00 (0x001977B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001975C0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PoiMarkerManager
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PoiMarkerManager* vfunc_00(int a1);
+};
+
+PoiMarkerManager* PoiMarkerManager::vfunc_00(int a1)
+{
+    sub_001975C0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001978F0 ConcreteClassRep<PoiMarkerObject>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<PoiMarkerObject>::vfunc_02 (0x00197920, 36 B)
@@ -20853,7 +29013,37 @@ void* InstanceObject::vfunc_00()
 // [TODO] 0x001994C0 sub_001994C0 (262 B)
 // [TODO] 0x001995D0 sub_001995D0 (55 B)
 // [TODO] 0x00199610 sub_00199610 (117 B)
-// [TODO] 0x00199690 InstanceObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] InstanceObject::vfunc_01 (0x00199690, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// InstanceObject::vfunc_01 (0x00199690, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00199610(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class InstanceObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual InstanceObject* vfunc_01(int a1);
+};
+
+InstanceObject* InstanceObject::vfunc_01(int a1)
+{
+    sub_00199610();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001996B0 sub_001996B0 (603 B)
 // [TODO] 0x00199910 sub_00199910 (172 B)
 // [TODO] 0x001999C0 sub_001999C0 (2147 B)
@@ -21272,7 +29462,23 @@ template <> void ConcreteClassRep<VehicleRenderableObject>::vfunc_02()
     sub_0019BB50();
 }
 
-// [TODO] 0x0019BD40 sub_0019BD40 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0019BD40 (0x0019BD40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0019BD40 (0x0019BD40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004605C8;
+
+int __cdecl sub_0019BD40(void)
+{
+    return DAT_004605C8;
+}
+
 // [TODO] 0x0019BD50 sub_0019BD50 (28 B)
 // [TODO] 0x0019BD70 sub_0019BD70 (46 B)
 // ============================================================================
@@ -21539,7 +29745,37 @@ void* LocatableSoundObject::vfunc_00()
 // [TODO] 0x0019E5E0 sub_0019E5E0 (23 B)
 // [TODO] 0x0019E620 sub_0019E620 (122 B)
 // [TODO] 0x0019E6A0 sub_0019E6A0 (118 B)
-// [TODO] 0x0019E720 LocatableSoundObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] LocatableSoundObject::vfunc_01 (0x0019E720, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// LocatableSoundObject::vfunc_01 (0x0019E720, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0019E4F0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class LocatableSoundObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LocatableSoundObject* vfunc_01(int a1);
+};
+
+LocatableSoundObject* LocatableSoundObject::vfunc_01(int a1)
+{
+    sub_0019E4F0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0019E790 sub_0019E790 (160 B)
 // [TODO] 0x0019E830 LocatableSoundObject::vfunc_05 (287 B)
 // [TODO] 0x0019E950 LocatableSoundObject::vfunc_09 (674 B)
@@ -21812,7 +30048,38 @@ template <> void ConcreteClassRep<TapeMixTape>::vfunc_02()
     sub_0019F3D0();
 }
 
-// [TODO] 0x0019F850 ConcreteClassRep<TapeTrackLibrary>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<TapeTrackLibrary>::vfunc_02 (0x0019F850, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<TapeTrackLibrary>::vfunc_02 (0x0019F850, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00415064;
+extern "C" int DAT_00415068;
+extern "C" char DAT_003F661C[];
+extern "C" int DAT_003F6640;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class TapeTrackLibrary;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<TapeTrackLibrary>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6640, DAT_00415064);
+    DAT_00415068 = (int)DAT_003F661C;
+}
+
 // [TODO] 0x0019F870 ConcreteClassRep<TapeTrackLibrary>::vfunc_01 (67 B)
 // ============================================================================
 // [VERIFIED] TapeTrackLibrary::vfunc_00 (0x0019F8C0, 6 B)
@@ -21842,7 +30109,38 @@ void* TapeTrackLibrary::vfunc_00()
 // [TODO] 0x0019F910 TapeTrackLibrary::vfunc_00 (12 B)
 // [TODO] 0x0019F920 TapeTrackLibrary::vfunc_03 (4 B)
 // [TODO] 0x0019F930 ConcreteClassRep<TapePlayer>::vfunc_01 (40 B)
-// [TODO] 0x0019F960 ConcreteClassRep<TapePlayer>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<TapePlayer>::vfunc_02 (0x0019F960, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<TapePlayer>::vfunc_02 (0x0019F960, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004150BC;
+extern "C" int DAT_004150C0;
+extern "C" char DAT_003F68D0[];
+extern "C" int DAT_003F68F4;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class TapePlayer;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<TapePlayer>::vfunc_02()
+{
+    sub_000660D0(DAT_003F68F4, DAT_004150BC);
+    DAT_004150C0 = (int)DAT_003F68D0;
+}
+
 // [TODO] 0x0019F980 ConcreteClassRep<ZoneSoundObject>::vfunc_01 (40 B)
 // [TODO] 0x0019F9B0 ConcreteClassRep<ZoneSoundObject>::vfunc_02 (84 B)
 // [TODO] 0x0019FA10 sub_0019FA10 (351 B)
@@ -21873,7 +30171,37 @@ void* SoundLocationObject::vfunc_00()
 
 // [TODO] 0x0019FC60 sub_0019FC60 (83 B)
 // [TODO] 0x0019FCC0 SoundLocationObject::vfunc_05 (34 B)
-// [TODO] 0x0019FCF0 SoundLocationObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] SoundLocationObject::vfunc_01 (0x0019FCF0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// SoundLocationObject::vfunc_01 (0x0019FCF0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0019FC60(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class SoundLocationObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual SoundLocationObject* vfunc_01(int a1);
+};
+
+SoundLocationObject* SoundLocationObject::vfunc_01(int a1)
+{
+    sub_0019FC60();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0019FD10 sub_0019FD10 (50 B)
 // ============================================================================
 // [VERIFIED] SoundPoiObject::vfunc_00 (0x0019FD50, 6 B)
@@ -22160,7 +30488,37 @@ void* AmbientCharacterSpawnObject::vfunc_00()
 // [TODO] 0x001A0FC0 AmbientCharacterSpawnObject::vfunc_05 (419 B)
 // [TODO] 0x001A1170 sub_001A1170 (204 B)
 // [TODO] 0x001A1240 sub_001A1240 (207 B)
-// [TODO] 0x001A1340 AmbientCharacterSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AmbientCharacterSpawnObject::vfunc_01 (0x001A1340, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AmbientCharacterSpawnObject::vfunc_01 (0x001A1340, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001A0F20(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AmbientCharacterSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AmbientCharacterSpawnObject* vfunc_01(int a1);
+};
+
+AmbientCharacterSpawnObject* AmbientCharacterSpawnObject::vfunc_01(int a1)
+{
+    sub_001A0F20();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001A1360 AmbientCharacterSpawnObject::vfunc_36 (276 B)
 // [TODO] 0x001A1530 sub_001A1530 (106 B)
 // [TODO] 0x001A1572 sub_001A1572 (40 B)
@@ -22280,7 +30638,37 @@ void* CharacterInVehicleSpawnObject::vfunc_00()
 // [TODO] 0x001A1F40 sub_001A1F40 (32 B)
 // [TODO] 0x001A1F60 sub_001A1F60 (42 B)
 // [TODO] 0x001A1F90 sub_001A1F90 (288 B)
-// [TODO] 0x001A20B0 CharacterInVehicleSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] CharacterInVehicleSpawnObject::vfunc_01 (0x001A20B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// CharacterInVehicleSpawnObject::vfunc_01 (0x001A20B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001A1DE0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class CharacterInVehicleSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CharacterInVehicleSpawnObject* vfunc_01(int a1);
+};
+
+CharacterInVehicleSpawnObject* CharacterInVehicleSpawnObject::vfunc_01(int a1)
+{
+    sub_001A1DE0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001A20D0 CharacterInVehicleSpawnObject::vfunc_05 (211 B)
 // [TODO] 0x001A21B0 sub_001A21B0 (231 B)
 // [TODO] 0x001A22A0 CharacterInVehicleSpawnObject::vfunc_38 (374 B)
@@ -22327,7 +30715,37 @@ void* CopSpawnObject::vfunc_00()
 // [TODO] 0x001A40C0 sub_001A40C0 (1068 B)
 // [TODO] 0x001A44F0 sub_001A44F0 (120 B)
 // [TODO] 0x001A4570 sub_001A4570 (318 B)
-// [TODO] 0x001A46B0 CopSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] CopSpawnObject::vfunc_01 (0x001A46B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// CopSpawnObject::vfunc_01 (0x001A46B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001A3F70(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class CopSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CopSpawnObject* vfunc_01(int a1);
+};
+
+CopSpawnObject* CopSpawnObject::vfunc_01(int a1)
+{
+    sub_001A3F70();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001A46D0 sub_001A46D0 (297 B)
 // [TODO] 0x001A4800 CopSpawnObject::vfunc_36 (3281 B)
 // [TODO] 0x001A54E0 sub_001A54E0 (196 B)
@@ -22391,9 +30809,69 @@ void* HenchmenVanSpawnObject::vfunc_00()
 
 // [TODO] 0x001A5C50 sub_001A5C50 (92 B)
 // [TODO] 0x001A5CB0 sub_001A5CB0 (637 B)
-// [TODO] 0x001A5F30 CubeVanSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] CubeVanSpawnObject::vfunc_01 (0x001A5F30, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// CubeVanSpawnObject::vfunc_01 (0x001A5F30, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001A5780(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class CubeVanSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CubeVanSpawnObject* vfunc_01(int a1);
+};
+
+CubeVanSpawnObject* CubeVanSpawnObject::vfunc_01(int a1)
+{
+    sub_001A5780();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001A5F50 CubeVanSpawnObject::vfunc_36 (343 B)
-// [TODO] 0x001A60D0 HenchmenVanSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] HenchmenVanSpawnObject::vfunc_01 (0x001A60D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// HenchmenVanSpawnObject::vfunc_01 (0x001A60D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001A5C50(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class HenchmenVanSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual HenchmenVanSpawnObject* vfunc_01(int a1);
+};
+
+HenchmenVanSpawnObject* HenchmenVanSpawnObject::vfunc_01(int a1)
+{
+    sub_001A5C50();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001A60F0 HenchmenVanSpawnObject::vfunc_36 (166 B)
 // [TODO] 0x001A61D0 sub_001A61D0 (12 B)
 // [TODO] 0x001A61E0 sub_001A61E0 (75 B)
@@ -22713,7 +31191,37 @@ void* GenericSpawnObject::vfunc_00()
 // [TODO] 0x001A9AE0 AddressSpawnObject::vfunc_35 (32 B)
 // [TODO] 0x001A9B00 AddressSpawnObject::vfunc_36 (1027 B)
 // [TODO] 0x001A9F10 sub_001A9F10 (158 B)
-// [TODO] 0x001A9FB0 GenericSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] GenericSpawnObject::vfunc_01 (0x001A9FB0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// GenericSpawnObject::vfunc_01 (0x001A9FB0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001A9F10(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class GenericSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual GenericSpawnObject* vfunc_01(int a1);
+};
+
+GenericSpawnObject* GenericSpawnObject::vfunc_01(int a1)
+{
+    sub_001A9F10();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001A9FD0 sub_001A9FD0 (47 B)
 // ============================================================================
 // [VERIFIED] NestSpawnObject::vfunc_00 (0x001AA000, 6 B)
@@ -22857,7 +31365,37 @@ void* PickupSpawnObject::vfunc_00()
 // [TODO] 0x001AA660 sub_001AA660 (68 B)
 // [TODO] 0x001AA6B0 sub_001AA6B0 (430 B)
 // [TODO] 0x001AA860 sub_001AA860 (85 B)
-// [TODO] 0x001AA8C0 PickupSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] PickupSpawnObject::vfunc_01 (0x001AA8C0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PickupSpawnObject::vfunc_01 (0x001AA8C0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001AA660(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PickupSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PickupSpawnObject* vfunc_01(int a1);
+};
+
+PickupSpawnObject* PickupSpawnObject::vfunc_01(int a1)
+{
+    sub_001AA660();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001AA8E0 sub_001AA8E0 (10 B)
 // [TODO] 0x001AA8F0 sub_001AA8F0 (23 B)
 // [TODO] 0x001AA910 sub_001AA910 (9 B)
@@ -22906,7 +31444,37 @@ void* PropSpawnObject::vfunc_00()
 // [TODO] 0x001AB370 sub_001AB370 (72 B)
 // [TODO] 0x001AB3C0 sub_001AB3C0 (164 B)
 // [TODO] 0x001AB470 sub_001AB470 (214 B)
-// [TODO] 0x001AB550 PropSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] PropSpawnObject::vfunc_01 (0x001AB550, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PropSpawnObject::vfunc_01 (0x001AB550, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001AB010(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PropSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PropSpawnObject* vfunc_01(int a1);
+};
+
+PropSpawnObject* PropSpawnObject::vfunc_01(int a1)
+{
+    sub_001AB010();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001AB570 PropSpawnObject::vfunc_05 (154 B)
 // ============================================================================
 // [VERIFIED] RaceSpawner::vfunc_00 (0x001AB610, 6 B)
@@ -22992,7 +31560,37 @@ void* ResourceLoader::vfunc_00()
 // [TODO] 0x001ABC30 sub_001ABC30 (73 B)
 // [TODO] 0x001ABC80 ResourceLoader::vfunc_35 (63 B)
 // [TODO] 0x001ABCC0 ResourceLoader::vfunc_36 (134 B)
-// [TODO] 0x001ABD80 ResourceLoader::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] ResourceLoader::vfunc_01 (0x001ABD80, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ResourceLoader::vfunc_01 (0x001ABD80, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001ABC30(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ResourceLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ResourceLoader* vfunc_01(int a1);
+};
+
+ResourceLoader* ResourceLoader::vfunc_01(int a1)
+{
+    sub_001ABC30();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001ABDA0 sub_001ABDA0 (142 B)
 // ============================================================================
 // [VERIFIED] ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_00 (0x001ABE30, 6 B)
@@ -23023,7 +31621,37 @@ void* ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_00()
 // [TODO] 0x001ABF00 sub_001ABF00 (76 B)
 // [TODO] 0x001ABF50 ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_35 (66 B)
 // [TODO] 0x001ABFA0 sub_001ABFA0 (391 B)
-// [TODO] 0x001AC170 ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_01 (0x001AC170, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_01 (0x001AC170, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001ABF00(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ScatteredEnemyCharacterGeneratorSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ScatteredEnemyCharacterGeneratorSpawnObject* vfunc_01(int a1);
+};
+
+ScatteredEnemyCharacterGeneratorSpawnObject* ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_01(int a1)
+{
+    sub_001ABF00();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001AC190 ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_36 (292 B)
 // [TODO] 0x001AC590 ConcreteClassRep<PropSpawnObject>::vfunc_01 (43 B)
 // ============================================================================
@@ -23249,7 +31877,38 @@ template <> void ConcreteClassRep<AmbientSpawnObject>::vfunc_02()
 
 // [TODO] 0x001AE5D0 ConcreteClassRep<CubeVanSpawnObject>::vfunc_01 (43 B)
 // [TODO] 0x001AE600 ConcreteClassRep<HenchmenVanSpawnObject>::vfunc_01 (43 B)
-// [TODO] 0x001AE630 ConcreteClassRep<HenchmenVanSpawnObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<HenchmenVanSpawnObject>::vfunc_02 (0x001AE630, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<HenchmenVanSpawnObject>::vfunc_02 (0x001AE630, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0041730C;
+extern "C" int DAT_00417310;
+extern "C" char DAT_004172BC[];
+extern "C" int DAT_004172E0;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class HenchmenVanSpawnObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<HenchmenVanSpawnObject>::vfunc_02()
+{
+    sub_000660D0(DAT_004172E0, DAT_0041730C);
+    DAT_00417310 = (int)DAT_004172BC;
+}
+
 // [TODO] 0x001AE650 ConcreteClassRep<AmbientCharacterSpawnObject>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AmbientCharacterSpawnObject>::vfunc_02 (0x001AE680, 36 B)
@@ -23322,7 +31981,38 @@ template <> void ConcreteClassRep<PersistentSpawnObject>::vfunc_02()
 }
 
 // [TODO] 0x001AE740 ConcreteClassRep<PersistentVehicleSpawnObject>::vfunc_01 (43 B)
-// [TODO] 0x001AE770 ConcreteClassRep<PersistentVehicleSpawnObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<PersistentVehicleSpawnObject>::vfunc_02 (0x001AE770, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<PersistentVehicleSpawnObject>::vfunc_02 (0x001AE770, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004173BC;
+extern "C" int DAT_004173C0;
+extern "C" char DAT_0041736C[];
+extern "C" int DAT_00417390;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class PersistentVehicleSpawnObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<PersistentVehicleSpawnObject>::vfunc_02()
+{
+    sub_000660D0(DAT_00417390, DAT_004173BC);
+    DAT_004173C0 = (int)DAT_0041736C;
+}
+
 // [TODO] 0x001AE790 ConcreteClassRep<CallForVehicleSpawnObject>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<CallForVehicleSpawnObject>::vfunc_02 (0x001AE7C0, 36 B)
@@ -23361,7 +32051,38 @@ template <> void ConcreteClassRep<CallForVehicleSpawnObject>::vfunc_02()
 // [TODO] 0x001AE7F0 ConcreteClassRep<CopSpawnObject>::vfunc_01 (43 B)
 // [TODO] 0x001AE820 ConcreteClassRep<GangSpawnObject>::vfunc_01 (43 B)
 // [TODO] 0x001AE850 ConcreteClassRep<DealerSpawnObject>::vfunc_01 (43 B)
-// [TODO] 0x001AE880 ConcreteClassRep<DealerSpawnObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<DealerSpawnObject>::vfunc_02 (0x001AE880, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<DealerSpawnObject>::vfunc_02 (0x001AE880, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0041746C;
+extern "C" int DAT_00417470;
+extern "C" char DAT_004170AC[];
+extern "C" int DAT_004170D0;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class DealerSpawnObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<DealerSpawnObject>::vfunc_02()
+{
+    sub_000660D0(DAT_004170D0, DAT_0041746C);
+    DAT_00417470 = (int)DAT_004170AC;
+}
+
 // [TODO] 0x001AE8A0 ConcreteClassRep<ResourceLoader>::vfunc_01 (43 B)
 // [TODO] 0x001AE8D0 ConcreteClassRep<ResourceLoader>::vfunc_02 (61 B)
 // [TODO] 0x001AE910 ConcreteClassRep<SpawnTemplateGroup>::vfunc_01 (40 B)
@@ -23369,7 +32090,38 @@ template <> void ConcreteClassRep<CallForVehicleSpawnObject>::vfunc_02()
 // [TODO] 0x001AE9A0 ConcreteClassRep<VehicleSpawnObject>::vfunc_01 (43 B)
 // [TODO] 0x001AE9D0 ConcreteClassRep<VehicleSpawnObject>::vfunc_02 (61 B)
 // [TODO] 0x001AEA10 ConcreteClassRep<SpawnTriggerObject>::vfunc_01 (40 B)
-// [TODO] 0x001AEA40 ConcreteClassRep<SpawnTriggerObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<SpawnTriggerObject>::vfunc_02 (0x001AEA40, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<SpawnTriggerObject>::vfunc_02 (0x001AEA40, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0041751C;
+extern "C" int DAT_00417520;
+extern "C" char DAT_003F6D24[];
+extern "C" int DAT_003F6D48;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class SpawnTriggerObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<SpawnTriggerObject>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6D48, DAT_0041751C);
+    DAT_00417520 = (int)DAT_003F6D24;
+}
+
 // [TODO] 0x001AEA60 CScript::Method5<void, int, int, int, int, int>::vfunc_00 (25 B)
 // [TODO] 0x001AEA80 sub_001AEA80 (55 B)
 // [TODO] 0x001AEAC0 sub_001AEAC0 (114 B)
@@ -23821,7 +32573,37 @@ void* ExplosionObject::vfunc_00()
 // [TODO] 0x001B1E30 ExplosionObject::vfunc_28 (29 B)
 // [TODO] 0x001B1E50 ExplosionObject::vfunc_30 (29 B)
 // [TODO] 0x001B1E70 sub_001B1E70 (212 B)
-// [TODO] 0x001B1F50 ExplosionObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] ExplosionObject::vfunc_01 (0x001B1F50, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ExplosionObject::vfunc_01 (0x001B1F50, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001B1DA0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ExplosionObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ExplosionObject* vfunc_01(int a1);
+};
+
+ExplosionObject* ExplosionObject::vfunc_01(int a1)
+{
+    sub_001B1DA0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001B1FA0 sub_001B1FA0 (87 B)
 // [TODO] 0x001B2000 sub_001B2000 (115 B)
 // ============================================================================
@@ -23936,7 +32718,38 @@ void* MortarObject::vfunc_00()
 // [TODO] 0x001B3D00 ShotgunWeaponStateProp::vfunc_53 (52 B)
 // [TODO] 0x001B3D40 ShotgunWeaponStateProp::vfunc_54 (52 B)
 // [TODO] 0x001B3D80 ConcreteClassRep<ExplosionObject>::vfunc_01 (43 B)
-// [TODO] 0x001B3DB0 ConcreteClassRep<ExplosionObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<ExplosionObject>::vfunc_02 (0x001B3DB0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<ExplosionObject>::vfunc_02 (0x001B3DB0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004177BC;
+extern "C" int DAT_004177C0;
+extern "C" char DAT_003F66E4[];
+extern "C" int DAT_003F6708;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class ExplosionObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<ExplosionObject>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6708, DAT_004177BC);
+    DAT_004177C0 = (int)DAT_003F66E4;
+}
+
 // [TODO] 0x001B3DD0 ConcreteClassRep<GameObjectMover>::vfunc_01 (40 B)
 // [TODO] 0x001B3E00 CScript::Method3<void, const char*, bool, bool>::vfunc_00 (58 B)
 // [TODO] 0x001B3E40 CScript::Method3<void, ScriptObject*, math::Vector, math::Vector>::vfunc_00 (25 B)
@@ -23979,9 +32792,71 @@ template <> void ConcreteClassRep<GameObjectMover>::vfunc_02()
 }
 
 // [TODO] 0x001B41E0 ConcreteClassRep<StatePropBehaviourTemplate>::vfunc_01 (40 B)
-// [TODO] 0x001B4210 ConcreteClassRep<StatePropBehaviourTemplate>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<StatePropBehaviourTemplate>::vfunc_02 (0x001B4210, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<StatePropBehaviourTemplate>::vfunc_02 (0x001B4210, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004179E4;
+extern "C" int DAT_004179E8;
+extern "C" char DAT_003F6D24[];
+extern "C" int DAT_003F6D48;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class StatePropBehaviourTemplate;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<StatePropBehaviourTemplate>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6D48, DAT_004179E4);
+    DAT_004179E8 = (int)DAT_003F6D24;
+}
+
 // [TODO] 0x001B4600 ConcreteClassRep<StatePropAttachmentObject>::vfunc_01 (40 B)
-// [TODO] 0x001B4630 ConcreteClassRep<StatePropAttachmentObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<StatePropAttachmentObject>::vfunc_02 (0x001B4630, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<StatePropAttachmentObject>::vfunc_02 (0x001B4630, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00417C68;
+extern "C" int DAT_00417C6C;
+extern "C" char DAT_003F6D24[];
+extern "C" int DAT_003F6D48;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class StatePropAttachmentObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<StatePropAttachmentObject>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6D48, DAT_00417C68);
+    DAT_00417C6C = (int)DAT_003F6D24;
+}
+
 // [TODO] 0x001B4650 ConcreteClassRep<StatePropObject>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<StatePropObject>::vfunc_02 (0x001B4680, 36 B)
@@ -24057,7 +32932,38 @@ template <> void ConcreteClassRep<StatePropWaterCollisionTemplate>::vfunc_02()
 // [TODO] 0x001B4810 ConcreteClassRep<StatePropSnapToWaterTemplate>::vfunc_01 (40 B)
 // [TODO] 0x001B4840 ConcreteClassRep<StatePropSnapToWaterTemplate>::vfunc_02 (58 B)
 // [TODO] 0x001B4880 ConcreteClassRep<VehicleWeaponStateProp>::vfunc_01 (43 B)
-// [TODO] 0x001B48B0 ConcreteClassRep<VehicleWeaponStateProp>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<VehicleWeaponStateProp>::vfunc_02 (0x001B48B0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<VehicleWeaponStateProp>::vfunc_02 (0x001B48B0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00417FA0;
+extern "C" int DAT_00417FA4;
+extern "C" char DAT_0041820C[];
+extern "C" int DAT_00418230;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class VehicleWeaponStateProp;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<VehicleWeaponStateProp>::vfunc_02()
+{
+    sub_000660D0(DAT_00418230, DAT_00417FA0);
+    DAT_00417FA4 = (int)DAT_0041820C;
+}
+
 // [TODO] 0x001B48D0 ConcreteClassRep<WeaponPickup>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<WeaponPickup>::vfunc_02 (0x001B4990, 36 B)
@@ -24582,7 +33488,37 @@ void* WeaponPickup::vfunc_00()
     return DAT_00418038;
 }
 
-// [TODO] 0x001B80F0 StatePropObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] StatePropObject::vfunc_01 (0x001B80F0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// StatePropObject::vfunc_01 (0x001B80F0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001B6560(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class StatePropObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual StatePropObject* vfunc_01(int a1);
+};
+
+StatePropObject* StatePropObject::vfunc_01(int a1)
+{
+    sub_001B6560();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001B8110 WeaponPickup::vfunc_14 (104 B)
 // [TODO] 0x001B8180 sub_001B8180 (94 B)
 // [TODO] 0x001B81E0 sub_001B81E0 (11 B)
@@ -24670,7 +33606,37 @@ void* MountedWeaponStateProp::vfunc_00()
 // [TODO] 0x001B93A0 sub_001B93A0 (419 B)
 // [TODO] 0x001B9550 MeleeWeaponStateProp::vfunc_30 (445 B)
 // [TODO] 0x001B9710 sub_001B9710 (153 B)
-// [TODO] 0x001B97B0 MountedWeaponStateProp::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] MountedWeaponStateProp::vfunc_01 (0x001B97B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// MountedWeaponStateProp::vfunc_01 (0x001B97B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001B8BB0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class MountedWeaponStateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual MountedWeaponStateProp* vfunc_01(int a1);
+};
+
+MountedWeaponStateProp* MountedWeaponStateProp::vfunc_01(int a1)
+{
+    sub_001B8BB0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001B97D0 MountedWeaponStateProp::vfunc_09 (150 B)
 // [TODO] 0x001B9870 sub_001B9870 (33 B)
 // [TODO] 0x001B98A0 sub_001B98A0 (146 B)
@@ -26922,7 +35888,37 @@ void* BoatDamageProperties::vfunc_00()
     return DAT_0041D574;
 }
 
-// [TODO] 0x001C60E0 BoatDamageProperties::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] BoatDamageProperties::vfunc_01 (0x001C60E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatDamageProperties::vfunc_01 (0x001C60E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001D3CE0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class BoatDamageProperties
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual BoatDamageProperties* vfunc_01(int a1);
+};
+
+BoatDamageProperties* BoatDamageProperties::vfunc_01(int a1)
+{
+    sub_001D3CE0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001C6100 sub_001C6100 (63 B)
 // [TODO] 0x001C6140 sub_001C6140 (32 B)
 // ============================================================================
@@ -27348,7 +36344,38 @@ template <> void ConcreteClassRep<BoatEnginePivotProperties>::vfunc_02()
 // [TODO] 0x001C89A0 ConcreteClassRep<BoatTemplate>::vfunc_01 (43 B)
 // [TODO] 0x001C89D0 ConcreteClassRep<BoatTemplate>::vfunc_02 (61 B)
 // [TODO] 0x001C8A10 ConcreteClassRep<HelicopterArtTemplate>::vfunc_01 (43 B)
-// [TODO] 0x001C8A40 ConcreteClassRep<HelicopterArtTemplate>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<HelicopterArtTemplate>::vfunc_02 (0x001C8A40, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<HelicopterArtTemplate>::vfunc_02 (0x001C8A40, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0041D62C;
+extern "C" int DAT_0041D630;
+extern "C" char DAT_0041DE44[];
+extern "C" int DAT_0041DE68;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class HelicopterArtTemplate;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<HelicopterArtTemplate>::vfunc_02()
+{
+    sub_000660D0(DAT_0041DE68, DAT_0041D62C);
+    DAT_0041D630 = (int)DAT_0041DE44;
+}
+
 // [TODO] 0x001C8DC0 ConcreteClassRep<HelicopterPhysicsTemplate>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<HelicopterPhysicsTemplate>::vfunc_02 (0x001C8DF0, 36 B)
@@ -27385,9 +36412,71 @@ template <> void ConcreteClassRep<HelicopterPhysicsTemplate>::vfunc_02()
 }
 
 // [TODO] 0x001C8E20 ConcreteClassRep<HelicopterTemplate>::vfunc_01 (43 B)
-// [TODO] 0x001C8E50 ConcreteClassRep<HelicopterTemplate>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<HelicopterTemplate>::vfunc_02 (0x001C8E50, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<HelicopterTemplate>::vfunc_02 (0x001C8E50, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0041D968;
+extern "C" int DAT_0041D96C;
+extern "C" char DAT_00421454[];
+extern "C" int DAT_00421478;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class HelicopterTemplate;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<HelicopterTemplate>::vfunc_02()
+{
+    sub_000660D0(DAT_00421478, DAT_0041D968);
+    DAT_0041D96C = (int)DAT_00421454;
+}
+
 // [TODO] 0x001C8E70 ConcreteClassRep<VehicleAITuneablesTemplate>::vfunc_01 (40 B)
-// [TODO] 0x001C8EA0 ConcreteClassRep<VehicleAITuneablesTemplate>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<VehicleAITuneablesTemplate>::vfunc_02 (0x001C8EA0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<VehicleAITuneablesTemplate>::vfunc_02 (0x001C8EA0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0041D9D4;
+extern "C" int DAT_0041D9D8;
+extern "C" char DAT_003F6F68[];
+extern "C" int DAT_003F6F8C;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class VehicleAITuneablesTemplate;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<VehicleAITuneablesTemplate>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6F8C, DAT_0041D9D4);
+    DAT_0041D9D8 = (int)DAT_003F6F68;
+}
+
 // [TODO] 0x001C9420 ConcreteClassRep<VehicleShaderProperties>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleShaderProperties>::vfunc_02 (0x001C9450, 36 B)
@@ -28206,9 +37295,71 @@ template <> void ConcreteClassRep<VehicleZoneProperties>::vfunc_02()
 }
 
 // [TODO] 0x001CD1C0 ConcreteClassRep<BoatZoneProperties>::vfunc_01 (40 B)
-// [TODO] 0x001CD1F0 ConcreteClassRep<BoatZoneProperties>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<BoatZoneProperties>::vfunc_02 (0x001CD1F0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<BoatZoneProperties>::vfunc_02 (0x001CD1F0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00421318;
+extern "C" int DAT_0042131C;
+extern "C" char DAT_004212C8[];
+extern "C" int DAT_004212EC;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class BoatZoneProperties;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<BoatZoneProperties>::vfunc_02()
+{
+    sub_000660D0(DAT_004212EC, DAT_00421318);
+    DAT_0042131C = (int)DAT_004212C8;
+}
+
 // [TODO] 0x001CD210 ConcreteClassRep<AirplaneZoneProperties>::vfunc_01 (40 B)
-// [TODO] 0x001CD240 ConcreteClassRep<AirplaneZoneProperties>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AirplaneZoneProperties>::vfunc_02 (0x001CD240, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AirplaneZoneProperties>::vfunc_02 (0x001CD240, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00421344;
+extern "C" int DAT_00421348;
+extern "C" char DAT_004212C8[];
+extern "C" int DAT_004212EC;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AirplaneZoneProperties;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AirplaneZoneProperties>::vfunc_02()
+{
+    sub_000660D0(DAT_004212EC, DAT_00421344);
+    DAT_00421348 = (int)DAT_004212C8;
+}
+
 // [TODO] 0x001CD260 ConcreteClassRep<VehicleZoneMeshProperties>::vfunc_01 (43 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleZoneMeshProperties>::vfunc_02 (0x001CD290, 36 B)
@@ -29257,7 +38408,37 @@ void* VehicleTargetingLocatorProperties::vfunc_00()
     return DAT_0041DE70;
 }
 
-// [TODO] 0x001D0FF0 ScriptObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] ScriptObject::vfunc_01 (0x001D0FF0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ScriptObject::vfunc_01 (0x001D0FF0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00029C00(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ScriptObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ScriptObject* vfunc_01(int a1);
+};
+
+ScriptObject* ScriptObject::vfunc_01(int a1)
+{
+    sub_00029C00();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001D1010 sub_001D1010 (39 B)
 // ============================================================================
 // [VERIFIED] VehicleArtTemplate::vfunc_00 (0x001D1040, 6 B)
@@ -32145,7 +41326,37 @@ void* LOSTriggerVolumeObject::vfunc_00()
 // [TODO] 0x001D7F90 LOSTriggerVolumeObject::vfunc_05 (29 B)
 // [TODO] 0x001D8030 sub_001D8030 (144 B)
 // [TODO] 0x001D80C0 sub_001D80C0 (118 B)
-// [TODO] 0x001D8140 LOSTriggerVolumeObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] LOSTriggerVolumeObject::vfunc_01 (0x001D8140, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// LOSTriggerVolumeObject::vfunc_01 (0x001D8140, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001D7F10(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class LOSTriggerVolumeObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LOSTriggerVolumeObject* vfunc_01(int a1);
+};
+
+LOSTriggerVolumeObject* LOSTriggerVolumeObject::vfunc_01(int a1)
+{
+    sub_001D7F10();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001D8160 ActiveAirplaneObject::vfunc_10 (11 B)
 // [TODO] 0x001D8170 ActiveAirplaneObject::vfunc_03 (17 B)
 // [TODO] 0x001D8190 ActiveAirplaneObject::vfunc_19 (47 B)
@@ -32284,7 +41495,37 @@ WheeledVehicleObject* WheeledVehicleObject::vfunc_01(int a1)
 // [TODO] 0x001D8A80 WheeledVehicleObject::vfunc_47 (179 B)
 // [TODO] 0x001D8B40 WheeledVehicleObject::vfunc_55 (41 B)
 // [TODO] 0x001D8B70 WheeledVehicleObject::vfunc_53 (119 B)
-// [TODO] 0x001D8BF0 ActiveWheeledVehicleObject::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] ActiveWheeledVehicleObject::vfunc_00 (0x001D8BF0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ActiveWheeledVehicleObject::vfunc_00 (0x001D8BF0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001D88D0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ActiveWheeledVehicleObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ActiveWheeledVehicleObject* vfunc_00(int a1);
+};
+
+ActiveWheeledVehicleObject* ActiveWheeledVehicleObject::vfunc_00(int a1)
+{
+    sub_001D88D0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001D8C10 ActiveWheeledVehicleObject::vfunc_04 (666 B)
 // [TODO] 0x001D8EB0 sub_001D8EB0 (661 B)
 // [TODO] 0x001D9150 WheeledVehicleObject::vfunc_46 (173 B)
@@ -32432,13 +41673,106 @@ HelicopterObject* HelicopterObject::vfunc_01(int a1)
 // [TODO] 0x001DA270 HelicopterObject::vfunc_55 (41 B)
 // [TODO] 0x001DA2A0 ActiveHelicopterObject::vfunc_04 (655 B)
 // [TODO] 0x001DA530 ConcreteClassRep<AirplaneObject>::vfunc_01 (43 B)
-// [TODO] 0x001DA560 ConcreteClassRep<AirplaneObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AirplaneObject>::vfunc_02 (0x001DA560, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<AirplaneObject>::vfunc_02 (0x001DA560, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00425C24;
+extern "C" int DAT_00425C28;
+extern "C" char DAT_00426154[];
+extern "C" int DAT_00426178;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class AirplaneObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AirplaneObject>::vfunc_02()
+{
+    sub_000660D0(DAT_00426178, DAT_00425C24);
+    DAT_00425C28 = (int)DAT_00426154;
+}
+
 // [TODO] 0x001DA590 ConcreteClassRep<WheeledVehicleObject>::vfunc_01 (43 B)
 // [TODO] 0x001DA620 ConcreteClassRep<WheeledVehicleObject>::vfunc_02 (26 B)
 // [TODO] 0x001DA640 ConcreteClassRep<BoatObject>::vfunc_01 (43 B)
-// [TODO] 0x001DA670 ConcreteClassRep<BoatObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<BoatObject>::vfunc_02 (0x001DA670, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<BoatObject>::vfunc_02 (0x001DA670, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00425D3C;
+extern "C" int DAT_00425D40;
+extern "C" char DAT_00426154[];
+extern "C" int DAT_00426178;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class BoatObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<BoatObject>::vfunc_02()
+{
+    sub_000660D0(DAT_00426178, DAT_00425D3C);
+    DAT_00425D40 = (int)DAT_00426154;
+}
+
 // [TODO] 0x001DA690 ConcreteClassRep<HelicopterObject>::vfunc_01 (43 B)
-// [TODO] 0x001DA6C0 ConcreteClassRep<HelicopterObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<HelicopterObject>::vfunc_02 (0x001DA6C0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<HelicopterObject>::vfunc_02 (0x001DA6C0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00425DA0;
+extern "C" int DAT_00425DA4;
+extern "C" char DAT_00426154[];
+extern "C" int DAT_00426178;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class HelicopterObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<HelicopterObject>::vfunc_02()
+{
+    sub_000660D0(DAT_00426178, DAT_00425DA0);
+    DAT_00425DA4 = (int)DAT_00426154;
+}
+
 // [TODO] 0x001DA6E0 sub_001DA6E0 (7 B)
 // [TODO] 0x001DAE20 ConcreteClassRep<VehicleObject>::vfunc_01 (43 B)
 // [TODO] 0x001DAE50 CScript::Method4<ScriptObject*, int, const char*, const char*, float>::vfunc_00 (25 B)
@@ -32595,7 +41929,37 @@ void* VehicleObject::vfunc_00()
 // [TODO] 0x001DC790 sub_001DC790 (104 B)
 // [TODO] 0x001DC800 sub_001DC800 (213 B)
 // [TODO] 0x001DC970 sub_001DC970 (79 B)
-// [TODO] 0x001DC9C0 VehicleObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] VehicleObject::vfunc_01 (0x001DC9C0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// VehicleObject::vfunc_01 (0x001DC9C0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001DB870(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class VehicleObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VehicleObject* vfunc_01(int a1);
+};
+
+VehicleObject* VehicleObject::vfunc_01(int a1)
+{
+    sub_001DB870();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001DC9E0 AirplaneObject::vfunc_15 (54 B)
 // [TODO] 0x001DCA20 AirplaneObject::vfunc_32 (34 B)
 // [TODO] 0x001DCA50 AirplaneObject::vfunc_20 (121 B)
@@ -32650,7 +42014,37 @@ void* VehicleObject::vfunc_00()
 // [TODO] 0x001DEBD0 AirplaneObject::vfunc_34 (111 B)
 // [TODO] 0x001DEC40 sub_001DEC40 (1147 B)
 // [TODO] 0x001DF0C0 sub_001DF0C0 (16 B)
-// [TODO] 0x001DF0D0 ActiveVehicleObject::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] ActiveVehicleObject::vfunc_00 (0x001DF0D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// ActiveVehicleObject::vfunc_00 (0x001DF0D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001DDBF0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class ActiveVehicleObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ActiveVehicleObject* vfunc_00(int a1);
+};
+
+ActiveVehicleObject* ActiveVehicleObject::vfunc_00(int a1)
+{
+    sub_001DDBF0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001DF0F0 ActiveVehicleObject::vfunc_01 (855 B)
 // [TODO] 0x001DF450 ActiveVehicleObject::vfunc_09 (173 B)
 // [TODO] 0x001DF500 ActiveAirplaneObject::vfunc_07 (73 B)
@@ -32923,8 +42317,68 @@ void* CarDrivingRewardsObject::vfunc_00()
 // [TODO] 0x001E0640 sub_001E0640 (87 B)
 // [TODO] 0x001E06A0 sub_001E06A0 (95 B)
 // [TODO] 0x001E0700 DrivingRewardsObject::vfunc_01 (91 B)
-// [TODO] 0x001E0760 BoatDrivingRewardsObject::vfunc_01 (30 B)
-// [TODO] 0x001E0780 CarDrivingRewardsObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] BoatDrivingRewardsObject::vfunc_01 (0x001E0760, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// BoatDrivingRewardsObject::vfunc_01 (0x001E0760, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001E0550(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class BoatDrivingRewardsObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual BoatDrivingRewardsObject* vfunc_01(int a1);
+};
+
+BoatDrivingRewardsObject* BoatDrivingRewardsObject::vfunc_01(int a1)
+{
+    sub_001E0550();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] CarDrivingRewardsObject::vfunc_01 (0x001E0780, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// CarDrivingRewardsObject::vfunc_01 (0x001E0780, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001E0640(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class CarDrivingRewardsObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CarDrivingRewardsObject* vfunc_01(int a1);
+};
+
+CarDrivingRewardsObject* CarDrivingRewardsObject::vfunc_01(int a1)
+{
+    sub_001E0640();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001E07A0 DrivingRewardsObject::vfunc_27 (54 B)
 // [TODO] 0x001E07E0 BoatDrivingRewardsObject::vfunc_27 (68 B)
 // [TODO] 0x001E0830 CarDrivingRewardsObject::vfunc_27 (68 B)
@@ -33059,9 +42513,70 @@ void* LightsVolumeObject::vfunc_00()
 
 // [TODO] 0x001E1090 sub_001E1090 (78 B)
 // [TODO] 0x001E10E0 LightsVolumeObject::vfunc_05 (488 B)
-// [TODO] 0x001E12D0 LightsVolumeObject::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] LightsVolumeObject::vfunc_01 (0x001E12D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// LightsVolumeObject::vfunc_01 (0x001E12D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001E1090(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class LightsVolumeObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LightsVolumeObject* vfunc_01(int a1);
+};
+
+LightsVolumeObject* LightsVolumeObject::vfunc_01(int a1)
+{
+    sub_001E1090();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001E12F0 ConcreteClassRep<LightsVolumeObject>::vfunc_01 (40 B)
-// [TODO] 0x001E1320 ConcreteClassRep<LightsVolumeObject>::vfunc_02 (32 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<LightsVolumeObject>::vfunc_02 (0x001E1320, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
+// its addresses and names were swapped for this function's.
+// ConcreteClassRep<LightsVolumeObject>::vfunc_02 (0x001E1320, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00426F3C;
+extern "C" int DAT_00426F40;
+extern "C" char DAT_003F6D24[];
+extern "C" int DAT_003F6D48;
+extern "C" void __cdecl sub_000660D0(int, int);
+
+class LightsVolumeObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<LightsVolumeObject>::vfunc_02()
+{
+    sub_000660D0(DAT_003F6D48, DAT_00426F3C);
+    DAT_00426F40 = (int)DAT_003F6D24;
+}
+
 // [TODO] 0x001E1350 ConcreteClassRep<WakeObject>::vfunc_01 (43 B)
 // [TODO] 0x001E1380 ConcreteClassRep<WakeObject>::vfunc_02 (64 B)
 // [TODO] 0x001E13C0 sub_001E13C0 (42 B)
@@ -33145,7 +42660,23 @@ void* AddressManager::vfunc_00()
     return DAT_00427124;
 }
 
-// [TODO] 0x001E1570 sub_001E1570 (6 B)
+// ============================================================================
+// [VERIFIED] sub_001E1570 (0x001E1570, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001E1570 (0x001E1570, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00461F94;
+
+int __cdecl sub_001E1570(void)
+{
+    return DAT_00461F94;
+}
+
 // [TODO] 0x001E1580 sub_001E1580 (39 B)
 // [TODO] 0x001E15B0 sub_001E15B0 (71 B)
 // [TODO] 0x001E1650 sub_001E1650 (21 B)
@@ -33155,7 +42686,37 @@ void* AddressManager::vfunc_00()
 // [TODO] 0x001E1730 sub_001E1730 (209 B)
 // [TODO] 0x001E1810 sub_001E1810 (166 B)
 // [TODO] 0x001E18C0 sub_001E18C0 (62 B)
-// [TODO] 0x001E1900 AddressManager::vfunc_01 (30 B)
+// ============================================================================
+// [VERIFIED] AddressManager::vfunc_01 (0x001E1900, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// AddressManager::vfunc_01 (0x001E1900, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001E1520(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class AddressManager
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual AddressManager* vfunc_01(int a1);
+};
+
+AddressManager* AddressManager::vfunc_01(int a1)
+{
+    sub_001E1520();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001E1920 sub_001E1920 (207 B)
 // [TODO] 0x001E19F0 sub_001E19F0 (144 B)
 // [TODO] 0x001E1A80 sub_001E1A80 (281 B)
@@ -33199,8 +42760,40 @@ void* AddressObject::vfunc_00()
 // [TODO] 0x001E2D90 sub_001E2D90 (97 B)
 // [TODO] 0x001E2E00 sub_001E2E00 (74 B)
 // [TODO] 0x001E2E50 sub_001E2E50 (30 B)
-// [TODO] 0x001E2ED0 sub_001E2ED0 (6 B)
-// [TODO] 0x001E2EE0 sub_001E2EE0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_001E2ED0 (0x001E2ED0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001E2ED0 (0x001E2ED0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00462048;
+
+int __cdecl sub_001E2ED0(void)
+{
+    return DAT_00462048;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E2EE0 (0x001E2EE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001E2EE0 (0x001E2EE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0046204C;
+
+int __cdecl sub_001E2EE0(void)
+{
+    return DAT_0046204C;
+}
+
 // [TODO] 0x001E2EF0 sub_001E2EF0 (6 B)
 // [TODO] 0x001E2F00 sub_001E2F00 (44 B)
 // [TODO] 0x001E2F30 sub_001E2F30 (82 B)
@@ -33384,7 +42977,29 @@ void* VisibilityTriggerObject::vfunc_00()
 // [TODO] 0x001E6060 sub_001E6060 (14 B)
 // [TODO] 0x001E60F0 sub_001E60F0 (100 B)
 // [TODO] 0x001E6160 sub_001E6160 (153 B)
-// [TODO] 0x001E6200 sub_001E6200 (5 B)
+// ============================================================================
+// [VERIFIED] sub_001E6200 (0x001E6200, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001E6200 (0x001E6200, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001E6070(void);
+
+class Class_001E6200
+{
+public:
+    void sub_001E6200();
+};
+
+void Class_001E6200::sub_001E6200()
+{
+    sub_001E6070();
+}
+
 // [TODO] 0x001E6210 sub_001E6210 (420 B)
 // [TODO] 0x001E63C0 sub_001E63C0 (151 B)
 // [TODO] 0x001E6460 sub_001E6460 (119 B)
@@ -33492,7 +43107,37 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x001EAD60 sub_001EAD60 (1305 B)
 // [TODO] 0x001EB280 sub_001EB280 (139 B)
 // [TODO] 0x001EB310 sub_001EB310 (608 B)
-// [TODO] 0x001EB5D0 CVManager::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] CVManager::vfunc_00 (0x001EB5D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// CVManager::vfunc_00 (0x001EB5D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001EB280(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class CVManager
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CVManager* vfunc_00(int a1);
+};
+
+CVManager* CVManager::vfunc_00(int a1)
+{
+    sub_001EB280();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001EB5F0 CVManager::vfunc_02 (350 B)
 // [TODO] 0x001EB750 CVManager::vfunc_01 (185 B)
 // [TODO] 0x001EB810 sub_001EB810 (414 B)
@@ -33503,7 +43148,37 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x001EBBA0 GameLoadingManager::vfunc_03 (81 B)
 // [TODO] 0x001EBC50 sub_001EBC50 (399 B)
 // [TODO] 0x001EBDE0 sub_001EBDE0 (988 B)
-// [TODO] 0x001EC1C0 GameObjectManager::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] GameObjectManager::vfunc_00 (0x001EC1C0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameObjectManager::vfunc_00 (0x001EC1C0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001EBC50(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class GameObjectManager
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual GameObjectManager* vfunc_00(int a1);
+};
+
+GameObjectManager* GameObjectManager::vfunc_00(int a1)
+{
+    sub_001EBC50();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001EC1E0 sub_001EC1E0 (77 B)
 // [TODO] 0x001EC230 sub_001EC230 (77 B)
 // [TODO] 0x001EC280 sub_001EC280 (83 B)
@@ -33587,7 +43262,37 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x001EEAB0 sub_001EEAB0 (380 B)
 // [TODO] 0x001EEC30 sub_001EEC30 (129 B)
 // [TODO] 0x001EECC0 sub_001EECC0 (188 B)
-// [TODO] 0x001EEDB0 PresentationManager::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] PresentationManager::vfunc_00 (0x001EEDB0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
+// its addresses and names were swapped for this function's.
+// PresentationManager::vfunc_00 (0x001EEDB0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001EEC30(void);
+extern "C" void __cdecl sub_00025160(int);
+
+class PresentationManager
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PresentationManager* vfunc_00(int a1);
+};
+
+PresentationManager* PresentationManager::vfunc_00(int a1)
+{
+    sub_001EEC30();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x001EEDD0 sub_001EEDD0 (442 B)
 // [TODO] 0x001EEF90 PresentationManager::vfunc_01 (87 B)
 // [TODO] 0x001EEFF0 PresentationManager::vfunc_02 (5 B)
@@ -33708,7 +43413,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x001F4417 sub_001F4417 (219 B)
 // [TODO] 0x001F44F2 sub_001F44F2 (79 B)
 // [TODO] 0x001F4541 sub_001F4541 (23 B)
-// [TODO] 0x001F4558 sub_001F4558 (6 B)
+// ============================================================================
+// [VERIFIED] sub_001F4558 (0x001F4558, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001F4558 (0x001F4558, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00497034;
+
+int __cdecl sub_001F4558(void)
+{
+    return DAT_00497034;
+}
+
 // [TODO] 0x001F455E sub_001F455E (29 B)
 // [TODO] 0x001F457B sub_001F457B (30 B)
 // [TODO] 0x001F4599 sub_001F4599 (288 B)
@@ -33735,7 +43456,29 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x001F6B1D sub_001F6B1D (116 B)
 // [TODO] 0x001F6C04 sub_001F6C04 (37 B)
 // [TODO] 0x001F6C29 sub_001F6C29 (98 B)
-// [TODO] 0x001F6C8B sub_001F6C8B (5 B)
+// ============================================================================
+// [VERIFIED] sub_001F6C8B (0x001F6C8B, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001F6C8B (0x001F6C8B, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F770E(void);
+
+class Class_001F6C8B
+{
+public:
+    void sub_001F6C8B();
+};
+
+void Class_001F6C8B::sub_001F6C8B()
+{
+    sub_001F770E();
+}
+
 // [TODO] 0x001F6C90 sub_001F6C90 (114 B)
 // [TODO] 0x001F6D02 sub_001F6D02 (117 B)
 // [TODO] 0x001F6D77 sub_001F6D77 (128 B)
@@ -33818,7 +43561,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x001F87F0 sub_001F87F0 (22 B)
 // [TODO] 0x001F8810 sub_001F8810 (91 B)
 // [TODO] 0x001F8870 sub_001F8870 (666 B)
-// [TODO] 0x001F8B10 fight::Branch::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] fight::Branch::vfunc_03 (0x001F8B10, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::Branch::vfunc_03 (0x001F8B10, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F8710(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace fight {
+
+class Branch
+{
+public:
+    virtual Branch* vfunc_03(int a1);
+};
+
+Branch* Branch::vfunc_03(int a1)
+{
+    sub_001F8710();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x001F8B30 sub_001F8B30 (94 B)
 // [TODO] 0x001F8B90 fight::Node::vfunc_07 (42 B)
 // [TODO] 0x001F8BC0 fight::Node::vfunc_10 (46 B)
@@ -33833,7 +43607,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x001F8EF0 sub_001F8EF0 (58 B)
 // [TODO] 0x001F8F30 sub_001F8F30 (409 B)
 // [TODO] 0x001F90D0 fight::Node::vfunc_13 (544 B)
-// [TODO] 0x001F92F0 fight::Node::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] fight::Node::vfunc_03 (0x001F92F0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::Node::vfunc_03 (0x001F92F0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F8EF0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace fight {
+
+class Node
+{
+public:
+    virtual Node* vfunc_03(int a1);
+};
+
+Node* Node::vfunc_03(int a1)
+{
+    sub_001F8EF0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x001F9310 fight::BufferFileReader::vfunc_05 (7 B)
 // [TODO] 0x001F9320 fight::BufferFileReader::vfunc_06 (13 B)
 // [TODO] 0x001F9330 fight::BufferFileReader::vfunc_08 (16 B)
@@ -33955,9 +43760,53 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x001FCE70 sub_001FCE70 (42 B)
 // [TODO] 0x001FCEA0 sub_001FCEA0 (33 B)
 // [TODO] 0x001FCED0 sub_001FCED0 (75 B)
-// [TODO] 0x001FCF20 sub_001FCF20 (5 B)
+// ============================================================================
+// [VERIFIED] sub_001FCF20 (0x001FCF20, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001FCF20 (0x001FCF20, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025120(void);
+
+class Class_001FCF20
+{
+public:
+    void sub_001FCF20();
+};
+
+void Class_001FCF20::sub_001FCF20()
+{
+    sub_00025120();
+}
+
 // [TODO] 0x001FCF30 sub_001FCF30 (40 B)
-// [TODO] 0x001FCF60 sub_001FCF60 (5 B)
+// ============================================================================
+// [VERIFIED] sub_001FCF60 (0x001FCF60, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001FCF60 (0x001FCF60, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025160(void);
+
+class Class_001FCF60
+{
+public:
+    void sub_001FCF60();
+};
+
+void Class_001FCF60::sub_001FCF60()
+{
+    sub_00025160();
+}
+
 // [TODO] 0x001FCF70 sub_001FCF70 (21 B)
 // [TODO] 0x001FCF90 content::LoadInventory::vfunc_04 (126 B)
 // [TODO] 0x001FD010 sub_001FD010 (76 B)
@@ -34112,7 +43961,29 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002013E0 sub_002013E0 (92 B)
 // [TODO] 0x00201440 sub_00201440 (75 B)
 // [TODO] 0x00201490 sub_00201490 (67 B)
-// [TODO] 0x002014E0 sub_002014E0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_002014E0 (0x002014E0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002014E0 (0x002014E0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00201440(void);
+
+class Class_002014E0
+{
+public:
+    void sub_002014E0();
+};
+
+void Class_002014E0::sub_002014E0()
+{
+    sub_00201440();
+}
+
 // [TODO] 0x002015A0 sub_002015A0 (99 B)
 // [TODO] 0x00201610 sub_00201610 (59 B)
 // [TODO] 0x00201650 sub_00201650 (65 B)
@@ -34123,7 +43994,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00201740 sub_00201740 (114 B)
 // [TODO] 0x002017C0 sub_002017C0 (99 B)
 // [TODO] 0x00201890 sub_00201890 (17 B)
-// [TODO] 0x002018B0 sub_002018B0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_002018B0 (0x002018B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002018B0 (0x002018B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004647F4;
+
+int __cdecl sub_002018B0(void)
+{
+    return DAT_004647F4;
+}
+
 // [TODO] 0x002018C0 sub_002018C0 (16 B)
 // [TODO] 0x002018D0 sub_002018D0 (20 B)
 // [TODO] 0x002018F0 sub_002018F0 (65 B)
@@ -34166,7 +44053,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00204C80 core::ControllerSystemXBox::vfunc_08 (74 B)
 // [TODO] 0x00204CD0 core::ControllerSystemXBox::vfunc_10 (22 B)
 // [TODO] 0x00204CF0 core::ControllerSystemXBox::vfunc_11 (17 B)
-// [TODO] 0x00204D10 sub_00204D10 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00204D10 (0x00204D10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00204D10 (0x00204D10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00464814;
+
+int __cdecl sub_00204D10(void)
+{
+    return DAT_00464814;
+}
+
 // [TODO] 0x00204D20 sub_00204D20 (16 B)
 // [TODO] 0x00204D30 sub_00204D30 (84 B)
 // [TODO] 0x00204D90 core::ControllerXBox::vfunc_18 (233 B)
@@ -34187,7 +44090,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00205300 core::ControllerXBox::vfunc_12 (24 B)
 // [TODO] 0x00205320 fight::ParamFloatConstRange<TimedFightTrack>::vfunc_01 (6 B)
 // [TODO] 0x00205330 core::ControllerXBox::vfunc_17 (27 B)
-// [TODO] 0x00205350 core::ControllerXBox::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] core::ControllerXBox::vfunc_03 (0x00205350, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::ControllerXBox::vfunc_03 (0x00205350, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00204D30(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace core {
+
+class ControllerXBox
+{
+public:
+    virtual ControllerXBox* vfunc_03(int a1);
+};
+
+ControllerXBox* ControllerXBox::vfunc_03(int a1)
+{
+    sub_00204D30();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00205370 core::ControllerOutputPointXBox::vfunc_05 (6 B)
 // [TODO] 0x00205380 core::ControllerOutputPointXBox::vfunc_07 (64 B)
 // [TODO] 0x002053C0 core::ControllerInputPointXBox::vfunc_14 (17 B)
@@ -34247,7 +44181,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00206320 sub_00206320 (77 B)
 // [TODO] 0x00206370 sub_00206370 (17 B)
 // [TODO] 0x00206390 sub_00206390 (112 B)
-// [TODO] 0x00206400 sub_00206400 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00206400 (0x00206400, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00206400 (0x00206400, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00464C20;
+
+int __cdecl sub_00206400(void)
+{
+    return DAT_00464C20;
+}
+
 // [TODO] 0x00206410 pure3d::frontend::Text::vfunc_07 (8 B)
 // [TODO] 0x00206420 sub_00206420 (153 B)
 // [TODO] 0x002064C0 sub_002064C0 (124 B)
@@ -34377,7 +44327,29 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0020B800 sub_0020B800 (535 B)
 // [TODO] 0x0020BA20 sub_0020BA20 (484 B)
 // [TODO] 0x0020BC10 pure3d::TextBible::vfunc_03 (59 B)
-// [TODO] 0x0020BC50 sub_0020BC50 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0020BC50 (0x0020BC50, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020BC50 (0x0020BC50, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0020B5F0(void);
+
+class Class_0020BC50
+{
+public:
+    void sub_0020BC50();
+};
+
+void Class_0020BC50::sub_0020BC50()
+{
+    sub_0020B5F0();
+}
+
 // [TODO] 0x0020BC60 sub_0020BC60 (36 B)
 // [TODO] 0x0020BC90 pure3d::frontend::App::vfunc_00 (40 B)
 // [TODO] 0x0020BCC0 sub_0020BCC0 (6 B)
@@ -34392,7 +44364,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0020BE50 sub_0020BE50 (44 B)
 // [TODO] 0x0020BE80 sub_0020BE80 (61 B)
 // [TODO] 0x0020BEC0 sub_0020BEC0 (7308 B)
-// [TODO] 0x0020BEE0 sub_0020BEE0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0020BEE0 (0x0020BEE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020BEE0 (0x0020BEE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00429334;
+
+int __cdecl sub_0020BEE0(void)
+{
+    return DAT_00429334;
+}
+
 // [TODO] 0x0020BEF0 sub_0020BEF0 (7319 B)
 // [TODO] 0x0020BF00 sub_0020BF00 (7391 B)
 // [TODO] 0x0020BF10 sub_0020BF10 (94 B)
@@ -34433,17 +44421,259 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0020DC30 sub_0020DC30 (6 B)
 // [TODO] 0x0020DC40 sub_0020DC40 (94 B)
 // [TODO] 0x0020DCA0 sub_0020DCA0 (94 B)
-// [TODO] 0x0020DD00 sub_0020DD00 (5 B)
-// [TODO] 0x0020DD10 sub_0020DD10 (5 B)
-// [TODO] 0x0020DD20 sub_0020DD20 (5 B)
-// [TODO] 0x0020DD30 sub_0020DD30 (5 B)
-// [TODO] 0x0020DD40 sub_0020DD40 (5 B)
-// [TODO] 0x0020DD50 sub_0020DD50 (5 B)
-// [TODO] 0x0020DD60 sub_0020DD60 (5 B)
-// [TODO] 0x0020DD70 sub_0020DD70 (5 B)
-// [TODO] 0x0020DD80 sub_0020DD80 (5 B)
-// [TODO] 0x0020DD90 sub_0020DD90 (5 B)
-// [TODO] 0x0020DDA0 sub_0020DDA0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0020DD00 (0x0020DD00, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD00 (0x0020DD00, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024DD90(void);
+
+class Class_0020DD00
+{
+public:
+    void sub_0020DD00();
+};
+
+void Class_0020DD00::sub_0020DD00()
+{
+    sub_0024DD90();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD10 (0x0020DD10, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD10 (0x0020DD10, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024E180(void);
+
+class Class_0020DD10
+{
+public:
+    void sub_0020DD10();
+};
+
+void Class_0020DD10::sub_0020DD10()
+{
+    sub_0024E180();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD20 (0x0020DD20, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD20 (0x0020DD20, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024DE10(void);
+
+class Class_0020DD20
+{
+public:
+    void sub_0020DD20();
+};
+
+void Class_0020DD20::sub_0020DD20()
+{
+    sub_0024DE10();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD30 (0x0020DD30, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD30 (0x0020DD30, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024E1E0(void);
+
+class Class_0020DD30
+{
+public:
+    void sub_0020DD30();
+};
+
+void Class_0020DD30::sub_0020DD30()
+{
+    sub_0024E1E0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD40 (0x0020DD40, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD40 (0x0020DD40, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024E340(void);
+
+class Class_0020DD40
+{
+public:
+    void sub_0020DD40();
+};
+
+void Class_0020DD40::sub_0020DD40()
+{
+    sub_0024E340();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD50 (0x0020DD50, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD50 (0x0020DD50, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024E4B0(void);
+
+class Class_0020DD50
+{
+public:
+    void sub_0020DD50();
+};
+
+void Class_0020DD50::sub_0020DD50()
+{
+    sub_0024E4B0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD60 (0x0020DD60, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD60 (0x0020DD60, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024DE90(void);
+
+class Class_0020DD60
+{
+public:
+    void sub_0020DD60();
+};
+
+void Class_0020DD60::sub_0020DD60()
+{
+    sub_0024DE90();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD70 (0x0020DD70, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD70 (0x0020DD70, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024E4E0(void);
+
+class Class_0020DD70
+{
+public:
+    void sub_0020DD70();
+};
+
+void Class_0020DD70::sub_0020DD70()
+{
+    sub_0024E4E0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD80 (0x0020DD80, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD80 (0x0020DD80, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024E020(void);
+
+class Class_0020DD80
+{
+public:
+    void sub_0020DD80();
+};
+
+void Class_0020DD80::sub_0020DD80()
+{
+    sub_0024E020();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DD90 (0x0020DD90, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DD90 (0x0020DD90, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024E0A0(void);
+
+class Class_0020DD90
+{
+public:
+    void sub_0020DD90();
+};
+
+void Class_0020DD90::sub_0020DD90()
+{
+    sub_0024E0A0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DDA0 (0x0020DDA0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020DDA0 (0x0020DDA0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024DEE0(void);
+
+class Class_0020DDA0
+{
+public:
+    void sub_0020DDA0();
+};
+
+void Class_0020DDA0::sub_0020DDA0()
+{
+    sub_0024DEE0();
+}
+
 // [TODO] 0x0020DDB0 sub_0020DDB0 (227 B)
 // [TODO] 0x0020DEA0 sub_0020DEA0 (22 B)
 // [TODO] 0x0020DEC0 sub_0020DEC0 (66 B)
@@ -34473,7 +44703,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0020F180 sub_0020F180 (368 B)
 // [TODO] 0x0020F2F0 sub_0020F2F0 (157 B)
 // [TODO] 0x0020F390 sub_0020F390 (28 B)
-// [TODO] 0x0020F3B0 sub_0020F3B0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0020F3B0 (0x0020F3B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0020F3B0 (0x0020F3B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00464CD8;
+
+int __cdecl sub_0020F3B0(void)
+{
+    return DAT_00464CD8;
+}
+
 // [TODO] 0x0020F3C0 sub_0020F3C0 (132 B)
 // [TODO] 0x0020F450 sub_0020F450 (135 B)
 // [TODO] 0x0020F4E0 sub_0020F4E0 (579 B)
@@ -34543,7 +44789,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00211760 sub_00211760 (84 B)
 // [TODO] 0x002117C0 sub_002117C0 (82 B)
 // [TODO] 0x00211820 sub_00211820 (65 B)
-// [TODO] 0x00211870 pure3d::View::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::View::vfunc_03 (0x00211870, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::View::vfunc_03 (0x00211870, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00211820(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class View
+{
+public:
+    virtual View* vfunc_03(int a1);
+};
+
+View* View::vfunc_03(int a1)
+{
+    sub_00211820();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00211890 sub_00211890 (94 B)
 // [TODO] 0x002118F0 sub_002118F0 (60 B)
 // [TODO] 0x00211930 sub_00211930 (54 B)
@@ -34600,9 +44877,71 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00214630 sub_00214630 (27 B)
 // [TODO] 0x00214650 pure3d::ShadowMeshLoader::vfunc_06 (1781 B)
 // [TODO] 0x00214D50 sub_00214D50 (27 B)
-// [TODO] 0x00214D70 pure3d::ShadowMeshImpl::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ShadowMeshImpl::vfunc_03 (0x00214D70, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ShadowMeshImpl::vfunc_03 (0x00214D70, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00213F60(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ShadowMeshImpl
+{
+public:
+    virtual ShadowMeshImpl* vfunc_03(int a1);
+};
+
+ShadowMeshImpl* ShadowMeshImpl::vfunc_03(int a1)
+{
+    sub_00213F60();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00214D90 sub_00214D90 (1542 B)
-// [TODO] 0x002153A0 pure3d::ShadowSkinImpl::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ShadowSkinImpl::vfunc_03 (0x002153A0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ShadowSkinImpl::vfunc_03 (0x002153A0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00214550(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ShadowSkinImpl
+{
+public:
+    virtual ShadowSkinImpl* vfunc_03(int a1);
+};
+
+ShadowSkinImpl* ShadowSkinImpl::vfunc_03(int a1)
+{
+    sub_00214550();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002153C0 pure3d::ShadowMeshImpl::vfunc_08 (363 B)
 // [TODO] 0x00215530 sub_00215530 (2482 B)
 // [TODO] 0x00215A1E sub_00215A1E (1220 B)
@@ -34630,7 +44969,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00217060 sub_00217060 (48 B)
 // [TODO] 0x00217090 sub_00217090 (433 B)
 // [TODO] 0x00217250 sub_00217250 (68 B)
-// [TODO] 0x002172A0 pure3d::DrawableContainer::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::DrawableContainer::vfunc_03 (0x002172A0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::DrawableContainer::vfunc_03 (0x002172A0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00217250(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class DrawableContainer
+{
+public:
+    virtual DrawableContainer* vfunc_03(int a1);
+};
+
+DrawableContainer* DrawableContainer::vfunc_03(int a1)
+{
+    sub_00217250();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002172C0 sub_002172C0 (22 B)
 // [TODO] 0x002172E0 sub_002172E0 (60 B)
 // [TODO] 0x00217320 sub_00217320 (94 B)
@@ -34645,7 +45015,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002178B0 sub_002178B0 (131 B)
 // [TODO] 0x00217940 sub_00217940 (125 B)
 // [TODO] 0x002179C0 sub_002179C0 (160 B)
-// [TODO] 0x00217A60 pure3d::DisplayList::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::DisplayList::vfunc_03 (0x00217A60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::DisplayList::vfunc_03 (0x00217A60, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00217940(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class DisplayList
+{
+public:
+    virtual DisplayList* vfunc_03(int a1);
+};
+
+DisplayList* DisplayList::vfunc_03(int a1)
+{
+    sub_00217940();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00217A80 sub_00217A80 (11 B)
 // [TODO] 0x00217A90 pure3d::Light::vfunc_07 (24 B)
 // [TODO] 0x00217AB0 pure3d::Light::vfunc_08 (41 B)
@@ -34665,7 +45066,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00218060 sub_00218060 (55 B)
 // [TODO] 0x002180A0 sub_002180A0 (42 B)
 // [TODO] 0x002180D0 sub_002180D0 (81 B)
-// [TODO] 0x00218130 pure3d::LightGroup::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::LightGroup::vfunc_03 (0x00218130, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::LightGroup::vfunc_03 (0x00218130, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002180D0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class LightGroup
+{
+public:
+    virtual LightGroup* vfunc_03(int a1);
+};
+
+LightGroup* LightGroup::vfunc_03(int a1)
+{
+    sub_002180D0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00218150 sub_00218150 (40 B)
 // [TODO] 0x00218180 sub_00218180 (56 B)
 // [TODO] 0x002181C0 sub_002181C0 (44 B)
@@ -34695,7 +45127,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00219C00 sub_00219C00 (233 B)
 // [TODO] 0x00219CF0 sub_00219CF0 (50 B)
 // [TODO] 0x00219D30 sub_00219D30 (203 B)
-// [TODO] 0x00219E00 pure3d::LightsChooser::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::LightsChooser::vfunc_03 (0x00219E00, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::LightsChooser::vfunc_03 (0x00219E00, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00219D30(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class LightsChooser
+{
+public:
+    virtual LightsChooser* vfunc_03(int a1);
+};
+
+LightsChooser* LightsChooser::vfunc_03(int a1)
+{
+    sub_00219D30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00219E20 sub_00219E20 (25 B)
 // [TODO] 0x00219E40 sub_00219E40 (32 B)
 // [TODO] 0x00219E60 pure3d::AmbientLight::vfunc_07 (13 B)
@@ -34763,9 +45226,108 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0021BE90 sub_0021BE90 (161 B)
 // [TODO] 0x0021BF40 sub_0021BF40 (109 B)
 // [TODO] 0x0021BFB0 sub_0021BFB0 (52 B)
-// [TODO] 0x0021BFF0 pure3d::PNGHandler::vfunc_07 (6 B)
-// [TODO] 0x0021C000 pure3d::RawImageHandler::vfunc_07 (6 B)
-// [TODO] 0x0021C010 pure3d::DXTNHandler::vfunc_07 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::PNGHandler::vfunc_07 (0x0021BFF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::PNGHandler::vfunc_07 (0x0021BFF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003AF2D0[];
+
+namespace pure3d {
+
+class PNGHandler
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* PNGHandler::vfunc_07()
+{
+    return DAT_003AF2D0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::RawImageHandler::vfunc_07 (0x0021C000, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::RawImageHandler::vfunc_07 (0x0021C000, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003AF320[];
+
+namespace pure3d {
+
+class RawImageHandler
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* RawImageHandler::vfunc_07()
+{
+    return DAT_003AF320;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::DXTNHandler::vfunc_07 (0x0021C010, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::DXTNHandler::vfunc_07 (0x0021C010, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003AF370[];
+
+namespace pure3d {
+
+class DXTNHandler
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+};
+
+void* DXTNHandler::vfunc_07()
+{
+    return DAT_003AF370;
+}
+
+}
+
 // [TODO] 0x0021C020 sub_0021C020 (529 B)
 // [TODO] 0x0021C240 sub_0021C240 (84 B)
 // [TODO] 0x0021C2A0 pure3d::PointCamera::vfunc_03 (36 B)
@@ -34841,7 +45403,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0021EBA0 pure3d::SpriteObject::vfunc_28 (10 B)
 // [TODO] 0x0021EBB0 pure3d::SpriteObject::vfunc_29 (10 B)
 // [TODO] 0x0021EBC0 pure3d::SpriteLoader::vfunc_07 (10 B)
-// [TODO] 0x0021EBD0 pure3d::Sprite::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::Sprite::vfunc_03 (0x0021EBD0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Sprite::vfunc_03 (0x0021EBD0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0021E940(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class Sprite
+{
+public:
+    virtual Sprite* vfunc_03(int a1);
+};
+
+Sprite* Sprite::vfunc_03(int a1)
+{
+    sub_0021E940();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0021EBF0 sub_0021EBF0 (703 B)
 // [TODO] 0x0021EEB0 sub_0021EEB0 (740 B)
 // [TODO] 0x0021F1A0 sub_0021F1A0 (138 B)
@@ -34872,7 +45465,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00220B00 sub_00220B00 (118 B)
 // [TODO] 0x00220B80 sub_00220B80 (112 B)
 // [TODO] 0x00220BF0 pure3d::ExpressionGroupLoader::vfunc_06 (461 B)
-// [TODO] 0x00220DC0 pure3d::ExpressionGroup::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ExpressionGroup::vfunc_03 (0x00220DC0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ExpressionGroup::vfunc_03 (0x00220DC0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00220B80(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ExpressionGroup
+{
+public:
+    virtual ExpressionGroup* vfunc_03(int a1);
+};
+
+ExpressionGroup* ExpressionGroup::vfunc_03(int a1)
+{
+    sub_00220B80();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00220DE0 sub_00220DE0 (78 B)
 // [TODO] 0x00220E30 sub_00220E30 (436 B)
 // [TODO] 0x00220FF0 sub_00220FF0 (293 B)
@@ -34891,7 +45515,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002215C0 sub_002215C0 (97 B)
 // [TODO] 0x00221630 sub_00221630 (315 B)
 // [TODO] 0x00221770 sub_00221770 (162 B)
-// [TODO] 0x00221820 pure3d::VertexOffsetExpressionMixer::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexOffsetExpressionMixer::vfunc_03 (0x00221820, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::VertexOffsetExpressionMixer::vfunc_03 (0x00221820, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002215C0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class VertexOffsetExpressionMixer
+{
+public:
+    virtual VertexOffsetExpressionMixer* vfunc_03(int a1);
+};
+
+VertexOffsetExpressionMixer* VertexOffsetExpressionMixer::vfunc_03(int a1)
+{
+    sub_002215C0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00221840 pure3d::VertexOffsetExpressionMixerLoader::vfunc_06 (446 B)
 // [TODO] 0x00221A00 sub_00221A00 (408 B)
 // [TODO] 0x00221BA0 sub_00221BA0 (63 B)
@@ -34910,14 +45565,138 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002221C0 sub_002221C0 (80 B)
 // [TODO] 0x00222210 pure3d::ParticleSystemLoader::vfunc_06 (1094 B)
 // [TODO] 0x00222297 sub_00222297 (959 B)
-// [TODO] 0x00222660 pure3d::OptimizedSpriteParticleEmitterHandler::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::OptimizedSpriteParticleEmitterHandler::vfunc_03 (0x00222660, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::OptimizedSpriteParticleEmitterHandler::vfunc_03 (0x00222660, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001F7E30(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class OptimizedSpriteParticleEmitterHandler
+{
+public:
+    virtual OptimizedSpriteParticleEmitterHandler* vfunc_03(int a1);
+};
+
+OptimizedSpriteParticleEmitterHandler* OptimizedSpriteParticleEmitterHandler::vfunc_03(int a1)
+{
+    sub_001F7E30();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00222680 pure3d::OptimizedParticleSystemLoader::vfunc_06 (622 B)
 // [TODO] 0x002228F0 sub_002228F0 (51 B)
 // [TODO] 0x00222930 sub_00222930 (51 B)
-// [TODO] 0x00222970 pure3d::ParticleGeneratorLoader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleGeneratorLoader::vfunc_03 (0x00222970, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleGeneratorLoader::vfunc_03 (0x00222970, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00221D30(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class ParticleGeneratorLoader
+{
+public:
+    virtual ParticleGeneratorLoader* vfunc_03(int a1);
+};
+
+ParticleGeneratorLoader* ParticleGeneratorLoader::vfunc_03(int a1)
+{
+    sub_00221D30();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00222990 sub_00222990 (216 B)
-// [TODO] 0x00222A70 pure3d::ParticleEmitterLoader::vfunc_03 (30 B)
-// [TODO] 0x00222A90 pure3d::ParticleSystemLoader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleEmitterLoader::vfunc_03 (0x00222A70, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleEmitterLoader::vfunc_03 (0x00222A70, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00221D70(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class ParticleEmitterLoader
+{
+public:
+    virtual ParticleEmitterLoader* vfunc_03(int a1);
+};
+
+ParticleEmitterLoader* ParticleEmitterLoader::vfunc_03(int a1)
+{
+    sub_00221D70();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleSystemLoader::vfunc_03 (0x00222A90, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleSystemLoader::vfunc_03 (0x00222A90, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002221C0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ParticleSystemLoader
+{
+public:
+    virtual ParticleSystemLoader* vfunc_03(int a1);
+};
+
+ParticleSystemLoader* ParticleSystemLoader::vfunc_03(int a1)
+{
+    sub_002221C0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00222AB0 sub_00222AB0 (167 B)
 // [TODO] 0x00222B60 pure3d::OptimizedParticleSystemLoader::vfunc_03 (56 B)
 // [TODO] 0x00222BA0 sub_00222BA0 (93 B)
@@ -34963,7 +45742,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00224950 sub_00224950 (256 B)
 // [TODO] 0x00224A50 sub_00224A50 (1291 B)
 // [TODO] 0x00224AA0 pure3d::MultiController::vfunc_05 (31 B)
-// [TODO] 0x00224AC0 pure3d::MultiController::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::MultiController::vfunc_03 (0x00224AC0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::MultiController::vfunc_03 (0x00224AC0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00224A50(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class MultiController
+{
+public:
+    virtual MultiController* vfunc_03(int a1);
+};
+
+MultiController* MultiController::vfunc_03(int a1)
+{
+    sub_00224A50();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00224AE0 sub_00224AE0 (39 B)
 // [TODO] 0x00224B10 pure3d::MultiControllerLoader::vfunc_06 (1002 B)
 // [TODO] 0x00224F00 sub_00224F00 (26 B)
@@ -35018,10 +45828,72 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00226350 content::LoadInventory::DynamicCaster<pure3d::Light>::vfunc_00 (30 B)
 // [TODO] 0x00226370 content::LoadInventory::DynamicCaster<pure3d::BillboardObject>::vfunc_00 (30 B)
 // [TODO] 0x00226390 pure3d::SimpleFrameController::vfunc_03 (63 B)
-// [TODO] 0x002263D0 pure3d::BlendFrameController::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::BlendFrameController::vfunc_03 (0x002263D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::BlendFrameController::vfunc_03 (0x002263D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00225E50(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class BlendFrameController
+{
+public:
+    virtual BlendFrameController* vfunc_03(int a1);
+};
+
+BlendFrameController* BlendFrameController::vfunc_03(int a1)
+{
+    sub_00225E50();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002263F0 sub_002263F0 (121 B)
 // [TODO] 0x00226455 sub_00226455 (14 B)
-// [TODO] 0x00226470 pure3d::FrameControllerLoader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::FrameControllerLoader::vfunc_03 (0x00226470, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::FrameControllerLoader::vfunc_03 (0x00226470, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002262F0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class FrameControllerLoader
+{
+public:
+    virtual FrameControllerLoader* vfunc_03(int a1);
+};
+
+FrameControllerLoader* FrameControllerLoader::vfunc_03(int a1)
+{
+    sub_002262F0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00226490 sub_00226490 (39 B)
 // [TODO] 0x002264C0 sub_002264C0 (39 B)
 // [TODO] 0x002264F0 sub_002264F0 (39 B)
@@ -35044,7 +45916,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00227440 sub_00227440 (154 B)
 // [TODO] 0x002274E0 pure3d::AnimationLoader::vfunc_06 (1208 B)
 // [TODO] 0x002279A0 sub_002279A0 (908 B)
-// [TODO] 0x00227D30 pure3d::Animation::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::Animation::vfunc_03 (0x00227D30, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Animation::vfunc_03 (0x00227D30, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00227440(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class Animation
+{
+public:
+    virtual Animation* vfunc_03(int a1);
+};
+
+Animation* Animation::vfunc_03(int a1)
+{
+    sub_00227440();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00227D50 sub_00227D50 (74 B)
 // [TODO] 0x00227DA0 sub_00227DA0 (95 B)
 // [TODO] 0x00227E00 pure3d::AnimationLoader::vfunc_03 (56 B)
@@ -35078,7 +45981,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00228960 sub_00228960 (99 B)
 // [TODO] 0x002289D0 sub_002289D0 (140 B)
 // [TODO] 0x00228A60 sub_00228A60 (120 B)
-// [TODO] 0x00228AE0 pure3d::CompositeDrawable::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::CompositeDrawable::vfunc_03 (0x00228AE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::CompositeDrawable::vfunc_03 (0x00228AE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00228780(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class CompositeDrawable
+{
+public:
+    virtual CompositeDrawable* vfunc_03(int a1);
+};
+
+CompositeDrawable* CompositeDrawable::vfunc_03(int a1)
+{
+    sub_00228780();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00228B00 sub_00228B00 (486 B)
 // [TODO] 0x00228CF0 sub_00228CF0 (43 B)
 // [TODO] 0x00228D20 pure3d::CompositeDrawable::ActiveControllerList::vfunc_03 (30 B)
@@ -35107,7 +46041,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00229810 sub_00229810 (111 B)
 // [TODO] 0x00229880 pure3d::PolySkin::vfunc_12 (38 B)
 // [TODO] 0x002298B0 sub_002298B0 (139 B)
-// [TODO] 0x00229940 pure3d::PolySkin::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::PolySkin::vfunc_03 (0x00229940, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::PolySkin::vfunc_03 (0x00229940, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00229810(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class PolySkin
+{
+public:
+    virtual PolySkin* vfunc_03(int a1);
+};
+
+PolySkin* PolySkin::vfunc_03(int a1)
+{
+    sub_00229810();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00229960 sub_00229960 (450 B)
 // [TODO] 0x00229B30 pure3d::PolySkin::vfunc_05 (33 B)
 // [TODO] 0x00229B35 sub_00229B35 (28 B)
@@ -35135,7 +46100,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0022A720 sub_0022A720 (177 B)
 // [TODO] 0x0022A7E0 sub_0022A7E0 (141 B)
 // [TODO] 0x0022A870 sub_0022A870 (94 B)
-// [TODO] 0x0022A8D0 pure3d::Skeleton::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::Skeleton::vfunc_03 (0x0022A8D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Skeleton::vfunc_03 (0x0022A8D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0022A720(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class Skeleton
+{
+public:
+    virtual Skeleton* vfunc_03(int a1);
+};
+
+Skeleton* Skeleton::vfunc_03(int a1)
+{
+    sub_0022A720();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0022A8F0 sub_0022A8F0 (408 B)
 // [TODO] 0x0022AA90 sub_0022AA90 (205 B)
 // [TODO] 0x0022AB60 pure3d::SkeletonLoader::vfunc_06 (1451 B)
@@ -35174,7 +46170,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0022E140 sub_0022E140 (127 B)
 // [TODO] 0x0022E1C0 pure3d::BillboardQuadGroup::vfunc_08 (675 B)
 // [TODO] 0x0022E470 sub_0022E470 (161 B)
-// [TODO] 0x0022E520 pure3d::BillboardQuadGroup::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::BillboardQuadGroup::vfunc_03 (0x0022E520, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::BillboardQuadGroup::vfunc_03 (0x0022E520, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0022E140(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class BillboardQuadGroup
+{
+public:
+    virtual BillboardQuadGroup* vfunc_03(int a1);
+};
+
+BillboardQuadGroup* BillboardQuadGroup::vfunc_03(int a1)
+{
+    sub_0022E140();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0022E540 pure3d::BillboardCutOffQuadGroup::vfunc_03 (36 B)
 // [TODO] 0x0022E570 sub_0022E570 (1816 B)
 // [TODO] 0x0022EC90 pure3d::BillboardObjectLoader::vfunc_06 (119 B)
@@ -35206,7 +46233,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002301A0 pure3d::TextureFont::vfunc_26 (111 B)
 // [TODO] 0x00230210 sub_00230210 (166 B)
 // [TODO] 0x002302C0 sub_002302C0 (27 B)
-// [TODO] 0x002302E0 pure3d::TextureFont::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::TextureFont::vfunc_03 (0x002302E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::TextureFont::vfunc_03 (0x002302E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00230210(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class TextureFont
+{
+public:
+    virtual TextureFont* vfunc_03(int a1);
+};
+
+TextureFont* TextureFont::vfunc_03(int a1)
+{
+    sub_00230210();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00230300 pure3d::TextureFontLoader::vfunc_06 (1908 B)
 // [TODO] 0x00230A80 pure3d::LightLoader::vfunc_06 (1336 B)
 // [TODO] 0x00230FC0 sub_00230FC0 (27 B)
@@ -35348,7 +46406,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00236F10 pure3d::d3dExtAntialiasControl::vfunc_02 (16 B)
 // [TODO] 0x00236F20 pure3d::d3dExtGlobalProjectedTexture::vfunc_01 (68 B)
 // [TODO] 0x00236F70 pure3d::d3dExtGlobalProjectedTexture::vfunc_02 (52 B)
-// [TODO] 0x00236FB0 pure3d::d3dExtGlobalProjectedTexture::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtGlobalProjectedTexture::vfunc_00 (0x00236FB0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dExtGlobalProjectedTexture::vfunc_00 (0x00236FB0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00236FD0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dExtGlobalProjectedTexture
+{
+public:
+    virtual d3dExtGlobalProjectedTexture* vfunc_00(int a1);
+};
+
+d3dExtGlobalProjectedTexture* d3dExtGlobalProjectedTexture::vfunc_00(int a1)
+{
+    sub_00236FD0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00236FD0 sub_00236FD0 (48 B)
 // [TODO] 0x00237000 pure3d::d3dExtHardwareSkinning::vfunc_01 (8 B)
 // [TODO] 0x00237010 pure3d::d3dExtHardwareSkinning::vfunc_05 (93 B)
@@ -35369,7 +46458,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002372B0 pure3d::d3dExtVertexProgram::vfunc_03 (14 B)
 // [TODO] 0x002372C0 pure3d::d3dExtVertexProgram::vfunc_02 (72 B)
 // [TODO] 0x00237310 sub_00237310 (422 B)
-// [TODO] 0x002374C0 pure3d::d3dExtFramebufferEffects::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtFramebufferEffects::vfunc_00 (0x002374C0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dExtFramebufferEffects::vfunc_00 (0x002374C0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00232D80(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dExtFramebufferEffects
+{
+public:
+    virtual d3dExtFramebufferEffects* vfunc_00(int a1);
+};
+
+d3dExtFramebufferEffects* d3dExtFramebufferEffects::vfunc_00(int a1)
+{
+    sub_00232D80();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00238220 pure3d::d3dExtFramebufferEffects::vfunc_25 (1119 B)
 // [TODO] 0x00238680 pure3d::d3dExtFramebufferEffects::vfunc_27 (1708 B)
 // [TODO] 0x00238D30 sub_00238D30 (2018 B)
@@ -35394,7 +46514,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0023A5C0 sub_0023A5C0 (929 B)
 // [TODO] 0x0023A970 pure3d::d3dExtFramebufferEffects::vfunc_23 (1061 B)
 // [TODO] 0x0023ADA0 sub_0023ADA0 (1089 B)
-// [TODO] 0x0023B1F0 pure3d::d3dContext::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dContext::vfunc_03 (0x0023B1F0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dContext::vfunc_03 (0x0023B1F0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002398F0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dContext
+{
+public:
+    virtual d3dContext* vfunc_03(int a1);
+};
+
+d3dContext* d3dContext::vfunc_03(int a1)
+{
+    sub_002398F0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0023B210 pure3d::d3dExtFramebufferEffects::vfunc_26 (3487 B)
 // [TODO] 0x0023BFB0 pure3d::prop::StateProp::vfunc_13 (20 B)
 // [TODO] 0x0023BFD0 pure3d::prop::StateProp::vfunc_12 (20 B)
@@ -35445,7 +46596,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0023DA00 pure3d::CharacterPose::vfunc_06 (81 B)
 // [TODO] 0x0023DA60 pure3d::Pose::vfunc_03 (90 B)
 // [TODO] 0x0023DAC0 sub_0023DAC0 (243 B)
-// [TODO] 0x0023DBC0 pure3d::CharacterPose::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::CharacterPose::vfunc_03 (0x0023DBC0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::CharacterPose::vfunc_03 (0x0023DBC0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0023D920(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class CharacterPose
+{
+public:
+    virtual CharacterPose* vfunc_03(int a1);
+};
+
+CharacterPose* CharacterPose::vfunc_03(int a1)
+{
+    sub_0023D920();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0023DBE0 sub_0023DBE0 (93 B)
 // [TODO] 0x0023DC40 sub_0023DC40 (93 B)
 // [TODO] 0x0023DCA0 sub_0023DCA0 (30 B)
@@ -35456,10 +46638,142 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0023DE80 sub_0023DE80 (55 B)
 // [TODO] 0x0023DEC0 sub_0023DEC0 (55 B)
 // [TODO] 0x0023DF00 pure3d::d3dVehicleShader::vfunc_04 (6 B)
-// [TODO] 0x0023DF10 pure3d::d3dVehicleShader::vfunc_15 (6 B)
-// [TODO] 0x0023DF20 pure3d::d3dVehicleShader::vfunc_16 (6 B)
-// [TODO] 0x0023DF30 pure3d::d3dVehicleShader::vfunc_17 (6 B)
-// [TODO] 0x0023DF40 pure3d::d3dVehicleShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_15 (0x0023DF10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_15 (0x0023DF10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042B9D8[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dVehicleShader::vfunc_15()
+{
+    return DAT_0042B9D8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_16 (0x0023DF20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_16 (0x0023DF20, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042B948[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dVehicleShader::vfunc_16()
+{
+    return DAT_0042B948;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_17 (0x0023DF30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_17 (0x0023DF30, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042B8A0[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dVehicleShader::vfunc_17()
+{
+    return DAT_0042B8A0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_18 (0x0023DF40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_18 (0x0023DF40, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042B990[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dVehicleShader::vfunc_18()
+{
+    return DAT_0042B990;
+}
+
+}
+
 // [TODO] 0x0023DF50 sub_0023DF50 (341 B)
 // [TODO] 0x0023E0B0 pure3d::d3dVehicleShader::vfunc_12 (34 B)
 // [TODO] 0x0023E0E0 pure3d::d3dVehicleShader::vfunc_13 (27 B)
@@ -35476,16 +46790,113 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0023E3C0 sub_0023E3C0 (848 B)
 // [TODO] 0x0023E710 sub_0023E710 (203 B)
 // [TODO] 0x0023E7E0 sub_0023E7E0 (228 B)
-// [TODO] 0x0023E8D0 pure3d::d3dVehicleShader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_03 (0x0023E8D0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVehicleShader::vfunc_03 (0x0023E8D0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0023DEC0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual d3dVehicleShader* vfunc_03(int a1);
+};
+
+d3dVehicleShader* d3dVehicleShader::vfunc_03(int a1)
+{
+    sub_0023DEC0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0023E8F0 pure3d::d3dVehicleShader::vfunc_14 (688 B)
 // [TODO] 0x0023EBA0 pure3d::d3dVehicleShader::vfunc_24 (743 B)
 // [TODO] 0x0023EF50 sub_0023EF50 (76 B)
 // [TODO] 0x0023EFA0 sub_0023EFA0 (57 B)
 // [TODO] 0x0023EFE0 sub_0023EFE0 (130 B)
 // [TODO] 0x0023F070 sub_0023F070 (13 B)
-// [TODO] 0x0023F080 sub_0023F080 (5 B)
-// [TODO] 0x0023F090 sub_0023F090 (5 B)
-// [TODO] 0x0023F0A0 sub_0023F0A0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0023F080 (0x0023F080, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0023F080 (0x0023F080, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0026A200(void);
+
+class Class_0023F080
+{
+public:
+    void sub_0023F080();
+};
+
+void Class_0023F080::sub_0023F080()
+{
+    sub_0026A200();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0023F090 (0x0023F090, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0023F090 (0x0023F090, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0026A480(void);
+
+class Class_0023F090
+{
+public:
+    void sub_0023F090();
+};
+
+void Class_0023F090::sub_0023F090()
+{
+    sub_0026A480();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0023F0A0 (0x0023F0A0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0023F0A0 (0x0023F0A0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0026A650(void);
+
+class Class_0023F0A0
+{
+public:
+    void sub_0023F0A0();
+};
+
+void Class_0023F0A0::sub_0023F0A0()
+{
+    sub_0026A650();
+}
+
 // [TODO] 0x0023F0B0 sub_0023F0B0 (18 B)
 // [TODO] 0x0023F0D0 sub_0023F0D0 (18 B)
 // [TODO] 0x0023F0F0 sub_0023F0F0 (11 B)
@@ -35570,7 +46981,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00241E40 pure3d::HeadTrackingLayer::vfunc_03 (56 B)
 // [TODO] 0x00241E80 sub_00241E80 (123 B)
 // [TODO] 0x00241F00 sub_00241F00 (130 B)
-// [TODO] 0x00241F90 pure3d::CharacterController::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::CharacterController::vfunc_03 (0x00241F90, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::CharacterController::vfunc_03 (0x00241F90, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00241F00(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class CharacterController
+{
+public:
+    virtual CharacterController* vfunc_03(int a1);
+};
+
+CharacterController* CharacterController::vfunc_03(int a1)
+{
+    sub_00241F00();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00241FB0 sub_00241FB0 (85 B)
 // [TODO] 0x00242010 sub_00242010 (13 B)
 // [TODO] 0x00242020 sub_00242020 (361 B)
@@ -35596,7 +47038,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00242F30 pure3d::PoseAnimationController::vfunc_26 (43 B)
 // [TODO] 0x00242F60 sub_00242F60 (128 B)
 // [TODO] 0x00242FE0 pure3d::PoseAnimationController::vfunc_29 (33 B)
-// [TODO] 0x00243010 pure3d::CharacterPoseAnimationController::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::CharacterPoseAnimationController::vfunc_03 (0x00243010, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::CharacterPoseAnimationController::vfunc_03 (0x00243010, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00242840(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class CharacterPoseAnimationController
+{
+public:
+    virtual CharacterPoseAnimationController* vfunc_03(int a1);
+};
+
+CharacterPoseAnimationController* CharacterPoseAnimationController::vfunc_03(int a1)
+{
+    sub_00242840();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00243030 sub_00243030 (130 B)
 // [TODO] 0x002430C0 pure3d::CharacterPoseAnimationController::vfunc_05 (34 B)
 // [TODO] 0x002430F0 pure3d::CharacterPoseAnimationController::vfunc_07 (99 B)
@@ -35680,7 +47153,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00245B90 sub_00245B90 (289 B)
 // [TODO] 0x00245CC0 sub_00245CC0 (288 B)
 // [TODO] 0x00245DE0 sub_00245DE0 (300 B)
-// [TODO] 0x00245F10 pure3d::ChannelLoader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ChannelLoader::vfunc_03 (0x00245F10, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ChannelLoader::vfunc_03 (0x00245F10, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244790(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class ChannelLoader
+{
+public:
+    virtual ChannelLoader* vfunc_03(int a1);
+};
+
+ChannelLoader* ChannelLoader::vfunc_03(int a1)
+{
+    sub_00244790();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00245F30 sub_00245F30 (128 B)
 // [TODO] 0x00245FB0 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_03 (44 B)
 // [TODO] 0x00245FE0 sub_00245FE0 (89 B)
@@ -35704,19 +47208,422 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002468C0 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion4>::vfunc_00 (43 B)
 // [TODO] 0x002468F0 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>::vfunc_00 (43 B)
 // [TODO] 0x00246920 pure3d::SimpleChannel::vfunc_00 (84 B)
-// [TODO] 0x00246980 pure3d::IntChannel::vfunc_00 (30 B)
-// [TODO] 0x002469A0 pure3d::Float1Channel::vfunc_00 (30 B)
-// [TODO] 0x002469C0 pure3d::Float2Channel::vfunc_00 (30 B)
-// [TODO] 0x002469E0 pure3d::VectorChannel::vfunc_00 (30 B)
-// [TODO] 0x00246A00 pure3d::Vector1DOFChannel::vfunc_00 (30 B)
-// [TODO] 0x00246A20 pure3d::Vector2DOFChannel::vfunc_00 (30 B)
-// [TODO] 0x00246A40 pure3d::Vector3DOFChannel::vfunc_00 (30 B)
-// [TODO] 0x00246A60 pure3d::RotationChannel::vfunc_00 (30 B)
-// [TODO] 0x00246A80 pure3d::QuaternionChannel::vfunc_00 (30 B)
-// [TODO] 0x00246AA0 pure3d::StringChannel::vfunc_00 (30 B)
-// [TODO] 0x00246AC0 pure3d::EntityChannel::vfunc_00 (30 B)
-// [TODO] 0x00246AE0 pure3d::BoolChannel::vfunc_00 (30 B)
-// [TODO] 0x00246B00 pure3d::ColourChannel::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::IntChannel::vfunc_00 (0x00246980, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::IntChannel::vfunc_00 (0x00246980, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244870(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class IntChannel
+{
+public:
+    virtual IntChannel* vfunc_00(int a1);
+};
+
+IntChannel* IntChannel::vfunc_00(int a1)
+{
+    sub_00244870();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Float1Channel::vfunc_00 (0x002469A0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Float1Channel::vfunc_00 (0x002469A0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244960(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class Float1Channel
+{
+public:
+    virtual Float1Channel* vfunc_00(int a1);
+};
+
+Float1Channel* Float1Channel::vfunc_00(int a1)
+{
+    sub_00244960();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Float2Channel::vfunc_00 (0x002469C0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Float2Channel::vfunc_00 (0x002469C0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244A70(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class Float2Channel
+{
+public:
+    virtual Float2Channel* vfunc_00(int a1);
+};
+
+Float2Channel* Float2Channel::vfunc_00(int a1)
+{
+    sub_00244A70();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::VectorChannel::vfunc_00 (0x002469E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::VectorChannel::vfunc_00 (0x002469E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244B00(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class VectorChannel
+{
+public:
+    virtual VectorChannel* vfunc_00(int a1);
+};
+
+VectorChannel* VectorChannel::vfunc_00(int a1)
+{
+    sub_00244B00();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Vector1DOFChannel::vfunc_00 (0x00246A00, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Vector1DOFChannel::vfunc_00 (0x00246A00, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244BE0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class Vector1DOFChannel
+{
+public:
+    virtual Vector1DOFChannel* vfunc_00(int a1);
+};
+
+Vector1DOFChannel* Vector1DOFChannel::vfunc_00(int a1)
+{
+    sub_00244BE0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Vector2DOFChannel::vfunc_00 (0x00246A20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Vector2DOFChannel::vfunc_00 (0x00246A20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244CE0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class Vector2DOFChannel
+{
+public:
+    virtual Vector2DOFChannel* vfunc_00(int a1);
+};
+
+Vector2DOFChannel* Vector2DOFChannel::vfunc_00(int a1)
+{
+    sub_00244CE0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Vector3DOFChannel::vfunc_00 (0x00246A40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Vector3DOFChannel::vfunc_00 (0x00246A40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244DE0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class Vector3DOFChannel
+{
+public:
+    virtual Vector3DOFChannel* vfunc_00(int a1);
+};
+
+Vector3DOFChannel* Vector3DOFChannel::vfunc_00(int a1)
+{
+    sub_00244DE0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::RotationChannel::vfunc_00 (0x00246A60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::RotationChannel::vfunc_00 (0x00246A60, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244E50(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class RotationChannel
+{
+public:
+    virtual RotationChannel* vfunc_00(int a1);
+};
+
+RotationChannel* RotationChannel::vfunc_00(int a1)
+{
+    sub_00244E50();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::QuaternionChannel::vfunc_00 (0x00246A80, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::QuaternionChannel::vfunc_00 (0x00246A80, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00244F40(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class QuaternionChannel
+{
+public:
+    virtual QuaternionChannel* vfunc_00(int a1);
+};
+
+QuaternionChannel* QuaternionChannel::vfunc_00(int a1)
+{
+    sub_00244F40();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::StringChannel::vfunc_00 (0x00246AA0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::StringChannel::vfunc_00 (0x00246AA0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00245050(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class StringChannel
+{
+public:
+    virtual StringChannel* vfunc_00(int a1);
+};
+
+StringChannel* StringChannel::vfunc_00(int a1)
+{
+    sub_00245050();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::EntityChannel::vfunc_00 (0x00246AC0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::EntityChannel::vfunc_00 (0x00246AC0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00245120(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class EntityChannel
+{
+public:
+    virtual EntityChannel* vfunc_00(int a1);
+};
+
+EntityChannel* EntityChannel::vfunc_00(int a1)
+{
+    sub_00245120();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::BoolChannel::vfunc_00 (0x00246AE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::BoolChannel::vfunc_00 (0x00246AE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002451F0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class BoolChannel
+{
+public:
+    virtual BoolChannel* vfunc_00(int a1);
+};
+
+BoolChannel* BoolChannel::vfunc_00(int a1)
+{
+    sub_002451F0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ColourChannel::vfunc_00 (0x00246B00, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ColourChannel::vfunc_00 (0x00246B00, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00245300(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class ColourChannel
+{
+public:
+    virtual ColourChannel* vfunc_00(int a1);
+};
+
+ColourChannel* ColourChannel::vfunc_00(int a1)
+{
+    sub_00245300();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00246B20 sub_00246B20 (2116 B)
 // [TODO] 0x00247370 sub_00247370 (105 B)
 // [TODO] 0x002473E0 sub_002473E0 (432 B)
@@ -35836,7 +47743,29 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00249DE0 pure3d::frontend::SpriteMenuItem::vfunc_03 (30 B)
 // [TODO] 0x00249E00 sub_00249E00 (29 B)
 // [TODO] 0x00249E20 pure3d::frontend::Screen::vfunc_14 (6 B)
-// [TODO] 0x00249E30 sub_00249E30 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00249E30 (0x00249E30, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00249E30 (0x00249E30, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002494D0(void);
+
+class Class_00249E30
+{
+public:
+    void sub_00249E30();
+};
+
+void Class_00249E30::sub_00249E30()
+{
+    sub_002494D0();
+}
+
 // [TODO] 0x00249E40 pure3d::frontend::Screen::vfunc_03 (52 B)
 // [TODO] 0x00249E80 pure3d::frontend::Screen::vfunc_11 (337 B)
 // [TODO] 0x00249FE0 pure3d::frontend::Screen::vfunc_08 (55 B)
@@ -35902,8 +47831,40 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0024DC60 sub_0024DC60 (246 B)
 // [TODO] 0x0024DD60 sub_0024DD60 (40 B)
 // [TODO] 0x0024DE90 sub_0024DE90 (47 B)
-// [TODO] 0x0024DEC0 sub_0024DEC0 (6 B)
-// [TODO] 0x0024DED0 sub_0024DED0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_0024DEC0 (0x0024DEC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0024DEC0 (0x0024DEC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048E028;
+
+int __cdecl sub_0024DEC0(void)
+{
+    return DAT_0048E028;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0024DED0 (0x0024DED0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0024DED0 (0x0024DED0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0042C3E0;
+
+int __cdecl sub_0024DED0(void)
+{
+    return DAT_0042C3E0;
+}
+
 // [TODO] 0x0024DEF0 sub_0024DEF0 (103 B)
 // [TODO] 0x0024DF60 sub_0024DF60 (182 B)
 // [TODO] 0x0024E020 sub_0024E020 (119 B)
@@ -35922,7 +47883,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0024E840 sub_0024E840 (250 B)
 // [TODO] 0x0024E940 sub_0024E940 (95 B)
 // [TODO] 0x0024E9A0 pure3d::ParticleController::vfunc_05 (31 B)
-// [TODO] 0x0024E9C0 pure3d::ParticleController::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleController::vfunc_03 (0x0024E9C0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleController::vfunc_03 (0x0024E9C0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024E940(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ParticleController
+{
+public:
+    virtual ParticleController* vfunc_03(int a1);
+};
+
+ParticleController* ParticleController::vfunc_03(int a1)
+{
+    sub_0024E940();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0024E9E0 sub_0024E9E0 (344 B)
 // [TODO] 0x0024EB40 pure3d::ParticleController::vfunc_07 (42 B)
 // [TODO] 0x0024EB70 sub_0024EB70 (15 B)
@@ -35995,10 +47987,103 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00250810 sub_00250810 (453 B)
 // [TODO] 0x002509E0 pure3d::PrimGroup::vfunc_03 (57 B)
 // [TODO] 0x00250A20 pure3d::PrimGroupOptimized::vfunc_03 (82 B)
-// [TODO] 0x00250A80 pure3d::PrimGroupSkinnedOptimized::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroupSkinnedOptimized::vfunc_03 (0x00250A80, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::PrimGroupSkinnedOptimized::vfunc_03 (0x00250A80, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024F880(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class PrimGroupSkinnedOptimized
+{
+public:
+    virtual PrimGroupSkinnedOptimized* vfunc_03(int a1);
+};
+
+PrimGroupSkinnedOptimized* PrimGroupSkinnedOptimized::vfunc_03(int a1)
+{
+    sub_0024F880();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00250AA0 pure3d::PrimGroupStreamed::vfunc_03 (82 B)
-// [TODO] 0x00250B00 pure3d::PrimGroupSkinnedStreamed::vfunc_03 (30 B)
-// [TODO] 0x00250B20 pure3d::VertexAnimPrimGroup::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroupSkinnedStreamed::vfunc_03 (0x00250B00, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::PrimGroupSkinnedStreamed::vfunc_03 (0x00250B00, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0024FC50(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class PrimGroupSkinnedStreamed
+{
+public:
+    virtual PrimGroupSkinnedStreamed* vfunc_03(int a1);
+};
+
+PrimGroupSkinnedStreamed* PrimGroupSkinnedStreamed::vfunc_03(int a1)
+{
+    sub_0024FC50();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::VertexAnimPrimGroup::vfunc_03 (0x00250B20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::VertexAnimPrimGroup::vfunc_03 (0x00250B20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00250010(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class VertexAnimPrimGroup
+{
+public:
+    virtual VertexAnimPrimGroup* vfunc_03(int a1);
+};
+
+VertexAnimPrimGroup* VertexAnimPrimGroup::vfunc_03(int a1)
+{
+    sub_00250010();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00250B40 pure3d::PrimGroupLoader::vfunc_03 (57 B)
 // [TODO] 0x00250B80 sub_00250B80 (95 B)
 // [TODO] 0x00250BE0 sub_00250BE0 (27 B)
@@ -36036,7 +48121,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00253C00 pure3d::xboxOceanRenderer::vfunc_04 (104 B)
 // [TODO] 0x00253C70 pure3d::xboxOceanRenderer::vfunc_01 (71 B)
 // [TODO] 0x00253CC0 pure3d::xboxOceanRenderer::vfunc_05 (80 B)
-// [TODO] 0x00253D10 pure3d::xboxOceanRenderer::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::xboxOceanRenderer::vfunc_00 (0x00253D10, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::xboxOceanRenderer::vfunc_00 (0x00253D10, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00253B50(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class xboxOceanRenderer
+{
+public:
+    virtual xboxOceanRenderer* vfunc_00(int a1);
+};
+
+xboxOceanRenderer* xboxOceanRenderer::vfunc_00(int a1)
+{
+    sub_00253B50();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00253D80 pure3d::PNGHandler::vfunc_09 (15 B)
 // [TODO] 0x00253D90 sub_00253D90 (146 B)
 // [TODO] 0x00253E30 sub_00253E30 (421 B)
@@ -36070,7 +48186,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00255420 sub_00255420 (113 B)
 // [TODO] 0x002554A0 sub_002554A0 (107 B)
 // [TODO] 0x00255510 sub_00255510 (196 B)
-// [TODO] 0x002555E0 pure3d::VertexAnimObject::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexAnimObject::vfunc_03 (0x002555E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::VertexAnimObject::vfunc_03 (0x002555E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002554A0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class VertexAnimObject
+{
+public:
+    virtual VertexAnimObject* vfunc_03(int a1);
+};
+
+VertexAnimObject* VertexAnimObject::vfunc_03(int a1)
+{
+    sub_002554A0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00255600 sub_00255600 (196 B)
 // [TODO] 0x002556D0 sub_002556D0 (38 B)
 // [TODO] 0x00255700 sub_00255700 (17 B)
@@ -36112,9 +48259,102 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00257B20 sub_00257B20 (265 B)
 // [TODO] 0x00257C30 sub_00257C30 (102 B)
 // [TODO] 0x00257CA0 pure3d::ParticleSphereGenerator::vfunc_05 (31 B)
-// [TODO] 0x00257CC0 pure3d::ParticlePointGenerator::vfunc_03 (30 B)
-// [TODO] 0x00257CE0 pure3d::ParticlePlaneGenerator::vfunc_03 (30 B)
-// [TODO] 0x00257D00 pure3d::ParticleSphereGenerator::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticlePointGenerator::vfunc_03 (0x00257CC0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticlePointGenerator::vfunc_03 (0x00257CC0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00257840(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ParticlePointGenerator
+{
+public:
+    virtual ParticlePointGenerator* vfunc_03(int a1);
+};
+
+ParticlePointGenerator* ParticlePointGenerator::vfunc_03(int a1)
+{
+    sub_00257840();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticlePlaneGenerator::vfunc_03 (0x00257CE0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticlePlaneGenerator::vfunc_03 (0x00257CE0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00257A50(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ParticlePlaneGenerator
+{
+public:
+    virtual ParticlePlaneGenerator* vfunc_03(int a1);
+};
+
+ParticlePlaneGenerator* ParticlePlaneGenerator::vfunc_03(int a1)
+{
+    sub_00257A50();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleSphereGenerator::vfunc_03 (0x00257D00, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleSphereGenerator::vfunc_03 (0x00257D00, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00257C30(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ParticleSphereGenerator
+{
+public:
+    virtual ParticleSphereGenerator* vfunc_03(int a1);
+};
+
+ParticleSphereGenerator* ParticleSphereGenerator::vfunc_03(int a1)
+{
+    sub_00257C30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00257D20 sub_00257D20 (16 B)
 // [TODO] 0x00257D30 sub_00257D30 (95 B)
 // [TODO] 0x00257D90 pure3d::ParticleEmitter::vfunc_21 (18 B)
@@ -36168,7 +48408,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0025A170 pure3d::MemoryImagedOptimizedSpriteParticleEmitter::vfunc_08 (433 B)
 // [TODO] 0x0025A330 pure3d::MemoryImagedOptimizedSpriteParticleEmitter::vfunc_18 (104 B)
 // [TODO] 0x0025A3A0 pure3d::OptimizedSpriteParticleEmitter::vfunc_10 (51 B)
-// [TODO] 0x0025A3E0 pure3d::ParticleEmitter::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleEmitter::vfunc_03 (0x0025A3E0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleEmitter::vfunc_03 (0x0025A3E0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002586C0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class ParticleEmitter
+{
+public:
+    virtual ParticleEmitter* vfunc_03(int a1);
+};
+
+ParticleEmitter* ParticleEmitter::vfunc_03(int a1)
+{
+    sub_002586C0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0025A400 pure3d::SpriteParticleEmitter::vfunc_17 (563 B)
 // [TODO] 0x0025A640 sub_0025A640 (73 B)
 // [TODO] 0x0025A690 sub_0025A690 (413 B)
@@ -36183,9 +48454,102 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0025ABA0 sub_0025ABA0 (275 B)
 // [TODO] 0x0025ACC0 sub_0025ACC0 (107 B)
 // [TODO] 0x0025AD30 pure3d::MemoryImagedOptimizedSpriteParticleEmitter::vfunc_05 (34 B)
-// [TODO] 0x0025AD60 pure3d::SpriteParticleEmitter::vfunc_03 (30 B)
-// [TODO] 0x0025AD80 pure3d::OptimizedSpriteParticleEmitter::vfunc_03 (30 B)
-// [TODO] 0x0025ADA0 pure3d::MemoryImagedOptimizedSpriteParticleEmitter::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::SpriteParticleEmitter::vfunc_03 (0x0025AD60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::SpriteParticleEmitter::vfunc_03 (0x0025AD60, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0025A830(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class SpriteParticleEmitter
+{
+public:
+    virtual SpriteParticleEmitter* vfunc_03(int a1);
+};
+
+SpriteParticleEmitter* SpriteParticleEmitter::vfunc_03(int a1)
+{
+    sub_0025A830();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::OptimizedSpriteParticleEmitter::vfunc_03 (0x0025AD80, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::OptimizedSpriteParticleEmitter::vfunc_03 (0x0025AD80, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0025AAC0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class OptimizedSpriteParticleEmitter
+{
+public:
+    virtual OptimizedSpriteParticleEmitter* vfunc_03(int a1);
+};
+
+OptimizedSpriteParticleEmitter* OptimizedSpriteParticleEmitter::vfunc_03(int a1)
+{
+    sub_0025AAC0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::MemoryImagedOptimizedSpriteParticleEmitter::vfunc_03 (0x0025ADA0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::MemoryImagedOptimizedSpriteParticleEmitter::vfunc_03 (0x0025ADA0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0025ACC0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace pure3d {
+
+class MemoryImagedOptimizedSpriteParticleEmitter
+{
+public:
+    virtual MemoryImagedOptimizedSpriteParticleEmitter* vfunc_03(int a1);
+};
+
+MemoryImagedOptimizedSpriteParticleEmitter* MemoryImagedOptimizedSpriteParticleEmitter::vfunc_03(int a1)
+{
+    sub_0025ACC0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0025ADC0 sub_0025ADC0 (16 B)
 // [TODO] 0x0025ADD0 pure3d::SpriteParticleRenderer::vfunc_05 (824 B)
 // [TODO] 0x0025B110 sub_0025B110 (25 B)
@@ -36243,11 +48607,73 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0025CCB0 sub_0025CCB0 (163 B)
 // [TODO] 0x0025CD60 sub_0025CD60 (1596 B)
 // [TODO] 0x0025D3A0 sub_0025D3A0 (94 B)
-// [TODO] 0x0025D400 pure3d::VertexAnimKeyFrame::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexAnimKeyFrame::vfunc_03 (0x0025D400, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::VertexAnimKeyFrame::vfunc_03 (0x0025D400, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0025CCB0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class VertexAnimKeyFrame
+{
+public:
+    virtual VertexAnimKeyFrame* vfunc_03(int a1);
+};
+
+VertexAnimKeyFrame* VertexAnimKeyFrame::vfunc_03(int a1)
+{
+    sub_0025CCB0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0025D420 sub_0025D420 (208 B)
 // [TODO] 0x0025D4F0 sub_0025D4F0 (518 B)
 // [TODO] 0x0025D6B4 sub_0025D6B4 (48 B)
-// [TODO] 0x0025D700 pure3d::VertexAnimKeyFrameList::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexAnimKeyFrameList::vfunc_03 (0x0025D700, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::VertexAnimKeyFrameList::vfunc_03 (0x0025D700, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0025D420(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class VertexAnimKeyFrameList
+{
+public:
+    virtual VertexAnimKeyFrameList* vfunc_03(int a1);
+};
+
+VertexAnimKeyFrameList* VertexAnimKeyFrameList::vfunc_03(int a1)
+{
+    sub_0025D420();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0025D720 sub_0025D720 (24 B)
 // [TODO] 0x0025D740 pure3d::d3dVehicleShader::vfunc_21 (38 B)
 // [TODO] 0x0025D780 BoatAIBehaviour::vfunc_30 (10 B)
@@ -36315,7 +48741,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0025F470 pure3d::d3dTexture::vfunc_18 (13 B)
 // [TODO] 0x0025F480 sub_0025F480 (63 B)
 // [TODO] 0x0025F4C0 sub_0025F4C0 (254 B)
-// [TODO] 0x0025F5C0 pure3d::d3dTexture::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dTexture::vfunc_03 (0x0025F5C0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dTexture::vfunc_03 (0x0025F5C0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0025EC30(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dTexture
+{
+public:
+    virtual d3dTexture* vfunc_03(int a1);
+};
+
+d3dTexture* d3dTexture::vfunc_03(int a1)
+{
+    sub_0025EC30();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x0025F5E0 sub_0025F5E0 (85 B)
 // [TODO] 0x0025F640 sub_0025F640 (731 B)
 // [TODO] 0x0025F920 sub_0025F920 (134 B)
@@ -36442,8 +48899,70 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00262840 pure3d::d3dContext::vfunc_100 (183 B)
 // [TODO] 0x00262900 sub_00262900 (93 B)
 // [TODO] 0x00262960 sub_00262960 (183 B)
-// [TODO] 0x00262A20 pure3d::pddiMatrixStack::vfunc_00 (30 B)
-// [TODO] 0x00262A40 pure3d::pddiBaseContext::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::pddiMatrixStack::vfunc_00 (0x00262A20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::pddiMatrixStack::vfunc_00 (0x00262A20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00262580(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class pddiMatrixStack
+{
+public:
+    virtual pddiMatrixStack* vfunc_00(int a1);
+};
+
+pddiMatrixStack* pddiMatrixStack::vfunc_00(int a1)
+{
+    sub_00262580();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::pddiBaseContext::vfunc_03 (0x00262A40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::pddiBaseContext::vfunc_03 (0x00262A40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002625D0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class pddiBaseContext
+{
+public:
+    virtual pddiBaseContext* vfunc_03(int a1);
+};
+
+pddiBaseContext* pddiBaseContext::vfunc_03(int a1)
+{
+    sub_002625D0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00262A60 pure3d::d3dContext::vfunc_118 (509 B)
 // [TODO] 0x00262C60 pure3d::_pddiExtMemRegistration::vfunc_01 (12 B)
 // [TODO] 0x00262C70 pure3d::pddiExtension::vfunc_00 (31 B)
@@ -36465,19 +48984,250 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00263370 pure3d::d3dFBEffectsShader::vfunc_04 (6 B)
 // [TODO] 0x002633B0 sub_002633B0 (183 B)
 // [TODO] 0x00263470 sub_00263470 (10 B)
-// [TODO] 0x00263480 pure3d::d3dFBEffectsShader::vfunc_18 (6 B)
-// [TODO] 0x00263490 pure3d::d3dFBEffectsShader::vfunc_17 (6 B)
-// [TODO] 0x002634A0 pure3d::d3dFBEffectsShader::vfunc_16 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dFBEffectsShader::vfunc_18 (0x00263480, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dFBEffectsShader::vfunc_18 (0x00263480, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042FCF8[];
+
+namespace pure3d {
+
+class d3dFBEffectsShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dFBEffectsShader::vfunc_18()
+{
+    return DAT_0042FCF8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dFBEffectsShader::vfunc_17 (0x00263490, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dFBEffectsShader::vfunc_17 (0x00263490, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042FD28[];
+
+namespace pure3d {
+
+class d3dFBEffectsShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dFBEffectsShader::vfunc_17()
+{
+    return DAT_0042FD28;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dFBEffectsShader::vfunc_16 (0x002634A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dFBEffectsShader::vfunc_16 (0x002634A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0042FCB0[];
+
+namespace pure3d {
+
+class d3dFBEffectsShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dFBEffectsShader::vfunc_16()
+{
+    return DAT_0042FCB0;
+}
+
+}
+
 // [TODO] 0x002634B0 sub_002634B0 (71 B)
 // [TODO] 0x00263500 pure3d::d3dFBEffectsShader::vfunc_03 (36 B)
 // [TODO] 0x00263530 sub_00263530 (129 B)
 // [TODO] 0x002635C0 sub_002635C0 (103 B)
 // [TODO] 0x00263630 sub_00263630 (169 B)
 // [TODO] 0x002636E0 sub_002636E0 (32 B)
-// [TODO] 0x00263700 pure3d::d3dSimpleShader::vfunc_15 (6 B)
-// [TODO] 0x00263710 pure3d::d3dSimpleShader::vfunc_16 (6 B)
-// [TODO] 0x00263720 pure3d::d3dSimpleShader::vfunc_17 (6 B)
-// [TODO] 0x00263730 pure3d::d3dSimpleShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleShader::vfunc_15 (0x00263700, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSimpleShader::vfunc_15 (0x00263700, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004305E0[];
+
+namespace pure3d {
+
+class d3dSimpleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dSimpleShader::vfunc_15()
+{
+    return DAT_004305E0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleShader::vfunc_16 (0x00263710, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSimpleShader::vfunc_16 (0x00263710, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430400[];
+
+namespace pure3d {
+
+class d3dSimpleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dSimpleShader::vfunc_16()
+{
+    return DAT_00430400;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleShader::vfunc_17 (0x00263720, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSimpleShader::vfunc_17 (0x00263720, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430388[];
+
+namespace pure3d {
+
+class d3dSimpleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dSimpleShader::vfunc_17()
+{
+    return DAT_00430388;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleShader::vfunc_18 (0x00263730, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSimpleShader::vfunc_18 (0x00263730, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00430550[];
+
+namespace pure3d {
+
+class d3dSimpleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dSimpleShader::vfunc_18()
+{
+    return DAT_00430550;
+}
+
+}
+
 // [TODO] 0x00263740 pure3d::d3dSimpleShader::vfunc_04 (6 B)
 // [TODO] 0x00263770 pure3d::d3dSimpleShader::vfunc_23 (31 B)
 // [TODO] 0x00263790 sub_00263790 (10 B)
@@ -36526,7 +49276,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00265360 sub_00265360 (2641 B)
 // [TODO] 0x00265DC0 sub_00265DC0 (1656 B)
 // [TODO] 0x00266440 pure3d::d3dExtDepthOfField::vfunc_01 (363 B)
-// [TODO] 0x002665B0 pure3d::d3dExtDepthOfField::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtDepthOfField::vfunc_00 (0x002665B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dExtDepthOfField::vfunc_00 (0x002665B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00265190(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dExtDepthOfField
+{
+public:
+    virtual d3dExtDepthOfField* vfunc_00(int a1);
+};
+
+d3dExtDepthOfField* d3dExtDepthOfField::vfunc_00(int a1)
+{
+    sub_00265190();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002665D0 pure3d::d3dExtDepthOfField::vfunc_03 (71 B)
 // [TODO] 0x00266620 sub_00266620 (65 B)
 // [TODO] 0x00266670 sub_00266670 (80 B)
@@ -36534,7 +49315,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002668E0 sub_002668E0 (207 B)
 // [TODO] 0x002669B0 sub_002669B0 (393 B)
 // [TODO] 0x00266B40 pure3d::d3dExtHeatShimmer::vfunc_03 (43 B)
-// [TODO] 0x00266B70 pure3d::d3dExtHeatShimmer::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtHeatShimmer::vfunc_00 (0x00266B70, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dExtHeatShimmer::vfunc_00 (0x00266B70, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00266670(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dExtHeatShimmer
+{
+public:
+    virtual d3dExtHeatShimmer* vfunc_00(int a1);
+};
+
+d3dExtHeatShimmer* d3dExtHeatShimmer::vfunc_00(int a1)
+{
+    sub_00266670();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00266B90 sub_00266B90 (852 B)
 // [TODO] 0x00266EF0 sub_00266EF0 (1479 B)
 // [TODO] 0x002674C0 sub_002674C0 (637 B)
@@ -36547,7 +49359,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00267A90 sub_00267A90 (655 B)
 // [TODO] 0x00267D20 sub_00267D20 (1312 B)
 // [TODO] 0x00268240 pure3d::d3dExtStaticShadowGen::vfunc_07 (279 B)
-// [TODO] 0x00268360 pure3d::d3dExtStaticShadowGen::vfunc_00 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtStaticShadowGen::vfunc_00 (0x00268360, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dExtStaticShadowGen::vfunc_00 (0x00268360, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002677F0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dExtStaticShadowGen
+{
+public:
+    virtual d3dExtStaticShadowGen* vfunc_00(int a1);
+};
+
+d3dExtStaticShadowGen* d3dExtStaticShadowGen::vfunc_00(int a1)
+{
+    sub_002677F0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00268380 pure3d::d3dExtStaticShadowGen::vfunc_01 (1285 B)
 // [TODO] 0x00268890 sub_00268890 (1920 B)
 // [TODO] 0x00269B00 pure3d::d3dExtStaticShadowGen::vfunc_05 (5 B)
@@ -36867,8 +49710,70 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00279BA0 sub_00279BA0 (419 B)
 // [TODO] 0x00279D50 sub_00279D50 (99 B)
 // [TODO] 0x00279DC0 sub_00279DC0 (89 B)
-// [TODO] 0x00279E20 pure3d::VertexList::vfunc_03 (30 B)
-// [TODO] 0x00279E40 pure3d::VertexOffsetList::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexList::vfunc_03 (0x00279E20, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::VertexList::vfunc_03 (0x00279E20, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00271A40(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class VertexList
+{
+public:
+    virtual VertexList* vfunc_03(int a1);
+};
+
+VertexList* VertexList::vfunc_03(int a1)
+{
+    sub_00271A40();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::VertexOffsetList::vfunc_03 (0x00279E40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::VertexOffsetList::vfunc_03 (0x00279E40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00279D50(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class VertexOffsetList
+{
+public:
+    virtual VertexOffsetList* vfunc_03(int a1);
+};
+
+VertexOffsetList* VertexOffsetList::vfunc_03(int a1)
+{
+    sub_00279D50();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00279E60 sub_00279E60 (244 B)
 // [TODO] 0x00279F60 sub_00279F60 (160 B)
 // [TODO] 0x0027A000 sub_0027A000 (25 B)
@@ -36880,7 +49785,29 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x0027A440 pure3d::xboxOceanReflection::vfunc_01 (24 B)
 // [TODO] 0x0027A460 pure3d::xboxOceanReflection::vfunc_00 (172 B)
 // [TODO] 0x0027A510 sub_0027A510 (123 B)
-// [TODO] 0x0027A5E0 sub_0027A5E0 (5 B)
+// ============================================================================
+// [VERIFIED] sub_0027A5E0 (0x0027A5E0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0027A5E0 (0x0027A5E0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00288E00(void);
+
+class Class_0027A5E0
+{
+public:
+    void sub_0027A5E0();
+};
+
+void Class_0027A5E0::sub_0027A5E0()
+{
+    sub_00288E00();
+}
+
 // [TODO] 0x0027A5F0 sub_0027A5F0 (25 B)
 // [TODO] 0x0027A610 sub_0027A610 (72 B)
 // [TODO] 0x0027A660 sub_0027A660 (951 B)
@@ -37076,25 +50003,287 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00285670 core::DriveThread::vfunc_03 (36 B)
 // [TODO] 0x002856A0 pure3d::d3dErrorShader::vfunc_04 (6 B)
 // [TODO] 0x002856B0 sub_002856B0 (50 B)
-// [TODO] 0x002856F0 pure3d::d3dShader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShader::vfunc_03 (0x002856F0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShader::vfunc_03 (0x002856F0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0025DA40(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dShader
+{
+public:
+    virtual d3dShader* vfunc_03(int a1);
+};
+
+d3dShader* d3dShader::vfunc_03(int a1)
+{
+    sub_0025DA40();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00285710 pure3d::d3dErrorShader::vfunc_14 (236 B)
 // [TODO] 0x00285800 sub_00285800 (78 B)
 // [TODO] 0x00285850 sub_00285850 (78 B)
 // [TODO] 0x002858A0 sub_002858A0 (131 B)
 // [TODO] 0x00285930 sub_00285930 (30 B)
-// [TODO] 0x00285950 pure3d::d3dReflShader::vfunc_15 (6 B)
-// [TODO] 0x00285960 pure3d::d3dReflShader::vfunc_16 (6 B)
-// [TODO] 0x00285970 pure3d::d3dReflShader::vfunc_17 (6 B)
-// [TODO] 0x00285980 pure3d::d3dReflShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_15 (0x00285950, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_15 (0x00285950, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00432B00[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dReflShader::vfunc_15()
+{
+    return DAT_00432B00;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_16 (0x00285960, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_16 (0x00285960, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00432A28[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dReflShader::vfunc_16()
+{
+    return DAT_00432A28;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_17 (0x00285970, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_17 (0x00285970, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004329C8[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dReflShader::vfunc_17()
+{
+    return DAT_004329C8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_18 (0x00285980, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_18 (0x00285980, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00432B48[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dReflShader::vfunc_18()
+{
+    return DAT_00432B48;
+}
+
+}
+
 // [TODO] 0x00285990 pure3d::d3dReflShader::vfunc_04 (6 B)
 // [TODO] 0x002859A0 pure3d::d3dReflShader::vfunc_12 (199 B)
 // [TODO] 0x00285A70 pure3d::d3dReflShader::vfunc_13 (89 B)
 // [TODO] 0x00285AD0 sub_00285AD0 (49 B)
 // [TODO] 0x00285B10 pure3d::d3dReflShader::vfunc_03 (68 B)
 // [TODO] 0x00285B60 pure3d::d3dReflShader::vfunc_14 (633 B)
-// [TODO] 0x00285DE0 pure3d::d3dPointSpriteShader::vfunc_15 (6 B)
-// [TODO] 0x00285DF0 pure3d::d3dPointSpriteShader::vfunc_16 (6 B)
-// [TODO] 0x00285E00 pure3d::d3dPointSpriteShader::vfunc_17 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_15 (0x00285DE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPointSpriteShader::vfunc_15 (0x00285DE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00432CE8[];
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dPointSpriteShader::vfunc_15()
+{
+    return DAT_00432CE8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_16 (0x00285DF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPointSpriteShader::vfunc_16 (0x00285DF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00432D18[];
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dPointSpriteShader::vfunc_16()
+{
+    return DAT_00432D18;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_17 (0x00285E00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPointSpriteShader::vfunc_17 (0x00285E00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00432C28[];
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dPointSpriteShader::vfunc_17()
+{
+    return DAT_00432C28;
+}
+
+}
+
 // [TODO] 0x00285E10 pure3d::d3dPointSpriteShader::vfunc_04 (6 B)
 // [TODO] 0x00285E20 pure3d::d3dPointSpriteShader::vfunc_12 (210 B)
 // [TODO] 0x00285F00 pure3d::d3dPointSpriteShader::vfunc_13 (36 B)
@@ -37102,10 +50291,142 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00285FE0 pure3d::d3dPointSpriteShader::vfunc_03 (53 B)
 // [TODO] 0x00286020 pure3d::d3dPointSpriteShader::vfunc_14 (438 B)
 // [TODO] 0x002861E0 sub_002861E0 (173 B)
-// [TODO] 0x00286290 pure3d::d3dLayeredShader::vfunc_15 (6 B)
-// [TODO] 0x002862A0 pure3d::d3dLayeredShader::vfunc_16 (6 B)
-// [TODO] 0x002862B0 pure3d::d3dLayeredShader::vfunc_17 (6 B)
-// [TODO] 0x002862C0 pure3d::d3dLayeredShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_15 (0x00286290, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_15 (0x00286290, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433088[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dLayeredShader::vfunc_15()
+{
+    return DAT_00433088;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_16 (0x002862A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_16 (0x002862A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004330D0[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dLayeredShader::vfunc_16()
+{
+    return DAT_004330D0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_17 (0x002862B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_17 (0x002862B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00432F98[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dLayeredShader::vfunc_17()
+{
+    return DAT_00432F98;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_18 (0x002862C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_18 (0x002862C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433010[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dLayeredShader::vfunc_18()
+{
+    return DAT_00433010;
+}
+
+}
+
 // [TODO] 0x002862D0 pure3d::d3dLayeredShader::vfunc_04 (6 B)
 // [TODO] 0x002862E0 core::IMemoryAllocator::vfunc_13 (3 B)
 // [TODO] 0x002862F0 pure3d::d3dLayeredShader::vfunc_23 (18 B)
@@ -37119,36 +50440,628 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00286980 pure3d::d3dLayeredShader::vfunc_24 (640 B)
 // [TODO] 0x00286C00 pure3d::d3dLayeredShader::vfunc_14 (1160 B)
 // [TODO] 0x002870E0 pure3d::d3dSpecularShader::vfunc_04 (6 B)
-// [TODO] 0x00287110 pure3d::d3dSpecularShader::vfunc_23 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_23 (0x00287110, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_23 (0x00287110, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0037F6AC[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_23();
+};
+
+void* d3dSpecularShader::vfunc_23()
+{
+    return DAT_0037F6AC;
+}
+
+}
+
 // [TODO] 0x00287120 sub_00287120 (131 B)
-// [TODO] 0x002871B0 pure3d::d3dSpecularShader::vfunc_15 (6 B)
-// [TODO] 0x002871C0 pure3d::d3dSpecularShader::vfunc_16 (6 B)
-// [TODO] 0x002871D0 pure3d::d3dSpecularShader::vfunc_17 (6 B)
-// [TODO] 0x002871E0 pure3d::d3dSpecularShader::vfunc_18 (6 B)
-// [TODO] 0x002871F0 pure3d::d3dSpecularShader::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_15 (0x002871B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_15 (0x002871B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004335B8[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dSpecularShader::vfunc_15()
+{
+    return DAT_004335B8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_16 (0x002871C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_16 (0x002871C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004334B0[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dSpecularShader::vfunc_16()
+{
+    return DAT_004334B0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_17 (0x002871D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_17 (0x002871D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433468[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dSpecularShader::vfunc_17()
+{
+    return DAT_00433468;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_18 (0x002871E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_18 (0x002871E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433558[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dSpecularShader::vfunc_18()
+{
+    return DAT_00433558;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_03 (0x002871F0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSpecularShader::vfunc_03 (0x002871F0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002636E0(void);
+extern "C" void __cdecl sub_00025160(int);
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual d3dSpecularShader* vfunc_03(int a1);
+};
+
+d3dSpecularShader* d3dSpecularShader::vfunc_03(int a1)
+{
+    sub_002636E0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00287210 pure3d::d3dSpecularShader::vfunc_14 (903 B)
-// [TODO] 0x002875A0 pure3d::d3dShadowShader::vfunc_15 (6 B)
-// [TODO] 0x002875B0 pure3d::d3dShadowShader::vfunc_16 (6 B)
-// [TODO] 0x002875C0 pure3d::d3dShadowShader::vfunc_17 (6 B)
-// [TODO] 0x002875D0 pure3d::d3dShadowShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_15 (0x002875A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_15 (0x002875A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433828[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dShadowShader::vfunc_15()
+{
+    return DAT_00433828;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_16 (0x002875B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_16 (0x002875B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004336D8[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dShadowShader::vfunc_16()
+{
+    return DAT_004336D8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_17 (0x002875C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_17 (0x002875C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433678[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dShadowShader::vfunc_17()
+{
+    return DAT_00433678;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_18 (0x002875D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_18 (0x002875D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004337B0[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dShadowShader::vfunc_18()
+{
+    return DAT_004337B0;
+}
+
+}
+
 // [TODO] 0x002875E0 pure3d::d3dShadowShader::vfunc_04 (6 B)
 // [TODO] 0x002875F0 sub_002875F0 (44 B)
 // [TODO] 0x00287620 pure3d::d3dShadowShader::vfunc_03 (53 B)
 // [TODO] 0x00287660 pure3d::d3dShadowShader::vfunc_14 (301 B)
-// [TODO] 0x00287790 pure3d::d3dSimpleCBVLitShader::vfunc_15 (6 B)
-// [TODO] 0x002877A0 pure3d::d3dSimpleCBVLitShader::vfunc_16 (6 B)
-// [TODO] 0x002877B0 pure3d::d3dSimpleCBVLitShader::vfunc_17 (6 B)
-// [TODO] 0x002877C0 pure3d::d3dSimpleCBVLitShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleCBVLitShader::vfunc_15 (0x00287790, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSimpleCBVLitShader::vfunc_15 (0x00287790, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433A40[];
+
+namespace pure3d {
+
+class d3dSimpleCBVLitShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dSimpleCBVLitShader::vfunc_15()
+{
+    return DAT_00433A40;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleCBVLitShader::vfunc_16 (0x002877A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSimpleCBVLitShader::vfunc_16 (0x002877A0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433A70[];
+
+namespace pure3d {
+
+class d3dSimpleCBVLitShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dSimpleCBVLitShader::vfunc_16()
+{
+    return DAT_00433A70;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleCBVLitShader::vfunc_17 (0x002877B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSimpleCBVLitShader::vfunc_17 (0x002877B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433968[];
+
+namespace pure3d {
+
+class d3dSimpleCBVLitShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dSimpleCBVLitShader::vfunc_17()
+{
+    return DAT_00433968;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleCBVLitShader::vfunc_18 (0x002877C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dSimpleCBVLitShader::vfunc_18 (0x002877C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004339C8[];
+
+namespace pure3d {
+
+class d3dSimpleCBVLitShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dSimpleCBVLitShader::vfunc_18()
+{
+    return DAT_004339C8;
+}
+
+}
+
 // [TODO] 0x002877D0 pure3d::d3dSimpleCBVLitShader::vfunc_04 (6 B)
 // [TODO] 0x00287810 pure3d::d3dSimpleCBVLitShader::vfunc_24 (115 B)
 // [TODO] 0x00287890 pure3d::d3dSimpleCBVLitShader::vfunc_12 (73 B)
 // [TODO] 0x002878E0 sub_002878E0 (70 B)
 // [TODO] 0x00287930 pure3d::d3dSimpleCBVLitShader::vfunc_03 (53 B)
 // [TODO] 0x00287970 pure3d::d3dSimpleCBVLitShader::vfunc_14 (364 B)
-// [TODO] 0x00287AE0 pure3d::d3dCharacterShader::vfunc_15 (6 B)
-// [TODO] 0x00287AF0 pure3d::d3dCharacterShader::vfunc_16 (6 B)
-// [TODO] 0x00287B00 pure3d::d3dCharacterShader::vfunc_17 (6 B)
-// [TODO] 0x00287B10 pure3d::d3dCharacterShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_15 (0x00287AE0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_15 (0x00287AE0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433E50[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dCharacterShader::vfunc_15()
+{
+    return DAT_00433E50;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_16 (0x00287AF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_16 (0x00287AF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433D00[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dCharacterShader::vfunc_16()
+{
+    return DAT_00433D00;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_17 (0x00287B00, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_17 (0x00287B00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433CA0[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dCharacterShader::vfunc_17()
+{
+    return DAT_00433CA0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_18 (0x00287B10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_18 (0x00287B10, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433DD8[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dCharacterShader::vfunc_18()
+{
+    return DAT_00433DD8;
+}
+
+}
+
 // [TODO] 0x00287B20 pure3d::d3dCharacterShader::vfunc_04 (6 B)
 // [TODO] 0x00287B30 pure3d::d3dCharacterShader::vfunc_23 (18 B)
 // [TODO] 0x00287B50 sub_00287B50 (1191 B)
@@ -37156,10 +51069,142 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00288040 pure3d::d3dCharacterShader::vfunc_03 (68 B)
 // [TODO] 0x00288090 pure3d::d3dCharacterShader::vfunc_14 (530 B)
 // [TODO] 0x002884C0 pure3d::d3dCharacterShader::vfunc_24 (13 B)
-// [TODO] 0x002884D0 pure3d::d3dShadowDecalShader::vfunc_15 (6 B)
-// [TODO] 0x002884E0 pure3d::d3dShadowDecalShader::vfunc_16 (6 B)
-// [TODO] 0x002884F0 pure3d::d3dShadowDecalShader::vfunc_17 (6 B)
-// [TODO] 0x00288500 pure3d::d3dShadowDecalShader::vfunc_18 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_15 (0x002884D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_15 (0x002884D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004340B8[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_15();
+};
+
+void* d3dShadowDecalShader::vfunc_15()
+{
+    return DAT_004340B8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_16 (0x002884E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_16 (0x002884E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433F68[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_16();
+};
+
+void* d3dShadowDecalShader::vfunc_16()
+{
+    return DAT_00433F68;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_17 (0x002884F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_17 (0x002884F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00433F08[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_17();
+};
+
+void* d3dShadowDecalShader::vfunc_17()
+{
+    return DAT_00433F08;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_18 (0x00288500, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::TargaHandler::vfunc_07 (0x0004A760), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_18 (0x00288500, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00434040[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_18();
+};
+
+void* d3dShadowDecalShader::vfunc_18()
+{
+    return DAT_00434040;
+}
+
+}
+
 // [TODO] 0x00288510 pure3d::d3dShadowDecalShader::vfunc_04 (6 B)
 // [TODO] 0x00288520 pure3d::d3dShadowDecalShader::vfunc_13 (23 B)
 // [TODO] 0x00288540 sub_00288540 (44 B)
@@ -37297,7 +51342,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002915A0 sub_002915A0 (13 B)
 // [TODO] 0x002915B0 sub_002915B0 (19 B)
 // [TODO] 0x002915D0 sub_002915D0 (222 B)
-// [TODO] 0x002916B0 sub_002916B0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_002916B0 (0x002916B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002916B0 (0x002916B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00490AFC;
+
+int __cdecl sub_002916B0(void)
+{
+    return DAT_00490AFC;
+}
+
 // [TODO] 0x002916C0 sub_002916C0 (4 B)
 // [TODO] 0x002916D0 sub_002916D0 (10 B)
 // [TODO] 0x002916E0 sub_002916E0 (10 B)
@@ -37316,7 +51377,29 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00291A20 sub_00291A20 (130 B)
 // [TODO] 0x00291AB0 sub_00291AB0 (50 B)
 // [TODO] 0x00291AF0 sub_00291AF0 (56 B)
-// [TODO] 0x00291B30 sub_00291B30 (5 B)
+// ============================================================================
+// [VERIFIED] sub_00291B30 (0x00291B30, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00291B30 (0x00291B30, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00291930(void);
+
+class Class_00291B30
+{
+public:
+    void sub_00291B30();
+};
+
+void Class_00291B30::sub_00291B30()
+{
+    sub_00291930();
+}
+
 // [TODO] 0x00291B40 sub_00291B40 (117 B)
 // [TODO] 0x00291BC0 sub_00291BC0 (104 B)
 // [TODO] 0x00291C30 sub_00291C30 (99 B)
@@ -37426,7 +51509,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x00294A30 audio::Sequence::vfunc_08 (71 B)
 // [TODO] 0x00294A80 sub_00294A80 (13 B)
 // [TODO] 0x00294A90 sub_00294A90 (19 B)
-// [TODO] 0x00294AB0 sub_00294AB0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00294AB0 (0x00294AB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00294AB0 (0x00294AB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00490C10;
+
+int __cdecl sub_00294AB0(void)
+{
+    return DAT_00490C10;
+}
+
 // [TODO] 0x00294AC0 sub_00294AC0 (38 B)
 // [TODO] 0x00294AF0 sub_00294AF0 (104 B)
 // [TODO] 0x00294B60 sub_00294B60 (90 B)
@@ -37565,7 +51664,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002987A0 sub_002987A0 (106 B)
 // [TODO] 0x00298810 sub_00298810 (107 B)
 // [TODO] 0x00298880 sub_00298880 (119 B)
-// [TODO] 0x00298900 sub_00298900 (6 B)
+// ============================================================================
+// [VERIFIED] sub_00298900 (0x00298900, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00298900 (0x00298900, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00434A2C;
+
+int __cdecl sub_00298900(void)
+{
+    return DAT_00434A2C;
+}
+
 // [TODO] 0x00298910 sub_00298910 (29 B)
 // [TODO] 0x00298930 sub_00298930 (51 B)
 // [TODO] 0x00298970 sub_00298970 (37 B)
@@ -38424,7 +52539,29 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002AFA60 sub_002AFA60 (104 B)
 // [TODO] 0x002AFAD0 sub_002AFAD0 (131 B)
 // [TODO] 0x002AFB60 sub_002AFB60 (139 B)
-// [TODO] 0x002AFC20 sub_002AFC20 (5 B)
+// ============================================================================
+// [VERIFIED] sub_002AFC20 (0x002AFC20, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AFC20 (0x002AFC20, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002AFBF0(void);
+
+class Class_002AFC20
+{
+public:
+    void sub_002AFC20();
+};
+
+void Class_002AFC20::sub_002AFC20()
+{
+    sub_002AFBF0();
+}
+
 // [TODO] 0x002AFC30 sub_002AFC30 (53 B)
 // [TODO] 0x002AFC70 sub_002AFC70 (60 B)
 // [TODO] 0x002AFCB0 sub_002AFCB0 (26 B)
@@ -38475,7 +52612,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002B1A90 sub_002B1A90 (132 B)
 // [TODO] 0x002B1B20 sub_002B1B20 (78 B)
 // [TODO] 0x002B1B70 sub_002B1B70 (203 B)
-// [TODO] 0x002B1C40 ravenphysics::CollisionObject::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] ravenphysics::CollisionObject::vfunc_03 (0x002B1C40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// ravenphysics::CollisionObject::vfunc_03 (0x002B1C40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002B1A90(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace ravenphysics {
+
+class CollisionObject
+{
+public:
+    virtual CollisionObject* vfunc_03(int a1);
+};
+
+CollisionObject* CollisionObject::vfunc_03(int a1)
+{
+    sub_002B1A90();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002B1C60 sub_002B1C60 (241 B)
 // [TODO] 0x002B1D60 sub_002B1D60 (212 B)
 // [TODO] 0x002B1E40 sub_002B1E40 (210 B)
@@ -38585,7 +52753,38 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002B9D60 ravenphysics::BroadPhaseDetectorSweepAndPrune::vfunc_06 (784 B)
 // [TODO] 0x002BA070 ravenphysics::BroadPhaseDetectorSweepAndPrune::vfunc_09 (371 B)
 // [TODO] 0x002BA1F0 ravenphysics::BroadPhaseDetectorSweepAndPrune::vfunc_10 (339 B)
-// [TODO] 0x002BA350 ravenphysics::BroadPhaseDetectorSweepAndPrune::vfunc_03 (30 B)
+// ============================================================================
+// [VERIFIED] ravenphysics::BroadPhaseDetectorSweepAndPrune::vfunc_03 (0x002BA350, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
+// its addresses and names were swapped for this function's.
+// ravenphysics::BroadPhaseDetectorSweepAndPrune::vfunc_03 (0x002BA350, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002B98A0(void);
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace ravenphysics {
+
+class BroadPhaseDetectorSweepAndPrune
+{
+public:
+    virtual BroadPhaseDetectorSweepAndPrune* vfunc_03(int a1);
+};
+
+BroadPhaseDetectorSweepAndPrune* BroadPhaseDetectorSweepAndPrune::vfunc_03(int a1)
+{
+    sub_002B98A0();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x002BA370 ravenphysics::BroadPhaseDetectorSweepAndPrune::vfunc_12 (394 B)
 // [TODO] 0x002BA500 sub_002BA500 (48 B)
 // [TODO] 0x002BA530 sub_002BA530 (143 B)
@@ -38626,7 +52825,23 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002BBE10 sub_002BBE10 (19 B)
 // [TODO] 0x002BBE30 sub_002BBE30 (124 B)
 // [TODO] 0x002BBEB0 sub_002BBEB0 (4 B)
-// [TODO] 0x002BBEC0 sub_002BBEC0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_002BBEC0 (0x002BBEC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0001E5D0 (0x0001E5D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002BBEC0 (0x002BBEC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00491698;
+
+int __cdecl sub_002BBEC0(void)
+{
+    return DAT_00491698;
+}
+
 // [TODO] 0x002BBED0 sub_002BBED0 (195 B)
 // [TODO] 0x002BBFA0 sub_002BBFA0 (66 B)
 // [TODO] 0x002BBFF0 sub_002BBFF0 (101 B)
@@ -38752,7 +52967,29 @@ AIManager* AIManager::vfunc_00(int a1)
 // [TODO] 0x002C9560 sub_002C9560 (190 B)
 // [TODO] 0x002C9620 sub_002C9620 (134 B)
 // [TODO] 0x002C96A6 sub_002C96A6 (88 B)
-// [TODO] 0x002C96FE sub_002C96FE (5 B)
+// ============================================================================
+// [VERIFIED] sub_002C96FE (0x002C96FE, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002C96FE (0x002C96FE, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002C96A6(void);
+
+class Class_002C96FE
+{
+public:
+    void sub_002C96FE();
+};
+
+void Class_002C96FE::sub_002C96FE()
+{
+    sub_002C96A6();
+}
+
 // [TODO] 0x002C9710 sub_002C9710 (292 B)
 // [TODO] 0x002C9834 sub_002C9834 (211 B)
 // [TODO] 0x002C9907 sub_002C9907 (86 B)
