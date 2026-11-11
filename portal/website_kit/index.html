@@ -1225,13 +1225,13 @@
               <legend class="gf-h">Layout</legend>
               <div class="gf-modes">
               <label class="gf-mode"><input type="radio" name="gf-mode" value="unique" checked onchange="gfChoicesChanged()" />
-                <span><b>No duplicates</b><span>A file that is exactly the same in several versions is copied once, into <code>Shared/</code>. What only one version has gets its own folder, <code>Exclusive to</code> that version.</span></span></label>
+                <span><b>No duplicates</b><span>A file that is exactly the same in several versions is copied once, into <code>Shared/</code>. What only one version has gets its own folder, <code>Exclusive to</code> that version. The smallest copy, but no version is in one folder: the PC game is split between <code>Shared/</code> and <code>Exclusive to PC</code>.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="every" onchange="gfChoicesChanged()" />
                 <span><b>Every version complete</b><span>Each version in its own folder with all of its files. Takes the most space.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="best" onchange="gfChoicesChanged()" />
                 <span><b>Best version of each file</b><span>One copy of everything the versions share, in <code>Best/</code>, the highest quality winning: the PC's 48 kHz sounds, its 1280&times;720 videos, the biggest textures. What only one version has gets its own <code>Exclusive to</code> folder.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="pc" onchange="gfChoicesChanged()" />
-                <span><b>The PC first, then what only the others have</b><span>The whole PC version in <code>PC/</code>, and from the others only what the PC doesn't have: each one's own in its <code>Exclusive to</code> folder, what several of them have once in <code>Not on the PC/</code>. The PC's models and animations are the ones Blender shows best. The Xbox keeps many of the same textures with deeper colours: <b>Every texture as a picture</b> takes the better copy of each.</span></span></label>
+                <span><b>The PC first, then what only the others have</b><span>The whole PC version in <code>PC/</code>, and from the others only what the PC doesn't have: each one's own in its <code>Exclusive to</code> folder, what several of them have once in <code>Not on the PC/</code>. The PC's models and animations are the ones Blender shows best. Unlike No duplicates, the PC's folder is the whole PC game on its own.</span></span></label>
               </div>
             </fieldset>
 
