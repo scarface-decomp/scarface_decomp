@@ -163,8 +163,8 @@ def check_compiler(r: Report, compile_test: bool = True) -> None:
     bin_dir = MV.find_msvc71_bin()
     if bin_dir is None:
         r.add("fix", "The compiler (Visual C++ Toolkit 2003) isn't set up",
-              "Download VCToolkitSetup.exe (see docs/CONTRIBUTING.md), put it in the project folder, and run: "
-              "python portal/scripts/setup_msvc71.py VCToolkitSetup.exe",
+              "Download VCToolkitSetup.exe (see docs/CONTRIBUTING.md), put it in the project folder and start the portal again: "
+              "it sets the compiler up by itself (or run: python portal/scripts/setup_msvc71.py VCToolkitSetup.exe)",
               "Until then you can still work on decomp.me (the decomp.me button in the portal).")
         return
     if os.name != "nt" and shutil.which("wine") is None:

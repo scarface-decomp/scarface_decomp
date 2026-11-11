@@ -16,6 +16,10 @@ if not defined PY (
   exit /b 1
 )
 
+rem The compiler: set up by itself the first time, when VCToolkitSetup.exe is in this folder, binaries\,
+rem source_archives\ or Downloads. Says nothing when it is already there or the installer isn't.
+%PY% portal\scripts\setup_msvc71.py --auto
+
 rem A quick setup check: says only what needs fixing (game files, compiler, port). The full report,
 rem with how to fix each thing: python portal\doctor.py
 %PY% portal\doctor.py --startup

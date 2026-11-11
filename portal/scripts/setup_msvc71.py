@@ -113,13 +113,67 @@ def file_version(path: Path) -> str:
     return f"{ms >> 16}.{ms & 0xFFFF}.{ls >> 16}"
 
 
+INSTALLER_NAMES = ("VCToolkitSetup*.exe",)
+
+
+def find_installer(places=None):
+    """The person's copy of the Toolkit's installer, wherever they are likely to have left it: the project
+    folder, binaries/, source_archives/, or their Downloads folder. None when it isn't in any of them."""
+    if places is None:
+        places = [ROOT, ROOT / "binaries", ROOT / "source_archives", Path.home() / "Downloads"]
+    for folder in places:
+        try:
+            found = sorted(p for pattern in INSTALLER_NAMES for p in Path(folder).glob(pattern) if p.is_file())
+        except OSError:
+            continue
+        if found:
+            return found[0]
+    return None
+
+
+def auto(dest: Path = None, places=None, install=None, say=print) -> int:
+    """What the START_PORTAL launchers run: set the compiler up when it isn't yet and the installer is at
+    hand, and say nothing otherwise. Never stops the portal from starting: without the compiler it still
+    runs, and its own check says how to add it."""
+    dest = DEST if dest is None else dest
+    if (dest / "bin" / "cl.exe").is_file():
+        return 0
+    exe = find_installer(places)
+    if exe is None:
+        return 0
+    say(f" Found {exe.name}: setting up the compiler (once, about a minute)...")
+    try:
+        (install or _install)(exe)
+        say(" The compiler is ready.")
+    except SystemExit as e:
+        say(f" Couldn't set the compiler up from {exe}: {e}")
+    except Exception as e:  # noqa: BLE001 - the portal starts either way
+        say(f" Couldn't set the compiler up from {exe}: {e}")
+        say(" The portal starts without it; python portal/doctor.py says what to do.")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("installer", nargs="?", default=str(ROOT / "source_archives" / "VCToolkitSetup.exe"))
+    ap.add_argument("--auto", action="store_true",
+                    help="set the compiler up if it isn't yet and VCToolkitSetup.exe is in the project folder, "
+                         "binaries/, source_archives/ or Downloads; otherwise do nothing (the launchers use this)")
     a = ap.parse_args()
+    if a.auto:
+        return auto()
     exe = Path(a.installer)
     if not exe.exists():
-        raise SystemExit(f"{exe} not found")
+        found = find_installer()
+        if found is None:
+            raise SystemExit(f"{exe} not found")
+        exe = found
+    _install(exe)
+    print("Done. Check with:  python portal/verify.py --status")
+    return 0
+
+
+def _install(exe: Path) -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
         msi = extract_msi(exe, tmp)
@@ -135,8 +189,6 @@ def main() -> int:
             if src.exists():
                 shutil.copytree(src, DEST / sub, dirs_exist_ok=True)
                 print(f"installed portal/tools/msvc71/{sub} ({sum(1 for _ in (DEST / sub).rglob('*'))} files)")
-    print("Done. Check with:  python portal/verify.py --status")
-    return 0
 
 
 if __name__ == "__main__":

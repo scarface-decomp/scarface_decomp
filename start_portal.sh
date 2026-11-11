@@ -7,6 +7,9 @@ if ! command -v python3 >/dev/null 2>&1; then
   echo "Python 3 is not installed. Get it from https://www.python.org/downloads/ or your package manager."
   exit 1
 fi
+# The compiler: set up by itself the first time, when VCToolkitSetup.exe is in this folder, binaries/,
+# source_archives/ or Downloads (needs msitools). Says nothing otherwise.
+python3 portal/scripts/setup_msvc71.py --auto
 # A quick setup check: says only what needs fixing. The full report: python3 portal/doctor.py
 python3 portal/doctor.py --startup
 export PYTHONDONTWRITEBYTECODE=1

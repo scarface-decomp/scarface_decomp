@@ -462,56 +462,43 @@
           <li><b>About 10 minutes</b> to set up</li>
           <li><b>Strongly recommended:</b> Visual C++ Toolkit 2003 (<code>VCToolkitSetup.exe</code>)</li>
         </ul>
-        <p class="small needs-note">Set up the compiler if you can: the portal then checks your work on the spot and credits
-          you right away. Only if you can't get it working, use decomp.me in your browser and a maintainer checks it for you
-          (steps 4 and 7). The game and the compiler are the only two things the project can't give you: they belong to
+        <p class="small needs-note">Five steps, and the portal does the setting up. Have the compiler's installer if you can: the portal then checks
+          your work on the spot and credits you right away; without it, a maintainer checks it for you (step 3). The game and the compiler are the only two things the project can't give you: they belong to
           their owners, so they are never on GitHub.</p>
         <ol class="steps">
-          <li><b>Install Python</b>Get Python 3 from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">python.org</a>.
-            On Windows, tick <em>Add python.exe to PATH</em> on the installer's first screen.</li>
-          <li><b>Get the project with Git</b>Install Git from <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">git-scm.com</a>
-            (the default options are fine), open a terminal (PowerShell on Windows) where you want the folder, and run:
+          <li><b>Install Python and Git</b>Get Python 3 from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">python.org</a>
+            (on Windows, tick <em>Add python.exe to PATH</em> on the installer's first screen) and Git from
+            <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">git-scm.com</a> (the default options are fine).</li>
+          <li><b>Get the project</b>Open a terminal (PowerShell on Windows) where you want the folder, and run:
             <pre tabindex="0">git clone <span data-repo-text="clone">https://github.com/scarface-decomp/scarface_decomp.git</span></pre>
             To update later, run <code>git pull</code> in that folder: it keeps everything you've done.
             <span class="aside">Rather not use Git? On <a data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
-            press <em>Code</em>, then <em>Download ZIP</em>. It works, but it can get more complicated later: there's no
-            one-command update, and a new ZIP replaces your work, so copy <code>reports\verified_registry.json</code> out
-            before each update (or connect the folder to Git afterwards with the steps in
+            press <em>Code</em>, then <em>Download ZIP</em>. It works, but there's no one-command update, and a new ZIP
+            replaces your work, so copy <code>reports\verified_registry.json</code> out before each update (or connect the
+            folder to Git afterwards with the steps in
             <a data-repo-link="/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md#downloaded-the-zip" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a>).</span></li>
-          <li><b>Add your game files</b>Put the game, or the downloads it came in, in the project's <code>binaries</code>
-            folder. The portal takes out what it needs when it starts: <code>default.xbe</code> from the Xbox disc image
-            (<code>.iso</code>, <code>.zip</code> or <code>.7z</code>), <code>Scarface.exe</code> from the official 1.00.2 PC
-            patch, and the game's scripts from all of them. Nothing has to be installed or unpacked first. The US Xbox disc
-            is the one that matters: almost all of the work is there. The PC game and the April 2006 Xbox prototype are
-            optional extras. Only the US versions are accepted; the portal checks.</li>
-          <li><b>Add the compiler (strongly recommended)</b>To check your work on your own computer, the portal needs the
-            compiler the game was made with, Microsoft's Visual C++ Toolkit 2003. Microsoft no longer offers it, so you need
-            your own copy of its installer, <code>VCToolkitSetup.exe</code>. Put it in the project folder (the
-            <code>scarface_decomp</code> folder Git made in step 2), then open a terminal in that folder. On Windows: open
-            the folder in File Explorer, click the address bar at the top, type <code>powershell</code> and press Enter
-            (on Windows 11 you can also right-click an empty spot in the folder and choose <em>Open in Terminal</em>).
-            Still have the window from step 2? Type <code>cd scarface_decomp</code> in it instead. On Mac or Linux, open
-            Terminal and type <code>cd</code>, a space, and the folder's path. Then run this once:
-            <pre tabindex="0">python portal/scripts/setup_msvc71.py VCToolkitSetup.exe</pre>
-            It says <em>Done</em> when the compiler is ready. On Mac or Linux, use <code>python3</code> instead of
-            <code>python</code>.
-            With it, every function you finish is checked and credited to you straight away, so set it up if you can. Only
-            skip this if you can't get it to work; step 7 says what to do then.</li>
-          <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
-            <code>sh start_portal.sh</code>. The first start takes a few minutes while it unpacks your files and lists
-            every function; then your browser opens the portal at <code>localhost:8085</code>.</li>
-          <li><b>Pick a function and solve it</b>Sign in (the first time, just pick a name and a PIN), then choose a small function and claim it. The editor starts you
-            off with a first draft of its C++, written from the game's machine code; for many small functions the draft
-            already matches. If it doesn't, change it until it does.</li>
-          <li><b>Verify it</b>Press <em>Compile &amp; Verify</em> to record it under your name (this uses the compiler from
-            step 4). No compiler, or it's acting up? Press <em>decomp.me</em> in the portal instead: it runs the same compiler
-            in your browser, and your scratch is filed under the <a href="https://decomp.me/preset/266" target="_blank" rel="noopener noreferrer">Scarface preset</a> with everyone else's. Get it to 100% there and post the link in a
+          <li><b>Drop in your two files</b>Put your game in the project's <code>binaries</code> folder, just as you
+            have it: the US Xbox disc image (<code>.iso</code>, <code>.zip</code> or <code>.7z</code>) is the one that
+            matters, and the PC game with its 1.00.2 patch is an optional extra. Put the compiler's installer,
+            <code>VCToolkitSetup.exe</code> (Microsoft's Visual C++ Toolkit 2003, which the game was built with), in the
+            project folder itself. Nothing has to be installed, unpacked or typed: the next step does all of it.
+            <span class="aside">No compiler? The portal still runs. Use its <em>decomp.me</em> button, which compiles in
+            your browser, get the function to 100% there and post the link in a
             <a data-repo-link="/issues/new" href="https://github.com/scarface-decomp/scarface_decomp/issues/new" target="_blank" rel="noopener noreferrer">GitHub issue</a>
-            or in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on Discord</a>, and a maintainer will verify it and credit you.</li>
-          <li><b>Submit your work</b>When you're done for now, press <em>Submit your work</em> in the portal's sidebar.
-            Your matches are saved on your computer as you go, so nothing is lost if you close it first. Submitting puts
-            the new ones in one file: post it in the Discord or a GitHub issue, and a maintainer adds them under your name
-            after compiling each one again.</li>
+            or in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on Discord</a>;
+            your scratch is filed under the <a href="https://decomp.me/preset/266" target="_blank" rel="noopener noreferrer">Scarface preset</a>
+            and a maintainer verifies it and credits you.</span></li>
+          <li><b>Start the portal</b>On Windows, double-click <code>START_PORTAL.bat</code>. On Mac or Linux, run
+            <code>sh start_portal.sh</code>. The first start takes a few minutes: it installs what it needs, sets up the
+            compiler, checks and unpacks your game and lists every function. Then your browser opens the portal at
+            <code>localhost:8085</code>. Only the US versions of the game are accepted; it tells you if something is off.</li>
+          <li><b>Match functions, then submit</b>Sign in (the first time, just pick a name and a PIN), choose a small
+            function and claim it. The editor starts you off with a first draft of its C++, written from the game's
+            machine code; for many small functions the draft already matches. Press <em>Compile &amp; Verify</em>, and
+            change the code until it says 100%: it is recorded under your name. When you're done for now, press
+            <em>Submit your work</em> in the sidebar. It puts your new matches in one file: post it in the Discord or a
+            GitHub issue, and a maintainer adds them under your name after compiling each one again. Your matches are
+            saved on your computer as you go, so nothing is lost if you close the portal first.</li>
         </ol>
         <div class="good-first" id="good-first-box" hidden>
           <h3>Good first functions</h3>

@@ -52,3 +52,30 @@ def test_msi_reader_names_and_folders():
     assert str(dirs["LOOP"]) == "x"
     from pathlib import PurePosixPath as P
     assert MR._safe(P("a/b/cl.exe")) and not MR._safe(P("../evil.exe")) and not MR._safe(P("/etc/x"))
+
+
+def test_the_launcher_sets_the_compiler_up_by_itself(tmp_path):
+    """START_PORTAL runs --auto: with the installer left in the project folder, binaries/ or Downloads and no
+    compiler yet, it is set up; otherwise nothing happens and nothing is said. It never stops the start."""
+    mod = spec.loader.load_module() if False else __import__("importlib").util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    dest, proj, downloads = tmp_path / "msvc71", tmp_path / "project", tmp_path / "Downloads"
+    proj.mkdir()
+    downloads.mkdir()
+    said, ran = [], []
+    assert mod.auto(dest, [proj, downloads], ran.append, said.append) == 0 and not ran and not said     # no installer
+    (downloads / "VCToolkitSetup.exe").write_bytes(b"x")
+    assert mod.find_installer([proj, downloads]) == downloads / "VCToolkitSetup.exe"
+    (proj / "VCToolkitSetup (1).exe").write_bytes(b"x")                    # the project folder comes first
+    assert mod.find_installer([proj, downloads]).parent == proj
+    assert mod.auto(dest, [proj, downloads], ran.append, said.append) == 0
+    assert ran == [proj / "VCToolkitSetup (1).exe"] and "The compiler is ready" in said[-1]
+
+    def fails(exe):
+        raise SystemExit("not the Toolkit")
+    assert mod.auto(dest, [proj], fails, said.append) == 0 and "not the Toolkit" in said[-1]
+    (dest / "bin").mkdir(parents=True)
+    (dest / "bin" / "cl.exe").write_bytes(b"x")
+    ran.clear()
+    n = len(said)
+    assert mod.auto(dest, [proj], ran.append, said.append) == 0 and not ran and len(said) == n         # already set up
