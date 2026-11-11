@@ -166,7 +166,7 @@ def markdown(report: dict) -> str:
     out += ["", "## Making this page", "",
             "With your own copies of the versions in `binaries/` ([GAME_VERSIONS.md](GAME_VERSIONS.md)):", "",
             "```", "python portal/tools/version_report.py --scan", "```", "",
-            "It reads every version (this takes a while), keeps the lists in `binaries/game_files/catalogs/`",
+            "It reads every version (this takes a while), keeps the lists in `extracted/game_files/catalogs/`",
             "(never committed), and writes this file, `docs/versions.json` and `docs/versions-changed.json`.", ""]
     return "\n".join(out)
 

@@ -308,5 +308,5 @@ With your own copies of the versions in `binaries/` ([GAME_VERSIONS.md](GAME_VER
 python portal/tools/version_report.py --scan
 ```
 
-It reads every version (this takes a while), keeps the lists in `binaries/game_files/catalogs/`
+It reads every version (this takes a while), keeps the lists in `extracted/game_files/catalogs/`
 (never committed), and writes this file, `docs/versions.json` and `docs/versions-changed.json`.

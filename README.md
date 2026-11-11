@@ -196,8 +196,10 @@ Choose a layout:
 * **Every version complete**: each version in its own folder.
 * **Best version of each file**: one copy of every file, in `Best/`. Where the versions have it in
   different forms, the highest quality wins: sounds by sample rate, then channels, then codec; videos by
-  picture size; models and textures by texture size, then colour depth. That is mostly the PC's (Ogg
-  Vorbis sounds at 44.1 to 48 kHz, 1280x720 videos), the Xbox's 5.1 surround sounds and many of its textures,
+  picture size; models and textures by texture size, then by how much each pixel really stores (the
+  Xbox's and the PC's textures are the same size; the PC keeps many in full colour where the Xbox
+  compresses them). That is mostly the PC's (Ogg Vorbis sounds at 44.1 to 48 kHz, 1280x720 videos, its
+  textures), the Xbox's 5.1 surround sounds,
   and some of the prototype's map files (they hold more textures: mostly ones the final game keeps in
   shared files instead). `INDEX - Best.txt` says where each file came from and why.
 * **The PC first, then what only the others have**: the whole PC version in `PC/` (patched, if the patch
@@ -225,11 +227,11 @@ through, with nothing to install. **Open in Blender** starts your Blender with a
 `.blend`): characters with their skeletons, skin weights and the game's animations, cameras with their
 moves, guns, cars with their moving parts, and map areas with the trees, lamps and benches the game places
 on them, as the game first shows them, on any version. The **In Blender** box does a whole map area at
-once, or the whole city into `binaries/blender/`, one file per area, then opens it all as one scene;
+once, or the whole city into `extracted/blender/`, one file per area, then opens it all as one scene;
 `portal/tools/p3d_gltf.py` does it from the command line
 ([FORMATS.md](docs/FORMATS.md#exporting-to-blender)).
 
-**Export every texture** writes all the game's textures out as `.png` into `binaries/textures/`: the PC's,
+**Export every texture** writes all the game's textures out as `.png` into `extracted/textures/`: the PC's,
 in a folder named after the file each is in, then what only the other versions have in their own
 `Exclusive to` folders. Where another version has the same picture at a higher resolution, that one is
 used: checked against all of them, the Xbox's textures are the same size as the PC's, the PS2's the same

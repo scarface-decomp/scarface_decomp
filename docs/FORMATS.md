@@ -383,7 +383,7 @@ copies them the way these exports like best): **Open** next to any `.p3d` file s
 offers what fits it (a character with the game's animations from `art/animations`, a file of animations
 shown on Tony, a camera with its move, a map file with what its region places on it), and the **In
 Blender** box gives a whole map area in one scene, or the whole city, one file per area, in
-`binaries/blender/`. **Open in Blender** starts your own Blender with the scene imported and saves it as a
+`extracted/blender/`. **Open in Blender** starts your own Blender with the scene imported and saves it as a
 `.blend` beside it; the whole city opens as one scene, every area at its place. A `.glb` you download goes
 in with File > Import > glTF 2.0: double-clicked, Blender tries to open it as a `.blend` and says it isn't
 a valid Blender file. Characters come with their skeleton as an armature, their skin

@@ -1,6 +1,8 @@
 # Game files and archives: never committed (bring your own copies). Only the folder's README is.
 binaries/*
 !binaries/README.md
+# Made by the portal from your game files (copies, Blender exports, textures, playable movies)
+extracted/
 source_archives/
 community_zips/
 workpacks/

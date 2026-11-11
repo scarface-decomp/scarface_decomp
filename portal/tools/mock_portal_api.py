@@ -180,7 +180,7 @@ GF_AREAS = [{"key": "z04/stripmall_01", "name": "stripmall_01", "place": "z04", 
 def blender_run(version):
     """A made-up city export: three areas, a moment each."""
     BLENDER.update(running=True, version=version, done=0, total=3, written=0, bytes=0, error="",
-                   folder=f"binaries/blender/{version.upper()}")
+                   folder=f"extracted/blender/{version.upper()}")
     for a in GF_AREAS[:2] + [{"name": "bridge_01"}]:
         BLENDER["area"] = a["name"]
         time.sleep(0.25)
@@ -368,7 +368,7 @@ class Handler(BaseHTTPRequestHandler):
             if u.path == "/api/import-status":
                 return self._json(IMPORT)
             if u.path == "/api/game-files":
-                return self._json({"ok": True, "versions": GF_VERSIONS, "folder": "binaries/game_files",
+                return self._json({"ok": True, "versions": GF_VERSIONS, "folder": "extracted/game_files",
                                    "free": 128 * 2**30, "summary": GF["summary"], "copy": GF["copy"],
                                    "interrupted": bool(CONFIG.get("gf_interrupted")),
                                    "status": {k: v for k, v in GF["status"].items() if k != "stop"},
@@ -693,7 +693,7 @@ class Handler(BaseHTTPRequestHandler):
                                    "Install it from blender.org, or tell the portal where blender.exe is."}, 404)
             name = "PC city" if body.get("city") else (body.get("area") or body.get("path") or "x").split("/")[-1].split(".")[0]
             return self._json({"ok": True, "blender": "blender.exe", "files": 3 if body.get("city") else 1,
-                               "saved": f"binaries/blender/PC/{'' if body.get('city') else 'Opened/'}{name}.blend"})
+                               "saved": f"extracted/blender/PC/{'' if body.get('city') else 'Opened/'}{name}.blend"})
         if u.path == "/api/game-files/blender-path":
             if "blender" not in str(body.get("path", "")).lower():
                 return self._json({"ok": False, "error": "That isn't Blender: pick blender.exe in the folder Blender is installed in."}, 400)
@@ -724,7 +724,7 @@ class Handler(BaseHTTPRequestHandler):
                         st.update(phase=phase, label=label, done=i, total=total, written=st["written"] + 50)
                         time.sleep(0.5)
                 st.update(running=False, phase="done", sharper=7, extra=172, made=True)
-            st.update(running=True, phase="starting", written=0, done=0, total=0, error="", folder="binaries/textures")
+            st.update(running=True, phase="starting", written=0, done=0, total=0, error="", folder="extracted/textures")
             threading.Thread(target=run, daemon=True).start()
             return self._json(dict(st, ok=True))
         if u.path == "/api/game-files/speed":
@@ -732,19 +732,22 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": True})
         if u.path == "/api/game-files/textures-stop":
             return self._json({"ok": True})
+        if u.path == "/api/game-files/ffmpeg-install":
+            CONFIG["ffmpeg"] = True
+            return self._json({"ok": True, "message": "A window opened that is installing FFmpeg (answer Y if it asks). When it closes, press Try again: no restart needed."})
         if u.path == "/api/game-files/ffmpeg-path":
             if "ffmpeg" not in str(body.get("path", "")).lower():
                 return self._json({"ok": False, "error": "That isn't FFmpeg."}, 400)
             CONFIG["ffmpeg"] = True
             return self._json({"ok": True})
         if u.path == "/api/game-files/open" and str(body.get("folder", "")).startswith("blender:"):
-            return self._json({"ok": True, "folder": "binaries/blender"})
+            return self._json({"ok": True, "folder": "extracted/blender"})
         if u.path == "/api/game-files/open":
             folder = body.get("folder", "")
             known = ("", "shared", "best", "notpc", "xbox", "pc", "ps2", "prototype", "textures")
             if (folder not in known and not (folder.startswith("only:") and folder[5:] in known)) or not GF["summary"]:
                 return self._json({"ok": False, "error": "That folder isn't there yet."}, 404)
-            return self._json({"ok": True, "folder": "binaries/game_files"})
+            return self._json({"ok": True, "folder": "extracted/game_files"})
         if u.path == "/api/submit":
             user, err = auth(body)
             if err:

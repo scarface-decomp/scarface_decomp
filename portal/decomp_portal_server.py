@@ -2347,6 +2347,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/game-files/speed": self.post_game_files_speed,
             "/api/game-files/textures-stop": self.post_game_files_textures_stop,
             "/api/game-files/ffmpeg-path": self.post_game_files_ffmpeg_path,
+            "/api/game-files/ffmpeg-install": self.post_game_files_ffmpeg_install,
             "/api/game-files/open": self.post_game_files_open,
             "/api/dme-bridge/run": self.post_bridge_run, "/api/dme-bridge/result": self.post_bridge_result,
             "/api/describe": self.post_describe,
@@ -2734,7 +2735,7 @@ class Handler(BaseHTTPRequestHandler):
         self._send(200, glb, "model/gltf-binary", {"Content-Disposition": f'attachment; filename="{name}"'})
 
     def post_game_files_blender(self, body):
-        """Every map area of the city as .glb files in binaries/blender/<version>/."""
+        """Every map area of the city as .glb files in extracted/blender/<version>/."""
         err = BLENDER.start(str(body.get("version", "")), GAME_FILES.index())
         if err:
             return self._json({"ok": False, "error": err}, 409 if "Already" in err or "being" in err else 400)
@@ -2784,7 +2785,7 @@ class Handler(BaseHTTPRequestHandler):
                 glbs, save = [folder / BX.OPENED / f"{name}.glb"], folder / BX.OPENED / f"{name}.blend"
                 glbs[0].parent.mkdir(parents=True, exist_ok=True)
                 glbs[0].write_bytes(glb)
-            BX.open_in_blender(exe, glbs, save, GAME_FILES.bin_dir / BX.OUT_NAME / "_scripts")
+            BX.open_in_blender(exe, glbs, save, GA.made_dir(GAME_FILES.bin_dir, BX.OUT_NAME) / "_scripts")
         except P3G.ExportError as e:
             return self._json({"ok": False, "error": f"Nothing to show in Blender: {e}."}, 415)
         except (OSError, P3G.p3d.P3dError) as e:
@@ -2802,7 +2803,7 @@ class Handler(BaseHTTPRequestHandler):
         self._json(dict(st, ok=st.get("state") != "error"), 200 if st.get("state") != "error" else 424)
 
     def post_game_files_textures(self, body):
-        """Every texture as a .png, into binaries/textures/ (PC first; see portal/tools/textures.py)."""
+        """Every texture as a .png, into extracted/textures/ (PC first; see portal/tools/textures.py)."""
         sources, _notes = GAME_FILES.sources()
         err = TEXTURE_JOB.start(GAME_FILES.index(), sources)
         if err:
@@ -2833,6 +2834,14 @@ class Handler(BaseHTTPRequestHandler):
         if err:
             return self._json({"ok": False, "error": err}, 400)
         self._json({"ok": True})
+
+    def post_game_files_ffmpeg_install(self, body):
+        if not self._local_only():
+            return
+        if MOVIES.find_ffmpeg(GAME_FILES.bin_dir):
+            return self._json({"ok": True, "message": "FFmpeg is already installed. Press Try again."})
+        ok, message = MOVIES.install_ffmpeg()
+        self._json({"ok": ok, "message": message, "error": "" if ok else message}, 200 if ok else 400)
 
     def post_game_files_blender_path(self, body):
         if not self._local_only():
@@ -2926,6 +2935,7 @@ def main() -> None:
         sys.exit("Capstone is required (function sizes, disassembly, address checks): pip install -r portal/requirements.txt")
     _migrate_legacy_auth()
     load_registry()
+    GA.move_made(BASE_DIR / "binaries")
     if not GF.startup(BASE_DIR / "binaries"):
         GF.pc_help(BASE_DIR / "binaries")
     try:

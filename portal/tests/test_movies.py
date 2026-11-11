@@ -80,6 +80,30 @@ def test_a_graphics_card_that_fails_falls_back_to_the_processor(tmp_path, monkey
     assert job._state[str(job.target(movie))]["encoder"] == "processor"
 
 
+def test_one_click_install_uses_windows_own_installer(monkeypatch):
+    """winget, in a window of its own, for exactly the FFmpeg package; where there is no winget (or no
+    Windows) it says what to do instead and starts nothing."""
+    started = []
+    monkeypatch.setattr(M.subprocess, "Popen", lambda cmd, **kw: started.append((cmd, kw)))
+    monkeypatch.setattr(M.os, "name", "posix")
+    ok, said = M.install_ffmpeg()
+    assert not ok and "brew install ffmpeg" in said and not started
+    monkeypatch.setattr(M.os, "name", "nt")
+    monkeypatch.setattr(M.shutil, "which", lambda name: None)
+    ok, said = M.install_ffmpeg()
+    assert not ok and "App Installer" in said and not started
+    monkeypatch.setattr(M.shutil, "which", lambda name: "C:/w/winget.exe")
+    ok, said = M.install_ffmpeg()
+    assert ok and "no restart needed" in said
+    assert started[0][0] == ["winget", "install", "--id", "Gyan.FFmpeg", "-e", "--source", "winget"]
+
+    def broken(cmd, **kw):
+        raise OSError("denied")
+    monkeypatch.setattr(M.subprocess, "Popen", broken)
+    ok, said = M.install_ffmpeg()
+    assert not ok and "winget install --id Gyan.FFmpeg" in said
+
+
 def test_no_graphics_card_check_without_ffmpeg():
     assert M.graphics_card(None) is None
 

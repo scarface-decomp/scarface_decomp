@@ -619,6 +619,20 @@ def test_sniff_says_what_a_file_is_and_how_good():
     model = p3d(chunk(0x10000, b"mesh"), texture(b"skin", 256, 128, 32))
     assert GA.sniff("art/car.p3d", model) == {"p3d": "models", "tex": 256 * 128, "bits": 256 * 128 * 32}
     assert GA.sniff("frontend/hud.p3d", p3d(texture(b"hud", 64, 64, 8)))["p3d"] == "textures"
+    # how good a texture is goes by what its picture really stores, not the depth its chunk names: the Xbox's
+    # say 32 bits and hold DXT1 (4 a pixel); the PC's same texture is a PNG with a palette (4, 8) or full colour (24)
+    def with_picture(declared, picture):
+        tex = chunk(0x19000, bytes([4]) + b"skin" + struct.pack("<IIIIIIIII", 14, 8, 8, declared, 8, 1, 0, 0, 0),
+                    [chunk(0x19001, b"\x04img\0" + bytes(28), [chunk(0x19002, struct.pack("<I", len(picture)) + picture)])])
+        return GA.sniff("art/t.p3d", p3d(tex))["bits"] // 64
+    png = lambda depth, kind: b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + b"IHDR" + struct.pack(">IIBB", 8, 8, depth, kind) + bytes(8)
+    dds = lambda four: b"DDS " + bytes(80) + four + struct.pack("<I", 0) + bytes(40)
+    assert [with_picture(32, dds(b"DXT1")), with_picture(32, dds(b"DXT5"))] == [4, 8]
+    assert [with_picture(4, png(4, 3)), with_picture(8, png(8, 3)), with_picture(24, png(8, 2)), with_picture(32, png(8, 6))] == [4, 8, 24, 32]
+    assert with_picture(8, b"P3DI" + struct.pack("<IIIII", 0, 8, 8, 8, 0)) == 8
+    assert with_picture(16, b"something else") == 16                      # can't be told: what the chunk says
+    xbox, pc = {"tex": 100, "bits": 100 * with_picture(32, dds(b"DXT1"))}, {"tex": 100, "bits": 100 * with_picture(24, png(8, 2))}
+    assert GA.quality(pc) > GA.quality(xbox)                               # full colour beats DXT1 at the same size
     assert GA.sniff("nis/stream0.p3d", p3d(chunk(0x121000, b"anim")))["p3d"] == "animations"
     assert GA.sniff("art/subtitles/1/x.p3d", p3d(chunk(0x3000000, b"text")))["p3d"] == "scripts"
     assert GA.sniff("packages/z.p3d", p3d(chunk(0x3000000, b"data")))["p3d"] == "other"
@@ -885,3 +899,35 @@ def test_stop_ends_the_reader_processes(tmp_path):
     assert not list((b / "game_files" / ".work").glob("read-*.json"))
     GA.run(list(GA.VERSIONS), "unique", b, log=lambda m: None, side_by_side=True)     # and carries on after
     assert read_all(b / "game_files")["Shared/cement.rcf/art/sound/hello.rsd"] == SOUND
+
+
+def test_what_the_portal_makes_lives_beside_binaries_not_in_it(tmp_path, monkeypatch):
+    """The copied game files, Blender exports, textures and playable movies go to extracted/ beside the
+    project's binaries/, which then holds only what the person put there. What an earlier portal wrote inside
+    binaries/ is moved once (a rename: no time, no space); anything in the way or in use is left and said."""
+    import blender_export as BX
+    import movies as MV
+    import textures as TX
+    bins = tmp_path / "project" / "binaries"
+    (bins / "game_files" / "PC").mkdir(parents=True)
+    (bins / "game_files" / "PC" / "a.p3d").write_bytes(b"x")
+    (bins / "blender").mkdir()
+    (bins / "blender" / "blender_path.txt").write_text("C:/b/blender.exe", encoding="utf-8")
+    (bins / "textures").mkdir()
+    (bins / "disc.iso").write_bytes(b"mine")
+    other = tmp_path / "elsewhere"
+    assert GA.made_root(other) == other and GA.out_dir(other) == other / "game_files"      # any other folder: as before
+    monkeypatch.setattr(GA, "BIN_DIR", bins)
+    root = tmp_path / "project" / "extracted"
+    assert GA.made_root(bins) == root and GA.out_dir(bins) == root / "game_files"
+    assert TX.TextureJob(bins).folder() == root / "textures" if hasattr(TX.TextureJob, "folder") else True
+    assert MV._previews(bins) == root / "previews" and GA.made_dir(bins, BX.OUT_NAME) == root / "blender"
+    (root / "textures").mkdir(parents=True)                      # already there: the old one is left, and said
+    said = []
+    assert GA.move_made(bins, said.append) == ["game_files", "blender"]
+    assert (root / "game_files" / "PC" / "a.p3d").read_bytes() == b"x" and not (bins / "game_files").exists()
+    assert (root / "blender" / "blender_path.txt").is_file() and (bins / "textures").is_dir()
+    assert sorted(p.name for p in bins.iterdir()) == ["disc.iso", "textures"]
+    assert any("both exist" in s for s in said) and any("Moved game_files, blender" in s for s in said)
+    assert GA.move_made(bins, said.append) == []                 # nothing left to move
+    assert GA.move_made(other, said.append) == []

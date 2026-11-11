@@ -1202,7 +1202,7 @@
             <div class="card-hdr">
               <div>
                 <h2 class="card-title lg">Game files</h2>
-                <p class="card-sub">Copy the sounds, textures, models, videos and everything else out of your own copies of the game, into <code id="gf-folder">binaries/game_files/</code>. Every file goes in the folder it has inside the game. They're for your own use: they stay on this computer and are never uploaded or put on GitHub.</p>
+                <p class="card-sub">Copy the sounds, textures, models, videos and everything else out of your own copies of the game, into <code id="gf-folder">extracted/game_files/</code>. Every file goes in the folder it has inside the game. They're for your own use: they stay on this computer and are never uploaded or put on GitHub.</p>
               </div>
               <div class="hdr-actions">
                 <button type="button" class="btn-sm" id="gf-open-all" onclick="openGameFolder('')" hidden>Open the folder</button>
@@ -1305,7 +1305,7 @@
             <div class="card-hdr">
               <div>
                 <h2 class="card-title">Every texture as a picture</h2>
-                <p class="card-sub">The game keeps its textures inside its <code>.p3d</code> files: each model, map area and menu carries its own. This writes every one out as a <code>.png</code> into <code>binaries/textures/</code>: the PC's, in a folder named after the file it is in, then what only the other versions have, in their own <b>Exclusive to</b> folders. Where another version has the same picture at a higher resolution (some of the 2006 prototype's world textures, at twice the size) that one is used; the prototype's bigger menu icons are different pictures, so they go in its own folder. <code>INDEX.txt</code> says what came from where.</p>
+                <p class="card-sub">The game keeps its textures inside its <code>.p3d</code> files: each model, map area and menu carries its own. This writes every one out as a <code>.png</code> into <code>extracted/textures/</code>: the PC's, in a folder named after the file it is in, then what only the other versions have, in their own <b>Exclusive to</b> folders. Where another version has the same picture at a higher resolution (some of the 2006 prototype's world textures, at twice the size) that one is used; the prototype's bigger menu icons are different pictures, so they go in its own folder. <code>INDEX.txt</code> says what came from where.</p>
               </div>
             </div>
             <div class="gf-run">
@@ -1346,7 +1346,7 @@
             <p class="gf-notes" id="gfb-area-note">Its shell and detail files in one scene, with the textures and placed models from its region.</p>
             <p class="gf-notes" id="gfb-area-status" role="status" aria-live="polite"></p>
             <h3 class="gf-h">The whole city</h3>
-            <p class="gf-notes">Every area of the city, one <code>.glb</code> each, into <code>binaries/blender/</code> under the version's name, each at its place in the city. Then <b>Open the whole city in Blender</b> brings them all into one scene, joined up, and saves it as one <code>.blend</code>.</p>
+            <p class="gf-notes">Every area of the city, one <code>.glb</code> each, into <code>extracted/blender/</code> under the version's name, each at its place in the city. Then <b>Open the whole city in Blender</b> brings them all into one scene, joined up, and saves it as one <code>.blend</code>.</p>
             <div class="gf-run">
               <button type="button" class="btn" id="gfb-city" onclick="startGfCity()">Export the city</button>
               <button type="button" class="btn-sm" id="gfb-city-stop" onclick="stopGfCity()" hidden>Stop</button>
@@ -3551,7 +3551,16 @@
     gpu.disabled = !d.gpu;
     $('gf-gpu-text').textContent = d.gpu ? 'Use the graphics card (' + d.gpu + ') to make movies playable; the processor does it if the card can’t.'
       : d.ffmpeg ? 'No graphics card FFmpeg can use was found: movies are made by the processor. (Copying the game files can’t use a graphics card.)'
-      : 'Movies need FFmpeg, a free program. On Windows, open PowerShell and run:  winget install Gyan.FFmpeg  then close this page\'s START_PORTAL window and start it again: the portal finds it by itself. With it, a graphics card can make movies faster. (Copying the game files can’t use a graphics card.)';
+      : 'Movies need FFmpeg, a free program. On Windows, open PowerShell and run:  winget install Gyan.FFmpeg  or press Install FFmpeg where a movie asks for it. The portal finds it by itself, no restart. With it, a graphics card can make movies faster. (Copying the game files can’t use a graphics card.)';
+  }
+
+  /* One click: Windows' own installer (winget) fetches FFmpeg in a window of its own. */
+  async function gfInstallFfmpeg(status) {
+    let d;
+    try { d = await postJson('/api/game-files/ffmpeg-install', {}); } catch (e) { d = { ok: false, error: e.message }; }
+    status.classList.toggle('err', !d.ok);
+    status.textContent = d.ok ? d.message : (d.error || 'Couldn’t start the installer.');
+    if (d.ok) setTimeout(loadGfSpeed, 30000);
   }
 
   async function saveGfSpeed() {
@@ -3799,7 +3808,7 @@
     $('gf-stop').disabled = false;
   }
 
-  /* Blender: a whole map area as one .glb, or every area of the city into binaries/blender/<version>/. */
+  /* Blender: a whole map area as one .glb, or every area of the city into extracted/blender/<version>/. */
   let GFB_AREAS_FOR = null;
   let GFB_CITY_VERSION = '';
   let GFB_CITY_T = null;
@@ -3838,7 +3847,7 @@
     renderGfCity(d.city || {});
     if (GFB_CITY_FILES && !d.city_current && !(d.city || {}).running) {
       $('gfb-city-bl-status').classList.remove('err');
-      $('gfb-city-bl-status').textContent = 'The city in binaries/blender/ was exported before props came in whole and at full detail: press Export the city again.';
+      $('gfb-city-bl-status').textContent = 'The city in extracted/blender/ was exported before props came in whole and at full detail: press Export the city again.';
     }
     gfShowBlenderApp();
   }
@@ -4323,6 +4332,10 @@
         st.classList.add('err');
         st.textContent = d.error || 'Couldn’t make the video.';
         if (d.need_ffmpeg) {
+          const inst = el('button', 'Install FFmpeg', 'btn-sm');
+          inst.type = 'button';
+          inst.addEventListener('click', () => gfInstallFfmpeg(st));
+          box.appendChild(inst);
           gfAskForPath(st, 'Or, where is ffmpeg.exe?', 'C:\\ffmpeg\\bin\\ffmpeg.exe', 'Use this FFmpeg',
             '/api/game-files/ffmpeg-path', start);
           const again = el('button', 'Try again', 'btn-sm');
@@ -4429,7 +4442,7 @@
     renderGfCity(res);
   }
 
-  /* Every texture as a .png (binaries/textures/). */
+  /* Every texture as a .png (extracted/textures/). */
   let GFT_T = null;
   let GFT_LOADED = false;
 
@@ -4447,7 +4460,7 @@
       other: 'Comparing the ' + st.label + '\'s textures: ' + fmtInt(st.done) + ' of ' + fmtInt(st.total) + ' files',
       disc: 'Reading the ' + st.label + '\'s files with textures from its disc: ' + fmtBytes(st.read) + ' of ' + fmtBytes(st.to_read),
       writing: 'Adding the sharper ones and what only the other versions have…',
-      done: 'Done: ' + fmtInt(st.written) + ' pictures in ' + (st.folder || 'binaries/textures') + '/. ' + fmtInt(st.sharper)
+      done: 'Done: ' + fmtInt(st.written) + ' pictures in ' + (st.folder || 'extracted/textures') + '/. ' + fmtInt(st.sharper)
         + ' sharper from another version, ' + fmtInt(st.extra) + ' that only other versions have.',
       stopped: 'Stopped.',
       error: 'Couldn’t finish: ' + (st.error || 'unknown error'),

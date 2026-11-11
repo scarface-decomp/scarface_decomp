@@ -31,7 +31,7 @@ And two ways to arrange the folders: as in the game, or by type first (Sounds, T
 Animations, Videos, Scripts & text, Other), each keeping the game's own folders below that. Pure3D
 files (.p3d) are sorted by what is inside them: meshes make a model, textures alone a texture file.
 
-The output goes in binaries/game_files/. binaries/ is in .gitignore, so these files are never
+The output goes in extracted/game_files/. binaries/ is in .gitignore, so these files are never
 committed or uploaded: they stay on this computer, for your own use.
 
     python portal/tools/game_assets.py                    # the versions found
@@ -149,12 +149,34 @@ def kind_of(path: str, info: Optional[dict] = None) -> str:
     return kind
 
 
+def _stored_bits(data: bytes, at: int) -> int:
+    """Bits per pixel a picture really keeps, from its own header (0 when it can't be told). A texture's
+    chunk also names a colour depth, but that is what it unpacks to: the Xbox's say 32 and hold DXT1, 4 bits
+    a pixel, where the PC's same texture is a PNG with a 16-colour palette (4) or in full colour (24)."""
+    head = data[at:at + 92]
+    if head[:8] == b"\x89PNG\r\n\x1a\n" and len(head) >= 26:
+        depth, kind = head[24], head[25]
+        return {0: depth, 2: 3 * depth, 3: depth, 4: 2 * depth, 6: 4 * depth}.get(kind, 0)
+    if head[:4] == b"DDS " and len(head) >= 92:
+        four = head[84:88]
+        if four == b"DXT1":
+            return 4
+        if four in (b"DXT2", b"DXT3", b"DXT4", b"DXT5"):
+            return 8
+        return struct.unpack_from("<I", head, 88)[0] if struct.unpack_from("<I", head, 88)[0] <= 64 else 0
+    if head[:4] == b"P3DI" and len(head) >= 20:
+        bpp = struct.unpack_from("<I", head, 16)[0]
+        return bpp if bpp <= 64 else 0
+    return 0
+
+
 def _p3d_info(path: str, data: bytes) -> Optional[dict]:
     """What a Pure3D file holds: its top-level chunks say whether it is a model (a mesh or skin), only
     textures, or animation; the texture chunks anywhere in it give their size and colour depth."""
     if data[:4] != P3D_MAGIC or len(data) < 12:
         return None
     top, pixels, bits = set(), 0, 0
+    waiting = None                          # (pixels, bits it says it has): a texture whose picture hasn't come yet
     stack = [(struct.unpack_from("<I", data, 4)[0], min(struct.unpack_from("<I", data, 8)[0], len(data)), 1)]
     walked = 0
     while stack and walked < 200_000:
@@ -171,11 +193,18 @@ def _p3d_info(path: str, data: bytes) -> Optional[dict]:
                 if p + 16 <= off + head:
                     _ver, w, h, bpp = struct.unpack_from("<IIII", data, p)
                     if w <= 16384 and h <= 16384 and bpp <= 64:
+                        if waiting:
+                            bits += waiting[0] * waiting[1]
                         pixels += w * h
-                        bits += w * h * bpp
+                        waiting = (w * h, bpp)
+            elif cid == 0x19002 and waiting:                       # its picture: what is really stored
+                bits += waiting[0] * (_stored_bits(data, off + 16) or waiting[1])
+                waiting = None
             if head < total:
                 stack.append((off + head, off + total, depth + 1))
             off += total
+    if waiting:
+        bits += waiting[0] * waiting[1]
     if not top:
         return None                         # nothing readable inside: sorted by its name alone
     if top & {0x10000, 0x10001}:            # Mesh, Skin
@@ -1295,7 +1324,7 @@ def list_versions(versions: List[str], bin_dir: Path = BIN_DIR, status: Optional
                   stop: Callable[[], bool] = lambda: False, log: Log = print,
                   sources: Optional[Dict[str, Source]] = None) -> Dict[str, List[list]]:
     """Read the chosen versions and list their files ([path, size, sha, facts]) without copying anything.
-    The lists are kept in binaries/game_files/catalogs/ and reused while the game files stay the same."""
+    The lists are kept in extracted/game_files/catalogs/ and reused while the game files stay the same."""
     status = status if status is not None else new_status()
     if sources is None:
         sources, _notes = find_sources(bin_dir)
@@ -1463,8 +1492,56 @@ INDEX_JSON = ".index.json"
 WORK = ".work"
 
 
+EXTRACTED = "extracted"                       # beside binaries/: everything the portal makes from the game files
+MADE = (OUT_NAME, "blender", "textures", "previews", "texture_compare")
+
+
+def made_root(bin_dir: Path = BIN_DIR) -> Path:
+    """Where what the portal makes from the game files goes: extracted/ beside the project's binaries/, so
+    binaries/ holds only what the person put there. Another folder given as the game files' place (a test's,
+    a script's --bin) keeps everything inside itself, as before."""
+    try:
+        own = Path(bin_dir).resolve() == BIN_DIR.resolve()
+    except OSError:
+        own = False
+    return Path(bin_dir).parent / EXTRACTED if own else Path(bin_dir)
+
+
+def made_dir(bin_dir: Path, name: str) -> Path:
+    return made_root(bin_dir) / name
+
+
 def out_dir(bin_dir: Path = BIN_DIR) -> Path:
-    return bin_dir / OUT_NAME
+    return made_dir(bin_dir, OUT_NAME)
+
+
+def move_made(bin_dir: Path = BIN_DIR, log: Log = print) -> List[str]:
+    """Once: what earlier versions of the portal wrote inside binaries/ (the copied game files, the Blender
+    exports, the textures, the playable movies) moves to extracted/. A rename on the same drive, so it takes
+    no time and no space whatever the size. Anything that can't move (a file open in Blender) stays where
+    it is, is said, and is tried again at the next start. Returns the folders moved."""
+    root = made_root(bin_dir)
+    if root == Path(bin_dir):
+        return []
+    moved = []
+    for name in MADE:
+        old, new = Path(bin_dir) / name, root / name
+        if not old.is_dir():
+            continue
+        if new.exists():
+            log(f"[!] {_show_path(old)} and {_show_path(new)} both exist: the portal uses {_show_path(new)}. "
+                f"Delete the other if you don't need it.")
+            continue
+        try:
+            root.mkdir(parents=True, exist_ok=True)
+            os.rename(old, new)
+            moved.append(name)
+        except OSError as e:
+            log(f"[!] Couldn't move {_show_path(old)} to {_show_path(new)} ({e}). Close anything that has its files "
+                f"open and start the portal again.")
+    if moved:
+        log(f"[*] Moved {', '.join(moved)} from binaries/ to {EXTRACTED}/: binaries/ now holds only your game files.")
+    return moved
 
 
 def load_index(out: Path) -> Optional[dict]:

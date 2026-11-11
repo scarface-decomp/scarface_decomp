@@ -3,10 +3,10 @@
 The game's movies as videos a browser plays, for the portal's Game files view: Bink (.bik, the PC, Xbox and
 prototype) and the PS2's RadMovie (.rmv, split by rmv.py into its IPU picture and its sound). Browsers play
 neither, so each movie is turned into an MP4 (H.264 and AAC) once, with the person's own FFmpeg, and kept in
-binaries/previews/movies/ for next time.
+extracted/previews/movies/ for next time.
 
 FFmpeg is free (ffmpeg.org; on Windows: winget install Gyan.FFmpeg). It is looked for where the person told
-the portal it is (binaries/previews/ffmpeg_path.txt), on the PATH, and where winget, Chocolatey and Scoop put
+the portal it is (extracted/previews/ffmpeg_path.txt), on the PATH, and where winget, Chocolatey and Scoop put
 it.
 
     find_ffmpeg(bin_dir) / remember_ffmpeg(bin_dir, path)
@@ -33,6 +33,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rmv as RMV  # noqa: E402
 
 PREVIEWS = "previews"
+
+
+def _previews(bin_dir: Path) -> Path:
+    """extracted/previews beside the project's binaries/ (game_assets.made_dir)."""
+    import game_assets as GA
+    return GA.made_dir(bin_dir, PREVIEWS)
 FFMPEG_PATH_FILE = "ffmpeg_path.txt"
 MOVIE_EXTS = (".bik", ".rmv")
 NEED_FFMPEG = ("Movies need FFmpeg, a free video tool: in PowerShell run  winget install Gyan.FFmpeg  then try "
@@ -51,7 +57,7 @@ def find_ffmpeg(bin_dir: Path) -> Optional[Path]:
     """The person's FFmpeg: the one they told the portal about, on the PATH, or where installers put it."""
     tries: List[Path] = []
     try:
-        told = (bin_dir / PREVIEWS / FFMPEG_PATH_FILE).read_text(encoding="utf-8").strip().strip('"')
+        told = (_previews(bin_dir) / FFMPEG_PATH_FILE).read_text(encoding="utf-8").strip().strip('"')
         if told:
             tries.append(Path(told))
     except OSError:
@@ -78,6 +84,28 @@ def find_ffmpeg(bin_dir: Path) -> Optional[Path]:
     return None
 
 
+INSTALL_FFMPEG = ["winget", "install", "--id", "Gyan.FFmpeg", "-e", "--source", "winget"]
+
+
+def install_ffmpeg() -> Tuple[bool, str]:
+    """Start Windows' own package manager installing FFmpeg, in a window of its own where the person sees what
+    it downloads and answers its questions. (ok, what to tell them). Nothing is installed without that
+    window; the portal finds FFmpeg where winget puts it, with no restart."""
+    if os.name != "nt":
+        return False, ("One-click install is for Windows. On a Mac: brew install ffmpeg. On Linux: your package "
+                       "manager's ffmpeg. Then press Try again.")
+    if not shutil.which("winget"):
+        return False, ("Windows' installer tool (winget) isn't on this computer: get \"App Installer\" from the "
+                       "Microsoft Store, or download FFmpeg from ffmpeg.org and tell the portal where ffmpeg.exe is.")
+    try:
+        subprocess.Popen(INSTALL_FFMPEG, creationflags=getattr(subprocess, "CREATE_NEW_CONSOLE", 0),
+                         stdin=subprocess.DEVNULL, close_fds=True)
+    except OSError as e:
+        return False, f"Couldn't start the installer ({e}). In PowerShell, run: {' '.join(INSTALL_FFMPEG)}"
+    return True, ("A window opened that is installing FFmpeg (answer Y if it asks). When it closes, press Try again: "
+                  "no restart needed.")
+
+
 def remember_ffmpeg(bin_dir: Path, path: str) -> Optional[str]:
     """Keep where the person's FFmpeg is. None when kept, or why not."""
     p = Path(path.strip().strip('"'))
@@ -85,8 +113,8 @@ def remember_ffmpeg(bin_dir: Path, path: str) -> Optional[str]:
         p = p / _exe("ffmpeg") if (p / _exe("ffmpeg")).is_file() else p / "bin" / _exe("ffmpeg")
     if not p.is_file() or "ffmpeg" not in p.name.lower():
         return "That isn't FFmpeg: pick ffmpeg.exe (in the bin folder of FFmpeg)."
-    (bin_dir / PREVIEWS).mkdir(parents=True, exist_ok=True)
-    (bin_dir / PREVIEWS / FFMPEG_PATH_FILE).write_text(str(p), encoding="utf-8")
+    _previews(bin_dir).mkdir(parents=True, exist_ok=True)
+    (_previews(bin_dir) / FFMPEG_PATH_FILE).write_text(str(p), encoding="utf-8")
     return None
 
 
@@ -172,7 +200,7 @@ class MovieJob:
         st = src.stat()
         tag = hashlib.sha1(f"{src.resolve()}|{st.st_size}|{st.st_mtime_ns}".encode()).hexdigest()[:10]
         stem = re.sub(r"[^A-Za-z0-9._-]", "_", src.stem)
-        return self.bin_dir / PREVIEWS / "movies" / f"{stem}-{tag}.mp4"
+        return _previews(self.bin_dir) / "movies" / f"{stem}-{tag}.mp4"
 
     def ready(self, src: Path) -> Optional[Path]:
         t = self.target(src)
@@ -250,7 +278,7 @@ class MovieJob:
         return code, err
 
     def _tmp_root(self) -> Path:
-        root = self.bin_dir / PREVIEWS / "tmp"
+        root = _previews(self.bin_dir) / "tmp"
         root.mkdir(parents=True, exist_ok=True)
         return root
 

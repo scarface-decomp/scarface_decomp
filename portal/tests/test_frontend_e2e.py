@@ -994,6 +994,18 @@ def test_game_files_movies_without_ffmpeg_say_how_to_get_it(page):
     page.wait_for_selector("#gf-list .gf-prev video", timeout=10000)
 
 
+def test_ffmpeg_installs_with_one_click(page):
+    """Install FFmpeg starts Windows' own installer in its own window; when it is done, Try again plays the movie."""
+    reset(no_ffmpeg=True)
+    _gf_copied(page)
+    page.click("#gf-list .gf-row:has-text('.bik') .a button")
+    page.click("#gf-list .gf-prev button:has-text('Install FFmpeg')")
+    page.wait_for_function("document.querySelector('#gf-list .gf-prev p[role=status]').textContent.includes('installing FFmpeg')")
+    assert calls("/api/game-files/ffmpeg-install")
+    page.click("#gf-list .gf-prev button:has-text('Try again')")
+    page.wait_for_selector("#gf-list .gf-prev video", timeout=10000)
+
+
 def test_game_files_every_texture(page):
     _gf_copied(page)
     page.wait_for_selector("#gf-textures:not([hidden])")

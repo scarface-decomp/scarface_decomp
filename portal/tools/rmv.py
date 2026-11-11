@@ -15,7 +15,7 @@ The PS2's movies (.rmv, "RadMovie", in MOVIES.RCF): a 2 KB header, the picture a
 Nothing plays IPU streams directly, but they are the same as Sony's .ipu files without their 16-byte
 header, which FFmpeg reads. This splits a movie into an .ipu file and a .wav file:
 
-    python portal/tools/rmv.py binaries/game_files/.../radical.rmv --out somewhere/
+    python portal/tools/rmv.py extracted/game_files/.../radical.rmv --out somewhere/
     ffmpeg -r 29.97 -i radical.ipu -i radical.wav -c:v libx264 -pix_fmt yuv420p radical.mp4
 
 Your own copies, on your own computer; standard library only.

@@ -2,7 +2,7 @@
 """
 The portal's Blender exports, from the game files the person has copied (portal/tools/game_assets.py):
 a whole map area at once (its shell and detail files, with the region and city files they need), or
-every area of the city, one .glb each, into binaries/blender/<version>/. The work is p3d_gltf.py's; this
+every area of the city, one .glb each, into extracted/blender/<version>/. The work is p3d_gltf.py's; this
 finds the files.
 
     model_glb(out, index, version, ...)  one copied file as a .glb (a character with the game's animations)
@@ -298,7 +298,7 @@ def city_worker(job_file: str) -> int:
 
 
 class CityJob:
-    """Every city area of one version, one .glb each, into binaries/blender/<version>/, in a background
+    """Every city area of one version, one .glb each, into extracted/blender/<version>/, in a background
     thread. Areas line up when imported together. With use_cores, several worker processes share the
     areas (city_worker), one per processor core but one."""
 
@@ -317,7 +317,7 @@ class CityJob:
         return bool(self._thread and self._thread.is_alive())
 
     def folder(self, version: str = "") -> Path:
-        base = self.bin_dir / OUT_NAME
+        base = GA.made_dir(self.bin_dir, OUT_NAME)
         return base / GA.LABELS[version] if version in GA.LABELS else base
 
     def start(self, version: str, index: Optional[dict]) -> Optional[str]:
@@ -392,7 +392,7 @@ class CityJob:
                 if p is not None:
                     files.append([p.name, str(p)])
             jobs[i % n].append({"name": area["name"], "files": files, "dest": str(dest / (area["name"] + ".glb"))})
-        work = self.bin_dir / OUT_NAME / "_scripts"
+        work = GA.made_dir(self.bin_dir, OUT_NAME) / "_scripts"
         work.mkdir(parents=True, exist_ok=True)
         flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
         procs = []
@@ -451,8 +451,8 @@ def main(argv=None) -> int:
 
 # --------------------------------------------------------------------------- the person's own Blender
 
-BLENDER_PATH_FILE = "blender_path.txt"           # binaries/blender/: where blender.exe is, if it isn't found
-CITY_MADE = "made_by.txt"                        # binaries/blender/<version>/: which exporter made the city
+BLENDER_PATH_FILE = "blender_path.txt"           # extracted/blender/: where blender.exe is, if it isn't found
+CITY_MADE = "made_by.txt"                        # extracted/blender/<version>/: which exporter made the city
 
 
 def city_current(folder: Path) -> bool:
@@ -472,7 +472,7 @@ def texture_look() -> str:
 
 def _made_by() -> str:
     return str(P3G.EXPORT_VERSION) + (" xbox" if texture_look() else "")
-OPENED = "Opened"                                # binaries/blender/<version>/Opened/: single files and areas
+OPENED = "Opened"                                # extracted/blender/<version>/Opened/: single files and areas
 
 OPEN_SCRIPT = r"""
 # Made by the Scarface decomp portal: import the game's scenes, then save them as a .blend beside them.
@@ -591,7 +591,7 @@ def find_blender(bin_dir: Path) -> Optional[Path]:
     files open with, or the newest in the usual places."""
     tries: List[Path] = []
     try:
-        told = (bin_dir / OUT_NAME / BLENDER_PATH_FILE).read_text(encoding="utf-8").strip().strip('"')
+        told = (GA.made_dir(bin_dir, OUT_NAME) / BLENDER_PATH_FILE).read_text(encoding="utf-8").strip().strip('"')
         if told:
             tries.append(Path(told))
     except OSError:
@@ -633,8 +633,8 @@ def remember_blender(bin_dir: Path, exe: str) -> Optional[str]:
         p = next((p / n for n in ("blender.exe", "blender", "Blender") if (p / n).is_file()), p / "blender.exe")
     if not p.is_file() or "blender" not in p.name.lower():
         return "That isn't Blender: pick blender.exe in the folder Blender is installed in."
-    (bin_dir / OUT_NAME).mkdir(parents=True, exist_ok=True)
-    (bin_dir / OUT_NAME / BLENDER_PATH_FILE).write_text(str(p), encoding="utf-8")
+    GA.made_dir(bin_dir, OUT_NAME).mkdir(parents=True, exist_ok=True)
+    (GA.made_dir(bin_dir, OUT_NAME) / BLENDER_PATH_FILE).write_text(str(p), encoding="utf-8")
     return None
 
 

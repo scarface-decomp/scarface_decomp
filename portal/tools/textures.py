@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Every texture in the game as a picture (.png), from the game files the person copied (game_assets.py), into
-binaries/textures/. The game keeps its textures inside its Pure3D (.p3d) files: each model, map area and
+extracted/textures/. The game keeps its textures inside its Pure3D (.p3d) files: each model, map area and
 menu carries its own.
 
     textures/PC/<folder>/<file>/<texture>.png   every texture the PC has, in a folder named after the file
@@ -86,7 +86,7 @@ class Export:
                  stop: Callable[[], bool], log: Callable[[str], None] = print):
         self.bin_dir, self.index, self.sources, self.status, self.stop, self.log = bin_dir, index, sources, status, stop, log
         self.files_out = GA.out_dir(bin_dir)
-        self.root = bin_dir / OUT_NAME
+        self.root = GA.made_dir(bin_dir, OUT_NAME)
         self.versions = [v for v in GA.VERSIONS if v in index.get("versions", {})]
         self.main = "pc" if "pc" in self.versions else (self.versions[0] if self.versions else "")
         self.table: Dict[str, List[Tuple[int, int, str]]] = {}         # name -> (w, h, where under main)
@@ -297,7 +297,7 @@ class TextureJob:
         self.bin_dir = bin_dir
         self.status: dict = {"running": False, "phase": "", "label": "", "done": 0, "total": 0, "written": 0,
                              "read": 0, "to_read": 0, "error": "", "sharper": 0, "extra": 0,
-                             "folder": GA._show_path(bin_dir / OUT_NAME)}
+                             "folder": GA._show_path(GA.made_dir(bin_dir, OUT_NAME))}
         self._thread: Optional[threading.Thread] = None
         self._stop = threading.Event()
         self._lock = threading.Lock()
@@ -308,7 +308,7 @@ class TextureJob:
         return bool(self._thread and self._thread.is_alive())
 
     def folder(self) -> Path:
-        return self.bin_dir / OUT_NAME
+        return GA.made_dir(self.bin_dir, OUT_NAME)
 
     def start(self, index: Optional[dict], sources: Dict[str, GA.Source]) -> Optional[str]:
         with self._lock:
@@ -355,7 +355,7 @@ def main(argv=None) -> int:
     sources, _notes = GA.find_sources(a.bin)
     status: dict = {}
     Export(a.bin, index, sources, status, lambda: False).run()
-    print(f"{status.get('written', 0):,} pictures written to {a.bin / OUT_NAME}")
+    print(f"{status.get('written', 0):,} pictures written to {GA.made_dir(a.bin, OUT_NAME)}")
     return 0
 
 
