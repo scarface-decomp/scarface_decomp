@@ -123,7 +123,9 @@ where everyone's can be found.
 
 ## The compiler
 
-From your own `VCToolkitSetup.exe` (Visual C++ Toolkit 2003; Microsoft no longer offers it for download).
+From your own `VCToolkitSetup.exe` (Visual C++ Toolkit 2003; Microsoft gave it away for free and no longer
+offers it for download; the Internet Archive keeps
+[a copy](https://archive.org/details/microsoft-visual-c-toolkit-2003)). The setup accepts only the real one.
 Put it in the project folder (`scarface_decomp`) and start the portal: `START_PORTAL.bat` and
 `start_portal.sh` set the compiler up by themselves the first time (they also look in `binaries/`,
 `source_archives/` and your Downloads folder). To do it by hand instead, in a terminal in the project folder:

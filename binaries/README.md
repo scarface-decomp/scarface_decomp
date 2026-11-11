@@ -7,7 +7,7 @@ this folder is never uploaded, and Git ignores everything in it except this note
 | Version | Put in any of these | Needed for |
 | :--- | :--- | :--- |
 | Xbox, US disc | `default.xbe`, or the disc image (`.iso`), or the `.7z` / `.zip` it came in | **the main one**: almost all of the work |
-| PC, US 1.00.2 | `Scarface.exe` 1.00.2, or the official 1.00.2 patch (`scarface_update_en_1001_1002.exe`), which has the whole file inside | optional: the PC-only functions |
+| PC, US 1.00.2 | `Scarface.exe` 1.00.2, or the official 1.00.2 patch (`scarface_update_en_1001_1002.exe`), which has the whole file inside ([a copy is on Nexus Mods](https://www.nexusmods.com/scarfacetheworldisyours/mods/10); the portal takes it under any file name) | optional: the PC-only functions |
 | Xbox prototype, April 20, 2006 | `game.xbe`, or the `.zip` of its folder | optional: unreleased code (its own lane) |
 | PS2, US disc | `SLUS_211.11`, or the disc image (`.iso`), or the `.7z` / `.zip` it came in (with "ps2" in its name) | optional: the PS2 lane, its own compiler ([PS2.md](../docs/PS2.md)) |
 
