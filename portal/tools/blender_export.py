@@ -24,6 +24,8 @@ Your own copies, on your own computer; standard library only.
 from __future__ import annotations
 
 import os
+import struct
+import re
 import shutil
 import subprocess
 import sys
@@ -62,8 +64,115 @@ def areas(out: Path, index: Optional[dict], version: str) -> List[dict]:
         key = place.split("/")[1] + "/" + name
         area = found.setdefault(key, {"key": key, "name": name, "place": place.split("/")[1], "files": []})
         area["files"].append(path)
+    for key, area in list(found.items()):
+        # A place the story changes (Tony's mansion: _TS0 to _TS3; the cargo ship: _CS0, _CS1) has a set
+        # of files per stage. All of them in one scene put the wrecked mansion inside the rebuilt one:
+        # the area is its last stage, and each earlier stage is an area of its own.
+        stages = sorted({m.group(1).upper() for f in area["files"] for m in [STAGE_FILE.search(Path(f).stem)] if m})
+        if stages:
+            every = area["files"]
+            area["files"], area["stage"] = _at_stage(every, stages[-1]), stages[-1]
+            for st in stages[:-1]:
+                found[key + "@" + st] = {"key": key + "@" + st, "name": area["name"] + " " + st, "place": area["place"],
+                                         "files": _at_stage(every, st), "stage": st, "earlier": True}
+    for area in found.values():
+        # In the whole city: every area as it ends up, and every building's inside as it starts out
+        # (not the same shop again owned, damaged, destroyed and condemned, one on top of the other).
+        inside = area["place"] != "z04"
+        area["city"] = not area.get("earlier") and not (inside and STATE_ZONE.search(area["name"]))
+        area["file"] = area["name"] + (" (inside)" if inside else "")
     order = {f.split("/")[1]: i for i, f in enumerate(AREA_FOLDERS)}
     return sorted(found.values(), key=lambda a: (order[a["place"]], a["name"].lower()))
+
+
+STAGE_FILE = re.compile(r"_((?:TS|CS)\d)$", re.I)
+STATE_ZONE = re.compile(r"(?:\d\d)?(?:owned|damaged|destroyed|condemned|toast)(?:_\d+)?$", re.I)
+
+
+def _at_stage(files: List[str], stage: str) -> List[str]:
+    """An area's files as the place is at one stage: the files with no stage, and of each staged file the
+    one for that stage (or the nearest one before it: a part the later stages don't change)."""
+    kept, staged = [], {}
+    for f in files:
+        m = STAGE_FILE.search(Path(f).stem)
+        if not m:
+            kept.append(f)
+        elif m.group(1).upper()[:2] == stage[:2] and m.group(1).upper() <= stage:
+            base = Path(f).stem[:m.start()].lower()
+            if base not in staged or STAGE_FILE.search(Path(staged[base]).stem).group(1).upper() < m.group(1).upper():
+                staged[base] = f
+    return kept + [staged[b] for b in sorted(staged)]
+
+
+def city_areas(out: Path, index: Optional[dict], version: str) -> List[dict]:
+    """The areas that make up the whole city, the buildings' insides with them."""
+    found = areas(out, index, version)
+    return [a for a in found if a["city"]] if any(a["place"] == "z04" for a in found) else []
+
+
+_CENTRES: Dict[tuple, Optional[tuple]] = {}
+
+
+def _centre(path: Path) -> Optional[tuple]:
+    """Where a building's inside is: the middle of what its file places (None when it places nothing)."""
+    try:
+        key = (str(path), path.stat().st_mtime_ns)
+        if key not in _CENTRES:
+            lib = P3G.Library()
+            src = lib.add(path.name, path.read_bytes(), main=True)
+            at = [P3G.instance_trs(rec)[0] for _m, records in P3G.instance_objects(src) for rec in records if any(rec[:3])]
+            _CENTRES[key] = tuple(sum(p[i] for p in at) / len(at) for i in range(3)) if at else None
+        return _CENTRES[key]
+    except (OSError, P3G.p3d.P3dError, struct.error):
+        return None
+
+
+def _glb_box(glb: bytes) -> Optional[Tuple[List[float], List[float]]]:
+    """The box a .glb's meshes fill (lowest and highest corner), going by where each is put."""
+    import json
+    try:
+        doc = json.loads(glb[20:20 + struct.unpack_from("<I", glb, 12)[0]])
+    except (struct.error, ValueError):
+        return None
+    lo, hi = [1e18] * 3, [-1e18] * 3
+
+    def walk(i: int, off: List[float]) -> None:
+        n = doc["nodes"][i]
+        t = n["matrix"][12:15] if "matrix" in n else n.get("translation", [0, 0, 0])
+        o = [off[k] + t[k] for k in range(3)]
+        if "mesh" in n:
+            for prim in doc["meshes"][n["mesh"]]["primitives"]:
+                acc = doc["accessors"][prim["attributes"]["POSITION"]]
+                if "min" in acc:
+                    for k in range(3):
+                        lo[k], hi[k] = min(lo[k], o[k] + acc["min"][k]), max(hi[k], o[k] + acc["max"][k])
+        for c in n.get("children", []):
+            walk(c, o)
+    for r in doc["scenes"][0]["nodes"]:
+        walk(r, [0.0, 0.0, 0.0])
+    return (lo, hi) if lo[0] <= hi[0] else None
+
+
+def insides_of(out: Path, index: Optional[dict], version: str, area: dict, glb: bytes) -> List[Path]:
+    """The files of the buildings' insides that belong in a city area: the ones of the same name
+    (babylonclub_01's pocket) and the ones whose furniture stands within the area."""
+    box = _glb_box(glb)
+    stem = re.sub(r"_\d+$", "", area["name"]).lower()
+    found = []
+    for other in areas(out, index, version):
+        if other["place"] == "z04" or not other["city"]:
+            continue
+        paths = [p for p in (GA.file_on_disk(out, index, version, f) for f in other["files"]) if p is not None]
+        same = re.sub(r"_\d+$", "", other["name"]).lower() == stem
+        within = False
+        if box and not same:
+            for p in paths:
+                c = _centre(p)
+                if c and all(box[0][k] - 2 <= c[k] <= box[1][k] + 2 for k in (0, 2)):
+                    within = True
+        if same or within:
+            found += paths
+    return found
 
 
 def _city_folder_path(index: Optional[dict], version: str) -> Optional[str]:
@@ -144,34 +253,91 @@ def animations(out: Path, index: Optional[dict], version: str) -> List[Path]:
     return found
 
 
+def _files_with(paths: Sequence, names, skip=(), most: int = 8) -> List[Tuple[str, bytes]]:
+    """The files among paths that mention any of the names (a texture's, say), fewest first: (name, bytes)."""
+    wanted = {n.lower().encode("latin-1", "replace") for n in names if n}
+    skip = {s.lower() for s in skip}
+    out = []
+    for path in paths:
+        path = Path(path)
+        if not wanted or len(out) >= most:
+            break
+        if path.name.lower() in skip:
+            continue
+        try:
+            data = path.read_bytes()
+        except OSError:
+            continue
+        low = data.lower()
+        has = {w for w in wanted if w in low}
+        if has:
+            out.append((path.name, data))
+            wanted -= has
+    return out
+
+
 def model_glb(out: Path, index: Optional[dict], version: str, game_path: str, data: bytes) -> Tuple[bytes, "P3G.Report"]:
     """One copied .p3d file as a .glb. A map area also gets its region's and the city's shared files; a
-    character gets the game's animations (art/animations), each as an action."""
-    lib = P3G.Library()
-    src = lib.add(Path(game_path).name, data, main=True)
-    is_map = bool(P3G._world_geo(lib, src) or P3G.instance_objects(src))
-    anims = []
-    if is_map:
-        for f in GA.files_beside(out, index, version, game_path, P3G.MAP_LIBRARY):
+    character gets the game's animations (art/animations), each as an action. What is still missing
+    after that (a sign's lettering kept in the city's shared textures, a prop kept with another area) is
+    looked for in the city's files, and the model made again with the ones that have it."""
+    name = Path(game_path).name
+
+    def make(extra: List[Tuple[str, bytes]]):
+        lib = P3G.Library()
+        src = lib.add(name, data, main=True)
+        have = {name.lower()}
+        is_map = bool(P3G._world_geo(lib, src) or P3G.instance_objects(src))
+        anims = []
+
+        def also(n: str, d: bytes, main: bool = False):
+            if n.lower() in have:
+                return None
+            have.add(n.lower())
             try:
-                lib.add(f.name, f.read_bytes(), main=False)
-            except (OSError, P3G.p3d.P3dError):
-                pass
-    elif _moves_only(src):
-        actor = stand_in(out, index, version)          # the people's animations, on Tony
-        if actor is not None:
-            try:
-                lib.add(actor.name, actor.read_bytes(), main=True)
-            except (OSError, P3G.p3d.P3dError):
-                pass
-    elif any(c.id == P3G.SKIN for c in src.chunks):
-        for f in animations(out, index, version):
-            try:
-                extra = lib.add(f.name, f.read_bytes(), main=False)
-            except (OSError, P3G.p3d.P3dError):
-                continue
-            anims += [P3G.Ref(extra, c) for c in extra.chunks if c.id == P3G.ANIMATION]
-    return P3G.export(lib, map_mode=is_map, anims=anims)
+                return lib.add(n, d, main=main)
+            except P3G.p3d.P3dError:
+                return None
+        if is_map:
+            for f in GA.files_beside(out, index, version, game_path, P3G.MAP_LIBRARY):
+                try:
+                    also(f.name, f.read_bytes())
+                except OSError:
+                    pass
+        elif _moves_only(src):
+            actor = stand_in(out, index, version)          # the people's animations, on Tony
+            if actor is not None:
+                try:
+                    also(actor.name, actor.read_bytes(), main=True)
+                except OSError:
+                    pass
+        elif any(c.id == P3G.SKIN for c in src.chunks):
+            for f in animations(out, index, version):
+                try:
+                    more = also(f.name, f.read_bytes())
+                except OSError:
+                    continue
+                if more is not None:
+                    anims += [P3G.Ref(more, c) for c in more.chunks if c.id == P3G.ANIMATION]
+        for n, d in extra:
+            also(n, d)
+        return P3G.export(lib, map_mode=is_map, anims=anims), have
+    (glb, report), have = make([])
+    extra: List[Tuple[str, bytes]] = []
+    if report.unplaced:
+        extra += _files_naming(_more_library(out, index, version), report.unplaced, have)
+    if report.missing_textures:
+        skip = have | {n.lower() for n, _d in extra}
+        extra += _files_with(_library(out, index, version), report.missing_textures, skip)
+    if extra:
+        try:
+            (glb2, report2), _h = make(extra)
+        except P3G.ExportError:
+            return glb, report
+        if (len(report2.missing_textures), sum(report2.unplaced.values())) < \
+                (len(report.missing_textures), sum(report.unplaced.values())):
+            return glb2, report2
+    return glb, report
 
 
 MODEL_CHUNKS = (P3G.SKIN, P3G.COMPOSITE, P3G.MESH)
@@ -232,7 +398,7 @@ def cant_show(out: Path, index: Optional[dict], version: str, game_path: str, da
 
 def city_counts(out: Path, index: Optional[dict]) -> Dict[str, int]:
     """How many city areas each version's copied files hold: {version: areas}."""
-    return {v: sum(1 for a in areas(out, index, v) if a["place"] == "z04")
+    return {v: len(city_areas(out, index, v))
             for v in (index or {}).get("versions", {})}
 
 
@@ -301,8 +467,11 @@ def inspect(data: bytes) -> dict:
 
 
 def area_glb(out: Path, index: Optional[dict], version: str, key: str,
-             parsed: Optional[dict] = None, library: Optional[List[Tuple[str, bytes]]] = None) -> Tuple[bytes, "P3G.Report"]:
-    """One map area (all its files) as a .glb, with what it needs from the shared files."""
+             parsed: Optional[dict] = None, library: Optional[List[Tuple[str, bytes]]] = None,
+             insides: bool = True) -> Tuple[bytes, "P3G.Report"]:
+    """One map area (all its files) as a .glb, with what it needs from the shared files. A city area
+    opened by itself comes with its buildings' insides (the club's furniture in the club); the whole
+    city leaves them out (insides=False), where each inside is a file of its own."""
     area = next((a for a in areas(out, index, version) if a["key"] == key), None)
     if area is None:
         raise P3G.ExportError("that map area isn't in your copied game files")
@@ -313,7 +482,18 @@ def area_glb(out: Path, index: Optional[dict], version: str, key: str,
             files.append((p.name, p.read_bytes()))
     if library is None:
         library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
-    return area_from_files(files, library, parsed, _more_library(out, index, version))
+    more = _more_library(out, index, version)
+    if insides and area["place"] == "z04":
+        try:
+            first, _r = area_from_files(files, library, parsed)
+        except P3G.ExportError:
+            first = b""
+        have = {n.lower() for n, _d in files}
+        for p in insides_of(out, index, version, area, first):
+            if p.name.lower() not in have:
+                have.add(p.name.lower())
+                files.append((p.name, p.read_bytes()))
+    return area_from_files(files, library, parsed, more)
 
 
 def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, bytes]],
@@ -400,7 +580,7 @@ class CityJob:
             if version not in GA.LABELS:
                 return "Pick a version."
             out = GA.out_dir(self.bin_dir)
-            todo = [a for a in areas(out, index, version) if a["place"] == "z04"]
+            todo = city_areas(out, index, version)
             if not todo:
                 return "None of the city's map areas are in your copied game files for that version: copy them first."
             self._stop.clear()
@@ -432,11 +612,11 @@ class CityJob:
                     break
                 self.status["area"] = area["name"]
                 try:
-                    glb, _report = area_glb(out, index, version, area["key"], parsed, library)
+                    glb, _report = area_glb(out, index, version, area["key"], parsed, library, insides=False)
                 except P3G.ExportError:
                     glb = b""
                 if glb:
-                    (dest / (area["name"] + ".glb")).write_bytes(glb)
+                    (dest / (area["file"] + ".glb")).write_bytes(glb)
                     self.status["written"] += 1
                     self.status["bytes"] += len(glb)
                 self.status["done"] += 1
@@ -461,7 +641,7 @@ class CityJob:
                 p = GA.file_on_disk(out, index, version, path)
                 if p is not None:
                     files.append([p.name, str(p)])
-            jobs[i % n].append({"name": area["name"], "files": files, "dest": str(dest / (area["name"] + ".glb"))})
+            jobs[i % n].append({"name": area["name"], "files": files, "dest": str(dest / (area["file"] + ".glb"))})
         work = GA.made_dir(self.bin_dir, OUT_NAME) / "_scripts"
         work.mkdir(parents=True, exist_ok=True)
         flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
@@ -550,24 +730,74 @@ OPEN_SCRIPT = r"""
 # The import runs once Blender's window is up, inside that window. Run straight from --python (and after
 # reloading the start-up file), Blender's own importer had no window to work in: a map came in, but anything
 # with a skeleton stopped half-way and left only the importer's helper ball (an "Icosphere") in the scene.
-import bpy, traceback
+import bpy, re, traceback
 FILES = %(files)r
 SAVE = %(save)r
+STATE = {"at": 0, "problems": [], "undo": None}
 NOTE = (SAVE or (FILES[0] if FILES else "scene")) + ".import-error.txt"
 
 
-def bring_in():
+def bring_one(f, problems):
+    try:
+        # Bones drawn towards the next joint, not as spikes pointing every way; and no helper ball for
+        # them (Blender 4.2 and later). Older Blenders don't know every option: fewer are tried in turn.
+        for options in ({"disable_bone_shape": True, "bone_heuristic": "TEMPERANCE"},
+                        {"bone_heuristic": "TEMPERANCE"}, {}):
+            try:
+                bpy.ops.import_scene.gltf(filepath=f, **options)
+                break
+            except TypeError:
+                continue
+    except Exception:  # one area that won't come in shouldn't stop the rest
+        problems.append(f + "\n" + traceback.format_exc())
+
+
+def same_pictures():
+    # Every area brings its own copy of the textures it shares with the others (the road, the palms):
+    # keep one of each, so the city takes a fraction of the memory and saves quickly.
+    seen = {}
+    for img in list(bpy.data.images):
+        try:
+            pf = img.packed_file
+            key = (re.sub(r"\.\d{3}$", "", img.name), pf.size if pf else 0)
+            first = seen.get(key)
+            if first is None:
+                seen[key] = img
+            elif key[1]:
+                img.user_remap(first)
+                bpy.data.images.remove(img)
+        except Exception:
+            pass
+
+
+def say(text):
+    print(text or "")
+    try:
+        for win in bpy.context.window_manager.windows:
+            if text:
+                win.workspace.status_text_set(text)
+            else:
+                win.workspace.status_text_set(None)
+    except Exception:
+        pass
+
+
+def start():
     for o in list(bpy.data.objects):            # the start-up cube, light and camera
         bpy.data.objects.remove(o, do_unlink=True)
-    problems = []
-    for f in FILES:
-        try:
-            try:                                 # no helper ball for the bones (Blender 4.2 and later)
-                bpy.ops.import_scene.gltf(filepath=f, disable_bone_shape=True)
-            except TypeError:
-                bpy.ops.import_scene.gltf(filepath=f)
-        except Exception:  # one area that won't come in shouldn't stop the rest
-            problems.append(f + "\n" + traceback.format_exc())
+    try:                                         # Blender copies the whole scene for Undo after every import:
+        STATE["undo"] = bpy.context.preferences.edit.use_global_undo      # with a city, most of the wait
+        bpy.context.preferences.edit.use_global_undo = False
+    except Exception:
+        pass
+
+
+def finish(problems):
+    try:
+        if STATE.get("undo") is not None:
+            bpy.context.preferences.edit.use_global_undo = STATE["undo"]
+    except Exception:
+        pass
     scene = bpy.context.scene
     tidy(scene)
     ends = [a.frame_range[1] for a in bpy.data.actions]
@@ -593,10 +823,23 @@ def bring_in():
         except OSError:
             pass
     if SAVE and shown:                           # never save a scene with nothing of the game in it
+        say("Scarface: saving the scene, so next time it opens at once...")
         try:
             bpy.ops.wm.save_as_mainfile(filepath=SAVE)
         except Exception as e:
             print("Couldn't save", SAVE, e)
+    say("")
+
+
+def bring_in():
+    # all at once: when Blender has no window (run with --background)
+    problems = []
+    start()
+    for f in FILES:
+        bring_one(f, problems)
+    if len(FILES) > 1:
+        same_pictures()
+    finish(problems)
 
 
 def tidy(scene):
@@ -611,6 +854,11 @@ def tidy(scene):
         for a in bpy.data.actions:               # kept in the saved .blend though nothing is playing them
             a.use_fake_user = True
     for o in scene.objects:
+        if o.type == "ARMATURE":
+            try:                                 # thin sticks: the skeleton doesn't cover the model
+                o.data.display_type = "STICK"
+            except Exception:
+                pass
         if o.type == "ARMATURE" and library:
             if o.animation_data is not None:
                 o.animation_data.action = None
@@ -639,11 +887,11 @@ def tidy(scene):
             pass
 
 
-def in_the_window():
+def in_the_window(what, *args):
     wm = bpy.context.window_manager
     win = bpy.context.window or (wm.windows[0] if wm and wm.windows else None)
     if win is None:
-        return bring_in()
+        return what(*args)
     where = {"window": win}
     area = next((a for a in win.screen.areas if a.type == "VIEW_3D"), None)
     if area is not None:
@@ -652,15 +900,28 @@ def in_the_window():
         if region is not None:
             where["region"] = region
     with bpy.context.temp_override(**where):
-        bring_in()
+        return what(*args)
 
 
 def later():
+    # One file each time Blender calls back, so its window keeps answering and says how far along it is
+    # (a whole city in one go left it "Not Responding" for many minutes).
     try:
-        in_the_window()
+        i = STATE["at"]
+        if i == 0:
+            in_the_window(start)
+        if i < len(FILES):
+            if len(FILES) > 1:
+                say("Scarface: bringing in area {} of {}...".format(i + 1, len(FILES)))
+            in_the_window(bring_one, FILES[i], STATE["problems"])
+            if len(FILES) > 1:
+                same_pictures()
+            STATE["at"] = i + 1
+            return 0.01
+        in_the_window(finish, STATE["problems"])
     except Exception:
         traceback.print_exc()
-    return None                                  # once
+    return None                                  # done
 
 
 if bpy.app.background:
@@ -668,6 +929,24 @@ if bpy.app.background:
 else:
     bpy.app.timers.register(later, first_interval=0.5)
 """
+
+
+def open_blend(exe: Path, blend: Path) -> None:
+    """Start Blender (not waiting for it) on a scene saved earlier."""
+    flags = 0
+    if os.name == "nt":
+        flags = getattr(subprocess, "DETACHED_PROCESS", 0) | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+    subprocess.Popen([str(exe), str(blend)], cwd=str(blend.parent), stdin=subprocess.DEVNULL,
+                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, close_fds=True, creationflags=flags)
+
+
+def saved_scene(blend: Path, glbs: Sequence[Path]) -> bool:
+    """Whether blend was saved from these very files (it is newer than each of them)."""
+    try:
+        made = blend.stat().st_mtime
+        return blend.stat().st_size > 0 and all(g.stat().st_mtime <= made for g in glbs)
+    except OSError:
+        return False
 
 
 def _versioned(p: Path) -> tuple:

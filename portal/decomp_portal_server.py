@@ -2811,12 +2811,17 @@ class Handler(BaseHTTPRequestHandler):
                 glbs, save = [folder / BX.OPENED / f"{name}.glb"], folder / BX.OPENED / f"{name}.blend"
                 glbs[0].parent.mkdir(parents=True, exist_ok=True)
                 glbs[0].write_bytes(glb)
-            BX.open_in_blender(exe, glbs, save, GA.made_dir(GAME_FILES.bin_dir, BX.OUT_NAME) / "_scripts")
+            reopened = bool(body.get("city")) and BX.saved_scene(save, glbs)
+            if reopened:                       # the city was brought in and saved before: open that, at once
+                BX.open_blend(exe, save)
+            else:
+                BX.open_in_blender(exe, glbs, save, GA.made_dir(GAME_FILES.bin_dir, BX.OUT_NAME) / "_scripts")
         except P3G.ExportError as e:
             return self._json({"ok": False, "error": f"Nothing to show in Blender: {e}."}, 415)
         except (OSError, P3G.p3d.P3dError) as e:
             return self._json({"ok": False, "error": f"Couldn't open it in Blender: {e}"}, 500)
-        self._json({"ok": True, "blender": str(exe), "saved": GA._show_path(save), "files": len(glbs)})
+        self._json({"ok": True, "blender": str(exe), "saved": GA._show_path(save), "files": len(glbs),
+                    "reopened": reopened})
 
     def post_game_files_movie(self, body):
         """Start making a movie into a video the browser plays (once; it is kept)."""

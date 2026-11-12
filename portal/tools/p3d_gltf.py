@@ -58,8 +58,10 @@ ANIMATION, ANIM_GROUP_LIST, ANIM_GROUP = 0x121000, 0x121002, 0x121001
 CAMERA, FRAME_CONTROLLER = 0x2200, 0x121201
 WORLD_GEO, STATE_PROP = 0x8800003, 0x8800005
 STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY = 0x0802000D, 0x0802000E, 0x08020002
+MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
+MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 3                     # 2: props as they start. 3: props whose model is kept with another area or an interior
+EXPORT_VERSION = 4                     # 3: props kept with another area. 4: one stage of each place; insides in the city
 _LOD_PART = re.compile(r"lod\d*(shape\d*)?$", re.I)
 SCRIPT_OBJECT, OBJECT_PROPERTY, OBJECT_BINARY = 0x9900190, 0x9900192, 0x9900194
 VECTOR_CHANNELS = (0x121102, 0x121103, 0x121104)
@@ -763,6 +765,11 @@ class Builder:
                 ti = self.texture(tex)
                 if ti is not None:
                     mat["pbrMetallicRoughness"]["baseColorTexture"] = {"index": ti}
+                elif tex in self.report.missing_textures:
+                    # a picture the game doesn't have either (the cars' windscreens and undersides): dark
+                    # glass or dark metal, not a glaring white sheet
+                    glass = bool(ints.get("BLMD") or info["translucent"])
+                    mat["pbrMetallicRoughness"]["baseColorFactor"] = MISSING_GLASS if glass else MISSING_SOLID
             if ints.get("2SID"):
                 mat["doubleSided"] = True
             if ints.get("ATST"):

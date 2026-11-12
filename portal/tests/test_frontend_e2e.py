@@ -836,7 +836,7 @@ def test_game_files_in_blender(page):
                            timeout=10000)
     assert page.is_visible("#gfb-city-open") and page.is_enabled("#gfb-city")
     page.click("#gfb-city-blender")                                            # the whole city, joined up
-    page.wait_for_function("document.getElementById('gfb-city-bl-status').textContent.includes('(3 areas)')")
+    page.wait_for_function("document.getElementById('gfb-city-bl-status').textContent.includes('bringing in 3 areas')")
     assert calls("/api/game-files/open-in-blender")[-1][1]["city"] is True
     page.click("#gfb-city-open")
     page.wait_for_timeout(200)

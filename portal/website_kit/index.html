@@ -4279,7 +4279,9 @@
     try { res = await postJson('/api/game-files/open-in-blender', Object.assign({ version: GF_TAB }, target)); }
     catch (e) { res = { ok: false, error: e.message }; }
     if (res.ok) {
-      status.textContent = 'Blender is opening it' + (target.city ? ' (' + fmtInt(res.files) + ' areas)' : '') + '. It’s saved as ' + res.saved + ' too: next time, double-click that.';
+      status.textContent = res.reopened ? 'Blender is opening the city scene saved last time (' + res.saved + ').'
+        : target.city ? 'Blender is bringing in ' + fmtInt(res.files) + ' areas, one at a time: the bar at the bottom of its window says how far along it is. When it finishes it saves ' + res.saved + ', and from then on the city opens at once.'
+        : 'Blender is opening it. It’s saved as ' + res.saved + ' too: next time, double-click that.';
       return;
     }
     status.classList.add('err');
@@ -4656,7 +4658,7 @@
     return '';
   }
 
-  const GF_MOVIE_EXTS = ['.bik', '.pss', '.xmv', '.wmv', '.mpg', '.mpeg', '.avi', '.mp4', '.webm'];
+  const GF_MOVIE_EXTS = ['.bik', '.rmv', '.pss', '.xmv', '.wmv', '.mpg', '.mpeg', '.avi', '.mp4', '.webm'];
 
   function gfFileUrl(what, version, path, extra) {
     return '/api/game-files/' + what + '?' + new URLSearchParams(Object.assign({ version: version, path: path }, extra || {})).toString();

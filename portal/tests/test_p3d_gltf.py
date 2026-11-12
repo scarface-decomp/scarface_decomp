@@ -527,11 +527,12 @@ def test_the_whole_city_one_file_per_area(tmp_path):
         job._thread.join(10)
     finally:
         GA.out_dir = real_out
-    assert sorted(p.name for p in (tmp_path / "blender" / "PC").iterdir()) == ["a_01.glb", "b_02.glb", "made_by.txt"]
+    assert sorted(p.name for p in (tmp_path / "blender" / "PC").iterdir()) == ["a_01.glb", "b_02.glb", "made_by.txt",
+                                                                                  "shop_01 (inside).glb"]
     assert BX.city_current(tmp_path / "blender" / "PC")                       # made by this exporter
     (tmp_path / "blender" / "PC" / "made_by.txt").unlink()
     assert not BX.city_current(tmp_path / "blender" / "PC")                   # one from before: export again
-    assert job.status["written"] == 2 and job.status["done"] == 2 and not job.status["running"]
+    assert job.status["written"] == 3 and job.status["done"] == 3 and not job.status["running"]
     assert BX.CityJob(tmp_path).start("pc", {"versions": {}}).startswith("None of the city")
     assert BX.CityJob(tmp_path).start("wii", index) == "Pick a version."
 
@@ -756,7 +757,7 @@ def test_how_much_of_the_city_each_version_has(tmp_path):
     index["versions"]["xbox"] = {"files": [["cement.rcf/packages/z04/s_09_shell.p3d", 10, "s", "only", "Exclusive to Xbox/s.p3d", None, 1],
                                            ["cement.rcf/packages/z04/t_10_shell.p3d", 10, "s", "changed", "", None, 1]]}
     index["versions"]["ps2"] = {"files": []}
-    assert BX.city_counts(out, index) == {"pc": 2, "xbox": 1, "ps2": 0}                 # a file not copied isn't an area
+    assert BX.city_counts(out, index) == {"pc": 3, "xbox": 1, "ps2": 0}                 # a file not copied isn't an area
 
 
 def test_open_in_blender(monkeypatch, tmp_path):
@@ -818,7 +819,7 @@ def test_the_blender_script_imports_and_saves(tmp_path, monkeypatch):
     assert "import_scene.gltf" in script and "save_as_mainfile" in script and "a.glb" in script
     # the import waits for Blender's window and runs inside it (a skeleton needs one), without the helper ball
     assert "bpy.app.timers.register(later" in script and "temp_override" in script
-    assert "disable_bone_shape=True" in script and "read_homefile" not in script
+    assert '"disable_bone_shape": True' in script and "TEMPERANCE" in script and "read_homefile" not in script
     assert ".import-error.txt" in script and "if SAVE and shown" in script
     # people stand in their rest pose (Blender would lay the library's first animation, a chicken's, on one
     # of them), the animations are kept, and the far-away copy of a model is hidden
@@ -896,10 +897,10 @@ def test_the_city_on_several_cores_is_the_same(tmp_path, monkeypatch):
         job.use_cores = lambda cores=cores: cores
         assert job.start("pc", index) is None
         job._thread.join(60)
-        assert job.status["workers"] == n and job.status["written"] == 2 and job.status["done"] == 2
+        assert job.status["workers"] == n and job.status["written"] == 3 and job.status["done"] == 3
         made[n] = {p.name: p.read_bytes() for p in (tmp_path / "blender" / "PC").glob("*.glb")}
         assert BX.city_current(tmp_path / "blender" / "PC")
-    assert made[1] == made[2] and sorted(made[2]) == ["a_01.glb", "b_02.glb"]
+    assert made[1] == made[2] and sorted(made[2]) == ["a_01.glb", "b_02.glb", "shop_01 (inside).glb"]
     assert not list((tmp_path / "blender" / "_scripts").glob("city_job_*.json"))       # tidied up
 
 
@@ -951,3 +952,73 @@ def test_an_area_is_made_again_with_the_files_that_have_its_missing_props(tmp_pa
     seen.clear()
     glb, _r = BX.area_from_files([("a_shell.p3d", b"")], [("Common.p3d", b"")], None, [])
     assert glb == b"glb1" and len(seen) == 1
+
+
+# ---- a place at each stage of the story, and the buildings' insides ---------------------------------------------
+
+def staged_city():
+    z, d = "cement.rcf/packages/z04/", "cement.rcf/packages/dzones/"
+    return {z + "m_01_shell_TS0.p3d": area("w_wrecked"), z + "m_01_shell_TS1.p3d": area("w_rebuilt"),
+            z + "m_01_detailB.p3d": area("w_always"), z + "m_01_detail_TS0.p3d": area("w_rubble"),
+            z + "c_02_shell.p3d": area("w_club", objects=[("treep", [record(5.0, 0.0, 5.0)])]),
+            z + "x_region_D.p3d": region("x", 1.0)[1],
+            d + "town_club_dzone.p3d": area("w_seats", objects=[("treep", [record(5.0, 0.0, 5.5)])]),
+            d + "town_club01owned_dzone.p3d": area("w_owned", objects=[("treep", [record(5.0, 0.0, 5.5)])]),
+            d + "town_far_dzone.p3d": area("w_far", objects=[("treep", [record(900.0, 0.0, 900.0)])])}
+
+
+def test_a_place_the_story_changes_is_one_stage_at_a_time(tmp_path):
+    import blender_export as BX
+    out, index = copied_game(tmp_path, staged_city())
+    found = {a["key"]: a for a in BX.areas(out, index, "pc")}
+    names = lambda key: sorted(f.rsplit("/", 1)[-1] for f in found[key]["files"])
+    assert names("z04/m_01") == ["m_01_detailB.p3d", "m_01_detail_TS0.p3d", "m_01_shell_TS1.p3d"]     # as it ends up
+    assert names("z04/m_01@TS0") == ["m_01_detailB.p3d", "m_01_detail_TS0.p3d", "m_01_shell_TS0.p3d"]
+    assert found["z04/m_01"]["city"] and not found["z04/m_01@TS0"]["city"]
+    _glb, report = BX.area_glb(out, index, "pc", "z04/m_01")
+    assert "w_rebuilt" in report.models and "w_wrecked" not in report.models
+    assert "w_wrecked" in BX.area_glb(out, index, "pc", "z04/m_01@TS0")[1].models
+
+
+def test_the_city_has_each_inside_once_and_an_area_alone_comes_with_its_own(tmp_path):
+    import blender_export as BX
+    out, index = copied_game(tmp_path, staged_city())
+    city = [a["file"] for a in BX.city_areas(out, index, "pc")]
+    assert city == ["c_02", "m_01", "town_club (inside)", "town_far (inside)"]         # not the shop owned as well
+    _glb, alone = BX.area_glb(out, index, "pc", "z04/c_02")
+    assert sorted(alone.models) == ["w_club", "w_seats"] and alone.placed == 2         # the club with its seats
+    _glb, in_city = BX.area_glb(out, index, "pc", "z04/c_02", insides=False)
+    assert in_city.models == ["w_club"]
+
+
+def test_blender_script_is_whole_and_a_saved_city_is_reused(tmp_path):
+    import ast
+    import os
+    import blender_export as BX
+    src = BX.OPEN_SCRIPT % {"files": ["a.glb", "b.glb"], "save": "city.blend"}
+    ast.parse(src)
+    assert "use_global_undo = False" in src and "bringing in area {} of {}" in src
+    glb, blend = tmp_path / "a.glb", tmp_path / "city.blend"
+    glb.write_bytes(b"g")
+    assert not BX.saved_scene(blend, [glb])                       # not made yet
+    blend.write_bytes(b"b")
+    os.utime(glb, (1000, 1000))
+    assert BX.saved_scene(blend, [glb])
+    os.utime(glb, (4e9, 4e9))                                     # the city was exported again since
+    assert not BX.saved_scene(blend, [glb])
+
+
+def test_a_picture_the_game_lacks_is_dark_not_white():
+    lib = G.Library()
+    lib.add("car.p3d", p3d(mesh("body", shader="glassy")), main=True)
+    b = G.Builder(lib)
+    b.report.missing_textures.add("gone.bmp")
+    import p3d_gltf
+    real = p3d_gltf.shader_from_name
+    p3d_gltf.shader_from_name = lambda name: {"name": name, "pddi": "", "translucent": False,
+                                              "textures": [("TEX", "gone.bmp")], "ints": {"BLMD": 1}, "floats": {}, "colours": {}}
+    try:
+        mat = b.g.doc["materials"][b.material("glassy")]
+    finally:
+        p3d_gltf.shader_from_name = real
+    assert mat["pbrMetallicRoughness"]["baseColorFactor"] == G.MISSING_GLASS and mat["alphaMode"] == "BLEND"
