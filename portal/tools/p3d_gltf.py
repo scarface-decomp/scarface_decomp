@@ -832,6 +832,10 @@ class Builder:
                     # glass or dark metal, not a glaring white sheet
                     glass = bool(ints.get("BLMD") or info["translucent"])
                     mat["pbrMetallicRoughness"]["baseColorFactor"] = MISSING_GLASS if glass else MISSING_SOLID
+            if not tex and (ints.get("BLMD") or info["translucent"]):
+                # a see-through layer with no picture of its own: the glass laid over a tower's walls, which
+                # the game makes shine with the sky's reflection. Without this it is a white sheet over them.
+                mat["pbrMetallicRoughness"]["baseColorFactor"] = MISSING_GLASS
             if ints.get("2SID"):
                 mat["doubleSided"] = True
             if ints.get("ATST"):

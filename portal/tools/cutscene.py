@@ -352,6 +352,38 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
     return glb, report
 
 
+def _person(b: G.Builder, lib: G.Library, src: G.Source, spot: int, label: str) -> Optional[G.SkeletonCopy]:
+    """Someone's model from their file, under spot: their skeleton, or None when nothing went in. A file
+    with a composite drawable that holds the body (Tony's cutscene suits) is put in whole, eyes and teeth
+    on their joints; otherwise the full-detail skins on their skeleton."""
+    skin_names = {G.chunk_name(src.data, c).lower() for c in src.chunks if c.id == G.SKIN}
+    for c in src.chunks:
+        if c.id != G.COMPOSITE:
+            continue
+        parts = [G.composite_prop(src.data, k)[0].lower() for k in c.children if k.id == G.COMPOSITE_PROP]
+        if any(p in skin_names for p in parts):
+            before = len(b.copies)
+            b.composite(G.Ref(src, c), spot, label + " skeleton")
+            if len(b.copies) > before:
+                return b.copies[before]
+    skins = [c for c in src.chunks if c.id == G.SKIN]
+    full = [c for c in skins if "_low" not in G.chunk_name(src.data, c).lower()] or skins
+    copy, placed = None, False
+    for c in full:
+        r = p3d._R(src.data, *c.body)
+        r.text()
+        r.u32()
+        skel_name = r.text()
+        if copy is None:
+            sref = lib.find("skeleton", skel_name, (src,))
+            if not sref:
+                break
+            copy = b.skeleton(sref, spot, label + " skeleton")
+        if b.skin(G.Ref(src, c), copy, copy.group) is not None:    # type: ignore[attr-defined]
+            placed = True
+    return copy if placed else None
+
+
 def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
           model: Callable[[str, str], Optional[Tuple[str, bytes]]], tracks: _Tracks,
           loaded: Dict[str, Optional[G.Source]], start: float) -> Tuple[List[str], List[int], float]:
@@ -388,26 +420,11 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         if src is None:
             left_out.append(label)
             continue
-        skins = [c for c in src.chunks if c.id == G.SKIN]
-        full = [c for c in skins if "_low" not in G.chunk_name(src.data, c).lower()] or skins
-        placed = False
         at, facing = script.stands.get(who, ((0.0, 0.0, 0.0), 0.0))
         spot = b.g.node(label, root, translation=list(G.pos(at)), rotation=list(facing_rotation(facing)))
-        copy = None
-        for c in full:
-            ref = G.Ref(src, c)
-            r = p3d._R(src.data, *c.body)
-            r.text()
-            r.u32()
-            skel_name = r.text()
-            if copy is None:
-                sref = lib.find("skeleton", skel_name, (src,))
-                if not sref:
-                    break
-                copy = b.skeleton(sref, spot, label + " skeleton")
-            if b.skin(ref, copy, copy.group) is not None:    # type: ignore[attr-defined]
-                placed = True
-        if not placed or copy is None:
+        copy = _person(b, lib, src, spot, label)
+        if copy is None:
+            b.g.doc["nodes"][root]["children"].remove(spot)
             left_out.append(label)
             continue
         went_in.append(label)

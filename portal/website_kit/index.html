@@ -4684,6 +4684,7 @@
       const p = el('span', f.path, 'p');
       if (f.placed) p.title = 'In ' + f.placed + (f.quality ? ' (' + f.quality + ')' : '');
       if (f.name) p.appendChild(el('span', f.name, 'nm'));
+      else if (gfSceneLabel(f.path)) p.appendChild(el('span', gfSceneLabel(f.path), 'nm'));
       row.appendChild(p);
       row.appendChild(el('span', gfKindLabel(f.kind), 'k'));
       row.appendChild(el('span', fmtBytes(f.size), 'z'));
@@ -4712,6 +4713,20 @@
 
   /* Previews of the person's own copied files: sounds play in the page, Pure3D files show their pictures.
      The portal decodes the console formats (Xbox ADPCM, PS2 VAG, PS2 and Xbox textures) on this computer. */
+  /* What a cutscene's file is: the game cuts each cutscene's animations into pieces (stream0, stream1 ...)
+     and keeps a second copy of some for European televisions (PAL_). They aren't from different versions. */
+  function gfSceneLabel(path) {
+    const m = /(?:^|\/)art\/nis\/(?:fsc\/([^\/]+)\.fsc|([^\/]+)\/(stream(\d+)|static)\.p3d|([^\/]+)\.p3d)$/i.exec(path);
+    if (!m) return '';
+    const name = m[1] || m[2] || m[5];
+    if (/^(characters|fsc)$/i.test(name)) return '';
+    const pal = /^PAL_/i.test(name);
+    const title = name.replace(/^PAL_/i, '').replace(/^M?NIS_/i, '').replace(/_/g, ' ');
+    const what = m[1] ? 'its script' : m[4] !== undefined ? 'piece ' + (Number(m[4]) + 1) + ' of its animations' : 'a small file for the game’s loader';
+    return 'Cutscene “' + title + '”: ' + what + (pal ? ', in the copy for European televisions (PAL)' : '')
+      + (m[1] ? '' : '. Open shows the whole cutscene.');
+  }
+
   function gfPreviewKind(path) {
     const ext = (path.match(/\.[^./\\]+$/) || [''])[0].toLowerCase();
     if (ext === '.rsd' || ext === '.ogg' || ext === '.wav') return 'sound';
