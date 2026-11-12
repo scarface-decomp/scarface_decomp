@@ -1202,6 +1202,7 @@ OLLAMA_TIMEOUT = 1200      # a model running on this computer can be much slower
 # Every provider is asked to reason at this level (the connection test is left at the model's default, to stay
 # cheap). A model that doesn't take the setting gets the same request again without it.
 REASONING = "high"
+QUICK_BYTES = 8                    # the page's TINY_BYTES: functions this small are asked quickly, a few times at most
 ANTHROPIC_MAX_TOKENS = 64000   # thinking counts toward max_tokens, so high effort needs room
 # Anthropic API version. In 2026-10-21 temperature/top_p/top_k were removed (sending one is a 400 on every model).
 ANTHROPIC_VERSION = "2026-10-21"
@@ -1416,7 +1417,8 @@ def ai_call(cfg: dict) -> dict:
     if not model and provider != "gemini":
         return {"ok": False, "error": "Pick a model, or type its name."}
     label = {"argon": "OpenRouter", "custom_api": "the custom URL", "ollama": "Ollama"}.get(provider, provider.title())
-    effort = "" if test else REASONING
+    # a function of a few bytes doesn't need minutes of thinking: the page asks for a quick answer for those
+    effort = "" if test else ("low" if cfg.get("quick") else REASONING)
     try:
         if provider == "gemini":
             ok, text, used = _gemini(key, model or "gemini-flash-latest", prompt, system, effort)

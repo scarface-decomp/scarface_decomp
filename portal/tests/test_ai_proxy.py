@@ -244,3 +244,13 @@ def test_the_connection_test_uses_the_default_reasoning(S, monkeypatch):
         S.ai_call({"provider": prov, "api_key": "k", "model": model, "prompt": "Ping", "is_test": True})
     for c in calls:
         assert not {"reasoning_effort", "reasoning", "thinking", "output_config"} & set(c["body"]), c["body"]
+
+
+def test_a_tiny_function_is_asked_quickly(S, monkeypatch):
+    """A function of a few bytes gets low reasoning (the page sends quick): minutes of thinking on a two-byte
+    function cost time and money for nothing. Everything else still gets high."""
+    calls = []
+    monkeypatch.setattr(S, "_http_json", fake_http(calls, [(200, chat("```cpp\nvoid f() {}\n```"))] * 2))
+    S.ai_call({"provider": "openai", "api_key": "k", "model": "gpt-6-astra", "prompt": "a tiny one", "quick": True})
+    S.ai_call({"provider": "openai", "api_key": "k", "model": "gpt-6-astra", "prompt": "a big one"})
+    assert [c["body"]["reasoning_effort"] for c in calls] == ["low", "high"]

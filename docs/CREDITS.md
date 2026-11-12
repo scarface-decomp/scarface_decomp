@@ -25,6 +25,11 @@ authors are credited in the commit history. Thank you.
   `.rcf` archives), [Broken Face](https://github.com/sulzbals/BrokenFace) by sulzbals and Meth0d's
   write-up on Scarface's compiled TorqueScript (layout of `.cso` / `.dso`). Their documentation was
   read; no code was copied.
+* The [Scarface Remastered Project](https://www.nexusmods.com/scarfacetheworldisyours/mods/6) by Neoxaero,
+  with sulzbals, Talon and DomenicoPe: the mod that keeps the PC game playable and looking its best, and the
+  community this project grew beside. None of it is part of this project or shipped with it, at its
+  author's wish: the portal can read a copy you downloaded yourself, on your own computer, and nothing from
+  it goes into the repository or onto the site.
 * For how the PC game works inside: [SilentPatch for Scarface](https://github.com/CookiePLMonster/SilentPatchScarface)
   by Silent (CookiePLMonster) and his [write-up](https://silentsblog.com/2020/03/29/silentpatch-scarface/)
   (how the renderer keeps its vertex and index buffers), [RCFRedirect](https://github.com/GangstaTeam/RCFRedirect)
