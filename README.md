@@ -278,6 +278,7 @@ portal/               the portal itself and its tools (you don't need to open it
 | `docs/METHODOLOGY.md`, `docs/SCRIPTS.md`, `docs/PS2.md`, `docs/OTHER_VERSIONS.md` | Verification rules, the game's scripts, the PS2 lane, the Wii version. |
 | `docs/FORMATS.md`, `docs/NAMES.md`, `docs/VERSIONS.md` | The game's file formats; function names for Ghidra and IDA; what differs between the versions. |
 | `docs/LEGAL.md`, `docs/PROVENANCE.md`, `docs/CREDITS.md` | Legal notes, where code and names may come from, credits. |
+| `docs/CLEAN_ROOM.md`, `docs/cleanroom/` | How research done next to leaked code becomes a written spec that someone who never saw it builds from, the record of who read what, and the specs. |
 | `docs/SCARFACE_DECOMP_AI_HANDOFF.md`, `docs/AGENTS.md` | Brief for AI assistants (served by the portal at `/download/ai-handoff`), and how an agent uses the portal API. |
 | `portal/decomp_portal_server.py`, `portal/website_kit/` | The portal: its server and its page. |
 | `portal/verify.py` | The command-line checker. |

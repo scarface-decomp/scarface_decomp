@@ -23,6 +23,14 @@ rules for what may go into the repository.
 
 If you are unsure where something came from, leave it out and ask in an issue.
 
+## Research done next to leaked code: the clean room
+
+Some published research on the game was done with leaked source at hand. Its code and names stay out
+of the project. What it found out about the game's files and behaviour may come in only through the
+clean-room process in [CLEAN_ROOM.md](CLEAN_ROOM.md): someone who read it writes a spec in their own words
+(no code, no names from it), the spec is reviewed, and someone who has never read it writes the code from
+the spec and the game files. The record of who read what is kept in CLEAN_ROOM.md.
+
 ## Names
 
 Function and class names come from RTTI in the retail binaries, from strings the code uses (the names

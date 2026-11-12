@@ -12,7 +12,7 @@ All numbers are little-endian unless a section says otherwise. Offsets are in he
 | [Disc images](#disc-images-and-installers) | `.iso`, `.xiso` | all | `portal/tools/game_assets.py`, `game_files.py` |
 | [PC installer](#disc-images-and-installers) | `SCARFACE.MSI`, `Data1.cab` | PC | `msi_reader.py`, `ms_cab.py` |
 | [Cement archives](#cement-archives-rcf) | `.rcf` | all | `rcf.py`, `game_assets.py` |
-| [Pure3D](#pure3d-p3d) | `.p3d` | all | `p3d.py` (chunks, models to .obj), `p3d_gltf.py` (models, animations and maps to glTF for Blender), `game_assets.py` (contents), `media.py` (pictures) |
+| [Pure3D](#pure3d-p3d) | `.p3d` | all | `p3d.py` (chunks, models to .obj), `p3d_gltf.py` (models, animations and maps to glTF for Blender), `stream_graph.py` ([what is loaded where](#the-stream-graph)), `game_assets.py` (contents), `media.py` (pictures) |
 | [Pictures in Pure3D](#pictures) | PNG, DDS, P3DI | PC, Xbox, PS2 | `media.py` |
 | [Sounds](#sounds-rsd) | `.rsd` | all | `game_assets.py` (facts), `media.py` (playing) |
 | [Videos](#videos-bik) | `.bik` | Xbox and PC (Bink) | `game_assets.py` (Bink picture size) |
@@ -89,7 +89,7 @@ A reader can skip any chunk it doesn't know by its third size. Ids the portal us
 read, and `--obj OUT.obj` writes its meshes and skins as plain geometry. `portal/tools/p3d_gltf.py` writes
 whole scenes as glTF (`.glb`), which Blender opens with File > Import > glTF 2.0: textured models,
 characters with their skeletons, skin weights and animations, guns and cars with their moving parts, and
-map areas with everything placed on them ([Exporting to Blender](#exporting-to-blender)).
+map areas with everything placed on them and their lights ([Exporting to Blender](#exporting-to-blender)).
 
 ### Pictures
 
@@ -241,7 +241,8 @@ used `0x4500` and `0x4501` for these.
 | `0x00121114` | no name known (`p3d.py` says Byte Quaternion Channel) | the same header, then x, y, z as signed bytes over 127 (Xbox and PS2; about 1% precision) |
 | `0x00121110` | Channel Interpolation Mode | u32 version, u32 interpolate (-1: yes) |
 | `0x00121100` | Float1 Channel | u32 version, parameter, u32 keys, u16 frames, 1 float per key |
-| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`CAM`, `PTRN` ...), `ANIM`, two u32, then the name of what it drives (a camera) and the animation it plays |
+| `0x00121109` | Colour Channel | u32 version, parameter (`CLR`), u32 keys, u16 frames, then a u32 colour (`0xAARRGGBB`) per key: two arrays, not interleaved |
+| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`CAM`, `PTRN`, `LITE` ...), `ANIM`, two u32, then the name of what it drives (a camera, a light) and the animation it plays |
 | `0x00002200` | Camera | name, u32 version (2), float field of view (radians, across the picture), float aspect, float near and far clip, then position, look direction and up (3 floats each) |
 
 Every person in the game has the same 27-joint skeleton (`character_root`, `pelvis`, `hip_l` ...), so
@@ -368,6 +369,120 @@ detail; a prop's file opened on its own also gets each later state's look beside
 Traffic, pedestrians and mission cars aren't models placed in the files: the game spawns them while it runs,
 at spawn objects the areas do place (`worldambiencespawnobject`, `enemycharactergeneratorspawnobject`, ...).
 
+### Lights
+
+This section, the next two and the Colour Channel above come from the clean-room spec
+[SPEC-001](cleanroom/SPEC-001-lights-sky-streaming.md) ([how that works](CLEAN_ROOM.md)), whose examiner
+checked them on the PC files; `p3d.py` reads them, and the tests check that on made-up files.
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x00013000` | Light | name, u32 version (`0x101`), u32 type (0 ambient, 1 point, 2 directional, 3 spot), u32 colour (`0xAARRGGBB`), 3 floats attenuation (constant, linear, quadratic: 1, 0, 0 in every Miami file), u32 enabled (1 or 0); the sub-chunks below |
+| `0x00013001` | Light Direction | 3 floats: a unit vector, the way the light shines |
+| `0x00013002` | Light Position | 3 floats, in the same space as the map's geometry |
+| `0x00013003` | Light Spot Cone | 4 floats: two angles, a falloff and a range. Which angle is the inner one, and whether they are in degrees or radians, isn't known yet |
+| `0x00013004` | Light Casts Shadows | u32 |
+| `0x00013006` | Light Decay Range | u32 shape (0 none, 1 sphere, 2 box, 3 ellipsoid), 3 floats inner size, 3 floats outer size; may hold a `0x00013007` |
+| `0x00013007` | Light Decay Range Rotation | a float: a turn about the vertical axis, in radians |
+| `0x00013008` | Light Illumination Kind | u32: 0 adds light, 1 none, 2 takes light away |
+| `0x00002380` | Light Group | name, u32 count, then that many light names. The lights are `0x00013000` chunks in the same file |
+| `0x08800007` | Light Group (game) | name, the light group's name, u32 kind, u32 count, then that many frame controller names |
+
+The names of the sub-chunks are descriptive ones of ours. In the city's files (`packages/z04`) there are
+1,830 lights: 1,105 point, 593 directional, 132 ambient and no spot lights. Every one has a position and a
+shadow flag and belongs to a light group.
+
+**The decay range.** A light is at full strength inside the inner size, fades smoothly to nothing at the
+outer size, and does nothing beyond. A sphere uses only the first of the three sizes (its radius); a box is
+turned by the `0x00013007` angle first; the game handles an ellipsoid as a box. The game counts a light
+with a decay range as a local light, and only when the decay where you are is above zero and the light is
+within about 50 m. Only the city-wide lights in `miami_lod.p3d` and `islands_LOD.p3d` have none. Every lamp
+and every interior light has one, many directional lights among them: those light only their range, not
+the whole city.
+
+The record's kind says what a light group is for:
+
+| Kind | Where | What |
+| :--- | :--- | :--- |
+| 0 | `miami_lod.p3d`, `islands_LOD.p3d` | the daylight (`zone_lights`): ambient, sun, fill, building ambient |
+| 1 | the same two | the same four lights for rain (`zone_rainlights`) |
+| 2 | mostly `*_detail.p3d` and `*_detailB.p3d`, a few `*_shell.p3d` | outdoor night lights (signs, a petrol station, a theatre front) |
+| 3 | `*_shell.p3d` | one group per interior |
+| 4 | `Common.p3d` | templates: `lamp_talllight`, `lamp_shortlight`, `vehicle_headlight` |
+
+The building ambient light (`MiamiBuildingAmbientShape`) isn't part of the light the world is lit with: it
+belongs to the lit windows at night.
+
+**The daylight changes with the hour.** The kind 0 and kind 1 records each name a frame controller per
+light (`LITE_<light name>`, type `LITE`), which plays an animation of type `LITE` on it: 241 frames, one
+day, frame 0 midnight, frame 120 noon, a frame every six minutes. Its `CLR` channel (a Colour Channel)
+gives the colour and its `DIR` channel (a Vector3DOF Channel) the direction; either may hold a Channel
+Interpolation Mode. These tags are padded with a NUL, not a space. The values stored in the lights are
+midnight's: `miami_lod.p3d`'s sun stores 31, 45, 48 and (0, -0.788, -0.616), and at noon is 99, 97, 72 and
+(-0.473, -0.743, 0.473).
+
+### The draw-order key and the sky
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x00122000` | Draw Order | u32 version (0), a float: the draw-order key of the mesh (`0x00010000`) it sits directly under. Billboard groups carry one too |
+| `0x08800002` | Sky | name, the composite drawable's name |
+
+The game clamps the key to 0..1, and a mesh without one counts as 0.5. It matters for the sky, which is
+drawn first, with no depth test, no depth writes and no fog, from the highest key to the lowest: a lower
+key ends up on top. Without it the dome can cover the clouds and the horizon, and the sky becomes one flat
+colour. The game doesn't sort the billboard groups by it.
+
+| Mesh | Key | What it is |
+| :--- | ---: | :--- |
+| `skyboxShape` | 1.0 | the dome, drawn first |
+| `skybox16Shape` | 0.9 | untextured |
+| `skybox17Shape`, `skybox18Shape` | 0.3, 0.2 | two cloud layers (`Cloud_variant_001.tga`) |
+| `skybox2Shape`, `skybox_horizonShape` | 0.0 | the horizon gradient, drawn last, on top |
+| `rainy_skyShape`, `rainy_sky2Shape` | 0.5 | the rain sky |
+| `rainy_sky3Shape`, `rainy_sky4Shape` | 0.6 | the rain sky |
+
+`Common.p3d` has two Sky chunks: `sky` (its composite has 6 meshes and 6 billboard groups) and
+`rainy_skybox` (6 meshes). A name starting `rainy_` is the rain sky: the game starts it faded out and
+cross-fades between the two with the weather.
+
+### The stream graph
+
+`art/levels/z04/streamgraph.p3d` says which packages the game keeps loaded at each place in the city: 216
+Stream Packages and 297 Stream Triggers.
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x08800100` | Stream Package | the package's name (lower case, no `.p3d`), u32 (5 to 65535, one per package; meaning not known) |
+| `0x08800101` | Stream Trigger | name (`loadTrigger`, `loadTrigger_100` ...), the subzone it belongs to (`bsand_02_shell`), float height (13 for the street-level ones), u32 count and that many points (3 floats: x, y, z), u32 count and that many package names, u32 count (the same) and the slot each package goes in, two region names (`fountainrock_region`, `lobst_region`; meaning not known), u32 (0 in all but one; meaning not known) |
+
+A trigger's points are a closed outline on the ground; y is its base. Its packages are what must be loaded
+while you are inside it, each in a slot:
+
+| Slot | Holds |
+| :--- | :--- |
+| `Global_S`, `Global_D` | the city-wide backdrop and the models it places (`miami_lod`, `miami_lod_d`, or the islands' `islands_lod`, `islands_lod_d`) |
+| `Region_S`, `Region_D` | a region's shaders and textures, and its models |
+| `Shell` | an area's streets and large buildings |
+| `Detail` | the small things on top of a shell; a shell can have several (`_detail`, `_detailB` ...) |
+| `ZoneAnimation` | `packages/ZoneAnimations/<name>_anim` |
+
+What is loaded at a place is every package of every trigger whose outline holds it. Triggers overlap:
+usually three to six shells and three to eight details are loaded at once, the area you stand in and its
+neighbours. Outside every trigger, the nearest one stands in. The coordinates are the map's own, before the
+exports mirror Z ([Which way round](#which-way-round)).
+
+```
+python portal/tools/stream_graph.py streamgraph.p3d               every trigger
+python portal/tools/stream_graph.py streamgraph.p3d --at X Z      what is loaded at x, z
+```
+
+The stream graph doesn't cover `packages/azones/*_pocket.p3d` (32), which the mission script
+`scriptc/missions/z04/azone_triggers.dso` loads as the player crosses its outlines (some are outdoor ground,
+so a city built from the stream graph alone has holes there; the map exports include them), nor
+`packages/dzones/*_dzone.p3d` (135: the furniture and props of interiors, from `dzone_triggers.dso`), nor
+the areas the game picks one of (`tonymansion_01_shell_TS0` to `TS3`, `cargoShip_01_shell_CS0` and `CS1`).
+
 ### Exporting to Blender
 
 ```
@@ -376,6 +491,7 @@ python portal/tools/p3d_gltf.py car.glb   art/vehicles/cabriolet.p3d
 python portal/tools/p3d_gltf.py guns.glb  art/stateprops/weapons_test/guns.p3d
 python portal/tools/p3d_gltf.py area.glb  "packages/z04/stripmall_01_*.p3d" --map
 python portal/tools/p3d_gltf.py miami/    packages/z04 --map --split
+python portal/tools/p3d_gltf.py city.glb  packages/z04/miami_lod.p3d --map --hour 12
 ```
 
 The portal does the same from the game files you copied (its Game files tab; **Copy everything, PC first**
@@ -394,15 +510,33 @@ read from the same folder unless `--library` says where. `--split` writes one `.
 up when imported together; the low-detail city in `miami_lod.p3d` is left out next to real areas unless
 `--lod` is given. PC, Xbox and PS2 files all work; textures are decoded on your computer.
 
-Left out for now: lights, particles and light flares, shadow volumes, collision shapes and state-prop
+**Lights.** With `--map` each area's [lights](#lights) come in too, in a node `<file> lights`, with a node per
+light group inside it (its extras give the record's kind). Point and spot lights, and directional lights
+without a decay range (the city-wide ones), are glTF lights (`KHR_lights_punctual`) at their place,
+directional and spot lights turned the way they shine; a point or spot light's range is its decay range's
+outer size (a sphere's radius, a box's or an ellipsoid's largest size). Ambient lights, directional lights
+with a decay range (glTF's directional lights have no range, so they would light the whole scene), and lights
+that are off or don't add light come in as empty nodes. Every light's node has the game's settings in its
+extras: the type, the colour, whether it is on and casts shadows, the decay range, the illumination kind, the
+spot cone, the light group's kind and, with `--hour`, the hour. Colours are the game's, each channel over 255.
+The game's brightness scale isn't known, so every light gets the same intensity: 2,000 lux for a directional
+light and 50,000 candela for a point or spot light, which lights a surface 5 m away as strongly. Change them
+in Blender to taste. A spot light keeps glTF's own cone, since which of the game's two angles is which isn't
+known. `--hour H` (0 to 24) lights the daylight for that hour from its `LITE` animations; without it the
+lights are as the files store them, at midnight. The daylight is in `miami_lod.p3d` and `islands_LOD.p3d`, so
+it comes in when those are exported (alone, or with `--lod`).
+
+A mesh with a [draw-order key](#the-draw-order-key-and-the-sky) carries it in its extras
+(`{"drawOrder": 0.3}`), clamped to 0..1 as the game does.
+
+Left out for now: particles and light flares, shadow volumes, collision shapes and state-prop
 animations' callbacks.
 
 ### Ids seen but not worked out
 
 `0x00010021` (u32 0, then seven u32: 32 on the PC and Xbox, 8 or 16 on the PS2, perhaps the bits each
-kind of vertex data is stored in), `0x0001001D` (u32 1, 3, 1, 0 in every mesh), `0x00122000` (u32 0 and a
-float, 0.5 or 0), `0x00121008` (u32 2), `0x00121402` (u32 0, 0), `0x01000001`, the fields of the loaders'
-chunks not written up above.
+kind of vertex data is stored in), `0x0001001D` (u32 1, 3, 1, 0 in every mesh), `0x00121008` (u32 2),
+`0x00121402` (u32 0, 0), `0x01000001`, the fields of the loaders' chunks not written up above.
 
 ## Sounds (`.rsd`)
 
@@ -526,7 +660,9 @@ what you find. Known gaps:
 * the Pure3D ids under [Ids seen but not worked out](#ids-seen-but-not-worked-out);
 * the seven u32 of `0x00010014`, and what the PS2 header's flags word and the vehicles' two extra vectors
   per vertex are (tangents, most likely);
-* lights (`0x00013000` and its sub-chunks), so map exports can carry them.
+* how the sky changes through the day: the sun's turning joint (`sun_grp`, played by `PTRN_sky`) and the
+  sky meshes' vertex-colour sets (`0x00121305`, `0x00121306`, `0x00010F02`), described in
+  [SPEC-001](cleanroom/SPEC-001-lights-sky-streaming.md) but not yet read by a tool.
 
 ## Credits and sources
 
@@ -540,7 +676,11 @@ what you find. Known gaps:
   build on.
 * The PS2's VIF command set, as documented for emulators such as PCSX2, to read the vector-unit packets.
 * The [glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html) (Khronos), which
-  `p3d_gltf.py` writes.
+  `p3d_gltf.py` writes, and its
+  [KHR_lights_punctual](https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Khronos/KHR_lights_punctual/README.md)
+  extension, which the map exports' lights follow.
+* The clean-room spec [SPEC-001](cleanroom/SPEC-001-lights-sky-streaming.md): the lights, the daylight's
+  animations, the draw-order key, the sky and the stream graph.
 
 The rest was worked out from the game files and checked against the other versions of the same files: the
 `RADP` speech against the PC's Ogg Vorbis copies, the PS2's stereo music and movie sound against the PC's,

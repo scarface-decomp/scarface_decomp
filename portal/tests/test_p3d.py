@@ -160,3 +160,119 @@ def test_obj_from_plain_lists_and_an_xbox_memory_image():
     assert "f 5 6 7" in lines and "f 7 6 8" in lines       # the strip, numbered after the first four vertices
     assert any("left out" in line for line in lines)       # a group it can't read is named, not drawn
     assert len(vb) == stride * len(QUAD)
+
+
+# --------------------------------------------------------------------------- lights, the sky, the stream graph
+
+def light(name, kind, argb, enabled=1, kids=b""):
+    """A Light chunk (0x13000): name, version 0x101, type, colour, attenuation (1, 0, 0), enabled."""
+    return chunk(0x13000, text(name) + struct.pack("<III3fI", 0x101, kind, argb, 1.0, 0.0, 0.0, enabled), kids)
+
+
+def decay(shape, inner, outer, rotation=None):
+    kids = chunk(0x13007, struct.pack("<f", rotation)) if rotation is not None else b""
+    return chunk(0x13006, struct.pack("<I6f", shape, *inner, *outer), kids)
+
+
+def test_a_light_and_its_sub_chunks():
+    kids = (chunk(0x13001, struct.pack("<3f", 0, -0.788, -0.616)) + chunk(0x13002, struct.pack("<3f", 10, 3, -20))
+            + chunk(0x13003, struct.pack("<4f", 0.5, 0.75, 1.0, 8.0)) + chunk(0x13004, struct.pack("<I", 1))
+            + decay(2, (1, 2, 3), (4, 5, 6), rotation=0.25) + chunk(0x13008, struct.pack("<I", 2)))
+    data = p3d(light("MiamiSunShape", 3, 0xFF1F2D30, kids=kids))
+    lt = P.read_tree(data)[0]
+    assert [c.name for c in P.walk([lt])] == ["Light", "Light Direction", "Light Position", "Light Spot Cone",
+                                               "Light Casts Shadows", "Light Decay Range",
+                                               "Light Decay Range Rotation", "Light Illumination Kind"]
+    assert P.fields(data, lt) == {"name": "MiamiSunShape", "version": 0x101, "type": "spot", "argb": "ff1f2d30",
+                                  "attenuation": (1.0, 0.0, 0.0), "enabled": True}
+    direction, position, cone, shadows, rng, illum = lt.children
+    assert P.fields(data, direction) == {"direction": (0.0, -0.788, -0.616)}
+    assert P.fields(data, position) == {"position": (10.0, 3.0, -20.0)}
+    assert P.fields(data, cone) == {"angles": (0.5, 0.75), "falloff": 1.0, "range": 8.0}
+    assert P.fields(data, shadows) == {"casts shadows": True}
+    assert P.fields(data, rng) == {"shape": "box", "inner": (1.0, 2.0, 3.0), "outer": (4.0, 5.0, 6.0)}
+    assert P.fields(data, rng.children[0]) == {"rotation": 0.25}
+    assert P.fields(data, illum) == {"illumination": "takes light away"}
+    whole = P.light(data, lt)                               # the light and its sub-chunks together
+    assert whole["direction"] == (0.0, -0.788, -0.616) and whole["position"] == (10.0, 3.0, -20.0)
+    assert whole["spot cone"]["angles"] == (0.5, 0.75) and whole["casts shadows"] is True
+    assert whole["decay range"] == {"shape": "box", "inner": (1.0, 2.0, 3.0), "outer": (4.0, 5.0, 6.0),
+                                    "rotation": 0.25}
+    assert whole["illumination"] == "takes light away"
+    assert "type=spot" in P.dump(data) and "argb=ff1f2d30" in P.dump(data)
+
+
+def test_light_types_and_a_bare_light():
+    for kind, name in ((0, "ambient"), (1, "point"), (2, "directional"), (3, "spot"), (9, 9)):
+        data = p3d(light("l", kind, 0, enabled=0))
+        info = P.light(data, P.read_tree(data)[0])
+        assert info["type"] == name and info["enabled"] is False
+        assert "position" not in info and "decay range" not in info
+
+
+def test_light_group_and_its_record():
+    group = chunk(0x2380, text("zone_lights") + struct.pack("<I", 2) + text("MiamiSunShape") + text("MiamiFillShape"))
+    record = chunk(0x8800007, text("zone_lights") + text("zone_lights") + struct.pack("<II", 0, 2)
+                   + text("LITE_MiamiSunShape") + text("LITE_MiamiFillShape"))
+    data = p3d(group, record)
+    g, r = P.read_tree(data)
+    assert (g.name, r.name) == ("Light Group", "Light Group (game)")
+    assert P.fields(data, g) == {"name": "zone_lights", "lights": ["MiamiSunShape", "MiamiFillShape"]}
+    assert P.fields(data, r) == {"name": "zone_lights", "light group": "zone_lights", "kind": 0,
+                                 "frame controllers": ["LITE_MiamiSunShape", "LITE_MiamiFillShape"]}
+
+
+def test_draw_order_and_sky():
+    mesh = chunk(0x10000, text("skybox17Shape") + struct.pack("<II", 0, 0), chunk(0x122000, struct.pack("<If", 0, 0.3)))
+    sky = chunk(0x8800002, text("rainy_skybox") + text("rainy_skybox"))
+    data = p3d(mesh, sky)
+    m, s = P.read_tree(data)
+    assert m.children[0].name == "Draw Order"
+    assert P.fields(data, m.children[0]) == {"version": 0, "draw order": 0.3}
+    assert s.name == "Sky" and P.fields(data, s) == {"name": "rainy_skybox", "composite drawable": "rainy_skybox"}
+
+
+def short_text(s: str) -> bytes:
+    """Text padded to 4 bytes without counting its length byte, as streamgraph.p3d's "0c loadTrigger NUL"."""
+    raw = s.encode() + b"\0"
+    raw += b"\0" * (-len(raw) % 4)
+    return bytes([len(raw)]) + raw
+
+
+def stream_trigger(name, subzone, outline, packages, height=13.0, base=12.4, regions=("a_region", "b_region"),
+                   flag=0, tx=text):
+    """A Stream Trigger (0x8800101): outline as (x, z), packages as (package, slot)."""
+    head = tx(name) + tx(subzone) + struct.pack("<fI", height, len(outline))
+    head += b"".join(struct.pack("<3f", x, base, z) for x, z in outline)
+    head += struct.pack("<I", len(packages)) + b"".join(tx(p) for p, _ in packages)
+    head += struct.pack("<I", len(packages)) + b"".join(tx(s) for _, s in packages)
+    head += b"".join(tx(r) for r in regions) + struct.pack("<I", flag)
+    return chunk(0x8800101, head)
+
+
+@pytest.mark.parametrize("tx", [text, short_text])
+def test_stream_package_and_trigger(tx):
+    pkg = chunk(0x8800100, tx("bsand_02_shell") + struct.pack("<I", 65535))
+    trig = stream_trigger("loadTrigger_100", "bsand_02_shell", [(0, 0), (10, 0), (10, 10)],
+                          [("miami_lod", "Global_S"), ("bsand_02_shell", "Shell")],
+                          regions=("fountainrock_region", "lobst_region"), flag=1, tx=tx)
+    data = p3d(pkg, trig)
+    p, t = P.read_tree(data)
+    assert (p.name, t.name) == ("Stream Package", "Stream Trigger")
+    assert P.fields(data, p) == {"name": "bsand_02_shell", "number": 65535}
+    assert P.fields(data, t) == {
+        "name": "loadTrigger_100", "subzone": "bsand_02_shell", "height": 13.0,
+        "points": [(0.0, 12.4, 0.0), (10.0, 12.4, 0.0), (10.0, 12.4, 10.0)],
+        "packages": ["miami_lod", "bsand_02_shell"], "slots": ["Global_S", "Shell"],
+        "regions": ["fountainrock_region", "lobst_region"], "flag": 1}
+
+
+def test_colour_channel_keys():
+    frames = [0, 40, 120]
+    argb = [0xFF1F2D30, 0xFF253134, 0xFF636148]
+    ch = chunk(0x121109, struct.pack("<I", 0) + b"CLR\0" + struct.pack(f"<I{len(frames)}H{len(argb)}I", len(frames),
+                                                                        *frames, *argb))
+    data = p3d(ch)
+    c = P.read_tree(data)[0]
+    assert P.fields(data, c) == {"version": 0, "parameter": "CLR", "keys": 3}
+    assert P.channel_keys(data, c) == ("CLR", [0, 40, 120], [(255, 31, 45, 48), (255, 37, 49, 52), (255, 99, 97, 72)])
