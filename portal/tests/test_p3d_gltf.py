@@ -1022,3 +1022,236 @@ def test_a_picture_the_game_lacks_is_dark_not_white():
     finally:
         p3d_gltf.shader_from_name = real
     assert mat["pbrMetallicRoughness"]["baseColorFactor"] == G.MISSING_GLASS and mat["alphaMode"] == "BLEND"
+
+
+# --------------------------------------------------------------------------- lights
+
+from test_p3d import decay, light  # noqa: E402
+
+
+def sub(position=None, direction=None, shadows=1, rng=None, illumination=None, cone=None):
+    """A light's sub-chunks."""
+    out = b""
+    if direction is not None:
+        out += chunk(0x13001, struct.pack("<3f", *direction))
+    if position is not None:
+        out += chunk(0x13002, struct.pack("<3f", *position))
+    if cone is not None:
+        out += chunk(0x13003, struct.pack("<4f", *cone))
+    out += chunk(0x13004, struct.pack("<I", shadows))
+    if rng is not None:
+        out += rng
+    if illumination is not None:
+        out += chunk(0x13008, struct.pack("<I", illumination))
+    return out
+
+
+def light_group(name, lights, kind=None, controllers=()):
+    """A Light Group (0x2380) and, with a kind, its record (0x8800007)."""
+    out = chunk(0x2380, text(name) + struct.pack("<I", len(lights)) + b"".join(text(n) for n in lights))
+    if kind is not None:
+        out += chunk(0x8800007, text(name) + text(name) + struct.pack("<II", kind, len(controllers))
+                     + b"".join(text(c) for c in controllers))
+    return out
+
+
+def lit_area(name, *extra):
+    rig = skeleton(name, [(name, 0, (0, 0, 0)), ("collapsedMesh_0", 0, (0, 0, 0))])
+    return p3d(rig, mesh("collapsedMesh_0"), composite(name, name, [("collapsedMesh_0", 1, 1)]), world_geo(name), *extra)
+
+
+def minus_z(q):
+    """Where a node's -Z points after rotation q (glTF lights shine along their -Z)."""
+    x, y, z, w = q
+    return (-(2 * (x * z + w * y)), -(2 * (y * z - w * x)), -(1 - 2 * (x * x + y * y)))
+
+
+def node_named(doc, name):
+    return next(n for n in doc["nodes"] if n["name"] == name)
+
+
+def test_a_map_area_carries_its_lights():
+    lights = (
+        light("lamp_a", 1, 0xFFFF8000, kids=sub((10, 3, -20), rng=decay(1, (2, 2, 2), (12.5, 7, 7))))
+        + light("lamp_box", 1, 0xFF000000, kids=sub((0, 0, 0), rng=decay(2, (1, 1, 1), (4, 9, 6), rotation=0.5)))
+        + light("sun", 2, 0xFF1F2D30, kids=sub((0, 0, 0), direction=(0, -0.788, -0.616), rng=decay(0, (0,) * 3, (0,) * 3)))
+        + light("room_sun", 2, 0xFF808080, kids=sub((5, 2, 5), direction=(0, -1, 0), rng=decay(2, (1, 1, 1), (3, 3, 3))))
+        + light("room_ambient", 0, 0xFF232530, kids=sub((5, 2, 5), rng=decay(1, (1,) * 3, (4,) * 3)))
+        + light("switched_off", 1, 0xFFFFFFFF, enabled=0, kids=sub((1, 1, 1)))
+        + light("darkener", 1, 0xFFFFFFFF, kids=sub((1, 1, 1), illumination=2))
+        + light("spotty", 3, 0xFFFFFFFF, kids=sub((2, 2, 2), direction=(1, 0, 0), cone=(0.3, 0.6, 1.0, 9.0),
+                                                   rng=decay(1, (1,) * 3, (9,) * 3))))
+    groups = (light_group("interior_lights", ["lamp_a", "room_sun", "room_ambient", "lamp_box"], kind=3)
+              + light_group("loose", ["sun", "switched_off", "darkener", "spotty"]))
+    glb, report = export(lit_area("w_lit", lights, groups), map_mode=True)
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    assert report.lights == 8 and report.gltf_lights == 4
+    assert "KHR_lights_punctual" in doc["extensionsUsed"]
+    table = doc["extensions"]["KHR_lights_punctual"]["lights"]
+
+    def gl(name):
+        n = node_named(doc, name)
+        return n, (table[n["extensions"]["KHR_lights_punctual"]["light"]] if "extensions" in n else None)
+
+    # where they hang: <file> lights > the light group > the light; the group's kind in extras
+    top = node_named(doc, "main0 lights")
+    assert top in [doc["nodes"][i] for i in node_named(doc, "main0")["children"]]
+    group = node_named(doc, "interior_lights")
+    assert group["extras"] == {"lightGroupKind": 3, "lightGroupRecord": "interior_lights"}
+    assert [doc["nodes"][i]["name"] for i in group["children"]] == ["lamp_a", "room_sun", "room_ambient", "lamp_box"]
+    assert "extras" not in node_named(doc, "loose")                   # a group with no record
+    # a point light: colour 0..1, placed like the geometry (Z mirrored), range = the sphere's first number
+    n, lt = gl("lamp_a")
+    assert lt == {"name": "lamp_a", "type": "point", "color": [1.0, 0.502, 0.0], "intensity": G.POINT_CANDELA,
+                  "range": 12.5}
+    assert n["translation"] == pytest.approx([10, 3, 20]) and "rotation" not in n
+    assert n["extras"]["lightGroupKind"] == 3 and n["extras"]["castsShadows"] is True
+    assert n["extras"]["decayRange"] == {"shape": "sphere", "inner": [2, 2, 2], "outer": [12.5, 7, 7]}
+    assert gl("lamp_box")[1]["range"] == 9.0                           # a box: its largest outer size
+    assert gl("lamp_box")[0]["extras"]["decayRange"]["rotation"] == 0.5
+    # the city-wide directional light (no decay range): a glTF directional light shining the way it says
+    n, lt = gl("sun")
+    assert lt["type"] == "directional" and lt["intensity"] == G.DIRECTIONAL_LUX and "range" not in lt
+    assert lt["color"] == [round(0x1F / 255, 4), round(0x2D / 255, 4), round(0x30 / 255, 4)]
+    want = (0, -0.788, 0.616)                                          # Z mirrored
+    norm = math.sqrt(sum(v * v for v in want))
+    assert minus_z(n["rotation"]) == pytest.approx([v / norm for v in want], abs=1e-4)
+    # a directional light that lights only its decay range, an ambient light, one switched off and one that
+    # takes light away: empty nodes with their settings in extras
+    for name, kind in (("room_sun", "directional"), ("room_ambient", "ambient"), ("switched_off", "point"),
+                       ("darkener", "point")):
+        n, lt = gl(name)
+        assert lt is None and n["extras"]["lightType"] == kind
+    assert node_named(doc, "room_sun")["extras"]["decayRange"]["shape"] == "box"
+    assert minus_z(node_named(doc, "room_sun")["rotation"]) == pytest.approx((0, -1, 0), abs=1e-6)
+    assert node_named(doc, "room_ambient")["extras"]["color"] == [round(0x23 / 255, 4), round(0x25 / 255, 4),
+                                                                  round(0x30 / 255, 4)]
+    assert node_named(doc, "switched_off")["extras"]["enabled"] is False
+    assert node_named(doc, "darkener")["extras"]["illumination"] == "takes light away"
+    # a spot light keeps glTF's own cone; the game's cone numbers go in extras
+    n, lt = gl("spotty")
+    assert lt["type"] == "spot" and lt["spot"] == {} and lt["range"] == 9.0
+    assert n["extras"]["spotCone"] == {"angles": [0.3, 0.6], "falloff": 1.0, "range": 9.0}
+    assert minus_z(n["rotation"]) == pytest.approx((1, 0, 0), abs=1e-6)
+    assert any("8 light(s), 4 of them as glTF lights" in line for line in report.lines())
+
+
+def test_lights_outside_groups_and_files_without_lights():
+    glb, report = export(lit_area("w_one", light("lonely", 1, 0xFF0000FF, kids=sub((1, 2, 3)))), map_mode=True)
+    doc, _ = read_glb(glb)
+    n = node_named(doc, "lonely")
+    assert n in [doc["nodes"][i] for i in node_named(doc, "main0 lights")["children"]]
+    assert "range" not in doc["extensions"]["KHR_lights_punctual"]["lights"][0]      # no decay range: no range
+    doc, _ = read_glb(export(lit_area("w_none"), map_mode=True)[0])
+    assert "extensions" not in doc and not any(n["name"].endswith(" lights") for n in doc["nodes"])
+    # not a map export: no lights
+    doc, _ = read_glb(export(p3d(mesh("box"), light("lonely", 1, 0xFF0000FF, kids=sub((1, 2, 3)))))[0])
+    assert "extensions" not in doc and [n["name"] for n in doc["nodes"]] == ["box"]
+
+
+# --------------------------------------------------------------------------- the daylight at an hour
+
+ISLAND_SUN = ([0, 40, 60, 90, 120, 180, 207, 210, 229, 234, 240],
+              [0x1F2D30, 0x253134, 0x3C4038, 0x5E593F, 0x636148, 0x635C36, 0x3B2919, 0x372316, 0x272927, 0x232B2B,
+               0x1F2D30])
+
+
+def lite_file(stepped=False):
+    """A low-detail city file whose sun is moved through the day by a LITE animation, as in miami_lod.p3d."""
+    frames, colours = ISLAND_SUN
+    mode = chunk(0x121110, struct.pack("<II", 0, 0 if stepped else 0xFFFFFFFF))
+    clr = chunk(0x121109, struct.pack("<I", 0) + b"CLR\0" + struct.pack(f"<I{len(frames)}H{len(frames)}I", len(frames),
+                                                                       *frames, *[0xFF000000 | c for c in colours]),
+                mode)
+    dirs = [(0, -0.788, -0.616), (-0.473, -0.743, 0.473), (0, -0.788, -0.616)]
+    dr = chunk(0x121104, struct.pack("<I", 0) + b"DIR\0" + struct.pack("<I3H", 3, 0, 120, 240)
+               + b"".join(struct.pack("<3f", *d) for d in dirs))
+    anim = chunk(0x121000, struct.pack("<I", 0) + text("LITE_MiamiSunShape") + b"LITE" + struct.pack("<ffI", 241.0, 30.0, 1),
+                 chunk(0x121002, struct.pack("<II", 0, 1),
+                       chunk(0x121001, struct.pack("<I", 0) + text("MiamiSunShape") + struct.pack("<II", 0, 2), clr + dr)))
+    fc = chunk(0x121201, struct.pack("<I", 1) + text("LITE_MiamiSunShape") + b"LITEANIM" + struct.pack("<fI", 0, 1)
+               + text("MiamiSunShape") + text("LITE_MiamiSunShape"))
+    sun = light("MiamiSunShape", 2, 0xFF1F2D30, kids=sub((0, 0, 0), direction=(0, -0.788, -0.616)))
+    fill = light("MiamiFillShape", 2, 0xFF060606, kids=sub((0, 0, 0), direction=(-0.863, 0.087, 0.498)))
+    groups = light_group("zone_lights", ["MiamiSunShape", "MiamiFillShape"], kind=0, controllers=["LITE_MiamiSunShape"])
+    return lit_area("low_LOD", sun, fill, groups, fc, anim)
+
+
+def sun_at(hour, stepped=False):
+    lib = G.Library()
+    lib.add("miami_lod.p3d", lite_file(stepped), main=True)
+    doc, _ = read_glb(G.export(lib, map_mode=True, hour=hour)[0])
+    n = node_named(doc, "MiamiSunShape")
+    return n, doc["extensions"]["KHR_lights_punctual"]["lights"][n["extensions"]["KHR_lights_punctual"]["light"]]
+
+
+def rgb(c):
+    return [round(((c >> s) & 0xFF) / 255, 4) for s in (16, 8, 0)]
+
+
+def test_without_an_hour_the_lights_are_as_stored():
+    n, lt = sun_at(None)
+    assert lt["color"] == rgb(0x1F2D30) and "hour" not in n["extras"]
+    assert minus_z(n["rotation"]) == pytest.approx((0, -0.788, 0.616), abs=1e-3)
+
+
+def test_the_daylight_at_noon_and_between_keys():
+    n, lt = sun_at(12)                                                 # frame 120: a key
+    assert lt["color"] == rgb(0x636148) and n["extras"]["hour"] == 12
+    want = (-0.473, -0.743, -0.473)                                    # Z mirrored
+    norm = math.sqrt(sum(v * v for v in want))
+    assert minus_z(n["rotation"]) == pytest.approx([v / norm for v in want], abs=1e-3)
+    assert sun_at(2)[1]["color"] == rgb(0x222F32)                      # frame 20, halfway from 1f2d30 to 253134
+    assert sun_at(24)[1]["color"] == rgb(0x1F2D30)
+    assert sun_at(2, stepped=True)[1]["color"] == rgb(0x1F2D30)        # not interpolated: the key before
+    lib = G.Library()
+    lib.add("miami_lod.p3d", lite_file(), main=True)
+    doc, _ = read_glb(G.export(lib, map_mode=True, hour=12)[0])
+    fill = node_named(doc, "MiamiFillShape")                           # no frame controller: as stored
+    assert "hour" not in fill["extras"]
+    assert doc["extensions"]["KHR_lights_punctual"]["lights"][fill["extensions"]["KHR_lights_punctual"]["light"]][
+        "color"] == rgb(0x060606)
+
+
+def test_hour_on_the_command_line(tmp_path, capsys):
+    (tmp_path / "miami_lod.p3d").write_bytes(lite_file())
+    out = tmp_path / "city.glb"
+    assert G.main([str(out), str(tmp_path / "miami_lod.p3d"), "--map", "--hour", "12"]) == 0
+    doc, _ = read_glb(out.read_bytes())
+    assert node_named(doc, "MiamiSunShape")["extras"]["hour"] == 12
+    assert "2 light(s), 2 of them as glTF lights" in capsys.readouterr().out
+    assert G.main([str(out), str(tmp_path / "miami_lod.p3d"), "--map", "--hour", "25"]) == 1
+    assert G.main([str(out), str(tmp_path / "miami_lod.p3d"), "--hour", "12"]) == 1
+    assert "--hour is for --map" in capsys.readouterr().err
+
+
+# --------------------------------------------------------------------------- the draw-order key, strips without indices
+
+def test_the_draw_order_key_goes_in_the_meshs_extras():
+    def keyed(name, key):
+        return chunk(0x10000, text(name) + struct.pack("<II", 0, 1),
+                     prim_group("sky", 1, 0x2001, QUAD, [0, 1, 2, 3]) + chunk(0x122000, struct.pack("<If", 0, key)))
+    rig = skeleton("sky", [("sky", 0, (0, 0, 0))])
+    parts = [("skyboxShape", 1, 0), ("skybox17Shape", 1, 0), ("over", 1, 0), ("plain", 1, 0)]
+    data = p3d(rig, keyed("skyboxShape", 1.0), keyed("skybox17Shape", 0.3), keyed("over", 1.5), mesh("plain"),
+               composite("sky", "sky", parts), chunk(0x8800002, text("sky") + text("sky")))
+    doc, _ = read_glb(export(data)[0])
+    extras = {m["name"]: m.get("extras") for m in doc["meshes"]}
+    assert extras == {"skyboxShape": {"drawOrder": 1.0}, "skybox17Shape": {"drawOrder": 0.3},
+                      "over": {"drawOrder": 1.0}, "plain": None}                 # clamped to 0..1, as the game does
+    # a model placed many times is still written once, keyed or not
+    keyed_tree = p3d(skeleton("treeP", [("treeP", 0, (0, 0, 0))]), keyed("treePShape", 0.3),
+                     composite("treeP", "treeP", [("treePShape", 1, 0)]))
+    for tree in (keyed_tree, region("x", 1.0)[1]):
+        shell = area("w_trees", objects=[("treep", [record(1.0, 0.0, 1.0), record(5.0, 0.0, 5.0)])])
+        doc, _ = read_glb(export(shell, lib=[("x_region_D.p3d", tree)], map_mode=True)[0])
+        assert [m["name"] for m in doc["meshes"]] == ["collapsedMesh_0", "treePShape"]
+
+
+def test_a_strip_with_no_index_list():
+    head = struct.pack("<I", 0) + text("sky") + struct.pack("<9I", 1, 0x2001, 4, 0, 0, 0, 1, 0, 0)
+    flat = [v for p in QUAD for v in p]
+    data = p3d(chunk(0x10020, head, chunk(0x10005, struct.pack("<I12f", 4, *flat))))
+    g = G.geometry(data, G.p3d.read_tree(data)[0])
+    assert g.triangles == [(0, 1, 2), (2, 1, 3)]

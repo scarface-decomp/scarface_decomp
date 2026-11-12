@@ -12,6 +12,8 @@ moving parts, and map areas with everything the game places on them.
                                   --library the shared files next to them are used (regions, miami_lod...)
         --split                   with --map: one .glb per area in the folder OUT, lined up when imported
         --lod                     with --map: keep the low-detail city (miami_lod) next to real areas
+        --hour H                  with --map: light the daylight for this hour (0 to 24) from its LITE
+                                  animations; without it, the lights as stored (midnight)
         --only NAME ...           just these models
         --list                    say what is in the files instead of writing anything
 
@@ -24,6 +26,11 @@ What goes where (see docs/FORMATS.md for the chunk layouts):
     an Animation (0x121000)          a glTF animation on the joints with the same names
     an instance object (0x9900190)   a copy of the model its "modelname" names, at the position, angles
                                      and scale its "instanceposition" records give
+    a Light (0x13000), with --map    a node in its light group's node; point and spot lights and the
+                                     city-wide directional ones as glTF lights (KHR_lights_punctual), the
+                                     rest (ambient, local directional) as empty nodes; the game's settings
+                                     and the light group's kind in extras
+    a Draw Order (0x122000)          the mesh's extras: {"drawOrder": key}
 
 Pure3D is left-handed with Y up; glTF is right-handed with Y up, so Z is mirrored (and the triangles
 turned round to keep facing the right way). A character faces +Z in the result, as glTF expects.
@@ -61,7 +68,18 @@ STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY = 0x0802000D, 0x0802000E, 0x0802000
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 4                     # 3: props kept with another area. 4: one stage of each place; insides in the city
+EXPORT_VERSION = 5                     # 3: props kept with another area. 4: one stage of each place; insides in the city.
+                                       # 5: map areas carry their lights
+LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER = 0x13000, 0x2380, 0x8800007, 0x122000
+DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)
+FRAMES_PER_HOUR = 10                   # the LITE animations: 241 frames, one day, frame 0 midnight, one per six minutes
+# The game stores only a light's colour; how bright that is on its scale isn't known. So every exported light
+# gets the same intensity, in KHR_lights_punctual's units: lux for a directional light, candela for a point or
+# spot light. 50,000 cd lights a surface 5 m away as strongly as the directional light's 2,000 lux
+# (50,000 / 5 squared). Blender's glTF importer divides by 683 lumens per watt: a sun of about 2.9 W/m² and
+# lamps of about 920 W. Change them in Blender to taste.
+DIRECTIONAL_LUX = 2000.0
+POINT_CANDELA = 50000.0
 _LOD_PART = re.compile(r"lod\d*(shape\d*)?$", re.I)
 SCRIPT_OBJECT, OBJECT_PROPERTY, OBJECT_BINARY = 0x9900190, 0x9900192, 0x9900194
 VECTOR_CHANNELS = (0x121102, 0x121103, 0x121104)
@@ -459,6 +477,17 @@ def chunk_name(data: bytes, c: p3d.Chunk) -> str:
     return _text(data, s)[0]
 
 
+def draw_order(data: bytes, c: p3d.Chunk) -> Optional[float]:
+    """A mesh's draw-order key: the Draw Order chunk (0x122000) right under it, clamped to 0..1 as the game
+    clamps it; None when it has none (the game counts that as 0.5). The game draws the sky's parts with no
+    depth test, from the highest key to the lowest, so a lower key ends up on top."""
+    k = c.find(DRAW_ORDER)
+    v = p3d.fields(data, k).get("draw order") if k is not None else None
+    if v is None or not math.isfinite(v):
+        return None
+    return max(0.0, min(1.0, v))
+
+
 KINDS = {MESH: "mesh", SKIN: "skin", SHADER: "shader", SKELETON: "skeleton", COMPOSITE: "composite",
          STATE_PROP: "stateprop", STATE_PROP_DATA: "propstates"}
 
@@ -651,6 +680,13 @@ class Gltf:
     def image(self, name: str, png: bytes) -> int:
         return self.add("images", {"name": name, "mimeType": "image/png", "bufferView": self._view(png)})
 
+    def light(self, light: dict) -> int:
+        """A KHR_lights_punctual light; a node takes it with extensions={"KHR_lights_punctual": {"light": i}}."""
+        lights = self.doc.setdefault("extensions", {}).setdefault("KHR_lights_punctual", {"lights": []})["lights"]
+        lights.append(light)
+        self.used_extensions.add("KHR_lights_punctual")
+        return len(lights) - 1
+
     def glb(self) -> bytes:
         doc = {k: v for k, v in self.doc.items() if v != [] or k in ("scenes", "nodes")}
         while len(self.bin) % 4:
@@ -678,10 +714,15 @@ class Report:
     unread_groups: int = 0
     at_origin: int = 0
     unmatched_animations: int = 0
+    lights: int = 0                                               # light nodes, glTF lights or not
+    gltf_lights: int = 0                                          # of them, the ones that are glTF lights
 
     def lines(self) -> List[str]:
         out = [f"{len(self.models)} model(s)" + (": " + ", ".join(self.models[:12]) + (" ..." if len(self.models) > 12 else "")
                                                  if self.models else "")]
+        if self.lights:
+            out.append(f"{self.lights} light(s), {self.gltf_lights} of them as glTF lights (the rest, such as ambient "
+                       "lights, as empty nodes with their settings in extras)")
         if self.animations:
             out.append(f"{len(self.animations)} animation(s): " + ", ".join(self.animations[:12])
                        + (" ..." if len(self.animations) > 12 else ""))
@@ -826,7 +867,13 @@ class Builder:
             prims.append({"attributes": attrs, "indices": self.g.accessor(flat, "SCALAR", 5125 if big else 5123,
                                                                           target=34963),
                           "material": self.material(shader), "mode": 4})
-        index = self.g.add("meshes", {"name": ref.name, "primitives": prims}) if prims else None
+        index = None
+        if prims:
+            item: dict = {"name": ref.name, "primitives": prims}
+            order = draw_order(ref.data, ref.chunk)
+            if order is not None:
+                item["extras"] = {"drawOrder": order}
+            index = self.g.add("meshes", item)
         if skinned_to is None:
             self.meshes[key] = index
         return index
@@ -1018,6 +1065,74 @@ class Builder:
         self.report.animations.append(info.get("name") or "camera")
         return True
 
+    # lights
+
+    def lights(self, src: Source, parent: int, hour: Optional[float] = None) -> int:
+        """A map file's lights (0x13000) under a node of their own ("<file> lights"), each in a node for its
+        light group (0x2380), whose extras give the kind its record (0x8800007) says. With an hour, the
+        daylight's lights are lit for it (see daylight). Returns how many lights went in."""
+        found, groups, records = file_lights(src)
+        if not found:
+            return 0
+        if hour is not None:
+            daylight(src, found, records, hour)
+        top = self.g.node(Path(src.label).stem + " lights", parent)
+        done = set()
+        for group in groups:
+            rec = records.get(group["name"].lower())
+            extras = {"lightGroupKind": rec["kind"], "lightGroupRecord": rec["name"]} if rec else None
+            node = self.g.node(group["name"], top, extras=extras)
+            for name in group["lights"]:
+                key = name.lower()
+                if key in found and key not in done:
+                    done.add(key)                               # a light in two groups goes in once, in the first
+                    self.light(found[key], node, rec["kind"] if rec else None)
+        for key, info in found.items():
+            if key not in done:
+                self.light(info, top)
+        return len(found)
+
+    def light(self, info: dict, parent: int, kind: Optional[int] = None) -> int:
+        """One light (p3d.light's dictionary) as a node at its position (mirrored like the map's geometry),
+        turned so that its -Z points the way it shines. It is a glTF light (KHR_lights_punctual) when it is
+        a point or spot light, or a directional light without a decay range (a city-wide one), and is on and
+        adds light; a point or spot light's range is its decay range's outer size. The rest are empty nodes:
+        ambient lights, directional lights that light only their decay range (glTF's have no range), and
+        lights switched off or that take light away. Every light node has the game's settings in extras."""
+        kind_ = info.get("type")
+        argb = int(info.get("argb") or "0", 16)
+        colour = [round(((argb >> s) & 0xFF) / 255, 4) for s in (16, 8, 0)]
+        decay = info.get("decay range")
+        local = bool(decay) and decay.get("shape") != "none"
+        extras: dict = {"lightType": kind_, "color": colour, "enabled": bool(info.get("enabled"))}
+        for key, name in (("casts shadows", "castsShadows"), ("illumination", "illumination"), ("hour", "hour")):
+            if key in info:
+                extras[name] = info[key]
+        for key, name in (("decay range", "decayRange"), ("spot cone", "spotCone")):
+            if info.get(key):
+                extras[name] = {k: list(v) if isinstance(v, tuple) else v for k, v in info[key].items()}
+        if kind is not None:
+            extras["lightGroupKind"] = kind
+        place = {}
+        if _finite(info.get("position")):
+            place["translation"] = list(pos(info["position"]))
+        if kind_ in ("directional", "spot") and _finite(info.get("direction")):
+            place["rotation"] = list(camera_rotation(info["direction"], (0.0, 1.0, 0.0)))
+        ext = None
+        lit = info.get("enabled") and info.get("illumination", "adds light") == "adds light"
+        if lit and (kind_ in ("point", "spot") or (kind_ == "directional" and not local)):
+            light: dict = {"name": info.get("name", ""), "type": kind_, "color": colour,
+                           "intensity": DIRECTIONAL_LUX if kind_ == "directional" else POINT_CANDELA}
+            reach = decay_reach(decay) if local else None
+            if kind_ != "directional" and reach:
+                light["range"] = reach
+            if kind_ == "spot":
+                light["spot"] = {}       # glTF's own cone: which of the game's two angles is which isn't known
+            ext = {"KHR_lights_punctual": {"light": self.g.light(light)}}
+            self.report.gltf_lights += 1
+        self.report.lights += 1
+        return self.g.node(info.get("name") or "light", parent, extensions=ext, extras=extras, **place)
+
 
     # animations
 
@@ -1178,6 +1293,116 @@ def _unit(v: Vec3) -> Vec3:
     return (v[0] / n, v[1] / n, v[2] / n) if n > 1e-12 else (0.0, 1.0, 0.0)
 
 
+def _finite(v: Optional[Sequence[float]]) -> bool:
+    return bool(v) and all(math.isfinite(x) for x in v)  # type: ignore[union-attr]
+
+
+# --------------------------------------------------------------------------- lights
+
+def file_lights(src: Source) -> Tuple[Dict[str, dict], List[dict], Dict[str, dict]]:
+    """A file's lights (p3d.light, by name in lower case, in file order), its light groups (0x2380:
+    name, lights) and its light group records (0x8800007: name, light group, kind, frame controllers), the
+    records by their light group's name in lower case."""
+    lights: Dict[str, dict] = {}
+    groups: List[dict] = []
+    records: Dict[str, dict] = {}
+    for c in src.chunks:
+        if c.id == LIGHT:
+            info = p3d.light(src.data, c)
+            if info:
+                lights.setdefault(info["name"].lower(), info)
+        elif c.id == LIGHT_GROUP:
+            f = p3d.fields(src.data, c)
+            if f:
+                groups.append(f)
+        elif c.id == LIGHT_GROUP_RECORD:
+            f = p3d.fields(src.data, c)
+            if f:
+                records.setdefault(f["light group"].lower(), f)
+    return lights, groups, records
+
+
+def decay_reach(decay: Optional[dict]) -> Optional[float]:
+    """How far a light's decay range reaches, for glTF's range: its outer size (a sphere's first number, the
+    radius; a box's or an ellipsoid's largest). None without one."""
+    if not decay or decay.get("shape") == "none":
+        return None
+    outer = decay.get("outer") or ()
+    reach = outer[0] if decay.get("shape") == "sphere" and outer else max(outer, default=0.0)
+    return reach if math.isfinite(reach) and reach > 0 else None
+
+
+def _sample(frames: List[int], values: List[tuple], f: float, smooth: bool = True) -> tuple:
+    """A channel's value at frame f: in a straight line between its keys, or (smooth False) the last key's."""
+    if smooth:
+        return _at(frames, values, f)
+    held = values[0]
+    for k, v in zip(frames, values):
+        if k <= f:
+            held = v
+    return held
+
+
+def daylight(src: Source, lights: Dict[str, dict], records: Dict[str, dict], hour: float) -> List[str]:
+    """Light the daylight for an hour (0 to 24). The records of the daylight and of the rain (kinds 0 and 1)
+    name a frame controller (0x121201, type LITE) per light, which plays an animation of 241 frames, one
+    day (frame 0 midnight, frame 120 noon), on it: its CLR channel (Colour) gives the light's colour and its
+    DIR channel (vector) the way it shines, sampled at frame hour x 10. The values the lights store are
+    the midnight ones. Changes the lights in place and returns the names of those changed."""
+    frame = max(0.0, min(24.0, hour)) * FRAMES_PER_HOUR
+    controllers: Dict[str, p3d.Chunk] = {}
+    anims: Dict[str, p3d.Chunk] = {}
+    for c in src.chunks:
+        try:
+            if c.id == FRAME_CONTROLLER:
+                controllers.setdefault(_text(src.data, c.body[0] + 4)[0].lower(), c)
+            elif c.id == ANIMATION:
+                anims.setdefault(chunk_name(src.data, c).lower(), c)
+        except IndexError:
+            continue
+    changed = []
+    for rec in records.values():
+        if rec.get("kind") not in DAYLIGHT_KINDS:
+            continue
+        for name in rec.get("frame controllers", []):
+            fc = controllers.get(name.lower())
+            if fc is None:
+                continue
+            try:
+                kind, target, anim = frame_controller(src.data, fc)
+            except (struct.error, IndexError, UnicodeDecodeError):
+                continue
+            info, a = lights.get(target.lower()), anims.get(anim.lower())
+            if kind.upper() != "LITE" or info is None or a is None:
+                continue
+            got = False
+            for ch in p3d.walk(a.children):
+                if ch.id != p3d.COLOUR_CHANNEL and ch.id not in VECTOR_CHANNELS:
+                    continue
+                try:
+                    if ch.id == p3d.COLOUR_CHANNEL:
+                        param, frames, values = p3d.channel_keys(src.data, ch)
+                    else:
+                        param, frames, values = _vector_keys(src.data, ch)
+                except (p3d.P3dError, struct.error, IndexError, KeyError):
+                    continue
+                if not frames or len(values) != len(frames):
+                    continue
+                mode = ch.find(0x121110)
+                smooth = p3d.fields(src.data, mode).get("interpolate", True) if mode is not None else True
+                v = _sample(frames, values, frame, smooth)
+                if param == "CLR" and ch.id == p3d.COLOUR_CHANNEL:
+                    info["argb"] = "".join(f"{max(0, min(255, round(x))):02x}" for x in v)
+                    got = True
+                elif param == "DIR" and _finite(v) and any(v):
+                    info["direction"] = tuple(v)
+                    got = True
+            if got:
+                info["hour"] = hour
+                changed.append(info["name"])
+    return changed
+
+
 # --------------------------------------------------------------------------- what to export
 
 def _composite_parts(lib: Library) -> set:
@@ -1265,14 +1490,15 @@ def _world_geo(lib: Library, src: Source) -> List[str]:
 
 
 def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims: Sequence[Ref] = (),
-           lod: bool = False) -> Tuple[bytes, Report]:
+           lod: bool = False, hour: Optional[float] = None) -> Tuple[bytes, Report]:
     """The glTF (.glb) for the library's main files, and a report of what went in.
 
     Models (the default): every skin with its skeleton, every composite drawable that isn't a map's
     world geometry, and every mesh no composite uses, side by side.
     Map (map_mode): per file, its world geometry (WorldGeo 0x8800003 names a composite drawable whose
-    meshes sit in world space) and a copy of each model its instance objects place. Low-detail files
-    (miami_lod, islands_LOD) are left out when there's anything else, unless lod is set."""
+    meshes sit in world space), a copy of each model its instance objects place, and its lights (see
+    Builder.lights; hour lights the daylight for that hour, 0 to 24). Low-detail files (miami_lod,
+    islands_LOD) are left out when there's anything else, unless lod is set."""
     b = Builder(lib)
     wanted = {n.lower() for n in only}
     if map_mode:
@@ -1293,21 +1519,22 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
                     b.report.models.append(comp)
                 else:
                     b.report.missing_drawables.add(comp)
-            if not placing:
-                continue
-            placed = b.g.node(Path(src.label).stem + " instances", group)
-            for model, records in placing:
-                mref = _model_for(lib, model, prefer)
-                if not mref:
-                    b.report.unplaced[model] = b.report.unplaced.get(model, 0) + len(records)
-                    continue
-                for rec in records:
-                    if not any(rec[:3]):
-                        b.report.at_origin += 1             # never moved from (0, 0, 0): left out
+            if placing:
+                placed = b.g.node(Path(src.label).stem + " instances", group)
+                for model, records in placing:
+                    mref = _model_for(lib, model, prefer)
+                    if not mref:
+                        b.report.unplaced[model] = b.report.unplaced.get(model, 0) + len(records)
                         continue
-                    t, q, sc = instance_trs(rec)
-                    b.composite(mref, placed, model, translation=t, rotation=q, scale=sc)
-                    b.report.placed += 1
+                    for rec in records:
+                        if not any(rec[:3]):
+                            b.report.at_origin += 1             # never moved from (0, 0, 0): left out
+                            continue
+                        t, q, sc = instance_trs(rec)
+                        b.composite(mref, placed, model, translation=t, rotation=q, scale=sc)
+                        b.report.placed += 1
+            if not wanted:
+                b.lights(src, group, hour)
     else:
         parts = _composite_parts(lib)
         world = {c.lower() for src in lib.sources for c in _world_geo(lib, src)}
@@ -1436,10 +1663,15 @@ def main(argv=None) -> int:
     ap.add_argument("--lod", action="store_true", help="with --map, keep the low-detail city too")
     ap.add_argument("--split", action="store_true",
                     help="with --map, one .glb per map area in the folder OUT (they line up when imported together)")
+    ap.add_argument("--hour", type=float, default=None,
+                    help="with --map, light the daylight (in miami_lod.p3d, islands_LOD.p3d) for this hour, 0 to 24; "
+                         "without it the lights are as the files store them, at midnight")
     ap.add_argument("--only", nargs="*", default=[], help="just these models")
     ap.add_argument("--list", action="store_true", help="say what would be exported, write nothing")
     a = ap.parse_args(argv)
     try:
+        if a.hour is not None and not (a.map and 0 <= a.hour <= 24):
+            raise ExportError("--hour is for --map, and is from 0 to 24")
         mains = _files(a.files)
         if not mains:
             raise ExportError("no .p3d files there")
@@ -1479,7 +1711,7 @@ def main(argv=None) -> int:
                 if f.resolve() not in mine:
                     lib.add(f.name, read(f), main=False)
             try:
-                glb, report = export(lib, a.map, a.only, refs, a.lod)
+                glb, report = export(lib, a.map, a.only, refs, a.lod, a.hour)
             except ExportError:
                 if a.split:
                     empty += 1                                  # a region, a shared file: no area of its own

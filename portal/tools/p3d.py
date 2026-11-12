@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Read Pure3D (.p3d) files: the chunk tree with every chunk named, the fields of the chunks for models,
-skins, skeletons, shaders, textures and animations, and the models as .obj files you can open in Blender.
+skins, skeletons, shaders, textures, animations, lights, the sky and the stream graph, and the models as
+.obj files you can open in Blender.
 
     python portal/tools/p3d.py FILE.p3d                 the chunk tree, with each known chunk's fields
     python portal/tools/p3d.py FILE.p3d --depth 2       only the first two levels
@@ -74,6 +75,11 @@ NAMES: Dict[int, str] = {
     0x8800181: "Game Group", 0x8800201: "Water Dock", 0x8800202: "Water Obstacle", 0x8800203: "Water Shallow Area",
     0x9900190: "Script Object Data", 0x9900191: "Game Group Data", 0x9900192: "Script Object Property (?)",
     0x9900194: "Script Object Property Value (?)",
+    # A light's sub-chunks and the draw-order key: descriptive names of ours, from the clean-room spec
+    # docs/cleanroom/SPEC-001-lights-sky-streaming.md.
+    0x13001: "Light Direction", 0x13002: "Light Position", 0x13003: "Light Spot Cone",
+    0x13004: "Light Casts Shadows", 0x13006: "Light Decay Range", 0x13007: "Light Decay Range Rotation",
+    0x13008: "Light Illumination Kind", 0x122000: "Draw Order",
 }
 for _cid in range(0x1005002, 0x100500C):
     NAMES[_cid] = "Sound Entity"
@@ -82,6 +88,10 @@ PRIMITIVES = {0: "triangle list", 1: "triangle strip", 2: "line list", 3: "line 
 VERTEX_BITS = ((0x2000, "position"), (0x0010, "normal"), (0x0020, "colour"), (0x0080, "matrix indices"),
                (0x0100, "weights"))
 QUATERNION_CHANNELS = (0x121105, 0x121111, 0x121112, 0x121114)
+COLOUR_CHANNEL = 0x121109
+LIGHT_TYPES = {0: "ambient", 1: "point", 2: "directional", 3: "spot"}
+DECAY_SHAPES = {0: "none", 1: "sphere", 2: "box", 3: "ellipsoid"}
+ILLUMINATION = {0: "adds light", 1: "none", 2: "takes light away"}
 
 
 class P3dError(ValueError):
@@ -371,6 +381,120 @@ def _property_value(r: _R) -> dict:
             "scale": round((v[3] | v[4] << 6 | v[5] << 12) / 1000, 3) if v[6] else tuple(round(a * 0.05, 2) for a in v[3:6])}
 
 
+# Lights, the draw-order key, the sky and the stream graph: docs/FORMATS.md, from the clean-room spec
+# docs/cleanroom/SPEC-001-lights-sky-streaming.md.
+
+def _vec3(r: _R) -> Tuple[float, float, float]:
+    return tuple(round(x, 4) for x in r.floats(3))  # type: ignore[return-value]
+
+
+def _texts(r: _R, n: int) -> List[str]:
+    return [r.text() for _ in range(n) if r.left() > 0]
+
+
+def _light(r: _R) -> dict:
+    """name, version, type (0 ambient, 1 point, 2 directional, 3 spot), colour 0xAARRGGBB, the constant,
+    linear and quadratic attenuation, enabled."""
+    name, version, kind, argb = r.text(), r.u32(), r.u32(), r.u32()
+    return {"name": name, "version": version, "type": LIGHT_TYPES.get(kind, kind), "argb": f"{argb:08x}",
+            "attenuation": _vec3(r), "enabled": r.u32() != 0}
+
+
+def _light_direction(r: _R) -> dict:
+    return {"direction": _vec3(r)}                           # a unit vector: the way the light shines
+
+
+def _light_position(r: _R) -> dict:
+    return {"position": _vec3(r)}                            # the same space as the map's geometry
+
+
+def _spot_cone(r: _R) -> dict:
+    """Two angles, a falloff and a range (which angle is the inner one, and in what unit, isn't known)."""
+    a, b, falloff, reach = r.floats(4)
+    return {"angles": (round(a, 4), round(b, 4)), "falloff": round(falloff, 4), "range": round(reach, 4)}
+
+
+def _casts_shadows(r: _R) -> dict:
+    return {"casts shadows": r.u32() != 0}
+
+
+def _decay_range(r: _R) -> dict:
+    """u32 shape (0 none, 1 sphere, 2 box, 3 ellipsoid), the inner size, the outer size (3 floats each)."""
+    shape = r.u32()
+    return {"shape": DECAY_SHAPES.get(shape, shape), "inner": _vec3(r), "outer": _vec3(r)}
+
+
+def _decay_rotation(r: _R) -> dict:
+    return {"rotation": round(r.f32(), 4)}                   # about the vertical axis, radians
+
+
+def _illumination(r: _R) -> dict:
+    v = r.u32()
+    return {"illumination": ILLUMINATION.get(v, v)}
+
+
+def _light_group(r: _R) -> dict:
+    name, n = r.text(), r.u32()
+    return {"name": name, "lights": _texts(r, n)}
+
+
+def _light_group_record(r: _R) -> dict:
+    """The game's light group (SFLightGroupLoader): name, the light group's name, the kind (what the group
+    is for), then the names of its frame controllers."""
+    name, group, kind, n = r.text(), r.text(), r.u32(), r.u32()
+    return {"name": name, "light group": group, "kind": kind, "frame controllers": _texts(r, n)}
+
+
+def _draw_order(r: _R) -> dict:
+    return {"version": r.u32(), "draw order": round(r.f32(), 4)}
+
+
+def _sky(r: _R) -> dict:
+    return {"name": r.text(), "composite drawable": r.text()}
+
+
+def _stream_package(r: _R) -> dict:
+    return {"name": r.text(), "number": r.u32()}             # what the number means isn't known
+
+
+def _stream_trigger(r: _R) -> dict:
+    """name, subzone, height, the outline's points (x, y, z), the packages and the slot each goes in, then
+    two region names and a number (what those three mean isn't known)."""
+    name, subzone, height, n = r.text(), r.text(), round(r.f32(), 4), r.u32()
+    points = [_vec3(r) for _ in range(n)]
+    packages = _texts(r, r.u32())
+    slots = _texts(r, r.u32())
+    out = {"name": name, "subzone": subzone, "height": height, "points": points, "packages": packages,
+           "slots": slots}
+    if r.left() > 0:
+        out["regions"] = _texts(r, 2)
+        out["flag"] = r.u32()
+    return out
+
+
+def light(data: bytes, c: Chunk) -> dict:
+    """A Light chunk (0x13000) with what its sub-chunks say, as one dictionary: the Light's own fields,
+    then "direction", "position", "spot cone", "casts shadows", "decay range" (shape, inner, outer, and the
+    "rotation" of a sub-chunk 0x13007 under it) and "illumination", for the sub-chunks it has."""
+    out = fields(data, c)
+    if not out:
+        return {}
+    for k in c.children:
+        f = fields(data, k)
+        if not f:
+            continue
+        if k.id == 0x13003:
+            out["spot cone"] = f
+        elif k.id == 0x13006:
+            rot = k.find(0x13007)
+            if rot:
+                f.update(fields(data, rot))
+            out["decay range"] = f
+        elif k.id in (0x13001, 0x13002, 0x13004, 0x13008):
+            out.update(f)
+    return out
+
+
 FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x7000: _history,
     0x10000: _mesh, 0x10001: _skin, 0x10020: _prim_group, 0x10003: _box, 0x10004: _sphere,
@@ -385,8 +509,12 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x123000: _composite, 0x123001: _composite_part, 0x8800003: _world_geo, 0x8800004: _zone,
     0x8800005: _two_names, 0x8800112: _name_only, 0x9900190: _script_object, 0x9900191: _game_group,
     0x9900192: _object_property, 0x9900194: _property_value,
+    0x13000: _light, 0x13001: _light_direction, 0x13002: _light_position, 0x13003: _spot_cone,
+    0x13004: _casts_shadows, 0x13006: _decay_range, 0x13007: _decay_rotation, 0x13008: _illumination,
+    0x2380: _light_group, 0x8800007: _light_group_record, 0x122000: _draw_order, 0x8800002: _sky,
+    0x8800100: _stream_package, 0x8800101: _stream_trigger,
 }
-for _cid in (0x121100, 0x121101, 0x121104) + QUATERNION_CHANNELS:
+for _cid in (0x121100, 0x121101, 0x121104, COLOUR_CHANNEL) + QUATERNION_CHANNELS:
     FIELDS[_cid] = _channel
 FIELDS[0x121102] = FIELDS[0x121103] = _dof_channel
 
@@ -405,8 +533,9 @@ def fields(data: bytes, c: Chunk) -> dict:
 # --------------------------------------------------------------------------- animation values
 
 def channel_keys(data: bytes, c: Chunk) -> Tuple[str, List[int], List[tuple]]:
-    """(parameter, key frames, values) of an animation channel. Quaternions come back as (x, y, z, w);
-    a Vector1DOF or Vector2DOF channel gives only its moving components (see its mapping and constants)."""
+    """(parameter, key frames, values) of an animation channel. Quaternions come back as (x, y, z, w),
+    a Colour channel's 0xAARRGGBB values as (a, r, g, b) from 0 to 255; a Vector1DOF or Vector2DOF channel
+    gives only its moving components (see its mapping and constants)."""
     r = _R(data, *c.body)
     if c.id in (0x121102, 0x121103):
         info = _dof_channel(r)
@@ -428,6 +557,8 @@ def channel_keys(data: bytes, c: Chunk) -> Tuple[str, List[int], List[tuple]]:
     elif c.id in (0x121100, 0x121101, 0x121102, 0x121103, 0x121104):
         size = {0x121100: 1, 0x121101: 2, 0x121102: 1, 0x121103: 2, 0x121104: 3}[c.id]
         vals = [r.floats(size) for _ in range(n)]
+    elif c.id == COLOUR_CHANNEL:                             # the frames, then a u32 0xAARRGGBB per key
+        vals = [tuple((v >> s) & 0xFF for s in (24, 16, 8, 0)) for v in struct.unpack_from(f"<{n}I", data, r.p)]
     else:
         raise P3dError(f"no reader for {NAMES.get(c.id, hex(c.id))}")
     return param, frames, vals
