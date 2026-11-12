@@ -397,3 +397,16 @@ Asked by the implementer on 2026-11-12; answered by the examiner from the PC fil
 | "From" or "along" for the direction? | Along: the way the light shines (§1.1, §1.4 now say so). |
 | Is frame = hour × 10 right for the `LITE` animations? | Yes: 241 frames for 24 hours is (number of frames − 1) × hour / 24 = hour × 10. How the game blends between keys is not known; straight lines are a reasonable reading. |
 | Local directional lights as empty nodes? | Yes: they light only their decay range, which glTF can't express. |
+
+### Part 2: questions from the implementer, and answers
+
+| Question | Answer |
+| :--- | :--- |
+| Does `islands_LOD.p3d` have its own `tod` object? | Yes, with the same hours, linked straight to `island_environment_clear_<hour>` and `island_environment_rainy_<hour>` (checked). |
+| Do the colour sets' vertex numbers run across the whole mesh or restart per primitive group? | Not settled; with the whole-mesh reading, the dome's and the clouds' first vertices come out exactly as §3.4 adds up (checked at noon and midnight). |
+| How is a sky linked to `PTRN_sky`; does `rainy_skybox` have `PTRN_` or `VRTX_` animations? | By name is what the files support. The rain sky has no animations of its own (the only rain animations in `Common.p3d` are particle effects): it looks the same all day (checked). |
+| Can a `VRTX` channel carry an interpolation-mode chunk? | None of the five in `Common.p3d` do; honouring one if present is right. |
+| Padding after the frames in a quaternion channel with an odd key count? | None: `PTRN_sky`'s 21 keys read this way give exactly the heights in §3.3 (checked). |
+| Fog blending when `FogEnabled` differs; blending alpha and clamp? | Fog is on in all 24 objects, so it never differs in the game's files. Alpha and clamp: their meaning isn't known; keeping them as blended data is fine. |
+| Can the colour amounts go past 255? Are the fog colours screen (sRGB) colours? | Not in the sky's files: the largest sum is 216. The fog colours are 0 to 255 numbers in the scripts; treating them as screen colours is the plain reading. |
+| The 1.1 margin round a city; the islands' fog for the islands? | The margin is the implementer's choice (the game has none: it moves the sky with the camera). The islands have their own fog (above), so a scene of the islands should use it. |
