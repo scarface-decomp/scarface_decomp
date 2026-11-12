@@ -124,7 +124,7 @@ class _Tracks:
     def __init__(self, b: G.Builder) -> None:
         self.b, self.channels, self.samplers = b, [], []
 
-    def add(self, node: int, path: str, times: List[float], values: List[tuple]) -> None:
+    def add(self, node: int, path: str, times: List[float], values: List[tuple], step: bool = False) -> None:
         keep_t, keep_v, last = [], [], -1.0
         for t, v in zip(times, values):
             if t > last + 1e-6:
@@ -139,8 +139,17 @@ class _Tracks:
                     keep_v[i] = tuple(-a for a in keep_v[i])
         kind = "VEC4" if path == "rotation" else "VEC3"
         self.samplers.append({"input": self.b.g.accessor([(t,) for t in keep_t], "SCALAR", bounds=True),
-                              "output": self.b.g.accessor(keep_v, kind), "interpolation": "LINEAR"})
+                              "output": self.b.g.accessor(keep_v, kind), "interpolation": "STEP" if step else "LINEAR"})
         self.channels.append({"sampler": len(self.samplers) - 1, "target": {"node": node, "path": path}})
+
+
+def _length(pieces: Sequence[G.Ref]) -> float:
+    """How long an animation's pieces run, laid end to end (seconds)."""
+    total = 0.0
+    for ref in pieces:
+        info = p3d.fields(ref.data, ref.chunk)
+        total += (info.get("frames") or 0.0) / (info.get("frame rate") or 30.0)
+    return total
 
 
 def _joint_keys(pieces: Sequence[G.Ref]) -> Tuple[Dict[str, Dict[str, Tuple[List[float], List[tuple]]]], float]:
@@ -255,14 +264,46 @@ def where(script: Script, streams: Sequence[Tuple[str, bytes]]) -> Optional[Tupl
     return None
 
 
+GONE = (1e-4, 1e-4, 1e-4)              # the size of someone whose part of a joined cutscene isn't playing
+PLAY = re.compile(r'\b\w+\("((?:PAL_)?M?NIS_\w+)"\s*(?:,\s*"([\w:]*)")?')
+
+
+def plays_next(texts: Sequence[str], hashed: Callable[[str], str]) -> Dict[str, str]:
+    """Which cutscene the game starts as soon as another ends: {cutscene (lower): the next (lower)}.
+    texts: the game's mission scripts, decompiled. A script starts a cutscene with a call whose first
+    argument is its name and whose second names the function to run when it is over; where that
+    function's first act with a cutscene is to start another, the two play back to back. hashed gives
+    the form a function's name has in the compiled scripts."""
+    starts: Dict[str, List[str]] = {}                       # function (lower) -> the cutscenes it starts
+    calls: List[Tuple[str, str]] = []                       # (cutscene, the function run after it)
+    for text in texts:
+        for part in re.split(r"(?m)^function ", text)[1:]:
+            fn = part.split("(", 1)[0].strip().split("::")[-1].lower()
+            for m in PLAY.finditer(part):
+                starts.setdefault(fn, []).append(m.group(1).lower())
+                if m.group(2):
+                    calls.append((m.group(1).lower(), m.group(2)))
+    out: Dict[str, str] = {}
+    for scene, after in calls:
+        for key in (after.lower(), hashed(after).lower()):
+            then = starts.get(key)
+            if then and then[0] != scene:
+                out.setdefault(scene, then[0])
+                break
+    return out
+
+
 def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
            model: Callable[[str, str], Optional[Tuple[str, bytes]]],
-           area: Sequence[Tuple[str, bytes]] = (), library: Sequence[Tuple[str, bytes]] = ()) -> Tuple[bytes, G.Report]:
+           area: Sequence[Tuple[str, bytes]] = (), library: Sequence[Tuple[str, bytes]] = (),
+           then: Sequence[Tuple[str, Script, Sequence[Tuple[str, bytes]]]] = ()) -> Tuple[bytes, G.Report]:
     """The cutscene as a .glb. streams: its stream files (name, bytes) in order. model(kind, name) hands
     over a model's file (name, bytes) or None: kind "person" with a template's name, "tony" with his
     suit's, "vehicle" with the name of the joint its animation moves, or "weapons".
     area: the files of the map where it happens, and library the shared files they need (see
-    blender_export.area_from_files): the cast then stands on the street or in the room."""
+    blender_export.area_from_files): the cast then stands on the street or in the room.
+    then: the cutscenes the game plays straight after it (name, script, streams), joined on: each one's
+    cast is there only while its own part plays."""
     lib = G.Library()
     have = set()
     for label, data in area:
@@ -273,12 +314,38 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
         if label.lower() not in have:
             have.add(label.lower())
             lib.add(label, data, main=False)
-    for label, data in streams:
-        lib.add(label, data, main=False)
+    for part in [streams] + [st for _n, _s, st in then]:
+        for label, data in part:
+            lib.add(label, data, main=False)
     found: List[str] = []
 
     def cast(b: G.Builder) -> None:
-        found.extend(_cast(b, lib, name, script, model))
+        b._animations = None                                 # the stream files came after the map's
+        tracks = _Tracks(b)
+        loaded: Dict[str, Optional[G.Source]] = {}
+        scenes = [(name, script)] + [(n, s) for n, s, _st in then]
+        spans = []
+        start = 0.0
+        for n, sc in scenes:
+            went_in, nodes, length = _cast(b, lib, n, sc, model, tracks, loaded, start)
+            found.extend(went_in)
+            spans.append((nodes, start, start + length))
+            start += length
+        if len(scenes) > 1:                                  # each cast is there for its own part only
+            for i, (nodes, begin, end) in enumerate(spans):
+                times, sizes = [begin], [(1.0, 1.0, 1.0)]
+                if begin > 0:
+                    times, sizes = [0.0] + times, [GONE] + sizes
+                if i < len(spans) - 1:
+                    times, sizes = times + [end], sizes + [GONE]
+                for node in nodes:
+                    tracks.add(node, "scale", times, sizes, step=True)
+        b.report.models += found
+        if tracks.channels:
+            # The only animation in the file. Blender plays a file's first animation and parks the rest: with
+            # the map's own (a door swinging) ahead of it, everybody stood with their arms out.
+            b.g.doc["animations"] = [{"name": ACTION + name, "channels": tracks.channels, "samplers": tracks.samplers}]
+            b.report.animations = [ACTION + name]
     glb, report = G.export(lib, map_mode=True, also=cast)
     if not found:
         raise G.ExportError("none of this cutscene's people or vehicles are in your copied game files")
@@ -286,14 +353,18 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
 
 
 def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
-          model: Callable[[str, str], Optional[Tuple[str, bytes]]]) -> List[str]:
-    """Puts the cutscene's people, vehicles and camera into b's scene; who went in."""
-    b._animations = None                                     # the stream files came after the map's
-    tracks = _Tracks(b)
+          model: Callable[[str, str], Optional[Tuple[str, bytes]]], tracks: _Tracks,
+          loaded: Dict[str, Optional[G.Source]], start: float) -> Tuple[List[str], List[int], float]:
+    """Puts one cutscene's people, vehicles and camera into b's scene, its animations beginning at start
+    (seconds): who went in, their nodes, and how long it runs."""
     root = b.g.node(name)
     left_out: List[str] = []
     went_in: List[str] = []
-    loaded: Dict[str, Optional[G.Source]] = {}
+    nodes: List[int] = []
+    length = 0.0
+
+    def later(times: List[float]) -> List[float]:
+        return [start + t for t in times] if start else times
 
     def source(kind: str, wanted: str) -> Optional[G.Source]:
         key = kind + ":" + wanted.lower()
@@ -340,6 +411,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             left_out.append(label)
             continue
         went_in.append(label)
+        nodes.append(spot)
         hand = copy.nodes.get(HAND)
         if who in script.holds and hand is not None:
             guns = source("weapons", "")
@@ -351,15 +423,17 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             else:
                 left_out.append(label + "'s " + WEAPON.sub("", script.holds[who]))
         if anim:
-            keys, _length = _joint_keys(_pieces(b, anim))
+            keys, ran = _joint_keys(_pieces(b, anim))
+            length = max(length, ran)
             for joint, paths in keys.items():
                 node = copy.nodes.get(joint)
                 if node is not None:
                     for path, (times, values) in paths.items():
-                        tracks.add(node, path, times, values)
+                        tracks.add(node, path, later(times), values)
     for who, anim in script.drives.items():
         label = next((k for k in script.cast if k.lower() == who), who)
-        keys, _length = _joint_keys(_pieces(b, anim))
+        keys, ran = _joint_keys(_pieces(b, anim))
+        length = max(length, ran)
         joint = next(iter(keys), "")
         src = source("vehicle", joint) if joint else None
         cref = None
@@ -371,23 +445,21 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         mover = b.g.node(label, root)
         b.composite(cref, mover)
         went_in.append(label)
+        nodes.append(b.g.node(label + " in the scene", root))
+        b.g.doc["nodes"][root]["children"].remove(mover)     # under a node of its own, to be shown and hidden
+        b.g.doc["nodes"][nodes[-1]]["children"] = [mover]
         for path, (times, values) in keys[joint].items():
-            tracks.add(mover, path, times, values)
+            tracks.add(mover, path, later(times), values)
     if script.camera:
         pieces = _pieces(b, script.camera)
         if pieces:
+            length = max(length, _length(pieces))
             ci = b.g.add("cameras", {"name": script.camera, "type": "perspective",
                                      "perspective": {"aspectRatio": 4 / 3, "yfov": 0.75, "znear": 0.1, "zfar": 5000.0}})
             cam = b.g.node(script.camera, root, camera=ci)
             for path, (times, values) in _camera_keys(pieces).items():
-                tracks.add(cam, path, times, values)
+                tracks.add(cam, path, later(times), values)
             went_in.append("camera")
-    b.report.models += went_in
-    if tracks.channels:
-        # The only animation in the file. Blender plays a file's first animation and parks the rest: with
-        # the map's own (a door swinging) ahead of it, everybody stood with their arms out.
-        b.g.doc["animations"] = [{"name": ACTION + name, "channels": tracks.channels, "samplers": tracks.samplers}]
-        b.report.animations = [ACTION + name]
     for label in left_out:
         b.report.missing_drawables.add(label)
-    return went_in
+    return went_in, nodes, length

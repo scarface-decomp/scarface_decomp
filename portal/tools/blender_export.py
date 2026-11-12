@@ -39,6 +39,8 @@ import game_assets as GA
 import p3d_gltf as P3G
 import cutscene as CUT
 import stream_graph as SG
+import torque_names as TN
+import torque_script as TS
 
 AREA_FOLDERS = ("packages/z04/", "packages/azones/", "packages/dzones/")
 CITY = "packages/z04/"
@@ -350,29 +352,84 @@ def model_glb(out: Path, index: Optional[dict], version: str, game_path: str, da
     return glb, report
 
 
-def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str) -> Tuple[bytes, "P3G.Report"]:
+def _scene_rows(index: Optional[dict], version: str) -> Dict[str, str]:
+    return {("/" + r[0].lower().replace("\\", "/")): r[0] for r in _rows(index, version) if r[4]}
+
+
+_NEXT: Dict[tuple, Dict[str, str]] = {}
+
+
+def plays_next(out: Path, index: Optional[dict], version: str) -> Dict[str, str]:
+    """Which cutscene the game plays straight after another, from the copied mission scripts (see
+    cutscene.plays_next): {cutscene (lower): the next (lower)}. Worked out once for a copy."""
+    rows = _scene_rows(index, version)
+    key = (version, len(rows), str(out))
+    if key not in _NEXT:
+        texts = []
+        for low, path in rows.items():
+            if "/scriptc/" not in low or not low.endswith((".cso", ".dso")):
+                continue
+            p = GA.file_on_disk(out, index, version, path)
+            try:
+                raw = p.read_bytes() if p is not None else b""
+                if b"NIS_" in raw:
+                    texts.append(TS.decompile(raw))
+            except Exception:  # a script the decompiler can't read tells nothing: the rest still do
+                continue
+        _NEXT[key] = CUT.plays_next(texts, TN.compiled_name)
+    return _NEXT[key]
+
+
+def cutscenes(out: Path, index: Optional[dict], version: str) -> List[dict]:
+    """The copied cutscenes, one entry each: [{name, then: [the ones the game plays straight after]}]. A
+    cutscene kept twice (PAL_<name>, for European televisions) is listed once; one that only ever plays
+    on the end of another is listed under that one."""
+    rows = _scene_rows(index, version)
+    found: Dict[str, str] = {}
+    for low in rows:
+        m = re.search(r"/art/nis/fsc/([^/]+)\.fsc$", low)
+        if m:
+            found[m.group(1)] = Path(rows[low]).stem
+    after = plays_next(out, index, version) if found else {}
+    out_: List[dict] = []
+    follows = {b for a, b in after.items() if a in found}
+    for low in sorted(found):
+        if low.startswith("pal_") and low[4:] in found:
+            continue
+        chain, at = [], low
+        while at in after and after[at] in found and after[at] not in chain and after[at] != low and len(chain) < 6:
+            at = after[at]
+            chain.append(found[at])
+        out_.append({"name": found[low], "then": chain, "follows": low in follows})
+    return out_
+
+
+def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, join: bool = True) -> Tuple[bytes, "P3G.Report"]:
     """A cutscene (art/nis/<scene>) with its people, vehicles and camera, from the copied files: its
-    script says who is in it, its stream files hold what they do (see cutscene.py)."""
-    rows = {("/" + r[0].lower().replace("\\", "/")): r[0] for r in _rows(index, version) if r[4]}
+    script says who is in it, its stream files hold what they do (see cutscene.py). With join, the
+    cutscenes the game plays straight after it are joined on."""
+    rows = _scene_rows(index, version)
 
     def named(ending: str) -> Optional[Path]:
         ending = ending.lower()
         hit = next((path for low, path in rows.items() if low.endswith(ending)), None)
         return GA.file_on_disk(out, index, version, hit) if hit else None
 
-    fsc = named(f"/art/nis/fsc/{scene}.fsc")
-    if fsc is None:
-        raise P3G.ExportError("that cutscene's script isn't in your copied game files")
-    folder = f"/art/nis/{scene}/".lower()
-    streams = []
-    for low, path in rows.items():
-        m = re.search(re.escape(folder) + r"stream(\d+)\.p3d$", low)
-        if m:
-            p = GA.file_on_disk(out, index, version, path)
-            if p is not None:
-                streams.append((int(m.group(1)), p))
-    if not streams:
-        raise P3G.ExportError("that cutscene's animations aren't in your copied game files")
+    def parts(name: str):
+        fsc = named(f"/art/nis/fsc/{name}.fsc")
+        if fsc is None:
+            raise P3G.ExportError("that cutscene's script isn't in your copied game files")
+        folder = f"/art/nis/{name}/".lower()
+        streams = []
+        for low, path in rows.items():
+            m = re.search(re.escape(folder) + r"stream(\d+)\.p3d$", low)
+            if m:
+                p = GA.file_on_disk(out, index, version, path)
+                if p is not None:
+                    streams.append((int(m.group(1)), p))
+        if not streams:
+            raise P3G.ExportError("that cutscene's animations aren't in your copied game files")
+        return CUT.read_script(fsc.read_text(encoding="latin-1")), [(p.name, p.read_bytes()) for _n, p in sorted(streams)]
 
     def model(kind: str, wanted: str) -> Optional[Tuple[str, bytes]]:
         if kind == "tony":
@@ -389,19 +446,31 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str) -> 
             return (p.name, p.read_bytes()) if p is not None else None
         except OSError:
             return None
-    script = CUT.read_script(fsc.read_text(encoding="latin-1"))
-    pieces = [(p.name, p.read_bytes()) for _n, p in sorted(streams)]
+    script, pieces = parts(scene)
+    then = []
+    if join:
+        entry = next((c for c in cutscenes(out, index, version) if c["name"].lower() == scene.lower()), None)
+        for name in (entry or {}).get("then", []):
+            try:
+                then.append((name,) + parts(name))
+            except P3G.ExportError:
+                break
     # The street or room it happens in: what the game keeps loaded at that spot (the stream graph).
     area: List[Tuple[str, bytes]] = []
     library: List[Tuple[str, bytes]] = []
-    spot = CUT.where(script, pieces)
     graph = named("/art/levels/z04/streamgraph.p3d")
-    if spot is not None and graph is not None:
+    spots = [w for w in (CUT.where(sc, st) for sc, st in [(script, pieces)] + [(sc, st) for _n, sc, st in then]) if w]
+    if spots and graph is not None:
         try:
-            loaded = SG.loaded_at(SG.triggers(graph.read_bytes()), spot[0], spot[1])
-            if loaded.inside:
+            triggers = SG.triggers(graph.read_bytes())
+            seen = set()
+            for spot in spots:
+                loaded = SG.loaded_at(triggers, spot[0], spot[1])
+                if not loaded.inside:
+                    continue
                 for package, slot in loaded.packages:
-                    if slot in ("Shell", "Detail"):
+                    if slot in ("Shell", "Detail") and package.lower() not in seen:
+                        seen.add(package.lower())
                         p = named(f"/packages/z04/{package}.p3d")
                         if p is not None:
                             area.append((p.name, p.read_bytes()))
@@ -410,18 +479,18 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str) -> 
         except (OSError, P3G.p3d.P3dError, struct.error, ValueError, IndexError):
             area, library = [], []
     try:
-        glb, report = CUT.export(scene, script, pieces, model, area, library)
+        glb, report = CUT.export(scene, script, pieces, model, area, library, then)
     except P3G.ExportError:
         raise
     except (P3G.p3d.P3dError, struct.error, ValueError, IndexError, KeyError):
         if not area:
             raise
-        return CUT.export(scene, script, pieces, model)          # the map wouldn't come in: the cast without it
+        return CUT.export(scene, script, pieces, model, then=then)          # the map wouldn't come in: the cast without it
     if report.unplaced and area:                             # props kept with another area (see area_from_files)
         have = [n for n, _d in area] + [n for n, _d in library]
         extra = _files_naming(_more_library(out, index, version), report.unplaced, have)
         if extra:
-            again = CUT.export(scene, script, pieces, model, area, library + extra)
+            again = CUT.export(scene, script, pieces, model, area, library + extra, then)
             if sum(again[1].unplaced.values()) < sum(report.unplaced.values()):
                 return again
     return glb, report
@@ -980,6 +1049,7 @@ OPEN_SCRIPT = r"""
 import bpy, json, re, struct, traceback
 FILES = %(files)r
 SAVE = %(save)r
+FPS = %(fps)r
 STATE = {"at": 0, "problems": [], "undo": None}
 NOTE = (SAVE or (FILES[0] if FILES else "scene")) + ".import-error.txt"
 
@@ -1032,8 +1102,10 @@ def say(text):
 def start():
     for o in list(bpy.data.objects):            # the start-up cube, light and camera
         bpy.data.objects.remove(o, do_unlink=True)
+    # FPS is 30, or 60 or 120 when asked: Blender fills in between the game's poses, so they play
+    # smoother at the same speed.
     try:                                         # the game's animations are made for 30 frames a second: set
-        bpy.context.scene.render.fps = 30        # before they come in, or Blender lays their keys out for its
+        bpy.context.scene.render.fps = FPS       # before they come in, or Blender lays their keys out for its
         bpy.context.scene.render.fps_base = 1.0  # own 24 and they play slow and jerky
     except Exception:
         pass
@@ -1344,12 +1416,16 @@ def remember_blender(bin_dir: Path, exe: str) -> Optional[str]:
     return None
 
 
-def open_in_blender(exe: Path, files: List[Path], save: Optional[Path], work: Path) -> None:
+FRAME_RATES = (30, 60, 120)
+
+
+def open_in_blender(exe: Path, files: List[Path], save: Optional[Path], work: Path, fps: int = 30) -> None:
     """Start Blender (not waiting for it) with the .glb files imported into a new scene, saved as save."""
     work.mkdir(parents=True, exist_ok=True)
     script = work / "open_in_blender.py"
     script.write_text(OPEN_SCRIPT % {"files": [str(f.resolve()) for f in files],
-                                     "save": str(save.resolve()) if save else None}, encoding="utf-8")
+                                     "save": str(save.resolve()) if save else None,
+                                     "fps": fps if fps in FRAME_RATES else 30}, encoding="utf-8")
     flags = 0
     if os.name == "nt":
         flags = getattr(subprocess, "DETACHED_PROCESS", 0) | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)

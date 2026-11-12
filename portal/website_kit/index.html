@@ -1345,6 +1345,24 @@
             </div>
             <p class="gf-notes" id="gfb-area-note">Its shell and detail files in one scene, with the textures and placed models from its region.</p>
             <p class="gf-notes" id="gfb-area-status" role="status" aria-live="polite"></p>
+            <h3 class="gf-h">A cutscene</h3>
+            <div class="gfb-row">
+              <label class="sr-only" for="gfb-scene">Cutscene</label>
+              <select id="gfb-scene" class="input-box" onchange="updateGfSceneLink()"></select>
+              <button type="button" class="btn-sm" id="gfb-scene-view" onclick="gfViewScene()">View here</button>
+              <button type="button" class="btn-sm" id="gfb-scene-open" onclick="gfOpenScene()">Open in Blender</button>
+              <button type="button" class="btn-sm" id="gfb-scene-dl" onclick="gfDownloadScene()">Download .glb</button>
+            </div>
+            <p class="gf-notes" id="gfb-scene-note">Everybody in it, the vehicles and the camera, moving together, on the street or in the room where it happens. Each cutscene is listed once (the game keeps a second copy of each for European televisions), and the ones the game plays straight after one another come as one. In Blender, press Space to play it. View here shows how it starts.</p>
+            <div class="gfb-row gfb-pick">
+              <label for="gfb-fps">Frames a second in Blender</label>
+              <select id="gfb-fps" class="input-box" onchange="saveGfSpeed()">
+                <option value="30">30 (as the game plays them)</option>
+                <option value="60">60 (smoother)</option>
+                <option value="120">120 (smoothest)</option>
+              </select>
+            </div>
+            <p class="gf-notes" id="gfb-scene-status" role="status" aria-live="polite"></p>
             <h3 class="gf-h">The whole city</h3>
             <p class="gf-notes">Every area of the city, one <code>.glb</code> each, into <code>extracted/blender/</code> under the version's name, each at its place in the city. Then <b>Open the whole city in Blender</b> brings them all into one scene, joined up, and saves it as one <code>.blend</code>.</p>
             <div class="gf-run">
@@ -3553,6 +3571,7 @@
     $('gf-speed').hidden = false;
     $('gf-use-cores').checked = !!d.use_cores;
     $('gfb-xbox-look').checked = !!d.xbox_look;
+    $('gfb-fps').value = String(d.fps || 30);
     $('gf-cores-text').textContent = 'Use all ' + fmtInt(d.cores) + ' processor cores: copy the versions at the same time '
       + '(when the discs are on a fast drive, an SSD) and export the city ' + fmtInt(d.workers) + ' areas at a time.';
     const gpu = $('gf-use-gpu');
@@ -3574,7 +3593,7 @@
 
   async function saveGfSpeed() {
     let res;
-    try { res = await postJson('/api/game-files/speed', { use_cores: $('gf-use-cores').checked, use_gpu: $('gf-use-gpu').checked, xbox_look: $('gfb-xbox-look').checked }); }
+    try { res = await postJson('/api/game-files/speed', { use_cores: $('gf-use-cores').checked, use_gpu: $('gf-use-gpu').checked, xbox_look: $('gfb-xbox-look').checked, fps: Number($('gfb-fps').value) || 30 }); }
     catch (e) { res = { ok: false, error: e.message }; }
     if (!res.ok) toast(res.error || 'Couldn’t keep the setting.', 'err');
   }
@@ -3898,6 +3917,50 @@
     GF_TAB = v;
     GF_KIND = '';
     renderGfResult();
+  }
+
+  /* The cutscenes, one entry each: PAL copies left out, the ones the game plays back to back joined. */
+  async function loadGfScenes(key) {
+    const sel = $('gfb-scene');
+    let d;
+    try { d = await apiFetchJson('/api/game-files/cutscenes?' + new URLSearchParams({ version: GF_TAB }).toString()); }
+    catch (e) { d = { cutscenes: [] }; }
+    if (GFB_AREAS_FOR !== key) return;
+    sel.textContent = '';
+    (d.cutscenes || []).filter((c) => !c.follows).forEach((c) => {
+      const o = el('option', c.name + ((c.then || []).length ? ', then ' + c.then.join(', then ') : ''));
+      o.value = c.name;
+      sel.appendChild(o);
+    });
+    if (!sel.options.length) {
+      const o = el('option', 'No cutscenes copied for this version');
+      o.value = '';
+      sel.appendChild(o);
+    }
+    updateGfSceneLink();
+  }
+
+  function updateGfSceneLink() {
+    const name = $('gfb-scene').value;
+    $('gfb-scene-open').disabled = !name;
+    $('gfb-scene-view').disabled = !name;
+    $('gfb-scene-dl').disabled = !name;
+    $('gfb-scene-status').textContent = '';
+  }
+
+  function gfOpenScene() {
+    const name = $('gfb-scene').value;
+    if (name) gfOpenInBlender({ scene: name }, $('gfb-scene-status'));
+  }
+
+  function gfDownloadScene() {
+    const name = $('gfb-scene').value;
+    if (name) gfDownloadGlb(gfFileUrl('model', GF_TAB, '', { scene: name }), name + '.glb', $('gfb-scene-status'));
+  }
+
+  function gfViewScene() {
+    const name = $('gfb-scene').value;
+    if (name) gfView(gfFileUrl('model', GF_TAB, '', { scene: name }), name, $('gfb-scene-status'));
   }
 
   function updateGfAreaLink() {
@@ -4531,7 +4594,7 @@
     const vers = Object.keys(s.versions || {});
     if (!vers.includes(GF_TAB)) { GF_TAB = vers[0] || ''; GF_KIND = ''; }
     const areasKey = GF_TAB + '|' + (s.created || '');
-    if (GFB_AREAS_FOR !== areasKey) loadGfAreas(areasKey);
+    if (GFB_AREAS_FOR !== areasKey) { loadGfAreas(areasKey); loadGfScenes(areasKey); }
     let sub = s.mode_label + (s.folders === 'type' ? ', by type' : '') + ', copied ' + s.created + '.';
     if (s.best) {
       sub += ' Best/ has ' + fmtInt(s.best.files) + ' files: ' + Object.keys(s.best.from).filter((v) => s.best.from[v])

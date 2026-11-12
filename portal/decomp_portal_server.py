@@ -135,7 +135,8 @@ def speed_settings() -> dict:
         d = json.loads(SPEED_FILE.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         d = {}
-    return {"cores": d.get("cores") is not False, "gpu": d.get("gpu") is not False, "xbox_look": d.get("xbox_look") is True}
+    return {"cores": d.get("cores") is not False, "gpu": d.get("gpu") is not False, "xbox_look": d.get("xbox_look") is True,
+            "fps": d.get("fps") if d.get("fps") in BX.FRAME_RATES else 30}
 
 
 def apply_texture_look(on: bool) -> None:
@@ -2307,6 +2308,10 @@ class Handler(BaseHTTPRequestHandler):
                                "city_files": len(list(BLENDER.folder(q1("version")).glob("*.glb")))
                                if q1("version") in GA.LABELS else 0,
                                "city_current": q1("version") in GA.LABELS and BX.city_current(BLENDER.folder(q1("version")))})
+        if u.path == "/api/game-files/cutscenes":
+            found = BX.cutscenes(GA.out_dir(GAME_FILES.bin_dir), GAME_FILES.index(), q1("version")) \
+                if q1("version") in GA.LABELS else []
+            return self._json({"ok": True, "cutscenes": found})
         if u.path == "/api/game-files/blender":
             return self._json(dict(BLENDER.status, ok=True))
         if u.path == "/api/game-files/textures":
@@ -2316,7 +2321,7 @@ class Handler(BaseHTTPRequestHandler):
             card = MOVIES.graphics_card(ffmpeg)
             st = speed_settings()
             return self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "xbox_look": st["xbox_look"],
-                               "cores": os.cpu_count() or 1,
+                               "fps": st["fps"], "cores": os.cpu_count() or 1,
                                "workers": BX.workers_wanted(True), "ffmpeg": ffmpeg is not None,
                                "gpu": card[1] if card else ""})
         if u.path == "/api/game-files/list":
@@ -2615,6 +2620,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": "Requests from other websites are not accepted."}, 403)
         if what == "model" and q1("area"):
             return self._send_area(q1("version"), q1("area"))
+        if what == "model" and q1("scene"):
+            return self._send_cutscene(q1("version"), q1("scene"))
         if what == "subtitles":                       # what is said in a sound, from its subtitle file
             sub = GA.companion(GAME_FILES.index(), q1("version"), q1("path"))
             p = GAME_FILES.file_path(q1("version"), sub) if sub else None
@@ -2749,6 +2756,17 @@ class Handler(BaseHTTPRequestHandler):
         name = re.sub(r'[^A-Za-z0-9._-]', "_", Path(game_path.replace("\\", "/")).stem) + ".glb"
         self._send(200, glb, "model/gltf-binary", {"Content-Disposition": f'attachment; filename="{name}"'})
 
+    def _send_cutscene(self, version: str, scene: str) -> None:
+        """A cutscene, with the ones the game plays straight after it, as one .glb."""
+        try:
+            glb, _report = BX.cutscene_glb(GA.out_dir(GAME_FILES.bin_dir), GAME_FILES.index(), version, scene)
+        except P3G.ExportError as e:
+            return self._json({"ok": False, "error": f"{str(e)[:1].upper()}{str(e)[1:]}."}, 404)
+        except (OSError, P3G.p3d.P3dError) as e:
+            return self._json({"ok": False, "error": f"Couldn't read the cutscene's files: {e}"}, 500)
+        name = re.sub(r'[^A-Za-z0-9._-]', "_", scene) + ".glb"
+        self._send(200, glb, "model/gltf-binary", {"Content-Disposition": f'attachment; filename="{name}"'})
+
     def _send_area(self, version: str, key: str) -> None:
         """A whole map area (its shell and detail files) as one .glb."""
         try:
@@ -2799,6 +2817,13 @@ class Handler(BaseHTTPRequestHandler):
                 if not files:
                     return self._json({"ok": False, "error": "Export the city first: then it opens as one scene."}, 404)
                 glbs, save = files, folder / f"{GA.LABELS[version]} city.blend"
+            elif body.get("scene"):
+                scene = str(body["scene"])
+                glb, _r = BX.cutscene_glb(out, GAME_FILES.index(), version, scene)
+                name = re.sub(r'[^A-Za-z0-9._-]', "_", scene)
+                glbs, save = [folder / BX.OPENED / f"{name}.glb"], folder / BX.OPENED / f"{name}.blend"
+                glbs[0].parent.mkdir(parents=True, exist_ok=True)
+                glbs[0].write_bytes(glb)
             elif body.get("area"):
                 key = str(body["area"])
                 glb, _r = BX.area_glb(out, GAME_FILES.index(), version, key)
@@ -2820,7 +2845,8 @@ class Handler(BaseHTTPRequestHandler):
             if reopened:                       # the city was brought in and saved before: open that, at once
                 BX.open_blend(exe, save)
             else:
-                BX.open_in_blender(exe, glbs, save, GA.made_dir(GAME_FILES.bin_dir, BX.OUT_NAME) / "_scripts")
+                BX.open_in_blender(exe, glbs, save, GA.made_dir(GAME_FILES.bin_dir, BX.OUT_NAME) / "_scripts",
+                                   speed_settings()["fps"])
         except P3G.ExportError as e:
             return self._json({"ok": False, "error": f"Nothing to show in Blender: {e}."}, 415)
         except (OSError, P3G.p3d.P3dError) as e:
@@ -2851,13 +2877,16 @@ class Handler(BaseHTTPRequestHandler):
         for k, field in (("cores", "use_cores"), ("gpu", "use_gpu"), ("xbox_look", "xbox_look")):
             if isinstance(body.get(field), bool):
                 st[k] = body[field]
+        if body.get("fps") in BX.FRAME_RATES:
+            st["fps"] = body["fps"]
         try:
             SPEED_FILE.parent.mkdir(parents=True, exist_ok=True)
             SPEED_FILE.write_text(json.dumps(st), encoding="utf-8")
         except OSError as e:
             return self._json({"ok": False, "error": f"Couldn't keep the setting: {e}"}, 500)
         apply_texture_look(st["xbox_look"])
-        self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "xbox_look": st["xbox_look"]})
+        self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "xbox_look": st["xbox_look"],
+                    "fps": st["fps"]})
 
     def post_game_files_textures_stop(self, body):
         TEXTURE_JOB.stop()

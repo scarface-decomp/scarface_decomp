@@ -137,3 +137,74 @@ def test_the_cast_on_their_map_with_a_weapon_in_hand():
     assert "Thug1's metal_pipe" in [doc["nodes"][c]["name"] for c in hand["children"]]
     assert names.count("right_hand_attach") == 2 and not report.missing_drawables
     assert [a["name"] for a in doc["animations"]] == ["Cutscene T"]           # the map's own animations don't come first
+
+
+def test_which_cutscene_the_game_plays_next():
+    hashed = lambda name: "stx" + name.lower()[:5]
+    scripts = ['''
+function stxaaaa::stxbbbb(%x)
+{
+    stxplay("MNIS_MB4A_0_Babylon_Intro", "M_B4A_SiegeNIS", "NIS");
+}
+
+function stxm_b4a()
+{
+    stxplay("MNIS_MB4A_0_Empty_the_Club", "Stage1Go", "NIS", "", "", "", "", 0);
+}
+
+function stxstage()
+{
+    stxsay("go");
+}
+''']
+    assert C.plays_next(scripts, hashed) == {"mnis_mb4a_0_babylon_intro": "mnis_mb4a_0_empty_the_club"}
+    assert C.plays_next([], hashed) == {}
+
+
+def test_cutscenes_played_back_to_back_come_as_one(tmp_path):
+    from test_p3d_gltf import animation, skeleton, skin_chunk, values, copied_game
+    import blender_export as BX
+    rig = skeleton("rig", [("Root", 0, (0, 0, 0)), ("Hip", 0, (0, 1.0, 0.5))])
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    person = p3d(rig, skin_chunk(tri, [0, 1, 2], [(0.75, 0.25, 0.0)] * 3, [0x01000000] * 3, [1, 0]))
+    half = 2 ** -0.5
+    turn = lambda name: p3d(animation(name + "0", [("hip", [(0, (0, 0, 0, 1)), (10, (0, half, 0, half))])]))
+    fsc = lambda who: (f'NISResourceLoader {{ Name "{who}"; TemplateName "CharTemp_X"; }}; '
+                       f'NISCharacterPosition {{ CharacterName "{who}"; Position {{ x 0; y 0; z 0; }}; Facing 0; }}; '
+                       f'NISCharacterAnimation {{ CharacterName "{who}"; AnimationName "{who}_move"; }};').encode()
+    z = "cement.rcf/art/nis/"
+    out, index = copied_game(tmp_path, {
+        z + "fsc/MNIS_One.fsc": fsc("Ann"), z + "MNIS_One/stream0.p3d": turn("Ann_move"),
+        z + "fsc/PAL_MNIS_One.fsc": fsc("Ann"), z + "PAL_MNIS_One/stream0.p3d": turn("Ann_move"),
+        z + "fsc/MNIS_Two.fsc": fsc("Bob"), z + "MNIS_Two/stream0.p3d": turn("Bob_move"),
+        "cement.rcf/art/characters/npc/CharTemp_X.p3d": person})
+    BX._NEXT.clear()
+    real = BX.plays_next
+    BX.plays_next = lambda o, i, v: {"mnis_one": "mnis_two"}
+    try:
+        listed = BX.cutscenes(out, index, "pc")
+        assert [(c["name"], c["then"], c["follows"]) for c in listed] == [("MNIS_One", ["MNIS_Two"], False),
+                                                                           ("MNIS_Two", [], True)]      # the PAL copy isn't listed
+        glb, report = BX.cutscene_glb(out, index, "pc", "MNIS_One")
+        alone, _r = BX.cutscene_glb(out, index, "pc", "MNIS_One", join=False)
+    finally:
+        BX.plays_next = real
+    doc, binc = read_glb(glb)
+    assert report.models == ["Ann", "Bob"] and [a["name"] for a in doc["animations"]] == ["Cutscene MNIS_One"]
+    ann = next(i for i, n in enumerate(doc["nodes"]) if n["name"] == "Ann")
+    bob = next(i for i, n in enumerate(doc["nodes"]) if n["name"] == "Bob")
+    anim = doc["animations"][0]
+
+    def track(node, path):
+        ch = next(c for c in anim["channels"] if c["target"] == {"node": node, "path": path})
+        sm = anim["samplers"][ch["sampler"]]
+        return [t for (t,) in values(doc, binc, sm["input"])], values(doc, binc, sm["output"]), sm["interpolation"]
+    third = 10 / 30
+    times, sizes, how = track(ann, "scale")                                    # Ann is there for the first part
+    assert times == pytest.approx([0.0, third]) and sizes[0] == pytest.approx((1, 1, 1)) and sizes[1][0] < 0.01 and how == "STEP"
+    times, sizes, _how = track(bob, "scale")                                   # Bob from when the second begins
+    assert times == pytest.approx([0.0, third]) and sizes[0][0] < 0.01 and sizes[1] == pytest.approx((1, 1, 1))
+    hip = next(c["target"]["node"] for c in anim["channels"] if c["target"]["path"] == "rotation"
+               and doc["nodes"][c["target"]["node"]]["name"] == "Hip" and track(c["target"]["node"], "rotation")[0][0] > 0.1)
+    assert track(hip, "rotation")[0] == pytest.approx([third, 2 * third])      # his moves start when hers end
+    assert len(read_glb(alone)[0]["animations"][0]["channels"]) == 1           # by itself: no one to show or hide

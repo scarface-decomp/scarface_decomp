@@ -764,7 +764,7 @@ def test_open_in_blender(monkeypatch, tmp_path):
     import blender_export as BX
     server, out, index = _server(monkeypatch, tmp_path, city_files())
     launched = []
-    monkeypatch.setattr(server.BX, "open_in_blender", lambda exe, files, save, work: launched.append((exe, files, save)))
+    monkeypatch.setattr(server.BX, "open_in_blender", lambda exe, files, save, work, fps=30: launched.append((exe, files, save)))
     sent = []
 
     class Fake:
@@ -995,7 +995,7 @@ def test_blender_script_is_whole_and_a_saved_city_is_reused(tmp_path):
     import ast
     import os
     import blender_export as BX
-    src = BX.OPEN_SCRIPT % {"files": ["a.glb", "b.glb"], "save": "city.blend"}
+    src = BX.OPEN_SCRIPT % {"files": ["a.glb", "b.glb"], "save": "city.blend", "fps": 30}
     ast.parse(src)
     assert "use_global_undo = False" in src and "bringing in area {} of {}" in src
     glb, blend = tmp_path / "a.glb", tmp_path / "city.blend"
@@ -1567,7 +1567,7 @@ def blender_script(monkeypatch, files):
         register=lambda *a, **k: None)), data=types.SimpleNamespace(worlds=types.SimpleNamespace(new=lambda name: FakeWorld())))
     monkeypatch.setitem(sys.modules, "bpy", bpy)
     ns: dict = {}
-    exec(compile(BX.OPEN_SCRIPT % {"files": [str(f) for f in files], "save": None}, "open_in_blender.py", "exec"), ns)
+    exec(compile(BX.OPEN_SCRIPT % {"files": [str(f) for f in files], "save": None, "fps": 30}, "open_in_blender.py", "exec"), ns)
     return ns
 
 
@@ -1591,7 +1591,7 @@ def test_the_blender_script_shows_the_fog(tmp_path, monkeypatch):
     assert scene.view_layers[0].use_pass_mist is True and json.loads(scene["scarface_fog"]) == fog
     assert not ns["show_fog"](FakeScene(), None) and not ns["show_fog"](FakeScene(), dict(fog, enabled=False))
     import blender_export as BX
-    script = BX.OPEN_SCRIPT % {"files": ["a.glb"], "save": "a.blend"}
+    script = BX.OPEN_SCRIPT % {"files": ["a.glb"], "save": "a.blend", "fps": 30}
     assert "show_fog(scene, next((f for f in (fog_of(p) for p in FILES) if f), None))" in script
 
 
