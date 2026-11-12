@@ -820,6 +820,11 @@ def test_the_blender_script_imports_and_saves(tmp_path, monkeypatch):
     assert "bpy.app.timers.register(later" in script and "temp_override" in script
     assert "disable_bone_shape=True" in script and "read_homefile" not in script
     assert ".import-error.txt" in script and "if SAVE and shown" in script
+    # people stand in their rest pose (Blender would lay the library's first animation, a chicken's, on one
+    # of them), the animations are kept, and the far-away copy of a model is hidden
+    assert "tidy(scene)" in script and "animation_data.action = None" in script and "use_fake_user = True" in script
+    assert '("_low", "_high")' in script and "hide_set(True)" in script
+    compile(script, "open_in_blender.py", "exec")
 
 
 # --------------------------------------------------------------------------- props: how they start, and what they become

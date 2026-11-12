@@ -499,6 +499,7 @@ def bring_in():
         except Exception:  # one area that won't come in shouldn't stop the rest
             problems.append(f + "\n" + traceback.format_exc())
     scene = bpy.context.scene
+    tidy(scene)
     ends = [a.frame_range[1] for a in bpy.data.actions]
     if ends:
         scene.frame_start, scene.frame_end = 0, int(max(ends))
@@ -526,6 +527,46 @@ def bring_in():
             bpy.ops.wm.save_as_mainfile(filepath=SAVE)
         except Exception as e:
             print("Couldn't save", SAVE, e)
+
+
+def tidy(scene):
+    # Stand the people up, and show one copy of each model.
+    # Blender puts the first animation it reads on each skeleton. A character comes with the whole library
+    # (hundreds, a chicken's first), so the model it landed on lay twisted on the floor: with a library that
+    # size, every skeleton is put back in its rest pose and the animations wait in the Action list.
+    # Models come at two levels of detail (..._high and ..._low, the far-away stand-in): the low one is
+    # hidden, not removed, so the scene shows one of each.
+    library = len(bpy.data.actions) > 20
+    if library:
+        for a in bpy.data.actions:               # kept in the saved .blend though nothing is playing them
+            a.use_fake_user = True
+    for o in scene.objects:
+        if o.type == "ARMATURE" and library:
+            if o.animation_data is not None:
+                o.animation_data.action = None
+            for b in o.pose.bones:
+                b.location = (0.0, 0.0, 0.0)
+                b.rotation_quaternion = (1.0, 0.0, 0.0, 0.0)
+                b.rotation_euler = (0.0, 0.0, 0.0)
+                b.scale = (1.0, 1.0, 1.0)
+    names = {o.name.lower() for o in scene.objects}
+    for o in scene.objects:
+        low = o.name.lower()
+        for a, b in (("_low", "_high"), ("low", "high"), ("_lod1", "_lod0"), ("_l", "_h")):
+            i = low.rfind(a)
+            if i > 0 and (a.startswith("_") and a not in ("_l",) or low.endswith(a) or low.endswith(a + "shape")):
+                twin = low[:i] + b + low[i + len(a):]
+                if twin in names and twin != low:
+                    try:
+                        o.hide_set(True)
+                    except Exception:
+                        o.hide_viewport = True
+                    break
+    if library:
+        try:
+            scene.frame_set(0)
+        except Exception:
+            pass
 
 
 def in_the_window():
