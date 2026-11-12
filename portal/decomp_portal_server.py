@@ -2761,8 +2761,13 @@ class Handler(BaseHTTPRequestHandler):
         self._send(200, glb, "model/gltf-binary", {"Content-Disposition": f'attachment; filename="{name}"'})
 
     def post_game_files_blender(self, body):
-        """Every map area of the city as .glb files in extracted/blender/<version>/."""
-        err = BLENDER.start(str(body.get("version", "")), GAME_FILES.index())
+        """Every map area of the city as .glb files in extracted/blender/<version>/, and the sky round them;
+        optionally at an hour ("hour": 0 to 24, with its fog) and in a weather ("weather": clear or rain)."""
+        try:
+            hour = float(body["hour"]) if body.get("hour") not in (None, "") else None
+        except (TypeError, ValueError):
+            return self._json({"ok": False, "error": "The hour is from 0 to 24."}, 400)
+        err = BLENDER.start(str(body.get("version", "")), GAME_FILES.index(), hour, str(body.get("weather") or "clear"))
         if err:
             return self._json({"ok": False, "error": err}, 409 if "Already" in err or "being" in err else 400)
         self._json(dict(BLENDER.status, ok=True))

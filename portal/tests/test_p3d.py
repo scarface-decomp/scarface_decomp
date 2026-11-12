@@ -276,3 +276,39 @@ def test_colour_channel_keys():
     c = P.read_tree(data)[0]
     assert P.fields(data, c) == {"version": 0, "parameter": "CLR", "keys": 3}
     assert P.channel_keys(data, c) == ("CLR", [0, 40, 120], [(255, 31, 45, 48), (255, 37, 49, 52), (255, 99, 97, 72)])
+
+
+# --------------------------------------------------------------------------- the sky's colour sets
+
+def colour_sets(sets, frames=None):
+    """A mesh's vertex-colour sets (0x121305): sets as [{vertex: (r, g, b)}], each a 0x121306 holding a 0x10F02."""
+    n = len(sets)
+    kids = b""
+    for i, amounts in enumerate(sets):
+        rows = b"".join(struct.pack("<I4H", v, *rgb, 0) for v, rgb in sorted(amounts.items()))
+        kids += chunk(0x121306, struct.pack("<III", 0, (frames or [0] * n)[i], 0),
+                      chunk(0x10F02, struct.pack("<I", 0) + b"CLR0" + struct.pack("<I", len(amounts)) + rows))
+    return chunk(0x121305, struct.pack(f"<II{n}I{n}I", 0, n, *range(n), *[7] * n), kids)
+
+
+def integer_channel(frames, values, param=b"VRTX"):
+    """An Integer Channel (0x12110E): the frames, then a u32 per key, no padding between them."""
+    return chunk(0x12110E, struct.pack("<I", 0) + param + struct.pack(f"<I{len(frames)}H{len(values)}I", len(frames),
+                                                                     *frames, *values))
+
+
+def test_vertex_colour_sets_and_the_channel_that_picks_them():
+    sets = colour_sets([{0: (0, 0, 0), 1: (0, 0, 0)}, {0: (104, 201, 209), 1: (104, 201, 209)}], frames=[0, 90])
+    mesh = chunk(0x10000, text("skyboxShape") + struct.pack("<II", 0, 0), sets)
+    data = p3d(mesh, integer_channel([40, 90, 120], [0, 1, 2]))
+    m, ch = P.read_tree(data)
+    assert [c.name for c in P.walk(m.children)] == ["Vertex Colour Sets", "Vertex Colour Set", "Vertex Colour Amounts",
+                                                    "Vertex Colour Set", "Vertex Colour Amounts"]
+    assert P.fields(data, m.children[0]) == {"version": 0, "sets": 2, "numbers": [0, 1], "unknown": [7, 7]}
+    assert P.fields(data, m.children[0].children[1]) == {"version": 0, "frame": 90, "unknown": 0}
+    assert P.fields(data, m.children[0].children[1].children[0]) == {"version": 0, "parameter": "CLR0", "count": 2}
+    assert P.vertex_colour_sets(data, m) == [{0: (0, 0, 0), 1: (0, 0, 0)}, {0: (104, 201, 209), 1: (104, 201, 209)}]
+    assert P.vertex_colour_sets(data, P.read_tree(p3d(chunk(0x10000, text("plain") + bytes(8))))[0]) == []
+    # an odd number of keys: the values follow the frames straight away
+    assert P.fields(data, ch) == {"version": 0, "parameter": "VRTX", "keys": 3}
+    assert P.channel_keys(data, ch) == ("VRTX", [40, 90, 120], [(0,), (1,), (2,)])
