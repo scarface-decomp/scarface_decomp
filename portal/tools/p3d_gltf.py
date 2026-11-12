@@ -534,6 +534,74 @@ def lod_parts(parts: Sequence[str]) -> set:
     return low if len(low) < len(parts) else set()
 
 
+OFFSET_SETS, OFFSET_SET, POSITION_OFFSETS = 0x121305, 0x121306, 0x10F00
+EXPRESSION_GROUP, EXPRESSION = 0x21001, 0x21000
+
+
+def position_offsets(data: bytes, c: p3d.Chunk) -> Dict[int, Dict[int, Dict[int, Vec3]]]:
+    """The shapes a mesh or skin can be pulled into (a face's raised lip, a closed eye):
+    {shape number: {primitive group number: {vertex: how far it moves (x, y, z)}}}. The chunk holds a set
+    list (0x121305); each set (0x121306: u32 0, the shape's number, the primitive group's) holds position
+    offsets (0x10F00: u32 0, "POS", a count, then per entry a vertex number and three floats)."""
+    out: Dict[int, Dict[int, Dict[int, Vec3]]] = {}
+    sets = c.find(OFFSET_SETS)
+    for k in (sets.children if sets else []):
+        if k.id != OFFSET_SET or k.body[1] - k.body[0] < 12:
+            continue
+        _zero, shape, group = struct.unpack_from("<3I", data, k.body[0])
+        for o in k.children:
+            if o.id != POSITION_OFFSETS or o.body[1] - o.body[0] < 12:
+                continue
+            if data[o.body[0] + 4:o.body[0] + 7] != b"POS":
+                continue
+            n = struct.unpack_from("<I", data, o.body[0] + 8)[0]
+            if o.body[0] + 12 + 16 * n > o.body[1]:
+                continue
+            moved = out.setdefault(shape, {}).setdefault(group, {})
+            for i in range(n):
+                v, x, y, z = struct.unpack_from("<I3f", data, o.body[0] + 12 + 16 * i)
+                moved[v] = (x, y, z)
+    return out
+
+
+def expressions(src: "Source", mesh: str) -> List[Tuple[str, List[Tuple[float, int]]]]:
+    """The sliders that work a mesh's shapes (an expression group, 0x21001: u32 0, its name, the mesh's
+    name, a count; each expression 0x21000: u32 0, its name, a count, that many slider values, that many
+    shape numbers): [(slider name, [(the value at which a shape is fully on, the shape's number)])]."""
+    out = []
+    for c in src.chunks:
+        if c.id != EXPRESSION_GROUP:
+            continue
+        try:
+            r = p3d._R(src.data, *c.body)
+            r.u32()
+            r.text()
+            if r.text().lower() != mesh.lower():
+                continue
+            for k in c.children:
+                if k.id != EXPRESSION:
+                    continue
+                r = p3d._R(src.data, *k.body)
+                r.u32()
+                name, n = r.text(), r.u32()
+                values = r.floats(n)
+                out.append((name, list(zip(values, [r.u32() for _ in range(n)]))))
+        except (struct.error, IndexError):
+            continue
+    return out
+
+
+def shape_names(sliders: Sequence[Tuple[str, List[Tuple[float, int]]]], count: int) -> List[str]:
+    """A name for each shape, from the slider that works it: "D___Frown_Smile -" and "D___Frown_Smile +"
+    for a slider with a shape at each end."""
+    names = [f"shape {i}" for i in range(count)]
+    for name, keys in sliders:
+        for value, shape in keys:
+            if 0 <= shape < count:
+                names[shape] = name if len(keys) == 1 else f"{name} {'-' if value < 0 else '+'}"
+    return names
+
+
 class Library:
     """Everything in a set of .p3d files, found by name the way the game finds it (letter case doesn't
     matter). Files given first win when two have the same name, unless a lookup says which files it
@@ -787,6 +855,7 @@ class Builder:
         self.hour: Optional[float] = None          # set: the sky's pose and colours are those of this hour
         self.posed: set = set()                    # the animations a pose was taken from (id of the chunk)
         self._animations: Optional[Dict[str, List[Ref]]] = None
+        self.shaped: Dict[int, list] = {}          # glTF mesh with shapes -> the sliders that work them
 
     # materials
 
@@ -859,7 +928,13 @@ class Builder:
         prims = []
         tinted = self.sky_colours(ref) if self.hour is not None and ref.chunk.id == MESH else None
         first = 0                                    # the mesh's number of the group's first vertex
-        for pg in (k for k in ref.chunk.children if k.id == PRIM_GROUP):
+        try:
+            shapes = position_offsets(ref.data, ref.chunk)
+        except struct.error:
+            shapes = {}
+        count = max(shapes) + 1 if shapes else 0
+        still: Dict[int, int] = {}                   # vertices -> an accessor of that many unmoved vertices
+        for number, pg in enumerate(k for k in ref.chunk.children if k.id == PRIM_GROUP):
             try:
                 geo = geometry(ref.data, pg)
             except (struct.error, IndexError, ValueError):
@@ -897,12 +972,32 @@ class Builder:
             prims.append({"attributes": attrs, "indices": self.g.accessor(flat, "SCALAR", 5125 if big else 5123,
                                                                           target=34963),
                           "material": self.material(shader), "mode": 4})
+            if count:                                # every group lists every shape, moved by it or not
+                n = len(geo.positions)
+                targets = []
+                for shape in range(count):
+                    moved = shapes.get(shape, {}).get(number)
+                    if not moved or max(moved) >= n:
+                        if n not in still:
+                            still[n] = self.g.accessor([(0.0, 0.0, 0.0)] * n, "VEC3", bounds=True)
+                        targets.append({"POSITION": still[n]})
+                        continue
+                    rows = [(0.0, 0.0, 0.0)] * n
+                    for v, d in moved.items():
+                        rows[v] = pos(d)
+                    targets.append({"POSITION": self.g.accessor(rows, "VEC3", bounds=True)})
+                prims[-1]["targets"] = targets
         index = None
         if prims:
             item: dict = {"name": ref.name, "primitives": prims}
+            if count:
+                sliders = expressions(ref.source, ref.name)
+                item["weights"] = [0.0] * count
+                item["extras"] = {"targetNames": shape_names(sliders, count)}
+                self.shaped[len(self.g.doc["meshes"])] = sliders
             order = draw_order(ref.data, ref.chunk)
             if order is not None:
-                item["extras"] = {"drawOrder": order}
+                item.setdefault("extras", {})["drawOrder"] = order
             if tinted is not None:
                 item.setdefault("extras", {}).update({"hour": self.hour, "colourSet": tinted[0]})
             index = self.g.add("meshes", item)

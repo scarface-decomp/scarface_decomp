@@ -20,6 +20,7 @@ the city's own coordinates. "MainCharacter" is Tony, in the suit the script chan
 
 from __future__ import annotations
 
+import bisect
 import math
 import re
 import struct
@@ -34,7 +35,7 @@ TONY = "maincharacter"
 TONY_FILES = ("tonyniswhtsuit.p3d", "tonynisblksuit.p3d", "tonynishawaiian.p3d")
 
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
-                    r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach)\s*\{")
+                    r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation)\s*\{")
 _FIELD = re.compile(r'\b(\w+)\s+(?:"([^"]*)"|(-?[\d.]+(?:e-?\d+)?))\s*;')
 
 
@@ -49,6 +50,7 @@ class Script:
         self.camera = ""
         self.tony = ""                                      # the suit Tony is changed into (NISSwapModel)
         self.holds: Dict[str, str] = {}                     # person (lower) -> weapon template (NISWeaponAttach)
+        self.faces: Dict[str, str] = {}                     # person (lower) -> their face's animation (NISExpAnimation)
 
 
 def _body(text: str, start: int) -> str:
@@ -79,6 +81,8 @@ def read_script(text: str) -> Script:
             s.plays.setdefault(str(f["CharacterName"]).lower(), str(f["AnimationName"]))
         elif kind == "NISVehicleAnimation" and f.get("VehicleName") and f.get("AnimationName"):
             s.drives.setdefault(str(f["VehicleName"]).lower(), str(f["AnimationName"]))
+        elif kind == "NISExpAnimation" and f.get("CharacterName") and f.get("AnimationName"):
+            s.faces.setdefault(str(f["CharacterName"]).lower(), str(f["AnimationName"]))
         elif kind == "NISWeaponAttach" and f.get("CharacterName") and f.get("WeaponTemplateName"):
             s.holds.setdefault(str(f["CharacterName"]).lower(), str(f["WeaponTemplateName"]))
         elif kind == "NISSwapModel" and str(f.get("Character", "")).lower() == TONY and f.get("newModel") and not s.tony:
@@ -141,6 +145,77 @@ class _Tracks:
         self.samplers.append({"input": self.b.g.accessor([(t,) for t in keep_t], "SCALAR", bounds=True),
                               "output": self.b.g.accessor(keep_v, kind), "interpolation": "STEP" if step else "LINEAR"})
         self.channels.append({"sampler": len(self.samplers) - 1, "target": {"node": node, "path": path}})
+
+    def weights(self, node: int, times: List[float], rows: List[List[float]]) -> None:
+        """How far a mesh's shapes are on at each time (glTF: every shape's weight, key after key)."""
+        if not times:
+            return
+        flat = [w for row in rows for w in row]
+        self.samplers.append({"input": self.b.g.accessor([(t,) for t in times], "SCALAR", bounds=True),
+                              "output": self.b.g.accessor(flat, "SCALAR"), "interpolation": "LINEAR"})
+        self.channels.append({"sampler": len(self.samplers) - 1, "target": {"node": node, "path": "weights"}})
+
+
+def slider_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[float]]]:
+    """A face animation's sliders over its pieces laid end to end: {slider (lower): (times, values)}. Each
+    slider is an animation group named after it, with one Float1 channel (0x121100)."""
+    out: Dict[str, Tuple[List[float], List[float]]] = {}
+    start = 0.0
+    for ref in pieces:
+        data, c = ref.data, ref.chunk
+        info = p3d.fields(data, c)
+        rate = info.get("frame rate") or 30.0
+        gl = c.find(G.ANIM_GROUP_LIST)
+        for gc in (gl.children if gl else []):
+            if gc.id != G.ANIM_GROUP:
+                continue
+            name = p3d.fields(data, gc).get("name", "").lower()
+            for ch in gc.children:
+                if ch.id != 0x121100:
+                    continue
+                try:
+                    _param, frames, values = p3d.channel_keys(data, ch)
+                except (p3d.P3dError, struct.error, IndexError, KeyError):
+                    continue
+                times, kept = out.setdefault(name, ([], []))
+                for f, v in zip(frames, values):
+                    t = start + f / rate
+                    if not times or t > times[-1] + 1e-6:
+                        times.append(t)
+                        kept.append(v[0])
+        start += (info.get("frames") or 0.0) / rate
+    return out
+
+
+def _value_at(times: List[float], values: List[float], t: float) -> float:
+    if not times or t <= times[0]:
+        return values[0] if values else 0.0
+    if t >= times[-1]:
+        return values[-1]
+    i = bisect.bisect_right(times, t)
+    a, b = times[i - 1], times[i]
+    return values[i - 1] + (values[i] - values[i - 1]) * ((t - a) / (b - a) if b > a else 0.0)
+
+
+def shape_weights(sliders: Sequence[Tuple[str, List[Tuple[float, int]]]], count: int,
+                  keys: Dict[str, Tuple[List[float], List[float]]]) -> Tuple[List[float], List[List[float]]]:
+    """How far each of a mesh's shapes is on through a face animation: (times, a row of count weights per
+    time). A slider's shape is fully on when the slider is at the shape's value (a lip slider at -1 is
+    all the way down, at 1 all the way up), and off at 0 or on the other side."""
+    times = sorted({t for name, _k in sliders for t in keys.get(name.lower(), ([], []))[0]})
+    rows = []
+    for t in times:
+        row = [0.0] * count
+        for name, ends in sliders:
+            got = keys.get(name.lower())
+            if not got:
+                continue
+            at = _value_at(got[0], got[1], t)
+            for value, shape in ends:
+                if 0 <= shape < count and value:
+                    row[shape] = max(0.0, min(1.0, at / value))
+        rows.append(row)
+    return times, rows
 
 
 def _length(pieces: Sequence[G.Ref]) -> float:
@@ -422,6 +497,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             continue
         at, facing = script.stands.get(who, ((0.0, 0.0, 0.0), 0.0))
         spot = b.g.node(label, root, translation=list(G.pos(at)), rotation=list(facing_rotation(facing)))
+        before = len(b.g.doc["nodes"])
         copy = _person(b, lib, src, spot, label)
         if copy is None:
             b.g.doc["nodes"][root]["children"].remove(spot)
@@ -439,6 +515,14 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
                 b.composite(gref, hand, label + "'s " + wanted)
             else:
                 left_out.append(label + "'s " + WEAPON.sub("", script.holds[who]))
+        if who in script.faces:                              # the lips, brows and eyelids
+            sliding = slider_keys(_pieces(b, script.faces[who]))
+            for i in range(before, len(b.g.doc["nodes"])):
+                mesh = b.g.doc["nodes"][i].get("mesh")
+                if mesh in b.shaped and sliding:
+                    count = len(b.g.doc["meshes"][mesh]["weights"])
+                    times, rows = shape_weights(b.shaped[mesh], count, sliding)
+                    tracks.weights(i, later(times), rows)
         if anim:
             keys, ran = _joint_keys(_pieces(b, anim))
             length = max(length, ran)

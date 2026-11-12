@@ -208,3 +208,69 @@ def test_cutscenes_played_back_to_back_come_as_one(tmp_path):
                and doc["nodes"][c["target"]["node"]]["name"] == "Hip" and track(c["target"]["node"], "rotation")[0][0] > 0.1)
     assert track(hip, "rotation")[0] == pytest.approx([third, 2 * third])      # his moves start when hers end
     assert len(read_glb(alone)[0]["animations"][0]["channels"]) == 1           # by itself: no one to show or hide
+
+
+# ---- faces: the shapes a head can be pulled into, and the sliders that work them --------------------------------
+
+def face_file():
+    """A skin with two shapes (the lip down, the lip up) on its one primitive group, and the slider for them."""
+    from test_p3d_gltf import skeleton
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    flat = [v for p in tri for v in p]
+    w3 = [0.75, 0.25, 0.0] * 3
+    kids = (chunk(0x10005, struct.pack("<I9f", 3, *flat)) + chunk(0x1000A, struct.pack("<I3I", 3, 0, 1, 2))
+            + chunk(0x1000C, struct.pack("<I9f", 3, *w3)) + chunk(0x1000B, struct.pack("<I3I", 3, *[0x01000000] * 3))
+            + chunk(0x1000D, struct.pack("<I2I", 2, 1, 0)))
+    head = struct.pack("<I", 0) + text("skin") + struct.pack("<9I", 0, 0x2181, 3, 3, 2, 0, 1, 0, 0)
+    offsets = lambda rows: chunk(0x10F00, struct.pack("<I", 0) + b"POS\0" + struct.pack("<I", len(rows))
+                                 + b"".join(struct.pack("<I3f", v, *d) for v, d in rows))
+    sets = chunk(0x121305, struct.pack("<II2I2I", 0, 2, 0, 1, 1, 1),
+                 chunk(0x121306, struct.pack("<3I", 0, 0, 0), offsets([(2, (0.0, -0.5, 0.25))]))
+                 + chunk(0x121306, struct.pack("<3I", 0, 1, 0), offsets([(2, (0.0, 0.5, 0.0)), (1, (0.1, 0.0, 0.0))])))
+    skin = chunk(0x10001, text("faceShape") + struct.pack("<I", 3) + text("rig") + struct.pack("<I", 1),
+                 chunk(0x10020, head, kids) + sets)
+    slider = chunk(0x21000, struct.pack("<I", 0) + text("A___Lip_Down_Up") + struct.pack("<I2f2I", 2, -1.0, 1.0, 0, 1))
+    group = chunk(0x21001, struct.pack("<I", 0) + text("Face") + text("faceShape") + struct.pack("<I", 1), slider)
+    return p3d(skeleton("rig", [("Root", 0, (0, 0, 0)), ("Hip", 0, (0, 1.0, 0.5))]), skin, group)
+
+
+def test_a_faces_shapes_go_in_named_after_their_sliders():
+    from test_p3d_gltf import export, values
+    glb, _report = export(face_file())
+    doc, binc = read_glb(glb)
+    mesh = next(m for m in doc["meshes"] if m["name"] == "faceShape")
+    assert mesh["weights"] == [0.0, 0.0] and mesh["extras"]["targetNames"] == ["A___Lip_Down_Up -", "A___Lip_Down_Up +"]
+    down, up = mesh["primitives"][0]["targets"]
+    assert values(doc, binc, down["POSITION"]) == [(0, 0, 0), (0, 0, 0), pytest.approx((0.0, -0.5, -0.25))]     # Z mirrored
+    assert values(doc, binc, up["POSITION"])[1:] == [pytest.approx((0.1, 0, 0)), pytest.approx((0, 0.5, 0))]
+
+
+def test_a_slider_turns_its_shapes_on():
+    sliders = [("A___Lip", [(-1.0, 0), (1.0, 1)]), ("H___Blink", [(1.0, 2)])]
+    keys = {"a___lip": ([0.0, 1.0], [-1.0, 1.0]), "h___blink": ([0.5], [0.5])}
+    times, rows = C.shape_weights(sliders, 3, keys)
+    assert times == [0.0, 0.5, 1.0]
+    assert rows[0] == pytest.approx([1.0, 0.0, 0.5])             # the lip all the way down
+    assert rows[1] == pytest.approx([0.0, 0.0, 0.5])             # half-way: neither shape
+    assert rows[2] == pytest.approx([0.0, 1.0, 0.5])             # all the way up
+    assert C.shape_weights(sliders, 3, {}) == ([], [])
+
+
+def test_the_face_moves_in_a_cutscene():
+    from test_p3d_gltf import values
+    frames = struct.pack("<2H", 0, 30)
+    channel = chunk(0x121100, struct.pack("<I", 0) + b"EXP\0" + struct.pack("<I", 2) + frames + struct.pack("<2f", 0.0, 1.0))
+    group = chunk(0x121001, struct.pack("<I", 0) + text("A___Lip_Down_Up") + struct.pack("<II", 0, 1), channel)
+    anim = chunk(0x121000, struct.pack("<I", 0) + text("EXP_T_Ann0") + b"EXP\0" + struct.pack("<ffI", 30.0, 30.0, 0),
+                 chunk(0x121002, struct.pack("<II", 0, 1), group))
+    script = C.read_script('NISResourceLoader { Name "Ann"; TemplateName "CharTemp_Ann"; }; '
+                           'NISCharacterPosition { CharacterName "Ann"; Position { x 0; y 0; z 0; }; Facing 0; }; '
+                           'NISExpAnimation { CharacterName "Ann"; AnimationName "EXP_T_Ann"; MixerModelName "Face"; };')
+    assert script.faces == {"ann": "EXP_T_Ann"}
+    glb, _r = C.export("T", script, [("stream0.p3d", p3d(anim))], lambda kind, name: ("ann.p3d", face_file()) if kind == "person" else None)
+    doc, binc = read_glb(glb)
+    ch = next(c for c in doc["animations"][0]["channels"] if c["target"]["path"] == "weights")
+    assert doc["nodes"][ch["target"]["node"]]["name"] == "faceShape"
+    sm = doc["animations"][0]["samplers"][ch["sampler"]]
+    assert [t for (t,) in values(doc, binc, sm["input"])] == pytest.approx([0.0, 1.0])
+    assert [w for (w,) in values(doc, binc, sm["output"])] == pytest.approx([0.0, 0.0, 0.0, 1.0])     # the lip rises

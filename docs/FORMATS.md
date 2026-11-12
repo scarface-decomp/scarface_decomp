@@ -746,8 +746,29 @@ others happen where the script first stands someone, and the map there is what t
 
 `cutscene.py` reads all of this and makes one scene with everybody in it, on the street or in the room
 where it happens; opening any of a cutscene's files in the portal gives the whole cutscene. Not read yet:
-props (`NISStatePropSpawn`), effects and sound; a weapon hangs on the hand joint as it is, without the
+props (`NISStatePropSpawn`), effects and sound; faces of people other than Tony whose model the script swaps in (`NISSwapModel`); a weapon hangs on the hand joint as it is, without the
 small shift the game gives each weapon.
+
+### Faces: shapes and sliders
+
+Worked out from the PC files (`art/nis/characters/tonynisHawaiian.p3d` and the cutscenes' stream files)
+by reading the chunks; `p3d_gltf.py` and `cutscene.py` read them, and the tests check that on made-up files.
+
+A head that can change expression is a skin (`0x10001`) with a set list (`0x121305`, the same container
+the map's colour sets use). Each set (`0x121306`: u32 0, a shape's number, a primitive group's number)
+holds position offsets (`0x10F00`: u32 0, the four bytes `POS\0`, a count, then per entry a vertex number
+and three floats: how far that vertex moves, in the mesh's own space). Tony's cutscene head has 18 shapes.
+
+An expression group (`0x21001`: u32 0, its name, the mesh's name, a count) holds the sliders that work
+the shapes. Each expression (`0x21000`) is u32 0, a name (`A___Top_Lip_Up_Down`, `H___Eye_Blink_Left`),
+a count, that many slider values and that many shape numbers: the shape that is fully on when the slider
+is at that value. A lip slider has a shape at -1 and another at 1; a blink has one, at 1.
+
+A cutscene's script plays a face with `NISExpAnimation` (`CharacterName`, `AnimationName`,
+`MixerModelName`: the expression group). The animation (type `EXP`) is in the stream files, cut into
+pieces like the others; it has one group per slider, named after it, each with a Float1 channel
+(`0x121100`): the slider's value over time. In a glTF export the shapes are morph targets named after
+their sliders (Blender: shape keys), and a cutscene's face animation is their weights.
 
 ## Sounds (`.rsd`)
 
