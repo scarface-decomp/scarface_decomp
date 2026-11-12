@@ -17,7 +17,7 @@ All numbers are little-endian unless a section says otherwise. Offsets are in he
 | [Sounds](#sounds-rsd) | `.rsd` | all | `game_assets.py` (facts), `media.py` (playing) |
 | [Videos](#videos-bik) | `.bik` | Xbox and PC (Bink) | `game_assets.py` (Bink picture size) |
 | [PS2 movies](#ps2-movies-rmv) | `.rmv` | PS2 | `rmv.py` (to an `.ipu` picture and a `.wav`) |
-| [Compiled scripts](#scripts-cso-dso-dtr) | `.cso`, `.dso` | all | `torque_dso.py` and friends ([SCRIPTS.md](SCRIPTS.md)) |
+| [Compiled scripts](#scripts-cso-dso-dtr) | `.cso`, `.dso` | all | `torque_dso.py` and friends ([SCRIPTS.md](SCRIPTS.md)), `fog.py` ([the fog](#fog-by-time-of-day)) |
 | [AI decision trees](#scripts-cso-dso-dtr) | `.dtr` | all | `dtr_format.py` |
 | [Programs](#programs) | `default.xbe`, `Scarface.exe`, `SLUS_211.11` | all | `sf_binaries.py`, `ps2_binary.py` |
 | [PS2 code overlays](#ps2-code-overlays) | `Overlays/FrontEnd/*.bin` | PS2 | `ps2_overlay.py` |
@@ -242,6 +242,7 @@ used `0x4500` and `0x4501` for these.
 | `0x00121110` | Channel Interpolation Mode | u32 version, u32 interpolate (-1: yes) |
 | `0x00121100` | Float1 Channel | u32 version, parameter, u32 keys, u16 frames, 1 float per key |
 | `0x00121109` | Colour Channel | u32 version, parameter (`CLR`), u32 keys, u16 frames, then a u32 colour (`0xAARRGGBB`) per key: two arrays, not interleaved |
+| `0x0012110E` | Integer Channel | u32 version, parameter (`VRTX`), u32 keys, u16 frames, then a u32 per key, with no padding between the two arrays |
 | `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`CAM`, `PTRN`, `LITE` ...), `ANIM`, two u32, then the name of what it drives (a camera, a light) and the animation it plays |
 | `0x00002200` | Camera | name, u32 version (2), float field of view (radians, across the picture), float aspect, float near and far clip, then position, look direction and up (3 floats each) |
 
@@ -371,9 +372,9 @@ at spawn objects the areas do place (`worldambiencespawnobject`, `enemycharacter
 
 ### Lights
 
-This section, the next two and the Colour Channel above come from the clean-room spec
+This section, the next three and the Colour and Integer Channels above come from the clean-room spec
 [SPEC-001](cleanroom/SPEC-001-lights-sky-streaming.md) ([how that works](CLEAN_ROOM.md)), whose examiner
-checked them on the PC files; `p3d.py` reads them, and the tests check that on made-up files.
+checked them on the PC files; `p3d.py` and `fog.py` read them, and the tests check that on made-up files.
 
 | Id | Chunk | Data |
 | :--- | :--- | :--- |
@@ -421,6 +422,13 @@ Interpolation Mode. These tags are padded with a NUL, not a space. The values st
 midnight's: `miami_lod.p3d`'s sun stores 31, 45, 48 and (0, -0.788, -0.616), and at noon is 99, 97, 72 and
 (-0.473, -0.743, 0.473).
 
+**One weather at a time.** `miami_lod.p3d` and `islands_LOD.p3d` each hold the daylight twice: kind 0
+(`zone_lights`) for clear weather and kind 1 (`zone_rainlights`) for rain, four lights each, sun included.
+They are alternatives, not layers: the game is in one weather at a time, and it starts in clear weather
+(`enableraining` 0 in the `tod` object, see [Fog by time of day](#fog-by-time-of-day)). Rain fades in and out
+over 50 frames (`rainstarttransitframes`, `rainendtransitframes`). A scene should be lit by one of the two
+groups, with the fog and the sky of the same weather.
+
 ### The draw-order key and the sky
 
 | Id | Chunk | Data |
@@ -445,6 +453,61 @@ colour. The game doesn't sort the billboard groups by it.
 `Common.p3d` has two Sky chunks: `sky` (its composite has 6 meshes and 6 billboard groups) and
 `rainy_skybox` (6 meshes). A name starting `rainy_` is the rain sky: the game starts it faded out and
 cross-fades between the two with the weather.
+
+**How the game draws it.** The whole sky is drawn at twice its size. The sky's meshes move with the camera
+across, not up: they take the camera's x and z, and their height stays 0, so the sky turns with the camera
+but doesn't rise with it. The billboard groups (the sun, its two flare stars, two lens flares and the moon;
+there are no stars) take the camera's whole position: they sit at infinity, and are drawn near the end of
+the frame. The sky is never culled by distance.
+
+**Where the sun is.** The `sky` composite's skeleton (`0x00023000`) has 14 joints: `sky` (the root),
+`skybox`, `sun_grp`, the six billboard joints hanging from `sun_grp` (`sun`, `fxSys_SunFlare`,
+`p3dBillboardQuadGroup1`, `p3dBillboardQuadGroup2`, `fxSys_SunFlare1`, `p3dBillboardQuadGroup3`; which one
+is the moon isn't known), then `skybox16`, `skybox2`, `skybox17`, `skybox18` and `skybox_horizon` under the
+root. The animation `PTRN_sky` (type `PTRN`, 241 frames at 30 a second: one day, frame = hour x 10, like the
+daylight's) turns `sun_grp`: a Quaternion Channel `ROT` with 21 keys. Its other group, `sun`, is a
+Vector3DOF Channel `TRAN` with two equal keys, (832.597, -0.755, -1.531): the sun's offset from `sun_grp`,
+which is also its rest offset. The skeleton's rest pose puts the sun about 755 m below the ground, at
+(8.0, -755.2, 350.5), so a viewer that doesn't play `PTRN_sky` draws it underground. Between the keys at
+frames 153 and 154 the quaternion changes sign (it is the same rotation): taken along the shorter arc the
+sun moves on; taken the long way, it jumps across the sky around 15:20. Played at frame = hour x 10, the sun
+is this high above the horizon (degrees):
+
+| Hour | 0 | 2.2 | 4.4 | 6.6 | 8.9 | 10.6 | 12.0 | 13.1 | 13.9 | 14.9 | 16.9 | 18.0 | 19.9 | 21.7 | 23.5 |
+| :--- | --: | --: | --: | --: | --: | --: | --: | --: | --: | --: | --: | --: | --: | --: | --: |
+| Height | -65.1 | -60.4 | -38.3 | -12.8 | 13.2 | 34.7 | 50.5 | 65.1 | 72.0 | 66.1 | 32.1 | 12.0 | -19.9 | -48.1 | -65.5 |
+
+Sunrise is at about 7.7 h, sunset at about 18.7 h.
+
+**The sky's colours.** Five of the clear sky's six meshes change colour through the day. Their primitive
+groups are triangle strips with no index list.
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x00121305` | Vertex Colour Sets | right under the mesh: u32 version, u32 count n, n u32 (0, 1, 2 ... in every sky mesh), n u32 (meaning not known); then n Vertex Colour Sets |
+| `0x00121306` | Vertex Colour Set | u32 version, u32 frame, u32 (meaning not known); holds a `0x00010F02` |
+| `0x00010F02` | Vertex Colour Amounts | u32 version, `CLR0`, u32 count (every vertex of the mesh), then per vertex u32 vertex number, u16 red, u16 green, u16 blue, u16 0 |
+
+The chunk names are descriptive ones of ours. A set holds **amounts added to the mesh's own vertex
+colours**, not new colours. The mesh's own colours are the night sky (the dome is `0x0a0d14`, dark blue), and
+the first set is all zeros. Each set gives every vertex the same amount, so the dome really is one flat
+colour; the look of the sky comes from the other meshes. The animation `VRTX_<mesh name>` (type `VRTX`, 241
+frames at 30 a second) picks the set: its Integer Channel gives the set's number at each key, and before the
+first key the first value holds. It isn't linear in the time of day:
+
+| Animation | Key frames: set |
+| :--- | :--- |
+| `VRTX_skyboxShape` | 40, 90, 120, 180, 210, 240: 0, 1, 2, 3, 4, 5 |
+| `VRTX_skybox17Shape` | 40, 41, 90, 210, 240: 0, 1, 2, 3, 4 |
+| `VRTX_skybox18Shape` | 40, 90, 210, 240: 0, 1, 2, 3 |
+| `VRTX_skybox2Shape`, `VRTX_skybox_horizonShape` | 0, 240: 0, 1 |
+
+Keeping the fraction of the number between keys and blending the two sets either side of it makes the sky
+cross-fade instead of jump. At noon the dome is on set 2. The dome's six sets are (0, 0, 0), (104, 201, 209),
+(132, 149, 204), (104, 177, 112), (4, 3, 11) and (0, 0, 0); the second, added to (10, 13, 20), is the familiar
+Miami sky blue. The cloud layers: `skybox17Shape` (0, 0, 0), (2, 2, 1), (122, 127, 85), (122, 127, 85),
+(0, 0, 0); `skybox18Shape` (0, 0, 0), (104, 109, 70), (104, 109, 70), (0, 0, 0). The two horizon meshes' sets
+are all zero: the horizon keeps its own colours all day.
 
 ### The stream graph
 
@@ -482,6 +545,74 @@ The stream graph doesn't cover `packages/azones/*_pocket.p3d` (32), which the mi
 so a city built from the stream graph alone has holes there; the map exports include them), nor
 `packages/dzones/*_dzone.p3d` (135: the furniture and props of interiors, from `dzone_triggers.dso`), nor
 the areas the game picks one of (`tonymansion_01_shell_TS0` to `TS3`, `cargoShip_01_shell_CS0` and `CS1`).
+
+### Fog by time of day
+
+The fog isn't in any `.p3d`. It is in `EnvironmentObject`s that the compiled script `scriptc/graphanims.cso`
+creates (for the islands, `scriptc/island_envobjects.cso`, whose objects are named
+`island_environment_...`): `environment_clear_<hour>` and `environment_rainy_<hour>` for the hours 4, 9, 12,
+18, 21 and 24. The repository's script decompiler shows them as
+`new EnvironmentObject("environment_clear_12") { FogStart = 25; FogEnd = 900; ... };`. Their fog properties:
+
+| Property | What |
+| :--- | :--- |
+| `FogEnabled` | 1: fog on (in all 24 objects) |
+| `FogStart`, `FogEnd` | the distances the fog runs from and to, in metres from the camera |
+| `FogColor_Red`, `FogColor_Green`, `FogColor_Blue` | the fog's colour, each over 255 |
+| `FogColor_Alpha` | meaning not known (95 to 150) |
+| `FogClamp` | meaning not known; the `*_xbox.cso` copies of the scripts differ only in it |
+
+The same objects set about fifty more looks (`Bloom_*`, `ColourFX_*`, `DOF*`, `PrelitLuminance_*`,
+`Window*`, `WindStrength` ...), not described here.
+
+| Object | Miami: start to end, colour | Islands: start to end, colour |
+| :--- | :--- | :--- |
+| `..._clear_4` | 20 to 800, (23, 28, 40) | 20 to 700, (25, 30, 40) |
+| `..._clear_9` | 25 to 800, (245, 240, 160) | 20 to 800, (205, 200, 132) |
+| `..._clear_12` | 25 to 900, (200, 200, 150) | 20 to 800, (190, 190, 145) |
+| `..._clear_18` | 25 to 800, (227, 223, 105) | 20 to 800, (217, 213, 100) |
+| `..._clear_21` | 20 to 800, (50, 35, 33) | 20 to 800, (65, 45, 43) |
+| `..._clear_24` | 20 to 800, (20, 25, 32) | 20 to 600, (20, 25, 32) |
+| `..._rainy_4` | 10 to 525, (16, 16, 17) | 2 to 550, (16, 18, 21) |
+| `..._rainy_9` | 20 to 700, (35, 35, 23) | 2 to 500, (36, 40, 35) |
+| `..._rainy_12` | 20 to 700, (35, 35, 28) | 2 to 550, (35, 35, 33) |
+| `..._rainy_18` | 20 to 600, (35, 35, 21) | 2 to 500, (44, 43, 35) |
+| `..._rainy_21` | 20 to 700, (26, 21, 21) | 2 to 500, (28, 21, 21) |
+| `..._rainy_24` | 10 to 500, (14, 14, 16) | 2 to 550, (14, 16, 18) |
+
+**The key hours.** The script object `tod` (class `todobject`) in `packages/z04/miami_lod.p3d` (a Script
+Object Data chunk with its properties, see [Maps](#maps)) has six keys, N = 0 to 5:
+
+| Property | What |
+| :--- | :--- |
+| `prelitluminancetime_N` | the key's hour: 4, 9, 12.0, 18.0, 21.0, 24.0 |
+| `attachedclearenvparamname_N`, `attachedrainyenvparamname_N` | the names of that hour's two `EnvironmentObject`s, for example `environment_clear_4` and `environment_rainy_4` |
+| `timetohold_N`, `timetotransit_N` | 0, 20, 0, 40, 120, 40 and 200, 360, 700, 340, 260, 200; how they turn into time isn't known |
+
+The same object sets the starting time (`settimeofdayhour` 18, `settimeofdayminute` 00), the clock's speed
+(`timeofdayspeed` 2000), `pausetimeofday` 0, and the weather: `enableraining` 0, `rainpercentage` 1,
+`rainstarttransitframes` 50, `rainendtransitframes` 50.
+
+The game draws plain linear fog by distance from the camera along the view direction (depth), from the start
+to the end distance, in the fog colour. The sky, the night lights and decals are drawn without fog.
+
+`portal/tools/fog.py` gives the fog for an hour and a weather: it decompiles the script with the
+repository's own decompiler (or reads a decompiled `.cs`), takes the `EnvironmentObject`s' fog properties,
+and blends in a straight line by the clock between the two key hours around the hour (the plain reading of
+the keys, since hold and transit aren't understood). The hours go round: 24 is also 0, so 2 a.m. lies between
+the 24 and the 4 key. The compiled scripts store names hashed ([Scripts](#scripts-cso-dso-dtr)), so `fog.py`
+matches the properties and objects by their hash and needs no name recovery. For the islands (`--islands`,
+with `island_envobjects.cso`) it looks for each linked name with `island_` in front too.
+
+```
+python portal/tools/fog.py packages/z04/miami_lod.p3d scriptc/graphanims.cso --hour 15
+python portal/tools/fog.py packages/z04/miami_lod.p3d scriptc/graphanims.cso --hour 2 --weather rain
+```
+
+It prints the fog as JSON: `enabled`, `start`, `end`, `color` (red, green and blue, each over 255), `alpha`
+and `clamp` (as the objects have them), the two objects blended (`keys`) and how far from the first to the
+second (`blend`). Clear weather in Miami, as a check: noon is 25 to 900 m in (200, 200, 150), 4 a.m. 20 to
+800 m in (23, 28, 40), 9 a.m. 25 to 800 m in (245, 240, 160); rain at noon is 20 to 700 m in (35, 35, 28).
 
 ### Exporting to Blender
 
@@ -525,6 +656,50 @@ in Blender to taste. A spot light keeps glTF's own cone, since which of the game
 known. `--hour H` (0 to 24) lights the daylight for that hour from its `LITE` animations; without it the
 lights are as the files store them, at midnight. The daylight is in `miami_lod.p3d` and `islands_LOD.p3d`, so
 it comes in when those are exported (alone, or with `--lod`).
+
+**The weather.** The clear weather's daylight and the rain's are [alternatives](#lights), so an export is lit
+by one of them: clear, as the game starts, unless `--weather rain` says otherwise. The other group's lights
+still come in, as empty nodes with their settings in extras and `"dataOnly": true`; the node of each daylight
+group says its `weather` in its extras, and the export's report says which group was kept as data only. The
+weather also picks the sky and the fog below.
+
+```
+python portal/tools/p3d_gltf.py city.glb  packages/z04/miami_lod.p3d --map --hour 18 --weather rain --scripts scriptc
+python portal/tools/p3d_gltf.py sky.glb   Common.p3d --hour 7.5 --library packages/z04/miami_lod.p3d
+```
+
+**The sky through the day.** Exported as a model, `Common.p3d` gives both skies side by side, or with
+`--weather` only that weather's. `--hour` works on it without `--map`. With an hour, the
+[sky](#the-draw-order-key-and-the-sky)'s skeleton takes the pose `PTRN_sky` has at frame hour x 10, each
+rotation taken along the shorter arc between its keys, so the sun and its billboard joints are where the game
+puts them (the billboards themselves are left out, like the light flares). `PTRN_sky` isn't added as an
+animation then, so the pose holds. Each sky mesh's vertex colours are its own plus the set its `VRTX_`
+animation picks for that hour, blended between the two sets either side of the number, each channel kept to
+255; the mesh's extras give the `hour` and the set's number (`colourSet`, with its fraction). Without an hour
+the sky is as the file stores it (the sun under the ground, the night colours), with `PTRN_sky` as an
+animation that plays the day.
+
+**The fog.** With `--hour` the scene's extras say the hour and the weather and hold the
+[fog](#fog-by-time-of-day) of that hour as `fog.py` gives it, when the game's scripts and the `tod` object are
+found: the scripts from `--scripts` (the `.cso` files, a folder holding them or a folder with a `scriptc`
+folder), or else from the files' own folder or one up to three folders above it, or a `scriptc` folder in
+one of those; the `tod` object from `miami_lod.p3d` among the files or the library. Without them the fog is left out and the export says why.
+The fog is Miami's, or the islands' when the export's own files are `islands_LOD.p3d` (and not
+`miami_lod.p3d`). An export with `--weather` and no hour says the weather in the scene's extras.
+
+**The whole city in Blender.** The portal's city export (the **In Blender** box) also writes `sky.glb` beside
+the areas when `Common.p3d` is among the copied files: the weather's sky, centred on the city (the middle of
+what the areas fill, at height 0) and made big enough to reach a tenth past the city's farthest corner, and
+never smaller than the game's twice. The game doesn't do that: it moves the sky with the camera, so the sky
+is always round the viewer, and a scene has no camera to follow. The sky's top node says so in its extras
+(`"followsCamera": true`). The city export is at no hour and in clear weather unless the request to the
+portal gives an `hour` and a `weather` (the page doesn't ask for them yet). Without an hour the sky is as
+stored, with `PTRN_sky` to play the day. With an hour, the sky is posed and coloured for it, and every file of
+the city carries that hour's fog, from the copied `miami_lod.p3d` and `scriptc/graphanims.cso` (or the
+scripts copied out into `binaries/scripts_and_data/`). The export's status says when there is no sky or no
+fog, and why. **Open in Blender** reads the first fog among the files it imports and shows it as the world's
+mist: from the fog's start, over the distance to its end, fading in a straight line, with the Mist pass on;
+the world's colour is the fog colour, turned from the game's screen colours into Blender's linear ones.
 
 A mesh with a [draw-order key](#the-draw-order-key-and-the-sky) carries it in its extras
 (`{"drawOrder": 0.3}`), clamped to 0..1 as the game does.
@@ -659,10 +834,7 @@ what you find. Known gaps:
 
 * the Pure3D ids under [Ids seen but not worked out](#ids-seen-but-not-worked-out);
 * the seven u32 of `0x00010014`, and what the PS2 header's flags word and the vehicles' two extra vectors
-  per vertex are (tangents, most likely);
-* how the sky changes through the day: the sun's turning joint (`sun_grp`, played by `PTRN_sky`) and the
-  sky meshes' vertex-colour sets (`0x00121305`, `0x00121306`, `0x00010F02`), described in
-  [SPEC-001](cleanroom/SPEC-001-lights-sky-streaming.md) but not yet read by a tool.
+  per vertex are (tangents, most likely).
 
 ## Credits and sources
 
@@ -680,7 +852,10 @@ what you find. Known gaps:
   [KHR_lights_punctual](https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Khronos/KHR_lights_punctual/README.md)
   extension, which the map exports' lights follow.
 * The clean-room spec [SPEC-001](cleanroom/SPEC-001-lights-sky-streaming.md): the lights, the daylight's
-  animations, the draw-order key, the sky and the stream graph.
+  animations, the draw-order key, the sky and the stream graph; and in its second part one weather at a time,
+  the sky through the day (the sun's joint and the sky's colour sets) and the fog by time of day.
+* The [Blender Python API](https://docs.blender.org/api/current/) documentation, for the world's mist that
+  shows the fog in Blender.
 
 The rest was worked out from the game files and checked against the other versions of the same files: the
 `RADP` speech against the PC's Ogg Vorbis copies, the PS2's stereo music and movie sound against the PC's,

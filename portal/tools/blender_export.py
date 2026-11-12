@@ -11,7 +11,8 @@ finds the files.
                                         interiors (packages/azones/*_pocket.p3d) and the changing
                                         places (packages/dzones/*_dzone.p3d)
     area_glb(out, index, version, key)  one area as a .glb
-    CityJob                             every city area, in the background
+    CityJob                             every city area, in the background, and the sky round them
+                                        (city_sky); with an hour, the fog of that hour (city_fog)
     inspect(data)                       what a .p3d holds, in words, and whether Blender can show it
     find_blender(bin_dir) / open_in_blender(exe, files, save)
                                         start the person's own Blender with .glb files imported, saving
@@ -468,10 +469,11 @@ def inspect(data: bytes) -> dict:
 
 def area_glb(out: Path, index: Optional[dict], version: str, key: str,
              parsed: Optional[dict] = None, library: Optional[List[Tuple[str, bytes]]] = None,
-             insides: bool = True) -> Tuple[bytes, "P3G.Report"]:
+             insides: bool = True, opts: Optional[dict] = None) -> Tuple[bytes, "P3G.Report"]:
     """One map area (all its files) as a .glb, with what it needs from the shared files. A city area
     opened by itself comes with its buildings' insides (the club's furniture in the club); the whole
-    city leaves them out (insides=False), where each inside is a file of its own."""
+    city leaves them out (insides=False), where each inside is a file of its own. opts: the hour, weather
+    and fog for P3G.export (city_options)."""
     area = next((a for a in areas(out, index, version) if a["key"] == key), None)
     if area is None:
         raise P3G.ExportError("that map area isn't in your copied game files")
@@ -493,14 +495,15 @@ def area_glb(out: Path, index: Optional[dict], version: str, key: str,
             if p.name.lower() not in have:
                 have.add(p.name.lower())
                 files.append((p.name, p.read_bytes()))
-    return area_from_files(files, library, parsed, more)
+    return area_from_files(files, library, parsed, more, opts)
 
 
 def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, bytes]],
-                    parsed: Optional[dict] = None, more: Optional[Sequence] = None) -> Tuple[bytes, "P3G.Report"]:
+                    parsed: Optional[dict] = None, more: Optional[Sequence] = None,
+                    opts: Optional[dict] = None) -> Tuple[bytes, "P3G.Report"]:
     """A map area's .glb from its own files and the shared ones (names and bytes). Props still without a
     model after that are looked for in the more files (the interiors'), and the area is made again with
-    the ones that have them."""
+    the ones that have them. opts: the hour, weather and fog for P3G.export, if any."""
     def make(extra: List[Tuple[str, bytes]]):
         lib = P3G.Library(parsed)
         for name, data in files:
@@ -510,7 +513,7 @@ def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, byt
             if name.lower() not in mine:
                 lib.add(name, data, main=False)
                 mine.add(name.lower())
-        return P3G.export(lib, map_mode=True)
+        return P3G.export(lib, map_mode=True, **(opts or {}))
     glb, report = make([])
     if report.unplaced and more:
         extra = _files_naming(more, report.unplaced, [n for n, _d in files] + [n for n, _d in library])
@@ -519,6 +522,126 @@ def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, byt
             if sum(report2.unplaced.values()) < sum(report.unplaced.values()):
                 return glb2, report2
     return glb, report
+
+
+SKY_FILE = "sky.glb"                             # extracted/blender/<version>/: the city's sky
+FOG_SCRIPTS = "scripts_and_data"                 # binaries/scripts_and_data/<version>/scriptc/: the scripts copied out
+
+
+def city_scripts(out: Path, index: Optional[dict], version: str, bin_dir: Optional[Path] = None) -> Dict[str, Path]:
+    """The game's scripts with the fog (fog.find_scripts: {"miami": graphanims.cso, "islands":
+    island_envobjects.cso}): among the version's copied files, else the scripts copied out of the game into
+    binaries/scripts_and_data/ (this version's folder first)."""
+    import fog as FOG
+    found: List[Path] = []
+    for row in _rows(index, version):
+        low = row[0].lower().replace("\\", "/")
+        if low.endswith(("scriptc/" + FOG.MIAMI_SCRIPT, "scriptc/" + FOG.ISLAND_SCRIPT)):
+            p = GA.file_on_disk(out, index, version, row[0])
+            if p is not None:
+                found.append(p)
+    scripts = FOG.find_scripts(found)
+    if bin_dir is not None:
+        base = Path(bin_dir) / FOG_SCRIPTS
+        others = sorted(p for p in base.iterdir() if p.is_dir() and p.name != version) if base.is_dir() else []
+        for folder in [base / version] + others:
+            for place, path in FOG.find_scripts([folder]).items():
+                scripts.setdefault(place, path)
+    return scripts
+
+
+def city_fog(out: Path, index: Optional[dict], version: str, hour: float, weather: str = "clear",
+             bin_dir: Optional[Path] = None) -> Tuple[Optional[dict], str]:
+    """Miami's fog at an hour in a weather (fog.fog_at), from the copied miami_lod.p3d's tod object and the
+    game's scripts; and "" or why there is none."""
+    import fog as FOG
+    script = city_scripts(out, index, version, bin_dir).get("miami")
+    if script is None:
+        return None, f"No fog: the game's script scriptc/{FOG.MIAMI_SCRIPT} isn't among the copied files."
+    lod = next((p for p in _library(out, index, version) if p.stem.lower() == "miami_lod"), None)
+    try:
+        tod = FOG.tod_object(lod.read_bytes()) if lod is not None else {}
+        if not tod:
+            return None, "No fog: the tod object (in miami_lod.p3d) isn't among the copied files."
+        found = FOG.fog_at(hour, tod, FOG.read_objects(script), weather)
+    except (OSError, P3G.p3d.P3dError, FOG.FogError) as e:
+        return None, f"No fog: {e}"
+    if found is None:
+        return None, f"No fog: {script.name} has none of the EnvironmentObjects the tod object names."
+    return found, ""
+
+
+def city_options(out: Path, index: Optional[dict], version: str, hour: Optional[float] = None,
+                 weather: str = "clear", bin_dir: Optional[Path] = None) -> Tuple[dict, List[str]]:
+    """What the city's exports are made with (P3G.export's hour, weather and fog), and notes for the person.
+    Nothing for the default (no hour, clear weather): the areas come out as they always have."""
+    opts: dict = {}
+    notes: List[str] = []
+    if weather != "clear":
+        opts["weather"] = weather
+    if hour is not None:
+        opts.update(hour=hour, weather=weather)
+        fog, why = city_fog(out, index, version, hour, weather, bin_dir)
+        if fog:
+            opts["fog"] = fog
+        else:
+            notes.append(why)
+    return opts, notes
+
+
+def _common(out: Path, index: Optional[dict], version: str) -> Optional[Path]:
+    """The copied Common.p3d (the sky is in it): the one beside the city's files, else any."""
+    beside = [p for p in _library(out, index, version) if p.name.lower() == "common.p3d"]
+    if beside:
+        return beside[0]
+    for row in _rows(index, version):
+        if row[0].lower().replace("\\", "/").rsplit("/", 1)[-1] == "common.p3d":
+            p = GA.file_on_disk(out, index, version, row[0])
+            if p is not None:
+                return p
+    return None
+
+
+def _city_box(folder: Path) -> Optional[Tuple[List[float], List[float]]]:
+    """The box the city's area files in folder fill (glTF's space), reading only their JSON."""
+    lo, hi = [1e18] * 3, [-1e18] * 3
+    for p in sorted(folder.glob("*.glb")):
+        if p.name == SKY_FILE:
+            continue
+        try:
+            with open(p, "rb") as f:
+                head = f.read(20)
+                glb = head + f.read(struct.unpack_from("<I", head, 12)[0])
+        except (OSError, struct.error):
+            continue
+        box = _glb_box(glb)
+        if box:
+            lo = [min(a, b) for a, b in zip(lo, box[0])]
+            hi = [max(a, b) for a, b in zip(hi, box[1])]
+    return (lo, hi) if lo[0] <= hi[0] else None
+
+
+def city_sky(out: Path, index: Optional[dict], version: str, folder: Path, opts: Optional[dict] = None) -> str:
+    """The sky round the city exported into folder (Common.p3d's, for the weather, posed and coloured for
+    the hour if there is one), as folder/sky.glb: centred on the city and big enough to surround it, since a
+    scene can't move it with the camera the way the game does (P3G.sky_export). "" when written, or why not."""
+    opts = opts or {}
+    common = _common(out, index, version)
+    if common is None:
+        return "No sky: Common.p3d isn't among the copied files."
+    box = _city_box(folder)
+    centre, reach = (0.0, 0.0), 0.0
+    if box:
+        centre = ((box[0][0] + box[1][0]) / 2, (box[0][2] + box[1][2]) / 2)
+        reach = ((box[1][0] - box[0][0]) ** 2 + (box[1][2] - box[0][2]) ** 2) ** 0.5 / 2
+    try:
+        lib = P3G.Library()
+        lib.add(common.name, common.read_bytes(), main=True)
+        glb, _r = P3G.sky_export(lib, opts.get("hour"), opts.get("weather", "clear"), centre, reach, opts.get("fog"))
+    except (OSError, P3G.p3d.P3dError, P3G.ExportError) as e:
+        return f"No sky: {e}."
+    (folder / SKY_FILE).write_bytes(glb)
+    return ""
 
 
 def workers_wanted(use_cores: bool = True) -> int:
@@ -534,11 +657,12 @@ def city_worker(job_file: str) -> int:
     job = json.loads(Path(job_file).read_text(encoding="utf-8"))
     library = [(n, Path(p).read_bytes()) for n, p in job["library"]]
     more = job.get("more") or []
+    opts = job.get("opts") or None
     parsed: dict = {}
     for area in job["areas"]:
         try:
             files = [(n, Path(p).read_bytes()) for n, p in area["files"]]
-            glb, _r = area_from_files(files, library, parsed, more)
+            glb, _r = area_from_files(files, library, parsed, more, opts)
             Path(area["dest"]).write_bytes(glb)
             print(json.dumps({"area": area["name"], "bytes": len(glb)}), flush=True)
         except (P3G.ExportError, OSError, P3G.p3d.P3dError) as e:
@@ -548,13 +672,15 @@ def city_worker(job_file: str) -> int:
 
 class CityJob:
     """Every city area of one version, one .glb each, into extracted/blender/<version>/, in a background
-    thread. Areas line up when imported together. With use_cores, several worker processes share the
-    areas (city_worker), one per processor core but one."""
+    thread, and the sky round them (sky.glb, city_sky). Areas line up when imported together. With
+    use_cores, several worker processes share the areas (city_worker), one per processor core but one.
+    With an hour, the sky is posed and coloured for it and every file carries that hour's fog; the weather
+    picks the sky and the fog (clear when not given)."""
 
     def __init__(self, bin_dir: Path):
         self.bin_dir = bin_dir
         self.status: dict = {"running": False, "version": "", "done": 0, "total": 0, "area": "", "error": "",
-                             "written": 0, "bytes": 0, "folder": ""}
+                             "written": 0, "bytes": 0, "folder": "", "hour": None, "weather": "clear", "notes": []}
         self._thread: Optional[threading.Thread] = None
         self._stop = threading.Event()
         self._lock = threading.Lock()
@@ -569,8 +695,9 @@ class CityJob:
         base = GA.made_dir(self.bin_dir, OUT_NAME)
         return base / GA.LABELS[version] if version in GA.LABELS else base
 
-    def start(self, version: str, index: Optional[dict]) -> Optional[str]:
-        """None when started, or why not."""
+    def start(self, version: str, index: Optional[dict], hour: Optional[float] = None,
+              weather: str = "clear") -> Optional[str]:
+        """None when started, or why not. hour: 0 to 24, or None; weather: clear or rain."""
         with self._lock:
             if self.running:
                 return "Already exporting the city. Wait for it to finish or press Stop."
@@ -579,14 +706,18 @@ class CityJob:
                 return why
             if version not in GA.LABELS:
                 return "Pick a version."
+            if hour is not None and not 0 <= hour <= 24:
+                return "The hour is from 0 to 24."
+            if weather not in P3G.WEATHERS:
+                return "The weather is clear or rain."
             out = GA.out_dir(self.bin_dir)
             todo = city_areas(out, index, version)
             if not todo:
                 return "None of the city's map areas are in your copied game files for that version: copy them first."
             self._stop.clear()
             self.status.update(running=True, version=version, done=0, total=len(todo), area="", error="", written=0,
-                               bytes=0, folder=GA._show_path(self.folder(version)),
-                               workers=min(len(todo), workers_wanted(self.use_cores())))
+                               bytes=0, folder=GA._show_path(self.folder(version)), hour=hour, weather=weather,
+                               notes=[], workers=min(len(todo), workers_wanted(self.use_cores())))
             self._thread = threading.Thread(target=self._run, args=(version, index, todo), daemon=True)
             self._thread.start()
             return None
@@ -599,9 +730,13 @@ class CityJob:
         dest = self.folder(version)
         try:
             dest.mkdir(parents=True, exist_ok=True)
+            opts, notes = city_options(out, index, version, self.status.get("hour"), self.status.get("weather", "clear"),
+                                       self.bin_dir)
+            self.status["notes"] = list(notes)
             if self.status.get("workers", 1) > 1:
-                self._run_parallel(out, index, version, todo, dest)
+                self._run_parallel(out, index, version, todo, dest, opts)
                 if not self._stop.is_set():
+                    self._sky(out, index, version, dest, opts)
                     (dest / CITY_MADE).write_text(_made_by(), encoding="utf-8")
                 return
             library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
@@ -612,7 +747,8 @@ class CityJob:
                     break
                 self.status["area"] = area["name"]
                 try:
-                    glb, _report = area_glb(out, index, version, area["key"], parsed, library, insides=False)
+                    glb, _report = area_glb(out, index, version, area["key"], parsed, library, insides=False,
+                                            opts=opts)
                 except P3G.ExportError:
                     glb = b""
                 if glb:
@@ -622,13 +758,27 @@ class CityJob:
                 self.status["done"] += 1
                 time.sleep(0)
             if not self._stop.is_set():
+                self._sky(out, index, version, dest, opts)
                 (dest / CITY_MADE).write_text(_made_by(), encoding="utf-8")
         except (OSError, P3G.p3d.P3dError) as e:
             self.status["error"] = f"{type(e).__name__}: {e}"
         finally:
             self.status.update(running=False, area="")
 
-    def _run_parallel(self, out: Path, index: Optional[dict], version: str, todo: List[dict], dest: Path) -> None:
+    def _sky(self, out: Path, index: Optional[dict], version: str, dest: Path, opts: dict) -> None:
+        """The sky round the city (city_sky); an earlier export's sky goes first, so a sky never stays from
+        another weather or hour."""
+        self.status["area"] = "the sky"
+        try:
+            (dest / SKY_FILE).unlink()
+        except OSError:
+            pass
+        why = city_sky(out, index, version, dest, opts)
+        if why:
+            self.status["notes"].append(why)
+
+    def _run_parallel(self, out: Path, index: Optional[dict], version: str, todo: List[dict], dest: Path,
+                      opts: Optional[dict] = None) -> None:
         """The areas shared out between worker processes (python blender_export.py --city-worker job.json)."""
         import json
         n = self.status["workers"]
@@ -650,7 +800,8 @@ class CityJob:
             if not areas_:
                 continue
             job = work / f"city_job_{i}.json"
-            job.write_text(json.dumps({"library": library, "more": more, "areas": areas_}), encoding="utf-8")
+            job.write_text(json.dumps({"library": library, "more": more, "areas": areas_, "opts": opts or {}}),
+                           encoding="utf-8")
             procs.append(subprocess.Popen([sys.executable, str(Path(__file__).resolve()), "--city-worker", str(job)],
                                           stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL,
                                           text=True, creationflags=flags))
@@ -730,7 +881,7 @@ OPEN_SCRIPT = r"""
 # The import runs once Blender's window is up, inside that window. Run straight from --python (and after
 # reloading the start-up file), Blender's own importer had no window to work in: a map came in, but anything
 # with a skeleton stopped half-way and left only the importer's helper ball (an "Icosphere") in the scene.
-import bpy, re, traceback
+import bpy, json, re, struct, traceback
 FILES = %(files)r
 SAVE = %(save)r
 STATE = {"at": 0, "problems": [], "undo": None}
@@ -792,6 +943,66 @@ def start():
         pass
 
 
+def fog_of(path):
+    # The fog an export made with an hour carries in its scene's extras (portal/tools/fog.py), read from the
+    # .glb itself: its JSON part, after the 12-byte header and the part's own 8.
+    try:
+        with open(path, "rb") as f:
+            head = f.read(20)
+            if head[:4] != b"glTF":
+                return None
+            text = f.read(struct.unpack_from("<I", head, 12)[0])
+        if b'"fog"' not in text:
+            return None
+        doc = json.loads(text)
+        scene = (doc.get("scenes") or [{}])[doc.get("scene", 0)]
+        return (scene.get("extras") or {}).get("fog")
+    except Exception:
+        return None
+
+
+def linear(c):
+    # the game's colours are screen (sRGB) colours; Blender's colour settings are linear
+    return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+
+
+def show_fog(scene, fog):
+    # The game's fog is plain linear fog by distance from the camera, from the start to the end distance, in
+    # the fog colour: here the world's mist (from the start, over the distance to the end, fading in a straight
+    # line; the Mist pass shows it), and the world's colour is the fog colour.
+    if not fog or not fog.get("enabled"):
+        return False
+    world = scene.world
+    if world is None:
+        world = scene.world = bpy.data.worlds.new("Scarface")
+    start, end = float(fog.get("start", 0.0)), float(fog.get("end", 0.0))
+    mist = world.mist_settings
+    mist.start = start
+    mist.depth = max(0.0, end - start)
+    mist.falloff = "LINEAR"
+    try:
+        mist.use_mist = True                     # Blenders that still have the switch
+    except Exception:
+        pass
+    colour = [linear(c) for c in fog.get("color", (0.0, 0.0, 0.0))]
+    world.color = colour
+    try:
+        if world.node_tree is None:
+            world.use_nodes = True
+        for node in world.node_tree.nodes:
+            if node.type == "BACKGROUND":
+                node.inputs[0].default_value = colour + [1.0]
+    except Exception:
+        pass
+    for layer in scene.view_layers:
+        try:
+            layer.use_pass_mist = True
+        except Exception:
+            pass
+    scene["scarface_fog"] = json.dumps(fog)
+    return True
+
+
 def finish(problems):
     try:
         if STATE.get("undo") is not None:
@@ -800,6 +1011,10 @@ def finish(problems):
         pass
     scene = bpy.context.scene
     tidy(scene)
+    try:                                         # the first file that has fog (each export with an hour has)
+        show_fog(scene, next((f for f in (fog_of(p) for p in FILES) if f), None))
+    except Exception:
+        traceback.print_exc()
     ends = [a.frame_range[1] for a in bpy.data.actions]
     if ends:
         scene.frame_start, scene.frame_end = 0, int(max(ends))

@@ -75,11 +75,12 @@ NAMES: Dict[int, str] = {
     0x8800181: "Game Group", 0x8800201: "Water Dock", 0x8800202: "Water Obstacle", 0x8800203: "Water Shallow Area",
     0x9900190: "Script Object Data", 0x9900191: "Game Group Data", 0x9900192: "Script Object Property (?)",
     0x9900194: "Script Object Property Value (?)",
-    # A light's sub-chunks and the draw-order key: descriptive names of ours, from the clean-room spec
-    # docs/cleanroom/SPEC-001-lights-sky-streaming.md.
+    # A light's sub-chunks, the draw-order key and the sky's vertex-colour sets: descriptive names of ours,
+    # from the clean-room spec docs/cleanroom/SPEC-001-lights-sky-streaming.md.
     0x13001: "Light Direction", 0x13002: "Light Position", 0x13003: "Light Spot Cone",
     0x13004: "Light Casts Shadows", 0x13006: "Light Decay Range", 0x13007: "Light Decay Range Rotation",
     0x13008: "Light Illumination Kind", 0x122000: "Draw Order",
+    0x121305: "Vertex Colour Sets", 0x121306: "Vertex Colour Set", 0x10F02: "Vertex Colour Amounts",
 }
 for _cid in range(0x1005002, 0x100500C):
     NAMES[_cid] = "Sound Entity"
@@ -89,6 +90,8 @@ VERTEX_BITS = ((0x2000, "position"), (0x0010, "normal"), (0x0020, "colour"), (0x
                (0x0100, "weights"))
 QUATERNION_CHANNELS = (0x121105, 0x121111, 0x121112, 0x121114)
 COLOUR_CHANNEL = 0x121109
+INTEGER_CHANNEL = 0x12110E
+COLOUR_SETS, COLOUR_SET, COLOUR_AMOUNTS = 0x121305, 0x121306, 0x10F02
 LIGHT_TYPES = {0: "ambient", 1: "point", 2: "directional", 3: "spot"}
 DECAY_SHAPES = {0: "none", 1: "sphere", 2: "box", 3: "ellipsoid"}
 ILLUMINATION = {0: "adds light", 1: "none", 2: "takes light away"}
@@ -453,6 +456,22 @@ def _sky(r: _R) -> dict:
     return {"name": r.text(), "composite drawable": r.text()}
 
 
+def _colour_sets(r: _R) -> dict:
+    """A mesh's vertex-colour sets: u32 version, u32 count n, n u32 (0, 1, 2 ...), n u32 (meaning not known);
+    the sets follow as sub-chunks."""
+    version, n = r.u32(), r.u32()
+    numbers = [r.u32() for _ in range(n)]
+    return {"version": version, "sets": n, "numbers": numbers, "unknown": [r.u32() for _ in range(n)]}
+
+
+def _colour_set(r: _R) -> dict:
+    return {"version": r.u32(), "frame": r.u32(), "unknown": r.u32()}
+
+
+def _colour_amounts(r: _R) -> dict:
+    return {"version": r.u32(), "parameter": r.fourcc(), "count": r.u32()}
+
+
 def _stream_package(r: _R) -> dict:
     return {"name": r.text(), "number": r.u32()}             # what the number means isn't known
 
@@ -495,6 +514,31 @@ def light(data: bytes, c: Chunk) -> dict:
     return out
 
 
+def vertex_colour_sets(data: bytes, mesh: Chunk) -> List[Dict[int, Tuple[int, int, int]]]:
+    """A mesh's vertex-colour sets (0x121305 right under it), in order: for each set (0x121306), what its
+    0x10F02 adds to each vertex, {vertex number: (r, g, b)}. The sky's meshes have them; the animation
+    VRTX_<mesh name> picks the set shown at each hour. [] for a mesh without them."""
+    sets = mesh.find(COLOUR_SETS)
+    out: List[Dict[int, Tuple[int, int, int]]] = []
+    for s in (sets.children if sets else []):
+        if s.id != COLOUR_SET:
+            continue
+        amounts: Dict[int, Tuple[int, int, int]] = {}
+        k = s.find(COLOUR_AMOUNTS)
+        info = fields(data, k) if k is not None else {}
+        if info.get("parameter") == "CLR0":
+            start, end = k.body
+            p = start + 12
+            for _ in range(info["count"]):
+                if p + 12 > end:
+                    break
+                v, red, green, blue, _zero = struct.unpack_from("<I4H", data, p)
+                amounts[v] = (red, green, blue)
+                p += 12
+        out.append(amounts)
+    return out
+
+
 FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x7000: _history,
     0x10000: _mesh, 0x10001: _skin, 0x10020: _prim_group, 0x10003: _box, 0x10004: _sphere,
@@ -513,8 +557,9 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x13004: _casts_shadows, 0x13006: _decay_range, 0x13007: _decay_rotation, 0x13008: _illumination,
     0x2380: _light_group, 0x8800007: _light_group_record, 0x122000: _draw_order, 0x8800002: _sky,
     0x8800100: _stream_package, 0x8800101: _stream_trigger,
+    COLOUR_SETS: _colour_sets, COLOUR_SET: _colour_set, COLOUR_AMOUNTS: _colour_amounts,
 }
-for _cid in (0x121100, 0x121101, 0x121104, COLOUR_CHANNEL) + QUATERNION_CHANNELS:
+for _cid in (0x121100, 0x121101, 0x121104, COLOUR_CHANNEL, INTEGER_CHANNEL) + QUATERNION_CHANNELS:
     FIELDS[_cid] = _channel
 FIELDS[0x121102] = FIELDS[0x121103] = _dof_channel
 
@@ -534,8 +579,8 @@ def fields(data: bytes, c: Chunk) -> dict:
 
 def channel_keys(data: bytes, c: Chunk) -> Tuple[str, List[int], List[tuple]]:
     """(parameter, key frames, values) of an animation channel. Quaternions come back as (x, y, z, w),
-    a Colour channel's 0xAARRGGBB values as (a, r, g, b) from 0 to 255; a Vector1DOF or Vector2DOF channel
-    gives only its moving components (see its mapping and constants)."""
+    a Colour channel's 0xAARRGGBB values as (a, r, g, b) from 0 to 255, an Integer channel's as (n,); a
+    Vector1DOF or Vector2DOF channel gives only its moving components (see its mapping and constants)."""
     r = _R(data, *c.body)
     if c.id in (0x121102, 0x121103):
         info = _dof_channel(r)
@@ -559,6 +604,8 @@ def channel_keys(data: bytes, c: Chunk) -> Tuple[str, List[int], List[tuple]]:
         vals = [r.floats(size) for _ in range(n)]
     elif c.id == COLOUR_CHANNEL:                             # the frames, then a u32 0xAARRGGBB per key
         vals = [tuple((v >> s) & 0xFF for s in (24, 16, 8, 0)) for v in struct.unpack_from(f"<{n}I", data, r.p)]
+    elif c.id == INTEGER_CHANNEL:                            # the frames, then a u32 per key, no padding between
+        vals = [(v,) for v in struct.unpack_from(f"<{n}I", data, r.p)]
     else:
         raise P3dError(f"no reader for {NAMES.get(c.id, hex(c.id))}")
     return param, frames, vals

@@ -1255,3 +1255,405 @@ def test_a_strip_with_no_index_list():
     data = p3d(chunk(0x10020, head, chunk(0x10005, struct.pack("<I12f", 4, *flat))))
     g = G.geometry(data, G.p3d.read_tree(data)[0])
     assert g.triangles == [(0, 1, 2), (2, 1, 3)]
+
+
+# --------------------------------------------------------------------------- one weather at a time
+
+def with_chunks(data, *more):
+    """A made-up .p3d with more chunks at the end."""
+    body = data[12:] + b"".join(more)
+    return b"P3D\xff" + struct.pack("<II", 12, 12 + len(body)) + body
+
+
+def weather_file():
+    """A low-detail city file with the clear weather's daylight (kind 0) and the rain's (kind 1)."""
+    sun = light("MiamiSunShape", 2, 0xFF1F2D30, kids=sub((0, 0, 0), direction=(0, -0.788, -0.616)))
+    ambient = light("MiamiAmbientShape", 0, 0xFF232530, kids=sub((0, 0, 0)))
+    rainy = light("MiamiRainySunShape", 2, 0xFF101418, kids=sub((0, 0, 0), direction=(0, -1, 0)))
+    groups = (light_group("zone_lights", ["MiamiSunShape", "MiamiAmbientShape"], kind=0)
+              + light_group("zone_rainlights", ["MiamiRainySunShape"], kind=1))
+    return lit_area("low_LOD", sun, ambient, rainy, groups)
+
+
+def daylight_export(**kw):
+    lib = G.Library()
+    lib.add("miami_lod.p3d", weather_file(), main=True)
+    glb, report = G.export(lib, map_mode=True, **kw)
+    doc, _ = read_glb(glb)
+    return doc, report
+
+
+def test_one_weather_at_a_time():
+    doc, report = daylight_export()                                    # clear weather unless asked: as the game starts
+    assert "extensions" in node_named(doc, "MiamiSunShape") and report.gltf_lights == 1
+    rainy = node_named(doc, "MiamiRainySunShape")
+    assert "extensions" not in rainy                                   # kept as data: an empty node with extras
+    assert rainy["extras"]["dataOnly"] is True and rainy["extras"]["lightType"] == "directional"
+    assert node_named(doc, "zone_lights")["extras"] == {"lightGroupKind": 0, "lightGroupRecord": "zone_lights",
+                                                        "weather": "clear"}
+    assert node_named(doc, "zone_rainlights")["extras"] == {"lightGroupKind": 1, "lightGroupRecord": "zone_rainlights",
+                                                            "weather": "rain", "dataOnly": True}
+    assert any("zone_rainlights: the rain weather's daylight, kept as data only" in line for line in report.lines())
+    assert "extras" not in doc["scenes"][0]                            # no weather asked for: nothing said
+    doc, report = daylight_export(weather="rain")
+    table = doc["extensions"]["KHR_lights_punctual"]["lights"]
+    assert [lt["name"] for lt in table] == ["MiamiRainySunShape"] and report.gltf_lights == 1
+    assert node_named(doc, "MiamiSunShape")["extras"]["dataOnly"] is True
+    assert doc["scenes"][0]["extras"] == {"weather": "rain"}
+    with pytest.raises(G.ExportError):
+        daylight_export(weather="snow")
+
+
+def test_other_light_groups_are_not_weather():
+    doc, _ = read_glb(export(lit_area("w_lit", light("lamp", 1, 0xFFFFFFFF, kids=sub((1, 1, 1))),
+                                     light_group("interior", ["lamp"], kind=3)), map_mode=True, weather="rain")[0])
+    assert node_named(doc, "interior")["extras"] == {"lightGroupKind": 3, "lightGroupRecord": "interior"}
+    assert "dataOnly" not in node_named(doc, "lamp")["extras"] and "extensions" in node_named(doc, "lamp")
+
+
+# --------------------------------------------------------------------------- the sky through the day
+
+from test_p3d import colour_sets, integer_channel  # noqa: E402
+
+SUN_OFFSET = (832.597, -0.755, -1.531)                  # the sun's offset from sun_grp (spec, section 3.3)
+SUN_REST = (8.0, -755.2, 350.5)                         # the rest pose: under the ground
+# made-up keys: frame, and how far sun_grp turns about the game's z axis (degrees); the key at frame 154 is
+# stored with the opposite sign (the same rotation), as the real one is
+SUN_KEYS = [(0, -65.1, False), (120, 50.5, False), (153, 70.0, False), (154, 72.0, True), (240, -65.5, False)]
+DOME_OWN = 0xFF0A0D14                                   # the night sky
+DOME_SETS = [(0, 0, 0), (104, 201, 209), (132, 149, 204), (250, 250, 250)]
+HORIZON_OWN = 0xFF6080A0
+
+
+def turn_z(degrees, flip=False):
+    a = math.radians(degrees) / 2
+    q = (0.0, 0.0, math.sin(a), math.cos(a))
+    return tuple(-v for v in q) if flip else q
+
+
+def day_animation(name, kind, groups):
+    """An animation of 241 frames (one day); groups: (group name, channel chunks, how many)."""
+    gl = b"".join(chunk(0x121001, struct.pack("<I", 0) + text(g) + struct.pack("<II", 0, k), chs) for g, chs, k in groups)
+    return chunk(0x121000, struct.pack("<I", 0) + text(name) + kind + struct.pack("<ffI", 241.0, 30.0, 1),
+                 chunk(0x121002, struct.pack("<II", 0, len(groups)), gl))
+
+
+def keyed_channel(cid, param, keys, fmt):
+    """A channel: the frames, then the values, no padding between them (an odd number of keys too)."""
+    n = len(keys)
+    return chunk(cid, struct.pack("<I", 1) + param + struct.pack(f"<I{n}H", n, *[f for f, _ in keys])
+                 + b"".join(struct.pack(fmt, *v) for _, v in keys))
+
+
+def sky_mesh(name, own, sets, key, positions):
+    flat_colours = chunk(0x10008, struct.pack("<I4I", 4, *[own] * 4))
+    return chunk(0x10000, text(name) + struct.pack("<II", 0, 1),
+                 prim_group("skyShader", 1, 0x2021, positions, [0, 1, 2, 3], kids=flat_colours)
+                 + chunk(0x122000, struct.pack("<If", 0, key)) + colour_sets([{v: s for v in range(4)} for s in sets]))
+
+
+def sky_file():
+    """A made-up Common.p3d: the clear sky (a dome whose colours change through the day, a horizon that keeps
+    its own, the sun on sun_grp), PTRN_sky and the VRTX_ animations, and the rain sky."""
+    rig = skeleton("sky", [("sky", 0, (0, 0, 0)), ("skybox", 0, (0, 0, 0)), ("sun_grp", 0, (0, 0, 0)),
+                           ("sun", 2, SUN_REST), ("skybox_horizon", 0, (0, 0, 0))])
+    dome = sky_mesh("skyboxShape", DOME_OWN, DOME_SETS, 1.0,
+                    [(-100.0, 50.0, -100.0), (100.0, 50.0, -100.0), (-100.0, 50.0, 100.0), (100.0, 50.0, 100.0)])
+    horizon = sky_mesh("skybox_horizonShape", HORIZON_OWN, [(0, 0, 0), (0, 0, 0)], 0.0,
+                       [(-90.0, 0.0, -90.0), (90.0, 0.0, -90.0), (-90.0, 10.0, -90.0), (90.0, 10.0, -90.0)])
+    sky = composite("sky", "sky", [("skyboxShape", 1, 1), ("skybox_horizonShape", 1, 4), ("sun", 1, 3)])
+    turn = keyed_channel(0x121105, b"ROT\0", [(f, turn_z(d, flip)) for f, d, flip in SUN_KEYS], "<4f")
+    offset = keyed_channel(0x121104, b"TRAN", [(0, SUN_OFFSET), (240, SUN_OFFSET)], "<3f")
+    ptrn = day_animation("PTRN_sky", b"PTRN", [("sun_grp", turn, 1), ("sun", offset, 1)])
+    vrtx = day_animation("VRTX_skyboxShape", b"VRTX", [("skyboxShape", integer_channel([40, 90, 120, 180], [0, 1, 2, 3]), 1)])
+    vrtx2 = day_animation("VRTX_skybox_horizonShape", b"VRTX",
+                          [("skybox_horizonShape", integer_channel([0, 240], [0, 1]), 1)])
+    rain = (skeleton("rainy_skybox", [("rainy_skybox", 0, (0, 0, 0))]), mesh("rainy_skyShape"),
+            composite("rainy_skybox", "rainy_skybox", [("rainy_skyShape", 1, 0)]))
+    return p3d(rig, dome, horizon, sky, ptrn, vrtx, vrtx2, *rain,
+               chunk(0x8800002, text("sky") + text("sky")), chunk(0x8800002, text("rainy_skybox") + text("rainy_skybox")))
+
+
+def where(doc):
+    """Every node's place in the scene (the first node of each name)."""
+    out = {}
+
+    def walk(i, m):
+        n = doc["nodes"][i]
+        m = G._mul(m, G._trs(tuple(n.get("translation", (0, 0, 0))), tuple(n.get("rotation", (0, 0, 0, 1))),
+                             tuple(n.get("scale", (1, 1, 1)))))
+        out.setdefault(n["name"], (m[0][3], m[1][3], m[2][3]))
+        for c in n.get("children", []):
+            walk(c, m)
+    for r in doc["scenes"][0]["nodes"]:
+        walk(r, G._identity())
+    return out
+
+
+def sun_height(doc):
+    """How high the sun is over the horizon, in degrees, seen from sun_grp."""
+    at = where(doc)
+    x, y, z = (a - b for a, b in zip(at["sun"], at["sun_grp"]))
+    return math.degrees(math.atan2(y, math.hypot(x, z)))
+
+
+def height_for(turn):
+    """The same worked out by hand: the sun's offset turned about the game's z axis."""
+    a = math.radians(turn)
+    x, y, z = SUN_OFFSET
+    return math.degrees(math.atan2(x * math.sin(a) + y * math.cos(a), math.hypot(x * math.cos(a) - y * math.sin(a), z)))
+
+
+def sky_at(hour=None, **kw):
+    lib = G.Library()
+    lib.add("Common.p3d", sky_file(), main=True)
+    glb, report = G.export(lib, hour=hour, **kw)
+    doc, binc = read_glb(glb)
+    return doc, binc, report
+
+
+def mesh_colours(doc, binc, name):
+    m = next(m for m in doc["meshes"] if m["name"] == name)
+    return {tuple(v[:3]) for v in values(doc, binc, m["primitives"][0]["attributes"]["COLOR_0"])}, m.get("extras")
+
+
+def test_without_an_hour_the_sky_is_as_stored():
+    doc, binc, report = sky_at()
+    assert report.models == ["sky", "rainy_skybox"]                    # both skies, side by side, as models
+    sky_top = doc["scenes"][0]["nodes"][0]
+    sun = [v - t for v, t in zip(where(doc)["sun"], doc["nodes"][sky_top].get("translation", (0, 0, 0)))]
+    assert sun == pytest.approx([8.0, -755.2, -350.5], abs=1e-3)       # the rest pose: under the ground (Z mirrored)
+    assert mesh_colours(doc, binc, "skyboxShape") == ({(10, 13, 20)}, {"drawOrder": 1.0})
+    assert [a["name"] for a in doc["animations"]] == ["PTRN_sky"]      # the day, to play
+    assert "extras" not in doc["scenes"][0] and "extras" not in doc["nodes"][sky_top]
+    lib = G.Library()
+    lib.add("Common.p3d", sky_file(), main=True)
+    assert G.export(lib)[0] == G.export(lib, hour=None, weather=None, fog=None)[0]
+
+
+@pytest.mark.parametrize("hour, turn", [(0, -65.1), (6, -7.3), (12, 50.5), (15.3, 70.0), (15.4, 72.0),
+                                        (20, 72.0 - 137.5 * 46 / 86), (24, -65.5)])
+def test_the_sun_where_the_game_puts_it(hour, turn):
+    doc, _binc, _report = sky_at(hour)
+    assert sun_height(doc) == pytest.approx(height_for(turn), abs=0.01)
+    assert not doc.get("animations")                                   # posed: PTRN_sky isn't played over it
+    sky_top = doc["nodes"][doc["scenes"][0]["nodes"][0]]
+    assert sky_top["name"] == "sky" and sky_top["extras"] == {"hour": hour}
+
+
+def test_the_sun_takes_the_shorter_way_round_where_the_keys_change_sign():
+    # frames 153 and 154 hold the same kind of rotation with opposite signs: half way, the sun is half way
+    doc, _binc, _report = sky_at(15.35)
+    assert sun_height(doc) == pytest.approx(height_for(71.0), abs=0.01)
+    assert G._slerp(turn_z(70.0), turn_z(72.0, flip=True), 0.5) == pytest.approx(turn_z(71.0), abs=1e-9)
+
+
+@pytest.mark.parametrize("hour, colour, picked", [
+    (2, (10, 13, 20), 0.0),                     # before the first key: the first set (nothing added)
+    (9, (114, 214, 229), 1.0),                  # a key: set 1 added to the night sky
+    (10, (123, 197, 227), 1.3333),              # a third of the way from set 1 to set 2
+    (12, (142, 162, 224), 2.0),
+    (20, (255, 255, 255), 3.0),                 # after the last key: the last set, each colour kept to 255
+])
+def test_the_sky_colours_of_an_hour(hour, colour, picked):
+    doc, binc, _report = sky_at(hour)
+    assert mesh_colours(doc, binc, "skyboxShape") == ({colour}, {"drawOrder": 1.0, "hour": hour, "colourSet": picked})
+    horizon, extras = mesh_colours(doc, binc, "skybox_horizonShape")
+    assert horizon == {(0x60, 0x80, 0xA0)} and extras["drawOrder"] == 0.0     # the horizon keeps its own colours
+
+
+def test_the_weather_picks_the_sky():
+    assert sky_at(12, weather="rain")[2].models == ["rainy_skybox"]
+    assert sky_at(weather="clear")[2].models == ["sky"]
+
+
+def test_a_sky_round_a_whole_city():
+    lib = G.Library()
+    lib.add("Common.p3d", sky_file(), main=False)
+    fog = {"start": 25.0, "end": 900.0, "color": [0.7843, 0.7843, 0.5882], "enabled": True}
+    glb, report = G.sky_export(lib, 12, "clear", centre=(500.0, -300.0), reach=1000.0, fog=fog)
+    doc, _binc = read_glb(glb)
+    top = doc["nodes"][doc["scenes"][0]["nodes"][0]]
+    radius = math.hypot(100, 100)                                      # the dome's reach across
+    assert top["translation"] == [500.0, 0.0, -300.0]                  # on the city's middle, at height 0
+    assert top["scale"] == pytest.approx([G.SKY_MARGIN * 1000 / radius] * 3)
+    assert top["extras"] == {"hour": 12, "sky": "sky", "weather": "clear", "followsCamera": True}
+    assert doc["scenes"][0]["extras"] == {"weather": "clear", "hour": 12, "fog": fog}
+    assert report.models == ["sky"] and not doc.get("animations")
+    doc, _binc = read_glb(G.sky_export(lib, None, "rain", reach=0.5)[0])
+    top = doc["nodes"][doc["scenes"][0]["nodes"][0]]
+    assert top["name"] == "rainy_skybox" and top["scale"] == [G.SKY_SCALE] * 3     # never smaller than the game's
+    doc, _binc = read_glb(G.sky_export(lib)[0])
+    assert [a["name"] for a in doc["animations"]] == ["PTRN_sky"]      # no hour: the day to play, as a model export
+    with pytest.raises(G.ExportError):
+        G.sky_export(G.Library(), 12)
+
+
+# --------------------------------------------------------------------------- the fog in exports and in Blender
+
+import fog as FOG  # noqa: E402
+import torque_script as TS  # noqa: E402
+from test_fog import env_script, tod_chunk  # noqa: E402
+
+
+def game_folder(tmp_path, scripts=True):
+    """packages/z04/miami_lod.p3d (the daylight and the tod object), Common.p3d and scriptc/graphanims.cso."""
+    z04 = tmp_path / "game" / "packages" / "z04"
+    z04.mkdir(parents=True)
+    (z04 / "miami_lod.p3d").write_bytes(with_chunks(weather_file(), tod_chunk()))
+    (z04 / "Common.p3d").write_bytes(sky_file())
+    if scripts:
+        (tmp_path / "game" / "scriptc").mkdir()
+        (tmp_path / "game" / "scriptc" / "graphanims.cso").write_bytes(TS.compile_text(env_script()))
+    return z04
+
+
+def test_hour_weather_and_fog_on_the_command_line(tmp_path, capsys):
+    z04 = game_folder(tmp_path)
+    out = tmp_path / "city.glb"
+    assert G.main([str(out), str(z04 / "miami_lod.p3d"), "--map", "--hour", "12"]) == 0
+    extras = read_glb(out.read_bytes())[0]["scenes"][0]["extras"]
+    assert extras["hour"] == 12 and extras["weather"] == "clear"         # the scripts found in game/scriptc
+    assert (extras["fog"]["start"], extras["fog"]["end"], extras["fog"]["keys"][0]) == (25, 900, "environment_clear_12")
+    assert G.main([str(out), str(z04 / "miami_lod.p3d"), "--map", "--hour", "2", "--weather", "rain"]) == 0
+    doc = read_glb(out.read_bytes())[0]
+    assert doc["scenes"][0]["extras"]["fog"]["end"] == pytest.approx(512.5)  # rain, between the 24 and the 4 key
+    assert "extensions" in node_named(doc, "MiamiRainySunShape")
+    assert "zone_lights: the clear weather's daylight, kept as data only" in capsys.readouterr().out
+    # the sky alone, at an hour, needs no --map; its fog needs the tod object, from miami_lod.p3d
+    assert G.main([str(out), str(z04 / "Common.p3d"), "--hour", "12", "--library", str(z04 / "miami_lod.p3d")]) == 0
+    doc = read_glb(out.read_bytes())[0]
+    assert sun_height(doc) == pytest.approx(height_for(50.5), abs=0.01) and doc["scenes"][0]["extras"]["fog"]["end"] == 900
+    assert G.main([str(out), str(z04 / "Common.p3d"), "--hour", "12"]) == 0
+    assert "no fog: the tod object (in miami_lod.p3d) isn't in the files used" in capsys.readouterr().out
+    with pytest.raises(SystemExit):
+        G.main([str(out), str(z04 / "miami_lod.p3d"), "--weather", "snow"])
+
+
+def test_without_the_scripts_the_fog_is_left_out_and_said_so(tmp_path, capsys):
+    z04 = game_folder(tmp_path, scripts=False)
+    out = tmp_path / "city.glb"
+    assert G.main([str(out), str(z04 / "miami_lod.p3d"), "--map", "--hour", "12"]) == 0
+    assert read_glb(out.read_bytes())[0]["scenes"][0]["extras"] == {"weather": "clear", "hour": 12}
+    assert "no fog: the game's script scriptc/graphanims.cso wasn't found (--scripts says where)" in capsys.readouterr().out
+    scripts = tmp_path / "elsewhere"
+    scripts.mkdir()
+    (scripts / "graphanims.cso").write_bytes(TS.compile_text(env_script()))
+    assert G.main([str(out), str(z04 / "miami_lod.p3d"), "--map", "--hour", "9", "--scripts", str(scripts)]) == 0
+    assert read_glb(out.read_bytes())[0]["scenes"][0]["extras"]["fog"]["color"] == [round(c / 255, 4) for c in (245, 240, 160)]
+
+
+class FakeWorld:
+    def __init__(self):
+        self.mist_settings = type("Mist", (), {"start": 5.0, "depth": 25.0, "falloff": "QUADRATIC"})()
+        self.color = (0.05, 0.05, 0.05)
+        self.background = type("Node", (), {"type": "BACKGROUND", "inputs": [type("In", (), {"default_value": None})()]})()
+        self.node_tree = type("Tree", (), {"nodes": [self.background]})()
+
+
+class FakeScene(dict):
+    def __init__(self):
+        super().__init__()
+        self.world = None
+        self.view_layers = [type("Layer", (), {"use_pass_mist": False})()]
+
+
+def blender_script(monkeypatch, files):
+    """The Blender script run against a stand-in for Blender's bpy (nothing imported): its functions."""
+    import sys
+    import types
+    import blender_export as BX
+    bpy = types.SimpleNamespace(app=types.SimpleNamespace(background=False, timers=types.SimpleNamespace(
+        register=lambda *a, **k: None)), data=types.SimpleNamespace(worlds=types.SimpleNamespace(new=lambda name: FakeWorld())))
+    monkeypatch.setitem(sys.modules, "bpy", bpy)
+    ns: dict = {}
+    exec(compile(BX.OPEN_SCRIPT % {"files": [str(f) for f in files], "save": None}, "open_in_blender.py", "exec"), ns)
+    return ns
+
+
+def test_the_blender_script_shows_the_fog(tmp_path, monkeypatch):
+    fog = FOG.fog_at(12, FOG.tod_object(p3d(tod_chunk())), FOG.environment_objects(env_script()))
+    lib = G.Library()
+    lib.add("miami_lod.p3d", weather_file(), main=True)
+    (tmp_path / "foggy.glb").write_bytes(G.export(lib, map_mode=True, hour=12, fog=fog)[0])
+    (tmp_path / "clear.glb").write_bytes(G.export(lib, map_mode=True)[0])
+    (tmp_path / "not.glb").write_bytes(b"nothing")
+    ns = blender_script(monkeypatch, [tmp_path / "clear.glb", tmp_path / "foggy.glb"])
+    assert ns["fog_of"](str(tmp_path / "foggy.glb")) == fog
+    assert ns["fog_of"](str(tmp_path / "clear.glb")) is None and ns["fog_of"](str(tmp_path / "not.glb")) is None
+    scene = FakeScene()
+    assert ns["show_fog"](scene, fog)
+    mist = scene.world.mist_settings
+    assert (mist.start, mist.depth, mist.falloff, mist.use_mist) == (25.0, 875.0, "LINEAR", True)
+    want = [ns["linear"](c) for c in fog["color"]]
+    assert scene.world.color == pytest.approx(want) and ns["linear"](1.0) == pytest.approx(1.0)
+    assert scene.world.background.inputs[0].default_value == pytest.approx(want + [1.0])
+    assert scene.view_layers[0].use_pass_mist is True and json.loads(scene["scarface_fog"]) == fog
+    assert not ns["show_fog"](FakeScene(), None) and not ns["show_fog"](FakeScene(), dict(fog, enabled=False))
+    import blender_export as BX
+    script = BX.OPEN_SCRIPT % {"files": ["a.glb"], "save": "a.blend"}
+    assert "show_fog(scene, next((f for f in (fog_of(p) for p in FILES) if f), None))" in script
+
+
+def test_the_city_with_its_sky_and_fog(tmp_path, monkeypatch):
+    import blender_export as BX
+    import game_assets as GA
+    z, files = "cement.rcf/packages/z04/", city_files()
+    files.update({z + "Common.p3d": sky_file(), z + "miami_lod.p3d": with_chunks(area("low_LOD"), tod_chunk()),
+                  "cement.rcf/scriptc/graphanims.cso": TS.compile_text(env_script())})
+    out, index = copied_game(tmp_path, files)
+    monkeypatch.setattr(GA, "out_dir", lambda bin_dir=None: out)
+    folder = tmp_path / "blender" / "PC"
+
+    def run(cores=False, **kw):
+        monkeypatch.setattr(BX, "workers_wanted", lambda use_cores=True: 2 if use_cores else 1)
+        job = BX.CityJob(tmp_path)
+        job.use_cores = lambda: cores
+        assert job.start("pc", index, **kw) is None
+        job._thread.join(60)
+        return job
+    job = run()                                                        # as before, and the sky round the city
+    assert sorted(p.name for p in folder.glob("*.glb")) == ["a_01.glb", "b_02.glb", "shop_01 (inside).glb", "sky.glb"]
+    assert job.status["notes"] == [] and job.status["written"] == 3
+    doc = read_glb((folder / "sky.glb").read_bytes())[0]
+    top = doc["nodes"][doc["scenes"][0]["nodes"][0]]
+    lo, hi = BX._city_box(folder)
+    assert top["translation"] == pytest.approx([(lo[0] + hi[0]) / 2, 0.0, (lo[2] + hi[2]) / 2])
+    assert top["scale"] == [G.SKY_SCALE] * 3 and "hour" not in top["extras"]       # the made-up city is small
+    assert "extras" not in read_glb((folder / "a_01.glb").read_bytes())[0]["scenes"][0]
+    job = run(hour=12, weather="rain")
+    assert job.status["notes"] == [] and (job.status["hour"], job.status["weather"]) == (12, "rain")
+    doc = read_glb((folder / "sky.glb").read_bytes())[0]
+    assert doc["nodes"][doc["scenes"][0]["nodes"][0]]["name"] == "rainy_skybox"
+    assert doc["scenes"][0]["extras"]["fog"]["keys"][0] == "environment_rainy_12"
+    area_scene = read_glb((folder / "a_01.glb").read_bytes())[0]["scenes"][0]
+    assert area_scene["extras"]["fog"] == doc["scenes"][0]["extras"]["fog"] and area_scene["extras"]["hour"] == 12
+    made = {p.name: p.read_bytes() for p in folder.glob("*.glb")}
+    assert run(cores=True, hour=12, weather="rain").status["workers"] == 2                  # the same on several cores
+    assert {p.name: p.read_bytes() for p in folder.glob("*.glb")} == made
+    assert BX.CityJob(tmp_path).start("pc", index, hour=25) == "The hour is from 0 to 24."
+    assert BX.CityJob(tmp_path).start("pc", index, weather="snow") == "The weather is clear or rain."
+    # without the scripts or Common.p3d: the city as before, and why there is no fog or sky
+    out, index = copied_game(tmp_path / "less", city_files())
+    monkeypatch.setattr(GA, "out_dir", lambda bin_dir=None: out)
+    job = run(hour=12)
+    assert job.status["notes"] == ["No fog: the game's script scriptc/graphanims.cso isn't among the copied files.",
+                                   "No sky: Common.p3d isn't among the copied files."]
+    assert not (folder / "sky.glb").exists()                           # the earlier one doesn't stay
+
+
+def test_the_portal_asks_for_the_city_at_an_hour_in_a_weather(monkeypatch, tmp_path):
+    server, _out, _index = _server(monkeypatch, tmp_path, city_files())
+    asked, sent = [], []
+    monkeypatch.setattr(server.BLENDER, "start", lambda version, index, hour=None, weather="clear":
+                        asked.append((version, hour, weather)) or None)
+
+    class Fake:
+        def _json(self, obj, code=200):
+            sent.append((code, obj))
+    for body in ({"version": "pc"}, {"version": "pc", "hour": "18.5", "weather": "rain"}, {"version": "pc", "hour": ""}):
+        server.Handler.post_game_files_blender(Fake(), body)
+        assert sent[-1][0] == 200
+    assert asked == [("pc", None, "clear"), ("pc", 18.5, "rain"), ("pc", None, "clear")]
+    server.Handler.post_game_files_blender(Fake(), {"version": "pc", "hour": "dusk"})
+    assert sent[-1] == (400, {"ok": False, "error": "The hour is from 0 to 24."}) and len(asked) == 3
