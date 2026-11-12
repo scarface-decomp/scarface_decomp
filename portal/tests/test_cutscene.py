@@ -89,3 +89,50 @@ def test_people_stand_where_the_script_puts_them_and_play_their_pieces_end_to_en
         _glb, rep = BX.model_glb(out, index, "pc", path, b"")
         assert rep.models == ["DB"] and rep.animations == ["Cutscene MNIS_T"]
     assert BX.cant_show(out, index, "pc", z + "MNIS_T.p3d", p3d(mesh("x"))) == ""
+
+
+def test_a_weapon_template_is_one_of_the_weapons_models():
+    models = ["M16", "M16_upgrade", "ak47", "ak47_upgrade", "chainsaw1", "colt_45", "metal_pipe", "sniper_rifle", "uzi"]
+    pick = lambda t: C.weapon_model("WeaponTemplate" + t, models)
+    assert [pick(t) for t in ("AK47", "MetalPipe", "Colt45", "Sniper", "Chainsaw", "M16Mortar", "uzi")] == \
+        ["ak47", "metal_pipe", "colt_45", "sniper_rifle", "chainsaw1", "M16", "uzi"]
+    assert pick("Banana") is None and C.weapon_model("", models) is None
+
+
+def test_where_a_cutscene_happens():
+    here = C.read_script(SCRIPT)
+    assert C.where(here, []) == (-10.5, 20.0)                                  # where the script first stands someone
+    anywhere = C.read_script('NISCharacterPosition { CharacterName "MainCharacter"; Position { x 0; y 0.1; z 0; }; Facing 0; };')
+    assert C.where(anywhere, []) is None                                       # played wherever Tony is: no map
+    assert C.where(C.read_script(""), []) is None
+
+
+def test_the_cast_on_their_map_with_a_weapon_in_hand():
+    from test_p3d_gltf import animation, area, composite, skeleton, skin_chunk
+    rig = skeleton("rig", [("Root", 0, (0, 0, 0)), ("right_hand_attach", 0, (0.5, 1.0, 0))])
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    person = p3d(rig, skin_chunk(tri, [0, 1, 2], [(0.75, 0.25, 0.0)] * 3, [0x01000000] * 3, [1, 0]))
+    guns = p3d(skeleton("metal_pipe", [("metal_pipe", 0, (0, 0, 0))]), mesh("metal_pipeShape"),
+               composite("metal_pipe", "metal_pipe", [("metal_pipeShape", 1, 0)]))
+    script = C.read_script('''
+      NISResourceLoader { Name "Thug1"; TemplateName "CharTemp_Columbia01"; };
+      NISCharacterPosition { CharacterName "Thug1"; Position { x 100; y 5; z -200; }; Facing 0; Clut -1; };
+      NISCharacterPosition { CharacterName "Hector"; Position { x 101; y 5; z -200; }; Facing 0; Clut -1; };
+      NISCharacterAnimation { CharacterName "Thug1"; AnimationName "T_Thug1"; };
+      NISCharacterAnimation { CharacterName "Hector"; AnimationName "T_Hector"; };
+      NISWeaponAttach { CharacterName "Thug1"; WeaponTemplateName "WeaponTemplateMetalPipe"; FrameBegin 0; };''')
+    assert script.holds == {"thug1": "WeaponTemplateMetalPipe"}
+    asked = []
+
+    def model(kind, name):
+        asked.append((kind, name))
+        return {"person": ("p.p3d", person), "weapons": ("guns.p3d", guns)}.get(kind)
+    streams = [("stream0.p3d", p3d(animation("T_Thug10", [("root", [(0, (0, 0, 0, 1))])])))]
+    glb, report = C.export("T", script, streams, model, area=[("a_01_shell.p3d", area("w_street"))])
+    doc, _ = read_glb(glb)
+    names = [n["name"] for n in doc["nodes"]]
+    assert "w_street" in report.models and "Thug1" in report.models and "hector" in report.models    # the street, and the cast on it
+    assert ("person", "CharTemp_hector") in asked                             # nobody loaded him: his template has his name
+    hand = next(n for n in doc["nodes"] if n["name"] == "right_hand_attach" and "children" in n)
+    assert "Thug1's metal_pipe" in [doc["nodes"][c]["name"] for c in hand["children"]]
+    assert names.count("right_hand_attach") == 2 and not report.missing_drawables

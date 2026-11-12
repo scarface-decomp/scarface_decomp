@@ -1708,8 +1708,10 @@ def _scene_extras(b: Builder, hour: Optional[float], weather: Optional[str], fog
 
 def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims: Sequence[Ref] = (),
            lod: bool = False, hour: Optional[float] = None, weather: Optional[str] = None,
-           fog: Optional[dict] = None) -> Tuple[bytes, Report]:
+           fog: Optional[dict] = None, also=None) -> Tuple[bytes, Report]:
     """The glTF (.glb) for the library's main files, and a report of what went in.
+    also: called with the Builder once the files are in, to put more into the same scene (a cutscene's
+    people on the map they stand on).
 
     Models (the default): every skin with its skeleton, every composite drawable that isn't a map's
     world geometry, and every mesh no composite uses, side by side. A sky (Common.p3d) with an hour is
@@ -1803,6 +1805,8 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
             continue                                            # a posed sky holds its hour's pose: not played
         if not b.animation(ref):
             b.report.unmatched_animations += 1
+    if also is not None:
+        also(b)
     _scene_extras(b, hour, weather, fog)
     if not b.g.doc["scenes"][0]["nodes"]:
         raise ExportError("nothing in these files to export" + (" (is it a map area? try --map)" if not map_mode and

@@ -732,14 +732,22 @@ The script's blocks that say who is in the scene:
 | `NISCharacterAnimation`, `NISVehicleAnimation` | Which animation they play. `MainCharacter` is Tony. |
 | `NISSwapModel` | The suit Tony wears: `tonynisHawaiianDrawable` is `art/nis/characters/tonynisHawaiian.p3d`. |
 | `NISSequenceCue` | The camera's animation (`CameraAnimationName`). |
+| `NISWeaponAttach` | A weapon put in someone's hand: `WeaponTemplateMetalPipe` is the model `metal_pipe` in `art/stateprops/weapons_test/guns.p3d`, hung on the joint `right_hand_attach`. |
 
 A person's animation moves them from where the script stands them. A vehicle's animation moves one joint,
 named after the vehicle's file (`sportfishing_boat` is `art/vehicles/sportfishing_boat.p3d`), in the
 city's own coordinates; so does the camera's (its place, the way it looks, which way is up).
 
-`cutscene.py` reads all of this and makes one scene with everybody in it; opening any of a cutscene's
-files in the portal gives the whole cutscene. Not read yet: weapons put in hands (`NISWeaponAttach`),
-props (`NISStatePropSpawn`), effects and sound.
+
+Someone the script moves but never loads was already in the game: their template is `CharTemp_<name>`.
+A cutscene whose people all stand at 0, 0, 0 has no place of its own (it plays wherever Tony is); the
+others happen where the script first stands someone, and the map there is what the
+[stream graph](#the-stream-graph) keeps loaded at that spot (its `Shell` and `Detail` packages).
+
+`cutscene.py` reads all of this and makes one scene with everybody in it, on the street or in the room
+where it happens; opening any of a cutscene's files in the portal gives the whole cutscene. Not read yet:
+props (`NISStatePropSpawn`), effects and sound; a weapon hangs on the hand joint as it is, without the
+small shift the game gives each weapon.
 
 ## Sounds (`.rsd`)
 

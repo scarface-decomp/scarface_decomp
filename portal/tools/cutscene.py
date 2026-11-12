@@ -34,7 +34,7 @@ TONY = "maincharacter"
 TONY_FILES = ("tonyniswhtsuit.p3d", "tonynisblksuit.p3d", "tonynishawaiian.p3d")
 
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
-                    r"NISVehicleAnimation|NISSequenceCue|NISSwapModel)\s*\{")
+                    r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach)\s*\{")
 _FIELD = re.compile(r'\b(\w+)\s+(?:"([^"]*)"|(-?[\d.]+(?:e-?\d+)?))\s*;')
 
 
@@ -48,6 +48,7 @@ class Script:
         self.drives: Dict[str, str] = {}                    # vehicle (lower) -> animation
         self.camera = ""
         self.tony = ""                                      # the suit Tony is changed into (NISSwapModel)
+        self.holds: Dict[str, str] = {}                     # person (lower) -> weapon template (NISWeaponAttach)
 
 
 def _body(text: str, start: int) -> str:
@@ -78,6 +79,8 @@ def read_script(text: str) -> Script:
             s.plays.setdefault(str(f["CharacterName"]).lower(), str(f["AnimationName"]))
         elif kind == "NISVehicleAnimation" and f.get("VehicleName") and f.get("AnimationName"):
             s.drives.setdefault(str(f["VehicleName"]).lower(), str(f["AnimationName"]))
+        elif kind == "NISWeaponAttach" and f.get("CharacterName") and f.get("WeaponTemplateName"):
+            s.holds.setdefault(str(f["CharacterName"]).lower(), str(f["WeaponTemplateName"]))
         elif kind == "NISSwapModel" and str(f.get("Character", "")).lower() == TONY and f.get("newModel") and not s.tony:
             s.tony = re.sub(r"Drawable$", "", str(f["newModel"]), flags=re.I)
         elif kind == "NISSequenceCue" and f.get("CameraAnimationName") and not s.camera:
@@ -206,18 +209,90 @@ def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[t
     return out
 
 
+HAND = "right_hand_attach"             # the joint a person's weapon hangs on
+WEAPON = re.compile(r"^WeaponTemplate", re.I)
+
+
+def weapon_model(template: str, models: Sequence[str]) -> Optional[str]:
+    """The model a weapon template stands for, among the weapons file's models: WeaponTemplateMetalPipe is
+    metal_pipe, WeaponTemplateSniper is sniper_rifle, WeaponTemplateM16Mortar is the M16."""
+    flat = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())
+    want = flat(WEAPON.sub("", template))
+    if not want:
+        return None
+    by = {flat(m): m for m in models}
+    if want in by:
+        return by[want]
+    longer = sorted((k for k in by if k.startswith(want)), key=len)
+    if longer:
+        return by[longer[0]]
+    shorter = sorted((k for k in by if want.startswith(k)), key=len, reverse=True)
+    return by[shorter[0]] if shorter else None
+
+
+def where(script: Script, streams: Sequence[Tuple[str, bytes]]) -> Optional[Tuple[float, float]]:
+    """Where in the city a cutscene happens (the map's own x and z): where the script first stands
+    someone, or else where its camera starts. None for a scene with no place of its own (the ones played
+    wherever Tony happens to be are set at 0, 0, 0)."""
+    for at, _facing in script.stands.values():
+        if abs(at[0]) + abs(at[2]) > 1.0:
+            return at[0], at[2]
+    if script.stands:                                        # everyone at 0, 0: played wherever Tony is
+        return None
+    if script.camera:
+        lib = G.Library()
+        for label, data in streams:
+            lib.add(label, data, main=False)
+        for ref in _pieces(G.Builder(lib), script.camera):
+            for ch in p3d.walk(ref.chunk.children):
+                if ch.id in G.VECTOR_CHANNELS:
+                    try:
+                        param, frames, vals = G._vector_keys(ref.data, ch)
+                    except (p3d.P3dError, struct.error, IndexError, KeyError):
+                        continue
+                    if param == "TRAN" and vals and abs(vals[0][0]) + abs(vals[0][2]) > 1.0:
+                        return vals[0][0], vals[0][2]
+    return None
+
+
 def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
-           model: Callable[[str, str], Optional[Tuple[str, bytes]]]) -> Tuple[bytes, G.Report]:
+           model: Callable[[str, str], Optional[Tuple[str, bytes]]],
+           area: Sequence[Tuple[str, bytes]] = (), library: Sequence[Tuple[str, bytes]] = ()) -> Tuple[bytes, G.Report]:
     """The cutscene as a .glb. streams: its stream files (name, bytes) in order. model(kind, name) hands
-    over a model's file (name, bytes) or None: kind "person" with a template's name, "tony", or
-    "vehicle" with the name of the joint its animation moves."""
+    over a model's file (name, bytes) or None: kind "person" with a template's name, "tony" with his
+    suit's, "vehicle" with the name of the joint its animation moves, or "weapons".
+    area: the files of the map where it happens, and library the shared files they need (see
+    blender_export.area_from_files): the cast then stands on the street or in the room."""
     lib = G.Library()
+    have = set()
+    for label, data in area:
+        if label.lower() not in have:
+            have.add(label.lower())
+            lib.add(label, data, main=True)
+    for label, data in library:
+        if label.lower() not in have:
+            have.add(label.lower())
+            lib.add(label, data, main=False)
     for label, data in streams:
         lib.add(label, data, main=False)
-    b = G.Builder(lib)
+    found: List[str] = []
+
+    def cast(b: G.Builder) -> None:
+        found.extend(_cast(b, lib, name, script, model))
+    glb, report = G.export(lib, map_mode=True, also=cast)
+    if not found:
+        raise G.ExportError("none of this cutscene's people or vehicles are in your copied game files")
+    return glb, report
+
+
+def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
+          model: Callable[[str, str], Optional[Tuple[str, bytes]]]) -> List[str]:
+    """Puts the cutscene's people, vehicles and camera into b's scene; who went in."""
+    b._animations = None                                     # the stream files came after the map's
     tracks = _Tracks(b)
     root = b.g.node(name)
     left_out: List[str] = []
+    went_in: List[str] = []
     loaded: Dict[str, Optional[G.Source]] = {}
 
     def source(kind: str, wanted: str) -> Optional[G.Source]:
@@ -236,7 +311,8 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
             people.append((who.lower(), ""))
     cast = {k.lower(): v for k, v in script.cast.items()}
     for who, anim in people:
-        src = source("tony", script.tony) if who == TONY else (source("person", cast[who]) if who in cast else None)
+        # someone the script doesn't load was already in the game: their template has their name
+        src = source("tony", script.tony) if who == TONY else source("person", cast.get(who) or "CharTemp_" + who)
         label = "Tony" if who == TONY else next((k for k in script.cast if k.lower() == who), who)
         if src is None:
             left_out.append(label)
@@ -263,7 +339,17 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
         if not placed or copy is None:
             left_out.append(label)
             continue
-        b.report.models.append(label)
+        went_in.append(label)
+        hand = copy.nodes.get(HAND)
+        if who in script.holds and hand is not None:
+            guns = source("weapons", "")
+            names = [G.chunk_name(guns.data, c) for c in guns.chunks if c.id == G.COMPOSITE] if guns else []
+            wanted = weapon_model(script.holds[who], names)
+            gref = lib.find("composite", wanted, (guns,)) if wanted and guns else None
+            if gref:
+                b.composite(gref, hand, label + "'s " + wanted)
+            else:
+                left_out.append(label + "'s " + WEAPON.sub("", script.holds[who]))
         if anim:
             keys, _length = _joint_keys(_pieces(b, anim))
             for joint, paths in keys.items():
@@ -284,7 +370,7 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
             continue
         mover = b.g.node(label, root)
         b.composite(cref, mover)
-        b.report.models.append(label)
+        went_in.append(label)
         for path, (times, values) in keys[joint].items():
             tracks.add(mover, path, times, values)
     if script.camera:
@@ -295,12 +381,11 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
             cam = b.g.node(script.camera, root, camera=ci)
             for path, (times, values) in _camera_keys(pieces).items():
                 tracks.add(cam, path, times, values)
-            b.report.models.append("camera")
-    if not b.report.models:
-        raise G.ExportError("none of this cutscene's people or vehicles are in your copied game files")
+            went_in.append("camera")
+    b.report.models += went_in
     if tracks.channels:
         b.g.add("animations", {"name": ACTION + name, "channels": tracks.channels, "samplers": tracks.samplers})
         b.report.animations.append(ACTION + name)
     for label in left_out:
         b.report.missing_drawables.add(label)
-    return b.g.glb(), b.report
+    return went_in

@@ -38,6 +38,7 @@ from typing import Callable, Dict, List, Optional, Sequence, Tuple
 import game_assets as GA
 import p3d_gltf as P3G
 import cutscene as CUT
+import stream_graph as SG
 
 AREA_FOLDERS = ("packages/z04/", "packages/azones/", "packages/dzones/")
 CITY = "packages/z04/"
@@ -380,6 +381,8 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str) -> 
                 or stand_in(out, index, version)
         elif kind == "vehicle":
             p = named(f"/art/vehicles/{wanted}.p3d")
+        elif kind == "weapons":
+            p = named("/art/stateprops/weapons_test/guns.p3d")
         else:
             p = next((q for q in (named(f"/art/characters/{d}{wanted}.p3d") for d in ("npc/", "pc/", "")) if q), None)
         try:
@@ -387,7 +390,41 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str) -> 
         except OSError:
             return None
     script = CUT.read_script(fsc.read_text(encoding="latin-1"))
-    return CUT.export(scene, script, [(p.name, p.read_bytes()) for _n, p in sorted(streams)], model)
+    pieces = [(p.name, p.read_bytes()) for _n, p in sorted(streams)]
+    # The street or room it happens in: what the game keeps loaded at that spot (the stream graph).
+    area: List[Tuple[str, bytes]] = []
+    library: List[Tuple[str, bytes]] = []
+    spot = CUT.where(script, pieces)
+    graph = named("/art/levels/z04/streamgraph.p3d")
+    if spot is not None and graph is not None:
+        try:
+            loaded = SG.loaded_at(SG.triggers(graph.read_bytes()), spot[0], spot[1])
+            if loaded.inside:
+                for package, slot in loaded.packages:
+                    if slot in ("Shell", "Detail"):
+                        p = named(f"/packages/z04/{package}.p3d")
+                        if p is not None:
+                            area.append((p.name, p.read_bytes()))
+            if area:
+                library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
+        except (OSError, P3G.p3d.P3dError, struct.error, ValueError, IndexError):
+            area, library = [], []
+    try:
+        glb, report = CUT.export(scene, script, pieces, model, area, library)
+    except P3G.ExportError:
+        raise
+    except (P3G.p3d.P3dError, struct.error, ValueError, IndexError, KeyError):
+        if not area:
+            raise
+        return CUT.export(scene, script, pieces, model)          # the map wouldn't come in: the cast without it
+    if report.unplaced and area:                             # props kept with another area (see area_from_files)
+        have = [n for n, _d in area] + [n for n, _d in library]
+        extra = _files_naming(_more_library(out, index, version), report.unplaced, have)
+        if extra:
+            again = CUT.export(scene, script, pieces, model, area, library + extra)
+            if sum(again[1].unplaced.values()) < sum(report.unplaced.values()):
+                return again
+    return glb, report
 
 
 MODEL_CHUNKS = (P3G.SKIN, P3G.COMPOSITE, P3G.MESH)
