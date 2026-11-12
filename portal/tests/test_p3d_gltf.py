@@ -901,3 +901,53 @@ def test_the_city_on_several_cores_is_the_same(tmp_path, monkeypatch):
         assert BX.city_current(tmp_path / "blender" / "PC")
     assert made[1] == made[2] and sorted(made[2]) == ["a_01.glb", "b_02.glb"]
     assert not list((tmp_path / "blender" / "_scripts").glob("city_job_*.json"))       # tidied up
+
+
+# ---- props whose model is kept in another area's file ----------------------------------------------------------
+
+def test_files_naming_takes_the_file_with_the_model_not_one_that_only_places_it(tmp_path):
+    import blender_export as BX
+    (tmp_path / "next_door_shell.p3d").write_bytes(b"..woodcrateA..woodcrateAInstanceShape..")
+    (tmp_path / "far_shell.p3d").write_bytes(b"..modelname\x00woodcratea..")
+    (tmp_path / "other.p3d").write_bytes(b"nothing here")
+    got = BX._files_naming(sorted(tmp_path.iterdir()), {"woodcratea": 3})
+    assert [n for n, _d in got] == ["next_door_shell.p3d"]
+
+
+def test_files_naming_falls_back_to_a_mention_and_skips_files_already_in(tmp_path):
+    import blender_export as BX
+    (tmp_path / "inside_dzone.p3d").write_bytes(b"..umbrellastanda..")
+    (tmp_path / "mine_shell.p3d").write_bytes(b"..umbrellastanda..")
+    got = BX._files_naming([[p.name, str(p)] for p in sorted(tmp_path.iterdir())], ["umbrellastanda"],
+                           skip=["MINE_shell.p3d"])
+    assert [n for n, _d in got] == ["inside_dzone.p3d"]
+    assert BX._files_naming([tmp_path / "gone.p3d"], ["x"]) == []
+
+
+def test_an_area_is_made_again_with_the_files_that_have_its_missing_props(tmp_path, monkeypatch):
+    import blender_export as BX
+    (tmp_path / "next_shell.p3d").write_bytes(b"crateAInstanceShape")
+    seen = []
+
+    class Lib:
+        def __init__(self, parsed=None):
+            self.names = []
+
+        def add(self, name, data, main=True, keep=True):
+            self.names.append((name, main))
+
+    def export(lib, map_mode=False):
+        seen.append(lib.names)
+        report = G.Report()
+        if ("next_shell.p3d", False) not in lib.names:
+            report.unplaced["cratea"] = 2
+        return b"glb%d" % len(seen), report
+
+    monkeypatch.setattr(BX.P3G, "Library", Lib)
+    monkeypatch.setattr(BX.P3G, "export", export)
+    glb, report = BX.area_from_files([("a_shell.p3d", b"")], [("Common.p3d", b"")], None, [tmp_path / "next_shell.p3d"])
+    assert glb == b"glb2" and not report.unplaced
+    assert seen[1] == [("a_shell.p3d", True), ("Common.p3d", False), ("next_shell.p3d", False)]
+    seen.clear()
+    glb, _r = BX.area_from_files([("a_shell.p3d", b"")], [("Common.p3d", b"")], None, [])
+    assert glb == b"glb1" and len(seen) == 1

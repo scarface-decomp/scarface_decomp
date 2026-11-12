@@ -30,7 +30,7 @@ import sys
 import threading
 import time
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
 import game_assets as GA
 import p3d_gltf as P3G
@@ -74,6 +74,62 @@ def _city_folder_path(index: Optional[dict], version: str) -> Optional[str]:
 def _library(out: Path, index: Optional[dict], version: str) -> List[Path]:
     anchor = _city_folder_path(index, version)
     return GA.files_beside(out, index, version, anchor, P3G.MAP_LIBRARY) if anchor else []
+
+
+MORE_FOLDERS = ("/packages/dzones/", "/packages/azones/", "/packages/z04/")
+MODEL_ENDINGS = (b"instanceshape", b"shape", b"instance")
+MORE_PER_MODEL = 4
+
+
+def _more_library(out: Path, index: Optional[dict], version: str) -> List[Path]:
+    """Where else a placed model can be. The game keeps one copy of each prop's model, in whichever file
+    needed it first: a mansion's piano bench with the building's inside, a beach's crates with the beach
+    next door. So the interiors' files and the other areas' files are looked in too."""
+    found = []
+    for row in _rows(index, version):
+        low = "/" + row[0].lower().replace("\\", "/")
+        if low.endswith(".p3d") and any(f in low for f in MORE_FOLDERS):
+            p = GA.file_on_disk(out, index, version, row[0])
+            if p is not None:
+                found.append(p)
+    return found
+
+
+def _files_naming(paths: Sequence, names, skip=()) -> List[Tuple[str, bytes]]:
+    """The fewest files among paths (Path or [name, path]) that hold the named models: (name, bytes).
+    A file that has a model's own parts (woodcrateAInstanceShape) is taken before one that only
+    mentions the name, which may be nothing but another area placing the same prop."""
+    wanted = [n.lower().encode("latin-1", "replace") for n in names if n]
+    skip = {s.lower() for s in skip}
+    sure: Dict[bytes, List[Path]] = {}
+    maybe: Dict[bytes, List[Path]] = {}
+    for item in paths:
+        path = Path(item[1]) if isinstance(item, (list, tuple)) else Path(item)
+        if path.name.lower() in skip:
+            continue
+        try:
+            low = path.read_bytes().lower()
+        except OSError:
+            continue
+        for w in wanted:
+            if w not in low:
+                continue
+            if any(w + e in low for e in MODEL_ENDINGS):
+                sure.setdefault(w, []).append(path)
+            else:
+                maybe.setdefault(w, []).append(path)
+    chosen: List[Path] = []
+    for w in wanted:
+        holders = sure.get(w) or maybe.get(w, [])[:MORE_PER_MODEL]
+        if holders and not any(h in chosen for h in holders):
+            chosen.extend(holders[:1] if w in sure else holders)
+    out = []
+    for path in chosen:
+        try:
+            out.append((path.name, path.read_bytes()))
+        except OSError:
+            continue
+    return out
 
 
 def animations(out: Path, index: Optional[dict], version: str) -> List[Path]:
@@ -257,20 +313,32 @@ def area_glb(out: Path, index: Optional[dict], version: str, key: str,
             files.append((p.name, p.read_bytes()))
     if library is None:
         library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
-    return area_from_files(files, library, parsed)
+    return area_from_files(files, library, parsed, _more_library(out, index, version))
 
 
 def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, bytes]],
-                    parsed: Optional[dict] = None) -> Tuple[bytes, "P3G.Report"]:
-    """A map area's .glb from its own files and the shared ones (names and bytes)."""
-    lib = P3G.Library(parsed)
-    for name, data in files:
-        lib.add(name, data, main=True, keep=False)
-    mine = {n.lower() for n, _d in files}
-    for name, data in library:
-        if name.lower() not in mine:
-            lib.add(name, data, main=False)
-    return P3G.export(lib, map_mode=True)
+                    parsed: Optional[dict] = None, more: Optional[Sequence] = None) -> Tuple[bytes, "P3G.Report"]:
+    """A map area's .glb from its own files and the shared ones (names and bytes). Props still without a
+    model after that are looked for in the more files (the interiors'), and the area is made again with
+    the ones that have them."""
+    def make(extra: List[Tuple[str, bytes]]):
+        lib = P3G.Library(parsed)
+        for name, data in files:
+            lib.add(name, data, main=True, keep=False)
+        mine = {n.lower() for n, _d in files}
+        for name, data in list(library) + extra:
+            if name.lower() not in mine:
+                lib.add(name, data, main=False)
+                mine.add(name.lower())
+        return P3G.export(lib, map_mode=True)
+    glb, report = make([])
+    if report.unplaced and more:
+        extra = _files_naming(more, report.unplaced, [n for n, _d in files] + [n for n, _d in library])
+        if extra:
+            glb2, report2 = make(extra)
+            if sum(report2.unplaced.values()) < sum(report.unplaced.values()):
+                return glb2, report2
+    return glb, report
 
 
 def workers_wanted(use_cores: bool = True) -> int:
@@ -285,11 +353,12 @@ def city_worker(job_file: str) -> int:
     import json
     job = json.loads(Path(job_file).read_text(encoding="utf-8"))
     library = [(n, Path(p).read_bytes()) for n, p in job["library"]]
+    more = job.get("more") or []
     parsed: dict = {}
     for area in job["areas"]:
         try:
             files = [(n, Path(p).read_bytes()) for n, p in area["files"]]
-            glb, _r = area_from_files(files, library, parsed)
+            glb, _r = area_from_files(files, library, parsed, more)
             Path(area["dest"]).write_bytes(glb)
             print(json.dumps({"area": area["name"], "bytes": len(glb)}), flush=True)
         except (P3G.ExportError, OSError, P3G.p3d.P3dError) as e:
@@ -384,6 +453,7 @@ class CityJob:
         import json
         n = self.status["workers"]
         library = [[p.name, str(p)] for p in _library(out, index, version)]
+        more = [[p.name, str(p)] for p in _more_library(out, index, version)]
         jobs: List[List[dict]] = [[] for _ in range(n)]
         for i, area in enumerate(sorted(todo, key=lambda a: -len(a["files"]))):     # big ones first, spread out
             files = []
@@ -400,7 +470,7 @@ class CityJob:
             if not areas_:
                 continue
             job = work / f"city_job_{i}.json"
-            job.write_text(json.dumps({"library": library, "areas": areas_}), encoding="utf-8")
+            job.write_text(json.dumps({"library": library, "more": more, "areas": areas_}), encoding="utf-8")
             procs.append(subprocess.Popen([sys.executable, str(Path(__file__).resolve()), "--city-worker", str(job)],
                                           stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL,
                                           text=True, creationflags=flags))
