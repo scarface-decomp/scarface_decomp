@@ -38,6 +38,15 @@ if not exist "portal\.venv\Scripts\python.exe" (
     exit /b 1
   )
 )
+rem A set-up that was cut short leaves portal\.venv without pip ("No module named pip"): put pip back,
+rem or failing that make the folder again.
+"portal\.venv\Scripts\python.exe" -m pip --version >nul 2>&1
+if errorlevel 1 (
+  echo  Repairing the portal's Python packages folder...
+  "portal\.venv\Scripts\python.exe" -m ensurepip --upgrade >nul 2>&1
+  "portal\.venv\Scripts\python.exe" -m pip --version >nul 2>&1
+  if errorlevel 1 %PY% -m venv --clear portal\.venv
+)
 echo  Checking the Python packages the portal needs...
 rem Exact versions (portal\requirements.txt), as ready-made wheels only: installing runs no package's setup code.
 "portal\.venv\Scripts\python.exe" -m pip install --quiet --disable-pip-version-check --only-binary :all: -r portal\requirements.txt

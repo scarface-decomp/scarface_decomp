@@ -18,6 +18,9 @@ if [ ! -x portal/.venv/bin/python ]; then
   python3 -m venv portal/.venv || { echo "Could not create portal/.venv. On Debian/Ubuntu: sudo apt install python3-venv"; exit 1; }
 fi
 # Exact versions (portal/requirements.txt), as ready-made wheels only: installing runs no package's setup code.
+# A set-up that was cut short leaves portal/.venv without pip: put it back, or make the folder again.
+portal/.venv/bin/python -m pip --version >/dev/null 2>&1 || portal/.venv/bin/python -m ensurepip --upgrade >/dev/null 2>&1 \
+  || python3 -m venv --clear portal/.venv
 portal/.venv/bin/python -m pip install --quiet --disable-pip-version-check --only-binary :all: -r portal/requirements.txt || {
   echo "Installing packages failed. Check your internet connection. If it says no matching distribution, use Python 3.12 or 3.13."; exit 1; }
 echo "Starting the portal at http://localhost:${SCARFACE_PORT:-8085} (Ctrl+C stops it)."
