@@ -713,6 +713,34 @@ animations' callbacks.
 kind of vertex data is stored in), `0x0001001D` (u32 1, 3, 1, 0 in every mesh), `0x00121008` (u32 2),
 `0x00121402` (u32 0, 0), `0x01000001`, the fields of the loaders' chunks not written up above.
 
+## Cutscenes (`art/nis/`)
+
+A cutscene is three things, found by its name (`MNIS_A56_2_Tony_Delivers_the_Goods`):
+
+| Where | What |
+| :--- | :--- |
+| `art/nis/fsc/<name>.fsc` | Its script, as plain text: nested `{ }` blocks of `key value;` lines. |
+| `art/nis/<name>/stream<n>.p3d` | Its animations (`0x121000`), cut into pieces: `<animation>0` in `stream0`, `<animation>1` in `stream1`, and so on. The pieces follow one another. |
+| `art/nis/<name>.p3d`, `static.p3d` | Small files for the game's loader. |
+
+The script's blocks that say who is in the scene:
+
+| Block | Says |
+| :--- | :--- |
+| `NISResourceLoader` | `Name` (what the scene calls someone) and `TemplateName`. A person's model is `art/characters/npc/<TemplateName>.p3d`. |
+| `NISCharacterPosition`, `NISObjectPosition` | Where someone stands (`Position`: x, y, z) and the way they face (`Facing`, degrees about the upright axis). |
+| `NISCharacterAnimation`, `NISVehicleAnimation` | Which animation they play. `MainCharacter` is Tony. |
+| `NISSwapModel` | The suit Tony wears: `tonynisHawaiianDrawable` is `art/nis/characters/tonynisHawaiian.p3d`. |
+| `NISSequenceCue` | The camera's animation (`CameraAnimationName`). |
+
+A person's animation moves them from where the script stands them. A vehicle's animation moves one joint,
+named after the vehicle's file (`sportfishing_boat` is `art/vehicles/sportfishing_boat.p3d`), in the
+city's own coordinates; so does the camera's (its place, the way it looks, which way is up).
+
+`cutscene.py` reads all of this and makes one scene with everybody in it; opening any of a cutscene's
+files in the portal gives the whole cutscene. Not read yet: weapons put in hands (`NISWeaponAttach`),
+props (`NISStatePropSpawn`), effects and sound.
+
 ## Sounds (`.rsd`)
 
 Radical sound files. Most sit at `art/sound/rsd/<x>/<16 hex digits>.rsd`, named by a hash, but each one

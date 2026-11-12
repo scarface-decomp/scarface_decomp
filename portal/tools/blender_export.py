@@ -37,6 +37,7 @@ from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
 import game_assets as GA
 import p3d_gltf as P3G
+import cutscene as CUT
 
 AREA_FOLDERS = ("packages/z04/", "packages/azones/", "packages/dzones/")
 CITY = "packages/z04/"
@@ -283,6 +284,13 @@ def model_glb(out: Path, index: Optional[dict], version: str, game_path: str, da
     after that (a sign's lettering kept in the city's shared textures, a prop kept with another area) is
     looked for in the city's files, and the model made again with the ones that have it."""
     name = Path(game_path).name
+    scene = CUT.scene_name(game_path)
+    if scene:                                   # a cutscene's file: the whole cutscene, everybody in it
+        try:
+            return cutscene_glb(out, index, version, scene)
+        except P3G.ExportError:
+            if game_path.lower().endswith(".fsc"):
+                raise
 
     def make(extra: List[Tuple[str, bytes]]):
         lib = P3G.Library()
@@ -341,6 +349,47 @@ def model_glb(out: Path, index: Optional[dict], version: str, game_path: str, da
     return glb, report
 
 
+def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str) -> Tuple[bytes, "P3G.Report"]:
+    """A cutscene (art/nis/<scene>) with its people, vehicles and camera, from the copied files: its
+    script says who is in it, its stream files hold what they do (see cutscene.py)."""
+    rows = {("/" + r[0].lower().replace("\\", "/")): r[0] for r in _rows(index, version) if r[4]}
+
+    def named(ending: str) -> Optional[Path]:
+        ending = ending.lower()
+        hit = next((path for low, path in rows.items() if low.endswith(ending)), None)
+        return GA.file_on_disk(out, index, version, hit) if hit else None
+
+    fsc = named(f"/art/nis/fsc/{scene}.fsc")
+    if fsc is None:
+        raise P3G.ExportError("that cutscene's script isn't in your copied game files")
+    folder = f"/art/nis/{scene}/".lower()
+    streams = []
+    for low, path in rows.items():
+        m = re.search(re.escape(folder) + r"stream(\d+)\.p3d$", low)
+        if m:
+            p = GA.file_on_disk(out, index, version, path)
+            if p is not None:
+                streams.append((int(m.group(1)), p))
+    if not streams:
+        raise P3G.ExportError("that cutscene's animations aren't in your copied game files")
+
+    def model(kind: str, wanted: str) -> Optional[Tuple[str, bytes]]:
+        if kind == "tony":
+            suits = ([wanted.lower() + ".p3d"] if wanted else []) + list(CUT.TONY_FILES)
+            p = next((q for q in (named("/art/nis/characters/" + f) for f in suits) if q), None) \
+                or stand_in(out, index, version)
+        elif kind == "vehicle":
+            p = named(f"/art/vehicles/{wanted}.p3d")
+        else:
+            p = next((q for q in (named(f"/art/characters/{d}{wanted}.p3d") for d in ("npc/", "pc/", "")) if q), None)
+        try:
+            return (p.name, p.read_bytes()) if p is not None else None
+        except OSError:
+            return None
+    script = CUT.read_script(fsc.read_text(encoding="latin-1"))
+    return CUT.export(scene, script, [(p.name, p.read_bytes()) for _n, p in sorted(streams)], model)
+
+
 MODEL_CHUNKS = (P3G.SKIN, P3G.COMPOSITE, P3G.MESH)
 STAND_INS = ("art/characters/pc/mcp_blacksuittony.p3d", "art/characters/npc/chartemp_npc_blacksuittony.p3d")
 
@@ -377,6 +426,16 @@ def cant_show(out: Path, index: Optional[dict], version: str, game_path: str, da
     file is a map area or too big to try ahead of time). The portal asks before it offers the button."""
     if len(data) > CHECK_MAX:
         return ""
+    scene = CUT.scene_name(game_path)
+    if scene:
+        try:
+            cutscene_glb(out, index, version, scene)
+            return ""
+        except P3G.ExportError as e:
+            if not Path(game_path).name.lower().startswith("stream"):
+                return f"This cutscene can't be shown: {e}."
+        except (OSError, P3G.p3d.P3dError, ValueError, KeyError, IndexError):
+            return ""
     try:
         lib = P3G.Library()
         src = lib.add(Path(game_path).name, data, main=True)
@@ -1064,7 +1123,7 @@ def tidy(scene):
     # size, every skeleton is put back in its rest pose and the animations wait in the Action list.
     # Models come at two levels of detail (..._high and ..._low, the far-away stand-in): the low one is
     # hidden, not removed, so the scene shows one of each.
-    library = len(bpy.data.actions) > 20
+    library = len(bpy.data.actions) > 20 and not any(a.name.startswith("Cutscene ") for a in bpy.data.actions)
     if library:
         for a in bpy.data.actions:               # kept in the saved .blend though nothing is playing them
             a.use_fake_user = True
