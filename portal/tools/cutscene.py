@@ -384,8 +384,10 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             went_in.append("camera")
     b.report.models += went_in
     if tracks.channels:
-        b.g.add("animations", {"name": ACTION + name, "channels": tracks.channels, "samplers": tracks.samplers})
-        b.report.animations.append(ACTION + name)
+        # The only animation in the file. Blender plays a file's first animation and parks the rest: with
+        # the map's own (a door swinging) ahead of it, everybody stood with their arms out.
+        b.g.doc["animations"] = [{"name": ACTION + name, "channels": tracks.channels, "samplers": tracks.samplers}]
+        b.report.animations = [ACTION + name]
     for label in left_out:
         b.report.missing_drawables.add(label)
     return went_in

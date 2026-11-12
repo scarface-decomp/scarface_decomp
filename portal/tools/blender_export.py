@@ -1032,6 +1032,11 @@ def say(text):
 def start():
     for o in list(bpy.data.objects):            # the start-up cube, light and camera
         bpy.data.objects.remove(o, do_unlink=True)
+    try:                                         # the game's animations are made for 30 frames a second: set
+        bpy.context.scene.render.fps = 30        # before they come in, or Blender lays their keys out for its
+        bpy.context.scene.render.fps_base = 1.0  # own 24 and they play slow and jerky
+    except Exception:
+        pass
     try:                                         # Blender copies the whole scene for Undo after every import:
         STATE["undo"] = bpy.context.preferences.edit.use_global_undo      # with a city, most of the wait
         bpy.context.preferences.edit.use_global_undo = False

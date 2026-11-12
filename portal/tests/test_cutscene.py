@@ -136,3 +136,4 @@ def test_the_cast_on_their_map_with_a_weapon_in_hand():
     hand = next(n for n in doc["nodes"] if n["name"] == "right_hand_attach" and "children" in n)
     assert "Thug1's metal_pipe" in [doc["nodes"][c]["name"] for c in hand["children"]]
     assert names.count("right_hand_attach") == 2 and not report.missing_drawables
+    assert [a["name"] for a in doc["animations"]] == ["Cutscene T"]           # the map's own animations don't come first
