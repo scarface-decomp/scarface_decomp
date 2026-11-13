@@ -573,6 +573,15 @@ def weapon_model(template: str, models: Sequence[str]) -> Optional[str]:
     return by[shorter[0]] if shorter else None
 
 
+def floor_spot(script: Script) -> Optional[Tuple[float, float, float]]:
+    """Where someone in the cutscene stands, height and all (the map's own x, y, z), or None: for finding
+    the room they stand in. The camera's start is no use for that: it hangs in the air."""
+    for at, _facing in script.stands.values():
+        if abs(at[0]) + abs(at[2]) > 30.0:                   # a place on the map, not a step from its origin
+            return at
+    return script.origin[0] if script.origin else None
+
+
 def where(script: Script, streams: Sequence[Tuple[str, bytes]]) -> Optional[Tuple[float, float]]:
     """Where in the city a cutscene happens (the map's own x and z): where the script first stands
     someone, or else where its camera starts. None for a scene with no place of its own (the ones played

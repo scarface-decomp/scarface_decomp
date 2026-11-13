@@ -2568,3 +2568,14 @@ def test_a_joint_named_twice_on_one_point_is_one_weight():
     assert sorted(joints[0][:2]) == [0, 1] and joints[0][2:] == (0, 0)             # each joint once
     assert weights[0] == pytest.approx((0.7, 0.3, 0.0, 0.0))                          # the two shares added up
 
+
+def test_the_boxes_round_a_files_meshes(tmp_path):
+    """Each mesh carries the box it fills; a cutscene's room is the building's inside whose box holds the spot."""
+    import blender_export as BX
+    box = chunk(0x10003, struct.pack("<6f", 900.0, 3.7, -745.0, 925.0, 9.0, -720.0))
+    far = chunk(0x10003, struct.pack("<6f", 0.0, 0.0, 0.0, 1.0, 1.0, 1.0))
+    f = tmp_path / "donutshop_01_pocket.p3d"
+    f.write_bytes(p3d(chunk(0x10000, text("room") + struct.pack("<II", 0, 0), box), chunk(0x10000, text("crate") + struct.pack("<II", 0, 0), far)))
+    assert BX._boxes(f) == [(900.0, pytest.approx(3.7), -745.0, 925.0, 9.0, -720.0), (0.0, 0.0, 0.0, 1.0, 1.0, 1.0)]
+    assert BX._boxes(tmp_path / "missing.p3d") == []
+
