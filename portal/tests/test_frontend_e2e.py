@@ -49,6 +49,17 @@ def calls(path=None):
     return [c for c in data if path is None or c[0] == path]
 
 
+def wait_for_calls(path, timeout=5.0):
+    """The calls to path, waiting up to timeout seconds for the first: for requests the browser makes on its own
+    time, such as an <audio> element fetching its sound after it appears."""
+    end = time.monotonic() + timeout
+    while True:
+        found = calls(path)
+        if found or time.monotonic() > end:
+            return found
+        time.sleep(0.05)
+
+
 @pytest.fixture(scope="module")
 def browser(server):
     with playwright.sync_playwright() as p:
@@ -1041,7 +1052,7 @@ def test_game_files_subtitles_and_their_sound(page):
     assert page.query_selector("#gf-list .gf-prev .gf-bl") is None            # nothing for Blender
     page.click("#gf-list .gf-prev button:has-text('Play the sound')")
     page.wait_for_selector("#gf-list .gf-prev audio")
-    assert calls("/api/game-files/sound")[-1][1]["path"].endswith("sounds/xbox_020.rsd")
+    assert wait_for_calls("/api/game-files/sound")[-1][1]["path"].endswith("sounds/xbox_020.rsd")
 
 
 def test_game_files_movies_play_in_the_page(page):
