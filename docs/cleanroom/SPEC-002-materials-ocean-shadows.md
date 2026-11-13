@@ -226,3 +226,20 @@ In priority order; tests on made-up files, as for SPEC-001.
    Keep them on by default unless that turns out to look wrong.
 7. `docs/FORMATS.md`: the shader kinds and settings, the blend modes, the ocean's scripts, the shadow
    records (`0x08800008` fields) and decals, in the house style; credit this spec.
+
+---
+
+## Questions from the implementer, and answers
+
+Asked on 2026-11-12; answered by the examiner from the PC files where they could be.
+
+| Question | Answer |
+| :--- | :--- |
+| `BLMD` 3: does the picture's alpha take part, and is the darkening per colour channel? | Not known *(check)*. Darkening by brightness, with the alpha only for a cut-out, is a fair reading. |
+| `BLMD` 2: does the picture's alpha matter; are lit ones lit before they are added? | Every light-adding picture checked is fully opaque (alpha 255 everywhere), so for them it makes no difference. Only one light-adding shader is lit (`r_tunnel-lighting.tga`, `cbvlit`); how the game lights it is not known. |
+| Is a shader without `LIT` unlit? | **Yes [checked].** In `packages/z04`, every shader whose name says `lit0` has no `LIT` setting (2,802 of them) and every one whose name says `lit1` has `LIT` 1 (2,043); none says `lit1` without it. So a shader read from the files without `LIT` is not lit by the scene's lights, and should export as unlit, like a name that says `lit0`. |
+| The sea's colour with no hour, and in rain? | Not in the files. The sky as stored (its night colours) with no hour, and the rain sky in rain, are fair readings. |
+| When is `OceanTemplateNightDefault` used? | `objects_static.dso` names only `OceanTemplateDefault`; when, if ever, the game switches is not known. |
+| The hull's fade: along the view or by distance, and is the 20/255 cut after the fade? | Not known *(check)*. |
+| Which props get the leaves' two passes? | The ones the city places (instance objects); that is the same set as the `art/ecoprops` models. |
+| Is the sky's dome drawn without writing depth too? | Yes: the whole sky is drawn with depth testing and writing off (SPEC-001 §3.2). |
