@@ -1083,7 +1083,7 @@
                   <label class="sr-only" for="ai-key">API key</label>
                   <input id="ai-key" type="text" class="input-box w-key masked" placeholder="Paste API key" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="" data-bwignore="" data-form-type="other" oninput="saveAiSettings()" />
                   <label class="remember-key" title="Off: the key is forgotten when you close this tab. On: it is stored in this browser until you clear it."><input type="checkbox" id="ai-remember-key" onchange="saveAiSettings()" /> Remember key</label>
-                  <label class="remember-key" title="Empty: no limit. The AI keeps trying until it matches or says it can't get closer, and every try is compiled and checked. Each try is one request on your key, so set a number to cap what a run can cost.">Stop after <input id="ai-max-tries" type="number" min="1" step="1" class="input-box w-tries" placeholder="no limit" inputmode="numeric" oninput="saveAiSettings()" /> tries</label>
+                  <label class="remember-key" title="Empty: no fixed limit. The AI keeps trying until it matches, says it can't get closer, or makes 12 tries in a row without getting any closer; every try is compiled and checked. Each try is one request on your key, so set a number to cap what a run can cost.">Stop after <input id="ai-max-tries" type="number" min="1" step="1" class="input-box w-tries" placeholder="no limit" inputmode="numeric" oninput="saveAiSettings()" /> tries</label>
                   <button type="button" id="btn-test-api" class="btn-sm gold" onclick="testAiConnection()">Test</button>
                 </div>
                 <div class="ai-row attrib">
@@ -3171,7 +3171,9 @@
     const loop = run ? 'HOW THIS RUN WORKS: you decide how many tries this takes. There is no limit' +
       (run.cap ? ' other than the ' + run.cap + ' the person set (this is try ' + run.attempt + ')' : ' (this is try ' + run.attempt + ')') +
       '. Every reply is one try: it is compiled with the exact compiler and compared with the target byte for byte, and the next message shows you the result. ' +
-      'Keep trying while you can still get closer. When you are sure you can\'t improve on the current best C++, reply with a single line starting GIVE UP: and the reason, and no code.' : '';
+      'Keep trying while you can still get closer. When you are sure you can\'t improve on the current best C++, reply with a single line starting GIVE UP: and the reason, and no code. ' +
+      'The run also ends by itself after ' + AI_NO_GAIN + ' tries in a row that match no more bytes than the best so far' +
+      (run.flat ? ' (' + run.flat + ' so far)' : '') + ', so change your approach when a line of attack stops paying.' : '';
     if (isPs2(t.bin)) {
       return [
         'Decompile this MIPS R5900 (PlayStation 2) function from Scarface: The World Is Yours (2006) into genuine, human-readable C++ that compiles byte-for-byte to the target with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me compiler ' + 'mwcps2-3.0.1b103-040528).',
@@ -3226,6 +3228,7 @@
     copyText(prompt, 'Copied the full AI decompilation prompt to the clipboard.');
   }
 
+  const AI_NO_GAIN = 12;               // tries in a row that get no closer before a run ends by itself
   const TINY_BYTES = 8;                // a function this small: quick answers, and three tries at most
   const TINY_TRIES = 3;
 
@@ -3321,6 +3324,14 @@
       // Not a limit on tries: a model that keeps answering without new code isn't trying any more.
       const STUCK = 5;
       let stuck = 0;
+      // Nor is this: new code every time, never any closer, would otherwise go on (and cost) for ever.
+      let flat = 0;
+      const giveUpFlat = () => {
+        editorEl().value = activeRun.bestCode;
+        setStatus('The AI made ' + AI_NO_GAIN + ' tries in a row without getting any closer, so the run stopped. Best: ' + bestScore + '/' + t.size +
+          ' B. Your best checkpoint is kept on the server. Try another model, or work on it by hand from here.', 'warn');
+        return false;
+      };
       const giveUpStuck = () => {
         editorEl().value = activeRun.bestCode;
         setStatus('The AI sent no new code ' + STUCK + ' times in a row, so the run stopped. Best: ' + bestScore + '/' + t.size +
@@ -3336,7 +3347,7 @@
 
         let reply;
         try {
-          reply = await callUserAiApi(buildAiPrompt(t, activeRun.bestCode, bestScore, history, feedback, { attempt: attempt, cap: cap }), signal, tiny);
+          reply = await callUserAiApi(buildAiPrompt(t, activeRun.bestCode, bestScore, history, feedback, { attempt: attempt, cap: cap, flat: flat }), signal, tiny);
         } catch (err) {
           if (cancelled() || err.name === 'AbortError') return false;
           editorEl().value = activeRun.bestCode;
@@ -3390,10 +3401,16 @@
           feedback = 'Attempt ' + attempt + ' did not compile. It was:' + NL + FENCE + 'cpp' + NL + candidate.slice(0, 6000) + NL + FENCE +
             NL + 'Compiler output:' + NL + errText + (bestFeedback ? NL + NL + 'The best C++ above still stands. ' + bestFeedback : '');
           editorEl().value = activeRun.bestCode;
+          if (++flat >= AI_NO_GAIN) return giveUpFlat();
         } else {
           const got = Number(r.matched_bytes) || 0;
           history.push('Attempt ' + attempt + ': ' + got + '/' + r.total_bytes + ' bytes.');
           tried.set(candidate.trim(), { attempt: attempt, result: 'matched ' + got + '/' + r.total_bytes + ' bytes' });
+          flat = got > bestScore ? 0 : flat + 1;
+          if (flat >= AI_NO_GAIN) {
+            if (got >= bestScore) { bestScore = got; activeRun.bestCode = candidate; activeRun.bestVerified = true; }
+            return giveUpFlat();
+          }
           if (got >= bestScore) {
             bestScore = got;
             activeRun.bestCode = candidate;

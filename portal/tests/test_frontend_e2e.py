@@ -611,6 +611,29 @@ def test_ai_run_stops_at_the_persons_limit(page):
     page.fill("#ai-max-tries", "")
 
 
+def test_ai_run_ends_when_new_code_gets_no_closer(page):
+    """No limit on tries, and new code every time: but twelve tries in a row that match no more bytes end the run,
+    or it would go on, and cost, for ever."""
+    sign_in(page)
+    prompts = []
+
+    def ai(route):
+        prompts.append(json.loads(route.request.post_data)["prompt"])
+        route.fulfill(json={"ok": True, "reply": "```cpp\nint f() { return %d; }\n```" % len(prompts), "used_model": "m"})
+
+    page.route("**/api/fast-synthesize", lambda r: r.fulfill(json={"ok": False}))
+    page.route("**/api/ai-proxy", ai)
+    page.route("**/api/verify", lambda r: r.fulfill(json={"ok": True, "is_exact": False, "matched_bytes": 2, "total_bytes": 12,
+                                                           "match_percent": 16.7, "diff_details": [], "compiled_hex": "90"}))
+    page.fill("#ai-key", "test-key")
+    page.fill("#ai-max-tries", "")
+    page.click("#btn-step2-ai")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('without getting any closer')", timeout=60000)
+    assert len(prompts) == 13                                   # the first got closer (0 to 2 bytes), then twelve that didn't
+    assert "ends by itself after 12 tries in a row" in prompts[0] and "(11 so far)" in prompts[-1]
+    assert "Best: 2/12 B" in status(page)
+
+
 def test_ai_run_ends_when_the_ai_sends_no_new_code(page):
     """No limit on tries, but a model that only repeats itself isn't trying any more."""
     sign_in(page)
