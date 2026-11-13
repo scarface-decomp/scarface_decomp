@@ -681,8 +681,9 @@ Keeping the fraction of the number between keys and blending the two sets either
 cross-fade instead of jump. At noon the dome is on set 2. The dome's six sets are (0, 0, 0), (104, 201, 209),
 (132, 149, 204), (104, 177, 112), (4, 3, 11) and (0, 0, 0); the second, added to (10, 13, 20), is the familiar
 Miami sky blue. The cloud layers: `skybox17Shape` (0, 0, 0), (2, 2, 1), (122, 127, 85), (122, 127, 85),
-(0, 0, 0); `skybox18Shape` (0, 0, 0), (104, 109, 70), (104, 109, 70), (0, 0, 0). The two horizon meshes' sets
-are all zero: the horizon keeps its own colours all day.
+(0, 0, 0); `skybox18Shape` (0, 0, 0), (104, 109, 70), (104, 109, 70), (0, 0, 0). The two horizon meshes' colour sets
+are all zero, but their sets also move the texture across a strip of colours, so the horizon changes colour
+by the hour ([SPEC-008 §1](cleanroom/SPEC-008-horizon-dents.md#1-the-horizons-colour-by-the-hour-checked)).
 
 ### The stream graph
 
@@ -1281,8 +1282,8 @@ open one in a hex editor, compare the versions (the [version differences](VERSIO
 what you find. Known gaps:
 
 * the Pure3D ids under [Ids seen but not worked out](#ids-seen-but-not-worked-out);
-* the seven u32 of `0x00010014`, and what the PS2 header's flags word and the vehicles' two extra vectors
-  per vertex are (tangents, most likely).
+* the seven u32 of `0x00010014`, and what the PS2 header's flags word is. (The vehicles' two extra vectors
+  per vertex are dents: [SPEC-008 §2](cleanroom/SPEC-008-horizon-dents.md#2-the-cars-dents-checked-checked-on-the-xbox).)
 
 ## Credits and sources
 
