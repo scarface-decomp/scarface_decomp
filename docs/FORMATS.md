@@ -249,9 +249,12 @@ used `0x4500` and `0x4501` for these.
 | `0x00121114` | no name known (`p3d.py` says Byte Quaternion Channel) | the same header, then x, y, z as signed bytes over 127 (Xbox and PS2; about 1% precision) |
 | `0x00121110` | Channel Interpolation Mode | u32 version, u32 interpolate (-1: yes) |
 | `0x00121100` | Float1 Channel | u32 version, parameter, u32 keys, u16 frames, 1 float per key |
+| `0x00121101` | Float2 Channel | the same with 2 floats per key (parameter `OFF`: a texture's shift across a surface) |
+| `0x00121108` | Boolean Channel | u32 version, parameter, a u16 starting state (1: on), u32 keys, u16 frames, and no values: every key flips the state. At a frame, the state is the starting state flipped once for each key at or before it |
+| `0x00121107` | Entity Channel | u32 version, parameter (`TEX`), u32 keys, u16 frames, then a name per key: the texture a surface shows from that frame on (the water's caustics: `CausticWaterA_x64_rgb.01.bmp` to `.20.bmp`) |
 | `0x00121109` | Colour Channel | u32 version, parameter (`CLR`), u32 keys, u16 frames, then a u32 colour (`0xAARRGGBB`) per key: two arrays, not interleaved |
 | `0x0012110E` | Integer Channel | u32 version, parameter (`VRTX`), u32 keys, u16 frames, then a u32 per key, with no padding between the two arrays |
-| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`CAM`, `PTRN`, `LITE` ...), `ANIM`, two u32, then the name of what it drives (a camera, a light) and the animation it plays |
+| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`CAM`, `PTRN`, `LITE` ...), `ANIM`, a float (the frame its animation starts at; 0 in every PC file), a u32 (1), then the name of what it drives (a camera, a light) and the animation it plays |
 | `0x00002200` | Camera | name, u32 version (2), float field of view (radians, across the picture), float aspect, float near and far clip, then position, look direction and up (3 floats each) |
 
 Every person in the game has the same 27-joint skeleton (`character_root`, `pelvis`, `hip_l` ...), so

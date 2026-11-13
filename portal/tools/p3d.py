@@ -94,6 +94,7 @@ VERTEX_BITS = ((0x2000, "position"), (0x0010, "normal"), (0x0020, "colour"), (0x
                (0x0100, "weights"))
 QUATERNION_CHANNELS = (0x121105, 0x121111, 0x121112, 0x121114)
 COLOUR_CHANNEL = 0x121109
+BOOLEAN_CHANNEL, ENTITY_CHANNEL = 0x121108, 0x121107
 INTEGER_CHANNEL = 0x12110E
 COLOUR_SETS, COLOUR_SET, COLOUR_AMOUNTS = 0x121305, 0x121306, 0x10F02
 LIGHT_TYPES = {0: "ambient", 1: "point", 2: "directional", 3: "spot"}
@@ -338,6 +339,25 @@ def _dof_channel(r: _R) -> dict:
     const = r.floats(3)
     return {"version": ver, "parameter": param, "mapping": mapping, "constants": tuple(round(x, 4) for x in const),
             "keys": r.u32()}
+
+
+def _bool_channel(r: _R) -> dict:
+    """A Boolean channel (0x121108; clean-room spec SPEC-005, section 1.2): u32 version, the parameter, a u16
+    starting state (1 on), u32 keys, the keys' frames, and no values: every key flips the state."""
+    ver, param = r.u32(), r.fourcc()
+    start = struct.unpack_from("<H", r.d, r.p)[0]
+    r.p += 2
+    return {"version": ver, "parameter": param, "starts on": start == 1, "keys": r.u32()}
+
+
+def _frame_controller(r: _R) -> dict:
+    """A Frame Controller (0x121201): u32 version, its name, 4 characters type (CAM, PTRN, LITE ...), the word
+    ANIM, a float (the frame its animation starts at: SPEC-005, section 1.4; 0 in every PC file), a u32 (1),
+    then the name of what it drives and the animation it plays."""
+    ver, name, kind, word = r.u32(), r.text(), r.fourcc(), r.fourcc()
+    offset, number = r.f32(), r.u32()
+    return {"version": ver, "name": name, "type": kind, "word": word, "frame offset": round(offset, 4),
+            "number": number, "drives": r.text(), "animation": r.text()}
 
 
 def _interp(r: _R) -> dict:
@@ -691,7 +711,7 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x19000: _texture, 0x19001: _image,
     0x23000: _skeleton, 0x23001: _joint,
     0x121000: _animation, 0x121002: _anim_count, 0x121006: _anim_count, 0x121007: _channel_count,
-    0x121001: _group, 0x121110: _interp,
+    0x121001: _group, 0x121110: _interp, 0x121108: _bool_channel, 0x121201: _frame_controller,
     0x123000: _composite, 0x123001: _composite_part, 0x8800003: _world_geo, 0x8800004: _zone,
     0x8800005: _two_names, 0x8800112: _name_only, 0x9900190: _script_object, 0x9900191: _game_group,
     0x9900192: _object_property, 0x9900194: _property_value,
@@ -704,7 +724,7 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x8020008: _prop_property, 0x802000B: _prop_effect, 0x8800009: _zone_entry, 0x880000A: _occluder,
     0x8800000: _model_record, 0x8800001: _model_record,
 }
-for _cid in (0x121100, 0x121101, 0x121104, COLOUR_CHANNEL, INTEGER_CHANNEL) + QUATERNION_CHANNELS:
+for _cid in (0x121100, 0x121101, 0x121104, 0x121107, COLOUR_CHANNEL, INTEGER_CHANNEL) + QUATERNION_CHANNELS:
     FIELDS[_cid] = _channel
 FIELDS[0x121102] = FIELDS[0x121103] = _dof_channel
 
@@ -725,11 +745,23 @@ def fields(data: bytes, c: Chunk) -> dict:
 def channel_keys(data: bytes, c: Chunk) -> Tuple[str, List[int], List[tuple]]:
     """(parameter, key frames, values) of an animation channel. Quaternions come back as (x, y, z, w),
     a Colour channel's 0xAARRGGBB values as (a, r, g, b) from 0 to 255, an Integer channel's as (n,); a
-    Vector1DOF or Vector2DOF channel gives only its moving components (see its mapping and constants)."""
+    Vector1DOF or Vector2DOF channel gives only its moving components (see its mapping and constants).
+    A Boolean channel has no values in the file: each key flips the state, so the value given for a key is
+    (the state from that key on,), and its fields say what it is before the first ("starts on"). An Entity
+    channel's values are names, (name,) per key: the texture a surface shows from that frame on."""
     r = _R(data, *c.body)
     if c.id in (0x121102, 0x121103):
         info = _dof_channel(r)
         param, n = info["parameter"], info["keys"]
+    elif c.id == BOOLEAN_CHANNEL:
+        info = _bool_channel(r)
+        n = info["keys"]
+        frames = list(struct.unpack_from(f"<{n}H", data, r.p))
+        state, states = info["starts on"], []
+        for _ in frames:
+            state = not state
+            states.append((state,))
+        return info["parameter"], frames, states
     else:
         r.u32()                                              # version
         param, n = r.fourcc(), r.u32()
@@ -751,6 +783,8 @@ def channel_keys(data: bytes, c: Chunk) -> Tuple[str, List[int], List[tuple]]:
         vals = [tuple((v >> s) & 0xFF for s in (24, 16, 8, 0)) for v in struct.unpack_from(f"<{n}I", data, r.p)]
     elif c.id == INTEGER_CHANNEL:                            # the frames, then a u32 per key, no padding between
         vals = [(v,) for v in struct.unpack_from(f"<{n}I", data, r.p)]
+    elif c.id == ENTITY_CHANNEL:                             # the frames, then a name per key
+        vals = [(r.text(),) for _ in range(n)]
     else:
         raise P3dError(f"no reader for {NAMES.get(c.id, hex(c.id))}")
     return param, frames, vals

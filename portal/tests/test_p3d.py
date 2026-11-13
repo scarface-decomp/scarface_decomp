@@ -478,3 +478,33 @@ def test_the_scripts_names_use_the_same_key():
         assert T.name_key(name) == P.name_key(name)
     assert T.name_key("") == 0x80000000                                        # an empty script name is still a key
     assert T.name_key(T.stx(P.name_key("Parent"))) == P.name_key("Parent")     # stx........ stands for its own key
+
+
+# ---- Boolean, Float2 and Entity channels; the frame controller (clean-room spec SPEC-005, sections 1.2 and 1.4) ----
+
+def test_a_boolean_channel_has_no_values_every_key_flips_it():
+    import p3d as P
+    c = chunk(0x121108, struct.pack("<I", 0) + b"DFEN" + struct.pack("<HI3H", 1, 3, 5, 9, 20))
+    data = p3d(c)
+    ch = P.read_tree(data)[0]
+    assert P.fields(data, ch) == {"version": 0, "parameter": "DFEN", "starts on": True, "keys": 3}
+    assert P.channel_keys(data, ch) == ("DFEN", [5, 9, 20], [(False,), (True,), (False,)])      # on until frame 5
+    off = p3d(chunk(0x121108, struct.pack("<I", 0) + b"VIS\0" + struct.pack("<HI1H", 0, 1, 12)))
+    assert P.channel_keys(off, P.read_tree(off)[0]) == ("VIS", [12], [(True,)])                # off, then on from 12
+
+
+def test_float2_and_entity_channels():
+    import p3d as P
+    f2 = p3d(chunk(0x121101, struct.pack("<I", 0) + b"OFF\0" + struct.pack("<I2H4f", 2, 0, 30, 0.0, 0.0, 1.0, 0.5)))
+    assert P.channel_keys(f2, P.read_tree(f2)[0]) == ("OFF", [0, 30], [(0.0, 0.0), (1.0, 0.5)])
+    ent = p3d(chunk(0x121107, struct.pack("<I", 0) + b"TEX\0" + struct.pack("<I2H", 2, 0, 1) + text("water.01.bmp") + text("water.02.bmp")))
+    assert P.channel_keys(ent, P.read_tree(ent)[0]) == ("TEX", [0, 1], [("water.01.bmp",), ("water.02.bmp",)])
+
+
+def test_the_frame_controllers_first_number_is_a_frame():
+    import p3d as P
+    data = p3d(chunk(0x121201, struct.pack("<I", 1) + text("PTRN_door") + b"PTRNANIM" + struct.pack("<fI", 12.5, 1)
+                     + text("door") + text("PTRN_door_opening")))
+    assert P.fields(data, P.read_tree(data)[0]) == {
+        "version": 1, "name": "PTRN_door", "type": "PTRN", "word": "ANIM", "frame offset": 12.5, "number": 1,
+        "drives": "door", "animation": "PTRN_door_opening"}
