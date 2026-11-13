@@ -77,6 +77,13 @@ state, and flags (placed and switched on, in its renderable, woken up, gone).
 * **Packed values:** height is kept times 100; a per-axis scale times 20; a uniform scale times 1000 (kept
   between 0.001 and 65); a tint in fifteenths.
 
+**[checked on the Xbox]** The Xbox has the same manager. Its constructor is `sub_0008C860` (1,122 bytes): it
+sets the 350-a-frame count and makes room for 4,181 placed props. Its scan is `sub_0008E8F0` (2,171 bytes),
+which uses the 900 margin, heights in hundredths (0.01), and two more squared distances the PC has too: 1,600
+(40 units) and 62,500 (250 units), for attract points (places characters are drawn to, such as parking). The
+manager's fields sit at **different offsets** on the Xbox (the 350 is at 0x25C0, not the PC's 0x2D90), so
+take its layout from the Xbox code, not from the PC.
+
 ## 3. The reflection, and the frame-time budget **[reported]**
 
 * **The water reflection** is drawn before the main frame, by the gameplay scene: the sky is drawn mirrored

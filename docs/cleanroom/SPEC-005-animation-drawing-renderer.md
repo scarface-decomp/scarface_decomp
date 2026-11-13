@@ -305,7 +305,23 @@ piece and its container (+0x50, +0x54), the shader it is grouped by (+0x58), the
 array of 84 heads of 12 bytes at +0x30 of the draw list, with a byte per list at +0x3C saying it needs
 sorting.
 
+**[checked on the Xbox]** The Xbox's draw-list constructor is `sub_00045510` (466 bytes): it allocates the
+84 list heads (0x3F0 bytes) and steps through its entries 0x70 bytes at a time. Its table slots are the PC's:
+`renderer::Display_List::vfunc_07` adds a container, `vfunc_08` adds one piece to its list (§3.2), `vfunc_09`
+draws the frame (§3.3), `vfunc_03` is the deleting destructor. The order of §3.3 has not been compared with
+`vfunc_09` *(check)*.
+
 ### 4.3 The kinds of renderable
+
+**[checked on the Xbox]** Every type mask below is set at 0x54 by a function in `default.xbe`, and where the
+Xbox allocates the object right before calling that function, it asks for exactly the size below. Those
+functions are the constructors: `ZonePkgRenderable` in `renderer::ZonePkgLoader::vfunc_06` (`0x00056F40`),
+`PropRenderable` `sub_00055CC0`, `InstanceRenderable` `sub_000543D0`, `CharacterRenderable` `sub_00050DD0`,
+`VehicleRenderable` `sub_0005D7D0`, `DecalRenderable` `sub_000532E0`, `SkidmarkRenderable` `sub_0005B5A0`,
+`TraceFireRenderable` `sub_0005D130`, `OceanRenderable` `sub_00055400`, `WakeRenderable` `sub_00060310`,
+`RainRenderable` `sub_00057AF0`, `MaskRenderable` `sub_00054F00`, `ParticleEffectRenderable` `sub_00055690`,
+`NISRenderable` `sub_00054FF0`, `PlugInRenderable` `sub_00055BF0`, and `LightingRenderable` `sub_00054970`
+(type mask 0x400, 0xA4 bytes).
 
 | class | size | type mask | its own fields |
 | :--- | :--- | :--- | :--- |
@@ -326,6 +342,7 @@ sorting.
 | `ParticleEffectRenderable` | 0xA8 | 0x4 | the particle system at 0x84, its emitter at 0x88; draws through the particle system, not slot 10 |
 | `NISRenderable` | 0x90 | 0x20000 | its position at 0x84 (cutscenes); no distance test |
 | `PlugInRenderable` | 0x88 | 0x40000 | a plug-in at 0x84 whose first slot draws |
+| `LightingRenderable` | 0xA4 | 0x400 | its light group and its animation controllers (SPEC-006 §1) |
 
 Their pieces: a *container* holds a sort number at 0x3C (decals and skidmarks 0, the ocean 0.5, wakes 0.89,
 vehicles their position each frame) and its pieces from 0x44. A *piece* (`...Primitive`) has its layer at 0x0C

@@ -12,6 +12,51 @@
   },
   {
    "bin": "xb",
+   "va": "0x000436F0",
+   "name_in_queue": "renderer::Display_List::vfunc_07",
+   "size": 63,
+   "what_it_does": "Draw list: adds a container (table slot 7).",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#42-an-element-0x30-bytes-and-a-draw-list-entry",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00043730",
+   "name_in_queue": "renderer::Display_List::vfunc_08",
+   "size": 1516,
+   "what_it_does": "Draw list: adds one piece of a container to the list it belongs in, from its layer, fade, lighting and blending (table slot 8; SPEC-005 section 3.1-3.2).",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#42-an-element-0x30-bytes-and-a-draw-list-entry",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000449F0",
+   "name_in_queue": "renderer::Display_List::vfunc_09",
+   "size": 2649,
+   "what_it_does": "Draw list: draws the whole frame from the 84 lists in order (table slot 9; SPEC-005 section 3.3).",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#42-an-element-0x30-bytes-and-a-draw-list-entry",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000454B0",
+   "name_in_queue": "renderer::Display_List::vfunc_03",
+   "size": 94,
+   "what_it_does": "Draw list: deleting destructor (table slot 3).",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#42-an-element-0x30-bytes-and-a-draw-list-entry",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00045510",
+   "name_in_queue": "sub_00045510",
+   "size": 466,
+   "what_it_does": "Draw-list constructor (checked on the Xbox): the 84 list heads (0x3F0 bytes) and its block of 0x70-byte entries.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#42-an-element-0x30-bytes-and-a-draw-list-entry",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
    "va": "0x00047AF0",
    "name_in_queue": "occlude::OccluderLoader::vfunc_06",
    "size": 494,
@@ -36,6 +81,15 @@
    "what_it_does": "CharacterRenderable's override: per-frame visibility, draw distance and fade (SPEC-005 \u00a72.2), putting visible elements into the draw lists.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
    "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00050DD0",
+   "name_in_queue": "sub_00050DD0",
+   "size": 487,
+   "what_it_does": "renderer::CharacterRenderable constructor (checked on the Xbox): 0xBC bytes, type mask 0x20 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "open"
   },
   {
    "bin": "xb",
@@ -66,6 +120,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x000532E0",
+   "name_in_queue": "sub_000532E0",
+   "size": 155,
+   "what_it_does": "renderer::DecalRenderable constructor (checked on the Xbox): 0x88 bytes, type mask 0x2000 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
    "va": "0x00053380",
    "name_in_queue": "renderer::DecalRenderable::vfunc_03",
    "size": 63,
@@ -80,6 +143,15 @@
    "size": 16,
    "what_it_does": "DecalRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000543D0",
+   "name_in_queue": "sub_000543D0",
+   "size": 145,
+   "what_it_does": "renderer::InstanceRenderable constructor (checked on the Xbox): 0x88 bytes, type mask 0x200 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
    "status": "open"
   },
   {
@@ -102,6 +174,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x00054970",
+   "name_in_queue": "sub_00054970",
+   "size": 103,
+   "what_it_does": "renderer::LightingRenderable constructor (checked on the Xbox): 0xA4 bytes, type mask 0x400 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
    "va": "0x00054CD0",
    "name_in_queue": "renderer::LightingRenderable::vfunc_03",
    "size": 30,
@@ -117,6 +198,15 @@
    "what_it_does": "MaskRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
    "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00054F00",
+   "name_in_queue": "sub_00054F00",
+   "size": 92,
+   "what_it_does": "renderer::MaskRenderable constructor (checked on the Xbox): 0x84 bytes, type mask 0x1000 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "open"
   },
   {
    "bin": "xb",
@@ -147,6 +237,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x00054FF0",
+   "name_in_queue": "sub_00054FF0",
+   "size": 79,
+   "what_it_does": "renderer::NISRenderable constructor (checked on the Xbox): 0x90 bytes, type mask 0x20000 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
    "va": "0x00055040",
    "name_in_queue": "renderer::NISRenderable::vfunc_03",
    "size": 36,
@@ -161,6 +260,15 @@
    "size": 246,
    "what_it_does": "NISRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055400",
+   "name_in_queue": "sub_00055400",
+   "size": 135,
+   "what_it_does": "renderer::OceanRenderable constructor (checked on the Xbox): 0x88 bytes, type mask 0x40 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
    "status": "open"
   },
   {
@@ -192,6 +300,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x00055690",
+   "name_in_queue": "sub_00055690",
+   "size": 161,
+   "what_it_does": "renderer::ParticleEffectRenderable constructor (checked on the Xbox): 0xA8 bytes, type mask 0x4 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
    "va": "0x00055740",
    "name_in_queue": "renderer::ParticleEffectRenderable::vfunc_03",
    "size": 89,
@@ -210,6 +327,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x00055BF0",
+   "name_in_queue": "sub_00055BF0",
+   "size": 39,
+   "what_it_does": "renderer::PlugInRenderable constructor (checked on the Xbox): 0x88 bytes, type mask 0x40000 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
    "va": "0x00055C20",
    "name_in_queue": "renderer::PlugInRenderable::vfunc_11",
    "size": 17,
@@ -224,6 +350,15 @@
    "size": 36,
    "what_it_does": "PlugInRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055CC0",
+   "name_in_queue": "sub_00055CC0",
+   "size": 69,
+   "what_it_does": "renderer::PropRenderable constructor (checked on the Xbox): 0x84 bytes, type mask 0x8 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
    "status": "matched"
   },
   {
@@ -314,6 +449,15 @@
    "size": 257,
    "what_it_does": "RainRenderable's override: draws straight away, outside the draw lists (non-gameplay scenes only); empty in the base.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00057AF0",
+   "name_in_queue": "sub_00057AF0",
+   "size": 549,
+   "what_it_does": "renderer::RainRenderable constructor (checked on the Xbox): 0x454 bytes, type mask 0x800 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
    "status": "open"
   },
   {
@@ -435,6 +579,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x0005B5A0",
+   "name_in_queue": "sub_0005B5A0",
+   "size": 97,
+   "what_it_does": "renderer::SkidmarkRenderable constructor (checked on the Xbox): 0x88 bytes, type mask 0x100000 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
    "va": "0x0005B610",
    "name_in_queue": "renderer::SkidmarkRenderable::vfunc_03",
    "size": 63,
@@ -507,6 +660,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x0005D130",
+   "name_in_queue": "sub_0005D130",
+   "size": 128,
+   "what_it_does": "renderer::TraceFireRenderable constructor (checked on the Xbox): 0x8C bytes, type mask 0x2 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
    "va": "0x0005D1B0",
    "name_in_queue": "renderer::TraceFireRenderable::vfunc_03",
    "size": 30,
@@ -521,6 +683,15 @@
    "size": 472,
    "what_it_does": "TraceFireRenderable's override: draws straight away, outside the draw lists (non-gameplay scenes only); empty in the base.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005D7D0",
+   "name_in_queue": "sub_0005D7D0",
+   "size": 77,
+   "what_it_does": "renderer::VehicleRenderable constructor (checked on the Xbox): 0xC0 bytes, type mask 0x4000 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
    "status": "open"
   },
   {
@@ -552,6 +723,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x00060310",
+   "name_in_queue": "sub_00060310",
+   "size": 146,
+   "what_it_does": "renderer::WakeRenderable constructor (checked on the Xbox): 0x88 bytes, type mask 0x80 at 0x54.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#43-the-kinds-of-renderable",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
    "va": "0x000603B0",
    "name_in_queue": "renderer::WakeRenderable::vfunc_03",
    "size": 63,
@@ -567,6 +747,24 @@
    "what_it_does": "WakeRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
    "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0008C860",
+   "name_in_queue": "sub_0008C860",
+   "size": 1122,
+   "what_it_does": "Placed-prop manager constructor (checked on the Xbox): sets 350 props checked a frame, room for 4,181.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#2-placed-props-at-run-time-reported",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0008E8F0",
+   "name_in_queue": "sub_0008E8F0",
+   "size": 2171,
+   "what_it_does": "Placed-prop scan (checked on the Xbox): which placed props are near enough to draw or wake (900 margin, attract points at 40 and 250 units).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#2-placed-props-at-run-time-reported",
+   "status": "open"
   },
   {
    "bin": "xb",
