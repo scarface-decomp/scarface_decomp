@@ -153,9 +153,9 @@ are a map for finding things, not facts: check each one against the code before 
 
 For the implementer. Choose your own names; keep each step small.
 
-1. **`p3d.py`:** a `name_key(text, start=0)` as §5, tested against the keys the game files carry (an
-   animation group's joint, a light's key in a light group, a prop's model-name key), and used wherever the
-   tools match objects by name.
+1. **`p3d.py`:** a `name_key(text, start=0)` as §5, tested against the keys the game files carry, and
+   used wherever the tools match objects by name. **Done** (`p3d.name_key`; see the answers below for where
+   the files do and don't carry keys).
 2. **Placed props:** use §2 in the city export and viewer: the view distance per model (with the draw-distance
    scale 1), the ground-plane distance, the 900 margin, and the sway number in the extras.
 3. **Lights in the viewer:** gather the lights near a point as §1 and light each object with at most four plus
@@ -167,4 +167,19 @@ For the implementer. Choose your own names; keep each step small.
 
 ### Questions from the implementer, and answers
 
-*(none yet)*
+*From the implementer, after building item 1 (checked on the PC's files and the Xbox's program):*
+
+* **The `.p3d` files carry no name keys.** Item 1 asked for a test against "an animation group's joint, a
+  light's key in a light group, a prop's model-name key". Nine PC files of different kinds (two city areas,
+  `Common.p3d`, the stream graph, an interior, a character, a vehicle, the weapons, a cutscene's stream) were
+  searched for the key of every name in them: none is stored. An animation group (`0x121001`) has its
+  joint's name as text and a u32 0 after it. The files keep names; the game makes the keys when it loads
+  them. The keys that *are* in files are the compiled scripts' (a name written `stx` and eight letters is its
+  key) and the AI trees' (`.dtr`); `torque_names.name_key` now uses `p3d.name_key`, and the tests check the
+  two agree.
+* **A character above 0x7F counts as below `a`.** §5 says "taken as a signed byte" and "below `a`: add 0x20".
+  The Xbox's function compares the byte as a signed character first (`cmp cl, 0x61` / `jge`), so 0xE9 is -23,
+  below `a`, and 0x20 is added before the XOR. The scripts' key in this repository did it the other way
+  round for such bytes (no names in the game's files have any, so nothing changed); it is corrected.
+* **`sub_00243FA0` is matched** from §5: `reports/to_submit/xb_00243FA0.cpp`, 75 of 75 bytes with
+  `portal/verify.py`. Its second argument is the starting value, as §5 says.
