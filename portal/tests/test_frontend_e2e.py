@@ -1406,3 +1406,41 @@ def test_a_cutscenes_pieces_are_one_row_until_asked_for(page):
     assert page.locator("#gf-list .gf-row:visible").count() == 3
     page.unroute("**/api/game-files/list*")
 
+
+def test_the_ai_is_told_what_the_specs_say_and_to_name_things(page):
+    sign_in(page)
+    prompts = []
+
+    def ai(route):
+        prompts.append(json.loads(route.request.post_data)["prompt"])
+        route.fulfill(json={"ok": True, "reply": "GIVE UP: enough", "used_model": "m"})
+
+    page.route("**/api/fast-synthesize", lambda r: r.fulfill(json={"ok": False}))
+    page.route("**/api/ai-proxy", ai)
+    page.evaluate("""() => { currentTask.guide = {what_it_does: 'Works out the name key of a text.', spec: 'docs/cleanroom/SPEC-006.md',
+                                                  low_confidence: false}; }""")
+    page.fill("#ai-key", "test-key")
+    page.click("#btn-step2-ai")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('The AI stopped')", timeout=30000)
+    assert "from the project's specs (checked on the game): Works out the name key of a text." in prompts[0]
+    assert "NAMES: the byte-for-byte match always comes first" in prompts[0] and "a guessed name that sounds sure is worse" in prompts[0]
+    page.evaluate("() => { currentTask.guide = {what_it_does: 'Maybe draws the HUD.', spec: '', low_confidence: true}; }")
+    page.click("#btn-step2-ai")
+    for _ in range(100):
+        if len(prompts) >= 2:
+            break
+        page.wait_for_timeout(100)
+    assert "NOT checked against this code; trust the disassembly over it): Maybe draws the HUD." in prompts[1]
+
+
+def test_a_matched_function_says_what_is_left_to_name(page):
+    page.evaluate("""() => { renderReadable({readable: {grade: 'matched', left: 3, stand_ins: ['sub_001B0920', 'DAT_0045418C'], raw_addresses: 1}}); }""")
+    text = page.inner_text("#wb-readable")
+    assert "Matched byte for byte. 3 things left to name" in text and "sub_001B0920, DAT_0045418C" in text
+    assert "1 place works on a raw address" in text and "the better version is kept if it still matches" in text
+    page.evaluate("() => { renderReadable({readable: {grade: 'readable', left: 0, stand_ins: [], raw_addresses: 0}}); }")
+    assert page.inner_text("#wb-readable") == "Matched, and it reads as finished C++."
+    page.evaluate("() => { renderReadable({}); }")
+    assert page.is_hidden("#wb-readable")
+    assert page.locator("#lane-filter option[value=NEEDS_NAMES]").count() == 1
+

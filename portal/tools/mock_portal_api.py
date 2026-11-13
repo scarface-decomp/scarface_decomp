@@ -456,6 +456,8 @@ class Handler(BaseHTTPRequestHandler):
                     why = {t["id"]: "the game's class information names it" for t in items
                            if "Easy" in t["symbol"] and t["size"] <= 32 and t["status"] == "UNCLAIMED"}
                     items = [t for t in items if t["id"] in why]
+                if lane == "NEEDS_NAMES":              # the verified ones stand in for matches with names to do
+                    items = [t for t in items if t["status"] == "VERIFIED"]
                 if lane == "IN_GUIDE":                 # the "Hard" ones stand in for the ones the specs describe
                     items = [t for t in items if "Hard" in t["symbol"]]
                 if tier != "ALL":
