@@ -350,14 +350,45 @@ a soft grey disc, 72 out of 255 in the middle, on black corners. Subtracted, it 
 Multiplied, it would be a black square. `SkidMark_Asphalt.bmp` (`Common.p3d`) is grey 7 to 20 all over:
 subtracted, a faint mark on the road; multiplied, nearly black.
 
-Whether the PC does the same isn't checked *(check)*. The Xbox is this project's main target.
+**The PC has the same table [checked in the PC program's data].** The PC program's code is encrypted in
+`Scarface.exe`, so its use of the table can't be followed. Its data isn't encrypted, though. At `0x007EC848`
+(`.data`) there are the same eight 16-byte entries, with Direct3D 9's numbers for the equations (1 add, 3 reverse
+subtract):
 
-### 8.2 Shadow decals on the Xbox: still open
+* entry 0: off, add, one, zero;
+* entry 1: add, source alpha, 1 minus source alpha;
+* entries 2 and 3: add and reverse subtract, each with one and one;
+* entries 4 to 7: as on the Xbox.
 
-The Xbox program has a shader class for the `shadowdecal` kind (run-time type name
-`pure3d::d3dShadowDecalShader`, beside `d3dSimpleShader`, `d3dDecalShader`, `d3dVertexFadeShader` and the
-others), so it can draw them. Whether it draws them in the world wasn't settled *(check)*. Nothing to build for
-this.
+Straight after the entries (`0x007EC8C8`) comes the table of blend factors, in the Xbox's order, with Direct3D
+9's numbers: 1, 2, 3, 4, 9, 10, 5, 6, 7, 8, 11 and two more. So `BLMD` 3 subtracts on the PC too. The table is
+checked; that the PC program picks its entries the way the Xbox does is assumed.
+
+### 8.2 Shadow decals on the Xbox: drawn **[checked on the Xbox]**
+
+SPEC-002 reported that the PC never shows the shadow decals. The Xbox does show them:
+
+* **The world geometry loader.** It is found through the run-time type name `WorldGeoLoader`; its loading
+  function is at `0x00056720`. It gives every primitive whose shader is of the `shadowdecal` kind its own
+  draw-list number, 37 (`0x00056943`). The same loader uses other numbers for the other kinds: 29 for `foam`,
+  33 for `vertexfade` and `untextured`, and so on.
+* **The display list.** Its class is `Display_List`, and its adding function is at `0x00043730`. It sends
+  number 37 to list 7 or list 8 (the jump table at `0x00043C68`, case at `0x00043ACB`).
+* **The frame.** The frame's drawing function (`0x000449F0`) calls `0x00042AB0` at `0x00044D2F`, which draws
+  everything in lists 7 and 8. It does so whenever either list holds anything and the byte at `0x0041C922` is
+  set. That byte is 1 in the file, and no code in the program writes it.
+* **The pass.** `0x00042AB0` wraps the drawing in a render-context extension's begin and end: id `0x108`, class
+  `d3dExtStaticShadowGen`. Its end (`0x002A34A0`) puts the result on the frame with a full-screen quad, in two
+  passes:
+  * first with blending "zero, 1 minus source alpha": the frame times 1 minus the coverage, once however many
+    decals overlap;
+  * then a pass that writes alpha only.
+
+  A strength of 0.65 (the float at `0x0045FCBC`, times 255 into the quad's alpha) goes into that quad. Whether it
+  limits the darkening to 65 % *(check)*.
+
+So on the Xbox, shadow decals darken what is under them by their coverage, and overlapping decals don't darken
+twice. That is what SPEC-002 said they were meant to do. Why the PC doesn't show them is outside this spec.
 
 ---
 
@@ -399,3 +430,30 @@ this.
      the 3 row of the export table with the new picture.
    * Point to this spec where its facts are used, as the SPEC-001 and SPEC-002 sections do.
 7. **Tests** on made-up files for every reader and for items 2 to 5. Keep each file's line endings as they are.
+8. **Prop properties in the exports.** A placed copy's node gets the prop's own properties in its extras, as
+   `"properties": {"<name>": "<value>", ...}`, texts as the file has them. These are the `0x08020008`
+   sub-chunks straight under its `0x0802000D` (§1.1), leaving out `name`, which is the prop's name. A prop's file
+   opened on its own gets them on the prop's top node. A state's own properties (§1.5) aren't carried. **Open in
+   Blender** gets them as custom properties through the importer, with nothing more to do: check that.
+9. **Shadow decals** (§8.2).
+   * The export's report line says the Xbox draws them and the PC is reported not to, instead of "the PC game
+     never shows them".
+   * FORMATS.md's [Shadows](../FORMATS.md#shadows) section says so too, with the 0.65 left marked
+     *(check)*.
+   * The exports stay as they are: the decals stay shown, as black see-through surfaces.
+10. **FORMATS.md** also gets §8.1's PC table, in the "On the Xbox" paragraph under the blend modes.
+11. **Tests** on made-up files for item 8, and the report line in item 9. Keep each file's line endings.
+
+---
+
+## 10. Answers to the implementer's questions
+
+1. *A kind on every world geometry, not only those with a zone package entry?* Yes, as built.
+2. *Should a far-away stand-in stay hidden when its area is exported on its own?* Yes. The game hides it whenever
+   the camera is closer than *near* to its point, and an area on its own is looked at from close by. It stays one
+   tick away in Blender.
+3. *Should the prop properties go into the exports?* Yes: work item 8.
+4. *Starting-state numbers 12 to 15 get the first state?* Yes. The game keeps 4 bits, and no file uses them.
+5. *The names for the open fields?* Fine as built.
+6. *Two zone package entries for one world geometry: the first wins?* Fine; no file has two.
+7. *The number of properties read only from version 3 on?* Yes, as §1.1 reports.
