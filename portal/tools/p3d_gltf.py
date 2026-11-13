@@ -55,6 +55,9 @@ What goes where (see docs/FORMATS.md for the chunk layouts):
                                      (near above 0: a far-away stand-in) is marked hidden
     an instanceposition's last value the state a placed prop starts in (extras {"state": name} when not
                                      its first)
+    a State Prop Data (0x802000D)    its own properties (0x8020008), but name, in the extras of each placed
+                                     copy, and of the prop's top node when its file is opened on its own:
+                                     {"properties": {name: value}}
     the sea, with --map              a flat surface at height 0 round the map, its settings in extras
     a Draw Order (0x122000)          the mesh's extras: {"drawOrder": key}
     a Sky (0x8800002), with --hour   its composite drawable posed by PTRN_<name> for the hour, and its
@@ -94,15 +97,16 @@ COMPOSITE, COMPOSITE_PROP = 0x123000, 0x123001
 ANIMATION, ANIM_GROUP_LIST, ANIM_GROUP = 0x121000, 0x121002, 0x121001
 CAMERA, FRAME_CONTROLLER = 0x2200, 0x121201
 WORLD_GEO, STATE_PROP, ZONE_PACKAGE, ZONE_ENTRY = 0x8800003, 0x8800005, 0x8800004, 0x8800009
-STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY = 0x0802000D, 0x0802000E, 0x08020002
+STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY, PROP_PROPERTY = 0x0802000D, 0x0802000E, 0x08020002, 0x08020008
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 9                     # 3: props kept with another area. 4: one stage of each place; insides in the city.
+EXPORT_VERSION = 10                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
                                        # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight.
                                        # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked.
                                        # 8: a shader without LIT is unlit. 9: darkening subtracts; placed props in their
-                                       # starting state; world geometry's draw distances, far-away stand-ins hidden
+                                       # starting state; world geometry's draw distances, far-away stand-ins hidden.
+                                       # 10: props carry their properties
 LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER, SKY = 0x13000, 0x2380, 0x8800007, 0x122000, 0x8800002
 DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)
 WEATHER_KIND = {"clear": 0, "rain": 1}  # the daylight's kind for each weather; the game starts in clear weather
@@ -573,6 +577,18 @@ def prop_states(data: bytes, c: p3d.Chunk) -> List[Tuple[str, Dict[str, bool]]]:
     return out
 
 
+def prop_properties(data: bytes, c: p3d.Chunk) -> Dict[str, str]:
+    """A State Prop Data chunk's own properties (the Prop Property chunks, 0x08020008, straight under it), as
+    {name: value}, texts as the file has them: visibility, movement, class ... (SPEC-003, sections 1.1 and 9). name,
+    the prop's own name, is left out, and so are a state's properties. The first of two with the same name wins."""
+    out: Dict[str, str] = {}
+    for k in c.children:
+        f = p3d.fields(data, k) if k.id == PROP_PROPERTY else {}
+        if "name" in f and f["name"].lower() != "name":
+            out.setdefault(f["name"], f["value"])
+    return out
+
+
 def starting_state(states: Sequence[Tuple[str, Dict[str, bool]]], number: int) -> int:
     """Which of a prop's states (prop_states) a placed copy starts in, by its place in the list, from the last of
     its instanceposition's twelve numbers (p3d.start_state, SPEC-003 section 2): the state with that name, letter
@@ -981,8 +997,8 @@ class Report:
         if self.unread_groups:
             out.append(f"{self.unread_groups} primitive group(s) in a form not read, left out")
         if self.shadow_decals:
-            out.append(f"{self.shadow_decals} shadow decal(s), each in a node of its own marked shadowDecal (the PC game "
-                       "never shows them)")
+            out.append(f"{self.shadow_decals} shadow decal(s), each in a node of its own marked shadowDecal (the Xbox "
+                       "draws them, darkening what is under them by their coverage; the PC is reported not to show them)")
         return out + self.notes
 
 
@@ -1313,10 +1329,22 @@ class Builder:
         cache = self.__dict__.setdefault("_states", {})
         key = id(ref.chunk)
         if key not in cache:
-            cache[key] = self._states_of(ref, name)
+            data = self.prop_data(ref, name)
+            cache[key] = prop_states(data.data, data.chunk) if data is not None else []
         return cache[key]
 
-    def _states_of(self, ref: Ref, name: str) -> List[Tuple[str, Dict[str, bool]]]:
+    def properties_of(self, ref: Ref, name: str) -> Dict[str, str]:
+        """The own properties (prop_properties) of the prop a composite drawable is the model of ({} for most)."""
+        cache = self.__dict__.setdefault("_properties", {})
+        key = id(ref.chunk)
+        if key not in cache:
+            data = self.prop_data(ref, name)
+            cache[key] = prop_properties(data.data, data.chunk) if data is not None else {}
+        return cache[key]
+
+    def prop_data(self, ref: Ref, name: str) -> Optional[Ref]:
+        """The State Prop Data (0x0802000D) of the prop a composite drawable is the model of: one of the same name,
+        or the one a State Prop naming the drawable names. None for most."""
         data = self.lib.find("propstates", name, (ref.source,))
         if data is None:
             for refs in self.lib.named["stateprop"].values():
@@ -1327,7 +1355,20 @@ class Builder:
                         break
                 if data is not None:
                     break
-        return prop_states(data.data, data.chunk) if data is not None else []
+        return data
+
+    def mark_prop(self, top: int, ref: Ref, name: str, state: int = 0) -> None:
+        """A prop's node says in its extras the state it is in, when not its first ({"state": name}), and the prop's
+        own properties ({"properties": {name: value}}), when it has any."""
+        extras: dict = {}
+        states = self.states_of(ref, name)
+        if 0 < state < len(states):
+            extras["state"] = states[state][0]
+        props = self.properties_of(ref, name)
+        if props:
+            extras["properties"] = dict(props)
+        if extras:
+            self.g.doc["nodes"][top].setdefault("extras", {}).update(extras)
 
     def composite(self, ref: Ref, parent: Optional[int] = None, label: str = "", state: int = 0, **place) -> int:
         """A composite drawable: its skeleton's joints, with each part (a mesh or a skin) on its joint.
@@ -2228,13 +2269,14 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
     export with lod): its nodes are marked hidden, as when the detailed areas are in this one.
 
     Models (the default): every skin with its skeleton, every composite drawable that isn't a map's
-    world geometry, and every mesh no composite uses, side by side. A sky (Common.p3d) with an hour is
+    world geometry (a prop's with its properties in its extras: Builder.mark_prop), and every mesh no
+    composite uses, side by side. A sky (Common.p3d) with an hour is
     posed and coloured for it (Builder.sky); with a weather, only that weather's sky goes in.
     Map (map_mode): per file, its world geometry (WorldGeo 0x8800003 names a composite drawable whose
     meshes sit in world space; its top node's extras give its kind, "worldGeometryKind", and its zone package
     entry's draw distance, "drawDistance", see draw_distance; one the game draws only when the camera is
     farther than its near distance is marked "hidden": true), a copy of each model its instance objects place,
-    each in the state its record names (starting_state; extras {"state": name} when not the first), and its
+    each in the state its record names (starting_state) and with the prop's properties (Builder.mark_prop), and its
     lights (see Builder.lights; hour lights the daylight for that hour, 0 to 24; weather, "clear" or "rain",
     picks the daylight, clear when not given). Low-detail files (miami_lod, islands_LOD) are left out when
     there's anything else, unless lod is set: then their world geometry (the low-detail hull) is marked
@@ -2306,8 +2348,7 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
                         t, q, sc = instance_trs(rec)
                         start = starting_state(states, rec[11])
                         top = b.composite(mref, placed, model, state=start, translation=t, rotation=q, scale=sc)
-                        if start:                               # an open door: not the prop's first state
-                            b.g.doc["nodes"][top].setdefault("extras", {})["state"] = states[start][0]
+                        b.mark_prop(top, mref, mref.name, start)  # its state when not the first, its properties
                         b.report.placed += 1
                 b.prop = False
             if not wanted:
@@ -2343,6 +2384,7 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
                 tops.append((name, b.sky(ref)))
                 continue
             tops.append((name, b.composite(ref)))
+            b.mark_prop(tops[-1][1], ref, name)                 # the prop's properties, if it is one
             states = b.states_of(ref, name)                     # what it becomes: beside it, kept apart
             for i, (state, shown) in enumerate(states[1:], 1):
                 if shown != states[0][1] and any(shown.values()):
