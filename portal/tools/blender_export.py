@@ -1501,8 +1501,16 @@ def measure(scene):
                                   "on": o.parent.name if o.parent else "", "bone": o.parent_bone})
     was = scene.frame_current
     span = max(1, scene.frame_end - scene.frame_start)
-    for k in range(7):
-        f = scene.frame_start + span * k // 6
+    # the moments to look at closely: the start, and the three where the face is doing the most
+    faces = [o for o in scene.objects if o.type == "MESH" and o.data.shape_keys]
+    busy = []
+    for k in range(41 if faces else 0):
+        f = scene.frame_start + span * k // 40
+        scene.frame_set(f)
+        busy.append((sum(b.value for o in faces for b in o.data.shape_keys.key_blocks[1:]), f))
+    close = {scene.frame_start} | {f for _v, f in sorted(busy, reverse=True)[:3]}
+    out["close"] = sorted(close)
+    for k, f in enumerate(sorted({scene.frame_start + span * k // 6 for k in range(7)} | close)):
         scene.frame_set(f)
         for o in scene.objects:
             if o.type == "ARMATURE":
@@ -1522,7 +1530,7 @@ def measure(scene):
             if o.type == "MESH" and o.data.shape_keys and len(out["sliders"]) < 3000:
                 out["sliders"].append({"frame": f, "name": o.name,
                                        "on": [round(b.value, 3) for b in o.data.shape_keys.key_blocks]})
-                if k in (0, 2, 4) and len(out["points"]) < 12:       # every point of a face, as Blender shows it
+                if f in close and len(out["points"]) < 12:           # every point of a face, as Blender shows it
                     shown = o.evaluated_get(bpy.context.evaluated_depsgraph_get())
                     mesh = shown.to_mesh()
                     w = shown.matrix_world
