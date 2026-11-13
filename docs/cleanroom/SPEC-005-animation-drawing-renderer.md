@@ -411,4 +411,17 @@ game's own text and type information. Keep each step small; open questions in a 
 
 ### Questions from the implementer, and answers
 
-*(none yet)*
+*From the implementer, after building item 1 (checked on the PC's files):*
+
+* **Boolean channel (§1.2): as the spec says.** All 1,256 in the files scanned are exactly 14 bytes plus two
+  per key: version, parameter, the u16 starting state, the key count, the frames, no values. The starting
+  state is 1 in 1,070 and 0 in 186.
+* **Float2 channel: as the spec says.** All 122 are Float1's layout with two floats per key; their parameter
+  is `OFF` and each has an interpolation-mode sub-chunk.
+* **Entity channel: decoded from the files** (§1.2 left it open). After the frames comes one name per key.
+  The 22 found have the parameter `TEX` and 20 keys naming `CausticWaterA_x64_rgb.01.bmp` to `.20.bmp`: the
+  texture a surface shows from that frame on. `p3d.channel_keys` reads it; FORMATS.md has it.
+* **The frame controller's first number (§1.4) can't be told apart in the files:** it is 0 in all 546 frame
+  controllers scanned, which is the same bytes as a float or a u32. `p3d.py` reads it as a float, as the spec
+  says, and FORMATS.md says it is 0 in every PC file. The u32 after it is 1 in all of them.
+
