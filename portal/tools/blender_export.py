@@ -12,7 +12,8 @@ finds the files.
                                         places (packages/dzones/*_dzone.p3d)
     area_glb(out, index, version, key)  one area as a .glb
     CityJob                             every city area, in the background, and the sky round them
-                                        (city_sky); with an hour, the fog of that hour (city_fog)
+                                        (city_sky) and the sea (city_ocean); with an hour, the fog of that
+                                        hour (city_fog)
     inspect(data)                       what a .p3d holds, in words, and whether Blender can show it
     find_blender(bin_dir) / open_in_blender(exe, files, save)
                                         start the person's own Blender with .glb files imported, saving
@@ -143,6 +144,8 @@ def _glb_box(glb: bytes) -> Optional[Tuple[List[float], List[float]]]:
 
     def walk(i: int, off: List[float]) -> None:
         n = doc["nodes"][i]
+        if (n.get("extras") or {}).get("ocean"):
+            return                                       # the sea reaches far past what it is round
         t = n["matrix"][12:15] if "matrix" in n else n.get("translation", [0, 0, 0])
         o = [off[k] + t[k] for k in range(3)]
         if "mesh" in n:
@@ -333,7 +336,7 @@ def model_glb(out: Path, index: Optional[dict], version: str, game_path: str, da
                     anims += [P3G.Ref(more, c) for c in more.chunks if c.id == P3G.ANIMATION]
         for n, d in extra:
             also(n, d)
-        return P3G.export(lib, map_mode=is_map, anims=anims), have
+        return P3G.export(lib, map_mode=is_map, anims=anims, ocean=is_map), have
     (glb, report), have = make([])
     extra: List[Tuple[str, bytes]] = []
     if report.unplaced:
@@ -634,11 +637,13 @@ def inspect(data: bytes) -> dict:
 
 def area_glb(out: Path, index: Optional[dict], version: str, key: str,
              parsed: Optional[dict] = None, library: Optional[List[Tuple[str, bytes]]] = None,
-             insides: bool = True, opts: Optional[dict] = None) -> Tuple[bytes, "P3G.Report"]:
+             insides: bool = True, opts: Optional[dict] = None, ocean: bool = True) -> Tuple[bytes, "P3G.Report"]:
     """One map area (all its files) as a .glb, with what it needs from the shared files. A city area
     opened by itself comes with its buildings' insides (the club's furniture in the club); the whole
     city leaves them out (insides=False), where each inside is a file of its own. opts: the hour, weather
-    and fog for P3G.export (city_options)."""
+    and fog for P3G.export (city_options). ocean: the sea round it (the whole city has one sea of its own
+    instead, city_ocean)."""
+    opts = dict(opts or {}, ocean=ocean)
     area = next((a for a in areas(out, index, version) if a["key"] == key), None)
     if area is None:
         raise P3G.ExportError("that map area isn't in your copied game files")
@@ -690,6 +695,7 @@ def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, byt
 
 
 SKY_FILE = "sky.glb"                             # extracted/blender/<version>/: the city's sky
+OCEAN_FILE = P3G.OCEAN_FILE                      # extracted/blender/<version>/: the city's sea
 FOG_SCRIPTS = "scripts_and_data"                 # binaries/scripts_and_data/<version>/scriptc/: the scripts copied out
 
 
@@ -771,7 +777,7 @@ def _city_box(folder: Path) -> Optional[Tuple[List[float], List[float]]]:
     """The box the city's area files in folder fill (glTF's space), reading only their JSON."""
     lo, hi = [1e18] * 3, [-1e18] * 3
     for p in sorted(folder.glob("*.glb")):
-        if p.name == SKY_FILE:
+        if p.name in (SKY_FILE, OCEAN_FILE):
             continue
         try:
             with open(p, "rb") as f:
@@ -809,6 +815,26 @@ def city_sky(out: Path, index: Optional[dict], version: str, folder: Path, opts:
     return ""
 
 
+def city_ocean(out: Path, index: Optional[dict], version: str, folder: Path, opts: Optional[dict] = None) -> str:
+    """The sea round the city exported into folder (P3G.sea_export), as folder/ocean.glb: one sea for every
+    area, at height 0, reaching past the box the areas fill, with ocean_text's picture and the sky's colour
+    for the hour and weather from the copied Common.p3d (without it, a plain sea). "" when written, or why not."""
+    opts = opts or {}
+    box = _city_box(folder)
+    if box is None:
+        return "No sea: none of the city's areas came out."
+    try:
+        lib = P3G.Library()
+        common = _common(out, index, version)
+        if common is not None:
+            lib.add(common.name, common.read_bytes(), main=False)
+        glb, _r = P3G.sea_export(lib, box[0], box[1], opts.get("hour"), opts.get("weather", "clear"))
+    except (OSError, P3G.p3d.P3dError, P3G.ExportError) as e:
+        return f"No sea: {e}."
+    (folder / OCEAN_FILE).write_bytes(glb)
+    return ""
+
+
 def workers_wanted(use_cores: bool = True) -> int:
     """How many processes to export with: one per processor core but one (left for everything else), at
     most 8 (each holds the shared map files)."""
@@ -837,16 +863,18 @@ def city_worker(job_file: str) -> int:
 
 class CityJob:
     """Every city area of one version, one .glb each, into extracted/blender/<version>/, in a background
-    thread, and the sky round them (sky.glb, city_sky). Areas line up when imported together. With
-    use_cores, several worker processes share the areas (city_worker), one per processor core but one.
-    With an hour, the sky is posed and coloured for it and every file carries that hour's fog; the weather
-    picks the sky and the fog (clear when not given). Both are kept beside the files once the city is whole
-    (city_made), so the page can tell a city at another hour from the one it asks for."""
+    thread, and the sky round them (sky.glb, city_sky) and the sea (ocean.glb, city_ocean; ocean=False leaves
+    it out). Areas line up when imported together. With use_cores, several worker processes share the areas
+    (city_worker), one per processor core but one. With an hour, the sky is posed and coloured for it and
+    every file carries that hour's fog; the weather picks the sky and the fog (clear when not given). Both
+    are kept beside the files once the city is whole (city_made), so the page can tell a city at another hour
+    from the one it asks for."""
 
     def __init__(self, bin_dir: Path):
         self.bin_dir = bin_dir
         self.status: dict = {"running": False, "version": "", "done": 0, "total": 0, "area": "", "error": "",
-                             "written": 0, "bytes": 0, "folder": "", "hour": None, "weather": "clear", "notes": []}
+                             "written": 0, "bytes": 0, "folder": "", "hour": None, "weather": "clear", "notes": [],
+                             "ocean": True}
         self._thread: Optional[threading.Thread] = None
         self._stop = threading.Event()
         self._lock = threading.Lock()
@@ -862,8 +890,8 @@ class CityJob:
         return base / GA.LABELS[version] if version in GA.LABELS else base
 
     def start(self, version: str, index: Optional[dict], hour: Optional[float] = None,
-              weather: str = "clear") -> Optional[str]:
-        """None when started, or why not. hour: 0 to 24, or None; weather: clear or rain."""
+              weather: str = "clear", ocean: bool = True) -> Optional[str]:
+        """None when started, or why not. hour: 0 to 24, or None; weather: clear or rain; ocean: the sea too."""
         with self._lock:
             if self.running:
                 return "Already exporting the city. Wait for it to finish or press Stop."
@@ -883,7 +911,7 @@ class CityJob:
             self._stop.clear()
             self.status.update(running=True, version=version, done=0, total=len(todo), area="", error="", written=0,
                                bytes=0, folder=GA._show_path(self.folder(version)), hour=hour, weather=weather,
-                               notes=[], workers=min(len(todo), workers_wanted(self.use_cores())))
+                               notes=[], workers=min(len(todo), workers_wanted(self.use_cores())), ocean=bool(ocean))
             self._thread = threading.Thread(target=self._run, args=(version, index, todo), daemon=True)
             self._thread.start()
             return None
@@ -907,6 +935,7 @@ class CityJob:
                 self._run_parallel(out, index, version, todo, dest, opts)
                 if not self._stop.is_set():
                     self._sky(out, index, version, dest, opts)
+                    self._ocean(out, index, version, dest, opts)
                     self._made(dest)
                 return
             library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
@@ -918,7 +947,7 @@ class CityJob:
                 self.status["area"] = area["name"]
                 try:
                     glb, _report = area_glb(out, index, version, area["key"], parsed, library, insides=False,
-                                            opts=opts)
+                                            opts=opts, ocean=False)
                 except P3G.ExportError:
                     glb = b""
                 if glb:
@@ -929,6 +958,7 @@ class CityJob:
                 time.sleep(0)
             if not self._stop.is_set():
                 self._sky(out, index, version, dest, opts)
+                self._ocean(out, index, version, dest, opts)
                 self._made(dest)
         except (OSError, P3G.p3d.P3dError) as e:
             self.status["error"] = f"{type(e).__name__}: {e}"
@@ -944,6 +974,19 @@ class CityJob:
         except OSError:
             pass
         why = city_sky(out, index, version, dest, opts)
+        if why:
+            self.status["notes"].append(why)
+
+    def _ocean(self, out: Path, index: Optional[dict], version: str, dest: Path, opts: dict) -> None:
+        """The sea round the city (city_ocean), unless it is left out; an earlier export's sea goes first."""
+        try:
+            (dest / OCEAN_FILE).unlink()
+        except OSError:
+            pass
+        if not self.status.get("ocean", True):
+            return
+        self.status["area"] = "the sea"
+        why = city_ocean(out, index, version, dest, opts)
         if why:
             self.status["notes"].append(why)
 
@@ -1202,6 +1245,170 @@ def show_fog(scene, fog):
     return True
 
 
+def own(thing, key):
+    # A setting the export left in a glTF "extras": Blender's glTF importer keeps them as custom properties
+    # (of the object for a node's, of the material for a material's). None when it isn't there.
+    try:
+        return thing.get(key)
+    except Exception:
+        return None
+
+
+def output_of(tree):
+    return next((n for n in tree.nodes if n.type == "OUTPUT_MATERIAL"), None)
+
+
+def picture_of(tree):
+    return next((n for n in tree.nodes if n.type == "TEX_IMAGE"), None)
+
+
+def add_light(mat):
+    # The game adds these surfaces' light to what is behind them (BLMD 2). The export made the picture ready for
+    # ordinary blending (its brightness as alpha, its colour divided by that), so colour x alpha is the light:
+    # here that light as an Emission shader, added to a Transparent BSDF that lets everything behind through.
+    tree = mat.node_tree
+    out = output_of(tree)
+    if out is None:
+        return False
+    nodes, links = tree.nodes, tree.links
+    pic = picture_of(tree)
+    light = nodes.new("ShaderNodeEmission")
+    if pic is not None:
+        times = nodes.new("ShaderNodeVectorMath")
+        times.operation = "MULTIPLY"
+        links.new(pic.outputs["Color"], times.inputs[0])
+        links.new(pic.outputs["Alpha"], times.inputs[1])
+        links.new(times.outputs[0], light.inputs["Color"])
+    else:                                        # no picture: nothing to add
+        light.inputs["Color"].default_value = (0.0, 0.0, 0.0, 1.0)
+    through = nodes.new("ShaderNodeBsdfTransparent")
+    both = nodes.new("ShaderNodeAddShader")
+    links.new(through.outputs[0], both.inputs[0])
+    links.new(light.outputs[0], both.inputs[1])
+    links.new(both.outputs[0], out.inputs["Surface"])
+    return True
+
+
+def darken(mat):
+    # The game darkens what is behind these surfaces by their picture (BLMD 3). The export made the picture black
+    # with an alpha of 1 minus its brightness: here a Transparent BSDF in the colour of that brightness, which
+    # multiplies what is behind by it.
+    tree = mat.node_tree
+    out = output_of(tree)
+    if out is None:
+        return False
+    nodes, links = tree.nodes, tree.links
+    pic = picture_of(tree)
+    through = nodes.new("ShaderNodeBsdfTransparent")
+    if pic is not None:
+        left = nodes.new("ShaderNodeMath")
+        left.operation = "SUBTRACT"
+        left.inputs[0].default_value = 1.0
+        links.new(pic.outputs["Alpha"], left.inputs[1])
+        links.new(left.outputs[0], through.inputs["Color"])
+    links.new(through.outputs[0], out.inputs["Surface"])
+    return True
+
+
+def see_through(mat, depth):
+    # Eevee: blended, drawn after the solid surfaces (Blender 4.2 and later call it the render method, older
+    # ones the blend mode); blended surfaces don't write depth. For the ones the game draws without writing
+    # depth (decals, glows, lit windows, shadow decals, the sky): every layer shown, and no shadow cast.
+    for name, value in (("surface_render_method", "BLENDED"), ("blend_method", "BLEND")):
+        try:
+            setattr(mat, name, value)
+        except Exception:
+            pass
+    if depth:
+        return
+    for name in ("use_transparency_overlap", "show_transparent_back"):
+        try:
+            setattr(mat, name, True)
+        except Exception:
+            pass
+    try:
+        mat.shadow_method = "NONE"
+    except Exception:
+        pass
+    out = output_of(mat.node_tree) if getattr(mat, "node_tree", None) else None
+    if out is None or not out.inputs["Surface"].links:
+        return
+    nodes, links = mat.node_tree.nodes, mat.node_tree.links
+    surface = out.inputs["Surface"].links[0].from_socket
+    path = nodes.new("ShaderNodeLightPath")      # what the light finds on its way: nothing (Cycles' shadows)
+    clear = nodes.new("ShaderNodeBsdfTransparent")
+    pick = nodes.new("ShaderNodeMixShader")
+    links.new(path.outputs["Is Shadow Ray"], pick.inputs[0])
+    links.new(surface, pick.inputs[1])
+    links.new(clear.outputs[0], pick.inputs[2])
+    links.new(pick.outputs[0], out.inputs["Surface"])
+
+
+def below(o):
+    try:
+        return list(o.children_recursive)
+    except Exception:
+        out = []
+        for c in getattr(o, "children", ()):
+            out += [c] + below(c)
+        return out
+
+
+def gather(scene, name, objects, shown=True):
+    # The objects in a collection of their own, which the Outliner's tick box shows or hides.
+    if not objects:
+        return None
+    coll = bpy.data.collections.new(name)
+    scene.collection.children.link(coll)
+    for o in objects:
+        for c in list(o.users_collection):
+            c.objects.unlink(o)
+        coll.objects.link(o)
+    if not shown:
+        try:
+            layer = next(lc for lc in bpy.context.view_layer.layer_collection.children if lc.collection == coll)
+            layer.exclude = True
+        except Exception:
+            coll.hide_viewport = coll.hide_render = True
+    return coll
+
+
+def game_looks(scene):
+    # What the exports leave in extras (docs/FORMATS.md, "Exporting to Blender"): how the game puts each
+    # see-through surface over what is behind it ("blend"), and which it draws without writing depth
+    # ("depthWrite"); then the shadow decals, the low-detail hull (switched off when the export says it is
+    # "hidden": it would cover the detailed areas) and the sea, each in a collection of its own.
+    for mat in list(bpy.data.materials):
+        blend, depth = own(mat, "blend"), own(mat, "depthWrite")
+        depth = True if depth is None else bool(depth)
+        if blend is None or not getattr(mat, "node_tree", None):
+            continue                             # solid: as the importer made it
+        try:
+            if blend == "add":
+                add_light(mat)
+            elif blend == "darken":
+                darken(mat)
+            if blend in ("add", "darken") or not depth:
+                see_through(mat, depth)
+        except Exception:
+            traceback.print_exc()
+    groups = {"Shadow decals": [], "Low-detail hull": [], "Sea": []}
+    hidden = False
+    for o in list(scene.objects):
+        if own(o, "shadowDecal"):
+            groups["Shadow decals"].append(o)
+        elif own(o, "lowDetailHull"):
+            groups["Low-detail hull"] += [o] + below(o)
+            hidden = hidden or bool(own(o, "hidden"))
+        elif own(o, "ocean"):
+            groups["Sea"].append(o)
+    for name, objects in groups.items():
+        try:
+            gather(scene, name, objects, shown=not (hidden and name == "Low-detail hull"))
+        except Exception:
+            traceback.print_exc()
+
+
 def finish(problems):
     try:
         if STATE.get("undo") is not None:
@@ -1210,6 +1417,10 @@ def finish(problems):
         pass
     scene = bpy.context.scene
     tidy(scene)
+    try:                                         # see-through surfaces as the game blends them; the groups
+        game_looks(scene)
+    except Exception:
+        traceback.print_exc()
     try:                                         # the first file that has fog (each export with an hour has)
         show_fog(scene, next((f for f in (fog_of(p) for p in FILES) if f), None))
     except Exception:

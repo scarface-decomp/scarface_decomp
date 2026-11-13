@@ -407,7 +407,7 @@ def test_command_line_splits_a_map_by_area(tmp_path):
         (tmp_path / f"{name}.p3d").write_bytes(area("w_" + name))
     out = tmp_path / "out"
     assert G.main([str(out), str(tmp_path), "--map", "--split"]) == 0
-    assert sorted(p.name for p in out.iterdir()) == ["a_01.glb", "b_02.glb"]
+    assert sorted(p.name for p in out.iterdir()) == ["a_01.glb", "b_02.glb", "ocean.glb"]      # one sea for both
     doc, _ = read_glb((out / "a_01.glb").read_bytes())
     assert [doc["nodes"][i]["name"] for i in doc["scenes"][0]["nodes"]] == ["a_01_detail", "a_01_shell"]
 
@@ -528,7 +528,8 @@ def test_the_whole_city_one_file_per_area(tmp_path):
     finally:
         GA.out_dir = real_out
     assert sorted(p.name for p in (tmp_path / "blender" / "PC").iterdir()) == ["a_01.glb", "b_02.glb", "made_by.txt",
-                                                                                  "made_with.json", "shop_01 (inside).glb"]
+                                                                                  "made_with.json", "ocean.glb",
+                                                                                  "shop_01 (inside).glb"]
     assert BX.city_current(tmp_path / "blender" / "PC")                       # made by this exporter
     assert BX.city_made(tmp_path / "blender" / "PC") == {"hour": None, "weather": "clear"}     # the sky as stored
     (tmp_path / "blender" / "PC" / "made_by.txt").unlink()
@@ -901,7 +902,7 @@ def test_the_city_on_several_cores_is_the_same(tmp_path, monkeypatch):
         assert job.status["workers"] == n and job.status["written"] == 3 and job.status["done"] == 3
         made[n] = {p.name: p.read_bytes() for p in (tmp_path / "blender" / "PC").glob("*.glb")}
         assert BX.city_current(tmp_path / "blender" / "PC")
-    assert made[1] == made[2] and sorted(made[2]) == ["a_01.glb", "b_02.glb", "shop_01 (inside).glb"]
+    assert made[1] == made[2] and sorted(made[2]) == ["a_01.glb", "b_02.glb", "ocean.glb", "shop_01 (inside).glb"]
     assert not list((tmp_path / "blender" / "_scripts").glob("city_job_*.json"))       # tidied up
 
 
@@ -1613,8 +1614,9 @@ def test_the_city_with_its_sky_and_fog(tmp_path, monkeypatch):
         assert job.start("pc", index, **kw) is None
         job._thread.join(60)
         return job
-    job = run()                                                        # as before, and the sky round the city
-    assert sorted(p.name for p in folder.glob("*.glb")) == ["a_01.glb", "b_02.glb", "shop_01 (inside).glb", "sky.glb"]
+    job = run()                                                        # as before, and the sky and the sea round the city
+    assert sorted(p.name for p in folder.glob("*.glb")) == ["a_01.glb", "b_02.glb", "ocean.glb", "shop_01 (inside).glb",
+                                                            "sky.glb"]
     assert job.status["notes"] == [] and job.status["written"] == 3
     doc = read_glb((folder / "sky.glb").read_bytes())[0]
     top = doc["nodes"][doc["scenes"][0]["nodes"][0]]
@@ -1677,7 +1679,7 @@ def test_the_page_hears_which_hour_and_weather_the_exported_city_is_at(monkeypat
     server.BLENDER._thread.join(60)
     server.Handler.do_GET(Fake())
     reply = sent[-1][1]
-    assert reply["city_made"] == {"hour": 18.0, "weather": "rain"} and reply["city_files"] == 3 and reply["city_current"]
+    assert reply["city_made"] == {"hour": 18.0, "weather": "rain"} and reply["city_files"] == 4 and reply["city_current"]
     assert (reply["city"]["hour"], reply["city"]["weather"]) == (18.0, "rain")
     assert reply["city"]["notes"][0].startswith("No fog: ")
 
@@ -1697,3 +1699,459 @@ def test_the_portal_asks_for_the_city_at_an_hour_in_a_weather(monkeypatch, tmp_p
     assert asked == [("pc", None, "clear"), ("pc", 18.5, "rain"), ("pc", None, "clear")]
     server.Handler.post_game_files_blender(Fake(), {"version": "pc", "hour": "dusk"})
     assert sent[-1] == (400, {"ok": False, "error": "The hour is from 0 to 24."}) and len(asked) == 3
+
+
+# --------------------------------------------------------------------------- see-through surfaces, the low-detail hull,
+# the sea and shadow decals (the clean-room spec docs/cleanroom/SPEC-002-materials-ocean-shadows.md)
+
+def shader_chunk(name, kind="simple", ints=(), floats=(), tex=None):
+    """A Shader (0x11000) of a kind with integer settings (0x11003), float settings (0x11004) and a texture."""
+    kids = chunk(0x11002, b"TEX\0" + text(tex)) if tex else b""
+    kids += b"".join(chunk(0x11003, k.encode().ljust(4, b"\0") + struct.pack("<I", v)) for k, v in ints)
+    kids += b"".join(chunk(0x11004, k.encode().ljust(4, b"\0") + struct.pack("<f", v)) for k, v in floats)
+    return chunk(0x11000, text(name) + struct.pack("<I", 0) + text(kind)
+                 + struct.pack("<4I", 0, 0, 0, len(ints) + len(floats) + bool(tex)), kids)
+
+
+def picture(name, w, h, rgba):
+    """A Texture (0x19000) holding a PC picture (a PNG)."""
+    png = media.png(w, h, rgba)
+    return chunk(0x19000, text(name) + struct.pack("<4I", 14000, w, h, 32),
+                 chunk(0x19001, text(name) + struct.pack("<7I", 14000, w, h, 32, 0, 1, 1),
+                       chunk(0x19002, struct.pack("<I", len(png)) + png)))
+
+
+def image_pixels(doc, binc, mat):
+    img = doc["images"][doc["textures"][mat["pbrMetallicRoughness"]["baseColorTexture"]["index"]]["source"]]
+    view = doc["bufferViews"][img["bufferView"]]
+    return media.decode_png(binc[view["byteOffset"]:view["byteOffset"] + view["byteLength"]])[2]
+
+
+def by_name(doc):
+    return {m["name"]: m for m in doc["materials"]}
+
+
+GLOW = bytes([0, 0, 0, 255, 200, 100, 50, 255, 255, 255, 255, 255, 0, 0, 0, 255])     # black, orange, white, black
+
+
+def test_light_adding_and_darkening_surfaces():
+    skid = bytes([20, 20, 20, 255, 125, 125, 125, 175, 255, 255, 255, 255, 0, 0, 0, 0])
+    shaders = [shader_chunk("flare", ints=[("BLMD", 2)], tex="flare.bmp"), shader_chunk("skid", ints=[("BLMD", 3)], tex="skid.bmp"),
+               shader_chunk("glass", ints=[("BLMD", 1)], tex="flare.bmp"), shader_chunk("wall", tex="flare.bmp"),
+               shader_chunk("lost", ints=[("BLMD", 2)], tex="gone.bmp")]
+    data = p3d(picture("flare.bmp", 2, 2, GLOW), picture("skid.bmp", 2, 2, skid), *shaders,
+               *(mesh("m_" + s, shader=s) for s in ("flare", "skid", "glass", "wall", "lost")))
+    doc, binc = read_glb(export(data)[0])
+    check_references(doc, binc)
+    mats = by_name(doc)
+    add = mats["flare"]
+    assert add["alphaMode"] == "BLEND" and add["extras"] == {"blend": "add", "depthWrite": False}
+    px = image_pixels(doc, binc, add)
+    assert px[0:4] == bytes(4)                                         # black adds nothing: it lets what is behind through
+    assert px[4:8] == bytes([255, 128, 64, 200])                       # its brightness as alpha, its colour divided by it
+    assert px[8:12] == bytes([255, 255, 255, 255])
+    dark = mats["skid"]
+    assert dark["alphaMode"] == "BLEND" and dark["extras"] == {"blend": "darken"}
+    px = image_pixels(doc, binc, dark)                                  # black, alpha 1 - brightness: what is behind x brightness
+    assert [px[i:i + 4] for i in range(0, 16, 4)] == [bytes([0, 0, 0, 235]), bytes([0, 0, 0, 130]), bytes(4), bytes([0, 0, 0, 255])]
+    assert mats["glass"]["alphaMode"] == "BLEND" and mats["glass"]["extras"] == {"blend": "alpha"}
+    assert "extras" not in mats["wall"] and "alphaMode" not in mats["wall"]
+    assert mats["lost"]["pbrMetallicRoughness"]["baseColorFactor"] == [0.0, 0.0, 0.0, 0.0]   # no picture: nothing, no dark square
+    assert len(doc["images"]) == 3                                     # flare.bmp as it is (glass, wall) and made ready twice
+    assert G.blend_of({"ints": {"BLMD": 7}}) == 7 and G.blend_of({"ints": {"BLMD": 0}}) is None
+
+
+def test_cut_outs_use_the_shaders_own_alpha():
+    edge = bytes([255, 255, 255, 153, 255, 255, 255, 154, 255, 255, 255, 255, 255, 255, 255, 0])
+    shaders = [shader_chunk("hedge", ints=[("BLMD", 1), ("ATST", 1), ("ACMP", 4)], floats=[("ACTH", 0.2)], tex="flare.bmp"),
+               shader_chunk("fence", ints=[("ATST", 1), ("ACMP", 4)], tex="flare.bmp"),
+               shader_chunk("sparks", ints=[("BLMD", 2), ("ATST", 1), ("ACMP", 4)], floats=[("ACTH", 0.6)], tex="edge.bmp"),
+               shader_chunk("sparks_or_equal", ints=[("BLMD", 2), ("ATST", 1)], floats=[("ACTH", 0.6)], tex="edge.bmp")]
+    data = p3d(picture("flare.bmp", 2, 2, GLOW), picture("edge.bmp", 2, 2, edge), *shaders,
+               *(mesh("m_" + s, shader=s) for s in ("hedge", "fence", "sparks", "sparks_or_equal")))
+    doc, binc = read_glb(export(data)[0])
+    mats = by_name(doc)
+    assert mats["hedge"]["alphaMode"] == "MASK" and mats["hedge"]["alphaCutoff"] == pytest.approx(0.2)   # its ACTH
+    assert mats["fence"]["alphaMode"] == "MASK" and mats["fence"]["alphaCutoff"] == 0.5                  # none: 0.5
+    # a light-adding cut-out: blended, with the cut-out in its picture, greater than ACTH (ACMP 4), or equal too without ACMP
+    assert mats["sparks"]["alphaMode"] == "BLEND" and "alphaCutoff" not in mats["sparks"]
+    assert image_pixels(doc, binc, mats["sparks"])[3::4] == bytes([0, 255, 255, 0])
+    assert image_pixels(doc, binc, mats["sparks_or_equal"])[3::4] == bytes([255, 255, 255, 0])
+    named = G.shader_from_name("GlobalShader_g_hedge.tga_simple_blmd1_mcbv0_lit1_alpha1_atst1_alum1_2sid0")
+    assert G.alpha_test(named) == (0.5, False) and named["pddi"] == "simple"
+
+
+def test_what_the_game_draws_without_writing_depth():
+    kinds = [("grime", "decal", 1), ("window", "nightlight", 2), ("blob", "shadowdecal", 1), ("glow", "simple", 2),
+             ("pane", "simple", 1), ("road", "cbvlit", 0)]
+    shaders = [shader_chunk(n, k, ints=[("BLMD", b)] if b else []) for n, k, b in kinds]
+    doc, _ = read_glb(export(p3d(*shaders, *(mesh("m_" + n, shader=n) for n, _k, _b in kinds)))[0])
+    depth = {m["name"]: m.get("extras", {}).get("depthWrite", True) for m in doc["materials"]}
+    assert depth == {"grime": False, "window": False, "blob": False, "glow": False, "pane": True, "road": True}
+    # a shader known only by its name: the kind is in the name
+    decal = G.shader_from_name("LocalShader_shadowdecal.TGA_shadowdecal_blmd1_mcbv0_lit0_alpha1_atst0_alum0_2sid0")
+    assert decal["pddi"] == "shadowdecal" and not G.draws_depth(decal) and G.draws_depth(None)
+    # the sky: drawn without writing depth too
+    doc, _binc, _report = sky_at()
+    assert doc["materials"] and all(m["extras"]["depthWrite"] is False for m in doc["materials"])
+
+
+def leafy_region():
+    """A region's _D file: a tree whose leaves are unlit and see-through, and a bush whose leaves are lit."""
+    return p3d(shader_chunk("leaves", ints=[("BLMD", 1)]), shader_chunk("lit_leaves", ints=[("BLMD", 1), ("LIT", 1)]),
+               skeleton("palm", [("palm", 0, (0, 0, 0))]), mesh("palmShape", shader="leaves"),
+               composite("palm", "palm", [("palmShape", 1, 0)]),
+               skeleton("bush", [("bush", 0, (0, 0, 0))]), mesh("bushShape", shader="lit_leaves"),
+               composite("bush", "bush", [("bushShape", 1, 0)]))
+
+
+def test_the_leaves_of_placed_props_come_twice():
+    shell = area("w_a_shell", objects=[("palm", [record(1.0, 0.0, 1.0)]), ("bush", [record(2.0, 0.0, 2.0)])], shader="leaves")
+    doc, binc = read_glb(export(shell, lib=[("x_region_D.p3d", leafy_region())], map_mode=True)[0])
+    check_references(doc, binc)
+    mats = doc["materials"]
+
+    def prims(name):
+        node = next(n for n in doc["nodes"] if n["name"] == name and "mesh" in n)
+        return doc["meshes"][node["mesh"]]["primitives"]
+    core, colour = prims("palmShape")
+    assert core["attributes"] == colour["attributes"] and core["indices"] == colour["indices"]       # the same vertices
+    assert mats[core["material"]]["alphaMode"] == "MASK" and mats[core["material"]]["alphaCutoff"] == pytest.approx(228 / 255, abs=1e-4)
+    assert mats[core["material"]]["extras"] == {"blend": "alpha", "leaves": "depth"}                 # the solid core hides
+    assert mats[colour["material"]]["alphaMode"] == "BLEND"
+    assert mats[colour["material"]]["extras"] == {"blend": "alpha", "depthWrite": False, "leaves": "colour"}
+    assert len(prims("bushShape")) == 1                                # lit leaves: drawn once
+    ground = prims("collapsedMesh_0")                                  # the same shader on the area's own ground: once
+    assert len(ground) == 1 and mats[ground[0]["material"]]["name"] == "leaves"
+
+
+def hull_file():
+    """A made-up miami_lod.p3d: the low-detail hull (a vertexfade shader) and the daylight."""
+    rig = skeleton("low_LOD", [("low_LOD", 0, (0, 0, 0)), ("collapsedMesh_0", 0, (0, 0, 0))])
+    return p3d(shader_chunk("pure3dVertexFadeShader1", "vertexfade", ints=[("BLMD", 1), ("LIT", 1)]), rig,
+               mesh("collapsedMesh_0", "pure3dVertexFadeShader1"), composite("low_LOD", "low_LOD", [("collapsedMesh_0", 1, 1)]),
+               world_geo("low_LOD"), light("MiamiSunShape", 2, 0xFF1F2D30, kids=sub((0, 0, 0), direction=(0, -1, 0))),
+               light_group("zone_lights", ["MiamiSunShape"], kind=0))
+
+
+def test_the_low_detail_hull_doesnt_cover_the_detailed_areas(tmp_path):
+    lib = G.Library()
+    lib.add("miami_lod.p3d", hull_file(), main=True)
+    lib.add("a_shell.p3d", area("shells_a"), main=True)
+    glb, report = G.export(lib, map_mode=True, lod=True)
+    doc, _ = read_glb(glb)
+    assert node_named(doc, "low_LOD")["extras"] == {"lowDetailHull": True, "hidden": True}
+    assert "extras" not in node_named(doc, "shells_a")
+    assert "hidden" not in json.dumps([node_named(doc, n) for n in ("miami_lod", "miami_lod lights", "zone_lights")])
+    assert "extensions" in node_named(doc, "MiamiSunShape")            # the daylight still lights the scene
+    hull = by_name(doc)["pure3dVertexFadeShader1"]
+    assert hull["extras"] == {"blend": "alpha", "lowDetailHull": True, "fade": [200.0, 250.0], "fadeCutoff": 0.0784}
+    assert any("low-detail hull, marked hidden" in line for line in report.lines())
+    alone = G.Library()
+    alone.add("miami_lod.p3d", hull_file(), main=True)
+    assert node_named(read_glb(G.export(alone, map_mode=True)[0])[0], "low_LOD")["extras"] == {"lowDetailHull": True}
+    assert node_named(read_glb(G.export(alone, map_mode=True, beside_detail=True)[0])[0], "low_LOD")["extras"]["hidden"]
+    # split: the hull's own file is hidden too, since the areas it would cover come in beside it
+    (tmp_path / "miami_lod.p3d").write_bytes(hull_file())
+    (tmp_path / "a_01_shell.p3d").write_bytes(area("shells_a"))
+    out = tmp_path / "out"
+    assert G.main([str(out), str(tmp_path / "*.p3d"), "--map", "--split", "--lod"]) == 0
+    assert sorted(p.name for p in out.iterdir()) == ["a_01.glb", "miami_lod.glb", "ocean.glb"]
+    assert node_named(read_glb((out / "miami_lod.glb").read_bytes())[0], "low_LOD")["extras"]["hidden"] is True
+
+
+def common_file():
+    """A made-up Common.p3d: the sky, and the sea's shader (ocean_text) with its picture."""
+    water = bytes([0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255])
+    return with_chunks(sky_file(), shader_chunk("ocean_text", tex="water_01.bmp"), picture("water_01.bmp", 2, 2, water))
+
+
+def sea_of(doc):
+    node = node_named(doc, "Ocean")
+    return node, doc["meshes"][node["mesh"]]["primitives"][0]
+
+
+def test_the_sea_round_a_map():
+    shell = area("shells_a", at=(100.0, 5.0, -200.0))                 # in glTF's space: x 100 to 101, z 200
+    glb, report = export(shell, lib=[("Common.p3d", common_file())], map_mode=True, ocean=True, hour=12)
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    node, prim = sea_of(doc)
+    assert doc["scenes"][0]["nodes"][-1] == doc["nodes"].index(node)  # a node of its own, after the map
+    pts = values(doc, binc, prim["attributes"]["POSITION"])
+    assert {p[1] for p in pts} == {0.0}                                # flat, at height 0
+    xs, zs = [p[0] for p in pts], [p[2] for p in pts]
+    assert min(xs) <= 100 - G.OCEAN_MARGIN and max(xs) >= 101 + G.OCEAN_MARGIN       # past the map on every side
+    assert min(zs) <= 200 - G.OCEAN_MARGIN and max(zs) >= 200 + G.OCEAN_MARGIN
+    assert all(v % G.OCEAN_TILE == 0 for v in xs + zs)                 # squares on a grid from 0, 0: seas line up
+    assert values(doc, binc, prim["attributes"]["NORMAL"])[0] == (0.0, 1.0, 0.0)
+    assert {u for u, _v in values(doc, binc, prim["attributes"]["TEXCOORD_0"])} == {0.0, 200.0}   # every 5 m, whole in a square
+    mat = doc["materials"][prim["material"]]
+    assert mat["name"] == "ocean_text" and mat["alphaMode"] == "BLEND" and "KHR_materials_unlit" in mat["extensions"]
+    assert mat["extras"] == {"ocean": True, "blend": "alpha"}
+    sky = [round(c / 255, 4) for c in (142, 162, 224)]                 # the made-up dome at noon (the sky's tests)
+    sea = [round(t * s, 4) for t, s in zip((0.25, 0.23, 0.25), sky)]   # the reflection's tint times the sky
+    extras = node["extras"]
+    assert extras["seaColour"] == sea and extras["skyColour"] == sky and (extras["hour"], extras["weather"]) == (12, "clear")
+    assert (extras["ocean"], extras["height"], extras["picture"]) == (True, 0.0, "water_01.bmp")
+    assert (extras["DetailOpacity"], extras["DetailTextureScale"], extras["ReflectionAlphaScale"]) == (0.225, 0.2, 0.98)
+    assert (extras["tuningTemplate"], extras["FoamMinHeight"], extras["AmplitudeRatio"]) == ("OceanTuningTemplateDefault", 0.15, 0.013)
+    px = image_pixels(doc, binc, mat)                                  # the picture at 0.225 over the sea's colour, alpha 0.98
+    assert px[0:4] == bytes([round(c * 255 * (1 - 0.225) + v * 0.225) for c, v in zip(sea, (0, 0, 255))] + [250])
+    assert any(line.startswith("the sea: 3,000 by 3,000 m at height 0") for line in report.lines())
+    # without an hour the sky is as stored (the night); in rain, the rain sky's
+    node, _prim = sea_of(read_glb(export(shell, lib=[("Common.p3d", common_file())], map_mode=True, ocean=True)[0])[0])
+    assert node["extras"]["skyColour"] == [round(c / 255, 4) for c in (10, 13, 20)] and "hour" not in node["extras"]
+    node, _prim = sea_of(read_glb(export(shell, lib=[("Common.p3d", common_file())], map_mode=True, ocean=True,
+                                         weather="rain")[0])[0])
+    assert node["extras"]["skyColour"] == [1.0, 1.0, 1.0]
+    # without Common.p3d: a plain sea in the tint; and left out unless asked for
+    doc, _ = read_glb(export(shell, map_mode=True, ocean=True)[0])
+    node, prim = sea_of(doc)
+    assert node["extras"]["skyColour"] is None and node["extras"]["picture"] is None
+    assert doc["materials"][prim["material"]]["pbrMetallicRoughness"]["baseColorFactor"] == [0.25, 0.23, 0.25, 0.98]
+    assert not any(n["name"] == "Ocean" for n in read_glb(export(shell, map_mode=True)[0])[0]["nodes"])
+    assert not any(n["name"] == "Ocean" for n in read_glb(export(p3d(mesh("box")), ocean=True)[0])[0]["nodes"])   # not a map
+
+
+def test_the_sea_on_the_command_line_and_in_the_portal(tmp_path):
+    import blender_export as BX
+    (tmp_path / "a_01_shell.p3d").write_bytes(area("shells_a"))
+    (tmp_path / "Common.p3d").write_bytes(common_file())
+    out = tmp_path / "a.glb"
+    assert G.main([str(out), str(tmp_path / "a_01_shell.p3d"), "--map"]) == 0
+    node, _prim = sea_of(read_glb(out.read_bytes())[0])
+    assert node["extras"]["picture"] == "water_01.bmp"                 # Common.p3d beside it, as for the regions
+    assert G.main([str(out), str(tmp_path / "a_01_shell.p3d"), "--map", "--no-ocean"]) == 0
+    assert not any(n["name"] == "Ocean" for n in read_glb(out.read_bytes())[0]["nodes"])
+    files = city_files()
+    files["cement.rcf/packages/z04/Common.p3d"] = common_file()
+    game, index = copied_game(tmp_path, files)
+    doc, _ = read_glb(BX.area_glb(game, index, "pc", "z04/a_01")[0])  # an area by itself comes with the sea
+    assert node_named(doc, "Ocean")["extras"]["ocean"] is True
+    doc, _ = read_glb(BX.area_glb(game, index, "pc", "z04/a_01", ocean=False)[0])
+    assert not any(n["name"] == "Ocean" for n in doc["nodes"])
+    path = "cement.rcf/packages/z04/a_01_shell.p3d"                    # a map file opened by itself too
+    doc, _ = read_glb(BX.model_glb(game, index, "pc", path, files[path])[0])
+    assert node_named(doc, "Ocean")
+
+
+def test_the_city_has_one_sea_and_can_go_without(tmp_path, monkeypatch):
+    import blender_export as BX
+    import game_assets as GA
+    files = city_files()
+    files["cement.rcf/packages/z04/Common.p3d"] = common_file()
+    out, index = copied_game(tmp_path, files)
+    monkeypatch.setattr(GA, "out_dir", lambda bin_dir=None: out)
+    folder = tmp_path / "blender" / "PC"
+
+    def run(**kw):
+        job = BX.CityJob(tmp_path)
+        job.use_cores = lambda: False
+        assert job.start("pc", index, **kw) is None
+        job._thread.join(60)
+        return job
+    job = run(hour=12)
+    assert job.status["ocean"] is True and not any(n.startswith("No sea") for n in job.status["notes"])
+    doc, binc = read_glb((folder / "ocean.glb").read_bytes())
+    node, prim = sea_of(doc)
+    lo, hi = BX._city_box(folder)                                      # what the areas fill, the sea not counted
+    pts = values(doc, binc, prim["attributes"]["POSITION"])
+    assert min(p[0] for p in pts) <= lo[0] - G.OCEAN_MARGIN and max(p[0] for p in pts) >= hi[0] + G.OCEAN_MARGIN
+    assert min(p[2] for p in pts) <= lo[2] - G.OCEAN_MARGIN and max(p[2] for p in pts) >= hi[2] + G.OCEAN_MARGIN
+    assert node["extras"]["hour"] == 12 and node["extras"]["picture"] == "water_01.bmp"
+    assert not any(n["name"] == "Ocean" for n in read_glb((folder / "a_01.glb").read_bytes())[0]["nodes"])  # one sea, not one each
+    assert BX._glb_box((folder / "ocean.glb").read_bytes()) is None
+    job = run(ocean=False)                                             # left out: and the one from before goes
+    assert job.status["ocean"] is False and not (folder / "ocean.glb").exists() and (folder / "sky.glb").exists()
+
+
+def test_shadow_decals_go_in_a_node_of_their_own():
+    name = "LocalShader_shadowdecal.TGA_shadowdecal_blmd1_mcbv0_lit0_alpha1_atst0_alum0_2sid0"
+    decal = shader_chunk(name, "shadowdecal", ints=[("BLMD", 1)])
+    piece = chunk(0x10000, text("collapsedMesh_details_0") + struct.pack("<II", 0, 2),
+                  prim_group("paint", 1, 0x2001, QUAD, [0, 1, 2, 3]) + prim_group(name, 1, 0x2001, QUAD, [0, 1, 2, 3]))
+    rig = skeleton("w_d", [("w_d", 0, (0, 0, 0)), ("collapsedMesh_details_0", 0, (5.0, 0.0, 5.0))])
+    glb, report = export(p3d(decal, rig, piece, composite("w_d", "w_d", [("collapsedMesh_details_0", 1, 1)]), world_geo("w_d")),
+                         map_mode=True)
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    node = next(n for n in doc["nodes"] if n["name"] == "collapsedMesh_details_0" and "mesh" in n)
+    assert [doc["materials"][p["material"]]["name"] for p in doc["meshes"][node["mesh"]]["primitives"]] == ["paint"]
+    shadow = doc["nodes"][node["children"][0]]                         # under its mesh: it goes where the mesh goes
+    assert shadow["name"] == "collapsedMesh_details_0 shadow decal" and shadow["extras"] == {"shadowDecal": True}
+    m = doc["meshes"][shadow["mesh"]]
+    assert m["extras"] == {"shadowDecal": True} and len(m["primitives"]) == 1
+    assert doc["materials"][m["primitives"][0]["material"]]["extras"] == {"blend": "alpha", "depthWrite": False, "shadowDecal": True}
+    assert report.shadow_decals == 1 and any("the PC game never shows them" in line for line in report.lines())
+    # a mesh that is nothing but a shadow decal (the blobs under the cars and the people): the node itself
+    doc, _ = read_glb(export(p3d(decal, mesh("vehicleShadowDecalShape", shader=name)))[0])
+    assert node_named(doc, "vehicleShadowDecalShape")["extras"] == {"shadowDecal": True}
+
+
+# ---- the Blender scene: the game's blending, depth and groups, from the extras the importer keeps -----------------
+
+class FakeSocket:
+    def __init__(self, node, name):
+        self.node, self.name, self.links, self.default_value = node, name, [], None
+
+
+class FakeSockets(list):
+    def __getitem__(self, key):
+        return next(s for s in self if s.name == key) if isinstance(key, str) else list.__getitem__(self, key)
+
+
+NODE_SOCKETS = {                       # the sockets of the shader nodes the script meets or makes: inputs, outputs
+    "OUTPUT_MATERIAL": (["Surface", "Volume"], []), "TEX_IMAGE": (["Vector"], ["Color", "Alpha"]),
+    "BSDF_PRINCIPLED": (["Base Color", "Alpha"], ["BSDF"]), "ShaderNodeEmission": (["Color", "Strength"], ["Emission"]),
+    "ShaderNodeVectorMath": (["Vector", "Vector_001"], ["Vector"]), "ShaderNodeBsdfTransparent": (["Color"], ["BSDF"]),
+    "ShaderNodeAddShader": (["Shader", "Shader_001"], ["Shader"]), "ShaderNodeMath": (["Value", "Value_001"], ["Value"]),
+    "ShaderNodeLightPath": ([], ["Is Camera Ray", "Is Shadow Ray"]),
+    "ShaderNodeMixShader": (["Fac", "Shader", "Shader_001"], ["Shader"]),
+}
+
+
+class FakeNode:
+    def __init__(self, kind):
+        self.type = kind
+        ins, outs = NODE_SOCKETS[kind]
+        self.inputs = FakeSockets(FakeSocket(self, n) for n in ins)
+        self.outputs = FakeSockets(FakeSocket(self, n) for n in outs)
+
+
+class FakeNodes(list):
+    def new(self, kind):
+        self.append(FakeNode(kind))
+        return self[-1]
+
+
+class FakeLinks:
+    def new(self, a, b):                                               # an input takes one link
+        b.links[:] = [type("Link", (), {"from_socket": a, "to_socket": b})()]
+
+
+class FakeMaterial(dict):
+    """A material as Blender's glTF importer leaves it: its extras as custom properties, an image into a
+    Principled BSDF into the output."""
+    def __init__(self, name, **extras):
+        super().__init__(extras)
+        self.name = name
+        self.node_tree = type("Tree", (), {})()
+        self.node_tree.nodes = FakeNodes(FakeNode(k) for k in ("OUTPUT_MATERIAL", "TEX_IMAGE", "BSDF_PRINCIPLED"))
+        self.node_tree.links = FakeLinks()
+        out, pic, bsdf = self.node_tree.nodes
+        self.node_tree.links.new(pic.outputs["Color"], bsdf.inputs["Base Color"])
+        self.node_tree.links.new(bsdf.outputs["BSDF"], out.inputs["Surface"])
+
+    def surface(self):
+        return self.node_tree.nodes[0].inputs["Surface"].links[0].from_socket.node
+
+    def picture(self):
+        return self.node_tree.nodes[1]
+
+
+class FakeObject(dict):
+    def __init__(self, name, children=(), **props):
+        super().__init__(props)
+        self.name, self.children, self.users_collection = name, list(children), []
+
+
+class FakeLinked(list):
+    def __init__(self, owner):
+        super().__init__()
+        self.owner = owner
+
+    def link(self, o):
+        self.append(o)
+        o.users_collection.append(self.owner)
+
+    def unlink(self, o):
+        self.remove(o)
+        o.users_collection.remove(self.owner)
+
+
+class FakeCollection:
+    layers: list = []
+
+    def __init__(self, name):
+        self.name, self.objects = name, FakeLinked(self)
+        self.children = type("Children", (list,), {"link": lambda s, c: (s.append(c), FakeCollection.layers.append(
+            type("Layer", (), {"collection": c, "exclude": False})()))})()
+
+
+def test_the_blender_scene_draws_them_as_the_game_does(monkeypatch):
+    import sys
+    import types
+    import blender_export as BX
+    glow, skid, decal = FakeMaterial("flare", blend="add", depthWrite=0), FakeMaterial("skid", blend="darken"), \
+        FakeMaterial("blob", blend="alpha", depthWrite=False, shadowDecal=1)
+    pane, wall = FakeMaterial("pane", blend="alpha"), FakeMaterial("wall")
+    layers: list = []
+    monkeypatch.setattr(FakeCollection, "layers", layers)
+    bpy = types.SimpleNamespace(
+        app=types.SimpleNamespace(background=False, timers=types.SimpleNamespace(register=lambda *a, **k: None)),
+        data=types.SimpleNamespace(materials=[glow, skid, decal, pane, wall], collections=types.SimpleNamespace(new=FakeCollection)),
+        context=types.SimpleNamespace(view_layer=types.SimpleNamespace(layer_collection=types.SimpleNamespace(children=layers))))
+    monkeypatch.setitem(sys.modules, "bpy", bpy)
+    ns: dict = {}
+    exec(compile(BX.OPEN_SCRIPT % {"files": [], "save": None, "fps": 30}, "open_in_blender.py", "exec"), ns)
+    joint = FakeObject("collapsedMesh_0", [FakeObject("collapsedMesh_0.001")])
+    hull = FakeObject("low_LOD", [joint], lowDetailHull=1, hidden=1)
+    shadow, sea, street = FakeObject("x shadow decal", shadowDecal=1), FakeObject("Ocean", ocean=1), FakeObject("shells_a")
+    scene = types.SimpleNamespace(collection=FakeCollection("Scene Collection"))
+    everything = [hull, joint, joint.children[0], shadow, sea, street]
+    for o in everything:
+        scene.collection.objects.link(o)
+    scene.objects = list(everything)
+    layers.clear()
+    ns["game_looks"](scene)
+
+    def into(socket):                                                  # the node a socket's link comes from
+        return socket.links[0].from_socket.node
+    # adds light: Emission (the picture's colour x its alpha) added to a Transparent BSDF; casts no shadow
+    pick = glow.surface()
+    assert pick.type == "ShaderNodeMixShader" and into(pick.inputs[0]).type == "ShaderNodeLightPath"
+    assert pick.inputs[0].links[0].from_socket.name == "Is Shadow Ray" and into(pick.inputs[2]).type == "ShaderNodeBsdfTransparent"
+    both = into(pick.inputs[1])
+    assert both.type == "ShaderNodeAddShader" and into(both.inputs[0]).type == "ShaderNodeBsdfTransparent"
+    light = into(both.inputs[1])
+    times = into(light.inputs["Color"])
+    assert light.type == "ShaderNodeEmission" and times.type == "ShaderNodeVectorMath" and times.operation == "MULTIPLY"
+    assert [s.links[0].from_socket.name for s in times.inputs] == ["Color", "Alpha"] and into(times.inputs[0]) is glow.picture()
+    assert (glow.surface_render_method, glow.blend_method, glow.show_transparent_back, glow.use_transparency_overlap,
+            glow.shadow_method) == ("BLENDED", "BLEND", True, True, "NONE")
+    # darkens: a Transparent BSDF in the colour of 1 minus the made picture's alpha (its brightness): a multiply
+    through = skid.surface()
+    left = into(through.inputs["Color"])
+    assert through.type == "ShaderNodeBsdfTransparent" and left.type == "ShaderNodeMath" and left.operation == "SUBTRACT"
+    assert left.inputs[0].default_value == 1.0 and left.inputs[1].links[0].from_socket.name == "Alpha"
+    assert skid.blend_method == "BLEND" and not hasattr(skid, "shadow_method")    # it writes depth in the game: no more
+    # drawn without writing depth: blended, every layer, no shadow; what it was is kept inside
+    assert decal.surface().type == "ShaderNodeMixShader" and into(decal.surface().inputs[1]).type == "BSDF_PRINCIPLED"
+    assert decal.blend_method == "BLEND" and decal.shadow_method == "NONE"
+    # ordinary see-through and solid surfaces: as the importer made them
+    for mat in (pane, wall):
+        assert mat.surface().type == "BSDF_PRINCIPLED" and not hasattr(mat, "blend_method")
+    # the groups: shadow decals and the sea shown, the hull (with everything under it) switched off
+    made = {c.collection.name: c for c in layers}
+    assert sorted(made) == ["Low-detail hull", "Sea", "Shadow decals"]
+    assert list(made["Shadow decals"].collection.objects) == [shadow] and list(made["Sea"].collection.objects) == [sea]
+    assert list(made["Low-detail hull"].collection.objects) == [hull, joint, joint.children[0]]
+    assert made["Low-detail hull"].exclude is True and not made["Sea"].exclude and not made["Shadow decals"].exclude
+    assert street.users_collection == [scene.collection] and hull.users_collection == [made["Low-detail hull"].collection]
+    script = BX.OPEN_SCRIPT % {"files": ["a.glb"], "save": "a.blend", "fps": 30}
+    assert "game_looks(scene)" in script
+
+
+def test_the_portal_can_leave_the_sea_out_of_the_city(monkeypatch, tmp_path):
+    server, _out, _index = _server(monkeypatch, tmp_path, city_files())
+    asked, sent = [], []
+    monkeypatch.setattr(server.BLENDER, "start", lambda version, index, hour=None, weather="clear", ocean=True:
+                        asked.append(ocean) or None)
+
+    class Fake:
+        def _json(self, obj, code=200):
+            sent.append((code, obj))
+    for body in ({"version": "pc"}, {"version": "pc", "ocean": False}, {"version": "pc", "ocean": "no"}):
+        server.Handler.post_game_files_blender(Fake(), body)
+    assert asked == [True, False, True] and all(code == 200 for code, _obj in sent)     # only a real false leaves it out

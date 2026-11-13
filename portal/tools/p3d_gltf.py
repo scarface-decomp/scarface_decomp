@@ -11,7 +11,10 @@ moving parts, and map areas with everything the game places on them.
                                   instance objects place on them (trees, lamps, benches...); without
                                   --library the shared files next to them are used (regions, miami_lod...)
         --split                   with --map: one .glb per area in the folder OUT, lined up when imported
-        --lod                     with --map: keep the low-detail city (miami_lod) next to real areas
+                                  (and the sea in OUT/ocean.glb)
+        --lod                     with --map: keep the low-detail city (miami_lod) next to real areas, its
+                                  hull marked hidden so that it doesn't cover them
+        --no-ocean                with --map: no sea (else a flat sea at height 0 round the map)
         --hour H                  with --map: light the daylight for this hour (0 to 24) from its LITE
                                   animations; without it, the lights as stored (midnight). Without --map,
                                   for the sky (Common.p3d): the sun where the game puts it at that hour,
@@ -40,6 +43,13 @@ What goes where (see docs/FORMATS.md for the chunk layouts):
                                      rest (ambient, local directional) as empty nodes; the game's settings
                                      and the light group's kind in extras. Of the daylight (kinds 0 and
                                      1), only the weather's group are glTF lights
+    a Shader (0x11000)               a material; how the game blends it (BLMD) in its extras ("blend"):
+                                     light-adding (2) and darkening (3) ones with their picture made ready
+                                     for ordinary blending; a cut-out (ATST) at its ACTH; "depthWrite":
+                                     false for the ones the game draws without writing depth
+    a shadowdecal primitive group    a node of its own under its mesh's, extras {"shadowDecal": true}
+    the low-detail hull, with --lod  marked {"lowDetailHull": true}, and hidden next to detailed areas
+    the sea, with --map              a flat surface at height 0 round the map, its settings in extras
     a Draw Order (0x122000)          the mesh's extras: {"drawOrder": key}
     a Sky (0x8800002), with --hour   its composite drawable posed by PTRN_<name> for the hour, and its
                                      meshes' vertex colours (0x121305) for the hour, picked by VRTX_<mesh>
@@ -63,6 +73,7 @@ import os
 import re
 import struct
 import sys
+import zlib
 from array import array
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -81,8 +92,9 @@ STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY = 0x0802000D, 0x0802000E, 0x0802000
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 6                     # 3: props kept with another area. 4: one stage of each place; insides in the city.
-                                       # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight
+EXPORT_VERSION = 7                     # 3: props kept with another area. 4: one stage of each place; insides in the city.
+                                       # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight.
+                                       # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked
 LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER, SKY = 0x13000, 0x2380, 0x8800007, 0x122000, 0x8800002
 DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)
 WEATHER_KIND = {"clear": 0, "rain": 1}  # the daylight's kind for each weather; the game starts in clear weather
@@ -101,6 +113,32 @@ _LOD_PART = re.compile(r"lod\d*(shape\d*)?$", re.I)
 SCRIPT_OBJECT, OBJECT_PROPERTY, OBJECT_BINARY = 0x9900190, 0x9900192, 0x9900194
 VECTOR_CHANNELS = (0x121102, 0x121103, 0x121104)
 SHADOW_PARTS = 0x20 | 0x40           # a composite part's kind: 1 a model, 0x20 a shadow mesh, 0x40 a shadow skin
+# How see-through surfaces are drawn, the low-detail hull, shadow decals and the sea: docs/FORMATS.md, from the
+# clean-room spec docs/cleanroom/SPEC-002-materials-ocean-shadows.md.
+BLENDS = {1: "alpha", 2: "add", 3: "darken"}  # a shader's BLMD: 1 ordinary see-through, 2 adds light, 3 darkens
+ALPHA_TEST = 0.5                       # the cut-out's alpha when the shader has no ACTH
+ACMP_GREATER = 4                       # ACMP 4: a pixel stays only if its alpha is greater (without ACMP: or equal)
+NO_DEPTH_KINDS = ("decal", "nightlight", "shadowdecal")   # shader kinds the game draws without writing depth
+SHADOW_DECAL_KIND = "shadowdecal"
+HULL_KIND = "vertexfade"               # the low-detail hull of the city and the islands (miami_lod, islands_LOD)
+HULL_FADE = (200.0, 250.0)             # see-through nearer than this, whole beyond it (metres from the camera)
+HULL_CUT = round(20 / 255, 4)          # and pixels with less alpha than this are cut out
+LEAF_DEPTH = round(228 / 255, 4)       # a placed prop's unlit see-through leaves hide what is behind where alpha >= this
+# The sea (OceanObject "Ocean" in scriptc/missions/z04/objects_static.dso, with OceanTemplateDefault and
+# OceanTuningTemplateDefault from scriptc/templates/ocean.cso, as the PC files have them): a flat surface at
+# height 0. The tuning template's look replaces the object's; the foam is the object's. The names are the scripts'.
+OCEAN_SHADER, OCEAN_TEXTURE = "ocean_text", "water_01.bmp"
+OCEAN = {"object": "Ocean", "position": [0.0, 0.0, 0.0], "oceanTemplate": "OceanTemplateDefault",
+         "tuningTemplate": "OceanTuningTemplateDefault", "DetailTextureName": "water_01.BMP",
+         "FoamTextureName": "Water_Ocean_Foam.tga", "ReflectionTextureName": "skyTexture",
+         "DetailOpacity": 0.225, "DetailTextureScale": 0.2, "ReflectionRedScale": 0.25,
+         "ReflectionGreenScale": 0.23, "ReflectionBlueScale": 0.25, "ReflectionAlphaScale": 0.98,
+         "FoamMinHeight": 0.15, "FoamMaxHeight": 1.0, "FoamMaxOpacity": 1.0, "MinWaveLength": 0.1,
+         "MaxWaveLength": 12.0, "AmplitudeRatio": 0.013, "WindDirectionMean": 90.0, "WindDirectionVariance": 30.0,
+         "speedScaleFactor": 1.2}
+OCEAN_MARGIN = 1000.0                  # the sea reaches this far past the scene on every side: past the fog's end
+                                       # (900 m at most), so with the fog on its edge can't be seen
+OCEAN_TILE = 1000.0                    # the sea is made of squares this big, on a grid from the city's 0, 0
 
 Vec3 = Tuple[float, float, float]
 Quat = Tuple[float, float, float, float]          # x, y, z, w
@@ -694,18 +732,98 @@ def shader_info(data: bytes, c: p3d.Chunk) -> dict:
 
 _SHADER_NAME = re.compile(r"^(?:Global|Region|Local)Shader_(.+?\.(?:tga|bmp|png))", re.I)
 _SHADER_FLAG = re.compile(r"_(blmd|mcbv|lit|alpha|atst|alum|2sid)(\d+)", re.I)
+_SHADER_KIND = re.compile(r"^_([a-z]+)_blmd\d", re.I)
 
 
 def shader_from_name(name: str) -> Optional[dict]:
     """The map's shared shaders are named after what they do, for example
-    GlobalShader_g_hedge.tga_simple_blmd1_mcbv0_lit1_alpha1_atst1_alum1_2sid0; read that when the
-    shader itself is in a file not given."""
+    GlobalShader_g_hedge.tga_simple_blmd1_mcbv0_lit1_alpha1_atst1_alum1_2sid0 (the texture, the shader
+    kind, then the settings); read that when the shader itself is in a file not given."""
     m = _SHADER_NAME.match(name)
     if not m:
         return None
     ints = {k.upper(): int(v) for k, v in _SHADER_FLAG.findall(name)}
-    return {"name": name, "pddi": "", "translucent": bool(ints.get("ALPHA")), "textures": [("TEX", m.group(1))],
-            "ints": ints, "floats": {}, "colours": {}}
+    kind = _SHADER_KIND.match(name[m.end():])
+    return {"name": name, "pddi": kind.group(1).lower() if kind else "", "translucent": bool(ints.get("ALPHA")),
+            "textures": [("TEX", m.group(1))], "ints": ints, "floats": {}, "colours": {}}
+
+
+def blend_of(info: Optional[dict]) -> Optional[str]:
+    """How a shader puts its surface over what is behind it (its BLMD): "alpha" (1, ordinary see-through),
+    "add" (2, adds light), "darken" (3), the number for any other, None when it is solid (0 or none)."""
+    blmd = (info or {}).get("ints", {}).get("BLMD")
+    return BLENDS.get(blmd, blmd) if blmd else None
+
+
+def alpha_test(info: dict) -> Optional[Tuple[float, bool]]:
+    """A cut-out shader's test (ATST 1): (the alpha a pixel is compared with, ACTH or else 0.5; whether it must
+    be greater, ACMP 4, rather than greater or equal). None without the test."""
+    if not info["ints"].get("ATST"):
+        return None
+    cut = info["floats"].get("ACTH")
+    cut = cut if isinstance(cut, (int, float)) and math.isfinite(cut) else ALPHA_TEST
+    return float(cut), info["ints"].get("ACMP") == ACMP_GREATER
+
+
+def draws_depth(info: Optional[dict]) -> bool:
+    """Whether the game writes depth for a shader's surfaces: not for the decal, nightlight and shadowdecal
+    kinds, nor for surfaces that add light (BLMD 2)."""
+    if not info:
+        return True
+    return (info.get("pddi") or "").lower() not in NO_DEPTH_KINDS and info["ints"].get("BLMD") != 2
+
+
+def is_leaf(info: Optional[dict]) -> bool:
+    """An unlit see-through shader without a cut-out (BLMD 1, no LIT, no ATST): on a placed prop (the trees and
+    bushes) the game draws it twice, see Builder.mesh."""
+    if not info:
+        return False
+    ints = info["ints"]
+    return ints.get("BLMD") == 1 and not ints.get("LIT") and not ints.get("ATST")
+
+
+def _passes(alpha: int, cut: Optional[Tuple[float, bool]]) -> bool:
+    if cut is None:
+        return True
+    return alpha / 255 > cut[0] if cut[1] else alpha / 255 >= cut[0]
+
+
+def added_light(rgba: bytes, cut: Optional[Tuple[float, bool]] = None) -> bytes:
+    """A light-adding (BLMD 2) picture made ready for ordinary see-through blending: each pixel's alpha is its
+    brightness (the largest of its red, green and blue) and its colour is divided by that. Blended as usual
+    (colour x alpha + what is behind x (1 - alpha)) it puts its own colour on top, and black leaves what is
+    behind alone. The picture's own alpha is used only for the cut-out (cut, see alpha_test): pixels that fail
+    it are left out (alpha 0)."""
+    out = bytearray(len(rgba))
+    for i in range(0, len(rgba) - 3, 4):
+        r, g, b, a = rgba[i], rgba[i + 1], rgba[i + 2], rgba[i + 3]
+        m = max(r, g, b)
+        if m and _passes(a, cut):
+            out[i], out[i + 1], out[i + 2], out[i + 3] = round(r * 255 / m), round(g * 255 / m), round(b * 255 / m), m
+    return bytes(out)
+
+
+def darkening(rgba: bytes, cut: Optional[Tuple[float, bool]] = None) -> bytes:
+    """A darkening (BLMD 3) picture made ready for ordinary see-through blending: black, with an alpha of 1 minus
+    the picture's brightness (its luminance), so what is behind ends up multiplied by that brightness. The
+    picture's own alpha is used only for the cut-out (cut): pixels that fail it darken nothing."""
+    out = bytearray(len(rgba))
+    for i in range(0, len(rgba) - 3, 4):
+        if _passes(rgba[i + 3], cut):
+            out[i + 3] = 255 - round((299 * rgba[i] + 587 * rgba[i + 1] + 114 * rgba[i + 2]) / 1000)
+    return bytes(out)
+
+
+def sea_picture(rgba: bytes, colour: Sequence[float], opacity: float, alpha: float) -> bytes:
+    """The sea's picture: the detail texture laid over the sea's colour (0..1 each) at opacity, with one alpha."""
+    out = bytearray(len(rgba))
+    base = [c * 255 * (1 - opacity) for c in colour[:3]]
+    a = round(max(0.0, min(1.0, alpha)) * 255)
+    for i in range(0, len(rgba) - 3, 4):
+        for k in range(3):
+            out[i + k] = max(0, min(255, round(base[k] + rgba[i + k] * opacity)))
+        out[i + 3] = a
+    return bytes(out)
 
 
 # --------------------------------------------------------------------------- glTF
@@ -801,7 +919,9 @@ class Report:
     unmatched_animations: int = 0
     lights: int = 0                                               # light nodes, glTF lights or not
     gltf_lights: int = 0                                          # of them, the ones that are glTF lights
-    notes: List[str] = field(default_factory=list)                # the weather, the sky, the fog
+    shadow_decals: int = 0                                        # primitive groups with a shadowdecal shader
+    box: Optional[Tuple[List[float], List[float]]] = None         # a map export's geometry: lowest, highest corner
+    notes: List[str] = field(default_factory=list)                # the weather, the sky, the fog, the sea
 
     def lines(self) -> List[str]:
         out = [f"{len(self.models)} model(s)" + (": " + ", ".join(self.models[:12]) + (" ..." if len(self.models) > 12 else "")
@@ -831,6 +951,9 @@ class Report:
                        "these files, left out: " + ", ".join(sorted(self.missing_drawables)[:12]))
         if self.unread_groups:
             out.append(f"{self.unread_groups} primitive group(s) in a form not read, left out")
+        if self.shadow_decals:
+            out.append(f"{self.shadow_decals} shadow decal(s), each in a node of its own marked shadowDecal (the PC game "
+                       "never shows them)")
         return out + self.notes
 
 
@@ -856,6 +979,9 @@ class Builder:
         self.posed: set = set()                    # the animations a pose was taken from (id of the chunk)
         self._animations: Optional[Dict[str, List[Ref]]] = None
         self.shaped: Dict[int, list] = {}          # glTF mesh with shapes -> the sliders that work them
+        self.prop = False                          # set while a placed prop goes in (its leaves: see mesh)
+        self.decals: Dict[tuple, int] = {}         # a mesh's key -> the glTF mesh of its shadow decals
+        self._shaders: Dict[str, Optional[dict]] = {}
 
     # materials
 
@@ -882,50 +1008,145 @@ class Builder:
         self.textures[key] = index
         return index
 
-    def material(self, shader: str) -> int:
+    def made_texture(self, name: str, look: str, make, variant: str = "") -> Optional[int]:
+        """A texture made from one of the game's pictures by make(rgba) -> rgba (added_light, darkening, the
+        sea's), once for each look (and variant: a cut-out's test). None when the picture isn't in the files or
+        can't be read. The picture is read as texture() reads it (with the Xbox's tones if asked)."""
+        key = f"{name.lower()}|{look}|{variant}"
+        if key in self.textures:
+            return self.textures[key]
+        found, made = self.lib.pictures.get(name.lower()), None
+        if found is None:
+            self.report.missing_textures.add(name)
+        else:
+            try:
+                picture = media.picture_png(found[0].data, found[1])
+                if found[1].kind == "png" and os.environ.get(LOOK_ENV) == "xbox":
+                    picture = media.xbox_look(picture)
+                w, h, rgba = media.decode_png(picture)
+                made = media.png(w, h, make(rgba)) if w and h else None
+            except (media.MediaError, struct.error, ValueError, IndexError, zlib.error):
+                made = None
+        index = None
+        if made:
+            if self.sampler is None:
+                self.sampler = self.g.add("samplers", {"magFilter": 9729, "minFilter": 9987, "wrapS": 10497,
+                                                       "wrapT": 10497})
+            index = self.g.add("textures", {"sampler": self.sampler, "source": self.g.image(f"{name} ({look})", made)})
+        self.textures[key] = index
+        return index
+
+    def shader(self, shader: str) -> Optional[dict]:
+        """A shader's settings (shader_info), found in the files by name, else read from its name."""
         key = shader.lower()
+        if key not in self._shaders:
+            ref = self.lib.find("shader", shader)
+            self._shaders[key] = shader_info(ref.data, ref.chunk) if ref else shader_from_name(shader)
+        return self._shaders[key]
+
+    def material(self, shader: str, leaf: str = "") -> int:
+        """The glTF material for a shader. How the game puts a see-through surface over what is behind it (its
+        BLMD) goes in the material's extras ("blend"): ordinary see-through (1) is glTF's BLEND; a surface that
+        adds light (2) or darkens (3) gets its picture made ready for ordinary blending (added_light,
+        darkening) so it neither comes out as a black square nor hides what is behind. A cut-out (ATST) is
+        glTF's MASK at the shader's ACTH (0.5 without one); a light-adding or darkening one has the cut-out in
+        its made picture instead. Shaders drawn without writing depth (draws_depth) say so ("depthWrite":
+        false), shadow decals and the low-detail hull are marked. leaf: "colour" or "depth" for the two parts
+        of a placed prop's leaves (see mesh)."""
+        key = shader.lower() + (f"|leaf {leaf}" if leaf else "")
         if key in self.materials:
             return self.materials[key]
-        ref = self.lib.find("shader", shader)
-        info = shader_info(ref.data, ref.chunk) if ref else shader_from_name(shader)
-        mat: dict = {"name": shader, "pbrMetallicRoughness": {"metallicFactor": 0.0, "roughnessFactor": 1.0}}
+        info = self.shader(shader)
+        name = shader + {"": "", "colour": " (leaves)", "depth": " (leaves, solid core)"}[leaf]
+        mat: dict = {"name": name, "pbrMetallicRoughness": {"metallicFactor": 0.0, "roughnessFactor": 1.0}}
+        extras: dict = {}
         if info:
             ints = info["ints"]
+            blend = blend_of(info)
+            look = blend if blend in ("add", "darken") else None
+            cut = alpha_test(info)
             tex = next((t for p, t in info["textures"] if p == "TEX"), None)
-            if tex:
+            if tex and look:
+                ti = self.made_texture(tex, look, lambda rgba: (added_light if look == "add" else darkening)(rgba, cut),
+                                       str(cut) if cut else "")
+            elif tex:
                 ti = self.texture(tex)
+            if tex:
                 if ti is not None:
                     mat["pbrMetallicRoughness"]["baseColorTexture"] = {"index": ti}
                 elif tex in self.report.missing_textures:
                     # a picture the game doesn't have either (the cars' windscreens and undersides): dark
-                    # glass or dark metal, not a glaring white sheet
+                    # glass or dark metal, not a glaring white sheet. Light to add or a darkening with no
+                    # picture: nothing at all, not a dark square.
                     glass = bool(ints.get("BLMD") or info["translucent"])
-                    mat["pbrMetallicRoughness"]["baseColorFactor"] = MISSING_GLASS if glass else MISSING_SOLID
+                    mat["pbrMetallicRoughness"]["baseColorFactor"] = (
+                        [0.0, 0.0, 0.0, 0.0] if look else MISSING_GLASS if glass else MISSING_SOLID)
             if not tex and (ints.get("BLMD") or info["translucent"]):
                 # a see-through layer with no picture of its own: the glass laid over a tower's walls, which
                 # the game makes shine with the sky's reflection. Without this it is a white sheet over them.
                 mat["pbrMetallicRoughness"]["baseColorFactor"] = MISSING_GLASS
             if ints.get("2SID"):
                 mat["doubleSided"] = True
-            if ints.get("ATST"):
-                mat["alphaMode"], mat["alphaCutoff"] = "MASK", 0.5
+            if look:
+                mat["alphaMode"] = "BLEND"                      # the cut-out, if any, is in the made picture
+            elif leaf == "depth":
+                mat["alphaMode"], mat["alphaCutoff"] = "MASK", LEAF_DEPTH
+            elif cut:
+                mat["alphaMode"], mat["alphaCutoff"] = "MASK", cut[0]
             elif ints.get("BLMD") or info["translucent"]:
                 mat["alphaMode"] = "BLEND"
             if ints.get("LIT") == 0 and "LIT" in ints:
                 mat["extensions"] = {"KHR_materials_unlit": {}}
                 self.g.used_extensions.add("KHR_materials_unlit")
+            if blend:
+                extras["blend"] = blend
+            kind = (info.get("pddi") or "").lower()
+            if not draws_depth(info) or leaf == "colour":
+                extras["depthWrite"] = False
+            if kind == SHADOW_DECAL_KIND:
+                extras["shadowDecal"] = True
+            if kind == HULL_KIND:
+                extras.update(lowDetailHull=True, fade=list(HULL_FADE), fadeCutoff=HULL_CUT)
+            if leaf:
+                extras["leaves"] = leaf
+        if extras:
+            mat["extras"] = extras
         self.materials[key] = self.g.add("materials", mat)
         return self.materials[key]
 
     # meshes
 
+    def _mesh_key(self, ref: Ref) -> tuple:
+        return (id(ref.source), ref.chunk.offset) + (("prop",) if self.prop else ())
+
+    def place_mesh(self, ref: Ref, name: str, parent: Optional[int]) -> Optional[int]:
+        """A Mesh chunk's node under parent (see mesh); its shadow decals, if it has any, in a node of their own
+        under it ("<name> shadow decal", extras {"shadowDecal": true}), or as the node itself when the mesh is
+        nothing else. None when nothing in it can be shown."""
+        mesh = self.mesh(ref)
+        decal = self.decals.get(self._mesh_key(ref))
+        if mesh is None:
+            return self.g.node(name, parent, mesh=decal, extras={"shadowDecal": True}) if decal is not None else None
+        node = self.g.node(name, parent, mesh=mesh)
+        if decal is not None:
+            self.g.node(name + " shadow decal", node, mesh=decal, extras={"shadowDecal": True})
+        return node
+
     def mesh(self, ref: Ref, skinned_to: Optional[Dict[int, int]] = None) -> Optional[int]:
         """A glTF mesh for a Mesh or Skin chunk (one primitive per primitive group). For a skin,
-        skinned_to maps skeleton joint numbers to the skin's joint list."""
-        key = (id(ref.source), ref.chunk.offset)
+        skinned_to maps skeleton joint numbers to the skin's joint list. The primitive groups drawn with a
+        shadowdecal shader go in a glTF mesh of their own (self.decals; place_mesh puts it in), so they can be
+        shown or hidden together. On a placed prop (self.prop), the game draws an unlit see-through shader
+        without a cut-out (is_leaf: the leaves of the trees and bushes) twice: once for its colour, blended, not
+        writing depth, and once writing depth only where the alpha is at least 228/255. Here that is two
+        primitives on the same vertices: the colour, see-through and marked as not writing depth, and a
+        cut-out at 228/255 for the solid core of each leaf (which draws its colour too: there it is nearly
+        opaque)."""
+        key = self._mesh_key(ref)
         if key in self.meshes and skinned_to is None:
             return self.meshes[key]
         prims = []
+        decal_prims = []
         tinted = self.sky_colours(ref) if self.hour is not None and ref.chunk.id == MESH else None
         first = 0                                    # the mesh's number of the group's first vertex
         try:
@@ -969,9 +1190,19 @@ class Builder:
                 attrs["WEIGHTS_0"] = self.g.accessor(weights, "VEC4", target=34962)
             flat = [i for a, b, c in geo.triangles for i in (a, c, b)]      # turned round for the mirroring
             big = len(geo.positions) > 65535
-            prims.append({"attributes": attrs, "indices": self.g.accessor(flat, "SCALAR", 5125 if big else 5123,
-                                                                          target=34963),
-                          "material": self.material(shader), "mode": 4})
+            indices = self.g.accessor(flat, "SCALAR", 5125 if big else 5123, target=34963)
+            info = self.shader(shader)
+            if (info or {}).get("pddi", "").lower() == SHADOW_DECAL_KIND and not count and skinned_to is None:
+                decal_prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader),
+                                    "mode": 4})
+                continue
+            if self.prop and skinned_to is None and not count and is_leaf(info):
+                prims.append({"attributes": dict(attrs), "indices": indices, "material": self.material(shader, "depth"),
+                              "mode": 4})
+                prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader, "colour"),
+                              "mode": 4})
+                continue
+            prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader), "mode": 4})
             if count:                                # every group lists every shape, moved by it or not
                 n = len(geo.positions)
                 targets = []
@@ -1001,6 +1232,10 @@ class Builder:
             if tinted is not None:
                 item.setdefault("extras", {}).update({"hour": self.hour, "colourSet": tinted[0]})
             index = self.g.add("meshes", item)
+        if decal_prims:
+            self.decals[key] = self.g.add("meshes", {"name": ref.name + " shadow decal", "primitives": decal_prims,
+                                                     "extras": {"shadowDecal": True}})
+            self.report.shadow_decals += len(decal_prims)
         if skinned_to is None:
             self.meshes[key] = index
         return index
@@ -1097,9 +1332,7 @@ class Builder:
             at = copy.order[joint] if copy and 0 <= joint < len(copy.order) else top
             mref = self.lib.find("mesh", part, own)
             if mref:
-                mesh = self.mesh(mref)
-                if mesh is not None:
-                    self.g.node(part, at, mesh=mesh)
+                self.place_mesh(mref, part, at)
                 continue
             sk = self.lib.find("skin", part, own)
             if sk and copy:
@@ -1358,6 +1591,9 @@ class Builder:
         pose has the sun under the ground) and its meshes get the colours of that hour (see sky_colours).
         Returns its top node."""
         top = self.composite(ref, parent, **place)
+        for node in _under(self.g.doc, top):                # the game draws the sky without writing depth
+            for prim in self.g.doc["meshes"][node["mesh"]]["primitives"] if "mesh" in node else []:
+                self.g.doc["materials"][prim["material"]].setdefault("extras", {})["depthWrite"] = False
         if self.hour is None:
             return top
         copy = next((cp for cp in self.copies if getattr(cp, "group", None) == top), None)
@@ -1367,6 +1603,111 @@ class Builder:
             self.posed.add(id(anim.chunk))
         self.g.doc["nodes"][top].setdefault("extras", {})["hour"] = self.hour
         return top
+
+    # the sea
+
+    def sky_colour(self, weather: str = "clear") -> Optional[Tuple[float, float, float]]:
+        """The colour of the weather's sky (0..1 each): the average vertex colour of its mesh drawn first (the
+        highest draw-order key: the clear sky's dome, skyboxShape, one flat colour), with the colour set of
+        self.hour added if there is an hour (sky_colours), else as stored (the night sky). None when the
+        library has no sky for the weather."""
+        pick = next((comp for comp, name in skies(self.lib, main_only=False).items()
+                     if is_rain_sky(name) == (weather == "rain")), None)
+        ref = self.lib.find("composite", pick) if pick else None
+        if ref is None:
+            return None
+        best: Optional[Tuple[float, Ref]] = None
+        for k in ref.chunk.children:
+            if k.id != COMPOSITE_PROP:
+                continue
+            mref = self.lib.find("mesh", composite_prop(ref.data, k)[0], (ref.source,))
+            if mref is not None:
+                key = draw_order(mref.data, mref.chunk)
+                key = 0.5 if key is None else key                  # the game counts no key as 0.5
+                if best is None or key > best[0]:
+                    best = (key, mref)
+        if best is None:
+            return None
+        dome = best[1]
+        tinted = self.sky_colours(dome) if self.hour is not None else None
+        total, n, first = [0.0, 0.0, 0.0], 0, 0
+        for pg in (k for k in dome.chunk.children if k.id == PRIM_GROUP):
+            try:
+                geo = geometry(dome.data, pg)
+            except (struct.error, IndexError, ValueError):
+                geo = None
+            if geo is None:
+                continue
+            count = len(geo.positions)
+            colours = geo.colours if geo.colours and len(geo.colours) == count else [0xFFFFFFFF] * count
+            if tinted is not None:
+                colours = add_colours(colours, tinted[1], first, count)
+            first += count
+            for c in colours:
+                for i, s in enumerate((16, 8, 0)):
+                    total[i] += (c >> s) & 0xFF
+            n += len(colours)
+        return tuple(round(t / n / 255, 4) for t in total) if n else None  # type: ignore[return-value]
+
+    def sea(self, lo: Sequence[float], hi: Sequence[float], weather: str = "clear", parent: Optional[int] = None) -> int:
+        """The sea (OCEAN): flat, at height 0, reaching OCEAN_MARGIN past the box lo..hi (glTF's space) on every
+        side, made of OCEAN_TILE squares on a grid from 0, 0 so that seas made for different scenes line up. Its
+        picture is ocean_text's (water_01.bmp) repeating every 1 / DetailTextureScale metres, laid at
+        DetailOpacity over the sea's colour: the reflection's tint times the sky's colour (sky_colour, for the
+        hour if there is one; white without a sky in the files). It is see-through at ReflectionAlphaScale
+        (0.98) and unlit (its colour is the sky's, reflected). The node's extras hold the settings. Returns
+        its node."""
+        x0 = math.floor((lo[0] - OCEAN_MARGIN) / OCEAN_TILE) * OCEAN_TILE
+        x1 = math.ceil((hi[0] + OCEAN_MARGIN) / OCEAN_TILE) * OCEAN_TILE
+        z0 = math.floor((lo[2] - OCEAN_MARGIN) / OCEAN_TILE) * OCEAN_TILE
+        z1 = math.ceil((hi[2] + OCEAN_MARGIN) / OCEAN_TILE) * OCEAN_TILE
+        repeats = round(OCEAN_TILE * OCEAN["DetailTextureScale"])      # whole repeats a square: no seams
+        positions: List[Vec3] = []
+        uvs: List[Tuple[float, float]] = []
+        flat: List[int] = []
+        nx, nz = int(round((x1 - x0) / OCEAN_TILE)), int(round((z1 - z0) / OCEAN_TILE))
+        for i in range(nx):
+            for j in range(nz):
+                ax, az = x0 + i * OCEAN_TILE, z0 + j * OCEAN_TILE
+                base = len(positions)
+                for dx, dz in ((0, 0), (1, 0), (0, 1), (1, 1)):
+                    positions.append((ax + dx * OCEAN_TILE, 0.0, az + dz * OCEAN_TILE))
+                    uvs.append((float(dx * repeats), float(dz * repeats)))
+                flat += [base, base + 2, base + 1, base + 1, base + 2, base + 3]      # facing up
+        sky = self.sky_colour(weather)
+        tint = (OCEAN["ReflectionRedScale"], OCEAN["ReflectionGreenScale"], OCEAN["ReflectionBlueScale"])
+        colour = [round(t * s, 4) for t, s in zip(tint, sky or (1.0, 1.0, 1.0))]
+        alpha = OCEAN["ReflectionAlphaScale"]
+        ref = self.lib.find("shader", OCEAN_SHADER)
+        info = shader_info(ref.data, ref.chunk) if ref else None
+        picture = next((t for p, t in (info or {}).get("textures", []) if p == "TEX"), OCEAN_TEXTURE)
+        ti = self.made_texture(picture, "sea", lambda rgba: sea_picture(rgba, colour, OCEAN["DetailOpacity"], alpha),
+                               f"{colour}") if picture.lower() in self.lib.pictures else None
+        pbr: dict = {"metallicFactor": 0.0, "roughnessFactor": 1.0}
+        if ti is not None:
+            pbr["baseColorTexture"] = {"index": ti}
+        else:
+            pbr["baseColorFactor"] = colour + [alpha]
+        mat = self.g.add("materials", {"name": ref.name if ref else OCEAN_SHADER, "pbrMetallicRoughness": pbr,
+                                       "alphaMode": "BLEND", "extensions": {"KHR_materials_unlit": {}},
+                                       "extras": {"ocean": True, "blend": "alpha"}})
+        self.g.used_extensions.add("KHR_materials_unlit")
+        attrs = {"POSITION": self.g.accessor(positions, "VEC3", bounds=True, target=34962),
+                 "NORMAL": self.g.accessor([(0.0, 1.0, 0.0)] * len(positions), "VEC3", target=34962),
+                 "TEXCOORD_0": self.g.accessor(uvs, "VEC2", target=34962)}
+        mesh = self.g.add("meshes", {"name": OCEAN["object"], "primitives": [{
+            "attributes": attrs, "indices": self.g.accessor(flat, "SCALAR", 5125 if len(positions) > 65535 else 5123,
+                                                             target=34963), "material": mat, "mode": 4}]})
+        extras = {"ocean": True, "height": 0.0, "seaColour": colour, "skyColour": list(sky) if sky else None,
+                  "weather": weather, "picture": picture if ti is not None else None}
+        if self.hour is not None:
+            extras["hour"] = self.hour
+        extras.update(OCEAN)
+        when = f"at {self.hour:g} h" if self.hour is not None else "as stored"
+        self.report.notes.append(f"the sea: {x1 - x0:,.0f} by {z1 - z0:,.0f} m at height 0, tinted by "
+                                 + (f"the {weather} sky {when}" if sky else "white (no sky in the files)")
+                                 + (f", with {picture}" if ti is not None else f", without {picture} (not in the files)"))
+        return self.g.node(OCEAN["object"], parent, mesh=mesh, extras=extras)
 
 
     # animations
@@ -1807,10 +2148,13 @@ def _scene_extras(b: Builder, hour: Optional[float], weather: Optional[str], fog
 
 def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims: Sequence[Ref] = (),
            lod: bool = False, hour: Optional[float] = None, weather: Optional[str] = None,
-           fog: Optional[dict] = None, also=None) -> Tuple[bytes, Report]:
+           fog: Optional[dict] = None, also=None, ocean: bool = False, beside_detail: bool = False) -> Tuple[bytes, Report]:
     """The glTF (.glb) for the library's main files, and a report of what went in.
     also: called with the Builder once the files are in, to put more into the same scene (a cutscene's
     people on the map they stand on).
+    ocean: with map_mode, the sea round the map (Builder.sea), when there is map geometry.
+    beside_detail: the low-detail hull is exported for a scene whose detailed areas are in other files (a split
+    export with lod): its nodes are marked hidden, as when the detailed areas are in this one.
 
     Models (the default): every skin with its skeleton, every composite drawable that isn't a map's
     world geometry, and every mesh no composite uses, side by side. A sky (Common.p3d) with an hour is
@@ -1819,7 +2163,9 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
     meshes sit in world space), a copy of each model its instance objects place, and its lights (see
     Builder.lights; hour lights the daylight for that hour, 0 to 24; weather, "clear" or "rain", picks
     the daylight, clear when not given). Low-detail files (miami_lod, islands_LOD) are left out when
-    there's anything else, unless lod is set.
+    there's anything else, unless lod is set: then their world geometry (the low-detail hull) is marked
+    {"lowDetailHull": true, "hidden": true}, so that it doesn't cover the detailed areas (the game fades it
+    out near the camera). With ocean, the sea round all of it.
     With an hour or a weather, the scene's extras say which, with fog (fog.fog_at) if given."""
     if weather is not None and weather not in WEATHER_KIND:
         raise ExportError(f"the weather is clear or rain, not {weather!r}")
@@ -1828,24 +2174,37 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
     wanted = {n.lower() for n in only}
     if map_mode:
         mains = [src for src in lib.sources if src.main]
-        if not lod and any(not _is_lod(src) and _world_geo(lib, src) for src in mains):
+        detailed = any(not _is_lod(src) and _world_geo(lib, src) for src in mains)
+        if not lod and detailed:
             mains = [src for src in mains if not _is_lod(src)]
+        groups = []
         for src in mains:
             comps = [c for c in _world_geo(lib, src) if not wanted or c.lower() in wanted]
             placing = [(m, r) for m, r in instance_objects(src) if not wanted or m.lower() in wanted]
             if not comps and not placing:
                 continue
             group = b.g.node(Path(src.label).stem)
+            groups.append(group)
             prefer = [src] + lib.region_of(src)
+            hull = _is_lod(src)
             for comp in comps:
                 cref = lib.find("composite", comp, prefer)
                 if cref:
-                    b.composite(cref, group)
+                    top = b.composite(cref, group)
                     b.report.models.append(comp)
+                    if hull:
+                        mark = {"lowDetailHull": True}
+                        if detailed or beside_detail:
+                            mark["hidden"] = True
+                        b.g.doc["nodes"][top].setdefault("extras", {}).update(mark)
                 else:
                     b.report.missing_drawables.add(comp)
+            if hull and comps and (detailed or beside_detail):
+                b.report.notes.append(f"{Path(src.label).stem}: the low-detail hull, marked hidden (lowDetailHull): next to "
+                                      "the detailed areas it would cover them")
             if placing:
                 placed = b.g.node(Path(src.label).stem + " instances", group)
+                b.prop = True                                   # placed props: their leaves (see Builder.mesh)
                 for model, records in placing:
                     mref = _model_for(lib, model, prefer)
                     if not mref:
@@ -1858,8 +2217,16 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
                         t, q, sc = instance_trs(rec)
                         b.composite(mref, placed, model, translation=t, rotation=q, scale=sc)
                         b.report.placed += 1
+                b.prop = False
             if not wanted:
                 b.lights(src, group, hour, weather or "clear")
+        pts: List[List[float]] = []
+        for group in groups:
+            _bounds(b, group, _identity(), pts)
+        if pts:
+            b.report.box = ([min(p[i] for p in pts) for i in range(3)], [max(p[i] for p in pts) for i in range(3)])
+        if ocean and b.report.box:
+            b.sea(b.report.box[0], b.report.box[1], weather or "clear")
     else:
         parts = _composite_parts(lib)
         world = {c.lower() for src in lib.sources for c in _world_geo(lib, src)}
@@ -1893,9 +2260,9 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
             name = ref.name
             if (wanted and name.lower() not in wanted) or (not wanted and name.lower() in parts):
                 continue
-            mesh = b.mesh(ref)
-            if mesh is not None:
-                tops.append((name, b.g.node(name, None, mesh=mesh)))
+            node = b.place_mesh(ref, name, None)                # with its shadow decals, if any
+            if node is not None:
+                tops.append((name, node))
         _lay_out(b, tops)
         b.report.models = [n for n, _ in tops]
     camera_moves = _cameras(lib, b) if not map_mode else set()
@@ -1948,6 +2315,20 @@ def sky_export(lib: Library, hour: Optional[float] = None, weather: str = "clear
     return b.g.glb(), b.report
 
 
+def sea_export(lib: Library, lo: Sequence[float], hi: Sequence[float], hour: Optional[float] = None,
+               weather: str = "clear") -> Tuple[bytes, Report]:
+    """The sea alone (Builder.sea) round the box lo..hi (glTF's space), for a scene made of several files (the
+    whole city, a split export), whose areas then go without one each: its picture and the sky's colour for the
+    hour and weather come from the library's files (Common.p3d)."""
+    if weather not in WEATHER_KIND:
+        raise ExportError(f"the weather is clear or rain, not {weather!r}")
+    b = Builder(lib)
+    b.hour = hour
+    b.sea(lo, hi, weather)
+    b.report.models.append(OCEAN["object"])
+    return b.g.glb(), b.report
+
+
 def lod_tod(lib: Library, islands: bool = False) -> Dict[str, str]:
     """The tod object's properties (fog.tod_object) from the low-detail city's file in the library:
     miami_lod.p3d's, or for the islands islands_LOD.p3d's if it has one."""
@@ -1981,6 +2362,15 @@ def scene_fog(lib: Library, scripts: Dict[str, Path], hour: float, weather: str 
     if found is None:
         return None, f"no fog: {Path(script).name} has none of the EnvironmentObjects the tod object names"
     return found, ""
+
+
+def _under(doc: dict, node: int) -> Iterable[dict]:
+    """A node and every node under it."""
+    todo = [node]
+    while todo:
+        n = doc["nodes"][todo.pop()]
+        yield n
+        todo += n.get("children", [])
 
 
 def _bounds(b: Builder, node: int, m: Mat4, out: List[List[float]]) -> None:
@@ -2020,6 +2410,7 @@ def _lay_out(b: Builder, tops: List[Tuple[str, int]]) -> None:
 # --------------------------------------------------------------------------- command line
 
 MAP_LIBRARY = ("*_region.p3d", "*_region_D.p3d", "*_lod.p3d", "*_lod_D.p3d", "Common.p3d")
+OCEAN_FILE = "ocean.glb"               # a split export's (and the whole city's) sea, beside the areas
 
 
 def _files(paths: Sequence[Path]) -> List[Path]:
@@ -2064,7 +2455,11 @@ def main(argv=None) -> int:
     ap.add_argument("--library", type=Path, nargs="*", default=None,
                     help="more .p3d files or folders to take textures, shaders and placed models from")
     ap.add_argument("--map", action="store_true", help="export map areas with their placed instances")
-    ap.add_argument("--lod", action="store_true", help="with --map, keep the low-detail city too")
+    ap.add_argument("--lod", action="store_true",
+                    help="with --map, keep the low-detail city too (next to real areas, marked hidden)")
+    ap.add_argument("--no-ocean", action="store_true",
+                    help="with --map, leave the sea out (else a flat sea at height 0 round the map; with --split, "
+                         "one ocean.glb beside the areas)")
     ap.add_argument("--split", action="store_true",
                     help="with --map, one .glb per map area in the folder OUT (they line up when imported together)")
     ap.add_argument("--hour", type=float, default=None,
@@ -2112,6 +2507,8 @@ def main(argv=None) -> int:
         cache: Dict[Path, bytes] = {}
         parsed: dict = {}
         empty = 0
+        boxes: List[Tuple[List[float], List[float]]] = []
+        detail_split = a.split and any(not all("_lod" in f.stem.lower() for f in g) for g in groups)
 
         def read(f: Path) -> bytes:
             if f not in cache:
@@ -2133,8 +2530,11 @@ def main(argv=None) -> int:
             if a.hour is not None and not a.map and not skies(lib):
                 raise ExportError("--hour is for --map, or for the sky (Common.p3d)")
             fog, no_fog = scene_fog(lib, scripts, a.hour, a.weather or "clear") if a.hour is not None else (None, "")
+            hull_only = all("_lod" in f.stem.lower() for f in group)
             try:
-                glb, report = export(lib, a.map, a.only, refs, a.lod, a.hour, a.weather, fog)
+                glb, report = export(lib, a.map, a.only, refs, a.lod, a.hour, a.weather, fog,
+                                     ocean=a.map and not a.split and not a.no_ocean,
+                                     beside_detail=detail_split and hull_only)
             except ExportError:
                 if a.split:
                     empty += 1                                  # a region, a shared file: no area of its own
@@ -2150,6 +2550,21 @@ def main(argv=None) -> int:
             if not a.list:
                 out.write_bytes(glb)
                 print(f"wrote {out} ({len(glb):,} bytes)")
+            if report.box:
+                boxes.append(report.box)
+        if a.split and a.map and not a.no_ocean and boxes:     # one sea for all the areas, which line up with it
+            lib = Library(parsed)
+            for f in extra:
+                lib.add(f.name, read(f), main=False)
+            lo = [min(bx[0][i] for bx in boxes) for i in range(3)]
+            hi = [max(bx[1][i] for bx in boxes) for i in range(3)]
+            glb, report = sea_export(lib, lo, hi, a.hour, a.weather or "clear")
+            print(f"== {OCEAN_FILE}")
+            for line in report.lines()[1:]:
+                print(line)
+            if not a.list:
+                (a.out / OCEAN_FILE).write_bytes(glb)
+                print(f"wrote {a.out / OCEAN_FILE} ({len(glb):,} bytes)")
         if a.split and empty:
             print(f"({empty} file group(s) with no map area of their own, such as regions and shared files, used "
                   "only for what the areas need)")
