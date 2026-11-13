@@ -51,4 +51,6 @@ def test_the_waiting_matches_are_well_formed():
     for path in sorted((Path(__file__).resolve().parents[2] / "reports" / "to_submit").glob("*.cpp")):
         fields, _code = S.read_proposal(path.read_text(encoding="utf-8"))
         assert S.task_id(fields) == path.stem, path.name                        # named after its function
-        assert fields.get("what") and len(fields["what"]) <= 160 and fields.get("spec"), path.name
+        assert fields.get("what") and len(fields["what"]) <= 160, path.name
+        # where it came from: a spec, or the already matched function it is a look-alike of
+        assert fields.get("spec") or "look-alike of 0x" in fields.get("tool", ""), path.name
