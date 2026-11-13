@@ -773,7 +773,7 @@
    "size": 75,
    "what_it_does": "The game's name key (SPEC-006 section 5): h = (h*65599) & 0x7FFFFFFF, character +0x20 below 'a', XOR; top bit set at the end.",
    "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#5-the-games-name-key-checked-on-the-xbox",
-   "status": "open"
+   "status": "matched"
   },
   {
    "bin": "xb",
@@ -6171,6 +6171,240 @@
    "what_it_does": "Allocates memory simply.",
    "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
    "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00279660",
+   "name_in_queue": "sub_00279660",
+   "size": 78,
+   "what_it_does": "Turns a billboard quad's facing code (NOAX, AAX, XAX, YAX, LXAX, LYAX) into 0 to 5; an unknown code gives 1 (AAX).",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002796B0",
+   "name_in_queue": "sub_002796B0",
+   "size": 52,
+   "what_it_does": "Turns a cut-off cone's code into a bit mask: BOTH 3, VERT 1, HRZT 2, anything else 0.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002796F0",
+   "name_in_queue": "sub_002796F0",
+   "size": 648,
+   "what_it_does": "Works out one pair of billboard cut-off cones (up-and-down and side-to-side) for a direction in a given frame, each 1 inside the inner angle, 0 outside the outer one, a straight line between.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00279980",
+   "name_in_queue": "sub_00279980",
+   "size": 84,
+   "what_it_does": "A billboard quad's distance fade: with the LINE kind, 1 nearer than the near distance, 0 beyond the far one, a straight line between; otherwise 1.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002799E0",
+   "name_in_queue": "sub_002799E0",
+   "size": 353,
+   "what_it_does": "Builds a flat billboard quad's four corners in a frame, scaled by the size, and moves them along the frame's -z by the quad's pull.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00279B50",
+   "name_in_queue": "sub_00279B50",
+   "size": 293,
+   "what_it_does": "Builds a fully camera-facing (AAX) billboard quad: pulls the centre towards the camera, sets the corners off along the screen's right and up, and keeps the on-screen size constant when the quad's world-size flag is 0.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00279C80",
+   "name_in_queue": "sub_00279C80",
+   "size": 175,
+   "what_it_does": "Builds an XAX billboard quad: a turn about the world's x axis towards the camera, then the flat quad.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00279D30",
+   "name_in_queue": "sub_00279D30",
+   "size": 175,
+   "what_it_does": "Builds a YAX billboard quad: an upright turn about the world's up axis towards the camera, then the flat quad at the quad's world position.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00279DE0",
+   "name_in_queue": "sub_00279DE0",
+   "size": 419,
+   "what_it_does": "Builds an LXAX billboard quad: a turn about the quad's own x axis towards the camera, then the flat quad.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00279F90",
+   "name_in_queue": "sub_00279F90",
+   "size": 406,
+   "what_it_does": "Builds an LYAX billboard quad: a turn about the quad's own y axis by the angle that best faces the camera, then the flat quad.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027A130",
+   "name_in_queue": "sub_0027A130",
+   "size": 208,
+   "what_it_does": "Picks a billboard quad's texture-strip frame (random, or the given one) and sets its texture offset to frame / frame count.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027A210",
+   "name_in_queue": "pure3d::BillboardQuadGroup::vfunc_17",
+   "size": 9,
+   "what_it_does": "A plain billboard group's own cones: always 1.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027A260",
+   "name_in_queue": "sub_0027A260",
+   "size": 187,
+   "what_it_does": "Constructs a plain billboard quad (0xc4 bytes): shown, white, half-size 0.5 by 1, default texture corners.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027A350",
+   "name_in_queue": "sub_0027A350",
+   "size": 1528,
+   "what_it_does": "Builds one billboard quad into the group's vertex stream each frame: placement, fade and size (with the cut-off cones), corners by facing, texture coordinates and offset, colour times fade.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027A950",
+   "name_in_queue": "sub_0027A950",
+   "size": 127,
+   "what_it_does": "Constructs a cut-off billboard quad (0x108 bytes).",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027A9D0",
+   "name_in_queue": "pure3d::BillboardCutOffQuad::vfunc_08",
+   "size": 433,
+   "what_it_does": "A cut-off billboard quad's fade and size: the facing cone in its own frame, the view cone in the camera's, the distance fade, and the size pair.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027B010",
+   "name_in_queue": "pure3d::BillboardObject::vfunc_10",
+   "size": 87,
+   "what_it_does": "Draws a billboard container: puts the group's placement on the matrix stack, lends the group its size multiplier, draws it, then puts 1.0 back.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027B0A0",
+   "name_in_queue": "sub_0027B0A0",
+   "size": 1744,
+   "what_it_does": "Reads a billboard quad (chunk 0x00017005) and its sub-chunks: placement, texture strip, texture corners, the cut-off cones, the distance fade and the size pair.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027BC00",
+   "name_in_queue": "sub_0027BC00",
+   "size": 1294,
+   "what_it_does": "The billboard occlusion test for the sun's flares: the visible share of a small square around the first quad, from the hardware visibility test, clamped to 0..1.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027C110",
+   "name_in_queue": "sub_0027C110",
+   "size": 96,
+   "what_it_does": "Constructs the billboard group loader (chunk 0x00017006).",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027C1B0",
+   "name_in_queue": "sub_0027C1B0",
+   "size": 75,
+   "what_it_does": "Constructs a plain billboard group (0x94 bytes).",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027C2C0",
+   "name_in_queue": "pure3d::BillboardQuadGroup::vfunc_08",
+   "size": 663,
+   "what_it_does": "Draws a billboard group: the group's fade (time-of-day factor, occlusion, own cones), depth and other render states, then every quad into one triangle list with the group's shader.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027C560",
+   "name_in_queue": "sub_0027C560",
+   "size": 161,
+   "what_it_does": "Constructs a cut-off billboard group (0xc8 bytes).",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027C670",
+   "name_in_queue": "sub_0027C670",
+   "size": 1672,
+   "what_it_does": "Reads a billboard group (chunk 0x00017006): name, shader, flags, quads, placement, the group's own cones, frame controllers, bounds and draw-order key.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0027CD00",
+   "name_in_queue": "pure3d::BillboardObjectLoader::vfunc_06",
+   "size": 118,
+   "what_it_does": "Loads a billboard group: makes the 0x5c-byte container, reads the group into it, and returns it under the group's name.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A8190",
+   "name_in_queue": "pure3d::BillboardQuadGroupAnimationController::vfunc_09",
+   "size": 583,
+   "what_it_does": "Plays a BQG animation into a billboard group's quads: VIS, TRAN, ROT, WDT and HGT (halved), DIST, CLR, FSF and OFF.",
+   "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
    "status": "open"
   }
  ]
