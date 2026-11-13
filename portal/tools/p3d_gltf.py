@@ -1245,9 +1245,18 @@ class Builder:
             if skinned_to is not None and geo.joints and geo.weights:
                 joints, weights = [], []
                 for js, ws in zip(geo.joints, geo.weights):
-                    pairs = [(skinned_to.get(j, 0), w) for j, w in zip(js, ws)]
+                    # One entry per joint: the game's files name a joint twice for some points (0.65 on it
+                    # and a sliver more further along). Blender keeps only the last weight it reads for a
+                    # joint, so such a point followed its other joint and tore away from its neighbours.
+                    share: Dict[int, float] = {}
+                    for j, w in zip(js, ws):
+                        if w > 0:
+                            node = skinned_to.get(j, 0)
+                            share[node] = share.get(node, 0.0) + w
+                    pairs = sorted(share.items(), key=lambda p: -p[1])[:4]
                     total = sum(w for _, w in pairs) or 1.0
-                    joints.append([j if w > 0 else 0 for j, w in pairs])
+                    pairs += [(0, 0.0)] * (4 - len(pairs))
+                    joints.append([j for j, _ in pairs])
                     weights.append([w / total for _, w in pairs])
                 big = max(max(j) for j in joints) > 255
                 attrs["JOINTS_0"] = self.g.accessor(joints, "VEC4", 5123 if big else 5121, target=34962)
