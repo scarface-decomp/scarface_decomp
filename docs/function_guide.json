@@ -1,0 +1,599 @@
+{
+ "about": "Xbox functions (default.xbe) the clean-room specs explain, with what each does in plain words. 'name_in_queue' is the work queue's name; 'status' is whether it is in reports/verified_registry.json. Generated from the specs; see docs/AI_GUIDE.md.",
+ "functions": [
+  {
+   "bin": "xb",
+   "va": "0x00042AB0",
+   "name_in_queue": "sub_00042AB0",
+   "size": 488,
+   "what_it_does": "Draws the shadow decals (draw lists 7, 8 and 77) inside the static-shadow extension's begin and end.",
+   "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#4-drawing-the-shadow-decals-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00047AF0",
+   "name_in_queue": "occlude::OccluderLoader::vfunc_06",
+   "size": 494,
+   "what_it_does": "The occluder loader: reads an occluder chunk and builds its box (named OccluderObject_<n>) and registers it.",
+   "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#3-the-occluder-loader-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00050D70",
+   "name_in_queue": "renderer::CharacterRenderable::vfunc_13",
+   "size": 33,
+   "what_it_does": "CharacterRenderable's override: returns the position: the matrix's last row.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00050DA0",
+   "name_in_queue": "renderer::CharacterRenderable::vfunc_10",
+   "size": 16,
+   "what_it_does": "CharacterRenderable's override: per-frame visibility, draw distance and fade (SPEC-005 \u00a72.2), putting visible elements into the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00051020",
+   "name_in_queue": "renderer::CharacterRenderable::vfunc_09",
+   "size": 246,
+   "what_it_does": "CharacterRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000511B0",
+   "name_in_queue": "renderer::CharacterRenderable::vfunc_03",
+   "size": 30,
+   "what_it_does": "CharacterRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00051810",
+   "name_in_queue": "renderer::DecalRenderable::vfunc_11",
+   "size": 16,
+   "what_it_does": "DecalRenderable's override: draws straight away, outside the draw lists (non-gameplay scenes only); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00053380",
+   "name_in_queue": "renderer::DecalRenderable::vfunc_03",
+   "size": 63,
+   "what_it_does": "DecalRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000533C0",
+   "name_in_queue": "renderer::DecalRenderable::vfunc_09",
+   "size": 16,
+   "what_it_does": "DecalRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00054470",
+   "name_in_queue": "renderer::InstanceRenderable::vfunc_03",
+   "size": 63,
+   "what_it_does": "InstanceRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00054730",
+   "name_in_queue": "renderer::InstanceRenderable::vfunc_09",
+   "size": 25,
+   "what_it_does": "InstanceRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00054CD0",
+   "name_in_queue": "renderer::LightingRenderable::vfunc_03",
+   "size": 30,
+   "what_it_does": "LightingRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00054ED0",
+   "name_in_queue": "renderer::MaskRenderable::vfunc_03",
+   "size": 36,
+   "what_it_does": "MaskRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00054F60",
+   "name_in_queue": "renderer::CharacterRenderable::vfunc_12",
+   "size": 38,
+   "what_it_does": "CharacterRenderable's override: sets the matrix (+0x14, 0x40 bytes) and marks it changed (flag 0x02 at +0x81).",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00054F90",
+   "name_in_queue": "renderer::InstanceRenderable::vfunc_10",
+   "size": 5,
+   "what_it_does": "InstanceRenderable's override: per-frame visibility, draw distance and fade (SPEC-005 \u00a72.2), putting visible elements into the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00054FA0",
+   "name_in_queue": "renderer::NISRenderable::vfunc_13",
+   "size": 33,
+   "what_it_does": "NISRenderable's override: returns the position: the matrix's last row.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055040",
+   "name_in_queue": "renderer::NISRenderable::vfunc_03",
+   "size": 36,
+   "what_it_does": "NISRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055070",
+   "name_in_queue": "renderer::NISRenderable::vfunc_09",
+   "size": 246,
+   "what_it_does": "NISRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055490",
+   "name_in_queue": "renderer::OceanRenderable::vfunc_03",
+   "size": 63,
+   "what_it_does": "OceanRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000554F0",
+   "name_in_queue": "renderer::OceanRenderable::vfunc_09",
+   "size": 79,
+   "what_it_does": "OceanRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055540",
+   "name_in_queue": "renderer::ParticleEffectRenderable::vfunc_09",
+   "size": 118,
+   "what_it_does": "ParticleEffectRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055740",
+   "name_in_queue": "renderer::ParticleEffectRenderable::vfunc_03",
+   "size": 89,
+   "what_it_does": "ParticleEffectRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055B70",
+   "name_in_queue": "renderer::ParticleEffectRenderable::vfunc_12",
+   "size": 120,
+   "what_it_does": "ParticleEffectRenderable's override: sets the matrix (+0x14, 0x40 bytes) and marks it changed (flag 0x02 at +0x81).",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055C20",
+   "name_in_queue": "renderer::PlugInRenderable::vfunc_11",
+   "size": 17,
+   "what_it_does": "PlugInRenderable's override: draws straight away, outside the draw lists (non-gameplay scenes only); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055C90",
+   "name_in_queue": "renderer::PlugInRenderable::vfunc_03",
+   "size": 36,
+   "what_it_does": "PlugInRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055D10",
+   "name_in_queue": "renderer::PropRenderable::vfunc_09",
+   "size": 31,
+   "what_it_does": "PropRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055D30",
+   "name_in_queue": "renderer::WorldGeoRenderable::vfunc_14",
+   "size": 56,
+   "what_it_does": "WorldGeoRenderable's override: takes every element out of the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055D90",
+   "name_in_queue": "renderer::WorldGeoRenderable::vfunc_08",
+   "size": 67,
+   "what_it_does": "WorldGeoRenderable's override: shows or hides the renderable: flag 0x10 at +0x80, and every element's draw-list entries added or removed.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055DE0",
+   "name_in_queue": "renderer::PropRenderable::vfunc_03",
+   "size": 36,
+   "what_it_does": "PropRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055E80",
+   "name_in_queue": "renderer::WorldGeoRenderable::vfunc_15",
+   "size": 41,
+   "what_it_does": "WorldGeoRenderable's override: gives another point to measure distance from; the base returns false, world geometry gives its own.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00056040",
+   "name_in_queue": "renderer::ZonePkgRenderable::vfunc_08",
+   "size": 73,
+   "what_it_does": "ZonePkgRenderable's override: shows or hides the renderable: flag 0x10 at +0x80, and every element's draw-list entries added or removed.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00056200",
+   "name_in_queue": "renderer::WorldGeoRenderable::vfunc_03",
+   "size": 30,
+   "what_it_does": "WorldGeoRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00056220",
+   "name_in_queue": "renderer::WorldGeoRenderable::vfunc_10",
+   "size": 1009,
+   "what_it_does": "WorldGeoRenderable's override: per-frame visibility, draw distance and fade (SPEC-005 \u00a72.2), putting visible elements into the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000566D0",
+   "name_in_queue": "renderer::ZonePkgRenderable::vfunc_03",
+   "size": 30,
+   "what_it_does": "ZonePkgRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000572D0",
+   "name_in_queue": "renderer::RainRenderable::vfunc_11",
+   "size": 257,
+   "what_it_does": "RainRenderable's override: draws straight away, outside the draw lists (non-gameplay scenes only); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00057D20",
+   "name_in_queue": "renderer::RainRenderable::vfunc_03",
+   "size": 30,
+   "what_it_does": "RainRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000581C0",
+   "name_in_queue": "renderer::RainRenderable::vfunc_09",
+   "size": 400,
+   "what_it_does": "RainRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00058500",
+   "name_in_queue": "renderer::DecalRenderable::vfunc_13",
+   "size": 30,
+   "what_it_does": "DecalRenderable's override: returns the position: the matrix's last row.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00058520",
+   "name_in_queue": "renderer::CharacterRenderable::vfunc_08",
+   "size": 92,
+   "what_it_does": "CharacterRenderable's override: shows or hides the renderable: flag 0x10 at +0x80, and every element's draw-list entries added or removed.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00058580",
+   "name_in_queue": "renderer::CharacterRenderable::vfunc_14",
+   "size": 70,
+   "what_it_does": "CharacterRenderable's override: takes every element out of the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000589C0",
+   "name_in_queue": "renderer::DecalRenderable::vfunc_10",
+   "size": 1535,
+   "what_it_does": "DecalRenderable's override: per-frame visibility, draw distance and fade (SPEC-005 \u00a72.2), putting visible elements into the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00059350",
+   "name_in_queue": "renderer::Renderable::vfunc_03",
+   "size": 30,
+   "what_it_does": "Destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000595B0",
+   "name_in_queue": "renderer::ShadowRenderable::vfunc_09",
+   "size": 27,
+   "what_it_does": "ShadowRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00059720",
+   "name_in_queue": "renderer::ShadowRenderable::vfunc_03",
+   "size": 88,
+   "what_it_does": "ShadowRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00059A90",
+   "name_in_queue": "renderer::ShadowRenderable::vfunc_10",
+   "size": 1370,
+   "what_it_does": "ShadowRenderable's override: per-frame visibility, draw distance and fade (SPEC-005 \u00a72.2), putting visible elements into the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005B610",
+   "name_in_queue": "renderer::SkidmarkRenderable::vfunc_03",
+   "size": 63,
+   "what_it_does": "SkidmarkRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005B650",
+   "name_in_queue": "renderer::SkidmarkRenderable::vfunc_09",
+   "size": 16,
+   "what_it_does": "SkidmarkRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005C2B0",
+   "name_in_queue": "renderer::SkyRenderable::vfunc_10",
+   "size": 19,
+   "what_it_does": "SkyRenderable's override: per-frame visibility, draw distance and fade (SPEC-005 \u00a72.2), putting visible elements into the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005C2D0",
+   "name_in_queue": "renderer::SkyRenderable::vfunc_03",
+   "size": 63,
+   "what_it_does": "SkyRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005C310",
+   "name_in_queue": "renderer::SkyRenderable::vfunc_09",
+   "size": 345,
+   "what_it_does": "SkyRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005CA20",
+   "name_in_queue": "renderer::StatePropRenderable::vfunc_03",
+   "size": 78,
+   "what_it_does": "StatePropRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005CD90",
+   "name_in_queue": "renderer::StatePropRenderable::vfunc_09",
+   "size": 171,
+   "what_it_does": "StatePropRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005D0D0",
+   "name_in_queue": "renderer::TraceFireRenderable::vfunc_09",
+   "size": 94,
+   "what_it_does": "TraceFireRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005D1B0",
+   "name_in_queue": "renderer::TraceFireRenderable::vfunc_03",
+   "size": 30,
+   "what_it_does": "TraceFireRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005D1D0",
+   "name_in_queue": "renderer::TraceFireRenderable::vfunc_11",
+   "size": 472,
+   "what_it_does": "TraceFireRenderable's override: draws straight away, outside the draw lists (non-gameplay scenes only); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005D830",
+   "name_in_queue": "renderer::VehicleRenderable::vfunc_10",
+   "size": 27,
+   "what_it_does": "VehicleRenderable's override: per-frame visibility, draw distance and fade (SPEC-005 \u00a72.2), putting visible elements into the draw lists.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005E430",
+   "name_in_queue": "renderer::VehicleRenderable::vfunc_03",
+   "size": 30,
+   "what_it_does": "VehicleRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0005EC70",
+   "name_in_queue": "renderer::VehicleRenderable::vfunc_09",
+   "size": 44,
+   "what_it_does": "VehicleRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000603B0",
+   "name_in_queue": "renderer::WakeRenderable::vfunc_03",
+   "size": 63,
+   "what_it_does": "WakeRenderable's override: destructor (deleting): frees this kind's own drawables, then the base part.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00060490",
+   "name_in_queue": "renderer::WakeRenderable::vfunc_09",
+   "size": 27,
+   "what_it_does": "WakeRenderable's override: per-frame update before drawing (animation, wind, skinning, ageing); empty in the base.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00251310",
+   "name_in_queue": "sub_00251310",
+   "size": 62,
+   "what_it_does": "The archive name hash: skips one leading backslash, folds each character (0x20 added below 'a'), hash = hash*31 + c.",
+   "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#1-the-archives-name-hash",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00282820",
+   "name_in_queue": "sub_00282820",
+   "size": 153,
+   "what_it_does": "Sets the blending render states (on, equation, source and destination factors), skipping ones that haven't changed.",
+   "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#24-sub_00282820-153-bytes-the-blending-render-states",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002828C0",
+   "name_in_queue": "sub_002828C0",
+   "size": 130,
+   "what_it_does": "Sets the alpha-test render states (on, comparison, reference), skipping ones that haven't changed.",
+   "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#25-sub_002828c0-130-bytes-the-alpha-test-render-states",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00282950",
+   "name_in_queue": "sub_00282950",
+   "size": 103,
+   "what_it_does": "Applies a shader's blending and alpha test: looks its blend mode up in the eight-entry table and sets both groups of render states.",
+   "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#23-sub_00282950-103-bytes-applying-them",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029A2F0",
+   "name_in_queue": "sub_0029A2F0",
+   "size": 146,
+   "what_it_does": "Works out the blend mode a shader actually uses (a fading solid one blends) and its alpha reference from ACTH and the fade.",
+   "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#22-sub_0029a2f0-146-bytes-working-out-the-blend-mode-and-the-alpha-reference",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0029A390",
+   "name_in_queue": "sub_0029A390",
+   "size": 18,
+   "what_it_does": "A shader's BLMD setting: keeps the blend mode and recomputes the blend mode and alpha reference.",
+   "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#21-sub_0029a390-18-bytes-setting-blmd",
+   "status": "matched"
+  }
+ ]
+}

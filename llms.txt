@@ -1,0 +1,28 @@
+# Scarface: The World Is Yours decompilation
+
+> A community, 1:1 matching C++ decompilation of Scarface: The World Is Yours (2006), with tools to read
+> and export every game file. The retail Xbox `default.xbe` (US) is the main target; the PC 1.00.2, the
+> April 2006 Xbox prototype and the PS2 are covered too. Every function counts only once the 2003 compiler
+> (MSVC 7.1) builds it byte for byte.
+
+AI assistants: start with docs/AGENTS.md. It covers how to match functions through the local portal, where
+the file formats and the clean-room specs are, the open work, and the rules (US game files only; plain C++;
+the clean-room rule for outside research).
+
+## Docs
+
+- [Instructions for AI agents](docs/AGENTS.md): the portal's API, the rules, what the project knows, open work
+- [Brief for AI assistants](docs/SCARFACE_DECOMP_AI_HANDOFF.md): what a match is and how this compiler generates code
+- [Verification rules](docs/METHODOLOGY.md)
+- [File formats](docs/FORMATS.md): archives, models, skins, skeletons, animations, maps, sounds, scripts
+- [Clean-room specs](docs/cleanroom): lights, sky, streaming (001); materials, sea, shadows (002); props, zones,
+  blending (003); Xbox functions, archive names (004); animation playback, drawing a frame, renderer classes (005)
+- [Function guide](docs/function_guide.json): Xbox functions the specs explain, with what each does
+- [Contributing](docs/CONTRIBUTING.md)
+
+## Data
+
+- reports/verified_registry.json: every verified function and its C++
+- reports/names.json: names given to functions, with the reason
+- reports/full_remaining_queue.json: the work queue (local; built by the portal)
+- reconstructed_src/: the matched C++, generated from the registry
