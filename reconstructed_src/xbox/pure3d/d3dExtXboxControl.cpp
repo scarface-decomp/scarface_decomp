@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtXboxControl.cpp (14 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtXboxControl.cpp (16 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 14 of 41 functions matched (34.15%). NOT COMPLETE YET.
-// The 27 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 16 of 41 functions matched (39.02%). NOT COMPLETE YET.
+// The 25 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -522,6 +522,105 @@ void d3dExtXboxControl::vfunc_37()
 {
     vfunc_13();
     sub_0032DDB0(0);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_22 (0x002A0FB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Switches a global flag on.
+// ============================================================================
+// bin: xb
+// va: 0x002A0FB0
+// what: Switches a global flag on.
+// tool: Claude Fable 5.2 (look-alike of 0x002A0F50, names and addresses swapped)
+// pure3d::d3dExtXboxControl::vfunc_22 (0x002A0FB0, 8 bytes)
+extern "C" bool DAT_0045C348;
+
+namespace pure3d {
+
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+void d3dExtXboxControl::vfunc_22()
+{
+    DAT_0045C348 = true;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_23 (0x002A0FC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Switches a global flag off.
+// ============================================================================
+// bin: xb
+// va: 0x002A0FC0
+// what: Switches a global flag off.
+// tool: Claude Fable 5.2 (look-alike of 0x002A0F60, names and addresses swapped)
+// pure3d::d3dExtXboxControl::vfunc_23 (0x002A0FC0, 8 bytes)
+extern "C" bool DAT_0045C348;
+
+namespace pure3d {
+
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void d3dExtXboxControl::vfunc_23()
+{
+    DAT_0045C348 = false;
 }
 
 }

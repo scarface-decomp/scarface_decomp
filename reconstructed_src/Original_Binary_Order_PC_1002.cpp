@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 378 of 1,516 functions matched (24.93%). NOT COMPLETE YET.
-// The 1,138 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 412 of 1,516 functions matched (27.18%). NOT COMPLETE YET.
+// The 1,104 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -6176,7 +6176,36 @@ L_2D:
 
 }
 
-// [TODO] 0x006F6960 audio::SeqEventNestTrack::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventNestTrack::vfunc_03 (0x006F6960, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a value kept in the game's data.
+// ============================================================================
+// bin: pc
+// va: 0x006F6960
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventNestTrack::vfunc_03 (0x006F6960, 6 bytes)
+extern "C" int DAT_0085D4F0;
+
+namespace audio {
+
+class SeqEventNestTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventNestTrack::vfunc_03()
+{
+    return DAT_0085D4F0;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventNestTrack::vfunc_04 (0x006F6970, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -6443,7 +6472,37 @@ void __cdecl sub_006F6DE0(void)
     first.sub_006EBBD0();
 }
 
-// [TODO] 0x006F6EC0 audio::SeqEventChannelSendVolumes::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventChannelSendVolumes::vfunc_03 (0x006F6EC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F6EC0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventChannelSendVolumes::vfunc_03 (0x006F6EC0, 6 bytes)
+extern "C" int DAT_0085D4F4;
+
+namespace audio {
+
+class SeqEventChannelSendVolumes
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventChannelSendVolumes::vfunc_03()
+{
+    return DAT_0085D4F4;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventChannelSendVolumes::vfunc_04 (0x006F6ED0, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -6555,7 +6614,37 @@ SeqActionChannelSends* SeqActionChannelSends::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F71F0 audio::SeqEventChannelSends::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventChannelSends::vfunc_03 (0x006F71F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F71F0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventChannelSends::vfunc_03 (0x006F71F0, 6 bytes)
+extern "C" int DAT_0085D4FC;
+
+namespace audio {
+
+class SeqEventChannelSends
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventChannelSends::vfunc_03()
+{
+    return DAT_0085D4FC;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventChannelSends::vfunc_04 (0x006F7200, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -6884,7 +6973,37 @@ L_28:
 
 }
 
-// [TODO] 0x006F74F0 audio::SeqEventCondition::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventCondition::vfunc_03 (0x006F74F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F74F0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventCondition::vfunc_03 (0x006F74F0, 6 bytes)
+extern "C" int DAT_0085D500;
+
+namespace audio {
+
+class SeqEventCondition
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventCondition::vfunc_03()
+{
+    return DAT_0085D500;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventCondition::vfunc_04 (0x006F7500, 72 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -7069,7 +7188,37 @@ void __cdecl sub_006F7600(void)
     first.sub_006EBBD0();
 }
 
-// [TODO] 0x006F7680 audio::SeqEventConditionElse::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventConditionElse::vfunc_03 (0x006F7680, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F7680
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventConditionElse::vfunc_03 (0x006F7680, 6 bytes)
+extern "C" int DAT_0085D504;
+
+namespace audio {
+
+class SeqEventConditionElse
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventConditionElse::vfunc_03()
+{
+    return DAT_0085D504;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventConditionElse::vfunc_04 (0x006F7690, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -7196,7 +7345,37 @@ template <> int audio::SeqEventType<audio::SeqEventCondition>::vfunc_01()
 // [TODO] 0x006F7900 audio::SeqActionWait::vfunc_01 (15 B)
 // [TODO] 0x006F7910 audio::SeqActionWait::vfunc_03 (15 B)
 // [TODO] 0x006F7920 audio::SeqActionWait::vfunc_04 (15 B)
-// [TODO] 0x006F7930 audio::SeqEventWait::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventWait::vfunc_03 (0x006F7930, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F7930
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventWait::vfunc_03 (0x006F7930, 6 bytes)
+extern "C" int DAT_0085D508;
+
+namespace audio {
+
+class SeqEventWait
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventWait::vfunc_03()
+{
+    return DAT_0085D508;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventWait::vfunc_04 (0x006F7940, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -7441,7 +7620,37 @@ void __cdecl sub_006F7CA0(void)
     first.sub_006EBBD0();
 }
 
-// [TODO] 0x006F7D80 audio::SeqEventWaitBeat::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventWaitBeat::vfunc_03 (0x006F7D80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F7D80
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventWaitBeat::vfunc_03 (0x006F7D80, 6 bytes)
+extern "C" int DAT_0085D510;
+
+namespace audio {
+
+class SeqEventWaitBeat
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventWaitBeat::vfunc_03()
+{
+    return DAT_0085D510;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventWaitBeat::vfunc_04 (0x006F7D90, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -7640,7 +7849,37 @@ SeqActionExpression* SeqActionExpression::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F7F30 audio::SeqEventExpression::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventExpression::vfunc_03 (0x006F7F30, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F7F30
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventExpression::vfunc_03 (0x006F7F30, 6 bytes)
+extern "C" int DAT_0085D518;
+
+namespace audio {
+
+class SeqEventExpression
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventExpression::vfunc_03()
+{
+    return DAT_0085D518;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventExpression::vfunc_04 (0x006F7F40, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -7774,7 +8013,37 @@ template <> int audio::SeqEventType<audio::SeqEventStopTrack>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x006F8240 audio::SeqEventStopTrack::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventStopTrack::vfunc_03 (0x006F8240, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F8240
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventStopTrack::vfunc_03 (0x006F8240, 6 bytes)
+extern "C" int DAT_0085D51C;
+
+namespace audio {
+
+class SeqEventStopTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventStopTrack::vfunc_03()
+{
+    return DAT_0085D51C;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqActionStopTrack::vfunc_00 (0x006F8250, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -7968,7 +8237,37 @@ SeqActionPlayTrack* SeqActionPlayTrack::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F8650 audio::SeqEventPlayTrack::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventPlayTrack::vfunc_03 (0x006F8650, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F8650
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventPlayTrack::vfunc_03 (0x006F8650, 6 bytes)
+extern "C" int DAT_0085D520;
+
+namespace audio {
+
+class SeqEventPlayTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventPlayTrack::vfunc_03()
+{
+    return DAT_0085D520;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventPlayTrack::vfunc_04 (0x006F8660, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -8133,7 +8432,37 @@ SeqActionChannelVolumes* SeqActionChannelVolumes::vfunc_00(int a1)
 }
 
 // [TODO] 0x006F8870 sub_006F8870 (83 B)
-// [TODO] 0x006F8930 audio::SeqEventChannelVolumes::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventChannelVolumes::vfunc_03 (0x006F8930, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F8930
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventChannelVolumes::vfunc_03 (0x006F8930, 6 bytes)
+extern "C" int DAT_0085D524;
+
+namespace audio {
+
+class SeqEventChannelVolumes
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventChannelVolumes::vfunc_03()
+{
+    return DAT_0085D524;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventChannelVolumes::vfunc_04 (0x006F8940, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -8394,7 +8723,37 @@ SeqActionVarVolumeRand* SeqActionVarVolumeRand::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F9060 audio::SeqEventVarVolumeRand::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarVolumeRand::vfunc_03 (0x006F9060, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F9060
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventVarVolumeRand::vfunc_03 (0x006F9060, 6 bytes)
+extern "C" int DAT_0085D52C;
+
+namespace audio {
+
+class SeqEventVarVolumeRand
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventVarVolumeRand::vfunc_03()
+{
+    return DAT_0085D52C;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventVarVolumeRand::vfunc_04 (0x006F9070, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -8616,7 +8975,37 @@ SeqActionVarVolume* SeqActionVarVolume::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F9280 audio::SeqEventVarVolume::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarVolume::vfunc_03 (0x006F9280, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F9280
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventVarVolume::vfunc_03 (0x006F9280, 6 bytes)
+extern "C" int DAT_0085D530;
+
+namespace audio {
+
+class SeqEventVarVolume
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventVarVolume::vfunc_03()
+{
+    return DAT_0085D530;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventVarVolume::vfunc_04 (0x006F9290, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -8891,7 +9280,37 @@ SeqActionVarTempo* SeqActionVarTempo::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F94B0 audio::SeqEventVarTempo::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarTempo::vfunc_03 (0x006F94B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F94B0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventVarTempo::vfunc_03 (0x006F94B0, 6 bytes)
+extern "C" int DAT_0085D534;
+
+namespace audio {
+
+class SeqEventVarTempo
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventVarTempo::vfunc_03()
+{
+    return DAT_0085D534;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventVarTempo::vfunc_04 (0x006F94C0, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9084,7 +9503,37 @@ SeqActionVarPosDist* SeqActionVarPosDist::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F96C0 audio::SeqEventVarPosDist::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarPosDist::vfunc_03 (0x006F96C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F96C0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventVarPosDist::vfunc_03 (0x006F96C0, 6 bytes)
+extern "C" int DAT_0085D538;
+
+namespace audio {
+
+class SeqEventVarPosDist
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventVarPosDist::vfunc_03()
+{
+    return DAT_0085D538;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventVarPosDist::vfunc_04 (0x006F96D0, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9279,7 +9728,37 @@ SeqActionVarPitchRand* SeqActionVarPitchRand::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F98B0 audio::SeqEventVarPitchRand::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarPitchRand::vfunc_03 (0x006F98B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F98B0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventVarPitchRand::vfunc_03 (0x006F98B0, 6 bytes)
+extern "C" int DAT_0085D53C;
+
+namespace audio {
+
+class SeqEventVarPitchRand
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventVarPitchRand::vfunc_03()
+{
+    return DAT_0085D53C;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventVarPitchRand::vfunc_04 (0x006F98C0, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9470,7 +9949,37 @@ SeqActionVarPitch* SeqActionVarPitch::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006F9AB0 audio::SeqEventVarPitch::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarPitch::vfunc_03 (0x006F9AB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F9AB0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventVarPitch::vfunc_03 (0x006F9AB0, 6 bytes)
+extern "C" int DAT_0085D540;
+
+namespace audio {
+
+class SeqEventVarPitch
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventVarPitch::vfunc_03()
+{
+    return DAT_0085D540;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventVarPitch::vfunc_04 (0x006F9AC0, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9711,7 +10220,37 @@ L_29:
 // [TODO] 0x006F9CB0 audio::SeqActionStream::vfunc_03 (52 B)
 // [TODO] 0x006F9CF0 sub_006F9CF0 (48 B)
 // [TODO] 0x006F9D20 sub_006F9D20 (247 B)
-// [TODO] 0x006F9E20 audio::SeqEventStream::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventStream::vfunc_03 (0x006F9E20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F9E20
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventStream::vfunc_03 (0x006F9E20, 6 bytes)
+extern "C" int DAT_0085D544;
+
+namespace audio {
+
+class SeqEventStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventStream::vfunc_03()
+{
+    return DAT_0085D544;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventStream::vfunc_04 (0x006F9E30, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9907,7 +10446,37 @@ void SeqActionSilence::vfunc_01(int a1)
 // [TODO] 0x006FA6A0 audio::SeqActionWaitBeat::vfunc_03 (15 B)
 // [TODO] 0x006FA6B0 audio::SeqActionWaitBeat::vfunc_04 (15 B)
 // [TODO] 0x006FA6C0 audio::SeqActionSilence::vfunc_05 (113 B)
-// [TODO] 0x006FA740 audio::SeqEventSilence::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventSilence::vfunc_03 (0x006FA740, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006FA740
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventSilence::vfunc_03 (0x006FA740, 6 bytes)
+extern "C" int DAT_0085D548;
+
+namespace audio {
+
+class SeqEventSilence
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventSilence::vfunc_03()
+{
+    return DAT_0085D548;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventSilence::vfunc_04 (0x006FA750, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -10177,7 +10746,37 @@ SeqEventLogicRepeat* SeqEventLogicRepeat::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x006FAAD0 audio::SeqEventLogicRepeat::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventLogicRepeat::vfunc_03 (0x006FAAD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006FAAD0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventLogicRepeat::vfunc_03 (0x006FAAD0, 6 bytes)
+extern "C" int DAT_0085D54C;
+
+namespace audio {
+
+class SeqEventLogicRepeat
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventLogicRepeat::vfunc_03()
+{
+    return DAT_0085D54C;
+}
+
+}
+
 // [TODO] 0x006FAAE0 sub_006FAAE0 (116 B)
 // ============================================================================
 // [VERIFIED] audio::SeqCommandLogicRepeat::vfunc_01 (0x006FAB60, 36 B)
@@ -10366,7 +10965,37 @@ void __cdecl sub_006FAD40(void)
     first.sub_006EBBD0();
 }
 
-// [TODO] 0x006FADC0 audio::SeqEventLogicOr::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventLogicOr::vfunc_03 (0x006FADC0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006FADC0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventLogicOr::vfunc_03 (0x006FADC0, 6 bytes)
+extern "C" int DAT_0085D554;
+
+namespace audio {
+
+class SeqEventLogicOr
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventLogicOr::vfunc_03()
+{
+    return DAT_0085D554;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventLogicOr::vfunc_04 (0x006FADD0, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -10567,7 +11196,37 @@ void __cdecl sub_006FB130(void)
     first.sub_006EBBD0();
 }
 
-// [TODO] 0x006FB240 audio::SeqEventCrossFade::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventCrossFade::vfunc_03 (0x006FB240, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006FB240
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventCrossFade::vfunc_03 (0x006FB240, 6 bytes)
+extern "C" int DAT_0085D558;
+
+namespace audio {
+
+class SeqEventCrossFade
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventCrossFade::vfunc_03()
+{
+    return DAT_0085D558;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventCrossFade::vfunc_04 (0x006FB250, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -10755,7 +11414,37 @@ L_24:
 }
 
 // [TODO] 0x006FB890 sub_006FB890 (217 B)
-// [TODO] 0x006FB970 audio::SeqEventClip::vfunc_03 (6 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventClip::vfunc_03 (0x006FB970, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006FB970
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventClip::vfunc_03 (0x006FB970, 6 bytes)
+extern "C" int DAT_0085D55C;
+
+namespace audio {
+
+class SeqEventClip
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventClip::vfunc_03()
+{
+    return DAT_0085D55C;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventClip::vfunc_04 (0x006FB980, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -12234,7 +12923,38 @@ d3dPrimBuffer* d3dPrimBuffer::vfunc_03(int a1)
 // [TODO] 0x00704420 pure3d::d3dPrimBufferStream::vfunc_20 (68 B)
 // [TODO] 0x00704470 pure3d::d3dPrimBufferStream::vfunc_19 (81 B)
 // [TODO] 0x00704770 sub_00704770 (346 B)
-// [TODO] 0x007048D0 pure3d::d3dErrorShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dErrorShader::vfunc_04 (0x007048D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x007048D0
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dErrorShader::vfunc_04 (0x007048D0, 6 bytes)
+extern "C" char DAT_007FB648[];
+
+namespace pure3d {
+
+class d3dErrorShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dErrorShader::vfunc_04()
+{
+    return DAT_007FB648;
+}
+
+}
+
 // [TODO] 0x007048E0 sub_007048E0 (50 B)
 // [TODO] 0x00704920 pure3d::d3dErrorShader::vfunc_15 (226 B)
 // [TODO] 0x00704A10 sub_00704A10 (36 B)
@@ -12374,7 +13094,38 @@ void* d3dReflShader::vfunc_19()
 
 }
 
-// [TODO] 0x00704A80 pure3d::d3dReflShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_04 (0x00704A80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00704A80
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dReflShader::vfunc_04 (0x00704A80, 6 bytes)
+extern "C" char DAT_007FB6AC[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dReflShader::vfunc_04()
+{
+    return DAT_007FB6AC;
+}
+
+}
+
 // [TODO] 0x00704A90 pure3d::d3dReflShader::vfunc_13 (164 B)
 // [TODO] 0x00704B40 pure3d::d3dReflShader::vfunc_14 (156 B)
 // [TODO] 0x00704BE0 sub_00704BE0 (49 B)
@@ -12482,7 +13233,38 @@ void* d3dPointSpriteShader::vfunc_18()
 
 }
 
-// [TODO] 0x00705080 pure3d::d3dPointSpriteShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_04 (0x00705080, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00705080
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dPointSpriteShader::vfunc_04 (0x00705080, 6 bytes)
+extern "C" char DAT_007FB8F4[];
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dPointSpriteShader::vfunc_04()
+{
+    return DAT_007FB8F4;
+}
+
+}
+
 // [TODO] 0x00705090 pure3d::d3dPointSpriteShader::vfunc_14 (54 B)
 // [TODO] 0x007050F0 sub_007050F0 (102 B)
 // [TODO] 0x00705160 pure3d::d3dPointSpriteShader::vfunc_03 (53 B)
@@ -12624,7 +13406,38 @@ void* d3dLayeredShader::vfunc_19()
 
 }
 
-// [TODO] 0x00705410 pure3d::d3dLayeredShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_04 (0x00705410, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00705410
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dLayeredShader::vfunc_04 (0x00705410, 6 bytes)
+extern "C" char DAT_00769BD0[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dLayeredShader::vfunc_04()
+{
+    return DAT_00769BD0;
+}
+
+}
+
 // [TODO] 0x00705420 pure3d::d3dLayeredShader::vfunc_24 (17 B)
 // ============================================================================
 // [VERIFIED] sub_00705430 (0x00705430, 1 B)
@@ -12650,7 +13463,38 @@ void __cdecl sub_00705430(void)
 // [TODO] 0x00705FA0 sub_00705FA0 (927 B)
 // [TODO] 0x00706340 pure3d::d3dLayeredShader::vfunc_25 (743 B)
 // [TODO] 0x00706680 pure3d::d3dSpecularShader::vfunc_24 (20 B)
-// [TODO] 0x007066A0 pure3d::d3dSpecularShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_04 (0x007066A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x007066A0
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dSpecularShader::vfunc_04 (0x007066A0, 6 bytes)
+extern "C" char DAT_007FBFE8[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dSpecularShader::vfunc_04()
+{
+    return DAT_007FBFE8;
+}
+
+}
+
 // [TODO] 0x007066B0 sub_007066B0 (1058 B)
 // [TODO] 0x00706AE0 sub_00706AE0 (147 B)
 // ============================================================================
@@ -12961,7 +13805,38 @@ void* d3dCharacterShader::vfunc_19()
 
 }
 
-// [TODO] 0x00707350 pure3d::d3dCharacterShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_04 (0x00707350, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00707350
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dCharacterShader::vfunc_04 (0x00707350, 6 bytes)
+extern "C" char DAT_0073E280[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dCharacterShader::vfunc_04()
+{
+    return DAT_0073E280;
+}
+
+}
+
 // [TODO] 0x00707360 pure3d::d3dShader::vfunc_22 (38 B)
 // [TODO] 0x00707390 pure3d::d3dCharacterShader::vfunc_24 (17 B)
 // ============================================================================
@@ -13000,7 +13875,38 @@ void __cdecl sub_00707D80(void)
 // [TODO] 0x00707D90 pure3d::d3dCharacterShader::vfunc_25 (58 B)
 // [TODO] 0x00707DD0 sub_00707DD0 (50 B)
 // [TODO] 0x00707E60 sub_00707E60 (57 B)
-// [TODO] 0x00707EA0 pure3d::d3dVehicleShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_04 (0x00707EA0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00707EA0
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dVehicleShader::vfunc_04 (0x00707EA0, 6 bytes)
+extern "C" char DAT_007331B0[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dVehicleShader::vfunc_04()
+{
+    return DAT_007331B0;
+}
+
+}
+
 // [TODO] 0x00707EB0 pure3d::d3dVehicleShader::vfunc_36 (35 B)
 // [TODO] 0x00707EE0 pure3d::d3dVehicleShader::vfunc_37 (15 B)
 // ============================================================================
@@ -13320,7 +14226,38 @@ void* d3dShadowShader::vfunc_19()
 
 }
 
-// [TODO] 0x00708F90 pure3d::d3dShadowShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_04 (0x00708F90, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00708F90
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dShadowShader::vfunc_04 (0x00708F90, 6 bytes)
+extern "C" char DAT_0072F5B0[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dShadowShader::vfunc_04()
+{
+    return DAT_0072F5B0;
+}
+
+}
+
 // [TODO] 0x00708FA0 pure3d::d3dShadowShader::vfunc_15 (136 B)
 // [TODO] 0x00709030 sub_00709030 (44 B)
 // [TODO] 0x00709060 pure3d::d3dShadowShader::vfunc_03 (53 B)
@@ -13460,13 +14397,75 @@ void* d3dShadowDecalShader::vfunc_19()
 
 }
 
-// [TODO] 0x007090E0 pure3d::d3dShadowDecalShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_04 (0x007090E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x007090E0
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dShadowDecalShader::vfunc_04 (0x007090E0, 6 bytes)
+extern "C" char DAT_00769C04[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dShadowDecalShader::vfunc_04()
+{
+    return DAT_00769C04;
+}
+
+}
+
 // [TODO] 0x007090F0 pure3d::d3dShadowDecalShader::vfunc_14 (23 B)
 // [TODO] 0x00709110 sub_00709110 (83 B)
 // [TODO] 0x00709170 pure3d::d3dShadowDecalShader::vfunc_03 (53 B)
 // [TODO] 0x007091B0 pure3d::d3dShadowDecalShader::vfunc_15 (408 B)
 // [TODO] 0x00709350 sub_00709350 (25 B)
-// [TODO] 0x00709370 pure3d::d3dDecalShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dDecalShader::vfunc_04 (0x00709370, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00709370
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dDecalShader::vfunc_04 (0x00709370, 6 bytes)
+extern "C" char DAT_00769C24[];
+
+namespace pure3d {
+
+class d3dDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dDecalShader::vfunc_04()
+{
+    return DAT_00769C24;
+}
+
+}
+
 // [TODO] 0x00709380 pure3d::d3dDecalShader::vfunc_15 (171 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dDecalShader::vfunc_14 (0x00709430, 5 B)
@@ -13539,7 +14538,38 @@ d3dDecalShader* d3dDecalShader::vfunc_03(int a1)
 
 }
 
-// [TODO] 0x00709470 pure3d::d3dVertexFadeShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_04 (0x00709470, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00709470
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dVertexFadeShader::vfunc_04 (0x00709470, 6 bytes)
+extern "C" char DAT_007FC9FC[];
+
+namespace pure3d {
+
+class d3dVertexFadeShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dVertexFadeShader::vfunc_04()
+{
+    return DAT_007FC9FC;
+}
+
+}
+
 // [TODO] 0x00709480 pure3d::ParticleEmitter::vfunc_33 (44 B)
 // [TODO] 0x007094B0 pure3d::d3dVertexFadeShader::vfunc_24 (20 B)
 // [TODO] 0x007094D0 sub_007094D0 (1239 B)

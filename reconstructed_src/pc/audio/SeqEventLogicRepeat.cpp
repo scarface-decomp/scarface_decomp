@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/SeqEventLogicRepeat.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/SeqEventLogicRepeat.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 5 functions matched (20.00%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 5 functions matched (40.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -38,6 +38,37 @@ SeqEventLogicRepeat* SeqEventLogicRepeat::vfunc_04(int a1)
         sub_006EE890((int)DAT_007F7CF8, (int)this);
     }
     return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqEventLogicRepeat::vfunc_03 (0x006FAAD0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventNestTrack::vfunc_03 (PC 0x006F6960), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006FAAD0
+// what: Returns a value kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of pc 0x006DF7F0, names and addresses swapped)
+// audio::SeqEventLogicRepeat::vfunc_03 (0x006FAAD0, 6 bytes)
+extern "C" int DAT_0085D54C;
+
+namespace audio {
+
+class SeqEventLogicRepeat
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int SeqEventLogicRepeat::vfunc_03()
+{
+    return DAT_0085D54C;
 }
 
 }

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/FEGroupObject.cpp (11 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/FEGroupObject.cpp (13 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11 of 20 functions matched (55.00%). NOT COMPLETE YET.
-// The 9 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 13 of 20 functions matched (65.00%). NOT COMPLETE YET.
+// The 7 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -482,6 +482,103 @@ public:
 void FEGroupObject::vfunc_22(int a1)
 {
     sub_00029F20((int)this, a1, (int)(&m_Field20), 8);
+}
+
+// ============================================================================
+// [VERIFIED] FEGroupObject::vfunc_24 (0x00027790, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Calls a function with this object and one of its fields.
+// ============================================================================
+// bin: proto
+// va: 0x00027790
+// what: Calls a function with this object and one of its fields.
+// tool: Claude Fable 5.2 (look-alike of xb 0x00029F40, names and addresses swapped)
+// FEGroupObject::vfunc_24 (0x00027790, 14 bytes)
+extern "C" void __cdecl sub_00029D60(int, int);
+
+class FEGroupObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+};
+
+void FEGroupObject::vfunc_24()
+{
+    sub_00029D60((int)this, (int)(&m_Field20));
+}
+
+// ============================================================================
+// [VERIFIED] FEGroupObject::vfunc_25 (0x000277A0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Calls a function on a part of this object, with 8.
+// ============================================================================
+// bin: proto
+// va: 0x000277A0
+// what: Calls a function on a part of this object, with 8.
+// tool: Claude Fable 5.2 (look-alike of xb 0x00029F50, names and addresses swapped)
+// FEGroupObject::vfunc_25 (0x000277A0, 15 bytes)
+extern "C" void __cdecl sub_00029DC0(int, int);
+
+class FEGroupObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+};
+
+void FEGroupObject::vfunc_25()
+{
+    sub_00029DC0((int)this + 32, 8);
 }
 
 // ============================================================================

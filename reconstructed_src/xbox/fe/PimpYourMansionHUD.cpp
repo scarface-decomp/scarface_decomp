@@ -1,13 +1,66 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/PimpYourMansionHUD.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/PimpYourMansionHUD.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 11 functions matched (27.27%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 11 functions matched (45.45%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] PimpYourMansionHUD::vfunc_00 (0x001B68C0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Steps back to the object this one is part of and calls one of its functions with 0.
+// ============================================================================
+// bin: xb
+// va: 0x001B68C0
+// what: Steps back to the object this one is part of and calls one of its functions with 0.
+// tool: Claude Fable 5.2 (look-alike of 0x001B2250, names and addresses swapped)
+// PimpYourMansionHUD::vfunc_00 (0x001B68C0, 11 bytes)
+struct Object
+{
+    void sub_001B6010(int);
+};
+
+class PimpYourMansionHUD
+{
+public:
+    virtual void vfunc_00();
+};
+
+void PimpYourMansionHUD::vfunc_00()
+{
+    ((Object*)(int)this + -104)->sub_001B6010(0);
+}
+
+// ============================================================================
+// [VERIFIED] PimpYourMansionHUD::vfunc_01 (0x001B68D0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Steps back to the object this one is part of and calls one of its functions with 0.
+// ============================================================================
+// bin: xb
+// va: 0x001B68D0
+// what: Steps back to the object this one is part of and calls one of its functions with 0.
+// tool: Claude Fable 5.2 (look-alike of 0x001B2250, names and addresses swapped)
+// PimpYourMansionHUD::vfunc_01 (0x001B68D0, 11 bytes)
+struct Object
+{
+    void sub_001B6090(int);
+};
+
+class PimpYourMansionHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+void PimpYourMansionHUD::vfunc_01()
+{
+    ((Object*)(int)this + -104)->sub_001B6090(0);
+}
 
 // ============================================================================
 // [VERIFIED] PimpYourMansionHUD::vfunc_00 (0x001BADF0, 37 B)

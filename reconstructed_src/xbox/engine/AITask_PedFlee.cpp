@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AITask_PedFlee.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AITask_PedFlee.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 10 functions matched (10.00%). NOT COMPLETE YET.
-// The 9 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 10 functions matched (20.00%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -30,5 +30,31 @@ public:
 void* AITask_PedFlee::vfunc_00()
 {
     return DAT_004294FC;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_PedFlee::vfunc_03 (0x001095B0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a fixed number kept in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x001095B0
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// AITask_PedFlee::vfunc_03 (0x001095B0, 7 bytes)
+extern "C" float DAT_003A01E8;
+
+class AITask_PedFlee
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual float vfunc_03();
+};
+
+float AITask_PedFlee::vfunc_03()
+{
+    return DAT_003A01E8;
 }
 
