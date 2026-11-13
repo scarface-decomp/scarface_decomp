@@ -425,3 +425,19 @@ game's own text and type information. Keep each step small; open questions in a 
   controllers scanned, which is the same bytes as a float or a u32. `p3d.py` reads it as a float, as the spec
   says, and FORMATS.md says it is 0 in every PC file. The u32 after it is 1 in all of them.
 
+*After building item 2, the sampler (`portal/tools/anim_sampler.py`), run on the PC's files:*
+
+* **The sun (§1.2): as the spec says.** `PTRN_sky` in `packages/z04/Common.p3d` is 241 frames at 30 a second
+  and loops. Its group `sun_grp` has a Quaternion channel `ROT` with 21 keys; the keys at frames 153 and 154
+  are the same turn with every sign reversed (their dot product is -1.0), and they are the only such pair. The
+  sampler's values from 153 to 153.75 stay beside the key at 153, as the shorter-way rule requires; a straight
+  blend of the two keys would pass through nearly zero.
+* **A door's `opening` (§1.1, §1.3):** `PTRN_doorDoubleB` in `luxuryhotel_02_shell.p3d` is 21 frames, plays
+  once, and has two groups (the two leaves), each a Quaternion channel with keys at 0 and 20. The prop's
+  `opening` state plays frames 0 to 20 of it. The sampler blends between the keys and holds the last value
+  from frame 20 on, including past the animation's length.
+* **A question for the examiner:** the animation's length is 241 (and 21) while its last key is at 240 (and
+  20). For a looping animation the sampler wraps at the length as §1.3 says, so frames 240 to 241 hold the
+  last key before wrapping to the first. Is that what the game does, or does it blend from the last key back
+  to the first across that last frame?
+
