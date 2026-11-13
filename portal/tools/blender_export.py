@@ -144,8 +144,8 @@ def _glb_box(glb: bytes) -> Optional[Tuple[List[float], List[float]]]:
 
     def walk(i: int, off: List[float]) -> None:
         n = doc["nodes"][i]
-        if (n.get("extras") or {}).get("ocean"):
-            return                                       # the sea reaches far past what it is round
+        if (n.get("extras") or {}).get("ocean") or (n.get("extras") or {}).get("occluder"):
+            return                                       # the sea reaches far past what it is round; occluders are unseen
         t = n["matrix"][12:15] if "matrix" in n else n.get("translation", [0, 0, 0])
         o = [off[k] + t[k] for k in range(3)]
         if "mesh" in n:
@@ -1387,8 +1387,9 @@ def game_looks(scene):
     # What the exports leave in extras (docs/FORMATS.md, "Exporting to Blender"): how the game puts each
     # see-through surface over what is behind it ("blend"), and which it draws without writing depth
     # ("depthWrite"); then the shadow decals, the low-detail hull (switched off when the export says it is
-    # "hidden": it would cover the detailed areas), the far-away stand-ins (always "hidden", so switched off)
-    # and the sea, each in a collection of its own.
+    # "hidden": it would cover the detailed areas), the far-away stand-ins (always "hidden", so switched off),
+    # the occluders (invisible in the game: switched off, and drawn as wireframe boxes when switched on) and the
+    # sea, each in a collection of its own.
     for mat in list(bpy.data.materials):
         blend, depth = own(mat, "blend"), own(mat, "depthWrite")
         depth = True if depth is None else bool(depth)
@@ -1403,11 +1404,17 @@ def game_looks(scene):
                 see_through(mat, depth)
         except Exception:
             traceback.print_exc()
-    groups = {"Shadow decals": [], "Low-detail hull": [], "Far-away stand-ins": [], "Sea": []}
+    groups = {"Shadow decals": [], "Low-detail hull": [], "Far-away stand-ins": [], "Occluders": [], "Sea": []}
     hidden = False
     for o in list(scene.objects):
         if own(o, "shadowDecal"):
             groups["Shadow decals"].append(o)
+        elif own(o, "occluder"):
+            groups["Occluders"].append(o)
+            try:
+                o.display_type = "WIRE"
+            except Exception:
+                pass
         elif own(o, "lowDetailHull") and not far_away(o):
             groups["Low-detail hull"] += [o] + below(o)
             hidden = hidden or bool(own(o, "hidden"))
@@ -1415,7 +1422,7 @@ def game_looks(scene):
             groups["Far-away stand-ins"] += [o] + below(o)
         elif own(o, "ocean"):
             groups["Sea"].append(o)
-    off = {"Low-detail hull": hidden, "Far-away stand-ins": True}
+    off = {"Low-detail hull": hidden, "Far-away stand-ins": True, "Occluders": True}
     for name, objects in groups.items():
         try:
             gather(scene, name, objects, shown=not off.get(name))

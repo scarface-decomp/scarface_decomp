@@ -1999,6 +1999,7 @@ def test_shadow_decals_go_in_a_node_of_their_own():
     line = next(line for line in report.lines() if "shadow decal" in line)
     assert report.shadow_decals == 1 and line.startswith("1 shadow decal(s), each in a node of its own marked shadowDecal")
     assert "the Xbox draws them" in line and "the PC is reported not to show them" in line and "never" not in line
+    assert "their alpha times 165/255" in line and "by 65 % at most" in line
     # a mesh that is nothing but a shadow decal (the blobs under the cars and the people): the node itself
     doc, _ = read_glb(export(p3d(decal, mesh("vehicleShadowDecalShape", shader=name)))[0])
     assert node_named(doc, "vehicleShadowDecalShape")["extras"] == {"shadowDecal": True}
@@ -2409,4 +2410,119 @@ def test_a_city_from_before_the_properties_is_made_again(monkeypatch, tmp_path):
     import blender_export as BX
     monkeypatch.delenv(G.LOOK_ENV, raising=False)
     (tmp_path / "made_by.txt").write_text("9", encoding="utf-8")
-    assert G.EXPORT_VERSION == 10 and not BX.city_current(tmp_path)
+    assert G.EXPORT_VERSION >= 10 and not BX.city_current(tmp_path)
+
+
+# --------------------------------------------------------------------------- shadow decals' limit and occluders
+# (SPEC-003, part 3)
+
+def test_a_shadow_decal_darkens_by_65_percent_at_most():
+    """The Xbox darkens by a decal's coverage times 165/255: its material's alpha is times that, its picture as it is."""
+    name = "LocalShader_shadowdecal.TGA_shadowdecal_blmd1_mcbv0_lit0_alpha1_atst0_alum0_2sid0"
+    black = bytes([0, 0, 0, 255, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 255])
+    shaders = [shader_chunk("blob", "shadowdecal", ints=[("BLMD", 1)], tex="blob.tga"),
+               shader_chunk("lost", "shadowdecal", ints=[("BLMD", 1)], tex="gone.tga"),
+               shader_chunk("pane", ints=[("BLMD", 1)], tex="blob.tga")]
+    data = p3d(picture("blob.tga", 2, 2, black), picture("shadowdecal.TGA", 2, 2, black), *shaders,
+               *(mesh("m_" + s, shader=s) for s in ("blob", "lost", "pane")), mesh("m_named", shader=name))
+    doc, binc = read_glb(export(data)[0])
+    mats = by_name(doc)
+    assert mats["blob"]["pbrMetallicRoughness"]["baseColorFactor"] == [1.0, 1.0, 1.0, 0.6471]
+    assert image_pixels(doc, binc, mats["blob"]) == black                    # the picture unchanged
+    # a decal whose picture the files lack: the dark glass, its alpha times 165/255 too, the constant untouched
+    assert mats["lost"]["pbrMetallicRoughness"]["baseColorFactor"] == [0.10, 0.13, 0.15, round(0.45 * 165 / 255, 4)]
+    assert G.MISSING_GLASS == [0.10, 0.13, 0.15, 0.45]
+    assert mats[name]["pbrMetallicRoughness"]["baseColorFactor"][3] == 0.6471   # known only by its name
+    assert "baseColorFactor" not in mats["pane"]["pbrMetallicRoughness"]       # other see-through surfaces: as before
+
+
+def occluder(position, facing, flags, sizes, value=0.0):
+    """An Occluder (0x0880000A): 44 bytes, no name."""
+    return chunk(0x880000A, struct.pack("<6fIf3f", *position, *facing, flags, value, *sizes))
+
+
+def boxed_area():
+    """A made-up area with two occluders, a wall along Z (2 wide, 8 long, its middle 4 up) and a low one, and a
+    damaged one cut short, last in the file."""
+    return with_chunks(area("shells_a"), occluder((10.0, 4.0, -20.0), (0.0, 0.0, 1.0), 0, (2.0, 6.0, 8.0)),
+                       occluder((-5.0, 0.0, 3.0), (0.6, 0.0, 0.8), 1, (4.0, 1.0, 2.0)),
+                       chunk(0x880000A, struct.pack("<3f", 1.0, 2.0, 3.0)))
+
+
+def test_occluders_come_in_as_hidden_boxes():
+    glb, report = export(boxed_area(), map_mode=True, ocean=True)
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    group = node_named(doc, "main0 occluders")
+    assert doc["nodes"].index(group) in node_named(doc, "main0")["children"]
+    wall, low = (doc["nodes"][c] for c in group["children"])               # the damaged one is left out
+    assert (wall["name"], low["name"]) == ("occluder 1", "occluder 2")
+    # lined up with the world's axes, the position +- half of each size, the bottom put at -1; Z mirrored
+    assert wall["translation"] == pytest.approx([10.0, 3.0, 20.0]) and wall["scale"] == pytest.approx([2.0, 8.0, 8.0])
+    assert low["translation"] == pytest.approx([-5.0, -0.25, -3.0]) and low["scale"] == pytest.approx([4.0, 1.5, 2.0])
+    assert "rotation" not in wall                                          # the way it faces doesn't turn it
+    assert wall["extras"] == {"occluder": {"facing": [0.0, 0.0, 1.0], "flags": 0}, "hidden": True}
+    assert low["extras"] == {"occluder": {"facing": [0.6, 0.0, 0.8], "flags": 1}, "hidden": True}
+    # one unit cube for all, its faces turned outwards, with an untextured see-through material
+    assert wall["mesh"] == low["mesh"]
+    prim = doc["meshes"][wall["mesh"]]["primitives"][0]
+    corners = values(doc, binc, prim["attributes"]["POSITION"])
+    assert sorted(corners) == sorted((x, y, z) for x in (-0.5, 0.5) for y in (-0.5, 0.5) for z in (-0.5, 0.5))
+    faces = [i for (i,) in values(doc, binc, prim["indices"])]
+    assert len(faces) == 36
+    for k in range(0, 36, 3):
+        a, b, c = (corners[i] for i in faces[k:k + 3])
+        n = G._cross([b[j] - a[j] for j in range(3)], [c[j] - a[j] for j in range(3)])
+        middle = [(a[j] + b[j] + c[j]) / 3 for j in range(3)]
+        assert sum(n[j] * middle[j] for j in range(3)) > 0                  # pointing away from the middle
+    mat = doc["materials"][prim["material"]]
+    assert mat["alphaMode"] == "BLEND" and "baseColorTexture" not in mat["pbrMetallicRoughness"]
+    assert [line for line in report.lines() if "occluder" in line] == [
+        "main0: 2 occluder(s), as hidden boxes: invisible in the game, which uses them only to skip drawing what is behind them"]
+    # they aren't part of what the scene shows: the box the sea is laid round, and the one the city goes by
+    plain, plain_report = export(area("shells_a"), map_mode=True, ocean=True)
+    assert report.box == plain_report.box
+    import blender_export as BX
+    assert BX._glb_box(glb) == BX._glb_box(plain)
+
+
+def test_an_area_without_occluders_is_as_before_and_only_leaves_them_out():
+    doc, _ = read_glb(export(area("shells_a"), map_mode=True)[0])
+    assert "occluder" not in json.dumps(doc) and len(doc["meshes"]) == 1 and len(doc["materials"]) == 1
+    doc, _ = read_glb(export(boxed_area(), map_mode=True, only=["shells_a"])[0])  # just these models: no occluders
+    assert "occluder" not in json.dumps(doc)
+
+
+def test_the_blender_scene_puts_the_occluders_in_a_switched_off_wireframe_collection(monkeypatch):
+    import sys
+    import types
+    import blender_export as BX
+    layers: list = []
+    monkeypatch.setattr(FakeCollection, "layers", layers)
+    bpy = types.SimpleNamespace(
+        app=types.SimpleNamespace(background=False, timers=types.SimpleNamespace(register=lambda *a, **k: None)),
+        data=types.SimpleNamespace(materials=[], collections=types.SimpleNamespace(new=FakeCollection)),
+        context=types.SimpleNamespace(view_layer=types.SimpleNamespace(layer_collection=types.SimpleNamespace(children=layers))))
+    monkeypatch.setitem(sys.modules, "bpy", bpy)
+    ns: dict = {}
+    exec(compile(BX.OPEN_SCRIPT % {"files": [], "save": None, "fps": 30}, "open_in_blender.py", "exec"), ns)
+    boxes = [FakeObject(f"occluder {i}", occluder={"facing": [0, 0, 1], "flags": 0}, hidden=1) for i in (1, 2)]
+    group, street = FakeObject("main0 occluders", boxes), FakeObject("shells_a")
+    scene = types.SimpleNamespace(collection=FakeCollection("Scene Collection"))
+    for o in [group, *boxes, street]:
+        scene.collection.objects.link(o)
+    scene.objects = [group, *boxes, street]
+    layers.clear()
+    ns["game_looks"](scene)
+    made = {c.collection.name: c for c in layers}
+    assert sorted(made) == ["Occluders"]                                   # hidden, but not far-away stand-ins
+    assert list(made["Occluders"].collection.objects) == boxes and made["Occluders"].exclude is True
+    assert all(o.display_type == "WIRE" for o in boxes)
+    assert group.users_collection == [scene.collection] and street.users_collection == [scene.collection]
+
+
+def test_a_city_from_before_the_occluders_is_made_again(monkeypatch, tmp_path):
+    import blender_export as BX
+    monkeypatch.delenv(G.LOOK_ENV, raising=False)
+    (tmp_path / "made_by.txt").write_text("10", encoding="utf-8")
+    assert G.EXPORT_VERSION == 11 and not BX.city_current(tmp_path)
