@@ -134,7 +134,9 @@ def test_the_cast_on_their_map_with_a_weapon_in_hand():
     assert "w_street" in report.models and "Thug1" in report.models and "hector" in report.models    # the street, and the cast on it
     assert ("person", "CharTemp_hector") in asked                             # nobody loaded him: his template has his name
     hand = next(n for n in doc["nodes"] if n["name"] == "right_hand_attach" and "children" in n)
-    assert "Thug1's metal_pipe" in [doc["nodes"][c]["name"] for c in hand["children"]]
+    grip = doc["nodes"][hand["children"][0]]                                  # the quarter turn that lays it along the hand
+    assert grip["name"] == "Thug1's grip" and grip["rotation"] == pytest.approx([0, -0.70710678, 0, 0.70710678])
+    assert "Thug1's metal_pipe" in [doc["nodes"][c]["name"] for c in grip["children"]]
     assert names.count("right_hand_attach") == 2 and not report.missing_drawables
     assert [a["name"] for a in doc["animations"]] == ["Cutscene T"]           # the map's own animations don't come first
 
@@ -274,3 +276,29 @@ def test_the_face_moves_in_a_cutscene():
     sm = doc["animations"][0]["samplers"][ch["sampler"]]
     assert [t for (t,) in values(doc, binc, sm["input"])] == pytest.approx([0.0, 1.0])
     assert [w for (w,) in values(doc, binc, sm["output"])] == pytest.approx([0.0, 0.0, 0.0, 1.0])     # the lip rises
+
+
+def test_people_are_stood_on_the_maps_floor():
+    """The script puts someone a few centimetres off the floor; the map's surface nearest to that height, under
+    the spot, is where they stand. A ceiling, a floor far below, or no map at all changes nothing."""
+    b = G.Builder(G.Library())
+    def slab(name, y, at=(0.0, 0.0)):
+        x, z = at
+        quad = [(x - 5, y, z - 5), (x + 5, y, z - 5), (x - 5, y, z + 5), (x + 5, y, z + 5)]
+        prim = {"attributes": {"POSITION": b.g.accessor(quad, "VEC3", bounds=True)},
+                "indices": b.g.accessor([0, 1, 2, 2, 1, 3], "SCALAR", 5123), "mode": 4}
+        b.g.node(name, mesh=b.g.add("meshes", {"name": name, "primitives": [prim]}))
+    slab("floor", 16.245)
+    slab("cellar", 12.0)
+    slab("ceiling", 19.0)
+    slab("next door", 3.0, at=(50.0, 0.0))
+    moved = b.g.node("lifted", translation=[0.0, 0.1, 0.0])
+    b.g.doc["nodes"][moved]["children"] = [len(b.g.doc["nodes"])]
+    slab("step", 16.3, at=(20.0, 0.0))                                        # under a node that lifts it to 16.4
+    ground = C.Ground(b)
+    assert ground.height(1.0, 16.2127, -2.0) == pytest.approx(16.245)
+    assert ground.height(1.0, 12.3, -2.0) == pytest.approx(12.0)              # the nearest one to where they are
+    assert ground.height(1.0, 17.5, -2.0) is None                             # nothing within reach
+    assert ground.height(21.0, 16.2, 1.0) == pytest.approx(16.4)
+    assert ground.height(200.0, 16.2, 0.0) is None and C.Ground(G.Builder(G.Library())).height(0, 0, 0) is None
+

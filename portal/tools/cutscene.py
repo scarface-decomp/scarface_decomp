@@ -294,6 +294,101 @@ def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[t
 
 
 HAND = "right_hand_attach"             # the joint a person's weapon hangs on
+# A weapon's model has its grip at its own origin and its barrel along its own forward axis (its muzzle
+# joint says so). In the hand, the barrel lies along the hand joint's own sideways axis instead, towards
+# the fingers: a quarter turn. Measured from the cutscenes: someone with a rifle keeps the other hand a
+# fixed 0.34 m along that axis from the hand joint, the length of a rifle from grip to handguard.
+GRIP = (0.0, -0.7071067811865476, 0.0, 0.7071067811865476)       # as glTF's rotation
+
+
+class Ground:
+    """The map's surfaces in a scene being built, for standing people on. A script places someone a few
+    centimetres off the floor (the game sets them on the ground itself); height() finds the floor."""
+
+    def __init__(self, b: G.Builder) -> None:
+        self.g = b.g
+        self.upto = len(b.g.doc["nodes"])                    # the map is what was there before the cast
+        self._world: Dict[int, List[List[float]]] = {}
+        self._parent: Optional[Dict[int, int]] = None
+        self._tris: Dict[Tuple[int, int], List[Tuple[G.Vec3, G.Vec3, G.Vec3]]] = {}
+
+    def _matrix(self, i: int) -> List[List[float]]:
+        if i in self._world:
+            return self._world[i]
+        nodes = self.g.doc["nodes"]
+        if self._parent is None:
+            self._parent = {c: k for k, n in enumerate(nodes[:self.upto]) for c in n.get("children", [])}
+        n = nodes[i]
+        if "matrix" in n:
+            m = [[n["matrix"][c * 4 + r] for c in range(4)] for r in range(4)]
+        else:
+            x, y, z, w = n.get("rotation", (0.0, 0.0, 0.0, 1.0))
+            sx, sy, sz = n.get("scale", (1.0, 1.0, 1.0))
+            tx, ty, tz = n.get("translation", (0.0, 0.0, 0.0))
+            m = [[(1 - 2 * (y * y + z * z)) * sx, 2 * (x * y - z * w) * sy, 2 * (x * z + y * w) * sz, tx],
+                 [2 * (x * y + z * w) * sx, (1 - 2 * (x * x + z * z)) * sy, 2 * (y * z - x * w) * sz, ty],
+                 [2 * (x * z - y * w) * sx, 2 * (y * z + x * w) * sy, (1 - 2 * (x * x + y * y)) * sz, tz],
+                 [0.0, 0.0, 0.0, 1.0]]
+        up = self._parent.get(i)
+        if up is not None:
+            p = self._matrix(up)
+            m = [[sum(p[r][k] * m[k][c] for k in range(4)) for c in range(4)] for r in range(4)]
+        self._world[i] = m
+        return m
+
+    def _read(self, index: int, code: str, width: int) -> List:
+        acc = self.g.doc["accessors"][index]
+        view = self.g.doc["bufferViews"][acc["bufferView"]]
+        at = view.get("byteOffset", 0) + acc.get("byteOffset", 0)
+        flat = struct.unpack_from(f"<{acc['count'] * width}{code}", self.g.bin, at)
+        return [flat[k:k + width] for k in range(0, len(flat), width)] if width > 1 else list(flat)
+
+    def height(self, x: float, y: float, z: float, reach: float = 0.5) -> Optional[float]:
+        """The height of the map's surface at x, z that is nearest to y, within reach; None when there is
+        none (no map, or nothing under the spot)."""
+        doc = self.g.doc
+        best: Optional[float] = None
+        for i, n in enumerate(doc["nodes"][:self.upto]):
+            if "mesh" not in n or "skin" in n:
+                continue
+            m = None
+            for pi, prim in enumerate(doc["meshes"][n["mesh"]]["primitives"]):
+                acc = doc["accessors"][prim["attributes"]["POSITION"]]
+                if prim.get("mode", 4) != 4 or "indices" not in prim or "min" not in acc:
+                    continue
+                m = m or self._matrix(i)
+                lo, hi = acc["min"], acc["max"]
+                corners = [[sum(m[r][k] * v for k, v in enumerate((cx, cy, cz))) + m[r][3] for r in range(3)]
+                           for cx in (lo[0], hi[0]) for cy in (lo[1], hi[1]) for cz in (lo[2], hi[2])]
+                if not (min(c[0] for c in corners) <= x <= max(c[0] for c in corners)
+                        and min(c[2] for c in corners) <= z <= max(c[2] for c in corners)
+                        and min(c[1] for c in corners) - reach <= y <= max(c[1] for c in corners) + reach):
+                    continue
+                key = (i, pi)
+                if key not in self._tris:
+                    pts = [tuple(sum(m[r][k] * v for k, v in enumerate(p)) + m[r][3] for r in range(3))
+                           for p in self._read(prim["attributes"]["POSITION"], "f", 3)]
+                    ia = doc["accessors"][prim["indices"]]
+                    idx = self._read(prim["indices"], {5123: "H", 5125: "I", 5121: "B"}[ia["componentType"]], 1)
+                    self._tris[key] = [(pts[idx[k]], pts[idx[k + 1]], pts[idx[k + 2]])
+                                       for k in range(0, len(idx) - 2, 3)]
+                for a, b_, c in self._tris[key]:
+                    if (min(a[0], b_[0], c[0]) > x or max(a[0], b_[0], c[0]) < x
+                            or min(a[2], b_[2], c[2]) > z or max(a[2], b_[2], c[2]) < z):
+                        continue
+                    ux, uy, uz = b_[0] - a[0], b_[1] - a[1], b_[2] - a[2]
+                    vx, vy, vz = c[0] - a[0], c[1] - a[1], c[2] - a[2]
+                    den = ux * vz - vx * uz
+                    if abs(den) < 1e-12:
+                        continue                             # a wall: no height of its own here
+                    s = ((x - a[0]) * vz - vx * (z - a[2])) / den
+                    t = (ux * (z - a[2]) - (x - a[0]) * uz) / den
+                    if s < -1e-6 or t < -1e-6 or s + t > 1 + 1e-6:
+                        continue
+                    h = a[1] + s * uy + t * vy
+                    if abs(h - y) <= reach and (best is None or abs(h - y) < abs(best - y)):
+                        best = h
+        return best
 WEAPON = re.compile(r"^WeaponTemplate", re.I)
 
 
@@ -397,12 +492,13 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
     def cast(b: G.Builder) -> None:
         b._animations = None                                 # the stream files came after the map's
         tracks = _Tracks(b)
+        ground = Ground(b)
         loaded: Dict[str, Optional[G.Source]] = {}
         scenes = [(name, script)] + [(n, s) for n, s, _st in then]
         spans = []
         start = 0.0
         for n, sc in scenes:
-            went_in, nodes, length = _cast(b, lib, n, sc, model, tracks, loaded, start)
+            went_in, nodes, length = _cast(b, lib, n, sc, model, tracks, loaded, start, ground)
             found.extend(went_in)
             spans.append((nodes, start, start + length))
             start += length
@@ -461,7 +557,8 @@ def _person(b: G.Builder, lib: G.Library, src: G.Source, spot: int, label: str) 
 
 def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
           model: Callable[[str, str], Optional[Tuple[str, bytes]]], tracks: _Tracks,
-          loaded: Dict[str, Optional[G.Source]], start: float) -> Tuple[List[str], List[int], float]:
+          loaded: Dict[str, Optional[G.Source]], start: float,
+          ground: Optional[Ground] = None) -> Tuple[List[str], List[int], float]:
     """Puts one cutscene's people, vehicles and camera into b's scene, its animations beginning at start
     (seconds): who went in, their nodes, and how long it runs."""
     root = b.g.node(name)
@@ -496,7 +593,11 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             left_out.append(label)
             continue
         at, facing = script.stands.get(who, ((0.0, 0.0, 0.0), 0.0))
-        spot = b.g.node(label, root, translation=list(G.pos(at)), rotation=list(facing_rotation(facing)))
+        stand = list(G.pos(at))
+        floor = ground.height(*stand) if ground is not None and who in script.stands else None
+        if floor is not None:                                # on the floor, not the few centimetres in it
+            stand[1] = floor
+        spot = b.g.node(label, root, translation=stand, rotation=list(facing_rotation(facing)))
         before = len(b.g.doc["nodes"])
         copy = _person(b, lib, src, spot, label)
         if copy is None:
@@ -512,7 +613,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             wanted = weapon_model(script.holds[who], names)
             gref = lib.find("composite", wanted, (guns,)) if wanted and guns else None
             if gref:
-                b.composite(gref, hand, label + "'s " + wanted)
+                b.composite(gref, b.g.node(label + "'s grip", hand, rotation=list(GRIP)), label + "'s " + wanted)
             else:
                 left_out.append(label + "'s " + WEAPON.sub("", script.holds[who]))
         if who in script.faces:                              # the lips, brows and eyelids
