@@ -63,6 +63,14 @@ The names come in the order the files are stored, so the i-th name belongs to th
 the i-th lowest offset (an empty file comes before a file that starts where it does). Paths use `\`.
 Layout first published by the [STWIY ToolKit](https://github.com/STWIY/ToolKit).
 
+**The name hash.** The directory is sorted by a hash of each file's path, as the name table has it: one leading
+`\` skipped, then for each character, taken as a signed byte, 0x20 added when it is below `a` (0x61), and the
+hash becomes hash x 31 + that, kept to 32 bits (0 for an empty path). That folds `A`-`Z` to lower case, and
+shifts `0`-`9`, `.`, `\`, `_` and the rest too. The Xbox game's `sub_00251310` is this hash
+([SPEC-004](cleanroom/SPEC-004-xbox-functions.md)). On the PS2 disc's `CEMENT.RCF` all 4,764 names hash to the
+entry they are paired with by offset. `rcf.py` checks that when it opens an archive, pairs the names by hash
+where it doesn't hold (with a warning), and finds a file by its path through the hash (`find_name`).
+
 ## Pure3D (`.p3d`)
 
 Radical's Pure3D engine format, used for models, textures, animations, fonts and some text. A file is a
