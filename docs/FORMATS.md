@@ -286,7 +286,7 @@ reads them, and the tests check that on made-up files.
 | `0x0802000D` | State Prop Data | u32 version (4 in all), name, the composite drawable's name (the same in all), u32 number of states, u32 number of properties (read only from version 3 on *(reported)*). The properties (`0x08020008`) follow, then the states (`0x0802000E`). The three `sshSignOwned` say 6 properties and hold 5 |
 | `0x0802000E` | Prop State | the state's name (`idle`, `final`, `shake`, `open`, `opening`, `closing` ...), then ten 4-byte values: u32 whether it moves on by itself (1 or 0), u32 the state it moves on to (its place in the prop's list, from 0), u32 the number of `0x08020002`, of `0x08020003`, of `0x08020004` and of `0x08020005` sub-chunks (the last two never occur), f32 a frame, u32 (0 in all), u32 the number of `0x08020008` and of `0x0802000B` sub-chunks |
 | `0x08020002` | Part Visibility | the part's name (a composite drawable part), u32 shown (1) or hidden (0) in this state |
-| `0x08020003` | Prop State Animation | the name of a Frame Controller (`0x00121201`) in the same file, three u32 (the first and the third 0 or 1, the second 0, 1 or 2; what they do isn't settled), f32 a first frame, f32 a last frame (it may be the smaller, or the same), f32 a speed (1 nearly always) |
+| `0x08020003` | Prop State Animation | the name of a Frame Controller (`0x00121201`) in the same file, three u32 (the first and the third 0 or 1, which the Xbox keeps as yes-or-no bytes; the second 0, 1 or 2, kept as a number; what they do isn't settled: no code was found that reads them back), f32 a first frame, f32 a last frame (it may be the smaller, or the same), f32 a speed (1 nearly always) |
 | `0x08020008` | Prop Property | two texts: a name and a value. Under State Prop Data, the prop's own; under a state, the state's (`percent_damaged`, `collision_on` ...) |
 | `0x0802000B` | Prop State Effect | an effect the state sets off: a text (`Effect` in all), the effect's name (`epDebris_Dust` ...; most are composite drawables in `Common.p3d`), u32 (0), a joint of the prop's skeleton, 3 floats an offset from it (nearly always straight up), 3 floats angles in radians, u32 (0), the joint again, f32 a size, f32 not known (0 in most) |
 
@@ -453,7 +453,7 @@ two-sided flags); the `RegionShader_` ones live in the area's region file.
 | `0x08800003` | World Geometry | name, the composite drawable's name, u32 its kind (below). The composite's joints sit at world positions and each mesh (`collapsedMesh_...`) hangs on one |
 | `0x08800004` | Zone Package | the area's name, u32 count, that many World Geometry names (the game doesn't use the list *(reported)*); one `0x08800009` per name follows, for the same names |
 | `0x08800009` | Zone Package Entry | a World Geometry's name (always one in the same file), u32 number of floats (6 in all), f32 near, f32 far, f32 fade, f32 (0 in all), f32 the x of a reference point, f32 that point's z with its sign flipped (both 0 in 49: no point) |
-| `0x0880000A` | Occluder | 44 bytes, no name: 3 floats a position, 3 floats the way it faces (a unit vector, y 0 in all), u32 (0 in all but one), f32 (0), 3 floats sizes (which axis each runs along isn't settled) |
+| `0x0880000A` | Occluder | 44 bytes, no name: 3 floats a position, 3 floats the way it faces (a unit vector, y 0 in all), u32 flags (0 in all but one, which has 1), f32 (0), 3 floats sizes: the box's full width along the world's X, Y and Z (below) |
 | `0x08800112` | Load Package Name | the file's own package name |
 | `0x09900191` | Game Group Data | the script file (`objects.ds`), the group's name, its class (`gamegroup`), u32 1; its objects follow |
 | `0x09900190` | Script Object Data | the script file, the object's name, its class (`instanceobject`, `missiontriggerobject`, `shadowobject`, ...); its properties follow |
@@ -482,8 +482,14 @@ which must vanish when the real thing is close: `fake_dock`, `fake_bridge`, `fak
 `low_LOD_1sbeachn_07` (from 581) and `low_LOD_fr_lod` (from 1370.4). *far* is 10000 in 177; the smallest belong
 to interiors and close-up detail (30 for `babylonclub_02_detail`).
 
-Occluders (1,022 in 31 files) are invisible *(reported)*: the game uses them only to skip drawing what is hidden
-behind them. The exports leave them out; `p3d.py` reads their fields.
+**Occluders.** 1,022 in 31 files. They are invisible *(reported)*: the game uses them only to skip drawing what
+is hidden behind them. The Xbox's loader (`OccluderLoader`, `0x00047AF0`; [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md))
+makes each a box lined up with the world's axes, from the position minus half of each size to the position plus
+half of it, then puts the box's bottom at a height of -1. So a box reaches from just below the ground up to the
+position's height plus half the second size. The way it faces doesn't turn the box: the loader keeps it as an
+angle, the arctangent of its x over its z. It keeps the u32 as two yes-or-no flags (1 sets both, 2 only the
+first; only 0 and 1 occur), skips the float that is always 0, and registers the occluder in a list of up to 256.
+`p3d.py` reads their fields; the map exports show the boxes, hidden ([Exporting to Blender](#exporting-to-blender)).
 
 **Placed objects.** Trees, lamps, benches, signs and the like are *instance objects*: a Script Object
 of class `instanceobject` whose `modelname` names the model (a composite drawable or state prop, found by
@@ -852,13 +858,15 @@ and people).
   `0x0041C922` is set: it is 1 in the file and no code writes it). They are drawn inside a render-context extension
   (`d3dExtStaticShadowGen`, id `0x108`), whose end puts the result on the frame with a full-screen quad: first
   blended "zero, 1 minus source alpha", the frame times 1 minus the coverage, once however many decals overlap;
-  then a pass that writes alpha only. The quad carries a strength of 0.65; whether that limits the darkening to
-  65 % *(check)*.
+  then a pass that writes alpha only. The quad's alpha is the coverage times a texture factor of 0.65 x 255,
+  truncated to 165 (`0x0032CD10`), so **a shadow decal darkens what is under it by 65 % at most** (165 out of
+  255), however dark its texture. The coverage is first multiplied by the frame's own alpha; what that alpha
+  holds then isn't settled *(check)*.
 * **The PC game shows none of them** *(reported)*. The pass that should put them on screen draws into a scratch
   picture that never reaches the frame. Why isn't known.
-* So on the Xbox they darken what is under them by their coverage, two overlapping decals not darkening twice, as
-  they were meant to. Drawn simply as black see-through surfaces, as the exports have them, one decal looks right
-  and two overlapping ones come out too dark.
+* So on the Xbox they darken what is under them by their coverage, by 65 % at most, two overlapping decals not
+  darkening twice, as they were meant to. Drawn simply as black see-through surfaces, as the exports have them
+  (their alpha times 165/255), one decal looks right and two overlapping ones come out too dark.
 * They are drawn only near the camera, like the rest of the detail geometry.
 
 ### Exporting to Blender
@@ -1021,10 +1029,21 @@ python portal/tools/p3d_gltf.py area.glb  "packages/z04/stripmall_01_*.p3d" --ma
 **Shadow decals.** Each primitive group with a `shadowdecal` shader comes in a glTF mesh of its own, in a node
 `<mesh> shadow decal` under its mesh's node, or as the mesh's node itself when the mesh is nothing else (the
 blobs in `Common.p3d`). The node and the mesh have `{"shadowDecal": true}` in their extras, and so does the
-material. They are shown: as black see-through surfaces, each looks right where it doesn't overlap another, and
-two overlapping ones come out too dark: the Xbox darkens by their coverage once, however many overlap, and the PC
-is reported not to show them at all ([Shadows](#shadows)). **Open in Blender** puts them in a collection *Shadow
-decals*, whose tick box hides them all.
+material. The material's alpha (`baseColorFactor`'s) is times 165/255, the picture unchanged: blended as usual,
+a black decal leaves at least 35 % of what is behind, as the Xbox does. They are shown: as black see-through
+surfaces, each looks right where it doesn't overlap another, but two overlapping ones darken twice and come out
+too dark, unlike the game: the Xbox darkens by their coverage once, however many overlap, and the PC is reported
+not to show them at all ([Shadows](#shadows)). The export's report gives the limit. **Open in Blender** puts them
+in a collection *Shadow decals*, whose tick box hides them all.
+
+**Occluders.** A map export has each file's [occluders](#maps) in a node `<file> occluders`, each a node
+`occluder <n>` holding the box the Xbox makes: one unit cube's mesh, shared by all of them, moved to the box's
+middle (converted like every other position: Z mirrored) and scaled to its size, with an untextured see-through
+material (`occluder`). Its extras are `{"occluder": {"facing": [x, y, z], "flags": 0}, "hidden": true}`: the way
+it faces and the u32, as the file has them. Being invisible in the game, they are hidden: the portal's 3D view
+leaves them out, and **Open in Blender** puts them in a collection of their own, *Occluders*, switched off and
+drawn as wireframe boxes when its tick box brings them back. They don't count in the box the sea is laid round.
+The report says how many there are, once per file. An area without occluders comes out as before.
 
 **The whole city in Blender.** The portal's city export (the **In Blender** box) also writes `sky.glb` beside
 the areas when `Common.p3d` is among the copied files: the weather's sky, centred on the city (the middle of
@@ -1058,14 +1077,15 @@ colour from the copied `Common.p3d` (without it, a plain sea in the tint). Every
 has no switch for it yet: to go without, delete `ocean.glb` or untick the *Sea* collection in Blender. The export
 itself leaves it out when it is asked with `"ocean": false` (and `CityJob.start(..., ocean=False)`). **Open in
 Blender** treats the city's files as it does a single export's: the see-through surfaces as the game blends them,
-and the shadow decals, the low-detail hull, the far-away stand-ins and the sea each in a collection of its own.
+and the shadow decals, the low-detail hull, the far-away stand-ins, the occluders and the sea each in a collection
+of its own.
 
 A mesh with a [draw-order key](#the-draw-order-key-and-the-sky) carries it in its extras
 (`{"drawOrder": 0.3}`), clamped to 0..1 as the game does.
 
-Left out for now: particles and light flares, shadow volumes, collision shapes, occluders, state-prop
-animations' callbacks and the effects states set off; the sea's reflection, ripples, waves and foam, and the
-fade of the low-detail hull and of the draw distances.
+Left out for now: particles and light flares, shadow volumes, collision shapes, state-prop animations'
+callbacks and the effects states set off; the sea's reflection, ripples, waves and foam, and the fade of the
+low-detail hull and of the draw distances.
 
 ### Ids seen but not worked out
 
@@ -1281,7 +1301,8 @@ what you find. Known gaps:
   prop's starting state, the zone packages' draw distances and the far-away stand-ins, the world geometry kinds,
   occluders, characters and vehicles, the water chunks' order, and how the Xbox blends (`BLMD` 3 subtracts); in its
   second part, the same blend table in the PC's data, the shadow decals drawn on the Xbox, and the props'
-  properties in the exports.
+  properties in the exports; in its third part, the occluders' boxes, the shadow decals' 65 % limit, and how the
+  Xbox keeps a state animation's three numbers.
 * The [Blender Python API](https://docs.blender.org/api/current/) documentation, for the world's mist that
   shows the fog in Blender, and the shaders, blend modes and collections that show the game's see-through
   surfaces and its groups.
