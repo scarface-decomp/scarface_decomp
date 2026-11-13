@@ -379,3 +379,20 @@ def test_a_wrong_pin_says_where_pins_are_kept_and_how_to_start_over(S, monkeypat
     ok, why = S.authenticate("Somebody", "another-pin-99")
     assert not ok and "different PIN" in why and "only on this computer" in why and "rename that file" in why
     assert "first-pin" not in why and "another-pin" not in why
+
+
+def test_the_ai_is_shown_matched_functions_of_the_same_class(S, monkeypatch):
+    reg = {"entries": {
+        "xb:0x00000010": {"bin": "xb", "va": "0x00000010", "size": 40, "symbol": "core::Timer::vfunc_02", "code": "class Timer { int m_ticks; };"},
+        "xb:0x00000020": {"bin": "xb", "va": "0x00000020", "size": 12, "symbol": "core::Timer::vfunc_03", "code": "// short"},
+        "pc:0x00000030": {"bin": "pc", "va": "0x00000030", "size": 99, "symbol": "core::Timer::vfunc_02", "code": "// the PC's"},
+        "xb:0x00000040": {"bin": "xb", "va": "0x00000040", "size": 50, "symbol": "core::Clock::vfunc_01", "code": "// another class"},
+        "xb:0x00000050": {"bin": "xb", "va": "0x00000050", "size": 70, "symbol": "core::Timer::vfunc_09", "code": "x" * 9000}}}
+    monkeypatch.setattr(S, "REGISTRY", reg)
+    monkeypatch.setattr(S, "_CLASSMATES", (-1, {}))
+    t = {"bin": "xb", "fva_int": 0x20, "symbol": "core::Timer::vfunc_03"}
+    near = S.neighbours(t)
+    assert [n["symbol"] + "@" + n["va"] for n in near] == ["core::Timer::vfunc_02@0x00000010", "core::Timer::vfunc_02@0x00000030"]
+    assert near[0]["code"].startswith("class Timer") and "Xbox" in near[0]["build"] and "PC" in near[1]["build"]
+    assert S.neighbours({"bin": "xb", "fva_int": 0x99, "symbol": "sub_00000099"}) == []      # not in a class
+    assert S.class_of("pure3d::Shader::vfunc_04") == "pure3d::Shader" and S.class_of("sub_1") == ""

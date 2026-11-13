@@ -173,6 +173,42 @@ def rewrite(cpp: str, amap: Dict[int, int], names: Dict[str, str]) -> str:
     return _TOKEN.sub(tok, cpp)
 
 
+_SLOT = re.compile(r"vfunc_(\d{1,3})$")
+
+
+def fit_slot(cpp: str, cls: str, method: str) -> str:
+    """After a virtual method's code has been renamed for another slot (vfunc_08's for vfunc_03), its class
+    still lists the slots the old one needed, the new name twice among them. The class's virtual list is
+    made again: a plain entry for every slot before the method's, then the method with its own return type
+    and arguments. cls: the class's own name (no namespace); method: vfunc_03. The code comes back as it was
+    when there is nothing to fix or it isn't laid out as the starter lays it out."""
+    m = _SLOT.match(method)
+    head = re.search(r"^[ \t]*(?:class|struct)[ \t]+" + re.escape(cls) + r"\b[^;{]*\{", cpp, re.M)
+    define = re.search(r"^[ \t]*(?!//)(\w[^\n;{}/]*?)[ \t]+" + re.escape(cls) + "::" + re.escape(method) + r"[ \t]*\(([^)]*)\)",
+                       cpp, re.M)
+    if not m or not head or not define:
+        return cpp
+    end = cpp.find("};", head.end())
+    if end < 0:
+        return cpp
+    body = cpp[head.end():end]
+    listed = re.findall(r"^[ \t]*virtual[^\n;]*\bvfunc_(\d{1,3})[ \t]*\([^)]*\)[ \t]*;[ \t]*\r?\n", body, re.M)
+    slot = int(m.group(1))
+    if [int(n) for n in listed] == list(range(slot + 1)):
+        return cpp                                           # one of each, up to the method: nothing to fix
+    first = re.search(r"^[ \t]*virtual[^\n;]*\bvfunc_\d{1,3}[ \t]*\([^)]*\)[ \t]*;[ \t]*\r?\n", body, re.M)
+    if not first:
+        return cpp
+    nl = "\r\n" if "\r\n" in body else "\n"
+    pad = re.match(r"[ \t]*", first.group(0)).group(0)
+    width = max(2, len(m.group(1)))
+    rows = "".join(f"{pad}virtual {define.group(1).strip() if i == slot else 'void'} vfunc_{i:0{width}d}"
+                   f"({define.group(2).strip() if i == slot else ''});{nl}" for i in range(slot + 1))
+    kept = re.sub(r"^[ \t]*virtual[^\n;]*\bvfunc_\d{1,3}[ \t]*\([^)]*\)[ \t]*;[ \t]*\r?\n", "", body, flags=re.M)
+    at = first.start()
+    return cpp[:head.end()] + kept[:at] + rows + kept[at:] + cpp[end:]
+
+
 def port_code(cpp: str, src: dict, src_relocs: Sequence[DME.Reloc], dst: dict,
               dst_relocs: Sequence[DME.Reloc]) -> Optional[str]:
     """src's matched C++ rewritten for dst, or None when the two cannot be paired this way.
@@ -186,7 +222,11 @@ def port_code(cpp: str, src: dict, src_relocs: Sequence[DME.Reloc], dst: dict,
         lines = lines[2:] if len(lines) > 1 and lines[1].startswith("// its addresses") else lines[1:]
     head = (f"{PORT_HEADER}{src['symbol']} ({src['va']}), which was matched first;\n"
             f"// its addresses and names were swapped for this function's.\n")
-    return head + rewrite("".join(lines), amap, names)
+    out = rewrite("".join(lines), amap, names)
+    parts = _IDENT.findall(dst.get("symbol", ""))
+    if len(parts) >= 2 and _SLOT.match(parts[-1]) and parts[-1] != _IDENT.findall(src.get("symbol", ""))[-1]:
+        out = fit_slot(out, parts[-2], parts[-1])            # the same code in another virtual slot
+    return head + out
 
 
 PORT_HEADER = "// Same machine code as "

@@ -1444,3 +1444,34 @@ def test_a_matched_function_says_what_is_left_to_name(page):
     assert page.is_hidden("#wb-readable")
     assert page.locator("#lane-filter option[value=NEEDS_NAMES]").count() == 1
 
+
+def test_the_ai_sees_its_classmates_and_the_run_is_metered(page):
+    sign_in(page)
+    prompts = []
+
+    def ai(route):
+        prompts.append(json.loads(route.request.post_data)["prompt"])
+        route.fulfill(json={"ok": True, "reply": "GIVE UP: enough" if len(prompts) > 1 else "```cpp\nint f() { return 1; }\n```",
+                            "used_model": "m"})
+
+    page.route("**/api/fast-synthesize", lambda r: r.fulfill(json={"ok": False}))
+    page.route("**/api/ai-proxy", ai)
+    page.route("**/api/verify", lambda r: r.fulfill(json={"ok": True, "is_exact": False, "matched_bytes": 2, "total_bytes": 12,
+                                                           "match_percent": 16.7, "diff_details": [], "compiled_hex": "90"}))
+    page.evaluate("""() => { currentTask.neighbours = [{symbol: 'core::Timer::vfunc_02', va: '0x00401200', size: 31,
+        build: 'the retail Xbox game', code: 'class Timer { public: int m_ticks; };'}]; }""")
+    page.fill("#ai-key", "test-key")
+    page.fill("#ai-price-in", "2")
+    page.fill("#ai-price-out", "10")
+    page.click("#btn-step2-ai")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('The AI stopped')", timeout=30000)
+    assert "Already matched in the same class" in prompts[0]
+    assert "// core::Timer::vfunc_02 (0x00401200, 31 bytes, the retail Xbox game)" in prompts[0] and "int m_ticks;" in prompts[0]
+    meter = page.inner_text("#ai-meter")
+    sent = round(sum(len(p) for p in prompts) / 4)
+    assert meter.startswith("This run: 2 tries") and f"{sent:,} tokens sent" in meter and "at your prices" in meter
+    assert "isn't counted here" in meter
+    page.fill("#ai-price-in", "")
+    page.fill("#ai-price-out", "")
+    assert "at your prices" not in page.inner_text("#ai-meter")
+
