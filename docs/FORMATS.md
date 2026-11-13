@@ -272,16 +272,30 @@ UVs have V running up from the bottom of the picture, so V is flipped too.
 ### Composite drawables
 
 Most things the game draws are composite drawables: a skeleton and the meshes (or skins) hung on its
-joints. A gun, a car, a placed tree and each part of a map are one.
+joints. A gun, a car, a placed tree and each part of a map are one. A prop that can change (a door, a
+crate that breaks, a tree that shakes) is a state prop. Its chunks, from State Prop Data down, come from the
+clean-room spec [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md)
+([how that works](CLEAN_ROOM.md)), whose examiner read all 1,009 in the city back from the PC files; `p3d.py`
+reads them, and the tests check that on made-up files.
 
 | Id | Chunk | Data |
 | :--- | :--- | :--- |
 | `0x00123000` | Composite Drawable | u32 version (0), name, skeleton name, u32 number of parts; the parts follow |
 | `0x00123001` | Composite Drawable Part | u32 0, u32 0, the drawable's name, u32 kind (1 a model; `0x20` a shadow mesh, `0x40` a shadow skin), u32 the joint it hangs on |
 | `0x08800005` | State Prop | name, the composite drawable's name |
-| `0x0802000D` | State Prop Data | u32 version (4), name, drawable name, u32 1, u32 number of states; holds `0x08020008` (name and value properties: `name`, `visibility`) and one `0x0802000E` per state |
-| `0x0802000E` | Prop State | the state's name (`idle`, `final`, `damage1`, `shake`, `open` ...), then 36 bytes not worked out; holds one `0x08020002` per part |
+| `0x0802000D` | State Prop Data | u32 version (4 in all), name, the composite drawable's name (the same in all), u32 number of states, u32 number of properties (read only from version 3 on *(reported)*). The properties (`0x08020008`) follow, then the states (`0x0802000E`). The three `sshSignOwned` say 6 properties and hold 5 |
+| `0x0802000E` | Prop State | the state's name (`idle`, `final`, `shake`, `open`, `opening`, `closing` ...), then ten 4-byte values: u32 whether it moves on by itself (1 or 0), u32 the state it moves on to (its place in the prop's list, from 0), u32 the number of `0x08020002`, of `0x08020003`, of `0x08020004` and of `0x08020005` sub-chunks (the last two never occur), f32 a frame, u32 (0 in all), u32 the number of `0x08020008` and of `0x0802000B` sub-chunks |
 | `0x08020002` | Part Visibility | the part's name (a composite drawable part), u32 shown (1) or hidden (0) in this state |
+| `0x08020003` | Prop State Animation | the name of a Frame Controller (`0x00121201`) in the same file, three u32 (the first and the third 0 or 1, the second 0, 1 or 2; what they do isn't settled), f32 a first frame, f32 a last frame (it may be the smaller, or the same), f32 a speed (1 nearly always) |
+| `0x08020008` | Prop Property | two texts: a name and a value. Under State Prop Data, the prop's own; under a state, the state's (`percent_damaged`, `collision_on` ...) |
+| `0x0802000B` | Prop State Effect | an effect the state sets off: a text (`Effect` in all), the effect's name (`epDebris_Dust` ...; most are composite drawables in `Common.p3d`), u32 (0), a joint of the prop's skeleton, 3 floats an offset from it (nearly always straight up), 3 floats angles in radians, u32 (0), the joint again, f32 a size, f32 not known (0 in most) |
+
+A state that moves on by itself is a passing one: when its animation reaches the frame, the prop goes on to the
+state it names. A gate's `opening` ends in `open` and its `closing` in `idle`, at frame 30; a tree's `shake`
+ends in `idle` again. The first property is always `name`; the others (`visibility`, `surface_type`,
+`hit_points`, `movement`, `mass`, `type`, `class` ...) are carried by 1 to 454 props each, and what the game does
+with them isn't known yet. Effects belong mostly to `final` states: the debris when a prop breaks. The exports
+show neither the properties nor the effects.
 
 A part's mesh is in its joint's space: the joint's world matrix times the vertex.
 
@@ -339,7 +353,16 @@ The shader names spell most of these out ([Maps](#maps)); the settings chunks ar
 | :--- | :--- | :--- |
 | 1 | ordinary see-through: the texture's alpha mixes it with what is behind *(reported)* | 1,456 shaders, among them the props' leaves, the shadow decals and the low-detail hull (below) |
 | 2 | adds light. The textures are opaque (alpha 255 everywhere) and mostly black, 40 to 87 % of their pixels, with the light in colour on top: the black adds nothing. Drawn with ordinary blending they come out as black squares | the sun's flares and lens rings (`Flare_Star_xb.bmp`, `LENS03.bmp` ...), light glows (`lightGlowWhite.bmp`), boat lights, the `nightlight` windows, one tunnel lighting texture |
-| 3 | darkens; exactly how isn't known. Multiplying what is behind by the texture fits all of them | skid marks (`SkidMark_Asphalt.bmp`, opaque and dark, 3 to 19 out of 255 on average), grime (`grime.tga`: grey 125, alpha 175), `r_tonymsn_shadow_circle.bmp` |
+| 3 | subtracts: what is behind minus the texture's colour, not below 0, the same for red, green and blue; alpha plays no part (on the Xbox, below). Subtracted, the soft grey disc of `r_tonymsn_shadow_circle.bmp` on its black corners is a round shadow with no edge, where multiplied it would be a black square; a skid mark is a faint mark on the road | skid marks (`SkidMark_Asphalt.bmp`, opaque and dark, 3 to 19 out of 255 on average), grime (`grime.tga`: grey 125, alpha 175), `r_tonymsn_shadow_circle.bmp` |
+
+**On the Xbox.** From [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md), read from `default.xbe`. A shader's
+`BLMD` picks one of eight entries in a table at `0x0045C188` (through `0x00282950`): blending on or off, an
+equation, and the source and destination factors, which become Direct3D's render states. 0 is off; 1 add, source
+alpha and 1 minus source alpha (ordinary see-through); 2 add, one and one (what is behind plus the colour); 3
+reverse subtract, one and one (what is behind minus the colour); 4 add, destination colour and zero (what is behind
+times the colour); 5 add, destination colour and source colour; 6 add, destination colour and source alpha; 7
+reverse subtract, source alpha and source alpha. Only 0 to 3 occur in the files. Whether the PC does the same isn't
+checked.
 
 **What hides what** *(reported)*. Ordinary see-through world surfaces (`BLMD` 1) are drawn after the solid
 ones, sorted from far to near, and still write depth. The `decal`, `nightlight` and `shadowdecal` kinds, the
@@ -379,7 +402,7 @@ The game reads each kind of chunk with a loader object, and the Xbox program sti
 | `0x08800008` | `ShadowLoader` | `0x08800113`, `0x08800114` | `NISStreamData`, `NISStreamPartitionInfo` |
 | `0x0880000A` | `occlude::OccluderLoader` | `0x08800150` | `CVLoadObject` |
 | `0x08800160`, `0x08800161` | `TrafficConfig`, `SubzoneTrafficTrigger` | `0x08800180`, `0x08800181` | `ScriptObject`, `GameGroup` |
-| `0x09900190`, `0x09900191` | `ScriptObjectData`, `GameGroupData` | `0x08800201` to `0x08800203` | `WaterData` (dock, obstacle, shallow area) |
+| `0x09900190`, `0x09900191` | `ScriptObjectData`, `GameGroupData` | `0x08800201` to `0x08800203` | `WaterData` (shallow area, obstacle, dock) |
 | `0x08011000`, `0x08011005` | `NavMesh`, `RoadGraph` | `0x07010000`, `0x07011000`, `0x07010025` | `ravenphysics` collision object, rigid body, world collision object |
 | `0x0802000D` | `prop::StatePropData` | `0x00123000` | `CompositeDrawable` |
 | `0x0001001A`, `0x00010019` | `ShadowMesh`, `ShadowSkin` | `0x0001580C`, `0x00017006` | `ParticleSystem`, `Billboard` |
@@ -387,12 +410,23 @@ The game reads each kind of chunk with a loader object, and the Xbox program sti
 | `0x00022000`, `0x00022002` | texture font, image font | `0x00121201`, `0x00121202` | frame controller, multi controller |
 | `0x00018000`, `0x0001800D`, `0x00019005` | frontend project, text bible, sprite | `0x01005002` to `0x0100500B` | sound entities |
 
-`p3d.py` names every chunk in this list.
+`p3d.py` names every chunk in this list. The water chunks' loaders, `WaterDataShallowAreaLoader`,
+`WaterDataObstacleLoader` and `WaterDataDockLoader`, are used next to `0x08800201`, `0x08800202` and
+`0x08800203`, in that order ([SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md)). Only `0x08800201` chunks have
+sub-chunks: 5 to 27 `0x08800200` each, in `miami_lod.p3d` and `islands_LOD.p3d`. They are named like
+`transform245_ShallowWaterArea3`, the other two like `transform245_WaterObstacle7` and
+`transform246_CallBoatArea19`.
+
+Characters and vehicles, from [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md), which read the 323 in
+`art/characters/**` and the 144 in `art/vehicles/`:
 
 | Id | Chunk | Data |
 | :--- | :--- | :--- |
-| `0x08800000` | Character | name, the skin's name, then nine u32 (3 in every file seen) |
-| `0x08800001` | Vehicle | name, its composite drawable, its low-detail composite drawable, the paint shaders' names, then three u32 |
+| `0x08800000` | Character | exactly eleven texts: the name, the skin (`AA_Female_01_meshShape`), its low-detail skin (`AA_Female_01_lowshape`; empty in 21), then eight shader names (0 to 3 used: `AA_Female_01_SG`), the unused ones empty |
+| `0x08800001` | Vehicle | exactly eleven texts: the name, its composite drawable (`albatross`), its low-detail composite drawable (`albatross_LOD`), then eight shader names (1 to 6 used: `albatross_mt` ...), the unused ones empty |
+
+An empty text is the 4 bytes `03 00 00 00`: a length of 3, then three NULs. The game finds the shaders by name
+*(reported)*; what it does with them isn't known yet.
 
 ### Maps
 
@@ -406,12 +440,40 @@ two-sided flags); the `RegionShader_` ones live in the area's region file.
 
 | Id | Chunk | Data |
 | :--- | :--- | :--- |
-| `0x08800003` | World Geometry | name, the composite drawable's name, u32 flags (5 for every underwater part seen, 3 for the low-detail city, else 0). The composite's joints sit at world positions and each mesh (`collapsedMesh_...`) hangs on one |
-| `0x08800004` | Zone Package | the area's name, u32 count, that many World Geometry names |
+| `0x08800003` | World Geometry | name, the composite drawable's name, u32 its kind (below). The composite's joints sit at world positions and each mesh (`collapsedMesh_...`) hangs on one |
+| `0x08800004` | Zone Package | the area's name, u32 count, that many World Geometry names (the game doesn't use the list *(reported)*); one `0x08800009` per name follows, for the same names |
+| `0x08800009` | Zone Package Entry | a World Geometry's name (always one in the same file), u32 number of floats (6 in all), f32 near, f32 far, f32 fade, f32 (0 in all), f32 the x of a reference point, f32 that point's z with its sign flipped (both 0 in 49: no point) |
+| `0x0880000A` | Occluder | 44 bytes, no name: 3 floats a position, 3 floats the way it faces (a unit vector, y 0 in all), u32 (0 in all but one), f32 (0), 3 floats sizes (which axis each runs along isn't settled) |
 | `0x08800112` | Load Package Name | the file's own package name |
 | `0x09900191` | Game Group Data | the script file (`objects.ds`), the group's name, its class (`gamegroup`), u32 1; its objects follow |
 | `0x09900190` | Script Object Data | the script file, the object's name, its class (`instanceobject`, `missiontriggerobject`, `shadowobject`, ...); its properties follow |
 | `0x09900192` | Script Object Property | name, u32 type: 0 for text (then the text, for example `position` = `-1928.0890 5.5734810 -943.42900`), 2 for binary (then u32 3 and a `0x09900194` sub-chunk) |
+
+**World geometry kinds and draw distances.** From [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md). A World
+Geometry's kind goes with how its name starts; how each kind is drawn isn't known yet.
+
+| Kind | World geometries | Names start |
+| ---: | ---: | :--- |
+| 0 | 331 | anything else (`shells_`, `details_`, `skyline_`, `fake_` ...) |
+| 1 | 16 | `shadowed_` |
+| 3 | 3 | `low_LOD_` |
+| 5 | 47 | `underwater_` |
+| 6 | 12 | `cbvlitdecals_` |
+| 7 | 9 | `interiorfloors_` |
+| 8 | 2 | `cardsnight_` |
+
+The game draws a world geometry only while the camera is farther than its zone package entry's *near* and nearer
+than its *far*, fading it over *fade*; the distance is measured from the reference point, at height 0, when there
+is one, else from the world geometry itself *(reported)*. Exactly how it fades isn't known. With the sign of
+the sixth number put back, the point lies within 5 units of its world geometry's box in 303 of the 359 that have
+one, and near it in the rest. *near* is 0 in 412 of the 420 entries. The other eight are far-away stand-ins,
+which must vanish when the real thing is close: `fake_dock`, `fake_bridge`, `fake_tunnel`, `cargo_LOD`,
+`fadeout_bankwindows`, `fadeout_hotelwindows` (*near* 40.8 to 211) and two of the low-detail hull's,
+`low_LOD_1sbeachn_07` (from 581) and `low_LOD_fr_lod` (from 1370.4). *far* is 10000 in 177; the smallest belong
+to interiors and close-up detail (30 for `babylonclub_02_detail`).
+
+Occluders (1,022 in 31 files) are invisible *(reported)*: the game uses them only to skip drawing what is hidden
+behind them. The exports leave them out; `p3d.py` reads their fields.
 
 **Placed objects.** Trees, lamps, benches, signs and the like are *instance objects*: a Script Object
 of class `instanceobject` whose `modelname` names the model (a composite drawable or state prop, found by
@@ -423,7 +485,7 @@ name with letter case ignored, in the area itself, its region's `_D` file or `mi
 0x00  float x, float y (in centimetres), float z
 0x0C  u32 x angle, u32 y angle, u32 z angle (degrees)
 0x18  u32 a, u32 b, u32 c (6 bits each), u32 same (1: one scale for all three axes)
-0x28  u32 d (4 bits: 0 is 1.0, else d/15, passed on with the model), u32 e (4 bits, 0 in every file seen)
+0x28  u32 d (4 bits: 0 is 1.0, else d/15, passed on with the model), u32 e (4 bits: the state it starts in)
 ```
 
 The game packs this into bit fields as it loads it (`default.xbe` `0x677B0`), so it keeps the height as
@@ -436,12 +498,22 @@ builds from three angles (`0x243020`: about X first, then Y, then Z) given minus
 angle and the Z angle. Placed this way the samples' street lamps, bus stops, parking meters and trees
 line up with the roads and pavements in the areas' own geometry.
 
+*e* names the state the copy starts in ([SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md)): 1 `idle`,
+2 `final`, 3 `damage_1`, 4 `damage_2`, 5 `damage_3`, 6 `damage_4`, 7 `explosion`, 8 `open`, 9 `opening`, 10
+`closed`, 11 `closing`, from a fixed list in the program (`default.xbe` `0x00314890` turns the eleven names into
+keys, in this order); 0 is the prop's own first state. The prop's state of that name, letter case ignored, is the one, not the state at that place in the
+prop's list (`tmdoora`'s states are `idle`, `opening`, `closing`, `open`); a prop without one starts in its first
+state. In the city *e* is 0 in 47,597 of the 47,631 placements, 8 in 13 (doors and gates that start open), 1 in
+20 and 2 in 1.
+
 A placed prop's composite drawable holds every look it can have. Most have a full-detail part
 (`garbageCanBInstanceShape`) and a low-detail one for far away (`...LODShape`), both shown in its first
 state: the game picks between them by distance. Props that can break have a damaged part too
 (`garbageCanBDamageShape`, `garagePostIBShape`), hidden in the first state (`idle`) and shown in a later
-one (`final`) while the whole one is hidden. The exports show each prop as its first state has it, at full
-detail; a prop's file opened on its own also gets each later state's look beside it, named after the state.
+one (`final`) while the whole one is hidden. The exports show each placed prop as its starting state has it
+(*e*, above), at full detail, with `{"state": "<the state's name>"}` in the copy's extras when that isn't its
+first state; a prop's file opened on its own comes in as its first state has it, with each later state's look
+beside it, named after the state.
 
 Traffic, pedestrians and mission cars aren't models placed in the files: the game spawns them while it runs,
 at spawn objects the areas do place (`worldambiencespawnobject`, `enemycharactergeneratorspawnobject`, ...).
@@ -792,11 +864,11 @@ in with File > Import > glTF 2.0: double-clicked, Blender tries to open it as a 
 a valid Blender file. Characters come with their skeleton as an armature, their skin
 weights and each animation (from `--anim` files or the file itself) as an action. Several models in one
 file (the 28 guns of `guns.p3d`) are set out side by side. With `--map` each area comes in at its place
-in the city, with its placed objects; the shared files the areas need (regions, `miami_lod`, `Common`) are
-read from the same folder unless `--library` says where. `--split` writes one `.glb` per area, which line
-up when imported together; the low-detail city in `miami_lod.p3d` is left out next to real areas unless
-`--lod` is given (then its hull is marked hidden: *The low-detail hull* below). PC, Xbox and PS2 files all
-work; textures are decoded on your computer.
+in the city, with its placed objects, each prop in the state it starts in ([Maps](#maps)); the shared files
+the areas need (regions, `miami_lod`, `Common`) are read from the same folder unless `--library` says where.
+`--split` writes one `.glb` per area, which line up when imported together; the low-detail city in
+`miami_lod.p3d` is left out next to real areas unless `--lod` is given (then its hull is marked hidden: *The
+low-detail hull* below). PC, Xbox and PS2 files all work; textures are decoded on your computer.
 
 **Lights.** With `--map` each area's [lights](#lights) come in too, in a node `<file> lights`, with a node per
 light group inside it (its extras give the record's kind). Point and spot lights, and directional lights
@@ -853,7 +925,7 @@ made ready for it:
 | :--- | :--- | :--- |
 | 1 | `BLEND`, or `MASK` with a cut-out | as Blender's importer makes it |
 | 2, adds light | `BLEND`. Each pixel's alpha is its brightness (the largest of its red, green and blue) and its colour is divided by that. Blended as usual, black lets what is behind through and the light lies on top of it; where the light is bright, what is behind is dimmed (times 1 minus the brightness) instead of added to | an Emission shader (the picture's colour times its alpha) added to a Transparent BSDF: real additive light |
-| 3, darkens | `BLEND`. The picture is black, with an alpha of 1 minus its brightness (luminance): what is behind ends up multiplied by that brightness, the same for red, green and blue | a Transparent BSDF in the colour of that brightness, which multiplies what is behind by it |
+| 3, subtracts | `BLEND`. The picture is black, with an alpha of its brightness (the largest of its red, green and blue): what is behind ends up times 1 minus that brightness, the same for red, green and blue. That is close to the game's subtracting where what is behind is bright, and black darkens nothing | a Transparent BSDF in the colour of 1 minus that brightness, which multiplies what is behind by it |
 
 The picture's own alpha is used only for a cut-out. A light-adding or darkening material whose picture isn't in
 the files is fully see-through, not a dark square.
@@ -884,11 +956,31 @@ so it looks the same. The same shader anywhere else (the area's own geometry, a 
 
 **The low-detail hull.** Next to detailed areas (`--lod`), the hull's world geometry is marked
 `{"lowDetailHull": true, "hidden": true}`; with `--split`, the hull's own file is marked so too when areas come
-beside it. By itself it is `{"lowDetailHull": true}` and shown: then it is the city. Its materials carry
+beside it. By itself it is `{"lowDetailHull": true}` and shown: then it is the city, but for any part of it
+drawn only from afar, which is hidden as a far-away stand-in (below). Its materials carry
 `{"lowDetailHull": true, "fade": [200, 250], "fadeCutoff": 0.0784}`, the game's fade, which the exports don't draw.
 Its file's lights are never hidden: the daylight still lights the scene. **Open in Blender** puts the hull in a
 collection of its own, *Low-detail hull*, switched off when it is hidden (its tick box in the Outliner brings it
 back), and the portal's 3D view leaves hidden nodes out.
+
+**Draw distances and far-away stand-ins.** From [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md)
+([Maps](#maps)). In a map export each world geometry's top node (named after its composite drawable) says its
+kind and, when its zone package has an entry for it, its draw distance, in its extras:
+
+```
+"extras": {"worldGeometryKind": 0,
+           "drawDistance": {"near": 83.9, "far": 388.8, "fade": 5.0, "from": [120.5, 0.0, 300.25]},
+           "hidden": true}
+```
+
+`worldGeometryKind` is the World Geometry's kind, as a number. `near`, `far` and `fade` are the entry's. `from`
+is its reference point, the one the distance is measured from, in glTF's space like every other position: x,
+height 0, and z mirrored. The file stores minus the game's z, so glTF's z is the file's sixth number as it is.
+Without a point there is no `from`: the distance counts from the world geometry itself. A world geometry with a `near` above 0 is a far-away stand-in that the game draws only from afar: it is
+marked `"hidden": true`, as the low-detail hull is, and the export's report names them, once per file. **Open in
+Blender** puts them, with everything under them, in a collection of their own, *Far-away stand-ins*, switched off
+(its tick box brings them back); the portal's 3D view leaves them out. The exports draw everything else at any
+distance, and don't fade.
 
 **The sea.** A map export (`--map`, a map area or a map file in the portal, not a cutscene) has a node `Ocean`: a
 flat surface at height 0, reaching at least 1,000 m past the map on every side, farther than the fog ends (900 m
@@ -946,13 +1038,14 @@ colour from the copied `Common.p3d` (without it, a plain sea in the tint). Every
 has no switch for it yet: to go without, delete `ocean.glb` or untick the *Sea* collection in Blender. The export
 itself leaves it out when it is asked with `"ocean": false` (and `CityJob.start(..., ocean=False)`). **Open in
 Blender** treats the city's files as it does a single export's: the see-through surfaces as the game blends them,
-and the shadow decals, the low-detail hull and the sea each in a collection of its own.
+and the shadow decals, the low-detail hull, the far-away stand-ins and the sea each in a collection of its own.
 
 A mesh with a [draw-order key](#the-draw-order-key-and-the-sky) carries it in its extras
 (`{"drawOrder": 0.3}`), clamped to 0..1 as the game does.
 
-Left out for now: particles and light flares, shadow volumes, collision shapes and state-prop
-animations' callbacks; the sea's reflection, ripples, waves and foam, and the low-detail hull's fade.
+Left out for now: particles and light flares, shadow volumes, collision shapes, occluders, state-prop
+animations' callbacks and the effects states set off; the sea's reflection, ripples, waves and foam, and the
+fade of the low-detail hull and of the draw distances.
 
 ### Ids seen but not worked out
 
@@ -1164,6 +1257,9 @@ what you find. Known gaps:
   settings, the blend modes, cut-outs and depth, the props' leaves, the low-detail hull, the sea's scripts, the
   shadow records and the shadow decals; and, in its answers to the implementer's questions, that a shader
   without `LIT` is unlit.
+* The clean-room spec [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md): the state props' chunks, a placed
+  prop's starting state, the zone packages' draw distances and the far-away stand-ins, the world geometry kinds,
+  occluders, characters and vehicles, the water chunks' order, and how the Xbox blends (`BLMD` 3 subtracts).
 * The [Blender Python API](https://docs.blender.org/api/current/) documentation, for the world's mist that
   shows the fog in Blender, and the shaders, blend modes and collections that show the game's see-through
   surfaces and its groups.

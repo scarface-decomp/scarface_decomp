@@ -245,8 +245,8 @@ def object_group(objects):
     return chunk(0x9900191, text("objects.ds") + text("instances") + text("gamegroup") + struct.pack("<I", 1), kids)
 
 
-def world_geo(name):
-    return chunk(0x8800003, text(name) + text(name) + struct.pack("<I", 0))
+def world_geo(name, kind=0):
+    return chunk(0x8800003, text(name) + text(name) + struct.pack("<I", kind))
 
 
 def area(name, at=(100.0, 5.0, -200.0), objects=(), shader="paint"):
@@ -833,12 +833,13 @@ def test_the_blender_script_imports_and_saves(tmp_path, monkeypatch):
 # --------------------------------------------------------------------------- props: how they start, and what they become
 
 def state_prop(name, states):
-    """A State Prop Data chunk (0x0802000D): states as (state name, [(part, shown)])."""
+    """A State Prop Data chunk (0x0802000D): states as (state name, [(part, shown)]). The number of states comes
+    before the number of properties (one: name), and each state's ten values hold its number of parts."""
     kids = chunk(0x08020008, text("name") + text(name))
     for sname, shown in states:
         vis = b"".join(chunk(0x08020002, text(p) + struct.pack("<I", int(on))) for p, on in shown)
-        kids += chunk(0x0802000E, text(sname) + bytes(36), vis)
-    return chunk(0x0802000D, struct.pack("<I", 4) + text(name) + text(name) + struct.pack("<II", 1, len(states)), kids)
+        kids += chunk(0x0802000E, text(sname) + struct.pack("<6If3I", 0, 0, len(shown), 0, 0, 0, 0.0, 0, 0, 0), vis)
+    return chunk(0x0802000D, struct.pack("<I", 4) + text(name) + text(name) + struct.pack("<II", len(states), 1), kids)
 
 
 def bin_prop():
@@ -1752,8 +1753,10 @@ def test_light_adding_and_darkening_surfaces():
     assert px[8:12] == bytes([255, 255, 255, 255])
     dark = mats["skid"]
     assert dark["alphaMode"] == "BLEND" and dark["extras"] == {"blend": "darken"}
-    px = image_pixels(doc, binc, dark)                                  # black, alpha 1 - brightness: what is behind x brightness
-    assert [px[i:i + 4] for i in range(0, 16, 4)] == [bytes([0, 0, 0, 235]), bytes([0, 0, 0, 130]), bytes(4), bytes([0, 0, 0, 255])]
+    # BLMD 3 subtracts (SPEC-003): black, alpha = brightness (the largest of red, green and blue), so what is behind ends
+    # up times 1 - brightness; black darkens nothing, and the picture's own alpha (175, 0) plays no part
+    px = image_pixels(doc, binc, dark)
+    assert [px[i:i + 4] for i in range(0, 16, 4)] == [bytes([0, 0, 0, 20]), bytes([0, 0, 0, 125]), bytes([0, 0, 0, 255]), bytes(4)]
     assert mats["glass"]["alphaMode"] == "BLEND" and mats["glass"]["extras"] == {"blend": "alpha"}
     assert "extras" not in mats["wall"] and "alphaMode" not in mats["wall"]
     assert mats["lost"]["pbrMetallicRoughness"]["baseColorFactor"] == [0.0, 0.0, 0.0, 0.0]   # no picture: nothing, no dark square
@@ -1826,11 +1829,11 @@ def test_the_leaves_of_placed_props_come_twice():
 
 
 def hull_file():
-    """A made-up miami_lod.p3d: the low-detail hull (a vertexfade shader) and the daylight."""
+    """A made-up miami_lod.p3d: the low-detail hull (a vertexfade shader, world geometry kind 3) and the daylight."""
     rig = skeleton("low_LOD", [("low_LOD", 0, (0, 0, 0)), ("collapsedMesh_0", 0, (0, 0, 0))])
     return p3d(shader_chunk("pure3dVertexFadeShader1", "vertexfade", ints=[("BLMD", 1), ("LIT", 1)]), rig,
                mesh("collapsedMesh_0", "pure3dVertexFadeShader1"), composite("low_LOD", "low_LOD", [("collapsedMesh_0", 1, 1)]),
-               world_geo("low_LOD"), light("MiamiSunShape", 2, 0xFF1F2D30, kids=sub((0, 0, 0), direction=(0, -1, 0))),
+               world_geo("low_LOD", 3), light("MiamiSunShape", 2, 0xFF1F2D30, kids=sub((0, 0, 0), direction=(0, -1, 0))),
                light_group("zone_lights", ["MiamiSunShape"], kind=0))
 
 
@@ -1840,8 +1843,8 @@ def test_the_low_detail_hull_doesnt_cover_the_detailed_areas(tmp_path):
     lib.add("a_shell.p3d", area("shells_a"), main=True)
     glb, report = G.export(lib, map_mode=True, lod=True)
     doc, _ = read_glb(glb)
-    assert node_named(doc, "low_LOD")["extras"] == {"lowDetailHull": True, "hidden": True}
-    assert "extras" not in node_named(doc, "shells_a")
+    assert node_named(doc, "low_LOD")["extras"] == {"worldGeometryKind": 3, "lowDetailHull": True, "hidden": True}
+    assert node_named(doc, "shells_a")["extras"] == {"worldGeometryKind": 0}         # no zone package: no draw distance
     assert "hidden" not in json.dumps([node_named(doc, n) for n in ("miami_lod", "miami_lod lights", "zone_lights")])
     assert "extensions" in node_named(doc, "MiamiSunShape")            # the daylight still lights the scene
     hull = by_name(doc)["pure3dVertexFadeShader1"]
@@ -1849,7 +1852,8 @@ def test_the_low_detail_hull_doesnt_cover_the_detailed_areas(tmp_path):
     assert any("low-detail hull, marked hidden" in line for line in report.lines())
     alone = G.Library()
     alone.add("miami_lod.p3d", hull_file(), main=True)
-    assert node_named(read_glb(G.export(alone, map_mode=True)[0])[0], "low_LOD")["extras"] == {"lowDetailHull": True}
+    assert node_named(read_glb(G.export(alone, map_mode=True)[0])[0], "low_LOD")["extras"] == {"worldGeometryKind": 3,
+                                                                                               "lowDetailHull": True}
     assert node_named(read_glb(G.export(alone, map_mode=True, beside_detail=True)[0])[0], "low_LOD")["extras"]["hidden"]
     # split: the hull's own file is hidden too, since the areas it would cover come in beside it
     (tmp_path / "miami_lod.p3d").write_bytes(hull_file())
@@ -2120,7 +2124,8 @@ def test_the_blender_scene_draws_them_as_the_game_does(monkeypatch):
     assert [s.links[0].from_socket.name for s in times.inputs] == ["Color", "Alpha"] and into(times.inputs[0]) is glow.picture()
     assert (glow.surface_render_method, glow.blend_method, glow.show_transparent_back, glow.use_transparency_overlap,
             glow.shadow_method) == ("BLENDED", "BLEND", True, True, "NONE")
-    # darkens: a Transparent BSDF in the colour of 1 minus the made picture's alpha (its brightness): a multiply
+    # darkens: a Transparent BSDF in the colour of 1 minus the made picture's alpha (its brightness, SPEC-003): what is
+    # behind times 1 minus the brightness, close to the game's subtracting where what is behind is bright
     through = skid.surface()
     left = into(through.inputs["Color"])
     assert through.type == "ShaderNodeBsdfTransparent" and left.type == "ShaderNodeMath" and left.operation == "SUBTRACT"
@@ -2203,3 +2208,145 @@ def test_the_blender_scene_handles_unlit_materials_too(monkeypatch):
     times = into(into(both.inputs[1]).inputs["Color"])
     assert both.type == "ShaderNodeAddShader" and into(times.inputs[0]) is glow.picture()
     assert decal.surface().type == "ShaderNodeMixShader" and into(decal.surface().inputs[1]).type == "ShaderNodeEmission"
+
+
+# --------------------------------------------------------------------------- a placed prop's starting state, draw
+# distances, far-away stand-ins and the subtracting surfaces (the clean-room spec
+# docs/cleanroom/SPEC-003-props-zones-xbox-blending.md)
+
+def door_prop(open_name="open"):
+    """A door whose states are idle, opening, closing and open, in that order: shut in idle and opening, open in
+    the other two."""
+    rig = skeleton("door", [("door", 0, (0, 0, 0)), ("doorShut", 0, (0, 0, 0)), ("doorOpen", 0, (0, 0, 0))])
+    shut, opened = [("doorShutShape", True), ("doorOpenShape", False)], [("doorShutShape", False), ("doorOpenShape", True)]
+    return p3d(rig, mesh("doorShutShape"), mesh("doorOpenShape"),
+               composite("door", "door", [("doorShutShape", 1, 1), ("doorOpenShape", 1, 2)]),
+               state_prop("door", [("idle", shut), ("opening", shut), ("closing", opened), (open_name, opened)]),
+               chunk(0x8800005, text("door") + text("door")))
+
+
+def test_a_placed_prop_starts_in_the_state_its_record_names():
+    # the last of the twelve numbers: 0 its first state; 8 open (found by name, not by its place: the door's
+    # fourth state, and named Open); 2 final, which a door hasn't: its first; 1 idle, its first anyway
+    starts = [0, 8, 2, 1]
+    shell = area("w_a_shell", objects=[("door", [record(i + 1.0, 0.0, 1.0)[:11] + [s] for i, s in enumerate(starts)])])
+    glb, report = export(shell, lib=[("x_region_D.p3d", door_prop("Open"))], map_mode=True)
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    copies = node_named(doc, "main0 instances")["children"]
+    assert report.placed == 4 and [doc["nodes"][c]["translation"][0] for c in copies] == [1.0, 2.0, 3.0, 4.0]
+    assert [shapes_under(doc, c) for c in copies] == [["doorShutShape"], ["doorOpenShape"], ["doorShutShape"], ["doorShutShape"]]
+    assert [doc["nodes"][c].get("extras") for c in copies] == [None, {"state": "Open"}, None, None]
+    # the prop's file opened on its own is as before: its first state, and its later looks beside it
+    doc, _ = read_glb(export(door_prop())[0])
+    tops = {doc["nodes"][i]["name"]: i for i in doc["scenes"][0]["nodes"]}
+    assert sorted(tops) == ["door", "door (closing)", "door (open)"] and shapes_under(doc, tops["door"]) == ["doorShutShape"]
+    assert not any("state" in n.get("extras", {}) for n in doc["nodes"])
+
+
+def test_which_state_a_placed_copy_starts_in():
+    states = [("idle", {}), ("Opening", {}), ("OPEN", {})]
+    assert [G.starting_state(states, n) for n in (0, 1, 8, 9, 2, 12)] == [0, 0, 2, 1, 0, 0]
+    assert G.starting_state([], 8) == 0
+
+
+def geo(name, kind, at):
+    """A world geometry (0x8800003 with its kind) whose one mesh hangs on a joint at `at`."""
+    part = name + "Shape"
+    return (skeleton(name, [(name, 0, (0, 0, 0)), (name + "_joint", 0, at)]) + mesh(part)
+            + composite(name, name, [(part, 1, 1)]) + world_geo(name, kind))
+
+
+def zone_entry(name, near, far, fade, x=0.0, minus_z=0.0):
+    """A Zone Package Entry (0x8800009): the file keeps the reference point's z with its sign flipped."""
+    return chunk(0x8800009, text(name) + struct.pack("<I6f", 6, near, far, fade, 0.0, x, minus_z))
+
+
+def zoned_area():
+    """A made-up area: a street drawn up to 500 away; two far-away stand-ins, drawn only when the camera is farther
+    than their near distance (the dock's distance measured from a point, (100, -200) in the game's space); and an
+    underwater part with no zone package entry."""
+    zone = chunk(0x8800004, text("a_01") + struct.pack("<I", 3) + text("shells_a") + text("fake_dock") + text("fadeout_windows"),
+                 zone_entry("shells_a", 0.0, 500.0, 15.0) + zone_entry("FAKE_DOCK", 83.9, 388.8, 5.0, 100.0, 200.0)
+                 + zone_entry("fadeout_windows", 40.8, 300.0, 5.0))
+    return p3d(geo("shells_a", 0, (0, 0, 0)), geo("fake_dock", 0, (100.0, 5.0, -200.0)), geo("fadeout_windows", 0, (1.0, 2.0, 3.0)),
+               geo("underwater_a", 5, (0, -2.0, 0)), zone)
+
+
+def test_world_geometry_carries_its_draw_distance_and_kind():
+    glb, report = export(zoned_area(), map_mode=True)
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    assert report.models == ["shells_a", "fake_dock", "fadeout_windows", "underwater_a"]
+    assert node_named(doc, "shells_a")["extras"] == {"worldGeometryKind": 0,
+                                                     "drawDistance": {"near": 0.0, "far": 500.0, "fade": 15.0}}
+    dock = node_named(doc, "fake_dock")["extras"]
+    assert dock == {"worldGeometryKind": 0, "hidden": True,
+                    "drawDistance": {"near": 83.9, "far": 388.8, "fade": 5.0, "from": [100.0, 0.0, 200.0]}}
+    # the point is converted like every other position (Z mirrored), at height 0: it is where the dock's joint is
+    joint = node_named(doc, "fake_dock_joint")["translation"]
+    assert dock["drawDistance"]["from"] == pytest.approx([joint[0], 0.0, joint[2]])
+    windows = node_named(doc, "fadeout_windows")["extras"]
+    assert windows["hidden"] is True and windows["drawDistance"] == {"near": 40.8, "far": 300.0, "fade": 5.0}  # no point
+    assert node_named(doc, "underwater_a")["extras"] == {"worldGeometryKind": 5}         # no entry: no draw distance
+    notes = [line for line in report.lines() if "far-away stand-in" in line]
+    assert len(notes) == 1 and notes[0].startswith("main0: 2 far-away stand-in(s), marked hidden")   # once per file
+    assert "fake_dock" in notes[0] and "fadeout_windows" in notes[0] and "shells_a" not in notes[0]
+    assert "-0.0" not in json.dumps([n.get("extras") for n in doc["nodes"]])
+
+
+def test_a_low_detail_hull_drawn_only_from_afar_is_hidden_even_alone():
+    """The low-detail city by itself is shown, but a part of it with a near distance is a far-away stand-in."""
+    zone = chunk(0x8800004, text("lod") + struct.pack("<I", 1) + text("low_LOD"), zone_entry("low_LOD", 581.0, 10000.0, 5.0))
+    lib = G.Library()
+    lib.add("miami_lod.p3d", with_chunks(hull_file(), zone), main=True)
+    glb, report = G.export(lib, map_mode=True)
+    assert node_named(read_glb(glb)[0], "low_LOD")["extras"] == {
+        "worldGeometryKind": 3, "lowDetailHull": True, "hidden": True,
+        "drawDistance": {"near": 581.0, "far": 10000.0, "fade": 5.0}}
+    assert any(line.startswith("miami_lod: 1 far-away stand-in(s)") for line in report.lines())
+
+
+def test_the_blender_scene_switches_the_far_away_stand_ins_off(monkeypatch):
+    import sys
+    import types
+    import blender_export as BX
+    layers: list = []
+    monkeypatch.setattr(FakeCollection, "layers", layers)
+    bpy = types.SimpleNamespace(
+        app=types.SimpleNamespace(background=False, timers=types.SimpleNamespace(register=lambda *a, **k: None)),
+        data=types.SimpleNamespace(materials=[], collections=types.SimpleNamespace(new=FakeCollection)),
+        context=types.SimpleNamespace(view_layer=types.SimpleNamespace(layer_collection=types.SimpleNamespace(children=layers))))
+    monkeypatch.setitem(sys.modules, "bpy", bpy)
+    ns: dict = {}
+    exec(compile(BX.OPEN_SCRIPT % {"files": [], "save": None, "fps": 30}, "open_in_blender.py", "exec"), ns)
+    joint = FakeObject("fake_dock_joint", [FakeObject("fake_dockShape")])
+    dock = FakeObject("fake_dock", [joint], worldGeometryKind=0, hidden=1, drawDistance={"near": 83.9, "far": 388.8, "fade": 5.0})
+    street = FakeObject("shells_a", worldGeometryKind=0, drawDistance={"near": 0.0, "far": 500.0, "fade": 15.0})
+    # the low-detail city by itself: shown, but its part drawn only from afar switched off with the stand-ins
+    hull = FakeObject("low_LOD", worldGeometryKind=3, lowDetailHull=1)
+    far_hull = FakeObject("low_LOD_far", worldGeometryKind=3, lowDetailHull=1, hidden=1, drawDistance={"near": 581.0})
+    scene = types.SimpleNamespace(collection=FakeCollection("Scene Collection"))
+    everything = [dock, joint, joint.children[0], street, hull, far_hull]
+    for o in everything:
+        scene.collection.objects.link(o)
+    scene.objects = list(everything)
+    layers.clear()
+    ns["game_looks"](scene)
+    made = {c.collection.name: c for c in layers}
+    assert sorted(made) == ["Far-away stand-ins", "Low-detail hull"]
+    assert list(made["Far-away stand-ins"].collection.objects) == [dock, joint, joint.children[0], far_hull]
+    assert made["Far-away stand-ins"].exclude is True and made["Low-detail hull"].exclude is False
+    assert list(made["Low-detail hull"].collection.objects) == [hull] and street.users_collection == [scene.collection]
+
+
+def test_darkening_subtracts_and_exports_made_before_are_made_again(monkeypatch, tmp_path):
+    # black, alpha = the largest of red, green and blue; a pixel that fails the cut-out darkens nothing
+    assert G.darkening(bytes([10, 200, 30, 255, 255, 0, 0, 100, 0, 0, 0, 255])) == bytes([0, 0, 0, 200, 0, 0, 0, 255, 0, 0, 0, 0])
+    assert G.darkening(bytes([10, 200, 30, 255, 255, 0, 0, 100]), cut=(0.5, True)) == bytes([0, 0, 0, 200, 0, 0, 0, 0])
+    import blender_export as BX
+    monkeypatch.delenv(G.LOOK_ENV, raising=False)
+    (tmp_path / "made_by.txt").write_text("8", encoding="utf-8")
+    assert G.EXPORT_VERSION > 8 and not BX.city_current(tmp_path)          # made with the multiplying darkening
+    (tmp_path / "made_by.txt").write_text(str(G.EXPORT_VERSION), encoding="utf-8")
+    assert BX.city_current(tmp_path)

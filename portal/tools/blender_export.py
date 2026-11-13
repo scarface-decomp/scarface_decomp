@@ -1290,9 +1290,10 @@ def add_light(mat):
 
 
 def darken(mat):
-    # The game darkens what is behind these surfaces by their picture (BLMD 3). The export made the picture black
-    # with an alpha of 1 minus its brightness: here a Transparent BSDF in the colour of that brightness, which
-    # multiplies what is behind by it.
+    # The game takes these surfaces' colour away from what is behind them (BLMD 3 subtracts). The export made the
+    # picture black with an alpha of its brightness (the largest of its red, green and blue): here a Transparent
+    # BSDF in the colour of 1 minus that brightness, which multiplies what is behind by it, close to subtracting
+    # the brightness where what is behind is bright.
     tree = mat.node_tree
     out = output_of(tree)
     if out is None:
@@ -1373,11 +1374,21 @@ def gather(scene, name, objects, shown=True):
     return coll
 
 
+def far_away(o):
+    # A world geometry the game draws only when the camera is farther than its near distance (a stand-in for
+    # something close by): the export marks it "hidden" and gives its "drawDistance".
+    try:
+        return bool(own(o, "hidden")) and float((own(o, "drawDistance") or {}).get("near") or 0) > 0
+    except Exception:
+        return False
+
+
 def game_looks(scene):
     # What the exports leave in extras (docs/FORMATS.md, "Exporting to Blender"): how the game puts each
     # see-through surface over what is behind it ("blend"), and which it draws without writing depth
     # ("depthWrite"); then the shadow decals, the low-detail hull (switched off when the export says it is
-    # "hidden": it would cover the detailed areas) and the sea, each in a collection of its own.
+    # "hidden": it would cover the detailed areas), the far-away stand-ins (always "hidden", so switched off)
+    # and the sea, each in a collection of its own.
     for mat in list(bpy.data.materials):
         blend, depth = own(mat, "blend"), own(mat, "depthWrite")
         depth = True if depth is None else bool(depth)
@@ -1392,19 +1403,22 @@ def game_looks(scene):
                 see_through(mat, depth)
         except Exception:
             traceback.print_exc()
-    groups = {"Shadow decals": [], "Low-detail hull": [], "Sea": []}
+    groups = {"Shadow decals": [], "Low-detail hull": [], "Far-away stand-ins": [], "Sea": []}
     hidden = False
     for o in list(scene.objects):
         if own(o, "shadowDecal"):
             groups["Shadow decals"].append(o)
-        elif own(o, "lowDetailHull"):
+        elif own(o, "lowDetailHull") and not far_away(o):
             groups["Low-detail hull"] += [o] + below(o)
             hidden = hidden or bool(own(o, "hidden"))
+        elif own(o, "hidden"):
+            groups["Far-away stand-ins"] += [o] + below(o)
         elif own(o, "ocean"):
             groups["Sea"].append(o)
+    off = {"Low-detail hull": hidden, "Far-away stand-ins": True}
     for name, objects in groups.items():
         try:
-            gather(scene, name, objects, shown=not (hidden and name == "Low-detail hull"))
+            gather(scene, name, objects, shown=not off.get(name))
         except Exception:
             traceback.print_exc()
 

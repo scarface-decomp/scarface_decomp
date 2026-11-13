@@ -326,3 +326,130 @@ def test_shadow_records():
                                  "building": True, "number": 0, "values": (0.0, 200.0)}
     assert P.fields(data, n)["building"] is False and P.fields(data, n)["values"] == (0.0, 15.0)
     assert "building=True" in P.dump(data)
+
+
+# --------------------------------------------------------------------------- state props, zone packages, occluders,
+# characters and vehicles (SPEC-003)
+
+def test_the_names_of_the_prop_zone_and_water_chunks():
+    assert {cid: P.NAMES[cid] for cid in (0x0802000E, 0x08020002, 0x08020003, 0x08020008, 0x0802000B, 0x08800009)} == {
+        0x0802000E: "Prop State", 0x08020002: "Part Visibility", 0x08020003: "Prop State Animation",
+        0x08020008: "Prop Property", 0x0802000B: "Prop State Effect", 0x08800009: "Zone Package Entry"}
+    # the loaders' order in the Xbox program: shallow area, obstacle, dock
+    assert [P.NAMES[cid] for cid in (0x08800201, 0x08800202, 0x08800203)] == ["Water Shallow Area", "Water Obstacle",
+                                                                              "Water Dock"]
+
+
+def prop_state(name, moves=0, after=0, frame=0.0, kids=b"", counts=(0, 0, 0, 0)):
+    """A Prop State (0x0802000E): the name, then ten 4-byte values; counts: part visibilities, animations,
+    properties, effects."""
+    shown, anims, props, effects = counts
+    return chunk(0x0802000E, text(name) + struct.pack("<6If3I", moves, after, shown, anims, 0, 0, frame, 0, props, effects),
+                 kids)
+
+
+def test_state_prop_data_its_states_and_what_they_hold():
+    shown = chunk(0x08020002, text("gateShape") + struct.pack("<I", 1))
+    anim = chunk(0x08020003, text("gateMove") + struct.pack("<3I3f", 1, 1, 0, 20.0, 0.0, 0.5))
+    prop = chunk(0x08020008, text("percent_damaged") + text("50"))
+    effect = chunk(0x0802000B, text("Effect") + text("dustCloud") + struct.pack("<I", 0) + text("gateJoint")
+                   + struct.pack("<6fI", 0.0, 0.5, 0.0, 1.5708, 0.0, 0.0, 0) + text("gateJoint") + struct.pack("<2f", 2.0, 10.0))
+    idle = prop_state("idle")
+    opening = prop_state("opening", moves=1, after=2, frame=30.0, kids=shown + anim + prop + effect, counts=(1, 1, 1, 1))
+    top = chunk(0x0802000D, struct.pack("<I", 4) + text("gate") + text("gate") + struct.pack("<II", 3, 1),
+                chunk(0x08020008, text("name") + text("gate")) + idle + opening + prop_state("open"))
+    data = p3d(top)
+    t = P.read_tree(data)[0]
+    assert [c.name for c in P.walk([t])] == ["State Prop Data", "Prop Property", "Prop State", "Prop State",
+                                             "Part Visibility", "Prop State Animation", "Prop Property",
+                                             "Prop State Effect", "Prop State"]
+    # the number of states comes first, then the number of properties
+    assert P.fields(data, t) == {"version": 4, "name": "gate", "composite drawable": "gate", "states": 3, "properties": 1}
+    assert P.fields(data, t.children[0]) == {"name": "name", "value": "gate"}
+    assert P.fields(data, t.children[1]) == {"name": "idle", "moves on": False, "next state": 0, "part visibilities": 0,
+                                             "animations": 0, "0x08020004 sub-chunks": 0, "0x08020005 sub-chunks": 0,
+                                             "frame": 0.0, "number": 0, "properties": 0, "effects": 0}
+    st = t.children[2]
+    assert P.fields(data, st) == {"name": "opening", "moves on": True, "next state": 2, "part visibilities": 1,
+                                  "animations": 1, "0x08020004 sub-chunks": 0, "0x08020005 sub-chunks": 0,
+                                  "frame": 30.0, "number": 0, "properties": 1, "effects": 1}
+    vis, an, pr, ef = st.children
+    assert P.fields(data, vis) == {"part": "gateShape", "shown": True}
+    assert P.fields(data, an) == {"frame controller": "gateMove", "numbers": (1, 1, 0), "frames": (20.0, 0.0), "speed": 0.5}
+    assert P.fields(data, pr) == {"name": "percent_damaged", "value": "50"}
+    assert P.fields(data, ef) == {"kind": "Effect", "effect": "dustCloud", "number": 0, "joint": "gateJoint",
+                                  "offset": (0.0, 0.5, 0.0), "angles": (1.5708, 0.0, 0.0), "number 2": 0,
+                                  "joint 2": "gateJoint", "size": 2.0, "value": 10.0}
+    assert "moves on=True" in P.dump(data) and "effect=dustCloud" in P.dump(data)
+
+
+def test_an_old_state_prop_data_has_no_number_of_properties():
+    data = p3d(chunk(0x0802000D, struct.pack("<I", 2) + text("crate") + text("crate") + struct.pack("<I", 1)))
+    assert P.fields(data, P.read_tree(data)[0]) == {"version": 2, "name": "crate", "composite drawable": "crate", "states": 1}
+
+
+def test_short_prop_and_zone_chunks_are_read_without_throwing():
+    for cid, body in ((0x0802000E, text("idle") + b"\x01\x00"), (0x0802000B, text("Effect") + text("dust")),
+                      (0x08020003, text("gateMove") + struct.pack("<I", 1)), (0x0880000A, struct.pack("<3f", 1, 2, 3)),
+                      (0x0802000D, struct.pack("<I", 4) + text("gate"))):
+        data = p3d(chunk(cid, body))
+        assert P.fields(data, P.read_tree(data)[0]) == {}
+    # a zone package entry that says six floats and holds three: the ones it has
+    data = p3d(chunk(0x08800009, text("cut") + struct.pack("<I3f", 6, 1.0, 2.0, 3.0)))
+    assert P.fields(data, P.read_tree(data)[0]) == {"name": "cut", "floats": 6, "near": 1.0, "far": 2.0, "fade": 3.0}
+    # a character with only three of its texts: no shaders
+    data = p3d(chunk(0x08800000, text("man") + text("manShape") + text("")))
+    assert P.fields(data, P.read_tree(data)[0]) == {"name": "man", "model": "manShape", "low-detail model": "", "shaders": []}
+
+
+def zone_entry(name, near, far, fade, x=0.0, minus_z=0.0):
+    """A Zone Package Entry (0x08800009): the file keeps the reference point's z with its sign flipped."""
+    return chunk(0x08800009, text(name) + struct.pack("<I6f", 6, near, far, fade, 0.0, x, minus_z))
+
+
+def test_zone_package_entries_give_each_world_geometrys_draw_distance():
+    zone = chunk(0x08800004, text("area_a") + struct.pack("<I", 2) + text("fake_dock") + text("shells_a"),
+                 zone_entry("fake_dock", 83.9, 388.8, 5.0, 120.5, 300.25) + zone_entry("shells_a", 0.0, 10000.0, 15.0))
+    data = p3d(zone, chunk(0x08800003, text("low_LOD_a") + text("low_LOD_a") + struct.pack("<I", 3)))
+    z, geo = P.read_tree(data)
+    assert [c.name for c in z.children] == ["Zone Package Entry", "Zone Package Entry"]
+    assert P.fields(data, z) == {"name": "area_a", "world geometry": ["fake_dock", "shells_a"]}
+    assert P.fields(data, z.children[0]) == {"name": "fake_dock", "floats": 6, "near": 83.9, "far": 388.8, "fade": 5.0,
+                                             "value": 0.0, "point": (120.5, -300.25)}       # the sign put back
+    none = P.fields(data, z.children[1])["point"]
+    assert none == (0.0, 0.0) and math.copysign(1.0, none[1]) == 1.0                         # no minus zero
+    assert P.fields(data, geo) == {"name": "low_LOD_a", "composite drawable": "low_LOD_a", "kind": 3}
+
+
+def test_occluders():
+    data = p3d(chunk(0x0880000A, struct.pack("<6fIf3f", 10.0, 2.0, -30.0, 0.0, 0.0, 1.0, 0, 0.0, 2.25, 10.0, 56.05)))
+    occ = P.read_tree(data)[0]
+    assert occ.name == "Occluder" and occ.head == 12 + 44
+    assert P.fields(data, occ) == {"position": (10.0, 2.0, -30.0), "facing": (0.0, 0.0, 1.0), "number": 0, "value": 0.0,
+                                   "sizes": (2.25, 10.0, 56.05)}
+
+
+def test_characters_and_vehicles_are_eleven_texts():
+    assert text("") == b"\x03\x00\x00\x00"                  # an empty text, which once looked like a u32 3
+    person = chunk(0x08800000, text("woman_01") + text("woman_01Shape") + text("woman_01_low") + text("woman_01_SG")
+                   + text("") * 7)
+    car = chunk(0x08800001, text("plane") + text("plane") + text("plane_LOD") + text("plane_mt") + text("plane_glass")
+                + text("") * 6)
+    data = p3d(person, car)
+    p, c = P.read_tree(data)
+    assert (p.name, c.name) == ("Character", "Vehicle")
+    assert P.fields(data, p) == {"name": "woman_01", "model": "woman_01Shape", "low-detail model": "woman_01_low",
+                                 "shaders": ["woman_01_SG"] + [""] * 7}
+    assert P.fields(data, c) == {"name": "plane", "model": "plane", "low-detail model": "plane_LOD",
+                                 "shaders": ["plane_mt", "plane_glass"] + [""] * 6}
+
+
+def test_an_instance_record_names_the_state_its_copy_starts_in():
+    def record(state):
+        return struct.pack("<3f9I", 1.0, 250.0, 2.0, 0, 90, 0, 40, 15, 0, 1, 0, state)
+    data = p3d(*(chunk(0x09900194, record(n)) for n in (0, 1, 8, 11, 12)))
+    first, idle, opened, closing, odd = (P.fields(data, c) for c in P.read_tree(data))
+    assert "state" not in first and first["position"] == (1.0, 2.5, 2.0)    # 0: the prop's own first state
+    assert (idle["state"], opened["state"], closing["state"], odd["state"]) == ("idle", "open", "closing", 12)
+    assert [P.start_state(n) for n in range(12)] == [None, "idle", "final", "damage_1", "damage_2", "damage_3",
+                                                     "damage_4", "explosion", "open", "opening", "closed", "closing"]
