@@ -941,7 +941,9 @@ def test_blender_version_is_picked_beside_the_tools_and_says_what_each_has(page)
     labels = page.eval_on_selector_all("#gfb-version option", "os => os.map(o => o.textContent)")
     values = page.eval_on_selector_all("#gfb-version option", "os => os.map(o => o.value)")
     assert "the whole city, 3 areas" in labels[0] and "only 1 area of its own" in labels[1]
-    assert page.input_value("#gfb-version") == values[0] and page.text_content("#gfb-version-note") == ""
+    assert page.input_value("#gfb-version") == "pc"                         # the PC's tab is the one it opens on
+    page.select_option("#gfb-version", values[0])
+    page.wait_for_function("document.getElementById('gfb-version-note').textContent.includes('pick PC here')")
     assert page.is_visible("#gfb-city")
     page.select_option("#gfb-version", values[1])                              # the same as pressing its tab
     page.wait_for_function("document.getElementById('gfb-version-note').textContent.includes('not its whole city')")
@@ -1052,7 +1054,7 @@ def test_game_files_subtitles_and_their_sound(page):
     assert page.query_selector("#gf-list .gf-prev .gf-bl") is None            # nothing for Blender
     page.click("#gf-list .gf-prev button:has-text('Play the sound')")
     page.wait_for_selector("#gf-list .gf-prev audio")
-    assert wait_for_calls("/api/game-files/sound")[-1][1]["path"].endswith("sounds/xbox_020.rsd")
+    assert wait_for_calls("/api/game-files/sound")[-1][1]["path"].endswith("sounds/pc_020.rsd")
 
 
 def test_game_files_movies_play_in_the_page(page):
@@ -1336,4 +1338,48 @@ def test_finding_a_cutscene_by_name(page):
     page.evaluate("() => { const f = document.getElementById('gfb-scene-find'); f.value = 'zzz'; fillGfScenes(); }")
     assert page.locator("#gfb-scene option").all_text_contents() == ["No cutscene with that in its name"]
     assert page.is_disabled("#gfb-scene-open")
+
+
+def test_game_files_open_on_the_pc_and_say_how_many_of_each_kind_there_are(page):
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.click("#gf-start")
+    _gf_done(page)
+    page.wait_for_selector("#gf-tabs .gf-tab")
+    assert page.text_content("#gf-tabs .gf-tab[aria-selected=true]") == "PC"          # not just the first tab
+    tiles = page.eval_on_selector_all("#gf-kinds .gf-kind", "els => els.map(e => e.innerText.replace(/\\s+/g, ' '))")
+    assert tiles and all(" only in this version" in t for t in tiles)
+    assert not any(t.startswith("0 ") for t in tiles)                                 # the big number is how many it has
+    page.click("#gf-tabs .gf-tab:has-text('Xbox')")
+    page.wait_for_function("document.getElementById('gfb-version-note').textContent.includes('pick PC here')")
+
+
+def test_a_cutscenes_pieces_are_one_row_until_asked_for(page):
+    page.goto(BASE + "#gamefiles")
+    page.wait_for_selector("#gf-versions .gf-ver")
+    page.click("#gf-start")
+    _gf_done(page)
+    page.wait_for_selector("#gf-list .gf-row")
+    rows = [{"path": f"cement.rcf/art/nis/MNIS_AMB_Tony_Beaten_by_Cops/stream{i}.p3d", "kind": "animations", "size": 1000,
+             "status": "changed", "placed": "PC", "picked": False} for i in range(4)]
+    rows.append({"path": "cement.rcf/art/nis/MNIS_Bank/stream0.p3d", "kind": "animations", "size": 500,
+                 "status": "changed", "placed": "PC", "picked": False})
+    rows.append({"path": "cement.rcf/art/other/walk.p3d", "kind": "animations", "size": 10, "status": "changed",
+                 "placed": "PC", "picked": False})
+    page.route("**/api/game-files/list*", lambda r: r.fulfill(json={"ok": True, "files": rows, "total": len(rows),
+                                                                     "kinds": {"animations": len(rows)}}))
+    page.evaluate("loadGfList()")
+    page.wait_for_selector("#gf-list .gf-scene")
+    shown = page.locator("#gf-list .gf-row:visible")
+    assert shown.count() == 3                                       # one for each cutscene, one for the other file
+    lead = page.locator("#gf-list .gf-scene").first
+    assert "in 4 files that belong together" in lead.text_content()
+    assert lead.locator(".p").text_content().startswith("cement.rcf/art/nis/MNIS_AMB_Tony_Beaten_by_Cops/")
+    assert "stream0" not in lead.locator(".p").inner_text() and lead.locator(".z").text_content() == "4 KB"
+    assert page.locator("#gf-list .gf-scene").nth(1).locator(".gf-pieces").is_hidden()   # a cutscene in one file
+    lead.locator(".gf-pieces").click()
+    assert page.locator("#gf-list .gf-row:visible").count() == 6 and lead.locator(".gf-pieces").text_content() == "Hide the files"
+    lead.locator(".gf-pieces").click()
+    assert page.locator("#gf-list .gf-row:visible").count() == 3
+    page.unroute("**/api/game-files/list*")
 

@@ -395,7 +395,10 @@ def test_summary_and_lists(tmp_path):
     index = GA.run(list(GA.VERSIONS), "unique", b, log=lambda m: None)
     s = GA.summary(index)["versions"]
     assert s["prototype"]["only"] >= 2 and s["prototype"]["changed"] == 1 and s["prototype"]["shared"] == 2
-    assert s["prototype"]["kinds"]["models"] == {"only": 1, "changed": 1}
+    assert s["prototype"]["kinds"]["models"]["only"] == 1 and s["prototype"]["kinds"]["models"]["changed"] == 1
+    for v in s.values():                    # each kind's total counts the shared files too, and they add up
+        assert sum(k["files"] for k in v["kinds"].values()) == v["files"]
+        assert all(k["files"] >= k["only"] + k["changed"] for k in v["kinds"].values())
     page = GA.list_files(index, "prototype", status="own", kind="models")
     assert {f["path"] for f in page["files"]} == {"art/models/car.p3d", "art/cut/protoonly.p3d"}
     assert GA.list_files(index, "prototype", query="CUT")["total"] == 1

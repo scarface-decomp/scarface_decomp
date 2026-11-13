@@ -2097,9 +2097,10 @@ def summary(index: Optional[dict]) -> Optional[dict]:
             s[st] += 1
             if mode in ("best", "pc") and _written(row):
                 s["picked"] += 1
+            k = s["kinds"].setdefault(kind_of(path, _facts(row)), {"files": 0, "only": 0, "changed": 0})
+            k["files"] += 1                 # every file of this kind, so "0 only here" isn't read as "none"
             if st != "shared":
                 s["own_bytes"] += size
-                k = s["kinds"].setdefault(kind_of(path, _facts(row)), {"only": 0, "changed": 0})
                 k[st] += 1
         best_total += s["picked"]
         out["versions"][v] = s
