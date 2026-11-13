@@ -2526,3 +2526,28 @@ def test_a_city_from_before_the_occluders_is_made_again(monkeypatch, tmp_path):
     monkeypatch.delenv(G.LOOK_ENV, raising=False)
     (tmp_path / "made_by.txt").write_text("10", encoding="utf-8")
     assert G.EXPORT_VERSION == 11 and not BX.city_current(tmp_path)
+
+
+def test_a_strips_joining_triangles_are_left_out():
+    """A strip repeats a corner to jump to its next run: triangles with no area. Left in, Blender shades the
+    smooth surface around them as flat pieces."""
+    data = p3d(mesh("faceShape", positions=QUAD + [QUAD[3]], indices=(0, 1, 2, 3, 4)))    # the last corner twice
+    assert len(G.geometry(data, G.p3d.read_tree(data)[0].children[0]).triangles) == 3      # as stored
+    glb, _ = export(data)
+    doc, _ = read_glb(glb)
+    prim = doc["meshes"][0]["primitives"][0]
+    assert doc["accessors"][prim["indices"]]["count"] == 6                                 # the two with an area
+
+
+def test_people_are_shaded_smooth_in_blender():
+    import blender_export as BX
+    script = BX.OPEN_SCRIPT % {"files": ["a.glb"], "save": None, "fps": 30}
+    assert 'find_armature() is not None' in script and 'foreach_set("use_smooth"' in script
+
+
+def test_a_cutscene_opened_in_blender_leaves_its_measurements_beside_it():
+    import blender_export as BX
+    script = BX.OPEN_SCRIPT % {"files": ["a.glb"], "save": "a.blend", "fps": 30}
+    compile(script, "open_in_blender.py", "exec")
+    assert "def measure(scene):" in script and '".check.json"' in script and "measure(scene)" in script
+

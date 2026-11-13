@@ -1468,6 +1468,10 @@ def finish(problems):
                 out.write("Blender " + bpy.app.version_string + " couldn't bring this in.\n\n" + "\n".join(problems))
         except OSError:
             pass
+    try:                                         # what Blender made of a cutscene, in numbers, beside it
+        measure(scene)
+    except Exception:
+        traceback.print_exc()
     if SAVE and shown:                           # never save a scene with nothing of the game in it
         say("Scarface: saving the scene, so next time it opens at once...")
         try:
@@ -1475,6 +1479,52 @@ def finish(problems):
         except Exception as e:
             print("Couldn't save", SAVE, e)
     say("")
+
+
+def measure(scene):
+    # For a cutscene: where Blender puts a few joints and the parts hung on them at seven moments, how each
+    # face slider stands, and how each person's surface is shaded. Written as <scene>.check.json, so what
+    # Blender shows can be compared with what the export meant without anybody describing a screenshot.
+    if not any(a.name.startswith("Cutscene ") for a in bpy.data.actions):
+        return
+    import json
+    watch = ("Head", "Jaw", "Wrist_R", "right_hand_attach")
+    out = {"blender": bpy.app.version_string, "fps": scene.render.fps, "frames": [scene.frame_start, scene.frame_end],
+           "meshes": [], "joints": [], "parts": [], "sliders": []}
+    for o in scene.objects:
+        if o.type == "MESH" and (o.find_armature() is not None or o.parent_bone):
+            me = o.data
+            out["meshes"].append({"name": o.name, "points": len(me.vertices), "faces": len(me.polygons),
+                                  "smooth": sum(1 for p in me.polygons if p.use_smooth),
+                                  "own_normals": bool(getattr(me, "has_custom_normals", False)),
+                                  "shapes": len(me.shape_keys.key_blocks) if me.shape_keys else 0,
+                                  "on": o.parent.name if o.parent else "", "bone": o.parent_bone})
+    was = scene.frame_current
+    span = max(1, scene.frame_end - scene.frame_start)
+    for k in range(7):
+        f = scene.frame_start + span * k // 6
+        scene.frame_set(f)
+        for o in scene.objects:
+            if o.type == "ARMATURE":
+                for name in watch:
+                    pb = o.pose.bones.get(name)
+                    if pb is not None:
+                        m = o.matrix_world @ pb.matrix
+                        out["joints"].append({"frame": f, "of": o.name, "joint": name,
+                                              "at": [round(v, 4) for v in m.translation],
+                                              "turn": [round(v, 4) for v in m.to_quaternion()],
+                                              "from_rest": [round(v, 4) for v in pb.matrix_basis.to_quaternion()]})
+            elif o.type == "MESH" and o.parent_bone and len(out["parts"]) < 3000:
+                m = o.matrix_world
+                out["parts"].append({"frame": f, "name": o.name, "bone": o.parent_bone,
+                                     "at": [round(v, 4) for v in m.translation],
+                                     "turn": [round(v, 4) for v in m.to_quaternion()]})
+            if o.type == "MESH" and o.data.shape_keys and len(out["sliders"]) < 3000:
+                out["sliders"].append({"frame": f, "name": o.name,
+                                       "on": [round(b.value, 3) for b in o.data.shape_keys.key_blocks]})
+    scene.frame_set(was)
+    with open((SAVE or FILES[0]) + ".check.json", "w", encoding="utf-8") as fh:
+        json.dump(out, fh)
 
 
 def bring_in():
@@ -1513,6 +1563,14 @@ def tidy(scene):
                 b.rotation_quaternion = (1.0, 0.0, 0.0, 0.0)
                 b.rotation_euler = (0.0, 0.0, 0.0)
                 b.scale = (1.0, 1.0, 1.0)
+    # People are smooth all over: a skinned model is shaded smooth whatever the import made of its normals.
+    for o in scene.objects:
+        try:
+            if o.type == "MESH" and o.find_armature() is not None:
+                o.data.polygons.foreach_set("use_smooth", [True] * len(o.data.polygons))
+                o.data.update()
+        except Exception:
+            pass
     names = {o.name.lower() for o in scene.objects}
     for o in scene.objects:
         low = o.name.lower()

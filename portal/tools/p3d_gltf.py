@@ -1228,6 +1228,9 @@ class Builder:
             if tinted is not None:
                 geo.colours = add_colours(geo.colours, tinted[1], first, len(geo.positions))
             first += len(geo.positions)
+            # A strip's joining triangles have two corners in one place: no area, nothing to see. Left in, they
+            # give an edge three faces, and Blender then shades the smooth surface around it as flat pieces.
+            geo.triangles = [t for t in geo.triangles if len({geo.positions[i] for i in t}) == 3]
             if not geo.triangles:
                 continue
             attrs = {"POSITION": self.g.accessor([pos(v) for v in geo.positions], "VEC3", bounds=True, target=34962)}

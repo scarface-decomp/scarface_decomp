@@ -546,12 +546,17 @@
     .gf-kind { border: 1px solid var(--border); border-radius: 2px; padding: 10px 12px 8px; background: var(--bg-card-alt); color: var(--text); font-family: var(--sans); text-align: left; cursor: pointer; }
     .gf-kind strong { display: block; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
     .gf-kind span { font-size: 0.78rem; color: var(--muted); }
+    .gf-kind span:not(.gf-kind-sub) { display: block; font-size: 0.86rem; color: var(--text); }
+    .gf-kind .gf-kind-sub { display: block; margin-top: 2px; }
     .gf-kind[aria-pressed="true"] { border-color: var(--crimson); }
     .gf-filters { display: grid; grid-template-columns: minmax(0, 230px) minmax(0, 180px) minmax(0, 1fr) auto; gap: 10px; align-items: center; margin-bottom: 8px; }
     .gf-group { padding: 10px 12px 6px; border-bottom: 1px solid var(--border); background: var(--bg-card); font-family: var(--serif); letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.82rem; color: var(--crimson); position: sticky; top: 0; z-index: 1; }
     .gf-group span { color: var(--muted); text-transform: none; letter-spacing: 0; font-family: var(--sans); margin-left: 8px; }
     .gf-filters .input-box { width: 100%; }
     .gf-list { max-height: 440px; overflow-y: auto; border: 1px solid var(--border); border-radius: 2px; background: var(--bg-input); }
+    .gf-row[hidden] { display: none; }
+    .gf-row.gf-piece { background: rgba(255, 255, 255, 0.02); padding-left: 28px; }
+    .gf-row .gf-pieces { display: inline-block; margin: 4px 0 2px; padding: 2px 8px; font-size: 0.74rem; }
     .gf-row { display: grid; grid-template-columns: minmax(0, 1fr) 130px 84px 96px; gap: 10px; padding: 6px 12px 4px; border-bottom: 1px solid var(--border-subtle); font-size: 0.84rem; align-items: baseline; }
     .gf-row .p { font-family: var(--mono); font-size: 0.8rem; color: var(--text-secondary); overflow-wrap: anywhere; }
     .gf-row .k, .gf-row .z { color: var(--muted); }
@@ -3617,6 +3622,7 @@
   let GF_TAB = '';
   let GF_KIND = '';
   let GF_LAST_GROUP = '';
+  let GF_SCENE = null;                 // the cutscene whose pieces are being listed: {dir, lead, label, size, rows, bytes, open}
   let GF_OFFSET = 0;
   let GF_POLL = 0;
   let GF_SEARCH_T = 0;
@@ -3985,7 +3991,8 @@
       ? 'Your copy (' + (s.mode_label || s.mode) + ') keeps from the ' + label + ' only the files no other version has the same, so there '
         + (mine ? (mine === 1 ? 'is 1 area' : 'are ' + fmtInt(mine) + ' areas') + ' here, not its whole city' : 'is no city to export here')
         + '. For the ' + label + '\'s whole city, copy again with Every version complete.'
-      : '';
+      : (GF_TAB !== 'pc' && s.versions.pc
+        ? 'Using the ' + label + '\'s files. The PC\'s are the ones Blender shows best: pick PC here to use those.' : '');
     $('gfb-city').hidden = known && !mine;
     $('gfb-city-look').hidden = $('gfb-city-look-note').hidden = $('gfb-city').hidden;
   }
@@ -4764,7 +4771,12 @@
     if (!s) return;
     if (!GFT_LOADED) { GFT_LOADED = true; pollGfTextures(); }
     const vers = Object.keys(s.versions || {});
-    if (!vers.includes(GF_TAB)) { GF_TAB = vers[0] || ''; GF_KIND = ''; }
+    // The PC's files are the ones Blender shows best, so its tab opens first when the copy holds the whole PC
+    // game (The PC first, Every version complete). Other layouts keep whole only the first version found.
+    if (!vers.includes(GF_TAB)) {
+      GF_TAB = (s.mode === 'pc' || s.mode === 'every') && vers.includes('pc') ? 'pc' : (vers[0] || '');
+      GF_KIND = '';
+    }
     const areasKey = GF_TAB + '|' + (s.created || '');
     if (GFB_AREAS_FOR !== areasKey) { loadGfAreas(areasKey); loadGfScenes(areasKey); }
     let sub = s.mode_label + (s.folders === 'type' ? ', by type' : '') + ', copied ' + s.created + '.';
@@ -4814,14 +4826,23 @@
     kinds.textContent = '';
     ((GF_DATA || {}).kinds || []).forEach((k) => {
       const c = (info.kinds || {})[k.id] || { only: 0, changed: 0 };
-      if (!c.only && !c.changed) return;
+      const all = c.files === undefined ? c.only + c.changed : c.files;       // an older copy's index has no total
+      if (!all) return;
       const b = el('button', undefined, 'gf-kind');
       b.type = 'button';
       b.setAttribute('aria-pressed', String(GF_KIND === k.id));
       b.title = 'Show only ' + k.label.toLowerCase();
-      b.appendChild(el('strong', fmtInt(c.only)));
-      b.appendChild(el('span', k.label + ' only here' + (c.changed ? ' · ' + fmtInt(c.changed) + ' different' : '')));
-      b.addEventListener('click', () => { GF_KIND = GF_KIND === k.id ? '' : k.id; renderGfResult(); });
+      // The big number is how many this version has; what sets it apart from the others comes after.
+      b.appendChild(el('strong', fmtInt(all)));
+      b.appendChild(el('span', k.label));
+      b.appendChild(el('span', (c.only ? fmtInt(c.only) + ' only in this version' : 'None only in this version')
+        + (c.changed ? ' · ' + fmtInt(c.changed) + ' differ from another version' : ''), 'gf-kind-sub'));
+      b.addEventListener('click', () => {
+        GF_KIND = GF_KIND === k.id ? '' : k.id;
+        // "Only in this version" would list nothing for a kind that has none of its own: show them all instead
+        if (GF_KIND && !c.only && $('gf-status').value === 'only') $('gf-status').value = '';
+        renderGfResult();
+      });
       kinds.appendChild(b);
     });
     loadGfList();
@@ -4842,7 +4863,7 @@
     try { d = await apiFetchJson('/api/game-files/list?' + params.toString()); } catch (e) { return; }
     if (seq !== GF_LIST_SEQ) return;
     const list = $('gf-list');
-    if (!more) { list.textContent = ''; GF_LAST_GROUP = ''; }
+    if (!more) { list.textContent = ''; GF_LAST_GROUP = ''; GF_SCENE = null; }
     (d.files || []).forEach((f) => {
       if (f.kind !== GF_LAST_GROUP) {                 // the list comes sorted by kind: a heading for each
         GF_LAST_GROUP = f.kind;
@@ -4876,6 +4897,7 @@
       }
       row.appendChild(act);
       list.appendChild(row);
+      gfFoldScenePiece(row, f);
     });
     if (!list.children.length) list.appendChild(el('p', 'No files match.', 'empty-note'));
     GF_OFFSET += (d.files || []).length;
@@ -4897,6 +4919,53 @@
     const what = m[1] ? 'its script' : m[4] !== undefined ? 'piece ' + (Number(m[4]) + 1) + ' of its animations' : 'a small file for the game’s loader';
     return 'Cutscene “' + title + '”: ' + what + (pal ? ', in the copy for European televisions (PAL)' : '')
       + (m[1] ? '' : '. Open shows the whole cutscene.');
+  }
+
+  /* A cutscene's animations come cut into pieces (stream0.p3d, stream1.p3d ...) that only make sense together,
+     and Open on any of them shows the whole cutscene. So the list shows one row for the lot, with a button
+     to see the pieces. Rows arrive in order, a page at a time, so the row for a cutscene is filled in as its
+     pieces come. */
+  function gfFoldScenePiece(row, f) {
+    const m = /^(.*(?:^|\/)art\/nis\/([^\/]+))\/(?:stream\d+|static)\.p3d$/i.exec(f.path);
+    if (!m || /^(characters|fsc)$/i.test(m[2])) { GF_SCENE = null; return; }
+    if (!GF_SCENE || GF_SCENE.dir !== m[1] || !GF_SCENE.lead.isConnected) {
+      const pal = /^PAL_/i.test(m[2]);
+      const title = m[2].replace(/^PAL_/i, '').replace(/^M?NIS_/i, '').replace(/_/g, ' ');
+      const more = el('button', '', 'btn-sm gf-pieces');
+      more.type = 'button';
+      more.setAttribute('aria-expanded', 'false');
+      const scene = { dir: m[1], lead: row, rows: [], bytes: 0, more, open: false, firstPath: f.path,
+        title: 'Cutscene “' + title + '”' + (pal ? ', the copy for European televisions (PAL)' : ''),
+        label: row.querySelector('.nm'), size: row.querySelector('.z'), path: row.querySelector('.p').firstChild };
+      more.addEventListener('click', () => {
+        scene.open = !scene.open;
+        scene.rows.forEach((r) => { r.hidden = !scene.open; });
+        gfSceneRowText(scene);
+      });
+      row.querySelector('.p').appendChild(more);
+      row.classList.add('gf-scene');
+      GF_SCENE = scene;
+    } else {
+      row.hidden = !GF_SCENE.open;
+      row.classList.add('gf-piece');
+      GF_SCENE.rows.push(row);
+    }
+    GF_SCENE.bytes += f.size || 0;
+    gfSceneRowText(GF_SCENE);
+  }
+
+  function gfSceneRowText(scene) {
+    const n = scene.rows.length + 1;
+    if (scene.path) scene.path.nodeValue = n > 1 ? scene.dir + '/' : scene.firstPath;
+    if (scene.label) {
+      scene.label.textContent = n > 1
+        ? scene.title + ': its animations, in ' + n + ' files that belong together. Open shows the whole cutscene.'
+        : scene.title + ': its animations. Open shows the whole cutscene.';
+    }
+    if (scene.size && n > 1) scene.size.textContent = fmtBytes(scene.bytes);
+    scene.more.hidden = n < 2;
+    scene.more.textContent = scene.open ? 'Hide the files' : 'Show the ' + n + ' files';
+    scene.more.setAttribute('aria-expanded', String(scene.open));
   }
 
   function gfPreviewKind(path) {

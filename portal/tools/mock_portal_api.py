@@ -227,8 +227,9 @@ def gf_summary(mode, folders="game"):
              "only": 0, "changed": 0, "shared": 0, "own_bytes": 0, "kinds": {}}
         for r in rows:
             s[r["status"]] += 1
+            k = s["kinds"].setdefault(r["kind"], {"files": 0, "only": 0, "changed": 0})
+            k["files"] += 1
             if r["status"] != "shared":
-                k = s["kinds"].setdefault(r["kind"], {"only": 0, "changed": 0})
                 k[r["status"]] += 1
         s["picked"] = sum(1 for r in rows if r["picked"])
         out["versions"][v["version"]] = s
