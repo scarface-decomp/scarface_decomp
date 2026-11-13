@@ -1,25 +1,25 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-13 07:08:01",
+  "updated_at": "2026-11-13 07:48:17",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 106,
-    "xb": 5876,
-    "proto": 2921,
+    "xb": 6372,
+    "proto": 3353,
     "ps2": 0,
-    "total": 5982,
-    "bytes": 184810,
+    "total": 6478,
+    "bytes": 203839,
     "ps2_bytes": 0
   },
   "size_buckets": {
-    "1-9 B": 1345,
-    "10-19 B": 880,
-    "20-39 B": 1896,
-    "40-79 B": 1688,
-    "80+ B": 173
+    "1-9 B": 1392,
+    "10-19 B": 964,
+    "20-39 B": 2072,
+    "40-79 B": 1816,
+    "80+ B": 234
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 8903
+    "RRutherrfordd (Founder)": 9831
   },
   "unattributed": 0,
   "queue": {
@@ -82,28 +82,28 @@
       "kind": "group"
     },
     {
-      "id": "xb_00022720",
+      "id": "xb_001284A0",
       "bin": "xb",
-      "va": "0x00022720",
-      "symbol": "Collidable::vfunc_04",
+      "va": "0x001284A0",
+      "symbol": "CollisionBehaviourTypeGroup::vfunc_27",
       "size": 3,
       "why": "the game's class information names it",
       "kind": "named"
     },
     {
-      "id": "xb_0006F990",
+      "id": "xb_001E0B70",
       "bin": "xb",
-      "va": "0x0006F990",
-      "symbol": "core::IMemoryAllocator::vfunc_13",
+      "va": "0x001E0B70",
+      "symbol": "FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_31",
       "size": 3,
       "why": "the game's class information names it",
       "kind": "named"
     },
     {
-      "id": "xb_000B7EB0",
+      "id": "xb_00213430",
       "bin": "xb",
-      "va": "0x000B7EB0",
-      "symbol": "Collidable::vfunc_05",
+      "va": "0x00213430",
+      "symbol": "FlowClient::vfunc_02",
       "size": 3,
       "why": "the game's class information names it",
       "kind": "named"

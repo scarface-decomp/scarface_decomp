@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/FightContext.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/FightContext.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 9 functions matched (55.56%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 9 functions matched (77.78%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -83,6 +83,51 @@ void FightContext::vfunc_06(int a1)
         m_Field14->sub_001F7A60(1, a1);
         m_Field14->sub_001F7A70();
     }
+}
+
+// ============================================================================
+// [VERIFIED] FightContext::vfunc_09 (0x0001F780, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as FightContext::vfunc_09 (0x00021980), which was matched first;
+// its addresses and names were swapped for this function's.
+
+struct Field0C
+{
+    int sub_000BF4B0();
+};
+
+extern "C" char DAT_0037D86C[];
+extern "C" void __cdecl sub_00065830(int, int, int);
+
+class FightContext
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09(int a1);
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void FightContext::vfunc_09(int a1)
+{
+    int t1;
+
+    t1 = m_Field0C->sub_000BF4B0();
+    if (a1) {
+        if (!*(char*)a1) goto L_24;
+        sub_00065830((int)DAT_0037D86C, t1, a1);
+    }
+L_24:
+    ;
 }
 
 // ============================================================================
@@ -241,5 +286,32 @@ FightContext* FightContext::vfunc_03(int a1)
         sub_00025160((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] FightContext::vfunc_04 (0x00057190, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as FightContext::vfunc_04 (0x00075710), which was matched first;
+// its addresses and names were swapped for this function's.
+// FightContext::vfunc_04 (0x00057190, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class FightContext
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04();
+    char m_pad04[0x10];
+    int m_Field14; // +0x14
+};
+
+int FightContext::vfunc_04()
+{
+    return m_Field14;
 }
 
