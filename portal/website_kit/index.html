@@ -414,6 +414,8 @@
     .wb-what [hidden] { display: none !important; }
     .wb-guide { margin-top: 8px; max-width: 640px; padding: 8px 10px; border: 1px solid var(--line, #2a2a2a); border-left: 3px solid var(--accent, #b3261e); font-size: 0.86rem; }
     .wb-guide[hidden] { display: none !important; }
+    .ai-meter { font-size: 0.8rem; color: var(--muted); flex-basis: 100%; }
+    .ai-meter b { color: var(--text); font-weight: 600; }
     .wb-readable { margin: 8px 0 0; max-width: 640px; font-size: 0.84rem; color: var(--muted); }
     .wb-readable b { color: var(--text); font-weight: 600; }
     .wb-readable code { font-size: 0.8rem; }
@@ -1088,6 +1090,8 @@
                   <input id="ai-key" type="text" class="input-box w-key masked" placeholder="Paste API key" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="" data-bwignore="" data-form-type="other" oninput="saveAiSettings()" />
                   <label class="remember-key" title="Off: the key is forgotten when you close this tab. On: it is stored in this browser until you clear it."><input type="checkbox" id="ai-remember-key" onchange="saveAiSettings()" /> Remember key</label>
                   <label class="remember-key" title="Empty: no fixed limit. The AI keeps trying until it matches, says it can't get closer, or makes 12 tries in a row without getting any closer; every try is compiled and checked. Each try is one request on your key, so set a number to cap what a run can cost.">Stop after <input id="ai-max-tries" type="number" min="1" step="1" class="input-box w-tries" placeholder="no limit" inputmode="numeric" oninput="saveAiSettings()" /> tries</label>
+                  <label class="remember-key" title="Optional. What your provider charges for a million tokens sent and a million received, in dollars: the portal then shows about what each run has cost. Leave empty to see tries and tokens only.">$ per million tokens: in <input id="ai-price-in" type="number" min="0" step="0.01" class="input-box w-tries" placeholder="-" inputmode="decimal" oninput="saveAiSettings(); renderAiMeter()" /> out <input id="ai-price-out" type="number" min="0" step="0.01" class="input-box w-tries" placeholder="-" inputmode="decimal" oninput="saveAiSettings(); renderAiMeter()" /></label>
+                  <span class="ai-meter" id="ai-meter" role="status" hidden></span>
                   <button type="button" id="btn-test-api" class="btn-sm gold" onclick="testAiConnection()">Test</button>
                 </div>
                 <div class="ai-row attrib">
@@ -2219,6 +2223,8 @@
     urlBox.style.display = p === 'custom_api' ? 'inline-block' : 'none';
     $('contrib-tool-used').value = LS.get('sf_tool_used', '');
     $('ai-max-tries').value = LS.get('sf_ai_max_tries', '');
+    $('ai-price-in').value = LS.get('sf_ai_price_in', '');
+    $('ai-price-out').value = LS.get('sf_ai_price_out', '');
   }
 
   function saveAiSettings() {
@@ -2226,6 +2232,8 @@
     LS.set('sf_ai_model', getActiveModelName());
     LS.set('sf_ai_custom_url', $('ai-custom-url').value);
     LS.set('sf_ai_max_tries', $('ai-max-tries').value);
+    LS.set('sf_ai_price_in', $('ai-price-in').value);
+    LS.set('sf_ai_price_out', $('ai-price-out').value);
     const key = $('ai-key').value;
     if ($('ai-remember-key').checked) {
       LS.set('sf_ai_key', key);
@@ -3199,6 +3207,7 @@
       'Compiler flags: ' + (t.flags || '/nologo /c /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4'),
       'Target machine code bytes: ' + t.target_hex,
       aiGuideLine(t),
+      aiNeighbours(t),
       'Target disassembly:' + NL + disasmText,
       'Current best C++ (' + bestScore + '/' + t.size + ' bytes matched):' + NL + code,
       past.length ? 'Previous attempts:' + NL + past.join(NL) : '',
@@ -3215,6 +3224,15 @@
     'a string it uses, or how the value is used). Keep an address name (sub_XXXXXXXX, DAT_XXXXXXXX) or an offset name (m_Field08) only for a thing you ' +
     'can\'t identify: a guessed name that sounds sure is worse than an honest stand-in. A called function or a global must still be declared so that ' +
     'it resolves to the same address.';
+
+  /* Matched functions of the same class: its layout, member names and types are already worked out in them. */
+  function aiNeighbours(t) {
+    const near = (t && Array.isArray(t.neighbours)) ? t.neighbours : [];
+    if (!near.length) return '';
+    return ['Already matched in the same class (verified byte for byte). Reuse the class\'s layout, member names and types from ' +
+      (near.length === 1 ? 'it' : 'them') + ' where they fit this function, and keep the same names for the same things:']
+      .concat(near.map((n) => '// ' + n.symbol + ' (' + n.va + ', ' + n.size + ' bytes, ' + n.build + ')' + NL + n.code)).join(NL + NL);
+  }
 
   /* What the project's specs say this function does, for the AI's prompt ('' when they say nothing). */
   function aiGuideLine(t) {
@@ -3255,8 +3273,41 @@
   const TINY_BYTES = 8;                // a function this small: quick answers, and three tries at most
   const TINY_TRIES = 3;
 
+  /* What a run (or a batch) has used: tries, and about how many tokens went each way. A token is counted as
+     four characters, which is near enough for C++ and English; what a reasoning model thinks before it
+     answers isn't in the reply, so its real bill is higher than this. With the person's own prices, a cost. */
+  const AI_METER = { tries: 0, sent: 0, got: 0, functions: 0, batch: false };
+
+  function resetAiMeter(batch) {
+    AI_METER.tries = AI_METER.sent = AI_METER.got = AI_METER.functions = 0;
+    AI_METER.batch = !!batch;
+    renderAiMeter();
+  }
+
+  function renderAiMeter() {
+    const box = $('ai-meter');
+    if (!box) return;
+    box.textContent = '';
+    box.hidden = !AI_METER.tries;
+    if (!AI_METER.tries) return;
+    const tokIn = Math.round(AI_METER.sent / 4), tokOut = Math.round(AI_METER.got / 4);
+    box.appendChild(el('b', (AI_METER.batch ? 'This batch: ' + AI_METER.functions + (AI_METER.functions === 1 ? ' function, ' : ' functions, ') : 'This run: ') +
+      AI_METER.tries + (AI_METER.tries === 1 ? ' try' : ' tries')));
+    let text = ' · about ' + fmtInt(tokIn) + ' tokens sent, ' + fmtInt(tokOut) + ' received';
+    const pin = parseFloat($('ai-price-in').value), pout = parseFloat($('ai-price-out').value);
+    if (pin >= 0 || pout >= 0) {
+      const cost = (tokIn * (pin >= 0 ? pin : 0) + tokOut * (pout >= 0 ? pout : 0)) / 1e6;
+      text += ' · about $' + (cost < 0.995 ? cost.toFixed(cost < 0.0995 ? 3 : 2) : cost.toFixed(2)) + ' at your prices';
+    }
+    box.appendChild(document.createTextNode(text + ' (an estimate: a reasoning model\'s thinking is billed too and isn\'t counted here)'));
+  }
+
   async function callUserAiApi(promptText, signal, quick) {
     const data = await postJson('/api/ai-proxy', Object.assign({}, getAiConfig(), { prompt: promptText, quick: !!quick }), signal);
+    AI_METER.tries++;
+    AI_METER.sent += promptText.length;
+    AI_METER.got += String((data && data.reply) || '').length;
+    renderAiMeter();
     if (!data.ok) throw new Error(data.error || 'API request failed');
     return data.reply || '';
   }
@@ -3280,6 +3331,7 @@
     const signal = runAbortCtrl.signal;
     activeRun = { gen: myGen, taskId: t.id, bestCode: editorEl().value, bestVerified: false };
     syncWorkflowButtons();
+    if (opts.fromAutopilot) AI_METER.functions++; else resetAiMeter(false);
 
     let keepMonitor = false;
     let mon;
@@ -3493,6 +3545,7 @@
 
     const myAuto = ++autoGen;
     autopilotRunning = true;
+    resetAiMeter(true);
     syncWorkflowButtons();
     let solved = 0;
     let processed = 0;

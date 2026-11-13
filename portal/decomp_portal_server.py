@@ -795,6 +795,47 @@ def setup_checklist() -> List[dict]:
 
 
 _GRADES: Dict[str, Tuple[int, dict]] = {}
+_CLASSMATES: Tuple[int, Dict[Tuple[str, str], List[str]]] = (-1, {})
+NEIGHBOURS = 3                         # matched functions of the same class shown to the AI
+NEIGHBOUR_CHARS = 5000                 # and how much of their C++ in all
+
+
+def class_of(symbol: str) -> str:
+    """The class a method belongs to (pure3d::Shader::vfunc_04 -> pure3d::Shader), or "" for a plain function."""
+    return symbol.rsplit("::", 1)[0] if "::" in symbol else ""
+
+
+def neighbours(t: dict) -> List[dict]:
+    """Up to NEIGHBOURS matched functions of t's class, for the AI's prompt: the class's layout, member names
+    and types are already worked out in them. This build's first, then the other builds'; the longest first
+    (more of the class shows in them), within NEIGHBOUR_CHARS."""
+    global _CLASSMATES
+    cls = class_of(t.get("symbol", ""))
+    if not cls:
+        return []
+    entries = REGISTRY["entries"]
+    if _CLASSMATES[0] != len(entries):
+        by: Dict[Tuple[str, str], List[str]] = {}
+        for key, e in entries.items():
+            c = class_of(str(e.get("symbol") or ""))
+            if c and (e.get("code") or "").strip():
+                by.setdefault((c, e["bin"]), []).append(key)
+        _CLASSMATES = (len(entries), by)
+    mine = task_key(t)
+    order = [t["bin"]] + [b for b in BIN_ORDER if b != t["bin"]]
+    out, room = [], NEIGHBOUR_CHARS
+    for b in order:
+        keys = [k for k in _CLASSMATES[1].get((cls, b), []) if k != mine]
+        for k in sorted(keys, key=lambda k: -int(entries[k].get("size", 0))):
+            code = entries[k]["code"].strip()
+            if len(out) >= NEIGHBOURS or len(code) > room:
+                continue
+            out.append({"symbol": entries[k]["symbol"], "va": entries[k]["va"], "size": entries[k].get("size", 0),
+                        "build": BUILD_NAMES.get(b, b), "code": code})
+            room -= len(code)
+        if len(out) >= NEIGHBOURS:
+            break
+    return out
 
 
 def readable_grade(key: str, code: str) -> dict:
@@ -814,6 +855,9 @@ def live_task(t: dict) -> dict:
     entry = REGISTRY["entries"].get(task_key(t)) if t.get("status") == "VERIFIED" else None
     if entry and entry.get("code"):
         out["readable"] = readable_grade(task_key(t), entry["code"])
+    near = neighbours(t)
+    if near:
+        out["neighbours"] = near
     if entry and entry.get("what"):
         out["what"], out["what_by"] = entry["what"], entry.get("what_by") or entry.get("verified_by", "")
     named = community_name(t) if t.get("status") != "VERIFIED" else None

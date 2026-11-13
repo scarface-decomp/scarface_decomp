@@ -108,3 +108,23 @@ def test_a_port_compiles_to_the_look_alike():
     for t, code in ((src, cpp), (dst, L.port_code(cpp, src, rs, dst, rd))):
         res = MV.verify_submission(code, img.read(t["fva_int"], 6), FLAGS, t["match_substr"], fn_va=t["fva_int"], image=img)
         assert res["ok"] and res["is_exact"] and res["reloc_checked"] == 1 and not res["reloc_unverified"], res
+
+
+def test_code_carried_to_another_virtual_slot_gets_its_class_list_made_again():
+    """vfunc_08's code renamed for vfunc_03 left the class listing eight slots, the new name twice. The list is
+    made again: a plain entry for each slot before the method's, then the method as it is defined."""
+    renamed = ('extern "C" float DAT_003B2314;\n\nclass PedFlee\n{\npublic:\n'
+               + "".join(f"    virtual void vfunc_{i:02d}();\n" for i in range(3))
+               + "    virtual void vfunc_03();\n    virtual void vfunc_04();\n    virtual float vfunc_03();\n    char m_pad04[0x4];\n};\n\n"
+               "// PedFlee::vfunc_03 (0x001095B0, 7 bytes)\nfloat PedFlee::vfunc_03()\n{\n    return DAT_003B2314;\n}\n")
+    fixed = L.fit_slot(renamed, "PedFlee", "vfunc_03")
+    body = fixed[fixed.index("public:"):fixed.index("};")]
+    assert [l.strip() for l in body.splitlines() if "virtual" in l] == [
+        "virtual void vfunc_00();", "virtual void vfunc_01();", "virtual void vfunc_02();", "virtual float vfunc_03();"]
+    assert "char m_pad04[0x4];" in body and fixed.endswith("return DAT_003B2314;\n}\n")
+    assert L.fit_slot(fixed, "PedFlee", "vfunc_03") == fixed                 # one of each already: left alone
+    up = L.fit_slot("class A\n{\npublic:\n    virtual void vfunc_00();\n    virtual int vfunc_02(int);\n};\nint A::vfunc_02(int a)\n{\n    return a;\n}\n",
+                     "A", "vfunc_02")
+    assert "virtual void vfunc_01();\n    virtual int vfunc_02(int a);" in up     # a slot further on: the gap is filled
+    assert L.fit_slot("int f() { return 1; }", "A", "vfunc_02") == "int f() { return 1; }"
+    assert L.fit_slot(renamed, "PedFlee", "update") == renamed               # a named method: nothing to do
