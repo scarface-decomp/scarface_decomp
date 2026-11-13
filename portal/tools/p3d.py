@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Read Pure3D (.p3d) files: the chunk tree with every chunk named, the fields of the chunks for models,
-skins, skeletons, shaders, textures, animations, lights, the sky, the stream graph and the shadow records,
-and the models as .obj files you can open in Blender.
+skins, skeletons, shaders, textures, animations, lights, the sky, the stream graph, the shadow records, state
+props, zone packages, occluders, characters and vehicles, and the models as .obj files you can open in Blender.
 
     python portal/tools/p3d.py FILE.p3d                 the chunk tree, with each known chunk's fields
     python portal/tools/p3d.py FILE.p3d --depth 2       only the first two levels
@@ -72,7 +72,7 @@ NAMES: Dict[int, str] = {
     0x8800104: "Script File", 0x8800105: "Load Package", 0x8800108: "Cement Header", 0x8800112: "Load Package Name",
     0x8800113: "NIS Stream Data", 0x8800114: "NIS Stream Partition Info", 0x8800150: "CV Load Object",
     0x8800160: "Traffic Config", 0x8800161: "Subzone Traffic Trigger", 0x8800180: "Script Object",
-    0x8800181: "Game Group", 0x8800201: "Water Dock", 0x8800202: "Water Obstacle", 0x8800203: "Water Shallow Area",
+    0x8800181: "Game Group", 0x8800201: "Water Shallow Area", 0x8800202: "Water Obstacle", 0x8800203: "Water Dock",
     0x9900190: "Script Object Data", 0x9900191: "Game Group Data", 0x9900192: "Script Object Property (?)",
     0x9900194: "Script Object Property Value (?)",
     # A light's sub-chunks, the draw-order key and the sky's vertex-colour sets: descriptive names of ours,
@@ -81,6 +81,10 @@ NAMES: Dict[int, str] = {
     0x13004: "Light Casts Shadows", 0x13006: "Light Decay Range", 0x13007: "Light Decay Range Rotation",
     0x13008: "Light Illumination Kind", 0x122000: "Draw Order",
     0x121305: "Vertex Colour Sets", 0x121306: "Vertex Colour Set", 0x10F02: "Vertex Colour Amounts",
+    # A state prop's parts and a zone package's entries: descriptive names of ours, from the clean-room spec
+    # docs/cleanroom/SPEC-003-props-zones-xbox-blending.md.
+    0x802000E: "Prop State", 0x8020002: "Part Visibility", 0x8020003: "Prop State Animation",
+    0x8020008: "Prop Property", 0x802000B: "Prop State Effect", 0x8800009: "Zone Package Entry",
 }
 for _cid in range(0x1005002, 0x100500C):
     NAMES[_cid] = "Sound Entity"
@@ -95,6 +99,11 @@ COLOUR_SETS, COLOUR_SET, COLOUR_AMOUNTS = 0x121305, 0x121306, 0x10F02
 LIGHT_TYPES = {0: "ambient", 1: "point", 2: "directional", 3: "spot"}
 DECAY_SHAPES = {0: "none", 1: "sphere", 2: "box", 3: "ellipsoid"}
 ILLUMINATION = {0: "adds light", 1: "none", 2: "takes light away"}
+# The state a placed copy of a prop starts in: the last of its instanceposition's twelve numbers is n for the
+# n-th of these, 0 for the prop's own first state (SPEC-003, section 2). The prop's state of that name, letter
+# case ignored, is the one; a prop without one starts in its first state.
+START_STATES = ("idle", "final", "damage_1", "damage_2", "damage_3", "damage_4", "explosion", "open", "opening",
+                "closed", "closing")
 
 
 class P3dError(ValueError):
@@ -347,7 +356,9 @@ def _two_names(r: _R) -> dict:
 
 
 def _world_geo(r: _R) -> dict:
-    return {"name": r.text(), "composite drawable": r.text(), "flags": r.u32()}
+    """name, the composite drawable's name, u32 kind (SPEC-003, section 4: 0, or 1 shadowed_, 3 low_LOD_,
+    5 underwater_, 6 cbvlitdecals_, 7 interiorfloors_, 8 cardsnight_, after how the names start)."""
+    return {"name": r.text(), "composite drawable": r.text(), "kind": r.u32()}
 
 
 def _zone(r: _R) -> dict:
@@ -374,14 +385,27 @@ def _object_property(r: _R) -> dict:
     return {"name": name, "type": kind}
 
 
+def start_state(number: int):
+    """The name of the state a placed copy starts in, from the last of its instanceposition's twelve numbers
+    (START_STATES): None for 0 (the prop's own first state), the number itself when it isn't on the list."""
+    if not number:
+        return None
+    return START_STATES[number - 1] if 1 <= number <= len(START_STATES) else number
+
+
 def _property_value(r: _R) -> dict:
-    """An instance object's "instanceposition": twelve 32-bit values (see p3d_gltf.instance_trs)."""
+    """An instance object's "instanceposition": twelve 32-bit values (see p3d_gltf.instance_trs). The last names
+    the state the copy starts in ("state", see start_state), left out when it is the prop's first."""
     if r.left() < 48:
         return {"bytes": r.left()}
     x, y, z = r.floats(3)
     v = [r.u32() for _ in range(9)]
-    return {"position": (round(x, 3), round(y / 100, 2), round(z, 3)), "angles": tuple(v[0:3]),
-            "scale": round((v[3] | v[4] << 6 | v[5] << 12) / 1000, 3) if v[6] else tuple(round(a * 0.05, 2) for a in v[3:6])}
+    out = {"position": (round(x, 3), round(y / 100, 2), round(z, 3)), "angles": tuple(v[0:3]),
+           "scale": round((v[3] | v[4] << 6 | v[5] << 12) / 1000, 3) if v[6] else tuple(round(a * 0.05, 2) for a in v[3:6])}
+    state = start_state(v[8])
+    if state is not None:
+        out["state"] = state
+    return out
 
 
 # Lights, the draw-order key, the sky and the stream graph: docs/FORMATS.md, from the clean-room spec
@@ -503,6 +527,91 @@ def _shadow(r: _R) -> dict:
             "values": (round(r.f32(), 4), round(r.f32(), 4))}
 
 
+# State props, zone packages, occluders, characters and vehicles: docs/FORMATS.md, from the clean-room spec
+# docs/cleanroom/SPEC-003-props-zones-xbox-blending.md. A field whose meaning is open is a "number" (u32) or a
+# "value" (f32), as in the shadow record.
+
+def _state_prop_data(r: _R) -> dict:
+    """State Prop Data (0x0802000D): u32 version (4), name, the composite drawable's name, u32 number of states,
+    u32 number of properties (the game reads it from version 3 on). The properties (0x08020008) follow, then the
+    states (0x0802000E)."""
+    version, name, drawable, states = r.u32(), r.text(), r.text(), r.u32()
+    out = {"version": version, "name": name, "composite drawable": drawable, "states": states}
+    if version >= 3 and r.left() >= 4:
+        out["properties"] = r.u32()
+    return out
+
+
+def _prop_state(r: _R) -> dict:
+    """A Prop State (0x0802000E): its name, then ten 4-byte values: u32 whether it moves on by itself, u32 the
+    state it moves on to (its place in the prop's list of states, from 0), u32 the number of Part Visibility
+    (0x08020002), Prop State Animation (0x08020003), 0x08020004 and 0x08020005 sub-chunks, f32 a frame (a state
+    that moves on does so when its animation reaches it), u32 (0 in every file), u32 the number of Prop Property
+    (0x08020008) and Prop State Effect (0x0802000B) sub-chunks."""
+    name = r.text()
+    moves, after, shown, anims, n4, n5 = r.u32(), r.u32(), r.u32(), r.u32(), r.u32(), r.u32()
+    return {"name": name, "moves on": moves != 0, "next state": after, "part visibilities": shown, "animations": anims,
+            "0x08020004 sub-chunks": n4, "0x08020005 sub-chunks": n5, "frame": round(r.f32(), 4), "number": r.u32(),
+            "properties": r.u32(), "effects": r.u32()}
+
+
+def _part_visibility(r: _R) -> dict:
+    return {"part": r.text(), "shown": r.u32() != 0}
+
+
+def _prop_animation(r: _R) -> dict:
+    """A Prop State Animation (0x08020003): the name of a Frame Controller (0x00121201) in the same file, three u32
+    whose meanings aren't settled (the first and the third 0 or 1, the second 0, 1 or 2), then two frames (the
+    first may be the larger) and a speed."""
+    name = r.text()
+    numbers = (r.u32(), r.u32(), r.u32())
+    first, last, speed = r.floats(3)
+    return {"frame controller": name, "numbers": numbers, "frames": (round(first, 4), round(last, 4)),
+            "speed": round(speed, 4)}
+
+
+def _prop_property(r: _R) -> dict:
+    return {"name": r.text(), "value": r.text()}
+
+
+def _prop_effect(r: _R) -> dict:
+    """A Prop State Effect (0x0802000B), an effect the state sets off: a text (Effect in every file), the effect's
+    name, u32 (0), a joint of the prop's skeleton, an offset from it (3 floats), angles in radians (3 floats), u32
+    (0), the joint again, a size, and a float whose meaning isn't known."""
+    return {"kind": r.text(), "effect": r.text(), "number": r.u32(), "joint": r.text(), "offset": _vec3(r),
+            "angles": _vec3(r), "number 2": r.u32(), "joint 2": r.text(), "size": round(r.f32(), 4),
+            "value": round(r.f32(), 4)}
+
+
+def _zone_entry(r: _R) -> dict:
+    """A Zone Package Entry (0x08800009, one per World Geometry its zone package lists): the World Geometry's name,
+    u32 number of floats (6), then near, far and fade (the world geometry is drawn while the camera is farther
+    than near and nearer than far), a float (0 in every file), the x of the point the distance is measured from
+    and that point's z with its sign flipped. "point" is (x, z) with the sign put back; (0, 0) means none."""
+    name, n = r.text(), r.u32()
+    v = [round(x, 4) for x in r.floats(max(0, min(n, r.left() // 4)))]
+    out: dict = {"name": name, "floats": n}
+    out.update(zip(("near", "far", "fade", "value"), v))
+    if len(v) >= 6:
+        out["point"] = (v[4], 0.0 - v[5])
+    if len(v) > 6:
+        out["more"] = v[6:]
+    return out
+
+
+def _occluder(r: _R) -> dict:
+    """An Occluder (0x0880000A): a position, the way it faces (a unit vector), u32 (0 in all but one), f32 (0), and
+    three sizes (which axis each runs along isn't settled)."""
+    return {"position": _vec3(r), "facing": _vec3(r), "number": r.u32(), "value": round(r.f32(), 4), "sizes": _vec3(r)}
+
+
+def _model_record(r: _R) -> dict:
+    """A Character (0x08800000) or Vehicle (0x08800001): eleven texts. The name, the model (a skin for a character,
+    a composite drawable for a vehicle), its low-detail model (may be empty), then eight shader names, the unused
+    ones empty."""
+    return {"name": r.text(), "model": r.text(), "low-detail model": r.text(), "shaders": _texts(r, 8)}
+
+
 def light(data: bytes, c: Chunk) -> dict:
     """A Light chunk (0x13000) with what its sub-chunks say, as one dictionary: the Light's own fields,
     then "direction", "position", "spot cone", "casts shadows", "decay range" (shape, inner, outer, and the
@@ -570,6 +679,9 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x2380: _light_group, 0x8800007: _light_group_record, 0x122000: _draw_order, 0x8800002: _sky,
     0x8800100: _stream_package, 0x8800101: _stream_trigger, 0x8800008: _shadow,
     COLOUR_SETS: _colour_sets, COLOUR_SET: _colour_set, COLOUR_AMOUNTS: _colour_amounts,
+    0x802000D: _state_prop_data, 0x802000E: _prop_state, 0x8020002: _part_visibility, 0x8020003: _prop_animation,
+    0x8020008: _prop_property, 0x802000B: _prop_effect, 0x8800009: _zone_entry, 0x880000A: _occluder,
+    0x8800000: _model_record, 0x8800001: _model_record,
 }
 for _cid in (0x121100, 0x121101, 0x121104, COLOUR_CHANNEL, INTEGER_CHANNEL) + QUATERNION_CHANNELS:
     FIELDS[_cid] = _channel
