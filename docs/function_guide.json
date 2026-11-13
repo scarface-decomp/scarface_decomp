@@ -4356,6 +4356,1822 @@
    "what_it_does": "Opens a file in an archive by its name hash.",
    "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
    "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0040F390",
+   "what_it_does": "Adds a reference (the common reference-counting base).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0040F3A0",
+   "what_it_does": "Releases a reference; deletes the object at 0.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0040FEC0",
+   "what_it_does": "Sets an entity's name (its key).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00414E10",
+   "what_it_does": "Releases a render-library object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0043CC30",
+   "what_it_does": "Returns the current memory heap's number.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0043CE00",
+   "what_it_does": "Allocates memory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0043CE70",
+   "what_it_does": "Frees memory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0043D6E0",
+   "what_it_does": "Destructor of the reference-counting base.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0043F710",
+   "what_it_does": "Cutscene manager constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004494E0",
+   "what_it_does": "Reads a 32-bit number from a chunk.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461AA0",
+   "what_it_does": "Sets up the `.p3d` file handler.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461AB0",
+   "what_it_does": "Installs the default file handlers.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465100",
+   "what_it_does": "The Targa picture handler's file extension.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D130",
+   "what_it_does": "Copies an entity.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047C200",
+   "what_it_does": "Drive (disc and file access) manager constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047C900",
+   "what_it_does": "Finds a loaded inventory by its number.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047CA30",
+   "what_it_does": "Finds the number of a loaded inventory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047CAD0",
+   "what_it_does": "Gets a loaded inventory by its number.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047CDD0",
+   "what_it_does": "Returns the single file-handler manager.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047D350",
+   "what_it_does": "File-handler manager constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047DC00",
+   "what_it_does": "Gets the file handler for an extension.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047E6E0",
+   "what_it_does": "Gets a loaded inventory by its number (a second form).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047E710",
+   "what_it_does": "Finds a loaded inventory by its name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047FDF0",
+   "what_it_does": "Resource manager's list constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00482AD0",
+   "what_it_does": "Sets up the sound file handlers.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004979A0",
+   "what_it_does": "The id of the chunk being read.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0049B9E0",
+   "what_it_does": "Sound manager's frame hook constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B5340",
+   "what_it_does": "Stream manager's frame hook constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004C0380",
+   "what_it_does": "Replaces a counted reference.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004E7D90",
+   "what_it_does": "A load request's options.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004EC520",
+   "what_it_does": "Console-variable manager constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652660",
+   "what_it_does": "Sets a simple shader's alpha-test threshold.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652820",
+   "what_it_does": "Sets a texture setting on a shader, by its four-letter name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652880",
+   "what_it_does": "Sets a whole-number setting on a shader.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006528E0",
+   "what_it_does": "Sets a float setting on a shader.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652940",
+   "what_it_does": "Sets a colour setting on a shader.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006529A0",
+   "what_it_does": "Sets a vector setting on a shader.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652A00",
+   "what_it_does": "Sets a matrix setting on a shader.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652A60",
+   "what_it_does": "Makes a shader the current one.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652AB0",
+   "what_it_does": "Makes a shader of a given kind.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652B60",
+   "what_it_does": "Sets a shader's material.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652BF0",
+   "what_it_does": "Shader base constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00652C20",
+   "what_it_does": "Shader base destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00659E50",
+   "what_it_does": "Allocates render-library memory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00659E70",
+   "what_it_does": "Frees render-library memory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065ACC0",
+   "what_it_does": "Render-context base constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065C9B0",
+   "what_it_does": "Render-library object constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065C9E0",
+   "what_it_does": "Render-library object destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006608C0",
+   "what_it_does": "Sets a matrix to the identity.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00660C90",
+   "what_it_does": "Sets a matrix's position (its last row).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00660F70",
+   "what_it_does": "Inverts a matrix that only turns and moves (transposes the turn, re-works the position).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006614D0",
+   "what_it_does": "Multiplies two matrices.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006624B0",
+   "what_it_does": "Makes a rotation (quaternion) from a matrix.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006626E0",
+   "what_it_does": "Writes a rotation (quaternion) into a matrix.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00668410",
+   "what_it_does": "Entity copy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006684D0",
+   "what_it_does": "Makes a pose for a skeleton.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00668520",
+   "what_it_does": "Rebuilds a skeleton after it is loaded.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00668A60",
+   "what_it_does": "Skeleton destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00668C40",
+   "what_it_does": "Skeleton constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00668EC0",
+   "what_it_does": "Loads a skeleton (`0x00023000`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669460",
+   "what_it_does": "Copies a pose.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669530",
+   "what_it_does": "Updates a pose.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669560",
+   "what_it_does": "Works out a pose's joint matrices from the joints' local ones (parent first).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669680",
+   "what_it_does": "Resets a pose to its skeleton's rest pose.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006698E0",
+   "what_it_does": "Gets one joint's matrix from a pose.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006699C0",
+   "what_it_does": "Gets a pose's position.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006699D0",
+   "what_it_does": "Sets a pose's position.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669A00",
+   "what_it_does": "Sets a pose flag.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669A10",
+   "what_it_does": "Clears a pose flag.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669A20",
+   "what_it_does": "Pose constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669AC0",
+   "what_it_does": "Character pose destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669BF0",
+   "what_it_does": "Pose destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00669F30",
+   "what_it_does": "Simple frame controller constructor (plays one animation on one target).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0066A730",
+   "what_it_does": "Simple frame controller copy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00673C00",
+   "what_it_does": "Returns the reference count.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00677950",
+   "what_it_does": "Loads a front-end (menu) project.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0067BFD0",
+   "what_it_does": "Replaces a counted reference kept at +0x0C.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0067D680",
+   "what_it_does": "Makes a render context.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0067E920",
+   "what_it_does": "Shader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0067EB70",
+   "what_it_does": "Shader destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0067EBB0",
+   "what_it_does": "Shader loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0067EBD0",
+   "what_it_does": "Loads a shader (FORMATS.md, *Shaders*).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00680700",
+   "what_it_does": "Shadow mesh constructor (empty).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00680770",
+   "what_it_does": "Shadow mesh constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00680F30",
+   "what_it_does": "Shadow mesh loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006832F0",
+   "what_it_does": "Constructor of a class that can't be copied.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00683340",
+   "what_it_does": "Draws one entry of a drawable container (one piece with its matrix).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00683600",
+   "what_it_does": "How many pieces a drawable container has.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00683960",
+   "what_it_does": "Re-sets-up a small array.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00683B10",
+   "what_it_does": "Allocates a small array.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00683B70",
+   "what_it_does": "Drawable container constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00683BA0",
+   "what_it_does": "Drawable container copy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00683D30",
+   "what_it_does": "Drawable container destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00686640",
+   "what_it_does": "Particle emitter constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00688860",
+   "what_it_does": "Sprite particle emitter constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068AF40",
+   "what_it_does": "Finds the picture handler for a file.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B2D0",
+   "what_it_does": "Loads a picture file as a texture.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B3C0",
+   "what_it_does": "Reads picture data in memory as a texture.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B460",
+   "what_it_does": "Loads a picture file into an existing texture.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B510",
+   "what_it_does": "Reads picture data in memory into an existing texture.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B580",
+   "what_it_does": "Picture handler constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B5C0",
+   "what_it_does": "The PNG handler's file extension.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B5D0",
+   "what_it_does": "The raw picture handler's file extension.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B5F0",
+   "what_it_does": "Picture factory constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068C930",
+   "what_it_does": "Loads a picture chunk.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068C960",
+   "what_it_does": "Picture loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068E120",
+   "what_it_does": "Sprite constructor (empty).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068E6F0",
+   "what_it_does": "Sprite loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068E7E0",
+   "what_it_does": "Sprite constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068E910",
+   "what_it_does": "Loads a sprite.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00690880",
+   "what_it_does": "Destructor of a counted reference.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00693700",
+   "what_it_does": "Brings a composite drawable's active-piece maps up to date.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00693990",
+   "what_it_does": "Draws a composite drawable: each piece with its joint's matrix from the pose.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00693C20",
+   "what_it_does": "Sets a composite drawable's pose.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00693D80",
+   "what_it_does": "Sets a composite drawable's shader callback (lets the game change shaders per piece).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00693DE0",
+   "what_it_does": "Releases a composite drawable's shader callback.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006940B0",
+   "what_it_does": "A composite drawable's bounds.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00694250",
+   "what_it_does": "Constructor of the array of active pieces.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006942C0",
+   "what_it_does": "Constructor of a composite drawable's list of active controllers.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00694350",
+   "what_it_does": "Destructor of that list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00694710",
+   "what_it_does": "Constructor of a composite drawable's list of active pieces.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00694780",
+   "what_it_does": "Copy constructor of that list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006948C0",
+   "what_it_does": "Destructor of that list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00694910",
+   "what_it_does": "Composite drawable copy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00694A50",
+   "what_it_does": "Copies a composite drawable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00694A70",
+   "what_it_does": "Loads a composite drawable (`0x00123000`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006951D0",
+   "what_it_does": "Skin (polyskin) loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006954F0",
+   "what_it_does": "Loads a skin.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00697660",
+   "what_it_does": "Draws a billboard object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00698830",
+   "what_it_does": "Billboard quad group constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00698BE0",
+   "what_it_does": "Constructor of a billboard quad group that is cut off with distance.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00698CE0",
+   "what_it_does": "Loads billboards.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006993D0",
+   "what_it_does": "Loads a billboard object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00699870",
+   "what_it_does": "Loads a picture font.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069AA20",
+   "what_it_does": "Loads a texture font.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069B8B0",
+   "what_it_does": "Loads a locator (a named point).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069BA60",
+   "what_it_does": "Locator loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069BD90",
+   "what_it_does": "Loads a texture's picture.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069BFA0",
+   "what_it_does": "Loads a volume (3D) texture's picture.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069C2A0",
+   "what_it_does": "Loads a texture.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069C4E0",
+   "what_it_does": "Texture loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069C5A0",
+   "what_it_does": "Loads a texture chunk.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069C610",
+   "what_it_does": "Draws a geometry (all its mesh pieces).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069C720",
+   "what_it_does": "Geometry loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069C7B0",
+   "what_it_does": "Loads a geometry (FORMATS.md, *Models*).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069CCE0",
+   "what_it_does": "Geometry copy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069CDB0",
+   "what_it_does": "Geometry loader destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069CDF0",
+   "what_it_does": "Drawable hierarchy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069CE30",
+   "what_it_does": "A composite drawable flag (bit 4).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069CE40",
+   "what_it_does": "Drawable hierarchy copy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A46B0",
+   "what_it_does": "Sets a mesh piece's fade.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A46D0",
+   "what_it_does": "Sets a mesh piece's tint.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A46F0",
+   "what_it_does": "A mesh piece's shader.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A4740",
+   "what_it_does": "Draws a mesh piece.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A4990",
+   "what_it_does": "Mesh piece loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A4C00",
+   "what_it_does": "Mesh piece copy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A4CD0",
+   "what_it_does": "Constructor of a skinned mesh piece in the optimised form.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A4D80",
+   "what_it_does": "Destructor of that.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A4F00",
+   "what_it_does": "Constructor of a streamed mesh piece.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A5150",
+   "what_it_does": "Destructor of a skinned streamed mesh piece.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A5280",
+   "what_it_does": "Constructor of the PC's skinned mesh piece.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A5350",
+   "what_it_does": "Copy constructor of a mesh piece with vertex animation (a first form).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A5470",
+   "what_it_does": "Copy constructor of a mesh piece with vertex animation.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A55D0",
+   "what_it_does": "Destructor of a mesh piece with vertex animation.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A5F80",
+   "what_it_does": "Mesh piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A5FC0",
+   "what_it_does": "Optimised mesh piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A6040",
+   "what_it_does": "Streamed mesh piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A61A0",
+   "what_it_does": "Loads a mesh piece in the optimised form.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A6C80",
+   "what_it_does": "Loads a mesh piece in the streamed form.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A7460",
+   "what_it_does": "Loads the PC's skinned mesh piece.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A7BD0",
+   "what_it_does": "Reads a mesh piece's header.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A7DF0",
+   "what_it_does": "Loads a mesh piece (FORMATS.md, *Models*), choosing the form.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A8890",
+   "what_it_does": "Reads a PNG file.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A95B0",
+   "what_it_does": "Picture converter constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006ACFA0",
+   "what_it_does": "Releases a counted reference kept at +0x0C.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006B7400",
+   "what_it_does": "Vertex list constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DC040",
+   "what_it_does": "The time now.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DC350",
+   "what_it_does": "Gets the current memory allocator.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DC360",
+   "what_it_does": "Sets the current memory allocator.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DC390",
+   "what_it_does": "Allocates memory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DC430",
+   "what_it_does": "Frees memory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DC520",
+   "what_it_does": "Frees memory (a second form).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DED30",
+   "what_it_does": "Shows an error message.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DFFC0",
+   "what_it_does": "String constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E0010",
+   "what_it_does": "Adds a reference.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9280",
+   "what_it_does": "Iterator constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E92A0",
+   "what_it_does": "Moves an iterator to the first item.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9340",
+   "what_it_does": "Moves an iterator to the next item.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E97D0",
+   "what_it_does": "Allocates memory (a third form).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "matched"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9970",
+   "what_it_does": "Inventory constructor (a named set of loaded objects).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9A10",
+   "what_it_does": "Adds an object to an inventory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9AE0",
+   "what_it_does": "Inventory destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9B40",
+   "what_it_does": "Loads a `.p3d` file into an inventory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9E90",
+   "what_it_does": "Loading statistics destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EA060",
+   "what_it_does": "Registers a chunk loader with the load manager.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EA090",
+   "what_it_does": "Registers a chunk loader (a second form).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EA150",
+   "what_it_does": "Gets the chunk loader for an id.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EA200",
+   "what_it_does": "The load manager's work on its thread.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EA380",
+   "what_it_does": "The load thread's entry point.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EA570",
+   "what_it_does": "Load manager constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EA680",
+   "what_it_does": "Starts a load.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EA820",
+   "what_it_does": "Sets the load manager up.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EAA70",
+   "what_it_does": "Load stream constructor (empty).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EAC10",
+   "what_it_does": "Makes a load stream.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EAC60",
+   "what_it_does": "Load stream destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EAE70",
+   "what_it_does": "Load stream constructor (a second form).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EAEE0",
+   "what_it_does": "Load stream constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EAFA0",
+   "what_it_does": "Moves forward in a file.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB050",
+   "what_it_does": "Reads data from a file.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB0E0",
+   "what_it_does": "Chunk reader destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB0F0",
+   "what_it_does": "Sets a chunk reader's name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB110",
+   "what_it_does": "Whether the current chunk has sub-chunks left.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB150",
+   "what_it_does": "Starts reading the next sub-chunk; returns its id.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB250",
+   "what_it_does": "Starts reading a sub-chunk (a second form).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB300",
+   "what_it_does": "Finishes a sub-chunk, skipping what wasn't read.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB350",
+   "what_it_does": "The id of the current chunk.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB360",
+   "what_it_does": "Starts reading inside the current chunk's data.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB370",
+   "what_it_does": "Chunk reader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB490",
+   "what_it_does": "Sets a load request's file name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB4B0",
+   "what_it_does": "Sets a load request's inventory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB4E0",
+   "what_it_does": "Sets a load request's stream.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB510",
+   "what_it_does": "Load request constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB580",
+   "what_it_does": "Load request destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EB5D0",
+   "what_it_does": "Sets a load request's state.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006EC650",
+   "what_it_does": "Object-model entity loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00703610",
+   "what_it_does": "Primitive buffer destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00704500",
+   "what_it_does": "Allocates memory simply.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#6-engine-functions-from-a-list-only-lower-confidence",
+   "confidence": "low",
+   "status": "open"
   }
  ]
 }

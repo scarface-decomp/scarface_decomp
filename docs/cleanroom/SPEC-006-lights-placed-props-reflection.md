@@ -94,7 +94,19 @@ take its layout from the Xbox code, not from the PC.
   it over many frames, and compares it with a budget of **33.3 ms** (30 frames a second). From that it
   publishes a number from 0 (on budget) to 1 (far over) that the distance and detail code reads, so draw
   distances shrink when the frame runs slow and grow back when it recovers. A switch can turn this off (the
-  number stays 0). The exact smoothing *(check)*.
+  number stays 0).
+
+**[checked on the Xbox]** The end of the Xbox's frame-drawing function (`renderer::Display_List::vfunc_09`,
+from `0x00045329`) gives the exact numbers:
+
+1. The frame's time in milliseconds is the timer's difference since the last frame times 0.001.
+2. A running average is kept (it starts at 33.3): `average = average × 0.9 + frame time × 0.1`.
+3. `t` is the average, but never less than 33.3.
+4. The over-budget number is `1 − 33.3 / t`: 0 at 30 frames a second or faster, rising towards 1 as frames
+   slow. A frame rate estimate, `(1 − over) × 30`, is kept beside it.
+5. When the switch (a byte at `0x0041C921`) is off, the over-budget number is set to 0.
+6. Then `1 − over × 0.5` is passed on (`sub_0025D760`): a scale from 1 down to 0.5 for the distance and detail
+   code.
 
 ## 4. The function guide's PC part **[reported]**
 
@@ -125,9 +137,19 @@ value:
 Like the archive hash (SPEC-004 §1), the folding is blind: it turns `A`–`Z` into `a`–`z`, but shifts digits,
 `.`, `_` and the rest too. Keys of the same name in different letter case are the same.
 
+## 6. Engine functions from a list only (lower confidence)
+
+The research also lists about 230 more PC functions of the engine itself, by name only, with no notes: the
+chunk reader and load manager, inventories, file handlers, picture loaders and factories, shaders' settings,
+mesh pieces (plain, optimised, streamed, skinned, with vertex animation), skeletons and poses, composite
+drawables, billboards, fonts, locators, textures, particle emitters, matrices and rotations, memory. The
+function guide has them (`"confidence": "low"`), each with what it does as far as its place and kind show. They
+are a map for finding things, not facts: check each one against the code before relying on it. PC-only parts
+(Direct3D, DirectInput, the Windows code) are left out.
+
 ---
 
-## 6. What to build
+## 7. What to build
 
 For the implementer. Choose your own names; keep each step small.
 

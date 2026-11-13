@@ -50,7 +50,7 @@ own files or programs, or written up through the clean room ([CLEAN_ROOM.md](CLE
 | The renderer's classes: sizes, fields, what each table slot does | [SPEC-005 §4](cleanroom/SPEC-005-animation-drawing-renderer.md#4-the-renderers-classes-pc-layouts) |
 | Which lights reach an object; placed props (trees, bushes) at run time: culling, waking, wind; the water reflection; the frame-time budget | [SPEC-006](cleanroom/SPEC-006-lights-placed-props-reflection.md) |
 | The game's name key (how objects are found by name) | [SPEC-006 §5](cleanroom/SPEC-006-lights-placed-props-reflection.md#5-the-games-name-key-checked-on-the-xbox) |
-| What functions do: the Xbox ones the specs cover, and about 500 PC ones (renderer, draw list, lights, placed props, render calls) whose Xbox twins do the same | [function_guide.json](function_guide.json) |
+| What functions do: the Xbox ones the specs cover, about 500 PC ones (renderer, draw list, lights, placed props, render calls) and about 230 engine ones marked low confidence, whose Xbox twins do the same | [function_guide.json](function_guide.json) |
 | Names given so far, and why | `reports/names.json`, [NAMES.md](NAMES.md) |
 | The game's versions and what differs | [VERSIONS.md](VERSIONS.md), [GAME_VERSIONS.md](GAME_VERSIONS.md), [PS2.md](PS2.md) |
 
@@ -63,7 +63,7 @@ own files or programs, or written up through the clean room ([CLEAN_ROOM.md](CLE
   animation channels, an animation sampler, `STEP` and visibility in the glTF export, prop-state animation
   settings, draw distances and depth writes in the city export and viewer, FORMATS.md sections, and one-line
   descriptions for `renderer::` functions.
-* [SPEC-006 §6](cleanroom/SPEC-006-lights-placed-props-reflection.md#6-what-to-build): the name key in
+* [SPEC-006 §7](cleanroom/SPEC-006-lights-placed-props-reflection.md#7-what-to-build): the name key in
   `p3d.py`, placed props' view distances and wind in the city export, lights per object, the reflection.
 * In `function_guide.json`, every function with `"status": "open"` is waiting to be matched.
 
