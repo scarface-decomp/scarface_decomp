@@ -840,7 +840,8 @@ class CityJob:
     thread, and the sky round them (sky.glb, city_sky). Areas line up when imported together. With
     use_cores, several worker processes share the areas (city_worker), one per processor core but one.
     With an hour, the sky is posed and coloured for it and every file carries that hour's fog; the weather
-    picks the sky and the fog (clear when not given)."""
+    picks the sky and the fog (clear when not given). Both are kept beside the files once the city is whole
+    (city_made), so the page can tell a city at another hour from the one it asks for."""
 
     def __init__(self, bin_dir: Path):
         self.bin_dir = bin_dir
@@ -895,6 +896,10 @@ class CityJob:
         dest = self.folder(version)
         try:
             dest.mkdir(parents=True, exist_ok=True)
+            try:                                 # the hour and weather of the city before: gone till this one is whole
+                (dest / CITY_LOOK).unlink()
+            except OSError:
+                pass
             opts, notes = city_options(out, index, version, self.status.get("hour"), self.status.get("weather", "clear"),
                                        self.bin_dir)
             self.status["notes"] = list(notes)
@@ -902,7 +907,7 @@ class CityJob:
                 self._run_parallel(out, index, version, todo, dest, opts)
                 if not self._stop.is_set():
                     self._sky(out, index, version, dest, opts)
-                    (dest / CITY_MADE).write_text(_made_by(), encoding="utf-8")
+                    self._made(dest)
                 return
             library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
             parsed: dict = {}
@@ -924,7 +929,7 @@ class CityJob:
                 time.sleep(0)
             if not self._stop.is_set():
                 self._sky(out, index, version, dest, opts)
-                (dest / CITY_MADE).write_text(_made_by(), encoding="utf-8")
+                self._made(dest)
         except (OSError, P3G.p3d.P3dError) as e:
             self.status["error"] = f"{type(e).__name__}: {e}"
         finally:
@@ -941,6 +946,13 @@ class CityJob:
         why = city_sky(out, index, version, dest, opts)
         if why:
             self.status["notes"].append(why)
+
+    def _made(self, dest: Path) -> None:
+        """The city is whole: which exporter made it (CITY_MADE), and at what hour in what weather (CITY_LOOK)."""
+        import json
+        (dest / CITY_MADE).write_text(_made_by(), encoding="utf-8")
+        (dest / CITY_LOOK).write_text(json.dumps({"hour": self.status.get("hour"),
+                                                  "weather": self.status.get("weather") or "clear"}), encoding="utf-8")
 
     def _run_parallel(self, out: Path, index: Optional[dict], version: str, todo: List[dict], dest: Path,
                       opts: Optional[dict] = None) -> None:
@@ -1019,6 +1031,7 @@ def main(argv=None) -> int:
 
 BLENDER_PATH_FILE = "blender_path.txt"           # extracted/blender/: where blender.exe is, if it isn't found
 CITY_MADE = "made_by.txt"                        # extracted/blender/<version>/: which exporter made the city
+CITY_LOOK = "made_with.json"                     # extracted/blender/<version>/: the hour and weather it is at
 
 
 def city_current(folder: Path) -> bool:
@@ -1029,6 +1042,19 @@ def city_current(folder: Path) -> bool:
         return int(made[0]) >= P3G.EXPORT_VERSION and (made[1:2] == ["xbox"]) == (texture_look() == "xbox")
     except (OSError, ValueError, IndexError):
         return False
+
+
+def city_made(folder: Path) -> Optional[dict]:
+    """The hour (None: the sky as stored) and the weather the city in folder was exported at, {"hour", "weather"};
+    None when that isn't known: exported before the portal kept it, or stopped part-way (a mix of the two)."""
+    import json
+    try:
+        made = json.loads((folder / CITY_LOOK).read_text(encoding="utf-8"))
+        hour, weather = made.get("hour"), made.get("weather")
+    except (OSError, ValueError, AttributeError):
+        return None
+    an_hour = hour is None or isinstance(hour, (int, float)) and not isinstance(hour, bool) and 0 <= hour <= 24
+    return {"hour": hour, "weather": weather} if an_hour and weather in P3G.WEATHERS else None
 
 
 def texture_look() -> str:

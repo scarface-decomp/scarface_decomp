@@ -168,25 +168,32 @@ GF_VERSIONS = [
 ]
 GF: dict = {"status": {"running": False, "phase": "", "done": 0, "total": 0, "files": 0, "label": "", "message": "",
                        "error": ""}, "summary": None, "files": {}, "copy": None, "movies": {},
-      "textures": {"running": False, "phase": "", "written": 0, "made": False}, "speed": {"cores": True, "gpu": True}}
+      "textures": {"running": False, "phase": "", "written": 0, "made": False},
+      "speed": {"cores": True, "gpu": True, "city_hour": None, "city_weather": "clear"}}
 GF_LINE = "Say hello to my little friend!"
-BLENDER: dict = {"running": False, "version": "", "done": 0, "total": 0, "area": "", "error": "", "written": 0,
-                 "bytes": 0, "folder": ""}
+BLENDER_IDLE = {"running": False, "version": "", "done": 0, "total": 0, "area": "", "error": "", "written": 0,
+                "bytes": 0, "folder": "", "hour": None, "weather": "clear", "notes": []}
+BLENDER: dict = dict(BLENDER_IDLE)
+CITY_MADE: dict = {"look": None}       # the hour and weather of the city "in the folder" (blender_export.city_made)
 GF_AREAS = [{"key": "z04/stripmall_01", "name": "stripmall_01", "place": "z04", "files": 3},
             {"key": "z04/havana_01", "name": "havana_01", "place": "z04", "files": 2},
             {"key": "azones/donutshop_01", "name": "donutshop_01", "place": "azones", "files": 1}]
 
 
-def blender_run(version):
-    """A made-up city export: three areas, a moment each."""
+def blender_run(version, hour=None, weather="clear"):
+    """A made-up city export: three areas, a moment each; at an hour, with no fog when the reset asked for none."""
+    notes = ["No fog: the game's script scriptc/graphanims.cso isn't among the copied files."] \
+        if hour is not None and CONFIG.get("no_fog") else []
+    CITY_MADE["look"] = None
     BLENDER.update(running=True, version=version, done=0, total=3, written=0, bytes=0, error="",
-                   folder=f"extracted/blender/{version.upper()}")
+                   folder=f"extracted/blender/{version.upper()}", hour=hour, weather=weather, notes=notes)
     for a in GF_AREAS[:2] + [{"name": "bridge_01"}]:
         BLENDER["area"] = a["name"]
         time.sleep(0.25)
         BLENDER["done"] += 1
         BLENDER["written"] += 1
         BLENDER["bytes"] += 4 << 20
+    CITY_MADE["look"] = {"hour": hour, "weather": weather}
     BLENDER.update(running=False, area="")
 
 
@@ -420,13 +427,14 @@ class Handler(BaseHTTPRequestHandler):
                           for i, v in enumerate(vers)}                     # a copy that keeps the first version whole
                 return self._json({"ok": True, "areas": GF_AREAS if GF["summary"] else [], "city": dict(BLENDER),
                                    "city_by_version": counts,
-                                   "city_files": BLENDER["written"], "city_current": True})
+                                   "city_files": BLENDER["written"], "city_current": True, "city_made": CITY_MADE["look"]})
             if u.path == "/api/game-files/blender":
                 return self._json(dict(BLENDER, ok=True))
             if u.path == "/api/game-files/textures":
                 return self._json(dict(GF["textures"], ok=True))
             if u.path == "/api/game-files/speed":
                 return self._json({"ok": True, "use_cores": GF["speed"]["cores"], "use_gpu": GF["speed"]["gpu"],
+                                   "city_hour": GF["speed"]["city_hour"], "city_weather": GF["speed"]["city_weather"],
                                    "cores": 8, "workers": 7, "ffmpeg": True, "gpu": "NVIDIA"})
             if u.path == "/api/game-files/model":
                 if CONFIG.get("model_error"):
@@ -533,7 +541,10 @@ class Handler(BaseHTTPRequestHandler):
                 GF["copy"] = None
                 GF["movies"] = {}
                 GF["textures"] = {"running": False, "phase": "", "written": 0, "made": False}
-                GF["speed"] = {"cores": True, "gpu": True}
+                GF["speed"] = {"cores": True, "gpu": True, "city_hour": None, "city_weather": "clear"}
+                BLENDER.clear(); BLENDER.update(BLENDER_IDLE)
+                CITY_MADE["look"] = None
+                CONFIG["no_fog"] = bool(body.get("no_fog"))
                 CONFIG["blender"] = not body.get("no_blender")
                 CONFIG["ffmpeg"] = not body.get("no_ffmpeg")
                 CONFIG["model_error"] = bool(body.get("model_error"))
@@ -683,8 +694,17 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/api/game-files/blender":
             if BLENDER["running"]:
                 return self._json({"ok": False, "error": "Already exporting the city."}, 409)
-            threading.Thread(target=blender_run, args=(str(body.get("version", "")),), daemon=True).start()
-            return self._json(dict(BLENDER, ok=True, running=True, total=3))
+            try:                                 # as the real portal: an hour from 0 to 24, or none; clear or rain
+                hour = float(body["hour"]) if body.get("hour") not in (None, "") else None
+            except (TypeError, ValueError):
+                hour = -1.0
+            weather = str(body.get("weather") or "clear")
+            if hour is not None and not 0 <= hour <= 24:
+                return self._json({"ok": False, "error": "The hour is from 0 to 24."}, 400)
+            if weather not in ("clear", "rain"):
+                return self._json({"ok": False, "error": "The weather is clear or rain."}, 400)
+            threading.Thread(target=blender_run, args=(str(body.get("version", "")), hour, weather), daemon=True).start()
+            return self._json(dict(BLENDER, ok=True, running=True, total=3, hour=hour, weather=weather, notes=[]))
         if u.path == "/api/game-files/blender-stop":
             return self._json({"ok": True})
         if u.path == "/api/game-files/open-in-blender":
@@ -729,6 +749,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(dict(st, ok=True))
         if u.path == "/api/game-files/speed":
             GF["speed"].update(cores=bool(body.get("use_cores")), gpu=bool(body.get("use_gpu")))
+            if "city_hour" in body:
+                GF["speed"]["city_hour"] = body["city_hour"] if isinstance(body["city_hour"], (int, float)) else None
+            if body.get("city_weather") in ("clear", "rain"):
+                GF["speed"]["city_weather"] = body["city_weather"]
             return self._json({"ok": True})
         if u.path == "/api/game-files/textures-stop":
             return self._json({"ok": True})

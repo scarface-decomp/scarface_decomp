@@ -576,6 +576,9 @@
     .gf-quick span { color: var(--muted); font-size: 0.9rem; }
     .gfb-row select { min-width: 260px; max-width: 100%; }
     .gfb-pick label { font-weight: 600; }
+    .gfb-look { margin-top: 10px; column-gap: 24px; }
+    .gfb-pair { display: inline-flex; gap: 10px; align-items: center; }
+    .gfb-look select { min-width: 0; }
     .viewer { position: fixed; inset: 0; z-index: 900; background: #0b0b0c; display: flex; flex-direction: column; }
     .viewer[hidden] { display: none; }
     .viewer-bar { display: flex; gap: 16px; align-items: center; padding: 10px 16px; border-bottom: 1px solid #2a2a2e; flex-wrap: wrap; }
@@ -1365,6 +1368,43 @@
             <p class="gf-notes" id="gfb-scene-status" role="status" aria-live="polite"></p>
             <h3 class="gf-h">The whole city</h3>
             <p class="gf-notes">Every area of the city, one <code>.glb</code> each, into <code>extracted/blender/</code> under the version's name, each at its place in the city. Then <b>Open the whole city in Blender</b> brings them all into one scene, joined up, and saves it as one <code>.blend</code>.</p>
+            <div class="gfb-row gfb-pick gfb-look" id="gfb-city-look">
+              <span class="gfb-pair"><label for="gfb-city-hour">Time of day</label>
+              <select id="gfb-city-hour" class="input-box" onchange="pickGfCityLook()">
+                <option value="">As stored</option>
+                <option value="0">midnight (start of the day)</option>
+                <option value="1">1 a.m.</option>
+                <option value="2">2 a.m.</option>
+                <option value="3">3 a.m.</option>
+                <option value="4">4 a.m.</option>
+                <option value="5">5 a.m.</option>
+                <option value="6">6 a.m.</option>
+                <option value="7">7 a.m.</option>
+                <option value="8">8 a.m.</option>
+                <option value="9">9 a.m.</option>
+                <option value="10">10 a.m.</option>
+                <option value="11">11 a.m.</option>
+                <option value="12">noon</option>
+                <option value="13">1 p.m.</option>
+                <option value="14">2 p.m.</option>
+                <option value="15">3 p.m.</option>
+                <option value="16">4 p.m.</option>
+                <option value="17">5 p.m.</option>
+                <option value="18">6 p.m.</option>
+                <option value="19">7 p.m.</option>
+                <option value="20">8 p.m.</option>
+                <option value="21">9 p.m.</option>
+                <option value="22">10 p.m.</option>
+                <option value="23">11 p.m.</option>
+                <option value="24">midnight (end of the day)</option>
+              </select></span>
+              <span class="gfb-pair"><label for="gfb-city-weather">Weather</label>
+              <select id="gfb-city-weather" class="input-box" onchange="pickGfCityLook()">
+                <option value="clear">Clear</option>
+                <option value="rain">Rain</option>
+              </select></span>
+            </div>
+            <p class="gf-notes" id="gfb-city-look-note">A time of day gives the sky that hour's colours and the whole city that hour's fog. As stored leaves the sky as the game's file keeps it (its night colours), with no fog. Rain brings the rain sky, and with a time of day the rain's fog. Export the city again after changing these.</p>
             <div class="gf-run">
               <button type="button" class="btn" id="gfb-city" onclick="startGfCity()">Export the city</button>
               <button type="button" class="btn-sm" id="gfb-city-stop" onclick="stopGfCity()" hidden>Stop</button>
@@ -1372,6 +1412,7 @@
               <button type="button" class="btn-sm" id="gfb-city-open" onclick="openGameFolder('blender:' + GFB_CITY_VERSION)" hidden>Open the folder</button>
             </div>
             <p class="gf-notes" id="gfb-city-status" role="status" aria-live="polite"></p>
+            <p class="gf-notes" id="gfb-city-made" role="status" aria-live="polite"></p>
             <p class="gf-notes" id="gfb-city-bl-status" role="status" aria-live="polite"></p>
             </div>
           </div>
@@ -3572,6 +3613,11 @@
     $('gf-use-cores').checked = !!d.use_cores;
     $('gfb-xbox-look').checked = !!d.xbox_look;
     $('gfb-fps').value = String(d.fps || 30);
+    const hour = $('gfb-city-hour');
+    hour.value = d.city_hour === null || d.city_hour === undefined ? '' : String(d.city_hour);
+    if (hour.selectedIndex < 0) hour.value = '';
+    $('gfb-city-weather').value = d.city_weather === 'rain' ? 'rain' : 'clear';
+    gfCityMadeNote();
     $('gf-cores-text').textContent = 'Use all ' + fmtInt(d.cores) + ' processor cores: copy the versions at the same time '
       + '(when the discs are on a fast drive, an SSD) and export the city ' + fmtInt(d.workers) + ' areas at a time.';
     const gpu = $('gf-use-gpu');
@@ -3592,8 +3638,10 @@
   }
 
   async function saveGfSpeed() {
+    const city = gfCityChoice();
     let res;
-    try { res = await postJson('/api/game-files/speed', { use_cores: $('gf-use-cores').checked, use_gpu: $('gf-use-gpu').checked, xbox_look: $('gfb-xbox-look').checked, fps: Number($('gfb-fps').value) || 30 }); }
+    try { res = await postJson('/api/game-files/speed', { use_cores: $('gf-use-cores').checked, use_gpu: $('gf-use-gpu').checked, xbox_look: $('gfb-xbox-look').checked, fps: Number($('gfb-fps').value) || 30,
+                                                           city_hour: city.hour, city_weather: city.weather }); }
     catch (e) { res = { ok: false, error: e.message }; }
     if (!res.ok) toast(res.error || 'Couldn’t keep the setting.', 'err');
   }
@@ -3841,6 +3889,7 @@
   let GFB_CITY_VERSION = '';
   let GFB_CITY_T = null;
   let GFB_CITY_FILES = 0;
+  let GFB_CITY_MADE = null;           // the hour and weather the city in extracted/blender/ is at, when known
 
   async function loadGfAreas(key) {
     GFB_AREAS_FOR = key;              // the version and when its files were copied: a new copy lists again
@@ -3872,6 +3921,7 @@
     updateGfAreaLink();
     GFB_CITY_FILES = d.city_files || 0;
     if (GFB_CITY_FILES) GFB_CITY_VERSION = GF_TAB;
+    GFB_CITY_MADE = d.city_made || null;
     renderGfCity(d.city || {});
     if (GFB_CITY_FILES && !d.city_current && !(d.city || {}).running) {
       $('gfb-city-bl-status').classList.remove('err');
@@ -3909,6 +3959,7 @@
         + '. For the ' + label + '\'s whole city, copy again with Every version complete.'
       : '';
     $('gfb-city').hidden = known && !mine;
+    $('gfb-city-look').hidden = $('gfb-city-look-note').hidden = $('gfb-city').hidden;
   }
 
   function gfPickBlenderVersion() {
@@ -4486,14 +4537,18 @@
     $('gfb-city-blender').hidden = running || !(st.written || GFB_CITY_FILES);
     const p = $('gfb-city-status');
     p.classList.toggle('err', !!st.error);
+    const look = gfCityLook(st.hour, st.weather);
+    const notes = (st.notes || []).length ? ' ' + st.notes.join(' ') : '';     // no fog or no sky, and why
     if (running) {
-      p.textContent = 'Exporting ' + (st.area || '…') + ': ' + fmtInt(st.done) + ' of ' + fmtInt(st.total) + ' areas done.';
+      p.textContent = 'Exporting ' + (st.area || '…') + ' ' + look + ': ' + fmtInt(st.done) + ' of ' + fmtInt(st.total) + ' areas done.' + notes;
     } else if (st.total) {
       p.textContent = (st.error ? st.error + ' ' : '') + fmtInt(st.written) + ' areas written to ' + st.folder + ' ('
-        + fmtBytes(st.bytes) + ').';
+        + fmtBytes(st.bytes) + '), ' + look + '.' + notes;
+      if (st.version === GF_TAB) GFB_CITY_MADE = st.error ? null : { hour: gfHour(st.hour), weather: st.weather === 'rain' ? 'rain' : 'clear' };
     } else {
       p.textContent = '';
     }
+    gfCityMadeNote();
     clearTimeout(GFB_CITY_T);
     if (running) GFB_CITY_T = setTimeout(pollGfCity, 1500);
   }
@@ -4504,10 +4559,51 @@
     renderGfCity(st);
   }
 
+  /* The time of day and the weather the city is exported at: no hour (As stored: the sky as the file keeps it,
+     no fog) or a whole hour from 0 to 24, and clear or rain. Kept with the other settings here (saveGfSpeed). */
+  function gfHour(h) {
+    return h === null || h === undefined || h === '' ? null : Number(h);
+  }
+
+  function gfCityChoice() {
+    return { hour: gfHour($('gfb-city-hour').value), weather: $('gfb-city-weather').value === 'rain' ? 'rain' : 'clear' };
+  }
+
+  function gfClock(hour) {            // 18 → "6 p.m.", 12 → "noon", 0 and 24 → "midnight", 7.5 → "7:30 a.m."
+    const m = Math.round(Number(hour) * 60), h = Math.floor(m / 60) % 24, min = m % 60;
+    if (!min && h === 0) return 'midnight';
+    if (!min && h === 12) return 'noon';
+    return (h % 12 || 12) + (min ? ':' + String(min).padStart(2, '0') : '') + (h < 12 ? ' a.m.' : ' p.m.');
+  }
+
+  /* "at 6 p.m. in the rain", "with the sky as stored, in clear weather" */
+  function gfCityLook(hour, weather) {
+    hour = gfHour(hour);
+    return (hour === null ? 'with the sky as stored,' : 'at ' + gfClock(hour)) + (weather === 'rain' ? ' in the rain' : ' in clear weather');
+  }
+
+  function pickGfCityLook() {
+    saveGfSpeed();
+    gfCityMadeNote();
+  }
+
+  /* Open the whole city in Blender opens the city as it was exported: when that was at another time of day or in
+     another weather than the one picked now, say so (an export always makes every area again). */
+  function gfCityMadeNote() {
+    const made = GFB_CITY_MADE, want = gfCityChoice();
+    const differs = !!made && !$('gfb-city-blender').hidden && (gfHour(made.hour) !== want.hour || made.weather !== want.weather);
+    $('gfb-city-made').textContent = differs ? 'The city was exported ' + gfCityLook(made.hour, made.weather)
+      + ', and Open the whole city in Blender opens it that way. To have it ' + gfCityLook(want.hour, want.weather)
+      + ', press Export the city again.' : '';
+  }
+
   async function startGfCity() {
     $('gfb-city').disabled = true;
+    const want = gfCityChoice();
+    const body = { version: GF_TAB, weather: want.weather };
+    if (want.hour !== null) body.hour = want.hour;           // none: the sky as stored, as before
     let res;
-    try { res = await postJson('/api/game-files/blender', { version: GF_TAB }); } catch (e) { res = { ok: false, error: e.message }; }
+    try { res = await postJson('/api/game-files/blender', body); } catch (e) { res = { ok: false, error: e.message }; }
     if (!res.ok) {
       $('gfb-city').disabled = false;
       toast(res.error || 'Couldn’t start.', 'err');

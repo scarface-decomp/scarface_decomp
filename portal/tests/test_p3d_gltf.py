@@ -528,8 +528,9 @@ def test_the_whole_city_one_file_per_area(tmp_path):
     finally:
         GA.out_dir = real_out
     assert sorted(p.name for p in (tmp_path / "blender" / "PC").iterdir()) == ["a_01.glb", "b_02.glb", "made_by.txt",
-                                                                                  "shop_01 (inside).glb"]
+                                                                                  "made_with.json", "shop_01 (inside).glb"]
     assert BX.city_current(tmp_path / "blender" / "PC")                       # made by this exporter
+    assert BX.city_made(tmp_path / "blender" / "PC") == {"hour": None, "weather": "clear"}     # the sky as stored
     (tmp_path / "blender" / "PC" / "made_by.txt").unlink()
     assert not BX.city_current(tmp_path / "blender" / "PC")                   # one from before: export again
     assert job.status["written"] == 3 and job.status["done"] == 3 and not job.status["running"]
@@ -1621,8 +1622,10 @@ def test_the_city_with_its_sky_and_fog(tmp_path, monkeypatch):
     assert top["translation"] == pytest.approx([(lo[0] + hi[0]) / 2, 0.0, (lo[2] + hi[2]) / 2])
     assert top["scale"] == [G.SKY_SCALE] * 3 and "hour" not in top["extras"]       # the made-up city is small
     assert "extras" not in read_glb((folder / "a_01.glb").read_bytes())[0]["scenes"][0]
+    assert BX.city_made(folder) == {"hour": None, "weather": "clear"}
     job = run(hour=12, weather="rain")
     assert job.status["notes"] == [] and (job.status["hour"], job.status["weather"]) == (12, "rain")
+    assert BX.city_made(folder) == {"hour": 12, "weather": "rain"}             # what the page compares its choice with
     doc = read_glb((folder / "sky.glb").read_bytes())[0]
     assert doc["nodes"][doc["scenes"][0]["nodes"][0]]["name"] == "rainy_skybox"
     assert doc["scenes"][0]["extras"]["fog"]["keys"][0] == "environment_rainy_12"
@@ -1640,6 +1643,43 @@ def test_the_city_with_its_sky_and_fog(tmp_path, monkeypatch):
     assert job.status["notes"] == ["No fog: the game's script scriptc/graphanims.cso isn't among the copied files.",
                                    "No sky: Common.p3d isn't among the copied files."]
     assert not (folder / "sky.glb").exists()                           # the earlier one doesn't stay
+    assert BX.city_made(folder) == {"hour": 12, "weather": "clear"}
+    # stopped part-way, the folder holds areas at two hours: which hour it is at isn't known any more
+    stopping = BX.CityJob(tmp_path)
+    stopping.use_cores = lambda: False
+    options = BX.city_options
+    monkeypatch.setattr(BX, "city_options", lambda *a, **k: (stopping.stop(), options(*a, **k))[1])
+    assert stopping.start("pc", index, hour=6) is None
+    stopping._thread.join(60)
+    assert stopping.status["error"] == "Stopped." and BX.city_made(folder) is None
+    (folder / BX.CITY_LOOK).write_text('{"hour": 30, "weather": "clear"}', encoding="utf-8")
+    assert BX.city_made(folder) is None
+
+
+def test_the_page_hears_which_hour_and_weather_the_exported_city_is_at(monkeypatch, tmp_path):
+    """The Game files tab's areas reply says the hour and weather of the city in extracted/blender/, kept
+    beside it, so the page can say when Open in Blender would open the city at another time than it asks for."""
+    server, _out, index = _server(monkeypatch, tmp_path, city_files())
+    monkeypatch.setattr(server.BLENDER, "use_cores", lambda: False)
+    monkeypatch.setattr(server.BLENDER, "busy", lambda: "")
+    sent = []
+
+    class Fake:
+        _allowed = lambda self: True  # noqa: E731
+        path = "/api/game-files/areas?version=pc"
+
+        def _json(self, obj, code=200):
+            sent.append((code, obj))
+
+    server.Handler.do_GET(Fake())
+    assert sent[-1][1]["city_made"] is None and sent[-1][1]["city_files"] == 0      # nothing exported yet
+    server.Handler.post_game_files_blender(Fake(), {"version": "pc", "hour": 18, "weather": "rain"})
+    server.BLENDER._thread.join(60)
+    server.Handler.do_GET(Fake())
+    reply = sent[-1][1]
+    assert reply["city_made"] == {"hour": 18.0, "weather": "rain"} and reply["city_files"] == 3 and reply["city_current"]
+    assert (reply["city"]["hour"], reply["city"]["weather"]) == (18.0, "rain")
+    assert reply["city"]["notes"][0].startswith("No fog: ")
 
 
 def test_the_portal_asks_for_the_city_at_an_hour_in_a_weather(monkeypatch, tmp_path):
