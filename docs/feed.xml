@@ -5,356 +5,356 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-13T10:01:47Z</updated>
+  <updated>2026-11-13T10:10:05Z</updated>
   <author><name>Scarface decomp contributors</name></author>
   <entry>
-    <title>audio::Sequence::vfunc_05 (PC, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ED6E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ED6E0</id>
-    <updated>2026-11-13T10:01:47Z</updated>
-    <summary>0x006ED6E0 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_00201440 (Xbox prototype, 75 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00201440"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00201440</id>
+    <updated>2026-11-13T10:10:05Z</updated>
+    <summary>0x00201440 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006ED5A0 (PC, 8 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ED5A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ED5A0</id>
-    <updated>2026-11-13T10:01:40Z</updated>
-    <summary>0x006ED5A0 in the PC version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dDecalShader::vfunc_14 (PC, 5 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00709430"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x00709430</id>
+    <updated>2026-11-13T10:09:55Z</updated>
+    <summary>0x00709430 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>om::Entity::vfunc_03 (PC, 51 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ED440"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ED440</id>
-    <updated>2026-11-13T10:01:34Z</updated>
-    <summary>0x006ED440 in the PC version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dPrimBufferStream::vfunc_24 (PC, 5 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00703DD0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x00703DD0</id>
+    <updated>2026-11-13T10:09:55Z</updated>
+    <summary>0x00703DD0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>om::EntityTypeBase::vfunc_00 (PC, 45 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ED3B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ED3B0</id>
-    <updated>2026-11-13T10:01:28Z</updated>
-    <summary>0x006ED3B0 in the PC version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dContext::vfunc_13 (PC, 3 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00703DB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x00703DB0</id>
+    <updated>2026-11-13T10:09:48Z</updated>
+    <summary>0x00703DB0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006ED0C0 (PC, 31 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ED0C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ED0C0</id>
-    <updated>2026-11-13T10:01:20Z</updated>
-    <summary>0x006ED0C0 in the PC version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dDecalShader::vfunc_03 (PC, 36 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00709440"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x00709440</id>
+    <updated>2026-11-13T10:09:41Z</updated>
+    <summary>0x00709440 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00243FA0 (Xbox, 75 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00243FA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00243FA0</id>
-    <updated>2026-11-13T10:01:13Z</updated>
-    <summary>The game's name key: h = (h * 65599) &amp; 0x7FFFFFFF, each character + 0x20 if below 'a', XORed in; top bit set. 0x00243FA0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::pddiPrimBuffer::vfunc_03 (PC, 36 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00703610"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x00703610</id>
+    <updated>2026-11-13T10:09:41Z</updated>
+    <summary>0x00703610 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>GlobalVehicleSound::vfunc_07 (PC, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ECD10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ECD10</id>
-    <updated>2026-11-13T10:01:06Z</updated>
-    <summary>0x006ECD10 in the PC version, matched byte for byte with its original.</summary>
+    <title>pure3d::pddiDevice::vfunc_03 (PC, 36 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00702F40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x00702F40</id>
+    <updated>2026-11-13T10:09:41Z</updated>
+    <summary>0x00702F40 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>GlobalVehicleSound::vfunc_05 (PC, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ECCF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ECCF0</id>
-    <updated>2026-11-13T10:00:59Z</updated>
-    <summary>0x006ECCF0 in the PC version, matched byte for byte with its original.</summary>
+    <title>movie::RenderStrategyBink::vfunc_04 (PC, 8 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x007016E0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x007016E0</id>
+    <updated>2026-11-13T10:09:34Z</updated>
+    <summary>0x007016E0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>GlobalVehicleSound::vfunc_02 (PC, 5 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ECCE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ECCE0</id>
-    <updated>2026-11-13T10:00:52Z</updated>
-    <summary>0x006ECCE0 in the PC version, matched byte for byte with its original.</summary>
+    <title>GameMemorySegmentCollection::vfunc_01 (PC, 8 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x007016D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x007016D0</id>
+    <updated>2026-11-13T10:09:27Z</updated>
+    <summary>0x007016D0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>om::MetaTypeBase::vfunc_00 (PC, 74 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ECB80"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ECB80</id>
-    <updated>2026-11-13T10:00:46Z</updated>
-    <summary>0x006ECB80 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventClip&gt;::vfunc_01 (PC, 53 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FBBE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FBBE0</id>
+    <updated>2026-11-13T10:09:20Z</updated>
+    <summary>0x006FBBE0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006ECB50 (PC, 48 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006ECB50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006ECB50</id>
-    <updated>2026-11-13T10:00:39Z</updated>
-    <summary>0x006ECB50 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqActionClip::vfunc_04 (PC, 54 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FB850"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FB850</id>
+    <updated>2026-11-13T10:09:13Z</updated>
+    <summary>0x006FB850 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_007001E0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x007001E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x007001E0</id>
-    <updated>2026-11-13T10:00:32Z</updated>
-    <summary>0x007001E0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqActionClip::vfunc_03 (PC, 54 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FB810"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FB810</id>
+    <updated>2026-11-13T10:09:07Z</updated>
+    <summary>0x006FB810 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006FE3E0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FE3E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FE3E0</id>
-    <updated>2026-11-13T10:00:32Z</updated>
-    <summary>0x006FE3E0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventCrossFade::vfunc_04 (PC, 53 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FB250"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FB250</id>
+    <updated>2026-11-13T10:09:00Z</updated>
+    <summary>0x006FB250 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006FE3B0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FE3B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FE3B0</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006FE3B0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqActionCrossFade::vfunc_04 (PC, 40 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FAFB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FAFB0</id>
+    <updated>2026-11-13T10:08:54Z</updated>
+    <summary>0x006FAFB0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006FD9D0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FD9D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FD9D0</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006FD9D0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventLogicOr&gt;::vfunc_01 (PC, 62 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FAF70"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FAF70</id>
+    <updated>2026-11-13T10:08:48Z</updated>
+    <summary>0x006FAF70 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006FD840 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FD840"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FD840</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006FD840 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventLogicOr::vfunc_00 (PC, 64 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FACD0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FACD0</id>
+    <updated>2026-11-13T10:08:42Z</updated>
+    <summary>0x006FACD0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006F5CC0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F5CC0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F5CC0</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006F5CC0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventLogicOr::vfunc_01 (PC, 64 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FAC90"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FAC90</id>
+    <updated>2026-11-13T10:08:36Z</updated>
+    <summary>0x006FAC90 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006F0990 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F0990"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F0990</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006F0990 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_006FAA70 (PC, 34 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FAA70"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FAA70</id>
+    <updated>2026-11-13T10:08:30Z</updated>
+    <summary>0x006FAA70 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EF170 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EF170"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EF170</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006EF170 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventSilence&gt;::vfunc_01 (PC, 55 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FA7B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FA7B0</id>
+    <updated>2026-11-13T10:08:23Z</updated>
+    <summary>0x006FA7B0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EE9D0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EE9D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EE9D0</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006EE9D0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqActionSilence::vfunc_01 (PC, 29 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FA680"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FA680</id>
+    <updated>2026-11-13T10:08:16Z</updated>
+    <summary>0x006FA680 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EDFD0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EDFD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EDFD0</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006EDFD0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventStream&gt;::vfunc_01 (PC, 49 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9F10"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9F10</id>
+    <updated>2026-11-13T10:08:09Z</updated>
+    <summary>0x006F9F10 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EDFA0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EDFA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EDFA0</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006EDFA0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqActionVarPitch::vfunc_06 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9B40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9B40</id>
+    <updated>2026-11-13T10:08:03Z</updated>
+    <summary>0x006F9B40 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EDF60 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EDF60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EDF60</id>
-    <updated>2026-11-13T10:00:31Z</updated>
-    <summary>0x006EDF60 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventVarPitchRand&gt;::vfunc_01 (PC, 55 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9980"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9980</id>
+    <updated>2026-11-13T10:07:56Z</updated>
+    <summary>0x006F9980 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EC7B0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EC7B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EC7B0</id>
-    <updated>2026-11-13T10:00:30Z</updated>
-    <summary>0x006EC7B0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarPitchRand::vfunc_01 (PC, 69 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9830"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9830</id>
+    <updated>2026-11-13T10:07:49Z</updated>
+    <summary>0x006F9830 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EC630 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EC630"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EC630</id>
-    <updated>2026-11-13T10:00:30Z</updated>
-    <summary>0x006EC630 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventVarPosDist&gt;::vfunc_01 (PC, 55 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9770"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9770</id>
+    <updated>2026-11-13T10:07:42Z</updated>
+    <summary>0x006F9770 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>audio::OmHalStream::vfunc_12 (PC, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EC5F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EC5F0</id>
-    <updated>2026-11-13T10:00:23Z</updated>
-    <summary>0x006EC5F0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventStream::vfunc_00 (PC, 48 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9C40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9C40</id>
+    <updated>2026-11-13T10:07:35Z</updated>
+    <summary>0x006F9C40 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EC4F0 (PC, 70 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EC4F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EC4F0</id>
-    <updated>2026-11-13T10:00:16Z</updated>
-    <summary>0x006EC4F0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventStream::vfunc_01 (PC, 48 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9C10"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9C10</id>
+    <updated>2026-11-13T10:07:35Z</updated>
+    <summary>0x006F9C10 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EC450 (PC, 24 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EC450"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EC450</id>
-    <updated>2026-11-13T10:00:09Z</updated>
-    <summary>0x006EC450 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarPosDist::vfunc_00 (PC, 48 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9660"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9660</id>
+    <updated>2026-11-13T10:07:35Z</updated>
+    <summary>0x006F9660 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>audio::OmHalStream::vfunc_09 (PC, 17 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EBFD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EBFD0</id>
-    <updated>2026-11-13T10:00:03Z</updated>
-    <summary>0x006EBFD0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarPosDist::vfunc_01 (PC, 48 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9630"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9630</id>
+    <updated>2026-11-13T10:07:35Z</updated>
+    <summary>0x006F9630 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>audio::OmHalStream::vfunc_08 (PC, 36 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EBFA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EBFA0</id>
-    <updated>2026-11-13T09:59:55Z</updated>
-    <summary>0x006EBFA0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarTempo::vfunc_00 (PC, 65 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9430"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9430</id>
+    <updated>2026-11-13T10:07:28Z</updated>
+    <summary>0x006F9430 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>audio::OmHalStream::vfunc_10 (PC, 11 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EBDF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EBDF0</id>
-    <updated>2026-11-13T09:59:48Z</updated>
-    <summary>0x006EBDF0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarTempo::vfunc_01 (PC, 65 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F93E0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F93E0</id>
+    <updated>2026-11-13T10:07:21Z</updated>
+    <summary>0x006F93E0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EBD00 (PC, 6 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EBD00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EBD00</id>
-    <updated>2026-11-13T09:59:41Z</updated>
-    <summary>0x006EBD00 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventVarPitch&gt;::vfunc_01 (PC, 48 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9B60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9B60</id>
+    <updated>2026-11-13T10:07:15Z</updated>
+    <summary>0x006F9B60 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EB9B0 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EB9B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EB9B0</id>
-    <updated>2026-11-13T09:59:35Z</updated>
-    <summary>0x006EB9B0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventVarVolume&gt;::vfunc_01 (PC, 48 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9330"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9330</id>
+    <updated>2026-11-13T10:07:15Z</updated>
+    <summary>0x006F9330 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EA1C0 (PC, 15 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EA1C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EA1C0</id>
-    <updated>2026-11-13T09:59:28Z</updated>
-    <summary>0x006EA1C0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqActionVarVolume::vfunc_06 (PC, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9310"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9310</id>
+    <updated>2026-11-13T10:07:08Z</updated>
+    <summary>0x006F9310 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006EA060 (PC, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EA060"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EA060</id>
-    <updated>2026-11-13T09:59:21Z</updated>
-    <summary>0x006EA060 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarVolume::vfunc_00 (PC, 32 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9230"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9230</id>
+    <updated>2026-11-13T10:07:01Z</updated>
+    <summary>0x006F9230 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::DriveThread::vfunc_01 (PC, 11 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E7EC0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E7EC0</id>
-    <updated>2026-11-13T09:59:13Z</updated>
-    <summary>0x006E7EC0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarVolume::vfunc_01 (PC, 52 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F91F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F91F0</id>
+    <updated>2026-11-13T10:06:54Z</updated>
+    <summary>0x006F91F0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::DriveThread::vfunc_00 (PC, 11 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E7EB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E7EB0</id>
-    <updated>2026-11-13T09:59:13Z</updated>
-    <summary>0x006E7EB0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventVarVolumeRand&gt;::vfunc_01 (PC, 55 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F9130"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F9130</id>
+    <updated>2026-11-13T10:06:47Z</updated>
+    <summary>0x006F9130 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::Drive::vfunc_01 (PC, 8 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E7E90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E7E90</id>
-    <updated>2026-11-13T09:59:06Z</updated>
-    <summary>0x006E7E90 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarVolumeRand::vfunc_00 (PC, 69 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F8FE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F8FE0</id>
+    <updated>2026-11-13T10:06:41Z</updated>
+    <summary>0x006F8FE0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>audio::HalRsdFileStream::vfunc_10 (PC, 8 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F3590"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F3590</id>
-    <updated>2026-11-13T09:58:59Z</updated>
-    <summary>0x006F3590 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventVarVolumeRand::vfunc_01 (PC, 49 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F8FA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F8FA0</id>
+    <updated>2026-11-13T10:06:34Z</updated>
+    <summary>0x006F8FA0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::CementLibrary::vfunc_01 (PC, 8 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E6B70"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E6B70</id>
-    <updated>2026-11-13T09:58:59Z</updated>
-    <summary>0x006E6B70 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventPlayTrack::vfunc_04 (PC, 45 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F8660"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F8660</id>
+    <updated>2026-11-13T10:06:26Z</updated>
+    <summary>0x006F8660 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006E6A10 (PC, 14 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E6A10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E6A10</id>
-    <updated>2026-11-13T09:58:52Z</updated>
-    <summary>0x006E6A10 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventStopTrack::vfunc_04 (PC, 45 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F8280"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F8280</id>
+    <updated>2026-11-13T10:06:20Z</updated>
+    <summary>0x006F8280 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_006E69F0 (PC, 29 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E69F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E69F0</id>
-    <updated>2026-11-13T09:58:45Z</updated>
-    <summary>0x006E69F0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqActionWaitBeat::vfunc_02 (PC, 60 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F7E80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F7E80</id>
+    <updated>2026-11-13T10:06:13Z</updated>
+    <summary>0x006F7E80 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>audio::SeqCommand::vfunc_01 (PC, 31 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F73F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F73F0</id>
-    <updated>2026-11-13T09:58:38Z</updated>
-    <summary>0x006F73F0 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventWaitBeat::vfunc_00 (PC, 65 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F7BC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F7BC0</id>
+    <updated>2026-11-13T10:06:06Z</updated>
+    <summary>0x006F7BC0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>om::DynBehaviour::vfunc_00 (PC, 31 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F6B60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F6B60</id>
-    <updated>2026-11-13T09:58:38Z</updated>
-    <summary>0x006F6B60 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventType&lt;audio::SeqEventConditionElse&gt;::vfunc_01 (PC, 58 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F77F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F77F0</id>
+    <updated>2026-11-13T10:05:58Z</updated>
+    <summary>0x006F77F0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>audio::SeqAction::vfunc_00 (PC, 31 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F6B10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F6B10</id>
-    <updated>2026-11-13T09:58:38Z</updated>
-    <summary>0x006F6B10 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventCondition::vfunc_04 (PC, 72 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F7500"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F7500</id>
+    <updated>2026-11-13T10:05:51Z</updated>
+    <summary>0x006F7500 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>audio::SeqEvent::vfunc_04 (PC, 31 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F5830"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F5830</id>
-    <updated>2026-11-13T09:58:38Z</updated>
-    <summary>0x006F5830 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventConditionElse::vfunc_00 (PC, 47 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F74C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F74C0</id>
+    <updated>2026-11-13T10:05:43Z</updated>
+    <summary>0x006F74C0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>om::Allocator::vfunc_00 (PC, 31 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EE990"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006EE990</id>
-    <updated>2026-11-13T09:58:38Z</updated>
-    <summary>0x006EE990 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventConditionElse::vfunc_01 (PC, 47 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F7450"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F7450</id>
+    <updated>2026-11-13T10:05:43Z</updated>
+    <summary>0x006F7450 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>content::Stats::vfunc_00 (PC, 31 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E9E90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E9E90</id>
-    <updated>2026-11-13T09:58:38Z</updated>
-    <summary>0x006E9E90 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventCondition::vfunc_00 (PC, 64 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F7480"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F7480</id>
+    <updated>2026-11-13T10:05:36Z</updated>
+    <summary>0x006F7480 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::SafeRefCount::vfunc_02 (PC, 31 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E6490"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E6490</id>
-    <updated>2026-11-13T09:58:38Z</updated>
-    <summary>0x006E6490 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventCondition::vfunc_01 (PC, 64 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F7410"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F7410</id>
+    <updated>2026-11-13T10:05:36Z</updated>
+    <summary>0x006F7410 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_46 (PC, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5E50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5E50</id>
-    <updated>2026-11-13T09:58:30Z</updated>
-    <summary>0x006E5E50 in the PC version, matched byte for byte with its original.</summary>
+    <title>audio::SeqEventChannelSends::vfunc_00 (PC, 72 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F7230"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006F7230</id>
+    <updated>2026-11-13T10:05:29Z</updated>
+    <summary>0x006F7230 in the PC version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

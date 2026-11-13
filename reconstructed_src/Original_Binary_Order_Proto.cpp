@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,353 of 17,904 functions matched (18.73%). NOT COMPLETE YET.
-// The 14,551 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 3,354 of 17,904 functions matched (18.73%). NOT COMPLETE YET.
+// The 14,550 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -99140,7 +99140,43 @@ void __cdecl sub_00200280(int a1)
 // [TODO] 0x002011A0 sub_002011A0 (87 B)
 // [TODO] 0x00201200 sub_00201200 (473 B)
 // [TODO] 0x002013E0 sub_002013E0 (92 B)
-// [TODO] 0x00201440 sub_00201440 (75 B)
+// ============================================================================
+// [VERIFIED] sub_00201440 (0x00201440, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00243FA0 (0x00243FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00201440
+// what: The game's name key: h = (h * 65599) & 0x7FFFFFFF, each character + 0x20 if below 'a', XORed in; top bit set.
+// spec: docs/cleanroom/SPEC-006-lights-placed-props-reflection.md section 5
+// tool: Claude Fable 5.2
+// sub_00201440 (0x00201440, 75 bytes): no text, or empty text, gives the starting value back.
+extern "C" unsigned int __cdecl sub_00201440(const char* text, unsigned int start);
+
+unsigned int __cdecl sub_00201440(const char* text, unsigned int start)
+{
+    if (text == 0 || *text == 0)
+    {
+        return start;
+    }
+    unsigned int h = start & 0x7FFFFFFF;
+    while (*text != 0)
+    {
+        h = (h * 65599) & 0x7FFFFFFF;
+        if (*text < 'a')
+        {
+            h ^= *text + 0x20;
+        }
+        else
+        {
+            h ^= *text;
+        }
+        text++;
+    }
+    return h | 0x80000000;
+}
+
 // [TODO] 0x00201490 sub_00201490 (67 B)
 // ============================================================================
 // [VERIFIED] sub_002014E0 (0x002014E0, 5 B)

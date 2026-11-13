@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (111 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (156 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 111 of 750 functions matched (14.80%). NOT COMPLETE YET.
-// The 639 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 156 of 750 functions matched (20.80%). NOT COMPLETE YET.
+// The 594 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -1578,6 +1578,52 @@ void Class_006EE570::sub_006EE570()
 }
 
 // ============================================================================
+// [VERIFIED] sub_006EE870 (0x006EE870, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002CF960 (0x002CF960), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EE870 (0x006EE870, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_007F6834;
+
+void __cdecl sub_006EE870(int a1)
+{
+    ((void (__cdecl*)(int, int))*(int*)(DAT_007F6834 + 4))(DAT_007F6834, a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EE900 (0x006EE900, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000B7EE0 (0x000B7EE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EE900 (0x006EE900, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007726E4[];
+
+class Class_006EE900
+{
+public:
+    Class_006EE900* sub_006EE900(int a1, int a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+Class_006EE900* Class_006EE900::sub_006EE900(int a1, int a2)
+{
+    m_Field00 = (int)DAT_007726E4;
+    m_Field04 = a1;
+    m_Field08 = a2;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_006EE9D0 (0x006EE9D0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -1616,6 +1662,141 @@ public:
 void Class_006EE9F0::sub_006EE9F0()
 {
     sub_00424301();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EEB80 (0x006EEB80, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00065340 (0x00065340), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EEB80 (0x006EEB80, 102 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006ECAC0(int, int);
+};
+
+extern "C" char DAT_00772718[];
+extern "C" char DAT_00772748[];
+extern "C" int DAT_0085CEDC;
+extern "C" int __cdecl sub_006EC7A0(int);
+
+class Class_006EEB80
+{
+public:
+    Class_006EEB80* sub_006EEB80(int a1, int a2, int a3, int a4);
+    void sub_006ED350(int, int, int, int);
+    int m_Field00; // +0x00
+};
+
+Class_006EEB80* Class_006EEB80::sub_006EEB80(int a1, int a2, int a3, int a4)
+{
+    int t2;
+
+    sub_006ED350(a1, a2, a3, a4);
+    m_Field00 = (int)DAT_00772748;
+    t2 = sub_006EC7A0(88);
+    if (t2) {
+        ((Object*)t2)->sub_006ECAC0(a1, 0);
+        *(int*)t2 = (int)DAT_00772718;
+        DAT_0085CEDC = t2;
+        return this;
+    }
+    DAT_0085CEDC = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EEC40 (0x006EEC40, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00065340 (0x00065340), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EEC40 (0x006EEC40, 102 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006ECAC0(int, int);
+};
+
+extern "C" char DAT_00772728[];
+extern "C" char DAT_0077275C[];
+extern "C" int DAT_0085CEE0;
+extern "C" int __cdecl sub_006EC7A0(int);
+
+class Class_006EEC40
+{
+public:
+    Class_006EEC40* sub_006EEC40(int a1, int a2, int a3, int a4);
+    void sub_006ED350(int, int, int, int);
+    int m_Field00; // +0x00
+};
+
+Class_006EEC40* Class_006EEC40::sub_006EEC40(int a1, int a2, int a3, int a4)
+{
+    int t2;
+
+    sub_006ED350(a1, a2, a3, a4);
+    m_Field00 = (int)DAT_0077275C;
+    t2 = sub_006EC7A0(88);
+    if (t2) {
+        ((Object*)t2)->sub_006ECAC0(a1, 0);
+        *(int*)t2 = (int)DAT_00772728;
+        DAT_0085CEE0 = t2;
+        return this;
+    }
+    DAT_0085CEE0 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EED70 (0x006EED70, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00065340 (0x00065340), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EED70 (0x006EED70, 102 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006ECAC0(int, int);
+};
+
+extern "C" char DAT_00772738[];
+extern "C" char DAT_007727A8[];
+extern "C" int DAT_0085CEE4;
+extern "C" int __cdecl sub_006EC7A0(int);
+
+class Class_006EED70
+{
+public:
+    Class_006EED70* sub_006EED70(int a1, int a2, int a3, int a4);
+    void sub_006ED350(int, int, int, int);
+    int m_Field00; // +0x00
+};
+
+Class_006EED70* Class_006EED70::sub_006EED70(int a1, int a2, int a3, int a4)
+{
+    int t2;
+
+    sub_006ED350(a1, a2, a3, a4);
+    m_Field00 = (int)DAT_007727A8;
+    t2 = sub_006EC7A0(88);
+    if (t2) {
+        ((Object*)t2)->sub_006ECAC0(a1, 0);
+        *(int*)t2 = (int)DAT_00772738;
+        DAT_0085CEE4 = t2;
+        return this;
+    }
+    DAT_0085CEE4 = 0;
+    return this;
 }
 
 // ============================================================================
@@ -1662,6 +1843,99 @@ void __cdecl sub_006EF170(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_006EF360 (0x006EF360, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00011710 (0x00011710), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EF360 (0x006EF360, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_0085D12C;
+
+bool __cdecl sub_006EF360(bool a1)
+{
+    DAT_0085D12C = a1;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EF980 (0x006EF980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0002E0C0 (0x0002E0C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EF980 (0x006EF980, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EF980(int a1)
+{
+    return *(int*)(a1 + 16);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EFB60 (0x006EFB60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0002E0B0 (0x0002E0B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EFB60 (0x006EFB60, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EFB60(int a1)
+{
+    return *(int*)(a1 + 8);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F04F0 (0x006F04F0, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00065340 (0x00065340), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F04F0 (0x006F04F0, 102 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006ECAC0(int, int);
+};
+
+extern "C" char DAT_007728D0[];
+extern "C" char DAT_00772918[];
+extern "C" int DAT_0085D138;
+extern "C" int __cdecl sub_006EC7A0(int);
+
+class Class_006F04F0
+{
+public:
+    Class_006F04F0* sub_006F04F0(int a1, int a2, int a3, int a4);
+    void sub_006ED350(int, int, int, int);
+    int m_Field00; // +0x00
+};
+
+Class_006F04F0* Class_006F04F0::sub_006F04F0(int a1, int a2, int a3, int a4)
+{
+    int t2;
+
+    sub_006ED350(a1, a2, a3, a4);
+    m_Field00 = (int)DAT_00772918;
+    t2 = sub_006EC7A0(88);
+    if (t2) {
+        ((Object*)t2)->sub_006ECAC0(a1, 0);
+        *(int*)t2 = (int)DAT_007728D0;
+        DAT_0085D138 = t2;
+        return this;
+    }
+    DAT_0085D138 = 0;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_006F0990 (0x006F0990, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -1677,6 +1951,107 @@ extern "C" void __cdecl sub_006EE890(int, int);
 void __cdecl sub_006F0990(int a1)
 {
     sub_006EE890((int)DAT_007F6BB4, a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F1070 (0x006F1070, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D2970 (0x002D2970), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F1070 (0x006F1070, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field2C
+{
+    int sub_006F0D00(int);
+};
+
+class Class_006F1070
+{
+public:
+    void sub_006F1070(int a1);
+    void sub_006F0FF0(int);
+    char m_pad00[0x2C];
+    Field2C m_Field2C; // +0x2C
+};
+
+void Class_006F1070::sub_006F1070(int a1)
+{
+    if (!m_Field2C.sub_006F0D00(a1)) {
+        sub_006F0FF0(a1);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F2BD0 (0x006F2BD0, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D4D20 (0x002D4D20), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F2BD0 (0x006F2BD0, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006F2BD0
+{
+public:
+    int sub_006F2BD0(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+int Class_006F2BD0::sub_006F2BD0(int a1)
+{
+    int t1;
+
+    *(int*)(a1 + 4) = 0;
+    *(int*)a1 = m_Field00;
+    t1 = m_Field00;
+    if (m_Field00) {
+        *(int*)(t1 + 4) = a1;
+        m_Field00 = a1;
+        return a1;
+    }
+    m_Field04 = a1;
+    m_Field00 = a1;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F2F00 (0x006F2F00, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D5430 (0x002D5430), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F2F00 (0x006F2F00, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772770[];
+extern "C" int __cdecl sub_006EFF60(int);
+
+class Class_006F2F00
+{
+public:
+    void sub_006F2F00();
+    void sub_006ED0C0();
+    int m_Field00; // +0x00
+    char m_pad04[0x24];
+    int m_Field28; // +0x28
+};
+
+void Class_006F2F00::sub_006F2F00()
+{
+    int r_eax;
+
+    r_eax = m_Field28;
+    m_Field00 = (int)DAT_00772770;
+    if (r_eax) {
+        r_eax = sub_006EFF60(r_eax);
+    }
+    sub_006ED0C0();
 }
 
 // ============================================================================
@@ -1700,6 +2075,57 @@ public:
 void Class_006F5730::sub_006F5730()
 {
     ((void (__cdecl*)(void))DAT_00FB100C)();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F57A0 (0x006F57A0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D6A60 (0x002D6A60), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F57A0 (0x006F57A0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006F57A0
+{
+public:
+    int sub_006F57A0(int a1, int a2);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+};
+
+int Class_006F57A0::sub_006F57A0(int a1, int a2)
+{
+    if (m_Field0C != a1) {
+        m_Field0C = a1;
+    }
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F5850 (0x006F5850, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00087E60 (0x00087E60), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F5850 (0x006F5850, 9 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772DC8[];
+
+class Class_006F5850
+{
+public:
+    Class_006F5850* sub_006F5850();
+    int m_Field00; // +0x00
+};
+
+Class_006F5850* Class_006F5850::sub_006F5850()
+{
+    m_Field00 = (int)DAT_00772DC8;
+    return this;
 }
 
 // ============================================================================
@@ -1743,6 +2169,1322 @@ extern "C" void __cdecl sub_006EE890(int, int);
 void __cdecl sub_006F5CC0(int a1)
 {
     sub_006EE890((int)DAT_007F6E60, a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F5F60 (0x006F5F60, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D7240 (0x002D7240), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F5F60 (0x006F5F60, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006F2C00(int);
+};
+
+class Class_006F5F60
+{
+public:
+    void sub_006F5F60(int a1);
+};
+
+void Class_006F5F60::sub_006F5F60(int a1)
+{
+    a1 = a1 + 20;
+    ((Object*)(int)this + 40)->sub_006F2C00(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F5F80 (0x006F5F80, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D7240 (0x002D7240), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F5F80 (0x006F5F80, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006F2C40(int);
+};
+
+class Class_006F5F80
+{
+public:
+    void sub_006F5F80(int a1);
+};
+
+void Class_006F5F80::sub_006F5F80(int a1)
+{
+    a1 = a1 + 20;
+    ((Object*)(int)this + 40)->sub_006F2C40(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F6070 (0x006F6070, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D7350 (0x002D7350), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    void sub_006EE060();
+};
+
+// The links sit 0x10 bytes into each item.
+struct Link
+{
+    Link* next;
+};
+
+struct Item
+{
+    char m_pad00[0x10];
+    Link m_link;       // +0x10
+    char m_pad14[0xC];
+    Object* m_object;  // +0x20
+};
+
+static inline Item* ItemOf(Link* link)
+{
+    return link ? (Item*)((char*)link - 0x10) : 0;
+}
+
+class Class_006F6070
+{
+public:
+    void sub_006F6070();
+
+    char m_pad00[0x14];
+    Link* m_first; // +0x14
+};
+
+// Walks the item list and calls the same method on each item's object.
+void Class_006F6070::sub_006F6070()
+{
+    if (m_first) {
+        for (Item* item = (Item*)((char*)m_first - 0x10); item; item = ItemOf(item->m_link.next))
+            item->m_object->sub_006EE060();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F60A0 (0x006F60A0, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D7350 (0x002D7350), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    void sub_006EE070();
+};
+
+// The links sit 0x10 bytes into each item.
+struct Link
+{
+    Link* next;
+};
+
+struct Item
+{
+    char m_pad00[0x10];
+    Link m_link;       // +0x10
+    char m_pad14[0xC];
+    Object* m_object;  // +0x20
+};
+
+static inline Item* ItemOf(Link* link)
+{
+    return link ? (Item*)((char*)link - 0x10) : 0;
+}
+
+class Class_006F60A0
+{
+public:
+    void sub_006F60A0();
+
+    char m_pad00[0x14];
+    Link* m_first; // +0x14
+};
+
+// Walks the item list and calls the same method on each item's object.
+void Class_006F60A0::sub_006F60A0()
+{
+    if (m_first) {
+        for (Item* item = (Item*)((char*)m_first - 0x10); item; item = ItemOf(item->m_link.next))
+            item->m_object->sub_006EE070();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F60D0 (0x006F60D0, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D7350 (0x002D7350), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    void sub_006EE080();
+};
+
+// The links sit 0x10 bytes into each item.
+struct Link
+{
+    Link* next;
+};
+
+struct Item
+{
+    char m_pad00[0x10];
+    Link m_link;       // +0x10
+    char m_pad14[0xC];
+    Object* m_object;  // +0x20
+};
+
+static inline Item* ItemOf(Link* link)
+{
+    return link ? (Item*)((char*)link - 0x10) : 0;
+}
+
+class Class_006F60D0
+{
+public:
+    void sub_006F60D0();
+
+    char m_pad00[0x14];
+    Link* m_first; // +0x14
+};
+
+// Walks the item list and calls the same method on each item's object.
+void Class_006F60D0::sub_006F60D0()
+{
+    if (m_first) {
+        for (Item* item = (Item*)((char*)m_first - 0x10); item; item = ItemOf(item->m_link.next))
+            item->m_object->sub_006EE080();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F6100 (0x006F6100, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D7350 (0x002D7350), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    void sub_006EE090();
+};
+
+// The links sit 0x10 bytes into each item.
+struct Link
+{
+    Link* next;
+};
+
+struct Item
+{
+    char m_pad00[0x10];
+    Link m_link;       // +0x10
+    char m_pad14[0xC];
+    Object* m_object;  // +0x20
+};
+
+static inline Item* ItemOf(Link* link)
+{
+    return link ? (Item*)((char*)link - 0x10) : 0;
+}
+
+class Class_006F6100
+{
+public:
+    void sub_006F6100();
+
+    char m_pad00[0x14];
+    Link* m_first; // +0x14
+};
+
+// Walks the item list and calls the same method on each item's object.
+void Class_006F6100::sub_006F6100()
+{
+    if (m_first) {
+        for (Item* item = (Item*)((char*)m_first - 0x10); item; item = ItemOf(item->m_link.next))
+            item->m_object->sub_006EE090();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F6740 (0x006F6740, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00065340 (0x00065340), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F6740 (0x006F6740, 102 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006ECAC0(int, int);
+};
+
+extern "C" char DAT_00772E90[];
+extern "C" char DAT_00772EA0[];
+extern "C" int DAT_0085D4EC;
+extern "C" int __cdecl sub_006EC7A0(int);
+
+class Class_006F6740
+{
+public:
+    Class_006F6740* sub_006F6740(int a1, int a2, int a3, int a4);
+    void sub_006ED350(int, int, int, int);
+    int m_Field00; // +0x00
+};
+
+Class_006F6740* Class_006F6740::sub_006F6740(int a1, int a2, int a3, int a4)
+{
+    int t2;
+
+    sub_006ED350(a1, a2, a3, a4);
+    m_Field00 = (int)DAT_00772EA0;
+    t2 = sub_006EC7A0(88);
+    if (t2) {
+        ((Object*)t2)->sub_006ECAC0(a1, 0);
+        *(int*)t2 = (int)DAT_00772E90;
+        DAT_0085D4EC = t2;
+        return this;
+    }
+    DAT_0085D4EC = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F6A00 (0x006F6A00, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00772F2C[];
+extern "C" char DAT_00772F50[];
+extern "C" char DAT_00772F5C[];
+extern "C" Object* DAT_0085D4F0;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F6A00(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00772F5C, 0);
+    second.sub_006EB7A0(DAT_00772F50, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00772F2C;
+        DAT_0085D4F0 = made;
+    } else {
+        DAT_0085D4F0 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F6DE0 (0x006F6DE0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00772FA8[];
+extern "C" char DAT_00772FDC[];
+extern "C" char DAT_00772FF0[];
+extern "C" Object* DAT_0085D4F4;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F6DE0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00772FF0, 0);
+    second.sub_006EB7A0(DAT_00772FDC, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00772FA8;
+        DAT_0085D4F4 = made;
+    } else {
+        DAT_0085D4F4 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F7320 (0x006F7320, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_0077305C[];
+extern "C" char DAT_007730A8[];
+extern "C" char DAT_007730B8[];
+extern "C" Object* DAT_0085D4FC;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F7320(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007730B8, 0);
+    second.sub_006EB7A0(DAT_007730A8, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_0077305C;
+        DAT_0085D4FC = made;
+    } else {
+        DAT_0085D4FC = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F7580 (0x006F7580, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773108[];
+extern "C" char DAT_00773128[];
+extern "C" char DAT_00773134[];
+extern "C" Object* DAT_0085D500;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F7580(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773134, 0);
+    second.sub_006EB7A0(DAT_00773128, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773108;
+        DAT_0085D500 = made;
+    } else {
+        DAT_0085D500 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F7600 (0x006F7600, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773114[];
+extern "C" char DAT_00773148[];
+extern "C" char DAT_00773150[];
+extern "C" Object* DAT_0085D504;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F7600(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773150, 0);
+    second.sub_006EB7A0(DAT_00773148, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773114;
+        DAT_0085D504 = made;
+    } else {
+        DAT_0085D504 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F7AF0 (0x006F7AF0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773198[];
+extern "C" char DAT_007731EC[];
+extern "C" char DAT_007731F4[];
+extern "C" Object* DAT_0085D508;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F7AF0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007731F4, 0);
+    second.sub_006EB7A0(DAT_007731EC, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773198;
+        DAT_0085D508 = made;
+    } else {
+        DAT_0085D508 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F7CA0 (0x006F7CA0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773228[];
+extern "C" char DAT_0077324C[];
+extern "C" char DAT_00773258[];
+extern "C" Object* DAT_0085D510;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F7CA0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773258, 0);
+    second.sub_006EB7A0(DAT_0077324C, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773228;
+        DAT_0085D510 = made;
+    } else {
+        DAT_0085D510 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F8070 (0x006F8070, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773298[];
+extern "C" char DAT_007732EC[];
+extern "C" char DAT_007732FC[];
+extern "C" Object* DAT_0085D518;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F8070(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007732FC, 0);
+    second.sub_006EB7A0(DAT_007732EC, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773298;
+        DAT_0085D518 = made;
+    } else {
+        DAT_0085D518 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F8320 (0x006F8320, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_0077333C[];
+extern "C" char DAT_00773364[];
+extern "C" char DAT_00773370[];
+extern "C" Object* DAT_0085D51C;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F8320(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773370, 0);
+    second.sub_006EB7A0(DAT_00773364, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_0077333C;
+        DAT_0085D51C = made;
+    } else {
+        DAT_0085D51C = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F87C0 (0x006F87C0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773398[];
+extern "C" char DAT_007733DC[];
+extern "C" char DAT_007733E4[];
+extern "C" Object* DAT_0085D520;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F87C0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007733E4, 0);
+    second.sub_006EB7A0(DAT_007733DC, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773398;
+        DAT_0085D520 = made;
+    } else {
+        DAT_0085D520 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F8DA0 (0x006F8DA0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773408[];
+extern "C" char DAT_00773458[];
+extern "C" char DAT_00773468[];
+extern "C" Object* DAT_0085D524;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F8DA0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773468, 0);
+    second.sub_006EB7A0(DAT_00773458, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773408;
+        DAT_0085D524 = made;
+    } else {
+        DAT_0085D524 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F9170 (0x006F9170, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773490[];
+extern "C" char DAT_007734D4[];
+extern "C" char DAT_007734DC[];
+extern "C" Object* DAT_0085D52C;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F9170(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007734DC, 0);
+    second.sub_006EB7A0(DAT_007734D4, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773490;
+        DAT_0085D52C = made;
+    } else {
+        DAT_0085D52C = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F9360 (0x006F9360, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773504[];
+extern "C" char DAT_00773548[];
+extern "C" char DAT_00773550[];
+extern "C" Object* DAT_0085D530;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F9360(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773550, 0);
+    second.sub_006EB7A0(DAT_00773548, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773504;
+        DAT_0085D530 = made;
+    } else {
+        DAT_0085D530 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F95B0 (0x006F95B0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773574[];
+extern "C" char DAT_007735B8[];
+extern "C" char DAT_007735C0[];
+extern "C" Object* DAT_0085D534;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F95B0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007735C0, 0);
+    second.sub_006EB7A0(DAT_007735B8, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773574;
+        DAT_0085D534 = made;
+    } else {
+        DAT_0085D534 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F97B0 (0x006F97B0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_007735E4[];
+extern "C" char DAT_00773628[];
+extern "C" char DAT_00773630[];
+extern "C" Object* DAT_0085D538;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F97B0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773630, 0);
+    second.sub_006EB7A0(DAT_00773628, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_007735E4;
+        DAT_0085D538 = made;
+    } else {
+        DAT_0085D538 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F99C0 (0x006F99C0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773654[];
+extern "C" char DAT_00773698[];
+extern "C" char DAT_007736A4[];
+extern "C" Object* DAT_0085D53C;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F99C0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007736A4, 0);
+    second.sub_006EB7A0(DAT_00773698, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773654;
+        DAT_0085D53C = made;
+    } else {
+        DAT_0085D53C = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F9B90 (0x006F9B90, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_007736CC[];
+extern "C" char DAT_0073C6BC[];
+extern "C" char DAT_00773710[];
+extern "C" Object* DAT_0085D540;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F9B90(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773710, 0);
+    second.sub_006EB7A0(DAT_0073C6BC, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_007736CC;
+        DAT_0085D540 = made;
+    } else {
+        DAT_0085D540 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F9F50 (0x006F9F50, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773740[];
+extern "C" char DAT_00773780[];
+extern "C" char DAT_00773788[];
+extern "C" Object* DAT_0085D544;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006F9F50(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773788, 0);
+    second.sub_006EB7A0(DAT_00773780, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773740;
+        DAT_0085D544 = made;
+    } else {
+        DAT_0085D544 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FA7F0 (0x006FA7F0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_007737A8[];
+extern "C" char DAT_007737E8[];
+extern "C" char DAT_007737F0[];
+extern "C" Object* DAT_0085D548;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006FA7F0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007737F0, 0);
+    second.sub_006EB7A0(DAT_007737E8, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_007737A8;
+        DAT_0085D548 = made;
+    } else {
+        DAT_0085D548 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FA9F0 (0x006FA9F0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773810[];
+extern "C" char DAT_00773818[];
+extern "C" char DAT_0077381C[];
+extern "C" Object* DAT_0085D54C;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006FA9F0(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_0077381C, 0);
+    second.sub_006EB7A0(DAT_00773818, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773810;
+        DAT_0085D54C = made;
+    } else {
+        DAT_0085D54C = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FAA70 (0x006FAA70, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002DCE80 (0x002DCE80), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006FAA70 (0x006FAA70, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00773834[];
+extern "C" void __cdecl sub_006F5850(void);
+
+class Class_006FAA70
+{
+public:
+    Class_006FAA70* sub_006FAA70();
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    bool m_Field10; // +0x10
+    bool m_Field11; // +0x11
+};
+
+Class_006FAA70* Class_006FAA70::sub_006FAA70()
+{
+    sub_006F5850();
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field10 = true;
+    m_Field11 = true;
+    m_Field00 = (int)DAT_00773834;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FAD40 (0x006FAD40, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773868[];
+extern "C" char DAT_00771844[];
+extern "C" char DAT_0077387C[];
+extern "C" Object* DAT_0085D554;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006FAD40(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_0077387C, 0);
+    second.sub_006EB7A0(DAT_00771844, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773868;
+        DAT_0085D554 = made;
+    } else {
+        DAT_0085D554 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FB130 (0x006FB130, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_007738BC[];
+extern "C" char DAT_007738E0[];
+extern "C" char DAT_007738E8[];
+extern "C" Object* DAT_0085D558;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006FB130(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_007738E8, 0);
+    second.sub_006EB7A0(DAT_007738E0, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_007738BC;
+        DAT_0085D558 = made;
+    } else {
+        DAT_0085D558 = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FBC20 (0x006FBC20, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D8E20 (0x002D8E20), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Name
+{
+    int data[3];
+    void sub_006EB7A0(const char* text, int flags);
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F5BB0(Name* a, Name* b);
+};
+
+extern "C" char DAT_00773930[];
+extern "C" char DAT_00756358[];
+extern "C" char DAT_00773970[];
+extern "C" Object* DAT_0085D55C;
+extern "C" void* __cdecl sub_0043CE00(unsigned int size);
+
+// Makes the single instance: builds it from two names and keeps it in a global (or null).
+void __cdecl sub_006FBC20(void)
+{
+    Name first, second;
+
+    first.sub_006EB7A0(DAT_00773970, 0);
+    second.sub_006EB7A0(DAT_00756358, 0);
+    Object* made = (Object*)sub_0043CE00(44);
+    if (made) {
+        made->sub_006F5BB0(&second, &first);
+        *(void**)made = DAT_00773930;
+        DAT_0085D55C = made;
+    } else {
+        DAT_0085D55C = 0;
+    }
+    second.sub_006EBBD0();
+    first.sub_006EBBD0();
 }
 
 // ============================================================================
