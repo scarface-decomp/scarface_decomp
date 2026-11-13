@@ -491,6 +491,10 @@ twice. That is what SPEC-002 said they were meant to do. Why the PC doesn't show
    beside the prop, which has them.
 9. *Is the 0.65 a limit on how far shadow decals darken?* Still open, as §8.2 says; the exports don't depend on
    it.
+10. *Should an occluder's `facing` in the extras be turned into glTF's space like its position?* No: keep it as
+    the file has it, as the lights' settings are.
+11. *Should the occluder nodes follow the game's `OccluderObject_<n>` naming?* No need: the game's count runs
+    across every file it loads, so a per-file number is as good.
 
 ---
 
