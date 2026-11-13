@@ -1,4 +1,5 @@
 """Sending prepared matches to the portal (portal/scripts/submit_matches.py)."""
+import re
 import sys
 from pathlib import Path
 
@@ -53,4 +54,4 @@ def test_the_waiting_matches_are_well_formed():
         assert S.task_id(fields) == path.stem, path.name                        # named after its function
         assert fields.get("what") and len(fields["what"]) <= 160, path.name
         # where it came from: a spec, or the already matched function it is a look-alike of
-        assert fields.get("spec") or "look-alike of 0x" in fields.get("tool", ""), path.name
+        assert fields.get("spec") or re.search(r"look-alike of (\w+ )?0x[0-9A-F]{8}", fields.get("tool", "")), path.name
