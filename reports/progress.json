@@ -1,25 +1,25 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-13 06:16:00",
+  "updated_at": "2026-11-13 07:08:01",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 106,
-    "xb": 1552,
-    "proto": 1505,
+    "xb": 5876,
+    "proto": 2921,
     "ps2": 0,
-    "total": 1658,
-    "bytes": 33056,
+    "total": 5982,
+    "bytes": 184810,
     "ps2_bytes": 0
   },
   "size_buckets": {
-    "1-9 B": 753,
-    "10-19 B": 128,
-    "20-39 B": 704,
-    "40-79 B": 73,
-    "80+ B": 0
+    "1-9 B": 1345,
+    "10-19 B": 880,
+    "20-39 B": 1896,
+    "40-79 B": 1688,
+    "80+ B": 173
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 3163
+    "RRutherrfordd (Founder)": 8903
   },
   "unattributed": 0,
   "queue": {
@@ -37,67 +37,49 @@
   },
   "good_first": [
     {
-      "id": "xb_00079FC0",
+      "id": "xb_0024E1E0",
       "bin": "xb",
-      "va": "0x00079FC0",
-      "symbol": "sub_00079FC0",
-      "size": 3,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
-    {
-      "id": "xb_000DD3D0",
-      "bin": "xb",
-      "va": "0x000DD3D0",
-      "symbol": "sub_000DD3D0",
-      "size": 3,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
-    {
-      "id": "xb_000720A0",
-      "bin": "xb",
-      "va": "0x000720A0",
-      "symbol": "sub_000720A0",
-      "size": 3,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
-    {
-      "id": "xb_00054F90",
-      "bin": "xb",
-      "va": "0x00054F90",
-      "symbol": "renderer::InstanceRenderable::vfunc_10",
-      "size": 5,
-      "why": "matching it also matches its 18 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_0008FAF0",
-      "bin": "xb",
-      "va": "0x0008FAF0",
-      "symbol": "PropAttachToObjectBehaviour::vfunc_01",
-      "size": 5,
-      "why": "matching it also matches its 9 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_0029F440",
-      "bin": "xb",
-      "va": "0x0029F440",
-      "symbol": "pure3d::d3dFBEffectsShader::vfunc_04",
+      "va": "0x0024E1E0",
+      "symbol": "sub_0024E1E0",
       "size": 6,
-      "why": "matching it also matches its 47 look-alikes",
+      "why": "it was matched before the reset, so it can be done",
+      "kind": "matched_before"
+    },
+    {
+      "id": "xb_0024E1F0",
+      "bin": "xb",
+      "va": "0x0024E1F0",
+      "symbol": "sub_0024E1F0",
+      "size": 6,
+      "why": "it was matched before the reset, so it can be done",
+      "kind": "matched_before"
+    },
+    {
+      "id": "xb_002FBBE9",
+      "bin": "xb",
+      "va": "0x002FBBE9",
+      "symbol": "sub_002FBBE9",
+      "size": 6,
+      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     },
     {
-      "id": "xb_00022710",
+      "id": "xb_000D8260",
       "bin": "xb",
-      "va": "0x00022710",
-      "symbol": "CollisionBehaviourTypeGroup::vfunc_05",
-      "size": 3,
-      "why": "the game's class information names it",
-      "kind": "named"
+      "va": "0x000D8260",
+      "symbol": "sub_000D8260",
+      "size": 7,
+      "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00248810",
+      "bin": "xb",
+      "va": "0x00248810",
+      "symbol": "core::ControllerSystemXBox::vfunc_00",
+      "size": 8,
+      "why": "matching it also matches its 30 look-alikes",
+      "kind": "group"
     },
     {
       "id": "xb_00022720",
@@ -118,13 +100,31 @@
       "kind": "named"
     },
     {
-      "id": "xb_000E3560",
+      "id": "xb_000B7EB0",
       "bin": "xb",
-      "va": "0x000E3560",
-      "symbol": "sub_000E3560",
+      "va": "0x000B7EB0",
+      "symbol": "Collidable::vfunc_05",
       "size": 3,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_0030715D",
+      "bin": "xb",
+      "va": "0x0030715D",
+      "symbol": "sub_0030715D",
+      "size": 8,
+      "why": "matching it also matches its 9 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002AC7B0",
+      "bin": "xb",
+      "va": "0x002AC7B0",
+      "symbol": "core::Drive::vfunc_02",
+      "size": 8,
+      "why": "matching it also matches its 8 look-alikes",
+      "kind": "group"
     }
   ]
 }

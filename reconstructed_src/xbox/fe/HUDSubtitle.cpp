@@ -1,13 +1,96 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/HUDSubtitle.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/HUDSubtitle.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 7 functions matched (14.29%). NOT COMPLETE YET.
-// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 7 functions matched (57.14%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] HUDSubtitle::vfunc_29 (0x00190FA0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// HUDSubtitle::vfunc_29 (0x00190FA0, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17(int);
+};
+
+extern "C" char DAT_003BA6AC[];
+extern "C" int __cdecl sub_00023EC0(int);
+extern "C" void __cdecl sub_00193150(void);
+
+class HUDSubtitle
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    char m_pad04[0x64];
+    int m_Field68; // +0x68
+};
+
+void HUDSubtitle::vfunc_29()
+{
+    int t2;
+
+    sub_00193150();
+    t2 = sub_00023EC0((int)DAT_003BA6AC);
+    m_Field68 = t2;
+    if (t2) {
+        ((Object*)t2)->vfunc_17(0);
+    }
+}
 
 // ============================================================================
 // [VERIFIED] HUDSubtitle::vfunc_00 (0x001918E0, 6 B)
@@ -30,5 +113,98 @@ public:
 void* HUDSubtitle::vfunc_00()
 {
     return DAT_004364D4;
+}
+
+// ============================================================================
+// [VERIFIED] HUDSubtitle::vfunc_01 (0x001920F0, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// HUDSubtitle::vfunc_01 (0x001920F0, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field64
+{
+    void sub_001918F0(int);
+};
+
+extern "C" char DAT_003BA6C4[];
+extern "C" void __cdecl sub_00027600(int);
+
+class HUDSubtitle
+{
+public:
+    virtual void vfunc_00();
+    virtual HUDSubtitle* vfunc_01(int a1);
+    void sub_00193F80();
+    char m_pad04[0x60];
+    Field64* m_Field64; // +0x64
+};
+
+HUDSubtitle* HUDSubtitle::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_003BA6C4;
+    if (m_Field64) {
+        m_Field64->sub_001918F0(3);
+        m_Field64 = 0;
+    }
+    sub_00193F80();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] HUDSubtitle::vfunc_04 (0x001A5B80, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ScriptDeclaration::vfunc_04 (0x0002AA90), which was matched first;
+// its addresses and names were swapped for this function's.
+// HUDSubtitle::vfunc_04 (0x001A5B80, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_00193190(int);
+
+class HUDSubtitle
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1);
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+};
+
+void HUDSubtitle::vfunc_04(int a1)
+{
+    sub_00193190(a1);
+    vfunc_29();
 }
 

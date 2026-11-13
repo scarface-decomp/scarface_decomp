@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dNightlightShader.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dNightlightShader.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 5 functions matched (20.00%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 5 functions matched (40.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -40,6 +40,40 @@ void* d3dNightlightShader::vfunc_23()
 {
     return DAT_003D97BC;
 }
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dNightlightShader::vfunc_03 (0x002C6330, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Param::vfunc_03 (0x00239CE0), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" char DAT_003DBB94[];
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dNightlightShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dNightlightShader* vfunc_03(unsigned int flags);
+    void sub_0029F6D0();
+};
+
+#pragma optimize("y", off)
+d3dNightlightShader* d3dNightlightShader::vfunc_03(unsigned int flags)
+{
+    *(void**)this = DAT_003DBB94;
+    sub_0029F6D0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
 
 }
 

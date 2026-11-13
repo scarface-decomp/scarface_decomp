@@ -1,770 +1,2002 @@
 [
   {
-    "time": "2026-11-13 06:16:02",
+    "time": "2026-11-13 07:00:48",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "67 look-alike(s) of fight::Branch::vfunc_03",
-    "va": "0x0023B160",
+    "symbol": "1 look-alike(s) of sub_00080430",
+    "va": "0x00080430",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-11 03:33:18",
+    "time": "2026-11-13 06:59:46",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "13 look-alike(s) of sub_00702F18",
-    "va": "PC 0x00702F18",
+    "symbol": "22 look-alike(s) of sub_002D8E20",
+    "va": "0x002D8E20",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-11 03:33:07",
+    "time": "2026-11-13 06:59:39",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00702F18",
-    "va": "PC 0x00702F18",
-    "bytes": "3/3 B"
-  },
-  {
-    "time": "2026-11-11 03:31:32",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "63 look-alike(s) of sub_0007F7F0",
-    "va": "0x0007F7F0",
+    "symbol": "7 look-alike(s) of sub_002D7350",
+    "va": "0x002D7350",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-11 03:31:06",
+    "time": "2026-11-13 06:59:34",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_0007F7F0",
-    "va": "0x0007F7F0",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-11 03:31:00",
-    "user": "RRutherrfordd (Founder)",
-    "action": "PARTIAL",
-    "symbol": "fight::Branch::vfunc_03",
-    "va": "0x0023B160",
-    "bytes": "1/33 B"
-  },
-  {
-    "time": "2026-11-11 00:00:26",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of CollisionBehaviourTypeGroup::vfunc_10",
-    "va": "0x002A9290",
+    "symbol": "9 look-alike(s) of sub_00272D90",
+    "va": "0x00272D90",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:59:54",
+    "time": "2026-11-13 06:59:30",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "70 look-alike(s) of content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00",
-    "va": "0x00013900",
+    "symbol": "18 look-alike(s) of content::LoadInventory::DynamicCaster<pure3d::Font>::vfunc_00",
+    "va": "0x00249390",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:59:00",
+    "time": "2026-11-13 06:59:23",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "71 look-alike(s) of SoundManager::SoundPlayerHandle::vfunc_00",
-    "va": "0x00077F00",
+    "symbol": "7 look-alike(s) of fight::ParamValue::vfunc_00",
+    "va": "0x0023F0C0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:58:10",
+    "time": "2026-11-13 06:59:20",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "64 look-alike(s) of SoundEntityLoader::vfunc_04",
-    "va": "0x00064FA0",
+    "symbol": "8 look-alike(s) of sub_0023EB20",
+    "va": "0x0023EB20",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:56:55",
+    "time": "2026-11-13 06:59:16",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "86 look-alike(s) of SpeedCondition::vfunc_08",
-    "va": "0x000DD280",
+    "symbol": "6 look-alike(s) of sub_0023B8D0",
+    "va": "0x0023B8D0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:55:20",
+    "time": "2026-11-13 06:59:12",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "17 look-alike(s) of core::MemoryAllocatorMalloc::vfunc_12",
-    "va": "0x0028D100",
+    "symbol": "35 look-alike(s) of fight::Param::vfunc_03",
+    "va": "0x00239CE0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:54:23",
+    "time": "2026-11-13 06:59:02",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "90 look-alike(s) of sub_000DD260",
-    "va": "0x000DD260",
+    "symbol": "1 look-alike(s) of sub_00230C40",
+    "va": "0x00230C40",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:52:32",
+    "time": "2026-11-13 06:58:59",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "119 look-alike(s) of sub_00023D40",
-    "va": "0x00023D40",
+    "symbol": "1 look-alike(s) of sub_00230BD0",
+    "va": "0x00230BD0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:50:02",
+    "time": "2026-11-13 06:58:57",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "127 look-alike(s) of sub_0001E5D0",
-    "va": "0x0001E5D0",
+    "symbol": "1 look-alike(s) of sub_00216C70",
+    "va": "0x00216C70",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:47:44",
+    "time": "2026-11-13 06:58:54",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "132 look-alike(s) of CollisionManager::CollisionManagerFlowClient::vfunc_00",
-    "va": "0x00016060",
+    "symbol": "1 look-alike(s) of sub_00216B70",
+    "va": "0x00216B70",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:45:41",
+    "time": "2026-11-13 06:58:52",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "143 look-alike(s) of fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03",
-    "va": "0x000DE4D0",
+    "symbol": "1 look-alike(s) of sub_00216AF0",
+    "va": "0x00216AF0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:42:46",
+    "time": "2026-11-13 06:58:50",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "147 look-alike(s) of pure3d::TargaHandler::vfunc_07",
-    "va": "0x0004A760",
+    "symbol": "1 look-alike(s) of sub_002169F0",
+    "va": "0x002169F0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:40:12",
+    "time": "2026-11-13 06:58:47",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "197 look-alike(s) of Collidable::vfunc_03",
-    "va": "0x00011F20",
+    "symbol": "50 look-alike(s) of sub_00200EA0",
+    "va": "0x00200EA0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:37:09",
+    "time": "2026-11-13 06:58:33",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "204 look-alike(s) of ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02",
-    "va": "0x00011400",
+    "symbol": "24 look-alike(s) of ConcreteClassRep<GenericWeaponHUD>::vfunc_02",
+    "va": "0x001BCB10",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:34:19",
+    "time": "2026-11-13 06:58:25",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "331 look-alike(s) of CollisionBehaviourTypeGroup::vfunc_01",
-    "va": "0x00013840",
+    "symbol": "1 look-alike(s) of sub_0017A140",
+    "va": "0x0017A140",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:29:25",
+    "time": "2026-11-13 06:58:22",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_003237C1",
-    "va": "0x003237C1",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:29:07",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F0AF0",
-    "va": "0x002F0AF0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:28:51",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002CE340",
-    "va": "0x002CE340",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:28:32",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002CC090",
-    "va": "0x002CC090",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:28:19",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CollisionBehaviourTypeGroup::vfunc_10",
-    "va": "0x002A9290",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:28:05",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0029DA50",
-    "va": "0x0029DA50",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:27:53",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00246630",
-    "va": "0x00246630",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:27:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002304E0",
-    "va": "0x002304E0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:27:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0021FBC0",
-    "va": "0x0021FBC0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:27:19",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "337 look-alike(s) of ConcreteClassRep<CollisionSurfaceType>::vfunc_02",
-    "va": "0x00011450",
+    "symbol": "4 look-alike(s) of sub_00136EB0",
+    "va": "0x00136EB0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:27:10",
+    "time": "2026-11-13 06:58:19",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_0021FB70",
-    "va": "0x0021FB70",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:26:58",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001FEEC0",
-    "va": "0x001FEEC0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:26:46",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001D7720",
-    "va": "0x001D7720",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:26:34",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001D76E0",
-    "va": "0x001D76E0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:26:20",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001D12D0",
-    "va": "0x001D12D0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:26:08",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001B73AE",
-    "va": "0x001B73AE",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:25:57",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00192A60",
-    "va": "0x00192A60",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:25:47",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00154560",
-    "va": "0x00154560",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:25:36",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001416E0",
-    "va": "0x001416E0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:25:26",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00128A50",
-    "va": "0x00128A50",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:25:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00126520",
-    "va": "0x00126520",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:25:03",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00126450",
-    "va": "0x00126450",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:24:54",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00126070",
-    "va": "0x00126070",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:24:44",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00120E10",
-    "va": "0x00120E10",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:24:34",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001067A0",
-    "va": "0x001067A0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:24:25",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000E9AD0",
-    "va": "0x000E9AD0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:24:17",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000E9A90",
-    "va": "0x000E9A90",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:24:09",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000D7FE0",
-    "va": "0x000D7FE0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:24:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000A4A50",
-    "va": "0x000A4A50",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:23:52",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00098460",
-    "va": "0x00098460",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:23:46",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000905D0",
-    "va": "0x000905D0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:23:38",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00088060",
-    "va": "0x00088060",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:23:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000721C0",
-    "va": "0x000721C0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:23:24",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000711F0",
-    "va": "0x000711F0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:23:17",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00067BA0",
-    "va": "0x00067BA0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:23:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000643C0",
-    "va": "0x000643C0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:23:03",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00063DA0",
-    "va": "0x00063DA0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:58",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0005D860",
-    "va": "0x0005D860",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:48",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000573D0",
-    "va": "0x000573D0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:42",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00056610",
-    "va": "0x00056610",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:35",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00050BB0",
-    "va": "0x00050BB0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:29",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00050020",
-    "va": "0x00050020",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:22",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0004F3F0",
-    "va": "0x0004F3F0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00048490",
-    "va": "0x00048490",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00048010",
-    "va": "0x00048010",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:22:05",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00047FE0",
-    "va": "0x00047FE0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:59",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000476A0",
-    "va": "0x000476A0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:51",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0003D580",
-    "va": "0x0003D580",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:46",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00036CD0",
-    "va": "0x00036CD0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000356A0",
-    "va": "0x000356A0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:35",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0002B9F0",
-    "va": "0x0002B9F0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:30",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00023F20",
-    "va": "0x00023F20",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:24",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000231B0",
-    "va": "0x000231B0",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:19",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0001E630",
-    "va": "0x0001E630",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:21:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00011170",
-    "va": "0x00011170",
-    "bytes": "1/1 B"
-  },
-  {
-    "time": "2026-11-10 23:20:42",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "803 look-alike(s) of CollisionBehaviourTypeGroup::vfunc_00",
-    "va": "0x000123B0",
+    "symbol": "1 look-alike(s) of sub_00136B30",
+    "va": "0x00136B30",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-10 23:20:29",
-    "user": "RRutherrfordd (Founder)",
-    "action": "PARTIAL",
-    "symbol": "fight::Branch::vfunc_03",
-    "va": "0x0023B160",
-    "bytes": "1/33 B"
-  },
-  {
-    "time": "2026-11-10 23:18:13",
+    "time": "2026-11-13 06:58:16",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00",
-    "va": "0x00013900",
-    "bytes": "30/30 B"
-  },
-  {
-    "time": "2026-11-10 23:18:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "SoundManager::SoundPlayerHandle::vfunc_00",
-    "va": "0x00077F00",
-    "bytes": "36/36 B"
-  },
-  {
-    "time": "2026-11-10 23:18:08",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "SoundEntityLoader::vfunc_04",
-    "va": "0x00064FA0",
-    "bytes": "5/5 B"
-  },
-  {
-    "time": "2026-11-10 23:18:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "SpeedCondition::vfunc_08",
-    "va": "0x000DD280",
-    "bytes": "16/16 B"
-  },
-  {
-    "time": "2026-11-10 23:18:04",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "core::MemoryAllocatorMalloc::vfunc_12",
-    "va": "0x0028D100",
-    "bytes": "6/6 B"
-  },
-  {
-    "time": "2026-11-10 23:18:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000DD260",
-    "va": "0x000DD260",
-    "bytes": "19/19 B"
-  },
-  {
-    "time": "2026-11-10 23:18:00",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00023D40",
-    "va": "0x00023D40",
-    "bytes": "5/5 B"
-  },
-  {
-    "time": "2026-11-10 23:17:58",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0001E5D0",
-    "va": "0x0001E5D0",
-    "bytes": "6/6 B"
-  },
-  {
-    "time": "2026-11-10 23:17:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CollisionManager::CollisionManagerFlowClient::vfunc_00",
-    "va": "0x00016060",
-    "bytes": "30/30 B"
-  },
-  {
-    "time": "2026-11-10 23:17:54",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03",
-    "va": "0x000DE4D0",
-    "bytes": "43/43 B"
-  },
-  {
-    "time": "2026-11-10 23:17:53",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::TargaHandler::vfunc_07",
-    "va": "0x0004A760",
-    "bytes": "6/6 B"
-  },
-  {
-    "time": "2026-11-10 23:17:51",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "Collidable::vfunc_03",
-    "va": "0x00011F20",
-    "bytes": "30/30 B"
-  },
-  {
-    "time": "2026-11-10 23:17:50",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02",
-    "va": "0x00011400",
-    "bytes": "32/32 B"
-  },
-  {
-    "time": "2026-11-10 23:17:48",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CollisionBehaviourTypeGroup::vfunc_01",
-    "va": "0x00013840",
-    "bytes": "36/36 B"
-  },
-  {
-    "time": "2026-11-10 23:17:47",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "ConcreteClassRep<CollisionSurfaceType>::vfunc_02",
-    "va": "0x00011450",
-    "bytes": "36/36 B"
-  },
-  {
-    "time": "2026-11-10 23:17:46",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CollisionBehaviourTypeGroup::vfunc_00",
-    "va": "0x000123B0",
-    "bytes": "6/6 B"
-  },
-  {
-    "time": "2026-11-09 07:59:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "7 look-alike(s) of sub_006DEDF0",
-    "va": "PC 0x006DEDF0",
+    "symbol": "18 look-alike(s) of sub_001369B0",
+    "va": "0x001369B0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-09 07:59:05",
+    "time": "2026-11-13 06:58:09",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_006DEDF0",
-    "va": "PC 0x006DEDF0",
-    "bytes": "1/1 B"
+    "symbol": "14 look-alike(s) of sub_00136930",
+    "va": "0x00136930",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:58:04",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "5 look-alike(s) of sub_00136830",
+    "va": "0x00136830",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:58:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "25 look-alike(s) of sub_0011BF20",
+    "va": "0x0011BF20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:51",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0011BDA0",
+    "va": "0x0011BDA0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:48",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0011BD30",
+    "va": "0x0011BD30",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "16 look-alike(s) of sub_0011BCB0",
+    "va": "0x0011BCB0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_0011A0E0",
+    "va": "0x0011A0E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "8 look-alike(s) of sub_00119F60",
+    "va": "0x00119F60",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00119EE0",
+    "va": "0x00119EE0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "7 look-alike(s) of sub_00119E60",
+    "va": "0x00119E60",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:27",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_00112E60",
+    "va": "0x00112E60",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:24",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "11 look-alike(s) of AITask_ChallengeTony::vfunc_01",
+    "va": "0x00105D40",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "15 look-alike(s) of BlendAction::vfunc_03",
+    "va": "0x000E3ED0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_00099620",
+    "va": "0x00099620",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:11",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "6 look-alike(s) of sub_000995B0",
+    "va": "0x000995B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00099540",
+    "va": "0x00099540",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00073AE0",
+    "va": "0x00073AE0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00073910",
+    "va": "0x00073910",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:57:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "5 look-alike(s) of sub_0006ECE0",
+    "va": "0x0006ECE0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of BreakStmtNode::vfunc_00",
+    "va": "0x0006BE00",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:53",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "22 look-alike(s) of sub_0003D840",
+    "va": "0x0003D840",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0002E330",
+    "va": "0x0002E330",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "5 look-alike(s) of sub_0002E2C0",
+    "va": "0x0002E2C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "8 look-alike(s) of sub_0002D910",
+    "va": "0x0002D910",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:36",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_00025350",
+    "va": "0x00025350",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "29 look-alike(s) of sub_000209E0",
+    "va": "0x000209E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:24",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "24 look-alike(s) of sub_00018F30",
+    "va": "0x00018F30",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00016030",
+    "va": "0x00016030",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:13",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "9 look-alike(s) of sub_00015AE0",
+    "va": "0x00015AE0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:09",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_000135D0",
+    "va": "0x000135D0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "5 look-alike(s) of sub_000115B0",
+    "va": "0x000115B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:56:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "5 look-alike(s) of sub_00011540",
+    "va": "0x00011540",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:55:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "40 look-alike(s) of sub_000111A0",
+    "va": "0x000111A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0002B540",
+    "va": "0x0002B540",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:23",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0002AE20",
+    "va": "0x0002AE20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0002AC50",
+    "va": "0x0002AC50",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0002A160",
+    "va": "0x0002A160",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of GameSetObject::vfunc_01",
+    "va": "0x00029FB0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00029F90",
+    "va": "0x00029F90",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:09",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEGroupObject::vfunc_28",
+    "va": "0x00029F60",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00029E90",
+    "va": "0x00029E90",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00029E60",
+    "va": "0x00029E60",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:54:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00029790",
+    "va": "0x00029790",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00029340",
+    "va": "0x00029340",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:53",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00029160",
+    "va": "0x00029160",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:51",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEGroupObject::vfunc_30",
+    "va": "0x00029060",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:48",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00028FA0",
+    "va": "0x00028FA0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MovieDrawHandler::vfunc_00",
+    "va": "0x00028A20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MovieRenderLoop::vfunc_04",
+    "va": "0x000288B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MovieRenderLoop::vfunc_01",
+    "va": "0x000288A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00027720",
+    "va": "0x00027720",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000275B0",
+    "va": "0x000275B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_02",
+    "va": "0x00027580",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_01",
+    "va": "0x00027570",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:27",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_00",
+    "va": "0x00027560",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:25",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_12",
+    "va": "0x00027530",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_11",
+    "va": "0x00027520",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_10",
+    "va": "0x00027510",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_09",
+    "va": "0x00027500",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_07",
+    "va": "0x000274C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_06",
+    "va": "0x000274B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::Allocator::vfunc_04",
+    "va": "0x00027470",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:04",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MemoryManager::GameSegmentAllocatorCreator::vfunc_00",
+    "va": "0x00027110",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:53:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00026EC0",
+    "va": "0x00026EC0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of GameMemorySegmentCollection::vfunc_03",
+    "va": "0x00026E70",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of GameMemorySegmentCollection::vfunc_00",
+    "va": "0x00026D80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:54",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00026D00",
+    "va": "0x00026D00",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of core::Object::vfunc_00",
+    "va": "0x00026CD0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:49",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000269C0",
+    "va": "0x000269C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000269A0",
+    "va": "0x000269A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00026990",
+    "va": "0x00026990",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of GameMemorySegmentCollection::vfunc_12",
+    "va": "0x00026980",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of GameMemorySegmentCollection::vfunc_09",
+    "va": "0x00026970",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:36",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of GameMemorySegmentCollection::vfunc_08",
+    "va": "0x00026960",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of GameMemorySegmentCollection::vfunc_07",
+    "va": "0x00026950",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:31",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000267E0",
+    "va": "0x000267E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of Graph::vfunc_01",
+    "va": "0x00026760",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:25",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00025600",
+    "va": "0x00025600",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CScript::Function1<bool, char*>::vfunc_00",
+    "va": "0x000252E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FrontEndFlowClient::vfunc_00",
+    "va": "0x000244A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00023F10",
+    "va": "0x00023F10",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:15",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_00023EC0",
+    "va": "0x00023EC0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00023BD0",
+    "va": "0x00023BD0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:10",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEGroupObject::vfunc_34",
+    "va": "0x00023B90",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEGroupObject::vfunc_17",
+    "va": "0x00023B70",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEGroupObject::vfunc_33",
+    "va": "0x00023B50",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:52:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEGroupObject::vfunc_32",
+    "va": "0x00023B30",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:58",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEMeshBroadcast::vfunc_05",
+    "va": "0x00023800",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEObject::vfunc_32",
+    "va": "0x00023450",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEMeshBroadcast::vfunc_06",
+    "va": "0x000231A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:49",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEObject::vfunc_37",
+    "va": "0x00022B80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FEObject::vfunc_30",
+    "va": "0x00022A20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of fight::ParamString<TimedCharacterFightTrack>::vfunc_01",
+    "va": "0x00022A00",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>::vfunc_07",
+    "va": "0x00022760",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CollisionBehaviourTypeGroup::vfunc_05",
+    "va": "0x00022710",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:34",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_23",
+    "va": "0x000226E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_19",
+    "va": "0x000226C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:29",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_07",
+    "va": "0x00022680",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00021D20",
+    "va": "0x00021D20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00021C80",
+    "va": "0x00021C80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FightContext::vfunc_03",
+    "va": "0x00021B20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:13",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00021B00",
+    "va": "0x00021B00",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:11",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FightContext::vfunc_11",
+    "va": "0x00021AB0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:08",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FightContext::vfunc_10",
+    "va": "0x00021A60",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000219B0",
+    "va": "0x000219B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FightContext::vfunc_06",
+    "va": "0x00021940",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:51:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FightContext::vfunc_05",
+    "va": "0x00021930",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:53",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00020D50",
+    "va": "0x00020D50",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:50",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00020C30",
+    "va": "0x00020C30",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:48",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00020B10",
+    "va": "0x00020B10",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:45",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ControllerManager::ControllerFlowClient::vfunc_00",
+    "va": "0x0001F120",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0001E560",
+    "va": "0x0001E560",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:39",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0001E100",
+    "va": "0x0001E100",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:31",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of VehiclePickupCollisionBroker::vfunc_01",
+    "va": "0x0001C010",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of PickupCollisionBroker::vfunc_01",
+    "va": "0x0001C000",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:24",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00019040",
+    "va": "0x00019040",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00018FF0",
+    "va": "0x00018FF0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00018EB0",
+    "va": "0x00018EB0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:15",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00018E20",
+    "va": "0x00018E20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000189E0",
+    "va": "0x000189E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00018820",
+    "va": "0x00018820",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:50:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000187A0",
+    "va": "0x000187A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:58",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00018520",
+    "va": "0x00018520",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00018500",
+    "va": "0x00018500",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000184E0",
+    "va": "0x000184E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00017930",
+    "va": "0x00017930",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00017640",
+    "va": "0x00017640",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:39",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00017630",
+    "va": "0x00017630",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000173D0",
+    "va": "0x000173D0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:29",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00014F70",
+    "va": "0x00014F70",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00013870",
+    "va": "0x00013870",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:23",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CollisionBehaviourTypeGroup::vfunc_13",
+    "va": "0x00012A30",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00012440",
+    "va": "0x00012440",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00012420",
+    "va": "0x00012420",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00012230",
+    "va": "0x00012230",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:04",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000120F0",
+    "va": "0x000120F0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:49:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000120C0",
+    "va": "0x000120C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00012090",
+    "va": "0x00012090",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00011FB0",
+    "va": "0x00011FB0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00011F70",
+    "va": "0x00011F70",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:50",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00011F40",
+    "va": "0x00011F40",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:47",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00011C50",
+    "va": "0x00011C50",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00011AE0",
+    "va": "0x00011AE0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of Collidable::vfunc_06",
+    "va": "0x00011A30",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:34",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_000117F0",
+    "va": "0x000117F0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:31",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00011780",
+    "va": "0x00011780",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00011770",
+    "va": "0x00011770",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:24",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CScript::Function1<void, const char*>::vfunc_00",
+    "va": "0x00011520",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CScript::Function2<void, const char*, const char*>::vfunc_00",
+    "va": "0x00011500",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CScript::Function1<void, ScriptObject*>::vfunc_00",
+    "va": "0x00011480",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002FF75B",
+    "va": "0x002FF75B",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:10",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "4 look-alike(s) of sub_002FF527",
+    "va": "0x002FF527",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002FEF14",
+    "va": "0x002FEF14",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:48:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002FD0ED",
+    "va": "0x002FD0ED",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002FBAEA",
+    "va": "0x002FBAEA",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002E9670",
+    "va": "0x002E9670",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:49",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002E8E50",
+    "va": "0x002E8E50",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of audio::SeqEventType<audio::SeqEventVarVolume>::vfunc_01",
+    "va": "0x002DB6F0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of audio::SeqEventConditionElse::vfunc_01",
+    "va": "0x002D9850",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of audio::SeqEventCondition::vfunc_01",
+    "va": "0x002D9810",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002D7240",
+    "va": "0x002D7240",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of core::DriveThread::vfunc_00",
+    "va": "0x002C1460",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of core::XboxDrive::vfunc_00",
+    "va": "0x002BEB90",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:25",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of core::CementLibrary::vfunc_01",
+    "va": "0x002ACEB0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002AAC30",
+    "va": "0x002AAC30",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002AA9D0",
+    "va": "0x002AA9D0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of core::FileCompletionRequest::vfunc_00",
+    "va": "0x002AA6D0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:08",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of pure3d::d3dExtStaticShadowGen::vfunc_01",
+    "va": "0x002A3040",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:04",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of pure3d::PrimGroupSkinnedOptimized::vfunc_05",
+    "va": "0x00293060",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:47:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of pure3d::ShadowMesh::vfunc_05",
+    "va": "0x00292630",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of pure3d::CameraAnimationController::vfunc_05",
+    "va": "0x0028CC20",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_0028C390",
+    "va": "0x0028C390",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:45",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "6 look-alike(s) of sub_00277C80",
+    "va": "0x00277C80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of pure3d::CompositeDrawable::vfunc_05",
+    "va": "0x002776D0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:36",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of pure3d::ShadowMeshLoader::vfunc_07",
+    "va": "0x002578E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_00244420",
+    "va": "0x00244420",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_00244230",
+    "va": "0x00244230",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_00239EE0",
+    "va": "0x00239EE0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of ExoticsPresentationState::vfunc_07",
+    "va": "0x0022E800",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00224A50",
+    "va": "0x00224A50",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ActiveWheeledVehicleObject::vfunc_15",
+    "va": "0x0021B8B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:10",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<CubeVan>::vfunc_02",
+    "va": "0x00217060",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ActiveBoatObject::vfunc_19",
+    "va": "0x00214BF0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:04",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ActiveAirplaneObject::vfunc_10",
+    "va": "0x00213440",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:46:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MissionTriggerObject::vfunc_30",
+    "va": "0x00212E80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of BoatZoneProperties::vfunc_04",
+    "va": "0x0020EA30",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0020E9F0",
+    "va": "0x0020E9F0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:53",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<VehicleWaterSprayProperties>::vfunc_01",
+    "va": "0x0020A610",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:50",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<BoatTemplate>::vfunc_01",
+    "va": "0x00203F80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:47",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_00200020",
+    "va": "0x00200020",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_001FFA60",
+    "va": "0x001FFA60",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:41",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_001FC260",
+    "va": "0x001FC260",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_001FB200",
+    "va": "0x001FB200",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:34",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of CharacterFightTreeTemplate::vfunc_11",
+    "va": "0x001FB1F0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:31",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CharacterTemplate::vfunc_01",
+    "va": "0x001FB170",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_001F3420",
+    "va": "0x001F3420",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:25",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_001F2040",
+    "va": "0x001F2040",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of MeleeWeaponStateProp::vfunc_30",
+    "va": "0x001F13F0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_001EEC80",
+    "va": "0x001EEC80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<WeaponPickup>::vfunc_01",
+    "va": "0x001EE8B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:11",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_001ED5A0",
+    "va": "0x001ED5A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:08",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_001ED240",
+    "va": "0x001ED240",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_001EC600",
+    "va": "0x001EC600",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ExplosionObject::vfunc_30",
+    "va": "0x001EBBD0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:45:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_001EA570",
+    "va": "0x001EA570",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:57",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<WorldAmbienceSpawnObject>::vfunc_01",
+    "va": "0x001E7420",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:54",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<GenericSpawnObject>::vfunc_01",
+    "va": "0x001E73C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "4 look-alike(s) of NestSpawnObject::vfunc_01",
+    "va": "0x001E34C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:48",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_001E3420",
+    "va": "0x001E3420",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:45",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_001D3900",
+    "va": "0x001D3900",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_001D38B0",
+    "va": "0x001D38B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:39",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<TraceFireObject>::vfunc_01",
+    "va": "0x001D35C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:36",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<ShaftAndDiscMarker>::vfunc_01",
+    "va": "0x001CF090",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of PauseMenuPageSerialize::vfunc_59",
+    "va": "0x001CD510",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_001C7260",
+    "va": "0x001C7260",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:23",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<TargetHUD>::vfunc_01",
+    "va": "0x001BF870",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<PromptHUD>::vfunc_02",
+    "va": "0x001BF4B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:18",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<HUDHealth>::vfunc_01",
+    "va": "0x001BDFD0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:15",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<GenericWeaponHUD>::vfunc_01",
+    "va": "0x001BCAE0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:13",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of DrugWarsHUD::vfunc_00",
+    "va": "0x001B2610",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:10",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of PromptHUD::vfunc_01",
+    "va": "0x001AC410",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_001A8A80",
+    "va": "0x001A8A80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00195610",
+    "va": "0x00195610",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:44:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of BusinessHUD::vfunc_51",
+    "va": "0x00190830",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:43:57",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of BusinessHUD::vfunc_50",
+    "va": "0x00190800",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:43:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of GameOverHUD::vfunc_50",
+    "va": "0x0018E000",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:43:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ExoticsHUD2::vfunc_00",
+    "va": "0x0018C650",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:43:50",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<GroundObject>::vfunc_01",
+    "va": "0x00189730",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 06:43:47",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of FireObject::vfunc_30",
+    "va": "0x00188370",
+    "bytes": "same code, own addresses"
   }
 ]

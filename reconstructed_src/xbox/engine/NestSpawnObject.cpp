@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/NestSpawnObject.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/NestSpawnObject.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 4 functions matched (25.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 4 functions matched (50.00%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -30,5 +30,41 @@ public:
 void* NestSpawnObject::vfunc_00()
 {
     return DAT_0043D890;
+}
+
+// ============================================================================
+// [VERIFIED] NestSpawnObject::vfunc_01 (0x001E34C0, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// NestSpawnObject::vfunc_01 (0x001E34C0, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00224A60(int);
+};
+
+extern "C" char DAT_003C7F7C[];
+extern "C" int DAT_00491EF8;
+extern "C" void __cdecl sub_00027600(int);
+
+class NestSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual NestSpawnObject* vfunc_01(int a1);
+    void sub_000290C0();
+};
+
+NestSpawnObject* NestSpawnObject::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_003C7F7C;
+    ((Object*)DAT_00491EF8)->sub_00224A60((int)this);
+    sub_000290C0();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
 }
 

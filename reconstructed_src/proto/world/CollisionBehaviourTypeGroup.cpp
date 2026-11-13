@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, world/CollisionBehaviourTypeGroup.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, world/CollisionBehaviourTypeGroup.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 13 functions matched (23.08%). NOT COMPLETE YET.
-// The 10 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 13 functions matched (38.46%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -30,6 +30,42 @@ public:
 void* CollisionBehaviourTypeGroup::vfunc_00()
 {
     return DAT_003F41B0;
+}
+
+// ============================================================================
+// [VERIFIED] CollisionBehaviourTypeGroup::vfunc_14 (0x00012EA0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_13 (0x00012A30), which was matched first;
+// its addresses and names were swapped for this function's.
+// CollisionBehaviourTypeGroup::vfunc_14 (0x00012EA0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class CollisionBehaviourTypeGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_14();
+    char m_pad04[0x1A];
+    unsigned char m_Field1E; // +0x1E
+};
+
+void CollisionBehaviourTypeGroup::vfunc_14()
+{
+    m_Field1E |= 2;
 }
 
 // ============================================================================
@@ -90,6 +126,31 @@ public:
 };
 
 void CollisionBehaviourTypeGroup::vfunc_11()
+{
+}
+
+// ============================================================================
+// [VERIFIED] CollisionBehaviourTypeGroup::vfunc_06 (0x0021AF00, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_05 (0x00022710), which was matched first;
+// its addresses and names were swapped for this function's.
+// CollisionBehaviourTypeGroup::vfunc_06 (0x0021AF00, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class CollisionBehaviourTypeGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_06(int a1);
+};
+
+void CollisionBehaviourTypeGroup::vfunc_06(int a1)
 {
 }
 
