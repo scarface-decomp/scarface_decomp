@@ -360,6 +360,37 @@ def _scene_rows(index: Optional[dict], version: str) -> Dict[str, str]:
 
 
 _NEXT: Dict[tuple, Dict[str, str]] = {}
+_WEARS: Dict[tuple, Dict[str, str]] = {}
+_TEXTS: Dict[tuple, List[Tuple[str, str]]] = {}
+
+
+def _mission_scripts(out: Path, index: Optional[dict], version: str) -> List[Tuple[str, str]]:
+    """The copied scripts that name a cutscene or one of Tony's outfits, decompiled: (path, text). Read once
+    for a copy."""
+    rows = _scene_rows(index, version)
+    key = (version, len(rows), str(out))
+    if key not in _TEXTS:
+        texts = []
+        for low, path in rows.items():
+            if "/scriptc/" not in low or not low.endswith((".cso", ".dso")):
+                continue
+            p = GA.file_on_disk(out, index, version, path)
+            try:
+                raw = p.read_bytes() if p is not None else b""
+                if b"NIS_" in raw or b"MCP_" in raw:
+                    texts.append((low, TS.decompile(raw)))
+            except Exception:  # a script the decompiler can't read tells nothing: the rest still do
+                continue
+        _TEXTS[key] = texts
+    return _TEXTS[key]
+
+
+def wears(out: Path, index: Optional[dict], version: str) -> Dict[str, str]:
+    """What Tony wears in each cutscene, from the copied mission scripts (see cutscene.outfits)."""
+    key = (version, len(_scene_rows(index, version)), str(out))
+    if key not in _WEARS:
+        _WEARS[key] = CUT.outfits(_mission_scripts(out, index, version))
+    return _WEARS[key]
 
 
 def plays_next(out: Path, index: Optional[dict], version: str) -> Dict[str, str]:
@@ -368,17 +399,7 @@ def plays_next(out: Path, index: Optional[dict], version: str) -> Dict[str, str]
     rows = _scene_rows(index, version)
     key = (version, len(rows), str(out))
     if key not in _NEXT:
-        texts = []
-        for low, path in rows.items():
-            if "/scriptc/" not in low or not low.endswith((".cso", ".dso")):
-                continue
-            p = GA.file_on_disk(out, index, version, path)
-            try:
-                raw = p.read_bytes() if p is not None else b""
-                if b"NIS_" in raw:
-                    texts.append(TS.decompile(raw))
-            except Exception:  # a script the decompiler can't read tells nothing: the rest still do
-                continue
+        texts = [text for _path, text in _mission_scripts(out, index, version) if "NIS_" in text]
         _NEXT[key] = CUT.plays_next(texts, TN.compiled_name)
     return _NEXT[key]
 
@@ -436,9 +457,15 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
 
     def model(kind: str, wanted: str) -> Optional[Tuple[str, bytes]]:
         if kind == "tony":
-            suits = ([wanted.lower() + ".p3d"] if wanted else []) + list(CUT.TONY_FILES)
-            p = next((q for q in (named("/art/nis/characters/" + f) for f in suits) if q), None) \
-                or stand_in(out, index, version)
+            # wanted: a cutscene model's name (the script swaps him into it), or an outfit as the mission
+            # scripts name it (MCP_...Tony): its cutscene model, else his everyday model in those clothes
+            own = CUT.suit_file(wanted) if wanted.lower().startswith("mcp_") else wanted
+            suits = ([own.lower() + ".p3d"] if own else []) + ([] if wanted and not own else list(CUT.TONY_FILES))
+            p = next((q for q in (named("/art/nis/characters/" + f) for f in suits) if q), None)
+            if p is None and wanted.lower().startswith("mcp_"):
+                p = named(f"/characters/pc/{wanted}.p3d") or next(
+                    (q for q in (named("/art/nis/characters/" + f) for f in CUT.TONY_FILES) if q), None)
+            p = p or stand_in(out, index, version)
         elif kind == "vehicle":
             p = named(f"/art/vehicles/{wanted}.p3d")
         elif kind == "weapons":
@@ -450,12 +477,15 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
         except OSError:
             return None
     script, pieces = parts(scene)
+    dressed = wears(out, index, version)
+    script.tony = script.tony or CUT.outfit_for(dressed, scene)
     then = []
     if join:
         entry = next((c for c in cutscenes(out, index, version) if c["name"].lower() == scene.lower()), None)
         for name in (entry or {}).get("then", []):
             try:
                 then.append((name,) + parts(name))
+                then[-1][1].tony = then[-1][1].tony or CUT.outfit_for(dressed, name)
             except P3G.ExportError:
                 break
     # The street or room it happens in: what the game keeps loaded at that spot (the stream graph).

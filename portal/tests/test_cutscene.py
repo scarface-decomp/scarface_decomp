@@ -302,3 +302,39 @@ def test_people_are_stood_on_the_maps_floor():
     assert ground.height(21.0, 16.2, 1.0) == pytest.approx(16.4)
     assert ground.height(200.0, 16.2, 0.0) is None and C.Ground(G.Builder(G.Library())).height(0, 0, 0) is None
 
+
+
+def test_what_tony_wears_comes_from_the_mission_scripts():
+    """A script dresses him with a call given an MCP_...Tony name; the cutscenes it names after that have him
+    in those clothes, and a cutscene no script dresses takes its mission's first outfit."""
+    scripts = [
+        ("scriptc/missionscripts/T01/T01_functions.cso",
+         'function a() {\n   stxbp("MCP_ArmyTony");\n}\nfunction b() {\n   stxdf("MNIS_TUT_Intro_Cam", "After", "NIS");\n}\n'),
+        ("scriptc/missionscripts/S01c/S01c_functions.cso",
+         'stxdf("MNIS_S01_2_Early", "", "NIS");\nstxbp("MCP_HawaiianTony");\n'
+         "stxmb(\"Movieplayer('MNIS_S01_4_Cops_Are_Here', 'done', 'NIS')\");\n"),
+        ("scriptc/missionscripts/S01a/S01a_functions.cso",
+         'stxbp("MCP_BlackSuitTony");\n%which = "PAL_MNIS_S01_1_Hm_Saves_the_Day";\n'),
+        ("scriptc/other.cso", 'stxdf("MNIS_A64_0_Daughter", "", "NIS");\nstxbp("MCP_Driver");\n'),
+    ]
+    wears = C.outfits(scripts)
+    assert C.outfit_for(wears, "MNIS_TUT_Intro_Cam") == "MCP_ArmyTony"
+    assert C.outfit_for(wears, "MNIS_S01_1_Hm_Saves_the_Day") == "MCP_BlackSuitTony"       # named in a variable, as PAL_
+    assert C.outfit_for(wears, "mnis_s01_4_cops_are_here") == "MCP_HawaiianTony"           # inside a quoted command
+    assert C.outfit_for(wears, "MNIS_S01_2_Early") == "MCP_HawaiianTony"                   # none before it: the script's first
+    assert C.outfit_for(wears, "MNIS_S01_0_Tony_in_Chair") == "MCP_BlackSuitTony"          # no script names it: mission S01's first
+    assert C.outfit_for(wears, "PAL_MNIS_S01_0_Tony_in_Chair") == "MCP_BlackSuitTony"
+    assert C.outfit_for(wears, "MNIS_A64_0_Daughter") == "" and C.outfit_for(wears, "NIS_01_secretary") == ""
+    assert C.suit_file("MCP_BlackSuitTony") == "tonynisBLKsuit" and C.suit_file("MCP_HawaiianShadesTony") == "tonynisHawaiianS"
+    assert C.suit_file("MCP_BluePinSuitTony") == "tonynisBLUPINsuit" and C.suit_file("MCP_GraySuitShadesTony") == "tonynisGRYsuitS"
+    assert C.suit_file("MCP_ArmyTony") == "" and C.suit_file("MCP_Driver") == ""          # no cutscene model: his everyday one
+    assert C.TONY_FILES[0] == "tonynishawaiian.p3d"                                       # when nothing says
+
+
+def test_a_cue_with_a_place_of_its_own_is_where_the_camera_moves_from():
+    cue = '''NISSequenceCue { SoundName ""; CameraAnimationName "CAM_T"; FrameBegin 0;
+               Position { x -3411; y 20; z -1704; }; Facing 90; };'''
+    script = C.read_script(cue + ' NISCharacterAnimation { CharacterName "MainCharacter"; AnimationName "T_Tony"; };')
+    assert script.origin == ((-3411.0, 20.0, -1704.0), 90.0) and C.where(script, []) == (-3411.0, -1704.0)
+    plain = C.read_script(cue.replace("-3411", "0").replace("-1704", "0"))
+    assert plain.origin is None                                                # at the map's origin: the keys are the place

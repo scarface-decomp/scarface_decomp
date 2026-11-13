@@ -32,7 +32,60 @@ import p3d_gltf as G
 
 ACTION = "Cutscene "                   # the animation's name starts with this (Blender's script looks for it)
 TONY = "maincharacter"
-TONY_FILES = ("tonyniswhtsuit.p3d", "tonynisblksuit.p3d", "tonynishawaiian.p3d")
+# What Tony wears when nothing says: the Hawaiian shirt he has for most of the game.
+TONY_FILES = ("tonynishawaiian.p3d", "tonyniswhtsuit.p3d", "tonynisblksuit.p3d")
+SUIT = re.compile(r'\b\w+\("(MCP_\w*Tony\w*)"')                 # a mission script changing his clothes
+NAMED = re.compile(r"""["']((?:PAL_)?M?NIS_\w+)["']""")           # a cutscene's name anywhere in a script
+MISSION = re.compile(r"(?:PAL_)?M?NIS_([A-Za-z]+\d+)", re.I)     # MNIS_S01_0_Tony_in_Chair is mission S01's
+
+
+def suit_file(outfit: str) -> str:
+    """The cutscene model (art/nis/characters) for one of Tony's outfits as the mission scripts name them:
+    MCP_BlackSuitTony is tonynisBLKsuit, MCP_HawaiianShadesTony is tonynisHawaiianS. "" for an outfit
+    with no cutscene model of its own (MCP_ArmyTony): his everyday model is used for those."""
+    m = re.fullmatch(r"MCP_(\w+?)(Shades)?Tony", outfit, re.I)
+    if not m:
+        return ""
+    kind = {"whitesuit": "WHTsuit", "blacksuit": "BLKsuit", "bluesuit": "BLUsuit", "bluepinsuit": "BLUPINsuit",
+            "graysuit": "GRYsuit", "hawaiian": "Hawaiian", "sandy": "Sandy"}.get(m.group(1).lower())
+    return "tonynis" + kind + ("S" if m.group(2) else "") if kind else ""
+
+
+def outfits(scripts: Sequence[Tuple[str, str]]) -> Dict[str, str]:
+    """What Tony wears in each cutscene the mission scripts tell of: {cutscene (lower, without PAL_): outfit}.
+    scripts: (path, decompiled text) of the game's scripts. A script changes his clothes with a call given
+    an MCP_...Tony name; a cutscene named in that script after it (or, with none before, before the first)
+    has him in those. A cutscene no script dresses takes its mission's first outfit: MNIS_S01_... the first
+    one set by the scripts whose names start S01."""
+    out: Dict[str, str] = {}
+    first: Dict[str, str] = {}                              # mission -> the first outfit its scripts set
+    for path, text in sorted(scripts):
+        marks = sorted([(m.start(), "suit", m.group(1)) for m in SUIT.finditer(text)]
+                       + [(m.start(), "scene", m.group(1)) for m in NAMED.finditer(text)])
+        opening = next((v for _at, kind, v in marks if kind == "suit"), "")
+        if not opening:
+            continue
+        stem = re.match(r"[A-Za-z]+\d+", path.replace("\\", "/").rsplit("/", 1)[-1])
+        if stem:
+            first.setdefault(stem.group(0).lower(), opening)
+        wearing = opening
+        for _at, kind, v in marks:
+            if kind == "suit":
+                wearing = v
+            else:
+                out.setdefault(re.sub(r"^pal_", "", v.lower()), wearing)
+    for mission, outfit in first.items():                   # under a key no cutscene's name can be
+        out.setdefault("\0" + mission, outfit)
+    return out
+
+
+def outfit_for(wears: Dict[str, str], scene: str) -> str:
+    """Tony's outfit in a cutscene, from outfits(): its own, else its mission's, else ""."""
+    low = re.sub(r"^pal_", "", scene.lower())
+    if low in wears:
+        return wears[low]
+    m = MISSION.match(low)
+    return wears.get("\0" + m.group(1).lower(), "") if m else ""
 
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
                     r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation)\s*\{")
@@ -48,6 +101,7 @@ class Script:
         self.plays: Dict[str, str] = {}                     # person (lower) -> animation
         self.drives: Dict[str, str] = {}                    # vehicle (lower) -> animation
         self.camera = ""
+        self.origin: Optional[Tuple[Tuple[float, float, float], float]] = None   # where the camera's move is set
         self.tony = ""                                      # the suit Tony is changed into (NISSwapModel)
         self.holds: Dict[str, str] = {}                     # person (lower) -> weapon template (NISWeaponAttach)
         self.faces: Dict[str, str] = {}                     # person (lower) -> their face's animation (NISExpAnimation)
@@ -89,6 +143,11 @@ def read_script(text: str) -> Script:
             s.tony = re.sub(r"Drawable$", "", str(f["newModel"]), flags=re.I)
         elif kind == "NISSequenceCue" and f.get("CameraAnimationName") and not s.camera:
             s.camera = str(f["CameraAnimationName"])
+            # A cue with a place of its own: the camera's move is measured from there, not from the map's
+            # origin (Tony in his chair: the cue is in the office, the camera's keys a few metres round it).
+            if all(isinstance(f.get(k), float) for k in "xyz") and abs(f["x"]) + abs(f["z"]) > 1.0:
+                facing = f.get("Facing")
+                s.origin = ((f["x"], f["y"], f["z"]), facing if isinstance(facing, float) else 0.0)
     return s
 
 
@@ -418,6 +477,8 @@ def where(script: Script, streams: Sequence[Tuple[str, bytes]]) -> Optional[Tupl
     for at, _facing in script.stands.values():
         if abs(at[0]) + abs(at[2]) > 1.0:
             return at[0], at[2]
+    if script.origin:
+        return script.origin[0][0], script.origin[0][2]
     if script.stands:                                        # everyone at 0, 0: played wherever Tony is
         return None
     if script.camera:
@@ -660,7 +721,11 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             length = max(length, _length(pieces))
             ci = b.g.add("cameras", {"name": script.camera, "type": "perspective",
                                      "perspective": {"aspectRatio": 4 / 3, "yfov": 0.75, "znear": 0.1, "zfar": 5000.0}})
-            cam = b.g.node(script.camera, root, camera=ci)
+            place = root
+            if script.origin:
+                place = b.g.node(script.camera + "'s place", root, translation=list(G.pos(script.origin[0])),
+                                 rotation=list(facing_rotation(script.origin[1])))
+            cam = b.g.node(script.camera, place, camera=ci)
             for path, (times, values) in _camera_keys(pieces).items():
                 tracks.add(cam, path, later(times), values)
             went_in.append("camera")
