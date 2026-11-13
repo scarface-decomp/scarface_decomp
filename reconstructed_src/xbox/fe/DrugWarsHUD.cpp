@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/DrugWarsHUD.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/DrugWarsHUD.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 10 functions matched (20.00%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 10 functions matched (40.00%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -61,5 +61,55 @@ DrugWarsHUD* DrugWarsHUD::vfunc_01(int a1)
         sub_00027600((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] DrugWarsHUD::vfunc_00 (0x001B2610, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// DrugWarsHUD::vfunc_00 (0x001B2610, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001B1BC0();
+};
+
+class DrugWarsHUD
+{
+public:
+    virtual void vfunc_00();
+};
+
+void DrugWarsHUD::vfunc_00()
+{
+    ((Object*)(int)this + -104)->sub_001B1BC0();
+}
+
+// ============================================================================
+// [VERIFIED] DrugWarsHUD::vfunc_01 (0x001B2620, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as DrugWarsHUD::vfunc_00 (0x001B2610), which was matched first;
+// its addresses and names were swapped for this function's.
+// DrugWarsHUD::vfunc_01 (0x001B2620, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001B1C30();
+};
+
+class DrugWarsHUD
+{
+public:
+    virtual void vfunc_01();
+};
+
+void DrugWarsHUD::vfunc_01()
+{
+    ((Object*)(int)this + -104)->sub_001B1C30();
 }
 

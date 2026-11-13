@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dVertexFadeShader.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dVertexFadeShader.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 8 functions matched (62.50%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 8 functions matched (75.00%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -175,6 +175,36 @@ public:
 void* d3dVertexFadeShader::vfunc_18()
 {
     return DAT_00463020;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_24 (0x002C6100, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtStaticShadowGen::vfunc_01 (0x002A3040), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dVertexFadeShader::vfunc_24 (0x002C6100, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002C57C0(void);
+
+namespace pure3d {
+
+class d3dVertexFadeShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_24();
+    void sub_002C5E80();
+};
+
+void d3dVertexFadeShader::vfunc_24()
+{
+    sub_002C57C0();
+    sub_002C5E80();
 }
 
 }
