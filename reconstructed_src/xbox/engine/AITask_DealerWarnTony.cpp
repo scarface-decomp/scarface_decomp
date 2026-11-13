@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AITask_DealerWarnTony.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AITask_DealerWarnTony.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 8 functions matched (37.50%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 8 functions matched (50.00%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -131,5 +131,32 @@ public:
 void* AITask_DealerWarnTony::vfunc_00()
 {
     return DAT_0042970C;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_DealerWarnTony::vfunc_03 (0x00125930, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AITask_PedFlee::vfunc_03 (0x001095B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00125930
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// AITask_DealerWarnTony::vfunc_03 (0x00125930, 7 bytes)
+extern "C" float DAT_003CA880;
+
+class AITask_DealerWarnTony
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual float vfunc_03();
+};
+
+float AITask_DealerWarnTony::vfunc_03()
+{
+    return DAT_003CA880;
 }
 

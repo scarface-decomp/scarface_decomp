@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/CheckOutToeToHead.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/CheckOutToeToHead.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 7 functions matched (42.86%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 7 functions matched (57.14%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -106,5 +106,33 @@ public:
 float CheckOutToeToHead::vfunc_08()
 {
     return DAT_003D111C;
+}
+
+// ============================================================================
+// [VERIFIED] CheckOutToeToHead::vfunc_05 (0x000EFDB0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a fixed number kept in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x000EFDB0
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// CheckOutToeToHead::vfunc_05 (0x000EFDB0, 7 bytes)
+extern "C" float DAT_003AAC30;
+
+class CheckOutToeToHead
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual float vfunc_05();
+};
+
+float CheckOutToeToHead::vfunc_05()
+{
+    return DAT_003AAC30;
 }
 

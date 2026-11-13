@@ -113,7 +113,7 @@
 // [TODO] 0x0084ADB0 RepGainHUD::ActivateElement (296 B)
 // [TODO] 0x0084AEE0 RepGainHUD::vfunc_45 (152 B)
 // [TODO] 0x0084AF80 RepGainHUD::vfunc_50 (236 B)
-// [TODO] 0x0084B070 RepGainHUD::vfunc_51 (60 B)
+// [TODO] 0x0084B070 func_0084B070 (60 B)
 // [TODO] 0x0084B0B0 func_0084B0B0 (176 B)
 // [TODO] 0x0084B160 func_0084B160 (352 B)
 // [TODO] 0x0084B2C0 func_0084B2C0 (252 B)

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dLayeredShader.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dLayeredShader.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 11 functions matched (45.45%). NOT COMPLETE YET.
-// The 6 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 11 functions matched (54.55%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -141,6 +141,38 @@ public:
 void* d3dLayeredShader::vfunc_18()
 {
     return DAT_00433010;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_04 (0x002862D0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002862D0
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dLayeredShader::vfunc_04 (0x002862D0, 6 bytes)
+extern "C" char DAT_003AEAC4[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dLayeredShader::vfunc_04()
+{
+    return DAT_003AEAC4;
 }
 
 }

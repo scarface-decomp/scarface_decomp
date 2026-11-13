@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, pure3d/d3dPointSpriteShader.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, pure3d/d3dPointSpriteShader.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 7 functions matched (42.86%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 7 functions matched (57.14%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -107,6 +107,38 @@ public:
 void* d3dPointSpriteShader::vfunc_18()
 {
     return DAT_007FB918;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_04 (0x00705080, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00705080
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dPointSpriteShader::vfunc_04 (0x00705080, 6 bytes)
+extern "C" char DAT_007FB8F4[];
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dPointSpriteShader::vfunc_04()
+{
+    return DAT_007FB8F4;
 }
 
 }

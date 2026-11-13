@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6,376 of 19,534 functions matched (32.64%). NOT COMPLETE YET.
-// The 13,158 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 6,408 of 19,534 functions matched (32.80%). NOT COMPLETE YET.
+// The 13,126 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -72074,7 +72074,34 @@ float CheckOutToeToHead::vfunc_08()
 }
 
 // [TODO] 0x000EFDA0 CheckOutToeToHead::vfunc_10 (4 B)
-// [TODO] 0x000EFDB0 CheckOutToeToHead::vfunc_05 (7 B)
+// ============================================================================
+// [VERIFIED] CheckOutToeToHead::vfunc_05 (0x000EFDB0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a fixed number kept in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x000EFDB0
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// CheckOutToeToHead::vfunc_05 (0x000EFDB0, 7 bytes)
+extern "C" float DAT_003AAC30;
+
+class CheckOutToeToHead
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual float vfunc_05();
+};
+
+float CheckOutToeToHead::vfunc_05()
+{
+    return DAT_003AAC30;
+}
+
 // ============================================================================
 // [VERIFIED] GlanceAtVehicle::vfunc_01 (0x000EFDC0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -75105,7 +75132,34 @@ void AITask_IdleAction::vfunc_37()
     ((Object*)*(int*)(r_eax + 340))->sub_00116670();
 }
 
-// [TODO] 0x001078B0 LazyEvaluatorOnSidewalk::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] LazyEvaluatorOnSidewalk::vfunc_00 (0x001078B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the call on to the object this one holds.
+// ============================================================================
+// bin: xb
+// va: 0x001078B0
+// what: Passes the call on to the object this one holds.
+// tool: Claude Fable 5.2 (look-alike of 0x000E5480, names and addresses swapped)
+// LazyEvaluatorOnSidewalk::vfunc_00 (0x001078B0, 8 bytes)
+struct Field08
+{
+    void sub_00164C90();
+};
+
+class LazyEvaluatorOnSidewalk
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x4];
+    Field08* m_Field08; // +0x08
+};
+
+void LazyEvaluatorOnSidewalk::vfunc_00()
+{
+    m_Field08->sub_00164C90();
+}
+
 // [TODO] 0x001078C0 sub_001078C0 (106 B)
 // ============================================================================
 // [VERIFIED] AITask_IdleAction::vfunc_45 (0x00107930, 7 B)
@@ -75515,7 +75569,32 @@ void* AITask_PedFlee::vfunc_00()
     return DAT_004294FC;
 }
 
-// [TODO] 0x001095B0 AITask_PedFlee::vfunc_03 (7 B)
+// ============================================================================
+// [VERIFIED] AITask_PedFlee::vfunc_03 (0x001095B0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a fixed number kept in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x001095B0
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// AITask_PedFlee::vfunc_03 (0x001095B0, 7 bytes)
+extern "C" float DAT_003A01E8;
+
+class AITask_PedFlee
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual float vfunc_03();
+};
+
+float AITask_PedFlee::vfunc_03()
+{
+    return DAT_003A01E8;
+}
+
 // [TODO] 0x001095C0 AITask_PedFlee::vfunc_39 (99 B)
 // [TODO] 0x00109630 sub_00109630 (71 B)
 // ============================================================================
@@ -85447,7 +85526,35 @@ Class_0011FC90* Class_0011FC90::sub_0011FC90(int a1)
 
 // [TODO] 0x0011FCB0 AIActionRepeatUntilFailure::vfunc_01 (81 B)
 // [TODO] 0x0011FD10 AIActionRepeatUntilFailure::vfunc_03 (43 B)
-// [TODO] 0x0011FD40 AIActionStrengthenInvariant::vfunc_03 (8 B)
+// ============================================================================
+// [VERIFIED] AIActionStrengthenInvariant::vfunc_03 (0x0011FD40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as LazyEvaluatorOnSidewalk::vfunc_00 (0x001078B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0011FD40
+// what: Passes the call on to the object this one holds.
+// tool: Claude Fable 5.2 (look-alike of 0x000E5480, names and addresses swapped)
+// AIActionStrengthenInvariant::vfunc_03 (0x0011FD40, 8 bytes)
+struct Field08
+{
+    void sub_0011E1B0();
+};
+
+class AIActionStrengthenInvariant
+{
+public:
+    virtual void vfunc_03();
+    char m_pad04[0x4];
+    Field08* m_Field08; // +0x08
+};
+
+void AIActionStrengthenInvariant::vfunc_03()
+{
+    m_Field08->sub_0011E1B0();
+}
+
 // ============================================================================
 // [VERIFIED] sub_0011FD50 (0x0011FD50, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -86317,7 +86424,35 @@ AIActionWaitForCondition* AIActionWaitForCondition::vfunc_00(int a1)
 // [TODO] 0x00121900 AIConditionCustom::vfunc_04 (14 B)
 // [TODO] 0x00121910 AIConditionSemaphoreIsSet::vfunc_04 (6 B)
 // [TODO] 0x00121920 AIConditionGameTimeIsAtLeast::vfunc_04 (28 B)
-// [TODO] 0x00121940 AIConditionSampleIsPlaying::vfunc_04 (8 B)
+// ============================================================================
+// [VERIFIED] AIConditionSampleIsPlaying::vfunc_04 (0x00121940, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as LazyEvaluatorOnSidewalk::vfunc_00 (0x001078B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00121940
+// what: Passes the call on to the object this one holds.
+// tool: Claude Fable 5.2 (look-alike of 0x000E5480, names and addresses swapped)
+// AIConditionSampleIsPlaying::vfunc_04 (0x00121940, 8 bytes)
+struct Field08
+{
+    void sub_00163BD0();
+};
+
+class AIConditionSampleIsPlaying
+{
+public:
+    virtual void vfunc_04();
+    char m_pad04[0x4];
+    Field08* m_Field08; // +0x08
+};
+
+void AIConditionSampleIsPlaying::vfunc_04()
+{
+    m_Field08->sub_00163BD0();
+}
+
 // [TODO] 0x00121950 AIConditionIsInFightTreePhysicalMode::vfunc_04 (18 B)
 // [TODO] 0x00121970 AIConditionLowPriorityNPCSoundChannelsBusy::vfunc_04 (11 B)
 // [TODO] 0x00121980 AIConditionUnary::vfunc_05 (8 B)
@@ -87268,7 +87403,32 @@ void* AITask_CopChallenge::vfunc_00()
     return DAT_004293F4;
 }
 
-// [TODO] 0x00123FC0 AITask_CopChallenge::vfunc_03 (7 B)
+// ============================================================================
+// [VERIFIED] AITask_CopChallenge::vfunc_03 (0x00123FC0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a fixed number kept in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x00123FC0
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// AITask_CopChallenge::vfunc_03 (0x00123FC0, 7 bytes)
+extern "C" float DAT_0039F068;
+
+class AITask_CopChallenge
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual float vfunc_03();
+};
+
+float AITask_CopChallenge::vfunc_03()
+{
+    return DAT_0039F068;
+}
+
 // [TODO] 0x00123FD0 sub_00123FD0 (91 B)
 // ============================================================================
 // [VERIFIED] PedHasBeaconInFrontHemisphereFilter::vfunc_00 (0x00124030, 16 B)
@@ -87496,7 +87656,29 @@ void* AITask_RunToAssistCorpse::vfunc_00()
     return DAT_00429058;
 }
 
-// [TODO] 0x00125060 DriversSmartCollection::vfunc_00 (7 B)
+// ============================================================================
+// [VERIFIED] DriversSmartCollection::vfunc_00 (0x00125060, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a fixed number kept in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x00125060
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// DriversSmartCollection::vfunc_00 (0x00125060, 7 bytes)
+extern "C" float DAT_0039DDD4;
+
+class DriversSmartCollection
+{
+public:
+    virtual float vfunc_00();
+};
+
+float DriversSmartCollection::vfunc_00()
+{
+    return DAT_0039DDD4;
+}
+
 // [TODO] 0x00125070 sub_00125070 (84 B)
 // [TODO] 0x001250D0 sub_001250D0 (54 B)
 // ============================================================================
@@ -87522,7 +87704,33 @@ void* AITask_GawkAtCorpse::vfunc_00()
     return DAT_0042902C;
 }
 
-// [TODO] 0x00125120 AITask_GawkAtCorpse::vfunc_03 (7 B)
+// ============================================================================
+// [VERIFIED] AITask_GawkAtCorpse::vfunc_03 (0x00125120, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AITask_PedFlee::vfunc_03 (0x001095B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00125120
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// AITask_GawkAtCorpse::vfunc_03 (0x00125120, 7 bytes)
+extern "C" float DAT_003A01E4;
+
+class AITask_GawkAtCorpse
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual float vfunc_03();
+};
+
+float AITask_GawkAtCorpse::vfunc_03()
+{
+    return DAT_003A01E4;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00125130 (0x00125130, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -87886,7 +88094,33 @@ void* AITask_DealerWarnTony::vfunc_00()
     return DAT_0042970C;
 }
 
-// [TODO] 0x00125930 AITask_DealerWarnTony::vfunc_03 (7 B)
+// ============================================================================
+// [VERIFIED] AITask_DealerWarnTony::vfunc_03 (0x00125930, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AITask_PedFlee::vfunc_03 (0x001095B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00125930
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// AITask_DealerWarnTony::vfunc_03 (0x00125930, 7 bytes)
+extern "C" float DAT_003CA880;
+
+class AITask_DealerWarnTony
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual float vfunc_03();
+};
+
+float AITask_DealerWarnTony::vfunc_03()
+{
+    return DAT_003CA880;
+}
+
 // [TODO] 0x00125940 sub_00125940 (39 B)
 // ============================================================================
 // [VERIFIED] AITask_FollowActor::vfunc_39 (0x00125970, 9 B)
@@ -89406,7 +89640,33 @@ void* AITask_ReactToDangerReaction::vfunc_00()
     return DAT_004295D8;
 }
 
-// [TODO] 0x001276B0 AIActionTreeCreatingTask::vfunc_03 (7 B)
+// ============================================================================
+// [VERIFIED] AIActionTreeCreatingTask::vfunc_03 (0x001276B0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AITask_PedFlee::vfunc_03 (0x001095B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001276B0
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// AIActionTreeCreatingTask::vfunc_03 (0x001276B0, 7 bytes)
+extern "C" float DAT_003A4974;
+
+class AIActionTreeCreatingTask
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual float vfunc_03();
+};
+
+float AIActionTreeCreatingTask::vfunc_03()
+{
+    return DAT_003A4974;
+}
+
 // [TODO] 0x001276C0 AITask_ReactToVisibleGun::vfunc_02 (20 B)
 // ============================================================================
 // [VERIFIED] AITask_ReactToVisibleGun::vfunc_49 (0x001276E0, 56 B)
@@ -90149,7 +90409,33 @@ void* AITask_ReactToVisibleGun::vfunc_00()
     return DAT_00429344;
 }
 
-// [TODO] 0x00128520 AITask_ReactToVisibleGun::vfunc_03 (7 B)
+// ============================================================================
+// [VERIFIED] AITask_ReactToVisibleGun::vfunc_03 (0x00128520, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AITask_PedFlee::vfunc_03 (0x001095B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00128520
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000EFD20, names and addresses swapped)
+// AITask_ReactToVisibleGun::vfunc_03 (0x00128520, 7 bytes)
+extern "C" float DAT_003B0654;
+
+class AITask_ReactToVisibleGun
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual float vfunc_03();
+};
+
+float AITask_ReactToVisibleGun::vfunc_03()
+{
+    return DAT_003B0654;
+}
+
 // [TODO] 0x00128530 AITask_ReactToVisibleGun::vfunc_01 (51 B)
 // [TODO] 0x00128570 AITask_CopChallenge::vfunc_01 (51 B)
 // [TODO] 0x001285B0 AITask_BumpReflex::vfunc_01 (51 B)
@@ -132223,8 +132509,59 @@ bool LookTutorialHUD::vfunc_44(int a1)
 }
 
 // [TODO] 0x001B6670 PimpYourMansionHUD::vfunc_44 (579 B)
-// [TODO] 0x001B68C0 PimpYourMansionHUD::vfunc_00 (11 B)
-// [TODO] 0x001B68D0 PimpYourMansionHUD::vfunc_01 (11 B)
+// ============================================================================
+// [VERIFIED] PimpYourMansionHUD::vfunc_00 (0x001B68C0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Steps back to the object this one is part of and calls one of its functions with 0.
+// ============================================================================
+// bin: xb
+// va: 0x001B68C0
+// what: Steps back to the object this one is part of and calls one of its functions with 0.
+// tool: Claude Fable 5.2 (look-alike of 0x001B2250, names and addresses swapped)
+// PimpYourMansionHUD::vfunc_00 (0x001B68C0, 11 bytes)
+struct Object
+{
+    void sub_001B6010(int);
+};
+
+class PimpYourMansionHUD
+{
+public:
+    virtual void vfunc_00();
+};
+
+void PimpYourMansionHUD::vfunc_00()
+{
+    ((Object*)(int)this + -104)->sub_001B6010(0);
+}
+
+// ============================================================================
+// [VERIFIED] PimpYourMansionHUD::vfunc_01 (0x001B68D0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Steps back to the object this one is part of and calls one of its functions with 0.
+// ============================================================================
+// bin: xb
+// va: 0x001B68D0
+// what: Steps back to the object this one is part of and calls one of its functions with 0.
+// tool: Claude Fable 5.2 (look-alike of 0x001B2250, names and addresses swapped)
+// PimpYourMansionHUD::vfunc_01 (0x001B68D0, 11 bytes)
+struct Object
+{
+    void sub_001B6090(int);
+};
+
+class PimpYourMansionHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+void PimpYourMansionHUD::vfunc_01()
+{
+    ((Object*)(int)this + -104)->sub_001B6090(0);
+}
+
 // [TODO] 0x001B68E0 sub_001B68E0 (71 B)
 // [TODO] 0x001B6930 EmpireHUD::vfunc_00 (49 B)
 // [TODO] 0x001B6970 EmpireHUD::vfunc_01 (49 B)
@@ -191953,7 +192290,47 @@ int d3dExtTODFactor::vfunc_01(int a1, int a2, int a3)
 // [TODO] 0x00263FA0 pure3d::d3dExtTODFactor::vfunc_12 (15 B)
 // [TODO] 0x00263FB0 pure3d::d3dExtTODFactor::vfunc_13 (15 B)
 // [TODO] 0x00263FC0 pure3d::d3dExtTODFactor::vfunc_15 (15 B)
-// [TODO] 0x00263FD0 pure3d::d3dExtTODFactor::vfunc_14 (7 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_14 (0x00263FD0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a fixed number kept in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x00263FD0
+// what: Returns a fixed number kept in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x000518E0, names and addresses swapped)
+// pure3d::d3dExtTODFactor::vfunc_14 (0x00263FD0, 7 bytes)
+extern "C" float DAT_004BD4C8;
+
+namespace pure3d {
+
+class d3dExtTODFactor
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual float vfunc_14();
+};
+
+float d3dExtTODFactor::vfunc_14()
+{
+    return DAT_004BD4C8;
+}
+
+}
+
 // [TODO] 0x00263FE0 pure3d::d3dExtTODFactor::vfunc_16 (15 B)
 // [TODO] 0x00263FF0 pure3d::d3dExtTODFactor::vfunc_17 (6 B)
 // ============================================================================
@@ -194039,7 +194416,35 @@ pddiExtension* pddiExtension::vfunc_00(unsigned int flags)
 }
 
 // [TODO] 0x002680D0 pure3d::d3dExtVisibilityTest::vfunc_01 (6 B)
-// [TODO] 0x002680E0 pure3d::d3dExtVisibilityTest::vfunc_02 (5 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtVisibilityTest::vfunc_02 (0x002680E0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Calls one other function and does nothing else.
+// ============================================================================
+// bin: xb
+// va: 0x002680E0
+// what: Calls one other function and does nothing else.
+// tool: Claude Fable 5.2 (look-alike of 0x00054F90, names and addresses swapped)
+// pure3d::d3dExtVisibilityTest::vfunc_02 (0x002680E0, 5 bytes)
+extern "C" void __cdecl sub_0032AC10(void);
+
+namespace pure3d {
+
+class d3dExtVisibilityTest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+void d3dExtVisibilityTest::vfunc_02()
+{
+    sub_0032AC10();
+}
+
+}
+
 // [TODO] 0x002680F0 pure3d::d3dExtVisibilityTest::vfunc_03 (32 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtVisibilityTest::vfunc_04 (0x00268110, 34 B)
@@ -198973,7 +199378,37 @@ int Class_002826D0::sub_002826D0(int a1)
 // [TODO] 0x00282820 sub_00282820 (153 B)
 // [TODO] 0x002828C0 sub_002828C0 (130 B)
 // [TODO] 0x00282950 sub_00282950 (103 B)
-// [TODO] 0x002829C0 pure3d::d3dVehicleShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_04 (0x002829C0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address of a fixed block in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x002829C0
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dVehicleShader::vfunc_04 (0x002829C0, 6 bytes)
+extern "C" char DAT_0039DDDC[];
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dVehicleShader::vfunc_04()
+{
+    return DAT_0039DDDC;
+}
+
+}
+
 // [TODO] 0x002829D0 sub_002829D0 (55 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dVehicleShader::vfunc_15 (0x00282A10, 6 B)
@@ -210699,7 +211134,37 @@ void* d3dSimpleShader::vfunc_18()
 
 }
 
-// [TODO] 0x0029F730 pure3d::d3dSimpleShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleShader::vfunc_04 (0x0029F730, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address of a fixed block in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x0029F730
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dSimpleShader::vfunc_04 (0x0029F730, 6 bytes)
+extern "C" char DAT_003D57FC[];
+
+namespace pure3d {
+
+class d3dSimpleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dSimpleShader::vfunc_04()
+{
+    return DAT_003D57FC;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::ParticleEmitter::vfunc_33 (0x0029F740, 47 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -211389,8 +211854,105 @@ void d3dExtXboxControl::vfunc_37()
 }
 
 // [TODO] 0x002A0F90 pure3d::d3dExtXboxControl::vfunc_03 (25 B)
-// [TODO] 0x002A0FB0 pure3d::d3dExtXboxControl::vfunc_22 (8 B)
-// [TODO] 0x002A0FC0 pure3d::d3dExtXboxControl::vfunc_23 (8 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_22 (0x002A0FB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Switches a global flag on.
+// ============================================================================
+// bin: xb
+// va: 0x002A0FB0
+// what: Switches a global flag on.
+// tool: Claude Fable 5.2 (look-alike of 0x002A0F50, names and addresses swapped)
+// pure3d::d3dExtXboxControl::vfunc_22 (0x002A0FB0, 8 bytes)
+extern "C" bool DAT_0045C348;
+
+namespace pure3d {
+
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+void d3dExtXboxControl::vfunc_22()
+{
+    DAT_0045C348 = true;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_23 (0x002A0FC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Switches a global flag off.
+// ============================================================================
+// bin: xb
+// va: 0x002A0FC0
+// what: Switches a global flag off.
+// tool: Claude Fable 5.2 (look-alike of 0x002A0F60, names and addresses swapped)
+// pure3d::d3dExtXboxControl::vfunc_23 (0x002A0FC0, 8 bytes)
+extern "C" bool DAT_0045C348;
+
+namespace pure3d {
+
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void d3dExtXboxControl::vfunc_23()
+{
+    DAT_0045C348 = false;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtXboxControl::vfunc_41 (0x002A0FD0, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -212052,8 +212614,66 @@ int d3dExtStaticShadowGen::vfunc_02()
 }
 
 // [TODO] 0x002A30A0 sub_002A30A0 (102 B)
-// [TODO] 0x002A3B40 pure3d::d3dExtStaticShadowGen::vfunc_07 (5 B)
-// [TODO] 0x002A3B50 pure3d::d3dExtStaticShadowGen::vfunc_08 (5 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtStaticShadowGen::vfunc_07 (0x002A3B40, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtVisibilityTest::vfunc_02 (0x002680E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002A3B40
+// what: Calls one other function and does nothing else.
+// tool: Claude Fable 5.2 (look-alike of 0x00054F90, names and addresses swapped)
+// pure3d::d3dExtStaticShadowGen::vfunc_07 (0x002A3B40, 5 bytes)
+extern "C" void __cdecl sub_002A3110(void);
+
+namespace pure3d {
+
+class d3dExtStaticShadowGen
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_07();
+};
+
+void d3dExtStaticShadowGen::vfunc_07()
+{
+    sub_002A3110();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtStaticShadowGen::vfunc_08 (0x002A3B50, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtVisibilityTest::vfunc_02 (0x002680E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002A3B50
+// what: Calls one other function and does nothing else.
+// tool: Claude Fable 5.2 (look-alike of 0x00054F90, names and addresses swapped)
+// pure3d::d3dExtStaticShadowGen::vfunc_08 (0x002A3B50, 5 bytes)
+extern "C" void __cdecl sub_002A34A0(void);
+
+namespace pure3d {
+
+class d3dExtStaticShadowGen
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_08();
+};
+
+void d3dExtStaticShadowGen::vfunc_08()
+{
+    sub_002A34A0();
+}
+
+}
+
 // [TODO] 0x002A3B60 pure3d::d3dExtStaticShadowGen::vfunc_10 (988 B)
 // [TODO] 0x002A3E9D sub_002A3E9D (159 B)
 // [TODO] 0x002A3F40 sub_002A3F40 (327 B)
@@ -217220,7 +217840,37 @@ DriveThread* DriveThread::vfunc_03(int a1)
 
 }
 
-// [TODO] 0x002C1C10 pure3d::d3dErrorShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dErrorShader::vfunc_04 (0x002C1C10, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address of a fixed block in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x002C1C10
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dErrorShader::vfunc_04 (0x002C1C10, 6 bytes)
+extern "C" char DAT_00461B48[];
+
+namespace pure3d {
+
+class d3dErrorShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dErrorShader::vfunc_04()
+{
+    return DAT_00461B48;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_002C1C20 (0x002C1C20, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -217430,7 +218080,37 @@ void* d3dReflShader::vfunc_18()
 
 }
 
-// [TODO] 0x002C1EF0 pure3d::d3dReflShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_04 (0x002C1EF0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address of a fixed block in the game's data.
+// ============================================================================
+// bin: xb
+// va: 0x002C1EF0
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dReflShader::vfunc_04 (0x002C1EF0, 6 bytes)
+extern "C" char DAT_00461BAC[];
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dReflShader::vfunc_04()
+{
+    return DAT_00461BAC;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dReflShader::vfunc_12 (0x002C1F00, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -217661,7 +218341,38 @@ void* d3dLayeredShader::vfunc_18()
 
 }
 
-// [TODO] 0x002C2430 pure3d::d3dLayeredShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_04 (0x002C2430, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C2430
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dLayeredShader::vfunc_04 (0x002C2430, 6 bytes)
+extern "C" char DAT_003D57F4[];
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dLayeredShader::vfunc_04()
+{
+    return DAT_003D57F4;
+}
+
+}
+
 // [TODO] 0x002C2440 pure3d::d3dLayeredShader::vfunc_23 (18 B)
 // [TODO] 0x002C24C0 sub_002C24C0 (1165 B)
 // [TODO] 0x002C2950 pure3d::d3dLayeredShader::vfunc_12 (62 B)
@@ -217669,7 +218380,38 @@ void* d3dLayeredShader::vfunc_18()
 // [TODO] 0x002C2A20 pure3d::d3dLayeredShader::vfunc_03 (71 B)
 // [TODO] 0x002C2A70 pure3d::d3dLayeredShader::vfunc_24 (601 B)
 // [TODO] 0x002C2CD0 pure3d::d3dLayeredShader::vfunc_14 (712 B)
-// [TODO] 0x002C3000 pure3d::d3dSpecularShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_04 (0x002C3000, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C3000
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dSpecularShader::vfunc_04 (0x002C3000, 6 bytes)
+extern "C" char DAT_00462518[];
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dSpecularShader::vfunc_04()
+{
+    return DAT_00462518;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dSpecularShader::vfunc_23 (0x002C3030, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -218071,7 +218813,38 @@ void* d3dShadowShader::vfunc_18()
 
 }
 
-// [TODO] 0x002C3C70 pure3d::d3dShadowShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_04 (0x002C3C70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C3C70
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dShadowShader::vfunc_04 (0x002C3C70, 6 bytes)
+extern "C" char DAT_003A6170[];
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dShadowShader::vfunc_04()
+{
+    return DAT_003A6170;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_002C3C80 (0x002C3C80, 47 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -218241,7 +219014,38 @@ void* d3dSimpleCBVLitShader::vfunc_18()
 
 }
 
-// [TODO] 0x002C3E70 pure3d::d3dSimpleCBVLitShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleCBVLitShader::vfunc_04 (0x002C3E70, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C3E70
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dSimpleCBVLitShader::vfunc_04 (0x002C3E70, 6 bytes)
+extern "C" char DAT_003D5870[];
+
+namespace pure3d {
+
+class d3dSimpleCBVLitShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dSimpleCBVLitShader::vfunc_04()
+{
+    return DAT_003D5870;
+}
+
+}
+
 // [TODO] 0x002C3EB0 sub_002C3EB0 (999 B)
 // [TODO] 0x002C423A sub_002C423A (93 B)
 // [TODO] 0x002C42C0 pure3d::d3dSimpleCBVLitShader::vfunc_13 (43 B)
@@ -218434,7 +219238,38 @@ void* d3dCharacterShader::vfunc_18()
 
 }
 
-// [TODO] 0x002C4950 pure3d::d3dCharacterShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_04 (0x002C4950, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C4950
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dCharacterShader::vfunc_04 (0x002C4950, 6 bytes)
+extern "C" char DAT_003B419C[];
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dCharacterShader::vfunc_04()
+{
+    return DAT_003B419C;
+}
+
+}
+
 // [TODO] 0x002C4990 pure3d::d3dCharacterShader::vfunc_23 (18 B)
 // [TODO] 0x002C49B0 sub_002C49B0 (1339 B)
 // [TODO] 0x002C4CC8 sub_002C4CC8 (547 B)
@@ -218614,7 +219449,38 @@ void* d3dShadowDecalShader::vfunc_18()
 
 }
 
-// [TODO] 0x002C5440 pure3d::d3dShadowDecalShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_04 (0x002C5440, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C5440
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dShadowDecalShader::vfunc_04 (0x002C5440, 6 bytes)
+extern "C" char DAT_003D583C[];
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dShadowDecalShader::vfunc_04()
+{
+    return DAT_003D583C;
+}
+
+}
+
 // [TODO] 0x002C5450 pure3d::d3dShadowDecalShader::vfunc_13 (23 B)
 // ============================================================================
 // [VERIFIED] sub_002C5470 (0x002C5470, 47 B)
@@ -218650,7 +219516,38 @@ Class_002C5470* Class_002C5470::sub_002C5470(int a1)
 // [TODO] 0x002C54A0 pure3d::d3dShadowDecalShader::vfunc_03 (56 B)
 // [TODO] 0x002C54E0 pure3d::d3dShadowDecalShader::vfunc_14 (339 B)
 // [TODO] 0x002C5640 sub_002C5640 (28 B)
-// [TODO] 0x002C5660 pure3d::d3dDecalShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dDecalShader::vfunc_04 (0x002C5660, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C5660
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dDecalShader::vfunc_04 (0x002C5660, 6 bytes)
+extern "C" char DAT_003D585C[];
+
+namespace pure3d {
+
+class d3dDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dDecalShader::vfunc_04()
+{
+    return DAT_003D585C;
+}
+
+}
+
 // [TODO] 0x002C5670 pure3d::d3dDecalShader::vfunc_14 (88 B)
 // [TODO] 0x002C56D0 pure3d::d3dDecalShader::vfunc_13 (38 B)
 // ============================================================================
@@ -218688,7 +219585,38 @@ d3dDecalShader* d3dDecalShader::vfunc_03(unsigned int flags)
 }
 
 // [TODO] 0x002C5730 sub_002C5730 (100 B)
-// [TODO] 0x002C57A0 pure3d::d3dVertexFadeShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_04 (0x002C57A0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C57A0
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dVertexFadeShader::vfunc_04 (0x002C57A0, 6 bytes)
+extern "C" char DAT_00462EF8[];
+
+namespace pure3d {
+
+class d3dVertexFadeShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dVertexFadeShader::vfunc_04()
+{
+    return DAT_00462EF8;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_23 (0x002C57B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -218957,7 +219885,38 @@ Class_002C6110* Class_002C6110::sub_002C6110(int a1)
     return this;
 }
 
-// [TODO] 0x002C6140 pure3d::d3dNightlightShader::vfunc_04 (6 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dNightlightShader::vfunc_04 (0x002C6140, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dVehicleShader::vfunc_04 (0x002829C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C6140
+// what: Returns the address of a fixed block in the game's data.
+// tool: Claude Fable 5.2 (look-alike of 0x0004A760, names and addresses swapped)
+// pure3d::d3dNightlightShader::vfunc_04 (0x002C6140, 6 bytes)
+extern "C" char DAT_003D5848[];
+
+namespace pure3d {
+
+class d3dNightlightShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void* vfunc_04();
+};
+
+void* d3dNightlightShader::vfunc_04()
+{
+    return DAT_003D5848;
+}
+
+}
+
 // [TODO] 0x002C6150 pure3d::d3dNightlightShader::vfunc_24 (452 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dNightlightShader::vfunc_23 (0x002C6320, 6 B)
