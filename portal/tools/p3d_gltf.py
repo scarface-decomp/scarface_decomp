@@ -44,12 +44,17 @@ What goes where (see docs/FORMATS.md for the chunk layouts):
                                      and the light group's kind in extras. Of the daylight (kinds 0 and
                                      1), only the weather's group are glTF lights
     a Shader (0x11000)               a material; how the game blends it (BLMD) in its extras ("blend"):
-                                     light-adding (2) and darkening (3) ones with their picture made ready
-                                     for ordinary blending; a cut-out (ATST) at its ACTH; "depthWrite":
+                                     light-adding (2) and darkening (3, subtracting) ones with their picture
+                                     made ready for ordinary blending; a cut-out (ATST) at its ACTH; "depthWrite":
                                      false for the ones the game draws without writing depth; unlit
                                      (KHR_materials_unlit) without LIT 1
     a shadowdecal primitive group    a node of its own under its mesh's, extras {"shadowDecal": true}
     the low-detail hull, with --lod  marked {"lowDetailHull": true}, and hidden next to detailed areas
+    a World Geometry (0x8800003)     its top node's extras: its kind ("worldGeometryKind") and, from its Zone
+                                     Package Entry (0x8800009), "drawDistance"; one drawn only from afar
+                                     (near above 0: a far-away stand-in) is marked hidden
+    an instanceposition's last value the state a placed prop starts in (extras {"state": name} when not
+                                     its first)
     the sea, with --map              a flat surface at height 0 round the map, its settings in extras
     a Draw Order (0x122000)          the mesh's extras: {"drawOrder": key}
     a Sky (0x8800002), with --hour   its composite drawable posed by PTRN_<name> for the hour, and its
@@ -88,15 +93,16 @@ MESH, SKIN, PRIM_GROUP, SHADER, SKELETON, JOINT = 0x10000, 0x10001, 0x10020, 0x1
 COMPOSITE, COMPOSITE_PROP = 0x123000, 0x123001
 ANIMATION, ANIM_GROUP_LIST, ANIM_GROUP = 0x121000, 0x121002, 0x121001
 CAMERA, FRAME_CONTROLLER = 0x2200, 0x121201
-WORLD_GEO, STATE_PROP = 0x8800003, 0x8800005
+WORLD_GEO, STATE_PROP, ZONE_PACKAGE, ZONE_ENTRY = 0x8800003, 0x8800005, 0x8800004, 0x8800009
 STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY = 0x0802000D, 0x0802000E, 0x08020002
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 8                     # 3: props kept with another area. 4: one stage of each place; insides in the city.
+EXPORT_VERSION = 9                     # 3: props kept with another area. 4: one stage of each place; insides in the city.
                                        # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight.
                                        # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked.
-                                       # 8: a shader without LIT is unlit
+                                       # 8: a shader without LIT is unlit. 9: darkening subtracts; placed props in their
+                                       # starting state; world geometry's draw distances, far-away stand-ins hidden
 LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER, SKY = 0x13000, 0x2380, 0x8800007, 0x122000, 0x8800002
 DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)
 WEATHER_KIND = {"clear": 0, "rain": 1}  # the daylight's kind for each weather; the game starts in clear weather
@@ -117,7 +123,7 @@ VECTOR_CHANNELS = (0x121102, 0x121103, 0x121104)
 SHADOW_PARTS = 0x20 | 0x40           # a composite part's kind: 1 a model, 0x20 a shadow mesh, 0x40 a shadow skin
 # How see-through surfaces are drawn, the low-detail hull, shadow decals and the sea: docs/FORMATS.md, from the
 # clean-room spec docs/cleanroom/SPEC-002-materials-ocean-shadows.md.
-BLENDS = {1: "alpha", 2: "add", 3: "darken"}  # a shader's BLMD: 1 ordinary see-through, 2 adds light, 3 darkens
+BLENDS = {1: "alpha", 2: "add", 3: "darken"}  # a shader's BLMD: 1 ordinary see-through, 2 adds light, 3 subtracts
 ALPHA_TEST = 0.5                       # the cut-out's alpha when the shader has no ACTH
 ACMP_GREATER = 4                       # ACMP 4: a pixel stays only if its alpha is greater (without ACMP: or equal)
 NO_DEPTH_KINDS = ("decal", "nightlight", "shadowdecal")   # shader kinds the game draws without writing depth
@@ -567,6 +573,16 @@ def prop_states(data: bytes, c: p3d.Chunk) -> List[Tuple[str, Dict[str, bool]]]:
     return out
 
 
+def starting_state(states: Sequence[Tuple[str, Dict[str, bool]]], number: int) -> int:
+    """Which of a prop's states (prop_states) a placed copy starts in, by its place in the list, from the last of
+    its instanceposition's twelve numbers (p3d.start_state, SPEC-003 section 2): the state with that name, letter
+    case ignored. The first state (0) for 0, for a number off the list, or when the prop has no state of that name."""
+    name = p3d.start_state(number)
+    if not isinstance(name, str):
+        return 0
+    return next((i for i, (s, _shown) in enumerate(states) if s.lower() == name.lower()), 0)
+
+
 def lod_parts(parts: Sequence[str]) -> set:
     """The low-detail stand-ins (storeInterior2LODShape beside storeInterior2InstanceShape) a composite
     carries for far away, when it has a part that isn't one."""
@@ -752,7 +768,8 @@ def shader_from_name(name: str) -> Optional[dict]:
 
 def blend_of(info: Optional[dict]) -> Optional[str]:
     """How a shader puts its surface over what is behind it (its BLMD): "alpha" (1, ordinary see-through),
-    "add" (2, adds light), "darken" (3), the number for any other, None when it is solid (0 or none)."""
+    "add" (2, adds light), "darken" (3, takes its colour away: SPEC-003, section 8.1), the number for any other,
+    None when it is solid (0 or none)."""
     blmd = (info or {}).get("ints", {}).get("BLMD")
     return BLENDS.get(blmd, blmd) if blmd else None
 
@@ -813,13 +830,16 @@ def added_light(rgba: bytes, cut: Optional[Tuple[float, bool]] = None) -> bytes:
 
 
 def darkening(rgba: bytes, cut: Optional[Tuple[float, bool]] = None) -> bytes:
-    """A darkening (BLMD 3) picture made ready for ordinary see-through blending: black, with an alpha of 1 minus
-    the picture's brightness (its luminance), so what is behind ends up multiplied by that brightness. The
-    picture's own alpha is used only for the cut-out (cut): pixels that fail it darken nothing."""
+    """A darkening (BLMD 3) picture made ready for ordinary see-through blending. The game takes the picture's colour
+    away from what is behind (what is behind minus the colour, not below 0; alpha plays no part: SPEC-003, section
+    8.1). Here the picture is black, with an alpha of its brightness (the largest of its red, green and blue), so
+    what is behind ends up times 1 minus that brightness: close to subtracting it where what is behind is bright,
+    and black darkens nothing. The picture's own alpha is used only for the cut-out (cut): pixels that fail it
+    darken nothing."""
     out = bytearray(len(rgba))
     for i in range(0, len(rgba) - 3, 4):
         if _passes(rgba[i + 3], cut):
-            out[i + 3] = 255 - round((299 * rgba[i] + 587 * rgba[i + 1] + 114 * rgba[i + 2]) / 1000)
+            out[i + 3] = max(rgba[i], rgba[i + 1], rgba[i + 2])
     return bytes(out)
 
 
@@ -1056,7 +1076,7 @@ class Builder:
     def material(self, shader: str, leaf: str = "") -> int:
         """The glTF material for a shader. How the game puts a see-through surface over what is behind it (its
         BLMD) goes in the material's extras ("blend"): ordinary see-through (1) is glTF's BLEND; a surface that
-        adds light (2) or darkens (3) gets its picture made ready for ordinary blending (added_light,
+        adds light (2) or darkens (3, subtracting) gets its picture made ready for ordinary blending (added_light,
         darkening) so it neither comes out as a black square nor hides what is behind. A cut-out (ATST) is
         glTF's MASK at the shader's ACTH (0.5 without one); a light-adding or darkening one has the cut-out in
         its made picture instead. Shaders drawn without writing depth (draws_depth) say so ("depthWrite":
@@ -1312,7 +1332,8 @@ class Builder:
     def composite(self, ref: Ref, parent: Optional[int] = None, label: str = "", state: int = 0, **place) -> int:
         """A composite drawable: its skeleton's joints, with each part (a mesh or a skin) on its joint.
         Its skeleton and parts are looked for in its own file first. Only the parts shown in the prop's
-        state are put in (the first state: how the game starts it, before anything breaks it), and only the
+        state are put in (state: its place in the prop's list; the first by default, how the game starts a
+        prop before anything breaks it, unless a placed copy says otherwise: starting_state), and only the
         full-detail ones: the low-detail stand-ins for far away are left out."""
         r = p3d._R(ref.data, *ref.chunk.body)
         r.u32()
@@ -2116,11 +2137,51 @@ def _is_lod(src: Source) -> bool:
 
 
 def _world_geo(lib: Library, src: Source) -> List[str]:
+    return [comp for _name, comp, _kind in world_geometries(src)] if src.main else []
+
+
+def world_geometries(src: Source) -> List[Tuple[str, str, int]]:
+    """A file's World Geometry chunks (0x8800003) as (name, the composite drawable's name, kind). The kind goes with
+    how the name starts (SPEC-003, section 4): 0, or 1 shadowed_, 3 low_LOD_, 5 underwater_, 6 cbvlitdecals_,
+    7 interiorfloors_, 8 cardsnight_; 0 when a damaged chunk ends before it."""
     out = []
-    for ref in lib.main_chunks(WORLD_GEO, [src]):
-        r = p3d._R(ref.data, *ref.chunk.body)
-        r.text()
-        out.append(r.text())
+    for c in src.chunks:
+        if c.id != WORLD_GEO:
+            continue
+        r = p3d._R(src.data, *c.body)
+        try:
+            name, comp = r.text(), r.text()
+        except IndexError:
+            continue
+        out.append((name, comp, r.u32() if r.left() >= 4 else 0))
+    return out
+
+
+def zone_entries(src: Source) -> Dict[str, dict]:
+    """The draw distances of a file's world geometry: {World Geometry name in lower case: its Zone Package Entry's
+    fields} (0x8800009 under a Zone Package, 0x8800004; p3d.fields). The first entry for a name wins."""
+    out: Dict[str, dict] = {}
+    for c in src.chunks:
+        if c.id != ZONE_PACKAGE:
+            continue
+        for k in c.children:
+            f = p3d.fields(src.data, k) if k.id == ZONE_ENTRY else {}
+            if f.get("name") and "fade" in f:
+                out.setdefault(f["name"].lower(), f)
+    return out
+
+
+def draw_distance(entry: Optional[dict]) -> Optional[dict]:
+    """A world geometry's drawDistance extras from its Zone Package Entry (zone_entries): near, far and fade, and
+    "from", the point the distance is measured from, at height 0 in glTF's space, when the entry has one (the game
+    measures from the world geometry itself when it hasn't). None without an entry. The game draws it while the
+    camera is farther than near and nearer than far, fading over fade (SPEC-003, section 3.2, reported)."""
+    if not entry:
+        return None
+    out = {k: float(entry[k]) for k in ("near", "far", "fade")}
+    x, z = entry.get("point") or (0.0, 0.0)
+    if x or z:
+        out["from"] = [v + 0.0 for v in pos((x, 0.0, z))]       # + 0.0: no minus zero
     return out
 
 
@@ -2170,9 +2231,12 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
     world geometry, and every mesh no composite uses, side by side. A sky (Common.p3d) with an hour is
     posed and coloured for it (Builder.sky); with a weather, only that weather's sky goes in.
     Map (map_mode): per file, its world geometry (WorldGeo 0x8800003 names a composite drawable whose
-    meshes sit in world space), a copy of each model its instance objects place, and its lights (see
-    Builder.lights; hour lights the daylight for that hour, 0 to 24; weather, "clear" or "rain", picks
-    the daylight, clear when not given). Low-detail files (miami_lod, islands_LOD) are left out when
+    meshes sit in world space; its top node's extras give its kind, "worldGeometryKind", and its zone package
+    entry's draw distance, "drawDistance", see draw_distance; one the game draws only when the camera is
+    farther than its near distance is marked "hidden": true), a copy of each model its instance objects place,
+    each in the state its record names (starting_state; extras {"state": name} when not the first), and its
+    lights (see Builder.lights; hour lights the daylight for that hour, 0 to 24; weather, "clear" or "rain",
+    picks the daylight, clear when not given). Low-detail files (miami_lod, islands_LOD) are left out when
     there's anything else, unless lod is set: then their world geometry (the low-detail hull) is marked
     {"lowDetailHull": true, "hidden": true}, so that it doesn't cover the detailed areas (the game fades it
     out near the camera). With ocean, the sea round all of it.
@@ -2189,29 +2253,43 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
             mains = [src for src in mains if not _is_lod(src)]
         groups = []
         for src in mains:
-            comps = [c for c in _world_geo(lib, src) if not wanted or c.lower() in wanted]
+            geos = [g for g in world_geometries(src) if not wanted or g[1].lower() in wanted]
             placing = [(m, r) for m, r in instance_objects(src) if not wanted or m.lower() in wanted]
-            if not comps and not placing:
+            if not geos and not placing:
                 continue
             group = b.g.node(Path(src.label).stem)
             groups.append(group)
             prefer = [src] + lib.region_of(src)
             hull = _is_lod(src)
-            for comp in comps:
+            zones = zone_entries(src)
+            far_off = []                                        # drawn only from afar: hidden
+            for geo, comp, kind in geos:
                 cref = lib.find("composite", comp, prefer)
                 if cref:
                     top = b.composite(cref, group)
                     b.report.models.append(comp)
+                    mark: dict = {"worldGeometryKind": kind}
+                    dist = draw_distance(zones.get(geo.lower()))
+                    if dist:
+                        mark["drawDistance"] = dist
+                        if dist["near"] > 0:
+                            mark["hidden"] = True
+                            far_off.append(geo)
                     if hull:
-                        mark = {"lowDetailHull": True}
+                        mark["lowDetailHull"] = True
                         if detailed or beside_detail:
                             mark["hidden"] = True
-                        b.g.doc["nodes"][top].setdefault("extras", {}).update(mark)
+                    b.g.doc["nodes"][top].setdefault("extras", {}).update(mark)
                 else:
                     b.report.missing_drawables.add(comp)
-            if hull and comps and (detailed or beside_detail):
+            if hull and geos and (detailed or beside_detail):
                 b.report.notes.append(f"{Path(src.label).stem}: the low-detail hull, marked hidden (lowDetailHull): next to "
                                       "the detailed areas it would cover them")
+            if far_off:
+                stem = Path(src.label).stem
+                b.report.notes.append(f"{stem}: {len(far_off)} far-away stand-in(s), marked hidden: the game draws them "
+                                      "only when the camera is farther than their near distance (drawDistance): "
+                                      + ", ".join(far_off[:12]) + (" ..." if len(far_off) > 12 else ""))
             if placing:
                 placed = b.g.node(Path(src.label).stem + " instances", group)
                 b.prop = True                                   # placed props: their leaves (see Builder.mesh)
@@ -2220,12 +2298,16 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
                     if not mref:
                         b.report.unplaced[model] = b.report.unplaced.get(model, 0) + len(records)
                         continue
+                    states = b.states_of(mref, mref.name)
                     for rec in records:
                         if not any(rec[:3]):
                             b.report.at_origin += 1             # never moved from (0, 0, 0): left out
                             continue
                         t, q, sc = instance_trs(rec)
-                        b.composite(mref, placed, model, translation=t, rotation=q, scale=sc)
+                        start = starting_state(states, rec[11])
+                        top = b.composite(mref, placed, model, state=start, translation=t, rotation=q, scale=sc)
+                        if start:                               # an open door: not the prop's first state
+                            b.g.doc["nodes"][top].setdefault("extras", {})["state"] = states[start][0]
                         b.report.placed += 1
                 b.prop = False
             if not wanted:

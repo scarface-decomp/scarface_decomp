@@ -4243,7 +4243,7 @@
       const n = J.nodes[i];
       if (!n || depth > 64) return;
       const marks = n.extras || {};
-      if (marks.hidden) return;                  // the low-detail hull next to the detailed areas it would cover
+      if (marks.hidden) return;                  // the low-detail hull next to the detailed areas it would cover; far-away stand-ins
       const local = n.matrix ? new Float32Array(n.matrix) : V3D.trs(n.translation || [0, 0, 0], n.rotation || [0, 0, 0, 1], n.scale || [1, 1, 1]);
       // a skinned mesh stands where its skeleton's rest pose puts it: its own node's place doesn't count
       const world = n.skin !== undefined ? V3D.ident() : V3D.mul(parent, local);
