@@ -457,3 +457,7 @@ twice. That is what SPEC-002 said they were meant to do. Why the PC doesn't show
 5. *The names for the open fields?* Fine as built.
 6. *Two zone package entries for one world geometry: the first wins?* Fine; no file has two.
 7. *The number of properties read only from version 3 on?* Yes, as §1.1 reports.
+8. *Should the later-state copies of a prop opened on its own carry the properties too?* No need: they stand
+   beside the prop, which has them.
+9. *Is the 0.65 a limit on how far shadow decals darken?* Still open, as §8.2 says; the exports don't depend on
+   it.
