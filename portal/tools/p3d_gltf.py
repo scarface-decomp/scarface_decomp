@@ -709,7 +709,7 @@ class Library:
             kind = KINDS.get(c.id)
             if kind:
                 try:
-                    self.named[kind].setdefault(chunk_name(data, c).lower(), []).append(Ref(src, c))
+                    self.named[kind].setdefault(p3d.name_key(chunk_name(data, c)), []).append(Ref(src, c))
                 except IndexError:
                     pass
         for t in pictures:
@@ -717,7 +717,7 @@ class Library:
         return src
 
     def find(self, kind: str, name: str, prefer: Sequence[Source] = ()) -> Optional[Ref]:
-        refs = self.named[kind].get(name.lower())
+        refs = self.named[kind].get(p3d.name_key(name))        # by the game's own key for the name
         if not refs:
             return None
         for ref in refs:

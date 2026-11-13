@@ -11,8 +11,13 @@ The April 2006 prototype writes the same key in decimal: "ste" + str(key)."""
 from __future__ import annotations
 
 import re
+import sys
 from collections import Counter
+from pathlib import Path
 from typing import Dict, Iterable
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import p3d  # noqa: E402
 
 STX = re.compile(r"stx[a-p]{8}$")
 STE = re.compile(r"ste\d{1,10}$")
@@ -28,15 +33,7 @@ def name_key(name: str) -> int:
         return sum((ord(ch) - 97) << (4 * i) for i, ch in enumerate(name[3:]))
     if STE.match(name) and int(name[3:]) < 1 << 32:
         return int(name[3:])
-    h = 0
-    for c in name.encode("latin-1"):
-        h = (h * 0x1003F) & 0x7FFFFFFF
-        if c < 0x61:
-            c += 0x20
-        if c >= 0x80:
-            c -= 0x100
-        h = (h ^ c) & 0xFFFFFFFF
-    return h | 0x80000000
+    return p3d.name_key(name) if name else 0x80000000        # the game's one key for names (p3d.name_key)
 
 
 def stx(key: int) -> str:

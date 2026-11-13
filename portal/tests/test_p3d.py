@@ -455,6 +455,31 @@ def test_an_instance_record_names_the_state_its_copy_starts_in():
                                                      "damage_4", "explosion", "open", "opening", "closed", "closing"]
 
 
+# ---- the game's key for a name (clean-room spec SPEC-006, section 5) ---------------------------------------------
+
+def test_name_key_as_the_game_makes_it():
+    import p3d as P
+    assert P.name_key("") == 0 and P.name_key("", 0x1234) == 0x1234            # no text: the starting value, untouched
+    assert P.name_key("a") == 0x80000061                                       # one step: 0 * 65599 ^ 'a', top bit set
+    assert P.name_key("ab") == ((0x61 * 65599) ^ 0x62) | 0x80000000
+    assert P.name_key("Tony") == P.name_key("tONY") == P.name_key("tony")      # letter case doesn't matter
+    assert P.name_key("b", P.name_key("a")) == P.name_key("ab")                # a start value carries on from a key
+    assert P.name_key("a_") == P.name_key("a\x7f")                             # the folding is blind: '_' + 0x20 is 0x7F
+    assert P.name_key("x", 0xFFFFFFFF) == P.name_key("x", 0x7FFFFFFF)          # the start's top bit is dropped
+    # a byte above 0x7F is a negative character, so below 'a': 0x20 is added to it (0xE9 - 256 + 32 = 9)
+    assert P.name_key("\xe9") == (0 ^ 9) | 0x80000000
+    assert all(P.name_key(n) & 0x80000000 for n in ("a", "Parent", "sportfishing_boat"))
+
+
+def test_the_scripts_names_use_the_same_key():
+    import p3d as P
+    import torque_names as T
+    for name in ("Parent", "common", "AITask_Flee", "EnvironmentObject", "FogColor_Red"):
+        assert T.name_key(name) == P.name_key(name)
+    assert T.name_key("") == 0x80000000                                        # an empty script name is still a key
+    assert T.name_key(T.stx(P.name_key("Parent"))) == P.name_key("Parent")     # stx........ stands for its own key
+
+
 # ---- Boolean, Float2 and Entity channels; the frame controller (clean-room spec SPEC-005, sections 1.2 and 1.4) ----
 
 def test_a_boolean_channel_has_no_values_every_key_flips_it():
