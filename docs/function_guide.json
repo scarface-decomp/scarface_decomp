@@ -6406,6 +6406,33 @@
    "what_it_does": "Plays a BQG animation into a billboard group's quads: VIS, TRAN, ROT, WDT and HGT (halved), DIST, CLR, FSF and OFF.",
    "spec": "docs/cleanroom/SPEC-007-billboards.md#6-the-xbox-functions-checked-on-the-xbox",
    "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00294310",
+   "name_in_queue": "sub_00294310",
+   "size": 2676,
+   "what_it_does": "Reads a mesh piece (chunk 0x00010020) into its vertex and index buffers, including the dent lists 0x00010022 and 0x00010023 when the vertex type has bit 0x100000.",
+   "spec": "docs/cleanroom/SPEC-008-horizon-dents.md#2-the-cars-dents-checked-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A9050",
+   "name_in_queue": "sub_002A9050",
+   "size": 490,
+   "what_it_does": "Reads a mesh's vertex sets (chunk 0x00121305), one 0x00121306 at a time.",
+   "spec": "docs/cleanroom/SPEC-008-horizon-dents.md#1-the-horizons-colour-by-the-hour-checked",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A88F0",
+   "name_in_queue": "sub_002A88F0",
+   "size": 1508,
+   "what_it_does": "Reads one vertex set (chunk 0x00121306): colour lists (CLR0, CLR1) and texture offsets (UV0, UV1, UV2), each a 0x00010F0n sub-chunk.",
+   "spec": "docs/cleanroom/SPEC-008-horizon-dents.md#1-the-horizons-colour-by-the-hour-checked",
+   "status": "open"
   }
  ]
 }

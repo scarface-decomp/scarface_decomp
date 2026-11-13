@@ -229,8 +229,9 @@ index list**, so a reader must handle a prim group without indices.
 * The dome's six sets: (0, 0, 0), (104, 201, 209), (132, 149, 204), (104, 177, 112), (4, 3, 11),
   (0, 0, 0). Added to (10, 13, 20), the second is the familiar Miami sky blue. The cloud layers:
   `skybox17Shape` (0, 0, 0), (2, 2, 1), (122, 127, 85), (122, 127, 85), (0, 0, 0); `skybox18Shape` (0, 0, 0),
-  (104, 109, 70), (104, 109, 70), (0, 0, 0). The two horizon meshes' sets are all zero: **the horizon keeps
-  its own colours all day.**
+  (104, 109, 70), (104, 109, 70), (0, 0, 0). The two horizon meshes' colour sets are all zero, but
+  their sets also move the texture across a strip of colours by the hour: the horizon does change colour
+  (corrected in [SPEC-008 §1](SPEC-008-horizon-dents.md#1-the-horizons-colour-by-the-hour-checked)).
 
 ---
 
