@@ -736,8 +736,35 @@ def community_name(t: dict) -> Optional[dict]:
     return info if isinstance(info, dict) and isinstance(info.get("name"), str) else None
 
 
+_GUIDE: Optional[Dict[Tuple[str, int], dict]] = None
+
+
+def guide_note(t: dict) -> Optional[dict]:
+    """What the function guide (docs/function_guide.json, from the clean-room specs) says a function does:
+    {"what_it_does", "spec", "low_confidence"}, or None when it isn't in the guide."""
+    global _GUIDE
+    if _GUIDE is None:
+        _GUIDE = {}
+        for e in (read_json(BASE_DIR / "docs" / "function_guide.json", {}) or {}).get("functions", []):
+            try:
+                _GUIDE[(str(e["bin"]), int(str(e["va"]), 16))] = e
+            except (KeyError, ValueError, TypeError):
+                continue
+    try:
+        e = _GUIDE.get((str(t.get("bin")), int(str(t.get("va")), 16)))
+    except (ValueError, TypeError):
+        return None
+    if not e or not e.get("what_it_does"):
+        return None
+    return {"what_it_does": str(e["what_it_does"]), "spec": str(e.get("spec") or ""),
+            "low_confidence": e.get("confidence") == "low"}
+
+
 def live_task(t: dict) -> dict:
     out = {k: v for k, v in t.items() if k not in ("best_cpp",)}
+    note = guide_note(t)
+    if note:
+        out["guide"] = note
     entry = REGISTRY["entries"].get(task_key(t)) if t.get("status") == "VERIFIED" else None
     if entry and entry.get("what"):
         out["what"], out["what_by"] = entry["what"], entry.get("what_by") or entry.get("verified_by", "")

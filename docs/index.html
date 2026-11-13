@@ -623,11 +623,31 @@
               valid Blender file). You get characters with their skeletons, skin weights and animations, the game's cameras
               with their moves, guns, cars with their moving parts, and each part of the city with the
               trees, lamps, benches and signs the game places on it, at their places; the whole city opens as one scene.
+              A building opened by itself comes with its inside and furniture, and a place the story changes, like
+              Tony's mansion, is shown one stage at a time. <b>View here</b> shows a model or an area in the page
+              without Blender.
               The Xbox, PC and PS2 files all work. Traffic
               and pedestrians aren't in the files: the game spawns them as it runs. How the models, animations and map are
               stored, and how to do it from the command line, is in
               <a data-repo-link="/blob/main/docs/FORMATS.md#exporting-to-blender" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#exporting-to-blender" target="_blank" rel="noopener noreferrer">FORMATS.md</a>.
               Nothing from the game is ever uploaded or shared: the scenes are made on your computer.</p></details>
+          <details><summary>Can I watch the game's cutscenes?</summary>
+            <p>Yes, from your own copy of the game. Once the game files are copied, the <b>In Blender</b> box lists every
+              cutscene once. Pick one and press <b>Open in Blender</b>, then Space to play it and Numpad 0 to look through
+              the game's camera. You get everybody in the scene standing where the script puts them, Tony in the suit it
+              gives him with his lips, brows and eyes moving, the weapons the script hands out, the vehicles and the
+              camera, on the street or in the room where it happens. Cutscenes the game plays one straight after another
+              come as one. Props a cutscene spawns, effects and sound aren't in yet. How a cutscene is stored is in
+              <a data-repo-link="/blob/main/docs/FORMATS.md#cutscenes-artnis" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#cutscenes-artnis" target="_blank" rel="noopener noreferrer">FORMATS.md</a>.</p></details>
+          <details><summary>How do you know what a function does?</summary>
+            <p>Three ways. The machine code itself, which anyone with the game can read. The game's own text: class names
+              in its run-time type information, script commands, and file names. And, for whole systems such as lighting
+              or animation, plain-language specs kept in <a data-repo-link="/tree/main/docs/cleanroom" href="https://github.com/scarface-decomp/scarface_decomp/tree/main/docs/cleanroom" target="_blank" rel="noopener noreferrer">docs/cleanroom</a>: those
+              were written through a clean room, so that nothing from outside research reaches the code except as a
+              description in the project's own words, checked against the game where it can be. No leaked source code is
+              in the repository or allowed in it. How that works, and who read what, is on record in
+              <a data-repo-link="/blob/main/docs/CLEAN_ROOM.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CLEAN_ROOM.md" target="_blank" rel="noopener noreferrer">CLEAN_ROOM.md</a>. Whatever a description says, a function only
+              counts when the compiler rebuilds it byte for byte.</p></details>
           <details><summary>I'm stuck. Where do I ask?</summary>
             <p>Ask in <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">#help on the Discord</a> (joining takes a short application, to keep bots
               out), or open an <a data-repo-link="/issues" href="https://github.com/scarface-decomp/scarface_decomp/issues" target="_blank" rel="noopener noreferrer">issue on GitHub</a>.
@@ -661,6 +681,17 @@
             How the city is cut into areas, how each placed tree, lamp and sign is stored (worked out from the game's own
             loader), and the names the game gives its data, read from the Xbox program. With your own copy, the portal turns
             any area, the whole city, the characters, guns and cars into <a data-repo-link="/blob/main/docs/FORMATS.md#exporting-to-blender" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#exporting-to-blender" target="_blank" rel="noopener noreferrer">scenes for Blender</a>.</li>
+          <li><b><a data-repo-link="/tree/main/docs/cleanroom" href="https://github.com/scarface-decomp/scarface_decomp/tree/main/docs/cleanroom" target="_blank" rel="noopener noreferrer">How the game works, system by system</a></b>
+            Plain-language specs: lights and the time of day, the sky and the horizon, which areas load where, the sea and
+            shadows, props and their states, how animations are played, how a frame is drawn, billboards and glows, and
+            how cars dent. Each says what was checked on the game and what is only reported.</li>
+          <li><b><a data-repo-link="/blob/main/docs/function_guide.json" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/function_guide.json" target="_blank" rel="noopener noreferrer">What functions do</a></b>
+            A guide to about 850 Xbox and PC functions, each with a line on what it does and the spec that
+            explains it. The ones marked open are waiting to be rebuilt; the portal shows a function's entry beside its
+            code.</li>
+          <li><b><a data-repo-link="/blob/main/docs/FORMATS.md#cutscenes-artnis" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#cutscenes-artnis" target="_blank" rel="noopener noreferrer">Cutscenes and faces</a></b>
+            How a cutscene names its cast, places them and plays their animations, and how a face's shapes and the
+            sliders that work them are stored.</li>
         </ul>
       </div>
     </section>

@@ -412,6 +412,10 @@
     .wb-what-line .input-box { flex: 1; min-width: 0; font-size: 0.86rem; padding: 6px 10px; }
     .wb-what .hint-small { display: block; margin-top: 3px; }
     .wb-what [hidden] { display: none !important; }
+    .wb-guide { margin-top: 8px; max-width: 640px; padding: 8px 10px; border: 1px solid var(--line, #2a2a2a); border-left: 3px solid var(--accent, #b3261e); font-size: 0.86rem; }
+    .wb-guide[hidden] { display: none !important; }
+    .wb-guide b { display: block; font-size: 0.78rem; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
+    .wb-guide .btn-sm { margin-top: 6px; }
     .wb-hint { font-size: 0.88rem; color: var(--text-secondary); margin-top: 6px; }
     .wb-chips { display: flex; gap: 8px; flex-wrap: wrap; }
     .chip { border: 1px solid var(--border); padding: 5px 10px 3px; border-radius: 2px; font-size: 0.8rem; white-space: nowrap; }
@@ -1080,6 +1084,7 @@
                     </div>
                     <span class="hint-small" id="wb-what-note"></span>
                   </div>
+                  <div class="wb-guide" id="wb-guide" hidden></div>
                   <div id="wb-hint" class="wb-hint"></div>
                 </div>
                 <div class="wb-chips">
@@ -5037,12 +5042,43 @@
       box.value = WHAT_DRAFTS[t.id] !== undefined ? WHAT_DRAFTS[t.id] : (t.what || '');
     }
     box.dataset.id = t.id;
+    renderGuide(t);
     save.hidden = !verified;
     save.disabled = !verified || box.value.trim() === (t.what || '');
     note.textContent = verified
       ? (t.what ? 'Written by ' + (t.what_by || 'whoever rebuilt it') + '. Shown on the function\'s page on the website.' : 'Not described yet: say what it does, then Save.')
       : 'Saved with your match when it verifies, and shown on the website.';
   }
+  /* What a clean-room spec says the function does (docs/function_guide.json): a head start for whoever
+     rebuilds it, and one press makes it the match's description. */
+  function renderGuide(t) {
+    const box = $('wb-guide');
+    box.textContent = '';
+    const g = t.guide;
+    box.hidden = !g;
+    if (!g) return;
+    box.appendChild(el('b', g.low_confidence ? 'What this probably does (a map from the specs, not checked: read the code)' : 'What this does, from the project\'s specs'));
+    box.appendChild(el('span', g.what_it_does));
+    if (g.spec) {
+      box.appendChild(document.createTextNode(' '));
+      const a = el('a', 'Read the spec');
+      a.href = repoBase() + '/blob/main/' + g.spec.replace(/^\//, '');
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      box.appendChild(a);
+    }
+    if (!t.what && !g.low_confidence) {
+      const use = el('button', 'Use as the description', 'btn-sm');
+      use.type = 'button';
+      use.style.display = 'block';
+      use.addEventListener('click', () => {
+        $('wb-what').value = g.what_it_does.slice(0, 160);
+        whatDraft();
+      });
+      box.appendChild(use);
+    }
+  }
+
   function whatDraft() {
     const box = $('wb-what');
     if (!currentTask || box.dataset.id !== currentTask.id) return;
