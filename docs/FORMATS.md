@@ -294,8 +294,13 @@ A state that moves on by itself is a passing one: when its animation reaches the
 state it names. A gate's `opening` ends in `open` and its `closing` in `idle`, at frame 30; a tree's `shake`
 ends in `idle` again. The first property is always `name`; the others (`visibility`, `surface_type`,
 `hit_points`, `movement`, `mass`, `type`, `class` ...) are carried by 1 to 454 props each, and what the game does
-with them isn't known yet. Effects belong mostly to `final` states: the debris when a prop breaks. The exports
-show neither the properties nor the effects.
+with them isn't known yet. Effects belong mostly to `final` states: the debris when a prop breaks.
+
+The exports carry a prop's own properties, all but `name` (a state's own aren't carried), in the extras of each
+placed copy, and of the prop's top node when its file is opened on its own:
+`{"properties": {"type": "Door", "visibility": "Medium", ...}}`, texts as the file has them. **Open in Blender**
+gets them as custom properties, as Blender's glTF importer does with every node's extras. The effects aren't
+shown.
 
 A part's mesh is in its joint's space: the joint's world matrix times the vertex.
 
@@ -353,7 +358,7 @@ The shader names spell most of these out ([Maps](#maps)); the settings chunks ar
 | :--- | :--- | :--- |
 | 1 | ordinary see-through: the texture's alpha mixes it with what is behind *(reported)* | 1,456 shaders, among them the props' leaves, the shadow decals and the low-detail hull (below) |
 | 2 | adds light. The textures are opaque (alpha 255 everywhere) and mostly black, 40 to 87 % of their pixels, with the light in colour on top: the black adds nothing. Drawn with ordinary blending they come out as black squares | the sun's flares and lens rings (`Flare_Star_xb.bmp`, `LENS03.bmp` ...), light glows (`lightGlowWhite.bmp`), boat lights, the `nightlight` windows, one tunnel lighting texture |
-| 3 | subtracts: what is behind minus the texture's colour, not below 0, the same for red, green and blue; alpha plays no part (on the Xbox, below). Subtracted, the soft grey disc of `r_tonymsn_shadow_circle.bmp` on its black corners is a round shadow with no edge, where multiplied it would be a black square; a skid mark is a faint mark on the road | skid marks (`SkidMark_Asphalt.bmp`, opaque and dark, 3 to 19 out of 255 on average), grime (`grime.tga`: grey 125, alpha 175), `r_tonymsn_shadow_circle.bmp` |
+| 3 | subtracts: what is behind minus the texture's colour, not below 0, the same for red, green and blue; alpha plays no part (on the Xbox and in the PC's data, below). Subtracted, the soft grey disc of `r_tonymsn_shadow_circle.bmp` on its black corners is a round shadow with no edge, where multiplied it would be a black square; a skid mark is a faint mark on the road | skid marks (`SkidMark_Asphalt.bmp`, opaque and dark, 3 to 19 out of 255 on average), grime (`grime.tga`: grey 125, alpha 175), `r_tonymsn_shadow_circle.bmp` |
 
 **On the Xbox.** From [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md), read from `default.xbe`. A shader's
 `BLMD` picks one of eight entries in a table at `0x0045C188` (through `0x00282950`): blending on or off, an
@@ -361,8 +366,13 @@ equation, and the source and destination factors, which become Direct3D's render
 alpha and 1 minus source alpha (ordinary see-through); 2 add, one and one (what is behind plus the colour); 3
 reverse subtract, one and one (what is behind minus the colour); 4 add, destination colour and zero (what is behind
 times the colour); 5 add, destination colour and source colour; 6 add, destination colour and source alpha; 7
-reverse subtract, source alpha and source alpha. Only 0 to 3 occur in the files. Whether the PC does the same isn't
-checked.
+reverse subtract, source alpha and source alpha. Only 0 to 3 occur in the files.
+
+The PC program holds the same table in its data (`Scarface.exe`, `.data` at `0x007EC848`): the same eight
+entries, with Direct3D 9's numbers for the equations (1 add, 3 reverse subtract), and straight after them
+(`0x007EC8C8`) the blend factors in the Xbox's order, with Direct3D 9's numbers (1, 2, 3, 4, 9, 10, 5, 6, 7, 8, 11
+and two more). So `BLMD` 3 subtracts on the PC too. The PC's code is encrypted, so that it picks the entries the
+way the Xbox does is assumed, not followed.
 
 **What hides what** *(reported)*. Ordinary see-through world surfaces (`BLMD` 1) are drawn after the solid
 ones, sorted from far to near, and still write depth. The `decal`, `nightlight` and `shadowdecal` kinds, the
@@ -512,8 +522,8 @@ state: the game picks between them by distance. Props that can break have a dama
 (`garbageCanBDamageShape`, `garagePostIBShape`), hidden in the first state (`idle`) and shown in a later
 one (`final`) while the whole one is hidden. The exports show each placed prop as its starting state has it
 (*e*, above), at full detail, with `{"state": "<the state's name>"}` in the copy's extras when that isn't its
-first state; a prop's file opened on its own comes in as its first state has it, with each later state's look
-beside it, named after the state.
+first state, and the prop's properties ([Composite drawables](#composite-drawables)); a prop's file opened on its
+own comes in as its first state has it, with each later state's look beside it, named after the state.
 
 Traffic, pedestrians and mission cars aren't models placed in the files: the game spawns them while it runs,
 at spawn objects the areas do place (`worldambiencespawnobject`, `enemycharactergeneratorspawnobject`, ...).
@@ -835,11 +845,20 @@ and people).
 * Their textures are pure black, with the shadow's coverage in the alpha: `r_tree_shadow.tga` (128 x 128, in the
   region files), `shadowdecal.TGA` (256 x 256), `lmp_table_001.tga`, `Shadow_vehicle.tga`, `Shadow_character.tga`
   (64 x 64).
+* **The Xbox draws them** ([SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md), read from `default.xbe`). Its world geometry
+  loader (`WorldGeoLoader`, `0x00056720`) gives every primitive with a `shadowdecal` shader a draw-list number of
+  its own, 37; the display list (`Display_List`, adding at `0x00043730`) sends that number to list 7 or 8; and the
+  frame (`0x000449F0`) draws those two lists whenever either holds anything (through `0x00042AB0`, while the byte at
+  `0x0041C922` is set: it is 1 in the file and no code writes it). They are drawn inside a render-context extension
+  (`d3dExtStaticShadowGen`, id `0x108`), whose end puts the result on the frame with a full-screen quad: first
+  blended "zero, 1 minus source alpha", the frame times 1 minus the coverage, once however many decals overlap;
+  then a pass that writes alpha only. The quad carries a strength of 0.65; whether that limits the darkening to
+  65 % *(check)*.
 * **The PC game shows none of them** *(reported)*. The pass that should put them on screen draws into a scratch
-  picture that never reaches the frame. Whether the Xbox shows them isn't known.
-* They were meant to darken what is under them by their coverage, two overlapping decals not darkening twice: the
-  decals are gathered into one coverage mask, then the frame is darkened by the mask once *(reported)*. Drawn
-  simply as black see-through surfaces, one decal looks right and two overlapping ones come out too dark.
+  picture that never reaches the frame. Why isn't known.
+* So on the Xbox they darken what is under them by their coverage, two overlapping decals not darkening twice, as
+  they were meant to. Drawn simply as black see-through surfaces, as the exports have them, one decal looks right
+  and two overlapping ones come out too dark.
 * They are drawn only near the camera, like the rest of the detail geometry.
 
 ### Exporting to Blender
@@ -1003,8 +1022,9 @@ python portal/tools/p3d_gltf.py area.glb  "packages/z04/stripmall_01_*.p3d" --ma
 `<mesh> shadow decal` under its mesh's node, or as the mesh's node itself when the mesh is nothing else (the
 blobs in `Common.p3d`). The node and the mesh have `{"shadowDecal": true}` in their extras, and so does the
 material. They are shown: as black see-through surfaces, each looks right where it doesn't overlap another, and
-two overlapping ones come out too dark. The PC game never shows them ([Shadows](#shadows)). **Open in Blender**
-puts them in a collection *Shadow decals*, whose tick box hides them all.
+two overlapping ones come out too dark: the Xbox darkens by their coverage once, however many overlap, and the PC
+is reported not to show them at all ([Shadows](#shadows)). **Open in Blender** puts them in a collection *Shadow
+decals*, whose tick box hides them all.
 
 **The whole city in Blender.** The portal's city export (the **In Blender** box) also writes `sky.glb` beside
 the areas when `Common.p3d` is among the copied files: the weather's sky, centred on the city (the middle of
@@ -1259,7 +1279,9 @@ what you find. Known gaps:
   without `LIT` is unlit.
 * The clean-room spec [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md): the state props' chunks, a placed
   prop's starting state, the zone packages' draw distances and the far-away stand-ins, the world geometry kinds,
-  occluders, characters and vehicles, the water chunks' order, and how the Xbox blends (`BLMD` 3 subtracts).
+  occluders, characters and vehicles, the water chunks' order, and how the Xbox blends (`BLMD` 3 subtracts); in its
+  second part, the same blend table in the PC's data, the shadow decals drawn on the Xbox, and the props'
+  properties in the exports.
 * The [Blender Python API](https://docs.blender.org/api/current/) documentation, for the world's mist that
   shows the fog in Blender, and the shaders, blend modes and collections that show the game's see-through
   surfaces and its groups.
