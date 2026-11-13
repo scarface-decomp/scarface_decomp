@@ -5,8 +5,29 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-11T03:33:14Z</updated>
+  <updated>2026-11-13T06:03:08Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>sub_0029A390 (Xbox, 18 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029A390"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029A390</id>
+    <updated>2026-11-13T06:03:08Z</updated>
+    <summary>Sets a shader's BLMD setting, then works out its blend mode and alpha reference again (sub_0029A2F0). 0x0029A390 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0029A2F0 (Xbox, 146 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029A2F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029A2F0</id>
+    <updated>2026-11-13T06:03:08Z</updated>
+    <summary>Works out a shader's blend mode (a fading solid surface blends) and its alpha reference: ACTH times the opacity, kept to 0..1. 0x0029A2F0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00251310 (Xbox, 62 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00251310"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00251310</id>
+    <updated>2026-11-13T06:03:08Z</updated>
+    <summary>The archive name hash: skips one leading backslash, then hash * 31 + each character (signed, 0x20 added below 'a'); 0 for null. 0x00251310 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>sub_0030809C (Xbox, 3 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0030809C"/>
@@ -335,26 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:xb:0x002DE610</id>
     <updated>2026-11-11T03:31:20Z</updated>
     <summary>0x002DE610 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002DE600 (Xbox, 13 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002DE600"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002DE600</id>
-    <updated>2026-11-11T03:31:20Z</updated>
-    <summary>0x002DE600 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002DE5D0 (Xbox, 13 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002DE5D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002DE5D0</id>
-    <updated>2026-11-11T03:31:20Z</updated>
-    <summary>0x002DE5D0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002D6F90 (Xbox, 13 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002D6F90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002D6F90</id>
-    <updated>2026-11-11T03:31:20Z</updated>
-    <summary>0x002D6F90 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

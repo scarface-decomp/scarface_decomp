@@ -256,3 +256,75 @@ def test_ps2_disc_gives_its_code_overlays_too(tmp_path):
     assert mod.auto_extract(b, logs.append) == 0 and any("code overlays" in line for line in logs)
     assert mod.overlay_of("Overlays\\FrontEnd\\ExoticsOverlayf.bin") == "ExoticsOverlayf.bin"
     assert mod.overlay_of("art\\ExoticsOverlayf.bin") is None and mod.overlay_of("Overlays\\FrontEnd\\x.bin") is None
+
+
+# --------------------------------------------------------------------------- the name hash (SPEC-004, section 1)
+
+def reference_hash(path: str) -> int:
+    """The hash written out the long way, to check name_hash against."""
+    if path.startswith("\\"):
+        path = path[1:]
+    h = 0
+    for ch in path.encode("latin-1"):
+        v = ch - 256 if ch > 127 else ch
+        h = (h * 31 + (v + 0x20 if v < 0x61 else v)) % 2 ** 32
+    return h
+
+
+def test_name_hash():
+    assert R.name_hash("a") == 0x61 and R.name_hash("A") == 0x61         # A to Z fold to lower case
+    assert R.name_hash("ab") == 0x61 * 31 + 0x62
+    assert R.name_hash("0") == 0x50                                      # but so do 0 to 9, . and \
+    assert R.name_hash("\\a") == R.name_hash("a")                        # one leading backslash skipped
+    assert R.name_hash("\\\\a") == (0x5C + 0x20) * 31 + 0x61             # only one
+    assert R.name_hash("\xe9") == (0xE9 - 256 + 0x20) & 0xFFFFFFFF       # a signed byte
+    assert R.name_hash("") == R.name_hash("\\") == 0
+    for name in ("scriptc\\ai\\gang.dso", "ART\\Models\\Car.P3D", "x" * 300):
+        assert R.name_hash(name) == reference_hash(name)                 # kept to 32 bits
+    assert R.name_hash("x\\ac") == R.name_hash("x\\b$")                  # two names, one hash
+
+
+def test_names_are_checked_against_their_hashes(tmp_path):
+    import warnings
+    p = tmp_path / "cement.rcf"
+    p.write_bytes(R.build_rcf(FILES))
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")                                   # every name hashes to its entry: quiet
+        arc = R.open_rcf(p)
+    assert arc.paired_by_hash == 0
+    assert all(R.name_hash(e.name) == e.hash for e in arc.entries)
+
+
+def test_names_stored_out_of_offset_order_are_paired_by_hash(tmp_path):
+    p = tmp_path / "cement.rcf"
+    p.write_bytes(R.build_rcf(FILES, name_order=[2, 0, 3, 1]))
+    with pytest.warns(R.RcfWarning, match="paired by their hash"):
+        arc = R.open_rcf(p)
+    assert [e.name for e in arc.entries] == [FILES[k][0] for k in (2, 0, 3, 1)]     # in the name table's order
+    for e in arc.entries:
+        assert arc.read(e) == dict(FILES)[e.name] and R.name_hash(e.name) == e.hash
+    assert arc.paired_by_hash == 4
+
+
+def test_a_name_without_an_entry_of_its_hash_is_kept_by_offset(tmp_path):
+    """Two names swapped in the name table, and one whose entry has another hash: the swapped ones are put right
+    by their hash, the odd one keeps the entry left over, as the pairing by offset gives it."""
+    hashes = [R.name_hash(n) for n, _ in FILES]
+    hashes[3] = 12345
+    p = tmp_path / "cement.rcf"
+    p.write_bytes(R.build_rcf(FILES, hashes=hashes, name_order=[1, 0, 2, 3]))
+    with pytest.warns(R.RcfWarning, match="1 kept by offset"):
+        arc = R.open_rcf(p)
+    assert {e.name: arc.read(e) for e in arc.entries} == dict(FILES)
+    assert arc.paired_by_hash == 3 and arc.entries[3].hash == 12345
+
+
+def test_find_an_entry_by_its_name(tmp_path):
+    files = FILES + [("x\\ac", b"first"), ("x\\b$", b"second")]
+    p = tmp_path / "cement.rcf"
+    p.write_bytes(R.build_rcf(files))
+    arc = R.open_rcf(p)
+    for path in ("scriptc\\ai\\gang.dso", "scriptc/ai/gang.dso", "\\SCRIPTC\\AI\\Gang.DSO", "/scriptc/ai/gang.dso"):
+        assert arc.read(arc.find_name(path)) == FILES[1][1], path
+    assert arc.find_name("scriptc\\ai\\nobody.dso") is None
+    assert arc.read(arc.find_name("x/b$")) == b"second" and arc.read(arc.find_name("x\\ac")) == b"first"   # same hash

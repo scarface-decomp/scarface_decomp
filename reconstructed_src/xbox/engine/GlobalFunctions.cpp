@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (262 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (265 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 262 of 12,771 functions matched (2.05%). NOT COMPLETE YET.
-// The 12,509 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 265 of 12,771 functions matched (2.08%). NOT COMPLETE YET.
+// The 12,506 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -3983,6 +3983,34 @@ void Class_00251210::sub_00251210()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00251310 (0x00251310, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: The archive name hash: skips one leading backslash, then hash * 31 + each character (signed, 0x20 added below 'a'); 0 for null.
+// ============================================================================
+// sub_00251310 (0x00251310, 62 bytes): the archive name hash (clean-room spec SPEC-004, section 1). The entries
+// of an .rcf archive's directory are sorted by it. A leading backslash is skipped (one only); then, for each
+// character taken as a signed byte, 0x20 is added when it is below 'a' and hash = hash * 31 + that value.
+// 0 for a null pointer or an empty name. portal/tools/rcf.py has the same as name_hash.
+extern "C" unsigned int __cdecl sub_00251310(const char* name)
+{
+    if (*name == '\\')
+        name++;
+    unsigned int hash = 0;
+    const char* p = name;
+    if (name)
+    {
+        while (*p)
+        {
+            int c = *p < 'a' ? *p + 0x20 : *p;
+            hash = hash * 31 + c;
+            p++;
+        }
+        return hash;
+    }
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00253080 (0x00253080, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -4100,6 +4128,79 @@ extern "C" int DAT_004BD3D8;
 int __cdecl sub_00291560(void)
 {
     return DAT_004BD3D8;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029A2F0 (0x0029A2F0, 146 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Works out a shader's blend mode (a fading solid surface blends) and its alpha reference: ACTH times the opacity, kept to 0..1.
+// ============================================================================
+// sub_0029A2F0 (0x0029A2F0, 146 bytes): a shader works out the blend mode it uses and its alpha reference
+// (clean-room spec SPEC-004, section 2.2). The fade level at 0x38 (0 to 255) makes the surface see-through:
+// a solid one (BLMD 0) that is fading blends as ordinary see-through (1), and the alpha-test reference (ACTH)
+// is scaled by (255 - fade) / 255 and kept between 0 and 1. Then four values at 0x64 are copied to 0x50.
+// This part of the program keeps a frame pointer, which /Oy leaves out: #pragma optimize("y", off) puts it back.
+#pragma optimize("y", off)
+
+class Shader
+{
+public:
+    void sub_0029A2F0();
+
+    char pad00[0x18];
+    int blendSetting;            // 0x18: BLMD as set
+    int blendMode;               // 0x1C: the blend mode used
+    char pad20[0x10];
+    float alphaTestReference;    // 0x30: ACTH
+    float alphaReference;        // 0x34: 0 to 1
+    unsigned int fade;           // 0x38: 0 to 255
+    char pad3C[0x14];
+    int current[4];              // 0x50
+    char pad60[4];
+    int wanted[4];               // 0x64
+};
+
+void Shader::sub_0029A2F0()
+{
+    float opacity = (float)(255 - fade) * (1.0f / 255.0f);
+    if (blendSetting == 0 && fade > 0)
+        blendMode = 1;
+    else
+        blendMode = blendSetting;
+    float reference = opacity * alphaTestReference;
+    alphaReference = (reference >= 0.0f && reference <= 1.0f) ? reference : (reference > 1.0f ? 1.0f : 0.0f);
+    current[2] = wanted[2];
+    current[0] = wanted[0];
+    current[1] = wanted[1];
+    current[3] = wanted[3];
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029A390 (0x0029A390, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets a shader's BLMD setting, then works out its blend mode and alpha reference again (sub_0029A2F0).
+// ============================================================================
+// sub_0029A390 (0x0029A390, 18 bytes): a shader's BLMD setting (clean-room spec SPEC-004, section 2.1).
+// Reached through the shader kind's table of settings (the BLMD entry at 0x0045F688). It keeps the value,
+// then works the blend mode and the alpha reference out again (sub_0029A2F0).
+// This part of the program keeps a frame pointer (push ebp / mov ebp, esp), which /Oy leaves out:
+// #pragma optimize("y", off) puts it back.
+#pragma optimize("y", off)
+
+class Shader
+{
+public:
+    void sub_0029A390(int blend);
+    void sub_0029A2F0();
+
+    char pad00[0x18];
+    int blendSetting;            // 0x18: BLMD as set
+};
+
+void Shader::sub_0029A390(int blend)
+{
+    blendSetting = blend;
+    sub_0029A2F0();
 }
 
 // ============================================================================
