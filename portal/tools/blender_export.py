@@ -359,6 +359,40 @@ def _scene_rows(index: Optional[dict], version: str) -> Dict[str, str]:
     return {("/" + r[0].lower().replace("\\", "/")): r[0] for r in _rows(index, version) if r[4]}
 
 
+_BOXES: Dict[tuple, List[tuple]] = {}
+
+
+def _boxes(path: Path) -> List[tuple]:
+    """The boxes round a file's meshes (lowest corner, highest corner; the map's own coordinates), from the
+    box each mesh carries. Read once for a file."""
+    try:
+        key = (str(path), path.stat().st_mtime_ns)
+        if key not in _BOXES:
+            data = path.read_bytes()
+            _BOXES[key] = [struct.unpack_from("<6f", data, c.offset + 12)
+                           for c in P3G.p3d.walk(P3G.p3d.read_tree(data)) if c.id == 0x10003 and c.head >= 36]
+        return _BOXES[key]
+    except (OSError, P3G.p3d.P3dError, struct.error):
+        return []
+
+
+def rooms_at(out: Path, index: Optional[dict], version: str, spot: Sequence[float]) -> List[Path]:
+    """The files of the rooms someone at spot (x, y, z) stands in: the buildings' insides, kept apart from
+    the streets (the donut shop's back room, a club), that have a mesh whose box holds the spot. The
+    stream graph loads the street there; the game brings the room in when Tony walks through its door."""
+    x, y, z = spot
+    found = []
+    for area in areas(out, index, version):
+        if area["place"] == "z04" or not area["city"]:
+            continue
+        for f in area["files"]:
+            p = GA.file_on_disk(out, index, version, f)
+            if p is not None and any(b[0] <= x <= b[3] and b[1] - 0.5 <= y <= b[4] + 0.5 and b[2] <= z <= b[5]
+                                     and b[3] - b[0] < 300 and b[5] - b[2] < 300 for b in _boxes(p)):
+                found.append(p)
+    return found[:4]
+
+
 _NEXT: Dict[tuple, Dict[str, str]] = {}
 _WEARS: Dict[tuple, Dict[str, str]] = {}
 _TEXTS: Dict[tuple, List[Tuple[str, str]]] = {}
@@ -507,6 +541,13 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
                         p = named(f"/packages/z04/{package}.p3d")
                         if p is not None:
                             area.append((p.name, p.read_bytes()))
+            # ...and the room, when they stand in one the streets' files don't hold
+            for sc in [script] + [sc for _n, sc, _st in then]:
+                at = CUT.floor_spot(sc)
+                for p in rooms_at(out, index, version, at) if at else []:
+                    if p.name.lower() not in seen:
+                        seen.add(p.name.lower())
+                        area.append((p.name, p.read_bytes()))
             if area:
                 library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
         except (OSError, P3G.p3d.P3dError, struct.error, ValueError, IndexError):
