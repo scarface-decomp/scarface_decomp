@@ -832,14 +832,22 @@ def test_the_blender_script_imports_and_saves(tmp_path, monkeypatch):
 
 # --------------------------------------------------------------------------- props: how they start, and what they become
 
-def state_prop(name, states):
-    """A State Prop Data chunk (0x0802000D): states as (state name, [(part, shown)]). The number of states comes
-    before the number of properties (one: name), and each state's ten values hold its number of parts."""
-    kids = chunk(0x08020008, text("name") + text(name))
+def prop_property(name, value):
+    return chunk(0x08020008, text(name) + text(value))
+
+
+def state_prop(name, states, props=(), state_props=None):
+    """A State Prop Data chunk (0x0802000D): states as (state name, [(part, shown)]); props: the prop's own properties
+    after name, as (name, value); state_props: {state name: [(name, value)]}, a state's own. The number of states
+    comes before the number of properties, and each state's ten values hold its numbers of parts and properties."""
+    kids = prop_property("name", name) + b"".join(prop_property(k, v) for k, v in props)
     for sname, shown in states:
+        own = (state_props or {}).get(sname, [])
         vis = b"".join(chunk(0x08020002, text(p) + struct.pack("<I", int(on))) for p, on in shown)
-        kids += chunk(0x0802000E, text(sname) + struct.pack("<6If3I", 0, 0, len(shown), 0, 0, 0, 0.0, 0, 0, 0), vis)
-    return chunk(0x0802000D, struct.pack("<I", 4) + text(name) + text(name) + struct.pack("<II", len(states), 1), kids)
+        vis += b"".join(prop_property(k, v) for k, v in own)
+        kids += chunk(0x0802000E, text(sname) + struct.pack("<6If3I", 0, 0, len(shown), 0, 0, 0, 0.0, 0, len(own), 0), vis)
+    return chunk(0x0802000D, struct.pack("<I", 4) + text(name) + text(name) + struct.pack("<II", len(states), 1 + len(props)),
+                 kids)
 
 
 def bin_prop():
@@ -1987,7 +1995,10 @@ def test_shadow_decals_go_in_a_node_of_their_own():
     m = doc["meshes"][shadow["mesh"]]
     assert m["extras"] == {"shadowDecal": True} and len(m["primitives"]) == 1
     assert doc["materials"][m["primitives"][0]["material"]]["extras"] == {"blend": "alpha", "depthWrite": False, "shadowDecal": True}
-    assert report.shadow_decals == 1 and any("the PC game never shows them" in line for line in report.lines())
+    # SPEC-003: the Xbox draws them (darkening by their coverage, once); the PC is reported not to
+    line = next(line for line in report.lines() if "shadow decal" in line)
+    assert report.shadow_decals == 1 and line.startswith("1 shadow decal(s), each in a node of its own marked shadowDecal")
+    assert "the Xbox draws them" in line and "the PC is reported not to show them" in line and "never" not in line
     # a mesh that is nothing but a shadow decal (the blobs under the cars and the people): the node itself
     doc, _ = read_glb(export(p3d(decal, mesh("vehicleShadowDecalShape", shader=name)))[0])
     assert node_named(doc, "vehicleShadowDecalShape")["extras"] == {"shadowDecal": True}
@@ -2214,14 +2225,15 @@ def test_the_blender_scene_handles_unlit_materials_too(monkeypatch):
 # distances, far-away stand-ins and the subtracting surfaces (the clean-room spec
 # docs/cleanroom/SPEC-003-props-zones-xbox-blending.md)
 
-def door_prop(open_name="open"):
+def door_prop(open_name="open", props=(), state_props=None):
     """A door whose states are idle, opening, closing and open, in that order: shut in idle and opening, open in
     the other two."""
     rig = skeleton("door", [("door", 0, (0, 0, 0)), ("doorShut", 0, (0, 0, 0)), ("doorOpen", 0, (0, 0, 0))])
     shut, opened = [("doorShutShape", True), ("doorOpenShape", False)], [("doorShutShape", False), ("doorOpenShape", True)]
     return p3d(rig, mesh("doorShutShape"), mesh("doorOpenShape"),
                composite("door", "door", [("doorShutShape", 1, 1), ("doorOpenShape", 1, 2)]),
-               state_prop("door", [("idle", shut), ("opening", shut), ("closing", opened), (open_name, opened)]),
+               state_prop("door", [("idle", shut), ("opening", shut), ("closing", opened), (open_name, opened)], props,
+                          state_props),
                chunk(0x8800005, text("door") + text("door")))
 
 
@@ -2350,3 +2362,51 @@ def test_darkening_subtracts_and_exports_made_before_are_made_again(monkeypatch,
     assert G.EXPORT_VERSION > 8 and not BX.city_current(tmp_path)          # made with the multiplying darkening
     (tmp_path / "made_by.txt").write_text(str(G.EXPORT_VERSION), encoding="utf-8")
     assert BX.city_current(tmp_path)
+
+
+# --------------------------------------------------------------------------- a prop's own properties in the exports
+# (SPEC-003, work item 8)
+
+DOOR_PROPERTIES = [("type", "Door"), ("visibility", "Medium"), ("class", "ChainLinkGate"), ("mass", " 50.0")]
+
+
+def test_placed_props_carry_their_own_properties():
+    damaged = {"closing": [("percent_damaged", "40")]}                 # a state's own: not carried
+    shell = area("w_a_shell", objects=[("door", [record(1.0, 0.0, 1.0), record(2.0, 0.0, 1.0)[:11] + [8]])])
+    glb, _report = export(shell, lib=[("x_region_D.p3d", door_prop("Open", DOOR_PROPERTIES, damaged))], map_mode=True)
+    doc, binc = read_glb(glb)
+    check_references(doc, binc)
+    want = {"type": "Door", "visibility": "Medium", "class": "ChainLinkGate", "mass": " 50.0"}   # texts as the file has them
+    first, opened = (doc["nodes"][c]["extras"] for c in node_named(doc, "main0 instances")["children"])
+    assert first == {"properties": want} and opened == {"state": "Open", "properties": want}
+    # what Blender's glTF importer makes custom properties of: a group of texts under "properties"
+    assert all(isinstance(k, str) and isinstance(v, str) for k, v in first["properties"].items())
+    # a prop with nothing but its name: no properties
+    glb, _report = export(area("w_a_shell", objects=[("bin", [record(1.0, 0.0, 1.0)])]), lib=[("x_region_D.p3d", bin_prop())],
+                          map_mode=True)
+    doc, _ = read_glb(glb)
+    assert "extras" not in doc["nodes"][node_named(doc, "main0 instances")["children"][0]]
+
+
+def test_a_props_file_opened_alone_has_its_properties_on_its_top_node():
+    doc, _ = read_glb(export(door_prop(props=DOOR_PROPERTIES))[0])
+    tops = {doc["nodes"][i]["name"]: doc["nodes"][i] for i in doc["scenes"][0]["nodes"]}
+    assert tops["door"]["extras"] == {"properties": dict(DOOR_PROPERTIES)}
+    assert "extras" not in tops["door (closing)"] and "extras" not in tops["door (open)"]    # its later looks: as before
+    assert "extras" not in node_named(read_glb(export(bin_prop())[0])[0], "bin")
+
+
+def test_a_props_own_properties():
+    kids = (prop_property("name", "gate") + prop_property("sway", "Normal") + prop_property("", "odd")
+            + prop_property("sway", "Extreme") + chunk(0x0802000E, text("idle") + bytes(40), prop_property("collision_on", "1")))
+    data = p3d(chunk(0x0802000D, struct.pack("<I", 4) + text("gate") + text("gate") + struct.pack("<II", 1, 4), kids))
+    c = G.p3d.read_tree(data)[0]
+    # name left out; an empty name kept as the file has it; the first of two the same; the state's own left out
+    assert G.prop_properties(data, c) == {"sway": "Normal", "": "odd"}
+
+
+def test_a_city_from_before_the_properties_is_made_again(monkeypatch, tmp_path):
+    import blender_export as BX
+    monkeypatch.delenv(G.LOOK_ENV, raising=False)
+    (tmp_path / "made_by.txt").write_text("9", encoding="utf-8")
+    assert G.EXPORT_VERSION == 10 and not BX.city_current(tmp_path)
