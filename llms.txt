@@ -18,7 +18,7 @@ the clean-room rule for outside research).
 - [Clean-room specs](docs/cleanroom): lights, sky, streaming (001); materials, sea, shadows (002); props, zones,
   blending (003); Xbox functions, archive names (004); animation playback, drawing a frame, renderer classes (005);
   lights per object, placed props at run time, the reflection, the name key (006)
-- [Function guide](docs/function_guide.json): about 570 functions (Xbox and PC) with what each does
+- [Function guide](docs/function_guide.json): about 820 functions (Xbox and PC) with what each does
 - [Contributing](docs/CONTRIBUTING.md)
 
 ## Data

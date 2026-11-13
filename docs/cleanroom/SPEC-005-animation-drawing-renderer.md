@@ -308,8 +308,10 @@ sorting.
 **[checked on the Xbox]** The Xbox's draw-list constructor is `sub_00045510` (466 bytes): it allocates the
 84 list heads (0x3F0 bytes) and steps through its entries 0x70 bytes at a time. Its table slots are the PC's:
 `renderer::Display_List::vfunc_07` adds a container, `vfunc_08` adds one piece to its list (§3.2), `vfunc_09`
-draws the frame (§3.3), `vfunc_03` is the deleting destructor. The order of §3.3 has not been compared with
-`vfunc_09` *(check)*.
+draws the frame (§3.3), `vfunc_03` is the deleting destructor. In `vfunc_09` (2,649 bytes) the Xbox draws
+some lists directly (52 and 53 early, then 49, 51, 55 and 56 near the end) and the rest through helper
+functions, and it has the indoor/outdoor group (B) of §3.3 in two places, as the PC does; which helper draws
+which list, and so the full order, *(check)*.
 
 ### 4.3 The kinds of renderable
 
