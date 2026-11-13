@@ -354,12 +354,115 @@ def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[t
 
 HAND = "right_hand_attach"             # the joint a person's weapon hangs on
 # A weapon's model has its grip at its own origin, its barrel along its own forward axis (its muzzle joint
-# says so) and its top upwards. In the hand it lies another way round: the barrel along the hand joint's
-# sideways axis, towards the fingers, and its top along the joint's forward axis. Measured from the
-# cutscenes: someone with a rifle keeps the other hand a fixed 0.34 m along that sideways axis from the hand
-# joint (a rifle's length from grip to handguard), and through every rifle scene looked at, "up" in the
-# world is close to the joint's forward axis.
-GRIP = (0.5, -0.5, -0.5, 0.5)                                    # as glTF's rotation
+# says so) and its top upwards. A handgun hangs on the hand joint just as its model lies. A long gun lies
+# another way round: the barrel along the hand joint's sideways axis, towards the fingers, and its top
+# along the joint's forward axis. Measured from the cutscenes: someone with a rifle keeps the palm of the
+# other hand a fixed 0.28 to 0.43 m along that sideways axis from the hand joint (a rifle's length from grip
+# to handguard), with the world's "up" close to the joint's forward axis; someone with a pistol brings the
+# joint's forward axis, not its sideways one, to bear on the people around.
+GRIP = (0.5, -0.5, -0.5, 0.5)                                    # a long gun's turn, as glTF's rotation
+LONG = 0.45                            # metres from grip to muzzle: from here on a gun takes both hands
+OTHER_HAND = "left_hand_attach"        # the palm of the other hand, when it hangs on the wrist
+FRONT = 0.45                           # how far along grip-to-muzzle the other hand holds a long gun
+REACH = (0.15, 0.6)                    # how far apart two hands on one gun can be, metres
+STEADY = 0.97                          # how alike the directions to the other hand must be (1: always one)
+NUDGE = 30.0                           # the most the gun is turned to meet the other hand, degrees
+
+
+def _qmul(a: Sequence[float], b: Sequence[float]) -> Tuple[float, float, float, float]:
+    ax, ay, az, aw = a
+    bx, by, bz, bw = b
+    return (aw * bx + ax * bw + ay * bz - az * by, aw * by - ax * bz + ay * bw + az * bx,
+            aw * bz + ax * by - ay * bx + az * bw, aw * bw - ax * bx - ay * by - az * bz)
+
+
+def _qturn(q: Sequence[float], v: Sequence[float]) -> Tuple[float, float, float]:
+    x, y, z, w = q
+    tx, ty, tz = 2 * (y * v[2] - z * v[1]), 2 * (z * v[0] - x * v[2]), 2 * (x * v[1] - y * v[0])
+    return (v[0] + w * tx + y * tz - z * ty, v[1] + w * ty + z * tx - x * tz, v[2] + w * tz + x * ty - y * tx)
+
+
+def _unit(v: Sequence[float]) -> Tuple[float, float, float]:
+    n = math.sqrt(sum(c * c for c in v)) or 1.0
+    return (v[0] / n, v[1] / n, v[2] / n)
+
+
+def _muzzle(doc: dict, grip: int) -> Optional[Tuple[float, float, float]]:
+    """Where a held weapon's muzzle is from its grip (the weapon's own muzzle_position joint), or None."""
+    todo = list(doc["nodes"][grip].get("children", []))
+    while todo:
+        n = doc["nodes"][todo.pop()]
+        if n.get("name", "").lower() == "muzzle_position" and "translation" in n:
+            return tuple(n["translation"])
+        todo += n.get("children", [])
+    return None
+
+
+def other_hand(doc: dict, copy: G.SkeletonCopy, keys: Dict[str, Dict[str, Tuple[List[float], List[tuple]]]],
+               length: float, muzzle: Sequence[float]) -> Optional[Tuple[float, float, float, float]]:
+    """The turn that lays a long gun in both hands, or None to leave it as GRIP has it. Through the
+    animation (keys, length seconds), where the other palm is from the gun hand's joint, in that joint's
+    own frame: when it stays one direction, a rifle's hold away, the gun is turned the little it takes for
+    its handguard to meet that palm."""
+    hand, palm = copy.nodes.get(HAND), copy.nodes.get(OTHER_HAND)
+    if hand is None or palm is None:
+        return None
+    nodes = doc["nodes"]
+    parent = {c: i for i in copy.order for c in nodes[i].get("children", [])}
+    names = {v: k for k, v in copy.nodes.items()}
+    if names.get(parent.get(palm, -1)) != "wrist_l":         # in some skeletons it hangs on nothing
+        return None
+
+    def local(i: int, t: float):
+        mine = keys.get(names.get(i, ""), {})
+        n = nodes[i]
+        at = n.get("translation", (0.0, 0.0, 0.0))
+        turn = n.get("rotation", (0.0, 0.0, 0.0, 1.0))
+        if "translation" in mine:
+            times, values = mine["translation"]
+            k = max(0, min(len(times) - 1, bisect.bisect_right(times, t) - 1))
+            at = values[k]
+        if "rotation" in mine:
+            times, values = mine["rotation"]
+            k = max(0, min(len(times) - 1, bisect.bisect_right(times, t) - 1))
+            turn = values[k]
+        return at, turn
+
+    def world(i: int, t: float):
+        chain = [i]
+        while chain[-1] in parent:
+            chain.append(parent[chain[-1]])
+        at, turn = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0)
+        for k in reversed(chain):
+            a, q = local(k, t)
+            moved = _qturn(turn, a)
+            at, turn = (at[0] + moved[0], at[1] + moved[1], at[2] + moved[2]), _qmul(turn, q)
+        return at, turn
+
+    total = [0.0, 0.0, 0.0]
+    count = 16
+    for k in range(count):
+        t = length * k / (count - 1)
+        (ha, hq), (pa, _pq) = world(hand, t), world(palm, t)
+        away = (pa[0] - ha[0], pa[1] - ha[1], pa[2] - ha[2])
+        far = math.sqrt(sum(c * c for c in away))
+        if not REACH[0] <= far <= REACH[1]:
+            return None
+        seen = _unit(_qturn((-hq[0], -hq[1], -hq[2], hq[3]), away))
+        total = [a + b for a, b in zip(total, seen)]
+    if math.sqrt(sum(c * c for c in total)) / count < STEADY:
+        return None
+    want = _unit(total)
+    # where the handguard is from the grip: part of the way to the muzzle, a little under the barrel
+    front = _unit(_qturn(GRIP, (muzzle[0] * FRONT, muzzle[1] - 0.05, muzzle[2] * FRONT)))
+    dot = max(-1.0, min(1.0, sum(a * b for a, b in zip(front, want))))
+    if math.degrees(math.acos(dot)) > NUDGE or dot > 0.99999:
+        return None
+    axis = _unit((front[1] * want[2] - front[2] * want[1], front[2] * want[0] - front[0] * want[2],
+                  front[0] * want[1] - front[1] * want[0]))
+    half = math.acos(dot) / 2
+    nudge = (axis[0] * math.sin(half), axis[1] * math.sin(half), axis[2] * math.sin(half), math.cos(half))
+    return _qmul(nudge, GRIP)
 
 
 class Ground:
@@ -670,13 +773,19 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         went_in.append(label)
         nodes.append(spot)
         hand = copy.nodes.get(HAND)
+        gripped = None                                       # a long gun in hand: (its grip's node, its muzzle)
         if who in script.holds and hand is not None:
             guns = source("weapons", "")
             names = [G.chunk_name(guns.data, c) for c in guns.chunks if c.id == G.COMPOSITE] if guns else []
             wanted = weapon_model(script.holds[who], names)
             gref = lib.find("composite", wanted, (guns,)) if wanted and guns else None
             if gref:
-                b.composite(gref, b.g.node(label + "'s grip", hand, rotation=list(GRIP)), label + "'s " + wanted)
+                grip = b.g.node(label + "'s grip", hand)
+                b.composite(gref, grip, label + "'s " + wanted)
+                muzzle = _muzzle(b.g.doc, grip)
+                if muzzle is None or math.sqrt(sum(c * c for c in muzzle)) >= LONG:
+                    b.g.doc["nodes"][grip]["rotation"] = list(GRIP)        # a long gun (or a pipe, a machete)
+                    gripped = (grip, muzzle)
             else:
                 left_out.append(label + "'s " + WEAPON.sub("", script.holds[who]))
         if who in script.faces:                              # the lips, brows and eyelids
@@ -690,6 +799,10 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         if anim:
             keys, ran = _joint_keys(_pieces(b, anim))
             length = max(length, ran)
+            if gripped and gripped[1] is not None:           # in both hands, when the other one is there
+                both = other_hand(b.g.doc, copy, keys, ran, gripped[1])
+                if both:
+                    b.g.doc["nodes"][gripped[0]]["rotation"] = list(both)
             for joint, paths in keys.items():
                 node = copy.nodes.get(joint)
                 if node is not None:

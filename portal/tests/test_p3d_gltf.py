@@ -2551,3 +2551,20 @@ def test_a_cutscene_opened_in_blender_leaves_its_measurements_beside_it():
     compile(script, "open_in_blender.py", "exec")
     assert "def measure(scene):" in script and '".check.json"' in script and "measure(scene)" in script
 
+
+def test_a_joint_named_twice_on_one_point_is_one_weight():
+    """Some points name a joint twice (most of its pull, then a sliver more). Blender keeps only the last weight
+    it reads for a joint, so the point would follow its other joint and tear away: one entry per joint."""
+    rig = skeleton("rig", [("Root", 0, (0, 0, 0)), ("Hip", 0, (0, 1.0, 0.5))])
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    # one joint gets 0.6 and, further along, 0.1 more; the other 0.3
+    skin = skin_chunk(tri, [0, 1, 2], [(0.6, 0.3, 0.1)] * 3, [0x00010001] * 3, [1, 0])
+    glb, _ = export(p3d(rig, skin))
+    doc, binc = read_glb(glb)
+    node = next(n for n in doc["nodes"] if n.get("skin") == 0)
+    prim = doc["meshes"][node["mesh"]]["primitives"][0]
+    joints = values(doc, binc, prim["attributes"]["JOINTS_0"])
+    weights = values(doc, binc, prim["attributes"]["WEIGHTS_0"])
+    assert sorted(joints[0][:2]) == [0, 1] and joints[0][2:] == (0, 0)             # each joint once
+    assert weights[0] == pytest.approx((0.7, 0.3, 0.0, 0.0))                          # the two shares added up
+

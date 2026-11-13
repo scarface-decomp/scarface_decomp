@@ -1,5 +1,6 @@
 """A cutscene with everybody in it (cutscene.py): the script's cast, their places, the pieces of animation."""
 import json
+import math
 import struct
 
 import pytest
@@ -338,3 +339,42 @@ def test_a_cue_with_a_place_of_its_own_is_where_the_camera_moves_from():
     assert script.origin == ((-3411.0, 20.0, -1704.0), 90.0) and C.where(script, []) == (-3411.0, -1704.0)
     plain = C.read_script(cue.replace("-3411", "0").replace("-1704", "0"))
     assert plain.origin is None                                                # at the map's origin: the keys are the place
+
+
+def _two_hands(palm_at=(-0.33, 0.06, 0.03), palm_on="wrist_l"):
+    doc = {"nodes": [
+        {"name": "Root", "children": [1, 2] + ([4] if palm_on != "wrist_l" else [])},
+        {"name": "Wrist_R", "translation": [0.3, 1.2, 0.0], "children": [3]},
+        {"name": "Wrist_L", "translation": [0.0, 0.0, 0.0], "children": [4] if palm_on == "wrist_l" else []},
+        {"name": "right_hand_attach", "translation": [0.0, 0.0, 0.0]},
+        {"name": "left_hand_attach", "translation": [0.3 + palm_at[0], 1.2 + palm_at[1], palm_at[2]]}]}
+    copy = G.SkeletonCopy("rig", {"root": 0, "wrist_r": 1, "wrist_l": 2, "right_hand_attach": 3, "left_hand_attach": 4},
+                          [0, 1, 2, 3, 4], [])
+    return doc, copy
+
+
+def test_a_long_gun_is_laid_into_the_other_hand():
+    """Where the other palm stays one direction from the gun hand, a rifle's hold away, the gun is turned the
+    little it takes for its handguard to meet it; otherwise it keeps the turn every long gun gets."""
+    muzzle = (0.0, 0.06, 0.68)
+    doc, copy = _two_hands()
+    turn = C.other_hand(doc, copy, {}, 5.0, muzzle)
+    assert turn is not None and turn != pytest.approx(C.GRIP)
+    handguard = C._unit(C._qturn(turn, (0.0, 0.06 - 0.05, 0.68 * C.FRONT)))
+    assert handguard == pytest.approx(C._unit((-0.33, 0.06, 0.03)), abs=1e-6)          # it points at the palm
+    assert C._qturn(turn, (0.0, 1.0, 0.0))[2] > 0.9                                    # and its top is still up
+    assert C.other_hand(*_two_hands(palm_on="root"), {}, 5.0, muzzle) is None          # a palm hung on nothing
+    assert C.other_hand(*_two_hands(palm_at=(-0.9, 0.0, 0.0)), {}, 5.0, muzzle) is None        # too far to be on the gun
+    assert C.other_hand(*_two_hands(palm_at=(0.0, -0.3, 0.0)), {}, 5.0, muzzle) is None        # nowhere near the barrel's line
+    half = math.sqrt(0.5)                                                              # a hand that swings about: not a hold
+    swing = {"wrist_r": {"rotation": ([0.0, 2.5, 5.0], [(0, 0, 0, 1), (0, half, 0, half), (0, 1, 0, 0)])}}
+    assert C.other_hand(doc, copy, swing, 5.0, muzzle) is None
+
+
+def test_handguns_hang_as_their_model_lies_and_long_guns_are_turned():
+    grip = {"name": "grip", "children": [1]}
+    for reach, long in ((0.22, False), (0.44, False), (0.45, True), (0.68, True)):
+        doc = {"nodes": [dict(grip), {"name": "colt", "children": [2]}, {"name": "muzzle_position", "translation": [0.0, 0.07, reach]}]}
+        m = C._muzzle(doc, 0)
+        assert (math.sqrt(sum(c * c for c in m)) >= C.LONG) is long
+    assert C._muzzle({"nodes": [{"name": "grip", "children": [1]}, {"name": "pipe"}]}, 0) is None
