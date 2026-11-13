@@ -692,14 +692,26 @@ the areas when `Common.p3d` is among the copied files: the weather's sky, centre
 what the areas fill, at height 0) and made big enough to reach a tenth past the city's farthest corner, and
 never smaller than the game's twice. The game doesn't do that: it moves the sky with the camera, so the sky
 is always round the viewer, and a scene has no camera to follow. The sky's top node says so in its extras
-(`"followsCamera": true`). The city export is at no hour and in clear weather unless the request to the
-portal gives an `hour` and a `weather` (the page doesn't ask for them yet). Without an hour the sky is as
-stored, with `PTRN_sky` to play the day. With an hour, the sky is posed and coloured for it, and every file of
-the city carries that hour's fog, from the copied `miami_lod.p3d` and `scriptc/graphanims.cso` (or the
-scripts copied out into `binaries/scripts_and_data/`). The export's status says when there is no sky or no
-fog, and why. **Open in Blender** reads the first fog among the files it imports and shows it as the world's
-mist: from the fog's start, over the distance to its end, fading in a straight line, with the Mist pass on;
-the world's colour is the fog colour, turned from the game's screen colours into Blender's linear ones.
+(`"followsCamera": true`). Beside **Export the city** the page asks for two things, kept for next time with
+its other settings:
+
+* **Time of day**: **As stored** (no hour, as before) or a whole hour from midnight to midnight (0 to 24),
+  sent to the portal as `hour`. Without an hour the sky is as stored, with `PTRN_sky` to play the day. With an
+  hour, the sky is posed and coloured for it, and every file of the city carries that hour's fog, from the
+  copied `miami_lod.p3d` and `scriptc/graphanims.cso` (or the scripts copied out into
+  `binaries/scripts_and_data/`).
+* **Weather**: **Clear** (as the game starts) or **Rain**, sent as `weather`: the rain sky and, with an hour,
+  the rain's fog.
+
+The export's status says the time of day and the weather, and when there is no sky or no fog, and why. Every
+export makes all the areas and the sky again, and a finished one keeps the hour and weather it was made at
+in `made_with.json` beside them (an export stopped part-way leaves a mix, so none). When the city in the
+folder is at another time or weather than the one picked, the page says that **Open the whole city in
+Blender** opens it that way until it is exported again. A `.blend` saved earlier is opened only when it is
+newer than every `.glb`, so after an export the city is brought in afresh. **Open in Blender** reads the
+first fog among the files it imports and shows it as the world's mist: from the fog's start, over the
+distance to its end, fading in a straight line, with the Mist pass on; the world's colour is the fog colour,
+turned from the game's screen colours into Blender's linear ones.
 
 A mesh with a [draw-order key](#the-draw-order-key-and-the-sky) carries it in its extras
 (`{"drawOrder": 0.3}`), clamped to 0..1 as the game does.

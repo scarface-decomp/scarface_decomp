@@ -116,16 +116,17 @@ def test_the_speed_switches_are_kept(tmp_path, monkeypatch):
     server = importlib.import_module("decomp_portal_server")
     monkeypatch.setattr(server, "SPEED_FILE", tmp_path / "portal_speed.json")
     sent = []
+    CITY = {"city_hour": None, "city_weather": "clear"}             # the city for Blender: as stored, clear
 
     class Fake:
         def _json(self, obj, code=200):
             sent.append((code, obj))
-    assert server.speed_settings() == {"cores": True, "gpu": True, "xbox_look": False, "fps": 30}    # the look is off to start with
+    assert server.speed_settings() == {"cores": True, "gpu": True, "xbox_look": False, "fps": 30, **CITY}    # the look is off to start with
     server.Handler.post_game_files_speed(Fake(), {"use_cores": False})
-    assert sent[-1][1]["use_cores"] is False and server.speed_settings() == {"cores": False, "gpu": True, "xbox_look": False, "fps": 30}
+    assert sent[-1][1]["use_cores"] is False and server.speed_settings() == {"cores": False, "gpu": True, "xbox_look": False, "fps": 30, **CITY}
     assert server.GAME_FILES.use_cores() is False and server.BLENDER.use_cores() is False
     server.Handler.post_game_files_speed(Fake(), {"use_gpu": False, "use_cores": "yes"})   # not a yes/no: kept
-    assert server.speed_settings() == {"cores": False, "gpu": False, "xbox_look": False, "fps": 30} and server.MOVIES_JOB.use_gpu() is False
+    assert server.speed_settings() == {"cores": False, "gpu": False, "xbox_look": False, "fps": 30, **CITY} and server.MOVIES_JOB.use_gpu() is False
     # Xbox tones for the PC's textures: kept with the others, and handed to the exporter (and the helper
     # processes it starts) through the environment
     monkeypatch.delenv(server.BX.P3G.LOOK_ENV, raising=False)

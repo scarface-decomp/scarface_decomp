@@ -32,7 +32,7 @@ def server():
 
 
 GF_FLAGS = ("gf_missing", "gf_interrupted", "no_blender", "no_ffmpeg", "model_error", "partial_city", "cant_show", "bad_glb",
-            "porting")
+            "porting", "no_fog")
 
 
 def reset(lease_sec=900, no_login=False, legacy_claim=False, dme_browser_fail=False, **delays):
@@ -942,6 +942,77 @@ def test_blender_version_is_picked_beside_the_tools_and_says_what_each_has(page)
         assert page.is_hidden("#gfb-city")
 
 
+def test_the_city_at_a_time_of_day_in_a_weather(page):
+    """Beside Export the city: a time of day (As stored, or a whole hour from midnight to midnight) and a weather.
+    As stored sends no hour; the status says the time and weather, with the export's notes (no fog, and why);
+    the choice is kept for next time; and a city exported at another time says that Open opens it that way."""
+    reset(no_fog=True)
+    _gf_copied(page)
+    page.wait_for_selector("#gfb-tools:not([hidden])")
+    hours = page.eval_on_selector_all("#gfb-city-hour option", "os => os.map(o => [o.value, o.textContent])")
+    assert hours[0] == ["", "As stored"] and [v for v, _t in hours[1:]] == [str(h) for h in range(25)]
+    named = dict(hours)
+    assert (named["6"], named["12"], named["18"], named["23"]) == ("6 a.m.", "noon", "6 p.m.", "11 p.m.")
+    assert named["0"].startswith("midnight") and named["24"].startswith("midnight") and named["0"] != named["24"]
+    assert page.eval_on_selector_all("#gfb-city-weather option", "os => os.map(o => [o.value, o.textContent])") == \
+        [["clear", "Clear"], ["rain", "Rain"]]
+    assert page.input_value("#gfb-city-hour") == "" and page.input_value("#gfb-city-weather") == "clear"
+    assert "Export the city again after changing these" in page.text_content("#gfb-city-look-note")
+
+    def export():
+        page.click("#gfb-city")
+        page.wait_for_selector("#gfb-city-stop:not([hidden])")
+        page.wait_for_function("document.getElementById('gfb-city-status').textContent.includes('3 areas written')",
+                               timeout=10000)
+        return [c[1] for c in calls("/api/game-files/blender") if "version" in (c[1] or {})][-1]
+
+    sent = export()                                                            # as before: no hour
+    assert "hour" not in sent and sent["weather"] == "clear"
+    status = page.text_content("#gfb-city-status")
+    assert status.endswith("MB), with the sky as stored, in clear weather.") and "No fog" not in status
+    assert page.text_content("#gfb-city-made") == ""
+
+    page.select_option("#gfb-city-hour", "18")
+    page.select_option("#gfb-city-weather", "rain")
+    page.wait_for_timeout(200)
+    kept = calls("/api/game-files/speed")[-1][1]                               # kept with the other settings
+    assert (kept["city_hour"], kept["city_weather"]) == (18, "rain")
+    assert page.text_content("#gfb-city-made") == (
+        "The city was exported with the sky as stored, in clear weather, and Open the whole city in Blender opens it "
+        "that way. To have it at 6 p.m. in the rain, press Export the city again.")
+    page.click("#gfb-city")
+    page.wait_for_function("document.getElementById('gfb-city-status').textContent.startsWith('Exporting')")
+    assert " at 6 p.m. in the rain: " in page.text_content("#gfb-city-status")
+    assert page.text_content("#gfb-city-made") == ""                           # nothing to open while it runs
+    page.wait_for_function("document.getElementById('gfb-city-status').textContent.includes('3 areas written')",
+                           timeout=10000)
+    sent = [c[1] for c in calls("/api/game-files/blender") if "version" in (c[1] or {})][-1]
+    assert sent["hour"] == 18 and sent["weather"] == "rain"
+    status = page.text_content("#gfb-city-status")
+    assert "MB), at 6 p.m. in the rain. No fog: the game's script scriptc/graphanims.cso isn't among the copied files." \
+        in status
+    assert page.text_content("#gfb-city-made") == ""                           # the city is as picked
+
+    page.reload()                                                              # next visit: the same choice
+    wait_until_loaded(page)
+    page.wait_for_function("document.getElementById('gfb-city-hour').value === '18'")
+    assert page.input_value("#gfb-city-weather") == "rain"
+    page.wait_for_function("document.getElementById('gfb-city-status').textContent.includes('at 6 p.m. in the rain')")
+    page.select_option("#gfb-city-hour", "0")                                  # midnight is an hour too: sent
+    page.wait_for_function("document.getElementById('gfb-city-made').textContent.includes('To have it at midnight in the rain')")
+    assert "exported at 6 p.m. in the rain" in page.text_content("#gfb-city-made")
+    sent = export()
+    assert sent["hour"] == 0 and sent["weather"] == "rain"
+    assert "at midnight in the rain" in page.text_content("#gfb-city-status")
+    page.select_option("#gfb-city-hour", "")
+    page.wait_for_timeout(200)
+    assert calls("/api/game-files/speed")[-1][1]["city_hour"] is None
+    assert "To have it with the sky as stored, in the rain" in page.text_content("#gfb-city-made")
+    page.click("#gfb-city-blender")                                            # opens what is in the folder
+    page.wait_for_function("document.getElementById('gfb-city-bl-status').textContent.includes('bringing in 3 areas')")
+    assert set(calls("/api/game-files/open-in-blender")[-1][1]) == {"version", "city"}
+
+
 def test_no_blender_button_for_a_file_this_copy_cant_show(page):
     reset(cant_show=True)
     _gf_copied(page)
@@ -1027,7 +1098,8 @@ def test_game_files_speed(page):
     assert page.is_checked("#gf-use-cores") and page.is_checked("#gf-use-gpu")
     page.uncheck("#gf-use-cores")
     page.wait_for_timeout(200)
-    assert calls("/api/game-files/speed")[-1][1] == {"use_cores": False, "use_gpu": True, "xbox_look": False, "fps": 30}
+    assert calls("/api/game-files/speed")[-1][1] == {"use_cores": False, "use_gpu": True, "xbox_look": False, "fps": 30,
+                                                     "city_hour": None, "city_weather": "clear"}
 
 
 def test_game_files_stop(page):

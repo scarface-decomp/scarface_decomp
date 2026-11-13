@@ -232,7 +232,9 @@ through, with nothing to install. **Open in Blender** starts your Blender with a
 `.blend`): characters with their skeletons, skin weights and the game's animations, cameras with their
 moves, guns, cars with their moving parts, and map areas with the trees, lamps and benches the game places
 on them, as the game first shows them, on any version. The **In Blender** box does a whole map area at
-once, or the whole city into `extracted/blender/`, one file per area, then opens it all as one scene;
+once, or the whole city into `extracted/blender/`, one file per area, then opens it all as one scene. For
+the city you pick a **Time of day** (**As stored**, or an hour from midnight to midnight: the sky's colours
+and the fog of that hour) and a **Weather** (**Clear** or **Rain**); export the city again after changing them.
 `portal/tools/p3d_gltf.py` does it from the command line
 ([FORMATS.md](docs/FORMATS.md#exporting-to-blender)).
 

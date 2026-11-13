@@ -281,3 +281,72 @@ def test_what_reaches_the_generated_files_and_the_feed(S):
     assert "What it does" not in RO._block("xb:0x00011000", dict(e, what=""))
     assert "<summary>Turns the car&apos;s lights on 0x00011000" in RO.feed_xml({"entries": {"xb:0x00011000": e}}) or \
         "<summary>Turns the car's lights on 0x00011000" in RO.feed_xml({"entries": {"xb:0x00011000": e}})
+
+
+# --------------------------------------------------------------------------- the city for Blender
+
+class _Replies:
+    """Just enough of a request handler for the post_* methods: what they answer."""
+    def __init__(self):
+        self.sent = []
+
+    def _json(self, obj, code=200):
+        self.sent.append((code, obj))
+
+
+def test_the_city_export_gets_the_time_of_day_and_weather_the_page_picked(S, monkeypatch):
+    """The page always sends the weather, and an hour only when one is picked: none is the sky as stored,
+    and midnight (0) is an hour like the others."""
+    asked = []
+    monkeypatch.setattr(S.BLENDER, "start", lambda version, index, hour=None, weather="clear":
+                        asked.append((version, hour, weather)) or None)
+    monkeypatch.setattr(S.GAME_FILES, "index", lambda: {})
+    h = _Replies()
+    for body in ({"version": "pc", "weather": "clear"}, {"version": "pc", "hour": 18, "weather": "rain"},
+                 {"version": "pc", "hour": 0, "weather": "clear"}, {"version": "pc", "hour": 24, "weather": "rain"}):
+        S.Handler.post_game_files_blender(h, body)
+        assert h.sent[-1][0] == 200 and h.sent[-1][1]["ok"] is True
+    assert asked == [("pc", None, "clear"), ("pc", 18.0, "rain"), ("pc", 0.0, "clear"), ("pc", 24.0, "rain")]
+    S.Handler.post_game_files_blender(h, {"version": "pc", "hour": "six", "weather": "rain"})
+    assert h.sent[-1] == (400, {"ok": False, "error": "The hour is from 0 to 24."}) and len(asked) == 4
+
+
+def test_the_city_export_says_when_the_hour_or_weather_cant_be(S, monkeypatch):
+    """The real job's answers reach the page as errors, and nothing starts."""
+    monkeypatch.setattr(S.BLENDER, "busy", lambda: "")
+    monkeypatch.setattr(S.GAME_FILES, "index", lambda: {})
+    h = _Replies()
+    S.Handler.post_game_files_blender(h, {"version": "pc", "hour": 25})
+    assert h.sent[-1] == (400, {"ok": False, "error": "The hour is from 0 to 24."})
+    S.Handler.post_game_files_blender(h, {"version": "pc", "weather": "snow"})
+    assert h.sent[-1] == (400, {"ok": False, "error": "The weather is clear or rain."})
+    assert not S.BLENDER.running
+
+
+def test_the_city_time_of_day_and_weather_are_kept_with_the_other_settings(S, monkeypatch, tmp_path):
+    """Like the frames a second and the Xbox tones beside them, the city's time of day and weather are kept
+    for next time; a save of the other switches leaves them, and what isn't a time or a weather is ignored."""
+    monkeypatch.setattr(S, "SPEED_FILE", tmp_path / "portal_speed.json")
+    monkeypatch.setattr(S, "apply_texture_look", lambda on: None)
+
+    def kept():
+        st = S.speed_settings()
+        return st["city_hour"], st["city_weather"]
+    assert kept() == (None, "clear")                                       # nothing kept yet: as stored, clear
+    h = _Replies()
+    S.Handler.post_game_files_speed(h, {"use_cores": True, "use_gpu": True, "xbox_look": False, "fps": 60,
+                                        "city_hour": 18, "city_weather": "rain"})
+    assert h.sent[-1][0] == 200 and (h.sent[-1][1]["city_hour"], h.sent[-1][1]["city_weather"]) == (18, "rain")
+    assert kept() == (18, "rain") and S.speed_settings()["fps"] == 60
+    S.Handler.post_game_files_speed(h, {"use_cores": False})
+    assert kept() == (18, "rain") and S.speed_settings()["cores"] is False
+    S.Handler.post_game_files_speed(h, {"city_hour": 30, "city_weather": "snow"})
+    S.Handler.post_game_files_speed(h, {"city_hour": "dusk", "city_weather": None})
+    S.Handler.post_game_files_speed(h, {"city_hour": True})
+    assert kept() == (18, "rain")
+    S.Handler.post_game_files_speed(h, {"city_hour": 0})
+    assert kept() == (0, "rain")
+    S.Handler.post_game_files_speed(h, {"city_hour": None, "city_weather": "clear"})     # As stored
+    assert kept() == (None, "clear")
+    (tmp_path / "portal_speed.json").write_text('{"city_hour": 99, "city_weather": "fog"}', encoding="utf-8")
+    assert kept() == (None, "clear")

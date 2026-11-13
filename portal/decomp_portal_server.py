@@ -129,14 +129,21 @@ TEXTURE_JOB = TEXTURES.TextureJob(BASE_DIR / "binaries")
 SPEED_FILE = BASE_DIR / "binaries" / "portal_speed.json"
 
 
+def _an_hour(h) -> bool:
+    return isinstance(h, (int, float)) and not isinstance(h, bool) and 0 <= h <= 24
+
+
 def speed_settings() -> dict:
-    """The Speed switches (binaries/portal_speed.json): every processor core, and the graphics card."""
+    """The Speed switches (binaries/portal_speed.json): every processor core, and the graphics card; and the
+    In Blender box's choices: the Xbox tones, frames a second, and the city's time of day (None: as stored) and weather."""
     try:
         d = json.loads(SPEED_FILE.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         d = {}
     return {"cores": d.get("cores") is not False, "gpu": d.get("gpu") is not False, "xbox_look": d.get("xbox_look") is True,
-            "fps": d.get("fps") if d.get("fps") in BX.FRAME_RATES else 30}
+            "fps": d.get("fps") if d.get("fps") in BX.FRAME_RATES else 30,
+            "city_hour": d.get("city_hour") if _an_hour(d.get("city_hour")) else None,
+            "city_weather": "rain" if d.get("city_weather") == "rain" else "clear"}
 
 
 def apply_texture_look(on: bool) -> None:
@@ -2307,7 +2314,8 @@ class Handler(BaseHTTPRequestHandler):
                                "city": dict(BLENDER.status),
                                "city_files": len(list(BLENDER.folder(q1("version")).glob("*.glb")))
                                if q1("version") in GA.LABELS else 0,
-                               "city_current": q1("version") in GA.LABELS and BX.city_current(BLENDER.folder(q1("version")))})
+                               "city_current": q1("version") in GA.LABELS and BX.city_current(BLENDER.folder(q1("version"))),
+                               "city_made": BX.city_made(BLENDER.folder(q1("version"))) if q1("version") in GA.LABELS else None})
         if u.path == "/api/game-files/cutscenes":
             found = BX.cutscenes(GA.out_dir(GAME_FILES.bin_dir), GAME_FILES.index(), q1("version")) \
                 if q1("version") in GA.LABELS else []
@@ -2321,7 +2329,8 @@ class Handler(BaseHTTPRequestHandler):
             card = MOVIES.graphics_card(ffmpeg)
             st = speed_settings()
             return self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "xbox_look": st["xbox_look"],
-                               "fps": st["fps"], "cores": os.cpu_count() or 1,
+                               "fps": st["fps"], "city_hour": st["city_hour"], "city_weather": st["city_weather"],
+                               "cores": os.cpu_count() or 1,
                                "workers": BX.workers_wanted(True), "ffmpeg": ffmpeg is not None,
                                "gpu": card[1] if card else ""})
         if u.path == "/api/game-files/list":
@@ -2879,6 +2888,10 @@ class Handler(BaseHTTPRequestHandler):
                 st[k] = body[field]
         if body.get("fps") in BX.FRAME_RATES:
             st["fps"] = body["fps"]
+        if "city_hour" in body and (body["city_hour"] in (None, "") or _an_hour(body["city_hour"])):
+            st["city_hour"] = body["city_hour"] if _an_hour(body["city_hour"]) else None     # None: as stored
+        if body.get("city_weather") in P3G.WEATHERS:
+            st["city_weather"] = body["city_weather"]
         try:
             SPEED_FILE.parent.mkdir(parents=True, exist_ok=True)
             SPEED_FILE.write_text(json.dumps(st), encoding="utf-8")
@@ -2886,7 +2899,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": f"Couldn't keep the setting: {e}"}, 500)
         apply_texture_look(st["xbox_look"])
         self._json({"ok": True, "use_cores": st["cores"], "use_gpu": st["gpu"], "xbox_look": st["xbox_look"],
-                    "fps": st["fps"]})
+                    "fps": st["fps"], "city_hour": st["city_hour"], "city_weather": st["city_weather"]})
 
     def post_game_files_textures_stop(self, body):
         TEXTURE_JOB.stop()
