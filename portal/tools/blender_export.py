@@ -1490,7 +1490,7 @@ def measure(scene):
     import json
     watch = ("Head", "Jaw", "Wrist_R", "right_hand_attach")
     out = {"blender": bpy.app.version_string, "fps": scene.render.fps, "frames": [scene.frame_start, scene.frame_end],
-           "meshes": [], "joints": [], "parts": [], "sliders": []}
+           "meshes": [], "joints": [], "parts": [], "sliders": [], "points": []}
     for o in scene.objects:
         if o.type == "MESH" and (o.find_armature() is not None or o.parent_bone):
             me = o.data
@@ -1522,6 +1522,16 @@ def measure(scene):
             if o.type == "MESH" and o.data.shape_keys and len(out["sliders"]) < 3000:
                 out["sliders"].append({"frame": f, "name": o.name,
                                        "on": [round(b.value, 3) for b in o.data.shape_keys.key_blocks]})
+                if k in (0, 2, 4) and len(out["points"]) < 12:       # every point of a face, as Blender shows it
+                    shown = o.evaluated_get(bpy.context.evaluated_depsgraph_get())
+                    mesh = shown.to_mesh()
+                    w = shown.matrix_world
+                    out["points"].append({
+                        "frame": f, "name": o.name,
+                        "rest": [[round(v, 4) for v in p.co] for p in o.data.vertices],
+                        "shown": [[round(v, 4) for v in (w @ p.co)] for p in mesh.vertices],
+                        "faces": [list(p.vertices) for p in o.data.polygons]})
+                    shown.to_mesh_clear()
     scene.frame_set(was)
     with open((SAVE or FILES[0]) + ".check.json", "w", encoding="utf-8") as fh:
         json.dump(out, fh)
