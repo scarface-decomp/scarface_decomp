@@ -96,6 +96,7 @@
                    box-shadow: 0 0 14px rgba(234,68,77,0.45);
                    transition: width 1.6s cubic-bezier(.2,.7,.2,1) .9s; }
     .count { margin-top: 16px; font-size: 1.08rem; }
+    .count-extra { margin-top: 6px; font-size: 0.92rem; color: var(--grey); }
     .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 44px; margin-top: 28px; }
     .facts dt { color: var(--grey); font-size: 0.86rem; }
     .facts dd { font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -325,6 +326,7 @@
         <p class="claim" id="claim">The world is <span id="sb-pct">…</span> yours.</p>
         <div class="tube" role="progressbar" aria-label="Share of the game rebuilt" aria-valuemin="0" aria-valuemax="100" id="sb-bar-outer"><span id="sb-bar"></span></div>
         <p class="count"><span id="sb-verified">…</span> of <span id="sb-total">…</span> functions rebuilt so far.</p>
+        <p class="count-extra" id="sb-proto" hidden></p>
 
         <dl class="facts">
           <div><dt>Xbox version</dt><dd id="sb-xb">…</dd></div>

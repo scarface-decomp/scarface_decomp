@@ -519,6 +519,17 @@
     .gf-mode:has(input:checked) { border-color: rgba(234, 68, 77, 0.65); background: rgba(181, 18, 27, 0.08); }
     .gf-mode input { margin-top: 4px; accent-color: var(--blood); }
     .gf-mode b { display: block; font-size: 0.95rem; }
+    .gf-rec { font-style: normal; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent, #EA444D); border: 1px solid currentColor; border-radius: 2px; padding: 1px 6px; margin-left: 8px; vertical-align: 1px; }
+    .setup-list { list-style: none; margin: 0; padding: 0; }
+    .setup-list li { display: grid; grid-template-columns: 22px 1fr; gap: 2px 10px; padding: 10px 0; border-top: 1px solid var(--line, #2a2a2a); font-size: 0.92rem; }
+    .setup-list li:first-child { border-top: 0; }
+    .setup-list .mark { font-weight: 700; }
+    .setup-list li.ok .mark { color: var(--ok, #3fb37f); }
+    .setup-list li.todo .mark { color: var(--error, #EA444D); }
+    .setup-list .t span { color: var(--muted); font-size: 0.82rem; margin-left: 8px; }
+    .setup-list .d { grid-column: 2; color: var(--muted); font-size: 0.84rem; line-height: 1.45; overflow-wrap: anywhere; }
+    .setup-list li.todo .d { color: inherit; }
+    #gfb-scene-find { max-width: 220px; }
     .gf-mode b + span { display: block; font-size: 0.84rem; color: var(--muted); margin-top: 2px; }
     .gf-run { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
     .gf-space { font-size: 0.84rem; color: var(--muted); }
@@ -900,6 +911,14 @@
             </div>
           </div>
 
+          <div class="card" id="setup-card" hidden>
+            <div class="card-hdr">
+              <h3 class="card-title">Setup</h3>
+              <span id="setup-stat" class="hdr-stat">—</span>
+            </div>
+            <ul class="setup-list" id="setup-list"></ul>
+          </div>
+
           <div class="split-2">
             <div class="card">
               <div class="card-hdr">
@@ -991,6 +1010,7 @@
                 <select id="lane-filter" class="input-box" onchange="resetPageAndLoadQueue(true)">
                   <option value="ALL">Everything</option>
                   <option value="GOOD_FIRST" title="Small Xbox and PC functions with a head start: a matched look-alike, matched before, or named">Good first functions</option>
+                  <option value="IN_GUIDE" title="Functions the project's specs describe: what each one does is already written down, with a link to the spec">Described by the specs</option>
                   <option value="Shared Engine">Xbox game (most of the work)</option>
                   <option value="PC Scarface.exe">PC game</option>
                   <option value="PS2 SLUS_211.11">PS2 game (its own compiler, checked through decomp.me)</option>
@@ -1232,14 +1252,14 @@
             <fieldset class="gf-modes-set">
               <legend class="gf-h">Layout</legend>
               <div class="gf-modes">
-              <label class="gf-mode"><input type="radio" name="gf-mode" value="unique" checked onchange="gfChoicesChanged()" />
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="pc" checked onchange="gfChoicesChanged()" />
+                <span><b>The PC first, then what only the others have <em class="gf-rec">Recommended</em></b><span>The whole PC version in <code>PC/</code>, and from the others only what the PC doesn't have: each one's own in its <code>Exclusive to</code> folder, what several of them have once in <code>Not on the PC/</code>. The PC's models and animations are the ones Blender shows best. Unlike No duplicates, the PC's folder is the whole PC game on its own.</span></span></label>
+              <label class="gf-mode"><input type="radio" name="gf-mode" value="unique" onchange="gfChoicesChanged()" />
                 <span><b>No duplicates</b><span>A file that is exactly the same in several versions is copied once, into <code>Shared/</code>. What only one version has gets its own folder, <code>Exclusive to</code> that version. The smallest copy, but no version is in one folder: the PC game is split between <code>Shared/</code> and <code>Exclusive to PC</code>.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="every" onchange="gfChoicesChanged()" />
                 <span><b>Every version complete</b><span>Each version in its own folder with all of its files. Takes the most space.</span></span></label>
               <label class="gf-mode"><input type="radio" name="gf-mode" value="best" onchange="gfChoicesChanged()" />
                 <span><b>Best version of each file</b><span>One copy of everything the versions share, in <code>Best/</code>, the highest quality winning: the PC's 48 kHz sounds, its 1280&times;720 videos, the biggest textures. What only one version has gets its own <code>Exclusive to</code> folder.</span></span></label>
-              <label class="gf-mode"><input type="radio" name="gf-mode" value="pc" onchange="gfChoicesChanged()" />
-                <span><b>The PC first, then what only the others have</b><span>The whole PC version in <code>PC/</code>, and from the others only what the PC doesn't have: each one's own in its <code>Exclusive to</code> folder, what several of them have once in <code>Not on the PC/</code>. The PC's models and animations are the ones Blender shows best. Unlike No duplicates, the PC's folder is the whole PC game on its own.</span></span></label>
               </div>
             </fieldset>
 
@@ -1355,11 +1375,14 @@
             <p class="gf-notes" id="gfb-area-status" role="status" aria-live="polite"></p>
             <h3 class="gf-h">A cutscene</h3>
             <div class="gfb-row">
+              <label class="sr-only" for="gfb-scene-find">Find a cutscene</label>
+              <input type="search" id="gfb-scene-find" class="input-box" placeholder="Find a cutscene…" oninput="fillGfScenes()" autocomplete="off" />
               <label class="sr-only" for="gfb-scene">Cutscene</label>
               <select id="gfb-scene" class="input-box" onchange="updateGfSceneLink()"></select>
               <button type="button" class="btn-sm" id="gfb-scene-view" onclick="gfViewScene()">View here</button>
               <button type="button" class="btn-sm" id="gfb-scene-open" onclick="gfOpenScene()">Open in Blender</button>
               <button type="button" class="btn-sm" id="gfb-scene-dl" onclick="gfDownloadScene()">Download .glb</button>
+              <span class="hdr-stat" id="gfb-scene-count"></span>
             </div>
             <p class="gf-notes" id="gfb-scene-note">Everybody in it, the vehicles and the camera, moving together, on the street or in the room where it happens. Each cutscene is listed once (the game keeps a second copy of each for European televisions), and the ones the game plays straight after one another come as one. In Blender, press Space to play it. View here shows how it starts.</p>
             <div class="gfb-row gfb-pick">
@@ -3670,7 +3693,7 @@
 
   function gfMode() {
     const r = document.querySelector('input[name="gf-mode"]:checked');
-    return r ? r.value : 'unique';
+    return r ? r.value : 'pc';
   }
 
   function gfFolders() {
@@ -3976,24 +3999,58 @@
   }
 
   /* The cutscenes, one entry each: PAL copies left out, the ones the game plays back to back joined. */
+  /* The Dashboard's checklist: what is in place, and for what is missing, what to do about it. */
+  async function loadSetup() {
+    let d;
+    try { d = await apiFetchJson('/api/setup'); } catch (e) { return; }
+    const items = (d && d.items) || [];
+    if (!items.length) return;
+    const list = $('setup-list');
+    list.textContent = '';
+    items.forEach((it) => {
+      const li = el('li', '', it.ok ? 'ok' : 'todo');
+      const mark = el('span', it.ok ? '✓' : '!', 'mark');
+      mark.setAttribute('aria-hidden', 'true');
+      const t = el('span', it.title, 't');
+      t.appendChild(el('span', (it.ok ? 'Ready' : 'Missing') + ' · ' + it.needed));
+      li.appendChild(mark); li.appendChild(t);
+      li.appendChild(el('span', it.ok ? it.note : it.fix, 'd'));
+      list.appendChild(li);
+    });
+    const ready = items.filter((it) => it.ok).length;
+    $('setup-stat').textContent = ready === items.length ? 'All set' : ready + ' of ' + items.length + ' ready';
+    $('setup-card').hidden = false;
+  }
+
+  let GF_SCENES = [];
+  function fillGfScenes() {
+    const sel = $('gfb-scene'), want = $('gfb-scene-find').value.trim().toLowerCase(), keep = sel.value;
+    sel.textContent = '';
+    GF_SCENES.forEach((c) => {
+      const label = c.name + ((c.then || []).length ? ', then ' + c.then.join(', then ') : '');
+      if (want && !label.toLowerCase().includes(want)) return;
+      const o = el('option', label);
+      o.value = c.name;
+      sel.appendChild(o);
+    });
+    if (!sel.options.length) {
+      const o = el('option', GF_SCENES.length ? 'No cutscene with that in its name' : 'No cutscenes copied for this version');
+      o.value = '';
+      sel.appendChild(o);
+    }
+    if (keep && Array.from(sel.options).some((o) => o.value === keep)) sel.value = keep;
+    $('gfb-scene-count').textContent = GF_SCENES.length ? (want ? sel.querySelectorAll('option:not([value=""])').length + ' of ' : '') + GF_SCENES.length + ' cutscenes' : '';
+    updateGfSceneLink();
+  }
+
   async function loadGfScenes(key) {
     const sel = $('gfb-scene');
     let d;
     try { d = await apiFetchJson('/api/game-files/cutscenes?' + new URLSearchParams({ version: GF_TAB }).toString()); }
     catch (e) { d = { cutscenes: [] }; }
     if (GFB_AREAS_FOR !== key) return;
-    sel.textContent = '';
-    (d.cutscenes || []).filter((c) => !c.follows).forEach((c) => {
-      const o = el('option', c.name + ((c.then || []).length ? ', then ' + c.then.join(', then ') : ''));
-      o.value = c.name;
-      sel.appendChild(o);
-    });
-    if (!sel.options.length) {
-      const o = el('option', 'No cutscenes copied for this version');
-      o.value = '';
-      sel.appendChild(o);
-    }
-    updateGfSceneLink();
+    GF_SCENES = (d.cutscenes || []).filter((c) => !c.follows);
+    fillGfScenes();
   }
 
   function updateGfSceneLink() {
@@ -5643,6 +5700,7 @@
       applyCounts(STATE);
       if (STATE.repo_url) applyRepoUrl(STATE.repo_url);
       showBinaryProblems(STATE.binary_problems || {});
+      loadSetup();
       markSourcesDirty();
       renderLeaderboard();
       online = true;
