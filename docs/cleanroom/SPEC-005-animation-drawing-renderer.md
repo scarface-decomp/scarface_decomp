@@ -246,6 +246,16 @@ vtable pointer is at 0.
 
 ### 4.1 `renderer::Renderable` (0x84 bytes), the base of everything drawn
 
+**[checked on the Xbox]** The Xbox's constructor is `sub_00059490` (178 bytes); it agrees with the table below
+field for field. It calls the entity constructor (`sub_00242DA0`), sets the type mask at 0x54 to -1, clears the
+elements at 0x58 and 0x5C, sets the fades at 0x68 to 0x78 to 0, 0, 0, 1, 0 and the scene at 0x7C to 5, turns
+on flags 0x01 and 0x02 at 0x80 (distance test and fading on from the start), takes the next running number from
+the global at `0x0047598C` (skipping -1), makes the matrix at 0x14 the identity (`sub_00242EB0`), shows itself
+through slot 8 (`0x00058520`, which the work queue names `renderer::CharacterRenderable::vfunc_08` because the
+character kind doesn't override it), and sets its number of elements with `sub_00059370` (each element 0x30
+bytes, the three distances and the *fading* byte at 0x2C). `sub_00059290` is the base part of the destructor,
+and `renderer::NISRenderable::vfunc_13` returns the position kept at 0x84, as §4.3 says.
+
 | offset | what |
 | :--- | :--- |
 | 0x04 | reference count |

@@ -1,5 +1,5 @@
 {
- "about": "Xbox functions (default.xbe) the clean-room specs explain, with what each does in plain words. 'name_in_queue' is the work queue's name; 'status' is whether it is in reports/verified_registry.json. Generated from the specs; see docs/AI_GUIDE.md.",
+ "about": "Functions the clean-room specs explain, with what each does in plain words: Xbox (default.xbe) ones by their work-queue name, and PC (Scarface.exe 1.00.2) ones by address, whose Xbox twins do the same unless a spec says otherwise. 'status' is whether it is in reports/verified_registry.json. See docs/AGENTS.md.",
  "functions": [
   {
    "bin": "xb",
@@ -348,7 +348,7 @@
    "va": "0x00058520",
    "name_in_queue": "renderer::CharacterRenderable::vfunc_08",
    "size": 92,
-   "what_it_does": "CharacterRenderable's override: shows or hides the renderable: flag 0x10 at +0x80, and every element's draw-list entries added or removed.",
+   "what_it_does": "The base renderable's show or hide (table slot 8); shared by the kinds that don't override it.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
    "status": "open"
   },
@@ -372,12 +372,39 @@
   },
   {
    "bin": "xb",
+   "va": "0x00059290",
+   "name_in_queue": "sub_00059290",
+   "size": 182,
+   "what_it_does": "The base part of a renderable's destructor.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
    "va": "0x00059350",
    "name_in_queue": "renderer::Renderable::vfunc_03",
    "size": 30,
    "what_it_does": "Destructor (deleting): frees this kind's own drawables, then the base part.",
    "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
    "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00059370",
+   "name_in_queue": "sub_00059370",
+   "size": 284,
+   "what_it_does": "Sets how many elements a renderable has (0x30 bytes each: near, far, fade band, fading byte at 0x2C).",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00059490",
+   "name_in_queue": "sub_00059490",
+   "size": 178,
+   "what_it_does": "Renderable constructor (checked on the Xbox): type mask -1, fades, scene 5, distance test and fading on, a new running number, identity matrix, visible, n elements.",
+   "spec": "docs/cleanroom/SPEC-005-animation-drawing-renderer.md#41-rendererrenderable-0x84-bytes-the-base-of-everything-drawn",
+   "status": "open"
   },
   {
    "bin": "xb",
@@ -543,6 +570,15 @@
   },
   {
    "bin": "xb",
+   "va": "0x00243FA0",
+   "name_in_queue": "sub_00243FA0",
+   "size": 75,
+   "what_it_does": "The game's name key (SPEC-006 section 5): h = (h*65599) & 0x7FFFFFFF, character +0x20 below 'a', XOR; top bit set at the end.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#5-the-games-name-key-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
    "va": "0x00251310",
    "name_in_queue": "sub_00251310",
    "size": 62,
@@ -594,6 +630,3534 @@
    "what_it_does": "A shader's BLMD setting: keeps the blend mode and recomputes the blend mode and alpha reference.",
    "spec": "docs/cleanroom/SPEC-004-xbox-functions.md#21-sub_0029a390-18-bytes-setting-blmd",
    "status": "matched"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00438400",
+   "what_it_does": "An entity's name setter that does nothing (the released game keeps no names).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00441A40",
+   "what_it_does": "Game group constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004453D0",
+   "what_it_does": "Sets one property of a script object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458210",
+   "what_it_does": "Canvas constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004582E0",
+   "what_it_does": "Sets the colour the frame is cleared to.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458300",
+   "what_it_does": "Sets a fog target (colour, start, end, clamp) and how long to move to it; zero time sets it at once.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458390",
+   "what_it_does": "Moves the fog towards its target by frame time / time left (SPEC-005 \u00a74.5).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458620",
+   "what_it_does": "Draws the canvas's scene: steps the fog fade, then draws.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458640",
+   "what_it_does": "Canvas deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004589D0",
+   "what_it_does": "Sets the global draw list (or clears it).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004589E0",
+   "what_it_does": "Draw-list sort comparison by the first sort number only.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458A20",
+   "what_it_does": "Takes every draw-list entry belonging to one membership out of its list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458BA0",
+   "what_it_does": "Tests a box against one occluder.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458BF0",
+   "what_it_does": "Whether a box can be seen past the occluders.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458C60",
+   "what_it_does": "Draw-list membership constructor: empty, flags cleared.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458CC0",
+   "what_it_does": "Draw-list membership destructor: removes its entries, releases its drawable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458D30",
+   "what_it_does": "Draw-list membership copy constructor: copies the owner, the drawable (with a reference) and the visible bit, but not whether it is in a list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458DE0",
+   "what_it_does": "Draw-list membership assignment: as the copy, removing its own entries first.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458E50",
+   "what_it_does": "Gives a membership a new drawable: removes its entries, swaps the drawable (references counted), sets a flag.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458EA0",
+   "what_it_does": "Takes a membership out of the draw lists, if it is in them.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458EC0",
+   "what_it_does": "Sets a membership visible or not; becoming invisible removes it. It never adds itself.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458F00",
+   "what_it_does": "Adds a membership's pieces to the draw lists when it becomes visible, removes them when it stops being.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00458FF0",
+   "what_it_does": "Draw-list sort comparison: first sort number, then depth (far to near).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459060",
+   "what_it_does": "Draw-list sort comparison by shader (groups pieces sharing render settings).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459090",
+   "what_it_does": "Draw-list sort comparison: first sort number, then material.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459120",
+   "what_it_does": "Works out each entry's depth from the camera in one list, before sorting.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004591E0",
+   "what_it_does": "Works out depths for the water-surface list (66).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459260",
+   "what_it_does": "Sorts lists 30, 39, 24 (light-adding).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004592C0",
+   "what_it_does": "Sorts the decal lists 4, 3, 18, 17, 75.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459350",
+   "what_it_does": "Sorts the fading decal lists 5, 6, 19, 20.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004593C0",
+   "what_it_does": "Sorts the underwater lists 78, 80, 79, 81.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459460",
+   "what_it_does": "Sorts lists 29 and 50.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004594B0",
+   "what_it_does": "Sorts lists 37 and 38 far to near.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459500",
+   "what_it_does": "Sorts the shadow-decal lists 7, 8, 77.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459560",
+   "what_it_does": "Sorts the building lists 21, 25, 22, 26, 27, 32, 28, 31, 43, 44, 35, 40.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004596F0",
+   "what_it_does": "Sorts lists 52, 53, 56, 55.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459780",
+   "what_it_does": "Sorts lists 36, 41, 42, 45.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459810",
+   "what_it_does": "Draws list 76: pieces moved with the camera, with their container's fade.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459910",
+   "what_it_does": "Draws one draw list, optionally applying each container's fade to its pieces.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459A00",
+   "what_it_does": "Draws the sky lists 46 and 47 without depth test or depth writes, centred on the camera's ground position; 47 also fades.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459BE0",
+   "what_it_does": "Draws list 58 into depth only (colour writes off), then turns colour back on.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459C80",
+   "what_it_does": "Draws the under-surface water list 65 with two environment colours.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00459F70",
+   "what_it_does": "Draws the water-surface list 66.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A010",
+   "what_it_does": "Draws the stencil shadow volumes (61, 63, 64), darkening with the draw list's shadow colour.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A4C0",
+   "what_it_does": "Draws the instanced trees and bushes of list 72: one pass in the reflection, otherwise two passes.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A620",
+   "what_it_does": "Draws instanced list 74.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A680",
+   "what_it_does": "Draws instanced list 73 in two passes.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A770",
+   "what_it_does": "Draws list 82 with each piece's own light set.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A7F0",
+   "what_it_does": "Draws list 83 with each piece's own light set and its container's fade.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A890",
+   "what_it_does": "Draws list 69 with each piece's own light set.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A910",
+   "what_it_does": "Draws list 71 with own light sets and container fade.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045A9B0",
+   "what_it_does": "Draws list 70 with own light sets and container fade.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045AA50",
+   "what_it_does": "Draws list 67, choosing each piece's light set by whether it is indoors and tinting it.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045AB20",
+   "what_it_does": "Draws list 68 as 67, with container fade.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045AC10",
+   "what_it_does": "Draws the underwater lists 78 and 79.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045AC90",
+   "what_it_does": "Draws the fading underwater lists 80 and 81.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045AD10",
+   "what_it_does": "Sorts every list that changed since the last sort (and works out whether the camera is inside a volume).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045B0C0",
+   "what_it_does": "Frees the draw-list entries whose membership has gone, once a frame.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045B110",
+   "what_it_does": "Whether one draw-list entry is visible: camera view and occluders.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045B240",
+   "what_it_does": "The second pass of the shiny ground lists (15, 13), after the shadow volumes.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045B590",
+   "what_it_does": "Draws the decal lists 3, 17, 18, 4, 75; 18 and 4 are drawn without fog.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045B870",
+   "what_it_does": "Draws the fading decal lists 5, 19, 20, 6.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045BB90",
+   "what_it_does": "The reflection pass, before the main frame: the sky mirrored, then the sky and list 72 into the reflection.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045BCE0",
+   "what_it_does": "Draws the projected shadows (list 62) through the static-shadow extension.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045BF30",
+   "what_it_does": "Draws lists 29 and 50.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045C070",
+   "what_it_does": "Draws lists 26 and 22 (the vertex-coloured, alpha-tested surfaces), fading ones first or last.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045C280",
+   "what_it_does": "Draws list 23 with its container's fade.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045C3C0",
+   "what_it_does": "Draws the unlit see-through lists 38 and 37.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045C590",
+   "what_it_does": "Draws the light-adding lists 39, 30, 24.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045C800",
+   "what_it_does": "Draws the solid building lists 21, 26, 22, 27, 28, 35, 43.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045CAF0",
+   "what_it_does": "Draws the shadow decals (7, 8, 77) with depth writes off.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045CCD0",
+   "what_it_does": "Draws lists 36 and 42 (unlit blended and two-layer).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045CE00",
+   "what_it_does": "Draws the fading lists 41 and 45.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045CFB0",
+   "what_it_does": "Draws the interior floors, lists 33 and 34.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045D140",
+   "what_it_does": "Draws the low-detail skyline, list 59, culling each piece.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045D1F0",
+   "what_it_does": "Draws list 2, the vertex-fade surfaces.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045D360",
+   "what_it_does": "Adds a container to the draw list (table slot 7).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045D3B0",
+   "what_it_does": "Adds one piece of a container to the draw list it belongs in, worked out from its layer, fade, lighting and blending (table slot 8).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045D9A0",
+   "what_it_does": "Draw-list destructor: frees the entries and the lists.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045DA30",
+   "what_it_does": "Draws the night cards, list 12, with container fade.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045DB80",
+   "what_it_does": "Draws the night lights, list 11, with fog forced off.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045DCF0",
+   "what_it_does": "Draws the reflection lists 9 and 10 without depth or alpha writes.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045DEB0",
+   "what_it_does": "Draws the shiny ground lists 13 and 15.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045E030",
+   "what_it_does": "Draws the fading shiny ground lists 14 and 16.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045E240",
+   "what_it_does": "Draws the fading blended building lists 44, 25, 26, 22, 32, 31, 40.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045E680",
+   "what_it_does": "Draws the whole frame from the 84 lists, in order (SPEC-005 \u00a73.3; table slot 9).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045F110",
+   "what_it_does": "Draw-list constructor: makes the 84 lists and one block of entries.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045F370",
+   "what_it_does": "Draw-list deleting destructor (table slot 3).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045F750",
+   "what_it_does": "Template-light constructor: a copy of one light, used to place street lamps and headlights.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045FA50",
+   "what_it_does": "Finds which room (lighting volume) a point is in, and whether it is inside one; otherwise the default room.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045FBD0",
+   "what_it_does": "Places a copy of a template light (street lamp, headlight) at a matrix; returns its slot (256 slots).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045FC30",
+   "what_it_does": "Removes a placed template light.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0045FC50",
+   "what_it_does": "Moves a placed template light.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00460130",
+   "what_it_does": "Chooses the lights near the camera each frame (SPEC-006 \u00a71).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00460600",
+   "what_it_does": "Light manager constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00460810",
+   "what_it_does": "Occluder destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00460900",
+   "what_it_does": "Tests a sphere against one occluder.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00460980",
+   "what_it_does": "Tests a sphere against the occluders; 2 means fully hidden.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00460A50",
+   "what_it_does": "Whether something can be seen past the occluders.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00460A90",
+   "what_it_does": "Occluder deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461650",
+   "what_it_does": "Loads an occluder from its chunk.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461840",
+   "what_it_does": "Occluder loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461860",
+   "what_it_does": "Empty handle constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461870",
+   "what_it_does": "Handle constructor: holds a renderable and its running number.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004618D0",
+   "what_it_does": "Lets go of the renderable a handle holds.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461920",
+   "what_it_does": "Handle deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461980",
+   "what_it_does": "Skid-marks handle constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004619F0",
+   "what_it_does": "Skid-marks handle deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461A10",
+   "what_it_does": "Skid-marks handle destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461AC0",
+   "what_it_does": "Returns the camera the frame is drawn from.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461AD0",
+   "what_it_does": "Returns the camera used for culling (what the distance and view tests use).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461D40",
+   "what_it_does": "Whether the player is inside a building.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461E00",
+   "what_it_does": "Sets the frame's clear colour.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461ED0",
+   "what_it_does": "Sets the fog on both canvases (colour, start, end, clamp, fade time) and remembers it.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461F50",
+   "what_it_does": "Gets the colour-effect settings.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461F70",
+   "what_it_does": "Gets the fog settings.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00461FD0",
+   "what_it_does": "Switches depth of field on, with its settings, through the full-screen effects extension.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00462030",
+   "what_it_does": "Switches the colour effects on or off.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00462050",
+   "what_it_does": "Whether the colour effects are on.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00462060",
+   "what_it_does": "Sets the colour-effect settings.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00462170",
+   "what_it_does": "Shows or hides the renderable behind a handle.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004621D0",
+   "what_it_does": "Switches a renderable's 'last element's far distance for all' setting.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00462340",
+   "what_it_does": "Destroys the renderable behind a handle at the start of the next frame (it is queued).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00462370",
+   "what_it_does": "Sets the matrix of the renderable behind a handle (decals ignore it).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00462E70",
+   "what_it_does": "Switches a vehicle renderable's distance test on or off (through its handle).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00463DB0",
+   "what_it_does": "Adds one placed prop (a tree, a bush) to the instanced renderable of its model.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00463E80",
+   "what_it_does": "Gets the matrix of one copy of an instanced model.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00463F00",
+   "what_it_does": "Shows or hides one copy of an instanced model.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00463F80",
+   "what_it_does": "Sets an instanced renderable's view distance (and whether it may be clamped).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464660",
+   "what_it_does": "Sets the player's renderable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464690",
+   "what_it_does": "Decals handle constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464720",
+   "what_it_does": "Decals handle deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464740",
+   "what_it_does": "Decals handle destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004647B0",
+   "what_it_does": "Tracer handle constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464840",
+   "what_it_does": "Tracer handle deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464860",
+   "what_it_does": "Tracer handle destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464AC0",
+   "what_it_does": "Destroys the renderables queued for destruction last frame.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464C80",
+   "what_it_does": "Render-flow client deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464CA0",
+   "what_it_does": "Sets the camera the frame is drawn from (also on the canvas and the view).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464D00",
+   "what_it_does": "Sets the camera used for culling.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464E00",
+   "what_it_does": "Switches one of the four scenes on or off.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00464F00",
+   "what_it_does": "Makes a plug-in renderable from a model and puts it in a scene.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465120",
+   "what_it_does": "Sets the renderer up.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465500",
+   "what_it_does": "Finds a geometry by name in a loaded inventory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465520",
+   "what_it_does": "Render-flow client constructor (the renderer's hook into the game's frame).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465590",
+   "what_it_does": "The renderer's per-frame work, called by the game's frame loop.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465840",
+   "what_it_does": "Makes a particle-effect renderable from an effect's name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465990",
+   "what_it_does": "Makes a state-prop renderable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465C80",
+   "what_it_does": "Makes the decal renderable from a shader's name; returns a decals handle.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465D50",
+   "what_it_does": "Makes the tracer renderable from a mesh's name; returns a tracer handle.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00465E60",
+   "what_it_does": "Makes a vehicle renderable from its name and puts it in a scene.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004661B0",
+   "what_it_does": "Makes a character renderable from its name and puts it in a scene.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00466310",
+   "what_it_does": "Makes a cutscene renderable from a composite drawable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004664A0",
+   "what_it_does": "Makes a zone package renderable (a map area) from its package name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00466600",
+   "what_it_does": "Makes a prop renderable with its distances.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004667C0",
+   "what_it_does": "Looks up a loaded sky renderable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00466940",
+   "what_it_does": "Makes the ocean renderable (with its reflection texture).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00466B10",
+   "what_it_does": "Makes a wake renderable from a shader's name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00466CE0",
+   "what_it_does": "Makes a lighting renderable from a light group's name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00466E90",
+   "what_it_does": "Makes the rain renderable from its streak and splash drawables.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00467060",
+   "what_it_does": "Makes an instanced renderable for a prop model.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00467210",
+   "what_it_does": "Makes a shadow renderable of a given kind.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004673C0",
+   "what_it_does": "Makes the render-flow client.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004675B0",
+   "what_it_does": "Returns one of the render manager's memory heaps.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004675C0",
+   "what_it_does": "Switches the sky on or off, fading the second sky over 3 seconds.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004676B0",
+   "what_it_does": "Sets up the render manager's table of 12 heaps.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00467810",
+   "what_it_does": "Render manager's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00467950",
+   "what_it_does": "Sets the first or second sky renderable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00467A00",
+   "what_it_does": "Render manager constructor; keeps itself in a global.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468470",
+   "what_it_does": "Render manager deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468490",
+   "what_it_does": "Sets the render manager up: its memory pools and four scenes.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004689A0",
+   "what_it_does": "Draws everything for the frame.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468A70",
+   "what_it_does": "Sets which type masks a scene accepts.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468A90",
+   "what_it_does": "Gameplay scene's name setter (does nothing).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468AA0",
+   "what_it_does": "Draws the gameplay scene: the reflection pass, then its draw list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468AC0",
+   "what_it_does": "Adds a renderable to a scene; it takes the scene's number.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468B20",
+   "what_it_does": "Removes a renderable from a scene.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468B80",
+   "what_it_does": "Draws a scene's renderables straight away.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468C00",
+   "what_it_does": "Updates a scene's renderables.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468C50",
+   "what_it_does": "Updates the gameplay scene's renderables and sorts its draw list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468CC0",
+   "what_it_does": "Adds a renderable to the gameplay scene.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468D10",
+   "what_it_does": "Removes a renderable from the gameplay scene.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468D60",
+   "what_it_does": "Sets aside a scene's array of renderables.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468DD0",
+   "what_it_does": "Scene destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468E60",
+   "what_it_does": "Gameplay scene destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468ED0",
+   "what_it_does": "Scene constructor (its number, how many renderables).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468F70",
+   "what_it_does": "Scene deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00468F90",
+   "what_it_does": "Gameplay scene constructor (adds a draw list of the given size).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00469050",
+   "what_it_does": "Gameplay scene deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046A520",
+   "what_it_does": "Whether the camera is indoors.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046C5F0",
+   "what_it_does": "Character's position (its own copy).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046C620",
+   "what_it_does": "Character's per-frame display.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046C650",
+   "what_it_does": "Character renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046C8F0",
+   "what_it_does": "Character's per-frame update (pose, skin).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046CA60",
+   "what_it_does": "Character renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046CA80",
+   "what_it_does": "Character loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046CAD0",
+   "what_it_does": "Loads a character from its chunk.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046CE10",
+   "what_it_does": "Destructor of one decal record.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046CED0",
+   "what_it_does": "Ages the decals.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D040",
+   "what_it_does": "Removes one decal.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D110",
+   "what_it_does": "Decal piece's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D150",
+   "what_it_does": "Draws a renderable straight away through its container.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D1D0",
+   "what_it_does": "Constructor of one decal record.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D3A0",
+   "what_it_does": "Decal drawable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D3C0",
+   "what_it_does": "Constructor of a decal drawable that stays where it is put.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D4E0",
+   "what_it_does": "Constructor of a decal drawable that rides on the ocean.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D780",
+   "what_it_does": "Decal piece constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D840",
+   "what_it_does": "Decal piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046D860",
+   "what_it_does": "Draws the decals.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046DBF0",
+   "what_it_does": "Decal container destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046DC10",
+   "what_it_does": "Decal renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046DD70",
+   "what_it_does": "Decal drawable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046DDB0",
+   "what_it_does": "Fixed decal drawable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046DDD0",
+   "what_it_does": "Ocean decal drawable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046EA70",
+   "what_it_does": "Decal container constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046EB00",
+   "what_it_does": "Decal renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046EBB0",
+   "what_it_does": "Decal renderable deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046EBD0",
+   "what_it_does": "Decal renderable's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046EBE0",
+   "what_it_does": "Removes a decal by its id.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046ED10",
+   "what_it_does": "Instanced piece's kind mask (0x200000).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046EDC0",
+   "what_it_does": "Works out an instanced model's detail bands from its view distance.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F030",
+   "what_it_does": "Prepares an instanced piece before drawing.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F0F0",
+   "what_it_does": "Draws an instanced piece's copies in one call.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F110",
+   "what_it_does": "Culls each copy of an instanced model, sets the wind, then draws them all in one call (SPEC-006 \u00a72).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F230",
+   "what_it_does": "Instance container destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F250",
+   "what_it_does": "Instanced renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F2E0",
+   "what_it_does": "Instanced piece constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F490",
+   "what_it_does": "Instanced piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F4B0",
+   "what_it_does": "Adds one copy (its matrix) to an instanced piece.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F840",
+   "what_it_does": "Instance container constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F8E0",
+   "what_it_does": "Instanced renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046F9C0",
+   "what_it_does": "Instanced renderable deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046FBA0",
+   "what_it_does": "Adds one copy to an instanced renderable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046FBF0",
+   "what_it_does": "Sets an instanced renderable's view distance.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046FC40",
+   "what_it_does": "Instanced renderable's per-frame update (time for the wind).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0046FF10",
+   "what_it_does": "Lighting renderable constructor: registers its light group by kind and, for the area's lights, ties it to the time of day.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470240",
+   "what_it_does": "Lighting renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470260",
+   "what_it_does": "Light-group record loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470280",
+   "what_it_does": "Loads a light-group record (`0x08800007`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004704A0",
+   "what_it_does": "Mask renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004704C0",
+   "what_it_does": "Mask renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470550",
+   "what_it_does": "Cutscene renderable's position.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004705B0",
+   "what_it_does": "Cutscene renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470630",
+   "what_it_does": "Cutscene renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470650",
+   "what_it_does": "Cutscene renderable's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004707A0",
+   "what_it_does": "Draws the ocean piece.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004707B0",
+   "what_it_does": "Ocean piece's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004707C0",
+   "what_it_does": "Re-centres the ocean's bounding sphere on the camera.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470800",
+   "what_it_does": "Ocean container's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470810",
+   "what_it_does": "Jumps to a renderable's per-frame display.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470820",
+   "what_it_does": "Ocean piece constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470990",
+   "what_it_does": "Ocean container destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470A20",
+   "what_it_does": "Ocean piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470A40",
+   "what_it_does": "Ocean container constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470AD0",
+   "what_it_does": "Ocean renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470BA0",
+   "what_it_does": "Ocean renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470BE0",
+   "what_it_does": "Ocean renderable's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470C30",
+   "what_it_does": "Particle effect's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470D70",
+   "what_it_does": "Particle-effect renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00470EC0",
+   "what_it_does": "Particle-effect renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471250",
+   "what_it_does": "Sets a particle effect's matrix and moves its emitter with it.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004712D0",
+   "what_it_does": "Plug-in renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471310",
+   "what_it_does": "Draws a plug-in renderable by calling its plug-in.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471330",
+   "what_it_does": "Copies a plug-in renderable (without its plug-in).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004713C0",
+   "what_it_does": "Plug-in renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004713E0",
+   "what_it_does": "Prop renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471460",
+   "what_it_does": "Prop's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471490",
+   "what_it_does": "World geometry renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004714E0",
+   "what_it_does": "World geometry's other point to measure distance from.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471510",
+   "what_it_does": "Takes world geometry out of the draw lists.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471570",
+   "what_it_does": "Shows or hides world geometry.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471620",
+   "what_it_does": "Prop renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471640",
+   "what_it_does": "World geometry's per-frame display: culls its pieces itself.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471BC0",
+   "what_it_does": "Shows or hides a zone package and all its world geometry.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471C10",
+   "what_it_does": "Applies a zone package entry to its world geometry (SPEC-003).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471D60",
+   "what_it_does": "World geometry renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471D80",
+   "what_it_does": "World geometry loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471E50",
+   "what_it_does": "Zone package loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471E70",
+   "what_it_does": "Zone package renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00471EC0",
+   "what_it_does": "Loads world geometry (`0x08800003`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00472680",
+   "what_it_does": "Loads a zone package (`0x08800004`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00472AF0",
+   "what_it_does": "Draws the rain straight away.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004732C0",
+   "what_it_does": "Rain renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004734E0",
+   "what_it_does": "Rain renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473940",
+   "what_it_does": "Rain's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473AA0",
+   "what_it_does": "Starts fading a renderable in over so many milliseconds.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473AC0",
+   "what_it_does": "Starts fading a renderable out over so many milliseconds.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473AE0",
+   "what_it_does": "Fades a renderable in, down to a target level, at the rate given.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473B10",
+   "what_it_does": "Fades a renderable out, up to a target level, at the rate given.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473B40",
+   "what_it_does": "Sets a renderable's matrix and marks it changed (table slot 12).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473B60",
+   "what_it_does": "The base part of a renderable's destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473B70",
+   "what_it_does": "Resets a renderable's fade and visibility, and every element's fading.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473C00",
+   "what_it_does": "A renderable's position: its matrix's last row (table slot 13).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473C20",
+   "what_it_does": "Shows or hides a renderable and all its elements (table slot 8).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473C80",
+   "what_it_does": "Takes all of a renderable's elements out of the draw lists (table slot 14).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473CC0",
+   "what_it_does": "Finds which room a renderable is in, through the light manager.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473D40",
+   "what_it_does": "Sets a renderable's second fade, kept between 0 and 1.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473D90",
+   "what_it_does": "Steps a renderable's fade towards its target; returns the larger of its two fades.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473E70",
+   "what_it_does": "Puts a drawable into one of a renderable's elements with the default distances (0, 100, 10).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473F00",
+   "what_it_does": "Sets one element's nearest and farthest distance and fade band.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473F50",
+   "what_it_does": "Gets one element's nearest and farthest distance and fade band.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473FC0",
+   "what_it_does": "Gets one element's drawable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00473FE0",
+   "what_it_does": "How many elements a renderable has.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00474000",
+   "what_it_does": "Copies a range of elements.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004740C0",
+   "what_it_does": "Per-frame tick: ages the renderable and steps its fade if fading is on.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004740F0",
+   "what_it_does": "Per-frame visibility, distance and fade of SPEC-005 \u00a72.2 (table slot 10).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00474AA0",
+   "what_it_does": "Renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00474AC0",
+   "what_it_does": "Sets how many elements a renderable has.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00474BA0",
+   "what_it_does": "Renderable constructor: type mask -1, a new running number, identity matrix, visible, n elements.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00474CD0",
+   "what_it_does": "Shadow renderable's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00474CF0",
+   "what_it_does": "Shadow renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00474EA0",
+   "what_it_does": "Shadow renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004751C0",
+   "what_it_does": "Shadow renderable's per-frame display.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004758E0",
+   "what_it_does": "Shadow loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00475930",
+   "what_it_does": "Loads a shadow record (`0x08800008`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00476090",
+   "what_it_does": "Skid-mark piece's display (unused).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004760D0",
+   "what_it_does": "Skid-mark piece's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004760F0",
+   "what_it_does": "Skid-mark container's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00476320",
+   "what_it_does": "Skid-mark piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004763F0",
+   "what_it_does": "Skid-mark container destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00476410",
+   "what_it_does": "Skid-mark renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00476480",
+   "what_it_does": "One skid mark's bounding sphere.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004764C0",
+   "what_it_does": "Draws one skid mark.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00476A30",
+   "what_it_does": "Skid-mark container constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00476AD0",
+   "what_it_does": "Skid-mark renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00476B80",
+   "what_it_does": "Skid-mark renderable deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00476BA0",
+   "what_it_does": "Skid marks' per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477340",
+   "what_it_does": "One skid mark's constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004773E0",
+   "what_it_does": "Draws a container straight away.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477450",
+   "what_it_does": "Sky's per-frame display.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477470",
+   "what_it_does": "Sky renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004774E0",
+   "what_it_does": "Sky renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477500",
+   "what_it_does": "Sky's per-frame update (the sun's turning joint, time of day).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477660",
+   "what_it_does": "Sky loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477680",
+   "what_it_does": "Loads a sky record (`0x08800002`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477A00",
+   "what_it_does": "Makes a state prop's drawable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477B20",
+   "what_it_does": "State-prop renderable copy constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477D10",
+   "what_it_does": "State-prop renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00477E60",
+   "what_it_does": "Sorts a state prop into a size class.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478070",
+   "what_it_does": "State prop's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478160",
+   "what_it_does": "State-prop record loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478180",
+   "what_it_does": "Loads a state-prop record (`0x08800005`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478430",
+   "what_it_does": "Tracers' per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478490",
+   "what_it_does": "Tracer renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478540",
+   "what_it_does": "Tracer renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478560",
+   "what_it_does": "Draws the tracers straight away.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478B00",
+   "what_it_does": "Vehicle piece's shader.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478B10",
+   "what_it_does": "Vehicle piece's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478B20",
+   "what_it_does": "Vehicle container's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478B90",
+   "what_it_does": "Vehicle's per-frame display.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478C50",
+   "what_it_does": "Vehicle piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478D00",
+   "what_it_does": "Draws one vehicle part.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478F00",
+   "what_it_does": "Vehicle piece's bounds.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478F30",
+   "what_it_does": "Vehicle container destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478FB0",
+   "what_it_does": "Sets whether a vehicle is fading.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478FC0",
+   "what_it_does": "Whether a vehicle is fading.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478FD0",
+   "what_it_does": "How far a vehicle has faded.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00478FE0",
+   "what_it_does": "Displays a vehicle: its position as the sort number, and its parts.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00479370",
+   "what_it_does": "Vehicle piece constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00479560",
+   "what_it_does": "Vehicle piece deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00479580",
+   "what_it_does": "Vehicle container deleting destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00479780",
+   "what_it_does": "Vehicle renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00479A90",
+   "what_it_does": "Vehicle container's bounds.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00479CC0",
+   "what_it_does": "Vehicle's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00479CF0",
+   "what_it_does": "Vehicle loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00479E00",
+   "what_it_does": "Vehicle container constructor (copies the model's pose).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047A5B0",
+   "what_it_does": "Loads a vehicle.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047AAA0",
+   "what_it_does": "Wake piece's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047AAC0",
+   "what_it_does": "Wake container's kind mask.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047AB90",
+   "what_it_does": "Draws a wake.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047AED0",
+   "what_it_does": "Wake container destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047AF60",
+   "what_it_does": "Wake piece constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047B040",
+   "what_it_does": "Wake piece destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047B450",
+   "what_it_does": "Wake container constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047B4E0",
+   "what_it_does": "Wake renderable constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047B5C0",
+   "what_it_does": "Wake renderable destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0047B660",
+   "what_it_does": "Wake's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00488B60",
+   "what_it_does": "Loads a placed object's packed location (`0x09900194`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00488DB0",
+   "what_it_does": "Loads a script object with no children.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00488F50",
+   "what_it_does": "Script-object loader constructor (`0x09900190`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00488F70",
+   "what_it_does": "Loads a script object (`0x09900190`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00488F90",
+   "what_it_does": "Game-group loader constructor (`0x09900191`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00488FB0",
+   "what_it_does": "Loads a game group's tree of script objects.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00489250",
+   "what_it_does": "Loads a game group (`0x09900191`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004956E0",
+   "what_it_does": "Makes a script object from its class name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AEE20",
+   "what_it_does": "Constructor of one placed-prop slot.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AEF10",
+   "what_it_does": "A placed prop's scale, from its packed location.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AF050",
+   "what_it_does": "Packed-location constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AF0B0",
+   "what_it_does": "A placed prop's position, from its packed location.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AF100",
+   "what_it_does": "Sets a placed prop's rotation in its packed location.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AF280",
+   "what_it_does": "Registers an instance object (a kind of placed prop) with the placed-prop manager.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AF300",
+   "what_it_does": "Erases a range of placed props.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AF5E0",
+   "what_it_does": "Turns a state name into the 4-bit starting-state number of a placed prop.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AF620",
+   "what_it_does": "Adds a placed prop from its packed location.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AFA00",
+   "what_it_does": "Sets the farthest distances placed props are kept at.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AFB50",
+   "what_it_does": "Fills in a packed location.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AFEE0",
+   "what_it_does": "Queues a placed prop to be added to its model's instanced renderable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004AFF50",
+   "what_it_does": "Switches a placed prop on or off; off ones are removed from drawing.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B0000",
+   "what_it_does": "Builds a placed prop's matrix from its packed location.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B0130",
+   "what_it_does": "Adds a placed prop.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B0250",
+   "what_it_does": "Makes the instanced renderable for a prop model (whole or destroyed).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B0530",
+   "what_it_does": "Fades placed props the camera runs into.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B0F10",
+   "what_it_does": "Adds one placed prop to its model's instanced renderable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B1220",
+   "what_it_does": "Placed-prop manager constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B1890",
+   "what_it_does": "Removes the instanced renderables of one prop template.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B1AC0",
+   "what_it_does": "Takes one placed prop out of its instanced renderable.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B1EB0",
+   "what_it_does": "Unregisters an instance object from the placed-prop manager.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B2280",
+   "what_it_does": "Inserts an instanced renderable into the sorted active list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B23B0",
+   "what_it_does": "Adds the queued placed props to their instanced renderables, once a frame.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B2910",
+   "what_it_does": "Turns a placed prop into a full state prop (when it wakes up).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B2C60",
+   "what_it_does": "Sets a placed prop's state by number.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B3080",
+   "what_it_does": "Sets up an instance object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B31A0",
+   "what_it_does": "Checks which placed props are near enough to draw (350 a frame, or all after a big camera move; SPEC-006 \u00a72).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B3A90",
+   "what_it_does": "Placed-prop manager's per-frame update.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B3E30",
+   "what_it_does": "Placed-prop manager's tick, called twice a frame (before and after the simulation).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004B9440",
+   "what_it_does": "Stream-trigger loader constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x004C1150",
+   "what_it_does": "Reads a length-prefixed string from a chunk.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00559000",
+   "what_it_does": "The base renderable's 'other point to measure from': none (table slot 15).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x005E9150",
+   "what_it_does": "Instance object constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x005E9250",
+   "what_it_does": "Registers an instance object with the placed-prop manager.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x005E9270",
+   "what_it_does": "Sets an instance object's state by number.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x005E9410",
+   "what_it_does": "Adds a packed location to an instance object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x005E9490",
+   "what_it_does": "Adds a location to an instance object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x005E9880",
+   "what_it_does": "Tells an instance object its package was unloaded.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x005E99D0",
+   "what_it_does": "Registers an instance object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x005E9B80",
+   "what_it_does": "Instance object destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00649B20",
+   "what_it_does": "Gets one matrix packet from an instancing list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00649C10",
+   "what_it_does": "Adds one matrix packet (a copy's matrix and sphere) to an instancing list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00649C80",
+   "what_it_does": "Sets the wind's direction for a swaying instancing list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00649CC0",
+   "what_it_does": "Sets the wind's strength for a swaying instancing list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064B850",
+   "what_it_does": "Sets the ambient light (one render state for the whole frame).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064B8D0",
+   "what_it_does": "Sets which colour channels (and alpha) are written.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064B990",
+   "what_it_does": "Turns depth writes on or off (the only place the PC does it per draw).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064B9F0",
+   "what_it_does": "Turns the stencil buffer on or off.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064BA20",
+   "what_it_does": "Sets the stencil comparison.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064BA50",
+   "what_it_does": "Sets the stencil reference value.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064BAE0",
+   "what_it_does": "Sets the stencil operations.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064BB80",
+   "what_it_does": "Turns fog on or off.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064BE30",
+   "what_it_does": "Gets a render-context extension by its number (instancing, static shadows, full-screen effects ...).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064D960",
+   "what_it_does": "Swaying instancing list constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0064FF10",
+   "what_it_does": "Clears the frame (colour, depth, stencil).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006503A0",
+   "what_it_does": "Sets which faces are culled.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658E90",
+   "what_it_does": "Sets the clear colour.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658EA0",
+   "what_it_does": "Gets the clear colour.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658EC0",
+   "what_it_does": "Sets the clear depth.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658ED0",
+   "what_it_does": "Gets the clear depth.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658EE0",
+   "what_it_does": "Sets the clear stencil value.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658EF0",
+   "what_it_does": "Gets the clear stencil value.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658F00",
+   "what_it_does": "Sets a matrix stack's top to identity.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658F30",
+   "what_it_does": "Loads a matrix onto a matrix stack's top.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00658F70",
+   "what_it_does": "Multiplies a matrix stack's top by a matrix.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00659430",
+   "what_it_does": "Gets the ambient light.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00659450",
+   "what_it_does": "Sets one hardware light.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00659580",
+   "what_it_does": "Turns one hardware light on or off.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00659D40",
+   "what_it_does": "Whether fog is on.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00659FE0",
+   "what_it_does": "Pushes a matrix stack.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065A010",
+   "what_it_does": "Pops a matrix stack.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065A030",
+   "what_it_does": "Gets a matrix stack's top.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065A050",
+   "what_it_does": "Pushes an identity matrix.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065A0B0",
+   "what_it_does": "Pushes and loads a matrix.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065A110",
+   "what_it_does": "Pushes and multiplies by a matrix.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065CA00",
+   "what_it_does": "Returns the static-shadow extension's own shader.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065CA10",
+   "what_it_does": "Sets the static-shadow extension's wash colour.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065CF60",
+   "what_it_does": "Begins the static shadow decals.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065CFD0",
+   "what_it_does": "Begins the stencil shadow volumes.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065D0F0",
+   "what_it_does": "Ends the static shadow decals: darkens the frame through them (SPEC-003 \u00a78).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0065DAC0",
+   "what_it_does": "Ends the stencil shadow volumes.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00660A90",
+   "what_it_does": "Sets a matrix's rotation.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006610F0",
+   "what_it_does": "Transforms a point by a matrix.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006683B0",
+   "what_it_does": "Makes an entity's key from its name.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006683C0",
+   "what_it_does": "Sets a key from text.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006683F0",
+   "what_it_does": "Entity constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00668900",
+   "what_it_does": "Skeleton loader constructor (`0x00023000`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006834C0",
+   "what_it_does": "Displays a drawable container's pieces.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006836E0",
+   "what_it_does": "Puts a piece into a drawable container.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00683790",
+   "what_it_does": "A drawable container's bounds.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00685F70",
+   "what_it_does": "Drawable piece constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068B850",
+   "what_it_does": "Camera constructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068EC90",
+   "what_it_does": "Sets a prop property's value from text.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068ECF0",
+   "what_it_does": "Prop-state data constructor (with its counts of events, callbacks, visibilities, controllers, properties, effects).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068EE50",
+   "what_it_does": "Releases a state prop's collision object.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068EFD0",
+   "what_it_does": "State-prop data loader constructor (`0x0802000D`; another for `0x0802000A`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068F060",
+   "what_it_does": "State-prop data destructor.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068F1F0",
+   "what_it_does": "State-prop data constructor (model, collision, number of states, number of properties).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0068F290",
+   "what_it_does": "Loads state-prop data (SPEC-003 \u00a71).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00694230",
+   "what_it_does": "Composite drawable loader constructor (`0x00123000`).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069E400",
+   "what_it_does": "Tests a sphere in camera space.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069E580",
+   "what_it_does": "Whether a sphere is in the camera's view.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0069E690",
+   "what_it_does": "The camera's position.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006A4C60",
+   "what_it_does": "Sets a mesh piece's shader (which also gives it its default layer).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DC190",
+   "what_it_does": "The game's name key (SPEC-006 \u00a75; the Xbox's is sub_00243FA0).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006DC230",
+   "what_it_does": "Makes a name key (jumps to the name key).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E3EB0",
+   "what_it_does": "How many hardware lights there are.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E8970",
+   "what_it_does": "Inserts into a linked list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E89E0",
+   "what_it_does": "Removes from a linked list.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E8A20",
+   "what_it_does": "Sorts a linked list with a comparison function.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9850",
+   "what_it_does": "Finds an object of a given type by key in a loaded inventory.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9E00",
+   "what_it_does": "Run-time type cast over a type's list of bases.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x006E9E70",
+   "what_it_does": "Loads a simple chunk.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00703300",
+   "what_it_does": "Sets a mesh piece's layer (SPEC-005 \u00a73.1).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0071E2E0",
+   "what_it_does": "Makes the keys of the attract-point names at start-up.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x0071E340",
+   "what_it_does": "Makes the keys of the starting-state names at start-up.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00750D60",
+   "what_it_does": "Checks an archive's header (the magic text and version).",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
+  },
+  {
+   "bin": "pc",
+   "va": "0x00751250",
+   "what_it_does": "Opens a file in an archive by its name hash.",
+   "spec": "docs/cleanroom/SPEC-006-lights-placed-props-reflection.md#4-the-function-guides-pc-part-reported",
+   "status": "open"
   }
  ]
 }
