@@ -396,3 +396,44 @@ def test_the_ai_is_shown_matched_functions_of_the_same_class(S, monkeypatch):
     assert near[0]["code"].startswith("class Timer") and "Xbox" in near[0]["build"] and "PC" in near[1]["build"]
     assert S.neighbours({"bin": "xb", "fva_int": 0x99, "symbol": "sub_00000099"}) == []      # not in a class
     assert S.class_of("pure3d::Shader::vfunc_04") == "pure3d::Shader" and S.class_of("sub_1") == ""
+
+
+def test_matched_functions_join_a_freshly_built_queue(S, monkeypatch):
+    """A queue built on this computer holds the functions still to do. The ones matched before it was built
+    get a task each, from the registry, so they can be opened, named and tried on their look-alikes."""
+    monkeypatch.setattr(S, "REGISTRY", {"entries": {
+        "xb:0x00011000": {"bin": "xb", "va": "0x00011000", "size": "18", "symbol": "Weapon::vfunc_02",
+                          "match": "vfunc_02@Weapon@@", "flags": "/O2 /G6"},
+        "xb:0x00011100": {"bin": "xb", "va": "0x00011100", "size": 6, "symbol": "sub_00011100", "match": "sub_00011100", "flags": "/O2"},
+        "pc:0x00401000": {"bin": "pc", "va": "0x00401000", "size": 9, "symbol": "sub_00401000", "match": "", "flags": "/O2"},
+        "proto:0x00012000": {"bin": "proto", "va": "0x00012000", "size": 9, "symbol": "sub_00012000", "match": "", "flags": "/O2"},
+        "xb:0x00011200": {"bin": "xb", "va": "nonsense", "size": 9},
+    }})
+    queue = [{"id": "xb_00011100", "bin": "xb", "fva_int": 0x11100, "size": 6}]
+    made = S.matched_tasks(queue, ["xb", "pc"])                 # the prototype's file isn't on this computer
+    assert [t["id"] for t in made] == ["xb_00011000", "pc_00401000"]
+    t = made[0]
+    assert (t["symbol"], t["match_substr"], t["fva_int"], t["size"], t["flags"]) == ("Weapon::vfunc_02", "vfunc_02@Weapon@@", 0x11000, 18, "/O2 /G6")
+    assert t["va"] == "0x00011000" and made[1]["va"] == "PC 0x00401000" and t["tier"] == "TIER_1_QUICK"
+    assert S.task_key(t) == "xb:0x00011000" and "lookalikes" not in t          # so the look-alike groups are rebuilt
+    assert S.matched_tasks(queue + made, ["xb", "pc"]) == []
+
+
+def test_easy_pass_tries_each_starting_point_once(S, monkeypatch):
+    t = {"id": "xb_00011000", "bin": "xb", "symbol": "sub_00011000", "va": "0x00011000", "fva_int": 0x11000, "size": 6,
+         "status": "UNCLAIMED", "best_cpp": "int kept() { return 1; }\n"}
+    monkeypatch.setattr(S, "target_bytes", lambda task: b"\xB8\x01\x00\x00\x00\xC3")
+    monkeypatch.setattr(S, "lookalike_starter", lambda task: ("int kept() { return 1; }", "xb_1"))
+    monkeypatch.setattr(S, "counterpart_starter", lambda task: ("", ""))
+    monkeypatch.setattr(S, "starter_relocs", lambda task, tb: None)
+    monkeypatch.setattr(S, "synthesize_cpp", lambda *a, **k: "int drafted() { return 1; }")
+    monkeypatch.setattr(S, "disassemble", lambda tb: [])
+    assert S.easy_codes(t) == ["int kept() { return 1; }\n", "int drafted() { return 1; }"]
+    monkeypatch.setattr(S, "target_bytes", lambda task: None)
+    assert S.easy_codes(t) == []
+    held = dict(t, id="xb_2", fva_int=0x11010, status="CLAIMED", claimed_by="Bob", claim_expires_at=S.now_ts() + 600)
+    done = dict(t, id="xb_3", fva_int=0x11020, status="VERIFIED")
+    big = dict(t, id="xb_4", fva_int=0x11030, size=40)
+    monkeypatch.setattr(S, "ALL_TASKS", [big, held, done, t])
+    assert [x["id"] for x in S.easy_targets("Alice", {})] == ["xb_00011000", "xb_4"]       # smallest first
+    assert [x["id"] for x in S.easy_targets("Bob", {"xb:0x00011000": S.EASY_VERSION})] == ["xb_2", "xb_4"]

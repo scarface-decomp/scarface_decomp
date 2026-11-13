@@ -1475,3 +1475,58 @@ def test_the_ai_sees_its_classmates_and_the_run_is_metered(page):
     page.fill("#ai-price-out", "")
     assert "at your prices" not in page.inner_text("#ai-meter")
 
+
+
+def test_names_pass_keeps_only_a_clearer_exact_version(page):
+    """Ask the AI to name them: the bytes stay fixed, and what the portal refuses goes back to the AI."""
+    sign_in(page)
+    prompts, sent = [], []
+
+    def ai(route):
+        prompts.append(json.loads(route.request.post_data)["prompt"])
+        route.fulfill(json={"ok": True, "used_model": "m",
+                            "reply": "```cpp\nint named_%d() { return 1; }\n```" % len(prompts)})
+
+    def verify(route):
+        body = json.loads(route.request.post_data)
+        sent.append(body)
+        kept = len(sent) > 1
+        task = page.evaluate("() => JSON.parse(JSON.stringify(currentTask))")
+        task["readable"] = {"grade": "matched", "stand_ins": ["m_Field08"], "raw_addresses": 0, "left": 1}
+        route.fulfill(json={"ok": True, "is_exact": True, "matched_bytes": 12, "total_bytes": 12, "match_percent": 100,
+                            "diff_details": [], "revised": kept, "task": task,
+                            "not_kept": "" if kept else "It leaves 3 thing(s) to name; the stored text leaves 3."})
+
+    page.route("**/api/ai-proxy", ai)
+    page.route("**/api/verify", verify)
+    page.evaluate("""() => { Object.assign(currentTask, {status: 'VERIFIED', can_rename: true,
+        names_to_use: [{now: 'sub_0011E4A0', name: 'Weapon::Reload'}],
+        readable: {grade: 'matched', stand_ins: ['sub_0011E4A0', 'm_Field08', 'a1'], raw_addresses: 0, left: 3}});
+        setEditor('void sub_00401000(int a1) { sub_0011E4A0(); }'); renderReadable(currentTask); }""")
+    assert page.inner_text("#btn-ai-names") == "Ask the AI to name them"
+    page.click("#btn-ai-names")
+    assert "Paste an API key" in page.inner_text("#verify-status") and not prompts
+    page.fill("#ai-key", "test-key")
+    page.click("#btn-ai-names")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('Names improved')", timeout=30000)
+    assert "already verified" in prompts[0] and "void sub_00401000(int a1) { sub_0011E4A0(); }" in prompts[0]
+    assert "sub_0011E4A0 is Weapon::Reload" in prompts[0] and "Stand-in names still in it: sub_0011E4A0, m_Field08, a1." in prompts[0]
+    assert "was not kept: It leaves 3 thing(s) to name" in prompts[1]
+    assert all(b["keep_revision"] and b["only_if_clearer"] for b in sent) and len(sent) == 2
+    assert "1 left to name (was 3)" in page.inner_text("#verify-status")
+    assert page.input_value("#wb-editor") == "int named_2() { return 1; }"
+    page.evaluate("() => { currentTask.can_rename = false; renderReadable(currentTask); }")
+    assert page.locator("#btn-ai-names").count() == 0           # text that comes from a source file is changed there
+
+
+def test_easy_pass_runs_in_the_background_and_reports(page):
+    """Match the easy ones: no AI, started with one confirmation, followed until it is done."""
+    sign_in(page)
+    asked = []
+    page.on("dialog", lambda d: (asked.append(d.message), d.accept()))
+    assert page.inner_text("#btn-easy") == "Match the easy ones"
+    page.click("#btn-easy")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('Easy pass finished')", timeout=30000)
+    assert "No AI is used" in asked[0] and "stop it at any time" in asked[0]
+    assert "3 of 40 functions matched" in page.inner_text("#verify-status") and "matched, not yet named" in page.inner_text("#verify-status")
+    assert page.inner_text("#btn-easy") == "Match the easy ones"

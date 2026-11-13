@@ -111,3 +111,13 @@ def test_hardcoded_shapes():
     rx, make = NH.SHAPES[2]
     m = rx.match("float __cdecl sub_0001EF60(void) { return *(const float*)0x00471508; }")
     assert make(m.group(1), "00471508", False).startswith('extern "C" const float DAT_00471508;')
+
+
+def test_names_are_read_off_compiled_symbols_only_when_that_takes_no_guessing():
+    q = MV.qualified_name
+    assert q("?Reload@Weapon@game@@QAEXXZ") == "game::Weapon::Reload"
+    assert q("?Tick@@YAXXZ") == "Tick" and q("_Tick") == "Tick" and q("_Tick@8") == "Tick"
+    assert q("??0Weapon@@QAE@XZ") is None                 # a constructor
+    assert q("?Get@?$List@H@@QAEHXZ") is None             # a template
+    assert q("?Fire@Weapon@1@QAEXXZ") is None             # a back-reference in the scope
+    assert q("__imp__Sleep@4") is None and q("sub_00011000") is None

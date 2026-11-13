@@ -1149,6 +1149,8 @@
                   <div class="step-pair">
                     <button type="button" id="btn-step4-cancel" class="btn btn-cancel" onclick="cancelAndSavePartial()" disabled>Cancel &amp; Save</button>
                     <button type="button" id="btn-autopilot" class="btn btn-autopilot" onclick="toggleAutopilot()">Batch Run</button>
+                    <button type="button" id="btn-easy" class="btn btn-autopilot" onclick="toggleEasyPass()"
+                            title="No AI and no key: the portal compiles its own starter code for every open function, smallest first, and records the ones that match byte for byte. It runs in the background; you can keep working.">Match the easy ones</button>
                   </div>
                 </div>
               </div>
@@ -3312,6 +3314,170 @@
     return data.reply || '';
   }
 
+  /* ===================================================================
+   * The easy pass: the portal's own starter code tried on every open function. No AI, no key.
+   * =================================================================== */
+  let easyWatching = false;
+
+  function renderEasy(st) {
+    const b = $('btn-easy');
+    b.textContent = st && st.running ? 'Stop easy pass (' + fmtInt(st.matched) + ' matched, ' + fmtInt(st.tried) + '/' + fmtInt(st.total) + ')' : 'Match the easy ones';
+    b.classList.toggle('running', !!(st && st.running));
+  }
+
+  async function watchEasyPass(announce) {
+    if (easyWatching) return;
+    easyWatching = true;
+    try {
+      for (;;) {
+        let st;
+        try { st = await apiFetchJson('/api/easy-pass'); } catch (e) { await sleep(3000); continue; }
+        renderEasy(st);
+        if (st.progress) { STATE.progress = st.progress; updateHeader(st.progress); }
+        if (st.leaderboard) { STATE.leaderboard = st.leaderboard; renderLeaderboard(); }
+        if (!st.running) {
+          if (announce) {
+            setStatus('Easy pass finished: ' + fmtInt(st.matched) + ' of ' + fmtInt(st.tried) + ' functions matched from the portal\'s own starter code, byte for byte.' +
+              (st.matched ? ' They are matched, not yet named: press Submit your work to send them, and see "Needs names" for what is left to tidy.' : '') +
+              (st.last && !st.matched ? ' ' + st.last : ''), st.matched ? 'ok' : 'info');
+            refreshSideState();
+            if (typeof loadQueuePage === 'function') loadQueuePage();
+          }
+          return;
+        }
+        announce = true;
+        await sleep(2500);
+      }
+    } finally {
+      easyWatching = false;
+    }
+  }
+
+  async function toggleEasyPass() {
+    if (!requireSignIn('match the easy ones')) return;
+    const running = $('btn-easy').classList.contains('running');
+    if (!running && !confirm('The portal will compile its own starter code for every function that is still open, smallest first, and record each one ' +
+        'that matches byte for byte under your name. No AI is used and nothing is sent anywhere. The whole game takes hours; it runs in the background, ' +
+        'picks up where it left off, and you can stop it at any time. Start?')) return;
+    try {
+      const st = await postJson('/api/easy-pass', Object.assign({ stop: running }, creds()));
+      if (!st.ok) { setStatus(st.error || 'Could not start the easy pass.', 'err'); return; }
+      renderEasy(st);
+      if (!running) setStatus('Easy pass started: trying every open function in the background, smallest first. Matches are saved as they are found.', 'info');
+      watchEasyPass(true);
+    } catch (e) {
+      setStatus('Easy pass: ' + e.message, 'err');
+    }
+  }
+
+  /* ===================================================================
+   * AI names pass: a matched function, read again only to name things. The bytes may not change.
+   * =================================================================== */
+  const AI_NAMES_TRIES = 3;
+
+  function buildNamesPrompt(t, code, feedback) {
+    const g = t.readable || {};
+    const use = Array.isArray(t.names_to_use) ? t.names_to_use : [];
+    return [
+      'This C++ from Scarface: The World Is Yours (2006) is already verified: with Microsoft Visual C++ 2003 (MSVC 7.1) it compiles byte for byte to ' +
+        t.symbol + ' at ' + t.va + ' (' + t.size + ' bytes). Your only job is to make it easier for a person to read. The compiled bytes must not change at all.',
+      'Verified C++:' + NL + code,
+      (g.stand_ins || []).length ? 'Stand-in names still in it: ' + g.stand_ins.join(', ') + (g.raw_addresses ? '; and ' + g.raw_addresses + ' place(s) that work on a raw address instead of a member.' : '.') : '',
+      use.length ? 'These functions it calls have known names. Declare each under its name (as a member function of the class named, with the same arguments and calling convention as now) and call it by that name; the portal checks the call still goes to the same address:' + NL +
+        use.map((n) => n.now + ' is ' + n.name).join(NL) : '',
+      aiGuideLine(t),
+      aiNeighbours(t),
+      'Disassembly, to work out what things are:' + NL + (Array.isArray(t.disasm_lines) ? t.disasm_lines : []).join(NL),
+      'WHAT YOU MAY CHANGE: names of members, parameters, locals and classes; types that have the same size and compile the same; raw pointer arithmetic into a named member at the same offset; comments.',
+      'WHAT MUST STAY: the function\'s own name (' + String(t.symbol).split('::').pop() + ', so the portal can find it); the order and sizes of members; every called function or global that is not in the list above keeps its sub_XXXXXXXX or DAT_XXXXXXXX name, because that name is how its address is checked.',
+      'Name only what the code, the notes above or a string it uses shows. Say in a short comment what each new name rests on. A guessed name that sounds sure is worse than an honest stand-in: leave those as they are.',
+      feedback || '',
+      'Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block and nothing else. If nothing here can be named honestly, reply with a single line starting GIVE UP: and the reason, and no code.'
+    ].filter(Boolean).join(NL + NL);
+  }
+
+  async function runAiNames() {
+    const t = currentTask;
+    if (!t || t.status !== 'VERIFIED' || workbenchLocked()) return false;
+    if (!requireSignIn('ask the AI for names')) return false;
+    const cfg = getAiConfig();
+    if (cfg.provider !== 'ollama' && !cfg.api_key) {
+      setStatus('Paste an API key in the AI settings first: the names pass uses your own AI.', 'warn');
+      return false;
+    }
+    const myGen = ++runGen;
+    const cancelled = () => myGen !== runGen || !currentTask || currentTask.id !== t.id;
+    const base = editorEl().value;
+    isBusy = true;
+    runAbortCtrl = new AbortController();
+    const signal = runAbortCtrl.signal;
+    syncWorkflowButtons();
+    renderReadable(t);
+    resetAiMeter(false);
+    const mon = startActivityMonitor('Names pass: asking ' + cfg.model + '...', 20);
+    const was = (t.readable && t.readable.left) || 0;
+    let feedback = '';
+    let last = '';
+    try {
+      for (let attempt = 1; attempt <= AI_NAMES_TRIES; attempt++) {
+        updateActivityMonitor('Names pass, try ' + attempt + '/' + AI_NAMES_TRIES + '...', 'Asking ' + cfg.model + ' for names...', 20 + 25 * (attempt - 1));
+        let reply;
+        try {
+          reply = await callUserAiApi(buildNamesPrompt(t, base, feedback), signal, false);
+        } catch (err) {
+          if (cancelled() || err.name === 'AbortError') return false;
+          setStatus('API error: ' + err.message, 'err');
+          return false;
+        }
+        if (cancelled()) return false;
+        const why = aiGaveUp(reply);
+        if (why !== null) {
+          setStatus('The AI found nothing it could name honestly' + (why ? ': "' + why + '"' : '') + '. The saved version is unchanged.', 'info');
+          return false;
+        }
+        const candidate = extractCppBlock(reply);
+        if (!candidate || candidate.trim() === base.trim()) { feedback = 'Your last reply changed nothing. Name something, or reply GIVE UP:.'; last = 'it changed nothing'; continue; }
+        updateActivityMonitor(null, 'Compiling try ' + attempt + ' to check the bytes did not change...', 35 + 25 * (attempt - 1));
+        const r = await postJson('/api/verify', Object.assign({ id: t.id, cpp_code: candidate }, creds(),
+          { tool_used: getToolUsed(), keep_revision: true, only_if_clearer: true }), signal);
+        if (cancelled()) return false;
+        if (r && r.revised) {
+          setEditor(candidate);
+          if (r.task) updateTaskUI(r.task, { keepEditor: true, keepDiff: true });
+          const now = (r.task && r.task.readable && r.task.readable.left) || 0;
+          setStatus('Names improved and it still matches byte for byte: ' + (now ? now + ' left to name (was ' + was + ').' : 'it now reads as finished C++.') +
+            ' Read the new names before you trust them; Submit your work sends the new version.', 'ok');
+          refreshSideState();
+          return true;
+        }
+        if (!r || !r.ok) {
+          last = 'it did not compile';
+          feedback = 'Your last version did not compile:' + NL + String((r && (r.compiler_error || r.error)) || 'unknown error').slice(0, 2000);
+        } else if (!r.is_exact) {
+          last = 'it changed the compiled bytes';
+          feedback = buildDiffFeedback(r, 'Your last version') + NL + 'It changed the compiled bytes, so it was dropped. Start again from the verified C++ above and change names only.';
+        } else {
+          last = r.not_kept || 'it was no clearer';
+          feedback = 'Your last version still matched but was not kept: ' + last;
+        }
+        updateActivityMonitor(null, 'Try ' + attempt + ': not kept (' + last + ').');
+      }
+      setStatus('The names pass made ' + AI_NAMES_TRIES + ' tries and none could be kept (last: ' + last + '). The saved version is unchanged.', 'warn');
+      return false;
+    } catch (e) {
+      if (!cancelled() && e.name !== 'AbortError') setStatus('Names pass error: ' + e.message, 'err');
+      return false;
+    } finally {
+      stopActivityMonitor(mon);
+      if (myGen === runGen) {
+        runAbortCtrl = null;
+        isBusy = false;
+        syncWorkflowButtons();
+        if (currentTask && currentTask.id === t.id) renderReadable(currentTask);
+      }
+    }
+  }
+
   /**
    * Returns true on a 100% match, false when stopped/unsolved,
    * or a string code: 'NEEDS_SIGNIN' | 'CLAIM_FAILED' | 'NO_KEY' | 'API_ERROR'.
@@ -5289,6 +5455,16 @@
     let rest = more > 0 ? ' and ' + more + ' more' : '';
     if (g.raw_addresses) rest += (names.length ? '; ' : '') + g.raw_addresses + (g.raw_addresses === 1 ? ' place works' : ' places work') + ' on a raw address';
     box.appendChild(document.createTextNode(rest + '. Rename or retype them, press Compile, and the better version is kept if it still matches.'));
+    if (t.can_rename && !isPs2(t.bin)) {
+      box.appendChild(document.createTextNode(' '));
+      const b = el('button', 'Ask the AI to name them', 'btn-sm');
+      b.type = 'button';
+      b.id = 'btn-ai-names';
+      b.title = 'Uses your AI key. The bytes stay fixed: a version is kept only if it still matches exactly and leaves fewer things to name.';
+      b.disabled = isBusy || autopilotRunning;
+      b.onclick = () => runAiNames();
+      box.appendChild(b);
+    }
   }
 
   function renderGuide(t) {
@@ -5884,6 +6060,7 @@
       if (STATE.repo_url) applyRepoUrl(STATE.repo_url);
       showBinaryProblems(STATE.binary_problems || {});
       loadSetup();
+      watchEasyPass(false);        // a pass started earlier keeps going: show it
       markSourcesDirty();
       renderLeaderboard();
       online = true;

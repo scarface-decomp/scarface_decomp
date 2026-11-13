@@ -35,6 +35,7 @@ import web_security as WS  # noqa: E402  (the real portal's headers, so the test
 
 PAGE_CSP = WS.page_policy(("https://decomp.me",))
 LOCK = threading.Lock()
+EASY: dict = {"running": False, "total": 0, "tried": 0, "matched": 0, "by": "", "last": "", "polls": 0}
 LEASE_SEC = 15 * 60
 DELAYS = {"verify": 0.15, "ai": 0.25, "fast": 0.05}
 CONFIG = {"lease_sec": LEASE_SEC, "no_login": False, "legacy_claim": False, "dme_browser_fail": False}
@@ -441,6 +442,11 @@ class Handler(BaseHTTPRequestHandler):
                 if CONFIG.get("model_error"):
                     return self._json({"ok": False, "error": "Nothing to show in Blender: nothing in these files to export."}, 415)
                 return self._bytes(b"glTF" + bytes(8) if CONFIG.get("bad_glb") else small_glb(), "model/gltf-binary")
+            if u.path == "/api/easy-pass":
+                EASY["polls"] += 1
+                if EASY["running"] and EASY["polls"] > 1:
+                    EASY.update(running=False, tried=EASY["total"], matched=3)
+                return self._json(dict(EASY, ok=True))
             if u.path == "/api/setup":
                 return self._json({"ok": True, "items": CONFIG.get("setup") or [
                     {"key": "game", "title": "The game's program file", "ok": True, "note": "Xbox default.xbe", "fix": "", "needed": "To check functions"},
@@ -547,6 +553,7 @@ class Handler(BaseHTTPRequestHandler):
                 GF["status"] = {"running": False, "phase": "", "done": 0, "total": 0, "files": 0, "label": "",
                                 "message": "", "error": ""}
                 GF["summary"] = None
+                EASY.update(running=False, total=0, tried=0, matched=0, by="", last="", polls=0)
                 GF["files"] = {}
                 GF["copy"] = None
                 GF["movies"] = {}
@@ -609,6 +616,13 @@ class Handler(BaseHTTPRequestHandler):
                 AUDIT.append({"action": "CHECKPOINT", "symbol": t["symbol"], "user": user, "va": t["va"],
                               "bytes": f"{t['best_matched_bytes']}/{t['size']} B", "time": time.strftime("%H:%M:%S")})
                 return self._json({"ok": True, "task": public_task(t), "sources": SOURCES})
+        if u.path == "/api/easy-pass":
+            with LOCK:
+                user, err = auth(body)
+                if err:
+                    return self._json({"ok": False, "error": err})
+                EASY.update(running=not body.get("stop"), total=40, tried=0, matched=0, by=user, polls=0)
+                return self._json(dict(EASY, ok=True))
         if u.path == "/api/verify":
             time.sleep(DELAYS["verify"])
             with LOCK:

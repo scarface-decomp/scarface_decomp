@@ -46,6 +46,22 @@ def key_for(task: dict) -> str:
     return f"{task['bin']}:0x{int(task['fva_int']):08X}"
 
 
+def addresses(data: dict, version: str) -> Dict[str, int]:
+    """{"Weapon::Reload": 0x0011E4A0} for one version: the names code may call a function by while the
+    verifier still checks the call goes to that address. A name given to two addresses is left out."""
+    out: Dict[str, int] = {}
+    twice = set()
+    names = data.get("names")
+    for key, info in (names.items() if isinstance(names, dict) else ()):
+        name = info.get("name") if isinstance(info, dict) else None
+        if not KEY_RE.match(key) or key.split(":")[0] != version or not isinstance(name, str):
+            continue
+        if name in out:
+            twice.add(name)
+        out[name] = int(key.split(":")[1], 16)
+    return {n: a for n, a in out.items() if n not in twice}
+
+
 def problems(data: dict, known: Optional[Dict[str, set]] = None) -> List[str]:
     """What is wrong with a names file. known: the addresses each version has (to catch typos)."""
     out: List[str] = []

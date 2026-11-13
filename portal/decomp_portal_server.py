@@ -484,6 +484,31 @@ def tier_meta(size: int) -> dict:
     return tier(size)
 
 
+def matched_tasks(tasks: List[dict], have) -> List[dict]:
+    """A queue built on this computer starts with the functions still to do, so the ones matched before it
+    was built (everything that came with the download) aren't in it. Without them a matched function can't
+    be opened or tidied here, isn't shown to the AI as a classmate, and is never tried on its look-alikes.
+    Returns a task for each of those, made from the registry."""
+    from queue_builder import CODE_CHECK, LANES, tier
+    there = {task_key(t) for t in tasks if "fva_int" in t and t.get("bin")}
+    out = []
+    for key, e in REGISTRY["entries"].items():
+        b = e.get("bin")
+        if key in there or b not in have or b not in LANES:
+            continue
+        try:
+            va, size = int(str(e["va"]), 16), int(e["size"])
+        except (KeyError, ValueError):
+            continue
+        t = {"id": LANES[b][0] + f"{va:08X}", "bin": b, "lane": LANES[b][1], "symbol": e.get("symbol") or f"sub_{va:08X}",
+             "match_substr": e.get("match") or "", "va": f"{LANES[b][2]}0x{va:08X}", "fva_int": va, "size": size,
+             "flags": e.get("flags") or "", "status": "UNCLAIMED", "claimed_by": "",     # load_tasks marks it matched
+             "hint": f"Matched; {size} bytes.", "code_check": CODE_CHECK}
+        t.update(tier(size))
+        out.append(t)
+    return out
+
+
 def load_tasks() -> None:
     global ALL_TASKS, TASK_BY_ID
     tasks = read_json(QUEUE_JSON, None)
@@ -498,6 +523,11 @@ def load_tasks() -> None:
             print(f"[*] New game files found ({names}); adding their functions to the work queue (a few minutes)...")
         tasks = build_queue(have, tasks, set(REGISTRY["entries"]), progress=print, **seed_data(BASE_DIR))
         write_json(QUEUE_JSON, tasks)
+    done = matched_tasks(tasks, have)
+    if done:
+        print(f"[*] Adding {len(done):,} functions that are already matched, so they can be opened, tidied and "
+              "tried on their look-alikes...")
+        tasks += done
     if any("lookalikes" not in t for t in tasks if "fva_int" in t):
         images = {b: image_for(b) for b in BIN_ORDER if image_for(b)}
         if images:
@@ -726,18 +756,50 @@ def ps2_starter(t: dict) -> str:
 _NAMES_CACHE: list = [None, {}]
 
 
-def community_name(t: dict) -> Optional[dict]:
-    """A name people worked out for this function (reports/names.json), re-read when the file changes."""
+def community_names() -> dict:
+    """reports/names.json's names, re-read when the file changes."""
     path = REPORTS_DIR / "names.json"
     try:
         mtime = path.stat().st_mtime
     except OSError:
-        return None
+        return {}
     if _NAMES_CACHE[0] != mtime:
         names = NAMES.load(path).get("names", {})
         _NAMES_CACHE[:] = [mtime, names if isinstance(names, dict) else {}]
-    info = _NAMES_CACHE[1].get(NAMES.key_for(t))
+        _KNOWN_NAMES.clear()
+    return _NAMES_CACHE[1]
+
+
+def community_name(t: dict) -> Optional[dict]:
+    """A name people worked out for this function (reports/names.json)."""
+    info = community_names().get(NAMES.key_for(t))
     return info if isinstance(info, dict) and isinstance(info.get("name"), str) else None
+
+
+_KNOWN_NAMES: Dict[str, Dict[str, int]] = {}
+
+
+def known_names(version: str) -> Dict[str, int]:
+    """The names code for this version may call a function by, each with its address (reports/names.json)."""
+    names = community_names()
+    if version not in _KNOWN_NAMES:
+        _KNOWN_NAMES[version] = NAMES.addresses({"names": names}, version)
+    return _KNOWN_NAMES[version]
+
+
+_CALLED = re.compile(r"\b(?:sub|FUN|func)_([0-9A-Fa-f]{8})\b")
+
+
+def names_to_use(t: dict, code: str) -> List[dict]:
+    """Functions this code calls by address that have a name: [{"now": "sub_0011E4A0", "name": "Weapon::Reload"}]."""
+    by_address = {a: n for n, a in known_names(t["bin"]).items()}
+    out, seen = [], set()
+    for m in _CALLED.finditer(READ.cpp_policy.strip_cpp_comments(code or "")):
+        address = int(m.group(1), 16)
+        if address in by_address and address != t["fva_int"] and m.group(0) not in seen:
+            seen.add(m.group(0))
+            out.append({"now": m.group(0), "name": by_address[address]})
+    return out
 
 
 _GUIDE: Optional[Dict[Tuple[str, int], dict]] = None
@@ -855,6 +917,10 @@ def live_task(t: dict) -> dict:
     entry = REGISTRY["entries"].get(task_key(t)) if t.get("status") == "VERIFIED" else None
     if entry and entry.get("code"):
         out["readable"] = readable_grade(task_key(t), entry["code"])
+        out["can_rename"] = entry.get("source") == "portal" and not entry.get("excerpt")
+        named_calls = names_to_use(t, entry["code"])
+        if named_calls:
+            out["names_to_use"] = named_calls
     near = neighbours(t)
     if near:
         out["neighbours"] = near
@@ -879,7 +945,9 @@ def live_task(t: dict) -> dict:
     out["lookalike_list"] = [{k: m[k] for k in ("id", "symbol", "va", "status")} for m in others[:12]]
     out["counterparts"] = [{"id": m["id"], "build": BUILD_NAMES.get(m["bin"], m["bin"]), "va": m["va"],
                             "status": m["status"]} for m in counterparts(t)]
-    if (t.get("best_cpp") or "").strip():
+    if entry and (entry.get("code") or "").strip() and not entry.get("excerpt"):
+        out["starter_cpp"] = entry["code"]          # a matched function shows the text that matched
+    elif (t.get("best_cpp") or "").strip():
         out["starter_cpp"] = t["best_cpp"]
     elif not (t.get("starter_cpp") or "").strip():
         code, src, kind = "", "", ""
@@ -1044,7 +1112,8 @@ def run_verify(t: dict, cpp_code: str, object_b64: str = "", slug: str = "") -> 
     best: Optional[dict] = None
     for flags in flag_options(t):
         res = MV.verify_submission(cpp_code, tb, flags, t.get("match_substr", ""), fn_va=t["fva_int"],
-                                   image=image_for(t["bin"]), include_dirs=[INCLUDE_DIR, RECON_DIR])
+                                   image=image_for(t["bin"]), include_dirs=[INCLUDE_DIR, RECON_DIR],
+                                   known_names=known_names(t["bin"]))
         res["flags"] = flags
         if not res.get("ok"):
             # A compile error or policy rejection does not depend on /G6 vs /G7.
@@ -1110,22 +1179,30 @@ def _unchecked(e: dict) -> int:
     return int(m.group(1)) if m else 0
 
 
-def revise_verified(t: dict, cpp_code: str, user: str, res: dict) -> bool:
+def revise_verified(t: dict, cpp_code: str, user: str, res: dict, clearer: bool = False) -> str:
     """A verified function compiled again, exactly, from different code (names cleaned up, comments
     added): keep the new text. Credit stays with whoever matched it first. Only for functions matched
     in the portal (the others are rebuilt from their source files) and never when more addresses
-    would go unchecked."""
+    would go unchecked. clearer: keep it only when it leaves fewer things to name than the stored text
+    (a names pass that didn't name anything isn't worth a revision). Returns "" when kept, otherwise why not."""
     e = REGISTRY["entries"].get(task_key(t))
-    if not e or e.get("source") != "portal" or e.get("excerpt") or not res.get("verified"):
-        return False
+    if not e or e.get("source") != "portal" or e.get("excerpt"):
+        return "This function's text comes from a source file, so it is changed there."
+    if not res.get("verified"):
+        return "It no longer compiles to the same bytes."
     new = cpp_code.strip()
     if not new or new == (e.get("code") or "").strip():
-        return False
+        return "Nothing changed."
     if res.get("reloc_unverified", 0) > _unchecked(e):
-        return False
+        return ("It calls or reads something by a name the portal can't tie to an address. Keep the sub_… or "
+                "DAT_… name for anything that isn't in reports/names.json.")
+    if clearer:
+        was, now = READ.grade(e.get("code") or "")["left"], READ.grade(new)["left"]
+        if now >= was:
+            return f"It leaves {now} thing(s) to name; the stored text leaves {was}."
     e.update(code=new, revised_by=user, revised_at=stamp(), compiler=PV.COMPILER if PO.is_ps2(t["bin"]) else compiler_build())
     save_registry()
-    return True
+    return ""
 
 
 def save_registry() -> None:
@@ -1171,8 +1248,10 @@ CATCHUP_JSON = PRIVATE_DIR / "lookalike_catchup.json"   # this computer's earlie
 
 
 def _catchup_sig(t: dict, cpp_code: str) -> str:
-    """Which match was tried: a revised match (new code) is tried again."""
-    return hashlib.sha1((task_key(t) + "\n" + cpp_code.strip()).encode("utf-8")).hexdigest()[:16]
+    """Which match was tried, and with which carry-over rules: a revised match (new code) is tried again,
+    and so is every earlier failure once the rules can carry over more (LA.VERSION)."""
+    rules = "" if LA.VERSION == 1 else f"\nrules {LA.VERSION}"
+    return hashlib.sha1((task_key(t) + "\n" + cpp_code.strip() + rules).encode("utf-8")).hexdigest()[:16]
 
 
 def catchup_targets(t: dict, cpp_code: str, user: str, tried: dict) -> List[dict]:
@@ -1281,7 +1360,7 @@ def catch_up_lookalikes() -> int:
     the queue (a game file added later, such as the prototype, or matches pulled from GitHub) never did, so
     at startup each one is tried on its unmatched look-alikes in the background. That is how the
     prototype's copies of retail code fill in by themselves. Returns how many functions will be tried."""
-    if not MV.find_msvc71_bin():
+    if not MV.find_msvc71_bin() or os.environ.get("SCARFACE_NO_CATCHUP") == "1":
         return 0
     tried = read_json(CATCHUP_JSON, {}) if CATCHUP_JSON.exists() else {}
     with STATE_LOCK:
@@ -1299,6 +1378,124 @@ def catch_up_lookalikes() -> int:
         total += queue_port(t, e["code"], e.get("verified_by") or "Imported (unattributed)",
                             e.get("tool_used") or "", catchup=True, tried=tried)
     return total
+
+
+# =========================================================================== #
+# The easy pass: the portal's own starter code, tried on every open function (no AI)
+# =========================================================================== #
+# The starter code the portal writes from the disassembly (and from a matched look-alike or the same
+# method in another build) already compiles to the exact bytes for many small functions. Nobody finds
+# out until someone opens the function and presses Compile. This tries them all, smallest first, in the
+# background, and records the ones that match exactly with every address checked.
+
+EASY_TOOL = "the portal's starter code (no AI)"
+EASY_VERSION = 1                                   # raise when the starter code gets better: tried again
+EASY_MAX = int(os.environ.get("SCARFACE_EASY_MAX", "0"))    # at most this many a run (0: all of them)
+EASY_JSON = PRIVATE_DIR / "easy_pass.json"         # which functions this computer already tried (gitignored)
+EASY: dict = {"running": False, "stop": False, "total": 0, "tried": 0, "matched": 0, "by": "", "last": ""}
+_EASY_START = threading.Lock()
+
+
+def easy_status() -> dict:
+    return {k: EASY[k] for k in ("running", "total", "tried", "matched", "by", "last")}
+
+
+def easy_targets(user: str, tried: dict) -> List[dict]:
+    """Open functions nobody else holds that haven't been tried with this starter code, smallest first."""
+    with STATE_LOCK:
+        out = [t for t in ALL_TASKS if t["status"] != "VERIFIED" and not PO.is_ps2(t["bin"])
+               and not _held_by_someone_else(t, user) and tried.get(task_key(t)) != EASY_VERSION]
+    out.sort(key=lambda t: (int(t["size"]), t["bin"] == "proto", t["fva_int"]))
+    return out[:EASY_MAX] if EASY_MAX else out
+
+
+def easy_codes(t: dict) -> List[str]:
+    """What to try on t: its best checkpoint, a matched look-alike's or counterpart's code rewritten for
+    it, and the code written from its disassembly."""
+    tb = target_bytes(t)
+    if not tb:
+        return []
+    with STATE_LOCK:
+        out = [t.get("best_cpp") or "", lookalike_starter(t)[0], counterpart_starter(t)[0]]
+    out.append(synthesize_cpp(t["symbol"], t["va"], tb, disassemble(tb), relocs=starter_relocs(t, tb)))
+    seen, codes = set(), []
+    for code in out:
+        if code.strip() and code.strip() not in seen:
+            seen.add(code.strip())
+            codes.append(code)
+    return codes
+
+
+def easy_pass(user: str) -> dict:
+    tried = read_json(EASY_JSON, {}) if EASY_JSON.exists() else {}
+    targets = easy_targets(user, tried)
+    EASY.update(total=len(targets), tried=0, matched=0, by=user, last="")
+    unsaved = 0
+
+    def remember() -> None:
+        try:
+            write_json(EASY_JSON, tried)
+        except OSError:
+            pass
+
+    try:
+        for t in targets:
+            if EASY["stop"]:
+                break
+            hit = None
+            unavailable = False
+            for code in easy_codes(t):
+                res = run_verify(t, code)
+                unavailable = bool(res.get("compiler_unavailable"))
+                if res.get("ok") and res.get("verified") and not res.get("reloc_unverified"):
+                    hit = (code, res)
+                    break
+                if unavailable:
+                    break
+            EASY["tried"] += 1
+            if unavailable:
+                EASY["last"] = "The compiler or the game file is missing, so the pass stopped."
+                break
+            if not hit:
+                tried[task_key(t)] = EASY_VERSION
+                continue
+            with STATE_LOCK:
+                if t["status"] == "VERIFIED" or _held_by_someone_else(t, user):
+                    continue
+                record_verified(t, hit[0], user, EASY_TOOL, hit[1], write=False)
+                t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
+                save_overlay(t)
+                EASY["matched"] += 1
+                EASY["last"] = f"{t['symbol']} ({t['va']}, {t['size']} bytes)"
+                unsaved += 1
+                if unsaved >= 25:
+                    save_registry()
+                    remember()
+                    unsaved = 0
+    finally:
+        with STATE_LOCK:
+            if unsaved:
+                save_registry()
+            remember()
+            if EASY["matched"]:
+                append_audit({"time": stamp(), "user": user, "action": "VERIFIED",
+                              "symbol": f"{EASY['matched']} function(s) from the portal's starter code", "va": "",
+                              "bytes": "easy pass, no AI"})
+                print(f"[+] Easy pass by {user}: {EASY['matched']} matched of {EASY['tried']} tried "
+                      f"-> {len(REGISTRY['entries'])} total")
+            EASY.update(running=False, stop=False)
+    return easy_status()
+
+
+def start_easy_pass(user: str) -> dict:
+    with _EASY_START:
+        if EASY["running"]:
+            return dict(easy_status(), ok=True)
+        if not MV.find_msvc71_bin():
+            return {"ok": False, "error": NO_COMPILER_HELP}
+        EASY.update(running=True, stop=False, total=0, tried=0, matched=0, by=user, last="")
+        threading.Thread(target=easy_pass, args=(user,), name="easy-pass", daemon=True).start()
+    return dict(easy_status(), ok=True)
 
 
 # =========================================================================== #
@@ -2423,6 +2620,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": False, "error": str(e)}, 400)
         if u.path == "/api/import-status":
             return self._json(dict(IMPORT_STATUS, failed=list(IMPORT_STATUS.get("failed", []))[:200]))
+        if u.path == "/api/easy-pass":
+            with STATE_LOCK:
+                return self._json(dict(easy_status(), ok=True, progress=progress(), leaderboard=leaderboard()))
         if u.path == "/api/lookalikes":
             with STATE_LOCK:
                 t = TASK_BY_ID.get(q1("id"))
@@ -2507,7 +2707,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/verify": self.post_verify, "/api/fast-synthesize": self.post_synth, "/api/ai-proxy": self.post_ai,
             "/api/git-sync": self.post_git, "/api/upload-script": self.post_upload,
             "/api/submit": self.post_submit, "/api/import-submission": self.post_import,
-            "/api/decompme": self.post_decompme,
+            "/api/decompme": self.post_decompme, "/api/easy-pass": self.post_easy_pass,
             "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
             "/api/game-files/blender": self.post_game_files_blender,
             "/api/game-files/blender-stop": self.post_game_files_blender_stop,
@@ -2538,6 +2738,17 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"ok": False, "error": msg}, 403)
             return None
         return body["user"].strip()
+
+    def post_easy_pass(self, body):
+        """Start (or stop) trying the portal's own starter code on every open function, for this contributor."""
+        user = self._auth(body)
+        if not user:
+            return
+        if body.get("stop"):
+            if EASY["running"]:
+                EASY["stop"] = True
+            return self._json(dict(easy_status(), ok=True))
+        return self._json(start_easy_pass(user))
 
     def post_login(self, body):
         ok, msg = authenticate(body.get("user", ""), body.get("pin", ""))
@@ -2625,12 +2836,15 @@ class Handler(BaseHTTPRequestHandler):
                               "bytes": f"{t['size']}/{t['size']} B"})
                 newly = True
                 print(f"[+] VERIFIED by {user}: {t['symbol']} ({t['va']}) -> {len(REGISTRY['entries'])} total")
-            revised = bool(already and body.get("keep_revision") and revise_verified(t, code, user, res))
+            revised, not_kept = False, ""
+            if already and body.get("keep_revision"):
+                not_kept = revise_verified(t, code, user, res, clearer=bool(body.get("only_if_clearer")))
+                revised = not not_kept
             if revised:
                 append_audit({"time": stamp(), "user": user, "action": "REVISED", "symbol": t["symbol"], "va": t["va"]})
             out = dict(res)
             entry = REGISTRY["entries"].get(task_key(t))
-            out.update(newly_promoted=newly, revised=revised,
+            out.update(newly_promoted=newly, revised=revised, not_kept=not_kept,
                        saved_to=RO.entry_path(entry) if entry and t["status"] == "VERIFIED" else "",
                        progress=progress(), leaderboard=leaderboard(), task=live_task(t),
                        target_hex=" ".join(f"{b:02X}" for b in (target_bytes(t) or b"")))

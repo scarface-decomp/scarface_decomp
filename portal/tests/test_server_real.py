@@ -59,10 +59,26 @@ def portal(tmp_path_factory):
 
     reg_p = work / "reports" / "verified_registry.json"
     reg = json.loads(reg_p.read_text(encoding="utf-8"))
-    reg["entries"].pop(KEY, None)
+    # The test function and everything matched from the same code go back to "open", as they were when
+    # nobody had matched them: its look-alikes are what the carry-over tests carry the match to.
+    first = (reg["entries"].get(KEY) or {}).get("ported_from") or TID
+    for k in [k for k, e in reg["entries"].items()
+              if k == KEY or e.get("ported_from") in (first, TID) or f"{e['bin']}_{int(str(e['va']), 16):08X}" == first]:
+        reg["entries"].pop(k)
     reg_p.write_text(json.dumps(reg), encoding="utf-8")
     q_p = work / "reports" / "full_remaining_queue.json"
     queue = json.loads(q_p.read_text(encoding="utf-8")) if q_p.exists() else []
+    # The test matches the function under a plain name, and a match is only carried to look-alikes named the
+    # same way: give a few of its look-alikes plain names too (and regroup), so there is somewhere to carry it.
+    group = next((t.get("lookalike_group") for t in queue if t.get("id") == TID), "")
+    mates = [t for t in queue if group and t.get("lookalike_group") == group and t.get("bin") == "xb" and t.get("id") != TID][:5]
+    for t in mates:
+        t.update(symbol=f"sub_{t['fva_int']:08X}", match_substr=f"sub_{t['fva_int']:08X}")
+        reg["entries"].pop(f"xb:0x{t['fva_int']:08X}", None)
+    for t in queue if mates else []:
+        for k in ("lookalike_group", "lookalikes", "lookalike_rep"):
+            t.pop(k, None)
+    reg_p.write_text(json.dumps(reg), encoding="utf-8")
     queue = [t for t in queue if t.get("id") != TID]
     queue.insert(0, {"id": TID, "bin": "xb", "lane": "Shared Engine & Gameplay", "symbol": "PauseMenuPageStats::vfunc_00",
                      "match_substr": "sub_001CDC80", "va": "0x001CDC80", "fva_int": VA, "size": 6,
@@ -74,7 +90,7 @@ def portal(tmp_path_factory):
     port = _free_port()
     import msvc_verify as MV
     env = dict(os.environ, SCARFACE_PORT=str(port), SCARFACE_NO_BROWSER="1", SCARFACE_MAINTAINERS="Maint",
-               SCARFACE_MSVC_BIN=str(MV.find_msvc71_bin()), SCARFACE_LOOKALIKE_MAX="3")
+               SCARFACE_MSVC_BIN=str(MV.find_msvc71_bin()), SCARFACE_LOOKALIKE_MAX="3", SCARFACE_EASY_MAX="12", SCARFACE_NO_CATCHUP="1")
     log = open(work / "server.log", "wb")
     proc = subprocess.Popen([sys.executable, "portal/decomp_portal_server.py"], cwd=work, env=env, stdout=log,
                             stderr=subprocess.STDOUT)
@@ -120,7 +136,7 @@ def test_health_and_progress_come_from_the_registry(portal):
     st = get(portal, "/api/state")
     prog = st["progress"]
     reg = json.loads((portal["work"] / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
-    assert prog["matched_functions"] == len(reg["entries"])
+    assert prog["matched_functions"] == sum(1 for e in reg["entries"].values() if e["bin"] in ("xb", "pc"))
     assert prog["by_binary"]["xbox"] == sum(1 for e in reg["entries"].values() if e["bin"] == "xb")
     assert "13.10.3052" in prog["compiler"]
 
@@ -331,14 +347,63 @@ def test_page_against_real_server(portal):
         errors = []
         pg.on("pageerror", lambda e: errors.append(str(e)))
         pg.goto(portal["base"] + "/#workbench")
-        reg = json.loads((portal["work"] / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
-        n = f"{len(reg['entries']):,}"
-        pg.wait_for_function(f"document.getElementById('top-verified-value').textContent.startsWith('{n} /')")
-        pg.wait_for_function("document.getElementById('live-by-binary').textContent.includes('Xbox')")
+        n = f"{get(portal, '/api/state')['progress']['matched_functions']:,}"
+        # (the real server's content policy forbids evaluating strings, so wait on the elements themselves)
+        sync_api.expect(pg.locator("#top-verified-value")).to_contain_text(f"{n} /", timeout=30000)
+        sync_api.expect(pg.locator("#live-by-binary")).to_contain_text("Xbox")
         pg.fill("#contrib-name", ALICE["user"])
         pg.fill("#contrib-pin", ALICE["pin"])
-        pg.click("#auth-form-row button[type=submit]")
+        with pg.expect_response("**/api/login", timeout=60000) as info:
+            pg.click("#auth-form-row button[type=submit]")
+        assert info.value.ok
         pg.wait_for_selector("#auth-signed-in-row", state="visible")
         pg.wait_for_selector(".queue-item")
         assert not errors, errors
         b.close()
+
+
+def test_a_names_pass_is_kept_only_when_it_names_something(portal):
+    """only_if_clearer: an exact revision replaces the saved text only if it leaves fewer stand-in names."""
+    work = portal["work"]
+    stored = json.loads((work / "reports" / "verified_registry.json").read_text(encoding="utf-8"))["entries"][KEY]["code"]
+    task = get(portal, f"/api/task?id={TID}")["task"]
+    assert task["starter_cpp"] == stored and task["can_rename"] and task["readable"]["left"] >= 1
+    same = stored + "\n// a comment names nothing\n"
+    _, res = post(portal, "/api/verify", {**BOB, "id": TID, "cpp_code": same, "keep_revision": True, "only_if_clearer": True})
+    assert res["is_exact"] and not res["revised"] and "to name" in res["not_kept"], res
+    worse = same.replace("DAT_00439DA4", "g_statsPage")          # a made-up name: its address can't be checked
+    _, res = post(portal, "/api/verify", {**BOB, "id": TID, "cpp_code": worse, "keep_revision": True, "only_if_clearer": True})
+    assert not res["revised"] and "reports/names.json" in res["not_kept"], res
+    after = json.loads((work / "reports" / "verified_registry.json").read_text(encoding="utf-8"))["entries"][KEY]["code"]
+    assert after == stored
+
+
+def test_easy_pass_matches_what_the_starter_code_already_gets(portal):
+    """The portal's own starter code, compiled for every open function: exact, fully checked ones are recorded."""
+    status, res = post(portal, "/api/easy-pass", {"user": "Nobody", "pin": "0000"})
+    assert status == 403
+    before = get(portal, "/api/state")["progress"]["matched_functions"]
+    _, res = post(portal, "/api/easy-pass", BOB)
+    assert res["ok"] and res["running"], res
+    for _ in range(600):
+        st = get(portal, "/api/easy-pass")
+        if not st["running"]:
+            break
+        time.sleep(0.5)
+    assert not st["running"] and st["tried"] == st["total"] > 0 and st["matched"] > 0 and st["by"] == "Bob", st
+    assert st["progress"]["matched_functions"] + st["progress"]["prototype"]["matched"] >= before + st["matched"]
+    reg = json.loads((portal["work"] / "reports" / "verified_registry.json").read_text(encoding="utf-8"))
+    mine = [e for e in reg["entries"].values() if e.get("tool_used") == "the portal's starter code (no AI)"]
+    assert len(mine) == st["matched"] and all(e["verified_by"] == "Bob" for e in mine)
+    assert all("unchecked" not in (e.get("note") or "") for e in mine)
+    assert st["total"] == 12
+    tried = json.loads((portal["work"] / "portal" / "private" / "easy_pass.json").read_text(encoding="utf-8"))
+    assert len(tried) == st["tried"] - st["matched"]                    # the ones that didn't match aren't tried twice
+    _, again = post(portal, "/api/easy-pass", BOB)                       # the next twelve
+    _, stop = post(portal, "/api/easy-pass", {**BOB, "stop": True})
+    assert again["ok"] and stop["ok"]
+    for _ in range(600):
+        if not get(portal, "/api/easy-pass")["running"]:
+            break
+        time.sleep(0.5)
+    assert not get(portal, "/api/easy-pass")["running"]
