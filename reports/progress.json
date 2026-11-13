@@ -11,6 +11,13 @@
     "bytes": 214868,
     "ps2_bytes": 0
   },
+  "readable": {
+    "pc": 0,
+    "xb": 0,
+    "proto": 0,
+    "ps2": 0,
+    "total": 0
+  },
   "size_buckets": {
     "1-9 B": 1515,
     "10-19 B": 1007,

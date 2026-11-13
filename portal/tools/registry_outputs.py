@@ -182,6 +182,15 @@ def update_readme(readme: Path, registry: dict) -> bool:
 SIZE_BUCKETS = [("1-9 B", 1, 10), ("10-19 B", 10, 20), ("20-39 B", 20, 40), ("40-79 B", 40, 80), ("80+ B", 80, 1 << 30)]
 
 
+def _readable_counts(entries: list) -> dict:
+    import readability
+    by = defaultdict(int)
+    for e in entries:
+        if readability.is_readable(e.get("code", "")):
+            by["ps2" if ps2_overlay.is_ps2(e["bin"]) else e["bin"]] += 1
+    return {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "ps2": by["ps2"], "total": by["pc"] + by["xb"]}
+
+
 def progress_summary(registry: dict, queue: Optional[list], previous: Optional[dict]) -> dict:
     """Small summary for the website: verified counts from the registry, work-queue counts from the local
     queue file when there is one (otherwise the last known numbers are kept)."""
@@ -203,6 +212,8 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "ps2": by["ps2"], "total": by["pc"] + by["xb"],
                      "bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] in ("pc", "xb")),
                      "ps2_bytes": sum(int(e.get("size", 0)) for e in entries if ps2_overlay.is_ps2(e["bin"]))},
+        # of the matched: the ones with no stand-in names or raw address work left (tools/readability.py)
+        "readable": _readable_counts(entries),
         "size_buckets": {name: sum(1 for e in entries if e["bin"] in ("pc", "xb") and lo <= int(e.get("size", 0)) < hi)
                          for name, lo, hi in SIZE_BUCKETS},
         "contributors": dict(sorted(contributors.items(), key=lambda kv: (-kv[1], kv[0].lower()))),

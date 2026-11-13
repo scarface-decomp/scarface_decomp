@@ -52,6 +52,7 @@ import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
 import names as NAMES  # noqa: E402
 import good_first as GOOD  # noqa: E402
+import readability as READ  # noqa: E402
 import discord_feed as DISCORD  # noqa: E402
 import media as MEDIA  # noqa: E402
 import p3d_gltf as P3G  # noqa: E402
@@ -793,12 +794,26 @@ def setup_checklist() -> List[dict]:
     return rows
 
 
+_GRADES: Dict[str, Tuple[int, dict]] = {}
+
+
+def readable_grade(key: str, code: str) -> dict:
+    """How much of a matched function is left to name (see tools/readability.py), kept until its text changes."""
+    mark = hash(code)
+    got = _GRADES.get(key)
+    if got is None or got[0] != mark:
+        got = _GRADES[key] = (mark, READ.grade(code))
+    return got[1]
+
+
 def live_task(t: dict) -> dict:
     out = {k: v for k, v in t.items() if k not in ("best_cpp",)}
     note = guide_note(t)
     if note:
         out["guide"] = note
     entry = REGISTRY["entries"].get(task_key(t)) if t.get("status") == "VERIFIED" else None
+    if entry and entry.get("code"):
+        out["readable"] = readable_grade(task_key(t), entry["code"])
     if entry and entry.get("what"):
         out["what"], out["what_by"] = entry["what"], entry.get("what_by") or entry.get("verified_by", "")
     named = community_name(t) if t.get("status") != "VERIFIED" else None
@@ -2312,9 +2327,14 @@ class Handler(BaseHTTPRequestHandler):
                         continue
                     if lane == "IN_GUIDE" and guide_note(t) is None:
                         continue
-                    if lane not in ("ALL", "UNCLAIMED", "CLAIMED", "PARTIAL", "VERIFIED", "PROTO_IN_RETAIL", "IN_GUIDE") and lane not in t["lane"]:
+                    if lane == "NEEDS_NAMES":                # matched, with names or types still to work out
+                        e = REGISTRY["entries"].get(task_key(t)) if st == "VERIFIED" else None
+                        if not e or not readable_grade(task_key(t), e.get("code", ""))["left"]:
+                            continue
+                    if lane not in ("ALL", "UNCLAIMED", "CLAIMED", "PARTIAL", "VERIFIED", "PROTO_IN_RETAIL", "IN_GUIDE",
+                                    "NEEDS_NAMES") and lane not in t["lane"]:
                         continue
-                    if lane != "VERIFIED" and st == "VERIFIED" and sort_by != "VERIFIED_FIRST":
+                    if lane not in ("VERIFIED", "NEEDS_NAMES") and st == "VERIFIED" and sort_by != "VERIFIED_FIRST":
                         continue
                     if tier != "ALL" and t.get("tier") != tier:
                         continue
@@ -2323,11 +2343,14 @@ class Handler(BaseHTTPRequestHandler):
                     if lane == "PROTO_IN_RETAIL":
                         if not t.get("in_retail"):
                             continue
-                    elif not q and lane != "VERIFIED" and not in_default_queue(t) and not (
+                    elif not q and lane not in ("VERIFIED", "NEEDS_NAMES") and not in_default_queue(t) and not (
                             PO.is_ps2(t["bin"]) and lane != "ALL"):
                         continue
                     items.append(t)
-                if sort_by == "DEFAULT":
+                if lane == "NEEDS_NAMES" and sort_by == "DEFAULT":       # the nearest to finished first
+                    items.sort(key=lambda x: (readable_grade(task_key(x), REGISTRY["entries"][task_key(x)].get("code", ""))["left"],
+                                              -x["size"]))
+                elif sort_by == "DEFAULT":
                     # One function of each look-alike group first, biggest group first: matching it
                     # also matches the rest of its group.
                     items.sort(key=lambda x: -x.get("lookalikes", 0) if x.get("lookalike_rep") else 0)

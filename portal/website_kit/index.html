@@ -414,6 +414,9 @@
     .wb-what [hidden] { display: none !important; }
     .wb-guide { margin-top: 8px; max-width: 640px; padding: 8px 10px; border: 1px solid var(--line, #2a2a2a); border-left: 3px solid var(--accent, #b3261e); font-size: 0.86rem; }
     .wb-guide[hidden] { display: none !important; }
+    .wb-readable { margin: 8px 0 0; max-width: 640px; font-size: 0.84rem; color: var(--muted); }
+    .wb-readable b { color: var(--text); font-weight: 600; }
+    .wb-readable code { font-size: 0.8rem; }
     .wb-guide b { display: block; font-size: 0.78rem; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
     .wb-guide .btn-sm { margin-top: 6px; }
     .wb-hint { font-size: 0.88rem; color: var(--text-secondary); margin-top: 6px; }
@@ -1016,6 +1019,7 @@
                   <option value="ALL">Everything</option>
                   <option value="GOOD_FIRST" title="Small Xbox and PC functions with a head start: a matched look-alike, matched before, or named">Good first functions</option>
                   <option value="IN_GUIDE" title="Functions the project's specs describe: what each one does is already written down, with a link to the spec">Described by the specs</option>
+                  <option value="NEEDS_NAMES" title="Functions that already match byte for byte but still use stand-in names (sub_..., DAT_..., m_Field08) or raw addresses: work out what things are and name them. No assembly needed. Nearest to finished first.">Matched, names still to work out</option>
                   <option value="Shared Engine">Xbox game (most of the work)</option>
                   <option value="PC Scarface.exe">PC game</option>
                   <option value="PS2 SLUS_211.11">PS2 game (its own compiler, checked through decomp.me)</option>
@@ -1110,6 +1114,7 @@
                     <span class="hint-small" id="wb-what-note"></span>
                   </div>
                   <div class="wb-guide" id="wb-guide" hidden></div>
+                  <p class="wb-readable" id="wb-readable" hidden></p>
                   <div id="wb-hint" class="wb-hint"></div>
                 </div>
                 <div class="wb-chips">
@@ -3193,13 +3198,31 @@
       'Function: ' + t.symbol + ' at ' + t.va + ' (' + t.size + ' bytes)',
       'Compiler flags: ' + (t.flags || '/nologo /c /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4'),
       'Target machine code bytes: ' + t.target_hex,
+      aiGuideLine(t),
       'Target disassembly:' + NL + disasmText,
       'Current best C++ (' + bestScore + '/' + t.size + ' bytes matched):' + NL + code,
       past.length ? 'Previous attempts:' + NL + past.join(NL) : '',
       feedback || '',
       'RULES: Do not use __asm, _asm, _emit, __declspec(naked), #pragma code_seg/data_seg/section, __declspec(allocate), or byte arrays. Write normal, readable C++ (classes, structs, methods, named members). Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block and nothing else.',
+      AI_NAMES_RULE,
       loop
     ].filter(Boolean).join(NL + NL);
+  }
+
+  /* The bytes come first; after that, names. A match full of sub_/DAT_/m_Field08 is correct and unfinished. */
+  const AI_NAMES_RULE = 'NAMES: the byte-for-byte match always comes first; never change what the code compiles to for the sake of a name. ' +
+    'Within that, give each function, global, member and local a real name wherever you can tell what it is (from the notes above, the class\'s name, ' +
+    'a string it uses, or how the value is used). Keep an address name (sub_XXXXXXXX, DAT_XXXXXXXX) or an offset name (m_Field08) only for a thing you ' +
+    'can\'t identify: a guessed name that sounds sure is worse than an honest stand-in. A called function or a global must still be declared so that ' +
+    'it resolves to the same address.';
+
+  /* What the project's specs say this function does, for the AI's prompt ('' when they say nothing). */
+  function aiGuideLine(t) {
+    const g = t && t.guide;
+    if (!g || !g.what_it_does) return '';
+    return (g.low_confidence
+      ? 'The project\'s notes suggest what this function does (a map from the specs, NOT checked against this code; trust the disassembly over it): '
+      : 'What this function does, from the project\'s specs (checked on the game): ') + g.what_it_does;
   }
 
   /* What is still wrong with a compiled result. `who` names the code, e.g. "The current best C++ (attempt 2)". */
@@ -5186,6 +5209,7 @@
     }
     box.dataset.id = t.id;
     renderGuide(t);
+    renderReadable(t);
     save.hidden = !verified;
     save.disabled = !verified || box.value.trim() === (t.what || '');
     note.textContent = verified
@@ -5194,6 +5218,26 @@
   }
   /* What a clean-room spec says the function does (docs/function_guide.json): a head start for whoever
      rebuilds it, and one press makes it the match's description. */
+  /* A match proves the bytes; this says how much of it a person can read yet. */
+  function renderReadable(t) {
+    const box = $('wb-readable');
+    const g = t.readable;
+    box.textContent = '';
+    box.hidden = !g;
+    if (!g) return;
+    if (!g.left) {
+      box.appendChild(el('b', 'Matched, and it reads as finished C++.'));
+      return;
+    }
+    box.appendChild(el('b', 'Matched byte for byte. ' + g.left + (g.left === 1 ? ' thing' : ' things') + ' left to name before it reads as finished C++: '));
+    const names = (g.stand_ins || []).slice(0, 6);
+    names.forEach((n, i) => { if (i) box.appendChild(document.createTextNode(', ')); box.appendChild(el('code', n)); });
+    const more = (g.stand_ins || []).length - names.length;
+    let rest = more > 0 ? ' and ' + more + ' more' : '';
+    if (g.raw_addresses) rest += (names.length ? '; ' : '') + g.raw_addresses + (g.raw_addresses === 1 ? ' place works' : ' places work') + ' on a raw address';
+    box.appendChild(document.createTextNode(rest + '. Rename or retype them, press Compile, and the better version is kept if it still matches.'));
+  }
+
   function renderGuide(t) {
     const box = $('wb-guide');
     box.textContent = '';
