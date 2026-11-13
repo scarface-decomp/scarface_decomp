@@ -134,7 +134,9 @@ def test_the_cast_on_their_map_with_a_weapon_in_hand():
     assert "w_street" in report.models and "Thug1" in report.models and "hector" in report.models    # the street, and the cast on it
     assert ("person", "CharTemp_hector") in asked                             # nobody loaded him: his template has his name
     hand = next(n for n in doc["nodes"] if n["name"] == "right_hand_attach" and "children" in n)
-    assert "Thug1's metal_pipe" in [doc["nodes"][c]["name"] for c in hand["children"]]
+    grip = doc["nodes"][hand["children"][0]]                                  # the turn that lays it along the hand, top up
+    assert grip["name"] == "Thug1's grip" and grip["rotation"] == pytest.approx([0.5, -0.5, -0.5, 0.5])
+    assert "Thug1's metal_pipe" in [doc["nodes"][c]["name"] for c in grip["children"]]
     assert names.count("right_hand_attach") == 2 and not report.missing_drawables
     assert [a["name"] for a in doc["animations"]] == ["Cutscene T"]           # the map's own animations don't come first
 
@@ -274,3 +276,65 @@ def test_the_face_moves_in_a_cutscene():
     sm = doc["animations"][0]["samplers"][ch["sampler"]]
     assert [t for (t,) in values(doc, binc, sm["input"])] == pytest.approx([0.0, 1.0])
     assert [w for (w,) in values(doc, binc, sm["output"])] == pytest.approx([0.0, 0.0, 0.0, 1.0])     # the lip rises
+
+
+def test_people_are_stood_on_the_maps_floor():
+    """The script puts someone a few centimetres off the floor; the map's surface nearest to that height, under
+    the spot, is where they stand. A ceiling, a floor far below, or no map at all changes nothing."""
+    b = G.Builder(G.Library())
+    def slab(name, y, at=(0.0, 0.0)):
+        x, z = at
+        quad = [(x - 5, y, z - 5), (x + 5, y, z - 5), (x - 5, y, z + 5), (x + 5, y, z + 5)]
+        prim = {"attributes": {"POSITION": b.g.accessor(quad, "VEC3", bounds=True)},
+                "indices": b.g.accessor([0, 1, 2, 2, 1, 3], "SCALAR", 5123), "mode": 4}
+        b.g.node(name, mesh=b.g.add("meshes", {"name": name, "primitives": [prim]}))
+    slab("floor", 16.245)
+    slab("cellar", 12.0)
+    slab("ceiling", 19.0)
+    slab("next door", 3.0, at=(50.0, 0.0))
+    moved = b.g.node("lifted", translation=[0.0, 0.1, 0.0])
+    b.g.doc["nodes"][moved]["children"] = [len(b.g.doc["nodes"])]
+    slab("step", 16.3, at=(20.0, 0.0))                                        # under a node that lifts it to 16.4
+    ground = C.Ground(b)
+    assert ground.height(1.0, 16.2127, -2.0) == pytest.approx(16.245)
+    assert ground.height(1.0, 12.3, -2.0) == pytest.approx(12.0)              # the nearest one to where they are
+    assert ground.height(1.0, 17.5, -2.0) is None                             # nothing within reach
+    assert ground.height(21.0, 16.2, 1.0) == pytest.approx(16.4)
+    assert ground.height(200.0, 16.2, 0.0) is None and C.Ground(G.Builder(G.Library())).height(0, 0, 0) is None
+
+
+
+def test_what_tony_wears_comes_from_the_mission_scripts():
+    """A script dresses him with a call given an MCP_...Tony name; the cutscenes it names after that have him
+    in those clothes, and a cutscene no script dresses takes its mission's first outfit."""
+    scripts = [
+        ("scriptc/missionscripts/T01/T01_functions.cso",
+         'function a() {\n   stxbp("MCP_ArmyTony");\n}\nfunction b() {\n   stxdf("MNIS_TUT_Intro_Cam", "After", "NIS");\n}\n'),
+        ("scriptc/missionscripts/S01c/S01c_functions.cso",
+         'stxdf("MNIS_S01_2_Early", "", "NIS");\nstxbp("MCP_HawaiianTony");\n'
+         "stxmb(\"Movieplayer('MNIS_S01_4_Cops_Are_Here', 'done', 'NIS')\");\n"),
+        ("scriptc/missionscripts/S01a/S01a_functions.cso",
+         'stxbp("MCP_BlackSuitTony");\n%which = "PAL_MNIS_S01_1_Hm_Saves_the_Day";\n'),
+        ("scriptc/other.cso", 'stxdf("MNIS_A64_0_Daughter", "", "NIS");\nstxbp("MCP_Driver");\n'),
+    ]
+    wears = C.outfits(scripts)
+    assert C.outfit_for(wears, "MNIS_TUT_Intro_Cam") == "MCP_ArmyTony"
+    assert C.outfit_for(wears, "MNIS_S01_1_Hm_Saves_the_Day") == "MCP_BlackSuitTony"       # named in a variable, as PAL_
+    assert C.outfit_for(wears, "mnis_s01_4_cops_are_here") == "MCP_HawaiianTony"           # inside a quoted command
+    assert C.outfit_for(wears, "MNIS_S01_2_Early") == "MCP_HawaiianTony"                   # none before it: the script's first
+    assert C.outfit_for(wears, "MNIS_S01_0_Tony_in_Chair") == "MCP_BlackSuitTony"          # no script names it: mission S01's first
+    assert C.outfit_for(wears, "PAL_MNIS_S01_0_Tony_in_Chair") == "MCP_BlackSuitTony"
+    assert C.outfit_for(wears, "MNIS_A64_0_Daughter") == "" and C.outfit_for(wears, "NIS_01_secretary") == ""
+    assert C.suit_file("MCP_BlackSuitTony") == "tonynisBLKsuit" and C.suit_file("MCP_HawaiianShadesTony") == "tonynisHawaiianS"
+    assert C.suit_file("MCP_BluePinSuitTony") == "tonynisBLUPINsuit" and C.suit_file("MCP_GraySuitShadesTony") == "tonynisGRYsuitS"
+    assert C.suit_file("MCP_ArmyTony") == "" and C.suit_file("MCP_Driver") == ""          # no cutscene model: his everyday one
+    assert C.TONY_FILES[0] == "tonynishawaiian.p3d"                                       # when nothing says
+
+
+def test_a_cue_with_a_place_of_its_own_is_where_the_camera_moves_from():
+    cue = '''NISSequenceCue { SoundName ""; CameraAnimationName "CAM_T"; FrameBegin 0;
+               Position { x -3411; y 20; z -1704; }; Facing 90; };'''
+    script = C.read_script(cue + ' NISCharacterAnimation { CharacterName "MainCharacter"; AnimationName "T_Tony"; };')
+    assert script.origin == ((-3411.0, 20.0, -1704.0), 90.0) and C.where(script, []) == (-3411.0, -1704.0)
+    plain = C.read_script(cue.replace("-3411", "0").replace("-1704", "0"))
+    assert plain.origin is None                                                # at the map's origin: the keys are the place

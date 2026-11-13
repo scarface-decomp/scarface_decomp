@@ -32,7 +32,60 @@ import p3d_gltf as G
 
 ACTION = "Cutscene "                   # the animation's name starts with this (Blender's script looks for it)
 TONY = "maincharacter"
-TONY_FILES = ("tonyniswhtsuit.p3d", "tonynisblksuit.p3d", "tonynishawaiian.p3d")
+# What Tony wears when nothing says: the Hawaiian shirt he has for most of the game.
+TONY_FILES = ("tonynishawaiian.p3d", "tonyniswhtsuit.p3d", "tonynisblksuit.p3d")
+SUIT = re.compile(r'\b\w+\("(MCP_\w*Tony\w*)"')                 # a mission script changing his clothes
+NAMED = re.compile(r"""["']((?:PAL_)?M?NIS_\w+)["']""")           # a cutscene's name anywhere in a script
+MISSION = re.compile(r"(?:PAL_)?M?NIS_([A-Za-z]+\d+)", re.I)     # MNIS_S01_0_Tony_in_Chair is mission S01's
+
+
+def suit_file(outfit: str) -> str:
+    """The cutscene model (art/nis/characters) for one of Tony's outfits as the mission scripts name them:
+    MCP_BlackSuitTony is tonynisBLKsuit, MCP_HawaiianShadesTony is tonynisHawaiianS. "" for an outfit
+    with no cutscene model of its own (MCP_ArmyTony): his everyday model is used for those."""
+    m = re.fullmatch(r"MCP_(\w+?)(Shades)?Tony", outfit, re.I)
+    if not m:
+        return ""
+    kind = {"whitesuit": "WHTsuit", "blacksuit": "BLKsuit", "bluesuit": "BLUsuit", "bluepinsuit": "BLUPINsuit",
+            "graysuit": "GRYsuit", "hawaiian": "Hawaiian", "sandy": "Sandy"}.get(m.group(1).lower())
+    return "tonynis" + kind + ("S" if m.group(2) else "") if kind else ""
+
+
+def outfits(scripts: Sequence[Tuple[str, str]]) -> Dict[str, str]:
+    """What Tony wears in each cutscene the mission scripts tell of: {cutscene (lower, without PAL_): outfit}.
+    scripts: (path, decompiled text) of the game's scripts. A script changes his clothes with a call given
+    an MCP_...Tony name; a cutscene named in that script after it (or, with none before, before the first)
+    has him in those. A cutscene no script dresses takes its mission's first outfit: MNIS_S01_... the first
+    one set by the scripts whose names start S01."""
+    out: Dict[str, str] = {}
+    first: Dict[str, str] = {}                              # mission -> the first outfit its scripts set
+    for path, text in sorted(scripts):
+        marks = sorted([(m.start(), "suit", m.group(1)) for m in SUIT.finditer(text)]
+                       + [(m.start(), "scene", m.group(1)) for m in NAMED.finditer(text)])
+        opening = next((v for _at, kind, v in marks if kind == "suit"), "")
+        if not opening:
+            continue
+        stem = re.match(r"[A-Za-z]+\d+", path.replace("\\", "/").rsplit("/", 1)[-1])
+        if stem:
+            first.setdefault(stem.group(0).lower(), opening)
+        wearing = opening
+        for _at, kind, v in marks:
+            if kind == "suit":
+                wearing = v
+            else:
+                out.setdefault(re.sub(r"^pal_", "", v.lower()), wearing)
+    for mission, outfit in first.items():                   # under a key no cutscene's name can be
+        out.setdefault("\0" + mission, outfit)
+    return out
+
+
+def outfit_for(wears: Dict[str, str], scene: str) -> str:
+    """Tony's outfit in a cutscene, from outfits(): its own, else its mission's, else ""."""
+    low = re.sub(r"^pal_", "", scene.lower())
+    if low in wears:
+        return wears[low]
+    m = MISSION.match(low)
+    return wears.get("\0" + m.group(1).lower(), "") if m else ""
 
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
                     r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation)\s*\{")
@@ -48,6 +101,7 @@ class Script:
         self.plays: Dict[str, str] = {}                     # person (lower) -> animation
         self.drives: Dict[str, str] = {}                    # vehicle (lower) -> animation
         self.camera = ""
+        self.origin: Optional[Tuple[Tuple[float, float, float], float]] = None   # where the camera's move is set
         self.tony = ""                                      # the suit Tony is changed into (NISSwapModel)
         self.holds: Dict[str, str] = {}                     # person (lower) -> weapon template (NISWeaponAttach)
         self.faces: Dict[str, str] = {}                     # person (lower) -> their face's animation (NISExpAnimation)
@@ -89,6 +143,11 @@ def read_script(text: str) -> Script:
             s.tony = re.sub(r"Drawable$", "", str(f["newModel"]), flags=re.I)
         elif kind == "NISSequenceCue" and f.get("CameraAnimationName") and not s.camera:
             s.camera = str(f["CameraAnimationName"])
+            # A cue with a place of its own: the camera's move is measured from there, not from the map's
+            # origin (Tony in his chair: the cue is in the office, the camera's keys a few metres round it).
+            if all(isinstance(f.get(k), float) for k in "xyz") and abs(f["x"]) + abs(f["z"]) > 1.0:
+                facing = f.get("Facing")
+                s.origin = ((f["x"], f["y"], f["z"]), facing if isinstance(facing, float) else 0.0)
     return s
 
 
@@ -294,6 +353,103 @@ def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[t
 
 
 HAND = "right_hand_attach"             # the joint a person's weapon hangs on
+# A weapon's model has its grip at its own origin, its barrel along its own forward axis (its muzzle joint
+# says so) and its top upwards. In the hand it lies another way round: the barrel along the hand joint's
+# sideways axis, towards the fingers, and its top along the joint's forward axis. Measured from the
+# cutscenes: someone with a rifle keeps the other hand a fixed 0.34 m along that sideways axis from the hand
+# joint (a rifle's length from grip to handguard), and through every rifle scene looked at, "up" in the
+# world is close to the joint's forward axis.
+GRIP = (0.5, -0.5, -0.5, 0.5)                                    # as glTF's rotation
+
+
+class Ground:
+    """The map's surfaces in a scene being built, for standing people on. A script places someone a few
+    centimetres off the floor (the game sets them on the ground itself); height() finds the floor."""
+
+    def __init__(self, b: G.Builder) -> None:
+        self.g = b.g
+        self.upto = len(b.g.doc["nodes"])                    # the map is what was there before the cast
+        self._world: Dict[int, List[List[float]]] = {}
+        self._parent: Optional[Dict[int, int]] = None
+        self._tris: Dict[Tuple[int, int], List[Tuple[G.Vec3, G.Vec3, G.Vec3]]] = {}
+
+    def _matrix(self, i: int) -> List[List[float]]:
+        if i in self._world:
+            return self._world[i]
+        nodes = self.g.doc["nodes"]
+        if self._parent is None:
+            self._parent = {c: k for k, n in enumerate(nodes[:self.upto]) for c in n.get("children", [])}
+        n = nodes[i]
+        if "matrix" in n:
+            m = [[n["matrix"][c * 4 + r] for c in range(4)] for r in range(4)]
+        else:
+            x, y, z, w = n.get("rotation", (0.0, 0.0, 0.0, 1.0))
+            sx, sy, sz = n.get("scale", (1.0, 1.0, 1.0))
+            tx, ty, tz = n.get("translation", (0.0, 0.0, 0.0))
+            m = [[(1 - 2 * (y * y + z * z)) * sx, 2 * (x * y - z * w) * sy, 2 * (x * z + y * w) * sz, tx],
+                 [2 * (x * y + z * w) * sx, (1 - 2 * (x * x + z * z)) * sy, 2 * (y * z - x * w) * sz, ty],
+                 [2 * (x * z - y * w) * sx, 2 * (y * z + x * w) * sy, (1 - 2 * (x * x + y * y)) * sz, tz],
+                 [0.0, 0.0, 0.0, 1.0]]
+        up = self._parent.get(i)
+        if up is not None:
+            p = self._matrix(up)
+            m = [[sum(p[r][k] * m[k][c] for k in range(4)) for c in range(4)] for r in range(4)]
+        self._world[i] = m
+        return m
+
+    def _read(self, index: int, code: str, width: int) -> List:
+        acc = self.g.doc["accessors"][index]
+        view = self.g.doc["bufferViews"][acc["bufferView"]]
+        at = view.get("byteOffset", 0) + acc.get("byteOffset", 0)
+        flat = struct.unpack_from(f"<{acc['count'] * width}{code}", self.g.bin, at)
+        return [flat[k:k + width] for k in range(0, len(flat), width)] if width > 1 else list(flat)
+
+    def height(self, x: float, y: float, z: float, reach: float = 0.5) -> Optional[float]:
+        """The height of the map's surface at x, z that is nearest to y, within reach; None when there is
+        none (no map, or nothing under the spot)."""
+        doc = self.g.doc
+        best: Optional[float] = None
+        for i, n in enumerate(doc["nodes"][:self.upto]):
+            if "mesh" not in n or "skin" in n:
+                continue
+            m = None
+            for pi, prim in enumerate(doc["meshes"][n["mesh"]]["primitives"]):
+                acc = doc["accessors"][prim["attributes"]["POSITION"]]
+                if prim.get("mode", 4) != 4 or "indices" not in prim or "min" not in acc:
+                    continue
+                m = m or self._matrix(i)
+                lo, hi = acc["min"], acc["max"]
+                corners = [[sum(m[r][k] * v for k, v in enumerate((cx, cy, cz))) + m[r][3] for r in range(3)]
+                           for cx in (lo[0], hi[0]) for cy in (lo[1], hi[1]) for cz in (lo[2], hi[2])]
+                if not (min(c[0] for c in corners) <= x <= max(c[0] for c in corners)
+                        and min(c[2] for c in corners) <= z <= max(c[2] for c in corners)
+                        and min(c[1] for c in corners) - reach <= y <= max(c[1] for c in corners) + reach):
+                    continue
+                key = (i, pi)
+                if key not in self._tris:
+                    pts = [tuple(sum(m[r][k] * v for k, v in enumerate(p)) + m[r][3] for r in range(3))
+                           for p in self._read(prim["attributes"]["POSITION"], "f", 3)]
+                    ia = doc["accessors"][prim["indices"]]
+                    idx = self._read(prim["indices"], {5123: "H", 5125: "I", 5121: "B"}[ia["componentType"]], 1)
+                    self._tris[key] = [(pts[idx[k]], pts[idx[k + 1]], pts[idx[k + 2]])
+                                       for k in range(0, len(idx) - 2, 3)]
+                for a, b_, c in self._tris[key]:
+                    if (min(a[0], b_[0], c[0]) > x or max(a[0], b_[0], c[0]) < x
+                            or min(a[2], b_[2], c[2]) > z or max(a[2], b_[2], c[2]) < z):
+                        continue
+                    ux, uy, uz = b_[0] - a[0], b_[1] - a[1], b_[2] - a[2]
+                    vx, vy, vz = c[0] - a[0], c[1] - a[1], c[2] - a[2]
+                    den = ux * vz - vx * uz
+                    if abs(den) < 1e-12:
+                        continue                             # a wall: no height of its own here
+                    s = ((x - a[0]) * vz - vx * (z - a[2])) / den
+                    t = (ux * (z - a[2]) - (x - a[0]) * uz) / den
+                    if s < -1e-6 or t < -1e-6 or s + t > 1 + 1e-6:
+                        continue
+                    h = a[1] + s * uy + t * vy
+                    if abs(h - y) <= reach and (best is None or abs(h - y) < abs(best - y)):
+                        best = h
+        return best
 WEAPON = re.compile(r"^WeaponTemplate", re.I)
 
 
@@ -321,6 +477,8 @@ def where(script: Script, streams: Sequence[Tuple[str, bytes]]) -> Optional[Tupl
     for at, _facing in script.stands.values():
         if abs(at[0]) + abs(at[2]) > 1.0:
             return at[0], at[2]
+    if script.origin:
+        return script.origin[0][0], script.origin[0][2]
     if script.stands:                                        # everyone at 0, 0: played wherever Tony is
         return None
     if script.camera:
@@ -397,12 +555,13 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
     def cast(b: G.Builder) -> None:
         b._animations = None                                 # the stream files came after the map's
         tracks = _Tracks(b)
+        ground = Ground(b)
         loaded: Dict[str, Optional[G.Source]] = {}
         scenes = [(name, script)] + [(n, s) for n, s, _st in then]
         spans = []
         start = 0.0
         for n, sc in scenes:
-            went_in, nodes, length = _cast(b, lib, n, sc, model, tracks, loaded, start)
+            went_in, nodes, length = _cast(b, lib, n, sc, model, tracks, loaded, start, ground)
             found.extend(went_in)
             spans.append((nodes, start, start + length))
             start += length
@@ -461,7 +620,8 @@ def _person(b: G.Builder, lib: G.Library, src: G.Source, spot: int, label: str) 
 
 def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
           model: Callable[[str, str], Optional[Tuple[str, bytes]]], tracks: _Tracks,
-          loaded: Dict[str, Optional[G.Source]], start: float) -> Tuple[List[str], List[int], float]:
+          loaded: Dict[str, Optional[G.Source]], start: float,
+          ground: Optional[Ground] = None) -> Tuple[List[str], List[int], float]:
     """Puts one cutscene's people, vehicles and camera into b's scene, its animations beginning at start
     (seconds): who went in, their nodes, and how long it runs."""
     root = b.g.node(name)
@@ -496,7 +656,11 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             left_out.append(label)
             continue
         at, facing = script.stands.get(who, ((0.0, 0.0, 0.0), 0.0))
-        spot = b.g.node(label, root, translation=list(G.pos(at)), rotation=list(facing_rotation(facing)))
+        stand = list(G.pos(at))
+        floor = ground.height(*stand) if ground is not None and who in script.stands else None
+        if floor is not None:                                # on the floor, not the few centimetres in it
+            stand[1] = floor
+        spot = b.g.node(label, root, translation=stand, rotation=list(facing_rotation(facing)))
         before = len(b.g.doc["nodes"])
         copy = _person(b, lib, src, spot, label)
         if copy is None:
@@ -512,7 +676,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             wanted = weapon_model(script.holds[who], names)
             gref = lib.find("composite", wanted, (guns,)) if wanted and guns else None
             if gref:
-                b.composite(gref, hand, label + "'s " + wanted)
+                b.composite(gref, b.g.node(label + "'s grip", hand, rotation=list(GRIP)), label + "'s " + wanted)
             else:
                 left_out.append(label + "'s " + WEAPON.sub("", script.holds[who]))
         if who in script.faces:                              # the lips, brows and eyelids
@@ -557,7 +721,11 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             length = max(length, _length(pieces))
             ci = b.g.add("cameras", {"name": script.camera, "type": "perspective",
                                      "perspective": {"aspectRatio": 4 / 3, "yfov": 0.75, "znear": 0.1, "zfar": 5000.0}})
-            cam = b.g.node(script.camera, root, camera=ci)
+            place = root
+            if script.origin:
+                place = b.g.node(script.camera + "'s place", root, translation=list(G.pos(script.origin[0])),
+                                 rotation=list(facing_rotation(script.origin[1])))
+            cam = b.g.node(script.camera, place, camera=ci)
             for path, (times, values) in _camera_keys(pieces).items():
                 tracks.add(cam, path, later(times), values)
             went_in.append("camera")
