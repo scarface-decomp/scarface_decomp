@@ -125,8 +125,11 @@ A text, then three u32 and three f32: 24 bytes after the text in all 283.
   2; the third 0 or 1. Common combinations: `idle` (1, 0, 0) 52 times; `open`, `opening` and `closing` (1, 1, 1) 47 times and (1, 1, 0) 29;
   `lockOn` (1, 1, 0) 11.
 
-**[reported]** The PC program keeps the first and third as yes-or-no and the second as a number. What each one
-does isn't settled *(check)*. A reader names them neutrally and keeps their values.
+**[checked on the Xbox]** The Xbox's State Prop Data loader is found through the run-time type name
+`StatePropDataLoader`; its loading function is at `0x0026ECB0`, and this sub-chunk's case is at `0x0026F0ED`. It
+keeps each one in 28 bytes: the name's key, then the first u32 as a yes-or-no byte, the second as a number, the
+third as a yes-or-no byte, then the two frames and the speed. What each one does wasn't found: no code was found
+that reads them back *(check)*. A reader names them neutrally and keeps their values.
 
 ### 1.5 `0x08020008` Prop Property **[checked]**
 
@@ -267,10 +270,25 @@ No other value occurs. How each kind is drawn isn't covered here.
 | 3 f32: the way it faces | a unit vector with y 0 in all |
 | u32 | 0 in 1,021, 1 in 1 |
 | f32 | 0 in all |
-| 3 f32: sizes | for example 2.249, 10, 56.05. Which axis each size runs along isn't settled *(check)* |
+| 3 f32: sizes | for example 2.249, 10, 56.05: the box's full width along the world's X, Y and Z (below) |
 
-**[reported]** Occluders are invisible. The game uses them only to skip drawing what is hidden behind them. The
-exports leave them out; `p3d.py` reads their fields.
+**How the Xbox makes the box [checked on the Xbox].** The loader is found through the run-time type name
+`OccluderLoader`; its loading function is at `0x00047AF0`.
+
+* It names each occluder `OccluderObject_<n>`, counting up.
+* It reads the fields in the order above.
+* The box is lined up with the world's axes: the position minus half of each size, to the position plus half of
+  it (the 0.5 at `0x0039D580`). Then it puts the box's bottom at a height of −1 (the −1.0 at `0x0039D65C`).
+  So a box reaches from just below the ground up to the position's height plus half the second size.
+* The way it faces doesn't turn the box. It keeps it as an angle, the arctangent of its x over its z.
+* It keeps the u32 as two yes-or-no flags: 1 sets both, 2 sets only the first. Only 0 and 1 occur in the files.
+* It skips the f32 that is always 0.
+* Then it registers the occluder (`0x00047480`) in a list of up to 256.
+
+For the first occluder in `DevilsCay_03_shell.p3d` (position −3247.4, 13.8, −10240.3; sizes 2.249, 10, 56.05),
+that is a box 2.25 wide in X and 56 long in Z, from −1 to 18.8 high: a wall along the Z axis.
+
+**[reported]** Occluders are invisible. The game uses them only to skip drawing what is hidden behind them.
 
 ---
 
@@ -384,8 +402,20 @@ SPEC-002 reported that the PC never shows the shadow decals. The Xbox does show 
     decals overlap;
   * then a pass that writes alpha only.
 
-  A strength of 0.65 (the float at `0x0045FCBC`, times 255 into the quad's alpha) goes into that quad. Whether it
-  limits the darkening to 65 % *(check)*.
+  Read in full, that end works like this. The decals are drawn into the alpha of a picture of their own (the
+  texture at offset `0x14` of the extension and its surface at `0x18`). The begin cleared that alpha to 0 with
+  the Xbox's alpha-only clear and writes nothing but alpha.
+
+  1. The coverage is multiplied by the frame's own alpha.
+  2. The frame becomes the frame times (1 − coverage × 0.647). The full-screen quad's alpha is the texture's
+     alpha times the texture factor, which `0x0032CD10` sets to 0.65 × 255, truncated to 165 (the float at
+     `0x0045FCBC` times the 255.0 at `0x003A0FC4`). The texture stage multiplies the two: alpha operation
+     *modulate*, texture and texture factor. The blending is "zero, 1 minus source alpha". Pixels whose alpha
+     is 0 are skipped (alpha test "greater than 0").
+  3. A pass that writes alpha only.
+
+  So **a shadow decal darkens what is under it by at most about 65 %** (165 out of 255), however dark its
+  texture. What the frame's alpha holds at step 1 isn't settled *(check)*.
 
 So on the Xbox, shadow decals darken what is under them by their coverage, and overlapping decals don't darken
 twice. That is what SPEC-002 said they were meant to do. Why the PC doesn't show them is outside this spec.
@@ -461,3 +491,29 @@ twice. That is what SPEC-002 said they were meant to do. Why the PC doesn't show
    beside the prop, which has them.
 9. *Is the 0.65 a limit on how far shadow decals darken?* Still open, as §8.2 says; the exports don't depend on
    it.
+10. *Should an occluder's `facing` in the extras be turned into glTF's space like its position?* No: keep it as
+    the file has it, as the lights' settings are.
+11. *Should the occluder nodes follow the game's `OccluderObject_<n>` naming?* No need: the game's count runs
+    across every file it loads, so a per-file number is as good.
+
+---
+
+## 11. Part 3: what to build from the new answers
+
+1. **Shadow decals darken by at most 65 %** (§8.2). In every export, a material made from a `shadowdecal` shader
+   gets its alpha multiplied by 0.647 (165 / 255): `baseColorFactor`'s alpha, the texture unchanged. Blended as
+   usual over what is behind, the black decal then leaves at least 35 % of it, as the Xbox does. Overlapping
+   decals still darken twice in an export, unlike the game: say so where FORMATS.md describes the decals. The
+   exports' report line and FORMATS.md's Shadows section give the limit, and the *(check)* on it goes.
+2. **Occluders in map exports** (§5). Each occluder becomes a node:
+   * the box the Xbox makes, as a unit cube's mesh moved and scaled into place;
+   * the position, converted as every other position is;
+   * extras `{"occluder": {"facing": [x, y, z], "flags": <the u32>}, "hidden": true}`.
+
+   One cube mesh is shared by all of them, with an untextured see-through material. **Open in Blender** puts them
+   in an *Occluders* collection of their own, switched off, drawn as wireframe. The portal's 3D view already
+   leaves hidden nodes out. The report says how many there are once per file.
+3. **FORMATS.md:** the occluder row and paragraph (the box, the flags), the Xbox's 0.65 limit in the Shadows
+   section, and the Xbox's way of keeping the Prop State Animation's three numbers.
+4. Bump `EXPORT_VERSION` (now 10) once for items 1 and 2.
+5. **Tests** on made-up files for items 1 and 2. Keep each file's line endings.

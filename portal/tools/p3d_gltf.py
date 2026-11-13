@@ -48,13 +48,16 @@ What goes where (see docs/FORMATS.md for the chunk layouts):
                                      made ready for ordinary blending; a cut-out (ATST) at its ACTH; "depthWrite":
                                      false for the ones the game draws without writing depth; unlit
                                      (KHR_materials_unlit) without LIT 1
-    a shadowdecal primitive group    a node of its own under its mesh's, extras {"shadowDecal": true}
+    a shadowdecal primitive group    a node of its own under its mesh's, extras {"shadowDecal": true}; its
+                                     material's alpha times 165/255, the most the Xbox darkens by
     the low-detail hull, with --lod  marked {"lowDetailHull": true}, and hidden next to detailed areas
     a World Geometry (0x8800003)     its top node's extras: its kind ("worldGeometryKind") and, from its Zone
                                      Package Entry (0x8800009), "drawDistance"; one drawn only from afar
                                      (near above 0: a far-away stand-in) is marked hidden
     an instanceposition's last value the state a placed prop starts in (extras {"state": name} when not
                                      its first)
+    an Occluder (0x880000A), --map   a hidden box where the Xbox puts it (a shared unit cube, moved and
+                                     scaled), extras {"occluder": {"facing", "flags"}, "hidden": true}
     a State Prop Data (0x802000D)    its own properties (0x8020008), but name, in the extras of each placed
                                      copy, and of the prop's top node when its file is opened on its own:
                                      {"properties": {name: value}}
@@ -96,17 +99,17 @@ MESH, SKIN, PRIM_GROUP, SHADER, SKELETON, JOINT = 0x10000, 0x10001, 0x10020, 0x1
 COMPOSITE, COMPOSITE_PROP = 0x123000, 0x123001
 ANIMATION, ANIM_GROUP_LIST, ANIM_GROUP = 0x121000, 0x121002, 0x121001
 CAMERA, FRAME_CONTROLLER = 0x2200, 0x121201
-WORLD_GEO, STATE_PROP, ZONE_PACKAGE, ZONE_ENTRY = 0x8800003, 0x8800005, 0x8800004, 0x8800009
+WORLD_GEO, STATE_PROP, ZONE_PACKAGE, ZONE_ENTRY, OCCLUDER = 0x8800003, 0x8800005, 0x8800004, 0x8800009, 0x880000A
 STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY, PROP_PROPERTY = 0x0802000D, 0x0802000E, 0x08020002, 0x08020008
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 10                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
+EXPORT_VERSION = 11                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
                                        # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight.
                                        # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked.
                                        # 8: a shader without LIT is unlit. 9: darkening subtracts; placed props in their
                                        # starting state; world geometry's draw distances, far-away stand-ins hidden.
-                                       # 10: props carry their properties
+                                       # 10: props carry their properties. 11: shadow decals at most 65 % dark; occluders
 LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER, SKY = 0x13000, 0x2380, 0x8800007, 0x122000, 0x8800002
 DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)
 WEATHER_KIND = {"clear": 0, "rain": 1}  # the daylight's kind for each weather; the game starts in clear weather
@@ -132,6 +135,13 @@ ALPHA_TEST = 0.5                       # the cut-out's alpha when the shader has
 ACMP_GREATER = 4                       # ACMP 4: a pixel stays only if its alpha is greater (without ACMP: or equal)
 NO_DEPTH_KINDS = ("decal", "nightlight", "shadowdecal")   # shader kinds the game draws without writing depth
 SHADOW_DECAL_KIND = "shadowdecal"
+# The Xbox darkens what is under a shadow decal by its coverage times 165/255 (0.65 x 255, truncated), so by 65 % at
+# most (SPEC-003, section 8.2): a shadow decal's material has its alpha times this.
+SHADOW_DECAL_STRENGTH = 165 / 255
+# Occluders (SPEC-003, section 5): the Xbox makes each a box lined up with the world's axes, the position plus and
+# minus half of each size, then puts its bottom at this height. Invisible in the game; the exports' boxes are hidden.
+OCCLUDER_FLOOR = -1.0
+OCCLUDER_COLOUR = [1.0, 0.45, 0.1, 0.3]  # the boxes' untextured see-through material, for when they are shown
 HULL_KIND = "vertexfade"               # the low-detail hull of the city and the islands (miami_lod, islands_LOD)
 HULL_FADE = (200.0, 250.0)             # see-through nearer than this, whole beyond it (metres from the camera)
 HULL_CUT = round(20 / 255, 4)          # and pixels with less alpha than this are cut out
@@ -997,8 +1007,9 @@ class Report:
         if self.unread_groups:
             out.append(f"{self.unread_groups} primitive group(s) in a form not read, left out")
         if self.shadow_decals:
-            out.append(f"{self.shadow_decals} shadow decal(s), each in a node of its own marked shadowDecal (the Xbox "
-                       "draws them, darkening what is under them by their coverage; the PC is reported not to show them)")
+            out.append(f"{self.shadow_decals} shadow decal(s), each in a node of its own marked shadowDecal, their alpha "
+                       "times 165/255 (the Xbox draws them, darkening what is under them by their coverage, by 65 % at "
+                       "most; the PC is reported not to show them)")
         return out + self.notes
 
 
@@ -1027,6 +1038,7 @@ class Builder:
         self.prop = False                          # set while a placed prop goes in (its leaves: see mesh)
         self.decals: Dict[tuple, int] = {}         # a mesh's key -> the glTF mesh of its shadow decals
         self._shaders: Dict[str, Optional[dict]] = {}
+        self._occluder_mesh: Optional[int] = None   # the unit cube every occluder's box is made of
 
     # materials
 
@@ -1151,6 +1163,9 @@ class Builder:
                 extras["depthWrite"] = False
             if kind == SHADOW_DECAL_KIND:
                 extras["shadowDecal"] = True
+                pbr = mat["pbrMetallicRoughness"]           # the Xbox darkens by at most 165/255: alpha times that
+                factor = list(pbr.get("baseColorFactor", [1.0, 1.0, 1.0, 1.0]))
+                pbr["baseColorFactor"] = factor[:3] + [round(factor[3] * SHADOW_DECAL_STRENGTH, 4)]
             if kind == HULL_KIND:
                 extras.update(lowDetailHull=True, fade=list(HULL_FADE), fadeCutoff=HULL_CUT)
             if leaf:
@@ -1356,6 +1371,41 @@ class Builder:
                 if data is not None:
                     break
         return data
+
+    def occluders(self, src: Source, parent: int) -> int:
+        """A map file's occluders (0x0880000A, its top-level chunks) in a node "<file> occluders" under parent, as
+        occluder_box makes them: each a node "occluder <n>" with the shared unit cube (occluder_mesh) moved and
+        scaled into place, extras {"occluder": {"facing": the way it faces as the file has it, "flags": its u32},
+        "hidden": true}. The number put in; nothing at all for a file without any."""
+        found = []
+        for c in src.chunks:
+            info = p3d.fields(src.data, c) if c.id == OCCLUDER else {}
+            box = occluder_box(info) if info else None
+            if box is not None:
+                found.append((info, box))
+        if not found:
+            return 0
+        group = self.g.node(Path(src.label).stem + " occluders", parent)
+        mesh = self.occluder_mesh()
+        for i, (info, (centre, size)) in enumerate(found, 1):
+            self.g.node(f"occluder {i}", group, mesh=mesh, translation=list(centre), scale=list(size),
+                        extras={"occluder": {"facing": list(info["facing"]), "flags": info["number"]}, "hidden": True})
+        return len(found)
+
+    def occluder_mesh(self) -> int:
+        """A unit cube (-0.5 to 0.5 on every axis, its faces turned outwards) with an untextured see-through
+        material, made once and shared by every occluder's box."""
+        if self._occluder_mesh is None:
+            corners = [(x, y, z) for x in (-0.5, 0.5) for y in (-0.5, 0.5) for z in (-0.5, 0.5)]   # 4x + 2y + z
+            faces = [0, 1, 3, 0, 3, 2, 4, 7, 5, 4, 6, 7, 0, 4, 5, 0, 5, 1,
+                     2, 3, 7, 2, 7, 6, 0, 2, 6, 0, 6, 4, 1, 5, 7, 1, 7, 3]
+            mat = self.g.add("materials", {"name": "occluder", "pbrMetallicRoughness": {
+                "baseColorFactor": list(OCCLUDER_COLOUR), "metallicFactor": 0.0, "roughnessFactor": 1.0},
+                "alphaMode": "BLEND", "doubleSided": True, "extras": {"occluder": True}})
+            prim = {"attributes": {"POSITION": self.g.accessor(corners, "VEC3", bounds=True, target=34962)},
+                    "indices": self.g.accessor(faces, "SCALAR", 5123, target=34963), "material": mat}
+            self._occluder_mesh = self.g.add("meshes", {"name": "occluder box", "primitives": [prim]})
+        return self._occluder_mesh
 
     def mark_prop(self, top: int, ref: Ref, name: str, state: int = 0) -> None:
         """A prop's node says in its extras the state it is in, when not its first ({"state": name}), and the prop's
@@ -2212,6 +2262,18 @@ def zone_entries(src: Source) -> Dict[str, dict]:
     return out
 
 
+def occluder_box(info: dict) -> Optional[Tuple[Vec3, Vec3]]:
+    """The box the Xbox makes of an occluder (p3d.fields of a 0x0880000A; SPEC-003, section 5): lined up with the
+    world's axes (the way it faces doesn't turn it), from the position minus half of each size to the position plus
+    half of it, then its bottom put at -1. As (its centre in glTF's space, its size); None for a damaged one."""
+    p, s = info.get("position"), info.get("sizes")
+    if not (_finite(p) and _finite(s)) or "facing" not in info or "number" not in info:
+        return None
+    top = p[1] + s[1] / 2
+    height = max(0.0, top - OCCLUDER_FLOOR)
+    return pos((p[0], OCCLUDER_FLOOR + height / 2, p[2])), (abs(s[0]), height, abs(s[2]))
+
+
 def draw_distance(entry: Optional[dict]) -> Optional[dict]:
     """A world geometry's drawDistance extras from its Zone Package Entry (zone_entries): near, far and fade, and
     "from", the point the distance is measured from, at height 0 in glTF's space, when the entry has one (the game
@@ -2276,7 +2338,8 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
     meshes sit in world space; its top node's extras give its kind, "worldGeometryKind", and its zone package
     entry's draw distance, "drawDistance", see draw_distance; one the game draws only when the camera is
     farther than its near distance is marked "hidden": true), a copy of each model its instance objects place,
-    each in the state its record names (starting_state) and with the prop's properties (Builder.mark_prop), and its
+    each in the state its record names (starting_state) and with the prop's properties (Builder.mark_prop), its
+    occluders as hidden boxes (Builder.occluders), and its
     lights (see Builder.lights; hour lights the daylight for that hour, 0 to 24; weather, "clear" or "rain",
     picks the daylight, clear when not given). Low-detail files (miami_lod, islands_LOD) are left out when
     there's anything else, unless lod is set: then their world geometry (the low-detail hull) is marked
@@ -2352,6 +2415,10 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
                         b.report.placed += 1
                 b.prop = False
             if not wanted:
+                shut = b.occluders(src, group)
+                if shut:
+                    b.report.notes.append(f"{Path(src.label).stem}: {shut} occluder(s), as hidden boxes: invisible in the "
+                                          "game, which uses them only to skip drawing what is behind them")
                 b.lights(src, group, hour, weather or "clear")
         pts: List[List[float]] = []
         for group in groups:
@@ -2509,6 +2576,8 @@ def _under(doc: dict, node: int) -> Iterable[dict]:
 
 def _bounds(b: Builder, node: int, m: Mat4, out: List[List[float]]) -> None:
     n = b.g.doc["nodes"][node]
+    if (n.get("extras") or {}).get("occluder"):
+        return                                          # an invisible occluder: not part of what the scene shows
     local = _trs(tuple(n.get("translation", (0, 0, 0))), tuple(n.get("rotation", (0, 0, 0, 1))),
                  tuple(n.get("scale", (1, 1, 1))))
     m = _mul(m, local)
