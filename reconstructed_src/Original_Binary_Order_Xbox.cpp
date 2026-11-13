@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1,484 of 19,534 functions matched (7.60%). NOT COMPLETE YET.
-// The 18,050 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 1,552 of 19,534 functions matched (7.95%). NOT COMPLETE YET.
+// The 17,982 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -49716,7 +49716,37 @@ void Class_00239213::sub_00239213()
 // [TODO] 0x0023AE40 sub_0023AE40 (24 B)
 // [TODO] 0x0023AE60 sub_0023AE60 (95 B)
 // [TODO] 0x0023AEC0 sub_0023AEC0 (665 B)
-// [TODO] 0x0023B160 fight::Branch::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] fight::Branch::vfunc_03 (0x0023B160, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: destroys the branch, frees it when asked, and returns it.
+// ============================================================================
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace fight {
+
+class Branch
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Branch* vfunc_03(unsigned int flags);
+    void sub_0023AD60();
+};
+
+#pragma optimize("y", off)
+Branch* Branch::vfunc_03(unsigned int flags)
+{
+    sub_0023AD60();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0023B190 fight::Node::vfunc_07 (42 B)
 // [TODO] 0x0023B1C0 fight::Node::vfunc_10 (46 B)
 // [TODO] 0x0023B1F0 fight::Node::vfunc_08 (75 B)
@@ -49729,7 +49759,38 @@ void Class_00239213::sub_00239213()
 // [TODO] 0x0023B480 sub_0023B480 (58 B)
 // [TODO] 0x0023B4C0 sub_0023B4C0 (434 B)
 // [TODO] 0x0023B680 fight::Node::vfunc_13 (529 B)
-// [TODO] 0x0023B8A0 fight::Node::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] fight::Node::vfunc_03 (0x0023B8A0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace fight {
+
+class Node
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Node* vfunc_03(unsigned int flags);
+    void sub_0023B480();
+};
+
+#pragma optimize("y", off)
+Node* Node::vfunc_03(unsigned int flags)
+{
+    sub_0023B480();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0023B8D0 sub_0023B8D0 (13 B)
 // [TODO] 0x0023B8E0 sub_0023B8E0 (61 B)
 // [TODO] 0x0023B920 fight::BufferFileReader::vfunc_05 (7 B)
@@ -51037,7 +51098,38 @@ int __cdecl sub_00253080(void)
 // [TODO] 0x00255580 sub_00255580 (85 B)
 // [TODO] 0x002555E0 sub_002555E0 (82 B)
 // [TODO] 0x00255640 sub_00255640 (65 B)
-// [TODO] 0x00255690 pure3d::View::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::View::vfunc_03 (0x00255690, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class View
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual View* vfunc_03(unsigned int flags);
+    void sub_00255640();
+};
+
+#pragma optimize("y", off)
+View* View::vfunc_03(unsigned int flags)
+{
+    sub_00255640();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002556C0 sub_002556C0 (94 B)
 // [TODO] 0x00255720 sub_00255720 (60 B)
 // [TODO] 0x00255760 sub_00255760 (54 B)
@@ -51115,9 +51207,71 @@ int __cdecl sub_00255790(void)
 // [TODO] 0x002584DF sub_002584DF (1196 B)
 // [TODO] 0x0025886D sub_0025886D (286 B)
 // [TODO] 0x002589C0 sub_002589C0 (27 B)
-// [TODO] 0x002589E0 pure3d::ShadowMeshImpl::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ShadowMeshImpl::vfunc_03 (0x002589E0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ShadowMeshImpl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ShadowMeshImpl* vfunc_03(unsigned int flags);
+    void sub_00257CD0();
+};
+
+#pragma optimize("y", off)
+ShadowMeshImpl* ShadowMeshImpl::vfunc_03(unsigned int flags)
+{
+    sub_00257CD0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00258A10 sub_00258A10 (1828 B)
-// [TODO] 0x00259140 pure3d::ShadowSkinImpl::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ShadowSkinImpl::vfunc_03 (0x00259140, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ShadowSkinImpl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ShadowSkinImpl* vfunc_03(unsigned int flags);
+    void sub_00258240();
+};
+
+#pragma optimize("y", off)
+ShadowSkinImpl* ShadowSkinImpl::vfunc_03(unsigned int flags)
+{
+    sub_00258240();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00259170 pure3d::ShadowMeshImpl::vfunc_08 (378 B)
 // [TODO] 0x002592F0 sub_002592F0 (2366 B)
 // [TODO] 0x00259699 sub_00259699 (1429 B)
@@ -51147,7 +51301,38 @@ int __cdecl sub_00255790(void)
 // [TODO] 0x0025ADD0 sub_0025ADD0 (50 B)
 // [TODO] 0x0025AE10 sub_0025AE10 (458 B)
 // [TODO] 0x0025AFE0 sub_0025AFE0 (68 B)
-// [TODO] 0x0025B030 pure3d::DrawableContainer::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::DrawableContainer::vfunc_03 (0x0025B030, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class DrawableContainer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual DrawableContainer* vfunc_03(unsigned int flags);
+    void sub_0025AFE0();
+};
+
+#pragma optimize("y", off)
+DrawableContainer* DrawableContainer::vfunc_03(unsigned int flags)
+{
+    sub_0025AFE0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0025B060 sub_0025B060 (25 B)
 // [TODO] 0x0025B080 sub_0025B080 (49 B)
 // [TODO] 0x0025B0C0 sub_0025B0C0 (63 B)
@@ -51179,7 +51364,38 @@ int __cdecl sub_00255790(void)
 // [TODO] 0x0025CEE0 sub_0025CEE0 (52 B)
 // [TODO] 0x0025CF20 sub_0025CF20 (84 B)
 // [TODO] 0x0025CF80 sub_0025CF80 (203 B)
-// [TODO] 0x0025D050 pure3d::LightsChooser::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::LightsChooser::vfunc_03 (0x0025D050, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class LightsChooser
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LightsChooser* vfunc_03(unsigned int flags);
+    void sub_0025CF80();
+};
+
+#pragma optimize("y", off)
+LightsChooser* LightsChooser::vfunc_03(unsigned int flags)
+{
+    sub_0025CF80();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0025D080 sub_0025D080 (53 B)
 // [TODO] 0x0025D0C0 sub_0025D0C0 (11 B)
 // [TODO] 0x0025D0D0 pure3d::d3dDevice::vfunc_05 (13 B)
@@ -51191,7 +51407,38 @@ int __cdecl sub_00255790(void)
 // [TODO] 0x0025D580 sub_0025D580 (141 B)
 // [TODO] 0x0025D610 sub_0025D610 (125 B)
 // [TODO] 0x0025D690 sub_0025D690 (158 B)
-// [TODO] 0x0025D730 pure3d::DisplayList::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::DisplayList::vfunc_03 (0x0025D730, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class DisplayList
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual DisplayList* vfunc_03(unsigned int flags);
+    void sub_0025D610();
+};
+
+#pragma optimize("y", off)
+DisplayList* DisplayList::vfunc_03(unsigned int flags)
+{
+    sub_0025D610();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0025D760 sub_0025D760 (13 B)
 // [TODO] 0x0025D770 sub_0025D770 (95 B)
 // [TODO] 0x0025D7D0 pure3d::ParticleEmitter::vfunc_22 (18 B)
@@ -51240,13 +51487,75 @@ int __cdecl sub_00255790(void)
 // [TODO] 0x0025F430 sub_0025F430 (117 B)
 // [TODO] 0x0025F4B0 sub_0025F4B0 (184 B)
 // [TODO] 0x0025F570 sub_0025F570 (469 B)
-// [TODO] 0x0025F750 pure3d::ParticleEmitter::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleEmitter::vfunc_03 (0x0025F750, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ParticleEmitter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ParticleEmitter* vfunc_03(unsigned int flags);
+    void sub_0025E120();
+};
+
+#pragma optimize("y", off)
+ParticleEmitter* ParticleEmitter::vfunc_03(unsigned int flags)
+{
+    sub_0025E120();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0025F780 pure3d::SpriteParticleEmitter::vfunc_18 (559 B)
 // [TODO] 0x0025F9B0 sub_0025F9B0 (80 B)
 // [TODO] 0x0025FA00 sub_0025FA00 (424 B)
 // [TODO] 0x0025FBB0 sub_0025FBB0 (298 B)
 // [TODO] 0x0025FCE0 pure3d::SpriteParticleEmitter::vfunc_05 (34 B)
-// [TODO] 0x0025FD10 pure3d::SpriteParticleEmitter::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::SpriteParticleEmitter::vfunc_03 (0x0025FD10, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class SpriteParticleEmitter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual SpriteParticleEmitter* vfunc_03(unsigned int flags);
+    void sub_0025FBB0();
+};
+
+#pragma optimize("y", off)
+SpriteParticleEmitter* SpriteParticleEmitter::vfunc_03(unsigned int flags)
+{
+    sub_0025FBB0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0025FD40 sub_0025FD40 (11 B)
 // [TODO] 0x0025FD50 pure3d::Light::vfunc_07 (24 B)
 // [TODO] 0x0025FD70 pure3d::Light::vfunc_08 (41 B)
@@ -51269,7 +51578,38 @@ int __cdecl sub_00255790(void)
 // [TODO] 0x00260320 sub_00260320 (84 B)
 // [TODO] 0x00260380 sub_00260380 (80 B)
 // [TODO] 0x002603D0 sub_002603D0 (81 B)
-// [TODO] 0x00260430 pure3d::LightGroup::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::LightGroup::vfunc_03 (0x00260430, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class LightGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LightGroup* vfunc_03(unsigned int flags);
+    void sub_002603D0();
+};
+
+#pragma optimize("y", off)
+LightGroup* LightGroup::vfunc_03(unsigned int flags)
+{
+    sub_002603D0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00260460 sub_00260460 (40 B)
 // [TODO] 0x00260490 sub_00260490 (59 B)
 // [TODO] 0x002604D0 sub_002604D0 (45 B)
@@ -51595,7 +51935,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00267EA0 pure3d::d3dExtAntialiasControl::vfunc_04 (16 B)
 // [TODO] 0x00267EB0 pure3d::d3dExtGlobalProjectedTexture::vfunc_01 (84 B)
 // [TODO] 0x00267F10 pure3d::d3dExtGlobalProjectedTexture::vfunc_02 (53 B)
-// [TODO] 0x00267F50 pure3d::d3dExtGlobalProjectedTexture::vfunc_00 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtGlobalProjectedTexture::vfunc_00 (0x00267F50, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dExtGlobalProjectedTexture
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dExtGlobalProjectedTexture* vfunc_00(unsigned int flags);
+    void sub_00267F80();
+};
+
+#pragma optimize("y", off)
+d3dExtGlobalProjectedTexture* d3dExtGlobalProjectedTexture::vfunc_00(unsigned int flags)
+{
+    sub_00267F80();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00267F80 sub_00267F80 (48 B)
 // [TODO] 0x00267FB0 pure3d::d3dExtHardwareSkinning::vfunc_01 (8 B)
 // [TODO] 0x00267FC0 pure3d::d3dExtHardwareSkinning::vfunc_05 (80 B)
@@ -51617,7 +51988,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00268280 pure3d::d3dExtVertexProgram::vfunc_03 (18 B)
 // [TODO] 0x002682A0 pure3d::d3dExtVertexProgram::vfunc_02 (71 B)
 // [TODO] 0x002682F0 sub_002682F0 (427 B)
-// [TODO] 0x002684A0 pure3d::d3dExtFramebufferEffects::vfunc_00 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtFramebufferEffects::vfunc_00 (0x002684A0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dExtFramebufferEffects
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dExtFramebufferEffects* vfunc_00(unsigned int flags);
+    void sub_002641D0();
+};
+
+#pragma optimize("y", off)
+d3dExtFramebufferEffects* d3dExtFramebufferEffects::vfunc_00(unsigned int flags)
+{
+    sub_002641D0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002684D0 pure3d::d3dExtFramebufferEffects::vfunc_16 (1086 B)
 // [TODO] 0x00268910 pure3d::d3dExtFramebufferEffects::vfunc_18 (1768 B)
 // [TODO] 0x00269000 sub_00269000 (1905 B)
@@ -51641,7 +52043,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x0026ABD0 sub_0026ABD0 (760 B)
 // [TODO] 0x0026AED0 pure3d::d3dExtFramebufferEffects::vfunc_14 (1055 B)
 // [TODO] 0x0026B2F0 sub_0026B2F0 (1059 B)
-// [TODO] 0x0026B720 pure3d::d3dContext::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dContext::vfunc_03 (0x0026B720, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dContext
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dContext* vfunc_03(unsigned int flags);
+    void sub_00269B70();
+};
+
+#pragma optimize("y", off)
+d3dContext* d3dContext::vfunc_03(unsigned int flags)
+{
+    sub_00269B70();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0026B750 pure3d::d3dExtFramebufferEffects::vfunc_17 (3262 B)
 // [TODO] 0x0026C410 pure3d::BMPHandler::vfunc_09 (18 B)
 // [TODO] 0x0026C430 sub_0026C430 (281 B)
@@ -51680,7 +52113,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x0026DB20 pure3d::SpriteObject::vfunc_31 (14 B)
 // [TODO] 0x0026DB30 pure3d::SpriteLoader::vfunc_07 (13 B)
 // [TODO] 0x0026DB40 NISCharacterAnimationAction::vfunc_04 (4 B)
-// [TODO] 0x0026DB50 pure3d::Sprite::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::Sprite::vfunc_03 (0x0026DB50, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class Sprite
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Sprite* vfunc_03(unsigned int flags);
+    void sub_0026D8D0();
+};
+
+#pragma optimize("y", off)
+Sprite* Sprite::vfunc_03(unsigned int flags)
+{
+    sub_0026D8D0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0026DB80 sub_0026DB80 (700 B)
 // [TODO] 0x0026DE40 sub_0026DE40 (681 B)
 // [TODO] 0x0026E0F0 sub_0026E0F0 (138 B)
@@ -51712,7 +52176,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x0026F940 sub_0026F940 (123 B)
 // [TODO] 0x0026F9C0 sub_0026F9C0 (112 B)
 // [TODO] 0x0026FA30 pure3d::ExpressionGroupLoader::vfunc_06 (450 B)
-// [TODO] 0x0026FC00 pure3d::ExpressionGroup::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ExpressionGroup::vfunc_03 (0x0026FC00, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ExpressionGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ExpressionGroup* vfunc_03(unsigned int flags);
+    void sub_0026F9C0();
+};
+
+#pragma optimize("y", off)
+ExpressionGroup* ExpressionGroup::vfunc_03(unsigned int flags)
+{
+    sub_0026F9C0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0026FC30 sub_0026FC30 (70 B)
 // [TODO] 0x0026FC80 sub_0026FC80 (78 B)
 // [TODO] 0x0026FCD0 sub_0026FCD0 (426 B)
@@ -51733,7 +52228,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00270470 sub_00270470 (97 B)
 // [TODO] 0x002704E0 sub_002704E0 (311 B)
 // [TODO] 0x00270620 sub_00270620 (149 B)
-// [TODO] 0x002706C0 pure3d::VertexOffsetExpressionMixer::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexOffsetExpressionMixer::vfunc_03 (0x002706C0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class VertexOffsetExpressionMixer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VertexOffsetExpressionMixer* vfunc_03(unsigned int flags);
+    void sub_00270470();
+};
+
+#pragma optimize("y", off)
+VertexOffsetExpressionMixer* VertexOffsetExpressionMixer::vfunc_03(unsigned int flags)
+{
+    sub_00270470();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002706F0 pure3d::VertexOffsetExpressionMixerLoader::vfunc_06 (424 B)
 // [TODO] 0x002708A0 sub_002708A0 (420 B)
 // [TODO] 0x00270A50 sub_00270A50 (98 B)
@@ -51744,14 +52270,138 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00270BC0 sub_00270BC0 (13 B)
 // [TODO] 0x00270BD0 sub_00270BD0 (61 B)
 // [TODO] 0x00270C10 sub_00270C10 (80 B)
-// [TODO] 0x00270C60 pure3d::DefaultParticleEmitterHandler::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::DefaultParticleEmitterHandler::vfunc_03 (0x00270C60, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class DefaultParticleEmitterHandler
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual DefaultParticleEmitterHandler* vfunc_03(unsigned int flags);
+    void sub_002A6940();
+};
+
+#pragma optimize("y", off)
+DefaultParticleEmitterHandler* DefaultParticleEmitterHandler::vfunc_03(unsigned int flags)
+{
+    sub_002A6940();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00270C90 sub_00270C90 (80 B)
 // [TODO] 0x00270CE0 pure3d::ParticleSystemLoader::vfunc_06 (1062 B)
 // [TODO] 0x00271110 sub_00271110 (52 B)
-// [TODO] 0x00271150 pure3d::ParticleGeneratorLoader::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleGeneratorLoader::vfunc_03 (0x00271150, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class ParticleGeneratorLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ParticleGeneratorLoader* vfunc_03(unsigned int flags);
+    void sub_00270BD0();
+};
+
+#pragma optimize("y", off)
+ParticleGeneratorLoader* ParticleGeneratorLoader::vfunc_03(unsigned int flags)
+{
+    sub_00270BD0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00271180 sub_00271180 (210 B)
-// [TODO] 0x00271260 pure3d::ParticleEmitterLoader::vfunc_03 (33 B)
-// [TODO] 0x00271290 pure3d::ParticleSystemLoader::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleEmitterLoader::vfunc_03 (0x00271260, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class ParticleEmitterLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ParticleEmitterLoader* vfunc_03(unsigned int flags);
+    void sub_00270C10();
+};
+
+#pragma optimize("y", off)
+ParticleEmitterLoader* ParticleEmitterLoader::vfunc_03(unsigned int flags)
+{
+    sub_00270C10();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleSystemLoader::vfunc_03 (0x00271290, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ParticleSystemLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ParticleSystemLoader* vfunc_03(unsigned int flags);
+    void sub_00270C90();
+};
+
+#pragma optimize("y", off)
+ParticleSystemLoader* ParticleSystemLoader::vfunc_03(unsigned int flags)
+{
+    sub_00270C90();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002712C0 sub_002712C0 (97 B)
 // [TODO] 0x00271330 sub_00271330 (516 B)
 // [TODO] 0x00271540 sub_00271540 (566 B)
@@ -51796,7 +52446,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00272BE0 sub_00272BE0 (261 B)
 // [TODO] 0x00272CF0 sub_00272CF0 (1291 B)
 // [TODO] 0x00272D40 pure3d::MultiController::vfunc_05 (31 B)
-// [TODO] 0x00272D60 pure3d::MultiController::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::MultiController::vfunc_03 (0x00272D60, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class MultiController
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual MultiController* vfunc_03(unsigned int flags);
+    void sub_00272CF0();
+};
+
+#pragma optimize("y", off)
+MultiController* MultiController::vfunc_03(unsigned int flags)
+{
+    sub_00272CF0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00272D90 sub_00272D90 (40 B)
 // [TODO] 0x00272DC0 pure3d::MultiControllerLoader::vfunc_06 (988 B)
 // [TODO] 0x002731A0 sub_002731A0 (26 B)
@@ -51852,10 +52533,72 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x002747C0 content::LoadInventory::DynamicCaster<pure3d::Light>::vfunc_00 (33 B)
 // [TODO] 0x002747F0 content::LoadInventory::DynamicCaster<pure3d::BillboardObject>::vfunc_00 (33 B)
 // [TODO] 0x00274820 pure3d::SimpleFrameController::vfunc_03 (66 B)
-// [TODO] 0x00274870 pure3d::BlendFrameController::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::BlendFrameController::vfunc_03 (0x00274870, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class BlendFrameController
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual BlendFrameController* vfunc_03(unsigned int flags);
+    void sub_00274170();
+};
+
+#pragma optimize("y", off)
+BlendFrameController* BlendFrameController::vfunc_03(unsigned int flags)
+{
+    sub_00274170();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002748A0 pure3d::BlendFrameController::vfunc_29 (53 B)
 // [TODO] 0x002748E0 sub_002748E0 (113 B)
-// [TODO] 0x00274960 pure3d::FrameControllerLoader::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::FrameControllerLoader::vfunc_03 (0x00274960, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class FrameControllerLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual FrameControllerLoader* vfunc_03(unsigned int flags);
+    void sub_00274750();
+};
+
+#pragma optimize("y", off)
+FrameControllerLoader* FrameControllerLoader::vfunc_03(unsigned int flags)
+{
+    sub_00274750();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00274990 sub_00274990 (40 B)
 // [TODO] 0x002749C0 sub_002749C0 (40 B)
 // [TODO] 0x002749F0 sub_002749F0 (40 B)
@@ -51876,7 +52619,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x002758B0 sub_002758B0 (154 B)
 // [TODO] 0x00275950 pure3d::AnimationLoader::vfunc_06 (1257 B)
 // [TODO] 0x00275E40 sub_00275E40 (812 B)
-// [TODO] 0x00276170 pure3d::Animation::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::Animation::vfunc_03 (0x00276170, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class Animation
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Animation* vfunc_03(unsigned int flags);
+    void sub_002758B0();
+};
+
+#pragma optimize("y", off)
+Animation* Animation::vfunc_03(unsigned int flags)
+{
+    sub_002758B0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002761A0 sub_002761A0 (70 B)
 // [TODO] 0x002761F0 sub_002761F0 (95 B)
 // [TODO] 0x00276250 pure3d::AnimationLoader::vfunc_03 (59 B)
@@ -51911,7 +52685,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00276E90 sub_00276E90 (27 B)
 // [TODO] 0x00276EB0 sub_00276EB0 (144 B)
 // [TODO] 0x00276F40 sub_00276F40 (128 B)
-// [TODO] 0x00276FC0 pure3d::CompositeDrawable::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::CompositeDrawable::vfunc_03 (0x00276FC0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class CompositeDrawable
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CompositeDrawable* vfunc_03(unsigned int flags);
+    void sub_00276CA0();
+};
+
+#pragma optimize("y", off)
+CompositeDrawable* CompositeDrawable::vfunc_03(unsigned int flags)
+{
+    sub_00276CA0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00276FF0 sub_00276FF0 (482 B)
 // [TODO] 0x002771E0 sub_002771E0 (44 B)
 // [TODO] 0x00277210 pure3d::CompositeDrawable::ActiveControllerList::vfunc_03 (33 B)
@@ -51943,7 +52748,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00277E00 pure3d::PolySkin::vfunc_24 (60 B)
 // [TODO] 0x00277E40 pure3d::PolySkin::vfunc_12 (41 B)
 // [TODO] 0x00277E70 sub_00277E70 (139 B)
-// [TODO] 0x00277F00 pure3d::PolySkin::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::PolySkin::vfunc_03 (0x00277F00, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class PolySkin
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PolySkin* vfunc_03(unsigned int flags);
+    void sub_00277D90();
+};
+
+#pragma optimize("y", off)
+PolySkin* PolySkin::vfunc_03(unsigned int flags)
+{
+    sub_00277D90();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00277F30 sub_00277F30 (472 B)
 // [TODO] 0x00278110 pure3d::PolySkin::vfunc_05 (33 B)
 // [TODO] 0x00278140 pure3d::PolySkin::vfunc_30 (44 B)
@@ -51968,7 +52804,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00278CB0 sub_00278CB0 (177 B)
 // [TODO] 0x00278D70 sub_00278D70 (144 B)
 // [TODO] 0x00278E00 sub_00278E00 (98 B)
-// [TODO] 0x00278E70 pure3d::Skeleton::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::Skeleton::vfunc_03 (0x00278E70, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class Skeleton
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Skeleton* vfunc_03(unsigned int flags);
+    void sub_00278CB0();
+};
+
+#pragma optimize("y", off)
+Skeleton* Skeleton::vfunc_03(unsigned int flags)
+{
+    sub_00278CB0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00278EA0 sub_00278EA0 (372 B)
 // [TODO] 0x00279020 sub_00279020 (209 B)
 // [TODO] 0x00279100 pure3d::SkeletonLoader::vfunc_06 (1361 B)
@@ -52010,7 +52877,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x0027C240 sub_0027C240 (124 B)
 // [TODO] 0x0027C2C0 pure3d::BillboardQuadGroup::vfunc_08 (663 B)
 // [TODO] 0x0027C560 sub_0027C560 (161 B)
-// [TODO] 0x0027C610 pure3d::BillboardQuadGroup::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::BillboardQuadGroup::vfunc_03 (0x0027C610, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class BillboardQuadGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual BillboardQuadGroup* vfunc_03(unsigned int flags);
+    void sub_0027C240();
+};
+
+#pragma optimize("y", off)
+BillboardQuadGroup* BillboardQuadGroup::vfunc_03(unsigned int flags)
+{
+    sub_0027C240();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0027C640 pure3d::BillboardCutOffQuadGroup::vfunc_03 (39 B)
 // [TODO] 0x0027C670 sub_0027C670 (1672 B)
 // [TODO] 0x0027CD00 pure3d::BillboardObjectLoader::vfunc_06 (118 B)
@@ -52043,7 +52941,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x0027E170 pure3d::TextureFont::vfunc_26 (115 B)
 // [TODO] 0x0027E1F0 sub_0027E1F0 (172 B)
 // [TODO] 0x0027E2A0 sub_0027E2A0 (27 B)
-// [TODO] 0x0027E2C0 pure3d::TextureFont::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::TextureFont::vfunc_03 (0x0027E2C0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class TextureFont
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TextureFont* vfunc_03(unsigned int flags);
+    void sub_0027E1F0();
+};
+
+#pragma optimize("y", off)
+TextureFont* TextureFont::vfunc_03(unsigned int flags)
+{
+    sub_0027E1F0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0027E2F0 pure3d::TextureFontLoader::vfunc_06 (1859 B)
 // [TODO] 0x0027EA40 pure3d::LightLoader::vfunc_06 (1260 B)
 // [TODO] 0x0027EF30 sub_0027EF30 (27 B)
@@ -52140,7 +53069,38 @@ void* DXTNHandler::vfunc_07()
 // [TODO] 0x00282450 pure3d::CharacterPose::vfunc_06 (84 B)
 // [TODO] 0x002824B0 pure3d::Pose::vfunc_03 (93 B)
 // [TODO] 0x00282510 sub_00282510 (245 B)
-// [TODO] 0x00282610 pure3d::CharacterPose::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::CharacterPose::vfunc_03 (0x00282610, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class CharacterPose
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CharacterPose* vfunc_03(unsigned int flags);
+    void sub_00282360();
+};
+
+#pragma optimize("y", off)
+CharacterPose* CharacterPose::vfunc_03(unsigned int flags)
+{
+    sub_00282360();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00282640 sub_00282640 (96 B)
 // [TODO] 0x002826A0 sub_002826A0 (45 B)
 // [TODO] 0x002826D0 sub_002826D0 (30 B)
@@ -52300,7 +53260,38 @@ void* d3dVehicleShader::vfunc_18()
 // [TODO] 0x002831BB sub_002831BB (93 B)
 // [TODO] 0x00283220 sub_00283220 (202 B)
 // [TODO] 0x002832F0 sub_002832F0 (247 B)
-// [TODO] 0x002833F0 pure3d::d3dVehicleShader::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_03 (0x002833F0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dVehicleShader* vfunc_03(unsigned int flags);
+    void sub_002829D0();
+};
+
+#pragma optimize("y", off)
+d3dVehicleShader* d3dVehicleShader::vfunc_03(unsigned int flags)
+{
+    sub_002829D0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00283420 pure3d::d3dVehicleShader::vfunc_14 (348 B)
 // [TODO] 0x00283580 pure3d::d3dVehicleShader::vfunc_24 (679 B)
 // [TODO] 0x00283940 sub_00283940 (76 B)
@@ -52445,7 +53436,38 @@ void Class_00283A90::sub_00283A90()
 // [TODO] 0x00285C10 pure3d::HeadTrackingLayer::vfunc_03 (59 B)
 // [TODO] 0x00285C50 sub_00285C50 (123 B)
 // [TODO] 0x00285CD0 sub_00285CD0 (128 B)
-// [TODO] 0x00285D50 pure3d::CharacterController::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::CharacterController::vfunc_03 (0x00285D50, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class CharacterController
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CharacterController* vfunc_03(unsigned int flags);
+    void sub_00285CD0();
+};
+
+#pragma optimize("y", off)
+CharacterController* CharacterController::vfunc_03(unsigned int flags)
+{
+    sub_00285CD0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00285D80 sub_00285D80 (85 B)
 // [TODO] 0x00285DE0 sub_00285DE0 (16 B)
 // [TODO] 0x00285DF0 sub_00285DF0 (383 B)
@@ -52471,7 +53493,38 @@ void Class_00283A90::sub_00283A90()
 // [TODO] 0x00286CC0 pure3d::PoseAnimationController::vfunc_26 (44 B)
 // [TODO] 0x00286CF0 sub_00286CF0 (131 B)
 // [TODO] 0x00286D80 pure3d::PoseAnimationController::vfunc_29 (33 B)
-// [TODO] 0x00286DB0 pure3d::CharacterPoseAnimationController::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::CharacterPoseAnimationController::vfunc_03 (0x00286DB0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class CharacterPoseAnimationController
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual CharacterPoseAnimationController* vfunc_03(unsigned int flags);
+    void sub_002865C0();
+};
+
+#pragma optimize("y", off)
+CharacterPoseAnimationController* CharacterPoseAnimationController::vfunc_03(unsigned int flags)
+{
+    sub_002865C0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00286DE0 sub_00286DE0 (133 B)
 // [TODO] 0x00286E70 pure3d::CharacterPoseAnimationController::vfunc_05 (34 B)
 // [TODO] 0x00286EA0 pure3d::CharacterPoseAnimationController::vfunc_07 (103 B)
@@ -52557,7 +53610,38 @@ void Class_00283A90::sub_00283A90()
 // [TODO] 0x00289870 sub_00289870 (300 B)
 // [TODO] 0x002899A0 sub_002899A0 (287 B)
 // [TODO] 0x00289AC0 sub_00289AC0 (289 B)
-// [TODO] 0x00289BF0 pure3d::ChannelLoader::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ChannelLoader::vfunc_03 (0x00289BF0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class ChannelLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ChannelLoader* vfunc_03(unsigned int flags);
+    void sub_00288510();
+};
+
+#pragma optimize("y", off)
+ChannelLoader* ChannelLoader::vfunc_03(unsigned int flags)
+{
+    sub_00288510();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00289C20 sub_00289C20 (91 B)
 // [TODO] 0x00289C80 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_03 (43 B)
 // [TODO] 0x00289CB0 sub_00289CB0 (87 B)
@@ -52579,19 +53663,422 @@ void Class_00283A90::sub_00283A90()
 // [TODO] 0x0028A470 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion4>::vfunc_00 (46 B)
 // [TODO] 0x0028A4A0 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>::vfunc_00 (46 B)
 // [TODO] 0x0028A4D0 pure3d::SimpleChannel::vfunc_00 (87 B)
-// [TODO] 0x0028A530 pure3d::IntChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A560 pure3d::Float1Channel::vfunc_00 (33 B)
-// [TODO] 0x0028A590 pure3d::Float2Channel::vfunc_00 (33 B)
-// [TODO] 0x0028A5C0 pure3d::VectorChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A5F0 pure3d::Vector1DOFChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A620 pure3d::Vector2DOFChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A650 pure3d::Vector3DOFChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A680 pure3d::RotationChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A6B0 pure3d::QuaternionChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A6E0 pure3d::StringChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A710 pure3d::EntityChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A740 pure3d::BoolChannel::vfunc_00 (33 B)
-// [TODO] 0x0028A770 pure3d::ColourChannel::vfunc_00 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::IntChannel::vfunc_00 (0x0028A530, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class IntChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual IntChannel* vfunc_00(unsigned int flags);
+    void sub_00288610();
+};
+
+#pragma optimize("y", off)
+IntChannel* IntChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288610();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Float1Channel::vfunc_00 (0x0028A560, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class Float1Channel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Float1Channel* vfunc_00(unsigned int flags);
+    void sub_00288700();
+};
+
+#pragma optimize("y", off)
+Float1Channel* Float1Channel::vfunc_00(unsigned int flags)
+{
+    sub_00288700();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Float2Channel::vfunc_00 (0x0028A590, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class Float2Channel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Float2Channel* vfunc_00(unsigned int flags);
+    void sub_002887F0();
+};
+
+#pragma optimize("y", off)
+Float2Channel* Float2Channel::vfunc_00(unsigned int flags)
+{
+    sub_002887F0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::VectorChannel::vfunc_00 (0x0028A5C0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class VectorChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VectorChannel* vfunc_00(unsigned int flags);
+    void sub_00288880();
+};
+
+#pragma optimize("y", off)
+VectorChannel* VectorChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288880();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Vector1DOFChannel::vfunc_00 (0x0028A5F0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class Vector1DOFChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Vector1DOFChannel* vfunc_00(unsigned int flags);
+    void sub_00288960();
+};
+
+#pragma optimize("y", off)
+Vector1DOFChannel* Vector1DOFChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288960();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Vector2DOFChannel::vfunc_00 (0x0028A620, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class Vector2DOFChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Vector2DOFChannel* vfunc_00(unsigned int flags);
+    void sub_00288A40();
+};
+
+#pragma optimize("y", off)
+Vector2DOFChannel* Vector2DOFChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288A40();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Vector3DOFChannel::vfunc_00 (0x0028A650, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class Vector3DOFChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Vector3DOFChannel* vfunc_00(unsigned int flags);
+    void sub_00288B10();
+};
+
+#pragma optimize("y", off)
+Vector3DOFChannel* Vector3DOFChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288B10();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::RotationChannel::vfunc_00 (0x0028A680, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class RotationChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual RotationChannel* vfunc_00(unsigned int flags);
+    void sub_00288B80();
+};
+
+#pragma optimize("y", off)
+RotationChannel* RotationChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288B80();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::QuaternionChannel::vfunc_00 (0x0028A6B0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class QuaternionChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual QuaternionChannel* vfunc_00(unsigned int flags);
+    void sub_00288C50();
+};
+
+#pragma optimize("y", off)
+QuaternionChannel* QuaternionChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288C50();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::StringChannel::vfunc_00 (0x0028A6E0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class StringChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual StringChannel* vfunc_00(unsigned int flags);
+    void sub_00288D80();
+};
+
+#pragma optimize("y", off)
+StringChannel* StringChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288D80();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::EntityChannel::vfunc_00 (0x0028A710, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class EntityChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual EntityChannel* vfunc_00(unsigned int flags);
+    void sub_00288E50();
+};
+
+#pragma optimize("y", off)
+EntityChannel* EntityChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288E50();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::BoolChannel::vfunc_00 (0x0028A740, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class BoolChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual BoolChannel* vfunc_00(unsigned int flags);
+    void sub_00288F20();
+};
+
+#pragma optimize("y", off)
+BoolChannel* BoolChannel::vfunc_00(unsigned int flags)
+{
+    sub_00288F20();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ColourChannel::vfunc_00 (0x0028A770, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class ColourChannel
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ColourChannel* vfunc_00(unsigned int flags);
+    void sub_00289010();
+};
+
+#pragma optimize("y", off)
+ColourChannel* ColourChannel::vfunc_00(unsigned int flags)
+{
+    sub_00289010();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0028A7A0 sub_0028A7A0 (1840 B)
 // [TODO] 0x0028AED0 sub_0028AED0 (97 B)
 // [TODO] 0x0028AF40 sub_0028AF40 (428 B)
@@ -52821,7 +54308,38 @@ int __cdecl sub_00291560(void)
 // [TODO] 0x00291EC0 sub_00291EC0 (258 B)
 // [TODO] 0x00291FD0 sub_00291FD0 (95 B)
 // [TODO] 0x00292030 pure3d::ParticleController::vfunc_05 (31 B)
-// [TODO] 0x00292050 pure3d::ParticleController::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleController::vfunc_03 (0x00292050, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ParticleController
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ParticleController* vfunc_03(unsigned int flags);
+    void sub_00291FD0();
+};
+
+#pragma optimize("y", off)
+ParticleController* ParticleController::vfunc_03(unsigned int flags)
+{
+    sub_00291FD0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00292080 sub_00292080 (353 B)
 // [TODO] 0x002921F0 pure3d::ParticleController::vfunc_07 (45 B)
 // [TODO] 0x00292220 sub_00292220 (15 B)
@@ -52899,10 +54417,103 @@ int __cdecl sub_00291560(void)
 // [TODO] 0x00293F50 sub_00293F50 (430 B)
 // [TODO] 0x00294100 pure3d::PrimGroup::vfunc_03 (60 B)
 // [TODO] 0x00294140 pure3d::PrimGroupOptimized::vfunc_03 (85 B)
-// [TODO] 0x002941A0 pure3d::PrimGroupSkinnedOptimized::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroupSkinnedOptimized::vfunc_03 (0x002941A0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class PrimGroupSkinnedOptimized
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PrimGroupSkinnedOptimized* vfunc_03(unsigned int flags);
+    void sub_00293000();
+};
+
+#pragma optimize("y", off)
+PrimGroupSkinnedOptimized* PrimGroupSkinnedOptimized::vfunc_03(unsigned int flags)
+{
+    sub_00293000();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002941D0 pure3d::PrimGroupStreamed::vfunc_03 (85 B)
-// [TODO] 0x00294230 pure3d::PrimGroupSkinnedStreamed::vfunc_03 (33 B)
-// [TODO] 0x00294260 pure3d::VertexAnimPrimGroup::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroupSkinnedStreamed::vfunc_03 (0x00294230, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class PrimGroupSkinnedStreamed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual PrimGroupSkinnedStreamed* vfunc_03(unsigned int flags);
+    void sub_002933D0();
+};
+
+#pragma optimize("y", off)
+PrimGroupSkinnedStreamed* PrimGroupSkinnedStreamed::vfunc_03(unsigned int flags)
+{
+    sub_002933D0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::VertexAnimPrimGroup::vfunc_03 (0x00294260, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class VertexAnimPrimGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VertexAnimPrimGroup* vfunc_03(unsigned int flags);
+    void sub_00293770();
+};
+
+#pragma optimize("y", off)
+VertexAnimPrimGroup* VertexAnimPrimGroup::vfunc_03(unsigned int flags)
+{
+    sub_00293770();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00294290 pure3d::PrimGroupLoader::vfunc_03 (60 B)
 // [TODO] 0x002942D0 pure3d::MatrixPaletteList::vfunc_03 (56 B)
 // [TODO] 0x00294310 sub_00294310 (2676 B)
@@ -52941,7 +54552,38 @@ int __cdecl sub_00291560(void)
 // [TODO] 0x00297100 sub_00297100 (41 B)
 // [TODO] 0x00297370 sub_00297370 (1747 B)
 // [TODO] 0x00297A50 pure3d::xboxOceanRenderer::vfunc_05 (81 B)
-// [TODO] 0x00297AB0 pure3d::xboxOceanRenderer::vfunc_00 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::xboxOceanRenderer::vfunc_00 (0x00297AB0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class xboxOceanRenderer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual xboxOceanRenderer* vfunc_00(unsigned int flags);
+    void sub_00297000();
+};
+
+#pragma optimize("y", off)
+xboxOceanRenderer* xboxOceanRenderer::vfunc_00(unsigned int flags)
+{
+    sub_00297000();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x00297AE0 pure3d::xboxOceanRenderer::vfunc_01 (71 B)
 // [TODO] 0x00297BA0 pure3d::PNGHandler::vfunc_09 (18 B)
 // [TODO] 0x00297BC0 sub_00297BC0 (160 B)
@@ -52994,7 +54636,38 @@ int __cdecl sub_00291560(void)
 // [TODO] 0x0029A000 pure3d::d3dTexture::vfunc_18 (16 B)
 // [TODO] 0x0029A010 sub_0029A010 (67 B)
 // [TODO] 0x0029A060 sub_0029A060 (257 B)
-// [TODO] 0x0029A170 pure3d::d3dTexture::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dTexture::vfunc_03 (0x0029A170, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dTexture
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dTexture* vfunc_03(unsigned int flags);
+    void sub_002997B0();
+};
+
+#pragma optimize("y", off)
+d3dTexture* d3dTexture::vfunc_03(unsigned int flags)
+{
+    sub_002997B0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0029A1A0 pure3d::d3dVehicleShader::vfunc_21 (41 B)
 // [TODO] 0x0029A250 sub_0029A250 (143 B)
 // ============================================================================
@@ -53213,8 +54886,70 @@ void __cdecl sub_0029DA50(void)
 // [TODO] 0x0029E8E0 pure3d::d3dContext::vfunc_100 (231 B)
 // [TODO] 0x0029E9D0 sub_0029E9D0 (96 B)
 // [TODO] 0x0029EA30 sub_0029EA30 (186 B)
-// [TODO] 0x0029EAF0 pure3d::pddiMatrixStack::vfunc_00 (33 B)
-// [TODO] 0x0029EB20 pure3d::pddiBaseContext::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::pddiMatrixStack::vfunc_00 (0x0029EAF0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class pddiMatrixStack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual pddiMatrixStack* vfunc_00(unsigned int flags);
+    void sub_0029E5E0();
+};
+
+#pragma optimize("y", off)
+pddiMatrixStack* pddiMatrixStack::vfunc_00(unsigned int flags)
+{
+    sub_0029E5E0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::pddiBaseContext::vfunc_03 (0x0029EB20, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class pddiBaseContext
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual pddiBaseContext* vfunc_03(unsigned int flags);
+    void sub_0029E630();
+};
+
+#pragma optimize("y", off)
+pddiBaseContext* pddiBaseContext::vfunc_03(unsigned int flags)
+{
+    sub_0029E630();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x0029EB50 pure3d::d3dContext::vfunc_121 (500 B)
 // [TODO] 0x0029ED50 pure3d::_pddiExtMemRegistration::vfunc_01 (15 B)
 // [TODO] 0x0029ED60 sub_0029ED60 (85 B)
@@ -53546,7 +55281,38 @@ void* d3dSimpleShader::vfunc_18()
 // [TODO] 0x002A193C sub_002A193C (2209 B)
 // [TODO] 0x002A21E0 sub_002A21E0 (1565 B)
 // [TODO] 0x002A2800 pure3d::d3dExtDepthOfField::vfunc_01 (355 B)
-// [TODO] 0x002A2970 pure3d::d3dExtDepthOfField::vfunc_00 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtDepthOfField::vfunc_00 (0x002A2970, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dExtDepthOfField
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dExtDepthOfField* vfunc_00(unsigned int flags);
+    void sub_002A1720();
+};
+
+#pragma optimize("y", off)
+d3dExtDepthOfField* d3dExtDepthOfField::vfunc_00(unsigned int flags)
+{
+    sub_002A1720();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002A29A0 pure3d::d3dExtDepthOfField::vfunc_03 (76 B)
 // [TODO] 0x002A29F0 sub_002A29F0 (68 B)
 // [TODO] 0x002A2A40 sub_002A2A40 (82 B)
@@ -53563,14 +55329,76 @@ void* d3dSimpleShader::vfunc_18()
 // [TODO] 0x002A3B60 pure3d::d3dExtStaticShadowGen::vfunc_10 (988 B)
 // [TODO] 0x002A3E9D sub_002A3E9D (159 B)
 // [TODO] 0x002A3F40 sub_002A3F40 (327 B)
-// [TODO] 0x002A4090 pure3d::d3dExtStaticShadowGen::vfunc_00 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtStaticShadowGen::vfunc_00 (0x002A4090, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dExtStaticShadowGen
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dExtStaticShadowGen* vfunc_00(unsigned int flags);
+    void sub_002A30A0();
+};
+
+#pragma optimize("y", off)
+d3dExtStaticShadowGen* d3dExtStaticShadowGen::vfunc_00(unsigned int flags)
+{
+    sub_002A30A0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002A40C0 sub_002A40C0 (44 B)
 // [TODO] 0x002A40F0 sub_002A40F0 (107 B)
 // [TODO] 0x002A4160 sub_002A4160 (113 B)
 // [TODO] 0x002A41E0 sub_002A41E0 (107 B)
 // [TODO] 0x002A4250 sub_002A4250 (115 B)
 // [TODO] 0x002A42D0 sub_002A42D0 (182 B)
-// [TODO] 0x002A4390 pure3d::VertexAnimObject::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexAnimObject::vfunc_03 (0x002A4390, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class VertexAnimObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VertexAnimObject* vfunc_03(unsigned int flags);
+    void sub_002A4250();
+};
+
+#pragma optimize("y", off)
+VertexAnimObject* VertexAnimObject::vfunc_03(unsigned int flags)
+{
+    sub_002A4250();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002A43C0 sub_002A43C0 (182 B)
 // [TODO] 0x002A4480 sub_002A4480 (38 B)
 // [TODO] 0x002A44B0 sub_002A44B0 (19 B)
@@ -53612,9 +55440,102 @@ void* d3dSimpleShader::vfunc_18()
 // [TODO] 0x002A6710 sub_002A6710 (273 B)
 // [TODO] 0x002A6830 sub_002A6830 (96 B)
 // [TODO] 0x002A6890 pure3d::ParticleSphereGenerator::vfunc_05 (31 B)
-// [TODO] 0x002A68B0 pure3d::ParticlePointGenerator::vfunc_03 (33 B)
-// [TODO] 0x002A68E0 pure3d::ParticlePlaneGenerator::vfunc_03 (33 B)
-// [TODO] 0x002A6910 pure3d::ParticleSphereGenerator::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticlePointGenerator::vfunc_03 (0x002A68B0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ParticlePointGenerator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ParticlePointGenerator* vfunc_03(unsigned int flags);
+    void sub_002A6440();
+};
+
+#pragma optimize("y", off)
+ParticlePointGenerator* ParticlePointGenerator::vfunc_03(unsigned int flags)
+{
+    sub_002A6440();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticlePlaneGenerator::vfunc_03 (0x002A68E0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ParticlePlaneGenerator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ParticlePlaneGenerator* vfunc_03(unsigned int flags);
+    void sub_002A6650();
+};
+
+#pragma optimize("y", off)
+ParticlePlaneGenerator* ParticlePlaneGenerator::vfunc_03(unsigned int flags)
+{
+    sub_002A6650();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleSphereGenerator::vfunc_03 (0x002A6910, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+namespace pure3d {
+
+class ParticleSphereGenerator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual ParticleSphereGenerator* vfunc_03(unsigned int flags);
+    void sub_002A6830();
+};
+
+#pragma optimize("y", off)
+ParticleSphereGenerator* ParticleSphereGenerator::vfunc_03(unsigned int flags)
+{
+    sub_002A6830();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002A6940 sub_002A6940 (7 B)
 // [TODO] 0x002A6950 sub_002A6950 (16 B)
 // [TODO] 0x002A6960 sub_002A6960 (16 B)
@@ -53675,10 +55596,72 @@ void* d3dSimpleShader::vfunc_18()
 // [TODO] 0x002A8840 sub_002A8840 (172 B)
 // [TODO] 0x002A88F0 sub_002A88F0 (1508 B)
 // [TODO] 0x002A8EE0 sub_002A8EE0 (98 B)
-// [TODO] 0x002A8F50 pure3d::VertexAnimKeyFrame::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexAnimKeyFrame::vfunc_03 (0x002A8F50, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class VertexAnimKeyFrame
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VertexAnimKeyFrame* vfunc_03(unsigned int flags);
+    void sub_002A8840();
+};
+
+#pragma optimize("y", off)
+VertexAnimKeyFrame* VertexAnimKeyFrame::vfunc_03(unsigned int flags)
+{
+    sub_002A8840();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002A8F80 sub_002A8F80 (207 B)
 // [TODO] 0x002A9050 sub_002A9050 (490 B)
-// [TODO] 0x002A9240 pure3d::VertexAnimKeyFrameList::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexAnimKeyFrameList::vfunc_03 (0x002A9240, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class VertexAnimKeyFrameList
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VertexAnimKeyFrameList* vfunc_03(unsigned int flags);
+    void sub_002A8F80();
+};
+
+#pragma optimize("y", off)
+VertexAnimKeyFrameList* VertexAnimKeyFrameList::vfunc_03(unsigned int flags)
+{
+    sub_002A8F80();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002A9270 sub_002A9270 (24 B)
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_10 (0x002A9290, 1 B)
@@ -54027,8 +56010,70 @@ void CollisionBehaviourTypeGroup::vfunc_10()
 // [TODO] 0x002B7020 sub_002B7020 (400 B)
 // [TODO] 0x002B71B0 sub_002B71B0 (99 B)
 // [TODO] 0x002B7220 sub_002B7220 (90 B)
-// [TODO] 0x002B7280 pure3d::VertexList::vfunc_03 (33 B)
-// [TODO] 0x002B72B0 pure3d::VertexOffsetList::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::VertexList::vfunc_03 (0x002B7280, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class VertexList
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VertexList* vfunc_03(unsigned int flags);
+    void sub_002AF370();
+};
+
+#pragma optimize("y", off)
+VertexList* VertexList::vfunc_03(unsigned int flags)
+{
+    sub_002AF370();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::VertexOffsetList::vfunc_03 (0x002B72B0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class VertexOffsetList
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual VertexOffsetList* vfunc_03(unsigned int flags);
+    void sub_002B71B0();
+};
+
+#pragma optimize("y", off)
+VertexOffsetList* VertexOffsetList::vfunc_03(unsigned int flags)
+{
+    sub_002B71B0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002B72E0 sub_002B72E0 (212 B)
 // [TODO] 0x002B73C0 sub_002B73C0 (198 B)
 // [TODO] 0x002B7490 sub_002B7490 (28 B)
@@ -54685,7 +56730,38 @@ void* d3dSpecularShader::vfunc_18()
 
 }
 
-// [TODO] 0x002C3500 pure3d::d3dSpecularShader::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_03 (0x002C3500, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dSpecularShader* vfunc_03(unsigned int flags);
+    void sub_0029F6D0();
+};
+
+#pragma optimize("y", off)
+d3dSpecularShader* d3dSpecularShader::vfunc_03(unsigned int flags)
+{
+    sub_0029F6D0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002C3530 pure3d::d3dSpecularShader::vfunc_14 (887 B)
 // [TODO] 0x002C3738 sub_002C3738 (367 B)
 // [TODO] 0x002C38B0 sub_002C38B0 (853 B)
@@ -55440,7 +57516,38 @@ void* d3dVertexFadeShader::vfunc_18()
 
 }
 
-// [TODO] 0x002C5C50 pure3d::d3dShader::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShader::vfunc_03 (0x002C5C50, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dShader* vfunc_03(unsigned int flags);
+    void sub_0029A500();
+};
+
+#pragma optimize("y", off)
+d3dShader* d3dShader::vfunc_03(unsigned int flags)
+{
+    sub_0029A500();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
+}
+
 // [TODO] 0x002C5C80 pure3d::d3dVertexFadeShader::vfunc_14 (501 B)
 // [TODO] 0x002C6100 pure3d::d3dVertexFadeShader::vfunc_24 (16 B)
 // [TODO] 0x002C6110 sub_002C6110 (39 B)

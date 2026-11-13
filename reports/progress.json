@@ -1,38 +1,38 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-11 03:33:14",
+  "updated_at": "2026-11-13 06:16:00",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 106,
-    "xb": 1484,
+    "xb": 1552,
     "proto": 1505,
     "ps2": 0,
-    "total": 1590,
-    "bytes": 30812,
+    "total": 1658,
+    "bytes": 33056,
     "ps2_bytes": 0
   },
   "size_buckets": {
     "1-9 B": 753,
     "10-19 B": 128,
-    "20-39 B": 636,
+    "20-39 B": 704,
     "40-79 B": 73,
     "80+ B": 0
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 3095
+    "RRutherrfordd (Founder)": 3163
   },
   "unattributed": 0,
   "queue": {
-    "pc": 1508,
-    "xb": 19534,
-    "proto": 17904,
-    "ps2": 24297,
-    "total": 21042,
+    "pc": 0,
+    "xb": 18050,
+    "proto": 16399,
+    "ps2": 0,
+    "total": 18050,
     "tiers": {
-      "TIER_1_QUICK": 3708,
-      "TIER_2_SMALL": 3681,
-      "TIER_3_MEDIUM": 5056,
-      "TIER_4_LARGE": 8597
+      "TIER_1_QUICK": 2489,
+      "TIER_2_SMALL": 2806,
+      "TIER_3_MEDIUM": 4618,
+      "TIER_4_LARGE": 8137
     }
   },
   "good_first": [
@@ -64,30 +64,30 @@
       "kind": "matched_before"
     },
     {
-      "id": "xb_002AD8C0",
+      "id": "xb_00054F90",
       "bin": "xb",
-      "va": "0x002AD8C0",
-      "symbol": "pure3d::d3dPrimBufferStream::vfunc_15",
-      "size": 3,
-      "why": "matching it also matches its 2 look-alikes",
+      "va": "0x00054F90",
+      "symbol": "renderer::InstanceRenderable::vfunc_10",
+      "size": 5,
+      "why": "matching it also matches its 18 look-alikes",
       "kind": "group"
     },
     {
-      "id": "xb_0017E6E0",
+      "id": "xb_0008FAF0",
       "bin": "xb",
-      "va": "0x0017E6E0",
-      "symbol": "sub_0017E6E0",
-      "size": 4,
-      "why": "matching it also matches its 2 look-alikes",
+      "va": "0x0008FAF0",
+      "symbol": "PropAttachToObjectBehaviour::vfunc_01",
+      "size": 5,
+      "why": "matching it also matches its 9 look-alikes",
       "kind": "group"
     },
     {
-      "id": "xb_001DE0E0",
+      "id": "xb_0029F440",
       "bin": "xb",
-      "va": "0x001DE0E0",
-      "symbol": "GameMemorySegmentCollection::vfunc_02",
-      "size": 4,
-      "why": "matching it also matches its 2 look-alikes",
+      "va": "0x0029F440",
+      "symbol": "pure3d::d3dFBEffectsShader::vfunc_04",
+      "size": 6,
+      "why": "matching it also matches its 47 look-alikes",
       "kind": "group"
     },
     {

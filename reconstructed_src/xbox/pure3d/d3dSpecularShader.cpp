@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dSpecularShader.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dSpecularShader.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 9 functions matched (55.56%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 9 functions matched (66.67%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -176,6 +176,38 @@ void* d3dSpecularShader::vfunc_18()
 {
     return DAT_00462470;
 }
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_03 (0x002C3500, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
+// its addresses and names were swapped for this function's.
+extern "C" void __cdecl sub_00027600(void* p);
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dSpecularShader* vfunc_03(unsigned int flags);
+    void sub_0029F6D0();
+};
+
+#pragma optimize("y", off)
+d3dSpecularShader* d3dSpecularShader::vfunc_03(unsigned int flags)
+{
+    sub_0029F6D0();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
 
 }
 
