@@ -285,6 +285,82 @@ joints. A gun, a car, a placed tree and each part of a map are one.
 
 A part's mesh is in its joint's space: the joint's world matrix times the vertex.
 
+### Shaders
+
+A primitive group names its shader, and the shader says how the surface is drawn. This section,
+[The sea](#the-sea) and [Shadows](#shadows) come from the clean-room spec
+[SPEC-002](cleanroom/SPEC-002-materials-ocean-shadows.md) ([how that works](CLEAN_ROOM.md)). Its examiner read
+the shaders' settings, the textures, the scripts and the shadow records back from the PC files. What the PC
+program does with them is marked *(reported)*: it comes from the research behind the spec and can't be checked
+from the files alone.
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x00011000` | Shader | name, u32 version, the kind (text), u32 translucent, u32 vertex needs, u32 vertex mask, u32 number of settings; the settings follow |
+| `0x00011002` | Shader Texture Parameter | 4 characters (`TEX`), the texture's name |
+| `0x00011003` | Shader Integer Parameter | 4 characters (`BLMD` ...), u32 |
+| `0x00011004` | Shader Float Parameter | 4 characters (`ACTH` ...), f32 |
+| `0x00011005` | Shader Colour Parameter | 4 characters, u32 colour (`0xAARRGGBB`) |
+
+The kinds, over the 5,393 shaders in `packages/z04/*.p3d` and `art/ecoprops/*.p3d`:
+
+| Kind | Shaders | What uses it |
+| :--- | ---: | :--- |
+| `simple` | 4,278 | most of the world, props, the sky, the sun's flares, the sea (`ocean_text`, `ocean_foam`) |
+| `cbvlit` | 654 | world surfaces lit by their vertex colours |
+| `decal` | 235 | grime, cracks, arrows, signs, light glows laid over other surfaces |
+| `layered` | 111 | two textures blended (`TBLM`, `CLYR` settings) |
+| `nightlight` | 53 | lit windows and signs (`..._win_Add_...`, `l_sign.bmp`) |
+| `shadowdecal` | 24 | shadows painted on the ground ([Shadows](#shadows)) |
+| `foam` | 14 | shore and wake foam (`ShoreGradient.tga`, `Boat_wakeFoam`) |
+| `specular` | 13 | roads and pavements with a shine texture |
+| `environment` | 6 | reflections laid over glass (`g_reflection.tga`, `r_lt_reflection.bmp`) |
+| `vertexfade` | 4 | the low-detail hull of the city and the islands (below) |
+| `untextured` | 1 | |
+
+The settings that matter here:
+
+| Setting | Seen | What it does |
+| :--- | :--- | :--- |
+| `BLMD` | 0 or none (solid), 1 (1,456 shaders), 2 (325), 3 (18) | how the surface goes over what is behind it (below) |
+| `ATST` | 1 in 555 shaders, never 0 | a cut-out: a pixel whose alpha fails the test isn't drawn and leaves no depth *(reported)* |
+| `ACMP` | 4 in all 555 | the test: 4 is "greater than" (Direct3D's `D3DCMP_GREATER`); without `ACMP` it would be "greater or equal" *(reported)* |
+| `ACTH` (float) | in 55 of them: 0.01, 0.054, 0.07, 0.2, 0.3, 0.6, 0.65, 0.7, 0.8 | the alpha the test compares with; 0.5 without it *(reported)* |
+| `2SID` | 1 in 900, 0 in 4,328 | drawn from both sides |
+| `UVMD` | 0 in all 5,318 that have it | textures repeat |
+| `LIT` | 1 in 2,084, none elsewhere | lit by the scene's lights; without it, not lit. In `packages/z04` every shader whose name says `lit0` has no `LIT` and every one that says `lit1` has `LIT` 1 (2,802 and 2,043; SPEC-002's answers) |
+| `ZWRT`, `ZTST` | 0 in 54 shaders, all in `art/ecoprops` | ignored by the PC game *(reported)*, and by the exports |
+
+The shader names spell most of these out ([Maps](#maps)); the settings chunks are what the game reads.
+
+**The blend modes.**
+
+| `BLMD` | What the game does | Used by |
+| :--- | :--- | :--- |
+| 1 | ordinary see-through: the texture's alpha mixes it with what is behind *(reported)* | 1,456 shaders, among them the props' leaves, the shadow decals and the low-detail hull (below) |
+| 2 | adds light. The textures are opaque (alpha 255 everywhere) and mostly black, 40 to 87 % of their pixels, with the light in colour on top: the black adds nothing. Drawn with ordinary blending they come out as black squares | the sun's flares and lens rings (`Flare_Star_xb.bmp`, `LENS03.bmp` ...), light glows (`lightGlowWhite.bmp`), boat lights, the `nightlight` windows, one tunnel lighting texture |
+| 3 | darkens; exactly how isn't known. Multiplying what is behind by the texture fits all of them | skid marks (`SkidMark_Asphalt.bmp`, opaque and dark, 3 to 19 out of 255 on average), grime (`grime.tga`: grey 125, alpha 175), `r_tonymsn_shadow_circle.bmp` |
+
+**What hides what** *(reported)*. Ordinary see-through world surfaces (`BLMD` 1) are drawn after the solid
+ones, sorted from far to near, and still write depth. The `decal`, `nightlight` and `shadowdecal` kinds, the
+light-adding surfaces (`BLMD` 2) and the sky are drawn without writing depth: they never hide anything drawn
+after them. A `decal` with `BLMD` 1 also drops pixels whose alpha is exactly 0, and decals are drawn without fog.
+
+**Leaves** *(reported)*. The trees and bushes the city places as props use unlit see-through shaders (`BLMD` 1,
+no `LIT`, no `ATST`). The game draws them twice: once for their colour, blended, without writing depth; then once
+more writing depth only, where the alpha is at least 228 out of 255 (0.894). So the solid core of each leaf
+hides what is behind it, and the soft edges never cut holes into the leaves behind. Lit ones are drawn once.
+
+**The low-detail hull.** `miami_lod.p3d` and `islands_LOD.p3d` hold a coarse copy of the whole city and the
+islands, drawn with the `vertexfade` kind: `pure3dVertexFadeShader1` in `miami_lod.p3d`; `RockShader`,
+`islands_LOD_pure3dVertexFadeShader1` and `pure3dVertexFadeShader3` in `islands_LOD.p3d`; all `BLMD` 1 and
+`LIT` 1. The game fades it out towards the camera *(reported)*: fully see-through nearer than about 200 m, whole
+beyond about 250 m, and every pixel with an alpha below 20 out of 255 cut out. Close up it is invisible, and far
+away it stands in for the detailed areas. Shown whole next to them, it is a shell that covers them.
+
+`p3d_gltf.shader_info` reads a shader and its settings (the kind is its `pddi`). A shader known only by name, from
+a file not given, is read from its name, kind included (`shader_from_name`).
+
 ### The game's loaders
 
 The game reads each kind of chunk with a loader object, and the Xbox program still has their class names
@@ -614,6 +690,86 @@ and `clamp` (as the objects have them), the two objects blended (`keys`) and how
 second (`blend`). Clear weather in Miami, as a check: noon is 25 to 900 m in (200, 200, 150), 4 a.m. 20 to
 800 m in (23, 28, 40), 9 a.m. 25 to 800 m in (245, 240, 160); rain at noon is 20 to 700 m in (35, 35, 28).
 
+### The sea
+
+From [SPEC-002](cleanroom/SPEC-002-materials-ocean-shadows.md), like [Shaders](#shaders). No `.p3d` holds the
+sea's shape: the program makes it. Its settings are in two compiled scripts:
+
+| Script | Creates |
+| :--- | :--- |
+| `scriptc/templates/ocean.cso` | three `oceanTemplate`s (`OceanTemplateDefault`, `OceanTemplateNightDefault`, `OceanTemplateRiver`), fifteen `OceanTuningTemplate`s (`OceanTuningTemplateDefault`, `...Wave45`, `...Light`, `...Calm`, `...Ripples` ...) and a `waketemplate` |
+| `scriptc/missions/z04/objects_static.dso` | the one sea: `OceanObject("Ocean")` with `position = "0 0 0"`, `oceanTemplate = "OceanTemplateDefault"`, `tuningTemplate = "OceanTuningTemplateDefault"` and `RoomIndex = 1` |
+
+| Property | The object | The templates |
+| :--- | :--- | :--- |
+| `DetailTextureName` | | `water_01.BMP` (`OceanTemplateNightDefault`: `water_night_01.BMP`) |
+| `FoamTextureName` | | `Water_Ocean_Foam.tga` |
+| `ReflectionTextureName` | | `skyTexture`: not a texture in the files, the program draws the reflection into it |
+| `OceanModelName` | | `OceanModel` (`ModelInventory = "Common"`; there is no such model in `Common.p3d`) |
+| `DetailOpacity` | 0.225 | 0.225 |
+| `DetailTextureScale` | 0.075 | 0.2 |
+| `ReflectionRedScale`, `...GreenScale`, `...BlueScale` | 0.50 each | 0.25, 0.23, 0.25 |
+| `ReflectionAlphaScale` | 1.0 | 0.98 |
+| `FoamMinHeight`, `FoamMaxHeight`, `FoamMaxOpacity` | 0.15, 1.0, 1.0 | |
+| `MinWaveLength`, `MaxWaveLength` | | 0.1, 12.0 |
+| `AmplitudeRatio` | | 0.0130 |
+| `WindDirectionMean`, `WindDirectionVariance` | | 90.0, 30.0 |
+| `speedScaleFactor` | | 1.2 |
+
+The template values are `OceanTemplateDefault`'s and `OceanTuningTemplateDefault`'s. `Common.p3d` holds the sea's
+two shaders and their textures: `ocean_text` (`simple`, `water_01.bmp`) and `ocean_foam` (`simple`, `LIT` 1,
+`Water_Ocean_Foam.tga`).
+
+What the game does with them *(reported)*:
+
+* The sea is a flat plane at height 0. There is no sea-level setting anywhere.
+* At start the tuning template's look replaces the object's: the reflection tint (0.25, 0.23, 0.25), alpha 0.98,
+  detail opacity 0.225 and detail scale 0.2, not the object's 0.5 and 0.075. The foam values are the object's.
+* It is drawn see-through (alpha 0.98: 2 % of the sea bed shows), writing depth, and fogged like the world, so at
+  the horizon it takes the fog's colour. It is never culled, and the PC draws it in one pass.
+* It shows the sky reflected in it, tinted by the reflection scales; `water_01.bmp` laid over at `DetailOpacity`,
+  repeating about every 5 m (scale 0.2); an animated ripple pattern; foam on the higher waves.
+* The waves are tiny: sixteen wave trains, each with a wavelength between `MinWaveLength` and `MaxWaveLength` (the
+  shorter ones far more common), an amplitude of the wavelength times `AmplitudeRatio` (at most about 16 cm),
+  heading `WindDirectionMean` give or take `WindDirectionVariance` degrees, moving at deep-water speed times
+  `speedScaleFactor`. Only four of them move the surface on the PC. For a still picture, the sea is flat.
+* Trigger volumes in z04 switch the tuning to `OceanTuningTemplateLight` or `...Calm` in some places; the other
+  templates aren't used by the shipped data.
+
+The exports don't read these scripts yet: `p3d_gltf.py` keeps the PC values above (`OCEAN`) and makes the sea
+from them ([Exporting to Blender](#exporting-to-blender)).
+
+### Shadows
+
+From [SPEC-002](cleanroom/SPEC-002-materials-ocean-shadows.md), like [Shaders](#shaders).
+
+| Id | Chunk | Data |
+| :--- | :--- | :--- |
+| `0x08800008` | Shadow (`ShadowLoader`) | name, the composite drawable's name, u32 building shadow (1 or 0), u32 (0 in every one), f32 (0.0 in every one), f32 (200.0 for buildings, 15.0 for `NPC_shadow`). What the last three mean isn't known |
+
+There are 44 in the city, all read to the last byte with these fields: 43 building shadows
+(`DevilsCay_02_shadow` ...) and `NPC_shadow`. The building shadows' composites are made of Shadow Mesh
+(`0x0001001A`) parts: closed shells the program stretches away from the sun to darken what lies behind them
+*(reported)*. They are never drawn as surfaces, and the exports leave them out. `p3d.py` reads the record.
+
+**Shadow decals.** 410 meshes have a primitive group whose shader is of the `shadowdecal` kind: 408
+`collapsedMesh_..._details_...` meshes of the city's detail world geometry, in 47 of the 220 `packages/z04`
+files, and `vehicleShadowDecalShape` and `characterShadowDecalShape` in `Common.p3d` (the blob shadows under cars
+and people).
+
+* Their shaders are all `BLMD` 1, unlit, with no alpha test, one-sided, and their textures repeat
+  (`LocalShader_shadowdecal.TGA_shadowdecal_blmd1_mcbv0_lit0_alpha1_atst0_alum0_2sid0`, `vehicleShadowDecal_SG`,
+  `characterShadowDecal_SG`).
+* Their textures are pure black, with the shadow's coverage in the alpha: `r_tree_shadow.tga` (128 x 128, in the
+  region files), `shadowdecal.TGA` (256 x 256), `lmp_table_001.tga`, `Shadow_vehicle.tga`, `Shadow_character.tga`
+  (64 x 64).
+* **The PC game shows none of them** *(reported)*. The pass that should put them on screen draws into a scratch
+  picture that never reaches the frame. Whether the Xbox shows them isn't known.
+* They were meant to darken what is under them by their coverage, two overlapping decals not darkening twice: the
+  decals are gathered into one coverage mask, then the frame is darkened by the mask once *(reported)*. Drawn
+  simply as black see-through surfaces, one decal looks right and two overlapping ones come out too dark.
+* They are drawn only near the camera, like the rest of the detail geometry.
+
 ### Exporting to Blender
 
 ```
@@ -639,7 +795,8 @@ file (the 28 guns of `guns.p3d`) are set out side by side. With `--map` each are
 in the city, with its placed objects; the shared files the areas need (regions, `miami_lod`, `Common`) are
 read from the same folder unless `--library` says where. `--split` writes one `.glb` per area, which line
 up when imported together; the low-detail city in `miami_lod.p3d` is left out next to real areas unless
-`--lod` is given. PC, Xbox and PS2 files all work; textures are decoded on your computer.
+`--lod` is given (then its hull is marked hidden: *The low-detail hull* below). PC, Xbox and PS2 files all
+work; textures are decoded on your computer.
 
 **Lights.** With `--map` each area's [lights](#lights) come in too, in a node `<file> lights`, with a node per
 light group inside it (its extras give the record's kind). Point and spot lights, and directional lights
@@ -687,6 +844,76 @@ one of those; the `tod` object from `miami_lod.p3d` among the files or the libra
 The fog is Miami's, or the islands' when the export's own files are `islands_LOD.p3d` (and not
 `miami_lod.p3d`). An export with `--weather` and no hour says the weather in the scene's extras.
 
+**See-through surfaces.** From [SPEC-002](cleanroom/SPEC-002-materials-ocean-shadows.md) ([Shaders](#shaders)).
+Every material whose shader blends says how, in its extras: `{"blend": "alpha"}` for `BLMD` 1, `"add"` for 2,
+`"darken"` for 3. glTF has only ordinary blending, so the light-adding and darkening surfaces get their picture
+made ready for it:
+
+| `BLMD` | In the glTF | In Blender (**Open in Blender**) |
+| :--- | :--- | :--- |
+| 1 | `BLEND`, or `MASK` with a cut-out | as Blender's importer makes it |
+| 2, adds light | `BLEND`. Each pixel's alpha is its brightness (the largest of its red, green and blue) and its colour is divided by that. Blended as usual, black lets what is behind through and the light lies on top of it; where the light is bright, what is behind is dimmed (times 1 minus the brightness) instead of added to | an Emission shader (the picture's colour times its alpha) added to a Transparent BSDF: real additive light |
+| 3, darkens | `BLEND`. The picture is black, with an alpha of 1 minus its brightness (luminance): what is behind ends up multiplied by that brightness, the same for red, green and blue | a Transparent BSDF in the colour of that brightness, which multiplies what is behind by it |
+
+The picture's own alpha is used only for a cut-out. A light-adding or darkening material whose picture isn't in
+the files is fully see-through, not a dark square.
+
+**Lit or not.** A shader without `LIT` 1 isn't lit by the scene's lights, so its material is unlit
+(`KHR_materials_unlit`): one read from the files without `LIT`, and one known only by a name that says `lit0`
+(SPEC-002's answers). A shader the files don't have and whose name says nothing is left lit. Blender's importer
+makes the unlit ones shadeless, and the portal's 3D view doesn't shade them. The portal's own 3D view (**View here**) draws the
+light-adding ones adding.
+
+**Cut-outs.** A shader with `ATST` is glTF's `MASK` at its `ACTH`, or 0.5 when it has none. glTF keeps a pixel
+whose alpha is exactly the cut-off; the game (`ACMP` 4) doesn't. A light-adding or darkening cut-out has the
+cut-out in its made picture, done as the game does it, and stays `BLEND`.
+
+**Depth.** `"depthWrite": false` marks the materials the game draws without writing depth: the `decal`,
+`nightlight` and `shadowdecal` kinds, the light-adding ones and the sky's. **Open in Blender** draws the
+see-through ones among them blended in Eevee (blended surfaces don't write depth), every layer shown, and casting
+no shadow (in Cycles too, through a Light Path node's *Is Shadow Ray*). The light-adding and darkening ones are
+blended too. The other see-through materials stay as the importer makes them. The portal's 3D view draws the
+see-through surfaces after the solid ones, far to near by the middle of each part, writing depth unless the
+material says not to.
+
+**Leaves.** On the props a map places, an unlit see-through shader without a cut-out comes in twice, on the same
+vertices: see-through and marked `"depthWrite": false` (`"leaves": "colour"`, material `<shader> (leaves)`), and
+as a cut-out at 228/255 (`"leaves": "depth"`, `<shader> (leaves, solid core)`). That is an approximation of the
+game's two passes: the cut-out draws its colour as well as its depth. Where it does, the leaf is nearly opaque,
+so it looks the same. The same shader anywhere else (the area's own geometry, a model by itself) comes in once.
+
+**The low-detail hull.** Next to detailed areas (`--lod`), the hull's world geometry is marked
+`{"lowDetailHull": true, "hidden": true}`; with `--split`, the hull's own file is marked so too when areas come
+beside it. By itself it is `{"lowDetailHull": true}` and shown: then it is the city. Its materials carry
+`{"lowDetailHull": true, "fade": [200, 250], "fadeCutoff": 0.0784}`, the game's fade, which the exports don't draw.
+Its file's lights are never hidden: the daylight still lights the scene. **Open in Blender** puts the hull in a
+collection of its own, *Low-detail hull*, switched off when it is hidden (its tick box in the Outliner brings it
+back), and the portal's 3D view leaves hidden nodes out.
+
+**The sea.** A map export (`--map`, a map area or a map file in the portal, not a cutscene) has a node `Ocean`: a
+flat surface at height 0, reaching at least 1,000 m past the map on every side, farther than the fog ends (900 m
+at the most). It is made of 1 km squares on a grid from 0, 0, so that the seas of different exports line up. Its
+material, `ocean_text` (unlit, `BLEND`), is `water_01.bmp` repeating every 5 m (1 over `DetailTextureScale`), laid
+at `DetailOpacity` (0.225) over the sea's colour, with an alpha of 0.98. The sea's colour is the reflection's tint
+(0.25, 0.23, 0.25) times the sky's colour: the average vertex colour of the weather's sky mesh drawn first (the
+highest [draw-order key](#the-draw-order-key-and-the-sky): the clear sky's dome), at the hour with `--hour`, else
+as stored (the night). Without `Common.p3d` among the files the sea is the tint itself (times white), without the
+picture. The node's extras hold the [settings](#the-sea) (named as in the scripts), `seaColour`, `skyColour`,
+`picture`, the weather and the hour. `--no-ocean` leaves it out; with `--split` the areas go without, and one
+`ocean.glb` beside them holds the sea for all of them. **Open in Blender** puts it in a collection *Sea*. Not
+drawn: the reflection, the ripples, the waves and the foam.
+
+```
+python portal/tools/p3d_gltf.py area.glb  "packages/z04/stripmall_01_*.p3d" --map --no-ocean
+```
+
+**Shadow decals.** Each primitive group with a `shadowdecal` shader comes in a glTF mesh of its own, in a node
+`<mesh> shadow decal` under its mesh's node, or as the mesh's node itself when the mesh is nothing else (the
+blobs in `Common.p3d`). The node and the mesh have `{"shadowDecal": true}` in their extras, and so does the
+material. They are shown: as black see-through surfaces, each looks right where it doesn't overlap another, and
+two overlapping ones come out too dark. The PC game never shows them ([Shadows](#shadows)). **Open in Blender**
+puts them in a collection *Shadow decals*, whose tick box hides them all.
+
 **The whole city in Blender.** The portal's city export (the **In Blender** box) also writes `sky.glb` beside
 the areas when `Common.p3d` is among the copied files: the weather's sky, centred on the city (the middle of
 what the areas fill, at height 0) and made big enough to reach a tenth past the city's farthest corner, and
@@ -713,11 +940,19 @@ first fog among the files it imports and shows it as the world's mist: from the 
 distance to its end, fading in a straight line, with the Mist pass on; the world's colour is the fog colour,
 turned from the game's screen colours into Blender's linear ones.
 
+The city export also writes `ocean.glb` beside the areas, which go without a sea each: one sea (**The sea** above)
+round the box the areas fill, at the hour and in the weather picked, with `ocean_text`'s picture and the sky's
+colour from the copied `Common.p3d` (without it, a plain sea in the tint). Every export makes it again. The page
+has no switch for it yet: to go without, delete `ocean.glb` or untick the *Sea* collection in Blender. The export
+itself leaves it out when it is asked with `"ocean": false` (and `CityJob.start(..., ocean=False)`). **Open in
+Blender** treats the city's files as it does a single export's: the see-through surfaces as the game blends them,
+and the shadow decals, the low-detail hull and the sea each in a collection of its own.
+
 A mesh with a [draw-order key](#the-draw-order-key-and-the-sky) carries it in its extras
 (`{"drawOrder": 0.3}`), clamped to 0..1 as the game does.
 
 Left out for now: particles and light flares, shadow volumes, collision shapes and state-prop
-animations' callbacks.
+animations' callbacks; the sea's reflection, ripples, waves and foam, and the low-detail hull's fade.
 
 ### Ids seen but not worked out
 
@@ -919,12 +1154,19 @@ what you find. Known gaps:
 * The [glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html) (Khronos), which
   `p3d_gltf.py` writes, and its
   [KHR_lights_punctual](https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Khronos/KHR_lights_punctual/README.md)
-  extension, which the map exports' lights follow.
+  extension, which the map exports' lights follow, and
+  [KHR_materials_unlit](https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Khronos/KHR_materials_unlit/README.md),
+  which the sea's material uses.
 * The clean-room spec [SPEC-001](cleanroom/SPEC-001-lights-sky-streaming.md): the lights, the daylight's
   animations, the draw-order key, the sky and the stream graph; and in its second part one weather at a time,
   the sky through the day (the sun's joint and the sky's colour sets) and the fog by time of day.
+* The clean-room spec [SPEC-002](cleanroom/SPEC-002-materials-ocean-shadows.md): the shaders' kinds and
+  settings, the blend modes, cut-outs and depth, the props' leaves, the low-detail hull, the sea's scripts, the
+  shadow records and the shadow decals; and, in its answers to the implementer's questions, that a shader
+  without `LIT` is unlit.
 * The [Blender Python API](https://docs.blender.org/api/current/) documentation, for the world's mist that
-  shows the fog in Blender.
+  shows the fog in Blender, and the shaders, blend modes and collections that show the game's see-through
+  surfaces and its groups.
 
 The rest was worked out from the game files and checked against the other versions of the same files: the
 `RADP` speech against the PC's Ogg Vorbis copies, the PS2's stereo music and movie sound against the PC's,

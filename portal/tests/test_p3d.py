@@ -312,3 +312,17 @@ def test_vertex_colour_sets_and_the_channel_that_picks_them():
     # an odd number of keys: the values follow the frames straight away
     assert P.fields(data, ch) == {"version": 0, "parameter": "VRTX", "keys": 3}
     assert P.channel_keys(data, ch) == ("VRTX", [40, 90, 120], [(0,), (1,), (2,)])
+
+
+# --------------------------------------------------------------------------- shadow records (SPEC-002, section 3.2)
+
+def test_shadow_records():
+    building = chunk(0x8800008, text("DevilsCay_02_shadow") + text("made_up_drawable_1") + struct.pack("<IIff", 1, 0, 0.0, 200.0))
+    npc = chunk(0x8800008, text("NPC_shadow") + text("made_up_drawable_2") + struct.pack("<IIff", 0, 0, 0.0, 15.0))
+    data = p3d(building, npc)
+    b, n = P.read_tree(data)
+    assert b.name == "Shadow"
+    assert P.fields(data, b) == {"name": "DevilsCay_02_shadow", "composite drawable": "made_up_drawable_1",
+                                 "building": True, "number": 0, "values": (0.0, 200.0)}
+    assert P.fields(data, n)["building"] is False and P.fields(data, n)["values"] == (0.0, 15.0)
+    assert "building=True" in P.dump(data)

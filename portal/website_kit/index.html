@@ -4224,10 +4224,15 @@
       const mat = (J.materials || [])[p.material] || {};
       const pbr = mat.pbrMetallicRoughness || {};
       const acc = J.accessors[p.attributes.POSITION];
+      // the game's way with see-through surfaces, from the material's extras (docs/FORMATS.md): light-adding
+      // ones add (their picture has its brightness as alpha), and some are drawn without writing depth
+      const ex = mat.extras || {};
       return { vao: vao, count: count, indexType: indexType, min: acc.min, max: acc.max,
                base: pbr.baseColorFactor || [1, 1, 1, 1], tex: texture((pbr.baseColorTexture || {}).index),
                blend: mat.alphaMode === 'BLEND', cutoff: mat.alphaMode === 'MASK' ? (mat.alphaCutoff === undefined ? 0.5 : mat.alphaCutoff) : 0,
-               twoSided: !!mat.doubleSided, lit: p.attributes.NORMAL !== undefined };
+               twoSided: !!mat.doubleSided,
+               lit: p.attributes.NORMAL !== undefined && !(mat.extensions && mat.extensions.KHR_materials_unlit),
+               add: ex.blend === 'add', depth: ex.depthWrite !== false };
     }));
     gl.bindVertexArray(null);
 
@@ -4237,14 +4242,17 @@
     const walk = (i, parent, depth) => {
       const n = J.nodes[i];
       if (!n || depth > 64) return;
+      const marks = n.extras || {};
+      if (marks.hidden) return;                  // the low-detail hull next to the detailed areas it would cover
       const local = n.matrix ? new Float32Array(n.matrix) : V3D.trs(n.translation || [0, 0, 0], n.rotation || [0, 0, 0, 1], n.scale || [1, 1, 1]);
       // a skinned mesh stands where its skeleton's rest pose puts it: its own node's place doesn't count
       const world = n.skin !== undefined ? V3D.ident() : V3D.mul(parent, local);
       if (n.mesh !== undefined && meshes[n.mesh]) {
         meshes[n.mesh].forEach((p) => {
           if (!p) return;
-          draws.push({ p: p, m: world });
-          if (p.min && p.max) {
+          const draw = { p: p, m: world, c: V3D.point(world, p.min && p.max ? [0, 1, 2].map((k) => (p.min[k] + p.max[k]) / 2) : [0, 0, 0]) };
+          draws.push(draw);
+          if (p.min && p.max && !marks.ocean) {    // the sea reaches far past the scene: not what the view is fitted to
             for (let c = 0; c < 8; c++) {
               const q = V3D.point(world, [c & 1 ? p.max[0] : p.min[0], c & 2 ? p.max[1] : p.min[1], c & 4 ? p.max[2] : p.min[2]]);
               for (let k = 0; k < 3; k++) { lo[k] = Math.min(lo[k], q[k]); hi[k] = Math.max(hi[k], q[k]); }
@@ -4258,6 +4266,7 @@
     (scene.nodes || []).forEach((i) => walk(i, V3D.ident(), 0));
     if (!draws.length) throw new Error('nothing in it to draw');
     if (!isFinite(lo[0])) { lo = [-1, -1, -1]; hi = [1, 1, 1]; }
+    const seeThrough = draws.filter((d) => d.p.blend);
 
     const centre = [(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2];
     const radius = Math.max(0.01, Math.hypot(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]) / 2);
@@ -4299,9 +4308,14 @@
       const pass = (blend) => {
         if (blend) { gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false); }
         else { gl.disable(gl.BLEND); gl.depthMask(true); }
-        for (const d of draws) {
+        // see-through surfaces as the game draws them: far to near, writing depth unless their material says
+        // not to; the light-adding ones add
+        const away = (d) => (d.c[0] - eye[0]) ** 2 + (d.c[1] - eye[1]) ** 2 + (d.c[2] - eye[2]) ** 2;
+        if (blend) seeThrough.sort((a, b) => away(b) - away(a));
+        for (const d of (blend ? seeThrough : draws)) {
           const p = d.p;
           if (p.blend !== blend) continue;
+          if (blend) { gl.blendFunc(gl.SRC_ALPHA, p.add ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(p.depth); }
           if (p.twoSided) gl.disable(gl.CULL_FACE); else gl.enable(gl.CULL_FACE);
           gl.uniformMatrix4fv(U.uModel, false, d.m);
           gl.uniform4fv(U.uBase, p.base);

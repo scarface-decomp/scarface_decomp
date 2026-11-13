@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Read Pure3D (.p3d) files: the chunk tree with every chunk named, the fields of the chunks for models,
-skins, skeletons, shaders, textures, animations, lights, the sky and the stream graph, and the models as
-.obj files you can open in Blender.
+skins, skeletons, shaders, textures, animations, lights, the sky, the stream graph and the shadow records,
+and the models as .obj files you can open in Blender.
 
     python portal/tools/p3d.py FILE.p3d                 the chunk tree, with each known chunk's fields
     python portal/tools/p3d.py FILE.p3d --depth 2       only the first two levels
@@ -491,6 +491,18 @@ def _stream_trigger(r: _R) -> dict:
     return out
 
 
+# The shadow records: docs/FORMATS.md, from the clean-room spec docs/cleanroom/SPEC-002-materials-ocean-shadows.md.
+
+def _shadow(r: _R) -> dict:
+    """A Shadow record (ShadowLoader, 0x8800008): name, the composite drawable's name (its parts are shadow
+    meshes), u32 1 for a building's shadow, then a u32 and two floats whose meanings aren't known (0, 0.0, and
+    200.0 for the buildings or 15.0 for NPC_shadow in every Miami file)."""
+    name, drawable, building = r.text(), r.text(), r.u32()
+    number = r.u32()
+    return {"name": name, "composite drawable": drawable, "building": building != 0, "number": number,
+            "values": (round(r.f32(), 4), round(r.f32(), 4))}
+
+
 def light(data: bytes, c: Chunk) -> dict:
     """A Light chunk (0x13000) with what its sub-chunks say, as one dictionary: the Light's own fields,
     then "direction", "position", "spot cone", "casts shadows", "decay range" (shape, inner, outer, and the
@@ -556,7 +568,7 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x13000: _light, 0x13001: _light_direction, 0x13002: _light_position, 0x13003: _spot_cone,
     0x13004: _casts_shadows, 0x13006: _decay_range, 0x13007: _decay_rotation, 0x13008: _illumination,
     0x2380: _light_group, 0x8800007: _light_group_record, 0x122000: _draw_order, 0x8800002: _sky,
-    0x8800100: _stream_package, 0x8800101: _stream_trigger,
+    0x8800100: _stream_package, 0x8800101: _stream_trigger, 0x8800008: _shadow,
     COLOUR_SETS: _colour_sets, COLOUR_SET: _colour_set, COLOUR_AMOUNTS: _colour_amounts,
 }
 for _cid in (0x121100, 0x121101, 0x121104, COLOUR_CHANNEL, INTEGER_CHANNEL) + QUATERNION_CHANNELS:
