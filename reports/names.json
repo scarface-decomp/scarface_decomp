@@ -2006,6 +2006,21 @@
       "name": "Script::AdvanceTutorialState",
       "by": "the game's own script command table (portal/tools/script_commands.py)",
       "why": "The start-up code at 0x003195C0 registers this function as the script command AdvanceTutorialState (0 arguments)."
+    },
+    "xb:0x00251310": {
+      "name": "HashArchiveName",
+      "by": "the clean-room spec docs/cleanroom/SPEC-004-xbox-functions.md (a name the implementer chose from its description)",
+      "why": "SPEC-004 section 1.2: the hash an .rcf archive's directory is sorted by, of a path with one leading backslash skipped (rcf.name_hash). Matched."
+    },
+    "xb:0x0029A2F0": {
+      "name": "Shader::UpdateBlendAndAlphaRef",
+      "by": "the clean-room spec docs/cleanroom/SPEC-004-xbox-functions.md (a name the implementer chose from its description)",
+      "why": "SPEC-004 section 2.2: works out the blend mode a shader uses (a fading solid one blends) and its alpha reference from ACTH and the fade. Matched."
+    },
+    "xb:0x0029A390": {
+      "name": "Shader::SetBLMD",
+      "by": "the clean-room spec docs/cleanroom/SPEC-004-xbox-functions.md (a name the implementer chose from its description)",
+      "why": "SPEC-004 section 2.1: a shader's BLMD setter (named after the game data's parameter), reached through its kind's table of settings; it keeps the value and calls sub_0029A2F0. Matched."
     }
   }
 }
