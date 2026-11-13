@@ -356,7 +356,10 @@ def authenticate(user: str, pin: str, allow_register: bool = True) -> Tuple[bool
                 return False, str(e)
             if not ok:
                 _FAILS[user.lower()] = fails + [time.time()]
-                return False, f"Handle '{user}' is locked with a different PIN."
+                return False, (f"Handle '{user}' is locked with a different PIN. PINs are kept only on this computer "
+                               "(portal/private/contributor_tokens.json), so a fresh download of the project doesn't "
+                               "know yours. Forgotten it? Close the portal, rename that file, start the portal and "
+                               "sign in with a new PIN.")
             if legacy:
                 auth[existing] = _make_token(pin)
                 write_json(AUTH_JSON, auth)
@@ -758,6 +761,36 @@ def guide_note(t: dict) -> Optional[dict]:
         return None
     return {"what_it_does": str(e["what_it_does"]), "spec": str(e.get("spec") or ""),
             "low_confidence": e.get("confidence") == "low"}
+
+
+def setup_checklist() -> List[dict]:
+    """What has to be in place before each part of the portal works, for the Dashboard's checklist:
+    {"key", "title", "ok", "note", "fix", "needed"} rows. needed says what the row is for."""
+    rows: List[dict] = []
+
+    def row(key: str, title: str, ok: bool, note: str, fix: str, needed: str) -> None:
+        rows.append({"key": key, "title": title, "ok": bool(ok), "note": note if ok else "", "fix": "" if ok else fix,
+                     "needed": needed})
+
+    names = {"xb": "Xbox default.xbe", "pc": "PC Scarface.exe"}
+    have = [names[b] for b in ("xb", "pc") if image_for(b)]
+    row("game", "The game's program file", bool(have), " and ".join(have),
+        "Put your own default.xbe (Xbox) or Scarface.exe (PC, patched to 1.00.2) in the binaries folder, "
+        "then start the portal again.", "To check functions")
+    build = compiler_build()
+    row("compiler", "The compiler", bool(build), "Visual C++ Toolkit 2003, cl.exe " + build,
+        "Get the Visual C++ Toolkit 2003 installer and run: python portal/scripts/setup_msvc71.py VCToolkitSetup.exe "
+        "(the README's section The compiler has the details).", "To check functions")
+    row("copied", "Game files copied", GAME_FILES.index() is not None, "In the extracted folder",
+        "Open Game files and press Copy everything, PC first.", "For sounds, textures, models and cutscenes")
+    row("ffmpeg", "FFmpeg", MOVIES.find_ffmpeg(GAME_FILES.bin_dir) is not None, "Found",
+        "Open Game files and press Install FFmpeg, or point the portal at your own copy there.",
+        "To watch the game's movies")
+    exe = BX.find_blender(GAME_FILES.bin_dir)
+    row("blender", "Blender", exe is not None, str(exe) if exe else "",
+        "Install Blender from blender.org; if the portal still can't find it, give it the path in Game files.",
+        "To open models, the map and cutscenes")
+    return rows
 
 
 def live_task(t: dict) -> dict:
@@ -2222,6 +2255,8 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/api/health":
             return self._json({"ok": True, "compiler": compiler_version(),
                                "binaries": {k: bool(image_for(k)) for k in BINARIES}})
+        if u.path == "/api/setup":
+            return self._json({"ok": True, "items": setup_checklist()})
         if u.path == "/api/state":
             with STATE_LOCK:
                 listed = [t for t in ALL_TASKS if in_default_queue(t)]
@@ -2275,7 +2310,9 @@ class Handler(BaseHTTPRequestHandler):
                         continue
                     if lane == "PARTIAL" and not (st == "PARTIAL" or (t.get("best_matched_bytes", 0) > 0 and st != "VERIFIED")):
                         continue
-                    if lane not in ("ALL", "UNCLAIMED", "CLAIMED", "PARTIAL", "VERIFIED", "PROTO_IN_RETAIL") and lane not in t["lane"]:
+                    if lane == "IN_GUIDE" and guide_note(t) is None:
+                        continue
+                    if lane not in ("ALL", "UNCLAIMED", "CLAIMED", "PARTIAL", "VERIFIED", "PROTO_IN_RETAIL", "IN_GUIDE") and lane not in t["lane"]:
                         continue
                     if lane != "VERIFIED" and st == "VERIFIED" and sort_by != "VERIFIED_FIRST":
                         continue

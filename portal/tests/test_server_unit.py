@@ -350,3 +350,32 @@ def test_the_city_time_of_day_and_weather_are_kept_with_the_other_settings(S, mo
     assert kept() == (None, "clear")
     (tmp_path / "portal_speed.json").write_text('{"city_hour": 99, "city_weather": "fog"}', encoding="utf-8")
     assert kept() == (None, "clear")
+
+
+def test_the_setup_checklist_says_what_is_missing_and_how_to_fix_it(S, monkeypatch):
+    monkeypatch.setattr(S, "image_for", lambda b: b"x" if b == "xb" else None)
+    monkeypatch.setattr(S, "compiler_build", lambda: "")
+    monkeypatch.setattr(S.GAME_FILES, "index", lambda: None)
+    monkeypatch.setattr(S.MOVIES, "find_ffmpeg", lambda d: None)
+    monkeypatch.setattr(S.BX, "find_blender", lambda d: None)
+    rows = {r["key"]: r for r in S.setup_checklist()}
+    assert list(rows) == ["game", "compiler", "copied", "ffmpeg", "blender"]
+    assert rows["game"]["ok"] and rows["game"]["note"] == "Xbox default.xbe" and not rows["game"]["fix"]
+    for key, word in (("compiler", "setup_msvc71.py"), ("copied", "Copy everything"), ("ffmpeg", "Install FFmpeg"),
+                      ("blender", "blender.org")):
+        assert not rows[key]["ok"] and word in rows[key]["fix"] and not rows[key]["note"], key
+    monkeypatch.setattr(S, "compiler_build", lambda: "13.10.3052")
+    monkeypatch.setattr(S.BX, "find_blender", lambda d: S.Path("C:/Blender/blender.exe"))
+    rows = {r["key"]: r for r in S.setup_checklist()}
+    assert rows["compiler"]["ok"] and "13.10.3052" in rows["compiler"]["note"]
+    assert rows["blender"]["ok"] and "blender.exe" in rows["blender"]["note"]
+
+
+def test_a_wrong_pin_says_where_pins_are_kept_and_how_to_start_over(S, monkeypatch, tmp_path):
+    monkeypatch.setattr(S, "AUTH_JSON", tmp_path / "contributor_tokens.json")
+    monkeypatch.setattr(S, "LEGACY_AUTH_JSON", tmp_path / "none.json")
+    monkeypatch.setattr(S, "_FAILS", {})
+    assert S.authenticate("Somebody", "first-pin-1234")[0]
+    ok, why = S.authenticate("Somebody", "another-pin-99")
+    assert not ok and "different PIN" in why and "only on this computer" in why and "rename that file" in why
+    assert "first-pin" not in why and "another-pin" not in why

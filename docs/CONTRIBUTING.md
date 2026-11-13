@@ -17,8 +17,13 @@ may come from and how AI tools may be used.
 2. **Sign in** with a name and a PIN of at least 8 characters. There is no separate sign-up: the first
    time you use a name, it is created. Names are not case-sensitive. The PIN is stored only as a salted
    hash on the machine running the portal.
+   That means a fresh download of the project doesn't know your PIN, and nobody can look it up. If the
+   portal says your name is locked with a different PIN and you can't recall it: close the portal, rename
+   `portal/private/contributor_tokens.json`, start the portal and sign in with a new PIN. Your earlier
+   matches stay yours; they are in the registry under your name.
 3. **Claim** a function from the queue. New here? Choose **Good first functions** above the list: small
    ones with a head start (a look-alike already matched, matched before, or named), with the reason shown.
+   **Described by the specs** lists the ones whose job is already written down in `docs/cleanroom`.
    A claim is a timed lease, from 15 minutes for tiny functions to
    2 hours for large ones; only you can submit or cancel it while it lasts.
 4. **Write the C++** in the editor. It starts with C++ written from the function's own machine code,

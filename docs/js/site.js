@@ -338,6 +338,12 @@
 
     // The prototype (unreleased code) has its own row once it is in the queue; the headline is the released game.
     $('proto-row').hidden = !((v.proto || 0) + (q && q.proto ? q.proto : 0));
+    // ...and a line under the headline, so its number and the chart's two lines visibly add up
+    $('sb-proto').hidden = !v.proto;
+    if (v.proto) {
+      $('sb-proto').textContent = 'Plus ' + fmt(v.proto) + ' in the unreleased 2006 Xbox prototype, counted on its own: '
+        + fmt(v.total + v.proto) + ' in all.';
+    }
     ['pc', 'xb', 'proto', 'ps2'].forEach(function (b) {
       var done = v[b] || 0, left = q ? (q[b] || 0) : 0, all = done + left;
       $(b + '-big').textContent = q ? fmtPct(pct(done, all)) + '%' : fmt(done);

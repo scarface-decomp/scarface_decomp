@@ -440,6 +440,11 @@ class Handler(BaseHTTPRequestHandler):
                 if CONFIG.get("model_error"):
                     return self._json({"ok": False, "error": "Nothing to show in Blender: nothing in these files to export."}, 415)
                 return self._bytes(b"glTF" + bytes(8) if CONFIG.get("bad_glb") else small_glb(), "model/gltf-binary")
+            if u.path == "/api/setup":
+                return self._json({"ok": True, "items": CONFIG.get("setup") or [
+                    {"key": "game", "title": "The game's program file", "ok": True, "note": "Xbox default.xbe", "fix": "", "needed": "To check functions"},
+                    {"key": "compiler", "title": "The compiler", "ok": True, "note": "Visual C++ Toolkit 2003, cl.exe 13.10.3052", "fix": "", "needed": "To check functions"},
+                    {"key": "blender", "title": "Blender", "ok": False, "note": "", "fix": "Install Blender from blender.org; if the portal still can't find it, give it the path in Game files.", "needed": "To open models, the map and cutscenes"}]})
             if u.path == "/api/queue":
                 items = list(TASKS.values())
                 lane, tier, query = q.get("lane", "ALL"), q.get("tier", "ALL"), q.get("q", "").lower()
@@ -450,6 +455,8 @@ class Handler(BaseHTTPRequestHandler):
                     why = {t["id"]: "the game's class information names it" for t in items
                            if "Easy" in t["symbol"] and t["size"] <= 32 and t["status"] == "UNCLAIMED"}
                     items = [t for t in items if t["id"] in why]
+                if lane == "IN_GUIDE":                 # the "Hard" ones stand in for the ones the specs describe
+                    items = [t for t in items if "Hard" in t["symbol"]]
                 if tier != "ALL":
                     items = [t for t in items if t["tier"] == tier]
                 if query:

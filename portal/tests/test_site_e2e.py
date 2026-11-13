@@ -163,6 +163,11 @@ def test_scoreboard_and_progress(site, browser):
     total = v["total"] + PROG["queue"]["total"]
     assert pg.text_content("#sb-verified") == f"{v['total']:,}"
     assert pg.text_content("#sb-total") == f"{total:,}"
+    if v.get("proto"):                       # the headline is the released game; the prototype is said beside it
+        assert pg.text_content("#sb-proto") == (f"Plus {v['proto']:,} in the unreleased 2006 Xbox prototype, counted on "
+                                                f"its own: {v['total'] + v['proto']:,} in all.")
+    else:
+        assert pg.is_hidden("#sb-proto")
     share = v["total"] / total * 100
     assert pg.text_content("#claim") == f"The world is {share:.1f}% yours." if share >= 10 else \
         pg.text_content("#claim") == f"The world is {share:.2f}% yours."

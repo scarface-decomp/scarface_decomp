@@ -1136,6 +1136,7 @@ def test_game_files_no_copying_twice(page):
     press; Stop can't cut the move into place in half."""
     page.goto(BASE + "#gamefiles")
     page.wait_for_selector("#gf-versions .gf-ver")
+    page.check("input[name=gf-mode][value=unique]")           # not the quick button's choices
     page.click("#gf-start")
     page.wait_for_function("document.getElementById('gf-progress-text').textContent.startsWith('Putting')"
                            " && document.getElementById('gf-stop').disabled", timeout=10000)
@@ -1295,3 +1296,44 @@ def test_other_sites_cant_frame_or_read_the_portal(browser):
         assert r.headers["Cross-Origin-Resource-Policy"] == "same-origin" and r.headers["X-Frame-Options"] == "DENY"
         assert "default-src 'none'" in r.headers["Content-Security-Policy"]
     ctx.close()
+
+
+def test_the_dashboard_lists_what_is_set_up_and_what_is_missing(page):
+    page.click(".side-btn:has-text('Dashboard')")
+    page.wait_for_selector("#setup-card:not([hidden])")
+    assert page.text_content("#setup-stat") == "2 of 3 ready"
+    rows = page.locator("#setup-list li")
+    assert rows.count() == 3 and "ok" in rows.nth(0).get_attribute("class")
+    last = rows.nth(2)
+    assert "todo" in last.get_attribute("class") and "Blender" in last.text_content()
+    assert "blender.org" in last.text_content() and "Missing" in last.text_content()
+
+
+def test_functions_the_specs_describe_have_their_own_list(page):
+    page.click(".side-btn:has-text('Workbench')")
+    page.select_option("#lane-filter", "IN_GUIDE")
+    wait_for_calls("/api/queue")
+    page.wait_for_function("!Array.from(document.querySelectorAll('#view-workbench .sym, #view-workbench code'))"
+                           ".some((e) => e.textContent.includes('EasyFunc'))")
+    assert calls("/api/queue")[-1][1].get("lane") == "IN_GUIDE"
+
+
+def test_the_pc_first_layout_is_the_default(page):
+    assert page.is_checked("input[name=gf-mode][value=pc]")
+    assert "Recommended" in page.text_content("label.gf-mode:has(input[value=pc]) b")
+    assert page.evaluate("document.querySelector('input[name=gf-mode]').value") == "pc"      # and it comes first
+
+
+def test_finding_a_cutscene_by_name(page):
+    page.evaluate("""() => { GF_SCENES = [{name: 'NIS_01_intro', then: ['NIS_01_part2']}, {name: 'NIS_07_bank'},
+                                          {name: 'NIS_12_boat'}]; fillGfScenes(); }""")
+    assert page.locator("#gfb-scene option").count() == 3 and page.text_content("#gfb-scene-count") == "3 cutscenes"
+    page.evaluate("() => { const f = document.getElementById('gfb-scene-find'); f.value = 'BANK'; fillGfScenes(); }")
+    assert page.locator("#gfb-scene option").all_text_contents() == ["NIS_07_bank"]
+    assert page.text_content("#gfb-scene-count") == "1 of 3 cutscenes"
+    page.evaluate("() => { const f = document.getElementById('gfb-scene-find'); f.value = 'part2'; fillGfScenes(); }")
+    assert page.locator("#gfb-scene option").all_text_contents() == ["NIS_01_intro, then NIS_01_part2"]
+    page.evaluate("() => { const f = document.getElementById('gfb-scene-find'); f.value = 'zzz'; fillGfScenes(); }")
+    assert page.locator("#gfb-scene option").all_text_contents() == ["No cutscene with that in its name"]
+    assert page.is_disabled("#gfb-scene-open")
+
