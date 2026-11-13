@@ -238,6 +238,13 @@ and the fog of that hour) and a **Weather** (**Clear** or **Rain**); export the 
 `portal/tools/p3d_gltf.py` does it from the command line
 ([FORMATS.md](docs/FORMATS.md#exporting-to-blender)).
 
+**Cutscenes** are in the same box: every one of the game's cutscenes, listed once, opens in Blender as
+the game stages it, with everybody in the scene standing where the script puts them, Tony in the suit it
+gives him with his lips, brows and eyes moving, the weapons it hands out, the vehicles and the game's
+camera (Numpad 0), on the street or in the room where it happens. Pick 30, 60 or 120 frames a second;
+cutscenes the game plays one straight after another come as one. Props a cutscene spawns, effects and
+sound aren't in yet ([FORMATS.md](docs/FORMATS.md#cutscenes-artnis)).
+
 **Export every texture** writes all the game's textures out as `.png` into `extracted/textures/`: the PC's,
 in a folder named after the file each is in, then what only the other versions have in their own
 `Exclusive to` folders. Where another version has the same picture at a higher resolution, that one is
@@ -281,6 +288,7 @@ portal/               the portal itself and its tools (you don't need to open it
 | `docs/FORMATS.md`, `docs/NAMES.md`, `docs/VERSIONS.md` | The game's file formats; function names for Ghidra and IDA; what differs between the versions. |
 | `docs/LEGAL.md`, `docs/PROVENANCE.md`, `docs/CREDITS.md` | Legal notes, where code and names may come from, credits. |
 | `docs/CLEAN_ROOM.md`, `docs/cleanroom/` | How research done next to leaked code becomes a written spec that someone who never saw it builds from, the record of who read what, and the specs. |
+| `docs/function_guide.json` | What the specs say each named function does, and whether that was checked on the Xbox. The portal shows it beside the function you open. |
 | `docs/SCARFACE_DECOMP_AI_HANDOFF.md`, `docs/AGENTS.md` | Brief for AI assistants (served by the portal at `/download/ai-handoff`), and how an agent uses the portal API. |
 | `portal/decomp_portal_server.py`, `portal/website_kit/` | The portal: its server and its page. |
 | `portal/verify.py` | The command-line checker. |
