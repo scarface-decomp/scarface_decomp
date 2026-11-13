@@ -328,7 +328,7 @@ The settings that matter here:
 | `ACTH` (float) | in 55 of them: 0.01, 0.054, 0.07, 0.2, 0.3, 0.6, 0.65, 0.7, 0.8 | the alpha the test compares with; 0.5 without it *(reported)* |
 | `2SID` | 1 in 900, 0 in 4,328 | drawn from both sides |
 | `UVMD` | 0 in all 5,318 that have it | textures repeat |
-| `LIT` | 1 in 2,084, none elsewhere | lit by the scene's lights |
+| `LIT` | 1 in 2,084, none elsewhere | lit by the scene's lights; without it, not lit. In `packages/z04` every shader whose name says `lit0` has no `LIT` and every one that says `lit1` has `LIT` 1 (2,802 and 2,043; SPEC-002's answers) |
 | `ZWRT`, `ZTST` | 0 in 54 shaders, all in `art/ecoprops` | ignored by the PC game *(reported)*, and by the exports |
 
 The shader names spell most of these out ([Maps](#maps)); the settings chunks are what the game reads.
@@ -856,7 +856,12 @@ made ready for it:
 | 3, darkens | `BLEND`. The picture is black, with an alpha of 1 minus its brightness (luminance): what is behind ends up multiplied by that brightness, the same for red, green and blue | a Transparent BSDF in the colour of that brightness, which multiplies what is behind by it |
 
 The picture's own alpha is used only for a cut-out. A light-adding or darkening material whose picture isn't in
-the files is fully see-through, not a dark square. The portal's own 3D view (**View here**) draws the
+the files is fully see-through, not a dark square.
+
+**Lit or not.** A shader without `LIT` 1 isn't lit by the scene's lights, so its material is unlit
+(`KHR_materials_unlit`): one read from the files without `LIT`, and one known only by a name that says `lit0`
+(SPEC-002's answers). A shader the files don't have and whose name says nothing is left lit. Blender's importer
+makes the unlit ones shadeless, and the portal's 3D view doesn't shade them. The portal's own 3D view (**View here**) draws the
 light-adding ones adding.
 
 **Cut-outs.** A shader with `ATST` is glTF's `MASK` at its `ACTH`, or 0.5 when it has none. glTF keeps a pixel
@@ -1157,7 +1162,8 @@ what you find. Known gaps:
   the sky through the day (the sun's joint and the sky's colour sets) and the fog by time of day.
 * The clean-room spec [SPEC-002](cleanroom/SPEC-002-materials-ocean-shadows.md): the shaders' kinds and
   settings, the blend modes, cut-outs and depth, the props' leaves, the low-detail hull, the sea's scripts, the
-  shadow records and the shadow decals.
+  shadow records and the shadow decals; and, in its answers to the implementer's questions, that a shader
+  without `LIT` is unlit.
 * The [Blender Python API](https://docs.blender.org/api/current/) documentation, for the world's mist that
   shows the fog in Blender, and the shaders, blend modes and collections that show the game's see-through
   surfaces and its groups.

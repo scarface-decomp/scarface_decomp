@@ -46,7 +46,8 @@ What goes where (see docs/FORMATS.md for the chunk layouts):
     a Shader (0x11000)               a material; how the game blends it (BLMD) in its extras ("blend"):
                                      light-adding (2) and darkening (3) ones with their picture made ready
                                      for ordinary blending; a cut-out (ATST) at its ACTH; "depthWrite":
-                                     false for the ones the game draws without writing depth
+                                     false for the ones the game draws without writing depth; unlit
+                                     (KHR_materials_unlit) without LIT 1
     a shadowdecal primitive group    a node of its own under its mesh's, extras {"shadowDecal": true}
     the low-detail hull, with --lod  marked {"lowDetailHull": true}, and hidden next to detailed areas
     the sea, with --map              a flat surface at height 0 round the map, its settings in extras
@@ -92,9 +93,10 @@ STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY = 0x0802000D, 0x0802000E, 0x0802000
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 7                     # 3: props kept with another area. 4: one stage of each place; insides in the city.
+EXPORT_VERSION = 8                     # 3: props kept with another area. 4: one stage of each place; insides in the city.
                                        # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight.
-                                       # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked
+                                       # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked.
+                                       # 8: a shader without LIT is unlit
 LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER, SKY = 0x13000, 0x2380, 0x8800007, 0x122000, 0x8800002
 DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)
 WEATHER_KIND = {"clear": 0, "rain": 1}  # the daylight's kind for each weather; the game starts in clear weather
@@ -773,13 +775,20 @@ def draws_depth(info: Optional[dict]) -> bool:
     return (info.get("pddi") or "").lower() not in NO_DEPTH_KINDS and info["ints"].get("BLMD") != 2
 
 
+def is_lit(info: Optional[dict]) -> bool:
+    """Whether the scene's lights light a shader's surfaces: only with LIT 1. A shader without LIT is unlit, as
+    is a name that says lit0: in the PC's packages/z04 every shader named lit0 has no LIT setting and every
+    one named lit1 has LIT 1 (SPEC-002's answers). Without the shader's settings at all, lit."""
+    return not info or bool(info["ints"].get("LIT"))
+
+
 def is_leaf(info: Optional[dict]) -> bool:
     """An unlit see-through shader without a cut-out (BLMD 1, no LIT, no ATST): on a placed prop (the trees and
     bushes) the game draws it twice, see Builder.mesh."""
     if not info:
         return False
     ints = info["ints"]
-    return ints.get("BLMD") == 1 and not ints.get("LIT") and not ints.get("ATST")
+    return ints.get("BLMD") == 1 and not is_lit(info) and not ints.get("ATST")
 
 
 def _passes(alpha: int, cut: Optional[Tuple[float, bool]]) -> bool:
@@ -1051,8 +1060,9 @@ class Builder:
         darkening) so it neither comes out as a black square nor hides what is behind. A cut-out (ATST) is
         glTF's MASK at the shader's ACTH (0.5 without one); a light-adding or darkening one has the cut-out in
         its made picture instead. Shaders drawn without writing depth (draws_depth) say so ("depthWrite":
-        false), shadow decals and the low-detail hull are marked. leaf: "colour" or "depth" for the two parts
-        of a placed prop's leaves (see mesh)."""
+        false), shadow decals and the low-detail hull are marked. A shader that isn't lit (is_lit: no LIT 1)
+        is unlit (KHR_materials_unlit). leaf: "colour" or "depth" for the two parts of a placed prop's leaves
+        (see mesh)."""
         key = shader.lower() + (f"|leaf {leaf}" if leaf else "")
         if key in self.materials:
             return self.materials[key]
@@ -1095,7 +1105,7 @@ class Builder:
                 mat["alphaMode"], mat["alphaCutoff"] = "MASK", cut[0]
             elif ints.get("BLMD") or info["translucent"]:
                 mat["alphaMode"] = "BLEND"
-            if ints.get("LIT") == 0 and "LIT" in ints:
+            if not is_lit(info):                                # no LIT 1: not lit by the scene's lights
                 mat["extensions"] = {"KHR_materials_unlit": {}}
                 self.g.used_extensions.add("KHR_materials_unlit")
             if blend:

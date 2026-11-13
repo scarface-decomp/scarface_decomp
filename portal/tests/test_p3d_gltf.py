@@ -2155,3 +2155,51 @@ def test_the_portal_can_leave_the_sea_out_of_the_city(monkeypatch, tmp_path):
     for body in ({"version": "pc"}, {"version": "pc", "ocean": False}, {"version": "pc", "ocean": "no"}):
         server.Handler.post_game_files_blender(Fake(), body)
     assert asked == [True, False, True] and all(code == 200 for code, _obj in sent)     # only a real false leaves it out
+
+
+def test_a_shader_without_lit_is_unlit():
+    """SPEC-002's answers: every shader named lit0 has no LIT setting and every one named lit1 has LIT 1, so a
+    shader without LIT isn't lit by the scene's lights: unlit (KHR_materials_unlit), like a name that says lit0."""
+    shaders = [shader_chunk("bare"), shader_chunk("lit", ints=[("LIT", 1)]), shader_chunk("zero", ints=[("LIT", 0)]),
+               shader_chunk("glow", ints=[("BLMD", 2)], tex="flare.bmp"), shader_chunk("lit_glow", ints=[("BLMD", 2), ("LIT", 1)])]
+    names = ["bare", "lit", "zero", "glow", "lit_glow", "GlobalShader_a.tga_simple_blmd0_mcbv0_lit0_alpha0_atst0_alum0_2sid0",
+             "GlobalShader_b.tga_simple_blmd0_mcbv0_lit1_alpha0_atst0_alum0_2sid0", "paint"]
+    doc, _ = read_glb(export(p3d(picture("flare.bmp", 2, 2, GLOW), *shaders, *(mesh(f"m{i}", shader=n) for i, n in enumerate(names))))[0])
+    unlit = {m["name"]: "KHR_materials_unlit" in m.get("extensions", {}) for m in doc["materials"]}
+    assert unlit == {"bare": True, "lit": False, "zero": True, "glow": True, "lit_glow": False, names[5]: True, names[6]: False,
+                     "paint": False}                                   # paint: no settings at all, so nothing known: lit
+    assert doc["extensionsUsed"] == ["KHR_materials_unlit"]
+    assert G.is_lit(None) and not G.is_lit({"ints": {}}) and G.is_lit({"ints": {"LIT": 1}})
+    assert G.is_leaf({"ints": {"BLMD": 1}}) and not G.is_leaf({"ints": {"BLMD": 1, "LIT": 1}})    # the leaves: the unlit ones
+
+
+def test_the_blender_scene_handles_unlit_materials_too(monkeypatch):
+    """Blender's importer makes an unlit material differently (no Principled BSDF): the light-adding shader and
+    the no-depth wrapping still find the picture and the surface."""
+    import sys
+    import types
+    import blender_export as BX
+
+    def unlit(name, **extras):
+        mat = FakeMaterial(name, **extras)
+        out, pic, _bsdf = mat.node_tree.nodes
+        light = mat.node_tree.nodes.new("ShaderNodeEmission")
+        mat.node_tree.links.new(pic.outputs["Color"], light.inputs["Color"])
+        mat.node_tree.links.new(light.outputs["Emission"], out.inputs["Surface"])
+        return mat
+    glow, decal = unlit("flare", blend="add", depthWrite=False), unlit("blob", blend="alpha", depthWrite=False, shadowDecal=1)
+    bpy = types.SimpleNamespace(
+        app=types.SimpleNamespace(background=False, timers=types.SimpleNamespace(register=lambda *a, **k: None)),
+        data=types.SimpleNamespace(materials=[glow, decal], collections=types.SimpleNamespace(new=FakeCollection)),
+        context=types.SimpleNamespace(view_layer=types.SimpleNamespace(layer_collection=types.SimpleNamespace(children=[]))))
+    monkeypatch.setitem(sys.modules, "bpy", bpy)
+    ns: dict = {}
+    exec(compile(BX.OPEN_SCRIPT % {"files": [], "save": None, "fps": 30}, "open_in_blender.py", "exec"), ns)
+    ns["game_looks"](types.SimpleNamespace(objects=[], collection=FakeCollection("Scene Collection")))
+
+    def into(socket):
+        return socket.links[0].from_socket.node
+    both = into(glow.surface().inputs[1])
+    times = into(into(both.inputs[1]).inputs["Color"])
+    assert both.type == "ShaderNodeAddShader" and into(times.inputs[0]) is glow.picture()
+    assert decal.surface().type == "ShaderNodeMixShader" and into(decal.surface().inputs[1]).type == "ShaderNodeEmission"

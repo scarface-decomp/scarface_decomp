@@ -4230,7 +4230,8 @@
       return { vao: vao, count: count, indexType: indexType, min: acc.min, max: acc.max,
                base: pbr.baseColorFactor || [1, 1, 1, 1], tex: texture((pbr.baseColorTexture || {}).index),
                blend: mat.alphaMode === 'BLEND', cutoff: mat.alphaMode === 'MASK' ? (mat.alphaCutoff === undefined ? 0.5 : mat.alphaCutoff) : 0,
-               twoSided: !!mat.doubleSided, lit: p.attributes.NORMAL !== undefined,
+               twoSided: !!mat.doubleSided,
+               lit: p.attributes.NORMAL !== undefined && !(mat.extensions && mat.extensions.KHR_materials_unlit),
                add: ex.blend === 'add', depth: ex.depthWrite !== false };
     }));
     gl.bindVertexArray(null);
