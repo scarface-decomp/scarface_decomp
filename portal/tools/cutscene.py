@@ -577,7 +577,7 @@ def floor_spot(script: Script) -> Optional[Tuple[float, float, float]]:
     """Where someone in the cutscene stands, height and all (the map's own x, y, z), or None: for finding
     the room they stand in. The camera's start is no use for that: it hangs in the air."""
     for at, _facing in script.stands.values():
-        if abs(at[0]) + abs(at[2]) > 1.0:
+        if abs(at[0]) + abs(at[2]) > 30.0:                   # a place on the map, not a step from its origin
             return at
     return script.origin[0] if script.origin else None
 

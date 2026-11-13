@@ -386,3 +386,5 @@ def test_the_spot_someone_stands_on_for_finding_their_room():
     cue = C.read_script('NISSequenceCue { CameraAnimationName "CAM"; Position { x -3411; y 20; z -1704; }; Facing 0; };')
     assert C.floor_spot(cue) == (-3411.0, 20.0, -1704.0)                       # nobody placed: where the cue is
     assert C.floor_spot(C.read_script('NISSequenceCue { CameraAnimationName "CAM"; };')) is None
+    near = C.read_script('NISCharacterPosition { CharacterName "MainCharacter"; Position { x -0.1; y 0; z -1.5; }; Facing 0; };')
+    assert C.floor_spot(near) is None                                          # played wherever Tony is: no room of its own
