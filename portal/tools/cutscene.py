@@ -294,11 +294,13 @@ def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[t
 
 
 HAND = "right_hand_attach"             # the joint a person's weapon hangs on
-# A weapon's model has its grip at its own origin and its barrel along its own forward axis (its muzzle
-# joint says so). In the hand, the barrel lies along the hand joint's own sideways axis instead, towards
-# the fingers: a quarter turn. Measured from the cutscenes: someone with a rifle keeps the other hand a
-# fixed 0.34 m along that axis from the hand joint, the length of a rifle from grip to handguard.
-GRIP = (0.0, -0.7071067811865476, 0.0, 0.7071067811865476)       # as glTF's rotation
+# A weapon's model has its grip at its own origin, its barrel along its own forward axis (its muzzle joint
+# says so) and its top upwards. In the hand it lies another way round: the barrel along the hand joint's
+# sideways axis, towards the fingers, and its top along the joint's forward axis. Measured from the
+# cutscenes: someone with a rifle keeps the other hand a fixed 0.34 m along that sideways axis from the hand
+# joint (a rifle's length from grip to handguard), and through every rifle scene looked at, "up" in the
+# world is close to the joint's forward axis.
+GRIP = (0.5, -0.5, -0.5, 0.5)                                    # as glTF's rotation
 
 
 class Ground:

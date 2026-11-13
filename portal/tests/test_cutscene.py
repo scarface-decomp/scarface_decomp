@@ -134,8 +134,8 @@ def test_the_cast_on_their_map_with_a_weapon_in_hand():
     assert "w_street" in report.models and "Thug1" in report.models and "hector" in report.models    # the street, and the cast on it
     assert ("person", "CharTemp_hector") in asked                             # nobody loaded him: his template has his name
     hand = next(n for n in doc["nodes"] if n["name"] == "right_hand_attach" and "children" in n)
-    grip = doc["nodes"][hand["children"][0]]                                  # the quarter turn that lays it along the hand
-    assert grip["name"] == "Thug1's grip" and grip["rotation"] == pytest.approx([0, -0.70710678, 0, 0.70710678])
+    grip = doc["nodes"][hand["children"][0]]                                  # the turn that lays it along the hand, top up
+    assert grip["name"] == "Thug1's grip" and grip["rotation"] == pytest.approx([0.5, -0.5, -0.5, 0.5])
     assert "Thug1's metal_pipe" in [doc["nodes"][c]["name"] for c in grip["children"]]
     assert names.count("right_hand_attach") == 2 and not report.missing_drawables
     assert [a["name"] for a in doc["animations"]] == ["Cutscene T"]           # the map's own animations don't come first
