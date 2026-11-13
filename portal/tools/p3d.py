@@ -156,6 +156,27 @@ def read_tree(data: bytes, max_chunks: int = 500_000) -> List[Chunk]:
     return walk(12, end, 0)
 
 
+def name_key(text: str, start: int = 0) -> int:
+    """The game's 32-bit key for a name: what it finds objects by once a file is loaded (clean-room spec
+    docs/cleanroom/SPEC-006, section 5; the Xbox's function is at 0x00243FA0). No text gives start back.
+    Otherwise h is start without its top bit, and for each character, taken as a signed byte:
+    h = (h * 65599) & 0x7FFFFFFF, the character + 0x20 if it is below 'a', h ^= the character; the top bit
+    is set at the end. The folding is blind: it turns A-Z into a-z, and shifts digits, '.' and '_' too, so
+    names that differ only in letter case have the same key. The .p3d files themselves keep names as
+    text; the keys are in the compiled scripts (a name written stx........) and the AI trees (.dtr)."""
+    if not text:
+        return start & 0xFFFFFFFF
+    h = start & 0x7FFFFFFF
+    for c in text.encode("latin-1", "replace"):
+        h = (h * 65599) & 0x7FFFFFFF
+        if c >= 0x80:
+            c -= 0x100                                       # a signed byte
+        if c < 0x61:
+            c += 0x20
+        h = (h ^ c) & 0xFFFFFFFF
+    return h | 0x80000000
+
+
 def walk(chunks: List[Chunk]) -> Iterator[Chunk]:
     for c in chunks:
         yield c
