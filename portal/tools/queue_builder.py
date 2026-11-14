@@ -26,10 +26,11 @@ from typing import Dict, List, Optional, Set, Tuple
 import lookalikes
 import ps2_overlay
 from msvc_verify import decorated_hint
-from sf_binaries import BinaryImage, Extent, collect_call_targets, function_extent, not_compiled_reason
+from sf_binaries import (BinaryImage, Extent, collect_call_targets, function_extent, not_compiled_reason,
+                         settle_overlaps)
 
 # Bumped when the checks that keep data out of the queue change; the portal re-checks older queues.
-CODE_CHECK = 2
+CODE_CHECK = 3
 
 PC_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # Only this part of the retail PC .text is stored as plaintext (the rest is not readable code),
@@ -275,6 +276,17 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                 extents[va] = e
             if progress and i % 2000 == 0:
                 progress(f"{b}: sized {i:,}/{len(starts):,} candidate starts")
+        # one function's bytes running over another's start: one of the two was measured or found wrong
+        proven = set(kf) | {va for va in extents if f"{b}:0x{va:08X}" in verified_keys}
+        resized, false_starts = settle_overlaps(img, {va: e.size for va, e in extents.items()}, set(vt), calls, proven)
+        for va, n in resized.items():
+            e = function_extent(img, va, known, max_size=n)
+            extents[va] = e if e.ok and e.size == n else Extent(va, n, True, "ends before the next function")
+        for va in false_starts:
+            del extents[va]
+        if progress and (resized or false_starts):
+            progress(f"{b}: {len(resized):,} functions measured again (they ran over the next one), "
+                     f"{len(false_starts):,} false starts left out")
         # drop starts that sit inside another function unless they are called or in a vtable
         ordered = sorted(extents)
         keep = []
@@ -342,6 +354,41 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                                cache=cache)
     lookalikes.annotate(tasks, images, progress=progress)
     return tasks
+
+
+def settle_queue(tasks: List[dict], images: Dict[str, BinaryImage], verified_keys: Set[str], progress=None) -> List[dict]:
+    """The same overlap check build_queue makes, for a queue built before it existed: functions that were
+    measured over the start of the next one get their real size, false starts are taken out. Matched
+    functions are left as they are. Returns the tasks to keep (changed ones lose their look-alike group,
+    so the groups are worked out again)."""
+    import re
+    drop_ids: Set[int] = set()
+    changed = 0
+    for b, img in images.items():
+        if ps2_overlay.is_ps2(b):
+            continue
+        mine = {t["fva_int"]: t for t in tasks if t.get("bin") == b and "fva_int" in t}
+        if not mine:
+            continue
+        proven = {va for va in mine if f"{b}:0x{va:08X}" in verified_keys}
+        resized, false_starts = settle_overlaps(img, {va: int(t["size"]) for va, t in mine.items()},
+                                                set(vtable_methods(img)), collect_call_targets(img), proven)
+        for va, n in resized.items():
+            t = mine[va]
+            t["hint"] = re.sub(r"\b%d bytes" % int(t["size"]), f"{n} bytes", t.get("hint", ""))
+            t["size"] = n
+            t.update(tier(n))
+            changed += 1
+        drop_ids |= {id(mine[va]) for va in false_starts}
+        if progress and (resized or false_starts):
+            progress(f"[*] {b}: {len(resized):,} functions measured again (they ran over the next one), "
+                     f"{len(false_starts):,} false starts taken out of the work queue.")
+    kept = [t for t in tasks if id(t) not in drop_ids]
+    if changed or drop_ids:
+        for t in kept:
+            for k in ("lookalike_group", "lookalikes", "lookalike_rep"):
+                t.pop(k, None)
+    return kept
 
 
 def ps2_tasks(img, xbox_img, xbox_tasks: List[dict], old_by_key: Dict[str, dict], verified_keys: Set[str],

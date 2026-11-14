@@ -528,14 +528,14 @@ def load_tasks() -> None:
         print(f"[*] Adding {len(done):,} functions that are already matched, so they can be opened, tidied and "
               "tried on their look-alikes...")
         tasks += done
+    verified = set(REGISTRY["entries"])
+    tasks = drop_non_code(tasks, verified)
     if any("lookalikes" not in t for t in tasks if "fva_int" in t):
         images = {b: image_for(b) for b in BIN_ORDER if image_for(b)}
         if images:
             print("[*] Grouping look-alike functions (once; about 15 seconds)...")
             LA.annotate([t for t in tasks if "fva_int" in t], images)
             write_json(QUEUE_JSON, tasks)
-    verified = set(REGISTRY["entries"])
-    tasks = drop_non_code(tasks, verified)
     out = []
     for t in tasks:
         if "fva_int" not in t or t.get("bin") not in BINARIES:
@@ -589,10 +589,17 @@ def load_tasks() -> None:
 def drop_non_code(tasks: List[dict], verified: set) -> List[dict]:
     """Queues built before a check existed can hold data that looked like a function start (a single
     `retf`, the middle of an instruction). No C++ can match those, so they are taken out, once."""
-    from queue_builder import CODE_CHECK
+    from queue_builder import CODE_CHECK, settle_queue
     todo = [t for t in tasks if "fva_int" in t and t.get("code_check", 0) < CODE_CHECK and not PO.is_ps2(t.get("bin"))]
     if not todo:
         return tasks
+    # functions measured over the start of the next one, and false starts inside another function
+    stale = {t.get("bin") for t in todo}
+    images = {b: image_for(b) for b in BIN_ORDER if b in stale and image_for(b)}
+    if images:
+        print("[*] Checking the work queue for functions that run into each other (once; about a minute)...")
+        tasks = settle_queue(tasks, images, verified, progress=print)
+        todo = [t for t in tasks if "fva_int" in t and t.get("code_check", 0) < CODE_CHECK and not PO.is_ps2(t.get("bin"))]
     from sf_binaries import not_compiled_reason
     known = {f"{f['bin']}:0x{int(f['va'], 16):08X}"
              for f in (read_json(REPORTS_DIR / "known_functions.json", {}) or {}).get("functions", [])

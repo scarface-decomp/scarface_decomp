@@ -12,7 +12,7 @@ import hashlib
 import struct
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 __all__ = ["Section", "BinaryImage", "function_extent", "collect_call_targets", "Extent"]
 
@@ -198,6 +198,95 @@ def not_compiled_reason(img: "BinaryImage", start: int, size: int) -> str:
             if prev is not None and prev.mnemonic in _NOT_A_PATH_END:
                 return f"ends after '{prev.mnemonic}' without returning: not a function"
     return ""
+
+
+def instruction_starts(img: "BinaryImage", start: int, size: int) -> Dict[int, int]:
+    """{address: length} of every instruction reached by running start..start+size from its start (the
+    same walk as not_compiled_reason: jump tables are not followed)."""
+    import capstone
+    from capstone import x86_const as X
+
+    blob = img.read(start, size)
+    if not blob:
+        return {}
+    end = start + size
+    md = _cs()
+    work = [start]
+    seen: Dict[int, int] = {}
+    while work:
+        addr = work.pop()
+        if addr in seen or not (start <= addr < end):
+            continue
+        for insn in md.disasm(blob[addr - start:], addr):
+            if insn.address in seen:
+                break
+            seen[insn.address] = insn.size
+            if insn.mnemonic in ("ret", "int3"):
+                break
+            if insn.group(capstone.CS_GRP_JUMP):
+                op = insn.operands[0] if insn.operands else None
+                if op is not None and op.type == X.X86_OP_IMM:
+                    work.append(op.imm & 0xFFFFFFFF)
+                    if insn.mnemonic == "jmp":
+                        break
+                    continue
+                break
+    return seen
+
+
+def settle_overlaps(img: "BinaryImage", sizes: Dict[int, int], certain: Set[int], called: Set[int],
+                    proven: Set[int]) -> Tuple[Dict[int, int], Set[int]]:
+    """Where one function's bytes run over the start of another, work out which of the two is wrong.
+
+    sizes: {start: size} as first measured. certain: starts that are functions beyond doubt (in a table of
+    virtual functions). called: starts some call instruction names. proven: starts whose size an exact match
+    proved (never changed, never dropped). Returns ({start: corrected size}, {starts that are not functions}).
+
+    * A function measured past a start that is certainly a function (in a virtual table, proven, or called
+      and standing right after a return or padding) followed a jump out of itself: it is measured again and
+      has to end before that start. A thunk (`sub ecx, 4; jmp method`) measured as thousands of bytes is the
+      usual case.
+    * A start nobody can vouch for (only a call names it), off the 16-byte boundary functions are placed on,
+      that falls in the middle of an instruction of the function around it is not a function: the "call" was
+      data or the inside of another instruction that happened to read as one."""
+    import bisect
+
+    def after_an_end(va: int) -> bool:
+        before = img.read(va - 3, 3) or b"\0\0\0"
+        return before[2] in (0xCC, 0xC3, 0x90) or before[0] == 0xC2
+
+    def solid(va: int) -> bool:
+        return va in certain or va in proven or (va in called and after_an_end(va))
+
+    known = set(certain) | set(called) | set(proven)
+    starts = sorted(sizes)
+    new: Dict[int, int] = {}
+    for i, va in enumerate(starts):
+        if va in proven:
+            continue
+        end = va + sizes[va]
+        j = bisect.bisect_right(starts, va)
+        wall = next((s for s in starts[j:bisect.bisect_left(starts, end)] if solid(s)), None)
+        if wall is None:
+            continue
+        e = function_extent(img, va, known, max_size=wall - va)
+        if e.ok and 1 <= e.size <= wall - va and not not_compiled_reason(img, va, e.size):
+            new[va] = e.size
+    size = {**sizes, **new}
+    drop: Set[int] = set()
+    cover_end, around = 0, None
+    walked: Dict[int, Dict[int, int]] = {}
+    for va in starts:
+        if va < cover_end and around is not None and va % 16 and not around % 16 \
+                and va not in certain and va not in proven:
+            if around not in walked:
+                walked[around] = instruction_starts(img, around, size[around])
+            if any(a < va < a + n for a, n in walked[around].items()):
+                drop.add(va)
+                continue
+        if va + size[va] > cover_end:
+            cover_end, around = va + size[va], va
+    return new, drop
 
 
 def collect_call_targets(img: BinaryImage) -> Set[int]:
