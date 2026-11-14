@@ -1,13 +1,41 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/Win32Drive.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/Win32Drive.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 17 functions matched (5.88%). NOT COMPLETE YET.
-// The 16 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 17 functions matched (11.76%). NOT COMPLETE YET.
+// The 15 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_00 (0x006E77B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Win32Drive::vfunc_00 (0x006E77B0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x006E78B0. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_006E78B0(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_006E78B0(); };
+
+class Win32Drive : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    Win32Drive();
+    virtual void sub_006E78B0();          // the real function; the thunk jumps here
+};
+
+Win32Drive::Win32Drive() {}                  // building one is what makes the compiler write its tables and the thunk
+}
 
 // ============================================================================
 // [VERIFIED] core::Win32Drive::vfunc_03 (0x006E78B0, 36 B)

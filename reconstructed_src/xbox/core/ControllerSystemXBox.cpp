@@ -1,13 +1,39 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/ControllerSystemXBox.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/ControllerSystemXBox.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 13 functions matched (7.69%). NOT COMPLETE YET.
-// The 12 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 13 functions matched (15.38%). NOT COMPLETE YET.
+// The 11 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::ControllerSystemXBox::vfunc_00 (0x00248810, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerSystemXBox::vfunc_00 (0x00248810, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x00248820. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_00248820(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_00248820(); };
+
+class ControllerSystemXBox : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    ControllerSystemXBox();
+    virtual void sub_00248820();          // the real function; the thunk jumps here
+};
+
+ControllerSystemXBox::ControllerSystemXBox() {}                  // building one is what makes the compiler write its tables and the thunk
+}
 
 // ============================================================================
 // [VERIFIED] core::ControllerSystemXBox::vfunc_03 (0x00248820, 36 B)

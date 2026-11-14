@@ -1,9 +1,7 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/SeqEventVarPitchRand.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/SeqEventVarPitchRand.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 4 functions matched (75.00%). NOT COMPLETE YET.
-// The 1 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
-// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// PROGRESS: COMPLETE. All 4 functions are matched.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
@@ -107,6 +105,66 @@ SeqEventVarPitchRand* SeqEventVarPitchRand::vfunc_04(int a1)
         sub_006EE890((int)DAT_007F7A98, (int)this);
     }
     return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarPitchRand::vfunc_02 (0x006F98F0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_007007A0(int);
+};
+
+extern "C" char DAT_00773660[];
+extern "C" char DAT_007F7AA0[];
+extern "C" int __cdecl sub_006EE870(int);
+
+namespace audio {
+
+class SeqEventVarPitchRand;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventVarPitchRand* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_006EE870((int)DAT_007F7AA0);
+    }
+
+    Instance(SeqEventVarPitchRand* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_00773660;
+    }
+};
+
+class SeqEventVarPitchRand
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventVarPitchRand* vfunc_04(int a1);
+};
+
+void SeqEventVarPitchRand::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_007007A0((int)new Instance(this));
 }
 
 }

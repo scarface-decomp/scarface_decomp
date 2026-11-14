@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (1256 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (1303 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1,256 of 11,142 functions matched (11.27%). NOT COMPLETE YET.
-// The 9,886 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 1,303 of 11,142 functions matched (11.69%). NOT COMPLETE YET.
+// The 9,839 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -11030,6 +11030,100 @@ int __cdecl sub_00077430(void)
         DAT_0045398C = 0;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00077EA0 (0x00077EA0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_003FD9D8;
+
+class Class_00077EA0
+{
+public:
+    Class_00077EA0* sub_00077EA0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_00077EA0* Class_00077EA0::sub_00077EA0()
+{
+    int val = DAT_003FD9D8.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00077ED0 (0x00077ED0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_003FDA38;
+
+class Class_00077ED0
+{
+public:
+    Class_00077ED0* sub_00077ED0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_00077ED0* Class_00077ED0::sub_00077ED0()
+{
+    int val = DAT_003FDA38.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00077F00 (0x00077F00, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_003FDA78;
+
+class Class_00077F00
+{
+public:
+    Class_00077F00* sub_00077F00();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_00077F00* Class_00077F00::sub_00077F00()
+{
+    int val = DAT_003FDA78.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
 }
 
 // ============================================================================
@@ -35440,6 +35534,1826 @@ Class_002A0000* Class_002A0000::sub_002A0000(int a1, int a2, int a3, int a4)
     }
     DAT_00490F2C = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0810 (0x002A0810, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_002A0810 (Proto 0x002A0810, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003B9E78[];
+extern "C" char DAT_003B9E84[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00490F30;
+extern "C" int DAT_00490F34;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A0810(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003B9E78;
+        DAT_00490F30 = t1;
+    } else {
+        DAT_00490F30 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003B9E84;
+        DAT_00490F34 = t5;
+        return;
+    }
+    DAT_00490F34 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0AB0 (0x002A0AB0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435030;
+
+class Class_002A0AB0
+{
+public:
+    Class_002A0AB0* sub_002A0AB0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A0AB0* Class_002A0AB0::sub_002A0AB0()
+{
+    int val = DAT_00435030.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0AE0 (0x002A0AE0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435080;
+
+class Class_002A0AE0
+{
+public:
+    Class_002A0AE0* sub_002A0AE0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A0AE0* Class_002A0AE0::sub_002A0AE0()
+{
+    int val = DAT_00435080.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0B10 (0x002A0B10, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435290;
+
+class Class_002A0B10
+{
+public:
+    Class_002A0B10* sub_002A0B10();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A0B10* Class_002A0B10::sub_002A0B10()
+{
+    int val = DAT_00435290.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0B40 (0x002A0B40, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_004352E0;
+
+class Class_002A0B40
+{
+public:
+    Class_002A0B40* sub_002A0B40();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A0B40* Class_002A0B40::sub_002A0B40()
+{
+    int val = DAT_004352E0.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0B70 (0x002A0B70, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435330;
+
+class Class_002A0B70
+{
+public:
+    Class_002A0B70* sub_002A0B70();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A0B70* Class_002A0B70::sub_002A0B70()
+{
+    int val = DAT_00435330.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0BA0 (0x002A0BA0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_004353A8;
+
+class Class_002A0BA0
+{
+public:
+    Class_002A0BA0* sub_002A0BA0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A0BA0* Class_002A0BA0::sub_002A0BA0()
+{
+    int val = DAT_004353A8.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0BD0 (0x002A0BD0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435420;
+
+class Class_002A0BD0
+{
+public:
+    Class_002A0BD0* sub_002A0BD0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A0BD0* Class_002A0BD0::sub_002A0BD0()
+{
+    int val = DAT_00435420.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A0C00 (0x002A0C00, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_004354A8;
+
+class Class_002A0C00
+{
+public:
+    Class_002A0C00* sub_002A0C00();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A0C00* Class_002A0C00::sub_002A0C00()
+{
+    int val = DAT_004354A8.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A1300 (0x002A1300, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A1300 (Proto 0x002A1300, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003B9F50[];
+extern "C" char DAT_003B9F5C[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00490F50;
+extern "C" int DAT_00490F4C;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A1300(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003B9F50;
+        DAT_00490F50 = t1;
+    } else {
+        DAT_00490F50 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003B9F5C;
+        DAT_00490F4C = t5;
+        return;
+    }
+    DAT_00490F4C = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A2610 (0x002A2610, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435740;
+
+class Class_002A2610
+{
+public:
+    Class_002A2610* sub_002A2610();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A2610* Class_002A2610::sub_002A2610()
+{
+    int val = DAT_00435740.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A2640 (0x002A2640, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435790;
+
+class Class_002A2640
+{
+public:
+    Class_002A2640* sub_002A2640();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A2640* Class_002A2640::sub_002A2640()
+{
+    int val = DAT_00435790.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A2670 (0x002A2670, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435828;
+
+class Class_002A2670
+{
+public:
+    Class_002A2670* sub_002A2670();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A2670* Class_002A2670::sub_002A2670()
+{
+    int val = DAT_00435828.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A26A0 (0x002A26A0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00435888;
+
+class Class_002A26A0
+{
+public:
+    Class_002A26A0* sub_002A26A0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A26A0* Class_002A26A0::sub_002A26A0()
+{
+    int val = DAT_00435888.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A26D0 (0x002A26D0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_004358F8;
+
+class Class_002A26D0
+{
+public:
+    Class_002A26D0* sub_002A26D0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A26D0* Class_002A26D0::sub_002A26D0()
+{
+    int val = DAT_004358F8.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A2AA0 (0x002A2AA0, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A2AA0 (Proto 0x002A2AA0, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA184[];
+extern "C" char DAT_003BA190[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00490FA4;
+extern "C" int DAT_00490FA0;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A2AA0(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA184;
+        DAT_00490FA4 = t1;
+    } else {
+        DAT_00490FA4 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA190;
+        DAT_00490FA0 = t5;
+        return;
+    }
+    DAT_00490FA0 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A3AA0 (0x002A3AA0, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A3AA0 (Proto 0x002A3AA0, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA2E8[];
+extern "C" char DAT_003BA300[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00490FD0;
+extern "C" int DAT_00490FD4;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A3AA0(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA2E8;
+        DAT_00490FD0 = t1;
+    } else {
+        DAT_00490FD0 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA300;
+        DAT_00490FD4 = t5;
+        return;
+    }
+    DAT_00490FD4 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A3B30 (0x002A3B30, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A3B30 (Proto 0x002A3B30, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA2F4[];
+extern "C" char DAT_003BA318[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00490FDC;
+extern "C" int DAT_00490FD8;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A3B30(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA2F4;
+        DAT_00490FDC = t1;
+    } else {
+        DAT_00490FDC = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA318;
+        DAT_00490FD8 = t5;
+        return;
+    }
+    DAT_00490FD8 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A40C0 (0x002A40C0, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A40C0 (Proto 0x002A40C0, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA3B8[];
+extern "C" char DAT_003BA3C4[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_0049101C;
+extern "C" int DAT_00491020;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A40C0(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA3B8;
+        DAT_0049101C = t1;
+    } else {
+        DAT_0049101C = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA3C4;
+        DAT_00491020 = t5;
+        return;
+    }
+    DAT_00491020 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A4600 (0x002A4600, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A4600 (Proto 0x002A4600, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA464[];
+extern "C" char DAT_003BA470[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491060;
+extern "C" int DAT_0049105C;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A4600(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA464;
+        DAT_00491060 = t1;
+    } else {
+        DAT_00491060 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA470;
+        DAT_0049105C = t5;
+        return;
+    }
+    DAT_0049105C = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A49B0 (0x002A49B0, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A49B0 (Proto 0x002A49B0, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA4FC[];
+extern "C" char DAT_003BA508[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_0049109C;
+extern "C" int DAT_004910A0;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A49B0(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA4FC;
+        DAT_0049109C = t1;
+    } else {
+        DAT_0049109C = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA508;
+        DAT_004910A0 = t5;
+        return;
+    }
+    DAT_004910A0 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A5010 (0x002A5010, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A5010 (Proto 0x002A5010, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA5C4[];
+extern "C" char DAT_003BA5D0[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_004910CC;
+extern "C" int DAT_004910D0;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A5010(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA5C4;
+        DAT_004910CC = t1;
+    } else {
+        DAT_004910CC = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA5D0;
+        DAT_004910D0 = t5;
+        return;
+    }
+    DAT_004910D0 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A55C0 (0x002A55C0, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A55C0 (Proto 0x002A55C0, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA6A8[];
+extern "C" char DAT_003BA6B4[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_004910FC;
+extern "C" int DAT_00491100;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A55C0(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA6A8;
+        DAT_004910FC = t1;
+    } else {
+        DAT_004910FC = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA6B4;
+        DAT_00491100 = t5;
+        return;
+    }
+    DAT_00491100 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A56E0 (0x002A56E0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00436008;
+
+class Class_002A56E0
+{
+public:
+    Class_002A56E0* sub_002A56E0();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A56E0* Class_002A56E0::sub_002A56E0()
+{
+    int val = DAT_00436008.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A5710 (0x002A5710, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00436078;
+
+class Class_002A5710
+{
+public:
+    Class_002A5710* sub_002A5710();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A5710* Class_002A5710::sub_002A5710()
+{
+    int val = DAT_00436078.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A5740 (0x002A5740, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_004360C0;
+
+class Class_002A5740
+{
+public:
+    Class_002A5740* sub_002A5740();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A5740* Class_002A5740::sub_002A5740()
+{
+    int val = DAT_004360C0.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A5770 (0x002A5770, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00436108;
+
+class Class_002A5770
+{
+public:
+    Class_002A5770* sub_002A5770();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A5770* Class_002A5770::sub_002A5770()
+{
+    int val = DAT_00436108.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A6290 (0x002A6290, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A6290 (Proto 0x002A6290, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA73C[];
+extern "C" char DAT_003BA748[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491130;
+extern "C" int DAT_0049112C;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A6290(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA73C;
+        DAT_00491130 = t1;
+    } else {
+        DAT_00491130 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA748;
+        DAT_0049112C = t5;
+        return;
+    }
+    DAT_0049112C = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A6CE0 (0x002A6CE0, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A6CE0 (Proto 0x002A6CE0, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA854[];
+extern "C" char DAT_003BA860[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491180;
+extern "C" int DAT_00491184;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A6CE0(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA854;
+        DAT_00491180 = t1;
+    } else {
+        DAT_00491180 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA860;
+        DAT_00491184 = t5;
+        return;
+    }
+    DAT_00491184 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A6E60 (0x002A6E60, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00436388;
+
+class Class_002A6E60
+{
+public:
+    Class_002A6E60* sub_002A6E60();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A6E60* Class_002A6E60::sub_002A6E60()
+{
+    int val = DAT_00436388.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A6E90 (0x002A6E90, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_004363C8;
+
+class Class_002A6E90
+{
+public:
+    Class_002A6E90* sub_002A6E90();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A6E90* Class_002A6E90::sub_002A6E90()
+{
+    int val = DAT_004363C8.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A7150 (0x002A7150, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A7150 (Proto 0x002A7150, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA8FC[];
+extern "C" char DAT_003BA908[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_004911B4;
+extern "C" int DAT_004911B0;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A7150(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA8FC;
+        DAT_004911B4 = t1;
+    } else {
+        DAT_004911B4 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA908;
+        DAT_004911B0 = t5;
+        return;
+    }
+    DAT_004911B0 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A7760 (0x002A7760, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A7760 (Proto 0x002A7760, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BA9B8[];
+extern "C" char DAT_003BA9C4[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_004911E0;
+extern "C" int DAT_004911E4;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A7760(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BA9B8;
+        DAT_004911E0 = t1;
+    } else {
+        DAT_004911E0 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BA9C4;
+        DAT_004911E4 = t5;
+        return;
+    }
+    DAT_004911E4 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A7B20 (0x002A7B20, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A7B20 (Proto 0x002A7B20, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BAA54[];
+extern "C" char DAT_003BAA60[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491210;
+extern "C" int DAT_00491214;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A7B20(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BAA54;
+        DAT_00491210 = t1;
+    } else {
+        DAT_00491210 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BAA60;
+        DAT_00491214 = t5;
+        return;
+    }
+    DAT_00491214 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A7EF0 (0x002A7EF0, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A7EF0 (Proto 0x002A7EF0, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BAAF0[];
+extern "C" char DAT_003BAAFC[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491240;
+extern "C" int DAT_00491244;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A7EF0(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BAAF0;
+        DAT_00491240 = t1;
+    } else {
+        DAT_00491240 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BAAFC;
+        DAT_00491244 = t5;
+        return;
+    }
+    DAT_00491244 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A8040 (0x002A8040, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_0043674C;
+
+class Class_002A8040
+{
+public:
+    Class_002A8040* sub_002A8040();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A8040* Class_002A8040::sub_002A8040()
+{
+    int val = DAT_0043674C.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A8070 (0x002A8070, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00077EA0 (Proto 0x00077EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    int sub_002CA6F2();
+};
+
+extern "C" Object DAT_00436790;
+
+class Class_002A8070
+{
+public:
+    Class_002A8070* sub_002A8070();
+    void sub_00290E20(int, int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+Class_002A8070* Class_002A8070::sub_002A8070()
+{
+    int val = DAT_00436790.sub_002CA6F2();
+    sub_00290E20(val, 0);
+    m_Field0C = 28;
+    m_Field10 = 4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A8290 (0x002A8290, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A8290 (Proto 0x002A8290, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BAB9C[];
+extern "C" char DAT_003BABA8[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491274;
+extern "C" int DAT_00491270;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A8290(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BAB9C;
+        DAT_00491274 = t1;
+    } else {
+        DAT_00491274 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BABA8;
+        DAT_00491270 = t5;
+        return;
+    }
+    DAT_00491270 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A8F40 (0x002A8F40, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A8F40 (Proto 0x002A8F40, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BAC64[];
+extern "C" char DAT_003BAC70[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_004912A0;
+extern "C" int DAT_004912A4;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A8F40(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BAC64;
+        DAT_004912A0 = t1;
+    } else {
+        DAT_004912A0 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BAC70;
+        DAT_004912A4 = t5;
+        return;
+    }
+    DAT_004912A4 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A9350 (0x002A9350, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A9350 (Proto 0x002A9350, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BACF4[];
+extern "C" char DAT_003BAD00[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_004912D0;
+extern "C" int DAT_004912D4;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A9350(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BACF4;
+        DAT_004912D0 = t1;
+    } else {
+        DAT_004912D0 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BAD00;
+        DAT_004912D4 = t5;
+        return;
+    }
+    DAT_004912D4 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A98B0 (0x002A98B0, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A98B0 (Proto 0x002A98B0, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BAD90[];
+extern "C" char DAT_003BAD9C[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491304;
+extern "C" int DAT_00491300;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A98B0(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BAD90;
+        DAT_00491304 = t1;
+    } else {
+        DAT_00491304 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BAD9C;
+        DAT_00491300 = t5;
+        return;
+    }
+    DAT_00491300 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A9D60 (0x002A9D60, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002A9D60 (Proto 0x002A9D60, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BAE1C[];
+extern "C" char DAT_003BAE28[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491334;
+extern "C" int DAT_00491330;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002A9D60(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BAE1C;
+        DAT_00491334 = t1;
+    } else {
+        DAT_00491334 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BAE28;
+        DAT_00491330 = t5;
+        return;
+    }
+    DAT_00491330 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AA640 (0x002AA640, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AA640 (Proto 0x002AA640, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BAE98[];
+extern "C" char DAT_003BAEA4[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491364;
+extern "C" int DAT_00491360;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002AA640(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BAE98;
+        DAT_00491364 = t1;
+    } else {
+        DAT_00491364 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BAEA4;
+        DAT_00491360 = t5;
+        return;
+    }
+    DAT_00491360 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AB380 (0x002AB380, 130 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002A0810 (Proto 0x002A0810), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AB380 (Proto 0x002AB380, 130 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00291030();
+    void sub_002926C0(int, int);
+    void sub_0029EE10(int, int);
+};
+
+extern "C" char DAT_003BAFCC[];
+extern "C" char DAT_003BAFD8[];
+extern "C" int DAT_00490C1C;
+extern "C" int DAT_00491390;
+extern "C" int DAT_00491394;
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00291D70(int);
+
+void __cdecl sub_002AB380(int a1, int a2)
+{
+    int r_ebx, t1, t3, t5;
+
+    t1 = sub_00025120(44);
+    r_ebx = a2;
+    if (t1) {
+        ((Object*)t1)->sub_0029EE10(a1, a2);
+        *(int*)t1 = (int)DAT_003BAFCC;
+        DAT_00491390 = t1;
+    } else {
+        DAT_00491390 = 0;
+    }
+    t3 = DAT_00490C1C;
+    r_ebx = ((Object*)r_ebx)->sub_00291030();
+    t5 = sub_00291D70(88);
+    if (t5) {
+        ((Object*)t5)->sub_002926C0(r_ebx, t3);
+        *(int*)t5 = (int)DAT_003BAFD8;
+        DAT_00491394 = t5;
+        return;
+    }
+    DAT_00491394 = 0;
 }
 
 // ============================================================================

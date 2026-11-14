@@ -1,5 +1,77 @@
 [
   {
+    "time": "2026-11-13 21:27:51",
+    "user": "RRutherrfordd (Founder)",
+    "action": "PARTIAL",
+    "symbol": "sub_002A13B0",
+    "va": "Proto 0x002A13B0",
+    "bytes": "10/114 B"
+  },
+  {
+    "time": "2026-11-13 21:17:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "22 look-alike(s) of sub_002A0810",
+    "va": "Proto 0x002A0810",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 21:17:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002A0810",
+    "va": "Proto 0x002A0810",
+    "bytes": "130/130 B"
+  },
+  {
+    "time": "2026-11-13 21:16:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "23 look-alike(s) of sub_00077EA0",
+    "va": "Proto 0x00077EA0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 21:16:23",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00077EA0",
+    "va": "Proto 0x00077EA0",
+    "bytes": "41/41 B"
+  },
+  {
+    "time": "2026-11-13 21:12:29",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "44 look-alike(s) of core::ControllerSystemXBox::vfunc_00",
+    "va": "0x00248810",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 21:12:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "core::ControllerSystemXBox::vfunc_00",
+    "va": "0x00248810",
+    "bytes": "8/8 B"
+  },
+  {
+    "time": "2026-11-13 21:04:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "25 look-alike(s) of audio::SeqEventChannelSendVolumes::vfunc_02",
+    "va": "0x002D8FA0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-13 21:04:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "audio::SeqEventChannelSendVolumes::vfunc_02",
+    "va": "0x002D8FA0",
+    "bytes": "67/67 B"
+  },
+  {
     "time": "2026-11-13 12:17:41",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1925,78 +1997,6 @@
     "action": "VERIFIED",
     "symbol": "1 look-alike(s) of VehicleLocomotion::vfunc_01",
     "va": "0x000B1CB0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:43:13",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000B1C80",
-    "va": "0x000B1C80",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:43:09",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000B1200",
-    "va": "0x000B1200",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:43:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000AE930",
-    "va": "0x000AE930",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:43:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000ABCD0",
-    "va": "0x000ABCD0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:43:00",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000ABA50",
-    "va": "0x000ABA50",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:42:57",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000AB8B0",
-    "va": "0x000AB8B0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:42:53",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000AB460",
-    "va": "0x000AB460",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:42:50",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000AB3C0",
-    "va": "0x000AB3C0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:42:47",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000AB360",
-    "va": "0x000AB360",
     "bytes": "same code, own addresses"
   }
 ]

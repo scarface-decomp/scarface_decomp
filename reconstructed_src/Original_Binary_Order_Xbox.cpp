@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6,408 of 19,534 functions matched (32.80%). NOT COMPLETE YET.
-// The 13,126 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 6,436 of 19,534 functions matched (32.95%). NOT COMPLETE YET.
+// The 13,098 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -186569,7 +186569,32 @@ void __stdcall sub_00248800(int a1)
 {
 }
 
-// [TODO] 0x00248810 core::ControllerSystemXBox::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::ControllerSystemXBox::vfunc_00 (0x00248810, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerSystemXBox::vfunc_00 (0x00248810, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x00248820. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_00248820(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_00248820(); };
+
+class ControllerSystemXBox : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    ControllerSystemXBox();
+    virtual void sub_00248820();          // the real function; the thunk jumps here
+};
+
+ControllerSystemXBox::ControllerSystemXBox() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // ============================================================================
 // [VERIFIED] core::ControllerSystemXBox::vfunc_03 (0x00248820, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -188264,7 +188289,34 @@ int MemoryPool::vfunc_15()
 // [TODO] 0x00251890 core::MemoryPool::vfunc_18 (17 B)
 // [TODO] 0x002518B0 core::MemoryPool::vfunc_19 (14 B)
 // [TODO] 0x002518C0 sub_002518C0 (86 B)
-// [TODO] 0x00251920 core::MemoryPool::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::MemoryPool::vfunc_00 (0x00251920, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::MemoryPool::vfunc_00 (0x00251920, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x00251A40. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_00251A40(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_00251A40(); };
+
+class MemoryPool : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    MemoryPool();
+    virtual void sub_00251A40();          // the real function; the thunk jumps here
+};
+
+MemoryPool::MemoryPool() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x00251930 sub_00251930 (138 B)
 // [TODO] 0x002519C0 core::MemoryPool::vfunc_05 (56 B)
 // [TODO] 0x00251A00 core::MemoryPool::vfunc_06 (54 B)
@@ -201755,7 +201807,34 @@ int MemoryAllocatorMalloc::vfunc_12()
 // [TODO] 0x0028D270 core::ControllerBuffer::vfunc_07 (52 B)
 // [TODO] 0x0028D2B0 core::ControllerBuffer::vfunc_08 (66 B)
 // [TODO] 0x0028D300 core::ControllerBuffer::vfunc_09 (9 B)
-// [TODO] 0x0028D310 core::ControllerBuffer::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::ControllerBuffer::vfunc_00 (0x0028D310, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::ControllerBuffer::vfunc_00 (0x0028D310, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x0028D320. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_0028D320(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_0028D320(); };
+
+class ControllerBuffer : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    ControllerBuffer();
+    virtual void sub_0028D320();          // the real function; the thunk jumps here
+};
+
+ControllerBuffer::ControllerBuffer() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x0028D320 core::ControllerBuffer::vfunc_03 (97 B)
 // [TODO] 0x0028D390 sub_0028D390 (82 B)
 // [TODO] 0x0028D3F0 sub_0028D3F0 (52 B)
@@ -202162,7 +202241,34 @@ MemoryDlAllocator* MemoryDlAllocator::vfunc_03(int a1)
 }
 
 // [TODO] 0x0028EA70 sub_0028EA70 (35 B)
-// [TODO] 0x0028EAA0 core::MemoryDlAllocator::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::MemoryDlAllocator::vfunc_00 (0x0028EAA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::MemoryDlAllocator::vfunc_00 (0x0028EAA0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x0028EA40. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_0028EA40(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_0028EA40(); };
+
+class MemoryDlAllocator : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    MemoryDlAllocator();
+    virtual void sub_0028EA40();          // the real function; the thunk jumps here
+};
+
+MemoryDlAllocator::MemoryDlAllocator() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x0028EAB0 sub_0028EAB0 (215 B)
 // [TODO] 0x0028EB90 core::MemoryDlAllocator::vfunc_05 (209 B)
 // [TODO] 0x0028EC70 core::MemoryDlAllocator::vfunc_04 (139 B)
@@ -202223,7 +202329,34 @@ MemorySmallDlAllocator* MemorySmallDlAllocator::vfunc_03(int a1)
 }
 
 // [TODO] 0x0028FDA0 sub_0028FDA0 (35 B)
-// [TODO] 0x0028FDD0 core::MemorySmallDlAllocator::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::MemorySmallDlAllocator::vfunc_00 (0x0028FDD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::MemorySmallDlAllocator::vfunc_00 (0x0028FDD0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x0028FD70. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_0028FD70(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_0028FD70(); };
+
+class MemorySmallDlAllocator : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    MemorySmallDlAllocator();
+    virtual void sub_0028FD70();          // the real function; the thunk jumps here
+};
+
+MemorySmallDlAllocator::MemorySmallDlAllocator() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x0028FDE0 core::MemoryDlAllocator::vfunc_01 (78 B)
 // [TODO] 0x0028FE30 core::MemorySmallDlAllocator::vfunc_05 (236 B)
 // [TODO] 0x0028FF20 sub_0028FF20 (716 B)
@@ -216188,7 +216321,34 @@ void Class_002AC710::sub_002AC710()
 // [TODO] 0x002AC770 core::Drive::vfunc_15 (5 B)
 // [TODO] 0x002AC780 core::Drive::vfunc_20 (5 B)
 // [TODO] 0x002AC790 core::Drive::vfunc_22 (8 B)
-// [TODO] 0x002AC7A0 core::Drive::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_00 (0x002AC7A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Drive::vfunc_00 (0x002AC7A0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002AC860. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002AC860(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002AC860(); };
+
+class Drive : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    Drive();
+    virtual void sub_002AC860();          // the real function; the thunk jumps here
+};
+
+Drive::Drive() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x002AC7B0 core::Drive::vfunc_02 (8 B)
 // ============================================================================
 // [VERIFIED] core::SafeRefCount::vfunc_02 (0x002AC7C0, 31 B)
@@ -216345,10 +216505,118 @@ void CementLibrary::vfunc_01()
 
 }
 
-// [TODO] 0x002ACEC0 core::CementLibrary::vfunc_00 (8 B)
-// [TODO] 0x002ACED0 core::CementLibrary::vfunc_01 (8 B)
-// [TODO] 0x002ACEE0 core::CementLibrary::vfunc_02 (8 B)
-// [TODO] 0x002ACEF0 core::CementLibrary::vfunc_03 (8 B)
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_00 (0x002ACEC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CementLibrary::vfunc_00 (0x002ACEC0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002ACE90. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002ACE90(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002ACE90(); };
+
+class CementLibrary : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    CementLibrary();
+    virtual void sub_002ACE90();          // the real function; the thunk jumps here
+};
+
+CementLibrary::CementLibrary() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_01 (0x002ACED0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CementLibrary::vfunc_01 (0x002ACED0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002ACEB0. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002ACEB0(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002ACEB0(); };
+
+class CementLibrary : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    CementLibrary();
+    virtual void sub_002ACEB0();          // the real function; the thunk jumps here
+};
+
+CementLibrary::CementLibrary() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_02 (0x002ACEE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CementLibrary::vfunc_02 (0x002ACEE0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x00075710. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_00075710(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_00075710(); };
+
+class CementLibrary : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    CementLibrary();
+    virtual void sub_00075710();          // the real function; the thunk jumps here
+};
+
+CementLibrary::CementLibrary() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_03 (0x002ACEF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CementLibrary::vfunc_03 (0x002ACEF0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002AD290. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002AD290(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002AD290(); };
+
+class CementLibrary : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    CementLibrary();
+    virtual void sub_002AD290();          // the real function; the thunk jumps here
+};
+
+CementLibrary::CementLibrary() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x002ACF00 core::CementLibrary::vfunc_00 (8 B)
 // [TODO] 0x002ACF10 core::CementLibrary::vfunc_02 (8 B)
 // [TODO] 0x002ACF20 core::CementLibrary::vfunc_04 (421 B)
@@ -217472,7 +217740,34 @@ void XboxDrive::vfunc_01()
 // [TODO] 0x002BECA0 sub_002BECA0 (145 B)
 // [TODO] 0x002BED40 sub_002BED40 (186 B)
 // [TODO] 0x002BEE00 sub_002BEE00 (114 B)
-// [TODO] 0x002BEE80 core::XboxDrive::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::XboxDrive::vfunc_00 (0x002BEE80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::XboxDrive::vfunc_00 (0x002BEE80, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002BF0D0. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002BF0D0(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002BF0D0(); };
+
+class XboxDrive : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    XboxDrive();
+    virtual void sub_002BF0D0();          // the real function; the thunk jumps here
+};
+
+XboxDrive::XboxDrive() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x002BEE90 core::XboxDrive::vfunc_02 (8 B)
 // [TODO] 0x002BEEA0 core::XboxDrive::vfunc_22 (28 B)
 // [TODO] 0x002BEEC0 sub_002BEEC0 (526 B)
@@ -217598,7 +217893,34 @@ void XboxSaveDrive::vfunc_01()
 // [TODO] 0x002BFB50 sub_002BFB50 (410 B)
 // [TODO] 0x002BFCF0 core::XboxSaveDrive::vfunc_14 (31 B)
 // [TODO] 0x002BFD10 core::XboxSaveDrive::vfunc_15 (31 B)
-// [TODO] 0x002BFD30 core::XboxSaveDrive::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::XboxSaveDrive::vfunc_00 (0x002BFD30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::XboxSaveDrive::vfunc_00 (0x002BFD30, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002C00D0. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002C00D0(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002C00D0(); };
+
+class XboxSaveDrive : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    XboxSaveDrive();
+    virtual void sub_002C00D0();          // the real function; the thunk jumps here
+};
+
+XboxSaveDrive::XboxSaveDrive() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x002BFD40 core::XboxSaveDrive::vfunc_02 (8 B)
 // [TODO] 0x002BFD50 core::XboxSaveDrive::vfunc_22 (63 B)
 // [TODO] 0x002BFD90 sub_002BFD90 (125 B)
@@ -217801,7 +218123,34 @@ void Class_002C1790::sub_002C1790(bool a1)
 
 // [TODO] 0x002C17B0 sub_002C17B0 (152 B)
 // [TODO] 0x002C1850 sub_002C1850 (62 B)
-// [TODO] 0x002C1890 core::DriveThread::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] core::DriveThread::vfunc_00 (0x002C1890, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveThread::vfunc_00 (0x002C1890, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002C1BE0. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace core {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002C1BE0(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002C1BE0(); };
+
+class DriveThread : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    DriveThread();
+    virtual void sub_002C1BE0();          // the real function; the thunk jumps here
+};
+
+DriveThread::DriveThread() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x002C18A0 core::DriveThread::vfunc_02 (8 B)
 // [TODO] 0x002C1B00 sub_002C1B00 (218 B)
 // ============================================================================
@@ -224671,7 +225020,64 @@ DynBehaviour* DynBehaviour::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x002D8FA0 audio::SeqEventChannelSendVolumes::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0828[];
+extern "C" char DAT_00463EBC[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventChannelSendVolumes;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventChannelSendVolumes* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_00463EBC);
+    }
+
+    Instance(SeqEventChannelSendVolumes* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0828;
+    }
+};
+
+class SeqEventChannelSendVolumes
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventChannelSendVolumes* vfunc_04(int a1);
+};
+
+void SeqEventChannelSendVolumes::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::ChannelSendVolumeFadeBehaviour::vfunc_00 (0x002D8FF0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -224987,7 +225393,66 @@ L_41:
 
 }
 
-// [TODO] 0x002D9680 audio::SeqEventChannelSends::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventChannelSends::vfunc_02 (0x002D9680, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E08DC[];
+extern "C" char DAT_00463F78[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventChannelSends;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventChannelSends* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_00463F78);
+    }
+
+    Instance(SeqEventChannelSends* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E08DC;
+    }
+};
+
+class SeqEventChannelSends
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventChannelSends* vfunc_04(int a1);
+};
+
+void SeqEventChannelSends::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // [TODO] 0x002D96D0 audio::SeqActionChannelSends::vfunc_06 (43 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventType<audio::SeqEventChannelSends>::vfunc_01 (0x002D9700, 27 B)
@@ -225760,7 +226225,66 @@ void __cdecl sub_002D9EF0(void)
     first.sub_002CE560();
 }
 
-// [TODO] 0x002D9F70 audio::SeqEventWait::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventWait::vfunc_02 (0x002D9F70, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0A48[];
+extern "C" char DAT_0046414C[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventWait;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventWait* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_0046414C);
+    }
+
+    Instance(SeqEventWait* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0A48;
+    }
+};
+
+class SeqEventWait
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventWait* vfunc_04(int a1);
+};
+
+void SeqEventWait::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // [TODO] 0x002D9FC0 audio::SeqActionWaitBeat::vfunc_03 (15 B)
 // [TODO] 0x002D9FD0 audio::SeqActionWaitBeat::vfunc_04 (15 B)
 // ============================================================================
@@ -226148,7 +226672,66 @@ SeqEventExpression* SeqEventExpression::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DA350 audio::SeqEventExpression::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventExpression::vfunc_02 (0x002DA350, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0B18[];
+extern "C" char DAT_00464294[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventExpression;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventExpression* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_00464294);
+    }
+
+    Instance(SeqEventExpression* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0B18;
+    }
+};
+
+class SeqEventExpression
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventExpression* vfunc_04(int a1);
+};
+
+void SeqEventExpression::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // [TODO] 0x002DA3A0 audio::SeqActionExpression::vfunc_06 (68 B)
 // [TODO] 0x002DA3F0 audio::SeqEventType<audio::SeqEventExpression>::vfunc_01 (88 B)
 // ============================================================================
@@ -226342,7 +226925,66 @@ SeqEventStopTrack* SeqEventStopTrack::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DA690 audio::SeqEventStopTrack::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventStopTrack::vfunc_02 (0x002DA690, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0BBC[];
+extern "C" char DAT_00464338[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventStopTrack;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventStopTrack* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_00464338);
+    }
+
+    Instance(SeqEventStopTrack* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0BBC;
+    }
+};
+
+class SeqEventStopTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventStopTrack* vfunc_04(int a1);
+};
+
+void SeqEventStopTrack::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_002DA6E0 (0x002DA6E0, 116 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -226495,7 +227137,66 @@ SeqEventPlayTrack* SeqEventPlayTrack::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DAA60 audio::SeqEventPlayTrack::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventPlayTrack::vfunc_02 (0x002DAA60, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0C18[];
+extern "C" char DAT_004643DC[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventPlayTrack;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventPlayTrack* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_004643DC);
+    }
+
+    Instance(SeqEventPlayTrack* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0C18;
+    }
+};
+
+class SeqEventPlayTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventPlayTrack* vfunc_04(int a1);
+};
+
+void SeqEventPlayTrack::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // [TODO] 0x002DAAB0 audio::SeqActionPlayTrack::vfunc_06 (188 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventType<audio::SeqEventPlayTrack>::vfunc_01 (0x002DAB70, 27 B)
@@ -226677,7 +227378,66 @@ SeqEventChannelVolumes* SeqEventChannelVolumes::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DAD40 audio::SeqEventChannelVolumes::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventChannelVolumes::vfunc_02 (0x002DAD40, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0C88[];
+extern "C" char DAT_004644C0[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventChannelVolumes;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventChannelVolumes* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_004644C0);
+    }
+
+    Instance(SeqEventChannelVolumes* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0C88;
+    }
+};
+
+class SeqEventChannelVolumes
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventChannelVolumes* vfunc_04(int a1);
+};
+
+void SeqEventChannelVolumes::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::ChannelVolumeFadeBehaviour::vfunc_00 (0x002DAD90, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -226963,7 +227723,66 @@ SeqEventVarVolumeRand* SeqEventVarVolumeRand::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DB460 audio::SeqEventVarVolumeRand::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarVolumeRand::vfunc_02 (0x002DB460, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0D10[];
+extern "C" char DAT_00464578[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventVarVolumeRand;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventVarVolumeRand* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_00464578);
+    }
+
+    Instance(SeqEventVarVolumeRand* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0D10;
+    }
+};
+
+class SeqEventVarVolumeRand
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventVarVolumeRand* vfunc_04(int a1);
+};
+
+void SeqEventVarVolumeRand::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // [TODO] 0x002DB4B0 audio::SeqActionVarVolumeRand::vfunc_06 (51 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventType<audio::SeqEventVarVolumeRand>::vfunc_01 (0x002DB4F0, 55 B)
@@ -227208,7 +228027,66 @@ SeqEventVarVolume* SeqEventVarVolume::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DB680 audio::SeqEventVarVolume::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarVolume::vfunc_02 (0x002DB680, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0D84[];
+extern "C" char DAT_0046461C[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventVarVolume;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventVarVolume* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_0046461C);
+    }
+
+    Instance(SeqEventVarVolume* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0D84;
+    }
+};
+
+class SeqEventVarVolume
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventVarVolume* vfunc_04(int a1);
+};
+
+void SeqEventVarVolume::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqActionVarVolume::vfunc_06 (0x002DB6D0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -227504,7 +228382,66 @@ SeqEventVarTempo* SeqEventVarTempo::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DB8B0 audio::SeqEventVarTempo::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarTempo::vfunc_02 (0x002DB8B0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0DF4[];
+extern "C" char DAT_004646C0[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventVarTempo;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventVarTempo* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_004646C0);
+    }
+
+    Instance(SeqEventVarTempo* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0DF4;
+    }
+};
+
+class SeqEventVarTempo
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventVarTempo* vfunc_04(int a1);
+};
+
+void SeqEventVarTempo::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // [TODO] 0x002DB900 audio::SeqActionVarTempo::vfunc_06 (41 B)
 // [TODO] 0x002DB930 audio::SeqEventType<audio::SeqEventVarTempo>::vfunc_01 (59 B)
 // ============================================================================
@@ -227724,7 +228661,66 @@ SeqEventVarPosDist* SeqEventVarPosDist::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DBAC0 audio::SeqEventVarPosDist::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarPosDist::vfunc_02 (0x002DBAC0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0E64[];
+extern "C" char DAT_00464764[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventVarPosDist;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventVarPosDist* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_00464764);
+    }
+
+    Instance(SeqEventVarPosDist* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0E64;
+    }
+};
+
+class SeqEventVarPosDist
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventVarPosDist* vfunc_04(int a1);
+};
+
+void SeqEventVarPosDist::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // [TODO] 0x002DBB10 audio::SeqActionVarPosDist::vfunc_06 (29 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventType<audio::SeqEventVarPosDist>::vfunc_01 (0x002DBB30, 55 B)
@@ -227944,7 +228940,66 @@ SeqEventVarPitchRand* SeqEventVarPitchRand::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DBCB0 audio::SeqEventVarPitchRand::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarPitchRand::vfunc_02 (0x002DBCB0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0ED4[];
+extern "C" char DAT_00464818[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventVarPitchRand;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventVarPitchRand* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_00464818);
+    }
+
+    Instance(SeqEventVarPitchRand* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0ED4;
+    }
+};
+
+class SeqEventVarPitchRand
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventVarPitchRand* vfunc_04(int a1);
+};
+
+void SeqEventVarPitchRand::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // [TODO] 0x002DBD00 audio::SeqActionVarPitchRand::vfunc_06 (51 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventType<audio::SeqEventVarPitchRand>::vfunc_01 (0x002DBD40, 55 B)
@@ -228162,7 +229217,66 @@ SeqEventVarPitch* SeqEventVarPitch::vfunc_04(int a1)
 
 }
 
-// [TODO] 0x002DBEB0 audio::SeqEventVarPitch::vfunc_02 (67 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventVarPitch::vfunc_02 (0x002DBEB0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_02 (0x002D8FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+#include <stddef.h>
+
+struct Object
+{
+    void sub_002E21B0(int);
+};
+
+extern "C" char DAT_003E0F4C[];
+extern "C" char DAT_004648BC[];
+extern "C" int __cdecl sub_002CF960(int);
+
+namespace audio {
+
+class SeqEventVarPitch;
+
+struct Instance
+{
+    void* m_vtable;
+    SeqEventVarPitch* m_parent;
+    int m_unk8;
+    int m_unkC;
+    bool m_unk10;
+
+    void* operator new(size_t)
+    {
+        return (void*)sub_002CF960((int)DAT_004648BC);
+    }
+
+    Instance(SeqEventVarPitch* parent)
+    {
+        m_unkC = 0;
+        m_unk10 = false;
+        m_parent = parent;
+        m_vtable = DAT_003E0F4C;
+    }
+};
+
+class SeqEventVarPitch
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    virtual int vfunc_03();
+    virtual SeqEventVarPitch* vfunc_04(int a1);
+};
+
+void SeqEventVarPitch::vfunc_02(int a1)
+{
+    ((Object*)a1)->sub_002E21B0((int)new Instance(this));
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqActionVarPitch::vfunc_06 (0x002DBF00, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -230282,7 +231396,34 @@ void Class_002E2870::sub_002E2870()
 // [TODO] 0x002E2D20 movie::PlayerBink::vfunc_08 (35 B)
 // [TODO] 0x002E2D50 movie::PlayerBink::vfunc_09 (45 B)
 // [TODO] 0x002E2D80 movie::PlayerBink::vfunc_10 (45 B)
-// [TODO] 0x002E2F40 movie::PlayerBink::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_00 (0x002E2F40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// movie::PlayerBink::vfunc_00 (0x002E2F40, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002E2FF0. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace movie {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002E2FF0(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002E2FF0(); };
+
+class PlayerBink : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    PlayerBink();
+    virtual void sub_002E2FF0();          // the real function; the thunk jumps here
+};
+
+PlayerBink::PlayerBink() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x002E2F50 sub_002E2F50 (102 B)
 // ============================================================================
 // [VERIFIED] movie::PlayerBink::vfunc_03 (0x002E2FF0, 36 B)
@@ -230408,7 +231549,34 @@ void RenderStrategyBink::vfunc_04()
 // [TODO] 0x002E3080 movie::RenderStrategyBink::vfunc_05 (133 B)
 // [TODO] 0x002E3110 movie::RenderStrategyBink::vfunc_06 (32 B)
 // [TODO] 0x002E3130 movie::RenderStrategyBink::vfunc_09 (845 B)
-// [TODO] 0x002E3480 movie::RenderStrategyBink::vfunc_00 (8 B)
+// ============================================================================
+// [VERIFIED] movie::RenderStrategyBink::vfunc_00 (0x002E3480, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerSystemXBox::vfunc_00 (0x00248810), which was matched first;
+// its addresses and names were swapped for this function's.
+// movie::RenderStrategyBink::vfunc_00 (0x002E3480, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x002E3530. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+namespace movie {
+class ControllerSystemXBox_Base0 { public: virtual void sub_002E3530(); };
+class ControllerSystemXBox_Base1 { public: virtual void sub_002E3530(); };
+
+class RenderStrategyBink : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    RenderStrategyBink();
+    virtual void sub_002E3530();          // the real function; the thunk jumps here
+};
+
+RenderStrategyBink::RenderStrategyBink() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // ============================================================================
 // [VERIFIED] movie::RenderStrategyBink::vfunc_03 (0x002E3530, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
