@@ -172,6 +172,11 @@ def not_compiled_reason(img: "BinaryImage", start: int, size: int) -> str:
             mn = insn.mnemonic
             if mn in NEVER_COMPILED:
                 return f"'{mn}' at +0x{insn.address - start:X}: the compiler never makes that, so these bytes are not a function"
+            if mn == "ret" and insn.operands and insn.operands[0].imm % 4:
+                # arguments are pushed four bytes at a time, so a function never pops an odd count: these
+                # bytes are the middle of another instruction that happens to read as a return
+                return (f"'ret 0x{insn.operands[0].imm:X}' at +0x{insn.address - start:X} pops a number of bytes that is "
+                        "not a multiple of 4: not a function")
             if mn == "int3" or mn == "ret":
                 if mn == "int3" and prev is not None and prev.mnemonic in _NOT_A_PATH_END:
                     return f"runs into padding after '{prev.mnemonic}' at +0x{prev.address - start:X}: not a function"
