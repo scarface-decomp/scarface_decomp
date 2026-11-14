@@ -195,8 +195,14 @@ def _readable_counts(entries: list, names: Optional[dict] = None) -> dict:
     return {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "ps2": by["ps2"], "total": by["pc"] + by["xb"]}
 
 
+def _tier_of(size: int) -> str:
+    """The size tier's name, as queue_builder.tier gives it (kept here so this file needs no disassembler)."""
+    return ("TIER_1_QUICK" if size < 20 else "TIER_2_SMALL" if size < 40 else
+            "TIER_3_MEDIUM" if size < 80 else "TIER_4_LARGE")
+
+
 def progress_summary(registry: dict, queue: Optional[list], previous: Optional[dict],
-                     names: Optional[dict] = None) -> dict:
+                     names: Optional[dict] = None, picks: bool = True) -> dict:
     """Small summary for the website: verified counts from the registry, work-queue counts from the local
     queue file when there is one (otherwise the last known numbers are kept)."""
     entries = list(registry.get("entries", {}).values())
@@ -226,17 +232,30 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         "queue": (previous or {}).get("queue"),
     }
     if queue is not None:
-        open_tasks = [t for t in queue if t.get("status") != "VERIFIED"]
+        # Open means "not in the registry". The status in a queue file can't be trusted for this: matched
+        # functions are kept in the file too, and their status is only set when the portal loads it.
+        matched = set(registry.get("entries", {}))
+
+        def is_open(t: dict) -> bool:
+            if t.get("status") == "VERIFIED":
+                return False
+            try:
+                return f"{t.get('bin')}:0x{int(t['fva_int']):08X}" not in matched
+            except (KeyError, TypeError, ValueError):
+                return True
+        open_tasks = [t for t in queue if is_open(t)]
         q = defaultdict(int)
         tiers = defaultdict(int)
         for t in open_tasks:
             q["ps2" if ps2_overlay.is_ps2(t.get("bin")) else t.get("bin", "?")] += 1
             if t.get("bin") in ("pc", "xb"):
-                tiers[t.get("tier", "?")] += 1
+                tiers[t.get("tier") or _tier_of(int(t.get("size", 0)))] += 1
         out["queue"] = {"pc": q["pc"], "xb": q["xb"], "proto": q["proto"], "ps2": q["ps2"], "total": q["pc"] + q["xb"],
                         "tiers": dict(sorted(tiers.items()))}
     import good_first
-    out["good_first"] = good_first.for_site(queue, registry, (previous or {}).get("good_first"))
+    # picks=False: `queue` is only a list of functions to count (from the address-order files), not the real
+    # queue the picks for newcomers are ranked from
+    out["good_first"] = good_first.for_site(queue if picks else None, registry, (previous or {}).get("good_first"))
     return out
 
 
@@ -415,12 +434,20 @@ def write_progress(registry: dict, reports_dir: Path) -> bool:
             queue = json.loads(qpath.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             queue = None
+    counted = queue
+    if counted is None:
+        # No queue on this computer: count the functions still open from the address-order lists, which name
+        # every function of every build. (The picks for newcomers still need the real queue.)
+        listed = [t for fns in known_from_files(reports_dir.parent / "reconstructed_src").values() for t in fns.values()]
+        counted = listed or None
     names = None
     try:
         names = json.loads((reports_dir / "names.json").read_text(encoding="utf-8")).get("names")
     except (OSError, ValueError, AttributeError):
         pass
-    text = json.dumps(progress_summary(registry, queue, previous, names if isinstance(names, dict) else None), indent=2) + "\n"
+    summary = progress_summary(registry, counted, previous, names if isinstance(names, dict) else None,
+                               picks=queue is not None)
+    text = json.dumps(summary, indent=2) + "\n"
     if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
         return False
     reports_dir.mkdir(parents=True, exist_ok=True)
