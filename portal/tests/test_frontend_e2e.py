@@ -1636,3 +1636,15 @@ def test_ai_replies_that_are_only_part_of_a_file(page):
     assert got["whole"] == "class Car { public: void Honk(); int m_horn; };\nvoid Car::Honk() { m_horn = 1; }"
     assert got["one"] == "void Car::Honk() { m_horn = 1; }"
     assert got["frag"] == [True, False, True, False, False]
+
+
+def test_wrong_reference_is_only_reported_when_the_rest_lines_up(page):
+    got = page.evaluate("""() => [
+      onlyReferencesDiffer({matched_bytes: 37, total_bytes: 41, reloc_mismatch: ['+0x6: ...']}),
+      onlyReferencesDiffer({matched_bytes: 29, total_bytes: 41, reloc_mismatch: ['+0x6: ...']}),
+      onlyReferencesDiffer({matched_bytes: 10, total_bytes: 114, reloc_mismatch: ['a', 'b']}),
+      onlyReferencesDiffer({matched_bytes: 41, total_bytes: 41, reloc_mismatch: []}),
+      buildDiffFeedback({matched_bytes: 29, total_bytes: 41, reloc_mismatch: ['+0x6: named for 0x003FD9D8'], diff_details: []}, 'Your code').includes('Wrong references'),
+      buildDiffFeedback({matched_bytes: 37, total_bytes: 41, reloc_mismatch: ['+0x6: named for 0x003FD9D8'], diff_details: []}, 'Your code').includes('Wrong references'),
+    ]""")
+    assert got == [True, False, False, False, False, True]
