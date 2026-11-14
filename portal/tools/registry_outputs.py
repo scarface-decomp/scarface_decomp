@@ -182,16 +182,21 @@ def update_readme(readme: Path, registry: dict) -> bool:
 SIZE_BUCKETS = [("1-9 B", 1, 10), ("10-19 B", 10, 20), ("20-39 B", 20, 40), ("40-79 B", 40, 80), ("80+ B", 80, 1 << 30)]
 
 
-def _readable_counts(entries: list) -> dict:
+def _readable_counts(entries: list, names: Optional[dict] = None) -> dict:
+    """names: reports/names.json's names. A function named there doesn't have its own address name held against it."""
     import readability
+    names = names or {}
     by = defaultdict(int)
     for e in entries:
-        if readability.is_readable(e.get("code", "")):
+        key = f"{e.get('bin')}:{e.get('va')}"
+        own = readability.own_stand_ins(e.get("symbol", ""), e.get("va")) if key in names else []
+        if readability.is_readable(e.get("code", ""), own):
             by["ps2" if ps2_overlay.is_ps2(e["bin"]) else e["bin"]] += 1
     return {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "ps2": by["ps2"], "total": by["pc"] + by["xb"]}
 
 
-def progress_summary(registry: dict, queue: Optional[list], previous: Optional[dict]) -> dict:
+def progress_summary(registry: dict, queue: Optional[list], previous: Optional[dict],
+                     names: Optional[dict] = None) -> dict:
     """Small summary for the website: verified counts from the registry, work-queue counts from the local
     queue file when there is one (otherwise the last known numbers are kept)."""
     entries = list(registry.get("entries", {}).values())
@@ -213,7 +218,7 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
                      "bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] in ("pc", "xb")),
                      "ps2_bytes": sum(int(e.get("size", 0)) for e in entries if ps2_overlay.is_ps2(e["bin"]))},
         # of the matched: the ones with no stand-in names or raw address work left (tools/readability.py)
-        "readable": _readable_counts(entries),
+        "readable": _readable_counts(entries, names),
         "size_buckets": {name: sum(1 for e in entries if e["bin"] in ("pc", "xb") and lo <= int(e.get("size", 0)) < hi)
                          for name, lo, hi in SIZE_BUCKETS},
         "contributors": dict(sorted(contributors.items(), key=lambda kv: (-kv[1], kv[0].lower()))),
@@ -410,7 +415,12 @@ def write_progress(registry: dict, reports_dir: Path) -> bool:
             queue = json.loads(qpath.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             queue = None
-    text = json.dumps(progress_summary(registry, queue, previous), indent=2) + "\n"
+    names = None
+    try:
+        names = json.loads((reports_dir / "names.json").read_text(encoding="utf-8")).get("names")
+    except (OSError, ValueError, AttributeError):
+        pass
+    text = json.dumps(progress_summary(registry, queue, previous, names if isinstance(names, dict) else None), indent=2) + "\n"
     if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
         return False
     reports_dir.mkdir(parents=True, exist_ok=True)

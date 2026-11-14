@@ -13,10 +13,10 @@
   },
   "readable": {
     "pc": 0,
-    "xb": 0,
+    "xb": 2,
     "proto": 0,
     "ps2": 0,
-    "total": 0
+    "total": 2
   },
   "size_buckets": {
     "1-9 B": 1515,

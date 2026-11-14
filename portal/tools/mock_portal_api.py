@@ -616,6 +616,16 @@ class Handler(BaseHTTPRequestHandler):
                 AUDIT.append({"action": "CHECKPOINT", "symbol": t["symbol"], "user": user, "va": t["va"],
                               "bytes": f"{t['best_matched_bytes']}/{t['size']} B", "time": time.strftime("%H:%M:%S")})
                 return self._json({"ok": True, "task": public_task(t), "sources": SOURCES})
+        if u.path == "/api/name":
+            with LOCK:
+                user, err = auth(body)
+                if err:
+                    return self._json({"ok": False, "error": err})
+                t = TASKS.get(body.get("id"))
+                if not t or not str(body.get("name") or "").strip() or len(str(body.get("why") or "")) < 10:
+                    return self._json({"ok": False, "error": "say in a sentence what shows it ('why')"}, 400)
+                t["known_name"] = {"name": body["name"], "by": user, "why": body["why"]}
+                return self._json({"ok": True, "task": public_task(t)})
         if u.path == "/api/easy-pass":
             with LOCK:
                 user, err = auth(body)

@@ -1,5 +1,6 @@
 """Small parts of portal/decomp_portal_server.py that need no compiler or game files."""
 import importlib
+import json
 import io
 import sys
 
@@ -437,3 +438,49 @@ def test_easy_pass_tries_each_starting_point_once(S, monkeypatch):
     monkeypatch.setattr(S, "ALL_TASKS", [big, held, done, t])
     assert [x["id"] for x in S.easy_targets("Alice", {})] == ["xb_00011000", "xb_4"]       # smallest first
     assert [x["id"] for x in S.easy_targets("Bob", {"xb:0x00011000": S.EASY_VERSION})] == ["xb_2", "xb_4"]
+
+
+def test_better_names_travel_in_submissions(S, monkeypatch, tmp_path):
+    """A function already on GitHub whose text was improved here, and a name given here, go into the file;
+    a maintainer's import compiles the text again and keeps it on the same terms as a revision made there."""
+    t = {"id": "xb_00011000", "bin": "xb", "fva_int": 0x11000, "va": "0x00011000", "symbol": "sub_00011000",
+         "status": "VERIFIED", "size": 6, "flags": "/O2", "lookalike_group": ""}
+    old = "void sub_00011000(int a1) { m_Field08 = a1; }"
+    new = "void sub_00011000(int ammo) { m_ammo = ammo; }"
+    reg = {"entries": {"xb:0x00011000": {"bin": "xb", "va": "0x00011000", "size": 6, "symbol": "sub_00011000", "code": new,
+                                           "verified_by": "Bo", "revised_by": "Cy", "source": "portal"},
+                       "xb:0x00012000": {"bin": "xb", "va": "0x00012000", "size": 6, "symbol": "sub_00012000", "code": "int same();",
+                                           "verified_by": "Bo", "revised_by": "Cy", "source": "portal"}}}
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    (reports / "names.json").write_text(json.dumps({"schema": "scarface_names_v1", "names": {}}), encoding="utf-8")
+    monkeypatch.setattr(S, "REPORTS_DIR", reports)
+    monkeypatch.setattr(S, "NAMES_ADDED_JSON", tmp_path / "names_added.json")
+    monkeypatch.setattr(S, "_NAMES_CACHE", [None, {}])
+    monkeypatch.setattr(S, "_KNOWN_NAMES", {})
+    monkeypatch.setattr(S, "REGISTRY", reg)
+    monkeypatch.setattr(S, "published_keys", lambda base=None: frozenset(reg["entries"]))
+    monkeypatch.setattr(S, "_PUBLISHED", {"what": {}, "names": {}, "code": {"xb:0x00011000": S._text_mark(old),
+                                                                          "xb:0x00012000": S._text_mark("int same();")}})
+    assert S.add_name(t, "Weapon::SetAmmo", "It stores its argument in the ammo count.", "Cy") == ""
+    bundle = S.make_submission("Cy")
+    assert bundle["entries"] == {} and list(bundle["revisions"]) == ["xb:0x00011000"] and bundle["count"] == 2
+    assert bundle["revisions"]["xb:0x00011000"]["code"] == new and bundle["names"]["xb:0x00011000"]["name"] == "Weapon::SetAmmo"
+    assert S.pending_count() == 2
+
+    # the maintainer's side: it has the old text and no name
+    reg["entries"]["xb:0x00011000"].update(code=old, revised_by="")
+    (reports / "names.json").write_text(json.dumps({"schema": "scarface_names_v1", "names": {}}), encoding="utf-8")
+    monkeypatch.setattr(S, "_NAMES_CACHE", [None, {}])
+    monkeypatch.setattr(S, "ALL_TASKS", [t])
+    monkeypatch.setattr(S, "save_registry", lambda: None)
+    monkeypatch.setattr(S, "append_audit", lambda e: None)
+    monkeypatch.setattr(S, "run_verify", lambda task, code: {"ok": True, "verified": "m_ammo" in code, "reloc_unverified": 0})
+    worse = dict(bundle, revisions={"xb:0x00011000": {"code": "void broken() {}", "revised_by": "Cy"}})
+    st = S.import_submission(worse, "Maint")
+    assert st["revised"] == 0 and reg["entries"]["xb:0x00011000"]["code"] == old           # it no longer matches: not kept
+    st = S.import_submission(bundle, "Maint")
+    assert (st["revised"], st["named"], st["error"]) == (1, 1, "")
+    assert reg["entries"]["xb:0x00011000"]["code"] == new and reg["entries"]["xb:0x00011000"]["revised_by"] == "Cy"
+    assert S.community_names()["xb:0x00011000"] == {"name": "Weapon::SetAmmo", "by": "Cy", "why": "It stores its argument in the ammo count."}
+    assert not (tmp_path / "names_added.json").read_text(encoding="utf-8").count("xb:0x00011000") > 1

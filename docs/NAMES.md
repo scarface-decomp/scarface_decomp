@@ -104,3 +104,17 @@ In the portal, a matched function shows how many things are left to name. **Ask 
 sends the matched code to your own AI with the names known for what it calls; a version is kept only if
 it still compiles to the same bytes and leaves fewer things to name. Read the names before you submit
 them: the bytes are proven, the names are a person's (or an AI's) judgement.
+
+**Naming the function itself.** Its code has to keep the address name (`sub_0011A060`), because that is how
+the portal finds it in the compiled object. Its real name is kept beside it: on a matched function press
+**Name this function**, give the name and one sentence on what shows it, and it goes into
+`reports/names.json` under your handle. From then on the address name isn't counted as "left to name",
+and other code can call the function by its name. The names pass asks the AI for this name too, and
+records it only with a reason.
+
+**After every AI match.** With *Name things after a match* ticked (it is by default), Auto-Decompile and
+Batch Run ask once more, for names only, as soon as a function matches. **Name the matched ones** does the
+same for everything matched earlier, the nearest to finished first.
+
+Improved text and new names are sent with **Submit your work**, like matches. A maintainer's import
+compiles the text again and keeps it only if it is still exact.
