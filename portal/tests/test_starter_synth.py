@@ -136,3 +136,31 @@ def test_the_scratch_target_uses_the_names_the_starter_compiles_to():
     got = {o: mine.symbols[si].name for o, si, _t in fn.relocs}
     want = {o: tobj.symbols[si].name for o, si, _t in target.relocs}
     assert got == want and fn.code == target.code
+
+
+def test_adjustor_thunk_starter_declares_the_class_instead_of_a_body():
+    import starter_synth as SS
+    target = bytes.fromhex("83E904E908000000")                        # sub ecx, 4; jmp +8
+    assert SS.adjustor_thunk(target, 0x248810) == (4, 0x248820)
+    assert SS.adjustor_thunk(bytes.fromhex("81E900010000E900000000"), 0x1000) == (0x100, 0x100B)
+    assert SS.adjustor_thunk(bytes.fromhex("83E904C390909090"), 0x1000) is None      # not a jump
+    assert SS.adjustor_thunk(bytes.fromhex("83E903E908000000"), 0x1000) is None      # not a whole number of words
+    assert SS.adjustor_thunk(target, None) is None
+    code = DS.synthesize_cpp("core::ControllerSystemXBox::vfunc_00", "0x00248810", target, [])
+    assert "An adjustor thunk" in code and "namespace core {" in code and "__asm" not in code
+    assert "class ControllerSystemXBox : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1" in code
+    assert code.count("virtual void sub_00248820();") == 3 and "ControllerSystemXBox::ControllerSystemXBox() {}" in code
+    wide = DS.synthesize_cpp("sub_00001000", "0x00001000", bytes.fromhex("83E90CE900000000"), [])
+    assert "class Class_00001000_Base0 { public: virtual void sub_00001008(); char m_pad04[0x8]; };" in wide and "namespace" not in wide
+    tmpl = DS.synthesize_cpp("core::Rep<a::B>::vfunc_01", "0x00001000", target, [])
+    assert "class Class_00001000 :" in tmpl and "namespace" not in tmpl
+
+
+@needs_compiler
+def test_adjustor_thunk_starter_compiles_to_the_thunk():
+    target = bytes.fromhex("83E904E908000000")
+    code = DS.synthesize_cpp("core::ControllerSystemXBox::vfunc_00", "0x00248810", target, [])
+    cr = MV.compile_cpp(code, FLAGS)
+    assert cr.ok, cr.error
+    fn, why = MV.select_function(MV.CoffObject(cr.obj).functions(), "vfunc_00@ControllerSystemXBox@core@@")
+    assert fn is not None and fn.code[:4] == target[:4] and len(fn.code) == 8 and len(fn.relocs) == 1, why

@@ -2082,9 +2082,64 @@ class Renderer:
         return "int", False
 
 
+def adjustor_thunk(target: bytes, va: Optional[int]):
+    """(how far `this` moves back, where it jumps) when these bytes are `sub ecx, N; jmp method`, else None."""
+    if va is None:
+        return None
+    if len(target) == 8 and target[:2] == b"\x83\xE9" and target[3] == 0xE9 and 4 <= target[2] < 0x80:
+        back, at = target[2], 4
+    elif len(target) == 11 and target[:2] == b"\x81\xE9" and target[6] == 0xE9:
+        back, at = int.from_bytes(target[2:6], "little"), 7
+    else:
+        return None
+    if back % 4 or not 4 <= back <= 0x10000:
+        return None
+    return back, (va + len(target) + int.from_bytes(target[at:at + 4], "little", signed=True)) & 0xFFFFFFFF
+
+
+def render_thunk(symbol: str, va_label: str, va: int, n: int, back: int, dest: int) -> str:
+    """The class shape that makes the compiler write this thunk. A thunk has no source of its own: it
+    appears when a class has two bases that both declare a virtual function and the class overrides it."""
+    parts = [p for p in re.sub(r"[^A-Za-z0-9_:]", "_", symbol).split("::") if p]
+    plain = "<" not in symbol and len(parts) >= 2 and re.match(r"[A-Za-z_]", parts[-2])
+    cls = parts[-2] if plain else f"Class_{va:08X}"
+    spaces = parts[:-2] if plain else []
+    method = f"sub_{dest:08X}"
+    pad = f" char m_pad04[0x{back - 4:X}];" if back > 4 else ""
+    lines = [
+        f"// {symbol} ({va_label}, {n} bytes)",
+        "// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base",
+        "// classes that both declare the same virtual function. Called through the second base's table, it",
+        f"// moves `this` back {back} bytes to the start of the object and jumps to the real function at",
+        f"// 0x{dest:08X}. So it is matched by declaring the class that way, not by writing a body.",
+        "// The two bases and their names are guesses; the first base is the part of the object in front",
+        f"// of the second base ({back} bytes).",
+        "",
+    ]
+    lines += [f"namespace {ns} {{" for ns in spaces]
+    lines += [
+        f"class {cls}_Base0 {{ public: virtual void {method}();{pad} }};",
+        f"class {cls}_Base1 {{ public: virtual void {method}(); }};",
+        "",
+        f"class {cls} : public {cls}_Base0, public {cls}_Base1",
+        "{",
+        "public:",
+        f"    {cls}();",
+        f"    virtual void {method}();          // the real function; the thunk jumps here",
+        "};",
+        "",
+        f"{cls}::{cls}() {{}}                  // building one is what makes the compiler write its tables and the thunk",
+    ]
+    lines += ["}" for _ in spaces]
+    return "\n".join(lines) + "\n"
+
+
 def synthesize(symbol: str, va_label: str, target: bytes, disasm: Sequence[str], relocs=None) -> str:
     m = re.search(r"0x([0-9A-Fa-f]+)", va_label or "")
     va = int(m.group(1), 16) if m else None
+    thunk = adjustor_thunk(target, va)
+    if thunk:
+        return render_thunk(symbol, va_label, va, len(target), *thunk)
     insns = parse_disasm(disasm)
     attach_relocs(insns, target, va, relocs)
     lf = Lifter(symbol, va, target, insns)

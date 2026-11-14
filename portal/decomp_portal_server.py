@@ -1430,7 +1430,7 @@ def catch_up_lookalikes() -> int:
 # background, and records the ones that match exactly with every address checked.
 
 EASY_TOOL = "the portal's starter code (no AI)"
-EASY_VERSION = 1                                   # raise when the starter code gets better: tried again
+EASY_VERSION = 2                                   # raise when the starter code gets better: tried again
 EASY_MAX = int(os.environ.get("SCARFACE_EASY_MAX", "0"))    # at most this many a run (0: all of them)
 EASY_JSON = PRIVATE_DIR / "easy_pass.json"         # which functions this computer already tried (gitignored)
 EASY: dict = {"running": False, "stop": False, "total": 0, "tried": 0, "matched": 0, "by": "", "last": ""}

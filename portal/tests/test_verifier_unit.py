@@ -121,3 +121,21 @@ def test_names_are_read_off_compiled_symbols_only_when_that_takes_no_guessing():
     assert q("?Get@?$List@H@@QAEHXZ") is None             # a template
     assert q("?Fire@Weapon@1@QAEXXZ") is None             # a back-reference in the scope
     assert q("__imp__Sleep@4") is None and q("sub_00011000") is None
+
+
+def test_an_adjustor_thunk_is_found_without_its_name():
+    """sub ecx, N; jmp method: written by the compiler and named after the method it jumps to, so the
+    target's own name (its slot in the second base's table) never appears in the object."""
+    assert MV.is_adjustor_thunk("?sub_00248820@ControllerSystemXBox@core@@W3AEXXZ")
+    assert MV.is_adjustor_thunk("?Tick@Car@@WBA@AEXH@Z")                      # a bigger step back
+    assert not MV.is_adjustor_thunk("?sub_00248820@ControllerSystemXBox@core@@UAEXXZ")
+    assert not MV.is_adjustor_thunk("??0ControllerSystemXBox@core@@QAE@XZ")
+    funcs = [_fn("??0Base0@core@@QAE@XZ"), _fn("??0ControllerSystemXBox@core@@QAE@XZ"),
+             _fn("?sub_00248820@ControllerSystemXBox@core@@W3AEXXZ")]
+    got, why = MV.select_function(funcs, "vfunc_00@ControllerSystemXBox@core@@")
+    assert got is funcs[2] and why == ""
+    # a function that does carry the name still wins, and two thunks are not guessed between
+    named = funcs + [_fn("?vfunc_00@ControllerSystemXBox@core@@UAEXXZ")]
+    assert MV.select_function(named, "vfunc_00@ControllerSystemXBox@core@@")[0] is named[3]
+    two = funcs + [_fn("?sub_00248900@ControllerSystemXBox@core@@W3AEXXZ")]
+    assert MV.select_function(two, "vfunc_00@ControllerSystemXBox@core@@")[0] is None
