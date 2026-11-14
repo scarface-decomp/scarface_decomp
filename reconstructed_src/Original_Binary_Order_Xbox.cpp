@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6,436 of 19,534 functions matched (32.95%). NOT COMPLETE YET.
-// The 13,098 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 6,453 of 19,534 functions matched (33.03%). NOT COMPLETE YET.
+// The 13,081 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -42159,10 +42159,34 @@ bool __cdecl sub_0008FD50(bool a1)
 
 // [TODO] 0x0008FD60 sub_0008FD60 (11 B)
 // [TODO] 0x0008FD70 sub_0008FD70 (11 B)
-// [TODO] 0x0008FD80 sub_0008FD80 (3 B)
+// ============================================================================
+// [VERIFIED] sub_0008FD80 (0x0008FD80, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+char sub_0008FD80(void)
+{
+    return 2;
+}
+
 // [TODO] 0x0008FD90 sub_0008FD90 (13 B)
-// [TODO] 0x0008FDA0 sub_0008FDA0 (3 B)
-// [TODO] 0x0008FDB0 sub_0008FDB0 (3 B)
+// ============================================================================
+// [VERIFIED] sub_0008FDA0 (0x0008FDA0, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+char __cdecl sub_0008FDA0(void)
+{
+    return 5;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008FDB0 (0x0008FDB0, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+char __cdecl sub_0008FDB0(void)
+{
+    return 15;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0008FDC0 (0x0008FDC0, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -60976,7 +61000,26 @@ L_24:
 // [TODO] 0x000DC5B0 sub_000DC5B0 (56 B)
 // [TODO] 0x000DC5F0 sub_000DC5F0 (11 B)
 // [TODO] 0x000DC600 sub_000DC600 (13 B)
-// [TODO] 0x000DC610 sub_000DC610 (3 B)
+// ============================================================================
+// [VERIFIED] sub_000DC610 (0x000DC610, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_000DC610 (0x000DC610, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000DC610
+{
+public:
+    float sub_000DC610();
+    float m_Field00; // +0x00
+};
+
+float Class_000DC610::sub_000DC610()
+{
+    return m_Field00;
+}
+
 // [TODO] 0x000DC620 sub_000DC620 (57 B)
 // [TODO] 0x000DC660 sub_000DC660 (187 B)
 // [TODO] 0x000DC720 sub_000DC720 (40 B)
@@ -90384,7 +90427,52 @@ void* AITask_PossibleMildInterest::vfunc_00()
     return DAT_00429814;
 }
 
-// [TODO] 0x001284A0 CollisionBehaviourTypeGroup::vfunc_27 (3 B)
+// ============================================================================
+// [VERIFIED] CollisionBehaviourTypeGroup::vfunc_27 (0x001284A0, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// CollisionBehaviourTypeGroup::vfunc_27 (0x001284A0, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class CollisionBehaviourTypeGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual int vfunc_27();
+};
+
+int CollisionBehaviourTypeGroup::vfunc_27()
+{
+    return 0;
+}
+
 // [TODO] 0x001284B0 sub_001284B0 (94 B)
 // ============================================================================
 // [VERIFIED] AITask_ReactToVisibleGun::vfunc_00 (0x00128510, 6 B)
@@ -111669,7 +111757,29 @@ L_2B:
 // [TODO] 0x0017E4F0 sub_0017E4F0 (138 B)
 // [TODO] 0x0017E580 sub_0017E580 (140 B)
 // [TODO] 0x0017E610 sub_0017E610 (204 B)
-// [TODO] 0x0017E6E0 sub_0017E6E0 (4 B)
+// ============================================================================
+// [VERIFIED] sub_0017E6E0 (0x0017E6E0, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006E6420 (PC 0x006E6420), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0017E6E0 (PC 0x0017E6E0, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0017E6E0
+{
+public:
+    void* sub_0017E6E0();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+void* Class_0017E6E0::sub_0017E6E0()
+{
+    return &m_Field14;
+}
+
 // [TODO] 0x0017E6F0 sub_0017E6F0 (4 B)
 // [TODO] 0x0017E700 sub_0017E700 (4 B)
 // [TODO] 0x0017E720 sub_0017E720 (80 B)
@@ -146193,7 +146303,31 @@ CopSpawnObject* CopSpawnObject::vfunc_01(int a1)
 // [TODO] 0x001DCE70 CopSpawnObject::vfunc_38 (4565 B)
 // [TODO] 0x001DE080 sub_001DE080 (12 B)
 // [TODO] 0x001DE090 sub_001DE090 (75 B)
-// [TODO] 0x001DE0E0 GameMemorySegmentCollection::vfunc_02 (4 B)
+// ============================================================================
+// [VERIFIED] GameMemorySegmentCollection::vfunc_02 (0x001DE0E0, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GameMemorySegmentCollection::vfunc_02 (PC 0x006E9820), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameMemorySegmentCollection::vfunc_02 (PC 0x001DE0E0, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class GameMemorySegmentCollection
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02();
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int GameMemorySegmentCollection::vfunc_02()
+{
+    return m_Field0C;
+}
+
 // [TODO] 0x001DE0F0 sub_001DE0F0 (55 B)
 // [TODO] 0x001DE130 sub_001DE130 (116 B)
 // [TODO] 0x001DE1B0 sub_001DE1B0 (15 B)
@@ -147259,7 +147393,59 @@ int Class_001E0B60::sub_001E0B60(int a1)
     return a1;
 }
 
-// [TODO] 0x001E0B70 FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_31 (3 B)
+// ============================================================================
+// [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_31 (0x001E0B70, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_31 (0x001E0B70, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace fight { class EnterExitScriptTrack; }
+
+namespace FightTree { 
+template <class T0> class FightActionController
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31(int a1, int a2);
+};
+}
+
+template <> void FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_31(int a1, int a2)
+{
+}
+
 // [TODO] 0x001E0B80 AddressSpawnObject::vfunc_13 (110 B)
 // [TODO] 0x001E0BF0 AddressSpawnObject::vfunc_39 (92 B)
 // [TODO] 0x001E0C50 AddressSpawnObject::vfunc_40 (175 B)
@@ -173871,7 +174057,26 @@ LOSTriggerVolumeObject* LOSTriggerVolumeObject::vfunc_01(int a1)
     return this;
 }
 
-// [TODO] 0x00213430 FlowClient::vfunc_02 (3 B)
+// ============================================================================
+// [VERIFIED] FlowClient::vfunc_02 (0x00213430, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// FlowClient::vfunc_02 (0x00213430, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class FlowClient
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1, int a2, int a3);
+};
+
+void FlowClient::vfunc_02(int a1, int a2, int a3)
+{
+}
+
 // ============================================================================
 // [VERIFIED] ActiveAirplaneObject::vfunc_10 (0x00213440, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -202289,7 +202494,35 @@ MemoryDlAllocator::MemoryDlAllocator() {}                  // building one is wh
 // [TODO] 0x0028FB50 sub_0028FB50 (60 B)
 // [TODO] 0x0028FB90 sub_0028FB90 (346 B)
 // [TODO] 0x0028FCF0 core::MemoryDlAllocator::vfunc_00 (4 B)
-// [TODO] 0x0028FD00 core::MemoryDlAllocator::vfunc_02 (4 B)
+// ============================================================================
+// [VERIFIED] core::MemoryDlAllocator::vfunc_02 (0x0028FD00, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryDlAllocator::vfunc_02 (PC 0x006E1CF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::MemoryDlAllocator::vfunc_02 (PC 0x0028FD00, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class MemoryDlAllocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02();
+    char m_pad04[0x38];
+    int m_Field3C; // +0x3C
+};
+
+int MemoryDlAllocator::vfunc_02()
+{
+    return m_Field3C;
+}
+
+}
+
 // [TODO] 0x0028FD10 core::MemoryDlAllocator::vfunc_06 (28 B)
 // [TODO] 0x0028FD30 core::MemorySmallDlAllocator::vfunc_10 (61 B)
 // ============================================================================
@@ -203821,7 +204054,48 @@ ImageConverter* ImageConverter::vfunc_00(unsigned int flags)
 // [TODO] 0x00298FD0 pure3d::ImageConverter::vfunc_06 (268 B)
 // [TODO] 0x00299400 sub_00299400 (171 B)
 // [TODO] 0x002994B0 sub_002994B0 (31 B)
-// [TODO] 0x002994D0 pure3d::pddiTexture::vfunc_20 (3 B)
+// ============================================================================
+// [VERIFIED] pure3d::pddiTexture::vfunc_20 (0x002994D0, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::pddiTexture::vfunc_20 (0x002994D0, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class pddiTexture
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20(int a1, int a2, int a3, int a4, int a5, int a6, int a7);
+};
+
+void pddiTexture::vfunc_20(int a1, int a2, int a3, int a4, int a5, int a6, int a7)
+{
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::pddiTexture::vfunc_03 (0x002994E0, 39 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -215511,7 +215785,57 @@ void File::vfunc_01()
 // [TODO] 0x002AB2F0 core::File::vfunc_22 (47 B)
 // [TODO] 0x002AB320 core::File::vfunc_23 (29 B)
 // [TODO] 0x002AB340 core::File::vfunc_25 (24 B)
-// [TODO] 0x002AB360 core::File::vfunc_26 (4 B)
+// ============================================================================
+// [VERIFIED] core::File::vfunc_26 (0x002AB360, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_26 (PC 0x006E5180), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_26 (PC 0x002AB360, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void* vfunc_26();
+};
+
+void* File::vfunc_26()
+{
+    return ((char*)this + 0x1E);
+}
+
+}
+
 // [TODO] 0x002AB370 core::File::vfunc_30 (7 B)
 // [TODO] 0x002AB380 core::File::vfunc_17 (7 B)
 // [TODO] 0x002AB390 core::File::vfunc_31 (13 B)
@@ -216811,7 +217135,45 @@ bool d3dPrimBuffer::vfunc_10(int a1)
 // [TODO] 0x002AD740 pure3d::d3dPrimBuffer::vfunc_12 (5 B)
 // [TODO] 0x002AD750 pure3d::d3dPrimBuffer::vfunc_09 (57 B)
 // [TODO] 0x002AD790 pure3d::d3dPrimBuffer::vfunc_15 (290 B)
-// [TODO] 0x002AD8C0 pure3d::d3dPrimBufferStream::vfunc_15 (3 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_15 (0x002AD8C0, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dPrimBufferStream::vfunc_15 (PC 0x00703DC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPrimBufferStream::vfunc_15 (PC 0x002AD8C0, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15(int a1, int a2, int a3, int a4, int a5);
+};
+
+void d3dPrimBufferStream::vfunc_15(int a1, int a2, int a3, int a4, int a5)
+{
+}
+
+}
+
 // [TODO] 0x002AD8D0 pure3d::d3dPrimBufferStream::vfunc_00 (38 B)
 // [TODO] 0x002AD900 pure3d::d3dPrimBufferStream::vfunc_01 (165 B)
 // ============================================================================
@@ -217671,7 +218033,26 @@ void Class_002B8650::sub_002B8650()
 // [TODO] 0x002BE6A0 sub_002BE6A0 (22 B)
 // [TODO] 0x002BE6C0 sub_002BE6C0 (37 B)
 // [TODO] 0x002BE6F0 sub_002BE6F0 (10 B)
-// [TODO] 0x002BE700 sub_002BE700 (3 B)
+// ============================================================================
+// [VERIFIED] sub_002BE700 (0x002BE700, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_002BE700 (0x002BE700, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_002BE700
+{
+public:
+    int sub_002BE700();
+    int m_Field00; // +0x00
+};
+
+int Class_002BE700::sub_002BE700()
+{
+    return m_Field00;
+}
+
 // [TODO] 0x002BE710 sub_002BE710 (18 B)
 // [TODO] 0x002BEA40 sub_002BEA40 (124 B)
 // [TODO] 0x002BEAC0 sub_002BEAC0 (26 B)
@@ -223245,9 +223626,93 @@ void OmHalStream::vfunc_10()
 
 }
 
-// [TODO] 0x002D5920 AnimationRetargetingAction::vfunc_14 (4 B)
+// ============================================================================
+// [VERIFIED] AnimationRetargetingAction::vfunc_14 (0x002D5920, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AnimationRetargetingAction::vfunc_14 (PC 0x006E7EA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AnimationRetargetingAction::vfunc_14 (PC 0x002D5920, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class AnimationRetargetingAction
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual int vfunc_14();
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+};
+
+int AnimationRetargetingAction::vfunc_14()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x002D5930 fight::ParamFloatConstRange<TimedFightTrack>::vfunc_01 (6 B)
-// [TODO] 0x002D5940 pure3d::d3dContext::vfunc_22 (4 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dContext::vfunc_22 (0x002D5940, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dContext::vfunc_22 (PC 0x006E4260), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dContext::vfunc_22 (PC 0x002D5940, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dContext
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void* vfunc_22();
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void* d3dContext::vfunc_22()
+{
+    return &m_Field0C;
+}
+
+}
+
 // [TODO] 0x002D5950 audio::OmHalStream::vfunc_07 (183 B)
 // [TODO] 0x002D5A10 audio::OmHalStream::vfunc_06 (231 B)
 // ============================================================================
@@ -223529,7 +223994,75 @@ void HalRsdFileStream::vfunc_10()
 
 }
 
-// [TODO] 0x002D6510 FETextObject::vfunc_46 (4 B)
+// ============================================================================
+// [VERIFIED] FETextObject::vfunc_46 (0x002D6510, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as FETextObject::vfunc_46 (PC 0x00700200), which was matched first;
+// its addresses and names were swapped for this function's.
+// FETextObject::vfunc_46 (PC 0x002D6510, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class FETextObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual int vfunc_46();
+    char m_pad04[0x28];
+    int m_Field2C; // +0x2C
+};
+
+int FETextObject::vfunc_46()
+{
+    return m_Field2C;
+}
+
 // [TODO] 0x002D6520 audio::HalRsdFileStream::vfunc_07 (118 B)
 // [TODO] 0x002D65A0 audio::HalRsdFileStream::vfunc_06 (80 B)
 // [TODO] 0x002D65F0 audio::HalRsdFileStream::vfunc_08 (32 B)

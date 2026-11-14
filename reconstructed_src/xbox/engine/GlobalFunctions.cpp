@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (3061 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (3067 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,061 of 12,771 functions matched (23.97%). NOT COMPLETE YET.
-// The 9,710 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3,067 of 12,771 functions matched (24.02%). NOT COMPLETE YET.
+// The 9,704 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -23980,6 +23980,33 @@ bool __cdecl sub_0008FD50(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0008FD80 (0x0008FD80, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+char sub_0008FD80(void)
+{
+    return 2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008FDA0 (0x0008FDA0, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+char __cdecl sub_0008FDA0(void)
+{
+    return 5;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008FDB0 (0x0008FDB0, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+char __cdecl sub_0008FDB0(void)
+{
+    return 15;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0008FDC0 (0x0008FDC0, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -38037,6 +38064,26 @@ int __cdecl sub_000DA730(void)
     }
 L_24:
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000DC610 (0x000DC610, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_000DC610 (0x000DC610, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000DC610
+{
+public:
+    float sub_000DC610();
+    float m_Field00; // +0x00
+};
+
+float Class_000DC610::sub_000DC610()
+{
+    return m_Field00;
 }
 
 // ============================================================================
@@ -57369,6 +57416,29 @@ void Class_0017CAA0::sub_0017CAA0()
 L_2B:
     sub_0017BF60(1);
     sub_0017B640(sub_0002AC90(m_Field04));
+}
+
+// ============================================================================
+// [VERIFIED] sub_0017E6E0 (0x0017E6E0, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006E6420 (PC 0x006E6420), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0017E6E0 (PC 0x0017E6E0, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0017E6E0
+{
+public:
+    void* sub_0017E6E0();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+void* Class_0017E6E0::sub_0017E6E0()
+{
+    return &m_Field14;
 }
 
 // ============================================================================
@@ -82175,6 +82245,26 @@ public:
 void Class_002B8650::sub_002B8650()
 {
     sub_002C6B20();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BE700 (0x002BE700, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_002BE700 (0x002BE700, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_002BE700
+{
+public:
+    int sub_002BE700();
+    int m_Field00; // +0x00
+};
+
+int Class_002BE700::sub_002BE700()
+{
+    return m_Field00;
 }
 
 // ============================================================================
