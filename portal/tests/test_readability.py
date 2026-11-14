@@ -98,3 +98,27 @@ def test_a_recorded_name_counts_for_the_function_itself():
     e = {"bin": "xb", "va": "0x0011A060", "symbol": "sub_0011A060", "code": code, "size": "9"}
     assert RO.progress_summary({"entries": {"k": e}}, None, None)["readable"]["xb"] == 0
     assert RO.progress_summary({"entries": {"k": e}}, None, None, {"xb:0x0011A060": {"name": "SetTotal"}})["readable"]["xb"] == 1
+
+
+def test_open_functions_are_counted_by_the_registry_not_by_a_status_in_the_queue_file(tmp_path):
+    """A queue file keeps matched functions too, without their status. Counting them as open made the website
+    add the matched ones twice (6,901 of 27,951 instead of 6,901 of 21,050)."""
+    import json
+    import registry_outputs as RO
+    reg = {"entries": {"xb:0x00011000": {"bin": "xb", "va": "0x00011000", "size": "6", "symbol": "sub_00011000", "code": "void f() {}"}}}
+    queue = [{"bin": "xb", "fva_int": 0x11000, "size": 6, "status": "UNCLAIMED", "tier": "TIER_1_QUICK"},     # matched, status not set
+             {"bin": "xb", "fva_int": 0x11010, "size": 30, "status": "UNCLAIMED"},
+             {"bin": "pc", "fva_int": 0x401000, "size": 90, "status": "UNCLAIMED", "tier": "TIER_4_LARGE"},
+             {"bin": "pc", "fva_int": 0x401100, "size": 9, "status": "VERIFIED"},
+             {"bin": "proto", "fva_int": 0x12000, "size": 9, "status": "UNCLAIMED"},
+             {"bin": "ps2", "fva_int": 0x100000, "size": 9, "status": "UNCLAIMED"}]
+    q = RO.progress_summary(reg, queue, None, picks=False)["queue"]
+    assert (q["xb"], q["pc"], q["proto"], q["ps2"], q["total"]) == (1, 1, 1, 1, 2)
+    assert q["tiers"] == {"TIER_2_SMALL": 1, "TIER_4_LARGE": 1}
+    # with no queue on this computer, the address-order lists are counted
+    recon, reports = tmp_path / "reconstructed_src", tmp_path / "reports"
+    reports.mkdir()
+    RO.write_outputs(reg, recon, queue=[t for t in queue if t["bin"] != "ps2"])
+    RO.write_progress(reg, reports)
+    got = json.loads((reports / "progress.json").read_text(encoding="utf-8"))
+    assert (got["queue"]["xb"], got["queue"]["pc"], got["queue"]["total"]) == (1, 2, 3) and got["verified"]["total"] == 1

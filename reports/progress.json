@@ -30,16 +30,16 @@
   },
   "unattributed": 0,
   "queue": {
-    "pc": 1516,
-    "xb": 19534,
-    "proto": 17904,
+    "pc": 1067,
+    "xb": 13082,
+    "proto": 14432,
     "ps2": 24297,
-    "total": 21050,
+    "total": 14149,
     "tiers": {
-      "TIER_1_QUICK": 3716,
-      "TIER_2_SMALL": 3681,
-      "TIER_3_MEDIUM": 5056,
-      "TIER_4_LARGE": 8597
+      "TIER_1_QUICK": 1139,
+      "TIER_2_SMALL": 1526,
+      "TIER_3_MEDIUM": 3152,
+      "TIER_4_LARGE": 8332
     }
   },
   "good_first": [
