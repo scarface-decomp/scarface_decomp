@@ -3171,14 +3171,29 @@
     const re = new RegExp(FENCE + '([A-Za-z0-9+#_-]*)[^\\n]*\\n([\\s\\S]*?)(?:' + FENCE + '|$)', 'g');
     let m;
     let first = null;
+    const cpp = [];
     while ((m = re.exec(text)) !== null) {
       const lang = m[1].toLowerCase();
       const body = m[2].trim();
       if (!body) continue;
-      if (lang === 'cpp' || lang === 'c++' || lang === 'cxx' || lang === 'c') return body;
+      if (lang === 'cpp' || lang === 'c++' || lang === 'cxx' || lang === 'c') cpp.push(body);
       if (first === null) first = body;
     }
+    if (cpp.length > 1) {
+      // Several blocks: a whole file plus a snippet repeating part of it (take the whole file), or one file
+      // cut into pieces, declarations in one block and the function in another (put them back together).
+      const whole = cpp.reduce((a, b) => (b.length > a.length ? b : a));
+      const flat = (x) => x.replace(/\s+/g, ' ');
+      return cpp.every((b) => b === whole || flat(whole).indexOf(flat(b)) >= 0) ? whole : cpp.join(NL + NL);
+    }
+    if (cpp.length) return cpp[0];
     return first !== null ? first : text.trim();
+  }
+
+  /** A member function with nothing declared around it can't compile: the AI answered with the function alone. */
+  function isFragment(code, t) {
+    const bare = String(code || '').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    return String(t.symbol).indexOf('::') > 0 && /\w+::~?\w+\s*\(/.test(bare) && !/\b(class|struct)\b/.test(bare);
   }
 
   function buildAiPrompt(t, code, bestScore, history, feedback, run) {
@@ -3700,6 +3715,15 @@
           feedback = 'Attempt ' + attempt + ' was exactly the code of attempt ' + seen.attempt + ', which ' + seen.result +
             '. Change something, or reply GIVE UP: if you can\'t get closer.' + (bestFeedback ? NL + bestFeedback : '');
           updateActivityMonitor(null, 'Try ' + attempt + ': the same code as try ' + seen.attempt + '; not compiled again.');
+          if (++stuck >= STUCK) return giveUpStuck();
+          continue;
+        }
+        if (isFragment(candidate, t)) {
+          tried.set(candidate.trim(), { attempt: attempt, result: 'was only part of a file' });
+          history.push('Attempt ' + attempt + ': only the function, with no class around it; not compiled.');
+          feedback = 'Attempt ' + attempt + ' was only the function. It is compiled alone, as one file, so nothing in it was declared. Reply with the WHOLE file in ONE ' +
+            FENCE + 'cpp block: the class with its members, every extern function and global it uses, then the function. Start from the current C++ above and change only what needs changing.';
+          updateActivityMonitor(null, 'Try ' + attempt + ': the AI sent only the function, not the whole file; asked again without compiling.');
           if (++stuck >= STUCK) return giveUpStuck();
           continue;
         }

@@ -1615,3 +1615,24 @@ def test_names_batch_goes_through_matched_functions(page):
     assert "7 matched functions still have things to name" in asked[0] and "bytes stay fixed" in asked[0]
     assert "2 of 2 functions read better now" in page.inner_text("#verify-status")
     assert len(prompts) == 2 and len(names) == 2 and page.inner_text("#btn-names-batch") == "Name the matched ones"
+
+
+def test_ai_replies_that_are_only_part_of_a_file(page):
+    """An AI that answers with the function alone (or cuts the file into several blocks) is not sent to the compiler as is."""
+    got = page.evaluate("""() => {
+      const F = '`'.repeat(3);
+      const decl = 'class Car { public: void Honk(); int m_horn; };';
+      const fn = 'void Car::Honk() { m_horn = 1; }';
+      const t = {symbol: 'Car::Honk'};
+      return {
+        split: extractCppBlock('First the class:\\n' + F + 'cpp\\n' + decl + '\\n' + F + '\\nthen:\\n' + F + 'cpp\\n' + fn + '\\n' + F),
+        whole: extractCppBlock(F + 'cpp\\n' + decl + '\\n' + fn + '\\n' + F + '\\nThe line that matters:\\n' + F + 'cpp\\nm_horn = 1;\\n' + F),
+        one: extractCppBlock(F + 'cpp\\n' + fn + '\\n' + F),
+        frag: [isFragment(fn, t), isFragment(decl + fn, t), isFragment('// class Car\\n' + fn, t),
+               isFragment('void sub_00011000() {}', {symbol: 'sub_00011000'}), isFragment('struct Car { void Honk(); };' + fn, t)],
+      };
+    }""")
+    assert got["split"].startswith("class Car") and got["split"].endswith("void Car::Honk() { m_horn = 1; }")
+    assert got["whole"] == "class Car { public: void Honk(); int m_horn; };\nvoid Car::Honk() { m_horn = 1; }"
+    assert got["one"] == "void Car::Honk() { m_horn = 1; }"
+    assert got["frag"] == [True, False, True, False, False]
