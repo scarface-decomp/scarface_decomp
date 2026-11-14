@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (1303 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (1306 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1,303 of 11,142 functions matched (11.69%). NOT COMPLETE YET.
-// The 9,839 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 1,306 of 11,142 functions matched (11.72%). NOT COMPLETE YET.
+// The 9,836 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -20666,6 +20666,28 @@ Object* __cdecl sub_000F8650(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000FC320 (0x000FC320, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002BE700 (0x002BE700), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000FC320 (0x000FC320, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000FC320
+{
+public:
+    int sub_000FC320();
+    int m_Field00; // +0x00
+};
+
+int Class_000FC320::sub_000FC320()
+{
+    return m_Field00;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000FC930 (0x000FC930, 114 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -24179,6 +24201,29 @@ extern "C" int DAT_0045DD40;
 void __cdecl sub_0015A970(void)
 {
     DAT_0045DD3C.sub_0008D4E0(DAT_0045DD40);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0015DD70 (0x0015DD70, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006E6420 (PC 0x006E6420), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0015DD70 (PC 0x0015DD70, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0015DD70
+{
+public:
+    void* sub_0015DD70();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+void* Class_0015DD70::sub_0015DD70()
+{
+    return &m_Field14;
 }
 
 // ============================================================================
@@ -32104,6 +32149,28 @@ Class_00224870* Class_00224870::sub_00224870()
     m_Field10 = 0;
     m_Field00 = (int)DAT_003AFA28;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002252E0 (0x002252E0, 3 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DC610 (0x000DC610), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002252E0 (0x002252E0, 3 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_002252E0
+{
+public:
+    float sub_002252E0();
+    float m_Field00; // +0x00
+};
+
+float Class_002252E0::sub_002252E0()
+{
+    return m_Field00;
 }
 
 // ============================================================================

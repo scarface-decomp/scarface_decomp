@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/GameMemorySegmentCollection.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/GameMemorySegmentCollection.cpp (10 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 15 functions matched (60.00%). NOT COMPLETE YET.
-// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 10 of 15 functions matched (66.67%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -325,5 +325,30 @@ GameMemorySegmentCollection* GameMemorySegmentCollection::vfunc_03(int a1)
         sub_002444F0(DAT_0045894C, (int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] GameMemorySegmentCollection::vfunc_02 (0x001DE0E0, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GameMemorySegmentCollection::vfunc_02 (PC 0x006E9820), which was matched first;
+// its addresses and names were swapped for this function's.
+// GameMemorySegmentCollection::vfunc_02 (PC 0x001DE0E0, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class GameMemorySegmentCollection
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02();
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int GameMemorySegmentCollection::vfunc_02()
+{
+    return m_Field0C;
 }
 

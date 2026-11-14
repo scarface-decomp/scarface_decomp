@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (156 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (159 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 156 of 750 functions matched (20.80%). NOT COMPLETE YET.
-// The 594 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 159 of 750 functions matched (21.20%). NOT COMPLETE YET.
+// The 591 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -804,6 +804,48 @@ int __cdecl sub_006E5480(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_006E6110 (0x006E6110, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_006E6110 (PC 0x006E6110, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E6110
+{
+public:
+    void* sub_006E6110();
+    char m_pad00[0x78];
+    int m_Field78; // +0x78
+};
+
+void* Class_006E6110::sub_006E6110()
+{
+    return &m_Field78;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E6360 (0x006E6360, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_006E6360 (PC 0x006E6360, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E6360
+{
+public:
+    bool sub_006E6360();
+    char m_pad00[0x74];
+    bool m_Field74; // +0x74
+};
+
+bool Class_006E6360::sub_006E6360()
+{
+    return m_Field74;
+}
+
+// ============================================================================
 // [VERIFIED] sub_006E6370 (0x006E6370, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -824,6 +866,27 @@ public:
 void Class_006E6370::sub_006E6370()
 {
     ((void (__cdecl*)(void))DAT_00FB0E38)();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E6420 (0x006E6420, 4 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// sub_006E6420 (PC 0x006E6420, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E6420
+{
+public:
+    void* sub_006E6420();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+void* Class_006E6420::sub_006E6420()
+{
+    return &m_Field14;
 }
 
 // ============================================================================
