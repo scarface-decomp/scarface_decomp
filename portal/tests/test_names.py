@@ -130,3 +130,35 @@ def test_names_code_may_call_a_function_by(monkeypatch, repo):
     assert server.names_to_use(t, code) == [{"now": "sub_000111C0", "name": "Weapon::Reload"}]
     assert server.names_to_use(t, "// only says sub_000111C0 in a comment\nvoid f() {}") == []
     assert server.names_to_use(dict(t, fva_int=0x111C0), "void sub_000111C0() {}") == []
+
+
+def test_a_name_given_in_the_portal(monkeypatch, repo, tmp_path):
+    import sys
+    sys.path.insert(0, str(PORTAL))
+    server = importlib.import_module("decomp_portal_server")
+    monkeypatch.setattr(server, "REPORTS_DIR", repo / "reports")
+    monkeypatch.setattr(server, "_NAMES_CACHE", [None, {}])
+    monkeypatch.setattr(server, "_KNOWN_NAMES", {})
+    monkeypatch.setattr(server, "_GRADES", {})
+    monkeypatch.setattr(server, "NAMES_ADDED_JSON", tmp_path / "names_added.json")
+    monkeypatch.setattr(server, "published_keys", lambda: frozenset())
+    monkeypatch.setattr(server, "_PUBLISHED", {"names": {}})
+    monkeypatch.setattr(server, "MAINTAINERS", {"Boss"})
+    t = {"bin": "xb", "fva_int": 0x11190, "symbol": "sub_00011190"}
+    code = "void sub_00011190(int count) { total = count; }"
+    monkeypatch.setattr(server, "REGISTRY", {"entries": {"xb:0x00011190": {"symbol": "sub_00011190", "code": code}}})
+    assert server.readable_grade("xb:0x00011190", code)["left"] == 1
+    assert "isn't a C++ function name" in server.add_name(t, "not a name!", "It sets the running total.", "Alice")
+    assert "what shows it" in server.add_name(t, "Hud::SetTotal", "short", "Alice")
+    assert server.add_name(t, "Hud::SetTotal", "It stores its argument   in the running total.", "Alice") == ""
+    saved = json.loads((repo / "reports" / "names.json").read_text(encoding="utf-8"))["names"]["xb:0x00011190"]
+    assert saved == {"name": "Hud::SetTotal", "by": "Alice", "why": "It stores its argument in the running total."}
+    assert server.readable_grade("xb:0x00011190", code)["left"] == 0            # its own name no longer counts against it
+    assert server.community_name(t)["name"] == "Hud::SetTotal" and server.known_names("xb")["Hud::SetTotal"] == 0x11190
+    assert list(server.pending_names()) == ["xb:0x00011190"]                    # sent with Submit your work
+    assert "already named Hud::SetTotal (by Alice)" in server.add_name(t, "Hud::Other", "It does something else here.", "Bob")
+    assert server.add_name(t, "Hud::SetRunningTotal", "It stores its argument in the running total.", "Boss") == ""   # a maintainer may
+    assert "already the name" in server.add_name({"bin": "xb", "fva_int": 0x111C0, "symbol": "sub_000111C0"},
+                                                 "Hud::SetRunningTotal", "Another function entirely.", "Boss")
+    monkeypatch.setattr(server, "_PUBLISHED", {"names": {"xb:0x00011190": server.community_names()["xb:0x00011190"]}})
+    assert server.pending_names() == {}                                         # on GitHub now

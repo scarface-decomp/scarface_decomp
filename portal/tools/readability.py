@@ -15,7 +15,7 @@ they are the honest way to say "something is here that this function doesn't tou
 from __future__ import annotations
 
 import re
-from typing import Dict, List
+from typing import Dict, Iterable, List
 
 import cpp_policy
 
@@ -32,23 +32,42 @@ RAW_ADDRESS = re.compile(
     r"|\(\s*[A-Za-z_]\w*\s*\*\s*\)\s*\(\s*int\s*\)")                          # (Object*)(int) ...
 
 
-def grade(code: str) -> Dict[str, object]:
+def own_stand_in(symbol: str) -> str:
+    """The stand-in a function's own name is written with in its code: sub_0011A060, vfunc_03."""
+    return (symbol or "").split("::")[-1]
+
+
+def own_stand_ins(symbol: str, va) -> List[str]:
+    """Every way a function's own name may be written in its code: its symbol's last part, and the plain
+    address name it may have been matched under before its class was known."""
+    out = [own_stand_in(symbol)]
+    try:
+        out.append(f"sub_{int(str(va), 16) if isinstance(va, str) else int(va):08X}")
+    except (TypeError, ValueError):
+        pass
+    return out
+
+
+def grade(code: str, named: Iterable[str] = ()) -> Dict[str, object]:
     """{"grade": "readable" | "matched", "stand_ins": [names, as written, most used first],
-    "raw_addresses": how many, "left": how many things in all are left to name or retype}."""
+    "raw_addresses": how many, "left": how many things in all are left to name or retype}.
+    named: stand-ins that have a real name on record (the function's own, once reports/names.json has it).
+    The code has to keep the address name so the portal can find the function; it isn't left to name."""
     text = cpp_policy.strip_cpp_comments(code or "")
+    done = set(named)
     seen: Dict[str, int] = {}
     for m in STAND_INS.finditer(text):
         seen[m.group(0)] = seen.get(m.group(0), 0) + 1
     for m in MADE_UP_LOCALS.finditer(text):
         seen[m.group(1)] = seen.get(m.group(1), 0) + 1
-    names: List[str] = sorted(seen, key=lambda n: (-seen[n], n))
+    names: List[str] = sorted((n for n in seen if n not in done), key=lambda n: (-seen[n], n))
     raw = len(RAW_ADDRESS.findall(text))
     left = len(names) + raw
     return {"grade": "readable" if not left else "matched", "stand_ins": names, "raw_addresses": raw, "left": left}
 
 
-def is_readable(code: str) -> bool:
-    return grade(code)["grade"] == "readable"
+def is_readable(code: str, named: Iterable[str] = ()) -> bool:
+    return grade(code, named)["grade"] == "readable"
 
 
 def advice(code: str, limit: int = 6) -> str:

@@ -901,12 +901,53 @@ def neighbours(t: dict) -> List[dict]:
 
 
 def readable_grade(key: str, code: str) -> dict:
-    """How much of a matched function is left to name (see tools/readability.py), kept until its text changes."""
-    mark = hash(code)
+    """How much of a matched function is left to name (see tools/readability.py), kept until its text or its
+    name changes. A function with a name in reports/names.json doesn't have its own address name held
+    against it: the code has to keep that one so the portal can find the function."""
+    info = community_names().get(key)
+    name = info.get("name") if isinstance(info, dict) else None
+    mark = (hash(code), name)
     got = _GRADES.get(key)
     if got is None or got[0] != mark:
-        got = _GRADES[key] = (mark, READ.grade(code))
+        e = REGISTRY["entries"].get(key) or {}
+        own = READ.own_stand_ins(e.get("symbol", ""), e.get("va") or key.split(":")[-1]) if name else []
+        got = _GRADES[key] = (mark, READ.grade(code, own))
     return got[1]
+
+
+NAME_WHY_MAX = 400
+NAMES_ADDED_JSON = PRIVATE_DIR / "names_added.json"     # names given on this computer, until they are on GitHub
+
+
+def add_name(t: dict, name: str, why: str, user: str, mine: bool = True) -> str:
+    """Record a name someone worked out for a function in reports/names.json. Returns "" or what is wrong.
+    A name already there is changed only by whoever gave it or by a maintainer."""
+    name, why = str(name or "").strip(), " ".join(str(why or "").split())[:NAME_WHY_MAX]
+    key = NAMES.key_for(t)
+    path = REPORTS_DIR / "names.json"
+    data = NAMES.load(path)
+    names = data.setdefault("names", {})
+    data.setdefault("schema", NAMES.SCHEMA)
+    had = names.get(key)
+    if isinstance(had, dict) and had.get("name") == name and had.get("why") == why:
+        return ""
+    if isinstance(had, dict) and had.get("by") not in (user, None) and user not in MAINTAINERS:
+        return (f"This function is already named {had.get('name')} (by {had.get('by')}). If that is wrong, say so "
+                "on Discord with what shows it.")
+    names[key] = {"name": name, "by": user, "why": why}
+    wrong = [p for p in NAMES.problems(data) if key in p]
+    if wrong:
+        return wrong[0].split(": ", 1)[-1]
+    write_json(path, data)
+    _NAMES_CACHE[0] = None
+    if mine:
+        try:
+            added = read_json(NAMES_ADDED_JSON, []) if NAMES_ADDED_JSON.exists() else []
+            if key not in added:
+                write_json(NAMES_ADDED_JSON, added + [key])
+        except OSError:
+            pass
+    return ""
 
 
 def live_task(t: dict) -> dict:
@@ -926,7 +967,7 @@ def live_task(t: dict) -> dict:
         out["neighbours"] = near
     if entry and entry.get("what"):
         out["what"], out["what_by"] = entry["what"], entry.get("what_by") or entry.get("verified_by", "")
-    named = community_name(t) if t.get("status") != "VERIFIED" else None
+    named = community_name(t)
     if named:
         out["known_name"] = {"name": named["name"], "by": str(named.get("by", "")), "why": str(named.get("why", ""))}
     tb = target_bytes(t)
@@ -1783,7 +1824,7 @@ def ai_call(cfg: dict) -> dict:
 
 # docs/feed.xml and docs/functions.json are made from the registry too (registry_outputs.py): the website's feed
 # and its list of rebuilt functions, so they go up with every sync.
-GIT_PATHS = ["reconstructed_src", "reports/verified_registry.json", "reports/reverify_report.md",
+GIT_PATHS = ["reconstructed_src", "reports/verified_registry.json", "reports/names.json", "reports/reverify_report.md",
              "reports/decomp_audit_log.json", "reports/progress.json", "README.md", "docs/feed.xml", "docs/functions.json",
              "docs/sitemap.xml"]
 
@@ -1860,7 +1901,7 @@ SUBMISSION_FORMAT = "scarface-decomp-submission"
 SUBMISSION_FIELDS = ("bin", "va", "size", "symbol", "flags", "verified_by", "tool_used", "verified_at", "code",
                      "ported_from", "revised_by", "note", "what", "what_by")
 IMPORT_MAX = 20000
-_PUBLISHED: Dict[str, object] = {"head": None, "keys": frozenset(), "what": {}}
+_PUBLISHED: Dict[str, object] = {"head": None, "keys": frozenset(), "what": {}, "code": {}, "names": {}}
 IMPORT_STATUS: Dict[str, object] = {"running": False}
 
 
@@ -1891,6 +1932,8 @@ def published_keys(base: Path = BASE_DIR) -> frozenset:
     if _PUBLISHED["head"] != head:
         keys: frozenset = frozenset()
         what: Dict[str, str] = {}
+        code: Dict[str, str] = {}
+        names: Dict[str, dict] = {}
         try:
             p = subprocess.run(["git", "show", "HEAD:reports/verified_registry.json"], cwd=base,
                                capture_output=True, timeout=60)
@@ -1898,9 +1941,16 @@ def published_keys(base: Path = BASE_DIR) -> frozenset:
                 entries = json.loads(p.stdout.decode("utf-8")).get("entries", {})
                 keys = frozenset(entries)
                 what = {k: e.get("what", "") for k, e in entries.items() if isinstance(e, dict)}
+                code = {k: _text_mark(e.get("code")) for k, e in entries.items() if isinstance(e, dict)}
         except (OSError, ValueError, subprocess.TimeoutExpired):
             pass
-        _PUBLISHED.update(head=head, keys=keys, what=what)
+        try:
+            p = subprocess.run(["git", "show", "HEAD:reports/names.json"], cwd=base, capture_output=True, timeout=60)
+            got = json.loads(p.stdout.decode("utf-8")).get("names", {}) if p.returncode == 0 else {}
+            names = got if isinstance(got, dict) else {}
+        except (OSError, ValueError, subprocess.TimeoutExpired):
+            pass
+        _PUBLISHED.update(head=head, keys=keys, what=what, code=code, names=names)
     return _PUBLISHED["keys"]  # type: ignore[return-value]
 
 
@@ -1912,6 +1962,35 @@ def pending_descriptions() -> Dict[str, dict]:
         return {k: {"what": e.get("what", ""), "what_by": e.get("what_by", "")}
                 for k, e in REGISTRY.get("entries", {}).items()
                 if k in pub and (e.get("what") or "") != (old.get(k) or "")}
+
+
+def _text_mark(code) -> str:
+    return hashlib.sha1(str(code or "").strip().encode("utf-8")).hexdigest()[:16]
+
+
+def pending_revisions() -> List[str]:
+    """Functions already on GitHub whose text was improved here (names, types, comments) since."""
+    pub = published_keys()
+    old = _PUBLISHED.get("code") or {}
+    with STATE_LOCK:
+        return [k for k, e in REGISTRY.get("entries", {}).items()
+                if k in pub and e.get("revised_by") and not e.get("excerpt") and old.get(k) != _text_mark(e.get("code"))]
+
+
+def pending_names() -> Dict[str, dict]:
+    """Names given on this computer that are not on GitHub yet."""
+    try:
+        added = read_json(NAMES_ADDED_JSON, []) if NAMES_ADDED_JSON.exists() else []
+    except (OSError, ValueError):
+        added = []
+    published_keys()
+    old = _PUBLISHED.get("names") or {}
+    names = community_names()
+    return {k: names[k] for k in added if isinstance(names.get(k), dict) and old.get(k) != names[k]}
+
+
+def pending_count() -> int:
+    return len(pending_keys()) + len(pending_descriptions()) + len(pending_revisions()) + len(pending_names())
 
 
 def pending_keys() -> List[str]:
@@ -1927,9 +2006,13 @@ def make_submission(user: str) -> dict:
                    for k in pending_keys() for e in [REGISTRY["entries"][k]]
                    if (e.get("code") or "").strip() and not e.get("excerpt")}
     described = pending_descriptions()
+    with STATE_LOCK:
+        revised = {k: {f: e[f] for f in SUBMISSION_FIELDS if f in e}
+                   for k in pending_revisions() for e in [REGISTRY["entries"][k]]}
+    named = pending_names()
     return {"format": SUBMISSION_FORMAT, "version": 1, "submitted_by": user, "created": stamp(),
-            "compiler": compiler_version(), "count": len(entries) + len(described), "entries": entries,
-            "descriptions": described}
+            "compiler": compiler_version(), "count": len(entries) + len(described) + len(revised) + len(named),
+            "entries": entries, "descriptions": described, "revisions": revised, "names": named}
 
 
 def submission_filename(user: str) -> str:
@@ -2002,6 +2085,33 @@ def import_submission(bundle: dict, importer: str) -> dict:
                 e.update(what=what, what_by=str(d.get("what_by") or who_sent)[:64], what_at=stamp())
                 described += 1
             st["described"] = described
+        # functions matched already, sent again with better names: compiled again, kept on the same terms as here
+        revised = 0
+        sent = bundle.get("revisions") if isinstance(bundle.get("revisions"), dict) else {}
+        for key, e in list(sent.items())[:IMPORT_MAX]:
+            t = by_key.get(str(key))
+            code = e.get("code") if isinstance(e, dict) and isinstance(e.get("code"), str) else ""
+            if t is None or t["status"] != "VERIFIED" or not code.strip() or len(code) > 200_000:
+                continue
+            res = run_verify(t, code)
+            with STATE_LOCK:
+                if res.get("ok") and not revise_verified(t, code, str(e.get("revised_by") or who_sent)[:64], res):
+                    revised += 1
+        st["revised"] = revised
+        named = 0
+        new_names = bundle.get("names") if isinstance(bundle.get("names"), dict) else {}
+        with STATE_LOCK:
+            for key, info in list(new_names.items())[:IMPORT_MAX]:
+                t = by_key.get(str(key))
+                if t is None or not isinstance(info, dict):
+                    continue
+                by = str(info.get("by") or who_sent)[:64]
+                had = community_names().get(str(key))
+                if isinstance(had, dict) and had.get("by") != by:
+                    continue                                     # someone else's name stays; that is settled by people
+                if not add_name(t, info.get("name"), info.get("why"), by, mine=False):
+                    named += 1
+            st["named"] = named
         with STATE_LOCK:
             if added or described:
                 save_registry()
@@ -2526,7 +2636,7 @@ class Handler(BaseHTTPRequestHandler):
                                    "repo_url": REPO_URL, "lookalikes": lookalike_summary(),
                                    "binary_problems": BINARY_PROBLEMS, "scripts": script_check_summary(),
                                    "proto_in_retail": {"same_code": copies["code"], "same_method": copies["method"]},
-                                   "pending": len(pending_keys()) + len(pending_descriptions()), "porting": porting_left(),
+                                   "pending": pending_count(), "porting": porting_left(),
                                    "maintainers": sorted(MAINTAINERS)})
         if u.path == "/api/source":
             name = q1("name")
@@ -2620,6 +2730,19 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": False, "error": str(e)}, 400)
         if u.path == "/api/import-status":
             return self._json(dict(IMPORT_STATUS, failed=list(IMPORT_STATUS.get("failed", []))[:200]))
+        if u.path == "/api/names-queue":
+            # matched functions with names still to work out, the nearest to finished first (for the names batch)
+            with STATE_LOCK:
+                rows = []
+                for t in ALL_TASKS:
+                    e = REGISTRY["entries"].get(task_key(t)) if t["status"] == "VERIFIED" else None
+                    if not e or e.get("source") != "portal" or e.get("excerpt") or PO.is_ps2(t["bin"]):
+                        continue
+                    left = readable_grade(task_key(t), e.get("code", ""))["left"]
+                    if left:
+                        rows.append((left, int(t["size"]), t["id"]))
+                rows.sort()
+                return self._json({"ok": True, "total": len(rows), "ids": [r[2] for r in rows[:500]]})
         if u.path == "/api/easy-pass":
             with STATE_LOCK:
                 return self._json(dict(easy_status(), ok=True, progress=progress(), leaderboard=leaderboard()))
@@ -2707,7 +2830,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/verify": self.post_verify, "/api/fast-synthesize": self.post_synth, "/api/ai-proxy": self.post_ai,
             "/api/git-sync": self.post_git, "/api/upload-script": self.post_upload,
             "/api/submit": self.post_submit, "/api/import-submission": self.post_import,
-            "/api/decompme": self.post_decompme, "/api/easy-pass": self.post_easy_pass,
+            "/api/decompme": self.post_decompme, "/api/easy-pass": self.post_easy_pass, "/api/name": self.post_name,
             "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
             "/api/game-files/blender": self.post_game_files_blender,
             "/api/game-files/blender-stop": self.post_game_files_blender_stop,
@@ -2738,6 +2861,24 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"ok": False, "error": msg}, 403)
             return None
         return body["user"].strip()
+
+    def post_name(self, body):
+        """A name for a function, with what shows it: kept in reports/names.json under the contributor's handle."""
+        user = self._auth(body)
+        if not user:
+            return
+        with STATE_LOCK:
+            t = TASK_BY_ID.get(str(body.get("id") or ""))
+            if not t:
+                return self._json({"ok": False, "error": "Function not found."}, 404)
+            err = add_name(t, body.get("name"), body.get("why"), user)
+            if err:
+                return self._json({"ok": False, "error": err}, 400)
+            append_audit({"time": stamp(), "user": user, "action": "NAMED", "symbol": str(body.get("name"))[:120],
+                          "va": t["va"], "bytes": t["symbol"]})
+            if t["status"] == "VERIFIED":
+                save_registry()                      # the counts of finished functions follow the names
+            return self._json({"ok": True, "task": live_task(t), "pending": pending_count()})
 
     def post_easy_pass(self, body):
         """Start (or stop) trying the portal's own starter code on every open function, for this contributor."""
@@ -2912,7 +3053,7 @@ class Handler(BaseHTTPRequestHandler):
             with STATE_LOCK:
                 refresh_outputs()
                 res = git_sync(user)
-            return self._json(dict(res, mode="pushed", pending=len(pending_keys()) + len(pending_descriptions())))
+            return self._json(dict(res, mode="pushed", pending=pending_count()))
         bundle = make_submission(user)
         if not bundle["count"]:
             return self._json({"ok": True, "mode": "nothing", "pending": 0,
@@ -2936,7 +3077,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": False, "error": err}, 409)
             append_audit({"time": stamp(), "user": user, "action": "DESCRIBED", "symbol": t["symbol"], "va": t["va"]})
             task = live_task(t)
-        self._json({"ok": True, "task": task, "pending": len(pending_keys()) + len(pending_descriptions())})
+        self._json({"ok": True, "task": task, "pending": pending_count()})
 
     def post_bridge_run(self, body):
         """From the portal page: have the decomp.me tab make a scratch and/or compile, and wait for it."""

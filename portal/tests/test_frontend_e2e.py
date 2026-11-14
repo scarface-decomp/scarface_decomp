@@ -1530,3 +1530,88 @@ def test_easy_pass_runs_in_the_background_and_reports(page):
     assert "No AI is used" in asked[0] and "stop it at any time" in asked[0]
     assert "3 of 40 functions matched" in page.inner_text("#verify-status") and "matched, not yet named" in page.inner_text("#verify-status")
     assert page.inner_text("#btn-easy") == "Match the easy ones"
+
+
+MATCHED = """() => { Object.assign(currentTask, {status: 'VERIFIED', can_rename: true,
+    readable: {grade: 'matched', stand_ins: ['m_Field08', 'a1'], raw_addresses: 0, left: 2}});
+    setEditor('void sub_00401000(int a1) { m_Field08 = a1; }'); updateTaskUI(currentTask, {keepEditor: true}); }"""
+
+
+def test_a_matched_function_is_named_in_the_portal(page):
+    sign_in(page)
+    page.evaluate(MATCHED)
+    answers = iter(["Weapon::SetAmmo", "It stores its argument in the ammo count the HUD reads."])
+    page.on("dialog", lambda d: d.accept(next(answers)))
+    assert page.inner_text("#btn-name-fn") == "Name this function"
+    page.click("#btn-name-fn")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('Named Weapon::SetAmmo')")
+    sent = calls("/api/name")[-1][1]
+    assert sent["name"] == "Weapon::SetAmmo" and sent["why"].startswith("It stores") and sent["id"]
+    page.evaluate("() => { currentTask.status = 'VERIFIED'; renderKnownName(currentTask); }")   # (the mock's copy isn't matched)
+    assert "Named Weapon::SetAmmo (named by Tester)" in page.inner_text("#wb-name")
+    assert page.inner_text("#btn-name-fn") == "Change the name"
+
+
+def _names_ai(page, prompts, names):
+    def ai(route):
+        prompts.append(json.loads(route.request.post_data)["prompt"])
+        route.fulfill(json={"ok": True, "used_model": "m", "reply":
+                            "FUNCTION NAME: Weapon::SetAmmo | It stores its argument in the member the HUD reads.\n"
+                            "```cpp\nvoid sub_00401000(int ammo) { m_ammo = ammo; }\n```"})
+
+    def verify(route):
+        task = page.evaluate("() => JSON.parse(JSON.stringify(currentTask))")
+        task["readable"] = {"grade": "readable", "stand_ins": [], "raw_addresses": 0, "left": 0}
+        route.fulfill(json={"ok": True, "is_exact": True, "matched_bytes": 9, "total_bytes": 9, "match_percent": 100,
+                            "diff_details": [], "revised": True, "not_kept": "", "task": task})
+
+    def name(route):
+        names.append(json.loads(route.request.post_data))
+        route.fulfill(json={"ok": True})
+
+    page.route("**/api/ai-proxy", ai)
+    page.route("**/api/verify", verify)
+    page.route("**/api/name", name)
+
+
+def test_an_ai_match_is_followed_by_a_names_pass(page):
+    """Auto-Decompile that matches asks once more, for names only, and records the name the AI gives the function."""
+    sign_in(page)
+    page.fill("#ai-key", "test-key")
+    prompts, names = [], []
+    _names_ai(page, prompts, names)
+    page.evaluate("() => { window.__matched = %s; runAiAutoSolve = async () => { window.__matched(); setStatus('Matched 9/9 bytes.', 'ok'); return true; }; }" % MATCHED)
+    assert page.is_checked("#ai-names-after")
+    page.evaluate("() => solveThenName()")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('reads as finished C++')", timeout=30000)
+    assert len(prompts) == 1 and "NameItDeserves | one sentence" in prompts[0] and "already verified" in prompts[0]
+    assert names[0]["name"] == "Weapon::SetAmmo" and names[0]["why"].endswith("(suggested by " + page.evaluate("() => getAiConfig().model") + ")")
+    page.uncheck("#ai-names-after")
+    page.evaluate("() => solveThenName()")
+    page.wait_for_timeout(600)
+    assert len(prompts) == 1 and "Matched 9/9 bytes." in page.inner_text("#verify-status")      # the box is off: no extra request
+
+
+def test_names_batch_goes_through_matched_functions(page):
+    sign_in(page)
+    page.fill("#ai-key", "test-key")
+    prompts, names = [], []
+    _names_ai(page, prompts, names)
+    ids = [t["id"] for t in json.loads(urllib.request.urlopen(BASE + "api/queue").read())["items"][:2]]
+    assert len(ids) == 2
+
+    def task(route):
+        body = route.fetch().json()
+        body["task"].update(status="VERIFIED", can_rename=True, claimed_by="", starter_cpp="void sub_00401000(int a1) { m_Field08 = a1; }",
+                            readable={"grade": "matched", "stand_ins": ["m_Field08", "a1"], "raw_addresses": 0, "left": 2})
+        route.fulfill(json=body)
+
+    page.route("**/api/task?*", task)
+    page.route("**/api/names-queue", lambda r: r.fulfill(json={"ok": True, "total": 7, "ids": ids}))
+    asked = []
+    page.on("dialog", lambda d: (asked.append(d.message), d.accept()))
+    page.click("#btn-names-batch")
+    page.wait_for_function("document.getElementById('verify-status').textContent.includes('Naming finished')", timeout=60000)
+    assert "7 matched functions still have things to name" in asked[0] and "bytes stay fixed" in asked[0]
+    assert "2 of 2 functions read better now" in page.inner_text("#verify-status")
+    assert len(prompts) == 2 and len(names) == 2 and page.inner_text("#btn-names-batch") == "Name the matched ones"

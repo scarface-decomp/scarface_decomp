@@ -82,3 +82,19 @@ def test_the_progress_summary_counts_the_readable_ones():
     reg = {"entries": {"xb:0x1": {"bin": "xb", "size": 11, "code": STARTER}, "xb:0x2": {"bin": "xb", "size": 9, "code": FINISHED},
                        "proto:0x3": {"bin": "proto", "size": 9, "code": FINISHED}, "pc:0x4": {"bin": "pc", "size": 5, "code": STARTER}}}
     assert RO.progress_summary(reg, None, None)["readable"] == {"pc": 0, "xb": 1, "proto": 1, "ps2": 0, "total": 1}
+
+
+def test_a_recorded_name_counts_for_the_function_itself():
+    """The code has to keep sub_0011A060 so the portal can find the function. Once reports/names.json names
+    that address, the stand-in isn't held against it; every other stand-in still is."""
+    code = "void sub_0011A060(int count) { total = count; }"
+    assert R.grade(code)["left"] == 1 and R.grade(code, ["sub_0011A060"])["grade"] == "readable"
+    assert R.is_readable(code, ["sub_0011A060"]) and not R.is_readable(code)
+    assert R.grade("void sub_0011A060() { sub_00011000(); }", ["sub_0011A060"])["stand_ins"] == ["sub_00011000"]
+    assert R.own_stand_in("Weapon::vfunc_03") == "vfunc_03" and R.own_stand_in("sub_0011A060") == "sub_0011A060"
+    assert R.own_stand_ins("Weapon::vfunc_03", "0x0011A060") == ["vfunc_03", "sub_0011A060"]       # matched before its class was known
+    assert R.own_stand_ins("Weapon::vfunc_03", None) == ["vfunc_03"]
+    import registry_outputs as RO
+    e = {"bin": "xb", "va": "0x0011A060", "symbol": "sub_0011A060", "code": code, "size": "9"}
+    assert RO.progress_summary({"entries": {"k": e}}, None, None)["readable"]["xb"] == 0
+    assert RO.progress_summary({"entries": {"k": e}}, None, None, {"xb:0x0011A060": {"name": "SetTotal"}})["readable"]["xb"] == 1

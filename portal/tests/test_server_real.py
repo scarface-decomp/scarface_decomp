@@ -378,6 +378,25 @@ def test_a_names_pass_is_kept_only_when_it_names_something(portal):
     assert after == stored
 
 
+def test_naming_a_matched_function(portal):
+    """A name with its reason goes to reports/names.json, and the function's own address name stops counting."""
+    before = get(portal, f"/api/task?id={TID}")["task"]["readable"]["left"]
+    queue = get(portal, "/api/names-queue")
+    assert queue["ok"] and TID in queue["ids"] and queue["total"] >= len(queue["ids"]) > 0
+    code, res = post(portal, "/api/name", {**BOB, "id": TID, "name": "not a name!", "why": "It returns the stats page's table."})
+    assert code == 400 and "C++ function name" in res["error"]
+    code, res = post(portal, "/api/name", {**BOB, "id": TID, "name": "PauseMenuPageStats::GetTable",
+                                           "why": "It returns the address of the stats page's table."})
+    assert code == 200 and res["ok"] and res["task"]["known_name"]["by"] == "Bob", res
+    assert res["task"]["readable"]["left"] == before - 1
+    names = json.loads((portal["work"] / "reports" / "names.json").read_text(encoding="utf-8"))["names"]
+    assert names[KEY]["name"] == "PauseMenuPageStats::GetTable"
+    code, res = post(portal, "/api/name", {**ALICE, "id": TID, "name": "PauseMenuPageStats::Other", "why": "Someone else's idea of it."})
+    assert code == 400 and "already named" in res["error"]
+    prog = json.loads((portal["work"] / "reports" / "progress.json").read_text(encoding="utf-8"))
+    assert "readable" in prog
+
+
 def test_easy_pass_matches_what_the_starter_code_already_gets(portal):
     """The portal's own starter code, compiled for every open function: exact, fully checked ones are recorded."""
     status, res = post(portal, "/api/easy-pass", {"user": "Nobody", "pin": "0000"})

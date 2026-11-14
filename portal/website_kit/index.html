@@ -1090,6 +1090,7 @@
                   <input id="ai-key" type="text" class="input-box w-key masked" placeholder="Paste API key" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="" data-bwignore="" data-form-type="other" oninput="saveAiSettings()" />
                   <label class="remember-key" title="Off: the key is forgotten when you close this tab. On: it is stored in this browser until you clear it."><input type="checkbox" id="ai-remember-key" onchange="saveAiSettings()" /> Remember key</label>
                   <label class="remember-key" title="Empty: no fixed limit. The AI keeps trying until it matches, says it can't get closer, or makes 12 tries in a row without getting any closer; every try is compiled and checked. Each try is one request on your key, so set a number to cap what a run can cost.">Stop after <input id="ai-max-tries" type="number" min="1" step="1" class="input-box w-tries" placeholder="no limit" inputmode="numeric" oninput="saveAiSettings()" /> tries</label>
+                  <label class="remember-key" title="On: when the AI matches a function, it is asked once more for names only, so what gets saved reads as close to finished C++ as the code allows. The bytes stay fixed; a names version is kept only if it still matches exactly. Costs up to 3 more requests per match."><input type="checkbox" id="ai-names-after" checked /> Name things after a match</label>
                   <label class="remember-key" title="Optional. What your provider charges for a million tokens sent and a million received, in dollars: the portal then shows about what each run has cost. Leave empty to see tries and tokens only.">$ per million tokens: in <input id="ai-price-in" type="number" min="0" step="0.01" class="input-box w-tries" placeholder="-" inputmode="decimal" oninput="saveAiSettings(); renderAiMeter()" /> out <input id="ai-price-out" type="number" min="0" step="0.01" class="input-box w-tries" placeholder="-" inputmode="decimal" oninput="saveAiSettings(); renderAiMeter()" /></label>
                   <span class="ai-meter" id="ai-meter" role="status" hidden></span>
                   <button type="button" id="btn-test-api" class="btn-sm gold" onclick="testAiConnection()">Test</button>
@@ -1135,7 +1136,7 @@
                 <div class="step-col">
                   <span class="step-lbl">Write the C++</span>
                   <div class="step-pair">
-                    <button type="button" id="btn-step2-ai" class="btn btn-ai" onclick="runAiAutoSolve()" disabled>2. Auto-Decompile</button>
+                    <button type="button" id="btn-step2-ai" class="btn btn-ai" onclick="solveThenName()" disabled>2. Auto-Decompile</button>
                     <button type="button" id="btn-decompme" class="btn btn-dme" onclick="openOnDecompMe()" disabled
                             title="Work on this function in your browser at decomp.me, with the same compiler">decomp.me &#x2197;</button>
                   </div>
@@ -1149,6 +1150,8 @@
                   <div class="step-pair">
                     <button type="button" id="btn-step4-cancel" class="btn btn-cancel" onclick="cancelAndSavePartial()" disabled>Cancel &amp; Save</button>
                     <button type="button" id="btn-autopilot" class="btn btn-autopilot" onclick="toggleAutopilot()">Batch Run</button>
+                    <button type="button" id="btn-names-batch" class="btn btn-autopilot" onclick="toggleNamesBatch()"
+                            title="Uses your AI key. Goes through the functions that are matched but not yet named, the nearest to finished first, and asks the AI for names. The bytes stay fixed: a version is kept only if it still matches exactly and is clearer.">Name the matched ones</button>
                     <button type="button" id="btn-easy" class="btn btn-autopilot" onclick="toggleEasyPass()"
                             title="No AI and no key: the portal compiles its own starter code for every open function, smallest first, and records the ones that match byte for byte. It runs in the background; you can keep working.">Match the easy ones</button>
                   </div>
@@ -3315,6 +3318,68 @@
   }
 
   /* ===================================================================
+   * Names as part of every AI match, and a batch over what is already matched.
+   * =================================================================== */
+  function namesAfterMatch() { const c = $('ai-names-after'); return !c || c.checked; }
+
+  /** Auto-Decompile, then (when it matched and the box is ticked) one names pass on the result. */
+  async function solveThenName() {
+    const res = await runAiAutoSolve();
+    if (res === true && namesAfterMatch() && currentTask && currentTask.status === 'VERIFIED') {
+      const matched = $('verify-status').textContent;
+      const named = await runAiNames({ quiet: true });
+      if (named !== true && matched) setStatus(matched, 'ok');       // the match is the news; the names pass found nothing to add
+    }
+    return res;
+  }
+
+  let namesBatchGen = 0;
+  let namesBatchRunning = false;
+
+  async function toggleNamesBatch() {
+    const b = $('btn-names-batch');
+    if (namesBatchRunning) { namesBatchGen++; stopAllRuns(); return; }
+    if (!requireSignIn('name the matched ones')) return;
+    const cfg = getAiConfig();
+    if (cfg.provider !== 'ollama' && !cfg.api_key) { setStatus('Paste an API key in the AI settings first: naming uses your own AI.', 'warn'); return; }
+    if (isBusy || autopilotRunning) { setStatus('Wait for the current run to finish first.', 'warn'); return; }
+    let list;
+    try { list = await apiFetchJson('/api/names-queue'); } catch (e) { setStatus('Could not load the list: ' + e.message, 'err'); return; }
+    const ids = (list && list.ids) || [];
+    if (!ids.length) { setStatus('Nothing matched here is waiting for names.', 'info'); return; }
+    if (!confirm(fmtInt(list.total) + ' matched functions still have things to name. This goes through ' + fmtInt(ids.length) +
+        ' of them, the nearest to finished first, and asks ' + cfg.model + ' for names: up to ' + AI_NAMES_TRIES + ' requests each on your key. ' +
+        'The bytes stay fixed. Press the button again to stop. Start?')) return;
+    const myGen = ++namesBatchGen;
+    namesBatchRunning = true;
+    resetAiMeter(true);
+    let done = 0, improved = 0, stopReason = '';
+    try {
+      for (const id of ids) {
+        if (myGen !== namesBatchGen) break;
+        b.textContent = 'Stop naming (' + improved + ' improved, ' + done + '/' + ids.length + ')';
+        b.classList.add('running');
+        const loaded = await selectTaskById(id, { fromAutopilot: true, skipConfirm: true, quiet: true });
+        if (myGen !== namesBatchGen) break;
+        if (!loaded || !currentTask || currentTask.id !== id) continue;
+        const res = await runAiNames({ quiet: true });
+        if (myGen !== namesBatchGen) break;
+        done++;
+        if (res === 'API_ERROR') { stopReason = 'API error'; break; }
+        if (res === true) improved++;
+        await sleep(150);
+      }
+    } finally {
+      namesBatchRunning = false;
+      b.textContent = 'Name the matched ones';
+      b.classList.remove('running');
+      setStatus('Naming ' + (stopReason ? 'stopped (' + stopReason + ')' : myGen !== namesBatchGen ? 'stopped' : 'finished') + ': ' + improved + ' of ' + done +
+        ' functions read better now, every one still byte for byte. Submit your work sends them.', improved ? 'ok' : 'info');
+      refreshSideState();
+    }
+  }
+
+  /* ===================================================================
    * The easy pass: the portal's own starter code tried on every open function. No AI, no key.
    * =================================================================== */
   let easyWatching = false;
@@ -3392,17 +3457,29 @@
       'WHAT MUST STAY: the function\'s own name (' + String(t.symbol).split('::').pop() + ', so the portal can find it); the order and sizes of members; every called function or global that is not in the list above keeps its sub_XXXXXXXX or DAT_XXXXXXXX name, because that name is how its address is checked.',
       'Name only what the code, the notes above or a string it uses shows. Say in a short comment what each new name rests on. A guessed name that sounds sure is worse than an honest stand-in: leave those as they are.',
       feedback || '',
-      'Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block and nothing else. If nothing here can be named honestly, reply with a single line starting GIVE UP: and the reason, and no code.'
+      t.known_name ? '' : 'THE FUNCTION\'S OWN NAME: if the code shows what this function does, put one line before the code block, exactly in this form:' + NL +
+        'FUNCTION NAME: ' + (String(t.symbol).indexOf('::') > 0 ? String(t.symbol).split('::').slice(0, -1).join('::') + '::' : '') + 'NameItDeserves | one sentence saying what in the code shows it' + NL +
+        'Keep the class it already has. Leave the line out if you would be guessing. In the code itself the function keeps its current name.',
+      'Return the complete C++ translation unit in a single ' + FENCE + 'cpp code block' + (t.known_name ? ' and nothing else' : ', with at most that one line before it') + '. If nothing here can be named honestly, reply with a single line starting GIVE UP: and the reason, and no code.'
     ].filter(Boolean).join(NL + NL);
   }
 
-  async function runAiNames() {
+  function aiFunctionName(reply) {
+    const m = /^\s*FUNCTION NAME:\s*([A-Za-z_][\w:]*)\s*\|\s*(.{10,400})$/m.exec(String(reply || ''));
+    return m && !/NameItDeserves$/.test(m[1]) ? { name: m[1], why: m[2].trim() } : null;
+  }
+
+  /** opts.quiet: run as a step of something else (after a match, or the names batch): no complaints when it
+      can't run. Returns true when something was named, 'API_ERROR' when the AI could not be reached. */
+  async function runAiNames(opts) {
+    opts = opts || {};
     const t = currentTask;
-    if (!t || t.status !== 'VERIFIED' || workbenchLocked()) return false;
-    if (!requireSignIn('ask the AI for names')) return false;
+    if (!t || t.status !== 'VERIFIED' || !t.can_rename || isPs2(t.bin) || (!opts.quiet && workbenchLocked())) return false;
+    if (!(t.readable && t.readable.left)) return false;
+    if (opts.quiet ? !session.signedIn : !requireSignIn('ask the AI for names')) return false;
     const cfg = getAiConfig();
     if (cfg.provider !== 'ollama' && !cfg.api_key) {
-      setStatus('Paste an API key in the AI settings first: the names pass uses your own AI.', 'warn');
+      if (!opts.quiet) setStatus('Paste an API key in the AI settings first: the names pass uses your own AI.', 'warn');
       return false;
     }
     const myGen = ++runGen;
@@ -3413,7 +3490,8 @@
     const signal = runAbortCtrl.signal;
     syncWorkflowButtons();
     renderReadable(t);
-    resetAiMeter(false);
+    if (!opts.quiet) resetAiMeter(false);
+    let named = false;
     const mon = startActivityMonitor('Names pass: asking ' + cfg.model + '...', 20);
     const was = (t.readable && t.readable.left) || 0;
     let feedback = '';
@@ -3427,13 +3505,16 @@
         } catch (err) {
           if (cancelled() || err.name === 'AbortError') return false;
           setStatus('API error: ' + err.message, 'err');
-          return false;
+          return 'API_ERROR';
         }
+        if (cancelled()) return false;
+        const own = !named && !t.known_name ? aiFunctionName(reply) : null;
+        if (own && await saveFunctionName(t, own.name, own.why + ' (suggested by ' + cfg.model + ')', true)) named = true;
         if (cancelled()) return false;
         const why = aiGaveUp(reply);
         if (why !== null) {
           setStatus('The AI found nothing it could name honestly' + (why ? ': "' + why + '"' : '') + '. The saved version is unchanged.', 'info');
-          return false;
+          return named;
         }
         const candidate = extractCppBlock(reply);
         if (!candidate || candidate.trim() === base.trim()) { feedback = 'Your last reply changed nothing. Name something, or reply GIVE UP:.'; last = 'it changed nothing'; continue; }
@@ -3462,8 +3543,9 @@
         }
         updateActivityMonitor(null, 'Try ' + attempt + ': not kept (' + last + ').');
       }
-      setStatus('The names pass made ' + AI_NAMES_TRIES + ' tries and none could be kept (last: ' + last + '). The saved version is unchanged.', 'warn');
-      return false;
+      setStatus('The names pass made ' + AI_NAMES_TRIES + ' tries and none could be kept (last: ' + last + ').' +
+        (named ? ' The function itself got a name.' : ' The saved version is unchanged.'), named ? 'info' : 'warn');
+      return named;
     } catch (e) {
       if (!cancelled() && e.name !== 'AbortError') setStatus('Names pass error: ' + e.message, 'err');
       return false;
@@ -3727,7 +3809,12 @@
         $('btn-autopilot').textContent = 'Stop Batch (' + processed + '/' + queue.length + ')';
         const res = await runAiAutoSolve({ fromAutopilot: true });
         if (myAuto !== autoGen) break;
-        if (res === true) { solved++; continue; }
+        if (res === true) {
+          solved++;
+          if (namesAfterMatch() && (await runAiNames({ quiet: true })) === 'API_ERROR') { stopReason = 'API error'; break; }
+          if (myAuto !== autoGen) break;
+          continue;
+        }
         if (res === 'NEEDS_SIGNIN') { stopReason = 'sign-in required'; break; }
         if (currentTask && isMine(currentTask)) await savePartialAndRelease(currentTask);
         if (res === 'API_ERROR') { stopReason = 'API error'; break; }
@@ -5524,12 +5611,21 @@
     const box = $('wb-name');
     box.textContent = '';
     if (t.known_name && t.known_name.name) {
-      box.appendChild(document.createTextNode('Probably '));
+      box.appendChild(document.createTextNode(t.status === 'VERIFIED' ? 'Named ' : 'Probably '));
       box.appendChild(el('code', t.known_name.name));
       box.appendChild(document.createTextNode((t.known_name.by ? ' (named by ' + t.known_name.by + ')' : '') + '. '));
       if (t.known_name.why) box.title = t.known_name.why;
     }
-    if (t.status === 'VERIFIED') return;
+    if (t.status === 'VERIFIED') {
+      // a matched function is named right here: the name and what shows it go to reports/names.json
+      const b = el('button', t.known_name ? 'Change the name' : 'Name this function', 'btn-sm');
+      b.type = 'button';
+      b.id = 'btn-name-fn';
+      b.title = 'Its code keeps the address name so the portal can find it; the real name is kept beside it, with what shows it, and sent with Submit your work.';
+      b.onclick = () => nameThisFunction();
+      box.appendChild(b);
+      return;
+    }
     const a = el('a', t.known_name ? 'Suggest a better name' : 'Know what this does? Suggest a name');
     const body = 'Function: `' + t.symbol + '` at ' + t.va + ' (' + t.size + ' B)\n\n' +
       'Suggested name: \n\nWhat shows it (strings it uses, what calls it, the matching PC/Xbox function, ...): \n\n' +
@@ -5538,6 +5634,30 @@
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
     box.appendChild(a);
+  }
+
+  async function saveFunctionName(t, name, why, quiet) {
+    const r = await postJson('/api/name', Object.assign({ id: t.id, name: name, why: why }, creds()));
+    if (!r || !r.ok) {
+      if (!quiet) setStatus((r && r.error) || 'Could not save the name.', 'err');
+      return false;
+    }
+    if (r.task && currentTask && currentTask.id === t.id) updateTaskUI(r.task, { keepEditor: true, keepDiff: true });
+    return true;
+  }
+
+  async function nameThisFunction() {
+    const t = currentTask;
+    if (!t || !requireSignIn('name a function')) return;
+    const name = prompt('A name for ' + t.symbol + ', as C++ would write it (Weapon::Reload, or UpdateHud for a plain function).\n' +
+      'From what the code does, a string it uses or the game\'s class information. Never from leaked symbols.', (t.known_name && t.known_name.name) || '');
+    if (!name || !name.trim()) return;
+    const why = prompt('What shows it? One sentence: what the function does, or the string or class that gives it away.', (t.known_name && t.known_name.why) || '');
+    if (!why || !why.trim()) return;
+    if (await saveFunctionName(t, name.trim(), why.trim(), false)) {
+      setStatus('Named ' + name.trim() + '. Submit your work sends it with your matches.', 'ok');
+      refreshSideState();
+    }
   }
 
   function repoBase() { return String(STATE.repo_url || 'https://github.com/scarface-decomp/scarface_decomp').replace(/\/+$/, ''); }
@@ -5629,7 +5749,9 @@
         parts.push(ul);
       }
       if (st.described) parts.push(fmtInt(st.described) + ' description' + (st.described === 1 ? '' : 's') + ' of rebuilt functions added too.');
-      if (st.added || st.described) parts.push('Press Submit your work to send them to GitHub.');
+      if (st.revised) parts.push(fmtInt(st.revised) + ' matched function' + (st.revised === 1 ? ' reads' : 's read') + ' better now (checked again, same bytes).');
+      if (st.named) parts.push(fmtInt(st.named) + ' function name' + (st.named === 1 ? '' : 's') + ' added.');
+      if (st.added || st.described || st.revised || st.named) parts.push('Press Submit your work to send them to GitHub.');
       showDialog('Submission imported', parts);
       refreshSideState();
       loadQueuePage();
