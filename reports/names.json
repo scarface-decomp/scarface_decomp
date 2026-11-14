@@ -2021,6 +2021,16 @@
       "name": "Shader::SetBLMD",
       "by": "the clean-room spec docs/cleanroom/SPEC-004-xbox-functions.md (a name the implementer chose from its description)",
       "why": "SPEC-004 section 2.1: a shader's BLMD setter (named after the game data's parameter), reached through its kind's table of settings; it keeps the value and calls sub_0029A2F0. Matched."
+    },
+    "xb:0x00243FA0": {
+      "name": "NameKey",
+      "by": "the clean-room spec docs/cleanroom/SPEC-006-lights-placed-props-reflection.md (a name the implementer chose from its description)",
+      "why": "SPEC-006 section 5: turns a name into the 32-bit key the game looks things up by (h * 65599, masked, each character folded and XORed in, top bit set). Matched."
+    },
+    "proto:0x00201440": {
+      "name": "NameKey",
+      "by": "the clean-room spec docs/cleanroom/SPEC-006-lights-placed-props-reflection.md (a name the implementer chose from its description)",
+      "why": "The prototype's copy of the Xbox name key at 0x00243FA0 (SPEC-006 section 5): the same code, matched."
     }
   }
 }
