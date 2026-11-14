@@ -3147,7 +3147,8 @@
       } else if (data.bytes_exact && Array.isArray(data.hardcoded_addresses) && data.hardcoded_addresses.length) {
         setStatus('Bytes match, but this hard-codes addresses from the 2006 binary (' + data.hardcoded_addresses.slice(0, 2).join('; ') +
           '). Name them instead, e.g. extern "C" char DAT_00439DA4; and use &DAT_00439DA4 in place of the number.', 'warn');
-      } else if (Array.isArray(data.reloc_mismatch) && data.reloc_mismatch.length) {
+      } else if (onlyReferencesDiffer(data)) {
+        // only when everything else lines up: in code shaped differently, "the address the original has here" is just whatever bytes sit there
         setStatus(data.matched_bytes + ' / ' + data.total_bytes + ' bytes, but a reference points somewhere else than in the original: ' + data.reloc_mismatch[0], 'warn');
       } else {
         setStatus(data.matched_bytes + ' / ' + data.total_bytes + ' bytes matched (' + fmtPct(data.match_percent) + '%).', 'warn');
@@ -3166,6 +3167,14 @@
   /* ===================================================================
    * AI auto-solve
    * =================================================================== */
+  /** Every byte matches except the addresses of some references: then "this points somewhere else" is worth
+      saying. In code that is shaped differently the same check compares an address with whatever instruction
+      bytes sit there in the original, which only misleads (a person and the AI alike). */
+  function onlyReferencesDiffer(r) {
+    const wrong = Array.isArray(r && r.reloc_mismatch) ? r.reloc_mismatch.length : 0;
+    return wrong > 0 && Number(r.total_bytes) - Number(r.matched_bytes) <= 4 * wrong;
+  }
+
   function extractCppBlock(raw) {
     const text = String(raw || '');
     const re = new RegExp(FENCE + '([A-Za-z0-9+#_-]*)[^\\n]*\\n([\\s\\S]*?)(?:' + FENCE + '|$)', 'g');
@@ -3276,7 +3285,7 @@
       }).join(', '));
     }
     if (Array.isArray(r.notes) && r.notes.length) lines.push(r.notes.join(' '));
-    if (Array.isArray(r.reloc_mismatch) && r.reloc_mismatch.length) lines.push('Wrong references: ' + r.reloc_mismatch.slice(0, 4).join('; '));
+    if (onlyReferencesDiffer(r)) lines.push('Wrong references: ' + r.reloc_mismatch.slice(0, 4).join('; '));
     if (Array.isArray(r.hardcoded_addresses) && r.hardcoded_addresses.length) lines.push('Do not hard-code addresses (' + r.hardcoded_addresses.slice(0, 3).join('; ') + '); declare extern globals/functions instead.');
     if (r.compiled_hex) lines.push('Its compiled bytes: ' + r.compiled_hex);
     lines.push('Fix the mismatches with the smallest change you can; keep everything that already matches.');
