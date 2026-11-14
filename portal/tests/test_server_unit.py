@@ -78,6 +78,8 @@ def test_old_queues_lose_their_non_functions_once(S, tmp_path, monkeypatch):
     img = _Img({0x1000: b"\xC3", 0x2000: b"\xCB", 0x3000: b"\xCB"})
     monkeypatch.setattr(S, "image_for", lambda b: img)
     monkeypatch.setattr(S, "QUEUE_JSON", tmp_path / "q.json")
+    import queue_builder
+    monkeypatch.setattr(queue_builder, "settle_queue", lambda tasks, *a, **k: tasks)     # (its own test: test_overlaps.py)
     monkeypatch.setattr(S, "REPORTS_DIR", tmp_path)
     tasks = [{"bin": "xb", "fva_int": 0x1000, "size": 1}, {"bin": "xb", "fva_int": 0x2000, "size": 1},
              {"bin": "xb", "fva_int": 0x3000, "size": 1}]
