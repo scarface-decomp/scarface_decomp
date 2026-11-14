@@ -58,6 +58,20 @@ Sizes are measured, never estimated. `portal/tools/sf_binaries.py` walks the ori
 tables) and stops at returns, tail jumps and the next known function start. Known starts are call
 targets plus vtable entries found through the MSVC RTTI complete-object locators.
 
+**When two functions overlap.** A walk can follow a jump out of its function and measure it over the next
+one (an 8-byte thunk came out as 9,000 bytes), and a "call target" can be data that happened to read as a
+call. `sf_binaries.settle_overlaps` decides the cases it can prove:
+
+* a function measured past a start that is certainly a function (a vtable entry, a start proven by an
+  exact match, or a call target standing directly after a return or padding) is measured again and has to
+  end before that start;
+* a start that only a call vouches for, off the 16-byte boundary functions are placed on (over 99% of
+  matched functions sit on one), that falls inside an instruction of the function around it, is dropped;
+* a `ret N` where N is not a multiple of 4 marks bytes that are not a function.
+
+Matched functions are never resized or dropped. On the three builds this re-measured 100 functions and
+removed 63 false starts; 135 overlaps remain that neither rule can decide.
+
 The queue (`portal/tools/queue_builder.py`, written to `reports/full_remaining_queue.json`) is rebuilt from the
 binaries, so a task's size is the real size of the original function. Virtual methods are named after
 their class and slot (`content::Stats::vfunc_03`); other functions are `sub_<address>`.
@@ -70,6 +84,10 @@ A submission counts only if all of the following hold:
 2. **The right function is compared.** The target is chosen by its decorated name
    (`vfunc_03@Stats@content@`, `??_GStats@@` for a destructor slot, `?$ConcreteClassRep@VFEObject@@@`
    for a template). If the name is ambiguous the check stops; it never falls back to another function.
+   One exception, because the name cannot work: an adjustor thunk (`sub ecx, N; jmp method`) is emitted
+   by the compiler under the name of the method it jumps to (`?method@Class@@W3AEXXZ`), never under its
+   own vtable slot. When no emitted function carries the target's name and exactly one is such a thunk,
+   that thunk is compared.
 3. **Same length.** The compiled function is exactly as long as the original.
 4. **Same bytes.** Every byte matches, except the 4-byte fields the linker fills in (COFF relocations).
 5. **Relocations are checked wherever possible:**
@@ -80,6 +98,10 @@ A submission counts only if all of the following hold:
    * absolute symbols such as `__except_list` (the `fs:[0]` SEH chain) must have the same value;
    * a symbol named after an address (`DAT_00439DA4`, `sub_00412340`, `g_007F5A70`, decorated or
      `extern "C"`) must refer to exactly that address;
+   * a C++ name that `reports/names.json` ties to an address may be used instead of the address name:
+     the name is read back from the decorated symbol (`?Reload@Weapon@@QAEXXZ` is `Weapon::Reload`) and
+     the address is checked the same way. Constructors, operators and templates are not read back and
+     keep address names;
    * one external symbol must mean one address throughout the function.
 
    References that cannot be checked (an ordinary external such as `operator delete`) are counted and
@@ -136,6 +158,11 @@ These were each confirmed by compiling variants and comparing against the game.
   functions before it (placeholders are fine) for the slot to line up.
 * **Destructor slots.** A vtable's destructor entry is the *scalar deleting destructor* (`??_G`):
   `if (flags & 1) operator delete(this)` around the inlined destructor body.
+* **Adjustor thunks have no source.** `83 E9 04 E9 rel32` (`sub ecx, 4; jmp`) appears when a class has
+  two bases that both declare a virtual function and the class overrides it; the second base's vtable
+  points at the thunk. A body that subtracts from `this` compiles to `add ecx, -4` (`83 C1 FC`) and can
+  never match. Declare the two bases, the override and a constructor (so the vtables are emitted) and
+  the compiler writes the thunk itself.
 * **Out-of-line definitions.** A method defined inside the class body is inline and usually not
   emitted at all. Define the target out of line.
 * **Prefer real types to casts.** Field types decide instruction widths (`mov byte ptr` vs
@@ -148,3 +175,17 @@ These were each confirmed by compiling variants and comparing against the game.
 rewrites `reports/verified_registry.json`, `reports/reverify_report.md` and the generated files
 (`Original_Binary_Order_*.cpp`, `pc/`, `xbox/`). Run it after changing a header, the verifier or the
 binaries. A function that stops matching drops out of the count.
+
+## 7. What this does not show
+
+* **Matched is not readable.** Most matched code was written by language models or by the project's
+  starter generator and accepted because it passed the rule in section 4. Nearly all of it still uses
+  address names and offset names. `portal/tools/readability.py` counts what is left to name;
+  `reports/progress.json` reports "readable" separately from "verified".
+* **Nothing is linked or run.** Each function is proven against the original bytes on its own. No
+  matched code is linked into a program, and no test calls a matched function and checks its result.
+* **Unchecked externals exist.** A reference to an ordinary external (an import, `operator delete`) is
+  counted and reported, not proven.
+* **Function boundaries are not all settled** (section 3).
+* **The reference is the original program.** A matching decompilation reads the binary, so it is not
+  a clean-room reimplementation; see [CLEAN_ROOM.md](CLEAN_ROOM.md) for what that term covers here.
