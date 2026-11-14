@@ -110,3 +110,23 @@ def test_portal_shows_a_known_name(monkeypatch, repo):
     t = {"bin": "xb", "fva_int": 0x111C0, "status": "UNCLAIMED"}
     assert server.community_name(t)["name"] == "Weapon::Reload"
     assert server.community_name(dict(t, fva_int=0x11010)) is None
+
+
+def test_names_code_may_call_a_function_by(monkeypatch, repo):
+    data = {"names": {"xb:0x000111C0": {"name": "Weapon::Reload"}, "pc:0x00401000": {"name": "Weapon::Reload"},
+                      "xb:0x00011200": {"name": "Car::Honk"}, "xb:0x00011300": {"name": "Car::Honk"},
+                      "xb:nonsense": {"name": "X"}, "xb:0x00011400": "oops"}}
+    assert NAMES.addresses(data, "xb") == {"Weapon::Reload": 0x111C0}          # a name used twice is left out
+    assert NAMES.addresses(data, "pc") == {"Weapon::Reload": 0x401000} and NAMES.addresses({}, "xb") == {}
+    import sys
+    sys.path.insert(0, str(PORTAL))
+    server = importlib.import_module("decomp_portal_server")
+    monkeypatch.setattr(server, "REPORTS_DIR", repo / "reports")
+    monkeypatch.setattr(server, "_NAMES_CACHE", [None, {}])
+    monkeypatch.setattr(server, "_KNOWN_NAMES", {})
+    assert server.known_names("xb")["Weapon::Reload"] == 0x111C0
+    t = {"bin": "xb", "fva_int": 0x11000}
+    code = "// like sub_000111C0\nvoid sub_00011000() { sub_000111C0(); sub_000111C0(); sub_00011010(); }"
+    assert server.names_to_use(t, code) == [{"now": "sub_000111C0", "name": "Weapon::Reload"}]
+    assert server.names_to_use(t, "// only says sub_000111C0 in a comment\nvoid f() {}") == []
+    assert server.names_to_use(dict(t, fva_int=0x111C0), "void sub_000111C0() {}") == []

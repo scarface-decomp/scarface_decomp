@@ -338,6 +338,22 @@ def source_name(name: str) -> str:
     return name
 
 
+_PLAIN = re.compile(r"[A-Za-z_]\w*$")
+
+
+def qualified_name(name: str) -> Optional[str]:
+    """The C++ name a compiled symbol stands for, when it can be read off without guessing:
+    ?Reload@Weapon@game@@QAEXXZ -> game::Weapon::Reload, _Tick -> Tick. None for constructors,
+    operators, templates and anything else whose decorated name needs more than splitting."""
+    if name.startswith("?") and not name.startswith("??"):
+        parts = name[1:].split("@@", 1)[0].split("@")
+        return "::".join(reversed(parts)) if parts and all(_PLAIN.match(p) for p in parts) else None
+    if name.startswith("_") and not name.startswith("__"):
+        plain = name[1:].split("@", 1)[0]
+        return plain if _PLAIN.match(plain) else None
+    return None
+
+
 def _split_scopes(qualified: str) -> List[str]:
     """'core::ConcreteClassRep<a::B>' -> ['core', 'ConcreteClassRep<a::B>'] (only top-level '::')."""
     parts, depth, cur, i = [], 0, "", 0
@@ -457,12 +473,16 @@ class CompareResult:
 
 
 def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Optional[int] = None,
-                     image=None, known_symbols: Optional[Dict[str, int]] = None) -> CompareResult:
+                     image=None, known_symbols: Optional[Dict[str, int]] = None,
+                     known_names: Optional[Dict[str, int]] = None) -> CompareResult:
     """
     target: original bytes of the function (exact size).
     fn_va / image: the original function's address and a BinaryImage, used to check relocation targets.
+    known_names: C++ names that are known to live at one address in this build ("Weapon::Reload" ->
+    0x0011E4A0). Code may call such a function by its name and the address is still checked.
     """
     known_symbols = known_symbols or {}
+    known_names = known_names or {}
     code = fn.code
     n_t, n_c = len(target), len(code)
     status = ["match"] * max(n_t, n_c)
@@ -552,6 +572,13 @@ def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Op
                     else:
                         verdict, why = "bad", (f"+0x{off:X}: '{sym.name}' is 0x{known_symbols[sym.name]:08X}, but the "
                                                f"original uses 0x{sym_va_in_orig:08X} here")
+                elif qualified_name(sym.name) in known_names:
+                    want = known_names[qualified_name(sym.name)]
+                    if want == sym_va_in_orig:
+                        verdict = "ok"
+                    else:
+                        verdict, why = "bad", (f"+0x{off:X}: '{qualified_name(sym.name)}' is at 0x{want:08X}, but "
+                                               f"the original uses 0x{sym_va_in_orig:08X} here")
                 else:
                     verdict = "unverified"
                 ext_seen.setdefault(sym.name, sym_va_in_orig)
@@ -641,7 +668,8 @@ def find_hardcoded_addresses(code: bytes, reloc_offsets: set, image) -> List[str
 
 def verify_submission(cpp_code: str, target: bytes, flags: str, match_substr: str = "",
                       fn_va: Optional[int] = None, image=None, known_symbols: Optional[Dict[str, int]] = None,
-                      include_dirs: Optional[Sequence[Path]] = None, bin_dir: Optional[Path] = None) -> dict:
+                      include_dirs: Optional[Sequence[Path]] = None, bin_dir: Optional[Path] = None,
+                      known_names: Optional[Dict[str, int]] = None) -> dict:
     """Returns {"ok": False, "compiler_error": ...} or {"ok": True, ...CompareResult fields, compiled_sym, compiled_hex}."""
     cr = compile_cpp(cpp_code, flags, include_dirs=include_dirs, bin_dir=bin_dir)
     if not cr.ok:
@@ -653,7 +681,8 @@ def verify_submission(cpp_code: str, target: bytes, flags: str, match_substr: st
     fn, why = select_function(coff.functions(), match_substr)
     if fn is None:
         return {"ok": False, "compiler_error": why}
-    res = compare_function(target, fn, coff, fn_va=fn_va, image=image, known_symbols=known_symbols)
+    res = compare_function(target, fn, coff, fn_va=fn_va, image=image, known_symbols=known_symbols,
+                           known_names=known_names)
     out = {"ok": True, **res.as_dict(), "compiled_sym": fn.name,
            "compiled_hex": " ".join(f"{b:02X}" for b in fn.code)}
     return out

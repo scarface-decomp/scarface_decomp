@@ -83,3 +83,24 @@ Keys are a version (`xb`, `pc`, `ps2`, `proto`) and the address where the functi
 `reconstructed_src/` lists. CI checks the file (`python portal/tools/names.py`): a C++ name, who worked it
 out, why, and a function that really starts there. A name is a label, not a match: the function still
 needs its C++ verified like any other.
+
+## Using a name in matched code
+
+Matched code calls other functions by their address (`sub_0011E4A0`), because that is how the verifier
+checks the call goes to the right place. Once a function has a name in `reports/names.json`, code may
+call it by that name instead and the check still holds: the verifier reads the name back from the
+compiled object and compares the address the file gives it.
+
+```cpp
+class Weapon { public: void Reload(); void sub_00011000(); int m_ammo; };
+void Weapon::sub_00011000() { m_ammo = 0; Reload(); }      // Reload is checked against 0x0011E4A0
+```
+
+A name nobody has tied to an address is not checked, so the portal won't keep a cleaned-up version that
+calls one; add the name to `reports/names.json` first. Constructors, operators and templates keep their
+address names for now.
+
+In the portal, a matched function shows how many things are left to name. **Ask the AI to name them**
+sends the matched code to your own AI with the names known for what it calls; a version is kept only if
+it still compiles to the same bytes and leaves fewer things to name. Read the names before you submit
+them: the bytes are proven, the names are a person's (or an AI's) judgement.

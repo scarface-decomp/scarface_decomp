@@ -156,7 +156,12 @@ and press **Compile & Verify**. A match is recorded in `reports/verified_registr
 generated source files are rewritten. About 4,600 functions are look-alikes of another (the same
 machine code with different addresses); after a match the portal swaps the addresses and names into
 your code, verifies it on each look-alike and credits you for every exact match
-([portal/tools/lookalikes.py](portal/tools/lookalikes.py)). The queue lists one function of each group first. Manual start: `pip install -r portal/requirements.txt`, then
+([portal/tools/lookalikes.py](portal/tools/lookalikes.py)). The queue lists one function of each group first.
+**Match the easy ones** (next to Batch Run) needs no AI and no key: the portal compiles its own draft for
+every function that is still open, smallest first, in the background, and records each one that matches
+byte for byte with every address checked. Those are matched, not yet named; the workbench says how many
+things each matched function still has to name, and **Ask the AI to name them** tidies one with your own
+AI while the bytes stay fixed ([docs/NAMES.md](docs/NAMES.md#using-a-name-in-matched-code)). Manual start: `pip install -r portal/requirements.txt`, then
 `python portal/decomp_portal_server.py`.
 
 | Variable | Default | What it does |
@@ -168,6 +173,8 @@ your code, verifies it on each look-alike and credits you for every exact match
 | `SCARFACE_DECOMPME_URL` | `https://decomp.me` | where the decomp.me button sends functions |
 | `SCARFACE_DECOMPME_PRESET` | `266` | the decomp.me preset scratches are filed under ([Scarface's](https://decomp.me/preset/266)); `none` turns it off |
 | `SCARFACE_LOOKALIKE_MAX` | `1000` | how many look-alikes a new match is tried on |
+| `SCARFACE_EASY_MAX` | `0` | how many functions one "Match the easy ones" run tries (`0`: all that are open) |
+| `SCARFACE_NO_CATCHUP` | unset | `1` stops the portal trying earlier matches on their look-alikes when it starts |
 | `SCARFACE_MSVC_BIN` | `portal/tools/msvc71/bin` | where `cl.exe` (13.10.3052 or 13.10.3077) is, if not there |
 
 **From the command line**, with the same rules:

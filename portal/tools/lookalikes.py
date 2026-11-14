@@ -32,6 +32,11 @@ _TOKEN = re.compile(r"[A-Za-z_]\w*|\d\w*")
 _HEX8 = re.compile(r"(?<![0-9A-Fa-f])([0-9A-Fa-f]{8})(?![0-9A-Fa-f])")
 
 
+# Raised whenever port_code can carry over something it could not before, so a portal tries again the
+# look-alikes it gave up on with the older rules (see catch_up_lookalikes in the portal server).
+VERSION = 2
+
+
 def signature(code: bytes, va: int, image) -> Tuple[str, List[DME.Reloc]]:
     """The function's bytes with every address field zeroed, plus where those fields are and what kind
     they are. Places inside the function (jump tables) keep their offset, so they must match too."""

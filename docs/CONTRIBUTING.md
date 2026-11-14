@@ -45,6 +45,9 @@ may come from and how AI tools may be used.
    files are rewritten. If the function has look-alikes (same machine code, other addresses; the
    queue shows "+N look-alikes"), the portal then tries your code on each of them in the background
    and credits you for every one that matches exactly. Pick those first: one match can count many times.
+   Before you start on the small ones by hand, press **Match the easy ones** once: with no AI, the portal
+   compiles its own draft for every open function and records the ones that already match. What is left
+   is what needs a person.
 6. If you stop, **Cancel & Save** keeps your best partial attempt for the next person.
 7. **Submit your work** when you're done for now (the red button in the sidebar; the workbench reminds you
    when you have new matches). Nothing is lost if you close the portal first: every match is saved on your

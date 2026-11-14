@@ -284,23 +284,35 @@ class Targets:
         return data, note
 
 
+_KNOWN: Dict[str, Dict[str, int]] = {}
+
+
+def known_names(version: str) -> Dict[str, int]:
+    """Names from reports/names.json that code may call a function by, with their addresses."""
+    if version not in _KNOWN:
+        import names as NAMES
+        _KNOWN[version] = NAMES.addresses(NAMES.load(ROOT / "reports" / "names.json"), version)
+    return _KNOWN[version]
+
+
 def judge(c: Claim, target: bytes, obj: bytes, flags: str, img) -> Tuple[str, int, str]:
     coff = CoffObject(obj)
     best: Optional[Tuple[str, int, str]] = None
     for alt in (c.match or "").split("|"):
-        res = judge_one(coff, alt, target, c.va, img)
+        res = judge_one(coff, alt, target, c.va, img, known_names(c.bin))
         if best is None or STATUS_ORDER.index(res[0]) < STATUS_ORDER.index(best[0]) or \
                 (res[0] == best[0] and res[1] > best[1]):
             best = res
     return best
 
 
-def judge_one(coff: CoffObject, match: str, target: bytes, va: int, img) -> Tuple[str, int, str]:
+def judge_one(coff: CoffObject, match: str, target: bytes, va: int, img,
+              known: Optional[Dict[str, int]] = None) -> Tuple[str, int, str]:
     fn, why = select_function(coff.functions(), match)
     if fn is None:
         return "UNMAPPED", 0, why
     c_va = va
-    r = compare_function(target, fn, coff, fn_va=c_va, image=img)
+    r = compare_function(target, fn, coff, fn_va=c_va, image=img, known_names=known)
     if r.is_exact and r.hardcoded_addresses:
         return "MATCH_HARDCODED_ADDR", r.matched, "; ".join(r.hardcoded_addresses[:3])
     if r.is_exact:

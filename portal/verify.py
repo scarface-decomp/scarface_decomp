@@ -180,7 +180,9 @@ def check(args) -> int:
         return 2
     code = Path(args.file).read_text(encoding="utf-8")
     print(f"{compiler_version()}\nTarget {b}:0x{va:08X}, {size} bytes, flags {flags}")
-    r = verify_submission(code, target, flags, match, fn_va=va, image=img,
+    import names as NAMES
+    known = NAMES.addresses(NAMES.load(ROOT / "reports" / "names.json"), b)
+    r = verify_submission(code, target, flags, match, fn_va=va, image=img, known_names=known,
                           include_dirs=[ROOT / "reconstructed_src" / "include", ROOT / "reconstructed_src", Path(args.file).resolve().parent])
     if not r.get("ok"):
         print("\n" + r["compiler_error"])

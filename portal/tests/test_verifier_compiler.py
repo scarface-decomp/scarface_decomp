@@ -109,3 +109,21 @@ def test_drivethread_vfunc_00_matches_as_void():
         "void DriveThread::vfunc_00() { ResolveDescA", "void* DriveThread::vfunc_00() { return ResolveDescA")
     r = MV.verify_submission(returning, target, FLAGS, "vfunc_00@DriveThread@", fn_va=0x006E7EB0, image=img)
     assert r["ok"] and not r["is_exact"]
+
+
+def test_a_call_by_a_known_name_is_checked_against_its_address(tiny_xbe):
+    """Code may call a function by the name reports/names.json gives its address; a name nobody has
+    tied to an address stays unchecked, and a name tied to another address is a mismatch."""
+    src = ('class Weapon { public: void Reload(); void sub_00011000(); int m_ammo; };\n'
+           'void Weapon::sub_00011000() { m_ammo = 0; Reload(); }')
+    coff, fn = compiled(src, "sub_00011000")
+    at = [off for off, _, _ in fn.relocs][0]
+    target = bytearray(fn.code)
+    target[at:at + 4] = (0x11200 - (0x11000 + at + 4)).to_bytes(4, "little", signed=True)   # the call goes to 0x11200
+    args = dict(fn_va=0x11000, image=tiny_xbe)
+    named = MV.compare_function(bytes(target), fn, coff, known_names={"Weapon::Reload": 0x11200}, **args)
+    assert named.is_exact and named.reloc_checked == 1 and named.reloc_unverified == 0
+    unknown = MV.compare_function(bytes(target), fn, coff, **args)
+    assert unknown.is_exact and unknown.reloc_checked == 0 and unknown.reloc_unverified == 1
+    wrong = MV.compare_function(bytes(target), fn, coff, known_names={"Weapon::Reload": 0x11300}, **args)
+    assert not wrong.is_exact and "Weapon::Reload" in wrong.reloc_mismatch[0]
