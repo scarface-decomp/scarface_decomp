@@ -6,6 +6,13 @@ found out about the game's files and behaviour can, through a
 [clean-room](https://en.wikipedia.org/wiki/Clean-room_design) process: the knowledge crosses over as a
 written description, and the code is written fresh by someone who never saw the original.
 
+**What this does and doesn't cover.** The clean room here is this one path: outside research done beside
+leaked source, reaching the project only as specs. It does not make the project as a whole a clean-room
+reimplementation. A matching decompilation reads the original program: the game's own machine code is the
+reference every function is checked against. So the claim the project makes is narrower and should be
+worded that way: **no leaked source code is used, nor anything written beside it; you need your own copy
+of the game.** Don't describe the decompilation itself as "clean room".
+
 ## Roles
 
 * **Examiner.** Reads the outside research and writes a **spec** in `docs/cleanroom/`: what the game's

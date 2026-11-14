@@ -3,7 +3,7 @@
 What is still wrong or unfinished, written so someone new can pick one thing and start. Each item says
 what is wrong, how to see it, and what "done" looks like. The numbers are from 13 November 2026.
 
-Before you start: read [CONTRIBUTING.md](CONTRIBUTING.md) and [CLEAN_ROOM.md](CLEAN_ROOM.md). You need your
+Before you start: read [CONTRIBUTING.md](CONTRIBUTING.md) and [PROVENANCE.md](PROVENANCE.md). You need your
 own copy of the game. Nothing here may come from leaked source code or from tools written beside it, and no
 game files go into the repository. Say in [Discord](https://discord.gg/azvrtGBvau) what you are taking so
 two people don't do the same thing.
@@ -79,7 +79,7 @@ the 2006 Xbox prototype). Three of them read as finished C++.
   Only the plain part is in the queue.
 - **Done:** not something to "fix"; listed so nobody is surprised. PC work is the 1,516.
 
-### 1.11 Clean-room spec work
+### 1.11 Work described by the specs
 One small pull request each, naming the spec and section. Files win over specs; a question the spec does
 not answer goes in its "Questions from the implementer" section.
 - SPEC-005 section 6, item 3: STEP interpolation and visibility in the glTF export; then items 4 to 7.
