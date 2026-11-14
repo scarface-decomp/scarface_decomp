@@ -29,7 +29,7 @@ from msvc_verify import decorated_hint
 from sf_binaries import BinaryImage, Extent, collect_call_targets, function_extent, not_compiled_reason
 
 # Bumped when the checks that keep data out of the queue change; the portal re-checks older queues.
-CODE_CHECK = 1
+CODE_CHECK = 2
 
 PC_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # Only this part of the retail PC .text is stored as plaintext (the rest is not readable code),

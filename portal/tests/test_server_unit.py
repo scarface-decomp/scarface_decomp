@@ -65,6 +65,8 @@ class _Img:
     (b"\x3C\x8B", False),                               # cmp al, 8Bh and then nothing
     (b"\x05\x05\x02\x05\x05\xCC", False),               # a table of small numbers, then padding
     (b"\xC5\x10\x8B\x4D\x00\xC3", False),               # lds: the middle of another instruction
+    (b"\xC2\x83\xC0", False),                           # "ret 0xC083": the tail of xor eax, edx / add eax, 1
+    (b"\x33\xC0\xC2\x08\x00", True),                   # xor eax, eax; ret 8: an ordinary __stdcall return
 ])
 def test_data_is_not_queued_as_a_function(code, ok):
     from sf_binaries import not_compiled_reason
