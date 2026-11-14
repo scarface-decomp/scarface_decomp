@@ -5,15 +5,8 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-13T21:52:58Z</updated>
+  <updated>2026-11-13T21:52:40Z</updated>
   <author><name>Scarface decomp contributors</name></author>
-  <entry>
-    <title>FETextObject::vfunc_46 (Xbox, 4 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002D6510"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002D6510</id>
-    <updated>2026-11-13T21:52:58Z</updated>
-    <summary>0x002D6510 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
   <entry>
     <title>FETextObject::vfunc_46 (PC, 4 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00700200"/>
@@ -356,5 +349,12 @@
     <id>tag:scarface-decomp.pages.dev,2026:proto:0x002A7B20</id>
     <updated>2026-11-13T21:17:29Z</updated>
     <summary>0x002A7B20 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_002A7760 (Xbox prototype, 130 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002A7760"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002A7760</id>
+    <updated>2026-11-13T21:17:29Z</updated>
+    <summary>0x002A7760 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

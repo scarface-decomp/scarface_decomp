@@ -1865,7 +1865,13 @@ def git_sync(user: str, base: Path = BASE_DIR) -> dict:
         rc, top = run(["rev-parse", "--show-toplevel"])
         if rc or not _same_folder(top, base):       # no .git here (a ZIP download), or a folder inside another repo
             return {"ok": False, "error": NOT_A_CLONE}
-        rc, out = run(["add", "--"] + [p for p in GIT_PATHS if (base / p).exists()])
+        # Background runs (look-alikes, the easy pass) record matches in memory and save in batches. Write the
+        # registry and everything generated from it together, and stage them before anything else is recorded,
+        # or the commit can hold generated files that are one match ahead of the registry.
+        with STATE_LOCK:
+            if base == BASE_DIR and REGISTRY.get("entries"):
+                save_registry()
+            rc, out = run(["add", "--"] + [p for p in GIT_PATHS if (base / p).exists()])
         if rc:
             return {"ok": False, "error": "git add failed: " + out[-400:]}
         rc, out = run(["diff", "--cached", "--quiet"])
