@@ -404,6 +404,14 @@ def is_helper_function(name: str) -> bool:
     return name.startswith(("__ehhandler$", "__unwindfunclet$", "__catch$", "$", "__tryend$"))
 
 
+_THUNK = re.compile(r"@@W[0-9A-P]+@?A[AEGI]")
+
+
+def is_adjustor_thunk(name: str) -> bool:
+    """?Method@Class@@W3AEXXZ: MSVC's "[thunk]: Class::Method`adjustor{4}'"."""
+    return name.startswith("?") and bool(_THUNK.search(name))
+
+
 def select_function(funcs: List[ObjFunction], match_substr: str = "") -> Tuple[Optional[ObjFunction], str]:
     """Pick the target function out of an .obj. match_substr may list alternatives separated by '|';
     the first alternative that picks out exactly one function wins."""
@@ -426,6 +434,11 @@ def select_function(funcs: List[ObjFunction], match_substr: str = "") -> Tuple[O
                 return exact[0], ""
             return None, ("Several functions match '" + match_substr + "': " + ", ".join(f.name for f in hits)
                           + ". Keep only the target function out-of-line in this translation unit.")
+    thunks = [f for f in main if is_adjustor_thunk(f.name)]
+    if len(thunks) == 1 and not any(match_substr and match_substr in f.name for f in main):
+        # The target is a thunk the compiler writes for a class with two bases (sub ecx, N; jmp method).
+        # It is named after the method it jumps to, never after its own slot, so the name can't pick it out.
+        return thunks[0], ""
     if len(main) == 1:
         return main[0], ""
     if not main:
