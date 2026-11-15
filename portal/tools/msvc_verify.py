@@ -412,18 +412,27 @@ def is_adjustor_thunk(name: str) -> bool:
     return name.startswith("?") and bool(_THUNK.search(name))
 
 
-def select_function(funcs: List[ObjFunction], match_substr: str = "") -> Tuple[Optional[ObjFunction], str]:
+def select_function(funcs: List[ObjFunction], match_substr: str = "",
+                    own_name: str = "") -> Tuple[Optional[ObjFunction], str]:
     """Pick the target function out of an .obj. match_substr may list alternatives separated by '|';
-    the first alternative that picks out exactly one function wins."""
+    the first alternative that picks out exactly one function wins. own_name: the C++ name on record
+    for the address being checked, if it has one."""
     if "|" in match_substr:
         last = (None, "")
         for alt in [a for a in match_substr.split("|") if a]:
-            fn, why = select_function(funcs, alt)
+            fn, why = select_function(funcs, alt, own_name)
             if fn is not None:
                 return fn, ""
             last = (None, why)
         return last
     main = [f for f in funcs if not is_helper_function(f.name)]
+    if own_name and not any(match_substr and match_substr in f.name for f in main):
+        # The function may be written under its real name once reports/names.json ties that name to the
+        # address being checked (own_name): "Weapon::Reload" picks ?Reload@Weapon@@QAEXXZ. The address
+        # name still wins when the code uses it, and overloads of one name are not guessed between.
+        named = [f for f in main if qualified_name(f.name) == own_name and not is_adjustor_thunk(f.name)]
+        if len(named) == 1:
+            return named[0], ""
     if match_substr:
         hits = [f for f in main if match_substr in f.name]
         if len(hits) == 1:
@@ -691,7 +700,8 @@ def verify_submission(cpp_code: str, target: bytes, flags: str, match_substr: st
         coff = CoffObject(cr.obj)
     except ValueError as e:
         return {"ok": False, "compiler_error": f"Could not read the compiled object: {e}"}
-    fn, why = select_function(coff.functions(), match_substr)
+    own_name = next((n for n, a in (known_names or {}).items() if a == fn_va), "") if fn_va is not None else ""
+    fn, why = select_function(coff.functions(), match_substr, own_name)
     if fn is None:
         return {"ok": False, "compiler_error": why}
     res = compare_function(target, fn, coff, fn_va=fn_va, image=image, known_symbols=known_symbols,
