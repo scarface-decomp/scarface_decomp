@@ -139,3 +139,22 @@ def test_an_adjustor_thunk_is_found_without_its_name():
     assert MV.select_function(named, "vfunc_00@ControllerSystemXBox@core@@")[0] is named[3]
     two = funcs + [_fn("?sub_00248900@ControllerSystemXBox@core@@W3AEXXZ")]
     assert MV.select_function(two, "vfunc_00@ControllerSystemXBox@core@@")[0] is None
+
+
+def test_a_function_may_be_written_under_its_real_name():
+    """Once reports/names.json ties a name to the address being checked, the code may define the function
+    under that name; before, it had to keep sub_XXXXXXXX for ever, and nothing could read as finished."""
+    funcs = [_fn("?Reload@Weapon@game@@QAEXXZ"), _fn("?Fire@Weapon@game@@QAEXXZ")]
+    assert MV.select_function(funcs, "sub_0011E4A0")[0] is None                       # no name on record: no guess
+    assert MV.select_function(funcs, "sub_0011E4A0", "game::Weapon::Reload")[0] is funcs[0]
+    assert MV.select_function(funcs, "sub_0011E4A0|vfunc_03@Weapon", "game::Weapon::Fire")[0] is funcs[1]
+    assert MV.select_function(funcs, "sub_0011E4A0", "game::Weapon::Aim")[0] is None  # that name isn't in the object
+    # the address name still wins when the code uses it
+    both = funcs + [_fn("?sub_0011E4A0@Weapon@game@@QAEXXZ")]
+    assert MV.select_function(both, "sub_0011E4A0", "game::Weapon::Reload")[0] is both[2]
+    # two overloads of the name: not guessed between
+    two = [_fn("?Reload@Weapon@game@@QAEXXZ"), _fn("?Reload@Weapon@game@@QAEXH@Z")]
+    assert MV.select_function(two, "sub_0011E4A0", "game::Weapon::Reload")[0] is None
+    # a thunk named after the method is not the method
+    thunk = [_fn("?Reload@Weapon@game@@W3AEXXZ"), _fn("??0Weapon@game@@QAE@XZ")]
+    assert MV.select_function(thunk, "", "game::Weapon::Reload")[0] is thunk[0]        # (the thunk rule, as before)

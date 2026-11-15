@@ -3478,7 +3478,10 @@
       aiNeighbours(t),
       'Disassembly, to work out what things are:' + NL + (Array.isArray(t.disasm_lines) ? t.disasm_lines : []).join(NL),
       'WHAT YOU MAY CHANGE: names of members, parameters, locals and classes; types that have the same size and compile the same; raw pointer arithmetic into a named member at the same offset; comments.',
-      'WHAT MUST STAY: the function\'s own name (' + String(t.symbol).split('::').pop() + ', so the portal can find it); the order and sizes of members; every called function or global that is not in the list above keeps its sub_XXXXXXXX or DAT_XXXXXXXX name, because that name is how its address is checked.',
+      'WHAT MUST STAY: ' + (t.known_name && t.known_name.name
+        ? 'the function is on record as ' + t.known_name.name + ': define it under that name (the portal finds it by it)'
+        : 'the function\'s own name (' + String(t.symbol).split('::').pop() + '): a new name for it goes on the FUNCTION NAME line, not into the code') +
+        '; the order and sizes of members; every called function or global that is not in the list above keeps its sub_XXXXXXXX or DAT_XXXXXXXX name, because that name is how its address is checked.',
       'Name only what the code, the notes above or a string it uses shows. Say in a short comment what each new name rests on. A guessed name that sounds sure is worse than an honest stand-in: leave those as they are.',
       feedback || '',
       t.known_name ? '' : 'THE FUNCTION\'S OWN NAME: if the code shows what this function does, put one line before the code block, exactly in this form:' + NL +

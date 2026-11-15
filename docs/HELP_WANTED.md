@@ -17,6 +17,9 @@ two people don't do the same thing.
 | Cutscenes and models | the portal, the game's data files, Blender |
 | Portal and tools | Python; for the page, a browser |
 
+Where all of this is heading, step by step: [ROADMAP.md](ROADMAP.md). Working with a coding agent:
+[AGENTS.md](../AGENTS.md).
+
 ---
 
 ## 1. Decompiling

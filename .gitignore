@@ -48,3 +48,4 @@ docs/data/
 # Python packages for the launchers (portal/.venv)
 .venv/
 .pytest_cache/
+work/

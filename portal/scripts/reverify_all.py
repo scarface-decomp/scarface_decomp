@@ -308,7 +308,8 @@ def judge(c: Claim, target: bytes, obj: bytes, flags: str, img) -> Tuple[str, in
 
 def judge_one(coff: CoffObject, match: str, target: bytes, va: int, img,
               known: Optional[Dict[str, int]] = None) -> Tuple[str, int, str]:
-    fn, why = select_function(coff.functions(), match)
+    own = next((n for n, a in (known or {}).items() if a == va), "")
+    fn, why = select_function(coff.functions(), match, own)
     if fn is None:
         return "UNMAPPED", 0, why
     c_va = va

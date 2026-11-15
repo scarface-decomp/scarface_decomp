@@ -43,6 +43,9 @@ This is a community project and every bit of help counts, from your first 5-byte
 naming classes and documenting the engine. You don't need to be an expert: the portal hands you one
 function at a time, shows the original bytes and disassembly, and tells you exactly how close your
 C++ is. See [CONTRIBUTING.md](docs/CONTRIBUTING.md) to get started. What still needs doing, one job at a time: [HELP_WANTED.md](docs/HELP_WANTED.md).
+Working with a coding agent (Claude Code, Codex, Cursor and the like)? Tell it: *read
+[AGENTS.md](AGENTS.md) in this repository and follow it*. It works from the command line with
+`portal/agent.py`, under the same rules as the portal.
 
 **Game scripts:** all 635 of the game's compiled TorqueScript files (the same on PS2, Xbox and PC) and all
 864 of the April 2006 prototype's decompile to readable TorqueScript that compiles back to the identical
