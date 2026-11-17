@@ -11,3 +11,6 @@ commit `reports/` and `reconstructed_src/` as the portal left them.
 The comment lines at the top of each file say which function it is (`bin`, `va`), what it does (`what`,
 saved as the match's description) and where the knowledge came from (`spec`, or for a look-alike of a
 function already matched, the `tool` line naming that function).
+
+`easy/` holds a batch of functions the portal's starter code matches with no AI; see its README for the
+one command that records them.

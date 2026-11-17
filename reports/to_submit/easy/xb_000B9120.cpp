@@ -1,0 +1,31 @@
+// bin: xb
+// va: 0x000B9120
+// tool: the portal's starter code (no AI)
+// sub_000B9120 (0x000B9120, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0039D65C;
+
+class Class_000B9120
+{
+public:
+    Class_000B9120* sub_000B9120();
+    bool m_Field00; // +0x00
+    char m_pad01[0x3];
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+};
+
+Class_000B9120* Class_000B9120::sub_000B9120()
+{
+    float t1;
+
+    m_Field04 = 0.0f;
+    t1 = DAT_0039D65C;
+    m_Field00 = false;
+    m_Field08 = t1;
+    m_Field0C = false;
+    return this;
+}
