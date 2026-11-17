@@ -168,6 +168,10 @@ def test_scoreboard_and_progress(site, browser):
                                                 f"its own: {v['total'] + v['proto']:,} in all.")
     else:
         assert pg.is_hidden("#sb-proto")
+    src = PROG["source"]                                      # and how much of it reads like source yet
+    line = pg.text_content("#sb-source")
+    assert f"{src['shared_class']['total']:,} functions share one class declaration" in line
+    assert f"{src['named']['total']:,} have a real name" in line and "placeholder names" in line
     share = v["total"] / total * 100
     assert pg.text_content("#claim") == f"The world is {share:.1f}% yours." if share >= 10 else \
         pg.text_content("#claim") == f"The world is {share:.2f}% yours."

@@ -122,3 +122,21 @@ def test_open_functions_are_counted_by_the_registry_not_by_a_status_in_the_queue
     RO.write_progress(reg, reports)
     got = json.loads((reports / "progress.json").read_text(encoding="utf-8"))
     assert (got["queue"]["xb"], got["queue"]["pc"], got["queue"]["total"]) == (1, 2, 3) and got["verified"]["total"] == 1
+
+
+def test_progress_counts_what_shares_a_class_and_what_is_named():
+    import registry_outputs as RO
+    def entry(b, va, symbol):
+        return {"bin": b, "va": va, "symbol": symbol, "size": 8, "code": ""}
+    reg = {"entries": {"xb:0x00011000": entry("xb", "0x00011000", "Foo::vfunc_01"),
+                       "xb:0x00011100": entry("xb", "0x00011100", "Foo::vfunc_02"),
+                       "xb:0x00012000": entry("xb", "0x00012000", "sub_00012000"),
+                       "proto:0x00011000": entry("proto", "0x00011000", "Foo::vfunc_01")}}
+    classes = {"by_class": {"xb:Foo": {"proven_functions": ["0x00011000", "0x00011100", "0x00099999"]},   # one is gone
+                            "proto:Foo": {"functions": 1, "proven": 0}}}
+    names = {"xb:0x00012000": {"name": "Start"}, "xb:0x00500000": {"name": "NotMatchedYet"}}
+    src = RO.progress_summary(reg, None, None, names, classes=classes)["source"]
+    assert src["member_functions"] == {"pc": 0, "xb": 2, "proto": 1, "total": 2}
+    assert src["shared_class"] == {"pc": 0, "xb": 2, "proto": 0, "total": 2}
+    assert src["named"] == {"pc": 0, "xb": 1, "proto": 0, "total": 1}
+    assert RO.progress_summary(reg, None, None)["source"]["shared_class"]["total"] == 0

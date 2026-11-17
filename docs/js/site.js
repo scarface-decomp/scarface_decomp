@@ -344,6 +344,16 @@
       $('sb-proto').textContent = 'Plus ' + fmt(v.proto) + ' in the unreleased 2006 Xbox prototype, counted on its own: '
         + fmt(v.total + v.proto) + ' in all.';
     }
+    // "Rebuilt" means it compiles to the same bytes. How much of it reads like source yet is a smaller number,
+    // and the page says so next to the headline.
+    var src = prog && prog.source;
+    $('sb-source').hidden = !src;
+    if (src) {
+      var done0 = (prog.readable && prog.readable.total) || 0;
+      $('sb-source').textContent = 'Rebuilt means it compiles to the same bytes; most of it still has placeholder names. '
+        + fmt(src.shared_class.total) + ' functions share one class declaration, ' + fmt(src.named.total)
+        + ' have a real name, and ' + fmt(done0) + (done0 === 1 ? ' is' : ' are') + ' fully named.';
+    }
     ['pc', 'xb', 'proto', 'ps2'].forEach(function (b) {
       var done = v[b] || 0, left = q ? (q[b] || 0) : 0, all = done + left;
       $(b + '-big').textContent = q ? fmtPct(pct(done, all)) + '%' : fmt(done);

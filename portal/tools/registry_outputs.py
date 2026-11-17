@@ -195,6 +195,30 @@ def _readable_counts(entries: list, names: Optional[dict] = None) -> dict:
     return {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "ps2": by["ps2"], "total": by["pc"] + by["xb"]}
 
 
+def _source_counts(registry: dict, names: Optional[dict], classes: Optional[dict]) -> dict:
+    """How far the matched code is from reading like source, beyond matching:
+    shared_class: matched functions proven against their class's one merged declaration
+                  (reports/classes.json, written by portal/scripts/merge_classes.py --verify);
+    named:        matched functions that have a name in reports/names.json.
+    "total" is the released game (PC + Xbox), as everywhere in this file."""
+    entries = registry.get("entries", {})
+
+    def counts(keys) -> dict:
+        by = defaultdict(int)
+        for key in keys:
+            e = entries.get(key)
+            if e:
+                by["ps2" if ps2_overlay.is_ps2(e["bin"]) else e["bin"]] += 1
+        return {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "total": by["pc"] + by["xb"]}
+    shared = []
+    for ckey, row in ((classes or {}).get("by_class") or {}).items():
+        b = ckey.split(":", 1)[0]
+        shared += [f"{b}:{va}" for va in row.get("proven_functions") or []]
+    return {"member_functions": counts(k for k, e in entries.items() if "::" in e.get("symbol", "")),
+            "shared_class": counts(shared),
+            "named": counts(k for k in (names or {}) if k in entries)}
+
+
 def _tier_of(size: int) -> str:
     """The size tier's name, as queue_builder.tier gives it (kept here so this file needs no disassembler)."""
     return ("TIER_1_QUICK" if size < 20 else "TIER_2_SMALL" if size < 40 else
@@ -202,7 +226,7 @@ def _tier_of(size: int) -> str:
 
 
 def progress_summary(registry: dict, queue: Optional[list], previous: Optional[dict],
-                     names: Optional[dict] = None, picks: bool = True) -> dict:
+                     names: Optional[dict] = None, picks: bool = True, classes: Optional[dict] = None) -> dict:
     """Small summary for the website: verified counts from the registry, work-queue counts from the local
     queue file when there is one (otherwise the last known numbers are kept)."""
     entries = list(registry.get("entries", {}).values())
@@ -225,6 +249,7 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
                      "ps2_bytes": sum(int(e.get("size", 0)) for e in entries if ps2_overlay.is_ps2(e["bin"]))},
         # of the matched: the ones with no stand-in names or raw address work left (tools/readability.py)
         "readable": _readable_counts(entries, names),
+        "source": _source_counts(registry, names, classes),
         "size_buckets": {name: sum(1 for e in entries if e["bin"] in ("pc", "xb") and lo <= int(e.get("size", 0)) < hi)
                          for name, lo, hi in SIZE_BUCKETS},
         "contributors": dict(sorted(contributors.items(), key=lambda kv: (-kv[1], kv[0].lower()))),
@@ -447,8 +472,14 @@ def write_progress(registry: dict, reports_dir: Path) -> bool:
         names = json.loads((reports_dir / "names.json").read_text(encoding="utf-8")).get("names")
     except (OSError, ValueError, AttributeError):
         pass
+    classes = None
+    try:
+        classes = json.loads((reports_dir / "classes.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
     summary = progress_summary(registry, counted, previous, names if isinstance(names, dict) else None,
-                               picks=bool(in_queue & set(good_first.MAIN_BINS)))
+                               picks=bool(in_queue & set(good_first.MAIN_BINS)),
+                               classes=classes if isinstance(classes, dict) else None)
     text = json.dumps(summary, indent=2) + "\n"
     if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
         return False
