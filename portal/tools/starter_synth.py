@@ -1521,8 +1521,10 @@ class Lifter:
             self.flags = ("res", Num(0))
             return self.store(ops[0], Num(0) if ops[0].size != 1 else Num(0))
         if mn in ("cmp", "test"):
-            a = self.value(ops[0], field_kind=None)
-            b = self.value(ops[1])
+            def width(op) -> str:                            # cmp byte ptr [edx], 0 compares one byte
+                return {1: "uchar", 2: "ushort"}.get(op.size, "int") if isinstance(op, Mem) else "int"
+            a = self.value(ops[0], width(ops[0]), field_kind=None)
+            b = self.value(ops[1], width(ops[1]))
             if a is None or b is None:
                 return False
             if mn == "test" and isinstance(ops[0], Reg) and isinstance(ops[1], Reg) and ops[0].name == ops[1].name:
@@ -1796,6 +1798,12 @@ class Lifter:
             return Cmp(">=", a, Num(0))
         uns = op.startswith("u")
         o = op[1:] if uns else op
+        if not uns and o in ("<", "<=", ">", ">="):
+            # A signed test of a byte or word member (cmp word ptr [ecx+8], 0; jle): the member is signed.
+            for e in (a, b):
+                if isinstance(e, Field) and e.kind in ("ushort", "uchar") and e.off in self.fields \
+                        and self.fields[e.off].get("kind") == e.kind:
+                    e.kind = self.fields[e.off]["kind"] = {"ushort": "short", "uchar": "char"}[e.kind]
         if uns and isinstance(b, Num) and b.v == 0:
             if o == ">":
                 return Cmp("!=", a, b)
@@ -2239,13 +2247,19 @@ class Renderer:
         others = {v.t(lf) for v in vals if not isinstance(v, Num)}
         if ts and all(t == "ptr:" + lf.cls_ref for t in ts):
             return "ptr:" + lf.cls_ref, False
+        if lf.ret_width == 1:                                    # al is the result, so a call passed on returns bool too
+            for v in vals:
+                if isinstance(v, Temp) and isinstance(v.d.value, Call) and v.d.value.callee.ret_hint == "int":
+                    v.d.value.callee.ret_hint = "bool"
+            ts = {v.t(lf) for v in vals if not (isinstance(v, Num) and v.v == 0)}
+            others = {v.t(lf) for v in vals if not isinstance(v, Num)}
         if lf.ret_width == 4 and vals and all(isinstance(v, Cmp) for v in vals):
             for v in vals:                                       # xor eax, eax; setcc al: an int, 0 or 1
                 v.explicit = True
             return "int", False
         if lf.ret_width == 2 and ts <= {"ushort", "short", "int"}:
             return "ushort", False
-        if ones and others <= {"bool"} and (others or lf.byte_ret):
+        if ones and others <= {"bool"} and (others or lf.byte_ret) and lf.ret_width != 4:
             return "bool", False
         if ts and all(t.startswith("ptr:") for t in ts):
             return "ptr:void", False
@@ -2265,7 +2279,10 @@ def result_width(insns) -> int:
         w = 0
         for j in range(k - 1, -1, -1):
             y = insns[j]
-            if y.mn in ("call", "jmp", "ret") or y.mn in JCC:
+            if y.mn == "call":
+                w = -1                                       # a call's result: as wide as the other rets say
+                break
+            if y.mn in ("jmp", "ret") or y.mn in JCC:
                 break
             d = y.ops[0] if y.ops else None
             if y.mn in ("push", "pop", "cmp", "test") or not isinstance(d, Reg) or d.parent != "eax":
@@ -2281,6 +2298,9 @@ def result_width(insns) -> int:
                         break
             break
         widths.add(w)
+    if widths == {-1}:
+        return 0
+    widths.discard(-1)
     return widths.pop() if len(widths) == 1 else 0
 
 
@@ -2534,8 +2554,9 @@ def render(lf: Lifter, symbol: str, va_label: str, n: int) -> str:
                 tparams.append(f"int N{k}")
                 continue
             tparams.append(f"class T{k}")
-            if a in ("bool", "char", "short", "int", "long", "float", "double", "unsigned", "signed"):
-                continue
+            if not re.fullmatch(r"[A-Za-z_][\w:]*", a) or \
+                    a in ("void", "bool", "char", "short", "int", "long", "float", "double", "unsigned", "signed"):
+                continue                                         # a built-in type, a pointer, ...: nothing to declare
             parts = split_scopes(a)
             fwd.append("".join(f"namespace {p} {{ " for p in parts[:-1]) + f"class {parts[-1]};" + " }" * (len(parts) - 1))
         out += fwd + ([""] if fwd else [])
