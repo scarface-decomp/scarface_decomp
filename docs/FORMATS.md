@@ -15,6 +15,7 @@ All numbers are little-endian unless a section says otherwise. Offsets are in he
 | [Pure3D](#pure3d-p3d) | `.p3d` | all | `p3d.py` (chunks, models to .obj), `p3d_gltf.py` (models, animations and maps to glTF for Blender), `stream_graph.py` ([what is loaded where](#the-stream-graph)), `game_assets.py` (contents), `media.py` (pictures) |
 | [Pictures in Pure3D](#pictures) | PNG, DDS, P3DI | PC, Xbox, PS2 | `media.py` |
 | [Sounds](#sounds-rsd) | `.rsd` | all | `game_assets.py` (facts), `media.py` (playing) |
+| [Text bibles](#text-bibles) | `.p3d` under `textbible/` and with missions | PC checked | `media.py` (`text_bible`) |
 | [Videos](#videos-bik) | `.bik` | Xbox and PC (Bink) | `game_assets.py` (Bink picture size) |
 | [PS2 movies](#ps2-movies-rmv) | `.rmv` | PS2 | `rmv.py` (to an `.ipu` picture and a `.wav`) |
 | [Compiled scripts](#scripts-cso-dso-dtr) | `.cso`, `.dso` | all | `torque_dso.py` and friends ([SCRIPTS.md](SCRIPTS.md)), `fog.py` ([the fog](#fog-by-time-of-day)) |
@@ -1176,6 +1177,15 @@ back.
 0x800 the sound data
 ```
 
+**The file's name.** The 16 hex digits are the game's name key done in 64 bits (`p3d.name_key64`:
+for each character, `h = h * 65599 mod 2^64`, the character + `0x20` if it is below `a`, `h ^=` the
+character) over the original path below `sound`, without its extension, in lower case with
+backslashes. `music\tapeplayer\tp_toots_fever` gives `c90ed53b0f931027`, so that sound is
+`art/sound/rsd/c/c90ed53b0f931027.rsd`. `media.sound_id` does this from any spelling of the path, so
+a sound can be found from its name without opening every file. A cutscene's sound is
+`localised\english\nis\<folder>\<scene name>_00` (the folder is `ps2_finals` on PC and PS2).
+Checked on the PC: 1,019 of 1,020 sounds tried.
+
 | Codec | Version | Data at `0x800` |
 | :--- | :--- | :--- |
 | `OOGV` | PC | an Ogg Vorbis stream (44.1 to 48 kHz) |
@@ -1191,6 +1201,30 @@ What each line of speech says, in a Pure3D file named like its sound (`art/sound
 One `0x0100500A` chunk per language: u32 length and the language's name (`English`), ended and padded
 to 4 bytes, two s32 (-1), u32 the length of the text in UTF-16 units, then the text (UTF-16). The portal
 shows them under the sound they go with.
+
+A line of speech's subtitles have its sound's 16 digits (`media.subtitle_file`). Cutscene sound tracks
+have no subtitle file of their own (5 of 5 checked on the PC); where the cutscenes' lines are kept is
+not known yet.
+
+## Text bibles
+
+The game's on-screen text (objectives, menus, prompts; not speech) is in Pure3D files: nine shared ones
+under `textbible/` and one with each mission (114 on the PC). A `0x0001800D` chunk names the bible, and
+inside it there is one `0x0001800E` chunk per language:
+
+```
+name, then a language letter
+u32 how many lines
+u32 0x0001003F
+u32 the size of the text, in bytes
+u32 x lines   keys, ascending: the 32-bit name key (p3d.name_key) of each line's id
+u32 x lines   where each line starts in the text
+the text      UTF-16, each line ended by a 0
+```
+
+A line is found by its id's key: `p3d.name_key("A64_GOTOHOTEL")`. `media.text_bible(data)` gives every
+`(key, text)`. The layout was worked out on the PC's 114 files; the reader in the repository is
+tested on made-up files only, so say so if a real one does not read.
 
 ## Videos (`.bik`)
 

@@ -176,14 +176,28 @@ they are not right yet.
 - **Done:** lips and jaw move as in the game; the neck is clean; separate face models are attached and
   animated.
 
+- **Seen (17 November 2026):** most people's mouths and eyes now move in cutscenes, as Tony's do, but
+  not everyone's. A face moves only when the script gives that person a face animation
+  (`NISExpAnimation`), the animation is found, and their head has shapes whose names match its sliders
+  (`portal/tools/cutscene.py`, `_cast`). **Wanted:** which people in which cutscenes stay still, so the
+  cause can be told apart (no face animation in the script, a model without shapes, or names that do
+  not match).
+
 ### 3.8 No sound
 - **Wrong:** cutscenes are silent.
 - **Done:** the cutscene's speech and effects on Blender's timeline, starting on the right frame.
+
+- **Known:** a cutscene's sound file can be found from its name: `media.sound_file` in
+  `portal/tools/media.py` (`docs/FORMATS.md`, Sounds). What is left is decoding it to a `.wav` beside the
+  export and adding it to Blender's sequencer.
 
 ### 3.9 No subtitles
 - **Wrong:** the game's subtitle text is not shown.
 - **Done:** each line shown while its audio plays, taken from the game's own text files and timed by the
   audio it belongs to.
+
+- **Known:** speech lines have a subtitle file named like their sound (`media.subtitle_file`), but the
+  cutscenes' own sound tracks do not (5 of 5 checked). Where the cutscenes' lines are kept is open.
 
 ### 3.10 Things the mission script does are missing
 - **Wrong:** doors that are shot open, effects, and the weapon a character carried in from gameplay are
