@@ -43,18 +43,19 @@ The step that turns snippets into source.
   (members by offset, virtual functions by slot, other member functions) into one class.
   With `--verify` it recompiles every function of the class with the merged class in place of its own
   copy, and keeps the class only for the functions that still compile to the game's bytes.
-- Measured on 17 November 2026 (15,630 matched functions, 8,322 of them member functions of 3,743
-  classes): **1,275 classes have a proven merged declaration, covering 4,173 functions.** They are in
-  `reports/classes/`, and `reports/classes.json` says how every class went. So this is a tool, not
-  hand work.
+- Measured on 17 November 2026 (15,630 matched functions, 8,322 of them member functions of 2,477
+  classes and templates): **1,335 classes have a proven merged declaration, covering 5,919
+  functions.** They are in `reports/classes/`, and `reports/classes.json` says how every class went.
+  So this is a tool, not hand work.
+- Every instance of a template (`ConcreteClassRep<X>` for each X) is merged under the one template
+  declaration its functions are written against.
 - What is left out, and why (`reports/classes.json` names each function):
-  - 2,224 functions of template classes (`CScript::Method1<void, bool>`): the tool does not read
-    templates yet.
+  - About 730 functions that no longer compile, or compile differently, with the merged class: two
+    copies type one member differently (an `int` in one, a pointer in another), or two instances of a
+    template define a slot with different signatures. A person or a smarter rule picks.
   - 458 functions whose class holds another object as a member (`Field20 m_Field20;`), and 67 with a
-    base class.
-  - About 200 where two copies type one member differently (an `int` in one, a pointer in another) and
-    the function no longer compiles with the other's type. A person or a smarter rule picks the type.
-  - 1,027 classes with only one matched function so far: nothing to merge.
+    base class: the tool does not read those yet.
+  - 1,039 classes with only one matched function so far: nothing to merge.
 - Still to do: make each function's recorded text use the merged class (through the portal, so the
   registry stays the proof), and carry a member's name from `reports/names.json` into every function of
   its class.

@@ -89,7 +89,8 @@ def test_copies_that_cannot_both_be_right_are_a_conflict():
     wide = GETTER.replace("int m_Field10;", "short m_Field10;")
     assert any("+0x10" in c for c in CM.merge(copies((GETTER, "Foo::vfunc_01"), (wide, "Foo::vfunc_01")), []).conflicts)
     other = GETTER.replace("virtual int vfunc_01();", "virtual float vfunc_01();").replace("int Foo::", "float Foo::")
-    assert any("slot 1" in c for c in CM.merge(copies((GETTER, "Foo::vfunc_01"), (other, "Foo::vfunc_01")), []).conflicts)
+    two = CM.merge(copies((GETTER, "Foo::vfunc_01"), (other, "Foo::vfunc_01"), (GETTER, "Foo::vfunc_01")), [])
+    assert not two.conflicts and any("slot 1" in n for n in two.notes) and "virtual int vfunc_01();" in CM.render(two)
     overlap = GETTER.replace("char m_pad04[0xC];\n    int m_Field10;", "char m_pad04[0xA];\n    short m_Field0E;\n    int m_Field10;") \
                     .replace("int m_Field10; // +0x10", "int m_Field10;")
     odd = GETTER.replace("char m_pad04[0xC];", "char m_pad04[0x9];\n    char m_pad0D[3];").replace("int m_Field10", "int m_Field10")
@@ -102,6 +103,42 @@ def test_a_differing_type_of_the_same_size_is_a_noted_choice():
     as_ptr = GETTER.replace("int m_Field10;", "char* m_Field10;").replace("return m_Field10;", "return (int)m_Field10;")
     mg = CM.merge(copies((GETTER, "Foo::vfunc_01"), (as_ptr, "Foo::vfunc_01"), (as_ptr, "Foo::vfunc_01")), [])
     assert not mg.conflicts and any("+0x10" in n for n in mg.notes) and "char* m_Field10;" in CM.render(mg)
+
+
+TEMPLATE = """class Thing;
+
+namespace ns {
+template <class T0> class Rep
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+};
+}
+
+template <> int ns::Rep<Thing>::vfunc_01()
+{
+    return m_Field08;
+}
+"""
+
+
+def test_every_instance_of_a_template_shares_the_template():
+    other = TEMPLATE.replace("Thing", "Other").replace("virtual void vfunc_00();", "virtual T0* vfunc_00();") \
+                    .replace("char m_pad04[0x4];\n    int m_Field08; // +0x08", "short m_Field04;")
+    assert CM.class_key("ns::Rep<Thing>::vfunc_01") == CM.class_key("ns::Rep<a::b<int>, Other*>::vfunc_00") == "ns::Rep"
+    decls = copies((TEMPLATE, "ns::Rep<Thing>::vfunc_01"), (other, "ns::Rep<Other>::vfunc_01"))
+    assert decls[0].params == ["T0"] and TEMPLATE[decls[0].start:].startswith("template <class T0> class Rep")
+    mg = CM.merge(decls, ["ns"])
+    text = CM.render(mg)
+    assert not mg.conflicts and text.startswith("template <class T0> class Rep\n{")       # T0 is not declared as a class
+    assert "virtual T0* vfunc_00();" in text and "short m_Field04; // +0x04" in text and "int m_Field08; // +0x08" in text
+    code = CM.with_class(TEMPLATE, decls[0], mg, 0)
+    assert code.count("template <class T0>") == 1 and "template <> int ns::Rep<Thing>::vfunc_01()" in code
+    with pytest.raises(CM.Unreadable, match="inside a template"):
+        CM.split_class("Outer<int>::Inner::f")
 
 
 @pytest.mark.parametrize("change,why", [

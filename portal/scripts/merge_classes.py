@@ -43,12 +43,17 @@ INCLUDES = [ROOT / "reconstructed_src" / "include", ROOT / "reconstructed_src"]
 
 
 def groups(entries: Dict[str, dict], only_bin: Optional[str] = None) -> Dict[Tuple[str, str], List[str]]:
-    """Registry keys of member functions, by (game, class)."""
+    """Registry keys of member functions, by (game, class). Every instance of a template is under
+    the template's own name."""
     out: Dict[Tuple[str, str], List[str]] = defaultdict(list)
     for key in sorted(entries):
         e = entries[key]
         if "::" in e["symbol"] and e["bin"] in FILES and only_bin in (None, e["bin"]):
-            out[(e["bin"], e["symbol"].rsplit("::", 1)[0])].append(key)
+            try:
+                cls = CM.class_key(e["symbol"])
+            except CM.Unreadable:
+                cls = e["symbol"].rsplit("::", 1)[0]
+            out[(e["bin"], cls)].append(key)
     return out
 
 
