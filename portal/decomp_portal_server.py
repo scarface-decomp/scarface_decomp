@@ -46,7 +46,7 @@ BASE_DIR = PORTAL_DIR.parent                          # the project folder: bina
 sys.path.insert(0, str(PORTAL_DIR / "tools"))
 
 import msvc_verify as MV  # noqa: E402
-from disasm_synth import disassemble, synthesize_cpp  # noqa: E402
+from disasm_synth import disassemble, synthesize_all, synthesize_cpp  # noqa: E402
 import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
@@ -1058,12 +1058,9 @@ def queue_item(t: dict, n: int) -> dict:
 # =========================================================================== #
 
 def flag_options(t: dict) -> List[str]:
-    """The task's flags first. PC also tries /G7, because a few PC functions only match with it
-    (portal/scripts/reverify_all.py does the same, so the portal and the re-verifier agree)."""
-    opts = [t["flags"]]
-    if t["bin"] == "pc" and "/G6" in t["flags"]:
-        opts.append(t["flags"].replace("/G6", "/G7"))
-    return opts
+    """The flag sets to try for t (MV.flag_options: the task's own first, then /G7 on PC and
+    /arch:SSE for Xbox functions that use SSE). The re-verifier uses the same list."""
+    return MV.flag_options(t["bin"], t["flags"], target_bytes(t))
 
 
 NO_COMPILER_HELP = ("The 2003 compiler is not installed on this computer yet, so it can't verify here.\n"
@@ -1164,7 +1161,7 @@ def run_verify(t: dict, cpp_code: str, object_b64: str = "", slug: str = "") -> 
                                    known_names=known_names(t["bin"]))
         res["flags"] = flags
         if not res.get("ok"):
-            # A compile error or policy rejection does not depend on /G6 vs /G7.
+            # A compile error or policy rejection does not depend on the flag set.
             return best or res
         res["verified"] = bool(res["is_exact"] and not res.get("hardcoded_addresses"))
         res["bytes_exact"] = res["is_exact"]
@@ -1437,7 +1434,7 @@ def catch_up_lookalikes() -> int:
 # background, and records the ones that match exactly with every address checked.
 
 EASY_TOOL = "the portal's starter code (no AI)"
-EASY_VERSION = 2                                   # raise when the starter code gets better: tried again
+EASY_VERSION = 3                                   # raise when the starter code gets better: tried again
 EASY_MAX = int(os.environ.get("SCARFACE_EASY_MAX", "0"))    # at most this many a run (0: all of them)
 EASY_JSON = PRIVATE_DIR / "easy_pass.json"         # which functions this computer already tried (gitignored)
 EASY: dict = {"running": False, "stop": False, "total": 0, "tried": 0, "matched": 0, "by": "", "last": ""}
@@ -1459,13 +1456,13 @@ def easy_targets(user: str, tried: dict) -> List[dict]:
 
 def easy_codes(t: dict) -> List[str]:
     """What to try on t: its best checkpoint, a matched look-alike's or counterpart's code rewritten for
-    it, and the code written from its disassembly."""
+    it, and the code written from its disassembly (each reading of it: see synthesize_all)."""
     tb = target_bytes(t)
     if not tb:
         return []
     with STATE_LOCK:
         out = [t.get("best_cpp") or "", lookalike_starter(t)[0], counterpart_starter(t)[0]]
-    out.append(synthesize_cpp(t["symbol"], t["va"], tb, disassemble(tb), relocs=starter_relocs(t, tb)))
+    out += synthesize_all(t["symbol"], t["va"], tb, disassemble(tb), relocs=starter_relocs(t, tb))
     seen, codes = set(), []
     for code in out:
         if code.strip() and code.strip() not in seen:

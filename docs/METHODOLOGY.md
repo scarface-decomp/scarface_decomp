@@ -40,6 +40,11 @@ executable, `.rdata` and `.data` included.
 * PC only: when `/G6` does not match, the same code is tried with `/G7`. Before the reset, 14 of the 155 verified PC
   functions needed `/G7`. Xbox code is checked with `/G6` only (see the notes in section 5). The
   registry stores the flags that matched.
+* Xbox only (retail and prototype): a function whose own instructions use the SSE registers
+  (`movss xmm0, ...`) is also tried with `/arch:SSE` added. The compiler never writes those
+  instructions without that flag, and the console's Pentium III has them. Functions that do not
+  use the registers are never tried with it. `msvc_verify.flag_options` holds this rule, and the
+  portal, `portal/verify.py`, `portal/agent.py` and the re-verifier all use it.
 * **decomp.me has the same compiler.** Its `msvc7.1` compiler (platform *Windows (9x/NT)*) gave 100%
   on two functions verified here before the reset, one PC (`CementLibrary::vfunc_05`, 39 B, `/G7`) and one Xbox
   (`sub_0001EF60`, 7 B), checked on 2026-11-08. It compiles as C unless `/TP` is passed, so the
@@ -140,6 +145,16 @@ These were each confirmed by compiling variants and comparing against the game.
   (`59`) when the function returns nothing, and with `add esp, 4` (`83 C4 04`) when it returns the
   call's result. `return f(x);` and `f(x);` are therefore different functions.
   (`core::DriveThread::vfunc_00` matches only as `void`.)
+* **A function that starts `push ebp; mov ebp, esp`** was built with frame pointers kept. Put
+  `#pragma optimize("y", off)` above it. When such a function does nothing but jump to another
+  (`push ebp; mov ebp, esp; pop ebp; jmp X`), it hands its own arguments on: the frame is there
+  because the source names a parameter (`void f(int a) { g(a); }`).
+* **SSE setters and getters** (`movss xmm0, [esp+4]; movss [ecx+N], xmm0`) are plain `float` code
+  under `/arch:SSE` (section 2).
+* **One bit of a byte** (`mov al, [ecx+N]; shr al, 6; and al, 1; ret`) is a one-bit bitfield member
+  returned as `bool`; `(m >> 6) & 1` on a whole byte compiles differently.
+* **`neg eax; sbb eax, eax; neg eax`** is `x != 0` written out; ending in `inc eax` it is `x == 0`.
+  `xor eax, eax; test r, r; setne al` is the same comparison in a function that returns `int`.
 * **Do not reach for `#pragma optimize("s")`.** It does not just change `add esp` into `pop ecx`; it
   makes the compiler push memory operands directly (`FF 71 08 push dword ptr [ecx+8]` instead of
   `8B 41 08 50`), which the game's PC code does not do.

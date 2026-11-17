@@ -24,7 +24,7 @@ One ` ```cpp ` block containing a complete translation unit that compiles on its
 ## How it is checked
 
 Compiled with `cl.exe` 13.10.3052 (Visual C++ Toolkit 2003, MSVC 7.1):
-`/nologo /c /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4` (PC functions are also tried with `/G7`).
+`/nologo /c /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4` (PC functions are also tried with `/G7`; Xbox functions that use `xmm` registers are also tried with `/arch:SSE`).
 It counts as VERIFIED only if:
 
 1. the compiled function has **exactly** the original's length and bytes, apart from the 4-byte fields

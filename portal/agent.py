@@ -75,9 +75,8 @@ def image(b: str):
     return BinaryImage(path)
 
 
-def flags_for(t: dict) -> list:
-    first = t.get("flags") or DEFAULT_FLAGS
-    return [first] + ([first.replace("/G6", "/G7")] if t["bin"] == "pc" and "/G6" in first else [])
+def flags_for(t: dict, target=None) -> list:
+    return MV.flag_options(t["bin"], t.get("flags") or DEFAULT_FLAGS, target)
 
 
 def known_names(b: str) -> dict:
@@ -117,7 +116,7 @@ def cmd_packet(args) -> int:
     symbol = t.get("symbol") or f"sub_{va:08X}"
     label = f"{'PC ' if b == 'pc' else 'Proto ' if b == 'proto' else ''}0x{va:08X}"
     print(f"{symbol}  ({b} 0x{va:08X}, {size} bytes)" + ("   ALREADY MATCHED" if entry else ""))
-    print(f"flags: {' | '.join(flags_for(t))}")
+    print(f"flags: {' | '.join(flags_for(t, tb))}")
     names = NAMES.load(ROOT / "reports" / "names.json").get("names", {})
     own = names.get(key_of(b, va))
     if isinstance(own, dict) and own.get("name"):
@@ -168,7 +167,7 @@ def check(path: Path) -> tuple:
     img = image(b)
     tb = img.read(va, int(t["size"]))
     best = None
-    for flags in flags_for(t):
+    for flags in flags_for(t, tb):
         r = MV.verify_submission(text, tb, flags, t.get("match_substr", ""), fn_va=va, image=img,
                                  include_dirs=[ROOT / "reconstructed_src" / "include", ROOT / "reconstructed_src"],
                                  known_names=known_names(b))

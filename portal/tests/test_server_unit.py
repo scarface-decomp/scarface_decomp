@@ -431,9 +431,9 @@ def test_easy_pass_tries_each_starting_point_once(S, monkeypatch):
     monkeypatch.setattr(S, "lookalike_starter", lambda task: ("int kept() { return 1; }", "xb_1"))
     monkeypatch.setattr(S, "counterpart_starter", lambda task: ("", ""))
     monkeypatch.setattr(S, "starter_relocs", lambda task, tb: None)
-    monkeypatch.setattr(S, "synthesize_cpp", lambda *a, **k: "int drafted() { return 1; }")
+    monkeypatch.setattr(S, "synthesize_all", lambda *a, **k: ["int drafted() { return 1; }", "void drafted() { }"])
     monkeypatch.setattr(S, "disassemble", lambda tb: [])
-    assert S.easy_codes(t) == ["int kept() { return 1; }\n", "int drafted() { return 1; }"]
+    assert S.easy_codes(t) == ["int kept() { return 1; }\n", "int drafted() { return 1; }", "void drafted() { }"]
     monkeypatch.setattr(S, "target_bytes", lambda task: None)
     assert S.easy_codes(t) == []
     held = dict(t, id="xb_2", fva_int=0x11010, status="CLAIMED", claimed_by="Bob", claim_expires_at=S.now_ts() + 600)

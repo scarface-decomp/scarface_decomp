@@ -172,6 +172,19 @@ def sanitize_class_and_method(sym: str) -> Tuple[str, str, List[str]]:
     return cls, meth, ns
 
 
+def synthesize_all(symbol: str, va: str, target: bytes, disasm: List[str], relocs=None) -> List[str]:
+    """synthesize_cpp's code first, then the other readings of the same instructions
+    (starter_synth.synthesize_variants). For tools that compile each and keep the one that matches."""
+    first = synthesize_cpp(symbol, va, target, disasm, relocs)
+    out = [first]
+    try:
+        from starter_synth import synthesize_variants
+        out += [c for c in synthesize_variants(symbol, va, target, disasm, relocs) if c != first]
+    except Exception:
+        pass
+    return out
+
+
 def synthesize_cpp(symbol: str, va: str, target: bytes, disasm: List[str], relocs=None) -> str:
     """
     Compilable starter C++ for one function, written from its instructions (see starter_synth.py).
