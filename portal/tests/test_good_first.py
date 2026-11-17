@@ -159,17 +159,17 @@ def test_feed_of_new_matches():
 
 
 def test_sitemap_lists_the_pages_and_every_function():
-    """docs/sitemap.xml: the two pages, then each rebuilt function's own page with the day it was matched."""
+    """docs/sitemap.xml: the pages, then each rebuilt function's own page with the day it was matched."""
     reg = {"entries": {f"xb:0x{i:08X}": entry(i) for i in (3, 1, 2)}}
     reg["entries"]["pc:0x00000009"] = dict(entry(9), bin="pc", verified_at="")
     doc = xml.dom.minidom.parseString(RO.sitemap_xml(reg))
     urls = doc.getElementsByTagName("url")
     locs = [u.getElementsByTagName("loc")[0].firstChild.data for u in urls]
-    assert locs == [RO.SITE, RO.SITE + "versions.html", RO.SITE + "function.html?f=pc%3A0x00000009"] + [
+    assert locs == [RO.SITE, RO.SITE + "join.html", RO.SITE + "versions.html", RO.SITE + "function.html?f=pc%3A0x00000009"] + [
         RO.SITE + f"function.html?f=xb%3A0x0000000{i}" for i in (1, 2, 3)]
     days = [[m.firstChild.data for m in u.getElementsByTagName("lastmod")] for u in urls]
-    assert days == [[], [], []] + [["2026-11-10"]] * 3                 # no date known: none claimed
-    assert RO.sitemap_xml({"entries": {}}).count("<url>") == 2
+    assert days == [[], [], [], []] + [["2026-11-10"]] * 3                 # no date known: none claimed
+    assert RO.sitemap_xml({"entries": {}}).count("<url>") == 3
 
 
 def test_the_repository_sitemap_is_current():

@@ -338,7 +338,7 @@ def write_feed(registry: dict, docs_dir: Path) -> bool:
 
 
 def sitemap_xml(registry: dict) -> str:
-    """docs/sitemap.xml, for search engines: the two pages everyone starts from, then a page per rebuilt
+    """docs/sitemap.xml, for search engines: the pages everyone starts from, then a page per rebuilt
     function (function.html?f=...), with the day it was matched. Sorted by address, so it only changes when
     the registry does."""
     from xml.sax.saxutils import escape
@@ -346,6 +346,7 @@ def sitemap_xml(registry: dict) -> str:
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
            "  <url>", f"    <loc>{SITE}</loc>", "    <changefreq>daily</changefreq>", "  </url>",
+           "  <url>", f"    <loc>{SITE}join.html</loc>", "    <changefreq>weekly</changefreq>", "  </url>",
            "  <url>", f"    <loc>{SITE}versions.html</loc>", "    <changefreq>weekly</changefreq>", "  </url>"]
     for key, e in sorted(registry.get("entries", {}).items()):
         day = str(e.get("verified_at") or e.get("reverified_at") or "")[:10]

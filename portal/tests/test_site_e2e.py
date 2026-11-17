@@ -27,7 +27,7 @@ PROG = json.loads((FIX / "progress.json").read_text(encoding="utf-8"))
 
 
 # Everything the Cloudflare build serves from docs/ besides data/.
-STATIC = ("index.html", "404.html", "versions.html", "function.html", "feed.xml", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
+STATIC = ("index.html", "404.html", "versions.html", "join.html", "function.html", "feed.xml", "favicon.svg", "favicon-32.png", "apple-touch-icon.png", "og.jpg",
           "robots.txt", "sitemap.xml", "scarface-setup.bat")
 # Folders and files every page needs beside it: its script, the fonts, and the headers Cloudflare adds.
 ASSETS = ("js", "fonts", "_headers")
@@ -401,7 +401,7 @@ def test_404_page(site, browser):
     ctx.close()
 
 
-SITE_PAGES = ("index.html", "function.html", "versions.html", "404.html")
+SITE_PAGES = ("index.html", "function.html", "versions.html", "join.html", "404.html")
 
 
 def test_pages_have_no_inline_script_or_google_fonts():
@@ -433,7 +433,7 @@ def test_security_headers_hold_on_every_page(site, browser):
     assert "unsafe-inline" not in csp.split("script-src", 1)[1].split(";", 1)[0]
     assert rules["X-Frame-Options"] == "DENY" and rules["X-Content-Type-Options"] == "nosniff"
     key = next(iter(REG["entries"]))
-    for page in ("", "function.html?f=" + key.replace("_", ":0x", 1).upper().replace("0X", "0x"), "versions.html", "404.html"):
+    for page in ("", "function.html?f=" + key.replace("_", ":0x", 1).upper().replace("0X", "0x"), "versions.html", "join.html", "404.html"):
         ctx = browser.new_context()
         outside = []
         ctx.on("request", lambda r: outside.append(r.url) if not r.url.startswith(url) and not r.url.startswith("data:") else None)
@@ -689,3 +689,26 @@ def test_the_windows_setup_file(tmp_path):
     assert ("Content-Disposition", 'attachment; filename="scarface-setup.bat"') in cloudflare_headers(tmp_path, "/scarface-setup.bat")
     page = (ROOT / "docs" / "index.html").read_text(encoding="utf-8")
     assert '<a href="scarface-setup.bat" download>' in page and page.count("<li><b>", page.index('class="steps"'), page.index("</ol>", page.index('class="steps"'))) == 4
+
+
+def test_the_join_page_says_the_three_ways_and_the_agent_sentence(site, browser):
+    _, url = site
+    ctx, pg = open_page(browser, url + "join.html")
+    assert pg.text_content("h1") == "Join in"
+    assert pg.locator("h2 span").all_text_contents() == ["1", "2", "3"]
+    assert pg.text_content(".say") == "Read AGENTS.md in this repository and follow it."
+    assert "python portal/agent.py next" in pg.text_content("pre")
+    assert pg.get_attribute("a[download]", "href") == "scarface-setup.bat"
+    assert pg.evaluate("document.documentElement.scrollWidth") <= 1281
+    ctx.close()
+    ctx = browser.new_context(viewport={"width": 390, "height": 800})          # and on a phone nothing sticks out
+    pg = ctx.new_page()
+    pg.goto(url + "join.html")
+    assert pg.evaluate("document.documentElement.scrollWidth") <= 390
+    ctx.close()
+    _, home = open_page(browser, url)
+    assert home.get_attribute("#help a[href='join.html']", "href") == "join.html"
+    # every command the page shows exists in the project
+    for script in ("portal/doctor.py", "portal/agent.py", "portal/scripts/submit_matches.py", "AGENTS.md",
+                   "START_PORTAL.bat", "start_portal.sh"):
+        assert (ROOT / script).is_file(), script
