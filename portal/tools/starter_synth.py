@@ -44,6 +44,8 @@ JCC = {"je": "==", "jz": "==", "jne": "!=", "jnz": "!=", "jl": "<", "jnge": "<",
 SETCC = {"set" + k[1:]: v for k, v in JCC.items()}
 ARITH = {"add": "+", "sub": "-", "and": "&", "or": "|", "xor": "^", "shl": "<<", "sal": "<<", "shr": ">>",
          "sar": ">>", "imul": "*"}
+SSE_MOVE = ("movss", "movaps", "movups")
+SSE_ARITH = {"addss": "+", "subss": "-", "mulss": "*", "divss": "/"}
 NEG = {"==": "!=", "!=": "==", "<": ">=", ">=": "<", ">": "<=", "<=": ">"}
 CTYPE = {"int": "int", "uint": "unsigned int", "bool": "bool", "char": "char", "uchar": "unsigned char",
          "short": "short", "ushort": "unsigned short", "float": "float", "double": "double", "void": "void"}
@@ -96,6 +98,12 @@ class FpuReg:
         self.i = i
 
 
+class XmmReg:
+    """An SSE register (xmm0-xmm7). The game's Xbox code keeps single floats in them."""
+    def __init__(self, name: str):
+        self.name = name
+
+
 _MEM_RE = re.compile(r"^(?:(byte|word|dword|qword|tbyte|xmmword) ptr )?(?:(\w\w):)?\[([^\]]*)\]$")
 
 
@@ -129,6 +137,8 @@ def parse_operand(s: str):
     m = re.match(r"^st(?:\((\d)\))?$", s)
     if m:
         return FpuReg(int(m.group(1) or 0))
+    if re.match(r"^xmm[0-7]$", s):
+        return XmmReg(s)
     try:
         return Imm(int(s, 0))
     except ValueError:
@@ -369,6 +379,32 @@ class Field(E):
         return True
 
 
+class BitField(E):
+    """One bit of a byte member, read as `(m_Field >> bit) & 1`: a one-bit bitfield member. It is
+    written as one only when the byte is not also used whole (cx.whole_bytes), since the same
+    byte can't be declared both ways."""
+    def __init__(self, whole: E, off: int, bit: int):
+        self.whole, self.off, self.bit = whole, off, bit
+
+    def named(self, cx) -> bool:
+        return self.off not in cx.whole_bytes and bool(cx.field_ok(self.off, 1))
+
+    def t(self, cx):
+        return "bool" if self.off not in cx.whole_bytes else "int"
+
+    def r(self, cx):
+        if self.named(cx):
+            return f"m_Field{self.off:02X}_bit{self.bit}"
+        return self.whole.r(cx)
+
+    @property
+    def atomic(self):
+        return True
+
+    def kids(self):
+        return ()
+
+
 class FieldAddr(E):
     def __init__(self, off: int):
         self.off = off
@@ -530,6 +566,25 @@ class Un(E):
         return (self.a,)
 
 
+class BoolMask(E):
+    """0 or -1 from a comparison: what `neg x; sbb eax, eax` leaves. The next instruction usually
+    turns it into the comparison itself (neg) or its opposite (inc)."""
+    atomic = False
+
+    def __init__(self, c: "Cmp"):
+        self.c = c
+
+    @property
+    def impure(self):
+        return self.c.impure
+
+    def r(self, cx):
+        return f"-(int)({self.c.r(cx)})"
+
+    def kids(self):
+        return (self.c,)
+
+
 class Cast(E):
     atomic = False
 
@@ -555,6 +610,7 @@ class Cmp(E):
 
     def __init__(self, op: str, a: E, b: E, unsigned: bool = False):
         self.op, self.a, self.b, self.unsigned = op, a, b, unsigned
+        self.explicit = False                # write `x != 0` out: the code turned x into 0 or 1 itself
 
     @property
     def impure(self):
@@ -568,7 +624,7 @@ class Cmp(E):
 
     def r(self, cx):
         zero = isinstance(self.b, Num) and self.b.v == 0
-        if zero and self.op in ("!=", "==") and not self.unsigned:
+        if zero and self.op in ("!=", "==") and not self.unsigned and not (self.explicit and self.op == "!="):
             return self.a.r(cx) if self.op == "!=" else f"!{par(cx, self.a)}"
         if self.unsigned:
             return f"(unsigned int){par(cx, self.a)} {self.op} (unsigned int){par(cx, self.b)}"
@@ -889,6 +945,10 @@ def reads_writes(ins: Insn, has_value: bool) -> Tuple[Set[str], Set[str]]:
 class Lifter:
     def __init__(self, symbol: str, va: Optional[int], target: bytes, insns: List[Insn]):
         self.symbol, self.va, self.target, self.insns = symbol, va, target, insns
+        self.ret_width = 0
+        self.bits: Dict[int, Set[int]] = {}          # byte member offset -> bits read one at a time
+        self.whole_bytes: Set[int] = set()           # of those, the ones also used as a whole byte
+        self.flip_value = False
         self.names = plan_names(symbol)
         self.notes: List[str] = []
         self.fields: Dict[int, dict] = {}
@@ -1105,6 +1165,12 @@ class Lifter:
         return False
 
     def _has_value(self) -> bool:
+        guess = self._value_guess()
+        return (not guess) if self.flip_value else guess
+
+    def _value_guess(self) -> bool:
+        """Whether eax holds a result at the end. A guess: a void function may use eax as a scratch
+        register, and a call's result may or may not be passed on (synthesize_variants tries both)."""
         ins = self.insns
         for bi, (s, e) in enumerate(self.blocks):
             if ins[e - 1].mn not in ("ret", "retn"):
@@ -1149,6 +1215,8 @@ class Lifter:
             reg[r] = Var("r_" + r)
         self.reg = reg
         self.fpu: List[E] = []
+        self.xmm: Dict[str, E] = {}
+        self.negated: Optional[Tuple[str, E]] = None
         self.flags = None
         self.depth = 0
         self.frame: Optional[int] = None
@@ -1419,6 +1487,8 @@ class Lifter:
             if ops[0].parent == "ebp" and mn == "mov" and isinstance(ops[1], Reg) and ops[1].parent == "esp":
                 self.frame = self.depth
                 return True
+        if mn in SSE_MOVE or mn in SSE_ARITH or mn in ("xorps", "comiss", "ucomiss", "cvtsi2ss", "cvttss2si"):
+            return self.do_sse(x)
         if mn in ("mov", "movzx", "movsx"):
             src = ops[1]
             signed = True if mn == "movsx" else (False if mn == "movzx" else None)
@@ -1506,6 +1576,63 @@ class Lifter:
             return self.do_fpu(x)
         return False
 
+    def do_sse(self, x: Insn) -> bool:
+        """Single-float SSE code: the registers hold float values, so it reads as plain float C++."""
+        mn, ops = x.mn, x.ops
+        if len(ops) != 2:
+            return False
+        dst, src = ops
+
+        def val(op) -> Optional[E]:
+            if isinstance(op, XmmReg):
+                return self.xmm.get(op.name)
+            if isinstance(op, Mem):
+                return self.mem(op, "float", "float")
+            return None
+
+        if mn == "xorps":
+            if isinstance(dst, XmmReg) and isinstance(src, XmmReg) and dst.name == src.name:
+                self.xmm[dst.name] = FNum(0.0)
+                return True
+            return False
+        if mn == "cvtsi2ss" and isinstance(dst, XmmReg):
+            v = self.value(src)
+            if v is None:
+                return False
+            self.xmm[dst.name] = Cast("float", v)
+            return True
+        if mn == "cvttss2si" and isinstance(dst, Reg):
+            v = val(src)
+            return v is not None and self.store(dst, Cast("int", v))
+        if mn in ("comiss", "ucomiss"):
+            a, b = val(dst), val(src)
+            if a is None or b is None:
+                return False
+            self.flags = ("cmpf", a, b)
+            return True
+        if mn in SSE_MOVE:
+            if isinstance(dst, XmmReg):
+                if mn != "movss" and not isinstance(src, XmmReg):
+                    return False                             # a whole 16-byte load, not one float
+                v = val(src)
+                if v is None:
+                    return False
+                if v.impure and not isinstance(v, Temp):
+                    v = self.define(v)                       # read it now, before anything is stored
+                self.xmm[dst.name] = v
+                return True
+            if mn == "movss" and isinstance(dst, Mem) and isinstance(src, XmmReg):
+                v = self.xmm.get(src.name)
+                return v is not None and self.store(dst, v)
+            return False
+        if mn in SSE_ARITH and isinstance(dst, XmmReg):
+            a, b = self.xmm.get(dst.name), val(src)
+            if a is None or b is None:
+                return False
+            self.xmm[dst.name] = Bin(SSE_ARITH[mn], a, b)
+            return True
+        return False
+
     def do_push(self, x: Insn) -> bool:
         op = x.ops[0]
         # Saving a callee-saved register it has not touched yet is the prologue, not an argument.
@@ -1560,8 +1687,23 @@ class Lifter:
     def do_arith(self, x: Insn) -> bool:
         mn, ops = x.mn, x.ops
         dst = ops[0]
-        if mn in ("adc", "sbb"):
+        negated, self.negated = self.negated, None
+        if mn == "sbb":
+            # neg x; sbb r, r  ->  r = (x != 0) ? -1 : 0
+            if negated and isinstance(dst, Reg) and isinstance(ops[1], Reg) and dst.name == ops[1].name \
+                    and dst.size == 4 and negated[0] == dst.parent:
+                v = negated[1]
+                c = Cmp("!=", v.a, v.b) if isinstance(v, Bin) and v.op == "-" else Cmp("!=", v, Num(0))
+                self.flags = None
+                return self.store(dst, BoolMask(c))
             return False
+        if mn == "adc":
+            return False
+        if mn in ("inc", "neg") and isinstance(dst, Reg) and dst.size == 4 and isinstance(self.reg.get(dst.parent), BoolMask):
+            c = self.reg[dst.parent].c
+            c.explicit = True
+            self.flags = None
+            return self.store(dst, c.neg() if mn == "inc" else c)
         if mn in ("inc", "dec"):
             src: E = Num(1)
             op = "+" if mn == "inc" else "-"
@@ -1569,6 +1711,8 @@ class Lifter:
             cur = self.value(dst)
             if cur is None:
                 return False
+            if mn == "neg" and isinstance(dst, Reg) and not dst.high:
+                self.negated = (dst.parent, cur)
             new: E = Un("-" if mn == "neg" else "~", cur)
             self.flags = ("res", new)
             if isinstance(dst, Mem):
@@ -1607,6 +1751,19 @@ class Lifter:
         new = Bin(op, cur, src)
         if mn == "and" and isinstance(src, Num) and src.v == 0:
             new = Num(0)
+        if mn == "and" and isinstance(src, Num) and src.v == 1 and isinstance(dst, Reg) and dst.size == 1:
+            inner, bit = cur, 0
+            while isinstance(inner, Cast):
+                inner = inner.a
+            if isinstance(inner, Bin) and inner.op == ">>" and isinstance(inner.b, Num) and 0 < inner.b.v < 8:
+                inner, bit = inner.a, inner.b.v
+            while isinstance(inner, Cast):
+                inner = inner.a
+            if isinstance(inner, Temp) and isinstance(inner.d.value, Field):
+                inner = inner.d.value
+            if isinstance(inner, Field) and inner.size == 1:
+                self.bits.setdefault(inner.off, set()).add(bit)
+                new = BitField(new, inner.off, bit)
         if mn != "sub":
             self.flags = ("res", new)
         if isinstance(dst, Reg) and dst.parent in self.vars:
@@ -1625,6 +1782,10 @@ class Lifter:
             return self.fpu_cond(op, f[1], f[2])
         if op in ("p", "np"):
             return None
+        if f[0] == "cmpf":                                   # comiss sets the flags an unsigned compare does
+            if op in ("s", "ns"):
+                return None
+            return Cmp(op[1:] if op.startswith("u") else op, f[1], f[2])
         if f[0] == "cmp":
             a, b = f[1], f[2]
         else:
@@ -1792,7 +1953,12 @@ class Lifter:
         for y in self.insns:
             if y.mn in ("ret", "retn") and y.ops and isinstance(y.ops[0], Imm):
                 n = max(n, y.ops[0].value // 4)
-        return max(n, self.max_arg)
+        n = max(n, self.max_arg)
+        if not n and has_frame_pointer(self.target):
+            # A frame pointer in a function that only jumps on means it names a parameter: it hands
+            # its own arguments to the function it jumps to. One is enough to show that.
+            n = 1
+        return n
 
     def owner_of(self, obj: E, virtual: bool = False, as_type: Optional[str] = None) -> str:
         if isinstance(obj, This):
@@ -2059,7 +2225,7 @@ class Renderer:
                     collect(s.body)
                     collect(s.other)
         collect(lf.stmts)
-        if any(r.fval is not None for r in rets) and not lf.has_value:
+        if any(r.fval is not None for r in rets):               # something left on the x87 stack is the result
             vals = [r.fval for r in rets if r.fval is not None]
             return ("double" if any(v.t(lf) == "double" for v in vals) else "float"), True
         if not lf.has_value:
@@ -2073,6 +2239,12 @@ class Renderer:
         others = {v.t(lf) for v in vals if not isinstance(v, Num)}
         if ts and all(t == "ptr:" + lf.cls_ref for t in ts):
             return "ptr:" + lf.cls_ref, False
+        if lf.ret_width == 4 and vals and all(isinstance(v, Cmp) for v in vals):
+            for v in vals:                                       # xor eax, eax; setcc al: an int, 0 or 1
+                v.explicit = True
+            return "int", False
+        if lf.ret_width == 2 and ts <= {"ushort", "short", "int"}:
+            return "ushort", False
         if ones and others <= {"bool"} and (others or lf.byte_ret):
             return "bool", False
         if ts and all(t.startswith("ptr:") for t in ts):
@@ -2080,6 +2252,36 @@ class Renderer:
         if ts and ts <= {"float"}:
             return "float", False
         return "int", False
+
+
+def result_width(insns) -> int:
+    """How much of eax the function's result fills, from the last instruction that writes it before
+    each ret: 1 (al only: bool or char), 2 (ax: a short), 4 (all of eax), or 0 when the rets differ
+    or it can't be told. `xor eax, eax` then `setcc al` fills all of eax: an int that is 0 or 1."""
+    widths = set()
+    for k, x in enumerate(insns):
+        if x.mn != "ret":
+            continue
+        w = 0
+        for j in range(k - 1, -1, -1):
+            y = insns[j]
+            if y.mn in ("call", "jmp", "ret") or y.mn in JCC:
+                break
+            d = y.ops[0] if y.ops else None
+            if y.mn in ("push", "pop", "cmp", "test") or not isinstance(d, Reg) or d.parent != "eax":
+                continue
+            w = d.size
+            if y.mn in SETCC and d.name == "al":
+                for i in range(j - 1, -1, -1):
+                    z = insns[i]
+                    if z.mn == "xor" and len(z.ops) == 2 and all(isinstance(o, Reg) and o.name == "eax" for o in z.ops):
+                        w = 4
+                    if z.mn in ("call", "jmp", "ret") or z.mn in JCC or \
+                            (z.ops and isinstance(z.ops[0], Reg) and z.ops[0].parent == "eax"):
+                        break
+            break
+        widths.add(w)
+    return widths.pop() if len(widths) == 1 else 0
 
 
 def adjustor_thunk(target: bytes, va: Optional[int]):
@@ -2134,7 +2336,23 @@ def render_thunk(symbol: str, va_label: str, va: int, n: int, back: int, dest: i
     return "\n".join(lines) + "\n"
 
 
-def synthesize(symbol: str, va_label: str, target: bytes, disasm: Sequence[str], relocs=None) -> str:
+def synthesize_variants(symbol: str, va_label: str, target: bytes, disasm: Sequence[str], relocs=None) -> List[str]:
+    """The starter code and the other readings of the same instructions, for a tool that can compile
+    each and keep the one that matches. Today the second reading differs in whether the function
+    returns what is in eax: the instructions alone do not always say."""
+    out: List[str] = []
+    for flip in (False, True):
+        try:
+            code = synthesize(symbol, va_label, target, disasm, relocs, flip_value=flip)
+        except Exception:
+            continue
+        if code not in out:
+            out.append(code)
+    return out
+
+
+def synthesize(symbol: str, va_label: str, target: bytes, disasm: Sequence[str], relocs=None,
+               flip_value: bool = False) -> str:
     m = re.search(r"0x([0-9A-Fa-f]+)", va_label or "")
     va = int(m.group(1), 16) if m else None
     thunk = adjustor_thunk(target, va)
@@ -2143,14 +2361,53 @@ def synthesize(symbol: str, va_label: str, target: bytes, disasm: Sequence[str],
     insns = parse_disasm(disasm)
     attach_relocs(insns, target, va, relocs)
     lf = Lifter(symbol, va, target, insns)
+    lf.flip_value = flip_value
     lf.has_vptr = lf.own_slot is not None
     lf.byte_ret = any(x.mn == "mov" and x.ops and isinstance(x.ops[0], Reg) and x.ops[0].name == "al" for x in insns)
+    lf.ret_width = result_width(insns)
+    if lf.ret_width == 1:
+        lf.byte_ret = True
     if insns:
         lf.run()
     else:
         lf.has_value = False
         lf.thiscall = lf.is_method
-    return render(lf, symbol, va_label, len(target))
+    return frame_pointer(target, render(lf, symbol, va_label, len(target)))
+
+
+FRAME_PRAGMA = '#pragma optimize("y", off)'
+
+
+def has_frame_pointer(target: bytes) -> bool:
+    """True when the function sets up ebp as a frame pointer (push ebp; mov ebp, esp). The game's
+    usual flags leave that out, so such a function was built with frame pointers kept."""
+    return target[:3] in (b"\x55\x8B\xEC", b"\x55\x89\xE5")
+
+
+def frame_pointer(target: bytes, code: str) -> str:
+    """code with frame pointers kept, when the target function keeps one."""
+    if not has_frame_pointer(target) or FRAME_PRAGMA in code:
+        return code
+    lines = code.split("\n")
+    k = 0
+    while k < len(lines) and lines[k].startswith("//"):
+        k += 1
+    lines[k:k] = ["// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.",
+                  FRAME_PRAGMA]
+    return "\n".join(lines)
+
+
+def bit_decls(off: int, bits: Set[int]) -> List[str]:
+    """Member lines for a byte whose bits are used one at a time: the used bits by name, the bits
+    below them as unnamed filler."""
+    out: List[str] = []
+    at = 0
+    for bit in sorted(bits):
+        if bit > at:
+            out.append(f"    unsigned char : {bit - at};")
+        out.append(f"    unsigned char m_Field{off:02X}_bit{bit} : 1; // +0x{off:02X}, bit {bit}")
+        at = bit + 1
+    return out
 
 
 def render(lf: Lifter, symbol: str, va_label: str, n: int) -> str:
@@ -2162,6 +2419,17 @@ def render(lf: Lifter, symbol: str, va_label: str, n: int) -> str:
         lf.cls_ref = (cls if not tmpl else f"{cls}<{', '.join(tmpl[1])}>")
     stmts = lf.stmts
     inline_temps(stmts)
+
+    def note_whole(ss):
+        for st in ss:
+            for e0 in st.exprs():
+                for e in walk(e0):
+                    if isinstance(e, Field) and e.off in lf.bits:
+                        lf.whole_bytes.add(e.off)
+            if isinstance(st, SBlock):
+                note_whole(st.body)
+                note_whole(st.other)
+    note_whole(stmts)
     rt, _fl = Renderer(lf).ret_type()
     stmts = structure(stmts)
     # Fields: lay out the class (offsets are what matter; types are guesses).
@@ -2179,6 +2447,10 @@ def render(lf: Lifter, symbol: str, va_label: str, n: int) -> str:
             if off > pos:
                 decls.append(f"    char m_pad{pos:02X}[0x{off - pos:X}];")
             layout[off] = f["kind"]
+            if off in lf.bits and off not in lf.whole_bytes and size == 1:
+                decls += bit_decls(off, lf.bits[off])
+                pos = off + 1
+                continue
             decls.append(f"    {ctype(f['kind'])} m_Field{off:02X}; // +0x{off:02X}")
             pos = off + size
     lf.layout = layout

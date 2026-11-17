@@ -40,7 +40,7 @@ ROOT = PORTAL.parent                                  # the project folder
 sys.path.insert(0, str(PORTAL / "tools"))
 
 from msvc_verify import (CoffObject, compare_function, compile_cpp, compiler_build,  # noqa: E402
-                         compiler_version, decorated_hint, find_msvc71_bin, select_function)
+                         compiler_version, decorated_hint, find_msvc71_bin, flag_options, select_function)
 from sf_binaries import BinaryImage, collect_call_targets, function_extent  # noqa: E402
 from queue_builder import PC_PLAINTEXT  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
@@ -55,6 +55,17 @@ FLAGS = {
     "proto": ["/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"],
 }
 INCLUDES = [RECON / "include", RECON]
+
+
+def flags_to_try(b: str, targets) -> List[str]:
+    """FLAGS[b], plus /arch:SSE on the Xbox builds when one of the target functions uses SSE
+    (msvc_verify.flag_options, which the portal uses too)."""
+    out = list(FLAGS[b])
+    for target in targets:
+        for flags in flag_options(b, FLAGS[b][0], target):
+            if flags not in out:
+                out.append(flags)
+    return out
 
 STATUS_ORDER = ["VERIFIED", "MATCH_HARDCODED_ADDR", "MISMATCH", "POLICY", "COMPILE_ERROR", "UNMAPPED",
                 "NO_CODE", "NO_TARGET"]
@@ -333,7 +344,7 @@ def verify_one(c: Claim, T: Targets) -> Claim:
         return c
     c.size = len(target)
     best = None
-    for flags in FLAGS[c.bin]:
+    for flags in flags_to_try(c.bin, [target]):
         cr = compile_cpp(c.code, flags, include_dirs=INCLUDES)
         if not cr.ok:
             st = "POLICY" if cr.policy_violation else "COMPILE_ERROR"
@@ -369,7 +380,7 @@ def verify_tu(path: Path, claims: List[Claim], T: Targets) -> List[Claim]:
         compiled = []
         err = ""
         policy = False
-        for flags in FLAGS[b]:
+        for flags in flags_to_try(b, [T.target(c)[0] for c in group]):
             cr = compile_cpp(code, flags, include_dirs=INCLUDES)
             if cr.ok:
                 compiled.append((flags, cr.obj))

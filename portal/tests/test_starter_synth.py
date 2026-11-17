@@ -43,6 +43,15 @@ CASES = {
     "sub_00011000": b"\xA1" + struct.pack("<I", DATA) + b"\xC3",                     # return DAT_00030000;
     "Bar::vfunc_00": bytes.fromhex("56 8B F1") + call(3, OTHER) + bytes.fromhex("8B C6 5E C3"),
     "Baz::vfunc_04": bytes.fromhex("8B 41 08 85 C0 74 03 B0 01 C3 32 C0 C3"),         # return m_Field08 != 0;
+    # push ebp; mov ebp, esp ... pop ebp: built with frame pointers kept.
+    "Frame::vfunc_03": bytes.fromhex("55 8B EC 8B 45 08 89 41 08 5D C2 04 00"),      # m_Field08 = a1;
+    "Fwd::vfunc_01": bytes.fromhex("55 8B EC 5D") + b"\xE9" + struct.pack("<i", OTHER - (FN + 9)),   # hands a1 on
+    # movss: built with /arch:SSE.
+    "Sse::vfunc_02": bytes.fromhex("F3 0F 10 44 24 04 F3 0F 11 41 08 C2 04 00"),     # m_Field08 = a1; (floats)
+    "Bits::vfunc_01": bytes.fromhex("8A 41 1C D0 E8 24 01 C3"),                      # return (one bit of +0x1C);
+    "Flag::vfunc_01": bytes.fromhex("8B 51 08 33 C0 85 D2 0F 95 C0 C3"),             # int: return m_Field08 != 0;
+    "Short::vfunc_01": bytes.fromhex("66 8B 41 08 C3"),                              # return m_Field08; (a short)
+    "No::vfunc_02": bytes.fromhex("32 C0 C2 08 00"),                                 # return false;
 }
 
 
@@ -64,15 +73,77 @@ def test_starter_names_things_by_address_and_never_by_number(tmp_path, symbol):
 EXACT = sorted(k for k in CASES if not k.startswith("Baz"))
 
 
+
 @needs_compiler
 @pytest.mark.parametrize("symbol", EXACT)
 def test_starter_compiles_to_the_original_bytes(tmp_path, symbol):
     code = CASES[symbol]
     img = image_with(tmp_path, code)
     cpp = starter(img, code, symbol)
-    res = MV.verify_submission(cpp, code, FLAGS, "", fn_va=FN, image=img)
-    assert res.get("ok"), res.get("compiler_error")
+    res = {}
+    for flags in MV.flag_options("xb", FLAGS, code):
+        res = MV.verify_submission(cpp, code, flags, "", fn_va=FN, image=img)
+        assert res.get("ok"), res.get("compiler_error")
+        if res["is_exact"]:
+            break
     assert res["is_exact"] and not res.get("hardcoded_addresses"), cpp
+
+
+def test_a_frame_pointer_turns_frame_pointers_on(tmp_path):
+    code = CASES["Frame::vfunc_03"]
+    cpp = starter(image_with(tmp_path, code), code, "Frame::vfunc_03")
+    assert '#pragma optimize("y", off)' in cpp and "m_Field08 = a1;" in cpp
+    plain = CASES["Foo::vfunc_02"]
+    assert "#pragma" not in starter(image_with(tmp_path, plain), plain, "Foo::vfunc_02")
+
+
+def test_a_frame_pointer_and_a_jump_means_the_arguments_are_handed_on(tmp_path):
+    code = CASES["Fwd::vfunc_01"]
+    cpp = starter(image_with(tmp_path, code), code, "Fwd::vfunc_01")
+    assert "vfunc_01(int a1)" in cpp and "sub_00011100(a1);" in cpp
+
+
+def test_sse_code_reads_as_float_code(tmp_path):
+    code = CASES["Sse::vfunc_02"]
+    cpp = starter(image_with(tmp_path, code), code, "Sse::vfunc_02")
+    assert "float m_Field08;" in cpp and "vfunc_02(float a1)" in cpp and "m_Field08 = a1;" in cpp and "TODO" not in cpp
+    assert MV.uses_sse(code) and not MV.uses_sse(CASES["Foo::vfunc_02"])
+    assert MV.flag_options("xb", FLAGS, code) == [FLAGS, FLAGS + " /arch:SSE"]
+    assert MV.flag_options("proto", FLAGS, code)[-1].endswith("/arch:SSE")
+    assert MV.flag_options("xb", FLAGS, CASES["Foo::vfunc_02"]) == [FLAGS]
+    assert MV.flag_options("pc", FLAGS, code) == [FLAGS, FLAGS.replace("/G6", "/G7")]
+
+
+def test_one_bit_of_a_byte_is_a_bitfield_member(tmp_path):
+    code = CASES["Bits::vfunc_01"]
+    cpp = starter(image_with(tmp_path, code), code, "Bits::vfunc_01")
+    assert "unsigned char : 1;" in cpp and "unsigned char m_Field1C_bit1 : 1;" in cpp
+    assert "bool vfunc_01()" in cpp and "return m_Field1C_bit1;" in cpp and ">>" not in cpp
+
+
+def test_the_return_type_follows_how_much_of_eax_is_filled(tmp_path):
+    def of(symbol):
+        return starter(image_with(tmp_path, CASES[symbol]), CASES[symbol], symbol)
+    assert "int vfunc_01()" in of("Flag::vfunc_01") and "return m_Field08 != 0;" in of("Flag::vfunc_01")
+    assert "unsigned short vfunc_01()" in of("Short::vfunc_01")
+    assert "bool vfunc_02(int a1, int a2)" in of("No::vfunc_02") and "return false;" in of("No::vfunc_02")
+
+
+def test_neg_sbb_is_read_as_a_comparison(tmp_path):
+    # mov eax, [ecx+8]; neg eax; sbb eax, eax; neg eax; ret  and the same ending in inc eax
+    for tail, want in (("F7 D8", "return m_Field08 != 0;"), ("40", "return !m_Field08;")):
+        code = bytes.fromhex("8B 41 08 F7 D8 1B C0 " + tail + " C3")
+        cpp = starter(image_with(tmp_path, code), code, "Neg::vfunc_01")
+        assert want in cpp and "TODO" not in cpp, cpp
+
+
+def test_the_other_reading_differs_in_whether_a_value_is_returned(tmp_path):
+    # mov eax, [ecx+8]; push eax; call OTHER; add esp, 4; ret: it may or may not pass the result on.
+    code = bytes.fromhex("8B 41 08 50") + call(4, OTHER) + bytes.fromhex("83 C4 04 C3")
+    img = image_with(tmp_path, code)
+    all_ = DS.synthesize_all("Pass::vfunc_01", f"0x{FN:08X}", code, DS.disassemble(code), relocs=D.find_relocations(code, FN, img))
+    assert len(all_) == 2 and all_[0] == starter(img, code, "Pass::vfunc_01")
+    assert "void vfunc_01()" in all_[0] and "int vfunc_01()" in all_[1] and "return sub_00011100(m_Field08);" in all_[1]
 
 
 def test_branches_become_if_blocks(tmp_path):

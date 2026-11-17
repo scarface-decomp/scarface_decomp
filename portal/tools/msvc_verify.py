@@ -688,6 +688,36 @@ def find_hardcoded_addresses(code: bytes, reloc_offsets: set, image) -> List[str
 # One-call API
 # --------------------------------------------------------------------------- #
 
+SSE_FLAG = "/arch:SSE"
+
+
+def uses_sse(target: Optional[bytes]) -> bool:
+    """True when the function's own instructions use the SSE registers (xmm0-xmm7)."""
+    if not target:
+        return False
+    try:
+        import capstone
+    except ImportError:
+        return False
+    md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+    return any("xmm" in insn.op_str for insn in md.disasm(bytes(target), 0))
+
+
+def flag_options(bin_name: str, flags: str, target: Optional[bytes] = None) -> List[str]:
+    """The flag sets to try for one function, the recorded ones first.
+
+    PC also tries /G7, because a few PC functions only match with it. The Xbox builds (retail and
+    prototype) also try /arch:SSE when the function itself uses the SSE registers: parts of the game
+    were built for the console's Pentium III that way, and the compiler never writes those
+    instructions without it. The portal, the command-line checks and the re-verifier all use this."""
+    opts = [flags]
+    if bin_name == "pc" and "/G6" in flags:
+        opts.append(flags.replace("/G6", "/G7"))
+    if bin_name in ("xb", "proto") and "/arch:" not in flags and uses_sse(target):
+        opts.append(flags + " " + SSE_FLAG)
+    return opts
+
+
 def verify_submission(cpp_code: str, target: bytes, flags: str, match_substr: str = "",
                       fn_va: Optional[int] = None, image=None, known_symbols: Optional[Dict[str, int]] = None,
                       include_dirs: Optional[Sequence[Path]] = None, bin_dir: Optional[Path] = None,

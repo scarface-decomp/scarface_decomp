@@ -145,7 +145,7 @@ def check_ps2(args) -> int:
 def check(args) -> int:
     if PO.is_ps2(args.bin):
         return check_ps2(args)
-    from msvc_verify import verify_submission, compiler_version
+    from msvc_verify import verify_submission, compiler_version, flag_options
     from sf_binaries import BinaryImage, collect_call_targets, function_extent
     b = args.bin
     if not BINARIES[b].exists():
@@ -179,11 +179,20 @@ def check(args) -> int:
         print("Address is not backed by file data.")
         return 2
     code = Path(args.file).read_text(encoding="utf-8")
-    print(f"{compiler_version()}\nTarget {b}:0x{va:08X}, {size} bytes, flags {flags}")
     import names as NAMES
     known = NAMES.addresses(NAMES.load(ROOT / "reports" / "names.json"), b)
-    r = verify_submission(code, target, flags, match, fn_va=va, image=img, known_names=known,
-                          include_dirs=[ROOT / "reconstructed_src" / "include", ROOT / "reconstructed_src", Path(args.file).resolve().parent])
+    # Flags given on the command line are used as they are; otherwise the usual sets are tried in turn.
+    options = [flags] if args.flags != DEFAULT_FLAGS else flag_options(b, flags, target)
+    r = {}
+    for flags in options:
+        res = verify_submission(code, target, flags, match, fn_va=va, image=img, known_names=known,
+                                include_dirs=[ROOT / "reconstructed_src" / "include", ROOT / "reconstructed_src", Path(args.file).resolve().parent])
+        res["flags"] = flags
+        if not r or (res.get("ok") and res.get("matched_bytes", 0) > r.get("matched_bytes", -1)):
+            r = res
+        if res.get("ok") and res.get("is_exact"):
+            break
+    print(f"{compiler_version()}\nTarget {b}:0x{va:08X}, {size} bytes, flags {r['flags']}")
     if not r.get("ok"):
         print("\n" + r["compiler_error"])
         return 1
