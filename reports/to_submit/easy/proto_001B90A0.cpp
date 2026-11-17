@@ -1,0 +1,21 @@
+// bin: proto
+// va: 0x001B90A0
+// tool: the portal's starter code (no AI)
+// sub_001B90A0 (0x001B90A0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_001B90A0
+{
+public:
+    int sub_001B90A0();
+    char m_pad00[0x130];
+    int m_Field130; // +0x130
+};
+
+int Class_001B90A0::sub_001B90A0()
+{
+    return sub_00028120(m_Field130);
+}
