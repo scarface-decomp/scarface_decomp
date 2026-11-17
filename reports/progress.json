@@ -18,6 +18,26 @@
     "ps2": 0,
     "total": 3
   },
+  "source": {
+    "member_functions": {
+      "pc": 290,
+      "xb": 3993,
+      "proto": 4039,
+      "total": 4283
+    },
+    "shared_class": {
+      "pc": 159,
+      "xb": 2873,
+      "proto": 2887,
+      "total": 3032
+    },
+    "named": {
+      "pc": 0,
+      "xb": 188,
+      "proto": 3,
+      "total": 188
+    }
+  },
   "size_buckets": {
     "1-9 B": 1866,
     "10-19 B": 1198,

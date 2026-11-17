@@ -94,6 +94,8 @@ def check_generated(reg: dict, problems: list) -> None:
             shutil.copy2(ROOT / "reports" / "progress.json", troot / "reports" / "progress.json")
         if (ROOT / "reports" / "names.json").exists():          # the count of finished functions follows the names
             shutil.copy2(ROOT / "reports" / "names.json", troot / "reports" / "names.json")
+        if (ROOT / "reports" / "classes.json").exists():        # and the count of functions sharing a class
+            shutil.copy2(ROOT / "reports" / "classes.json", troot / "reports" / "classes.json")
         # the function list comes from the committed files (CI has no game files)
         written = write_outputs(reg, troot / "reconstructed_src", known_from=ROOT / "reconstructed_src")
         if not (ROOT / "reports" / "progress.json").exists():
