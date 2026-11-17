@@ -146,6 +146,33 @@ def test_the_other_reading_differs_in_whether_a_value_is_returned(tmp_path):
     assert "void vfunc_01()" in all_[0] and "int vfunc_01()" in all_[1] and "return sub_00011100(m_Field08);" in all_[1]
 
 
+def test_a_signed_test_makes_the_member_signed(tmp_path):
+    # cmp word ptr [ecx+8], 0; jle +3; mov al, 1; ret; xor al, al; ret
+    code = bytes.fromhex("66 83 79 08 00 7E 03 B0 01 C3 32 C0 C3")
+    cpp = starter(image_with(tmp_path, code), code, "Signed::vfunc_01")
+    assert "    short m_Field08;" in cpp and "unsigned short" not in cpp
+
+
+def test_a_byte_compare_reads_one_byte(tmp_path):
+    # mov eax, [ecx+8]; cmp byte ptr [eax], 0; je +3; mov al, 1; ret; xor al, al; ret
+    code = bytes.fromhex("8B 41 08 80 38 00 74 03 B0 01 C3 32 C0 C3")
+    cpp = starter(image_with(tmp_path, code), code, "Byte::vfunc_01")
+    assert "*(unsigned char*)" in cpp and "*(int*)" not in cpp
+
+
+def test_a_built_in_template_argument_is_not_declared(tmp_path):
+    code = CASES["Foo::vfunc_01"]
+    cpp = starter(image_with(tmp_path, code), code, "om::Command0<void>::vfunc_01")
+    assert "class void" not in cpp and "Command0<void>::vfunc_01" in cpp
+
+
+def test_a_bool_call_result_can_be_passed_on(tmp_path):
+    # mov al, [ecx+8]; test al, al; jne +3; xor al, al; ret; call OTHER; ret
+    code = bytes.fromhex("8A 41 08 84 C0 75 03 32 C0 C3") + call(10, OTHER) + b"\xC3"
+    cpp = starter(image_with(tmp_path, code), code, "Pass::vfunc_02")
+    assert "bool vfunc_02()" in cpp and "bool __cdecl sub_00011100" in cpp, cpp
+
+
 def test_branches_become_if_blocks(tmp_path):
     code = CASES["Baz::vfunc_04"]
     cpp = starter(image_with(tmp_path, code), code, "Baz::vfunc_04")
