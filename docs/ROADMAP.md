@@ -34,17 +34,30 @@ several thousand functions match from the portal's starter code alone.
 - Code may call a function by its recorded name, and may define a function under its recorded name; the
   address is checked either way.
 - Still to do: names for globals and for class members, the same way (a name, an address or offset, a
-  reason), so `DAT_00439DA4` and `m_Field64` can go too.
+  reason), so `DAT_00439DA4` and `m_Field64` can go too. Step 3's merged classes are where a member's
+  name will live.
 
-### 3. One declaration per class
+### 3. One declaration per class (started)
 The step that turns snippets into source.
-- For each class, merge what its matched functions declare (members by offset, virtual functions by
-  slot, base classes) into one header under `reconstructed_src/include/`.
-- Recompile every matched function of the class against that header. The header is accepted only if
-  every one of them still matches.
-- Start with classes whose functions already agree; report the ones that conflict for a person.
-- Measure first: how many classes merge with no conflict today. That number decides whether this is a
-  tool or hand work.
+- `python portal/scripts/merge_classes.py` merges what each class's matched functions declare
+  (members by offset, virtual functions by slot, other member functions) into one class.
+  With `--verify` it recompiles every function of the class with the merged class in place of its own
+  copy, and keeps the class only for the functions that still compile to the game's bytes.
+- Measured on 17 November 2026 (15,630 matched functions, 8,322 of them member functions of 3,743
+  classes): **1,275 classes have a proven merged declaration, covering 4,173 functions.** They are in
+  `reports/classes/`, and `reports/classes.json` says how every class went. So this is a tool, not
+  hand work.
+- What is left out, and why (`reports/classes.json` names each function):
+  - 2,224 functions of template classes (`CScript::Method1<void, bool>`): the tool does not read
+    templates yet.
+  - 458 functions whose class holds another object as a member (`Field20 m_Field20;`), and 67 with a
+    base class.
+  - About 200 where two copies type one member differently (an `int` in one, a pointer in another) and
+    the function no longer compiles with the other's type. A person or a smarter rule picks the type.
+  - 1,027 classes with only one matched function so far: nothing to merge.
+- Still to do: make each function's recorded text use the merged class (through the portal, so the
+  registry stays the proof), and carry a member's name from `reports/names.json` into every function of
+  its class.
 
 ### 4. Files and one build command
 - Group functions into files by address order and class (the original file boundaries are not known;
