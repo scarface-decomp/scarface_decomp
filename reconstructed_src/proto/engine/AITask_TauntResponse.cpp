@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_TauntResponse.cpp (4 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_TauntResponse.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4 of 9 functions matched (44.44%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 9 functions matched (66.67%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -180,6 +180,40 @@ int AITask_TauntResponse::vfunc_52()
 }
 
 // ============================================================================
+// [VERIFIED] AITask_TauntResponse::vfunc_00 (0x0010CEA0, 54 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// AITask_TauntResponse::vfunc_00 (Proto 0x0010CEA0, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldMB0
+{
+    int sub_000EEAB0(int, int, int);
+    int sub_000EEAB0();
+};
+
+struct Object
+{
+    void sub_000DDD30();
+    void sub_000E14A0();
+};
+
+extern "C" char DAT_0038E58C[];
+
+class AITask_TauntResponse
+{
+public:
+    virtual void vfunc_00(int a1);
+};
+
+void AITask_TauntResponse::vfunc_00(int a1)
+{
+    ((Object*)((FieldMB0*)(int)(((char*)this - 0xB0)))->sub_000EEAB0((int)DAT_0038E58C, 10000, 25000))->sub_000DDD30();
+    ((Object*)((FieldMB0*)(int)(((char*)this - 0xB0)))->sub_000EEAB0())->sub_000E14A0();
+}
+
+// ============================================================================
 // [VERIFIED] AITask_TauntResponse::vfunc_00 (0x0010D910, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -200,5 +234,40 @@ public:
 void* AITask_TauntResponse::vfunc_00()
 {
     return DAT_00403B8C;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_TauntResponse::vfunc_01 (0x0010D920, 43 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// AITask_TauntResponse::vfunc_01 (Proto 0x0010D920, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldB8
+{
+    void sub_00102BA0();
+};
+
+extern "C" void __cdecl sub_00025160(int);
+
+class AITask_TauntResponse
+{
+public:
+    virtual void vfunc_00();
+    virtual AITask_TauntResponse* vfunc_01(int a1);
+    void sub_0010D7D0();
+    char m_pad04[0xB4];
+    FieldB8 m_FieldB8; // +0xB8
+};
+
+AITask_TauntResponse* AITask_TauntResponse::vfunc_01(int a1)
+{
+    m_FieldB8.sub_00102BA0();
+    sub_0010D7D0();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
 }
 

@@ -1,13 +1,181 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, audio/PrimGroupSkinnedStreamed.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, audio/PrimGroupSkinnedStreamed.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 6 functions matched (16.67%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 6 functions matched (83.33%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroupSkinnedStreamed::vfunc_07 (0x0024F440, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::PrimGroupSkinnedStreamed::vfunc_07 (Proto 0x0024F440, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class PrimGroupSkinnedStreamed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07();
+};
+
+int PrimGroupSkinnedStreamed::vfunc_07()
+{
+    return 385;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroupSkinnedStreamed::vfunc_17 (0x0024F450, 24 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::PrimGroupSkinnedStreamed::vfunc_17 (Proto 0x0024F450, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field50
+{
+    void sub_00279E60(int, int, int);
+};
+
+namespace pure3d {
+
+class PrimGroupSkinnedStreamed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17(int a1);
+    char m_pad04[0x4C];
+    Field50* m_Field50; // +0x50
+    int m_Field54; // +0x54
+    int m_Field58; // +0x58
+};
+
+void PrimGroupSkinnedStreamed::vfunc_17(int a1)
+{
+    m_Field50->sub_00279E60(a1, m_Field54, m_Field58);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroupSkinnedStreamed::vfunc_16 (0x0024F470, 24 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::PrimGroupSkinnedStreamed::vfunc_16 (Proto 0x0024F470, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field50
+{
+    void sub_00279F60(int, int, int);
+};
+
+namespace pure3d {
+
+class PrimGroupSkinnedStreamed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16(int a1);
+    char m_pad04[0x4C];
+    Field50* m_Field50; // +0x50
+    int m_Field54; // +0x54
+    int m_Field58; // +0x58
+};
+
+void PrimGroupSkinnedStreamed::vfunc_16(int a1)
+{
+    m_Field50->sub_00279F60(a1, m_Field54, m_Field58);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroupSkinnedStreamed::vfunc_05 (0x0024FCB0, 31 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::PrimGroupSkinnedStreamed::vfunc_05 (Proto 0x0024FCB0, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0024FBD0(int);
+};
+
+extern "C" int __cdecl sub_001FCF20(int);
+
+namespace pure3d {
+
+class PrimGroupSkinnedStreamed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual int vfunc_05();
+};
+
+int PrimGroupSkinnedStreamed::vfunc_05()
+{
+    int t1;
+
+    t1 = sub_001FCF20(92);
+    if (t1) {
+        return ((Object*)t1)->sub_0024FBD0((int)this);
+    }
+    return 0;
+}
+
+}
 
 // ============================================================================
 // [VERIFIED] pure3d::PrimGroupSkinnedStreamed::vfunc_03 (0x00250B00, 30 B)

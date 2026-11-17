@@ -1,5 +1,29 @@
 [
   {
+    "time": "2026-11-14 09:50:25",
+    "user": "NoahBPeterson",
+    "action": "VERIFIED",
+    "symbol": "1453 function(s) from the portal's starter code",
+    "va": "",
+    "bytes": "easy pass, no AI"
+  },
+  {
+    "time": "2026-11-14 08:34:10",
+    "user": "NoahBPeterson",
+    "action": "VERIFIED",
+    "symbol": "3755 function(s) from the portal's starter code",
+    "va": "",
+    "bytes": "easy pass, no AI"
+  },
+  {
+    "time": "2026-11-14 07:39:44",
+    "user": "NoahBPeterson",
+    "action": "VERIFIED",
+    "symbol": "49 function(s) from the portal's starter code",
+    "va": "",
+    "bytes": "easy pass, no AI"
+  },
+  {
     "time": "2026-11-13 21:52:48",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1973,30 +1997,6 @@
     "action": "VERIFIED",
     "symbol": "1 look-alike(s) of sub_000C0CF0",
     "va": "0x000C0CF0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:45:20",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000C0AE0",
-    "va": "0x000C0AE0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:45:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000C0450",
-    "va": "0x000C0450",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 07:45:12",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000BFFB0",
-    "va": "0x000BFFB0",
     "bytes": "same code, own addresses"
   }
 ]

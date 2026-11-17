@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/GameMemorySegmentCollection.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/GameMemorySegmentCollection.cpp (10 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 13 functions matched (69.23%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 10 of 13 functions matched (76.92%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -202,6 +202,30 @@ bool GameMemorySegmentCollection::vfunc_10(unsigned int* freeBytes, unsigned int
         *usedBytes = m_segmentSize * used;
     return true;
 }
+
+// ============================================================================
+// [VERIFIED] GameMemorySegmentCollection::vfunc_00 (0x00024980, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// GameMemorySegmentCollection::vfunc_00 (Proto 0x00024980, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 4 bytes to the start of the object and jumps to the real function at
+// 0x00024A60. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (4 bytes).
+
+class GameMemorySegmentCollection_Base0 { public: virtual void sub_00024A60(); };
+class GameMemorySegmentCollection_Base1 { public: virtual void sub_00024A60(); };
+
+class GameMemorySegmentCollection : public GameMemorySegmentCollection_Base0, public GameMemorySegmentCollection_Base1
+{
+public:
+    GameMemorySegmentCollection();
+    virtual void sub_00024A60();          // the real function; the thunk jumps here
+};
+
+GameMemorySegmentCollection::GameMemorySegmentCollection() {}                  // building one is what makes the compiler write its tables and the thunk
 
 // ============================================================================
 // [VERIFIED] GameMemorySegmentCollection::vfunc_03 (0x00024A60, 78 B)

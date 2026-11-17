@@ -434,19 +434,21 @@ def write_progress(registry: dict, reports_dir: Path) -> bool:
             queue = json.loads(qpath.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             queue = None
-    counted = queue
-    if counted is None:
-        # No queue on this computer: count the functions still open from the address-order lists, which name
-        # every function of every build. (The picks for newcomers still need the real queue.)
-        listed = [t for fns in known_from_files(reports_dir.parent / "reconstructed_src").values() for t in fns.values()]
-        counted = listed or None
+    # A build that is not in the queue (no queue on this computer, or not all the game files) is counted from
+    # its address-order list, which names every function of it; otherwise a computer with only some of the
+    # game files would report 0 open functions for the others. (The picks for newcomers need the real queue.)
+    in_queue = {t.get("bin") for t in queue or []}
+    listed = [t for b, fns in known_from_files(reports_dir.parent / "reconstructed_src").items()
+              if b not in in_queue for t in fns.values()]
+    counted = (queue or []) + listed or None
+    import good_first
     names = None
     try:
         names = json.loads((reports_dir / "names.json").read_text(encoding="utf-8")).get("names")
     except (OSError, ValueError, AttributeError):
         pass
     summary = progress_summary(registry, counted, previous, names if isinstance(names, dict) else None,
-                               picks=queue is not None)
+                               picks=bool(in_queue & set(good_first.MAIN_BINS)))
     text = json.dumps(summary, indent=2) + "\n"
     if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
         return False

@@ -1,14 +1,14 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-13 21:52:40",
+  "updated_at": "2026-11-14 09:50:16",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 449,
-    "xb": 6452,
-    "proto": 3472,
+    "xb": 7905,
+    "proto": 7276,
     "ps2": 0,
-    "total": 6901,
-    "bytes": 216935,
+    "total": 8354,
+    "bytes": 293121,
     "ps2_bytes": 0
   },
   "readable": {
@@ -19,65 +19,66 @@
     "total": 3
   },
   "size_buckets": {
-    "1-9 B": 1570,
-    "10-19 B": 1007,
-    "20-39 B": 2155,
-    "40-79 B": 1904,
-    "80+ B": 265
+    "1-9 B": 1866,
+    "10-19 B": 1198,
+    "20-39 B": 2484,
+    "40-79 B": 2217,
+    "80+ B": 589
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 10373
+    "RRutherrfordd (Founder)": 10373,
+    "NoahBPeterson": 5257
   },
   "unattributed": 0,
   "queue": {
     "pc": 1067,
-    "xb": 13082,
-    "proto": 14432,
+    "xb": 11596,
+    "proto": 10597,
     "ps2": 24297,
-    "total": 14149,
+    "total": 12663,
     "tiers": {
-      "TIER_1_QUICK": 1139,
-      "TIER_2_SMALL": 1526,
-      "TIER_3_MEDIUM": 3152,
-      "TIER_4_LARGE": 8332
+      "TIER_1_QUICK": 671,
+      "TIER_2_SMALL": 1202,
+      "TIER_3_MEDIUM": 2839,
+      "TIER_4_LARGE": 7951
     }
   },
   "good_first": [
     {
-      "id": "xb_0024E1E0",
+      "id": "xb_002FBBE9",
       "bin": "xb",
-      "va": "0x0024E1E0",
-      "symbol": "sub_0024E1E0",
+      "va": "0x002FBBE9",
+      "symbol": "sub_002FBBE9",
       "size": 6,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
-    {
-      "id": "xb_0024E1F0",
-      "bin": "xb",
-      "va": "0x0024E1F0",
-      "symbol": "sub_0024E1F0",
-      "size": 6,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
-    {
-      "id": "pc_006EE9B0",
-      "bin": "pc",
-      "va": "PC 0x006EE9B0",
-      "symbol": "sub_006EE9B0",
-      "size": 6,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
-    {
-      "id": "xb_00239EC0",
-      "bin": "xb",
-      "va": "0x00239EC0",
-      "symbol": "CollisionBehaviourTypeGroup::vfunc_19",
-      "size": 5,
       "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
+    },
+    {
+      "id": "xb_000D8260",
+      "bin": "xb",
+      "va": "0x000D8260",
+      "symbol": "sub_000D8260",
+      "size": 7,
+      "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_0030715D",
+      "bin": "xb",
+      "va": "0x0030715D",
+      "symbol": "sub_0030715D",
+      "size": 8,
+      "why": "matching it also matches its 9 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_0014A270",
+      "bin": "xb",
+      "va": "0x0014A270",
+      "symbol": "GameSimObject::vfunc_57",
+      "size": 5,
+      "why": "the game's class information names it",
+      "kind": "named"
     },
     {
       "id": "xb_0028D0F0",
@@ -85,53 +86,53 @@
       "va": "0x0028D0F0",
       "symbol": "core::MemoryAllocatorMalloc::vfunc_10",
       "size": 5,
-      "why": "matching it also matches its 2 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_002AC760",
-      "bin": "xb",
-      "va": "0x002AC760",
-      "symbol": "core::Drive::vfunc_11",
-      "size": 5,
-      "why": "matching it also matches its 2 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_000D6C60",
-      "bin": "xb",
-      "va": "0x000D6C60",
-      "symbol": "audio::HalRadicalAdpcmDecodeStream::vfunc_02",
-      "size": 4,
       "why": "the game's class information names it",
       "kind": "named"
     },
     {
-      "id": "xb_000E9210",
+      "id": "xb_00070770",
       "bin": "xb",
-      "va": "0x000E9210",
-      "symbol": "ExitConditionTrack::vfunc_23",
-      "size": 4,
-      "why": "the game's class information names it",
-      "kind": "named"
-    },
-    {
-      "id": "xb_000E9230",
-      "bin": "xb",
-      "va": "0x000E9230",
-      "symbol": "ExitConditionTrack::vfunc_25",
-      "size": 4,
-      "why": "the game's class information names it",
-      "kind": "named"
-    },
-    {
-      "id": "pc_006E9F50",
-      "bin": "pc",
-      "va": "PC 0x006E9F50",
-      "symbol": "sub_006E9F50",
+      "va": "0x00070770",
+      "symbol": "CScript::Function0<void>::vfunc_00",
       "size": 6,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_002FD289",
+      "bin": "xb",
+      "va": "0x002FD289",
+      "symbol": "sub_002FD289",
+      "size": 8,
+      "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00267E90",
+      "bin": "xb",
+      "va": "0x00267E90",
+      "symbol": "pure3d::d3dExtAntialiasControl::vfunc_03",
+      "size": 9,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002FE371",
+      "bin": "xb",
+      "va": "0x002FE371",
+      "symbol": "sub_002FE371",
+      "size": 10,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00277C60",
+      "bin": "xb",
+      "va": "0x00277C60",
+      "symbol": "sub_00277C60",
+      "size": 12,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
     }
   ]
 }

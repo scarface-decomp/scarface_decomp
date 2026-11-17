@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, om/String_.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, om/String_.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 13 functions matched (7.69%). NOT COMPLETE YET.
-// The 12 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 13 functions matched (15.38%). NOT COMPLETE YET.
+// The 11 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -44,5 +44,35 @@ public:
 template <> void om::MetaAttribScalar<om::String>::vfunc_05(int a1)
 {
     ((Object*)m_Field14 + a1)->sub_00291180((int)(&m_Field34));
+}
+
+// ============================================================================
+// [VERIFIED] om::MetaAttrib<om::String>::vfunc_00 (0x00078A90, 31 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// om::MetaAttrib<om::String>::vfunc_00 (Proto 0x00078A90, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00382D14[];
+extern "C" void __cdecl sub_00078AB0(int);
+
+namespace om { class String; }
+
+namespace om { 
+template <class T0> class MetaAttrib
+{
+public:
+    virtual MetaAttrib<om::String>* vfunc_00(int a1);
+};
+}
+
+template <> om::MetaAttrib<om::String>* om::MetaAttrib<om::String>::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00382D14;
+    if (a1 & 1) {
+        sub_00078AB0((int)this);
+    }
+    return this;
 }
 

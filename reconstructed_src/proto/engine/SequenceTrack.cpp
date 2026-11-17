@@ -1,0 +1,60 @@
+// ============================================================================
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/SequenceTrack.cpp (1 verified)
+// GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
+// PROGRESS: COMPLETE. All 1 functions are matched.
+// Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
+// Blocks marked 'excerpt' are cut from the named source file and are built from that file;
+// every other block compiles on its own. The file as a whole is not one translation unit.
+// ============================================================================
+
+// ============================================================================
+// [VERIFIED] fight::SequenceTrack::vfunc_03 (0x001FC0E0, 54 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// fight::SequenceTrack::vfunc_03 (Proto 0x001FC0E0, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_001FCCC0();
+};
+
+struct Field20
+{
+    void sub_001FCAC0();
+};
+
+extern "C" char DAT_003ADA34[];
+extern "C" void __cdecl sub_001FCF60(int);
+
+namespace fight {
+
+class SequenceTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual SequenceTrack* vfunc_03(int a1);
+    void sub_001FBF40();
+    char m_pad04[0x10];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0xB];
+    Field20 m_Field20; // +0x20
+};
+
+SequenceTrack* SequenceTrack::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_003ADA34;
+    m_Field20.sub_001FCAC0();
+    m_Field14.sub_001FCCC0();
+    sub_001FBF40();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+
+}
+

@@ -1,13 +1,74 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/DrivingRewardsObject.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/DrivingRewardsObject.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 4 functions matched (25.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
-// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// PROGRESS: COMPLETE. All 4 functions are matched.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] DrivingRewardsObject::vfunc_04 (0x0021C4F0, 83 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// DrivingRewardsObject::vfunc_04 (0x0021C4F0, 83 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field108
+{
+    void sub_000C3110();
+};
+
+struct Field120
+{
+    void sub_000C3150();
+};
+
+struct FieldD4
+{
+    void sub_000C3130();
+};
+
+struct FieldF0
+{
+    void sub_002A9290();
+};
+
+extern "C" void __stdcall sub_0002B700(int);
+
+class DrivingRewardsObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1);
+    char m_pad04[0xD0];
+    FieldD4 m_FieldD4; // +0xD4
+    char m_padD5[0x1B];
+    FieldF0 m_FieldF0; // +0xF0
+    char m_padF1[0x17];
+    Field108 m_Field108; // +0x108
+    char m_pad109[0x17];
+    Field120 m_Field120; // +0x120
+    char m_pad121[0x17];
+    Field120 m_Field138; // +0x138
+    char m_pad139[0x17];
+    Field120 m_Field150; // +0x150
+};
+
+void DrivingRewardsObject::vfunc_04(int a1)
+{
+    sub_0002B700(a1);
+    m_FieldD4.sub_000C3130();
+    m_FieldF0.sub_002A9290();
+    m_Field108.sub_000C3110();
+    m_Field120.sub_000C3150();
+    m_Field138.sub_000C3150();
+    m_Field150.sub_000C3150();
+}
 
 // ============================================================================
 // [VERIFIED] DrivingRewardsObject::vfunc_00 (0x0021C690, 6 B)
@@ -30,5 +91,154 @@ public:
 void* DrivingRewardsObject::vfunc_00()
 {
     return DAT_0044D438;
+}
+
+// ============================================================================
+// [VERIFIED] DrivingRewardsObject::vfunc_01 (0x0021C870, 91 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// DrivingRewardsObject::vfunc_01 (0x0021C870, 91 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field30
+{
+    void sub_002A9290();
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30(int);
+    int sub_00098BB0(int);
+};
+
+extern "C" char DAT_003D0774[];
+extern "C" Object DAT_00490D14;
+extern "C" int DAT_00490D18;
+extern "C" void __cdecl sub_00027600(int);
+
+class DrivingRewardsObject
+{
+public:
+    virtual void vfunc_00();
+    virtual DrivingRewardsObject* vfunc_01(int a1);
+    void sub_00029F90();
+    char m_pad04[0x2C];
+    Field30 m_Field30; // +0x30
+};
+
+DrivingRewardsObject* DrivingRewardsObject::vfunc_01(int a1)
+{
+    *(int*)this = (int)DAT_003D0774;
+    if (DAT_00490D14.sub_00098BB0(DAT_00490D18)) {
+        ((Object*)DAT_00490D14.sub_00098BB0(DAT_00490D18))->vfunc_30((int)this);
+    }
+    m_Field30.sub_002A9290();
+    sub_00029F90();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] DrivingRewardsObject::vfunc_29 (0x0021CB70, 54 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as DrivingRewardsObject::vfunc_27 (Proto 0x001E07A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DrivingRewardsObject::vfunc_29 (Proto 0x0021CB70, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field30
+{
+    int sub_000CE970();
+    int sub_0017E700();
+};
+
+struct Object
+{
+    void sub_000C38A0(int, int);
+};
+
+extern "C" void __cdecl sub_0021CB10(int);
+
+class DrivingRewardsObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29(int a1);
+    char m_pad04[0x2C];
+    Field30 m_Field30; // +0x30
+};
+
+void DrivingRewardsObject::vfunc_29(int a1)
+{
+    int t2;
+
+    if (m_Field30.sub_000CE970()) {
+        t2 = m_Field30.sub_0017E700();
+        sub_0021CB10(t2);
+        ((Object*)t2)->sub_000C38A0(a1, (int)this);
+    }
 }
 

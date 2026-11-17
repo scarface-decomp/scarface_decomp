@@ -1,0 +1,52 @@
+// ============================================================================
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/WaterDock.cpp (1 verified)
+// GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
+// PROGRESS: COMPLETE. All 1 functions are matched.
+// Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
+// Blocks marked 'excerpt' are cut from the named source file and are built from that file;
+// every other block compiles on its own. The file as a whole is not one translation unit.
+// ============================================================================
+
+// ============================================================================
+// [VERIFIED] WaterDock::vfunc_03 (0x0012FCC0, 70 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// WaterDock::vfunc_03 (Proto 0x0012FCC0, 70 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00130640();
+};
+
+extern "C" char DAT_00390D6C[];
+extern "C" void __cdecl sub_00025160(int);
+extern "C" int __stdcall sub_00130DD0(int);
+extern "C" void __cdecl sub_001FCF60(int);
+
+class WaterDock
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual WaterDock* vfunc_03(int a1);
+    void sub_001F7E30();
+    char m_pad04[0x10];
+    int m_Field14; // +0x14
+};
+
+WaterDock* WaterDock::vfunc_03(int a1)
+{
+    *(int*)this = (int)DAT_00390D6C;
+    sub_00025160(m_Field14);
+    m_Field14 = 0;
+    ((Object*)sub_00130DD0((int)this))->sub_00130640();
+    sub_001F7E30();
+    if (a1 & 1) {
+        sub_001FCF60((int)this);
+    }
+    return this;
+}
+

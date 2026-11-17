@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlanceAtOvertakingPed.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlanceAtOvertakingPed.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 9 functions matched (11.11%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 9 functions matched (33.33%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -38,5 +38,69 @@ public:
 float GlanceAtOvertakingPed::vfunc_08()
 {
     return DAT_0038086C;
+}
+
+// ============================================================================
+// [VERIFIED] GlanceAtOvertakingPed::vfunc_00 (0x000DCE50, 41 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// GlanceAtOvertakingPed::vfunc_00 (Proto 0x000DCE50, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00028120(int);
+
+class GlanceAtOvertakingPed
+{
+public:
+    virtual int vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual bool vfunc_07();
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+};
+
+int GlanceAtOvertakingPed::vfunc_00()
+{
+    if (sub_00028120(m_Field10)) {
+        if (!vfunc_07()) goto L_25;
+        return 1;
+    }
+L_25:
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] GlanceAtOvertakingPed::vfunc_10 (0x0026CAA0, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// GlanceAtOvertakingPed::vfunc_10 (Proto 0x0026CAA0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class GlanceAtOvertakingPed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual int vfunc_10();
+};
+
+int GlanceAtOvertakingPed::vfunc_10()
+{
+    return 13;
 }
 

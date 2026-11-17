@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, audio/d3dPrimBufferStream.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, audio/d3dPrimBufferStream.cpp (8 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 16 functions matched (12.50%). NOT COMPLETE YET.
-// The 14 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 8 of 16 functions matched (50.00%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -44,6 +44,267 @@ public:
 
 void d3dPrimBufferStream::vfunc_15(int a1, int a2, int a3, int a4, int a5)
 {
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_09 (0x002700E0, 32 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::d3dPrimBufferStream::vfunc_09 (Proto 0x002700E0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual int vfunc_09(int a1, int a2, int a3);
+    char m_pad04[0x40];
+    int m_Field44; // +0x44
+};
+
+int d3dPrimBufferStream::vfunc_09(int a1, int a2, int a3)
+{
+    int t1;
+
+    *(int*)m_Field44 = a1;
+    *(int*)(m_Field44 + 4) = a2;
+    t1 = m_Field44;
+    *(int*)(m_Field44 + 8) = a3;
+    return t1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_10 (0x00270100, 32 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::d3dPrimBufferStream::vfunc_10 (Proto 0x00270100, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual int vfunc_10(int a1, int a2, int a3);
+    char m_pad04[0x44];
+    int m_Field48; // +0x48
+};
+
+int d3dPrimBufferStream::vfunc_10(int a1, int a2, int a3)
+{
+    int t1;
+
+    *(int*)m_Field48 = a1;
+    *(int*)(m_Field48 + 4) = a2;
+    t1 = m_Field48;
+    *(int*)(m_Field48 + 8) = a3;
+    return t1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_11 (0x00270120, 17 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::d3dPrimBufferStream::vfunc_11 (Proto 0x00270120, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11(int a1, int a2);
+    char m_pad04[0x2C];
+    int m_Field30; // +0x30
+};
+
+int d3dPrimBufferStream::vfunc_11(int a1, int a2)
+{
+    int t1;
+
+    t1 = m_Field30;
+    *(int*)(m_Field30 + (a2 * 4)) = a1;
+    return t1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_13 (0x00270140, 28 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::d3dPrimBufferStream::vfunc_13 (Proto 0x00270140, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual int vfunc_13(float a1, float a2, int a3);
+    char m_pad04[0x34];
+    int m_Field38; // +0x38
+};
+
+int d3dPrimBufferStream::vfunc_13(float a1, float a2, int a3)
+{
+    *(float*)(m_Field38 + (a3 * 8)) = a1;
+    *(float*)(m_Field38 + (a3 * 8) + 4) = a2;
+    return a3;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_16 (0x00270160, 12 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::d3dPrimBufferStream::vfunc_16 (Proto 0x00270160, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual int vfunc_16(int a1);
+    char m_pad04[0x30];
+    int m_Field34; // +0x34
+};
+
+int d3dPrimBufferStream::vfunc_16(int a1)
+{
+    int t1;
+
+    t1 = m_Field34;
+    *(int*)m_Field34 = a1;
+    return t1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_22 (0x00270240, 59 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::d3dPrimBufferStream::vfunc_22 (Proto 0x00270240, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(int, int, int);
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22(int a1, int a2);
+    void sub_0026FC20();
+    char m_pad04[0x20];
+    int m_Field24; // +0x24
+};
+
+void d3dPrimBufferStream::vfunc_22(int a1, int a2)
+{
+    int t1;
+
+    t1 = m_Field24;
+    *(int*)m_Field24 = *(int*)a1;
+    *(int*)(t1 + 4) = *(int*)(a1 + 4);
+    *(int*)(t1 + 8) = *(int*)(a1 + 8);
+    vfunc_01(*(int*)a2, *(int*)(a2 + 4), *(int*)(a2 + 8));
+    sub_0026FC20();
 }
 
 }

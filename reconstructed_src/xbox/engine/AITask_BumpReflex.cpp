@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AITask_BumpReflex.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AITask_BumpReflex.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 6 functions matched (50.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 6 functions matched (66.67%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -177,5 +177,50 @@ public:
 void* AITask_BumpReflex::vfunc_00()
 {
     return DAT_00429000;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_BumpReflex::vfunc_01 (0x001285B0, 51 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AITask_BumpReflex::vfunc_01 (Proto 0x0010C9D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_BumpReflex::vfunc_01 (Proto 0x001285B0, 51 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field54
+{
+    void sub_0010AA70();
+};
+
+struct FieldB0
+{
+    void sub_0011DD70();
+};
+
+extern "C" void __cdecl sub_00027600(int);
+
+class AITask_BumpReflex
+{
+public:
+    virtual void vfunc_00();
+    virtual AITask_BumpReflex* vfunc_01(int a1);
+    void sub_00126EC0();
+    char m_pad04[0x50];
+    Field54 m_Field54; // +0x54
+    char m_pad55[0x5B];
+    FieldB0 m_FieldB0; // +0xB0
+};
+
+AITask_BumpReflex* AITask_BumpReflex::vfunc_01(int a1)
+{
+    m_FieldB0.sub_0011DD70();
+    m_Field54.sub_0010AA70();
+    sub_00126EC0();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
 }
 

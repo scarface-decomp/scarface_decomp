@@ -1,13 +1,202 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/Drive.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/Drive.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 11 functions matched (9.09%). NOT COMPLETE YET.
-// The 10 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 11 functions matched (63.64%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_06 (0x0026EE60, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::Drive::vfunc_06 (Proto 0x0026EE60, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06(int a1, int a2);
+};
+
+int Drive::vfunc_06(int a1, int a2)
+{
+    return a2;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_11 (0x0026EE70, 5 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::Drive::vfunc_11 (Proto 0x0026EE70, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11(int a1, int a2, int a3, int a4, int a5, int a6, int a7);
+};
+
+int Drive::vfunc_11(int a1, int a2, int a3, int a4, int a5, int a6, int a7)
+{
+    return 0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_15 (0x0026EE80, 5 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::Drive::vfunc_15 (Proto 0x0026EE80, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual int vfunc_15(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9);
+};
+
+int Drive::vfunc_15(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)
+{
+    return 0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_20 (0x0026EE90, 5 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::Drive::vfunc_20 (Proto 0x0026EE90, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual int vfunc_20(int a1, int a2, int a3, int a4);
+};
+
+int Drive::vfunc_20(int a1, int a2, int a3, int a4)
+{
+    return 0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_22 (0x0026EEA0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::Drive::vfunc_22 (Proto 0x0026EEA0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual int vfunc_22(int a1);
+};
+
+int Drive::vfunc_22(int a1)
+{
+    return 1;
+}
+
+}
 
 // ============================================================================
 // [VERIFIED] core::Drive::vfunc_00 (0x0026EEB0, 8 B)
@@ -28,6 +217,32 @@ class ControllerSystemXBox_Base0 { public: virtual void sub_0026EF70(); };
 class ControllerSystemXBox_Base1 { public: virtual void sub_0026EF70(); };
 
 class Drive : public ControllerSystemXBox_Base0, public ControllerSystemXBox_Base1
+{
+public:
+    Drive();
+    virtual void sub_0026EF70();          // the real function; the thunk jumps here
+};
+
+Drive::Drive() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_02 (0x0026EEC0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::Drive::vfunc_02 (Proto 0x0026EEC0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 12 bytes to the start of the object and jumps to the real function at
+// 0x0026EF70. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (12 bytes).
+
+namespace core {
+class Drive_Base0 { public: virtual void sub_0026EF70(); char m_pad04[0x8]; };
+class Drive_Base1 { public: virtual void sub_0026EF70(); };
+
+class Drive : public Drive_Base0, public Drive_Base1
 {
 public:
     Drive();

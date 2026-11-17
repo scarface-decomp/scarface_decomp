@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/ParticleSphereGenerator.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/ParticleSphereGenerator.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 7 functions matched (28.57%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 7 functions matched (57.14%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -46,6 +46,90 @@ float ParticleSphereGenerator::vfunc_10(int a1)
         return DAT_0039D584;
     }
     return m_Field38;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleSphereGenerator::vfunc_11 (0x002A5EF0, 12 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::ParticleSphereGenerator::vfunc_11 (Proto 0x00257320), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleSphereGenerator::vfunc_11 (Proto 0x002A5EF0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class ParticleSphereGenerator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11();
+    char m_pad04[0x34];
+    int m_Field38; // +0x38
+    int m_Field3C; // +0x3C
+};
+
+int ParticleSphereGenerator::vfunc_11()
+{
+    m_Field38 = 0x3F800000;
+    m_Field3C = 0x3F800000;
+    return 0x3F800000;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleSphereGenerator::vfunc_05 (0x002A6890, 31 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::ParticleSphereGenerator::vfunc_05 (Proto 0x00257CA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleSphereGenerator::vfunc_05 (Proto 0x002A6890, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_002A6710(int);
+};
+
+extern "C" int __cdecl sub_0023F760(int);
+
+namespace pure3d {
+
+class ParticleSphereGenerator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual int vfunc_05();
+};
+
+int ParticleSphereGenerator::vfunc_05()
+{
+    int t1;
+
+    t1 = sub_0023F760(64);
+    if (t1) {
+        return ((Object*)t1)->sub_002A6710((int)this);
+    }
+    return 0;
 }
 
 }

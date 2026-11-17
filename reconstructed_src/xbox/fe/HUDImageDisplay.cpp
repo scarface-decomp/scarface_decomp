@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/HUDImageDisplay.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/HUDImageDisplay.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 10 functions matched (30.00%). NOT COMPLETE YET.
-// The 7 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 10 functions matched (40.00%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -238,5 +238,57 @@ public:
 void* HUDImageDisplay::vfunc_00()
 {
     return DAT_004367D4;
+}
+
+// ============================================================================
+// [VERIFIED] HUDImageDisplay::vfunc_01 (0x00194CD0, 86 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// HUDImageDisplay::vfunc_01 (0x00194CD0, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001C5730();
+};
+
+extern "C" char DAT_003BB0D8[];
+extern "C" char DAT_003BB0E4[];
+extern "C" void __cdecl sub_00027600(int);
+
+class HUDImageDisplay
+{
+public:
+    virtual void vfunc_00();
+    virtual HUDImageDisplay* vfunc_01(int a1);
+    void sub_00193F80();
+    char m_pad04[0x60];
+    int m_Field64; // +0x64
+    char m_pad68[0x4];
+    int m_Field6C; // +0x6C
+    int m_Field70; // +0x70
+};
+
+HUDImageDisplay* HUDImageDisplay::vfunc_01(int a1)
+{
+    int t1, t3;
+
+    t1 = m_Field70;
+    *(int*)this = (int)DAT_003BB0E4;
+    m_Field64 = (int)DAT_003BB0D8;
+    if (m_Field70) {
+        sub_00027600(t1);
+    }
+    t3 = m_Field6C;
+    if (m_Field6C) {
+        ((Object*)t3)->sub_001C5730();
+        sub_00027600(t3);
+    }
+    sub_00193F80();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
 }
 

@@ -1,13 +1,45 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, audio/WeaponStreamingClient.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, audio/WeaponStreamingClient.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 4 functions matched (50.00%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 4 functions matched (75.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] WeaponStreamingClient::vfunc_03 (0x000EED40, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as WeaponStreamingClient::vfunc_02 (Proto 0x000DB8F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// WeaponStreamingClient::vfunc_03 (Proto 0x000EED40, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00094EF0();
+};
+
+extern "C" int __stdcall sub_000CE360(int);
+extern "C" int __stdcall sub_00094C80(int);
+
+class WeaponStreamingClient
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03(int a1);
+};
+
+void WeaponStreamingClient::vfunc_03(int a1)
+{
+    ((Object*)sub_00094C80(sub_000CE360(a1)))->sub_00094EF0();
+}
 
 // ============================================================================
 // [VERIFIED] WeaponStreamingClient::vfunc_02 (0x000EED60, 13 B)

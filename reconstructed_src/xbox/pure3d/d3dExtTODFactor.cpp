@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtTODFactor.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtTODFactor.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 17 functions matched (11.76%). NOT COMPLETE YET.
-// The 15 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 17 functions matched (17.65%). NOT COMPLETE YET.
+// The 14 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -78,6 +78,50 @@ public:
 float d3dExtTODFactor::vfunc_14()
 {
     return DAT_004BD4C8;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_17 (0x00263FF0, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtTODFactor::vfunc_16 (Proto 0x00232C30), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dExtTODFactor::vfunc_17 (Proto 0x00263FF0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_004BD4CC;
+
+namespace pure3d {
+
+class d3dExtTODFactor
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual bool vfunc_17();
+};
+
+bool d3dExtTODFactor::vfunc_17()
+{
+    return DAT_004BD4CC;
 }
 
 }

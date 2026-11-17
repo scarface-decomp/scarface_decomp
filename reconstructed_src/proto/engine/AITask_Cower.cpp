@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_Cower.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_Cower.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 8 functions matched (25.00%). NOT COMPLETE YET.
-// The 6 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 8 functions matched (50.00%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -84,6 +84,29 @@ int AITask_Cower::vfunc_44()
 }
 
 // ============================================================================
+// [VERIFIED] AITask_Cower::vfunc_00 (0x0010BF20, 23 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// AITask_Cower::vfunc_00 (Proto 0x0010BF20, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045A0EC;
+
+class AITask_Cower
+{
+public:
+    virtual bool vfunc_00();
+    char m_pad04[0x6C];
+    int m_Field70; // +0x70
+};
+
+bool AITask_Cower::vfunc_00()
+{
+    return (*(int*)(DAT_0045A0EC + 44) - m_Field70) >= 750;
+}
+
+// ============================================================================
 // [VERIFIED] AITask_Cower::vfunc_00 (0x0010C800, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -104,5 +127,48 @@ public:
 void* AITask_Cower::vfunc_00()
 {
     return DAT_00404004;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_Cower::vfunc_01 (0x0010C950, 51 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// AITask_Cower::vfunc_01 (Proto 0x0010C950, 51 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field58
+{
+    void sub_000DBE80();
+};
+
+struct FieldB4
+{
+    void sub_00102BA0();
+};
+
+extern "C" void __cdecl sub_00025160(int);
+
+class AITask_Cower
+{
+public:
+    virtual void vfunc_00();
+    virtual AITask_Cower* vfunc_01(int a1);
+    void sub_000DC430();
+    char m_pad04[0x54];
+    Field58 m_Field58; // +0x58
+    char m_pad59[0x5B];
+    FieldB4 m_FieldB4; // +0xB4
+};
+
+AITask_Cower* AITask_Cower::vfunc_01(int a1)
+{
+    m_FieldB4.sub_00102BA0();
+    m_Field58.sub_000DBE80();
+    sub_000DC430();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
 }
 

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/ControllerXBox.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/ControllerXBox.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 19 functions matched (15.79%). NOT COMPLETE YET.
-// The 16 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 19 functions matched (36.84%). NOT COMPLETE YET.
+// The 12 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -74,6 +74,121 @@ void* ControllerXBox::vfunc_06()
 }
 
 // ============================================================================
+// [VERIFIED] core::ControllerXBox::vfunc_07 (0x002052F0, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerXBox::vfunc_07 (Proto 0x002052F0, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class ControllerXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void* vfunc_07();
+    char m_pad04[0x444];
+    int m_Field448; // +0x448
+};
+
+void* ControllerXBox::vfunc_07()
+{
+    return &m_Field448;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerXBox::vfunc_12 (0x00205300, 24 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerXBox::vfunc_12 (Proto 0x00205300, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class ControllerXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12(int a1);
+    char m_pad04[0x10];
+    int m_Field14; // +0x14
+};
+
+int ControllerXBox::vfunc_12(int a1)
+{
+    if ((unsigned int)a1 < (unsigned int)m_Field14) {
+        return (a1 * 52) + (int)this + 24;
+    }
+    return 0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerXBox::vfunc_17 (0x00205330, 27 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerXBox::vfunc_17 (Proto 0x00205330, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class ControllerXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual int vfunc_17(int a1);
+};
+
+int ControllerXBox::vfunc_17(int a1)
+{
+    if ((unsigned int)a1 < (unsigned int)2) {
+        return (a1 << 4) + (int)this + 1064;
+    }
+    return 0;
+}
+
+}
+
+// ============================================================================
 // [VERIFIED] core::ControllerXBox::vfunc_03 (0x00205350, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -101,6 +216,31 @@ ControllerXBox* ControllerXBox::vfunc_03(int a1)
         sub_00025160((int)this);
     }
     return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerXBox::vfunc_01 (0x00240900, 4 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerXBox::vfunc_01 (Proto 0x00240900, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class ControllerXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    int m_Field04; // +0x04
+};
+
+void ControllerXBox::vfunc_01()
+{
+    m_Field04 -= 1;
 }
 
 }

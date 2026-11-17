@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/ActiveAirplaneObject.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/ActiveAirplaneObject.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 15 functions matched (40.00%). NOT COMPLETE YET.
-// The 9 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 15 functions matched (46.67%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -239,5 +239,137 @@ void ActiveAirplaneObject::vfunc_08()
     if (sub_0002AC90(m_Field65C)) {
         m_Field660.sub_00240C70(sub_0002AC90(m_Field65C) + 236);
     }
+}
+
+// ============================================================================
+// [VERIFIED] ActiveAirplaneObject::vfunc_02 (0x00219970, 162 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// ActiveAirplaneObject::vfunc_02 (0x00219970, 162 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field48
+{
+    void sub_000B0CB0(int, int);
+    void sub_000B1210(int);
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    virtual void vfunc_49();
+    virtual void vfunc_50();
+    virtual void vfunc_51();
+    virtual void vfunc_52();
+    virtual void vfunc_53();
+    virtual void vfunc_54();
+    virtual void vfunc_55();
+    virtual void vfunc_56();
+    virtual void vfunc_57();
+    virtual void vfunc_58();
+    virtual void vfunc_59();
+    virtual void vfunc_60();
+    virtual void vfunc_61();
+    virtual void vfunc_62();
+    virtual void vfunc_63();
+    virtual void vfunc_64();
+    virtual void vfunc_65();
+    virtual void vfunc_66();
+    virtual void vfunc_67();
+    virtual void vfunc_68();
+    virtual void vfunc_69();
+    virtual void vfunc_70();
+    virtual void vfunc_71();
+    virtual int vfunc_72(int);
+    bool sub_0002B710(int);
+};
+
+extern "C" char DAT_003A2BB8[];
+extern "C" char DAT_003D00F0[];
+extern "C" int __cdecl sub_0002AC90(int);
+extern "C" void __cdecl sub_00070470(int, int, int);
+
+class ActiveAirplaneObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    char m_pad0C[0x3C];
+    Field48 m_Field48; // +0x48
+    char m_pad49[0x607];
+    int m_Field650; // +0x650
+};
+
+void ActiveAirplaneObject::vfunc_02(int a1)
+{
+    int local_4, r_edi;
+
+    r_edi = (int)(&m_Field48);
+    local_4 = (int)DAT_003D00F0;
+    m_Field48.sub_000B0CB0((int)(&local_4), a1);
+    m_Field48.sub_000B1210(a1);
+    if (!sub_0002AC90(m_Field08)) goto L_9B;
+    r_edi = ((Object*)sub_0002AC90(m_Field08))->vfunc_72(1);
+    if (r_edi == m_Field650) goto L_9B;
+    if (r_edi == 1) {
+        if (!((Object*)sub_0002AC90(m_Field08))->sub_0002B710(24)) goto L_95;
+        sub_00070470(sub_0002AC90(m_Field08), r_edi, (int)DAT_003A2BB8);
+    }
+L_95:
+    m_Field650 = r_edi;
+L_9B:
+    ;
 }
 

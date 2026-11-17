@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AITask_WatchDangerSource.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AITask_WatchDangerSource.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 10 functions matched (50.00%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 10 functions matched (60.00%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -245,6 +245,31 @@ int AITask_WatchDangerSource::vfunc_50()
     r_eax = DAT_004879E8;
     m_FieldCC = *(int*)(r_eax + 44);
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_WatchDangerSource::vfunc_00 (0x00127980, 23 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AITask_WatchDangerSource::vfunc_00 (Proto 0x0010BE70), which was matched first;
+// its addresses and names were swapped for this function's.
+// AITask_WatchDangerSource::vfunc_00 (Proto 0x00127980, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004879E8;
+
+class AITask_WatchDangerSource
+{
+public:
+    virtual bool vfunc_00();
+    char m_pad04[0x70];
+    int m_Field74; // +0x74
+};
+
+bool AITask_WatchDangerSource::vfunc_00()
+{
+    return (*(int*)(DAT_004879E8 + 44) - m_Field74) >= 750;
 }
 
 // ============================================================================

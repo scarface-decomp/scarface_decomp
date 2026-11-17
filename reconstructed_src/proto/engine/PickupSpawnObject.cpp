@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/PickupSpawnObject.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/PickupSpawnObject.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 5 functions matched (60.00%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 5 functions matched (80.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -123,5 +123,38 @@ PickupSpawnObject* PickupSpawnObject::vfunc_01(int a1)
         sub_00025160((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] PickupSpawnObject::vfunc_05 (0x001B0CD0, 29 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// PickupSpawnObject::vfunc_05 (Proto 0x001B0CD0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001E6DA0(int);
+};
+
+extern "C" int DAT_00462ED0;
+extern "C" void __stdcall sub_00028C40(int);
+
+class PickupSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int a1);
+};
+
+void PickupSpawnObject::vfunc_05(int a1)
+{
+    sub_00028C40(a1);
+    ((Object*)DAT_00462ED0)->sub_001E6DA0((int)this);
 }
 

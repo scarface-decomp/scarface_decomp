@@ -55,6 +55,27 @@ def test_progress_carries_the_list():
     assert again["good_first"] == prog["good_first"]
 
 
+def test_progress_with_only_some_game_files_keeps_the_others(tmp_path):
+    """Only game.xbe here: the Xbox is counted from its address-order list and the picks are kept."""
+    recon, reports = tmp_path / "reconstructed_src", tmp_path / "reports"
+    recon.mkdir()
+    reports.mkdir()
+    (tmp_path / "README.md").write_text("")
+    xb = [dict(t, status="UNCLAIMED") for t in QUEUE if t["bin"] == "xb"]
+    proto = [dict(task(0x200 + i, size=4), bin="proto", id=f"proto_{0x200 + i:08X}") for i in range(3)]
+    reg = {"entries": {}}
+    (reports / "full_remaining_queue.json").write_text(json.dumps(xb + proto))
+    RO.write_outputs(reg, recon, queue=xb + proto)           # a computer with both: writes both lists
+    full = json.loads((reports / "progress.json").read_text())
+    assert full["queue"]["xb"] == len(xb) and full["queue"]["proto"] == 3 and full["good_first"]
+    (reports / "full_remaining_queue.json").write_text(json.dumps(proto))
+    RO.write_outputs(reg, recon, queue=proto)                # a computer with only the prototype
+    part = json.loads((reports / "progress.json").read_text())
+    assert part["queue"]["xb"] == len(xb) and part["queue"]["proto"] == 3
+    assert part["queue"]["tiers"] == full["queue"]["tiers"]
+    assert part["good_first"] == full["good_first"]
+
+
 # --------------------------------------------------------------------------- Discord
 
 URL = "https://discord.com/api/webhooks/123456/abc_DEF-ghi"

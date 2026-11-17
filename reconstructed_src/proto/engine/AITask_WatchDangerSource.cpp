@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_WatchDangerSource.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_WatchDangerSource.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 9 functions matched (22.22%). NOT COMPLETE YET.
-// The 7 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 9 functions matched (44.44%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -81,6 +81,61 @@ int AITask_WatchDangerSource::vfunc_44()
         return t1;
     }
     return DAT_0045C094;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_WatchDangerSource::vfunc_00 (0x0010BE70, 23 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// AITask_WatchDangerSource::vfunc_00 (Proto 0x0010BE70, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045A0EC;
+
+class AITask_WatchDangerSource
+{
+public:
+    virtual bool vfunc_00();
+    char m_pad04[0x70];
+    int m_Field74; // +0x74
+};
+
+bool AITask_WatchDangerSource::vfunc_00()
+{
+    return (*(int*)(DAT_0045A0EC + 44) - m_Field74) >= 750;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_WatchDangerSource::vfunc_02 (0x0010C550, 45 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// AITask_WatchDangerSource::vfunc_02 (Proto 0x0010C550, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class AITask_WatchDangerSource
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02(int a1);
+    char m_pad04[0x74];
+    int m_Field78; // +0x78
+    int m_Field7C; // +0x7C
+    int m_Field80; // +0x80
+    int m_Field84; // +0x84
+    int m_Field88; // +0x88
+};
+
+int AITask_WatchDangerSource::vfunc_02(int a1)
+{
+    *(int*)a1 = m_Field78;
+    *(int*)(a1 + 4) = m_Field7C;
+    *(int*)(a1 + 8) = m_Field80;
+    *(int*)(a1 + 12) = m_Field84;
+    *(int*)(a1 + 16) = m_Field88;
+    return a1;
 }
 
 // ============================================================================

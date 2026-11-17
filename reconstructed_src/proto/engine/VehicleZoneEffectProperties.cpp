@@ -1,9 +1,7 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/VehicleZoneEffectProperties.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/VehicleZoneEffectProperties.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 3 functions matched (66.67%). NOT COMPLETE YET.
-// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
-// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// PROGRESS: COMPLETE. All 3 functions are matched.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
@@ -61,5 +59,48 @@ VehicleZoneEffectProperties* VehicleZoneEffectProperties::vfunc_01(int a1)
         sub_00025160((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] VehicleZoneEffectProperties::vfunc_05 (0x001D34E0, 55 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// VehicleZoneEffectProperties::vfunc_05 (Proto 0x001D34E0, 55 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001D33D0(int);
+};
+
+extern "C" void __stdcall sub_00028C40(int);
+
+class VehicleZoneEffectProperties
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int a1);
+};
+
+void VehicleZoneEffectProperties::vfunc_05(int a1)
+{
+    int r_ebx, r_edi, r_esi;
+
+    r_esi = (int)this;
+    sub_00028C40(a1);
+    r_edi = r_esi + 392;
+    r_esi += 32;
+    r_ebx = 30;
+    do {
+        ((Object*)r_edi)->sub_001D33D0(r_esi);
+        r_esi += 12;
+        r_edi += 16;
+        r_ebx -= 1;
+    } while (r_ebx);
 }
 

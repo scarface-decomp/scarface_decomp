@@ -65,6 +65,10 @@ def portal(tmp_path_factory):
     for k in [k for k, e in reg["entries"].items()
               if k == KEY or e.get("ported_from") in (first, TID) or f"{e['bin']}_{int(str(e['va']), 16):08X}" == first]:
         reg["entries"].pop(k)
+    # What the easy pass (the portal's starter code) recorded goes back to "open" too, so the easy-pass test
+    # has something to match however far the real queue has got, and the other lists stay the size they test.
+    for k in [k for k, e in reg["entries"].items() if e.get("tool_used") == "the portal's starter code (no AI)"]:
+        reg["entries"].pop(k)
     reg_p.write_text(json.dumps(reg), encoding="utf-8")
     q_p = work / "reports" / "full_remaining_queue.json"
     queue = json.loads(q_p.read_text(encoding="utf-8")) if q_p.exists() else []

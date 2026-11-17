@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/Path.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/Path.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 5 functions matched (20.00%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 5 functions matched (40.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -38,5 +38,29 @@ Path* Path::vfunc_00(int a1)
         sub_00025160((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] Path::vfunc_03 (0x00031000, 34 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Path::vfunc_03 (Proto 0x00031000, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Path
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03(int a1, int a2, int a3);
+    void sub_00030F00(int, int, int);
+};
+
+void Path::vfunc_03(int a1, int a2, int a3)
+{
+    vfunc_02();
+    sub_00030F00(a1, a2, a3);
 }
 

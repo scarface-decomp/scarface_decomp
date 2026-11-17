@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Image8.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Image8.cpp (8 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 14 functions matched (42.86%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 8 of 14 functions matched (57.14%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -47,6 +47,49 @@ int Image8::vfunc_15(int a1)
 {
     m_Field428 = a1;
     return a1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Image8::vfunc_16 (0x00263040, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::Image8::vfunc_16 (Proto 0x0021C6F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Image8::vfunc_16 (Proto 0x00263040, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class Image8
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual int vfunc_16();
+    char m_pad04[0x424];
+    int m_Field428; // +0x428
+};
+
+int Image8::vfunc_16()
+{
+    return m_Field428;
 }
 
 }
@@ -264,6 +307,53 @@ public:
 int Image8::vfunc_19(int a1)
 {
     return *(int*)((int)this + (a1 * 4) + 40);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Image8::vfunc_20 (0x002D64A0, 4 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::Image8::vfunc_20 (Proto 0x0021C8B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::Image8::vfunc_20 (Proto 0x002D64A0, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class Image8
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void* vfunc_20();
+    char m_pad04[0x24];
+    int m_Field28; // +0x28
+};
+
+void* Image8::vfunc_20()
+{
+    return &m_Field28;
 }
 
 }

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/Condition.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/Condition.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 6 functions matched (33.33%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 6 functions matched (50.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -37,6 +37,59 @@ public:
 int Condition::vfunc_07()
 {
     return m_Field08;
+}
+
+// ============================================================================
+// [VERIFIED] Condition::vfunc_10 (0x001F77B0, 65 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Condition::vfunc_10 (Proto 0x001F77B0, 65 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03(int, int);
+};
+
+class Condition
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int);
+    virtual void vfunc_09();
+    virtual bool vfunc_10(int a1);
+};
+
+bool Condition::vfunc_10(int a1)
+{
+    int r_ebx, r_edi;
+
+    r_edi = 0;
+    if (vfunc_08(0)) {
+        do {
+            r_edi += 1;
+        } while (vfunc_08(r_edi));
+    }
+    r_edi -= 1;
+    if (r_edi >= 0) {
+        r_ebx = a1;
+        do {
+            ((Object*)vfunc_08(r_edi))->vfunc_03((int)this, r_ebx);
+            r_edi -= 1;
+        } while (r_edi >= 0);
+    }
+    return true;
 }
 
 // ============================================================================

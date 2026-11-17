@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_BasicInVehicle.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_BasicInVehicle.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 4 functions matched (50.00%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 4 functions matched (75.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -101,5 +101,48 @@ public:
 void* AITask_BasicInVehicle::vfunc_00()
 {
     return DAT_004041E8;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_BasicInVehicle::vfunc_01 (0x000F6280, 48 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// AITask_BasicInVehicle::vfunc_01 (Proto 0x000F6280, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field4C
+{
+    void sub_000DBE80();
+};
+
+struct Field5C
+{
+    void sub_00102BA0();
+};
+
+extern "C" void __cdecl sub_00025160(int);
+
+class AITask_BasicInVehicle
+{
+public:
+    virtual void vfunc_00();
+    virtual AITask_BasicInVehicle* vfunc_01(int a1);
+    void sub_000DC430();
+    char m_pad04[0x48];
+    Field4C m_Field4C; // +0x4C
+    char m_pad4D[0xF];
+    Field5C m_Field5C; // +0x5C
+};
+
+AITask_BasicInVehicle* AITask_BasicInVehicle::vfunc_01(int a1)
+{
+    m_Field5C.sub_00102BA0();
+    m_Field4C.sub_000DBE80();
+    sub_000DC430();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
 }
 

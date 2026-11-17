@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_BumpReflex.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/AITask_BumpReflex.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 6 functions matched (33.33%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 6 functions matched (50.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -104,5 +104,48 @@ public:
 void* AITask_BumpReflex::vfunc_00()
 {
     return DAT_00403C3C;
+}
+
+// ============================================================================
+// [VERIFIED] AITask_BumpReflex::vfunc_01 (0x0010C9D0, 51 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// AITask_BumpReflex::vfunc_01 (Proto 0x0010C9D0, 51 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field54
+{
+    void sub_000DBE80();
+};
+
+struct FieldB0
+{
+    void sub_00102BA0();
+};
+
+extern "C" void __cdecl sub_00025160(int);
+
+class AITask_BumpReflex
+{
+public:
+    virtual void vfunc_00();
+    virtual AITask_BumpReflex* vfunc_01(int a1);
+    void sub_000DC430();
+    char m_pad04[0x50];
+    Field54 m_Field54; // +0x54
+    char m_pad55[0x5B];
+    FieldB0 m_FieldB0; // +0xB0
+};
+
+AITask_BumpReflex* AITask_BumpReflex::vfunc_01(int a1)
+{
+    m_FieldB0.sub_00102BA0();
+    m_Field54.sub_000DBE80();
+    sub_000DC430();
+    if (a1 & 1) {
+        sub_00025160((int)this);
+    }
+    return this;
 }
 

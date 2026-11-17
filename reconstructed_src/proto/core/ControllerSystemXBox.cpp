@@ -1,13 +1,269 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/ControllerSystemXBox.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/ControllerSystemXBox.cpp (8 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 13 functions matched (15.38%). NOT COMPLETE YET.
-// The 11 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 8 of 13 functions matched (61.54%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::ControllerSystemXBox::vfunc_10 (0x00204CD0, 22 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerSystemXBox::vfunc_10 (Proto 0x00204CD0, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class ControllerSystemXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int);
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10(int a1);
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    char m_pad1C[0x1284];
+    int m_Field12A0; // +0x12A0
+};
+
+void ControllerSystemXBox::vfunc_10(int a1)
+{
+    m_Field12A0 = a1;
+    a1 = m_Field18;
+    vfunc_07(a1);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerSystemXBox::vfunc_11 (0x00204CF0, 17 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerSystemXBox::vfunc_11 (Proto 0x00204CF0, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class ControllerSystemXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11(int a1);
+    char m_pad04[0x18];
+    int m_Field1C; // +0x1C
+};
+
+int ControllerSystemXBox::vfunc_11(int a1)
+{
+    int r_eax;
+
+    r_eax = m_Field1C;
+    if (!r_eax) {
+        r_eax = a1;
+        m_Field1C = a1;
+    }
+    return r_eax;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerSystemXBox::vfunc_01 (0x002057E0, 4 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerSystemXBox::vfunc_01 (Proto 0x002057E0, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class ControllerSystemXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void ControllerSystemXBox::vfunc_01()
+{
+    m_Field0C -= 1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerSystemXBox::vfunc_04 (0x00205A70, 43 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerSystemXBox::vfunc_04 (Proto 0x00205A70, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual bool vfunc_04();
+};
+
+namespace core {
+
+class ControllerSystemXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04();
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+};
+
+int ControllerSystemXBox::vfunc_04()
+{
+    int r_ebx, r_edi, r_esi;
+
+    r_ebx = 0;
+    r_esi = (int)(&m_Field20);
+    r_edi = 4;
+    do {
+        if (((Object*)r_esi)->vfunc_04()) {
+            r_ebx += 1;
+        }
+        r_esi += 1184;
+        r_edi -= 1;
+    } while (r_edi);
+    return r_ebx;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerSystemXBox::vfunc_05 (0x00205AA0, 72 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerSystemXBox::vfunc_05 (Proto 0x00205AA0, 72 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual bool vfunc_04();
+};
+
+namespace core {
+
+class ControllerSystemXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual int vfunc_05(int a1);
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+};
+
+int ControllerSystemXBox::vfunc_05(int a1)
+{
+    int r_ebx, r_edi, r_esi;
+
+    r_ebx = 0;
+    r_esi = 0;
+    r_edi = (int)(&m_Field20);
+    do {
+        if (((Object*)r_edi)->vfunc_04()) {
+            if (r_ebx == a1) goto L_37;
+            r_ebx += 1;
+        }
+        r_esi += 1;
+        r_edi += 1184;
+    } while ((unsigned int)r_esi < (unsigned int)4);
+    return 0;
+L_37:
+    r_esi = r_esi * 1184;
+    return r_esi + (int)this + 32;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerSystemXBox::vfunc_12 (0x00205BB0, 19 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// core::ControllerSystemXBox::vfunc_12 (Proto 0x00205BB0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class ControllerSystemXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12(int a1);
+    char m_pad04[0x18];
+    int m_Field1C; // +0x1C
+};
+
+int ControllerSystemXBox::vfunc_12(int a1)
+{
+    int r_eax;
+
+    r_eax = m_Field1C;
+    if (r_eax == a1) {
+        m_Field1C = 0;
+    }
+    return r_eax;
+}
+
+}
 
 // ============================================================================
 // [VERIFIED] core::ControllerSystemXBox::vfunc_00 (0x00205BD0, 8 B)

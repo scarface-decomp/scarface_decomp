@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/StatePropAttachmentObject.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/StatePropAttachmentObject.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 4 functions matched (25.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 4 functions matched (75.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -30,5 +30,75 @@ public:
 void* StatePropAttachmentObject::vfunc_00()
 {
     return DAT_00417C44;
+}
+
+// ============================================================================
+// [VERIFIED] StatePropAttachmentObject::vfunc_00 (0x001B55B0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// StatePropAttachmentObject::vfunc_00 (Proto 0x001B55B0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 32 bytes to the start of the object and jumps to the real function at
+// 0x001B55C0. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (32 bytes).
+
+class StatePropAttachmentObject_Base0 { public: virtual void sub_001B55C0(); char m_pad04[0x1C]; };
+class StatePropAttachmentObject_Base1 { public: virtual void sub_001B55C0(); };
+
+class StatePropAttachmentObject : public StatePropAttachmentObject_Base0, public StatePropAttachmentObject_Base1
+{
+public:
+    StatePropAttachmentObject();
+    virtual void sub_001B55C0();          // the real function; the thunk jumps here
+};
+
+StatePropAttachmentObject::StatePropAttachmentObject() {}                  // building one is what makes the compiler write its tables and the thunk
+
+// ============================================================================
+// [VERIFIED] StatePropAttachmentObject::vfunc_01 (0x001B5600, 86 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// StatePropAttachmentObject::vfunc_01 (Proto 0x001B5600, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0007DA70(int);
+    int sub_00084AA0(int);
+    void sub_0009F960(int);
+    void sub_0024EC50(int);
+};
+
+extern "C" int __cdecl sub_00025120(int);
+extern "C" int __cdecl sub_00028120(int);
+
+class StatePropAttachmentObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(int a1, int a2);
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void StatePropAttachmentObject::vfunc_01(int a1, int a2)
+{
+    int r_esi, t1;
+
+    r_esi = a1;
+    if (a1) {
+        t1 = sub_00025120(16);
+        if (t1) {
+            r_esi = ((Object*)t1)->sub_00084AA0(a1);
+        } else {
+            r_esi = 0;
+        }
+        ((Object*)r_esi)->sub_0024EC50((int)(&m_Field08));
+        ((Object*)r_esi)->sub_0009F960(sub_00028120(m_Field04));
+        ((Object*)a2)->sub_0007DA70(r_esi);
+    }
 }
 

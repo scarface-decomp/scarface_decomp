@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/xboxOceanRenderer.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/xboxOceanRenderer.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 11 functions matched (54.55%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 11 functions matched (63.64%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -216,6 +216,59 @@ xboxOceanRenderer* xboxOceanRenderer::vfunc_00(unsigned int flags)
     return this;
 }
 #pragma optimize("", on)
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::xboxOceanRenderer::vfunc_01 (0x00297AE0, 71 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::xboxOceanRenderer::vfunc_01 (Proto 0x00253C70), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::xboxOceanRenderer::vfunc_01 (Proto 0x00297AE0, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_002B74B0();
+};
+
+extern "C" int DAT_0045C0D0;
+extern "C" void __cdecl sub_00296700(void);
+
+namespace pure3d {
+
+class xboxOceanRenderer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    void sub_00297130();
+    void sub_002967D0(int);
+    void sub_00297370();
+    int m_Field04; // +0x04
+};
+
+void xboxOceanRenderer::vfunc_01()
+{
+    int r_eax, r_edi;
+
+    sub_00296700();
+    sub_00297370();
+    r_eax = DAT_0045C0D0;
+    r_edi = 0;
+    if (r_eax > 0) {
+        do {
+            sub_002967D0(r_edi);
+            r_eax = m_Field04;
+            ((Object*)*(int*)((int)this + (r_eax * 4) + 8))->sub_002B74B0();
+            r_eax = DAT_0045C0D0;
+            r_edi += 1;
+        } while (r_edi < r_eax);
+    }
+    sub_00297130();
+}
 
 }
 

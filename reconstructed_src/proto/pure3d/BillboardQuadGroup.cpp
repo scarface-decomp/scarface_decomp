@@ -1,13 +1,54 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/BillboardQuadGroup.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/BillboardQuadGroup.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 8 functions matched (12.50%). NOT COMPLETE YET.
-// The 7 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 8 functions matched (37.50%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] pure3d::BillboardQuadGroup::vfunc_16 (0x0022BBF0, 9 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::BillboardQuadGroup::vfunc_16 (Proto 0x0022BBF0, 9 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+namespace pure3d {
+
+class BillboardQuadGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual float vfunc_16(int a1, int a2);
+};
+
+float BillboardQuadGroup::vfunc_16(int a1, int a2)
+{
+    return DAT_0037CE50;
+}
+
+}
 
 // ============================================================================
 // [VERIFIED] pure3d::BillboardQuadGroup::vfunc_03 (0x0022E520, 30 B)
@@ -37,6 +78,40 @@ BillboardQuadGroup* BillboardQuadGroup::vfunc_03(int a1)
         sub_001FCF60((int)this);
     }
     return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::BillboardQuadGroup::vfunc_09 (0x00257E10, 4 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// pure3d::BillboardQuadGroup::vfunc_09 (Proto 0x00257E10, 4 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class BillboardQuadGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual int vfunc_09();
+    char m_pad04[0x78];
+    int m_Field7C; // +0x7C
+};
+
+int BillboardQuadGroup::vfunc_09()
+{
+    return m_Field7C;
 }
 
 }

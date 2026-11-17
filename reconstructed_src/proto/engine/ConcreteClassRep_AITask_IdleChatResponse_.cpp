@@ -1,9 +1,7 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/ConcreteClassRep_AITask_IdleChatResponse_.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/ConcreteClassRep_AITask_IdleChatResponse_.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 2 functions matched (50.00%). NOT COMPLETE YET.
-// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
-// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// PROGRESS: COMPLETE. All 2 functions are matched.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
@@ -39,5 +37,49 @@ template <> void ConcreteClassRep<AITask_IdleChatResponse>::vfunc_02()
 {
     sub_000660D0(DAT_00403B00, DAT_00403E9C);
     DAT_00403EA0 = (int)DAT_00403ADC;
+}
+
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_IdleChatResponse>::vfunc_01 (0x001019E0, 80 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// ConcreteClassRep<AITask_IdleChatResponse>::vfunc_01 (Proto 0x001019E0, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0010B480(int, int);
+};
+
+extern "C" char DAT_0038BC84[];
+extern "C" char DAT_0038BC8C[];
+extern "C" int __cdecl sub_00025140(int, int);
+extern "C" void __cdecl sub_00029D40(int, int);
+
+class AITask_IdleChatResponse;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+    char m_pad04[0x18];
+    int m_Field1C; // +0x1C
+};
+
+template <> int ConcreteClassRep<AITask_IdleChatResponse>::vfunc_01()
+{
+    int t2;
+
+    t2 = sub_00025140(200, m_Field1C);
+    if (t2) {
+        ((Object*)t2)->sub_0010B480(0, m_Field1C);
+        *(int*)t2 = (int)DAT_0038BC8C;
+        *(int*)(t2 + 84) = (int)DAT_0038BC84;
+        sub_00029D40(t2 + 196, 2);
+        return t2;
+    }
+    return 0;
 }
 
