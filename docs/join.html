@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join in | Scarface decomp</title>
+  <meta name="description" content="Three ways to help rebuild the source code of Scarface: The World Is Yours (2006): by hand, with your own AI key in the portal, or with an AI coding agent. What you need, the steps, and what is open." />
+  <meta name="theme-color" content="#0A0A0A" />
+  <meta property="og:title" content="Join the Scarface: The World Is Yours decompilation" />
+  <meta property="og:description" content="Help by hand, with your own AI key, or with an AI coding agent. Bring your own copy of the game." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scarface-decomp.pages.dev/join.html" />
+  <meta property="og:image" content="https://scarface-decomp.pages.dev/og.jpg" />
+  <link rel="canonical" href="https://scarface-decomp.pages.dev/join.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <style>
+    /* The main page's look (index.html): black, white and blood red. */
+    :root {
+      --black: #0A0A0A; --panel: #121212; --white: #F2EFEA; --grey: #A6A6A6; --line: #2A2A2A;
+      --red: #EA444D; --blood: #B5121B; --hot: #FF3B45;
+      --title: 'Marcellus', 'Friz Quadrata', 'Optima', Georgia, serif;
+      --sans: 'Josefin Sans', 'Avant Garde', 'Century Gothic', 'Futura', 'Segoe UI', sans-serif;
+      --mono: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--red); text-underline-offset: 4px; }
+    a:hover { color: var(--hot); }
+    :focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+    code { font-family: var(--mono); font-size: 0.82em; background: var(--panel); border: 1px solid var(--line); padding: 1px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+    .topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,10,10,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .topbar .wrap { max-width: 1100px; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+    .brand { font-family: var(--title); font-size: 1.02rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); text-decoration: none; white-space: nowrap; }
+    .nav { display: flex; gap: 8px; }
+    .nav a { color: var(--white); text-decoration: none; font-size: 0.9rem; border: 1px solid #3A3A3A; border-radius: 2px; padding: 6px 14px; white-space: nowrap; }
+    .nav a:hover { border-color: var(--white); }
+    main .wrap { padding-top: 64px; padding-bottom: 80px; }
+    h1 { font-family: var(--title); font-weight: 400; color: var(--red); text-transform: uppercase; letter-spacing: 0.14em; font-size: clamp(1.4rem, 3.4vw, 2rem); line-height: 1.25; text-align: center; margin-bottom: 14px; }
+    .intro { color: var(--grey); max-width: 38em; margin: 0 auto 44px; text-align: center; }
+    h2 { font-family: var(--title); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; font-size: 1.15rem; margin: 46px 0 12px; padding-top: 22px; border-top: 1px solid var(--line); }
+    h2 span { color: var(--red); margin-right: 10px; }
+    p { margin-bottom: 12px; }
+    ul, ol { margin: 0 0 14px 1.3em; }
+    li { margin-bottom: 7px; }
+    .who { color: var(--grey); }
+    .say { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--blood); padding: 14px 18px 12px; margin: 14px 0; font-family: var(--mono); font-size: 0.9rem; overflow-wrap: anywhere; }
+    pre { background: #050505; border: 1px solid var(--line); padding: 14px 16px; margin: 12px 0 16px; overflow-x: auto; font-family: var(--mono); font-size: 0.84rem; line-height: 1.55; }
+    .note { color: var(--grey); font-size: 0.92rem; }
+    .rules li b { color: var(--white); }
+    footer { border-top: 1px solid var(--line); color: var(--grey); font-size: 0.9rem; }
+    footer .wrap { padding: 24px 28px 40px; }
+    @media (max-width: 560px) { .nav a:nth-child(n+2) { display: none; } .wrap, footer .wrap { padding-left: 18px; padding-right: 18px; } .brand { letter-spacing: 0.1em; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="./">Scarface decomp</a>
+      <nav class="nav" aria-label="Site">
+        <a href="./">Progress</a>
+        <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>
+        <a href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <h1>Join in</h1>
+      <p class="intro">Each function of the game is rewritten in C++ until the game's own 2003 compiler turns it back into
+        exactly the same bytes. The compiler is the judge, so anyone's work counts the moment it matches. Pick the way that
+        suits you.</p>
+
+      <h2>What everyone needs</h2>
+      <ul>
+        <li><b>Your own copy of the game</b> (Xbox is the main one; PC 1.00.2 also works). The project never hands out game files.</li>
+        <li><b>Visual C++ Toolkit 2003</b> (<code>VCToolkitSetup.exe</code>), the compiler the game was built with. Without it
+          you can still work, and a maintainer checks your matches for you.</li>
+        <li><b>Python 3 and Git</b>, both free. On Windows, <a href="scarface-setup.bat" download>scarface-setup.bat</a>
+          installs them and fetches the project.</li>
+      </ul>
+      <p class="note">The full setup, step by step, is under <a href="./#help">Start helping</a> on the main page. No leaked
+        source is used anywhere in this project, and none may be brought in.</p>
+
+      <h2><span>1</span>No AI, no experience</h2>
+      <p class="who">About ten minutes, and it costs nothing.</p>
+      <ol>
+        <li>Start the portal (<code>START_PORTAL.bat</code>, or <code>sh start_portal.sh</code>) and sign in with a name.</li>
+        <li>Press <b>Match the easy ones</b>. With no AI, the portal writes C++ straight from each small function's machine
+          code, compiles it, and records every one that already matches, under your name.</li>
+        <li>Press <b>Submit your work</b> and post the file it makes in #help on Discord, or attach it to a GitHub issue.</li>
+      </ol>
+      <p class="note">The portal's own drafts match about half of the smallest open functions. Whatever is left is what
+        needs a person or an AI.</p>
+
+      <h2><span>2</span>Your own AI key, in the portal</h2>
+      <p class="who">For anyone with an API key from an AI provider. You pay your provider for what you use.</p>
+      <ol>
+        <li>In the portal's workbench, paste your key. It goes from your browser through the portal to the provider and is
+          never stored or logged by the project.</li>
+        <li>Claim a function and let the AI draft it, or run it over a batch. A draft is kept only if it compiles to the
+          exact bytes, so a wrong answer costs credits but can never get into the project.</li>
+        <li>Leave <b>Name things after a match</b> ticked, so the AI also proposes real names for the function and its
+          members. A named version is kept only if it still matches.</li>
+      </ol>
+      <p class="note">Run step 1 first: it clears the functions that need no AI, so your credits go to the ones that do.</p>
+
+      <h2><span>3</span>An AI coding agent</h2>
+      <p class="who">For Claude Code, Codex, Cursor and similar tools that can run commands in a folder.</p>
+      <p>Open the project folder in your agent and tell it:</p>
+      <p class="say">Read AGENTS.md in this repository and follow it.</p>
+      <p>That file gives the agent its rules and this loop, which it runs by itself:</p>
+<pre>python portal/doctor.py            # what is missing: game files, compiler
+python portal/agent.py next --bin xb --max-size 40     # pick one, smallest first
+python portal/agent.py packet xb 0x00248810            # disassembly and a starter file
+python portal/agent.py check work/xb_00248810.cpp      # compile, compare, repeat
+python portal/agent.py keep work/xb_00248810.cpp       # ready to record</pre>
+      <p>When it has a batch, you record them yourself with <code>python portal/scripts/submit_matches.py</code>. That step
+        asks for your name and PIN, which the agent never sees.</p>
+
+      <h2>Not only matching</h2>
+      <ul>
+        <li><b>Names.</b> Most rebuilt code still says <code>m_Field28</code> and <code>sub_00123456</code>. Working out what
+          a function or member is, and saying why, is the help the project needs most.
+          See <a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/NAMES.md" target="_blank" rel="noopener noreferrer">NAMES.md</a>.</li>
+        <li><b>File formats, cutscenes in Blender, the tools themselves.</b> Everything open is listed in
+          <a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/HELP_WANTED.md" target="_blank" rel="noopener noreferrer">HELP_WANTED.md</a>.</li>
+        <li><b>Questions.</b> Ask in #help on <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>.</li>
+      </ul>
+
+      <h2>The rules, for people and for AI</h2>
+      <ul class="rules">
+        <li><b>No leaked source</b>, and no tools or name lists written from it.</li>
+        <li><b>No game files in the project</b>: not the game, not the compiler.</li>
+        <li><b>Real C++ only</b>: no inline assembly, no emitted bytes, no hard-coded addresses.</li>
+        <li><b>Say what wrote it.</b> Each match records the person and the tool, AI included.</li>
+        <li><b>A match is the compiler's verdict.</b> Nothing counts until it compiles to the same bytes.</li>
+      </ul>
+      <p class="note">More in <a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a>
+        and <a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/PROVENANCE.md" target="_blank" rel="noopener noreferrer">PROVENANCE.md</a>.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">A fan project. Not affiliated with the game's publisher or developer. You need your own copy of the game.</div>
+  </footer>
+</body>
+</html>

@@ -5,6 +5,10 @@
     <changefreq>daily</changefreq>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/join.html</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/versions.html</loc>
     <changefreq>weekly</changefreq>
   </url>
