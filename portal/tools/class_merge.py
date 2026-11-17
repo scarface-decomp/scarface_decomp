@@ -256,8 +256,9 @@ def _pick(options: Counter) -> str:
     return sorted(options, key=lambda o: (-options[o], o))[0]
 
 
-def merge(decls: List[ClassDecl], namespaces: List[str]) -> Merged:
-    """One class from the copies in decls (all of the same class). Where copies only differ by one
+def merge(decls: List[ClassDecl], namespaces: List[str], given: Optional[Dict[int, str]] = None) -> Merged:
+    """One class from the copies in decls (all of the same class). given: names recorded for its
+    members by offset (reports/names.json); they beat whatever the copies call the member. Where copies only differ by one
     being more specific, the specific one is taken and noted; where they can't both be right, the
     conflict is listed and the class should not be used."""
     mg = Merged(namespaces, decls[0].name)
@@ -343,7 +344,9 @@ def merge(decls: List[ClassDecl], namespaces: List[str]) -> Merged:
         names = Counter(mb.name for _i, mb in group if not placeholder(mb.name))
         first = group[0][1]
         name = _pick(names) if names else first.name
-        if len(names) > 1:
+        if given and key[1] is None and key[0] in given:
+            name = given[key[0]]
+        elif len(names) > 1:
             mg.notes.append(f"+0x{key[0]:X}: several names ({', '.join(sorted(names))}); took {name}")
         mg.members.append(Member(first.off, first.size, ctype, name, first.count, first.bit, first.width))
         for i, mb in group:
@@ -418,6 +421,24 @@ def render(mg: Merged, indent: str = "") -> str:
         pos = mb.off + size
     out.append(f"{indent}}};")
     return "\n".join(out)
+
+
+def with_member_names(code: str, symbol: str, given: Dict[int, str]) -> str:
+    """code with the members of symbol's class called by their recorded names (given: by offset).
+    Only stand-in names are replaced, and only when the class in the code can be read."""
+    if not given:
+        return code
+    try:
+        d = parse_class(code, symbol)
+    except Unreadable:
+        return code
+    used = set(re.findall(r"\b\w+\b", strip_comments(code)))
+    for mb in d.members:
+        new = given.get(mb.off)
+        if mb.bit is None and new and new != mb.name and placeholder(mb.name) and new not in used:
+            code = re.sub(r"\b" + re.escape(mb.name) + r"\b", new, code)
+            used.add(new)
+    return code
 
 
 def with_class(code: str, decl: ClassDecl, mg: Merged, index: int) -> str:

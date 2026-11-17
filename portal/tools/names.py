@@ -10,6 +10,14 @@ portal shows them next to the function. Once a function is matched, the name it 
     {"schema": "scarface_names_v1",
      "names": {"xb:0x0011E4A0": {"name": "Weapon::Reload", "by": "handle", "why": "what shows it"}}}
 
+Class members have names too, under "members": a version and a class (for a template, the template's
+own name), then the member's offset in the object:
+
+     "members": {"xb:CharacterObject": {"+0x28": {"name": "m_health", "by": "handle", "why": "what shows it"}}}
+
+The portal's starter code for any function of that class then uses the name instead of m_Field28, and
+portal/scripts/merge_classes.py puts it in the class's merged declaration.
+
 Keys are the registry's: a version (pc, xb, proto, ps2, or a PS2 overlay such as ps2pause) and the function's
 address. Names are C++ names:
 letters, digits and _, parts joined by ::, templates in <>. Add one with a pull request (docs/NAMES.md),
@@ -31,6 +39,10 @@ KEY_RE = re.compile(r"^(" + "|".join(BINS) + r"):0x[0-9A-F]{8}$")
 PART = r"[A-Za-z_][A-Za-z0-9_]*(?:<[A-Za-z0-9_:<>, *&]+>)?"
 NAME_RE = re.compile(rf"^(?:{PART}::)*(?:{PART}|operator\S{{1,3}}|~{PART})$")
 DEFAULT_RE = re.compile(r"^(sub|func|FUN|thunk)_[0-9A-Fa-f]+$")
+CLASS_KEY_RE = re.compile(r"^(" + "|".join(BINS) + r"):[A-Za-z_][A-Za-z0-9_]*(?:::[A-Za-z_][A-Za-z0-9_]*)*$")
+OFFSET_RE = re.compile(r"^\+0x[0-9A-F]{2,}$")
+MEMBER_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+MEMBER_DEFAULT_RE = re.compile(r"^m?_?(Field|pad)[0-9A-Fa-f]+(_bit\d)?$")
 EMPTY = {"schema": SCHEMA, "names": {}}
 
 
@@ -60,6 +72,57 @@ def addresses(data: dict, version: str) -> Dict[str, int]:
             twice.add(name)
         out[name] = int(key.split(":")[1], 16)
     return {n: a for n, a in out.items() if n not in twice}
+
+
+def members(data: dict, version: str, cls: str) -> Dict[int, str]:
+    """{0x28: "m_health"}: the names recorded for one class's members on one version."""
+    out: Dict[int, str] = {}
+    section = data.get("members")
+    row = section.get(f"{version}:{cls}") if isinstance(section, dict) else None
+    for off, info in (row.items() if isinstance(row, dict) else ()):
+        name = info.get("name") if isinstance(info, dict) else None
+        if OFFSET_RE.match(off) and isinstance(name, str) and MEMBER_RE.match(name):
+            out[int(off, 16)] = name
+    return out
+
+
+def member_problems(data: dict) -> List[str]:
+    """What is wrong with the "members" section (it may be absent)."""
+    out: List[str] = []
+    section = data.get("members")
+    if section is None:
+        return out
+    if not isinstance(section, dict):
+        return ["reports/names.json: 'members' must be an object"]
+    for key, row in section.items():
+        where = f"reports/names.json members {key}"
+        if not CLASS_KEY_RE.match(key):
+            out.append(f"{where}: keys look like xb:CharacterObject (a version, then the class without template arguments)")
+            continue
+        if not isinstance(row, dict):
+            out.append(f"{where}: must be an object of offsets")
+            continue
+        seen: Dict[str, str] = {}
+        for off, info in row.items():
+            at = f"{where} {off}"
+            if not OFFSET_RE.match(off):
+                out.append(f"{at}: offsets look like +0x28 (upper-case hex, two digits or more)")
+                continue
+            if not isinstance(info, dict):
+                out.append(f"{at}: must be an object with name, by and why")
+                continue
+            name = info.get("name")
+            if not isinstance(name, str) or not MEMBER_RE.match(name) or MEMBER_DEFAULT_RE.match(name):
+                out.append(f"{at}: {name!r} isn't a member name (letters, digits and _, and not a stand-in like m_Field28)")
+            elif name in seen:
+                out.append(f"{at}: {name} is already the name of {seen[name]}")
+            else:
+                seen[name] = off
+            if not isinstance(info.get("by"), str) or not info["by"].strip():
+                out.append(f"{at}: say who worked it out ('by')")
+            if not isinstance(info.get("why"), str) or len(info["why"].strip()) < 10:
+                out.append(f"{at}: say in a sentence what shows it ('why')")
+    return out
 
 
 def problems(data: dict, known: Optional[Dict[str, set]] = None) -> List[str]:
@@ -95,7 +158,7 @@ def problems(data: dict, known: Optional[Dict[str, set]] = None) -> List[str]:
             if other:
                 out.append(f"{where}: {name} is already the name of {other}")
             seen[(b, name)] = key
-    return out
+    return out + member_problems(data)
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@
 
     python portal/scripts/merge_classes.py              # count what merges; needs nothing but the repo
     python portal/scripts/merge_classes.py --verify     # also prove it, and write the results
+    python portal/scripts/merge_classes.py --verify --harvest   # and record members' names
 
 Every matched member function carries its own copy of its class. This script merges the copies of each
 class (portal/tools/class_merge.py). With --verify it then recompiles every function of the class with
@@ -14,6 +15,10 @@ and named, and the merge is tried again without it.
 
     reports/classes.json                 every class: how it went, which functions the class is proven for
     reports/classes/<game>/<Class>.h     the merged class, for classes proven for two or more functions
+
+Members named in reports/names.json ("members") get that name in the merged class. --harvest goes the
+other way: a member that matched code already calls by a real name, in a class proven this run, is
+added to reports/names.json, so the portal's starter code for the class's other functions uses it.
 
 The registry is not touched: each function's own recorded text stays the proof that it matches. The
 merged classes are what a shared header is built from next.
@@ -34,6 +39,9 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "portal" / "tools"))
 
 import class_merge as CM  # noqa: E402
+import names as NAMES  # noqa: E402
+
+NAMES_JSON = ROOT / "reports" / "names.json"
 
 REGISTRY = ROOT / "reports" / "verified_registry.json"
 OUT_JSON = ROOT / "reports" / "classes.json"
@@ -116,9 +124,35 @@ def header_text(b: str, cls: str, mg: "CM.Merged", proven: List[dict]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def harvest(names: dict, state: dict, entries: Dict[str, dict]) -> int:
+    """Add to names (reports/names.json's data) each member a proven merged class calls by a real
+    name that is not recorded yet. Returns how many were added."""
+    added = 0
+    for (b, cls), st in sorted(state.items()):
+        mg = st["merged"]
+        if mg is None or len(st["proven"]) < 2 or not NAMES.CLASS_KEY_RE.match(f"{b}:{cls}"):
+            continue
+        have = NAMES.members(names, b, cls)
+        for mb in mg.members:
+            if mb.bit is not None or mb.off in have or mb.name in have.values() \
+                    or not NAMES.MEMBER_RE.match(mb.name) or NAMES.MEMBER_DEFAULT_RE.match(mb.name) or CM.placeholder(mb.name):
+                continue
+            src = next((k for k, d in st["good"] if any(m.off == mb.off and m.name == mb.name for m in d.members)), None)
+            if src is None:
+                continue
+            e = entries[src]
+            names.setdefault("members", {}).setdefault(f"{b}:{cls}", {})[f"+0x{mb.off:02X}"] = {
+                "name": mb.name, "by": e.get("verified_by") or "matched code",
+                "why": f"The name the matched code of {e['symbol']} ({e['va']}) uses for this member."}
+            have[mb.off] = mb.name
+            added += 1
+    return added
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--verify", action="store_true", help="recompile every function with its merged class and write the results")
+    ap.add_argument("--harvest", action="store_true", help="with --verify: add members' real names from matched code to reports/names.json")
     ap.add_argument("--bin", choices=sorted(FILES), help="only this game file")
     ap.add_argument("--jobs", type=int, default=3)
     ap.add_argument("--limit", type=int, default=0, help="only the first N classes (for a quick try)")
@@ -134,10 +168,13 @@ def main() -> int:
         good, bad = read_copies(entries, keys)
         state[(b, cls)] = {"functions": len(keys), "good": good, "left_out": dict(bad), "merged": None, "proven": []}
 
+    names = NAMES.load(NAMES_JSON)
+
     def merge_all(which) -> None:
         for bc in which:
             st = state[bc]
-            st["merged"] = CM.merge([d for _k, d in st["good"]], bc[1].split("::")[:-1]) if len(st["good"]) >= 2 else None
+            st["merged"] = CM.merge([d for _k, d in st["good"]], bc[1].split("::")[:-1],
+                                    NAMES.members(names, *bc)) if len(st["good"]) >= 2 else None
 
     merge_all(state)
     counts = Counter()
@@ -217,6 +254,11 @@ def main() -> int:
     OUT_JSON.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"{out['classes_proven']} classes have a proven declaration, covering {out['functions_proven']} functions.")
     print(f"Wrote {OUT_JSON.relative_to(ROOT)} and {OUT_DIR.relative_to(ROOT)}/")
+    if args.harvest:
+        added = harvest(names, state, entries)
+        if added:
+            NAMES_JSON.write_text(json.dumps(names, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        print(f"Added {added} member names from matched code to {NAMES_JSON.relative_to(ROOT)}.")
     return 0
 
 

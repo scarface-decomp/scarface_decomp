@@ -2032,5 +2032,288 @@
       "by": "the clean-room spec docs/cleanroom/SPEC-006-lights-placed-props-reflection.md (a name the implementer chose from its description)",
       "why": "The prototype's copy of the Xbox name key at 0x00243FA0 (SPEC-006 section 5): the same code, matched."
     }
+  },
+  "members": {
+    "proto:AITask_ChallengeTony": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_ChallengeTony::vfunc_01 (0x000EF5C0) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_ChallengeTony::vfunc_01 (0x000EF5C0) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_ChallengeTony::vfunc_01 (0x000EF5C0) uses for this member."
+      }
+    },
+    "proto:AITask_DestroyObject": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_DestroyObject::vfunc_01 (0x000F5170) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_DestroyObject::vfunc_01 (0x000F5170) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_DestroyObject::vfunc_01 (0x000F5170) uses for this member."
+      }
+    },
+    "proto:AITask_Dummy": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Dummy::vfunc_01 (0x000F50D0) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Dummy::vfunc_01 (0x000F50D0) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Dummy::vfunc_01 (0x000F50D0) uses for this member."
+      }
+    },
+    "proto:AITask_Engage": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Engage::vfunc_01 (0x000F5120) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Engage::vfunc_01 (0x000F5120) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Engage::vfunc_01 (0x000F5120) uses for this member."
+      }
+    },
+    "proto:AITask_VehicleGetIn": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_VehicleGetIn::vfunc_01 (0x000F6FA0) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_VehicleGetIn::vfunc_01 (0x000F6FA0) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_VehicleGetIn::vfunc_01 (0x000F6FA0) uses for this member."
+      }
+    },
+    "proto:AITask_WaitWhenTonyIsNear": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_WaitWhenTonyIsNear::vfunc_01 (0x000F7480) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_WaitWhenTonyIsNear::vfunc_01 (0x000F7480) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_WaitWhenTonyIsNear::vfunc_01 (0x000F7480) uses for this member."
+      }
+    },
+    "proto:DismemberAction": {
+      "+0x04": {
+        "name": "m_vtable_unused",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of DismemberAction::vfunc_03 (0x000D29E0) uses for this member."
+      },
+      "+0x08": {
+        "name": "m_child",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of DismemberAction::vfunc_03 (0x000D29E0) uses for this member."
+      }
+    },
+    "proto:GameMemorySegmentCollection": {
+      "+0x10": {
+        "name": "m_segments",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of GameMemorySegmentCollection::vfunc_10 (0x00024810) uses for this member."
+      },
+      "+0x14": {
+        "name": "m_count",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of GameMemorySegmentCollection::vfunc_10 (0x00024810) uses for this member."
+      },
+      "+0x18": {
+        "name": "m_segmentSize",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of GameMemorySegmentCollection::vfunc_10 (0x00024810) uses for this member."
+      }
+    },
+    "proto:LayeredAnimationAction": {
+      "+0x04": {
+        "name": "m_vtable_unused",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of LayeredAnimationAction::vfunc_03 (0x000D3140) uses for this member."
+      },
+      "+0x08": {
+        "name": "m_child",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of LayeredAnimationAction::vfunc_03 (0x000D3140) uses for this member."
+      }
+    },
+    "xb:AITask_ChallengeTony": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_ChallengeTony::vfunc_01 (0x00105D40) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_ChallengeTony::vfunc_01 (0x00105D40) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_ChallengeTony::vfunc_01 (0x00105D40) uses for this member."
+      }
+    },
+    "xb:AITask_DestroyObject": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_DestroyObject::vfunc_01 (0x0010C0E0) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_DestroyObject::vfunc_01 (0x0010C0E0) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_DestroyObject::vfunc_01 (0x0010C0E0) uses for this member."
+      }
+    },
+    "xb:AITask_Dummy": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Dummy::vfunc_01 (0x0010BFC0) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Dummy::vfunc_01 (0x0010BFC0) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Dummy::vfunc_01 (0x0010BFC0) uses for this member."
+      }
+    },
+    "xb:AITask_Engage": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Engage::vfunc_01 (0x0010C090) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Engage::vfunc_01 (0x0010C090) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_Engage::vfunc_01 (0x0010C090) uses for this member."
+      }
+    },
+    "xb:AITask_VehicleGetIn": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_VehicleGetIn::vfunc_01 (0x0010E3C0) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_VehicleGetIn::vfunc_01 (0x0010E3C0) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_VehicleGetIn::vfunc_01 (0x0010E3C0) uses for this member."
+      }
+    },
+    "xb:AITask_WaitWhenTonyIsNear": {
+      "+0x38": {
+        "name": "m_target",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_WaitWhenTonyIsNear::vfunc_01 (0x0010E870) uses for this member."
+      },
+      "+0x3C": {
+        "name": "m_lastTarget",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_WaitWhenTonyIsNear::vfunc_01 (0x0010E870) uses for this member."
+      },
+      "+0x44": {
+        "name": "m_driver",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of AITask_WaitWhenTonyIsNear::vfunc_01 (0x0010E870) uses for this member."
+      }
+    },
+    "xb:ExecScriptFunctionAction": {
+      "+0x04": {
+        "name": "m_vtable_unused",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of ExecScriptFunctionAction::vfunc_03 (0x000E62B0) uses for this member."
+      },
+      "+0x08": {
+        "name": "m_child",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of ExecScriptFunctionAction::vfunc_03 (0x000E62B0) uses for this member."
+      }
+    },
+    "xb:LayeredAnimationAction": {
+      "+0x04": {
+        "name": "m_vtable_unused",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of LayeredAnimationAction::vfunc_03 (0x000E5350) uses for this member."
+      },
+      "+0x08": {
+        "name": "m_child",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of LayeredAnimationAction::vfunc_03 (0x000E5350) uses for this member."
+      }
+    },
+    "xb:NISScriptFunctionCallAction": {
+      "+0x04": {
+        "name": "m_vtable_unused",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of NISScriptFunctionCallAction::vfunc_03 (0x001812D0) uses for this member."
+      },
+      "+0x08": {
+        "name": "m_child",
+        "by": "RRutherrfordd (Founder)",
+        "why": "The name the matched code of NISScriptFunctionCallAction::vfunc_03 (0x001812D0) uses for this member."
+      }
+    }
   }
 }
