@@ -126,12 +126,12 @@ not answer goes in its "Questions from the implementer" section.
   Two functions of one class can disagree.
 - **Done:** one header per class that grows as functions are matched, checked so every function of the
   class still compiles to the same bytes against it.
-- **Started:** `python portal/scripts/merge_classes.py --verify` does this for 1,275 classes (4,173
-  functions); the merged classes are in `reports/classes/`. Open, each a task of its own
-  (`reports/classes.json` lists the functions): template classes (2,224 functions), classes that hold
-  another object as a member (458), classes with a base class (67), and members two copies type
-  differently (about 200). The code is `portal/tools/class_merge.py`; its tests are
-  `portal/tests/test_class_merge.py`.
+- **Started:** `python portal/scripts/merge_classes.py --verify` does this for 1,335 classes and
+  templates (5,919 functions); the merged classes are in `reports/classes/`. Open, each a task of its
+  own (`reports/classes.json` lists the functions): classes that hold another object as a member (458
+  functions), classes with a base class (67), and about 730 functions that stop compiling or change
+  with the merged class because two copies type a member or a virtual function differently. The code
+  is `portal/tools/class_merge.py`; its tests are `portal/tests/test_class_merge.py`.
 
 ---
 

@@ -74,6 +74,7 @@ class ClassDecl:
         self.virtuals: List[Method] = []     # by slot
         self.methods: List[Method] = []
         self.own = ""                        # the member function this code defines
+        self.params: List[str] = []          # template parameter names; empty for a plain class
         self.size = 0
 
 
@@ -102,12 +103,28 @@ def norm_params(params: str) -> Tuple[str, ...]:
 def split_class(symbol: str) -> Tuple[List[str], str, str]:
     """(namespaces, class name, member name) of `pure3d::d3dContext::vfunc_04`. Raises Unreadable
     for a symbol that is not a plain member of a plain class."""
-    if "<" in symbol:
-        raise Unreadable("template")
-    parts = symbol.split("::")
+    parts, depth, cur = [], 0, ""
+    for ch in symbol.replace("::", "\0"):                 # split on :: outside template arguments
+        depth += {"<": 1, ">": -1}.get(ch, 0)
+        if ch == "\0" and depth == 0:
+            parts.append(cur)
+            cur = ""
+        else:
+            cur += "::" if ch == "\0" else ch
+    parts.append(cur)
     if len(parts) < 2:
         raise Unreadable("not a member function")
-    return parts[:-2], parts[-2], parts[-1]
+    if any("<" in p for p in parts[:-2]) or "<" in parts[-1]:
+        raise Unreadable("a class inside a template")
+    return parts[:-2], parts[-2].split("<", 1)[0], parts[-1]
+
+
+def class_key(symbol: str) -> str:
+    """The class a member function is merged under: its class with namespaces, and for a template
+    the template itself (`ConcreteClassRep` for every `ConcreteClassRep<X>`), since all of a
+    template's functions are written against the one template declaration."""
+    ns, name, _own = split_class(symbol)
+    return "::".join(ns + [name])
 
 
 def type_size(ctype: str) -> int:
@@ -123,6 +140,7 @@ def type_size(ctype: str) -> int:
 def parse_class(code: str, symbol: str) -> ClassDecl:
     """The class `symbol` belongs to, as this code declares it. Raises Unreadable."""
     _ns, name, own = split_class(symbol)
+    is_template = "<" in symbol
     text = strip_comments(code)
     m = None
     for m in re.finditer(r"\b(class|struct)\s+" + re.escape(name) + r"\b\s*([^;{(]*)\{", text):
@@ -131,8 +149,16 @@ def parse_class(code: str, symbol: str) -> ClassDecl:
         raise Unreadable("no declaration of the class")
     if m.group(2).strip():
         raise Unreadable("a base class")
-    if re.search(r"template\s*<[^;{}]*>\s*$", text[:m.start()]):
+    tm = re.search(r"template\s*<([^;{}<>]*)>\s*$", text[:m.start()])
+    if bool(tm) != is_template:
         raise Unreadable("template")
+    params: List[str] = []
+    if tm:
+        for p in tm.group(1).split(","):
+            pm = re.match(r"^\s*(?:class|typename)\s+(\w+)\s*$", p)
+            if not pm:
+                raise Unreadable("a template parameter that is not a type")
+            params.append(pm.group(1))
     depth, k = 1, m.end()
     while depth and k < len(text):
         depth += {"{": 1, "}": -1}.get(text[k], 0)
@@ -145,7 +171,8 @@ def parse_class(code: str, symbol: str) -> ClassDecl:
         raise Unreadable("something nested in the class")
     d = ClassDecl()
     d.name, d.keyword, d.own = name, m.group(1), own
-    d.start, d.end = m.start(), k + end.end()
+    d.start, d.end = (tm.start() if tm else m.start()), k + end.end()
+    d.params = params
 
     pos = 0                                  # next free byte
     unit = None                              # the bitfield unit being filled: [offset, size, bits used]
@@ -215,6 +242,7 @@ class Merged:
     def __init__(self, namespaces: List[str], name: str):
         self.namespaces, self.name = namespaces, name
         self.keyword = "class"
+        self.params: List[str] = []
         self.members: List[Member] = []
         self.virtuals: List[Method] = []
         self.methods: List[Method] = []
@@ -235,6 +263,9 @@ def merge(decls: List[ClassDecl], namespaces: List[str]) -> Merged:
     mg = Merged(namespaces, decls[0].name)
     mg.keyword = "struct" if all(d.keyword == "struct" for d in decls) else "class"
     mg.renames = {i: {} for i in range(len(decls))}
+    mg.params = decls[0].params
+    if any(d.params != mg.params for d in decls):
+        mg.conflicts.append("copies disagree on the template's parameters")
 
     # Virtual functions, by slot. A function knows its own signature; the other copies usually hold
     # a `virtual void vfunc_NN();` stand-in there, or the signature they call it with.
@@ -258,9 +289,13 @@ def merge(decls: List[ClassDecl], namespaces: List[str]) -> Merged:
             mg.virtuals.append(stand_in)
             continue
         sigs = Counter(v.sig for _i, v, _o in real)
-        chosen = owners[0][1] if owners else next(v for _i, v, _o in real if v.sig == _pick(Counter({s: n for s, n in sigs.items()})))
+        pool = [v for _i, v in owners] or [v for _i, v, _o in real]
+        top = _pick(Counter(str(v.sig) for v in pool))
+        chosen = next(v for v in pool if str(v.sig) == top)
         if len({v.sig for _i, v in owners}) > 1:
-            mg.conflicts.append(f"slot {pos} is defined with two signatures")
+            # Functions that define this slot disagree. The commonest wins; the others will not
+            # compile against it, and the compile check leaves them out by name.
+            mg.notes.append(f"slot {pos}: defined with several signatures; took `{chosen.decl(True)}`")
         elif len(sigs) > 1:
             mg.notes.append(f"slot {pos}: copies disagree on the signature; took `{chosen.decl(True)}`")
         names = Counter(v.name for _i, v, _o in real if not placeholder(v.name))
@@ -344,7 +379,8 @@ def other_types(mg: Merged) -> List[str]:
     for text in texts:
         if "::" in text or "<" in text or "(" in text:
             continue
-        found |= {w for w in re.findall(r"[A-Za-z_]\w*", text) if w not in BUILT_IN and w != mg.name}
+        found |= {w for w in re.findall(r"[A-Za-z_]\w*", text)
+                  if w not in BUILT_IN and w != mg.name and w not in mg.params}
     return sorted(found)
 
 
@@ -352,7 +388,8 @@ def render(mg: Merged, indent: str = "") -> str:
     """The merged class as C++, after forward declarations of the types it points at (no namespaces
     around it)."""
     out = [f"{indent}class {t};" for t in other_types(mg)]
-    out += [f"{indent}{mg.keyword} {mg.name}", f"{indent}{{", f"{indent}public:"]
+    head = f"template <{', '.join('class ' + p for p in mg.params)}> " if mg.params else ""
+    out += [f"{indent}{head}{mg.keyword} {mg.name}", f"{indent}{{", f"{indent}public:"]
     for v in mg.virtuals:
         out.append(f"{indent}    {v.decl(True)}")
     for f in mg.methods:
