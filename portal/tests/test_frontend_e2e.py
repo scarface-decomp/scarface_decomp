@@ -1337,7 +1337,9 @@ def test_the_dashboard_lists_what_is_set_up_and_what_is_missing(page):
 def test_functions_the_specs_describe_have_their_own_list(page):
     page.click(".side-btn:has-text('Workbench')")
     page.select_option("#lane-filter", "IN_GUIDE")
-    wait_for_calls("/api/queue")
+    end = time.monotonic() + 5.0                              # the list's own refresh may still be on its way
+    while calls("/api/queue")[-1:] and calls("/api/queue")[-1][1].get("lane") != "IN_GUIDE" and time.monotonic() < end:
+        time.sleep(0.05)
     page.wait_for_function("!Array.from(document.querySelectorAll('#view-workbench .sym, #view-workbench code'))"
                            ".some((e) => e.textContent.includes('EasyFunc'))")
     assert calls("/api/queue")[-1][1].get("lane") == "IN_GUIDE"

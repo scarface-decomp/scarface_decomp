@@ -488,3 +488,17 @@ def test_better_names_travel_in_submissions(S, monkeypatch, tmp_path):
     assert reg["entries"]["xb:0x00011000"]["code"] == new and reg["entries"]["xb:0x00011000"]["revised_by"] == "Cy"
     assert S.community_names()["xb:0x00011000"] == {"name": "Weapon::SetAmmo", "by": "Cy", "why": "It stores its argument in the ammo count."}
     assert not (tmp_path / "names_added.json").read_text(encoding="utf-8").count("xb:0x00011000") > 1
+
+
+def test_starter_code_uses_the_names_recorded_for_the_class(S, monkeypatch, tmp_path):
+    import json
+    (tmp_path / "names.json").write_text(json.dumps({"schema": "scarface_names_v1", "names": {}, "members": {
+        "xb:ns::Foo": {"+0x10": {"name": "m_health", "by": "someone", "why": "compared with the damage taken"}}}}))
+    monkeypatch.setattr(S, "REPORTS_DIR", tmp_path)
+    monkeypatch.setattr(S, "_MEMBERS_CACHE", [None, {}])
+    code = "namespace ns {\nclass Foo\n{\npublic:\n    int f();\n    char m_pad00[0x10];\n    int m_Field10; // +0x10\n};\n" \
+           "int Foo::f() { return m_Field10; }\n}\n"
+    t = {"bin": "xb", "symbol": "ns::Foo<Thing>::f"}
+    assert S.member_names({"bin": "xb", "symbol": "ns::Foo::f"}) == {0x10: "m_health"} == S.member_names(t)
+    assert "return m_health;" in S.named_members({"bin": "xb", "symbol": "ns::Foo::f"}, code)
+    assert S.member_names({"bin": "proto", "symbol": "ns::Foo::f"}) == {} and S.member_names({"bin": "xb", "symbol": "free"}) == {}

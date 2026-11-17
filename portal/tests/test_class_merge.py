@@ -190,3 +190,52 @@ def test_the_script_groups_member_functions_by_game_and_class():
     assert MC.header_path("xb", "pure3d::d3dContext").name == "pure3d__d3dContext.h"
     text = MC.header_text("xb", "ns::Foo", CM.merge([d for _k, d in good], ["ns"]), [{}, {}])
     assert "namespace ns {" in text and "Proven for 2 functions" in text and text.rstrip().endswith("}")
+
+
+def test_recorded_member_names_reach_the_merged_class_and_the_starter_code():
+    import names as NAMES
+    data = {"schema": NAMES.SCHEMA, "names": {},
+            "members": {"xb:Foo": {"+0x10": {"name": "m_health", "by": "someone", "why": "It is compared with the damage taken."}}}}
+    assert NAMES.problems(data) == [] and NAMES.members(data, "xb", "Foo") == {0x10: "m_health"}
+    assert NAMES.members(data, "proto", "Foo") == {} and NAMES.members({"names": {}}, "xb", "Foo") == {}
+    given = NAMES.members(data, "xb", "Foo")
+    mg = CM.merge(copies((GETTER, "Foo::vfunc_01"), (RENAMED, "Foo::vfunc_01")), [], given)
+    assert "int m_health; // +0x10" in CM.render(mg) and not mg.notes
+    code = CM.with_member_names(GETTER, "Foo::vfunc_01", given)
+    assert "int m_health; // +0x10" in code and "return m_health;" in code and "m_Field10" not in code
+    assert CM.with_member_names(RENAMED, "Foo::vfunc_01", given) == RENAMED          # a real name is left alone
+    assert CM.with_member_names("int f() { return 1; }", "Foo::vfunc_01", given) == "int f() { return 1; }"
+
+
+@pytest.mark.parametrize("members,word", [
+    ({"Foo": {}}, "keys look like"),
+    ({"xb:Foo<int>": {}}, "keys look like"),
+    ({"xb:Foo": {"0x10": {}}}, "offsets look like"),
+    ({"xb:Foo": {"+0x10": {"name": "m_Field10", "by": "a", "why": "long enough reason"}}}, "stand-in"),
+    ({"xb:Foo": {"+0x10": {"name": "m_a", "by": "", "why": "long enough reason"}}}, "who worked it out"),
+    ({"xb:Foo": {"+0x10": {"name": "m_a", "by": "a", "why": "short"}}}, "what shows it"),
+    ({"xb:Foo": {"+0x10": {"name": "m_a", "by": "a", "why": "long enough reason"},
+                 "+0x14": {"name": "m_a", "by": "a", "why": "long enough reason"}}}, "already the name"),
+])
+def test_bad_member_names_are_reported(members, word):
+    import names as NAMES
+    errs = NAMES.problems({"schema": NAMES.SCHEMA, "names": {}, "members": members})
+    assert len(errs) == 1 and word in errs[0]
+
+
+def test_harvest_records_real_names_from_proven_classes():
+    import importlib.util
+    import names as NAMES
+    from conftest import ROOT
+    spec = importlib.util.spec_from_file_location("merge_classes", ROOT / "portal" / "scripts" / "merge_classes.py")
+    MC = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(MC)
+    entries = {"a": {"symbol": "Foo::vfunc_01", "va": "0x00011000", "verified_by": "RRutherrfordd"},
+               "b": {"symbol": "Foo::vfunc_01", "va": "0x00011100", "verified_by": "Someone"}}
+    good = [("a", CM.parse_class(GETTER, "Foo::vfunc_01")), ("b", CM.parse_class(RENAMED, "Foo::vfunc_01"))]
+    state = {("xb", "Foo"): {"merged": CM.merge([d for _k, d in good], []), "proven": ["a", "b"], "good": good}}
+    data = {"schema": NAMES.SCHEMA, "names": {}}
+    assert MC.harvest(data, state, entries) == 1 and MC.harvest(data, state, entries) == 0
+    row = data["members"]["xb:Foo"]["+0x10"]
+    assert row["name"] == "m_count" and row["by"] == "Someone" and "0x00011100" in row["why"]
+    assert NAMES.problems(data) == []

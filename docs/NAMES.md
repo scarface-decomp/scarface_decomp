@@ -84,6 +84,29 @@ Keys are a version (`xb`, `pc`, `ps2`, `proto`) and the address where the functi
 out, why, and a function that really starts there. A name is a label, not a match: the function still
 needs its C++ verified like any other.
 
+## Naming a class's members
+
+A member has a name too, recorded once for its class and used everywhere. In `reports/names.json`,
+under `"members"`:
+
+```json
+"members": {
+  "xb:CharacterObject": {
+    "+0x28": {"name": "m_health", "by": "your handle", "why": "compared with the damage taken in vfunc_12"}
+  }
+}
+```
+
+The key is a version and the class (for a template, the template's own name, without `<...>`); inside
+it, the member's offset in the object as the starter code shows it (`m_Field28` is `+0x28`). From then
+on the portal's starter code for every function of that class writes `m_health` instead of `m_Field28`,
+and `portal/scripts/merge_classes.py` puts the name in the class's merged declaration in
+`reports/classes/`. A member's name changes no bytes, so it never affects whether a function matches.
+
+Names that matched code already uses are collected by `python portal/scripts/merge_classes.py --verify
+--harvest`, which adds them here with the function they came from. Offsets differ between versions, so
+a name is recorded per version.
+
 ## Using a name in matched code
 
 Matched code calls other functions by their address (`sub_0011E4A0`), because that is how the verifier

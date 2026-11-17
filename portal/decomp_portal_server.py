@@ -51,6 +51,7 @@ import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
 import game_files as GF  # noqa: E402
 import names as NAMES  # noqa: E402
+import class_merge as CM  # noqa: E402
 import good_first as GOOD  # noqa: E402
 import readability as READ  # noqa: E402
 import discord_feed as DISCORD  # noqa: E402
@@ -777,6 +778,29 @@ def community_names() -> dict:
     return _NAMES_CACHE[1]
 
 
+_MEMBERS_CACHE: list = [None, {}]
+
+
+def member_names(t: dict) -> Dict[int, str]:
+    """The names recorded for the members of t's class, by offset (reports/names.json "members")."""
+    path = REPORTS_DIR / "names.json"
+    try:
+        mtime = path.stat().st_mtime
+    except OSError:
+        return {}
+    if _MEMBERS_CACHE[0] != mtime:
+        _MEMBERS_CACHE[:] = [mtime, NAMES.load(path)]
+    try:
+        return NAMES.members(_MEMBERS_CACHE[1], t["bin"], CM.class_key(t["symbol"]))
+    except CM.Unreadable:
+        return {}
+
+
+def named_members(t: dict, code: str) -> str:
+    """Starter code for t with its class's members called by their recorded names."""
+    return CM.with_member_names(code, t["symbol"], member_names(t))
+
+
 def community_name(t: dict) -> Optional[dict]:
     """A name people worked out for this function (reports/names.json)."""
     info = community_names().get(NAMES.key_for(t))
@@ -1007,8 +1031,8 @@ def live_task(t: dict) -> dict:
             kind = "counterpart" if code else ""
         if not code and PO.is_ps2(t["bin"]):
             code = ps2_starter(t)
-        out["starter_cpp"] = code or synthesize_cpp(t["symbol"], t["va"], tb or b"", out["disasm_lines"],
-                                                    relocs=starter_relocs(t, tb))
+        out["starter_cpp"] = code or named_members(t, synthesize_cpp(t["symbol"], t["va"], tb or b"", out["disasm_lines"],
+                                                                     relocs=starter_relocs(t, tb)))
         out["starter_from"], out["starter_kind"] = src, kind
     out["server_now"] = now_ts()
     return out
@@ -1462,7 +1486,8 @@ def easy_codes(t: dict) -> List[str]:
         return []
     with STATE_LOCK:
         out = [t.get("best_cpp") or "", lookalike_starter(t)[0], counterpart_starter(t)[0]]
-    out += synthesize_all(t["symbol"], t["va"], tb, disassemble(tb), relocs=starter_relocs(t, tb))
+    out += [named_members(t, c) for c in
+            synthesize_all(t["symbol"], t["va"], tb, disassemble(tb), relocs=starter_relocs(t, tb))]
     seen, codes = set(), []
     for code in out:
         if code.strip() and code.strip() not in seen:
@@ -3037,8 +3062,8 @@ class Handler(BaseHTTPRequestHandler):
             if not t:
                 return self._json({"ok": False, "error": "Function not found."}, 404)
             tb = target_bytes(t) or b""
-        return self._json({"ok": True, "cpp_code": synthesize_cpp(t["symbol"], t["va"], tb, disassemble(tb),
-                                                                 relocs=starter_relocs(t, tb))})
+        return self._json({"ok": True, "cpp_code": named_members(t, synthesize_cpp(
+            t["symbol"], t["va"], tb, disassemble(tb), relocs=starter_relocs(t, tb)))})
 
     def post_ai(self, body):
         self._json(ai_call(body))
