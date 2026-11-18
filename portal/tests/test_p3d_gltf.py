@@ -2525,8 +2525,8 @@ def test_a_city_from_before_the_occluders_is_made_again(monkeypatch, tmp_path):
     import blender_export as BX
     monkeypatch.delenv(G.LOOK_ENV, raising=False)
     (tmp_path / "made_by.txt").write_text("10", encoding="utf-8")
-    assert G.EXPORT_VERSION == 12 and not BX.city_current(tmp_path)
-    (tmp_path / "made_by.txt").write_text("11", encoding="utf-8")           # and from before props played as their state says
+    assert G.EXPORT_VERSION == 13 and not BX.city_current(tmp_path)
+    (tmp_path / "made_by.txt").write_text("12", encoding="utf-8")           # and from before props played as their state says
     assert not BX.city_current(tmp_path)
 
 
@@ -2621,10 +2621,10 @@ def test_a_prop_plays_its_animation_as_its_starting_state_says():
     data = p3d(rig, skin, turn, playing_prop("ball", "Spin", True, 0.0, 4.0, 0.1))
     tree = G.p3d.read_tree(data)
     prop = next(c for c in tree if c.id == G.STATE_PROP_DATA)
-    assert G.prop_play(data, prop) == {"spin": (True, 0.0, 4.0, pytest.approx(0.1))}
+    assert G.prop_play(data, prop) == {"spin": G.Play(True, 0, False, 0.0, 4.0, pytest.approx(0.1))}
     doc, binc = read_glb(export(data)[0])
     anim = doc["animations"][0]
-    assert anim["extras"] == {"loops": True}
+    assert anim["extras"] == {"loops": True}                               # repeat with 0 passes: no end
     times = [t[0] for t in values(doc, binc, anim["samplers"][0]["input"])]
     assert len(times) == 17 and times[0] == 0.0                            # frames 0 to 4 only, eight steps a key
     assert times[-1] == pytest.approx(4 / 30.0 / 0.1) and times[1] == pytest.approx(times[-1] / 16)
@@ -2633,8 +2633,26 @@ def test_a_prop_plays_its_animation_as_its_starting_state_says():
     # with no prop saying how, the animation is as stored (and the file's own flag says whether it loops)
     plain, pbin = read_glb(export(p3d(rig, skin, turn))[0])
     assert len(values(plain, pbin, plain["animations"][0]["samplers"][0]["input"])) == 4
-    stop = playing_prop("ball", "Spin", False, 0.0, 0.0, 1.0)              # frames 0 to 0: plays nothing
-    assert G.prop_play(p3d(stop), G.p3d.read_tree(p3d(stop))[0]) == {}
+
+
+def test_passes_backwards_and_held_poses():
+    # SPEC-009 sections 2.1 to 2.3, on plain numbers: keys at frames 0, 2 and 4 with the values 0, 20 and 40.
+    keys = [(0.0, (0.0,)), (2.0, (20.0,)), (4.0, (40.0,))]
+
+    def run(*how):
+        times, vals = G.played(keys, G.Play(*how), 2.0, False)              # 2 frames a second
+        return [round(t, 3) for t in times], [v[0] for v in vals]
+    assert run(False, 0, False, 0.0, 4.0, 1.0) == ([0.0, 1.0, 2.0], [0.0, 20.0, 40.0])        # one pass
+    assert run(False, 5, False, 0.0, 4.0, 1.0)[0] == [0.0, 1.0, 2.0]                          # passes ignored without repeat
+    assert run(True, 2, False, 0.0, 4.0, 1.0) == ([0.0, 1.0, 2.0, 3.0, 4.0], [0.0, 20.0, 40.0, 20.0, 40.0])   # two passes
+    assert run(True, 1, True, 4.0, 0.0, 2.0) == ([0.0, 0.5, 1.0], [40.0, 20.0, 0.0])          # backwards, twice as fast
+    assert run(False, 0, False, 1.0, 3.0, 1.0) == ([0.0, 0.5, 1.0], [10.0, 20.0, 30.0])       # a part, ends between keys
+    assert run(False, 0, False, 3.0, 3.0, 1.0) == ([0.0], [30.0])                             # held still on frame 3
+    assert run(True, 0, False, 0.0, 8.0, 1.0) == ([0.0, 1.0, 2.0, 4.0], [0.0, 20.0, 40.0, 40.0])   # past the last key: it holds
+    assert G.Play(True, 0, False, 0.0, 4.0, 1.0).endless and not G.Play(True, 1, False, 0.0, 4.0, 1.0).endless
+    assert not G.Play(False, 0, False, 0.0, 4.0, 1.0).endless and not G.Play(True, 0, False, 2.0, 2.0, 1.0).endless
+    hold = playing_prop("ball", "Spin", False, 2.0, 2.0, 1.0)              # frames equal: a pose, and it is kept
+    assert G.prop_play(p3d(hold), G.p3d.read_tree(p3d(hold))[0]) == {"spin": G.Play(False, 0, False, 2.0, 2.0, 1.0)}
 
 
 class FakeCurve:

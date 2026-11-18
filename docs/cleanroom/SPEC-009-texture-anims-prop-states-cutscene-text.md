@@ -473,3 +473,24 @@ For the implementer. Choose your own names; keep each step small.
 ### Questions from the implementer, and answers
 
 *(none yet)*
+
+*From the implementer, 18 November 2026, after reading the whole spec and before building §8:*
+
+* **Checked on the PC's files, and they agree.** §5: `media.text_bible` (written before this spec) reads
+  all 114 bibles I could find by name, with their keys ascending; `textbible/HINTS_textbible_E.p3d` has 113
+  lines and `BUTTON_GRAPHIC_X` is `¶Enter·`. §4.1 and §4.2: 189 scripts, 474 calls, and the example path
+  gives `art/subtitles/c/c8c7f4b0e0999977.p3d`, which is there; 405 of the 474 have a file (the spec says 404
+  of 473: one call apart, not looked into). §2.1: over `z04`, `dzones` and `azones` (612 records, a wider set
+  than the spec's) the same six combinations of the three words occur and no others, and no speed is negative.
+* **Built from §2 (§8 step 2, the export half):** `p3d._prop_animation` names the three words;
+  `p3d_gltf.prop_play` and `played` write a prop's animation as its starting state plays it: passes,
+  backwards, a held pose for equal frames, the last key held to the end of the range, and looping only for
+  repeat 1 with passes 0. On the Babylon Club the disco ball is unchanged (13.3 s, looping), the doors are now
+  held on their closed frame instead of swinging once, and `bsand_02`'s fan and film reel loop.
+* **Not built yet from §2:** carry on, which needs more than the starting state (the exports play only that
+  one); the state's clock moving a prop on (§2.4) and the effects' start times in the extras (§2.5); the
+  animation sampler. Steps 1 and 3 to 8 are not started.
+* **A question.** §2.2 says a state's entries go to the prop's controllers in order, with the name matching
+  left as *(check)*. The export matches by the entry's name, through the Frame Controller of that name to its
+  animation. For the disco ball's two `TEX_sparkle_m` entries that gives one answer for both. Is there a file
+  where order and name disagree?
