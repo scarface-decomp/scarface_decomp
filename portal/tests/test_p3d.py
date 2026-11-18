@@ -375,7 +375,8 @@ def test_state_prop_data_its_states_and_what_they_hold():
                                   "frame": 30.0, "number": 0, "properties": 1, "effects": 1}
     vis, an, pr, ef = st.children
     assert P.fields(data, vis) == {"part": "gateShape", "shown": True}
-    assert P.fields(data, an) == {"frame controller": "gateMove", "numbers": (1, 1, 0), "frames": (20.0, 0.0), "speed": 0.5}
+    assert P.fields(data, an) == {"frame controller": "gateMove", "repeat": True, "passes": 1, "carry on": False,
+                                 "frames": (20.0, 0.0), "speed": 0.5}
     assert P.fields(data, pr) == {"name": "percent_damaged", "value": "50"}
     assert P.fields(data, ef) == {"kind": "Effect", "effect": "dustCloud", "number": 0, "joint": "gateJoint",
                                   "offset": (0.0, 0.5, 0.0), "angles": (1.5708, 0.0, 0.0), "number 2": 0,

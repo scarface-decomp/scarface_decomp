@@ -614,14 +614,15 @@ def _part_visibility(r: _R) -> dict:
 
 
 def _prop_animation(r: _R) -> dict:
-    """A Prop State Animation (0x08020003): the name of a Frame Controller (0x00121201) in the same file, three u32
-    whose meanings aren't settled (the first and the third 0 or 1, the second 0, 1 or 2), then two frames (the
-    first may be the larger) and a speed."""
+    """A Prop State Animation (0x08020003; clean-room spec SPEC-009 section 2.1): the name of a Frame Controller
+    (0x00121201) in the same file; repeat (1 = more than one pass); passes (with repeat: how many, 0 = no end);
+    carry on (1 = on entering the state, keep the current frame when it lies in the range); then the first and
+    last frames (first larger = backwards, equal = held still on it) and a speed."""
     name = r.text()
-    numbers = (r.u32(), r.u32(), r.u32())
+    repeat, passes, carry = r.u32(), r.u32(), r.u32()
     first, last, speed = r.floats(3)
-    return {"frame controller": name, "numbers": numbers, "frames": (round(first, 4), round(last, 4)),
-            "speed": round(speed, 4)}
+    return {"frame controller": name, "repeat": bool(repeat), "passes": passes, "carry on": bool(carry),
+            "frames": (round(first, 4), round(last, 4)), "speed": round(speed, 4)}
 
 
 def _prop_property(r: _R) -> dict:

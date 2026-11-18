@@ -89,7 +89,7 @@ import zlib
 from array import array
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Dict, Iterable, List, NamedTuple, Optional, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import media  # noqa: E402
@@ -104,12 +104,13 @@ STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY, PROP_PROPERTY = 0x0802000D, 0x0802
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 12                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
+EXPORT_VERSION = 13                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
                                        # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight.
                                        # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked.
                                        # 8: a shader without LIT is unlit. 9: darkening subtracts; placed props in their
                                        # starting state; world geometry's draw distances, far-away stand-ins hidden.
                                        # 12: a prop's animation plays as its starting state says (speed, part, looping).
+                                       # 13: as SPEC-009 says: passes, backwards, held poses, the last key held.
                                        # 10: props carry their properties. 11: shadow decals at most 65 % dark; occluders
 LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER, SKY = 0x13000, 0x2380, 0x8800007, 0x122000, 0x8800002
 DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)
@@ -591,12 +592,31 @@ def prop_states(data: bytes, c: p3d.Chunk) -> List[Tuple[str, Dict[str, bool]]]:
 PROP_ANIMATION = 0x08020003
 
 
-def prop_play(data: bytes, c: p3d.Chunk) -> Dict[str, Tuple[bool, float, float, float]]:
+class Play(NamedTuple):
+    """How a prop state plays one animation (clean-room spec SPEC-009, section 2.1)."""
+    repeat: bool        # more than one pass
+    passes: int         # with repeat: how many passes; 0 = no end
+    carry_on: bool      # on entering the state, keep the current frame when it lies in the range
+    first: float        # the frame it starts on
+    last: float         # the frame it ends on; smaller than first = backwards; equal = held still on it
+    speed: float        # multiplies the animation's frame rate
+
+    @property
+    def endless(self) -> bool:
+        return self.repeat and self.passes == 0 and self.first != self.last
+
+    @property
+    def rounds(self) -> int:
+        """How many passes to write out: one for an endless animation (it is marked as looping)."""
+        return 1 if (not self.repeat or self.passes == 0) else min(self.passes, 8)
+
+
+def prop_play(data: bytes, c: p3d.Chunk) -> Dict[str, Play]:
     """How a State Prop Data chunk's first state (how the prop starts: "idle") plays its animations
-    (clean-room spec SPEC-005, section 2.1): {frame controller's name (lower case): (loops, first frame,
-    last frame, speed)}. A disco ball's whole turn is five keys played at a hundredth of the speed, for
-    ever. Records that play nothing (frames 0 to 0) are left out."""
-    out: Dict[str, Tuple[bool, float, float, float]] = {}
+    (SPEC-009 section 2): {frame controller's name (lower case): Play}. A disco ball's whole turn is
+    five keys played at a hundredth of the speed, with no end. An entry whose first and last frames
+    are the same holds the prop still on that frame."""
+    out: Dict[str, Play] = {}
     first = next((st for st in c.children if st.id == PROP_STATE), None)
     for a in (first.children if first is not None else ()):
         if a.id != PROP_ANIMATION:
@@ -605,11 +625,44 @@ def prop_play(data: bytes, c: p3d.Chunk) -> Dict[str, Tuple[bool, float, float, 
             f = p3d.fields(data, a)
             start, end = f["frames"]
             speed = float(f["speed"])
-            if end > start and speed > 0 and math.isfinite(speed):
-                out.setdefault(f["frame controller"].lower(), (bool(f["numbers"][0]), float(start), float(end), speed))
+            repeat, passes, carry = f["repeat"], f["passes"], f["carry on"]
+            if speed > 0 and math.isfinite(speed) and math.isfinite(start) and math.isfinite(end):
+                out.setdefault(f["frame controller"].lower(),
+                               Play(bool(repeat), int(passes), bool(carry), float(start), float(end), speed))
         except (KeyError, IndexError, TypeError, ValueError, struct.error, p3d.P3dError):
             continue
     return out
+
+
+def played(keys: List[Tuple[float, tuple]], play: Play, rate: float, turn: bool) -> Tuple[List[float], List[tuple]]:
+    """keys (frame, value; frames rising) as a prop state plays them (SPEC-009 sections 2.2 and 2.3):
+    (times in seconds, values). The frames run from play.first to play.last, backwards when last is the
+    smaller; a frame past the last key keeps the last key's value; equal frames give the one pose.
+    turn: the values are rotations, so they are stepped between along the turn."""
+    def at(frame: float) -> tuple:
+        if frame <= keys[0][0]:
+            return keys[0][1]
+        for (f0, v0), (f1, v1) in zip(keys, keys[1:]):
+            if frame <= f1:
+                t = (frame - f0) / (f1 - f0)
+                return _slerp(v0, v1, t) if turn else tuple(a + (b - a) * t for a, b in zip(v0, v1))
+        return keys[-1][1]
+    lo, hi = min(play.first, play.last), max(play.first, play.last)
+    if lo == hi:
+        return [0.0], [at(lo)]
+    marks = sorted({lo, hi} | {f for f, _v in keys if lo < f < hi})
+    if turn and play.speed < 1.0:                              # slowed turns need steps between the keys
+        marks = sorted(set(marks) | {a + (b - a) * k / 8.0 for a, b in zip(marks, marks[1:]) for k in range(1, 8)})
+    if play.last < play.first:
+        marks.reverse()
+    span = (hi - lo) / rate / play.speed
+    one = [(abs(f - play.first) / rate / play.speed, at(f)) for f in marks]
+    times, vals = [], []
+    for n in range(play.rounds):
+        for t, v in one[(1 if n else 0):]:                     # a later pass starts where the one before ended
+            times.append(n * span + t)
+            vals.append(v)
+    return times, vals
 
 
 def prop_properties(data: bytes, c: p3d.Chunk) -> Dict[str, str]:
@@ -1059,7 +1112,7 @@ class Builder:
         self.hour: Optional[float] = None          # set: the sky's pose and colours are those of this hour
         self.posed: set = set()                    # the animations a pose was taken from (id of the chunk)
         self._animations: Optional[Dict[str, List[Ref]]] = None
-        self._plays: Optional[Dict[str, Tuple[bool, float, float, float]]] = None
+        self._plays: Optional[Dict[str, Play]] = None
         self.shaped: Dict[int, list] = {}          # glTF mesh with shapes -> the sliders that work them
         self.prop = False                          # set while a placed prop goes in (its leaves: see mesh)
         self.decals: Dict[tuple, int] = {}         # a mesh's key -> the glTF mesh of its shadow decals
@@ -1685,9 +1738,9 @@ class Builder:
         refs = self._animations.get(name.lower(), [])
         return next((r for r in refs if any(r.source is p for p in prefer)), refs[0] if refs else None)
 
-    def play_settings(self, name: str) -> Optional[Tuple[bool, float, float, float]]:
-        """How a prop's starting state plays the animation called name: (loops, first frame, last frame,
-        speed), from the props in the library's files (prop_play); None when no prop says."""
+    def play_settings(self, name: str) -> Optional[Play]:
+        """How a prop's starting state plays the animation called name, from the props in the library's
+        files (prop_play); None when no prop says."""
         if self._plays is None:
             self._plays = {}
             for src in self.lib.sources:
@@ -1941,25 +1994,16 @@ class Builder:
                         last = f
                 times = [frames[i] / rate for i in keep]
                 vals = [out[i] for i in keep]
-                if play is not None:
-                    # The prop's starting state plays a part of the animation, at its own speed.
-                    _loops, first, end, speed = play
-                    part = [(frames[i], v) for i, v in zip(keep, vals) if first <= frames[i] <= end]
-                    if len(part) >= 2:
-                        if path == "rotation" and speed < 1.0:       # slowed turns need keys between: a
-                            fine = []                                # quarter turn is not a straight line
-                            for (f0, q0), (f1, q1) in zip(part, part[1:]):
-                                fine += [(f0 + (f1 - f0) * k / 8.0, _slerp(q0, q1, k / 8.0)) for k in range(8)]
-                            part = fine + [part[-1]]
-                        times = [(f - first) / rate / speed for f, _v in part]
-                        vals = [v for _f, v in part]
+                if play is not None and vals:
+                    # The prop's starting state plays a part of the animation, its own way (SPEC-009 §2).
+                    times, vals = played([(frames[i], v) for i, v in zip(keep, vals)], play, rate, path == "rotation")
                 samplers.append({"input": self.g.accessor([(t,) for t in times], "SCALAR", bounds=True),
                                  "output": self.g.accessor(vals, kind), "interpolation": "LINEAR"})
                 channels.append({"sampler": len(samplers) - 1, "target": {"node": node, "path": path}})
         if not channels:
             return False
         made = {"name": info.get("name") or "animation", "channels": channels, "samplers": samplers}
-        if (play[0] if play is not None else info.get("cyclic")):
+        if (play.endless if play is not None else info.get("cyclic")):
             made["extras"] = {"loops": True}                         # the game plays it round and round
         self.g.add("animations", made)
         self.report.animations.append(info.get("name") or "animation")
