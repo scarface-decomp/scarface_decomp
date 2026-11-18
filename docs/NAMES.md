@@ -47,6 +47,16 @@ the address-order files in [`reconstructed_src/`](../reconstructed_src).)
   Xbox one has a name here, the PS2 function takes it (`python portal/scripts/names_to_ps2.py`, 49 so
   far), unless two PS2 functions claim the same twin.
 
+* **Another Radical game's linker map.** The 10 July 2003 PS2 prototype of *The Simpsons: Hit & Run*
+  has a linker map on its disc (`SRR2.MAP`), which names every function of that build. The two games share
+  Radical's engine, so where a class is the same in both (`tCamera` there, `pure3d::Camera` here) and
+  their tables of virtual functions line up, a slot takes its name from the map
+  (`python portal/scripts/names_from_shar_map.py`, 45 names so far; the script's own text has the exact
+  rules). Only the map and that build's program are read, from the founder's own copy of the disc; neither
+  is in this repository. **Nothing from Hit & Run's source code is used, and nobody working on this project
+  may consult it to settle a name.** A name from the map is evidence, not proof: each one records the class
+  and slot it came from.
+
 Everything else keeps an address name: `sub_00011010` (Xbox, PC, prototype) or `func_00390320` (PS2).
 
 ## Ghidra
