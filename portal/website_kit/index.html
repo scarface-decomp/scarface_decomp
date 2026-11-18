@@ -4326,6 +4326,7 @@
         const o = el('option', a.parts ? a.name + ' (whole: ' + a.parts + ' pieces together)'
           : a.part_of ? '\u00a0\u00a0\u00a0\u00a0' + a.name + ' (one piece of ' + a.part_of + ')' : a.name);
         o.value = a.key;
+        if (a.shown_from) o.dataset.from = a.shown_from;
         g.appendChild(o);
       });
       sel.appendChild(g);
@@ -4472,7 +4473,11 @@
     $('gfb-area-open').disabled = !key;
     $('gfb-area-view').disabled = !key;
     $('gfb-area-dl').disabled = !key;
-    $('gfb-area-status').textContent = '';
+    const pick = $('gfb-area').selectedOptions[0];
+    // This version's own files for the place weren't copied: it is shown from the version that has them.
+    $('gfb-area-status').classList.remove('err');
+    $('gfb-area-status').textContent = pick && pick.dataset.from
+      ? 'Only the ' + pick.dataset.from + ' version\u2019s files for this place were copied, so it opens from those. No need to switch version.' : '';
   }
 
   function gfOpenArea() {
