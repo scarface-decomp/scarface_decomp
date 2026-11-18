@@ -64,3 +64,25 @@ def test_a_slot_two_classes_name_is_carried_to_the_others(monkeypatch):
     assert {va: n for va, (n, _w) in found.items()} == {f[0]: "A::Open", f[1]: "B::Open", f[2]: "C::Close", f[3]: "D::Open"}
     assert "Slot 1 of Base" in found[f[3]][1] and "2 of its derived classes (A, B)" in found[f[3]][1]
     # C alone says slot 2 is Close: not enough to name D's slot 2
+
+
+def test_a_ps2_function_takes_its_xbox_twins_name():
+    spec2 = importlib.util.spec_from_file_location("names_to_ps2", ROOT / "portal" / "scripts" / "names_to_ps2.py")
+    P2 = importlib.util.module_from_spec(spec2)
+    spec2.loader.exec_module(P2)
+    names = {"xb:0x000C7EC0": {"name": "SaveGameController::SaveInit"}, "xb:0x0018B960": {"name": "ExoticsHUD2::DeactivateElement"}}
+    same = "Stored in the data; 140 bytes. Same function as Xbox 0x%s: %s."
+    tasks = [
+        {"bin": "ps2", "fva_int": 0x49FE30, "xbox_twin": "0x000C7EC0", "hint": same % ("000C7EC0", 'it uses the same text ("SaveInit")')},
+        {"bin": "ps2", "fva_int": 0x3D7EB0, "xbox_twin": "0x0018B960", "hint": same % ("0018B960", "its place in a table lines up")},
+        {"bin": "ps2", "fva_int": 0x3FA6C0, "xbox_twin": "0x0018B960", "hint": same % ("0018B960", "its place in a table lines up")},
+        {"bin": "ps2exotics", "fva_int": 0x845AF0, "xbox_twin": "0x0018B960", "hint": same % ("0018B960", "its place in a table lines up")},
+        {"bin": "ps2", "fva_int": 0x100, "xbox_twin": "0x00011000", "hint": same % ("00011000", "same text")},    # twin not named
+        {"bin": "ps2", "fva_int": 0x200, "xbox_twin": "0x000C7EC0", "hint": "Found after a call; 8 bytes."},      # no reason given
+        {"bin": "xb", "fva_int": 0xC7EC0, "hint": ""},
+    ]
+    got = P2.twins(tasks, names)
+    # the reasonless one is not counted, so SaveInit has one claim; two ps2 functions claim one twin: neither is taken
+    assert [(k, n) for k, n, _w in got] == [("ps2:0x0049FE30", "SaveGameController::SaveInit"),
+                                            ("ps2exotics:0x00845AF0", "ExoticsHUD2::DeactivateElement")]
+    assert 'it uses the same text ("SaveInit")' in got[0][2] and "0x000C7EC0" in got[0][2]
