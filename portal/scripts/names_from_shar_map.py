@@ -15,13 +15,17 @@ What is taken, and when. Only names of virtual functions, by their slot:
   * the Hit & Run class and the Scarface class are the same class under the engine's renaming
     (tCamera -> pure3d::Camera, pddiShader -> pure3d::pddiShader, Scrooby::Page ->
     pure3d::frontend::Page), and Scarface's class information has exactly that class;
-  * both tables of virtual functions have the same number of slots, and at least MIN_SLOTS;
+  * the two tables of virtual functions line up: either they have the same number of slots (at least
+    MIN_SLOTS), or they follow a base class both games have, and the part after the base's slots (the
+    class's own functions) has the same number of slots in both (at least MIN_OWN). The base may have
+    grown between 2003 and 2006; the class's own part must not have;
   * the slot's function has one name in Hit & Run's table (an overloaded name is skipped: the two
     compilers order overloads differently), and it is not a destructor, an operator or a pure slot;
-  * Scarface's function in that slot is already known as <Class>::vfunc_<that slot>;
+  * Scarface's function in that slot is already known as <Class>::vfunc_<that slot>, for that class or
+    one of its bases;
   * nothing recorded already disagrees, and no two classes give one function two names.
 
-A table that gained or lost a slot between 2003 and 2006 is left alone. Each name records the class
+A class whose own part gained or lost a slot between 2003 and 2006 is left alone. Each name records the class
 and slot it came from. It is evidence, not proof: a class can keep its size and still have had a
 function replaced.
 """
@@ -45,6 +49,7 @@ import names as NAMES  # noqa: E402
 
 BY = "the Hit & Run prototype's linker map"
 MIN_SLOTS = 6
+MIN_OWN = 4
 MAP_LINE = re.compile(r"^([0-9a-fA-F]{8}) ([0-9a-fA-F]{8})\s+\S+\s+(\S.*?)\s*$")
 SLOT = re.compile(r"^(.*)::vfunc_(\d+)$")
 IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
@@ -141,35 +146,60 @@ def our_class(theirs: str) -> Optional[str]:
 
 
 def find(theirs: Dict[str, List[Optional[str]]], ours: Dict[str, List[int]], known: Dict[int, dict],
-         recorded: Dict[int, str]) -> Tuple[Dict[int, Tuple[str, str]], Counter]:
+         recorded: Dict[int, str], bases: Optional[Dict[str, List[str]]] = None) -> Tuple[Dict[int, Tuple[str, str]], Counter]:
     """({address: (name, why)}, counts of what happened). ours: Scarface's tables from its class
-    information; known: its functions; recorded: names already in reports/names.json, by address."""
+    information; bases: its classes' base classes, from the same; known: its functions; recorded: names
+    already in reports/names.json, by address."""
+    bases = bases or {}
     stats: Counter = Counter()
     proposals: Dict[int, List[Tuple[str, str]]] = {}
-    for cls, slots in sorted(theirs.items()):
-        mine = our_class(cls)
-        if mine is None or mine not in ours:
-            continue
+    pairs = {cls: our_class(cls) for cls in theirs}
+    pairs = {t: o for t, o in pairs.items() if o in ours}
+    back = {o: t for t, o in pairs.items()}
+    for cls, mine in sorted(pairs.items()):
         stats["classes in both games"] += 1
-        table = ours[mine]
-        if len(table) != len(slots) or len(slots) < MIN_SLOTS:
-            stats["tables of different sizes, or too small"] += 1
+        slots, table = theirs[cls], ours[mine]
+        # Where the two tables line up: from the start when they are the same size; otherwise after a
+        # base class both games have, when the class's own part (what follows the base's) is the same size.
+        start_t = start_o = 0
+        how = f"both tables of virtual functions have {len(slots)} slots"
+        if len(table) != len(slots):
+            for base in bases.get(mine, []):
+                bt = back.get(base)
+                if bt is None:
+                    continue
+                n_t, n_o = len(theirs[bt]), len(ours[base])
+                own = len(slots) - n_t
+                inherits = [a for a, b in zip(slots, theirs[bt]) if a and b] == [b for a, b in zip(slots, theirs[bt]) if a and b]
+                if own >= MIN_OWN and own == len(table) - n_o and inherits and n_t <= len(slots):
+                    start_t, start_o = n_t, n_o
+                    how = (f"after their base class ({bt} there with {n_t} slots, {base} here with {n_o}), "
+                           f"each has {own} slots of its own")
+                    break
+            else:
+                stats["tables that do not line up"] += 1
+                continue
+        elif len(slots) < MIN_SLOTS:
+            stats["tables too small to trust"] += 1
             continue
         often = Counter(n for n in slots if n)
+        family = [mine] + bases.get(mine, [])
         picks = []
-        for i, name in enumerate(slots):
+        for j in range(len(slots) - start_t):
+            name, i = slots[start_t + j], start_o + j
             m = SLOT.match(known.get(table[i], {}).get("symbol", ""))
-            if not name or often[name] != 1 or not m or int(m.group(2)) != i:
-                continue
-            picks.append((table[i], m.group(1) + "::" + name, i))
-        if any(recorded.get(va, n).split("::")[-1] != n.split("::")[-1] for va, n, _i in picks):
+            if not name or often[name] != 1 or not m or int(m.group(2)) != i or m.group(1) not in family:
+                continue                                       # no single name, or the function is filed elsewhere
+            picks.append((table[i], m.group(1) + "::" + name, i, start_t + j))
+        if any(recorded.get(va, n).split("::")[-1] != n.split("::")[-1] for va, n, _i, _k in picks):
             stats["classes that disagree with a recorded name"] += 1
             continue
         stats["classes used"] += 1
-        for va, name, i in picks:
+        stats["of them, checked by a name already recorded"] += any(va in recorded for va, _n, _i, _k in picks)
+        for va, name, i, k in picks:
             why = (f"Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class {cls} is this game's "
-                   f"{mine}: both tables of virtual functions have {len(slots)} slots, and slot {i} of {cls} is "
-                   f"{name.split('::')[-1]} in that map.")
+                   f"{mine}: {how}. Slot {k} of {cls} is {name.split('::')[-1]} in that map, which lines up with "
+                   f"slot {i} here.")
             proposals.setdefault(va, []).append((name, why))
     out: Dict[int, Tuple[str, str]] = {}
     for va, found in proposals.items():
@@ -200,13 +230,13 @@ def main() -> int:
         return 1
     symbols, tables = parse_map(Path(args.map).read_text(encoding="latin-1"))
     theirs = their_tables(symbols, tables, elf_reader(Path(args.elf).read_bytes()))
-    _bases, ours = NM.hierarchy(BinaryImage(exe))
+    bases, ours = NM.hierarchy(BinaryImage(exe))
     known = RO.known_from_files(ROOT / "reconstructed_src").get("xb", {})
     path = ROOT / "reports" / "names.json"
     data = NAMES.load(path)
     names = data.setdefault("names", {})
     recorded = {int(k[3:], 16): v["name"] for k, v in names.items() if k.startswith("xb:")}
-    found, stats = find(theirs, ours, known, recorded)
+    found, stats = find(theirs, ours, known, recorded, bases)
     print(f"The map: {len(symbols):,} symbols, {len(theirs):,} classes with a table.")
     for what, n in stats.items():
         print(f"  {what}: {n}")
