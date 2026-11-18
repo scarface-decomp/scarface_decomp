@@ -178,6 +178,19 @@ def name_key(text: str, start: int = 0) -> int:
     return h | 0x80000000
 
 
+def name_key64(text: str) -> int:
+    """The 64-bit form of the name key, which names the sound files: for each character,
+    h = (h * 65599) mod 2^64, the character + 0x20 if it is below 'a', h ^= the character. It starts at
+    0 and no top bit is set. media.sound_id gives a sound's file name from its path with it."""
+    h = 0
+    for c in text.encode("latin-1", "replace"):
+        h = (h * 65599) & 0xFFFFFFFFFFFFFFFF
+        if c < 0x61:
+            c += 0x20
+        h ^= c
+    return h
+
+
 def walk(chunks: List[Chunk]) -> Iterator[Chunk]:
     for c in chunks:
         yield c

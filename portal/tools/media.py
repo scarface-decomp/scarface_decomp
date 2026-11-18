@@ -293,6 +293,88 @@ def playable(data: bytes) -> Tuple[bytes, str, str]:
     raise MediaError(f"the {info['codec']} codec can't be previewed")
 
 
+# --------------------------------------------------------------------------- sound names
+
+def sound_id(path: str) -> str:
+    """The 16 hex digits a sound is filed under, from the path it had when the game was made:
+    the path below `sound`, without its extension, lower case, with backslashes, through the 64-bit name
+    key (p3d.name_key64). `music/tapeplayer/tp_toots_fever.rsd` gives c90ed53b0f931027. The sound is
+    art/sound/rsd/<first digit>/<id>.rsd and its subtitles art/subtitles/<first digit>/<id>.p3d."""
+    import p3d
+    text = path.replace("/", "\\").lower()
+    for lead in ("art\\sound\\", "sound\\"):
+        k = text.find(lead)
+        if k >= 0 and (k == 0 or text[k - 1] == "\\"):
+            text = text[k + len(lead):]
+            break
+    dot = text.rfind(".")
+    if dot > text.rfind("\\"):
+        text = text[:dot]
+    return f"{p3d.name_key64(text):016x}"
+
+
+def sound_file(path: str) -> str:
+    """Where the game keeps the sound that was made from path: art/sound/rsd/<x>/<id>.rsd."""
+    sid = sound_id(path)
+    return f"art/sound/rsd/{sid[0]}/{sid}.rsd"
+
+
+def subtitle_file(path: str) -> str:
+    """Where the subtitles of the sound made from path are, when it has any."""
+    sid = sound_id(path)
+    return f"art/subtitles/{sid[0]}/{sid}.p3d"
+
+
+# --------------------------------------------------------------------------- text bibles
+
+TEXT_BIBLE = 0x0001800E
+BIBLE_MARK = 0x0001003F
+
+
+def text_bible(data: bytes) -> List[Tuple[int, str]]:
+    """The lines of a text bible (the game's on-screen text: objectives, menus, prompts; a .p3d under
+    textbible/ or with a mission): [(key, text)], in the file's order. The key is the 32-bit name key
+    (p3d.name_key) of the line's id, so `p3d.name_key("A64_GOTOHOTEL")` finds that line.
+
+    Each language is a 0x0001800E chunk: a name and a language letter, then u32 how many lines,
+    u32 0x0001003F, u32 the size of the text in bytes, the keys (u32 each, ascending), where each line
+    starts in the text (u32 each), and the text: UTF-16, each line ended by a 0. Returns the first
+    language; [] when data is not a text bible."""
+    if data[:4] != b"P3D\xff":
+        return []
+    p, end = 12, len(data)
+    while p + 12 <= end:                                     # chunk after chunk, inner ones included
+        cid, head, _size = struct.unpack_from("<3I", data, p)
+        if head < 12 or p + head > end:
+            return []
+        if cid == TEXT_BIBLE:
+            return _bible_lines(data[p + 12:p + head])
+        p += head
+    return []
+
+
+def _bible_lines(body: bytes) -> List[Tuple[int, str]]:
+    # The counts sit after a name of any length: find the place where they add up to the chunk's size.
+    for q in range(0, max(0, min(len(body) - 12, 300))):
+        count, mark, size = struct.unpack_from("<3I", body, q)
+        table = q + 12 + 8 * count
+        if mark != BIBLE_MARK or count > 100_000 or not 0 <= len(body) - table - size < 4:
+            continue
+        keys = struct.unpack_from(f"<{count}I", body, q + 12)
+        starts = struct.unpack_from(f"<{count}I", body, q + 12 + 4 * count)
+        text = body[table:table + size]
+        in_bytes = all(s < max(size, 1) and s % 2 == 0 and (s == 0 or text[s - 2:s] == b"\0\0") for s in starts)
+        out = []
+        for key, s in zip(keys, starts):
+            s *= 1 if in_bytes else 2
+            e = s
+            while e + 1 < len(text) and text[e:e + 2] != b"\0\0":
+                e += 2
+            out.append((key, text[s:e].decode("utf-16-le", "replace")))
+        return out
+    return []
+
+
 # --------------------------------------------------------------------------- subtitles
 
 SUBTITLE = 0x0100500A
