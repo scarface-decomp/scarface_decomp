@@ -2031,6 +2031,511 @@
       "name": "NameKey",
       "by": "the clean-room spec docs/cleanroom/SPEC-006-lights-placed-props-reflection.md (a name the implementer chose from its description)",
       "why": "The prototype's copy of the Xbox name key at 0x00243FA0 (SPEC-006 section 5): the same code, matched."
+    },
+    "xb:0x000C7EC0": {
+      "name": "SaveGameController::SaveInit",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"SaveGameController::SaveInit\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x000C8950": {
+      "name": "SaveGameController::CheckLoadCommit",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"SaveGameController::CheckLoadCommit\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x000C8B90": {
+      "name": "SaveGameController::SaveEnd",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"SaveGameController::SaveEnd\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x0018B960": {
+      "name": "ExoticsHUD2::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says ExoticsHUD2 derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x0018C2D0": {
+      "name": "ExoticsHUD2::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says ExoticsHUD2 derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x0018E6A0": {
+      "name": "GameOverHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"GameOverHUD::ActivateElement\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in GameOverHUD's table."
+    },
+    "xb:0x0018E8C0": {
+      "name": "GameOverHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"GameOverHUD::DeactivateElement\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in GameOverHUD's table."
+    },
+    "xb:0x0018EB60": {
+      "name": "GameOverHUD::UpdateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"GameOverHUD::UpdateElement::DramaticCamera::IsFinished\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in GameOverHUD's table."
+    },
+    "xb:0x00190500": {
+      "name": "HitsHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HitsHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x00190560": {
+      "name": "HitsHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HitsHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x00193620": {
+      "name": "HUDSubtitle::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDSubtitle derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x00193D50": {
+      "name": "HUDSubtitle::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDSubtitle derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x00194BC0": {
+      "name": "HUDImageDisplay::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDImageDisplay derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x00194F00": {
+      "name": "LaunderCashHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says LaunderCashHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001950C0": {
+      "name": "LaunderCashHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says LaunderCashHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x00196D00": {
+      "name": "HUDManager2::ToggleModal",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"HUDManager2::ToggleModal%d\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x00198CA0": {
+      "name": "HUDMeterWithIcon::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDMeterWithIcon derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x00198D30": {
+      "name": "HUDMeterWithIcon::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDMeterWithIcon derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001990B0": {
+      "name": "HUDHealth::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDHealth derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001991C0": {
+      "name": "HUDHealth::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDHealth derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x00199700": {
+      "name": "HUDHeatMeter::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDHeatMeter derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001998F0": {
+      "name": "HUDFrontMeter::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDFrontMeter derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x00199930": {
+      "name": "HUDFrontMeter::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDFrontMeter derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x0019B820": {
+      "name": "MissionCompleteHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"MissionCompleteHUD::DeactivateElement\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in MissionCompleteHUD's table."
+    },
+    "xb:0x0019B940": {
+      "name": "MissionCompleteHUD::Select",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"MissionCompleteHUD::Select\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x0019C7A0": {
+      "name": "MissionCompleteHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says MissionCompleteHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x0019EB90": {
+      "name": "RepGainHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"RepGainHUD::ActivateElement\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in RepGainHUD's table."
+    },
+    "xb:0x0019EC80": {
+      "name": "RepGainHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says RepGainHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x0019F540": {
+      "name": "HUDLoadingScreen::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDLoadingScreen derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x0019F620": {
+      "name": "HUDLoadingScreen::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDLoadingScreen derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x0019F8B0": {
+      "name": "HUDScreenFX::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDScreenFX derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x0019FDA0": {
+      "name": "HUDScreenFX::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDScreenFX derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001A1100": {
+      "name": "HUDTapePlayer::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDTapePlayer derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001A1680": {
+      "name": "HUDTapePlayer::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDTapePlayer derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001A2260": {
+      "name": "HUDTimer::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDTimer derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001A2670": {
+      "name": "HUDTimer::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDTimer derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001A2B40": {
+      "name": "HUDTrackable::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDTrackable derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001A3110": {
+      "name": "HUDTrackable::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDTrackable derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001A3460": {
+      "name": "HUDMissionReadout::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says HUDMissionReadout derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001A4840": {
+      "name": "IntimidationHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says IntimidationHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001A4940": {
+      "name": "IntimidationHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says IntimidationHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001A5750": {
+      "name": "InvSelectionHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"InvSelectionHUD::ActivateElement\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in InvSelectionHUD's table."
+    },
+    "xb:0x001A5890": {
+      "name": "InvSelectionHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says InvSelectionHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001A6810": {
+      "name": "MapHUD2::ActivateMaxiMap",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"MapHUD2::ActivateMaxiMap\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x001A84F0": {
+      "name": "MapHUD2::UpdateMaxiMap",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"MapHUD2::UpdateMaxiMap (EMTState_DEACTIVATING)\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x001AC190": {
+      "name": "PromptHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says PromptHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001AC8C0": {
+      "name": "PromptHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PromptHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001AD320": {
+      "name": "MissionFailHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"MissionFailHUD::ActivateElement\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in MissionFailHUD's table."
+    },
+    "xb:0x001AD420": {
+      "name": "MissionFailHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"MissionFailHUD::DeactivateElement\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in MissionFailHUD's table."
+    },
+    "xb:0x001AD8A0": {
+      "name": "MissionHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says MissionHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001AD960": {
+      "name": "MissionHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says MissionHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001AE000": {
+      "name": "DrugWarsHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says DrugWarsHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001AE7A0": {
+      "name": "ViceCopHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says ViceCopHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001AF0B0": {
+      "name": "BusinessHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says BusinessHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001AF490": {
+      "name": "BusinessDetailHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says BusinessDetailHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001B0BF0": {
+      "name": "VehicleSelectionHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says VehicleSelectionHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B10D0": {
+      "name": "VehicleSelectionHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says VehicleSelectionHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001B1860": {
+      "name": "BusinessDetailHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says BusinessDetailHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B18E0": {
+      "name": "DrugWarsHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says DrugWarsHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B1EF0": {
+      "name": "ViceCopHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says ViceCopHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B2660": {
+      "name": "BusinessHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says BusinessHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B2C70": {
+      "name": "TeleportHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says TeleportHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001B34F0": {
+      "name": "EmpireHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says EmpireHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001B4910": {
+      "name": "LookTutorialHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says LookTutorialHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001B53A0": {
+      "name": "PimpYourMansionHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says PimpYourMansionHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001B6320": {
+      "name": "EmpireHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says EmpireHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B6630": {
+      "name": "LookTutorialHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says LookTutorialHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B6670": {
+      "name": "PimpYourMansionHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"PimpYourMansionHUD::ActivateElement\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in PimpYourMansionHUD's table."
+    },
+    "xb:0x001B7D80": {
+      "name": "GenericWeaponHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says GenericWeaponHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B8840": {
+      "name": "StreetWeaponHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says StreetWeaponHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B8D20": {
+      "name": "LockerWeaponHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says LockerWeaponHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001B9590": {
+      "name": "SatPhoneWeaponHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says SatPhoneWeaponHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001BAA00": {
+      "name": "GenericWeaponHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says GenericWeaponHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001C15D0": {
+      "name": "TargetHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says TargetHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001C1AF0": {
+      "name": "TargetHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says TargetHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001C2520": {
+      "name": "HUDImageDisplay::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says HUDImageDisplay derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001C2710": {
+      "name": "VisibilityHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says VisibilityHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001C2B10": {
+      "name": "WeaponHUD::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says WeaponHUD derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001C3170": {
+      "name": "WeaponHUD::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says WeaponHUD derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001C42C0": {
+      "name": "SystemDialogBox::OpenSystemDialog",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"SystemDialogBox::OpenSystemDialog\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x001CA1B0": {
+      "name": "PauseMenu::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenu derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CA3C0": {
+      "name": "PauseMenu::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says PauseMenu derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001CA770": {
+      "name": "PauseMenuPage::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPage derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CA7F0": {
+      "name": "PauseMenuPage::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says PauseMenuPage derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001CADD0": {
+      "name": "PauseMenuPageController::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageController derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CB160": {
+      "name": "PauseMenuPageCredits::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says PauseMenuPageCredits derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001CB220": {
+      "name": "PauseMenuPageCredits::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageCredits derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CB5B0": {
+      "name": "PauseMenuPageDebug::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageDebug derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CBA50": {
+      "name": "PauseMenuPageHome::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageHome derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CBDE0": {
+      "name": "PauseMenuPageMain::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageMain derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CC0E0": {
+      "name": "PauseMenuPageMain::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says PauseMenuPageMain derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001CC510": {
+      "name": "PauseMenuPageOptions::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageOptions derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CC780": {
+      "name": "PauseMenuPageRewards::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says PauseMenuPageRewards derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001CD0B0": {
+      "name": "PauseMenuPageRewards::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageRewards derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CD4C0": {
+      "name": "PauseMenuPageSerialize::DeactivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 45 of HUDElement2's table of virtual functions is DeactivateElement: 3 of its derived classes (GameOverHUD, MissionCompleteHUD, MissionFailHUD) say so in their own log messages. The game's class information says PauseMenuPageSerialize derives from HUDElement2, and this function is in slot 45 of its table."
+    },
+    "xb:0x001CD680": {
+      "name": "PauseMenuPageSerialize::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageSerialize derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x001CDE10": {
+      "name": "PauseMenuPageStats::ActivateElement",
+      "by": "the game's own text and class information",
+      "why": "Slot 44 of HUDElement2's table of virtual functions is ActivateElement: 5 of its derived classes (GameOverHUD, InvSelectionHUD, MissionFailHUD, PimpYourMansionHUD, RepGainHUD) say so in their own log messages. The game's class information says PauseMenuPageStats derives from HUDElement2, and this function is in slot 44 of its table."
+    },
+    "xb:0x0022CDA0": {
+      "name": "PlayerProfileManager::RequestState",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"PlayerProfileManager::RequestState ePROFMGR_LOAD\" (it hands it to a logging call), so the message names the function it is in."
+    },
+    "xb:0x0022F1A0": {
+      "name": "PresentationManager::Notify",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"PresentationManager::Notify (DB_EVENT_START_MINIGAME)\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in PresentationManager's table."
+    },
+    "xb:0x00298F40": {
+      "name": "pure3d::ImageConverter::UpdateSurface",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"ImageConverter::UpdateSurface():  Pixel format for texture is not s...\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in pure3d::ImageConverter's table."
+    },
+    "proto:0x00255150": {
+      "name": "pure3d::ImageConverter::UpdateSurface",
+      "by": "the game's own text and class information",
+      "why": "The only function that uses the message \"ImageConverter::UpdateSurface():  Pixel format for texture is not s...\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in pure3d::ImageConverter's table."
     }
   },
   "members": {
