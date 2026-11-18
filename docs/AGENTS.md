@@ -51,6 +51,7 @@ own files or programs, or written up through the clean room ([CLEAN_ROOM.md](CLE
 | Which lights reach an object; placed props (trees, bushes) at run time: culling, waking, wind; the water reflection; the frame-time budget | [SPEC-006](cleanroom/SPEC-006-lights-placed-props-reflection.md) |
 | Billboards: the sun and its flares, the moon, street-lamp and car-light glows, mission markers; how each kind faces the camera, fades and animates | [SPEC-007](cleanroom/SPEC-007-billboards.md) |
 | The horizon's colour through the day; the cars' dents (per-vertex damage); the cut-scene package's file entry; the exporter's notes | [SPEC-008](cleanroom/SPEC-008-horizon-dents.md) |
+| Texture animations (`TEX`); a prop state's animation settings, clock and effect times; cutscene faces of people other than Tony; where cutscene lines (subtitles) are and how they are timed; text bibles; corrections to SPEC-005 and FORMATS.md | [SPEC-009](cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md) |
 | The game's name key (how objects are found by name) | [SPEC-006 §5](cleanroom/SPEC-006-lights-placed-props-reflection.md#5-the-games-name-key-checked-on-the-xbox) |
 | What functions do: the Xbox ones the specs cover, about 500 PC ones (renderer, draw list, lights, placed props, render calls) and about 230 engine ones marked low confidence, whose Xbox twins do the same | [function_guide.json](function_guide.json) |
 | Names given so far, and why | `reports/names.json`, [NAMES.md](NAMES.md) |
@@ -71,6 +72,9 @@ own files or programs, or written up through the clean room ([CLEAN_ROOM.md](CLE
   the glTF and Blender exports and the viewer; then the Xbox billboard functions of its §6.
 * [SPEC-008 §4](cleanroom/SPEC-008-horizon-dents.md#4-what-to-build): texture-offset sets and dents in
   `p3d.py`, FORMATS.md, the horizon by the hour in the sky, dents as morph targets in the car exports.
+* [SPEC-009 §8](cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#8-what-to-build): the
+  mixer and text-bible fields in `p3d.py`, prop states and their clock in the exports, texture animations,
+  every cutscene face, cutscene subtitles; it also corrects SPEC-005 §2.1 and §1.3 (its §6).
 * In `function_guide.json`, every function with `"status": "open"` is waiting to be matched.
 
 When you finish a spec's work item, say so in the pull request and answer its questions in the spec's

@@ -6433,6 +6433,348 @@
    "what_it_does": "Reads one vertex set (chunk 0x00121306): colour lists (CLR0, CLR1) and texture offsets (UV0, UV1, UV2), each a 0x00010F0n sub-chunk.",
    "spec": "docs/cleanroom/SPEC-008-horizon-dents.md#1-the-horizons-colour-by-the-hour-checked",
    "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A7F70",
+   "name_in_queue": "pure3d::TextureAnimationController::vfunc_09",
+   "size": 149,
+   "what_it_does": "Each update of a texture animation: finds the key at or before the frame on the TEX Entity channel and sets that texture as the target shader's texture parameter.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A80A0",
+   "name_in_queue": "pure3d::ShaderAnimationController::vfunc_07",
+   "size": 102,
+   "what_it_does": "Sets a shader animation's target from an object: a mesh piece's shader, or a shader itself.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A8160",
+   "name_in_queue": "sub_002A8160",
+   "size": 41,
+   "what_it_does": "Sets a shader animation's target shader directly, keeping a reference.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00274A50",
+   "name_in_queue": "pure3d::DefaultFrameControllerHandler::vfunc_05",
+   "size": 1734,
+   "what_it_does": "Makes a frame controller of the chunk's type (CAM, PTRN, LITE, BQG, TEX, EXP and others) and binds it; for TEX it looks for a shader by the driven name.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000511F0",
+   "name_in_queue": "sub_000511F0",
+   "size": 39,
+   "what_it_does": "Finds a shader by name (its 32-bit name key) in the loaded objects.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0025AC40",
+   "name_in_queue": "sub_0025AC40",
+   "size": 297,
+   "what_it_does": "Reads a controller list (chunk 0x00121204) and hands each frame controller to its owner, for example a mesh piece.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00287020",
+   "name_in_queue": "sub_00287020",
+   "size": 199,
+   "what_it_does": "A channel's key search: the keys at or before and after a frame, clamped at both ends.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00287CE0",
+   "name_in_queue": "sub_00287CE0",
+   "size": 47,
+   "what_it_does": "An Entity channel's value at a frame: the entity of the key at or before it.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00281400",
+   "name_in_queue": "sub_00281400",
+   "size": 622,
+   "what_it_does": "Applies a prop state's animation settings (0x08020003) to the prop's controllers: freeze, passes, direction, range, speed and starting frame.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00281940",
+   "name_in_queue": "pure3d::prop::StateProp::vfunc_08",
+   "size": 698,
+   "what_it_does": "A prop's update: advances the state's clock (30 a second), moves on to the next state when due, starts the effects due.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002816F0",
+   "name_in_queue": "sub_002816F0",
+   "size": 122,
+   "what_it_does": "Starts the prop state effects whose start time lies between two values of the state's clock.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00280CC0",
+   "name_in_queue": "sub_00280CC0",
+   "size": 773,
+   "what_it_does": "Places and starts a prop state's effects: joint or prop placement, offset and angles, size times the prop's scale.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00275E40",
+   "name_in_queue": "sub_00275E40",
+   "size": 812,
+   "what_it_does": "Moves a frame on by a number of frames, by direction kind, passes left and range: wraps, or stops on the end frame.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002761A0",
+   "name_in_queue": "sub_002761A0",
+   "size": 70,
+   "what_it_does": "Turns a time step into frames (divided by 1000, times the animation's frame rate and the speed) and moves the frame on.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00273390",
+   "name_in_queue": "pure3d::SimpleFrameController::vfunc_08",
+   "size": 97,
+   "what_it_does": "Advances a frame controller by a time step and applies it to its target when asked.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00273C80",
+   "name_in_queue": "pure3d::SimpleFrameController::vfunc_14",
+   "size": 96,
+   "what_it_does": "Sets a frame controller's frame, kept inside its range.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00273CE0",
+   "name_in_queue": "pure3d::SimpleFrameController::vfunc_16",
+   "size": 149,
+   "what_it_does": "Sets a frame controller's range and keeps its frame inside it.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00273460",
+   "name_in_queue": "pure3d::SimpleFrameController::vfunc_18",
+   "size": 91,
+   "what_it_does": "Sets a frame controller's direction kind (forwards, backwards and others).",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002734C0",
+   "name_in_queue": "pure3d::SimpleFrameController::vfunc_20",
+   "size": 91,
+   "what_it_does": "Sets a frame controller's number of passes (0 = no end).",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00273D80",
+   "name_in_queue": "pure3d::SimpleFrameController::vfunc_25",
+   "size": 73,
+   "what_it_does": "Resets a frame controller: range 0 to the animation's length minus 1, frame 0, speed 1.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00273210",
+   "name_in_queue": "pure3d::AnimationFrameController::vfunc_22",
+   "size": 300,
+   "what_it_does": "How many frames a frame controller has left to play, by direction kind and passes.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002763A0",
+   "name_in_queue": "sub_002763A0",
+   "size": 57,
+   "what_it_does": "Puts a controller of a multi-controller among the ones that advance.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00276C40",
+   "name_in_queue": "sub_00276C40",
+   "size": 89,
+   "what_it_does": "Takes a controller of a multi-controller out of the ones that advance.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0026ECB0",
+   "name_in_queue": "pure3d::prop::StatePropDataLoader::vfunc_06",
+   "size": 2606,
+   "what_it_does": "Reads a prop's data (chunk 0x0802000D): states, visibilities, animation settings, properties and effects.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000CA6A0",
+   "name_in_queue": "sub_000CA6A0",
+   "size": 124,
+   "what_it_does": "The script call SubtitleManager_LocalisedDialogueEvent: makes localised\\english\\<name> and queues that line with its start and duration.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000CB870",
+   "name_in_queue": "sub_000CB870",
+   "size": 141,
+   "what_it_does": "Queues a dialogue line: finds its subtitle text by the 64-bit name key of its path.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000CB2F0",
+   "name_in_queue": "sub_000CB2F0",
+   "size": 272,
+   "what_it_does": "Stores a queued dialogue line in a free slot.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000CB650",
+   "name_in_queue": "SubtitleManager::SubtitleFlowClient::vfunc_02",
+   "size": 541,
+   "what_it_does": "Each update of the subtitle queue: shows due lines as captions.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000CAC50",
+   "name_in_queue": "sub_000CAC50",
+   "size": 584,
+   "what_it_does": "Cuts a line into captions of up to 80 characters (# next speaker, @ new caption, else at sentence end, comma or space) and times them by their share of characters.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000CA8E0",
+   "name_in_queue": "sub_000CA8E0",
+   "size": 129,
+   "what_it_does": "The class of a character for cutting captions: space 1; comma and semicolon 2; full stop, ! and ? 3; @ 4; # 5.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0026E620",
+   "name_in_queue": "pure3d::TextBibleLoader::vfunc_06",
+   "size": 43,
+   "what_it_does": "Loads a text bible (chunk 0x0001800D).",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0024DD60",
+   "name_in_queue": "sub_0024DD60",
+   "size": 461,
+   "what_it_does": "Reads a text bible: its name, languages, and one table per 0x0001800E.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0024D490",
+   "name_in_queue": "sub_0024D490",
+   "size": 286,
+   "what_it_does": "Reads one language of a text bible: letter, count, 65599, size, keys, byte starts, UTF-16 text.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0024D900",
+   "name_in_queue": "sub_0024D900",
+   "size": 120,
+   "what_it_does": "Finds a text line by its id in every loaded text bible.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0024D9B0",
+   "name_in_queue": "sub_0024D9B0",
+   "size": 156,
+   "what_it_does": "Reads a bracketed id ([NAME]) inside a text line and looks it up.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0028E5D0",
+   "name_in_queue": "sub_0028E5D0",
+   "size": 64,
+   "what_it_does": "A text bible language's key search (binary search of its sorted keys).",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0028E550",
+   "name_in_queue": "sub_0028E550",
+   "size": 35,
+   "what_it_does": "A text line from its index: the text plus the line's start in bytes.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002706F0",
+   "name_in_queue": "pure3d::VertexOffsetExpressionMixerLoader::vfunc_06",
+   "size": 424,
+   "what_it_does": "Reads an expression mixer (chunk 0x00021002): finds its expression group and its skin by name.",
+   "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
+   "status": "open"
   }
  ]
 }
