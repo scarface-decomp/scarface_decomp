@@ -2781,6 +2781,231 @@
       "name": "LockerWeaponHUD::ActivateElement",
       "by": "the portal's PS2 to Xbox pairing",
       "why": "The same function as the Xbox game's LockerWeaponHUD::ActivateElement (0x001B8D20): it uses the same text as Xbox 0x001B8D20 (\"WM_GetPlayerMaxWeight();\", \"[WM_TITLELOCKERVENDOR]\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "xb:0x0024AAD0": {
+      "name": "pure3d::VectorCamera::Update",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 26 of tVectorCamera is Update in that map, which lines up with slot 30 here."
+    },
+    "xb:0x0025FD50": {
+      "name": "pure3d::Light::Activate",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tDirectionalLight is this game's pure3d::DirectionalLight: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 5 slots of its own. Slot 3 of tDirectionalLight is Activate in that map, which lines up with slot 7 here."
+    },
+    "xb:0x0025FD70": {
+      "name": "pure3d::Light::Deactivate",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tDirectionalLight is this game's pure3d::DirectionalLight: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 5 slots of its own. Slot 4 of tDirectionalLight is Deactivate in that map, which lines up with slot 8 here."
+    },
+    "xb:0x00260560": {
+      "name": "pure3d::DirectionalLight::Update",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tDirectionalLight is this game's pure3d::DirectionalLight: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 5 slots of its own. Slot 7 of tDirectionalLight is Update in that map, which lines up with slot 11 here."
+    },
+    "xb:0x00260650": {
+      "name": "pure3d::AmbientLight::Activate",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tAmbientLight is this game's pure3d::AmbientLight: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 5 slots of its own. Slot 3 of tAmbientLight is Activate in that map, which lines up with slot 7 here."
+    },
+    "xb:0x00260660": {
+      "name": "pure3d::AmbientLight::Update",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tAmbientLight is this game's pure3d::AmbientLight: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 5 slots of its own. Slot 7 of tAmbientLight is Update in that map, which lines up with slot 11 here."
+    },
+    "xb:0x002607D0": {
+      "name": "pure3d::PointLight::Update",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tPointLight is this game's pure3d::PointLight: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 5 slots of its own. Slot 7 of tPointLight is Update in that map, which lines up with slot 11 here."
+    },
+    "xb:0x00262DA0": {
+      "name": "pure3d::PointCamera::Update",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tPointCamera is this game's pure3d::PointCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 26 of tPointCamera is Update in that map, which lines up with slot 30 here."
+    },
+    "xb:0x00263030": {
+      "name": "pure3d::Image8::SetUsedColours",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 11 of tImage8 is SetUsedColours in that map, which lines up with slot 15 here."
+    },
+    "xb:0x00263040": {
+      "name": "pure3d::Image8::GetUsedColours",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 12 of tImage8 is GetUsedColours in that map, which lines up with slot 16 here."
+    },
+    "xb:0x00263070": {
+      "name": "pure3d::Image8::GetPixelIndex",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 18 of tImage8 is GetPixelIndex in that map, which lines up with slot 22 here."
+    },
+    "xb:0x002631F0": {
+      "name": "pure3d::Image8::SetPalette",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 14 of tImage8 is SetPalette in that map, which lines up with slot 18 here."
+    },
+    "xb:0x00263220": {
+      "name": "pure3d::Image8::SetPaletteEntry",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 13 of tImage8 is SetPaletteEntry in that map, which lines up with slot 17 here."
+    },
+    "xb:0x00263240": {
+      "name": "pure3d::Image8::GetPaletteEntry",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 15 of tImage8 is GetPaletteEntry in that map, which lines up with slot 19 here."
+    },
+    "xb:0x0027CD80": {
+      "name": "pure3d::ImageFont::SetLineSpacing",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageFont is this game's pure3d::ImageFont: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 13 slots of its own. Slot 11 of tImageFont is SetLineSpacing in that map, which lines up with slot 15 here."
+    },
+    "xb:0x0027CDB0": {
+      "name": "pure3d::ImageFont::SetColour",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageFont is this game's pure3d::ImageFont: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 13 slots of its own. Slot 13 of tImageFont is SetColour in that map, which lines up with slot 17 here."
+    },
+    "xb:0x0028BAB0": {
+      "name": "pure3d::VectorCamera::GetFOV",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 4 of tVectorCamera is GetFOV in that map, which lines up with slot 8 here."
+    },
+    "xb:0x0028BAD0": {
+      "name": "pure3d::VectorCamera::GetCameraSpaceClipPlane",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 9 of tVectorCamera is GetCameraSpaceClipPlane in that map, which lines up with slot 13 here."
+    },
+    "xb:0x0028BBD0": {
+      "name": "pure3d::VectorCamera::GetWorldSpaceClipPlane",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 10 of tVectorCamera is GetWorldSpaceClipPlane in that map, which lines up with slot 14 here."
+    },
+    "xb:0x0028BC00": {
+      "name": "pure3d::VectorCamera::GetWorldToCameraMatrix",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 11 of tVectorCamera is GetWorldToCameraMatrix in that map, which lines up with slot 15 here."
+    },
+    "xb:0x0028BC20": {
+      "name": "pure3d::VectorCamera::GetCameraToWorldMatrix",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 12 of tVectorCamera is GetCameraToWorldMatrix in that map, which lines up with slot 16 here."
+    },
+    "xb:0x0028BC40": {
+      "name": "pure3d::VectorCamera::CameraToWorld",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 13 of tVectorCamera is CameraToWorld in that map, which lines up with slot 17 here."
+    },
+    "xb:0x0028BC60": {
+      "name": "pure3d::VectorCamera::CameraToView",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 15 of tVectorCamera is CameraToView in that map, which lines up with slot 19 here."
+    },
+    "xb:0x0028BCF0": {
+      "name": "pure3d::VectorCamera::WorldToCamera",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 14 of tVectorCamera is WorldToCamera in that map, which lines up with slot 18 here."
+    },
+    "xb:0x0028BD90": {
+      "name": "pure3d::VectorCamera::WorldToView",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 16 of tVectorCamera is WorldToView in that map, which lines up with slot 20 here."
+    },
+    "xb:0x0028BDD0": {
+      "name": "pure3d::VectorCamera::SphereVisibleCamera",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 18 of tVectorCamera is SphereVisibleCamera in that map, which lines up with slot 22 here."
+    },
+    "xb:0x0028BE10": {
+      "name": "pure3d::VectorCamera::PointVisibleCamera",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 17 of tVectorCamera is PointVisibleCamera in that map, which lines up with slot 21 here."
+    },
+    "xb:0x0028BE50": {
+      "name": "pure3d::VectorCamera::PointVisible",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 19 of tVectorCamera is PointVisible in that map, which lines up with slot 23 here."
+    },
+    "xb:0x0028BEE0": {
+      "name": "pure3d::VectorCamera::SphereVisible",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 20 of tVectorCamera is SphereVisible in that map, which lines up with slot 24 here."
+    },
+    "xb:0x0028BF20": {
+      "name": "pure3d::VectorCamera::GetWorldLookAtDirection",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 22 of tVectorCamera is GetWorldLookAtDirection in that map, which lines up with slot 26 here."
+    },
+    "xb:0x0028BF80": {
+      "name": "pure3d::Camera::Update",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tCamera is this game's pure3d::Camera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 26 of tCamera is Update in that map, which lines up with slot 30 here."
+    },
+    "xb:0x0028BFC0": {
+      "name": "pure3d::VectorCamera::SetState",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 25 of tVectorCamera is SetState in that map, which lines up with slot 29 here."
+    },
+    "xb:0x0028C030": {
+      "name": "pure3d::VectorCamera::SetCameraMatrix",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 24 of tVectorCamera is SetCameraMatrix in that map, which lines up with slot 28 here."
+    },
+    "xb:0x0028C080": {
+      "name": "pure3d::VectorCamera::GetWorldPosition",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 23 of tVectorCamera is GetWorldPosition in that map, which lines up with slot 27 here."
+    },
+    "xb:0x0028C1D0": {
+      "name": "pure3d::VectorCamera::SetFOV",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 3 of tVectorCamera is SetFOV in that map, which lines up with slot 7 here."
+    },
+    "xb:0x0028C2D0": {
+      "name": "pure3d::VectorCamera::PointClipCode",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tVectorCamera is this game's pure3d::VectorCamera: after their base class (tEntity there with 3 slots, pure3d::Entity here with 7), each has 24 slots of its own. Slot 21 of tVectorCamera is PointClipCode in that map, which lines up with slot 25 here."
+    },
+    "xb:0x00298430": {
+      "name": "pure3d::ImageConverter::ImageToTexture",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageConverter is this game's pure3d::ImageConverter: both tables of virtual functions have 9 slots. Slot 1 of tImageConverter is ImageToTexture in that map, which lines up with slot 1 here."
+    },
+    "xb:0x002985D0": {
+      "name": "pure3d::ImageConverter::ImageInToVolumeTexture",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageConverter is this game's pure3d::ImageConverter: both tables of virtual functions have 9 slots. Slot 3 of tImageConverter is ImageInToVolumeTexture in that map, which lines up with slot 3 here."
+    },
+    "xb:0x00298630": {
+      "name": "pure3d::ImageConverter::ImageToVolumeTexture",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageConverter is this game's pure3d::ImageConverter: both tables of virtual functions have 9 slots. Slot 2 of tImageConverter is ImageToVolumeTexture in that map, which lines up with slot 2 here."
+    },
+    "xb:0x002987C0": {
+      "name": "pure3d::ImageConverter::UpdateTexture",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageConverter is this game's pure3d::ImageConverter: both tables of virtual functions have 9 slots. Slot 5 of tImageConverter is UpdateTexture in that map, which lines up with slot 5 here."
+    },
+    "xb:0x00298CB0": {
+      "name": "pure3d::ImageConverter::LockToImage",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageConverter is this game's pure3d::ImageConverter: both tables of virtual functions have 9 slots. Slot 4 of tImageConverter is LockToImage in that map, which lines up with slot 4 here."
+    },
+    "xb:0x00298D00": {
+      "name": "pure3d::ImageConverter::UpdateImage",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageConverter is this game's pure3d::ImageConverter: both tables of virtual functions have 9 slots. Slot 8 of tImageConverter is UpdateImage in that map, which lines up with slot 8 here."
+    },
+    "xb:0x00298FD0": {
+      "name": "pure3d::ImageConverter::UpdateVolumeTexture",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImageConverter is this game's pure3d::ImageConverter: both tables of virtual functions have 9 slots. Slot 6 of tImageConverter is UpdateVolumeTexture in that map, which lines up with slot 6 here."
+    },
+    "xb:0x0029E590": {
+      "name": "pure3d::pddiDevice::SetMessageCallback",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class pddiDevice is this game's pure3d::pddiDevice: both tables of virtual functions have 14 slots. Slot 13 of pddiDevice is SetMessageCallback in that map, which lines up with slot 13 here."
+    },
+    "xb:0x002D64A0": {
+      "name": "pure3d::Image8::GetPalette",
+      "by": "the Hit & Run prototype's linker map",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 16 of tImage8 is GetPalette in that map, which lines up with slot 20 here."
     }
   },
   "members": {

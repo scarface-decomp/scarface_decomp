@@ -13,6 +13,20 @@ reference every function is checked against. So the claim the project makes is n
 worded that way: **no leaked source code is used, nor anything written beside it; you need your own copy
 of the game.** Don't describe the decompilation itself as "clean room".
 
+## Names from another game's build
+
+One source of names is neither this game nor a spec, so it is recorded here. The 10 July 2003 PS2 prototype
+of *The Simpsons: Hit & Run*, a game on the same engine, carries its own linker map on the disc. Since 18
+November 2026 the project takes virtual functions' names from that map where the two games' classes line up
+([NAMES.md](NAMES.md), `portal/scripts/names_from_shar_map.py`).
+
+* **What is read:** the map file and the prototype's program, from the founder's own copy of the disc. They
+  are a build's own by-products, not source code. Neither file is in this repository.
+* **What is not:** *Hit & Run*'s source code, which has leaked, is not used, and must not be consulted to
+  check, complete or correct a name from the map.
+* **What it gives:** names only, each recorded in `reports/names.json` with the class and slot it came
+  from. No code, layouts or behaviour are taken from it.
+
 ## Roles
 
 * **Examiner.** Reads the outside research and writes a **spec** in `docs/cleanroom/`: what the game's
