@@ -104,11 +104,12 @@ STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY, PROP_PROPERTY = 0x0802000D, 0x0802
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 11                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
+EXPORT_VERSION = 12                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
                                        # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight.
                                        # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked.
                                        # 8: a shader without LIT is unlit. 9: darkening subtracts; placed props in their
                                        # starting state; world geometry's draw distances, far-away stand-ins hidden.
+                                       # 12: a prop's animation plays as its starting state says (speed, part, looping).
                                        # 10: props carry their properties. 11: shadow decals at most 65 % dark; occluders
 LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER, SKY = 0x13000, 0x2380, 0x8800007, 0x122000, 0x8800002
 DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)
@@ -587,6 +588,30 @@ def prop_states(data: bytes, c: p3d.Chunk) -> List[Tuple[str, Dict[str, bool]]]:
     return out
 
 
+PROP_ANIMATION = 0x08020003
+
+
+def prop_play(data: bytes, c: p3d.Chunk) -> Dict[str, Tuple[bool, float, float, float]]:
+    """How a State Prop Data chunk's first state (how the prop starts: "idle") plays its animations
+    (clean-room spec SPEC-005, section 2.1): {frame controller's name (lower case): (loops, first frame,
+    last frame, speed)}. A disco ball's whole turn is five keys played at a hundredth of the speed, for
+    ever. Records that play nothing (frames 0 to 0) are left out."""
+    out: Dict[str, Tuple[bool, float, float, float]] = {}
+    first = next((st for st in c.children if st.id == PROP_STATE), None)
+    for a in (first.children if first is not None else ()):
+        if a.id != PROP_ANIMATION:
+            continue
+        try:
+            f = p3d.fields(data, a)
+            start, end = f["frames"]
+            speed = float(f["speed"])
+            if end > start and speed > 0 and math.isfinite(speed):
+                out.setdefault(f["frame controller"].lower(), (bool(f["numbers"][0]), float(start), float(end), speed))
+        except (KeyError, IndexError, TypeError, ValueError, struct.error, p3d.P3dError):
+            continue
+    return out
+
+
 def prop_properties(data: bytes, c: p3d.Chunk) -> Dict[str, str]:
     """A State Prop Data chunk's own properties (the Prop Property chunks, 0x08020008, straight under it), as
     {name: value}, texts as the file has them: visibility, movement, class ... (SPEC-003, sections 1.1 and 9). name,
@@ -1034,6 +1059,7 @@ class Builder:
         self.hour: Optional[float] = None          # set: the sky's pose and colours are those of this hour
         self.posed: set = set()                    # the animations a pose was taken from (id of the chunk)
         self._animations: Optional[Dict[str, List[Ref]]] = None
+        self._plays: Optional[Dict[str, Tuple[bool, float, float, float]]] = None
         self.shaped: Dict[int, list] = {}          # glTF mesh with shapes -> the sliders that work them
         self.prop = False                          # set while a placed prop goes in (its leaves: see mesh)
         self.decals: Dict[tuple, int] = {}         # a mesh's key -> the glTF mesh of its shadow decals
@@ -1659,6 +1685,25 @@ class Builder:
         refs = self._animations.get(name.lower(), [])
         return next((r for r in refs if any(r.source is p for p in prefer)), refs[0] if refs else None)
 
+    def play_settings(self, name: str) -> Optional[Tuple[bool, float, float, float]]:
+        """How a prop's starting state plays the animation called name: (loops, first frame, last frame,
+        speed), from the props in the library's files (prop_play); None when no prop says."""
+        if self._plays is None:
+            self._plays = {}
+            for src in self.lib.sources:
+                via = {}                                     # frame controller's name -> its animation's
+                for c in src.chunks:
+                    if c.id == FRAME_CONTROLLER:
+                        try:
+                            via[_text(src.data, c.body[0] + 4)[0].lower()] = frame_controller(src.data, c)[2].lower()
+                        except (struct.error, IndexError, UnicodeDecodeError):
+                            continue
+                for c in src.chunks:
+                    if c.id == STATE_PROP_DATA:
+                        for fc, how in prop_play(src.data, c).items():
+                            self._plays.setdefault(via.get(fc, fc), how)
+        return self._plays.get(name.lower())
+
     def sky_colours(self, ref: Ref) -> Optional[Tuple[float, Dict[int, Vec3]]]:
         """For a mesh with vertex-colour sets (0x121305), at self.hour: (the set number its animation
         VRTX_<mesh name> gives, with its fraction; what to add to each vertex's own colour, blended between
@@ -1850,6 +1895,7 @@ class Builder:
         data, c = ref.data, ref.chunk
         info = p3d.fields(data, c)
         rate = info.get("frame rate") or 30.0
+        play = self.play_settings(info.get("name") or "")
         groups = []
         gl = c.find(ANIM_GROUP_LIST)
         for gc in (gl.children if gl else []):
@@ -1894,12 +1940,28 @@ class Builder:
                         keep.append(i)
                         last = f
                 times = [frames[i] / rate for i in keep]
+                vals = [out[i] for i in keep]
+                if play is not None:
+                    # The prop's starting state plays a part of the animation, at its own speed.
+                    _loops, first, end, speed = play
+                    part = [(frames[i], v) for i, v in zip(keep, vals) if first <= frames[i] <= end]
+                    if len(part) >= 2:
+                        if path == "rotation" and speed < 1.0:       # slowed turns need keys between: a
+                            fine = []                                # quarter turn is not a straight line
+                            for (f0, q0), (f1, q1) in zip(part, part[1:]):
+                                fine += [(f0 + (f1 - f0) * k / 8.0, _slerp(q0, q1, k / 8.0)) for k in range(8)]
+                            part = fine + [part[-1]]
+                        times = [(f - first) / rate / speed for f, _v in part]
+                        vals = [v for _f, v in part]
                 samplers.append({"input": self.g.accessor([(t,) for t in times], "SCALAR", bounds=True),
-                                 "output": self.g.accessor([out[i] for i in keep], kind), "interpolation": "LINEAR"})
+                                 "output": self.g.accessor(vals, kind), "interpolation": "LINEAR"})
                 channels.append({"sampler": len(samplers) - 1, "target": {"node": node, "path": path}})
         if not channels:
             return False
-        self.g.add("animations", {"name": info.get("name") or "animation", "channels": channels, "samplers": samplers})
+        made = {"name": info.get("name") or "animation", "channels": channels, "samplers": samplers}
+        if (play[0] if play is not None else info.get("cyclic")):
+            made["extras"] = {"loops": True}                         # the game plays it round and round
+        self.g.add("animations", made)
         self.report.animations.append(info.get("name") or "animation")
         return True
 

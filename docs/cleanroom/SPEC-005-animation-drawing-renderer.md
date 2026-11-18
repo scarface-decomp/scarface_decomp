@@ -441,3 +441,16 @@ game's own text and type information. Keep each step small; open questions in a 
   last key before wrapping to the first. Is that what the game does, or does it blend from the last key back
   to the first across that last frame?
 
+*From the implementer, after using §2.1 in the exports (checked on the PC's files, 18 November 2026):*
+
+* §2.1 holds for the Babylon Club's disco ball (`bcdiscoball` in `packages/z04/babylonclub_01_shell.p3d`). Its
+  animation `PTRN_bcdiscoball` has 5 frames at 30 a second and is not marked cyclic in its own header; the
+  prop's `idle` state plays it with (1, 0, 0), frames 0 to 4, speed 0.01. Read as §2.1 says, that is one whole
+  turn every 13.3 seconds, for ever, which is what the game shows. So the state's first u32 decides the
+  looping, not the animation's own flag, and the speed multiplies the frame rate.
+* The glTF export now plays a prop's animation as its starting state says: only the frames between the two,
+  the time divided by the speed, and `"loops": true` in the animation's extras when the first u32 is 1 (or,
+  for an animation no prop state names, when its own header says cyclic). The play count and the hold flag
+  (second and third u32) are not used yet. The `final` state's settings (frames 0 to 19 of a 5-frame
+  animation, speed 0.02) run past the animation's end; what the game does then is not known.
+* Not done: the texture animations a state plays (`TEX_sparkle_m`), which the export does not carry.

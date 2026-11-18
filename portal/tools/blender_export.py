@@ -87,10 +87,31 @@ def areas(out: Path, index: Optional[dict], version: str) -> List[dict]:
         inside = area["place"] != "z04"
         area["city"] = not area.get("earlier") and not (inside and STATE_ZONE.search(area["name"]))
         area["file"] = area["name"] + (" (inside)" if inside else "")
+    # A place the map keeps in numbered pieces (babylonclub_01, _02, _03) is also one area made of all of
+    # them, listed before its pieces. The whole city takes the pieces, so the joined area isn't part of it.
+    pieces: Dict[tuple, List[dict]] = {}
+    for area in found.values():
+        m = PIECE.match(area["name"])
+        if m and not area.get("earlier") and "@" not in area["key"]:
+            pieces.setdefault((area["place"], m.group(1)), []).append(area)
+    for (place, base), parts in pieces.items():
+        key = place + "/" + base
+        if len(parts) < 2 or key in found:
+            continue
+        parts.sort(key=lambda a: a["name"].lower())
+        files: List[str] = []
+        for a in parts:
+            a["part_of"] = base
+            files += [f for f in a["files"] if f not in files]
+        found[key] = {"key": key, "name": base, "place": place, "files": files, "parts": len(parts),
+                      "city": False, "file": base + (" (inside)" if place != "z04" else "")}
     order = {f.split("/")[1]: i for i, f in enumerate(AREA_FOLDERS)}
-    return sorted(found.values(), key=lambda a: (order[a["place"]], a["name"].lower()))
+    # a joined area just before its own pieces: by the place's name first, then the whole before the parts
+    return sorted(found.values(), key=lambda a: (order[a["place"]], (a.get("part_of") or a["name"]).lower(),
+                                                 "parts" not in a, a["name"].lower()))
 
 
+PIECE = re.compile(r"^(.+?)_(\d{1,2})$")
 STAGE_FILE = re.compile(r"_((?:TS|CS)\d)$", re.I)
 STATE_ZONE = re.compile(r"(?:\d\d)?(?:owned|damaged|destroyed|condemned|toast)(?:_\d+)?$", re.I)
 
@@ -1274,6 +1295,50 @@ def fog_of(path):
         return None
 
 
+def loops_of(path):
+    # The names of the animations the game plays round and round (a .glb's animations marked "loops").
+    try:
+        with open(path, "rb") as f:
+            head = f.read(20)
+            if head[:4] != b"glTF":
+                return []
+            text = f.read(struct.unpack_from("<I", head, 12)[0])
+        if b'"loops"' not in text:
+            return []
+        return [a.get("name", "") for a in json.loads(text).get("animations", []) if (a.get("extras") or {}).get("loops")]
+    except Exception:
+        return []
+
+
+def curves_of(action):
+    # An action's curves, in old Blenders (action.fcurves) and new ones (layers, strips, channel bags).
+    try:
+        return list(action.fcurves)
+    except Exception:
+        pass
+    out = []
+    for layer in getattr(action, "layers", []):
+        for strip in getattr(layer, "strips", []):
+            for bag in getattr(strip, "channelbags", []):
+                out.extend(bag.fcurves)
+    return out
+
+
+def play_round(names):
+    # Makes the looping animations loop in Blender too (a Cycles modifier on each curve): a disco ball
+    # keeps turning for as long as the timeline runs. Returns how long one round of the longest takes.
+    longest = 0
+    for action in bpy.data.actions:
+        if not any(n and (action.name == n or action.name.startswith(n + "_") or action.name.startswith(n + "."))
+                   for n in names):
+            continue
+        longest = max(longest, int(action.frame_range[1]))
+        for curve in curves_of(action):
+            if not any(m.type == "CYCLES" for m in curve.modifiers):
+                curve.modifiers.new(type="CYCLES")
+    return longest
+
+
 def linear(c):
     # the game's colours are screen (sRGB) colours; Blender's colour settings are linear
     return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
@@ -1520,6 +1585,12 @@ def finish(problems):
     ends = [a.frame_range[1] for a in bpy.data.actions]
     if ends:
         scene.frame_start, scene.frame_end = 0, int(max(ends))
+    try:                                         # what the game loops, loops: the timeline holds a whole round
+        looping = sorted({n for p in FILES for n in loops_of(p)})
+        if looping:
+            scene.frame_start, scene.frame_end = 0, max(scene.frame_end, play_round(looping))
+    except Exception:
+        traceback.print_exc()
     cams = [o for o in scene.objects if o.type == "CAMERA"]
     if cams and scene.camera is None:
         scene.camera = cams[0]

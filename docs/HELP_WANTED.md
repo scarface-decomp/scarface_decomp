@@ -153,6 +153,11 @@ they are not right yet.
 - **Wrong:** stepped keys are blended as if smooth, and visibility tracks are ignored (SPEC-005 section 6).
 - **Done:** STEP keys hold their value; things that should appear and disappear do.
 
+- **Fixed (18 November 2026):** props that spin or loop (the Babylon Club's disco ball) played their few
+  keys once and stopped. They now play as the prop's starting state says (part of the animation, its speed,
+  looping: SPEC-005 §2.1), and Blender loops what the game loops. Still missing: texture animations
+  (the ball's sparkle), which the export does not carry.
+
 ### 3.4 Parts of the city are missing
 - **Wrong:** 30 cutscenes load their room. Outdoor ones get the nearest piece of the map or nothing, so
   streets and buildings around the action are missing.
