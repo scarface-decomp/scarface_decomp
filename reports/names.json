@@ -2536,6 +2536,251 @@
       "name": "pure3d::ImageConverter::UpdateSurface",
       "by": "the game's own text and class information",
       "why": "The only function that uses the message \"ImageConverter::UpdateSurface():  Pixel format for texture is not s...\" (it hands it to a logging call), so the message names the function it is in. The game's class information already puts this function in pure3d::ImageConverter's table."
+    },
+    "ps2:0x0038BD60": {
+      "name": "Script::SubtitleManager_LocalisedDialogueEvent",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's Script::SubtitleManager_LocalisedDialogueEvent (0x000CA6A0): it uses the same text as Xbox 0x000CA6A0 (\"english\", \"localised\\%s\\%s\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x0038C310": {
+      "name": "Script::PlayNIS",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's Script::PlayNIS (0x000CEE10): it uses the same text as Xbox 0x000CEE10 (\"PlayNIS( \"%s\", \"%s\", \"%s\", \"%s\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x00390A70": {
+      "name": "Script::OptionManager_GetInvertStatus",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's Script::OptionManager_GetInvertStatus (0x0002EB50): it uses the same text as Xbox 0x0002EB50 (\"InvertX\", \"InvertY\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x0040DC80": {
+      "name": "Script::getSubStr",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's Script::getSubStr (0x00071330): it uses the same text as Xbox 0x00071330 (\"getSubStr(...): error, startin\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x00460600": {
+      "name": "MissionHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's MissionHUD::ActivateElement (0x001AD8A0): it uses the same text as Xbox 0x001AD8A0 (\"DL_MS_BlackPoly\", \"SetBlockingActionMap(true);\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x0047FA10": {
+      "name": "HUDManager2::ToggleModal",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's HUDManager2::ToggleModal (0x00196D00): it uses the same text as Xbox 0x00196D00 (\"HUDManager2::ToggleModal%d\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x00494A60": {
+      "name": "PresentationManager::Notify",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PresentationManager::Notify (0x0022F1A0): it uses the same text as Xbox 0x0022F1A0 (\"PresentationManager::Notify (D\", \"PresentationManager::Notify (D\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x0049FE30": {
+      "name": "SaveGameController::SaveInit",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's SaveGameController::SaveInit (0x000C7EC0): it uses the same text as Xbox 0x000C7EC0 (\"SaveGameController::SaveInit\", \"Script Event Heap\"); it names itself in a message (\"SaveGameController::SaveInit\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x004A01E0": {
+      "name": "SaveGameController::CheckLoadCommit",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's SaveGameController::CheckLoadCommit (0x000C8950): it uses the same text as Xbox 0x000C8950 (\"Pause_UnpauseGame();\", \"ResetHUDElementStatus();\"); it names itself in a message (\"SaveGameController::CheckLoadCommit\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x004A34D0": {
+      "name": "SystemDialogBox::OpenSystemDialog",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's SystemDialogBox::OpenSystemDialog (0x001C42C0): it uses the same text as Xbox 0x001C42C0 (\"LL_DLG_BODY\", \"LL_DialogBack\"); it names itself in a message (\"SystemDialogBox::OpenSystemDialog\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x005E1880": {
+      "name": "MapHUD2::ActivateMaxiMap",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's MapHUD2::ActivateMaxiMap (0x001A6810): it uses the same text as Xbox 0x001A6810 (\"MapHUD2::ActivateMaxiMap\"); it names itself in a message (\"MapHUD2::ActivateMaxiMap\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x005F49C0": {
+      "name": "GameOverHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's GameOverHUD::ActivateElement (0x0018E6A0): it uses the same text as Xbox 0x0018E6A0 (\"GameOverHUD::ActivateElement\", \"IsInCombatTutorial();\"); it names itself in a message (\"GameOverHUD::ActivateElement\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x005F4C10": {
+      "name": "GameOverHUD::UpdateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's GameOverHUD::UpdateElement (0x0018EB60): it uses the same text as Xbox 0x0018EB60 (\"$LastDeathWasInAMission\", \"GameOverHUD::UpdateElement::Dr\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x005F70D0": {
+      "name": "HUDTapePlayer::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's HUDTapePlayer::DeactivateElement (0x001A1680): it uses the same text as Xbox 0x001A1680 (\"TP_SetActionMap( false );\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x005F71F0": {
+      "name": "HUDTapePlayer::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's HUDTapePlayer::ActivateElement (0x001A1100): it uses the same text as Xbox 0x001A1100 (\"AddRemoveButton\", \"ECShuffleLabel\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x005F8720": {
+      "name": "IntimidationHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's IntimidationHUD::DeactivateElement (0x001A4940): it uses the same text as Xbox 0x001A4940 (\"IntimidationHUD_DeleteActionMa\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x005F8830": {
+      "name": "IntimidationHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's IntimidationHUD::ActivateElement (0x001A4840): it uses the same text as Xbox 0x001A4840 (\"IntimidationHUD_SetActionMap()\", \"intimidate_start\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x00606B30": {
+      "name": "PlayerProfileManager::RequestState",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PlayerProfileManager::RequestState (0x0022CDA0): it uses the same text as Xbox 0x0022CDA0 (\"PlayerProfileManager::RequestS\", \"PlayerProfileManager::RequestS\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x00607F10": {
+      "name": "LaunderCashHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's LaunderCashHUD::ActivateElement (0x00194F00): it uses the same text as Xbox 0x00194F00 (\"GetCurrentMissionName();\", \"LC_SaveContinue\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x00611490": {
+      "name": "Script::TakeScreenShot",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's Script::TakeScreenShot (0x0003D860): it uses the same text as Xbox 0x0003D860 (\"%s.tga\", \".tga\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2:0x006124A0": {
+      "name": "Script::GameGroup_Recurse",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's Script::GameGroup_Recurse (0x0002CE80): it uses the same text as Xbox 0x0002CE80 (\"Recurse\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x00845AF0": {
+      "name": "PauseMenu::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenu::ActivateElement (0x001CA1B0): it uses the same text as Xbox 0x001CA1B0 (\"Pause-Data-Heap\", \"SetPausePageActionMap( true );\"); its place in a virtual table lines up with PauseMenu's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x00845CC0": {
+      "name": "PauseMenu::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenu::DeactivateElement (0x001CA3C0): it uses the same text as Xbox 0x001CA3C0 (\"SetPausePageActionMap( false )\", \"SetUnpauseActionMap( false );\"); its place in a virtual table lines up with PauseMenu's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x00846380": {
+      "name": "PauseMenuPage::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenuPage::ActivateElement (0x001CA770): it uses the same text as Xbox 0x001CA770 (\"Pause-Data-Heap\", \"PauseMenuSetCurrentPage( true,\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x00847910": {
+      "name": "PauseMenuPageController::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenuPageController::ActivateElement (0x001CADD0): it uses the same text as Xbox 0x001CADD0 (\"Pause-Data-Heap\", \"PauseGetControllerCount();\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x00848610": {
+      "name": "PauseMenuPageOptions::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenuPageOptions::ActivateElement (0x001CC510): it uses the same text as Xbox 0x001CC510 (\"Pause-Data-Heap\", \"PauseGetOptionCount();\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x00848DA0": {
+      "name": "PauseMenuPageStats::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenuPageStats::ActivateElement (0x001CDE10): it uses the same text as Xbox 0x001CDE10 (\"Pause-Data-Heap\", \"PauseGetStatCount();\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x00849340": {
+      "name": "PauseMenuPageDebug::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenuPageDebug::ActivateElement (0x001CB5B0): it uses the same text as Xbox 0x001CB5B0 (\"Pause-Data-Heap\", \"PauseGetCheatCount();\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x00849940": {
+      "name": "PauseMenuPageHome::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenuPageHome::ActivateElement (0x001CBA50): it uses the same text as Xbox 0x001CBA50 (\"IsPauseDebugMode();\", \"Pause-Data-Heap\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2pause:0x0084A430": {
+      "name": "PauseMenuPageRewards::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PauseMenuPageRewards::ActivateElement (0x001CD0B0): it uses the same text as Xbox 0x001CD0B0 (\"Pause-Data-Heap\", \"pauseCheatBar%i\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2exotics:0x00845980": {
+      "name": "ExoticsHUD2::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's ExoticsHUD2::ActivateElement (0x0018C2D0): it uses the same text as Xbox 0x0018C2D0 (\"ECArrow%i\", \"ECBack%i\"); its place in a virtual table lines up with ExoticsHUD2's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2exotics:0x00845F70": {
+      "name": "ExoticsHUD2::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's ExoticsHUD2::DeactivateElement (0x0018B960): it uses the same text as Xbox 0x0018B960 (\"EC_SetActionMap( false );\", \"SetBlockingActionMap( false );\"); its place in a virtual table lines up with ExoticsHUD2's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2exotics:0x008489E0": {
+      "name": "MissionCompleteHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's MissionCompleteHUD::DeactivateElement (0x0019B820): it uses the same text as Xbox 0x0019B820 (\"MissionCompleteHUD::Deactivate\", \"SetBlockingActionMap( false );\"); it names itself in a message (\"MissionCompleteHUD::DeactivateElement\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2exotics:0x00848B80": {
+      "name": "MissionCompleteHUD::Select",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's MissionCompleteHUD::Select (0x0019B940): it uses the same text as Xbox 0x0019B940 (\"ExecuteMissionCompleteCallback\", \"IsInMansionMission();\"); it names itself in a message (\"MissionCompleteHUD::Select\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2exotics:0x0084ADB0": {
+      "name": "RepGainHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's RepGainHUD::ActivateElement (0x0019EB90): it uses the same text as Xbox 0x0019EB90 (\"Front-end Exotics\", \"RepGainHUD::ActivateElement\"); it names itself in a message (\"RepGainHUD::ActivateElement\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2exotics:0x0084AEE0": {
+      "name": "RepGainHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's RepGainHUD::DeactivateElement (0x0019EC80): it uses the same text as Xbox 0x0019EC80 (\"DoRepGainCallback();\", \"SetBlockingActionMap( false );\"); its place in a virtual table lines up with RepGainHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals:0x00846350": {
+      "name": "DrugWarsHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's DrugWarsHUD::ActivateElement (0x001B18E0): it uses the same text as Xbox 0x001B18E0 (\"DW_MenuItem%i\", \"DW_TurfIcon%i\"); its place in a virtual table lines up with DrugWarsHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals:0x00846730": {
+      "name": "DrugWarsHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's DrugWarsHUD::DeactivateElement (0x001AE000): it uses the same text as Xbox 0x001AE000 (\"DrugWarsHUD_SetActionMap( fals\"); its place in a virtual table lines up with DrugWarsHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals:0x0084B310": {
+      "name": "BusinessHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's BusinessHUD::DeactivateElement (0x001AF0B0): it uses the same text as Xbox 0x001AF0B0 (\"BusinessHUD_CreateWaypoint( fa\", \"BusinessHUD_SetActionMap(false\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals:0x0084C900": {
+      "name": "BusinessDetailHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's BusinessDetailHUD::ActivateElement (0x001B1860): it uses the same text as Xbox 0x001B1860 (\"BusinessDetailHUD_SetActionMap\"); its place in a virtual table lines up with BusinessDetailHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals:0x0084C9B0": {
+      "name": "BusinessDetailHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's BusinessDetailHUD::DeactivateElement (0x001AF490): it uses the same text as Xbox 0x001AF490 (\"BusinessDetailHUD_SetActionMap\", \"IsEmpirePageAvailable();\"); its place in a virtual table lines up with BusinessDetailHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals1:0x00848BC0": {
+      "name": "PimpYourMansionHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PimpYourMansionHUD::ActivateElement (0x001B6670): it uses the same text as Xbox 0x001B6670 (\"DEC_ON();\", \"PYM_MenuItem%02i\"); it names itself in a message (\"PimpYourMansionHUD::ActivateElement\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals1:0x00849090": {
+      "name": "PimpYourMansionHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's PimpYourMansionHUD::DeactivateElement (0x001B53A0): it uses the same text as Xbox 0x001B53A0 (\"DEC_OFF();\", \"SetCharacterContextsEnabled( t\"); its place in a virtual table lines up with PimpYourMansionHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals1:0x00849F20": {
+      "name": "EmpireHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's EmpireHUD::ActivateElement (0x001B6320): it uses the same text as Xbox 0x001B6320 (\"E_Icon%i\", \"E_MenuBack%i\"); its place in a virtual table lines up with EmpireHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals1:0x0084A1F0": {
+      "name": "EmpireHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's EmpireHUD::DeactivateElement (0x001B34F0): it uses the same text as Xbox 0x001B34F0 (\"EmpireHUD_SetActionMap(false);\", \"MaxiMap_ModalShutDown();\"); its place in a virtual table lines up with EmpireHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals2:0x00845500": {
+      "name": "GenericWeaponHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's GenericWeaponHUD::ActivateElement (0x001B7D80): it uses the same text as Xbox 0x001B7D80 (\"Front-end Modal\", \"Panel%i_ScrollBack\"); its place in a virtual table lines up with GenericWeaponHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals2:0x008458E0": {
+      "name": "GenericWeaponHUD::DeactivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's GenericWeaponHUD::DeactivateElement (0x001BAA00): it uses the same text as Xbox 0x001BAA00 (\"duck_phonecall\", \"no_sale_00\"); its place in a virtual table lines up with GenericWeaponHUD's on Xbox. The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals2:0x00847500": {
+      "name": "StreetWeaponHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's StreetWeaponHUD::ActivateElement (0x001B8840): it uses the same text as Xbox 0x001B8840 (\"WM_GetPlayerMaxWeight();\", \"[WM_TITLESTREETVENDOR]\"). The name is the Xbox function's, from reports/names.json."
+    },
+    "ps2modals2:0x00847F00": {
+      "name": "LockerWeaponHUD::ActivateElement",
+      "by": "the portal's PS2 to Xbox pairing",
+      "why": "The same function as the Xbox game's LockerWeaponHUD::ActivateElement (0x001B8D20): it uses the same text as Xbox 0x001B8D20 (\"WM_GetPlayerMaxWeight();\", \"[WM_TITLELOCKERVENDOR]\"). The name is the Xbox function's, from reports/names.json."
     }
   },
   "members": {

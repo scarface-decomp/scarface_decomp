@@ -43,6 +43,10 @@ the address-order files in [`reconstructed_src/`](../reconstructed_src).)
   classes), the name is carried to that slot in every class the game's class information says derives
   from their shared base. `python portal/scripts/names_from_messages.py` finds them (101 names so far).
 
+* **A named Xbox function's PS2 twin.** Where the portal pairs a PS2 function with an Xbox one and the
+  Xbox one has a name here, the PS2 function takes it (`python portal/scripts/names_to_ps2.py`, 49 so
+  far), unless two PS2 functions claim the same twin.
+
 Everything else keeps an address name: `sub_00011010` (Xbox, PC, prototype) or `func_00390320` (PS2).
 
 ## Ghidra
