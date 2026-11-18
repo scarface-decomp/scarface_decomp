@@ -104,11 +104,12 @@ STATE_PROP_DATA, PROP_STATE, PROP_VISIBILITY, PROP_PROPERTY = 0x0802000D, 0x0802
 MISSING_GLASS = [0.10, 0.13, 0.15, 0.45]
 MISSING_SOLID = [0.12, 0.12, 0.12, 1.0]
 LOOK_ENV = "SCARFACE_TEXTURE_LOOK"       # "xbox": PC textures get the Xbox's darker mid-tones (media.xbox_look)
-EXPORT_VERSION = 11                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
+EXPORT_VERSION = 12                    # 3: props kept with another area. 4: one stage of each place; insides in the city.
                                        # 5: map areas carry their lights. 6: the city has its sky; one weather's daylight.
                                        # 7: light-adding and darkening surfaces; the sea; shadow decals and the hull marked.
                                        # 8: a shader without LIT is unlit. 9: darkening subtracts; placed props in their
                                        # starting state; world geometry's draw distances, far-away stand-ins hidden.
+                                       # 12: a prop's animation plays as its starting state says (speed, part, looping).
                                        # 10: props carry their properties. 11: shadow decals at most 65 % dark; occluders
 LIGHT, LIGHT_GROUP, LIGHT_GROUP_RECORD, DRAW_ORDER, SKY = 0x13000, 0x2380, 0x8800007, 0x122000, 0x8800002
 DAYLIGHT_KINDS = (0, 1)                # light group record kinds: the daylight and the same for rain (LITE animations)

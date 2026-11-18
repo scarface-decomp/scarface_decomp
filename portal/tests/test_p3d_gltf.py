@@ -2525,7 +2525,9 @@ def test_a_city_from_before_the_occluders_is_made_again(monkeypatch, tmp_path):
     import blender_export as BX
     monkeypatch.delenv(G.LOOK_ENV, raising=False)
     (tmp_path / "made_by.txt").write_text("10", encoding="utf-8")
-    assert G.EXPORT_VERSION == 11 and not BX.city_current(tmp_path)
+    assert G.EXPORT_VERSION == 12 and not BX.city_current(tmp_path)
+    (tmp_path / "made_by.txt").write_text("11", encoding="utf-8")           # and from before props played as their state says
+    assert not BX.city_current(tmp_path)
 
 
 def test_a_strips_joining_triangles_are_left_out():
@@ -2579,3 +2581,97 @@ def test_the_boxes_round_a_files_meshes(tmp_path):
     assert BX._boxes(f) == [(900.0, pytest.approx(3.7), -745.0, 925.0, 9.0, -720.0), (0.0, 0.0, 0.0, 1.0, 1.0, 1.0)]
     assert BX._boxes(tmp_path / "missing.p3d") == []
 
+
+
+# --------------------------------------------------------------------------- whole places, and props that loop
+
+def test_a_place_in_numbered_pieces_is_also_listed_whole(tmp_path):
+    import blender_export as BX
+    z = "cement.rcf/packages/z04/"
+    files = {z + "club_01_shell.p3d": area("w_one"), z + "club_01_detail.p3d": area("w_one_d"),
+             z + "club_02_shell.p3d": area("w_two"), z + "club_03_detail.p3d": area("w_three"),
+             z + "pier_01_shell.p3d": area("w_pier"), "cement.rcf/art/box.p3d": p3d(mesh("box"))}
+    out, index = copied_game(tmp_path, files)
+    found = BX.areas(out, index, "pc")
+    assert [(a["key"], len(a["files"]), a.get("parts"), a.get("part_of")) for a in found] == [
+        ("z04/club", 4, 3, None), ("z04/club_01", 2, None, "club"), ("z04/club_02", 1, None, "club"),
+        ("z04/club_03", 1, None, "club"), ("z04/pier_01", 1, None, None)]          # one piece alone is not a set
+    whole = found[0]
+    assert whole["city"] is False and [a["key"] for a in BX.city_areas(out, index, "pc")] == [
+        "z04/club_01", "z04/club_02", "z04/club_03", "z04/pier_01"]                # the city takes the pieces, once
+    _glb, report = BX.area_glb(out, index, "pc", "z04/club")
+    assert sorted(report.models) == ["w_one", "w_one_d", "w_three", "w_two"]
+
+
+def playing_prop(name, anim, loops, first, last, speed):
+    """A State Prop Data chunk whose starting state plays anim (a Prop State Animation, 0x08020003)."""
+    play = chunk(0x08020003, text(anim) + struct.pack("<3I3f", int(loops), 0, 0, first, last, speed))
+    idle = chunk(0x0802000E, text("idle") + struct.pack("<6If3I", 0, 0, 0, 1, 0, 0, 0.0, 0, 0, 0), play)
+    return chunk(0x0802000D, struct.pack("<I", 4) + text(name) + text(name) + struct.pack("<II", 1, 1),
+                 prop_property("name", name) + idle)
+
+
+def test_a_prop_plays_its_animation_as_its_starting_state_says():
+    # SPEC-005 section 2.1: a disco ball's whole turn is a few keys, played slowly, for ever.
+    rig = skeleton("rig", [("Root", 0, (0, 0, 0)), ("Hip", 0, (0, 1.0, 0.5))])
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    skin = skin_chunk(tri, [0, 1, 2], [(0.75, 0.25, 0.0)] * 3, [0x01000000] * 3, [1, 0])
+    half = math.sqrt(0.5)
+    turn = animation("Spin", [("hip", [(0, (0, 0, 0, 1)), (2, (0, half, 0, half)), (4, (0, 1, 0, 0)), (6, (0, half, 0, -half))])])
+    data = p3d(rig, skin, turn, playing_prop("ball", "Spin", True, 0.0, 4.0, 0.1))
+    tree = G.p3d.read_tree(data)
+    prop = next(c for c in tree if c.id == G.STATE_PROP_DATA)
+    assert G.prop_play(data, prop) == {"spin": (True, 0.0, 4.0, pytest.approx(0.1))}
+    doc, binc = read_glb(export(data)[0])
+    anim = doc["animations"][0]
+    assert anim["extras"] == {"loops": True}
+    times = [t[0] for t in values(doc, binc, anim["samplers"][0]["input"])]
+    assert len(times) == 17 and times[0] == 0.0                            # frames 0 to 4 only, eight steps a key
+    assert times[-1] == pytest.approx(4 / 30.0 / 0.1) and times[1] == pytest.approx(times[-1] / 16)
+    turns = values(doc, binc, anim["samplers"][0]["output"])
+    assert all(sum(c * c for c in q) == pytest.approx(1.0) for q in turns)  # every step a rotation
+    # with no prop saying how, the animation is as stored (and the file's own flag says whether it loops)
+    plain, pbin = read_glb(export(p3d(rig, skin, turn))[0])
+    assert len(values(plain, pbin, plain["animations"][0]["samplers"][0]["input"])) == 4
+    stop = playing_prop("ball", "Spin", False, 0.0, 0.0, 1.0)              # frames 0 to 0: plays nothing
+    assert G.prop_play(p3d(stop), G.p3d.read_tree(p3d(stop))[0]) == {}
+
+
+class FakeCurve:
+    def __init__(self):
+        self.modifiers = FakeModifiers()
+
+
+class FakeModifiers(list):
+    def new(self, type):
+        self.append(types_ns(type=type))
+        return self[-1]
+
+
+def types_ns(**kw):
+    import types
+    return types.SimpleNamespace(**kw)
+
+
+def test_the_blender_script_loops_what_the_game_loops(tmp_path, monkeypatch):
+    import json
+    doc = {"asset": {"version": "2.0"}, "animations": [{"name": "PTRN_ball", "extras": {"loops": True}},
+                                                        {"name": "PTRN_door"}]}
+    text = json.dumps(doc).encode()
+    text += b" " * (-len(text) % 4)
+    glb = b"glTF" + struct.pack("<II", 2, 20 + len(text)) + struct.pack("<I", len(text)) + b"JSON" + text
+    (tmp_path / "club.glb").write_bytes(glb)
+    (tmp_path / "not.glb").write_bytes(b"nothing")
+    ns = blender_script(monkeypatch, [tmp_path / "club.glb"])
+    assert ns["loops_of"](str(tmp_path / "club.glb")) == ["PTRN_ball"] and ns["loops_of"](str(tmp_path / "not.glb")) == []
+    old = types_ns(name="PTRN_ball_discoball", frame_range=(0.0, 400.0), fcurves=[FakeCurve(), FakeCurve()])
+    bag = types_ns(fcurves=[FakeCurve()])                                   # newer Blenders: layers, strips, bags
+    new = types_ns(name="PTRN_ball", frame_range=(0.0, 120.0), layers=[types_ns(strips=[types_ns(channelbags=[bag])])])
+    door = types_ns(name="PTRN_door_doorA", frame_range=(0.0, 10.0), fcurves=[FakeCurve()])
+    other = types_ns(name="PTRN_ballroom", frame_range=(0.0, 900.0), fcurves=[FakeCurve()])      # another animation
+    ns["bpy"].data.actions = [old, new, door, other]
+    assert ns["play_round"](["PTRN_ball"]) == 400
+    assert [m.type for m in old.fcurves[0].modifiers] == ["CYCLES"] and [m.type for m in bag.fcurves[0].modifiers] == ["CYCLES"]
+    assert door.fcurves[0].modifiers == [] and other.fcurves[0].modifiers == []
+    ns["play_round"](["PTRN_ball"])
+    assert len(old.fcurves[0].modifiers) == 1                               # not added twice
