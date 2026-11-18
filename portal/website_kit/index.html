@@ -4322,7 +4322,9 @@
       const g = el('optgroup');
       g.label = groups[place];
       list.forEach((a) => {
-        const o = el('option', a.name + (a.files > 1 ? ' (' + a.files + ' files)' : ''));
+        // A place in numbered pieces is listed whole first, its pieces under it.
+        const o = el('option', a.parts ? a.name + ' (whole: ' + a.parts + ' pieces together)'
+          : a.part_of ? '\u00a0\u00a0\u00a0\u00a0' + a.name + ' (one piece of ' + a.part_of + ')' : a.name);
         o.value = a.key;
         g.appendChild(o);
       });
