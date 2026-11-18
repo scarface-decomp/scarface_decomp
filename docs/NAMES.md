@@ -37,6 +37,12 @@ the address-order files in [`reconstructed_src/`](../reconstructed_src).)
 * **People.** Names worked out by hand are in [`reports/names.json`](../reports/names.json), with the
   two kinds above.
 
+* **The program's own messages.** The Xbox program keeps log messages such as
+  `SaveGameController::SaveInit`, each used by exactly one function, which names that function. Where two
+  or more classes' messages agree on a virtual function's slot (`ActivateElement` in slot 44 of five HUD
+  classes), the name is carried to that slot in every class the game's class information says derives
+  from their shared base. `python portal/scripts/names_from_messages.py` finds them (101 names so far).
+
 Everything else keeps an address name: `sub_00011010` (Xbox, PC, prototype) or `func_00390320` (PS2).
 
 ## Ghidra
