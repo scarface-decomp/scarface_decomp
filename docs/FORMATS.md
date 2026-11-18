@@ -1200,7 +1200,19 @@ Checked on the PC: 1,019 of 1,020 sounds tried.
 
 What each line of speech says, in a Pure3D file named like its sound (`art/sound/rsd/<x>/<name>.rsd`).
 One `0x0100500A` chunk per language: u32 length and the language's name (`English`), ended and padded
-to 4 bytes, two s32 (-1), u32 the length of the text in UTF-16 units, then the text (UTF-16). The portal
+to 4 bytes; two s32 times in milliseconds (when the line's first caption appears, and how long the whole
+line stays up; -1 in most files, which leaves both to the script that plays the line; 45 files, phone
+calls mostly, carry their own); u32 the length of the text in UTF-16 units; then the text (UTF-16). About
+40 files store the name's length as a u16 instead, with the name unpadded (`media.subtitle_entries` reads
+both). In the text, `#` ends a caption and moves to the next speaker and `@` ends one for the same
+speaker; a longer run is cut to captions of at most 80 characters (SPEC-009 §4.4; `cutscene.split_line`).
+
+**A cutscene's lines.** A cutscene's script (`art/nis/fsc/<scene>.fsc`) names each spoken line in a call
+on a track, `SubtitleManager_LocalisedDialogueEvent( ^nis\\<name>^, begin, total )`, at a frame of the
+scene (30 a second). The line's text is the subtitle file named from `localised\english\nis\<name>`
+(`media.subtitle_file`); about one line in seven has no file. `cutscene.captions` gives each caption its
+start and end, and opening a cutscene in Blender from the portal writes them beside it as `<scene>.srt`.
+The portal
 shows them under the sound they go with.
 
 A line of speech's subtitles have its sound's 16 digits (`media.subtitle_file`). Cutscene sound tracks

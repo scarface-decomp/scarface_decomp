@@ -494,3 +494,18 @@ For the implementer. Choose your own names; keep each step small.
   left as *(check)*. The export matches by the entry's name, through the Frame Controller of that name to its
   animation. For the disco ball's two `TEX_sparkle_m` entries that gives one answer for both. Is there a file
   where order and name disagree?
+
+*From the implementer, 18 November 2026, on §4 (§8 step 6, and the subtitle part of step 1):*
+
+* **Built:** `media.subtitle_entries` (both lengths of §4.5's first layout, and the two times of §4.3);
+  `cutscene.spoken_lines`, `split_line`, `captions` and `srt`; `blender_export.cutscene_captions`; the portal
+  writes `<scene>.srt` beside a cutscene it opens in Blender.
+* **Not checked on the game's files.** The founder's copied game files were no longer on the computer when
+  this was written (the project folder had been set up again), so the new code is tested only on files made
+  up from this spec's layouts and its own example. Earlier the same day, with the files there, the example
+  path gave its subtitle file and 405 of 474 calls had one. The first run on real files should be looked at.
+* **Not built:** §4.5's 8-bit layout; the speaker number is kept with each caption but nothing is done with
+  it; a caption in a scene the export joins on after another does not have the earlier scenes' length added;
+  the portal's cutscene view does not show the captions yet.
+* **Question:** §4.4 says "when more than 80 characters remain". For a run of exactly 80 with no place to
+  cut, I keep it whole. Does the game count the 80 before or after the `#` and `@` marks are taken out?
