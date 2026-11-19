@@ -213,8 +213,9 @@ def tier(size: int) -> dict:
 
 
 def seed_data(root: Path) -> dict:
-    """The tracked inputs that, with the game files, decide the queue: reports/known_functions.json and
-    reports/extra_function_starts.json. Pass as build_queue(..., **seed_data(root))."""
+    """The tracked inputs that, with the game files, decide the queue: reports/known_functions.json,
+    reports/extra_function_starts.json and reports/library_functions.json. Pass as
+    build_queue(..., **seed_data(root))."""
     def load(name: str) -> dict:
         p = root / "reports" / name
         try:
@@ -222,18 +223,22 @@ def seed_data(root: Path) -> dict:
         except ValueError:
             return {}
     return {"known_functions": load("known_functions.json").get("functions", []),
-            "extra_starts": load("extra_function_starts.json").get("starts", {})}
+            "extra_starts": load("extra_function_starts.json").get("starts", {}),
+            "library": load("library_functions.json").get("functions", {})}
 
 
 def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = None,
                 verified_keys: Optional[Set[str]] = None, progress=None,
                 known_functions: Optional[List[dict]] = None,
-                extra_starts: Optional[Dict[str, List[str]]] = None) -> List[dict]:
+                extra_starts: Optional[Dict[str, List[str]]] = None,
+                library: Optional[Dict[str, List[str]]] = None) -> List[dict]:
     """known_functions: [{bin, va, size, symbol, match}] whose start and size were proven earlier by an
     exact byte match (reports/known_functions.json). They are always queued, with that size, even where
     the scanner alone would not find them (tiny stubs, starts inside padding).
     extra_starts: {bin: ["0x...", ...]} starts that calls and vtables do not reveal
-    (reports/extra_function_starts.json), so a fresh copy builds the same queue as an old one."""
+    (reports/extra_function_starts.json), so a fresh copy builds the same queue as an old one.
+    library: {bin: ["0x...", ...]} Microsoft library functions linked in among the game's own code
+    (reports/library_functions.json): not the game's, so never queued, unless one is already matched."""
     verified_keys = verified_keys or set()
     old_by_key = {}
     for t in old_queue or []:
@@ -255,6 +260,7 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
         kf = {int(f["va"], 16): f for f in (known_functions or []) if f.get("bin") == b}
         starts: Set[int] = set(vt) | set(kf) | {t["fva_int"] for k, t in old_by_key.items() if k.startswith(b + ":")}
         starts |= {int(v, 16) for v in (extra_starts or {}).get(b, [])}
+        not_ours = {int(v, 16) for v in (library or {}).get(b, [])}
         if b != "pc":
             starts |= {c for c in calls}
         else:
@@ -266,6 +272,8 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
             sec = img.section_of(va)
             if not sec or not sec.is_code or sec.library:
                 continue                        # data, or Xbox XDK / Bink library code
+            if va in not_ours and va not in kf and f"{b}:0x{va:08X}" not in (verified_keys or ()):
+                continue                        # the C runtime or XAPILIB, linked into the game's own section
             e = function_extent(img, va, known)
             if va in kf:
                 e = Extent(va, int(kf[va]["size"]), True, "size proven by an earlier exact match",

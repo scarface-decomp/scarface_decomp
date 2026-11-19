@@ -27,6 +27,17 @@ November 2026 the project takes virtual functions' names from that map where the
 * **What it gives:** names only, each recorded in `reports/names.json` with the class and slot it came
   from. No code, layouts or behaviour are taken from it.
 
+Since 18 November 2026 a second build is read, for one narrow thing. The 5 February 2006 Xbox prototype of
+*The Godfather* (another studio's game, another engine) was built with the same Xbox SDK as Scarface and
+carries its linker map. Microsoft's library functions, which the linker copies unchanged into every game,
+take their names from that map where their bytes are found exactly once in Scarface's program
+([NAMES.md](NAMES.md), `portal/scripts/names_from_xdk_map.py`).
+
+* **What is read:** that map and that build's program, from the founder's own copy. Neither file is in this
+  repository.
+* **What is taken:** the names of Microsoft's library functions only, and which of Scarface's functions are
+  library code. Nothing of *The Godfather*'s own code, names or data.
+
 ## Roles
 
 * **Examiner.** Reads the outside research and writes a **spec** in `docs/cleanroom/`: what the game's

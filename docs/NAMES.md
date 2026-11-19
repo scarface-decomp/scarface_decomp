@@ -57,6 +57,19 @@ the address-order files in [`reconstructed_src/`](../reconstructed_src).)
   may consult it to settle a name.** A name from the map is evidence, not proof: each one records the class
   and slot it came from.
 
+* **Microsoft's library code, from another Xbox game's linker map.** The Xbox programs have Microsoft's
+  own code linked in: the C runtime and the Xbox libraries (XAPILIB, D3D8, D3DX8, DSOUND, XGRAPHICS). The
+  5 February 2006 Xbox prototype of *The Godfather* was built with the same Xbox SDK (5849) and has its
+  linker map beside its program, so the same library function has the same bytes there, with its name.
+  A function found exactly once in Scarface's program, comparing everything but the addresses inside it,
+  takes that name (`python portal/scripts/names_from_xdk_map.py`: 1,225 names on the Xbox and 1,262 on
+  the prototype; the script's own text has the exact rules). Only Microsoft's library functions are
+  taken: nothing of *The Godfather* itself, which is another studio's game on another engine. The map and
+  program come from the founder's own copy; neither is in this repository. The ones linked in among the
+  game's own code (339 on the Xbox, 362 on the prototype) are listed in `reports/library_functions.json`
+  and are not in the queue of functions to match: they are not the game's, and were not compiled with
+  its settings.
+
 Everything else keeps an address name: `sub_00011010` (Xbox, PC, prototype) or `func_00390320` (PS2).
 
 ## Ghidra
