@@ -129,6 +129,15 @@ def check_names(problems: list) -> None:
     if not path.exists():
         return
     known = {b: set(fns) for b, fns in known_from_files(ROOT / "reconstructed_src").items()}
+    # Microsoft's library functions have names too, and the ones in the library's own sections are not
+    # among the game's functions: reports/library_functions.json lists them
+    try:
+        lib = json.loads((ROOT / "reports" / "library_functions.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        lib = {}
+    for part in ("functions", "in_library_sections"):
+        for b, addresses in (lib.get(part) or {}).items():
+            known.setdefault(b, set()).update(int(a, 16) for a in addresses)
     problems.extend(NAMES.problems(NAMES.load(path), known))
 
 
