@@ -3357,6 +3357,9 @@ class Handler(BaseHTTPRequestHandler):
                 glbs, save = [folder / BX.OPENED / f"{name}.glb"], folder / BX.OPENED / f"{name}.blend"
                 glbs[0].parent.mkdir(parents=True, exist_ok=True)
                 glbs[0].write_bytes(glb)
+                spoken = BX.cutscene_captions(out, GAME_FILES.index(), version, scene)
+                if spoken:                               # the lines spoken in it, as subtitles beside the scene
+                    glbs[0].with_suffix(".srt").write_text(BX.CUT.srt(spoken), encoding="utf-8")
             elif body.get("area"):
                 key = str(body["area"])
                 glb, _r = BX.area_glb(out, GAME_FILES.index(), version, key)

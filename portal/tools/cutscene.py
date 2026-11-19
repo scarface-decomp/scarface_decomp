@@ -151,6 +151,103 @@ def read_script(text: str) -> Script:
     return s
 
 
+# --------------------------------------------------------------------------- spoken lines (SPEC-009 section 4)
+
+FRAMES_A_SECOND = 30.0
+CAPTION_LENGTH = 80
+_CALL_TRACK = re.compile(r"\bNISScriptFunctionCallTrack\s*\{")
+_LINE_CALL = re.compile(r"SubtitleManager_LocalisedDialogueEvent\(\s*\^([^^]+)\^\s*((?:,\s*-?\d+\s*)*)\)")
+
+
+def spoken_lines(script: str) -> List[dict]:
+    """The lines a cutscene's script puts on screen, in order: [{"name", "frame", "begin", "total",
+    "priority"}]. Each is a call on a track: SubtitleManager_LocalisedDialogueEvent( ^nis\\NAME^, begin,
+    total ) at a frame of the cutscene. begin and total are milliseconds: when the first caption appears
+    after the call, and how long the whole line stays up."""
+    out = []
+    for m in _CALL_TRACK.finditer(script):
+        body = _body(script, m.end())
+        call = _LINE_CALL.search(body)
+        frame = re.search(r"\bFrameBegin\s+(-?[\d.]+)", body)
+        if not call:
+            continue
+        numbers = [int(n) for n in re.findall(r"-?\d+", call.group(2))]
+        out.append({"name": re.sub(r"\\+", r"\\", call.group(1).strip()),          # the file doubles the backslashes
+                    "frame": float(frame.group(1)) if frame else 0.0,
+                    "begin": numbers[0] if numbers else 0, "total": numbers[1] if len(numbers) > 1 else 0,
+                    "priority": numbers[2] if len(numbers) > 2 else 10})
+    return sorted(out, key=lambda line: line["frame"])
+
+
+def line_path(name: str, language: str = "english") -> str:
+    """The path a line's subtitle file is named from (media.subtitle_file gives the file)."""
+    return f"localised\\{language}\\{name}"
+
+
+def split_line(text: str) -> List[Tuple[int, str]]:
+    """A line cut into captions the way the game does: [(speaker number, caption)]. `#` ends a caption and
+    moves to the next speaker; `@` ends one with the same speaker; otherwise a caption is at most 80
+    characters, cut at the last . ! or ? within them, else the last , or ; else the last space."""
+    out: List[Tuple[int, str]] = []
+    speaker = 0
+    for part in re.split(r"(#|@)", text):
+        if part == "#":
+            speaker += 1
+            continue
+        if part == "@":
+            continue
+        left = " ".join(part.split())
+        while len(left) > CAPTION_LENGTH:
+            head = left[:CAPTION_LENGTH]
+            cut = max(head.rfind(c) for c in ".!?")
+            if cut < 0:
+                cut = max(head.rfind(c) for c in ",;")
+            if cut < 0:
+                cut = head.rfind(" ")
+            cut = cut if cut >= 0 else CAPTION_LENGTH - 1
+            out.append((speaker, left[:cut + 1].strip()))
+            left = left[cut + 1:].strip()
+        if left:
+            out.append((speaker, left))
+    return out
+
+
+def captions(lines: List[dict], entry_of: Callable[[str], Optional[dict]]) -> List[dict]:
+    """The captions of a cutscene with their times: [{"start", "end" (seconds from the cutscene's start),
+    "speaker", "text", "line"}]. lines: spoken_lines' result; entry_of(name) gives the line's subtitle entry
+    (media.subtitle_entries: its text, and its own times where it has them) or None when it has no file.
+    A line's captions share its time in proportion to their lengths."""
+    out: List[dict] = []
+    for line in lines:
+        entry = entry_of(line["name"])
+        if not entry or not entry.get("text", "").strip():
+            continue
+        begin = entry.get("begin") or line["begin"]                   # the file's own times replace the script's
+        total = entry.get("total") or line["total"]
+        parts = split_line(entry["text"])
+        letters = sum(len(t) for _s, t in parts)
+        if not parts or total <= 0 or not letters:
+            continue
+        at = line["frame"] / FRAMES_A_SECOND + begin / 1000.0
+        for speaker, text in parts:
+            lasts = total / 1000.0 * len(text) / letters
+            out.append({"start": round(at, 3), "end": round(at + lasts, 3), "speaker": speaker, "text": text,
+                        "line": line["name"]})
+            at += lasts
+    return out
+
+
+def srt(caps: List[dict]) -> str:
+    """Captions as a SubRip file (.srt), which Blender's sequencer and video players read."""
+    def stamp(t: float) -> str:
+        ms = int(round(max(t, 0.0) * 1000))
+        return f"{ms // 3600000:02d}:{ms // 60000 % 60:02d}:{ms // 1000 % 60:02d},{ms % 1000:03d}"
+    blocks = []
+    for n, c in enumerate(sorted(caps, key=lambda c: c["start"]), 1):
+        blocks.append(f"{n}\n{stamp(c['start'])} --> {stamp(c['end'])}\n{c['text']}\n")
+    return "\n".join(blocks)
+
+
 def scene_name(game_path: str) -> Optional[str]:
     """The cutscene a copied file belongs to (art/nis/<name>.p3d, art/nis/<name>/stream0.p3d,
     art/nis/fsc/<name>.fsc), or None."""

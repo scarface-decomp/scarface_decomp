@@ -483,6 +483,32 @@ def cutscenes(out: Path, index: Optional[dict], version: str) -> List[dict]:
     return out_
 
 
+def cutscene_captions(out: Path, index: Optional[dict], version: str, scene: str) -> List[dict]:
+    """The lines spoken in a cutscene as captions with their times (cutscene.captions; clean-room spec
+    SPEC-009 section 4), from the copied files: the scene's script names each line, and the line's text is
+    in the subtitle file named from it. [] when the script isn't there or names no lines. A line with no
+    subtitle file (about one in seven) is left out."""
+    import media as MEDIA
+    rows = _scene_rows(index, version)
+
+    def named(ending: str) -> Optional[Path]:
+        ending = ending.lower()
+        hit = next((path for low, path in rows.items() if low.endswith(ending)), None)
+        return GA.file_on_disk(out, index, version, hit) if hit else None
+    fsc = named(f"/art/nis/fsc/{scene}.fsc")
+    if fsc is None:
+        return []
+
+    def entry_of(name: str) -> Optional[dict]:
+        p = named("/" + MEDIA.subtitle_file(CUT.line_path(name)))
+        entries = MEDIA.subtitle_entries(p.read_bytes()) if p is not None else []
+        return next((e for e in entries if e["language"].lower().startswith("english")), entries[0] if entries else None)
+    try:
+        return CUT.captions(CUT.spoken_lines(fsc.read_text(encoding="latin-1")), entry_of)
+    except OSError:
+        return []
+
+
 def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, join: bool = True) -> Tuple[bytes, "P3G.Report"]:
     """A cutscene (art/nis/<scene>) with its people, vehicles and camera, from the copied files: its
     script says who is in it, its stream files hold what they do (see cutscene.py). With join, the
