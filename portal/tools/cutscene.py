@@ -417,6 +417,8 @@ def _hide_map_props_at(b: G.Builder, copy) -> int:
             if t and any(math.hypot(t[0] - p[0], t[2] - p[2]) < STANDS_IN and abs(t[1] - p[1]) < STANDS_IN_HEIGHT
                          for p in spots):
                 n["children"].remove(kid)
+                # out of the scene, and marked hidden too: an importer that brings in every node keeps it off
+                doc["nodes"][kid].setdefault("extras", {})["hidden"] = True
                 gone += 1
     return gone
 
