@@ -1230,10 +1230,10 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             for path, (times, values) in _camera_keys(pieces).items():
                 tracks.add(cam, path, later(times), values)
             went_in.append("camera")
-    for what, model in script.renderables.items():           # the scene's own props: the cabinet's doors
+    for what, drawn in script.renderables.items():           # the scene's own props: the cabinet's doors
         own = source("scene", name)
         ref = next((G.Ref(own, c) for c in (own.chunks if own else []) if c.id == G.COMPOSITE
-                    and G.chunk_name(own.data, c).lower() == model.lower()), None) or lib.find("composite", model)
+                    and G.chunk_name(own.data, c).lower() == drawn.lower()), None) or lib.find("composite", drawn)
         if ref is None:
             left_out.append(what)
             continue
