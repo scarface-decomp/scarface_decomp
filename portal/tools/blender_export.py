@@ -718,8 +718,14 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
                 loaded = SG.loaded_at(triggers, spot[0], spot[1])
                 if not loaded.inside:
                     continue
-                for package, slot in loaded.packages:
-                    if slot in ("Shell", "Detail") and package.lower() not in seen:
+                wanted = [package for package, slot in loaded.packages if slot in ("Shell", "Detail")]
+                # A building's detail can come in two files, and the stream graph loads the second (its "b":
+                # the luxury bank's upstairs desks and chairs) from only some of the building's triggers;
+                # a cutscene there has both: Jerry's office is furnished from luxurybank_02_detailB.
+                wanted += [package + "b" for package, slot in loaded.packages
+                           if slot == "Detail" and package.lower().endswith("_detail")]
+                for package in wanted:
+                    if package.lower() not in seen:
                         seen.add(package.lower())
                         p = named(f"/packages/z04/{package}.p3d")
                         if p is not None:
