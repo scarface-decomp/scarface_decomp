@@ -2798,7 +2798,13 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/api/game-files/areas":
             out = GA.out_dir(GAME_FILES.bin_dir)
             found = BX.areas(out, GAME_FILES.index(), q1("version"))
-            return self._json({"ok": True, "areas": [dict(a, files=len(a["files"])) for a in found],
+            listed = {q1("version"): found}
+
+            def shown(a: dict) -> dict:
+                # this version's own files for it weren't copied: the version whose copy is shown instead
+                v = BX.area_source(out, GAME_FILES.index(), q1("version"), a["key"], listed)
+                return dict(a, files=len(a["files"]), **({"shown_from": GA.LABELS[v]} if v != q1("version") else {}))
+            return self._json({"ok": True, "areas": [shown(a) for a in found],
                                "city_by_version": BX.city_counts(out, GAME_FILES.index()),
                                "city": dict(BLENDER.status),
                                "city_files": len(list(BLENDER.folder(q1("version")).glob("*.glb")))

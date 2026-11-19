@@ -753,16 +753,65 @@ def inspect(data: bytes) -> dict:
             "lines": [{"language": lang, "text": text} for lang, text in lines]}
 
 
+_ON_DISK: Dict[Tuple[int, str], tuple] = {}
+
+
+def _copied(out: Path, index: Optional[dict], version: str, path: str) -> bool:
+    """Whether this version's own copy of a file is on disk (GA.file_on_disk, without reading the whole
+    list for every file)."""
+    listed = _rows(index, version)
+    kept = _ON_DISK.get((id(index), version))
+    if kept is None or kept[0] is not listed:                 # another list since (copied again)
+        if len(_ON_DISK) > 8:
+            _ON_DISK.clear()
+        kept = _ON_DISK[(id(index), version)] = (listed, {r[0]: r for r in listed})
+    row = kept[1].get(path)
+    if row is None or not row[4]:
+        return False
+    p = GA.safe_output_path(out, row[4])
+    try:
+        return p is not None and p.is_file() and p.stat().st_size == row[1]
+    except OSError:
+        return False
+
+
+def area_source(out: Path, index: Optional[dict], version: str, key: str,
+                listed: Optional[Dict[str, List[dict]]] = None) -> str:
+    """The version whose copy of a map area to use. The one asked for, when all its files for the area
+    were copied. A copy that keeps the PC's files and only what the others have besides (the PC-first
+    layout) leaves the other versions' own shells and details out: then the first version, the PC before
+    the rest, that has the same area with every file on disk. listed: areas() by version, to not make
+    them again for every area."""
+    def whole(v: str) -> bool:
+        every = (listed or {}).get(v)
+        if every is None:
+            every = areas(out, index, v)
+            if listed is not None:
+                listed[v] = every
+        area = next((a for a in every if a["key"].lower() == key.lower()), None)
+        return bool(area) and all(_copied(out, index, v, f) for f in area["files"])
+    if whole(version):
+        return version
+    for v in ["pc"] + [v for v in GA.LABELS if v != "pc"]:
+        if v != version and v in ((index or {}).get("versions") or {}) and whole(v):
+            return v
+    return version
+
+
 def area_glb(out: Path, index: Optional[dict], version: str, key: str,
              parsed: Optional[dict] = None, library: Optional[List[Tuple[str, bytes]]] = None,
-             insides: bool = True, opts: Optional[dict] = None, ocean: bool = True) -> Tuple[bytes, "P3G.Report"]:
+             insides: bool = True, opts: Optional[dict] = None, ocean: bool = True,
+             other: bool = True) -> Tuple[bytes, "P3G.Report"]:
     """One map area (all its files) as a .glb, with what it needs from the shared files. A city area
     opened by itself comes with its buildings' insides (the club's furniture in the club); the whole
     city leaves them out (insides=False), where each inside is a file of its own. opts: the hour, weather
     and fog for P3G.export (city_options). ocean: the sea round it (the whole city has one sea of its own
-    instead, city_ocean)."""
+    instead, city_ocean). other: when this version's own files for the area weren't copied, the area
+    from the version that has them (area_source)."""
     opts = dict(opts or {}, ocean=ocean)
-    area = next((a for a in areas(out, index, version) if a["key"] == key), None)
+    if other:
+        version = area_source(out, index, version, key)
+    area = next((a for a in areas(out, index, version) if a["key"].lower() == key.lower()), None)
     if area is None:
         raise P3G.ExportError("that map area isn't in your copied game files")
     files = []
@@ -770,6 +819,9 @@ def area_glb(out: Path, index: Optional[dict], version: str, key: str,
         p = GA.file_on_disk(out, index, version, path)
         if p is not None:
             files.append((p.name, p.read_bytes()))
+    if len(files) < len(area["files"]) and not any(len(d) > 4096 for _n, d in files):
+        raise P3G.ExportError("this place's own files weren't copied for any version (copy your game files again "
+                              "with the Every version complete layout to have each version's)")
     if library is None:
         library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
     more = _more_library(out, index, version)
@@ -1065,7 +1117,7 @@ class CityJob:
                 self.status["area"] = area["name"]
                 try:
                     glb, _report = area_glb(out, index, version, area["key"], parsed, library, insides=False,
-                                            opts=opts, ocean=False)
+                                            opts=opts, ocean=False, other=False)
                 except P3G.ExportError:
                     glb = b""
                 if glb:
