@@ -798,7 +798,12 @@ def test_open_in_blender(monkeypatch, tmp_path):
     for n in ("a_01", "b_02"):
         (tmp_path / "blender" / "PC" / f"{n}.glb").write_bytes(b"glTF")
     code, obj = post(version="pc", city=True)
-    assert code == 200 and obj["files"] == 2 and launched[-1][2].name == "PC city.blend"
+    assert code == 200 and obj["files"] == 2 and launched[-1][2].name == "PC city.blend"   # not real .glb files
+    for n in ("a_01", "b_02"):                                                         # real ones: joined into one
+        (tmp_path / "blender" / "PC" / f"{n}.glb").write_bytes(BX.area_glb(out, index, "pc", "z04/" + n)[0])
+    code, obj = post(version="pc", city=True)
+    assert code == 200 and obj["files"] == 1 and launched[-1][1][0].name == "PC city.glb"
+    assert obj["one_file"].replace("\\", "/").endswith("One file/PC city.glb")
     Fake.client_address = ("192.168.1.9", 5)
     assert post(version="pc", city=True)[0] == 403
     # where Blender is, when it isn't found
