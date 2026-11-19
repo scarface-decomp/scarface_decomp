@@ -194,6 +194,10 @@ def test_cutscenes_played_back_to_back_come_as_one(tmp_path):
         BX.plays_next = real
     doc, binc = read_glb(glb)
     assert report.models == ["Ann", "Bob"] and [a["name"] for a in doc["animations"]] == ["Cutscene MNIS_One"]
+    # the parts and when each runs: for the sounds, the lines and the cameras
+    assert [(p["name"], p["start"]) for p in report.parts] == [("MNIS_One", 0.0), ("MNIS_Two", pytest.approx(10 / 30, abs=1e-3))]
+    assert doc["scenes"][0]["extras"]["parts"] == report.parts and report.parts[0]["end"] == report.parts[1]["start"]
+    assert [p["name"] for p in _r.parts] == ["MNIS_One"]
     ann = next(i for i, n in enumerate(doc["nodes"]) if n["name"] == "Ann")
     bob = next(i for i, n in enumerate(doc["nodes"]) if n["name"] == "Bob")
     anim = doc["animations"][0]
@@ -424,3 +428,15 @@ def test_the_spot_someone_stands_on_for_finding_their_room():
     assert C.floor_spot(C.read_script('NISSequenceCue { CameraAnimationName "CAM"; };')) is None
     near = C.read_script('NISCharacterPosition { CharacterName "MainCharacter"; Position { x -0.1; y 0; z -1.5; }; Facing 0; };')
     assert C.floor_spot(near) is None                                          # played wherever Tony is: no room of its own
+
+
+def test_the_floor_is_looked_for_under_the_feet_not_under_the_scripts_spot():
+    """A scene's cast is often given one spot, and the animation's first pose walks each of them from it:
+    the clerk behind his desk stands metres from the spot, on a floor of his own."""
+    keys = {"Motion_Root": {"translation": ([0.0], [(0.0, 0.0, 0.0)])},
+            "Character_Root": {"translation": ([0.0, 1.0], [(1.0, 0.3, -2.0), (5.0, 0.3, 5.0)])},
+            "Hip": {"translation": ([0.0], [(9.0, 9.0, 9.0)])}}
+    assert C._first_step(keys, C.facing_rotation(0.0)) == pytest.approx((1.0, -2.0))
+    quarter = (0.0, 0.7071067811865476, 0.0, 0.7071067811865476)                # a quarter turn about the upright axis
+    assert C._first_step(keys, quarter) == pytest.approx((-2.0, -1.0))
+    assert C._first_step({}, quarter) == (0.0, 0.0)

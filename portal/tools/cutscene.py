@@ -269,6 +269,24 @@ def facing_rotation(degrees: float) -> G.Quat:
     return G.rot((0.0, math.sin(a), 0.0, math.cos(a)))
 
 
+ROOTS = ("motion_root", "balance_root", "character_root")
+SUNK = 0.08                                                  # deeper in the floor than this (metres): on purpose
+
+
+def _first_step(keys: Dict[str, Dict[str, Tuple[List[float], List[tuple]]]], facing: G.Quat) -> Tuple[float, float]:
+    """How far from their spot an animation's first pose puts someone, along the ground (x, z): the root
+    joints' first positions, turned the way the person faces."""
+    x = z = 0.0
+    for joint, paths in keys.items():
+        if joint.lower() in ROOTS and paths.get("translation") and paths["translation"][1]:
+            first = paths["translation"][1][0]
+            x += first[0]
+            z += first[2]
+    qx, qy, qz, qw = facing                                   # a turn about the upright axis
+    s, c = 2 * qw * qy, 1 - 2 * qy * qy
+    return c * x + s * z, -s * x + c * z
+
+
 def _pieces(b: G.Builder, name: str) -> List[G.Ref]:
     """An animation's pieces in order: <name>0, <name>1, ... (or <name> itself when it isn't cut up)."""
     found, n = [], 0
@@ -787,6 +805,11 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
                     times, sizes = times + [end], sizes + [GONE]
                 for node in nodes:
                     tracks.add(node, "scale", times, sizes, step=True)
+        # Each part's name, when it runs (seconds) and its camera: in the report, and in the scene's extras
+        # for the Blender script, which changes camera and starts each part's sound at its start.
+        b.report.parts = [{"name": n, "start": round(begin, 4), "end": round(end, 4), "camera": sc.camera}
+                          for (n, sc), (_nodes, begin, end) in zip(scenes, spans)]
+        b.g.doc["scenes"][0].setdefault("extras", {})["parts"] = b.report.parts
         b.report.models += found
         if tracks.channels:
             # The only animation in the file. Blender plays a file's first animation and parks the rest: with
@@ -886,8 +909,19 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             continue
         at, facing = script.stands.get(who, ((0.0, 0.0, 0.0), 0.0))
         stand = list(G.pos(at))
-        floor = ground.height(*stand) if ground is not None and who in script.stands else None
-        if floor is not None:                                # on the floor, not the few centimetres in it
+        moves = _joint_keys(_pieces(b, anim)) if anim else None
+        # The floor is looked for under their feet, which the animation may put metres from the spot the
+        # script names (a whole scene's cast is often given one spot, and a clerk behind his desk is given
+        # the same one a little lower: the floor there is lower, and his hands rest on the desk).
+        feet = list(stand)
+        if moves is not None:
+            dx, dz = _first_step(moves[0], facing_rotation(facing))
+            feet[0] += dx
+            feet[2] += dz
+        floor = ground.height(*feet) if ground is not None and who in script.stands else None
+        # On the floor, not the few centimetres in it. Someone the script sinks well into it is meant to be
+        # there: the hotel clerk is 16 cm down so that his hands reach his desk.
+        if floor is not None and floor - stand[1] <= SUNK:
             stand[1] = floor
         spot = b.g.node(label, root, translation=stand, rotation=list(facing_rotation(facing)))
         before = len(b.g.doc["nodes"])
@@ -932,7 +966,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             role["face"] = "no face animation in the script" + ("" if shapes else ", and the model has no face shapes")
         if anim:
             role["body"] = "moves" if _pieces(b, anim) else "animation not found"
-            keys, ran = _joint_keys(_pieces(b, anim))
+            keys, ran = moves
             length = max(length, ran)
             if gripped and gripped[1] is not None:           # in both hands, when the other one is there
                 both = other_hand(b.g.doc, copy, keys, ran, gripped[1])
