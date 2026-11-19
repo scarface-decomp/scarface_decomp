@@ -1857,11 +1857,15 @@ def finish(problems):
     cams = [o for o in scene.objects if o.type == "CAMERA"]
     if cams and scene.camera is None:
         scene.camera = cams[0]
+    # The view's nearest and farthest: its depth precision goes by their ratio. 0.05 m to 50 km (a million
+    # to one) had the city's roads, kerbs and walls flicker through each other as the view moved. A cutscene
+    # is looked at close up; a map from further out.
+    near, far = (0.05, 5000.0) if cams else (0.5, 30000.0)
     for screen in bpy.data.screens:
         for area in screen.areas:
             for space in area.spaces:
                 if space.type == "VIEW_3D":
-                    space.clip_start, space.clip_end = 0.05, 50000.0
+                    space.clip_start, space.clip_end = near, far
     try:
         bpy.ops.view3d.view_all()
     except Exception:
