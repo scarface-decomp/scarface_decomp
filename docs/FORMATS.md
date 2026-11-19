@@ -1216,8 +1216,16 @@ The portal
 shows them under the sound they go with.
 
 A line of speech's subtitles have its sound's 16 digits (`media.subtitle_file`). Cutscene sound tracks
-have no subtitle file of their own (5 of 5 checked on the PC); where the cutscenes' lines are kept is
-not known yet.
+have no subtitle file of their own (5 of 5 checked on the PC): a cutscene's lines are the ones its script
+names, above.
+
+**A cutscene's sound.** Each cutscene has a sound script, `art/sound/scripts/localised/english/nis/<scene>.p3d`,
+which names the scene's sound track by the path it was made from
+(`localised\english\nis\ps2_finals\<scene>_00`, `media.stream_names`); `media.sound_file` gives the
+`.rsd` it is filed under. It is one sound for the whole scene, speech and effects together, starting with
+the scene: on the PC 183 of 187 cutscenes have one, and its length is the scene's (within about a second;
+10 of 10 checked). Opening a cutscene in Blender from the portal writes it beside the scene as
+`<scene>.sound.ogg` (`.wav` from the consoles' files) and puts it in the sequencer from frame 0.
 
 ## Text bibles
 

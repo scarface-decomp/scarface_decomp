@@ -380,6 +380,15 @@ def _bible_lines(body: bytes) -> List[Tuple[int, str]]:
 SUBTITLE = 0x0100500A
 
 
+def stream_names(data: bytes) -> List[str]:
+    """The sounds a sound script plays (art/sound/scripts/.../<name>.p3d: a cutscene's has the scene's
+    whole sound track, `localised\\english\\nis\\ps2_finals\\<scene>_00`), as the paths they were made
+    from, in the file's order. sound_file gives each one's file. Read as the file's texts with a backslash
+    in them: nothing else in a sound script has one."""
+    import re
+    return [m.decode("latin-1") for m in re.findall(rb"[ -~]{6,}", data) if b"\\" in m]
+
+
 def subtitles(data: bytes) -> List[Tuple[str, str]]:
     """The lines a subtitle file (art/subtitles/<x>/<name>.p3d, named like the sound it goes with) holds:
     [(language, text)], the text with its spacing tidied. subtitle_entries gives the times too."""
