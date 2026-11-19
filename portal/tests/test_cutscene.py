@@ -215,8 +215,9 @@ def test_cutscenes_played_back_to_back_come_as_one(tmp_path):
 
 # ---- faces: the shapes a head can be pulled into, and the sliders that work them --------------------------------
 
-def face_file():
-    """A skin with two shapes (the lip down, the lip up) on its one primitive group, and the slider for them."""
+def face_file(*more):
+    """A skin with two shapes (the lip down, the lip up) on its one primitive group, and the slider for them.
+    more: chunks to put after them."""
     from test_p3d_gltf import skeleton
     tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
     flat = [v for p in tri for v in p]
@@ -234,7 +235,7 @@ def face_file():
                  chunk(0x10020, head, kids) + sets)
     slider = chunk(0x21000, struct.pack("<I", 0) + text("A___Lip_Down_Up") + struct.pack("<I2f2I", 2, -1.0, 1.0, 0, 1))
     group = chunk(0x21001, struct.pack("<I", 0) + text("Face") + text("faceShape") + struct.pack("<I", 1), slider)
-    return p3d(skeleton("rig", [("Root", 0, (0, 0, 0)), ("Hip", 0, (0, 1.0, 0.5))]), skin, group)
+    return p3d(skeleton("rig", [("Root", 0, (0, 0, 0)), ("Hip", 0, (0, 1.0, 0.5))]), skin, group, *more)
 
 
 def test_a_faces_shapes_go_in_named_after_their_sliders():
@@ -277,6 +278,41 @@ def test_the_face_moves_in_a_cutscene():
     sm = doc["animations"][0]["samplers"][ch["sampler"]]
     assert [t for (t,) in values(doc, binc, sm["input"])] == pytest.approx([0.0, 1.0])
     assert [w for (w,) in values(doc, binc, sm["output"])] == pytest.approx([0.0, 0.0, 0.0, 1.0])     # the lip rises
+
+
+def test_someone_the_scene_swaps_in_comes_from_its_own_file_with_their_face():
+    """SPEC-009 section 3.1: the model a script changes someone into (NISSwapModel) is in the scene's own
+    static.p3d, with the shapes their face moves by; their everyday model has none."""
+    from test_p3d_gltf import composite, skeleton
+    frames = struct.pack("<2H", 0, 30)
+    channel = chunk(0x121100, struct.pack("<I", 0) + b"EXP\0" + struct.pack("<I", 2) + frames + struct.pack("<2f", 0.0, 1.0))
+    group = chunk(0x121001, struct.pack("<I", 0) + text("A___Lip_Down_Up") + struct.pack("<II", 0, 1), channel)
+    anim = chunk(0x121000, struct.pack("<I", 0) + text("EXP_T_Ann0") + b"EXP\0" + struct.pack("<ffI", 30.0, 30.0, 0),
+                 chunk(0x121002, struct.pack("<II", 0, 1), group))
+    text_of = ('NISResourceLoader { Name "Ann"; TemplateName "CharTemp_Ann"; }; '
+               'NISCharacterPosition { CharacterName "Ann"; Position { x 0; y 0; z 0; }; Facing 0; }; '
+               'NISSwapModel { Character "MainCharacter"; newModel "tonynisDrawable"; }; '
+               'NISSwapModel { Character "Ann"; newModel "annnisDrawable"; }; '
+               'NISExpAnimation { CharacterName "Ann"; AnimationName "EXP_T_Ann"; MixerModelName "annnis_Face"; };')
+    script = C.read_script(text_of)
+    assert script.swaps == {"ann": "annnisDrawable"} and script.tony == "tonynis"
+    static = face_file(composite("bobnisDrawable", "rig", [("nobody", 1, 0)]),
+                       composite("annnisDrawable", "rig", [("faceShape", 1, 0)]))
+    plain = p3d(skeleton("rig", [("Root", 0, (0, 0, 0))]))
+    asked = []
+
+    def model(kind, name):
+        asked.append((kind, name))
+        return {"scene": ("static.p3d", static), "person": ("ann.p3d", plain)}.get(kind)
+    glb, report = C.export("T", script, [("stream0.p3d", p3d(anim))], model)
+    assert ("scene", "T") in asked
+    assert report.cast == [{"name": "Ann", "template": "CharTemp_Ann", "model": "annnisDrawable", "body": "", "face": "moves"}]
+    doc, _b = read_glb(glb)
+    assert any(c["target"]["path"] == "weights" for c in doc["animations"][0]["channels"])
+    # a scene whose own file doesn't have that model: the everyday one
+    glb, report = C.export("T", script, [("stream0.p3d", p3d(anim))],
+                           lambda kind, name: {"scene": ("static.p3d", plain), "person": ("ann.p3d", face_file())}.get(kind))
+    assert report.cast[0]["model"] == "ann.p3d" and report.cast[0]["face"] == "moves"
 
 
 def test_people_are_stood_on_the_maps_floor():

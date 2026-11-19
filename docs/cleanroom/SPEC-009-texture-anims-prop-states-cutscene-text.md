@@ -519,4 +519,10 @@ For the implementer. Choose your own names; keep each step small.
   PC cutscenes have it and its length matches the scene's. Written up in `docs/FORMATS.md` ("A cutscene's
   sound") and built as `media.stream_names`, `blender_export.cutscene_sounds` and `write_sounds`. The few
   sound scripts that name several sounds (2, 4, 6 and 10) are placed one after the other, which is a guess.
+* **Built from §3 (§8 step 5):** `cutscene.read_script` keeps every character's `NISSwapModel`; the export takes
+  a swapped-in person's model from the scene's `static.p3d` (the composite named by `newModel`), so the
+  expression group there works their face. The mixer chunk itself is not read: the group names its mesh,
+  which was enough in every scene. On the PC's 186 readable cutscenes: 450 people, every body moves, 85 use
+  their cutscene model, 140 faces move (before: Tony's only). 292 people have no `NISExpAnimation` in their
+  script and no shapes on their model, so their faces stay still in the export, as the files have it.
 

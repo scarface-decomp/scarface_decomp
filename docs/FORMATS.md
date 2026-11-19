@@ -1115,7 +1115,8 @@ A cutscene is three things, found by its name (`MNIS_A56_2_Tony_Delivers_the_Goo
 | :--- | :--- |
 | `art/nis/fsc/<name>.fsc` | Its script, as plain text: nested `{ }` blocks of `key value;` lines. |
 | `art/nis/<name>/stream<n>.p3d` | Its animations (`0x121000`), cut into pieces: `<animation>0` in `stream0`, `<animation>1` in `stream1`, and so on. The pieces follow one another. |
-| `art/nis/<name>.p3d`, `static.p3d` | Small files for the game's loader. |
+| `art/nis/<name>.p3d` | A small file for the game's loader. |
+| `art/nis/<name>/static.p3d` | The people the scene swaps in (`NISSwapModel` `newModel`, any character): each one's cutscene model, with the face shapes, the expression group and the mixer (SPEC-009 §3.1). Tony's suits are in `art/nis/characters/` instead. The export takes a swapped-in person from here, so their face moves; `Report.cast` says who went in, with which model, and whether body and face move. On the PC, 85 of 336 people other than Tony are swapped in, and a face animation is named for Tony in 96 scenes and for 44 others; the rest (thugs, shop managers) have none in the game. |
 
 The script's blocks that say who is in the scene:
 

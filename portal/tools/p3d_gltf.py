@@ -1048,6 +1048,7 @@ class Report:
     missing_textures: set = field(default_factory=set)
     missing_drawables: set = field(default_factory=set)
     unread_groups: int = 0
+    cast: List[dict] = field(default_factory=list)             # a cutscene's people: name, template, model, body, face
     at_origin: int = 0
     unmatched_animations: int = 0
     lights: int = 0                                               # light nodes, glTF lights or not
