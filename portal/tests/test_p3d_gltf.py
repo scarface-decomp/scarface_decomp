@@ -2743,12 +2743,13 @@ def test_many_glbs_join_into_one_with_shared_pictures_kept_once(tmp_path):
     one = BX.city_one_file(folder, "PC")
     assert one == folder / "One file" / "PC city.glb"
     doc, binary = read_glb(one.read_bytes())
-    assert len(doc["nodes"]) == counts["nodes"] and len(doc["meshes"]) == counts["meshes"]
+    assert 3 <= len(doc["nodes"]) <= counts["nodes"] and len(doc["meshes"]) == counts["meshes"]
+    assert not any("children" in n for n in doc["nodes"])                      # flat: nothing only holds others
     assert len(doc["accessors"]) == counts["accessors"] and len(doc.get("images", [])) <= counts["images"]
     assert doc["buffers"] == [{"byteLength": len(binary)}]
     assert all(i < len(doc["nodes"]) for i in doc["scenes"][0]["nodes"]) and len(doc["scenes"][0]["nodes"]) >= 3
-    names = {n.get("name") for n in doc["nodes"]}
-    assert {"w_one", "w_two", "w_pier"} <= names
+    assert sorted(doc["nodes"][i]["mesh"] for i in doc["scenes"][0]["nodes"] if "mesh" in doc["nodes"][i]) \
+        == list(range(len(doc["meshes"])))                                     # every mesh still drawn, once
     for a in doc["accessors"]:                               # every accessor's bytes are inside the one buffer
         v = doc["bufferViews"][a["bufferView"]]
         assert v["buffer"] == 0 and v["byteOffset"] % 4 == 0 and v["byteOffset"] + v["byteLength"] <= len(binary)
@@ -2758,3 +2759,33 @@ def test_many_glbs_join_into_one_with_shared_pictures_kept_once(tmp_path):
     made = one.stat().st_mtime_ns
     assert BX.city_one_file(folder, "PC").stat().st_mtime_ns == made         # nothing newer: not made again
     assert not list((folder / "One file").glob("*.tmp"))
+
+
+def test_a_scenes_tree_is_taken_apart_with_everything_left_where_it_was():
+    quarter = [0.0, 0.7071067811865476, 0.0, 0.7071067811865476]               # a quarter turn about Y
+    doc = {"scene": 0, "scenes": [{"nodes": [0, 6]}], "nodes": [
+        {"name": "area", "translation": [10.0, 0.0, 0.0], "children": [1, 3, 4], "extras": {"hidden": 1, "properties": {"a": 1}}},
+        {"name": "group", "rotation": quarter, "children": [2]},
+        {"name": "crate", "mesh": 0, "translation": [1.0, 2.0, 0.0], "extras": {"shadowDecal": 1}},
+        {"name": "marker"},                                                      # holds nothing: gone
+        {"name": "fan", "children": [5], "translation": [0.0, 5.0, 0.0]},        # an animation turns it: kept whole
+        {"name": "blade", "mesh": 1, "translation": [0.0, 0.0, 1.0]},
+        {"name": "lamp", "extensions": {"KHR_lights_punctual": {"light": 0}}, "scale": [2.0, 2.0, 2.0]}],
+        "animations": [{"channels": [{"sampler": 0, "target": {"node": 4, "path": "rotation"}}], "samplers": []}]}
+    assert G.flatten_nodes(doc) == 5
+    nodes = doc["nodes"]
+    tops = [nodes[i] for i in doc["scenes"][0]["nodes"]]
+    assert [n["name"] for n in tops] == ["crate", "fan (place)", "lamp"]
+    crate = tops[0]
+    # the crate: 1 along X, turned a quarter about Y (X goes to -Z), then moved 10 along X
+    assert crate["matrix"][12:15] == pytest.approx([10.0, 2.0, -1.0]) and "children" not in crate
+    assert crate["extras"] == {"hidden": 1, "shadowDecal": 1} and crate["mesh"] == 0   # what the area said, on it
+    place = tops[1]
+    assert place["matrix"][12:15] == pytest.approx([10.0, 0.0, 0.0])
+    fan = nodes[place["children"][0]]
+    assert fan["name"] == "fan" and fan["translation"] == [0.0, 5.0, 0.0] and fan["extras"] == {"hidden": 1}
+    assert nodes[fan["children"][0]]["name"] == "blade"
+    assert nodes[doc["animations"][0]["channels"][0]["target"]["node"]] is fan   # the animation still turns the fan
+    assert tops[2]["matrix"][0] == pytest.approx(2.0) and "scale" not in tops[2]
+    skinned = {"scene": 0, "scenes": [{"nodes": [0]}], "nodes": [{"children": [1]}, {"mesh": 0, "skin": 0}], "skins": [{"joints": [0]}]}
+    assert G.flatten_nodes(skinned) == 2 and "children" in skinned["nodes"][0]   # a scene with skins is left alone
