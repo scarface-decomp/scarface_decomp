@@ -6775,6 +6775,465 @@
    "what_it_does": "Reads an expression mixer (chunk 0x00021002): finds its expression group and its skin by name.",
    "spec": "docs/cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md#7-xbox-functions-checked-on-the-xbox",
    "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001811B0",
+   "name_in_queue": "NISCharacterEffectAction::vfunc_07",
+   "size": 8,
+   "what_it_does": "Runs the effect action.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0017F490",
+   "name_in_queue": "sub_0017F490",
+   "size": 1468,
+   "what_it_does": "The effect action: joints, direction, type switch, wall splash ray.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00184EC0",
+   "name_in_queue": "sub_00184EC0",
+   "size": 14,
+   "what_it_does": "Effect type name by number.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00187070",
+   "name_in_queue": "sub_00187070",
+   "size": 321,
+   "what_it_does": "Reads `NISCharacterEffect`'s fields.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000D7130",
+   "name_in_queue": "sub_000D7130",
+   "size": 37,
+   "what_it_does": "Joint name key \u2192 body joint number (42 names; 43 for none).",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00163F50",
+   "name_in_queue": "sub_00163F50",
+   "size": 79,
+   "what_it_does": "A character's body joint position.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CF3D0",
+   "name_in_queue": "sub_001CF3D0",
+   "size": 17,
+   "what_it_does": "Finds the `EffectsObject`.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CF980",
+   "name_in_queue": "sub_001CF980",
+   "size": 179,
+   "what_it_does": "Headshot effect.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CF860",
+   "name_in_queue": "sub_001CF860",
+   "size": 130,
+   "what_it_does": "Gore effect.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CF8F0",
+   "name_in_queue": "sub_001CF8F0",
+   "size": 130,
+   "what_it_does": "Grenade effect.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CFA40",
+   "name_in_queue": "sub_001CFA40",
+   "size": 197,
+   "what_it_does": "Light or heavy shot effect.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CF4F0",
+   "name_in_queue": "sub_001CF4F0",
+   "size": 878,
+   "what_it_does": "Starts a blood pool.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001CF130",
+   "name_in_queue": "sub_001CF130",
+   "size": 52,
+   "what_it_does": "A weapon's decal of one surface at a point.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0017B9D0",
+   "name_in_queue": "sub_0017B9D0",
+   "size": 43,
+   "what_it_does": "A character's weapon kind.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00048710",
+   "name_in_queue": "sub_00048710",
+   "size": 61,
+   "what_it_does": "Plays an effect at a matrix.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00048790",
+   "name_in_queue": "sub_00048790",
+   "size": 66,
+   "what_it_does": "Sets one of an effect's four multipliers.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00055A10",
+   "name_in_queue": "sub_00055A10",
+   "size": 337,
+   "what_it_does": "Passes the multipliers to the particle system.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001800C0",
+   "name_in_queue": "NISWeaponFireAction::vfunc_12",
+   "size": 260,
+   "what_it_does": "Holds and lets go of the fire control.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00187600",
+   "name_in_queue": "sub_00187600",
+   "size": 256,
+   "what_it_does": "Reads `NISWeaponFire`'s fields.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00162520",
+   "name_in_queue": "sub_00162520",
+   "size": 75,
+   "what_it_does": "Sets a control's state.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001625C0",
+   "name_in_queue": "sub_001625C0",
+   "size": 33,
+   "what_it_does": "Is a control down.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0016B8D0",
+   "name_in_queue": "sub_0016B8D0",
+   "size": 898,
+   "what_it_does": "The pad into the controls.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0017F440",
+   "name_in_queue": "NISFadeAction::vfunc_07",
+   "size": 8,
+   "what_it_does": "Runs the fade action.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "matched"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0017E800",
+   "name_in_queue": "sub_0017E800",
+   "size": 359,
+   "what_it_does": "The fade action's choice of fade.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00186880",
+   "name_in_queue": "sub_00186880",
+   "size": 409,
+   "what_it_does": "Reads `NISFade`'s fields.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A0170",
+   "name_in_queue": "sub_001A0170",
+   "size": 124,
+   "what_it_does": "Starts the coloured fade.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0019FB70",
+   "name_in_queue": "sub_0019FB70",
+   "size": 63,
+   "what_it_does": "Copies its times.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001A0350",
+   "name_in_queue": "sub_001A0350",
+   "size": 1300,
+   "what_it_does": "The overlay's states and alpha.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0022F460",
+   "name_in_queue": "sub_0022F460",
+   "size": 464,
+   "what_it_does": "The screen fade to black.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00270CE0",
+   "name_in_queue": "pure3d::ParticleSystemLoader::vfunc_06",
+   "size": 1062,
+   "what_it_does": "Reads `0x1580C`.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00271AF0",
+   "name_in_queue": "sub_00271AF0",
+   "size": 1535,
+   "what_it_does": "Reads `0x15900`.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00271A80",
+   "name_in_queue": "pure3d::DefaultParticleGeneratorHandler::vfunc_05",
+   "size": 99,
+   "what_it_does": "Picks the generator reader by chunk id.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00271330",
+   "name_in_queue": "sub_00271330",
+   "size": 516,
+   "what_it_does": "Reads the point generator.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00271540",
+   "name_in_queue": "sub_00271540",
+   "size": 566,
+   "what_it_does": "Reads the plane generator.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00271780",
+   "name_in_queue": "sub_00271780",
+   "size": 485,
+   "what_it_does": "Reads the sphere generator.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A5210",
+   "name_in_queue": "sub_002A5210",
+   "size": 102,
+   "what_it_does": "Point generator channels.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A55E0",
+   "name_in_queue": "sub_002A55E0",
+   "size": 148,
+   "what_it_does": "Plane generator channels.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A5B70",
+   "name_in_queue": "sub_002A5B70",
+   "size": 79,
+   "what_it_does": "Sphere generator channels.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002708A0",
+   "name_in_queue": "sub_002708A0",
+   "size": 420,
+   "what_it_does": "Builds the update steps from the mode word.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0025EBE0",
+   "name_in_queue": "sub_0025EBE0",
+   "size": 1033,
+   "what_it_does": "Samples the `SPAR` curves into 20 steps.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0025D8B0",
+   "name_in_queue": "sub_0025D8B0",
+   "size": 428,
+   "what_it_does": "Binds the `SPEM` channels.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0025F780",
+   "name_in_queue": "pure3d::SpriteParticleEmitter::vfunc_18",
+   "size": 559,
+   "what_it_does": "The emitter's step: follow, rate.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0025F430",
+   "name_in_queue": "sub_0025F430",
+   "size": 117,
+   "what_it_does": "Evaluates the emitter's channels.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0025F4B0",
+   "name_in_queue": "sub_0025F4B0",
+   "size": 184,
+   "what_it_does": "Makes the counted particles.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0025EFF0",
+   "name_in_queue": "pure3d::SpriteParticleEmitter::vfunc_20",
+   "size": 550,
+   "what_it_does": "Sets up one new particle.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x0025F2A0",
+   "name_in_queue": "pure3d::SpriteParticleEmitter::vfunc_23",
+   "size": 264,
+   "what_it_does": "Sets a multiplier.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002872B0",
+   "name_in_queue": "sub_002872B0",
+   "size": 571,
+   "what_it_does": "Area under a float channel between two frames.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x001F2C00",
+   "name_in_queue": "sub_001F2C00",
+   "size": 103,
+   "what_it_does": "Random number between \u22121 and +1.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A4FE0",
+   "name_in_queue": "pure3d::SpriteParticleUpdater::vfunc_05",
+   "size": 333,
+   "what_it_does": "Particle step with life curves.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002A5130",
+   "name_in_queue": "pure3d::SpriteParticleUpdater::vfunc_06",
+   "size": 207,
+   "what_it_does": "Particle step without.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00295800",
+   "name_in_queue": "sub_00295800",
+   "size": 191,
+   "what_it_does": "Adds an offset to a colour, kept in range.",
+   "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
+   "status": "open"
   }
  ]
 }
