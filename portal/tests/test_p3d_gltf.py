@@ -2890,3 +2890,18 @@ def test_a_placed_prop_on_its_own_at_the_top_of_the_file_is_read():
     loose = alone[12 + len(text("objects.ds") + text("instances") + text("gamegroup")) + 4:]   # its one object
     src = G.Library().add("f", p3d(group, loose), main=True)
     assert [(m, len(r)) for m, r in G.instance_objects(src)] == [("treep", 1), ("hottub", 1)]
+
+
+def test_a_room_with_only_furniture_is_the_room_where_its_props_stand(tmp_path):
+    """The banks', shops' and clubs' insides have no walls of their own, only their placed props: a cutscene
+    standing among them (two or more within 8 m, and 3 m in height) takes that file as its room."""
+    import blender_export as BX
+    rooms = {"cement.rcf/packages/dzones/shop_dzone.p3d": p3d(object_group([("chair", [record(10.0, 500.0, 20.0),
+                                                                                         record(13.0, 500.0, 22.0)])])),
+             "cement.rcf/packages/dzones/far_dzone.p3d": p3d(object_group([("chair", [record(90.0, 500.0, 20.0),
+                                                                                        record(91.0, 500.0, 20.0)])])),
+             "cement.rcf/packages/dzones/upstairs_dzone.p3d": p3d(object_group([("chair", [record(10.0, 1500.0, 20.0),
+                                                                                             record(11.0, 1500.0, 20.0)])]))}
+    out, index = copied_game(tmp_path, rooms)
+    at = G.pos(G.instance_trs(record(11.0, 500.0, 21.0))[0])            # the game's own coordinates of that spot
+    assert [p.name for p in BX.rooms_at(out, index, "pc", at)] == ["shop_dzone.p3d"]
