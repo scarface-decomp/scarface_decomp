@@ -187,10 +187,16 @@ twentieth the particle is in, blended with the next for the float curves.
 ### 1.7 Making particles [checked on the Xbox]
 
 * **How many.** Each step the emitter adds the area under `RAT` between the previous frame and this one
-  (straight lines between keys) to a running count, times the effect's rate multiplier (§1.9), and makes
-  that many whole particles, never more than its most-particles limit. In Common.p3d `RAT` is nearly always
-  a one-frame burst: e.g. `fxSys_Debris_WoodShape` has 50 at frame 4 and 0 at frame 5. *(check: what the
-  area is before the first key; the burst size the eye sees should be compared with the game.)*
+  (straight lines between keys; a stepped channel gives rectangles) to a running count, times the effect's
+  rate multiplier (§1.9), and makes that many whole particles, never more than its most-particles limit; the
+  fraction left over carries to the next step.
+* **Before the first key, and after the last** [checked on the Xbox]: if a step *starts* before the first
+  key, the whole step counts at the first key's value, even the part of it after that key. If it starts at
+  or after the last key, the whole step counts at the last key's value. So `RAT` is held flat outside its
+  keys. In Common.p3d `RAT` is nearly always a pair like `fxSys_Debris_WoodShape`'s: 50 at frame 4, 0 at
+  frame 5. Held at 50 from frame 0, the first step already gives 50, the emitter's limit: the burst comes at
+  the start of the effect, not at frame 4, and the later frames add nothing while the 50 live. The pair's 0
+  then holds after frame 5, so nothing more is made.
 * **Where and which way.** The generator gives each new particle its position and direction:
 
 | Chunk | Generator | Floats in the chunk, in order | Channels |
@@ -199,8 +205,23 @@ twentieth the particle is in, blended with the next for the float curves.
 | `0x15B01` | plane | width, height, horizontal spread, vertical spread, `RDVA` | `WDT`, `HGT`, `HOSP`, `VESP`, `RDVA` |
 | `0x15B02` | sphere | radius, `RDVA` | `RAD`, `RDVA` |
 
-  The chunk starts with a u32 (0). Spreads are angles in radians (0.1745 = 10° for a muzzle; π/2 for an
-  explosion). *(check: which axis is "forward" for the spread, and what `RDVA` does; it is 0 or small.)*
+  The chunk starts with a u32 (0). **Which way and how wide** [checked on the Xbox, point generator]:
+  * **Forward is the emitter's own +Y axis** (its "up"), turned by the emitter's matrix. With no spread every
+    particle leaves along +Y.
+  * **Each spread is a half-angle, in radians:** a particle's horizontal angle is forward ± a random fraction
+    of the horizontal spread, and its vertical angle likewise, each with its own random number between −1 and
+    +1. So 0.1745 (10°) gives directions up to 10° either side, 20° across. The two are independent, so the
+    shape is a square in angle, not a round cone. In numbers, with *h* = π/2 + *r*1 × horizontal spread and
+    *v* = π/2 + *r*2 × vertical spread, the direction is (sin *v* cos *h*, sin *v* sin *h*, cos *v*) in the
+    emitter's frame: the horizontal spread swings it in the X–Y plane, the vertical toward Z.
+  * **`RDVA`:** each particle starts a random ± `RDVA` along its own direction from the point.
+  * Particles made in one step are spread evenly along the emitter's path between its last place and this one.
+  * The plane and sphere generators were not read beyond their fields *(check: they are read as the same
+    spreads around the same axis, from a rectangle of width × height, or a ball of the radius)*.
+  * Where an effect points comes from the matrix it is played at: for a cutscene blood effect, the shot
+    direction (§2.2); for a prop effect, the joint and the effect's angles. The M16's muzzle flash sits at
+    (0, 0, 0.45) with angles 0, so its spray goes along the gun's +Y unless the effect's own skeleton turns it
+    *(check on the gun: the `.50` cal's offsets run along −Z)*.
 * **At birth:** speed `SPD`±`SPDV`, along the generator's direction; weight `WGT`±`WGTV`; size `SIZ`±`SIZV`;
   spin `SPI`±`SPIV`; angle (field 11)±(field 12); life `LIF`±`LIFV`; colour `CLR` with a random offset in
   `CLRV`, alpha `ALP` with one in `ALPV`; a random texture picture. Each of speed, size, spin, weight,
@@ -228,6 +249,10 @@ squares of their size, facing the camera and turned by their angle *(check: came
 turning code, which measures on screen; the drawing code was not read)*. With several texture pictures the
 texture is cut into that many equal strips across.
 
+**Playing again** [checked on the Xbox]: when the game plays an effect through a renderable (the cutscene
+blood) while the last one is still alive, it only moves it; a new one starts only when the old one has
+ended. Props work differently (§1.10).
+
 The game can change an effect while it plays with four multipliers [checked on the Xbox]:
 
 | Multiplier | Acts on |
@@ -245,6 +270,21 @@ SPEC-009 §2.5 covers them. Adding to it: the effect name is a composite in Comm
 (the last float) is on the state's clock. The size field multiplies the particles' size *(check: the prop's
 call that sets it was not traced; read as the size multiplier of §1.9)*. Offset and angles place the effect
 relative to its joint. The "number" and "joint 2" fields were not settled here.
+
+**Starting and ending** [checked on the Xbox]:
+
+* Each time the state's clock passes an effect's start time, a **new** copy of the effect starts. The
+  effect's start-kind word decides how it is held: 0 on its joint (follows the joint), 1 on the prop, 2 left
+  in the world where it started.
+* The prop keeps a short list of the copies it started and drops each one that has ended.
+* **On entering any state**, before the new state's effects start, every copy on that list is told to wind
+  down (it stops making particles; a time limit of 10000 is also set on it) and the list is emptied. Its
+  live particles finish their lives.
+
+So a looping effect on a prop runs until the prop changes state. **A gun's muzzle flash** (`fire1`) is
+started anew by each shot, and the shot before it is wound down, as long as each shot enters `fire1` again
+*(check: that the weapon re-enters `fire1` for every shot, and not only when it starts firing; the weapon's
+own fire code was not read)*. The flash's "loops" flag only matters if no shot follows.
 
 ---
 
@@ -284,11 +324,19 @@ made one long. The effect is turned to face along it, so blood sprays away from 
 
 ### 2.3 How long each lasts if nothing stops it [checked]
 
-None loops (§1.3). Each makes its particles in a burst in its first frames, and the effect is over when the
-last particle dies. At 30 frames a second:
+None loops (§1.3). Each makes its particles in a burst at its start (§1.7: `RAT` is held at its first key's
+value before that key), and the effect is over when the last particle dies. At 30 frames a second:
 
-| Type | System length | Bursts at | Longest life | Gone after about |
-|---|---|---|---|---|
+| Type | System length | Longest life | Gone after about |
+|---|---|---|---|
+| `Headshot` | 18 frames | 15 | 18 frames (0.6 s) |
+| `GoreBloodExplosion` | 29 | 21 | 29 frames (1.0 s) |
+| `GrenadeExplosion` | 60 | 60 (smoke) | 60 frames (2 s) |
+| `ShotEffectLight` | 22 | 30 (mist) | 30 frames (1 s) |
+| `ShotEffectHeavy` | 30 | 30 (mist) | 30 frames (1 s) |
+| `BloodPool` | — | — | stays; grows to full size (§4.2) |
+
+---|---|---|---|---|
 | `Headshot` | 18 frames | 3 to 5 | 15 | 20 frames (0.7 s) |
 | `GoreBloodExplosion` | 29 | 2 to 4 | 21 | 25 frames (0.8 s) |
 | `GrenadeExplosion` | 60 | 2 to 10 | 60 (smoke) | 70 frames (2.3 s) |
@@ -496,4 +544,14 @@ The small step functions (`0x2A4530` to `0x2A4F20`) are not separate entries in 
 
 ## Questions from the implementer, and answers
 
-*(none yet)*
+*From the implementer, 19 November 2026, with the examiner's answers the same day (put into §1.7, §1.9 and
+§1.10 above):*
+
+* **Which way is "forward" for a spray, and is its spread the full angle or half of it?** The emitter's own
+  +Y, and each spread is a half-angle (± that much), horizontal and vertical separately: §1.7.
+* **Does a looping muzzle flash restart with each shot?** Yes, on a prop: each start makes a new copy and
+  entering a state winds the old ones down (§1.10). Through a renderable, no: a live copy is only moved
+  (§1.9).
+* **What does the spawn rate count as before its first key?** As the first key's value, for the whole step
+  that starts there; after the last key, as the last key's value (§1.7). The one-frame bursts therefore come
+  at the very start of an effect.

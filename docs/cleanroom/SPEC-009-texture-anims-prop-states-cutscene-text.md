@@ -538,3 +538,23 @@ For the implementer. Choose your own names; keep each step small.
   of a file, not only in a group (`0x9900191`). They were not read: Tony's hot tub, and 3,240 props on the PC
   (most on South Beach: `sbeachn_05` 1,275, `sbeachn_03` 1,010, `sbeachn_01` 625). Written up in FORMATS.md.
 
+*Answers from the examiner, 19 November 2026, to the two questions above:*
+
+* **Order or name (§2.2)?** By position only [checked on the Xbox]. On entering a state the game walks the
+  prop's own list of frame controllers and gives controller *i* the state's entry *i*; it never compares
+  names. So where an entry's name and its place disagree, the place wins. Where that list comes from was not
+  traced *(check: read as the prop's frame controllers in the order the file gives them)*, and the scan for
+  a disagreeing file could not be run (the founder's computer was offline). Keep matching by name, but have
+  the export report any prop whose *i*-th entry does not name its *i*-th controller: if none is reported,
+  the two ways agree on every shipped file, the disco ball's two `TEX_sparkle_m` entries included.
+* **The 80 characters (§4.4): before or after the marks?** Before: the count runs over the stored text with
+  `#` and `@` still in it [checked on the Xbox]. In detail:
+  * the rest of the line is kept whole when (the text's stored length − the caption's first position + 1) is
+    at most 80 *(check: whether the stored length counts a closing zero; if it does not, a run of exactly 80
+    is cut)*;
+  * otherwise the game looks at the 80 characters from the caption's first; the first `#` or `@` among them
+    ends the caption just before it; failing that, the last `.`, `!` or `?`, then the last `,` or `;`, then
+    the last space, and the caption includes that character;
+  * the next caption starts after it, skipping one `#` or `@` there (a `#` also moves the speaker on);
+  * the time share uses the caption's own length (first to last character, inclusive).
+
