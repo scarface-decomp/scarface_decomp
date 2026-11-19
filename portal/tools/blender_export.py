@@ -1169,6 +1169,26 @@ CITY_MADE = "made_by.txt"                        # extracted/blender/<version>/:
 CITY_LOOK = "made_with.json"                     # extracted/blender/<version>/: the hour and weather it is at
 
 
+ONE_FILE = "One file"                            # extracted/blender/<version>/One file/: the city as one .glb
+
+
+def city_one_file(folder: Path, label: str) -> Path:
+    """The exported city (every .glb in the folder: areas, sky, sea) as one .glb in its One file folder,
+    made again only when an area is newer. One import in Blender instead of one for every area, and one
+    file to open anywhere else."""
+    files = sorted(folder.glob("*.glb"))
+    if not files:
+        raise P3G.ExportError("export the city first")
+    one = folder / ONE_FILE / f"{label} city.glb"
+    try:
+        if one.is_file() and all(f.stat().st_mtime <= one.stat().st_mtime for f in files):
+            return one
+    except OSError:
+        pass
+    P3G.join_glbs(files, one)
+    return one
+
+
 def city_current(folder: Path) -> bool:
     """Whether the city in folder was exported by this version of the exporter (not one from before props
     came in whole and at full detail)."""

@@ -2693,3 +2693,38 @@ def test_the_blender_script_loops_what_the_game_loops(tmp_path, monkeypatch):
     assert door.fcurves[0].modifiers == [] and other.fcurves[0].modifiers == []
     ns["play_round"](["PTRN_ball"])
     assert len(old.fcurves[0].modifiers) == 1                               # not added twice
+
+
+# --------------------------------------------------------------------------- the city as one file
+
+def test_many_glbs_join_into_one_with_shared_pictures_kept_once(tmp_path):
+    import blender_export as BX
+    z = "cement.rcf/packages/z04/"
+    out, index = copied_game(tmp_path, {z + "club_01_shell.p3d": area("w_one"), z + "club_02_shell.p3d": area("w_two"),
+                                        z + "pier_01_shell.p3d": area("w_pier")})
+    folder = tmp_path / "city"
+    folder.mkdir()
+    counts = {"nodes": 0, "meshes": 0, "accessors": 0, "images": 0}
+    for key in ("z04/club_01", "z04/club_02", "z04/pier_01"):
+        glb, _r = BX.area_glb(out, index, "pc", key)
+        (folder / (key.split("/")[1] + ".glb")).write_bytes(glb)
+        d = read_glb(glb)[0]
+        for k in counts:
+            counts[k] += len(d.get(k, []))
+    one = BX.city_one_file(folder, "PC")
+    assert one == folder / "One file" / "PC city.glb"
+    doc, binary = read_glb(one.read_bytes())
+    assert len(doc["nodes"]) == counts["nodes"] and len(doc["meshes"]) == counts["meshes"]
+    assert len(doc["accessors"]) == counts["accessors"] and len(doc.get("images", [])) <= counts["images"]
+    assert doc["buffers"] == [{"byteLength": len(binary)}]
+    names = {doc["nodes"][i].get("name") for i in doc["scenes"][0]["nodes"]}
+    assert {"w_one", "w_two", "w_pier"} <= names
+    for a in doc["accessors"]:                               # every accessor's bytes are inside the one buffer
+        v = doc["bufferViews"][a["bufferView"]]
+        assert v["buffer"] == 0 and v["byteOffset"] % 4 == 0 and v["byteOffset"] + v["byteLength"] <= len(binary)
+    for m in doc["meshes"]:
+        for pr in m["primitives"]:
+            assert all(i < len(doc["accessors"]) for i in pr["attributes"].values())
+    made = one.stat().st_mtime_ns
+    assert BX.city_one_file(folder, "PC").stat().st_mtime_ns == made         # nothing newer: not made again
+    assert not list((folder / "One file").glob("*.tmp"))
