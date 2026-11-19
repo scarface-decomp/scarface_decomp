@@ -270,6 +270,37 @@ def facing_rotation(degrees: float) -> G.Quat:
 
 
 ROOTS = ("motion_root", "balance_root", "character_root")
+MISSION_FOLDER = re.compile(r"/scriptc/missionscripts/([^/]+)/[^/]+$")
+MOST = 12                                                    # a mission's film: this many cutscenes at most
+
+
+def mission_films(scripts: Sequence[Tuple[str, str]], known: Dict[str, str]) -> Dict[str, List[str]]:
+    """{mission: its cutscenes, in the order its scripts first name them}, for a mission with at least
+    two. scripts: (path, decompiled text) of the copied scripts; known: {cutscene name (lower): its name}.
+    The mission's functions script is read first (it plays them as the mission goes), then its other
+    files. A cutscene's second version (<name>_Alt, played instead of it) is left out when the first is
+    there, and so is a copy for European televisions. This is the order the script names them, which is
+    nearly always the order they play in, not a record of a played mission."""
+    by: Dict[str, List[Tuple[str, str]]] = {}
+    label: Dict[str, str] = {}
+    for path, text in scripts:
+        m = MISSION_FOLDER.search(path.replace("\\", "/"))
+        if m:
+            by.setdefault(m.group(1).lower(), []).append((path, text))
+            label.setdefault(m.group(1).lower(), Path(path.replace("\\", "/")).parent.name)
+    films: Dict[str, List[str]] = {}
+    for mission, files in by.items():
+        files.sort(key=lambda f: ("functions" not in f[0].lower(), f[0].lower()))
+        seen: List[str] = []
+        for _path, text in files:
+            for name in NAMED.findall(text):
+                low = re.sub(r"^pal_", "", name.lower())
+                if low in known and low not in seen:
+                    seen.append(low)
+        seen = [s for s in seen if not (s.endswith("_alt") and s[:-4] in seen)]
+        if len(seen) >= 2:
+            films[label[mission]] = [known[s] for s in seen[:MOST]]
+    return films
 SUNK = 0.08                                                  # deeper in the floor than this (metres): on purpose
 
 

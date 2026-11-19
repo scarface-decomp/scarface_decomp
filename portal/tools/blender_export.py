@@ -480,7 +480,16 @@ def cutscenes(out: Path, index: Optional[dict], version: str) -> List[dict]:
             at = after[at]
             chain.append(found[at])
         out_.append({"name": found[low], "then": chain, "follows": low in follows})
+    # A mission's cutscenes one after the other, as one more thing to open: "mission:<name>".
+    known = {low: name for low, name in found.items() if not low.startswith("pal_")}
+    films = CUT.mission_films(_mission_scripts(out, index, version), known) if found else {}
+    for mission in sorted(films, key=str.lower):
+        scenes = films[mission]
+        out_.append({"name": MISSION + mission, "mission": mission, "first": scenes[0], "then": scenes[1:], "follows": False})
     return out_
+
+
+MISSION = "mission:"                             # cutscenes()' name for a mission's cutscenes joined in order
 
 
 def cutscene_sounds(out: Path, index: Optional[dict], version: str, scene: str) -> List[Tuple[bytes, str]]:
@@ -616,6 +625,12 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
             return (p.name, p.read_bytes()) if p is not None else None
         except OSError:
             return None
+    chain: Optional[List[str]] = None
+    if scene.lower().startswith(MISSION):                    # a mission: its first cutscene, the rest joined on
+        film = next((c for c in cutscenes(out, index, version) if c["name"].lower() == scene.lower()), None)
+        if film is None:
+            raise P3G.ExportError("that mission's cutscenes aren't in your copied game files")
+        scene, chain = film["first"], list(film["then"]) if join else []
     script, pieces = parts(scene)
     dressed = wears(out, index, version)
     # What the mission's scripts dress Tony in comes before the model the cutscene's own script swaps him
@@ -625,11 +640,13 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
     then = []
     if join:
         entry = next((c for c in cutscenes(out, index, version) if c["name"].lower() == scene.lower()), None)
-        for name in (entry or {}).get("then", []):
+        for name in (chain if chain is not None else (entry or {}).get("then", [])):
             try:
                 then.append((name,) + parts(name))
                 then[-1][1].tony = CUT.outfit_for(dressed, name) or then[-1][1].tony
             except P3G.ExportError:
+                if chain is not None:
+                    continue                                 # a mission: one that can't be read is skipped
                 break
     # The street or room it happens in: what the game keeps loaded at that spot (the stream graph).
     area: List[Tuple[str, bytes]] = []
