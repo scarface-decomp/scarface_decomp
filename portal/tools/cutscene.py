@@ -513,7 +513,10 @@ def _gun_fire(b: G.Builder, fx: Optional[CFX.Effects], gref: G.Ref, wanted: str,
     bullet = 0
     played = 0
     for a, z, alt in sorted(shots):
-        effects = states.get("fire2" if alt else "fire1", [])
+        # alternate fire plays "fire2"; a gun without one (an Uzi: the cutscenes' gunmen all fire this way, and
+        # are seen firing) plays its "fire1"
+        effects = states.get("fire2", []) if alt else []
+        effects = effects or states.get("fire1", [])
         frames = CFX.shot_frames(a, z, rate)
         for k, f0 in enumerate(frames):
             bullet += 1
@@ -1115,9 +1118,15 @@ class Ground:
 WEAPON = re.compile(r"^WeaponTemplate", re.I)
 
 
-def weapon_model(template: str, models: Sequence[str]) -> Optional[str]:
-    """The model a weapon template stands for, among the weapons file's models: WeaponTemplateMetalPipe is
-    metal_pipe, WeaponTemplateSniper is sniper_rifle, WeaponTemplateM16Mortar is the M16."""
+def weapon_model(template: str, models: Sequence[str], texts: Sequence[str] = ()) -> Optional[str]:
+    """The model a weapon template stands for, among the weapons file's models. The template's own text in
+    the weapons' script (texts) names it where it can (WeaponTemplateM16Mortar names M16_upgrade2, the M16
+    with the grenade launcher); without the script, by the template's name: WeaponTemplateMetalPipe is
+    metal_pipe, WeaponTemplateSniper is sniper_rifle."""
+    lower = {m.lower(): m for m in models}
+    for t in texts:
+        if t.lower() in lower:
+            return lower[t.lower()]
     flat = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())
     want = flat(WEAPON.sub("", template))
     if not want:
@@ -1396,7 +1405,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         for n, (frame, template) in enumerate(held if hand is not None else []):
             guns = source("weapons", "")
             names = [G.chunk_name(guns.data, c) for c in guns.chunks if c.id == G.COMPOSITE] if guns else []
-            wanted = weapon_model(template, names)
+            wanted = weapon_model(template, names, (weapons.get(template.lower()) or {}).get("texts", ()))
             gref = lib.find("composite", wanted, (guns,)) if wanted and guns else None
             if not gref:
                 left_out.append(label + "'s " + WEAPON.sub("", template))

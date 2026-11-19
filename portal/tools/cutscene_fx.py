@@ -285,11 +285,13 @@ def firing_rate(template: str, rates: Dict[str, float]) -> float:
     return DEFAULT_FIRING_RATE
 
 
-def weapon_settings(script) -> Dict[str, Dict[str, float]]:
-    """{template name (lower): {"FiringRate", "TracerFrequency" ...}} from the weapons' template script
-    (scriptc/templates/weapons.cso, compiled bytes or decompiled text): every object that sets FiringRate."""
+def weapon_settings(script) -> Dict[str, Dict]:
+    """{template name (lower): {"FiringRate", "TracerFrequency" ..., "texts": [its words]}} from the weapons'
+    template script (scriptc/templates/weapons.cso, compiled bytes or decompiled text): every object that
+    sets FiringRate."""
     try:
         import fog as F
+        import torque_ast as AST
         import torque_script as TS
         from torque_names import name_key
         from torque_parse import parse
@@ -301,12 +303,14 @@ def weapon_settings(script) -> Dict[str, Dict[str, float]]:
     out: Dict[str, Dict[str, float]] = {}
     for obj in F._objects(tree):
         name = F._word(obj.name_expr)
-        values = {}
+        values: Dict = {}
+        texts = [F._word(slot.value) for slot in obj.slots if isinstance(slot.value, AST.StrConst)]
         for slot in obj.slots:
             prop = wanted.get(name_key(slot.slot))
             v = F._number(slot.value)
             if prop and v is not None and slot.index is None:
                 values[prop] = v
         if name and "FiringRate" in values:
+            values["texts"] = texts                          # its words, one of them its model's name
             out.setdefault(name.lower(), values)
     return out

@@ -651,8 +651,12 @@ def test_the_weapons_template_script_gives_each_guns_rate():
     import cutscene_fx as CFX
     text = ('new WeaponTemplate(WeaponTemplateUzi) { FiringRate = 105; TracerFrequency = "2"; };\n'
             'new WeaponTemplate(WeaponTemplateM16) { FiringRate = 75; };\nnew Thing(Other) { Speed = 3; };')
-    assert CFX.weapon_settings(text) == {"weapontemplateuzi": {"FiringRate": 105.0, "TracerFrequency": 2.0},
-                                         "weapontemplatem16": {"FiringRate": 75.0}}
+    assert CFX.weapon_settings(text) == {"weapontemplateuzi": {"FiringRate": 105.0, "TracerFrequency": 2.0, "texts": ["2"]},
+                                         "weapontemplatem16": {"FiringRate": 75.0, "texts": []}}
+    named = 'new WeaponTemplate(WeaponTemplateM16Mortar) { FiringRate = 110; Look = "M16_upgrade2"; };'
+    texts = CFX.weapon_settings(named)["weapontemplatem16mortar"]["texts"]
+    assert C.weapon_model("WeaponTemplateM16Mortar", ["M16", "M16_upgrade2"], texts) == "M16_upgrade2"
+    assert C.weapon_model("WeaponTemplateM16Mortar", ["M16", "M16_upgrade2"]) == "M16"   # without the script
     assert CFX.weapon_settings("this is not a script {") == {}
 
 
