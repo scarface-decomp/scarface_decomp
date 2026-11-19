@@ -52,6 +52,16 @@ def _rows(index: Optional[dict], version: str) -> List[list]:
     return ((index or {}).get("versions", {}).get(version) or {}).get("files", [])
 
 
+def _places_props(out: Path, stored: str) -> bool:
+    """Whether a copied file places props (a script object of class instanceobject). Read only for the
+    files the copy found no models in, which are small."""
+    p = GA.safe_output_path(out, stored) if stored else None
+    try:
+        return p is not None and b"instanceobject" in p.read_bytes().lower()
+    except OSError:
+        return False
+
+
 def areas(out: Path, index: Optional[dict], version: str) -> List[dict]:
     """[{key, name, place, files}] for every map area with a copied file, city areas first."""
     found: Dict[str, dict] = {}
@@ -72,10 +82,11 @@ def areas(out: Path, index: Optional[dict], version: str) -> List[dict]:
         area["files"].append(path)
         # what the copy found in the file: an area whose files hold only scripts and triggers (no models)
         facts = row[5] if len(row) > 5 and isinstance(row[5], dict) else None
-        if facts is None or facts.get("p3d") == "models":
+        if facts is None or facts.get("p3d") == "models" or _places_props(out, row[4]):
             area["drawn"] = True
-    # Nothing to draw: 17 places on the PC (sosa_01, downtown_01, the dzones of the bank and the tanker...)
-    # are only triggers and scripts. Listed, they could only answer "nothing in these files to export".
+    # Nothing to draw: 15 places on the PC (sosa_01, downtown_01, the dzones of the bank and the tanker...)
+    # are only triggers and scripts. Listed, they could only answer "nothing in these files to export". A
+    # file with no models of its own may still place props from others (sleepingMary_01): those stay.
     for key in [k for k, a in found.items() if not a.pop("drawn", False)]:
         del found[key]
     for key, area in list(found.items()):

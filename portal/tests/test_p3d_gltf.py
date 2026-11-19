@@ -2818,6 +2818,9 @@ def test_a_place_whose_files_hold_no_models_is_not_listed(tmp_path):
         r[5] = {"p3d": "other"} if "sosa" in r[0] or "detail" in r[0] else {"p3d": "models"}
     assert [a["key"] for a in BX.areas(out, index, "pc")] == ["z04/pier_01"]       # one file with models is enough
     assert len(BX.areas(out, index, "pc")[0]["files"]) == 2
+    sosa = next(r for r in index["versions"]["pc"]["files"] if "sosa" in r[0])     # no models, but places props
+    (out / sosa[4]).write_bytes(b"P3D\xff....instanceObject....")
+    assert [a["key"] for a in BX.areas(out, index, "pc")] == ["z04/pier_01", "z04/sosa_01"]
 
 
 # --------------------------------------------------------------------------- pictures swapped over time
@@ -2878,3 +2881,12 @@ def test_blender_makes_an_image_sequence_of_it(tmp_path, monkeypatch):
     # the first picture for 3 frames, the second for 4, the third for 3
     by = [f.read_bytes() for f in files]
     assert by[0] == by[1] == by[2] != by[3] and by[3] == by[6] != by[7] and by[7] == by[9] != by[0]
+
+
+def test_a_placed_prop_on_its_own_at_the_top_of_the_file_is_read():
+    """Tony's hot tub, and every prop of some places: an instance object that is not in a group."""
+    group = object_group([("treep", [record(10.0, 250.0, 20.0)])])
+    alone = object_group([("hottub", [record(5.0, 1.0, 7.0)])])
+    loose = alone[12 + len(text("objects.ds") + text("instances") + text("gamegroup")) + 4:]   # its one object
+    src = G.Library().add("f", p3d(group, loose), main=True)
+    assert [(m, len(r)) for m, r in G.instance_objects(src)] == [("treep", 1), ("hottub", 1)]
