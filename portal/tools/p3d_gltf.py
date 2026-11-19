@@ -1321,8 +1321,13 @@ class Builder:
                 if len(uv) == len(geo.positions):
                     attrs[f"TEXCOORD_{i}"] = self.g.accessor([(u, 1.0 - v) for u, v in uv], "VEC2", target=34962)
             if geo.colours and len(geo.colours) == len(geo.positions):
-                attrs["COLOR_0"] = self.g.accessor([((c >> 16) & 255, (c >> 8) & 255, c & 255, (c >> 24) & 255)
-                                                    for c in geo.colours], "VEC4", 5121, normalized=True, target=34962)
+                # glTF's vertex colours are linear; the game's are screen (sRGB) colours, which it multiplies
+                # with the texture as they are. Written linear (16 bits, so the dark ones keep their steps),
+                # Blender's linear multiply of texture and colour gives what the game shows; written as they
+                # were, Blender read them as brighter than they are and lit surfaces came out washed out.
+                attrs["COLOR_0"] = self.g.accessor([(LINEAR16[(c >> 16) & 255], LINEAR16[(c >> 8) & 255],
+                                                     LINEAR16[c & 255], ((c >> 24) & 255) * 257)
+                                                    for c in geo.colours], "VEC4", 5123, normalized=True, target=34962)
             if skinned_to is not None and geo.joints and geo.weights:
                 joints, weights = [], []
                 for js, ws in zip(geo.joints, geo.weights):
@@ -2786,6 +2791,12 @@ def _glb_parts(path: Path) -> Tuple[dict, int, int]:
         return doc, 20 + n + 8, struct.unpack_from("<I", more, 0)[0]
 
 
+def _linear(v: float) -> float:
+    """A screen (sRGB) colour value, 0 to 1, as a linear one."""
+    return v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4
+
+
+LINEAR16 = [round(_linear(b / 255.0) * 65535) for b in range(256)]      # a byte of sRGB colour -> linear, in 16 bits
 _IDENTITY = (1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0)
 PASSED_DOWN = ("hidden", "lowDetailHull", "occluder", "shadowDecal", "ocean", "drawDistance", "worldGeometryKind")
 

@@ -89,7 +89,7 @@ def outfit_for(wears: Dict[str, str], scene: str) -> str:
 
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
                     r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation|"
-                    r"NISWeaponFire|NISStatePropState)\s*\{")
+                    r"NISWeaponFire|NISStatePropState|NISRenderableTrack|NISRenderableAnimationTrack)\s*\{")
 _FIELD = re.compile(r'\b(\w+)\s+(?:"([^"]*)"|(-?[\d.]+(?:e-?\d+)?))\s*;')
 
 
@@ -111,6 +111,10 @@ class Script:
         self.holds_at: Dict[str, List[Tuple[int, str]]] = {}        # person (lower) -> [(frame, weapon template)]
         self.fires: Dict[str, List[Tuple[int, int]]] = {}           # person (lower) -> [(first frame, last frame)]
         self.prop_states: Dict[str, List[Tuple[int, str]]] = {}     # prop's name in the script -> [(frame, state)]
+        # The scene's own props (a cabinet's doors, a glass, a tray): its name for each -> the model in the
+        # scene's static.p3d, and the animation that moves it.
+        self.renderables: Dict[str, str] = {}
+        self.renderable_moves: Dict[str, str] = {}
         self.swaps: Dict[str, str] = {}                     # person (lower) -> the cutscene model they are changed
         #                                                     into (NISSwapModel), kept in the scene's static.p3d
 
@@ -156,6 +160,10 @@ def read_script(text: str) -> Script:
             end = f.get("FrameEnd")
             s.fires.setdefault(str(f["CharacterName"]).lower(), []).append(
                 (int(f["FrameBegin"]), int(end) if isinstance(end, float) else int(f["FrameBegin"]) + 6))
+        elif kind == "NISRenderableTrack" and f.get("RenderableName") and f.get("CompositeDrawableName"):
+            s.renderables.setdefault(str(f["RenderableName"]), str(f["CompositeDrawableName"]))
+        elif kind == "NISRenderableAnimationTrack" and f.get("RenderableName") and f.get("AnimationName"):
+            s.renderable_moves.setdefault(str(f["RenderableName"]), str(f["AnimationName"]))
         elif kind == "NISStatePropState" and f.get("StatePropName") and f.get("StateName"):
             at = int(f["FrameBegin"]) if isinstance(f.get("FrameBegin"), float) else 0
             got = s.prop_states.setdefault(str(f["StatePropName"]), [])
@@ -377,6 +385,44 @@ def _prop_states(b: G.Builder, lib: G.Library, script: Script, tracks: _Tracks, 
 
 
 ROOTS = ("motion_root", "balance_root", "character_root")
+STANDS_IN = 0.5                                              # metres along the ground: a scene's prop this near
+STANDS_IN_HEIGHT = 2.0                                       # a map's prop (and this near in height) replaces it
+
+
+def _hide_map_props_at(b: G.Builder, copy) -> int:
+    """Takes out the map's placed props that a scene's own prop stands in for: the mansion's gun cabinet
+    has closed doors of its own (tmDoorGun, one state), and the scene brings doors that open in the same
+    place. A placed prop goes when one of the scene prop's joints is within STANDS_IN of it along the
+    ground and STANDS_IN_HEIGHT in height (the cabinet's doors hang 1.3 m below the cabinet's own origin). Returns how
+    many went."""
+    doc = b.g.doc
+    parent = {c: i for i, n in enumerate(doc["nodes"]) for c in n.get("children", [])}
+
+    def place(i: int) -> Tuple[float, float, float]:
+        x = y = z = 0.0
+        while True:
+            t = doc["nodes"][i].get("translation") or (0.0, 0.0, 0.0)
+            x, y, z = x + t[0], y + t[1], z + t[2]
+            if i not in parent:
+                return x, y, z
+            i = parent[i]
+    spots = [place(i) for i in copy.nodes.values()]
+    spots = [p for p in spots if abs(p[0]) + abs(p[2]) > 1.0]
+    gone = 0
+    for g, n in enumerate(doc["nodes"]):
+        if not (n.get("name") or "").endswith(" instances"):
+            continue
+        for kid in list(n.get("children", [])):
+            t = doc["nodes"][kid].get("translation")
+            if t and any(math.hypot(t[0] - p[0], t[2] - p[2]) < STANDS_IN and abs(t[1] - p[1]) < STANDS_IN_HEIGHT
+                         for p in spots):
+                n["children"].remove(kid)
+                # out of the scene, and marked hidden too: an importer that brings in every node keeps it off
+                doc["nodes"][kid].setdefault("extras", {})["hidden"] = True
+                gone += 1
+    return gone
+
+
 MISSION_FOLDER = re.compile(r"/scriptc/missionscripts/([^/]+)/[^/]+$")
 STAGE = re.compile(r"m?nis_[a-z]+\d+[a-z]?_(\d+)_")
 MOST = 12                                                    # a mission's film: this many cutscenes at most
@@ -1092,9 +1138,13 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             grip = b.g.node(label + "'s grip", hand)
             b.composite(gref, grip, label + "'s " + wanted)
             muzzle = _muzzle(b.g.doc, grip)
+            # Every weapon is turned the same way in the hand: its barrel (its own -Z) along the forearm and
+            # its top up. Measured on NIS_100_office_politics: with the turn, the barrels of the Uzis, the
+            # pistol and the M16s point along the forearm (0.89 to 0.99 of the way); without it, the short
+            # guns pointed at the sky.
+            b.g.doc["nodes"][grip]["rotation"] = list(GRIP)
             if muzzle is None or math.sqrt(sum(c * c for c in muzzle)) >= LONG:
-                b.g.doc["nodes"][grip]["rotation"] = list(GRIP)            # a long gun (or a pipe, a machete)
-                long_guns.append((grip, muzzle))
+                long_guns.append((grip, muzzle))                           # a long gun (or a pipe): both hands
             # In the hand from its frame, until the next weapon's: the grip is shrunk away outside that.
             until = held[n + 1][0] if n + 1 < len(held) else None
             if frame > 0 or until is not None:
@@ -1182,6 +1232,30 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             for path, (times, values) in _camera_keys(pieces).items():
                 tracks.add(cam, path, later(times), values)
             went_in.append("camera")
+    for what, drawn in script.renderables.items():           # the scene's own props: the cabinet's doors
+        own = source("scene", name)
+        ref = next((G.Ref(own, c) for c in (own.chunks if own else []) if c.id == G.COMPOSITE
+                    and G.chunk_name(own.data, c).lower() == drawn.lower()), None) or lib.find("composite", drawn)
+        if ref is None:
+            left_out.append(what)
+            continue
+        before = len(b.copies)
+        top = b.composite(ref, root, what)                   # its joints carry their places on the map
+        copy = b.copies[before] if len(b.copies) > before else None
+        if copy is None:
+            continue
+        nodes.append(top)
+        went_in.append(what)
+        _hide_map_props_at(b, copy)
+        anim = script.renderable_moves.get(what)
+        if anim:
+            keys, ran = _joint_keys(_pieces(b, anim))
+            length = max(length, ran)
+            for joint, paths in keys.items():
+                node = copy.nodes.get(joint)
+                if node is not None:
+                    for path, (times, values) in paths.items():
+                        tracks.add(node, path, later(times), values)
     if script.prop_states:                                   # the map's props the scene changes: a door blown in
         spot = next((G.pos(at) for at, _f in script.stands.values() if abs(at[0]) + abs(at[2]) > 30.0), None)
         for lost in _prop_states(b, lib, script, tracks, later, spot):

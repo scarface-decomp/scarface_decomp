@@ -485,3 +485,21 @@ def test_a_muzzle_flash_is_made_once_and_a_prop_placed_from_text_is_read():
     line = b"\x00tmDoorCGroup\x00tmDoorC\x00-2220.523 20.538 -1702.431 0 350 0 1 1 1 0 final\x00"
     m = C.PLACED.search(line)
     assert m.group(1) == b"tmDoorC" and [float(v) for v in m.groups()[1:]] == [-2220.523, 20.538, -1702.431, 0.0, 350.0, 0.0]
+
+
+def test_a_scenes_own_props_are_read_and_stand_in_for_the_maps():
+    script = C.read_script('NISRenderableTrack { RenderableName "doors"; CompositeDrawableName "closet_doors"; }; '
+                           'NISRenderableAnimationTrack { RenderableName "doors"; AnimationName "NIS_X_doors"; };')
+    assert script.renderables == {"doors": "closet_doors"} and script.renderable_moves == {"doors": "NIS_X_doors"}
+    b = G.Builder(G.Library())
+    area = b.g.node("area")
+    placed = b.g.node("area instances", area)
+    near = b.g.node("tmdoorgun", placed, translation=[10.0, 21.5, 5.0])            # 1.3 m above the doors' hinge
+    far = b.g.node("lamp", placed, translation=[13.0, 20.0, 5.0])
+    above = b.g.node("upstairs", placed, translation=[10.0, 25.0, 5.0])
+    root = b.g.node("scene")
+    joint = b.g.node("L_door_anim", root, translation=[10.1, 20.2, 5.1])
+    copy = type("Copy", (), {"nodes": {"L_door_anim": joint}})()
+    assert C._hide_map_props_at(b, copy) == 1
+    assert b.g.doc["nodes"][placed]["children"] == [far, above]
+    assert b.g.doc["nodes"][near]["extras"] == {"hidden": True}

@@ -4569,13 +4569,15 @@
     in vec3 aPos; in vec3 aNormal; in vec2 aUv; in vec4 aColor;
     uniform mat4 uProj, uView, uModel;
     out vec3 vNormal; out vec2 vUv; out vec4 vColor;
-    void main() { vUv = aUv; vColor = aColor; vNormal = mat3(uView * uModel) * aNormal; gl_Position = uProj * uView * uModel * vec4(aPos, 1.0); }`;
+    vec4 screen(vec4 c) { return vec4(mix(c.rgb * 12.92, 1.055 * pow(c.rgb, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c.rgb)), c.a); }
+    void main() { vUv = aUv; vColor = screen(aColor); vNormal = mat3(uView * uModel) * aNormal; gl_Position = uProj * uView * uModel * vec4(aPos, 1.0); }`;
   /* A big scene (the whole city): each model is in the graphics memory once and drawn in every place it stands. */
   const VIEW_VS_MANY = `#version 300 es
     in vec3 aPos; in vec3 aNormal; in vec2 aUv; in vec4 aColor; in mat4 aModel;
     uniform mat4 uProj, uView;
     out vec3 vNormal; out vec2 vUv; out vec4 vColor;
-    void main() { vUv = aUv; vColor = aColor; vNormal = mat3(uView * aModel) * aNormal; gl_Position = uProj * uView * aModel * vec4(aPos, 1.0); }`;
+    vec4 screen(vec4 c) { return vec4(mix(c.rgb * 12.92, 1.055 * pow(c.rgb, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c.rgb)), c.a); }
+    void main() { vUv = aUv; vColor = screen(aColor); vNormal = mat3(uView * aModel) * aNormal; gl_Position = uProj * uView * aModel * vec4(aPos, 1.0); }`;
   const VIEW_BIG = 6000;              // more parts than this: drawn the big scene's way
   const VIEW_FS = `#version 300 es
     precision mediump float;
@@ -4795,17 +4797,24 @@
         -(right[0] * eye[0] + right[1] * eye[1] + right[2] * eye[2]), -(up[0] * eye[0] + up[1] * eye[1] + up[2] * eye[2]),
         fwd[0] * eye[0] + fwd[1] * eye[1] + fwd[2] * eye[2], 1]);
       const far = big ? (cam.dist * 1.2 + big.reach) * 1.3 : cam.dist + radius * 4;
+      // The nearest the view draws: as far out as it can be without cutting into what is looked at. The depth
+      // buffer's precision goes by far / near; with the near plane a hair from the eye, the ground, the roads
+      // and the kerbs on them fight over the same pixels and flicker as the view moves.
+      const near = Math.max(far / 20000, Math.min(cam.dist * 0.05, far / 3000), 0.01);
       gl.viewport(0, 0, w, h);
       gl.clearColor(0.09, 0.09, 0.10, 1);
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
       gl.enable(gl.DEPTH_TEST);
+      gl.depthFunc(gl.LEQUAL);                     // a surface drawn twice in the same place keeps its first
       gl.useProgram(prog);
-      gl.uniformMatrix4fv(U.uProj, false, V3D.perspective(0.9, w / h, Math.max(far / 20000, 0.01), far));
+      gl.uniformMatrix4fv(U.uProj, false, V3D.perspective(0.9, w / h, near, far));
       gl.uniformMatrix4fv(U.uView, false, view);
       gl.uniform1i(U.uTex, 0);
       const pass = (blend) => {
-        if (blend) { gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false); }
-        else { gl.disable(gl.BLEND); gl.depthMask(true); }
+        // see-through surfaces lie on others (road markings, shadows, grime): pulled a little towards the eye,
+        // as the game's own depth bias does, so they don't flicker in and out of the surface under them
+        if (blend) { gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false); gl.enable(gl.POLYGON_OFFSET_FILL); gl.polygonOffset(-1, -4); }
+        else { gl.disable(gl.BLEND); gl.depthMask(true); gl.disable(gl.POLYGON_OFFSET_FILL); }
         // see-through surfaces as the game draws them: far to near, writing depth unless their material says
         // not to; the light-adding ones add
         const away = (d) => (d.c[0] - eye[0]) ** 2 + (d.c[1] - eye[1]) ** 2 + (d.c[2] - eye[2]) ** 2;
@@ -4826,7 +4835,7 @@
         }
       };
       if (big) {
-        const proj = V3D.perspective(0.9, w / h, Math.max(far / 20000, 0.01), far);
+        const proj = V3D.perspective(0.9, w / h, near, far);
         state.shown = big.draw(proj, view, eye, fwd, right, up, w / h, cam.dist * 1.2 + big.reach);
         if (state.frames % 30 === 0) told();
       } else {
@@ -4974,8 +4983,11 @@
         }
       }
       gl.enable(gl.BLEND);
+      gl.enable(gl.POLYGON_OFFSET_FILL);             // on the surface under them, without flickering (see pass)
+      gl.polygonOffset(-1, -4);
       far.sort((a, b) => b[0].dist - a[0].dist);   // see-through surfaces: the far squares first
       for (const [, g] of far) one(g, true);
+      gl.disable(gl.POLYGON_OFFSET_FILL);
       gl.disable(gl.BLEND);
       return shown;
     };
