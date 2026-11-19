@@ -1443,8 +1443,12 @@ def sky_at(hour=None, **kw):
 
 
 def mesh_colours(doc, binc, name):
+    """A mesh's vertex colours as the game's screen-colour bytes (the file has them linear, in 16 bits)."""
     m = next(m for m in doc["meshes"] if m["name"] == name)
-    return {tuple(v[:3]) for v in values(doc, binc, m["primitives"][0]["attributes"]["COLOR_0"])}, m.get("extras")
+    acc = doc["accessors"][m["primitives"][0]["attributes"]["COLOR_0"]]
+    assert acc["componentType"] == 5123 and acc["normalized"]
+    back = {v: b for b, v in enumerate(G.LINEAR16)}
+    return {tuple(back[c] for c in v[:3]) for v in values(doc, binc, m["primitives"][0]["attributes"]["COLOR_0"])}, m.get("extras")
 
 
 def test_without_an_hour_the_sky_is_as_stored():
@@ -2803,3 +2807,14 @@ def test_a_scenes_tree_is_taken_apart_with_everything_left_where_it_was():
     assert tops[2]["matrix"][0] == pytest.approx(2.0) and "scale" not in tops[2]
     skinned = {"scene": 0, "scenes": [{"nodes": [0]}], "nodes": [{"children": [1]}, {"mesh": 0, "skin": 0}], "skins": [{"joints": [0]}]}
     assert G.flatten_nodes(skinned) == 2 and "children" in skinned["nodes"][0]   # a scene with skins is left alone
+
+
+def test_a_place_whose_files_hold_no_models_is_not_listed(tmp_path):
+    import blender_export as BX
+    z = "cement.rcf/packages/z04/"
+    out, index = copied_game(tmp_path, {z + "sosa_01_shell.p3d": area("w_none"), z + "pier_01_shell.p3d": area("w_pier"),
+                                        z + "pier_01_detail.p3d": area("w_pier_d")})
+    for r in index["versions"]["pc"]["files"]:                       # what the copy found in each file
+        r[5] = {"p3d": "other"} if "sosa" in r[0] or "detail" in r[0] else {"p3d": "models"}
+    assert [a["key"] for a in BX.areas(out, index, "pc")] == ["z04/pier_01"]       # one file with models is enough
+    assert len(BX.areas(out, index, "pc")[0]["files"]) == 2

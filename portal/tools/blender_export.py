@@ -70,6 +70,14 @@ def areas(out: Path, index: Optional[dict], version: str) -> List[dict]:
         key = place.split("/")[1] + "/" + name
         area = found.setdefault(key, {"key": key, "name": name, "place": place.split("/")[1], "files": []})
         area["files"].append(path)
+        # what the copy found in the file: an area whose files hold only scripts and triggers (no models)
+        facts = row[5] if len(row) > 5 and isinstance(row[5], dict) else None
+        if facts is None or facts.get("p3d") == "models":
+            area["drawn"] = True
+    # Nothing to draw: 17 places on the PC (sosa_01, downtown_01, the dzones of the bank and the tanker...)
+    # are only triggers and scripts. Listed, they could only answer "nothing in these files to export".
+    for key in [k for k, a in found.items() if not a.pop("drawn", False)]:
+        del found[key]
     for key, area in list(found.items()):
         # A place the story changes (Tony's mansion: _TS0 to _TS3; the cargo ship: _CS0, _CS1) has a set
         # of files per stage. All of them in one scene put the wrecked mansion inside the rebuilt one:
