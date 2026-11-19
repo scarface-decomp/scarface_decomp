@@ -516,8 +516,10 @@ def _gun_fire(b: G.Builder, fx: Optional[CFX.Effects], gref: G.Ref, wanted: str,
         # alternate fire plays "fire2"; a gun without one (an Uzi: the cutscenes' gunmen all fire this way, and
         # are seen firing) plays its "fire1"
         effects = states.get("fire2", []) if alt else []
+        launcher = bool(effects)
         effects = effects or states.get("fire1", [])
-        frames = CFX.shot_frames(a, z, rate)
+        # the grenade launcher: one grenade a press (its rate isn't known: asked in SPEC-010)
+        frames = [float(a)] if launcher else CFX.shot_frames(a, z, rate)
         for k, f0 in enumerate(frames):
             bullet += 1
             # each shot enters the state again: this shot's effects start, and the last shot's wind down
