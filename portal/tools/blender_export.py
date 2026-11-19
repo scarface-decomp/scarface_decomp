@@ -942,12 +942,20 @@ def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, byt
                 mine.add(name.lower())
         return P3G.export(lib, map_mode=True, **(opts or {}))
     glb, report = make([])
+    have = [n for n, _d in files] + [n for n, _d in library]
+    extra: List[Tuple[str, bytes]] = []
     if report.unplaced and more:
-        extra = _files_naming(more, report.unplaced, [n for n, _d in files] + [n for n, _d in library])
-        if extra:
-            glb2, report2 = make(extra)
-            if sum(report2.unplaced.values()) < sum(report.unplaced.values()):
-                return glb2, report2
+        extra = _files_naming(more, report.unplaced, have)
+    # A texture animation's pictures in another area's file: Tony's pool plays the caustic-water pictures the
+    # city's regions keep. Only these are looked for: a picture the game itself lacks would have every file read.
+    frames = _files_with(more, report.missing_frames, have + [n for n, _d in extra], most=2) \
+        if report.missing_frames and more else []
+    if extra or frames:
+        glb2, report2 = make(extra + frames)
+        if (sum(report2.unplaced.values()) <= sum(report.unplaced.values())
+                and report2.texture_animations >= report.texture_animations
+                and (report2.unplaced != report.unplaced or report2.texture_animations > report.texture_animations)):
+            return glb2, report2
     return glb, report
 
 

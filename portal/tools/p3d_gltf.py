@@ -1051,7 +1051,8 @@ class Report:
     parts: List[dict] = field(default_factory=list)            # a cutscene and the ones joined on: name, start, end, camera
     cast: List[dict] = field(default_factory=list)
     scene_props: List[str] = field(default_factory=list)
-    texture_animations: int = 0                                 # materials whose picture is swapped over time       # a cutscene's own props that went in             # a cutscene's people: name, template, model, body, face
+    texture_animations: int = 0                                 # materials whose picture is swapped over time
+    missing_frames: set = field(default_factory=set)            # pictures of texture animations not in the files       # a cutscene's own props that went in             # a cutscene's people: name, template, model, body, face
     at_origin: int = 0
     unmatched_animations: int = 0
     lights: int = 0                                               # light nodes, glTF lights or not
@@ -1748,6 +1749,8 @@ class Builder:
             ti = self.texture(picture)
             if ti is not None:
                 keys.append([frame, ti])
+            else:                                    # kept in another area's file (the caustics, in the regions')
+                self.report.missing_frames.add(picture)
         if not keys:
             return False
         mat = self.g.doc["materials"][material]
