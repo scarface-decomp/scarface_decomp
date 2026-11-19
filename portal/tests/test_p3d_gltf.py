@@ -2717,7 +2717,8 @@ def test_many_glbs_join_into_one_with_shared_pictures_kept_once(tmp_path):
     assert len(doc["nodes"]) == counts["nodes"] and len(doc["meshes"]) == counts["meshes"]
     assert len(doc["accessors"]) == counts["accessors"] and len(doc.get("images", [])) <= counts["images"]
     assert doc["buffers"] == [{"byteLength": len(binary)}]
-    names = {doc["nodes"][i].get("name") for i in doc["scenes"][0]["nodes"]}
+    assert all(i < len(doc["nodes"]) for i in doc["scenes"][0]["nodes"]) and len(doc["scenes"][0]["nodes"]) >= 3
+    names = {n.get("name") for n in doc["nodes"]}
     assert {"w_one", "w_two", "w_pier"} <= names
     for a in doc["accessors"]:                               # every accessor's bytes are inside the one buffer
         v = doc["bufferViews"][a["bufferView"]]
