@@ -256,7 +256,7 @@ class _Live:
 
 
 def _birth(e: Emitter, n: int, frame: float, born: int, rng: random.Random, size: float, speed: float,
-           record: Particle) -> _Live:
+           record: Particle, along: float = 1.0) -> _Live:
     g = e.generator
     hosp = g.value("HOSP", frame) if g else 0.0
     vesp = g.value("VESP", frame) if g else 0.0
@@ -278,7 +278,9 @@ def _birth(e: Emitter, n: int, frame: float, born: int, rng: random.Random, size
     if rdva:                                               # a random way along its own direction
         k = rdva * _spread(rng)
         at = (at[0] + direction[0] * k, at[1] + direction[1] * k, at[2] + direction[2] * k)
-    place = e.setting("TRA", frame)
+    # the particles of one step are spread along the emitter's way over the step (SPEC-010 section 1.7, the
+    # answers): along is how far, 0 to 1
+    place = e.setting("TRA", frame + along)            # the step runs from frame to frame + 1
     turn = e.setting("ROT", frame)
     if turn is not None:
         direction = _turn(turn, direction)
@@ -386,9 +388,9 @@ def play(system: System, frames: Optional[int] = None, seed: int = 0, size: floa
                 counts[n] -= make
                 alive = sum(1 for p in live if p.emitter == n)
                 make = max(0, min(make, e.most - alive, most - len(out)))
-                for _ in range(make):
+                for k in range(make):
                     record = Particle(n, f)
-                    p = _birth(e, n, frame, f, rng, size, speed, record)
+                    p = _birth(e, n, frame, f, rng, size, speed, record, (k + 1) / make)
                     record.looks.append(_look(p))
                     out.append(record)
                     live.append(p)

@@ -600,6 +600,7 @@ class Play(NamedTuple):
     first: float        # the frame it starts on
     last: float         # the frame it ends on; smaller than first = backwards; equal = held still on it
     speed: float        # multiplies the animation's frame rate
+    bounce: bool = False  # each pass runs on to the end and back again (a ping-pong frame controller)
 
     @property
     def endless(self) -> bool:
@@ -609,6 +610,21 @@ class Play(NamedTuple):
     def rounds(self) -> int:
         """How many passes to write out: one for an endless animation (it is marked as looping)."""
         return 1 if (not self.repeat or self.passes == 0) else min(self.passes, 8)
+
+
+def controller_play(mode: int, cycles: float, frames: float) -> Optional[Play]:
+    """How a frame controller's cycle mode plays an animation of so many frames (clean-room spec SPEC-011
+    section 3.2), as a Play; None for mode 0 (ANIM, every shipped controller): as the animation says, round
+    and round when its cyclic word is 1, else once, holding the last frame. HOLD stays on the first frame;
+    FWD and BACK wrap, FDBK and BKFD go there and back (BACK and BKFD starting backwards), for their cycles
+    (0: no end)."""
+    last = max(0.0, float(frames) - 1.0)
+    passes = int(cycles or 0)
+    return {1: Play(False, 0, False, 0.0, 0.0, 1.0),
+            2: Play(True, passes, False, 0.0, last, 1.0),
+            3: Play(True, passes, False, last, 0.0, 1.0),
+            4: Play(True, passes, False, 0.0, last, 1.0, True),
+            5: Play(True, passes, False, last, 0.0, 1.0, True)}.get(mode)
 
 
 def prop_play(data: bytes, c: p3d.Chunk) -> Dict[str, Play]:
@@ -685,6 +701,9 @@ def played(keys: List[Tuple[float, tuple]], play: Play, rate: float, turn: bool)
         marks.reverse()
     span = (hi - lo) / rate / play.speed
     one = [(abs(f - play.first) / rate / play.speed, at(f)) for f in marks]
+    if play.bounce:                                            # on to the end, then back the same way
+        one += [(2 * span - t, v) for t, v in reversed(one[:-1])]
+        span *= 2
     times, vals = [], []
     for n in range(play.rounds):
         for t, v in one[(1 if n else 0):]:                     # a later pass starts where the one before ended
@@ -1146,6 +1165,7 @@ class Builder:
         self.posed: set = set()                    # the animations a pose was taken from (id of the chunk)
         self._animations: Optional[Dict[str, List[Ref]]] = None
         self._plays: Optional[Dict[str, Play]] = None
+        self._modes: Optional[Dict[str, Tuple[int, float]]] = None
         self.shaped: Dict[int, list] = {}          # glTF mesh with shapes -> the sliders that work them
         self.prop = False                          # set while a placed prop goes in (its leaves: see mesh)
         self.decals: Dict[tuple, int] = {}         # a mesh's key -> the glTF mesh of its shadow decals
@@ -1829,6 +1849,22 @@ class Builder:
                             self._plays.setdefault(via.get(fc, fc), how)
         return self._plays.get(name.lower())
 
+    def controller_mode(self, name: str) -> Optional[Tuple[int, float]]:
+        """(cycle mode, cycles) of the frame controller playing the animation called name, when its mode isn't
+        0 (ANIM: as the animation says). SPEC-011 section 3.1."""
+        if self._modes is None:
+            self._modes = {}
+            for src in self.lib.sources:
+                for c in src.chunks:
+                    if c.id == FRAME_CONTROLLER:
+                        try:
+                            f = p3d.fields(src.data, c)
+                        except (p3d.P3dError, struct.error, IndexError, UnicodeDecodeError):
+                            continue
+                        if f.get("mode"):
+                            self._modes.setdefault(str(f.get("animation", "")).lower(), (f["mode"], f.get("cycles", 0)))
+        return self._modes.get(name.lower())
+
     def sky_colours(self, ref: Ref) -> Optional[Tuple[float, Dict[int, Vec3]]]:
         """For a mesh with vertex-colour sets (0x121305), at self.hour: (the set number its animation
         VRTX_<mesh name> gives, with its fraction; what to add to each vertex's own colour, blended between
@@ -2021,6 +2057,10 @@ class Builder:
         info = p3d.fields(data, c)
         rate = info.get("frame rate") or 30.0
         play = self.play_settings(info.get("name") or "")
+        if play is None:                                     # a prop state wins; else the frame controller's mode
+            mode = self.controller_mode(info.get("name") or "")
+            if mode is not None:
+                play = controller_play(mode[0], mode[1], info.get("frames") or 1)
         groups = []
         gl = c.find(ANIM_GROUP_LIST)
         for gc in (gl.children if gl else []):
@@ -2710,6 +2750,16 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
     if also is not None:
         also(b)
     _scene_extras(b, hour, weather, fog)
+    # SPEC-009 section 2.2: the game hands a prop's controllers its state's entries by place; the export matches
+    # them by name. Say where the two ways part (none in a file means both agree there).
+    for src in lib.sources:
+        if src.main and any(c.id == STATE_PROP_DATA for c in src.chunks):
+            apart = prop_order_mismatches(src.data, src.chunks)
+            if apart:
+                prop, state, i, name, there = apart[0]
+                b.report.notes.append(f"{src.label}: {len(apart)} prop state entr{'y' if len(apart) == 1 else 'ies'} "
+                                      f"name another frame controller than the one in their place (first: {prop}, "
+                                      f"state {state}, entry {i}: {name}, by place {there or 'none'}); played by name")
     if not b.g.doc["scenes"][0]["nodes"]:
         raise ExportError("nothing in these files to export" + (" (is it a map area? try --map)" if not map_mode and
                                                                  any(_world_geo(lib, s) for s in lib.sources) else ""))

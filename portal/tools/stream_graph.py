@@ -10,11 +10,19 @@ place in the city.
 The file holds Stream Packages (0x8800100: a package name and a number) and Stream Triggers (0x8800101):
 a name, the subzone it belongs to, its height, an outline on the ground (points x, y, z; y is its base),
 the packages that must be loaded while you are inside it and the slot each goes in (Global_S, Region_D,
-Shell, Detail, ZoneAnimation ...), then two region names and a number whose meaning isn't known. What is
-loaded at a place is every package of every trigger whose outline holds it; outside them all, the nearest
-trigger's. The coordinates are the map's own: in a glTF export from p3d_gltf.py, Z is mirrored, so ask for
-the export's (x, -z). Layouts in docs/FORMATS.md (from the clean-room spec
-docs/cleanroom/SPEC-001-lights-sky-streaming.md).
+Shell, Detail, ZoneAnimation ...), then two region names and a number, "gives way" when not 0.
+
+Which trigger applies (clean-room spec docs/cleanroom/SPEC-011-streaming-frame-controllers.md, sections 1
+and 2): a trigger is an upright prism, its outline from the average height of its points up by its height
+(no limit when the height is 0), and only one trigger applies at a time. What is loaded is exactly that
+trigger's packages: no union with the triggers around it. For one fixed answer per place, the first
+trigger in the file's order whose prism holds the point, the one that gives way last; outside them all,
+the nearest trigger's (the game would keep what it had). The coordinates are the map's own: in a glTF
+export from p3d_gltf.py, Z is mirrored, so ask for the export's (x, -z). Layouts in docs/FORMATS.md.
+
+Interiors' furniture (packages/dzones/*_dzone.p3d) is not in the stream graph: the mission script
+scriptc/missions/z04/dzone_triggers.dso loads each by its own outline (dzone_triggers below), and the
+outdoor pockets (packages/azones) the same way from azone_triggers.dso.
 
 Your own copies, on your own computer; standard library only.
 """
@@ -26,7 +34,7 @@ import math
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Sequence, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import p3d  # noqa: E402
@@ -43,14 +51,41 @@ class Trigger:
     height: float
     points: List[Point]                                   # the outline on the ground: x, y (its base), z
     packages: List[Tuple[str, str]]                       # (package, slot), in the file's order
-    regions: List[str] = field(default_factory=list)      # two region names: meaning not known
-    flag: int = 0                                         # meaning not known
+    regions: List[str] = field(default_factory=list)      # two region names: they load nothing
+    flag: int = 0                                         # not 0: it "gives way" (SPEC-011 section 1.3)
+
+    @property
+    def gives_way(self) -> bool:
+        return self.flag != 0
+
+    @property
+    def base(self) -> float:
+        """The prism's floor: the average of its points' heights, kept in tenths, cut down."""
+        if not self.points:
+            return 0.0
+        return _tenths(sum(p[1] for p in self.points) / len(self.points))
+
+    @property
+    def top(self) -> Optional[float]:
+        """The prism's roof (base + height), or None when the height is 0: no limit."""
+        h = _tenths(self.height)
+        return None if abs(h) <= HEIGHTLESS else self.base + h
+
+
+HEIGHTLESS = 1e-5                                         # a height this near 0 sets no limit
+STEP = 0.1                                                # the game keeps outlines in tenths of a unit
+MOST = 32767                                              # in a signed 16-bit number
+
+
+def _tenths(v: float) -> float:
+    """A length kept as a whole number of tenths, cut down (towards 0)."""
+    return int(v * 10.0) / 10.0
 
 
 @dataclass
 class Loaded:
-    """What is loaded at a place: the triggers that hold it (or, when none does, the nearest one), and
-    the packages of them all, each (package, slot) once, in the order the triggers give them."""
+    """What is loaded at a place: the trigger that applies (or, when none holds it, the nearest one) and
+    its packages, each (package, slot), in its order."""
     triggers: List[Trigger]
     inside: bool                                          # False: the nearest trigger stands in
     packages: List[Tuple[str, str]]
@@ -106,40 +141,107 @@ def distance(t: Trigger, x: float, z: float) -> float:
     return min(_segment_distance(x, z, a, b) for a, b in _edges(t))
 
 
-def contains(t: Trigger, x: float, z: float) -> bool:
-    """Whether a trigger's outline, on the ground, holds x, z (a point on the outline counts)."""
+def _grid(t: Trigger) -> Tuple[float, float, float]:
+    """How the game keeps an outline: its smallest x and z, and the step its points are counted in
+    (tenths, or coarser when the outline is too wide for a 16-bit count: SPEC-011 section 1.1, (check)
+    the coarser step)."""
+    xs, zs = [p[0] for p in t.points], [p[2] for p in t.points]
+    wide = max(max(xs) - min(xs), max(zs) - min(zs))
+    return min(xs), min(zs), max(STEP, wide / MOST)
+
+
+def contains(t: Trigger, x: float, z: float, y: Optional[float] = None) -> bool:
+    """Whether a trigger holds a place (SPEC-011 section 1.2): x and z in its outline's box and in its outline
+    (the crossing count, on the outline counted in the game's tenths), and y, when given, from its base
+    to base + height, both ends in; a trigger of no height holds every y."""
     if len(t.points) < 3:
         return False
-    if distance(t, x, z) <= 1e-6:
+    xs, zs = [p[0] for p in t.points], [p[2] for p in t.points]
+    if not (math.floor(min(xs)) <= x <= math.ceil(max(xs)) and math.floor(min(zs)) <= z <= math.ceil(max(zs))):
+        return False
+    if y is not None:
+        top = t.top
+        if top is not None and not (t.base <= y <= top):
+            return False
+    if distance(t, x, z) <= 1e-6:                          # on the outline: in
         return True
+    x0, z0, step = _grid(t)
+    q = [(int((p[0] - x0) / step), int((p[2] - z0) / step)) for p in t.points]
+    px, pz = (x - x0) / step, (z - z0) / step
     inside = False
-    for (ax, az), (bx, bz) in _edges(t):
-        if (az > z) != (bz > z) and x < ax + (z - az) * (bx - ax) / (bz - az):
+    for (ax, az), (bx, bz) in zip(q, q[1:] + q[:1]):
+        if (az > pz) != (bz > pz) and px < ax + (pz - az) * (bx - ax) / (bz - az):
             inside = not inside
     return inside
 
 
-def loaded_at(found: Sequence[Trigger], x: float, z: float) -> Loaded:
-    """What the game has loaded at x, z (the map's own coordinates): the union of the packages of every
-    trigger whose outline holds the point; when none does, the nearest trigger's."""
-    hits = [t for t in found if contains(t, x, z)]
-    inside = bool(hits)
-    if not hits and found:
-        hits = [min(found, key=lambda t: distance(t, x, z))]
-    seen, union = set(), []
-    for t in hits:
-        for pair in t.packages:
-            if pair not in seen:
-                seen.add(pair)
-                union.append(pair)
-    return Loaded(hits, inside, union)
+def current(found: Sequence[Trigger], x: float, z: float, y: Optional[float] = None) -> Optional[Trigger]:
+    """The trigger that applies at a place, for one fixed answer (SPEC-011 section 1.3): the first in the
+    file's order whose prism holds it, any other before the one that gives way. None when none holds it.
+    (In the game the current trigger is sticky: coming in from another side can keep an overlapping one.)"""
+    hits = [t for t in found if contains(t, x, z, y)]
+    return next((t for t in hits if not t.gives_way), hits[0] if hits else None)
+
+
+def loaded_at(found: Sequence[Trigger], x: float, z: float, y: Optional[float] = None) -> Loaded:
+    """What the game has loaded at x, z (and y: the height, for the triggers that have one), in the map's
+    own coordinates: exactly the packages of the one trigger that applies (SPEC-011 section 2). When no
+    trigger holds the place, the game keeps what it had: the nearest trigger stands in."""
+    hit = current(found, x, z, y)
+    inside = hit is not None
+    if hit is None and found:
+        hit = min(found, key=lambda t: distance(t, x, z))
+    if hit is None:
+        return Loaded([], False, [])
+    seen, packages_ = set(), []
+    for pair in hit.packages:
+        if pair not in seen:
+            seen.add(pair)
+            packages_.append(pair)
+    return Loaded([hit], inside, packages_)
+
+
+@dataclass
+class ScriptTrigger:
+    """A mission script's trigger (dzone_triggers.dso, azone_triggers.dso): its name, its outline (x, y, z)
+    and the packages its load command names."""
+    name: str
+    points: List[Point]
+    packages: List[str]
+
+    def holds(self, x: float, z: float) -> bool:
+        return contains(Trigger(self.name, "", 0.0, self.points, []), x, z)
+
+
+def script_triggers(text: str) -> List[ScriptTrigger]:
+    """The triggers of a decompiled zone-trigger script: each object whose words hold its outline's points
+    ("x y z", in order) and a load command, LoadDzone('...') or LoadAzone('...')."""
+    import re
+    out = []
+    for m in re.finditer(r'new \w+\("(\w+)"\)\s*\{([^{}]*)\}', text):
+        body = m.group(2)
+        points = [tuple(float(v) for v in found.split())
+                  for found in re.findall(r'=\s*"(-?[\d.]+(?:e-?\d+)? -?[\d.]+(?:e-?\d+)? -?[\d.]+(?:e-?\d+)?)"\s*;', body)]
+        loads = re.findall(r"(?<![A-Za-z])Load[AD]zone\('(\w+)'\)", body)
+        if len(points) >= 3 and loads:
+            out.append(ScriptTrigger(m.group(1), points, loads))  # type: ignore[arg-type]
+    return out
+
+
+def script_loaded_at(found: Sequence[ScriptTrigger], x: float, z: float) -> List[str]:
+    """The packages every script trigger holding x, z loads (the map's own coordinates), each once."""
+    out: List[str] = []
+    for t in found:
+        if t.holds(x, z):
+            out += [p for p in t.packages if p not in out]
+    return out
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Show what the stream graph (streamgraph.p3d) loads where.")
     ap.add_argument("file", type=Path, help="art/levels/z04/streamgraph.p3d")
-    ap.add_argument("--at", type=float, nargs=2, metavar=("X", "Z"),
-                    help="what is loaded at this place (the map's own coordinates)")
+    ap.add_argument("--at", type=float, nargs="+", metavar="X Z [Y]",
+                    help="what is loaded at this place (the map's own coordinates; the height too, if known)")
     a = ap.parse_args(argv)
     try:
         data = a.file.read_bytes()
@@ -151,11 +253,10 @@ def main(argv=None) -> int:
         print(f"{a.file}: no stream triggers in it", file=sys.stderr)
         return 1
     if a.at:
-        x, z = a.at
-        got = loaded_at(found, x, z)
+        x, z = a.at[0], a.at[1]
+        got = loaded_at(found, x, z, a.at[2] if len(a.at) > 2 else None)
         names = ", ".join(f"{t.name} ({t.subzone})" for t in got.triggers)
-        print(f"inside {len(got.triggers)} trigger(s): {names}" if got.inside
-              else f"inside no trigger; the nearest: {names}")
+        print(f"the trigger that applies: {names}" if got.inside else f"inside no trigger; the nearest: {names}")
         for slot, names_ in got.by_slot().items():
             print(f"  {slot}: {', '.join(names_)}")
         return 0

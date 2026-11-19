@@ -363,14 +363,21 @@ def _bool_channel(r: _R) -> dict:
     return {"version": ver, "parameter": param, "starts on": start == 1, "keys": r.u32()}
 
 
+CYCLE_MODES = {"HOLD": 1, "FWD": 2, "BACK": 3, "FDBK": 4, "BKFD": 5}     # any other word (ANIM): 0
+
+
 def _frame_controller(r: _R) -> dict:
-    """A Frame Controller (0x121201): u32 version, its name, 4 characters type (CAM, PTRN, LITE ...), the word
-    ANIM, a float (the frame its animation starts at: SPEC-005, section 1.4; 0 in every PC file), a u32 (1),
-    then the name of what it drives and the animation it plays."""
+    """A Frame Controller (0x121201; clean-room spec SPEC-011 section 3.1): u32 version, its name, 4
+    characters type (PTRN, TEX, PSYS, BQG, CAM, LITE ...), 4 characters cycle mode (FWD, BACK, FDBK, BKFD,
+    HOLD; any other word, ANIM in every file seen, plays as its animation says), the number of cycles (u32 in
+    version 1, f32 in version 0), u32 "for ever" (not 0: no end, and the cycles don't count), then the name
+    of what it drives and of the animation it plays."""
     ver, name, kind, word = r.u32(), r.text(), r.fourcc(), r.fourcc()
-    offset, number = r.f32(), r.u32()
-    return {"version": ver, "name": name, "type": kind, "word": word, "frame offset": round(offset, 4),
-            "number": number, "drives": r.text(), "animation": r.text()}
+    cycles = r.u32() if ver >= 1 else r.f32()
+    forever = r.u32()
+    return {"version": ver, "name": name, "type": kind, "cycle mode": word,
+            "mode": CYCLE_MODES.get(word.strip().upper(), 0), "cycles": 0 if forever else cycles,
+            "for ever": forever != 0, "drives": r.text(), "animation": r.text()}
 
 
 def _interp(r: _R) -> dict:

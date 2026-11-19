@@ -39,19 +39,70 @@ def test_the_triggers_and_packages():
     assert S.packages(city()) == {"a_01_shell": 5, "b_02_shell": 6, "c_03_shell": 7}
 
 
-def test_what_is_loaded_inside_one_trigger_and_where_two_overlap():
+def test_one_trigger_applies_where_two_overlap():
+    """SPEC-011 sections 1.3 and 2: no union; the first trigger in the file's order that holds the place,
+    and exactly its packages."""
     found = S.triggers(city())
     one = S.loaded_at(found, 2, 5)
     assert one.inside and [t.name for t in one.triggers] == ["loadTrigger"]
     assert ("b_02_shell", "Shell") not in one.packages
     both = S.loaded_at(found, 7, 5)
-    assert both.inside and [t.name for t in both.triggers] == ["loadTrigger", "loadTrigger_1"]
+    assert both.inside and [t.name for t in both.triggers] == ["loadTrigger"]
     assert both.packages == [("miami_lod", "Global_S"), ("miami_lod_d", "Global_D"), ("a_01_shell", "Shell"),
-                             ("a_01_detail", "Detail"), ("b_02_shell", "Shell"), ("b_02_detail", "Detail"),
-                             ("b_02_detailB", "Detail")]                # the union, miami_lod once
-    assert both.by_slot()["Detail"] == ["a_01_detail", "b_02_detail", "b_02_detailB"]
-    edge = S.loaded_at(found, 10, 5)                                   # on a's edge, inside b
-    assert [t.name for t in edge.triggers] == ["loadTrigger", "loadTrigger_1"]
+                             ("a_01_detail", "Detail")]
+    assert both.by_slot()["Detail"] == ["a_01_detail"]
+    assert [t.name for t in S.loaded_at(found, 12, 5).triggers] == ["loadTrigger_1"]
+
+
+def test_a_trigger_is_an_upright_prism():
+    """SPEC-011 section 1.2: from the average height of its points up by its height, both ends in; a
+    height of 0 means no limit."""
+    low = stream_trigger("loadTrigger_low", "a", square(0, 0, 10, 10), [("downstairs", "Detail")], height=10.0, base=0.0)
+    high = stream_trigger("loadTrigger_high", "a", square(0, 0, 10, 10), [("upstairs", "Detail")], height=5.0, base=10.04)
+    tall = stream_trigger("loadTrigger_tall", "a", square(20, 0, 30, 10), [("street", "Shell")], height=0.0, base=3.0)
+    found = S.triggers(p3d(low, high, tall))
+    assert found[1].base == 10.0 and found[1].top == 15.0              # kept in tenths, cut down
+    assert found[2].top is None
+    assert S.loaded_at(found, 5, 5, 4.0).packages == [("downstairs", "Detail")]
+    assert S.loaded_at(found, 5, 5, 10.0).packages == [("downstairs", "Detail")]   # its roof is in it too
+    assert S.loaded_at(found, 5, 5, 12.0).packages == [("upstairs", "Detail")]
+    assert S.loaded_at(found, 5, 5).packages == [("downstairs", "Detail")]        # without a height: the first
+    assert S.contains(found[2], 25, 5, -500.0) and S.contains(found[2], 25, 5, 9000.0)
+
+
+def test_the_trigger_that_gives_way_comes_last():
+    """SPEC-011 section 1.3: the one trigger whose last number isn't 0 gives way to any other holding you."""
+    gives = stream_trigger("loadTrigger_big", "a", square(0, 0, 100, 100), [("big", "Shell")], flag=1)
+    room = stream_trigger("loadTrigger_room", "b", square(10, 10, 20, 20), [("room", "Shell")])
+    found = S.triggers(p3d(gives, room))
+    assert found[0].gives_way and not found[1].gives_way
+    assert S.loaded_at(found, 15, 15).packages == [("room", "Shell")]
+    assert S.loaded_at(found, 50, 50).packages == [("big", "Shell")]
+
+
+def test_the_zone_scripts_triggers():
+    """The dzone and azone scripts' own outlines (SPEC-001 section 4.3), as the decompiler writes them."""
+    text = """new stxddnhlkdj("nbeach_dzTriggers")
+{
+    new stxgpjhamho("luxBank_dzTrigger")
+    {
+        stxngcbeklm = 5;
+        stxcbiedpki = "0 0 0";
+        stxdbiedpki = "10 0 0";
+        stxabiedpki = "10 0 10";
+        stxbbiedpki = "0 0 10";
+        stxgbiedpki = "0 0 0";
+        stxncchodbl = "0.0";
+        stxopplcgel = "LoadDzone('nbeach_luxBank_dzone');";
+        stxeliilhjo = "UnloadDzone('nbeach_luxBank_dzone');";
+        stxeobamfnj = "nbeach_region_D";
+    };
+    new stxgpjhamho("empty") { stxngcbeklm = 0; };
+};"""
+    found = S.script_triggers(text)
+    assert [(t.name, t.packages, len(t.points)) for t in found] == [("luxBank_dzTrigger", ["nbeach_luxBank_dzone"], 5)]
+    assert S.script_loaded_at(found, 5, 5) == ["nbeach_luxBank_dzone"]
+    assert S.script_loaded_at(found, 15, 5) == []
 
 
 def test_outside_every_trigger_the_nearest_stands_in():
@@ -77,8 +128,8 @@ def test_command_line(tmp_path, capsys):
     f.write_bytes(city())
     assert S.main([str(f), "--at", "7", "5"]) == 0
     out = capsys.readouterr().out
-    assert "inside 2 trigger(s): loadTrigger (a_01_shell), loadTrigger_1 (b_02_shell)" in out
-    assert "  Shell: a_01_shell, b_02_shell" in out
+    assert "the trigger that applies: loadTrigger (a_01_shell)" in out
+    assert "  Shell: a_01_shell\n" in out
     assert S.main([str(f), "--at", "50", "5"]) == 0
     assert "inside no trigger; the nearest: loadTrigger_1" in capsys.readouterr().out
     assert S.main([str(f)]) == 0

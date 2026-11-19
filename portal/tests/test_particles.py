@@ -132,3 +132,11 @@ def test_a_spray_goes_up_the_emitters_y_within_its_half_angles():
     for x, y, z in ways:
         assert y > math.cos(0.1745 * math.sqrt(2)) - 1e-6         # within 10 degrees each way, of up
         assert abs(math.atan2(x, y)) <= 0.1745 + 1e-6 and abs(math.atan2(z, y)) <= 0.1745 + 0.02
+
+
+def test_one_steps_particles_are_spread_along_the_emitters_way():
+    settings = [channel(0x121100, "RAT", [0], [(4.0,)]), channel(0x121100, "LIF", [0], [(9.0,)]),
+                channel(0x121104, "TRA", [0, 1], [(0.0, 0.0, 0.0), (4.0, 0.0, 0.0)])]
+    s = read(emitter(most=100, settings=settings), length=1)
+    xs = sorted(round(p.looks[0].at[0], 3) for p in PS.play(s, seed=1) if p.born == 0)
+    assert xs == [1.0, 2.0, 3.0, 4.0]                       # a quarter of the way, half, three quarters, there

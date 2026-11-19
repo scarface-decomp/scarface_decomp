@@ -417,6 +417,29 @@ def _boxes(path: Path) -> List[tuple]:
         return []
 
 
+def _zone_triggers(named) -> Callable[[float, float], List[Tuple[str, str]]]:
+    """The zone scripts' triggers (scriptc/missions/z04/dzone_triggers.dso: interiors' furniture;
+    azone_triggers.dso: outdoor pockets), as a lookup: (x, z) -> [(folder, package)] loaded there."""
+    found: List[Tuple[str, "SG.ScriptTrigger"]] = []
+    for folder, script in (("dzones", "dzone_triggers.dso"), ("azones", "azone_triggers.dso")):
+        p = named(f"/scriptc/missions/z04/{script}")
+        if p is None:
+            continue
+        try:
+            import torque_script as TS
+            found += [(folder, t) for t in SG.script_triggers(TS.decompile(p.read_bytes()))]
+        except Exception:                                    # a script that won't read: its zones are left out
+            continue
+
+    def at(x: float, z: float) -> List[Tuple[str, str]]:
+        out: List[Tuple[str, str]] = []
+        for folder, t in found:
+            if t.holds(x, z):
+                out += [(folder, package) for package in t.packages if (folder, package) not in out]
+        return out
+    return at
+
+
 def rooms_at(out: Path, index: Optional[dict], version: str, spot: Sequence[float]) -> List[Path]:
     """The files of the rooms someone at spot (x, y, z) stands in: the buildings' insides, kept apart from
     the streets (the donut shop's back room, a club), that have a mesh whose box holds the spot. The
@@ -709,25 +732,31 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
     area: List[Tuple[str, bytes]] = []
     library: List[Tuple[str, bytes]] = []
     graph = named("/art/levels/z04/streamgraph.p3d")
-    spots = [w for w in (CUT.where(sc, st) for sc, st in [(script, pieces)] + [(sc, st) for _n, sc, st in then]) if w]
+    # Where: someone's feet (with their height, for the triggers that have one), else the camera's start.
+    spots = []
+    for sc, st in [(script, pieces)] + [(sc, st) for _n, sc, st in then]:
+        feet = CUT.floor_spot(sc)
+        ground = CUT.where(sc, st)
+        if feet is not None and ground is not None and (feet[0], feet[2]) == ground:
+            spots.append((feet[0], feet[2], feet[1]))
+        elif ground is not None:
+            spots.append((ground[0], ground[1], None))
     if spots and graph is not None:
         try:
             triggers = SG.triggers(graph.read_bytes())
+            inside = _zone_triggers(named)
             seen = set()
-            for spot in spots:
-                loaded = SG.loaded_at(triggers, spot[0], spot[1])
-                if not loaded.inside:
-                    continue
-                wanted = [package for package, slot in loaded.packages if slot in ("Shell", "Detail")]
-                # A building's detail can come in two files, and the stream graph loads the second (its "b":
-                # the luxury bank's upstairs desks and chairs) from only some of the building's triggers;
-                # a cutscene there has both: Jerry's office is furnished from luxurybank_02_detailB.
-                wanted += [package + "b" for package, slot in loaded.packages
-                           if slot == "Detail" and package.lower().endswith("_detail")]
-                for package in wanted:
-                    if package.lower() not in seen:
-                        seen.add(package.lower())
-                        p = named(f"/packages/z04/{package}.p3d")
+            for x, z, y in spots:
+                # the one stream trigger that applies there, and exactly its list (SPEC-011 sections 1 and 2)
+                loaded = SG.loaded_at(triggers, x, z, y)
+                wanted = [f"/packages/z04/{package}.p3d" for package, slot in loaded.packages
+                          if slot in ("Shell", "Detail")] if loaded.inside else []
+                # ...and the furniture and outdoor pockets the zone scripts load there (SPEC-001 section 4.3)
+                wanted += [f"/packages/{folder}/{package}.p3d" for folder, package in inside(x, z)]
+                for ending in wanted:
+                    if ending.lower() not in seen:
+                        seen.add(ending.lower())
+                        p = named(ending)
                         if p is not None:
                             area.append((p.name, p.read_bytes()))
             # ...and the room, when they stand in one the streets' files don't hold

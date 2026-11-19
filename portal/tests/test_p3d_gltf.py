@@ -2922,3 +2922,18 @@ def test_a_props_entries_are_checked_against_its_controllers_by_place():
         data = p3d(fc("blades"), fc("other"), fc("light"), prop(order))
         import p3d as p3d_module
         assert G.prop_order_mismatches(data, p3d_module.read_tree(data)) == wrong
+
+
+def test_a_frame_controllers_cycle_modes():
+    """SPEC-011 section 3.2: ANIM (mode 0) leaves it to the animation; HOLD stays; FWD and BACK wrap; FDBK and
+    BKFD go there and back."""
+    assert G.controller_play(0, 0, 11) is None
+    hold = G.controller_play(1, 0, 11)
+    assert G.played([(0, (0.0,)), (10, (1.0,))], hold, 10.0, False) == ([0.0], [(0.0,)])
+    fwd = G.controller_play(2, 2, 11)
+    assert G.played([(0, (0.0,)), (10, (1.0,))], fwd, 10.0, False) == ([0.0, 1.0, 2.0], [(0.0,), (1.0,), (1.0,)])
+    back = G.controller_play(3, 0, 11)
+    assert back.endless and G.played([(0, (0.0,)), (10, (1.0,))], back, 10.0, False) == ([0.0, 1.0], [(1.0,), (0.0,)])
+    bounce = G.controller_play(4, 1, 11)
+    assert G.played([(0, (0.0,)), (10, (1.0,))], bounce, 10.0, False) == ([0.0, 1.0, 2.0], [(0.0,), (1.0,), (0.0,)])
+    assert G.controller_play(5, 0, 11).first == 10.0
