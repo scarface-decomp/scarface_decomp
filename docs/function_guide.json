@@ -7234,6 +7234,96 @@
    "what_it_does": "Adds an offset to a colour, kept in range.",
    "spec": "docs/cleanroom/SPEC-010-cutscene-effects-particles-grips.md#9-xbox-functions-read-checked-on-the-xbox",
    "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x000947F0",
+   "name_in_queue": "StreamTriggerLoader::vfunc_06",
+   "size": 1094,
+   "what_it_does": "Reads a stream trigger.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00093F40",
+   "name_in_queue": "sub_00093F40",
+   "size": 1009,
+   "what_it_does": "Builds a trigger: packed outline, box, base and height.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00094340",
+   "name_in_queue": "sub_00094340",
+   "size": 967,
+   "what_it_does": "Is a point inside a trigger.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00090990",
+   "name_in_queue": "sub_00090990",
+   "size": 170,
+   "what_it_does": "Picks the trigger that applies.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00090C90",
+   "name_in_queue": "sub_00090C90",
+   "size": 387,
+   "what_it_does": "Changes the current trigger.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00093AA0",
+   "name_in_queue": "sub_00093AA0",
+   "size": 116,
+   "what_it_does": "Marks a trigger's packages to load or unload.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00093C70",
+   "name_in_queue": "sub_00093C70",
+   "size": 325,
+   "what_it_does": "Loads or unloads the marked packages.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00094710",
+   "name_in_queue": "sub_00094710",
+   "size": 178,
+   "what_it_does": "Goes through a trigger's packages.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x00273A20",
+   "name_in_queue": "pure3d::FrameControllerLoader::vfunc_06",
+   "size": 252,
+   "what_it_does": "Reads a frame controller's start.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
+  },
+  {
+   "bin": "xb",
+   "va": "0x002739A0",
+   "name_in_queue": "pure3d::DefaultFrameControllerHandler::vfunc_04",
+   "size": 120,
+   "what_it_does": "Which types it takes.",
+   "spec": "docs/cleanroom/SPEC-011-streaming-frame-controllers.md#5-xbox-functions-read",
+   "status": "open"
   }
  ]
 }
