@@ -4868,7 +4868,10 @@
       status.textContent = res.reopened ? 'Blender is opening the city scene saved last time (' + res.saved + ').'
         : res.one_file ? 'Blender is bringing in the whole city from one file (' + res.one_file + ', which opens in other 3D programs too). When it finishes it saves ' + res.saved + ', and from then on the city opens at once.'
         : target.city ? 'Blender is bringing in ' + fmtInt(res.files) + ' areas, one at a time: the bar at the bottom of its window says how far along it is. When it finishes it saves ' + res.saved + ', and from then on the city opens at once.'
-        : 'Blender is opening it. It’s saved as ' + res.saved + ' too: next time, double-click that.';
+        : 'Blender is opening it. It’s saved as ' + res.saved + ' too: next time, double-click that.'
+          + (res.people && res.people.length ? ' In it: ' + res.people.join(', ') + '. '
+            + (res.faces.length ? 'Faces that move: ' + res.faces.join(', ') + ' (the game has no face animation for the others in this scene).'
+              : 'The game has no face animation for anyone in this scene.') : '');
       return;
     }
     status.classList.add('err');

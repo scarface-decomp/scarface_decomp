@@ -3344,6 +3344,7 @@ class Handler(BaseHTTPRequestHandler):
         version = str(body.get("version", ""))
         if version not in GA.LABELS:
             return self._json({"ok": False, "error": "Pick a version."}, 400)
+        cast: list = []
         exe = BX.find_blender(GAME_FILES.bin_dir)
         if exe is None:
             return self._json({"ok": False, "need_blender": True, "error": "Couldn't find Blender on this computer. "
@@ -3366,6 +3367,7 @@ class Handler(BaseHTTPRequestHandler):
             elif body.get("scene"):
                 scene = str(body["scene"])
                 glb, _r = BX.cutscene_glb(out, GAME_FILES.index(), version, scene)
+                cast = list(getattr(_r, "cast", []) or [])
                 name = re.sub(r'[^A-Za-z0-9._-]', "_", scene)
                 glbs, save = [folder / BX.OPENED / f"{name}.glb"], folder / BX.OPENED / f"{name}.blend"
                 glbs[0].parent.mkdir(parents=True, exist_ok=True)
@@ -3404,7 +3406,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": f"Couldn't open it in Blender: {e}"}, 500)
         one = body.get("city") and len(glbs) == 1 and not reopened
         self._json({"ok": True, "blender": str(exe), "saved": GA._show_path(save), "files": len(glbs),
-                    "reopened": reopened, **({"one_file": GA._show_path(glbs[0])} if one else {})})
+                    "reopened": reopened, **({"one_file": GA._show_path(glbs[0])} if one else {}),
+                    # a cutscene's people: who is in it, and whose face moves (the game gives extras no face animation)
+                    **({"people": [c["name"] for c in cast if c.get("model")],
+                        "faces": [c["name"] for c in cast if c.get("face") == "moves"]} if cast else {})})
 
     def post_game_files_movie(self, body):
         """Start making a movie into a video the browser plays (once; it is kept)."""
