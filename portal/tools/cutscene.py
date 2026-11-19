@@ -270,6 +270,7 @@ def facing_rotation(degrees: float) -> G.Quat:
 
 
 ROOTS = ("motion_root", "balance_root", "character_root")
+SUNK = 0.08                                                  # deeper in the floor than this (metres): on purpose
 
 
 def _first_step(keys: Dict[str, Dict[str, Tuple[List[float], List[tuple]]]], facing: G.Quat) -> Tuple[float, float]:
@@ -918,7 +919,9 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             feet[0] += dx
             feet[2] += dz
         floor = ground.height(*feet) if ground is not None and who in script.stands else None
-        if floor is not None:                                # on the floor, not the few centimetres in it
+        # On the floor, not the few centimetres in it. Someone the script sinks well into it is meant to be
+        # there: the hotel clerk is 16 cm down so that his hands reach his desk.
+        if floor is not None and floor - stand[1] <= SUNK:
             stand[1] = floor
         spot = b.g.node(label, root, translation=stand, rotation=list(facing_rotation(facing)))
         before = len(b.g.doc["nodes"])
