@@ -25,6 +25,7 @@ Your own copies, on your own computer; standard library only.
 
 from __future__ import annotations
 
+import math
 import os
 import struct
 import re
@@ -427,10 +428,43 @@ def rooms_at(out: Path, index: Optional[dict], version: str, spot: Sequence[floa
             continue
         for f in area["files"]:
             p = GA.file_on_disk(out, index, version, f)
-            if p is not None and any(b[0] <= x <= b[3] and b[1] - 0.5 <= y <= b[4] + 0.5 and b[2] <= z <= b[5]
-                                     and b[3] - b[0] < 300 and b[5] - b[2] < 300 for b in _boxes(p)):
+            if p is None:
+                continue
+            if any(b[0] <= x <= b[3] and b[1] - 0.5 <= y <= b[4] + 0.5 and b[2] <= z <= b[5]
+                   and b[3] - b[0] < 300 and b[5] - b[2] < 300 for b in _boxes(p)):
+                found.append(p)
+            elif _furnishes(p, spot):
+                # A room with no walls of its own, only its furniture placed in a building the streets' files
+                # hold (the Coconut Grove branch bank, where Jerry sits): its props stand round the spot.
                 found.append(p)
     return found[:4]
+
+
+_PROPS_AT: Dict[tuple, List[Tuple[float, float, float]]] = {}
+FURNISHED = 8.0                                  # metres along the ground: a room's placed props this near
+FURNISHED_HEIGHT = 3.0                           # and this near in height furnish where someone stands
+
+
+def _furnishes(path: Path, spot: Sequence[float]) -> bool:
+    """Whether a file's placed props stand round spot (the game's own coordinates), at least two of them."""
+    try:
+        key = (str(path), path.stat().st_mtime_ns)
+    except OSError:
+        return False
+    if key not in _PROPS_AT:
+        places = []
+        try:
+            src = P3G.Library().add(path.name, path.read_bytes(), main=True, keep=False)
+            for _model, records in P3G.instance_objects(src):
+                for rec in records:
+                    if any(rec[:3]):
+                        places.append(tuple(P3G.instance_trs(rec)[0]))
+        except (OSError, P3G.p3d.P3dError, struct.error, ValueError, IndexError):
+            pass
+        _PROPS_AT[key] = places
+    x, y, z = P3G.pos(tuple(spot))
+    return sum(1 for px, py, pz in _PROPS_AT[key]
+               if math.hypot(px - x, pz - z) < FURNISHED and abs(py - y) < FURNISHED_HEIGHT) >= 2
 
 
 _NEXT: Dict[tuple, Dict[str, str]] = {}
