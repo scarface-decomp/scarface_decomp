@@ -255,7 +255,7 @@ used `0x4500` and `0x4501` for these.
 | `0x00121107` | Entity Channel | u32 version, parameter (`TEX`), u32 keys, u16 frames, then a name per key: the texture a surface shows from that frame on (the water's caustics: `CausticWaterA_x64_rgb.01.bmp` to `.20.bmp`) |
 | `0x00121109` | Colour Channel | u32 version, parameter (`CLR`), u32 keys, u16 frames, then a u32 colour (`0xAARRGGBB`) per key: two arrays, not interleaved |
 | `0x0012110E` | Integer Channel | u32 version, parameter (`VRTX`), u32 keys, u16 frames, then a u32 per key, with no padding between the two arrays |
-| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`CAM`, `PTRN`, `LITE` ...), `ANIM`, a float (the frame its animation starts at; 0 in every PC file), a u32 (1), then the name of what it drives (a camera, a light) and the animation it plays |
+| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`PTRN`, `TEX`, `SHAD`, `VRTX`, `PSYS`, `BQG`, `CAM`, `LITE`, `EXP`, `PVIS` ...), 4 characters cycle mode (`HOLD` stays on its frame, `FWD` and `BACK` wrap round, `FDBK` and `BKFD` go there and back; any other word, `ANIM` in all 588 PC controllers, plays as its animation says: round and round when the animation's cyclic word is 1, else once, holding the last frame), the number of cycles (u32 in version 1, f32 in version 0), u32 "for ever" (not 0: no end, the cycles don't count), then the name of what it drives and the animation it plays. A prop state's own settings take over from all of this (SPEC-011 §3; `p3d.py`, `p3d_gltf.controller_play`) |
 | `0x00002200` | Camera | name, u32 version (2), float field of view (radians, across the picture), float aspect, float near and far clip, then position, look direction and up (3 floats each) |
 
 Every person in the game has the same 27-joint skeleton (`character_root`, `pelvis`, `hip_l` ...), so
@@ -695,9 +695,10 @@ Stream Packages and 297 Stream Triggers.
 | Id | Chunk | Data |
 | :--- | :--- | :--- |
 | `0x08800100` | Stream Package | the package's name (lower case, no `.p3d`), u32 (5 to 65535, one per package; meaning not known) |
-| `0x08800101` | Stream Trigger | name (`loadTrigger`, `loadTrigger_100` ...), the subzone it belongs to (`bsand_02_shell`), float height (13 for the street-level ones), u32 count and that many points (3 floats: x, y, z), u32 count and that many package names, u32 count (the same) and the slot each package goes in, two region names (`fountainrock_region`, `lobst_region`; meaning not known), u32 (0 in all but one; meaning not known) |
+| `0x08800101` | Stream Trigger | name (`loadTrigger`, `loadTrigger_100` ...), the subzone it belongs to (`bsand_02_shell`), float height (0 = no limit), u32 count and that many points (3 floats: x, y, z), u32 count and that many package names, u32 count (the same) and the slot each package goes in, two region names (`fountainrock_region`, `lobst_region`; they load nothing), u32 "gives way" (not 0 in only one trigger, `loadTrigger_258`) |
 
-A trigger's points are a closed outline on the ground; y is its base. Its packages are what must be loaded
+A trigger is an upright prism: its outline on the ground, from the average of its points' heights up by its
+height (both kept in tenths, cut down; a height of 0 sets no limit). Its packages are what must be loaded
 while you are inside it, each in a slot:
 
 | Slot | Holds |
@@ -708,10 +709,20 @@ while you are inside it, each in a slot:
 | `Detail` | the small things on top of a shell; a shell can have several (`_detail`, `_detailB` ...) |
 | `ZoneAnimation` | `packages/ZoneAnimations/<name>_anim` |
 
-What is loaded at a place is every package of every trigger whose outline holds it. Triggers overlap:
-usually three to six shells and three to eight details are loaded at once, the area you stand in and its
-neighbours. Outside every trigger, the nearest one stands in. The coordinates are the map's own, before the
-exports mirror Z ([Which way round](#which-way-round)).
+**Only one trigger applies at a time**, and what is loaded is exactly its list (SPEC-011): no union with
+the triggers around it. In the game the current trigger is sticky: while you stay inside it, overlapping
+triggers don't take over, unless it is the one that gives way. Where no prism holds you, nothing changes:
+what was loaded stays. The exports take one fixed answer per place: the first trigger in the file's order
+whose prism holds it (the one that gives way last); above every prism, the building's own trigger that
+reaches the height (Jerry's office upstairs in the Coconut Grove bank: `loadTrigger_400`, the only one that
+loads `luxurybank_02_detailB`, its furniture); else the nearest. The coordinates are the map's own, before
+the exports mirror Z ([Which way round](#which-way-round)).
+
+Interiors' furniture and props (`packages/dzones/*_dzone.p3d`, 61 triggers) and the outdoor pockets
+(`packages/azones`, 27) are not in the stream graph. The scripts `scriptc/missions/z04/dzone_triggers.dso`
+and `azone_triggers.dso` load them, each from its own outline: an object whose words hold the outline's
+points as `"x y z"` texts, in order, and a command `LoadDzone('<package>')` (or `LoadAzone`). Their
+coordinates are the map's own too. `stream_graph.script_triggers` reads them from the decompiled script.
 
 ```
 python portal/tools/stream_graph.py streamgraph.p3d               every trigger
