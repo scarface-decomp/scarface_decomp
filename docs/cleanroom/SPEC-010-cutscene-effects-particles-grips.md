@@ -497,3 +497,31 @@ The small step functions (`0x2A4530` to `0x2A4F20`) are not separate entries in 
 ## Questions from the implementer, and answers
 
 *(none yet)*
+
+*From the implementer, 19 November 2026, after building §10 steps 1 to 9 (not yet run on the PC's files):*
+
+* **Built.** `p3d.py` reads `0x1580C`, `0x15900` and the three generators, the mode word split in four;
+  `particles.py` plays a system by §1.5 to §1.8 (the count from the area under `RAT`, the `SPAR` tables at
+  twenty points, gravity times weight times `WEOL`, movement times `SPOL` and `DRA`, the four multipliers);
+  `cutscene_fx.py` puts each particle in the glTF as a square facing the camera, keyed each frame of its
+  life. In cutscenes: `NISCharacterEffect` by §2.1 and §2.2 (the head for `Headshot`, the sizes, turned
+  away from the source's `Neck`), `BloodPool` by §4.2, gun fire by §3 (a shot every `FiringRate` read from
+  `scriptc/templates/weapons.cso`, the gun's `fire1`/`fire2` effects at their offsets, a tracer every
+  `TracerFrequency`-th bullet), prop-state effects by §1.10, `NISFade` by §5. The gun stays on
+  `right_hand_attach`; the export's own turn of long guns towards the other hand is gone (§7).
+* **Chosen where the spec says (check), to be put right if the game says otherwise:**
+  1. forward for a generator's spread is +Z, and a spread is the most the direction turns either way
+     (spread × a number from −1 to 1, like the `V` channels);
+  2. a plane generator is centred on the emitter, ±half its width and height; a sphere generator starts
+     particles on the sphere, heading outwards;
+  3. a looping system's time wraps at its length; a gun's flash (which loops) plays one round per shot;
+     a fire with nothing to stop it plays 10 seconds;
+  4. mode *a* = 2 (turned along its movement on screen) is drawn unturned; picture modes 1 to 3 keep the
+     birth picture; mode *d* 0 particles under a moving gun move with it (the export has no world space
+     for them yet);
+  5. the wall splash (§2.2's ray) and the mark on the target's own model are not made: the export has no
+     collision to cast the ray against.
+* **Questions.** (a) Which way is "forward" for the spread, and is the spread the half angle or the whole?
+  (b) For a gun's `fire1` state on a looping muzzle flash: does each shot restart the system, or does it
+  run on while the control is held and stop when it is let go? (c) What does the rate's area before the
+  first key come to: the first key's value held (as now), or 0?

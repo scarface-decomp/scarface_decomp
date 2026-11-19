@@ -1097,9 +1097,41 @@ of its own.
 A mesh with a [draw-order key](#the-draw-order-key-and-the-sky) carries it in its extras
 (`{"drawOrder": 0.3}`), clamped to 0..1 as the game does.
 
-Left out for now: particles and light flares, shadow volumes, collision shapes, state-prop animations'
+Left out for now: light flares, shadow volumes, collision shapes, state-prop animations'
 callbacks and the effects states set off; the sea's reflection, ripples, waves and foam, and the fade of the
 low-detail hull and of the draw distances.
+
+### Particle systems
+
+Every particle effect in the game is in `packages/z04/Common.p3d` (123 systems on the PC), read by
+`portal/tools/particles.py` from the clean-room spec SPEC-010 section 1. Two names reach one effect:
+`<x>Shape` is the Particle System chunk itself, and `<x>` (what prop states and the effects scripts name)
+is a [composite drawable](#composite-drawables) whose part of kind 4 is that system, sometimes with other
+parts (billboards, meshes).
+
+| Chunk | Holds |
+| :--- | :--- |
+| `0x0001580C` Particle System | u32 0, its name, f32 frame rate (30), u32 length in its frames, u32 loops (1 for what goes on: fire, smoke, muzzle flashes; 0 for one-shots: hits, blood, debris), a sphere (4 f32, unused), an offset (3 f32, unused), u32 emitter count. Under it: the emitters, a `0x122000` (u32 0, f32 between 0 and 1), a Frame Controller of type `PSYS`. |
+| `0x00015900` emitter | u32 0, its name, the shader it draws with, u32 mode word, u32 (1), u32 (0), u32 most particles alive at once, u32 (0), u32 pictures side by side across its texture, u32 frames each picture lasts, f32 start angle and f32 its random spread (radians), f32 and f32 how much live particles follow the emitter's movement and turning (0 to 1). Under it: an animation of type `SPEM` (its settings over the effect's time), one of type `SPAR` (curves over a particle's life, 100 frames = 100 percent) and a generator. |
+| `0x00015B00` / `01` / `02` | Where particles start and which way they go: a point (u32 0, then horizontal and vertical spread in radians and `RDVA`), a plane (width, height, the spreads, `RDVA`) or a sphere (radius, `RDVA`), each with an animation of the same channels. |
+
+The mode word is four numbers in one: *a* = word mod 3 (0 spin, 1 spin times the spin curve, 2 turned along
+its movement), then of *w* = word ÷ 3: *w* mod 4 the picture (random kept, cycling, from a curve, random
+again every picture time), (*w* ÷ 4) mod 4 the colour (kept, colour curve, alpha curve, both) and
+(*w* ÷ 16) mod 4 whether particles move and turn with the emitter.
+
+`SPEM` channels: `RAT` (particles a frame: each frame the emitter makes as many as the area under it
+since the last frame adds up to), `LIF` life in frames, `SPD` speed, `SIZ` size, `SPI` spin, `WGT`
+weight, `GRA` gravity on the upward speed times the weight, `DRA` a factor on each step's movement, `CLR`
+and `ALP` the birth colour and alpha, `TRA` and `ROT` the emitter's place and turn; each `...V` is a random
+spread added to its base (times a number from −1 to 1). `SPAR` curves, sampled at twenty points of life:
+`SPOL` speed, `SZOL` size, `SNOL` spin, `WEOL` weight, `COOL` colour, `ALOL` alpha, `TEOL` picture.
+
+A particle is a square of its size facing the camera, drawn with its emitter's shader (`BLMD` 1 laid
+over what is behind, 2 added to it). In a cutscene's export each particle is a node with a square, keyed
+every frame of its life and shrunk to nothing outside it, its extras saying `"billboard": true` and its
+colour over life (`"colours"`: seconds, r, g, b, a, five numbers a key); the Blender script turns them to
+the camera and keys their colour.
 
 ### Ids seen but not worked out
 
@@ -1140,7 +1172,13 @@ others happen where the script first stands someone, and the map there is what t
 [stream graph](#the-stream-graph) keeps loaded at that spot (its `Shell` and `Detail` packages).
 
 `cutscene.py` reads all of this and makes one scene with everybody in it, on the street or in the room
-where it happens; opening any of a cutscene's files in the portal gives the whole cutscene. Not read yet:
+where it happens; opening any of a cutscene's files in the portal gives the whole cutscene. Its effects
+are the game's own particles (SPEC-010): `NISCharacterEffect` plays its type's system on the joint (the head
+for a headshot), turned away from `SourceCharacterName`'s neck, or a blood pool growing under them;
+`NISWeaponFire` fires the held gun every `FiringRate` milliseconds (from `scriptc/templates/weapons.cso`),
+each shot playing the gun prop's `fire1` (alternate fire: `fire2`) effects, with a tracer every second
+bullet; a prop's state plays its state's effects; `NISFade` goes to its colour, holds and clears in straight
+lines. Not read yet:
 props (`NISStatePropSpawn`), effects and sound; faces of people other than Tony whose model the script swaps in (`NISSwapModel`); a weapon hangs on the hand joint as it is, without the
 small shift the game gives each weapon.
 

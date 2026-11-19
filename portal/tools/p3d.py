@@ -715,6 +715,46 @@ def vertex_colour_sets(data: bytes, mesh: Chunk) -> List[Dict[int, Tuple[int, in
     return out
 
 
+# Particle systems (clean-room spec SPEC-010, sections 1.3, 1.4 and 1.7; particles.py plays them)
+PARTICLE_GENERATOR_FLOATS = {0x15B00: ("HOSP", "VESP", "RDVA"), 0x15B01: ("WDT", "HGT", "HOSP", "VESP", "RDVA"),
+                             0x15B02: ("RAD", "RDVA")}
+
+
+def particle_mode(word: int) -> Tuple[int, int, int, int]:
+    """An emitter's mode word as its four parts: turning, texture picture, colour and space (SPEC-010 1.4)."""
+    a, w = word % 3, word // 3
+    return a, w % 4, (w // 4) % 4, (w // 16) % 4
+
+
+def _system_fields(r: _R) -> dict:
+    out = {"version": r.u32(), "name": r.text(), "frame rate": r.f32(), "length": r.u32(), "loops": r.u32()}
+    out["sphere"] = r.floats(4)
+    out["offset"] = r.floats(3)
+    out["emitters"] = r.u32()
+    return out
+
+
+def _emitter_fields(r: _R) -> dict:
+    out = {"version": r.u32(), "name": r.text(), "shader": r.text(), "mode": r.u32(), "unknown 1": r.u32(),
+           "unknown 2": r.u32(), "most": r.u32(), "unknown 3": r.u32(), "pictures": r.u32(),
+           "picture time": r.u32()}
+    out["start angle"], out["angle spread"], out["follow move"], out["follow turn"] = r.floats(4)
+    a, b, c, d = particle_mode(out["mode"])
+    out["turning"], out["picture"], out["colour"], out["space"] = a, b, c, d
+    return out
+
+
+def _generator_fields(kind: int):
+    def read(r: _R) -> dict:
+        out = {"version": r.u32()}
+        for name in PARTICLE_GENERATOR_FLOATS[kind]:
+            out[name] = r.f32()
+        return out
+    return read
+
+
+
+
 FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x7000: _history,
     0x10000: _mesh, 0x10001: _skin, 0x10020: _prim_group, 0x10003: _box, 0x10004: _sphere,
@@ -738,6 +778,9 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x8020008: _prop_property, 0x802000B: _prop_effect, 0x8800009: _zone_entry, 0x880000A: _occluder,
     0x8800000: _model_record, 0x8800001: _model_record,
 }
+FIELDS[0x1580C], FIELDS[0x15900] = _system_fields, _emitter_fields
+for _cid in PARTICLE_GENERATOR_FLOATS:
+    FIELDS[_cid] = _generator_fields(_cid)
 for _cid in (0x121100, 0x121101, 0x121104, 0x121107, COLOUR_CHANNEL, INTEGER_CHANNEL) + QUATERNION_CHANNELS:
     FIELDS[_cid] = _channel
 FIELDS[0x121102] = FIELDS[0x121103] = _dof_channel
