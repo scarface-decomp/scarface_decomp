@@ -503,3 +503,30 @@ def test_a_scenes_own_props_are_read_and_stand_in_for_the_maps():
     assert C._hide_map_props_at(b, copy) == 1
     assert b.g.doc["nodes"][placed]["children"] == [far, above]
     assert b.g.doc["nodes"][near]["extras"] == {"hidden": True}
+
+
+def test_fades_and_effects_are_read_and_effects_go_on_the_joint_at_their_frame():
+    script = C.read_script(
+        'NISResourceLoader { Name "Ann"; TemplateName "CharTemp_Ann"; }; '
+        'NISCharacterPosition { CharacterName "Ann"; Position { x 0; y 0; z 0; }; Facing 0; }; '
+        'NISFade { FrameBegin 1560; FadeInFrames 30; DurationFrames 0; FadeOutFrames 0; Red 0; Green 0; Blue 0; }; '
+        'NISFade { FrameBegin 0; FadeInFrames 0; DurationFrames 0; FadeOutFrames 30; Red 255; Green 0; Blue 0; }; '
+        'NISCharacterEffect { CharacterName "Ann"; EffectType "GoreBloodExplosion"; JointName "Hip"; '
+        'SourceCharacterName "Tony"; FrameBegin 60; }; '
+        'NISCharacterEffect { CharacterName "Nobody"; EffectType "ShotEffectHeavy"; JointName "Hip"; FrameBegin 5; };')
+    assert script.fades == [(0, 0, 0, 30, (1.0, 0.0, 0.0)), (1560, 30, 0, 0, (0.0, 0.0, 0.0))]
+    assert script.effects == [("ann", "GoreBloodExplosion", "Hip", 60), ("nobody", "ShotEffectHeavy", "Hip", 5)]
+    glb, report = C.export("T", script, [], lambda kind, name: ("ann.p3d", face_file()) if kind == "person" else None)
+    doc, binc = read_glb(glb)
+    fades = report.parts[0]["fades"]
+    assert fades[1] == {"at": 52.0, "in": 1.0, "hold": 0.0, "out": 0.0, "colour": [0.0, 0.0, 0.0]}
+    assert doc["scenes"][0]["extras"]["parts"][0]["fades"] == fades
+    burst = next(i for i, n in enumerate(doc["nodes"]) if n["name"] == "GoreBloodExplosion on ann")
+    holder = next(n for n in doc["nodes"] if burst in n.get("children", []))
+    assert holder["name"] == "Hip"                                            # on the joint the script names
+    ch = next(c for c in doc["animations"][0]["channels"] if c["target"]["node"] == burst)
+    sm = doc["animations"][0]["samplers"][ch["sampler"]]
+    from test_p3d_gltf import values
+    assert [t for (t,) in values(doc, binc, sm["input"])] == pytest.approx([0.0, 2.0, 70 / 30])
+    assert sm["interpolation"] == "STEP"
+    assert not any(n["name"].endswith("on nobody") for n in doc["nodes"])      # nobody of that name: nothing

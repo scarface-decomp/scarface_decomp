@@ -1570,6 +1570,71 @@ def part_cameras(scene):
     return n
 
 
+def add_fades(scene):
+    # The screen fading to black (or a colour) and back, as each part's script says: a card just in front of
+    # each part's camera, its colour mixed in and out over the fade's frames, and hidden whenever it is clear.
+    # Returns how many fades.
+    count = 0
+    for f in FILES:
+        parts = parts_of(f)
+        fades = [(p.get("start", 0) + x.get("at", 0), x, p.get("camera")) for p in parts for x in (p.get("fades") or [])]
+        if not fades:
+            continue
+        mat = bpy.data.materials.new("Fade")
+        mat.use_nodes = True
+        nt = mat.node_tree
+        for n in list(nt.nodes):
+            nt.nodes.remove(n)
+        out = nt.nodes.new("ShaderNodeOutputMaterial")
+        mix = nt.nodes.new("ShaderNodeMixShader")
+        clear = nt.nodes.new("ShaderNodeBsdfTransparent")
+        glow = nt.nodes.new("ShaderNodeEmission")
+        colour = fades[0][1].get("colour") or [0, 0, 0]
+        glow.inputs[0].default_value = (linear(colour[0]), linear(colour[1]), linear(colour[2]), 1.0)
+        nt.links.new(clear.outputs[0], mix.inputs[1])
+        nt.links.new(glow.outputs[0], mix.inputs[2])
+        nt.links.new(mix.outputs[0], out.inputs[0])
+        for attr, value in (("surface_render_method", "BLENDED"), ("blend_method", "BLEND")):
+            try:
+                setattr(mat, attr, value)
+            except Exception:
+                pass
+        mat.diffuse_color = (colour[0], colour[1], colour[2], 1.0)
+        amount = mix.inputs[0]
+        cards = []
+        for cam in [o for o in scene.objects if o.type == "CAMERA"]:
+            d = max(cam.data.clip_start * 1.5, 0.01)
+            bpy.ops.mesh.primitive_plane_add(size=d * 20)
+            card = bpy.context.active_object
+            card.name = "Fade (" + cam.name + ")"
+            card.parent = cam
+            card.location = (0.0, 0.0, -d)
+            card.rotation_euler = (0.0, 0.0, 0.0)
+            card.data.materials.append(mat)
+            card.color = (colour[0], colour[1], colour[2], 1.0)
+            cards.append(card)
+        keys = {}
+        for start, x, _cam in fades:
+            a = start
+            b = a + x.get("in", 0)
+            c = b + x.get("hold", 0)
+            d = c + x.get("out", 0)
+            keys.setdefault(a, 0.0 if b > a else 1.0)
+            keys[b] = 1.0
+            keys[c] = 1.0
+            keys[d] = 0.0
+            count += 1
+        for t in sorted(keys):
+            frame = int(round(t * FPS))
+            amount.default_value = keys[t]
+            amount.keyframe_insert("default_value", frame=frame)
+            for card in cards:
+                card.hide_viewport = card.hide_render = keys[t] == 0.0
+                card.keyframe_insert("hide_viewport", frame=frame)
+                card.keyframe_insert("hide_render", frame=frame)
+    return count
+
+
 def add_sounds(scene):
     # The sounds the portal left beside a scene (<name>.sound.ogg, <name>.sound2.ogg ...) as sound strips,
     # and playback kept in step with the sound. A cutscene's parts each have their number's sound, placed
@@ -1854,6 +1919,10 @@ def finish(problems):
         traceback.print_exc()
     try:                                         # joined cutscenes: each part seen through its own camera
         part_cameras(scene)
+    except Exception:
+        traceback.print_exc()
+    try:                                         # the screen fading to black and back, as the script says
+        add_fades(scene)
     except Exception:
         traceback.print_exc()
     try:                                         # what the game loops, loops: the timeline holds a whole round
