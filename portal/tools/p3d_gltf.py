@@ -1050,7 +1050,9 @@ class Report:
     unread_groups: int = 0
     parts: List[dict] = field(default_factory=list)            # a cutscene and the ones joined on: name, start, end, camera
     cast: List[dict] = field(default_factory=list)
-    scene_props: List[str] = field(default_factory=list)       # a cutscene's own props that went in             # a cutscene's people: name, template, model, body, face
+    scene_props: List[str] = field(default_factory=list)
+    texture_animations: int = 0                                 # materials whose picture is swapped over time
+    missing_frames: set = field(default_factory=set)            # pictures of texture animations not in the files       # a cutscene's own props that went in             # a cutscene's people: name, template, model, body, face
     at_origin: int = 0
     unmatched_animations: int = 0
     lights: int = 0                                               # light nodes, glTF lights or not
@@ -1352,17 +1354,26 @@ class Builder:
             big = len(geo.positions) > 65535
             indices = self.g.accessor(flat, "SCALAR", 5125 if big else 5123, target=34963)
             info = self.shader(shader)
+            swapped = texture_controllers(ref.data, pg)      # its picture swapped frame by frame (the pool's light)
+
+            def moving(items: list, n: int) -> None:
+                for prim in items[-n:]:
+                    for anim in swapped:
+                        self.texture_animation(prim["material"], anim, ref.source)
             if (info or {}).get("pddi", "").lower() == SHADOW_DECAL_KIND and not count and skinned_to is None:
                 decal_prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader),
                                     "mode": 4})
+                moving(decal_prims, 1)
                 continue
             if self.prop and skinned_to is None and not count and is_leaf(info):
                 prims.append({"attributes": dict(attrs), "indices": indices, "material": self.material(shader, "depth"),
                               "mode": 4})
                 prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader, "colour"),
                               "mode": 4})
+                moving(prims, 2)
                 continue
             prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader), "mode": 4})
+            moving(prims, 1)
             if count:                                # every group lists every shape, moved by it or not
                 n = len(geo.positions)
                 targets = []
@@ -1731,6 +1742,31 @@ class Builder:
 
     # the sky through the day
 
+    def texture_animation(self, material: int, name: str, own: Optional[Source] = None) -> bool:
+        """A texture animation (SPEC-009 section 1) on a material, in its extras ("textureAnimation"): the
+        animation's frame rate, length and whether it goes round, and its keys, each a frame and the glTF
+        texture shown from it. glTF has no way to swap a texture over time; the Blender script makes an image
+        sequence of it. A key whose picture isn't in the files is left out (the game keeps the last one)."""
+        ref = self.find_animation(name, (own,) if own else ())
+        if ref is None:
+            return False
+        info = p3d.fields(ref.data, ref.chunk)
+        keys = []
+        for frame, picture in texture_keys(ref.data, ref.chunk):
+            ti = self.texture(picture)
+            if ti is not None:
+                keys.append([frame, ti])
+            else:                                    # kept in another area's file (the caustics, in the regions')
+                self.report.missing_frames.add(picture)
+        if not keys:
+            return False
+        mat = self.g.doc["materials"][material]
+        mat.setdefault("extras", {})["textureAnimation"] = {
+            "name": name, "fps": info.get("frame rate") or 30.0, "frames": info.get("frames") or keys[-1][0] + 1,
+            "cyclic": bool(info.get("cyclic")), "keys": keys}
+        self.report.texture_animations += 1
+        return True
+
     def find_animation(self, name: str, prefer: Sequence[Source] = ()) -> Optional[Ref]:
         """An animation (0x121000) in any of the library's files by its name (letter case ignored), from the
         preferred files first."""
@@ -2065,6 +2101,45 @@ def camera_rotation(look: Sequence[float], up: Sequence[float]) -> Quat:
     return _quat_from_rows([[x[0], y[0], z[0]], [x[1], y[1], z[1]], [x[2], y[2], z[2]]])
 
 
+CONTROLLER_LIST, ENTITY_CHANNEL = 0x121204, 0x121107
+
+
+def texture_keys(data: bytes, c: p3d.Chunk) -> List[Tuple[int, str]]:
+    """A texture animation's keys (type TEX, SPEC-009 section 1.2): [(frame, texture name)], from the Entity
+    channel in its group: u32 version, TEX, u32 count, count u16 frames, then count names."""
+    for lst in c.children:
+        if lst.id != ANIM_GROUP_LIST:
+            continue
+        for grp in lst.children:
+            for ch in grp.children if grp.id == ANIM_GROUP else ():
+                if ch.id != ENTITY_CHANNEL:
+                    continue
+                r = p3d._R(data, *ch.body)
+                r.u32()
+                if r.fourcc() != "TEX":
+                    continue
+                n = r.u32()
+                frames = list(struct.unpack_from(f"<{n}H", data, r.p))
+                r.p += 2 * n
+                return [(f, r.text()) for f in frames]
+    return []
+
+
+def texture_controllers(data: bytes, piece: p3d.Chunk) -> List[str]:
+    """The texture animations a mesh piece's own controller list names (SPEC-009 section 1.4)."""
+    out = []
+    for lst in piece.children:
+        for c in lst.children if lst.id == CONTROLLER_LIST else ():
+            if c.id == FRAME_CONTROLLER:
+                try:
+                    kind, _target, anim = frame_controller(data, c)
+                except (struct.error, IndexError, UnicodeDecodeError):
+                    continue
+                if kind.upper() == "TEX" and anim:
+                    out.append(anim)
+    return out
+
+
 def frame_controller(data: bytes, c: p3d.Chunk) -> Tuple[str, str, str]:
     """A Frame Controller (0x121201): (its type, what it drives, the animation it plays). Version, name,
     type (CAM, PTRN ...), "ANIM", two numbers, then the driven object's name and the animation's."""
@@ -2308,9 +2383,15 @@ def instance_objects(src: Source) -> List[Tuple[str, List[List[int]]]]:
     properties (binary, 0x9900194) each place one copy."""
     out = []
     for top in src.chunks:
-        if top.id != 0x9900191:
+        # in a group of script objects (0x9900191), or one on its own at the top of the file (0x9900190: Tony's
+        # hot tub, and every prop of some places, which were read as having nothing to draw)
+        if top.id == 0x9900191:
+            objects = p3d.walk(top.children)
+        elif top.id == SCRIPT_OBJECT:
+            objects = [top]
+        else:
             continue
-        for obj in p3d.walk(top.children):
+        for obj in objects:
             if obj.id != SCRIPT_OBJECT:
                 continue
             p = obj.body[0]

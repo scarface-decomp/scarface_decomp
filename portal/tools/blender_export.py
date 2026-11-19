@@ -52,6 +52,16 @@ def _rows(index: Optional[dict], version: str) -> List[list]:
     return ((index or {}).get("versions", {}).get(version) or {}).get("files", [])
 
 
+def _places_props(out: Path, stored: str) -> bool:
+    """Whether a copied file places props (a script object of class instanceobject). Read only for the
+    files the copy found no models in, which are small."""
+    p = GA.safe_output_path(out, stored) if stored else None
+    try:
+        return p is not None and b"instanceobject" in p.read_bytes().lower()
+    except OSError:
+        return False
+
+
 def areas(out: Path, index: Optional[dict], version: str) -> List[dict]:
     """[{key, name, place, files}] for every map area with a copied file, city areas first."""
     found: Dict[str, dict] = {}
@@ -72,10 +82,11 @@ def areas(out: Path, index: Optional[dict], version: str) -> List[dict]:
         area["files"].append(path)
         # what the copy found in the file: an area whose files hold only scripts and triggers (no models)
         facts = row[5] if len(row) > 5 and isinstance(row[5], dict) else None
-        if facts is None or facts.get("p3d") == "models":
+        if facts is None or facts.get("p3d") == "models" or _places_props(out, row[4]):
             area["drawn"] = True
-    # Nothing to draw: 17 places on the PC (sosa_01, downtown_01, the dzones of the bank and the tanker...)
-    # are only triggers and scripts. Listed, they could only answer "nothing in these files to export".
+    # Nothing to draw: 15 places on the PC (sosa_01, downtown_01, the dzones of the bank and the tanker...)
+    # are only triggers and scripts. Listed, they could only answer "nothing in these files to export". A
+    # file with no models of its own may still place props from others (sleepingMary_01): those stay.
     for key in [k for k, a in found.items() if not a.pop("drawn", False)]:
         del found[key]
     for key, area in list(found.items()):
@@ -942,12 +953,20 @@ def area_from_files(files: List[Tuple[str, bytes]], library: List[Tuple[str, byt
                 mine.add(name.lower())
         return P3G.export(lib, map_mode=True, **(opts or {}))
     glb, report = make([])
+    have = [n for n, _d in files] + [n for n, _d in library]
+    extra: List[Tuple[str, bytes]] = []
     if report.unplaced and more:
-        extra = _files_naming(more, report.unplaced, [n for n, _d in files] + [n for n, _d in library])
-        if extra:
-            glb2, report2 = make(extra)
-            if sum(report2.unplaced.values()) < sum(report.unplaced.values()):
-                return glb2, report2
+        extra = _files_naming(more, report.unplaced, have)
+    # A texture animation's pictures in another area's file: Tony's pool plays the caustic-water pictures the
+    # city's regions keep. Only these are looked for: a picture the game itself lacks would have every file read.
+    frames = _files_with(more, report.missing_frames, have + [n for n, _d in extra], most=2) \
+        if report.missing_frames and more else []
+    if extra or frames:
+        glb2, report2 = make(extra + frames)
+        if (sum(report2.unplaced.values()) <= sum(report.unplaced.values())
+                and report2.texture_animations >= report.texture_animations
+                and (report2.unplaced != report.unplaced or report2.texture_animations > report.texture_animations)):
+            return glb2, report2
     return glb, report
 
 
@@ -1570,6 +1589,75 @@ def part_cameras(scene):
     return n
 
 
+def glb_parts(path):
+    # A .glb's JSON and its binary part.
+    with open(path, "rb") as f:
+        data = f.read()
+    if data[:4] != b"glTF":
+        return None, b""
+    n = struct.unpack_from("<I", data, 12)[0]
+    doc = json.loads(data[20:20 + n])
+    at = 20 + n
+    binary = data[at + 8:at + 8 + struct.unpack_from("<I", data, at)[0]] if at + 8 <= len(data) else b""
+    return doc, binary
+
+
+def moving_pictures(scene):
+    # A surface whose picture the game swaps frame by frame (a pool's light, the disco ball's sparkle: the
+    # material's extras "textureAnimation"): its pictures written out as an image sequence, one file for
+    # each frame of the scene, beside the .blend, and the material's picture made that sequence. Returns
+    # how many materials.
+    import os
+    done = 0
+    for f in FILES:
+        try:
+            doc, binary = glb_parts(f)
+        except Exception:
+            continue
+        if not doc:
+            continue
+        folder = os.path.splitext(SAVE or f)[0] + " moving pictures"
+        for m in doc.get("materials", []):
+            anim = (m.get("extras") or {}).get("textureAnimation")
+            if not anim or not anim.get("keys"):
+                continue
+            mat = bpy.data.materials.get(m.get("name", ""))
+            node = None
+            if mat and mat.use_nodes:
+                node = next((n for n in mat.node_tree.nodes if n.type == "TEX_IMAGE"), None)
+            if node is None:
+                continue
+            def picture(t):
+                tex = doc["textures"][t]
+                img = doc["images"][tex["source"]]
+                view = doc["bufferViews"][img["bufferView"]]
+                at = view.get("byteOffset", 0)
+                return binary[at:at + view["byteLength"]]
+            keys = sorted((int(k[0]), int(k[1])) for k in anim["keys"])
+            fps = float(anim.get("fps") or 30.0)
+            count = max(1, int(round(float(anim.get("frames") or keys[-1][0] + 1) / fps * FPS)))
+            name = "".join(c if c.isalnum() or c in "-_" else "_" for c in m.get("name", "picture"))[:60]
+            where = os.path.join(folder, name)
+            os.makedirs(where, exist_ok=True)
+            first = None
+            for k in range(count):
+                frame = int(k * fps / FPS)                  # the game drops the fraction (SPEC-009 section 1.3)
+                tex = next((t for fr, t in reversed(keys) if fr <= frame), keys[0][1])
+                path = os.path.join(where, "%%04d.png" %% (k + 1))
+                with open(path, "wb") as out:
+                    out.write(picture(tex))
+                first = first or path
+            img = bpy.data.images.load(first, check_existing=False)
+            img.source = "SEQUENCE"
+            node.image = img
+            node.image_user.frame_duration = count
+            node.image_user.frame_start = 1
+            node.image_user.use_cyclic = bool(anim.get("cyclic", True))
+            node.image_user.use_auto_refresh = True
+            done += 1
+    return done
+
+
 def add_fades(scene):
     # The screen fading to black (or a colour) and back, as each part's script says: a card just in front of
     # each part's camera, its colour mixed in and out over the fade's frames, and hidden whenever it is clear.
@@ -1923,6 +2011,10 @@ def finish(problems):
         traceback.print_exc()
     try:                                         # the screen fading to black and back, as the script says
         add_fades(scene)
+    except Exception:
+        traceback.print_exc()
+    try:                                         # pictures the game swaps frame by frame: a pool's light
+        moving_pictures(scene)
     except Exception:
         traceback.print_exc()
     try:                                         # what the game loops, loops: the timeline holds a whole round

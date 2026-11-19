@@ -525,4 +525,16 @@ For the implementer. Choose your own names; keep each step small.
   which was enough in every scene. On the PC's 186 readable cutscenes: 450 people, every body moves, 85 use
   their cutscene model, 140 faces move (before: Tony's only). 292 people have no `NISExpAnimation` in their
   script and no shapes on their model, so their faces stay still in the export, as the files have it.
+* **Built from §1 (§8 step 4), 19 November 2026:** `p3d_gltf.texture_keys` reads §1.2's Entity channel;
+  `texture_controllers` reads a mesh piece's controller list (§1.4); `Builder.texture_animation` puts the
+  animation on the piece's material (extras `textureAnimation`: frame rate, length, cyclic, each key's frame and
+  texture). glTF cannot swap a texture over time, so the Blender script writes an image sequence beside the
+  scene (one picture per scene frame, the key at or before the frame with the fraction dropped, §1.3). On the
+  PC files: Tony's pool's 82 keys and the disco ball's 5 go in. A key whose picture is in another area's file
+  (the caustics, kept in the regions') is taken from there. Not followed: §1.5's prop-state settings, so the
+  disco ball's sparkle cycles here where §1.5 says the shipped game holds frame 0 *(the founder asked for it to
+  cycle; worth checking in the running game)*.
+* **Found while building it:** instance objects (`0x9900190` of class `instanceobject`) can stand at the top
+  of a file, not only in a group (`0x9900191`). They were not read: Tony's hot tub, and 3,240 props on the PC
+  (most on South Beach: `sbeachn_05` 1,275, `sbeachn_03` 1,010, `sbeachn_01` 625). Written up in FORMATS.md.
 
