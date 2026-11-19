@@ -457,3 +457,31 @@ def test_a_missions_cutscenes_are_joined_in_the_order_its_script_names_them():
     # the one not copied left out; a mission with one cutscene is that cutscene already
     assert C.mission_films(scripts, known) == {
         "A51": ["MNIS_A51_0_Intro", "MNIS_A51_2_Heli", "MNIS_A51_3_Boats", "MNIS_A51_9_Late", "MNIS_AMB_Dies"]}
+
+
+def test_a_script_says_when_weapons_are_held_and_fired_and_when_props_change():
+    script = C.read_script(
+        'NISWeaponAttach { CharacterName "Cuban3"; WeaponTemplateName "WeaponTemplateAK47"; FrameBegin 600; }; '
+        'NISWeaponAttach { CharacterName "Cuban3"; WeaponTemplateName "WeaponTemplateColt45"; FrameBegin 0; }; '
+        'NISWeaponAttach { CharacterName "Tony"; WeaponTemplateName "WeaponTemplateM16Mortar"; FrameBegin 98; }; '
+        'NISWeaponFire { CharacterName "Cuban3"; IsSecondaryWeapon 1; FrameBegin 182; FrameEnd 237; }; '
+        'NISWeaponFire { CharacterName "Cuban3"; FrameBegin 700; }; '
+        'NISStatePropState { StatePropName "OfficeDoors"; StateName "idle"; FrameBegin 0; }; '
+        'NISStatePropState { StatePropName "OfficeDoors"; StateName "final"; FrameBegin 642; }; '
+        'NISStatePropState { StatePropName "OfficeDoors"; StateName "damage1"; FrameBegin 625; }; '
+        'NISStatePropState { StatePropName "OfficeDoors"; StateName "final"; FrameBegin 0; };')      # how the scene leaves it
+    assert script.holds_at == {"cuban3": [(0, "WeaponTemplateColt45"), (600, "WeaponTemplateAK47")],
+                               "tony": [(98, "WeaponTemplateM16Mortar")]}
+    assert script.fires == {"cuban3": [(182, 237), (700, 706)]}
+    assert script.prop_states == {"OfficeDoors": [(0, "idle"), (625, "damage1"), (642, "final")]}
+
+
+def test_a_muzzle_flash_is_made_once_and_a_prop_placed_from_text_is_read():
+    b = G.Builder(G.Library())
+    first = C._flash_mesh(b)
+    assert C._flash_mesh(b) == first and b.g.doc["meshes"][first]["name"] == "muzzle flash"
+    material = b.g.doc["materials"][b.g.doc["meshes"][first]["primitives"][0]["material"]]
+    assert material["extras"] == {"blend": "add", "depthWrite": False}
+    line = b"\x00tmDoorCGroup\x00tmDoorC\x00-2220.523 20.538 -1702.431 0 350 0 1 1 1 0 final\x00"
+    m = C.PLACED.search(line)
+    assert m.group(1) == b"tmDoorC" and [float(v) for v in m.groups()[1:]] == [-2220.523, 20.538, -1702.431, 0.0, 350.0, 0.0]
