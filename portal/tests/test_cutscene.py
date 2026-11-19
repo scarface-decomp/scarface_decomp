@@ -530,3 +530,14 @@ def test_fades_and_effects_are_read_and_effects_go_on_the_joint_at_their_frame()
     assert [t for (t,) in values(doc, binc, sm["input"])] == pytest.approx([0.0, 2.0, 70 / 30])
     assert sm["interpolation"] == "STEP"
     assert not any(n["name"].endswith("on nobody") for n in doc["nodes"])      # nobody of that name: nothing
+
+
+def test_a_props_effects_have_a_look_and_a_length_by_their_kind():
+    fire, smoke, blast, wood = (C._prop_effect_look(k, 1.0) for k in
+                                ("epFire_Burning", "epSmoke_Lingering", "epExplosion_Generic", "epDebris_Wood"))
+    assert fire[2] and fire[3] == 60 * 30                    # adds light, burns on through the scene
+    assert not smoke[2] and smoke[1][3] < 0.5 and smoke[3] == 8 * 30
+    assert blast[3] == 20 and wood[3] == 15 and C._prop_effect_look("epFire_BurningStop", 1.0)[3] == 10 * 30
+    assert C._prop_effect_look("epDebris_Wood", 2.0)[0] == 2 * wood[0]          # the effect's size scales it
+    b = G.Builder(G.Library())
+    assert C._burst_mesh(b, 0.5, (1.0, 0.5, 0.0, 1.0), True) == C._burst_mesh(b, 0.5, (1.0, 0.5, 0.0, 1.0), True)
