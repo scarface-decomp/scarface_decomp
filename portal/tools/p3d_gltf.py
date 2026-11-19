@@ -2373,9 +2373,15 @@ def instance_objects(src: Source) -> List[Tuple[str, List[List[int]]]]:
     properties (binary, 0x9900194) each place one copy."""
     out = []
     for top in src.chunks:
-        if top.id != 0x9900191:
+        # in a group of script objects (0x9900191), or one on its own at the top of the file (0x9900190: Tony's
+        # hot tub, and every prop of some places, which were read as having nothing to draw)
+        if top.id == 0x9900191:
+            objects = p3d.walk(top.children)
+        elif top.id == SCRIPT_OBJECT:
+            objects = [top]
+        else:
             continue
-        for obj in p3d.walk(top.children):
+        for obj in objects:
             if obj.id != SCRIPT_OBJECT:
                 continue
             p = obj.body[0]
