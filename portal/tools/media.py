@@ -380,27 +380,60 @@ def _bible_lines(body: bytes) -> List[Tuple[int, str]]:
 SUBTITLE = 0x0100500A
 
 
+def stream_names(data: bytes) -> List[str]:
+    """The sounds a sound script plays (art/sound/scripts/.../<name>.p3d: a cutscene's has the scene's
+    whole sound track, `localised\\english\\nis\\ps2_finals\\<scene>_00`), as the paths they were made
+    from, in the file's order. sound_file gives each one's file. Read as the file's texts with a backslash
+    in them: nothing else in a sound script has one."""
+    import re
+    return [m.decode("latin-1") for m in re.findall(rb"[ -~]{6,}", data) if b"\\" in m]
+
+
 def subtitles(data: bytes) -> List[Tuple[str, str]]:
     """The lines a subtitle file (art/subtitles/<x>/<name>.p3d, named like the sound it goes with) holds:
-    [(language, text)]. Each is a 0x0100500A chunk: the language (u32 length, then the letters, ended and
-    padded to 4 bytes), two numbers (-1), the length of the text in UTF-16 units, then the text."""
-    out: List[Tuple[str, str]] = []
+    [(language, text)], the text with its spacing tidied. subtitle_entries gives the times too."""
+    return [(e["language"], " ".join(e["text"].split())) for e in subtitle_entries(data)]
+
+
+def subtitle_entries(data: bytes) -> List[dict]:
+    """A subtitle file's lines with their times (clean-room spec SPEC-009 sections 4.3 and 4.5):
+    [{"language", "text", "begin", "total"}]. Each is a 0x0100500A chunk: the language, two s32 times in
+    milliseconds (when the first caption appears, and how long the whole line stays; -1 = the script that
+    plays the line says), the length of the text in UTF-16 units, then the text. The language's length is a
+    u32 with the name padded to 4 bytes, or, in about 40 files, a u16 with the name unpadded. "begin" and
+    "total" are None where the file leaves them to the script."""
+    out: List[dict] = []
     if data[:4] != b"P3D\xff":
         return out
+
+    def rest(q: int, stop: int) -> Optional[Tuple[int, int, str]]:
+        if q + 12 > stop:
+            return None
+        begin, total, count = struct.unpack_from("<iiI", data, q)
+        if not 0 <= stop - (q + 12 + 2 * count) < 4:
+            return None                                      # the text must end where the chunk does
+        return begin, total, data[q + 12:q + 12 + 2 * count].decode("utf-16-le", "replace").replace("\0", " ")
     p, end = 12, min(len(data), struct.unpack_from("<I", data, 8)[0] if len(data) >= 12 else 0)
     while p + 12 <= end:
-        cid, head, size = struct.unpack_from("<3I", data, p)
+        cid, _head, size = struct.unpack_from("<3I", data, p)
         if size < 12 or p + size > len(data):
             break
         if cid == SUBTITLE:
             try:
-                q = p + 12
+                q, stop = p + 12, p + size
                 n = struct.unpack_from("<I", data, q)[0]
-                lang = data[q + 4:q + 4 + n].split(b"\0")[0].decode("latin-1")
-                q += 4 + ((n + 4) & ~3)
-                count = struct.unpack_from("<I", data, q + 8)[0]
-                text = data[q + 12:q + 12 + 2 * count].decode("utf-16-le", "replace")
-                out.append((lang, " ".join(text.replace("\0", " ").split())))
+                found, lang = None, ""
+                if n <= 64:                                  # the usual layout
+                    lang = data[q + 4:q + 4 + n].split(b"\0")[0].decode("latin-1")
+                    found = rest(q + 4 + ((n + 4) & ~3), stop)
+                if found is None:                            # the 16-bit one: the name, its zero, no padding
+                    n = struct.unpack_from("<H", data, q)[0]
+                    lang = data[q + 2:q + 2 + n].split(b"\0")[0].decode("latin-1")
+                    found = rest(q + 2 + n, stop) or rest(q + 2 + n + 1, stop)
+                if found is not None:
+                    begin, total, text = found
+                    out.append({"language": lang, "text": text, "begin": begin if begin > 0 else None,
+                                "total": total if total > 0 else None})
             except (struct.error, UnicodeDecodeError):
                 pass
         p += size

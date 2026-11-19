@@ -2608,6 +2608,30 @@ def test_a_place_in_numbered_pieces_is_also_listed_whole(tmp_path):
     assert sorted(report.models) == ["w_one", "w_one_d", "w_three", "w_two"]
 
 
+def test_a_place_another_version_didnt_copy_opens_from_the_version_that_has_it(tmp_path):
+    """The PC-first layout keeps the PC's files and not the other versions' own shells: picking the place
+    on the Xbox shows the PC's copy, without going back to pick the PC."""
+    import blender_export as BX
+    z = "cement.rcf/packages/z04/"
+    out, index = copied_game(tmp_path, {z + "club_01_shell.p3d": area("w_one"), z + "club_02_shell.p3d": area("w_two"),
+                                        z + "pier_01_shell.p3d": area("w_pier")})
+    pc = index["versions"]["pc"]["files"]
+    # the Xbox's club is its own (bigger, and not on disk: its row points at the PC's file); its pier is the PC's
+    index["versions"]["xbox"] = {"files": [[r[0], r[1] + (0 if "pier" in r[0] else 9), "x", "changed", r[4], None, 1]
+                                           for r in pc]}
+    assert BX.area_source(out, index, "xbox", "z04/club") == "pc"
+    assert BX.area_source(out, index, "xbox", "z04/club_01") == "pc"
+    assert BX.area_source(out, index, "xbox", "z04/pier_01") == "xbox"            # its own copy is there: kept
+    assert BX.area_source(out, index, "pc", "z04/club") == "pc"
+    _glb, report = BX.area_glb(out, index, "xbox", "z04/club")
+    assert sorted(report.models) == ["w_one", "w_two"]
+    for r in pc:                                                                 # nobody's copy: said plainly
+        if "club" in r[0]:
+            (out / r[4]).unlink()
+    with pytest.raises(BX.P3G.ExportError, match="weren't copied for any version"):
+        BX.area_glb(out, index, "xbox", "z04/club")
+
+
 def playing_prop(name, anim, loops, first, last, speed):
     """A State Prop Data chunk whose starting state plays anim (a Prop State Animation, 0x08020003)."""
     play = chunk(0x08020003, text(anim) + struct.pack("<3I3f", int(loops), 0, 0, first, last, speed))

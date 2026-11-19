@@ -483,6 +483,85 @@ def cutscenes(out: Path, index: Optional[dict], version: str) -> List[dict]:
     return out_
 
 
+def cutscene_sounds(out: Path, index: Optional[dict], version: str, scene: str) -> List[Tuple[bytes, str]]:
+    """A cutscene's sound track from the copied files, ready to play: [(data, ".ogg" or ".wav")]. The
+    scene's sound script (art/sound/scripts/localised/english/nis/<scene>.p3d) names it (media.stream_names);
+    nearly every scene has one sound for the whole scene, a few have several. From this version's files,
+    or another's when this one's weren't copied. [] when there is none."""
+    import media as MEDIA
+    others = [v for v in GA.PREFER if v != version and v in (index or {}).get("versions", {})]
+    for v in [version] + others:
+        rows = _scene_rows(index, v)
+
+        def named(ending: str) -> Optional[Path]:
+            ending = ending.lower()
+            hit = next((path for low, path in rows.items() if low.endswith(ending)), None)
+            return GA.file_on_disk(out, index, v, hit) if hit else None
+        script = named(f"/art/sound/scripts/localised/english/nis/{scene}.p3d")
+        if script is None:
+            continue
+        found: List[Tuple[bytes, str]] = []
+        try:
+            for name in MEDIA.stream_names(script.read_bytes()):
+                p = named("/" + MEDIA.sound_file(name))
+                if p is None:
+                    continue
+                try:
+                    data, _kind, ext = MEDIA.playable(p.read_bytes())
+                except MEDIA.MediaError:
+                    continue
+                found.append((data, ext))
+        except OSError:
+            continue
+        if found:
+            return found
+    return []
+
+
+def write_sounds(glb: Path, sounds: List[Tuple[bytes, str]]) -> List[Path]:
+    """A scene's sounds beside its .glb, where the Blender script looks for them: <name>.sound.ogg, then
+    <name>.sound2.ogg and so on. Ones left from an earlier time are taken away first."""
+    stem = glb.name[:-len(glb.suffix)] if glb.suffix else glb.name
+    for old in glb.parent.glob(stem + ".sound*"):
+        if old.suffix.lower() in (".ogg", ".wav"):
+            try:
+                old.unlink()
+            except OSError:
+                pass
+    made = []
+    for i, (data, ext) in enumerate(sounds, 1):
+        p = glb.parent / f"{stem}.sound{'' if i == 1 else i}{ext}"
+        p.write_bytes(data)
+        made.append(p)
+    return made
+
+
+def cutscene_captions(out: Path, index: Optional[dict], version: str, scene: str) -> List[dict]:
+    """The lines spoken in a cutscene as captions with their times (cutscene.captions; clean-room spec
+    SPEC-009 section 4), from the copied files: the scene's script names each line, and the line's text is
+    in the subtitle file named from it. [] when the script isn't there or names no lines. A line with no
+    subtitle file (about one in seven) is left out."""
+    import media as MEDIA
+    rows = _scene_rows(index, version)
+
+    def named(ending: str) -> Optional[Path]:
+        ending = ending.lower()
+        hit = next((path for low, path in rows.items() if low.endswith(ending)), None)
+        return GA.file_on_disk(out, index, version, hit) if hit else None
+    fsc = named(f"/art/nis/fsc/{scene}.fsc")
+    if fsc is None:
+        return []
+
+    def entry_of(name: str) -> Optional[dict]:
+        p = named("/" + MEDIA.subtitle_file(CUT.line_path(name)))
+        entries = MEDIA.subtitle_entries(p.read_bytes()) if p is not None else []
+        return next((e for e in entries if e["language"].lower().startswith("english")), entries[0] if entries else None)
+    try:
+        return CUT.captions(CUT.spoken_lines(fsc.read_text(encoding="latin-1")), entry_of)
+    except OSError:
+        return []
+
+
 def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, join: bool = True) -> Tuple[bytes, "P3G.Report"]:
     """A cutscene (art/nis/<scene>) with its people, vehicles and camera, from the copied files: its
     script says who is in it, its stream files hold what they do (see cutscene.py). With join, the
@@ -727,16 +806,65 @@ def inspect(data: bytes) -> dict:
             "lines": [{"language": lang, "text": text} for lang, text in lines]}
 
 
+_ON_DISK: Dict[Tuple[int, str], tuple] = {}
+
+
+def _copied(out: Path, index: Optional[dict], version: str, path: str) -> bool:
+    """Whether this version's own copy of a file is on disk (GA.file_on_disk, without reading the whole
+    list for every file)."""
+    listed = _rows(index, version)
+    kept = _ON_DISK.get((id(index), version))
+    if kept is None or kept[0] is not listed:                 # another list since (copied again)
+        if len(_ON_DISK) > 8:
+            _ON_DISK.clear()
+        kept = _ON_DISK[(id(index), version)] = (listed, {r[0]: r for r in listed})
+    row = kept[1].get(path)
+    if row is None or not row[4]:
+        return False
+    p = GA.safe_output_path(out, row[4])
+    try:
+        return p is not None and p.is_file() and p.stat().st_size == row[1]
+    except OSError:
+        return False
+
+
+def area_source(out: Path, index: Optional[dict], version: str, key: str,
+                listed: Optional[Dict[str, List[dict]]] = None) -> str:
+    """The version whose copy of a map area to use. The one asked for, when all its files for the area
+    were copied. A copy that keeps the PC's files and only what the others have besides (the PC-first
+    layout) leaves the other versions' own shells and details out: then the first version, the PC before
+    the rest, that has the same area with every file on disk. listed: areas() by version, to not make
+    them again for every area."""
+    def whole(v: str) -> bool:
+        every = (listed or {}).get(v)
+        if every is None:
+            every = areas(out, index, v)
+            if listed is not None:
+                listed[v] = every
+        area = next((a for a in every if a["key"].lower() == key.lower()), None)
+        return bool(area) and all(_copied(out, index, v, f) for f in area["files"])
+    if whole(version):
+        return version
+    for v in ["pc"] + [v for v in GA.LABELS if v != "pc"]:
+        if v != version and v in ((index or {}).get("versions") or {}) and whole(v):
+            return v
+    return version
+
+
 def area_glb(out: Path, index: Optional[dict], version: str, key: str,
              parsed: Optional[dict] = None, library: Optional[List[Tuple[str, bytes]]] = None,
-             insides: bool = True, opts: Optional[dict] = None, ocean: bool = True) -> Tuple[bytes, "P3G.Report"]:
+             insides: bool = True, opts: Optional[dict] = None, ocean: bool = True,
+             other: bool = True) -> Tuple[bytes, "P3G.Report"]:
     """One map area (all its files) as a .glb, with what it needs from the shared files. A city area
     opened by itself comes with its buildings' insides (the club's furniture in the club); the whole
     city leaves them out (insides=False), where each inside is a file of its own. opts: the hour, weather
     and fog for P3G.export (city_options). ocean: the sea round it (the whole city has one sea of its own
-    instead, city_ocean)."""
+    instead, city_ocean). other: when this version's own files for the area weren't copied, the area
+    from the version that has them (area_source)."""
     opts = dict(opts or {}, ocean=ocean)
-    area = next((a for a in areas(out, index, version) if a["key"] == key), None)
+    if other:
+        version = area_source(out, index, version, key)
+    area = next((a for a in areas(out, index, version) if a["key"].lower() == key.lower()), None)
     if area is None:
         raise P3G.ExportError("that map area isn't in your copied game files")
     files = []
@@ -744,6 +872,9 @@ def area_glb(out: Path, index: Optional[dict], version: str, key: str,
         p = GA.file_on_disk(out, index, version, path)
         if p is not None:
             files.append((p.name, p.read_bytes()))
+    if len(files) < len(area["files"]) and not any(len(d) > 4096 for _n, d in files):
+        raise P3G.ExportError("this place's own files weren't copied for any version (copy your game files again "
+                              "with the Every version complete layout to have each version's)")
     if library is None:
         library = [(p.name, p.read_bytes()) for p in _library(out, index, version)]
     more = _more_library(out, index, version)
@@ -1039,7 +1170,7 @@ class CityJob:
                 self.status["area"] = area["name"]
                 try:
                     glb, _report = area_glb(out, index, version, area["key"], parsed, library, insides=False,
-                                            opts=opts, ocean=False)
+                                            opts=opts, ocean=False, other=False)
                 except P3G.ExportError:
                     glb = b""
                 if glb:
@@ -1359,6 +1490,35 @@ def play_round(names):
     return longest
 
 
+def add_sounds(scene):
+    # The sounds the portal left beside a scene (<name>.sound.ogg, <name>.sound2.ogg ...) as sound strips
+    # from frame 0, one after the other, and playback kept in step with the sound.
+    import os
+    at, n = 0, 0
+    for f in FILES:
+        base, i = f[:-4], 1
+        while True:
+            tail = ".sound" + ("" if i == 1 else str(i))
+            path = next((base + tail + e for e in (".ogg", ".wav") if os.path.exists(base + tail + e)), None)
+            if path is None:
+                break
+            ed = scene.sequence_editor_create()
+            strips = getattr(ed, "strips", None)             # Blender 4.4 and later; "sequences" before
+            if strips is None:
+                strips = ed.sequences
+            strip = strips.new_sound(os.path.basename(path), path, 1 + (i - 1) %% 8, int(at))
+            at = max(at, int(strip.frame_final_end))
+            i += 1
+            n += 1
+    if n:
+        scene.frame_end = max(scene.frame_end, int(at))
+        try:
+            scene.sync_mode = "AUDIO_SYNC"
+        except Exception:
+            pass
+    return n
+
+
 def linear(c):
     # the game's colours are screen (sRGB) colours; Blender's colour settings are linear
     return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
@@ -1605,6 +1765,10 @@ def finish(problems):
     ends = [a.frame_range[1] for a in bpy.data.actions]
     if ends:
         scene.frame_start, scene.frame_end = 0, int(max(ends))
+    try:                                         # a cutscene's sound, in the sequencer under the pictures
+        add_sounds(scene)
+    except Exception:
+        traceback.print_exc()
     try:                                         # what the game loops, loops: the timeline holds a whole round
         looping = sorted({n for p in FILES for n in loops_of(p)})
         if looping:
