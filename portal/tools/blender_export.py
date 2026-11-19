@@ -618,14 +618,17 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
             return None
     script, pieces = parts(scene)
     dressed = wears(out, index, version)
-    script.tony = script.tony or CUT.outfit_for(dressed, scene)
+    # What the mission's scripts dress Tony in comes before the model the cutscene's own script swaps him
+    # into: nearly every script names the Hawaiian-shirt model, and the game shows the outfit he is wearing
+    # (the black suit all through the mansion shoot-out).
+    script.tony = CUT.outfit_for(dressed, scene) or script.tony
     then = []
     if join:
         entry = next((c for c in cutscenes(out, index, version) if c["name"].lower() == scene.lower()), None)
         for name in (entry or {}).get("then", []):
             try:
                 then.append((name,) + parts(name))
-                then[-1][1].tony = then[-1][1].tony or CUT.outfit_for(dressed, name)
+                then[-1][1].tony = CUT.outfit_for(dressed, name) or then[-1][1].tony
             except P3G.ExportError:
                 break
     # The street or room it happens in: what the game keeps loaded at that spot (the stream graph).
