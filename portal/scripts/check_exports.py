@@ -46,7 +46,7 @@ def check_cutscenes(out: Path, index: dict, version: str, log=print) -> List[dic
         try:
             _glb, r = BX.cutscene_glb(out, index, version, name, join=False)
             row["cast"] = list(r.cast)
-            row["props"] = [m for m in r.models if m not in {p["name"] for p in r.cast} and m != "camera"]
+            row["props"] = list(r.scene_props)
             row["left_out"] = sorted(r.missing_drawables)
             row["sound"] = bool(BX.cutscene_sounds(out, index, version, name))
             row["lines"] = len(BX.cutscene_captions(out, index, version, name))

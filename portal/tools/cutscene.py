@@ -1320,6 +1320,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             continue
         nodes.append(top)
         went_in.append(what)
+        b.report.scene_props.append(what)
         _hide_map_props_at(b, copy)
         anim = script.renderable_moves.get(what)
         if anim:

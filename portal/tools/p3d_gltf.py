@@ -1049,7 +1049,8 @@ class Report:
     missing_drawables: set = field(default_factory=set)
     unread_groups: int = 0
     parts: List[dict] = field(default_factory=list)            # a cutscene and the ones joined on: name, start, end, camera
-    cast: List[dict] = field(default_factory=list)             # a cutscene's people: name, template, model, body, face
+    cast: List[dict] = field(default_factory=list)
+    scene_props: List[str] = field(default_factory=list)       # a cutscene's own props that went in             # a cutscene's people: name, template, model, body, face
     at_origin: int = 0
     unmatched_animations: int = 0
     lights: int = 0                                               # light nodes, glTF lights or not
