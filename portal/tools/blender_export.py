@@ -1956,7 +1956,8 @@ def game_looks(scene):
                 see_through(mat, depth)
         except Exception:
             traceback.print_exc()
-    groups = {"Shadow decals": [], "Low-detail hull": [], "Far-away stand-ins": [], "Occluders": [], "Sea": []}
+    groups = {"Shadow decals": [], "Low-detail hull": [], "Far-away stand-ins": [], "Occluders": [], "Sea": [],
+              "Effects (stand-ins)": []}
     hidden = False
     for o in list(scene.objects):
         if own(o, "shadowDecal"):
@@ -1974,7 +1975,12 @@ def game_looks(scene):
             groups["Far-away stand-ins"] += [o] + below(o)
         elif own(o, "ocean"):
             groups["Sea"].append(o)
-    off = {"Low-detail hull": hidden, "Far-away stand-ins": True, "Occluders": True}
+        elif own(o, "effect"):
+            groups["Effects (stand-ins)"].append(o)
+    # The game's particle effects (blood, smoke, fire, debris) are marked by plain coloured cards at the
+    # right place and frames: switched off, as they look nothing like the game's. Tick the collection to see
+    # where and when they go off.
+    off = {"Low-detail hull": hidden, "Far-away stand-ins": True, "Occluders": True, "Effects (stand-ins)": True}
     for name, objects in groups.items():
         try:
             gather(scene, name, objects, shown=not off.get(name))

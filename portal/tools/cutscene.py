@@ -444,7 +444,8 @@ def _prop_states(b: G.Builder, lib: G.Library, script: Script, tracks: _Tracks, 
             # what the game sets off as the prop enters the state: the blast, wood flying, smoke, fire
             for kind, at_, size_, begin in effects.get(state.lower(), []) if frame > 0 or n > 0 else []:
                 look = _prop_effect_look(kind, size_)
-                fx = b.g.node(kind + " (" + wanted + ")", home, translation=list(G.pos(at_)), mesh=_burst_mesh(b, *look[:3]))
+                fx = b.g.node(kind + " (" + wanted + ")", home, translation=list(G.pos(at_)), mesh=_burst_mesh(b, *look[:3]),
+                              extras={"effect": kind})
                 first = frame + int(round(begin * FRAMES_A_SECOND))
                 last = first + look[3] if until is None else min(until, first + look[3])
                 if last <= first:
@@ -1316,7 +1317,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         if node is None:
             continue
         size, frames, _rgba, _add = _effect_look(kind)
-        burst = b.g.node(kind + " on " + who, node, mesh=_effect_mesh(b, kind))
+        burst = b.g.node(kind + " on " + who, node, mesh=_effect_mesh(b, kind), extras={"effect": kind})
         times = [0.0, frame / FRAMES_A_SECOND, (frame + frames) / FRAMES_A_SECOND] if frame > 0 else \
             [0.0, frames / FRAMES_A_SECOND]
         sizes = [GONE, (1.0, 1.0, 1.0), GONE] if frame > 0 else [(1.0, 1.0, 1.0), GONE]
