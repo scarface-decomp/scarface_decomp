@@ -1261,9 +1261,9 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
                         tracks.add(node, path, later(times), values)
     for who, kind, joint, frame in script.effects:           # hits, blood, a grenade going off on someone
         body = bodies.get(who)
-        node = body.nodes.get(joint) if body is not None else None
-        if node is None and body is not None:
-            node = body.nodes.get("Spine_2") or next(iter(body.nodes.values()), None)
+        node = body.nodes.get(joint.lower()) if body is not None else None
+        if node is None and body is not None:                # a joint this model doesn't have: the chest
+            node = body.nodes.get("spine_2") or next(iter(body.nodes.values()), None)
         if node is None:
             continue
         size, frames, _rgba, _add = _effect_look(kind)
