@@ -137,3 +137,21 @@ def test_command_line(tmp_path, capsys):
     assert out.startswith("3 stream package(s), 4 trigger(s)") and "subzone=c_03_shell" in out
     (tmp_path / "empty.p3d").write_bytes(p3d())
     assert S.main([str(tmp_path / "empty.p3d")]) == 1
+
+
+def test_above_every_prism_the_buildings_own_trigger():
+    """SPEC-011 section 1.3: where no prism holds you, the game keeps what it had. Upstairs in a building
+    whose street trigger stops at 10, the export takes the building's own trigger (Jerry's office)."""
+    street = stream_trigger("loadTrigger_448", "cgrove_01_shell", square(0, 0, 50, 50),
+                            [("cgrove_01_shell", "Shell"), ("bank_02_shell", "Shell"), ("bank_02_detail", "Detail")],
+                            height=10.0, base=0.0)
+    near = stream_trigger("loadTrigger_233", "cgrove_01_shell", square(-20, 0, -1, 50),
+                          [("cgrove_01_shell", "Shell"), ("bank_02_shell", "Shell")], height=0.0)
+    stairs = stream_trigger("loadTrigger_400", "bank_02_shell", square(0, 60, 20, 80),
+                            [("bank_02_shell", "Shell"), ("bank_02_detail", "Detail"), ("bank_02_detailb", "Detail")],
+                            height=0.0)
+    found = S.triggers(p3d(street, near, stairs))
+    upstairs = S.loaded_at(found, 5, 25, 13.8)
+    assert not upstairs.inside and [t.name for t in upstairs.triggers] == ["loadTrigger_400"]
+    assert ("bank_02_detailb", "Detail") in upstairs.packages
+    assert [t.name for t in S.loaded_at(found, 5, 25, 6.0).triggers] == ["loadTrigger_448"]

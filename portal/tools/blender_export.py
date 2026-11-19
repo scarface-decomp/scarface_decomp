@@ -750,7 +750,7 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
                 # the one stream trigger that applies there, and exactly its list (SPEC-011 sections 1 and 2)
                 loaded = SG.loaded_at(triggers, x, z, y)
                 wanted = [f"/packages/z04/{package}.p3d" for package, slot in loaded.packages
-                          if slot in ("Shell", "Detail")] if loaded.inside else []
+                          if slot in ("Shell", "Detail")] if loaded.how != "nearest" else []
                 # ...and the furniture and outdoor pockets the zone scripts load there (SPEC-001 section 4.3)
                 wanted += [f"/packages/{folder}/{package}.p3d" for folder, package in inside(x, z)]
                 for ending in wanted:

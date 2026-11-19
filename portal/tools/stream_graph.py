@@ -16,8 +16,9 @@ Which trigger applies (clean-room spec docs/cleanroom/SPEC-011-streaming-frame-c
 and 2): a trigger is an upright prism, its outline from the average height of its points up by its height
 (no limit when the height is 0), and only one trigger applies at a time. What is loaded is exactly that
 trigger's packages: no union with the triggers around it. For one fixed answer per place, the first
-trigger in the file's order whose prism holds the point, the one that gives way last; outside them all,
-the nearest trigger's (the game would keep what it had). The coordinates are the map's own: in a glTF
+trigger in the file's order whose prism holds the point, the one that gives way last. Outside them all the
+game keeps what it had, which depends on the way you came: above a building's street trigger, the export
+takes the building's own nearest trigger that reaches the height; else the nearest trigger. The coordinates are the map's own: in a glTF
 export from p3d_gltf.py, Z is mirrored, so ask for the export's (x, -z). Layouts in docs/FORMATS.md.
 
 Interiors' furniture (packages/dzones/*_dzone.p3d) is not in the stream graph: the mission script
@@ -87,8 +88,9 @@ class Loaded:
     """What is loaded at a place: the trigger that applies (or, when none holds it, the nearest one) and
     its packages, each (package, slot), in its order."""
     triggers: List[Trigger]
-    inside: bool                                          # False: the nearest trigger stands in
+    inside: bool                                          # False: no prism holds the place
     packages: List[Tuple[str, str]]
+    how: str = "inside"                                   # or "came through" (the building's own) or "nearest"
 
     def by_slot(self) -> Dict[str, List[str]]:
         out: Dict[str, List[str]] = {}
@@ -159,10 +161,8 @@ def contains(t: Trigger, x: float, z: float, y: Optional[float] = None) -> bool:
     xs, zs = [p[0] for p in t.points], [p[2] for p in t.points]
     if not (math.floor(min(xs)) <= x <= math.ceil(max(xs)) and math.floor(min(zs)) <= z <= math.ceil(max(zs))):
         return False
-    if y is not None:
-        top = t.top
-        if top is not None and not (t.base <= y <= top):
-            return False
+    if y is not None and not contains_height(t, y):
+        return False
     if distance(t, x, z) <= 1e-6:                          # on the outline: in
         return True
     x0, z0, step = _grid(t)
@@ -189,16 +189,39 @@ def loaded_at(found: Sequence[Trigger], x: float, z: float, y: Optional[float] =
     trigger holds the place, the game keeps what it had: the nearest trigger stands in."""
     hit = current(found, x, z, y)
     inside = hit is not None
+    how = "inside"
+    if hit is None and y is not None:
+        hit, how = _came_through(found, x, z, y), "came through"
     if hit is None and found:
-        hit = min(found, key=lambda t: distance(t, x, z))
+        hit, how = min(found, key=lambda t: distance(t, x, z)), "nearest"
     if hit is None:
-        return Loaded([], False, [])
+        return Loaded([], False, [], "nearest")
     seen, packages_ = set(), []
     for pair in hit.packages:
         if pair not in seen:
             seen.add(pair)
             packages_.append(pair)
-    return Loaded([hit], inside, packages_)
+    return Loaded([hit], inside, packages_, how)
+
+
+def _came_through(found: Sequence[Trigger], x: float, z: float, y: float) -> Optional[Trigger]:
+    """Above (or below) every prism at a place, the game keeps what it had (SPEC-011 section 1.3), which
+    depends on the way you came. One fixed guess: the triggers that hold the place on the ground name the
+    building round it among their shells (a shell other than their own subzone, the street's); you came
+    through one of that building's own triggers, so the nearest one whose prism reaches the height. Jerry's
+    office, upstairs in the Coconut Grove bank, is above loadTrigger_448 and reached through loadTrigger_400,
+    the bank's own trigger, which alone loads its upstairs furniture (luxurybank_02_detailB)."""
+    below = [t for t in found if contains(t, x, z)]
+    buildings = {p.lower() for t in below for p, slot in t.packages
+                 if slot == "Shell" and p.lower() != t.subzone.lower()}
+    own = [t for t in found if t.subzone.lower() in buildings and contains_height(t, y)]
+    return min(own, key=lambda t: distance(t, x, z)) if own else None
+
+
+def contains_height(t: Trigger, y: float) -> bool:
+    """Whether a trigger's prism reaches a height (a trigger of no height reaches every one)."""
+    top = t.top
+    return top is None or t.base <= y <= top
 
 
 @dataclass
