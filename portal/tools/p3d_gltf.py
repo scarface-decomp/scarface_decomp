@@ -1354,19 +1354,26 @@ class Builder:
             big = len(geo.positions) > 65535
             indices = self.g.accessor(flat, "SCALAR", 5125 if big else 5123, target=34963)
             info = self.shader(shader)
+            swapped = texture_controllers(ref.data, pg)      # its picture swapped frame by frame (the pool's light)
+
+            def moving(items: list, n: int) -> None:
+                for prim in items[-n:]:
+                    for anim in swapped:
+                        self.texture_animation(prim["material"], anim, ref.source)
             if (info or {}).get("pddi", "").lower() == SHADOW_DECAL_KIND and not count and skinned_to is None:
                 decal_prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader),
                                     "mode": 4})
+                moving(decal_prims, 1)
                 continue
             if self.prop and skinned_to is None and not count and is_leaf(info):
                 prims.append({"attributes": dict(attrs), "indices": indices, "material": self.material(shader, "depth"),
                               "mode": 4})
                 prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader, "colour"),
                               "mode": 4})
+                moving(prims, 2)
                 continue
             prims.append({"attributes": attrs, "indices": indices, "material": self.material(shader), "mode": 4})
-            for anim in texture_controllers(ref.data, pg):   # its picture swapped frame by frame (the pool's light)
-                self.texture_animation(prims[-1]["material"], anim, ref.source)
+            moving(prims, 1)
             if count:                                # every group lists every shape, moved by it or not
                 n = len(geo.positions)
                 targets = []
