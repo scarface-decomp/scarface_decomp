@@ -1403,7 +1403,7 @@
               <button type="button" class="btn-sm" id="gfb-scene-dl" onclick="gfDownloadScene()">Download .glb</button>
               <span class="hdr-stat" id="gfb-scene-count"></span>
             </div>
-            <p class="gf-notes" id="gfb-scene-note">Everybody in it, the vehicles and the camera, moving together, on the street or in the room where it happens. Each cutscene is listed once (the game keeps a second copy of each for European televisions), and the ones the game plays straight after one another come as one. In Blender, press Space to play it. View here shows how it starts.</p>
+            <p class="gf-notes" id="gfb-scene-note">Everybody in it, the vehicles and the camera, moving together, on the street or in the room where it happens. Each cutscene is listed once (the game keeps a second copy of each for European televisions), and the ones the game plays straight after one another come as one. At the end of the list, each mission's cutscenes joined in the order its script names them (the play in between is not in them). In Blender, press Space to play it. View here shows how it starts.</p>
             <div class="gfb-row gfb-pick">
               <label for="gfb-fps">Frames a second in Blender</label>
               <select id="gfb-fps" class="input-box" onchange="saveGfSpeed()">
@@ -4420,7 +4420,9 @@
     const sel = $('gfb-scene'), want = $('gfb-scene-find').value.trim().toLowerCase(), keep = sel.value;
     sel.textContent = '';
     GF_SCENES.forEach((c) => {
-      const label = c.name + ((c.then || []).length ? ', then ' + c.then.join(', then ') : '');
+      // a mission's cutscenes joined in order are listed as the mission
+      const label = (c.mission ? 'Mission ' + c.mission + ', all its cutscenes: ' + c.first : c.name)
+        + ((c.then || []).length ? ', then ' + c.then.join(', then ') : '');
       if (want && !label.toLowerCase().includes(want)) return;
       const o = el('option', label);
       o.value = c.name;
