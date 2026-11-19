@@ -483,6 +483,59 @@ def cutscenes(out: Path, index: Optional[dict], version: str) -> List[dict]:
     return out_
 
 
+def cutscene_sounds(out: Path, index: Optional[dict], version: str, scene: str) -> List[Tuple[bytes, str]]:
+    """A cutscene's sound track from the copied files, ready to play: [(data, ".ogg" or ".wav")]. The
+    scene's sound script (art/sound/scripts/localised/english/nis/<scene>.p3d) names it (media.stream_names);
+    nearly every scene has one sound for the whole scene, a few have several. From this version's files,
+    or another's when this one's weren't copied. [] when there is none."""
+    import media as MEDIA
+    others = [v for v in GA.PREFER if v != version and v in (index or {}).get("versions", {})]
+    for v in [version] + others:
+        rows = _scene_rows(index, v)
+
+        def named(ending: str) -> Optional[Path]:
+            ending = ending.lower()
+            hit = next((path for low, path in rows.items() if low.endswith(ending)), None)
+            return GA.file_on_disk(out, index, v, hit) if hit else None
+        script = named(f"/art/sound/scripts/localised/english/nis/{scene}.p3d")
+        if script is None:
+            continue
+        found: List[Tuple[bytes, str]] = []
+        try:
+            for name in MEDIA.stream_names(script.read_bytes()):
+                p = named("/" + MEDIA.sound_file(name))
+                if p is None:
+                    continue
+                try:
+                    data, _kind, ext = MEDIA.playable(p.read_bytes())
+                except MEDIA.MediaError:
+                    continue
+                found.append((data, ext))
+        except OSError:
+            continue
+        if found:
+            return found
+    return []
+
+
+def write_sounds(glb: Path, sounds: List[Tuple[bytes, str]]) -> List[Path]:
+    """A scene's sounds beside its .glb, where the Blender script looks for them: <name>.sound.ogg, then
+    <name>.sound2.ogg and so on. Ones left from an earlier time are taken away first."""
+    stem = glb.name[:-len(glb.suffix)] if glb.suffix else glb.name
+    for old in glb.parent.glob(stem + ".sound*"):
+        if old.suffix.lower() in (".ogg", ".wav"):
+            try:
+                old.unlink()
+            except OSError:
+                pass
+    made = []
+    for i, (data, ext) in enumerate(sounds, 1):
+        p = glb.parent / f"{stem}.sound{'' if i == 1 else i}{ext}"
+        p.write_bytes(data)
+        made.append(p)
+    return made
+
+
 def cutscene_captions(out: Path, index: Optional[dict], version: str, scene: str) -> List[dict]:
     """The lines spoken in a cutscene as captions with their times (cutscene.captions; clean-room spec
     SPEC-009 section 4), from the copied files: the scene's script names each line, and the line's text is
@@ -1365,6 +1418,35 @@ def play_round(names):
     return longest
 
 
+def add_sounds(scene):
+    # The sounds the portal left beside a scene (<name>.sound.ogg, <name>.sound2.ogg ...) as sound strips
+    # from frame 0, one after the other, and playback kept in step with the sound.
+    import os
+    at, n = 0, 0
+    for f in FILES:
+        base, i = f[:-4], 1
+        while True:
+            tail = ".sound" + ("" if i == 1 else str(i))
+            path = next((base + tail + e for e in (".ogg", ".wav") if os.path.exists(base + tail + e)), None)
+            if path is None:
+                break
+            ed = scene.sequence_editor_create()
+            strips = getattr(ed, "strips", None)             # Blender 4.4 and later; "sequences" before
+            if strips is None:
+                strips = ed.sequences
+            strip = strips.new_sound(os.path.basename(path), path, 1 + (i - 1) %% 8, int(at))
+            at = max(at, int(strip.frame_final_end))
+            i += 1
+            n += 1
+    if n:
+        scene.frame_end = max(scene.frame_end, int(at))
+        try:
+            scene.sync_mode = "AUDIO_SYNC"
+        except Exception:
+            pass
+    return n
+
+
 def linear(c):
     # the game's colours are screen (sRGB) colours; Blender's colour settings are linear
     return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
@@ -1611,6 +1693,10 @@ def finish(problems):
     ends = [a.frame_range[1] for a in bpy.data.actions]
     if ends:
         scene.frame_start, scene.frame_end = 0, int(max(ends))
+    try:                                         # a cutscene's sound, in the sequencer under the pictures
+        add_sounds(scene)
+    except Exception:
+        traceback.print_exc()
     try:                                         # what the game loops, loops: the timeline holds a whole round
         looping = sorted({n for p in FILES for n in loops_of(p)})
         if looping:

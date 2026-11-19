@@ -86,3 +86,66 @@ def test_captions_share_the_lines_time_by_their_length():
     text = CUT.srt(caps)
     assert text.startswith("1\n00:00:01,500 --> 00:00:02,190\nTony.\n\n2\n00:00:02,190 --> 00:00:05,500\n")
     assert text.count("-->") == 3 and CUT.srt([]) == ""
+
+
+# --------------------------------------------------------------------------- the scene's sound
+
+def test_a_cutscenes_sound_script_names_its_sound_track():
+    script = (b"P3D\xff" + bytes(20) + b"MNIS_X\0" + b"SeqEventStream\0" + struct.pack("<I", 40)
+              + b"localised\\english\\nis\\ps2_finals\\mnis_x_00\0\0" + bytes(12))
+    assert media.stream_names(script) == ["localised\\english\\nis\\ps2_finals\\mnis_x_00"]
+    assert media.stream_names(b"P3D\xff" + b"SeqEventStream\0") == []
+
+
+def test_a_cutscenes_sound_comes_from_the_copied_files_and_lands_beside_the_scene(tmp_path):
+    import sys
+    import types
+    import blender_export as BX
+    name = "localised\\english\\nis\\ps2_finals\\mnis_x_00"
+    ogg = b"OggS" + bytes(range(200))
+    rsd = b"RSD6OOGV" + struct.pack("<3I", 2, 16, 48000) + b"****" + b"c:\\x.wav\0"
+    rsd = rsd + bytes(0x800 - len(rsd)) + ogg
+    files = {"sound.rcf/art/sound/scripts/localised/english/nis/MNIS_X.p3d": b"P3D\xff" + name.encode() + b"\0",
+             "sound.rcf/" + media.sound_file(name): rsd}
+    out = tmp_path / "game_files"
+    rows = []
+    for path, data in files.items():
+        (out / "PC" / path).parent.mkdir(parents=True, exist_ok=True)
+        (out / "PC" / path).write_bytes(data)
+        rows.append([path, len(data), "s", "only", "PC/" + path, None, 1])
+    # the Xbox's own copies weren't copied (the PC-first layout): the PC's sound is used
+    index = {"versions": {"pc": {"files": rows}, "xbox": {"files": [[r[0], r[1] + 1, "x", "changed", r[4], None, 1] for r in rows]}}}
+    for version in ("pc", "xbox"):
+        sounds = BX.cutscene_sounds(out, index, version, "MNIS_X")
+        assert [ext for _d, ext in sounds] == [".ogg"] and sounds[0][0].startswith(b"OggS")
+    assert BX.cutscene_sounds(out, index, "pc", "MNIS_Y") == []
+    glb = tmp_path / "Opened" / "MNIS_X.glb"
+    glb.parent.mkdir()
+    (glb.parent / "MNIS_X.sound3.wav").write_bytes(b"old")
+    made = BX.write_sounds(glb, sounds + [(b"RIFF", ".wav")])
+    assert [p.name for p in made] == ["MNIS_X.sound.ogg", "MNIS_X.sound2.wav"]
+    assert sorted(p.name for p in glb.parent.iterdir()) == ["MNIS_X.sound.ogg", "MNIS_X.sound2.wav"]
+
+    # in Blender: sound strips from frame 0, one after the other, and playback in step with the sound
+    placed = []
+
+    class Strips:
+        def new_sound(self, label, path, channel, frame):
+            placed.append((label, channel, frame))
+            return types.SimpleNamespace(frame_final_end=frame + 300)
+    scene = types.SimpleNamespace(frame_end=120, sync_mode="NONE",
+                                  sequence_editor_create=lambda: types.SimpleNamespace(sequences=Strips()))
+    old = sys.modules.get("bpy")
+    sys.modules["bpy"] = types.SimpleNamespace(app=types.SimpleNamespace(
+        background=False, timers=types.SimpleNamespace(register=lambda *a, **k: None)))
+    try:
+        ns: dict = {}
+        exec(compile(BX.OPEN_SCRIPT % {"files": [str(glb)], "save": None, "fps": 30}, "open_in_blender.py", "exec"), ns)
+        assert ns["add_sounds"](scene) == 2
+    finally:
+        if old is None:
+            del sys.modules["bpy"]
+        else:
+            sys.modules["bpy"] = old
+    assert placed == [("MNIS_X.sound.ogg", 1, 0), ("MNIS_X.sound2.wav", 2, 300)]
+    assert scene.frame_end == 600 and scene.sync_mode == "AUDIO_SYNC"

@@ -3360,6 +3360,8 @@ class Handler(BaseHTTPRequestHandler):
                 spoken = BX.cutscene_captions(out, GAME_FILES.index(), version, scene)
                 if spoken:                               # the lines spoken in it, as subtitles beside the scene
                     glbs[0].with_suffix(".srt").write_text(BX.CUT.srt(spoken), encoding="utf-8")
+                # its sound, beside it: the Blender script puts it in the sequencer, in step with the pictures
+                BX.write_sounds(glbs[0], BX.cutscene_sounds(out, GAME_FILES.index(), version, scene))
             elif body.get("area"):
                 key = str(body["area"])
                 glb, _r = BX.area_glb(out, GAME_FILES.index(), version, key)
