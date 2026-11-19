@@ -291,8 +291,12 @@ def _birth(e: Emitter, n: int, frame: float, born: int, rng: random.Random, size
         return float(v[0]) if v is not None else default
     go = (num("SPD") + num("SPDV") * _spread(rng)) * speed
     clr = e.setting("CLR", frame, (255, 255, 255, 255))
-    clrv = e.setting("CLRV", frame, (0, 0, 0, 0))
-    offset = (clrv[1] * _spread(rng), clrv[2] * _spread(rng), clrv[3] * _spread(rng), num("ALPV") * _spread(rng))
+    clrv = e.setting("CLRV", frame, (0,))
+    if len(clrv) >= 4:                                     # a colour each way
+        offset = (clrv[1] * _spread(rng), clrv[2] * _spread(rng), clrv[3] * _spread(rng), num("ALPV") * _spread(rng))
+    else:                                                  # one number (the game's files): the same for all three
+        shade = float(clrv[0]) * _spread(rng)
+        offset = (shade, shade, shade, num("ALPV") * _spread(rng))
     rgb = tuple(_clamp(c + o) for c, o in zip(clr[1:], offset))
     alpha = _clamp(num("ALP", 255.0) + offset[3])
     birth_size = max(0.0, (num("SIZ") + num("SIZV") * _spread(rng)) * size)
