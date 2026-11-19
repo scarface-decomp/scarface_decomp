@@ -53,6 +53,7 @@ own files or programs, or written up through the clean room ([CLEAN_ROOM.md](CLE
 | The horizon's colour through the day; the cars' dents (per-vertex damage); the cut-scene package's file entry; the exporter's notes | [SPEC-008](cleanroom/SPEC-008-horizon-dents.md) |
 | Texture animations (`TEX`); a prop state's animation settings, clock and effect times; cutscene faces of people other than Tony; where cutscene lines (subtitles) are and how they are timed; text bibles; corrections to SPEC-005 and FORMATS.md | [SPEC-009](cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md) |
 | Particle effects (`0x1580C`, emitters, generators, life curves); cutscene effects, gun fire, blood marks, fades; two-handed grips | [SPEC-010](cleanroom/SPEC-010-cutscene-effects-particles-grips.md) |
+| Which stream trigger applies at a place and what unloads; frame controllers' cycle modes and types | [SPEC-011](cleanroom/SPEC-011-streaming-frame-controllers.md) |
 | The game's name key (how objects are found by name) | [SPEC-006 §5](cleanroom/SPEC-006-lights-placed-props-reflection.md#5-the-games-name-key-checked-on-the-xbox) |
 | What functions do: the Xbox ones the specs cover, about 500 PC ones (renderer, draw list, lights, placed props, render calls) and about 230 engine ones marked low confidence, whose Xbox twins do the same | [function_guide.json](function_guide.json) |
 | Names given so far, and why | `reports/names.json`, [NAMES.md](NAMES.md) |
@@ -78,6 +79,9 @@ own files or programs, or written up through the clean room ([CLEAN_ROOM.md](CLE
   every cutscene face, cutscene subtitles; it also corrects SPEC-005 §2.1 and §1.3 (its §6).
 * [SPEC-010 §10](cleanroom/SPEC-010-cutscene-effects-particles-grips.md#10-what-to-build): particle
   chunks in `p3d.py`, a particle player, cutscene effects, gun fire and fades in the exports.
+* [SPEC-011 §6](cleanroom/SPEC-011-streaming-frame-controllers.md#6-what-to-build): one stream trigger
+  at a time in the exports, dzone triggers for interiors, frame controller cycle modes; it corrects
+  SPEC-001 §4.2 and SPEC-005 §1.4 (its §4).
 * In `function_guide.json`, every function with `"status": "open"` is waiting to be matched.
 
 When you finish a spec's work item, say so in the pull request and answer its questions in the spec's
