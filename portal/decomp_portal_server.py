@@ -3154,6 +3154,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": "Previews only work on the computer the portal runs on."}, 403)
         if (self.headers.get("Sec-Fetch-Site") or "").strip().lower() == "cross-site":
             return self._json({"ok": False, "error": "Requests from other websites are not accepted."}, 403)
+        if what == "model" and q1("city"):
+            return self._send_city(q1("version"))
         if what == "model" and q1("area"):
             return self._send_area(q1("version"), q1("area"))
         if what == "model" and q1("scene"):
@@ -3302,6 +3304,18 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": f"Couldn't read the cutscene's files: {e}"}, 500)
         name = re.sub(r'[^A-Za-z0-9._-]', "_", scene) + ".glb"
         self._send(200, glb, "model/gltf-binary", {"Content-Disposition": f'attachment; filename="{name}"'})
+
+    def _send_city(self, version: str) -> None:
+        """The exported city as one .glb (BX.city_one_file), for the portal's own viewer."""
+        if version not in GA.LABELS:
+            return self._json({"ok": False, "error": "Pick a version."}, 400)
+        try:
+            one = BX.city_one_file(BLENDER.folder(version), GA.LABELS[version])
+        except P3G.ExportError:
+            return self._json({"ok": False, "error": "Export the city first: then it can be looked at here."}, 404)
+        except (ValueError, KeyError, IndexError, struct.error, OSError) as e:
+            return self._json({"ok": False, "error": f"Couldn't put the city's files together: {e}"}, 500)
+        self._send_file_ranged(one, "model/gltf-binary")
 
     def _send_area(self, version: str, key: str) -> None:
         """A whole map area (its shell and detail files) as one .glb."""

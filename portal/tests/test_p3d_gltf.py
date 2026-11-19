@@ -566,6 +566,20 @@ def test_portal_hands_over_a_whole_area(monkeypatch, tmp_path):
     assert code == 200 and ctype == "model/gltf-binary" and 'filename="a_01.glb"' in extra["Content-Disposition"]
     server.Handler.get_game_file_preview(Fake(), "model", lambda k, d="": {"version": "pc", "area": "z04/zz"}.get(k, d))
     assert sent[-1][0] == 404 and "isn't in your copied game files" in sent[-1][2]["error"]
+    # the whole exported city as one file, for the page's own view
+    folder = tmp_path / "blender" / "PC"
+    monkeypatch.setattr(server.BLENDER, "folder", lambda version: folder)
+    Fake._send_city = server.Handler._send_city
+    Fake._send_file_ranged = lambda self, path, ctype: sent.append((200, ctype, path, None))
+    ask = lambda **q: server.Handler.get_game_file_preview(Fake(), "model", lambda k, d="": q.get(k, d))
+    ask(version="pc", city="1")
+    assert sent[-1][0] == 404 and "Export the city first" in sent[-1][2]["error"]
+    folder.mkdir(parents=True)
+    (folder / "a_01.glb").write_bytes(server.BX.area_glb(out, index, "pc", "z04/a_01")[0])
+    ask(version="pc", city="1")
+    assert sent[-1][:2] == (200, "model/gltf-binary") and sent[-1][2].name == "PC city.glb" and sent[-1][2].is_file()
+    ask(version="nope", city="1")
+    assert sent[-1][0] == 400
 
 
 # --------------------------------------------------------------------------- cameras

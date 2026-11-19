@@ -269,8 +269,9 @@ def gf_run(versions, mode, folders="game", all_there=False):
         st.update(running=False, phase="done", message="Done")
 
 
-def small_glb() -> bytes:
-    """A real little model for the page's 3D view: one textured, bright red triangle and one see-through one."""
+def small_glb(many: int = 0) -> bytes:
+    """A real little model for the page's 3D view: one textured, bright red triangle and one see-through one.
+    many: that many more of the red one, stood in a square on the ground (a city for the big scene's view)."""
     import media
     png = media.png(2, 2, bytes([255, 40, 40, 255] * 4))
     pos = struct.pack("<9f", -1, 0, 0, 1, 0, 0, 0, 1.5, 0)
@@ -294,6 +295,10 @@ def small_glb() -> bytes:
                          {"bufferView": 1, "componentType": 5126, "count": 3, "type": "VEC2"},
                          {"bufferView": 2, "componentType": 5123, "count": 3, "type": "SCALAR"}],
            "bufferViews": views, "buffers": [{"byteLength": off}]}
+    side = int(many ** 0.5) + 1
+    for i in range(many):
+        doc["nodes"].append({"mesh": 0, "translation": [3.0 * (i % side), 0, 3.0 * (i // side)]})
+        doc["scenes"][0]["nodes"].append(len(doc["nodes"]) - 1)
     js = json.dumps(doc).encode()
     js += b" " * (-len(js) % 4)
     body = b"".join(parts)
@@ -441,6 +446,8 @@ class Handler(BaseHTTPRequestHandler):
             if u.path == "/api/game-files/model":
                 if CONFIG.get("model_error"):
                     return self._json({"ok": False, "error": "Nothing to show in Blender: nothing in these files to export."}, 415)
+                if q.get("city"):
+                    return self._bytes(small_glb(many=9000), "model/gltf-binary")
                 return self._bytes(b"glTF" + bytes(8) if CONFIG.get("bad_glb") else small_glb(), "model/gltf-binary")
             if u.path == "/api/easy-pass":
                 EASY["polls"] += 1
