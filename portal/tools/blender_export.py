@@ -604,6 +604,8 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
             p = named(f"/art/vehicles/{wanted}.p3d")
         elif kind == "weapons":
             p = named("/art/stateprops/weapons_test/guns.p3d")
+        elif kind == "scene":                                # the scene's own file: the people it swaps in
+            p = named(f"/art/nis/{wanted}/static.p3d")
         else:
             p = next((q for q in (named(f"/art/characters/{d}{wanted}.p3d") for d in ("npc/", "pc/", "")) if q), None)
         try:

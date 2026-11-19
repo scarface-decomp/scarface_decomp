@@ -105,6 +105,8 @@ class Script:
         self.tony = ""                                      # the suit Tony is changed into (NISSwapModel)
         self.holds: Dict[str, str] = {}                     # person (lower) -> weapon template (NISWeaponAttach)
         self.faces: Dict[str, str] = {}                     # person (lower) -> their face's animation (NISExpAnimation)
+        self.swaps: Dict[str, str] = {}                     # person (lower) -> the cutscene model they are changed
+        #                                                     into (NISSwapModel), kept in the scene's static.p3d
 
 
 def _body(text: str, start: int) -> str:
@@ -141,6 +143,8 @@ def read_script(text: str) -> Script:
             s.holds.setdefault(str(f["CharacterName"]).lower(), str(f["WeaponTemplateName"]))
         elif kind == "NISSwapModel" and str(f.get("Character", "")).lower() == TONY and f.get("newModel") and not s.tony:
             s.tony = re.sub(r"Drawable$", "", str(f["newModel"]), flags=re.I)
+        elif kind == "NISSwapModel" and f.get("Character") and f.get("newModel"):
+            s.swaps.setdefault(str(f["Character"]).lower(), str(f["newModel"]))
         elif kind == "NISSequenceCue" and f.get("CameraAnimationName") and not s.camera:
             s.camera = str(f["CameraAnimationName"])
             # A cue with a place of its own: the camera's move is measured from there, not from the map's
@@ -795,13 +799,15 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
     return glb, report
 
 
-def _person(b: G.Builder, lib: G.Library, src: G.Source, spot: int, label: str) -> Optional[G.SkeletonCopy]:
+def _person(b: G.Builder, lib: G.Library, src: G.Source, spot: int, label: str,
+            wanted: str = "") -> Optional[G.SkeletonCopy]:
     """Someone's model from their file, under spot: their skeleton, or None when nothing went in. A file
     with a composite drawable that holds the body (Tony's cutscene suits) is put in whole, eyes and teeth
-    on their joints; otherwise the full-detail skins on their skeleton."""
+    on their joints; otherwise the full-detail skins on their skeleton. wanted: the composite's name, in a
+    file that holds several people (a scene's static.p3d): only that one, or nothing."""
     skin_names = {G.chunk_name(src.data, c).lower() for c in src.chunks if c.id == G.SKIN}
     for c in src.chunks:
-        if c.id != G.COMPOSITE:
+        if c.id != G.COMPOSITE or (wanted and G.chunk_name(src.data, c).lower() != wanted.lower()):
             continue
         parts = [G.composite_prop(src.data, k)[0].lower() for k in c.children if k.id == G.COMPOSITE_PROP]
         if any(p in skin_names for p in parts):
@@ -809,6 +815,8 @@ def _person(b: G.Builder, lib: G.Library, src: G.Source, spot: int, label: str) 
             b.composite(G.Ref(src, c), spot, label + " skeleton")
             if len(b.copies) > before:
                 return b.copies[before]
+    if wanted:
+        return None
     skins = [c for c in src.chunks if c.id == G.SKIN]
     full = [c for c in skins if "_low" not in G.chunk_name(src.data, c).lower()] or skins
     copy, placed = None, False
@@ -862,8 +870,16 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         src = source("tony", script.tony) if who == TONY else source("person", cast.get(who) or "CharTemp_" + who)
         label = "Tony" if who == TONY else next((k for k in script.cast if k.lower() == who), who)
         # who they are in the report: the model they got, and whether their body and face move
+        # The model the scene changes someone into (SPEC-009 section 3.1) is in the scene's own static.p3d,
+        # with the shapes their face moves by; without it, the everyday model their template names.
+        swapped = ""
+        if who != TONY and who in script.swaps:
+            own = source("scene", name)
+            if own is not None and any(c.id == G.COMPOSITE and G.chunk_name(own.data, c).lower() == script.swaps[who].lower()
+                                       for c in own.chunks):
+                src, swapped = own, script.swaps[who]
         role = {"name": label, "template": script.tony if who == TONY else cast.get(who) or "CharTemp_" + who,
-                "model": src.label if src is not None else "", "body": "", "face": ""}
+                "model": (swapped or src.label) if src is not None else "", "body": "", "face": ""}
         b.report.cast.append(role)
         if src is None:
             left_out.append(label)
@@ -875,7 +891,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             stand[1] = floor
         spot = b.g.node(label, root, translation=stand, rotation=list(facing_rotation(facing)))
         before = len(b.g.doc["nodes"])
-        copy = _person(b, lib, src, spot, label)
+        copy = _person(b, lib, src, spot, label, swapped)
         if copy is None:
             b.g.doc["nodes"][root]["children"].remove(spot)
             left_out.append(label)
