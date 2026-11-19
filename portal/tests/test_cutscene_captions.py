@@ -149,3 +149,49 @@ def test_a_cutscenes_sound_comes_from_the_copied_files_and_lands_beside_the_scen
             sys.modules["bpy"] = old
     assert placed == [("MNIS_X.sound.ogg", 1, 0), ("MNIS_X.sound2.wav", 2, 300)]
     assert scene.frame_end == 600 and scene.sync_mode == "AUDIO_SYNC"
+
+
+def test_joined_cutscenes_get_each_parts_sound_and_camera_at_its_start(tmp_path):
+    import json
+    import sys
+    import types
+    import blender_export as BX
+    glb = tmp_path / "MNIS_One.glb"
+    parts = [{"name": "MNIS_One", "start": 0.0, "end": 10.0, "camera": "CAM_One"},
+             {"name": "MNIS_Two", "start": 10.0, "end": 14.0, "camera": "CAM_Two"},
+             {"name": "MNIS_Three", "start": 14.0, "end": 20.0, "camera": "CAM_Three"}]
+    js = json.dumps({"scene": 0, "scenes": [{"nodes": [], "extras": {"parts": parts}}]}).encode()
+    js += b" " * (-len(js) % 4)
+    glb.write_bytes(b"glTF" + struct.pack("<II", 2, 20 + len(js)) + struct.pack("<I", len(js)) + b"JSON" + js)
+    # the second part has no sound: the third's still starts with the third
+    made = BX.write_sounds(glb, [(b"OggS", ".ogg"), None, (b"OggS", ".ogg")])
+    assert [p.name for p in made] == ["MNIS_One.sound.ogg", "MNIS_One.sound3.ogg"]
+    placed, markers = [], []
+
+    class Strips:
+        def new_sound(self, label, path, channel, frame):
+            placed.append((label, frame))
+            return types.SimpleNamespace(frame_final_end=frame + 100)
+
+    class Markers:
+        def new(self, name, frame=0):
+            markers.append(types.SimpleNamespace(name=name, frame=frame, camera=None))
+            return markers[-1]
+    cams = {n: types.SimpleNamespace(type="CAMERA", name=n) for n in ("CAM_One", "CAM_Two")}     # the third's is missing
+    scene = types.SimpleNamespace(frame_end=10, sync_mode="NONE", timeline_markers=Markers(),
+                                  sequence_editor_create=lambda: types.SimpleNamespace(strips=Strips()))
+    old = sys.modules.get("bpy")
+    sys.modules["bpy"] = types.SimpleNamespace(
+        app=types.SimpleNamespace(background=False, timers=types.SimpleNamespace(register=lambda *a, **k: None)),
+        data=types.SimpleNamespace(objects=cams))
+    try:
+        ns: dict = {}
+        exec(compile(BX.OPEN_SCRIPT % {"files": [str(glb)], "save": None, "fps": 60}, "open_in_blender.py", "exec"), ns)
+        assert ns["add_sounds"](scene) == 2 and ns["part_cameras"](scene) == 2
+    finally:
+        if old is None:
+            del sys.modules["bpy"]
+        else:
+            sys.modules["bpy"] = old
+    assert placed == [("MNIS_One.sound.ogg", 0), ("MNIS_One.sound3.ogg", 840)]           # 14 seconds at 60 a second
+    assert [(m.name, m.frame, m.camera.name) for m in markers] == [("MNIS_One", 0, "CAM_One"), ("MNIS_Two", 600, "CAM_Two")]

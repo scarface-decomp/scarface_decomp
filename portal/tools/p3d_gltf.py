@@ -1048,6 +1048,7 @@ class Report:
     missing_textures: set = field(default_factory=set)
     missing_drawables: set = field(default_factory=set)
     unread_groups: int = 0
+    parts: List[dict] = field(default_factory=list)            # a cutscene and the ones joined on: name, start, end, camera
     cast: List[dict] = field(default_factory=list)             # a cutscene's people: name, template, model, body, face
     at_origin: int = 0
     unmatched_animations: int = 0
@@ -2436,7 +2437,7 @@ def _scene_extras(b: Builder, hour: Optional[float], weather: Optional[str], fog
         extras["hour"] = hour
     if fog:
         extras["fog"] = fog
-    b.g.doc["scenes"][0]["extras"] = extras
+    b.g.doc["scenes"][0]["extras"] = dict(b.g.doc["scenes"][0].get("extras") or {}, **extras)
 
 
 def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims: Sequence[Ref] = (),

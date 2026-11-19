@@ -3372,11 +3372,18 @@ class Handler(BaseHTTPRequestHandler):
                 glbs, save = [folder / BX.OPENED / f"{name}.glb"], folder / BX.OPENED / f"{name}.blend"
                 glbs[0].parent.mkdir(parents=True, exist_ok=True)
                 glbs[0].write_bytes(glb)
-                spoken = BX.cutscene_captions(out, GAME_FILES.index(), version, scene)
+                # the scene and the ones joined on after it: each part's lines and sound start when it does
+                parts = list(getattr(_r, "parts", []) or []) or [{"name": scene, "start": 0.0}]
+                spoken, sounds = [], []
+                for part in parts:
+                    for cap in BX.cutscene_captions(out, GAME_FILES.index(), version, part["name"]):
+                        spoken.append(dict(cap, start=cap["start"] + part["start"], end=cap["end"] + part["start"]))
+                    found = BX.cutscene_sounds(out, GAME_FILES.index(), version, part["name"])
+                    sounds.append(found[0] if found else None)
                 if spoken:                               # the lines spoken in it, as subtitles beside the scene
                     glbs[0].with_suffix(".srt").write_text(BX.CUT.srt(spoken), encoding="utf-8")
                 # its sound, beside it: the Blender script puts it in the sequencer, in step with the pictures
-                BX.write_sounds(glbs[0], BX.cutscene_sounds(out, GAME_FILES.index(), version, scene))
+                BX.write_sounds(glbs[0], sounds)
             elif body.get("area"):
                 key = str(body["area"])
                 glb, _r = BX.area_glb(out, GAME_FILES.index(), version, key)

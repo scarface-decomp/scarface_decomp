@@ -518,9 +518,10 @@ def cutscene_sounds(out: Path, index: Optional[dict], version: str, scene: str) 
     return []
 
 
-def write_sounds(glb: Path, sounds: List[Tuple[bytes, str]]) -> List[Path]:
+def write_sounds(glb: Path, sounds: List[Optional[Tuple[bytes, str]]]) -> List[Path]:
     """A scene's sounds beside its .glb, where the Blender script looks for them: <name>.sound.ogg, then
-    <name>.sound2.ogg and so on. Ones left from an earlier time are taken away first."""
+    <name>.sound2.ogg and so on (for a cutscene with others joined on, each part's sound has its part's
+    number; None for a part without one). Ones left from an earlier time are taken away first."""
     stem = glb.name[:-len(glb.suffix)] if glb.suffix else glb.name
     for old in glb.parent.glob(stem + ".sound*"):
         if old.suffix.lower() in (".ogg", ".wav"):
@@ -529,7 +530,10 @@ def write_sounds(glb: Path, sounds: List[Tuple[bytes, str]]) -> List[Path]:
             except OSError:
                 pass
     made = []
-    for i, (data, ext) in enumerate(sounds, 1):
+    for i, sound in enumerate(sounds, 1):
+        if sound is None:
+            continue
+        data, ext = sound
         p = glb.parent / f"{stem}.sound{'' if i == 1 else i}{ext}"
         p.write_bytes(data)
         made.append(p)
@@ -1433,6 +1437,11 @@ def start():
         bpy.context.preferences.edit.use_global_undo = False
     except Exception:
         pass
+    try:                                         # play at the scene's real speed: when the computer can't draw
+        bpy.context.scene.sync_mode = "FRAME_DROP"   # every frame (more of them at 60 or 120 a second), frames are
+                                                 # skipped. Blender's own way, every frame, plays it in slow motion
+    except Exception:
+        pass
 
 
 def fog_of(path):
@@ -1497,25 +1506,64 @@ def play_round(names):
     return longest
 
 
+def parts_of(path):
+    # A cutscene's parts (itself, then the ones joined on) from its scene's extras: name, start and end in
+    # seconds, and the camera's name.
+    try:
+        with open(path, "rb") as f:
+            head = f.read(20)
+            if head[:4] != b"glTF":
+                return []
+            text = f.read(struct.unpack_from("<I", head, 12)[0])
+        if b'"parts"' not in text:
+            return []
+        doc = json.loads(text)
+        scene = (doc.get("scenes") or [{}])[doc.get("scene", 0)]
+        return list((scene.get("extras") or {}).get("parts") or [])
+    except Exception:
+        return []
+
+
+def part_cameras(scene):
+    # A cutscene with others joined on has a camera for each part: a marker at each part's start hands the
+    # view to that part's camera, so the picture cuts as the game's does. Returns how many markers.
+    n = 0
+    for f in FILES:
+        parts = parts_of(f)
+        if len(parts) < 2:
+            continue
+        for part in parts:
+            cam = bpy.data.objects.get(part.get("camera") or "")
+            if cam is None or cam.type != "CAMERA":
+                continue
+            marker = scene.timeline_markers.new(part.get("name") or "part", frame=int(round(part.get("start", 0) * FPS)))
+            marker.camera = cam
+            n += 1
+    return n
+
+
 def add_sounds(scene):
-    # The sounds the portal left beside a scene (<name>.sound.ogg, <name>.sound2.ogg ...) as sound strips
-    # from frame 0, one after the other, and playback kept in step with the sound.
+    # The sounds the portal left beside a scene (<name>.sound.ogg, <name>.sound2.ogg ...) as sound strips,
+    # and playback kept in step with the sound. A cutscene's parts each have their number's sound, placed
+    # at the part's start; without parts, from frame 0, one after the other.
     import os
     at, n = 0, 0
     for f in FILES:
-        base, i = f[:-4], 1
-        while True:
+        base, parts = f[:-4], parts_of(f)
+        for i in range(1, max(len(parts), 1) + (0 if parts else 15) + 1):
             tail = ".sound" + ("" if i == 1 else str(i))
             path = next((base + tail + e for e in (".ogg", ".wav") if os.path.exists(base + tail + e)), None)
             if path is None:
+                if parts:
+                    continue
                 break
             ed = scene.sequence_editor_create()
             strips = getattr(ed, "strips", None)             # Blender 4.4 and later; "sequences" before
             if strips is None:
                 strips = ed.sequences
-            strip = strips.new_sound(os.path.basename(path), path, 1 + (i - 1) %% 8, int(at))
+            begin = int(round(parts[i - 1].get("start", 0) * FPS)) if parts else int(at)
+            strip = strips.new_sound(os.path.basename(path), path, 1 + (i - 1) %% 8, begin)
             at = max(at, int(strip.frame_final_end))
-            i += 1
             n += 1
     if n:
         scene.frame_end = max(scene.frame_end, int(at))
@@ -1774,6 +1822,10 @@ def finish(problems):
         scene.frame_start, scene.frame_end = 0, int(max(ends))
     try:                                         # a cutscene's sound, in the sequencer under the pictures
         add_sounds(scene)
+    except Exception:
+        traceback.print_exc()
+    try:                                         # joined cutscenes: each part seen through its own camera
+        part_cameras(scene)
     except Exception:
         traceback.print_exc()
     try:                                         # what the game loops, loops: the timeline holds a whole round
