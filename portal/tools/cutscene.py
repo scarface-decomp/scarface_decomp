@@ -861,6 +861,10 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         # someone the script doesn't load was already in the game: their template has their name
         src = source("tony", script.tony) if who == TONY else source("person", cast.get(who) or "CharTemp_" + who)
         label = "Tony" if who == TONY else next((k for k in script.cast if k.lower() == who), who)
+        # who they are in the report: the model they got, and whether their body and face move
+        role = {"name": label, "template": script.tony if who == TONY else cast.get(who) or "CharTemp_" + who,
+                "model": src.label if src is not None else "", "body": "", "face": ""}
+        b.report.cast.append(role)
         if src is None:
             left_out.append(label)
             continue
@@ -875,6 +879,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         if copy is None:
             b.g.doc["nodes"][root]["children"].remove(spot)
             left_out.append(label)
+            role["model"] = ""
             continue
         went_in.append(label)
         nodes.append(spot)
@@ -894,15 +899,23 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
                     gripped = (grip, muzzle)
             else:
                 left_out.append(label + "'s " + WEAPON.sub("", script.holds[who]))
+        shapes = [i for i in range(before, len(b.g.doc["nodes"])) if b.g.doc["nodes"][i].get("mesh") in b.shaped]
         if who in script.faces:                              # the lips, brows and eyelids
             sliding = slider_keys(_pieces(b, script.faces[who]))
-            for i in range(before, len(b.g.doc["nodes"])):
-                mesh = b.g.doc["nodes"][i].get("mesh")
-                if mesh in b.shaped and sliding:
+            moved = 0
+            for i in shapes:
+                mesh = b.g.doc["nodes"][i]["mesh"]
+                if sliding:
                     count = len(b.g.doc["meshes"][mesh]["weights"])
                     times, rows = shape_weights(b.shaped[mesh], count, sliding)
                     tracks.weights(i, later(times), rows)
+                    moved += any(any(row) for row in rows)
+            role["face"] = ("moves" if moved else "animation not found" if not sliding
+                            else "model has no face shapes" if not shapes else "no slider matches a shape")
+        else:
+            role["face"] = "no face animation in the script" + ("" if shapes else ", and the model has no face shapes")
         if anim:
+            role["body"] = "moves" if _pieces(b, anim) else "animation not found"
             keys, ran = _joint_keys(_pieces(b, anim))
             length = max(length, ran)
             if gripped and gripped[1] is not None:           # in both hands, when the other one is there
