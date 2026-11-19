@@ -1302,6 +1302,7 @@ CITY_MADE = "made_by.txt"                        # extracted/blender/<version>/:
 CITY_LOOK = "made_with.json"                     # extracted/blender/<version>/: the hour and weather it is at
 
 
+ONE_FILE_MADE = "2: flat"                         # raise when city_one_file makes the file another way
 ONE_FILE = "One file"                            # extracted/blender/<version>/One file/: the city as one .glb
 
 
@@ -1313,12 +1314,16 @@ def city_one_file(folder: Path, label: str) -> Path:
     if not files:
         raise P3G.ExportError("export the city first")
     one = folder / ONE_FILE / f"{label} city.glb"
+    how = one.with_name(one.name + ".made")                 # how the file there was made: an older way is made again
     try:
-        if one.is_file() and all(f.stat().st_mtime <= one.stat().st_mtime for f in files):
+        if (one.is_file() and how.read_text(encoding="utf-8").strip() == ONE_FILE_MADE
+                and all(f.stat().st_mtime <= one.stat().st_mtime for f in files)):
             return one
     except OSError:
         pass
-    P3G.join_glbs(files, one)
+    # flat: Blender makes an object for every node, and five in six of a map's nodes only hold others
+    P3G.join_glbs(files, one, flat=True)
+    how.write_text(ONE_FILE_MADE + "\n", encoding="utf-8")
     return one
 
 

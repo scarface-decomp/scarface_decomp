@@ -2785,12 +2785,114 @@ def _glb_parts(path: Path) -> Tuple[dict, int, int]:
         return doc, 20 + n + 8, struct.unpack_from("<I", more, 0)[0]
 
 
-def join_glbs(files: Sequence[Path], out: Path) -> dict:
+_IDENTITY = (1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0)
+PASSED_DOWN = ("hidden", "lowDetailHull", "occluder", "shadowDecal", "ocean", "drawDistance", "worldGeometryKind")
+
+
+def _node_matrix(n: dict) -> Tuple[float, ...]:
+    """A glTF node's own transform as its 16 numbers (column after column)."""
+    if "matrix" in n:
+        return tuple(n["matrix"])
+    tx, ty, tz = n.get("translation", (0.0, 0.0, 0.0))
+    x, y, z, w = n.get("rotation", (0.0, 0.0, 0.0, 1.0))
+    sx, sy, sz = n.get("scale", (1.0, 1.0, 1.0))
+    if (tx, ty, tz, x, y, z, w, sx, sy, sz) == (0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0):
+        return _IDENTITY
+    return ((1 - 2 * (y * y + z * z)) * sx, 2 * (x * y + z * w) * sx, 2 * (x * z - y * w) * sx, 0.0,
+            2 * (x * y - z * w) * sy, (1 - 2 * (x * x + z * z)) * sy, 2 * (y * z + x * w) * sy, 0.0,
+            2 * (x * z + y * w) * sz, 2 * (y * z - x * w) * sz, (1 - 2 * (x * x + y * y)) * sz, 0.0,
+            tx, ty, tz, 1.0)
+
+
+def _times(a: Sequence[float], b: Sequence[float]) -> Tuple[float, ...]:
+    """a x b for two transforms as glTF writes them (column after column): b first, then a."""
+    if a is _IDENTITY:
+        return tuple(b)
+    if b is _IDENTITY:
+        return tuple(a)
+    return tuple(a[r] * b[4 * c] + a[4 + r] * b[4 * c + 1] + a[8 + r] * b[4 * c + 2] + a[12 + r] * b[4 * c + 3]
+                 for c in range(4) for r in range(4))
+
+
+def flatten_nodes(doc: dict) -> int:
+    """Takes the scene's tree of nodes apart: everything drawn (a mesh, a light, a camera) becomes a node
+    of its own at the top, in the place the tree had put it, and the nodes that only held others together
+    are gone. A map is mostly those (five nodes in six of the city): Blender makes an object for each, and
+    that is what makes a city slow to bring in. What a holder said about everything below it (hidden, an
+    occluder, the low-detail hull...) goes onto each node it held. A node an animation moves stays as it
+    is, with everything below it, under one node that puts it in place. Not done to a scene with skins.
+    Returns how many nodes are left."""
+    if doc.get("skins"):
+        return len(doc.get("nodes", []))
+    nodes = doc.get("nodes", [])
+    moved = {ch["target"]["node"] for an in doc.get("animations", []) for ch in an.get("channels", [])
+             if "node" in ch.get("target", {})}
+    new: List[dict] = []
+    at: Dict[int, int] = {}
+    roots: List[int] = []
+
+    def keep(i: int) -> int:
+        """Node i and everything below it, as they are."""
+        first = len(new)
+        new.append({})
+        todo = [(i, first)]
+        while todo:
+            old, slot = todo.pop()
+            n = dict(nodes[old])
+            at[old] = slot
+            if "children" in n:
+                kids = []
+                for c in n["children"]:
+                    kids.append(len(new))
+                    new.append({})
+                    todo.append((c, kids[-1]))
+                n["children"] = kids
+            new[slot] = n
+        return first
+    scene = doc["scenes"][doc.get("scene", 0)]
+    todo = [(i, _IDENTITY, {}) for i in reversed(scene.get("nodes", []))]
+    while todo:
+        i, above, said = todo.pop()
+        n = nodes[i]
+        if i in moved:
+            top = keep(i)
+            if said:
+                new[top]["extras"] = dict(said, **(new[top].get("extras") or {}))
+            if above is not _IDENTITY:
+                new.append({"name": (n.get("name") or "node") + " (place)", "matrix": list(above), "children": [top]})
+                top = len(new) - 1
+            roots.append(top)
+            continue
+        world = _times(above, _node_matrix(n))
+        extras = n.get("extras") or {}
+        below = dict(said, **{k: extras[k] for k in PASSED_DOWN if k in extras}) if extras else said
+        if "mesh" in n or "camera" in n or "extensions" in n:
+            m = {k: v for k, v in n.items() if k not in ("children", "matrix", "translation", "rotation", "scale")}
+            if world is not _IDENTITY:
+                m["matrix"] = list(world)
+            if said:
+                m["extras"] = dict(said, **extras)
+            at[i] = len(new)
+            roots.append(len(new))
+            new.append(m)
+        for c in reversed(n.get("children", [])):
+            todo.append((c, world, below))
+    for an in doc.get("animations", []):
+        for ch in an.get("channels", []):
+            if "node" in ch.get("target", {}):
+                ch["target"]["node"] = at[ch["target"]["node"]]
+    doc["nodes"] = new
+    scene["nodes"] = roots
+    return len(new)
+
+
+def join_glbs(files: Sequence[Path], out: Path, flat: bool = False) -> dict:
     """Writes the .glb files as one .glb with all their scenes' nodes in one scene (the whole city in a
     file: one import in Blender instead of one for every area). A picture two files both carry (the road,
     the palms: every area brings its own copy) is kept once. Extras stay where they were; the scene's are
-    the files' put together (the first file to say a thing says it). Returns {"files", "pictures",
-    "pictures_kept", "bytes"}."""
+    the files' put together (the first file to say a thing says it). flat: the tree of nodes taken apart
+    (flatten_nodes), for a scene that is quick to bring in. Returns {"files", "pictures", "pictures_kept",
+    "bytes", "nodes"}."""
     import hashlib
     lists = ("accessors", "bufferViews", "images", "samplers", "textures", "materials", "meshes", "skins",
              "nodes", "cameras", "animations")
@@ -2932,6 +3034,8 @@ def join_glbs(files: Sequence[Path], out: Path) -> dict:
             size += pad
         if size >= 1 << 32 or not doc["scenes"][0]["nodes"]:
             raise ExportError("nothing to join" if size < 1 << 32 else "too big for one .glb file (4 GB)")
+        if flat:
+            flatten_nodes(doc)
         doc = {k: v for k, v in doc.items() if v != [] or k in ("scenes", "nodes")}
         doc["buffers"] = [{"byteLength": size}]
         if lights:
@@ -2958,7 +3062,8 @@ def join_glbs(files: Sequence[Path], out: Path) -> dict:
             tmp.unlink()
         except OSError:
             pass
-    return {"files": len(files), "pictures": pictures, "pictures_kept": len(doc.get("images", [])), "bytes": total}
+    return {"files": len(files), "pictures": pictures, "pictures_kept": len(doc.get("images", [])), "bytes": total,
+            "nodes": len(doc.get("nodes", []))}
 
 
 def main(argv=None) -> int:
