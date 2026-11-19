@@ -469,7 +469,7 @@ two-sided flags); the `RegionShader_` ones live in the area's region file.
 | `0x0880000A` | Occluder | 44 bytes, no name: 3 floats a position, 3 floats the way it faces (a unit vector, y 0 in all), u32 flags (0 in all but one, which has 1), f32 (0), 3 floats sizes: the box's full width along the world's X, Y and Z (below) |
 | `0x08800112` | Load Package Name | the file's own package name |
 | `0x09900191` | Game Group Data | the script file (`objects.ds`), the group's name, its class (`gamegroup`), u32 1; its objects follow |
-| `0x09900190` | Script Object Data | the script file, the object's name, its class (`instanceobject`, `missiontriggerobject`, `shadowobject`, ...); its properties follow |
+| `0x09900190` | Script Object Data | the script file, the object's name, its class (`instanceobject`, `missiontriggerobject`, `shadowobject`, ...); its properties follow. In a Game Group, or on its own at the top of the file: on the PC 3,240 placed props (Tony's hot tub, most of South Beach's) are in objects of the second kind |
 | `0x09900192` | Script Object Property | name, u32 type: 0 for text (then the text, for example `position` = `-1928.0890 5.5734810 -943.42900`), 2 for binary (then u32 3 and a `0x09900194` sub-chunk) |
 
 **World geometry kinds and draw distances.** From [SPEC-003](cleanroom/SPEC-003-props-zones-xbox-blending.md). A World
