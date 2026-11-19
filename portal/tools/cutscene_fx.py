@@ -37,6 +37,7 @@ GONE = (1e-4, 1e-4, 1e-4)
 JUST_BEFORE = 1e-3                     # seconds: a particle appears and goes this sharply
 MOST_PARTICLES = 40000                 # in one scene, past which effects are left out (and counted)
 MOST_LOOPING = 10 * 30                 # frames a looping effect (a fire) is played when nothing stops it
+MOST_WOUND_DOWN = 60 * 30              # and the longest it is played when something does
 PARTICLE_PART = 4                      # a composite drawable's part of this kind is a particle system
 
 # SPEC-010 section 2.1: an NISCharacterEffect's type -> its particle system and the size given to it
@@ -72,6 +73,7 @@ class Effects:
         self.played: Dict[Tuple[str, int, float, Optional[int]], List[PS.Particle]] = {}
         self.quads: Dict[Tuple[str, int, int], int] = {}
         self.count = 0
+        self.last_end = 0
         self.left_out = 0
         self.not_found: set = set()
         if src is not None:
@@ -129,21 +131,27 @@ class Effects:
         return self.quads[key]
 
     def play(self, name: str, parent: int, frame: float, tracks, later: Callable[[List[float]], List[float]],
-             size: float = 1.0, frames: Optional[int] = None, seed: int = 0, label: str = "", once: bool = False) -> int:
+             size: float = 1.0, frames: Optional[float] = None, seed: int = 0, label: str = "") -> int:
         """Plays an effect (a system or a composite of them) under a node from a frame of the scene: every
-        particle a node, keyed over its life. frames: how long a looping one goes on (MOST_LOOPING when
-        None); once: one round of it, whether it loops or not (a gun's flash, each shot). Returns how many
-        particles went in."""
+        particle a node, keyed over its life. frames: when it is wound down (SPEC-010 section 1.10: it stops
+        making particles, and those alive live out their lives), as when its prop enters another state or the
+        gun fires again; without it a one-shot plays its length and a looping one MOST_LOOPING. Returns how
+        many particles went in; self.last_end is how many frames after its start the last one dies."""
+        self.last_end = 0
         made = 0
         for sname in self.systems_of(name):
             system = self.system(sname)
             if system is None:
                 continue
-            on = system.length if once else frames if frames is not None else (MOST_LOOPING if system.loops else None)
+            on = MOST_LOOPING if system.loops else system.length
+            if frames is not None:
+                on = max(1, int(math.ceil(frames))) if system.loops else min(on, max(1, int(math.ceil(frames))))
+                on = min(on, MOST_WOUND_DOWN)
             key = (sname, seed % 4, size, on)
             if key not in self.played:
                 self.played[key] = PS.play(system, frames=on, seed=seed % 4, size=size)
             group = None
+            self.last_end = max([self.last_end] + [p.born + len(p.looks) for p in self.played[key]])
             for p in self.played[key]:
                 if self.count >= MOST_PARTICLES:
                     self.left_out += 1

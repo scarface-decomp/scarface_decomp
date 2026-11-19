@@ -641,7 +641,9 @@ def test_a_gun_fires_its_own_effects_shot_by_shot():
     assert len(shots) == 4                                   # frames 30, 33.15, 36.3 and 39.45
     anchor = next(n for n in doc["nodes"] if n["name"] == "Cuban's fxSys_PistolUzi_MuzzleFlash")
     assert anchor["translation"] == pytest.approx([0.0, 0.0, -0.3])   # at its offset on the gun
-    assert sum(1 for n in doc["nodes"] if (n.get("extras") or {}).get("billboard")) == 4
+    # the flash loops (2 frames, one particle a round) until the next shot winds it down: two rounds in the
+    # 3.15 frames between shots, and one for the last, cut short when the trigger is let go at frame 40
+    assert sum(1 for n in doc["nodes"] if (n.get("extras") or {}).get("billboard")) == 3 * 2 + 1
     assert "Cuban's tracers" in names and "Cuban's muzzle flash" not in names
 
 
@@ -652,3 +654,16 @@ def test_the_weapons_template_script_gives_each_guns_rate():
     assert CFX.weapon_settings(text) == {"weapontemplateuzi": {"FiringRate": 105.0, "TracerFrequency": 2.0},
                                          "weapontemplatem16": {"FiringRate": 75.0}}
     assert CFX.weapon_settings("this is not a script {") == {}
+
+
+def test_a_hit_while_the_last_still_sprays_adds_nothing_new():
+    """SPEC-010 section 1.9: played again while the last is alive, the effect is only moved."""
+    hit = lambda f: (f'NISCharacterEffect {{ CharacterName "Ann"; EffectType "GoreBloodExplosion"; JointName "Hip"; '
+                     f'FrameBegin {f}; }}; ')
+    script = C.read_script('NISResourceLoader { Name "Ann"; TemplateName "CharTemp_Ann"; }; '
+                           'NISCharacterPosition { CharacterName "Ann"; Position { x 0; y 0; z 0; }; Facing 0; }; '
+                           + hit(60) + hit(62) + hit(90))
+    files = {"person": ("ann.p3d", face_file()), "effects": ("Common.p3d", _effects_file())}
+    glb, _report = C.export("T", script, [], lambda kind, name: files.get(kind))
+    doc, _ = read_glb(glb)
+    assert sum(1 for n in doc["nodes"] if n["name"] == "GoreBloodExplosion on ann") == 2   # 60 and 90, not 62

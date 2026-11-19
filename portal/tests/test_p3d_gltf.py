@@ -2905,3 +2905,20 @@ def test_a_room_with_only_furniture_is_the_room_where_its_props_stand(tmp_path):
     out, index = copied_game(tmp_path, rooms)
     at = G.pos(G.instance_trs(record(11.0, 500.0, 21.0))[0])            # the game's own coordinates of that spot
     assert [p.name for p in BX.rooms_at(out, index, "pc", at)] == ["shop_dzone.p3d"]
+
+
+def test_a_props_entries_are_checked_against_its_controllers_by_place():
+    """SPEC-009 section 2.2: the game gives controller i entry i; the export says where names disagree."""
+    fc = lambda name: chunk(0x121201, struct.pack("<I", 0) + text(name) + b"PTRN" + b"ANIM" + struct.pack("<fI", 0.0, 1)
+                            + text(name) + text(name))
+    entry = lambda name: chunk(0x08020003, text(name) + struct.pack("<3I3f", 0, 0, 0, 0.0, 10.0, 1.0))
+
+    def prop(order):
+        kids = prop_property("name", "fan") + chunk(0x0802000E, text("idle") + struct.pack("<6If3I", 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0),
+                                                    b"".join(entry(n) for n in order))
+        return chunk(0x0802000D, struct.pack("<I", 4) + text("fan") + text("fan") + struct.pack("<II", 1, 1), kids)
+    for order, wrong in ((["blades", "light"], []), (["light", "blades"], [("fan", "idle", 0, "light", "blades"),
+                                                                           ("fan", "idle", 1, "blades", "light")])):
+        data = p3d(fc("blades"), fc("other"), fc("light"), prop(order))
+        import p3d as p3d_module
+        assert G.prop_order_mismatches(data, p3d_module.read_tree(data)) == wrong

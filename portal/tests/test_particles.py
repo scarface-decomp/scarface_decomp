@@ -75,8 +75,8 @@ def test_particles_age_fall_and_die():
     (p,) = PS.play(s, seed=3)
     assert len(p.looks) == 4                                # born, then three steps: dead at age 4
     assert p.looks[0].at == (0.0, 0.0, 0.0)
-    assert p.looks[1].at == pytest.approx((0.0, -0.5, 1.0))  # forward (+Z) by its speed, down by its weight
-    assert p.looks[2].at == pytest.approx((0.0, -1.5, 2.0))
+    assert p.looks[1].at == pytest.approx((0.0, 0.5, 0.0), abs=1e-9)  # forward (+Y) by its speed, down by its weight
+    assert p.looks[2].at == pytest.approx((0.0, 0.5, 0.0), abs=1e-9)  # falling now as fast as it goes up
     assert all(look.size == 2.0 for look in p.looks)
 
 
@@ -105,4 +105,30 @@ def test_a_sphere_generator_starts_particles_on_the_sphere():
     settings = [channel(0x121100, "RAT", [0, 1], [(20.0,), (0.0,)]), channel(0x121100, "LIF", [0], [(2.0,)])]
     s = read(emitter(most=50, settings=settings, gen=gen), length=1)
     for p in PS.play(s, seed=2):
-        assert sum(c * c for c in p.looks[0].at) == pytest.approx(4.0)
+        assert sum(c * c for c in p.looks[0].at) <= 4.0 + 1e-9    # anywhere in the ball
+
+
+def test_the_rate_is_held_flat_outside_its_keys():
+    rat = PS.A.Channel(*_one_channel(channel(0x121100, "RAT", [4, 5], [(50.0,), (0.0,)])))
+    assert PS.area(rat, 0.0, 1.0) == 50.0                     # before the first key: its value, the whole step
+    assert PS.area(rat, 3.5, 4.5) == 50.0                     # even the part after the key
+    assert PS.area(rat, 4.0, 5.0) == 25.0                     # between keys: straight lines
+    assert PS.area(rat, 5.0, 6.0) == 0.0                      # at or after the last: its value
+
+
+def _one_channel(made):
+    data = p3d(made)
+    return data, P.read_tree(data)[0]
+
+
+def test_a_spray_goes_up_the_emitters_y_within_its_half_angles():
+    import math
+    gen = chunk(PS.POINT, struct.pack("<I3f", 0, 0.1745, 0.1745, 0.0))
+    settings = [channel(0x121100, "RAT", [0], [(40.0,)]), channel(0x121100, "LIF", [0], [(2.0,)]),
+                channel(0x121100, "SPD", [0], [(1.0,)])]
+    s = read(emitter(most=100, settings=settings, gen=gen), length=1)
+    ways = [p.looks[1].at for p in PS.play(s, seed=5)]
+    assert len(ways) == 40
+    for x, y, z in ways:
+        assert y > math.cos(0.1745 * math.sqrt(2)) - 1e-6         # within 10 degrees each way, of up
+        assert abs(math.atan2(x, y)) <= 0.1745 + 1e-6 and abs(math.atan2(z, y)) <= 0.1745 + 0.02

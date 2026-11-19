@@ -558,3 +558,13 @@ For the implementer. Choose your own names; keep each step small.
   * the next caption starts after it, skipping one `#` or `@` there (a `#` also moves the speaker on);
   * the time share uses the caption's own length (first to last character, inclusive).
 
+*From the implementer, 19 November 2026, on the two answers above:*
+
+* **Order or name.** `p3d_gltf.prop_order_mismatches` and `portal/scripts/check_prop_order.py` list every
+  entry whose name is not the controller in its place (the controllers read as those of the file that the
+  prop's entries name, in file order). Not yet run on the PC's files.
+* **The 80 characters.** `cutscene.caption_spans` now counts over the stored text, marks included, keeps the
+  rest whole only when (stored length − first + 1) ≤ 80, skips one mark after a cut, and shares the time by
+  each caption's stored length. **A question:** read literally, a remainder short enough to be kept whole
+  keeps any `#` or `@` inside it, so `Hello?#Hey.` would be one caption with the mark showing. The export
+  still ends a caption at a mark inside a short remainder. Does the game check for marks before the length?

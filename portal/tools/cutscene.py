@@ -235,32 +235,49 @@ def line_path(name: str, language: str = "english") -> str:
     return f"localised\\{language}\\{name}"
 
 
-def split_line(text: str) -> List[Tuple[int, str]]:
-    """A line cut into captions the way the game does: [(speaker number, caption)]. `#` ends a caption and
-    moves to the next speaker; `@` ends one with the same speaker; otherwise a caption is at most 80
-    characters, cut at the last . ! or ? within them, else the last , or ; else the last space."""
-    out: List[Tuple[int, str]] = []
-    speaker = 0
-    for part in re.split(r"(#|@)", text):
-        if part == "#":
+def caption_spans(text: str) -> List[Tuple[int, str, int]]:
+    """A line cut into captions the way the game does (SPEC-009 section 4.4, with the examiner's answer of 19
+    November 2026): [(speaker number, caption, its length as the game counts it)]. The count runs over the
+    text as stored, marks and all. From a caption's first character: the rest of the line is one caption
+    when (the stored length - that position + 1) is at most 80 and it has no mark in it; otherwise, among the
+    80 characters from there, the first `#` or `@` ends the caption just before it, else the last `.`, `!` or
+    `?`, then the last `,` or `;`, then the last space ends it, that character included. The next caption
+    starts after it, skipping one `#` or `@` there; a `#` moves to the next speaker. A caption's length (first
+    to last character) is what its share of the line's time goes by."""
+    out: List[Tuple[int, str, int]] = []
+    speaker, pos, n = 0, 0, len(text)
+    while pos < n:
+        rest = text[pos:]
+        if n - pos + 1 <= CAPTION_LENGTH and "#" not in rest and "@" not in rest:
+            piece, nxt, mark = rest, n, ""
+        else:
+            window = text[pos:pos + CAPTION_LENGTH]
+            marks = [i for i in (window.find("#"), window.find("@")) if i >= 0]
+            if marks:
+                cut = min(marks)
+                piece, nxt, mark = window[:cut], pos + cut + 1, window[cut]
+            else:
+                cut = max(window.rfind(ch) for ch in ".!?")
+                if cut < 0:
+                    cut = max(window.rfind(ch) for ch in ",;")
+                if cut < 0:
+                    cut = window.rfind(" ")
+                cut = cut if cut >= 0 else len(window) - 1
+                piece, nxt, mark = window[:cut + 1], pos + cut + 1, ""
+                if nxt < n and text[nxt] in "#@":        # a mark right after the cut is skipped too
+                    mark, nxt = text[nxt], nxt + 1
+        shown = " ".join(piece.split())
+        if shown:
+            out.append((speaker, shown, len(piece)))
+        if mark == "#":
             speaker += 1
-            continue
-        if part == "@":
-            continue
-        left = " ".join(part.split())
-        while len(left) > CAPTION_LENGTH:
-            head = left[:CAPTION_LENGTH]
-            cut = max(head.rfind(c) for c in ".!?")
-            if cut < 0:
-                cut = max(head.rfind(c) for c in ",;")
-            if cut < 0:
-                cut = head.rfind(" ")
-            cut = cut if cut >= 0 else CAPTION_LENGTH - 1
-            out.append((speaker, left[:cut + 1].strip()))
-            left = left[cut + 1:].strip()
-        if left:
-            out.append((speaker, left))
+        pos = nxt
     return out
+
+
+def split_line(text: str) -> List[Tuple[int, str]]:
+    """A line cut into captions the way the game does: [(speaker number, caption)] (caption_spans)."""
+    return [(s, t) for s, t, _n in caption_spans(text)]
 
 
 def captions(lines: List[dict], entry_of: Callable[[str], Optional[dict]]) -> List[dict]:
@@ -275,13 +292,13 @@ def captions(lines: List[dict], entry_of: Callable[[str], Optional[dict]]) -> Li
             continue
         begin = entry.get("begin") or line["begin"]                   # the file's own times replace the script's
         total = entry.get("total") or line["total"]
-        parts = split_line(entry["text"])
-        letters = sum(len(t) for _s, t in parts)
+        parts = caption_spans(entry["text"])
+        letters = sum(n for _s, _t, n in parts)
         if not parts or total <= 0 or not letters:
             continue
         at = line["frame"] / FRAMES_A_SECOND + begin / 1000.0
-        for speaker, text in parts:
-            lasts = total / 1000.0 * len(text) / letters
+        for speaker, text, count in parts:
+            lasts = total / 1000.0 * count / letters
             out.append({"start": round(at, 3), "end": round(at + lasts, 3), "speaker": speaker, "text": text,
                         "line": line["name"]})
             at += lasts
@@ -497,8 +514,12 @@ def _gun_fire(b: G.Builder, fx: Optional[CFX.Effects], gref: G.Ref, wanted: str,
     played = 0
     for a, z, alt in sorted(shots):
         effects = states.get("fire2" if alt else "fire1", [])
-        for k, f0 in enumerate(CFX.shot_frames(a, z, rate)):
+        frames = CFX.shot_frames(a, z, rate)
+        for k, f0 in enumerate(frames):
             bullet += 1
+            # each shot enters the state again: this shot's effects start, and the last shot's wind down
+            # (SPEC-010 section 1.10); the last shot's go on until the trigger is let go
+            until = (frames[k + 1] if k + 1 < len(frames) else max(float(z), f0 + 1.0)) - f0
             for e, (kind, at, size, begin, joint, angles) in enumerate(effects):
                 if fx is None or not fx.systems_of(kind):
                     continue
@@ -507,7 +528,7 @@ def _gun_fire(b: G.Builder, fx: Optional[CFX.Effects], gref: G.Ref, wanted: str,
                                                   translation=list(G.pos(at)), rotation=list(CFX.angles_turn(angles)),
                                                   extras={"effect": kind})
                 fx.play(kind, anchors[(kind, e)], f0 + begin * FRAMES_A_SECOND, tracks, later, size=size or 1.0,
-                        seed=bullet, label=kind + " (shot " + str(bullet) + ")", once=True)
+                        seed=bullet, label=kind + " (shot " + str(bullet) + ")", frames=until - begin * FRAMES_A_SECOND)
                 played += 1
             if tracer_ref is not None and effects and bullet % tracer_every == 0:
                 tracer_times += [f0 / FRAMES_A_SECOND, (f0 + 1) / FRAMES_A_SECOND]
@@ -581,8 +602,18 @@ def _character_effect(b: G.Builder, fx: Optional[CFX.Effects], root: int, bodies
                 jq = target[1]
                 turn = _qmul((-jq[0], -jq[1], -jq[2], jq[3]), CFX.facing(way))
     if fx is not None and system and fx.systems_of(system):
+        # the game plays it again only once the last one has ended: while that one lives, it is only moved
+        # (SPEC-010 section 1.9), so a hit that comes while the last is still spraying adds nothing new
+        alive = getattr(b, "_alive_fx", None)
+        if alive is None:
+            alive = b._alive_fx = {}                         # type: ignore[attr-defined]
+        key = (id(body), system.lower())
+        when = start * FRAMES_A_SECOND + frame
+        if alive.get(key, -1.0) > when:
+            return
         place = b.g.node(kind + " on " + who, node, rotation=list(turn) if turn else None, extras={"effect": kind})
         fx.play(system, place, frame, tracks, later, size=size, seed=frame)
+        alive[key] = when + fx.last_end
         return
     sz, frames, _rgba, _add = _effect_look(kind)                # without the effects file: a card
     burst = b.g.node(kind + " on " + who, node, mesh=_effect_mesh(b, kind), extras={"effect": kind})

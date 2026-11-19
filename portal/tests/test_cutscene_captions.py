@@ -195,3 +195,12 @@ def test_joined_cutscenes_get_each_parts_sound_and_camera_at_its_start(tmp_path)
             sys.modules["bpy"] = old
     assert placed == [("MNIS_One.sound.ogg", 0), ("MNIS_One.sound3.ogg", 840)]           # 14 seconds at 60 a second
     assert [(m.name, m.frame, m.camera.name) for m in markers] == [("MNIS_One", 0, "CAM_One"), ("MNIS_Two", 600, "CAM_Two")]
+
+
+def test_the_80_are_counted_over_the_stored_text_marks_and_all():
+    """SPEC-009 section 4.4 (the examiner's answer): the count runs over the text as stored."""
+    spans = CUT.caption_spans("a" * 70 + ". " + "b" * 20)
+    assert [(s, len(t), n) for s, t, n in spans] == [(0, 71, 71), (0, 20, 21)]   # the space goes with the second
+    assert CUT.caption_spans("x" * 79) == [(0, "x" * 79, 79)]                     # 79 + 1 is 80: kept whole
+    assert len(CUT.caption_spans("Hi.#" + "y" * 90)) == 3                          # the mark ends the first
+    assert CUT.caption_spans("Done." + "z" * 76 + "#Next.")[0] == (0, "Done.", 5)

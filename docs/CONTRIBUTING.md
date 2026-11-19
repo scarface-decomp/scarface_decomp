@@ -146,10 +146,11 @@ place they include a run of the real portal on a throwaway copy of the repositor
 
 ## Checking that everything still holds
 
-Two scripts check the project's output on your own computer, and change nothing:
+Three scripts check the project's output on your own computer, and change nothing:
 
     python portal/scripts/recheck_matches.py            # 300 recorded matches compiled again (--all: every one)
     python portal/scripts/check_exports.py              # every cutscene and map area made once, for Blender
+    python portal/scripts/check_prop_order.py extracted/game_files/PC   # props whose entries and controllers disagree
 
 The first needs the compiler (`portal/tools/msvc71`) and says whether each match still comes out byte for
 byte; it writes `work/recheck_matches.md`. The second needs your copied game files and writes

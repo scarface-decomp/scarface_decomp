@@ -634,6 +634,34 @@ def prop_play(data: bytes, c: p3d.Chunk) -> Dict[str, Play]:
     return out
 
 
+def prop_order_mismatches(data: bytes, chunks: Sequence[p3d.Chunk]) -> List[Tuple[str, str, int, str, str]]:
+    """Where a prop's state entries and its frame controllers disagree by place (SPEC-009 section 2.2 and the
+    examiner's answer of 19 November 2026): the game gives the prop's controller i the state's entry i and
+    never compares names; the export matches them by name. The prop's controllers are read as the Frame
+    Controllers (0x121201) of its file that any of its entries name, in the file's order. [(prop, state, i,
+    the entry's name, the controller there)], empty when the two ways agree."""
+    controllers = [str(p3d.fields(data, c).get("name", "")) for c in p3d.walk(list(chunks)) if c.id == 0x121201]
+    out = []
+    for c in p3d.walk(list(chunks)):
+        if c.id != STATE_PROP_DATA:
+            continue
+        prop = chunk_name(data, c)
+        states = []
+        for st in c.children:
+            if st.id == PROP_STATE:
+                names = [str(p3d.fields(data, a).get("frame controller", "")) for a in st.children
+                         if a.id == PROP_ANIMATION]
+                states.append((str(p3d.fields(data, st).get("name", "")), names))
+        used = {n.lower() for _s, names in states for n in names}
+        own = [n for n in controllers if n.lower() in used]
+        for state, names in states:
+            for i, name in enumerate(names):
+                there = own[i] if i < len(own) else ""
+                if name.lower() != there.lower():
+                    out.append((prop, state, i, name, there))
+    return out
+
+
 def played(keys: List[Tuple[float, tuple]], play: Play, rate: float, turn: bool) -> Tuple[List[float], List[tuple]]:
     """keys (frame, value; frames rising) as a prop state plays them (SPEC-009 sections 2.2 and 2.3):
     (times in seconds, values). The frames run from play.first to play.last, backwards when last is the

@@ -17,9 +17,8 @@ Written from the clean-room spec docs/cleanroom/SPEC-010-cutscene-effects-partic
   curve.
 
 Points the spec leaves open, and what is done here until they are settled (marked "(check)" there):
-the generator's forward axis is taken as +Z (a muzzle flash's offsets lie along +Z); a spread is the most
-the direction turns either way; a plane generator is centred on the emitter; a sphere generator starts
-particles on the sphere, heading out; a looping system's time wraps at its length.
+a plane generator's rectangle lies across the forward axis (+Y) and a sphere generator's particles start
+anywhere in its ball, both with the point generator's spreads; a looping system's time wraps at its length.
 
     system = read_system(data, chunk)              # a 0x1580C chunk of a parsed .p3d file
     for p in play(system, frames=30, seed=1): ...  # every particle: its birth frame and its look each frame
@@ -184,10 +183,16 @@ class Particle:
 
 
 def area(ch: Optional[A.Channel], a: float, b: float) -> float:
-    """The area under a float channel from frame a to frame b, straight lines between keys; before the first
-    key and after the last the channel holds its value."""
+    """What a step from frame a to frame b adds to an emitter's count: the area under a float channel
+    (SPEC-010 section 1.7), straight lines between keys (rectangles for a stepped channel). A step that starts
+    before the first key counts whole at the first key's value, even the part after that key; one that starts
+    at or after the last key counts whole at the last key's value."""
     if ch is None or not ch.frames or b <= a:
         return 0.0
+    if a < ch.frames[0]:
+        return float(ch.values[0][0]) * (b - a)
+    if a >= ch.frames[-1]:
+        return float(ch.values[-1][0]) * (b - a)
     cuts = [a] + [float(k) for k in ch.frames if a < k < b] + [b]
     total = 0.0
     for x, y in zip(cuts, cuts[1:]):
@@ -255,20 +260,24 @@ def _birth(e: Emitter, n: int, frame: float, born: int, rng: random.Random, size
     g = e.generator
     hosp = g.value("HOSP", frame) if g else 0.0
     vesp = g.value("VESP", frame) if g else 0.0
-    yaw, pitch = hosp * _spread(rng), vesp * _spread(rng)
-    direction = (math.sin(yaw) * math.cos(pitch), math.sin(pitch), math.cos(yaw) * math.cos(pitch))
+    # SPEC-010 section 1.7: forward is the emitter's +Y; each spread is a half-angle, the two independent
+    h = math.pi / 2 + _spread(rng) * hosp
+    v = math.pi / 2 + _spread(rng) * vesp
+    direction = (math.sin(v) * math.cos(h), math.sin(v) * math.sin(h), math.cos(v))
     at = (0.0, 0.0, 0.0)
-    if g is not None and g.kind == "plane":
-        at = (g.value("WDT", frame) * 0.5 * _spread(rng), g.value("HGT", frame) * 0.5 * _spread(rng), 0.0)
-    elif g is not None and g.kind == "sphere":
+    if g is not None and g.kind == "plane":                # a rectangle across the forward axis
+        at = (g.value("WDT", frame) * 0.5 * _spread(rng), 0.0, g.value("HGT", frame) * 0.5 * _spread(rng))
+    elif g is not None and g.kind == "sphere":             # a ball of the radius
         while True:
-            v = (_spread(rng), _spread(rng), _spread(rng))
-            length = math.sqrt(sum(c * c for c in v))
-            if 0.01 < length <= 1.0:
+            p = (_spread(rng), _spread(rng), _spread(rng))
+            if sum(c * c for c in p) <= 1.0:
                 break
-        direction = tuple(c / length for c in v)                       # type: ignore[assignment]
         radius = g.value("RAD", frame)
-        at = tuple(c * radius for c in direction)                      # type: ignore[assignment]
+        at = (p[0] * radius, p[1] * radius, p[2] * radius)
+    rdva = g.value("RDVA", frame) if g else 0.0
+    if rdva:                                               # a random way along its own direction
+        k = rdva * _spread(rng)
+        at = (at[0] + direction[0] * k, at[1] + direction[1] * k, at[2] + direction[2] * k)
     place = e.setting("TRA", frame)
     turn = e.setting("ROT", frame)
     if turn is not None:
