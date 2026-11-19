@@ -509,3 +509,14 @@ For the implementer. Choose your own names; keep each step small.
   the portal's cutscene view does not show the captions yet.
 * **Question:** §4.4 says "when more than 80 characters remain". For a run of exactly 80 with no place to
   cut, I keep it whole. Does the game count the 80 before or after the `#` and `@` marks are taken out?
+
+*From the implementer, 18 November 2026, later, with the copied game files back on the computer:*
+
+* **§4 checked on real files.** `blender_export.cutscene_captions` gives captions for 114 of the PC's 187
+  cutscenes; `MNIS_A23_0_Intro_to_Tranq` starts "Tony the Colombians have hit back hard." at 0.0 s.
+* **Not in the spec, read from the game's files: a cutscene's sound.** The scene's sound script
+  (`art/sound/scripts/localised/english/nis/<scene>.p3d`) names one sound for the whole scene; 183 of 187
+  PC cutscenes have it and its length matches the scene's. Written up in `docs/FORMATS.md` ("A cutscene's
+  sound") and built as `media.stream_names`, `blender_export.cutscene_sounds` and `write_sounds`. The few
+  sound scripts that name several sounds (2, 4, 6 and 10) are placed one after the other, which is a guess.
+
