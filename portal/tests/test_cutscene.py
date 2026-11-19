@@ -446,12 +446,14 @@ def test_a_missions_cutscenes_are_joined_in_the_order_its_script_names_them():
     scripts = [
         ("cement.rcf/scriptc/missionscripts/A51/A51_objects.dso", 'new x("a") { nis = "MNIS_A51_9_Late"; };'),
         ("cement.rcf/scriptc/missionscripts/A51/A51_functions.cso",
-         'play("MNIS_A51_0_Intro");\nplay("PAL_MNIS_A51_0_Intro");\nplay("MNIS_A51_2_Heli_Alt");\nplay("MNIS_A51_2_Heli");\n'
-         'play("MNIS_Not_Copied");\nplay("MNIS_A51_0_Intro");\n'),
+         'play("MNIS_AMB_Dies");\nplay("MNIS_A51_3_Boats");\nplay("MNIS_A51_0_Intro");\nplay("PAL_MNIS_A51_0_Intro");\n'
+         'play("MNIS_A51_2_Heli_Alt");\nplay("MNIS_A51_2_Heli");\nplay("MNIS_Not_Copied");\nplay("MNIS_A51_0_Intro");\n'),
         ("cement.rcf/scriptc/missionscripts/B02/B02_functions.cso", 'play("MNIS_B02_Only");'),
         ("cement.rcf/scriptc/other.cso", 'play("MNIS_A51_0_Intro"); play("MNIS_B02_Only");'),
     ]
-    known = {n.lower(): n for n in ("MNIS_A51_0_Intro", "MNIS_A51_2_Heli", "MNIS_A51_2_Heli_Alt", "MNIS_A51_9_Late", "MNIS_B02_Only")}
-    # the functions script first, each cutscene once, the second version and the one not copied left out;
-    # a mission with one cutscene is that cutscene already
-    assert C.mission_films(scripts, known) == {"A51": ["MNIS_A51_0_Intro", "MNIS_A51_2_Heli", "MNIS_A51_9_Late"]}
+    known = {n.lower(): n for n in ("MNIS_A51_0_Intro", "MNIS_A51_2_Heli", "MNIS_A51_2_Heli_Alt", "MNIS_A51_3_Boats",
+                                    "MNIS_A51_9_Late", "MNIS_B02_Only", "MNIS_AMB_Dies")}
+    # each cutscene once, by the stage in its name, the one without a stage last; the second version and
+    # the one not copied left out; a mission with one cutscene is that cutscene already
+    assert C.mission_films(scripts, known) == {
+        "A51": ["MNIS_A51_0_Intro", "MNIS_A51_2_Heli", "MNIS_A51_3_Boats", "MNIS_A51_9_Late", "MNIS_AMB_Dies"]}
