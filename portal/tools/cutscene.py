@@ -88,7 +88,8 @@ def outfit_for(wears: Dict[str, str], scene: str) -> str:
     return wears.get("\0" + m.group(1).lower(), "") if m else ""
 
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
-                    r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation)\s*\{")
+                    r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation|"
+                    r"NISWeaponFire|NISStatePropState)\s*\{")
 _FIELD = re.compile(r'\b(\w+)\s+(?:"([^"]*)"|(-?[\d.]+(?:e-?\d+)?))\s*;')
 
 
@@ -105,6 +106,11 @@ class Script:
         self.tony = ""                                      # the suit Tony is changed into (NISSwapModel)
         self.holds: Dict[str, str] = {}                     # person (lower) -> weapon template (NISWeaponAttach)
         self.faces: Dict[str, str] = {}                     # person (lower) -> their face's animation (NISExpAnimation)
+        # A weapon is put in a hand at a frame, and another may take its place later; it fires from a frame
+        # to a frame; a prop of the map is put in a state at a frame (a door whole, then blown apart).
+        self.holds_at: Dict[str, List[Tuple[int, str]]] = {}        # person (lower) -> [(frame, weapon template)]
+        self.fires: Dict[str, List[Tuple[int, int]]] = {}           # person (lower) -> [(first frame, last frame)]
+        self.prop_states: Dict[str, List[Tuple[int, str]]] = {}     # prop's name in the script -> [(frame, state)]
         self.swaps: Dict[str, str] = {}                     # person (lower) -> the cutscene model they are changed
         #                                                     into (NISSwapModel), kept in the scene's static.p3d
 
@@ -141,6 +147,21 @@ def read_script(text: str) -> Script:
             s.faces.setdefault(str(f["CharacterName"]).lower(), str(f["AnimationName"]))
         elif kind == "NISWeaponAttach" and f.get("CharacterName") and f.get("WeaponTemplateName"):
             s.holds.setdefault(str(f["CharacterName"]).lower(), str(f["WeaponTemplateName"]))
+            at = int(f["FrameBegin"]) if isinstance(f.get("FrameBegin"), float) else 0
+            got = s.holds_at.setdefault(str(f["CharacterName"]).lower(), [])
+            if all(frame != at for frame, _w in got):
+                got.append((at, str(f["WeaponTemplateName"])))
+                got.sort()
+        elif kind == "NISWeaponFire" and f.get("CharacterName") and isinstance(f.get("FrameBegin"), float):
+            end = f.get("FrameEnd")
+            s.fires.setdefault(str(f["CharacterName"]).lower(), []).append(
+                (int(f["FrameBegin"]), int(end) if isinstance(end, float) else int(f["FrameBegin"]) + 6))
+        elif kind == "NISStatePropState" and f.get("StatePropName") and f.get("StateName"):
+            at = int(f["FrameBegin"]) if isinstance(f.get("FrameBegin"), float) else 0
+            got = s.prop_states.setdefault(str(f["StatePropName"]), [])
+            if all(frame != at for frame, _st in got):       # the first to name a frame: the scene's end sets
+                got.append((at, str(f["StateName"])))        # every prop to how it is left, at frame 0 again
+                got.sort()
         elif kind == "NISSwapModel" and str(f.get("Character", "")).lower() == TONY and f.get("newModel") and not s.tony:
             s.tony = re.sub(r"Drawable$", "", str(f["newModel"]), flags=re.I)
         elif kind == "NISSwapModel" and f.get("Character") and f.get("newModel"):
@@ -267,6 +288,92 @@ def facing_rotation(degrees: float) -> G.Quat:
     """The way the script faces someone (a turn about the upright axis, in degrees), as glTF's rotation."""
     a = math.radians(degrees) / 2
     return G.rot((0.0, math.sin(a), 0.0, math.cos(a)))
+
+
+FLASH_EVERY = 3                                              # frames from one shot's flash to the next
+FLASH = 0.14                                                 # metres: half the width of a muzzle flash
+
+
+def _flash_mesh(b: G.Builder) -> int:
+    """A muzzle flash: two crossed squares that add their yellow light, made once for a scene. The game
+    draws a particle effect there; this stands in for it, at the frames the script fires the gun."""
+    made = getattr(b, "_flash", None)
+    if made is None:
+        f = FLASH
+        corners = [(-f, -f, 0.0), (f, -f, 0.0), (f, f, 0.0), (-f, f, 0.0), (0.0, -f, -f), (0.0, -f, f), (0.0, f, f), (0.0, f, -f)]
+        material = b.g.add("materials", {"name": "muzzle flash", "doubleSided": True, "alphaMode": "BLEND",
+                                         "pbrMetallicRoughness": {"baseColorFactor": [1.0, 0.85, 0.35, 0.9]},
+                                         "emissiveFactor": [1.0, 0.8, 0.3], "extensions": {"KHR_materials_unlit": {}},
+                                         "extras": {"blend": "add", "depthWrite": False}})
+        b.g.used_extensions.add("KHR_materials_unlit")
+        made = b.g.add("meshes", {"name": "muzzle flash", "primitives": [{
+            "attributes": {"POSITION": b.g.accessor(corners, "VEC3", bounds=True)},
+            "indices": b.g.accessor([0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7], "SCALAR", 5123), "material": material, "mode": 4}]})
+        b._flash = made                                      # type: ignore[attr-defined]
+    return made
+
+
+PLACED = re.compile(rb"\x00(\w+)\x00(-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) [\d.]+ [\d.]+ [\d.]+ \d+ \w+\x00")
+
+
+def _prop_states(b: G.Builder, lib: G.Library, script: Script, tracks: _Tracks, later, near) -> List[str]:
+    """The map's props the script puts in a state at a frame (NISStatePropState: the office doors whole,
+    then blown apart), each state there for its frames. The script names a prop its own way ("OfficeDoors",
+    "Railing"); the prop is the placed one whose model or one of whose joints has that name in it, the
+    nearest to the scene. A prop the map places from a line of text in a script kept in its file
+    (model, then "x y z, turn in degrees, size, a number, state") is read from there. Returns the props
+    it could not find."""
+    lost = []
+    doc = b.g.doc
+    for wanted, when in script.prop_states.items():
+        key = re.sub(r"s$", "", re.sub(r"[^a-z0-9]", "", wanted.lower()))
+        found = []                                           # (distance, model ref, parent, translation, rotation, scale, old node)
+        for src in lib.sources:
+            for c in src.chunks:
+                if c.id != G.COMPOSITE:
+                    continue
+                name = G.chunk_name(src.data, c)
+                skeleton = next((k for k in src.chunks if k.id == 0x23000 and G.chunk_name(src.data, k) == name), None)
+                joints = [G.chunk_name(src.data, j) for j in (skeleton.children if skeleton else []) if j.id == 0x23001]
+                if not any(key in re.sub(r"[^a-z0-9]", "", n.lower()) for n in [name] + joints):
+                    continue
+                ref = G.Ref(src, c)
+                if len(b.states_of(ref, name)) < 2:
+                    continue
+                for i, n in enumerate(doc["nodes"]):          # placed the usual way: its node is in the scene
+                    if (n.get("name") or "").lower() == name.lower() and "translation" in n and "mesh" not in n:
+                        parent = next((p for p, q in enumerate(doc["nodes"]) if i in q.get("children", [])), None)
+                        if parent is not None:
+                            found.append((ref, parent, n["translation"], n.get("rotation"), n.get("scale"), i))
+                for other in lib.sources:                     # placed from a line of text
+                    for m in PLACED.finditer(other.data):
+                        if m.group(1).decode("latin-1").lower() == name.lower():
+                            x, y, z, _rx, ry, _rz = (float(v) for v in m.groups()[1:])
+                            found.append((ref, None, list(G.pos((x, y, z))), list(facing_rotation(ry)), None, None))
+        if not found:
+            lost.append(wanted)
+            continue
+        if near is not None:
+            found.sort(key=lambda f: (f[2][0] - near[0]) ** 2 + (f[2][2] - near[2]) ** 2)
+        ref, parent, at, turn, size, old = found[0]
+        name = G.chunk_name(ref.data, ref.chunk)
+        states = [s.lower() for s, _shown in b.states_of(ref, name)]
+        if old is not None:
+            doc["nodes"][parent]["children"].remove(old)     # the one the map put there, in one state for good
+        home = b.g.node(wanted + " (" + name + ")", parent, translation=at, rotation=turn, scale=size)
+        for n, (frame, state) in enumerate(when):
+            if state.lower() not in states:
+                continue
+            top = b.g.node(name + " (" + state + ")", home)
+            b.composite(ref, top, name + " " + state, state=states.index(state.lower()))
+            until = when[n + 1][0] if n + 1 < len(when) else None
+            times, sizes = ([0.0], [GONE]) if frame > 0 else ([], [])
+            times, sizes = times + [frame / FRAMES_A_SECOND], sizes + [(1.0, 1.0, 1.0)]
+            if until is not None:
+                times, sizes = times + [until / FRAMES_A_SECOND], sizes + [GONE]
+            if len(times) > 1:
+                tracks.add(top, "scale", later(times), sizes, step=True)
+    return lost
 
 
 ROOTS = ("motion_root", "balance_root", "character_root")
@@ -972,21 +1079,47 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         went_in.append(label)
         nodes.append(spot)
         hand = copy.nodes.get(HAND)
-        gripped = None                                       # a long gun in hand: (its grip's node, its muzzle)
-        if who in script.holds and hand is not None:
+        long_guns = []                                       # long guns in hand: (the grip's node, its muzzle)
+        held = script.holds_at.get(who) or ([(0, script.holds[who])] if who in script.holds else [])
+        for n, (frame, template) in enumerate(held if hand is not None else []):
             guns = source("weapons", "")
             names = [G.chunk_name(guns.data, c) for c in guns.chunks if c.id == G.COMPOSITE] if guns else []
-            wanted = weapon_model(script.holds[who], names)
+            wanted = weapon_model(template, names)
             gref = lib.find("composite", wanted, (guns,)) if wanted and guns else None
-            if gref:
-                grip = b.g.node(label + "'s grip", hand)
-                b.composite(gref, grip, label + "'s " + wanted)
-                muzzle = _muzzle(b.g.doc, grip)
-                if muzzle is None or math.sqrt(sum(c * c for c in muzzle)) >= LONG:
-                    b.g.doc["nodes"][grip]["rotation"] = list(GRIP)        # a long gun (or a pipe, a machete)
-                    gripped = (grip, muzzle)
-            else:
-                left_out.append(label + "'s " + WEAPON.sub("", script.holds[who]))
+            if not gref:
+                left_out.append(label + "'s " + WEAPON.sub("", template))
+                continue
+            grip = b.g.node(label + "'s grip", hand)
+            b.composite(gref, grip, label + "'s " + wanted)
+            muzzle = _muzzle(b.g.doc, grip)
+            if muzzle is None or math.sqrt(sum(c * c for c in muzzle)) >= LONG:
+                b.g.doc["nodes"][grip]["rotation"] = list(GRIP)            # a long gun (or a pipe, a machete)
+                long_guns.append((grip, muzzle))
+            # In the hand from its frame, until the next weapon's: the grip is shrunk away outside that.
+            until = held[n + 1][0] if n + 1 < len(held) else None
+            if frame > 0 or until is not None:
+                holder = b.g.node(label + "'s " + wanted + " (from frame " + str(frame) + ")", hand)
+                kids = b.g.doc["nodes"][hand]["children"]
+                kids.remove(grip)
+                b.g.doc["nodes"][holder]["children"] = [grip]
+                times, sizes = ([0.0], [GONE]) if frame > 0 else ([], [])
+                times, sizes = times + [frame / FRAMES_A_SECOND], sizes + [(1.0, 1.0, 1.0)]
+                if until is not None:
+                    times, sizes = times + [until / FRAMES_A_SECOND], sizes + [GONE]
+                tracks.add(holder, "scale", later(times), sizes, step=True)
+            # Its fire: a flash at the muzzle while the script has it firing and it is the one in the hand.
+            shots = [(max(a, frame), min(z, until if until is not None else z)) for a, z in script.fires.get(who, [])]
+            shots = [(a, z) for a, z in shots if z > a]
+            if shots:
+                at = muzzle if muzzle is not None else (0.0, 0.0, 0.0)
+                flash = b.g.node(label + "'s muzzle flash", grip, translation=list(at), mesh=_flash_mesh(b))
+                times, sizes = [0.0], [GONE]
+                for a, z in sorted(shots):
+                    for k in range(a, z, FLASH_EVERY):                       # a shot every few frames: on, then off
+                        times += [k / FRAMES_A_SECOND, (k + 1) / FRAMES_A_SECOND]
+                        sizes += [(1.0, 1.0, 1.0), GONE]
+                tracks.add(flash, "scale", later(times), sizes, step=True)
+        gripped = long_guns[-1] if long_guns else None
         shapes = [i for i in range(before, len(b.g.doc["nodes"])) if b.g.doc["nodes"][i].get("mesh") in b.shaped]
         if who in script.faces:                              # the lips, brows and eyelids
             sliding = slider_keys(_pieces(b, script.faces[who]))
@@ -1006,10 +1139,10 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             role["body"] = "moves" if _pieces(b, anim) else "animation not found"
             keys, ran = moves
             length = max(length, ran)
-            if gripped and gripped[1] is not None:           # in both hands, when the other one is there
-                both = other_hand(b.g.doc, copy, keys, ran, gripped[1])
+            for grip, muzzle in long_guns:                   # in both hands, when the other one is there
+                both = other_hand(b.g.doc, copy, keys, ran, muzzle) if muzzle is not None else None
                 if both:
-                    b.g.doc["nodes"][gripped[0]]["rotation"] = list(both)
+                    b.g.doc["nodes"][grip]["rotation"] = list(both)
             for joint, paths in keys.items():
                 node = copy.nodes.get(joint)
                 if node is not None:
@@ -1049,6 +1182,10 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             for path, (times, values) in _camera_keys(pieces).items():
                 tracks.add(cam, path, later(times), values)
             went_in.append("camera")
+    if script.prop_states:                                   # the map's props the scene changes: a door blown in
+        spot = next((G.pos(at) for at, _f in script.stands.values() if abs(at[0]) + abs(at[2]) > 30.0), None)
+        for lost in _prop_states(b, lib, script, tracks, later, spot):
+            left_out.append(lost + " (a prop the script changes)")
     for label in left_out:
         b.report.missing_drawables.add(label)
     return went_in, nodes, length
