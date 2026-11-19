@@ -2818,3 +2818,63 @@ def test_a_place_whose_files_hold_no_models_is_not_listed(tmp_path):
         r[5] = {"p3d": "other"} if "sosa" in r[0] or "detail" in r[0] else {"p3d": "models"}
     assert [a["key"] for a in BX.areas(out, index, "pc")] == ["z04/pier_01"]       # one file with models is enough
     assert len(BX.areas(out, index, "pc")[0]["files"]) == 2
+
+
+# --------------------------------------------------------------------------- pictures swapped over time
+
+def texture_animation_file():
+    """A pool surface whose piece names a TEX controller, and the animation: three pictures at frames 0, 2, 5."""
+    pics = [picture(f"caustic.0{i}.bmp", 2, 2, bytes([40 * i, 90, 200, 255]) * 4) for i in (1, 2, 3)]
+    channel = chunk(0x121107, struct.pack("<I", 0) + b"TEX\0" + struct.pack("<I3H", 3, 0, 2, 5)
+                    + text("caustic.01.bmp") + text("caustic.02.bmp") + text("caustic.03.bmp"))
+    group = chunk(0x121001, struct.pack("<I", 0) + text("water") + struct.pack("<II", 0, 1), channel)
+    anim = chunk(0x121000, struct.pack("<I", 0) + text("TEX_water") + b"TEX\0" + struct.pack("<ffI", 8.0, 24.0, 1),
+                 chunk(0x121002, struct.pack("<II", 0, 1), group))
+    controller = chunk(0x121201, struct.pack("<I", 1) + text("TEX_water") + b"TEX\0" + b"ANIM" + struct.pack("<fI", 0.0, 1)
+                       + text("water") + text("TEX_water"))
+    shader = shader_chunk("pool", tex="caustic.01.bmp")
+    uvs = uv_list([(0, 0), (1, 0), (0, 1), (1, 1)])
+    return p3d(*pics, shader, anim, mesh("poolShape", shader="pool", kids=uvs + chunk(0x121204, struct.pack("<I", 1), controller)))
+
+
+def test_a_texture_animation_goes_on_the_material_of_the_piece_that_names_it():
+    data = texture_animation_file()
+    src = G.Library().add("f", data, main=False)
+    a = next(c for c in src.chunks if c.id == 0x121000)
+    assert G.texture_keys(src.data, a) == [(0, "caustic.01.bmp"), (2, "caustic.02.bmp"), (5, "caustic.03.bmp")]
+    glb, report = export(data)
+    doc, binc = read_glb(glb)
+    mat = next(m for m in doc["materials"] if "textureAnimation" in m.get("extras", {}))
+    anim = mat["extras"]["textureAnimation"]
+    assert (anim["name"], anim["fps"], anim["frames"], anim["cyclic"]) == ("TEX_water", 24.0, 8.0, True)
+    assert [k[0] for k in anim["keys"]] == [0, 2, 5] and report.texture_animations == 1
+    shades = [image_pixels(doc, binc, {"pbrMetallicRoughness": {"baseColorTexture": {"index": t}}})[:4] for _f, t in anim["keys"]]
+    assert [s[0] for s in shades] == [40, 80, 120]                             # each key its own picture
+
+
+def test_blender_makes_an_image_sequence_of_it(tmp_path, monkeypatch):
+    import sys
+    import types
+    import blender_export as BX
+    glb = tmp_path / "pool.glb"
+    glb.write_bytes(export(texture_animation_file())[0])
+    loaded = []
+    image_user = types.SimpleNamespace(frame_duration=0, frame_start=0, use_cyclic=False, use_auto_refresh=False)
+    node = types.SimpleNamespace(type="TEX_IMAGE", image=None, image_user=image_user)
+    mat = types.SimpleNamespace(use_nodes=True, node_tree=types.SimpleNamespace(nodes=[node]))
+    images = types.SimpleNamespace(load=lambda path, check_existing=False: loaded.append(path) or types.SimpleNamespace(source=""))
+    doc = read_glb(glb.read_bytes())[0]
+    name = next(m["name"] for m in doc["materials"] if "textureAnimation" in m.get("extras", {}))
+    monkeypatch.setitem(sys.modules, "bpy", types.SimpleNamespace(
+        app=types.SimpleNamespace(background=False, timers=types.SimpleNamespace(register=lambda *a, **k: None)),
+        data=types.SimpleNamespace(materials={name: mat}, images=images)))
+    ns: dict = {}
+    exec(compile(BX.OPEN_SCRIPT % {"files": [str(glb)], "save": None, "fps": 30}, "open_in_blender.py", "exec"), ns)
+    assert ns["moving_pictures"](None) == 1
+    files = sorted((tmp_path / "pool moving pictures").rglob("*.png"))
+    assert len(files) == 10                                       # 8 frames at 24 a second, shown at 30 a second
+    assert node.image.source == "SEQUENCE" and image_user.frame_duration == 10 and image_user.use_cyclic
+    # scene frame k shows the key at or before the animation's frame int(k * 24 / 30) (0,0,1,2,3,4,4,5,6,7):
+    # the first picture for 3 frames, the second for 4, the third for 3
+    by = [f.read_bytes() for f in files]
+    assert by[0] == by[1] == by[2] != by[3] and by[3] == by[6] != by[7] and by[7] == by[9] != by[0]
