@@ -1455,7 +1455,8 @@
             <div class="gf-run">
               <button type="button" class="btn" id="gfb-city" onclick="startGfCity()">Export the city</button>
               <button type="button" class="btn-sm" id="gfb-city-stop" onclick="stopGfCity()" hidden>Stop</button>
-              <button type="button" class="btn" id="gfb-city-blender" onclick="gfOpenCity()" hidden>Open the whole city in Blender</button>
+              <button type="button" class="btn" id="gfb-city-view" onclick="gfViewCity()" hidden>View the whole city here</button>
+              <button type="button" class="btn-sm" id="gfb-city-blender" onclick="gfOpenCity()" hidden>Open the whole city in Blender (slow)</button>
               <button type="button" class="btn-sm" id="gfb-city-open" onclick="openGameFolder('blender:' + GFB_CITY_VERSION)" hidden>Open the folder</button>
             </div>
             <p class="gf-notes" id="gfb-city-status" role="status" aria-live="polite"></p>
@@ -4552,6 +4553,10 @@
     const v = g.json.bufferViews[a.bufferView];
     const start = g.bin.byteOffset + (v.byteOffset || 0) + (a.byteOffset || 0);
     const step = v.byteStride || T.BYTES_PER_ELEMENT * n;
+    if (step === T.BYTES_PER_ELEMENT * n && start % T.BYTES_PER_ELEMENT === 0) {   // packed and aligned: copied in one go
+      out.set(new T(g.bin.buffer, start, a.count * n));
+      return { data: out, size: n, type: a.componentType, normalized: !!a.normalized, count: a.count };
+    }
     const dv = new DataView(g.bin.buffer, start);
     const read = { 5120: 'getInt8', 5121: 'getUint8', 5122: 'getInt16', 5123: 'getUint16', 5125: 'getUint32', 5126: 'getFloat32' }[a.componentType];
     for (let k = 0; k < a.count; k++) for (let c = 0; c < n; c++) out[k * n + c] = dv[read](k * step + c * T.BYTES_PER_ELEMENT, true);
@@ -4563,6 +4568,13 @@
     uniform mat4 uProj, uView, uModel;
     out vec3 vNormal; out vec2 vUv; out vec4 vColor;
     void main() { vUv = aUv; vColor = aColor; vNormal = mat3(uView * uModel) * aNormal; gl_Position = uProj * uView * uModel * vec4(aPos, 1.0); }`;
+  /* A big scene (the whole city): each model is in the graphics memory once and drawn in every place it stands. */
+  const VIEW_VS_MANY = `#version 300 es
+    in vec3 aPos; in vec3 aNormal; in vec2 aUv; in vec4 aColor; in mat4 aModel;
+    uniform mat4 uProj, uView;
+    out vec3 vNormal; out vec2 vUv; out vec4 vColor;
+    void main() { vUv = aUv; vColor = aColor; vNormal = mat3(uView * aModel) * aNormal; gl_Position = uProj * uView * aModel * vec4(aPos, 1.0); }`;
+  const VIEW_BIG = 6000;              // more parts than this: drawn the big scene's way
   const VIEW_FS = `#version 300 es
     precision mediump float;
     in vec3 vNormal; in vec2 vUv; in vec4 vColor;
@@ -4724,14 +4736,40 @@
     (scene.nodes || []).forEach((i) => walk(i, V3D.ident(), 0));
     if (!draws.length) throw new Error('nothing in it to draw');
     if (!isFinite(lo[0])) { lo = [-1, -1, -1]; hi = [1, 1, 1]; }
+    let middle = null;
+    if (draws.length > VIEW_BIG) {
+      // A whole city: the view is fitted to where nearly everything is (a far island or the sea's edge doesn't
+      // count), and the sky's dome is left out: from outside it stands over the city like a lid.
+      const at = (k, f) => { const a = Float64Array.from(draws, (d) => d.c[k]).sort(); return a[Math.floor((a.length - 1) * f)]; };
+      const l = [0, 1, 2].map((k) => at(k, 0.02)), h = [0, 1, 2].map((k) => at(k, 0.98));
+      const across = Math.hypot(h[0] - l[0], h[2] - l[2]) / 2;
+      const kept = draws.filter((d) => {
+        const p = d.p;
+        if (!p.min || !p.max) return true;
+        const s = Math.hypot(d.m[0], d.m[1], d.m[2]);
+        return !((p.max[1] - p.min[1]) * s > across * 0.5 && Math.hypot(p.max[0] - p.min[0], p.max[2] - p.min[2]) * s > across * 2);
+      });
+      draws.length = 0;
+      kept.forEach((d) => draws.push(d));
+      lo = l;
+      hi = h;
+      middle = [0, 1, 2].map((k) => at(k, 0.5));   // where the most is: the view starts over the town, not the open sea
+    }
     const seeThrough = draws.filter((d) => d.p.blend);
+    const big = draws.length > VIEW_BIG ? viewerBigScene(gl, sh, draws, lo, hi) : null;
 
-    const centre = [(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2];
+    const centre = middle || [(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2];
     const radius = Math.max(0.01, Math.hypot(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]) / 2);
-    const cam = { target: centre.slice(), yaw: 0.6, pitch: 0.35, dist: radius * 1.5 };
-    const fit = () => { cam.target = centre.slice(); cam.yaw = 0.6; cam.pitch = 0.35; cam.dist = radius * 1.5; };
+    const start = middle ? 0.3 : 1.5;              // a city: close enough to see streets
+    const cam = { target: centre.slice(), yaw: 0.6, pitch: middle ? 0.6 : 0.35, dist: radius * start };
+    const fit = () => { cam.target = centre.slice(); cam.yaw = 0.6; cam.pitch = middle ? 0.6 : 0.35; cam.dist = radius * start; };
     const keys = {};
-    const state = { gl: gl, alive: true, draws: draws.length, triangles: triangles, frames: 0, cam: cam };
+    const state = { gl: gl, alive: true, draws: draws.length, triangles: triangles, frames: 0, cam: cam, big: !!big, shown: draws.length };
+    const told = () => {
+      $('viewer-info').textContent = fmtInt(draws.length) + ' part' + (draws.length === 1 ? '' : 's') + ' · ' + fmtInt(triangles) + ' triangles'
+        + (big ? ' · ' + fmtInt(state.shown) + ' in view · [ and ]: see less or more far away' : '')
+        + ((J.skins || []).length ? ' · rest pose (animations play in Blender)' : '');
+    };
 
     const frame = () => {
       if (!state.alive) return;
@@ -4754,7 +4792,7 @@
       const view = new Float32Array([right[0], up[0], -fwd[0], 0, right[1], up[1], -fwd[1], 0, right[2], up[2], -fwd[2], 0,
         -(right[0] * eye[0] + right[1] * eye[1] + right[2] * eye[2]), -(up[0] * eye[0] + up[1] * eye[1] + up[2] * eye[2]),
         fwd[0] * eye[0] + fwd[1] * eye[1] + fwd[2] * eye[2], 1]);
-      const far = cam.dist + radius * 4;
+      const far = big ? (cam.dist * 1.2 + big.reach) * 1.3 : cam.dist + radius * 4;
       gl.viewport(0, 0, w, h);
       gl.clearColor(0.09, 0.09, 0.10, 1);
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -4785,8 +4823,14 @@
           if (p.indexType) gl.drawElements(gl.TRIANGLES, p.count, p.indexType, 0); else gl.drawArrays(gl.TRIANGLES, 0, p.count);
         }
       };
-      pass(false);
-      pass(true);
+      if (big) {
+        const proj = V3D.perspective(0.9, w / h, Math.max(far / 20000, 0.01), far);
+        state.shown = big.draw(proj, view, eye, fwd, right, up, w / h, cam.dist * 1.2 + big.reach);
+        if (state.frames % 30 === 0) told();
+      } else {
+        pass(false);
+        pass(true);
+      }
       gl.depthMask(true);
       gl.bindVertexArray(null);
       state.frames++;
@@ -4818,16 +4862,122 @@
       if (e.key === 'Escape') { closeViewer(); return; }
       const k = e.key.toLowerCase();
       if (k === 'f') fit();
+      if (big && (k === '[' || k === ']')) big.reach = Math.max(radius / 200, Math.min(radius * 4, big.reach * (k === ']' ? 1.3 : 1 / 1.3)));
       if ('wasdqe'.includes(k) && k.length === 1) { keys[k] = true; e.preventDefault(); }
       keys.shift = e.shiftKey;
     });
     on(window, 'keyup', (e) => { keys[e.key.toLowerCase()] = false; keys.shift = e.shiftKey; });
 
     VIEWER = state;
-    $('viewer-info').textContent = fmtInt(draws.length) + ' part' + (draws.length === 1 ? '' : 's') + ' · ' + fmtInt(triangles) + ' triangles'
-      + ((J.skins || []).length ? ' · rest pose (animations play in Blender)' : '');
+    told();
     canvas.focus();
     frame();
+  }
+
+  /* The big scene's way of drawing. The scene is cut into squares on the ground; in each, the places a model
+     stands are kept together, so one call draws them all. Each frame only the squares in front of the camera
+     and within reach are drawn, and far away the small things are left out. Returns { reach, draw }. */
+  function viewerBigScene(gl, sh, draws, lo, hi) {
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VIEW_VS_MANY));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, VIEW_FS));
+    ['aPos', 'aNormal', 'aUv', 'aColor', 'aModel'].forEach((n, i) => gl.bindAttribLocation(prog, i, n));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog) || 'program');
+    const U = {};
+    ['uProj', 'uView', 'uTex', 'uBase', 'uHasTex', 'uCutoff', 'uLit'].forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
+    const side = Math.max(1, Math.max(hi[0] - lo[0], hi[2] - lo[2]) / 28);
+    const prims = new Map();
+    draws.forEach((d) => {
+      if (!prims.has(d.p)) prims.set(d.p, prims.size);
+      const p = d.p, m = d.m;
+      const half = p.min && p.max ? Math.hypot(p.max[0] - p.min[0], p.max[1] - p.min[1], p.max[2] - p.min[2]) / 2 : 1;
+      d.r = half * Math.max(Math.hypot(m[0], m[1], m[2]), Math.hypot(m[4], m[5], m[6]), Math.hypot(m[8], m[9], m[10]));
+      d.cx = Math.floor((d.c[0] - lo[0]) / side);
+      d.cz = Math.floor((d.c[2] - lo[2]) / side);
+    });
+    const order = draws.slice().sort((a, b) => (a.cx - b.cx) || (a.cz - b.cz) || (prims.get(a.p) - prims.get(b.p)));
+    const places = new Float32Array(order.length * 16);
+    const squares = [];
+    let square = null, group = null;
+    order.forEach((d, i) => {
+      places.set(d.m, i * 16);
+      if (!square || square.cx !== d.cx || square.cz !== d.cz) {
+        square = { cx: d.cx, cz: d.cz, c: [lo[0] + (d.cx + 0.5) * side, 0, lo[2] + (d.cz + 0.5) * side], lowest: Infinity, highest: -Infinity, r: 0, groups: [] };
+        squares.push(square);
+        group = null;
+      }
+      if (!group || group.p !== d.p) { group = { p: d.p, start: i, count: 0, r: 0 }; square.groups.push(group); }
+      group.count++;
+      group.r = Math.max(group.r, d.r);
+      square.r = Math.max(square.r, d.r);
+      square.lowest = Math.min(square.lowest, d.c[1]);
+      square.highest = Math.max(square.highest, d.c[1]);
+    });
+    squares.forEach((q) => { q.c[1] = (q.lowest + q.highest) / 2; q.r += Math.hypot(side, side, q.highest - q.lowest) / 2; });
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, places, gl.STATIC_DRAW);
+    prims.forEach((_, p) => {                      // every model takes its places from the one list
+      gl.bindVertexArray(p.vao);
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      for (let k = 0; k < 4; k++) { gl.enableVertexAttribArray(4 + k); gl.vertexAttribDivisor(4 + k, 1); }
+    });
+    gl.bindVertexArray(null);
+    const big = { reach: Math.hypot(hi[0] - lo[0], hi[2] - lo[2]) / 8, squares: squares.length };
+    const SMALL = 0.004;                           // smaller than this for how far away it is: not drawn
+    big.draw = (proj, view, eye, fwd, right, up, aspect, limit) => {
+      const tanY = Math.tan(0.45), tanX = tanY * aspect;
+      const near = [], far = [];
+      for (const q of squares) {
+        const v = [q.c[0] - eye[0], q.c[1] - eye[1], q.c[2] - eye[2]];
+        const dist = Math.hypot(v[0], v[1], v[2]);
+        if (dist - q.r > limit) continue;
+        const z = v[0] * fwd[0] + v[1] * fwd[1] + v[2] * fwd[2];
+        if (z < -q.r) continue;
+        const ahead = Math.max(z, 0);
+        if (Math.abs(v[0] * right[0] + v[1] * right[1] + v[2] * right[2]) - q.r * 1.5 > ahead * tanX) continue;
+        if (Math.abs(v[0] * up[0] + v[1] * up[1] + v[2] * up[2]) - q.r * 1.5 > ahead * tanY) continue;
+        q.dist = dist;
+        near.push(q);
+      }
+      gl.useProgram(prog);
+      gl.uniformMatrix4fv(U.uProj, false, proj);
+      gl.uniformMatrix4fv(U.uView, false, view);
+      gl.uniform1i(U.uTex, 0);
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      let shown = 0;
+      const one = (g, blend) => {
+        const p = g.p;
+        if (blend) { gl.blendFunc(gl.SRC_ALPHA, p.add ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(p.depth); }
+        if (p.twoSided) gl.disable(gl.CULL_FACE); else gl.enable(gl.CULL_FACE);
+        gl.uniform4fv(U.uBase, p.base);
+        gl.uniform1f(U.uCutoff, p.cutoff);
+        gl.uniform1f(U.uLit, p.lit ? 1 : 0);
+        gl.uniform1f(U.uHasTex, p.tex ? 1 : 0);
+        if (p.tex) { gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, p.tex); }
+        gl.bindVertexArray(p.vao);
+        for (let k = 0; k < 4; k++) gl.vertexAttribPointer(4 + k, 4, gl.FLOAT, false, 64, g.start * 64 + k * 16);
+        if (p.indexType) gl.drawElementsInstanced(gl.TRIANGLES, p.count, p.indexType, 0, g.count);
+        else gl.drawArraysInstanced(gl.TRIANGLES, 0, p.count, g.count);
+        shown += g.count;
+      };
+      gl.disable(gl.BLEND);
+      gl.depthMask(true);
+      for (const q of near) {
+        for (const g of q.groups) {
+          if (q.dist > q.r && g.r < q.dist * SMALL) continue;
+          if (g.p.blend) { far.push([q, g]); continue; }
+          one(g, false);
+        }
+      }
+      gl.enable(gl.BLEND);
+      far.sort((a, b) => b[0].dist - a[0].dist);   // see-through surfaces: the far squares first
+      for (const [, g] of far) one(g, true);
+      gl.disable(gl.BLEND);
+      return shown;
+    };
+    return big;
   }
 
   function closeViewer() {
@@ -4842,6 +4992,13 @@
     if (lose) lose.loseContext();
     const old = $('viewer-canvas'), fresh = old.cloneNode(false);  // a lost context can't be used again: a new canvas
     old.replaceWith(fresh);
+  }
+
+  /* The whole city in the viewer: one file from the portal, each model drawn in every place it stands. */
+  function gfViewCity() {
+    const status = $('gfb-city-bl-status');
+    gfView(gfFileUrl('model', GF_TAB, '', { city: '1' }), 'The whole city', status);
+    status.textContent = 'Getting the whole city (a couple of hundred megabytes: a few seconds)…';
   }
 
   function gfOpenCity() {
@@ -5011,6 +5168,7 @@
     if (st.version) GFB_CITY_VERSION = st.version;
     $('gfb-city-open').hidden = running || !st.written;
     $('gfb-city-blender').hidden = running || !(st.written || GFB_CITY_FILES);
+    $('gfb-city-view').hidden = $('gfb-city-blender').hidden;
     const p = $('gfb-city-status');
     p.classList.toggle('err', !!st.error);
     const look = gfCityLook(st.hour, st.weather);

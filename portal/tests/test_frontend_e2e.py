@@ -869,6 +869,23 @@ def test_game_files_in_blender(page):
     page.wait_for_function("document.getElementById('gfb-city-status').textContent.includes('3 areas written')",
                            timeout=10000)
     assert page.is_visible("#gfb-city-open") and page.is_enabled("#gfb-city")
+    # the whole city in the page's own view: each model drawn in every place it stands, only what is in view
+    page.click("#gfb-city-view")
+    page.wait_for_function("!document.getElementById('viewer').hidden && document.getElementById('viewer-info').textContent.includes('in view')",
+                           timeout=20000)
+    assert page.evaluate("VIEWER.big && VIEWER.draws") == 9002
+    page.wait_for_function("VIEWER.frames > 3")
+    assert 0 < page.evaluate("VIEWER.shown") <= 9002
+    import media
+    _w, _h, rgba = media.decode_png(page.locator("#viewer-canvas").screenshot())
+    px = [rgba[i:i + 3] for i in range(0, len(rgba), 4 * 7)]
+    assert sum(1 for r, g, b in px if r > 150 and g < 110 and b < 110) > len(px) * 0.01, "the city isn't on screen"
+    for _ in range(12):                                                        # zoomed in: most of it is out of view
+        page.mouse.wheel(0, -400)
+    page.wait_for_timeout(300)
+    assert page.evaluate("VIEWER.shown") < 9002
+    page.keyboard.press("Escape")
+    assert page.is_hidden("#viewer")
     page.click("#gfb-city-blender")                                            # the whole city, joined up
     page.wait_for_function("document.getElementById('gfb-city-bl-status').textContent.includes('bringing in 3 areas')")
     assert calls("/api/game-files/open-in-blender")[-1][1]["city"] is True
