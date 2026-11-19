@@ -3355,7 +3355,14 @@ class Handler(BaseHTTPRequestHandler):
                 files = sorted(folder.glob("*.glb"))
                 if not files:
                     return self._json({"ok": False, "error": "Export the city first: then it opens as one scene."}, 404)
-                glbs, save = files, folder / f"{GA.LABELS[version]} city.blend"
+                save = folder / f"{GA.LABELS[version]} city.blend"
+                # every area in one file: Blender imports it in one go, not one import for every area
+                glbs = files
+                if not BX.saved_scene(save, files):
+                    try:
+                        glbs = [BX.city_one_file(folder, GA.LABELS[version])]
+                    except (P3G.ExportError, ValueError, KeyError, IndexError, struct.error, OSError):
+                        glbs = files                 # a file that won't join: one at a time, as before
             elif body.get("scene"):
                 scene = str(body["scene"])
                 glb, _r = BX.cutscene_glb(out, GAME_FILES.index(), version, scene)
@@ -3395,8 +3402,9 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"ok": False, "error": f"Nothing to show in Blender: {e}."}, 415)
         except (OSError, P3G.p3d.P3dError) as e:
             return self._json({"ok": False, "error": f"Couldn't open it in Blender: {e}"}, 500)
+        one = body.get("city") and len(glbs) == 1 and not reopened
         self._json({"ok": True, "blender": str(exe), "saved": GA._show_path(save), "files": len(glbs),
-                    "reopened": reopened})
+                    "reopened": reopened, **({"one_file": GA._show_path(glbs[0])} if one else {})})
 
     def post_game_files_movie(self, body):
         """Start making a movie into a video the browser plays (once; it is kept)."""

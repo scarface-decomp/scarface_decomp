@@ -798,7 +798,12 @@ def test_open_in_blender(monkeypatch, tmp_path):
     for n in ("a_01", "b_02"):
         (tmp_path / "blender" / "PC" / f"{n}.glb").write_bytes(b"glTF")
     code, obj = post(version="pc", city=True)
-    assert code == 200 and obj["files"] == 2 and launched[-1][2].name == "PC city.blend"
+    assert code == 200 and obj["files"] == 2 and launched[-1][2].name == "PC city.blend"   # not real .glb files
+    for n in ("a_01", "b_02"):                                                         # real ones: joined into one
+        (tmp_path / "blender" / "PC" / f"{n}.glb").write_bytes(BX.area_glb(out, index, "pc", "z04/" + n)[0])
+    code, obj = post(version="pc", city=True)
+    assert code == 200 and obj["files"] == 1 and launched[-1][1][0].name == "PC city.glb"
+    assert obj["one_file"].replace("\\", "/").endswith("One file/PC city.glb")
     Fake.client_address = ("192.168.1.9", 5)
     assert post(version="pc", city=True)[0] == 403
     # where Blender is, when it isn't found
@@ -2717,3 +2722,39 @@ def test_the_blender_script_loops_what_the_game_loops(tmp_path, monkeypatch):
     assert door.fcurves[0].modifiers == [] and other.fcurves[0].modifiers == []
     ns["play_round"](["PTRN_ball"])
     assert len(old.fcurves[0].modifiers) == 1                               # not added twice
+
+
+# --------------------------------------------------------------------------- the city as one file
+
+def test_many_glbs_join_into_one_with_shared_pictures_kept_once(tmp_path):
+    import blender_export as BX
+    z = "cement.rcf/packages/z04/"
+    out, index = copied_game(tmp_path, {z + "club_01_shell.p3d": area("w_one"), z + "club_02_shell.p3d": area("w_two"),
+                                        z + "pier_01_shell.p3d": area("w_pier")})
+    folder = tmp_path / "city"
+    folder.mkdir()
+    counts = {"nodes": 0, "meshes": 0, "accessors": 0, "images": 0}
+    for key in ("z04/club_01", "z04/club_02", "z04/pier_01"):
+        glb, _r = BX.area_glb(out, index, "pc", key)
+        (folder / (key.split("/")[1] + ".glb")).write_bytes(glb)
+        d = read_glb(glb)[0]
+        for k in counts:
+            counts[k] += len(d.get(k, []))
+    one = BX.city_one_file(folder, "PC")
+    assert one == folder / "One file" / "PC city.glb"
+    doc, binary = read_glb(one.read_bytes())
+    assert len(doc["nodes"]) == counts["nodes"] and len(doc["meshes"]) == counts["meshes"]
+    assert len(doc["accessors"]) == counts["accessors"] and len(doc.get("images", [])) <= counts["images"]
+    assert doc["buffers"] == [{"byteLength": len(binary)}]
+    assert all(i < len(doc["nodes"]) for i in doc["scenes"][0]["nodes"]) and len(doc["scenes"][0]["nodes"]) >= 3
+    names = {n.get("name") for n in doc["nodes"]}
+    assert {"w_one", "w_two", "w_pier"} <= names
+    for a in doc["accessors"]:                               # every accessor's bytes are inside the one buffer
+        v = doc["bufferViews"][a["bufferView"]]
+        assert v["buffer"] == 0 and v["byteOffset"] % 4 == 0 and v["byteOffset"] + v["byteLength"] <= len(binary)
+    for m in doc["meshes"]:
+        for pr in m["primitives"]:
+            assert all(i < len(doc["accessors"]) for i in pr["attributes"].values())
+    made = one.stat().st_mtime_ns
+    assert BX.city_one_file(folder, "PC").stat().st_mtime_ns == made         # nothing newer: not made again
+    assert not list((folder / "One file").glob("*.tmp"))

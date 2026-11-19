@@ -2769,6 +2769,198 @@ def _area(path: Path) -> str:
     return re.sub(r"_(shell|detail[a-z]?|pocket|dzone)(_[a-z0-9]+)?$", "", path.stem, flags=re.I)
 
 
+# --------------------------------------------------------------------------- many .glb files as one
+
+def _glb_parts(path: Path) -> Tuple[dict, int, int]:
+    """A .glb's JSON, and where its binary part is in the file (offset, length)."""
+    with open(path, "rb") as f:
+        head = f.read(20)
+        if len(head) < 20 or head[:4] != b"glTF":
+            raise ExportError(f"{path.name} isn't a .glb file")
+        n = struct.unpack_from("<I", head, 12)[0]
+        doc = json.loads(f.read(n))
+        more = f.read(8)
+        if len(more) < 8:
+            return doc, 0, 0
+        return doc, 20 + n + 8, struct.unpack_from("<I", more, 0)[0]
+
+
+def join_glbs(files: Sequence[Path], out: Path) -> dict:
+    """Writes the .glb files as one .glb with all their scenes' nodes in one scene (the whole city in a
+    file: one import in Blender instead of one for every area). A picture two files both carry (the road,
+    the palms: every area brings its own copy) is kept once. Extras stay where they were; the scene's are
+    the files' put together (the first file to say a thing says it). Returns {"files", "pictures",
+    "pictures_kept", "bytes"}."""
+    import hashlib
+    lists = ("accessors", "bufferViews", "images", "samplers", "textures", "materials", "meshes", "skins",
+             "nodes", "cameras", "animations")
+    doc: dict = {"asset": {"version": "2.0", "generator": "Scarface decomp portal"}, "scene": 0,
+                 "scenes": [{"nodes": []}]}
+    for k in lists:
+        doc[k] = []
+    lights: List[dict] = []
+    used: set = set()
+    seen: Dict[bytes, int] = {}
+    pictures = 0
+    out.parent.mkdir(parents=True, exist_ok=True)
+    tmp = out.with_name(out.name + ".bin.tmp")
+    size = 0
+    try:
+        with open(tmp, "wb") as bin_out:
+            for path in files:
+                d, at, length = _glb_parts(path)
+                with open(path, "rb") as f:
+                    f.seek(at)
+                    data = f.read(length)
+                views = d.get("bufferViews", [])
+
+                def view_bytes(i: int) -> bytes:
+                    v = views[i]
+                    o = v.get("byteOffset", 0)
+                    return data[o:o + v["byteLength"]]
+                # pictures first: which are new, and which views only an already-kept picture used
+                image_at: List[int] = []
+                dropped: set = set()
+                fresh: List[dict] = []
+                for img in d.get("images", []):
+                    pictures += 1
+                    if "bufferView" not in img:
+                        image_at.append(len(doc["images"]) + len(fresh))
+                        fresh.append(img)
+                        continue
+                    key = hashlib.sha1(view_bytes(img["bufferView"])).digest() + img.get("mimeType", "").encode()
+                    if key in seen:
+                        image_at.append(seen[key])
+                        dropped.add(img["bufferView"])
+                    else:
+                        seen[key] = len(doc["images"]) + len(fresh)
+                        image_at.append(seen[key])
+                        fresh.append(img)
+                view_at: Dict[int, int] = {}
+                for i, v in enumerate(views):
+                    if i in dropped:
+                        continue
+                    body = view_bytes(i)
+                    pad = -size % 4
+                    bin_out.write(b"\0" * pad)
+                    size += pad
+                    view_at[i] = len(doc["bufferViews"])
+                    doc["bufferViews"].append(dict({k: x for k, x in v.items() if k != "byteOffset"},
+                                                   buffer=0, byteOffset=size))
+                    bin_out.write(body)
+                    size += len(body)
+                base = {k: len(doc[k]) for k in lists}
+                light0 = len(lights)
+
+                def tex(x):
+                    # every texture slot, wherever a material keeps it ({"index": n} under a ...Texture key)
+                    if isinstance(x, dict):
+                        return {k: (dict(tex(v), index=v["index"] + base["textures"])
+                                    if k.endswith("Texture") and isinstance(v, dict) and "index" in v else tex(v))
+                                for k, v in x.items()}
+                    if isinstance(x, list):
+                        return [tex(v) for v in x]
+                    return x
+                for a in d.get("accessors", []):
+                    a = dict(a)
+                    if "bufferView" in a:
+                        a["bufferView"] = view_at[a["bufferView"]]
+                    if "sparse" in a:
+                        raise ExportError(f"{path.name}: sparse accessors can't be joined")
+                    doc["accessors"].append(a)
+                for img in fresh:
+                    img = dict(img)
+                    if "bufferView" in img:
+                        img["bufferView"] = view_at[img["bufferView"]]
+                    doc["images"].append(img)
+                doc["samplers"] += d.get("samplers", [])
+                for t in d.get("textures", []):
+                    t = dict(t)
+                    if "source" in t:
+                        t["source"] = image_at[t["source"]]
+                    if "sampler" in t:
+                        t["sampler"] += base["samplers"]
+                    doc["textures"].append(t)
+                doc["materials"] += [tex(m) for m in d.get("materials", [])]
+                for m in d.get("meshes", []):
+                    m = dict(m, primitives=[dict(pr) for pr in m.get("primitives", [])])
+                    for pr in m["primitives"]:
+                        pr["attributes"] = {k: v + base["accessors"] for k, v in pr.get("attributes", {}).items()}
+                        if "indices" in pr:
+                            pr["indices"] += base["accessors"]
+                        if "material" in pr:
+                            pr["material"] += base["materials"]
+                        if "targets" in pr:
+                            pr["targets"] = [{k: v + base["accessors"] for k, v in t.items()} for t in pr["targets"]]
+                    doc["meshes"].append(m)
+                for sk in d.get("skins", []):
+                    sk = dict(sk, joints=[j + base["nodes"] for j in sk.get("joints", [])])
+                    if "inverseBindMatrices" in sk:
+                        sk["inverseBindMatrices"] += base["accessors"]
+                    if "skeleton" in sk:
+                        sk["skeleton"] += base["nodes"]
+                    doc["skins"].append(sk)
+                for n in d.get("nodes", []):
+                    n = dict(n)
+                    if "children" in n:
+                        n["children"] = [c + base["nodes"] for c in n["children"]]
+                    for k in ("mesh", "skin", "camera"):
+                        if k in n:
+                            n[k] += base[k + ("es" if k == "mesh" else "s")]
+                    lit = (n.get("extensions") or {}).get("KHR_lights_punctual")
+                    if lit and "light" in lit:
+                        n["extensions"] = dict(n["extensions"], KHR_lights_punctual=dict(lit, light=lit["light"] + light0))
+                    doc["nodes"].append(n)
+                doc["cameras"] += d.get("cameras", [])
+                for an in d.get("animations", []):
+                    an = dict(an)
+                    an["samplers"] = [dict(sm, input=sm["input"] + base["accessors"], output=sm["output"] + base["accessors"])
+                                      for sm in an.get("samplers", [])]
+                    an["channels"] = [dict(ch, target=dict(ch["target"], **({"node": ch["target"]["node"] + base["nodes"]}
+                                                                           if "node" in ch["target"] else {})))
+                                      for ch in an.get("channels", [])]
+                    doc["animations"].append(an)
+                lights += ((d.get("extensions") or {}).get("KHR_lights_punctual") or {}).get("lights", [])
+                used |= set(d.get("extensionsUsed", []))
+                scenes = d.get("scenes") or [{}]
+                sc = scenes[min(d.get("scene", 0), len(scenes) - 1)]
+                doc["scenes"][0]["nodes"] += [x + base["nodes"] for x in sc.get("nodes", [])]
+                for k, v in (sc.get("extras") or {}).items():
+                    doc["scenes"][0].setdefault("extras", {}).setdefault(k, v)
+            pad = -size % 4
+            bin_out.write(b"\0" * pad)
+            size += pad
+        if size >= 1 << 32 or not doc["scenes"][0]["nodes"]:
+            raise ExportError("nothing to join" if size < 1 << 32 else "too big for one .glb file (4 GB)")
+        doc = {k: v for k, v in doc.items() if v != [] or k in ("scenes", "nodes")}
+        doc["buffers"] = [{"byteLength": size}]
+        if lights:
+            doc["extensions"] = {"KHR_lights_punctual": {"lights": lights}}
+        if used:
+            doc["extensionsUsed"] = sorted(used)
+        js = json.dumps(doc, separators=(",", ":")).encode()
+        js += b" " * (-len(js) % 4)
+        total = 12 + 8 + len(js) + 8 + size
+        if total >= 1 << 32:
+            raise ExportError("too big for one .glb file (4 GB)")
+        part = out.with_name(out.name + ".tmp")
+        with open(part, "wb") as f, open(tmp, "rb") as b:
+            f.write(struct.pack("<III", 0x46546C67, 2, total) + struct.pack("<II", len(js), 0x4E4F534A) + js
+                    + struct.pack("<II", size, 0x004E4942))
+            while True:
+                piece = b.read(1 << 22)
+                if not piece:
+                    break
+                f.write(piece)
+        os.replace(part, out)
+    finally:
+        try:
+            tmp.unlink()
+        except OSError:
+            pass
+    return {"files": len(files), "pictures": pictures, "pictures_kept": len(doc.get("images", [])), "bytes": total}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Turn Pure3D (.p3d) files into a glTF (.glb) scene for Blender.")
     ap.add_argument("out", type=Path, help="the .glb file to write (a folder with --split)")
