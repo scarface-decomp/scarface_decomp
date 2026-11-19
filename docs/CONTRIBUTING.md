@@ -144,6 +144,18 @@ Tests that need the compiler or the game files skip themselves when those are mi
 place they include a run of the real portal on a throwaway copy of the repository.
 `python portal/tools/mock_portal_api.py` serves the page with fake data for front-end work.
 
+## Checking that everything still holds
+
+Two scripts check the project's output on your own computer, and change nothing:
+
+    python portal/scripts/recheck_matches.py            # 300 recorded matches compiled again (--all: every one)
+    python portal/scripts/check_exports.py              # every cutscene and map area made once, for Blender
+
+The first needs the compiler (`portal/tools/msvc71`) and says whether each match still comes out byte for
+byte; it writes `work/recheck_matches.md`. The second needs your copied game files and writes
+`extracted/blender/<version>/export_check.md`: what could not be made, whose model or face is missing,
+which props could not be placed. Run them after updating the project; the numbers should not go down.
+
 ## Rules
 
 * **Only the compiler decides.** No estimates, no "close enough", no counting partial matches.

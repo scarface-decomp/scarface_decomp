@@ -89,7 +89,8 @@ def outfit_for(wears: Dict[str, str], scene: str) -> str:
 
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
                     r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation|"
-                    r"NISWeaponFire|NISStatePropState|NISRenderableTrack|NISRenderableAnimationTrack)\s*\{")
+                    r"NISWeaponFire|NISStatePropState|NISRenderableTrack|NISRenderableAnimationTrack|NISFade|"
+                    r"NISCharacterEffect)\s*\{")
 _FIELD = re.compile(r'\b(\w+)\s+(?:"([^"]*)"|(-?[\d.]+(?:e-?\d+)?))\s*;')
 
 
@@ -113,6 +114,10 @@ class Script:
         self.prop_states: Dict[str, List[Tuple[int, str]]] = {}     # prop's name in the script -> [(frame, state)]
         # The scene's own props (a cabinet's doors, a glass, a tray): its name for each -> the model in the
         # scene's static.p3d, and the animation that moves it.
+        # The screen fading to a colour and back: (frame, frames to fade in, frames held, frames to fade out,
+        # (r, g, b) 0 to 1). Effects on people: (person (lower), kind, joint, frame).
+        self.fades: List[Tuple[int, int, int, int, Tuple[float, float, float]]] = []
+        self.effects: List[Tuple[str, str, str, int]] = []
         self.renderables: Dict[str, str] = {}
         self.renderable_moves: Dict[str, str] = {}
         self.swaps: Dict[str, str] = {}                     # person (lower) -> the cutscene model they are changed
@@ -160,6 +165,14 @@ def read_script(text: str) -> Script:
             end = f.get("FrameEnd")
             s.fires.setdefault(str(f["CharacterName"]).lower(), []).append(
                 (int(f["FrameBegin"]), int(end) if isinstance(end, float) else int(f["FrameBegin"]) + 6))
+        elif kind == "NISFade" and isinstance(f.get("FrameBegin"), float):
+            num = lambda k: int(f[k]) if isinstance(f.get(k), float) else 0
+            s.fades.append((num("FrameBegin"), num("FadeInFrames"), num("DurationFrames"), num("FadeOutFrames"),
+                            tuple(min(1.0, num(c) / 255.0) for c in ("Red", "Green", "Blue"))))
+            s.fades.sort()
+        elif kind == "NISCharacterEffect" and f.get("CharacterName") and f.get("EffectType"):
+            s.effects.append((str(f["CharacterName"]).lower(), str(f["EffectType"]), str(f.get("JointName") or ""),
+                              int(f["FrameBegin"]) if isinstance(f.get("FrameBegin"), float) else 0))
         elif kind == "NISRenderableTrack" and f.get("RenderableName") and f.get("CompositeDrawableName"):
             s.renderables.setdefault(str(f["RenderableName"]), str(f["CompositeDrawableName"]))
         elif kind == "NISRenderableAnimationTrack" and f.get("RenderableName") and f.get("AnimationName"):
@@ -319,6 +332,48 @@ def _flash_mesh(b: G.Builder) -> int:
             "indices": b.g.accessor([0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7], "SCALAR", 5123), "material": material, "mode": 4}]})
         b._flash = made                                      # type: ignore[attr-defined]
     return made
+
+
+# What the game's effects look like, in stand-in form: (half-size in metres, frames shown, colour, adds light).
+# The game draws particle systems; these mark the place and the frames the script gives them.
+EFFECTS = {"GoreBloodExplosion": (0.22, 10, (0.55, 0.02, 0.02, 0.9), False),
+           "ShotEffectHeavy": (0.1, 6, (0.5, 0.03, 0.03, 0.85), False),
+           "ShotEffectLight": (0.06, 5, (0.5, 0.03, 0.03, 0.8), False),
+           "GrenadeExplosion": (1.4, 20, (1.0, 0.55, 0.15, 0.9), True)}
+
+
+def _effect_look(kind: str) -> Tuple[float, int, Tuple[float, float, float, float], bool]:
+    if kind in EFFECTS:
+        return EFFECTS[kind]
+    low = kind.lower()
+    if "explo" in low or "fire" in low:
+        return EFFECTS["GrenadeExplosion"]
+    if "blood" in low or "gore" in low or "shot" in low:
+        return EFFECTS["ShotEffectHeavy"]
+    return (0.12, 8, (0.8, 0.8, 0.8, 0.6), True)
+
+
+def _effect_mesh(b: G.Builder, kind: str) -> int:
+    """A burst for an effect: three crossed squares of its colour, made once for each look in a scene."""
+    size, _frames, rgba, add = _effect_look(kind)
+    made = getattr(b, "_effects", None)
+    if made is None:
+        made = b._effects = {}                               # type: ignore[attr-defined]
+    key = (size, rgba, add)
+    if key not in made:
+        f = size
+        corners = [(-f, -f, 0.0), (f, -f, 0.0), (f, f, 0.0), (-f, f, 0.0), (0.0, -f, -f), (0.0, -f, f), (0.0, f, f),
+                   (0.0, f, -f), (-f, 0.0, -f), (f, 0.0, -f), (f, 0.0, f), (-f, 0.0, f)]
+        extras = {"blend": "add", "depthWrite": False} if add else {"blend": "alpha", "depthWrite": False}
+        material = b.g.add("materials", {"name": kind, "doubleSided": True, "alphaMode": "BLEND",
+                                         "pbrMetallicRoughness": {"baseColorFactor": list(rgba)},
+                                         "extensions": {"KHR_materials_unlit": {}}, "extras": extras})
+        b.g.used_extensions.add("KHR_materials_unlit")
+        made[key] = b.g.add("meshes", {"name": kind, "primitives": [{
+            "attributes": {"POSITION": b.g.accessor(corners, "VEC3", bounds=True)},
+            "indices": b.g.accessor([0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 10, 8, 10, 11], "SCALAR", 5123),
+            "material": material, "mode": 4}]})
+    return made[key]
 
 
 PLACED = re.compile(rb"\x00(\w+)\x00(-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) [\d.]+ [\d.]+ [\d.]+ \d+ \w+\x00")
@@ -998,7 +1053,11 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
                     tracks.add(node, "scale", times, sizes, step=True)
         # Each part's name, when it runs (seconds) and its camera: in the report, and in the scene's extras
         # for the Blender script, which changes camera and starts each part's sound at its start.
-        b.report.parts = [{"name": n, "start": round(begin, 4), "end": round(end, 4), "camera": sc.camera}
+        b.report.parts = [{"name": n, "start": round(begin, 4), "end": round(end, 4), "camera": sc.camera,
+                           # the screen's fades, in seconds from the part's start (the Blender script plays them)
+                           "fades": [{"at": round(at / FRAMES_A_SECOND, 4), "in": round(fi / FRAMES_A_SECOND, 4),
+                                      "hold": round(hold / FRAMES_A_SECOND, 4), "out": round(fo / FRAMES_A_SECOND, 4),
+                                      "colour": list(rgb)} for at, fi, hold, fo, rgb in sc.fades]}
                           for (n, sc), (_nodes, begin, end) in zip(scenes, spans)]
         b.g.doc["scenes"][0].setdefault("extras", {})["parts"] = b.report.parts
         b.report.models += found
@@ -1074,6 +1133,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
                 loaded[key] = None
         return loaded[key]
 
+    bodies: Dict[str, G.SkeletonCopy] = {}                   # person (lower) -> their skeleton, for the effects
     people = [(who, anim) for who, anim in script.plays.items()]
     for who in script.cast:                                  # loaded and stood somewhere, but playing nothing
         if who.lower() not in script.plays and who.lower() not in script.drives and who.lower() in script.stands:
@@ -1124,6 +1184,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             continue
         went_in.append(label)
         nodes.append(spot)
+        bodies[who] = copy
         hand = copy.nodes.get(HAND)
         long_guns = []                                       # long guns in hand: (the grip's node, its muzzle)
         held = script.holds_at.get(who) or ([(0, script.holds[who])] if who in script.holds else [])
@@ -1198,6 +1259,19 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
                 if node is not None:
                     for path, (times, values) in paths.items():
                         tracks.add(node, path, later(times), values)
+    for who, kind, joint, frame in script.effects:           # hits, blood, a grenade going off on someone
+        body = bodies.get(who)
+        node = body.nodes.get(joint.lower()) if body is not None else None
+        if node is None and body is not None:                # a joint this model doesn't have: the chest
+            node = body.nodes.get("spine_2") or next(iter(body.nodes.values()), None)
+        if node is None:
+            continue
+        size, frames, _rgba, _add = _effect_look(kind)
+        burst = b.g.node(kind + " on " + who, node, mesh=_effect_mesh(b, kind))
+        times = [0.0, frame / FRAMES_A_SECOND, (frame + frames) / FRAMES_A_SECOND] if frame > 0 else \
+            [0.0, frames / FRAMES_A_SECOND]
+        sizes = [GONE, (1.0, 1.0, 1.0), GONE] if frame > 0 else [(1.0, 1.0, 1.0), GONE]
+        tracks.add(burst, "scale", later(times), sizes, step=True)
     for who, anim in script.drives.items():
         label = next((k for k in script.cast if k.lower() == who), who)
         keys, ran = _joint_keys(_pieces(b, anim))
@@ -1246,6 +1320,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             continue
         nodes.append(top)
         went_in.append(what)
+        b.report.scene_props.append(what)
         _hide_map_props_at(b, copy)
         anim = script.renderable_moves.get(what)
         if anim:
