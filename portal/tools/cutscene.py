@@ -356,6 +356,10 @@ def _effect_look(kind: str) -> Tuple[float, int, Tuple[float, float, float, floa
 def _effect_mesh(b: G.Builder, kind: str) -> int:
     """A burst for an effect: three crossed squares of its colour, made once for each look in a scene."""
     size, _frames, rgba, add = _effect_look(kind)
+    return _burst_mesh(b, size, rgba, add, kind)
+
+
+def _burst_mesh(b: G.Builder, size: float, rgba, add: bool, kind: str = "effect") -> int:
     made = getattr(b, "_effects", None)
     if made is None:
         made = b._effects = {}                               # type: ignore[attr-defined]
@@ -421,6 +425,7 @@ def _prop_states(b: G.Builder, lib: G.Library, script: Script, tracks: _Tracks, 
         ref, parent, at, turn, size, old = found[0]
         name = G.chunk_name(ref.data, ref.chunk)
         states = [s.lower() for s, _shown in b.states_of(ref, name)]
+        effects = _state_effects(b, ref, name)
         if old is not None:
             doc["nodes"][parent]["children"].remove(old)     # the one the map put there, in one state for good
         home = b.g.node(wanted + " (" + name + ")", parent, translation=at, rotation=turn, scale=size)
@@ -436,7 +441,51 @@ def _prop_states(b: G.Builder, lib: G.Library, script: Script, tracks: _Tracks, 
                 times, sizes = times + [until / FRAMES_A_SECOND], sizes + [GONE]
             if len(times) > 1:
                 tracks.add(top, "scale", later(times), sizes, step=True)
+            # what the game sets off as the prop enters the state: the blast, wood flying, smoke, fire
+            for kind, at_, size_, begin in effects.get(state.lower(), []) if frame > 0 or n > 0 else []:
+                look = _prop_effect_look(kind, size_)
+                fx = b.g.node(kind + " (" + wanted + ")", home, translation=list(G.pos(at_)), mesh=_burst_mesh(b, *look[:3]))
+                first = frame + int(round(begin * FRAMES_A_SECOND))
+                last = first + look[3] if until is None else min(until, first + look[3])
+                if last <= first:
+                    continue
+                tracks.add(fx, "scale", later([0.0, first / FRAMES_A_SECOND, last / FRAMES_A_SECOND]),
+                           [GONE, (1.0, 1.0, 1.0), GONE], step=True)
     return lost
+
+
+def _state_effects(b: G.Builder, ref: G.Ref, name: str) -> Dict[str, List[Tuple[str, tuple, float, float]]]:
+    """{state (lower): [(effect name, offset from the prop, size, start in seconds)]}: the Prop State
+    Effects (0x0802000B) of each of a prop's states (SPEC-009 section 2.5: the last float is when it starts)."""
+    data = b.prop_data(ref, name)
+    out: Dict[str, List[Tuple[str, tuple, float, float]]] = {}
+    if data is None:
+        return out
+    for st in data.chunk.children:
+        if st.id != G.PROP_STATE:
+            continue
+        state = (p3d.fields(data.data, st).get("name") or "").lower()
+        for e in st.children:
+            if e.id == 0x0802000B:
+                f = p3d.fields(data.data, e)
+                if f.get("kind") == "Effect" and f.get("effect"):
+                    out.setdefault(state, []).append((str(f["effect"]), tuple(f.get("offset") or (0, 0, 0)),
+                                                      float(f.get("size") or 1.0), float(f.get("value") or 0.0)))
+    return out
+
+
+def _prop_effect_look(kind: str, size: float) -> Tuple[float, Tuple[float, float, float, float], bool, int]:
+    """A prop's effect as a stand-in: (half-size, colour, adds light, frames shown)."""
+    low = kind.lower()
+    if "fire" in low:
+        return 0.35 * size, (1.0, 0.45, 0.1, 0.85), True, 10 * 30 if "stop" in low else 60 * 30
+    if "smoke" in low:
+        return 0.8 * size, (0.35, 0.35, 0.35, 0.45), False, 8 * 30 if "linger" in low else 3 * 30
+    if "explo" in low or "grenade" in low:
+        return 1.0 * size, (1.0, 0.6, 0.2, 0.9), True, 20
+    if "debris" in low or "spark" in low:
+        return 0.4 * size, (0.45, 0.32, 0.2, 0.9) if "spark" not in low else (1.0, 0.85, 0.4, 0.9), "spark" in low, 15
+    return 0.3 * size, (0.8, 0.8, 0.8, 0.6), True, 15
 
 
 ROOTS = ("motion_root", "balance_root", "character_root")
