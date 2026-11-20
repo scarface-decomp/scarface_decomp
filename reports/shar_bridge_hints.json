@@ -1,0 +1,286 @@
+{
+  "schema": "scarface_shar_bridge_hints_v1",
+  "note": "What Hit & Run's 10 July 2003 PS2 prototype's linker map calls a function, carried through Hit & Run's retail Xbox build, where the evidence is one signal on a hop: a hint to what the code does, never a name. hop1 (PS2 symbol to Hit & Run Xbox): V slot of a table of virtual functions, S a string only it uses, R its parameters against the bytes its ret removes, G call graph. hop2 (Hit & Run Xbox to Scarface): I identical code, T table slot of the same class under the engine's renaming, S string, K constant, R the same ret N, G call graph. Made by tools/shar_bridge.c.",
+  "hints": {
+    "xb:0x00018F90": {
+      "hint": "RadicalMathLibrary::Randomizer::Float",
+      "ps2_symbol": "Float__Q218RadicalMathLibrary10Randomizer",
+      "hop1": "G",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its Float__Q218RadicalMathLibrary10Randomizer pairs with the function at 0x0012E5C0 of Hit & Run's retail Xbox build by the same place in the call graph under a function paired the same way, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x0013D830": {
+      "hint": "renderer::CharacterRenderable::DisplayShadow",
+      "ps2_symbol": "DisplayShadow__19CharacterRenderableP5tPosePC16BlobShadowParams",
+      "hop1": "SR",
+      "hop2": "KR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its DisplayShadow__19CharacterRenderableP5tPosePC16BlobShadowParams pairs with the function at 0x0010C6D0 of Hit & Run's retail Xbox build by a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a constant only it uses in each program; the same ret N."
+    },
+    "xb:0x001A8170": {
+      "hint": "UserController::Initialize",
+      "ps2_symbol": "Initialize__14UserControllerP14IRadController",
+      "hop1": "VSR",
+      "hop2": "KR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its Initialize__14UserControllerP14IRadController pairs with the function at 0x00046D10 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds; a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a constant only it uses in each program; the same ret N."
+    },
+    "xb:0x0021EF90": {
+      "hint": "renderer::RenderManager::HandleEvent",
+      "ps2_symbol": "HandleEvent__13RenderManager9EventEnumPv",
+      "hop1": "S",
+      "hop2": "KR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its HandleEvent__13RenderManager9EventEnumPv pairs with the function at 0x000B6380 of Hit & Run's retail Xbox build by a string only it uses on each side, and that function pairs with this one by a constant only it uses in each program; the same ret N."
+    },
+    "xb:0x0023C290": {
+      "hint": "fight::ScriptReader::LoadDefault",
+      "ps2_symbol": "LoadDefault__Q26choreo12ScriptReader",
+      "hop1": "S",
+      "hop2": "S",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its LoadDefault__Q26choreo12ScriptReader pairs with the function at 0x00199B80 of Hit & Run's retail Xbox build by a string only it uses on each side, and that function pairs with this one by a string only it uses in each program."
+    },
+    "xb:0x0023C670": {
+      "hint": "fight::ScriptReader::LoadLocalFloat",
+      "ps2_symbol": "LoadLocalFloat__Q26choreo12ScriptReader",
+      "hop1": "S",
+      "hop2": "S",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its LoadLocalFloat__Q26choreo12ScriptReader pairs with the function at 0x00199F80 of Hit & Run's retail Xbox build by a string only it uses on each side, and that function pairs with this one by a string only it uses in each program."
+    },
+    "xb:0x0023C7F0": {
+      "hint": "fight::ScriptReader::LoadLocalString",
+      "ps2_symbol": "LoadLocalString__Q26choreo12ScriptReader",
+      "hop1": "S",
+      "hop2": "S",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its LoadLocalString__Q26choreo12ScriptReader pairs with the function at 0x0019A0F0 of Hit & Run's retail Xbox build by a string only it uses on each side, and that function pairs with this one by a string only it uses in each program."
+    },
+    "xb:0x0023C8E0": {
+      "hint": "fight::ScriptReader::LoadUntilStruct",
+      "ps2_symbol": "LoadUntilStruct__Q26choreo12ScriptReader",
+      "hop1": "S",
+      "hop2": "SG",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its LoadUntilStruct__Q26choreo12ScriptReader pairs with the function at 0x0019A200 of Hit & Run's retail Xbox build by a string only it uses on each side, and that function pairs with this one by a string only it uses in each program; the same place in the call graph under a function paired the same way."
+    },
+    "xb:0x0023CAA0": {
+      "hint": "fight::ScriptReader::BeginStruct",
+      "ps2_symbol": "BeginStruct__Q26choreo12ScriptReaderPCc",
+      "hop1": "SR",
+      "hop2": "SR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its BeginStruct__Q26choreo12ScriptReaderPCc pairs with the function at 0x0019A4E0 of Hit & Run's retail Xbox build by a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a string only it uses in each program; the same ret N."
+    },
+    "xb:0x0023CC20": {
+      "hint": "fight::ScriptReader::EndStruct",
+      "ps2_symbol": "EndStruct__Q26choreo12ScriptReader",
+      "hop1": "S",
+      "hop2": "S",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its EndStruct__Q26choreo12ScriptReader pairs with the function at 0x0019A620 of Hit & Run's retail Xbox build by a string only it uses on each side, and that function pairs with this one by a string only it uses in each program."
+    },
+    "xb:0x0023CEC0": {
+      "hint": "fight::ScriptReader::RequiredParamFloat",
+      "ps2_symbol": "RequiredParamFloat__Q26choreo12ScriptReaderPCcPfPi",
+      "hop1": "SR",
+      "hop2": "SR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its RequiredParamFloat__Q26choreo12ScriptReaderPCcPfPi pairs with the function at 0x0019A820 of Hit & Run's retail Xbox build by a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a string only it uses in each program; the same ret N."
+    },
+    "xb:0x0023D190": {
+      "hint": "fight::ScriptReader::RequiredParamString",
+      "ps2_symbol": "RequiredParamString__Q26choreo12ScriptReaderPCcPciPi",
+      "hop1": "SR",
+      "hop2": "SR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its RequiredParamString__Q26choreo12ScriptReaderPCcPciPi pairs with the function at 0x0019AB50 of Hit & Run's retail Xbox build by a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a string only it uses in each program; the same ret N."
+    },
+    "xb:0x0023D470": {
+      "hint": "fight::ScriptReader::ParamFloat",
+      "ps2_symbol": "ParamFloat__Q26choreo12ScriptReaderPCcPfPi",
+      "hop1": "SR",
+      "hop2": "SR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its ParamFloat__Q26choreo12ScriptReaderPCcPfPi pairs with the function at 0x0019AE60 of Hit & Run's retail Xbox build by a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a string only it uses in each program; the same ret N."
+    },
+    "xb:0x0023D650": {
+      "hint": "fight::ScriptReader::ParamString",
+      "ps2_symbol": "ParamString__Q26choreo12ScriptReaderPCcPciPi",
+      "hop1": "SR",
+      "hop2": "SR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its ParamString__Q26choreo12ScriptReaderPCcPciPi pairs with the function at 0x0019B040 of Hit & Run's retail Xbox build by a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a string only it uses in each program; the same ret N."
+    },
+    "xb:0x00242960": {
+      "hint": "radTimeGetDate",
+      "ps2_symbol": "radTimeGetDate__FP7radDate",
+      "hop1": "G",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its radTimeGetDate__FP7radDate pairs with the function at 0x00183020 of Hit & Run's retail Xbox build by the same place in the call graph under a function paired the same way, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x00244170": {
+      "hint": "math::Vector::Normalize",
+      "ps2_symbol": "Normalize__Q218RadicalMathLibrary6Vector",
+      "hop1": "G",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its Normalize__Q218RadicalMathLibrary6Vector pairs with the function at 0x0012C3D0 of Hit & Run's retail Xbox build by the same place in the call graph under a function paired the same way, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x00244450": {
+      "hint": "radMemoryAlloc",
+      "ps2_symbol": "radMemoryAlloc__FiUi",
+      "hop1": "G",
+      "hop2": "G",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its radMemoryAlloc__FiUi pairs with the function at 0x00182A00 of Hit & Run's retail Xbox build by the same place in the call graph under a function paired the same way, and that function pairs with this one by the same place in the call graph under a function paired the same way."
+    },
+    "xb:0x002557F0": {
+      "hint": "pure3d::Platform::CreateContext",
+      "ps2_symbol": "CreateContext__9tPlatformP16tContextInitData",
+      "hop1": "SR",
+      "hop2": "SR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its CreateContext__9tPlatformP16tContextInitData pairs with the function at 0x0012D450 of Hit & Run's retail Xbox build by a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a string only it uses in each program; the same ret N."
+    },
+    "xb:0x00275830": {
+      "hint": "pure3d::AnimationGroup::CleanUp",
+      "ps2_symbol": "CleanUp__15tAnimationGroup",
+      "hop1": "V",
+      "hop2": "T",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its CleanUp__15tAnimationGroup pairs with the function at 0x0013E560 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by the same slot of the same class's table of virtual functions."
+    },
+    "xb:0x0027CF20": {
+      "hint": "pure3d::ImageFont::FindGlyph",
+      "ps2_symbol": "FindGlyph__C10tImageFontUs",
+      "hop1": "RG",
+      "hop2": "RG",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its FindGlyph__C10tImageFontUs pairs with the function at 0x001455C0 of Hit & Run's retail Xbox build by its parameter list adds up to the bytes the Xbox function's ret removes; the same place in the call graph under a function paired the same way, and that function pairs with this one by the same ret N; the same place in the call graph under a function paired the same way."
+    },
+    "xb:0x002846A0": {
+      "hint": "RadicalMathLibrary::Quaternion::Normalize",
+      "ps2_symbol": "Normalize__Q218RadicalMathLibrary10Quaternion",
+      "hop1": "G",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its Normalize__Q218RadicalMathLibrary10Quaternion pairs with the function at 0x0012F590 of Hit & Run's retail Xbox build by the same place in the call graph under a function paired the same way, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x00298180": {
+      "hint": "pure3d::RawImageHandler::CreateImage",
+      "ps2_symbol": "CreateImage__16tRawImageHandlerP5tFilePQ213tImageHandler7Builder",
+      "hop1": "VSR",
+      "hop2": "KR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its CreateImage__16tRawImageHandlerP5tFilePQ213tImageHandler7Builder pairs with the function at 0x00159D00 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds; a string only it uses on each side; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a constant only it uses in each program; the same ret N."
+    },
+    "xb:0x0029D420": {
+      "hint": "pure3d::pddiBaseContext::DisplayStats",
+      "ps2_symbol": "DisplayStats__15pddiBaseContext",
+      "hop1": "S",
+      "hop2": "K",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its DisplayStats__15pddiBaseContext pairs with the function at 0x0016B040 of Hit & Run's retail Xbox build by a string only it uses on each side, and that function pairs with this one by a constant only it uses in each program."
+    },
+    "xb:0x002A8190": {
+      "hint": "pure3d::BillboardQuadGroupAnimationController::Update",
+      "ps2_symbol": "Update__38tBillboardQuadGroupAnimationController",
+      "hop1": "V",
+      "hop2": "K",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its Update__38tBillboardQuadGroupAnimationController pairs with the function at 0x001650B0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by a constant only it uses in each program."
+    },
+    "xb:0x002A88F0": {
+      "hint": "pure3d::VertexAnimKeyLoader::LoadObject",
+      "ps2_symbol": "LoadObject__20tVertexAnimKeyLoaderP10tChunkFileP12tEntityStore",
+      "hop1": "VR",
+      "hop2": "KR",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its LoadObject__20tVertexAnimKeyLoaderP10tChunkFileP12tEntityStore pairs with the function at 0x001407F0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by a constant only it uses in each program; the same ret N."
+    },
+    "xb:0x002A9FD0": {
+      "hint": "core::FileSetPositionRequest::DoRequest",
+      "ps2_symbol": "DoRequest__22FileSetPositionRequest",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its DoRequest__22FileSetPositionRequest pairs with the function at 0x0018C320 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x002AA010": {
+      "hint": "core::FileGetPositionRequest::DoRequest",
+      "ps2_symbol": "DoRequest__22FileGetPositionRequest",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its DoRequest__22FileGetPositionRequest pairs with the function at 0x0018C3B0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x002AA060": {
+      "hint": "core::FileGetSizeRequest::DoRequest",
+      "ps2_symbol": "DoRequest__18FileGetSizeRequest",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its DoRequest__18FileGetSizeRequest pairs with the function at 0x0018C440 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x002AA0A0": {
+      "hint": "core::FileCancelRequest::DoRequest",
+      "ps2_symbol": "DoRequest__17FileCancelRequest",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its DoRequest__17FileCancelRequest pairs with the function at 0x0018C4D0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x002AB2C0": {
+      "hint": "core::File::CheckForCompletion",
+      "ps2_symbol": "CheckForCompletion__7radFile",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its CheckForCompletion__7radFile pairs with the function at 0x0018A9B0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x002AB320": {
+      "hint": "core::File::GetLastError",
+      "ps2_symbol": "GetLastError__7radFile",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its GetLastError__7radFile pairs with the function at 0x0018AA10 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x002ABC90": {
+      "hint": "core::InstanceDrive::CheckForCompletion",
+      "ps2_symbol": "CheckForCompletion__16radInstanceDrive",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its CheckForCompletion__16radInstanceDrive pairs with the function at 0x0018B3E0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x002AC200": {
+      "hint": "PlatformDrivesValidateDriveName",
+      "ps2_symbol": "PlatformDrivesValidateDriveName__FPCc",
+      "hop1": "S",
+      "hop2": "S",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its PlatformDrivesValidateDriveName__FPCc pairs with the function at 0x0018CCF0 of Hit & Run's retail Xbox build by a string only it uses on each side, and that function pairs with this one by a string only it uses in each program."
+    },
+    "xb:0x002ACA60": {
+      "hint": "core::CementLibrary::WaitForCompletion",
+      "ps2_symbol": "WaitForCompletion__16radCementLibrary",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its WaitForCompletion__16radCementLibrary pairs with the function at 0x00188760 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    },
+    "xb:0x002ACE90": {
+      "hint": "core::CementLibrary::AddRef",
+      "ps2_symbol": "AddRef__16radCementLibrary",
+      "hop1": "V",
+      "hop2": "I",
+      "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
+      "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its AddRef__16radCementLibrary pairs with the function at 0x001886E0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds, and that function pairs with this one by identical code (addresses apart), found once in each program."
+    }
+  }
+}

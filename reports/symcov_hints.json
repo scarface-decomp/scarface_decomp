@@ -1,0 +1,4175 @@
+{
+  "schema": "scarface_symcov_hints_v1",
+  "note": "For functions of game code that a symcov report of default.xbe found identical to a named function in another game's build. The name is what that other game called the code: a hint to what it does, never this game's name for it (AGENTS.md ruling 2). Keys: xb:address. choice: unique (one name for this code) or link-order (the same code has several names and the report assigned this one by link order, so it is a guess within them). kind: game, or third-party (RAD Game Tools' Bink audio code and the Ooura FFT it holds, found among the Microsoft libraries). Made by tools/symcov_import.c.",
+  "hints": {
+    "xb:0x00011910": {
+      "hint": "?SquaredLength@vector3@@QBEMXZ",
+      "build": "[XBOX] The Red Star (Beta) [2004-07-17] (MAP)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 31,
+      "kind": "game"
+    },
+    "xb:0x00012380": {
+      "hint": "??_H@YGXPAXIHP6EPAX0@Z@Z",
+      "build": "[XBOX] The Red Star (Beta) [2004-07-17] (MAP)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 48,
+      "kind": "game"
+    },
+    "xb:0x00012450": {
+      "hint": "??$_Rotate@PAUTRecord@TTextTable@localization@@HU123@@std@@YAXPAUTRecord@TTextTable@localization@@00PAH0@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 246,
+      "kind": "game"
+    },
+    "xb:0x00013AA0": {
+      "hint": "Abacus::operator*",
+      "build": "[XBOX] Crusty Demons - Freestyle Moto X [2005-08-23] (MAP+PDB)/Crusty.exe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 55,
+      "kind": "game"
+    },
+    "xb:0x00014FC0": {
+      "hint": "??$_Median@PAUTRecord@TTextTable@localization@@@std@@YAXPAUTRecord@TTextTable@localization@@00@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 140,
+      "kind": "game"
+    },
+    "xb:0x00015FD0": {
+      "hint": "??$_Make_heap@PAUTRecord@TTextTable@localization@@HU123@@std@@YAXPAUTRecord@TTextTable@localization@@0PAH0@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 90,
+      "kind": "game"
+    },
+    "xb:0x00016910": {
+      "hint": "??$sort_heap@PAUTRecord@TTextTable@localization@@@std@@YAXPAUTRecord@TTextTable@localization@@0@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 139,
+      "kind": "game"
+    },
+    "xb:0x000169D0": {
+      "hint": "??$_Sort@PAUTRecord@TTextTable@localization@@H@std@@YAXPAUTRecord@TTextTable@localization@@0H@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 203,
+      "kind": "game"
+    },
+    "xb:0x00025400": {
+      "hint": "??_I@YGXPAXIHP6EX0@Z@Z",
+      "build": "[XBOX] Buffy the Vampire Slayer [2002-08-07] (MAP)/Default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 49,
+      "kind": "game"
+    },
+    "xb:0x00026740": {
+      "hint": "_floorf",
+      "build": "[XBOX] The Red Star (Beta) [2004-07-17] (MAP)/default.xbe",
+      "choice": "link-order",
+      "candidates": 4,
+      "size": 19,
+      "kind": "game"
+    },
+    "xb:0x00029CE0": {
+      "hint": "??$sort_heap@PAJUTSortByTimesPlayed@@@std@@YAXPAJ0UTSortByTimesPlayed@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 74,
+      "kind": "game"
+    },
+    "xb:0x00029D30": {
+      "hint": "??$_Sort@PAJHUTSortByTimesPlayed@@@std@@YAXPAJ0HUTSortByTimesPlayed@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 238,
+      "kind": "game"
+    },
+    "xb:0x0002EAA0": {
+      "hint": "GUI_ScoreCardUp",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 27,
+      "kind": "game"
+    },
+    "xb:0x0003DBD0": {
+      "hint": "?Length@TVector@@QBEMXZ",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 33,
+      "kind": "game"
+    },
+    "xb:0x00063880": {
+      "hint": "?TriggerCamera@TScriptFunction_General@@SAXPBD@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 18,
+      "kind": "game"
+    },
+    "xb:0x000643F0": {
+      "hint": "DF_vDrawLayers",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 22,
+      "kind": "game"
+    },
+    "xb:0x0006F9C0": {
+      "hint": "_SNDAPP_DebugPrint",
+      "build": "[XBOX] Project Snowblind [2004-11-17] (MAP)/bo3netm.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 36,
+      "kind": "game"
+    },
+    "xb:0x0007F600": {
+      "hint": "??$_Sort@PAUTUnicodeMapRec@?A0xb9e4283c@@H@std@@YAXPAUTUnicodeMapRec@?A0xb9e4283c@@0H@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 203,
+      "kind": "game"
+    },
+    "xb:0x0009ACA0": {
+      "hint": "RSQuat::Identity",
+      "build": "[XBOX] Tom Clancy's Ghost Recon 2 [2004-07-30] (MAP+PDB)/StonewallXbox_Profile.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 33,
+      "kind": "game"
+    },
+    "xb:0x000A5670": {
+      "hint": "EARS::Modules::Sentient::HeadTrackAngleInfo::Init",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 23,
+      "kind": "game"
+    },
+    "xb:0x000A6D40": {
+      "hint": "EARS::SaveGame::MemcardHandler::PlatformMessages::PlatformMessages",
+      "build": "[XBOX] James Bond 007 - From Russia With Love [2005-09-30] (MAP+PDB)/ears_bond_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 96,
+      "kind": "game"
+    },
+    "xb:0x000AB410": {
+      "hint": "?SetSplashDamageValue@Projectile@Framework@EARS@@QAEXM@Z",
+      "build": "[XBOX] James Bond 007 - From Russia With Love [2005-09-11] (MAP+PDB)/ears_bond_f.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x000AB430": {
+      "hint": "?SetGravity@Projectile@Framework@EARS@@QAEXM@Z",
+      "build": "[XBOX] James Bond 007 - From Russia With Love [2005-09-11] (MAP+PDB)/ears_bond_f.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x000B8790": {
+      "hint": "?CompareX@@YA_NABVBoxTreeBuildRecord@@0@Z",
+      "build": "[XBOX] Project Snowblind [2004-11-17] (MAP)/bo3netm.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 26,
+      "kind": "game"
+    },
+    "xb:0x000C4360": {
+      "hint": "?CompareY@@YA_NABVBoxTreeBuildRecord@@0@Z",
+      "build": "[XBOX] Project Snowblind [2004-11-17] (MAP)/bo3netm.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 28,
+      "kind": "game"
+    },
+    "xb:0x000C4380": {
+      "hint": "??$_Rotate@PAUTUnicodeMapRec@?A0xb9e4283c@@HU12@@std@@YAXPAUTUnicodeMapRec@?A0xb9e4283c@@00PAH0@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 149,
+      "kind": "game"
+    },
+    "xb:0x000C47B0": {
+      "hint": "??$_Make_heap@PAJHJUTSortByTimesPlayed@@@std@@YAXPAJ0UTSortByTimesPlayed@@PAH0@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 61,
+      "kind": "game"
+    },
+    "xb:0x000C4AC0": {
+      "hint": "??$_Sort@PAJHUTSortByTimesPlayed@@@std@@YAXPAJ0HUTSortByTimesPlayed@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 238,
+      "kind": "game"
+    },
+    "xb:0x000CA160": {
+      "hint": "Photon::CLineSegment::CLineSegment",
+      "build": "[XBOX] Amped 2 (Beta) [2003-09-12] (PDB)/ayeti.exe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 52,
+      "kind": "game"
+    },
+    "xb:0x000E7920": {
+      "hint": "CSA_Physical::GetEndPos",
+      "build": "[XBOX] Full Spectrum Warrior - Ten Hammers [2005-12-14] (MAP+PDB)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 30,
+      "kind": "game"
+    },
+    "xb:0x000EAA10": {
+      "hint": "??$_Median@PAPAUTRenderGameData@@UL_Sort_ObjectId@?A0x5db36290@@@std@@YAXPAPAUTRenderGameData@@00UL_Sort_ObjectId@?A0x5db36290@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 167,
+      "kind": "game"
+    },
+    "xb:0x000EAC60": {
+      "hint": "??$_Sort@PAPAUTRenderGameData@@HUL_Sort_ObjectId@?A0x5db36290@@@std@@YAXPAPAUTRenderGameData@@0HUL_Sort_ObjectId@?A0x5db36290@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 238,
+      "kind": "game"
+    },
+    "xb:0x000EAD50": {
+      "hint": "??$_Sort@PAPAUTRenderGameData@@HUL_Sort_ObjectId@?A0x5db36290@@@std@@YAXPAPAUTRenderGameData@@0HUL_Sort_ObjectId@?A0x5db36290@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 238,
+      "kind": "game"
+    },
+    "xb:0x0010C1F0": {
+      "hint": "std::_Rotate<EARS::Framework::Modules::OccluderSortRecord *,int,EARS::Framework::Modules::OccluderSortRecord>",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_f.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 177,
+      "kind": "game"
+    },
+    "xb:0x0013CE60": {
+      "hint": "BarrageEffect::ActivationTimerIsActive",
+      "build": "[XBOX] Tom Clancy's Ghost Recon 2 [2004-07-30] (MAP+PDB)/StonewallXbox_Profile.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 26,
+      "kind": "game"
+    },
+    "xb:0x001522C0": {
+      "hint": "fcGlowPixelShader::fcGlowPixelShader",
+      "build": "[XBOX] Power Drome [2004-04-19]/Powerdrome.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 30,
+      "kind": "game"
+    },
+    "xb:0x001527F0": {
+      "hint": "?Mesh_Offset@IPickup@@UAE?AUTVector@@XZ",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0015D790": {
+      "hint": "Photon::CEnvironment::GetPanoShadowColor",
+      "build": "[XBOX] Amped 2 (Beta) [2003-09-12] (PDB)/ayeti.exe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 33,
+      "kind": "game"
+    },
+    "xb:0x001649B0": {
+      "hint": "?SetScale@cEffectSpikes@@UAEXM@Z",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/GhostU.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00164A10": {
+      "hint": "cEffectSpikes::SetScale",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00164A40": {
+      "hint": "EARS::Audio::AMixer::MixChannel::SetUIAttenuation",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_f.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00167CF0": {
+      "hint": "?SetFullSplashDamageRadius@Projectile@Framework@EARS@@QAEXM@Z",
+      "build": "[XBOX] James Bond 007 - From Russia With Love [2005-09-11] (MAP+PDB)/ears_bond_f.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00177F80": {
+      "hint": "cMissionData::SetMissionTimerLimit",
+      "build": "[XBOX] Crusty Demons - Freestyle Moto X [2005-08-23] (MAP+PDB)/Crusty.exe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x0017AC20": {
+      "hint": "?CustomFaceExist@@YA_NVRString@@@Z",
+      "build": "[XBOX] Operation Flashpoint - Elite (Beta) [2005-08-12] (MAP)/Default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x0017AC30": {
+      "hint": "?CustomFaceExist@@YA_NVRString@@@Z",
+      "build": "[XBOX] Operation Flashpoint - Elite (Beta) [2005-08-12] (MAP)/Default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x001C2520": {
+      "hint": "?SetTemplate@TFXMeshInstance@@UAE_NPAUTFXTemplate@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 18,
+      "kind": "game"
+    },
+    "xb:0x001C4640": {
+      "hint": "EARS::Modules::Attitude::SetBrowTilt",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_f.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 25,
+      "kind": "game"
+    },
+    "xb:0x001C7300": {
+      "hint": "?ClassFactoryCompareFunc@SimManager@@CAHPBX0@Z",
+      "build": "[XBOX] The Simpsons [2004-03-08] (MAP+PDB)/Simpsons_Xbox_R.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 25,
+      "kind": "game"
+    },
+    "xb:0x001CC0E0": {
+      "hint": "?SetTemplate@TFXMeshInstance@@UAE_NPAUTFXTemplate@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 18,
+      "kind": "game"
+    },
+    "xb:0x001D3C50": {
+      "hint": "?SetGrowBarLevel@UIBarMeter@@IAEXM@Z",
+      "build": "[XBOX] The Simpsons [2004-03-08] (MAP+PDB)/BondXBox_TF.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x001D3C70": {
+      "hint": "?SetShrinkRate@UIBarMeter@@QAEXM@Z",
+      "build": "[XBOX] The Simpsons [2004-03-08] (MAP+PDB)/Simpsons_Xbox_R.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x001E5990": {
+      "hint": "EARS::Alchemy::SFX_AnimInfo_BoneIndexFromName",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_f.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x001E9170": {
+      "hint": "cHelpText::EndScene",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 39,
+      "kind": "game"
+    },
+    "xb:0x001E9290": {
+      "hint": "??$_Sort@PAJHUTSortByTimesPlayed@@@std@@YAXPAJ0HUTSortByTimesPlayed@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 238,
+      "kind": "game"
+    },
+    "xb:0x001F0540": {
+      "hint": "?R_SetFogColor@@YAXPBUColor@@@Z",
+      "build": "[XBOX] The Simpsons [2004-03-08] (MAP+PDB)/Simpsons_Xbox_R.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 43,
+      "kind": "game"
+    },
+    "xb:0x00211990": {
+      "hint": "?GetFollowCharacter@TAIFollow@@UAEPAUICharacter@@XZ",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x00213510": {
+      "hint": "EARS::Alchemy::TEffectParticleSystem::ScaleAlpha",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_f.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00230490": {
+      "hint": "?step@hkVisualDebugger@@SAXM@Z",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x002304B0": {
+      "hint": "?step@hkVisualDebugger@@SAXM@Z",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x002304F0": {
+      "hint": "?step@hkVisualDebugger@@SAXM@Z",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00230510": {
+      "hint": "gameFoley_Free",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 22,
+      "kind": "game"
+    },
+    "xb:0x00242D30": {
+      "hint": "std::_Tree<std::_Tmap_traits<RpLight *,EARS::Modules::EARSLight *,std::less<RpLight *>,std::allocator<std::pair<RpLight * const,EARS::Modules::EARSLight *> >,0> >::const_iterator::operator==",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 46,
+      "size": 19,
+      "kind": "game"
+    },
+    "xb:0x00242D50": {
+      "hint": "std::vector<RSAccumulatedObject,std::allocator<RSAccumulatedObject> >::const_iterator::operator<",
+      "build": "[XBOX] Tom Clancy's Ghost Recon 2 [2004-07-30] (MAP+PDB)/StonewallXbox_Profile.xbe",
+      "choice": "link-order",
+      "candidates": 3,
+      "size": 18,
+      "kind": "game"
+    },
+    "xb:0x00244170": {
+      "hint": "FcGenericVector<float>::Normalise",
+      "build": "[XBOX] Power Drome [2004-04-19]/Powerdrome.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 59,
+      "kind": "game"
+    },
+    "xb:0x00247FD0": {
+      "hint": "Reward::SetScale",
+      "build": "[XBOX] Amped 2 (Beta) [2003-09-12] (PDB)/default.exe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 64,
+      "kind": "game"
+    },
+    "xb:0x00248D40": {
+      "hint": "EARS::Alchemy::TEffectType::AddType",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_f.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 23,
+      "kind": "game"
+    },
+    "xb:0x00269B30": {
+      "hint": "EARS::Modules::ChatterPlaybackManager::GetChatGroupHash",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 9,
+      "size": 19,
+      "kind": "game"
+    },
+    "xb:0x00269B50": {
+      "hint": "EARS::Modules::ChatterPlaybackManager::GetChatGroupHash",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 9,
+      "size": 19,
+      "kind": "game"
+    },
+    "xb:0x0027DE20": {
+      "hint": "IkeSoundMgr::PropagateForAudio",
+      "build": "[XBOX] Tom Clancy's Ghost Recon 2 [2004-07-30] (MAP+PDB)/StonewallXbox_Profile.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 18,
+      "kind": "game"
+    },
+    "xb:0x00283FE0": {
+      "hint": "File_ReadAsyncEx",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 34,
+      "kind": "game"
+    },
+    "xb:0x00292230": {
+      "hint": "std::allocator<char>::allocate",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 9,
+      "size": 19,
+      "kind": "game"
+    },
+    "xb:0x00299510": {
+      "hint": "_count_bits_32",
+      "build": "[XBOX] Hail to the Chimp (Beta) [2006-11-15] (MAP)/cachebeta.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 25,
+      "kind": "game"
+    },
+    "xb:0x0029C290": {
+      "hint": "RpTieSetFreeListCreateParams",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 35,
+      "size": 22,
+      "kind": "game"
+    },
+    "xb:0x0029F450": {
+      "hint": "EARS::Modules::FollowPathStateMachine::SetIdleAnim",
+      "build": "[XBOX] James Bond 007 - From Russia With Love [2005-09-30] (MAP+PDB)/ears_bond_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x0029F460": {
+      "hint": "EARS::Modules::PedestrianStateMachine::SetInterrupt",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x002A08A0": {
+      "hint": "?MemCard_SaveInit@@YAXXZ",
+      "build": "[XBOX] Predator - Concrete Jungle (Beta) [2005-03-31] (MAP)/DEFAULT.XBE",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 23,
+      "kind": "game"
+    },
+    "xb:0x002A0900": {
+      "hint": "?MemCard_SaveInit@@YAXXZ",
+      "build": "[XBOX] Predator - Concrete Jungle (Beta) [2005-03-31] (MAP)/DEFAULT.XBE",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 23,
+      "kind": "game"
+    },
+    "xb:0x002BE6A0": {
+      "hint": "RpSkinSetFreeListCreateParams",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 35,
+      "size": 22,
+      "kind": "game"
+    },
+    "xb:0x002CC350": {
+      "hint": "zcalloc",
+      "build": "[XBOX] Full Spectrum Warrior - Ten Hammers [2005-12-14] (MAP+PDB)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 19,
+      "kind": "game",
+      "name_pending": "zcalloc"
+    },
+    "xb:0x002CE740": {
+      "hint": "EAStringC::operator!=",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_f.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 18,
+      "kind": "game"
+    },
+    "xb:0x002D1650": {
+      "hint": "?SetGlowParams@TGMMesh@@SAXABUTRGB@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 30,
+      "kind": "game"
+    },
+    "xb:0x002D1680": {
+      "hint": "?SetGlowParams@TGMMesh@@SAXABUTRGB@@@Z",
+      "build": "[XBOX] The Da Vinci Code [2006-03-17] (MAP)/davinci_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 30,
+      "kind": "game"
+    },
+    "xb:0x002D37A0": {
+      "hint": "_HLBApiPresenceExtra",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "link-order",
+      "candidates": 4,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x002D37B0": {
+      "hint": "_HLBApiPresenceDiff",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x002D37C0": {
+      "hint": "_HLBApiPresenceDiff",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x002D37D0": {
+      "hint": "_HLBApiPresenceExtra",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "link-order",
+      "candidates": 4,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x002D37E0": {
+      "hint": "_HLBApiPresenceExtra",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "link-order",
+      "candidates": 4,
+      "size": 16,
+      "kind": "game"
+    },
+    "xb:0x002F0C80": {
+      "hint": "ConnApiHost2",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 29,
+      "kind": "game"
+    },
+    "xb:0x002F0CA0": {
+      "hint": "ConnApiHost2",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 29,
+      "kind": "game"
+    },
+    "xb:0x002F0CC0": {
+      "hint": "ConnApiHost2",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 29,
+      "kind": "game"
+    },
+    "xb:0x002F0CE0": {
+      "hint": "ConnApiHost2",
+      "build": "[XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 29,
+      "kind": "game"
+    },
+    "xb:0x0030ABD0": {
+      "hint": "_radmalloc@4",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 106,
+      "kind": "third-party"
+    },
+    "xb:0x0030AC40": {
+      "hint": "_radfree@4",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 41,
+      "kind": "third-party"
+    },
+    "xb:0x0030AC70": {
+      "hint": "_pushmalloc@8",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 213,
+      "kind": "third-party"
+    },
+    "xb:0x0030AD60": {
+      "hint": "_popmalloc@4",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 93,
+      "kind": "third-party"
+    },
+    "xb:0x0030BF00": {
+      "hint": "_bitrv216",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 219,
+      "kind": "third-party",
+      "name_pending": "bitrv216"
+    },
+    "xb:0x0030BFE0": {
+      "hint": "_bitrv216neg",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 303,
+      "kind": "third-party",
+      "name_pending": "bitrv216neg"
+    },
+    "xb:0x0030C110": {
+      "hint": "_bitrv208",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 73,
+      "kind": "third-party",
+      "name_pending": "bitrv208"
+    },
+    "xb:0x0030C160": {
+      "hint": "_bitrv208neg",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 125,
+      "kind": "third-party",
+      "name_pending": "bitrv208neg"
+    },
+    "xb:0x0030EC50": {
+      "hint": "_cftf040",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 148,
+      "kind": "third-party",
+      "name_pending": "cftf040"
+    },
+    "xb:0x0030ECF0": {
+      "hint": "_cftb040",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 148,
+      "kind": "third-party",
+      "name_pending": "cftb040"
+    },
+    "xb:0x0030FB40": {
+      "hint": "_cftfsub",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 289,
+      "kind": "third-party"
+    },
+    "xb:0x0030FC70": {
+      "hint": "_cftbsub",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 289,
+      "kind": "third-party"
+    },
+    "xb:0x0030FDA0": {
+      "hint": "_rdft@20",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 306,
+      "kind": "third-party",
+      "name_pending": "rdft"
+    },
+    "xb:0x0030FEE0": {
+      "hint": "_ddct@20",
+      "build": "[XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 385,
+      "kind": "third-party",
+      "name_pending": "ddct"
+    },
+    "xb:0x00310070": {
+      "hint": "_check_for_MMX",
+      "build": "[XBOX] The Red Star (Beta) [2004-07-17] (MAP)/default.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 110,
+      "kind": "third-party"
+    },
+    "xb:0x003118E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00311920": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312160": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003123A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003123C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003123E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312400": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312440": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312460": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312480": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003124A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003124C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003124E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312740": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312850": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312890": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003128F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312A10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312A30": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312A70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312AB0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312AD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312AF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312B10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312B30": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312B50": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312CD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00312CF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00314C90": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00314CB0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00314CD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00314CF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00314D10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00315210": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00315270": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00315290": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003152E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00315300": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316900": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00316920": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x003169E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316A00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316A60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316B20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316B40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316B60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316B80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316BA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316BC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316BE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316C00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316C20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316C40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316C60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316C80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316CA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316CC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316CE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316D00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316D20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316D40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316D60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316D80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316DA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316DC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316DE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316E00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316E20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316E40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316E60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316E80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316EA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316EC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316EE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316F00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316F20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316F40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316F60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316F80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316FA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316FC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00316FE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317000": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317020": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317040": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317060": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317080": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003170A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003170C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003170E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317100": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317120": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317140": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317160": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317180": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003171A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003171C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003171E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317200": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317220": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317260": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317460": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317480": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003174A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003174C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003174E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317520": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317540": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317560": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317580": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003175A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003175C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003175E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317600": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317620": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317640": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317660": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003176E0": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00317700": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00317720": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00317770": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317830": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003178D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317990": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317A50": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317A70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00317CF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318200": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318240": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003182C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318C80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318CA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318CC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318CE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318D00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318D40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318D80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318DA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318EA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318EC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318EE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00318FC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319040": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319420": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319440": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319460": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003197A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003197E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003198A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319920": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319960": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319980": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x003199C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319A00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319A40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319A60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319AC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319B00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319B60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319BC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319BE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319C20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319C80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319CC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319CE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319D00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319D40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319FA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319FC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x00319FE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A000": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A020": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A060": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A080": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A120": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A160": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A1A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A1C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A220": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A3A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A3C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A3E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A400": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A420": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A460": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A4A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A560": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A6A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A720": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A920": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A9C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031A9E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AA20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AAA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AAE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AB20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AB60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AB80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AC40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AC80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031ACA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031ACC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031AD00": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031ADA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031ADC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B2A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B2C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B320": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B340": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B3A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B3C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B460": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B480": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B4A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B4C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B4E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B520": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B540": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B560": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B580": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B650": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031B690": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BAA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BAE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BB60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BB80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BBE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BC20": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BC40": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BD80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BDE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BE70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BF90": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BFB0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BFD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031BFF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C010": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C030": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C050": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C0F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C170": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C290": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C410": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C470": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C490": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C4B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C4D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C4F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C510": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C530": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C550": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C570": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C590": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C5B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C5D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C5F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C610": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C630": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C650": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C670": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C690": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C6B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C6D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C6F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C710": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C730": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C790": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C7B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C7D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C7F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031C830": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CB10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CB30": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CB50": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CB70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CB90": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CBD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CD10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CE70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031CE90": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D090": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D0B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D0D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D0F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D110": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D130": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D150": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D170": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D1F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D210": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D230": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D250": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D270": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D290": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D2B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D2D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D2F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D310": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D330": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D350": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D370": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D410": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D430": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D450": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D470": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D490": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D4B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D4D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D4F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D510": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D530": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D550": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D590": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D5B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D5D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D5F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D610": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D630": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D650": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D670": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D690": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D6B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D6D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D6F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D710": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D730": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D750": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D770": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D790": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D7B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D7D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D7F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D810": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D830": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D850": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D870": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D890": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D8B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D8D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D8F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D910": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D930": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D950": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D970": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D990": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D9B0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D9D0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031D9F0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DA10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DA30": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DA50": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DA70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DA90": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DAD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DAF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DB10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DB30": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DB50": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DB70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DB90": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DBB0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DBD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DBF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DC10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DC30": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DC50": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DC70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DC90": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DCB0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DCD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DCF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DD10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DD30": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DD50": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DD70": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DD90": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DDB0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DDD0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DDF0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DE10": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DE60": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DE80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DEA0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DEC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DEE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DFC0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031DFE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E020": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E040": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E080": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E4A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E4C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E4E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E5A0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E5C0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E5E0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E600": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E620": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031E8C0": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x0031E8E0": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x0031E900": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x0031E920": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x0031EF80": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031EFE0": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031F520": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031F540": {
+      "hint": "EARS::Framework::CameraUnRegisterDbgCmd",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 5,
+      "size": 24,
+      "kind": "game"
+    },
+    "xb:0x0031FC80": {
+      "hint": "TexBlender::ResetCenterU",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "link-order",
+      "candidates": 6,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00322530": {
+      "hint": "_light_volumes_initialize_for_new_map",
+      "build": "[XBOX] Hail to the Chimp (Beta) [2006-11-15] (MAP)/cachebeta.xbe",
+      "choice": "link-order",
+      "candidates": 4,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00322550": {
+      "hint": "_light_volumes_initialize_for_new_map",
+      "build": "[XBOX] Hail to the Chimp (Beta) [2006-11-15] (MAP)/cachebeta.xbe",
+      "choice": "link-order",
+      "candidates": 4,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00322D90": {
+      "hint": "_hkSolveUpload",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00324B20": {
+      "hint": "?ClearShapes@@YAXXZ",
+      "build": "[XBOX] Operation Flashpoint - Elite (Beta) [2005-08-12] (MAP)/Default.xbe",
+      "choice": "link-order",
+      "candidates": 2,
+      "size": 30,
+      "kind": "game"
+    },
+    "xb:0x00329360": {
+      "hint": "_hkSolveUpload",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x003293B0": {
+      "hint": "_hkSolveUpload",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    },
+    "xb:0x00329410": {
+      "hint": "_hkSolveUpload",
+      "build": "[XBOX] The Godfather [2006-02-05] (MAP+PDB)/ears_godfather_r.xbe",
+      "choice": "unique",
+      "candidates": 1,
+      "size": 17,
+      "kind": "game"
+    }
+  }
+}
