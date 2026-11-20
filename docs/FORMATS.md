@@ -368,6 +368,16 @@ are two weights the shader sets from the time of day (`1 − x/255` pairs), and 
 light, not the vertex colour**: with an ambient of 0.5 and no lights a `cbvlit` vertex shows its own colour
 × c18. The exports show the vertex colour as it is (BGRA in the file), which is that case.
 
+Where the terms come from (the examiner's block H): c29 is the context's ambient colour (`0x29DB30`, ARGB
+/ 255, no scale), set each frame from the daylight group's last ambient light other than the building
+ambient (`MiamiAmbientShape`; the building ambient for the passes that ask for it); its `LITE` animation
+gives, at noon (frame 120), 63, 52, 31, so 2 × c29 is about (0.49, 0.41, 0.24). c18 = X and c20 = 1 − X,
+with X the environment's `CbvLitBlendValue` only when the shader has `CLRE` set (else 1: the second colour
+set is never shown); the four lights are the group's other lights, not the sun (`MiamiSunShape`), and
+the sun only reaches the alpha. The pixel stage is T0 × D0 with fog and no scale, so a lit `cbvlit` surface
+at noon is about half its stored colour before the full-screen effects (`ColourFX_*`, `Bloom_*`); how
+those bring it back is not known yet, so the exports keep the stored colour.
+
 The settings that matter here:
 
 | Setting | Seen | What it does |
