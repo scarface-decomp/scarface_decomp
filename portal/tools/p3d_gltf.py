@@ -288,6 +288,9 @@ class Geometry:
     normals: Optional[List[Vec3]] = None
     uvs: List[List[Tuple[float, float]]] = field(default_factory=list)
     colours: Optional[List[int]] = None             # ARGB
+    # a second colour set (the cbvlit program's v4: the examiner's block J0.2, a primitive group with two
+    # colour lists, its vertex type 0x4000 with a count of 2 in bits 15 to 17), ARGB
+    colours2: Optional[List[int]] = None
     joints: Optional[List[Tuple[int, int, int, int]]] = None   # skeleton joint numbers
     weights: Optional[List[Tuple[float, float, float, float]]] = None
 
@@ -457,6 +460,8 @@ def geometry(data: bytes, pg: p3d.Chunk) -> Optional[Geometry]:
             g.uvs.append(_floats(data, uv, 2, skip=4))
         if 0x10008 in kids:
             g.colours = _u32s(data, kids[0x10008][0])
+            if len(kids[0x10008]) > 1:
+                g.colours2 = _u32s(data, kids[0x10008][1])
         if 0x1000C in kids and 0x1000B in kids:
             palette = _u32s(data, kids[0x1000D][0]) if 0x1000D in kids else list(range(256))
             packed = _u32s(data, kids[0x1000B][0])
@@ -1379,6 +1384,11 @@ class Builder:
                 attrs["COLOR_0"] = self.g.accessor([(LINEAR16[(c >> 16) & 255], LINEAR16[(c >> 8) & 255],
                                                      LINEAR16[c & 255], ((c >> 24) & 255) * 257)
                                                     for c in geo.colours], "VEC4", 5123, normalized=True, target=34962)
+            if geo.colours2 and len(geo.colours2) == len(geo.positions):
+                # the second set: what a cbvlit surface with CLRE blends to as the hour's CbvLitBlendValue falls
+                attrs["COLOR_1"] = self.g.accessor([(LINEAR16[(c >> 16) & 255], LINEAR16[(c >> 8) & 255],
+                                                     LINEAR16[c & 255], ((c >> 24) & 255) * 257)
+                                                    for c in geo.colours2], "VEC4", 5123, normalized=True, target=34962)
             if skinned_to is not None and geo.joints and geo.weights:
                 joints, weights = [], []
                 for js, ws in zip(geo.joints, geo.weights):
