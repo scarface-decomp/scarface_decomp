@@ -49,3 +49,6 @@ docs/data/
 .venv/
 .pytest_cache/
 work/
+
+# The campaign tools' binaries (tools/build.bat)
+build/
