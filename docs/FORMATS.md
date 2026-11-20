@@ -1402,3 +1402,35 @@ Read from the retail Xbox program itself, no clean room needed (the examiner's s
   `PTRN` and `VRTX`. No PC file has `STRN` or `PVRT`.
 * **A shader's ambient colour is its diffuse colour.** The colour reader skips `AMBI` and, on `DIFF`,
   sets both. A file's own `AMBI` is never used (`p3d_gltf.shader_info` drops it).
+
+### Collision
+
+Read from the files and the program (no clean-room spec: the outside research has nothing on collision);
+`portal/tools/collision.py` reads it, `reports/collision_survey.json` lists every mesh. Each map area's
+shell package and each outdoor pocket holds one **World Collision Object** (`0x07010025`: its name, u32),
+94 meshes and 393,876 triangles on the PC, in the map's own coordinates:
+
+| Chunk | Holds |
+| :--- | :--- |
+| `0x07010001` | 12 bytes, 0 in every file; the mesh under it |
+| `0x0701000A` Collision Mesh | u32 version (5), u32, u32, its box (min x y z, max x y z) |
+| `0x07000003` vertices | u32 count, then x y z (f32) each |
+| `0x07000006` triangles | u32 count, then four u16 each: three vertex numbers and a 3-bit edge mask (0 to 7) |
+| `0x07000007` neighbours | u32 count (the triangles'), then four u16 each: the triangle across each edge (65535: none) and a number that is the same for the whole mesh |
+| `0x07000008` search tree | u32 count, then that many u16 (nodes of four) |
+| `0x07016000` triangle sets | u32 0, u32 how many sets follow |
+| `0x07016010` / `0x07016012` | a flag set / a value set: u32 0, its name, u32 count, then count triangle numbers (u16) and count values (u16) |
+
+The sets' names: `surfaceType` (86 meshes), `Walkable` (77), `VehicleIgnore` (59), `exitLinkType` (51),
+`navigationType` (42), `speedLimitType` (19), `objectSurfaceType` (8), `Navigation Graph Sub-Zone Link` (2). A
+triangle missing from `surfaceType` has the default surface. The surface types themselves are the 30
+objects of `CollisionSurfaceTypeGroup` in `scriptc/collisions.cso` (Default, Grass, Sand, Asphalt, Concrete
+... each with its decal surface and sound); how a triangle's number picks one is not known yet (by position
+the cargo ship would be mostly `WoodNoDecal`, and the files use 30 and 65280, past the 30).
+
+The collision floors match where the scripts stand people: Jerry's office in the Coconut Grove bank is at
+y 13.84 in `luxurybank_02_shell`'s collision, the script stands him at 13.8.
+
+Objects' collision (`0x07010000`, an animal's or a prop's: `0x07010021` > `0x07010022`, `0x07010001` >
+`0x07010003` > `0x07010007`, `0x07010023`) and rigid bodies (`0x07011000` > `0x07011020` > `0x07011001`,
+`0x07011002`) are listed but not read yet.

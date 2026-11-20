@@ -1,0 +1,1173 @@
+{
+ "what": "every collision mesh in the PC files: where, its size and its triangle sets (portal/tools/collision.py; the examiner's question F12)",
+ "meshes": 94,
+ "triangles": 393876,
+ "sets": {
+  "surfaceType": 86,
+  "Walkable": 77,
+  "VehicleIgnore": 59,
+  "exitLinkType": 51,
+  "navigationType": 42,
+  "speedLimitType": 19,
+  "objectSurfaceType": 8,
+  "Navigation Graph Sub-Zone Link": 2
+ },
+ "surface_values": {
+  "0": 28,
+  "1": 14,
+  "2": 15191,
+  "3": 11168,
+  "4": 581,
+  "5": 4330,
+  "6": 331,
+  "7": 9387,
+  "8": 10454,
+  "9": 27103,
+  "10": 78,
+  "12": 9,
+  "13": 3699,
+  "14": 7130,
+  "18": 6646,
+  "19": 502,
+  "20": 193,
+  "21": 17506,
+  "22": 29868,
+  "23": 11056,
+  "24": 5243,
+  "25": 770,
+  "26": 306,
+  "27": 1549,
+  "28": 12,
+  "29": 3382,
+  "30": 4108,
+  "65280": 11
+ },
+ "surface_types_in_script": {
+  "file": "scriptc/collisions.cso, CollisionSurfaceTypeGroup, in its order",
+  "names": [
+   "Default",
+   "Grass",
+   "Sand",
+   "Asphalt",
+   "Concrete",
+   "Gravel",
+   "Wood",
+   "Metal",
+   "ShootThrough",
+   "BoatJump",
+   "Swamp",
+   "NoDecal",
+   "Plaster",
+   "Pleather",
+   "TankerDefault",
+   "TankerStairs",
+   "TankerGrating",
+   "Dirt",
+   "ShallowWaterPool",
+   "DeepWaterPool",
+   "ConcreteNoDecal",
+   "MetalNoDecal",
+   "WoodNoDecal",
+   "SandJump",
+   "RockJump",
+   "WoodJump",
+   "Glass",
+   "Furniture",
+   "SeeThrough",
+   "VehicleOnly"
+  ],
+  "note": "How a triangle's surfaceType number picks one of these is not known: by position, the cargo ship would be mostly WoodNoDecal and the banks TankerDefault, and the files use 30 and 65280, past the 30 types (0 to 29)."
+ },
+ "files": [
+  {
+   "file": "art/azones/cargoship_01_pocket/cargoShip_01_collision.p3d",
+   "object": "cargoship_01_pocket",
+   "vertices": 2024,
+   "triangles": 3412,
+   "sets": {
+    "Walkable": 177,
+    "surfaceType": 2501
+   }
+  },
+  {
+   "file": "art/azones/diazmotors_01_pocket/diazmotors_01_collision.p3d",
+   "object": "diazmotors_01_pocket",
+   "vertices": 900,
+   "triangles": 946,
+   "sets": {
+    "VehicleIgnore": 858,
+    "Walkable": 8,
+    "surfaceType": 397
+   }
+  },
+  {
+   "file": "art/azones/fidelrecords_01_pocket/fidelrecords_01_collision.p3d",
+   "object": "fidelrecords_01_pocket",
+   "vertices": 223,
+   "triangles": 300,
+   "sets": {
+    "VehicleIgnore": 259,
+    "Walkable": 201,
+    "surfaceType": 166
+   }
+  },
+  {
+   "file": "art/azones/pedropawn_01_pocket/pedropawn_01_collision.p3d",
+   "object": "pedropawn_01_pocket",
+   "vertices": 708,
+   "triangles": 818,
+   "sets": {
+    "VehicleIgnore": 818,
+    "surfaceType": 730
+   }
+  },
+  {
+   "file": "art/levels/z04/cargoship_01_shell_cs0/cargoShip_01_collision.p3d",
+   "object": "cargoship_01_shell_cs0",
+   "vertices": 3278,
+   "triangles": 4756,
+   "sets": {
+    "Walkable": 235,
+    "surfaceType": 4753
+   }
+  },
+  {
+   "file": "art/levels/z04/fidelrecords_01_shell/fidelrecords_01_collision.p3d",
+   "object": "fidelrecords_01_shell",
+   "vertices": 231,
+   "triangles": 304,
+   "sets": {
+    "VehicleIgnore": 298,
+    "Walkable": 203,
+    "surfaceType": 166
+   }
+  },
+  {
+   "file": "art/levels/z04/sbeachn_04_detail/sbeachn_04_detail_collision.p3d",
+   "object": "sbeachn_04_detail",
+   "vertices": 1118,
+   "triangles": 1235,
+   "sets": {
+    "surfaceType": 1021
+   }
+  },
+  {
+   "file": "art/levels/z04/tonymansion_01_detail_ts3/tonymansion_01_collision.p3d",
+   "object": "tonymansion_01_detail_ts3",
+   "vertices": 4623,
+   "triangles": 6040,
+   "sets": {
+    "VehicleIgnore": 318,
+    "Walkable": 1607,
+    "exitLinkType": 7,
+    "navigationType": 10,
+    "surfaceType": 2399
+   }
+  },
+  {
+   "file": "packages/azones/cabanacigar_01_pocket.p3d",
+   "object": "cabanacigar_01_pocket",
+   "vertices": 137,
+   "triangles": 112,
+   "sets": {
+    "VehicleIgnore": 112,
+    "objectSurfaceType": 8,
+    "surfaceType": 106
+   }
+  },
+  {
+   "file": "packages/azones/cargoShip_02_pocket.p3d",
+   "object": "cargoship_02_pocket",
+   "vertices": 256,
+   "triangles": 438,
+   "sets": {
+    "surfaceType": 424
+   }
+  },
+  {
+   "file": "packages/azones/diazmotors_01_pocket.p3d",
+   "object": "diazmotors_01_pocket",
+   "vertices": 900,
+   "triangles": 946,
+   "sets": {
+    "VehicleIgnore": 858,
+    "Walkable": 8,
+    "surfaceType": 397
+   }
+  },
+  {
+   "file": "packages/azones/fidelrecords_01_pocket.p3d",
+   "object": "fidelrecords_01_pocket",
+   "vertices": 223,
+   "triangles": 300,
+   "sets": {
+    "VehicleIgnore": 259,
+    "Walkable": 201,
+    "surfaceType": 166
+   }
+  },
+  {
+   "file": "packages/azones/gbank_01_pocket.p3d",
+   "object": "gbank_01_pocket",
+   "vertices": 489,
+   "triangles": 644,
+   "sets": {
+    "VehicleIgnore": 628,
+    "Walkable": 144,
+    "surfaceType": 387
+   }
+  },
+  {
+   "file": "packages/azones/gbank_02_pocket.p3d",
+   "object": "gbank_02_pocket",
+   "vertices": 466,
+   "triangles": 598,
+   "sets": {
+    "VehicleIgnore": 598,
+    "Walkable": 144,
+    "surfaceType": 341
+   }
+  },
+  {
+   "file": "packages/azones/macau_01_pocket.p3d",
+   "object": "macau_01_pocket",
+   "vertices": 514,
+   "triangles": 640,
+   "sets": {
+    "VehicleIgnore": 570,
+    "Walkable": 531,
+    "surfaceType": 154
+   }
+  },
+  {
+   "file": "packages/azones/pedropawn_01_pocket.p3d",
+   "object": "pedropawn_01_pocket",
+   "vertices": 708,
+   "triangles": 818,
+   "sets": {
+    "VehicleIgnore": 818,
+    "surfaceType": 730
+   }
+  },
+  {
+   "file": "packages/azones/sunray_01_pocket.p3d",
+   "object": "sunray_01_pocket",
+   "vertices": 267,
+   "triangles": 314,
+   "sets": {
+    "VehicleIgnore": 314,
+    "surfaceType": 198
+   }
+  },
+  {
+   "file": "packages/azones/swansong_01_pocket.p3d",
+   "object": "swansong_01_pocket",
+   "vertices": 815,
+   "triangles": 966,
+   "sets": {
+    "VehicleIgnore": 954,
+    "Walkable": 277,
+    "surfaceType": 740
+   }
+  },
+  {
+   "file": "packages/azones/trattoria_01_pocket.p3d",
+   "object": "trattoria_01_pocket",
+   "vertices": 377,
+   "triangles": 578,
+   "sets": {
+    "VehicleIgnore": 576,
+    "Walkable": 3,
+    "surfaceType": 68
+   }
+  },
+  {
+   "file": "packages/z04/DevilsCay_01_shell.p3d",
+   "object": "devilscay_01_shell",
+   "vertices": 3,
+   "triangles": 1,
+   "sets": {}
+  },
+  {
+   "file": "packages/z04/DevilsCay_02_shell.p3d",
+   "object": "devilscay_02_shell",
+   "vertices": 2164,
+   "triangles": 3616,
+   "sets": {
+    "VehicleIgnore": 8,
+    "Walkable": 24,
+    "surfaceType": 2881
+   }
+  },
+  {
+   "file": "packages/z04/DevilsCay_03_shell.p3d",
+   "object": "devilscay_03_shell",
+   "vertices": 2611,
+   "triangles": 4645,
+   "sets": {
+    "Walkable": 48,
+    "exitLinkType": 3,
+    "surfaceType": 2461
+   }
+  },
+  {
+   "file": "packages/z04/FountainRock_01_shell.p3d",
+   "object": "fountainrock_01_shell",
+   "vertices": 4161,
+   "triangles": 7234,
+   "sets": {
+    "Walkable": 363,
+    "exitLinkType": 4,
+    "navigationType": 624,
+    "speedLimitType": 184,
+    "surfaceType": 618
+   }
+  },
+  {
+   "file": "packages/z04/FountainRock_02_shell.p3d",
+   "object": "fountainrock_02_shell",
+   "vertices": 3260,
+   "triangles": 4712,
+   "sets": {
+    "VehicleIgnore": 606,
+    "Walkable": 979,
+    "exitLinkType": 2,
+    "navigationType": 74,
+    "surfaceType": 976
+   }
+  },
+  {
+   "file": "packages/z04/babylonclub_01_shell.p3d",
+   "object": "babylonclub_01_shell",
+   "vertices": 5998,
+   "triangles": 7394,
+   "sets": {
+    "VehicleIgnore": 138,
+    "Walkable": 4371,
+    "exitLinkType": 2,
+    "surfaceType": 4286
+   }
+  },
+  {
+   "file": "packages/z04/bridge_01_shell.p3d",
+   "object": "bridge_01_shell",
+   "vertices": 4965,
+   "triangles": 7927,
+   "sets": {
+    "VehicleIgnore": 404,
+    "Walkable": 501,
+    "exitLinkType": 2,
+    "navigationType": 671,
+    "surfaceType": 3393
+   }
+  },
+  {
+   "file": "packages/z04/bridge_02_shell.p3d",
+   "object": "bridge_02_shell",
+   "vertices": 4177,
+   "triangles": 6139,
+   "sets": {
+    "VehicleIgnore": 470,
+    "Walkable": 280,
+    "exitLinkType": 3,
+    "navigationType": 231,
+    "speedLimitType": 176,
+    "surfaceType": 3752
+   }
+  },
+  {
+   "file": "packages/z04/bsand_01_shell.p3d",
+   "object": "bsand_01_shell",
+   "vertices": 4664,
+   "triangles": 6903,
+   "sets": {
+    "VehicleIgnore": 575,
+    "Walkable": 625,
+    "exitLinkType": 1,
+    "navigationType": 344,
+    "speedLimitType": 85,
+    "surfaceType": 3403
+   }
+  },
+  {
+   "file": "packages/z04/bsand_02_shell.p3d",
+   "object": "bsand_02_shell",
+   "vertices": 4578,
+   "triangles": 6003,
+   "sets": {
+    "Walkable": 398,
+    "exitLinkType": 2,
+    "surfaceType": 5914
+   }
+  },
+  {
+   "file": "packages/z04/bsand_03_shell.p3d",
+   "object": "bsand_03_shell",
+   "vertices": 2569,
+   "triangles": 2996,
+   "sets": {
+    "Walkable": 222,
+    "exitLinkType": 2,
+    "surfaceType": 2983
+   }
+  },
+  {
+   "file": "packages/z04/bsand_04_shell.p3d",
+   "object": "bsand_04_shell",
+   "vertices": 4,
+   "triangles": 2,
+   "sets": {}
+  },
+  {
+   "file": "packages/z04/bsand_05_shell.p3d",
+   "object": "bsand_05_shell",
+   "vertices": 4,
+   "triangles": 2,
+   "sets": {}
+  },
+  {
+   "file": "packages/z04/bsand_06_shell.p3d",
+   "object": "bsand_06_shell",
+   "vertices": 2321,
+   "triangles": 2695,
+   "sets": {
+    "Walkable": 185,
+    "exitLinkType": 1,
+    "surfaceType": 2673
+   }
+  },
+  {
+   "file": "packages/z04/cargoShip_01_shell_CS0.p3d",
+   "object": "cargoship_01_shell_cs0",
+   "vertices": 3278,
+   "triangles": 4756,
+   "sets": {
+    "Walkable": 235,
+    "surfaceType": 4753
+   }
+  },
+  {
+   "file": "packages/z04/cgrove_01_shell.p3d",
+   "object": "cgrove_01_shell",
+   "vertices": 6112,
+   "triangles": 8820,
+   "sets": {
+    "VehicleIgnore": 957,
+    "Walkable": 1157,
+    "exitLinkType": 14,
+    "navigationType": 1007,
+    "speedLimitType": 18,
+    "surfaceType": 2181
+   }
+  },
+  {
+   "file": "packages/z04/cgrove_02_shell.p3d",
+   "object": "cgrove_02_shell",
+   "vertices": 6835,
+   "triangles": 9942,
+   "sets": {
+    "VehicleIgnore": 2155,
+    "Walkable": 2192,
+    "exitLinkType": 8,
+    "navigationType": 953,
+    "objectSurfaceType": 95,
+    "speedLimitType": 117,
+    "surfaceType": 4504
+   }
+  },
+  {
+   "file": "packages/z04/clounge_01_shell.p3d",
+   "object": "clounge_01_shell",
+   "vertices": 1240,
+   "triangles": 1526,
+   "sets": {
+    "VehicleIgnore": 1436,
+    "Walkable": 22,
+    "surfaceType": 1364
+   }
+  },
+  {
+   "file": "packages/z04/construction_01_shell.p3d",
+   "object": "construction_01_shell",
+   "vertices": 3842,
+   "triangles": 6707,
+   "sets": {
+    "Walkable": 134,
+    "exitLinkType": 1,
+    "navigationType": 489,
+    "surfaceType": 4468
+   }
+  },
+  {
+   "file": "packages/z04/drivein_01_shell.p3d",
+   "object": "drivein_01_shell",
+   "vertices": 2889,
+   "triangles": 4175,
+   "sets": {
+    "VehicleIgnore": 1685,
+    "Walkable": 983,
+    "exitLinkType": 7,
+    "navigationType": 149,
+    "objectSurfaceType": 20,
+    "speedLimitType": 162,
+    "surfaceType": 1738
+   }
+  },
+  {
+   "file": "packages/z04/fidelrecords_01_shell.p3d",
+   "object": "fidelrecords_01_shell",
+   "vertices": 231,
+   "triangles": 304,
+   "sets": {
+    "VehicleIgnore": 298,
+    "Walkable": 203,
+    "surfaceType": 166
+   }
+  },
+  {
+   "file": "packages/z04/fountainCave_01_shell.p3d",
+   "object": "fountaincave_01_shell",
+   "vertices": 931,
+   "triangles": 1537,
+   "sets": {
+    "VehicleIgnore": 86,
+    "surfaceType": 394
+   }
+  },
+  {
+   "file": "packages/z04/fountainRock_03_shell.p3d",
+   "object": "fountainrock_03_shell",
+   "vertices": 2541,
+   "triangles": 4387,
+   "sets": {
+    "Walkable": 274,
+    "exitLinkType": 2,
+    "navigationType": 132,
+    "surfaceType": 676
+   }
+  },
+  {
+   "file": "packages/z04/gentsclub_01_shell.p3d",
+   "object": "gentsclub_01_shell",
+   "vertices": 1253,
+   "triangles": 1686,
+   "sets": {
+    "VehicleIgnore": 724,
+    "Walkable": 1147,
+    "exitLinkType": 2,
+    "surfaceType": 1049
+   }
+  },
+  {
+   "file": "packages/z04/havana_01_shell.p3d",
+   "object": "havana_01_shell",
+   "vertices": 6896,
+   "triangles": 9256,
+   "sets": {
+    "VehicleIgnore": 641,
+    "Walkable": 2449,
+    "exitLinkType": 18,
+    "navigationType": 1309,
+    "objectSurfaceType": 105,
+    "speedLimitType": 47,
+    "surfaceType": 2443
+   }
+  },
+  {
+   "file": "packages/z04/havana_02_shell.p3d",
+   "object": "havana_02_shell",
+   "vertices": 6069,
+   "triangles": 8471,
+   "sets": {
+    "VehicleIgnore": 959,
+    "Walkable": 1902,
+    "exitLinkType": 11,
+    "navigationType": 1303,
+    "surfaceType": 2544
+   }
+  },
+  {
+   "file": "packages/z04/havana_03_shell.p3d",
+   "object": "havana_03_shell",
+   "vertices": 5736,
+   "triangles": 7824,
+   "sets": {
+    "VehicleIgnore": 1633,
+    "Walkable": 1770,
+    "exitLinkType": 6,
+    "navigationType": 747,
+    "surfaceType": 1678
+   }
+  },
+  {
+   "file": "packages/z04/ind_01_shell.p3d",
+   "object": "ind_01_shell",
+   "vertices": 5688,
+   "triangles": 8482,
+   "sets": {
+    "VehicleIgnore": 804,
+    "Walkable": 1157,
+    "exitLinkType": 11,
+    "navigationType": 640,
+    "speedLimitType": 197,
+    "surfaceType": 2622
+   }
+  },
+  {
+   "file": "packages/z04/ind_02_shell.p3d",
+   "object": "ind_02_shell",
+   "vertices": 4572,
+   "triangles": 6885,
+   "sets": {
+    "VehicleIgnore": 364,
+    "Walkable": 1172,
+    "exitLinkType": 8,
+    "navigationType": 279,
+    "speedLimitType": 30,
+    "surfaceType": 1546
+   }
+  },
+  {
+   "file": "packages/z04/ind_03_shell.p3d",
+   "object": "ind_03_shell",
+   "vertices": 5857,
+   "triangles": 8900,
+   "sets": {
+    "VehicleIgnore": 1243,
+    "Walkable": 2502,
+    "exitLinkType": 4,
+    "navigationType": 306,
+    "surfaceType": 3126
+   }
+  },
+  {
+   "file": "packages/z04/indchopshop_01_shell.p3d",
+   "object": "indchopshop_01_shell",
+   "vertices": 1522,
+   "triangles": 1923,
+   "sets": {
+    "VehicleIgnore": 1008,
+    "Walkable": 76,
+    "surfaceType": 1173
+   }
+  },
+  {
+   "file": "packages/z04/lobst_01_shell.p3d",
+   "object": "lobst_01_shell",
+   "vertices": 5418,
+   "triangles": 8105,
+   "sets": {
+    "VehicleIgnore": 237,
+    "Walkable": 658,
+    "exitLinkType": 2,
+    "navigationType": 273,
+    "objectSurfaceType": 65,
+    "surfaceType": 1637
+   }
+  },
+  {
+   "file": "packages/z04/lobst_02_shell.p3d",
+   "object": "lobst_02_shell",
+   "vertices": 1875,
+   "triangles": 2773,
+   "sets": {
+    "VehicleIgnore": 92,
+    "Walkable": 734,
+    "exitLinkType": 3,
+    "navigationType": 204,
+    "objectSurfaceType": 61,
+    "surfaceType": 1025
+   }
+  },
+  {
+   "file": "packages/z04/lobst_03_shell.p3d",
+   "object": "lobst_03_shell",
+   "vertices": 4991,
+   "triangles": 7233,
+   "sets": {
+    "VehicleIgnore": 1009,
+    "Walkable": 1301,
+    "exitLinkType": 1,
+    "navigationType": 271,
+    "surfaceType": 2896
+   }
+  },
+  {
+   "file": "packages/z04/lobst_04_shell.p3d",
+   "object": "lobst_04_shell",
+   "vertices": 4791,
+   "triangles": 7353,
+   "sets": {
+    "Walkable": 705,
+    "exitLinkType": 2,
+    "navigationType": 157,
+    "surfaceType": 1406
+   }
+  },
+  {
+   "file": "packages/z04/lobst_05_shell.p3d",
+   "object": "lobst_05_shell",
+   "vertices": 5274,
+   "triangles": 7874,
+   "sets": {
+    "VehicleIgnore": 368,
+    "Walkable": 27,
+    "exitLinkType": 8,
+    "navigationType": 45,
+    "speedLimitType": 45,
+    "surfaceType": 849
+   }
+  },
+  {
+   "file": "packages/z04/lobst_06_shell.p3d",
+   "object": "lobst_06_shell",
+   "vertices": 4137,
+   "triangles": 6630,
+   "sets": {
+    "Walkable": 662,
+    "exitLinkType": 10,
+    "navigationType": 489,
+    "speedLimitType": 132,
+    "surfaceType": 1681
+   }
+  },
+  {
+   "file": "packages/z04/luxurybank_01_shell.p3d",
+   "object": "luxurybank_01_shell",
+   "vertices": 3323,
+   "triangles": 4724,
+   "sets": {
+    "Navigation Graph Sub-Zone Link": 2,
+    "VehicleIgnore": 408,
+    "Walkable": 168,
+    "navigationType": 170,
+    "surfaceType": 4395
+   }
+  },
+  {
+   "file": "packages/z04/luxurybank_02_shell.p3d",
+   "object": "luxurybank_02_shell",
+   "vertices": 3236,
+   "triangles": 4662,
+   "sets": {
+    "Navigation Graph Sub-Zone Link": 2,
+    "VehicleIgnore": 408,
+    "Walkable": 172,
+    "exitLinkType": 2,
+    "navigationType": 170,
+    "surfaceType": 3255
+   }
+  },
+  {
+   "file": "packages/z04/luxuryhotel_01_shell.p3d",
+   "object": "luxuryhotel_01_shell",
+   "vertices": 2119,
+   "triangles": 2979,
+   "sets": {
+    "VehicleIgnore": 48,
+    "Walkable": 703,
+    "exitLinkType": 3,
+    "surfaceType": 1222
+   }
+  },
+  {
+   "file": "packages/z04/luxuryhotel_02_shell.p3d",
+   "object": "luxuryhotel_02_shell",
+   "vertices": 4763,
+   "triangles": 5530,
+   "sets": {
+    "VehicleIgnore": 297,
+    "Walkable": 302,
+    "exitLinkType": 3,
+    "surfaceType": 2374
+   }
+  },
+  {
+   "file": "packages/z04/ocean_01_detail.p3d",
+   "object": "ocean_01_detail",
+   "vertices": 960,
+   "triangles": 1420,
+   "sets": {
+    "surfaceType": 1230
+   }
+  },
+  {
+   "file": "packages/z04/penthouse_01_shell.p3d",
+   "object": "penthouse_01_shell",
+   "vertices": 3682,
+   "triangles": 5515,
+   "sets": {
+    "Walkable": 778,
+    "surfaceType": 2022
+   }
+  },
+  {
+   "file": "packages/z04/penthouse_02_shell.p3d",
+   "object": "penthouse_02_shell",
+   "vertices": 3,
+   "triangles": 1,
+   "sets": {}
+  },
+  {
+   "file": "packages/z04/sandbar_01_detail.p3d",
+   "object": "sandbar_01_detail",
+   "vertices": 3214,
+   "triangles": 4916,
+   "sets": {
+    "surfaceType": 873
+   }
+  },
+  {
+   "file": "packages/z04/sandbar_02_detail.p3d",
+   "object": "sandbar_02_detail",
+   "vertices": 3209,
+   "triangles": 4904,
+   "sets": {
+    "surfaceType": 1929
+   }
+  },
+  {
+   "file": "packages/z04/sandbar_03_detail.p3d",
+   "object": "sandbar_03_detail",
+   "vertices": 2142,
+   "triangles": 3254,
+   "sets": {
+    "surfaceType": 1026
+   }
+  },
+  {
+   "file": "packages/z04/sbeachn_01_shell.p3d",
+   "object": "sbeachn_01_shell",
+   "vertices": 3957,
+   "triangles": 5867,
+   "sets": {
+    "VehicleIgnore": 792,
+    "Walkable": 793,
+    "exitLinkType": 10,
+    "navigationType": 716,
+    "speedLimitType": 322,
+    "surfaceType": 1672
+   }
+  },
+  {
+   "file": "packages/z04/sbeachn_02_shell.p3d",
+   "object": "sbeachn_02_shell",
+   "vertices": 5221,
+   "triangles": 7221,
+   "sets": {
+    "VehicleIgnore": 578,
+    "Walkable": 420,
+    "exitLinkType": 18,
+    "navigationType": 914,
+    "surfaceType": 2247
+   }
+  },
+  {
+   "file": "packages/z04/sbeachn_03_shell.p3d",
+   "object": "sbeachn_03_shell",
+   "vertices": 5008,
+   "triangles": 7106,
+   "sets": {
+    "VehicleIgnore": 1406,
+    "Walkable": 563,
+    "exitLinkType": 13,
+    "navigationType": 1079,
+    "objectSurfaceType": 4,
+    "surfaceType": 2539
+   }
+  },
+  {
+   "file": "packages/z04/sbeachn_04_shell.p3d",
+   "object": "sbeachn_04_shell",
+   "vertices": 6309,
+   "triangles": 9116,
+   "sets": {
+    "VehicleIgnore": 1609,
+    "Walkable": 1497,
+    "exitLinkType": 16,
+    "navigationType": 826,
+    "objectSurfaceType": 79,
+    "speedLimitType": 123,
+    "surfaceType": 3285
+   }
+  },
+  {
+   "file": "packages/z04/sbeachn_05_shell.p3d",
+   "object": "sbeachn_05_shell",
+   "vertices": 5848,
+   "triangles": 8501,
+   "sets": {
+    "VehicleIgnore": 1455,
+    "Walkable": 568,
+    "exitLinkType": 14,
+    "navigationType": 1425,
+    "surfaceType": 3236
+   }
+  },
+  {
+   "file": "packages/z04/sbeachs_01_shell.p3d",
+   "object": "sbeachs_01_shell",
+   "vertices": 4027,
+   "triangles": 5244,
+   "sets": {
+    "VehicleIgnore": 1182,
+    "Walkable": 261,
+    "exitLinkType": 5,
+    "navigationType": 273,
+    "speedLimitType": 37,
+    "surfaceType": 2975
+   }
+  },
+  {
+   "file": "packages/z04/sbeachs_02_shell.p3d",
+   "object": "sbeachs_02_shell",
+   "vertices": 4695,
+   "triangles": 6820,
+   "sets": {
+    "VehicleIgnore": 715,
+    "Walkable": 1455,
+    "exitLinkType": 8,
+    "navigationType": 921,
+    "speedLimitType": 29,
+    "surfaceType": 2560
+   }
+  },
+  {
+   "file": "packages/z04/sbeachs_03_shell.p3d",
+   "object": "sbeachs_03_shell",
+   "vertices": 5226,
+   "triangles": 6938,
+   "sets": {
+    "VehicleIgnore": 1400,
+    "Walkable": 82,
+    "exitLinkType": 12,
+    "navigationType": 728,
+    "speedLimitType": 24,
+    "surfaceType": 2404
+   }
+  },
+  {
+   "file": "packages/z04/sbeachs_04_shell.p3d",
+   "object": "sbeachs_04_shell",
+   "vertices": 1735,
+   "triangles": 2058,
+   "sets": {
+    "VehicleIgnore": 878,
+    "Walkable": 85,
+    "exitLinkType": 7,
+    "surfaceType": 610
+   }
+  },
+  {
+   "file": "packages/z04/shadygrove_01_shell.p3d",
+   "object": "shadygrove_01_shell",
+   "vertices": 1908,
+   "triangles": 2657,
+   "sets": {
+    "Walkable": 695,
+    "exitLinkType": 1,
+    "navigationType": 139,
+    "speedLimitType": 25,
+    "surfaceType": 1630
+   }
+  },
+  {
+   "file": "packages/z04/sosaIsland_01_shell.p3d",
+   "object": "sosaisland_01_shell",
+   "vertices": 94,
+   "triangles": 84,
+   "sets": {
+    "Walkable": 84
+   }
+  },
+  {
+   "file": "packages/z04/sosaMansion_01_shell.p3d",
+   "object": "sosamansion_01_shell",
+   "vertices": 3932,
+   "triangles": 4924,
+   "sets": {
+    "Walkable": 525,
+    "exitLinkType": 1,
+    "surfaceType": 2471
+   }
+  },
+  {
+   "file": "packages/z04/sosaMansion_02_shell.p3d",
+   "object": "sosamansion_02_shell",
+   "vertices": 2740,
+   "triangles": 4139,
+   "sets": {
+    "Walkable": 347,
+    "exitLinkType": 1,
+    "surfaceType": 2220
+   }
+  },
+  {
+   "file": "packages/z04/stripmall_01_shell.p3d",
+   "object": "stripmall_01_shell",
+   "vertices": 5032,
+   "triangles": 7485,
+   "sets": {
+    "VehicleIgnore": 1117,
+    "Walkable": 377,
+    "exitLinkType": 12,
+    "navigationType": 1112,
+    "speedLimitType": 67,
+    "surfaceType": 2169
+   }
+  },
+  {
+   "file": "packages/z04/swampshack_01_shell.p3d",
+   "object": "swampshack_01_shell",
+   "vertices": 36,
+   "triangles": 50,
+   "sets": {}
+  },
+  {
+   "file": "packages/z04/tonyIsland_01_shell.p3d",
+   "object": "tonyisland_01_shell",
+   "vertices": 6815,
+   "triangles": 9407,
+   "sets": {
+    "VehicleIgnore": 1225,
+    "Walkable": 2249,
+    "exitLinkType": 7,
+    "navigationType": 196,
+    "speedLimitType": 78,
+    "surfaceType": 4640
+   }
+  },
+  {
+   "file": "packages/z04/tonyOffice_01_shell.p3d",
+   "object": "tonyoffice_01_shell",
+   "vertices": 563,
+   "triangles": 831,
+   "sets": {
+    "Walkable": 588,
+    "surfaceType": 705
+   }
+  },
+  {
+   "file": "packages/z04/tonymansion_01_shell_TS0.p3d",
+   "object": "tonymansion_01_shell_ts0",
+   "vertices": 4623,
+   "triangles": 6040,
+   "sets": {
+    "VehicleIgnore": 318,
+    "Walkable": 1607,
+    "exitLinkType": 7,
+    "navigationType": 10,
+    "surfaceType": 2399
+   }
+  },
+  {
+   "file": "packages/z04/tonymansion_01_shell_TS1.p3d",
+   "object": "tonymansion_01_shell_ts1",
+   "vertices": 4623,
+   "triangles": 6040,
+   "sets": {
+    "VehicleIgnore": 318,
+    "Walkable": 1607,
+    "exitLinkType": 7,
+    "navigationType": 10,
+    "surfaceType": 2399
+   }
+  },
+  {
+   "file": "packages/z04/tonymansion_01_shell_TS2.p3d",
+   "object": "tonymansion_01_shell_ts2",
+   "vertices": 4623,
+   "triangles": 6040,
+   "sets": {
+    "VehicleIgnore": 318,
+    "Walkable": 1607,
+    "exitLinkType": 7,
+    "navigationType": 10,
+    "surfaceType": 2399
+   }
+  },
+  {
+   "file": "packages/z04/tonymansion_01_shell_TS3.p3d",
+   "object": "tonymansion_01_shell_ts3",
+   "vertices": 4623,
+   "triangles": 6040,
+   "sets": {
+    "VehicleIgnore": 318,
+    "Walkable": 1607,
+    "exitLinkType": 7,
+    "navigationType": 10,
+    "surfaceType": 2399
+   }
+  },
+  {
+   "file": "packages/z04/tonymansion_03_shell.p3d",
+   "object": "tonymansion_03_shell",
+   "vertices": 4,
+   "triangles": 2,
+   "sets": {
+    "Walkable": 2
+   }
+  },
+  {
+   "file": "packages/z04/tonymansion_05_shell.p3d",
+   "object": "tonymansion_05_shell",
+   "vertices": 2722,
+   "triangles": 3906,
+   "sets": {
+    "Walkable": 3894,
+    "surfaceType": 3202
+   }
+  },
+  {
+   "file": "packages/z04/trailerpark_01_shell.p3d",
+   "object": "trailerpark_01_shell",
+   "vertices": 3404,
+   "triangles": 5303,
+   "sets": {
+    "VehicleIgnore": 29,
+    "Walkable": 294,
+    "exitLinkType": 1,
+    "navigationType": 548,
+    "surfaceType": 3606
+   }
+  },
+  {
+   "file": "packages/z04/tranq_01_shell.p3d",
+   "object": "tranq_01_shell",
+   "vertices": 3664,
+   "triangles": 6073,
+   "sets": {
+    "Walkable": 307,
+    "surfaceType": 2866
+   }
+  },
+  {
+   "file": "packages/z04/tranq_02_shell.p3d",
+   "object": "tranq_02_shell",
+   "vertices": 4651,
+   "triangles": 7224,
+   "sets": {
+    "Walkable": 277,
+    "surfaceType": 2448
+   }
+  },
+  {
+   "file": "packages/z04/tranq_03_shell.p3d",
+   "object": "tranq_03_shell",
+   "vertices": 8,
+   "triangles": 12,
+   "sets": {}
+  },
+  {
+   "file": "packages/z04/tutorial_01_shell.p3d",
+   "object": "tutorial_01_shell",
+   "vertices": 626,
+   "triangles": 860,
+   "sets": {
+    "Walkable": 86,
+    "navigationType": 45,
+    "surfaceType": 145
+   }
+  }
+ ]
+}

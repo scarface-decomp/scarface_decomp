@@ -5,6 +5,24 @@
    "file": "default.xbe",
    "loops": 53,
    "ids": 98,
+   "handler_accepts": {
+    "pure3d::DefaultFrameControllerHandler": [
+     "BQG",
+     "CAM",
+     "EFX",
+     "EXP",
+     "LITE",
+     "PSYS",
+     "PTRN",
+     "PVIS",
+     "PVRT",
+     "SHAD",
+     "STRN",
+     "SVIS",
+     "TEX",
+     "VRTX"
+    ]
+   },
    "unnamed_ids": [
     "0x00003510",
     "0x00010009",

@@ -111,20 +111,22 @@ def _writes(ins, reg: int) -> bool:
     return any(_wide(r) == reg for r in written)
 
 
-def cases_from(code: Code, start: int, reg: int) -> Tuple[List[Tuple[int, int]], Optional[int]]:
+def cases_from(code: Code, start: int, reg: int, everything: bool = False) -> Tuple[List[Tuple[int, int]], Optional[int]]:
     """[(id, case start)] and the default case's start: following reg (holding the id) from start along
-    every branch, keeping the amount subtracted from it."""
+    every branch, keeping the amount subtracted from it (the compiler's switch by subtraction over sorted
+    case values: each sub, dec, add and inc moves what the next compare means). everything: keep every
+    value (four-letter words too), not only those in the chunk-id range."""
     from capstone import x86_const as X
     found: Dict[int, int] = {}
     defaults: List[int] = []
     todo: List[Tuple[int, int, int, Optional[int]]] = [(start, reg, 0, None)]   # (address, reg, subtracted, last compared)
-    seen: Set[Tuple[int, int, int]] = set()
+    seen: Set[Tuple[int, int, int, Optional[int]]] = set()
     paths = 0
     while todo and paths < PATHS:
         va, r, off, cmp_val = todo.pop()
         paths += 1
         for _ in range(STEPS):
-            key = (va, r, off)
+            key = (va, r, off, cmp_val)                  # paths meeting at one je with different compares
             if key in seen:
                 break
             seen.add(key)
@@ -177,10 +179,60 @@ def cases_from(code: Code, start: int, reg: int) -> Tuple[List[Tuple[int, int]],
                 defaults.append(va)
                 break
             va = nxt
-    cases = sorted((i, t) for i, t in found.items() if 0x100 <= i <= 0x0FFFFFFF)
+    cases = sorted((i, t) for i, t in found.items() if everything or 0x100 <= i <= 0x0FFFFFFF)
     starts = {t for _i, t in cases}
     default = next((d for d in defaults if d not in starts), None)
     return cases, default
+
+
+def argument_switch(img: BinaryImage, fn: int) -> List[Tuple[int, int]]:
+    """[(value, case start)] of a function that switches on its first argument (a handler's "accepts" check,
+    vfunc_04): the register loaded from [ebp+8] or [esp+4] near its start, followed as cases_from does."""
+    from capstone import x86_const as X
+    code = Code(img)
+    va = fn
+    for _ in range(8):
+        ins = code.at(va)
+        if ins is None:
+            break
+        if ins.mnemonic == "mov" and len(ins.operands) == 2 and ins.operands[1].type == X.X86_OP_MEM:
+            m = ins.operands[1].mem
+            if (m.base, m.disp) in ((X.X86_REG_EBP, 8), (X.X86_REG_ESP, 4)) and _reg(ins, 0):
+                return cases_from(code, va + ins.size, _wide(_reg(ins, 0)), everything=True)[0]
+        va += ins.size
+    return []
+
+
+def word_of(v: int) -> str:
+    """A four-letter word as text (0x53595350 -> PSYS), or the number."""
+    raw = struct.pack("<I", v).rstrip(b"\0")
+    return raw.decode("ascii") if raw and all(48 <= c <= 57 or 65 <= c <= 90 for c in raw) else f"0x{v:08X}"
+
+
+def accepted_by(img: BinaryImage, fn: int, accept: int) -> List[str]:
+    """The values a handler's accepts check (fn) says yes to: its cases whose code is the "yes" path."""
+    return sorted(word_of(v) for v, at in argument_switch(img, fn) if at == accept)
+
+
+def says_yes(img: BinaryImage, va: int) -> bool:
+    """Whether code starts by returning true (mov al, 1 / mov eax, 1)."""
+    raw = img.read(va, 5) or b""
+    return raw[:2] == b"\xB0\x01" or raw[:5] == b"\xB8\x01\x00\x00\x00"
+
+
+def handler_accepts(img: BinaryImage) -> Dict[str, List[str]]:
+    """{handler class: what its accepts check (vfunc_04) says yes to}, for every class named ...Handler."""
+    out: Dict[str, List[str]] = {}
+    for vt, (cls, _raw) in rtti_vtables(img).items():
+        if not cls.endswith("Handler"):
+            continue
+        slots = vtable_slots(img, vt)
+        if len(slots) <= 4:
+            continue
+        yes = sorted({word_of(v) for v, at in argument_switch(img, slots[4]) if says_yes(img, at)})
+        if yes:
+            out[cls] = yes
+    return dict(sorted(out.items()))
 
 
 def first_calls(code: Code, start: int, most: int = 2, steps: int = 60) -> List[int]:
@@ -297,6 +349,7 @@ def report(bin_dir: Path) -> dict:
                                     "calls": [label(v) for v in c.calls]} for c in d.cases]})
         ids = sorted({c["id"] for r in rows for c in r["cases"]})
         out["versions"][b] = {"file": name, "loops": len(rows), "ids": len(ids),
+                              "handler_accepts": handler_accepts(BinaryImage(path)),
                               "unnamed_ids": [i for i in ids if int(i, 16) not in p3d.NAMES], "dispatches": rows}
     return out
 

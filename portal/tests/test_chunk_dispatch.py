@@ -67,3 +67,37 @@ def test_a_jump_table(tmp_path):
     found = {d.site: d for d in D.dispatches(img, 0x11400)}
     two = found[TEXT + 0x100]
     assert [(c.id, c.at) for c in two.cases] == [(0x15B00, 0x11120), (0x15B01, 0x11128), (0x15B02, 0x11130)]
+
+
+def test_a_switch_on_the_argument(tmp_path):
+    """A handler's accepts check: mov eax, [ebp+8]; cmp eax, 'PTRN'; je yes; sub eax, 'STRN' - 'PTRN'... The
+    subtractions fold into the words they stand for, as in DefaultFrameControllerHandler::vfunc_04."""
+    w = lambda s_: struct.unpack("<I", s_.encode().ljust(4, b"\0"))[0]
+    code = bytearray(b"\xCC" * 0x40)
+    body = (b"\x55\x8B\xEC\x8B\x45\x08"                                  # push ebp; mov ebp, esp; mov eax, [ebp+8]
+            + b"\x3D" + struct.pack("<I", w("PTRN")) + b"\x74\x0E"           # cmp eax, PTRN; je yes
+            + b"\x2D" + struct.pack("<I", w("STRN")) + b"\x74\x07"           # sub eax, STRN; je yes
+            + b"\x2D" + struct.pack("<I", w("PVIS") - w("STRN")) + b"\x74\x00")  # sub eax, PVIS - STRN; je yes
+    code[0:len(body)] = body
+    yes = len(body)
+    code[yes:yes + 6] = b"\x32\xC0\x5D\xC2\x04\x00"                       # xor al, al; pop ebp; ret 4  (the "no" path)
+    tail = b"\xB0\x01\x5D\xC2\x04\x00"                                    # mov al, 1; pop ebp; ret 4
+    code[0x30:0x30 + len(tail)] = tail
+    # point every je at the "yes" block at 0x11030
+    for at in (len(b"\x55\x8B\xEC\x8B\x45\x08") + 5, len(b"\x55\x8B\xEC\x8B\x45\x08") + 12, len(body) - 2):
+        code[at:at + 2] = b"\x74" + bytes([(0x30 - (at + 2)) & 0xFF])
+    img = BinaryImage(make_xbe(tmp_path / "t.xbe", [(".text", TEXT, bytes(code), 0x6)]))
+    assert D.accepted_by(img, TEXT, TEXT + 0x30) == ["PTRN", "PVIS", "STRN"]
+    assert D.says_yes(img, TEXT + 0x30) and not D.says_yes(img, TEXT + yes)
+
+
+def test_the_frame_controller_handlers_accepts_on_the_retail_xbox():
+    """The examiner's fixture (F1): DefaultFrameControllerHandler::vfunc_04 at 0x2739A0 accepts these 14."""
+    from conftest import ROOT
+    import pytest
+    path = ROOT / "binaries" / "default.xbe"
+    if not path.exists():
+        pytest.skip("binaries/default.xbe missing")
+    img = BinaryImage(path)
+    assert D.accepted_by(img, 0x2739A0, 0x273A12) == sorted(
+        ["PTRN", "TEX", "BQG", "CAM", "EXP", "EFX", "SHAD", "LITE", "PSYS", "STRN", "PVIS", "SVIS", "PVRT", "VRTX"])
