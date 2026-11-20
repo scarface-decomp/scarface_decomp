@@ -735,6 +735,11 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
     # Where: someone's feet (with their height, for the triggers that have one), else the camera's start.
     spots = []
     for sc, st in [(script, pieces)] + [(sc, st) for _n, sc, st in then]:
+        if sc.streams_by_camera:                          # the world streams round the camera (examiner H5.3)
+            path = CUT.camera_path(sc, st)
+            if path:
+                spots += [(x, z, y) for x, y, z in path]
+                continue
         feet = CUT.floor_spot(sc)
         ground = CUT.where(sc, st)
         if feet is not None and ground is not None and (feet[0], feet[2]) == ground:

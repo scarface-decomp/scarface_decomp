@@ -671,3 +671,14 @@ def test_a_hit_while_the_last_still_sprays_adds_nothing_new():
     glb, _report = C.export("T", script, [], lambda kind, name: files.get(kind))
     doc, _ = read_glb(glb)
     assert sum(1 for n in doc["nodes"] if n["name"] == "GoreBloodExplosion on ann") == 2   # 60 and 90, not 62
+
+
+def test_a_cutscene_that_streams_round_its_camera():
+    """NISDriveWorldStreamer Enable 1 (examiner H5.3): the world loads round the camera, not the player."""
+    on = C.read_script('NISDriveWorldStreamer { Enable 1; }; NISCharacterAnimation { CharacterName "A"; AnimationName "x"; };')
+    assert on.streams_by_camera
+    assert not C.read_script('NISDriveWorldStreamer { Enable 1; }; NISDriveWorldStreamer { Enable 0; };').streams_by_camera
+    assert not C.read_script("").streams_by_camera
+    assert C.camera_path(C.read_script(""), []) == []
+    cue = C.read_script('NISSequenceCue { CameraAnimationName "CAM_T"; Position { x -3411; y 20; z -1704; }; Facing 90; };')
+    assert C.camera_path(cue, []) == [(-3411.0, 20.0, -1704.0)]

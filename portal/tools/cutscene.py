@@ -91,7 +91,7 @@ def outfit_for(wears: Dict[str, str], scene: str) -> str:
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
                     r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation|"
                     r"NISWeaponFire|NISStatePropState|NISRenderableTrack|NISRenderableAnimationTrack|NISFade|"
-                    r"NISCharacterEffect)\s*\{")
+                    r"NISCharacterEffect|NISDriveWorldStreamer)\s*\{")
 _FIELD = re.compile(r'\b(\w+)\s+(?:"([^"]*)"|(-?[\d.]+(?:e-?\d+)?))\s*;')
 
 
@@ -123,6 +123,9 @@ class Script:
         self.effects: List[Tuple[str, str, str, int, str]] = []
         self.renderables: Dict[str, str] = {}
         self.renderable_moves: Dict[str, str] = {}
+        # NISDriveWorldStreamer Enable 1: from then on the world streams round the camera, not the player
+        # (the examiner's block H5.3: the action at 0x180EC0 pushes the active camera on the streamer's stack)
+        self.streams_by_camera = False
         self.swaps: Dict[str, str] = {}                     # person (lower) -> the cutscene model they are changed
         #                                                     into (NISSwapModel), kept in the scene's static.p3d
 
@@ -192,6 +195,8 @@ def read_script(text: str) -> Script:
             s.tony = re.sub(r"Drawable$", "", str(f["newModel"]), flags=re.I)
         elif kind == "NISSwapModel" and f.get("Character") and f.get("newModel"):
             s.swaps.setdefault(str(f["Character"]).lower(), str(f["newModel"]))
+        elif kind == "NISDriveWorldStreamer":
+            s.streams_by_camera = bool(f.get("Enable"))           # the last one in the script holds
         elif kind == "NISSequenceCue" and f.get("CameraAnimationName") and not s.camera:
             s.camera = str(f["CameraAnimationName"])
             # A cue with a place of its own: the camera's move is measured from there, not from the map's
@@ -1177,6 +1182,32 @@ def where(script: Script, streams: Sequence[Tuple[str, bytes]]) -> Optional[Tupl
                     if param == "TRAN" and vals and abs(vals[0][0]) + abs(vals[0][2]) > 1.0:
                         return vals[0][0], vals[0][2]
     return None
+
+
+def camera_path(script: Script, streams: Sequence[Tuple[str, bytes]], most: int = 12) -> List[Tuple[float, float, float]]:
+    """Where the camera goes (the map's own x, y, z), at most `most` places spread evenly over its keys:
+    for the cutscenes whose world streams round the camera (NISDriveWorldStreamer). A camera measured from a
+    cue's own place gives that place."""
+    if script.origin:
+        return [script.origin[0]]
+    if not script.camera:
+        return []
+    lib = G.Library()
+    for label, data in streams:
+        lib.add(label, data, main=False)
+    keys: List[Tuple[float, float, float]] = []
+    for ref in _pieces(G.Builder(lib), script.camera):
+        for ch in p3d.walk(ref.chunk.children):
+            if ch.id in G.VECTOR_CHANNELS:
+                try:
+                    param, _frames, vals = G._vector_keys(ref.data, ch)
+                except (p3d.P3dError, struct.error, IndexError, KeyError):
+                    continue
+                if param == "TRAN":
+                    keys += [tuple(v) for v in vals]
+    if len(keys) <= most:
+        return keys
+    return [keys[round(i * (len(keys) - 1) / (most - 1))] for i in range(most)]
 
 
 GONE = (1e-4, 1e-4, 1e-4)              # the size of someone whose part of a joined cutscene isn't playing
