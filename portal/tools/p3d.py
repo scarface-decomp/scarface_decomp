@@ -56,6 +56,10 @@ NAMES: Dict[int, str] = {
     0x12110E: "Integer Channel", 0x121110: "Channel Interpolation Mode",
     0x121111: "Compressed Quaternion Channel", 0x121112: "Compressed Quaternion Channel2",
     0x121114: "Byte Quaternion Channel (?)",
+    0x0701000A: "Collision Mesh",
+    0x07000003: "Collision Vertices", 0x07000006: "Collision Triangles", 0x07000007: "Collision Neighbours",
+    0x07000008: "Collision Search Tree", 0x07016000: "Collision Triangle Sets", 0x07016010: "Collision Flag Set",
+    0x07016012: "Collision Value Set",
     0x121200: "Old Frame Controller", 0x121201: "Frame Controller",
     # Named after the classes that load them in the Xbox game (default.xbe's run-time type names), so
     # these are the game's own names: docs/FORMATS.md has the list and where each was found.

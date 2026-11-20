@@ -24,6 +24,7 @@ names into reports/names.json for the functions the work queue still calls sub_X
     python portal/tools/script_commands.py                 what it finds in binaries/
     python portal/tools/script_commands.py --write         add the names to reports/names.json
     python portal/tools/script_commands.py --list xb       every command and its function
+    python portal/tools/script_commands.py --json          the whole table: reports/script_bindings.json
 
 A function gets the name Script::<Command>, or Script::<Class>_<Command> for a class's command: it
 is the script system's handler (it takes the object, a count and the arguments as text), not the class's
@@ -201,12 +202,25 @@ def main(argv=None) -> int:
     ap.add_argument("--write", action="store_true", help="add the names to reports/names.json")
     ap.add_argument("--list", metavar="VERSION", choices=sorted(FILES), help="print every command of xb or proto")
     ap.add_argument("--bin-dir", type=Path, default=ROOT / "binaries")
+    ap.add_argument("--json", nargs="?", const=ROOT / "reports" / "script_bindings.json", type=Path, metavar="PATH",
+                    help="write every command (class, name, handler, fewest and most arguments, where it is "
+                         "registered) as JSON (default reports/script_bindings.json)")
     args = ap.parse_args(argv)
     found = scan(args.bin_dir, ROOT / "reconstructed_src")
     if not found:
         print(f"Neither default.xbe nor game.xbe is in {args.bin_dir}: put your game files there first "
               "(docs/GAME_VERSIONS.md).")
         return 1
+    if args.json:
+        table = {"what": "script commands the program registers, read from its own start-up code "
+                         "(portal/tools/script_commands.py; the examiner's question E7)", "versions": {}}
+        for b, (commands, _new, _counts) in found.items():
+            table["versions"][b] = [{"class": c.cls, "name": c.name, "handler": f"0x{c.handler:08X}",
+                                     "fewest": c.fewest, "most": c.most, "registered_at": f"0x{c.at:08X}"}
+                                    for c in sorted(commands, key=lambda c: (c.cls, c.name.lower(), c.handler))]
+        args.json.write_text(json.dumps(table, indent=1) + "\n", encoding="utf-8")
+        print(f"{args.json}: " + ", ".join(f"{b} {len(v):,} commands" for b, v in table["versions"].items()))
+        return 0
     if args.list:
         commands = found.get(args.list, ([],))[0]
         for c in sorted(commands, key=lambda c: (c.cls, c.name.lower())):

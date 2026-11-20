@@ -105,3 +105,8 @@ def test_command_line_writes_the_names(tmp_path, monkeypatch, capsys):
     assert SC.main(["--bin-dir", str(tmp_path), "--list", "xb"]) == 0
     assert capsys.readouterr().out.strip().endswith("0x00011800  DBChangeDirtyCash")
     assert SC.main(["--bin-dir", str(tmp_path / "nowhere")]) == 1
+    table = tmp_path / "bindings.json"
+    assert SC.main(["--bin-dir", str(tmp_path), "--json", str(table)]) == 0
+    assert json.loads(table.read_text())["versions"]["xb"] == [
+        {"class": "", "name": "DBChangeDirtyCash", "handler": "0x00011800", "fewest": 2, "most": 2,
+         "registered_at": json.loads(table.read_text())["versions"]["xb"][0]["registered_at"]}]

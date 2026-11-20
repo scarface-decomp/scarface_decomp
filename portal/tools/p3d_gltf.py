@@ -909,6 +909,11 @@ def shader_info(data: bytes, c: p3d.Chunk) -> dict:
             info["floats"][kf["parameter"]] = kf["value"]
         elif k.id == 0x11005:
             info["colours"][kf["parameter"]] = int(kf["argb"], 16)
+    # The game never applies a shader's own AMBI: its colour reader skips it, and sets the ambient colour
+    # from DIFF instead (ShaderLoader::vfunc_06, the examiner's answer F2). So ambient is the diffuse colour.
+    info["colours"].pop("AMBI", None)
+    if "DIFF" in info["colours"]:
+        info["colours"]["AMBI"] = info["colours"]["DIFF"]
     return info
 
 
@@ -2517,6 +2522,17 @@ def _model_for(lib: Library, name: str, prefer: Sequence[Source]) -> Optional[Re
         if found:
             return found
     return lib.find("composite", name, prefer)
+
+
+    """The model an instance object names: a composite drawable of that name, or a state prop's."""
+    ref = lib.find("composite", name, prefer)
+    if ref:
+        return ref
+    sp = lib.find("stateprop", name, prefer)
+    if sp:
+        p = _text(sp.data, sp.chunk.body[0])[1]
+        return lib.find("composite", _text(sp.data, p)[0], (sp.source,) + tuple(prefer))
+    return None
 
 
 def _is_lod(src: Source) -> bool:

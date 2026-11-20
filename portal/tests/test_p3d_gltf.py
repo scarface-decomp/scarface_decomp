@@ -2949,3 +2949,14 @@ def test_a_frame_controllers_cycle_modes():
     bounce = G.controller_play(4, 1, 11)
     assert G.played([(0, (0.0,)), (10, (1.0,))], bounce, 10.0, False) == ([0.0, 1.0, 2.0], [(0.0,), (1.0,), (0.0,)])
     assert G.controller_play(5, 0, 11).first == 10.0
+
+
+def test_a_shaders_ambient_is_its_diffuse():
+    """The examiner's answer F2: the game skips a shader's own AMBI and sets ambient from DIFF."""
+    import p3d as p3d_module
+    colour = lambda param, argb: chunk(0x11005, param + struct.pack("<I", argb))
+    head = text("s") + struct.pack("<I", 0) + text("simple") + struct.pack("<4I", 0, 0, 0, 2)
+    for kids, want in ((colour(b"AMBI", 0xFF112233) + colour(b"DIFF", 0xFF808080), {"DIFF": 0xFF808080, "AMBI": 0xFF808080}),
+                       (colour(b"AMBI", 0xFF112233), {})):
+        data = p3d(chunk(0x11000, head, kids))
+        assert G.shader_info(data, p3d_module.read_tree(data)[0])["colours"] == want
