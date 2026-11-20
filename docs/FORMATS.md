@@ -186,8 +186,10 @@ The same model is stored three ways:
   them and `0x00010013` holds u16 indices (both after three u32: `0x20001`, 0, the size in bytes). A
   vertex is the position (3 floats), then the normal if the vertex type has one (a packed u32, Direct3D's
   NORMPACKED3: x and y in 11 signed bits, z in 10), the colour if it has one (u32, ARGB), one more u32
-  colour for each of the bits `0x4000` and `0x10000` (the PC keeps these in `0x0001001C` lists: u32 count,
-  u32 channel, a u32 per vertex), each UV set (2 floats), and on vehicles (vertex type bit `0x100000`) two
+  colour for each colour set when the vertex type has `0x4000` (how many in bits 15 to 17: `0x16011` has
+  two; the PC keeps these in `0x0001001C` lists instead of a `0x00010008`: u32 count, u32 set number, a u32
+  per vertex; set 0 is the cbvlit program's `v3`, set 1 its `v4`, exported as `COLOR_0` and `COLOR_1`),
+  each UV set (2 floats), and on vehicles (vertex type bit `0x100000`) two
   more vectors (6 floats). Skins keep the PC's plain lists.
 * **PS2**: only a memory image: `0x00010012` (after three u32: `0x100008`, the number of quadwords, the
   size) is a ready-made VIF packet for the vector unit's microprogram. See
@@ -255,7 +257,7 @@ used `0x4500` and `0x4501` for these.
 | `0x00121107` | Entity Channel | u32 version, parameter (`TEX`), u32 keys, u16 frames, then a name per key: the texture a surface shows from that frame on (the water's caustics: `CausticWaterA_x64_rgb.01.bmp` to `.20.bmp`) |
 | `0x00121109` | Colour Channel | u32 version, parameter (`CLR`), u32 keys, u16 frames, then a u32 colour (`0xAARRGGBB`) per key: two arrays, not interleaved |
 | `0x0012110E` | Integer Channel | u32 version, parameter (`VRTX`), u32 keys, u16 frames, then a u32 per key, with no padding between the two arrays |
-| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`CAM`, `PTRN`, `LITE` ...), `ANIM`, a float (the frame its animation starts at; 0 in every PC file), a u32 (1), then the name of what it drives (a camera, a light) and the animation it plays |
+| `0x00121201` | Frame Controller | u32 version, name, 4 characters type (`PTRN`, `TEX`, `SHAD`, `VRTX`, `PSYS`, `BQG`, `CAM`, `LITE`, `EXP`, `PVIS` ...), 4 characters cycle mode (`HOLD` stays on its frame, `FWD` and `BACK` wrap round, `FDBK` and `BKFD` go there and back; any other word, `ANIM` in all 588 PC controllers, plays as its animation says: round and round when the animation's cyclic word is 1, else once, holding the last frame), the number of cycles (u32 in version 1, f32 in version 0), u32 "for ever" (not 0: no end, the cycles don't count), then the name of what it drives and the animation it plays. A prop state's own settings take over from all of this (SPEC-011 §3; `p3d.py`, `p3d_gltf.controller_play`) |
 | `0x00002200` | Camera | name, u32 version (2), float field of view (radians, across the picture), float aspect, float near and far clip, then position, look direction and up (3 floats each) |
 
 Every person in the game has the same 27-joint skeleton (`character_root`, `pelvis`, `hip_l` ...), so
@@ -804,9 +806,10 @@ Stream Packages and 297 Stream Triggers.
 | Id | Chunk | Data |
 | :--- | :--- | :--- |
 | `0x08800100` | Stream Package | the package's name (lower case, no `.p3d`), u32 (5 to 65535, one per package; meaning not known) |
-| `0x08800101` | Stream Trigger | name (`loadTrigger`, `loadTrigger_100` ...), the subzone it belongs to (`bsand_02_shell`), float height (13 for the street-level ones), u32 count and that many points (3 floats: x, y, z), u32 count and that many package names, u32 count (the same) and the slot each package goes in, two region names (`fountainrock_region`, `lobst_region`; meaning not known), u32 (0 in all but one; meaning not known) |
+| `0x08800101` | Stream Trigger | name (`loadTrigger`, `loadTrigger_100` ...), the subzone it belongs to (`bsand_02_shell`), float height (0 = no limit), u32 count and that many points (3 floats: x, y, z), u32 count and that many package names, u32 count (the same) and the slot each package goes in, two region names (`fountainrock_region`, `lobst_region`; they load nothing), u32 "gives way" (not 0 in only one trigger, `loadTrigger_258`) |
 
-A trigger's points are a closed outline on the ground; y is its base. Its packages are what must be loaded
+A trigger is an upright prism: its outline on the ground, from the average of its points' heights up by its
+height (both kept in tenths, cut down; a height of 0 sets no limit). Its packages are what must be loaded
 while you are inside it, each in a slot:
 
 | Slot | Holds |
@@ -817,10 +820,24 @@ while you are inside it, each in a slot:
 | `Detail` | the small things on top of a shell; a shell can have several (`_detail`, `_detailB` ...) |
 | `ZoneAnimation` | `packages/ZoneAnimations/<name>_anim` |
 
-What is loaded at a place is every package of every trigger whose outline holds it. Triggers overlap:
-usually three to six shells and three to eight details are loaded at once, the area you stand in and its
-neighbours. Outside every trigger, the nearest one stands in. The coordinates are the map's own, before the
-exports mirror Z ([Which way round](#which-way-round)).
+**Only one trigger applies at a time**, and what is loaded is exactly its list (SPEC-011): no union with
+the triggers around it. In the game the current trigger is sticky: while you stay inside it, overlapping
+triggers don't take over, unless it is the one that gives way. Where no prism holds you, nothing changes:
+what was loaded stays. The exports take one fixed answer per place: the first trigger in the file's order
+whose prism holds it (the one that gives way last); above every prism (the update at `0x90990` finds none, so the
+current trigger at `0x481AF4` stays), the trigger you came up through: one that reaches the height and whose
+outline meets a trigger under you, the building's own first (its subzone a shell the triggers under you list),
+then the nearest (Jerry's office upstairs in the Coconut Grove bank, y 13.87,
+above `loadTrigger_448`'s top of 10: its neighbour `loadTrigger_400`, the bank's stair column with no height
+limit, the only one that loads `luxurybank_02_detailB`, its furniture); with no such neighbour, the trigger
+under you; else the nearest. The coordinates are the map's own, before
+the exports mirror Z ([Which way round](#which-way-round)).
+
+Interiors' furniture and props (`packages/dzones/*_dzone.p3d`, 61 triggers) and the outdoor pockets
+(`packages/azones`, 27) are not in the stream graph. The scripts `scriptc/missions/z04/dzone_triggers.dso`
+and `azone_triggers.dso` load them, each from its own outline: an object whose words hold the outline's
+points as `"x y z"` texts, in order, and a command `LoadDzone('<package>')` (or `LoadAzone`). Their
+coordinates are the map's own too. `stream_graph.script_triggers` reads them from the decompiled script.
 
 ```
 python portal/tools/stream_graph.py streamgraph.p3d               every trigger
@@ -1206,9 +1223,41 @@ of its own.
 A mesh with a [draw-order key](#the-draw-order-key-and-the-sky) carries it in its extras
 (`{"drawOrder": 0.3}`), clamped to 0..1 as the game does.
 
-Left out for now: particles and light flares, shadow volumes, collision shapes, state-prop animations'
+Left out for now: light flares, shadow volumes, collision shapes, state-prop animations'
 callbacks and the effects states set off; the sea's reflection, ripples, waves and foam, and the fade of the
 low-detail hull and of the draw distances.
+
+### Particle systems
+
+Every particle effect in the game is in `packages/z04/Common.p3d` (123 systems on the PC), read by
+`portal/tools/particles.py` from the clean-room spec SPEC-010 section 1. Two names reach one effect:
+`<x>Shape` is the Particle System chunk itself, and `<x>` (what prop states and the effects scripts name)
+is a [composite drawable](#composite-drawables) whose part of kind 4 is that system, sometimes with other
+parts (billboards, meshes).
+
+| Chunk | Holds |
+| :--- | :--- |
+| `0x0001580C` Particle System | u32 0, its name, f32 frame rate (30), u32 length in its frames, u32 loops (1 for what goes on: fire, smoke, muzzle flashes; 0 for one-shots: hits, blood, debris), a sphere (4 f32, unused), an offset (3 f32, unused), u32 emitter count. Under it: the emitters, a `0x122000` (u32 0, f32 between 0 and 1), a Frame Controller of type `PSYS`. |
+| `0x00015900` emitter | u32 0, its name, the shader it draws with, u32 mode word, u32 (1), u32 (0), u32 most particles alive at once, u32 (0), u32 pictures side by side across its texture, u32 frames each picture lasts, f32 start angle and f32 its random spread (radians), f32 and f32 how much live particles follow the emitter's movement and turning (0 to 1). Under it: an animation of type `SPEM` (its settings over the effect's time), one of type `SPAR` (curves over a particle's life, 100 frames = 100 percent) and a generator. |
+| `0x00015B00` / `01` / `02` | Where particles start and which way they go: a point (u32 0, then horizontal and vertical spread in radians and `RDVA`), a plane (width, height, the spreads, `RDVA`) or a sphere (radius, `RDVA`), each with an animation of the same channels. |
+
+The mode word is four numbers in one: *a* = word mod 3 (0 spin, 1 spin times the spin curve, 2 turned along
+its movement), then of *w* = word ÷ 3: *w* mod 4 the picture (random kept, cycling, from a curve, random
+again every picture time), (*w* ÷ 4) mod 4 the colour (kept, colour curve, alpha curve, both) and
+(*w* ÷ 16) mod 4 whether particles move and turn with the emitter.
+
+`SPEM` channels: `RAT` (particles a frame: each frame the emitter makes as many as the area under it
+since the last frame adds up to), `LIF` life in frames, `SPD` speed, `SIZ` size, `SPI` spin, `WGT`
+weight, `GRA` gravity on the upward speed times the weight, `DRA` a factor on each step's movement, `CLR`
+and `ALP` the birth colour and alpha, `TRA` and `ROT` the emitter's place and turn; each `...V` is a random
+spread added to its base (times a number from −1 to 1). `SPAR` curves, sampled at twenty points of life:
+`SPOL` speed, `SZOL` size, `SNOL` spin, `WEOL` weight, `COOL` colour, `ALOL` alpha, `TEOL` picture.
+
+A particle is a square of its size facing the camera, drawn with its emitter's shader (`BLMD` 1 laid
+over what is behind, 2 added to it). In a cutscene's export each particle is a node with a square, keyed
+every frame of its life and shrunk to nothing outside it, its extras saying `"billboard": true` and its
+colour over life (`"colours"`: seconds, r, g, b, a, five numbers a key); the Blender script turns them to
+the camera and keys their colour.
 
 ### Ids seen but not worked out
 
@@ -1249,7 +1298,13 @@ others happen where the script first stands someone, and the map there is what t
 [stream graph](#the-stream-graph) keeps loaded at that spot (its `Shell` and `Detail` packages).
 
 `cutscene.py` reads all of this and makes one scene with everybody in it, on the street or in the room
-where it happens; opening any of a cutscene's files in the portal gives the whole cutscene. Not read yet:
+where it happens; opening any of a cutscene's files in the portal gives the whole cutscene. Its effects
+are the game's own particles (SPEC-010): `NISCharacterEffect` plays its type's system on the joint (the head
+for a headshot), turned away from `SourceCharacterName`'s neck, or a blood pool growing under them;
+`NISWeaponFire` fires the held gun every `FiringRate` milliseconds (from `scriptc/templates/weapons.cso`),
+each shot playing the gun prop's `fire1` (alternate fire: `fire2`) effects, with a tracer every second
+bullet; a prop's state plays its state's effects; `NISFade` goes to its colour, holds and clears in straight
+lines. Not read yet:
 props (`NISStatePropSpawn`), effects and sound; faces of people other than Tony whose model the script swaps in (`NISSwapModel`); a weapon hangs on the hand joint as it is, without the
 small shift the game gives each weapon.
 

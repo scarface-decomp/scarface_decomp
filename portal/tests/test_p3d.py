@@ -502,10 +502,24 @@ def test_float2_and_entity_channels():
     assert P.channel_keys(ent, P.read_tree(ent)[0]) == ("TEX", [0, 1], [("water.01.bmp",), ("water.02.bmp",)])
 
 
-def test_the_frame_controllers_first_number_is_a_frame():
+def test_the_frame_controllers_mode_cycles_and_for_ever():
+    """SPEC-011 section 3.1 (it corrects SPEC-005 section 1.4): ANIM is the cycle mode, then the cycles (u32 in
+    version 1, f32 in version 0) and "for ever"."""
     import p3d as P
-    data = p3d(chunk(0x121201, struct.pack("<I", 1) + text("PTRN_door") + b"PTRNANIM" + struct.pack("<fI", 12.5, 1)
-                     + text("door") + text("PTRN_door_opening")))
+
+    def fc(version, mode, cycles, forever):
+        n = struct.pack("<I", cycles) if version >= 1 else struct.pack("<f", cycles)
+        return p3d(chunk(0x121201, struct.pack("<I", version) + text("PTRN_door") + b"PTRN" + mode + n
+                         + struct.pack("<I", forever) + text("door") + text("PTRN_door_opening")))
+    data = fc(1, b"ANIM", 0, 1)
     assert P.fields(data, P.read_tree(data)[0]) == {
-        "version": 1, "name": "PTRN_door", "type": "PTRN", "word": "ANIM", "frame offset": 12.5, "number": 1,
-        "drives": "door", "animation": "PTRN_door_opening"}
+        "version": 1, "name": "PTRN_door", "type": "PTRN", "cycle mode": "ANIM", "mode": 0, "cycles": 0,
+        "for ever": True, "drives": "door", "animation": "PTRN_door_opening"}
+    data = fc(1, b"FDBK", 3, 0)
+    assert {k: v for k, v in P.fields(data, P.read_tree(data)[0]).items() if k in ("mode", "cycles", "for ever")} == \
+        {"mode": 4, "cycles": 3, "for ever": False}
+    data = fc(0, b"BACK", 2.0, 0)
+    got = P.fields(data, P.read_tree(data)[0])
+    assert (got["mode"], got["cycles"], got["animation"]) == (3, 2.0, "PTRN_door_opening")
+    data = fc(1, b"HOLD", 5, 1)                                        # for ever: the cycles don't count
+    assert P.fields(data, P.read_tree(data)[0])["cycles"] == 0

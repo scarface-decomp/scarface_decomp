@@ -393,22 +393,18 @@ def _two_hands(palm_at=(-0.33, 0.06, 0.03), palm_on="wrist_l"):
     return doc, copy
 
 
-def test_a_long_gun_is_laid_into_the_other_hand():
-    """Where the other palm stays one direction from the gun hand, a rifle's hold away, the gun is turned the
-    little it takes for its handguard to meet it; otherwise it keeps the turn every long gun gets."""
-    muzzle = (0.0, 0.06, 0.68)
+def test_where_a_joint_is_through_the_animation():
+    """joint_world: a joint's place and turn in the space of the spot someone stands on, through the joints
+    above it and their keys (SPEC-010 section 2.2 aims a hit from the shooter's neck to the joint hit)."""
     doc, copy = _two_hands()
-    turn = C.other_hand(doc, copy, {}, 5.0, muzzle)
-    assert turn is not None and turn != pytest.approx(C.GRIP)
-    handguard = C._unit(C._qturn(turn, (0.0, 0.06 - 0.05, 0.68 * C.FRONT)))
-    assert handguard == pytest.approx(C._unit((-0.33, 0.06, 0.03)), abs=1e-6)          # it points at the palm
-    assert C._qturn(turn, (0.0, 1.0, 0.0))[2] > 0.9                                    # and its top is still up
-    assert C.other_hand(*_two_hands(palm_on="root"), {}, 5.0, muzzle) is None          # a palm hung on nothing
-    assert C.other_hand(*_two_hands(palm_at=(-0.9, 0.0, 0.0)), {}, 5.0, muzzle) is None        # too far to be on the gun
-    assert C.other_hand(*_two_hands(palm_at=(0.0, -0.3, 0.0)), {}, 5.0, muzzle) is None        # nowhere near the barrel's line
-    half = math.sqrt(0.5)                                                              # a hand that swings about: not a hold
-    swing = {"wrist_r": {"rotation": ([0.0, 2.5, 5.0], [(0, 0, 0, 1), (0, half, 0, half), (0, 1, 0, 0)])}}
-    assert C.other_hand(doc, copy, swing, 5.0, muzzle) is None
+    at, turn = C.joint_world(doc, copy, {}, "left_hand_attach", 0.0)
+    assert at == pytest.approx((-0.03, 1.26, 0.03)) and turn == (0.0, 0.0, 0.0, 1.0)
+    half = math.sqrt(0.5)                                     # the wrist turned a quarter about up at 1 s
+    keys = {"wrist_r": {"rotation": ([0.0, 1.0], [(0, 0, 0, 1), (0, half, 0, half)])}}
+    doc["nodes"][3]["translation"] = [0.0, 0.0, 0.1]
+    assert C.joint_world(doc, copy, keys, "right_hand_attach", 0.5)[0] == pytest.approx((0.3, 1.2, 0.1))
+    assert C.joint_world(doc, copy, keys, "right_hand_attach", 1.0)[0] == pytest.approx((0.4, 1.2, 0.0))
+    assert C.joint_world(doc, copy, keys, "nowhere", 1.0) is None
 
 
 def test_handguns_hang_as_their_model_lies_and_long_guns_are_turned():
@@ -472,7 +468,7 @@ def test_a_script_says_when_weapons_are_held_and_fired_and_when_props_change():
         'NISStatePropState { StatePropName "OfficeDoors"; StateName "final"; FrameBegin 0; };')      # how the scene leaves it
     assert script.holds_at == {"cuban3": [(0, "WeaponTemplateColt45"), (600, "WeaponTemplateAK47")],
                                "tony": [(98, "WeaponTemplateM16Mortar")]}
-    assert script.fires == {"cuban3": [(182, 237), (700, 706)]}
+    assert script.fires == {"cuban3": [(182, 237, True), (700, 706, False)]}
     assert script.prop_states == {"OfficeDoors": [(0, "idle"), (625, "damage1"), (642, "final")]}
 
 
@@ -515,11 +511,13 @@ def test_fades_and_effects_are_read_and_effects_go_on_the_joint_at_their_frame()
         'SourceCharacterName "Tony"; FrameBegin 60; }; '
         'NISCharacterEffect { CharacterName "Nobody"; EffectType "ShotEffectHeavy"; JointName "Hip"; FrameBegin 5; };')
     assert script.fades == [(0, 0, 0, 30, (1.0, 0.0, 0.0)), (1560, 30, 0, 0, (0.0, 0.0, 0.0))]
-    assert script.effects == [("ann", "GoreBloodExplosion", "Hip", 60), ("nobody", "ShotEffectHeavy", "Hip", 5)]
+    assert script.effects == [("ann", "GoreBloodExplosion", "Hip", 60, "tony"), ("nobody", "ShotEffectHeavy", "Hip", 5, "")]
     glb, report = C.export("T", script, [], lambda kind, name: ("ann.p3d", face_file()) if kind == "person" else None)
     doc, binc = read_glb(glb)
     fades = report.parts[0]["fades"]
-    assert fades[1] == {"at": 52.0, "in": 1.0, "hold": 0.0, "out": 0.0, "colour": [0.0, 0.0, 0.0]}
+    assert fades[1] == {"at": 52.0, "in": 1.0, "hold": 0.0, "out": 0.0, "colour": [0.0, 0.0, 0.0],
+                        "keys": [[52.0, 0.0], [53.0, 1.0]]}            # the scene's end: to black, and it stays
+    assert fades[0]["keys"] == [[0.0, 1.0], [1.0, 0.0]]                # red, clearing over a second
     assert doc["scenes"][0]["extras"]["parts"][0]["fades"] == fades
     burst = next(i for i, n in enumerate(doc["nodes"]) if n["name"] == "GoreBloodExplosion on ann")
     holder = next(n for n in doc["nodes"] if burst in n.get("children", []))
@@ -541,3 +539,159 @@ def test_a_props_effects_have_a_look_and_a_length_by_their_kind():
     assert C._prop_effect_look("epDebris_Wood", 2.0)[0] == 2 * wood[0]          # the effect's size scales it
     b = G.Builder(G.Library())
     assert C._burst_mesh(b, 0.5, (1.0, 0.5, 0.0, 1.0), True) == C._burst_mesh(b, 0.5, (1.0, 0.5, 0.0, 1.0), True)
+
+
+def test_a_fade_as_the_game_plays_it():
+    """SPEC-010 section 5: black with no hold ends a scene (in longer than out) or starts one; any other fade
+    goes in, holds (for ever when negative) and goes out, in straight lines."""
+    black = (0.0, 0.0, 0.0)
+    assert C.fade_keys(30, 0, 0, black) == [(0, 0.0), (30, 1.0)]
+    assert C.fade_keys(0, 0, 15, black) == [(0, 1.0), (15, 0.0)]
+    assert C.fade_keys(10, -1, 5, black) == [(0, 0.0), (10, 1.0)]         # no hold: longer in, the end
+    white = (1.0, 1.0, 1.0)
+    assert C.fade_keys(2, 3, 4, white) == [(0, 0.0), (2, 1.0), (5, 1.0), (9, 0.0)]
+    assert C.fade_keys(2, -1, 4, white) == [(0, 0.0), (2, 1.0)]           # held for ever
+    assert C.fade_keys(10, 20, 10, black) == [(0, 0.0), (10, 1.0), (30, 1.0), (40, 0.0)]
+
+
+def _effects_file():
+    """A made-up effects file: the gore system, four particles that fly off forwards."""
+    from test_particles import channel as ch, emitter, system
+    settings = [ch(0x121100, "RAT", [0, 1], [(8.0,), (0.0,)]), ch(0x121100, "LIF", [0], [(5.0,)]),
+                ch(0x121100, "SPD", [0], [(0.1,)]), ch(0x121100, "SIZ", [0], [(0.2,)])]
+    return p3d(system([emitter(settings=settings, most=20)], length=3, name="fxSys_Blood_HeadExplodeShape"))
+
+
+def test_a_character_effect_plays_the_games_particles_away_from_the_shooter():
+    script = C.read_script(
+        'NISResourceLoader { Name "Ann"; TemplateName "CharTemp_Ann"; }; '
+        'NISResourceLoader { Name "Bob"; TemplateName "CharTemp_Bob"; }; '
+        'NISCharacterPosition { CharacterName "Ann"; Position { x 0; y 0; z 0; }; Facing 0; }; '
+        'NISCharacterPosition { CharacterName "Bob"; Position { x 0; y 0; z 5; }; Facing 0; }; '
+        'NISCharacterEffect { CharacterName "Ann"; EffectType "GoreBloodExplosion"; JointName "Hip"; '
+        'SourceCharacterName "Bob"; FrameBegin 60; };')
+    files = {"person": ("ann.p3d", face_file()), "effects": ("Common.p3d", _effects_file())}
+    glb, report = C.export("T", script, [], lambda kind, name: files.get(kind))
+    doc, binc = read_glb(glb)
+    place = next(i for i, n in enumerate(doc["nodes"]) if n["name"] == "GoreBloodExplosion on ann")
+    group = doc["nodes"][doc["nodes"][place]["children"][0]]
+    assert group["extras"] == {"effect": "fxSys_Blood_HeadExplodeShape", "system": "fxSys_Blood_HeadExplodeShape"}
+    particles = [doc["nodes"][i] for i in group["children"]]
+    assert len(particles) == 4 and all(p["extras"]["billboard"] for p in particles)
+    colours = particles[0]["extras"]["colours"]
+    assert colours[:5] == [2.0, 1.0, 1.0, 1.0, 1.0]                   # born at frame 60: white, seen whole
+    from test_p3d_gltf import values
+    scale = next(c for c in doc["animations"][0]["channels"] if c["target"]["node"] == group["children"][0]
+                 and c["target"]["path"] == "scale")
+    times = [t for (t,) in values(doc, binc, doc["animations"][0]["samplers"][scale["sampler"]]["input"])]
+    assert times[0] == 0.0 and times[2] == pytest.approx(2.0) and times[-1] == pytest.approx(2.0 + 5 / 30)
+    # turned so the particles fly from Bob (at z 5, the game's space: glTF's -5) through Ann
+    q = doc["nodes"][place].get("rotation")
+    assert q is not None
+    forward = C._qturn(q, (0.0, 0.0, -1.0))
+    assert forward[2] > 0.5                                          # towards glTF +z: away from Bob
+
+
+def test_effect_helpers():
+    import cutscene_fx as CFX
+    assert CFX.shot_frames(0, 10, 105.0) == pytest.approx([0.0, 3.15, 6.3, 9.45])
+    assert CFX.firing_rate("WeaponTemplateUzi", {}) == 105.0
+    assert CFX.firing_rate("WeaponTemplateM16Mortar", {"weapontemplatem16mortar": 80.0}) == 80.0
+    assert CFX.character_effect("ShotEffectHeavy") == ("fxSys_Large_ImpactBloodShape", 2.0)
+    assert CFX.character_effect("BloodPool") == (None, 1.0) and CFX.character_effect("Sneeze") is None
+    times, sizes = CFX.pool_keys(30)
+    assert times[2] == 1.0 and times[3] == pytest.approx(1.0 + 1.9 / 0.0025 / 30) and sizes[3] == (1.9, 1.0, 1.9)
+    for way in ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0), (0.0, 0.0, -1.0)):
+        assert C._qturn(CFX.facing(way), (0.0, 0.0, -1.0)) == pytest.approx(way, abs=1e-6)
+
+
+def test_a_gun_fires_its_own_effects_shot_by_shot():
+    """SPEC-010 section 3: while the fire control is held, a shot every FiringRate milliseconds (105 for an
+    Uzi), each playing the gun's fire1 effects at their place on it; a tracer every second bullet."""
+    from test_p3d_gltf import composite, mesh, prop_property, skeleton, skin_chunk
+    from test_particles import channel as ch, emitter, system
+    rig = skeleton("rig", [("Root", 0, (0, 0, 0)), ("right_hand_attach", 0, (0.5, 1.0, 0))])
+    tri = [(0, 0, 0), (1, 0, 0), (0, 1, 0)]
+    person = p3d(rig, skin_chunk(tri, [0, 1, 2], [(0.75, 0.25, 0.0)] * 3, [0x01000000] * 3, [1, 0]))
+    flash = chunk(0x0802000B, text("Effect") + text("fxSys_PistolUzi_MuzzleFlash") + struct.pack("<I", 0) + text("uzi")
+                  + struct.pack("<6fI", 0.0, 0.0, 0.3, 0.0, 0.0, 0.0, 0) + text("uzi") + struct.pack("<2f", 1.0, 0.0))
+    states = prop_property("name", "uzi")
+    for sname, kids in (("idle", b""), ("fire1", flash)):
+        states += chunk(0x0802000E, text(sname) + struct.pack("<6If3I", 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0), kids)
+    guns = p3d(skeleton("uzi", [("uzi", 0, (0, 0, 0)), ("muzzle_position", 0, (0, 0, 0.3))]), mesh("uziShape"),
+               composite("uzi", "uzi", [("uziShape", 1, 0)]),
+               chunk(0x0802000D, struct.pack("<I", 4) + text("uzi") + text("uzi") + struct.pack("<II", 2, 1), states))
+    settings = [ch(0x121100, "RAT", [0, 1], [(2.0,), (0.0,)]), ch(0x121100, "LIF", [0], [(2.0,)]),
+                ch(0x121100, "SIZ", [0], [(0.1,)])]
+    effects = p3d(system([emitter(settings=settings)], length=2, loops=1, name="fxSys_PistolUzi_MuzzleFlashShape"),
+                  skeleton("fx", [("fx", 0, (0, 0, 0))]),
+                  composite("fxSys_PistolUzi_MuzzleFlash", "fx", [("fxSys_PistolUzi_MuzzleFlashShape", 4, 0)]),
+                  skeleton("fx_tracer", [("fx_tracer", 0, (0, 0, 0))]), mesh("tracerShape"),
+                  composite("fx_tracer", "fx_tracer", [("tracerShape", 1, 0)]))
+    script = C.read_script('''
+      NISResourceLoader { Name "Cuban"; TemplateName "CharTemp_Cuban"; };
+      NISCharacterPosition { CharacterName "Cuban"; Position { x 0; y 0; z 0; }; Facing 0; };
+      NISWeaponAttach { CharacterName "Cuban"; WeaponTemplateName "WeaponTemplateUzi"; FrameBegin 0; };
+      NISWeaponFire { CharacterName "Cuban"; FrameBegin 30; FrameEnd 40; IsSecondaryWeapon 0; };''')
+    files = {"person": ("p.p3d", person), "weapons": ("guns.p3d", guns), "effects": ("Common.p3d", effects)}
+    glb, _report = C.export("T", script, [], lambda kind, name: files.get(kind))
+    doc, _ = read_glb(glb)
+    names = [n["name"] for n in doc["nodes"]]
+    shots = sorted(n for n in names if n.startswith("fxSys_PistolUzi_MuzzleFlash (shot"))
+    assert len(shots) == 4                                   # frames 30, 33.15, 36.3 and 39.45
+    anchor = next(n for n in doc["nodes"] if n["name"] == "Cuban's fxSys_PistolUzi_MuzzleFlash")
+    assert anchor["translation"] == pytest.approx([0.0, 0.0, -0.3])   # at its offset on the gun
+    # the flash loops (2 frames, one particle a round) until the next shot winds it down: two rounds in the
+    # 3.15 frames between shots, and one for the last, cut short when the trigger is let go at frame 40
+    assert sum(1 for n in doc["nodes"] if (n.get("extras") or {}).get("billboard")) == 3 * 2 + 1
+    assert "Cuban's tracers" in names and "Cuban's muzzle flash" not in names
+
+
+def test_the_weapons_template_script_gives_each_guns_rate():
+    import cutscene_fx as CFX
+    text = ('new WeaponTemplate(WeaponTemplateUzi) { FiringRate = 105; TracerFrequency = "2"; };\n'
+            'new WeaponTemplate(WeaponTemplateM16) { FiringRate = 75; };\nnew Thing(Other) { Speed = 3; };')
+    assert CFX.weapon_settings(text) == {"weapontemplateuzi": {"FiringRate": 105.0, "TracerFrequency": 2.0, "texts": ["2"]},
+                                         "weapontemplatem16": {"FiringRate": 75.0, "texts": []}}
+    named = 'new WeaponTemplate(WeaponTemplateM16Mortar) { FiringRate = 110; Look = "M16_upgrade2"; };'
+    texts = CFX.weapon_settings(named)["weapontemplatem16mortar"]["texts"]
+    assert C.weapon_model("WeaponTemplateM16Mortar", ["M16", "M16_upgrade2"], texts) == "M16_upgrade2"
+    assert C.weapon_model("WeaponTemplateM16Mortar", ["M16", "M16_upgrade2"]) == "M16"   # without the script
+    assert CFX.weapon_settings("this is not a script {") == {}
+
+
+def test_a_hit_while_the_last_still_sprays_adds_nothing_new():
+    """SPEC-010 section 1.9: played again while the last is alive, the effect is only moved."""
+    hit = lambda f: (f'NISCharacterEffect {{ CharacterName "Ann"; EffectType "GoreBloodExplosion"; JointName "Hip"; '
+                     f'FrameBegin {f}; }}; ')
+    script = C.read_script('NISResourceLoader { Name "Ann"; TemplateName "CharTemp_Ann"; }; '
+                           'NISCharacterPosition { CharacterName "Ann"; Position { x 0; y 0; z 0; }; Facing 0; }; '
+                           + hit(60) + hit(62) + hit(90))
+    files = {"person": ("ann.p3d", face_file()), "effects": ("Common.p3d", _effects_file())}
+    glb, _report = C.export("T", script, [], lambda kind, name: files.get(kind))
+    doc, _ = read_glb(glb)
+    assert sum(1 for n in doc["nodes"] if n["name"] == "GoreBloodExplosion on ann") == 2   # 60 and 90, not 62
+
+
+def test_a_cutscene_that_streams_round_its_camera():
+    """NISDriveWorldStreamer Enable 1 (examiner H5.3): the world loads round the camera, not the player."""
+    on = C.read_script('NISDriveWorldStreamer { Enable 1; }; NISCharacterAnimation { CharacterName "A"; AnimationName "x"; };')
+    assert on.streams_by_camera
+    assert not C.read_script('NISDriveWorldStreamer { Enable 1; }; NISDriveWorldStreamer { Enable 0; };').streams_by_camera
+    assert not C.read_script("").streams_by_camera
+    assert C.camera_path(C.read_script(""), []) == []
+    cue = C.read_script('NISSequenceCue { CameraAnimationName "CAM_T"; Position { x -3411; y 20; z -1704; }; Facing 90; };')
+    assert C.camera_path(cue, []) == [(-3411.0, 20.0, -1704.0)]
+
+
+def test_the_camera_lens():
+    """The FOV channel is the horizontal angle for a 4:3 screen (examiner H7.3); glTF keeps the vertical one."""
+    import math
+    assert abs(C.vertical_fov(2 * math.atan(4 / 3)) - 2 * math.atan(1.0)) < 1e-9     # 4:3 → tan(v/2) = 3/4 tan(h/2)
+    assert C.vertical_fov(0.0) == 0.0
+    import struct
+    body = struct.pack("<I4sI", 0, b"FOV\0", 2) + struct.pack("<2H", 0, 30) + struct.pack("<2f", 0.696, 0.5)
+    data = struct.pack("<III", C.FLOAT_CHANNEL, 12 + len(body), 12 + len(body)) + body
+    ch = C.p3d.Chunk(C.FLOAT_CHANNEL, 0, 12 + len(body), 12 + len(body), 0)
+    param, frames, vals = C.float_keys(data, ch)
+    assert param == "FOV" and frames == [0, 30] and abs(vals[0] - 0.696) < 1e-6

@@ -288,6 +288,9 @@ class Geometry:
     normals: Optional[List[Vec3]] = None
     uvs: List[List[Tuple[float, float]]] = field(default_factory=list)
     colours: Optional[List[int]] = None             # ARGB
+    # a second colour set (the cbvlit program's v4: the examiner's block J0.2, a primitive group with two
+    # colour lists, its vertex type 0x4000 with a count of 2 in bits 15 to 17), ARGB
+    colours2: Optional[List[int]] = None
     joints: Optional[List[Tuple[int, int, int, int]]] = None   # skeleton joint numbers
     weights: Optional[List[Tuple[float, float, float, float]]] = None
 
@@ -457,6 +460,16 @@ def geometry(data: bytes, pg: p3d.Chunk) -> Optional[Geometry]:
             g.uvs.append(_floats(data, uv, 2, skip=4))
         if 0x10008 in kids:
             g.colours = _u32s(data, kids[0x10008][0])
+        elif 0x1001C in kids:
+            # Colour sets (vertex type 0x4000, how many in bits 15 to 17): u32 count, u32 set number, then the
+            # colours. Set 0 is the cbvlit program's v3, set 1 its v4 (the examiner's block J0.2).
+            sets = {}
+            for c in kids[0x1001C]:
+                cs = c.body[0]
+                n_, number = struct.unpack_from("<II", data, cs)
+                if cs + 8 + 4 * n_ <= c.body[1]:
+                    sets[number] = list(struct.unpack_from(f"<{n_}I", data, cs + 8))
+            g.colours, g.colours2 = sets.get(0), sets.get(1)
         if 0x1000C in kids and 0x1000B in kids:
             palette = _u32s(data, kids[0x1000D][0]) if 0x1000D in kids else list(range(256))
             packed = _u32s(data, kids[0x1000B][0])
@@ -600,6 +613,7 @@ class Play(NamedTuple):
     first: float        # the frame it starts on
     last: float         # the frame it ends on; smaller than first = backwards; equal = held still on it
     speed: float        # multiplies the animation's frame rate
+    bounce: bool = False  # each pass runs on to the end and back again (a ping-pong frame controller)
 
     @property
     def endless(self) -> bool:
@@ -609,6 +623,21 @@ class Play(NamedTuple):
     def rounds(self) -> int:
         """How many passes to write out: one for an endless animation (it is marked as looping)."""
         return 1 if (not self.repeat or self.passes == 0) else min(self.passes, 8)
+
+
+def controller_play(mode: int, cycles: float, frames: float) -> Optional[Play]:
+    """How a frame controller's cycle mode plays an animation of so many frames (clean-room spec SPEC-011
+    section 3.2), as a Play; None for mode 0 (ANIM, every shipped controller): as the animation says, round
+    and round when its cyclic word is 1, else once, holding the last frame. HOLD stays on the first frame;
+    FWD and BACK wrap, FDBK and BKFD go there and back (BACK and BKFD starting backwards), for their cycles
+    (0: no end)."""
+    last = max(0.0, float(frames) - 1.0)
+    passes = int(cycles or 0)
+    return {1: Play(False, 0, False, 0.0, 0.0, 1.0),
+            2: Play(True, passes, False, 0.0, last, 1.0),
+            3: Play(True, passes, False, last, 0.0, 1.0),
+            4: Play(True, passes, False, 0.0, last, 1.0, True),
+            5: Play(True, passes, False, last, 0.0, 1.0, True)}.get(mode)
 
 
 def prop_play(data: bytes, c: p3d.Chunk) -> Dict[str, Play]:
@@ -631,6 +660,34 @@ def prop_play(data: bytes, c: p3d.Chunk) -> Dict[str, Play]:
                                Play(bool(repeat), int(passes), bool(carry), float(start), float(end), speed))
         except (KeyError, IndexError, TypeError, ValueError, struct.error, p3d.P3dError):
             continue
+    return out
+
+
+def prop_order_mismatches(data: bytes, chunks: Sequence[p3d.Chunk]) -> List[Tuple[str, str, int, str, str]]:
+    """Where a prop's state entries and its frame controllers disagree by place (SPEC-009 section 2.2 and the
+    examiner's answer of 19 November 2026): the game gives the prop's controller i the state's entry i and
+    never compares names; the export matches them by name. The prop's controllers are read as the Frame
+    Controllers (0x121201) of its file that any of its entries name, in the file's order. [(prop, state, i,
+    the entry's name, the controller there)], empty when the two ways agree."""
+    controllers = [str(p3d.fields(data, c).get("name", "")) for c in p3d.walk(list(chunks)) if c.id == 0x121201]
+    out = []
+    for c in p3d.walk(list(chunks)):
+        if c.id != STATE_PROP_DATA:
+            continue
+        prop = chunk_name(data, c)
+        states = []
+        for st in c.children:
+            if st.id == PROP_STATE:
+                names = [str(p3d.fields(data, a).get("frame controller", "")) for a in st.children
+                         if a.id == PROP_ANIMATION]
+                states.append((str(p3d.fields(data, st).get("name", "")), names))
+        used = {n.lower() for _s, names in states for n in names}
+        own = [n for n in controllers if n.lower() in used]
+        for state, names in states:
+            for i, name in enumerate(names):
+                there = own[i] if i < len(own) else ""
+                if name.lower() != there.lower():
+                    out.append((prop, state, i, name, there))
     return out
 
 
@@ -657,6 +714,9 @@ def played(keys: List[Tuple[float, tuple]], play: Play, rate: float, turn: bool)
         marks.reverse()
     span = (hi - lo) / rate / play.speed
     one = [(abs(f - play.first) / rate / play.speed, at(f)) for f in marks]
+    if play.bounce:                                            # on to the end, then back the same way
+        one += [(2 * span - t, v) for t, v in reversed(one[:-1])]
+        span *= 2
     times, vals = [], []
     for n in range(play.rounds):
         for t, v in one[(1 if n else 0):]:                     # a later pass starts where the one before ended
@@ -1123,6 +1183,7 @@ class Builder:
         self.posed: set = set()                    # the animations a pose was taken from (id of the chunk)
         self._animations: Optional[Dict[str, List[Ref]]] = None
         self._plays: Optional[Dict[str, Play]] = None
+        self._modes: Optional[Dict[str, Tuple[int, float]]] = None
         self.shaped: Dict[int, list] = {}          # glTF mesh with shapes -> the sliders that work them
         self.prop = False                          # set while a placed prop goes in (its leaves: see mesh)
         self.decals: Dict[tuple, int] = {}         # a mesh's key -> the glTF mesh of its shadow decals
@@ -1336,6 +1397,11 @@ class Builder:
                 attrs["COLOR_0"] = self.g.accessor([(LINEAR16[(c >> 16) & 255], LINEAR16[(c >> 8) & 255],
                                                      LINEAR16[c & 255], ((c >> 24) & 255) * 257)
                                                     for c in geo.colours], "VEC4", 5123, normalized=True, target=34962)
+            if geo.colours2 and len(geo.colours2) == len(geo.positions):
+                # the second set: what a cbvlit surface with CLRE blends to as the hour's CbvLitBlendValue falls
+                attrs["COLOR_1"] = self.g.accessor([(LINEAR16[(c >> 16) & 255], LINEAR16[(c >> 8) & 255],
+                                                     LINEAR16[c & 255], ((c >> 24) & 255) * 257)
+                                                    for c in geo.colours2], "VEC4", 5123, normalized=True, target=34962)
             if skinned_to is not None and geo.joints and geo.weights:
                 joints, weights = [], []
                 for js, ws in zip(geo.joints, geo.weights):
@@ -1806,6 +1872,22 @@ class Builder:
                             self._plays.setdefault(via.get(fc, fc), how)
         return self._plays.get(name.lower())
 
+    def controller_mode(self, name: str) -> Optional[Tuple[int, float]]:
+        """(cycle mode, cycles) of the frame controller playing the animation called name, when its mode isn't
+        0 (ANIM: as the animation says). SPEC-011 section 3.1."""
+        if self._modes is None:
+            self._modes = {}
+            for src in self.lib.sources:
+                for c in src.chunks:
+                    if c.id == FRAME_CONTROLLER:
+                        try:
+                            f = p3d.fields(src.data, c)
+                        except (p3d.P3dError, struct.error, IndexError, UnicodeDecodeError):
+                            continue
+                        if f.get("mode"):
+                            self._modes.setdefault(str(f.get("animation", "")).lower(), (f["mode"], f.get("cycles", 0)))
+        return self._modes.get(name.lower())
+
     def sky_colours(self, ref: Ref) -> Optional[Tuple[float, Dict[int, Vec3]]]:
         """For a mesh with vertex-colour sets (0x121305), at self.hour: (the set number its animation
         VRTX_<mesh name> gives, with its fraction; what to add to each vertex's own colour, blended between
@@ -1998,6 +2080,10 @@ class Builder:
         info = p3d.fields(data, c)
         rate = info.get("frame rate") or 30.0
         play = self.play_settings(info.get("name") or "")
+        if play is None:                                     # a prop state wins; else the frame controller's mode
+            mode = self.controller_mode(info.get("name") or "")
+            if mode is not None:
+                play = controller_play(mode[0], mode[1], info.get("frames") or 1)
         groups = []
         gl = c.find(ANIM_GROUP_LIST)
         for gc in (gl.children if gl else []):
@@ -2424,6 +2510,20 @@ def instance_objects(src: Source) -> List[Tuple[str, List[List[int]]]]:
 
 
 def _model_for(lib: Library, name: str, prefer: Sequence[Source]) -> Optional[Ref]:
+    """The model an instance object names: the drawable of the state prop of that name (the examiner's block
+    H6.1: the game binds a modelName only to a pure3d::prop::StatePropData by its Name, late, on every package
+    load, and never draws an instance with none). On the PC every instance model that has a model at all has a
+    state prop of its name; 21 names (589 copies: arcadea, jukeboxa, treetops ...) have nothing, in any package.
+    A composite of the name is still taken when no state prop has it (made-up files; never in the game's)."""
+    sp = lib.find("stateprop", name, prefer)
+    if sp:
+        p = _text(sp.data, sp.chunk.body[0])[1]
+        found = lib.find("composite", _text(sp.data, p)[0], (sp.source,) + tuple(prefer))
+        if found:
+            return found
+    return lib.find("composite", name, prefer)
+
+
     """The model an instance object names: a composite drawable of that name, or a state prop's."""
     ref = lib.find("composite", name, prefer)
     if ref:
@@ -2687,6 +2787,16 @@ def export(lib: Library, map_mode: bool = False, only: Sequence[str] = (), anims
     if also is not None:
         also(b)
     _scene_extras(b, hour, weather, fog)
+    # SPEC-009 section 2.2: the game hands a prop's controllers its state's entries by place; the export matches
+    # them by name. Say where the two ways part (none in a file means both agree there).
+    for src in lib.sources:
+        if src.main and any(c.id == STATE_PROP_DATA for c in src.chunks):
+            apart = prop_order_mismatches(src.data, src.chunks)
+            if apart:
+                prop, state, i, name, there = apart[0]
+                b.report.notes.append(f"{src.label}: {len(apart)} prop state entr{'y' if len(apart) == 1 else 'ies'} "
+                                      f"name another frame controller than the one in their place (first: {prop}, "
+                                      f"state {state}, entry {i}: {name}, by place {there or 'none'}); played by name")
     if not b.g.doc["scenes"][0]["nodes"]:
         raise ExportError("nothing in these files to export" + (" (is it a map area? try --map)" if not map_mode and
                                                                  any(_world_geo(lib, s) for s in lib.sources) else ""))

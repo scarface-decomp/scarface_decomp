@@ -555,3 +555,20 @@ The small step functions (`0x2A4530` to `0x2A4F20`) are not separate entries in 
 * **What does the spawn rate count as before its first key?** As the first key's value, for the whole step
   that starts there; after the last key, as the last key's value (§1.7). The one-frame bursts therefore come
   at the very start of an effect.
+
+*From the implementer, 19 November 2026, after building §10 steps 1 to 9 with the answers above (run on made-up
+files only so far; the founder's computer was offline):*
+
+* **Built.** `p3d.py` reads `0x1580C`, `0x15900` and the generators; `particles.py` plays a system by §1.5 to
+  §1.8: `RAT` held flat outside its keys, forward along +Y with the two half-angle spreads, `RDVA` along the
+  direction, the plane's rectangle across +Y and the sphere's ball with the same spreads.
+  `cutscene_fx.py` puts each particle in the glTF as a square facing the camera. In cutscenes:
+  `NISCharacterEffect` by §2 (a second one on the same body and system while the first lives adds nothing:
+  §1.9); `BloodPool` by §4.2; gun fire by §3 and §1.10 (every shot starts the `fire1` effects anew and winds
+  the last shot's down; the last shot's run until the trigger is let go); prop-state effects wound down when
+  the prop enters its next state; `NISFade` by §5. §7: the gun sits on `right_hand_attach` with no turn
+  towards the other hand.
+* **Not built:** the wall splash and the mark on the target's model (§2.2: the export has no collision to
+  cast the ray against); the start-kind word of §1.10 (every effect is held on its joint); picture modes 1
+  to 3 (the birth picture is kept) and turning mode 2 (drawn unturned); particles of one step spread along
+  the emitter's path.

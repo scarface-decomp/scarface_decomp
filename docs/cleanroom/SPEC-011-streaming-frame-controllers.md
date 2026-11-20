@@ -203,4 +203,36 @@ The advance itself, `sub_00275E40`, is already in the guide from SPEC-009.
 
 ## Questions from the implementer, and answers
 
-*(none yet)*
+*From the implementer, 19 November 2026, after building §6 steps 1 to 5 and running them on the PC's files:*
+
+* **Built.** `stream_graph.py`: the prism test (§1.2: box, crossing count on the outline counted in tenths,
+  the base and height in tenths cut down, height 0 no limit), one trigger (§1.3: the first in file order
+  whose prism holds the place, `loadTrigger_258`, the one that gives way, last), and exactly its list (§2).
+  The zone scripts' triggers (`dzone_triggers.dso`: 61, `azone_triggers.dso`: 27) are read from the
+  decompiled scripts and their packages added. `p3d.py` reads the frame controller by §3.1;
+  `p3d_gltf.controller_play` plays the five modes of §3.2 (mode 0 left to the animation's cyclic word).
+  `check_frame_controllers.py` and a test (run with the game's files) look at every controller.
+* **On the PC's files:** all **588** frame controllers are `ANIM`, 0 cycles, for ever, version 1 (160 `PTRN`,
+  131 `PSYS`, 121 `BQG`, 80 `TEX`, 38 `VRTX`, 31 `PVIS`, 20 `LITE`, 7 `CAM`). All 6,652 prop state effects
+  (`0x0802000B`) have 0 in both their "number" fields, so whichever is SPEC-010 §1.10's start-kind, every
+  shipped effect is held on its joint.
+* **Jerry's office** (`NIS_10_jerry`, Tony at x −1375, y 13.8, z 431.5): `loadTrigger_448` holds the place on
+  the ground but stops at 10, so **no prism holds it**, and by §1.3 the game keeps what it had. The
+  furniture there (desks, chairs, books: `luxurybank_02_detailB`) is only in `loadTrigger_400`'s list
+  (subzone `luxurybank_02_shell`, no height limit, 26 units away at the back of the bank). The dzone script
+  adds `cgrove_branchBank_dzone` there (plants, ashtrays, cameras), not furniture. The export now takes,
+  above every prism, a trigger that reaches the height and whose outline meets a trigger under you, the
+  building's own first (the street's `loadTrigger_233` touches 448 too and is nearer, but loads no
+  `detailB`), then the nearest: `loadTrigger_400`, whose outline overlaps 448's.
+* **Answer to (a), from the examiner (block G3), and the files.** The current trigger is the global at
+  `0x481AF4`, updated by `sub_00090990` (change: `sub_00090C90`); outside every prism the update finds none
+  and nothing changes. The examiner's fallback, "the trigger under you" (y clamped into its prism), gives
+  448 here, which does not load `detailB`. The files say the way up is through 400: its outline (x −1387 to
+  −1365, z 457.5 to 478.8) overlaps 448's (z to 472.3), it has no height limit and it comes first in the
+  file, so in the overlap it applies at every height, and leaving it above y 10 enters no prism. The export
+  uses that rule and keeps "the trigger under you" only where no neighbour reaches the height.
+* **Questions.** (a) Is that right for the bank: does the way upstairs pass through `loadTrigger_400`, so
+  `luxurybank_02_detailB` is still loaded in Jerry's office? (b) The point fed to §1.3: the player's or the
+  camera's? A cutscene's camera can stand in another trigger from the people. (c) The coarser outline step
+  when an outline is too wide for tenths: how is it chosen? The export uses width / 32767. (d) §6 step 6
+  (matching the §5 functions) needs the compiler, which runs on the founder's computer; not done here.

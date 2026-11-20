@@ -558,3 +558,23 @@ For the implementer. Choose your own names; keep each step small.
   * the next caption starts after it, skipping one `#` or `@` there (a `#` also moves the speaker on);
   * the time share uses the caption's own length (first to last character, inclusive).
 
+*From the implementer, 19 November 2026, on the two answers above:*
+
+* **Order or name.** `p3d_gltf.prop_order_mismatches` and `portal/scripts/check_prop_order.py` list every
+  entry whose name is not the controller in its place (the controllers read as those of the file that the
+  prop's entries name, in file order). Not yet run on the PC's files.
+* **The 80 characters.** `cutscene.caption_spans` now counts over the stored text, marks included, keeps the
+  rest whole only when (stored length − first + 1) ≤ 80, skips one mark after a cut, and shares the time by
+  each caption's stored length. **A question:** read literally, a remainder short enough to be kept whole
+  keeps any `#` or `@` inside it, so `Hello?#Hey.` would be one caption with the mark showing. The export
+  still ends a caption at a mark inside a short remainder. Does the game check for marks before the length?
+
+*Run on the PC's files, 19 November 2026:* 286 files hold 3,010 props; **219 entries** name another
+controller than the one in their place, when "the prop's own list" is read as the file's frame controllers
+that its entries name, in file order. Examples: `tmOfficeTv` in `art/ecoprops/tonyOffice_01_shell_ecoprops.p3d`
+(entries name the screens `tvs7` to `tvs11`; the file's order is 11, 10, 7, 8, 9); `gFX_TM_HotTub` in
+`tonymansion_02_detailB_ecoprops.p3d` (entries 0 and 2 swapped against the file); `fx_splash` in
+`art/nis/NIS_19_nachos_death/static.p3d`. **A question:** is the prop's list of frame controllers the
+file's order, or a list of its own somewhere (its composite drawable's parts, a list in the State Prop
+Data)? If the file's order is right, these props play the wrong animation on each part in the game and
+the export (by name) differs from it.

@@ -29,6 +29,7 @@ from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
 import p3d
 import p3d_gltf as G
+import cutscene_fx as CFX
 
 ACTION = "Cutscene "                   # the animation's name starts with this (Blender's script looks for it)
 TONY = "maincharacter"
@@ -90,7 +91,7 @@ def outfit_for(wears: Dict[str, str], scene: str) -> str:
 _BLOCK = re.compile(r"\b(NISResourceLoader|NISCharacterPosition|NISObjectPosition|NISCharacterAnimation|"
                     r"NISVehicleAnimation|NISSequenceCue|NISSwapModel|NISWeaponAttach|NISExpAnimation|"
                     r"NISWeaponFire|NISStatePropState|NISRenderableTrack|NISRenderableAnimationTrack|NISFade|"
-                    r"NISCharacterEffect)\s*\{")
+                    r"NISCharacterEffect|NISDriveWorldStreamer)\s*\{")
 _FIELD = re.compile(r'\b(\w+)\s+(?:"([^"]*)"|(-?[\d.]+(?:e-?\d+)?))\s*;')
 
 
@@ -110,16 +111,21 @@ class Script:
         # A weapon is put in a hand at a frame, and another may take its place later; it fires from a frame
         # to a frame; a prop of the map is put in a state at a frame (a door whole, then blown apart).
         self.holds_at: Dict[str, List[Tuple[int, str]]] = {}        # person (lower) -> [(frame, weapon template)]
-        self.fires: Dict[str, List[Tuple[int, int]]] = {}           # person (lower) -> [(first frame, last frame)]
+        # person (lower) -> [(first frame, last frame, alternate fire)]: the fire control held (SPEC-010 section 3.1)
+        self.fires: Dict[str, List[Tuple[int, int, bool]]] = {}
         self.prop_states: Dict[str, List[Tuple[int, str]]] = {}     # prop's name in the script -> [(frame, state)]
         # The scene's own props (a cabinet's doors, a glass, a tray): its name for each -> the model in the
         # scene's static.p3d, and the animation that moves it.
         # The screen fading to a colour and back: (frame, frames to fade in, frames held, frames to fade out,
         # (r, g, b) 0 to 1). Effects on people: (person (lower), kind, joint, frame).
         self.fades: List[Tuple[int, int, int, int, Tuple[float, float, float]]] = []
-        self.effects: List[Tuple[str, str, str, int]] = []
+        # (target (lower), effect type, joint, frame, source (lower) or ""): NISCharacterEffect (SPEC-010 section 2)
+        self.effects: List[Tuple[str, str, str, int, str]] = []
         self.renderables: Dict[str, str] = {}
         self.renderable_moves: Dict[str, str] = {}
+        # NISDriveWorldStreamer Enable 1: from then on the world streams round the camera, not the player
+        # (the examiner's block H5.3: the action at 0x180EC0 pushes the active camera on the streamer's stack)
+        self.streams_by_camera = False
         self.swaps: Dict[str, str] = {}                     # person (lower) -> the cutscene model they are changed
         #                                                     into (NISSwapModel), kept in the scene's static.p3d
 
@@ -164,7 +170,8 @@ def read_script(text: str) -> Script:
         elif kind == "NISWeaponFire" and f.get("CharacterName") and isinstance(f.get("FrameBegin"), float):
             end = f.get("FrameEnd")
             s.fires.setdefault(str(f["CharacterName"]).lower(), []).append(
-                (int(f["FrameBegin"]), int(end) if isinstance(end, float) else int(f["FrameBegin"]) + 6))
+                (int(f["FrameBegin"]), int(end) if isinstance(end, float) else int(f["FrameBegin"]) + 6,
+                 bool(f.get("IsSecondaryWeapon"))))
         elif kind == "NISFade" and isinstance(f.get("FrameBegin"), float):
             num = lambda k: int(f[k]) if isinstance(f.get(k), float) else 0
             s.fades.append((num("FrameBegin"), num("FadeInFrames"), num("DurationFrames"), num("FadeOutFrames"),
@@ -172,7 +179,8 @@ def read_script(text: str) -> Script:
             s.fades.sort()
         elif kind == "NISCharacterEffect" and f.get("CharacterName") and f.get("EffectType"):
             s.effects.append((str(f["CharacterName"]).lower(), str(f["EffectType"]), str(f.get("JointName") or ""),
-                              int(f["FrameBegin"]) if isinstance(f.get("FrameBegin"), float) else 0))
+                              int(f["FrameBegin"]) if isinstance(f.get("FrameBegin"), float) else 0,
+                              str(f.get("SourceCharacterName") or "").lower()))
         elif kind == "NISRenderableTrack" and f.get("RenderableName") and f.get("CompositeDrawableName"):
             s.renderables.setdefault(str(f["RenderableName"]), str(f["CompositeDrawableName"]))
         elif kind == "NISRenderableAnimationTrack" and f.get("RenderableName") and f.get("AnimationName"):
@@ -187,6 +195,8 @@ def read_script(text: str) -> Script:
             s.tony = re.sub(r"Drawable$", "", str(f["newModel"]), flags=re.I)
         elif kind == "NISSwapModel" and f.get("Character") and f.get("newModel"):
             s.swaps.setdefault(str(f["Character"]).lower(), str(f["newModel"]))
+        elif kind == "NISDriveWorldStreamer":
+            s.streams_by_camera = bool(f.get("Enable"))           # the last one in the script holds
         elif kind == "NISSequenceCue" and f.get("CameraAnimationName") and not s.camera:
             s.camera = str(f["CameraAnimationName"])
             # A cue with a place of its own: the camera's move is measured from there, not from the map's
@@ -230,32 +240,49 @@ def line_path(name: str, language: str = "english") -> str:
     return f"localised\\{language}\\{name}"
 
 
-def split_line(text: str) -> List[Tuple[int, str]]:
-    """A line cut into captions the way the game does: [(speaker number, caption)]. `#` ends a caption and
-    moves to the next speaker; `@` ends one with the same speaker; otherwise a caption is at most 80
-    characters, cut at the last . ! or ? within them, else the last , or ; else the last space."""
-    out: List[Tuple[int, str]] = []
-    speaker = 0
-    for part in re.split(r"(#|@)", text):
-        if part == "#":
+def caption_spans(text: str) -> List[Tuple[int, str, int]]:
+    """A line cut into captions the way the game does (SPEC-009 section 4.4, with the examiner's answer of 19
+    November 2026): [(speaker number, caption, its length as the game counts it)]. The count runs over the
+    text as stored, marks and all. From a caption's first character: the rest of the line is one caption
+    when (the stored length - that position + 1) is at most 80 and it has no mark in it; otherwise, among the
+    80 characters from there, the first `#` or `@` ends the caption just before it, else the last `.`, `!` or
+    `?`, then the last `,` or `;`, then the last space ends it, that character included. The next caption
+    starts after it, skipping one `#` or `@` there; a `#` moves to the next speaker. A caption's length (first
+    to last character) is what its share of the line's time goes by."""
+    out: List[Tuple[int, str, int]] = []
+    speaker, pos, n = 0, 0, len(text)
+    while pos < n:
+        rest = text[pos:]
+        if n - pos + 1 <= CAPTION_LENGTH and "#" not in rest and "@" not in rest:
+            piece, nxt, mark = rest, n, ""
+        else:
+            window = text[pos:pos + CAPTION_LENGTH]
+            marks = [i for i in (window.find("#"), window.find("@")) if i >= 0]
+            if marks:
+                cut = min(marks)
+                piece, nxt, mark = window[:cut], pos + cut + 1, window[cut]
+            else:
+                cut = max(window.rfind(ch) for ch in ".!?")
+                if cut < 0:
+                    cut = max(window.rfind(ch) for ch in ",;")
+                if cut < 0:
+                    cut = window.rfind(" ")
+                cut = cut if cut >= 0 else len(window) - 1
+                piece, nxt, mark = window[:cut + 1], pos + cut + 1, ""
+                if nxt < n and text[nxt] in "#@":        # a mark right after the cut is skipped too
+                    mark, nxt = text[nxt], nxt + 1
+        shown = " ".join(piece.split())
+        if shown:
+            out.append((speaker, shown, len(piece)))
+        if mark == "#":
             speaker += 1
-            continue
-        if part == "@":
-            continue
-        left = " ".join(part.split())
-        while len(left) > CAPTION_LENGTH:
-            head = left[:CAPTION_LENGTH]
-            cut = max(head.rfind(c) for c in ".!?")
-            if cut < 0:
-                cut = max(head.rfind(c) for c in ",;")
-            if cut < 0:
-                cut = head.rfind(" ")
-            cut = cut if cut >= 0 else CAPTION_LENGTH - 1
-            out.append((speaker, left[:cut + 1].strip()))
-            left = left[cut + 1:].strip()
-        if left:
-            out.append((speaker, left))
+        pos = nxt
     return out
+
+
+def split_line(text: str) -> List[Tuple[int, str]]:
+    """A line cut into captions the way the game does: [(speaker number, caption)] (caption_spans)."""
+    return [(s, t) for s, t, _n in caption_spans(text)]
 
 
 def captions(lines: List[dict], entry_of: Callable[[str], Optional[dict]]) -> List[dict]:
@@ -270,13 +297,13 @@ def captions(lines: List[dict], entry_of: Callable[[str], Optional[dict]]) -> Li
             continue
         begin = entry.get("begin") or line["begin"]                   # the file's own times replace the script's
         total = entry.get("total") or line["total"]
-        parts = split_line(entry["text"])
-        letters = sum(len(t) for _s, t in parts)
+        parts = caption_spans(entry["text"])
+        letters = sum(n for _s, _t, n in parts)
         if not parts or total <= 0 or not letters:
             continue
         at = line["frame"] / FRAMES_A_SECOND + begin / 1000.0
-        for speaker, text in parts:
-            lasts = total / 1000.0 * len(text) / letters
+        for speaker, text, count in parts:
+            lasts = total / 1000.0 * count / letters
             out.append({"start": round(at, 3), "end": round(at + lasts, 3), "speaker": speaker, "text": text,
                         "line": line["name"]})
             at += lasts
@@ -383,7 +410,8 @@ def _burst_mesh(b: G.Builder, size: float, rgba, add: bool, kind: str = "effect"
 PLACED = re.compile(rb"\x00(\w+)\x00(-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) [\d.]+ [\d.]+ [\d.]+ \d+ \w+\x00")
 
 
-def _prop_states(b: G.Builder, lib: G.Library, script: Script, tracks: _Tracks, later, near) -> List[str]:
+def _prop_states(b: G.Builder, lib: G.Library, script: Script, tracks: _Tracks, later, near,
+                 fx: Optional[CFX.Effects] = None) -> List[str]:
     """The map's props the script puts in a state at a frame (NISStatePropState: the office doors whole,
     then blown apart), each state there for its frames. The script names a prop its own way ("OfficeDoors",
     "Railing"); the prop is the placed one whose model or one of whose joints has that name in it, the
@@ -442,24 +470,186 @@ def _prop_states(b: G.Builder, lib: G.Library, script: Script, tracks: _Tracks, 
             if len(times) > 1:
                 tracks.add(top, "scale", later(times), sizes, step=True)
             # what the game sets off as the prop enters the state: the blast, wood flying, smoke, fire
-            for kind, at_, size_, begin in effects.get(state.lower(), []) if frame > 0 or n > 0 else []:
-                look = _prop_effect_look(kind, size_)
-                fx = b.g.node(kind + " (" + wanted + ")", home, translation=list(G.pos(at_)), mesh=_burst_mesh(b, *look[:3]),
-                              extras={"effect": kind})
+            for k, (kind, at_, size_, begin, joint, angles) in enumerate(
+                    effects.get(state.lower(), []) if frame > 0 or n > 0 else []):
                 first = frame + int(round(begin * FRAMES_A_SECOND))
-                last = first + look[3] if until is None else min(until, first + look[3])
-                if last <= first:
+                if until is not None and until <= first:
                     continue
-                tracks.add(fx, "scale", later([0.0, first / FRAMES_A_SECOND, last / FRAMES_A_SECOND]),
+                anchor = _joint_under(b.g.doc, top, joint) if joint else top
+                place = b.g.node(kind + " (" + wanted + ")", anchor, translation=list(G.pos(at_)),
+                                 rotation=list(CFX.angles_turn(angles)), extras={"effect": kind})
+                if fx is not None and fx.systems_of(kind):
+                    # the game's own particles; a looping one (fire) until the prop leaves the state
+                    fx.play(kind, place, first, tracks, later, size=size_ or 1.0, seed=n + k,
+                            frames=(until - first) if until is not None else None)
+                    continue
+                look = _prop_effect_look(kind, size_)                  # without the effects file: a card
+                b.g.doc["nodes"][place]["mesh"] = _burst_mesh(b, *look[:3])
+                last = first + look[3] if until is None else min(until, first + look[3])
+                tracks.add(place, "scale", later([0.0, first / FRAMES_A_SECOND, last / FRAMES_A_SECOND]),
                            [GONE, (1.0, 1.0, 1.0), GONE], step=True)
     return lost
 
 
-def _state_effects(b: G.Builder, ref: G.Ref, name: str) -> Dict[str, List[Tuple[str, tuple, float, float]]]:
-    """{state (lower): [(effect name, offset from the prop, size, start in seconds)]}: the Prop State
-    Effects (0x0802000B) of each of a prop's states (SPEC-009 section 2.5: the last float is when it starts)."""
+def fade_keys(fade_in: int, hold: int, fade_out: int, rgb: Sequence[float]) -> List[Tuple[int, float]]:
+    """An NISFade as (frames from its start, how much of the colour covers the screen) with straight lines
+    between (SPEC-010 section 5). A black fade with no hold is the scene's end (longer in than out: to black
+    over the fade-in, and it stays) or its start (black, clearing over the fade-out). Any other fade goes to
+    its colour over the fade-in, holds (for ever when the hold is negative), and clears over the fade-out."""
+    if not any(rgb) and hold <= 0:
+        if fade_in > fade_out:
+            return [(0, 0.0), (fade_in, 1.0)]
+        return [(0, 1.0), (fade_out, 0.0)]
+    keys = [(0, 0.0 if fade_in > 0 else 1.0), (fade_in, 1.0)]
+    if hold >= 0:
+        keys += [(fade_in + hold, 1.0), (fade_in + hold + fade_out, 0.0)]
+    return [k for i, k in enumerate(keys) if i == 0 or k != keys[i - 1]]
+
+
+def _gun_fire(b: G.Builder, fx: Optional[CFX.Effects], gref: G.Ref, wanted: str, grip: int,
+              muzzle: Optional[Sequence[float]], shots: Sequence[Tuple[int, int, bool]], rate: float, tracks: _Tracks,
+              later, label: str, tracer_every: int = CFX.TRACER_EVERY) -> None:
+    """A held gun's shots (SPEC-010 section 3.2). Without the effects file, a stand-in flash at the muzzle."""
+    states = _state_effects(b, gref, wanted)
+    tracer_ref = b.lib.find("composite", CFX.TRACER)
+    anchors: Dict[Tuple[str, int], int] = {}
+    tracer_times: List[float] = [0.0]
+    tracer_sizes: List[tuple] = [GONE]
+    bullet = 0
+    played = 0
+    for a, z, alt in sorted(shots):
+        # alternate fire plays "fire2"; a gun without one (an Uzi: the cutscenes' gunmen all fire this way, and
+        # are seen firing) plays its "fire1"
+        effects = states.get("fire2", []) if alt else []
+        launcher = bool(effects)
+        effects = effects or states.get("fire1", [])
+        # the grenade launcher: one grenade a press (its rate isn't known: asked in SPEC-010)
+        frames = [float(a)] if launcher else CFX.shot_frames(a, z, rate)
+        for k, f0 in enumerate(frames):
+            bullet += 1
+            # each shot enters the state again: this shot's effects start, and the last shot's wind down
+            # (SPEC-010 section 1.10); the last shot's go on until the trigger is let go
+            until = (frames[k + 1] if k + 1 < len(frames) else max(float(z), f0 + 1.0)) - f0
+            for e, (kind, at, size, begin, joint, angles) in enumerate(effects):
+                if fx is None or not fx.systems_of(kind):
+                    continue
+                if (kind, e) not in anchors:
+                    anchors[(kind, e)] = b.g.node(label + "'s " + kind, _joint_under(b.g.doc, grip, joint) if joint else grip,
+                                                  translation=list(G.pos(at)), rotation=list(CFX.angles_turn(angles)),
+                                                  extras={"effect": kind})
+                fx.play(kind, anchors[(kind, e)], f0 + begin * FRAMES_A_SECOND, tracks, later, size=size or 1.0,
+                        seed=bullet, label=kind + " (shot " + str(bullet) + ")", frames=until - begin * FRAMES_A_SECOND)
+                played += 1
+            if tracer_ref is not None and effects and bullet % tracer_every == 0:
+                tracer_times += [f0 / FRAMES_A_SECOND, (f0 + 1) / FRAMES_A_SECOND]
+                tracer_sizes += [(1.0, 1.0, 1.0), GONE]
+    if played and tracer_ref is not None and len(tracer_times) > 1:
+        at = muzzle if muzzle is not None else (0.0, 0.0, 0.0)
+        tracer = b.g.node(label + "'s tracers", grip, translation=list(at), extras={"effect": CFX.TRACER})
+        b.composite(tracer_ref, tracer, label + "'s tracer")
+        tracks.add(tracer, "scale", later(tracer_times), tracer_sizes, step=True)
+    if played:
+        return
+    at = muzzle if muzzle is not None else (0.0, 0.0, 0.0)              # no effects file: a stand-in flash
+    flash = b.g.node(label + "'s muzzle flash", grip, translation=list(at), mesh=_flash_mesh(b), extras={"effect": "flash"})
+    times, sizes = [0.0], [GONE]
+    for a, z, _alt in sorted(shots):
+        for f0 in CFX.shot_frames(a, z, rate):
+            times += [f0 / FRAMES_A_SECOND, (f0 + 1) / FRAMES_A_SECOND]
+            sizes += [(1.0, 1.0, 1.0), GONE]
+    tracks.add(flash, "scale", later(times), sizes, step=True)
+
+
+def _in_scene(doc: dict, pose: tuple, joint: str, t: float) -> Optional[Tuple[G.Vec3, G.Quat]]:
+    """A joint of someone in the scene's space at a time (seconds): their skeleton's pose put on their spot."""
+    copy, keys, stand, turn = pose
+    got = joint_world(doc, copy, keys, joint, t)
+    if got is None:
+        return None
+    at, q = got
+    moved = _qturn(turn, at)
+    return (stand[0] + moved[0], stand[1] + moved[1], stand[2] + moved[2]), _qmul(turn, q)
+
+
+def _character_effect(b: G.Builder, fx: Optional[CFX.Effects], root: int, bodies: Dict[str, G.SkeletonCopy],
+                      poses: Dict[str, tuple], who: str, kind: str, joint: str, frame: int, by: str, tracks: _Tracks,
+                      later, start: float, length: float) -> None:
+    """An NISCharacterEffect (SPEC-010 section 2): the type's particles at the joint (the head for a
+    headshot), turned to spray away from the source's neck; a blood pool, a growing decal under them."""
+    body = bodies.get(who)
+    if body is None:
+        return
+    found = CFX.character_effect(kind)
+    system, size = found if found is not None else (None, 1.0)
+    if found is not None and system is None:                 # a blood pool, under them, on their floor
+        pose = poses.get(who)
+        place = _in_scene(b.g.doc, pose, "pelvis", frame / FRAMES_A_SECOND) if pose else None
+        if place is None:
+            return
+        floor = pose[2][1]
+        pool = b.g.node("blood pool under " + who, root, translation=[place[0][0], floor + 0.01, place[0][2]],
+                        mesh=CFX.pool_mesh(b), scale=list(GONE), extras={"effect": kind})
+        times, sizes = CFX.pool_keys(frame)
+        tracks.add(pool, "scale", later(times), sizes)
+        return
+    wanted = CFX.HEADSHOT_JOINT if found is not None and system == "fxSys_Blood_HeadshotShape" else joint.lower()
+    node = body.nodes.get(wanted)
+    if node is None:                                         # a joint this model doesn't have: the chest
+        node = body.nodes.get("spine_2") or next(iter(body.nodes.values()), None)
+        wanted = "spine_2"
+    if node is None:
+        return
+    turn = None
+    if by and by in poses and who in poses:                  # away from the shooter (section 2.2)
+        t = frame / FRAMES_A_SECOND
+        # from the shooter's neck (a model without one: its head, else its root)
+        source = next((got for got in (_in_scene(b.g.doc, poses[by], j, t) for j in (CFX.SOURCE_JOINT, "head", "root"))
+                       if got is not None), None)
+        target = _in_scene(b.g.doc, poses[who], wanted, t)
+        if source is not None and target is not None:
+            way = tuple(c - d for c, d in zip(target[0], source[0]))
+            if sum(c * c for c in way) > 1e-8:
+                jq = target[1]
+                turn = _qmul((-jq[0], -jq[1], -jq[2], jq[3]), CFX.facing(way))
+    if fx is not None and system and fx.systems_of(system):
+        # the game plays it again only once the last one has ended: while that one lives, it is only moved
+        # (SPEC-010 section 1.9), so a hit that comes while the last is still spraying adds nothing new
+        alive = getattr(b, "_alive_fx", None)
+        if alive is None:
+            alive = b._alive_fx = {}                         # type: ignore[attr-defined]
+        key = (id(body), system.lower())
+        when = start * FRAMES_A_SECOND + frame
+        if alive.get(key, -1.0) > when:
+            return
+        place = b.g.node(kind + " on " + who, node, rotation=list(turn) if turn else None, extras={"effect": kind})
+        fx.play(system, place, frame, tracks, later, size=size, seed=frame)
+        alive[key] = when + fx.last_end
+        return
+    sz, frames, _rgba, _add = _effect_look(kind)                # without the effects file: a card
+    burst = b.g.node(kind + " on " + who, node, mesh=_effect_mesh(b, kind), extras={"effect": kind})
+    times = [0.0, frame / FRAMES_A_SECOND, (frame + frames) / FRAMES_A_SECOND] if frame > 0 else \
+        [0.0, frames / FRAMES_A_SECOND]
+    sizes = [GONE, (1.0, 1.0, 1.0), GONE] if frame > 0 else [(1.0, 1.0, 1.0), GONE]
+    tracks.add(burst, "scale", later(times), sizes, step=True)
+
+
+def _joint_under(doc: dict, top: int, joint: str) -> int:
+    """The node of a joint under a placed prop or gun (by name, letter case aside), else the top."""
+    todo, want = [top], joint.lower()
+    while todo:
+        i = todo.pop()
+        if (doc["nodes"][i].get("name") or "").lower() == want:
+            return i
+        todo += doc["nodes"][i].get("children", [])
+    return top
+
+
+def _state_effects(b: G.Builder, ref: G.Ref, name: str) -> Dict[str, List[Tuple[str, tuple, float, float, str, tuple]]]:
+    """{state (lower): [(effect name, offset from its joint, size, start in seconds, joint, angles)]}: the Prop
+    State Effects (0x0802000B) of each of a prop's states (SPEC-009 section 2.5: the last float is when it
+    starts; SPEC-010 section 1.10: the size multiplies the particles' size, offset and angles place it)."""
     data = b.prop_data(ref, name)
-    out: Dict[str, List[Tuple[str, tuple, float, float]]] = {}
+    out: Dict[str, List[Tuple[str, tuple, float, float, str, tuple]]] = {}
     if data is None:
         return out
     for st in data.chunk.children:
@@ -471,7 +661,8 @@ def _state_effects(b: G.Builder, ref: G.Ref, name: str) -> Dict[str, List[Tuple[
                 f = p3d.fields(data.data, e)
                 if f.get("kind") == "Effect" and f.get("effect"):
                     out.setdefault(state, []).append((str(f["effect"]), tuple(f.get("offset") or (0, 0, 0)),
-                                                      float(f.get("size") or 1.0), float(f.get("value") or 0.0)))
+                                                      float(f.get("size") or 1.0), float(f.get("value") or 0.0),
+                                                      str(f.get("joint") or ""), tuple(f.get("angles") or (0, 0, 0))))
     return out
 
 
@@ -736,8 +927,32 @@ def _joint_keys(pieces: Sequence[G.Ref]) -> Tuple[Dict[str, Dict[str, Tuple[List
     return out, start
 
 
+FLOAT_CHANNEL = 0x121100
+SCREEN = 0.75                          # the game's FOV is set for a 4:3 screen (examiner H7.3)
+
+
+def float_keys(data: bytes, ch: p3d.Chunk) -> Tuple[str, List[int], List[float]]:
+    """A Float1 channel (0x121100): u32 version, the parameter (4 characters, NUL padded), u32 n, u16 frames[n],
+    f32 values[n]."""
+    s, e = ch.body
+    _version, param, n = struct.unpack_from("<I4sI", data, s)
+    if s + 12 + 6 * n > e:
+        raise ValueError("short channel")
+    frames = list(struct.unpack_from(f"<{n}H", data, s + 12))
+    vals = list(struct.unpack_from(f"<{n}f", data, s + 12 + 2 * n))
+    return param.rstrip(b"\0 ").decode("latin1"), frames, vals
+
+
+def vertical_fov(horizontal: float) -> float:
+    """The camera's FOV channel is the horizontal angle in radians for a 4:3 screen; the game widens it on a
+    wide screen so the vertical angle stays (Camera::SetFOV, 0x28C1D0). The vertical angle, which glTF and
+    Blender keep, is the same at every screen shape."""
+    return 2.0 * math.atan(math.tan(horizontal / 2.0) * SCREEN)
+
+
 def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[tuple]]]:
-    """The camera's place and the way it looks over the pieces: {"translation"|"rotation": (times, values)}."""
+    """The camera's place and the way it looks over the pieces: {"translation"|"rotation": (times, values)},
+    and, where the camera keys them, "yfov" (the vertical angle, radians), "znear" and "zfar"."""
     out: Dict[str, Tuple[List[float], List[tuple]]] = {"translation": ([], []), "rotation": ([], [])}
     start = 0.0
     for ref in pieces:
@@ -757,6 +972,18 @@ def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[t
             frames, vals = keys["TRAN"]
             out["translation"][0].extend(start + f / rate for f in frames)
             out["translation"][1].extend(G.pos(v) for v in vals)
+        for ch in p3d.walk(c.children):
+            if ch.id != FLOAT_CHANNEL:
+                continue
+            try:
+                param, frames, vals = float_keys(data, ch)
+            except (struct.error, ValueError):
+                continue
+            name = {"FOV": "yfov", "NCLP": "znear", "FCLP": "zfar"}.get(param)
+            if name and frames:
+                out.setdefault(name, ([], []))
+                out[name][0].extend(start + f / rate for f in frames)
+                out[name][1].extend(vertical_fov(v) if name == "yfov" else v for v in vals)
         if "LOOK" in keys:
             look = keys["LOOK"]
             up = keys.get("UP", ([0], [(0.0, 1.0, 0.0)]))
@@ -777,11 +1004,6 @@ HAND = "right_hand_attach"             # the joint a person's weapon hangs on
 # joint's forward axis, not its sideways one, to bear on the people around.
 GRIP = (0.5, -0.5, -0.5, 0.5)                                    # a long gun's turn, as glTF's rotation
 LONG = 0.45                            # metres from grip to muzzle: from here on a gun takes both hands
-OTHER_HAND = "left_hand_attach"        # the palm of the other hand, when it hangs on the wrist
-FRONT = 0.45                           # how far along grip-to-muzzle the other hand holds a long gun
-REACH = (0.15, 0.6)                    # how far apart two hands on one gun can be, metres
-STEADY = 0.97                          # how alike the directions to the other hand must be (1: always one)
-NUDGE = 30.0                           # the most the gun is turned to meet the other hand, degrees
 
 
 def _qmul(a: Sequence[float], b: Sequence[float]) -> Tuple[float, float, float, float]:
@@ -813,71 +1035,39 @@ def _muzzle(doc: dict, grip: int) -> Optional[Tuple[float, float, float]]:
     return None
 
 
-def other_hand(doc: dict, copy: G.SkeletonCopy, keys: Dict[str, Dict[str, Tuple[List[float], List[tuple]]]],
-               length: float, muzzle: Sequence[float]) -> Optional[Tuple[float, float, float, float]]:
-    """The turn that lays a long gun in both hands, or None to leave it as GRIP has it. Through the
-    animation (keys, length seconds), where the other palm is from the gun hand's joint, in that joint's
-    own frame: when it stays one direction, a rifle's hold away, the gun is turned the little it takes for
-    its handguard to meet that palm."""
-    hand, palm = copy.nodes.get(HAND), copy.nodes.get(OTHER_HAND)
-    if hand is None or palm is None:
+def joint_world(doc: dict, copy: G.SkeletonCopy, keys: Dict[str, Dict[str, Tuple[List[float], List[tuple]]]],
+                joint: str, t: float) -> Optional[Tuple[G.Vec3, G.Quat]]:
+    """Where a joint of someone's skeleton is, and its turn, at a time (seconds) of their animation (keys),
+    in the space of the node they stand on. None if they have no such joint."""
+    i = copy.nodes.get(joint.lower())
+    if i is None:
         return None
     nodes = doc["nodes"]
-    parent = {c: i for i in copy.order for c in nodes[i].get("children", [])}
+    parent = {c: k for k in copy.order for c in nodes[k].get("children", [])}
     names = {v: k for k, v in copy.nodes.items()}
-    if names.get(parent.get(palm, -1)) != "wrist_l":         # in some skeletons it hangs on nothing
-        return None
 
-    def local(i: int, t: float):
-        mine = keys.get(names.get(i, ""), {})
-        n = nodes[i]
+    def local(k: int):
+        mine = keys.get(names.get(k, ""), {})
+        n = nodes[k]
         at = n.get("translation", (0.0, 0.0, 0.0))
         turn = n.get("rotation", (0.0, 0.0, 0.0, 1.0))
         if "translation" in mine:
             times, values = mine["translation"]
-            k = max(0, min(len(times) - 1, bisect.bisect_right(times, t) - 1))
-            at = values[k]
+            at = values[max(0, min(len(times) - 1, bisect.bisect_right(times, t) - 1))]
         if "rotation" in mine:
             times, values = mine["rotation"]
-            k = max(0, min(len(times) - 1, bisect.bisect_right(times, t) - 1))
-            turn = values[k]
+            turn = values[max(0, min(len(times) - 1, bisect.bisect_right(times, t) - 1))]
         return at, turn
 
-    def world(i: int, t: float):
-        chain = [i]
-        while chain[-1] in parent:
-            chain.append(parent[chain[-1]])
-        at, turn = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0)
-        for k in reversed(chain):
-            a, q = local(k, t)
-            moved = _qturn(turn, a)
-            at, turn = (at[0] + moved[0], at[1] + moved[1], at[2] + moved[2]), _qmul(turn, q)
-        return at, turn
-
-    total = [0.0, 0.0, 0.0]
-    count = 16
-    for k in range(count):
-        t = length * k / (count - 1)
-        (ha, hq), (pa, _pq) = world(hand, t), world(palm, t)
-        away = (pa[0] - ha[0], pa[1] - ha[1], pa[2] - ha[2])
-        far = math.sqrt(sum(c * c for c in away))
-        if not REACH[0] <= far <= REACH[1]:
-            return None
-        seen = _unit(_qturn((-hq[0], -hq[1], -hq[2], hq[3]), away))
-        total = [a + b for a, b in zip(total, seen)]
-    if math.sqrt(sum(c * c for c in total)) / count < STEADY:
-        return None
-    want = _unit(total)
-    # where the handguard is from the grip: part of the way to the muzzle, a little under the barrel
-    front = _unit(_qturn(GRIP, (muzzle[0] * FRONT, muzzle[1] - 0.05, muzzle[2] * FRONT)))
-    dot = max(-1.0, min(1.0, sum(a * b for a, b in zip(front, want))))
-    if math.degrees(math.acos(dot)) > NUDGE or dot > 0.99999:
-        return None
-    axis = _unit((front[1] * want[2] - front[2] * want[1], front[2] * want[0] - front[0] * want[2],
-                  front[0] * want[1] - front[1] * want[0]))
-    half = math.acos(dot) / 2
-    nudge = (axis[0] * math.sin(half), axis[1] * math.sin(half), axis[2] * math.sin(half), math.cos(half))
-    return _qmul(nudge, GRIP)
+    chain = [i]
+    while chain[-1] in parent:
+        chain.append(parent[chain[-1]])
+    at, turn = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0)
+    for k in reversed(chain):
+        a, q = local(k)
+        moved = _qturn(turn, a)
+        at, turn = (at[0] + moved[0], at[1] + moved[1], at[2] + moved[2]), _qmul(turn, q)
+    return at, turn
 
 
 class Ground:
@@ -971,9 +1161,15 @@ class Ground:
 WEAPON = re.compile(r"^WeaponTemplate", re.I)
 
 
-def weapon_model(template: str, models: Sequence[str]) -> Optional[str]:
-    """The model a weapon template stands for, among the weapons file's models: WeaponTemplateMetalPipe is
-    metal_pipe, WeaponTemplateSniper is sniper_rifle, WeaponTemplateM16Mortar is the M16."""
+def weapon_model(template: str, models: Sequence[str], texts: Sequence[str] = ()) -> Optional[str]:
+    """The model a weapon template stands for, among the weapons file's models. The template's own text in
+    the weapons' script (texts) names it where it can (WeaponTemplateM16Mortar names M16_upgrade2, the M16
+    with the grenade launcher); without the script, by the template's name: WeaponTemplateMetalPipe is
+    metal_pipe, WeaponTemplateSniper is sniper_rifle."""
+    lower = {m.lower(): m for m in models}
+    for t in texts:
+        if t.lower() in lower:
+            return lower[t.lower()]
     flat = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())
     want = flat(WEAPON.sub("", template))
     if not want:
@@ -1022,6 +1218,32 @@ def where(script: Script, streams: Sequence[Tuple[str, bytes]]) -> Optional[Tupl
                     if param == "TRAN" and vals and abs(vals[0][0]) + abs(vals[0][2]) > 1.0:
                         return vals[0][0], vals[0][2]
     return None
+
+
+def camera_path(script: Script, streams: Sequence[Tuple[str, bytes]], most: int = 12) -> List[Tuple[float, float, float]]:
+    """Where the camera goes (the map's own x, y, z), at most `most` places spread evenly over its keys:
+    for the cutscenes whose world streams round the camera (NISDriveWorldStreamer). A camera measured from a
+    cue's own place gives that place."""
+    if script.origin:
+        return [script.origin[0]]
+    if not script.camera:
+        return []
+    lib = G.Library()
+    for label, data in streams:
+        lib.add(label, data, main=False)
+    keys: List[Tuple[float, float, float]] = []
+    for ref in _pieces(G.Builder(lib), script.camera):
+        for ch in p3d.walk(ref.chunk.children):
+            if ch.id in G.VECTOR_CHANNELS:
+                try:
+                    param, _frames, vals = G._vector_keys(ref.data, ch)
+                except (p3d.P3dError, struct.error, IndexError, KeyError):
+                    continue
+                if param == "TRAN":
+                    keys += [tuple(v) for v in vals]
+    if len(keys) <= most:
+        return keys
+    return [keys[round(i * (len(keys) - 1) / (most - 1))] for i in range(most)]
 
 
 GONE = (1e-4, 1e-4, 1e-4)              # the size of someone whose part of a joined cutscene isn't playing
@@ -1107,7 +1329,10 @@ def export(name: str, script: Script, streams: Sequence[Tuple[str, bytes]],
                            # the screen's fades, in seconds from the part's start (the Blender script plays them)
                            "fades": [{"at": round(at / FRAMES_A_SECOND, 4), "in": round(fi / FRAMES_A_SECOND, 4),
                                       "hold": round(hold / FRAMES_A_SECOND, 4), "out": round(fo / FRAMES_A_SECOND, 4),
-                                      "colour": list(rgb)} for at, fi, hold, fo, rgb in sc.fades]}
+                                      "colour": list(rgb),
+                                      "keys": [[round((at + f) / FRAMES_A_SECOND, 4), a]
+                                               for f, a in fade_keys(fi, hold, fo, rgb)]}
+                                     for at, fi, hold, fo, rgb in sc.fades]}
                           for (n, sc), (_nodes, begin, end) in zip(scenes, spans)]
         b.g.doc["scenes"][0].setdefault("extras", {})["parts"] = b.report.parts
         b.report.models += found
@@ -1184,6 +1409,14 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         return loaded[key]
 
     bodies: Dict[str, G.SkeletonCopy] = {}                   # person (lower) -> their skeleton, for the effects
+    poses: Dict[str, tuple] = {}                             # person (lower) -> (skeleton, keys, spot, turn)
+    fx = getattr(b, "_fx", None)
+    if fx is None:                                           # the game's particle effects (Common.p3d)
+        fx = b._fx = CFX.Effects(b, source("effects", ""))   # type: ignore[attr-defined]
+        got = model("script", "templates/weapons.cso")
+        b._weapons = CFX.weapon_settings(got[1]) if got else {}  # type: ignore[attr-defined]
+    weapons: Dict[str, Dict[str, float]] = getattr(b, "_weapons", {})
+    rates = {k: v["FiringRate"] for k, v in weapons.items() if v.get("FiringRate")}
     people = [(who, anim) for who, anim in script.plays.items()]
     for who in script.cast:                                  # loaded and stood somewhere, but playing nothing
         if who.lower() not in script.plays and who.lower() not in script.drives and who.lower() in script.stands:
@@ -1235,13 +1468,13 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         went_in.append(label)
         nodes.append(spot)
         bodies[who] = copy
+        poses[who] = (copy, moves[0] if moves is not None else {}, tuple(stand), facing_rotation(facing))
         hand = copy.nodes.get(HAND)
-        long_guns = []                                       # long guns in hand: (the grip's node, its muzzle)
         held = script.holds_at.get(who) or ([(0, script.holds[who])] if who in script.holds else [])
         for n, (frame, template) in enumerate(held if hand is not None else []):
             guns = source("weapons", "")
             names = [G.chunk_name(guns.data, c) for c in guns.chunks if c.id == G.COMPOSITE] if guns else []
-            wanted = weapon_model(template, names)
+            wanted = weapon_model(template, names, (weapons.get(template.lower()) or {}).get("texts", ()))
             gref = lib.find("composite", wanted, (guns,)) if wanted and guns else None
             if not gref:
                 left_out.append(label + "'s " + WEAPON.sub("", template))
@@ -1254,8 +1487,6 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             # pistol and the M16s point along the forearm (0.89 to 0.99 of the way); without it, the short
             # guns pointed at the sky.
             b.g.doc["nodes"][grip]["rotation"] = list(GRIP)
-            if muzzle is None or math.sqrt(sum(c * c for c in muzzle)) >= LONG:
-                long_guns.append((grip, muzzle))                           # a long gun (or a pipe): both hands
             # In the hand from its frame, until the next weapon's: the grip is shrunk away outside that.
             until = held[n + 1][0] if n + 1 < len(held) else None
             if frame > 0 or until is not None:
@@ -1268,19 +1499,17 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
                 if until is not None:
                     times, sizes = times + [until / FRAMES_A_SECOND], sizes + [GONE]
                 tracks.add(holder, "scale", later(times), sizes, step=True)
-            # Its fire: a flash at the muzzle while the script has it firing and it is the one in the hand.
-            shots = [(max(a, frame), min(z, until if until is not None else z)) for a, z in script.fires.get(who, [])]
-            shots = [(a, z) for a, z in shots if z > a]
+            # Its fire (SPEC-010 section 3): while the script holds the fire control and it is the gun in the
+            # hand, a shot every FiringRate milliseconds, each playing the gun's "fire1" state's effects (the
+            # muzzle flash and the casing; "fire2" for alternate fire) at their places on the gun, and a
+            # tracer every second bullet.
+            shots = [(max(a, frame), min(z, until if until is not None else z), alt)
+                     for a, z, alt in script.fires.get(who, [])]
+            shots = [s_ for s_ in shots if s_[1] > s_[0]]
             if shots:
-                at = muzzle if muzzle is not None else (0.0, 0.0, 0.0)
-                flash = b.g.node(label + "'s muzzle flash", grip, translation=list(at), mesh=_flash_mesh(b))
-                times, sizes = [0.0], [GONE]
-                for a, z in sorted(shots):
-                    for k in range(a, z, FLASH_EVERY):                       # a shot every few frames: on, then off
-                        times += [k / FRAMES_A_SECOND, (k + 1) / FRAMES_A_SECOND]
-                        sizes += [(1.0, 1.0, 1.0), GONE]
-                tracks.add(flash, "scale", later(times), sizes, step=True)
-        gripped = long_guns[-1] if long_guns else None
+                every = int((weapons.get(template.lower()) or {}).get("TracerFrequency") or CFX.TRACER_EVERY)
+                _gun_fire(b, fx, gref, wanted, grip, muzzle, shots, CFX.firing_rate(template, rates), tracks, later,
+                          label, max(1, every))
         shapes = [i for i in range(before, len(b.g.doc["nodes"])) if b.g.doc["nodes"][i].get("mesh") in b.shaped]
         if who in script.faces:                              # the lips, brows and eyelids
             sliding = slider_keys(_pieces(b, script.faces[who]))
@@ -1300,28 +1529,13 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
             role["body"] = "moves" if _pieces(b, anim) else "animation not found"
             keys, ran = moves
             length = max(length, ran)
-            for grip, muzzle in long_guns:                   # in both hands, when the other one is there
-                both = other_hand(b.g.doc, copy, keys, ran, muzzle) if muzzle is not None else None
-                if both:
-                    b.g.doc["nodes"][grip]["rotation"] = list(both)
             for joint, paths in keys.items():
                 node = copy.nodes.get(joint)
                 if node is not None:
                     for path, (times, values) in paths.items():
                         tracks.add(node, path, later(times), values)
-    for who, kind, joint, frame in script.effects:           # hits, blood, a grenade going off on someone
-        body = bodies.get(who)
-        node = body.nodes.get(joint.lower()) if body is not None else None
-        if node is None and body is not None:                # a joint this model doesn't have: the chest
-            node = body.nodes.get("spine_2") or next(iter(body.nodes.values()), None)
-        if node is None:
-            continue
-        size, frames, _rgba, _add = _effect_look(kind)
-        burst = b.g.node(kind + " on " + who, node, mesh=_effect_mesh(b, kind), extras={"effect": kind})
-        times = [0.0, frame / FRAMES_A_SECOND, (frame + frames) / FRAMES_A_SECOND] if frame > 0 else \
-            [0.0, frames / FRAMES_A_SECOND]
-        sizes = [GONE, (1.0, 1.0, 1.0), GONE] if frame > 0 else [(1.0, 1.0, 1.0), GONE]
-        tracks.add(burst, "scale", later(times), sizes, step=True)
+    for who, kind, joint, frame, by in script.effects:       # hits, blood, a grenade going off on someone
+        _character_effect(b, fx, root, bodies, poses, who, kind, joint, frame, by, tracks, later, start, length)
     for who, anim in script.drives.items():
         label = next((k for k in script.cast if k.lower() == who), who)
         keys, ran = _joint_keys(_pieces(b, anim))
@@ -1346,14 +1560,21 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         pieces = _pieces(b, script.camera)
         if pieces:
             length = max(length, _length(pieces))
+            moves = _camera_keys(pieces)
+            first = lambda k, d: moves[k][1][0] if moves.get(k) and moves[k][1] else d
             ci = b.g.add("cameras", {"name": script.camera, "type": "perspective",
-                                     "perspective": {"aspectRatio": 4 / 3, "yfov": 0.75, "znear": 0.1, "zfar": 5000.0}})
+                                     "perspective": {"aspectRatio": 4 / 3, "yfov": first("yfov", 0.75),
+                                                     "znear": first("znear", 0.1), "zfar": first("zfar", 5000.0)}})
             place = root
             if script.origin:
                 place = b.g.node(script.camera + "'s place", root, translation=list(G.pos(script.origin[0])),
                                  rotation=list(facing_rotation(script.origin[1])))
-            cam = b.g.node(script.camera, place, camera=ci)
-            for path, (times, values) in _camera_keys(pieces).items():
+            # the lens over time goes in the node's extras: glTF can't key a camera's angle
+            lens = {k: [[round(t, 4), round(v, 5)] for t, v in zip(later(moves[k][0]), moves[k][1])]
+                    for k in ("yfov", "znear", "zfar") if moves.get(k) and len(set(moves[k][1])) > 1}
+            cam = b.g.node(script.camera, place, camera=ci, extras={"lens": lens} if lens else None)
+            for path in ("translation", "rotation"):
+                times, values = moves[path]
                 tracks.add(cam, path, later(times), values)
             went_in.append("camera")
     for what, drawn in script.renderables.items():           # the scene's own props: the cabinet's doors
@@ -1383,7 +1604,7 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
                         tracks.add(node, path, later(times), values)
     if script.prop_states:                                   # the map's props the scene changes: a door blown in
         spot = next((G.pos(at) for at, _f in script.stands.values() if abs(at[0]) + abs(at[2]) > 30.0), None)
-        for lost in _prop_states(b, lib, script, tracks, later, spot):
+        for lost in _prop_states(b, lib, script, tracks, later, spot, fx):
             left_out.append(lost + " (a prop the script changes)")
     for label in left_out:
         b.report.missing_drawables.add(label)

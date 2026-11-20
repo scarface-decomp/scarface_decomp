@@ -417,6 +417,29 @@ def _boxes(path: Path) -> List[tuple]:
         return []
 
 
+def _zone_triggers(named) -> Callable[[float, float], List[Tuple[str, str]]]:
+    """The zone scripts' triggers (scriptc/missions/z04/dzone_triggers.dso: interiors' furniture;
+    azone_triggers.dso: outdoor pockets), as a lookup: (x, z) -> [(folder, package)] loaded there."""
+    found: List[Tuple[str, "SG.ScriptTrigger"]] = []
+    for folder, script in (("dzones", "dzone_triggers.dso"), ("azones", "azone_triggers.dso")):
+        p = named(f"/scriptc/missions/z04/{script}")
+        if p is None:
+            continue
+        try:
+            import torque_script as TS
+            found += [(folder, t) for t in SG.script_triggers(TS.decompile(p.read_bytes()))]
+        except Exception:                                    # a script that won't read: its zones are left out
+            continue
+
+    def at(x: float, z: float) -> List[Tuple[str, str]]:
+        out: List[Tuple[str, str]] = []
+        for folder, t in found:
+            if t.holds(x, z):
+                out += [(folder, package) for package in t.packages if (folder, package) not in out]
+        return out
+    return at
+
+
 def rooms_at(out: Path, index: Optional[dict], version: str, spot: Sequence[float]) -> List[Path]:
     """The files of the rooms someone at spot (x, y, z) stands in: the buildings' insides, kept apart from
     the streets (the donut shop's back room, a club), that have a mesh whose box holds the spot. The
@@ -670,6 +693,10 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
             p = named(f"/art/vehicles/{wanted}.p3d")
         elif kind == "weapons":
             p = named("/art/stateprops/weapons_test/guns.p3d")
+        elif kind == "effects":                              # the game's particle effects (SPEC-010 section 1.1)
+            p = named("/packages/z04/common.p3d") or _common(out, index, version)
+        elif kind == "script":                               # a compiled script: the weapons' templates
+            p = named(f"/scriptc/{wanted}")
         elif kind == "scene":                                # the scene's own file: the people it swaps in
             p = named(f"/art/nis/{wanted}/static.p3d")
         else:
@@ -705,19 +732,36 @@ def cutscene_glb(out: Path, index: Optional[dict], version: str, scene: str, joi
     area: List[Tuple[str, bytes]] = []
     library: List[Tuple[str, bytes]] = []
     graph = named("/art/levels/z04/streamgraph.p3d")
-    spots = [w for w in (CUT.where(sc, st) for sc, st in [(script, pieces)] + [(sc, st) for _n, sc, st in then]) if w]
+    # Where: someone's feet (with their height, for the triggers that have one), else the camera's start.
+    spots = []
+    for sc, st in [(script, pieces)] + [(sc, st) for _n, sc, st in then]:
+        if sc.streams_by_camera:                          # the world streams round the camera (examiner H5.3)
+            path = CUT.camera_path(sc, st)
+            if path:
+                spots += [(x, z, y) for x, y, z in path]
+                continue
+        feet = CUT.floor_spot(sc)
+        ground = CUT.where(sc, st)
+        if feet is not None and ground is not None and (feet[0], feet[2]) == ground:
+            spots.append((feet[0], feet[2], feet[1]))
+        elif ground is not None:
+            spots.append((ground[0], ground[1], None))
     if spots and graph is not None:
         try:
             triggers = SG.triggers(graph.read_bytes())
+            inside = _zone_triggers(named)
             seen = set()
-            for spot in spots:
-                loaded = SG.loaded_at(triggers, spot[0], spot[1])
-                if not loaded.inside:
-                    continue
-                for package, slot in loaded.packages:
-                    if slot in ("Shell", "Detail") and package.lower() not in seen:
-                        seen.add(package.lower())
-                        p = named(f"/packages/z04/{package}.p3d")
+            for x, z, y in spots:
+                # the one stream trigger that applies there, and exactly its list (SPEC-011 sections 1 and 2)
+                loaded = SG.loaded_at(triggers, x, z, y)
+                wanted = [f"/packages/z04/{package}.p3d" for package, slot in loaded.packages
+                          if slot in ("Shell", "Detail")] if loaded.how != "nearest" else []
+                # ...and the furniture and outdoor pockets the zone scripts load there (SPEC-001 section 4.3)
+                wanted += [f"/packages/{folder}/{package}.p3d" for folder, package in inside(x, z)]
+                for ending in wanted:
+                    if ending.lower() not in seen:
+                        seen.add(ending.lower())
+                        p = named(ending)
                         if p is not None:
                             area.append((p.name, p.read_bytes()))
             # ...and the room, when they stand in one the streets' files don't hold
@@ -1623,6 +1667,28 @@ def part_cameras(scene):
     return n
 
 
+def camera_lenses(scene):
+    # A cutscene camera's lens over time (its node's extras "lens": yfov, the vertical angle in radians, and
+    # its near and far planes, each [[seconds, value], ...]): keyed on the camera, the vertical angle held
+    # whatever the picture's shape, as the game holds it. Returns how many cameras were keyed.
+    n = 0
+    for o in scene.objects:
+        if o.type != "CAMERA" or "lens" not in o.keys():
+            continue
+        lens = o["lens"].to_dict() if hasattr(o["lens"], "to_dict") else dict(o["lens"])
+        cam = o.data
+        cam.sensor_fit = "VERTICAL"
+        for key, prop in (("yfov", "lens"), ("znear", "clip_start"), ("zfar", "clip_end")):
+            for t, v in lens.get(key) or []:
+                if key == "yfov":
+                    cam.angle_y = float(v)
+                else:
+                    setattr(cam, prop, float(v))
+                cam.keyframe_insert(prop, frame=float(t) * FPS)
+        n += 1
+    return n
+
+
 def glb_parts(path):
     # A .glb's JSON and its binary part.
     with open(path, "rb") as f:
@@ -1737,6 +1803,11 @@ def add_fades(scene):
             cards.append(card)
         keys = {}
         for start, x, _cam in fades:
+            if x.get("keys"):                    # as the game plays it (SPEC-010 section 5): seconds in the part
+                for t, amount_ in x["keys"]:
+                    keys[start - x.get("at", 0) + t] = amount_
+                count += 1
+                continue
             a = start
             b = a + x.get("in", 0)
             c = b + x.get("hold", 0)
@@ -1969,6 +2040,94 @@ def far_away(o):
         return False
 
 
+def particle_looks(scene):
+    # The game's particles (SPEC-010): each a square that faces the camera, its colour and alpha over its life
+    # in its extras ("colours": seconds, r, g, b, a, five numbers a key, 0 to 1). The squares copy the turn of an empty that
+    # follows whichever camera is showing, before their own spin; each one's colour goes in its object colour,
+    # keyed; their materials multiply their picture by it. Returns how many particles.
+    particles = [o for o in scene.objects if own(o, "billboard")]
+    if not particles:
+        return 0
+    facing = bpy.data.objects.new("Particles face this camera", None)
+    scene.collection.objects.link(facing)
+    cams = []
+    for f in FILES:
+        for part in parts_of(f):
+            cam = bpy.data.objects.get(part.get("camera") or "")
+            if cam is not None and cam.type == "CAMERA":
+                cams.append((cam, part.get("start", 0.0), part.get("end")))
+    if not cams:
+        cams = [(o, 0.0, None) for o in scene.objects if o.type == "CAMERA"][:1]
+    for cam, start, end in cams:
+        c = facing.constraints.new("COPY_ROTATION")
+        c.target = cam
+        if len(cams) > 1:                        # each part's camera only while its part plays
+            for frame, on in ((0, 0.0), (int(round(start * FPS)), 1.0)) + (((int(round(end * FPS)), 0.0),) if end else ()):
+                c.influence = on
+                c.keyframe_insert("influence", frame=frame)
+    for o in particles:
+        try:
+            c = o.constraints.new("COPY_ROTATION")
+            c.target = facing
+            c.owner_space = "LOCAL"
+            c.mix_mode = "BEFORE"
+            keys = list(own(o, "colours") or [])
+            for k in range(0, len(keys) - 4, 5):     # five numbers a key: seconds, r, g, b, a
+                o.color = (keys[k + 1], keys[k + 2], keys[k + 3], keys[k + 4])
+                o.keyframe_insert("color", frame=keys[k] * FPS)
+        except Exception:
+            traceback.print_exc()
+    done = set()
+    for o in particles:
+        for slot in getattr(o, "material_slots", []):
+            mat = slot.material
+            if mat is None or mat.name in done or not mat.use_nodes:
+                continue
+            done.add(mat.name)
+            try:
+                tree = mat.node_tree
+                out = output_of(tree)
+                pic = picture_of(tree)
+                if out is None:
+                    continue
+                nodes, links = tree.nodes, tree.links
+                info = nodes.new("ShaderNodeObjectInfo")
+                colour = nodes.new("ShaderNodeVectorMath")
+                colour.operation = "MULTIPLY"
+                alpha = nodes.new("ShaderNodeMath")
+                alpha.operation = "MULTIPLY"
+                if pic is not None:
+                    links.new(pic.outputs["Color"], colour.inputs[0])
+                    links.new(pic.outputs["Alpha"], alpha.inputs[0])
+                else:
+                    colour.inputs[0].default_value = (1.0, 1.0, 1.0)
+                    alpha.inputs[0].default_value = 1.0
+                links.new(info.outputs["Color"], colour.inputs[1])
+                links.new(info.outputs["Alpha"], alpha.inputs[1])
+                glow = nodes.new("ShaderNodeEmission")
+                through = nodes.new("ShaderNodeBsdfTransparent")
+                if own(mat, "blend") == "add":       # the light it adds: colour x alpha, over what is behind
+                    light = nodes.new("ShaderNodeVectorMath")
+                    light.operation = "SCALE"
+                    links.new(colour.outputs[0], light.inputs[0])
+                    links.new(alpha.outputs[0], light.inputs["Scale"])
+                    links.new(light.outputs[0], glow.inputs["Color"])
+                    both = nodes.new("ShaderNodeAddShader")
+                    links.new(through.outputs[0], both.inputs[0])
+                    links.new(glow.outputs[0], both.inputs[1])
+                else:                                # laid over what is behind by its alpha
+                    links.new(colour.outputs[0], glow.inputs["Color"])
+                    both = nodes.new("ShaderNodeMixShader")
+                    links.new(alpha.outputs[0], both.inputs[0])
+                    links.new(through.outputs[0], both.inputs[1])
+                    links.new(glow.outputs[0], both.inputs[2])
+                links.new(both.outputs[0], out.inputs["Surface"])
+                see_through(mat, False)
+            except Exception:
+                traceback.print_exc()
+    return len(particles)
+
+
 def game_looks(scene):
     # What the exports leave in extras (docs/FORMATS.md, "Exporting to Blender"): how the game puts each
     # see-through surface over what is behind it ("blend"), and which it draws without writing depth
@@ -1991,7 +2150,7 @@ def game_looks(scene):
         except Exception:
             traceback.print_exc()
     groups = {"Shadow decals": [], "Low-detail hull": [], "Far-away stand-ins": [], "Occluders": [], "Sea": [],
-              "Effects (stand-ins)": []}
+              "Effects": [], "Effects (stand-ins)": []}
     hidden = False
     for o in list(scene.objects):
         if own(o, "shadowDecal"):
@@ -2009,11 +2168,14 @@ def game_looks(scene):
             groups["Far-away stand-ins"] += [o] + below(o)
         elif own(o, "ocean"):
             groups["Sea"].append(o)
-        elif own(o, "effect"):
+        elif own(o, "billboard"):
+            groups["Effects"].append(o)
+        elif own(o, "effect") and o.type == "MESH":
             groups["Effects (stand-ins)"].append(o)
-    # The game's particle effects (blood, smoke, fire, debris) are marked by plain coloured cards at the
-    # right place and frames: switched off, as they look nothing like the game's. Tick the collection to see
-    # where and when they go off.
+    # The game's particle effects (blood, smoke, fire, debris, gun fire) are its own particles, played as it
+    # plays them. Without the game's effects file they are marked by plain coloured cards at the right place
+    # and frames instead: those are switched off, as they look nothing like the game's. Tick the collection
+    # to see where and when they go off.
     off = {"Low-detail hull": hidden, "Far-away stand-ins": True, "Occluders": True, "Effects (stand-ins)": True}
     for name, objects in groups.items():
         try:
@@ -2047,6 +2209,14 @@ def finish(problems):
         traceback.print_exc()
     try:                                         # joined cutscenes: each part seen through its own camera
         part_cameras(scene)
+    except Exception:
+        traceback.print_exc()
+    try:                                         # the cameras' zoom and clipping over time (examiner H7.3)
+        camera_lenses(scene)
+    except Exception:
+        traceback.print_exc()
+    try:                                         # blood, smoke, fire and gun fire: squares facing the camera
+        particle_looks(scene)
     except Exception:
         traceback.print_exc()
     try:                                         # the screen fading to black and back, as the script says

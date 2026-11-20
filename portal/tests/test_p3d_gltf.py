@@ -1287,6 +1287,18 @@ def test_a_strip_with_no_index_list():
     assert g.triangles == [(0, 1, 2), (2, 1, 3)]
 
 
+def test_two_colour_sets():
+    """A cbvlit primitive group with colour sets (0x1001C: u32 count, u32 set number, the colours) instead of a
+    colour list: set 0 is COLOR_0 (the program's v3), set 1 the second (v4; the examiner's block J0.2)."""
+    head = struct.pack("<I", 0) + text("wall") + struct.pack("<9I", 1, 0x16011, 4, 0, 0, 0, 1, 0, 0)
+    flat = [v for p in QUAD for v in p]
+    night = chunk(0x1001C, struct.pack("<II4I", 4, 1, *[0xFF050504] * 4))
+    day = chunk(0x1001C, struct.pack("<II4I", 4, 0, *[0xFF575856] * 4))
+    data = p3d(chunk(0x10020, head, chunk(0x10005, struct.pack("<I12f", 4, *flat)) + night + day))
+    g = G.geometry(data, G.p3d.read_tree(data)[0])
+    assert g.colours == [0xFF575856] * 4 and g.colours2 == [0xFF050504] * 4
+
+
 # --------------------------------------------------------------------------- one weather at a time
 
 def with_chunks(data, *more):
@@ -2905,6 +2917,38 @@ def test_a_room_with_only_furniture_is_the_room_where_its_props_stand(tmp_path):
     out, index = copied_game(tmp_path, rooms)
     at = G.pos(G.instance_trs(record(11.0, 500.0, 21.0))[0])            # the game's own coordinates of that spot
     assert [p.name for p in BX.rooms_at(out, index, "pc", at)] == ["shop_dzone.p3d"]
+
+
+def test_a_props_entries_are_checked_against_its_controllers_by_place():
+    """SPEC-009 section 2.2: the game gives controller i entry i; the export says where names disagree."""
+    fc = lambda name: chunk(0x121201, struct.pack("<I", 0) + text(name) + b"PTRN" + b"ANIM" + struct.pack("<fI", 0.0, 1)
+                            + text(name) + text(name))
+    entry = lambda name: chunk(0x08020003, text(name) + struct.pack("<3I3f", 0, 0, 0, 0.0, 10.0, 1.0))
+
+    def prop(order):
+        kids = prop_property("name", "fan") + chunk(0x0802000E, text("idle") + struct.pack("<6If3I", 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0),
+                                                    b"".join(entry(n) for n in order))
+        return chunk(0x0802000D, struct.pack("<I", 4) + text("fan") + text("fan") + struct.pack("<II", 1, 1), kids)
+    for order, wrong in ((["blades", "light"], []), (["light", "blades"], [("fan", "idle", 0, "light", "blades"),
+                                                                           ("fan", "idle", 1, "blades", "light")])):
+        data = p3d(fc("blades"), fc("other"), fc("light"), prop(order))
+        import p3d as p3d_module
+        assert G.prop_order_mismatches(data, p3d_module.read_tree(data)) == wrong
+
+
+def test_a_frame_controllers_cycle_modes():
+    """SPEC-011 section 3.2: ANIM (mode 0) leaves it to the animation; HOLD stays; FWD and BACK wrap; FDBK and
+    BKFD go there and back."""
+    assert G.controller_play(0, 0, 11) is None
+    hold = G.controller_play(1, 0, 11)
+    assert G.played([(0, (0.0,)), (10, (1.0,))], hold, 10.0, False) == ([0.0], [(0.0,)])
+    fwd = G.controller_play(2, 2, 11)
+    assert G.played([(0, (0.0,)), (10, (1.0,))], fwd, 10.0, False) == ([0.0, 1.0, 2.0], [(0.0,), (1.0,), (1.0,)])
+    back = G.controller_play(3, 0, 11)
+    assert back.endless and G.played([(0, (0.0,)), (10, (1.0,))], back, 10.0, False) == ([0.0, 1.0], [(1.0,), (0.0,)])
+    bounce = G.controller_play(4, 1, 11)
+    assert G.played([(0, (0.0,)), (10, (1.0,))], bounce, 10.0, False) == ([0.0, 1.0, 2.0], [(0.0,), (1.0,), (0.0,)])
+    assert G.controller_play(5, 0, 11).first == 10.0
 
 
 def test_a_shaders_ambient_is_its_diffuse():
