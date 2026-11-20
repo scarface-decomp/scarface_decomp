@@ -1419,14 +1419,24 @@ shell package and each outdoor pocket holds one **World Collision Object** (`0x0
 | `0x07000007` neighbours | u32 count (the triangles'), then four u16 each: the triangle across each edge (65535: none) and a number that is the same for the whole mesh |
 | `0x07000008` search tree | u32 count, then that many u16 (nodes of four) |
 | `0x07016000` triangle sets | u32 0, u32 how many sets follow |
-| `0x07016010` / `0x07016012` | a flag set / a value set: u32 0, its name, u32 count, then count triangle numbers (u16) and count values (u16) |
+| `0x07016010` / `0x07016012` | a set: u32 0, its name, u32 count, then count triangle numbers (u16) and count values (u16); the two ids are read the same way, the name decides the meaning |
 
 The sets' names: `surfaceType` (86 meshes), `Walkable` (77), `VehicleIgnore` (59), `exitLinkType` (51),
-`navigationType` (42), `speedLimitType` (19), `objectSurfaceType` (8), `Navigation Graph Sub-Zone Link` (2). A
-triangle missing from `surfaceType` has the default surface. The surface types themselves are the 30
-objects of `CollisionSurfaceTypeGroup` in `scriptc/collisions.cso` (Default, Grass, Sand, Asphalt, Concrete
-... each with its decal surface and sound); how a triangle's number picks one is not known yet (by position
-the cargo ship would be mostly `WoodNoDecal`, and the files use 30 and 65280, past the 30).
+`navigationType` (42), `speedLimitType` (19), `objectSurfaceType` (8), `Navigation Graph Sub-Zone Link` (2).
+The collision loader (`0x2E9F00` on the retail Xbox) takes only three of them, by name:
+
+* **`surfaceType`**: each listed triangle's surface code is its value's low byte less 1 (0 for 0 and 1), kept
+  in 5 bits; a triangle not listed is 0. The code is an index into the 30 `CollisionSurfaceType` objects of
+  `scriptc/collisions.cso`, in their order (0 Default, 1 Grass, 2 Sand, 3 Asphalt, 4 Concrete, 6 Wood, 7 Metal,
+  8 ShootThrough, 12 Plaster, 13 Pleather, 20 ConcreteNoDecal, 21 MetalNoDecal, 26 Glass, 27 Furniture,
+  29 VehicleOnly ...), each with its decal surface, sound and effects. The PC files bear it out: the beach
+  is mostly Sand, Tony's mansion Plaster and Wood, the bank Pleather, Wood and Glass, the cargo ship
+  MetalNoDecal. A value of 65280 has a low byte of 0: Default.
+* **`objectSurfaceType`**: the same rule, into a second code (objects' collision).
+* **`VehicleIgnore`**: every listed triangle is ignored by vehicles; the values are not used.
+
+`Walkable`, `navigationType`, `exitLinkType`, `speedLimitType` and the sub-zone links are skipped by the
+collision: other systems (navigation, traffic) may read them.
 
 The collision floors match where the scripts stand people: Jerry's office in the Coconut Grove bank is at
 y 13.84 in `luxurybank_02_shell`'s collision, the script stands him at 13.8.

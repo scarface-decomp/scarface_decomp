@@ -76,7 +76,7 @@
    "SeeThrough",
    "VehicleOnly"
   ],
-  "note": "How a triangle's surfaceType number picks one of these is not known: by position, the cargo ship would be mostly WoodNoDecal and the banks TankerDefault, and the files use 30 and 65280, past the 30 types (0 to 29)."
+  "note": "A triangle's surface code is its surfaceType value's low byte less 1 (0 for 0 and 1), in 5 bits, an index into these in their order (the collision loader at 0x2E9F00 on the retail Xbox). 65280 is Default."
  },
  "files": [
   {
@@ -1169,5 +1169,33 @@
     "surfaceType": 145
    }
   }
- ]
+ ],
+ "surfaces_by_name": {
+  "MetalNoDecal": 29868,
+  "ShootThrough": 27103,
+  "ConcreteNoDecal": 17506,
+  "Grass": 15191,
+  "Sand": 11168,
+  "WoodNoDecal": 11056,
+  "Metal": 10454,
+  "Wood": 9387,
+  "Pleather": 7130,
+  "Dirt": 6646,
+  "SandJump": 5243,
+  "Concrete": 4330,
+  "VehicleOnly": 4108,
+  "Plaster": 3699,
+  "SeeThrough": 3382,
+  "Glass": 1549,
+  "RockJump": 770,
+  "Asphalt": 581,
+  "ShallowWaterPool": 502,
+  "Gravel": 331,
+  "WoodJump": 306,
+  "DeepWaterPool": 193,
+  "BoatJump": 78,
+  "Default": 53,
+  "Furniture": 12,
+  "NoDecal": 9
+ }
 }

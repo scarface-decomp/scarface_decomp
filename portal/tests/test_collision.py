@@ -36,9 +36,9 @@ def test_reading_a_world_collision_object():
 def test_the_floor_under_a_place_and_a_ray():
     found = C.meshes(floor_file())
     h = C.ground(found, 7.0, 3.0, 2.0)                       # over the first triangle (x > z)
-    assert h is not None and abs(h.at[1] - 2.0) < 1e-6 and h.triangle == 0 and h.surface == 4 and not h.walkable
+    assert h is not None and abs(h.at[1] - 2.0) < 1e-6 and h.triangle == 0 and h.surface == 3 and not h.walkable
     h = C.ground(found, 2.0, 3.0, 7.0)                       # over the second
-    assert h.triangle == 1 and h.surface == 9 and h.walkable
+    assert h.triangle == 1 and h.surface == 8 and h.walkable and not h.vehicle_ignore
     assert C.ground(found, 20.0, 3.0, 5.0) is None           # off the floor
     assert C.ground(found, 5.0, 1.0, 5.0, above=0.5) is None  # below it
     side = C.ray(found, (5.0, 5.0, 5.0), (0.0, -2.0, 0.0), 2.5)
@@ -52,5 +52,21 @@ def test_the_collision_as_gltf():
     n = struct.unpack("<I", glb[12:16])[0]
     doc = json.loads(glb[20:20 + n])
     node = next(x for x in doc["nodes"] if x["name"] == "room_01_shell collision")
-    assert node["extras"] == {"collision": True, "triangles": 2, "sets": {"Walkable": 1, "surfaceType": 2}}
+    assert node["extras"] == {"collision": True, "triangles": 2, "sets": {"Walkable": 1, "surfaceType": 2},
+                              "surfaces": {"3": 1, "8": 1}}
     assert doc["accessors"][doc["meshes"][0]["primitives"][0]["attributes"]["POSITION"]]["count"] == 6
+
+
+def test_the_games_rule_for_surfaces():
+    """The examiner's answer to F12: the low byte, less 1 (0 and 1 both Default), in 5 bits."""
+    assert [C.surface_code(v) for v in (0, 1, 2, 9, 22, 30, 0xFF00, 0x0103)] == [0, 0, 1, 8, 21, 29, 0, 2]
+    text = ('new stxddnhlkdj("CollisionSurfaceTypeGroup")\n{\n    new stxfiphfnbj("DefaultSurfaceType")\n    {\n'
+            '    };\n    new stxfiphfnbj("GrassSurfaceType")\n    {\n    };\n};\nnew Other("x") {};')
+    assert C.surface_names(text) == ["Default", "Grass"]
+    assert C.surface_names("nothing here") == []
+
+
+def test_vehicle_ignore_is_membership():
+    m = C.meshes(floor_file())[0]
+    m.sets["VehicleIgnore"] = C.TriangleSet("VehicleIgnore", {1: 0}, True)      # value 0, still ignored
+    assert m.vehicle_ignore(1) and not m.vehicle_ignore(0)

@@ -18,9 +18,17 @@ sub_002F7550). Each map area's shell package (86 of them on the PC) holds one Wo
           0x07000008  search tree         u32 count, then that many u16 (nodes of 4: the tree the game
                                           searches; not needed to find a triangle here)
           0x07016000  triangle sets       u32 0, u32 how many sets follow:
-            0x07016010  a flag set         u32 0, its name (VehicleIgnore, Walkable ...), u32 count, then
-            0x07016012  a value set        count triangle numbers (u16) and count values (u16): surfaceType
-                                          gives each listed triangle its surface (8, 9 ...)
+            0x07016010  a set              u32 0, its name, u32 count, then count triangle numbers (u16) and
+            0x07016012  a set              count values (u16). The name decides what it means, not the id:
+                                          the collision loader takes only surfaceType, objectSurfaceType
+                                          and VehicleIgnore (the others, Walkable, navigationType ..., are
+                                          for other systems)
+
+How the game uses the sets (the examiner's answer to F12, from the loader at 0x2E9F00): a triangle's
+surface code is (its value's low byte - 1), or 0 for a value of 0 or 1, in 5 bits: an index into the 30
+CollisionSurfaceType objects of scriptc/collisions.cso, in their order (0 Default, 2 Sand, 6 Wood, 13
+Pleather, 26 Glass ...). A triangle the set doesn't list is Default. VehicleIgnore marks every listed
+triangle (its values are not used). objectSurfaceType fills a second code the same way.
 
 Coordinates are the map's own (the exports' glTF mirrors z). Objects' collision (an animal's, a prop's:
 0x07010000 with 0x07010001 > 0x07010003 > 0x07010007 primitives, and a rigid body 0x07011000) is read
@@ -41,7 +49,7 @@ import struct
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import p3d  # noqa: E402
@@ -74,6 +82,19 @@ class CollisionMesh:
     def value(self, name: str, triangle: int, default: Optional[int] = None) -> Optional[int]:
         s = self.sets.get(name)
         return s.values.get(triangle, default) if s else default
+
+    def surface(self, t: int) -> int:
+        """The triangle's surface code, as the game stores it (surface_code; 0 Default when not listed)."""
+        v = self.value("surfaceType", t)
+        return surface_code(v) if v is not None else 0
+
+    def object_surface(self, t: int) -> int:
+        v = self.value("objectSurfaceType", t)
+        return surface_code(v) if v is not None else 0
+
+    def vehicle_ignore(self, t: int) -> bool:
+        """Listed in VehicleIgnore: membership is the flag."""
+        return t in self.sets.get("VehicleIgnore", TriangleSet("", {}, True)).values
 
     def corners(self, t: int) -> Tuple[Vec3, Vec3, Vec3]:
         a, b, c, _m = self.triangles[t]
@@ -180,6 +201,32 @@ def hit(origin: Vec3, way: Vec3, tri: Tuple[Vec3, Vec3, Vec3]) -> Optional[float
     return t if t >= 0 else None
 
 
+RUNTIME_SETS = ("surfaceType", "objectSurfaceType", "VehicleIgnore")
+
+
+def surface_code(value: int) -> int:
+    """A surfaceType (or objectSurfaceType) value as the game stores it: its low byte less 1 (0 for 0 and 1),
+    in 5 bits."""
+    low = value & 0xFF
+    return (low - 1 if low else 0) & 0x1F
+
+
+def surface_names(script) -> List[str]:
+    """The CollisionSurfaceType objects' names in their order (scriptc/collisions.cso: compiled bytes or
+    decompiled text), or [] when it can't be read."""
+    import re
+    try:
+        if isinstance(script, (bytes, bytearray)):
+            import torque_script as TS
+            script = TS.decompile(script)
+        i = script.index("CollisionSurfaceTypeGroup")
+    except Exception:
+        return []
+    end = script.find("\n};", i)
+    body = script[i:end if end > 0 else len(script)]
+    return [re.sub(r"SurfaceType$", "", m.group(1)) for m in re.finditer(r'new \w+\("(\w+)"\)', body)]
+
+
 @dataclass
 class Hit:
     at: Vec3
@@ -188,11 +235,17 @@ class Hit:
     triangle: int
 
     @property
-    def surface(self) -> Optional[int]:
-        return self.mesh.value("surfaceType", self.triangle)
+    def surface(self) -> int:
+        """The triangle's surface code: an index into CollisionSurfaceTypeGroup (0 Default)."""
+        return self.mesh.surface(self.triangle)
+
+    @property
+    def vehicle_ignore(self) -> bool:
+        return self.mesh.vehicle_ignore(self.triangle)
 
     @property
     def walkable(self) -> bool:
+        """Listed in the Walkable set (not used by the collision itself: for other systems)."""
         return self.triangle in self.mesh.sets.get("Walkable", TriangleSet("", {}, True)).values
 
 
@@ -233,9 +286,10 @@ SURFACE_COLOURS = [(0.6, 0.6, 0.6), (0.8, 0.5, 0.3), (0.4, 0.6, 0.9), (0.5, 0.8,
                    (0.6, 0.9, 0.6), (0.9, 0.7, 0.5)]
 
 
-def to_glb(found: Sequence[CollisionMesh]) -> bytes:
-    """The collision as a glTF: one mesh each, its triangles coloured by surface type, the walkable ones
-    lighter; the glTF's z mirrored like the other exports'. Each node's extras say "collision": true."""
+def to_glb(found: Sequence[CollisionMesh], names: Sequence[str] = ()) -> bytes:
+    """The collision as a glTF: one mesh each, its triangles coloured by surface code (the ones vehicles
+    ignore darker); the glTF's z mirrored like the other exports'. Each node's extras say "collision": true
+    and count its triangles by surface (by name when names are given)."""
     import p3d_gltf as G
     b = G.Builder(G.Library())
     g = b.g
@@ -248,18 +302,22 @@ def to_glb(found: Sequence[CollisionMesh]) -> bytes:
             continue
         pos, col = [], []
         for t, (a, bb, c, _mask) in enumerate(m.triangles):
-            surface = m.value("surfaceType", t, 0) or 0
-            r, gg, bl = SURFACE_COLOURS[surface % len(SURFACE_COLOURS)]
-            k = 1.0 if m.value("Walkable", t) is not None else 0.6
+            r, gg, bl = SURFACE_COLOURS[m.surface(t) % len(SURFACE_COLOURS)]
+            k = 0.6 if m.vehicle_ignore(t) else 1.0
             for v in (a, c, bb):                                       # mirrored: the winding turns round
                 pos.append(G.pos(m.vertices[v]))
                 col.append((r * k, gg * k, bl * k, 1.0))
         mesh = g.add("meshes", {"name": (m.owner or "collision") + " collision", "primitives": [{
             "attributes": {"POSITION": g.accessor(pos, "VEC3", bounds=True), "COLOR_0": g.accessor(col, "VEC4")},
             "material": mat, "mode": 4}]})
+        surfaces: Dict[str, int] = {}
+        for t in range(len(m.triangles)):
+            code = m.surface(t)
+            key = names[code] if code < len(names) else str(code)
+            surfaces[key] = surfaces.get(key, 0) + 1
         g.node((m.owner or "collision") + " collision", root, mesh=mesh,
                extras={"collision": True, "triangles": len(m.triangles),
-                       "sets": {k: len(v.values) for k, v in m.sets.items()}})
+                       "sets": {k: len(v.values) for k, v in m.sets.items()}, "surfaces": surfaces})
     return g.glb()
 
 
@@ -268,21 +326,24 @@ def main(argv=None) -> int:
     ap.add_argument("file", type=Path)
     ap.add_argument("--glb", type=Path, help="write the collision as a glTF here")
     ap.add_argument("--ground", type=float, nargs=3, metavar=("X", "Y", "Z"), help="the floor under this place")
+    ap.add_argument("--surfaces", type=Path, help="scriptc/collisions.cso, for the surface types' names")
     a = ap.parse_args(argv)
     data = a.file.read_bytes()
     found = meshes(data)
     if not found:
         print(f"{a.file.name}: no collision mesh in it")
         return 1
+    names = surface_names(a.surfaces.read_bytes()) if a.surfaces else []
     for m in found:
         sets = ", ".join(f"{k} ({len(v.values)}{'' if v.flag else ' values'})" for k, v in m.sets.items())
         print(f"{m.owner or '?'}: {len(m.vertices)} vertices, {len(m.triangles)} triangles; sets: {sets or 'none'}")
     if a.ground:
         h = ground(found, *a.ground)
+        surface = (names[h.surface] if h and h.surface < len(names) else str(h.surface)) if h else ""
         print("no floor under it" if h is None else
-              f"floor at y {h.at[1]:.3f} ({h.distance:.3f} down), surface {h.surface}, walkable: {h.walkable}")
+              f"floor at y {h.at[1]:.3f} ({h.distance:.3f} down), surface {surface}, vehicles ignore it: {h.vehicle_ignore}")
     if a.glb:
-        a.glb.write_bytes(to_glb(found))
+        a.glb.write_bytes(to_glb(found, names))
         print(f"written {a.glb}")
     return 0
 
