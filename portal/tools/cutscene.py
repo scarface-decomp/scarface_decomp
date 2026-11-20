@@ -927,8 +927,32 @@ def _joint_keys(pieces: Sequence[G.Ref]) -> Tuple[Dict[str, Dict[str, Tuple[List
     return out, start
 
 
+FLOAT_CHANNEL = 0x121100
+SCREEN = 0.75                          # the game's FOV is set for a 4:3 screen (examiner H7.3)
+
+
+def float_keys(data: bytes, ch: p3d.Chunk) -> Tuple[str, List[int], List[float]]:
+    """A Float1 channel (0x121100): u32 version, the parameter (4 characters, NUL padded), u32 n, u16 frames[n],
+    f32 values[n]."""
+    s, e = ch.body
+    _version, param, n = struct.unpack_from("<I4sI", data, s)
+    if s + 12 + 6 * n > e:
+        raise ValueError("short channel")
+    frames = list(struct.unpack_from(f"<{n}H", data, s + 12))
+    vals = list(struct.unpack_from(f"<{n}f", data, s + 12 + 2 * n))
+    return param.rstrip(b"\0 ").decode("latin1"), frames, vals
+
+
+def vertical_fov(horizontal: float) -> float:
+    """The camera's FOV channel is the horizontal angle in radians for a 4:3 screen; the game widens it on a
+    wide screen so the vertical angle stays (Camera::SetFOV, 0x28C1D0). The vertical angle, which glTF and
+    Blender keep, is the same at every screen shape."""
+    return 2.0 * math.atan(math.tan(horizontal / 2.0) * SCREEN)
+
+
 def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[tuple]]]:
-    """The camera's place and the way it looks over the pieces: {"translation"|"rotation": (times, values)}."""
+    """The camera's place and the way it looks over the pieces: {"translation"|"rotation": (times, values)},
+    and, where the camera keys them, "yfov" (the vertical angle, radians), "znear" and "zfar"."""
     out: Dict[str, Tuple[List[float], List[tuple]]] = {"translation": ([], []), "rotation": ([], [])}
     start = 0.0
     for ref in pieces:
@@ -948,6 +972,18 @@ def _camera_keys(pieces: Sequence[G.Ref]) -> Dict[str, Tuple[List[float], List[t
             frames, vals = keys["TRAN"]
             out["translation"][0].extend(start + f / rate for f in frames)
             out["translation"][1].extend(G.pos(v) for v in vals)
+        for ch in p3d.walk(c.children):
+            if ch.id != FLOAT_CHANNEL:
+                continue
+            try:
+                param, frames, vals = float_keys(data, ch)
+            except (struct.error, ValueError):
+                continue
+            name = {"FOV": "yfov", "NCLP": "znear", "FCLP": "zfar"}.get(param)
+            if name and frames:
+                out.setdefault(name, ([], []))
+                out[name][0].extend(start + f / rate for f in frames)
+                out[name][1].extend(vertical_fov(v) if name == "yfov" else v for v in vals)
         if "LOOK" in keys:
             look = keys["LOOK"]
             up = keys.get("UP", ([0], [(0.0, 1.0, 0.0)]))
@@ -1524,14 +1560,21 @@ def _cast(b: G.Builder, lib: G.Library, name: str, script: Script,
         pieces = _pieces(b, script.camera)
         if pieces:
             length = max(length, _length(pieces))
+            moves = _camera_keys(pieces)
+            first = lambda k, d: moves[k][1][0] if moves.get(k) and moves[k][1] else d
             ci = b.g.add("cameras", {"name": script.camera, "type": "perspective",
-                                     "perspective": {"aspectRatio": 4 / 3, "yfov": 0.75, "znear": 0.1, "zfar": 5000.0}})
+                                     "perspective": {"aspectRatio": 4 / 3, "yfov": first("yfov", 0.75),
+                                                     "znear": first("znear", 0.1), "zfar": first("zfar", 5000.0)}})
             place = root
             if script.origin:
                 place = b.g.node(script.camera + "'s place", root, translation=list(G.pos(script.origin[0])),
                                  rotation=list(facing_rotation(script.origin[1])))
-            cam = b.g.node(script.camera, place, camera=ci)
-            for path, (times, values) in _camera_keys(pieces).items():
+            # the lens over time goes in the node's extras: glTF can't key a camera's angle
+            lens = {k: [[round(t, 4), round(v, 5)] for t, v in zip(later(moves[k][0]), moves[k][1])]
+                    for k in ("yfov", "znear", "zfar") if moves.get(k) and len(set(moves[k][1])) > 1}
+            cam = b.g.node(script.camera, place, camera=ci, extras={"lens": lens} if lens else None)
+            for path in ("translation", "rotation"):
+                times, values = moves[path]
                 tracks.add(cam, path, later(times), values)
             went_in.append("camera")
     for what, drawn in script.renderables.items():           # the scene's own props: the cabinet's doors

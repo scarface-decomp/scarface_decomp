@@ -682,3 +682,16 @@ def test_a_cutscene_that_streams_round_its_camera():
     assert C.camera_path(C.read_script(""), []) == []
     cue = C.read_script('NISSequenceCue { CameraAnimationName "CAM_T"; Position { x -3411; y 20; z -1704; }; Facing 90; };')
     assert C.camera_path(cue, []) == [(-3411.0, 20.0, -1704.0)]
+
+
+def test_the_camera_lens():
+    """The FOV channel is the horizontal angle for a 4:3 screen (examiner H7.3); glTF keeps the vertical one."""
+    import math
+    assert abs(C.vertical_fov(2 * math.atan(4 / 3)) - 2 * math.atan(1.0)) < 1e-9     # 4:3 → tan(v/2) = 3/4 tan(h/2)
+    assert C.vertical_fov(0.0) == 0.0
+    import struct
+    body = struct.pack("<I4sI", 0, b"FOV\0", 2) + struct.pack("<2H", 0, 30) + struct.pack("<2f", 0.696, 0.5)
+    data = struct.pack("<III", C.FLOAT_CHANNEL, 12 + len(body), 12 + len(body)) + body
+    ch = C.p3d.Chunk(C.FLOAT_CHANNEL, 0, 12 + len(body), 12 + len(body), 0)
+    param, frames, vals = C.float_keys(data, ch)
+    assert param == "FOV" and frames == [0, 30] and abs(vals[0] - 0.696) < 1e-6

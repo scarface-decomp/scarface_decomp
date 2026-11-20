@@ -1667,6 +1667,28 @@ def part_cameras(scene):
     return n
 
 
+def camera_lenses(scene):
+    # A cutscene camera's lens over time (its node's extras "lens": yfov, the vertical angle in radians, and
+    # its near and far planes, each [[seconds, value], ...]): keyed on the camera, the vertical angle held
+    # whatever the picture's shape, as the game holds it. Returns how many cameras were keyed.
+    n = 0
+    for o in scene.objects:
+        if o.type != "CAMERA" or "lens" not in o.keys():
+            continue
+        lens = o["lens"].to_dict() if hasattr(o["lens"], "to_dict") else dict(o["lens"])
+        cam = o.data
+        cam.sensor_fit = "VERTICAL"
+        for key, prop in (("yfov", "lens"), ("znear", "clip_start"), ("zfar", "clip_end")):
+            for t, v in lens.get(key) or []:
+                if key == "yfov":
+                    cam.angle_y = float(v)
+                else:
+                    setattr(cam, prop, float(v))
+                cam.keyframe_insert(prop, frame=float(t) * FPS)
+        n += 1
+    return n
+
+
 def glb_parts(path):
     # A .glb's JSON and its binary part.
     with open(path, "rb") as f:
@@ -2187,6 +2209,10 @@ def finish(problems):
         traceback.print_exc()
     try:                                         # joined cutscenes: each part seen through its own camera
         part_cameras(scene)
+    except Exception:
+        traceback.print_exc()
+    try:                                         # the cameras' zoom and clipping over time (examiner H7.3)
+        camera_lenses(scene)
     except Exception:
         traceback.print_exc()
     try:                                         # blood, smoke, fire and gun fire: squares facing the camera

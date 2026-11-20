@@ -2487,15 +2487,18 @@ def instance_objects(src: Source) -> List[Tuple[str, List[List[int]]]]:
 
 
 def _model_for(lib: Library, name: str, prefer: Sequence[Source]) -> Optional[Ref]:
-    """The model an instance object names: a composite drawable of that name, or a state prop's."""
-    ref = lib.find("composite", name, prefer)
-    if ref:
-        return ref
+    """The model an instance object names: the drawable of the state prop of that name (the examiner's block
+    H6.1: the game binds a modelName only to a pure3d::prop::StatePropData by its Name, late, on every package
+    load, and never draws an instance with none). On the PC every instance model that has a model at all has a
+    state prop of its name; 21 names (589 copies: arcadea, jukeboxa, treetops ...) have nothing, in any package.
+    A composite of the name is still taken when no state prop has it (made-up files; never in the game's)."""
     sp = lib.find("stateprop", name, prefer)
     if sp:
         p = _text(sp.data, sp.chunk.body[0])[1]
-        return lib.find("composite", _text(sp.data, p)[0], (sp.source,) + tuple(prefer))
-    return None
+        found = lib.find("composite", _text(sp.data, p)[0], (sp.source,) + tuple(prefer))
+        if found:
+            return found
+    return lib.find("composite", name, prefer)
 
 
 def _is_lod(src: Source) -> bool:
