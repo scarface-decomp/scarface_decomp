@@ -31,6 +31,7 @@ from __future__ import annotations
 import argparse
 import collections
 import contextlib
+import re
 import sys
 import tempfile
 import zipfile
@@ -193,6 +194,17 @@ def rcf_from_disc(src: Path, tmp: Path) -> Optional[Path]:
     return None
 
 
+def patch_archives(src: Path) -> List[Path]:
+    """The patch archives the PC game loads after cement.rcf, from the same folder: patch01.rcf, patch02.rcf ...
+    in number order, so a later one replaces an earlier one's files (the 1.00.2 patch's patch01.rcf replaces
+    scriptc/gui/pause/controller.cso, win32_controller.cso and scriptc/worldgameplay/decor.cso). None for anything
+    but an installed cement.rcf."""
+    if src.name.lower() != "cement.rcf":
+        return []
+    found = [p for p in src.parent.iterdir() if p.is_file() and re.fullmatch(r"patch\d+\.rcf", p.name.lower())]
+    return sorted(found, key=lambda p: int(re.sub(r"\D", "", p.name)))
+
+
 def entries(src: Path, tmp: Path, stack: contextlib.ExitStack,
             overlays: bool = False) -> Iterator[Tuple[str, int, callable]]:
     """(name inside the game's files, size, read()) for every script file in src (and with `overlays`, the
@@ -212,8 +224,16 @@ def entries(src: Path, tmp: Path, stack: contextlib.ExitStack,
         src = rcf
     arc = stack.enter_context(open_rcf(src))
     print(f"{src.name}: {len(arc.entries):,} files in the archive")
+    found = {}                                        # name (lower case, \\) -> (name, size, read): later wins
     for e in arc.find(SCRIPT_EXTENSIONS):
-        yield e.name, e.size, (lambda e=e: arc.read(e))
+        found[e.name.lower().replace("/", "\\")] = (e.name, e.size, (lambda a=arc, e=e: a.read(e)))
+    for patch in patch_archives(src):                 # the PC's patchNN.rcf beside cement.rcf replace its files
+        parc = stack.enter_context(open_rcf(patch))
+        hits = list(parc.find(SCRIPT_EXTENSIONS))
+        print(f"{patch.name}: {len(hits):,} script files replace cement.rcf's")
+        for e in hits:
+            found[e.name.lower().replace("/", "\\")] = (e.name, e.size, (lambda a=parc, e=e: a.read(e)))
+    yield from found.values()
     if overlays:
         for e in arc.entries:
             if overlay_of(e.name):
