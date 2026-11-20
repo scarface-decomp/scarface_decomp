@@ -168,6 +168,10 @@ game's own class names and chunk ids; no game bytes):
     python portal/tools/script_commands.py --json     # every script command and its handler (script_bindings.json)
     python portal/tools/chunk_dispatch.py             # which child chunks each loader handles (chunk_dispatch.json)
 
+and one more prints, without writing anything, the GPU's vertex programs as assembly:
+
+    python portal/tools/vertex_programs.py [0x45E3D0]  # the 16 programs, or one of them
+
 `triage_*.json` is the place to start: a function whose twin in another build is already matched comes
 first (port that C++, then rename), then folded bodies (one match counts for every class that shares it),
 then small functions without floating point or many struct fields. Run `pairing.py` before `triage.py`

@@ -350,6 +350,24 @@ The kinds, over the 5,393 shaders in `packages/z04/*.p3d` and `art/ecoprops/*.p3
 | `vertexfade` | 4 | the low-detail hull of the city and the islands (below) |
 | `untextured` | 1 | |
 
+**How the game colours a vertex** (the Xbox program's own vertex programs, read with
+`portal/tools/vertex_programs.py`; the constants are the ones the shaders' code uploads, `0x32E5F0`). The
+kind name picks the class (`cbvlit` builds `d3dSimpleCBVLitShader`; `foam` and `untextured` build the simple
+one) and `LIT` picks the lit or unlit program:
+
+| Kind | Program | Front colour |
+| :--- | :--- | :--- |
+| `simple`, `LIT` 0 | `0x45DF20` | vertex colour × c55 (the shader's colour) |
+| `simple`, `LIT` 1 | `0x45E008` | 2 × (c29 + Σ lights) × c55: no vertex colour |
+| `layered`, `LIT` 0 | `0x45E190` | vertex colour × c55 |
+| `cbvlit` | `0x45E3D0` | 2 × (c29 + Σ lights) × vertex colour × c18 + second colour (v4) × c20 |
+
+c29 is the scene's ambient, the lights are four lights, each `max(0, N·−L) ×` its colour, c18 and c20
+are two weights the shader sets from the time of day (`1 − x/255` pairs), and the sun (`c42`: its direction
+× 2.5 × its brightness) goes only into the alpha (`r7.w`), not the colour. So **the ×2 multiplies the
+light, not the vertex colour**: with an ambient of 0.5 and no lights a `cbvlit` vertex shows its own colour
+× c18. The exports show the vertex colour as it is (BGRA in the file), which is that case.
+
 The settings that matter here:
 
 | Setting | Seen | What it does |
