@@ -208,17 +208,22 @@ def _came_through(found: Sequence[Trigger], x: float, z: float, y: float) -> Opt
     """Above (or below) every prism at a place, the current trigger does not change (SPEC-011 section 1.3:
     the update at 0x90990 finds none and keeps the pointer at 0x481AF4), so what is loaded is the trigger
     you were last inside. You reach a height no prism holds by leaving, at that height, a prism that holds
-    it: one whose outline meets the outline of a trigger standing under you. So: the nearest trigger that
-    reaches y and touches a trigger holding x, z on the ground, any other before one that gives way; with
-    none, the one under you (the examiner's "directly below"). Jerry's office in the Coconut Grove bank
+    it: one whose outline meets the outline of a trigger standing under you. So: of the triggers that reach
+    y and touch a trigger holding x, z on the ground, a building's own first (its subzone a shell the
+    triggers under you list, not their own: the street's neighbours outside don't take you upstairs), then
+    any other before one that gives way, then the nearest; with none, the one under you (the examiner's
+    "directly below"). Jerry's office in the Coconut Grove bank
     (y 13.87) is above loadTrigger_448 (top 10); its neighbour loadTrigger_400, the bank's stair column with
     no height limit, reaches it, and alone loads the upstairs furniture (luxurybank_02_detailB)."""
     below = [t for t in found if contains(t, x, z)]
     if not below:
         return None
     reach = [t for t in found if t not in below and contains_height(t, y) and any(touches(t, b) for b in below)]
+    # the buildings round you: shells the triggers under you list that are not their own subzone (the street's)
+    buildings = {p.lower() for t in below for p, slot in t.packages
+                 if slot == "Shell" and p.lower() != t.subzone.lower()}
     if reach:
-        reach.sort(key=lambda t: (t.gives_way, distance(t, x, z)))
+        reach.sort(key=lambda t: (t.subzone.lower() not in buildings, t.gives_way, distance(t, x, z)))
         return reach[0]
     return next((t for t in below if not t.gives_way), below[0])
 

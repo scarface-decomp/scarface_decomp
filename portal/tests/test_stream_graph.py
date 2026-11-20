@@ -145,7 +145,7 @@ def test_above_every_prism_the_buildings_own_trigger():
     street = stream_trigger("loadTrigger_448", "cgrove_01_shell", square(0, 0, 50, 50),
                             [("cgrove_01_shell", "Shell"), ("bank_02_shell", "Shell"), ("bank_02_detail", "Detail")],
                             height=10.0, base=0.0)
-    near = stream_trigger("loadTrigger_233", "cgrove_01_shell", square(-20, 0, -1, 50),
+    near = stream_trigger("loadTrigger_233", "cgrove_01_shell", square(-20, 0, 1, 50),
                           [("cgrove_01_shell", "Shell"), ("bank_02_shell", "Shell")], height=0.0)
     stairs = stream_trigger("loadTrigger_400", "bank_02_shell", square(0, 40, 20, 80),
                             [("bank_02_shell", "Shell"), ("bank_02_detail", "Detail"), ("bank_02_detailb", "Detail")],
@@ -156,6 +156,7 @@ def test_above_every_prism_the_buildings_own_trigger():
     assert ("bank_02_detailb", "Detail") in upstairs.packages
     assert [t.name for t in S.loaded_at(found, 5, 25, 6.0).triggers] == ["loadTrigger_448"]
     # with no neighbour reaching the height, the one under you stays
-    alone = S.triggers(p3d(street, near))
+    # the street outside is nearer and touches too, but it doesn't take you upstairs
+    assert S.touches(found[0], found[1]) and S.touches(found[0], found[2])
+    alone = S.triggers(p3d(street))
     assert [t.name for t in S.loaded_at(alone, 5, 25, 13.8).triggers] == ["loadTrigger_448"]
-    assert S.touches(found[0], found[2]) and not S.touches(found[1], found[2])

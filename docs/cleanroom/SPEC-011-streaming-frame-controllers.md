@@ -221,8 +221,9 @@ The advance itself, `sub_00275E40`, is already in the guide from SPEC-009.
   furniture there (desks, chairs, books: `luxurybank_02_detailB`) is only in `loadTrigger_400`'s list
   (subzone `luxurybank_02_shell`, no height limit, 26 units away at the back of the bank). The dzone script
   adds `cgrove_branchBank_dzone` there (plants, ashtrays, cameras), not furniture. The export now takes,
-  above every prism, the nearest trigger that reaches the height and whose outline meets a trigger under
-  you, any other before one that gives way: `loadTrigger_400`, whose outline overlaps 448's.
+  above every prism, a trigger that reaches the height and whose outline meets a trigger under you, the
+  building's own first (the street's `loadTrigger_233` touches 448 too and is nearer, but loads no
+  `detailB`), then the nearest: `loadTrigger_400`, whose outline overlaps 448's.
 * **Answer to (a), from the examiner (block G3), and the files.** The current trigger is the global at
   `0x481AF4`, updated by `sub_00090990` (change: `sub_00090C90`); outside every prism the update finds none
   and nothing changes. The examiner's fallback, "the trigger under you" (y clamped into its prism), gives

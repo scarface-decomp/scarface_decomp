@@ -714,8 +714,9 @@ the triggers around it. In the game the current trigger is sticky: while you sta
 triggers don't take over, unless it is the one that gives way. Where no prism holds you, nothing changes:
 what was loaded stays. The exports take one fixed answer per place: the first trigger in the file's order
 whose prism holds it (the one that gives way last); above every prism (the update at `0x90990` finds none, so the
-current trigger at `0x481AF4` stays), the nearest trigger that reaches the height and whose outline meets a
-trigger under you: the one you came up through (Jerry's office upstairs in the Coconut Grove bank, y 13.87,
+current trigger at `0x481AF4` stays), the trigger you came up through: one that reaches the height and whose
+outline meets a trigger under you, the building's own first (its subzone a shell the triggers under you list),
+then the nearest (Jerry's office upstairs in the Coconut Grove bank, y 13.87,
 above `loadTrigger_448`'s top of 10: its neighbour `loadTrigger_400`, the bank's stair column with no height
 limit, the only one that loads `luxurybank_02_detailB`, its furniture); with no such neighbour, the trigger
 under you; else the nearest. The coordinates are the map's own, before
