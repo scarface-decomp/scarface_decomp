@@ -16,6 +16,7 @@ All numbers are little-endian unless a section says otherwise. Offsets are in he
 | [Pictures in Pure3D](#pictures) | PNG, DDS, P3DI | PC, Xbox, PS2 | `media.py` |
 | [Sounds](#sounds-rsd) | `.rsd` | all | `game_assets.py` (facts), `media.py` (playing) |
 | [Text bibles](#text-bibles) | `.p3d` under `textbible/` and with missions | PC checked | `media.py` (`text_bible`) |
+| [The tape player](#the-tape-player) | `missions.cso`, `tapeplayer.p3d`, HUD text | PC checked | `tape_mod.py` |
 | [Videos](#videos-bik) | `.bik` | Xbox and PC (Bink) | `game_assets.py` (Bink picture size) |
 | [PS2 movies](#ps2-movies-rmv) | `.rmv` | PS2 | `rmv.py` (to an `.ipu` picture and a `.wav`) |
 | [Compiled scripts](#scripts-cso-dso-dtr) | `.cso`, `.dso` | all | `torque_dso.py` and friends ([SCRIPTS.md](SCRIPTS.md)), `fog.py` ([the fog](#fog-by-time-of-day)) |
@@ -1411,6 +1412,44 @@ the text      UTF-16, each line ended by a 0
 A line is found by its id's key: `p3d.name_key("A64_GOTOHOTEL")`. `media.text_bible(data)` gives every
 `(key, text)`. The layout was worked out on the PC's 114 files; the reader in the repository is
 tested on made-up files only, so say so if a real one does not read.
+
+## The tape player
+
+The in-game tape player (HUDTapePlayer) plays songs from a library script, lists them by numbers kept in 13 tapes,
+and names them from the HUD text bible. From the Xbox program (default.xbe) and the PC files; `portal/tools/tape_mod.py`
+adds songs this way.
+
+**The library.** `scriptc/missions/missions.cso` makes a `TapeTrackLibrary` (`Name = "TapeTrackGroup"`) holding 108
+`TapeTrack` objects, `Track0` to `Track107`. Fields (reports/fields.json): `WasPlayed` bool +0x20, `IsUnlocked` bool +0x21,
+`UnlockList` s16 +0x22, `Title` string +0x24, `LayerName` string +0x28 (compiled names `stxccnfjjol`, `stxpgegeiml`,
+`stxaklkeccn`, `stxgcpallon`, `stxocihbejk`; class `stxbkecbojn`). Every stock song has `IsUnlocked = 1`,
+`UnlockList = 0`. A track number n is found by name (`sprintf("Track%i")`, then the object lookup), but the random
+unlock picker walks the library by position, so `Track<n>` must be at position n. Five `TapeMixTape` objects
+(`MixTape1`–`MixTape5`: `Editable`, `Title`, `TrackIndex0`–`TrackIndex11` s16) are also made; `MixTape1` lists 90,
+95, 71, 128 and 129, the last two beyond the library.
+
+**The tapes.** A fixed block of 13 × 108 bytes (0x57C, at `0x48C314`) kept in the save game: one byte per slot, a
+track number, 0xFF empty. A new game fills tape 0 ("Entire Library") with 0 to 107 and tapes 1 to 8 with fixed genre
+lists (`0x1A19F0`); tapes 9 to 12 (the custom mixes) start empty. Every reader takes the byte as signed (`movsx`),
+so only tracks 0 to 127 work. The script command `HUDTapePlayer_SetSongAt(tape, slot, track)` writes a slot (no
+checks); `HUDTapePlayer_GetSongAt` reads one; `HUDTapePlayer_UnlockSong(11)` lifts track 11's lock.
+
+**On screen.** A row reads `[TAPE_PLAYER_TRACK_<n>_ARTIST] - [TAPE_PLAYER_TRACK_<n>_TITLE]`, cut to a per-track length
+(a 108-byte table at `0x3C1078`, 255 = never) with "..." added; tracks 5, 13, 21, 22, 66, 73, 74, 82 and 90 read
+`[SONG_LOCKED]` until the Records front business is owned, and track 11 until a flag is set. A tape is named
+`[TAPE_PLAYER_MIXTAPE_<m>]` (0 ENTIRE LIBRARY … 8 SCARFACE O.S.T., 9–12 CUSTOM MIX 1–4). For tracks 108 to 127 the
+length table runs on into the next data: 108–124 are never cut, 125–127 are cut to nothing.
+
+**The music.** A track's `LayerName` names a layer of the `tapeplayer` cue in `art/sound/scripts/tapeplayer.p3d` (a
+`0x01000001` chunk), found by the name's hash at load; a name with no layer plays nothing. The cue's body: name, u32 1,
+u32 1, track name (`tape`), u32 layer count (114 on the PC), then each layer: name, 15 bytes
+(`00000000 00010000 00000000 000000`), a 64-bit id, u32 event count, each event (class name `SeqEventStream`, a
+64-bit id, the stream path `music\tapeplayer\<name>`, u32 length in bytes as 16-bit PCM = samples × channels × 2,
+u8 0, u32 channels, u32 rate, u32 bits), then u32 1, u32 1. Strings are u32 length, the bytes, a 0. The ids are a
+random word and a 2001 time stamp. Four layers have no library track (`tp_clash_police`, `tp_germany`,
+`tp_grant_avenue`, `tp_italy`, their sounds on the disc); two have no stream and are silent (`tp_donomar_guerra`,
+`tp_ivyqueen_dale`). A stream path's sound is `art/sound/rsd/<x>/<id>.rsd` (Sounds, above): on the PC a 2 KB `RSD6`
+`OOGV` header and an Ogg Vorbis stream, 48000 Hz stereo for every tape song.
 
 ## Videos (`.bik`)
 
