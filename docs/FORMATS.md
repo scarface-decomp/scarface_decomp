@@ -493,7 +493,8 @@ on the result's luma; a 4-tap box shrink; then a Gaussian blur along each axis w
 `out = clamp(Bloom_Value, 0, 2) × bloom + clamp(Bloom_BackBuffer, 0, 1) × scene`, replacing the picture (no
 blending; the tint is not in it). The bright pass is a colour-keeping contrast curve about the midpoint; only
 at `Bloom_Contrast` 100 does it become a black-and-white step. Its result is drawn at half size, then shrunk to a
-quarter, where the blur runs back and forth between two quarter-size pictures, the taps a whole texel apart.
+quarter in one fetch multiplied by `Bloom_Tint_RGB` (fixed-function: texture × texture factor), where the blur
+runs back and forth between two quarter-size pictures, the taps a whole texel apart.
 
 **Cutscenes.** Track times are frames at 30 per second. Every channel is linear between keys (quaternions
 slerped the short way, a plain lerp when nearly equal), holding the first key before and the last after
@@ -508,7 +509,12 @@ of the game's own. While an `NISDriveWorldStreamer` is on, the world streams rou
 **Instance objects.** Flags at +0x30: `noCollision` bit 23, `interior` 24, `doNotCull` 25, `staticCollision`
 27, `priority` bits 18 to 20. `attractEnabled` writes the same bit as `doNotCull`, and `noSway` the same as
 `staticCollision`, so the later of each pair in the object wins. A model name binds only to a state prop
-with that `Name` **(exported)**; the cull radius is the model's bounding radius.
+with that `Name` **(exported)**; the cull radius is the model's bounding radius. An instance's place keeps the precision the game
+packs it to **(exported)**: the height in whole centimetres (a s16), the turn about Y in whole degrees (9 bits)
+and about X and Z in 2-degree steps (8 bits each), applied X first, then Y, then Z, X and Y the other way round;
+the scale in 0.001 steps when uniform (0.001 to 65), else 0.05 steps per axis (up to 3.15). The eighth number
+becomes a 4-bit level `L` (0 reads as 1.0, else `L / 15`) passed on with the instance; what uses it is not
+known yet. The game keeps at most 4,181 instances; more are dropped.
 
 ### The game's loaders
 
