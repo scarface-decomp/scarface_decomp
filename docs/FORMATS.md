@@ -435,6 +435,62 @@ away it stands in for the detailed areas. Shown whole next to them, it is a shel
 `p3d_gltf.shader_info` reads a shader and its settings (the kind is its `pddi`). A shader known only by name, from
 a file not given, is read from its name, kind included (`shader_from_name`).
 
+### How the game draws a frame
+
+What the Xbox program does with a shader, from the examiner's blocks H and J (addresses are `default.xbe`'s).
+The exports follow the parts marked **(exported)**; the rest is recorded for the tools that come next.
+
+**Render states** (`sub_00282950`, tables in the program's data). `BLMD` picks a row: 0 off; 1 source alpha,
+one minus source alpha; 2 one, one (adds); 3 one, one, subtracted from what is behind (dst − src); 4 dst colour,
+zero (multiplies); 5 dst colour, src colour (doubles); 6 dst colour, src alpha; 7 src alpha, src alpha,
+subtracted. Only 0 to 3 are in the game's files **(exported)**. `ATST` turns the alpha test on, `ACMP` picks
+the test (0 never, 1 always, 2 less, 3 less or equal, 4 greater, 5 greater or equal, 6 equal, 7 not equal),
+`ACTH` × 255 is its reference **(exported)**. A cbvlit shader with a fade (its byte at +0x38) skips both and
+blends by a constant alpha instead: `out = lerp(behind, surface, 1 − fade/255)`.
+
+**Pixel stage** (Xbox pixel-shader definitions, decoded): simple, cbvlit and character are `T0 × D0` with no
+scale; layered lit is `2 × lerp(T0, T1, D0.a) × D0`; specular `4 × T0 × D1` for its shine pass; vehicles
+`2 × T0 × D0` plus gloss and environment passes (up to `4 ×`). Every one ends in linear fog:
+`fog.a × colour + (1 − fog.a) × fog colour`. The vertex programs' `×2` (above) is on the light only.
+
+**Fog.** The start and end distances and the colour are the environment's `FogStart`, `FogEnd` and
+`FogColor_RGBA`, blended by the hour; the vertex programs put a linear factor in `oFog` from `c49`.
+
+**Far geometry** (`vertexfade`): colour `T0 × 2 × (building ambient + lights) × (LODRedScaler,
+LODGreenScaler, LODBlueScaler)`, no vertex colour; alpha `clamp((distance − 200) / 50, 0, 1)`, alpha-tested
+at 20/255 and blended: it fades in from 200 to 250 units.
+
+**Time of day.** The clock is milliseconds of the day; six keys (time, hold share A, ramp share B, a clear
+and a rainy environment) per `TODObject`. Between two keys an environment holds for `A / (A + B)` of the
+span, then blends linearly to the next; rain blends the clear and rainy results by its weight. The light
+groups' and the sky's animations play at frame `day fraction × frames` (the sky's only every 15 seconds).
+
+**Colour effects** (`ColourFX_*`, a full-screen pass, `d3dExtFramebufferEffects` 0x26AED0). With `t` the
+picture, `L = 0.25 r + 0.625 g + 0.125 b`, `Lt` the same of the tint:
+`out = Lt × Sat × K × (t − L) + (tint − Lt) × L + P × (k × L + B′ − bias)`, where
+`Sat = 1 + Saturation / 100`, `K` is `1 + Contrast / 100` below 0 and the program's table above
+(1.0 at 0, 2.096 at 50, 255 at 100), `P` the smallest of 1, 2, 4 ... 64, 255 not below `K` and `k = K / P`,
+`B = Brightness / 255`, `m = MidPoint / 255`, `B′ = B` when `K` is 1 else `((B − m) K + m) Lt`, `bias` 0.5 on
+the contrast path else 1; each stage clamped. `K` = 255 is a posterising pass of its own.
+
+**Bloom**: a bright pass (luma above a threshold), a 4-tap box shrink, blurs of 1 to 4 taps
+(`Bloom_Radius`), then `2 × scene × Bloom_BackBuffer + bloom × Bloom_Brightness`.
+
+**Cutscenes.** Track times are frames at 30 per second. Every channel is linear between keys (quaternions
+slerped the short way, a plain lerp when nearly equal), holding the first key before and the last after
+**(exported)**. Cameras: position `TRAN`, a direction `LOOK`, `UP`, the horizontal FOV in radians for a 4:3
+screen (kept vertical on wide screens), near and far planes **(exported)**. A fade is linear in, hold and
+out, drawn over the picture **(exported)**; the letterbox bars slide in or out over 500 ms, linearly.
+A camera shake adds `amplitude × e^(−3 t / duration) × (sin(2π f t) + noise × random)` degrees, up to six at
+once. Faces are morph targets weighted by `EXP` animations' `STE` channels; there is no lip sync or blinking
+of the game's own. While an `NISDriveWorldStreamer` is on, the world streams round the camera
+**(exported)**.
+
+**Instance objects.** Flags at +0x30: `noCollision` bit 23, `interior` 24, `doNotCull` 25, `staticCollision`
+27, `priority` bits 18 to 20. `attractEnabled` writes the same bit as `doNotCull`, and `noSway` the same as
+`staticCollision`, so the later of each pair in the object wins. A model name binds only to a state prop
+with that `Name` **(exported)**; the cull radius is the model's bounding radius.
+
 ### The game's loaders
 
 The game reads each kind of chunk with a loader object, and the Xbox program still has their class names
