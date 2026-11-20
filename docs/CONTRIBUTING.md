@@ -156,6 +156,29 @@ byte; it writes `work/recheck_matches.md`. The second needs your copied game fil
 `extracted/blender/<version>/export_check.md`: what could not be made, whose model or face is missing,
 which props could not be placed. Run them after updating the project; the numbers should not go down.
 
+## Reports that say what to take next
+
+Six tools read only your own copies of the programs and write tables under `reports/` (addresses, the
+game's own class names and chunk ids; no game bytes):
+
+    python portal/tools/triage.py xb                  # unmatched functions, best first (triage_xb.json)
+    python portal/tools/pairing.py xb proto           # each function's twin in the other build (pairing_*.json)
+    python portal/tools/folds.py                      # one body shared by several classes (folded_functions.json)
+    python portal/tools/loader_registry.py            # which class reads which .p3d chunk (loader_registry.json)
+    python portal/tools/script_commands.py --json     # every script command and its handler (script_bindings.json)
+    python portal/tools/chunk_dispatch.py             # which child chunks each loader handles (chunk_dispatch.json)
+    python portal/tools/fields.py                     # every class's script fields: name, type, offset, setter (fields.json)
+
+and one more prints, without writing anything, the GPU's vertex programs as assembly:
+
+    python portal/tools/vertex_programs.py [0x45E3D0]  # the 16 programs, or one of them
+
+`triage_*.json` is the place to start: a function whose twin in another build is already matched comes
+first (port that C++, then rename), then folded bodies (one match counts for every class that shares it),
+then small functions without floating point or many struct fields. Run `pairing.py` before `triage.py`
+after new matches, so the twins are current. The PC's program is packed on disk: only about a tenth of its
+code can be read, so its pairing and triage cover only that part.
+
 ## Rules
 
 * **Only the compiler decides.** No estimates, no "close enough", no counting partial matches.

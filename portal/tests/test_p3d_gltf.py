@@ -2905,3 +2905,14 @@ def test_a_room_with_only_furniture_is_the_room_where_its_props_stand(tmp_path):
     out, index = copied_game(tmp_path, rooms)
     at = G.pos(G.instance_trs(record(11.0, 500.0, 21.0))[0])            # the game's own coordinates of that spot
     assert [p.name for p in BX.rooms_at(out, index, "pc", at)] == ["shop_dzone.p3d"]
+
+
+def test_a_shaders_ambient_is_its_diffuse():
+    """The examiner's answer F2: the game skips a shader's own AMBI and sets ambient from DIFF."""
+    import p3d as p3d_module
+    colour = lambda param, argb: chunk(0x11005, param + struct.pack("<I", argb))
+    head = text("s") + struct.pack("<I", 0) + text("simple") + struct.pack("<4I", 0, 0, 0, 2)
+    for kids, want in ((colour(b"AMBI", 0xFF112233) + colour(b"DIFF", 0xFF808080), {"DIFF": 0xFF808080, "AMBI": 0xFF808080}),
+                       (colour(b"AMBI", 0xFF112233), {})):
+        data = p3d(chunk(0x11000, head, kids))
+        assert G.shader_info(data, p3d_module.read_tree(data)[0])["colours"] == want

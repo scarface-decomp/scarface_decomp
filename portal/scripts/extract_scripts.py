@@ -8,8 +8,10 @@ Copy the game's script files out of your own copy of the game, for the script wo
     python portal/scripts/extract_scripts.py "..\\SLUS_211.11.SCARFACEps2.iso"                # PS2 disc
 
 Takes any of:
-  * cement.rcf from an installed copy (the PC disc keeps its files inside DATA*.CAB, so use the
-    installed game's cement.rcf for the PC version);
+  * cement.rcf from an installed copy, or the PC installer disc image (.iso) itself: its files are read out
+    of DATA*.CAB as the installer places them. Either way the official 1.00.2 patch's patch01.rcf is applied
+    over cement.rcf (beside an installed cement.rcf; for the disc, the patch .exe in the same folder), so the
+    PC scripts are the patched ones;
   * a disc image (.iso) with cement.rcf on it: the PS2 disc, or an Xbox disc image;
   * a .7z or .zip holding an Xbox disc image (cement.rcf is read out of it without unpacking the
     whole image);
@@ -31,6 +33,7 @@ from __future__ import annotations
 import argparse
 import collections
 import contextlib
+import re
 import sys
 import tempfile
 import zipfile
@@ -57,7 +60,7 @@ def guess_version(src: Path) -> str:
         return "ps2"
     if "xbox" in low or (low.endswith(GF.DISC_IMAGES) and GF._is_xbox_image(src)):
         return "xbox"
-    if low == "cement.rcf":
+    if low == "cement.rcf" or is_pc_disc(src):
         return "pc"
     if low.endswith(GF.ARCHIVES):
         try:
@@ -193,6 +196,79 @@ def rcf_from_disc(src: Path, tmp: Path) -> Optional[Path]:
     return None
 
 
+def is_pc_disc(src: Path) -> bool:
+    """The PC game's installer disc image (its files in Data*.cab, placed by SCARFACE.MSI)."""
+    if src.suffix.lower() != ".iso" or not src.is_file():
+        return False
+    import game_assets as GA
+    return GA._pc_layout(GA._pc_disc_root(src))
+
+
+PATCH_RCF = re.compile(r"patch(\d+)\.rcf/(.+)")
+
+
+def pc_disc_scripts(src: Path, log=print) -> List[Tuple[str, int, callable]]:
+    """The PC game's script files read straight off its installer disc, as an installed and patched game has
+    them: cement.rcf's, then those of the patch archives the official 1.00.2 patch (sitting beside the disc in
+    binaries/) adds, in number order, a later one replacing an earlier one's file. Uses the full unpacker's
+    own disc reader (game_assets.read_pc_disc), keeping only the scripts."""
+    import game_assets as GA
+    found, by_sha = {}, {}
+
+    def keep(path: str, data: bytes) -> None:
+        low = path.replace("\\", "/").lower()
+        if low.startswith("cement.rcf/"):
+            rank, inner = 0, path.replace("\\", "/")[len("cement.rcf/"):]
+        else:
+            m = PATCH_RCF.match(low)
+            if not m:
+                return
+            rank, inner = int(m.group(1)), path.replace("\\", "/")[len(low) - len(m.group(2)):]
+        if not inner.lower().endswith(SCRIPT_EXTENSIONS):
+            return
+        key = inner.lower()
+        if key not in found or found[key][0] <= rank:
+            found[key] = (rank, inner.replace("/", "\\"), data)
+
+    class Keep:
+        def file(self, path, size, chunks):
+            import hashlib
+            h, buf = hashlib.sha1(), bytearray()
+            wanted = path.lower().endswith(SCRIPT_EXTENSIONS)
+            for c in chunks:
+                h.update(c)
+                if wanted:
+                    buf += c
+            sha = h.hexdigest()
+            if wanted:
+                by_sha[sha] = bytes(buf)
+                keep(path, by_sha[sha])
+            return sha
+
+        def same(self, path, size, sha):
+            if sha in by_sha:
+                keep(path, by_sha[sha])
+
+    import game_files as GF2
+    patch = GF2._patch_installer(src.parent)
+    source = GA.Source(version="pc", path=src, kind="pcdisc", extra=str(patch) if patch else "")
+    if patch:
+        log(f"{patch.name}: its patch archives replace cement.rcf's files")
+    GA.read_pc_disc(source, Keep(), lambda n: None, lambda: False, log=log)
+    return [(name, len(data), (lambda d=data: d)) for _rank, name, data in found.values()]
+
+
+def patch_archives(src: Path) -> List[Path]:
+    """The patch archives the PC game loads after cement.rcf, from the same folder: patch01.rcf, patch02.rcf ...
+    in number order, so a later one replaces an earlier one's files (the 1.00.2 patch's patch01.rcf replaces
+    scriptc/gui/pause/controller.cso, win32_controller.cso and scriptc/worldgameplay/decor.cso). None for anything
+    but an installed cement.rcf."""
+    if src.name.lower() != "cement.rcf":
+        return []
+    found = [p for p in src.parent.iterdir() if p.is_file() and re.fullmatch(r"patch\d+\.rcf", p.name.lower())]
+    return sorted(found, key=lambda p: int(re.sub(r"\D", "", p.name)))
+
+
 def entries(src: Path, tmp: Path, stack: contextlib.ExitStack,
             overlays: bool = False) -> Iterator[Tuple[str, int, callable]]:
     """(name inside the game's files, size, read()) for every script file in src (and with `overlays`, the
@@ -210,10 +286,23 @@ def entries(src: Path, tmp: Path, stack: contextlib.ExitStack,
         if not rcf:
             raise RcfError(f"no cement.rcf found in {src.name}")
         src = rcf
+    if is_pc_disc(src):
+        found = pc_disc_scripts(src)
+        print(f"{src.name}: {len(found):,} script files (installer disc, patches applied)")
+        yield from found
+        return
     arc = stack.enter_context(open_rcf(src))
     print(f"{src.name}: {len(arc.entries):,} files in the archive")
+    found = {}                                        # name (lower case, \\) -> (name, size, read): later wins
     for e in arc.find(SCRIPT_EXTENSIONS):
-        yield e.name, e.size, (lambda e=e: arc.read(e))
+        found[e.name.lower().replace("/", "\\")] = (e.name, e.size, (lambda a=arc, e=e: a.read(e)))
+    for patch in patch_archives(src):                 # the PC's patchNN.rcf beside cement.rcf replace its files
+        parc = stack.enter_context(open_rcf(patch))
+        hits = list(parc.find(SCRIPT_EXTENSIONS))
+        print(f"{patch.name}: {len(hits):,} script files replace cement.rcf's")
+        for e in hits:
+            found[e.name.lower().replace("/", "\\")] = (e.name, e.size, (lambda a=parc, e=e: a.read(e)))
+    yield from found.values()
     if overlays:
         for e in arc.entries:
             if overlay_of(e.name):

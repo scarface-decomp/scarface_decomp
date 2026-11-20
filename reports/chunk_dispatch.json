@@ -1,0 +1,2177 @@
+{
+ "what": "child chunks each loader's dispatch loop handles, read from the program's own code (portal/tools/chunk_dispatch.py; the examiner's question F3)",
+ "versions": {
+  "xb": {
+   "file": "default.xbe",
+   "loops": 53,
+   "ids": 98,
+   "handler_accepts": {
+    "pure3d::DefaultFrameControllerHandler": [
+     "BQG",
+     "CAM",
+     "EFX",
+     "EXP",
+     "LITE",
+     "PSYS",
+     "PTRN",
+     "PVIS",
+     "PVRT",
+     "SHAD",
+     "STRN",
+     "SVIS",
+     "TEX",
+     "VRTX"
+    ]
+   },
+   "unnamed_ids": [
+    "0x00003510",
+    "0x00010009",
+    "0x0001000E",
+    "0x0001000F",
+    "0x00010015",
+    "0x00010016",
+    "0x00010022",
+    "0x00010023",
+    "0x00010F00",
+    "0x00010F01",
+    "0x00011001",
+    "0x00011006",
+    "0x00011007",
+    "0x00014001",
+    "0x00017005",
+    "0x00017007",
+    "0x00017008",
+    "0x00017009",
+    "0x0001700A",
+    "0x0001700B",
+    "0x0001700C",
+    "0x0001700D",
+    "0x00018003",
+    "0x0001800E",
+    "0x00018020",
+    "0x00019003",
+    "0x00019004",
+    "0x00022003",
+    "0x00022006",
+    "0x00022007",
+    "0x00121008",
+    "0x00121203",
+    "0x00121204",
+    "0x00121400",
+    "0x00121401",
+    "0x00121402",
+    "0x07000003",
+    "0x07000006",
+    "0x07000007",
+    "0x07000008",
+    "0x07016000",
+    "0x08011001",
+    "0x08011002",
+    "0x08011003",
+    "0x08011004",
+    "0x08020004",
+    "0x08020005",
+    "0x08020006",
+    "0x08020007",
+    "0x08020009",
+    "0x0802000A",
+    "0x08800106",
+    "0x08800200"
+   ],
+   "dispatches": [
+    {
+     "site": "0x00032082",
+     "function": "0x00031F80",
+     "owner": "",
+     "called_from": [
+      "NavMeshLoader::vfunc_06"
+     ],
+     "default": "0x00032360",
+     "cases": [
+      {
+       "id": "0x08011001",
+       "chunk": "",
+       "at": "0x0003209C",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x08011002",
+       "chunk": "",
+       "at": "0x0003210C",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x08011003",
+       "chunk": "",
+       "at": "0x00032199",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x08011004",
+       "chunk": "",
+       "at": "0x0003220B",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0014C9A2",
+     "function": "0x0014C910",
+     "owner": "WaterDataShallowAreaLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0014CA12",
+     "cases": [
+      {
+       "id": "0x08800200",
+       "chunk": "",
+       "at": "0x0014C9AE",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x001C6832",
+     "function": "0x001C6580",
+     "owner": "LoadPackageChunkLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x001C68C8",
+     "cases": [
+      {
+       "id": "0x08800106",
+       "chunk": "",
+       "at": "0x001C6842",
+       "calls": [
+        "sub_000275B0",
+        "sub_001C5750"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0024C4F7",
+     "function": "0x0024C230",
+     "owner": "",
+     "called_from": [
+      "pure3d::frontend::ProjectLoader::vfunc_06"
+     ],
+     "default": "0x0024C5B2",
+     "cases": [
+      {
+       "id": "0x0001800C",
+       "chunk": "Frontend String Hard Coded",
+       "at": "0x0024C507",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0024CE62",
+     "function": "0x0024CD90",
+     "owner": "",
+     "called_from": [
+      "pure3d::frontend::ProjectLoader::vfunc_06"
+     ],
+     "default": "0x0024CE8A",
+     "cases": [
+      {
+       "id": "0x00018003",
+       "chunk": "",
+       "at": "0x0024CE73",
+       "calls": [
+        "sub_0024CB70",
+        "sub_00240820"
+       ]
+      },
+      {
+       "id": "0x00018020",
+       "chunk": "",
+       "at": "0x0024CE73",
+       "calls": [
+        "sub_0024CB70",
+        "sub_00240820"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0024D104",
+     "function": "0x0024CED0",
+     "owner": "pure3d::frontend::ProjectLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0024D153",
+     "cases": [
+      {
+       "id": "0x00018001",
+       "chunk": "Frontend Screen",
+       "at": "0x0024D12E",
+       "calls": [
+        "sub_0024C670",
+        "sub_0024FA20"
+       ]
+      },
+      {
+       "id": "0x00018002",
+       "chunk": "Frontend Page",
+       "at": "0x0024D110",
+       "calls": [
+        "sub_0024CD90",
+        "sub_0023FA10"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0024DEB2",
+     "function": "0x0024DD60",
+     "owner": "",
+     "called_from": [
+      "pure3d::TextBibleLoader::vfunc_06"
+     ],
+     "default": "0x0024DEF8",
+     "cases": [
+      {
+       "id": "0x0001800E",
+       "chunk": "",
+       "at": "0x0024DEBE",
+       "calls": [
+        "sub_0024D5B0"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00256102",
+     "function": "0x00255FE0",
+     "owner": "pure3d::ShaderLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x00256470",
+     "cases": [
+      {
+       "id": "0x00011001",
+       "chunk": "",
+       "at": "0x0025611C",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00011002",
+       "chunk": "Shader Texture Parameter",
+       "at": "0x002561D9",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00011003",
+       "chunk": "Shader Integer Parameter",
+       "at": "0x00256269",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00011004",
+       "chunk": "Shader Float Parameter",
+       "at": "0x00256358",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00011005",
+       "chunk": "Shader Colour Parameter",
+       "at": "0x00256397",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00011006",
+       "chunk": "",
+       "at": "0x002563F8",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00011007",
+       "chunk": "",
+       "at": "0x00256434",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0025ACE5",
+     "function": "0x0025AC40",
+     "owner": "",
+     "called_from": [
+      "pure3d::BillboardObjectLoader::vfunc_06",
+      "pure3d::DefaultParticleEmitterHandler::vfunc_05"
+     ],
+     "default": "0x0025AD49",
+     "cases": [
+      {
+       "id": "0x00121201",
+       "chunk": "Frame Controller",
+       "at": "0x0025ACF1",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00263918",
+     "function": "0x00263810",
+     "owner": "",
+     "called_from": [
+      "pure3d::ImageFontLoader::vfunc_06",
+      "pure3d::ImageLoader::vfunc_06",
+      "pure3d::SpriteLoader::vfunc_06"
+     ],
+     "default": "0x002639B3",
+     "cases": [
+      {
+       "id": "0x00019002",
+       "chunk": "Image Data",
+       "at": "0x00263979",
+       "calls": [
+        "sub_00240570",
+        "sub_00240880"
+       ]
+      },
+      {
+       "id": "0x00019003",
+       "chunk": "",
+       "at": "0x0026392B",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0026D5B8",
+     "function": "0x0026D4B0",
+     "owner": "pure3d::SpriteLoader::vfunc_09",
+     "called_from": [],
+     "default": "0x0026D653",
+     "cases": [
+      {
+       "id": "0x00019002",
+       "chunk": "Image Data",
+       "at": "0x0026D619",
+       "calls": [
+        "sub_00240570",
+        "sub_00240880"
+       ]
+      },
+      {
+       "id": "0x00019003",
+       "chunk": "",
+       "at": "0x0026D5CB",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0026D7C4",
+     "function": "0x0026D690",
+     "owner": "pure3d::SpriteLoader::vfunc_10",
+     "called_from": [],
+     "default": "0x0026D85F",
+     "cases": [
+      {
+       "id": "0x00019002",
+       "chunk": "Image Data",
+       "at": "0x0026D823",
+       "calls": [
+        "sub_00240570",
+        "sub_00240880"
+       ]
+      },
+      {
+       "id": "0x00019003",
+       "chunk": "",
+       "at": "0x0026D7D7",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0026E442",
+     "function": "0x0026E310",
+     "owner": "pure3d::SpriteLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0026E47C",
+     "cases": [
+      {
+       "id": "0x00003510",
+       "chunk": "",
+       "at": "0x0026E46C",
+       "calls": [
+        "sub_00263810",
+        "sub_00240820"
+       ]
+      },
+      {
+       "id": "0x00019001",
+       "chunk": "Image",
+       "at": "0x0026E455",
+       "calls": []
+      }
+     ]
+    },
+    {
+     "site": "0x0026F052",
+     "function": "0x0026ECB0",
+     "owner": "pure3d::prop::StatePropDataLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0026F63B",
+     "cases": [
+      {
+       "id": "0x08020002",
+       "chunk": "Part Visibility",
+       "at": "0x0026F06C",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x08020003",
+       "chunk": "Prop State Animation",
+       "at": "0x0026F0ED",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x08020004",
+       "chunk": "",
+       "at": "0x0026F206",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x08020005",
+       "chunk": "",
+       "at": "0x0026F29C",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x08020006",
+       "chunk": "",
+       "at": "0x0026F639",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x08020007",
+       "chunk": "",
+       "at": "0x0026F639",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x08020008",
+       "chunk": "Prop Property",
+       "at": "0x0026F599",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x08020009",
+       "chunk": "",
+       "at": "0x0026F639",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x0802000A",
+       "chunk": "",
+       "at": "0x0026F639",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x0802000B",
+       "chunk": "Prop State Effect",
+       "at": "0x0026F332",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0026FB56",
+     "function": "0x0026FA30",
+     "owner": "pure3d::ExpressionGroupLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0026FBBE",
+     "cases": [
+      {
+       "id": "0x00021000",
+       "chunk": "Expression",
+       "at": "0x0026FB62",
+       "calls": [
+        "sub_00240870",
+        "sub_00240F00"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00270E52",
+     "function": "0x00270CE0",
+     "owner": "pure3d::ParticleSystemLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x00270F82",
+     "cases": [
+      {
+       "id": "0x00010003",
+       "chunk": "Bounding Box",
+       "at": "0x00270EA7",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010004",
+       "chunk": "Bounding Sphere",
+       "at": "0x00270E72",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121201",
+       "chunk": "Frame Controller",
+       "at": "0x00270ED6",
+       "calls": [
+        "sub_00240F00",
+        "sub_002FC034"
+       ]
+      },
+      {
+       "id": "0x00122000",
+       "chunk": "Draw Order",
+       "at": "0x0027102E",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x002713D2",
+     "function": "0x00271330",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultParticleGeneratorHandler::vfunc_05"
+     ],
+     "default": "0x00271515",
+     "cases": [
+      {
+       "id": "0x00121000",
+       "chunk": "Animation",
+       "at": "0x002713E2",
+       "calls": [
+        "sub_00240F00",
+        "sub_002FC034"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00271614",
+     "function": "0x00271540",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultParticleGeneratorHandler::vfunc_05"
+     ],
+     "default": "0x00271757",
+     "cases": [
+      {
+       "id": "0x00121000",
+       "chunk": "Animation",
+       "at": "0x00271624",
+       "calls": [
+        "sub_00240F00",
+        "sub_002FC034"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00271803",
+     "function": "0x00271780",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultParticleGeneratorHandler::vfunc_05"
+     ],
+     "default": "0x00271946",
+     "cases": [
+      {
+       "id": "0x00121000",
+       "chunk": "Animation",
+       "at": "0x00271813",
+       "calls": [
+        "sub_00240F00",
+        "sub_002FC034"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00271DD6",
+     "function": "0x00271AF0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultParticleEmitterHandler::vfunc_05"
+     ],
+     "default": "0x0027207F",
+     "cases": [
+      {
+       "id": "0x00010003",
+       "chunk": "Bounding Box",
+       "at": "0x00271E2B",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010004",
+       "chunk": "Bounding Sphere",
+       "at": "0x00271DF6",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121000",
+       "chunk": "Animation",
+       "at": "0x00271E5A",
+       "calls": [
+        "sub_00240F00",
+        "sub_002FC034"
+       ]
+      },
+      {
+       "id": "0x00121204",
+       "chunk": "",
+       "at": "0x002720BF",
+       "calls": [
+        "sub_0025AC40",
+        "sub_00240820"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00272F82",
+     "function": "0x00272DC0",
+     "owner": "pure3d::MultiControllerLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x00273164",
+     "cases": [
+      {
+       "id": "0x00121203",
+       "chunk": "",
+       "at": "0x00272F92",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00275632",
+     "function": "0x002755D0",
+     "owner": "",
+     "called_from": [
+      "pure3d::AnimationLoader::vfunc_06"
+     ],
+     "default": "0x0027573B",
+     "cases": [
+      {
+       "id": "0x00121006",
+       "chunk": "Animation Header",
+       "at": "0x0027576F",
+       "calls": [
+        "sub_00240820"
+       ]
+      },
+      {
+       "id": "0x00121007",
+       "chunk": "Animation Channel Count",
+       "at": "0x0027568E",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121400",
+       "chunk": "",
+       "at": "0x00275650",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00275AC2",
+     "function": "0x00275950",
+     "owner": "pure3d::AnimationLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x00275DB4",
+     "cases": [
+      {
+       "id": "0x00121002",
+       "chunk": "Animation Group List",
+       "at": "0x00275B15",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121006",
+       "chunk": "Animation Header",
+       "at": "0x00275AE8",
+       "calls": [
+        "sub_002755D0"
+       ]
+      },
+      {
+       "id": "0x00121008",
+       "chunk": "",
+       "at": "0x00275BCF",
+       "calls": [
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121401",
+       "chunk": "",
+       "at": "0x00275C50",
+       "calls": []
+      },
+      {
+       "id": "0x00121402",
+       "chunk": "",
+       "at": "0x00275C1B",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00277872",
+     "function": "0x002776F0",
+     "owner": "pure3d::CompositeDrawableLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x00277BC0",
+     "cases": [
+      {
+       "id": "0x00121201",
+       "chunk": "Frame Controller",
+       "at": "0x00277AB6",
+       "calls": [
+        "sub_00240F00",
+        "sub_002FC034"
+       ]
+      },
+      {
+       "id": "0x00123001",
+       "chunk": "Composite Drawable Part",
+       "at": "0x0027788D",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00278332",
+     "function": "0x002781B0",
+     "owner": "pure3d::PolySkinLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0027864A",
+     "cases": [
+      {
+       "id": "0x00010003",
+       "chunk": "Bounding Box",
+       "at": "0x002783C9",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010004",
+       "chunk": "Bounding Sphere",
+       "at": "0x00278394",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010020",
+       "chunk": "Primitive Group",
+       "at": "0x0027835B",
+       "calls": [
+        "sub_00272260",
+        "sub_00295760"
+       ]
+      },
+      {
+       "id": "0x00010021",
+       "chunk": "Vertex Precision (?)",
+       "at": "0x002783F8",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121201",
+       "chunk": "Frame Controller",
+       "at": "0x00278598",
+       "calls": [
+        "sub_00240F00",
+        "sub_002FC034"
+       ]
+      },
+      {
+       "id": "0x00121305",
+       "chunk": "Vertex Colour Sets",
+       "at": "0x00278526",
+       "calls": [
+        "sub_000B7EB0",
+        "sub_002A9050"
+       ]
+      },
+      {
+       "id": "0x00122000",
+       "chunk": "Draw Order",
+       "at": "0x002784EC",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027B242",
+     "function": "0x0027B0A0",
+     "owner": "",
+     "called_from": [
+      "pure3d::BillboardObjectLoader::vfunc_06"
+     ],
+     "default": "0x0027B733",
+     "cases": [
+      {
+       "id": "0x00017007",
+       "chunk": "",
+       "at": "0x0027B25C",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00017008",
+       "chunk": "",
+       "at": "0x0027B2C8",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00017009",
+       "chunk": "",
+       "at": "0x0027B37A",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001700A",
+       "chunk": "",
+       "at": "0x0027B485",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001700B",
+       "chunk": "",
+       "at": "0x0027B54F",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001700C",
+       "chunk": "",
+       "at": "0x0027B61C",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001700D",
+       "chunk": "",
+       "at": "0x0027B6A4",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027C8A2",
+     "function": "0x0027C670",
+     "owner": "",
+     "called_from": [
+      "pure3d::BillboardObjectLoader::vfunc_06"
+     ],
+     "default": "0x0027CCDB",
+     "cases": [
+      {
+       "id": "0x00010003",
+       "chunk": "Bounding Box",
+       "at": "0x0027C908",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010004",
+       "chunk": "Bounding Sphere",
+       "at": "0x0027C8D3",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00017005",
+       "chunk": "",
+       "at": "0x0027C937",
+       "calls": [
+        "sub_0027B0A0"
+       ]
+      },
+      {
+       "id": "0x00017007",
+       "chunk": "",
+       "at": "0x0027C992",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001700A",
+       "chunk": "",
+       "at": "0x0027C9F2",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001700B",
+       "chunk": "",
+       "at": "0x0027CB8C",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001700C",
+       "chunk": "",
+       "at": "0x0027CB03",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121204",
+       "chunk": "",
+       "at": "0x0027CC57",
+       "calls": [
+        "sub_0025AC40"
+       ]
+      },
+      {
+       "id": "0x00122000",
+       "chunk": "Draw Order",
+       "at": "0x0027CC71",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027D332",
+     "function": "0x0027D1D0",
+     "owner": "pure3d::ImageFontLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0027D4B2",
+     "cases": [
+      {
+       "id": "0x00019001",
+       "chunk": "Image",
+       "at": "0x0027D4F1",
+       "calls": [
+        "sub_00263810"
+       ]
+      },
+      {
+       "id": "0x00022003",
+       "chunk": "",
+       "at": "0x0027D34D",
+       "calls": [
+        "sub_00027600",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027E562",
+     "function": "0x0027E2F0",
+     "owner": "pure3d::TextureFontLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0027E9BC",
+     "cases": [
+      {
+       "id": "0x00019000",
+       "chunk": "Texture",
+       "at": "0x0027E7D5",
+       "calls": [
+        "sub_0027FAE0"
+       ]
+      },
+      {
+       "id": "0x00022001",
+       "chunk": "Texture Glyph List",
+       "at": "0x0027E58E",
+       "calls": [
+        "sub_002A9290",
+        "sub_00027600"
+       ]
+      },
+      {
+       "id": "0x00022006",
+       "chunk": "",
+       "at": "0x0027E80C",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00022007",
+       "chunk": "",
+       "at": "0x0027E8B8",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027F229",
+     "function": "0x0027F150",
+     "owner": "pure3d::LocatorLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0027F27E",
+     "cases": [
+      {
+       "id": "0x00014001",
+       "chunk": "",
+       "at": "0x0027F235",
+       "calls": [
+        "sub_00240570",
+        "sub_00240820"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027F712",
+     "function": "0x0027F5F0",
+     "owner": "",
+     "called_from": [
+      "pure3d::TextureFontLoader::vfunc_06",
+      "pure3d::TextureLoader::vfunc_06"
+     ],
+     "default": "0x0027F7ED",
+     "cases": [
+      {
+       "id": "0x00019002",
+       "chunk": "Image Data",
+       "at": "0x0027F78A",
+       "calls": [
+        "sub_00240570",
+        "sub_00240880"
+       ]
+      },
+      {
+       "id": "0x00019003",
+       "chunk": "",
+       "at": "0x0027F725",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027F952",
+     "function": "0x0027F820",
+     "owner": "",
+     "called_from": [
+      "pure3d::TextureFontLoader::vfunc_06",
+      "pure3d::TextureLoader::vfunc_06"
+     ],
+     "default": "0x0027FA68",
+     "cases": [
+      {
+       "id": "0x00019001",
+       "chunk": "Image",
+       "at": "0x0027F962",
+       "calls": [
+        "sprintf",
+        "sub_00240630"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027F9A2",
+     "function": "0x0027F820",
+     "owner": "",
+     "called_from": [
+      "pure3d::TextureFontLoader::vfunc_06",
+      "pure3d::TextureLoader::vfunc_06"
+     ],
+     "default": "0x0027FA4F",
+     "cases": [
+      {
+       "id": "0x00019002",
+       "chunk": "Image Data",
+       "at": "0x0027FA0B",
+       "calls": [
+        "sub_00240570",
+        "sub_00240880"
+       ]
+      },
+      {
+       "id": "0x00019003",
+       "chunk": "",
+       "at": "0x0027F9B5",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0027FC6A",
+     "function": "0x0027FAE0",
+     "owner": "",
+     "called_from": [
+      "pure3d::TextureFontLoader::vfunc_06",
+      "pure3d::TextureLoader::vfunc_06"
+     ],
+     "default": "0x0027FCC8",
+     "cases": [
+      {
+       "id": "0x00019001",
+       "chunk": "Image",
+       "at": "0x0027FCA1",
+       "calls": [
+        "sub_0027F5F0",
+        "sub_00240820"
+       ]
+      },
+      {
+       "id": "0x00019004",
+       "chunk": "",
+       "at": "0x0027FC7B",
+       "calls": [
+        "sub_0027F820"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00280117",
+     "function": "0x00280030",
+     "owner": "pure3d::GeometryLoader::vfunc_06",
+     "called_from": [],
+     "default": "0x0028042D",
+     "cases": [
+      {
+       "id": "0x00010003",
+       "chunk": "Bounding Box",
+       "at": "0x002801AC",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010004",
+       "chunk": "Bounding Sphere",
+       "at": "0x00280177",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010020",
+       "chunk": "Primitive Group",
+       "at": "0x00280140",
+       "calls": [
+        "sub_00272260",
+        "sub_00295760"
+       ]
+      },
+      {
+       "id": "0x00010021",
+       "chunk": "Vertex Precision (?)",
+       "at": "0x002801DB",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121201",
+       "chunk": "Frame Controller",
+       "at": "0x0028037B",
+       "calls": [
+        "sub_00240F00",
+        "sub_002FC034"
+       ]
+      },
+      {
+       "id": "0x00121305",
+       "chunk": "Vertex Colour Sets",
+       "at": "0x00280309",
+       "calls": [
+        "sub_000B7EB0",
+        "sub_002A9050"
+       ]
+      },
+      {
+       "id": "0x00122000",
+       "chunk": "Draw Order",
+       "at": "0x002802CF",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00289168",
+     "function": "0x002890A0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x002891A6",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x00289174",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00289298",
+     "function": "0x002891D0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x002892D6",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x002892A4",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x002893D2",
+     "function": "0x00289300",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x00289410",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x002893DE",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00289528",
+     "function": "0x00289430",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x00289566",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x00289534",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x002896B3",
+     "function": "0x00289430",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x002896F1",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x002896BF",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00289812",
+     "function": "0x00289430",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x00289850",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x0028981E",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00289B88",
+     "function": "0x00289AC0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x00289BC6",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x00289B94",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0028AA22",
+     "function": "0x0028A7A0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x0028AA60",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x0028AA2E",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0028AB73",
+     "function": "0x0028A7A0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x0028ABB1",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x0028AB7F",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0028AC64",
+     "function": "0x0028A7A0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x0028ACA2",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x0028AC70",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0028AD52",
+     "function": "0x0028A7A0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x0028AD90",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x0028AD5E",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0028AE43",
+     "function": "0x0028A7A0",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x0028AE81",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x0028AE4F",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x0028B094",
+     "function": "0x0028AF40",
+     "owner": "",
+     "called_from": [
+      "pure3d::DefaultChannelHandler::vfunc_05"
+     ],
+     "default": "0x0028B0D2",
+     "cases": [
+      {
+       "id": "0x00121110",
+       "chunk": "Channel Interpolation Mode",
+       "at": "0x0028B0A0",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00294537",
+     "function": "0x00294310",
+     "owner": "",
+     "called_from": [
+      "pure3d::GeometryLoader::vfunc_06",
+      "pure3d::PolySkinLoader::vfunc_06"
+     ],
+     "default": "0x00294D0D",
+     "cases": [
+      {
+       "id": "0x00010003",
+       "chunk": "Bounding Box",
+       "at": "0x00294AFE",
+       "calls": [
+        "sub_0002FA50",
+        "sub_0002FA50"
+       ]
+      },
+      {
+       "id": "0x00010004",
+       "chunk": "Bounding Sphere",
+       "at": "0x00294B1F",
+       "calls": [
+        "sub_0002FA50",
+        "sub_0002FA30"
+       ]
+      },
+      {
+       "id": "0x00010005",
+       "chunk": "Position List",
+       "at": "0x0029465E",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010006",
+       "chunk": "Normal List",
+       "at": "0x002946D1",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010007",
+       "chunk": "UV List",
+       "at": "0x00294887",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_0003AEF0"
+       ]
+      },
+      {
+       "id": "0x00010008",
+       "chunk": "Colour List",
+       "at": "0x00294829",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010009",
+       "chunk": "",
+       "at": "0x00294D0B",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x0001000A",
+       "chunk": "Index List",
+       "at": "0x002948FE",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00244450"
+       ]
+      },
+      {
+       "id": "0x0001000B",
+       "chunk": "Matrix List",
+       "at": "0x002949D9",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001000C",
+       "chunk": "Weight List",
+       "at": "0x00294967",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001000D",
+       "chunk": "Matrix Palette",
+       "at": "0x00294A47",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x0001000E",
+       "chunk": "",
+       "at": "0x00294D0B",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x0001000F",
+       "chunk": "",
+       "at": "0x00294D0B",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010010",
+       "chunk": "Packed Normal List",
+       "at": "0x00294D0B",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010011",
+       "chunk": "Vertex Shader",
+       "at": "0x00294D0B",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010012",
+       "chunk": "Memory Image Vertex List",
+       "at": "0x002945B4",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_0003AEF0"
+       ]
+      },
+      {
+       "id": "0x00010013",
+       "chunk": "Memory Image Index List",
+       "at": "0x00294606",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_0003AEF0"
+       ]
+      },
+      {
+       "id": "0x00010014",
+       "chunk": "Memory Image Vertex Description",
+       "at": "0x00294562",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_0003AEF0"
+       ]
+      },
+      {
+       "id": "0x00010015",
+       "chunk": "",
+       "at": "0x002947B7",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010016",
+       "chunk": "",
+       "at": "0x00294745",
+       "calls": [
+        "sub_0003AEF0",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001001C",
+       "chunk": "Extra Colour List (?)",
+       "at": "0x00294B3F",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010022",
+       "chunk": "",
+       "at": "0x00294C85",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010023",
+       "chunk": "",
+       "at": "0x00294C03",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121204",
+       "chunk": "",
+       "at": "0x00294BEE",
+       "calls": [
+        "sub_0025AC40"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x00294FE2",
+     "function": "0x00294DC7",
+     "owner": "",
+     "called_from": [],
+     "default": "0x002954D9",
+     "cases": [
+      {
+       "id": "0x00010003",
+       "chunk": "Bounding Box",
+       "at": "0x00295404",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010004",
+       "chunk": "Bounding Sphere",
+       "at": "0x00295436",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010005",
+       "chunk": "Position List",
+       "at": "0x0029500D",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010006",
+       "chunk": "Normal List",
+       "at": "0x0029508B",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010007",
+       "chunk": "UV List",
+       "at": "0x00295190",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010008",
+       "chunk": "Colour List",
+       "at": "0x00295152",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010009",
+       "chunk": "",
+       "at": "0x002954D7",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x0001000A",
+       "chunk": "Index List",
+       "at": "0x002951F3",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001000B",
+       "chunk": "Matrix List",
+       "at": "0x002952A8",
+       "calls": [
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001000C",
+       "chunk": "Weight List",
+       "at": "0x00295242",
+       "calls": [
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001000D",
+       "chunk": "Matrix Palette",
+       "at": "0x00295332",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x0001000E",
+       "chunk": "",
+       "at": "0x002954D7",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x0001000F",
+       "chunk": "",
+       "at": "0x002954D7",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010010",
+       "chunk": "Packed Normal List",
+       "at": "0x002954D7",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010011",
+       "chunk": "Vertex Shader",
+       "at": "0x002954D7",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010012",
+       "chunk": "Memory Image Vertex List",
+       "at": "0x002954D7",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010013",
+       "chunk": "Memory Image Index List",
+       "at": "0x002954D7",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010014",
+       "chunk": "Memory Image Vertex Description",
+       "at": "0x002954D7",
+       "calls": [
+        "sub_00240820",
+        "sub_00240630"
+       ]
+      },
+      {
+       "id": "0x00010015",
+       "chunk": "",
+       "at": "0x0029510F",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010016",
+       "chunk": "",
+       "at": "0x002950CC",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x0001001C",
+       "chunk": "Extra Colour List (?)",
+       "at": "0x0029546B",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00121204",
+       "chunk": "",
+       "at": "0x002954C6",
+       "calls": [
+        "sub_0025AC40",
+        "sub_00240820"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x002A8982",
+     "function": "0x002A88F0",
+     "owner": "",
+     "called_from": [
+      "pure3d::GeometryLoader::vfunc_06",
+      "pure3d::PolySkinLoader::vfunc_06"
+     ],
+     "default": "0x002A8EB5",
+     "cases": [
+      {
+       "id": "0x00010F00",
+       "chunk": "",
+       "at": "0x002A8D6F",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010F01",
+       "chunk": "",
+       "at": "0x002A8B0F",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      },
+      {
+       "id": "0x00010F02",
+       "chunk": "Vertex Colour Amounts",
+       "at": "0x002A89A0",
+       "calls": [
+        "sub_00240570",
+        "sub_00240570"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x002A91A8",
+     "function": "0x002A9050",
+     "owner": "",
+     "called_from": [
+      "pure3d::GeometryLoader::vfunc_06",
+      "pure3d::PolySkinLoader::vfunc_06"
+     ],
+     "default": "0x002A920D",
+     "cases": [
+      {
+       "id": "0x00121306",
+       "chunk": "Vertex Colour Set",
+       "at": "0x002A91B4",
+       "calls": [
+        "sub_002A88F0",
+        "sub_002A84C0"
+       ]
+      }
+     ]
+    },
+    {
+     "site": "0x002F76C3",
+     "function": "0x002F7550",
+     "owner": "",
+     "called_from": [
+      "ravenphysics::CollisionObjectLoader::vfunc_06",
+      "ravenphysics::WorldCollisionObjectLoader::vfunc_06"
+     ],
+     "default": "0x002F79A1",
+     "cases": [
+      {
+       "id": "0x07000003",
+       "chunk": "",
+       "at": "0x002F77F0",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x07000006",
+       "chunk": "",
+       "at": "0x002F76ED",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x07000007",
+       "chunk": "",
+       "at": "0x002F785C",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x07000008",
+       "chunk": "",
+       "at": "0x002F7965",
+       "calls": [
+        "sub_00240570",
+        "sub_00027590"
+       ]
+      },
+      {
+       "id": "0x07016000",
+       "chunk": "",
+       "at": "0x002F794F",
+       "calls": []
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

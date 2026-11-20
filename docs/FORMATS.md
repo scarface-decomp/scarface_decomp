@@ -350,6 +350,34 @@ The kinds, over the 5,393 shaders in `packages/z04/*.p3d` and `art/ecoprops/*.p3
 | `vertexfade` | 4 | the low-detail hull of the city and the islands (below) |
 | `untextured` | 1 | |
 
+**How the game colours a vertex** (the Xbox program's own vertex programs, read with
+`portal/tools/vertex_programs.py`; the constants are the ones the shaders' code uploads, `0x32E5F0`). The
+kind name picks the class (`cbvlit` builds `d3dSimpleCBVLitShader`; `foam` and `untextured` build the simple
+one) and `LIT` picks the lit or unlit program:
+
+| Kind | Program | Front colour |
+| :--- | :--- | :--- |
+| `simple`, `LIT` 0 | `0x45DF20` | vertex colour × c55 (the shader's colour) |
+| `simple`, `LIT` 1 | `0x45E008` | 2 × (c29 + Σ lights) × c55: no vertex colour |
+| `layered`, `LIT` 0 | `0x45E190` | vertex colour × c55 |
+| `cbvlit` | `0x45E3D0` | 2 × (c29 + Σ lights) × vertex colour × c18 + second colour (v4) × c20 |
+
+c29 is the scene's ambient, the lights are four lights, each `max(0, N·−L) ×` its colour, c18 and c20
+are two weights the shader sets from the time of day (`1 − x/255` pairs), and the sun (`c42`: its direction
+× 2.5 × its brightness) goes only into the alpha (`r7.w`), not the colour. So **the ×2 multiplies the
+light, not the vertex colour**: with an ambient of 0.5 and no lights a `cbvlit` vertex shows its own colour
+× c18. The exports show the vertex colour as it is (BGRA in the file), which is that case.
+
+Where the terms come from (the examiner's block H): c29 is the context's ambient colour (`0x29DB30`, ARGB
+/ 255, no scale), set each frame from the daylight group's last ambient light other than the building
+ambient (`MiamiAmbientShape`; the building ambient for the passes that ask for it); its `LITE` animation
+gives, at noon (frame 120), 63, 52, 31, so 2 × c29 is about (0.49, 0.41, 0.24). c18 = X and c20 = 1 − X,
+with X the environment's `CbvLitBlendValue` only when the shader has `CLRE` set (else 1: the second colour
+set is never shown); the four lights are the group's other lights, not the sun (`MiamiSunShape`), and
+the sun only reaches the alpha. The pixel stage is T0 × D0 with fog and no scale, so a lit `cbvlit` surface
+at noon is about half its stored colour before the full-screen effects (`ColourFX_*`, `Bloom_*`); how
+those bring it back is not known yet, so the exports keep the stored colour.
+
 The settings that matter here:
 
 | Setting | Seen | What it does |
@@ -406,6 +434,87 @@ away it stands in for the detailed areas. Shown whole next to them, it is a shel
 
 `p3d_gltf.shader_info` reads a shader and its settings (the kind is its `pddi`). A shader known only by name, from
 a file not given, is read from its name, kind included (`shader_from_name`).
+
+### How the game draws a frame
+
+What the Xbox program does with a shader, from the examiner's blocks H and J (addresses are `default.xbe`'s).
+The exports follow the parts marked **(exported)**; the rest is recorded for the tools that come next.
+
+**Render states** (`sub_00282950`, tables in the program's data). `BLMD` picks a row: 0 off; 1 source alpha,
+one minus source alpha; 2 one, one (adds); 3 one, one, subtracted from what is behind (dst − src); 4 dst colour,
+zero (multiplies); 5 dst colour, src colour (doubles); 6 dst colour, src alpha; 7 src alpha, src alpha,
+subtracted. Only 0 to 3 are in the game's files **(exported)**. `ATST` turns the alpha test on, `ACMP` picks
+the test (0 never, 1 always, 2 less, 3 less or equal, 4 greater, 5 greater or equal, 6 equal, 7 not equal),
+`ACTH` × 255 is its reference **(exported)**. A cbvlit shader with a fade (its byte at +0x38) skips both and
+blends by a constant alpha instead: `out = lerp(behind, surface, 1 − fade/255)`.
+
+**Pixel stage** (Xbox pixel-shader definitions, decoded): simple, cbvlit and character are `T0 × D0` with no
+scale; layered lit is `2 × lerp(T0, T1, D0.a) × D0`; specular `4 × T0 × D1` for its shine pass; vehicles
+`2 × T0 × D0` plus gloss and environment passes (up to `4 ×`). Every one ends in linear fog:
+`fog.a × colour + (1 − fog.a) × fog colour`. The vertex programs' `×2` (above) is on the light only.
+
+**A primitive group's vertex type** (its loader `sub_00295550`; the game always adds `0x2000`): `0x000F` the
+number of UV sets, `0x0010` normals, `0x0020` one colour (a `0x00010008` list is read only with this bit),
+`0x0040` a second, specular colour, `0x0080` matrix indices, `0x0100` weights, `0x2000` positions, `0x4000`
+colour sets (`0x0001001C`, how many in bits 15 to 17), `0x100000` two delta vectors (vehicles). The PC's city
+files: `0x2011` (normals, 1 UV) 9,542; `0x2021` (colour, 1 UV) 8,265; `0x2031` 7,754; `0x2032` (2 UVs) 930;
+`0x16011` (normals, 1 UV, 2 colour sets) 587. Every group with a colour list has the bit, and none without.
+After the vertex type the header holds the vertex, index and matrix counts, two flags, a u16 and a u32.
+
+**Fog.** The start and end distances and the colour are the environment's `FogStart`, `FogEnd` and
+`FogColor_RGBA`, blended by the hour; the vertex programs put a linear factor in `oFog` from `c49`.
+
+**Far geometry** (`vertexfade`): colour `T0 × 2 × (building ambient + lights) × (LODRedScaler,
+LODGreenScaler, LODBlueScaler)`, no vertex colour; alpha `clamp((distance − 200) / 50, 0, 1)`, alpha-tested
+at 20/255 and blended: it fades in from 200 to 250 units.
+
+**Time of day.** The clock is milliseconds of the day; six keys (time, hold share A, ramp share B, a clear
+and a rainy environment) per `TODObject`. Between two keys an environment holds for `A / (A + B)` of the
+span, then blends linearly to the next; rain blends the clear and rainy results by its weight. The light
+groups' and the sky's animations play at frame `day fraction × frames` (the sky's only every 15 seconds).
+
+**Colour effects** (`ColourFX_*`, a full-screen pass, `d3dExtFramebufferEffects` 0x26AED0). With `t` the
+picture, `L = 0.25 r + 0.625 g + 0.125 b`, `Lt` the same of the tint:
+`out = Lt × Sat × K × (t − L) + (tint − Lt) × L + P × (k × L + B′ − bias)`, where
+`Sat = 1 + Saturation / 100`, `K` is `1 + Contrast / 100` below 0 and the program's table above
+(1.0 at 0, 2.096 at 50, 255 at 100), `P` the smallest of 1, 2, 4 ... 64, 255 not below `K` and `k = K / P`,
+`B = Brightness / 255`, `m = MidPoint / 255`, `B′ = B` when `K` is 1 else `((B − m) K + m) Lt`, `bias` 0.5 on
+the contrast path else 1; each stage clamped. `K` = 255 is a posterising pass of its own.
+
+**Order**: at the end of the frame the colour effects run first, then the bloom (`Display_List` 0x449F0), so
+the bloom is taken from, and added to, the graded picture: `Bloom(ColourFX(scene))`.
+
+**Bloom** (`SetBloom` 0x2684D0, then the pass 0x26B750): the bright pass is the colour-effects formula above
+applied with the bloom's own weights (`Bloom_Weights_RGB` scaled to sum 1, a third each when all 0), no tint,
+`B = Bloom_Brightness / 255`, `K` from `Bloom_Contrast` (the same table) and `m = Bloom_MidPoint`, then a step
+on the result's luma; a 4-tap box shrink; then a Gaussian blur along each axis with
+`R = clamp(Bloom_Radius / 4, 0, 25)`, `s = 0.45 R + 0.3`, weights `e^(−i²/s²)` for whole-texel steps `i` up to 19
+(dropped below 1/255), normalised over both sides, run four taps at a time; then
+`out = clamp(Bloom_Value, 0, 2) × bloom + clamp(Bloom_BackBuffer, 0, 1) × scene`, replacing the picture (no
+blending; the tint is not in it). The bright pass is a colour-keeping contrast curve about the midpoint; only
+at `Bloom_Contrast` 100 does it become a black-and-white step. Its result is drawn at half size, then shrunk to a
+quarter in one fetch multiplied by `Bloom_Tint_RGB` (fixed-function: texture × texture factor), where the blur
+runs back and forth between two quarter-size pictures, the taps a whole texel apart.
+
+**Cutscenes.** Track times are frames at 30 per second. Every channel is linear between keys (quaternions
+slerped the short way, a plain lerp when nearly equal), holding the first key before and the last after
+**(exported)**. Cameras: position `TRAN`, a direction `LOOK`, `UP`, the horizontal FOV in radians for a 4:3
+screen (kept vertical on wide screens), near and far planes **(exported)**. A fade is linear in, hold and
+out, drawn over the picture **(exported)**; the letterbox bars slide in or out over 500 ms, linearly.
+A camera shake adds `amplitude × e^(−3 t / duration) × (sin(2π f t) + noise × random)` degrees, up to six at
+once. Faces are morph targets weighted by `EXP` animations' `STE` channels; there is no lip sync or blinking
+of the game's own. While an `NISDriveWorldStreamer` is on, the world streams round the camera
+**(exported)**.
+
+**Instance objects.** Flags at +0x30: `noCollision` bit 23, `interior` 24, `doNotCull` 25, `staticCollision`
+27, `priority` bits 18 to 20. `attractEnabled` writes the same bit as `doNotCull`, and `noSway` the same as
+`staticCollision`, so the later of each pair in the object wins. A model name binds only to a state prop
+with that `Name` **(exported)**; the cull radius is the model's bounding radius. An instance's place keeps the precision the game
+packs it to **(exported)**: the height in whole centimetres (a s16), the turn about Y in whole degrees (9 bits)
+and about X and Z in 2-degree steps (8 bits each), applied X first, then Y, then Z, X and Y the other way round;
+the scale in 0.001 steps when uniform (0.001 to 65), else 0.05 steps per axis (up to 3.15). The eighth number
+becomes a 4-bit level `L` (0 reads as 1.0, else `L / 15`) passed on with the instance; what uses it is not
+known yet. The game keeps at most 4,181 instances; more are dropped.
 
 ### The game's loaders
 
@@ -1380,3 +1489,67 @@ The rest was worked out from the game files and checked against the other versio
 the movies' pictures by decoding them, the PS2 rotations against the PC's, the Xbox and PS2 vertex data
 against the PC's lists, and the chunk names and the placement records against the Xbox program's own
 loaders.
+
+## What the program's loaders read
+
+Read from the retail Xbox program itself, no clean room needed (the examiner's section E and F; tools in
+`portal/tools`, tables in `reports/`):
+
+* **Which class reads which chunk** (`loader_registry.json`): each loader's constructor passes its chunk
+  id to its base class; 92 loader and handler classes, 59 top-level chunk ids, and what each builds
+  (`0x0802000D` → `pure3d::prop::StatePropDataLoader` → `StatePropData`).
+* **Which children each loader handles** (`chunk_dispatch.json`): the loops of the form
+  `while (more()) { switch (current_id()) ... }` (`sub_00240630`, `sub_00240670`), followed through the
+  compiler's compare-and-subtract chains and jump tables: 53 loops, 98 child ids, each with the code its
+  case runs. For example the particle system (`ParticleSystemLoader::vfunc_06`) takes `0x10003`, `0x10004`,
+  `0x121201` and `0x122000` and hands everything else to its emitter handler; the collision objects
+  (`CollisionObjectLoader`, `WorldCollisionObjectLoader`, through `sub_002F7550`) take `0x07000003`,
+  `0x07000006`, `0x07000007`, `0x07000008` and `0x07016000`. Ids the loaders handle that this file does
+  not yet describe are listed there as `unnamed_ids`.
+* **Frame controller types:** the handler accepts `STRN` and `PVRT` but builds nothing for them (the
+  chunk is read and dropped); it builds `PSYS`, `EFX`, `SHAD`, `EXP`, `BQG`, `CAM`, `TEX`, `PVIS`, `LITE`,
+  `PTRN` and `VRTX`. No PC file has `STRN` or `PVRT`.
+* **A shader's ambient colour is its diffuse colour.** The colour reader skips `AMBI` and, on `DIFF`,
+  sets both. A file's own `AMBI` is never used (`p3d_gltf.shader_info` drops it).
+
+### Collision
+
+Read from the files and the program (no clean-room spec: the outside research has nothing on collision);
+`portal/tools/collision.py` reads it, `reports/collision_survey.json` lists every mesh. Each map area's
+shell package and each outdoor pocket holds one **World Collision Object** (`0x07010025`: its name, u32),
+94 meshes and 393,876 triangles on the PC, in the map's own coordinates:
+
+| Chunk | Holds |
+| :--- | :--- |
+| `0x07010001` | 12 bytes, 0 in every file; the mesh under it |
+| `0x0701000A` Collision Mesh | u32 version (5), u32, u32, its box (min x y z, max x y z) |
+| `0x07000003` vertices | u32 count, then x y z (f32) each |
+| `0x07000006` triangles | u32 count, then four u16 each: three vertex numbers and a 3-bit edge mask (0 to 7) |
+| `0x07000007` neighbours | u32 count (the triangles'), then four u16 each: the triangle across each edge (65535: none) and a number that is the same for the whole mesh |
+| `0x07000008` search tree | u32 count, then that many u16 (nodes of four) |
+| `0x07016000` triangle sets | u32 0, u32 how many sets follow |
+| `0x07016010` / `0x07016012` | a set: u32 0, its name, u32 count, then count triangle numbers (u16) and count values (u16); the two ids are read the same way, the name decides the meaning |
+
+The sets' names: `surfaceType` (86 meshes), `Walkable` (77), `VehicleIgnore` (59), `exitLinkType` (51),
+`navigationType` (42), `speedLimitType` (19), `objectSurfaceType` (8), `Navigation Graph Sub-Zone Link` (2).
+The collision loader (`0x2E9F00` on the retail Xbox) takes only three of them, by name:
+
+* **`surfaceType`**: each listed triangle's surface code is its value's low byte less 1 (0 for 0 and 1), kept
+  in 5 bits; a triangle not listed is 0. The code is an index into the 30 `CollisionSurfaceType` objects of
+  `scriptc/collisions.cso`, in their order (0 Default, 1 Grass, 2 Sand, 3 Asphalt, 4 Concrete, 6 Wood, 7 Metal,
+  8 ShootThrough, 12 Plaster, 13 Pleather, 20 ConcreteNoDecal, 21 MetalNoDecal, 26 Glass, 27 Furniture,
+  29 VehicleOnly ...), each with its decal surface, sound and effects. The PC files bear it out: the beach
+  is mostly Sand, Tony's mansion Plaster and Wood, the bank Pleather, Wood and Glass, the cargo ship
+  MetalNoDecal. A value of 65280 has a low byte of 0: Default.
+* **`objectSurfaceType`**: the same rule, into a second code (objects' collision).
+* **`VehicleIgnore`**: every listed triangle is ignored by vehicles; the values are not used.
+
+`Walkable`, `navigationType`, `exitLinkType`, `speedLimitType` and the sub-zone links are skipped by the
+collision: other systems (navigation, traffic) may read them.
+
+The collision floors match where the scripts stand people: Jerry's office in the Coconut Grove bank is at
+y 13.84 in `luxurybank_02_shell`'s collision, the script stands him at 13.8.
+
+Objects' collision (`0x07010000`, an animal's or a prop's: `0x07010021` > `0x07010022`, `0x07010001` >
+`0x07010003` > `0x07010007`, `0x07010023`) and rigid bodies (`0x07011000` > `0x07011020` > `0x07011001`,
+`0x07011002`) are listed but not read yet.

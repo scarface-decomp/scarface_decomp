@@ -122,7 +122,21 @@ def names_for(script_files: Iterable[Path], bin_dir: Path) -> Dict[int, str]:
                 else:
                     texts.append(v)
     bins = [(bin_dir / e).read_bytes() for e in EXECUTABLES if (bin_dir / e).is_file()]
+    texts += field_names()
     return recover(wanted, candidates(bins, texts))
+
+
+def field_names(path: Optional[Path] = None) -> list:
+    """Every class field's name from reports/fields.json (portal/tools/fields.py), so a script's hashed field
+    resolves to the name the program registers it under, weighted like a script's own word."""
+    import json
+    path = path or Path(__file__).resolve().parents[2] / "reports" / "fields.json"
+    try:
+        report = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return []
+    return [f["name"] for c in report.get("classes", {}).values() for f in c.get("fields", [])] + \
+        [f["name"] for f in report.get("unowned", [])]
 
 
 def main(argv=None) -> int:
