@@ -490,8 +490,10 @@ applied with the bloom's own weights (`Bloom_Weights_RGB` scaled to sum 1, a thi
 on the result's luma; a 4-tap box shrink; then a Gaussian blur along each axis with
 `R = clamp(Bloom_Radius / 4, 0, 25)`, `s = 0.45 R + 0.3`, weights `e^(−i²/s²)` for whole-texel steps `i` up to 19
 (dropped below 1/255), normalised over both sides, run four taps at a time; then
-`out = 2 × scene × clamp(Bloom_BackBuffer, 0, 1) + bloom × clamp(Bloom_Value / 2, 0, 1) × Bloom_Tint_RGB`.
-The render-target sizes are not known yet.
+`out = clamp(Bloom_Value, 0, 2) × bloom + clamp(Bloom_BackBuffer, 0, 1) × scene`, replacing the picture (no
+blending; the tint is not in it). The bright pass is a colour-keeping contrast curve about the midpoint; only
+at `Bloom_Contrast` 100 does it become a black-and-white step. Its result is drawn at half size, then shrunk to a
+quarter, where the blur runs back and forth between two quarter-size pictures, the taps a whole texel apart.
 
 **Cutscenes.** Track times are frames at 30 per second. Every channel is linear between keys (quaternions
 slerped the short way, a plain lerp when nearly equal), holding the first key before and the last after
