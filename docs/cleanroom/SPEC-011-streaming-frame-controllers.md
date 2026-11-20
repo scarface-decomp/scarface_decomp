@@ -221,8 +221,15 @@ The advance itself, `sub_00275E40`, is already in the guide from SPEC-009.
   furniture there (desks, chairs, books: `luxurybank_02_detailB`) is only in `loadTrigger_400`'s list
   (subzone `luxurybank_02_shell`, no height limit, 26 units away at the back of the bank). The dzone script
   adds `cgrove_branchBank_dzone` there (plants, ashtrays, cameras), not furniture. The export now takes,
-  above every prism, the nearest trigger of the building round it (a shell the ground triggers list that is
-  not their own subzone) that reaches the height: `loadTrigger_400`.
+  above every prism, the nearest trigger that reaches the height and whose outline meets a trigger under
+  you, any other before one that gives way: `loadTrigger_400`, whose outline overlaps 448's.
+* **Answer to (a), from the examiner (block G3), and the files.** The current trigger is the global at
+  `0x481AF4`, updated by `sub_00090990` (change: `sub_00090C90`); outside every prism the update finds none
+  and nothing changes. The examiner's fallback, "the trigger under you" (y clamped into its prism), gives
+  448 here, which does not load `detailB`. The files say the way up is through 400: its outline (x −1387 to
+  −1365, z 457.5 to 478.8) overlaps 448's (z to 472.3), it has no height limit and it comes first in the
+  file, so in the overlap it applies at every height, and leaving it above y 10 enters no prism. The export
+  uses that rule and keeps "the trigger under you" only where no neighbour reaches the height.
 * **Questions.** (a) Is that right for the bank: does the way upstairs pass through `loadTrigger_400`, so
   `luxurybank_02_detailB` is still loaded in Jerry's office? (b) The point fed to §1.3: the player's or the
   camera's? A cutscene's camera can stand in another trigger from the people. (c) The coarser outline step

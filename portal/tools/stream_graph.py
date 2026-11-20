@@ -90,7 +90,7 @@ class Loaded:
     triggers: List[Trigger]
     inside: bool                                          # False: no prism holds the place
     packages: List[Tuple[str, str]]
-    how: str = "inside"                                   # or "came through" (the building's own) or "nearest"
+    how: str = "inside"                                   # or "came through" (kept from a neighbour) or "nearest"
 
     def by_slot(self) -> Dict[str, List[str]]:
         out: Dict[str, List[str]] = {}
@@ -205,17 +205,40 @@ def loaded_at(found: Sequence[Trigger], x: float, z: float, y: Optional[float] =
 
 
 def _came_through(found: Sequence[Trigger], x: float, z: float, y: float) -> Optional[Trigger]:
-    """Above (or below) every prism at a place, the game keeps what it had (SPEC-011 section 1.3), which
-    depends on the way you came. One fixed guess: the triggers that hold the place on the ground name the
-    building round it among their shells (a shell other than their own subzone, the street's); you came
-    through one of that building's own triggers, so the nearest one whose prism reaches the height. Jerry's
-    office, upstairs in the Coconut Grove bank, is above loadTrigger_448 and reached through loadTrigger_400,
-    the bank's own trigger, which alone loads its upstairs furniture (luxurybank_02_detailB)."""
+    """Above (or below) every prism at a place, the current trigger does not change (SPEC-011 section 1.3:
+    the update at 0x90990 finds none and keeps the pointer at 0x481AF4), so what is loaded is the trigger
+    you were last inside. You reach a height no prism holds by leaving, at that height, a prism that holds
+    it: one whose outline meets the outline of a trigger standing under you. So: the nearest trigger that
+    reaches y and touches a trigger holding x, z on the ground, any other before one that gives way; with
+    none, the one under you (the examiner's "directly below"). Jerry's office in the Coconut Grove bank
+    (y 13.87) is above loadTrigger_448 (top 10); its neighbour loadTrigger_400, the bank's stair column with
+    no height limit, reaches it, and alone loads the upstairs furniture (luxurybank_02_detailB)."""
     below = [t for t in found if contains(t, x, z)]
-    buildings = {p.lower() for t in below for p, slot in t.packages
-                 if slot == "Shell" and p.lower() != t.subzone.lower()}
-    own = [t for t in found if t.subzone.lower() in buildings and contains_height(t, y)]
-    return min(own, key=lambda t: distance(t, x, z)) if own else None
+    if not below:
+        return None
+    reach = [t for t in found if t not in below and contains_height(t, y) and any(touches(t, b) for b in below)]
+    if reach:
+        reach.sort(key=lambda t: (t.gives_way, distance(t, x, z)))
+        return reach[0]
+    return next((t for t in below if not t.gives_way), below[0])
+
+
+def touches(a: Trigger, b: Trigger) -> bool:
+    """Whether two triggers' outlines meet (on the ground): a corner of one inside the other, or two edges
+    that cross."""
+    if any(contains(b, p[0], p[2]) for p in a.points) or any(contains(a, p[0], p[2]) for p in b.points):
+        return True
+    ea = list(zip(a.points, a.points[1:] + a.points[:1]))
+    eb = list(zip(b.points, b.points[1:] + b.points[:1]))
+
+    def side(p, q, r):
+        return (q[0] - p[0]) * (r[2] - p[2]) - (q[2] - p[2]) * (r[0] - p[0])
+
+    for p1, p2 in ea:
+        for q1, q2 in eb:
+            if side(p1, p2, q1) * side(p1, p2, q2) < 0 and side(q1, q2, p1) * side(q1, q2, p2) < 0:
+                return True
+    return False
 
 
 def contains_height(t: Trigger, y: float) -> bool:
