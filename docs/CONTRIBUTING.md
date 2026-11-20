@@ -167,6 +167,7 @@ game's own class names and chunk ids; no game bytes):
     python portal/tools/loader_registry.py            # which class reads which .p3d chunk (loader_registry.json)
     python portal/tools/script_commands.py --json     # every script command and its handler (script_bindings.json)
     python portal/tools/chunk_dispatch.py             # which child chunks each loader handles (chunk_dispatch.json)
+    python portal/tools/fields.py                     # every class's script fields: name, type, offset, setter (fields.json)
 
 and one more prints, without writing anything, the GPU's vertex programs as assembly:
 
