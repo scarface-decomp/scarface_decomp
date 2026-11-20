@@ -1,0 +1,3702 @@
+{
+ "what": "chunk loaders read from the program's own RTTI and code (portal/tools/loader_registry.py)",
+ "versions": {
+  "xb": {
+   "file": "default.xbe",
+   "code_readable": true,
+   "note": "",
+   "loaders": [
+    {
+     "class": "CVLoadObjectLoader",
+     "rtti": ".?AVCVLoadObjectLoader@@",
+     "vtable": "0x003C7820",
+     "chunk_ids": [
+      "0x08800150"
+     ],
+     "chunk_names": [
+      "CV Load Object"
+     ],
+     "constructors": [
+      "0x001DE6D0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x001DE430",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "CVLoadObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "CementLoader",
+     "rtti": ".?AVCementLoader@@",
+     "vtable": "0x003A1A24",
+     "chunk_ids": [
+      "0x08800108"
+     ],
+     "chunk_names": [
+      "Cement Header"
+     ],
+     "constructors": [
+      "0x00061340"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x000610C0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "CementLoadTracker"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "DecisionTreeFileHandler",
+     "rtti": ".?AVDecisionTreeFileHandler@@",
+     "vtable": "0x003A1AB8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x00062070"
+     ],
+     "slots": []
+    },
+    {
+     "class": "FightScriptFileHandler",
+     "rtti": ".?AVFightScriptFileHandler@@",
+     "vtable": "0x003A1AA0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x00062070"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00061390",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "fight::BufferFileReader",
+        "fight::ScriptReader",
+        "fight::Bank",
+        "content::LoadInventory"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "FrontEndManager::DrawHandler",
+     "rtti": ".?AVDrawHandler@FrontEndManager@@",
+     "vtable": "0x0039ECD0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x00023D50"
+     ],
+     "slots": []
+    },
+    {
+     "class": "FrontEndManager::LoadingDrawHandler",
+     "rtti": ".?AVLoadingDrawHandler@FrontEndManager@@",
+     "vtable": "0x0039ECD8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x00023D50"
+     ],
+     "slots": []
+    },
+    {
+     "class": "GameGroupDataLoader",
+     "rtti": ".?AVGameGroupDataLoader@@",
+     "vtable": "0x003A21DC",
+     "chunk_ids": [
+      "0x09900191"
+     ],
+     "chunk_names": [
+      "Game Group Data"
+     ],
+     "constructors": [
+      "0x00067BF0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "GameGroupLoader",
+     "rtti": ".?AVGameGroupLoader@@",
+     "vtable": "0x0039F44C",
+     "chunk_ids": [
+      "0x08800181"
+     ],
+     "chunk_names": [
+      "Game Group"
+     ],
+     "constructors": [
+      "0x00029340"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "LoadPackageChunkLoader",
+     "rtti": ".?AVLoadPackageChunkLoader@@",
+     "vtable": "0x003C356C",
+     "chunk_ids": [
+      "0x08800105"
+     ],
+     "chunk_names": [
+      "Load Package"
+     ],
+     "constructors": [
+      "0x001C69A0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x001C6580",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "LoadPackage",
+        "LoadObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "LoadPackageIdentifierLoader",
+     "rtti": ".?AVLoadPackageIdentifierLoader@@",
+     "vtable": "0x003C354C",
+     "chunk_ids": [
+      "0x08800112"
+     ],
+     "chunk_names": [
+      "Load Package Name"
+     ],
+     "constructors": [
+      "0x001C6980"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "MemorySectionLoader",
+     "rtti": ".?AVMemorySectionLoader@@",
+     "vtable": "0x003A1B38",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00062550"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "MovieDrawHandler",
+     "rtti": ".?AVMovieDrawHandler@@",
+     "vtable": "0x0039F300",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00028A30"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "NISPackageLoader",
+     "rtti": ".?AVNISPackageLoader@@",
+     "vtable": "0x003A5EA8",
+     "chunk_ids": [
+      "0x08800102"
+     ],
+     "chunk_names": [
+      "NIS Package"
+     ],
+     "constructors": [
+      "0x000CDAB0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "NISStreamDataLoader",
+     "rtti": ".?AVNISStreamDataLoader@@",
+     "vtable": "0x003A5DB8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x000CD2A0"
+     ],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x000CEB50",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "NISStreamData"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "NISStreamPartitionInfoLoader",
+     "rtti": ".?AVNISStreamPartitionInfoLoader@@",
+     "vtable": "0x003A5FB8",
+     "chunk_ids": [
+      "0x08800114"
+     ],
+     "chunk_names": [
+      "NIS Stream Partition Info"
+     ],
+     "constructors": [
+      "0x000CE530"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x000CE430",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "NISStreamPartitionInfo"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "NavMeshLoader",
+     "rtti": ".?AVNavMeshLoader@@",
+     "vtable": "0x003A0094",
+     "chunk_ids": [
+      "0x08011000"
+     ],
+     "chunk_names": [
+      "Nav Mesh"
+     ],
+     "constructors": [
+      "0x00031F60"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "OverlayFileHandler",
+     "rtti": ".?AVOverlayFileHandler@@",
+     "vtable": "0x003A1AD0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x00062070"
+     ],
+     "slots": []
+    },
+    {
+     "class": "ResourceLoader",
+     "rtti": ".?AVResourceLoader@@",
+     "vtable": "0x003C848C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x001E50A0",
+      "0x001E5110"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "RoadGraphLoader",
+     "rtti": ".?AVRoadGraphLoader@@",
+     "vtable": "0x003A0274",
+     "chunk_ids": [
+      "0x08011005"
+     ],
+     "chunk_names": [
+      "Road Graph"
+     ],
+     "constructors": [
+      "0x0003D6A0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "SaveGameHandler",
+     "rtti": ".?AVSaveGameHandler@@",
+     "vtable": "0x003A3530",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ScriptFileChunkLoader",
+     "rtti": ".?AVScriptFileChunkLoader@@",
+     "vtable": "0x003A21FC",
+     "chunk_ids": [
+      "0x08800104"
+     ],
+     "chunk_names": [
+      "Script File"
+     ],
+     "constructors": [
+      "0x00067F50"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00067F70",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "ScriptFileObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "ScriptFileHandler",
+     "rtti": ".?AVScriptFileHandler@@",
+     "vtable": "0x003A1A88",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x00062070"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00064CF0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadInventory",
+        "ScriptFileObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "ScriptObjectDataLoader",
+     "rtti": ".?AVScriptObjectDataLoader@@",
+     "vtable": "0x003A21BC",
+     "chunk_ids": [
+      "0x09900190"
+     ],
+     "chunk_names": [
+      "Script Object Data"
+     ],
+     "constructors": [
+      "0x00067BB0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ScriptObjectLoader",
+     "rtti": ".?AVScriptObjectLoader@@",
+     "vtable": "0x0039FC24",
+     "chunk_ids": [
+      "0x08800180"
+     ],
+     "chunk_names": [
+      "Script Object"
+     ],
+     "constructors": [
+      "0x0002CB50"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0002CE10",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "ScriptObjectEntity<StreamedTemplate>"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "SoundEntityLoader",
+     "rtti": ".?AVSoundEntityLoader@@",
+     "vtable": "0x003A1D5C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x000662F0"
+     ],
+     "slots": []
+    },
+    {
+     "class": "SoundMixLoader",
+     "rtti": ".?AVSoundMixLoader@@",
+     "vtable": "0x003A1D44",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00065300"
+     ],
+     "registered_by": [
+      "0x000662F0"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00066170",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "om::ContentStream",
+        "om::Stream",
+        "audio::MixerMix"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "SoundSequenceLoader",
+     "rtti": ".?AVSoundSequenceLoader@@",
+     "vtable": "0x003A1D2C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x000662F0"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00065F30",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "om::ContentStream",
+        "om::Stream",
+        "SoundLoadSequence"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "StreamPackageLoader",
+     "rtti": ".?AVStreamPackageLoader@@",
+     "vtable": "0x003A434C",
+     "chunk_ids": [
+      "0x08800100"
+     ],
+     "chunk_names": [
+      "Stream Package"
+     ],
+     "constructors": [
+      "0x00092860"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "StreamTriggerLoader",
+     "rtti": ".?AVStreamTriggerLoader@@",
+     "vtable": "0x003A43E4",
+     "chunk_ids": [
+      "0x08800101"
+     ],
+     "chunk_names": [
+      "Stream Trigger"
+     ],
+     "constructors": [
+      "0x000947D0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "SubzoneTrafficTriggerLoader",
+     "rtti": ".?AVSubzoneTrafficTriggerLoader@@",
+     "vtable": "0x003C8A78",
+     "chunk_ids": [
+      "0x08800161"
+     ],
+     "chunk_names": [
+      "Subzone Traffic Trigger"
+     ],
+     "constructors": [
+      "0x001E8890"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "TrafficConfigLoader",
+     "rtti": ".?AVTrafficConfigLoader@@",
+     "vtable": "0x003C8A58",
+     "chunk_ids": [
+      "0x08800160"
+     ],
+     "chunk_names": [
+      "Traffic Config"
+     ],
+     "constructors": [
+      "0x001E8870"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "WaterDataDockLoader",
+     "rtti": ".?AVWaterDataDockLoader@@",
+     "vtable": "0x003B2DF8",
+     "chunk_ids": [
+      "0x08800201",
+      "0x08800202",
+      "0x08800203"
+     ],
+     "chunk_names": [
+      "Water Shallow Area",
+      "Water Obstacle",
+      "Water Dock"
+     ],
+     "constructors": [
+      "0x0014D3F0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0014CA50",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "WaterDock"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "WaterDataObstacleLoader",
+     "rtti": ".?AVWaterDataObstacleLoader@@",
+     "vtable": "0x003B2DD8",
+     "chunk_ids": [
+      "0x08800201",
+      "0x08800202",
+      "0x08800203"
+     ],
+     "chunk_names": [
+      "Water Shallow Area",
+      "Water Obstacle",
+      "Water Dock"
+     ],
+     "constructors": [
+      "0x0014D3F0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0014E120",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "WaterDataDockLoader",
+        "WaterObstacle"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "WaterDataShallowAreaLoader",
+     "rtti": ".?AVWaterDataShallowAreaLoader@@",
+     "vtable": "0x003B2DB8",
+     "chunk_ids": [
+      "0x08800201",
+      "0x08800202",
+      "0x08800203"
+     ],
+     "chunk_names": [
+      "Water Shallow Area",
+      "Water Obstacle",
+      "Water Dock"
+     ],
+     "constructors": [
+      "0x0014D3F0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0014C910",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "ShallowWater"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "content::P3DFileHandler",
+     "rtti": ".?AVP3DFileHandler@content@@",
+     "vtable": "0x003A05A0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x0004C7E0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00240900",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadStream",
+        "content::LoadInventory"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "occlude::OccluderLoader",
+     "rtti": ".?AVOccluderLoader@occlude@@",
+     "vtable": "0x003A0404",
+     "chunk_ids": [
+      "0x0880000A"
+     ],
+     "chunk_names": [
+      "Occluder"
+     ],
+     "constructors": [
+      "0x00047CE0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00047AF0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::Entity",
+        "occlude::Occluder"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "om::EntityLoader",
+     "rtti": ".?AVEntityLoader@om@@",
+     "vtable": "0x003DFCA4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x002CEA70"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x002CEAC0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "om::ContentStream",
+        "om::Stream"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::AnimationLoader",
+     "rtti": ".?AVAnimationLoader@pure3d@@",
+     "vtable": "0x003D7574",
+     "chunk_ids": [
+      "0x00121000"
+     ],
+     "chunk_names": [
+      "Animation"
+     ],
+     "constructors": [
+      "0x002761F0",
+      "0x00276250"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00275950",
+       "chunk_ids": [
+        "0x00121002"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::Entity",
+        "pure3d::Animation",
+        "pure3d::AnimationGroup"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::BMPHandler",
+     "rtti": ".?AVBMPHandler@pure3d@@",
+     "vtable": "0x003A0554",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x0004C7E0"
+     ],
+     "registered_by": [
+      "0x002629A0"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00262370",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadStream",
+        "content::LoadInventory",
+        "pure3d::Sprite",
+        "pure3d::SpriteObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::BillboardObjectLoader",
+     "rtti": ".?AVBillboardObjectLoader@pure3d@@",
+     "vtable": "0x003D792C",
+     "chunk_ids": [
+      "0x00017006"
+     ],
+     "chunk_names": [
+      "Billboard"
+     ],
+     "constructors": [
+      "0x0027C110",
+      "0x0027C170"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0027CD00",
+       "chunk_ids": [
+        "0x00017006"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::DrawableContainer",
+        "pure3d::BillboardObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::BillboardQuadGroupLoader",
+     "rtti": ".?AVBillboardQuadGroupLoader@pure3d@@",
+     "vtable": "0x003D78F0",
+     "chunk_ids": [
+      "0x00017006"
+     ],
+     "chunk_names": [
+      "Billboard"
+     ],
+     "constructors": [
+      "0x0027B070",
+      "0x0027C110"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::CameraLoader",
+     "rtti": ".?AVCameraLoader@pure3d@@",
+     "vtable": "0x003D7C44",
+     "chunk_ids": [
+      "0x00002200"
+     ],
+     "chunk_names": [
+      "Camera"
+     ],
+     "constructors": [
+      "0x0027F4B0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0027F310",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::VectorCamera"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::ChannelLoader",
+     "rtti": ".?AVChannelLoader@pure3d@@",
+     "vtable": "0x003D8240",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00288510",
+      "0x0028AED0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::CompositeDrawableLoader",
+     "rtti": ".?AVCompositeDrawableLoader@pure3d@@",
+     "vtable": "0x003D7634",
+     "chunk_ids": [
+      "0x00123000"
+     ],
+     "chunk_names": [
+      "Composite Drawable"
+     ],
+     "constructors": [
+      "0x00276E90"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x002776F0",
+       "chunk_ids": [
+        "0x00121201",
+        "0x00123001"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::DrawableHierarchy",
+        "pure3d::CompositeDrawable",
+        "pure3d::CompositeDrawable::ActivePrimitiveList"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::DXTNHandler",
+     "rtti": ".?AVDXTNHandler@pure3d@@",
+     "vtable": "0x003D621C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x002629A0"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00262370",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadStream",
+        "content::LoadInventory",
+        "pure3d::Sprite",
+        "pure3d::SpriteObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::DefaultChannelHandler",
+     "rtti": ".?AVDefaultChannelHandler@pure3d@@",
+     "vtable": "0x003D837C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x0028AED0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::DefaultFrameControllerHandler",
+     "rtti": ".?AVDefaultFrameControllerHandler@pure3d@@",
+     "vtable": "0x003D74C4",
+     "chunk_ids": [
+      "0x00121201"
+     ],
+     "chunk_names": [
+      "Frame Controller"
+     ],
+     "constructors": [
+      "0x002748E0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x002739A0",
+       "chunk_ids": [],
+       "words": [
+        "PTRN",
+        "TEX",
+        "BQG",
+        "CAM",
+        "EXP",
+        "EFX",
+        "SHAD",
+        "LITE",
+        "PSYS",
+        "STRN",
+        "PVRT",
+        "VRTX"
+       ],
+       "builds": []
+      },
+      {
+       "slot": 5,
+       "va": "0x00274A50",
+       "chunk_ids": [],
+       "words": [
+        "HOLD",
+        "FWD",
+        "BKFD",
+        "FDBK",
+        "BACK",
+        "PSYS",
+        "EFX",
+        "SHAD",
+        "EXP",
+        "BQG",
+        "CAM",
+        "TEX",
+        "PVIS",
+        "LITE",
+        "PTRN",
+        "VRTX"
+       ],
+       "builds": [
+        "pure3d::CameraAnimationController",
+        "pure3d::BillboardQuadGroupAnimationController",
+        "pure3d::ExpressionAnimationController",
+        "pure3d::ParticleController",
+        "pure3d::TextureAnimationController",
+        "pure3d::ShaderAnimationController",
+        "pure3d::PoseAnimationController",
+        "pure3d::LightAnimationController",
+        "pure3d::CompDrawVisibilityAnimationController",
+        "pure3d::VertexAnimController"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::DefaultParticleEmitterHandler",
+     "rtti": ".?AVDefaultParticleEmitterHandler@pure3d@@",
+     "vtable": "0x003D716C",
+     "chunk_ids": [
+      "0x0001580C"
+     ],
+     "chunk_names": [
+      "Particle System"
+     ],
+     "constructors": [
+      "0x002720F0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::DefaultParticleGeneratorHandler",
+     "rtti": ".?AVDefaultParticleGeneratorHandler@pure3d@@",
+     "vtable": "0x003D713C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00271180"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ExpressionGroupLoader",
+     "rtti": ".?AVExpressionGroupLoader@pure3d@@",
+     "vtable": "0x003D7028",
+     "chunk_ids": [
+      "0x00021001"
+     ],
+     "chunk_names": [
+      "Expression Group"
+     ],
+     "constructors": [
+      "0x0026F920"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0026FA30",
+       "chunk_ids": [
+        "0x00021000"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::ExpressionGroup"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::ExpressionLoader",
+     "rtti": ".?AVExpressionLoader@pure3d@@",
+     "vtable": "0x003D7008",
+     "chunk_ids": [
+      "0x00021000"
+     ],
+     "chunk_names": [
+      "Expression"
+     ],
+     "constructors": [
+      "0x0026F900"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0026F710",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::Entity",
+        "pure3d::Expression"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::FrameControllerLoader",
+     "rtti": ".?AVFrameControllerLoader@pure3d@@",
+     "vtable": "0x003D74E0",
+     "chunk_ids": [
+      "0x00121201"
+     ],
+     "chunk_names": [
+      "Frame Controller"
+     ],
+     "constructors": [
+      "0x00274750",
+      "0x002748E0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::GeometryLoader",
+     "rtti": ".?AVGeometryLoader@pure3d@@",
+     "vtable": "0x003D7D68",
+     "chunk_ids": [
+      "0x00010000"
+     ],
+     "chunk_names": [
+      "Mesh"
+     ],
+     "constructors": [
+      "0x0027FFA0",
+      "0x002805C0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00280030",
+       "chunk_ids": [
+        "0x00010021",
+        "0x00010003",
+        "0x00121201",
+        "0x00121305",
+        "0x00122000"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::DrawableContainer",
+        "pure3d::Geometry",
+        "pure3d::VertexAnimKeyFrameList",
+        "pure3d::VertexAnimObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::IgnoreLoader",
+     "rtti": ".?AVIgnoreLoader@pure3d@@",
+     "vtable": "0x003A05B8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x0004C7E0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ImageFontLoader",
+     "rtti": ".?AVImageFontLoader@pure3d@@",
+     "vtable": "0x003D7AA0",
+     "chunk_ids": [
+      "0x00022002"
+     ],
+     "chunk_names": [
+      "Image Font"
+     ],
+     "constructors": [
+      "0x0027D520"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0027D1D0",
+       "chunk_ids": [
+        "0x00019001"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::Entity",
+        "pure3d::ImageFont"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::ImageHandler",
+     "rtti": ".?AVImageHandler@pure3d@@",
+     "vtable": "0x003D6134",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00262930"
+     ],
+     "registered_by": [
+      "0x002629A0"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00262370",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadStream",
+        "content::LoadInventory",
+        "pure3d::Sprite",
+        "pure3d::SpriteObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::ImageLoader",
+     "rtti": ".?AVImageLoader@pure3d@@",
+     "vtable": "0x003D6404",
+     "chunk_ids": [
+      "0x00019001"
+     ],
+     "chunk_names": [
+      "Image"
+     ],
+     "constructors": [
+      "0x00263C90",
+      "0x00263CF0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::LightGroupLoader",
+     "rtti": ".?AVLightGroupLoader@pure3d@@",
+     "vtable": "0x003D7BAC",
+     "chunk_ids": [
+      "0x00002380"
+     ],
+     "chunk_names": [
+      "Light Group"
+     ],
+     "constructors": [
+      "0x0027EF50"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0027EFC0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::LightGroup"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::LightLoader",
+     "rtti": ".?AVLightLoader@pure3d@@",
+     "vtable": "0x003D7B8C",
+     "chunk_ids": [
+      "0x00013000"
+     ],
+     "chunk_names": [
+      "Light"
+     ],
+     "constructors": [
+      "0x0027EF30"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0027EA40",
+       "chunk_ids": [
+        "0x00013007"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::DirectionalLight",
+        "pure3d::PointLight",
+        "pure3d::AmbientLight"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::LocatorLoader",
+     "rtti": ".?AVLocatorLoader@pure3d@@",
+     "vtable": "0x003D7C08",
+     "chunk_ids": [
+      "0x00014000"
+     ],
+     "chunk_names": [
+      "Locator"
+     ],
+     "constructors": [
+      "0x0027F2F0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0027F150",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::Entity",
+        "pure3d::Locator"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::MultiControllerLoader",
+     "rtti": ".?AVMultiControllerLoader@pure3d@@",
+     "vtable": "0x003D7228",
+     "chunk_ids": [
+      "0x00121202"
+     ],
+     "chunk_names": [
+      "Multi Controller"
+     ],
+     "constructors": [
+      "0x00272B00"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00272DC0",
+       "chunk_ids": [],
+       "words": [
+        "HOLD",
+        "FWD",
+        "BKFD",
+        "FDBK",
+        "BACK",
+        "SHAD",
+        "EXP",
+        "BQG",
+        "CAM",
+        "TEX",
+        "EFX",
+        "PVIS",
+        "LITE",
+        "PTRN",
+        "VRTX"
+       ],
+       "builds": [
+        "pure3d::MultiController"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::PNGHandler",
+     "rtti": ".?AVPNGHandler@pure3d@@",
+     "vtable": "0x003D617C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x002629A0"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00262370",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadStream",
+        "content::LoadInventory",
+        "pure3d::Sprite",
+        "pure3d::SpriteObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::ParticleEmitterLoader",
+     "rtti": ".?AVParticleEmitterLoader@pure3d@@",
+     "vtable": "0x003D7158",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00270C10",
+      "0x00271180"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ParticleGeneratorLoader",
+     "rtti": ".?AVParticleGeneratorLoader@pure3d@@",
+     "vtable": "0x003D7128",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00270BD0",
+      "0x00271180"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ParticleSystemLoader",
+     "rtti": ".?AVParticleSystemLoader@pure3d@@",
+     "vtable": "0x003D7188",
+     "chunk_ids": [
+      "0x0001580C"
+     ],
+     "chunk_names": [
+      "Particle System"
+     ],
+     "constructors": [
+      "0x00270C90",
+      "0x002720F0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00270CE0",
+       "chunk_ids": [
+        "0x00121201",
+        "0x00010003",
+        "0x00122000"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::ParticleSystem",
+        "pure3d::ParticleController"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::PolySkinLoader",
+     "rtti": ".?AVPolySkinLoader@pure3d@@",
+     "vtable": "0x003D771C",
+     "chunk_ids": [
+      "0x00010001"
+     ],
+     "chunk_names": [
+      "Skin"
+     ],
+     "constructors": [
+      "0x00277E70",
+      "0x00278170"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x002781B0",
+       "chunk_ids": [
+        "0x00010021",
+        "0x00010003",
+        "0x00121201",
+        "0x00121305",
+        "0x00122000"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::DrawableContainer",
+        "pure3d::PolySkin",
+        "pure3d::BoneMatrixList",
+        "pure3d::VertexAnimKeyFrameList",
+        "pure3d::VertexAnimObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::PrimGroupLoader",
+     "rtti": ".?AVPrimGroupLoader@pure3d@@",
+     "vtable": "0x003D8D9C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x00292C00",
+      "0x00294290"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::RawImageHandler",
+     "rtti": ".?AVRawImageHandler@pure3d@@",
+     "vtable": "0x003D61CC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [
+      "0x002629A0"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00262370",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadStream",
+        "content::LoadInventory",
+        "pure3d::Sprite",
+        "pure3d::SpriteObject"
+       ]
+      },
+      {
+       "slot": 10,
+       "va": "0x00298180",
+       "chunk_ids": [],
+       "words": [
+        "P3DI"
+       ],
+       "builds": []
+      }
+     ]
+    },
+    {
+     "class": "pure3d::RenderObjectLoader",
+     "rtti": ".?AVRenderObjectLoader@pure3d@@",
+     "vtable": "0x003D5A30",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x0025A4B0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ShaderLoader",
+     "rtti": ".?AVShaderLoader@pure3d@@",
+     "vtable": "0x003D58A4",
+     "chunk_ids": [
+      "0x00011000"
+     ],
+     "chunk_names": [
+      "Shader"
+     ],
+     "constructors": [
+      "0x00255FC0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00255FE0",
+       "chunk_ids": [],
+       "words": [
+        "LIT",
+        "ALUM",
+        "BLMD",
+        "ATST",
+        "MCBV",
+        "AMBI",
+        "DIFF"
+       ],
+       "builds": [
+        "pure3d::Shader"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::ShadowMeshLoader",
+     "rtti": ".?AVShadowMeshLoader@pure3d@@",
+     "vtable": "0x003D59CC",
+     "chunk_ids": [
+      "0x0001001A"
+     ],
+     "chunk_names": [
+      "Shadow Mesh"
+     ],
+     "constructors": [
+      "0x00258320"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00258340",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::ShadowMeshTopology",
+        "pure3d::ShadowMeshVertices"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::ShadowSkinLoader",
+     "rtti": ".?AVShadowSkinLoader@pure3d@@",
+     "vtable": "0x003D59F0",
+     "chunk_ids": [
+      "0x00010019"
+     ],
+     "chunk_names": [
+      "Shadow Skin"
+     ],
+     "constructors": [
+      "0x002589C0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00259C80",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::ShadowMeshTopology",
+        "pure3d::ShadowMeshVertices",
+        "pure3d::ShadowSkinTopology"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::SkeletonLoader",
+     "rtti": ".?AVSkeletonLoader@pure3d@@",
+     "vtable": "0x003D7768",
+     "chunk_ids": [
+      "0x00023000"
+     ],
+     "chunk_names": [
+      "Skeleton"
+     ],
+     "constructors": [
+      "0x00278B40"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00279100",
+       "chunk_ids": [
+        "0x00023001"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::Skeleton"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::SpriteLoader",
+     "rtti": ".?AVSpriteLoader@pure3d@@",
+     "vtable": "0x003D6EE4",
+     "chunk_ids": [
+      "0x00019005"
+     ],
+     "chunk_names": [
+      "Sprite"
+     ],
+     "constructors": [
+      "0x0026E0F0",
+      "0x0026E180"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0026E310",
+       "chunk_ids": [
+        "0x00019001"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::Sprite",
+        "pure3d::DrawableContainer",
+        "pure3d::SpriteObject"
+       ]
+      },
+      {
+       "slot": 9,
+       "va": "0x0026D4B0",
+       "chunk_ids": [
+        "0x00019002"
+       ],
+       "words": [],
+       "builds": []
+      },
+      {
+       "slot": 10,
+       "va": "0x0026D690",
+       "chunk_ids": [
+        "0x00019002"
+       ],
+       "words": [],
+       "builds": []
+      }
+     ]
+    },
+    {
+     "class": "pure3d::TargaHandler",
+     "rtti": ".?AVTargaHandler@pure3d@@",
+     "vtable": "0x003A04DC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x0004C7E0"
+     ],
+     "registered_by": [
+      "0x0004AB50",
+      "0x002629A0"
+     ],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x00262370",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadStream",
+        "content::LoadInventory",
+        "pure3d::Sprite",
+        "pure3d::SpriteObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::TextBibleLoader",
+     "rtti": ".?AVTextBibleLoader@pure3d@@",
+     "vtable": "0x003D6F30",
+     "chunk_ids": [
+      "0x0001800D"
+     ],
+     "chunk_names": [
+      "Text Bible"
+     ],
+     "constructors": [
+      "0x0026E650"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0026E620",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::TextBible"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::TextureFontLoader",
+     "rtti": ".?AVTextureFontLoader@pure3d@@",
+     "vtable": "0x003D7B50",
+     "chunk_ids": [
+      "0x00022000"
+     ],
+     "chunk_names": [
+      "Texture Font"
+     ],
+     "constructors": [
+      "0x0027E2A0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0027E2F0",
+       "chunk_ids": [
+        "0x00019000",
+        "0x00022001"
+       ],
+       "words": [
+        "LIT",
+        "BLMD",
+        "FIMD",
+        "ATST"
+       ],
+       "builds": [
+        "pure3d::TextureFont",
+        "pure3d::Shader"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::TextureLoader",
+     "rtti": ".?AVTextureLoader@pure3d@@",
+     "vtable": "0x003D7CAC",
+     "chunk_ids": [
+      "0x00019000"
+     ],
+     "chunk_names": [
+      "Texture"
+     ],
+     "constructors": [
+      "0x0027FD40",
+      "0x0027FDB0"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::VertexOffsetExpressionMixerLoader",
+     "rtti": ".?AVVertexOffsetExpressionMixerLoader@pure3d@@",
+     "vtable": "0x003D7090",
+     "chunk_ids": [
+      "0x00021002"
+     ],
+     "chunk_names": [
+      "Expression Mixer"
+     ],
+     "constructors": [
+      "0x00270240"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x002706F0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::VertexOffsetExpressionMixer"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::frontend::ProjectLoader",
+     "rtti": ".?AVProjectLoader@frontend@pure3d@@",
+     "vtable": "0x003D5224",
+     "chunk_ids": [
+      "0x00018000"
+     ],
+     "chunk_names": [
+      "Frontend Project"
+     ],
+     "constructors": [
+      "0x0024C640"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0024CED0",
+       "chunk_ids": [
+        "0x00018002",
+        "0x00018001"
+       ],
+       "words": [],
+       "builds": [
+        "pure3d::frontend::Project"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "pure3d::prop::StatePropDataLoader",
+     "rtti": ".?AVStatePropDataLoader@prop@pure3d@@",
+     "vtable": "0x003D6F8C",
+     "chunk_ids": [
+      "0x0802000D"
+     ],
+     "chunk_names": [
+      "State Prop Data"
+     ],
+     "constructors": [
+      "0x0026EA00"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0026ECB0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "pure3d::prop::StatePropData",
+        "pure3d::prop::StateData"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "ravenphysics::CollisionObjectLoader",
+     "rtti": ".?AVCollisionObjectLoader@ravenphysics@@",
+     "vtable": "0x003E1D58",
+     "chunk_ids": [
+      "0x07010000"
+     ],
+     "chunk_names": [
+      "Collision Object"
+     ],
+     "constructors": [
+      "0x002F7A20"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x002F7FB0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "ravenphysics::CollisionObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "ravenphysics::RigidBodyLoader",
+     "rtti": ".?AVRigidBodyLoader@ravenphysics@@",
+     "vtable": "0x003E1AB4",
+     "chunk_ids": [
+      "0x07011000"
+     ],
+     "chunk_names": [
+      "Rigid Body"
+     ],
+     "constructors": [
+      "0x002EDB70"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ravenphysics::WorldCollisionObjectLoader",
+     "rtti": ".?AVWorldCollisionObjectLoader@ravenphysics@@",
+     "vtable": "0x003E1D78",
+     "chunk_ids": [
+      "0x07010025"
+     ],
+     "chunk_names": [
+      "World Collision Object"
+     ],
+     "constructors": [
+      "0x002F7E50"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x002F7E70",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "ravenphysics::CollisionObject"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "renderer::CharacterLoader",
+     "rtti": ".?AVCharacterLoader@renderer@@",
+     "vtable": "0x003A07B0",
+     "chunk_ids": [
+      "0x08800000"
+     ],
+     "chunk_names": [
+      "Character"
+     ],
+     "constructors": [
+      "0x000511D0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00051220",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "renderer::Renderable",
+        "renderer::CharacterRenderable"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "renderer::SFLightGroupLoader",
+     "rtti": ".?AVSFLightGroupLoader@renderer@@",
+     "vtable": "0x003A0B30",
+     "chunk_ids": [
+      "0x08800007"
+     ],
+     "chunk_names": [
+      "Light Group (game)"
+     ],
+     "constructors": [
+      "0x00054CF0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00054D10",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "renderer::LightingRenderable"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "renderer::SFStatePropLoader",
+     "rtti": ".?AVSFStatePropLoader@renderer@@",
+     "vtable": "0x003A12E0",
+     "chunk_ids": [
+      "0x08800005"
+     ],
+     "chunk_names": [
+      "State Prop"
+     ],
+     "constructors": [
+      "0x0005CE40"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0005CE60",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "renderer::Renderable",
+        "renderer::StatePropRenderable",
+        "pure3d::prop::StateProp"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "renderer::ShadowLoader",
+     "rtti": ".?AVShadowLoader@renderer@@",
+     "vtable": "0x003A1064",
+     "chunk_ids": [
+      "0x08800008"
+     ],
+     "chunk_names": [
+      "Shadow"
+     ],
+     "constructors": [
+      "0x0005A170"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0005A1C0",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "renderer::ShadowRenderable"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "renderer::SkyLoader",
+     "rtti": ".?AVSkyLoader@renderer@@",
+     "vtable": "0x003A1278",
+     "chunk_ids": [
+      "0x08800002"
+     ],
+     "chunk_names": [
+      "Sky"
+     ],
+     "constructors": [
+      "0x0005C470"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0005C490",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "renderer::Renderable",
+        "renderer::SkyRenderable"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "renderer::VehicleLoader",
+     "rtti": ".?AVVehicleLoader@renderer@@",
+     "vtable": "0x003A16D0",
+     "chunk_ids": [
+      "0x08800001"
+     ],
+     "chunk_names": [
+      "Vehicle"
+     ],
+     "constructors": [
+      "0x0005ECA0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x0005F500",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "renderer::VehicleRenderable",
+        "renderer::VehicleContainer"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "renderer::WorldGeoLoader",
+     "rtti": ".?AVWorldGeoLoader@renderer@@",
+     "vtable": "0x003A0E70",
+     "chunk_ids": [
+      "0x08800003"
+     ],
+     "chunk_names": [
+      "World Geometry"
+     ],
+     "constructors": [
+      "0x00056620"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00056720",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "renderer::WorldGeoRenderable",
+        "renderer::DisplayListPrimitive"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "renderer::ZonePkgLoader",
+     "rtti": ".?AVZonePkgLoader@renderer@@",
+     "vtable": "0x003A0ED8",
+     "chunk_ids": [
+      "0x08800004"
+     ],
+     "chunk_names": [
+      "Zone Package"
+     ],
+     "constructors": [
+      "0x000566B0"
+     ],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 6,
+       "va": "0x00056EA0",
+       "chunk_ids": [
+        "0x08800009"
+       ],
+       "words": [],
+       "builds": [
+        "renderer::Renderable",
+        "renderer::ZonePkgRenderable"
+       ]
+      }
+     ]
+    }
+   ],
+   "by_chunk": {
+    "0x00002200": {
+     "name": "Camera",
+     "loaders": [
+      "pure3d::CameraLoader"
+     ],
+     "builds": [
+      "pure3d::VectorCamera"
+     ]
+    },
+    "0x00002380": {
+     "name": "Light Group",
+     "loaders": [
+      "pure3d::LightGroupLoader"
+     ],
+     "builds": [
+      "pure3d::LightGroup"
+     ]
+    },
+    "0x00010000": {
+     "name": "Mesh",
+     "loaders": [
+      "pure3d::GeometryLoader"
+     ],
+     "builds": [
+      "pure3d::DrawableContainer",
+      "pure3d::Geometry",
+      "pure3d::VertexAnimKeyFrameList",
+      "pure3d::VertexAnimObject"
+     ]
+    },
+    "0x00010001": {
+     "name": "Skin",
+     "loaders": [
+      "pure3d::PolySkinLoader"
+     ],
+     "builds": [
+      "pure3d::BoneMatrixList",
+      "pure3d::DrawableContainer",
+      "pure3d::PolySkin",
+      "pure3d::VertexAnimKeyFrameList",
+      "pure3d::VertexAnimObject"
+     ]
+    },
+    "0x00010019": {
+     "name": "Shadow Skin",
+     "loaders": [
+      "pure3d::ShadowSkinLoader"
+     ],
+     "builds": [
+      "pure3d::ShadowMeshTopology",
+      "pure3d::ShadowMeshVertices",
+      "pure3d::ShadowSkinTopology"
+     ]
+    },
+    "0x0001001A": {
+     "name": "Shadow Mesh",
+     "loaders": [
+      "pure3d::ShadowMeshLoader"
+     ],
+     "builds": [
+      "pure3d::ShadowMeshTopology",
+      "pure3d::ShadowMeshVertices"
+     ]
+    },
+    "0x00011000": {
+     "name": "Shader",
+     "loaders": [
+      "pure3d::ShaderLoader"
+     ],
+     "builds": [
+      "pure3d::Shader"
+     ]
+    },
+    "0x00013000": {
+     "name": "Light",
+     "loaders": [
+      "pure3d::LightLoader"
+     ],
+     "builds": [
+      "pure3d::AmbientLight",
+      "pure3d::DirectionalLight",
+      "pure3d::PointLight"
+     ]
+    },
+    "0x00014000": {
+     "name": "Locator",
+     "loaders": [
+      "pure3d::LocatorLoader"
+     ],
+     "builds": [
+      "pure3d::Entity",
+      "pure3d::Locator"
+     ]
+    },
+    "0x0001580C": {
+     "name": "Particle System",
+     "loaders": [
+      "pure3d::DefaultParticleEmitterHandler",
+      "pure3d::ParticleSystemLoader"
+     ],
+     "builds": [
+      "pure3d::ParticleController",
+      "pure3d::ParticleSystem"
+     ]
+    },
+    "0x00017006": {
+     "name": "Billboard",
+     "loaders": [
+      "pure3d::BillboardObjectLoader",
+      "pure3d::BillboardQuadGroupLoader"
+     ],
+     "builds": [
+      "pure3d::BillboardObject",
+      "pure3d::DrawableContainer"
+     ]
+    },
+    "0x00018000": {
+     "name": "Frontend Project",
+     "loaders": [
+      "pure3d::frontend::ProjectLoader"
+     ],
+     "builds": [
+      "pure3d::frontend::Project"
+     ]
+    },
+    "0x0001800D": {
+     "name": "Text Bible",
+     "loaders": [
+      "pure3d::TextBibleLoader"
+     ],
+     "builds": [
+      "pure3d::TextBible"
+     ]
+    },
+    "0x00019000": {
+     "name": "Texture",
+     "loaders": [
+      "pure3d::TextureLoader"
+     ],
+     "builds": []
+    },
+    "0x00019001": {
+     "name": "Image",
+     "loaders": [
+      "pure3d::ImageLoader"
+     ],
+     "builds": []
+    },
+    "0x00019005": {
+     "name": "Sprite",
+     "loaders": [
+      "pure3d::SpriteLoader"
+     ],
+     "builds": [
+      "pure3d::DrawableContainer",
+      "pure3d::Sprite",
+      "pure3d::SpriteObject"
+     ]
+    },
+    "0x00021000": {
+     "name": "Expression",
+     "loaders": [
+      "pure3d::ExpressionLoader"
+     ],
+     "builds": [
+      "pure3d::Entity",
+      "pure3d::Expression"
+     ]
+    },
+    "0x00021001": {
+     "name": "Expression Group",
+     "loaders": [
+      "pure3d::ExpressionGroupLoader"
+     ],
+     "builds": [
+      "pure3d::ExpressionGroup"
+     ]
+    },
+    "0x00021002": {
+     "name": "Expression Mixer",
+     "loaders": [
+      "pure3d::VertexOffsetExpressionMixerLoader"
+     ],
+     "builds": [
+      "pure3d::VertexOffsetExpressionMixer"
+     ]
+    },
+    "0x00022000": {
+     "name": "Texture Font",
+     "loaders": [
+      "pure3d::TextureFontLoader"
+     ],
+     "builds": [
+      "pure3d::Shader",
+      "pure3d::TextureFont"
+     ]
+    },
+    "0x00022002": {
+     "name": "Image Font",
+     "loaders": [
+      "pure3d::ImageFontLoader"
+     ],
+     "builds": [
+      "pure3d::Entity",
+      "pure3d::ImageFont"
+     ]
+    },
+    "0x00023000": {
+     "name": "Skeleton",
+     "loaders": [
+      "pure3d::SkeletonLoader"
+     ],
+     "builds": [
+      "pure3d::Skeleton"
+     ]
+    },
+    "0x00121000": {
+     "name": "Animation",
+     "loaders": [
+      "pure3d::AnimationLoader"
+     ],
+     "builds": [
+      "pure3d::Animation",
+      "pure3d::AnimationGroup",
+      "pure3d::Entity"
+     ]
+    },
+    "0x00121201": {
+     "name": "Frame Controller",
+     "loaders": [
+      "pure3d::DefaultFrameControllerHandler",
+      "pure3d::FrameControllerLoader"
+     ],
+     "builds": [
+      "pure3d::BillboardQuadGroupAnimationController",
+      "pure3d::CameraAnimationController",
+      "pure3d::CompDrawVisibilityAnimationController",
+      "pure3d::ExpressionAnimationController",
+      "pure3d::LightAnimationController",
+      "pure3d::ParticleController",
+      "pure3d::PoseAnimationController",
+      "pure3d::ShaderAnimationController",
+      "pure3d::TextureAnimationController",
+      "pure3d::VertexAnimController"
+     ]
+    },
+    "0x00121202": {
+     "name": "Multi Controller",
+     "loaders": [
+      "pure3d::MultiControllerLoader"
+     ],
+     "builds": [
+      "pure3d::MultiController"
+     ]
+    },
+    "0x00123000": {
+     "name": "Composite Drawable",
+     "loaders": [
+      "pure3d::CompositeDrawableLoader"
+     ],
+     "builds": [
+      "pure3d::CompositeDrawable",
+      "pure3d::CompositeDrawable::ActivePrimitiveList",
+      "pure3d::DrawableHierarchy"
+     ]
+    },
+    "0x07010000": {
+     "name": "Collision Object",
+     "loaders": [
+      "ravenphysics::CollisionObjectLoader"
+     ],
+     "builds": [
+      "ravenphysics::CollisionObject"
+     ]
+    },
+    "0x07010025": {
+     "name": "World Collision Object",
+     "loaders": [
+      "ravenphysics::WorldCollisionObjectLoader"
+     ],
+     "builds": [
+      "ravenphysics::CollisionObject"
+     ]
+    },
+    "0x07011000": {
+     "name": "Rigid Body",
+     "loaders": [
+      "ravenphysics::RigidBodyLoader"
+     ],
+     "builds": []
+    },
+    "0x08011000": {
+     "name": "Nav Mesh",
+     "loaders": [
+      "NavMeshLoader"
+     ],
+     "builds": []
+    },
+    "0x08011005": {
+     "name": "Road Graph",
+     "loaders": [
+      "RoadGraphLoader"
+     ],
+     "builds": []
+    },
+    "0x0802000D": {
+     "name": "State Prop Data",
+     "loaders": [
+      "pure3d::prop::StatePropDataLoader"
+     ],
+     "builds": [
+      "pure3d::prop::StateData",
+      "pure3d::prop::StatePropData"
+     ]
+    },
+    "0x08800000": {
+     "name": "Character",
+     "loaders": [
+      "renderer::CharacterLoader"
+     ],
+     "builds": [
+      "renderer::CharacterRenderable",
+      "renderer::Renderable"
+     ]
+    },
+    "0x08800001": {
+     "name": "Vehicle",
+     "loaders": [
+      "renderer::VehicleLoader"
+     ],
+     "builds": [
+      "renderer::VehicleContainer",
+      "renderer::VehicleRenderable"
+     ]
+    },
+    "0x08800002": {
+     "name": "Sky",
+     "loaders": [
+      "renderer::SkyLoader"
+     ],
+     "builds": [
+      "renderer::Renderable",
+      "renderer::SkyRenderable"
+     ]
+    },
+    "0x08800003": {
+     "name": "World Geometry",
+     "loaders": [
+      "renderer::WorldGeoLoader"
+     ],
+     "builds": [
+      "renderer::DisplayListPrimitive",
+      "renderer::WorldGeoRenderable"
+     ]
+    },
+    "0x08800004": {
+     "name": "Zone Package",
+     "loaders": [
+      "renderer::ZonePkgLoader"
+     ],
+     "builds": [
+      "renderer::Renderable",
+      "renderer::ZonePkgRenderable"
+     ]
+    },
+    "0x08800005": {
+     "name": "State Prop",
+     "loaders": [
+      "renderer::SFStatePropLoader"
+     ],
+     "builds": [
+      "pure3d::prop::StateProp",
+      "renderer::Renderable",
+      "renderer::StatePropRenderable"
+     ]
+    },
+    "0x08800007": {
+     "name": "Light Group (game)",
+     "loaders": [
+      "renderer::SFLightGroupLoader"
+     ],
+     "builds": [
+      "renderer::LightingRenderable"
+     ]
+    },
+    "0x08800008": {
+     "name": "Shadow",
+     "loaders": [
+      "renderer::ShadowLoader"
+     ],
+     "builds": [
+      "renderer::ShadowRenderable"
+     ]
+    },
+    "0x0880000A": {
+     "name": "Occluder",
+     "loaders": [
+      "occlude::OccluderLoader"
+     ],
+     "builds": [
+      "occlude::Occluder",
+      "pure3d::Entity"
+     ]
+    },
+    "0x08800100": {
+     "name": "Stream Package",
+     "loaders": [
+      "StreamPackageLoader"
+     ],
+     "builds": []
+    },
+    "0x08800101": {
+     "name": "Stream Trigger",
+     "loaders": [
+      "StreamTriggerLoader"
+     ],
+     "builds": []
+    },
+    "0x08800102": {
+     "name": "NIS Package",
+     "loaders": [
+      "NISPackageLoader"
+     ],
+     "builds": []
+    },
+    "0x08800104": {
+     "name": "Script File",
+     "loaders": [
+      "ScriptFileChunkLoader"
+     ],
+     "builds": [
+      "ScriptFileObject"
+     ]
+    },
+    "0x08800105": {
+     "name": "Load Package",
+     "loaders": [
+      "LoadPackageChunkLoader"
+     ],
+     "builds": [
+      "LoadObject",
+      "LoadPackage"
+     ]
+    },
+    "0x08800108": {
+     "name": "Cement Header",
+     "loaders": [
+      "CementLoader"
+     ],
+     "builds": [
+      "CementLoadTracker"
+     ]
+    },
+    "0x08800112": {
+     "name": "Load Package Name",
+     "loaders": [
+      "LoadPackageIdentifierLoader"
+     ],
+     "builds": []
+    },
+    "0x08800114": {
+     "name": "NIS Stream Partition Info",
+     "loaders": [
+      "NISStreamPartitionInfoLoader"
+     ],
+     "builds": [
+      "NISStreamPartitionInfo"
+     ]
+    },
+    "0x08800150": {
+     "name": "CV Load Object",
+     "loaders": [
+      "CVLoadObjectLoader"
+     ],
+     "builds": [
+      "CVLoadObject"
+     ]
+    },
+    "0x08800160": {
+     "name": "Traffic Config",
+     "loaders": [
+      "TrafficConfigLoader"
+     ],
+     "builds": []
+    },
+    "0x08800161": {
+     "name": "Subzone Traffic Trigger",
+     "loaders": [
+      "SubzoneTrafficTriggerLoader"
+     ],
+     "builds": []
+    },
+    "0x08800180": {
+     "name": "Script Object",
+     "loaders": [
+      "ScriptObjectLoader"
+     ],
+     "builds": [
+      "ScriptObjectEntity<StreamedTemplate>"
+     ]
+    },
+    "0x08800181": {
+     "name": "Game Group",
+     "loaders": [
+      "GameGroupLoader"
+     ],
+     "builds": []
+    },
+    "0x08800201": {
+     "name": "Water Shallow Area",
+     "loaders": [
+      "WaterDataDockLoader",
+      "WaterDataObstacleLoader",
+      "WaterDataShallowAreaLoader"
+     ],
+     "builds": [
+      "WaterDock",
+      "WaterDataDockLoader",
+      "WaterObstacle",
+      "ShallowWater"
+     ]
+    },
+    "0x08800202": {
+     "name": "Water Obstacle",
+     "loaders": [
+      "WaterDataDockLoader",
+      "WaterDataObstacleLoader",
+      "WaterDataShallowAreaLoader"
+     ],
+     "builds": [
+      "WaterDock",
+      "WaterDataDockLoader",
+      "WaterObstacle",
+      "ShallowWater"
+     ]
+    },
+    "0x08800203": {
+     "name": "Water Dock",
+     "loaders": [
+      "WaterDataDockLoader",
+      "WaterDataObstacleLoader",
+      "WaterDataShallowAreaLoader"
+     ],
+     "builds": [
+      "WaterDock",
+      "WaterDataDockLoader",
+      "WaterObstacle",
+      "ShallowWater"
+     ]
+    },
+    "0x09900190": {
+     "name": "Script Object Data",
+     "loaders": [
+      "ScriptObjectDataLoader"
+     ],
+     "builds": []
+    },
+    "0x09900191": {
+     "name": "Game Group Data",
+     "loaders": [
+      "GameGroupDataLoader"
+     ],
+     "builds": []
+    }
+   },
+   "unknown_chunks": []
+  },
+  "pc": {
+   "file": "Scarface.exe",
+   "code_readable": false,
+   "note": "the classes come from its RTTI, but its code isn't readable on disk (packed): no constructors or chunk ids",
+   "loaders": [
+    {
+     "class": "CVLoadObjectLoader",
+     "rtti": ".?AVCVLoadObjectLoader@@",
+     "vtable": "0x0075BBAC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "CementLoader",
+     "rtti": ".?AVCementLoader@@",
+     "vtable": "0x00738B48",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "DecisionTreeFileHandler",
+     "rtti": ".?AVDecisionTreeFileHandler@@",
+     "vtable": "0x00738BDC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "FightScriptFileHandler",
+     "rtti": ".?AVFightScriptFileHandler@@",
+     "vtable": "0x00738BC4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "FrontEndManager::DrawHandler",
+     "rtti": ".?AVDrawHandler@FrontEndManager@@",
+     "vtable": "0x00735CC0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "FrontEndManager::LoadingDrawHandler",
+     "rtti": ".?AVLoadingDrawHandler@FrontEndManager@@",
+     "vtable": "0x00735CC8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "GameGroupDataLoader",
+     "rtti": ".?AVGameGroupDataLoader@@",
+     "vtable": "0x00739A98",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "GameGroupLoader",
+     "rtti": ".?AVGameGroupLoader@@",
+     "vtable": "0x00736784",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "LoadPackageChunkLoader",
+     "rtti": ".?AVLoadPackageChunkLoader@@",
+     "vtable": "0x007570FC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "LoadPackageIdentifierLoader",
+     "rtti": ".?AVLoadPackageIdentifierLoader@@",
+     "vtable": "0x007570DC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "MemorySectionLoader",
+     "rtti": ".?AVMemorySectionLoader@@",
+     "vtable": "0x00738C5C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "MovieDrawHandler",
+     "rtti": ".?AVMovieDrawHandler@@",
+     "vtable": "0x007362E8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "NISPackageLoader",
+     "rtti": ".?AVNISPackageLoader@@",
+     "vtable": "0x007364EC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "NISStreamDataLoader",
+     "rtti": ".?AVNISStreamDataLoader@@",
+     "vtable": "0x007363FC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "NISStreamPartitionInfoLoader",
+     "rtti": ".?AVNISStreamPartitionInfoLoader@@",
+     "vtable": "0x007365FC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "NavMeshLoader",
+     "rtti": ".?AVNavMeshLoader@@",
+     "vtable": "0x007373C4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "OverlayFileHandler",
+     "rtti": ".?AVOverlayFileHandler@@",
+     "vtable": "0x00738BF4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ResourceLoader",
+     "rtti": ".?AVResourceLoader@@",
+     "vtable": "0x0075C804",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "RoadGraphLoader",
+     "rtti": ".?AVRoadGraphLoader@@",
+     "vtable": "0x00737594",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "SaveGameHandler",
+     "rtti": ".?AVSaveGameHandler@@",
+     "vtable": "0x007392E0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ScriptFileChunkLoader",
+     "rtti": ".?AVScriptFileChunkLoader@@",
+     "vtable": "0x00739AB8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ScriptFileHandler",
+     "rtti": ".?AVScriptFileHandler@@",
+     "vtable": "0x00738BAC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ScriptObjectDataLoader",
+     "rtti": ".?AVScriptObjectDataLoader@@",
+     "vtable": "0x00739A78",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ScriptObjectLoader",
+     "rtti": ".?AVScriptObjectLoader@@",
+     "vtable": "0x00736F5C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "SoundEntityLoader",
+     "rtti": ".?AVSoundEntityLoader@@",
+     "vtable": "0x00738E84",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "SoundMixLoader",
+     "rtti": ".?AVSoundMixLoader@@",
+     "vtable": "0x00738E6C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "SoundSequenceLoader",
+     "rtti": ".?AVSoundSequenceLoader@@",
+     "vtable": "0x00738E54",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "StreamPackageLoader",
+     "rtti": ".?AVStreamPackageLoader@@",
+     "vtable": "0x0073BD7C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "StreamTriggerLoader",
+     "rtti": ".?AVStreamTriggerLoader@@",
+     "vtable": "0x0073BE44",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "SubzoneTrafficTriggerLoader",
+     "rtti": ".?AVSubzoneTrafficTriggerLoader@@",
+     "vtable": "0x0075CDBC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "TrafficConfigLoader",
+     "rtti": ".?AVTrafficConfigLoader@@",
+     "vtable": "0x0075CD9C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "WaterDataDockLoader",
+     "rtti": ".?AVWaterDataDockLoader@@",
+     "vtable": "0x00746C7C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "WaterDataObstacleLoader",
+     "rtti": ".?AVWaterDataObstacleLoader@@",
+     "vtable": "0x00746C5C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "WaterDataShallowAreaLoader",
+     "rtti": ".?AVWaterDataShallowAreaLoader@@",
+     "vtable": "0x00746C3C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "content::P3DFileHandler",
+     "rtti": ".?AVP3DFileHandler@content@@",
+     "vtable": "0x00737980",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": [
+      {
+       "slot": 4,
+       "va": "0x006E9B40",
+       "chunk_ids": [],
+       "words": [],
+       "builds": [
+        "content::LoadStream"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "occlude::OccluderLoader",
+     "rtti": ".?AVOccluderLoader@occlude@@",
+     "vtable": "0x007377FC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "om::EntityLoader",
+     "rtti": ".?AVEntityLoader@om@@",
+     "vtable": "0x00772544",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [
+      "0x006EC650"
+     ],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::AnimationLoader",
+     "rtti": ".?AVAnimationLoader@pure3d@@",
+     "vtable": "0x007691F0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::BMPHandler",
+     "rtti": ".?AVBMPHandler@pure3d@@",
+     "vtable": "0x00737934",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::BillboardObjectLoader",
+     "rtti": ".?AVBillboardObjectLoader@pure3d@@",
+     "vtable": "0x0076AFBC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::BillboardQuadGroupLoader",
+     "rtti": ".?AVBillboardQuadGroupLoader@pure3d@@",
+     "vtable": "0x0076AF80",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::CameraLoader",
+     "rtti": ".?AVCameraLoader@pure3d@@",
+     "vtable": "0x0076B2D4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ChannelLoader",
+     "rtti": ".?AVChannelLoader@pure3d@@",
+     "vtable": "0x0076924C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::CompositeDrawableLoader",
+     "rtti": ".?AVCompositeDrawableLoader@pure3d@@",
+     "vtable": "0x0076ADAC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::DXTNHandler",
+     "rtti": ".?AVDXTNHandler@pure3d@@",
+     "vtable": "0x0076A5CC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::DefaultChannelHandler",
+     "rtti": ".?AVDefaultChannelHandler@pure3d@@",
+     "vtable": "0x00769388",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::DefaultFrameControllerHandler",
+     "rtti": ".?AVDefaultFrameControllerHandler@pure3d@@",
+     "vtable": "0x00768F74",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::DefaultParticleEmitterHandler",
+     "rtti": ".?AVDefaultParticleEmitterHandler@pure3d@@",
+     "vtable": "0x0076ABC4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::DefaultParticleGeneratorHandler",
+     "rtti": ".?AVDefaultParticleGeneratorHandler@pure3d@@",
+     "vtable": "0x0076AB94",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ExpressionGroupLoader",
+     "rtti": ".?AVExpressionGroupLoader@pure3d@@",
+     "vtable": "0x0076AA80",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ExpressionLoader",
+     "rtti": ".?AVExpressionLoader@pure3d@@",
+     "vtable": "0x0076AA60",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::FrameControllerLoader",
+     "rtti": ".?AVFrameControllerLoader@pure3d@@",
+     "vtable": "0x00768F90",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::GeometryLoader",
+     "rtti": ".?AVGeometryLoader@pure3d@@",
+     "vtable": "0x0076B3F8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::HDRHandler",
+     "rtti": ".?AVHDRHandler@pure3d@@",
+     "vtable": "0x0076A61C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::IgnoreLoader",
+     "rtti": ".?AVIgnoreLoader@pure3d@@",
+     "vtable": "0x00737998",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ImageFontLoader",
+     "rtti": ".?AVImageFontLoader@pure3d@@",
+     "vtable": "0x0076B130",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ImageHandler",
+     "rtti": ".?AVImageHandler@pure3d@@",
+     "vtable": "0x0076A4E4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ImageLoader",
+     "rtti": ".?AVImageLoader@pure3d@@",
+     "vtable": "0x0076A804",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::LightGroupLoader",
+     "rtti": ".?AVLightGroupLoader@pure3d@@",
+     "vtable": "0x0076B23C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::LightLoader",
+     "rtti": ".?AVLightLoader@pure3d@@",
+     "vtable": "0x0076B21C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::LocatorLoader",
+     "rtti": ".?AVLocatorLoader@pure3d@@",
+     "vtable": "0x0076B298",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::MultiControllerLoader",
+     "rtti": ".?AVMultiControllerLoader@pure3d@@",
+     "vtable": "0x0076AC80",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::PNGHandler",
+     "rtti": ".?AVPNGHandler@pure3d@@",
+     "vtable": "0x0076A52C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ParticleEmitterLoader",
+     "rtti": ".?AVParticleEmitterLoader@pure3d@@",
+     "vtable": "0x0076ABB0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ParticleGeneratorLoader",
+     "rtti": ".?AVParticleGeneratorLoader@pure3d@@",
+     "vtable": "0x0076AB80",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ParticleSystemLoader",
+     "rtti": ".?AVParticleSystemLoader@pure3d@@",
+     "vtable": "0x0076ABE0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::PolySkinLoader",
+     "rtti": ".?AVPolySkinLoader@pure3d@@",
+     "vtable": "0x0076AE94",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::PrimGroupLoader",
+     "rtti": ".?AVPrimGroupLoader@pure3d@@",
+     "vtable": "0x0076C0C4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::RawImageHandler",
+     "rtti": ".?AVRawImageHandler@pure3d@@",
+     "vtable": "0x0076A57C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::RenderObjectLoader",
+     "rtti": ".?AVRenderObjectLoader@pure3d@@",
+     "vtable": "0x00769DF0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ShaderLoader",
+     "rtti": ".?AVShaderLoader@pure3d@@",
+     "vtable": "0x00769C64",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ShadowMeshLoader",
+     "rtti": ".?AVShadowMeshLoader@pure3d@@",
+     "vtable": "0x00769D8C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::ShadowSkinLoader",
+     "rtti": ".?AVShadowSkinLoader@pure3d@@",
+     "vtable": "0x00769DB0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::SkeletonLoader",
+     "rtti": ".?AVSkeletonLoader@pure3d@@",
+     "vtable": "0x00768C20",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::SpriteLoader",
+     "rtti": ".?AVSpriteLoader@pure3d@@",
+     "vtable": "0x0076A93C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::TargaHandler",
+     "rtti": ".?AVTargaHandler@pure3d@@",
+     "vtable": "0x007378BC",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::TextBibleLoader",
+     "rtti": ".?AVTextBibleLoader@pure3d@@",
+     "vtable": "0x0076A988",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::TextureFontLoader",
+     "rtti": ".?AVTextureFontLoader@pure3d@@",
+     "vtable": "0x0076B1E0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::TextureLoader",
+     "rtti": ".?AVTextureLoader@pure3d@@",
+     "vtable": "0x0076B33C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::VertexOffsetExpressionMixerLoader",
+     "rtti": ".?AVVertexOffsetExpressionMixerLoader@pure3d@@",
+     "vtable": "0x0076AAE8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::frontend::ProjectLoader",
+     "rtti": ".?AVProjectLoader@frontend@pure3d@@",
+     "vtable": "0x00769754",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "pure3d::prop::StatePropDataLoader",
+     "rtti": ".?AVStatePropDataLoader@prop@pure3d@@",
+     "vtable": "0x0076A9E4",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ravenphysics::CollisionObjectLoader",
+     "rtti": ".?AVCollisionObjectLoader@ravenphysics@@",
+     "vtable": "0x007714B8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ravenphysics::RigidBodyLoader",
+     "rtti": ".?AVRigidBodyLoader@ravenphysics@@",
+     "vtable": "0x00771120",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "ravenphysics::WorldCollisionObjectLoader",
+     "rtti": ".?AVWorldCollisionObjectLoader@ravenphysics@@",
+     "vtable": "0x007714D8",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "renderer::CharacterLoader",
+     "rtti": ".?AVCharacterLoader@renderer@@",
+     "vtable": "0x00737B88",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "renderer::SFLightGroupLoader",
+     "rtti": ".?AVSFLightGroupLoader@renderer@@",
+     "vtable": "0x00737EF0",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "renderer::SFStatePropLoader",
+     "rtti": ".?AVSFStatePropLoader@renderer@@",
+     "vtable": "0x00738690",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "renderer::ShadowLoader",
+     "rtti": ".?AVShadowLoader@renderer@@",
+     "vtable": "0x0073841C",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "renderer::SkyLoader",
+     "rtti": ".?AVSkyLoader@renderer@@",
+     "vtable": "0x00738628",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "renderer::VehicleLoader",
+     "rtti": ".?AVVehicleLoader@renderer@@",
+     "vtable": "0x00738810",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "renderer::WorldGeoLoader",
+     "rtti": ".?AVWorldGeoLoader@renderer@@",
+     "vtable": "0x00738230",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    },
+    {
+     "class": "renderer::ZonePkgLoader",
+     "rtti": ".?AVZonePkgLoader@renderer@@",
+     "vtable": "0x00738298",
+     "chunk_ids": [],
+     "chunk_names": [],
+     "constructors": [],
+     "registered_by": [],
+     "slots": []
+    }
+   ],
+   "by_chunk": {},
+   "unknown_chunks": []
+  }
+ }
+}
