@@ -453,6 +453,14 @@ scale; layered lit is `2 × lerp(T0, T1, D0.a) × D0`; specular `4 × T0 × D1` 
 `2 × T0 × D0` plus gloss and environment passes (up to `4 ×`). Every one ends in linear fog:
 `fog.a × colour + (1 − fog.a) × fog colour`. The vertex programs' `×2` (above) is on the light only.
 
+**A primitive group's vertex type** (its loader `sub_00295550`; the game always adds `0x2000`): `0x000F` the
+number of UV sets, `0x0010` normals, `0x0020` one colour (a `0x00010008` list is read only with this bit),
+`0x0040` a second, specular colour, `0x0080` matrix indices, `0x0100` weights, `0x2000` positions, `0x4000`
+colour sets (`0x0001001C`, how many in bits 15 to 17), `0x100000` two delta vectors (vehicles). The PC's city
+files: `0x2011` (normals, 1 UV) 9,542; `0x2021` (colour, 1 UV) 8,265; `0x2031` 7,754; `0x2032` (2 UVs) 930;
+`0x16011` (normals, 1 UV, 2 colour sets) 587. Every group with a colour list has the bit, and none without.
+After the vertex type the header holds the vertex, index and matrix counts, two flags, a u16 and a u32.
+
 **Fog.** The start and end distances and the colour are the environment's `FogStart`, `FogEnd` and
 `FogColor_RGBA`, blended by the hour; the vertex programs put a linear factor in `oFog` from `c49`.
 
@@ -472,6 +480,9 @@ picture, `L = 0.25 r + 0.625 g + 0.125 b`, `Lt` the same of the tint:
 (1.0 at 0, 2.096 at 50, 255 at 100), `P` the smallest of 1, 2, 4 ... 64, 255 not below `K` and `k = K / P`,
 `B = Brightness / 255`, `m = MidPoint / 255`, `B′ = B` when `K` is 1 else `((B − m) K + m) Lt`, `bias` 0.5 on
 the contrast path else 1; each stage clamped. `K` = 255 is a posterising pass of its own.
+
+**Order**: at the end of the frame the colour effects run first, then the bloom (`Display_List` 0x449F0), so
+the bloom is taken from, and added to, the graded picture: `Bloom(ColourFX(scene))`.
 
 **Bloom**: a bright pass (luma above a threshold), a 4-tap box shrink, blurs of 1 to 4 taps
 (`Bloom_Radius`), then `2 × scene × Bloom_BackBuffer + bloom × Bloom_Brightness`.
