@@ -1380,3 +1380,25 @@ The rest was worked out from the game files and checked against the other versio
 the movies' pictures by decoding them, the PS2 rotations against the PC's, the Xbox and PS2 vertex data
 against the PC's lists, and the chunk names and the placement records against the Xbox program's own
 loaders.
+
+## What the program's loaders read
+
+Read from the retail Xbox program itself, no clean room needed (the examiner's section E and F; tools in
+`portal/tools`, tables in `reports/`):
+
+* **Which class reads which chunk** (`loader_registry.json`): each loader's constructor passes its chunk
+  id to its base class; 92 loader and handler classes, 59 top-level chunk ids, and what each builds
+  (`0x0802000D` → `pure3d::prop::StatePropDataLoader` → `StatePropData`).
+* **Which children each loader handles** (`chunk_dispatch.json`): the loops of the form
+  `while (more()) { switch (current_id()) ... }` (`sub_00240630`, `sub_00240670`), followed through the
+  compiler's compare-and-subtract chains and jump tables: 53 loops, 98 child ids, each with the code its
+  case runs. For example the particle system (`ParticleSystemLoader::vfunc_06`) takes `0x10003`, `0x10004`,
+  `0x121201` and `0x122000` and hands everything else to its emitter handler; the collision objects
+  (`CollisionObjectLoader`, `WorldCollisionObjectLoader`, through `sub_002F7550`) take `0x07000003`,
+  `0x07000006`, `0x07000007`, `0x07000008` and `0x07016000`. Ids the loaders handle that this file does
+  not yet describe are listed there as `unnamed_ids`.
+* **Frame controller types:** the handler accepts `STRN` and `PVRT` but builds nothing for them (the
+  chunk is read and dropped); it builds `PSYS`, `EFX`, `SHAD`, `EXP`, `BQG`, `CAM`, `TEX`, `PVIS`, `LITE`,
+  `PTRN` and `VRTX`. No PC file has `STRN` or `PVRT`.
+* **A shader's ambient colour is its diffuse colour.** The colour reader skips `AMBI` and, on `DIFF`,
+  sets both. A file's own `AMBI` is never used (`p3d_gltf.shader_info` drops it).

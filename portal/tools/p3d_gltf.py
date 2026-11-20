@@ -849,6 +849,11 @@ def shader_info(data: bytes, c: p3d.Chunk) -> dict:
             info["floats"][kf["parameter"]] = kf["value"]
         elif k.id == 0x11005:
             info["colours"][kf["parameter"]] = int(kf["argb"], 16)
+    # The game never applies a shader's own AMBI: its colour reader skips it, and sets the ambient colour
+    # from DIFF instead (ShaderLoader::vfunc_06, the examiner's answer F2). So ambient is the diffuse colour.
+    info["colours"].pop("AMBI", None)
+    if "DIFF" in info["colours"]:
+        info["colours"]["AMBI"] = info["colours"]["DIFF"]
     return info
 
 
