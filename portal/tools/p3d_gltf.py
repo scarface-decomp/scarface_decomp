@@ -460,8 +460,16 @@ def geometry(data: bytes, pg: p3d.Chunk) -> Optional[Geometry]:
             g.uvs.append(_floats(data, uv, 2, skip=4))
         if 0x10008 in kids:
             g.colours = _u32s(data, kids[0x10008][0])
-            if len(kids[0x10008]) > 1:
-                g.colours2 = _u32s(data, kids[0x10008][1])
+        elif 0x1001C in kids:
+            # Colour sets (vertex type 0x4000, how many in bits 15 to 17): u32 count, u32 set number, then the
+            # colours. Set 0 is the cbvlit program's v3, set 1 its v4 (the examiner's block J0.2).
+            sets = {}
+            for c in kids[0x1001C]:
+                cs = c.body[0]
+                n_, number = struct.unpack_from("<II", data, cs)
+                if cs + 8 + 4 * n_ <= c.body[1]:
+                    sets[number] = list(struct.unpack_from(f"<{n_}I", data, cs + 8))
+            g.colours, g.colours2 = sets.get(0), sets.get(1)
         if 0x1000C in kids and 0x1000B in kids:
             palette = _u32s(data, kids[0x1000D][0]) if 0x1000D in kids else list(range(256))
             packed = _u32s(data, kids[0x1000B][0])

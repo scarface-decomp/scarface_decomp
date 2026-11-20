@@ -39,7 +39,7 @@ NAMES: Dict[int, str] = {
     0x1000D: "Matrix Palette", 0x10010: "Packed Normal List", 0x10011: "Vertex Shader",
     0x10012: "Memory Image Vertex List", 0x10013: "Memory Image Index List",
     0x10014: "Memory Image Vertex Description", 0x10017: "Render Status", 0x1001B: "Topology (?)",
-    0x1001C: "Extra Colour List (?)",
+    0x1001C: "Colour Set",
     0x10020: "Primitive Group", 0x10021: "Vertex Precision (?)",
     0x11000: "Shader", 0x11002: "Shader Texture Parameter", 0x11003: "Shader Integer Parameter",
     0x11004: "Shader Float Parameter", 0x11005: "Shader Colour Parameter",

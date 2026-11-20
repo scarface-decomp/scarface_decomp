@@ -186,8 +186,10 @@ The same model is stored three ways:
   them and `0x00010013` holds u16 indices (both after three u32: `0x20001`, 0, the size in bytes). A
   vertex is the position (3 floats), then the normal if the vertex type has one (a packed u32, Direct3D's
   NORMPACKED3: x and y in 11 signed bits, z in 10), the colour if it has one (u32, ARGB), one more u32
-  colour for each of the bits `0x4000` and `0x10000` (the PC keeps these in `0x0001001C` lists: u32 count,
-  u32 channel, a u32 per vertex), each UV set (2 floats), and on vehicles (vertex type bit `0x100000`) two
+  colour for each colour set when the vertex type has `0x4000` (how many in bits 15 to 17: `0x16011` has
+  two; the PC keeps these in `0x0001001C` lists instead of a `0x00010008`: u32 count, u32 set number, a u32
+  per vertex; set 0 is the cbvlit program's `v3`, set 1 its `v4`, exported as `COLOR_0` and `COLOR_1`),
+  each UV set (2 floats), and on vehicles (vertex type bit `0x100000`) two
   more vectors (6 floats). Skins keep the PC's plain lists.
 * **PS2**: only a memory image: `0x00010012` (after three u32: `0x100008`, the number of quadwords, the
   size) is a ready-made VIF packet for the vector unit's microprogram. See

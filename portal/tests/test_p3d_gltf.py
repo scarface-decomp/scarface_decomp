@@ -1287,6 +1287,18 @@ def test_a_strip_with_no_index_list():
     assert g.triangles == [(0, 1, 2), (2, 1, 3)]
 
 
+def test_two_colour_sets():
+    """A cbvlit primitive group with colour sets (0x1001C: u32 count, u32 set number, the colours) instead of a
+    colour list: set 0 is COLOR_0 (the program's v3), set 1 the second (v4; the examiner's block J0.2)."""
+    head = struct.pack("<I", 0) + text("wall") + struct.pack("<9I", 1, 0x16011, 4, 0, 0, 0, 1, 0, 0)
+    flat = [v for p in QUAD for v in p]
+    night = chunk(0x1001C, struct.pack("<II4I", 4, 1, *[0xFF050504] * 4))
+    day = chunk(0x1001C, struct.pack("<II4I", 4, 0, *[0xFF575856] * 4))
+    data = p3d(chunk(0x10020, head, chunk(0x10005, struct.pack("<I12f", 4, *flat)) + night + day))
+    g = G.geometry(data, G.p3d.read_tree(data)[0])
+    assert g.colours == [0xFF575856] * 4 and g.colours2 == [0xFF050504] * 4
+
+
 # --------------------------------------------------------------------------- one weather at a time
 
 def with_chunks(data, *more):
