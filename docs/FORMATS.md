@@ -484,8 +484,14 @@ the contrast path else 1; each stage clamped. `K` = 255 is a posterising pass of
 **Order**: at the end of the frame the colour effects run first, then the bloom (`Display_List` 0x449F0), so
 the bloom is taken from, and added to, the graded picture: `Bloom(ColourFX(scene))`.
 
-**Bloom**: a bright pass (luma above a threshold), a 4-tap box shrink, blurs of 1 to 4 taps
-(`Bloom_Radius`), then `2 × scene × Bloom_BackBuffer + bloom × Bloom_Brightness`.
+**Bloom** (`SetBloom` 0x2684D0, then the pass 0x26B750): the bright pass is the colour-effects formula above
+applied with the bloom's own weights (`Bloom_Weights_RGB` scaled to sum 1, a third each when all 0), no tint,
+`B = Bloom_Brightness / 255`, `K` from `Bloom_Contrast` (the same table) and `m = Bloom_MidPoint`, then a step
+on the result's luma; a 4-tap box shrink; then a Gaussian blur along each axis with
+`R = clamp(Bloom_Radius / 4, 0, 25)`, `s = 0.45 R + 0.3`, weights `e^(−i²/s²)` for whole-texel steps `i` up to 19
+(dropped below 1/255), normalised over both sides, run four taps at a time; then
+`out = 2 × scene × clamp(Bloom_BackBuffer, 0, 1) + bloom × clamp(Bloom_Value / 2, 0, 1) × Bloom_Tint_RGB`.
+The render-target sizes are not known yet.
 
 **Cutscenes.** Track times are frames at 30 per second. Every channel is linear between keys (quaternions
 slerped the short way, a plain lerp when nearly equal), holding the first key before and the last after
