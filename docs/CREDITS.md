@@ -10,6 +10,12 @@ Everyone who verifies a function through the portal is recorded by handle in
 `reports/verified_registry.json` (`verified_by`) and shown on the portal's leaderboard. Pull request
 authors are credited in the commit history. Thank you.
 
+* **lemiur**: 73 Xbox matches (46 game functions and 27 library ones, among them the `<algorithm>`
+  instantiations and zlib's `adler32`), the symcov import (564 library names, 556 missing function
+  starts, 164 functions moved to the library list), the Hit & Run linker-map bridge
+  (`tools/shar_bridge.c`) and a list of gaps in the project's own checking tools
+  (`reports/campaign_status.md`).
+
 ## Tools and references
 
 * [Capstone](https://www.capstone-engine.org/) disassembler, used for function sizing and checks.
