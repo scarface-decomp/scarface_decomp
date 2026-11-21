@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,905 of 19,501 functions matched (40.54%). NOT COMPLETE YET.
-// The 11,596 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 7,978 of 19,501 functions matched (40.91%). NOT COMPLETE YET.
+// The 11,523 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -546,7 +546,33 @@ L_1C:
 // [TODO] 0x00011850 sub_00011850 (53 B)
 // [TODO] 0x00011890 sub_00011890 (53 B)
 // [TODO] 0x000118D0 sub_000118D0 (49 B)
-// [TODO] 0x00011910 sub_00011910 (31 B)
+// ============================================================================
+// [VERIFIED] sub_00011910 (0x00011910, 31 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the squared length of a three-number vector (x*x + y*y + z*z).
+// ============================================================================
+// bin: xb
+// va: 0x00011910
+// what: Returns the squared length of a three-number vector (x*x + y*y + z*z).
+// tool: Claude Opus 5.5 (symcov hint: vector3::SquaredLength)
+// sub_00011910 (0x00011910, 31 bytes)
+
+class Class_00011910
+{
+public:
+    float sub_00011910() const;
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Sum of the squares of the three components.
+float Class_00011910::sub_00011910() const
+{
+    return m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08;
+}
+
 // [TODO] 0x00011930 Collidable::vfunc_01 (28 B)
 // [TODO] 0x00011950 sub_00011950 (100 B)
 // [TODO] 0x000119C0 sub_000119C0 (100 B)
@@ -1003,7 +1029,30 @@ int __cdecl sub_00012230(int a1, int a2)
 
 // [TODO] 0x00012250 sub_00012250 (113 B)
 // [TODO] 0x000122D0 sub_000122D0 (169 B)
-// [TODO] 0x00012380 sub_00012380 (48 B)
+// ============================================================================
+// [VERIFIED] sub_00012380 (0x00012380, 48 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Runs a constructor on every element of an array, first to last (compiler helper "vector constructor iterator").
+// ============================================================================
+// bin: xb
+// va: 0x00012380
+// what: Runs a constructor on every element of an array, first to last (compiler helper "vector constructor iterator").
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00012380.cpp --va 0x00012380 --bin xb --match '??_H'
+
+// ??_H (`vector constructor iterator') has no source of its own: cl writes it into any file that
+// builds an array of a class with a constructor and no destructor. The array below is that
+// declaration; which class and array the game's copy came from is not known.
+class Class_00012380
+{
+public:
+    Class_00012380();
+
+    int m_Field00;
+};
+
+Class_00012380 g_00012380[4];
+
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1079,7 +1128,37 @@ int Class_00012440::sub_00012440()
     return t1;
 }
 
-// [TODO] 0x00012450 sub_00012450 (246 B)
+// ============================================================================
+// [VERIFIED] sub_00012450 (0x00012450, 246 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 16-byte records so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x00012450
+// what: Rotates a range of 16-byte records so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00012450.cpp --va 0x00012450 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Rotate for random-access iterators, instantiated for Class_00012450.
+template void std::_Rotate<Class_00012450 *, int, Class_00012450>(Class_00012450 *, Class_00012450 *, Class_00012450 *, int *, Class_00012450 *);
+
 // [TODO] 0x00012550 sub_00012550 (49 B)
 // [TODO] 0x00012590 sub_00012590 (71 B)
 // [TODO] 0x000125E0 sub_000125E0 (93 B)
@@ -1541,7 +1620,37 @@ int __cdecl sub_00014F70(int a1, int a2, int a3)
 }
 
 // [TODO] 0x00014FA0 sub_00014FA0 (30 B)
-// [TODO] 0x00014FC0 sub_00014FC0 (140 B)
+// ============================================================================
+// [VERIFIED] sub_00014FC0 (0x00014FC0, 140 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 5 external relocation(s) unchecked
+// What it does: Picks a median-of-three (or of nine for large ranges) pivot among 16-byte records ordered by their float key (standard library sort helper).
+// ============================================================================
+// bin: xb
+// va: 0x00014FC0
+// what: Picks a median-of-three (or of nine for large ranges) pivot among 16-byte records ordered by their float key (standard library sort helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00014FC0.cpp --va 0x00014FC0 --bin xb --match '?$_Median@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Median (pivot selection of std::sort), instantiated for Class_00012450.
+template void std::_Median<Class_00012450 *>(Class_00012450 *, Class_00012450 *, Class_00012450 *);
+
 // [TODO] 0x00015050 sub_00015050 (184 B)
 // [TODO] 0x00015110 sub_00015110 (667 B)
 // [TODO] 0x000153B0 sub_000153B0 (416 B)
@@ -1612,7 +1721,37 @@ void __cdecl sub_00015AE0(Target* target, const char* name)
 
 // [TODO] 0x00015B10 sub_00015B10 (1076 B)
 // [TODO] 0x00015F50 sub_00015F50 (119 B)
-// [TODO] 0x00015FD0 sub_00015FD0 (90 B)
+// ============================================================================
+// [VERIFIED] sub_00015FD0 (0x00015FD0, 90 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Arranges an array of 16-byte records into a heap ordered by their float key (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x00015FD0
+// what: Arranges an array of 16-byte records into a heap ordered by their float key (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00015FD0.cpp --va 0x00015FD0 --bin xb --match '?$_Make_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Make_heap, instantiated for Class_00012450.
+template void std::_Make_heap<Class_00012450 *, int, Class_00012450>(Class_00012450 *, Class_00012450 *, int *, Class_00012450 *);
+
 // ============================================================================
 // [VERIFIED] sub_00016030 (0x00016030, 37 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1674,9 +1813,69 @@ CollisionManagerFlowClient* CollisionManagerFlowClient::vfunc_00(int a1)
 // [TODO] 0x00016710 sub_00016710 (174 B)
 // [TODO] 0x000167C0 sub_000167C0 (197 B)
 // [TODO] 0x00016890 sub_00016890 (114 B)
-// [TODO] 0x00016910 sub_00016910 (139 B)
+// ============================================================================
+// [VERIFIED] sub_00016910 (0x00016910, 139 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Sorts a heap of 16-byte records by their float key (standard library std::sort_heap).
+// ============================================================================
+// bin: xb
+// va: 0x00016910
+// what: Sorts a heap of 16-byte records by their float key (standard library std::sort_heap).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00016910.cpp --va 0x00016910 --bin xb --match '?$sort_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::sort_heap, instantiated for Class_00012450.
+template void std::sort_heap<Class_00012450 *>(Class_00012450 *, Class_00012450 *);
+
 // [TODO] 0x000169A0 sub_000169A0 (37 B)
-// [TODO] 0x000169D0 sub_000169D0 (203 B)
+// ============================================================================
+// [VERIFIED] sub_000169D0 (0x000169D0, 203 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 16-byte records by their float key, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000169D0
+// what: Sorts an array of 16-byte records by their float key, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000169D0.cpp --va 0x000169D0 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Sort (introsort loop of std::sort), instantiated for Class_00012450.
+template void std::_Sort<Class_00012450 *, int>(Class_00012450 *, Class_00012450 *, int);
+
 // [TODO] 0x00016AA0 CollisionManager::CollisionManagerFlowClient::vfunc_02 (1103 B)
 // [TODO] 0x00016EF0 sub_00016EF0 (336 B)
 // [TODO] 0x00017040 sub_00017040 (885 B)
@@ -8344,7 +8543,31 @@ template <> void ConcreteClassRep<FEObject>::vfunc_02()
     sub_00025350((int)DAT_0041AFA0, (int)DAT_0039D520, (int)sub_00023D20, 2, 2, (int)DAT_0039D520);
 }
 
-// [TODO] 0x00025400 sub_00025400 (49 B)
+// ============================================================================
+// [VERIFIED] sub_00025400 (0x00025400, 49 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Runs a destructor on every element of an array, last to first (compiler helper "vector destructor iterator").
+// ============================================================================
+// bin: xb
+// va: 0x00025400
+// what: Runs a destructor on every element of an array, last to first (compiler helper "vector destructor iterator").
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00025400.cpp --va 0x00025400 --bin xb --match '??_I' --flags "/O2 /Ot /Oy /G6 /Gd /GR /Zp4"
+
+// ??_I (`vector destructor iterator') has no source of its own: cl writes it into a file that
+// destroys an array of a class with a destructor. With /EHsc cl uses the exception-aware
+// iterator instead, so the game's copy came from a file built without /EHsc (see the verify line).
+// The array below is the declaration that needs it; which class it was is not known.
+class Class_00025400
+{
+public:
+    ~Class_00025400();
+
+    int m_Field00;
+};
+
+Class_00025400 g_00025400[4];
+
 // [TODO] 0x00025440 sub_00025440 (241 B)
 // [TODO] 0x00025540 sub_00025540 (85 B)
 // [TODO] 0x000255A0 sub_000255A0 (82 B)
@@ -8473,7 +8696,23 @@ void* Graph::vfunc_00()
 }
 
 // [TODO] 0x00026720 sub_00026720 (28 B)
-// [TODO] 0x00026740 sub_00026740 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00026740 (0x00026740, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Rounds a float down to the nearest whole number (the C++ floorf overload from <math.h>).
+// ============================================================================
+// bin: xb
+// va: 0x00026740
+// what: Rounds a float down to the nearest whole number (the C++ floorf overload from <math.h>).
+// tool: Claude Opus 5.5
+
+// The original is the Toolkit's own header inline, <math.h>'s floorf(float), emitted out of line
+// because something takes or keeps a call to it that the compiler did not inline.
+#include <math.h>
+
+// Taking floorf's address makes the compiler emit the header's copy of it.
+float (*g_FloorF)(float) = floorf;
+
 // ============================================================================
 // [VERIFIED] Graph::vfunc_01 (0x00026760, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11544,8 +11783,52 @@ GameSet* GameSet::vfunc_01(int a1)
     return this;
 }
 
-// [TODO] 0x00029CE0 sub_00029CE0 (74 B)
-// [TODO] 0x00029D30 sub_00029D30 (238 B)
+// ============================================================================
+// [VERIFIED] sub_00029CE0 (0x00029CE0, 74 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Sorts a heap of 4-byte elements with a caller-supplied ordering function (standard library std::sort_heap).
+// ============================================================================
+// bin: xb
+// va: 0x00029CE0
+// what: Sorts a heap of 4-byte elements with a caller-supplied ordering function (standard library std::sort_heap).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00029CE0.cpp --va 0x00029CE0 --bin xb --match '?$sort_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::sort_heap with a predicate, instantiated for an array of Class_00029D30 pointers.
+template void std::sort_heap<Class_00029D30 **, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, Class_00029D30Less);
+
+// ============================================================================
+// [VERIFIED] sub_00029D30 (0x00029D30, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x00029D30
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00029D30.cpp --va 0x00029D30 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_00029D30 pointers.
+template void std::_Sort<Class_00029D30 **, int, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, int, Class_00029D30Less);
+
 // ============================================================================
 // [VERIFIED] sub_00029E20 (0x00029E20, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -16733,7 +17016,26 @@ bool __cdecl sub_0002EA90(void)
     return true;
 }
 
-// [TODO] 0x0002EAA0 sub_0002EAA0 (27 B)
+// ============================================================================
+// [VERIFIED] sub_0002EAA0 (0x0002EAA0, 27 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether either of two global on/off flags is set.
+// ============================================================================
+// bin: xb
+// va: 0x0002EAA0
+// what: Says whether either of two global on/off flags is set.
+// tool: Claude Opus 5.5 (symcov hint: GUI_ScoreCardUp)
+// sub_0002EAA0 (0x0002EAA0, 27 bytes)
+
+extern "C" bool DAT_0041C040;
+extern "C" bool DAT_00474517;
+
+// True when either flag is set.
+bool __cdecl sub_0002EAA0()
+{
+    return DAT_00474517 || DAT_0041C040;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0002EAC0 (0x0002EAC0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -18575,7 +18877,35 @@ template <> void content::LoadInventory::DynamicCaster<pure3d::DrawableHierarchy
     sub_002FC034(a1, 0, (int)DAT_004194F4, (int)DAT_0041C738, 0);
 }
 
-// [TODO] 0x0003DBD0 sub_0003DBD0 (33 B)
+// ============================================================================
+// [VERIFIED] sub_0003DBD0 (0x0003DBD0, 33 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the length of a three-number vector.
+// ============================================================================
+// bin: xb
+// va: 0x0003DBD0
+// what: Returns the length of a three-number vector.
+// tool: Claude Opus 5.5 (symcov hint: TVector::Length)
+// sub_0003DBD0 (0x0003DBD0, 33 bytes)
+
+extern "C" double __cdecl sqrt(double);
+
+class Class_0003DBD0
+{
+public:
+    float sub_0003DBD0() const;
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Square root of the sum of the squares of the three components.
+float Class_0003DBD0::sub_0003DBD0() const
+{
+    return (float)sqrt(m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08);
+}
+
 // [TODO] 0x0003DC00 sub_0003DC00 (1764 B)
 // [TODO] 0x0003E2F0 sub_0003E2F0 (216 B)
 // [TODO] 0x0003E3D0 sub_0003E3D0 (75 B)
@@ -30583,7 +30913,31 @@ bool __cdecl sub_00063870(bool a1)
     return a1;
 }
 
-// [TODO] 0x00063880 sub_00063880 (18 B)
+// ============================================================================
+// [VERIFIED] sub_00063880 (0x00063880, 18 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets an on/off flag on the object held in a global pointer.
+// ============================================================================
+// bin: xb
+// va: 0x00063880
+// what: Sets an on/off flag on the object held in a global pointer.
+// tool: Claude Opus 5.5 (symcov hint: TScriptFunction_General::TriggerCamera)
+// sub_00063880 (0x00063880, 18 bytes)
+
+class Class_000618F0
+{
+public:
+    bool sub_000618F0(bool a1);
+};
+
+extern "C" Class_000618F0 *__cdecl sub_000618E0();
+
+// Passes the flag to the global object's setter.
+void __cdecl sub_00063880(bool value)
+{
+    sub_000618E0()->sub_000618F0(value);
+}
+
 // ============================================================================
 // [VERIFIED] sub_000638A0 (0x000638A0, 9 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -30762,7 +31116,27 @@ ResourceManagerFlowClient* ResourceManagerFlowClient::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x000643F0 sub_000643F0 (22 B)
+// ============================================================================
+// [VERIFIED] sub_000643F0 (0x000643F0, 22 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the same value to two other functions, one after the other.
+// ============================================================================
+// bin: xb
+// va: 0x000643F0
+// what: Passes the same value to two other functions, one after the other.
+// tool: Claude Opus 5.5 (symcov hint: DF_vDrawLayers, link-order)
+// sub_000643F0 (0x000643F0, 22 bytes)
+
+extern "C" void __cdecl sub_00064240(int);
+extern "C" void __cdecl sub_00061760(int);
+
+// Calls the two functions with the same argument.
+void __cdecl sub_000643F0(int a1)
+{
+    sub_00064240(a1);
+    sub_00061760(a1);
+}
+
 // [TODO] 0x00064410 sub_00064410 (36 B)
 // [TODO] 0x00064440 sub_00064440 (133 B)
 // ============================================================================
@@ -36247,7 +36621,32 @@ int __cdecl sub_0006F9B0(int a1)
     return a1 + 3;
 }
 
-// [TODO] 0x0006F9C0 sub_0006F9C0 (36 B)
+// ============================================================================
+// [VERIFIED] sub_0006F9C0 (0x0006F9C0, 36 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Formats a debug message into a local buffer; this build prints it nowhere.
+// ============================================================================
+// bin: xb
+// va: 0x0006F9C0
+// what: Formats a debug message into a local buffer; this build prints it nowhere.
+// tool: Claude Opus 5.5 (symcov hint: _SNDAPP_DebugPrint)
+// sub_0006F9C0 (0x0006F9C0, 36 bytes)
+
+#include <stdarg.h>
+
+extern "C" int __cdecl vsprintf(char *buffer, const char *format, va_list args);
+
+// Formats the message; the output step is compiled out of the retail build.
+void __cdecl sub_0006F9C0(const char *format, ...)
+{
+    char buffer[1024];
+    va_list args;
+
+    va_start(args, format);
+    vsprintf(buffer, format, args);
+    va_end(args);
+}
+
 // [TODO] 0x0006F9F0 sub_0006F9F0 (67 B)
 // [TODO] 0x0006FA40 sub_0006FA40 (71 B)
 // [TODO] 0x0006FA90 sub_0006FA90 (85 B)
@@ -40157,7 +40556,32 @@ Object* __cdecl sub_0007F120(void)
 // [TODO] 0x0007F470 sub_0007F470 (103 B)
 // [TODO] 0x0007F4E0 sub_0007F4E0 (68 B)
 // [TODO] 0x0007F590 sub_0007F590 (102 B)
-// [TODO] 0x0007F600 sub_0007F600 (203 B)
+// ============================================================================
+// [VERIFIED] sub_0007F600 (0x0007F600, 203 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte records by their unsigned key, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x0007F600
+// what: Sorts an array of 4-byte records by their unsigned key, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_0007F600.cpp --va 0x0007F600 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 4-byte record ordered by an unsigned key. Its operator< is defined in another file
+// (sub_00242D50), so the sort calls it rather than inlining it.
+class Class_0007F600
+{
+public:
+    bool operator<(const Class_0007F600 &other) const;
+
+    unsigned int m_Key;
+};
+
+// std::_Sort (introsort loop of std::sort), instantiated for Class_0007F600.
+template void std::_Sort<Class_0007F600 *, int>(Class_0007F600 *, Class_0007F600 *, int);
+
 // [TODO] 0x0007F6D0 sub_0007F6D0 (171 B)
 // [TODO] 0x0007F780 sub_0007F780 (102 B)
 // ============================================================================
@@ -47060,7 +47484,32 @@ template <> void ConcreteClassRep<VarietySlot>::vfunc_02()
 
 // [TODO] 0x00096780 sub_00096780 (72 B)
 // [TODO] 0x000967D0 sub_000967D0 (57 B)
-// [TODO] 0x00096810 sub_00096810 (19 B)
+// ============================================================================
+// [VERIFIED] sub_00096810 (0x00096810, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Calls a function of the object held in a global pointer, passing it a global value.
+// ============================================================================
+// bin: xb
+// va: 0x00096810
+// what: Calls a function of the object held in a global pointer, passing it a global value.
+// tool: Claude Opus 5.5 (symcov hint: $E13, link-order)
+// sub_00096810 (0x00096810, 19 bytes)
+
+class Class_00094E30
+{
+public:
+    void sub_00094E30(int a1);
+};
+
+extern "C" int DAT_004236AC;
+extern "C" Class_00094E30 *__cdecl sub_00094C80();
+
+// Hands the global value to the global object's method.
+void __cdecl sub_00096810()
+{
+    sub_00094C80()->sub_00094E30(DAT_004236AC);
+}
+
 // ============================================================================
 // [VERIFIED] sub_00096830 (0x00096830, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -48772,7 +49221,38 @@ Class_0009AC70* Class_0009AC70::sub_0009AC70()
     return this;
 }
 
-// [TODO] 0x0009ACA0 sub_0009ACA0 (33 B)
+// ============================================================================
+// [VERIFIED] sub_0009ACA0 (0x0009ACA0, 33 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Resets a four-number rotation to "no rotation" (0, 0, 0, 1).
+// ============================================================================
+// bin: xb
+// va: 0x0009ACA0
+// what: Resets a four-number rotation to "no rotation" (0, 0, 0, 1).
+// tool: Claude Opus 5.5 (symcov hint: RSQuat::Identity, link-order)
+// sub_0009ACA0 (0x0009ACA0, 33 bytes)
+
+class Class_0009ACA0
+{
+public:
+    Class_0009ACA0 *sub_0009ACA0();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Sets the first three components to zero and the last to one.
+Class_0009ACA0 *Class_0009ACA0::sub_0009ACA0()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 1.0f;
+    return this;
+}
+
 // [TODO] 0x0009ACD0 sub_0009ACD0 (18 B)
 // [TODO] 0x0009ACF0 sub_0009ACF0 (83 B)
 // [TODO] 0x0009AD50 sub_0009AD50 (167 B)
@@ -51201,7 +51681,37 @@ HelicopterLocomotion* HelicopterLocomotion::vfunc_00(int a1)
 // [TODO] 0x000A4EC0 sub_000A4EC0 (136 B)
 // [TODO] 0x000A4F50 sub_000A4F50 (1744 B)
 // [TODO] 0x000A5620 HelicopterLocomotion::vfunc_01 (80 B)
-// [TODO] 0x000A5670 sub_000A5670 (23 B)
+// ============================================================================
+// [VERIFIED] sub_000A5670 (0x000A5670, 23 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Sets four numbers of an object to zero.
+// ============================================================================
+// bin: xb
+// va: 0x000A5670
+// what: Sets four numbers of an object to zero.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::Sentient::HeadTrackAngleInfo::Init)
+// sub_000A5670 (0x000A5670, 23 bytes)
+
+class Class_000A5670
+{
+public:
+    void sub_000A5670();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Clears all four values.
+void Class_000A5670::sub_000A5670()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+}
+
 // [TODO] 0x000A5690 sub_000A5690 (29 B)
 // [TODO] 0x000A56B0 sub_000A56B0 (294 B)
 // [TODO] 0x000A57E0 sub_000A57E0 (121 B)
@@ -51445,7 +51955,35 @@ void* Class_000A6B90::sub_000A6B90()
 // [TODO] 0x000A6C90 sub_000A6C90 (42 B)
 // [TODO] 0x000A6CC0 sub_000A6CC0 (75 B)
 // [TODO] 0x000A6D10 sub_000A6D10 (44 B)
-// [TODO] 0x000A6D40 sub_000A6D40 (96 B)
+// ============================================================================
+// [VERIFIED] sub_000A6D40 (0x000A6D40, 96 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Builds an object of thirty values, all set to zero.
+// ============================================================================
+// bin: xb
+// va: 0x000A6D40
+// what: Builds an object of thirty values, all set to zero.
+// tool: Claude Opus 5.5 (symcov hint: EARS::SaveGame::MemcardHandler::PlatformMessages::PlatformMessages)
+// sub_000A6D40 (0x000A6D40, 96 bytes)
+
+class Class_000A6D40
+{
+public:
+    Class_000A6D40 *sub_000A6D40();
+
+    int m_Field00[30]; // +0x00
+};
+
+// Clears every value and returns the object.
+Class_000A6D40 *Class_000A6D40::sub_000A6D40()
+{
+    for (int i = 0; i < 30; i++)
+    {
+        m_Field00[i] = 0;
+    }
+    return this;
+}
+
 // [TODO] 0x000A6DA0 sub_000A6DA0 (28 B)
 // ============================================================================
 // [VERIFIED] sub_000A6DC0 (0x000A6DC0, 28 B)
@@ -53172,8 +53710,58 @@ L_17:
 }
 
 // [TODO] 0x000AB3E0 sub_000AB3E0 (46 B)
-// [TODO] 0x000AB410 sub_000AB410 (17 B)
-// [TODO] 0x000AB430 sub_000AB430 (17 B)
+// ============================================================================
+// [VERIFIED] sub_000AB410 (0x000AB410, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x000AB410
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: Projectile::SetSplashDamageValue(float))
+// sub_000AB410 (0x000AB410, 17 bytes)
+
+class Class_000AB410
+{
+public:
+    void sub_000AB410(float value);
+
+    char m_pad00[0x1AC];
+    float m_Field1AC; // +0x1AC
+};
+
+// Sets the value.
+void Class_000AB410::sub_000AB410(float value)
+{
+    m_Field1AC = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AB430 (0x000AB430, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x000AB430
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: Projectile::SetGravity(float))
+// sub_000AB430 (0x000AB430, 17 bytes)
+
+class Class_000AB430
+{
+public:
+    void sub_000AB430(float value);
+
+    char m_pad00[0x1B0];
+    float m_Field1B0; // +0x1B0
+};
+
+// Sets the value.
+void Class_000AB430::sub_000AB430(float value)
+{
+    m_Field1B0 = value;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000AB460 (0x000AB460, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -55736,7 +56324,28 @@ void Class_000B8770::sub_000B8770(int a1)
     }
 }
 
-// [TODO] 0x000B8790 sub_000B8790 (26 B)
+// ============================================================================
+// [VERIFIED] sub_000B8790 (0x000B8790, 26 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether the first record's first float value (its X) is smaller than the second's, an ordering used for sorting.
+// ============================================================================
+// bin: xb
+// va: 0x000B8790
+// what: Says whether the first record's first float value (its X) is smaller than the second's, an ordering used for sorting.
+// tool: Claude Opus 5.5
+
+// A record whose first member is a float position; the rest of it is not known yet.
+struct Class_000B8790
+{
+    float m_Field00;
+};
+
+// Orders records by their leading float.
+bool sub_000B8790(const Class_000B8790 &left, const Class_000B8790 &right)
+{
+    return left.m_Field00 < right.m_Field00;
+}
+
 // [TODO] 0x000B87B0 sub_000B87B0 (82 B)
 // ============================================================================
 // [VERIFIED] sub_000B8810 (0x000B8810, 36 B)
@@ -57385,8 +57994,48 @@ void Class_000C3A40::sub_000C3A40()
 // [TODO] 0x000C41D0 sub_000C41D0 (181 B)
 // [TODO] 0x000C4290 sub_000C4290 (84 B)
 // [TODO] 0x000C42F0 sub_000C42F0 (103 B)
-// [TODO] 0x000C4360 sub_000C4360 (28 B)
-// [TODO] 0x000C4380 sub_000C4380 (149 B)
+// ============================================================================
+// [VERIFIED] sub_000C4360 (0x000C4360, 28 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether the first record's second float value (its Y) is smaller than the second's, an ordering used for sorting.
+// ============================================================================
+// bin: xb
+// va: 0x000C4360
+// what: Says whether the first record's second float value (its Y) is smaller than the second's, an ordering used for sorting.
+// tool: Claude Opus 5.5
+
+// A record whose second member is a float position; the rest of it is not known yet.
+struct Class_000C4360
+{
+    float m_Field00;
+    float m_Field04;
+};
+
+// Orders records by their second float.
+bool sub_000C4360(const Class_000C4360 &left, const Class_000C4360 &right)
+{
+    return left.m_Field04 < right.m_Field04;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C4380 (0x000C4380, 149 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 4-byte elements so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x000C4380
+// what: Rotates a range of 4-byte elements so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C4380.cpp --va 0x000C4380 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The rotated elements are 4 bytes wide; what they point to is not known yet.
+class Class_000C4380;
+
+// std::_Rotate for random-access iterators, instantiated for an array of Class_000C4380 pointers.
+template void std::_Rotate<Class_000C4380 **, int, Class_000C4380 *>(Class_000C4380 **, Class_000C4380 **, Class_000C4380 **, int *, Class_000C4380 **);
+
 // [TODO] 0x000C4420 ScriptContextProperties::vfunc_04 (173 B)
 // [TODO] 0x000C44D0 sub_000C44D0 (79 B)
 // [TODO] 0x000C4520 ScriptContextProperties::vfunc_29 (59 B)
@@ -57522,10 +58171,54 @@ void* WeaponPickupContextProperties::vfunc_00()
     return DAT_004245A0;
 }
 
-// [TODO] 0x000C47B0 sub_000C47B0 (61 B)
+// ============================================================================
+// [VERIFIED] sub_000C47B0 (0x000C47B0, 61 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Arranges an array of 4-byte elements into a heap with a caller-supplied ordering function (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x000C47B0
+// what: Arranges an array of 4-byte elements into a heap with a caller-supplied ordering function (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C47B0.cpp --va 0x000C47B0 --bin xb --match '?$_Make_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::_Make_heap with a predicate, instantiated for an array of Class_00029D30 pointers.
+template void std::_Make_heap<Class_00029D30 **, int, Class_00029D30 *, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, Class_00029D30Less, int *, Class_00029D30 **);
+
 // [TODO] 0x000C47F0 WeaponPickupContextProperties::vfunc_29 (544 B)
 // [TODO] 0x000C4A10 sub_000C4A10 (166 B)
-// [TODO] 0x000C4AC0 sub_000C4AC0 (238 B)
+// ============================================================================
+// [VERIFIED] sub_000C4AC0 (0x000C4AC0, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000C4AC0
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C4AC0.cpp --va 0x000C4AC0 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000C4AC0;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000C4AC0Less)(Class_000C4AC0 *, Class_000C4AC0 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000C4AC0 pointers.
+template void std::_Sort<Class_000C4AC0 **, int, Class_000C4AC0Less>(Class_000C4AC0 **, Class_000C4AC0 **, int, Class_000C4AC0Less);
+
 // [TODO] 0x000C4BB0 sub_000C4BB0 (1039 B)
 // [TODO] 0x000C4FC0 sub_000C4FC0 (221 B)
 // ============================================================================
@@ -60154,7 +60847,41 @@ template <> void ConcreteClassRep<SaveGameController>::vfunc_02()
     DAT_0042485C = 7;
 }
 
-// [TODO] 0x000CA160 sub_000CA160 (52 B)
+// ============================================================================
+// [VERIFIED] sub_000CA160 (0x000CA160, 52 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Builds an object from two three-number vectors, such as the two ends of a line.
+// ============================================================================
+// bin: xb
+// va: 0x000CA160
+// what: Builds an object from two three-number vectors, such as the two ends of a line.
+// tool: Claude Opus 5.5 (symcov hint: Photon::CLineSegment::CLineSegment)
+// sub_000CA160 (0x000CA160, 52 bytes)
+
+struct Struct_000CA160
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_000CA160
+{
+public:
+    Class_000CA160 *sub_000CA160(const Struct_000CA160 &first, const Struct_000CA160 &second);
+
+    Struct_000CA160 m_Field00; // +0x00
+    Struct_000CA160 m_Field0C; // +0x0C
+};
+
+// Copies both vectors in and returns the object.
+Class_000CA160 *Class_000CA160::sub_000CA160(const Struct_000CA160 &first, const Struct_000CA160 &second)
+{
+    m_Field00 = first;
+    m_Field0C = second;
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000CA1A0 (0x000CA1A0, 17 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -73871,7 +74598,39 @@ bool Class_000E7910::sub_000E7910(bool a1)
     return true;
 }
 
-// [TODO] 0x000E7920 sub_000E7920 (30 B)
+// ============================================================================
+// [VERIFIED] sub_000E7920 (0x000E7920, 30 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: xb
+// va: 0x000E7920
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (symcov hint: CSA_Physical::GetEndPos)
+// sub_000E7920 (0x000E7920, 30 bytes)
+
+struct Struct_000E7920
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_000E7920
+{
+public:
+    Struct_000E7920 sub_000E7920() const;
+
+    char m_pad00[0x24];
+    Struct_000E7920 m_Field24; // +0x24
+};
+
+// Returns the stored vector by value.
+Struct_000E7920 Class_000E7920::sub_000E7920() const
+{
+    return m_Field24;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000E7940 (0x000E7940, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -77792,10 +78551,76 @@ bool __cdecl sub_000EA530(void)
 // [TODO] 0x000EA7D0 sub_000EA7D0 (117 B)
 // [TODO] 0x000EA850 sub_000EA850 (63 B)
 // [TODO] 0x000EA890 sub_000EA890 (376 B)
-// [TODO] 0x000EAA10 sub_000EAA10 (167 B)
+// ============================================================================
+// [VERIFIED] sub_000EAA10 (0x000EAA10, 167 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 5 external relocation(s) unchecked
+// What it does: Picks a median-of-three (or of nine for large ranges) pivot among 4-byte elements with a caller-supplied ordering function (standard library sort helper).
+// ============================================================================
+// bin: xb
+// va: 0x000EAA10
+// what: Picks a median-of-three (or of nine for large ranges) pivot among 4-byte elements with a caller-supplied ordering function (standard library sort helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAA10.cpp --va 0x000EAA10 --bin xb --match '?$_Median@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAA10;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAA10Less)(Class_000EAA10 *, Class_000EAA10 *);
+
+// std::_Median with a predicate (pivot selection of std::sort), instantiated for an array of Class_000EAA10 pointers.
+template void std::_Median<Class_000EAA10 **, Class_000EAA10Less>(Class_000EAA10 **, Class_000EAA10 **, Class_000EAA10 **, Class_000EAA10Less);
+
 // [TODO] 0x000EAAC0 sub_000EAAC0 (408 B)
-// [TODO] 0x000EAC60 sub_000EAC60 (238 B)
-// [TODO] 0x000EAD50 sub_000EAD50 (238 B)
+// ============================================================================
+// [VERIFIED] sub_000EAC60 (0x000EAC60, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000EAC60
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAC60.cpp --va 0x000EAC60 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAC60;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAC60Less)(Class_000EAC60 *, Class_000EAC60 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000EAC60 pointers.
+template void std::_Sort<Class_000EAC60 **, int, Class_000EAC60Less>(Class_000EAC60 **, Class_000EAC60 **, int, Class_000EAC60Less);
+
+// ============================================================================
+// [VERIFIED] sub_000EAD50 (0x000EAD50, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000EAD50
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAD50.cpp --va 0x000EAD50 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAD50;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAD50Less)(Class_000EAD50 *, Class_000EAD50 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000EAD50 pointers.
+template void std::_Sort<Class_000EAD50 **, int, Class_000EAD50Less>(Class_000EAD50 **, Class_000EAD50 **, int, Class_000EAD50Less);
+
 // [TODO] 0x000EAE40 sub_000EAE40 (255 B)
 // [TODO] 0x000EAF40 sub_000EAF40 (975 B)
 // [TODO] 0x000EB310 sub_000EB310 (137 B)
@@ -87533,7 +88358,29 @@ int __cdecl sub_0010C180(void)
 }
 
 // [TODO] 0x0010C190 sub_0010C190 (91 B)
-// [TODO] 0x0010C1F0 sub_0010C1F0 (177 B)
+// ============================================================================
+// [VERIFIED] sub_0010C1F0 (0x0010C1F0, 177 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 8-byte records so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x0010C1F0
+// what: Rotates a range of 8-byte records so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_0010C1F0.cpp --va 0x0010C1F0 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// An 8-byte record; its fields are not known yet.
+struct Class_0010C1F0
+{
+    int m_Field00;
+    int m_Field04;
+};
+
+// std::_Rotate for random-access iterators, instantiated for Class_0010C1F0.
+template void std::_Rotate<Class_0010C1F0 *, int, Class_0010C1F0>(Class_0010C1F0 *, Class_0010C1F0 *, Class_0010C1F0 *, int *, Class_0010C1F0 *);
+
 // [TODO] 0x0010C2B0 sub_0010C2B0 (59 B)
 // [TODO] 0x0010C2F0 sub_0010C2F0 (126 B)
 // [TODO] 0x0010C370 sub_0010C370 (121 B)
@@ -115660,7 +116507,32 @@ void BoatAITask_Enemy::vfunc_33(int a1)
     sub_0013CBE0();
 }
 
-// [TODO] 0x0013CE60 sub_0013CE60 (26 B)
+// ============================================================================
+// [VERIFIED] sub_0013CE60 (0x0013CE60, 26 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether a timer value in an object is still above zero.
+// ============================================================================
+// bin: xb
+// va: 0x0013CE60
+// what: Says whether a timer value in an object is still above zero.
+// tool: Claude Opus 5.5 (symcov hint: BarrageEffect::ActivationTimerIsActive)
+// sub_0013CE60 (0x0013CE60, 26 bytes)
+
+class Class_0013CE60
+{
+public:
+    bool sub_0013CE60() const;
+
+    char m_pad00[0x138];
+    float m_Field138; // +0x138
+};
+
+// True while the value is greater than zero.
+bool Class_0013CE60::sub_0013CE60() const
+{
+    return m_Field138 > 0.0f;
+}
+
 // ============================================================================
 // [VERIFIED] CarAIBehavior::vfunc_32 (0x0013CE80, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -119634,7 +120506,41 @@ int __cdecl sub_00150820(void)
 // [TODO] 0x00151F60 sub_00151F60 (566 B)
 // [TODO] 0x001521A0 CameraManager::vfunc_08 (193 B)
 // [TODO] 0x00152270 sub_00152270 (73 B)
-// [TODO] 0x001522C0 sub_001522C0 (30 B)
+// ============================================================================
+// [VERIFIED] sub_001522C0 (0x001522C0, 30 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Builds a camera transition: two values cleared and a third set to one.
+// ============================================================================
+// bin: xb
+// va: 0x001522C0
+// what: Builds a camera transition: two values cleared and a third set to one.
+// tool: Claude Opus 5.5 (symcov hint: fcGlowPixelShader::fcGlowPixelShader)
+// sub_001522C0 (0x001522C0, 30 bytes)
+// The vtable it installs (0x003B3080) is CameraTransition's: CameraTransition::vfunc_00
+// (0x00152530, its deleting destructor) installs the same one, so this is CameraTransition's
+// constructor. Slot 0 keeps the shape of the matched CameraTransition::vfunc_00.
+
+class CameraTransition
+{
+public:
+    CameraTransition();
+    virtual CameraTransition* vfunc_00(int a1);
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+
+    int m_Field04;   // +0x04
+    int m_Field08;   // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Clears the first two values and sets the third to one.
+CameraTransition::CameraTransition()
+{
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 1.0f;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001522E0 (0x001522E0, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -121779,7 +122685,39 @@ L_21:
     return false;
 }
 
-// [TODO] 0x0015D790 sub_0015D790 (33 B)
+// ============================================================================
+// [VERIFIED] sub_0015D790 (0x0015D790, 33 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: xb
+// va: 0x0015D790
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (symcov hint: Photon::CEnvironment::GetPanoShadowColor)
+// sub_0015D790 (0x0015D790, 33 bytes)
+
+struct Struct_0015D790
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_0015D790
+{
+public:
+    Struct_0015D790 sub_0015D790() const;
+
+    char m_pad00[0xB4];
+    Struct_0015D790 m_FieldB4; // +0xB4
+};
+
+// Returns the stored vector by value.
+Struct_0015D790 Class_0015D790::sub_0015D790() const
+{
+    return m_FieldB4;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0015D7C0 (0x0015D7C0, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -126077,7 +127015,32 @@ float Class_001649A0::sub_001649A0()
     return m_Field12C;
 }
 
-// [TODO] 0x001649B0 sub_001649B0 (17 B)
+// ============================================================================
+// [VERIFIED] sub_001649B0 (0x001649B0, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x001649B0
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: cEffectSpikes::SetScale(float))
+// sub_001649B0 (0x001649B0, 17 bytes)
+
+class Class_001649B0
+{
+public:
+    void sub_001649B0(float value);
+
+    char m_pad00[0x12C];
+    float m_Field12C; // +0x12C
+};
+
+// Sets the value.
+void Class_001649B0::sub_001649B0(float value)
+{
+    m_Field12C = value;
+}
+
 // [TODO] 0x001649D0 sub_001649D0 (24 B)
 // ============================================================================
 // [VERIFIED] sub_001649F0 (0x001649F0, 14 B)
@@ -126119,7 +127082,32 @@ float Class_00164A00::sub_00164A00()
     return m_Field120;
 }
 
-// [TODO] 0x00164A10 sub_00164A10 (17 B)
+// ============================================================================
+// [VERIFIED] sub_00164A10 (0x00164A10, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x00164A10
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: cEffectSpikes::SetScale)
+// sub_00164A10 (0x00164A10, 17 bytes)
+
+class Class_00164A10
+{
+public:
+    void sub_00164A10(float value);
+
+    char m_pad00[0x120];
+    float m_Field120; // +0x120
+};
+
+// Sets the value.
+void Class_00164A10::sub_00164A10(float value)
+{
+    m_Field120 = value;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00164A30 (0x00164A30, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -126141,7 +127129,32 @@ float Class_00164A30::sub_00164A30()
     return m_Field124;
 }
 
-// [TODO] 0x00164A40 sub_00164A40 (17 B)
+// ============================================================================
+// [VERIFIED] sub_00164A40 (0x00164A40, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x00164A40
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Audio::AMixer::MixChannel::SetUIAttenuation)
+// sub_00164A40 (0x00164A40, 17 bytes)
+
+class Class_00164A40
+{
+public:
+    void sub_00164A40(float value);
+
+    char m_pad00[0x124];
+    float m_Field124; // +0x124
+};
+
+// Sets the value.
+void Class_00164A40::sub_00164A40(float value)
+{
+    m_Field124 = value;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00164A60 (0x00164A60, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -127626,7 +128639,118 @@ void* CharacterObject::vfunc_00()
     return DAT_004304FC;
 }
 
-// [TODO] 0x00167CF0 CharacterObject::vfunc_44 (17 B)
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_44 (0x00167CF0, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in a character object.
+// ============================================================================
+// bin: xb
+// va: 0x00167CF0
+// what: Stores one number in a character object.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Framework::Projectile::SetFullSplashDamageRadius(float))
+// CharacterObject::vfunc_44 (0x00167CF0)
+// Class shape from reports/classes/xb/CharacterObject.h.
+
+class CharacterObject
+{
+public:
+    virtual void* vfunc_00();
+    virtual CharacterObject* vfunc_01(int a1);
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int a1);
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29(int a1);
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual int vfunc_35(int a1);
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual int vfunc_39();
+    virtual int vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44(float a1);
+    virtual float vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual float vfunc_48();
+    virtual void vfunc_49();
+    virtual bool vfunc_50();
+    virtual bool vfunc_51(bool a1);
+    virtual void vfunc_52();
+    virtual void vfunc_53();
+    virtual void vfunc_54();
+    virtual void vfunc_55();
+    virtual void vfunc_56();
+    virtual void vfunc_57();
+    virtual void vfunc_58();
+    virtual void vfunc_59();
+    virtual void vfunc_60();
+    virtual void vfunc_61();
+    virtual void vfunc_62();
+    virtual void vfunc_63();
+    virtual void vfunc_64(int a1, int a2);
+    virtual void vfunc_65();
+    virtual void vfunc_66();
+    virtual void vfunc_67();
+    virtual void vfunc_68();
+    virtual int vfunc_69();
+    void sub_00166150(int);
+    void sub_00166250();
+    void sub_00168AA0();
+    void sub_00169F00(int, int);
+    char m_pad04[0x60];
+    int m_Field64; // +0x64
+    int m_Field68; // +0x68
+    int m_Field6C; // +0x6C
+    char m_pad70[0x35];
+    unsigned char m_FieldA5; // +0xA5
+    char m_padA6[0x66];
+    float m_Field10C; // +0x10C
+    char m_pad110[0x94];
+    float m_Field1A4; // +0x1A4
+    char m_pad1A8[0x4];
+    int m_Field1AC; // +0x1AC
+    int m_Field1B0; // +0x1B0
+    char m_pad1B4[0x26D];
+    bool m_Field421; // +0x421
+};
+
+// Sets the value at +0x1A4.
+void CharacterObject::vfunc_44(float a1)
+{
+    m_Field1A4 = a1;
+}
+
 // ============================================================================
 // [VERIFIED] CharacterObject::vfunc_45 (0x00167D10, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -131563,7 +132687,32 @@ void __stdcall sub_00177F60(int a1, int a2, int a3)
     sub_00165440((int)(&a1));
 }
 
-// [TODO] 0x00177F80 sub_00177F80 (17 B)
+// ============================================================================
+// [VERIFIED] sub_00177F80 (0x00177F80, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x00177F80
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: cMissionData::SetMissionTimerLimit)
+// sub_00177F80 (0x00177F80, 17 bytes)
+
+class Class_00177F80
+{
+public:
+    void sub_00177F80(float value);
+
+    char m_pad00[0x174];
+    float m_Field174; // +0x174
+};
+
+// Sets the value.
+void Class_00177F80::sub_00177F80(float value)
+{
+    m_Field174 = value;
+}
+
 // [TODO] 0x00177FA0 sub_00177FA0 (72 B)
 // ============================================================================
 // [VERIFIED] sub_00177FF0 (0x00177FF0, 15 B)
@@ -134776,8 +135925,60 @@ template <> int ConcreteClassRep<InventoryOwner>::vfunc_01()
 
 // [TODO] 0x0017AA80 ConcreteClassRep<InventoryOwner>::vfunc_02 (61 B)
 // [TODO] 0x0017AAC0 sub_0017AAC0 (329 B)
-// [TODO] 0x0017AC20 sub_0017AC20 (16 B)
-// [TODO] 0x0017AC30 sub_0017AC30 (16 B)
+// ============================================================================
+// [VERIFIED] sub_0017AC20 (0x0017AC20, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: If an object is given, sets its on/off flag through its own function; always returns false.
+// ============================================================================
+// bin: xb
+// va: 0x0017AC20
+// what: If an object is given, sets its on/off flag through its own function; always returns false.
+// tool: Claude Opus 5.5 (symcov hint: CustomFaceExist(RString))
+// sub_0017AC20 (0x0017AC20, 16 bytes)
+
+class Class_00177A70
+{
+public:
+    void sub_00177A70();
+};
+
+// Calls the object's method when the pointer is set, then reports false.
+bool __cdecl sub_0017AC20(Class_00177A70 *object)
+{
+    if (object)
+    {
+        object->sub_00177A70();
+    }
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0017AC30 (0x0017AC30, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: If an object is given, clears its on/off flag through its own function; always returns false.
+// ============================================================================
+// bin: xb
+// va: 0x0017AC30
+// what: If an object is given, clears its on/off flag through its own function; always returns false.
+// tool: Claude Opus 5.5 (symcov hint: CustomFaceExist(RString))
+// sub_0017AC30 (0x0017AC30, 16 bytes)
+
+class Class_00177B10
+{
+public:
+    void sub_00177B10();
+};
+
+// Calls the object's method when the pointer is set, then reports false.
+bool __cdecl sub_0017AC30(Class_00177B10 *object)
+{
+    if (object)
+    {
+        object->sub_00177B10();
+    }
+    return false;
+}
+
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<RageState>::vfunc_01 (0x0017AC40, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -169827,7 +171028,34 @@ SystemDialogBox* SystemDialogBox::vfunc_01(int a1)
 // [TODO] 0x001C4560 sub_001C4560 (143 B)
 // [TODO] 0x001C45F0 sub_001C45F0 (14 B)
 // [TODO] 0x001C4600 sub_001C4600 (55 B)
-// [TODO] 0x001C4640 sub_001C4640 (25 B)
+// ============================================================================
+// [VERIFIED] sub_001C4640 (0x001C4640, 25 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores two numbers in an object.
+// ============================================================================
+// bin: xb
+// va: 0x001C4640
+// what: Stores two numbers in an object.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::Attitude::SetBrowTilt)
+// sub_001C4640 (0x001C4640, 25 bytes)
+
+class Class_001C4640
+{
+public:
+    void sub_001C4640(float a1, float a2);
+
+    char m_pad00[0x2C];
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+};
+
+// Sets both values.
+void Class_001C4640::sub_001C4640(float a1, float a2)
+{
+    m_Field2C = a1;
+    m_Field30 = a2;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001C4660 (0x001C4660, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -176319,8 +177547,58 @@ void* TraceFireObject::vfunc_00()
     return DAT_0043B078;
 }
 
-// [TODO] 0x001D3C50 sub_001D3C50 (17 B)
-// [TODO] 0x001D3C70 sub_001D3C70 (17 B)
+// ============================================================================
+// [VERIFIED] sub_001D3C50 (0x001D3C50, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x001D3C50
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: UIBarMeter::SetGrowBarLevel(float))
+// sub_001D3C50 (0x001D3C50, 17 bytes)
+
+class Class_001D3C50
+{
+public:
+    void sub_001D3C50(float value);
+
+    char m_pad00[0xE8];
+    float m_FieldE8; // +0xE8
+};
+
+// Sets the value.
+void Class_001D3C50::sub_001D3C50(float value)
+{
+    m_FieldE8 = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001D3C70 (0x001D3C70, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x001D3C70
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: UIBarMeter::SetShrinkRate(float))
+// sub_001D3C70 (0x001D3C70, 17 bytes)
+
+class Class_001D3C70
+{
+public:
+    void sub_001D3C70(float value);
+
+    char m_pad00[0xEC];
+    float m_FieldEC; // +0xEC
+};
+
+// Sets the value.
+void Class_001D3C70::sub_001D3C70(float value)
+{
+    m_FieldEC = value;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001D3C90 (0x001D3C90, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -184229,7 +185507,29 @@ void __cdecl sub_001E8C10(void)
 // [TODO] 0x001E8DB0 TrafficConfigLoader::vfunc_06 (948 B)
 // [TODO] 0x001E9170 sub_001E9170 (39 B)
 // [TODO] 0x001E91A0 sub_001E91A0 (237 B)
-// [TODO] 0x001E9290 sub_001E9290 (238 B)
+// ============================================================================
+// [VERIFIED] sub_001E9290 (0x001E9290, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x001E9290
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_001E9290.cpp --va 0x001E9290 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_001E9290;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_001E9290Less)(Class_001E9290 *, Class_001E9290 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_001E9290 pointers.
+template void std::_Sort<Class_001E9290 **, int, Class_001E9290Less>(Class_001E9290 **, Class_001E9290 **, int, Class_001E9290Less);
+
 // [TODO] 0x001E9380 sub_001E9380 (709 B)
 // [TODO] 0x001E9650 sub_001E9650 (355 B)
 // [TODO] 0x001E97C0 sub_001E97C0 (2029 B)
@@ -188934,7 +190234,34 @@ void Class_001F0140::sub_001F0140(int a1, int a2, int a3, int a4)
 // [TODO] 0x001F0180 MeleeWeaponStateProp::vfunc_65 (287 B)
 // [TODO] 0x001F02A0 sub_001F02A0 (341 B)
 // [TODO] 0x001F0400 sub_001F0400 (308 B)
-// [TODO] 0x001F0540 sub_001F0540 (43 B)
+// ============================================================================
+// [VERIFIED] sub_001F0540 (0x001F0540, 43 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Copies a three-number value (such as a colour) into a global setting.
+// ============================================================================
+// bin: xb
+// va: 0x001F0540
+// what: Copies a three-number value (such as a colour) into a global setting.
+// tool: Claude Opus 5.5 (symcov hint: R_SetFogColor(const Color *), link-order)
+// sub_001F0540 (0x001F0540, 43 bytes)
+
+struct Struct_001F0540
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+extern "C" Struct_001F0540 DAT_0043EBC4;
+
+// Stores the three components in the global.
+void __cdecl sub_001F0540(const Struct_001F0540 *value)
+{
+    DAT_0043EBC4.m_Field00 = value->m_Field00;
+    DAT_0043EBC4.m_Field04 = value->m_Field04;
+    DAT_0043EBC4.m_Field08 = value->m_Field08;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001F0570 (0x001F0570, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -209916,7 +211243,34 @@ void WheeledVehicleTemplate::vfunc_11()
     sub_0020F260();
 }
 
-// [TODO] 0x00211990 sub_00211990 (16 B)
+// ============================================================================
+// [VERIFIED] sub_00211990 (0x00211990, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value stored in the object to another function and returns its result.
+// ============================================================================
+// bin: xb
+// va: 0x00211990
+// what: Passes a value stored in the object to another function and returns its result.
+// tool: Claude Opus 5.5 (symcov hint: TAIFollow::GetFollowCharacter)
+// sub_00211990 (0x00211990, 16 bytes)
+
+extern "C" void *__cdecl sub_0002AC90(int handle);
+
+class Class_00211990
+{
+public:
+    void *sub_00211990();
+
+    char m_pad00[0x100];
+    int m_Field100; // +0x100
+};
+
+// Looks the stored value up.
+void *Class_00211990::sub_00211990()
+{
+    return sub_0002AC90(m_Field100);
+}
+
 // [TODO] 0x002119A0 sub_002119A0 (127 B)
 // ============================================================================
 // [VERIFIED] sub_00211A20 (0x00211A20, 81 B)
@@ -212078,7 +213432,118 @@ Class_002134E0* Class_002134E0::sub_002134E0(int a1, int a2)
     return this;
 }
 
-// [TODO] 0x00213510 AirplaneObject::vfunc_44 (17 B)
+// ============================================================================
+// [VERIFIED] AirplaneObject::vfunc_44 (0x00213510, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an airplane object.
+// ============================================================================
+// bin: xb
+// va: 0x00213510
+// what: Stores one number in an airplane object.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Alchemy::TEffectParticleSystem::ScaleAlpha, link-order)
+// AirplaneObject::vfunc_44 (0x00213510)
+// Class shape from reports/classes/xb/AirplaneObject.h.
+
+class AirplaneObject
+{
+public:
+    virtual void* vfunc_00();
+    virtual AirplaneObject* vfunc_01(int a1);
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1);
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual int vfunc_29(int a1);
+    virtual int vfunc_30(int a1);
+    virtual int vfunc_31(int a1);
+    virtual int vfunc_32(int a1);
+    virtual int vfunc_33(bool a1);
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44(float a1);
+    virtual float vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    virtual void vfunc_49();
+    virtual void vfunc_50();
+    virtual void vfunc_51();
+    virtual void vfunc_52();
+    virtual void vfunc_53();
+    virtual void vfunc_54();
+    virtual void vfunc_55();
+    virtual void vfunc_56();
+    virtual void vfunc_57();
+    virtual void vfunc_58();
+    virtual void vfunc_59();
+    virtual void vfunc_60();
+    virtual void vfunc_61();
+    virtual void vfunc_62();
+    virtual void vfunc_63();
+    virtual int vfunc_64();
+    virtual void vfunc_65();
+    virtual void vfunc_66();
+    virtual void vfunc_67();
+    virtual void vfunc_68();
+    virtual void vfunc_69();
+    virtual void vfunc_70();
+    virtual void vfunc_71();
+    virtual void vfunc_72();
+    virtual void vfunc_73();
+    virtual int vfunc_74();
+    int sub_0002A170();
+    void sub_00217490();
+    char m_pad04[0x60];
+    int m_Field64; // +0x64
+    int m_Field68; // +0x68
+    int m_Field6C; // +0x6C
+    char m_pad70[0x3C];
+    int m_FieldAC; // +0xAC
+    char m_padB0[0x8];
+    float m_FieldB8; // +0xB8
+    char m_padBC[0x4];
+    bool m_FieldC0; // +0xC0
+    char m_padC1[0x3];
+    int m_FieldC4; // +0xC4
+};
+
+// Sets the value at +0xB8.
+void AirplaneObject::vfunc_44(float a1)
+{
+    m_FieldB8 = a1;
+}
+
 // ============================================================================
 // [VERIFIED] AirplaneObject::vfunc_45 (0x00213530, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -229776,8 +231241,60 @@ Class_00242D20* Class_00242D20::sub_00242D20(int a1)
     return this;
 }
 
-// [TODO] 0x00242D30 sub_00242D30 (19 B)
-// [TODO] 0x00242D50 sub_00242D50 (18 B)
+// ============================================================================
+// [VERIFIED] sub_00242D30 (0x00242D30, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether two 4-byte handles hold the same value (an equality operator).
+// ============================================================================
+// bin: xb
+// va: 0x00242D30
+// what: Says whether two 4-byte handles hold the same value (an equality operator).
+// tool: Claude Opus 5.5
+
+// This part of the program was built with frame pointers.
+#pragma optimize("y", off)
+
+// A 4-byte handle compared by value; what it refers to is not known yet.
+class Class_00242D30
+{
+public:
+    bool operator==(const Class_00242D30 &other) const;
+
+    void *m_Field00;
+};
+
+bool Class_00242D30::operator==(const Class_00242D30 &other) const
+{
+    return m_Field00 == other.m_Field00;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00242D50 (0x00242D50, 18 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether this 4-byte record's unsigned key is smaller than another's; the sort at 0x0007F600 orders its records with it.
+// ============================================================================
+// bin: xb
+// va: 0x00242D50
+// what: Says whether this 4-byte record's unsigned key is smaller than another's; the sort at 0x0007F600 orders its records with it.
+// tool: Claude Opus 5.5
+
+// This part of the program was built with frame pointers.
+#pragma optimize("y", off)
+
+// A 4-byte record ordered by an unsigned key (sub_0007F3D0, the insertion sort under sub_0007F600, calls this).
+class Class_0007F600
+{
+public:
+    bool operator<(const Class_0007F600 &other) const;
+
+    unsigned int m_Key;
+};
+
+bool Class_0007F600::operator<(const Class_0007F600 &other) const
+{
+    return m_Key < other.m_Key;
+}
+
 // [TODO] 0x00242D70 sub_00242D70 (40 B)
 // ============================================================================
 // [VERIFIED] sub_00242DA0 (0x00242DA0, 17 B)
@@ -230203,7 +231720,39 @@ void Class_00244040::sub_00244040()
 }
 
 // [TODO] 0x00244100 sub_00244100 (99 B)
-// [TODO] 0x00244170 sub_00244170 (59 B)
+// ============================================================================
+// [VERIFIED] sub_00244170 (0x00244170, 59 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Scales a three-number vector so its length becomes one.
+// ============================================================================
+// bin: xb
+// va: 0x00244170
+// what: Scales a three-number vector so its length becomes one.
+// tool: Claude Opus 5.5 (symcov hint: FcGenericVector<float>::Normalise)
+// sub_00244170 (0x00244170, 59 bytes)
+
+extern "C" double __cdecl sqrt(double);
+
+class Class_00244170
+{
+public:
+    void sub_00244170();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Multiplies every component by one over the length.
+void Class_00244170::sub_00244170()
+{
+    float length = (float)sqrt(m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08);
+    float scale = 1.0f / length;
+    m_Field00 *= scale;
+    m_Field04 *= scale;
+    m_Field08 *= scale;
+}
+
 // [TODO] 0x002441B0 sub_002441B0 (65 B)
 // [TODO] 0x00244200 sub_00244200 (48 B)
 // ============================================================================
@@ -231071,7 +232620,54 @@ void* ControllerOutputPointXBox::vfunc_05()
 
 }
 
-// [TODO] 0x00247FD0 core::ControllerOutputPointXBox::vfunc_07 (64 B)
+// ============================================================================
+// [VERIFIED] core::ControllerOutputPointXBox::vfunc_07 (0x00247FD0, 64 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a number in the controller output, kept between zero and one.
+// ============================================================================
+// bin: xb
+// va: 0x00247FD0
+// what: Stores a number in the controller output, kept between zero and one.
+// tool: Claude Opus 5.5 (symcov hint: Reward::SetScale)
+// core::ControllerOutputPointXBox::vfunc_07 (0x00247FD0, 64 bytes)
+
+namespace core {
+
+class ControllerOutputPointXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void* vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(float value);
+
+    char m_pad04[0x8];
+    float m_Field0C; // +0x0C
+};
+
+// Clamps the value to [0, 1] and stores it.
+void ControllerOutputPointXBox::vfunc_07(float value)
+{
+    if (value < 0.0f)
+    {
+        m_Field0C = 0.0f;
+    }
+    else if (value > 1.0f)
+    {
+        m_Field0C = 1.0f;
+    }
+    else
+    {
+        m_Field0C = value;
+    }
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::ControllerInputPointXBox::vfunc_14 (0x00248010, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -242926,8 +244522,72 @@ d3dExtFrameBufferTexture* d3dExtFrameBufferTexture::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x00269B30 pure3d::d3dExtUnLitColourTint::vfunc_01 (19 B)
-// [TODO] 0x00269B50 pure3d::d3dExtUnLitColourTint::vfunc_02 (19 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtUnLitColourTint::vfunc_01 (0x00269B30, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets a global on/off switch used by the colour-tint extension.
+// ============================================================================
+// bin: xb
+// va: 0x00269B30
+// what: Sets a global on/off switch used by the colour-tint extension.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::ChatterPlaybackManager::GetChatGroupHash, link-order)
+// pure3d::d3dExtUnLitColourTint::vfunc_01 (0x00269B30, 19 bytes)
+// pure3d is built with frame pointers (push ebp; mov ebp, esp), like the other pure3d functions.
+#pragma optimize("y", off)
+
+extern "C" void __cdecl sub_0029F7B0(bool value);
+
+namespace pure3d {
+
+class d3dExtUnLitColourTint
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(bool value);
+};
+
+// Forwards the value to the global setter.
+void d3dExtUnLitColourTint::vfunc_01(bool value)
+{
+    sub_0029F7B0(value);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtUnLitColourTint::vfunc_02 (0x00269B50, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtUnLitColourTint::vfunc_01 (0x00269B30), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00269B50
+// what: Sets a global on/off switch used by the colour-tint extension.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::ChatterPlaybackManager::GetChatGroupHash, link-order)
+// pure3d::d3dExtUnLitColourTint::vfunc_02 (0x00269B50, 19 bytes)
+// pure3d is built with frame pointers (push ebp; mov ebp, esp), like the other pure3d functions.
+#pragma optimize("y", off)
+
+extern "C" void __cdecl sub_0029F7C0(bool value);
+
+namespace pure3d {
+
+class d3dExtUnLitColourTint
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(bool value);
+};
+
+// Forwards the value to the global setter.
+void d3dExtUnLitColourTint::vfunc_02(bool value)
+{
+    sub_0029F7C0(value);
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_00269B70 (0x00269B70, 342 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -248184,7 +249844,108 @@ Class_0027D520* Class_0027D520::sub_0027D520()
 // [TODO] 0x0027D8D0 sub_0027D8D0 (68 B)
 // [TODO] 0x0027D920 pure3d::TextureFont::vfunc_16 (376 B)
 // [TODO] 0x0027DAA0 pure3d::TextureFont::vfunc_15 (883 B)
-// [TODO] 0x0027DE20 pure3d::TextureFont::vfunc_17 (18 B)
+// ============================================================================
+// [VERIFIED] pure3d::TextureFont::vfunc_17 (0x0027DE20, 18 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the call on to an object held in a global pointer.
+// ============================================================================
+// bin: xb
+// va: 0x0027DE20
+// what: Passes the call on to an object held in a global pointer.
+// tool: Claude Opus 5.5 (symcov hint: IkeSoundMgr::PropagateForAudio)
+// pure3d::TextureFont::vfunc_17 (0x0027DE20)
+// Class shape from reports/classes/xb/pure3d__TextureFont.h.
+// pure3d is built with frame pointers (push ebp; mov ebp, esp), like the other pure3d functions.
+#pragma optimize("y", off)
+
+class Class_00492F00
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33(int a1);
+};
+
+extern "C" Class_00492F00 *DAT_00492F00;
+namespace pure3d {
+class TextureFont
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual TextureFont* vfunc_03(unsigned int flags);
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17(int a1);
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21(float a1);
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25(int a1);
+    void sub_0027E1F0();
+    char m_pad04[0x18];
+    float m_Field1C; // +0x1C
+    char m_pad20[0x4];
+    int m_Field24; // +0x24
+};
+}
+
+namespace pure3d {
+
+// Forwards the argument to slot 33 of the global object.
+void TextureFont::vfunc_17(int a1)
+{
+    DAT_00492F00->vfunc_33(a1);
+}
+
+}
+
 // [TODO] 0x0027DE40 pure3d::TextureFont::vfunc_19 (173 B)
 // [TODO] 0x0027DEF0 sub_0027DEF0 (66 B)
 // ============================================================================
@@ -250083,7 +251844,25 @@ void __cdecl sub_00283F00(int a1)
 }
 
 // [TODO] 0x00283F50 sub_00283F50 (129 B)
-// [TODO] 0x00283FE0 sub_00283FE0 (34 B)
+// ============================================================================
+// [VERIFIED] sub_00283FE0 (0x00283FE0, 34 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes its four arguments, the last a 64-bit number, unchanged to another function.
+// ============================================================================
+// bin: xb
+// va: 0x00283FE0
+// what: Passes its four arguments, the last a 64-bit number, unchanged to another function.
+// tool: Claude Opus 5.5 (symcov hint: File_ReadAsyncEx)
+// sub_00283FE0 (0x00283FE0, 34 bytes)
+
+extern "C" int __cdecl sub_00283F50(int a1, int a2, int a3, __int64 a4);
+
+// Forwards all four arguments. MSVC 7.1 does not turn the call into a jump because of the 64-bit argument.
+int __cdecl sub_00283FE0(int a1, int a2, int a3, __int64 a4)
+{
+    return sub_00283F50(a1, a2, a3, a4);
+}
+
 // [TODO] 0x00284010 sub_00284010 (91 B)
 // ============================================================================
 // [VERIFIED] sub_00284070 (0x00284070, 36 B)
@@ -253997,7 +255776,38 @@ void __cdecl sub_00292220(void)
     sub_002A9290();
 }
 
-// [TODO] 0x00292230 pure3d::AdaptPDDI::vfunc_00 (19 B)
+// ============================================================================
+// [VERIFIED] pure3d::AdaptPDDI::vfunc_00 (0x00292230, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtUnLitColourTint::vfunc_01 (0x00269B30), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00292230
+// what: Sets a global on/off switch used by the colour-tint extension.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::ChatterPlaybackManager::GetChatGroupHash, link-order)
+// pure3d::AdaptPDDI::vfunc_00 (0x00292230, 19 bytes)
+// pure3d is built with frame pointers (push ebp; mov ebp, esp), like the other pure3d functions.
+#pragma optimize("y", off)
+
+extern "C" void __cdecl sub_002A9290(bool value);
+
+namespace pure3d {
+
+class AdaptPDDI
+{
+public:
+    virtual void vfunc_00(bool value);
+};
+
+// Forwards the value to the global setter.
+void AdaptPDDI::vfunc_00(bool value)
+{
+    sub_002A9290(value);
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::AdaptPDDI::vfunc_02 (0x00292250, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -257394,7 +259204,29 @@ void Class_0029BE40::sub_0029BE40()
 
 // [TODO] 0x0029BE70 sub_0029BE70 (963 B)
 // [TODO] 0x0029C240 sub_0029C240 (72 B)
-// [TODO] 0x0029C290 sub_0029C290 (22 B)
+// ============================================================================
+// [VERIFIED] sub_0029C290 (0x0029C290, 22 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores two numbers in a pair of global settings.
+// ============================================================================
+// bin: xb
+// va: 0x0029C290
+// what: Stores two numbers in a pair of global settings.
+// tool: Claude Opus 5.5 (symcov hint: RpTieSetFreeListCreateParams, link-order)
+// sub_0029C290 (0x0029C290, 22 bytes)
+// The unit keeps frame pointers (push ebp; mov ebp, esp).
+#pragma optimize("y", off)
+
+extern "C" int DAT_0045EAB4;
+extern "C" int DAT_0045EAB8;
+
+// Sets both globals.
+void __cdecl sub_0029C290(int a1, int a2)
+{
+    DAT_0045EAB4 = a1;
+    DAT_0045EAB8 = a2;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0029C2B0 (0x0029C2B0, 64 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -264873,7 +266705,91 @@ pddiObject* pddiObject::vfunc_03(unsigned int flags)
 // [TODO] 0x002A0790 pure3d::d3dExtXboxControl::vfunc_09 (74 B)
 // [TODO] 0x002A07E0 pure3d::d3dExtXboxControl::vfunc_10 (90 B)
 // [TODO] 0x002A0840 pure3d::d3dExtXboxControl::vfunc_11 (87 B)
-// [TODO] 0x002A08A0 pure3d::d3dExtXboxControl::vfunc_07 (23 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_07 (0x002A08A0, 23 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Turns off four global on/off switches of the Xbox render control.
+// ============================================================================
+// bin: xb
+// va: 0x002A08A0
+// what: Turns off four global on/off switches of the Xbox render control.
+// tool: Claude Opus 5.5 (symcov hint: MemCard_SaveInit())
+// pure3d::d3dExtXboxControl::vfunc_07 (0x002A08A0)
+// Class shape from reports/classes/xb/pure3d__d3dExtXboxControl.h.
+extern "C" bool DAT_004BD4CD;
+extern "C" bool DAT_004BD4CE;
+extern "C" bool DAT_004BD4CF;
+extern "C" bool DAT_004BD4D1;
+namespace pure3d {
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27(int a1);
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48(int a1);
+    virtual void vfunc_49();
+};
+}
+
+namespace pure3d {
+
+// Clears the four switches.
+void d3dExtXboxControl::vfunc_07()
+{
+    DAT_004BD4CD = false;
+    DAT_004BD4CF = false;
+    DAT_004BD4CE = false;
+    DAT_004BD4D1 = false;
+}
+
+}
+
 // [TODO] 0x002A08C0 pure3d::d3dExtXboxControl::vfunc_15 (13 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtXboxControl::vfunc_18 (0x002A08D0, 22 B)
@@ -264966,7 +266882,60 @@ void d3dExtXboxControl::vfunc_19()
 
 }
 
-// [TODO] 0x002A0900 pure3d::d3dExtXboxControl::vfunc_17 (23 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_17 (0x002A0900, 23 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtXboxControl::vfunc_07 (0x002A08A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002A0900
+// what: Turns off four global on/off switches of the Xbox render control.
+// tool: Claude Opus 5.5 (symcov hint: MemCard_SaveInit())
+// pure3d::d3dExtXboxControl::vfunc_17 (0x002A0900)
+// Class shape from reports/classes/xb/pure3d__d3dExtXboxControl.h.
+extern "C" bool DAT_004BD4D0;
+extern "C" bool DAT_004BD4CF;
+extern "C" bool DAT_004BD4CD;
+extern "C" bool DAT_004BD4CE;
+namespace pure3d {
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+};
+}
+
+namespace pure3d {
+
+// Clears the four switches.
+void d3dExtXboxControl::vfunc_17()
+{
+    DAT_004BD4D0 = false;
+    DAT_004BD4CD = false;
+    DAT_004BD4CF = false;
+    DAT_004BD4CE = false;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtXboxControl::vfunc_21 (0x002A0920, 42 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -276252,7 +278221,30 @@ void Class_002BE680::sub_002BE680()
     DAT_004BDDA8 = 0;
 }
 
-// [TODO] 0x002BE6A0 sub_002BE6A0 (22 B)
+// ============================================================================
+// [VERIFIED] sub_002BE6A0 (0x002BE6A0, 22 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029C290 (0x0029C290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002BE6A0
+// what: Stores two numbers in a pair of global settings.
+// tool: Claude Opus 5.5 (symcov hint: RpTieSetFreeListCreateParams, link-order)
+// sub_002BE6A0 (0x002BE6A0, 22 bytes)
+// The unit keeps frame pointers (push ebp; mov ebp, esp).
+#pragma optimize("y", off)
+
+extern "C" int DAT_00461A58;
+extern "C" int DAT_00461A5C;
+
+// Sets both globals.
+void __cdecl sub_002BE6A0(int a1, int a2)
+{
+    DAT_00461A58 = a1;
+    DAT_00461A5C = a2;
+}
+
 // ============================================================================
 // [VERIFIED] sub_002BE6C0 (0x002BE6C0, 37 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -279943,8 +281935,78 @@ int __cdecl sub_002C67E0(int a1, int a2, int a3, int a4)
 // [TODO] 0x002C6920 sub_002C6920 (41 B)
 // [TODO] 0x002C6950 sub_002C6950 (125 B)
 // [TODO] 0x002C69D0 sub_002C69D0 (72 B)
-// [TODO] 0x002C6A20 sub_002C6A20 (35 B)
-// [TODO] 0x002C6A50 sub_002C6A50 (49 B)
+// ============================================================================
+// [VERIFIED] sub_002C6A20 (0x002C6A20, 35 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies a block of memory for the PNG image library after checking that its length fits (libpng png_memcpy_check).
+// ============================================================================
+// bin: xb
+// va: 0x002C6A20
+// what: Copies a block of memory for the PNG image library after checking that its length fits (libpng png_memcpy_check).
+// tool: Claude Opus 5.5
+
+#include <string.h>
+
+// libpng's types, as png.h / pngconf.h declare them.
+typedef unsigned long png_uint_32;
+typedef size_t png_size_t;
+typedef void *png_voidp;
+typedef struct png_struct_def png_struct;
+typedef png_struct *png_structp;
+
+#define png_memcpy memcpy
+
+extern "C" void __cdecl png_error(png_structp png_ptr, const char *error_message);
+
+// pngmem.c: memcpy that refuses a length the platform's size type cannot hold.
+extern "C" png_voidp __cdecl png_memcpy_check(png_structp png_ptr, png_voidp s1, png_voidp s2,
+    png_uint_32 length)
+{
+    png_size_t size;
+
+    size = (png_size_t)length;
+    if ((png_uint_32)size != length)
+        png_error(png_ptr, "Overflow in png_memcpy_check.");
+
+    return (png_memcpy(s1, s2, size));
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C6A50 (0x002C6A50, 49 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills a block of memory for the PNG image library after checking that its length fits (libpng png_memset_check).
+// ============================================================================
+// bin: xb
+// va: 0x002C6A50
+// what: Fills a block of memory for the PNG image library after checking that its length fits (libpng png_memset_check).
+// tool: Claude Opus 5.5
+
+#include <string.h>
+
+// libpng's types, as png.h / pngconf.h declare them.
+typedef unsigned long png_uint_32;
+typedef size_t png_size_t;
+typedef void *png_voidp;
+typedef struct png_struct_def png_struct;
+typedef png_struct *png_structp;
+
+#define png_memset memset
+
+extern "C" void __cdecl png_error(png_structp png_ptr, const char *error_message);
+
+// pngmem.c: memset that refuses a length the platform's size type cannot hold.
+extern "C" png_voidp __cdecl png_memset_check(png_structp png_ptr, png_voidp s1, int value,
+    png_uint_32 length)
+{
+    png_size_t size;
+
+    size = (png_size_t)length;
+    if ((png_uint_32)size != length)
+        png_error(png_ptr, "Overflow in png_memset_check.");
+
+    return (png_memset(s1, value, size));
+}
+
 // ============================================================================
 // [VERIFIED] sub_002C6A90 (0x002C6A90, 35 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -280210,7 +282272,63 @@ int Class_002CC120::sub_002CC120(int a1, int a2)
 
 // [TODO] 0x002CC380 sub_002CC380 (1131 B)
 // [TODO] 0x002CC7F0 sub_002CC7F0 (1210 B)
-// [TODO] 0x002CCCB0 sub_002CCCB0 (297 B)
+// ============================================================================
+// [VERIFIED] sub_002CCCB0 (0x002CCCB0, 297 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Updates an Adler-32 checksum with a block of bytes (zlib adler32), used to check compressed data.
+// ============================================================================
+// bin: xb
+// va: 0x002CCCB0
+// what: Updates an Adler-32 checksum with a block of bytes (zlib adler32), used to check compressed data.
+// tool: Claude Opus 5.5
+
+// zlib 1.2.1's adler32.c. Types and macros as zconf.h / zlib.h / adler32.c declare them.
+// RULE-EXCEPTION: R32, the body keeps zlib's published layout so it can be compared with the library.
+typedef unsigned char Bytef;
+typedef unsigned int uInt;
+typedef unsigned long uLong;
+
+#define Z_NULL 0
+#define ZEXPORT
+
+#define BASE 65521UL    /* largest prime smaller than 65536 */
+#define NMAX 5552
+/* NMAX is the largest n such that 255n(n+1)/2 + (n+1)(BASE-1) <= 2^32-1 */
+
+#define DO1(buf,i)  {s1 += buf[i]; s2 += s1;}
+#define DO2(buf,i)  DO1(buf,i); DO1(buf,i+1);
+#define DO4(buf,i)  DO2(buf,i); DO2(buf,i+2);
+#define DO8(buf,i)  DO4(buf,i); DO4(buf,i+4);
+#define DO16(buf)   DO8(buf,0); DO8(buf,8);
+
+#define MOD(a) a %= BASE
+
+extern "C" uLong ZEXPORT adler32(uLong adler, const Bytef *buf, uInt len)
+{
+    unsigned long s1 = adler & 0xffff;
+    unsigned long s2 = (adler >> 16) & 0xffff;
+    int k;
+
+    if (buf == Z_NULL) return 1L;
+
+    while (len > 0) {
+        k = len < NMAX ? (int)len : NMAX;
+        len -= k;
+        while (k >= 16) {
+            DO16(buf);
+            buf += 16;
+            k -= 16;
+        }
+        if (k != 0) do {
+            s1 += *buf++;
+            s2 += s1;
+        } while (--k);
+        MOD(s1);
+        MOD(s2);
+    }
+    return (s2 << 16) | s1;
+}
+
 // [TODO] 0x002CCDE0 sub_002CCDE0 (48 B)
 // [TODO] 0x002CCE10 sub_002CCE10 (695 B)
 // [TODO] 0x002CD0D0 sub_002CD0D0 (560 B)
@@ -280359,7 +282477,30 @@ Class_002CE640* Class_002CE640::sub_002CE640(int a1)
 
 // [TODO] 0x002CE660 sub_002CE660 (101 B)
 // [TODO] 0x002CE6D0 sub_002CE6D0 (99 B)
-// [TODO] 0x002CE740 sub_002CE740 (18 B)
+// ============================================================================
+// [VERIFIED] sub_002CE740 (0x002CE740, 18 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether two values differ, by asking the comparison that says whether they are equal.
+// ============================================================================
+// bin: xb
+// va: 0x002CE740
+// what: Says whether two values differ, by asking the comparison that says whether they are equal.
+// tool: Claude Opus 5.5 (symcov hint: EAStringC::operator!=)
+// sub_002CE740 (0x002CE740, 18 bytes)
+
+class Class_002CE660
+{
+public:
+    bool sub_002CE660(const Class_002CE660 &other) const;
+    bool sub_002CE740(const Class_002CE660 &other) const;
+};
+
+// The opposite of the equality test.
+bool Class_002CE660::sub_002CE740(const Class_002CE660 &other) const
+{
+    return !sub_002CE660(other);
+}
+
 // [TODO] 0x002CE760 sub_002CE760 (279 B)
 // [TODO] 0x002CE880 sub_002CE880 (128 B)
 // [TODO] 0x002CE900 sub_002CE900 (159 B)
@@ -283607,11 +285748,138 @@ int __cdecl sub_002D3780(int a1, int a2)
 }
 
 // [TODO] 0x002D3790 sub_002D3790 (16 B)
-// [TODO] 0x002D37A0 sub_002D37A0 (16 B)
-// [TODO] 0x002D37B0 sub_002D37B0 (16 B)
-// [TODO] 0x002D37C0 sub_002D37C0 (16 B)
-// [TODO] 0x002D37D0 sub_002D37D0 (16 B)
-// [TODO] 0x002D37E0 sub_002D37E0 (16 B)
+// ============================================================================
+// [VERIFIED] sub_002D37A0 (0x002D37A0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value stored inside the given record, with a number, on to another function.
+// ============================================================================
+// bin: xb
+// va: 0x002D37A0
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_002D37A0 (0x002D37A0, 16 bytes)
+
+struct Struct_002D37A0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002DF360(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_002D37A0(Struct_002D37A0 *record, float value)
+{
+    return sub_002DF360(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37B0 (0x002D37B0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value stored inside the given record, with two more arguments, on to another function.
+// ============================================================================
+// bin: xb
+// va: 0x002D37B0
+// what: Passes a value stored inside the given record, with two more arguments, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceDiff)
+// sub_002D37B0 (0x002D37B0, 16 bytes)
+
+struct Struct_002D37B0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" void __cdecl sub_002DF370(int handle, int, unsigned int);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+void __cdecl sub_002D37B0(Struct_002D37B0 *record, int a2, unsigned int count)
+{
+    sub_002DF370(record->m_Field08, a2, count);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37C0 (0x002D37C0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value stored inside the given record, with two more arguments, on to another function.
+// ============================================================================
+// bin: xb
+// va: 0x002D37C0
+// what: Passes a value stored inside the given record, with two more arguments, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceDiff)
+// sub_002D37C0 (0x002D37C0, 16 bytes)
+
+struct Struct_002D37C0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" void __cdecl sub_002DF3C0(int handle, int, int);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+void __cdecl sub_002D37C0(Struct_002D37C0 *record, int a2, int a3)
+{
+    sub_002DF3C0(record->m_Field08, a2, a3);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37D0 (0x002D37D0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002D37D0
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_002D37D0 (0x002D37D0, 16 bytes)
+
+struct Struct_002D37D0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002DF450(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_002D37D0(Struct_002D37D0 *record, float value)
+{
+    return sub_002DF450(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37E0 (0x002D37E0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002D37E0
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_002D37E0 (0x002D37E0, 16 bytes)
+
+struct Struct_002D37E0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002DF470(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_002D37E0(Struct_002D37E0 *record, float value)
+{
+    return sub_002DF470(record->m_Field08, value);
+}
+
 // ============================================================================
 // [VERIFIED] sub_002D37F0 (0x002D37F0, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

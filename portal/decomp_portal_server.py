@@ -1197,6 +1197,29 @@ def run_verify(t: dict, cpp_code: str, object_b64: str = "", slug: str = "") -> 
     return best
 
 
+def submission_task(t: dict, body: dict) -> Tuple[dict, str]:
+    """The task as one submission asks to check it: a "match" picks the compiled function by part of its
+    symbol (a template instantiation or a compiler helper, which the file's own name cannot pick), and
+    "flags" drops some of the task's flags or adds /arch:SSE (a unit built without /EHsc, say). Anything
+    else is refused, so a submission can't hand the compiler options of its own. (task, error)."""
+    match = body.get("match")
+    flags = body.get("flags")
+    if not match and not flags:
+        return t, ""
+    t2 = dict(t)
+    if match:
+        if not isinstance(match, str) or len(match) > 200 or not match.isprintable():
+            return t, "match: part of a symbol, at most 200 printable characters."
+        t2["match_substr"] = match
+    if flags:
+        allowed = set(str(t.get("flags") or "").split()) | {MV.SSE_FLAG}
+        asked = str(flags).split() if isinstance(flags, str) else []
+        if not asked or any(f not in allowed for f in asked) or len(set(asked)) != len(asked):
+            return t, f"flags: only the function's own flags ({t.get('flags')}), fewer of them, or {MV.SSE_FLAG}."
+        t2["flags"] = " ".join(asked)
+    return t2, ""
+
+
 WHAT_MAX = 160
 
 
@@ -2999,7 +3022,10 @@ class Handler(BaseHTTPRequestHandler):
             already = t["status"] == "VERIFIED"
             if not already and (t["status"] != "CLAIMED" or t.get("claimed_by") != user):
                 return self._json({"ok": False, "error": "Claim the function before compiling."}, 403)
-        res = run_verify(t, code, str(body.get("object_b64") or ""), str(body.get("slug") or ""))   # outside the lock
+        tv, bad = submission_task(t, body)
+        if bad:
+            return self._json({"ok": False, "error": bad}, 400)
+        res = run_verify(tv, code, str(body.get("object_b64") or ""), str(body.get("slug") or ""))   # outside the lock
         if not res.get("ok"):
             return self._json(res)
         newly = False
@@ -3011,7 +3037,9 @@ class Handler(BaseHTTPRequestHandler):
                          best_cpp=code, best_diff_details=res["diff_details"])
                 save_overlay(t)
             if res["verified"] and not already:
-                record_verified(t, code, user, tool, res, what=clean_what(body.get("what")))
+                record_verified(tv, code, user, tool, res, what=clean_what(body.get("what")))
+                if tv is not t:
+                    t["match_substr"] = tv.get("match_substr", "")
                 t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
                 save_overlay(t)
                 append_audit({"time": stamp(), "user": user, "action": "VERIFIED", "symbol": t["symbol"], "va": t["va"],

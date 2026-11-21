@@ -53,5 +53,15 @@ def test_the_waiting_matches_are_well_formed():
         fields, _code = S.read_proposal(path.read_text(encoding="utf-8"))
         assert S.task_id(fields) == path.stem, path.name                        # named after its function
         assert fields.get("what") and len(fields["what"]) <= 160, path.name
-        # where it came from: a spec, or the already matched function it is a look-alike of
-        assert fields.get("spec") or re.search(r"look-alike of (\w+ )?0x[0-9A-F]{8}", fields.get("tool", "")), path.name
+        # where it came from: a spec, or the tool that wrote it (agent.py keep's own rule); a look-alike
+        # names the already matched function it copies
+        assert fields.get("spec") or fields.get("tool"), path.name
+        if "look-alike" in fields.get("tool", ""):
+            assert re.search(r"look-alike of (\w+ )?0x[0-9A-F]{8}", fields["tool"]), path.name
+
+
+def test_a_verify_line_says_which_function_and_flags():
+    text = ("// bin: xb\n// va: 0x00025400\n// verify: python portal/verify.py x.cpp --va 0x00025400 --bin xb "
+            "--match '??_I' --flags \"/O2 /Ot /Oy /G6 /Gd /GR /Zp4\"   (built without /EHsc)\nint x;\n")
+    assert S.verify_options(text) == {"match": "??_I", "flags": "/O2 /Ot /Oy /G6 /Gd /GR /Zp4"}
+    assert S.verify_options("// bin: xb\nint x;\n") == {}

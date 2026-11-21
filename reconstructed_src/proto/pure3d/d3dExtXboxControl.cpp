@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dExtXboxControl.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dExtXboxControl.cpp (11 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 24 functions matched (37.50%). NOT COMPLETE YET.
-// The 15 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 11 of 24 functions matched (45.83%). NOT COMPLETE YET.
+// The 13 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -63,6 +63,49 @@ public:
 void d3dExtXboxControl::vfunc_04()
 {
     sub_00318C00(0);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_06 (0x00264570, 23 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtXboxControl::vfunc_07 (0x002A08A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00264570
+// what: Turns off four global on/off switches of the Xbox render control.
+// tool: Claude Opus 5.5 (symcov hint: MemCard_SaveInit())
+// pure3d::d3dExtXboxControl::vfunc_06 (0x00264570)
+// Class shape from reports/classes/xb/pure3d__d3dExtXboxControl.h.
+extern "C" bool DAT_0048E12D;
+extern "C" bool DAT_0048E12E;
+extern "C" bool DAT_0048E12F;
+extern "C" bool DAT_0048E131;
+namespace pure3d {
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+};
+}
+
+namespace pure3d {
+
+// Clears the four switches.
+void d3dExtXboxControl::vfunc_06()
+{
+    DAT_0048E12D = false;
+    DAT_0048E12F = false;
+    DAT_0048E12E = false;
+    DAT_0048E131 = false;
 }
 
 }
@@ -144,6 +187,55 @@ public:
 void d3dExtXboxControl::vfunc_14()
 {
     vfunc_12();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_12 (0x002645D0, 23 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtXboxControl::vfunc_07 (0x002A08A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002645D0
+// what: Turns off four global on/off switches of the Xbox render control.
+// tool: Claude Opus 5.5 (symcov hint: MemCard_SaveInit())
+// pure3d::d3dExtXboxControl::vfunc_12 (0x002645D0)
+// Class shape from reports/classes/xb/pure3d__d3dExtXboxControl.h.
+extern "C" bool DAT_0048E130;
+extern "C" bool DAT_0048E12F;
+extern "C" bool DAT_0048E12D;
+extern "C" bool DAT_0048E12E;
+namespace pure3d {
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+};
+}
+
+namespace pure3d {
+
+// Clears the four switches.
+void d3dExtXboxControl::vfunc_12()
+{
+    DAT_0048E130 = false;
+    DAT_0048E12D = false;
+    DAT_0048E12F = false;
+    DAT_0048E12E = false;
 }
 
 }

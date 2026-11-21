@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (3237 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (3261 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,237 of 11,111 functions matched (29.13%). NOT COMPLETE YET.
-// The 7,874 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3,261 of 11,111 functions matched (29.35%). NOT COMPLETE YET.
+// The 7,850 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -295,6 +295,34 @@ void __cdecl sub_00011D70(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00011E60 (0x00011E60, 31 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00011910 (0x00011910), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00011E60
+// what: Returns the squared length of a three-number vector (x*x + y*y + z*z).
+// tool: Claude Opus 5.5 (symcov hint: vector3::SquaredLength)
+// sub_00011E60 (0x00011E60, 31 bytes)
+
+class Class_00011E60
+{
+public:
+    float sub_00011E60() const;
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Sum of the squares of the three components.
+float Class_00011E60::sub_00011E60() const
+{
+    return m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00011F50 (0x00011F50, 82 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -369,6 +397,36 @@ bool Class_000120B0::sub_000120B0()
     }
 L_17:
     return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000121D0 (0x000121D0, 33 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0003DBD0 (0x0003DBD0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000121D0
+// what: Returns the length of a three-number vector.
+// tool: Claude Opus 5.5 (symcov hint: TVector::Length)
+// sub_000121D0 (0x000121D0, 33 bytes)
+
+extern "C" double __cdecl sqrt(double);
+
+class Class_000121D0
+{
+public:
+    float sub_000121D0() const;
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Square root of the sum of the squares of the three components.
+float Class_000121D0::sub_000121D0() const
+{
+    return (float)sqrt(m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08);
 }
 
 // ============================================================================
@@ -3901,6 +3959,24 @@ int Class_00024320::sub_00024320()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000243B0 (0x000243B0, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00026740 (0x00026740), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000243B0
+// what: Rounds a float down to the nearest whole number (the C++ floorf overload from <math.h>).
+// tool: Claude Opus 5.5
+
+// The original is the Toolkit's own header inline, <math.h>'s floorf(float), emitted out of line
+// because something takes or keeps a call to it that the compiler did not inline.
+#include <math.h>
+
+// Taking floorf's address makes the compiler emit the header's copy of it.
+float (*g_FloorF)(float) = floorf;
+
+// ============================================================================
 // [VERIFIED] sub_00024450 (0x00024450, 51 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -6087,6 +6163,27 @@ bool __cdecl sub_0002BFA0(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0002BFE0 (0x0002BFE0, 27 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0002EAA0 (0x0002EAA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0002BFE0
+// what: Says whether either of two global on/off flags is set.
+// tool: Claude Opus 5.5 (symcov hint: GUI_ScoreCardUp)
+// sub_0002BFE0 (0x0002BFE0, 27 bytes)
+
+extern "C" bool DAT_003F6F98;
+extern "C" bool DAT_004498BE;
+
+// True when either flag is set.
+bool __cdecl sub_0002BFE0()
+{
+    return DAT_004498BE || DAT_003F6F98;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0002C020 (0x0002C020, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -6835,6 +6932,42 @@ void Class_00031030::sub_00031030(int a1, int a2, int a3, int a4)
 {
     sub_00030F00(a1, a2, a3);
     vfunc_04(a4);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00031260 (0x00031260, 52 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000CA160 (0x000CA160), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00031260
+// what: Builds an object from two three-number vectors, such as the two ends of a line.
+// tool: Claude Opus 5.5 (symcov hint: Photon::CLineSegment::CLineSegment)
+// sub_00031260 (0x00031260, 52 bytes)
+
+struct Struct_00031260
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_00031260
+{
+public:
+    Class_00031260 *sub_00031260(const Struct_00031260 &first, const Struct_00031260 &second);
+
+    Struct_00031260 m_Field00; // +0x00
+    Struct_00031260 m_Field0C; // +0x0C
+};
+
+// Copies both vectors in and returns the object.
+Class_00031260 *Class_00031260::sub_00031260(const Struct_00031260 &first, const Struct_00031260 &second)
+{
+    m_Field00 = first;
+    m_Field0C = second;
+    return this;
 }
 
 // ============================================================================
@@ -12913,6 +13046,32 @@ bool __cdecl sub_000590C0(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000590E0 (0x000590E0, 18 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00063880 (0x00063880), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000590E0
+// what: Sets an on/off flag on the object held in a global pointer.
+// tool: Claude Opus 5.5 (symcov hint: TScriptFunction_General::TriggerCamera)
+// sub_000590E0 (0x000590E0, 18 bytes)
+
+class Class_00057160
+{
+public:
+    bool sub_00057160(bool a1);
+};
+
+extern "C" Class_00057160 *__cdecl sub_00057150();
+
+// Passes the flag to the global object's setter.
+void __cdecl sub_000590E0(bool value)
+{
+    sub_00057150()->sub_00057160(value);
+}
+
+// ============================================================================
 // [VERIFIED] sub_00059280 (0x00059280, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -15721,6 +15880,33 @@ int __cdecl sub_00065690(void)
         return DAT_0044ED8C[t1 + (t1 * 4)];
     }
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000656C0 (0x000656C0, 36 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0006F9C0 (0x0006F9C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000656C0
+// what: Formats a debug message into a local buffer; this build prints it nowhere.
+// tool: Claude Opus 5.5 (symcov hint: _SNDAPP_DebugPrint)
+// sub_000656C0 (0x000656C0, 36 bytes)
+
+#include <stdarg.h>
+
+extern "C" int __cdecl vsprintf(char *buffer, const char *format, va_list args);
+
+// Formats the message; the output step is compiled out of the retail build.
+void __cdecl sub_000656C0(const char *format, ...)
+{
+    char buffer[1024];
+    va_list args;
+
+    va_start(args, format);
+    vsprintf(buffer, format, args);
+    va_end(args);
 }
 
 // ============================================================================
@@ -23358,6 +23544,39 @@ Class_0008F4A0* Class_0008F4A0::sub_0008F4A0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0008F4D0 (0x0008F4D0, 33 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_0009ACA0 (0x0009ACA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0008F4D0
+// what: Resets a four-number rotation to "no rotation" (0, 0, 0, 1).
+// tool: Claude Opus 5.5 (symcov hint: RSQuat::Identity, link-order)
+// sub_0008F4D0 (0x0008F4D0, 33 bytes)
+
+class Class_0008F4D0
+{
+public:
+    Class_0008F4D0 *sub_0008F4D0();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Sets the first three components to zero and the last to one.
+Class_0008F4D0 *Class_0008F4D0::sub_0008F4D0()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 1.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0008F870 (0x0008F870, 74 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -24660,6 +24879,36 @@ public:
 void* Class_0009ACC0::sub_0009ACC0()
 {
     return &m_Field80;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009AE70 (0x0009AE70, 96 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000A6D40 (0x000A6D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0009AE70
+// what: Builds an object of thirty values, all set to zero.
+// tool: Claude Opus 5.5 (symcov hint: EARS::SaveGame::MemcardHandler::PlatformMessages::PlatformMessages)
+// sub_0009AE70 (0x0009AE70, 96 bytes)
+
+class Class_0009AE70
+{
+public:
+    Class_0009AE70 *sub_0009AE70();
+
+    int m_Field00[30]; // +0x00
+};
+
+// Clears every value and returns the object.
+Class_0009AE70 *Class_0009AE70::sub_0009AE70()
+{
+    for (int i = 0; i < 30; i++)
+    {
+        m_Field00[i] = 0;
+    }
+    return this;
 }
 
 // ============================================================================
@@ -27041,6 +27290,38 @@ void Class_000A9670::sub_000A9670()
         m_Field40 = 0;
     }
     m_Field84.sub_000AC6A0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AA7F0 (0x000AA7F0, 23 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000A5670 (0x000A5670), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000AA7F0
+// what: Sets four numbers of an object to zero.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::Sentient::HeadTrackAngleInfo::Init)
+// sub_000AA7F0 (0x000AA7F0, 23 bytes)
+
+class Class_000AA7F0
+{
+public:
+    void sub_000AA7F0();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Clears all four values.
+void Class_000AA7F0::sub_000AA7F0()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
 }
 
 // ============================================================================
@@ -49740,6 +50021,42 @@ void Class_001341F0::sub_001341F0(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00135AE0 (0x00135AE0, 30 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_001522C0 (0x001522C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00135AE0
+// what: Builds a camera transition: two values cleared and a third set to one.
+// tool: Claude Opus 5.5 (symcov hint: fcGlowPixelShader::fcGlowPixelShader)
+// sub_00135AE0 (0x00135AE0, 30 bytes)
+// The vtable it installs (0x0039102C) is CameraTransition's: CameraTransition::vfunc_00
+// (0x00152530, its deleting destructor) installs the same one, so this is CameraTransition's
+// constructor. Slot 0 keeps the shape of the matched CameraTransition::vfunc_00.
+
+class CameraTransition
+{
+public:
+    CameraTransition();
+    virtual CameraTransition* vfunc_00(int a1);
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+
+    int m_Field04;   // +0x04
+    int m_Field08;   // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Clears the first two values and sets the third to one.
+CameraTransition::CameraTransition()
+{
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 1.0f;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00135B00 (0x00135B00, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -64129,6 +64446,35 @@ void Class_0018F420::sub_0018F420()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0018F6E0 (0x0018F6E0, 25 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_001C4640 (0x001C4640), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0018F6E0
+// what: Stores two numbers in an object.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::Attitude::SetBrowTilt)
+// sub_0018F6E0 (0x0018F6E0, 25 bytes)
+
+class Class_0018F6E0
+{
+public:
+    void sub_0018F6E0(float a1, float a2);
+
+    char m_pad00[0x2C];
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+};
+
+// Sets both values.
+void Class_0018F6E0::sub_0018F6E0(float a1, float a2)
+{
+    m_Field2C = a1;
+    m_Field30 = a2;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0018F700 (0x0018F700, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -65795,6 +66141,33 @@ extern "C" void __cdecl sub_00040CF0(int, int, int);
 void __stdcall sub_0019BE00(int a1, int a2, int a3)
 {
     sub_00040CF0(a1, a2, a3);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0019C0E0 (0x0019C0E0, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_001D3C70 (0x001D3C70), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0019C0E0
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: UIBarMeter::SetShrinkRate(float))
+// sub_0019C0E0 (0x0019C0E0, 17 bytes)
+
+class Class_0019C0E0
+{
+public:
+    void sub_0019C0E0(float value);
+
+    char m_pad00[0xEC];
+    float m_FieldEC; // +0xEC
+};
+
+// Sets the value.
+void Class_0019C0E0::sub_0019C0E0(float value)
+{
+    m_FieldEC = value;
 }
 
 // ============================================================================
@@ -69302,6 +69675,35 @@ extern "C" int DAT_00462EA8;
 void __cdecl sub_001B5E00(void)
 {
     DAT_00462EA4.sub_0008D4E0(DAT_00462EA8);
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B6340 (0x001B6340, 43 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_001F0540 (0x001F0540), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001B6340
+// what: Copies a three-number value (such as a colour) into a global setting.
+// tool: Claude Opus 5.5 (symcov hint: R_SetFogColor(const Color *), link-order)
+// sub_001B6340 (0x001B6340, 43 bytes)
+
+struct Struct_001B6340
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+extern "C" Struct_001B6340 DAT_0041833C;
+
+// Stores the three components in the global.
+void __cdecl sub_001B6340(const Struct_001B6340 *value)
+{
+    DAT_0041833C.m_Field00 = value->m_Field00;
+    DAT_0041833C.m_Field04 = value->m_Field04;
+    DAT_0041833C.m_Field08 = value->m_Field08;
 }
 
 // ============================================================================
@@ -82961,6 +83363,40 @@ void Class_002014E0::sub_002014E0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00201610 (0x00201610, 59 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00244170 (0x00244170), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00201610
+// what: Scales a three-number vector so its length becomes one.
+// tool: Claude Opus 5.5 (symcov hint: FcGenericVector<float>::Normalise)
+// sub_00201610 (0x00201610, 59 bytes)
+
+extern "C" double __cdecl sqrt(double);
+
+class Class_00201610
+{
+public:
+    void sub_00201610();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Multiplies every component by one over the length.
+void Class_00201610::sub_00201610()
+{
+    float length = (float)sqrt(m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08);
+    float scale = 1.0f / length;
+    m_Field00 *= scale;
+    m_Field04 *= scale;
+    m_Field08 *= scale;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002016D0 (0x002016D0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -90126,6 +90562,26 @@ void __cdecl sub_0023F510(int a1)
 {
     *(int*)(sub_0023F4C0() + 44) = a1;
     ((Object*)a1)->sub_002D767D(*(int*)(a1 + 20));
+}
+
+// ============================================================================
+// [VERIFIED] sub_0023F5F0 (0x0023F5F0, 34 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00283FE0 (0x00283FE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0023F5F0
+// what: Passes its four arguments, the last a 64-bit number, unchanged to another function.
+// tool: Claude Opus 5.5 (symcov hint: File_ReadAsyncEx)
+// sub_0023F5F0 (0x0023F5F0, 34 bytes)
+
+extern "C" int __cdecl sub_0023F560(int a1, int a2, int a3, __int64 a4);
+
+// Forwards all four arguments. MSVC 7.1 does not turn the call into a jump because of the 64-bit argument.
+int __cdecl sub_0023F5F0(int a1, int a2, int a3, __int64 a4)
+{
+    return sub_0023F560(a1, a2, a3, a4);
 }
 
 // ============================================================================
@@ -97655,6 +98111,80 @@ int __cdecl sub_00288AC0(int a1, int a2, int a3, int a4)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00288D00 (0x00288D00, 35 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002C6A20 (0x002C6A20), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00288D00
+// what: Copies a block of memory for the PNG image library after checking that its length fits (libpng png_memcpy_check).
+// tool: Claude Opus 5.5
+
+#include <string.h>
+
+// libpng's types, as png.h / pngconf.h declare them.
+typedef unsigned long png_uint_32;
+typedef size_t png_size_t;
+typedef void *png_voidp;
+typedef struct png_struct_def png_struct;
+typedef png_struct *png_structp;
+
+#define png_memcpy memcpy
+
+extern "C" void __cdecl png_error(png_structp png_ptr, const char *error_message);
+
+// pngmem.c: memcpy that refuses a length the platform's size type cannot hold.
+extern "C" png_voidp __cdecl png_memcpy_check(png_structp png_ptr, png_voidp s1, png_voidp s2,
+    png_uint_32 length)
+{
+    png_size_t size;
+
+    size = (png_size_t)length;
+    if ((png_uint_32)size != length)
+        png_error(png_ptr, "Overflow in png_memcpy_check.");
+
+    return (png_memcpy(s1, s2, size));
+}
+
+// ============================================================================
+// [VERIFIED] sub_00288D30 (0x00288D30, 49 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002C6A50 (0x002C6A50), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00288D30
+// what: Fills a block of memory for the PNG image library after checking that its length fits (libpng png_memset_check).
+// tool: Claude Opus 5.5
+
+#include <string.h>
+
+// libpng's types, as png.h / pngconf.h declare them.
+typedef unsigned long png_uint_32;
+typedef size_t png_size_t;
+typedef void *png_voidp;
+typedef struct png_struct_def png_struct;
+typedef png_struct *png_structp;
+
+#define png_memset memset
+
+extern "C" void __cdecl png_error(png_structp png_ptr, const char *error_message);
+
+// pngmem.c: memset that refuses a length the platform's size type cannot hold.
+extern "C" png_voidp __cdecl png_memset_check(png_structp png_ptr, png_voidp s1, int value,
+    png_uint_32 length)
+{
+    png_size_t size;
+
+    size = (png_size_t)length;
+    if ((png_uint_32)size != length)
+        png_error(png_ptr, "Overflow in png_memset_check.");
+
+    return (png_memset(s1, value, size));
+}
+
+// ============================================================================
 // [VERIFIED] sub_00288D70 (0x00288D70, 35 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -97894,6 +98424,64 @@ int Class_0028EB00::sub_0028EB00(int a1, int a2)
         return m_Field104;
     }
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0028F690 (0x0028F690, 297 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002CCCB0 (0x002CCCB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028F690
+// what: Updates an Adler-32 checksum with a block of bytes (zlib adler32), used to check compressed data.
+// tool: Claude Opus 5.5
+
+// zlib 1.2.1's adler32.c. Types and macros as zconf.h / zlib.h / adler32.c declare them.
+// RULE-EXCEPTION: R32, the body keeps zlib's published layout so it can be compared with the library.
+typedef unsigned char Bytef;
+typedef unsigned int uInt;
+typedef unsigned long uLong;
+
+#define Z_NULL 0
+#define ZEXPORT
+
+#define BASE 65521UL    /* largest prime smaller than 65536 */
+#define NMAX 5552
+/* NMAX is the largest n such that 255n(n+1)/2 + (n+1)(BASE-1) <= 2^32-1 */
+
+#define DO1(buf,i)  {s1 += buf[i]; s2 += s1;}
+#define DO2(buf,i)  DO1(buf,i); DO1(buf,i+1);
+#define DO4(buf,i)  DO2(buf,i); DO2(buf,i+2);
+#define DO8(buf,i)  DO4(buf,i); DO4(buf,i+4);
+#define DO16(buf)   DO8(buf,0); DO8(buf,8);
+
+#define MOD(a) a %= BASE
+
+extern "C" uLong ZEXPORT adler32(uLong adler, const Bytef *buf, uInt len)
+{
+    unsigned long s1 = adler & 0xffff;
+    unsigned long s2 = (adler >> 16) & 0xffff;
+    int k;
+
+    if (buf == Z_NULL) return 1L;
+
+    while (len > 0) {
+        k = len < NMAX ? (int)len : NMAX;
+        len -= k;
+        while (k >= 16) {
+            DO16(buf);
+            buf += 16;
+            k -= 16;
+        }
+        if (k != 0) do {
+            s1 += *buf++;
+            s2 += s1;
+        } while (--k);
+        MOD(s1);
+        MOD(s2);
+    }
+    return (s2 << 16) | s1;
 }
 
 // ============================================================================
@@ -100542,6 +101130,141 @@ void Class_00298A20::sub_00298A20(int a1)
 int __cdecl sub_0029A110(int a1)
 {
     return *(int*)(a1 + 192);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029A130 (0x0029A130, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0029A130
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_0029A130 (0x0029A130, 16 bytes)
+
+struct Struct_0029A130
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002AB580(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_0029A130(Struct_0029A130 *record, float value)
+{
+    return sub_002AB580(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029A140 (0x0029A140, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37B0 (0x002D37B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0029A140
+// what: Passes a value stored inside the given record, with two more arguments, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceDiff)
+// sub_0029A140 (0x0029A140, 16 bytes)
+
+struct Struct_0029A140
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" void __cdecl sub_002AB590(int handle, int, unsigned int);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+void __cdecl sub_0029A140(Struct_0029A140 *record, int a2, unsigned int count)
+{
+    sub_002AB590(record->m_Field08, a2, count);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029A150 (0x0029A150, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37B0 (0x002D37B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0029A150
+// what: Passes a value stored inside the given record, with two more arguments, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceDiff)
+// sub_0029A150 (0x0029A150, 16 bytes)
+
+struct Struct_0029A150
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" void __cdecl sub_002AB5E0(int handle, int, unsigned int);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+void __cdecl sub_0029A150(Struct_0029A150 *record, int a2, unsigned int count)
+{
+    sub_002AB5E0(record->m_Field08, a2, count);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029A160 (0x0029A160, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0029A160
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_0029A160 (0x0029A160, 16 bytes)
+
+struct Struct_0029A160
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002AB670(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_0029A160(Struct_0029A160 *record, float value)
+{
+    return sub_002AB670(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029A170 (0x0029A170, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0029A170
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_0029A170 (0x0029A170, 16 bytes)
+
+struct Struct_0029A170
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002AB690(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_0029A170(Struct_0029A170 *record, float value)
+{
+    return sub_002AB690(record->m_Field08, value);
 }
 
 // ============================================================================

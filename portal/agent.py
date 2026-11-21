@@ -76,6 +76,7 @@ def image(b: str):
 
 
 def flags_for(t: dict, target=None) -> list:
+    import msvc_verify as MV
     return MV.flag_options(t["bin"], t.get("flags") or DEFAULT_FLAGS, target)
 
 

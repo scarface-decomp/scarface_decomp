@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (3912 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (3976 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,912 of 12,738 functions matched (30.71%). NOT COMPLETE YET.
-// The 8,826 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3,976 of 12,738 functions matched (31.21%). NOT COMPLETE YET.
+// The 8,762 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -305,6 +305,33 @@ void Class_000117F0::sub_000117F0(int a1)
     }
 L_1C:
     ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00011910 (0x00011910, 31 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the squared length of a three-number vector (x*x + y*y + z*z).
+// ============================================================================
+// bin: xb
+// va: 0x00011910
+// what: Returns the squared length of a three-number vector (x*x + y*y + z*z).
+// tool: Claude Opus 5.5 (symcov hint: vector3::SquaredLength)
+// sub_00011910 (0x00011910, 31 bytes)
+
+class Class_00011910
+{
+public:
+    float sub_00011910() const;
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Sum of the squares of the three components.
+float Class_00011910::sub_00011910() const
+{
+    return m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08;
 }
 
 // ============================================================================
@@ -655,6 +682,30 @@ int __cdecl sub_00012230(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00012380 (0x00012380, 48 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Runs a constructor on every element of an array, first to last (compiler helper "vector constructor iterator").
+// ============================================================================
+// bin: xb
+// va: 0x00012380
+// what: Runs a constructor on every element of an array, first to last (compiler helper "vector constructor iterator").
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00012380.cpp --va 0x00012380 --bin xb --match '??_H'
+
+// ??_H (`vector constructor iterator') has no source of its own: cl writes it into any file that
+// builds an array of a class with a constructor and no destructor. The array below is that
+// declaration; which class and array the game's copy came from is not known.
+class Class_00012380
+{
+public:
+    Class_00012380();
+
+    int m_Field00;
+};
+
+Class_00012380 g_00012380[4];
+
+// ============================================================================
 // [VERIFIED] sub_00012420 (0x00012420, 26 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -706,6 +757,37 @@ int Class_00012440::sub_00012440()
     DAT_0046BFF4 = m_Field04;
     return t1;
 }
+
+// ============================================================================
+// [VERIFIED] sub_00012450 (0x00012450, 246 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 16-byte records so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x00012450
+// what: Rotates a range of 16-byte records so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00012450.cpp --va 0x00012450 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Rotate for random-access iterators, instantiated for Class_00012450.
+template void std::_Rotate<Class_00012450 *, int, Class_00012450>(Class_00012450 *, Class_00012450 *, Class_00012450 *, int *, Class_00012450 *);
 
 // ============================================================================
 // [VERIFIED] sub_00013030 (0x00013030, 41 B)
@@ -1027,6 +1109,37 @@ int __cdecl sub_00014F70(int a1, int a2, int a3)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00014FC0 (0x00014FC0, 140 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 5 external relocation(s) unchecked
+// What it does: Picks a median-of-three (or of nine for large ranges) pivot among 16-byte records ordered by their float key (standard library sort helper).
+// ============================================================================
+// bin: xb
+// va: 0x00014FC0
+// what: Picks a median-of-three (or of nine for large ranges) pivot among 16-byte records ordered by their float key (standard library sort helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00014FC0.cpp --va 0x00014FC0 --bin xb --match '?$_Median@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Median (pivot selection of std::sort), instantiated for Class_00012450.
+template void std::_Median<Class_00012450 *>(Class_00012450 *, Class_00012450 *, Class_00012450 *);
+
+// ============================================================================
 // [VERIFIED] sub_00015A50 (0x00015A50, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -1088,6 +1201,37 @@ void __cdecl sub_00015AE0(Target* target, const char* name)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00015FD0 (0x00015FD0, 90 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Arranges an array of 16-byte records into a heap ordered by their float key (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x00015FD0
+// what: Arranges an array of 16-byte records into a heap ordered by their float key (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00015FD0.cpp --va 0x00015FD0 --bin xb --match '?$_Make_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Make_heap, instantiated for Class_00012450.
+template void std::_Make_heap<Class_00012450 *, int, Class_00012450>(Class_00012450 *, Class_00012450 *, int *, Class_00012450 *);
+
+// ============================================================================
 // [VERIFIED] sub_00016030 (0x00016030, 37 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -1107,6 +1251,68 @@ extern "C" Made* __cdecl sub_00016030(void)
     DAT_0046C01C = made;
     return made;
 }
+
+// ============================================================================
+// [VERIFIED] sub_00016910 (0x00016910, 139 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Sorts a heap of 16-byte records by their float key (standard library std::sort_heap).
+// ============================================================================
+// bin: xb
+// va: 0x00016910
+// what: Sorts a heap of 16-byte records by their float key (standard library std::sort_heap).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00016910.cpp --va 0x00016910 --bin xb --match '?$sort_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::sort_heap, instantiated for Class_00012450.
+template void std::sort_heap<Class_00012450 *>(Class_00012450 *, Class_00012450 *);
+
+// ============================================================================
+// [VERIFIED] sub_000169D0 (0x000169D0, 203 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 16-byte records by their float key, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000169D0
+// what: Sorts an array of 16-byte records by their float key, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000169D0.cpp --va 0x000169D0 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Sort (introsort loop of std::sort), instantiated for Class_00012450.
+template void std::_Sort<Class_00012450 *, int>(Class_00012450 *, Class_00012450 *, int);
 
 // ============================================================================
 // [VERIFIED] sub_000173D0 (0x000173D0, 20 B)
@@ -4134,6 +4340,31 @@ void __cdecl sub_00025350(int a1, int a2, int a3, int a4, int a5, int a6)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00025400 (0x00025400, 49 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Runs a destructor on every element of an array, last to first (compiler helper "vector destructor iterator").
+// ============================================================================
+// bin: xb
+// va: 0x00025400
+// what: Runs a destructor on every element of an array, last to first (compiler helper "vector destructor iterator").
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00025400.cpp --va 0x00025400 --bin xb --match '??_I' --flags "/O2 /Ot /Oy /G6 /Gd /GR /Zp4"
+
+// ??_I (`vector destructor iterator') has no source of its own: cl writes it into a file that
+// destroys an array of a class with a destructor. With /EHsc cl uses the exception-aware
+// iterator instead, so the game's copy came from a file built without /EHsc (see the verify line).
+// The array below is the declaration that needs it; which class it was is not known.
+class Class_00025400
+{
+public:
+    ~Class_00025400();
+
+    int m_Field00;
+};
+
+Class_00025400 g_00025400[4];
+
+// ============================================================================
 // [VERIFIED] sub_00025600 (0x00025600, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -4185,6 +4416,23 @@ int Class_000266B0::sub_000266B0()
     }
     return r_eax;
 }
+
+// ============================================================================
+// [VERIFIED] sub_00026740 (0x00026740, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Rounds a float down to the nearest whole number (the C++ floorf overload from <math.h>).
+// ============================================================================
+// bin: xb
+// va: 0x00026740
+// what: Rounds a float down to the nearest whole number (the C++ floorf overload from <math.h>).
+// tool: Claude Opus 5.5
+
+// The original is the Toolkit's own header inline, <math.h>'s floorf(float), emitted out of line
+// because something takes or keeps a call to it that the compiler did not inline.
+#include <math.h>
+
+// Taking floorf's address makes the compiler emit the header's copy of it.
+float (*g_FloorF)(float) = floorf;
 
 // ============================================================================
 // [VERIFIED] sub_000267E0 (0x000267E0, 51 B)
@@ -5111,6 +5359,52 @@ Class_000297B0* Class_000297B0::sub_000297B0(int a1)
     m_Field08 = *(short*)(a1 + 56);
     return this;
 }
+
+// ============================================================================
+// [VERIFIED] sub_00029CE0 (0x00029CE0, 74 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Sorts a heap of 4-byte elements with a caller-supplied ordering function (standard library std::sort_heap).
+// ============================================================================
+// bin: xb
+// va: 0x00029CE0
+// what: Sorts a heap of 4-byte elements with a caller-supplied ordering function (standard library std::sort_heap).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00029CE0.cpp --va 0x00029CE0 --bin xb --match '?$sort_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::sort_heap with a predicate, instantiated for an array of Class_00029D30 pointers.
+template void std::sort_heap<Class_00029D30 **, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, Class_00029D30Less);
+
+// ============================================================================
+// [VERIFIED] sub_00029D30 (0x00029D30, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x00029D30
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00029D30.cpp --va 0x00029D30 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_00029D30 pointers.
+template void std::_Sort<Class_00029D30 **, int, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, int, Class_00029D30Less);
 
 // ============================================================================
 // [VERIFIED] sub_00029E20 (0x00029E20, 49 B)
@@ -7170,6 +7464,26 @@ bool __cdecl sub_0002EA90(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0002EAA0 (0x0002EAA0, 27 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether either of two global on/off flags is set.
+// ============================================================================
+// bin: xb
+// va: 0x0002EAA0
+// what: Says whether either of two global on/off flags is set.
+// tool: Claude Opus 5.5 (symcov hint: GUI_ScoreCardUp)
+// sub_0002EAA0 (0x0002EAA0, 27 bytes)
+
+extern "C" bool DAT_0041C040;
+extern "C" bool DAT_00474517;
+
+// True when either flag is set.
+bool __cdecl sub_0002EAA0()
+{
+    return DAT_00474517 || DAT_0041C040;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0002EAC0 (0x0002EAC0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -8524,6 +8838,35 @@ void Class_0003DB00::sub_0003DB00(int a1)
         ((Object*)t1)->vfunc_01();
         *(int*)((int)this + (a1 * 4) + 28) = 0;
     }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003DBD0 (0x0003DBD0, 33 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the length of a three-number vector.
+// ============================================================================
+// bin: xb
+// va: 0x0003DBD0
+// what: Returns the length of a three-number vector.
+// tool: Claude Opus 5.5 (symcov hint: TVector::Length)
+// sub_0003DBD0 (0x0003DBD0, 33 bytes)
+
+extern "C" double __cdecl sqrt(double);
+
+class Class_0003DBD0
+{
+public:
+    float sub_0003DBD0() const;
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Square root of the sum of the squares of the three components.
+float Class_0003DBD0::sub_0003DBD0() const
+{
+    return (float)sqrt(m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08);
 }
 
 // ============================================================================
@@ -16409,6 +16752,31 @@ bool __cdecl sub_00063870(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00063880 (0x00063880, 18 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets an on/off flag on the object held in a global pointer.
+// ============================================================================
+// bin: xb
+// va: 0x00063880
+// what: Sets an on/off flag on the object held in a global pointer.
+// tool: Claude Opus 5.5 (symcov hint: TScriptFunction_General::TriggerCamera)
+// sub_00063880 (0x00063880, 18 bytes)
+
+class Class_000618F0
+{
+public:
+    bool sub_000618F0(bool a1);
+};
+
+extern "C" Class_000618F0 *__cdecl sub_000618E0();
+
+// Passes the flag to the global object's setter.
+void __cdecl sub_00063880(bool value)
+{
+    sub_000618E0()->sub_000618F0(value);
+}
+
+// ============================================================================
 // [VERIFIED] sub_000638A0 (0x000638A0, 9 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -16529,6 +16897,27 @@ void __cdecl sub_00064140(int a1, int a2)
 
 void __cdecl sub_000643C0(void)
 {
+}
+
+// ============================================================================
+// [VERIFIED] sub_000643F0 (0x000643F0, 22 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the same value to two other functions, one after the other.
+// ============================================================================
+// bin: xb
+// va: 0x000643F0
+// what: Passes the same value to two other functions, one after the other.
+// tool: Claude Opus 5.5 (symcov hint: DF_vDrawLayers, link-order)
+// sub_000643F0 (0x000643F0, 22 bytes)
+
+extern "C" void __cdecl sub_00064240(int);
+extern "C" void __cdecl sub_00061760(int);
+
+// Calls the two functions with the same argument.
+void __cdecl sub_000643F0(int a1)
+{
+    sub_00064240(a1);
+    sub_00061760(a1);
 }
 
 // ============================================================================
@@ -19969,6 +20358,32 @@ int __cdecl sub_0006F9B0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0006F9C0 (0x0006F9C0, 36 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Formats a debug message into a local buffer; this build prints it nowhere.
+// ============================================================================
+// bin: xb
+// va: 0x0006F9C0
+// what: Formats a debug message into a local buffer; this build prints it nowhere.
+// tool: Claude Opus 5.5 (symcov hint: _SNDAPP_DebugPrint)
+// sub_0006F9C0 (0x0006F9C0, 36 bytes)
+
+#include <stdarg.h>
+
+extern "C" int __cdecl vsprintf(char *buffer, const char *format, va_list args);
+
+// Formats the message; the output step is compiled out of the retail build.
+void __cdecl sub_0006F9C0(const char *format, ...)
+{
+    char buffer[1024];
+    va_list args;
+
+    va_start(args, format);
+    vsprintf(buffer, format, args);
+    va_end(args);
+}
+
+// ============================================================================
 // [VERIFIED] sub_0006FAF0 (0x0006FAF0, 32 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -22992,6 +23407,32 @@ Object* __cdecl sub_0007F120(void)
     }
     return &DAT_004810FC;
 }
+
+// ============================================================================
+// [VERIFIED] sub_0007F600 (0x0007F600, 203 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte records by their unsigned key, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x0007F600
+// what: Sorts an array of 4-byte records by their unsigned key, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_0007F600.cpp --va 0x0007F600 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 4-byte record ordered by an unsigned key. Its operator< is defined in another file
+// (sub_00242D50), so the sort calls it rather than inlining it.
+class Class_0007F600
+{
+public:
+    bool operator<(const Class_0007F600 &other) const;
+
+    unsigned int m_Key;
+};
+
+// std::_Sort (introsort loop of std::sort), instantiated for Class_0007F600.
+template void std::_Sort<Class_0007F600 *, int>(Class_0007F600 *, Class_0007F600 *, int);
 
 // ============================================================================
 // [VERIFIED] sub_0007F7F0 (0x0007F7F0, 13 B)
@@ -27648,6 +28089,32 @@ int __cdecl sub_00096430(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00096810 (0x00096810, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Calls a function of the object held in a global pointer, passing it a global value.
+// ============================================================================
+// bin: xb
+// va: 0x00096810
+// what: Calls a function of the object held in a global pointer, passing it a global value.
+// tool: Claude Opus 5.5 (symcov hint: $E13, link-order)
+// sub_00096810 (0x00096810, 19 bytes)
+
+class Class_00094E30
+{
+public:
+    void sub_00094E30(int a1);
+};
+
+extern "C" int DAT_004236AC;
+extern "C" Class_00094E30 *__cdecl sub_00094C80();
+
+// Hands the global value to the global object's method.
+void __cdecl sub_00096810()
+{
+    sub_00094C80()->sub_00094E30(DAT_004236AC);
+}
+
+// ============================================================================
 // [VERIFIED] sub_00096830 (0x00096830, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29065,6 +29532,38 @@ Class_0009AC70* Class_0009AC70::sub_0009AC70()
     m_Field1C = 0;
     m_Field20 = 0;
     m_Field24 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009ACA0 (0x0009ACA0, 33 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Resets a four-number rotation to "no rotation" (0, 0, 0, 1).
+// ============================================================================
+// bin: xb
+// va: 0x0009ACA0
+// what: Resets a four-number rotation to "no rotation" (0, 0, 0, 1).
+// tool: Claude Opus 5.5 (symcov hint: RSQuat::Identity, link-order)
+// sub_0009ACA0 (0x0009ACA0, 33 bytes)
+
+class Class_0009ACA0
+{
+public:
+    Class_0009ACA0 *sub_0009ACA0();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Sets the first three components to zero and the last to one.
+Class_0009ACA0 *Class_0009ACA0::sub_0009ACA0()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 1.0f;
     return this;
 }
 
@@ -30748,6 +31247,37 @@ L_2B:
 }
 
 // ============================================================================
+// [VERIFIED] sub_000A5670 (0x000A5670, 23 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Sets four numbers of an object to zero.
+// ============================================================================
+// bin: xb
+// va: 0x000A5670
+// what: Sets four numbers of an object to zero.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::Sentient::HeadTrackAngleInfo::Init)
+// sub_000A5670 (0x000A5670, 23 bytes)
+
+class Class_000A5670
+{
+public:
+    void sub_000A5670();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Clears all four values.
+void Class_000A5670::sub_000A5670()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000A5890 (0x000A5890, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -30934,6 +31464,35 @@ public:
 void* Class_000A6B90::sub_000A6B90()
 {
     return &m_Field80;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000A6D40 (0x000A6D40, 96 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Builds an object of thirty values, all set to zero.
+// ============================================================================
+// bin: xb
+// va: 0x000A6D40
+// what: Builds an object of thirty values, all set to zero.
+// tool: Claude Opus 5.5 (symcov hint: EARS::SaveGame::MemcardHandler::PlatformMessages::PlatformMessages)
+// sub_000A6D40 (0x000A6D40, 96 bytes)
+
+class Class_000A6D40
+{
+public:
+    Class_000A6D40 *sub_000A6D40();
+
+    int m_Field00[30]; // +0x00
+};
+
+// Clears every value and returns the object.
+Class_000A6D40 *Class_000A6D40::sub_000A6D40()
+{
+    for (int i = 0; i < 30; i++)
+    {
+        m_Field00[i] = 0;
+    }
+    return this;
 }
 
 // ============================================================================
@@ -32495,6 +33054,58 @@ int Class_000AB3C0::sub_000AB3C0()
     }
 L_17:
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AB410 (0x000AB410, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x000AB410
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: Projectile::SetSplashDamageValue(float))
+// sub_000AB410 (0x000AB410, 17 bytes)
+
+class Class_000AB410
+{
+public:
+    void sub_000AB410(float value);
+
+    char m_pad00[0x1AC];
+    float m_Field1AC; // +0x1AC
+};
+
+// Sets the value.
+void Class_000AB410::sub_000AB410(float value)
+{
+    m_Field1AC = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AB430 (0x000AB430, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x000AB430
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: Projectile::SetGravity(float))
+// sub_000AB430 (0x000AB430, 17 bytes)
+
+class Class_000AB430
+{
+public:
+    void sub_000AB430(float value);
+
+    char m_pad00[0x1B0];
+    float m_Field1B0; // +0x1B0
+};
+
+// Sets the value.
+void Class_000AB430::sub_000AB430(float value)
+{
+    m_Field1B0 = value;
 }
 
 // ============================================================================
@@ -34560,6 +35171,28 @@ void Class_000B8770::sub_000B8770(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B8790 (0x000B8790, 26 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether the first record's first float value (its X) is smaller than the second's, an ordering used for sorting.
+// ============================================================================
+// bin: xb
+// va: 0x000B8790
+// what: Says whether the first record's first float value (its X) is smaller than the second's, an ordering used for sorting.
+// tool: Claude Opus 5.5
+
+// A record whose first member is a float position; the rest of it is not known yet.
+struct Class_000B8790
+{
+    float m_Field00;
+};
+
+// Orders records by their leading float.
+bool sub_000B8790(const Class_000B8790 &left, const Class_000B8790 &right)
+{
+    return left.m_Field00 < right.m_Field00;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B8810 (0x000B8810, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -36005,6 +36638,48 @@ void Class_000C3A40::sub_000C3A40()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000C4360 (0x000C4360, 28 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether the first record's second float value (its Y) is smaller than the second's, an ordering used for sorting.
+// ============================================================================
+// bin: xb
+// va: 0x000C4360
+// what: Says whether the first record's second float value (its Y) is smaller than the second's, an ordering used for sorting.
+// tool: Claude Opus 5.5
+
+// A record whose second member is a float position; the rest of it is not known yet.
+struct Class_000C4360
+{
+    float m_Field00;
+    float m_Field04;
+};
+
+// Orders records by their second float.
+bool sub_000C4360(const Class_000C4360 &left, const Class_000C4360 &right)
+{
+    return left.m_Field04 < right.m_Field04;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C4380 (0x000C4380, 149 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 4-byte elements so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x000C4380
+// what: Rotates a range of 4-byte elements so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C4380.cpp --va 0x000C4380 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The rotated elements are 4 bytes wide; what they point to is not known yet.
+class Class_000C4380;
+
+// std::_Rotate for random-access iterators, instantiated for an array of Class_000C4380 pointers.
+template void std::_Rotate<Class_000C4380 **, int, Class_000C4380 *>(Class_000C4380 **, Class_000C4380 **, Class_000C4380 **, int *, Class_000C4380 **);
+
+// ============================================================================
 // [VERIFIED] sub_000C4560 (0x000C4560, 34 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -36084,6 +36759,52 @@ Class_000C4780* Class_000C4780::sub_000C4780(int a1, int a2)
     m_Field00 = (int)DAT_003A5274;
     return this;
 }
+
+// ============================================================================
+// [VERIFIED] sub_000C47B0 (0x000C47B0, 61 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Arranges an array of 4-byte elements into a heap with a caller-supplied ordering function (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x000C47B0
+// what: Arranges an array of 4-byte elements into a heap with a caller-supplied ordering function (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C47B0.cpp --va 0x000C47B0 --bin xb --match '?$_Make_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::_Make_heap with a predicate, instantiated for an array of Class_00029D30 pointers.
+template void std::_Make_heap<Class_00029D30 **, int, Class_00029D30 *, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, Class_00029D30Less, int *, Class_00029D30 **);
+
+// ============================================================================
+// [VERIFIED] sub_000C4AC0 (0x000C4AC0, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000C4AC0
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C4AC0.cpp --va 0x000C4AC0 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000C4AC0;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000C4AC0Less)(Class_000C4AC0 *, Class_000C4AC0 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000C4AC0 pointers.
+template void std::_Sort<Class_000C4AC0 **, int, Class_000C4AC0Less>(Class_000C4AC0 **, Class_000C4AC0 **, int, Class_000C4AC0Less);
 
 // ============================================================================
 // [VERIFIED] sub_000C51B0 (0x000C51B0, 93 B)
@@ -38087,6 +38808,41 @@ void __cdecl sub_000CA070(int a1, int a2, int a3)
 
     t2 = sub_002FC43E(*(int*)(a3 + 12));
     ((Object*)a1)->sub_000C79A0(sub_002FC43E(*(int*)(a3 + 8)), t2);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CA160 (0x000CA160, 52 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Builds an object from two three-number vectors, such as the two ends of a line.
+// ============================================================================
+// bin: xb
+// va: 0x000CA160
+// what: Builds an object from two three-number vectors, such as the two ends of a line.
+// tool: Claude Opus 5.5 (symcov hint: Photon::CLineSegment::CLineSegment)
+// sub_000CA160 (0x000CA160, 52 bytes)
+
+struct Struct_000CA160
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_000CA160
+{
+public:
+    Class_000CA160 *sub_000CA160(const Struct_000CA160 &first, const Struct_000CA160 &second);
+
+    Struct_000CA160 m_Field00; // +0x00
+    Struct_000CA160 m_Field0C; // +0x0C
+};
+
+// Copies both vectors in and returns the object.
+Class_000CA160 *Class_000CA160::sub_000CA160(const Struct_000CA160 &first, const Struct_000CA160 &second)
+{
+    m_Field00 = first;
+    m_Field0C = second;
+    return this;
 }
 
 // ============================================================================
@@ -44568,6 +45324,39 @@ bool Class_000E7910::sub_000E7910(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000E7920 (0x000E7920, 30 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: xb
+// va: 0x000E7920
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (symcov hint: CSA_Physical::GetEndPos)
+// sub_000E7920 (0x000E7920, 30 bytes)
+
+struct Struct_000E7920
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_000E7920
+{
+public:
+    Struct_000E7920 sub_000E7920() const;
+
+    char m_pad00[0x24];
+    Struct_000E7920 m_Field24; // +0x24
+};
+
+// Returns the stored vector by value.
+Struct_000E7920 Class_000E7920::sub_000E7920() const
+{
+    return m_Field24;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000E7940 (0x000E7940, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -45963,6 +46752,75 @@ bool __cdecl sub_000EA530(void)
 {
     return *(bool*)(DAT_004879E8 + 375);
 }
+
+// ============================================================================
+// [VERIFIED] sub_000EAA10 (0x000EAA10, 167 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 5 external relocation(s) unchecked
+// What it does: Picks a median-of-three (or of nine for large ranges) pivot among 4-byte elements with a caller-supplied ordering function (standard library sort helper).
+// ============================================================================
+// bin: xb
+// va: 0x000EAA10
+// what: Picks a median-of-three (or of nine for large ranges) pivot among 4-byte elements with a caller-supplied ordering function (standard library sort helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAA10.cpp --va 0x000EAA10 --bin xb --match '?$_Median@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAA10;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAA10Less)(Class_000EAA10 *, Class_000EAA10 *);
+
+// std::_Median with a predicate (pivot selection of std::sort), instantiated for an array of Class_000EAA10 pointers.
+template void std::_Median<Class_000EAA10 **, Class_000EAA10Less>(Class_000EAA10 **, Class_000EAA10 **, Class_000EAA10 **, Class_000EAA10Less);
+
+// ============================================================================
+// [VERIFIED] sub_000EAC60 (0x000EAC60, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000EAC60
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAC60.cpp --va 0x000EAC60 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAC60;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAC60Less)(Class_000EAC60 *, Class_000EAC60 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000EAC60 pointers.
+template void std::_Sort<Class_000EAC60 **, int, Class_000EAC60Less>(Class_000EAC60 **, Class_000EAC60 **, int, Class_000EAC60Less);
+
+// ============================================================================
+// [VERIFIED] sub_000EAD50 (0x000EAD50, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000EAD50
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAD50.cpp --va 0x000EAD50 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAD50;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAD50Less)(Class_000EAD50 *, Class_000EAD50 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000EAD50 pointers.
+template void std::_Sort<Class_000EAD50 **, int, Class_000EAD50Less>(Class_000EAD50 **, Class_000EAD50 **, int, Class_000EAD50Less);
 
 // ============================================================================
 // [VERIFIED] sub_000EB3A0 (0x000EB3A0, 67 B)
@@ -51291,6 +52149,29 @@ int __cdecl sub_0010C180(void)
 {
     return DAT_004896B0;
 }
+
+// ============================================================================
+// [VERIFIED] sub_0010C1F0 (0x0010C1F0, 177 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 8-byte records so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x0010C1F0
+// what: Rotates a range of 8-byte records so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_0010C1F0.cpp --va 0x0010C1F0 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// An 8-byte record; its fields are not known yet.
+struct Class_0010C1F0
+{
+    int m_Field00;
+    int m_Field04;
+};
+
+// std::_Rotate for random-access iterators, instantiated for Class_0010C1F0.
+template void std::_Rotate<Class_0010C1F0 *, int, Class_0010C1F0>(Class_0010C1F0 *, Class_0010C1F0 *, Class_0010C1F0 *, int *, Class_0010C1F0 *);
 
 // ============================================================================
 // [VERIFIED] sub_0010D250 (0x0010D250, 61 B)
@@ -61300,6 +62181,32 @@ int Class_0013CB10::sub_0013CB10(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0013CE60 (0x0013CE60, 26 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether a timer value in an object is still above zero.
+// ============================================================================
+// bin: xb
+// va: 0x0013CE60
+// what: Says whether a timer value in an object is still above zero.
+// tool: Claude Opus 5.5 (symcov hint: BarrageEffect::ActivationTimerIsActive)
+// sub_0013CE60 (0x0013CE60, 26 bytes)
+
+class Class_0013CE60
+{
+public:
+    bool sub_0013CE60() const;
+
+    char m_pad00[0x138];
+    float m_Field138; // +0x138
+};
+
+// True while the value is greater than zero.
+bool Class_0013CE60::sub_0013CE60() const
+{
+    return m_Field138 > 0.0f;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0013CF40 (0x0013CF40, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -62541,6 +63448,41 @@ int __cdecl sub_00150820(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001522C0 (0x001522C0, 30 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Builds a camera transition: two values cleared and a third set to one.
+// ============================================================================
+// bin: xb
+// va: 0x001522C0
+// what: Builds a camera transition: two values cleared and a third set to one.
+// tool: Claude Opus 5.5 (symcov hint: fcGlowPixelShader::fcGlowPixelShader)
+// sub_001522C0 (0x001522C0, 30 bytes)
+// The vtable it installs (0x003B3080) is CameraTransition's: CameraTransition::vfunc_00
+// (0x00152530, its deleting destructor) installs the same one, so this is CameraTransition's
+// constructor. Slot 0 keeps the shape of the matched CameraTransition::vfunc_00.
+
+class CameraTransition
+{
+public:
+    CameraTransition();
+    virtual CameraTransition* vfunc_00(int a1);
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+
+    int m_Field04;   // +0x04
+    int m_Field08;   // +0x08
+    float m_Field0C; // +0x0C
+};
+
+// Clears the first two values and sets the third to one.
+CameraTransition::CameraTransition()
+{
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 1.0f;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001522E0 (0x001522E0, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -63454,6 +64396,39 @@ L_17:
     }
 L_21:
     return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0015D790 (0x0015D790, 33 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: xb
+// va: 0x0015D790
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (symcov hint: Photon::CEnvironment::GetPanoShadowColor)
+// sub_0015D790 (0x0015D790, 33 bytes)
+
+struct Struct_0015D790
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_0015D790
+{
+public:
+    Struct_0015D790 sub_0015D790() const;
+
+    char m_pad00[0xB4];
+    Struct_0015D790 m_FieldB4; // +0xB4
+};
+
+// Returns the stored vector by value.
+Struct_0015D790 Class_0015D790::sub_0015D790() const
+{
+    return m_FieldB4;
 }
 
 // ============================================================================
@@ -66721,6 +67696,32 @@ float Class_001649A0::sub_001649A0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001649B0 (0x001649B0, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x001649B0
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: cEffectSpikes::SetScale(float))
+// sub_001649B0 (0x001649B0, 17 bytes)
+
+class Class_001649B0
+{
+public:
+    void sub_001649B0(float value);
+
+    char m_pad00[0x12C];
+    float m_Field12C; // +0x12C
+};
+
+// Sets the value.
+void Class_001649B0::sub_001649B0(float value)
+{
+    m_Field12C = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001649F0 (0x001649F0, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -66761,6 +67762,32 @@ float Class_00164A00::sub_00164A00()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00164A10 (0x00164A10, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x00164A10
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: cEffectSpikes::SetScale)
+// sub_00164A10 (0x00164A10, 17 bytes)
+
+class Class_00164A10
+{
+public:
+    void sub_00164A10(float value);
+
+    char m_pad00[0x120];
+    float m_Field120; // +0x120
+};
+
+// Sets the value.
+void Class_00164A10::sub_00164A10(float value)
+{
+    m_Field120 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00164A30 (0x00164A30, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -66779,6 +67806,32 @@ public:
 float Class_00164A30::sub_00164A30()
 {
     return m_Field124;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00164A40 (0x00164A40, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x00164A40
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Audio::AMixer::MixChannel::SetUIAttenuation)
+// sub_00164A40 (0x00164A40, 17 bytes)
+
+class Class_00164A40
+{
+public:
+    void sub_00164A40(float value);
+
+    char m_pad00[0x124];
+    float m_Field124; // +0x124
+};
+
+// Sets the value.
+void Class_00164A40::sub_00164A40(float value)
+{
+    m_Field124 = value;
 }
 
 // ============================================================================
@@ -69882,6 +70935,32 @@ void __stdcall sub_00177F60(int a1, int a2, int a3)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00177F80 (0x00177F80, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x00177F80
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: cMissionData::SetMissionTimerLimit)
+// sub_00177F80 (0x00177F80, 17 bytes)
+
+class Class_00177F80
+{
+public:
+    void sub_00177F80(float value);
+
+    char m_pad00[0x174];
+    float m_Field174; // +0x174
+};
+
+// Sets the value.
+void Class_00177F80::sub_00177F80(float value)
+{
+    m_Field174 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00177FF0 (0x00177FF0, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -72172,6 +73251,60 @@ struct Object
 void __cdecl sub_0017AA30(int a1, int a2, int a3)
 {
     ((Object*)a1)->sub_001718C0(*(int*)(a3 + 8));
+}
+
+// ============================================================================
+// [VERIFIED] sub_0017AC20 (0x0017AC20, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: If an object is given, sets its on/off flag through its own function; always returns false.
+// ============================================================================
+// bin: xb
+// va: 0x0017AC20
+// what: If an object is given, sets its on/off flag through its own function; always returns false.
+// tool: Claude Opus 5.5 (symcov hint: CustomFaceExist(RString))
+// sub_0017AC20 (0x0017AC20, 16 bytes)
+
+class Class_00177A70
+{
+public:
+    void sub_00177A70();
+};
+
+// Calls the object's method when the pointer is set, then reports false.
+bool __cdecl sub_0017AC20(Class_00177A70 *object)
+{
+    if (object)
+    {
+        object->sub_00177A70();
+    }
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0017AC30 (0x0017AC30, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: If an object is given, clears its on/off flag through its own function; always returns false.
+// ============================================================================
+// bin: xb
+// va: 0x0017AC30
+// what: If an object is given, clears its on/off flag through its own function; always returns false.
+// tool: Claude Opus 5.5 (symcov hint: CustomFaceExist(RString))
+// sub_0017AC30 (0x0017AC30, 16 bytes)
+
+class Class_00177B10
+{
+public:
+    void sub_00177B10();
+};
+
+// Calls the object's method when the pointer is set, then reports false.
+bool __cdecl sub_0017AC30(Class_00177B10 *object)
+{
+    if (object)
+    {
+        object->sub_00177B10();
+    }
+    return false;
 }
 
 // ============================================================================
@@ -81380,6 +82513,34 @@ int __cdecl sub_001C39B0(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001C4640 (0x001C4640, 25 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores two numbers in an object.
+// ============================================================================
+// bin: xb
+// va: 0x001C4640
+// what: Stores two numbers in an object.
+// tool: Claude Opus 5.5 (symcov hint: EARS::Modules::Attitude::SetBrowTilt)
+// sub_001C4640 (0x001C4640, 25 bytes)
+
+class Class_001C4640
+{
+public:
+    void sub_001C4640(float a1, float a2);
+
+    char m_pad00[0x2C];
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+};
+
+// Sets both values.
+void Class_001C4640::sub_001C4640(float a1, float a2)
+{
+    m_Field2C = a1;
+    m_Field30 = a2;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001C4660 (0x001C4660, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -83089,6 +84250,58 @@ int __cdecl sub_001D3970(int a1, int a2)
     }
     r_eax -= a1;
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001D3C50 (0x001D3C50, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x001D3C50
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: UIBarMeter::SetGrowBarLevel(float))
+// sub_001D3C50 (0x001D3C50, 17 bytes)
+
+class Class_001D3C50
+{
+public:
+    void sub_001D3C50(float value);
+
+    char m_pad00[0xE8];
+    float m_FieldE8; // +0xE8
+};
+
+// Sets the value.
+void Class_001D3C50::sub_001D3C50(float value)
+{
+    m_FieldE8 = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001D3C70 (0x001D3C70, 17 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
+// ============================================================================
+// bin: xb
+// va: 0x001D3C70
+// what: Stores one number in an object.
+// tool: Claude Opus 5.5 (symcov hint: UIBarMeter::SetShrinkRate(float))
+// sub_001D3C70 (0x001D3C70, 17 bytes)
+
+class Class_001D3C70
+{
+public:
+    void sub_001D3C70(float value);
+
+    char m_pad00[0xEC];
+    float m_FieldEC; // +0xEC
+};
+
+// Sets the value.
+void Class_001D3C70::sub_001D3C70(float value)
+{
+    m_FieldEC = value;
 }
 
 // ============================================================================
@@ -85331,6 +86544,29 @@ void __cdecl sub_001E8C10(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001E9290 (0x001E9290, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x001E9290
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_001E9290.cpp --va 0x001E9290 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_001E9290;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_001E9290Less)(Class_001E9290 *, Class_001E9290 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_001E9290 pointers.
+template void std::_Sort<Class_001E9290 **, int, Class_001E9290Less>(Class_001E9290 **, Class_001E9290 **, int, Class_001E9290Less);
+
+// ============================================================================
 // [VERIFIED] sub_001E9FF0 (0x001E9FF0, 30 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -86626,6 +87862,34 @@ void Class_001F0140::sub_001F0140(int a1, int a2, int a3, int a4)
         m_FieldC8->sub_00089AE0(a1, a2, a3, a4);
         sub_001EF960();
     }
+}
+
+// ============================================================================
+// [VERIFIED] sub_001F0540 (0x001F0540, 43 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Copies a three-number value (such as a colour) into a global setting.
+// ============================================================================
+// bin: xb
+// va: 0x001F0540
+// what: Copies a three-number value (such as a colour) into a global setting.
+// tool: Claude Opus 5.5 (symcov hint: R_SetFogColor(const Color *), link-order)
+// sub_001F0540 (0x001F0540, 43 bytes)
+
+struct Struct_001F0540
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+extern "C" Struct_001F0540 DAT_0043EBC4;
+
+// Stores the three components in the global.
+void __cdecl sub_001F0540(const Struct_001F0540 *value)
+{
+    DAT_0043EBC4.m_Field00 = value->m_Field00;
+    DAT_0043EBC4.m_Field04 = value->m_Field04;
+    DAT_0043EBC4.m_Field08 = value->m_Field08;
 }
 
 // ============================================================================
@@ -92671,6 +93935,34 @@ Class_002116F0* Class_002116F0::sub_002116F0(int a1, int a2)
     m_Field00 = (int)DAT_003CF0A4;
     m_Field24.sub_000C0CF0();
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00211990 (0x00211990, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value stored in the object to another function and returns its result.
+// ============================================================================
+// bin: xb
+// va: 0x00211990
+// what: Passes a value stored in the object to another function and returns its result.
+// tool: Claude Opus 5.5 (symcov hint: TAIFollow::GetFollowCharacter)
+// sub_00211990 (0x00211990, 16 bytes)
+
+extern "C" void *__cdecl sub_0002AC90(int handle);
+
+class Class_00211990
+{
+public:
+    void *sub_00211990();
+
+    char m_pad00[0x100];
+    int m_Field100; // +0x100
+};
+
+// Looks the stored value up.
+void *Class_00211990::sub_00211990()
+{
+    return sub_0002AC90(m_Field100);
 }
 
 // ============================================================================
@@ -101894,6 +103186,60 @@ Class_00242D20* Class_00242D20::sub_00242D20(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00242D30 (0x00242D30, 19 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether two 4-byte handles hold the same value (an equality operator).
+// ============================================================================
+// bin: xb
+// va: 0x00242D30
+// what: Says whether two 4-byte handles hold the same value (an equality operator).
+// tool: Claude Opus 5.5
+
+// This part of the program was built with frame pointers.
+#pragma optimize("y", off)
+
+// A 4-byte handle compared by value; what it refers to is not known yet.
+class Class_00242D30
+{
+public:
+    bool operator==(const Class_00242D30 &other) const;
+
+    void *m_Field00;
+};
+
+bool Class_00242D30::operator==(const Class_00242D30 &other) const
+{
+    return m_Field00 == other.m_Field00;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00242D50 (0x00242D50, 18 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether this 4-byte record's unsigned key is smaller than another's; the sort at 0x0007F600 orders its records with it.
+// ============================================================================
+// bin: xb
+// va: 0x00242D50
+// what: Says whether this 4-byte record's unsigned key is smaller than another's; the sort at 0x0007F600 orders its records with it.
+// tool: Claude Opus 5.5
+
+// This part of the program was built with frame pointers.
+#pragma optimize("y", off)
+
+// A 4-byte record ordered by an unsigned key (sub_0007F3D0, the insertion sort under sub_0007F600, calls this).
+class Class_0007F600
+{
+public:
+    bool operator<(const Class_0007F600 &other) const;
+
+    unsigned int m_Key;
+};
+
+bool Class_0007F600::operator<(const Class_0007F600 &other) const
+{
+    return m_Key < other.m_Key;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00242DA0 (0x00242DA0, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -102288,6 +103634,39 @@ public:
 void Class_00244040::sub_00244040()
 {
     sub_00243FA0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00244170 (0x00244170, 59 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Scales a three-number vector so its length becomes one.
+// ============================================================================
+// bin: xb
+// va: 0x00244170
+// what: Scales a three-number vector so its length becomes one.
+// tool: Claude Opus 5.5 (symcov hint: FcGenericVector<float>::Normalise)
+// sub_00244170 (0x00244170, 59 bytes)
+
+extern "C" double __cdecl sqrt(double);
+
+class Class_00244170
+{
+public:
+    void sub_00244170();
+
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+// Multiplies every component by one over the length.
+void Class_00244170::sub_00244170()
+{
+    float length = (float)sqrt(m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08);
+    float scale = 1.0f / length;
+    m_Field00 *= scale;
+    m_Field04 *= scale;
+    m_Field08 *= scale;
 }
 
 // ============================================================================
@@ -109311,6 +110690,25 @@ void __cdecl sub_00283F00(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00283FE0 (0x00283FE0, 34 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes its four arguments, the last a 64-bit number, unchanged to another function.
+// ============================================================================
+// bin: xb
+// va: 0x00283FE0
+// what: Passes its four arguments, the last a 64-bit number, unchanged to another function.
+// tool: Claude Opus 5.5 (symcov hint: File_ReadAsyncEx)
+// sub_00283FE0 (0x00283FE0, 34 bytes)
+
+extern "C" int __cdecl sub_00283F50(int a1, int a2, int a3, __int64 a4);
+
+// Forwards all four arguments. MSVC 7.1 does not turn the call into a jump because of the 64-bit argument.
+int __cdecl sub_00283FE0(int a1, int a2, int a3, __int64 a4)
+{
+    return sub_00283F50(a1, a2, a3, a4);
+}
+
+// ============================================================================
 // [VERIFIED] sub_00284070 (0x00284070, 36 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -110933,6 +112331,29 @@ void Class_0029BE40::sub_0029BE40()
         sub_00025400(r_esi, 24, 32, (int)sub_0029BA60);
         r_edi -= 1;
     } while (r_edi);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029C290 (0x0029C290, 22 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores two numbers in a pair of global settings.
+// ============================================================================
+// bin: xb
+// va: 0x0029C290
+// what: Stores two numbers in a pair of global settings.
+// tool: Claude Opus 5.5 (symcov hint: RpTieSetFreeListCreateParams, link-order)
+// sub_0029C290 (0x0029C290, 22 bytes)
+// The unit keeps frame pointers (push ebp; mov ebp, esp).
+#pragma optimize("y", off)
+
+extern "C" int DAT_0045EAB4;
+extern "C" int DAT_0045EAB8;
+
+// Sets both globals.
+void __cdecl sub_0029C290(int a1, int a2)
+{
+    DAT_0045EAB4 = a1;
+    DAT_0045EAB8 = a2;
 }
 
 // ============================================================================
@@ -114331,6 +115752,30 @@ void Class_002BE680::sub_002BE680()
 }
 
 // ============================================================================
+// [VERIFIED] sub_002BE6A0 (0x002BE6A0, 22 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029C290 (0x0029C290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002BE6A0
+// what: Stores two numbers in a pair of global settings.
+// tool: Claude Opus 5.5 (symcov hint: RpTieSetFreeListCreateParams, link-order)
+// sub_002BE6A0 (0x002BE6A0, 22 bytes)
+// The unit keeps frame pointers (push ebp; mov ebp, esp).
+#pragma optimize("y", off)
+
+extern "C" int DAT_00461A58;
+extern "C" int DAT_00461A5C;
+
+// Sets both globals.
+void __cdecl sub_002BE6A0(int a1, int a2)
+{
+    DAT_00461A58 = a1;
+    DAT_00461A5C = a2;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002BE6C0 (0x002BE6C0, 37 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -114885,6 +116330,78 @@ int __cdecl sub_002C67E0(int a1, int a2, int a3, int a4)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002C6A20 (0x002C6A20, 35 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies a block of memory for the PNG image library after checking that its length fits (libpng png_memcpy_check).
+// ============================================================================
+// bin: xb
+// va: 0x002C6A20
+// what: Copies a block of memory for the PNG image library after checking that its length fits (libpng png_memcpy_check).
+// tool: Claude Opus 5.5
+
+#include <string.h>
+
+// libpng's types, as png.h / pngconf.h declare them.
+typedef unsigned long png_uint_32;
+typedef size_t png_size_t;
+typedef void *png_voidp;
+typedef struct png_struct_def png_struct;
+typedef png_struct *png_structp;
+
+#define png_memcpy memcpy
+
+extern "C" void __cdecl png_error(png_structp png_ptr, const char *error_message);
+
+// pngmem.c: memcpy that refuses a length the platform's size type cannot hold.
+extern "C" png_voidp __cdecl png_memcpy_check(png_structp png_ptr, png_voidp s1, png_voidp s2,
+    png_uint_32 length)
+{
+    png_size_t size;
+
+    size = (png_size_t)length;
+    if ((png_uint_32)size != length)
+        png_error(png_ptr, "Overflow in png_memcpy_check.");
+
+    return (png_memcpy(s1, s2, size));
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C6A50 (0x002C6A50, 49 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills a block of memory for the PNG image library after checking that its length fits (libpng png_memset_check).
+// ============================================================================
+// bin: xb
+// va: 0x002C6A50
+// what: Fills a block of memory for the PNG image library after checking that its length fits (libpng png_memset_check).
+// tool: Claude Opus 5.5
+
+#include <string.h>
+
+// libpng's types, as png.h / pngconf.h declare them.
+typedef unsigned long png_uint_32;
+typedef size_t png_size_t;
+typedef void *png_voidp;
+typedef struct png_struct_def png_struct;
+typedef png_struct *png_structp;
+
+#define png_memset memset
+
+extern "C" void __cdecl png_error(png_structp png_ptr, const char *error_message);
+
+// pngmem.c: memset that refuses a length the platform's size type cannot hold.
+extern "C" png_voidp __cdecl png_memset_check(png_structp png_ptr, png_voidp s1, int value,
+    png_uint_32 length)
+{
+    png_size_t size;
+
+    size = (png_size_t)length;
+    if ((png_uint_32)size != length)
+        png_error(png_ptr, "Overflow in png_memset_check.");
+
+    return (png_memset(s1, value, size));
+}
+
+// ============================================================================
 // [VERIFIED] sub_002C6A90 (0x002C6A90, 35 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -115106,6 +116623,63 @@ int Class_002CC120::sub_002CC120(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002CCCB0 (0x002CCCB0, 297 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Updates an Adler-32 checksum with a block of bytes (zlib adler32), used to check compressed data.
+// ============================================================================
+// bin: xb
+// va: 0x002CCCB0
+// what: Updates an Adler-32 checksum with a block of bytes (zlib adler32), used to check compressed data.
+// tool: Claude Opus 5.5
+
+// zlib 1.2.1's adler32.c. Types and macros as zconf.h / zlib.h / adler32.c declare them.
+// RULE-EXCEPTION: R32, the body keeps zlib's published layout so it can be compared with the library.
+typedef unsigned char Bytef;
+typedef unsigned int uInt;
+typedef unsigned long uLong;
+
+#define Z_NULL 0
+#define ZEXPORT
+
+#define BASE 65521UL    /* largest prime smaller than 65536 */
+#define NMAX 5552
+/* NMAX is the largest n such that 255n(n+1)/2 + (n+1)(BASE-1) <= 2^32-1 */
+
+#define DO1(buf,i)  {s1 += buf[i]; s2 += s1;}
+#define DO2(buf,i)  DO1(buf,i); DO1(buf,i+1);
+#define DO4(buf,i)  DO2(buf,i); DO2(buf,i+2);
+#define DO8(buf,i)  DO4(buf,i); DO4(buf,i+4);
+#define DO16(buf)   DO8(buf,0); DO8(buf,8);
+
+#define MOD(a) a %= BASE
+
+extern "C" uLong ZEXPORT adler32(uLong adler, const Bytef *buf, uInt len)
+{
+    unsigned long s1 = adler & 0xffff;
+    unsigned long s2 = (adler >> 16) & 0xffff;
+    int k;
+
+    if (buf == Z_NULL) return 1L;
+
+    while (len > 0) {
+        k = len < NMAX ? (int)len : NMAX;
+        len -= k;
+        while (k >= 16) {
+            DO16(buf);
+            buf += 16;
+            k -= 16;
+        }
+        if (k != 0) do {
+            s1 += *buf++;
+            s2 += s1;
+        } while (--k);
+        MOD(s1);
+        MOD(s2);
+    }
+    return (s2 << 16) | s1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002CE2A0 (0x002CE2A0, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -115219,6 +116793,30 @@ Class_002CE640* Class_002CE640::sub_002CE640(int a1)
         sub_002CE4E0(a1);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002CE740 (0x002CE740, 18 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether two values differ, by asking the comparison that says whether they are equal.
+// ============================================================================
+// bin: xb
+// va: 0x002CE740
+// what: Says whether two values differ, by asking the comparison that says whether they are equal.
+// tool: Claude Opus 5.5 (symcov hint: EAStringC::operator!=)
+// sub_002CE740 (0x002CE740, 18 bytes)
+
+class Class_002CE660
+{
+public:
+    bool sub_002CE660(const Class_002CE660 &other) const;
+    bool sub_002CE740(const Class_002CE660 &other) const;
+};
+
+// The opposite of the equality test.
+bool Class_002CE660::sub_002CE740(const Class_002CE660 &other) const
+{
+    return !sub_002CE660(other);
 }
 
 // ============================================================================
@@ -117098,6 +118696,138 @@ int __cdecl sub_002D3780(int a1, int a2)
 {
     *(int*)(*(int*)(a1 + 16) + 12) = a2;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37A0 (0x002D37A0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value stored inside the given record, with a number, on to another function.
+// ============================================================================
+// bin: xb
+// va: 0x002D37A0
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_002D37A0 (0x002D37A0, 16 bytes)
+
+struct Struct_002D37A0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002DF360(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_002D37A0(Struct_002D37A0 *record, float value)
+{
+    return sub_002DF360(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37B0 (0x002D37B0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value stored inside the given record, with two more arguments, on to another function.
+// ============================================================================
+// bin: xb
+// va: 0x002D37B0
+// what: Passes a value stored inside the given record, with two more arguments, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceDiff)
+// sub_002D37B0 (0x002D37B0, 16 bytes)
+
+struct Struct_002D37B0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" void __cdecl sub_002DF370(int handle, int, unsigned int);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+void __cdecl sub_002D37B0(Struct_002D37B0 *record, int a2, unsigned int count)
+{
+    sub_002DF370(record->m_Field08, a2, count);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37C0 (0x002D37C0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value stored inside the given record, with two more arguments, on to another function.
+// ============================================================================
+// bin: xb
+// va: 0x002D37C0
+// what: Passes a value stored inside the given record, with two more arguments, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceDiff)
+// sub_002D37C0 (0x002D37C0, 16 bytes)
+
+struct Struct_002D37C0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" void __cdecl sub_002DF3C0(int handle, int, int);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+void __cdecl sub_002D37C0(Struct_002D37C0 *record, int a2, int a3)
+{
+    sub_002DF3C0(record->m_Field08, a2, a3);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37D0 (0x002D37D0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002D37D0
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_002D37D0 (0x002D37D0, 16 bytes)
+
+struct Struct_002D37D0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002DF450(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_002D37D0(Struct_002D37D0 *record, float value)
+{
+    return sub_002DF450(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D37E0 (0x002D37E0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002D37E0
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_002D37E0 (0x002D37E0, 16 bytes)
+
+struct Struct_002D37E0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_002DF470(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_002D37E0(Struct_002D37E0 *record, float value)
+{
+    return sub_002DF470(record->m_Field08, value);
 }
 
 // ============================================================================
