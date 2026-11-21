@@ -167,9 +167,10 @@ def check_compiler(r: Report, compile_test: bool = True) -> None:
               "it sets the compiler up by itself (or run: python portal/scripts/setup_msvc71.py VCToolkitSetup.exe)",
               "Until then you can still work on decomp.me (the decomp.me button in the portal).")
         return
-    if os.name != "nt" and shutil.which("wine") is None:
-        r.add("fix", "The compiler is there, but Wine isn't installed (cl.exe is a Windows program)",
-              "Install Wine (macOS: brew install --cask wine-stable; Debian/Ubuntu: sudo apt install wine), then try again.")
+    if not MV.runner_name():
+        r.add("fix", "The compiler is there, but nothing here can run it (cl.exe is a Windows program)",
+              "Linux: python3 portal/scripts/setup_wibo.py (downloads wibo, a small loader decomp.me uses). "
+              "macOS: install Wine (brew install --cask wine-stable). Then try again.")
         return
     build = MV.compiler_build(bin_dir)
     if build not in ACCEPTED_BUILDS:
@@ -182,7 +183,8 @@ def check_compiler(r: Report, compile_test: bool = True) -> None:
         return
     res = MV.compile_cpp("int scarface_doctor_test() { return 1; }", "/nologo /c /O2")
     if res.ok and res.obj:
-        r.add("ok", f"Compiler: cl.exe {build}, and a test compile works")
+        via = {"wibo": " (through wibo)", "wine": " (through Wine)"}.get(MV.runner_name(), "")
+        r.add("ok", f"Compiler: cl.exe {build}{via}, and a test compile works")
     else:
         lines = (res.error or "no object file").strip().splitlines()
         r.add("fix", f"Compiler: cl.exe {build} is there, but a one-line test didn't compile",

@@ -4,7 +4,7 @@ Re-verify every function this repository claims to have matched, using the same 
 portal (portal/tools/msvc_verify.py), and rebuild reports/verified_registry.json from the results.
 
     python portal/scripts/reverify_all.py              # Windows: uses portal/tools/msvc71/bin/cl.exe
-    python3 portal/scripts/reverify_all.py --jobs 8    # Linux/macOS: runs cl.exe under Wine
+    python3 portal/scripts/reverify_all.py --jobs 8    # Linux/macOS: runs cl.exe under wibo or Wine
 
 A function counts as VERIFIED only if:
   * its C++ passes the genuine-C++ policy (no __asm/_emit/naked/section tricks),

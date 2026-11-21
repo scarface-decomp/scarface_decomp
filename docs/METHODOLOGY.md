@@ -56,8 +56,9 @@ executable, `.rdata` and `.data` included.
   `extern "C"` declarations. Those relocations were checked against MSVC's own for 243 verified
   functions (all offsets and types agree). A decomp.me score is a helper; the portal decides.
 * `portal/scripts/setup_msvc71.py` installs `bin/`, `include/` and `lib/` from your own `VCToolkitSetup.exe`.
-  On Linux and macOS the compiler runs under Wine (32-bit prefix). `SCARFACE_MSVC_BIN` overrides the
-  location.
+  On Linux the compiler runs under wibo (`portal/scripts/setup_wibo.py`; all 16,096
+  recorded matches came out the same under it), on macOS under Wine (32-bit prefix). `SCARFACE_MSVC_BIN` overrides the
+  location, `SCARFACE_WIBO` names a wibo binary, `SCARFACE_USE_WINE=1` forces Wine.
 
 ## 3. Function boundaries
 

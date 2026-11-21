@@ -19,7 +19,7 @@ import msvc_verify as MV  # noqa: E402
 
 
 def have_compiler() -> bool:
-    """cl.exe is installed AND runs here (on Linux/macOS that needs Wine)."""
+    """cl.exe is installed AND runs here (on Linux that needs wibo or Wine, on macOS Wine)."""
     if MV.find_msvc71_bin() is None:
         return False
     try:
@@ -29,7 +29,7 @@ def have_compiler() -> bool:
 
 
 needs_compiler = pytest.mark.skipif(not have_compiler(), reason="cl.exe 13.10.3052 not installed or cannot run here "
-                                                                "(portal/scripts/setup_msvc71.py; Wine on Linux/macOS)")
+                                                                "(portal/scripts/setup_msvc71.py; wibo or Wine off Windows)")
 needs_pc = pytest.mark.skipif(not (ROOT / "binaries" / "Scarface.exe").exists(), reason="binaries/Scarface.exe missing")
 needs_xbox = pytest.mark.skipif(not (ROOT / "binaries" / "default.xbe").exists(), reason="binaries/default.xbe missing")
 
