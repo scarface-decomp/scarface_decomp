@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtTODFactor.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtTODFactor.cpp (11 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 17 functions matched (29.41%). NOT COMPLETE YET.
-// The 12 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 11 of 17 functions matched (64.71%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -42,6 +42,62 @@ int d3dExtTODFactor::vfunc_01(int a1, int a2, int a3)
 }
 
 // ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_04 (0x00263ED0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a value in the global at 0x004BD4BC.
+// ============================================================================
+// bin: xb
+// va: 0x00263ED0
+// what: Stores a value in the global at 0x004BD4BC.
+// tool: Claude Opus 5.5 (generated from the shape 'set int global (framed)', checked on decomp.me preset 266 by example)
+#pragma optimize("y", off)
+
+extern "C" int DAT_004BD4BC;
+
+void __stdcall sub_00263ED0(int value)
+{
+    DAT_004BD4BC = value;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_05 (0x00263EE0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtTODFactor::vfunc_04 (0x00263ED0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00263EE0
+// what: Stores a value in the global at 0x0045C328.
+// tool: Claude Opus 5.5 (generated from the shape 'set int global (framed)', checked on decomp.me preset 266 by example)
+#pragma optimize("y", off)
+
+extern "C" int DAT_0045C328;
+
+void __stdcall sub_00263EE0(int value)
+{
+    DAT_0045C328 = value;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_06 (0x00263EF0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtTODFactor::vfunc_04 (0x00263ED0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00263EF0
+// what: Stores a value in the global at 0x0045C32C.
+// tool: Claude Opus 5.5 (generated from the shape 'set int global (framed)', checked on decomp.me preset 266 by example)
+#pragma optimize("y", off)
+
+extern "C" int DAT_0045C32C;
+
+void __stdcall sub_00263EF0(int value)
+{
+    DAT_0045C32C = value;
+}
+
+// ============================================================================
 // [VERIFIED] pure3d::d3dExtTODFactor::vfunc_10 (0x00263F60, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // What it does: Stores a yes/no setting in a global and returns it.
@@ -58,6 +114,63 @@ bool __stdcall sub_00263F60(bool a1)
 {
     DAT_004BD4C1 = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_12 (0x00263FA0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtTODFactor::vfunc_04 (0x00263ED0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00263FA0
+// what: Stores a value in the global at 0x004BD500.
+// tool: Claude Opus 5.5 (generated from the shape 'set int global (framed)', checked on decomp.me preset 266 by example)
+#pragma optimize("y", off)
+
+extern "C" int DAT_004BD500;
+
+void __stdcall sub_00263FA0(int value)
+{
+    DAT_004BD500 = value;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_13 (0x00263FB0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtTODFactor::vfunc_04 (0x00263ED0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00263FB0
+// what: Stores a value in the global at 0x0045C33C.
+// tool: Claude Opus 5.5 (generated from the shape 'set int global (framed)', checked on decomp.me preset 266 by example)
+#pragma optimize("y", off)
+
+extern "C" int DAT_0045C33C;
+
+void __stdcall sub_00263FB0(int value)
+{
+    DAT_0045C33C = value;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_15 (0x00263FC0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtTODFactor::vfunc_04 (0x00263ED0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00263FC0
+// what: Stores a value in the global at 0x004BD4C8.
+// tool: Claude Opus 5.5 (generated from the shape 'set int global (framed)', checked on decomp.me preset 266 by example)
+#pragma optimize("y", off)
+
+extern "C" int DAT_004BD4C8;
+
+void __stdcall sub_00263FC0(int value)
+{
+    DAT_004BD4C8 = value;
 }
 
 // ============================================================================

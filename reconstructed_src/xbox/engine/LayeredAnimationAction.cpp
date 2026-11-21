@@ -1,13 +1,35 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/LayeredAnimationAction.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/LayeredAnimationAction.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 4 functions matched (50.00%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 4 functions matched (75.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] LayeredAnimationAction::vfunc_04 (0x000E5280, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x10.
+// ============================================================================
+// bin: xb
+// va: 0x000E5280
+// what: Reads flag bit 0 of the byte at +0x10.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_000E5280
+{
+public:
+    bool sub_000E5280();
+    char m_pad00[0x10];
+    unsigned char m_Flag0 : 1;
+};
+
+bool Class_000E5280::sub_000E5280()
+{
+    return m_Flag0;
+}
 
 // ============================================================================
 // [VERIFIED] LayeredAnimationAction::vfunc_08 (0x000E52F0, 8 B)

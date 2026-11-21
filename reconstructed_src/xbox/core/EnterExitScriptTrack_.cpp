@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/EnterExitScriptTrack_.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/EnterExitScriptTrack_.cpp (11 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 12 functions matched (75.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 11 of 12 functions matched (91.67%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -104,6 +104,52 @@ public:
 template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_23()
 {
     return m_Field0C;
+}
+
+// ============================================================================
+// [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_24 (0x000226F0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0xC and returns true.
+// ============================================================================
+// bin: xb
+// va: 0x000226F0
+// what: Stores a number at +0xC and returns true.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field, return true', checked on decomp.me preset 266 by example)
+class Class_000226F0
+{
+public:
+    bool sub_000226F0(float value);
+    char m_pad00[0xC];
+    float m_FieldC; // +0xC
+};
+
+bool Class_000226F0::sub_000226F0(float value)
+{
+    m_FieldC = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_26 (0x00022700, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x10 and returns true.
+// ============================================================================
+// bin: xb
+// va: 0x00022700
+// what: Stores a number at +0x10 and returns true.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field, return true', checked on decomp.me preset 266 by example)
+class Class_00022700
+{
+public:
+    bool sub_00022700(float value);
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+bool Class_00022700::sub_00022700(float value)
+{
+    m_Field10 = value;
+    return true;
 }
 
 // ============================================================================

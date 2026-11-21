@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/EnterExitScriptTrack_.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/EnterExitScriptTrack_.cpp (11 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 12 functions matched (75.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 11 of 12 functions matched (91.67%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -111,6 +111,30 @@ template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>:
 }
 
 // ============================================================================
+// [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_24 (0x00020380, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_24 (0x000226F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00020380
+// what: Stores a number at +0xC and returns true.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field, return true', checked on decomp.me preset 266 by example)
+class Class_00020380
+{
+public:
+    bool sub_00020380(float value);
+    char m_pad00[0xC];
+    float m_FieldC; // +0xC
+};
+
+bool Class_00020380::sub_00020380(float value)
+{
+    m_FieldC = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_25 (0x00020390, 4 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -158,6 +182,30 @@ public:
 template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_25()
 {
     return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_26 (0x000203A0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_26 (0x00022700), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000203A0
+// what: Stores a number at +0x10 and returns true.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field, return true', checked on decomp.me preset 266 by example)
+class Class_000203A0
+{
+public:
+    bool sub_000203A0(float value);
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+bool Class_000203A0::sub_000203A0(float value)
+{
+    m_Field10 = value;
+    return true;
 }
 
 // ============================================================================

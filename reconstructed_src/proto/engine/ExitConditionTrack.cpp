@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/ExitConditionTrack.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/ExitConditionTrack.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 8 functions matched (62.50%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 8 functions matched (87.50%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -131,6 +131,30 @@ int ExitConditionTrack::vfunc_08(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] ExitConditionTrack::vfunc_26 (0x000D6BE0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as ExitConditionTrack::vfunc_26 (0x000E80A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000D6BE0
+// what: Stores a number at +0x20 and returns true.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field, return true', checked on decomp.me preset 266 by example)
+class Class_000D6BE0
+{
+public:
+    bool sub_000D6BE0(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+bool Class_000D6BE0::sub_000D6BE0(float value)
+{
+    m_Field20 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] ExitConditionTrack::vfunc_33 (0x000D6BF0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -210,5 +234,29 @@ ExitConditionTrack* ExitConditionTrack::vfunc_03(int a1)
         sub_001FCF60((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] ExitConditionTrack::vfunc_24 (0x000D7800, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as ExitConditionTrack::vfunc_24 (0x000E9220), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000D7800
+// what: Stores a number at +0x1C and returns true.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field, return true', checked on decomp.me preset 266 by example)
+class Class_000D7800
+{
+public:
+    bool sub_000D7800(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+bool Class_000D7800::sub_000D7800(float value)
+{
+    m_Field1C = value;
+    return true;
 }
 

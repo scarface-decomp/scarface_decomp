@@ -5,356 +5,356 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-21T04:19:32Z</updated>
+  <updated>2026-11-21T04:53:18Z</updated>
   <author><name>Scarface decomp contributors</name></author>
   <entry>
-    <title>pure3d::CompressedQuaternionChannel&lt;math::CompressedQuaternion3&gt;::vfunc_00 (Xbox, 46 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028A4A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028A4A0</id>
-    <updated>2026-11-21T04:19:32Z</updated>
-    <summary>0x0028A4A0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002DE790 (Xbox, 5 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002DE790"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002DE790</id>
+    <updated>2026-11-21T04:53:18Z</updated>
+    <summary>Returns the 16-bit value at +0x34. 0x002DE790 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::CompressedQuaternionChannel&lt;math::CompressedQuaternion4&gt;::vfunc_00 (Xbox, 46 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028A470"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028A470</id>
-    <updated>2026-11-21T04:19:31Z</updated>
-    <summary>0x0028A470 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dContext::vfunc_09 (Xbox, 10 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029D590"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029D590</id>
+    <updated>2026-11-21T04:53:06Z</updated>
+    <summary>Returns the number at +0x8 of the object pointed to at +0x14C. 0x0029D590 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::CompressedQuaternionChannel&lt;math::CompressedQuaternion6&gt;::vfunc_00 (Xbox, 46 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028A440"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028A440</id>
-    <updated>2026-11-21T04:19:31Z</updated>
-    <summary>0x0028A440 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::frontend::Screen::vfunc_14 (Xbox prototype, 6 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00249E20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00249E20</id>
+    <updated>2026-11-21T04:52:55Z</updated>
+    <summary>0x00249E20 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::CompressedQuaternionChannel&lt;math::CompressedQuaternion8&gt;::vfunc_00 (Xbox, 46 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028A410"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028A410</id>
-    <updated>2026-11-21T04:19:20Z</updated>
-    <summary>Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to. 0x0028A410 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::frontend::Screen::vfunc_14 (Xbox, 6 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028D580"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028D580</id>
+    <updated>2026-11-21T04:52:44Z</updated>
+    <summary>Reads flag bit 0 of the byte at +0x24. 0x0028D580 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::RoundedRectangle::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028E390"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028E390</id>
-    <updated>2026-11-21T04:19:08Z</updated>
-    <summary>0x0028E390 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00232720 (Xbox prototype, 9 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00232720"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00232720</id>
+    <updated>2026-11-21T04:52:33Z</updated>
+    <summary>0x00232720 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Parent::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028D9A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028D9A0</id>
-    <updated>2026-11-21T04:19:08Z</updated>
-    <summary>0x0028D9A0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dExtXboxControl::vfunc_02 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002A0710"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002A0710</id>
+    <updated>2026-11-21T04:52:21Z</updated>
+    <summary>0x002A0710 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::prop::StateProp::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00281910"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00281910</id>
-    <updated>2026-11-21T04:18:57Z</updated>
-    <summary>0x00281910 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dExtXboxControl::vfunc_01 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002A0700"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002A0700</id>
+    <updated>2026-11-21T04:52:10Z</updated>
+    <summary>0x002A0700 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::CompositeDrawable::ActivePrimitiveList::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00277C10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00277C10</id>
-    <updated>2026-11-21T04:18:57Z</updated>
-    <summary>0x00277C10 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::_pddiExtMemRegistration::vfunc_01 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029ED50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029ED50</id>
+    <updated>2026-11-21T04:52:10Z</updated>
+    <summary>0x0029ED50 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::CompositeDrawable::ActiveControllerList::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00277210"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00277210</id>
-    <updated>2026-11-21T04:18:57Z</updated>
-    <summary>0x00277210 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::pddiDevice::vfunc_13 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029E590"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029E590</id>
+    <updated>2026-11-21T04:52:10Z</updated>
+    <summary>0x0029E590 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::d3dExtTODFactor::vfunc_16 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00263FE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00263FE0</id>
-    <updated>2026-11-21T04:18:57Z</updated>
-    <summary>Stores a yes/no setting in a global and returns it. 0x00263FE0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00280640 (Xbox, 9 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00280640"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00280640</id>
+    <updated>2026-11-21T04:52:10Z</updated>
+    <summary>Reads flag bit 2 of the byte at +0x38. 0x00280640 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::prop::StatePropData::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0026EB50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0026EB50</id>
-    <updated>2026-11-21T04:18:45Z</updated>
-    <summary>0x0026EB50 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dExtTODFactor::vfunc_15 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00263FC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00263FC0</id>
+    <updated>2026-11-21T04:52:10Z</updated>
+    <summary>0x00263FC0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::prop::StateData::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0026EA70"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0026EA70</id>
-    <updated>2026-11-21T04:18:45Z</updated>
-    <summary>0x0026EA70 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dExtTODFactor::vfunc_13 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00263FB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00263FB0</id>
+    <updated>2026-11-21T04:52:09Z</updated>
+    <summary>0x00263FB0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::d3dExtTODFactor::vfunc_10 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00263F60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00263F60</id>
-    <updated>2026-11-21T04:18:45Z</updated>
-    <summary>Stores a yes/no setting in a global and returns it. 0x00263F60 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dExtTODFactor::vfunc_12 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00263FA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00263FA0</id>
+    <updated>2026-11-21T04:52:09Z</updated>
+    <summary>0x00263FA0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::SpriteParticleEmitter::OverLifeAttributes::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0025EBB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0025EBB0</id>
-    <updated>2026-11-21T04:18:45Z</updated>
-    <summary>0x0025EBB0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dExtTODFactor::vfunc_06 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00263EF0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00263EF0</id>
+    <updated>2026-11-21T04:52:09Z</updated>
+    <summary>0x00263EF0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::prop::EffectQueue::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002548F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002548F0</id>
-    <updated>2026-11-21T04:18:45Z</updated>
-    <summary>0x002548F0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dExtTODFactor::vfunc_05 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00263EE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00263EE0</id>
+    <updated>2026-11-21T04:52:09Z</updated>
+    <summary>0x00263EE0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Project::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00250DD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00250DD0</id>
-    <updated>2026-11-21T04:18:44Z</updated>
-    <summary>0x00250DD0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>pure3d::d3dExtTODFactor::vfunc_04 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00263ED0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00263ED0</id>
+    <updated>2026-11-21T04:51:58Z</updated>
+    <summary>Stores a value in the global at 0x004BD4BC. 0x00263ED0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Sprite::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0024B8C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0024B8C0</id>
-    <updated>2026-11-21T04:18:33Z</updated>
-    <summary>Deleting destructor: runs the destructor, then frees the object when asked to. 0x0024B8C0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>core::ControllerXBox::vfunc_04 (Xbox prototype, 11 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00204FA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00204FA0</id>
+    <updated>2026-11-21T04:51:47Z</updated>
+    <summary>0x00204FA0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Layer::vfunc_03 (Xbox, 39 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028E430"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028E430</id>
-    <updated>2026-11-21T04:18:22Z</updated>
-    <summary>0x0028E430 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>core::ControllerXBox::vfunc_04 (Xbox, 11 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00247C00"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00247C00</id>
+    <updated>2026-11-21T04:51:35Z</updated>
+    <summary>Says whether the pointer at +0x8 is set. 0x00247C00 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Group::vfunc_03 (Xbox, 39 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028E3E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028E3E0</id>
-    <updated>2026-11-21T04:18:22Z</updated>
-    <summary>0x0028E3E0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_001ECBB0 (Xbox prototype, 5 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001ECBB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001ECBB0</id>
+    <updated>2026-11-21T04:51:25Z</updated>
+    <summary>0x001ECBB0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Child::vfunc_03 (Xbox, 39 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0028D4D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0028D4D0</id>
-    <updated>2026-11-21T04:18:10Z</updated>
-    <summary>0x0028D4D0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_0022D880 (Xbox, 5 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0022D880"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0022D880</id>
+    <updated>2026-11-21T04:51:14Z</updated>
+    <summary>Returns the 16-bit value at +0x60. 0x0022D880 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Page::vfunc_03 (Xbox, 39 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00250E20"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00250E20</id>
-    <updated>2026-11-21T04:18:10Z</updated>
-    <summary>0x00250E20 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00217740 (Xbox, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00217740"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00217740</id>
+    <updated>2026-11-21T04:51:02Z</updated>
+    <summary>Reads flag bit 6 of the byte at +0xE9. 0x00217740 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Text::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00249C40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00249C40</id>
-    <updated>2026-11-21T04:18:10Z</updated>
-    <summary>Deleting destructor: runs the destructor, then frees the object when asked to. 0x00249C40 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00217710 (Xbox, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00217710"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00217710</id>
+    <updated>2026-11-21T04:50:51Z</updated>
+    <summary>Reads flag bit 5 of the byte at +0xE9. 0x00217710 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::frontend::Drawable::vfunc_03 (Xbox, 39 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00248C00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00248C00</id>
-    <updated>2026-11-21T04:17:58Z</updated>
-    <summary>Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to. 0x00248C00 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00217620 (Xbox, 9 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00217620"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00217620</id>
+    <updated>2026-11-21T04:50:40Z</updated>
+    <summary>Reads flag bit 0 of the byte at +0xE9. 0x00217620 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>pure3d::ParticleAllocatorTemplate&lt;pure3d::SpriteParticle&gt;::vfunc_03 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00271A10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00271A10</id>
-    <updated>2026-11-21T04:17:47Z</updated>
-    <summary>0x00271A10 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>AirplaneObject::vfunc_50 (Xbox, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00213560"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00213560</id>
+    <updated>2026-11-21T04:50:28Z</updated>
+    <summary>Reads flag bit 3 of the byte at +0xE9. 0x00213560 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>fight::ParamString&lt;fight::EnterExitScriptTrack&gt;::vfunc_00 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0023E8B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0023E8B0</id>
-    <updated>2026-11-21T04:17:36Z</updated>
-    <summary>Deleting destructor: runs the destructor, then frees the object when asked to. 0x0023E8B0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_001F2B80 (Xbox, 10 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001F2B80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001F2B80</id>
+    <updated>2026-11-21T04:50:16Z</updated>
+    <summary>Returns the number at +0x60 of the object pointed to at +0x150. 0x001F2B80 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>fight::ConditionFactoryTemplate&lt;fight::MaybeCondition&gt;::vfunc_03 (Xbox, 46 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0023E050"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0023E050</id>
-    <updated>2026-11-21T04:17:23Z</updated>
-    <summary>Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to. 0x0023E050 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_001F2B70 (Xbox, 10 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001F2B70"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001F2B70</id>
+    <updated>2026-11-21T04:50:04Z</updated>
+    <summary>Returns the number at +0x5C of the object pointed to at +0x150. 0x001F2B70 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method4&lt;void, float, float, float, float&gt;::vfunc_00 (Xbox prototype, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0011B420"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0011B420</id>
-    <updated>2026-11-21T04:17:12Z</updated>
-    <summary>0x0011B420 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001F2B60 (Xbox, 10 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001F2B60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001F2B60</id>
+    <updated>2026-11-21T04:49:53Z</updated>
+    <summary>Returns the number at +0x58 of the object pointed to at +0x150. 0x001F2B60 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method5&lt;void, int, int, int, int, int&gt;::vfunc_00 (Xbox prototype, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001AEA60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001AEA60</id>
-    <updated>2026-11-21T04:17:00Z</updated>
-    <summary>0x001AEA60 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001F2B50 (Xbox, 10 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001F2B50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001F2B50</id>
+    <updated>2026-11-21T04:49:42Z</updated>
+    <summary>Returns the number at +0x54 of the object pointed to at +0x150. 0x001F2B50 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method5&lt;void, int, int, int, int, int&gt;::vfunc_00 (Xbox, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001E7B10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001E7B10</id>
-    <updated>2026-11-21T04:16:48Z</updated>
-    <summary>0x001E7B10 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_001F2B40 (Xbox, 10 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001F2B40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001F2B40</id>
+    <updated>2026-11-21T04:49:30Z</updated>
+    <summary>Returns the number at +0x50 of the object pointed to at +0x150. 0x001F2B40 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method4&lt;void, float, float, float, float&gt;::vfunc_00 (Xbox, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00136540"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00136540</id>
-    <updated>2026-11-21T04:16:48Z</updated>
-    <summary>Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C. 0x00136540 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_001EF120 (Xbox, 9 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001EF120"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001EF120</id>
+    <updated>2026-11-21T04:49:19Z</updated>
+    <summary>Reads flag bit 0 of the byte at +0x129. 0x001EF120 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method5&lt;void, float, float, float, float, float&gt;::vfunc_00 (Xbox prototype, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0011B320"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0011B320</id>
-    <updated>2026-11-21T04:16:48Z</updated>
-    <summary>0x0011B320 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>WorldAmbienceSpawnObject::vfunc_46 (Xbox, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001EAFE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001EAFE0</id>
+    <updated>2026-11-21T04:49:07Z</updated>
+    <summary>Reads flag bit 4 of the byte at +0xB3. 0x001EAFE0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method5&lt;void, float, float, float, float, float&gt;::vfunc_00 (Xbox, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00136480"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00136480</id>
-    <updated>2026-11-21T04:16:36Z</updated>
-    <summary>Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C. 0x00136480 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>TriggeredSpawnObject::vfunc_51 (Xbox, 9 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001EA810"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001EA810</id>
+    <updated>2026-11-21T04:48:56Z</updated>
+    <summary>Reads flag bit 0 of the byte at +0x1F4. 0x001EA810 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method2&lt;void, math::Vector, float&gt;::vfunc_00 (Xbox prototype, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0011B250"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0011B250</id>
-    <updated>2026-11-21T04:16:24Z</updated>
-    <summary>0x0011B250 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001E3DD0 (Xbox, 9 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001E3DD0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001E3DD0</id>
+    <updated>2026-11-21T04:48:45Z</updated>
+    <summary>Reads flag bit 0 of the byte at +0xA5. 0x001E3DD0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method2&lt;void, math::Vector, float&gt;::vfunc_00 (Xbox, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001363B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001363B0</id>
-    <updated>2026-11-21T04:16:13Z</updated>
-    <summary>Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C. 0x001363B0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00197220 (Xbox, 14 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00197220"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00197220</id>
+    <updated>2026-11-21T04:48:34Z</updated>
+    <summary>Stores a number at +0x40. 0x00197220 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method4&lt;void, math::Vector, float, float, bool&gt;::vfunc_00 (Xbox prototype, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0011B110"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0011B110</id>
-    <updated>2026-11-21T04:16:02Z</updated>
-    <summary>0x0011B110 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00179DC0 (Xbox, 17 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00179DC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00179DC0</id>
+    <updated>2026-11-21T04:48:22Z</updated>
+    <summary>Stores a number at +0x434. 0x00179DC0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>CScript::Method4&lt;void, math::Vector, float, float, bool&gt;::vfunc_00 (Xbox, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00136270"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00136270</id>
-    <updated>2026-11-21T04:15:50Z</updated>
-    <summary>Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C. 0x00136270 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00171D40 (Xbox, 8 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00171D40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00171D40</id>
+    <updated>2026-11-21T04:48:10Z</updated>
+    <summary>Returns the 16-bit value at +0x94. 0x00171D40 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_002445E0 (Xbox, 75 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002445E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002445E0</id>
-    <updated>2026-11-21T04:06:48Z</updated>
-    <summary>Frees memory: finds the heap that owns the block (trying the last one used first), remembers it and lets it free the block. 0x002445E0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00164EB0 (Xbox, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00164EB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00164EB0</id>
+    <updated>2026-11-21T04:47:58Z</updated>
+    <summary>Reads flag bit 5 of the byte at +0x423. 0x00164EB0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_002019E0 (Xbox prototype, 62 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002019E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002019E0</id>
-    <updated>2026-11-21T04:06:37Z</updated>
-    <summary>0x002019E0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00164E80 (Xbox, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00164E80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00164E80</id>
+    <updated>2026-11-21T04:47:47Z</updated>
+    <summary>Reads flag bit 4 of the byte at +0x423. 0x00164E80 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00244540 (Xbox, 62 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00244540"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00244540</id>
-    <updated>2026-11-21T04:06:25Z</updated>
-    <summary>Finds the deepest heap in the heap tree that owns a block of memory, or 0 when none does. 0x00244540 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00164E40 (Xbox, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00164E40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00164E40</id>
+    <updated>2026-11-21T04:47:35Z</updated>
+    <summary>Reads flag bit 3 of the byte at +0x423. 0x00164E40 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_001FDA90 (Xbox prototype, 144 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001FDA90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001FDA90</id>
-    <updated>2026-11-21T04:06:14Z</updated>
-    <summary>0x001FDA90 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00164C10 (Xbox, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00164C10"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00164C10</id>
+    <updated>2026-11-21T04:47:23Z</updated>
+    <summary>Reads flag bit 2 of the byte at +0x269. 0x00164C10 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00240570 (Xbox, 144 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00240570"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00240570</id>
-    <updated>2026-11-21T04:06:03Z</updated>
-    <summary>Reads from a stream: opens it first if an open is pending, then reads one of two ways depending on its mode. 0x00240570 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00164B50 (Xbox, 17 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00164B50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00164B50</id>
+    <updated>2026-11-21T04:47:11Z</updated>
+    <summary>Stores a number at +0x414. 0x00164B50 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>GlobalVehicleSound::vfunc_01 (Xbox, 24 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CF0E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CF0E0</id>
-    <updated>2026-11-21T03:38:33Z</updated>
-    <summary>Releases one reference to an om::Entity; at the last one it destroys it. 0x002CF0E0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00164340 (Xbox, 14 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00164340"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00164340</id>
+    <updated>2026-11-21T04:47:00Z</updated>
+    <summary>Says whether the pointer at +0x2E8 is set. 0x00164340 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_002015A0 (Xbox prototype, 99 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002015A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002015A0</id>
-    <updated>2026-11-21T03:38:21Z</updated>
-    <summary>0x002015A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001642B0 (Xbox, 9 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001642B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001642B0</id>
+    <updated>2026-11-21T04:46:49Z</updated>
+    <summary>Reads flag bit 0 of the byte at +0x424. 0x001642B0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00244100 (Xbox, 99 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00244100"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00244100</id>
-    <updated>2026-11-21T03:38:09Z</updated>
-    <summary>Scales a three-number vector to length one and returns its old length; a near-zero vector becomes zero. 0x00244100 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00164150 (Xbox, 14 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00164150"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00164150</id>
+    <updated>2026-11-21T04:46:37Z</updated>
+    <summary>Says whether the pointer at +0x2A4 is set. 0x00164150 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00201490 (Xbox prototype, 67 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00201490"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00201490</id>
-    <updated>2026-11-21T03:37:57Z</updated>
-    <summary>0x00201490 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_001467F0 (Xbox prototype, 14 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001467F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001467F0</id>
+    <updated>2026-11-21T04:46:26Z</updated>
+    <summary>0x001467F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00243FF0 (Xbox, 67 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00243FF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00243FF0</id>
-    <updated>2026-11-21T03:37:45Z</updated>
-    <summary>The game's name key without case folding: h = (h * 65599) &amp; 0x7FFFFFFF, each character XORed in; top bit set. 0x00243FF0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_001624F0 (Xbox, 14 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001624F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001624F0</id>
+    <updated>2026-11-21T04:46:15Z</updated>
+    <summary>Says whether the pointer at +0x90 is set. 0x001624F0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_0008D4A0 (Xbox prototype, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008D4A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008D4A0</id>
-    <updated>2026-11-21T03:37:33Z</updated>
-    <summary>0x0008D4A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00142DE0 (Xbox prototype, 11 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00142DE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00142DE0</id>
+    <updated>2026-11-21T04:46:04Z</updated>
+    <summary>0x00142DE0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_00098B70 (Xbox, 25 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00098B70"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00098B70</id>
-    <updated>2026-11-21T03:37:21Z</updated>
-    <summary>Copies the key (+0x10) of the object it is given, or 0 when there is no object. 0x00098B70 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_00161030 (Xbox, 11 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00161030"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00161030</id>
+    <updated>2026-11-21T04:45:52Z</updated>
+    <summary>Says whether the pointer at +0x30 is set. 0x00161030 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_0008B0D0 (Xbox prototype, 20 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008B0D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008B0D0</id>
-    <updated>2026-11-21T03:37:08Z</updated>
-    <summary>0x0008B0D0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_0015A560 (Xbox, 14 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0015A560"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0015A560</id>
+    <updated>2026-11-21T04:45:41Z</updated>
+    <summary>Says whether the pointer at +0xAC is set. 0x0015A560 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_0008B0B0 (Xbox prototype, 20 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008B0B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008B0B0</id>
-    <updated>2026-11-21T03:37:08Z</updated>
-    <summary>0x0008B0B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_00136010 (Xbox prototype, 10 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00136010"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00136010</id>
+    <updated>2026-11-21T04:45:30Z</updated>
+    <summary>0x00136010 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, world/CollisionBehaviourTypeGroup.cpp (10 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, world/CollisionBehaviourTypeGroup.cpp (11 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 10 of 14 functions matched (71.43%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 11 of 14 functions matched (78.57%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -28,6 +28,30 @@ public:
 void* CollisionBehaviourTypeGroup::vfunc_00()
 {
     return DAT_004191A0;
+}
+
+// ============================================================================
+// [VERIFIED] CollisionBehaviourTypeGroup::vfunc_02 (0x00012A20, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 2 of the byte at +0x1E.
+// ============================================================================
+// bin: xb
+// va: 0x00012A20
+// what: Reads flag bit 2 of the byte at +0x1E.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_00012A20
+{
+public:
+    bool sub_00012A20();
+    char m_pad00[0x1E];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+bool Class_00012A20::sub_00012A20()
+{
+    return m_Flag2;
 }
 
 // ============================================================================

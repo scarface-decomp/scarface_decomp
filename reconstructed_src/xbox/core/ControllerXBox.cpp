@@ -1,13 +1,35 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/ControllerXBox.cpp (7 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/ControllerXBox.cpp (8 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7 of 19 functions matched (36.84%). NOT COMPLETE YET.
-// The 12 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 8 of 19 functions matched (42.11%). NOT COMPLETE YET.
+// The 11 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::ControllerXBox::vfunc_04 (0x00247C00, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x8 is set.
+// ============================================================================
+// bin: xb
+// va: 0x00247C00
+// what: Says whether the pointer at +0x8 is set.
+// tool: Claude Opus 5.5 (generated from the shape 'field is set', checked on decomp.me preset 266 by example)
+class Class_00247C00
+{
+public:
+    int sub_00247C00();
+    char m_pad00[0x8];
+    void* m_Field8; // +0x8
+};
+
+int Class_00247C00::sub_00247C00()
+{
+    return m_Field8 != 0;
+}
 
 // ============================================================================
 // [VERIFIED] core::ControllerXBox::vfunc_05 (0x00247C10, 6 B)

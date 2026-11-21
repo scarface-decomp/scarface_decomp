@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dContext.cpp (61 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dContext.cpp (62 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 61 of 120 functions matched (50.83%). NOT COMPLETE YET.
-// The 59 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 62 of 120 functions matched (51.67%). NOT COMPLETE YET.
+// The 58 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -1868,6 +1868,34 @@ int d3dContext::vfunc_08(int a1)
     return t1;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dContext::vfunc_09 (0x0029D590, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x8 of the object pointed to at +0x14C.
+// ============================================================================
+// bin: xb
+// va: 0x0029D590
+// what: Returns the number at +0x8 of the object pointed to at +0x14C.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer field', checked on decomp.me preset 266 by example)
+struct Obj_0029D590
+{
+    char m_pad00[0x8];
+    float m_Field8; // +0x8
+};
+
+class Class_0029D590
+{
+public:
+    float sub_0029D590();
+    char m_pad00[0x14C];
+    Obj_0029D590* m_Field14C; // +0x14C
+};
+
+float Class_0029D590::sub_0029D590()
+{
+    return m_Field14C->m_Field8;
 }
 
 // ============================================================================

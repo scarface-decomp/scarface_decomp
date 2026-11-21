@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (212 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (213 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 212 of 748 functions matched (28.34%). NOT COMPLETE YET.
-// The 536 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 213 of 748 functions matched (28.48%). NOT COMPLETE YET.
+// The 535 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -5093,6 +5093,29 @@ void __cdecl sub_006FD9D0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_006FDA00 (0x006FDA00, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002DE790 (0x002DE790), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006FDA00
+// what: Returns the 16-bit value at +0x34.
+// tool: Claude Opus 5.5 (generated from the shape 'read short field', checked on decomp.me preset 266 by example)
+class Class_006FDA00
+{
+public:
+    unsigned short sub_006FDA00();
+    char m_pad00[0x34];
+    unsigned short m_Field34; // +0x34
+};
+
+unsigned short Class_006FDA00::sub_006FDA00()
+{
+    return m_Field34;
+}
+
+// ============================================================================
 // [VERIFIED] sub_006FE3A0 (0x006FE3A0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -6105,24 +6128,4 @@ void __cdecl sub_0072CC00(void)
 // Same machine code as sub_006DEDF0 (PC 0x006DEDF0), which was matched first;
 // its addresses and names were swapped for this function's.
 // sub_0072CC10 (PC 0x0072CC10, 1 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-void __cdecl sub_0072CC10(void)
-{
-}
-
-// ============================================================================
-// [VERIFIED] sub_0072CD30 (0x0072CD30, 1 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_006DEDF0 (PC 0x006DEDF0), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_0072CD30 (PC 0x0072CD30, 1 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-void __cdecl sub_0072CD30(void)
-{
-}
-
+// Starter code written from the disassembly. Names and types are guesse

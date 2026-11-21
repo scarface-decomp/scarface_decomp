@@ -1,13 +1,36 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/Screen.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/Screen.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 4 functions matched (25.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 4 functions matched (50.00%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Screen::vfunc_14 (0x00249E20, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Screen::vfunc_14 (0x0028D580), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00249E20
+// what: Reads flag bit 0 of the byte at +0x24.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_00249E20
+{
+public:
+    bool sub_00249E20();
+    char m_pad00[0x24];
+    unsigned char m_Flag0 : 1;
+};
+
+bool Class_00249E20::sub_00249E20()
+{
+    return m_Flag0;
+}
 
 // ============================================================================
 // [VERIFIED] pure3d::frontend::Screen::vfunc_03 (0x00249E40, 52 B)

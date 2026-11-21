@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (3269 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (3297 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,269 of 11,111 functions matched (29.42%). NOT COMPLETE YET.
-// The 7,842 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3,297 of 11,111 functions matched (29.67%). NOT COMPLETE YET.
+// The 7,814 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -204,6 +204,29 @@ int Class_00011CD0::sub_00011CD0()
     r_eax = 0;
 L_0F:
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00011CF0 (0x00011CF0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000117D0 (0x000117D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00011CF0
+// what: Returns the 16-bit value at +0x20.
+// tool: Claude Opus 5.5 (generated from the shape 'read short field', checked on decomp.me preset 266 by example)
+class Class_00011CF0
+{
+public:
+    unsigned short sub_00011CF0();
+    char m_pad00[0x20];
+    unsigned short m_Field20; // +0x20
+};
+
+unsigned short Class_00011CF0::sub_00011CF0()
+{
+    return m_Field20;
 }
 
 // ============================================================================
@@ -23519,6 +23542,29 @@ Class_0008E240* Class_0008E240::sub_0008E240(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0008E270 (0x0008E270, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00099810 (0x00099810), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0008E270
+// what: Returns the 16-bit value at +0xA.
+// tool: Claude Opus 5.5 (generated from the shape 'read short field', checked on decomp.me preset 266 by example)
+class Class_0008E270
+{
+public:
+    unsigned short sub_0008E270();
+    char m_pad00[0xA];
+    unsigned short m_FieldA; // +0xA
+};
+
+unsigned short Class_0008E270::sub_0008E270()
+{
+    return m_FieldA;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0008E3B0 (0x0008E3B0, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -24609,6 +24655,29 @@ bool Class_00097450::sub_00097450(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00097490 (0x00097490, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000A3400 (0x000A3400), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00097490
+// what: Stores a number at +0x4.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field', checked on decomp.me preset 266 by example)
+class Class_00097490
+{
+public:
+    void sub_00097490(float value);
+    char m_pad00[0x4];
+    float m_Field4; // +0x4
+};
+
+void Class_00097490::sub_00097490(float value)
+{
+    m_Field4 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00097860 (0x00097860, 55 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -25693,6 +25762,29 @@ extern "C" int DAT_00458DF0;
 void __cdecl sub_0009EFE0(void)
 {
     DAT_00458DF0 -= 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009F010 (0x0009F010, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000AB070 (0x000AB070), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0009F010
+// what: Says whether the pointer at +0x14 is set.
+// tool: Claude Opus 5.5 (generated from the shape 'field is set', checked on decomp.me preset 266 by example)
+class Class_0009F010
+{
+public:
+    int sub_0009F010();
+    char m_pad00[0x14];
+    void* m_Field14; // +0x14
+};
+
+int Class_0009F010::sub_0009F010()
+{
+    return m_Field14 != 0;
 }
 
 // ============================================================================
@@ -27169,6 +27261,30 @@ L_13:
 }
 
 // ============================================================================
+// [VERIFIED] sub_000A8470 (0x000A8470, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000B5A90 (0x000B5A90), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000A8470
+// what: Reads flag bit 1 of the byte at +0x98.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_000A8470
+{
+public:
+    bool sub_000A8470();
+    char m_pad00[0x98];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+};
+
+bool Class_000A8470::sub_000A8470()
+{
+    return m_Flag1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000A8480 (0x000A8480, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -27614,6 +27730,29 @@ bool Class_000AADC0::sub_000AADC0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AAE30 (0x000AAE30, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000B8530 (0x000B8530), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000AAE30
+// what: Says whether the pointer at +0x4 is set.
+// tool: Claude Opus 5.5 (generated from the shape 'field is set', checked on decomp.me preset 266 by example)
+class Class_000AAE30
+{
+public:
+    int sub_000AAE30();
+    char m_pad00[0x4];
+    void* m_Field4; // +0x4
+};
+
+int Class_000AAE30::sub_000AAE30()
+{
+    return m_Field4 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AAE40 (0x000AAE40, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -28020,6 +28159,29 @@ void Class_000AB0D0::sub_000AB0D0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AB1C0 (0x000AB1C0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000B8900 (0x000B8900), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000AB1C0
+// what: Says whether the pointer at +0xC is set.
+// tool: Claude Opus 5.5 (generated from the shape 'field is set', checked on decomp.me preset 266 by example)
+class Class_000AB1C0
+{
+public:
+    int sub_000AB1C0();
+    char m_pad00[0xC];
+    void* m_FieldC; // +0xC
+};
+
+int Class_000AB1C0::sub_000AB1C0()
+{
+    return m_FieldC != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AB670 (0x000AB670, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -28348,6 +28510,29 @@ extern "C" void __cdecl sub_000AEEB0(int, int, int, int);
 void __cdecl sub_000AEFA0(int a1, int a2, int a3)
 {
     sub_000AEEB0(a1, a2, (a2 - a1) >> 4, a3);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AF240 (0x000AF240, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000BC990 (0x000BC990), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000AF240
+// what: Stores a number at +0x28.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field', checked on decomp.me preset 266 by example)
+class Class_000AF240
+{
+public:
+    void sub_000AF240(float value);
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+};
+
+void Class_000AF240::sub_000AF240(float value)
+{
+    m_Field28 = value;
 }
 
 // ============================================================================
@@ -31155,6 +31340,29 @@ L_27:
 }
 
 // ============================================================================
+// [VERIFIED] sub_000BE230 (0x000BE230, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000CE7F0 (0x000CE7F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000BE230
+// what: Stores a number at +0x18.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field', checked on decomp.me preset 266 by example)
+class Class_000BE230
+{
+public:
+    void sub_000BE230(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+void Class_000BE230::sub_000BE230(float value)
+{
+    m_Field18 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000BE240 (0x000BE240, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -33060,6 +33268,24 @@ void __cdecl sub_000C6700(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000C6760 (0x000C6760, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000D8290 (0x000D8290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000C6760
+// what: Stores a number in the global at 0x003FFAA4.
+// tool: Claude Opus 5.5 (generated from the shape 'set float global', checked on decomp.me preset 266 by example)
+extern "C" float DAT_003FFAA4;
+extern "C" void __cdecl sub_000C6760(float value);
+
+void __cdecl sub_000C6760(float value)
+{
+    DAT_003FFAA4 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000C6770 (0x000C6770, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -34045,6 +34271,29 @@ int Class_000CA6D0::sub_000CA6D0(int a1, int a2)
     }
 L_35:
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CA710 (0x000CA710, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000DC5F0 (0x000DC5F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000CA710
+// what: Says whether the pointer at +0x20 is set.
+// tool: Claude Opus 5.5 (generated from the shape 'field is set', checked on decomp.me preset 266 by example)
+class Class_000CA710
+{
+public:
+    int sub_000CA710();
+    char m_pad00[0x20];
+    void* m_Field20; // +0x20
+};
+
+int Class_000CA710::sub_000CA710()
+{
+    return m_Field20 != 0;
 }
 
 // ============================================================================
@@ -35610,6 +35859,29 @@ int Class_000D4F20::sub_000D4F20()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D4F40 (0x000D4F40, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000E75E0 (0x000E75E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000D4F40
+// what: Reads flag bit 0 of the byte at +0x33.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_000D4F40
+{
+public:
+    bool sub_000D4F40();
+    char m_pad00[0x33];
+    unsigned char m_Flag0 : 1;
+};
+
+bool Class_000D4F40::sub_000D4F40()
+{
+    return m_Flag0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D5220 (0x000D5220, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -36082,6 +36354,29 @@ int Class_000D6F60::sub_000D6F60(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D6F80 (0x000D6F80, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000E9610 (0x000E9610), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000D6F80
+// what: Reads flag bit 0 of the byte at +0x29.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_000D6F80
+{
+public:
+    bool sub_000D6F80();
+    char m_pad00[0x29];
+    unsigned char m_Flag0 : 1;
+};
+
+bool Class_000D6F80::sub_000D6F80()
+{
+    return m_Flag0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D7180 (0x000D7180, 39 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -36118,6 +36413,53 @@ Class_000D7180* Class_000D7180::sub_000D7180()
     m_Field18 = 0;
     m_Field1C = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D7330 (0x000D7330, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000E99B0 (0x000E99B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000D7330
+// what: Reads flag bit 0 of the byte at +0x1C.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_000D7330
+{
+public:
+    bool sub_000D7330();
+    char m_pad00[0x1C];
+    unsigned char m_Flag0 : 1;
+};
+
+bool Class_000D7330::sub_000D7330()
+{
+    return m_Flag0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D7360 (0x000D7360, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000E99E0 (0x000E99E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000D7360
+// what: Reads flag bit 1 of the byte at +0x1C.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_000D7360
+{
+public:
+    bool sub_000D7360();
+    char m_pad00[0x1C];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+};
+
+bool Class_000D7360::sub_000D7360()
+{
+    return m_Flag1;
 }
 
 // ============================================================================
@@ -40656,6 +40998,29 @@ int __cdecl sub_000F75D0(void)
     }
 L_10:
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000F7770 (0x000F7770, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000B5A30 (0x000B5A30), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000F7770
+// what: Stores a number at +0x30.
+// tool: Claude Opus 5.5 (generated from the shape 'set float field', checked on decomp.me preset 266 by example)
+class Class_000F7770
+{
+public:
+    void sub_000F7770(float value);
+    char m_pad00[0x30];
+    float m_Field30; // +0x30
+};
+
+void Class_000F7770::sub_000F7770(float value)
+{
+    m_Field30 = value;
 }
 
 // ============================================================================
@@ -50203,6 +50568,35 @@ void Class_00135B50::sub_00135B50()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00136010 (0x00136010, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001527D0 (0x001527D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00136010
+// what: Returns the number at +0x10 of the object pointed to at +0x84.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer field', checked on decomp.me preset 266 by example)
+struct Obj_00136010
+{
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+class Class_00136010
+{
+public:
+    float sub_00136010();
+    char m_pad00[0x84];
+    Obj_00136010* m_Field84; // +0x84
+};
+
+float Class_00136010::sub_00136010()
+{
+    return m_Field84->m_Field10;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00139200 (0x00139200, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -50629,6 +51023,29 @@ int Class_00142DC0::sub_00142DC0()
     }
 L_10:
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00142DE0 (0x00142DE0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00161030 (0x00161030), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00142DE0
+// what: Says whether the pointer at +0x30 is set.
+// tool: Claude Opus 5.5 (generated from the shape 'field is set', checked on decomp.me preset 266 by example)
+class Class_00142DE0
+{
+public:
+    int sub_00142DE0();
+    char m_pad00[0x30];
+    void* m_Field30; // +0x30
+};
+
+int Class_00142DE0::sub_00142DE0()
+{
+    return m_Field30 != 0;
 }
 
 // ============================================================================
@@ -51458,6 +51875,29 @@ public:
 void Class_001467E0::sub_001467E0()
 {
     m_Field90 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001467F0 (0x001467F0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001624F0 (0x001624F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001467F0
+// what: Says whether the pointer at +0x90 is set.
+// tool: Claude Opus 5.5 (generated from the shape 'field is set', checked on decomp.me preset 266 by example)
+class Class_001467F0
+{
+public:
+    int sub_001467F0();
+    char m_pad00[0x90];
+    void* m_Field90; // +0x90
+};
+
+int Class_001467F0::sub_001467F0()
+{
+    return m_Field90 != 0;
 }
 
 // ============================================================================
@@ -69602,6 +70042,24 @@ int Class_001B54D0::sub_001B54D0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001B54E0 (0x001B54E0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000D8290 (0x000D8290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001B54E0
+// what: Stores a number in the global at 0x0041832C.
+// tool: Claude Opus 5.5 (generated from the shape 'set float global', checked on decomp.me preset 266 by example)
+extern "C" float DAT_0041832C;
+extern "C" void __cdecl sub_001B54E0(float value);
+
+void __cdecl sub_001B54E0(float value)
+{
+    DAT_0041832C = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001B54F0 (0x001B54F0, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -77823,6 +78281,24 @@ float __cdecl sub_001E2FA0(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001E3060 (0x001E3060, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000D8290 (0x000D8290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001E3060
+// what: Stores a number in the global at 0x004626C4.
+// tool: Claude Opus 5.5 (generated from the shape 'set float global', checked on decomp.me preset 266 by example)
+extern "C" float DAT_004626C4;
+extern "C" void __cdecl sub_001E3060(float value);
+
+void __cdecl sub_001E3060(float value)
+{
+    DAT_004626C4 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001E30A0 (0x001E30A0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -77858,6 +78334,42 @@ bool __cdecl sub_001E30B0(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001E30C0 (0x001E30C0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000D8290 (0x000D8290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001E30C0
+// what: Stores a number in the global at 0x00462628.
+// tool: Claude Opus 5.5 (generated from the shape 'set float global', checked on decomp.me preset 266 by example)
+extern "C" float DAT_00462628;
+extern "C" void __cdecl sub_001E30C0(float value);
+
+void __cdecl sub_001E30C0(float value)
+{
+    DAT_00462628 = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E30D0 (0x001E30D0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000D8290 (0x000D8290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001E30D0
+// what: Stores a number in the global at 0x00462624.
+// tool: Claude Opus 5.5 (generated from the shape 'set float global', checked on decomp.me preset 266 by example)
+extern "C" float DAT_00462624;
+extern "C" void __cdecl sub_001E30D0(float value);
+
+void __cdecl sub_001E30D0(float value)
+{
+    DAT_00462624 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001E3110 (0x001E3110, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -77872,6 +78384,60 @@ extern "C" char DAT_00462610[];
 void* __cdecl sub_001E3110(void)
 {
     return DAT_00462610;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E3160 (0x001E3160, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000D8290 (0x000D8290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001E3160
+// what: Stores a number in the global at 0x004626CC.
+// tool: Claude Opus 5.5 (generated from the shape 'set float global', checked on decomp.me preset 266 by example)
+extern "C" float DAT_004626CC;
+extern "C" void __cdecl sub_001E3160(float value);
+
+void __cdecl sub_001E3160(float value)
+{
+    DAT_004626CC = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E3170 (0x001E3170, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000D8290 (0x000D8290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001E3170
+// what: Stores a number in the global at 0x004626D4.
+// tool: Claude Opus 5.5 (generated from the shape 'set float global', checked on decomp.me preset 266 by example)
+extern "C" float DAT_004626D4;
+extern "C" void __cdecl sub_001E3170(float value);
+
+void __cdecl sub_001E3170(float value)
+{
+    DAT_004626D4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E3180 (0x001E3180, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000D8290 (0x000D8290), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001E3180
+// what: Stores a number in the global at 0x004626D0.
+// tool: Claude Opus 5.5 (generated from the shape 'set float global', checked on decomp.me preset 266 by example)
+extern "C" float DAT_004626D0;
+extern "C" void __cdecl sub_001E3180(float value);
+
+void __cdecl sub_001E3180(float value)
+{
+    DAT_004626D0 = value;
 }
 
 // ============================================================================
@@ -79400,6 +79966,29 @@ public:
 void Class_001ECBA0::sub_001ECBA0()
 {
     m_Field5C = 3;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001ECBB0 (0x001ECBB0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0022D880 (0x0022D880), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001ECBB0
+// what: Returns the 16-bit value at +0x60.
+// tool: Claude Opus 5.5 (generated from the shape 'read short field', checked on decomp.me preset 266 by example)
+class Class_001ECBB0
+{
+public:
+    unsigned short sub_001ECBB0();
+    char m_pad00[0x60];
+    unsigned short m_Field60; // +0x60
+};
+
+unsigned short Class_001ECBB0::sub_001ECBB0()
+{
+    return m_Field60;
 }
 
 // ============================================================================
@@ -90027,6 +90616,31 @@ Class_00231540* Class_00231540::sub_00231540()
     m_Field00 = (int)DAT_003B0460;
     m_Field0C = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00232720 (0x00232720, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00280640 (0x00280640), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00232720
+// what: Reads flag bit 2 of the byte at +0x38.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_00232720
+{
+public:
+    bool sub_00232720();
+    char m_pad00[0x38];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+bool Class_00232720::sub_00232720()
+{
+    return m_Flag2;
 }
 
 // ============================================================================

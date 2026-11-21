@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AirplaneObject.cpp (15 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/AirplaneObject.cpp (16 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 15 of 41 functions matched (36.59%). NOT COMPLETE YET.
-// The 26 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 16 of 41 functions matched (39.02%). NOT COMPLETE YET.
+// The 25 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -185,6 +185,31 @@ public:
 float AirplaneObject::vfunc_45()
 {
     return m_FieldB8;
+}
+
+// ============================================================================
+// [VERIFIED] AirplaneObject::vfunc_50 (0x00213560, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 3 of the byte at +0xE9.
+// ============================================================================
+// bin: xb
+// va: 0x00213560
+// what: Reads flag bit 3 of the byte at +0xE9.
+// tool: Claude Opus 5.5 (generated from the shape 'read one flag bit', checked on decomp.me preset 266 by example)
+class Class_00213560
+{
+public:
+    bool sub_00213560();
+    char m_pad00[0xE9];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+    unsigned char m_Flag3 : 1;
+};
+
+bool Class_00213560::sub_00213560()
+{
+    return m_Flag3;
 }
 
 // ============================================================================
