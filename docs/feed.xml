@@ -5,8 +5,15 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-21T04:53:18Z</updated>
+  <updated>2026-11-21T04:53:29Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>sub_006FDA00 (PC, 5 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006FDA00"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006FDA00</id>
+    <updated>2026-11-21T04:53:29Z</updated>
+    <summary>0x006FDA00 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>sub_002DE790 (Xbox, 5 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002DE790"/>
@@ -349,12 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:xb:0x0015A560</id>
     <updated>2026-11-21T04:45:41Z</updated>
     <summary>Says whether the pointer at +0xAC is set. 0x0015A560 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00136010 (Xbox prototype, 10 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00136010"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00136010</id>
-    <updated>2026-11-21T04:45:30Z</updated>
-    <summary>0x00136010 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

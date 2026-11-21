@@ -6128,4 +6128,24 @@ void __cdecl sub_0072CC00(void)
 // Same machine code as sub_006DEDF0 (PC 0x006DEDF0), which was matched first;
 // its addresses and names were swapped for this function's.
 // sub_0072CC10 (PC 0x0072CC10, 1 bytes)
-// Starter code written from the disassembly. Names and types are guesse
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_0072CC10(void)
+{
+}
+
+// ============================================================================
+// [VERIFIED] sub_0072CD30 (0x0072CD30, 1 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006DEDF0 (PC 0x006DEDF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0072CD30 (PC 0x0072CD30, 1 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_0072CD30(void)
+{
+}
+
