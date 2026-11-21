@@ -355,7 +355,9 @@ The kinds, over the 5,393 shaders in `packages/z04/*.p3d` and `art/ecoprops/*.p3
 **How the game colours a vertex** (the Xbox program's own vertex programs, read with
 `portal/tools/vertex_programs.py`; the constants are the ones the shaders' code uploads, `0x32E5F0`). The
 kind name picks the class (`cbvlit` builds `d3dSimpleCBVLitShader`; `foam` and `untextured` build the simple
-one) and `LIT` picks the lit or unlit program:
+one) and `LIT` picks the lit or unlit program. By the game's class information, `nightlight` and `decal`
+derive from the simple shader (`pure3d::d3dSimpleShader`), while `cbvlit` and `vertexfade` derive straight
+from `pure3d::d3dShader` and only reuse the simple pixel programs:
 
 | Kind | Program | Front colour |
 | :--- | :--- | :--- |
@@ -501,10 +503,12 @@ runs back and forth between two quarter-size pictures, the taps a whole texel ap
 **Cutscenes.** Track times are frames at 30 per second. Every channel is linear between keys (quaternions
 slerped the short way, a plain lerp when nearly equal), holding the first key before and the last after
 **(exported)**. Cameras: position `TRAN`, a direction `LOOK`, `UP`, the horizontal FOV in radians for a 4:3
-screen (kept vertical on wide screens), near and far planes **(exported)**. A fade is linear in, hold and
+screen (kept vertical on wide screens), near and far planes **(exported)**. A new camera starts at a
+horizontal FOV of π/2 (90°) with aspect 1.0 (`pure3d::Camera`'s constructor, Xbox `0x0028C320`) until a
+`FOV` key sets it. A fade is linear in, hold and
 out, drawn over the picture **(exported)**; the letterbox bars slide in or out over 500 ms, linearly.
 A camera shake adds `amplitude × e^(−3 t / duration) × (sin(2π f t) + noise × random)` degrees, up to six at
-once. Faces are morph targets weighted by `EXP` animations' `STE` channels; there is no lip sync or blinking
+once (the range of `random`, 0 to 1 or −1 to 1, is not read yet). Faces are morph targets weighted by `EXP` animations' `STE` channels; there is no lip sync or blinking
 of the game's own. While an `NISDriveWorldStreamer` is on, the world streams round the camera
 **(exported)**.
 
