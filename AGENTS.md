@@ -37,7 +37,8 @@ If the compiler or the game's program file is missing, stop and tell the person 
 
 ## The loop
 
-    python portal/agent.py next --bin xb --max-size 40     # pick one (smallest first is a good order)
+    python portal/tools/similar.py rank                    # once per session: open functions by their nearest match
+    python portal/agent.py next --bin xb --order similar   # pick one: most like a matched function first
     python portal/agent.py packet xb 0x00248810            # disassembly, bytes, classmates, starter file
     #   edit work/xb_00248810.cpp
     python portal/agent.py check work/xb_00248810.cpp      # compile and compare; repeat until MATCH
@@ -52,8 +53,10 @@ If the compiler or the game's program file is missing, stop and tell the person 
   `/arch:SSE`). `keep` writes both into the file's `// verify:` line, and recording uses them.
 - `packet` prints `hint:` lines when the function's own instructions say how its source was written
   (an 8-byte-aligned local, double `sqrt()` next to SSE code); `docs/METHODOLOGY.md` section 5 explains them.
-- `packet` prints up to three functions of the same class that are already matched. Use the same class
-  shape, member names and style.
+- `packet` prints up to three functions of the same class that are already matched, then up to three
+  matched functions with the most similar instructions (score 0.6 to 1.0; 1.00 means the same
+  instructions with other registers, offsets or addresses). Start from the nearest one and change what
+  differs; use the same class shape, member names and style. `--order size` (the default) is smallest first.
 - When `check` says how many bytes match, read the differing offsets against the disassembly and change
   one thing at a time. `docs/METHODOLOGY.md` section 5 lists what MSVC 7.1 does that surprises people
   (who cleans the stack, branch layout, `/G6` against `/G7` on PC, thunks that have no source).
