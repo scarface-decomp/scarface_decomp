@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,960 of 19,501 functions matched (40.82%). NOT COMPLETE YET.
-// The 11,541 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 7,978 of 19,501 functions matched (40.91%). NOT COMPLETE YET.
+// The 11,523 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -1029,7 +1029,30 @@ int __cdecl sub_00012230(int a1, int a2)
 
 // [TODO] 0x00012250 sub_00012250 (113 B)
 // [TODO] 0x000122D0 sub_000122D0 (169 B)
-// [TODO] 0x00012380 sub_00012380 (48 B)
+// ============================================================================
+// [VERIFIED] sub_00012380 (0x00012380, 48 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Runs a constructor on every element of an array, first to last (compiler helper "vector constructor iterator").
+// ============================================================================
+// bin: xb
+// va: 0x00012380
+// what: Runs a constructor on every element of an array, first to last (compiler helper "vector constructor iterator").
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00012380.cpp --va 0x00012380 --bin xb --match '??_H'
+
+// ??_H (`vector constructor iterator') has no source of its own: cl writes it into any file that
+// builds an array of a class with a constructor and no destructor. The array below is that
+// declaration; which class and array the game's copy came from is not known.
+class Class_00012380
+{
+public:
+    Class_00012380();
+
+    int m_Field00;
+};
+
+Class_00012380 g_00012380[4];
+
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1105,7 +1128,37 @@ int Class_00012440::sub_00012440()
     return t1;
 }
 
-// [TODO] 0x00012450 sub_00012450 (246 B)
+// ============================================================================
+// [VERIFIED] sub_00012450 (0x00012450, 246 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 16-byte records so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x00012450
+// what: Rotates a range of 16-byte records so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00012450.cpp --va 0x00012450 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Rotate for random-access iterators, instantiated for Class_00012450.
+template void std::_Rotate<Class_00012450 *, int, Class_00012450>(Class_00012450 *, Class_00012450 *, Class_00012450 *, int *, Class_00012450 *);
+
 // [TODO] 0x00012550 sub_00012550 (49 B)
 // [TODO] 0x00012590 sub_00012590 (71 B)
 // [TODO] 0x000125E0 sub_000125E0 (93 B)
@@ -1567,7 +1620,37 @@ int __cdecl sub_00014F70(int a1, int a2, int a3)
 }
 
 // [TODO] 0x00014FA0 sub_00014FA0 (30 B)
-// [TODO] 0x00014FC0 sub_00014FC0 (140 B)
+// ============================================================================
+// [VERIFIED] sub_00014FC0 (0x00014FC0, 140 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 5 external relocation(s) unchecked
+// What it does: Picks a median-of-three (or of nine for large ranges) pivot among 16-byte records ordered by their float key (standard library sort helper).
+// ============================================================================
+// bin: xb
+// va: 0x00014FC0
+// what: Picks a median-of-three (or of nine for large ranges) pivot among 16-byte records ordered by their float key (standard library sort helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00014FC0.cpp --va 0x00014FC0 --bin xb --match '?$_Median@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Median (pivot selection of std::sort), instantiated for Class_00012450.
+template void std::_Median<Class_00012450 *>(Class_00012450 *, Class_00012450 *, Class_00012450 *);
+
 // [TODO] 0x00015050 sub_00015050 (184 B)
 // [TODO] 0x00015110 sub_00015110 (667 B)
 // [TODO] 0x000153B0 sub_000153B0 (416 B)
@@ -1638,7 +1721,37 @@ void __cdecl sub_00015AE0(Target* target, const char* name)
 
 // [TODO] 0x00015B10 sub_00015B10 (1076 B)
 // [TODO] 0x00015F50 sub_00015F50 (119 B)
-// [TODO] 0x00015FD0 sub_00015FD0 (90 B)
+// ============================================================================
+// [VERIFIED] sub_00015FD0 (0x00015FD0, 90 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Arranges an array of 16-byte records into a heap ordered by their float key (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x00015FD0
+// what: Arranges an array of 16-byte records into a heap ordered by their float key (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00015FD0.cpp --va 0x00015FD0 --bin xb --match '?$_Make_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Make_heap, instantiated for Class_00012450.
+template void std::_Make_heap<Class_00012450 *, int, Class_00012450>(Class_00012450 *, Class_00012450 *, int *, Class_00012450 *);
+
 // ============================================================================
 // [VERIFIED] sub_00016030 (0x00016030, 37 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1700,9 +1813,69 @@ CollisionManagerFlowClient* CollisionManagerFlowClient::vfunc_00(int a1)
 // [TODO] 0x00016710 sub_00016710 (174 B)
 // [TODO] 0x000167C0 sub_000167C0 (197 B)
 // [TODO] 0x00016890 sub_00016890 (114 B)
-// [TODO] 0x00016910 sub_00016910 (139 B)
+// ============================================================================
+// [VERIFIED] sub_00016910 (0x00016910, 139 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Sorts a heap of 16-byte records by their float key (standard library std::sort_heap).
+// ============================================================================
+// bin: xb
+// va: 0x00016910
+// what: Sorts a heap of 16-byte records by their float key (standard library std::sort_heap).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00016910.cpp --va 0x00016910 --bin xb --match '?$sort_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::sort_heap, instantiated for Class_00012450.
+template void std::sort_heap<Class_00012450 *>(Class_00012450 *, Class_00012450 *);
+
 // [TODO] 0x000169A0 sub_000169A0 (37 B)
-// [TODO] 0x000169D0 sub_000169D0 (203 B)
+// ============================================================================
+// [VERIFIED] sub_000169D0 (0x000169D0, 203 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 16-byte records by their float key, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000169D0
+// what: Sorts an array of 16-byte records by their float key, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000169D0.cpp --va 0x000169D0 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_00012450
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_00012450 &left, const Class_00012450 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Sort (introsort loop of std::sort), instantiated for Class_00012450.
+template void std::_Sort<Class_00012450 *, int>(Class_00012450 *, Class_00012450 *, int);
+
 // [TODO] 0x00016AA0 CollisionManager::CollisionManagerFlowClient::vfunc_02 (1103 B)
 // [TODO] 0x00016EF0 sub_00016EF0 (336 B)
 // [TODO] 0x00017040 sub_00017040 (885 B)
@@ -8370,7 +8543,31 @@ template <> void ConcreteClassRep<FEObject>::vfunc_02()
     sub_00025350((int)DAT_0041AFA0, (int)DAT_0039D520, (int)sub_00023D20, 2, 2, (int)DAT_0039D520);
 }
 
-// [TODO] 0x00025400 sub_00025400 (49 B)
+// ============================================================================
+// [VERIFIED] sub_00025400 (0x00025400, 49 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Runs a destructor on every element of an array, last to first (compiler helper "vector destructor iterator").
+// ============================================================================
+// bin: xb
+// va: 0x00025400
+// what: Runs a destructor on every element of an array, last to first (compiler helper "vector destructor iterator").
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00025400.cpp --va 0x00025400 --bin xb --match '??_I' --flags "/O2 /Ot /Oy /G6 /Gd /GR /Zp4"
+
+// ??_I (`vector destructor iterator') has no source of its own: cl writes it into a file that
+// destroys an array of a class with a destructor. With /EHsc cl uses the exception-aware
+// iterator instead, so the game's copy came from a file built without /EHsc (see the verify line).
+// The array below is the declaration that needs it; which class it was is not known.
+class Class_00025400
+{
+public:
+    ~Class_00025400();
+
+    int m_Field00;
+};
+
+Class_00025400 g_00025400[4];
+
 // [TODO] 0x00025440 sub_00025440 (241 B)
 // [TODO] 0x00025540 sub_00025540 (85 B)
 // [TODO] 0x000255A0 sub_000255A0 (82 B)
@@ -11586,8 +11783,52 @@ GameSet* GameSet::vfunc_01(int a1)
     return this;
 }
 
-// [TODO] 0x00029CE0 sub_00029CE0 (74 B)
-// [TODO] 0x00029D30 sub_00029D30 (238 B)
+// ============================================================================
+// [VERIFIED] sub_00029CE0 (0x00029CE0, 74 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Sorts a heap of 4-byte elements with a caller-supplied ordering function (standard library std::sort_heap).
+// ============================================================================
+// bin: xb
+// va: 0x00029CE0
+// what: Sorts a heap of 4-byte elements with a caller-supplied ordering function (standard library std::sort_heap).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00029CE0.cpp --va 0x00029CE0 --bin xb --match '?$sort_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::sort_heap with a predicate, instantiated for an array of Class_00029D30 pointers.
+template void std::sort_heap<Class_00029D30 **, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, Class_00029D30Less);
+
+// ============================================================================
+// [VERIFIED] sub_00029D30 (0x00029D30, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x00029D30
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_00029D30.cpp --va 0x00029D30 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_00029D30 pointers.
+template void std::_Sort<Class_00029D30 **, int, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, int, Class_00029D30Less);
+
 // ============================================================================
 // [VERIFIED] sub_00029E20 (0x00029E20, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -40315,7 +40556,32 @@ Object* __cdecl sub_0007F120(void)
 // [TODO] 0x0007F470 sub_0007F470 (103 B)
 // [TODO] 0x0007F4E0 sub_0007F4E0 (68 B)
 // [TODO] 0x0007F590 sub_0007F590 (102 B)
-// [TODO] 0x0007F600 sub_0007F600 (203 B)
+// ============================================================================
+// [VERIFIED] sub_0007F600 (0x0007F600, 203 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte records by their unsigned key, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x0007F600
+// what: Sorts an array of 4-byte records by their unsigned key, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_0007F600.cpp --va 0x0007F600 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 4-byte record ordered by an unsigned key. Its operator< is defined in another file
+// (sub_00242D50), so the sort calls it rather than inlining it.
+class Class_0007F600
+{
+public:
+    bool operator<(const Class_0007F600 &other) const;
+
+    unsigned int m_Key;
+};
+
+// std::_Sort (introsort loop of std::sort), instantiated for Class_0007F600.
+template void std::_Sort<Class_0007F600 *, int>(Class_0007F600 *, Class_0007F600 *, int);
+
 // [TODO] 0x0007F6D0 sub_0007F6D0 (171 B)
 // [TODO] 0x0007F780 sub_0007F780 (102 B)
 // ============================================================================
@@ -57751,7 +58017,25 @@ bool sub_000C4360(const Class_000C4360 &left, const Class_000C4360 &right)
     return left.m_Field04 < right.m_Field04;
 }
 
-// [TODO] 0x000C4380 sub_000C4380 (149 B)
+// ============================================================================
+// [VERIFIED] sub_000C4380 (0x000C4380, 149 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 4-byte elements so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x000C4380
+// what: Rotates a range of 4-byte elements so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C4380.cpp --va 0x000C4380 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The rotated elements are 4 bytes wide; what they point to is not known yet.
+class Class_000C4380;
+
+// std::_Rotate for random-access iterators, instantiated for an array of Class_000C4380 pointers.
+template void std::_Rotate<Class_000C4380 **, int, Class_000C4380 *>(Class_000C4380 **, Class_000C4380 **, Class_000C4380 **, int *, Class_000C4380 **);
+
 // [TODO] 0x000C4420 ScriptContextProperties::vfunc_04 (173 B)
 // [TODO] 0x000C44D0 sub_000C44D0 (79 B)
 // [TODO] 0x000C4520 ScriptContextProperties::vfunc_29 (59 B)
@@ -57887,10 +58171,54 @@ void* WeaponPickupContextProperties::vfunc_00()
     return DAT_004245A0;
 }
 
-// [TODO] 0x000C47B0 sub_000C47B0 (61 B)
+// ============================================================================
+// [VERIFIED] sub_000C47B0 (0x000C47B0, 61 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 1 external relocation(s) unchecked
+// What it does: Arranges an array of 4-byte elements into a heap with a caller-supplied ordering function (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x000C47B0
+// what: Arranges an array of 4-byte elements into a heap with a caller-supplied ordering function (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C47B0.cpp --va 0x000C47B0 --bin xb --match '?$_Make_heap@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_00029D30;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_00029D30Less)(Class_00029D30 *, Class_00029D30 *);
+
+// std::_Make_heap with a predicate, instantiated for an array of Class_00029D30 pointers.
+template void std::_Make_heap<Class_00029D30 **, int, Class_00029D30 *, Class_00029D30Less>(Class_00029D30 **, Class_00029D30 **, Class_00029D30Less, int *, Class_00029D30 **);
+
 // [TODO] 0x000C47F0 WeaponPickupContextProperties::vfunc_29 (544 B)
 // [TODO] 0x000C4A10 sub_000C4A10 (166 B)
-// [TODO] 0x000C4AC0 sub_000C4AC0 (238 B)
+// ============================================================================
+// [VERIFIED] sub_000C4AC0 (0x000C4AC0, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000C4AC0
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000C4AC0.cpp --va 0x000C4AC0 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000C4AC0;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000C4AC0Less)(Class_000C4AC0 *, Class_000C4AC0 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000C4AC0 pointers.
+template void std::_Sort<Class_000C4AC0 **, int, Class_000C4AC0Less>(Class_000C4AC0 **, Class_000C4AC0 **, int, Class_000C4AC0Less);
+
 // [TODO] 0x000C4BB0 sub_000C4BB0 (1039 B)
 // [TODO] 0x000C4FC0 sub_000C4FC0 (221 B)
 // ============================================================================
@@ -78223,10 +78551,76 @@ bool __cdecl sub_000EA530(void)
 // [TODO] 0x000EA7D0 sub_000EA7D0 (117 B)
 // [TODO] 0x000EA850 sub_000EA850 (63 B)
 // [TODO] 0x000EA890 sub_000EA890 (376 B)
-// [TODO] 0x000EAA10 sub_000EAA10 (167 B)
+// ============================================================================
+// [VERIFIED] sub_000EAA10 (0x000EAA10, 167 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 5 external relocation(s) unchecked
+// What it does: Picks a median-of-three (or of nine for large ranges) pivot among 4-byte elements with a caller-supplied ordering function (standard library sort helper).
+// ============================================================================
+// bin: xb
+// va: 0x000EAA10
+// what: Picks a median-of-three (or of nine for large ranges) pivot among 4-byte elements with a caller-supplied ordering function (standard library sort helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAA10.cpp --va 0x000EAA10 --bin xb --match '?$_Median@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAA10;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAA10Less)(Class_000EAA10 *, Class_000EAA10 *);
+
+// std::_Median with a predicate (pivot selection of std::sort), instantiated for an array of Class_000EAA10 pointers.
+template void std::_Median<Class_000EAA10 **, Class_000EAA10Less>(Class_000EAA10 **, Class_000EAA10 **, Class_000EAA10 **, Class_000EAA10Less);
+
 // [TODO] 0x000EAAC0 sub_000EAAC0 (408 B)
-// [TODO] 0x000EAC60 sub_000EAC60 (238 B)
-// [TODO] 0x000EAD50 sub_000EAD50 (238 B)
+// ============================================================================
+// [VERIFIED] sub_000EAC60 (0x000EAC60, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000EAC60
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAC60.cpp --va 0x000EAC60 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAC60;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAC60Less)(Class_000EAC60 *, Class_000EAC60 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000EAC60 pointers.
+template void std::_Sort<Class_000EAC60 **, int, Class_000EAC60Less>(Class_000EAC60 **, Class_000EAC60 **, int, Class_000EAC60Less);
+
+// ============================================================================
+// [VERIFIED] sub_000EAD50 (0x000EAD50, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x000EAD50
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_000EAD50.cpp --va 0x000EAD50 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_000EAD50;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_000EAD50Less)(Class_000EAD50 *, Class_000EAD50 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_000EAD50 pointers.
+template void std::_Sort<Class_000EAD50 **, int, Class_000EAD50Less>(Class_000EAD50 **, Class_000EAD50 **, int, Class_000EAD50Less);
+
 // [TODO] 0x000EAE40 sub_000EAE40 (255 B)
 // [TODO] 0x000EAF40 sub_000EAF40 (975 B)
 // [TODO] 0x000EB310 sub_000EB310 (137 B)
@@ -87964,7 +88358,29 @@ int __cdecl sub_0010C180(void)
 }
 
 // [TODO] 0x0010C190 sub_0010C190 (91 B)
-// [TODO] 0x0010C1F0 sub_0010C1F0 (177 B)
+// ============================================================================
+// [VERIFIED] sub_0010C1F0 (0x0010C1F0, 177 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 8-byte records so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: xb
+// va: 0x0010C1F0
+// what: Rotates a range of 8-byte records so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_0010C1F0.cpp --va 0x0010C1F0 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// An 8-byte record; its fields are not known yet.
+struct Class_0010C1F0
+{
+    int m_Field00;
+    int m_Field04;
+};
+
+// std::_Rotate for random-access iterators, instantiated for Class_0010C1F0.
+template void std::_Rotate<Class_0010C1F0 *, int, Class_0010C1F0>(Class_0010C1F0 *, Class_0010C1F0 *, Class_0010C1F0 *, int *, Class_0010C1F0 *);
+
 // [TODO] 0x0010C2B0 sub_0010C2B0 (59 B)
 // [TODO] 0x0010C2F0 sub_0010C2F0 (126 B)
 // [TODO] 0x0010C370 sub_0010C370 (121 B)
@@ -185091,7 +185507,29 @@ void __cdecl sub_001E8C10(void)
 // [TODO] 0x001E8DB0 TrafficConfigLoader::vfunc_06 (948 B)
 // [TODO] 0x001E9170 sub_001E9170 (39 B)
 // [TODO] 0x001E91A0 sub_001E91A0 (237 B)
-// [TODO] 0x001E9290 sub_001E9290 (238 B)
+// ============================================================================
+// [VERIFIED] sub_001E9290 (0x001E9290, 238 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 | 4 external relocation(s) unchecked
+// What it does: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// ============================================================================
+// bin: xb
+// va: 0x001E9290
+// what: Sorts an array of 4-byte elements with a caller-supplied ordering function, the standard library's quicksort loop.
+// tool: Claude Opus 5.5
+// verify: python portal/verify.py reports/to_submit/xb_001E9290.cpp --va 0x001E9290 --bin xb --match '?$_Sort@'   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The sorted elements are 4 bytes wide and handed to the ordering function by value; what they
+// point to is not known yet.
+class Class_001E9290;
+
+// Caller-supplied ordering: true when the first element goes before the second.
+typedef bool (*Class_001E9290Less)(Class_001E9290 *, Class_001E9290 *);
+
+// std::_Sort with a predicate (introsort loop of std::sort), instantiated for an array of Class_001E9290 pointers.
+template void std::_Sort<Class_001E9290 **, int, Class_001E9290Less>(Class_001E9290 **, Class_001E9290 **, int, Class_001E9290Less);
+
 // [TODO] 0x001E9380 sub_001E9380 (709 B)
 // [TODO] 0x001E9650 sub_001E9650 (355 B)
 // [TODO] 0x001E97C0 sub_001E97C0 (2029 B)
