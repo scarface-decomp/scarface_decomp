@@ -65,3 +65,13 @@ def test_setup_wibo_is_pinned():
     assert setup_wibo.VERSION in setup_wibo.URL
     assert len(setup_wibo.SHA256) == 64 and int(setup_wibo.SHA256, 16) >= 0
     assert setup_wibo.DEST == ROOT / "portal" / "tools" / "wibo" / "wibo"
+
+
+def test_tmpdir_is_dropped_for_wibo(monkeypatch, fake_wibo, tmp_path):
+    """wibo 1.2.0 crashes under cl.exe 13.10 whenever TMPDIR is set."""
+    monkeypatch.delenv("SCARFACE_USE_WINE", raising=False)
+    monkeypatch.setenv("SCARFACE_WIBO", str(fake_wibo))
+    monkeypatch.setenv("TMPDIR", "/tmp")
+    assert "TMPDIR" not in MV._env(tmp_path, [])
+    monkeypatch.setenv("SCARFACE_USE_WINE", "1")
+    assert MV._env(tmp_path, [])["TMPDIR"] == "/tmp"

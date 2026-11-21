@@ -149,6 +149,10 @@ def _env(bin_dir: Path, include_dirs: Sequence[Path]) -> dict:
     env["INCLUDE"] = ";".join(_compiler_path(Path(d)) for d in include_dirs if Path(d).exists())
     env["LIB"] = ""
     env.setdefault("WINEDEBUG", "-all")
+    if _wibo():
+        # wibo 1.2.0 crashes under cl.exe 13.10 (SIGSEGV / "free(): invalid pointer") whenever TMPDIR is set,
+        # whatever its value; TMP and TEMP are fine.
+        env.pop("TMPDIR", None)
     return env
 
 
