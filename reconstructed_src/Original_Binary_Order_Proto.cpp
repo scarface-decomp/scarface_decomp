@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,312 of 17,873 functions matched (40.91%). NOT COMPLETE YET.
-// The 10,561 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 7,317 of 17,873 functions matched (40.94%). NOT COMPLETE YET.
+// The 10,556 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -97061,7 +97061,32 @@ void Method6_void__const_char___float__bool__bool__bool__bool_::vfunc_00(int a1,
 }
 
 // [TODO] 0x0011B0B0 sub_0011B0B0 (95 B)
-// [TODO] 0x0011B110 CScript::Method4<void, math::Vector, float, float, bool>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method4<void, math::Vector, float, float, bool>::vfunc_00 (0x0011B110, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CScript::Method4<void, math::Vector, float, float, bool>::vfunc_00 (0x00136270), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0011B110
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method4@XVVector@math@@MM_N@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_0011B130(int, int, int);
+
+class Method_0011B110
+{
+public:
+    virtual void sub_0011B110(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_0011B110::sub_0011B110(int a1, int a2)
+{
+    sub_0011B130(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x0011B130 sub_0011B130 (125 B)
 // ============================================================================
 // [VERIFIED] CScript::Method4<void, const char*, float, float, bool>::vfunc_00 (0x0011B1B0, 25 B)
@@ -97094,14 +97119,89 @@ void Method4_void__const_char___int__int__float_::vfunc_00(float a1, float a2)
 
 // [TODO] 0x0011B1D0 sub_0011B1D0 (67 B)
 // [TODO] 0x0011B220 CScript::Method3<void, const char*, unsigned int, int>::vfunc_00 (40 B)
-// [TODO] 0x0011B250 CScript::Method2<void, math::Vector, float>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method2<void, math::Vector, float>::vfunc_00 (0x0011B250, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CScript::Method2<void, math::Vector, float>::vfunc_00 (0x001363B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0011B250
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method2@XVVector@math@@M@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_0011B270(int, int, int);
+
+class Method_0011B250
+{
+public:
+    virtual void sub_0011B250(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_0011B250::sub_0011B250(int a1, int a2)
+{
+    sub_0011B270(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x0011B270 sub_0011B270 (97 B)
 // [TODO] 0x0011B2E0 CScript::Method3<void, const char*, float, bool>::vfunc_00 (58 B)
-// [TODO] 0x0011B320 CScript::Method5<void, float, float, float, float, float>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method5<void, float, float, float, float, float>::vfunc_00 (0x0011B320, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CScript::Method5<void, float, float, float, float, float>::vfunc_00 (0x00136480), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0011B320
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method5@XMMMMM@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_0011B340(int, int, int);
+
+class Method_0011B320
+{
+public:
+    virtual void sub_0011B320(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_0011B320::sub_0011B320(int a1, int a2)
+{
+    sub_0011B340(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x0011B340 sub_0011B340 (83 B)
 // [TODO] 0x0011B3A0 CScript::Method3<void, const char*, const char*, float>::vfunc_00 (50 B)
 // [TODO] 0x0011B3E0 CScript::Method3<void, unsigned int, float, bool>::vfunc_00 (58 B)
-// [TODO] 0x0011B420 CScript::Method4<void, float, float, float, float>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method4<void, float, float, float, float>::vfunc_00 (0x0011B420, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CScript::Method4<void, float, float, float, float>::vfunc_00 (0x00136540), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0011B420
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method4@XMMMM@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_0011B440(int, int, int);
+
+class Method_0011B420
+{
+public:
+    virtual void sub_0011B420(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_0011B420::sub_0011B420(int a1, int a2)
+{
+    sub_0011B440(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x0011B440 sub_0011B440 (69 B)
 // [TODO] 0x0011B490 CScript::Method2<void, float, float>::vfunc_00 (48 B)
 // [TODO] 0x0011B4C0 CScript::Method2<void, unsigned int, const char*>::vfunc_00 (30 B)
@@ -160292,7 +160392,32 @@ template <> void ConcreteClassRep<SpawnTriggerObject>::vfunc_02()
     DAT_00417520 = (int)DAT_003F6D24;
 }
 
-// [TODO] 0x001AEA60 CScript::Method5<void, int, int, int, int, int>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method5<void, int, int, int, int, int>::vfunc_00 (0x001AEA60, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CScript::Method5<void, float, float, float, float, float>::vfunc_00 (0x00136480), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001AEA60
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method5@XMMMMM@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_001AEA80(int, int, int);
+
+class Method_001AEA60
+{
+public:
+    virtual void sub_001AEA60(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_001AEA60::sub_001AEA60(int a1, int a2)
+{
+    sub_001AEA80(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x001AEA80 sub_001AEA80 (55 B)
 // ============================================================================
 // [VERIFIED] sub_001AEAC0 (0x001AEAC0, 114 B)

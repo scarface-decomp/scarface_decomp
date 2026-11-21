@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Drawable.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Drawable.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 4 functions matched (50.00%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 4 functions matched (75.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -89,4 +89,38 @@ int Drawable::vfunc_14()
 }
 
 } }
+
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Drawable::vfunc_03 (0x00248C00, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x00248C00
+// what: Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00239CE0 with its own addresses, examiner A6: pure3d::frontend::Drawable::vfunc_03)
+
+extern "C" char DAT_003D4F14[];
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_00248C00
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00248C00* sub_00248C00(unsigned int flags);
+    void sub_0028D470();
+};
+
+#pragma optimize("y", off)
+Class_00248C00* Class_00248C00::sub_00248C00(unsigned int flags)
+{
+    *(void**)this = DAT_003D4F14;
+    sub_0028D470();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
 

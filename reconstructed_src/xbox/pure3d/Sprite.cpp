@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Sprite.cpp (8 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Sprite.cpp (9 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 8 of 17 functions matched (47.06%). NOT COMPLETE YET.
-// The 9 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 9 of 17 functions matched (52.94%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -144,6 +144,38 @@ void Sprite::vfunc_17(int a1)
 }
 
 } }
+
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Sprite::vfunc_03 (0x0024B8C0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: runs the destructor, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x0024B8C0
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::frontend::Sprite::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0024B8C0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0024B8C0* sub_0024B8C0(unsigned int flags);
+    void sub_0024B800();
+};
+
+#pragma optimize("y", off)
+Class_0024B8C0* Class_0024B8C0::sub_0024B8C0(unsigned int flags)
+{
+    sub_0024B800();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
 
 // ============================================================================
 // [VERIFIED] pure3d::Sprite::vfunc_09 (0x0026CF80, 4 B)

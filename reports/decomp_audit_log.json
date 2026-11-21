@@ -1,5 +1,165 @@
 [
   {
+    "time": "2026-11-21 04:19:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00",
+    "va": "0x0028A410",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:19:31",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00",
+    "va": "0x0028A410",
+    "bytes": "46/46 B"
+  },
+  {
+    "time": "2026-11-21 04:19:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "10 look-alike(s) of pure3d::frontend::Text::vfunc_03",
+    "va": "0x00249C40",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:19:08",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::d3dExtTODFactor::vfunc_16",
+    "va": "0x00263FE0",
+    "bytes": "15/15 B"
+  },
+  {
+    "time": "2026-11-21 04:18:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::d3dExtTODFactor::vfunc_10",
+    "va": "0x00263F60",
+    "bytes": "15/15 B"
+  },
+  {
+    "time": "2026-11-21 04:18:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::frontend::Sprite::vfunc_03",
+    "va": "0x0024B8C0",
+    "bytes": "33/33 B"
+  },
+  {
+    "time": "2026-11-21 04:18:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "4 look-alike(s) of pure3d::frontend::Drawable::vfunc_03",
+    "va": "0x00248C00",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:18:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::frontend::Text::vfunc_03",
+    "va": "0x00249C40",
+    "bytes": "33/33 B"
+  },
+  {
+    "time": "2026-11-21 04:18:10",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::frontend::Drawable::vfunc_03",
+    "va": "0x00248C00",
+    "bytes": "39/39 B"
+  },
+  {
+    "time": "2026-11-21 04:17:58",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of fight::ParamString<fight::EnterExitScriptTrack>::vfunc_00",
+    "va": "0x0023E8B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:17:47",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "fight::ParamString<fight::EnterExitScriptTrack>::vfunc_00",
+    "va": "0x0023E8B0",
+    "bytes": "33/33 B"
+  },
+  {
+    "time": "2026-11-21 04:17:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "fight::ConditionFactoryTemplate<fight::MaybeCondition>::vfunc_03",
+    "va": "0x0023E050",
+    "bytes": "46/46 B"
+  },
+  {
+    "time": "2026-11-21 04:17:23",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CScript::Method4<void, float, float, float, float>::vfunc_00",
+    "va": "0x00136540",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:17:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of CScript::Method5<void, float, float, float, float, float>::vfunc_00",
+    "va": "0x00136480",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:17:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "CScript::Method4<void, float, float, float, float>::vfunc_00",
+    "va": "0x00136540",
+    "bytes": "25/25 B"
+  },
+  {
+    "time": "2026-11-21 04:16:48",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "CScript::Method5<void, float, float, float, float, float>::vfunc_00",
+    "va": "0x00136480",
+    "bytes": "25/25 B"
+  },
+  {
+    "time": "2026-11-21 04:16:36",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CScript::Method2<void, math::Vector, float>::vfunc_00",
+    "va": "0x001363B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:16:24",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "CScript::Method2<void, math::Vector, float>::vfunc_00",
+    "va": "0x001363B0",
+    "bytes": "25/25 B"
+  },
+  {
+    "time": "2026-11-21 04:16:13",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of CScript::Method4<void, math::Vector, float, float, bool>::vfunc_00",
+    "va": "0x00136270",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:16:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "CScript::Method4<void, math::Vector, float, float, bool>::vfunc_00",
+    "va": "0x00136270",
+    "bytes": "25/25 B"
+  },
+  {
     "time": "2026-11-21 04:07:00",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1837,166 +1997,6 @@
     "action": "VERIFIED",
     "symbol": "1 look-alike(s) of core::DriveCompletionRequest::vfunc_06",
     "va": "Proto 0x0026C230",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:35:58",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::DriveCancelRequest::vfunc_06",
-    "va": "Proto 0x0026CD30",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:35:46",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::DriveFileDestroyRequest::vfunc_06",
-    "va": "Proto 0x0026CCE0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:35:35",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::DriveFindCloseRequest::vfunc_06",
-    "va": "Proto 0x0026CC80",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:35:23",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of GangSpawnObject::vfunc_43",
-    "va": "Proto 0x00213E60",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:35:12",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::DriveDestroyDirectoryRequest::vfunc_06",
-    "va": "Proto 0x0026CB60",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:35:00",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::DriveCreateDirectoryRequest::vfunc_06",
-    "va": "Proto 0x0026CB00",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:34:48",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of GlanceAtOvertakingPed::vfunc_10",
-    "va": "Proto 0x0026CAA0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:34:36",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::DriveMediaRequest::vfunc_06",
-    "va": "Proto 0x0026CA50",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:34:25",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::DriveOpenRequest::vfunc_06",
-    "va": "Proto 0x0026C9F0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:34:13",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::FileRequest::vfunc_03",
-    "va": "Proto 0x0026C9A0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:34:01",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of fight::ParamBranch<ExitConditionTrack>::vfunc_01",
-    "va": "Proto 0x000D6C80",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:33:48",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of DealerSpawnObject::vfunc_43",
-    "va": "Proto 0x0021E9A0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:33:37",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::FileGetPositionRequest::vfunc_06",
-    "va": "Proto 0x0026C8F0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:33:25",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01",
-    "va": "Proto 0x000CB900",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:33:13",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::FileRequest::vfunc_05",
-    "va": "Proto 0x0026C280",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:33:01",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::CompletionEventRequest::vfunc_06",
-    "va": "Proto 0x0026C190",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:32:49",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::FileCompletionRequest::vfunc_03",
-    "va": "Proto 0x0026C220",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:32:37",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::FileCompletionRequest::vfunc_01",
-    "va": "Proto 0x0026C1D0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:32:26",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::CompletionEventRequest::vfunc_01",
-    "va": "Proto 0x0026C170",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:32:14",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::MemorySmallDlAllocator::vfunc_10",
-    "va": "Proto 0x0024C630",
     "bytes": "same code, own addresses"
   }
 ]

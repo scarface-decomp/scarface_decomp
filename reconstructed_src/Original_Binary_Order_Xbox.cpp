@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,990 of 19,501 functions matched (40.97%). NOT COMPLETE YET.
-// The 11,511 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 8,021 of 19,501 functions matched (41.13%). NOT COMPLETE YET.
+// The 11,480 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -113991,7 +113991,31 @@ void Method7_void__const_char___float__bool__bool__bool__bool__bool_::vfunc_00(i
 }
 
 // [TODO] 0x00136200 sub_00136200 (109 B)
-// [TODO] 0x00136270 CScript::Method4<void, math::Vector, float, float, bool>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method4<void, math::Vector, float, float, bool>::vfunc_00 (0x00136270, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// ============================================================================
+// bin: xb
+// va: 0x00136270
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method4@XVVector@math@@MM_N@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_00136290(int, int, int);
+
+class Method_00136270
+{
+public:
+    virtual void sub_00136270(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_00136270::sub_00136270(int a1, int a2)
+{
+    sub_00136290(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x00136290 sub_00136290 (125 B)
 // ============================================================================
 // [VERIFIED] CScript::Method4<void, const char*, float, float, bool>::vfunc_00 (0x00136310, 25 B)
@@ -114024,13 +114048,85 @@ void Method4_void__const_char___int__int__float_::vfunc_00(float a1, float a2)
 
 // [TODO] 0x00136330 sub_00136330 (67 B)
 // [TODO] 0x00136380 CScript::Method3<void, const char*, unsigned int, int>::vfunc_00 (40 B)
-// [TODO] 0x001363B0 CScript::Method2<void, math::Vector, float>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method2<void, math::Vector, float>::vfunc_00 (0x001363B0, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// ============================================================================
+// bin: xb
+// va: 0x001363B0
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method2@XVVector@math@@M@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_001363D0(int, int, int);
+
+class Method_001363B0
+{
+public:
+    virtual void sub_001363B0(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_001363B0::sub_001363B0(int a1, int a2)
+{
+    sub_001363D0(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x001363D0 sub_001363D0 (97 B)
 // [TODO] 0x00136440 CScript::Method3<void, const char*, float, bool>::vfunc_00 (58 B)
-// [TODO] 0x00136480 CScript::Method5<void, float, float, float, float, float>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method5<void, float, float, float, float, float>::vfunc_00 (0x00136480, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// ============================================================================
+// bin: xb
+// va: 0x00136480
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method5@XMMMMM@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_001364A0(int, int, int);
+
+class Method_00136480
+{
+public:
+    virtual void sub_00136480(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_00136480::sub_00136480(int a1, int a2)
+{
+    sub_001364A0(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x001364A0 sub_001364A0 (83 B)
 // [TODO] 0x00136500 CScript::Method3<void, unsigned int, float, bool>::vfunc_00 (58 B)
-// [TODO] 0x00136540 CScript::Method4<void, float, float, float, float>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method4<void, float, float, float, float>::vfunc_00 (0x00136540, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// ============================================================================
+// bin: xb
+// va: 0x00136540
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method4@XMMMM@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_00136560(int, int, int);
+
+class Method_00136540
+{
+public:
+    virtual void sub_00136540(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_00136540::sub_00136540(int a1, int a2)
+{
+    sub_00136560(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x00136560 sub_00136560 (69 B)
 // [TODO] 0x001365B0 CScript::Method2<void, float, float>::vfunc_00 (48 B)
 // [TODO] 0x001365E0 CScript::Method2<void, unsigned int, const char*>::vfunc_00 (30 B)
@@ -185138,7 +185234,32 @@ template <> void ConcreteClassRep<SpawnTriggerObject>::vfunc_02()
     DAT_0043DC50 = (int)DAT_0041BDC0;
 }
 
-// [TODO] 0x001E7B10 CScript::Method5<void, int, int, int, int, int>::vfunc_00 (25 B)
+// ============================================================================
+// [VERIFIED] CScript::Method5<void, int, int, int, int, int>::vfunc_00 (0x001E7B10, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CScript::Method5<void, float, float, float, float, float>::vfunc_00 (0x00136480), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001E7B10
+// what: Script method thunk: calls the bound function with the two arguments and the stored value at +0x0C.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0002E1D0 with its own addresses, examiner A6: ?$Method5@XMMMMM@CScript::vfunc_00)
+
+extern "C" void __cdecl sub_001E7B30(int, int, int);
+
+class Method_001E7B10
+{
+public:
+    virtual void sub_001E7B10(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void Method_001E7B10::sub_001E7B10(int a1, int a2)
+{
+    sub_001E7B30(a1, a2, m_Field0C);
+}
+
 // [TODO] 0x001E7B30 sub_001E7B30 (55 B)
 // ============================================================================
 // [VERIFIED] sub_001E7B70 (0x001E7B70, 114 B)
@@ -228354,7 +228475,42 @@ template <> int fight::ConditionFactoryTemplate<fight::MaybeCondition>::vfunc_07
     return r_esi;
 }
 
-// [TODO] 0x0023E050 fight::ConditionFactoryTemplate<fight::MaybeCondition>::vfunc_03 (46 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactoryTemplate<fight::MaybeCondition>::vfunc_03 (0x0023E050, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x0023E050
+// what: Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0024A800 with its own addresses, examiner A6: ?$ConditionFactoryTemplate@VMaybeCondition@fight@@@fight::vfunc_03)
+#pragma optimize("y", off)
+
+extern "C" char DAT_003D4554[];
+extern "C" void __cdecl sub_0023F7A0(int);
+extern "C" void __cdecl sub_0023DED0(void);
+
+class Class_0023E050
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0023E050* sub_0023E050(int a1);
+    void sub_00239ED0();
+};
+
+Class_0023E050* Class_0023E050::sub_0023E050(int a1)
+{
+    *(int*)this = (int)DAT_003D4554;
+    sub_0023DED0();
+    sub_00239ED0();
+    if (a1 & 1) {
+        sub_0023F7A0((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0023E080 sub_0023E080 (111 B)
 // ============================================================================
 // [VERIFIED] fight::AndCondition::vfunc_03 (0x0023E0F0, 39 B)
@@ -228885,7 +229041,38 @@ SequenceTrack* SequenceTrack::vfunc_03(int a1)
 
 // [TODO] 0x0023E880 fight::ParamBranch<fight::SequenceTrack>::vfunc_05 (15 B)
 // [TODO] 0x0023E890 fight::ParamString<fight::EnterExitScriptTrack>::vfunc_05 (29 B)
-// [TODO] 0x0023E8B0 fight::ParamString<fight::EnterExitScriptTrack>::vfunc_00 (33 B)
+// ============================================================================
+// [VERIFIED] fight::ParamString<fight::EnterExitScriptTrack>::vfunc_00 (0x0023E8B0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: runs the destructor, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x0023E8B0
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: ?$ParamString@VEnterExitScriptTrack@fight@@@fight::vfunc_00)
+
+extern "C" void __cdecl sub_00027600(void* p);
+
+class Class_0023E8B0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0023E8B0* sub_0023E8B0(unsigned int flags);
+    void sub_0023EA70();
+};
+
+#pragma optimize("y", off)
+Class_0023E8B0* Class_0023E8B0::sub_0023E8B0(unsigned int flags)
+{
+    sub_0023EA70();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0023E8E0 sub_0023E8E0 (209 B)
 // [TODO] 0x0023E9C0 FightTree::FightActionController<fight::SequenceTrack>::vfunc_20 (96 B)
 // [TODO] 0x0023EA20 fight::SequenceAction::vfunc_03 (68 B)
@@ -234027,7 +234214,40 @@ int Drawable::vfunc_14()
 } }
 
 // [TODO] 0x00248B30 sub_00248B30 (204 B)
-// [TODO] 0x00248C00 pure3d::frontend::Drawable::vfunc_03 (39 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Drawable::vfunc_03 (0x00248C00, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x00248C00
+// what: Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00239CE0 with its own addresses, examiner A6: pure3d::frontend::Drawable::vfunc_03)
+
+extern "C" char DAT_003D4F14[];
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_00248C00
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00248C00* sub_00248C00(unsigned int flags);
+    void sub_0028D470();
+};
+
+#pragma optimize("y", off)
+Class_00248C00* Class_00248C00::sub_00248C00(unsigned int flags)
+{
+    *(void**)this = DAT_003D4F14;
+    sub_0028D470();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x00248C30 pure3d::frontend::Drawable::vfunc_13 (63 B)
 // [TODO] 0x00248DB0 sub_00248DB0 (121 B)
 // [TODO] 0x00248E30 sub_00248E30 (199 B)
@@ -234375,7 +234595,38 @@ bool __cdecl sub_00249B00(void)
 
 // [TODO] 0x00249B20 sub_00249B20 (159 B)
 // [TODO] 0x00249BC0 sub_00249BC0 (124 B)
-// [TODO] 0x00249C40 pure3d::frontend::Text::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Text::vfunc_03 (0x00249C40, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: runs the destructor, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x00249C40
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::frontend::Text::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_00249C40
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00249C40* sub_00249C40(unsigned int flags);
+    void sub_00249A40();
+};
+
+#pragma optimize("y", off)
+Class_00249C40* Class_00249C40::sub_00249C40(unsigned int flags)
+{
+    sub_00249A40();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x00249C70 pure3d::frontend::Polygon::vfunc_12 (378 B)
 // ============================================================================
 // [VERIFIED] sub_00249DF0 (0x00249DF0, 5 B)
@@ -234932,7 +235183,38 @@ int Class_0024B2C0::sub_0024B2C0(int a1)
 // [TODO] 0x0024B7A0 sub_0024B7A0 (88 B)
 // [TODO] 0x0024B800 sub_0024B800 (100 B)
 // [TODO] 0x0024B870 sub_0024B870 (71 B)
-// [TODO] 0x0024B8C0 pure3d::frontend::Sprite::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Sprite::vfunc_03 (0x0024B8C0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: runs the destructor, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x0024B8C0
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::frontend::Sprite::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0024B8C0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0024B8C0* sub_0024B8C0(unsigned int flags);
+    void sub_0024B800();
+};
+
+#pragma optimize("y", off)
+Class_0024B8C0* Class_0024B8C0::sub_0024B8C0(unsigned int flags)
+{
+    sub_0024B800();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0024B8F0 sub_0024B8F0 (27 B)
 // [TODO] 0x0024B910 sub_0024B910 (64 B)
 // [TODO] 0x0024B950 sub_0024B950 (71 B)
@@ -235565,9 +235847,75 @@ void Class_0024FA20::sub_0024FA20(int a1)
 // [TODO] 0x00250580 sub_00250580 (206 B)
 // [TODO] 0x00250650 sub_00250650 (1609 B)
 // [TODO] 0x00250CA0 sub_00250CA0 (298 B)
-// [TODO] 0x00250DD0 pure3d::frontend::Project::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Project::vfunc_03 (0x00250DD0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00250DD0
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::frontend::Project::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_00250DD0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00250DD0* sub_00250DD0(unsigned int flags);
+    void sub_0024FB50();
+};
+
+#pragma optimize("y", off)
+Class_00250DD0* Class_00250DD0::sub_00250DD0(unsigned int flags)
+{
+    sub_0024FB50();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x00250E00 sub_00250E00 (28 B)
-// [TODO] 0x00250E20 pure3d::frontend::Page::vfunc_03 (39 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Page::vfunc_03 (0x00250E20, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Drawable::vfunc_03 (0x00248C00), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00250E20
+// what: Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00239CE0 with its own addresses, examiner A6: pure3d::frontend::Page::vfunc_03)
+
+extern "C" char DAT_003D5388[];
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_00250E20
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00250E20* sub_00250E20(unsigned int flags);
+    void sub_0028D930();
+};
+
+#pragma optimize("y", off)
+Class_00250E20* Class_00250E20::sub_00250E20(unsigned int flags)
+{
+    *(void**)this = DAT_003D5388;
+    sub_0028D930();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // ============================================================================
 // [VERIFIED] sub_00250E50 (0x00250E50, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -236813,7 +237161,39 @@ void Class_00254610::sub_00254610()
 // [TODO] 0x00254650 sub_00254650 (85 B)
 // [TODO] 0x002546B0 sub_002546B0 (265 B)
 // [TODO] 0x002547C0 sub_002547C0 (298 B)
-// [TODO] 0x002548F0 pure3d::prop::EffectQueue::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::prop::EffectQueue::vfunc_03 (0x002548F0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002548F0
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::prop::EffectQueue::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_002548F0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_002548F0* sub_002548F0(unsigned int flags);
+    void sub_00254610();
+};
+
+#pragma optimize("y", off)
+Class_002548F0* Class_002548F0::sub_002548F0(unsigned int flags)
+{
+    sub_00254610();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // ============================================================================
 // [VERIFIED] sub_00254920 (0x00254920, 64 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -239629,7 +240009,39 @@ void ParticleEmitter::vfunc_29(int a1)
 // [TODO] 0x0025E600 sub_0025E600 (771 B)
 // [TODO] 0x0025E910 sub_0025E910 (670 B)
 // [TODO] 0x0025EABE sub_0025EABE (240 B)
-// [TODO] 0x0025EBB0 pure3d::SpriteParticleEmitter::OverLifeAttributes::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::SpriteParticleEmitter::OverLifeAttributes::vfunc_03 (0x0025EBB0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0025EBB0
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::SpriteParticleEmitter::OverLifeAttributes::vfunc_03)
+
+extern "C" void __cdecl sub_00027600(void* p);
+
+class Class_0025EBB0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0025EBB0* sub_0025EBB0(unsigned int flags);
+    void sub_0025DB70();
+};
+
+#pragma optimize("y", off)
+Class_0025EBB0* Class_0025EBB0::sub_0025EBB0(unsigned int flags)
+{
+    sub_0025DB70();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0025EBE0 sub_0025EBE0 (1033 B)
 // [TODO] 0x0025EFF0 pure3d::SpriteParticleEmitter::vfunc_20 (550 B)
 // [TODO] 0x0025F220 pure3d::SpriteParticleEmitter::vfunc_21 (115 B)
@@ -242172,7 +242584,25 @@ int d3dExtTODFactor::vfunc_01(int a1, int a2, int a3)
 // [TODO] 0x00263EE0 pure3d::d3dExtTODFactor::vfunc_05 (15 B)
 // [TODO] 0x00263EF0 pure3d::d3dExtTODFactor::vfunc_06 (15 B)
 // [TODO] 0x00263F00 pure3d::d3dExtTODFactor::vfunc_09 (91 B)
-// [TODO] 0x00263F60 pure3d::d3dExtTODFactor::vfunc_10 (15 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_10 (0x00263F60, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a yes/no setting in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00263F60
+// what: Stores a yes/no setting in a global and returns it.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00253130 with its own addresses, examiner A6: pure3d::d3dExtTODFactor::vfunc_10)
+#pragma optimize("y", off)
+
+extern "C" bool DAT_004BD4C1;
+
+bool __stdcall sub_00263F60(bool a1)
+{
+    DAT_004BD4C1 = a1;
+    return a1;
+}
+
 // [TODO] 0x00263F70 pure3d::d3dExtTODFactor::vfunc_11 (33 B)
 // [TODO] 0x00263FA0 pure3d::d3dExtTODFactor::vfunc_12 (15 B)
 // [TODO] 0x00263FB0 pure3d::d3dExtTODFactor::vfunc_13 (15 B)
@@ -242218,7 +242648,25 @@ float d3dExtTODFactor::vfunc_14()
 
 }
 
-// [TODO] 0x00263FE0 pure3d::d3dExtTODFactor::vfunc_16 (15 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_16 (0x00263FE0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a yes/no setting in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00263FE0
+// what: Stores a yes/no setting in a global and returns it.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00253130 with its own addresses, examiner A6: pure3d::d3dExtTODFactor::vfunc_16)
+#pragma optimize("y", off)
+
+extern "C" bool DAT_004BD4CC;
+
+bool __stdcall sub_00263FE0(bool a1)
+{
+    DAT_004BD4CC = a1;
+    return a1;
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtTODFactor::vfunc_17 (0x00263FF0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -246316,9 +246764,73 @@ Class_0026EA00* Class_0026EA00::sub_0026EA00()
 }
 
 // [TODO] 0x0026EA20 sub_0026EA20 (76 B)
-// [TODO] 0x0026EA70 pure3d::prop::StateData::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::prop::StateData::vfunc_03 (0x0026EA70, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026EA70
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::prop::StateData::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0026EA70
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0026EA70* sub_0026EA70(unsigned int flags);
+    void sub_0026E8D0();
+};
+
+#pragma optimize("y", off)
+Class_0026EA70* Class_0026EA70::sub_0026EA70(unsigned int flags)
+{
+    sub_0026E8D0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0026EAA0 sub_0026EAA0 (164 B)
-// [TODO] 0x0026EB50 pure3d::prop::StatePropData::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::prop::StatePropData::vfunc_03 (0x0026EB50, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026EB50
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::prop::StatePropData::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0026EB50
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0026EB50* sub_0026EB50(unsigned int flags);
+    void sub_0026EAA0();
+};
+
+#pragma optimize("y", off)
+Class_0026EB50* Class_0026EB50::sub_0026EB50(unsigned int flags)
+{
+    sub_0026EAA0();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0026EB80 sub_0026EB80 (128 B)
 // [TODO] 0x0026EC00 sub_0026EC00 (169 B)
 // [TODO] 0x0026ECB0 pure3d::prop::StatePropDataLoader::vfunc_06 (2606 B)
@@ -246797,7 +247309,39 @@ template <> void pure3d::ParticleAllocatorTemplate<pure3d::SpriteParticle>::vfun
     sub_002957F0();
 }
 
-// [TODO] 0x00271A10 pure3d::ParticleAllocatorTemplate<pure3d::SpriteParticle>::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleAllocatorTemplate<pure3d::SpriteParticle>::vfunc_03 (0x00271A10, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ParamString<fight::EnterExitScriptTrack>::vfunc_00 (0x0023E8B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00271A10
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: ?$ParticleAllocatorTemplate@VEnterExitScriptTrack@pure3d@@@pure3d::vfunc_03)
+
+extern "C" void __cdecl sub_00027600(void* p);
+
+class Class_00271A10
+{
+public:
+    virtual void vfunc_03();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00271A10* sub_00271A10(unsigned int flags);
+    void sub_00271A40();
+};
+
+#pragma optimize("y", off)
+Class_00271A10* Class_00271A10::sub_00271A10(unsigned int flags)
+{
+    sub_00271A40();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x00271A40 sub_00271A40 (49 B)
 // [TODO] 0x00271A80 pure3d::DefaultParticleGeneratorHandler::vfunc_05 (99 B)
 // [TODO] 0x00271AF0 sub_00271AF0 (1535 B)
@@ -248762,7 +249306,39 @@ void __cdecl sub_002771E0(int a1, int a2)
     }
 }
 
-// [TODO] 0x00277210 pure3d::CompositeDrawable::ActiveControllerList::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::CompositeDrawable::ActiveControllerList::vfunc_03 (0x00277210, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00277210
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::CompositeDrawable::ActiveControllerList::vfunc_03)
+
+extern "C" void __cdecl sub_00027600(void* p);
+
+class Class_00277210
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00277210* sub_00277210(unsigned int flags);
+    void sub_00276F40();
+};
+
+#pragma optimize("y", off)
+Class_00277210* Class_00277210::sub_00277210(unsigned int flags)
+{
+    sub_00276F40();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // ============================================================================
 // [VERIFIED] sub_00277240 (0x00277240, 40 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -248979,7 +249555,39 @@ int CompositeDrawable::vfunc_05()
 }
 
 // [TODO] 0x002776F0 pure3d::CompositeDrawableLoader::vfunc_06 (1310 B)
-// [TODO] 0x00277C10 pure3d::CompositeDrawable::ActivePrimitiveList::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::CompositeDrawable::ActivePrimitiveList::vfunc_03 (0x00277C10, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00277C10
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::CompositeDrawable::ActivePrimitiveList::vfunc_03)
+
+extern "C" void __cdecl sub_00027600(void* p);
+
+class Class_00277C10
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00277C10* sub_00277C10(unsigned int flags);
+    void sub_00277540();
+};
+
+#pragma optimize("y", off)
+Class_00277C10* Class_00277C10::sub_00277C10(unsigned int flags)
+{
+    sub_00277540();
+    if (flags & 1)
+        sub_00027600(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // ============================================================================
 // [VERIFIED] pure3d::PolySkin::vfunc_17 (0x00277C40, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -251190,7 +251798,39 @@ int StateProp::vfunc_05()
 // [TODO] 0x00281670 sub_00281670 (124 B)
 // [TODO] 0x002816F0 sub_002816F0 (122 B)
 // [TODO] 0x00281770 sub_00281770 (415 B)
-// [TODO] 0x00281910 pure3d::prop::StateProp::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::prop::StateProp::vfunc_03 (0x00281910, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00281910
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::prop::StateProp::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_00281910
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00281910* sub_00281910(unsigned int flags);
+    void sub_00281280();
+};
+
+#pragma optimize("y", off)
+Class_00281910* Class_00281910::sub_00281910(unsigned int flags)
+{
+    sub_00281280();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x00281940 pure3d::prop::StateProp::vfunc_08 (698 B)
 // [TODO] 0x00281C00 sub_00281C00 (89 B)
 // ============================================================================
@@ -253564,10 +254204,153 @@ ChannelLoader* ChannelLoader::vfunc_03(unsigned int flags)
 // [TODO] 0x0028A270 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>::vfunc_03 (45 B)
 // [TODO] 0x0028A2A0 sub_0028A2A0 (137 B)
 // [TODO] 0x0028A330 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>::vfunc_05 (223 B)
-// [TODO] 0x0028A410 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00 (46 B)
-// [TODO] 0x0028A440 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion6>::vfunc_00 (46 B)
-// [TODO] 0x0028A470 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion4>::vfunc_00 (46 B)
-// [TODO] 0x0028A4A0 pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>::vfunc_00 (46 B)
+// ============================================================================
+// [VERIFIED] pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00 (0x0028A410, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x0028A410
+// what: Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0024A800 with its own addresses, examiner A6: ?$CompressedQuaternionChannel@VCompressedQuaternion8@math@@@pure3d::vfunc_00)
+#pragma optimize("y", off)
+
+extern "C" char DAT_003D839C[];
+extern "C" void __cdecl sub_00027600(int);
+extern "C" void __cdecl sub_002884C0(void);
+
+class Class_0028A410
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028A410* sub_0028A410(int a1);
+    void sub_00288B80();
+};
+
+Class_0028A410* Class_0028A410::sub_0028A410(int a1)
+{
+    *(int*)this = (int)DAT_003D839C;
+    sub_002884C0();
+    sub_00288B80();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::CompressedQuaternionChannel<math::CompressedQuaternion6>::vfunc_00 (0x0028A440, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00 (0x0028A410), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028A440
+// what: Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0024A800 with its own addresses, examiner A6: ?$CompressedQuaternionChannel@VCompressedQuaternion8@math@@@pure3d::vfunc_00)
+#pragma optimize("y", off)
+
+extern "C" char DAT_003D83BC[];
+extern "C" void __cdecl sub_00027600(int);
+extern "C" void __cdecl sub_002884C0(void);
+
+class Class_0028A440
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028A440* sub_0028A440(int a1);
+    void sub_00288B80();
+};
+
+Class_0028A440* Class_0028A440::sub_0028A440(int a1)
+{
+    *(int*)this = (int)DAT_003D83BC;
+    sub_002884C0();
+    sub_00288B80();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::CompressedQuaternionChannel<math::CompressedQuaternion4>::vfunc_00 (0x0028A470, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00 (0x0028A410), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028A470
+// what: Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0024A800 with its own addresses, examiner A6: ?$CompressedQuaternionChannel@VCompressedQuaternion8@math@@@pure3d::vfunc_00)
+#pragma optimize("y", off)
+
+extern "C" char DAT_003D83DC[];
+extern "C" void __cdecl sub_00027600(int);
+extern "C" void __cdecl sub_002884C0(void);
+
+class Class_0028A470
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028A470* sub_0028A470(int a1);
+    void sub_00288B80();
+};
+
+Class_0028A470* Class_0028A470::sub_0028A470(int a1)
+{
+    *(int*)this = (int)DAT_003D83DC;
+    sub_002884C0();
+    sub_00288B80();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>::vfunc_00 (0x0028A4A0, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00 (0x0028A410), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028A4A0
+// what: Deleting destructor: puts back the class's vtable, runs its two destructors, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0024A800 with its own addresses, examiner A6: ?$CompressedQuaternionChannel@VCompressedQuaternion8@math@@@pure3d::vfunc_00)
+#pragma optimize("y", off)
+
+extern "C" char DAT_003D83FC[];
+extern "C" void __cdecl sub_00027600(int);
+extern "C" void __cdecl sub_002884C0(void);
+
+class Class_0028A4A0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028A4A0* sub_0028A4A0(int a1);
+    void sub_00288B80();
+};
+
+Class_0028A4A0* Class_0028A4A0::sub_0028A4A0(int a1)
+{
+    *(int*)this = (int)DAT_003D83FC;
+    sub_002884C0();
+    sub_00288B80();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+
 // [TODO] 0x0028A4D0 pure3d::SimpleChannel::vfunc_00 (87 B)
 // ============================================================================
 // [VERIFIED] pure3d::IntChannel::vfunc_00 (0x0028A530, 33 B)
@@ -255140,7 +255923,41 @@ L_1A:
 }
 
 // [TODO] 0x0028D4A0 sub_0028D4A0 (44 B)
-// [TODO] 0x0028D4D0 pure3d::frontend::Child::vfunc_03 (39 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Child::vfunc_03 (0x0028D4D0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Drawable::vfunc_03 (0x00248C00), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028D4D0
+// what: Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00239CE0 with its own addresses, examiner A6: pure3d::frontend::Child::vfunc_03)
+
+extern "C" char DAT_003D86FC[];
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0028D4D0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028D4D0* sub_0028D4D0(unsigned int flags);
+    void sub_002A6940();
+};
+
+#pragma optimize("y", off)
+Class_0028D4D0* Class_0028D4D0::sub_0028D4D0(unsigned int flags)
+{
+    *(void**)this = DAT_003D86FC;
+    sub_002A6940();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0028D500 sub_0028D500 (82 B)
 // ============================================================================
 // [VERIFIED] sub_0028D560 (0x0028D560, 32 B)
@@ -255485,7 +256302,39 @@ L_26:
 
 // [TODO] 0x0028D900 sub_0028D900 (39 B)
 // [TODO] 0x0028D930 sub_0028D930 (98 B)
-// [TODO] 0x0028D9A0 pure3d::frontend::Parent::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Parent::vfunc_03 (0x0028D9A0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028D9A0
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::frontend::Parent::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0028D9A0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028D9A0* sub_0028D9A0(unsigned int flags);
+    void sub_0028D930();
+};
+
+#pragma optimize("y", off)
+Class_0028D9A0* Class_0028D9A0::sub_0028D9A0(unsigned int flags)
+{
+    sub_0028D930();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0028D9D0 sub_0028D9D0 (169 B)
 // [TODO] 0x0028DA80 sub_0028DA80 (115 B)
 // [TODO] 0x0028DB00 sub_0028DB00 (475 B)
@@ -255493,11 +256342,111 @@ L_26:
 // [TODO] 0x0028E190 sub_0028E190 (72 B)
 // [TODO] 0x0028E1E0 pure3d::frontend::RoundedRectangle::vfunc_11 (98 B)
 // [TODO] 0x0028E250 pure3d::frontend::RoundedRectangle::vfunc_08 (307 B)
-// [TODO] 0x0028E390 pure3d::frontend::RoundedRectangle::vfunc_03 (33 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::RoundedRectangle::vfunc_03 (0x0028E390, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028E390
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::frontend::RoundedRectangle::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0028E390
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028E390* sub_0028E390(unsigned int flags);
+    void sub_0028DA80();
+};
+
+#pragma optimize("y", off)
+Class_0028E390* Class_0028E390::sub_0028E390(unsigned int flags)
+{
+    sub_0028DA80();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0028E3C0 sub_0028E3C0 (28 B)
-// [TODO] 0x0028E3E0 pure3d::frontend::Group::vfunc_03 (39 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Group::vfunc_03 (0x0028E3E0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Drawable::vfunc_03 (0x00248C00), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028E3E0
+// what: Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00239CE0 with its own addresses, examiner A6: pure3d::frontend::Group::vfunc_03)
+
+extern "C" char DAT_003D8858[];
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0028E3E0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028E3E0* sub_0028E3E0(unsigned int flags);
+    void sub_0028D930();
+};
+
+#pragma optimize("y", off)
+Class_0028E3E0* Class_0028E3E0::sub_0028E3E0(unsigned int flags)
+{
+    *(void**)this = DAT_003D8858;
+    sub_0028D930();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0028E410 sub_0028E410 (28 B)
-// [TODO] 0x0028E430 pure3d::frontend::Layer::vfunc_03 (39 B)
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Layer::vfunc_03 (0x0028E430, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::frontend::Drawable::vfunc_03 (0x00248C00), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0028E430
+// what: Deleting destructor: puts back the class's vtable, runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00239CE0 with its own addresses, examiner A6: pure3d::frontend::Layer::vfunc_03)
+
+extern "C" char DAT_003D88A8[];
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_0028E430
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_0028E430* sub_0028E430(unsigned int flags);
+    void sub_0028D930();
+};
+
+#pragma optimize("y", off)
+Class_0028E430* Class_0028E430::sub_0028E430(unsigned int flags)
+{
+    *(void**)this = DAT_003D88A8;
+    sub_0028D930();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
+
 // [TODO] 0x0028E460 sub_0028E460 (173 B)
 // ============================================================================
 // [VERIFIED] sub_0028E510 (0x0028E510, 19 B)

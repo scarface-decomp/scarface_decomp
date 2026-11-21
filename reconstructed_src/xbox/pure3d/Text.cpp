@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Text.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Text.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 5 functions matched (40.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 5 functions matched (60.00%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -104,4 +104,36 @@ L_18:
 }
 
 } }
+
+// ============================================================================
+// [VERIFIED] pure3d::frontend::Text::vfunc_03 (0x00249C40, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Deleting destructor: runs the destructor, then frees the object when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x00249C40
+// what: Deleting destructor: runs the destructor, then frees the object when asked to.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x0023B160 with its own addresses, examiner A6: pure3d::frontend::Text::vfunc_03)
+
+extern "C" void __cdecl sub_0023F7A0(void* p);
+
+class Class_00249C40
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual Class_00249C40* sub_00249C40(unsigned int flags);
+    void sub_00249A40();
+};
+
+#pragma optimize("y", off)
+Class_00249C40* Class_00249C40::sub_00249C40(unsigned int flags)
+{
+    sub_00249A40();
+    if (flags & 1)
+        sub_0023F7A0(this);
+    return this;
+}
+#pragma optimize("", on)
 

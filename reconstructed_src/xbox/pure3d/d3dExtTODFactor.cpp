@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtTODFactor.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtTODFactor.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 17 functions matched (17.65%). NOT COMPLETE YET.
-// The 14 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 17 functions matched (29.41%). NOT COMPLETE YET.
+// The 12 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -39,6 +39,25 @@ int d3dExtTODFactor::vfunc_01(int a1, int a2, int a3)
     return a1;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_10 (0x00263F60, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a yes/no setting in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00263F60
+// what: Stores a yes/no setting in a global and returns it.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00253130 with its own addresses, examiner A6: pure3d::d3dExtTODFactor::vfunc_10)
+#pragma optimize("y", off)
+
+extern "C" bool DAT_004BD4C1;
+
+bool __stdcall sub_00263F60(bool a1)
+{
+    DAT_004BD4C1 = a1;
+    return a1;
 }
 
 // ============================================================================
@@ -80,6 +99,25 @@ float d3dExtTODFactor::vfunc_14()
     return DAT_004BD4C8;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtTODFactor::vfunc_16 (0x00263FE0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a yes/no setting in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00263FE0
+// what: Stores a yes/no setting in a global and returns it.
+// tool: Claude Opus 5.5 (byte copy of the matched 0x00253130 with its own addresses, examiner A6: pure3d::d3dExtTODFactor::vfunc_16)
+#pragma optimize("y", off)
+
+extern "C" bool DAT_004BD4CC;
+
+bool __stdcall sub_00263FE0(bool a1)
+{
+    DAT_004BD4CC = a1;
+    return a1;
 }
 
 // ============================================================================
