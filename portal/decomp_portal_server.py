@@ -1212,11 +1212,10 @@ def submission_task(t: dict, body: dict) -> Tuple[dict, str]:
             return t, "match: part of a symbol, at most 200 printable characters."
         t2["match_substr"] = match
     if flags:
-        allowed = set(str(t.get("flags") or "").split()) | {MV.SSE_FLAG}
-        asked = str(flags).split() if isinstance(flags, str) else []
-        if not asked or any(f not in allowed for f in asked) or len(set(asked)) != len(asked):
-            return t, f"flags: only the function's own flags ({t.get('flags')}), fewer of them, or {MV.SSE_FLAG}."
-        t2["flags"] = " ".join(asked)
+        bad = MV.allowed_flags(t.get("flags") or "", flags if isinstance(flags, str) else "")
+        if bad:
+            return t, bad
+        t2["flags"] = " ".join(flags.split())
     return t2, ""
 
 

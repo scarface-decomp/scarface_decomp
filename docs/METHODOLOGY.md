@@ -41,9 +41,12 @@ executable, `.rdata` and `.data` included.
   functions needed `/G7`. Xbox code is checked with `/G6` only (see the notes in section 5). The
   registry stores the flags that matched.
 * Xbox only (retail and prototype): a function whose own instructions use the SSE registers
-  (`movss xmm0, ...`) is also tried with `/arch:SSE` added. The compiler never writes those
-  instructions without that flag, and the console's Pentium III has them. Functions that do not
-  use the registers are never tried with it. `msvc_verify.flag_options` holds this rule, and the
+  (`movss xmm0, ...`), a conditional move (`cmov`) or an `fcomi`-style compare is also tried with
+  `/arch:SSE` added. The compiler writes none of these without that flag (it targets the Pentium III
+  then, and compares with `fcom` / `fnstsw` otherwise), and the console's Pentium III has them. In the
+  Xbox program, conditional moves and `fcomi` occur only in the game's own code (below 0x2335F6);
+  `0x00012450`, `0x000C4380` and `0x0010C1F0` use `cmov` or `fcomi` without any `xmm` and match only with the flag. Functions that use
+  none of them are never tried with it. `msvc_verify.flag_options` holds this rule, and the
   portal, `portal/verify.py`, `portal/agent.py` and the re-verifier all use it.
 * **decomp.me has the same compiler.** Its `msvc7.1` compiler (platform *Windows (9x/NT)*) gave 100%
   on two functions verified here before the reset, one PC (`CementLibrary::vfunc_05`, 39 B, `/G7`) and one Xbox
@@ -151,6 +154,17 @@ These were each confirmed by compiling variants and comparing against the game.
   because the source names a parameter (`void f(int a) { g(a); }`).
 * **SSE setters and getters** (`movss xmm0, [esp+4]; movss [ecx+N], xmm0`) are plain `float` code
   under `/arch:SSE` (section 2).
+* **x87 next to SSE in the game's code.** Under `/arch:SSE` the console still has no doubles in SSE,
+  so `sqrt`, `sin`, `cos` and `atan2` (which take doubles) stay on the x87: the game's code has
+  `fsqrt` 258 times and `sqrtss` never. Write `(float)sqrt(x*x + y*y + z*z)` with the double
+  `sqrt`, not `sqrtf`, and keep `/arch:SSE`. A called function's `float` result arrives in `ST0`
+  and reaches an `xmm` register through the stack (`fstp [esp]; movss xmm0, [esp]`); mixed x87 and
+  SSE in one function is normal.
+* **`push ebp; mov ebp, esp; and esp, -8`** in the game's Xbox code is a local that needs 8-byte
+  alignment (a `double`, an `__int64`), not a flag change.
+* **Engine libraries on the Xbox** (pure3d, core, audio, physics, from 0x239CA2) were built without
+  `/arch:SSE`: x87 only, `(int)f` through `_ftol`, compares through `fnstsw`. Their plain
+  `push ebp; mov ebp, esp` frames match with the usual flags, so a frame there is not a sign of `/Oy-`.
 * **One bit of a byte** (`mov al, [ecx+N]; shr al, 6; and al, 1; ret`) is a one-bit bitfield member
   returned as `bool`; `(m >> 6) & 1` on a whole byte compiles differently.
 * **`neg eax; sbb eax, eax; neg eax`** is `x != 0` written out; ending in `inc eax` it is `x == 0`.

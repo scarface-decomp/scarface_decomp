@@ -515,3 +515,16 @@ def test_a_submission_can_pick_its_function_and_drop_flags(S):
     for flags in ("/O2 /Fo..\\x.obj", "/O2 /O2", " ", "/FI evil.h"):
         assert S.submission_task(t, {"flags": flags})[1], flags
     assert S.submission_task(t, {"match": "x" * 201})[1]
+
+
+def test_cmov_and_fcomi_also_mean_arch_sse():
+    """The 2003 compiler writes conditional moves and fcomi-style compares only under /arch:SSE."""
+    sys.path.insert(0, str(conftest.PORTAL / "tools"))
+    MV = importlib.import_module("msvc_verify")
+    assert MV.uses_sse(bytes.fromhex("0F44C1C3"))          # cmove eax, ecx; ret
+    assert MV.uses_sse(bytes.fromhex("DBF1C3"))            # fcomi st(1); ret
+    assert MV.uses_sse(bytes.fromhex("F30F1045 08C3".replace(" ", "")))   # movss xmm0, [ebp+8]
+    assert not MV.uses_sse(bytes.fromhex("D8D1DFE0C3"))    # fcom st(1); fnstsw ax; ret
+    assert MV.flag_options("xb", "/O2 /G6", bytes.fromhex("0F44C1C3")) == ["/O2 /G6", "/O2 /G6 /arch:SSE"]
+    assert MV.verify_line_options("// verify: python portal/verify.py a.cpp --va 0x1 --bin xb --match '??_I'\n") == {"match": "??_I"}
+    assert MV.allowed_flags("/O2 /G6 /EHsc", "/O2 /G6") == "" and MV.allowed_flags("/O2", "/O2 /Fo x")

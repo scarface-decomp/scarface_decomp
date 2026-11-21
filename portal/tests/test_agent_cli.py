@@ -55,7 +55,7 @@ def test_keep_wants_an_exact_match_a_description_and_who_wrote_it(monkeypatch, t
     monkeypatch.setattr(A, "ROOT", tmp_path)
     monkeypatch.setattr(A, "registry", lambda: {})
     state = {"ok": False}
-    monkeypatch.setattr(A, "check", lambda path: (state["ok"], dict(good, is_exact=state["ok"], matched_bytes=6 if state["ok"] else 4,
+    monkeypatch.setattr(A, "check", lambda path, *_: (state["ok"], dict(good, is_exact=state["ok"], matched_bytes=6 if state["ok"] else 4,
                                                                     diff_details=[] if state["ok"] else [
                                                                         {"idx": 1, "target": "C3", "compiled": "90", "status": "diff"}]),
                                                   t, f.read_text(encoding="utf-8")))
@@ -67,3 +67,25 @@ def test_keep_wants_an_exact_match_a_description_and_who_wrote_it(monkeypatch, t
     assert A.main(["keep", str(f)]) == 0 and (tmp_path / "to_submit" / "xb_00011000.cpp").exists()
     monkeypatch.setattr(A, "registry", lambda: {"xb:0x00011000": {}})
     assert A.main(["keep", str(f)]) == 1 and "already matched" in capsys.readouterr().out
+
+
+def test_check_picks_the_target_among_several_functions(monkeypatch):
+    """An inline helper, <math.h> or 'delete' adds a second function to the object file. Without the
+    portal's queue the target is still picked: by --match, the file's '// verify:' line, or its address name."""
+    t = {"bin": "xb", "fva_int": 0x13AA0, "size": 55, "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"}
+    assert A.selection(t, "// bin: xb\n") == ("sub_00013AA0", None)
+    assert A.selection(dict(t, match_substr="Honk@Car"), "") == ("Honk@Car", None)
+    line = "// verify: python portal/verify.py x.cpp --va 0x13AA0 --bin xb --match '?$_Sort@' --flags \"/O2 /Ot /Oy /G6 /Gd /GR /Zp4\"\n"
+    assert A.selection(t, line) == ("?$_Sort@", ["/O2 /Ot /Oy /G6 /Gd /GR /Zp4"])
+    assert A.selection(t, line, match="??_I") == ("??_I", ["/O2 /Ot /Oy /G6 /Gd /GR /Zp4"])
+    assert A.selection(t, "", flags=t["flags"] + " /arch:SSE")[1] == [t["flags"] + " /arch:SSE"]
+    with pytest.raises(SystemExit):
+        A.selection(t, "", flags="/O2 /FI evil.h")
+
+
+def test_packet_hints_come_from_the_functions_own_instructions():
+    # push ebp; mov ebp, esp; and esp, -8; ... ret
+    assert any("8 bytes" in h for h in A.codegen_hints("xb", bytes.fromhex("558BEC83E4F8C3")))
+    # fsqrt next to an SSE move: write sqrt() on doubles
+    assert any("sqrt()" in h for h in A.codegen_hints("xb", bytes.fromhex("D9FAF30F1045 08C3".replace(" ", ""))))
+    assert A.codegen_hints("xb", bytes.fromhex("C3")) == []
