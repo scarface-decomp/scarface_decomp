@@ -355,9 +355,9 @@ The kinds, over the 5,393 shaders in `packages/z04/*.p3d` and `art/ecoprops/*.p3
 **How the game colours a vertex** (the Xbox program's own vertex programs, read with
 `portal/tools/vertex_programs.py`; the constants are the ones the shaders' code uploads, `0x32E5F0`). The
 kind name picks the class (`cbvlit` builds `d3dSimpleCBVLitShader`; `foam` and `untextured` build the simple
-one) and `LIT` picks the lit or unlit program. By the game's class information, `nightlight` and `decal`
-derive from the simple shader (`pure3d::d3dSimpleShader`), while `cbvlit` and `vertexfade` derive straight
-from `pure3d::d3dShader` and only reuse the simple pixel programs:
+one) and `LIT` picks the lit or unlit program. By the game's class information, `nightlight`, `decal` and
+`specular` derive from the simple shader (`pure3d::d3dSimpleShader`), while `cbvlit` and `vertexfade` derive
+straight from `pure3d::d3dShader` and only reuse the simple pixel programs:
 
 | Kind | Program | Front colour |
 | :--- | :--- | :--- |
@@ -412,6 +412,11 @@ alpha and 1 minus source alpha (ordinary see-through); 2 add, one and one (what 
 reverse subtract, one and one (what is behind minus the colour); 4 add, destination colour and zero (what is behind
 times the colour); 5 add, destination colour and source colour; 6 add, destination colour and source alpha; 7
 reverse subtract, source alpha and source alpha. Only 0 to 3 occur in the files.
+
+The `nightlight` kind ignores `BLMD`: its render-state code (`0x002C6360`) always adds, one and one (what is
+behind plus the colour), with the material's alpha test. Its colour constant c55 is `(k, k, k, 1)` with
+`k = 1 − FADE / 255` (white when `FADE` is 0), and it leaves the fog constant c49 as the shader drawn before it
+set it (`0x002C6150`). Neither function sets depth writing; where that comes from is not read yet.
 
 The PC program holds the same table in its data (`Scarface.exe`, `.data` at `0x007EC848`): the same eight
 entries, with Direct3D 9's numbers for the equations (1 add, 3 reverse subtract), and straight after them
@@ -507,8 +512,11 @@ screen (kept vertical on wide screens), near and far planes **(exported)**. A ne
 horizontal FOV of π/2 (90°) with aspect 1.0 (`pure3d::Camera`'s constructor, Xbox `0x0028C320`) until a
 `FOV` key sets it. A fade is linear in, hold and
 out, drawn over the picture **(exported)**; the letterbox bars slide in or out over 500 ms, linearly.
-A camera shake adds `amplitude × e^(−3 t / duration) × (sin(2π f t) + noise × random)` degrees, up to six at
-once (the range of `random`, 0 to 1 or −1 to 1, is not read yet). Faces are morph targets weighted by `EXP` animations' `STE` channels; there is no lip sync or blinking
+A camera shake works on six fixed axes: moving along X, Y and Z, and turning about X, Y and Z (degrees). Each
+axis adds `amplitude × e^(−3 t / duration) × (sin(2π × frequency × t) + noise × r)`, where `r` is a new random
+number from 0 to 1 each update (the shake only ever pushes one way from the noise), until `t` passes the
+duration. A new shake on a busy axis replaces the old one unless the old one, faded so far, is still stronger
+(`CameraManager`, Xbox `0x001504F0` and `0x00150590`). Faces are morph targets weighted by `EXP` animations' `STE` channels; there is no lip sync or blinking
 of the game's own. While an `NISDriveWorldStreamer` is on, the world streams round the camera
 **(exported)**.
 
