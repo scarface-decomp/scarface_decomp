@@ -694,7 +694,7 @@ SSE_FLAG = "/arch:SSE"
 # Instructions the 2003 compiler writes only under /arch:SSE: it then targets the Pentium III, whose
 # conditional moves and flag-setting float compares it uses too. Without it, it compares with
 # fcom/fnstsw and never writes these (none occur in the Xbox code built without /arch:SSE).
-P6_ONLY = ("cmov", "fcomi", "fcomip", "fucomi", "fucomip")
+P6_ONLY = ("cmov", "fcomi", "fcompi", "fcomip", "fucomi", "fucompi", "fucomip")   # the disassembler spells the popping forms fcompi/fucompi
 
 
 def uses_sse(target: Optional[bytes]) -> bool:

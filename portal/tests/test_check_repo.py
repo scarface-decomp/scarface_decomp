@@ -16,6 +16,13 @@ def test_queue_seed_data_is_tracked_and_valid():
     assert set(starts) <= {"pc", "xb", "proto"} and sum(len(v) for v in starts.values()) > 900
     for vas in starts.values():
         assert all(len(v) == 10 and int(v, 16) > 0 for v in vas) and vas == sorted(set(vas))
+    # Bink and the starts that are not functions are left out like the C runtime; never a matched one
+    import json
+    reg = json.loads((ROOT / "reports" / "verified_registry.json").read_text(encoding="utf-8"))["entries"]
+    ex = json.loads((ROOT / "reports" / "queue_exclusions.json").read_text(encoding="utf-8"))["starts"]["xb"]
+    assert {r["kind"] for r in ex} <= {"bink", "nonstart"} and all(r["why"] for r in ex)
+    assert not [r["va"] for r in ex if "xb:" + r["va"] in reg]
+    assert {r["va"] for r in ex} <= set(seeds["library"]["xb"])
 
 
 def test_registry_from_another_game_version_is_rejected(tmp_path, monkeypatch):

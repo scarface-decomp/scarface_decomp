@@ -523,6 +523,7 @@ def test_cmov_and_fcomi_also_mean_arch_sse():
     MV = importlib.import_module("msvc_verify")
     assert MV.uses_sse(bytes.fromhex("0F44C1C3"))          # cmove eax, ecx; ret
     assert MV.uses_sse(bytes.fromhex("DBF1C3"))            # fcomi st(1); ret
+    assert MV.uses_sse(bytes.fromhex("DFF1C3"))            # fcomip st(1), printed fcompi; ret
     assert MV.uses_sse(bytes.fromhex("F30F1045 08C3".replace(" ", "")))   # movss xmm0, [ebp+8]
     assert not MV.uses_sse(bytes.fromhex("D8D1DFE0C3"))    # fcom st(1); fnstsw ax; ret
     assert MV.flag_options("xb", "/O2 /G6", bytes.fromhex("0F44C1C3")) == ["/O2 /G6", "/O2 /G6 /arch:SSE"]

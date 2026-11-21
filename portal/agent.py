@@ -91,6 +91,7 @@ def codegen_hints(b: str, tb: bytes) -> list:
         import capstone
     except ImportError:
         return []
+    from msvc_verify import P6_ONLY as MV_P6
     md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
     insns = list(md.disasm(bytes(tb), 0))
     mn = {i.mnemonic for i in insns}
@@ -100,7 +101,7 @@ def codegen_hints(b: str, tb: bytes) -> list:
         out.append("the frame is aligned to 8 bytes (and esp, -8): it has a local that needs that alignment, "
                    "a double or an __int64; no flag change is needed.")
     if b in ("xb", "proto") and mn & {"fsqrt", "fsin", "fcos", "fpatan"} and \
-            any("xmm" in i.op_str or i.mnemonic.startswith(("cmov", "fcomi", "fucomi")) for i in insns):
+            any("xmm" in i.op_str or i.mnemonic.startswith(MV_P6) for i in insns):
         out.append("x87 math next to SSE code: write sqrt()/sin()/cos()/atan2() on doubles (the SSE of the "
                    "console has no doubles, so they stay on the x87), not sqrtf; keep /arch:SSE.")
     if b in ("xb", "proto") and any(t.startswith("fstp dword ptr [esp") for t in text) and "movss" in mn:

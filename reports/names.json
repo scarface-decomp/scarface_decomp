@@ -18361,6 +18361,16 @@
       "name": "pure3d::AdaptPDDI::Fatal",
       "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
       "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its Fatal__9AdaptPDDIPCcT1i pairs with the function at 0x001520A0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by the same slot of the same class's table of virtual functions; the same ret N."
+    },
+    "xb:0x002FBA99": {
+      "name": "_purecall",
+      "by": "examiner (A1b) and Claude Opus 5.5, checked against the code",
+      "why": "Every slot of core::IRefCount's vtable (0x0039E22C) and every pure virtual slot elsewhere points here. It calls the handler at 0x004C066C if one is set, then _amsg_exit (0x002FF3F0) with 25, the C runtime's pure-virtual-call error. The old name AbstractClassRep::vfunc_01 came from one of those pure slots."
+    },
+    "xb:0x002FF74E": {
+      "name": "std::exception::what",
+      "by": "examiner (A1b) and Claude Opus 5.5, checked against the code",
+      "why": "Returns the exception's stored message (+4) or, without one, the C++ library's \"Unknown exception\" text (0x003E201C); it sits in the C runtime's part of the program, after the game's code."
     }
   },
   "members": {

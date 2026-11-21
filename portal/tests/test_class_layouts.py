@@ -20,7 +20,7 @@ ROWS = {   # class: (vtable, slots, bases in hierarchy order, constructors, size
 
 def classes():
     d = json.loads(LAYOUTS.read_text(encoding="utf-8"))
-    assert d["schema"] == "j10_6_class_layouts/1" and d["binary"] == "default.xbe"
+    assert d["schema"] == "j10_6_class_layouts/2" and d["binary"] == "default.xbe"
     return {c["class"]: c for c in d["classes"]}
 
 
@@ -65,3 +65,9 @@ def test_the_rows_come_from_the_games_own_type_information():
         _sig, _attr, nbases, bca = struct.unpack("<4I", img.read(chd, 16))
         got = [td_name(u32(u32(bca + 4 * i))) for i in range(1, nbases)]
         assert got == bases, name
+
+
+def test_schema_2_adds_cast_sites_literals_and_allocators():
+    d = json.loads(LAYOUTS.read_text(encoding="utf-8"))
+    assert len(d["rt_cast_sites"]) == 540 and len(d["cached_literals"]) == 29
+    assert classes()["pure3d::Camera"]["sizeof"] == 0xDC          # new site 0x1500E4 through 0x23F770 (heap, size)
