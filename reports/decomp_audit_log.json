@@ -1,5 +1,141 @@
 [
   {
+    "time": "2026-11-21 04:07:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002445E0",
+    "va": "0x002445E0",
+    "bytes": "75/75 B"
+  },
+  {
+    "time": "2026-11-21 04:06:48",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00244540",
+    "va": "0x00244540",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:06:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00244540",
+    "va": "0x00244540",
+    "bytes": "62/62 B"
+  },
+  {
+    "time": "2026-11-21 04:06:25",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00240570",
+    "va": "0x00240570",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 04:06:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00240570",
+    "va": "0x00240570",
+    "bytes": "144/144 B"
+  },
+  {
+    "time": "2026-11-21 03:38:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "GlobalVehicleSound::vfunc_01",
+    "va": "0x002CF0E0",
+    "bytes": "24/24 B"
+  },
+  {
+    "time": "2026-11-21 03:38:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00244100",
+    "va": "0x00244100",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 03:38:21",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00244100",
+    "va": "0x00244100",
+    "bytes": "99/99 B"
+  },
+  {
+    "time": "2026-11-21 03:38:09",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00243FF0",
+    "va": "0x00243FF0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 03:37:57",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00243FF0",
+    "va": "0x00243FF0",
+    "bytes": "67/67 B"
+  },
+  {
+    "time": "2026-11-21 03:37:45",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00098B70",
+    "va": "0x00098B70",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 03:37:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00098B70",
+    "va": "0x00098B70",
+    "bytes": "25/25 B"
+  },
+  {
+    "time": "2026-11-21 03:37:21",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "5 look-alike(s) of sub_00027590",
+    "va": "0x00027590",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 03:37:08",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0002AC90",
+    "va": "0x0002AC90",
+    "bytes": "45/45 B"
+  },
+  {
+    "time": "2026-11-21 03:36:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00027590",
+    "va": "0x00027590",
+    "bytes": "20/20 B"
+  },
+  {
+    "time": "2026-11-21 03:36:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of Collidable::vfunc_01",
+    "va": "0x00011930",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-21 03:36:31",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "Collidable::vfunc_01",
+    "va": "0x00011930",
+    "bytes": "28/28 B"
+  },
+  {
     "time": "2026-11-20 20:32:16",
     "user": "lemiur",
     "action": "VERIFIED",
@@ -1861,142 +1997,6 @@
     "action": "VERIFIED",
     "symbol": "1 look-alike(s) of core::MemorySmallDlAllocator::vfunc_10",
     "va": "Proto 0x0024C630",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:32:03",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::MemoryAllocatorMalloc::vfunc_07",
-    "va": "Proto 0x00248F00",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:31:50",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of CollisionBehaviourTypeGroup::vfunc_20",
-    "va": "Proto 0x0001C290",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:31:37",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of sub_00023D40",
-    "va": "0x00023D40",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-20 19:30:53",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001FFF90",
-    "va": "Proto 0x001FFF90",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-14 09:50:25",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1453 function(s) from the portal's starter code",
-    "va": "",
-    "bytes": "easy pass, no AI"
-  },
-  {
-    "time": "2026-11-14 08:34:10",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "3755 function(s) from the portal's starter code",
-    "va": "",
-    "bytes": "easy pass, no AI"
-  },
-  {
-    "time": "2026-11-14 07:39:44",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "49 function(s) from the portal's starter code",
-    "va": "",
-    "bytes": "easy pass, no AI"
-  },
-  {
-    "time": "2026-11-13 21:52:48",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "FETextObject::vfunc_46",
-    "va": "PC 0x00700200",
-    "bytes": "4/4 B"
-  },
-  {
-    "time": "2026-11-13 21:51:50",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of GameMemorySegmentCollection::vfunc_02",
-    "va": "PC 0x006E9820",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 21:51:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "GameMemorySegmentCollection::vfunc_02",
-    "va": "PC 0x006E9820",
-    "bytes": "4/4 B"
-  },
-  {
-    "time": "2026-11-13 21:49:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of AnimationRetargetingAction::vfunc_14",
-    "va": "PC 0x006E7EA0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 21:49:37",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "AnimationRetargetingAction::vfunc_14",
-    "va": "PC 0x006E7EA0",
-    "bytes": "4/4 B"
-  },
-  {
-    "time": "2026-11-13 21:49:18",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of sub_006E6420",
-    "va": "PC 0x006E6420",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-13 21:49:00",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_006E6420",
-    "va": "PC 0x006E6420",
-    "bytes": "4/4 B"
-  },
-  {
-    "time": "2026-11-13 21:48:27",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_006E6360",
-    "va": "PC 0x006E6360",
-    "bytes": "4/4 B"
-  },
-  {
-    "time": "2026-11-13 21:47:53",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_006E6110",
-    "va": "PC 0x006E6110",
-    "bytes": "4/4 B"
-  },
-  {
-    "time": "2026-11-13 21:45:43",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of core::File::vfunc_26",
-    "va": "PC 0x006E5180",
     "bytes": "same code, own addresses"
   }
 ]

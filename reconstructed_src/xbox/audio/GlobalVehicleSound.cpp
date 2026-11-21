@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, audio/GlobalVehicleSound.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, audio/GlobalVehicleSound.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 9 functions matched (55.56%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 9 functions matched (66.67%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -61,6 +61,39 @@ public:
 void GlobalVehicleSound::vfunc_00()
 {
     m_Field20 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] GlobalVehicleSound::vfunc_01 (0x002CF0E0, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Releases one reference to an om::Entity; at the last one it destroys it.
+// ============================================================================
+// bin: xb
+// va: 0x002CF0E0
+// what: Releases one reference to an om::Entity; at the last one it destroys it.
+// tool: Claude Opus 5.5 (examiner listing A5 and J10.6 R1; decomp.me preset 266 score 0)
+class Entity_002CF0E0
+{
+public:
+    virtual void vfunc_00();
+    virtual void sub_002CF0E0();
+    virtual unsigned int vfunc_02();
+    virtual void vfunc_03(int flags);
+
+    char m_pad04[0x1C];
+    unsigned short m_Count; // +0x20
+};
+
+void Entity_002CF0E0::sub_002CF0E0()
+{
+    if (m_Count == 1)
+    {
+        vfunc_03(1);
+    }
+    else
+    {
+        m_Count--;
+    }
 }
 
 // ============================================================================

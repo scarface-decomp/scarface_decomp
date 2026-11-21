@@ -1,13 +1,45 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/Collidable.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/Collidable.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 7 functions matched (85.71%). NOT COMPLETE YET.
-// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
-// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// PROGRESS: COMPLETE. All 7 functions are matched.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] Collidable::vfunc_01 (0x00011E80, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as Collidable::vfunc_01 (0x00011930), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00011E80
+// what: Releases one reference to a loaded object; at the last one it marks it and deletes it.
+// tool: Claude Opus 5.5 (examiner listing A5 and J10.6 R1; decomp.me preset 266 score 0)
+class LoadObject_00011E80
+{
+public:
+    virtual void vfunc_00();
+    virtual void sub_00011E80();
+    virtual unsigned int vfunc_02();
+    virtual ~LoadObject_00011E80();
+
+    unsigned int m_Count; // +0x04
+};
+
+void LoadObject_00011E80::sub_00011E80()
+{
+    if (m_Count < 2)
+    {
+        m_Count = 0x08000000;
+        delete this;
+    }
+    else
+    {
+        m_Count--;
+    }
+}
 
 // ============================================================================
 // [VERIFIED] Collidable::vfunc_06 (0x00011EA0, 8 B)

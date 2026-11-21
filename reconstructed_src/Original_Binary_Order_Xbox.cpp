@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,978 of 19,501 functions matched (40.91%). NOT COMPLETE YET.
-// The 11,523 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 7,990 of 19,501 functions matched (40.97%). NOT COMPLETE YET.
+// The 11,511 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -573,7 +573,39 @@ float Class_00011910::sub_00011910() const
     return m_Field00 * m_Field00 + m_Field04 * m_Field04 + m_Field08 * m_Field08;
 }
 
-// [TODO] 0x00011930 Collidable::vfunc_01 (28 B)
+// ============================================================================
+// [VERIFIED] Collidable::vfunc_01 (0x00011930, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Releases one reference to a loaded object; at the last one it marks it and deletes it.
+// ============================================================================
+// bin: xb
+// va: 0x00011930
+// what: Releases one reference to a loaded object; at the last one it marks it and deletes it.
+// tool: Claude Opus 5.5 (examiner listing A5 and J10.6 R1; decomp.me preset 266 score 0)
+class LoadObject_00011930
+{
+public:
+    virtual void vfunc_00();
+    virtual void sub_00011930();
+    virtual unsigned int vfunc_02();
+    virtual ~LoadObject_00011930();
+
+    unsigned int m_Count; // +0x04
+};
+
+void LoadObject_00011930::sub_00011930()
+{
+    if (m_Count < 2)
+    {
+        m_Count = 0x08000000;
+        delete this;
+    }
+    else
+    {
+        m_Count--;
+    }
+}
+
 // [TODO] 0x00011950 sub_00011950 (100 B)
 // [TODO] 0x000119C0 sub_000119C0 (100 B)
 // ============================================================================
@@ -10459,7 +10491,24 @@ void Allocator::vfunc_02()
 
 }
 
-// [TODO] 0x00027590 sub_00027590 (20 B)
+// ============================================================================
+// [VERIFIED] sub_00027590 (0x00027590, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: The game's operator new: allocates memory from the current heap.
+// ============================================================================
+// bin: xb
+// va: 0x00027590
+// what: The game's operator new: allocates memory from the current heap.
+// tool: Claude Opus 5.5 (examiner listing A5 and J10.6 C1; decomp.me preset 266 score 0)
+extern "C" int __cdecl sub_00244410();
+extern "C" void* __cdecl sub_00244450(int heap, unsigned int size);
+extern "C" void* __cdecl sub_00027590(unsigned int size);
+
+void* __cdecl sub_00027590(unsigned int size)
+{
+    return sub_00244450(sub_00244410(), size);
+}
+
 // ============================================================================
 // [VERIFIED] sub_000275B0 (0x000275B0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -14238,7 +14287,35 @@ void CollisionBehaviourTypeGroup::vfunc_07()
     vfunc_06();
 }
 
-// [TODO] 0x0002AC90 sub_0002AC90 (45 B)
+// ============================================================================
+// [VERIFIED] sub_0002AC90 (0x0002AC90, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Finds the object a handle stands for in the game's handle table, or 0 when the handle is stale.
+// ============================================================================
+// bin: xb
+// va: 0x0002AC90
+// what: Finds the object a handle stands for in the game's handle table, or 0 when the handle is stale.
+// tool: Claude Opus 5.5 (examiner listing A5; decomp.me preset 266 score 0)
+struct Entry_0002AC90
+{
+    void* m_Object;         // +0x00
+    unsigned int m_Handle;  // +0x04
+};
+
+extern "C" unsigned int DAT_004740E4;
+extern "C" Entry_0002AC90* DAT_004740DC;
+extern "C" void* __cdecl sub_0002AC90(unsigned int handle);
+
+void* __cdecl sub_0002AC90(unsigned int handle)
+{
+    if (handle > DAT_004740E4) return 0;
+    unsigned int index = handle & 0x3FFF;
+    if (index >= 6000) return 0;
+    Entry_0002AC90* table = DAT_004740DC;
+    if (table[index].m_Handle == handle) return table[index].m_Object;
+    return 0;
+}
+
 // [TODO] 0x0002ACC0 sub_0002ACC0 (119 B)
 // [TODO] 0x0002AD40 CollisionBehaviourTypeGroup::vfunc_25 (46 B)
 // ============================================================================
@@ -47538,8 +47615,44 @@ int Class_00096830::sub_00096830()
 }
 
 // [TODO] 0x00096850 sub_00096850 (42 B)
-// [TODO] 0x00096880 sub_00096880 (20 B)
-// [TODO] 0x000968A0 sub_000968A0 (20 B)
+// ============================================================================
+// [VERIFIED] sub_00096880 (0x00096880, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00027590 (0x00027590), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00096880
+// what: The game's operator new: allocates memory from the current heap.
+// tool: Claude Opus 5.5 (examiner listing A5 and J10.6 C1; decomp.me preset 266 score 0)
+extern "C" int __cdecl sub_00097050();
+extern "C" void* __cdecl sub_00244450(int heap, unsigned int size);
+extern "C" void* __cdecl sub_00096880(unsigned int size);
+
+void* __cdecl sub_00096880(unsigned int size)
+{
+    return sub_00244450(sub_00097050(), size);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000968A0 (0x000968A0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00027590 (0x00027590), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000968A0
+// what: The game's operator new: allocates memory from the current heap.
+// tool: Claude Opus 5.5 (examiner listing A5 and J10.6 C1; decomp.me preset 266 score 0)
+extern "C" int __cdecl sub_00097050();
+extern "C" void* __cdecl sub_002444F0(int heap, unsigned int size);
+extern "C" void* __cdecl sub_000968A0(unsigned int size);
+
+void* __cdecl sub_000968A0(unsigned int size)
+{
+    return sub_002444F0(sub_00097050(), size);
+}
+
 // [TODO] 0x000968C0 sub_000968C0 (952 B)
 // [TODO] 0x00096C80 sub_00096C80 (193 B)
 // ============================================================================
@@ -48341,7 +48454,35 @@ Class_00098B60* Class_00098B60::sub_00098B60(int a1)
     return this;
 }
 
-// [TODO] 0x00098B70 sub_00098B70 (25 B)
+// ============================================================================
+// [VERIFIED] sub_00098B70 (0x00098B70, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies the key (+0x10) of the object it is given, or 0 when there is no object.
+// ============================================================================
+// bin: xb
+// va: 0x00098B70
+// what: Copies the key (+0x10) of the object it is given, or 0 when there is no object.
+// tool: Claude Opus 5.5 (examiner listing A5; decomp.me preset 266 score 0)
+struct Obj_00098B70
+{
+    char m_pad00[0x10];
+    unsigned int m_Key; // +0x10
+};
+
+class Key_00098B70
+{
+public:
+    Key_00098B70* sub_00098B70(const Obj_00098B70* object);
+
+    unsigned int m_Key; // +0x00
+};
+
+Key_00098B70* Key_00098B70::sub_00098B70(const Obj_00098B70* object)
+{
+    m_Key = object ? object->m_Key : 0;
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00098B90 (0x00098B90, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -230031,7 +230172,75 @@ bool Class_00240470::sub_00240470()
 }
 
 // [TODO] 0x002404C0 sub_002404C0 (174 B)
-// [TODO] 0x00240570 sub_00240570 (144 B)
+// ============================================================================
+// [VERIFIED] sub_00240570 (0x00240570, 144 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads from a stream: opens it first if an open is pending, then reads one of two ways depending on its mode.
+// ============================================================================
+// bin: xb
+// va: 0x00240570
+// what: Reads from a stream: opens it first if an open is pending, then reads one of two ways depending on its mode.
+// tool: Claude Opus 5.5 (examiner listing A5; decomp.me preset 266: same instructions, only the member call symbols differ)
+class Device_00240570
+{
+public:
+    virtual void vfunc_00(); virtual void vfunc_01(); virtual void vfunc_02(); virtual void vfunc_03();
+    virtual void vfunc_04(); virtual void vfunc_05(); virtual void vfunc_06(); virtual void vfunc_07();
+    virtual void vfunc_08(); virtual void vfunc_09(); virtual void vfunc_10(); virtual void vfunc_11();
+    virtual void vfunc_12(); virtual void vfunc_13(); virtual void vfunc_14(); virtual void vfunc_15();
+    virtual void vfunc_16(); virtual void vfunc_17(); virtual void vfunc_18(); virtual void vfunc_19();
+    virtual void vfunc_20(); virtual void vfunc_21(); virtual void vfunc_22(); virtual void vfunc_23();
+    virtual bool IsReady(); // +0x60
+};
+
+class Stream_00240570
+{
+public:
+    bool sub_00240570(int a, int b, int c, int d);
+    void sub_0023FDD0();
+    void sub_0023FFF0();
+    bool sub_0023FF60(int a, int b, int c, int d);
+    bool sub_00240150(int a, int b, int c, int d);
+
+    char m_pad00[8];
+    Device_00240570* m_Device; // +0x08
+    bool m_Open;               // +0x0C
+    char m_pad0D;
+    bool m_Mode;               // +0x0E
+    char m_pad0F;
+    bool m_Pending;            // +0x10
+};
+
+bool Stream_00240570::sub_00240570(int a, int b, int c, int d)
+{
+    if (m_Pending)
+    {
+        m_Pending = false;
+        if (!m_Device->IsReady())
+        {
+            sub_0023FDD0();
+        }
+        if (m_Device->IsReady())
+        {
+            m_Open = true;
+            sub_0023FFF0();
+        }
+        else
+        {
+            m_Open = false;
+        }
+    }
+    if (!m_Open)
+    {
+        return false;
+    }
+    if (!m_Mode)
+    {
+        return sub_0023FF60(a, b, c, d);
+    }
+    return sub_00240150(a, b, c, d);
+}
+
 // ============================================================================
 // [VERIFIED] sub_00240600 (0x00240600, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -231695,7 +231904,33 @@ unsigned int __cdecl sub_00243FA0(const char* text, unsigned int start)
     return h | 0x80000000;
 }
 
-// [TODO] 0x00243FF0 sub_00243FF0 (67 B)
+// ============================================================================
+// [VERIFIED] sub_00243FF0 (0x00243FF0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: The game's name key without case folding: h = (h * 65599) & 0x7FFFFFFF, each character XORed in; top bit set.
+// ============================================================================
+// bin: xb
+// va: 0x00243FF0
+// what: The game's name key without case folding: h = (h * 65599) & 0x7FFFFFFF, each character XORed in; top bit set.
+// tool: Claude Opus 5.5 (from the matched 0x00243FA0 without the fold, examiner listing A5; decomp.me preset 266 score 0)
+extern "C" unsigned int __cdecl sub_00243FF0(const char* text, unsigned int start);
+
+unsigned int __cdecl sub_00243FF0(const char* text, unsigned int start)
+{
+    if (text == 0 || *text == 0)
+    {
+        return start;
+    }
+    unsigned int h = start & 0x7FFFFFFF;
+    while (*text != 0)
+    {
+        h = (h * 65599) & 0x7FFFFFFF;
+        h ^= *text;
+        text++;
+    }
+    return h | 0x80000000;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00244040 (0x00244040, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -231719,7 +231954,46 @@ void Class_00244040::sub_00244040()
     sub_00243FA0();
 }
 
-// [TODO] 0x00244100 sub_00244100 (99 B)
+// ============================================================================
+// [VERIFIED] sub_00244100 (0x00244100, 99 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Scales a three-number vector to length one and returns its old length; a near-zero vector becomes zero.
+// ============================================================================
+// bin: xb
+// va: 0x00244100
+// what: Scales a three-number vector to length one and returns its old length; a near-zero vector becomes zero.
+// tool: Claude Opus 5.5 (examiner listing A5; decomp.me preset 266 score 0)
+extern "C" double __cdecl sqrt(double);
+extern "C" const float DAT_00458248;   // 1e-10
+extern "C" const float DAT_0039D664;   // 1.0
+extern "C" const float DAT_0039D584;   // 0.0
+
+class Vec_00244100
+{
+public:
+    float sub_00244100();
+
+    float x; // +0x00
+    float y; // +0x04
+    float z; // +0x08
+};
+
+float Vec_00244100::sub_00244100()
+{
+    float lengthSq = x * x + y * y + z * z;
+    if (lengthSq >= DAT_00458248)
+    {
+        float inv = DAT_0039D664 / (float)sqrt(lengthSq);
+        x *= inv;
+        y *= inv;
+        z *= inv;
+        return DAT_0039D664 / inv;
+    }
+    float result = DAT_0039D584;
+    x = y = z = 0;
+    return result;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00244170 (0x00244170, 59 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -232036,7 +232310,49 @@ int __cdecl sub_00244530(int a1)
     return *(int*)(((int)DAT_00493330) + (a1 << 4));
 }
 
-// [TODO] 0x00244540 sub_00244540 (62 B)
+// ============================================================================
+// [VERIFIED] sub_00244540 (0x00244540, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Finds the deepest heap in the heap tree that owns a block of memory, or 0 when none does.
+// ============================================================================
+// bin: xb
+// va: 0x00244540
+// what: Finds the deepest heap in the heap tree that owns a block of memory, or 0 when none does.
+// tool: Claude Opus 5.5 (examiner listing A5; decomp.me preset 266: same instructions, only the self-call's symbol spelling differs)
+class Allocator_00244540
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void Free(void* p);       // +0x14
+    virtual bool Contains(void* p);   // +0x18
+};
+
+struct Node_00244540
+{
+    Allocator_00244540* m_Allocator; // +0x00
+    Node_00244540* m_Child;          // +0x04
+    Node_00244540* m_Next;           // +0x08
+};
+
+extern "C" Node_00244540* __cdecl sub_00244540(Node_00244540* node, void* p);
+
+Node_00244540* __cdecl sub_00244540(Node_00244540* node, void* p)
+{
+    for (; node; node = node->m_Next)
+    {
+        if (node->m_Allocator->Contains(p))
+        {
+            Node_00244540* deeper = sub_00244540(node->m_Child, p);
+            return deeper ? deeper : node;
+        }
+    }
+    return 0;
+}
+
 // [TODO] 0x00244580 sub_00244580 (62 B)
 // ============================================================================
 // [VERIFIED] sub_002445C0 (0x002445C0, 29 B)
@@ -232069,7 +232385,51 @@ void __cdecl sub_002445C0(int a1)
     ((Object*)*(int*)sub_00244580((int)DAT_00493B40, a1))->vfunc_08(a1);
 }
 
-// [TODO] 0x002445E0 sub_002445E0 (75 B)
+// ============================================================================
+// [VERIFIED] sub_002445E0 (0x002445E0, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Frees memory: finds the heap that owns the block (trying the last one used first), remembers it and lets it free the block.
+// ============================================================================
+// bin: xb
+// va: 0x002445E0
+// what: Frees memory: finds the heap that owns the block (trying the last one used first), remembers it and lets it free the block.
+// tool: Claude Opus 5.5 (examiner listing A5; decomp.me preset 266 score 0)
+class Allocator_002445E0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void Free(void* p);       // +0x14
+    virtual bool Contains(void* p);   // +0x18
+};
+
+struct Node_002445E0
+{
+    Allocator_002445E0* m_Allocator; // +0x00
+    Node_002445E0* m_Child;          // +0x04
+    Node_002445E0* m_Next;           // +0x08
+};
+
+extern "C" Node_002445E0* DAT_00493B60;        // the heap that freed last
+extern "C" Allocator_002445E0* DAT_004BC294;
+extern "C" Node_002445E0 DAT_00493B40;         // the root of the heap tree
+extern "C" Node_002445E0* __cdecl sub_00244540(Node_002445E0* node, void* p);
+extern "C" void __cdecl sub_002445E0(void* p);
+
+void __cdecl sub_002445E0(void* p)
+{
+    Node_002445E0* node;
+    if (DAT_00493B60 && DAT_00493B60->m_Allocator != DAT_004BC294 && DAT_00493B60->m_Allocator->Contains(p))
+        node = sub_00244540(DAT_00493B60, p);
+    else
+        node = sub_00244540(&DAT_00493B40, p);
+    DAT_00493B60 = node;
+    node->m_Allocator->Free(p);
+}
+
 // [TODO] 0x00244630 sub_00244630 (102 B)
 // [TODO] 0x002446A0 sub_002446A0 (109 B)
 // ============================================================================
@@ -282812,7 +283172,39 @@ void GlobalVehicleSound::vfunc_00()
     m_Field20 += 1;
 }
 
-// [TODO] 0x002CF0E0 GlobalVehicleSound::vfunc_01 (24 B)
+// ============================================================================
+// [VERIFIED] GlobalVehicleSound::vfunc_01 (0x002CF0E0, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Releases one reference to an om::Entity; at the last one it destroys it.
+// ============================================================================
+// bin: xb
+// va: 0x002CF0E0
+// what: Releases one reference to an om::Entity; at the last one it destroys it.
+// tool: Claude Opus 5.5 (examiner listing A5 and J10.6 R1; decomp.me preset 266 score 0)
+class Entity_002CF0E0
+{
+public:
+    virtual void vfunc_00();
+    virtual void sub_002CF0E0();
+    virtual unsigned int vfunc_02();
+    virtual void vfunc_03(int flags);
+
+    char m_pad04[0x1C];
+    unsigned short m_Count; // +0x20
+};
+
+void Entity_002CF0E0::sub_002CF0E0()
+{
+    if (m_Count == 1)
+    {
+        vfunc_03(1);
+    }
+    else
+    {
+        m_Count--;
+    }
+}
+
 // ============================================================================
 // [VERIFIED] GlobalVehicleSound::vfunc_02 (0x002CF100, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
