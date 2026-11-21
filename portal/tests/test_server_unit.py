@@ -502,3 +502,16 @@ def test_starter_code_uses_the_names_recorded_for_the_class(S, monkeypatch, tmp_
     assert S.member_names({"bin": "xb", "symbol": "ns::Foo::f"}) == {0x10: "m_health"} == S.member_names(t)
     assert "return m_health;" in S.named_members({"bin": "xb", "symbol": "ns::Foo::f"}, code)
     assert S.member_names({"bin": "proto", "symbol": "ns::Foo::f"}) == {} and S.member_names({"bin": "xb", "symbol": "free"}) == {}
+
+
+def test_a_submission_can_pick_its_function_and_drop_flags(S):
+    """A template instantiation is picked by part of its symbol; flags may only be the task's own,
+    fewer of them, or /arch:SSE, so a submission can't pass the compiler options of its own."""
+    t = {"flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4", "match_substr": ""}
+    assert S.submission_task(t, {}) == (t, "")
+    t2, bad = S.submission_task(t, {"match": "?$_Sort@", "flags": "/O2 /Ot /Oy /G6 /Gd /GR /Zp4"})
+    assert not bad and t2["match_substr"] == "?$_Sort@" and "/EHsc" not in t2["flags"] and t["match_substr"] == ""
+    assert not S.submission_task(t, {"flags": t["flags"] + " /arch:SSE"})[1]
+    for flags in ("/O2 /Fo..\\x.obj", "/O2 /O2", " ", "/FI evil.h"):
+        assert S.submission_task(t, {"flags": flags})[1], flags
+    assert S.submission_task(t, {"match": "x" * 201})[1]

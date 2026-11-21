@@ -26,6 +26,7 @@ import argparse
 import getpass
 import json
 import re
+import shlex
 import sys
 import urllib.error
 import urllib.request
@@ -72,9 +73,27 @@ def call(base: str, path: str, body: Optional[dict] = None) -> dict:
             return {"ok": False, "error": f"the portal answered {e.code}"}
 
 
+def verify_options(text: str) -> Dict[str, str]:
+    """--match and --flags from a '// verify: python portal/verify.py ...' line: a file whose function the
+    portal can't pick by its own name (a template instantiation, a compiler helper) says which one it is."""
+    m = re.search(r"^//\s*verify:\s*(.*)$", text, re.M)
+    if not m:
+        return {}
+    try:
+        words = shlex.split(m.group(1).split("   (")[0])
+    except ValueError:
+        return {}
+    out = {}
+    for flag, key in (("--match", "match"), ("--flags", "flags")):
+        if flag in words[:-1]:
+            out[key] = words[words.index(flag) + 1]
+    return out
+
+
 def submit(base: str, user: str, pin: str, path: Path) -> Tuple[bool, str]:
     """Claims and verifies one proposal. (accepted, what happened)."""
-    fields, code = read_proposal(path.read_text(encoding="utf-8"))
+    text = path.read_text(encoding="utf-8")
+    fields, code = read_proposal(text)
     tid = task_id(fields)
     if not tid:
         return False, "no '// bin:' and '// va:' lines at the top"
@@ -87,11 +106,12 @@ def submit(base: str, user: str, pin: str, path: Path) -> Tuple[bool, str]:
     if claim.get("ok") is False:
         return False, "couldn't claim it: " + str(claim.get("error"))
     res = call(base, "/api/verify", {"user": user, "pin": pin, "id": tid, "cpp_code": code,
-                                     "tool_used": fields.get("tool", "")[:120], "what": fields.get("what", "")[:160]})
+                                     "tool_used": fields.get("tool", "")[:120], "what": fields.get("what", "")[:160],
+                                     **verify_options(text)})
     if res.get("verified"):
         return True, f"verified, {res.get('total_bytes')} bytes"
     call(base, "/api/cancel", {"user": user, "pin": pin, "id": tid, "cpp_code": code})
-    return False, res.get("error") or f"not a match: {res.get('matched_bytes')} of {res.get('total_bytes')} bytes"
+    return False, res.get("error") or res.get("compiler_error") or f"not a match: {res.get('matched_bytes')} of {res.get('total_bytes')} bytes"
 
 
 def main() -> int:
