@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 449 of 1,516 functions matched (29.62%). NOT COMPLETE YET.
-// The 1,067 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 611 of 1,514 functions matched (40.36%). NOT COMPLETE YET.
+// The 903 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -191,7 +191,26 @@ void Class_006DEC00::sub_006DEC00()
 }
 
 // [TODO] 0x006DEC30 sub_006DEC30 (84 B)
-// [TODO] 0x006DEC90 sub_006DEC90 (24 B)
+// ============================================================================
+// [VERIFIED] sub_006DEC90 (0x006DEC90, 24 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FFF90 (Proto 0x001FFF90), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006DEC90 (Proto 0x006DEC90, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0085AEB0[];
+extern "C" int DAT_0085AEC8;
+extern "C" void __cdecl sub_006DF050(int);
+
+void __cdecl sub_006DEC90(void)
+{
+    sub_006DF050((int)DAT_0085AEB0);
+    DAT_0085AEC8 = 0x55555555;
+}
+
 // [TODO] 0x006DECB0 sub_006DECB0 (118 B)
 // ============================================================================
 // [VERIFIED] sub_006DED30 (0x006DED30, 6 B)
@@ -323,7 +342,26 @@ void __cdecl sub_006DF080(int a1)
 // [TODO] 0x006DF0F0 sub_006DF0F0 (78 B)
 // [TODO] 0x006DF140 sub_006DF140 (80 B)
 // [TODO] 0x006DF220 sub_006DF220 (129 B)
-// [TODO] 0x006DF2B0 sub_006DF2B0 (34 B)
+// ============================================================================
+// [VERIFIED] sub_006DF2B0 (0x006DF2B0, 34 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00283FE0 (0x00283FE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006DF2B0
+// what: Passes its four arguments, the last a 64-bit number, unchanged to another function.
+// tool: Claude Opus 5.5 (symcov hint: File_ReadAsyncEx)
+// sub_006DF2B0 (0x006DF2B0, 34 bytes)
+
+extern "C" int __cdecl sub_006DF220(int a1, int a2, int a3, __int64 a4);
+
+// Forwards all four arguments. MSVC 7.1 does not turn the call into a jump because of the 64-bit argument.
+int __cdecl sub_006DF2B0(int a1, int a2, int a3, __int64 a4)
+{
+    return sub_006DF220(a1, a2, a3, a4);
+}
+
 // [TODO] 0x006DF310 sub_006DF310 (141 B)
 // [TODO] 0x006DF3A0 sub_006DF3A0 (7 B)
 // [TODO] 0x006DF3E0 sub_006DF3E0 (14 B)
@@ -351,14 +389,102 @@ int __cdecl sub_006DF490(void)
 // [TODO] 0x006DF4C0 core::Platform::vfunc_04 (24 B)
 // [TODO] 0x006DF4E0 core::Platform::vfunc_07 (68 B)
 // [TODO] 0x006DF590 core::Platform::vfunc_06 (50 B)
-// [TODO] 0x006DF650 sub_006DF650 (16008 B)
+// ============================================================================
+// [VERIFIED] sub_006DF650 (0x006DF650, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006DF650 (0x006DF650, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006E3460(void);
+
+class Class_006DF650
+{
+public:
+    void sub_006DF650();
+};
+
+void Class_006DF650::sub_006DF650()
+{
+    sub_006E3460();
+}
+
 // [TODO] 0x006DF6B0 sub_006DF6B0 (33 B)
 // [TODO] 0x006DF6E0 sub_006DF6E0 (34 B)
 // [TODO] 0x006DF710 core::MemorySpaceAsyncRequest_Copy::vfunc_01 (5 B)
-// [TODO] 0x006DF720 UpperBodyAnimStateCondition::vfunc_13 (5 B)
+// ============================================================================
+// [VERIFIED] UpperBodyAnimStateCondition::vfunc_13 (0x006DF720, 5 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as CollisionBehaviourTypeGroup::vfunc_20 (Proto 0x0001C290), which was matched first;
+// its addresses and names were swapped for this function's.
+// UpperBodyAnimStateCondition::vfunc_13 (Proto 0x006DF720, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class UpperBodyAnimStateCondition
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual bool vfunc_13(int a1);
+};
+
+bool UpperBodyAnimStateCondition::vfunc_13(int a1)
+{
+    return true;
+}
+
 // [TODO] 0x006DF730 core::MemoryAllocatorMalloc::vfunc_04 (26 B)
 // [TODO] 0x006DF750 core::MemoryAllocatorMalloc::vfunc_05 (15 B)
-// [TODO] 0x006DF760 core::MemoryAllocatorMalloc::vfunc_07 (21 B)
+// ============================================================================
+// [VERIFIED] core::MemoryAllocatorMalloc::vfunc_07 (0x006DF760, 21 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemoryAllocatorMalloc::vfunc_07 (Proto 0x00248F00), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::MemoryAllocatorMalloc::vfunc_07 (Proto 0x006DF760, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DF780(int, int);
+
+namespace core {
+
+class MemoryAllocatorMalloc
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int a1, int a2);
+};
+
+void MemoryAllocatorMalloc::vfunc_07(int a1, int a2)
+{
+    sub_006DF780(a1, a2);
+}
+
+}
+
 // [TODO] 0x006DF780 sub_006DF780 (55 B)
 // [TODO] 0x006DF7C0 core::MemoryAllocatorMalloc::vfunc_08 (22 B)
 // [TODO] 0x006DF7E0 pure3d::pddiDisplay::vfunc_09 (5 B)
@@ -651,7 +777,57 @@ int MemoryDlAllocator::vfunc_02()
 
 }
 
-// [TODO] 0x006E1D00 core::MemorySmallDlAllocator::vfunc_10 (61 B)
+// ============================================================================
+// [VERIFIED] core::MemorySmallDlAllocator::vfunc_10 (0x006E1D00, 61 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::MemorySmallDlAllocator::vfunc_10 (Proto 0x0024C630), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::MemorySmallDlAllocator::vfunc_10 (Proto 0x006E1D00, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class MemorySmallDlAllocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual bool vfunc_10(int a1, int a2, int a3, int a4);
+};
+
+bool MemorySmallDlAllocator::vfunc_10(int a1, int a2, int a3, int a4)
+{
+    int r_ecx;
+
+    r_ecx = (int)this;
+    if (a1) {
+        *(int*)a1 = *(int*)(r_ecx + 24) - *(int*)(r_ecx + 44);
+    }
+    if (a2) {
+        *(int*)a2 = 0;
+    }
+    if (a3) {
+        *(int*)a3 = *(int*)(r_ecx + 40);
+    }
+    if (a4) {
+        r_ecx = *(int*)(r_ecx + 48);
+        *(int*)a4 = r_ecx;
+    }
+    return true;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::MemorySmallDlAllocator::vfunc_03 (0x006E1D40, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -723,14 +899,43 @@ MemorySmallDlAllocator::MemorySmallDlAllocator() {}                  // building
 // [TODO] 0x006E21D0 core::MemorySmallDlAllocator::vfunc_04 (167 B)
 // [TODO] 0x006E2280 sub_006E2280 (232 B)
 // [TODO] 0x006E2370 sub_006E2370 (2613 B)
-// [TODO] 0x006E2D92 sub_006E2D92 (3 B)
 // [TODO] 0x006E2DB0 sub_006E2DB0 (673 B)
 // [TODO] 0x006E3060 core::MemorySmallDlAllocator::vfunc_07 (151 B)
 // [TODO] 0x006E3100 sub_006E3100 (482 B)
 // [TODO] 0x006E32F0 sub_006E32F0 (244 B)
 // [TODO] 0x006E3630 sub_006E3630 (50 B)
 // [TODO] 0x006E3670 sub_006E3670 (6 B)
-// [TODO] 0x006E36A0 core::CompletionEventRequest::vfunc_01 (18 B)
+// ============================================================================
+// [VERIFIED] core::CompletionEventRequest::vfunc_01 (0x006E36A0, 18 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CompletionEventRequest::vfunc_01 (Proto 0x0026C170), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CompletionEventRequest::vfunc_01 (Proto 0x006E36A0, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DF0D0(int);
+
+namespace core {
+
+class CompletionEventRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+};
+
+int CompletionEventRequest::vfunc_01()
+{
+    sub_006DF0D0(m_Field08);
+    return 1;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::CompletionEventRequest::vfunc_06 (0x006E36C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -763,13 +968,167 @@ int CompletionEventRequest::vfunc_06()
 }
 
 // [TODO] 0x006E36D0 core::FileCompletionRequest::vfunc_07 (46 B)
-// [TODO] 0x006E3700 core::FileCompletionRequest::vfunc_01 (18 B)
+// ============================================================================
+// [VERIFIED] core::FileCompletionRequest::vfunc_01 (0x006E3700, 18 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileCompletionRequest::vfunc_01 (Proto 0x0026C1D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::FileCompletionRequest::vfunc_01 (Proto 0x006E3700, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006E6120(int);
+};
+
+namespace core {
+
+class FileCompletionRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int FileCompletionRequest::vfunc_01()
+{
+    ((Object*)*(int*)(m_Field0C + 12))->sub_006E6120((int)this);
+    return 3;
+}
+
+}
+
 // [TODO] 0x006E3720 core::DriveCompletionRequest::vfunc_07 (46 B)
-// [TODO] 0x006E3750 core::FileCompletionRequest::vfunc_03 (7 B)
-// [TODO] 0x006E3760 core::DriveCompletionRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::FileCompletionRequest::vfunc_03 (0x006E3750, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileCompletionRequest::vfunc_03 (Proto 0x0026C220), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::FileCompletionRequest::vfunc_03 (Proto 0x006E3750, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class FileCompletionRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int FileCompletionRequest::vfunc_03()
+{
+    return *(int*)(m_Field0C + 12);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::DriveCompletionRequest::vfunc_06 (0x006E3760, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CompletionEventRequest::vfunc_06 (Proto 0x0026C190), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveCompletionRequest::vfunc_06 (Proto 0x006E3760, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveCompletionRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveCompletionRequest::vfunc_06()
+{
+    return 22;
+}
+
+}
+
 // [TODO] 0x006E3770 core::FileRequest::vfunc_02 (15 B)
 // [TODO] 0x006E3780 core::FileRequest::vfunc_04 (63 B)
-// [TODO] 0x006E37C0 core::FileRequest::vfunc_05 (8 B)
+// ============================================================================
+// [VERIFIED] core::FileRequest::vfunc_05 (0x006E37C0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileRequest::vfunc_05 (Proto 0x0026C280), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::FileRequest::vfunc_05 (Proto 0x006E37C0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+};
+
+namespace core {
+
+class FileRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    char m_pad04[0x4];
+    Field08* m_Field08; // +0x08
+};
+
+void FileRequest::vfunc_05()
+{
+    m_Field08->vfunc_26();
+}
+
+}
+
 // [TODO] 0x006E37D0 core::FileOpenRequest::vfunc_01 (561 B)
 // [TODO] 0x006E3A10 core::FileOpenByKeyRequest::vfunc_01 (195 B)
 // [TODO] 0x006E3AE0 core::SaveGameOpenRequest::vfunc_01 (127 B)
@@ -803,27 +1162,416 @@ template <> int fight::ParamString<UpperBodyAnimStateCondition>::vfunc_01()
 
 // [TODO] 0x006E3C30 core::FileReadRequest::vfunc_01 (266 B)
 // [TODO] 0x006E3D40 core::FileWriteRequest::vfunc_01 (144 B)
-// [TODO] 0x006E3DD0 fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (6 B)
+// ============================================================================
+// [VERIFIED] fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (0x006E3DD0, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (Proto 0x000CB900), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (Proto 0x006E3DD0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class DirectionalGetHitCondition;
+
+namespace fight { 
+template <class T0> class ParamEnumConstList
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+};
+}
+
+template <> int fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01()
+{
+    return 5;
+}
+
 // [TODO] 0x006E3DE0 core::FileSetPositionRequest::vfunc_01 (55 B)
 // [TODO] 0x006E3E20 core::FileGetPositionRequest::vfunc_01 (56 B)
-// [TODO] 0x006E3E60 core::FileGetPositionRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::FileGetPositionRequest::vfunc_06 (0x006E3E60, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileGetPositionRequest::vfunc_06 (Proto 0x0026C8F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::FileGetPositionRequest::vfunc_06 (Proto 0x006E3E60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class FileGetPositionRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int FileGetPositionRequest::vfunc_06()
+{
+    return 7;
+}
+
+}
+
 // [TODO] 0x006E3E70 core::FileGetSizeRequest::vfunc_01 (56 B)
-// [TODO] 0x006E3EB0 DealerSpawnObject::vfunc_45 (6 B)
+// ============================================================================
+// [VERIFIED] DealerSpawnObject::vfunc_45 (0x006E3EB0, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as DealerSpawnObject::vfunc_43 (Proto 0x0021E9A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// DealerSpawnObject::vfunc_45 (Proto 0x006E3EB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class DealerSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual int vfunc_45();
+};
+
+int DealerSpawnObject::vfunc_45()
+{
+    return 8;
+}
+
 // [TODO] 0x006E3EC0 core::FileCancelRequest::vfunc_01 (59 B)
-// [TODO] 0x006E3F00 fight::ParamBranch<ExitConditionTrack>::vfunc_01 (6 B)
-// [TODO] 0x006E3F10 core::FileRequest::vfunc_03 (7 B)
+// ============================================================================
+// [VERIFIED] fight::ParamBranch<ExitConditionTrack>::vfunc_01 (0x006E3F00, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::ParamBranch<ExitConditionTrack>::vfunc_01 (Proto 0x000D6C80), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::ParamBranch<ExitConditionTrack>::vfunc_01 (Proto 0x006E3F00, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class ExitConditionTrack;
+
+namespace fight { 
+template <class T0> class ParamBranch
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+};
+}
+
+template <> int fight::ParamBranch<ExitConditionTrack>::vfunc_01()
+{
+    return 9;
+}
+
+// ============================================================================
+// [VERIFIED] core::FileRequest::vfunc_03 (0x006E3F10, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileRequest::vfunc_03 (Proto 0x0026C9A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::FileRequest::vfunc_03 (Proto 0x006E3F10, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class FileRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+};
+
+int FileRequest::vfunc_03()
+{
+    return *(int*)(m_Field08 + 12);
+}
+
+}
+
 // [TODO] 0x006E3F20 core::DriveRequest::vfunc_04 (63 B)
-// [TODO] 0x006E3F60 core::DriveOpenRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::DriveOpenRequest::vfunc_06 (0x006E3F60, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveOpenRequest::vfunc_06 (Proto 0x0026C9F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveOpenRequest::vfunc_06 (Proto 0x006E3F60, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveOpenRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveOpenRequest::vfunc_06()
+{
+    return 11;
+}
+
+}
+
 // [TODO] 0x006E3F70 core::DriveMediaRequest::vfunc_01 (78 B)
-// [TODO] 0x006E3FC0 core::DriveMediaRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::DriveMediaRequest::vfunc_06 (0x006E3FC0, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveMediaRequest::vfunc_06 (Proto 0x0026CA50), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveMediaRequest::vfunc_06 (Proto 0x006E3FC0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveMediaRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveMediaRequest::vfunc_06()
+{
+    return 12;
+}
+
+}
+
 // [TODO] 0x006E3FD0 core::DriveFormatRequest::vfunc_01 (63 B)
-// [TODO] 0x006E4010 GlanceAtOvertakingPed::vfunc_10 (6 B)
+// ============================================================================
+// [VERIFIED] GlanceAtOvertakingPed::vfunc_10 (0x006E4010, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GlanceAtOvertakingPed::vfunc_10 (Proto 0x0026CAA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// GlanceAtOvertakingPed::vfunc_10 (Proto 0x006E4010, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class GlanceAtOvertakingPed
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual int vfunc_10();
+};
+
+int GlanceAtOvertakingPed::vfunc_10()
+{
+    return 13;
+}
+
 // [TODO] 0x006E4020 core::DriveCreateDirectoryRequest::vfunc_01 (68 B)
-// [TODO] 0x006E4070 core::DriveCreateDirectoryRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::DriveCreateDirectoryRequest::vfunc_06 (0x006E4070, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveCreateDirectoryRequest::vfunc_06 (Proto 0x0026CB00), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveCreateDirectoryRequest::vfunc_06 (Proto 0x006E4070, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveCreateDirectoryRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveCreateDirectoryRequest::vfunc_06()
+{
+    return 14;
+}
+
+}
+
 // [TODO] 0x006E4080 core::DriveDestroyDirectoryRequest::vfunc_01 (68 B)
-// [TODO] 0x006E40D0 core::DriveDestroyDirectoryRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::DriveDestroyDirectoryRequest::vfunc_06 (0x006E40D0, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveDestroyDirectoryRequest::vfunc_06 (Proto 0x0026CB60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveDestroyDirectoryRequest::vfunc_06 (Proto 0x006E40D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveDestroyDirectoryRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveDestroyDirectoryRequest::vfunc_06()
+{
+    return 15;
+}
+
+}
+
 // [TODO] 0x006E40E0 core::DriveFindFirstRequest::vfunc_01 (110 B)
-// [TODO] 0x006E4150 GangSpawnObject::vfunc_45 (6 B)
+// ============================================================================
+// [VERIFIED] GangSpawnObject::vfunc_45 (0x006E4150, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GangSpawnObject::vfunc_43 (Proto 0x00213E60), which was matched first;
+// its addresses and names were swapped for this function's.
+// GangSpawnObject::vfunc_45 (Proto 0x006E4150, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class GangSpawnObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual int vfunc_45();
+};
+
+int GangSpawnObject::vfunc_45()
+{
+    return 16;
+}
+
 // [TODO] 0x006E4160 core::DriveFindNextRequest::vfunc_01 (72 B)
 // ============================================================================
 // [VERIFIED] core::DriveFindNextRequest::vfunc_06 (0x006E41B0, 6 B)
@@ -857,7 +1605,37 @@ int DriveFindNextRequest::vfunc_06()
 }
 
 // [TODO] 0x006E41C0 core::DriveFindCloseRequest::vfunc_01 (64 B)
-// [TODO] 0x006E4200 core::DriveFindCloseRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::DriveFindCloseRequest::vfunc_06 (0x006E4200, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveFindCloseRequest::vfunc_06 (Proto 0x0026CC80), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveFindCloseRequest::vfunc_06 (Proto 0x006E4200, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveFindCloseRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveFindCloseRequest::vfunc_06()
+{
+    return 18;
+}
+
+}
+
 // [TODO] 0x006E4210 core::DriveFileDestroyRequest::vfunc_01 (68 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_22 (0x006E4260, 4 B)
@@ -906,15 +1684,251 @@ void* d3dContext::vfunc_22()
 
 }
 
-// [TODO] 0x006E4270 core::DriveFileDestroyRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::DriveFileDestroyRequest::vfunc_06 (0x006E4270, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveFileDestroyRequest::vfunc_06 (Proto 0x0026CCE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveFileDestroyRequest::vfunc_06 (Proto 0x006E4270, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveFileDestroyRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveFileDestroyRequest::vfunc_06()
+{
+    return 19;
+}
+
+}
+
 // [TODO] 0x006E4280 core::DriveCancelRequest::vfunc_01 (59 B)
-// [TODO] 0x006E42C0 core::DriveCancelRequest::vfunc_06 (6 B)
-// [TODO] 0x006E42D0 core::DriveLockRequest::vfunc_06 (6 B)
+// ============================================================================
+// [VERIFIED] core::DriveCancelRequest::vfunc_06 (0x006E42C0, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveCancelRequest::vfunc_06 (Proto 0x0026CD30), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveCancelRequest::vfunc_06 (Proto 0x006E42C0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveCancelRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveCancelRequest::vfunc_06()
+{
+    return 20;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::DriveLockRequest::vfunc_06 (0x006E42D0, 6 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveCompletionRequest::vfunc_06 (Proto 0x0026C230), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveLockRequest::vfunc_06 (Proto 0x006E42D0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class DriveLockRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+};
+
+int DriveLockRequest::vfunc_06()
+{
+    return 21;
+}
+
+}
+
 // [TODO] 0x006E42E0 core::DriveLockRequest::vfunc_01 (73 B)
 // [TODO] 0x006E4330 sub_006E4330 (77 B)
-// [TODO] 0x006E4380 core::Request::vfunc_00 (60 B)
-// [TODO] 0x006E43C0 sub_006E43C0 (59 B)
-// [TODO] 0x006E4400 core::CompletionEventRequest::vfunc_00 (74 B)
+// ============================================================================
+// [VERIFIED] core::Request::vfunc_00 (0x006E4380, 60 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Request::vfunc_00 (Proto 0x0026CD90), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Request::vfunc_00 (Proto 0x006E4380, 60 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int);
+};
+
+extern "C" char DAT_00771C98[];
+extern "C" char DAT_0085CDDC[];
+extern "C" int DAT_0085CDF4;
+extern "C" void __cdecl sub_006DF070(int);
+extern "C" void __cdecl sub_006DF080(int);
+
+namespace core {
+
+class Request
+{
+public:
+    virtual Request* vfunc_00(int a1);
+};
+
+Request* Request::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00771C98;
+    if (a1 & 1) {
+        sub_006DF080((int)DAT_0085CDDC);
+        ((Object*)DAT_0085CDF4)->vfunc_05((int)this);
+        sub_006DF070((int)DAT_0085CDDC);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E43C0 (0x006E43C0, 59 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0026CDD0 (Proto 0x0026CDD0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E43C0 (Proto 0x006E43C0, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+};
+
+struct Object
+{
+    void sub_006DEC00();
+};
+
+extern "C" char DAT_00771C98[];
+extern "C" char DAT_00771CB8[];
+extern "C" void __cdecl sub_006DEC00(void);
+
+class Class_006E43C0
+{
+public:
+    Class_006E43C0* sub_006E43C0(int a1, int a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    Field0C* m_Field0C; // +0x0C
+};
+
+Class_006E43C0* Class_006E43C0::sub_006E43C0(int a1, int a2)
+{
+    m_Field00 = (int)DAT_00771C98;
+    m_Field04 = 0;
+    ::sub_006DEC00();
+    m_Field00 = (int)DAT_00771CB8;
+    m_Field08 = a1;
+    m_Field0C = (Field0C*)a2;
+    ((Object*)a2)->sub_006DEC00();
+    m_Field0C->vfunc_00();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] core::CompletionEventRequest::vfunc_00 (0x006E4400, 74 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CompletionEventRequest::vfunc_00 (Proto 0x0026CE10), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CompletionEventRequest::vfunc_00 (Proto 0x006E4400, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int);
+};
+
+extern "C" char DAT_00771C98[];
+extern "C" char DAT_00771CB8[];
+extern "C" char DAT_0085CDDC[];
+extern "C" int DAT_0085CDF4;
+extern "C" void __cdecl sub_006DF070(int);
+extern "C" void __cdecl sub_006DF080(int);
+
+namespace core {
+
+class CompletionEventRequest
+{
+public:
+    virtual CompletionEventRequest* vfunc_00(int a1);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+CompletionEventRequest* CompletionEventRequest::vfunc_00(int a1)
+{
+    int t1;
+
+    t1 = m_Field0C;
+    *(int*)this = (int)DAT_00771CB8;
+    ((Object*)t1)->vfunc_01();
+    *(int*)this = (int)DAT_00771C98;
+    if (a1 & 1) {
+        sub_006DF080((int)DAT_0085CDDC);
+        ((Object*)DAT_0085CDF4)->vfunc_05((int)this);
+        sub_006DF070((int)DAT_0085CDDC);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006E4450 sub_006E4450 (120 B)
 // ============================================================================
 // [VERIFIED] core::FileCompletionRequest::vfunc_00 (0x006E44D0, 82 B)
@@ -1044,7 +2058,44 @@ DriveCompletionRequest* DriveCompletionRequest::vfunc_00(int a1)
 }
 
 // [TODO] 0x006E4610 sub_006E4610 (9 B)
-// [TODO] 0x006E4670 sub_006E4670 (44 B)
+// ============================================================================
+// [VERIFIED] sub_006E4670 (0x006E4670, 44 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0026D070 (Proto 0x0026D070), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E4670 (Proto 0x006E4670, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006DEC00();
+};
+
+extern "C" char DAT_00771DA4[];
+extern "C" void __stdcall sub_006E4610(int);
+
+class Class_006E4670
+{
+public:
+    Class_006E4670* sub_006E4670(int a1, int a2, bool a3);
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    bool m_Field10; // +0x10
+};
+
+Class_006E4670* Class_006E4670::sub_006E4670(int a1, int a2, bool a3)
+{
+    sub_006E4610(a1);
+    m_Field00 = (int)DAT_00771DA4;
+    m_Field0C = a2;
+    m_Field10 = a3;
+    ((Object*)a2)->sub_006DEC00();
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006E46A0 (0x006E46A0, 51 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1090,7 +2141,49 @@ Class_006E46A0* Class_006E46A0::sub_006E46A0(int a1, int a2, int a3)
 }
 
 // [TODO] 0x006E46E0 core::FileOpenByKeyRequest::vfunc_00 (116 B)
-// [TODO] 0x006E4760 sub_006E4760 (58 B)
+// ============================================================================
+// [VERIFIED] sub_006E4760 (0x006E4760, 58 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0026D0D0 (Proto 0x0026D0D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E4760 (Proto 0x006E4760, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006DEC00();
+};
+
+extern "C" char DAT_00771DC4[];
+extern "C" void __stdcall sub_006E4610(int);
+
+class Class_006E4760
+{
+public:
+    Class_006E4760* sub_006E4760(int a1, int a2, bool a3, int a4, int a5);
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    bool m_Field10; // +0x10
+    char m_pad11[0x3];
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+};
+
+Class_006E4760* Class_006E4760::sub_006E4760(int a1, int a2, bool a3, int a4, int a5)
+{
+    sub_006E4610(a1);
+    m_Field0C = a2;
+    m_Field00 = (int)DAT_00771DC4;
+    m_Field10 = a3;
+    m_Field14 = a4;
+    m_Field18 = a5;
+    ((Object*)a5)->sub_006DEC00();
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006E47A0 (0x006E47A0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1667,17 +2760,405 @@ void File::vfunc_01()
 // [TODO] 0x006E4E70 core::File::vfunc_06 (69 B)
 // [TODO] 0x006E4EC0 core::File::vfunc_07 (69 B)
 // [TODO] 0x006E4F10 core::File::vfunc_08 (69 B)
-// [TODO] 0x006E4F60 core::File::vfunc_10 (36 B)
-// [TODO] 0x006E4F90 core::File::vfunc_11 (36 B)
-// [TODO] 0x006E4FC0 core::File::vfunc_12 (26 B)
-// [TODO] 0x006E4FE0 core::File::vfunc_13 (26 B)
-// [TODO] 0x006E5000 core::File::vfunc_14 (26 B)
-// [TODO] 0x006E5020 core::File::vfunc_15 (16 B)
-// [TODO] 0x006E5030 core::File::vfunc_16 (7 B)
+// ============================================================================
+// [VERIFIED] core::File::vfunc_10 (0x006E4F60, 36 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_10 (Proto 0x0026D880), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_10 (Proto 0x006E4F60, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int, int, int);
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10(int a1, int a2, int a3);
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+void File::vfunc_10(int a1, int a2, int a3)
+{
+    vfunc_04(a1, a2, a3);
+    vfunc_22();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_11 (0x006E4F90, 36 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_11 (Proto 0x0026D8B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_11 (Proto 0x006E4F90, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int, int, int);
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11(int a1, int a2, int a3);
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+void File::vfunc_11(int a1, int a2, int a3)
+{
+    vfunc_05(a1, a2, a3);
+    vfunc_22();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_12 (0x006E4FC0, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_12 (Proto 0x0026D8E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_12 (Proto 0x006E4FC0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int);
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12(int a1);
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+void File::vfunc_12(int a1)
+{
+    vfunc_06(a1);
+    vfunc_22();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_13 (0x006E4FE0, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_13 (Proto 0x0026D900), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_13 (Proto 0x006E4FE0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int);
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13(int a1);
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+void File::vfunc_13(int a1)
+{
+    vfunc_07(a1);
+    vfunc_22();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_14 (0x006E5000, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_14 (Proto 0x0026D920), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_14 (Proto 0x006E5000, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08(int);
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14(int a1);
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+void File::vfunc_14(int a1)
+{
+    vfunc_08(a1);
+    vfunc_22();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_15 (0x006E5020, 16 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_15 (Proto 0x0026D940), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_15 (Proto 0x006E5020, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+void File::vfunc_15()
+{
+    vfunc_09();
+    vfunc_22();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_16 (0x006E5030, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_16 (Proto 0x0026D950), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_16 (Proto 0x006E5030, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual int vfunc_16();
+    char m_pad04[0x124];
+    int m_Field128; // +0x128
+};
+
+int File::vfunc_16()
+{
+    return m_Field128;
+}
+
+}
+
 // [TODO] 0x006E5040 core::File::vfunc_18 (61 B)
 // [TODO] 0x006E5080 core::File::vfunc_19 (85 B)
 // [TODO] 0x006E50E0 core::File::vfunc_21 (35 B)
-// [TODO] 0x006E5110 core::File::vfunc_22 (47 B)
+// ============================================================================
+// [VERIFIED] core::File::vfunc_22 (0x006E5110, 47 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_22 (Proto 0x0026DA30), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_22 (Proto 0x006E5110, 47 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+extern "C" void __cdecl sub_006DEFA0(int);
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual bool vfunc_21();
+    virtual void vfunc_22();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void File::vfunc_22()
+{
+    if (!vfunc_21()) {
+        do {
+            m_Field0C->vfunc_04();
+            sub_006DEFA0(0);
+        } while (!vfunc_21());
+    }
+}
+
+}
+
 // [TODO] 0x006E5140 core::File::vfunc_23 (29 B)
 // [TODO] 0x006E5160 core::File::vfunc_25 (24 B)
 // ============================================================================
@@ -1729,13 +3210,375 @@ void* File::vfunc_26()
 
 }
 
-// [TODO] 0x006E5190 core::File::vfunc_27 (8 B)
-// [TODO] 0x006E51A0 core::File::vfunc_30 (7 B)
+// ============================================================================
+// [VERIFIED] core::File::vfunc_27 (0x006E5190, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_27 (Proto 0x0026E730), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_27 (Proto 0x006E5190, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+};
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void File::vfunc_27()
+{
+    m_Field0C->vfunc_05();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_30 (0x006E51A0, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_30 (Proto 0x0026DAD0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_30 (Proto 0x006E51A0, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual bool vfunc_30();
+    char m_pad04[0x15C];
+    bool m_Field160; // +0x160
+};
+
+bool File::vfunc_30()
+{
+    return m_Field160;
+}
+
+}
+
 // [TODO] 0x006E51B0 core::File::vfunc_17 (6 B)
-// [TODO] 0x006E51C0 core::File::vfunc_31 (13 B)
-// [TODO] 0x006E51D0 core::File::vfunc_32 (7 B)
-// [TODO] 0x006E51E0 core::File::vfunc_33 (7 B)
-// [TODO] 0x006E51F0 core::File::vfunc_03 (92 B)
+// ============================================================================
+// [VERIFIED] core::File::vfunc_31 (0x006E51C0, 13 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_31 (Proto 0x0026DAF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_31 (Proto 0x006E51C0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual int vfunc_31(int a1);
+    char m_pad04[0x11C];
+    int m_Field120; // +0x120
+};
+
+int File::vfunc_31(int a1)
+{
+    m_Field120 = a1;
+    return a1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_32 (0x006E51D0, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_32 (Proto 0x0026DB00), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_32 (Proto 0x006E51D0, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual int vfunc_32();
+    char m_pad04[0x158];
+    int m_Field15C; // +0x15C
+};
+
+int File::vfunc_32()
+{
+    return m_Field15C;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_33 (0x006E51E0, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_33 (Proto 0x0026DB10), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_33 (Proto 0x006E51E0, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void* vfunc_33();
+    char m_pad04[0x128];
+    int m_Field12C; // +0x12C
+};
+
+void* File::vfunc_33()
+{
+    return &m_Field12C;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::File::vfunc_03 (0x006E51F0, 92 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_03 (Proto 0x0026DB70), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::File::vfunc_03 (Proto 0x006E51F0, 92 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field12C
+{
+    void sub_005E1BB0();
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int);
+};
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_00772058[];
+extern "C" char DAT_00772064[];
+extern "C" char DAT_0085CDF8[];
+extern "C" int DAT_0085CE10;
+extern "C" void __cdecl sub_006DF070(int);
+extern "C" void __cdecl sub_006DF080(int);
+
+namespace core {
+
+class File
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual File* vfunc_03(int a1);
+    int m_Field04; // +0x04
+    char m_pad08[0x4];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x11C];
+    Field12C m_Field12C; // +0x12C
+};
+
+File* File::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field0C;
+    *(int*)this = (int)DAT_00772064;
+    m_Field04 = (int)DAT_00772058;
+    ((Object*)t1)->vfunc_01();
+    m_Field12C.sub_005E1BB0();
+    *(int*)this = (int)DAT_0073523C;
+    if (a1 & 1) {
+        sub_006DF080((int)DAT_0085CDF8);
+        ((Object*)DAT_0085CE10)->vfunc_05((int)this);
+        sub_006DF070((int)DAT_0085CDF8);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006E5250 sub_006E5250 (248 B)
 // [TODO] 0x006E5350 sub_006E5350 (23 B)
 // [TODO] 0x006E5450 sub_006E5450 (47 B)
@@ -1843,7 +3686,50 @@ void InstanceDrive::vfunc_01()
 
 }
 
-// [TODO] 0x006E5570 core::InstanceDrive::vfunc_04 (8 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_04 (0x006E5570, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_04 (Proto 0x0026DEF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_04 (Proto 0x006E5570, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_04()
+{
+    m_Field0C->vfunc_08();
+}
+
+}
+
 // [TODO] 0x006E5580 core::InstanceDrive::vfunc_05 (69 B)
 // [TODO] 0x006E55D0 core::InstanceDrive::vfunc_06 (60 B)
 // [TODO] 0x006E5610 core::InstanceDrive::vfunc_07 (135 B)
@@ -1851,22 +3737,594 @@ void InstanceDrive::vfunc_01()
 // [TODO] 0x006E5730 core::InstanceDrive::vfunc_09 (146 B)
 // [TODO] 0x006E57D0 core::InstanceDrive::vfunc_10 (69 B)
 // [TODO] 0x006E5820 core::InstanceDrive::vfunc_11 (138 B)
-// [TODO] 0x006E58B0 core::InstanceDrive::vfunc_12 (26 B)
-// [TODO] 0x006E58D0 core::InstanceDrive::vfunc_13 (16 B)
-// [TODO] 0x006E58E0 core::InstanceDrive::vfunc_14 (26 B)
-// [TODO] 0x006E5900 core::InstanceDrive::vfunc_15 (26 B)
-// [TODO] 0x006E5920 core::InstanceDrive::vfunc_16 (31 B)
-// [TODO] 0x006E5940 core::InstanceDrive::vfunc_17 (26 B)
-// [TODO] 0x006E5960 core::InstanceDrive::vfunc_18 (26 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_12 (0x006E58B0, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_12 (Proto 0x0026E230), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_12 (Proto 0x006E58B0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int);
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12(int a1);
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void InstanceDrive::vfunc_12(int a1)
+{
+    vfunc_05(a1);
+    vfunc_23();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_13 (0x006E58D0, 16 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_13 (Proto 0x0026E250), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_13 (Proto 0x006E58D0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void InstanceDrive::vfunc_13()
+{
+    vfunc_06();
+    vfunc_23();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_14 (0x006E58E0, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_14 (Proto 0x0026E260), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_14 (Proto 0x006E58E0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int);
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14(int a1);
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void InstanceDrive::vfunc_14(int a1)
+{
+    vfunc_07(a1);
+    vfunc_23();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_15 (0x006E5900, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_15 (Proto 0x0026E280), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_15 (Proto 0x006E5900, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08(int);
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15(int a1);
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void InstanceDrive::vfunc_15(int a1)
+{
+    vfunc_08(a1);
+    vfunc_23();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_16 (0x006E5920, 31 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_16 (Proto 0x0026E2A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_16 (Proto 0x006E5920, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09(int, int);
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16(int a1, int a2);
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void InstanceDrive::vfunc_16(int a1, int a2)
+{
+    vfunc_09(a1, a2);
+    vfunc_23();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_17 (0x006E5940, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_17 (Proto 0x0026E2C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_17 (Proto 0x006E5940, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10(int);
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17(int a1);
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void InstanceDrive::vfunc_17(int a1)
+{
+    vfunc_10(a1);
+    vfunc_23();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_18 (0x006E5960, 26 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_18 (Proto 0x0026E2E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_18 (Proto 0x006E5960, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11(int);
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18(int a1);
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+};
+
+void InstanceDrive::vfunc_18(int a1)
+{
+    vfunc_11(a1);
+    vfunc_23();
+}
+
+}
+
 // [TODO] 0x006E5980 core::InstanceDrive::vfunc_19 (61 B)
 // [TODO] 0x006E59C0 core::InstanceDrive::vfunc_20 (85 B)
 // [TODO] 0x006E5A20 core::File::vfunc_20 (72 B)
 // [TODO] 0x006E5A70 core::InstanceDrive::vfunc_22 (35 B)
-// [TODO] 0x006E5AA0 core::InstanceDrive::vfunc_23 (47 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_23 (0x006E5AA0, 47 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_23 (Proto 0x0026E420), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_23 (Proto 0x006E5AA0, 47 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+};
+
+extern "C" void __cdecl sub_006DEFA0(int);
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual bool vfunc_22();
+    virtual void vfunc_23();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_23()
+{
+    if (!vfunc_22()) {
+        do {
+            m_Field0C->vfunc_04();
+            sub_006DEFA0(0);
+        } while (!vfunc_22());
+    }
+}
+
+}
+
 // [TODO] 0x006E5AD0 core::InstanceDrive::vfunc_24 (63 B)
-// [TODO] 0x006E5B10 core::InstanceDrive::vfunc_25 (1671 B)
-// [TODO] 0x006E5B20 core::InstanceDrive::vfunc_26 (1701 B)
-// [TODO] 0x006E5B30 core::InstanceDrive::vfunc_27 (1736 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_25 (0x006E5B10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_25 (0x006E5B10, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E6160();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_25()
+{
+    m_Field0C->sub_006E6160();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_26 (0x006E5B20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_26 (0x006E5B20, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E61A0();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_26()
+{
+    m_Field0C->sub_006E61A0();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_27 (0x006E5B30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_27 (0x006E5B30, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E61D0();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_27()
+{
+    m_Field0C->sub_006E61D0();
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_29 (0x006E5B40, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1989,14 +4447,461 @@ void InstanceDrive::vfunc_30()
 
 }
 
-// [TODO] 0x006E5B60 core::InstanceDrive::vfunc_31 (1729 B)
-// [TODO] 0x006E5B70 core::InstanceDrive::vfunc_32 (2026 B)
-// [TODO] 0x006E5B80 core::InstanceDrive::vfunc_33 (1987 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_31 (0x006E5B60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_31 (0x006E5B60, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E6200();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_31()
+{
+    m_Field0C->sub_006E6200();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_32 (0x006E5B70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_32 (0x006E5B70, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E6350();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_32()
+{
+    m_Field0C->sub_006E6350();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_33 (0x006E5B80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_33 (0x006E5B80, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E62F0();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_33()
+{
+    m_Field0C->sub_006E62F0();
+}
+
+}
+
 // [TODO] 0x006E5B90 core::InstanceDrive::vfunc_34 (203 B)
-// [TODO] 0x006E5C60 core::InstanceDrive::vfunc_35 (64 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_35 (0x006E5C60, 64 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_35 (Proto 0x0026E5E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_35 (Proto 0x006E5C60, 64 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34(int, int, int, int, int, int, int, int);
+    virtual void vfunc_35(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
+};
+
+void InstanceDrive::vfunc_35(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
+{
+    int t2;
+
+    vfunc_34(a1, a2, a3, a4, a5, a6, a7, a8);
+    t2 = *(int*)a1;
+    if (*(int*)a1) {
+        ((Object*)t2)->vfunc_22();
+    }
+}
+
+}
+
 // [TODO] 0x006E5CA0 core::InstanceDrive::vfunc_36 (193 B)
-// [TODO] 0x006E5D70 core::InstanceDrive::vfunc_37 (59 B)
-// [TODO] 0x006E5DB0 core::InstanceDrive::vfunc_41 (1525 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_37 (0x006E5D70, 59 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_37 (Proto 0x0026E6F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_37 (Proto 0x006E5D70, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36(int, int, int, int, int, int, int);
+    virtual void vfunc_37(int a1, int a2, int a3, int a4, int a5, int a6, int a7);
+};
+
+void InstanceDrive::vfunc_37(int a1, int a2, int a3, int a4, int a5, int a6, int a7)
+{
+    int t2;
+
+    vfunc_36(a1, a2, a3, a4, a5, a6, a7);
+    t2 = *(int*)a1;
+    if (*(int*)a1) {
+        ((Object*)t2)->vfunc_22();
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_41 (0x006E5DB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_41 (0x006E5DB0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E6390();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_41()
+{
+    m_Field0C->sub_006E6390();
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_40 (0x006E5DC0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2058,7 +4963,81 @@ void InstanceDrive::vfunc_40()
 
 }
 
-// [TODO] 0x006E5DD0 core::InstanceDrive::vfunc_43 (1541 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_43 (0x006E5DD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_43 (0x006E5DD0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E63C0();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_43()
+{
+    m_Field0C->sub_006E63C0();
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_42 (0x006E5DE0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2120,7 +5099,82 @@ void InstanceDrive::vfunc_42()
 
 }
 
-// [TODO] 0x006E5DF0 core::InstanceDrive::vfunc_44 (9105 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_44 (0x006E5DF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_29 (0x002ABD60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_44 (0x006E5DF0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    void sub_006E63F0();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_44()
+{
+    m_Field0C->sub_006E63F0();
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_45 (0x006E5E00, 65 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2290,9 +5344,196 @@ void InstanceDrive::vfunc_46(int a1)
 
 }
 
-// [TODO] 0x006E5E60 core::InstanceDrive::vfunc_48 (8 B)
-// [TODO] 0x006E5E70 fight::SequenceAction::vfunc_04 (8 B)
-// [TODO] 0x006E5E80 core::InstanceDrive::vfunc_03 (81 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_48 (0x006E5E60, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_41 (Proto 0x0026E740), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_48 (Proto 0x006E5E60, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+};
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void InstanceDrive::vfunc_48()
+{
+    m_Field0C->vfunc_06();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] fight::SequenceAction::vfunc_04 (0x006E5E70, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as fight::SequenceAction::vfunc_04 (Proto 0x0026E750), which was matched first;
+// its addresses and names were swapped for this function's.
+// fight::SequenceAction::vfunc_04 (Proto 0x006E5E70, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+};
+
+namespace fight {
+
+class SequenceAction
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void SequenceAction::vfunc_04()
+{
+    m_Field0C->vfunc_07();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_03 (0x006E5E80, 81 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_03 (Proto 0x0026E7B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::InstanceDrive::vfunc_03 (Proto 0x006E5E80, 81 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int);
+};
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_00772100[];
+extern "C" char DAT_0077210C[];
+extern "C" char DAT_0085CE14[];
+extern "C" int DAT_0085CE2C;
+extern "C" void __cdecl sub_006DF070(int);
+extern "C" void __cdecl sub_006DF080(int);
+
+namespace core {
+
+class InstanceDrive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual InstanceDrive* vfunc_03(int a1);
+    int m_Field04; // +0x04
+    char m_pad08[0x4];
+    int m_Field0C; // +0x0C
+};
+
+InstanceDrive* InstanceDrive::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field0C;
+    *(int*)this = (int)DAT_0077210C;
+    m_Field04 = (int)DAT_00772100;
+    ((Object*)t1)->vfunc_01();
+    *(int*)this = (int)DAT_0073523C;
+    if (a1 & 1) {
+        sub_006DF080((int)DAT_0085CE14);
+        ((Object*)DAT_0085CE2C)->vfunc_05((int)this);
+        sub_006DF070((int)DAT_0085CE14);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006E5EE0 sub_006E5EE0 (114 B)
 // [TODO] 0x006E5F60 sub_006E5F60 (66 B)
 // [TODO] 0x006E5FB0 sub_006E5FB0 (67 B)
@@ -2370,11 +5611,61 @@ void Class_006E6370::sub_006E6370()
     ((void (__cdecl*)(void))DAT_00FB0E38)();
 }
 
-// [TODO] 0x006E6380 sub_006E6380 (7330 B)
+// [TODO] 0x006E6380 sub_006E6380 (11 B)
 // [TODO] 0x006E63B0 sub_006E63B0 (11 B)
 // [TODO] 0x006E63E0 sub_006E63E0 (11 B)
-// [TODO] 0x006E6400 sub_006E6400 (1394 B)
-// [TODO] 0x006E6410 sub_006E6410 (1490 B)
+// ============================================================================
+// [VERIFIED] sub_006E6400 (0x006E6400, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00082DB0 (0x00082DB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E6400 (0x006E6400, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006E6930();
+};
+
+class Class_006E6400
+{
+public:
+    void sub_006E6400();
+};
+
+void Class_006E6400::sub_006E6400()
+{
+    ((Object*)(int)this + 20)->sub_006E6930();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E6410 (0x006E6410, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00082DB0 (0x00082DB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E6410 (0x006E6410, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006E6980();
+};
+
+class Class_006E6410
+{
+public:
+    void sub_006E6410();
+};
+
+void Class_006E6410::sub_006E6410()
+{
+    ((Object*)(int)this + 20)->sub_006E6980();
+}
+
 // ============================================================================
 // [VERIFIED] sub_006E6420 (0x006E6420, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2396,10 +5687,160 @@ void* Class_006E6420::sub_006E6420()
     return &m_Field14;
 }
 
-// [TODO] 0x006E6430 core::Drive::vfunc_06 (7 B)
-// [TODO] 0x006E6440 core::Drive::vfunc_11 (5 B)
-// [TODO] 0x006E6450 core::Drive::vfunc_15 (5 B)
-// [TODO] 0x006E6460 core::Drive::vfunc_22 (8 B)
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_06 (0x006E6430, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Drive::vfunc_06 (Proto 0x0026EE60), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Drive::vfunc_06 (Proto 0x006E6430, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06(int a1, int a2);
+};
+
+int Drive::vfunc_06(int a1, int a2)
+{
+    return a2;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_11 (0x006E6440, 5 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Drive::vfunc_11 (Proto 0x0026EE70), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Drive::vfunc_11 (Proto 0x006E6440, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11(int a1, int a2, int a3, int a4, int a5, int a6, int a7);
+};
+
+int Drive::vfunc_11(int a1, int a2, int a3, int a4, int a5, int a6, int a7)
+{
+    return 0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_15 (0x006E6450, 5 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Drive::vfunc_15 (Proto 0x0026EE80), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Drive::vfunc_15 (Proto 0x006E6450, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual int vfunc_15(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9);
+};
+
+int Drive::vfunc_15(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)
+{
+    return 0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_22 (0x006E6460, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Drive::vfunc_22 (Proto 0x0026EEA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Drive::vfunc_22 (Proto 0x006E6460, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual int vfunc_22(int a1);
+};
+
+int Drive::vfunc_22(int a1)
+{
+    return 1;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::Drive::vfunc_00 (0x006E6470, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2428,7 +5869,34 @@ public:
 Drive::Drive() {}                  // building one is what makes the compiler write its tables and the thunk
 }
 
-// [TODO] 0x006E6480 core::Drive::vfunc_02 (8 B)
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_02 (0x006E6480, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Drive::vfunc_02 (Proto 0x0026EEC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Drive::vfunc_02 (Proto 0x006E6480, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 12 bytes to the start of the object and jumps to the real function at
+// 0x006E6530. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (12 bytes).
+
+namespace core {
+class Drive_Base0 { public: virtual void sub_006E6530(); char m_pad04[0x8]; };
+class Drive_Base1 { public: virtual void sub_006E6530(); };
+
+class Drive : public Drive_Base0, public Drive_Base1
+{
+public:
+    Drive();
+    virtual void sub_006E6530();          // the real function; the thunk jumps here
+};
+
+Drive::Drive() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // ============================================================================
 // [VERIFIED] core::SafeRefCount::vfunc_02 (0x006E6490, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2469,12 +5937,117 @@ SafeRefCount* SafeRefCount::vfunc_02(int a1)
 // [TODO] 0x006E6720 core::CementLibrary::vfunc_01 (12 B)
 // [TODO] 0x006E6730 core::CementLibrary::vfunc_05 (39 B)
 // [TODO] 0x006E6760 core::CementLibrary::vfunc_07 (10 B)
-// [TODO] 0x006E6770 core::CementLibrary::vfunc_06 (23 B)
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_06 (0x006E6770, 23 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CementLibrary::vfunc_06 (Proto 0x0026F1B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CementLibrary::vfunc_06 (Proto 0x006E6770, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+};
+
+namespace core {
+
+class CementLibrary
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int a1, int a2);
+    char m_pad04[0x68];
+    int m_Field6C; // +0x6C
+    int m_Field70; // +0x70
+};
+
+void CementLibrary::vfunc_06(int a1, int a2)
+{
+    m_Field6C = a1;
+    m_Field70 = a2;
+    ((Object*)a1)->vfunc_00();
+}
+
+}
+
 // [TODO] 0x006E6790 sub_006E6790 (62 B)
 // [TODO] 0x006E67D0 sub_006E67D0 (52 B)
 // [TODO] 0x006E6810 core::CementLibrary::vfunc_08 (151 B)
-// [TODO] 0x006E68B0 core::CementLibrary::vfunc_09 (51 B)
-// [TODO] 0x006E68C9 sub_006E68C9 (26 B)
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_09 (0x006E68B0, 51 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CementLibrary::vfunc_09 (Proto 0x0026F300), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CementLibrary::vfunc_09 (Proto 0x006E68B0, 51 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+};
+
+namespace core {
+
+class CementLibrary
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08(int, int, int, int, int, int);
+    virtual void vfunc_09(int a1, int a2, int a3, int a4, int a5, int a6);
+};
+
+void CementLibrary::vfunc_09(int a1, int a2, int a3, int a4, int a5, int a6)
+{
+    int t2;
+
+    vfunc_08(a1, a2, a3, a4, a5, a6);
+    t2 = *(int*)a1;
+    if (*(int*)a1) {
+        ((Object*)t2)->vfunc_22();
+    }
+}
+
+}
+
 // [TODO] 0x006E68F0 sub_006E68F0 (54 B)
 // ============================================================================
 // [VERIFIED] sub_006E69F0 (0x006E69F0, 29 B)
@@ -2701,8 +6274,62 @@ public:
 CementLibrary::CementLibrary() {}                  // building one is what makes the compiler write its tables and the thunk
 }
 
-// [TODO] 0x006E6BC0 core::CementLibrary::vfunc_00 (8 B)
-// [TODO] 0x006E6BD0 core::CementLibrary::vfunc_02 (8 B)
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_00 (0x006E6BC0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CementLibrary::vfunc_00 (Proto 0x0026F620), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CementLibrary::vfunc_00 (Proto 0x006E6BC0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 8 bytes to the start of the object and jumps to the real function at
+// 0x006E6F50. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (8 bytes).
+
+namespace core {
+class CementLibrary_Base0 { public: virtual void sub_006E6F50(); char m_pad04[0x4]; };
+class CementLibrary_Base1 { public: virtual void sub_006E6F50(); };
+
+class CementLibrary : public CementLibrary_Base0, public CementLibrary_Base1
+{
+public:
+    CementLibrary();
+    virtual void sub_006E6F50();          // the real function; the thunk jumps here
+};
+
+CementLibrary::CementLibrary() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_02 (0x006E6BD0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CementLibrary::vfunc_02 (Proto 0x0026F630), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::CementLibrary::vfunc_02 (Proto 0x006E6BD0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 16 bytes to the start of the object and jumps to the real function at
+// 0x006E6F50. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (16 bytes).
+
+namespace core {
+class CementLibrary_Base0 { public: virtual void sub_006E6F50(); char m_pad04[0xC]; };
+class CementLibrary_Base1 { public: virtual void sub_006E6F50(); };
+
+class CementLibrary : public CementLibrary_Base0, public CementLibrary_Base1
+{
+public:
+    CementLibrary();
+    virtual void sub_006E6F50();          // the real function; the thunk jumps here
+};
+
+CementLibrary::CementLibrary() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x006E6BE0 core::CementLibrary::vfunc_04 (419 B)
 // [TODO] 0x006E6C82 sub_006E6C82 (257 B)
 // [TODO] 0x006E6D90 sub_006E6D90 (137 B)
@@ -2711,8 +6338,78 @@ CementLibrary::CementLibrary() {}                  // building one is what makes
 // [TODO] 0x006E6F50 core::CementLibrary::vfunc_03 (13 B)
 // [TODO] 0x006E6F80 sub_006E6F80 (41 B)
 // [TODO] 0x006E6FB0 sub_006E6FB0 (135 B)
-// [TODO] 0x006E7040 sub_006E7040 (37 B)
-// [TODO] 0x006E7070 sub_006E7070 (18 B)
+// ============================================================================
+// [VERIFIED] sub_006E7040 (0x006E7040, 37 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002816D0 (Proto 0x002816D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E7040 (Proto 0x006E7040, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E7040
+{
+public:
+    Class_006E7040* sub_006E7040();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+};
+
+Class_006E7040* Class_006E7040::sub_006E7040()
+{
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    m_Field20 = 0;
+    m_Field24 = 0;
+    m_Field28 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E7070 (0x006E7070, 18 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00281710 (Proto 0x00281710), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E7070 (Proto 0x006E7070, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field00
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_006E7070
+{
+public:
+    void sub_006E7070();
+    Field00* m_Field00; // +0x00
+};
+
+void Class_006E7070::sub_006E7070()
+{
+    m_Field00->vfunc_01();
+    m_Field00 = 0;
+}
+
 // [TODO] 0x006E7390 sub_006E7390 (124 B)
 // [TODO] 0x006E7410 sub_006E7410 (28 B)
 // [TODO] 0x006E7430 sub_006E7430 (80 B)
@@ -2753,7 +6450,34 @@ public:
 Win32Drive::Win32Drive() {}                  // building one is what makes the compiler write its tables and the thunk
 }
 
-// [TODO] 0x006E77C0 core::Win32Drive::vfunc_02 (8 B)
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_02 (0x006E77C0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Drive::vfunc_02 (Proto 0x0026EEC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::Win32Drive::vfunc_02 (Proto 0x006E77C0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 12 bytes to the start of the object and jumps to the real function at
+// 0x006E78B0. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (12 bytes).
+
+namespace core {
+class Drive_Base0 { public: virtual void sub_006E78B0(); char m_pad04[0x8]; };
+class Drive_Base1 { public: virtual void sub_006E78B0(); };
+
+class Win32Drive : public Drive_Base0, public Drive_Base1
+{
+public:
+    Win32Drive();
+    virtual void sub_006E78B0();          // the real function; the thunk jumps here
+};
+
+Win32Drive::Win32Drive() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x006E77D0 sub_006E77D0 (220 B)
 // ============================================================================
 // [VERIFIED] core::Win32Drive::vfunc_03 (0x006E78B0, 36 B)
@@ -2963,7 +6687,34 @@ public:
 DriveThread::DriveThread() {}                  // building one is what makes the compiler write its tables and the thunk
 }
 
-// [TODO] 0x006E82D0 core::DriveThread::vfunc_02 (8 B)
+// ============================================================================
+// [VERIFIED] core::DriveThread::vfunc_02 (0x006E82D0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Drive::vfunc_02 (Proto 0x0026EEC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// core::DriveThread::vfunc_02 (Proto 0x006E82D0, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 12 bytes to the start of the object and jumps to the real function at
+// 0x006E8610. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (12 bytes).
+
+namespace core {
+class Drive_Base0 { public: virtual void sub_006E8610(); char m_pad04[0x8]; };
+class Drive_Base1 { public: virtual void sub_006E8610(); };
+
+class DriveThread : public Drive_Base0, public Drive_Base1
+{
+public:
+    DriveThread();
+    virtual void sub_006E8610();          // the real function; the thunk jumps here
+};
+
+DriveThread::DriveThread() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x006E8530 sub_006E8530 (209 B)
 // ============================================================================
 // [VERIFIED] core::DriveThread::vfunc_03 (0x006E8610, 36 B)
@@ -3002,19 +6753,128 @@ DriveThread* DriveThread::vfunc_03(int a1)
 }
 
 // [TODO] 0x006E8640 sub_006E8640 (692 B)
-// [TODO] 0x006E8B20 sub_006E8B20 (83 B)
+// ============================================================================
+// [VERIFIED] sub_006E8B20 (0x006E8B20, 83 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FF040 (Proto 0x001FF040), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E8B20 (Proto 0x006E8B20, 83 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E8B20
+{
+public:
+    int sub_006E8B20(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+int Class_006E8B20::sub_006E8B20(int a1)
+{
+    int r_eax, r_edi, r_esi;
+
+    r_eax = *(int*)a1;
+    r_esi = *(int*)(r_eax + 4);
+    *(int*)a1 = r_esi;
+    r_esi = *(int*)(r_eax + 4);
+    r_edi = (int)(&m_Field04);
+    if (r_esi != ((int)(&m_Field04))) {
+        *(int*)(r_esi + 8) = a1;
+    }
+    r_esi = *(int*)(a1 + 8);
+    *(int*)(r_eax + 8) = r_esi;
+    r_esi = *(int*)(a1 + 8);
+    if (r_esi == r_edi) {
+        m_Field00 = r_eax;
+        *(int*)(r_eax + 4) = a1;
+        *(int*)(a1 + 8) = r_eax;
+        return r_eax;
+    }
+    if (a1 == *(int*)r_esi) {
+        *(int*)r_esi = r_eax;
+        *(int*)(r_eax + 4) = a1;
+        *(int*)(a1 + 8) = r_eax;
+        return r_eax;
+    }
+    *(int*)(r_esi + 4) = r_eax;
+    *(int*)(r_eax + 4) = a1;
+    *(int*)(a1 + 8) = r_eax;
+    return r_eax;
+}
+
 // [TODO] 0x006E8B80 sub_006E8B80 (599 B)
 // [TODO] 0x006E9160 sub_006E9160 (25 B)
 // [TODO] 0x006E9180 sub_006E9180 (42 B)
 // [TODO] 0x006E91B0 sub_006E91B0 (194 B)
-// [TODO] 0x006E9280 sub_006E9280 (22 B)
+// ============================================================================
+// [VERIFIED] sub_006E9280 (0x006E9280, 22 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FF7A0 (Proto 0x001FF7A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E9280 (Proto 0x006E9280, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E9280
+{
+public:
+    Class_006E9280* sub_006E9280(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+Class_006E9280* Class_006E9280::sub_006E9280(int a1)
+{
+    m_Field00 = a1;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    return this;
+}
+
 // [TODO] 0x006E92A0 sub_006E92A0 (31 B)
 // [TODO] 0x006E9340 sub_006E9340 (96 B)
 // [TODO] 0x006E93A0 sub_006E93A0 (162 B)
 // [TODO] 0x006E9450 sub_006E9450 (121 B)
 // [TODO] 0x006E94D0 sub_006E94D0 (14 B)
 // [TODO] 0x006E94F0 sub_006E94F0 (54 B)
-// [TODO] 0x006E9530 sub_006E9530 (27 B)
+// ============================================================================
+// [VERIFIED] sub_006E9530 (0x006E9530, 27 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FFA30 (Proto 0x001FFA30), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E9530 (Proto 0x006E9530, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E9530
+{
+public:
+    int sub_006E9530();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+int Class_006E9530::sub_006E9530()
+{
+    int t1, t2;
+
+    t1 = m_Field04;
+    if (m_Field04 >= 0) {
+        t2 = m_Field00;
+        if ((unsigned int)t1 >= (unsigned int)*(unsigned short*)(m_Field00 + 12)) goto L_18;
+        return *(int*)(*(int*)(t2 + 4) + (t1 * 4));
+    }
+L_18:
+    return 0;
+}
+
 // [TODO] 0x006E9550 sub_006E9550 (68 B)
 // [TODO] 0x006E95A0 sub_006E95A0 (167 B)
 // ============================================================================
@@ -3115,10 +6975,130 @@ int GameMemorySegmentCollection::vfunc_02()
 // [TODO] 0x006E9830 sub_006E9830 (17 B)
 // [TODO] 0x006E9850 content::LoadInventory::vfunc_04 (126 B)
 // [TODO] 0x006E9970 sub_006E9970 (16 B)
-// [TODO] 0x006E9A10 sub_006E9A10 (33 B)
-// [TODO] 0x006E9AE0 content::LoadInventory::vfunc_03 (81 B)
+// ============================================================================
+// [VERIFIED] sub_006E9A10 (0x006E9A10, 33 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FD160 (Proto 0x001FD160), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E9A10 (Proto 0x006E9A10, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    void sub_006E95A0(int, int);
+};
+
+class Class_006E9A10
+{
+public:
+    void sub_006E9A10(int a1, int a2);
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+};
+
+void Class_006E9A10::sub_006E9A10(int a1, int a2)
+{
+    int t1;
+
+    t1 = m_Field08;
+    ((Object*)a2)->vfunc_00();
+    ((Object*)t1)->sub_006E95A0(a1, a2);
+}
+
+// ============================================================================
+// [VERIFIED] content::LoadInventory::vfunc_03 (0x006E9AE0, 81 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadInventory::vfunc_03 (Proto 0x001FD230), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadInventory::vfunc_03 (Proto 0x006E9AE0, 81 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    void sub_006EA020();
+    void sub_006E9160();
+};
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_007723EC[];
+extern "C" void __cdecl sub_0043CE70(int);
+extern "C" void __cdecl sub_006E9810(int);
+
+namespace content {
+
+class LoadInventory
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LoadInventory* vfunc_03(int a1);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+LoadInventory* LoadInventory::vfunc_03(int a1)
+{
+    int t1, t5;
+
+    t1 = m_Field08;
+    *(int*)this = (int)DAT_007723EC;
+    if (m_Field08) {
+        ((Object*)t1)->sub_006EA020();
+        ((Object*)t1)->sub_006E9160();
+        sub_0043CE70(t1);
+    }
+    t5 = m_Field0C;
+    if (m_Field0C) {
+        ((Object*)t5)->vfunc_01();
+    }
+    *(int*)this = (int)DAT_0073523C;
+    if (a1 & 1) {
+        sub_006E9810((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006E9B40 content::P3DFileHandler::vfunc_04 (809 B)
-// [TODO] 0x006E9E70 NISStreamDataLoader::vfunc_04 (27 B)
+// ============================================================================
+// [VERIFIED] NISStreamDataLoader::vfunc_04 (0x006E9E70, 27 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GameGroupLoader::vfunc_04 (Proto 0x001FE150), which was matched first;
+// its addresses and names were swapped for this function's.
+// NISStreamDataLoader::vfunc_04 (Proto 0x006E9E70, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class NISStreamDataLoader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1, int a2, int a3, int a4, int a5);
+    virtual void vfunc_05();
+    virtual void vfunc_06(int, int, int, int);
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+};
+
+void NISStreamDataLoader::vfunc_04(int a1, int a2, int a3, int a4, int a5)
+{
+    vfunc_06(a1, a2, m_Field10, a5);
+}
+
 // ============================================================================
 // [VERIFIED] content::Stats::vfunc_00 (0x006E9E90, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -3151,7 +7131,49 @@ Stats* Stats::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006E9EC0 sub_006E9EC0 (86 B)
+// ============================================================================
+// [VERIFIED] sub_006E9EC0 (0x006E9EC0, 86 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FE190 (Proto 0x001FE190), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006E9EC0 (Proto 0x006E9EC0, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_0043CE00(int);
+
+class Class_006E9EC0
+{
+public:
+    bool sub_006E9EC0(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+bool Class_006E9EC0::sub_006E9EC0(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = sub_0043CE00(a1 * 8);
+        m_Field00 = t1;
+        if (!t1) goto L_48;
+        m_Field0C = (a1 * 8) + t1;
+        m_Field04 = t1;
+        m_Field08 = t1;
+        return true;
+    }
+    m_Field00 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+L_48:
+    m_Field04 = 0;
+    return false;
+}
+
 // [TODO] 0x006E9F50 sub_006E9F50 (6 B)
 // [TODO] 0x006E9F60 sub_006E9F60 (21 B)
 // [TODO] 0x006EA020 sub_006EA020 (64 B)
@@ -3209,7 +7231,77 @@ void __stdcall sub_006EA1C0(int a1)
 // [TODO] 0x006EA1D0 sub_006EA1D0 (39 B)
 // [TODO] 0x006EA4B0 sub_006EA4B0 (162 B)
 // [TODO] 0x006EA570 sub_006EA570 (268 B)
-// [TODO] 0x006EA790 sub_006EA790 (137 B)
+// ============================================================================
+// [VERIFIED] sub_006EA790 (0x006EA790, 137 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00241560 (0x00241560), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EA790 (0x006EA790, 137 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006EA020();
+    void sub_006E9160();
+};
+
+extern "C" char DAT_0085CE34[];
+extern "C" void __cdecl sub_0043CE70(int);
+extern "C" void __cdecl sub_006DF010(int);
+
+class Class_006EA790
+{
+public:
+    void sub_006EA790();
+    char m_pad00[0x1];
+    bool m_Field01; // +0x01
+    char m_pad02[0x1A];
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+    char m_pad30[0x8];
+    int m_Field38; // +0x38
+    int m_Field3C; // +0x3C
+    int m_Field40; // +0x40
+};
+
+void Class_006EA790::sub_006EA790()
+{
+    int t1, t5, t10, t12;
+
+    t1 = m_Field1C;
+    if (m_Field1C) {
+        ((Object*)t1)->sub_006EA020();
+        ((Object*)t1)->sub_006E9160();
+        sub_0043CE70(t1);
+    }
+    t5 = m_Field20;
+    if (m_Field20) {
+        ((Object*)t5)->sub_006EA020();
+        ((Object*)t5)->sub_006E9160();
+        sub_0043CE70(t5);
+    }
+    m_Field01 = true;
+    sub_006DF010((int)DAT_0085CE34);
+    t10 = m_Field40;
+    m_Field38 = m_Field40;
+    m_Field3C = t10;
+    if (m_Field40) {
+        sub_0043CE70(t10);
+    }
+    t12 = m_Field2C;
+    m_Field24 = m_Field2C;
+    m_Field28 = t12;
+    if (m_Field2C) {
+        sub_0043CE70(t12);
+    }
+    sub_0043CE70((int)this);
+}
+
 // [TODO] 0x006EA8F0 sub_006EA8F0 (118 B)
 // [TODO] 0x006EA970 sub_006EA970 (100 B)
 // [TODO] 0x006EA9E0 sub_006EA9E0 (60 B)
@@ -3226,24 +7318,261 @@ void __stdcall sub_006EA1C0(int a1)
 // [TODO] 0x006EAF50 sub_006EAF50 (69 B)
 // [TODO] 0x006EAFA0 sub_006EAFA0 (168 B)
 // [TODO] 0x006EB050 sub_006EB050 (141 B)
-// [TODO] 0x006EB0E0 sub_006EB0E0 (11 B)
+// ============================================================================
+// [VERIFIED] sub_006EB0E0 (0x006EB0E0, 11 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FDB20 (Proto 0x001FDB20), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EB0E0 (Proto 0x006EB0E0, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field284
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_006EB0E0
+{
+public:
+    void sub_006EB0E0();
+    char m_pad00[0x284];
+    Field284* m_Field284; // +0x284
+};
+
+void Class_006EB0E0::sub_006EB0E0()
+{
+    m_Field284->vfunc_01();
+}
+
 // [TODO] 0x006EB0F0 sub_006EB0F0 (20 B)
 // [TODO] 0x006EB110 sub_006EB110 (7 B)
 // [TODO] 0x006EB150 sub_006EB150 (242 B)
 // [TODO] 0x006EB250 sub_006EB250 (162 B)
 // [TODO] 0x006EB300 sub_006EB300 (10 B)
-// [TODO] 0x006EB350 sub_006EB350 (16 B)
+// ============================================================================
+// [VERIFIED] sub_006EB350 (0x006EB350, 16 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FDD90 (Proto 0x001FDD90), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EB350 (Proto 0x006EB350, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EB350
+{
+public:
+    int sub_006EB350();
+    char m_pad00[0x280];
+    int m_Field280; // +0x280
+};
+
+int Class_006EB350::sub_006EB350()
+{
+    return *(int*)(((m_Field280 + 8) << 4) + (int)this);
+}
+
 // [TODO] 0x006EB370 sub_006EB370 (102 B)
 // [TODO] 0x006EB490 sub_006EB490 (28 B)
-// [TODO] 0x006EB4B0 sub_006EB4B0 (38 B)
-// [TODO] 0x006EB4E0 sub_006EB4E0 (38 B)
+// ============================================================================
+// [VERIFIED] sub_006EB4B0 (0x006EB4B0, 38 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FEC60 (Proto 0x001FEC60), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EB4B0 (Proto 0x006EB4B0, 38 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_006EB4B0
+{
+public:
+    void sub_006EB4B0(int a1);
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+void Class_006EB4B0::sub_006EB4B0(int a1)
+{
+    int t2;
+
+    if (a1) {
+        ((Object*)a1)->vfunc_00();
+    }
+    t2 = m_Field18;
+    if (m_Field18) {
+        ((Object*)t2)->vfunc_01();
+    }
+    m_Field18 = a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EB4E0 (0x006EB4E0, 38 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001FEC90 (Proto 0x001FEC90), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EB4E0 (Proto 0x006EB4E0, 38 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_006EB4E0
+{
+public:
+    void sub_006EB4E0(int a1);
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+void Class_006EB4E0::sub_006EB4E0(int a1)
+{
+    int t2;
+
+    if (a1) {
+        ((Object*)a1)->vfunc_00();
+    }
+    t2 = m_Field1C;
+    if (m_Field1C) {
+        ((Object*)t2)->vfunc_01();
+    }
+    m_Field1C = a1;
+}
+
 // [TODO] 0x006EB510 sub_006EB510 (110 B)
-// [TODO] 0x006EB580 content::LoadRequest::vfunc_03 (76 B)
+// ============================================================================
+// [VERIFIED] content::LoadRequest::vfunc_03 (0x006EB580, 76 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as content::LoadRequest::vfunc_03 (Proto 0x001FED30), which was matched first;
+// its addresses and names were swapped for this function's.
+// content::LoadRequest::vfunc_03 (Proto 0x006EB580, 76 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_00772428[];
+extern "C" void __cdecl sub_006E9810(int);
+
+namespace content {
+
+class LoadRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LoadRequest* vfunc_03(int a1);
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    char m_pad20[0x104];
+    int m_Field124; // +0x124
+};
+
+LoadRequest* LoadRequest::vfunc_03(int a1)
+{
+    int t1, t3, t5;
+
+    t1 = m_Field18;
+    *(int*)this = (int)DAT_00772428;
+    if (m_Field18) {
+        ((Object*)t1)->vfunc_01();
+    }
+    t3 = m_Field124;
+    if (m_Field124) {
+        ((Object*)t3)->vfunc_01();
+    }
+    t5 = m_Field1C;
+    if (m_Field1C) {
+        ((Object*)t5)->vfunc_01();
+    }
+    *(int*)this = (int)DAT_0073523C;
+    if (a1 & 1) {
+        sub_006E9810((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006EB5D0 sub_006EB5D0 (71 B)
-// [TODO] 0x006EB620 sub_006EB620 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006EB620 (0x006EB620, 5 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00290C80 (Proto 0x00290C80), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EB620 (Proto 0x006EB620, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EB620
+{
+public:
+    int sub_006EB620();
+    char m_pad00[0x8];
+    unsigned short m_Field08; // +0x08
+};
+
+int Class_006EB620::sub_006EB620()
+{
+    return m_Field08;
+}
+
 // [TODO] 0x006EB630 sub_006EB630 (98 B)
 // [TODO] 0x006EB6A0 sub_006EB6A0 (34 B)
-// [TODO] 0x006EB6D0 sub_006EB6D0 (16 B)
+// ============================================================================
+// [VERIFIED] sub_006EB6D0 (0x006EB6D0, 16 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00291030 (Proto 0x00291030), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EB6D0 (Proto 0x006EB6D0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0072FC64[];
+extern "C" int DAT_007F6398;
+
+class Class_006EB6D0
+{
+public:
+    int sub_006EB6D0();
+    int m_Field00; // +0x00
+};
+
+int Class_006EB6D0::sub_006EB6D0()
+{
+    int r_eax;
+
+    r_eax = m_Field00;
+    if (r_eax == DAT_007F6398) {
+        r_eax = (int)DAT_0072FC64;
+    }
+    return r_eax;
+}
+
 // [TODO] 0x006EB6E0 sub_006EB6E0 (12 B)
 // [TODO] 0x006EB6F0 sub_006EB6F0 (82 B)
 // [TODO] 0x006EB750 sub_006EB750 (8 B)
@@ -3600,7 +7929,35 @@ void __cdecl sub_006EC630(int a1)
     sub_006EE890((int)DAT_007F6474, a1);
 }
 
-// [TODO] 0x006EC650 sub_006EC650 (25 B)
+// ============================================================================
+// [VERIFIED] sub_006EC650 (0x006EC650, 25 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00291400 (Proto 0x00291400), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EC650 (Proto 0x006EC650, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772544[];
+
+class Class_006EC650
+{
+public:
+    Class_006EC650* sub_006EC650(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+Class_006EC650* Class_006EC650::sub_006EC650(int a1)
+{
+    m_Field04 = 0;
+    m_Field00 = (int)DAT_00772544;
+    m_Field08 = a1;
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] om::EntityLoader::vfunc_03 (0x006EC670, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -3900,7 +8257,29 @@ void GlobalVehicleSound::vfunc_07(int a1)
     ((Object2*)((Object*)vfunc_12())->vfunc_02())->vfunc_02(a1, (int)this);
 }
 
-// [TODO] 0x006ECD30 sub_006ECD30 (71 B)
+// ============================================================================
+// [VERIFIED] sub_006ECD30 (0x006ECD30, 71 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00292A70 (Proto 0x00292A70), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006ECD30 (Proto 0x006ECD30, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006F33D0(int, int);
+
+int __cdecl sub_006ECD30(int a1, int a2)
+{
+    if (sub_006F33D0(a1, a2)) {
+        if (!sub_006F33D0(a1, a2 + 4)) goto L_42;
+        if (!sub_006F33D0(a1, a2 + 8)) goto L_42;
+        return 1;
+    }
+L_42:
+    return 0;
+}
+
 // [TODO] 0x006ECE00 GlobalVehicleSound::vfunc_08 (488 B)
 // [TODO] 0x006ECFF0 sub_006ECFF0 (115 B)
 // [TODO] 0x006ED070 om::TRbTree<om::EntityTypeBase, 28>::Comp<om::EntityTypeBase, 28, unsigned int>::vfunc_00 (35 B)
@@ -4145,10 +8524,105 @@ void Sequence::vfunc_05(int a1)
 }
 
 // [TODO] 0x006ED700 sub_006ED700 (273 B)
-// [TODO] 0x006ED820 sub_006ED820 (98 B)
+// ============================================================================
+// [VERIFIED] sub_006ED820 (0x006ED820, 98 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002CFDC0 (0x002CFDC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006ED820 (0x006ED820, 98 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field44
+{
+    int sub_006F2510();
+};
+
+struct Object
+{
+    int sub_006F2450();
+    int sub_006F2470(int);
+};
+
+extern "C" bool __cdecl sub_006ECBD0(int, int);
+extern "C" int __cdecl sub_006EE9B0(void);
+extern "C" bool __cdecl sub_006F33F0(int, int);
+
+class Class_006ED820
+{
+public:
+    bool sub_006ED820(int a1);
+    char m_pad00[0x44];
+    Field44 m_Field44; // +0x44
+};
+
+bool Class_006ED820::sub_006ED820(int a1)
+{
+    int r_edi, r_esi;
+    bool t2;
+
+    r_edi = (int)(&m_Field44);
+    t2 = sub_006F33F0(a1, m_Field44.sub_006F2510());
+    if (!t2) {
+        return t2;
+    }
+    r_esi = ((Object*)r_edi)->sub_006F2450();
+    if (r_esi) {
+        do {
+            if (!sub_006ECBD0(a1, sub_006EE9B0())) goto L_5A;
+            r_esi = ((Object*)r_edi)->sub_006F2470(r_esi);
+        } while (r_esi);
+    }
+    return true;
+L_5A:
+    return false;
+}
+
 // [TODO] 0x006ED890 sub_006ED890 (107 B)
 // [TODO] 0x006ED900 audio::Sequence::vfunc_03 (96 B)
-// [TODO] 0x006ED960 audio::Sequence::vfunc_07 (64 B)
+// ============================================================================
+// [VERIFIED] audio::Sequence::vfunc_07 (0x006ED960, 64 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::Sequence::vfunc_09 (Proto 0x002947D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::Sequence::vfunc_07 (Proto 0x006ED960, 64 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006F33F0(int, int);
+
+namespace audio {
+
+class Sequence
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07(int a1);
+    bool sub_006ED5C0(int);
+    bool sub_006ED820(int);
+};
+
+int Sequence::vfunc_07(int a1)
+{
+    if (sub_006F33F0(a1, 1)) {
+        if (!sub_006ED820(a1)) goto L_39;
+        if (!sub_006ED5C0(a1)) goto L_39;
+        return 1;
+    }
+L_39:
+    return 0;
+}
+
+}
+
 // [TODO] 0x006ED9A0 sub_006ED9A0 (143 B)
 // [TODO] 0x006EDA30 audio::Sequence::vfunc_06 (110 B)
 // [TODO] 0x006EDB60 sub_006EDB60 (12 B)
@@ -4175,16 +8649,138 @@ void Class_006EDCA0::sub_006EDCA0()
     sub_004897A5();
 }
 
-// [TODO] 0x006EDCB0 sub_006EDCB0 (18 B)
+// ============================================================================
+// [VERIFIED] sub_006EDCB0 (0x006EDCB0, 18 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00293BF0 (Proto 0x00293BF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EDCB0 (Proto 0x006EDCB0, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EDCB0
+{
+public:
+    Class_006EDCB0* sub_006EDCB0(int a1, bool a2);
+    int m_Field00; // +0x00
+    bool m_Field04; // +0x04
+};
+
+Class_006EDCB0* Class_006EDCB0::sub_006EDCB0(int a1, bool a2)
+{
+    m_Field00 = a1;
+    m_Field04 = a2;
+    return this;
+}
+
 // [TODO] 0x006EDCD0 sub_006EDCD0 (36 B)
 // [TODO] 0x006EDD00 sub_006EDD00 (64 B)
 // [TODO] 0x006EDD40 sub_006EDD40 (133 B)
 // [TODO] 0x006EDDD0 sub_006EDDD0 (22 B)
 // [TODO] 0x006EDDF0 sub_006EDDF0 (27 B)
 // [TODO] 0x006EDE10 sub_006EDE10 (91 B)
-// [TODO] 0x006EDE70 om::ContentStream::vfunc_00 (45 B)
+// ============================================================================
+// [VERIFIED] om::ContentStream::vfunc_00 (0x006EDE70, 45 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as om::ContentStream::vfunc_00 (Proto 0x00293E50), which was matched first;
+// its addresses and names were swapped for this function's.
+// om::ContentStream::vfunc_00 (Proto 0x006EDE70, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_0073C2A8[];
+extern "C" char DAT_00772678[];
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace om {
+
+class ContentStream
+{
+public:
+    virtual ContentStream* vfunc_00(int a1);
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+};
+
+ContentStream* ContentStream::vfunc_00(int a1)
+{
+    int t1;
+
+    t1 = m_Field20;
+    *(int*)this = (int)DAT_00772678;
+    ((Object*)t1)->vfunc_01();
+    *(int*)this = (int)DAT_0073C2A8;
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006EDEA0 sub_006EDEA0 (13 B)
-// [TODO] 0x006EDEF0 sub_006EDEF0 (81 B)
+// ============================================================================
+// [VERIFIED] sub_006EDEF0 (0x006EDEF0, 81 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00293ED0 (Proto 0x00293ED0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EDEF0 (Proto 0x006EDEF0, 81 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0077269C[];
+extern "C" char sub_006EDB80[];
+extern "C" char sub_006EDBD0[];
+extern "C" char sub_006EDC20[];
+extern "C" char sub_006EDC40[];
+extern "C" char sub_006EDC60[];
+extern "C" char sub_006EDC80[];
+
+class Class_006EDEF0
+{
+public:
+    Class_006EDEF0* sub_006EDEF0(int a1, int a2, bool a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    bool m_Field1C; // +0x1C
+    char m_pad1D[0x3];
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    bool m_Field2C; // +0x2C
+};
+
+Class_006EDEF0* Class_006EDEF0::sub_006EDEF0(int a1, int a2, bool a3)
+{
+    m_Field20 = a2;
+    m_Field04 = (int)sub_006EDB80;
+    m_Field08 = (int)sub_006EDBD0;
+    m_Field0C = (int)sub_006EDC20;
+    m_Field10 = (int)sub_006EDC40;
+    m_Field14 = (int)sub_006EDC60;
+    m_Field18 = (int)sub_006EDC80;
+    m_Field1C = false;
+    m_Field00 = (int)DAT_0077269C;
+    m_Field24 = a1;
+    m_Field28 = a1;
+    m_Field2C = a3;
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EDF50 (0x006EDF50, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -4401,7 +8997,47 @@ Class_006EE310* Class_006EE310::sub_006EE310()
 // [TODO] 0x006EE440 sub_006EE440 (88 B)
 // [TODO] 0x006EE4A0 sub_006EE4A0 (71 B)
 // [TODO] 0x006EE4F0 sub_006EE4F0 (60 B)
-// [TODO] 0x006EE530 sub_006EE530 (56 B)
+// ============================================================================
+// [VERIFIED] sub_006EE530 (0x006EE530, 56 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00291AF0 (Proto 0x00291AF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EE530 (Proto 0x006EE530, 56 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_006EE4A0(int, int);
+};
+
+extern "C" char DAT_007F682C[];
+extern "C" int __stdcall sub_006EE3B0(int);
+extern "C" int __cdecl sub_006EE870(int);
+
+class Class_006EE530
+{
+public:
+    int sub_006EE530(int a1);
+};
+
+int Class_006EE530::sub_006EE530(int a1)
+{
+    int r_eax;
+
+    r_eax = sub_006EE3B0(a1);
+    if (!r_eax) {
+        r_eax = sub_006EE870((int)DAT_007F682C);
+        if (r_eax) {
+            r_eax = ((Object*)r_eax)->sub_006EE4A0((int)this, a1);
+            return r_eax;
+        }
+        r_eax = 0;
+    }
+    return r_eax;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EE570 (0x006EE570, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -5276,7 +9912,22 @@ int __cdecl sub_006EFB60(int a1)
 }
 
 // [TODO] 0x006EFB70 sub_006EFB70 (12 B)
-// [TODO] 0x006EFB80 sub_006EFB80 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006EFB80 (0x006EFB80, 12 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002AB580 (Proto 0x002AB580), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EFB80 (Proto 0x006EFB80, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EFB80(int a1, float a2)
+{
+    *(float*)(a1 + 20) = a2;
+    return a1;
+}
+
 // [TODO] 0x006EFB90 sub_006EFB90 (94 B)
 // [TODO] 0x006EFBF0 sub_006EFBF0 (136 B)
 // [TODO] 0x006EFC80 sub_006EFC80 (13 B)
@@ -5538,7 +10189,34 @@ void __cdecl sub_006F0990(int a1)
 }
 
 // [TODO] 0x006F09B0 audio::StreamPlayerAllocator::vfunc_00 (44 B)
-// [TODO] 0x006F09E0 audio::StreamPlayerAllocator::vfunc_01 (14 B)
+// ============================================================================
+// [VERIFIED] audio::StreamPlayerAllocator::vfunc_01 (0x006F09E0, 14 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::StreamPlayerAllocator::vfunc_01 (Proto 0x002963B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::StreamPlayerAllocator::vfunc_01 (Proto 0x006F09E0, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006F21F0(int);
+
+namespace audio {
+
+class StreamPlayerAllocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(int a1, int a2);
+};
+
+void StreamPlayerAllocator::vfunc_01(int a1, int a2)
+{
+    sub_006F21F0(a2);
+}
+
+}
+
 // [TODO] 0x006F0A70 sub_006F0A70 (123 B)
 // [TODO] 0x006F0AF0 sub_006F0AF0 (311 B)
 // [TODO] 0x006F0C30 sub_006F0C30 (122 B)
@@ -5581,10 +10259,74 @@ void Class_006F1070::sub_006F1070(int a1)
 
 // [TODO] 0x006F1340 sub_006F1340 (10 B)
 // [TODO] 0x006F1350 sub_006F1350 (51 B)
-// [TODO] 0x006F1390 sub_006F1390 (15 B)
-// [TODO] 0x006F13A0 sub_006F13A0 (29 B)
-// [TODO] 0x006F13C0 sub_006F13C0 (20 B)
-// [TODO] 0x006F13E0 sub_006F13E0 (34 B)
+// ============================================================================
+// [VERIFIED] sub_006F1390 (0x006F1390, 15 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002985E0 (Proto 0x002985E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F1390 (Proto 0x006F1390, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_007F6BD4;
+
+bool __cdecl sub_006F1390(int a1)
+{
+    return *(bool*)(((int)&DAT_007F6BD4) + ((a1 + (a1 * 2)) * 8));
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F13A0 (0x006F13A0, 29 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00298620 (Proto 0x00298620), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F13A0 (Proto 0x006F13A0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_007F6BD0;
+
+int __cdecl sub_006F13A0(int a1)
+{
+    return ((((unsigned int)*(int*)a1) >> 4) & 31) * *(int*)(((int)&DAT_007F6BD0) + (((*(int*)a1 & 15) + ((*(int*)a1 & 15) * 2)) * 8));
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F13C0 (0x006F13C0, 20 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00298640 (Proto 0x00298640), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F13C0 (Proto 0x006F13C0, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_007F6BCC;
+
+int __cdecl sub_006F13C0(int a1)
+{
+    return *(int*)(((int)&DAT_007F6BCC) + (((*(int*)a1 & 15) + ((*(int*)a1 & 15) * 2)) * 8));
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F13E0 (0x006F13E0, 34 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002986A0 (Proto 0x002986A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F13E0 (Proto 0x006F13E0, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_007F6BD0;
+
+int __cdecl sub_006F13E0(int a1, int a2)
+{
+    return ((((unsigned int)*(int*)a1) >> 4) & 31) * *(int*)(((int)&DAT_007F6BD0) + (((*(int*)a1 & 15) + ((*(int*)a1 & 15) * 2)) * 8)) * a2;
+}
+
 // [TODO] 0x006F1410 sub_006F1410 (41 B)
 // [TODO] 0x006F1440 sub_006F1440 (40 B)
 // [TODO] 0x006F1490 sub_006F1490 (71 B)
@@ -5593,17 +10335,189 @@ void Class_006F1070::sub_006F1070(int a1)
 // [TODO] 0x006F1600 sub_006F1600 (50 B)
 // [TODO] 0x006F1640 sub_006F1640 (37 B)
 // [TODO] 0x006F1670 sub_006F1670 (72 B)
-// [TODO] 0x006F16C0 sub_006F16C0 (11 B)
+// ============================================================================
+// [VERIFIED] sub_006F16C0 (0x006F16C0, 11 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029A110 (Proto 0x0029A110), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F16C0 (Proto 0x006F16C0, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006F16C0(int a1)
+{
+    return *(int*)(a1 + 192);
+}
+
 // [TODO] 0x006F16E0 sub_006F16E0 (16 B)
-// [TODO] 0x006F16F0 sub_006F16F0 (16 B)
-// [TODO] 0x006F1700 sub_006F1700 (16 B)
-// [TODO] 0x006F1710 sub_006F1710 (16 B)
-// [TODO] 0x006F1720 sub_006F1720 (16 B)
-// [TODO] 0x006F1730 sub_006F1730 (16 B)
-// [TODO] 0x006F1740 sub_006F1740 (11 B)
+// ============================================================================
+// [VERIFIED] sub_006F16F0 (0x006F16F0, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006F16F0
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_006F16F0 (0x006F16F0, 16 bytes)
+
+struct Struct_006F16F0
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_006EFB70(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_006F16F0(Struct_006F16F0 *record, float value)
+{
+    return sub_006EFB70(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F1700 (0x006F1700, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37B0 (0x002D37B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006F1700
+// what: Passes a value stored inside the given record, with two more arguments, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceDiff)
+// sub_006F1700 (0x006F1700, 16 bytes)
+
+struct Struct_006F1700
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" void __cdecl sub_006EFB90(int handle, int, unsigned int);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+void __cdecl sub_006F1700(Struct_006F1700 *record, int a2, unsigned int count)
+{
+    sub_006EFB90(record->m_Field08, a2, count);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F1710 (0x006F1710, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37B0 (0x002D37B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006F1710
+// what: Passes a value stored inside the given record, with two more arguments, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceDiff)
+// sub_006F1710 (0x006F1710, 16 bytes)
+
+struct Struct_006F1710
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" void __cdecl sub_006EFBF0(int handle, int, unsigned int);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+void __cdecl sub_006F1710(Struct_006F1710 *record, int a2, unsigned int count)
+{
+    sub_006EFBF0(record->m_Field08, a2, count);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F1720 (0x006F1720, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006F1720
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_006F1720 (0x006F1720, 16 bytes)
+
+struct Struct_006F1720
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_006EFB80(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_006F1720(Struct_006F1720 *record, float value)
+{
+    return sub_006EFB80(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F1730 (0x006F1730, 16 B)
+// By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002D37A0 (0x002D37A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006F1730
+// what: Passes a value stored inside the given record, with a number, on to another function.
+// tool: Claude Opus 5.5 (symcov hint: _HLBApiPresenceExtra, link-order)
+// sub_006F1730 (0x006F1730, 16 bytes)
+
+struct Struct_006F1730
+{
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+extern "C" int __cdecl sub_006EFC80(int handle, float);
+
+// Calls the function with the record's value at +0x08 in place of the record.
+int __cdecl sub_006F1730(Struct_006F1730 *record, float value)
+{
+    return sub_006EFC80(record->m_Field08, value);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F1740 (0x006F1740, 11 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029A180 (Proto 0x0029A180), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F1740 (Proto 0x006F1740, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006F1740(int a1)
+{
+    return *(int*)(*(int*)(a1 + 16) + 36);
+}
+
 // [TODO] 0x006F1750 sub_006F1750 (139 B)
 // [TODO] 0x006F17E0 sub_006F17E0 (22 B)
-// [TODO] 0x006F1800 sub_006F1800 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006F1800 (0x006F1800, 12 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029A240 (Proto 0x0029A240), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F1800 (Proto 0x006F1800, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006F1800(int a1)
+{
+    return *(unsigned char*)(a1 + 185);
+}
+
 // [TODO] 0x006F1810 sub_006F1810 (45 B)
 // [TODO] 0x006F1840 sub_006F1840 (20 B)
 // [TODO] 0x006F1860 sub_006F1860 (72 B)
@@ -5622,12 +10536,92 @@ void Class_006F1070::sub_006F1070(int a1)
 // [TODO] 0x006F2380 sub_006F2380 (34 B)
 // [TODO] 0x006F23B0 sub_006F23B0 (51 B)
 // [TODO] 0x006F23F0 sub_006F23F0 (62 B)
-// [TODO] 0x006F2430 sub_006F2430 (21 B)
+// ============================================================================
+// [VERIFIED] sub_006F2430 (0x006F2430, 21 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00296E70 (Proto 0x00296E70), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F2430 (Proto 0x006F2430, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006F2430
+{
+public:
+    void* sub_006F2430();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+void* Class_006F2430::sub_006F2430()
+{
+    m_Field04 = (int)(&m_Field04);
+    m_Field08 = (int)(&m_Field04);
+    m_Field0C = (int)(&m_Field04);
+    m_Field10 = 0;
+    m_Field00 = (int)(&m_Field04);
+    return &m_Field04;
+}
+
 // [TODO] 0x006F2450 sub_006F2450 (27 B)
 // [TODO] 0x006F2470 sub_006F2470 (75 B)
 // [TODO] 0x006F24C0 sub_006F24C0 (75 B)
 // [TODO] 0x006F2510 sub_006F2510 (91 B)
-// [TODO] 0x006F2570 sub_006F2570 (80 B)
+// ============================================================================
+// [VERIFIED] sub_006F2570 (0x006F2570, 80 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002ADF70 (Proto 0x002ADF70), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F2570 (Proto 0x006F2570, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006F2570
+{
+public:
+    int sub_006F2570(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+int Class_006F2570::sub_006F2570(int a1)
+{
+    int r_eax, r_edi, r_esi;
+
+    r_eax = *(int*)(a1 + 4);
+    r_esi = *(int*)r_eax;
+    *(int*)(a1 + 4) = r_esi;
+    r_esi = *(int*)r_eax;
+    r_edi = (int)(&m_Field04);
+    if (r_esi != ((int)(&m_Field04))) {
+        *(int*)(r_esi + 8) = a1;
+    }
+    r_esi = *(int*)(a1 + 8);
+    *(int*)(r_eax + 8) = r_esi;
+    r_esi = *(int*)(a1 + 8);
+    if (r_esi == r_edi) {
+        m_Field00 = r_eax;
+        *(int*)r_eax = a1;
+        *(int*)(a1 + 8) = r_eax;
+        return r_eax;
+    }
+    if (a1 == *(int*)r_esi) {
+        *(int*)r_esi = r_eax;
+        *(int*)r_eax = a1;
+        *(int*)(a1 + 8) = r_eax;
+        return r_eax;
+    }
+    *(int*)(r_esi + 4) = r_eax;
+    *(int*)r_eax = a1;
+    *(int*)(a1 + 8) = r_eax;
+    return r_eax;
+}
+
 // [TODO] 0x006F25C0 sub_006F25C0 (55 B)
 // [TODO] 0x006F2600 sub_006F2600 (603 B)
 // [TODO] 0x006F2860 sub_006F2860 (439 B)
@@ -5669,11 +10663,71 @@ int Class_006F2BD0::sub_006F2BD0(int a1)
     return a1;
 }
 
-// [TODO] 0x006F2C00 sub_006F2C00 (53 B)
+// ============================================================================
+// [VERIFIED] sub_006F2C00 (0x006F2C00, 53 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029CB70 (Proto 0x0029CB70), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F2C00 (Proto 0x006F2C00, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006F2C00
+{
+public:
+    int sub_006F2C00(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+int Class_006F2C00::sub_006F2C00(int a1)
+{
+    if (!m_Field00) {
+        m_Field00 = a1;
+        *(int*)(a1 + 4) = 0;
+        m_Field04 = a1;
+        *(int*)a1 = 0;
+        return a1;
+    }
+    *(int*)m_Field04 = a1;
+    *(int*)(a1 + 4) = m_Field04;
+    m_Field04 = a1;
+    *(int*)a1 = 0;
+    return a1;
+}
+
 // [TODO] 0x006F2C40 sub_006F2C40 (47 B)
 // [TODO] 0x006F2C70 sub_006F2C70 (18 B)
 // [TODO] 0x006F2C90 sub_006F2C90 (116 B)
-// [TODO] 0x006F2EF0 om::SparksHeap::vfunc_00 (14 B)
+// ============================================================================
+// [VERIFIED] om::SparksHeap::vfunc_00 (0x006F2EF0, 14 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as om::SparksHeap::vfunc_00 (Proto 0x0029A0C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// om::SparksHeap::vfunc_00 (Proto 0x006F2EF0, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006F2C90(void);
+
+namespace om {
+
+class SparksHeap
+{
+public:
+    virtual SparksHeap* vfunc_00(int a1);
+};
+
+SparksHeap* SparksHeap::vfunc_00(int a1)
+{
+    sub_006F2C90();
+    return this;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_006F2F00 (0x006F2F00, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -5760,7 +10814,52 @@ int HalRsdFileStream::vfunc_03()
 
 }
 
-// [TODO] 0x006F3570 audio::HalRsdFileStream::vfunc_09 (32 B)
+// ============================================================================
+// [VERIFIED] audio::HalRsdFileStream::vfunc_09 (0x006F3570, 32 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::HalRsdFileStream::vfunc_09 (Proto 0x002AD670), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::HalRsdFileStream::vfunc_09 (Proto 0x006F3570, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00772AD4[];
+
+namespace audio {
+
+class HalRsdFileStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual int vfunc_09(int a1);
+    char m_pad04[0x20];
+    int m_Field24; // +0x24
+};
+
+int HalRsdFileStream::vfunc_09(int a1)
+{
+    int r_eax;
+
+    r_eax = m_Field24;
+    if (!r_eax) {
+        r_eax = (int)DAT_00772AD4;
+        return r_eax;
+    }
+    r_eax = (a1 << 4) + r_eax + 164;
+    return r_eax;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::HalRsdFileStream::vfunc_10 (0x006F3590, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -5907,7 +11006,57 @@ void AirplanePlaneCollisionReceiver::vfunc_00()
     m_Field04->vfunc_09();
 }
 
-// [TODO] 0x006F4DC0 audio::OggVorbisStream::vfunc_10 (8 B)
+// ============================================================================
+// [VERIFIED] audio::OggVorbisStream::vfunc_10 (0x006F4DC0, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::HalRadicalAdpcmDecodeStream::vfunc_10 (Proto 0x002AD200), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::OggVorbisStream::vfunc_10 (Proto 0x006F4DC0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field04
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+};
+
+namespace audio {
+
+class OggVorbisStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    Field04* m_Field04; // +0x04
+};
+
+void OggVorbisStream::vfunc_10()
+{
+    m_Field04->vfunc_10();
+}
+
+}
+
 // [TODO] 0x006F4DD0 audio::OggVorbisStream::vfunc_04 (13 B)
 // [TODO] 0x006F4DE0 audio::OggVorbisStream::vfunc_06 (117 B)
 // [TODO] 0x006F4E60 audio::OggVorbisStream::vfunc_08 (27 B)
@@ -5920,13 +11069,129 @@ void AirplanePlaneCollisionReceiver::vfunc_00()
 // [TODO] 0x006F5260 sub_006F5260 (298 B)
 // [TODO] 0x006F5390 audio::HalRadicalAdpcmDecodeStream::vfunc_11 (212 B)
 // [TODO] 0x006F5470 audio::HalRadicalAdpcmDecodeStream::vfunc_08 (65 B)
-// [TODO] 0x006F54C0 audio::HalRadicalAdpcmDecodeStream::vfunc_00 (32 B)
+// ============================================================================
+// [VERIFIED] audio::HalRadicalAdpcmDecodeStream::vfunc_00 (0x006F54C0, 32 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::HalRadicalAdpcmDecodeStream::vfunc_00 (Proto 0x002AD350), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::HalRadicalAdpcmDecodeStream::vfunc_00 (Proto 0x006F54C0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field04
+{
+    virtual void vfunc_00();
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+};
+
+namespace audio {
+
+class HalRadicalAdpcmDecodeStream
+{
+public:
+    virtual void vfunc_00();
+    Field04* m_Field04; // +0x04
+    char m_pad08[0x14];
+    int m_Field1C; // +0x1C
+};
+
+void HalRadicalAdpcmDecodeStream::vfunc_00()
+{
+    Field04* t1;
+
+    t1 = m_Field04;
+    m_Field1C = 1;
+    if (!((Object*)(int)t1)->vfunc_01()) {
+        m_Field04->vfunc_00();
+        return;
+    }
+}
+
+}
+
 // [TODO] 0x006F54E0 audio::HalRadicalAdpcmDecodeStream::vfunc_01 (56 B)
 // [TODO] 0x006F5520 audio::HalRadicalAdpcmDecodeStream::vfunc_03 (56 B)
 // [TODO] 0x006F5560 audio::HalRadicalAdpcmDecodeStream::vfunc_04 (53 B)
 // [TODO] 0x006F55A0 audio::HalRadicalAdpcmDecodeStream::vfunc_07 (82 B)
 // [TODO] 0x006F5600 audio::HalRadicalAdpcmDecodeStream::vfunc_06 (89 B)
-// [TODO] 0x006F5660 audio::HalRadicalAdpcmDecodeStream::vfunc_17 (44 B)
+// ============================================================================
+// [VERIFIED] audio::HalRadicalAdpcmDecodeStream::vfunc_17 (0x006F5660, 44 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::HalRadicalAdpcmDecodeStream::vfunc_13 (Proto 0x002AD500), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::HalRadicalAdpcmDecodeStream::vfunc_17 (Proto 0x006F5660, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+};
+
+extern "C" char DAT_00772D64[];
+extern "C" char DAT_007F6DBC[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class HalRadicalAdpcmDecodeStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual HalRadicalAdpcmDecodeStream* vfunc_17(int a1);
+    int m_Field04; // +0x04
+};
+
+HalRadicalAdpcmDecodeStream* HalRadicalAdpcmDecodeStream::vfunc_17(int a1)
+{
+    int t1;
+
+    t1 = m_Field04;
+    *(int*)this = (int)DAT_00772D64;
+    ((Object*)t1)->vfunc_12();
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F6DBC, (int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F5690 sub_006F5690 (72 B)
 // [TODO] 0x006F56E0 sub_006F56E0 (69 B)
 // ============================================================================
@@ -6070,13 +11335,105 @@ Class_006F5850* Class_006F5850::sub_006F5850()
 
 // [TODO] 0x006F5860 sub_006F5860 (227 B)
 // [TODO] 0x006F5950 om::TRbTree<audio::SeqEventTypeBase, 4>::Comp<audio::SeqEventTypeBase, 4, om::String>::vfunc_00 (86 B)
-// [TODO] 0x006F59B0 sub_006F59B0 (40 B)
+// ============================================================================
+// [VERIFIED] sub_006F59B0 (0x006F59B0, 40 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029E9F0 (Proto 0x0029E9F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006F59B0 (Proto 0x006F59B0, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field20
+{
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F2A40(int);
+};
+
+extern "C" char DAT_00772DEC[];
+extern "C" Object DAT_0085D4D8;
+
+class Class_006F59B0
+{
+public:
+    void sub_006F59B0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    char m_pad08[0xC];
+    Field20 m_Field14; // +0x14
+    char m_pad15[0xB];
+    Field20 m_Field20; // +0x20
+};
+
+void Class_006F59B0::sub_006F59B0()
+{
+    m_Field00 = (int)DAT_00772DEC;
+    DAT_0085D4D8.sub_006F2A40((int)(&m_Field04));
+    m_Field20.sub_006EBBD0();
+    m_Field14.sub_006EBBD0();
+}
+
 // [TODO] 0x006F59E0 sub_006F59E0 (119 B)
 // [TODO] 0x006F5A60 audio::SeqEventContainer::vfunc_00 (90 B)
 // [TODO] 0x006F5AC0 audio::SeqEventContainer::vfunc_01 (173 B)
 // [TODO] 0x006F5B70 audio::SeqEventContainer::vfunc_05 (59 B)
 // [TODO] 0x006F5BB0 sub_006F5BB0 (21 B)
-// [TODO] 0x006F5C10 audio::SeqEventTypeBase::vfunc_00 (61 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventTypeBase::vfunc_00 (0x006F5C10, 61 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventTypeBase::vfunc_00 (Proto 0x0029EE70), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqEventTypeBase::vfunc_00 (Proto 0x006F5C10, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field20
+{
+    void sub_006EBBD0();
+};
+
+struct Object
+{
+    void sub_006F2A40(int);
+};
+
+extern "C" char DAT_00772DEC[];
+extern "C" Object DAT_0085D4D8;
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace audio {
+
+class SeqEventTypeBase
+{
+public:
+    virtual SeqEventTypeBase* vfunc_00(int a1);
+    int m_Field04; // +0x04
+    char m_pad08[0xC];
+    Field20 m_Field14; // +0x14
+    char m_pad15[0xB];
+    Field20 m_Field20; // +0x20
+};
+
+SeqEventTypeBase* SeqEventTypeBase::vfunc_00(int a1)
+{
+    *(int*)this = (int)DAT_00772DEC;
+    DAT_0085D4D8.sub_006F2A40((int)(&m_Field04));
+    m_Field20.sub_006EBBD0();
+    m_Field14.sub_006EBBD0();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006F5C50 sub_006F5C50 (61 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventContainer::vfunc_04 (0x006F5C90, 30 B)
@@ -7199,7 +12556,46 @@ template <> int audio::SeqEventType<audio::SeqEventChannelSendVolumes>::vfunc_01
 // [TODO] 0x006F7000 sub_006F7000 (68 B)
 // [TODO] 0x006F7050 sub_006F7050 (68 B)
 // [TODO] 0x006F70A0 audio::SeqEventChannelSendVolumes::vfunc_01 (88 B)
-// [TODO] 0x006F7100 audio::SeqEventChannelSendVolumes::vfunc_00 (86 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventChannelSendVolumes::vfunc_00 (0x006F7100, 86 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelSendVolumes::vfunc_00 (0x002D9500), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqEventChannelSendVolumes::vfunc_00 (0x006F7100, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006ED500(int, int);
+extern "C" bool __cdecl sub_006F33D0(int, int);
+extern "C" bool __stdcall sub_006F5740(int);
+extern "C" bool __cdecl sub_006F7050(int, int);
+
+namespace audio {
+
+class SeqEventChannelSendVolumes
+{
+public:
+    virtual int vfunc_00(int a1);
+    char m_pad04[0x44];
+    int m_Field48; // +0x48
+    int m_Field4C; // +0x4C
+};
+
+int SeqEventChannelSendVolumes::vfunc_00(int a1)
+{
+    if (sub_006F5740(a1)) {
+        if (!sub_006F33D0(a1, (int)(&m_Field48))) goto L_4F;
+        if (!sub_006ED500(a1, (int)(&m_Field4C))) goto L_4F;
+        if (!sub_006F7050(a1, (int)this + 8)) goto L_4F;
+        return 1;
+    }
+L_4F:
+    return 0;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqActionChannelSends::vfunc_00 (0x006F7160, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -8019,10 +13415,126 @@ template <> int audio::SeqEventType<audio::SeqEventCondition>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x006F78E0 audio::SeqActionWait::vfunc_02 (21 B)
-// [TODO] 0x006F7900 audio::SeqActionWait::vfunc_01 (15 B)
-// [TODO] 0x006F7910 audio::SeqActionWait::vfunc_03 (15 B)
-// [TODO] 0x006F7920 audio::SeqActionWait::vfunc_04 (15 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionWait::vfunc_02 (0x006F78E0, 21 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqActionWait::vfunc_02 (Proto 0x002A3D90), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWait::vfunc_02 (Proto 0x006F78E0, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_006F57A0(int, int);
+
+namespace audio {
+
+class SeqActionWait
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int a1, int a2);
+};
+
+void SeqActionWait::vfunc_02(int a1, int a2)
+{
+    a2 = a1;
+    a1 = 1;
+    sub_006F57A0(a1, a2);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqActionWait::vfunc_01 (0x006F7900, 15 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqActionWait::vfunc_01 (Proto 0x002A3DB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWait::vfunc_01 (Proto 0x006F7900, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_006F57A0(int, int);
+
+namespace audio {
+
+class SeqActionWait
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(int a1);
+};
+
+void SeqActionWait::vfunc_01(int a1)
+{
+    sub_006F57A0(3, a1);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqActionWait::vfunc_03 (0x006F7910, 15 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqActionWait::vfunc_03 (Proto 0x002A3DC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWait::vfunc_03 (Proto 0x006F7910, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_006F57A0(int, int);
+
+namespace audio {
+
+class SeqActionWait
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03(int a1);
+};
+
+void SeqActionWait::vfunc_03(int a1)
+{
+    sub_006F57A0(4, a1);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqActionWait::vfunc_04 (0x006F7920, 15 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqActionWait::vfunc_04 (Proto 0x002A3DD0), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWait::vfunc_04 (Proto 0x006F7920, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_006F57A0(int, int);
+
+namespace audio {
+
+class SeqActionWait
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1);
+};
+
+void SeqActionWait::vfunc_04(int a1)
+{
+    sub_006F57A0(5, a1);
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventWait::vfunc_03 (0x006F7930, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -8768,7 +14280,48 @@ void __cdecl sub_006F8070(void)
 }
 
 // [TODO] 0x006F8140 audio::SeqEventStopTrack::vfunc_01 (103 B)
-// [TODO] 0x006F81B0 audio::SeqEventStopTrack::vfunc_00 (103 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventStopTrack::vfunc_00 (0x006F81B0, 103 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventStopTrack::vfunc_00 (0x002DA590), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqEventStopTrack::vfunc_00 (0x006F81B0, 103 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006ECC20(int, int);
+extern "C" bool __cdecl sub_006F3300(int, int);
+extern "C" bool __cdecl sub_006F33D0(int, int);
+extern "C" bool __stdcall sub_006F5740(int);
+
+namespace audio {
+
+class SeqEventStopTrack
+{
+public:
+    virtual int vfunc_00(int a1);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+int SeqEventStopTrack::vfunc_00(int a1)
+{
+    if (sub_006F5740(a1)) {
+        if (!sub_006F33D0(a1, (int)(&m_Field08))) goto L_60;
+        if (!sub_006F33D0(a1, (int)(&m_Field0C))) goto L_60;
+        if (!sub_006ECC20(a1, (int)(&m_Field10))) goto L_60;
+        if (!sub_006F3300(a1, (int)this + 28)) goto L_60;
+        return 1;
+    }
+L_60:
+    return 0;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEventType<audio::SeqEventStopTrack>::vfunc_01 (0x006F8220, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9058,7 +14611,48 @@ void __cdecl sub_006F8320(void)
 
 // [TODO] 0x006F83A0 audio::SeqActionStopTrack::vfunc_06 (335 B)
 // [TODO] 0x006F84F0 audio::SeqEventPlayTrack::vfunc_01 (103 B)
-// [TODO] 0x006F8560 audio::SeqEventPlayTrack::vfunc_00 (103 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventPlayTrack::vfunc_00 (0x006F8560, 103 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventPlayTrack::vfunc_00 (0x002DA930), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqEventPlayTrack::vfunc_00 (0x006F8560, 103 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006ECC20(int, int);
+extern "C" bool __cdecl sub_006F3300(int, int);
+extern "C" bool __cdecl sub_006F33D0(int, int);
+extern "C" bool __stdcall sub_006F5740(int);
+
+namespace audio {
+
+class SeqEventPlayTrack
+{
+public:
+    virtual int vfunc_00(int a1);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+int SeqEventPlayTrack::vfunc_00(int a1)
+{
+    if (sub_006F5740(a1)) {
+        if (!sub_006F33D0(a1, (int)(&m_Field08))) goto L_60;
+        if (!sub_006F33D0(a1, (int)(&m_Field0C))) goto L_60;
+        if (!sub_006F3300(a1, (int)(&m_Field10))) goto L_60;
+        if (!sub_006ECC20(a1, (int)this + 20)) goto L_60;
+        return 1;
+    }
+L_60:
+    return 0;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqActionPlayTrack::vfunc_00 (0x006F85D0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9590,7 +15184,46 @@ void __cdecl sub_006F8DA0(void)
 }
 
 // [TODO] 0x006F8E20 audio::SeqEventChannelVolumes::vfunc_01 (88 B)
-// [TODO] 0x006F8E80 audio::SeqEventChannelVolumes::vfunc_00 (86 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventChannelVolumes::vfunc_00 (0x006F8E80, 86 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventChannelVolumes::vfunc_00 (0x002DB240), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqEventChannelVolumes::vfunc_00 (0x006F8E80, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006ED500(int, int);
+extern "C" bool __cdecl sub_006F33D0(int, int);
+extern "C" bool __stdcall sub_006F5740(int);
+extern "C" bool __cdecl sub_006F8D60(int, int);
+
+namespace audio {
+
+class SeqEventChannelVolumes
+{
+public:
+    virtual int vfunc_00(int a1);
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+int SeqEventChannelVolumes::vfunc_00(int a1)
+{
+    if (sub_006F5740(a1)) {
+        if (!sub_006F33D0(a1, (int)(&m_Field18))) goto L_4F;
+        if (!sub_006ED500(a1, (int)(&m_Field1C))) goto L_4F;
+        if (!sub_006F8D60(a1, (int)this + 8)) goto L_4F;
+        return 1;
+    }
+L_4F:
+    return 0;
+}
+
+}
+
 // [TODO] 0x006F8EE0 audio::SeqActionChannelVolumes::vfunc_06 (180 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventVarVolumeRand::vfunc_01 (0x006F8FA0, 49 B)
@@ -11770,8 +17403,67 @@ void SeqActionSilence::vfunc_01(int a1)
 
 }
 
-// [TODO] 0x006FA6A0 audio::SeqActionWaitBeat::vfunc_03 (15 B)
-// [TODO] 0x006FA6B0 audio::SeqActionWaitBeat::vfunc_04 (15 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionWaitBeat::vfunc_03 (0x006FA6A0, 15 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqActionWaitBeat::vfunc_03 (Proto 0x002A41A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWaitBeat::vfunc_03 (Proto 0x006FA6A0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_006F57A0(int, int);
+
+namespace audio {
+
+class SeqActionWaitBeat
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03(int a1);
+};
+
+void SeqActionWaitBeat::vfunc_03(int a1)
+{
+    sub_006F57A0(2, a1);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqActionWaitBeat::vfunc_04 (0x006FA6B0, 15 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::SpriteObject::vfunc_31 (Proto 0x0021E500), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqActionWaitBeat::vfunc_04 (Proto 0x006FA6B0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_006F57A0(int, int);
+
+namespace audio {
+
+class SeqActionWaitBeat
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1);
+};
+
+void SeqActionWaitBeat::vfunc_04(int a1)
+{
+    sub_006F57A0(0, a1);
+}
+
+}
+
 // [TODO] 0x006FA6C0 audio::SeqActionSilence::vfunc_05 (113 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventSilence::vfunc_03 (0x006FA740, 6 B)
@@ -12446,7 +18138,65 @@ void SeqActionCrossFade::vfunc_04(int a1)
 }
 
 // [TODO] 0x006FAFE0 sub_006FAFE0 (86 B)
-// [TODO] 0x006FB040 audio::SeqEventCrossFade::vfunc_00 (192 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventCrossFade::vfunc_00 (0x006FB040, 192 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as audio::SeqEventCrossFade::vfunc_00 (0x002DD430), which was matched first;
+// its addresses and names were swapped for this function's.
+// audio::SeqEventCrossFade::vfunc_00 (0x006FB040, 192 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field2C
+{
+    bool sub_00700D90(int);
+};
+
+extern "C" bool __cdecl sub_006ECC20(int, int);
+extern "C" bool __cdecl sub_006ED500(int, int);
+extern "C" bool __cdecl sub_006F3300(int, int);
+extern "C" bool __cdecl sub_006F33D0(int, int);
+extern "C" bool __stdcall sub_006F5740(int);
+
+namespace audio {
+
+class SeqEventCrossFade
+{
+public:
+    virtual int vfunc_00(int a1);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    char m_pad20[0x8];
+    int m_Field28; // +0x28
+    Field2C m_Field2C; // +0x2C
+};
+
+int SeqEventCrossFade::vfunc_00(int a1)
+{
+    if (sub_006F5740(a1)) {
+        if (!sub_006F33D0(a1, (int)(&m_Field08))) goto L_B9;
+        if (!sub_006F33D0(a1, (int)(&m_Field0C))) goto L_B9;
+        if (!sub_006F33D0(a1, (int)(&m_Field10))) goto L_B9;
+        if (!sub_006F33D0(a1, (int)(&m_Field14))) goto L_B9;
+        if (!sub_006F3300(a1, (int)(&m_Field18))) goto L_B9;
+        if (!sub_006F3300(a1, (int)(((char*)this + 0x19)))) goto L_B9;
+        if (!sub_006ECC20(a1, (int)(&m_Field1C))) goto L_B9;
+        if (!sub_006ED500(a1, (int)(&m_Field28))) goto L_B9;
+        if (!m_Field2C.sub_00700D90(a1)) goto L_B9;
+        return 1;
+    }
+L_B9:
+    return 0;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqActionCrossFade::vfunc_00 (0x006FB100, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -13200,7 +18950,35 @@ void __cdecl sub_006FE3E0(int a1)
 // [TODO] 0x006FE8B0 sub_006FE8B0 (711 B)
 // [TODO] 0x006FEB80 sub_006FEB80 (79 B)
 // [TODO] 0x006FEBD0 sub_006FEBD0 (1986 B)
-// [TODO] 0x006FF3A0 sub_006FF3A0 (14 B)
+// ============================================================================
+// [VERIFIED] sub_006FF3A0 (0x006FF3A0, 14 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002AE020 (Proto 0x002AE020), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006FF3A0 (Proto 0x006FF3A0, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006FF3A0
+{
+public:
+    Class_006FF3A0* sub_006FF3A0();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+    char m_pad14[0x4];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+Class_006FF3A0* Class_006FF3A0::sub_006FF3A0()
+{
+    m_Field10 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    return this;
+}
+
 // [TODO] 0x006FF3B0 sub_006FF3B0 (50 B)
 // [TODO] 0x006FF3F0 sub_006FF3F0 (154 B)
 // [TODO] 0x006FF490 om::TRbTree<om::PointerUid, 0>::Comp<om::PointerUid, 0, unsigned __int64>::vfunc_00 (61 B)
@@ -13385,8 +19163,64 @@ void Class_007003E0::sub_007003E0()
 // [TODO] 0x00700AD0 sub_00700AD0 (114 B)
 // [TODO] 0x00700B50 sub_00700B50 (8 B)
 // [TODO] 0x00700C30 sub_00700C30 (103 B)
-// [TODO] 0x00700CA0 sub_00700CA0 (56 B)
-// [TODO] 0x00700CE0 sub_00700CE0 (58 B)
+// ============================================================================
+// [VERIFIED] sub_00700CA0 (0x00700CA0, 56 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002989A0 (Proto 0x002989A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00700CA0 (Proto 0x00700CA0, 56 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006F33D0(int, int);
+
+class Class_00700CA0
+{
+public:
+    int sub_00700CA0(int a1);
+};
+
+int Class_00700CA0::sub_00700CA0(int a1)
+{
+    if (sub_006F33D0(a1, (int)this)) {
+        if (!sub_006F33D0(a1, (int)this + 4)) goto L_31;
+        return 1;
+    }
+L_31:
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00700CE0 (0x00700CE0, 58 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002989E0 (Proto 0x002989E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00700CE0 (Proto 0x00700CE0, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006F33F0(int, int);
+
+class Class_00700CE0
+{
+public:
+    int sub_00700CE0(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+int Class_00700CE0::sub_00700CE0(int a1)
+{
+    if (sub_006F33F0(a1, m_Field00)) {
+        if (!sub_006F33F0(a1, m_Field04)) goto L_33;
+        return 1;
+    }
+L_33:
+    return 0;
+}
+
 // [TODO] 0x00700D20 sub_00700D20 (104 B)
 // [TODO] 0x00700D90 sub_00700D90 (131 B)
 // [TODO] 0x00700E20 sub_00700E20 (139 B)
@@ -13421,12 +19255,189 @@ void Class_00700EE0::sub_00700EE0()
 // [TODO] 0x00701060 movie::PlayerBink::vfunc_11 (113 B)
 // [TODO] 0x007010E0 movie::PlayerBink::vfunc_14 (36 B)
 // [TODO] 0x00701110 movie::PlayerBink::vfunc_15 (54 B)
-// [TODO] 0x00701150 movie::PlayerBink::vfunc_16 (14 B)
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_16 (0x00701150, 14 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as movie::PlayerBink::vfunc_16 (Proto 0x002AFEE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// movie::PlayerBink::vfunc_16 (Proto 0x00701150, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual int vfunc_16();
+    char m_pad04[0x18];
+    int m_Field1C; // +0x1C
+};
+
+int PlayerBink::vfunc_16()
+{
+    int t1;
+
+    t1 = m_Field1C;
+    if (m_Field1C) {
+        return *(int*)(t1 + 12);
+    }
+    return 0;
+}
+
+}
+
 // [TODO] 0x00701160 sub_00701160 (139 B)
-// [TODO] 0x007011F0 sub_007011F0 (5421 B)
-// [TODO] 0x00701220 sub_00701220 (3291 B)
-// [TODO] 0x00701230 movie::PlayerBink::vfunc_04 (75 B)
-// [TODO] 0x00701280 movie::PlayerBink::vfunc_05 (12 B)
+// [TODO] 0x007011F0 sub_007011F0 (34 B)
+// ============================================================================
+// [VERIFIED] sub_00701220 (0x00701220, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00701220 (0x00701220, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00701EE0(void);
+
+class Class_00701220
+{
+public:
+    void sub_00701220();
+};
+
+void Class_00701220::sub_00701220()
+{
+    sub_00701EE0();
+}
+
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_04 (0x00701230, 75 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as movie::PlayerBink::vfunc_04 (Proto 0x002AFFC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// movie::PlayerBink::vfunc_04 (Proto 0x00701230, 75 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1, int a2, int a3);
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+};
+
+void PlayerBink::vfunc_04(int a1, int a2, int a3)
+{
+    int r_edi;
+
+    r_edi = m_Field10;
+    if (r_edi != a1) {
+        m_Field10 = a1;
+        if (a1) {
+            ((Object*)a1)->vfunc_00();
+        }
+        if (!r_edi) goto L_25;
+        ((Object*)r_edi)->vfunc_01();
+    }
+L_25:
+    r_edi = m_Field14;
+    if (r_edi != a2) {
+        m_Field14 = a2;
+        if (a2) {
+            ((Object*)a2)->vfunc_00();
+        }
+        if (!r_edi) goto L_46;
+        ((Object*)r_edi)->vfunc_01();
+    }
+L_46:
+    ;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_05 (0x00701280, 12 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as movie::PlayerBink::vfunc_05 (Proto 0x002B0010), which was matched first;
+// its addresses and names were swapped for this function's.
+// movie::PlayerBink::vfunc_05 (Proto 0x00701280, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+};
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    char m_pad04[0x10];
+    Field14* m_Field14; // +0x14
+    char m_pad18[0xC];
+    bool m_Field24; // +0x24
+};
+
+void PlayerBink::vfunc_05()
+{
+    m_Field24 = false;
+    m_Field14->vfunc_09();
+}
+
+}
+
 // [TODO] 0x00701290 movie::PlayerBink::vfunc_06 (196 B)
 // [TODO] 0x00701360 movie::PlayerBink::vfunc_08 (35 B)
 // [TODO] 0x00701390 movie::PlayerBink::vfunc_09 (46 B)
@@ -13648,7 +19659,34 @@ void Class_00702090::sub_00702090()
 
 // [TODO] 0x007021C0 sub_007021C0 (35 B)
 // [TODO] 0x007025A0 movie::BinkCallback::vfunc_04 (218 B)
-// [TODO] 0x00702680 movie::BinkCallback::vfunc_03 (8 B)
+// ============================================================================
+// [VERIFIED] movie::BinkCallback::vfunc_03 (0x00702680, 8 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CementLibrary::vfunc_00 (Proto 0x0026F620), which was matched first;
+// its addresses and names were swapped for this function's.
+// movie::BinkCallback::vfunc_03 (Proto 0x00702680, 8 bytes)
+// An adjustor thunk. Nobody wrote this function: the compiler adds it for a class with two base
+// classes that both declare the same virtual function. Called through the second base's table, it
+// moves `this` back 8 bytes to the start of the object and jumps to the real function at
+// 0x00702690. So it is matched by declaring the class that way, not by writing a body.
+// The two bases and their names are guesses; the first base is the part of the object in front
+// of the second base (8 bytes).
+
+namespace movie {
+class CementLibrary_Base0 { public: virtual void sub_00702690(); char m_pad04[0x4]; };
+class CementLibrary_Base1 { public: virtual void sub_00702690(); };
+
+class BinkCallback : public CementLibrary_Base0, public CementLibrary_Base1
+{
+public:
+    BinkCallback();
+    virtual void sub_00702690();          // the real function; the thunk jumps here
+};
+
+BinkCallback::BinkCallback() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
 // [TODO] 0x00702690 movie::BinkCallback::vfunc_00 (63 B)
 // ============================================================================
 // [VERIFIED] sub_0070271E (0x0070271E, 6 B)
@@ -14153,13 +20191,86 @@ pddiDevice* pddiDevice::vfunc_03(int a1)
 // [TODO] 0x00702F70 sub_00702F70 (107 B)
 // [TODO] 0x00702FE0 pure3d::d3dDevice::vfunc_05 (63 B)
 // [TODO] 0x00703020 pure3d::d3dDevice::vfunc_04 (728 B)
-// [TODO] 0x00703300 pure3d::d3dDevice::vfunc_06 (10 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dDevice::vfunc_06 (0x00703300, 10 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dDevice::vfunc_05 (Proto 0x0024EC50), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dDevice::vfunc_06 (Proto 0x00703300, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dDevice
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06(int a1);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int d3dDevice::vfunc_06(int a1)
+{
+    m_Field0C = a1;
+    return a1;
+}
+
+}
+
 // [TODO] 0x00703310 pure3d::d3dDevice::vfunc_08 (78 B)
 // [TODO] 0x00703360 pure3d::d3dDevice::vfunc_09 (63 B)
 // [TODO] 0x007033A0 pure3d::d3dDevice::vfunc_10 (183 B)
 // [TODO] 0x00703460 pure3d::d3dDevice::vfunc_11 (109 B)
 // [TODO] 0x007034D0 pure3d::d3dDevice::vfunc_15 (112 B)
-// [TODO] 0x00703540 pure3d::d3dDevice::vfunc_12 (22 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dDevice::vfunc_12 (0x00703540, 22 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dDevice::vfunc_11 (Proto 0x0024EE00), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dDevice::vfunc_12 (Proto 0x00703540, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00652AB0(int, int, int);
+
+namespace pure3d {
+
+class d3dDevice
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void d3dDevice::vfunc_12(int a1, int a2)
+{
+    sub_00652AB0(m_Field0C, a1, 0);
+}
+
+}
+
 // [TODO] 0x00703560 sub_00703560 (47 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dDevice::vfunc_03 (0x00703590, 30 B)
@@ -14438,7 +20549,45 @@ void* d3dErrorShader::vfunc_04()
 
 }
 
-// [TODO] 0x007048E0 sub_007048E0 (50 B)
+// ============================================================================
+// [VERIFIED] sub_007048E0 (0x007048E0, 50 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002856B0 (Proto 0x002856B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_007048E0 (Proto 0x007048E0, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00774994[];
+extern "C" void __stdcall sub_006524F0(int);
+
+class Class_007048E0
+{
+public:
+    Class_007048E0* sub_007048E0(int a1);
+    int m_Field00; // +0x00
+    char m_pad04[0x44];
+    bool m_Field48; // +0x48
+    char m_pad49[0x7];
+    int m_Field50; // +0x50
+    int m_Field54; // +0x54
+    int m_Field58; // +0x58
+    int m_Field5C; // +0x5C
+};
+
+Class_007048E0* Class_007048E0::sub_007048E0(int a1)
+{
+    sub_006524F0(a1);
+    m_Field58 = -0x1000000;
+    m_Field50 = -0x1000000;
+    m_Field54 = -0x1000000;
+    m_Field00 = (int)DAT_00774994;
+    m_Field48 = true;
+    m_Field5C = -32513;
+    return this;
+}
+
 // [TODO] 0x00704920 pure3d::d3dErrorShader::vfunc_15 (226 B)
 // [TODO] 0x00704A10 sub_00704A10 (36 B)
 // ============================================================================
@@ -14611,8 +20760,96 @@ void* d3dReflShader::vfunc_04()
 
 // [TODO] 0x00704A90 pure3d::d3dReflShader::vfunc_13 (164 B)
 // [TODO] 0x00704B40 pure3d::d3dReflShader::vfunc_14 (156 B)
-// [TODO] 0x00704BE0 sub_00704BE0 (49 B)
-// [TODO] 0x00704C20 pure3d::d3dReflShader::vfunc_03 (68 B)
+// ============================================================================
+// [VERIFIED] sub_00704BE0 (0x00704BE0, 49 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00285AD0 (Proto 0x00285AD0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00704BE0 (Proto 0x00704BE0, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00774A24[];
+extern "C" void __stdcall sub_006524F0(int);
+
+class Class_00704BE0
+{
+public:
+    Class_00704BE0* sub_00704BE0(int a1);
+    int m_Field00; // +0x00
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+    int m_Field84; // +0x84
+    int m_Field88; // +0x88
+};
+
+Class_00704BE0* Class_00704BE0::sub_00704BE0(int a1)
+{
+    sub_006524F0(a1);
+    m_Field80 = 0;
+    m_Field84 = 0;
+    m_Field00 = (int)DAT_00774A24;
+    m_Field88 = -0x7F7F7F80;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dReflShader::vfunc_03 (0x00704C20, 68 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dReflShader::vfunc_03 (Proto 0x00285B10), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dReflShader::vfunc_03 (Proto 0x00704C20, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_00774A24[];
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dReflShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dReflShader* vfunc_03(int a1);
+    void sub_006527F0();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+    int m_Field84; // +0x84
+};
+
+d3dReflShader* d3dReflShader::vfunc_03(int a1)
+{
+    int t1, t3;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_00774A24;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    t3 = m_Field84;
+    if (m_Field84) {
+        ((Object*)t3)->vfunc_01();
+    }
+    sub_006527F0();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00704C70 pure3d::d3dReflShader::vfunc_15 (977 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_16 (0x00705050, 6 B)
@@ -14750,7 +20987,57 @@ void* d3dPointSpriteShader::vfunc_04()
 
 // [TODO] 0x00705090 pure3d::d3dPointSpriteShader::vfunc_14 (54 B)
 // [TODO] 0x007050F0 sub_007050F0 (102 B)
-// [TODO] 0x00705160 pure3d::d3dPointSpriteShader::vfunc_03 (53 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPointSpriteShader::vfunc_03 (0x00705160, 53 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dSimpleShader::vfunc_03 (Proto 0x00263DB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dPointSpriteShader::vfunc_03 (Proto 0x00705160, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_00774AAC[];
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dPointSpriteShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dPointSpriteShader* vfunc_03(int a1);
+    void sub_006527F0();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+d3dPointSpriteShader* d3dPointSpriteShader::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_00774AAC;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    sub_006527F0();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x007051A0 pure3d::d3dPointSpriteShader::vfunc_15 (446 B)
 // [TODO] 0x00705360 sub_00705360 (111 B)
 // ============================================================================
@@ -14921,7 +21208,7 @@ void* d3dLayeredShader::vfunc_04()
 
 }
 
-// [TODO] 0x00705420 pure3d::d3dLayeredShader::vfunc_24 (17 B)
+// [TODO] 0x00705420 pure3d::d3dLayeredShader::vfunc_24 (16 B)
 // ============================================================================
 // [VERIFIED] sub_00705430 (0x00705430, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -14941,7 +21228,62 @@ void __cdecl sub_00705430(void)
 // [TODO] 0x00705A60 pure3d::d3dLayeredShader::vfunc_13 (89 B)
 // [TODO] 0x00705AC0 pure3d::d3dLayeredShader::vfunc_14 (66 B)
 // [TODO] 0x00705B10 sub_00705B10 (155 B)
-// [TODO] 0x00705BB0 pure3d::d3dLayeredShader::vfunc_03 (68 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_03 (0x00705BB0, 68 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dReflShader::vfunc_03 (Proto 0x00285B10), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dLayeredShader::vfunc_03 (Proto 0x00705BB0, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_00774B34[];
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dLayeredShader* vfunc_03(int a1);
+    void sub_006527F0();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+    int m_Field84; // +0x84
+};
+
+d3dLayeredShader* d3dLayeredShader::vfunc_03(int a1)
+{
+    int t1, t3;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_00774B34;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    t3 = m_Field84;
+    if (m_Field84) {
+        ((Object*)t3)->vfunc_01();
+    }
+    sub_006527F0();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00705C00 pure3d::d3dLayeredShader::vfunc_15 (844 B)
 // [TODO] 0x00705FA0 sub_00705FA0 (927 B)
 // [TODO] 0x00706340 pure3d::d3dLayeredShader::vfunc_25 (743 B)
@@ -15148,7 +21490,7 @@ d3dSpecularShader* d3dSpecularShader::vfunc_03(int a1)
 
 }
 
-// [TODO] 0x00706BE0 pure3d::d3dSpecularShader::vfunc_15 (683 B)
+// [TODO] 0x00706BE0 pure3d::d3dSpecularShader::vfunc_15 (385 B)
 // [TODO] 0x00706D62 pure3d::BMPHandler::vfunc_17 (297 B)
 // [TODO] 0x00706E90 sub_00706E90 (1067 B)
 // [TODO] 0x007072C0 pure3d::d3dSpecularShader::vfunc_25 (77 B)
@@ -15321,7 +21663,7 @@ void* d3dCharacterShader::vfunc_04()
 }
 
 // [TODO] 0x00707360 pure3d::d3dShader::vfunc_22 (38 B)
-// [TODO] 0x00707390 pure3d::d3dCharacterShader::vfunc_24 (17 B)
+// [TODO] 0x00707390 pure3d::d3dCharacterShader::vfunc_24 (16 B)
 // ============================================================================
 // [VERIFIED] sub_007073A0 (0x007073A0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -15338,7 +21680,62 @@ void __cdecl sub_007073A0(void)
 
 // [TODO] 0x007073B0 sub_007073B0 (1319 B)
 // [TODO] 0x007078E0 sub_007078E0 (77 B)
-// [TODO] 0x00707930 pure3d::d3dCharacterShader::vfunc_03 (68 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dCharacterShader::vfunc_03 (0x00707930, 68 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dReflShader::vfunc_03 (Proto 0x00285B10), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dCharacterShader::vfunc_03 (Proto 0x00707930, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_00774C4C[];
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dCharacterShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dCharacterShader* vfunc_03(int a1);
+    void sub_006527F0();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+    int m_Field84; // +0x84
+};
+
+d3dCharacterShader* d3dCharacterShader::vfunc_03(int a1)
+{
+    int t1, t3;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_00774C4C;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    t3 = m_Field84;
+    if (m_Field84) {
+        ((Object*)t3)->vfunc_01();
+    }
+    sub_006527F0();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x00707980 pure3d::d3dCharacterShader::vfunc_15 (417 B)
 // [TODO] 0x00707B30 sub_00707B30 (593 B)
 // ============================================================================
@@ -15742,8 +22139,89 @@ void* d3dShadowShader::vfunc_04()
 }
 
 // [TODO] 0x00708FA0 pure3d::d3dShadowShader::vfunc_15 (136 B)
-// [TODO] 0x00709030 sub_00709030 (44 B)
-// [TODO] 0x00709060 pure3d::d3dShadowShader::vfunc_03 (53 B)
+// ============================================================================
+// [VERIFIED] sub_00709030 (0x00709030, 44 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002875F0 (Proto 0x002875F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00709030 (Proto 0x00709030, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00774D94[];
+extern "C" void __stdcall sub_006524F0(int);
+
+class Class_00709030
+{
+public:
+    Class_00709030* sub_00709030(int a1);
+    void sub_00517CE0(int);
+    int m_Field00; // +0x00
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+Class_00709030* Class_00709030::sub_00709030(int a1)
+{
+    sub_006524F0(a1);
+    m_Field00 = (int)DAT_00774D94;
+    m_Field80 = 0;
+    sub_00517CE0(0);
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_03 (0x00709060, 53 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dSimpleShader::vfunc_03 (Proto 0x00263DB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowShader::vfunc_03 (Proto 0x00709060, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_00774D94[];
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dShadowShader* vfunc_03(int a1);
+    void sub_006527F0();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+d3dShadowShader* d3dShadowShader::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_00774D94;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    sub_006527F0();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_16 (0x007090A0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -15914,9 +22392,85 @@ void* d3dShadowDecalShader::vfunc_04()
 
 // [TODO] 0x007090F0 pure3d::d3dShadowDecalShader::vfunc_14 (23 B)
 // [TODO] 0x00709110 sub_00709110 (83 B)
-// [TODO] 0x00709170 pure3d::d3dShadowDecalShader::vfunc_03 (53 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_03 (0x00709170, 53 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dSimpleShader::vfunc_03 (Proto 0x00263DB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::d3dShadowDecalShader::vfunc_03 (Proto 0x00709170, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_00774E1C[];
+extern "C" void __cdecl sub_0043CE70(int);
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dShadowDecalShader* vfunc_03(int a1);
+    void sub_006527F0();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+d3dShadowDecalShader* d3dShadowDecalShader::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_00774E1C;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    sub_006527F0();
+    if (a1 & 1) {
+        sub_0043CE70((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x007091B0 pure3d::d3dShadowDecalShader::vfunc_15 (408 B)
-// [TODO] 0x00709350 sub_00709350 (25 B)
+// ============================================================================
+// [VERIFIED] sub_00709350 (0x00709350, 25 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0020DAB0 (Proto 0x0020DAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00709350 (Proto 0x00709350, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00774EA4[];
+extern "C" void __stdcall sub_0065BD30(int);
+
+class Class_00709350
+{
+public:
+    Class_00709350* sub_00709350(int a1);
+    int m_Field00; // +0x00
+};
+
+Class_00709350* Class_00709350::sub_00709350(int a1)
+{
+    sub_0065BD30(a1);
+    m_Field00 = (int)DAT_00774EA4;
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dDecalShader::vfunc_04 (0x00709370, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -16053,7 +22607,81 @@ void* d3dVertexFadeShader::vfunc_04()
 
 }
 
-// [TODO] 0x00709480 pure3d::ParticleEmitter::vfunc_33 (44 B)
+// ============================================================================
+// [VERIFIED] pure3d::ParticleEmitter::vfunc_33 (0x00709480, 44 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::ParticleEmitter::vfunc_32 (Proto 0x00286310), which was matched first;
+// its addresses and names were swapped for this function's.
+// pure3d::ParticleEmitter::vfunc_33 (Proto 0x00709480, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+namespace pure3d {
+
+class ParticleEmitter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33(int a1);
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+void ParticleEmitter::vfunc_33(int a1)
+{
+    int t2;
+
+    if (a1) {
+        ((Object*)a1)->vfunc_00();
+    }
+    t2 = m_Field80;
+    if (m_Field80) {
+        ((Object*)t2)->vfunc_01();
+    }
+    m_Field80 = a1;
+}
+
+}
+
 // [TODO] 0x007094B0 pure3d::d3dVertexFadeShader::vfunc_24 (20 B)
 // [TODO] 0x007094D0 sub_007094D0 (1239 B)
 // [TODO] 0x007099B0 sub_007099B0 (63 B)
