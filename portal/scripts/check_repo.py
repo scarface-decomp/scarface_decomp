@@ -138,6 +138,12 @@ def check_names(problems: list) -> None:
     for part in ("functions", "in_library_sections"):
         for b, addresses in (lib.get(part) or {}).items():
             known.setdefault(b, set()).update(int(a, 16) for a in addresses)
+    try:   # library functions the queue leaves out by reports/queue_exclusions.json
+        ex = json.loads((ROOT / "reports" / "queue_exclusions.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        ex = {}
+    for b, rows in (ex.get("starts") or {}).items():
+        known.setdefault(b, set()).update(int(r["va"], 16) for r in rows if r.get("kind") == "library")
     problems.extend(NAMES.problems(NAMES.load(path), known))
 
 

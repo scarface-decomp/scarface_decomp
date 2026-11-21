@@ -1,0 +1,7742 @@
+{
+ "schema": "godfather_libproof/2",
+ "reference": "The Godfather Feb-5-2006 Xbox prototype, ears_godfather_{f,q,r,d}.map/.xbe, XDK 1.00.5849 (same as Scarface) ; + The Red Star Aug-18-2004 Xbox prototype default.map/.xbe (XDK 1.00.5849, same rule)",
+ "method": "reloc-masked byte identity (DIR32 image operands + out-of-function rel32 zeroed; trailing CC/90 stripped); exact or located inside B/F/G; game-range hits rejected as coincidences",
+ "rows": [
+  {
+   "va": "0x2335f6",
+   "len": 237,
+   "names": [
+    "_ReadFile@20",
+    "_ReadFileScatter@20"
+   ],
+   "objs": [
+    "xapilib:filehops.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2336e3",
+   "len": 214,
+   "names": [
+    "_WriteFile@20",
+    "_WriteFileGather@20"
+   ],
+   "objs": [
+    "xapilib:filehops.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2337b9",
+   "len": 132,
+   "names": [
+    "_SetEndOfFile@4"
+   ],
+   "objs": [
+    "xapilib:filehops.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23383d",
+   "len": 250,
+   "names": [
+    "_SetFilePointer@16"
+   ],
+   "objs": [
+    "xapilib:filehops.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233937",
+   "len": 200,
+   "names": [
+    "_SetFilePointerEx@20"
+   ],
+   "objs": [
+    "xapilib:filehops.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2339ff",
+   "len": 39,
+   "names": [
+    "_FlushFileBuffers@4"
+   ],
+   "objs": [
+    "xapilib:filehops.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233a26",
+   "len": 62,
+   "names": [
+    "_GetFileSizeEx@8"
+   ],
+   "objs": [
+    "xapilib:filehops.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233a64",
+   "len": 59,
+   "names": [
+    "_GetFileSize@8"
+   ],
+   "objs": [
+    "xapilib:filehops.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233a9f",
+   "len": 30,
+   "names": [
+    "_CloseHandle@4",
+    "_ResetEvent@4"
+   ],
+   "objs": [
+    "xapilib:handle.obj",
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233abd",
+   "len": 395,
+   "names": [
+    "_CreateFileA@28"
+   ],
+   "objs": [
+    "xapilib:fileopcr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233c48",
+   "len": 738,
+   "names": [
+    "_CopyFileExA@24"
+   ],
+   "objs": [
+    "xapilib:fileopcr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233f2a",
+   "len": 31,
+   "names": [
+    "_CopyFileA@12"
+   ],
+   "objs": [
+    "xapilib:fileopcr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233f49",
+   "len": 33,
+   "names": [
+    "_XboxTimeZoneNameToWstr@8"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233f6a",
+   "len": 56,
+   "names": [
+    "_XboxTimeZoneDateToSystemTime@8"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x233fa2",
+   "len": 170,
+   "names": [
+    "_XapipQueryTimeZoneInformation@8"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234054",
+   "len": 107,
+   "names": [
+    "_FileTimeToSystemTime@8"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2340bf",
+   "len": 117,
+   "names": [
+    "_SystemTimeToFileTime@8"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234134",
+   "len": 522,
+   "names": [
+    "_RtlpCutoverTimeToSystemTime@16"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23433e",
+   "len": 348,
+   "names": [
+    "_GetTimeZoneInformation@4"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23449a",
+   "len": 86,
+   "names": [
+    "_XapipGetTimeZoneBias@4"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2344f0",
+   "len": 127,
+   "names": [
+    "_GetLocalTime@4"
+   ],
+   "objs": [
+    "xapilib:datetime.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23456f",
+   "len": 56,
+   "names": [
+    "_XapiCallThreadNotifyRoutines@4"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2345a7",
+   "len": 82,
+   "names": [
+    "_SetThreadPriority@8"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2345f9",
+   "len": 38,
+   "names": [
+    "_ResumeThread@4",
+    "_SuspendThread@4"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23461f",
+   "len": 86,
+   "names": [
+    "_RaiseException@16"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234675",
+   "len": 19,
+   "names": [
+    "_SwitchToThread@0"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234688",
+   "len": 17,
+   "names": [
+    "_ExitThread@4"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23469a",
+   "len": 18,
+   "names": [
+    "_SetUnhandledExceptionFilter@4"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2346ac",
+   "len": 73,
+   "names": [
+    "_XRegisterThreadNotifyRoutine@8"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2346f5",
+   "len": 60,
+   "names": [
+    "_UnhandledExceptionFilter@4"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2347c9",
+   "len": 110,
+   "names": [
+    "_CreateThread@24"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234837",
+   "len": 13,
+   "names": [
+    "_GetCurrentThreadId@0"
+   ],
+   "objs": [
+    "xapilib:thread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234844",
+   "len": 66,
+   "names": [
+    "_XLaunchNewImageA@8"
+   ],
+   "objs": [
+    "xapilib:launch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234886",
+   "len": 225,
+   "names": [
+    "_XWriteTitleInfoNoReboot@24"
+   ],
+   "objs": [
+    "xapilib:launch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234967",
+   "len": 100,
+   "names": [
+    "_XGetLaunchInfo@8"
+   ],
+   "objs": [
+    "xapilib:launch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2349cb",
+   "len": 71,
+   "names": [
+    "_XWriteTitleInfoAndRebootA@20"
+   ],
+   "objs": [
+    "xapilib:launch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234a12",
+   "len": 79,
+   "names": [
+    "_GlobalMemoryStatus@4"
+   ],
+   "objs": [
+    "xapilib:virtual.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234a61",
+   "len": 116,
+   "names": [
+    "_mainXapiStartup@4"
+   ],
+   "objs": [
+    "xapilib:xapi0.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234ad5",
+   "len": 114,
+   "names": [
+    "_mainCRTStartup"
+   ],
+   "objs": [
+    "xapilib:xapi0.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234b47",
+   "len": 40,
+   "names": [
+    "_GetLastError@0"
+   ],
+   "objs": [
+    "xapilib:error.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234b6f",
+   "len": 46,
+   "names": [
+    "_SetLastError@4"
+   ],
+   "objs": [
+    "xapilib:error.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234b9d",
+   "len": 23,
+   "names": [
+    "_XapiSetLastNTError@4"
+   ],
+   "objs": [
+    "xapilib:error.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234c19",
+   "len": 34,
+   "names": [
+    "_XQueryValue@20"
+   ],
+   "objs": [
+    "xapilib:xqueryvalue.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234c3b",
+   "len": 74,
+   "names": [
+    "_BuildUpdateFilePath@12"
+   ],
+   "objs": [
+    "xapilib:bootutil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234c85",
+   "len": 204,
+   "names": [
+    "_XoUpdateLoadXBEInfo@8"
+   ],
+   "objs": [
+    "xapilib:bootutil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234d51",
+   "len": 100,
+   "names": [
+    "_XoUpdateGetSavedDataFromLaunchPage@12"
+   ],
+   "objs": [
+    "xapilib:bootutil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234db5",
+   "len": 146,
+   "names": [
+    "_XapipUpdateGetCurrentDDriveMapping@8"
+   ],
+   "objs": [
+    "xapilib:bootutil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234e47",
+   "len": 129,
+   "names": [
+    "_XapipUpdateSaveDDriveMappingToLaunchPage@8"
+   ],
+   "objs": [
+    "xapilib:bootutil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x234ec8",
+   "len": 386,
+   "names": [
+    "_XapipUpdateDetectAndVerify@16"
+   ],
+   "objs": [
+    "xapilib:bootutil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23504a",
+   "len": 385,
+   "names": [
+    "_XapipLaunchNewImageInternal@16"
+   ],
+   "objs": [
+    "xapilib:bootutil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2351cb",
+   "len": 357,
+   "names": [
+    "_XapipUpdateRebootIfNecessary@0"
+   ],
+   "objs": [
+    "xapilib:bootutil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235330",
+   "len": 69,
+   "names": [
+    "_lstrcmpiA@8",
+    "_lstrcmpiW@8"
+   ],
+   "objs": [
+    "xapilib:lcompat.obj",
+    "xapilib:lcompata.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235375",
+   "len": 101,
+   "names": [
+    "_lstrcpynA@12"
+   ],
+   "objs": [
+    "xapilib:lcompata.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2353da",
+   "len": 120,
+   "names": [
+    "_XapiValidateDiskPartitionEx@8"
+   ],
+   "objs": [
+    "xapilib:xapiinit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235452",
+   "len": 231,
+   "names": [
+    "_XapiCopySectionToFile@16"
+   ],
+   "objs": [
+    "xapilib:xapiinit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235539",
+   "len": 820,
+   "names": [
+    "_XapiMapLetterToDirectory@24"
+   ],
+   "objs": [
+    "xapilib:xapiinit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23586d",
+   "len": 85,
+   "names": [
+    "_XapiSetupPerTitleDriveLetters@8"
+   ],
+   "objs": [
+    "xapilib:xapiinit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2358c2",
+   "len": 100,
+   "names": [
+    "_XapiBootToDash@12"
+   ],
+   "objs": [
+    "xapilib:xapiinit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235927",
+   "len": 17,
+   "names": [
+    "_XapiFormatFATVolume@4",
+    "_XapiValidateDiskPartition@4"
+   ],
+   "objs": [
+    "xapilib:format.obj",
+    "xapilib:xapiinit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235938",
+   "len": 367,
+   "names": [
+    "_XapiInitProcess@0"
+   ],
+   "objs": [
+    "xapilib:xapiinit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235aa7",
+   "len": 88,
+   "names": [
+    "__cinit@0"
+   ],
+   "objs": [
+    "xapilib:xapi0dat.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235aff",
+   "len": 41,
+   "names": [
+    "__rtinit@0"
+   ],
+   "objs": [
+    "xapilib:xapi0dat.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235b28",
+   "len": 100,
+   "names": [
+    "_XapiRestrictCodeSelectorLimit@0"
+   ],
+   "objs": [
+    "xapilib:krnlptch.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235b8c",
+   "len": 197,
+   "names": [
+    "_XapiApplyKernelPatches@0"
+   ],
+   "objs": [
+    "xapilib:krnlptch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235c52",
+   "len": 40,
+   "names": [
+    "_XapiFormatObjectAttributes@12"
+   ],
+   "objs": [
+    "xapilib:support.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235c7a",
+   "len": 46,
+   "names": [
+    "_XapiFormatTimeOut@8"
+   ],
+   "objs": [
+    "xapilib:support.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235ca8",
+   "len": 97,
+   "names": [
+    "_CreateEventA@16"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235d09",
+   "len": 32,
+   "names": [
+    "_PulseEvent@4",
+    "_ReleaseMutex@4",
+    "_SetEvent@4"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235d29",
+   "len": 30,
+   "names": [
+    "_CloseHandle@4",
+    "_ResetEvent@4"
+   ],
+   "objs": [
+    "xapilib:handle.obj",
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235d47",
+   "len": 91,
+   "names": [
+    "_CreateSemaphoreA@16"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235da2",
+   "len": 38,
+   "names": [
+    "_ReleaseSemaphore@12"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235dc8",
+   "len": 88,
+   "names": [
+    "_CreateMutexA@12"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235e20",
+   "len": 32,
+   "names": [
+    "_PulseEvent@4",
+    "_ReleaseMutex@4",
+    "_SetEvent@4"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235e40",
+   "len": 68,
+   "names": [
+    "_WaitForSingleObjectEx@12"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235e84",
+   "len": 128,
+   "names": [
+    "_WaitForMultipleObjectsEx@20"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235f04",
+   "len": 82,
+   "names": [
+    "_SleepEx@8"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235f56",
+   "len": 18,
+   "names": [
+    "_WaitForSingleObject@8"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235f68",
+   "len": 26,
+   "names": [
+    "_WaitForMultipleObjects@16"
+   ],
+   "objs": [
+    "xapilib:synch.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235f82",
+   "len": 14,
+   "names": [
+    "?clear@ios_base@std@@QAEXH@Z",
+    "_Sleep@4"
+   ],
+   "objs": [
+    "libcpmt:ios.obj",
+    "xapilib:synch.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235f90",
+   "len": 31,
+   "names": [
+    "_XComputeContentSignatureKey@8"
+   ],
+   "objs": [
+    "xapilib:contsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x235faf",
+   "len": 229,
+   "names": [
+    "_XapiComputeContentHeaderSignature@16"
+   ],
+   "objs": [
+    "xapilib:contsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236094",
+   "len": 225,
+   "names": [
+    "_XapiLoadContentMetadataHeader@16"
+   ],
+   "objs": [
+    "xapilib:contsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236175",
+   "len": 393,
+   "names": [
+    "_xCompareStringA@20"
+   ],
+   "objs": [
+    "xapilib:compstra.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2362fe",
+   "len": 103,
+   "names": [
+    "_XGetSectionHandleA@4"
+   ],
+   "objs": [
+    "xapilib:xemodule.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236365",
+   "len": 33,
+   "names": [
+    "_XLoadSectionByHandle@4"
+   ],
+   "objs": [
+    "xapilib:xemodule.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236386",
+   "len": 30,
+   "names": [
+    "_XFreeSectionByHandle@4"
+   ],
+   "objs": [
+    "xapilib:xemodule.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2363a4",
+   "len": 10,
+   "names": [
+    "_XGBuffer_GetBufferSize@4",
+    "_XGetSectionSize@4"
+   ],
+   "objs": [
+    "xapilib:xemodule.obj",
+    "xgraphics:api.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2363ae",
+   "len": 37,
+   "names": [
+    "_XGetParentalControlSetting@0"
+   ],
+   "objs": [
+    "xapilib:xgetparentalcontrolsetting.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2363d3",
+   "len": 244,
+   "names": [
+    "_GetDiskFreeSpaceExA@16"
+   ],
+   "objs": [
+    "xapilib:pathmisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2364c7",
+   "len": 587,
+   "names": [
+    "_XapiSelectCachePartition@12"
+   ],
+   "objs": [
+    "xapilib:pathmisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236712",
+   "len": 261,
+   "names": [
+    "_XMountUtilityDrive@4"
+   ],
+   "objs": [
+    "xapilib:pathmisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236817",
+   "len": 142,
+   "names": [
+    "_XFormatSecondaryUtilityDrive@0",
+    "_XFormatUtilityDrive@0"
+   ],
+   "objs": [
+    "xapilib:pathmisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2368a5",
+   "len": 93,
+   "names": [
+    "_XUnmountAlternateTitleA@4"
+   ],
+   "objs": [
+    "xapilib:pathmisc.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236902",
+   "len": 155,
+   "names": [
+    "_XGetDiskSectorSizeA@4"
+   ],
+   "objs": [
+    "xapilib:pathmisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23699d",
+   "len": 219,
+   "names": [
+    "_XMUNameFromDriveLetter@12"
+   ],
+   "objs": [
+    "xapilib:pathmisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236a78",
+   "len": 79,
+   "names": [
+    "_HeapCreate@12"
+   ],
+   "objs": [
+    "xapilib:xapiheap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236ac7",
+   "len": 23,
+   "names": [
+    "_HeapFree@12"
+   ],
+   "objs": [
+    "xapilib:xapiheap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236ade",
+   "len": 6,
+   "names": [
+    "?GetInterfaceDescriptor@IUsbDevice@@QBEPBU_USB_INTERFACE_DESCRIPTOR@@XZ",
+    "?_query_new_handler@@YAP6AHI@ZXZ",
+    "_D3DDevice_GetOverscanColor@0",
+    "_GetProcessHeap@0",
+    "_OHCD_IsochPoolGetMaxBuffers@0",
+    "__Getgloballocale"
+   ],
+   "objs": [
+    "LIBCMT:ctype.obj",
+    "LIBCMT:handler.obj",
+    "LIBCMT:initctyp.obj",
+    "LIBCMT:lconv.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236ae4",
+   "len": 29,
+   "names": [
+    "_GlobalAlloc@8",
+    "_LocalAlloc@8"
+   ],
+   "objs": [
+    "xapilib:xapiheap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236b01",
+   "len": 30,
+   "names": [
+    "_LocalFree@4"
+   ],
+   "objs": [
+    "xapilib:xapiheap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236b1f",
+   "len": 288,
+   "names": [
+    "_RtlpCreateUnCommittedRange@4"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236c3f",
+   "len": 33,
+   "names": [
+    "_RtlpDestroyUnCommittedRange@8"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236c60",
+   "len": 147,
+   "names": [
+    "_RtlpInsertUnCommittedPages@12"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236cf3",
+   "len": 67,
+   "names": [
+    "_RtlpFindAndCommitPages@16"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x236e7e",
+   "len": 677,
+   "names": [
+    "_RtlpCoalesceFreeBlocks@16"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x237123",
+   "len": 250,
+   "names": [
+    "_RtlpInsertFreeBlock@12"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23721d",
+   "len": 28,
+   "names": [
+    "_RtlpGetExtraStuffPointer@4"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x237239",
+   "len": 1022,
+   "names": [
+    "_RtlpGrowBlockInPlace@20"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x237637",
+   "len": 47,
+   "names": [
+    "_RtlSizeHeap@12"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x237666",
+   "len": 286,
+   "names": [
+    "_RtlpInitializeHeapSegment@28"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x237784",
+   "len": 391,
+   "names": [
+    "_RtlpExtendHeap@8"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23790b",
+   "len": 682,
+   "names": [
+    "_RtlpDeCommitFreeBlock@12"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x237bb5",
+   "len": 1060,
+   "names": [
+    "_RtlCreateHeap@24"
+   ],
+   "objs": [
+    "xapilib:heap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239076",
+   "len": 27,
+   "names": [
+    "_XAutoPowerDownResetTimer@0"
+   ],
+   "objs": [
+    "xapilib:powerdwn.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239091",
+   "len": 18,
+   "names": [
+    "_XapiAutoPowerDownTimeout@16"
+   ],
+   "objs": [
+    "xapilib:powerdwn.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2390a3",
+   "len": 116,
+   "names": [
+    "_XapiInitAutoPowerDown@0"
+   ],
+   "objs": [
+    "xapilib:powerdwn.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239117",
+   "len": 25,
+   "names": [
+    "_XapiShutdownChannelStartNextPacket@0"
+   ],
+   "objs": [
+    "xapilib:xapiterm.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239133",
+   "len": 86,
+   "names": [
+    "_XapiShutdownNotification@4"
+   ],
+   "objs": [
+    "xapilib:xapiterm.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23918c",
+   "len": 37,
+   "names": [
+    "_XapiChangeCodeSelectorLimit@8"
+   ],
+   "objs": [
+    "xapilib:xapidlla.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2391b1",
+   "len": 98,
+   "names": [
+    "_XShaHmacInitialize@12"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239213",
+   "len": 5,
+   "names": [
+    "??1CAc97Channel@DirectSound@@QAE@XZ",
+    "??1CAutoFpState@DirectSound@@QAE@XZ",
+    "??1CAutoIrql@DirectSound@@QAE@XZ",
+    "??1CStdFileStream@WaveLoaderFoo@@QAE@XZ",
+    "??1CWaveFileWriter@WaveLoaderFoo@@QAE@XZ",
+    "??1Entry@Map@PreProcessor@XGRAPHICS@@QAE@XZ"
+   ],
+   "objs": [
+    "LIBCMT:atox.obj",
+    "LIBCMT:fputwc.obj",
+    "LIBCMT:heapinit.obj",
+    "LIBCMT:iswctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239218",
+   "len": 114,
+   "names": [
+    "_XShaHmacComputeFinal@16"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23928a",
+   "len": 117,
+   "names": [
+    "_XapiConvertSignatureToNonRoamable@12"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2392ff",
+   "len": 128,
+   "names": [
+    "_XapipCalculateSaveGameSignatureBegin@8"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23937f",
+   "len": 26,
+   "names": [
+    "_XapipCalculateContentSignatureUpdate@12",
+    "_XapipCalculateSaveGameSignatureUpdate@12"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239399",
+   "len": 98,
+   "names": [
+    "_XapipCalculateSaveGameSignatureEnd@8"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2393fb",
+   "len": 54,
+   "names": [
+    "_XapipCalculateContentSignatureBegin@0"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239431",
+   "len": 42,
+   "names": [
+    "_XapipCalculateContentSignatureEnd@8"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23945b",
+   "len": 65,
+   "names": [
+    "_XCalculateSignatureBeginEx@8"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23949c",
+   "len": 20,
+   "names": [
+    "_XCalculateSignatureBegin@4"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2394b0",
+   "len": 78,
+   "names": [
+    "_XCalculateSignatureUpdate@12"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2394fe",
+   "len": 69,
+   "names": [
+    "_XCalculateSignatureEnd@8"
+   ],
+   "objs": [
+    "xapilib:xcalcsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239543",
+   "len": 160,
+   "names": [
+    "_XMemAllocDefault@8"
+   ],
+   "objs": [
+    "xapilib:xmem.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2395e3",
+   "len": 26,
+   "names": [
+    "_XMemFreeDefault@8",
+    "_XMemSizeDefault@8"
+   ],
+   "objs": [
+    "xapilib:xmem.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2395fd",
+   "len": 381,
+   "names": [
+    "_XapiNukeDirectoryFromHandle@8"
+   ],
+   "objs": [
+    "xapilib:xclndrv.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x23977a",
+   "len": 111,
+   "names": [
+    "_XapiNukeDirectory@8"
+   ],
+   "objs": [
+    "xapilib:xclndrv.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2397e9",
+   "len": 142,
+   "names": [
+    "_DeleteFileA@4"
+   ],
+   "objs": [
+    "xapilib:filemisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239877",
+   "len": 804,
+   "names": [
+    "_XapiFormatFATVolumeEx@8"
+   ],
+   "objs": [
+    "xapilib:format.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239b9b",
+   "len": 108,
+   "names": [
+    "_lstrcpynW@12"
+   ],
+   "objs": [
+    "xapilib:lcompat.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239c10",
+   "len": 4,
+   "names": [
+    "?lsb@Math@DirectSound@@YIII@Z",
+    "@RtlFindFirstSetRightMember@4"
+   ],
+   "objs": [
+    "dsound:dsapi.obj",
+    "xapilib:bitmapa.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239c14",
+   "len": 67,
+   "names": [
+    "_XPhysicalAlloc@16"
+   ],
+   "objs": [
+    "xapilib:physical.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239c57",
+   "len": 45,
+   "names": [
+    "_XPhysicalAllocEx@20"
+   ],
+   "objs": [
+    "xapilib:physical.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239c84",
+   "len": 6,
+   "names": [
+    "?CalcConeAngle@CHRTFSource@DirectSound@@SGXABU_D3DVECTOR@@0PAM@Z",
+    "@IofCompleteRequest@8",
+    "@KfLowerIrql@4",
+    "@KfRaiseIrql@4",
+    "@ObfDereferenceObject@4",
+    "_AvGetSavedDataAddress@0"
+   ],
+   "objs": [
+    "d3d8:d3dbase.obj",
+    "dsound:dsapi.obj",
+    "xapilib:kthunks.obj",
+    "xapilib:physical.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239c8a",
+   "len": 6,
+   "names": [
+    "?CalcConeAngle@CHRTFSource@DirectSound@@SGXABU_D3DVECTOR@@0PAM@Z",
+    "@IofCompleteRequest@8",
+    "@KfLowerIrql@4",
+    "@KfRaiseIrql@4",
+    "@ObfDereferenceObject@4",
+    "_AvGetSavedDataAddress@0"
+   ],
+   "objs": [
+    "d3d8:d3dbase.obj",
+    "dsound:dsapi.obj",
+    "xapilib:kthunks.obj",
+    "xapilib:physical.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239c90",
+   "len": 6,
+   "names": [
+    "?CalcConeAngle@CHRTFSource@DirectSound@@SGXABU_D3DVECTOR@@0PAM@Z",
+    "@IofCompleteRequest@8",
+    "@KfLowerIrql@4",
+    "@KfRaiseIrql@4",
+    "@ObfDereferenceObject@4",
+    "_AvGetSavedDataAddress@0"
+   ],
+   "objs": [
+    "d3d8:d3dbase.obj",
+    "dsound:dsapi.obj",
+    "xapilib:kthunks.obj",
+    "xapilib:physical.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239c96",
+   "len": 6,
+   "names": [
+    "?CalcConeAngle@CHRTFSource@DirectSound@@SGXABU_D3DVECTOR@@0PAM@Z",
+    "@IofCompleteRequest@8",
+    "@KfLowerIrql@4",
+    "@KfRaiseIrql@4",
+    "@ObfDereferenceObject@4",
+    "_AvGetSavedDataAddress@0"
+   ],
+   "objs": [
+    "d3d8:d3dbase.obj",
+    "dsound:dsapi.obj",
+    "xapilib:kthunks.obj",
+    "xapilib:physical.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x239c9c",
+   "len": 6,
+   "names": [
+    "?CalcConeAngle@CHRTFSource@DirectSound@@SGXABU_D3DVECTOR@@0PAM@Z",
+    "@IofCompleteRequest@8",
+    "@KfLowerIrql@4",
+    "@KfRaiseIrql@4",
+    "@ObfDereferenceObject@4",
+    "_AvGetSavedDataAddress@0"
+   ],
+   "objs": [
+    "d3d8:d3dbase.obj",
+    "dsound:dsapi.obj",
+    "xapilib:kthunks.obj",
+    "xapilib:physical.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fb789",
+   "len": 87,
+   "names": [
+    "_vsprintf"
+   ],
+   "objs": [
+    "LIBCMT:vsprintf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fb7e0",
+   "len": 88,
+   "names": [
+    "_sprintf"
+   ],
+   "objs": [
+    "LIBCMT:sprintf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fb838",
+   "len": 32,
+   "names": [
+    "__global_unwind2"
+   ],
+   "objs": [
+    "LIBCMT:exsup.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fb858",
+   "len": 34,
+   "names": [
+    "__unwind_handler"
+   ],
+   "objs": [
+    "LIBCMT:exsup.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fb87a",
+   "len": 104,
+   "names": [
+    "__local_unwind2"
+   ],
+   "objs": [
+    "LIBCMT:exsup.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fb8e2",
+   "len": 35,
+   "names": [
+    "__abnormal_termination"
+   ],
+   "objs": [
+    "LIBCMT:exsup.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fb90e",
+   "len": 24,
+   "names": [
+    "__NLG_Notify"
+   ],
+   "objs": [
+    "LIBCMT:exsup.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fba02",
+   "len": 27,
+   "names": [
+    "__seh_longjmp_unwind@4"
+   ],
+   "objs": [
+    "LIBCMT:exsup3.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fba1d",
+   "len": 13,
+   "names": [
+    "_srand"
+   ],
+   "objs": [
+    "LIBCMT:rand.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fba2a",
+   "len": 34,
+   "names": [
+    "_rand"
+   ],
+   "objs": [
+    "LIBCMT:rand.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fba4d",
+   "len": 56,
+   "names": [
+    "__cfltcvt_init"
+   ],
+   "objs": [
+    "LIBCMT:fpinit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fba99",
+   "len": 20,
+   "names": [
+    "__purecall"
+   ],
+   "objs": [
+    "LIBCMT:purevirt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fbaf3",
+   "len": 28,
+   "names": [
+    "??_E_Locimp@locale@std@@MAEPAXI@Z",
+    "??_E__non_rtti_object@@UAEPAXI@Z",
+    "??_Ebad_cast@@UAEPAXI@Z",
+    "??_Ebad_typeid@@UAEPAXI@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "LIBCMT:typinfo.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fbb0f",
+   "len": 128,
+   "names": [
+    "__onexit_lk"
+   ],
+   "objs": [
+    "LIBCMT:onexit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fbb8f",
+   "len": 40,
+   "names": [
+    "___onexitinit"
+   ],
+   "objs": [
+    "LIBCMT:onexit.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fbbef",
+   "len": 18,
+   "names": [
+    "_atexit"
+   ],
+   "objs": [
+    "LIBCMT:onexit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc120",
+   "len": 31,
+   "names": [
+    "__allshl"
+   ],
+   "objs": [
+    "LIBCMT:llshl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc140",
+   "len": 20,
+   "names": [
+    "__CIacos",
+    "__CIasin"
+   ],
+   "objs": [
+    "LIBCMT:acos.obj",
+    "LIBCMT:asin.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc20c",
+   "len": 117,
+   "names": [
+    "__ftol2"
+   ],
+   "objs": [
+    "LIBCMT:ftol2.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc360",
+   "len": 134,
+   "names": [
+    "_strstr"
+   ],
+   "objs": [
+    "LIBCMT:strstr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc3e6",
+   "len": 88,
+   "names": [
+    "_atol"
+   ],
+   "objs": [
+    "LIBCMT:atox.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc43e",
+   "len": 5,
+   "names": [
+    "??1CAc97Channel@DirectSound@@QAE@XZ",
+    "??1CAutoFpState@DirectSound@@QAE@XZ",
+    "??1CAutoIrql@DirectSound@@QAE@XZ",
+    "??1CStdFileStream@WaveLoaderFoo@@QAE@XZ",
+    "??1CWaveFileWriter@WaveLoaderFoo@@QAE@XZ",
+    "??1Entry@Map@PreProcessor@XGRAPHICS@@QAE@XZ"
+   ],
+   "objs": [
+    "LIBCMT:atox.obj",
+    "LIBCMT:fputwc.obj",
+    "LIBCMT:heapinit.obj",
+    "LIBCMT:iswctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc450",
+   "len": 292,
+   "names": [
+    "_strncpy"
+   ],
+   "objs": [
+    "LIBCMT:strncpy.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc574",
+   "len": 211,
+   "names": [
+    "_floor"
+   ],
+   "objs": [
+    "LIBCMT:floor.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc650",
+   "len": 109,
+   "names": [
+    "_shortsort"
+   ],
+   "objs": [
+    "LIBCMT:qsort.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc6c0",
+   "len": 643,
+   "names": [
+    "_qsort"
+   ],
+   "objs": [
+    "LIBCMT:qsort.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fc950",
+   "len": 45,
+   "names": [
+    "_strrchr"
+   ],
+   "objs": [
+    "LIBCMT:strrchr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fca70",
+   "len": 57,
+   "names": [
+    "_strncmp"
+   ],
+   "objs": [
+    "LIBCMT:strncmp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fcaa9",
+   "len": 165,
+   "names": [
+    "_strtok"
+   ],
+   "objs": [
+    "LIBCMT:strtok.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fcb50",
+   "len": 70,
+   "names": [
+    "_strcspn"
+   ],
+   "objs": [
+    "LIBCMT:strcspn.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fcb96",
+   "len": 425,
+   "names": [
+    "_strtoxl"
+   ],
+   "objs": [
+    "LIBCMT:strtol.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fcd3f",
+   "len": 23,
+   "names": [
+    "__aligned_realloc",
+    "_strtol"
+   ],
+   "objs": [
+    "LIBCMT:align.obj",
+    "LIBCMT:strtol.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fcd56",
+   "len": 23,
+   "names": [
+    "_strtoul"
+   ],
+   "objs": [
+    "LIBCMT:strtol.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fcd6d",
+   "len": 58,
+   "names": [
+    "_sscanf"
+   ],
+   "objs": [
+    "LIBCMT:sscanf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fcdb0",
+   "len": 262,
+   "names": [
+    "_memcpy"
+   ],
+   "objs": [
+    "LIBCMT:memcpy.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd0ed",
+   "len": 9,
+   "names": [
+    "__lockexit",
+    "__unlockexit"
+   ],
+   "objs": [
+    "LIBCMT:crt0dat.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd0f6",
+   "len": 9,
+   "names": [
+    "__lockexit",
+    "__unlockexit"
+   ],
+   "objs": [
+    "LIBCMT:crt0dat.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd1c3",
+   "len": 12,
+   "names": [
+    "_exit"
+   ],
+   "objs": [
+    "LIBCMT:crt0dat.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd1cf",
+   "len": 12,
+   "names": [
+    "___buffer_overrun",
+    "__exit"
+   ],
+   "objs": [
+    "LIBCMT:crt0dat.obj",
+    "LIBCMT:secfail.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd291",
+   "len": 169,
+   "names": [
+    "___initstdio"
+   ],
+   "objs": [
+    "LIBCMT:_file.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd33a",
+   "len": 20,
+   "names": [
+    "___endstdio"
+   ],
+   "objs": [
+    "LIBCMT:_file.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd34e",
+   "len": 47,
+   "names": [
+    "__lock_file",
+    "__unlock_file"
+   ],
+   "objs": [
+    "LIBCMT:_file.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd37d",
+   "len": 35,
+   "names": [
+    "__lock_file2",
+    "__unlock_file2"
+   ],
+   "objs": [
+    "LIBCMT:_file.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd3a0",
+   "len": 47,
+   "names": [
+    "__lock_file",
+    "__unlock_file"
+   ],
+   "objs": [
+    "LIBCMT:_file.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd3cf",
+   "len": 35,
+   "names": [
+    "__lock_file2",
+    "__unlock_file2"
+   ],
+   "objs": [
+    "LIBCMT:_file.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd4b0",
+   "len": 31,
+   "names": [
+    "__aullshr"
+   ],
+   "objs": [
+    "LIBCMT:ullshr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd4d0",
+   "len": 20,
+   "names": [
+    "__CIacos",
+    "__CIasin"
+   ],
+   "objs": [
+    "LIBCMT:acos.obj",
+    "LIBCMT:asin.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd5a6",
+   "len": 24,
+   "names": [
+    "__CIfmod"
+   ],
+   "objs": [
+    "LIBCMT:87fmod.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd5be",
+   "len": 211,
+   "names": [
+    "_ceil"
+   ],
+   "objs": [
+    "LIBCMT:ceil.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd6a0",
+   "len": 309,
+   "names": [
+    "_strncat"
+   ],
+   "objs": [
+    "LIBCMT:strncat.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd7d5",
+   "len": 49,
+   "names": [
+    "_tolower"
+   ],
+   "objs": [
+    "LIBCMT:tolower.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd806",
+   "len": 49,
+   "names": [
+    "_toupper"
+   ],
+   "objs": [
+    "LIBCMT:toupper.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd837",
+   "len": 46,
+   "names": [
+    "__isnan"
+   ],
+   "objs": [
+    "LIBCMT:ieeemisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd865",
+   "len": 156,
+   "names": [
+    "__fpclass"
+   ],
+   "objs": [
+    "LIBCMT:ieeemisc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fd90a",
+   "len": 25,
+   "names": [
+    "__CIpow_default"
+   ],
+   "objs": [
+    "LIBCMT:pow.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdb19",
+   "len": 46,
+   "names": [
+    "_isalpha"
+   ],
+   "objs": [
+    "LIBCMT:_ctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdb47",
+   "len": 41,
+   "names": [
+    "_isdigit"
+   ],
+   "objs": [
+    "LIBCMT:_ctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdb70",
+   "len": 41,
+   "names": [
+    "_isspace"
+   ],
+   "objs": [
+    "LIBCMT:_ctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdb99",
+   "len": 46,
+   "names": [
+    "_isalnum"
+   ],
+   "objs": [
+    "LIBCMT:_ctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdbd0",
+   "len": 52,
+   "names": [
+    "__allmul"
+   ],
+   "objs": [
+    "LIBCMT:llmul.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdc04",
+   "len": 59,
+   "names": [
+    "__SEH_prolog"
+   ],
+   "objs": [
+    "LIBCMT:sehprolg.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdc3f",
+   "len": 17,
+   "names": [
+    "__SEH_epilog"
+   ],
+   "objs": [
+    "LIBCMT:sehprolg.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdc50",
+   "len": 87,
+   "names": [
+    "__snprintf"
+   ],
+   "objs": [
+    "LIBCMT:snprintf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdca7",
+   "len": 85,
+   "names": [
+    "__strnicmp",
+    "_strnicmp"
+   ],
+   "objs": [
+    "LIBCMT:strnicmp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdd00",
+   "len": 65,
+   "names": [
+    "__chkstk"
+   ],
+   "objs": [
+    "LIBCMT:chkstk.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdd41",
+   "len": 67,
+   "names": [
+    "__stricmp",
+    "_stricmp"
+   ],
+   "objs": [
+    "LIBCMT:stricmp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdd84",
+   "len": 112,
+   "names": [
+    "__snwprintf"
+   ],
+   "objs": [
+    "LIBCMT:snwprint.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fddf4",
+   "len": 61,
+   "names": [
+    "_wcsncpy"
+   ],
+   "objs": [
+    "LIBCMT:wcsncpy.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fde31",
+   "len": 22,
+   "names": [
+    "_wcslen"
+   ],
+   "objs": [
+    "LIBCMT:wcslen.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fde50",
+   "len": 104,
+   "names": [
+    "__aulldiv"
+   ],
+   "objs": [
+    "LIBCMT:ulldiv.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdec0",
+   "len": 170,
+   "names": [
+    "__alldiv"
+   ],
+   "objs": [
+    "LIBCMT:lldiv.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdf6a",
+   "len": 50,
+   "names": [
+    "_wcscmp"
+   ],
+   "objs": [
+    "LIBCMT:wcscmp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdf9c",
+   "len": 92,
+   "names": [
+    "_atof"
+   ],
+   "objs": [
+    "LIBCMT:atof.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fdff8",
+   "len": 86,
+   "names": [
+    "__vsnprintf"
+   ],
+   "objs": [
+    "LIBCMT:vsnprint.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe050",
+   "len": 149,
+   "names": [
+    "__aulldvrm"
+   ],
+   "objs": [
+    "LIBCMT:ulldvrm.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe0e5",
+   "len": 39,
+   "names": [
+    "__heap_alloc"
+   ],
+   "objs": [
+    "LIBCMT:malloc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe10c",
+   "len": 44,
+   "names": [
+    "__nh_malloc"
+   ],
+   "objs": [
+    "LIBCMT:malloc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe138",
+   "len": 18,
+   "names": [
+    "_malloc"
+   ],
+   "objs": [
+    "LIBCMT:malloc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe1a2",
+   "len": 23,
+   "names": [
+    "_abort"
+   ],
+   "objs": [
+    "LIBCMT:abort.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe1bc",
+   "len": 123,
+   "names": [
+    "__setjmp3"
+   ],
+   "objs": [
+    "LIBCMT:setjmp3.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe237",
+   "len": 248,
+   "names": [
+    "__fread_lk"
+   ],
+   "objs": [
+    "LIBCMT:fread.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe37c",
+   "len": 121,
+   "names": [
+    "_longjmp"
+   ],
+   "objs": [
+    "LIBCMT:longjmp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe3f5",
+   "len": 175,
+   "names": [
+    "_strtod"
+   ],
+   "objs": [
+    "LIBCMT:strtod.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe4a4",
+   "len": 281,
+   "names": [
+    "__flsbuf"
+   ],
+   "objs": [
+    "LIBCMT:_flsbuf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe5bd",
+   "len": 51,
+   "names": [
+    "_write_char"
+   ],
+   "objs": [
+    "LIBCMT:output.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe5f0",
+   "len": 36,
+   "names": [
+    "_write_multi_char"
+   ],
+   "objs": [
+    "LIBCMT:output.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fe614",
+   "len": 55,
+   "names": [
+    "_write_string"
+   ],
+   "objs": [
+    "LIBCMT:output.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fefe2",
+   "len": 88,
+   "names": [
+    "__forcdecpt"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff03a",
+   "len": 75,
+   "names": [
+    "__cropzeros"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff085",
+   "len": 26,
+   "names": [
+    "__positive"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff09f",
+   "len": 62,
+   "names": [
+    "__fassign"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff0dd",
+   "len": 35,
+   "names": [
+    "__shift"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff100",
+   "len": 169,
+   "names": [
+    "__cftoe2"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff1a9",
+   "len": 94,
+   "names": [
+    "__cftoe"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff207",
+   "len": 167,
+   "names": [
+    "__cftof2"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff2ae",
+   "len": 82,
+   "names": [
+    "__cftof"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff300",
+   "len": 141,
+   "names": [
+    "__cftog"
+   ],
+   "objs": [
+    "LIBCMT:cvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff3de",
+   "len": 18,
+   "names": [
+    "__setdefaultprecision"
+   ],
+   "objs": [
+    "LIBCMT:fp8.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff3f0",
+   "len": 28,
+   "names": [
+    "__amsg_exit"
+   ],
+   "objs": [
+    "LIBCMT:crt0.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff40c",
+   "len": 73,
+   "names": [
+    "__mtinitlocks"
+   ],
+   "objs": [
+    "LIBCMT:mlock.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff455",
+   "len": 41,
+   "names": [
+    "__mtdeletelocks"
+   ],
+   "objs": [
+    "LIBCMT:mlock.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff47e",
+   "len": 18,
+   "names": [
+    "__unlock"
+   ],
+   "objs": [
+    "LIBCMT:mlock.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff530",
+   "len": 46,
+   "names": [
+    "__lock"
+   ],
+   "objs": [
+    "LIBCMT:mlock.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff6a4",
+   "len": 69,
+   "names": [
+    "??0exception@@QAE@ABQBD@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff6e9",
+   "len": 79,
+   "names": [
+    "??0exception@@QAE@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff738",
+   "len": 22,
+   "names": [
+    "??1exception@@UAE@XZ"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff74e",
+   "len": 13,
+   "names": [
+    "?what@exception@@UBEPBDXZ"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff75b",
+   "len": 25,
+   "names": [
+    "??0bad_cast@@QAE@PBD@Z",
+    "??0bad_typeid@@QAE@PBD@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff774",
+   "len": 24,
+   "names": [
+    "??0CDirectSoundBuffer@DirectSound@@QAE@PAVCDirectSound@1@@Z",
+    "??0__non_rtti_object@@QAE@ABV0@@Z",
+    "??0__non_rtti_object@@QAE@PBD@Z",
+    "??0bad_cast@@QAE@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "dsound:dsapi.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff78c",
+   "len": 11,
+   "names": [
+    "??1?$map@HPAVRegister@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAV?$collection@PAVInstruction@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@U?$less@PAV?$collection@PAVInstruction@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAV?$collection@PAVRegister@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@U?$less@PAV?$collection@PAVRegister@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAVGraphOptimizerObject@VS_GRAPH_OPTIMIZER@XGRAPHICS@@U?$less@PAVGraphOptimizerObject@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAVInstruction@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UInstructionLess@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAVReader@VS_GRAPH_OPTIMIZER@XGRAPHICS@@U?$less@PAVReader@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "dsound:dsapi.obj",
+    "libcpmt:ios.obj",
+    "xgraphics:instructiongraph.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff797",
+   "len": 25,
+   "names": [
+    "??0bad_cast@@QAE@PBD@Z",
+    "??0bad_typeid@@QAE@PBD@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff7b0",
+   "len": 24,
+   "names": [
+    "??0CDirectSoundBuffer@DirectSound@@QAE@PAVCDirectSound@1@@Z",
+    "??0__non_rtti_object@@QAE@ABV0@@Z",
+    "??0__non_rtti_object@@QAE@PBD@Z",
+    "??0bad_cast@@QAE@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "dsound:dsapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff7c8",
+   "len": 11,
+   "names": [
+    "??1?$map@HPAVRegister@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAV?$collection@PAVInstruction@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@U?$less@PAV?$collection@PAVInstruction@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAV?$collection@PAVRegister@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@U?$less@PAV?$collection@PAVRegister@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAVGraphOptimizerObject@VS_GRAPH_OPTIMIZER@XGRAPHICS@@U?$less@PAVGraphOptimizerObject@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAVInstruction@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UInstructionLess@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ",
+    "??1?$set@PAVReader@VS_GRAPH_OPTIMIZER@XGRAPHICS@@U?$less@PAVReader@VS_GRAPH_OPTIMIZER@XGRAPHICS@@@23@@VS_GRAPH_OPTIMIZER@XGRAPHICS@@UAE@XZ"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "dsound:dsapi.obj",
+    "libcpmt:ios.obj",
+    "xgraphics:instructiongraph.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff7d3",
+   "len": 24,
+   "names": [
+    "??0CDirectSoundBuffer@DirectSound@@QAE@PAVCDirectSound@1@@Z",
+    "??0__non_rtti_object@@QAE@ABV0@@Z",
+    "??0__non_rtti_object@@QAE@PBD@Z",
+    "??0bad_cast@@QAE@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "dsound:dsapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff7eb",
+   "len": 24,
+   "names": [
+    "??0CDirectSoundBuffer@DirectSound@@QAE@PAVCDirectSound@1@@Z",
+    "??0__non_rtti_object@@QAE@ABV0@@Z",
+    "??0__non_rtti_object@@QAE@PBD@Z",
+    "??0bad_cast@@QAE@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "dsound:dsapi.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff803",
+   "len": 28,
+   "names": [
+    "??_E_Locimp@locale@std@@MAEPAXI@Z",
+    "??_E__non_rtti_object@@UAEPAXI@Z",
+    "??_Ebad_cast@@UAEPAXI@Z",
+    "??_Ebad_typeid@@UAEPAXI@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "LIBCMT:typinfo.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff81f",
+   "len": 28,
+   "names": [
+    "??_E_Locimp@locale@std@@MAEPAXI@Z",
+    "??_E__non_rtti_object@@UAEPAXI@Z",
+    "??_Ebad_cast@@UAEPAXI@Z",
+    "??_Ebad_typeid@@UAEPAXI@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "LIBCMT:typinfo.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff83b",
+   "len": 28,
+   "names": [
+    "??_E_Locimp@locale@std@@MAEPAXI@Z",
+    "??_E__non_rtti_object@@UAEPAXI@Z",
+    "??_Ebad_cast@@UAEPAXI@Z",
+    "??_Ebad_typeid@@UAEPAXI@Z"
+   ],
+   "objs": [
+    "LIBCMT:stdexcpt.obj",
+    "LIBCMT:typinfo.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff857",
+   "len": 57,
+   "names": [
+    "__CxxThrowException@8"
+   ],
+   "objs": [
+    "LIBCMT:throw.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff890",
+   "len": 103,
+   "names": [
+    "__trandisp1"
+   ],
+   "objs": [
+    "LIBCMT:87disp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ff8f7",
+   "len": 140,
+   "names": [
+    "__trandisp2"
+   ],
+   "objs": [
+    "LIBCMT:87disp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffa5c",
+   "len": 83,
+   "names": [
+    "__startTwoArgErrorHandling"
+   ],
+   "objs": [
+    "LIBCMT:genexcep.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffa73",
+   "len": 60,
+   "names": [
+    "__startOneArgErrorHandling"
+   ],
+   "objs": [
+    "LIBCMT:genexcep.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffab0",
+   "len": 21,
+   "names": [
+    "__twoToTOS"
+   ],
+   "objs": [
+    "LIBCMT:common.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffac5",
+   "len": 23,
+   "names": [
+    "__load_CW"
+   ],
+   "objs": [
+    "LIBCMT:common.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffadc",
+   "len": 25,
+   "names": [
+    "__convertTOStoQNaN"
+   ],
+   "objs": [
+    "LIBCMT:common.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffaf5",
+   "len": 67,
+   "names": [
+    "__fload_withFB"
+   ],
+   "objs": [
+    "LIBCMT:common.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffb38",
+   "len": 22,
+   "names": [
+    "__checkTOS_withFB"
+   ],
+   "objs": [
+    "LIBCMT:common.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffb5b",
+   "len": 42,
+   "names": [
+    "__math_exit"
+   ],
+   "objs": [
+    "LIBCMT:common.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffb85",
+   "len": 20,
+   "names": [
+    "__check_overflow_exit"
+   ],
+   "objs": [
+    "LIBCMT:common.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffc3c",
+   "len": 48,
+   "names": [
+    "__ismbcspace"
+   ],
+   "objs": [
+    "LIBCMT:ismbspc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2ffc6c",
+   "len": 676,
+   "names": [
+    "__raise_exc"
+   ],
+   "objs": [
+    "LIBCMT:fpexcept.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x2fff10",
+   "len": 493,
+   "names": [
+    "__handle_exc"
+   ],
+   "objs": [
+    "LIBCMT:fpexcept.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3000fd",
+   "len": 40,
+   "names": [
+    "__set_errno"
+   ],
+   "objs": [
+    "LIBCMT:fpexcept.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300125",
+   "len": 45,
+   "names": [
+    "__errcode"
+   ],
+   "objs": [
+    "LIBCMT:fpexcept.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300152",
+   "len": 158,
+   "names": [
+    "__umatherr"
+   ],
+   "objs": [
+    "LIBCMT:fpexcept.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3001f0",
+   "len": 83,
+   "names": [
+    "__handle_qnan1"
+   ],
+   "objs": [
+    "LIBCMT:fpexcept.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300243",
+   "len": 160,
+   "names": [
+    "__except1"
+   ],
+   "objs": [
+    "LIBCMT:fpexcept.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3002e3",
+   "len": 17,
+   "names": [
+    "__frnd"
+   ],
+   "objs": [
+    "LIBCMT:frnd.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3002f4",
+   "len": 42,
+   "names": [
+    "__set_exp"
+   ],
+   "objs": [
+    "LIBCMT:util.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30031e",
+   "len": 91,
+   "names": [
+    "__sptype"
+   ],
+   "objs": [
+    "LIBCMT:util.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300379",
+   "len": 180,
+   "names": [
+    "__decomp"
+   ],
+   "objs": [
+    "LIBCMT:util.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30042d",
+   "len": 11,
+   "names": [
+    "__statfp"
+   ],
+   "objs": [
+    "LIBCMT:fpctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300438",
+   "len": 12,
+   "names": [
+    "__clrfp"
+   ],
+   "objs": [
+    "LIBCMT:fpctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300444",
+   "len": 36,
+   "names": [
+    "__ctrlfp"
+   ],
+   "objs": [
+    "LIBCMT:fpctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300468",
+   "len": 86,
+   "names": [
+    "__set_statfp"
+   ],
+   "objs": [
+    "LIBCMT:fpctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3004be",
+   "len": 136,
+   "names": [
+    "__stbuf"
+   ],
+   "objs": [
+    "LIBCMT:_sftbuf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300546",
+   "len": 42,
+   "names": [
+    "__ftbuf"
+   ],
+   "objs": [
+    "LIBCMT:_sftbuf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300570",
+   "len": 9,
+   "names": [
+    "__errno"
+   ],
+   "objs": [
+    "LIBCMT:dosmap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300579",
+   "len": 9,
+   "names": [
+    "___doserrno"
+   ],
+   "objs": [
+    "LIBCMT:dosmap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300582",
+   "len": 115,
+   "names": [
+    "__dosmaperr"
+   ],
+   "objs": [
+    "LIBCMT:dosmap.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3005f5",
+   "len": 33,
+   "names": [
+    "__isctype"
+   ],
+   "objs": [
+    "LIBCMT:isctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300616",
+   "len": 50,
+   "names": [
+    "__hextodec"
+   ],
+   "objs": [
+    "LIBCMT:input.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x300648",
+   "len": 22,
+   "names": [
+    "__inc"
+   ],
+   "objs": [
+    "LIBCMT:input.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30065e",
+   "len": 2941,
+   "names": [
+    "__input"
+   ],
+   "objs": [
+    "LIBCMT:input.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3011db",
+   "len": 101,
+   "names": [
+    "__ioinit"
+   ],
+   "objs": [
+    "LIBCMT:ioinit.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301240",
+   "len": 77,
+   "names": [
+    "_calloc"
+   ],
+   "objs": [
+    "LIBCMT:calloc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301308",
+   "len": 9,
+   "names": [
+    "__flushall"
+   ],
+   "objs": [
+    "LIBCMT:fflush.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301311",
+   "len": 93,
+   "names": [
+    "__flush"
+   ],
+   "objs": [
+    "LIBCMT:fflush.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30136e",
+   "len": 46,
+   "names": [
+    "__fflush_lk"
+   ],
+   "objs": [
+    "LIBCMT:fflush.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301468",
+   "len": 9,
+   "names": [
+    "__flushall"
+   ],
+   "objs": [
+    "LIBCMT:fflush.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301471",
+   "len": 9,
+   "names": [
+    "__flushall"
+   ],
+   "objs": [
+    "LIBCMT:fflush.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30147a",
+   "len": 38,
+   "names": [
+    "?Destructor@HeapManager@@QAEXXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3014a0",
+   "len": 99,
+   "names": [
+    "?getNumberOfDimensions@UnDecorator@@CAHXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301918",
+   "len": 25,
+   "names": [
+    "?UScore@UnDecorator@@SAPBDW4Tokens@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301931",
+   "len": 132,
+   "names": [
+    "?getMemory@HeapManager@@QAEPAXIH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3019b5",
+   "len": 105,
+   "names": [
+    "??0DName@@QAE@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301a1e",
+   "len": 107,
+   "names": [
+    "??4DName@@QAEAAV0@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301a89",
+   "len": 41,
+   "names": [
+    "??AReplicator@@QBEABVDName@@H@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301ab2",
+   "len": 41,
+   "names": [
+    "??YDNameNode@@QAEAAV0@PAV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301ae3",
+   "len": 27,
+   "names": [
+    "?getString@charNode@@UBEPADPADH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301b02",
+   "len": 47,
+   "names": [
+    "??0pDNameNode@@QAE@PAVDName@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301b31",
+   "len": 37,
+   "names": [
+    "??0DNameStatusNode@@QAE@W4DNameStatus@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301b83",
+   "len": 51,
+   "names": [
+    "?getDataIndirectType@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301bb6",
+   "len": 52,
+   "names": [
+    "?getThisType@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301bea",
+   "len": 85,
+   "names": [
+    "??0DName@@QAE@PAV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301c3f",
+   "len": 96,
+   "names": [
+    "??0DName@@QAE@W4DNameStatus@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301c9f",
+   "len": 23,
+   "names": [
+    "?isValid@DName@@QBEHXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301cb6",
+   "len": 21,
+   "names": [
+    "?isEmpty@DName@@QBEHXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301ccb",
+   "len": 20,
+   "names": [
+    "?isUDC@DName@@QBEHXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301cdf",
+   "len": 37,
+   "names": [
+    "?length@DName@@QBEHXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301d04",
+   "len": 56,
+   "names": [
+    "?getLastChar@DName@@QBEDXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301d3c",
+   "len": 145,
+   "names": [
+    "?getString@DName@@QBEPADPADH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301dcd",
+   "len": 53,
+   "names": [
+    "??_5DName@@QAEAAV0@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301e02",
+   "len": 129,
+   "names": [
+    "??4DName@@QAEAAV0@W4DNameStatus@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301e83",
+   "len": 30,
+   "names": [
+    "??0Replicator@@QAE@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301ea1",
+   "len": 71,
+   "names": [
+    "??YReplicator@@QAEAAV0@ABVDName@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301ee8",
+   "len": 70,
+   "names": [
+    "?clone@DNameNode@@QAEPAV1@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301f2e",
+   "len": 103,
+   "names": [
+    "??0pcharNode@@QAE@PBDH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301f95",
+   "len": 18,
+   "names": [
+    "?getLastChar@pcharNode@@UBEDXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301fa7",
+   "len": 49,
+   "names": [
+    "?getString@pcharNode@@UBEPADPADH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x301ff6",
+   "len": 29,
+   "names": [
+    "?getString@pDNameNode@@UBEPADPADH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302013",
+   "len": 51,
+   "names": [
+    "?getString@DNameStatusNode@@UBEPADPADH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302046",
+   "len": 109,
+   "names": [
+    "??0UnDecorator@@QAE@PADPBDHP6APADJ@ZK@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3020b3",
+   "len": 47,
+   "names": [
+    "?getReturnType@UnDecorator@@CA?AVDName@@PAV2@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3020e2",
+   "len": 123,
+   "names": [
+    "??YDName@@QAEAAV0@W4DNameStatus@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30215d",
+   "len": 166,
+   "names": [
+    "?doPchar@DName@@AAEXPBDH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302203",
+   "len": 37,
+   "names": [
+    "??0DName@@QAE@D@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302228",
+   "len": 48,
+   "names": [
+    "??0DName@@QAE@PBD@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302258",
+   "len": 191,
+   "names": [
+    "??0DName@@QAE@AAPBDD@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302317",
+   "len": 71,
+   "names": [
+    "??0DName@@QAE@K@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30235e",
+   "len": 103,
+   "names": [
+    "??0DName@@QAE@H@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3023c5",
+   "len": 60,
+   "names": [
+    "??HDName@@QBE?AV0@D@Z",
+    "??HDName@@QBE?AV0@PAV0@@Z",
+    "??HDName@@QBE?AV0@PBD@Z",
+    "??HDName@@QBE?AV0@W4DNameStatus@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302401",
+   "len": 100,
+   "names": [
+    "??YDName@@QAEAAV0@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302465",
+   "len": 25,
+   "names": [
+    "??4DName@@QAEAAV0@D@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30247e",
+   "len": 39,
+   "names": [
+    "??4DName@@QAEAAV0@PBD@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3024a5",
+   "len": 165,
+   "names": [
+    "?getCallingConvention@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30254a",
+   "len": 55,
+   "names": [
+    "?getVCallThunkType@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302581",
+   "len": 96,
+   "names": [
+    "??HDName@@QBE?AV0@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3025e1",
+   "len": 106,
+   "names": [
+    "??YDName@@QAEAAV0@D@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30264b",
+   "len": 108,
+   "names": [
+    "??YDName@@QAEAAV0@PBD@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3026b7",
+   "len": 231,
+   "names": [
+    "?getArgumentList@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30279e",
+   "len": 34,
+   "names": [
+    "??H@YA?AVDName@@DABV0@@Z",
+    "??H@YA?AVDName@@PBDABV0@@Z",
+    "??H@YA?AVDName@@W4DNameStatus@@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3027c0",
+   "len": 34,
+   "names": [
+    "??H@YA?AVDName@@DABV0@@Z",
+    "??H@YA?AVDName@@PBDABV0@@Z",
+    "??H@YA?AVDName@@W4DNameStatus@@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3027e2",
+   "len": 34,
+   "names": [
+    "??H@YA?AVDName@@DABV0@@Z",
+    "??H@YA?AVDName@@PBDABV0@@Z",
+    "??H@YA?AVDName@@W4DNameStatus@@ABV0@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302804",
+   "len": 60,
+   "names": [
+    "??HDName@@QBE?AV0@D@Z",
+    "??HDName@@QBE?AV0@PAV0@@Z",
+    "??HDName@@QBE?AV0@PBD@Z",
+    "??HDName@@QBE?AV0@W4DNameStatus@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302840",
+   "len": 60,
+   "names": [
+    "??HDName@@QBE?AV0@D@Z",
+    "??HDName@@QBE?AV0@PAV0@@Z",
+    "??HDName@@QBE?AV0@PBD@Z",
+    "??HDName@@QBE?AV0@W4DNameStatus@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30287c",
+   "len": 228,
+   "names": [
+    "?getDimension@UnDecorator@@CA?AVDName@@_N@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302a31",
+   "len": 146,
+   "names": [
+    "?getArgumentTypes@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302ac3",
+   "len": 125,
+   "names": [
+    "?getThrowTypes@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302b40",
+   "len": 347,
+   "names": [
+    "?getArrayType@UnDecorator@@CA?AVDName@@ABV2@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302c9b",
+   "len": 49,
+   "names": [
+    "?getLexicalFrame@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302ccc",
+   "len": 366,
+   "names": [
+    "?getVfTableType@UnDecorator@@CA?AVDName@@ABV2@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302e3a",
+   "len": 160,
+   "names": [
+    "?getStringEncoding@UnDecorator@@CA?AVDName@@PADH@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302eda",
+   "len": 80,
+   "names": [
+    "?getSignedDimension@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x302f2a",
+   "len": 448,
+   "names": [
+    "?getTemplateConstant@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3030ea",
+   "len": 191,
+   "names": [
+    "?getPtrRefDataType@UnDecorator@@CA?AVDName@@ABV2@H@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3031a9",
+   "len": 413,
+   "names": [
+    "?getTemplateArgumentList@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x303346",
+   "len": 261,
+   "names": [
+    "?getTemplateName@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30344b",
+   "len": 456,
+   "names": [
+    "?getZName@UnDecorator@@CA?AVDName@@_N@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x303613",
+   "len": 1072,
+   "names": [
+    "?getOperatorName@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x303a43",
+   "len": 252,
+   "names": [
+    "?getScopedName@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x303b3f",
+   "len": 255,
+   "names": [
+    "?getECSUDataType@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x303c3e",
+   "len": 45,
+   "names": [
+    "?getSymbolName@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x303c6b",
+   "len": 146,
+   "names": [
+    "?getBasedType@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x303cfd",
+   "len": 2551,
+   "names": [
+    "?composeDeclaration@UnDecorator@@CA?AVDName@@ABV2@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3046f4",
+   "len": 442,
+   "names": [
+    "?getDecoratedName@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3048ae",
+   "len": 663,
+   "names": [
+    "?getScope@UnDecorator@@CA?AVDName@@XZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x304b45",
+   "len": 833,
+   "names": [
+    "?getFunctionIndirectType@UnDecorator@@CA?AVDName@@ABV2@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x304e86",
+   "len": 1334,
+   "names": [
+    "?getDataIndirectType@UnDecorator@@CA?AVDName@@ABV2@D0H@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3053bc",
+   "len": 297,
+   "names": [
+    "??BUnDecorator@@QAEPADXZ"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3054e5",
+   "len": 278,
+   "names": [
+    "?getPtrRefType@UnDecorator@@CA?AVDName@@ABV2@0D@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x305a02",
+   "len": 304,
+   "names": [
+    "?getPrimaryDataType@UnDecorator@@CA?AVDName@@ABV2@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x305b32",
+   "len": 174,
+   "names": [
+    "?getDataType@UnDecorator@@CA?AVDName@@PAV2@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x305be0",
+   "len": 112,
+   "names": [
+    "?getExternalDataType@UnDecorator@@CA?AVDName@@ABV2@@Z"
+   ],
+   "objs": [
+    "LIBCMT:xundname.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x305c50",
+   "len": 62,
+   "names": [
+    "__cintrindisp2"
+   ],
+   "objs": [
+    "LIBCMT:87cdisp.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x305c8e",
+   "len": 61,
+   "names": [
+    "__cintrindisp1"
+   ],
+   "objs": [
+    "LIBCMT:87cdisp.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x305e61",
+   "len": 51,
+   "names": [
+    "__ctrandisp1"
+   ],
+   "objs": [
+    "LIBCMT:87cdisp.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x305e94",
+   "len": 60,
+   "names": [
+    "__fload"
+   ],
+   "objs": [
+    "LIBCMT:87cdisp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3060c7",
+   "len": 101,
+   "names": [
+    "__d_inttype"
+   ],
+   "objs": [
+    "LIBCMT:powhlp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30612c",
+   "len": 338,
+   "names": [
+    "__powhlp"
+   ],
+   "objs": [
+    "LIBCMT:powhlp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306280",
+   "len": 97,
+   "names": [
+    "___ascii_strnicmp"
+   ],
+   "objs": [
+    "LIBCMT:_strnicm.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3062f0",
+   "len": 78,
+   "names": [
+    "___ascii_stricmp"
+   ],
+   "objs": [
+    "LIBCMT:_stricmp.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30633e",
+   "len": 37,
+   "names": [
+    "_write_char"
+   ],
+   "objs": [
+    "LIBCMT:woutput.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306363",
+   "len": 37,
+   "names": [
+    "_write_multi_char"
+   ],
+   "objs": [
+    "LIBCMT:woutput.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306388",
+   "len": 61,
+   "names": [
+    "_write_string"
+   ],
+   "objs": [
+    "LIBCMT:woutput.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3063c5",
+   "len": 1956,
+   "names": [
+    "__woutput"
+   ],
+   "objs": [
+    "LIBCMT:woutput.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306b89",
+   "len": 133,
+   "names": [
+    "__fltin2"
+   ],
+   "objs": [
+    "LIBCMT:cfin.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306c0e",
+   "len": 27,
+   "names": [
+    "__callnewh"
+   ],
+   "objs": [
+    "LIBCMT:handler.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306c29",
+   "len": 46,
+   "names": [
+    "_siglookup"
+   ],
+   "objs": [
+    "LIBCMT:winsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306c57",
+   "len": 377,
+   "names": [
+    "_raise"
+   ],
+   "objs": [
+    "LIBCMT:winsig.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306dd0",
+   "len": 44,
+   "names": [
+    "__NMSG_WRITE"
+   ],
+   "objs": [
+    "LIBCMT:crt0msg.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306dfc",
+   "len": 34,
+   "names": [
+    "__FF_MSGBANNER"
+   ],
+   "objs": [
+    "LIBCMT:crt0msg.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306e1e",
+   "len": 225,
+   "names": [
+    "__filbuf"
+   ],
+   "objs": [
+    "LIBCMT:_filbuf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x306eff",
+   "len": 471,
+   "names": [
+    "__read_lk"
+   ],
+   "objs": [
+    "LIBCMT:read.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3070d6",
+   "len": 171,
+   "names": [
+    "__lseek",
+    "__read",
+    "__write"
+   ],
+   "objs": [
+    "LIBCMT:lseek.obj",
+    "LIBCMT:read.obj",
+    "LIBCMT:write.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307181",
+   "len": 66,
+   "names": [
+    "__rt_probe_read4@4"
+   ],
+   "objs": [
+    "LIBCMT:sehsupp.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3071c4",
+   "len": 114,
+   "names": [
+    "__lseek_lk"
+   ],
+   "objs": [
+    "LIBCMT:lseek.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307236",
+   "len": 171,
+   "names": [
+    "__lseek",
+    "__read",
+    "__write"
+   ],
+   "objs": [
+    "LIBCMT:lseek.obj",
+    "LIBCMT:read.obj",
+    "LIBCMT:write.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3072e1",
+   "len": 395,
+   "names": [
+    "__write_lk"
+   ],
+   "objs": [
+    "LIBCMT:write.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30746c",
+   "len": 171,
+   "names": [
+    "__lseek",
+    "__read",
+    "__write"
+   ],
+   "objs": [
+    "LIBCMT:lseek.obj",
+    "LIBCMT:read.obj",
+    "LIBCMT:write.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307517",
+   "len": 68,
+   "names": [
+    "__getbuf"
+   ],
+   "objs": [
+    "LIBCMT:_getbuf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30755b",
+   "len": 42,
+   "names": [
+    "__isatty"
+   ],
+   "objs": [
+    "LIBCMT:isatty.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307585",
+   "len": 43,
+   "names": [
+    "_wctomb"
+   ],
+   "objs": [
+    "LIBCMT:wctomb.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3075b0",
+   "len": 43,
+   "names": [
+    "_setSBCS"
+   ],
+   "objs": [
+    "LIBCMT:mbctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3075db",
+   "len": 271,
+   "names": [
+    "__setmbcp_lk"
+   ],
+   "objs": [
+    "LIBCMT:mbctype.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30780b",
+   "len": 40,
+   "names": [
+    "___initmbctable"
+   ],
+   "objs": [
+    "LIBCMT:mbctype.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307833",
+   "len": 42,
+   "names": [
+    "__mtxthreadnotification@4"
+   ],
+   "objs": [
+    "LIBCMT:thread.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30785d",
+   "len": 50,
+   "names": [
+    "__ZeroTail"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30788f",
+   "len": 77,
+   "names": [
+    "__IncMan"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3078dc",
+   "len": 114,
+   "names": [
+    "__RoundMan"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30794e",
+   "len": 27,
+   "names": [
+    "__CopyMan"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307969",
+   "len": 25,
+   "names": [
+    "__IsZeroMan"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307982",
+   "len": 123,
+   "names": [
+    "__ShrMan"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3079fd",
+   "len": 344,
+   "names": [
+    "__ld12cvt"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307b55",
+   "len": 22,
+   "names": [
+    "__ld12tod",
+    "__ld12tof"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307b6b",
+   "len": 22,
+   "names": [
+    "__ld12tod",
+    "__ld12tof"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307b81",
+   "len": 45,
+   "names": [
+    "__atodbl",
+    "__atoflt"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307bae",
+   "len": 45,
+   "names": [
+    "__atodbl",
+    "__atoflt"
+   ],
+   "objs": [
+    "LIBCMT:intrncvt.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307bdb",
+   "len": 127,
+   "names": [
+    "__fptostr"
+   ],
+   "objs": [
+    "LIBCMT:_fptostr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307c5a",
+   "len": 186,
+   "names": [
+    "___dtold"
+   ],
+   "objs": [
+    "LIBCMT:cfout.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307d14",
+   "len": 101,
+   "names": [
+    "__fltout2"
+   ],
+   "objs": [
+    "LIBCMT:cfout.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307d82",
+   "len": 146,
+   "names": [
+    "__abstract_cw"
+   ],
+   "objs": [
+    "LIBCMT:ieee87.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307e14",
+   "len": 142,
+   "names": [
+    "__hw_cw"
+   ],
+   "objs": [
+    "LIBCMT:ieee87.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307ea2",
+   "len": 50,
+   "names": [
+    "__control87"
+   ],
+   "objs": [
+    "LIBCMT:ieee87.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307ed4",
+   "len": 22,
+   "names": [
+    "__controlfp"
+   ],
+   "objs": [
+    "LIBCMT:ieee87.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307eea",
+   "len": 16,
+   "names": [
+    "___crtInitCritSecNoSpinCount@8"
+   ],
+   "objs": [
+    "LIBCMT:initcrit.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307efa",
+   "len": 97,
+   "names": [
+    "___crtInitCritSecAndSpinCount"
+   ],
+   "objs": [
+    "LIBCMT:initcrit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307f5b",
+   "len": 70,
+   "names": [
+    "?__CxxUnhandledExceptionFilter@@YGJPAU_EXCEPTION_POINTERS@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:unhandld.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307fa1",
+   "len": 18,
+   "names": [
+    "?__CxxSetUnhandledExceptionFilter@@YAHXZ"
+   ],
+   "objs": [
+    "LIBCMT:unhandld.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x307fbf",
+   "len": 221,
+   "names": [
+    "__87except"
+   ],
+   "objs": [
+    "LIBCMT:87except.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30809f",
+   "len": 108,
+   "names": [
+    "__ungetc_lk"
+   ],
+   "objs": [
+    "LIBCMT:ungetc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30810b",
+   "len": 55,
+   "names": [
+    "_mbtowc"
+   ],
+   "objs": [
+    "LIBCMT:mbtowc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308142",
+   "len": 76,
+   "names": [
+    "__fclose_lk"
+   ],
+   "objs": [
+    "LIBCMT:fclose.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3081df",
+   "len": 186,
+   "names": [
+    "__commit"
+   ],
+   "objs": [
+    "LIBCMT:commit.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308299",
+   "len": 197,
+   "names": [
+    "__putwc_lk"
+   ],
+   "objs": [
+    "LIBCMT:fputwc.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3087d5",
+   "len": 73,
+   "names": [
+    "__free_osfhnd"
+   ],
+   "objs": [
+    "LIBCMT:osfinfo.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30881e",
+   "len": 65,
+   "names": [
+    "__get_osfhandle"
+   ],
+   "objs": [
+    "LIBCMT:osfinfo.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3088ff",
+   "len": 34,
+   "names": [
+    "__unlock_fhandle"
+   ],
+   "objs": [
+    "LIBCMT:osfinfo.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308921",
+   "len": 129,
+   "names": [
+    "__lseeki64_lk"
+   ],
+   "objs": [
+    "LIBCMT:lseeki64.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3089a2",
+   "len": 33,
+   "names": [
+    "___addl"
+   ],
+   "objs": [
+    "LIBCMT:mantold.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3089c3",
+   "len": 94,
+   "names": [
+    "___add_12"
+   ],
+   "objs": [
+    "LIBCMT:mantold.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308a21",
+   "len": 46,
+   "names": [
+    "___shl_12"
+   ],
+   "objs": [
+    "LIBCMT:mantold.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308a4f",
+   "len": 45,
+   "names": [
+    "___shr_12"
+   ],
+   "objs": [
+    "LIBCMT:mantold.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308a7c",
+   "len": 206,
+   "names": [
+    "___mtold12"
+   ],
+   "objs": [
+    "LIBCMT:mantold.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308b4a",
+   "len": 631,
+   "names": [
+    "_$I10_OUTPUT"
+   ],
+   "objs": [
+    "LIBCMT:x10fout.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308dc1",
+   "len": 27,
+   "names": [
+    "?_ValidateRead@@YAHPBXI@Z",
+    "?_ValidateWrite@@YAHPAXI@Z"
+   ],
+   "objs": [
+    "LIBCMT:validate.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308ddc",
+   "len": 27,
+   "names": [
+    "?_ValidateRead@@YAHPBXI@Z",
+    "?_ValidateWrite@@YAHPAXI@Z"
+   ],
+   "objs": [
+    "LIBCMT:validate.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308df7",
+   "len": 23,
+   "names": [
+    "?_ValidateExecute@@YAHP6GHXZ@Z"
+   ],
+   "objs": [
+    "LIBCMT:validate.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308e0e",
+   "len": 59,
+   "names": [
+    "?terminate@@YAXXZ"
+   ],
+   "objs": [
+    "LIBCMT:hooks.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308e4a",
+   "len": 45,
+   "names": [
+    "?_inconsistency@@YAXXZ"
+   ],
+   "objs": [
+    "LIBCMT:hooks.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308e77",
+   "len": 129,
+   "names": [
+    "__close_lk"
+   ],
+   "objs": [
+    "LIBCMT:close.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308ef8",
+   "len": 155,
+   "names": [
+    "__close"
+   ],
+   "objs": [
+    "LIBCMT:close.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308f93",
+   "len": 43,
+   "names": [
+    "__freebuf"
+   ],
+   "objs": [
+    "LIBCMT:_freebuf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x308fbe",
+   "len": 296,
+   "names": [
+    "__flswbuf"
+   ],
+   "objs": [
+    "LIBCMT:_flswbuf.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3090e6",
+   "len": 546,
+   "names": [
+    "___ld12mul"
+   ],
+   "objs": [
+    "LIBCMT:tenpow.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309308",
+   "len": 118,
+   "names": [
+    "___multtenpow12"
+   ],
+   "objs": [
+    "LIBCMT:tenpow.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309380",
+   "len": 50,
+   "names": [
+    "_OutputDebugStringA@4"
+   ],
+   "objs": [
+    "xapilib:outputdebugstringa.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3093b2",
+   "len": 17,
+   "names": [
+    "_QueryPerformanceCounter@4"
+   ],
+   "objs": [
+    "xapilib:perfctr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3093c3",
+   "len": 20,
+   "names": [
+    "_QueryPerformanceFrequency@4"
+   ],
+   "objs": [
+    "xapilib:perfctr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3093d7",
+   "len": 45,
+   "names": [
+    "_XGetLanguage@0"
+   ],
+   "objs": [
+    "xapilib:xgetlanguage.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3095a6",
+   "len": 41,
+   "names": [
+    "_XGetVideoStandard@0"
+   ],
+   "objs": [
+    "xapilib:xgetvideostandard.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3095cf",
+   "len": 23,
+   "names": [
+    "_wvsprintfA@12",
+    "_wvsprintfW@12"
+   ],
+   "objs": [
+    "xapilib:kthunks.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3095e6",
+   "len": 19,
+   "names": [
+    "_wsprintfA",
+    "_wsprintfW"
+   ],
+   "objs": [
+    "xapilib:kthunks.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3095f9",
+   "len": 62,
+   "names": [
+    "_XapiReadFromStDb@12"
+   ],
+   "objs": [
+    "xapilib:xsndtrk.obj"
+   ],
+   "queue_start": true,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "redstar_aug18_2004"
+  },
+  {
+   "va": "0x309637",
+   "len": 102,
+   "names": [
+    "_XapiOpenStDbAndReadHeader@8"
+   ],
+   "objs": [
+    "xapilib:xsndtrk.obj"
+   ],
+   "queue_start": true,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "redstar_aug18_2004"
+  },
+  {
+   "va": "0x30969d",
+   "len": 552,
+   "names": [
+    "_XGetSoundtrackSongInfo@24"
+   ],
+   "objs": [
+    "xapilib:xsndtrk.obj"
+   ],
+   "queue_start": true,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "redstar_aug18_2004"
+  },
+  {
+   "va": "0x3098c5",
+   "len": 144,
+   "names": [
+    "_XOpenSoundtrackSong@8"
+   ],
+   "objs": [
+    "xapilib:xsndtrk.obj"
+   ],
+   "queue_start": true,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "redstar_aug18_2004"
+  },
+  {
+   "va": "0x309955",
+   "len": 108,
+   "names": [
+    "_XapiDirectoryInformationToFindData@8"
+   ],
+   "objs": [
+    "xapilib:filefind.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3099c1",
+   "len": 269,
+   "names": [
+    "_FindFirstFileA@8"
+   ],
+   "objs": [
+    "xapilib:filefind.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309ace",
+   "len": 81,
+   "names": [
+    "_FindNextFileA@8"
+   ],
+   "objs": [
+    "xapilib:filefind.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309b1f",
+   "len": 108,
+   "names": [
+    "_CreateDirectoryA@8"
+   ],
+   "objs": [
+    "xapilib:dir.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309b8b",
+   "len": 142,
+   "names": [
+    "_RemoveDirectoryA@4"
+   ],
+   "objs": [
+    "xapilib:dir.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309c19",
+   "len": 20,
+   "names": [
+    "_HexDigitToChar@4"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309c2d",
+   "len": 146,
+   "names": [
+    "_XapiSaveGameHashEncode@12"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309cbf",
+   "len": 72,
+   "names": [
+    "_XapiValidateAndSkipUnicodeSignature@8"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309d07",
+   "len": 387,
+   "names": [
+    "_XapiFindValueInMetaFile@16"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309e8a",
+   "len": 257,
+   "names": [
+    "_XapiFillInSaveGameData@12"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x309f8b",
+   "len": 128,
+   "names": [
+    "_XapiVerifyGameName@8"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a00b",
+   "len": 92,
+   "names": [
+    "_XapiTouchDirectoryTimestamp@4"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a067",
+   "len": 611,
+   "names": [
+    "_XCreateSaveGame@24"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a2ca",
+   "len": 208,
+   "names": [
+    "_XDeleteSaveGame@8"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a39a",
+   "len": 266,
+   "names": [
+    "_XFindFirstSaveGame@8"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a4a4",
+   "len": 71,
+   "names": [
+    "_XFindNextSaveGame@8"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a4eb",
+   "len": 86,
+   "names": [
+    "_XFindClose@4"
+   ],
+   "objs": [
+    "xapilib:xsaveapi.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a541",
+   "len": 66,
+   "names": [
+    "_XGetAudioFlags@0"
+   ],
+   "objs": [
+    "xapilib:xgetaudioflags.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a583",
+   "len": 101,
+   "names": [
+    "_IsBadReadPtr@8"
+   ],
+   "objs": [
+    "xapilib:process.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a5e8",
+   "len": 105,
+   "names": [
+    "_IsBadWritePtr@8"
+   ],
+   "objs": [
+    "xapilib:process.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a651",
+   "len": 14,
+   "names": [
+    "_IsBadCodePtr@4"
+   ],
+   "objs": [
+    "xapilib:process.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a65f",
+   "len": 8,
+   "names": [
+    "_GetTickCount@0",
+    "_XGetAVPack@0"
+   ],
+   "objs": [
+    "xapilib:datetime.obj",
+    "xapilib:xgetavpack.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30a66f",
+   "len": 403,
+   "names": [
+    "_prvAdaptTrigToSubframeConfig_XDS@4"
+   ],
+   "objs": [
+    "dsound:float.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "redstar_aug18_2004"
+  },
+  {
+   "va": "0x30aba0",
+   "len": 6,
+   "names": [
+    "?CalcConeAngle@CHRTFSource@DirectSound@@SGXABU_D3DVECTOR@@0PAM@Z",
+    "@IofCompleteRequest@8",
+    "@KfLowerIrql@4",
+    "@KfRaiseIrql@4",
+    "@ObfDereferenceObject@4",
+    "_AvGetSavedDataAddress@0"
+   ],
+   "objs": [
+    "d3d8:d3dbase.obj",
+    "dsound:dsapi.obj",
+    "xapilib:kthunks.obj",
+    "xapilib:physical.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x30abb0",
+   "len": 22,
+   "names": [
+    "_Direct3D_SetPushBufferSize@8"
+   ],
+   "objs": [
+    "d3d8:d3ddev.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "M",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3100e0",
+   "len": 35,
+   "names": [
+    "__strlwr",
+    "_strlwr"
+   ],
+   "objs": [
+    "LIBCMT:strlwr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310110",
+   "len": 117,
+   "names": [
+    "__aullrem"
+   ],
+   "objs": [
+    "LIBCMT:ullrem.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310185",
+   "len": 94,
+   "names": [
+    "_wcsstr"
+   ],
+   "objs": [
+    "LIBCMT:wcsstr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3101f0",
+   "len": 33,
+   "names": [
+    "__allshr"
+   ],
+   "objs": [
+    "LIBCMT:llshr.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310211",
+   "len": 48,
+   "names": [
+    "?_JumpToContinuation@@YGXPAXPAUEHRegistrationNode@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310241",
+   "len": 7,
+   "names": [
+    "?_CallMemberFunction0@@YGXPAX0@Z",
+    "?_CallMemberFunction1@@YGXPAX00@Z",
+    "?_CallMemberFunction2@@YGXPAX00H@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": true,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310248",
+   "len": 82,
+   "names": [
+    "?_UnwindNestedFrames@@YGXPAUEHRegistrationNode@@PAUEHExceptionRecord@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x31029a",
+   "len": 54,
+   "names": [
+    "___CxxFrameHandler"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3102d0",
+   "len": 59,
+   "names": [
+    "?CatchGuardHandler@@YA?AW4_EXCEPTION_DISPOSITION@@PAUEHExceptionRecord@@PAUCatchGuardRN@@PAX2@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x31030b",
+   "len": 199,
+   "names": [
+    "?_CallSETranslator@@YAHPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAX2PBU_s_FuncInfo@@H1@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310484",
+   "len": 122,
+   "names": [
+    "?_GetRangeOfTrysToCheck@@YAPBU_s_TryBlockMapEntry@@PBU_s_FuncInfo@@HHPAI1@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3104fe",
+   "len": 40,
+   "names": [
+    "?_CreateFrameInfo@@YAPAUFrameInfo@@PAU1@PAX@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310526",
+   "len": 33,
+   "names": [
+    "?IsExceptionObjectToBeDestroyed@@YAHPAX@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310547",
+   "len": 76,
+   "names": [
+    "?_FindAndUnlinkFrame@@YAXPAUFrameInfo@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310593",
+   "len": 89,
+   "names": [
+    "?_CallCatchBlock2@@YAPAXPAUEHRegistrationNode@@PBU_s_FuncInfo@@PAXHK@Z"
+   ],
+   "objs": [
+    "LIBCMT:trnsctrl.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3105ec",
+   "len": 31,
+   "names": [
+    "__EH_prolog"
+   ],
+   "objs": [
+    "LIBCMT:ehprolog.obj"
+   ],
+   "queue_start": false,
+   "queue_status": null,
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x31060b",
+   "len": 62,
+   "names": [
+    "_xtoa"
+   ],
+   "objs": [
+    "LIBCMT:xtoa.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3106d5",
+   "len": 93,
+   "names": [
+    "?__ArrayUnwind@@YGXPAXIHP6EX0@Z@Z"
+   ],
+   "objs": [
+    "LIBCMT:ehvecdtr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x3107c4",
+   "len": 114,
+   "names": [
+    "?TypeMatch@@YAHPBU_s_HandlerType@@PBU_s_CatchableType@@PBU_s_ThrowInfo@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310836",
+   "len": 30,
+   "names": [
+    "?FrameUnwindFilter@@YAHPAU_EXCEPTION_POINTERS@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310922",
+   "len": 69,
+   "names": [
+    "___DestructExceptionObject"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310967",
+   "len": 31,
+   "names": [
+    "?AdjustPointer@@YAPAXPAXABUPMD@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310b2d",
+   "len": 380,
+   "names": [
+    "?BuildCatchObject@@YAXPAUEHExceptionRecord@@PAXPBU_s_HandlerType@@PBU_s_CatchableType@@@Z"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310ca9",
+   "len": 103,
+   "names": [
+    "?CatchIt@@YAXPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAU_CONTEXT@@PAXPBU_s_FuncInfo@@PBU_s_HandlerType@@PBU_s_CatchableType@@PBU_s_TryBlockMapEntry@@H1E@Z"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310d10",
+   "len": 190,
+   "names": [
+    "?FindHandlerForForeignException@@YAXPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAU_CONTEXT@@PAXPBU_s_FuncInfo@@HH1@Z"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310dce",
+   "len": 479,
+   "names": [
+    "?FindHandler@@YAXPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAU_CONTEXT@@PAXPBU_s_FuncInfo@@EH1@Z"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x310fad",
+   "len": 162,
+   "names": [
+    "___InternalCxxFrameHandler"
+   ],
+   "objs": [
+    "LIBCMT:frame.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  },
+  {
+   "va": "0x311050",
+   "len": 76,
+   "names": [
+    "__CallSettingFrame@12"
+   ],
+   "objs": [
+    "LIBCMT:lowhelpr.obj"
+   ],
+   "queue_start": true,
+   "queue_status": "U",
+   "ambiguous": false,
+   "source": "godfather"
+  }
+ ]
+}

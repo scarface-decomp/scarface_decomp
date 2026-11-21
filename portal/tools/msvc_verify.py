@@ -691,8 +691,15 @@ def find_hardcoded_addresses(code: bytes, reloc_offsets: set, image) -> List[str
 SSE_FLAG = "/arch:SSE"
 
 
+# Instructions the 2003 compiler writes only under /arch:SSE: it then targets the Pentium III, whose
+# conditional moves and flag-setting float compares it uses too. Without it, it compares with
+# fcom/fnstsw and never writes these (none occur in the Xbox code built without /arch:SSE).
+P6_ONLY = ("cmov", "fcomi", "fcompi", "fcomip", "fucomi", "fucompi", "fucomip")   # the disassembler spells the popping forms fcompi/fucompi
+
+
 def uses_sse(target: Optional[bytes]) -> bool:
-    """True when the function's own instructions use the SSE registers (xmm0-xmm7)."""
+    """True when the function's own instructions show it was built with /arch:SSE: it uses the SSE
+    registers (xmm0-xmm7), a conditional move, or an fcomi-style compare."""
     if not target:
         return False
     try:
@@ -700,15 +707,45 @@ def uses_sse(target: Optional[bytes]) -> bool:
     except ImportError:
         return False
     md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
-    return any("xmm" in insn.op_str for insn in md.disasm(bytes(target), 0))
+    return any("xmm" in insn.op_str or insn.mnemonic.startswith(P6_ONLY)
+               for insn in md.disasm(bytes(target), 0))
+
+
+def verify_line_options(text: str) -> Dict[str, str]:
+    """--match and --flags from a '// verify: python portal/verify.py ...' line at the top of a file: a file
+    whose function can't be picked by its own name (a template instantiation, a compiler helper) or that
+    is built without one of the usual flags says so there. {} when there is no such line."""
+    import shlex
+    m = re.search(r"^//\s*verify:\s*(.*)$", text, re.M)
+    if not m:
+        return {}
+    try:
+        words = shlex.split(m.group(1).split("   (")[0])
+    except ValueError:
+        return {}
+    out = {}
+    for flag, key in (("--match", "match"), ("--flags", "flags")):
+        if flag in words[:-1]:
+            out[key] = words[words.index(flag) + 1]
+    return out
+
+
+def allowed_flags(own: str, asked: str) -> str:
+    """'' when the flags asked for are the function's own flags, fewer of them, or /arch:SSE added (a unit
+    built without /EHsc, say); otherwise why not. Nothing else may reach the compiler from a submission."""
+    words = str(asked).split()
+    ok = set(str(own).split()) | {SSE_FLAG}
+    if not words or len(set(words)) != len(words) or any(w not in ok for w in words):
+        return f"flags: only the function's own flags ({own}), fewer of them, or {SSE_FLAG}."
+    return ""
 
 
 def flag_options(bin_name: str, flags: str, target: Optional[bytes] = None) -> List[str]:
     """The flag sets to try for one function, the recorded ones first.
 
     PC also tries /G7, because a few PC functions only match with it. The Xbox builds (retail and
-    prototype) also try /arch:SSE when the function itself uses the SSE registers: parts of the game
-    were built for the console's Pentium III that way, and the compiler never writes those
+    prototype) also try /arch:SSE when the function's own instructions show it (uses_sse): parts of
+    the game were built for the console's Pentium III that way, and the compiler never writes those
     instructions without it. The portal, the command-line checks and the re-verifier all use this."""
     opts = [flags]
     if bin_name == "pc" and "/G6" in flags:

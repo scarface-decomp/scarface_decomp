@@ -18361,6 +18361,91 @@
       "name": "pure3d::AdaptPDDI::Fatal",
       "by": "the Hit & Run prototype's linker map, through the retail Xbox build",
       "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP); its Fatal__9AdaptPDDIPCcT1i pairs with the function at 0x001520A0 of Hit & Run's retail Xbox build by the same slot of the class's table of virtual functions in both builds; its parameter list adds up to the bytes the Xbox function's ret removes, and that function pairs with this one by the same slot of the same class's table of virtual functions; the same ret N."
+    },
+    "xb:0x002FBA99": {
+      "name": "_purecall",
+      "by": "examiner (A1b) and Claude Opus 5.5, checked against the code",
+      "why": "Every slot of core::IRefCount's vtable (0x0039E22C) and every pure virtual slot elsewhere points here. It calls the handler at 0x004C066C if one is set, then _amsg_exit (0x002FF3F0) with 25, the C runtime's pure-virtual-call error. The old name AbstractClassRep::vfunc_01 came from one of those pure slots."
+    },
+    "xb:0x002FF74E": {
+      "name": "std::exception::what",
+      "by": "examiner (A1b) and Claude Opus 5.5, checked against the code",
+      "why": "Returns the exception's stored message (+4) or, without one, the C++ library's \"Unknown exception\" text (0x003E201C); it sits in the C runtime's part of the program, after the game's code."
+    },
+    "xb:0x00234837": {
+      "name": "GetCurrentThreadId",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 13 bytes (addresses masked) as _GetCurrentThreadId@0 (xapilib:thread.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x002FCDB0": {
+      "name": "memcpy",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 262 bytes (addresses masked) as _memcpy (LIBCMT:memcpy.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x002FD1C3": {
+      "name": "exit",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 12 bytes (addresses masked) as _exit (LIBCMT:crt0dat.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x002FF0DD": {
+      "name": "_shift",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 35 bytes (addresses masked) as __shift (LIBCMT:cvt.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x002FF100": {
+      "name": "_cftoe2",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 169 bytes (addresses masked) as __cftoe2 (LIBCMT:cvt.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x002FF207": {
+      "name": "_cftof2",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 167 bytes (addresses masked) as __cftof2 (LIBCMT:cvt.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x002FF738": {
+      "name": "exception::~exception",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 22 bytes (addresses masked) as ??1exception@@UAE@XZ (LIBCMT:stdexcpt.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x0030042D": {
+      "name": "_statfp",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 11 bytes (addresses masked) as __statfp (LIBCMT:fpctrl.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x00300438": {
+      "name": "_clrfp",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 12 bytes (addresses masked) as __clrfp (LIBCMT:fpctrl.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x00302203": {
+      "name": "DName::DName",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 37 bytes (addresses masked) as ??0DName@@QAE@D@Z (LIBCMT:xundname.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x0030A651": {
+      "name": "IsBadCodePtr",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 14 bytes (addresses masked) as _IsBadCodePtr@4 (xapilib:process.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x00310967": {
+      "name": "AdjustPointer",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 31 bytes (addresses masked) as ?AdjustPointer@@YAPAXPAXABUPMD@@@Z (LIBCMT:frame.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x002FBA1D": {
+      "name": "srand",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 13 bytes (addresses masked) as _srand (LIBCMT:rand.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x00300570": {
+      "name": "_errno",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 9 bytes (addresses masked) as __errno (LIBCMT:dosmap.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x00300579": {
+      "name": "__doserrno",
+      "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
+      "why": "The same 9 bytes (addresses masked) as ___doserrno (LIBCMT:dosmap.obj) in that build, and that symbol is found once."
     }
   },
   "members": {

@@ -1,0 +1,328 @@
+{
+ "schema": "scarface_queue_exclusions_v1",
+ "note": "Starts the queue leaves out that reports/library_functions.json does not cover. library: a Microsoft library function (C runtime, XAPILIB) found byte for byte in another game's build with the same SDK, which reports/library_functions.json missed. bink: RAD Bink, third-party code linked into the Xbox game's own section (called from the BINK section, padded with 0x90 where the game's compiler pads with 0xCC). nonstart: not the start of a function (an exception-handling funclet that reads its parent's frame, a label inside another function, a misaligned decode, or a shared tail). From the examiner's A1 pass over default.xbe; a matched function is never left out.",
+ "starts": {
+  "xb": [
+   {
+    "va": "0x00234837",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) _GetCurrentThreadId@0 from xapilib:thread.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x00238741",
+    "kind": "nonstart",
+    "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
+   },
+   {
+    "va": "0x00238935",
+    "kind": "nonstart",
+    "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
+   },
+   {
+    "va": "0x00239060",
+    "kind": "nonstart",
+    "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
+   },
+   {
+    "va": "0x00239868",
+    "kind": "nonstart",
+    "why": "inside extent of 0x2397e9"
+   },
+   {
+    "va": "0x002FCDB0",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) _memcpy from LIBCMT:memcpy.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x002FD1C3",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) _exit from LIBCMT:crt0dat.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x002FD22F",
+    "kind": "nonstart",
+    "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
+   },
+   {
+    "va": "0x002FF0DD",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) __shift from LIBCMT:cvt.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x002FF100",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) __cftoe2 from LIBCMT:cvt.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x002FF207",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) __cftof2 from LIBCMT:cvt.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x002FF738",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) ??1exception@@UAE@XZ from LIBCMT:stdexcpt.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x002FF99D",
+    "kind": "nonstart",
+    "why": "x87 math helper shared tail/entry fragment"
+   },
+   {
+    "va": "0x002FFA49",
+    "kind": "nonstart",
+    "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
+   },
+   {
+    "va": "0x0030042D",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) __statfp from LIBCMT:fpctrl.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x00300438",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) __clrfp from LIBCMT:fpctrl.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x0030143C",
+    "kind": "nonstart",
+    "why": "inside extent of 0x30139c"
+   },
+   {
+    "va": "0x00302203",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) ??0DName@@QAE@D@Z from LIBCMT:xundname.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x00305D1A",
+    "kind": "nonstart",
+    "why": "inside extent of 0x305d13"
+   },
+   {
+    "va": "0x00306001",
+    "kind": "nonstart",
+    "why": "x87 math helper shared tail/entry fragment"
+   },
+   {
+    "va": "0x00306D92",
+    "kind": "nonstart",
+    "why": "EH/SEH funclet inside 0x306c57"
+   },
+   {
+    "va": "0x0030715D",
+    "kind": "nonstart",
+    "why": "EH/SEH funclet inside 0x3070d6"
+   },
+   {
+    "va": "0x003072BD",
+    "kind": "nonstart",
+    "why": "EH/SEH funclet inside 0x307236"
+   },
+   {
+    "va": "0x003074F3",
+    "kind": "nonstart",
+    "why": "EH/SEH funclet inside 0x30746c"
+   },
+   {
+    "va": "0x0030827D",
+    "kind": "nonstart",
+    "why": "EH/SEH funclet inside 0x3081df"
+   },
+   {
+    "va": "0x00308F6F",
+    "kind": "nonstart",
+    "why": "EH/SEH funclet inside 0x308ef8"
+   },
+   {
+    "va": "0x00309C0A",
+    "kind": "nonstart",
+    "why": "inside extent of 0x309b8b"
+   },
+   {
+    "va": "0x0030A651",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) _IsBadCodePtr@4 from xapilib:process.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x0030A9B4",
+    "kind": "nonstart",
+    "why": "misaligned decode (first insn pop; prev byte 8b)"
+   },
+   {
+    "va": "0x0030ABD0",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030AC40",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030ADC0",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030AF20",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030AFB0",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030B700",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030BC23",
+    "kind": "nonstart",
+    "why": "inside extent of 0x30b700"
+   },
+   {
+    "va": "0x0030C1E0",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030CA40",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030D2C0",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030D690",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030DC00",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030E1B0",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030E830",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030EA20",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030ED90",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030EE50",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030EF10",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030F0F0",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030F160",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030F560",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030FA00",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030FAA0",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030FB40",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x0030FC70",
+    "kind": "bink",
+    "why": "RAD Bink: 0x90 (nop) padding, non-MSVC codegen; reached from BINK section or its siblings"
+   },
+   {
+    "va": "0x00310241",
+    "kind": "nonstart",
+    "why": "misaligned decode (first insn pop; prev byte 00)"
+   },
+   {
+    "va": "0x003106BD",
+    "kind": "nonstart",
+    "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
+   },
+   {
+    "va": "0x0031077B",
+    "kind": "nonstart",
+    "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
+   },
+   {
+    "va": "0x00310967",
+    "kind": "library",
+    "why": "Byte for byte (addresses masked) ?AdjustPointer@@YAPAXPAXABUPMD@@@Z from LIBCMT:frame.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
+   },
+   {
+    "va": "0x00310AC9",
+    "kind": "nonstart",
+    "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
+   },
+   {
+    "va": "0x00311144",
+    "kind": "nonstart",
+    "why": "x87 math helper shared tail/entry fragment"
+   },
+   {
+    "va": "0x00311175",
+    "kind": "nonstart",
+    "why": "x87 math helper shared tail/entry fragment"
+   },
+   {
+    "va": "0x00311187",
+    "kind": "nonstart",
+    "why": "x87 math helper shared tail/entry fragment"
+   },
+   {
+    "va": "0x00312434",
+    "kind": "nonstart",
+    "why": "x87 math helper shared tail/entry fragment"
+   },
+   {
+    "va": "0x00317881",
+    "kind": "nonstart",
+    "why": "misaligned decode (first insn js; prev byte 68)"
+   }
+  ]
+ }
+}

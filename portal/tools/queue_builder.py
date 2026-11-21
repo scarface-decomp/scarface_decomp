@@ -214,7 +214,7 @@ def tier(size: int) -> dict:
 
 def seed_data(root: Path) -> dict:
     """The tracked inputs that, with the game files, decide the queue: reports/known_functions.json,
-    reports/extra_function_starts.json and reports/library_functions.json. Pass as
+    reports/extra_function_starts.json, reports/library_functions.json and reports/queue_exclusions.json. Pass as
     build_queue(..., **seed_data(root))."""
     def load(name: str) -> dict:
         p = root / "reports" / name
@@ -222,9 +222,12 @@ def seed_data(root: Path) -> dict:
             return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
         except ValueError:
             return {}
+    library = {b: list(v) for b, v in load("library_functions.json").get("functions", {}).items()}
+    for b, rows in load("queue_exclusions.json").get("starts", {}).items():   # Bink, and starts that are not functions
+        library.setdefault(b, []).extend(r["va"] for r in rows)
     return {"known_functions": load("known_functions.json").get("functions", []),
             "extra_starts": load("extra_function_starts.json").get("starts", {}),
-            "library": load("library_functions.json").get("functions", {})}
+            "library": library}
 
 
 def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = None,
