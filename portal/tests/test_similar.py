@@ -21,7 +21,19 @@ RET_DAT = bytes.fromhex("B8A49D4300C3")          # mov eax, offset DAT; ret
 def test_tokens_ignore_registers_offsets_and_addresses():
     assert SIM.tokens(VEC_AT_64) == SIM.tokens(VEC_AT_24)
     assert SIM.tokens(RET_DAT) == ["mov r,i", "ret"]
-    assert SIM.tokens(bytes.fromhex("8B442404"))[0] == "mov r,m32"
+    assert SIM.tokens(bytes.fromhex("8B442404"))[0] == "mov r,m32s"
+
+
+def test_memory_operands_say_what_they_are_based_on():
+    member = SIM.tokens(bytes.fromhex("8B4118 C3".replace(" ", "")))        # mov eax,[ecx+0x18]: this->m_Field18
+    arg = SIM.tokens(bytes.fromhex("8B442404 8B4018 C3".replace(" ", "")))  # mov eax,[esp+4]; mov eax,[eax+0x18]
+    glob = SIM.tokens(bytes.fromhex("A13CD18500 8B4018 C3".replace(" ", "")))  # mov eax,[DAT]; mov eax,[eax+0x18]
+    call_imp = SIM.tokens(bytes.fromhex("FF1528F07200"))                   # call [import]
+    call_vt = SIM.tokens(bytes.fromhex("FF5004"))                          # call [eax+4]: a virtual call
+    assert member == ["mov r,m32", "ret"]
+    assert arg[0] == "mov r,m32s" and glob[0] == "mov r,m32a" and arg[1] == glob[1] == "mov r,m32"
+    assert call_imp == ["call m32a"] and call_vt == ["call m32"]
+    assert SIM.tokens(bytes.fromhex("8B4508"))[0] == "mov r,m32s"           # mov eax,[ebp+8]
 
 
 @pytest.mark.parametrize("a,b", [("kitten", "sitting"), ("", "abc"), ("abc", "abc"), ("flaw", "lawn")])
