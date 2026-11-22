@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/TextMenuItem.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/TextMenuItem.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 13 functions matched (46.15%). NOT COMPLETE YET.
-// The 7 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 13 functions matched (53.85%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -94,6 +94,35 @@ int TextMenuItem::vfunc_16()
 }
 
 } }
+
+// ============================================================================
+// [VERIFIED] pure3d::frontend::TextMenuItem::vfunc_22 (0x002496C0, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Turns flag bit 3 of the menu item's byte at +0x2D on or off.
+// ============================================================================
+// bin: proto
+// va: 0x002496C0
+// what: Turns flag bit 3 of the menu item's byte at +0x2D on or off.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00088360, nearest by portal/tools/similar.py)
+namespace pure3d {
+namespace frontend {
+class TextMenuItem
+{
+public:
+    void vfunc_22(bool value);
+    char m_pad00[0x2D];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+    unsigned char m_Flag3 : 1;
+};
+
+void TextMenuItem::vfunc_22(bool value)
+{
+    m_Flag3 = value;
+}
+}
+}
 
 // ============================================================================
 // [VERIFIED] pure3d::frontend::TextMenuItem::vfunc_18 (0x00249860, 82 B)

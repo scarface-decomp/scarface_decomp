@@ -13,12 +13,28 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DDC80</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DDF50</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DDF90</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DDFD0</loc>
     <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DE1D0</loc>
     <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DE590</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DE680</loc>
@@ -637,6 +653,18 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E7480</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E7490</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E74A0</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E77B0</loc>
     <lastmod>2026-11-13</lastmod>
   </url>
@@ -731,6 +759,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E9EC0</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E9F50</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EA060</loc>
@@ -1077,6 +1109,14 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EFC80</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EFCE0</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006EFD30</loc>
     <lastmod>2026-11-21</lastmod>
   </url>
@@ -1203,6 +1243,14 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F4D30</loc>
     <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F4D80</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F4D90</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006F4DB0</loc>
@@ -2067,6 +2115,14 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00700EE0</loc>
     <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00700F20</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00700F30</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=pc%3A0x00701150</loc>
@@ -4961,6 +5017,10 @@
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00049090</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00049450</loc>
     <lastmod>2026-11-10</lastmod>
   </url>
@@ -5183,6 +5243,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0004F8B0</loc>
     <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0004F8C0</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0004F8D0</loc>
@@ -6867,6 +6931,14 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0007DE40</loc>
     <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0007DF00</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0007DF20</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0007DF40</loc>
@@ -8657,6 +8729,10 @@
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000BEB80</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000BEBA0</loc>
     <lastmod>2026-11-14</lastmod>
   </url>
@@ -8763,6 +8839,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000BF420</loc>
     <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000BF460</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000BF4B0</loc>
@@ -8975,6 +9055,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000C6E20</loc>
     <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000C6E30</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000C6EB0</loc>
@@ -10641,6 +10725,10 @@
     <lastmod>2026-11-14</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000E1470</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000E1490</loc>
     <lastmod>2026-11-22</lastmod>
   </url>
@@ -11031,6 +11119,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000F3910</loc>
     <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000F3920</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000F3AE0</loc>
@@ -15089,6 +15181,10 @@
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00148580</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001485A0</loc>
     <lastmod>2026-11-14</lastmod>
   </url>
@@ -15162,6 +15258,10 @@
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00148D40</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00148E10</loc>
     <lastmod>2026-11-22</lastmod>
   </url>
   <url>
@@ -21993,6 +22093,10 @@
     <lastmod>2026-11-14</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001CCFE0</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001CD040</loc>
     <lastmod>2026-11-14</lastmod>
   </url>
@@ -25193,6 +25297,10 @@
     <lastmod>2026-11-14</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002054C0</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00205500</loc>
     <lastmod>2026-11-14</lastmod>
   </url>
@@ -27565,6 +27673,10 @@
     <lastmod>2026-11-14</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002496C0</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00249830</loc>
     <lastmod>2026-11-14</lastmod>
   </url>
@@ -27843,6 +27955,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00250B20</loc>
     <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00250B40</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002522C0</loc>
@@ -31675,6 +31791,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002A80E0</loc>
     <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002A8240</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002A8260</loc>
@@ -43203,6 +43323,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0010A7F0</loc>
     <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0010A800</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0010AA40</loc>
@@ -55253,6 +55377,10 @@
     <lastmod>2026-11-13</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00208370</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002083D0</loc>
     <lastmod>2026-11-13</lastmod>
   </url>
@@ -58717,6 +58845,10 @@
     <lastmod>2026-11-14</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00248110</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00248150</loc>
     <lastmod>2026-11-14</lastmod>
   </url>
@@ -61805,6 +61937,10 @@
     <lastmod>2026-11-13</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029FEA0</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002A06A0</loc>
     <lastmod>2026-11-14</lastmod>
   </url>
@@ -63149,6 +63285,10 @@
     <lastmod>2026-11-13</lastmod>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C3CB0</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C3E30</loc>
     <lastmod>2026-11-10</lastmod>
   </url>
@@ -63223,6 +63363,10 @@
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C5470</loc>
     <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C54A0</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C5660</loc>

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (3391 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (3399 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,391 of 11,111 functions matched (30.52%). NOT COMPLETE YET.
-// The 7,720 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3,399 of 11,111 functions matched (30.59%). NOT COMPLETE YET.
+// The 7,712 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -21621,6 +21621,55 @@ void Class_0007DE40::sub_0007DE40()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007DF00 (0x0007DF00, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 2 of the byte at +0x149.
+// ============================================================================
+// bin: proto
+// va: 0x0007DF00
+// what: Sets flag bit 2 of the byte at +0x149.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0002A340, nearest by portal/tools/similar.py)
+class Class_0007DF00
+{
+public:
+    void sub_0007DF00(bool value);
+    char m_pad00[0x149];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+void Class_0007DF00::sub_0007DF00(bool value)
+{
+    m_Flag2 = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007DF20 (0x0007DF20, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 3 of the byte at +0x149.
+// ============================================================================
+// bin: proto
+// va: 0x0007DF20
+// what: Sets flag bit 3 of the byte at +0x149.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00088360, nearest by portal/tools/similar.py)
+class Class_0007DF20
+{
+public:
+    void sub_0007DF20(bool value);
+    char m_pad00[0x149];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+    unsigned char m_Flag3 : 1;
+};
+
+void Class_0007DF20::sub_0007DF20(bool value)
+{
+    m_Flag3 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007E050 (0x0007E050, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -32503,6 +32552,30 @@ bool Class_000BEB70::sub_000BEB70()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000BEB80 (0x000BEB80, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 2 of the byte at +0x19C.
+// ============================================================================
+// bin: proto
+// va: 0x000BEB80
+// what: Sets flag bit 2 of the byte at +0x19C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0002A340, nearest by portal/tools/similar.py)
+class Class_000BEB80
+{
+public:
+    void sub_000BEB80(bool value);
+    char m_pad00[0x19C];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+void Class_000BEB80::sub_000BEB80(bool value)
+{
+    m_Flag2 = value;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000BEBA0 (0x000BEBA0, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -33310,6 +33383,31 @@ int Class_000BF420::sub_000BF420()
     m_Field120 = 0;
 L_34:
     return m_Field120;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000BF460 (0x000BF460, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 3 of the byte at +0x19C.
+// ============================================================================
+// bin: proto
+// va: 0x000BF460
+// what: Sets flag bit 3 of the byte at +0x19C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00088360, nearest by portal/tools/similar.py)
+class Class_000BF460
+{
+public:
+    void sub_000BF460(bool value);
+    char m_pad00[0x19C];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+    unsigned char m_Flag3 : 1;
+};
+
+void Class_000BF460::sub_000BF460(bool value)
+{
+    m_Flag3 = value;
 }
 
 // ============================================================================
@@ -34856,6 +34954,31 @@ public:
 int Class_000C6E20::sub_000C6E20()
 {
     return m_Field160;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C6E30 (0x000C6E30, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 3 of the byte at +0x238.
+// ============================================================================
+// bin: proto
+// va: 0x000C6E30
+// what: Sets flag bit 3 of the byte at +0x238.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00088360, nearest by portal/tools/similar.py)
+class Class_000C6E30
+{
+public:
+    void sub_000C6E30(bool value);
+    char m_pad00[0x238];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+    unsigned char m_Flag3 : 1;
+};
+
+void Class_000C6E30::sub_000C6E30(bool value)
+{
+    m_Flag3 = value;
 }
 
 // ============================================================================
@@ -40714,6 +40837,30 @@ public:
 void Class_000E1450::sub_000E1450()
 {
     ((Object*)sub_00028120(m_Field84))->sub_0014A290();
+}
+
+// ============================================================================
+// [VERIFIED] sub_000E1470 (0x000E1470, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_00028120 gives a nonzero result for the value at +0x2E0.
+// ============================================================================
+// bin: proto
+// va: 0x000E1470
+// what: Says whether sub_00028120 gives a nonzero result for the value at +0x2E0.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000F5770, nearest by portal/tools/similar.py)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_000E1470
+{
+public:
+    int sub_000E1470();
+    char m_pad00[0x2E0];
+    int m_Field2E0; // +0x2E0
+};
+
+int Class_000E1470::sub_000E1470()
+{
+    return sub_00028120(m_Field2E0) != 0;
 }
 
 // ============================================================================
@@ -55611,6 +55758,38 @@ void Class_00148560::sub_00148560(float value)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00148580 (0x00148580, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x88 of the object pointed to at +0xA8, or a fixed default when there is none.
+// ============================================================================
+// bin: proto
+// va: 0x00148580
+// what: Returns the number at +0x88 of the object pointed to at +0xA8, or a fixed default when there is none.
+// tool: Claude Opus 5.5 (transplanted from xb:0x001649D0, nearest by portal/tools/similar.py)
+extern "C" const float DAT_0037CE50;
+
+struct Obj_00148580
+{
+    char m_pad00[0x88];
+    float m_Field88; // +0x88
+};
+
+class Class_00148580
+{
+public:
+    float sub_00148580();
+    char m_pad00[0xA8];
+    Obj_00148580* m_FieldA8; // +0xA8
+};
+
+float Class_00148580::sub_00148580()
+{
+    if (m_FieldA8)
+        return m_FieldA8->m_Field88;
+    return DAT_0037CE50;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001485A0 (0x001485A0, 14 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -55992,6 +56171,30 @@ public:
 void *Class_00148D40::sub_00148D40()
 {
     return sub_00028120(m_FieldD8);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00148E10 (0x00148E10, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_00028120 gives a nonzero result for the value at +0x3DC.
+// ============================================================================
+// bin: proto
+// va: 0x00148E10
+// what: Says whether sub_00028120 gives a nonzero result for the value at +0x3DC.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000F5770, nearest by portal/tools/similar.py)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_00148E10
+{
+public:
+    int sub_00148E10();
+    char m_pad00[0x3DC];
+    int m_Field3DC; // +0x3DC
+};
+
+int Class_00148E10::sub_00148E10()
+{
+    return sub_00028120(m_Field3DC) != 0;
 }
 
 // ============================================================================

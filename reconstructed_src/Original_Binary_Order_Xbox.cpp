@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 8,218 of 19,501 functions matched (42.14%). NOT COMPLETE YET.
-// The 11,283 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 8,224 of 19,501 functions matched (42.17%). NOT COMPLETE YET.
+// The 11,277 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -89841,7 +89841,80 @@ void* AITask_SharkWander::vfunc_00()
     return DAT_00429764;
 }
 
-// [TODO] 0x0010A800 AITask_SharkInteractWithSwimmer::vfunc_39 (13 B)
+// ============================================================================
+// [VERIFIED] AITask_SharkInteractWithSwimmer::vfunc_39 (0x0010A800, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AITask_SharkInteractWithSwimmer::vfunc_36 (Proto 0x000F3920), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0010A800
+// what: Calls sub_0010A690 when the value at +0x4C is set.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00050DA0, nearest by portal/tools/similar.py)
+// AITask_SharkInteractWithSwimmer::vfunc_39
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_0010A690(void);
+
+
+class AITask_SharkInteractWithSwimmer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    char m_pad04[0x48];
+    int m_Field4C; // +0x4C
+};
+
+void AITask_SharkInteractWithSwimmer::vfunc_39()
+{
+    int r_eax;
+
+    r_eax = m_Field4C;
+    if (r_eax) {
+        sub_0010A690();
+    }
+}
+
 // [TODO] 0x0010A810 AITask_SharkInteractWithSwimmer::vfunc_41 (187 B)
 // [TODO] 0x0010A8D0 sub_0010A8D0 (238 B)
 // [TODO] 0x0010A9C0 sub_0010A9C0 (117 B)
@@ -205131,7 +205204,46 @@ template <> int ConcreteClassRep<VehicleRenderMaskTemplate>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x00208370 ConcreteClassRep<VehicleRenderMaskTemplate>::vfunc_02 (84 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<VehicleRenderMaskTemplate>::vfunc_02 (0x00208370, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<VehicleFixedWeaponTemplate>::vfunc_02 (Proto 0x001CCFE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x00208370
+// what: Fills in the script system's description of the VehicleRenderMaskTemplate class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0019F9B0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00447814;
+extern "C" int DAT_00447818;
+extern "C" char DAT_00445F9C[];
+extern "C" char DAT_00445FAC[];
+extern "C" char DAT_00444668[];
+extern "C" int DAT_00444688;
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_00073780(int, int, int, int, int, int, int, int, int);
+
+class VehicleRenderMaskTemplate;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<VehicleRenderMaskTemplate>::vfunc_02()
+{
+    sub_00070520(DAT_00444688, DAT_00447814);
+    DAT_00447818 = (int)DAT_00444668;
+    sub_00073780((int)DAT_00445FAC, 8, 0, 0, 44, 0, 0, 0, 0);
+    sub_00073780((int)DAT_00445F9C, 8, 0, 0, 48, 0, 0, 0, 0);
+}
+
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleSirenTemplate>::vfunc_01 (0x002083D0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -237654,7 +237766,53 @@ int ControllerInputPointXBox::vfunc_14(int a1)
 
 // [TODO] 0x00248030 core::ControllerInputPointXBox::vfunc_13 (20 B)
 // [TODO] 0x00248050 sub_00248050 (181 B)
-// [TODO] 0x00248110 core::ControllerInputPointXBox::vfunc_06 (64 B)
+// ============================================================================
+// [VERIFIED] core::ControllerInputPointXBox::vfunc_06 (0x00248110, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::ControllerInputPointXBox::vfunc_06 (Proto 0x002054C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x00248110
+// what: Stores the value passed in at +0x14, clamped between 0 and 1.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00247FD0, nearest by portal/tools/similar.py)
+// core::ControllerInputPointXBox::vfunc_06
+
+
+namespace core {
+class ControllerInputPointXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(float value);
+
+    char m_pad04[0x10];
+    float m_Field14; // +0x14
+};
+
+// Clamps the value to [0, 1] and stores it.
+void ControllerInputPointXBox::vfunc_06(float value)
+{
+    if (value < 0.0f)
+    {
+        m_Field14 = 0.0f;
+    }
+    else if (value > 1.0f)
+    {
+        m_Field14 = 1.0f;
+    }
+    else
+    {
+        m_Field14 = value;
+    }
+}
+}
+
 // ============================================================================
 // [VERIFIED] core::ControllerInputPointXBox::vfunc_08 (0x00248150, 24 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -272621,7 +272779,60 @@ extern "C" void __cdecl sub_0029F7C0(int value)
 // [TODO] 0x0029FB53 sub_0029FB53 (540 B)
 // [TODO] 0x0029FD70 pure3d::d3dSimpleShader::vfunc_13 (53 B)
 // [TODO] 0x0029FDB0 sub_0029FDB0 (239 B)
-// [TODO] 0x0029FEA0 pure3d::d3dSimpleShader::vfunc_03 (56 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleShader::vfunc_03 (0x0029FEA0, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Tears down the shader: releases the object it holds, cleans up, and frees itself when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x0029FEA0
+// what: Tears down the shader: releases the object it holds, cleans up, and frees itself when asked to.
+// tool: Claude Opus 5.5 (transplanted from xb:0x002C4360, nearest by portal/tools/similar.py)
+// pure3d::d3dSimpleShader::vfunc_03
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_003D9D5C[];
+extern "C" void __cdecl sub_00027600(int);
+
+
+namespace pure3d {
+class d3dSimpleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dSimpleShader* vfunc_03(int a1);
+    void sub_0029A500();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+d3dSimpleShader* d3dSimpleShader::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_003D9D5C;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    sub_0029A500();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+}
+
 // [TODO] 0x0029FEE0 pure3d::d3dSimpleShader::vfunc_14 (915 B)
 // [TODO] 0x002A0280 pure3d::d3dSimpleShader::vfunc_24 (1055 B)
 // ============================================================================
@@ -286749,7 +286960,61 @@ Class_002C3C80* Class_002C3C80::sub_002C3C80(int a1)
     return this;
 }
 
-// [TODO] 0x002C3CB0 pure3d::d3dShadowShader::vfunc_03 (56 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowShader::vfunc_03 (0x002C3CB0, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dSimpleShader::vfunc_03 (0x0029FEA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C3CB0
+// what: Tears down the shader: releases the object it holds, cleans up, and frees itself when asked to.
+// tool: Claude Opus 5.5 (transplanted from xb:0x002C4360, nearest by portal/tools/similar.py)
+// pure3d::d3dShadowShader::vfunc_03
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_003DB85C[];
+extern "C" void __cdecl sub_00027600(int);
+
+
+namespace pure3d {
+class d3dShadowShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dShadowShader* vfunc_03(int a1);
+    void sub_0029A500();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+d3dShadowShader* d3dShadowShader::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_003DB85C;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    sub_0029A500();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+}
+
 // [TODO] 0x002C3CF0 pure3d::d3dShadowShader::vfunc_14 (310 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dSimpleCBVLitShader::vfunc_15 (0x002C3E30, 6 B)
@@ -287429,7 +287694,61 @@ Class_002C5470* Class_002C5470::sub_002C5470(int a1)
     return this;
 }
 
-// [TODO] 0x002C54A0 pure3d::d3dShadowDecalShader::vfunc_03 (56 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_03 (0x002C54A0, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dSimpleShader::vfunc_03 (0x0029FEA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C54A0
+// what: Tears down the shader: releases the object it holds, cleans up, and frees itself when asked to.
+// tool: Claude Opus 5.5 (transplanted from xb:0x002C4360, nearest by portal/tools/similar.py)
+// pure3d::d3dShadowDecalShader::vfunc_03
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_003DB9F4[];
+extern "C" void __cdecl sub_00027600(int);
+
+
+namespace pure3d {
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dShadowDecalShader* vfunc_03(int a1);
+    void sub_0029A500();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+d3dShadowDecalShader* d3dShadowDecalShader::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_003DB9F4;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    sub_0029A500();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
+}
+
 // [TODO] 0x002C54E0 pure3d::d3dShadowDecalShader::vfunc_14 (339 B)
 // [TODO] 0x002C5640 sub_002C5640 (28 B)
 // ============================================================================

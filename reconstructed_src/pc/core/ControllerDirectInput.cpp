@@ -1,13 +1,126 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/ControllerDirectInput.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/ControllerDirectInput.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 18 functions matched (11.11%). NOT COMPLETE YET.
-// The 16 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 18 functions matched (27.78%). NOT COMPLETE YET.
+// The 13 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::ControllerDirectInput::vfunc_05 (0x006DDC80, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address of the block at +0x144 inside the controller.
+// ============================================================================
+// bin: pc
+// va: 0x006DDC80
+// what: Returns the address of the block at +0x144 inside the controller.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006E4260, nearest by portal/tools/similar.py)
+// core::ControllerDirectInput::vfunc_05
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+
+namespace core {
+class ControllerDirectInput
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void* vfunc_05();
+    char m_pad04[0x140];
+    int m_Field144; // +0x144
+};
+
+void* ControllerDirectInput::vfunc_05()
+{
+    return &m_Field144;
+}
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerDirectInput::vfunc_08 (0x006DDF50, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number stored at +0x26C in the controller.
+// ============================================================================
+// bin: pc
+// va: 0x006DDF50
+// what: Returns the number stored at +0x26C in the controller.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006E1CF0, nearest by portal/tools/similar.py)
+// core::ControllerDirectInput::vfunc_08
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+
+namespace core {
+class ControllerDirectInput
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08();
+    char m_pad04[0x268];
+    int m_Field26C; // +0x26C
+};
+
+int ControllerDirectInput::vfunc_08()
+{
+    return m_Field26C;
+}
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerDirectInput::vfunc_13 (0x006DDF90, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number stored at +0x278 in the controller.
+// ============================================================================
+// bin: pc
+// va: 0x006DDF90
+// what: Returns the number stored at +0x278 in the controller.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006E1CF0, nearest by portal/tools/similar.py)
+// core::ControllerDirectInput::vfunc_13
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+
+namespace core {
+class ControllerDirectInput
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual int vfunc_13();
+    char m_pad04[0x274];
+    int m_Field278; // +0x278
+};
+
+int ControllerDirectInput::vfunc_13()
+{
+    return m_Field278;
+}
+}
 
 // ============================================================================
 // [VERIFIED] core::ControllerDirectInput::vfunc_00 (0x006DDFD0, 8 B)

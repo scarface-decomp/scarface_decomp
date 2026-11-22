@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/ControllerInputPointXBox.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/ControllerInputPointXBox.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 9 functions matched (55.56%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 9 functions matched (66.67%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -49,6 +49,52 @@ int ControllerInputPointXBox::vfunc_14(int a1)
     return a1;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] core::ControllerInputPointXBox::vfunc_06 (0x002054C0, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores the value passed in at +0x14, clamped between 0 and 1.
+// ============================================================================
+// bin: proto
+// va: 0x002054C0
+// what: Stores the value passed in at +0x14, clamped between 0 and 1.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00247FD0, nearest by portal/tools/similar.py)
+// core::ControllerInputPointXBox::vfunc_06
+
+
+namespace core {
+class ControllerInputPointXBox
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(float value);
+
+    char m_pad04[0x10];
+    float m_Field14; // +0x14
+};
+
+// Clamps the value to [0, 1] and stores it.
+void ControllerInputPointXBox::vfunc_06(float value)
+{
+    if (value < 0.0f)
+    {
+        m_Field14 = 0.0f;
+    }
+    else if (value > 1.0f)
+    {
+        m_Field14 = 1.0f;
+    }
+    else
+    {
+        m_Field14 = value;
+    }
+}
 }
 
 // ============================================================================

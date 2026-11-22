@@ -1,13 +1,107 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/Win32Drive.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/Win32Drive.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 17 functions matched (17.65%). NOT COMPLETE YET.
-// The 14 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 17 functions matched (35.29%). NOT COMPLETE YET.
+// The 11 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_00 (0x006E7480, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the drive's block at +0xEC to sub_006DF080.
+// ============================================================================
+// bin: pc
+// va: 0x006E7480
+// what: Passes the drive's block at +0xEC to sub_006DF080.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00281AE0, nearest by portal/tools/similar.py)
+// core::Win32Drive::vfunc_00
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DF080(int);
+
+
+namespace core {
+class Win32Drive
+{
+public:
+    virtual void vfunc_00();
+};
+
+void Win32Drive::vfunc_00()
+{
+    sub_006DF080((int)this + 236);
+}
+}
+
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_01 (0x006E7490, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::Win32Drive::vfunc_00 (PC 0x006E7480), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006E7490
+// what: Passes the drive's block at +0xEC to sub_006DF070.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00281AE0, nearest by portal/tools/similar.py)
+// core::Win32Drive::vfunc_01
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DF070(int);
+
+
+namespace core {
+class Win32Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+void Win32Drive::vfunc_01()
+{
+    sub_006DF070((int)this + 236);
+}
+}
+
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_05 (0x006E74A0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address of the block at +0xE0 inside the drive.
+// ============================================================================
+// bin: pc
+// va: 0x006E74A0
+// what: Returns the address of the block at +0xE0 inside the drive.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006E4260, nearest by portal/tools/similar.py)
+// core::Win32Drive::vfunc_05
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+
+namespace core {
+class Win32Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void* vfunc_05();
+    char m_pad04[0xDC];
+    int m_FieldE0; // +0xE0
+};
+
+void* Win32Drive::vfunc_05()
+{
+    return &m_FieldE0;
+}
+}
 
 // ============================================================================
 // [VERIFIED] core::Win32Drive::vfunc_00 (0x006E77B0, 8 B)

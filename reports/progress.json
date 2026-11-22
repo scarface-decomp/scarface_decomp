@@ -1,14 +1,14 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-22 00:45:48",
+  "updated_at": "2026-11-22 01:25:43",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
-    "pc": 628,
-    "xb": 8218,
-    "proto": 7486,
+    "pc": 642,
+    "xb": 8224,
+    "proto": 7502,
     "ps2": 0,
-    "total": 8846,
-    "bytes": 309149,
+    "total": 8866,
+    "bytes": 309618,
     "ps2_bytes": 0
   },
   "readable": {
@@ -20,10 +20,10 @@
   },
   "source": {
     "member_functions": {
-      "pc": 405,
-      "xb": 4088,
-      "proto": 4095,
-      "total": 4493
+      "pc": 414,
+      "xb": 4094,
+      "proto": 4103,
+      "total": 4508
     },
     "shared_class": {
       "pc": 159,
@@ -39,29 +39,29 @@
     }
   },
   "size_buckets": {
-    "1-9 B": 1944,
-    "10-19 B": 1386,
+    "1-9 B": 1952,
+    "10-19 B": 1393,
     "20-39 B": 2609,
-    "40-79 B": 2275,
-    "80+ B": 632
+    "40-79 B": 2279,
+    "80+ B": 633
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 10826,
+    "RRutherrfordd (Founder)": 10862,
     "NoahBPeterson": 5400,
     "lemiur": 106
   },
   "unattributed": 0,
   "queue": {
-    "pc": 886,
-    "xb": 11283,
-    "proto": 10387,
+    "pc": 872,
+    "xb": 11277,
+    "proto": 10371,
     "ps2": 24297,
-    "total": 12169,
+    "total": 12149,
     "tiers": {
-      "TIER_1_QUICK": 418,
+      "TIER_1_QUICK": 403,
       "TIER_2_SMALL": 1077,
-      "TIER_3_MEDIUM": 2781,
-      "TIER_4_LARGE": 7893
+      "TIER_3_MEDIUM": 2777,
+      "TIER_4_LARGE": 7892
     }
   },
   "good_first": [
@@ -70,15 +70,6 @@
       "bin": "pc",
       "va": "PC 0x006EE9B0",
       "symbol": "sub_006EE9B0",
-      "size": 6,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
-    {
-      "id": "pc_006E9F50",
-      "bin": "pc",
-      "va": "PC 0x006E9F50",
-      "symbol": "sub_006E9F50",
       "size": 6,
       "why": "it was matched before the reset, so it can be done",
       "kind": "matched_before"
@@ -153,6 +144,15 @@
       "symbol": "sub_002FD289",
       "size": 8,
       "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00267E90",
+      "bin": "xb",
+      "va": "0x00267E90",
+      "symbol": "pure3d::d3dExtAntialiasControl::vfunc_03",
+      "size": 9,
+      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     }
   ]

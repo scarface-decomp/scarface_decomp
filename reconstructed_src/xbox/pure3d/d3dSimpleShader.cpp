@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dSimpleShader.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dSimpleShader.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 10 functions matched (50.00%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 10 functions matched (60.00%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -174,5 +174,59 @@ void* d3dSimpleShader::vfunc_04()
     return DAT_003D57FC;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dSimpleShader::vfunc_03 (0x0029FEA0, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Tears down the shader: releases the object it holds, cleans up, and frees itself when asked to.
+// ============================================================================
+// bin: xb
+// va: 0x0029FEA0
+// what: Tears down the shader: releases the object it holds, cleans up, and frees itself when asked to.
+// tool: Claude Opus 5.5 (transplanted from xb:0x002C4360, nearest by portal/tools/similar.py)
+// pure3d::d3dSimpleShader::vfunc_03
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_003D9D5C[];
+extern "C" void __cdecl sub_00027600(int);
+
+
+namespace pure3d {
+class d3dSimpleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dSimpleShader* vfunc_03(int a1);
+    void sub_0029A500();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+d3dSimpleShader* d3dSimpleShader::vfunc_03(int a1)
+{
+    int t1;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_003D9D5C;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    sub_0029A500();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
+}
 }
 

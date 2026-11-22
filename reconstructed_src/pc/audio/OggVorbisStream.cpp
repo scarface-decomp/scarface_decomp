@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/OggVorbisStream.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/OggVorbisStream.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 12 functions matched (16.67%). NOT COMPLETE YET.
-// The 10 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 12 functions matched (33.33%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -51,6 +51,67 @@ void OggVorbisStream::vfunc_12()
     }
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] audio::OggVorbisStream::vfunc_01 (0x006F4D80, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number stored at +0x2EC in the audio stream.
+// ============================================================================
+// bin: pc
+// va: 0x006F4D80
+// what: Returns the number stored at +0x2EC in the audio stream.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006E1CF0, nearest by portal/tools/similar.py)
+// audio::OggVorbisStream::vfunc_01
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+
+namespace audio {
+class OggVorbisStream
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+    char m_pad04[0x2E8];
+    int m_Field2EC; // +0x2EC
+};
+
+int OggVorbisStream::vfunc_01()
+{
+    return m_Field2EC;
+}
+}
+
+// ============================================================================
+// [VERIFIED] audio::OggVorbisStream::vfunc_02 (0x006F4D90, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address of the block at +0x2DC inside the audio stream.
+// ============================================================================
+// bin: pc
+// va: 0x006F4D90
+// what: Returns the address of the block at +0x2DC inside the audio stream.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006E4260, nearest by portal/tools/similar.py)
+// audio::OggVorbisStream::vfunc_02
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+
+namespace audio {
+class OggVorbisStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void* vfunc_02();
+    char m_pad04[0x2D8];
+    int m_Field2DC; // +0x2DC
+};
+
+void* OggVorbisStream::vfunc_02()
+{
+    return &m_Field2DC;
+}
 }
 
 // ============================================================================

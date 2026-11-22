@@ -1,5 +1,285 @@
 [
   {
+    "time": "2026-11-22 01:25:54",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of pure3d::d3dSimpleShader::vfunc_03",
+    "va": "0x0029FEA0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-22 01:25:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::d3dSimpleShader::vfunc_03",
+    "va": "0x0029FEA0",
+    "bytes": "56/56 B"
+  },
+  {
+    "time": "2026-11-22 01:25:31",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "audio::SeqActionVarPitch::vfunc_06",
+    "va": "Proto 0x002A8240",
+    "bytes": "19/19 B"
+  },
+  {
+    "time": "2026-11-22 01:25:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::PrimGroupLoader::vfunc_03",
+    "va": "Proto 0x00250B40",
+    "bytes": "57/57 B"
+  },
+  {
+    "time": "2026-11-22 01:25:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::frontend::TextMenuItem::vfunc_22",
+    "va": "Proto 0x002496C0",
+    "bytes": "22/22 B"
+  },
+  {
+    "time": "2026-11-22 01:24:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of core::ControllerInputPointXBox::vfunc_06",
+    "va": "Proto 0x002054C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-22 01:24:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "core::ControllerInputPointXBox::vfunc_06",
+    "va": "Proto 0x002054C0",
+    "bytes": "64/64 B"
+  },
+  {
+    "time": "2026-11-22 01:24:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of ConcreteClassRep<VehicleFixedWeaponTemplate>::vfunc_02",
+    "va": "Proto 0x001CCFE0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-22 01:24:21",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "ConcreteClassRep<VehicleFixedWeaponTemplate>::vfunc_02",
+    "va": "Proto 0x001CCFE0",
+    "bytes": "84/84 B"
+  },
+  {
+    "time": "2026-11-22 01:24:10",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00148E10",
+    "va": "Proto 0x00148E10",
+    "bytes": "22/22 B"
+  },
+  {
+    "time": "2026-11-22 01:23:58",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00148580",
+    "va": "Proto 0x00148580",
+    "bytes": "24/24 B"
+  },
+  {
+    "time": "2026-11-22 01:23:47",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of AITask_SharkInteractWithSwimmer::vfunc_36",
+    "va": "Proto 0x000F3920",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-22 01:23:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "AITask_SharkInteractWithSwimmer::vfunc_36",
+    "va": "Proto 0x000F3920",
+    "bytes": "13/13 B"
+  },
+  {
+    "time": "2026-11-22 01:23:24",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_000E1470",
+    "va": "Proto 0x000E1470",
+    "bytes": "22/22 B"
+  },
+  {
+    "time": "2026-11-22 01:23:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_000C6E30",
+    "va": "Proto 0x000C6E30",
+    "bytes": "28/28 B"
+  },
+  {
+    "time": "2026-11-22 01:23:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_000BF460",
+    "va": "Proto 0x000BF460",
+    "bytes": "28/28 B"
+  },
+  {
+    "time": "2026-11-22 01:22:49",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_000BEB80",
+    "va": "Proto 0x000BEB80",
+    "bytes": "28/28 B"
+  },
+  {
+    "time": "2026-11-22 01:22:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0007DF20",
+    "va": "Proto 0x0007DF20",
+    "bytes": "28/28 B"
+  },
+  {
+    "time": "2026-11-22 01:22:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0007DF00",
+    "va": "Proto 0x0007DF00",
+    "bytes": "28/28 B"
+  },
+  {
+    "time": "2026-11-22 01:22:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "renderer::ShadowRenderable::vfunc_10",
+    "va": "Proto 0x0004F8C0",
+    "bytes": "16/16 B"
+  },
+  {
+    "time": "2026-11-22 01:22:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "renderer::CharacterRenderable::vfunc_10",
+    "va": "Proto 0x00049090",
+    "bytes": "16/16 B"
+  },
+  {
+    "time": "2026-11-22 01:21:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00700F30",
+    "va": "PC 0x00700F30",
+    "bytes": "12/12 B"
+  },
+  {
+    "time": "2026-11-22 01:21:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00700F20",
+    "va": "PC 0x00700F20",
+    "bytes": "12/12 B"
+  },
+  {
+    "time": "2026-11-22 01:21:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "audio::OggVorbisStream::vfunc_02",
+    "va": "PC 0x006F4D90",
+    "bytes": "7/7 B"
+  },
+  {
+    "time": "2026-11-22 01:21:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "audio::OggVorbisStream::vfunc_01",
+    "va": "PC 0x006F4D80",
+    "bytes": "7/7 B"
+  },
+  {
+    "time": "2026-11-22 01:21:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_006EFCE0",
+    "va": "PC 0x006EFCE0",
+    "bytes": "8/8 B"
+  },
+  {
+    "time": "2026-11-22 01:20:53",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_006EFC80",
+    "va": "PC 0x006EFC80",
+    "bytes": "13/13 B"
+  },
+  {
+    "time": "2026-11-22 01:20:41",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_006E9F50",
+    "va": "PC 0x006E9F50",
+    "bytes": "6/6 B"
+  },
+  {
+    "time": "2026-11-22 01:20:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "core::Win32Drive::vfunc_05",
+    "va": "PC 0x006E74A0",
+    "bytes": "7/7 B"
+  },
+  {
+    "time": "2026-11-22 01:20:18",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of core::Win32Drive::vfunc_00",
+    "va": "PC 0x006E7480",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-22 01:20:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "core::Win32Drive::vfunc_00",
+    "va": "PC 0x006E7480",
+    "bytes": "14/14 B"
+  },
+  {
+    "time": "2026-11-22 01:19:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "core::ControllerSystemDirectInput::vfunc_12",
+    "va": "PC 0x006DE590",
+    "bytes": "19/19 B"
+  },
+  {
+    "time": "2026-11-22 01:19:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "core::ControllerDirectInput::vfunc_13",
+    "va": "PC 0x006DDF90",
+    "bytes": "7/7 B"
+  },
+  {
+    "time": "2026-11-22 01:19:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "core::ControllerDirectInput::vfunc_08",
+    "va": "PC 0x006DDF50",
+    "bytes": "7/7 B"
+  },
+  {
+    "time": "2026-11-22 01:19:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "core::ControllerDirectInput::vfunc_05",
+    "va": "PC 0x006DDC80",
+    "bytes": "7/7 B"
+  },
+  {
     "time": "2026-11-22 00:46:01",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1718,285 +1998,5 @@
     "symbol": "sub_00027970",
     "va": "Proto 0x00027970",
     "bytes": "30/30 B"
-  },
-  {
-    "time": "2026-11-21 18:41:13",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "GameObject::vfunc_33",
-    "va": "Proto 0x00026F70",
-    "bytes": "30/30 B"
-  },
-  {
-    "time": "2026-11-21 18:41:01",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000235E0",
-    "va": "Proto 0x000235E0",
-    "bytes": "49/49 B"
-  },
-  {
-    "time": "2026-11-21 18:40:49",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000128F0",
-    "va": "Proto 0x000128F0",
-    "bytes": "246/246 B"
-  },
-  {
-    "time": "2026-11-21 18:40:37",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00012820",
-    "va": "Proto 0x00012820",
-    "bytes": "48/48 B"
-  },
-  {
-    "time": "2026-11-21 18:40:26",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::d3dVehicleShader::vfunc_28",
-    "va": "PC 0x00708120",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-21 18:40:14",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::d3dVehicleShader::vfunc_30",
-    "va": "PC 0x00708110",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-21 18:40:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::d3dVehicleShader::vfunc_31",
-    "va": "PC 0x00708100",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-21 18:39:50",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_006EFD30",
-    "va": "PC 0x006EFD30",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-21 18:39:37",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_006EFB70",
-    "va": "PC 0x006EFB70",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-21 18:39:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_006EF970",
-    "va": "PC 0x006EF970",
-    "bytes": "8/8 B"
-  },
-  {
-    "time": "2026-11-21 18:38:58",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of sub_006EB6E0",
-    "va": "PC 0x006EB6E0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-21 18:38:46",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_006EB6E0",
-    "va": "PC 0x006EB6E0",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-21 18:38:34",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_006E0D10",
-    "va": "PC 0x006E0D10",
-    "bytes": "42/42 B"
-  },
-  {
-    "time": "2026-11-21 18:38:23",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "core::String::vfunc_24",
-    "va": "PC 0x006E00C0",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-21 04:53:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_002DE790",
-    "va": "0x002DE790",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-21 04:53:29",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002DE790",
-    "va": "0x002DE790",
-    "bytes": "5/5 B"
-  },
-  {
-    "time": "2026-11-21 04:53:18",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::d3dContext::vfunc_09",
-    "va": "0x0029D590",
-    "bytes": "10/10 B"
-  },
-  {
-    "time": "2026-11-21 04:53:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of pure3d::frontend::Screen::vfunc_14",
-    "va": "0x0028D580",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-21 04:52:55",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::frontend::Screen::vfunc_14",
-    "va": "0x0028D580",
-    "bytes": "6/6 B"
-  },
-  {
-    "time": "2026-11-21 04:52:44",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00280640",
-    "va": "0x00280640",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-21 04:52:33",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "9 look-alike(s) of pure3d::d3dExtTODFactor::vfunc_04",
-    "va": "0x00263ED0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-21 04:52:21",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00280640",
-    "va": "0x00280640",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-21 04:52:09",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::d3dExtTODFactor::vfunc_04",
-    "va": "0x00263ED0",
-    "bytes": "15/15 B"
-  },
-  {
-    "time": "2026-11-21 04:51:57",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of core::ControllerXBox::vfunc_04",
-    "va": "0x00247C00",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-21 04:51:46",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "core::ControllerXBox::vfunc_04",
-    "va": "0x00247C00",
-    "bytes": "11/11 B"
-  },
-  {
-    "time": "2026-11-21 04:51:35",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_0022D880",
-    "va": "0x0022D880",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-21 04:51:24",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0022D880",
-    "va": "0x0022D880",
-    "bytes": "5/5 B"
-  },
-  {
-    "time": "2026-11-21 04:51:13",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00217740",
-    "va": "0x00217740",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-21 04:51:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00217710",
-    "va": "0x00217710",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-21 04:50:50",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00217620",
-    "va": "0x00217620",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-21 04:50:39",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "AirplaneObject::vfunc_50",
-    "va": "0x00213560",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-21 04:50:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001F2B80",
-    "va": "0x001F2B80",
-    "bytes": "10/10 B"
-  },
-  {
-    "time": "2026-11-21 04:50:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001F2B70",
-    "va": "0x001F2B70",
-    "bytes": "10/10 B"
-  },
-  {
-    "time": "2026-11-21 04:50:04",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001F2B60",
-    "va": "0x001F2B60",
-    "bytes": "10/10 B"
-  },
-  {
-    "time": "2026-11-21 04:49:52",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001F2B50",
-    "va": "0x001F2B50",
-    "bytes": "10/10 B"
   }
 ]

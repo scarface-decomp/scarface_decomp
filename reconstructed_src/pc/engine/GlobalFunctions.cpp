@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (223 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (228 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 223 of 748 functions matched (29.81%). NOT COMPLETE YET.
-// The 525 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 228 of 748 functions matched (30.48%). NOT COMPLETE YET.
+// The 520 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -1660,6 +1660,38 @@ L_48:
 }
 
 // ============================================================================
+// [VERIFIED] sub_006E9F50 (0x006E9F50, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 1.
+// ============================================================================
+// bin: pc
+// va: 0x006E9F50
+// what: Always returns 1.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006E36C0, nearest by portal/tools/similar.py)
+// its addresses and names were swapped for this function's.
+// sub_006E9F50
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+
+class Class_006E9F50
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int sub_006E9F50();
+};
+
+int Class_006E9F50::sub_006E9F50()
+{
+    return 1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_006EA060 (0x006EA060, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -3169,6 +3201,42 @@ int __cdecl sub_006EFB80(int a1, float a2)
 {
     *(float*)(a1 + 20) = a2;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EFC80 (0x006EFC80, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns entry number a2 of the table at +0x5C in the object passed in.
+// ============================================================================
+// bin: pc
+// va: 0x006EFC80
+// what: Returns entry number a2 of the table at +0x5C in the object passed in.
+// tool: Claude Opus 5.5 (transplanted from proto:0x002AB690, nearest by portal/tools/similar.py)
+// sub_006EFC80 (Proto 0x006EFC80, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EFC80(int a1, int a2)
+{
+    return *(int*)(a1 + (a2 * 4) + 92);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EFCE0 (0x006EFCE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the value at +0x18 in the object passed in.
+// ============================================================================
+// bin: pc
+// va: 0x006EFCE0
+// what: Returns the value at +0x18 in the object passed in.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0027AA80, nearest by portal/tools/similar.py)
+// sub_006EFCE0 (Proto 0x006EFCE0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EFCE0(int a1)
+{
+    return *(int*)(a1 + 24);
 }
 
 // ============================================================================
@@ -5636,6 +5704,78 @@ public:
 void Class_00700EE0::sub_00700EE0()
 {
     sub_00700EB0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00700F20 (0x00700F20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the global at 0x0085D588 to sub_006DF080.
+// ============================================================================
+// bin: pc
+// va: 0x00700F20
+// what: Passes the global at 0x0085D588 to sub_006DF080.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0016FAA0, nearest by portal/tools/similar.py)
+// sub_00700F20
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0085D588[];
+extern "C" void __cdecl sub_006DF080(int);
+
+class Class_00700F20
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void sub_00700F20();
+};
+
+void Class_00700F20::sub_00700F20()
+{
+    sub_006DF080((int)DAT_0085D588);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00700F30 (0x00700F30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the global at 0x0085D588 to sub_006DF070.
+// ============================================================================
+// bin: pc
+// va: 0x00700F30
+// what: Passes the global at 0x0085D588 to sub_006DF070.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0016FAA0, nearest by portal/tools/similar.py)
+// sub_00700F30
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0085D588[];
+extern "C" void __cdecl sub_006DF070(int);
+
+class Class_00700F30
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void sub_00700F30();
+};
+
+void Class_00700F30::sub_00700F30()
+{
+    sub_006DF070((int)DAT_0085D588);
 }
 
 // ============================================================================
