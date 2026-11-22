@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 621 of 1,514 functions matched (41.02%). NOT COMPLETE YET.
-// The 893 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 628 of 1,514 functions matched (41.48%). NOT COMPLETE YET.
+// The 886 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -364,7 +364,32 @@ int __cdecl sub_006DF2B0(int a1, int a2, int a3, __int64 a4)
 
 // [TODO] 0x006DF310 sub_006DF310 (141 B)
 // [TODO] 0x006DF3A0 sub_006DF3A0 (7 B)
-// [TODO] 0x006DF3E0 sub_006DF3E0 (14 B)
+// ============================================================================
+// [VERIFIED] sub_006DF3E0 (0x006DF3E0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Looks up an object and returns the number at +0x20 in it, or 0 when there is none.
+// ============================================================================
+// bin: pc
+// va: 0x006DF3E0
+// what: Looks up an object and returns the number at +0x20 in it, or 0 when there is none.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0023F500, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_006DF3A0(void);
+
+int __cdecl sub_006DF3E0(void)
+{
+    int r_eax;
+
+    r_eax = sub_006DF3A0();
+    if (!r_eax) {
+        return r_eax;
+    }
+    r_eax = *(int*)(r_eax + 32);
+    return r_eax;
+}
+
 // [TODO] 0x006DF3F0 sub_006DF3F0 (23 B)
 // [TODO] 0x006DF430 sub_006DF430 (81 B)
 // ============================================================================
@@ -3389,7 +3414,31 @@ bool File::vfunc_30()
 
 }
 
-// [TODO] 0x006E51B0 core::File::vfunc_17 (6 B)
+// ============================================================================
+// [VERIFIED] core::File::vfunc_17 (0x006E51B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Calls the function whose address is kept in a global.
+// ============================================================================
+// bin: pc
+// va: 0x006E51B0
+// what: Calls the function whose address is kept in a global.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006DED30, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00FB0444;
+
+class Class_006E51B0
+{
+public:
+    void sub_006E51B0();
+};
+
+void Class_006E51B0::sub_006E51B0()
+{
+    ((void (__cdecl*)(void))DAT_00FB0444)();
+}
+
 // ============================================================================
 // [VERIFIED] core::File::vfunc_31 (0x006E51C0, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -6713,8 +6762,65 @@ void DriveThread::vfunc_01()
 // [TODO] 0x006E8030 sub_006E8030 (123 B)
 // [TODO] 0x006E80B0 sub_006E80B0 (103 B)
 // [TODO] 0x006E8120 sub_006E8120 (43 B)
-// [TODO] 0x006E8190 sub_006E8190 (36 B)
-// [TODO] 0x006E81C0 sub_006E81C0 (26 B)
+// ============================================================================
+// [VERIFIED] sub_006E8190 (0x006E8190, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes a value to another object, then runs a step on the part of this object at +0xAC.
+// ============================================================================
+// bin: pc
+// va: 0x006E8190
+// what: Passes a value to another object, then runs a step on the part of this object at +0xAC.
+// tool: Claude Opus 5.5 (transplanted from proto:0x002851F0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006E62B0(int);
+};
+
+extern "C" void __cdecl sub_006DF0C0(int);
+
+class Class_006E8190
+{
+public:
+    void sub_006E8190(int a1, int a2);
+};
+
+void Class_006E8190::sub_006E8190(int a1, int a2)
+{
+    ((Object*)a1)->sub_006E62B0(a2);
+    sub_006DF0C0((int)this + 172);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E81C0 (0x006E81C0, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a yes/no value at +0xB0, then runs a step on the part of this object at +0xAC.
+// ============================================================================
+// bin: pc
+// va: 0x006E81C0
+// what: Stores a yes/no value at +0xB0, then runs a step on the part of this object at +0xAC.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00285220, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DF0D0(int);
+
+class Class_006E81C0
+{
+public:
+    void sub_006E81C0(bool a1);
+    char m_pad00[0xB0];
+    bool m_FieldB0; // +0xB0
+};
+
+void Class_006E81C0::sub_006E81C0(bool a1)
+{
+    m_FieldB0 = a1;
+    sub_006DF0D0((int)this + 172);
+}
+
 // [TODO] 0x006E81E0 sub_006E81E0 (154 B)
 // [TODO] 0x006E8280 sub_006E8280 (21 B)
 // ============================================================================
@@ -9955,7 +10061,25 @@ bool __cdecl sub_006EF360(bool a1)
 // [TODO] 0x006EF470 sub_006EF470 (208 B)
 // [TODO] 0x006EF540 sub_006EF540 (292 B)
 // [TODO] 0x006EF670 sub_006EF670 (539 B)
-// [TODO] 0x006EF8F0 sub_006EF8F0 (9 B)
+// ============================================================================
+// [VERIFIED] sub_006EF8F0 (0x006EF8F0, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x24 of a global object.
+// ============================================================================
+// bin: pc
+// va: 0x006EF8F0
+// what: Returns the number at +0x24 of a global object.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0006D060, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085D134;
+
+int __cdecl sub_006EF8F0(void)
+{
+    return *(int*)(DAT_0085D134 + 36);
+}
+
 // [TODO] 0x006EF900 sub_006EF900 (27 B)
 // ============================================================================
 // [VERIFIED] sub_006EF970 (0x006EF970, 8 B)
@@ -9994,7 +10118,24 @@ int __cdecl sub_006EF980(int a1)
 // [TODO] 0x006EF9A0 sub_006EF9A0 (34 B)
 // [TODO] 0x006EF9E0 sub_006EF9E0 (35 B)
 // [TODO] 0x006EFA10 sub_006EFA10 (61 B)
-// [TODO] 0x006EFA50 sub_006EFA50 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006EFA50 (0x006EFA50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores 3 at +0x18 of a record and returns the record.
+// ============================================================================
+// bin: pc
+// va: 0x006EFA50
+// what: Stores 3 at +0x18 of a record and returns the record.
+// tool: Claude Opus 5.5 (transplanted from proto:0x002AB460, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EFA50(int a1)
+{
+    *(int*)(a1 + 24) = 3;
+    return a1;
+}
+
 // [TODO] 0x006EFA60 sub_006EFA60 (256 B)
 // ============================================================================
 // [VERIFIED] sub_006EFB60 (0x006EFB60, 8 B)
@@ -20033,7 +20174,32 @@ void Class_007027CC::sub_007027CC()
     ((void (__cdecl*)(void))DAT_0072F220)();
 }
 
-// [TODO] 0x007027E6 fight::ConditionFactory::vfunc_07 (6 B)
+// ============================================================================
+// [VERIFIED] fight::ConditionFactory::vfunc_07 (0x007027E6, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::File::vfunc_17 (PC 0x006E51B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x007027E6
+// what: Calls the function whose address is kept in a global.
+// tool: Claude Opus 5.5 (transplanted from pc:0x006DED30, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F214;
+
+class Class_007027E6
+{
+public:
+    void sub_007027E6();
+};
+
+void Class_007027E6::sub_007027E6()
+{
+    ((void (__cdecl*)(void))DAT_0072F214)();
+}
+
 // ============================================================================
 // [VERIFIED] sub_00702810 (0x00702810, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

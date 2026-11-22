@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 8,193 of 19,501 functions matched (42.01%). NOT COMPLETE YET.
-// The 11,308 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 8,218 of 19,501 functions matched (42.14%). NOT COMPLETE YET.
+// The 11,283 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -10905,7 +10905,32 @@ void MovieDrawHandler::vfunc_00()
 // [TODO] 0x00028A30 sub_00028A30 (149 B)
 // [TODO] 0x00028AD0 MovieFlowClient::vfunc_00 (64 B)
 // [TODO] 0x00028B10 MovieFlowClient::vfunc_02 (821 B)
-// [TODO] 0x00028E50 sub_00028E50 (40 B)
+// ============================================================================
+// [VERIFIED] sub_00028E50 (0x00028E50, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates the game's single 136-byte object of this kind, keeps it in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00028E50
+// what: Creates the game's single 136-byte object of this kind, keeps it in a global and returns it.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00097870, nearest by portal/tools/similar.py)
+struct Made
+{
+    Made* sub_00028A30();   // constructor
+};
+
+extern "C" Made* DAT_00473FA4;
+extern "C" void* __cdecl sub_000275B0(unsigned int a1, unsigned int a2);
+
+// Creates the single instance and keeps it in a global (null if the allocation fails).
+extern "C" Made* __cdecl sub_00028E50(void)
+{
+    void* memory = sub_000275B0(136, 7);
+    Made* made = memory ? ((Made*)memory)->sub_00028A30() : 0;
+    DAT_00473FA4 = made;
+    return made;
+}
+
 // [TODO] 0x00028E80 MovieFlowClient::vfunc_01 (235 B)
 // ============================================================================
 // [VERIFIED] sub_00028F70 (0x00028F70, 42 B)
@@ -18686,7 +18711,32 @@ int __cdecl sub_00038020(int a1, int a2, int a3, int a4, int a5, int a6)
 // [TODO] 0x00038670 sub_00038670 (213 B)
 // [TODO] 0x00038750 sub_00038750 (212 B)
 // [TODO] 0x00038830 sub_00038830 (556 B)
-// [TODO] 0x00038A60 sub_00038A60 (37 B)
+// ============================================================================
+// [VERIFIED] sub_00038A60 (0x00038A60, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates the game's single 4-byte object of this kind, keeps it in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00038A60
+// what: Creates the game's single 4-byte object of this kind, keeps it in a global and returns it.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00016030, nearest by portal/tools/similar.py)
+struct Made
+{
+    Made* sub_00038670();   // constructor
+};
+
+extern "C" Made* DAT_00474B28;
+extern "C" void* __cdecl sub_000275B0(unsigned int a1, unsigned int a2);
+
+// Creates the single instance and keeps it in a global (null if the allocation fails).
+extern "C" Made* __cdecl sub_00038A60(void)
+{
+    void* memory = sub_000275B0(4, 11);
+    Made* made = memory ? ((Made*)memory)->sub_00038670() : 0;
+    DAT_00474B28 = made;
+    return made;
+}
+
 // [TODO] 0x00038A90 sub_00038A90 (99 B)
 // [TODO] 0x00038B00 sub_00038B00 (98 B)
 // [TODO] 0x00038B70 sub_00038B70 (194 B)
@@ -35227,7 +35277,32 @@ void __cdecl sub_000685B0(int a1)
 
 // [TODO] 0x00068610 sub_00068610 (90 B)
 // [TODO] 0x00068670 sub_00068670 (199 B)
-// [TODO] 0x00068740 sub_00068740 (37 B)
+// ============================================================================
+// [VERIFIED] sub_00068740 (0x00068740, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates the game's single 4-byte object of this kind, keeps it in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00068740
+// what: Creates the game's single 4-byte object of this kind, keeps it in a global and returns it.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00016030, nearest by portal/tools/similar.py)
+struct Made
+{
+    Made* sub_000684F0();   // constructor
+};
+
+extern "C" Made* DAT_00476A54;
+extern "C" void* __cdecl sub_000275B0(unsigned int a1, unsigned int a2);
+
+// Creates the single instance and keeps it in a global (null if the allocation fails).
+extern "C" Made* __cdecl sub_00068740(void)
+{
+    void* memory = sub_000275B0(4, 4);
+    Made* made = memory ? ((Made*)memory)->sub_000684F0() : 0;
+    DAT_00476A54 = made;
+    return made;
+}
+
 // [TODO] 0x00068770 ScriptSchedulerFlowClient::vfunc_00 (84 B)
 // [TODO] 0x000687D0 ScriptSchedulerFlowClient::vfunc_02 (458 B)
 // ============================================================================
@@ -36450,7 +36525,52 @@ int __cdecl sub_0006EF50(int a1, bool a2, int a3)
     return r_esi;
 }
 
-// [TODO] 0x0006EFA0 sub_0006EFA0 (77 B)
+// ============================================================================
+// [VERIFIED] sub_0006EFA0 (0x0006EFA0, 77 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00064CC0 (Proto 0x00064CC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0006EFA0
+// what: Takes a 24-byte object from a memory pool and sets it up, or returns nothing if there was no room.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0006ECE0, nearest by portal/tools/similar.py)
+struct Heap
+{
+    void* sub_000745F0(unsigned int size);
+};
+
+struct Made
+{
+    void* vtable;
+    int m_04;
+    int m_08;
+    int m_0C;
+    int m_value; // +0x10
+};
+
+extern "C" char DAT_003A24DC[];
+extern "C" char DAT_003A265C[];
+extern "C" Heap* DAT_004795AC;
+extern "C" int __cdecl sub_000758D0(void);
+extern "C" int __cdecl sub_000758E0(void);
+
+// Allocates a 24-byte object from the heap and builds it (base part first, then its own vtable).
+// The value is stored after the null check, so a failed allocation writes to address 0x10.
+Made* __cdecl sub_0006EFA0(int value)
+{
+    Made* made = (Made*)DAT_004795AC->sub_000745F0(24);
+    if (made) {
+        made->vtable = DAT_003A24DC;
+        made->m_04 = 0;
+        made->m_08 = sub_000758D0();
+        made->m_0C = sub_000758E0();
+        made->vtable = DAT_003A265C;
+    }
+    made->m_value = value;
+    return made;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0006EFF0 (0x0006EFF0, 84 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -36491,7 +36611,52 @@ int __cdecl sub_0006EFF0(int a1, int a2, int a3)
 
 // [TODO] 0x0006F050 sub_0006F050 (70 B)
 // [TODO] 0x0006F0A0 sub_0006F0A0 (116 B)
-// [TODO] 0x0006F120 sub_0006F120 (77 B)
+// ============================================================================
+// [VERIFIED] sub_0006F120 (0x0006F120, 77 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00064E40 (Proto 0x00064E40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0006F120
+// what: Takes a 28-byte object from a memory pool and sets it up, or returns nothing if there was no room.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0006ECE0, nearest by portal/tools/similar.py)
+struct Heap
+{
+    void* sub_000745F0(unsigned int size);
+};
+
+struct Made
+{
+    void* vtable;
+    int m_04;
+    int m_08;
+    int m_0C;
+    int m_value; // +0x10
+};
+
+extern "C" char DAT_003A24DC[];
+extern "C" char DAT_003A26CC[];
+extern "C" Heap* DAT_004795AC;
+extern "C" int __cdecl sub_000758D0(void);
+extern "C" int __cdecl sub_000758E0(void);
+
+// Allocates a 28-byte object from the heap and builds it (base part first, then its own vtable).
+// The value is stored after the null check, so a failed allocation writes to address 0x10.
+Made* __cdecl sub_0006F120(int value)
+{
+    Made* made = (Made*)DAT_004795AC->sub_000745F0(28);
+    if (made) {
+        made->vtable = DAT_003A24DC;
+        made->m_04 = 0;
+        made->m_08 = sub_000758D0();
+        made->m_0C = sub_000758E0();
+        made->vtable = DAT_003A26CC;
+    }
+    made->m_value = value;
+    return made;
+}
+
 // [TODO] 0x0006F170 sub_0006F170 (87 B)
 // [TODO] 0x0006F1D0 sub_0006F1D0 (94 B)
 // ============================================================================
@@ -62300,7 +62465,32 @@ SubtitleFlowClient* SubtitleFlowClient::vfunc_00(int a1)
 // [TODO] 0x000CB650 SubtitleManager::SubtitleFlowClient::vfunc_02 (541 B)
 // [TODO] 0x000CB870 sub_000CB870 (141 B)
 // [TODO] 0x000CB900 sub_000CB900 (103 B)
-// [TODO] 0x000CB970 sub_000CB970 (37 B)
+// ============================================================================
+// [VERIFIED] sub_000CB970 (0x000CB970, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates the game's single 24-byte object of this kind, keeps it in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x000CB970
+// what: Creates the game's single 24-byte object of this kind, keeps it in a global and returns it.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00097870, nearest by portal/tools/similar.py)
+struct Made
+{
+    Made* sub_000CB560();   // constructor
+};
+
+extern "C" Made* DAT_004870BC;
+extern "C" void* __cdecl sub_000275B0(unsigned int a1, unsigned int a2);
+
+// Creates the single instance and keeps it in a global (null if the allocation fails).
+extern "C" Made* __cdecl sub_000CB970(void)
+{
+    void* memory = sub_000275B0(24, 18);
+    Made* made = memory ? ((Made*)memory)->sub_000CB560() : 0;
+    DAT_004870BC = made;
+    return made;
+}
+
 // [TODO] 0x000CB9A0 sub_000CB9A0 (126 B)
 // [TODO] 0x000CBA20 sub_000CBA20 (99 B)
 // ============================================================================
@@ -64311,7 +64501,42 @@ int Class_000CF7F0::sub_000CF7F0()
     return m_Field188;
 }
 
-// [TODO] 0x000CF800 sub_000CF800 (15 B)
+// ============================================================================
+// [VERIFIED] sub_000CF800 (0x000CF800, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Asks the object kept at +0x50 a yes/no question; the answer is no when there is none.
+// ============================================================================
+// bin: xb
+// va: 0x000CF800
+// what: Asks the object kept at +0x50 a yes/no question; the answer is no when there is none.
+// tool: Claude Opus 5.5 (transplanted from xb:0x001DE1B0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_00163DB0();
+};
+
+class Class_000CF800
+{
+public:
+    bool sub_000CF800();
+    char m_pad00[0x50];
+    int m_Field50; // +0x50
+};
+
+bool Class_000CF800::sub_000CF800()
+{
+    int t1;
+
+    t1 = m_Field50;
+    if (m_Field50) {
+        return ((Object*)t1)->sub_00163DB0();
+    }
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000CF810 (0x000CF810, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -64696,7 +64921,42 @@ void* __cdecl sub_000CFC10(void)
     return DAT_0049331C;
 }
 
-// [TODO] 0x000CFC20 sub_000CFC20 (18 B)
+// ============================================================================
+// [VERIFIED] sub_000CFC20 (0x000CFC20, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Asks the object kept at +0x17C a yes/no question; the answer is no when there is none.
+// ============================================================================
+// bin: xb
+// va: 0x000CFC20
+// what: Asks the object kept at +0x17C a yes/no question; the answer is no when there is none.
+// tool: Claude Opus 5.5 (transplanted from xb:0x001DE1B0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_00021EE0();
+};
+
+class Class_000CFC20
+{
+public:
+    bool sub_000CFC20();
+    char m_pad00[0x17C];
+    int m_Field17C; // +0x17C
+};
+
+bool Class_000CFC20::sub_000CFC20()
+{
+    int t1;
+
+    t1 = m_Field17C;
+    if (m_Field17C) {
+        return ((Object*)t1)->sub_00021EE0();
+    }
+    return 0;
+}
+
 // [TODO] 0x000CFC40 sub_000CFC40 (269 B)
 // ============================================================================
 // [VERIFIED] sub_000CFD50 (0x000CFD50, 60 B)
@@ -93086,7 +93346,32 @@ void Class_001120B0::sub_001120B0(int a1, bool a2)
 // [TODO] 0x00112CD0 sub_00112CD0 (116 B)
 // [TODO] 0x00112D50 sub_00112D50 (123 B)
 // [TODO] 0x00112DD0 CoverManager::vfunc_00 (80 B)
-// [TODO] 0x00112E20 sub_00112E20 (37 B)
+// ============================================================================
+// [VERIFIED] sub_00112E20 (0x00112E20, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates the game's single 40-byte object of this kind, keeps it in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00112E20
+// what: Creates the game's single 40-byte object of this kind, keeps it in a global and returns it.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00097870, nearest by portal/tools/similar.py)
+struct Made
+{
+    Made* sub_00112D50();   // constructor
+};
+
+extern "C" Made* DAT_004897F0;
+extern "C" void* __cdecl sub_000275B0(unsigned int a1, unsigned int a2);
+
+// Creates the single instance and keeps it in a global (null if the allocation fails).
+extern "C" Made* __cdecl sub_00112E20(void)
+{
+    void* memory = sub_000275B0(40, 10);
+    Made* made = memory ? ((Made*)memory)->sub_00112D50() : 0;
+    DAT_004897F0 = made;
+    return made;
+}
+
 // ============================================================================
 // [VERIFIED] CoverObject::vfunc_00 (0x00112E50, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -99479,7 +99764,47 @@ template <> void ConcreteClassRep<AttractPointTemplate>::vfunc_02()
     sub_0011C490();
 }
 
-// [TODO] 0x0011C7F0 ConcreteClassRep<AITask_Engage>::vfunc_02 (66 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AITask_Engage>::vfunc_02 (0x0011C7F0, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<AITask_Engage>::vfunc_02 (Proto 0x001018C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0011C7F0
+// what: Fills in the script system's description of the AITask_Engage class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x001AF2B0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039D520[];
+extern "C" int DAT_00428EEC;
+extern "C" int DAT_00428EF0;
+extern "C" char DAT_0042A7E4[];
+extern "C" char DAT_0042A7F4[];
+extern "C" char DAT_00428EA0[];
+extern "C" int DAT_00428EC0;
+extern "C" char sub_0010AA90[];
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_0011BCB0(int, int, int, int, int, int, int);
+
+class AITask_Engage;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AITask_Engage>::vfunc_02()
+{
+    sub_00070520(DAT_00428EC0, DAT_00428EEC);
+    DAT_00428EF0 = (int)DAT_00428EA0;
+    sub_0011BCB0((int)DAT_0042A7E4, (int)DAT_0042A7F4, (int)DAT_0039D520, (int)sub_0010AA90, 3, 3, (int)DAT_0039D520);
+}
+
 // [TODO] 0x0011C840 ConcreteClassRep<AITask_ForcedIntimidation>::vfunc_02 (70 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AITask_TauntResponse>::vfunc_02 (0x0011C890, 36 B)
@@ -124267,7 +124592,45 @@ template <> int ConcreteClassRep<CameraManager>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x0015C600 ConcreteClassRep<CameraManager>::vfunc_02 (90 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<CameraManager>::vfunc_02 (0x0015C600, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills in the script system's description of the CameraManager class and lists its fields.
+// ============================================================================
+// bin: xb
+// va: 0x0015C600
+// what: Fills in the script system's description of the CameraManager class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00024510, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0042E7F4;
+extern "C" int DAT_0042E7F8;
+extern "C" char DAT_0042E800[];
+extern "C" char DAT_0042E814[];
+extern "C" char DAT_0041BDC0[];
+extern "C" int DAT_0041BDE0;
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_00073780(int, int, int, int, int, int, int, int, int);
+
+class CameraManager;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<CameraManager>::vfunc_02()
+{
+    sub_00070520(DAT_0041BDE0, DAT_0042E7F4);
+    DAT_0042E7F8 = (int)DAT_0041BDC0;
+    sub_00073780((int)DAT_0042E814, 6, 0, 0, 244, 0, 0, 0, 0);
+    sub_00073780((int)DAT_0042E800, 6, 0, 0, 248, 0, 0, 0, 0);
+}
+
 // [TODO] 0x0015C660 sub_0015C660 (85 B)
 // [TODO] 0x0015C6C0 sub_0015C6C0 (10 B)
 // [TODO] 0x0015C6D0 sub_0015C6D0 (35 B)
@@ -128119,7 +128482,42 @@ int Class_00163E80::sub_00163E80(int a1)
     return 0;
 }
 
-// [TODO] 0x00163EA0 sub_00163EA0 (18 B)
+// ============================================================================
+// [VERIFIED] sub_00163EA0 (0x00163EA0, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Asks the object kept at +0x1AC a yes/no question; the answer is no when there is none.
+// ============================================================================
+// bin: xb
+// va: 0x00163EA0
+// what: Asks the object kept at +0x1AC a yes/no question; the answer is no when there is none.
+// tool: Claude Opus 5.5 (transplanted from xb:0x001DE1B0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_000CF820();
+};
+
+class Class_00163EA0
+{
+public:
+    bool sub_00163EA0();
+    char m_pad00[0x1AC];
+    int m_Field1AC; // +0x1AC
+};
+
+bool Class_00163EA0::sub_00163EA0()
+{
+    int t1;
+
+    t1 = m_Field1AC;
+    if (m_Field1AC) {
+        return ((Object*)t1)->sub_000CF820();
+    }
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00163EC0 (0x00163EC0, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -158262,7 +158660,32 @@ void Class_00196B30::sub_00196B30()
 // [TODO] 0x00196D00 sub_00196D00 (338 B)
 // [TODO] 0x00196E60 sub_00196E60 (50 B)
 // [TODO] 0x00196EA0 HUDManager2::vfunc_00 (30 B)
-// [TODO] 0x00196EC0 sub_00196EC0 (37 B)
+// ============================================================================
+// [VERIFIED] sub_00196EC0 (0x00196EC0, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates the game's single 92-byte object of this kind, keeps it in a global and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x00196EC0
+// what: Creates the game's single 92-byte object of this kind, keeps it in a global and returns it.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00097870, nearest by portal/tools/similar.py)
+struct Made
+{
+    Made* sub_00196A40();   // constructor
+};
+
+extern "C" Made* DAT_0048C23C;
+extern "C" void* __cdecl sub_000275B0(unsigned int a1, unsigned int a2);
+
+// Creates the single instance and keeps it in a global (null if the allocation fails).
+extern "C" Made* __cdecl sub_00196EC0(void)
+{
+    void* memory = sub_000275B0(92, 7);
+    Made* made = memory ? ((Made*)memory)->sub_00196A40() : 0;
+    DAT_0048C23C = made;
+    return made;
+}
+
 // ============================================================================
 // [VERIFIED] HUDManager2::vfunc_00 (0x00196EF0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -169587,7 +170010,45 @@ template <> int ConcreteClassRep<HUDElement2>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x001BD1A0 ConcreteClassRep<HUDElement2>::vfunc_02 (84 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<HUDElement2>::vfunc_02 (0x001BD1A0, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills in the script system's description of the HUDElement2 class and lists its fields.
+// ============================================================================
+// bin: xb
+// va: 0x001BD1A0
+// what: Fills in the script system's description of the HUDElement2 class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00024510, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00436684;
+extern "C" int DAT_00436688;
+extern "C" char DAT_00436690[];
+extern "C" char DAT_00436698[];
+extern "C" char DAT_0041BDC0[];
+extern "C" int DAT_0041BDE0;
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_00073780(int, int, int, int, int, int, int, int, int);
+
+class HUDElement2;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<HUDElement2>::vfunc_02()
+{
+    sub_00070520(DAT_0041BDE0, DAT_00436684);
+    DAT_00436688 = (int)DAT_0041BDC0;
+    sub_00073780((int)DAT_00436698, 8, 0, 0, 84, 0, 0, 0, 0);
+    sub_00073780((int)DAT_00436690, 8, 0, 0, 88, 0, 0, 0, 0);
+}
+
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<EmpireHUD>::vfunc_01 (0x001BD240, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -182260,7 +182721,45 @@ template <> int ConcreteClassRep<ZoneSoundObject>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x001D7980 ConcreteClassRep<ZoneSoundObject>::vfunc_02 (84 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<ZoneSoundObject>::vfunc_02 (0x001D7980, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills in the script system's description of the ZoneSoundObject class and lists its fields.
+// ============================================================================
+// bin: xb
+// va: 0x001D7980
+// what: Fills in the script system's description of the ZoneSoundObject class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00024510, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0043BC8C;
+extern "C" int DAT_0043BC90;
+extern "C" char DAT_0043BC14[];
+extern "C" char DAT_0043BC24[];
+extern "C" char DAT_0041BDC0[];
+extern "C" int DAT_0041BDE0;
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_00073780(int, int, int, int, int, int, int, int, int);
+
+class ZoneSoundObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<ZoneSoundObject>::vfunc_02()
+{
+    sub_00070520(DAT_0041BDE0, DAT_0043BC8C);
+    DAT_0043BC90 = (int)DAT_0041BDC0;
+    sub_00073780((int)DAT_0043BC24, 8, 0, 0, 32, 0, 0, 0, 0);
+    sub_00073780((int)DAT_0043BC14, 8, 0, 0, 36, 0, 0, 0, 0);
+}
+
 // [TODO] 0x001D79E0 sub_001D79E0 (347 B)
 // ============================================================================
 // [VERIFIED] sub_001D7B40 (0x001D7B40, 38 B)
@@ -187467,7 +187966,45 @@ template <> int ConcreteClassRep<AmbientSpawnObject>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x001E7710 ConcreteClassRep<AmbientSpawnObject>::vfunc_02 (90 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<AmbientSpawnObject>::vfunc_02 (0x001E7710, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills in the script system's description of the AmbientSpawnObject class and lists its fields.
+// ============================================================================
+// bin: xb
+// va: 0x001E7710
+// what: Fills in the script system's description of the AmbientSpawnObject class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000268A0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0043DA68;
+extern "C" int DAT_0043DA6C;
+extern "C" char DAT_0043CD94[];
+extern "C" char DAT_0043CDA4[];
+extern "C" char DAT_0043D8E8[];
+extern "C" int DAT_0043D908;
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_00073780(int, int, int, int, int, int, int, int, int);
+
+class AmbientSpawnObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<AmbientSpawnObject>::vfunc_02()
+{
+    sub_00070520(DAT_0043D908, DAT_0043DA68);
+    DAT_0043DA6C = (int)DAT_0043D8E8;
+    sub_00073780((int)DAT_0043CDA4, 2, 0, 0, 248, 0, 0, 0, 0);
+    sub_00073780((int)DAT_0043CD94, 2, 0, 0, 236, 0, 0, 0, 0);
+}
+
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ScatteredEnemyCharacterGeneratorSpawnObject>::vfunc_01 (0x001E7770, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -188357,7 +188894,47 @@ template <> void ConcreteClassRep<CopSpawnObject>::vfunc_02()
     sub_001E8030();
 }
 
-// [TODO] 0x001E81E0 ConcreteClassRep<DealerSpawnObject>::vfunc_02 (66 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<DealerSpawnObject>::vfunc_02 (0x001E81E0, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<AITask_Engage>::vfunc_02 (Proto 0x001018C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001E81E0
+// what: Fills in the script system's description of the DealerSpawnObject class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x001AF2B0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039D520[];
+extern "C" int DAT_0043DB9C;
+extern "C" int DAT_0043DBA0;
+extern "C" char DAT_0043D840[];
+extern "C" char DAT_0043D854[];
+extern "C" char DAT_0043D864[];
+extern "C" int DAT_0043D884;
+extern "C" char sub_001DEC10[];
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_001368B0(int, int, int, int, int, int, int);
+
+class DealerSpawnObject;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<DealerSpawnObject>::vfunc_02()
+{
+    sub_00070520(DAT_0043D884, DAT_0043DB9C);
+    DAT_0043DBA0 = (int)DAT_0043D864;
+    sub_001368B0((int)DAT_0043D840, (int)DAT_0043D854, (int)DAT_0039D520, (int)sub_001DEC10, 3, 3, (int)DAT_0039D520);
+}
+
 // [TODO] 0x001E8270 sub_001E8270 (31 B)
 // [TODO] 0x001E8290 sub_001E8290 (56 B)
 // ============================================================================
@@ -192172,7 +192749,46 @@ template <> int ConcreteClassRep<StatePropDragTemplate>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x001EE760 ConcreteClassRep<StatePropDragTemplate>::vfunc_02 (84 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<StatePropDragTemplate>::vfunc_02 (0x001EE760, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<StatePropDragTemplate>::vfunc_02 (Proto 0x001B47B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001EE760
+// what: Fills in the script system's description of the StatePropDragTemplate class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00024510, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0043E760;
+extern "C" int DAT_0043E764;
+extern "C" char DAT_0043E618[];
+extern "C" char DAT_0043E62C[];
+extern "C" char DAT_0043E150[];
+extern "C" int DAT_0043E170;
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_00073780(int, int, int, int, int, int, int, int, int);
+
+class StatePropDragTemplate;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<StatePropDragTemplate>::vfunc_02()
+{
+    sub_00070520(DAT_0043E170, DAT_0043E760);
+    DAT_0043E764 = (int)DAT_0043E150;
+    sub_00073780((int)DAT_0043E62C, 6, 0, 0, 36, 0, 0, 0, 0);
+    sub_00073780((int)DAT_0043E618, 6, 0, 0, 40, 0, 0, 0, 0);
+}
+
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<StatePropSnapToWaterTemplate>::vfunc_01 (0x001EE7C0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -198661,7 +199277,46 @@ template <> int ConcreteClassRep<SkyTemplate>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x001FD8F0 ConcreteClassRep<SkyTemplate>::vfunc_02 (84 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<SkyTemplate>::vfunc_02 (0x001FD8F0, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ConcreteClassRep<SkyTemplate>::vfunc_02 (Proto 0x001C2400), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001FD8F0
+// what: Fills in the script system's description of the SkyTemplate class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00024510, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004402F0;
+extern "C" int DAT_004402F4;
+extern "C" char DAT_00440284[];
+extern "C" char DAT_00440290[];
+extern "C" char DAT_0041C010[];
+extern "C" int DAT_0041C030;
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_00073780(int, int, int, int, int, int, int, int, int);
+
+class SkyTemplate;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<SkyTemplate>::vfunc_02()
+{
+    sub_00070520(DAT_0041C030, DAT_004402F0);
+    DAT_004402F4 = (int)DAT_0041C010;
+    sub_00073780((int)DAT_00440290, 8, 0, 0, 36, 0, 0, 0, 0);
+    sub_00073780((int)DAT_00440284, 8, 0, 0, 40, 0, 0, 0, 0);
+}
+
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<SpeedDataTemplate>::vfunc_01 (0x001FDA90, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -204398,7 +205053,45 @@ template <> int ConcreteClassRep<VehicleFlappingJointProperties>::vfunc_01()
     return 0;
 }
 
-// [TODO] 0x002082E0 ConcreteClassRep<VehicleFlappingJointProperties>::vfunc_02 (84 B)
+// ============================================================================
+// [VERIFIED] ConcreteClassRep<VehicleFlappingJointProperties>::vfunc_02 (0x002082E0, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills in the script system's description of the VehicleFlappingJointProperties class and lists its fields.
+// ============================================================================
+// bin: xb
+// va: 0x002082E0
+// what: Fills in the script system's description of the VehicleFlappingJointProperties class and lists its fields.
+// tool: Claude Opus 5.5 (transplanted from proto:0x00024510, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004477E8;
+extern "C" int DAT_004477EC;
+extern "C" char DAT_00445F78[];
+extern "C" char DAT_00445F88[];
+extern "C" char DAT_0041BDC0[];
+extern "C" int DAT_0041BDE0;
+extern "C" void __cdecl sub_00070520(int, int);
+extern "C" void __cdecl sub_00073780(int, int, int, int, int, int, int, int, int);
+
+class VehicleFlappingJointProperties;
+
+template <class T0> class ConcreteClassRep
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+template <> void ConcreteClassRep<VehicleFlappingJointProperties>::vfunc_02()
+{
+    sub_00070520(DAT_0041BDE0, DAT_004477E8);
+    DAT_004477EC = (int)DAT_0041BDC0;
+    sub_00073780((int)DAT_00445F88, 16, 0, 0, 40, 0, 0, 0, 0);
+    sub_00073780((int)DAT_00445F78, 16, 0, 0, 56, 0, 0, 0, 0);
+}
+
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleRenderMaskTemplate>::vfunc_01 (0x00208340, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -212916,7 +213609,46 @@ VehicleCameraCategoryProperties* VehicleCameraCategoryProperties::vfunc_01(int a
     return this;
 }
 
-// [TODO] 0x0020F5B0 sub_0020F5B0 (127 B)
+// ============================================================================
+// [VERIFIED] sub_0020F5B0 (0x0020F5B0, 127 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001D44A0 (Proto 0x001D44A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0020F5B0
+// what: Looks up an object by name, keeps it in the holder and hands back a pointer into it; says whether it was found.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00200EA0, nearest by portal/tools/similar.py)
+struct Holder
+{
+    void* object;
+    void sub_00098B90(void* object);
+};
+
+extern "C" char DAT_004195CC[];
+extern "C" char DAT_00441624[];
+extern "C" void* __cdecl sub_0002AC90(void* object);
+extern "C" void* __cdecl sub_0002B770(const char* name, int flags);
+extern "C" void* __cdecl sub_002FC034(void* object, int offset, void* from, void* to, int isReference);
+
+// Looks a name up, casts what it finds to the wanted type, keeps it in the holder, and
+// hands back the address 0x24 bytes into it. False when the name is empty or nothing is found.
+bool __cdecl sub_0020F5B0(const char* name, Holder* holder, void** out)
+{
+    bool found = false;
+    *out = 0;
+    if (name && *name) {
+        void* object = sub_0002B770(name, 0);
+        holder->sub_00098B90(sub_002FC034(object, 0, DAT_004195CC, DAT_00441624, 0));
+        sub_0002AC90(holder->object);
+        if (sub_0002AC90(holder->object)) {
+            *out = (char*)sub_0002AC90(holder->object) + 0x24;
+            found = true;
+        }
+    }
+    return found;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0020F630 (0x0020F630, 127 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -213349,7 +214081,46 @@ bool __cdecl sub_0020FBB0(const char* name, Holder* holder, void** out)
     return found;
 }
 
-// [TODO] 0x0020FC30 sub_0020FC30 (127 B)
+// ============================================================================
+// [VERIFIED] sub_0020FC30 (0x0020FC30, 127 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001D44A0 (Proto 0x001D44A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0020FC30
+// what: Looks up an object by name, keeps it in the holder and hands back a pointer into it; says whether it was found.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00200EA0, nearest by portal/tools/similar.py)
+struct Holder
+{
+    void* object;
+    void sub_00098B90(void* object);
+};
+
+extern "C" char DAT_004195CC[];
+extern "C" char DAT_0044B804[];
+extern "C" void* __cdecl sub_0002AC90(void* object);
+extern "C" void* __cdecl sub_0002B770(const char* name, int flags);
+extern "C" void* __cdecl sub_002FC034(void* object, int offset, void* from, void* to, int isReference);
+
+// Looks a name up, casts what it finds to the wanted type, keeps it in the holder, and
+// hands back the address 0x24 bytes into it. False when the name is empty or nothing is found.
+bool __cdecl sub_0020FC30(const char* name, Holder* holder, void** out)
+{
+    bool found = false;
+    *out = 0;
+    if (name && *name) {
+        void* object = sub_0002B770(name, 0);
+        holder->sub_00098B90(sub_002FC034(object, 0, DAT_004195CC, DAT_0044B804, 0));
+        sub_0002AC90(holder->object);
+        if (sub_0002AC90(holder->object)) {
+            *out = (char*)sub_0002AC90(holder->object) + 0x24;
+            found = true;
+        }
+    }
+    return found;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0020FCB0 (0x0020FCB0, 127 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -213386,7 +214157,46 @@ bool __cdecl sub_0020FCB0(const char* name, Holder* holder, void** out)
     return found;
 }
 
-// [TODO] 0x0020FD30 sub_0020FD30 (127 B)
+// ============================================================================
+// [VERIFIED] sub_0020FD30 (0x0020FD30, 127 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001D44A0 (Proto 0x001D44A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0020FD30
+// what: Looks up an object by name, keeps it in the holder and hands back a pointer into it; says whether it was found.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00200EA0, nearest by portal/tools/similar.py)
+struct Holder
+{
+    void* object;
+    void sub_00098B90(void* object);
+};
+
+extern "C" char DAT_004195CC[];
+extern "C" char DAT_0043A354[];
+extern "C" void* __cdecl sub_0002AC90(void* object);
+extern "C" void* __cdecl sub_0002B770(const char* name, int flags);
+extern "C" void* __cdecl sub_002FC034(void* object, int offset, void* from, void* to, int isReference);
+
+// Looks a name up, casts what it finds to the wanted type, keeps it in the holder, and
+// hands back the address 0x24 bytes into it. False when the name is empty or nothing is found.
+bool __cdecl sub_0020FD30(const char* name, Holder* holder, void** out)
+{
+    bool found = false;
+    *out = 0;
+    if (name && *name) {
+        void* object = sub_0002B770(name, 0);
+        holder->sub_00098B90(sub_002FC034(object, 0, DAT_004195CC, DAT_0043A354, 0));
+        sub_0002AC90(holder->object);
+        if (sub_0002AC90(holder->object)) {
+            *out = (char*)sub_0002AC90(holder->object) + 0x24;
+            found = true;
+        }
+    }
+    return found;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0020FDB0 (0x0020FDB0, 127 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -214720,7 +215530,46 @@ void *Class_00211990::sub_00211990()
     return sub_0002AC90(m_Field100);
 }
 
-// [TODO] 0x002119A0 sub_002119A0 (127 B)
+// ============================================================================
+// [VERIFIED] sub_002119A0 (0x002119A0, 127 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001D44A0 (Proto 0x001D44A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x002119A0
+// what: Looks up an object by name, keeps it in the holder and hands back a pointer into it; says whether it was found.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00200EA0, nearest by portal/tools/similar.py)
+struct Holder
+{
+    void* object;
+    void sub_00098B90(void* object);
+};
+
+extern "C" char DAT_004195CC[];
+extern "C" char DAT_0044B934[];
+extern "C" void* __cdecl sub_0002AC90(void* object);
+extern "C" void* __cdecl sub_0002B770(const char* name, int flags);
+extern "C" void* __cdecl sub_002FC034(void* object, int offset, void* from, void* to, int isReference);
+
+// Looks a name up, casts what it finds to the wanted type, keeps it in the holder, and
+// hands back the address 0x24 bytes into it. False when the name is empty or nothing is found.
+bool __cdecl sub_002119A0(const char* name, Holder* holder, void** out)
+{
+    bool found = false;
+    *out = 0;
+    if (name && *name) {
+        void* object = sub_0002B770(name, 0);
+        holder->sub_00098B90(sub_002FC034(object, 0, DAT_004195CC, DAT_0044B934, 0));
+        sub_0002AC90(holder->object);
+        if (sub_0002AC90(holder->object)) {
+            *out = (char*)sub_0002AC90(holder->object) + 0x24;
+            found = true;
+        }
+    }
+    return found;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00211A20 (0x00211A20, 81 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -236017,7 +236866,53 @@ Node_00244540* __cdecl sub_00244540(Node_00244540* node, void* p)
     return 0;
 }
 
-// [TODO] 0x00244580 sub_00244580 (62 B)
+// ============================================================================
+// [VERIFIED] sub_00244580 (0x00244580, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00201A20 (Proto 0x00201A20), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x00244580
+// what: Finds the deepest heap in the heap tree that owns a block of memory, or 0 when none does.
+// tool: Claude Opus 5.5 (transplanted from proto:0x002019E0, nearest by portal/tools/similar.py)
+class Allocator_00244580
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void Free(void* p);       // +0x14
+    virtual void vfunc_pad6_0();
+    virtual void vfunc_pad6_1();
+    virtual void vfunc_pad6_2();
+    virtual bool Contains(void* p);   // +0x18
+};
+
+struct Node_00244580
+{
+    Allocator_00244580* m_Allocator; // +0x00
+    Node_00244580* m_Child;          // +0x04
+    Node_00244580* m_Next;           // +0x08
+};
+
+extern "C" Node_00244580* __cdecl sub_00244580(Node_00244580* node, void* p);
+
+Node_00244580* __cdecl sub_00244580(Node_00244580* node, void* p)
+{
+    for (; node; node = node->m_Next)
+    {
+        if (node->m_Allocator->Contains(p))
+        {
+            Node_00244580* deeper = sub_00244580(node->m_Child, p);
+            return deeper ? deeper : node;
+        }
+    }
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_002445C0 (0x002445C0, 29 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

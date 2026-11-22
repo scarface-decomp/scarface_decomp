@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, fe/HUDTrackable.cpp (4 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, fe/HUDTrackable.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4 of 10 functions matched (40.00%). NOT COMPLETE YET.
-// The 6 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 10 functions matched (50.00%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -244,5 +244,49 @@ HUDTrackable* HUDTrackable::vfunc_01(int a1)
         sub_00025160((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] HUDTrackable::vfunc_00 (0x00178610, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: When the value given matches the one at +0x1C, stores a new number and passes it to a linked object.
+// ============================================================================
+// bin: proto
+// va: 0x00178610
+// what: When the value given matches the one at +0x1C, stores a new number and passes it to a linked object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x001A30E0, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03(int);
+};
+
+class HUDTrackable
+{
+public:
+    virtual void vfunc_00(int a1, int a2);
+    int m_Field04; // +0x04
+    char m_pad08[0x10];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+void HUDTrackable::vfunc_00(int a1, int a2)
+{
+    int r_eax, t1;
+
+    r_eax = a1;
+    if (a1 == m_Field1C) {
+        r_eax = *(int*)(a2 + 8);
+        t1 = m_Field18;
+        m_Field04 = r_eax;
+        r_eax = ((Object*)t1)->vfunc_03(r_eax);
+        *(unsigned char*)((char*)this - 0x4) |= 1;
+    }
 }
 

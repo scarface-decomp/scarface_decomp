@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/CharacterTemplate.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/CharacterTemplate.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 5 functions matched (60.00%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 5 functions matched (80.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -70,6 +70,39 @@ int CharacterTemplate::vfunc_05(int a1)
         m_Field50 = r_eax;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterTemplate::vfunc_12 (0x001BF9F0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the object held at +0x74 to a helper when there is one.
+// ============================================================================
+// bin: proto
+// va: 0x001BF9F0
+// what: Passes the object held at +0x74 to a helper when there is one.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000B8540, nearest by portal/tools/similar.py)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00015510(int);
+
+class Class_001BF9F0
+{
+public:
+    void sub_001BF9F0();
+    char m_pad00[0x74];
+    int m_Field74; // +0x74
+};
+
+void Class_001BF9F0::sub_001BF9F0()
+{
+    int r_eax;
+
+    r_eax = m_Field74;
+    if (r_eax) {
+        r_eax = sub_00015510(r_eax);
+    }
+    return;
 }
 
 // ============================================================================
