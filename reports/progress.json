@@ -52,16 +52,16 @@
   },
   "unattributed": 0,
   "queue": {
-    "pc": 872,
-    "xb": 11277,
-    "proto": 10371,
+    "pc": 873,
+    "xb": 11295,
+    "proto": 10042,
     "ps2": 24297,
-    "total": 12149,
+    "total": 12168,
     "tiers": {
-      "TIER_1_QUICK": 403,
-      "TIER_2_SMALL": 1077,
-      "TIER_3_MEDIUM": 2777,
-      "TIER_4_LARGE": 7892
+      "TIER_1_QUICK": 461,
+      "TIER_2_SMALL": 1438,
+      "TIER_3_MEDIUM": 2650,
+      "TIER_4_LARGE": 7619
     }
   },
   "good_first": [
@@ -73,6 +73,15 @@
       "size": 6,
       "why": "it was matched before the reset, so it can be done",
       "kind": "matched_before"
+    },
+    {
+      "id": "xb_00322D90",
+      "bin": "xb",
+      "va": "0x00322D90",
+      "symbol": "sub_00322D90",
+      "size": 1,
+      "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
     },
     {
       "id": "xb_0028D0F0",
@@ -90,15 +99,6 @@
       "symbol": "sub_002FBBE9",
       "size": 6,
       "why": "matching it also matches its 2 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_000D8260",
-      "bin": "xb",
-      "va": "0x000D8260",
-      "symbol": "sub_000D8260",
-      "size": 7,
-      "why": "matching it also matches its 3 look-alikes",
       "kind": "group"
     },
     {
@@ -129,12 +129,12 @@
       "kind": "named"
     },
     {
-      "id": "xb_0030715D",
+      "id": "xb_000D8260",
       "bin": "xb",
-      "va": "0x0030715D",
-      "symbol": "sub_0030715D",
-      "size": 8,
-      "why": "matching it also matches its 9 look-alikes",
+      "va": "0x000D8260",
+      "symbol": "sub_000D8260",
+      "size": 7,
+      "why": "matching it also matches its 3 look-alikes",
       "kind": "group"
     },
     {
