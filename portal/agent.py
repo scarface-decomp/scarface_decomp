@@ -37,6 +37,8 @@ TO_SUBMIT = ROOT / "reports" / "to_submit"
 DEFAULT_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 HEADER = re.compile(r"^//\s*(bin|va|what|tool|spec):\s*(.*)$", re.M)
 CLASSMATES = 3
+NEAREST = 3            # matched functions with the most similar instructions (portal/tools/similar.py)
+NEAREST_FLOOR = 0.6
 
 
 def registry() -> dict:
@@ -60,6 +62,10 @@ def find(b: str, va: int) -> dict:
     for t in functions():
         if t["bin"] == b and t["fva_int"] == va:
             return t
+    e = registry().get(key_of(b, va))
+    if e and e.get("size"):                  # matched already, so no longer in the queue of open work
+        return {"bin": b, "fva_int": va, "va": f"0x{va:08X}", "size": int(e["size"]), "symbol": e.get("symbol", ""),
+                "flags": e.get("flags") or DEFAULT_FLAGS}
     sys.exit(f"{key_of(b, va)} is not a function the project knows of. `next` lists the ones that are open.")
 
 
@@ -115,11 +121,22 @@ def cmd_next(args) -> int:
     rows = [t for t in functions() if key_of(t["bin"], t["fva_int"]) not in done
             and (not args.bin or t["bin"] == args.bin) and args.min_size <= int(t["size"]) <= args.max_size]
     rows.sort(key=lambda t: (int(t["size"]), t["bin"], t["fva_int"]))
+    score = {}
+    if args.order == "similar":
+        import similar as SIM
+        if not SIM.RANKED.exists():
+            sys.exit("Run `python portal/tools/similar.py rank` first (about a minute): it writes work/nearest_open.json.")
+        ranked = json.loads(SIM.RANKED.read_text(encoding="utf-8"))
+        score = {(r["bin"], int(r["va"], 16)): (r["score"], r["nearest"][0]["key"]) for r in ranked}
+        rows = [t for t in rows if (t["bin"], t["fva_int"]) in score]
+        rows.sort(key=lambda t: (-score[(t["bin"], t["fva_int"])][0], int(t["size"]), t["bin"], t["fva_int"]))
     waiting = {p.stem.lower() for p in TO_SUBMIT.glob("*.cpp")} if TO_SUBMIT.exists() else set()
     rows = [t for t in rows if f"{t['bin']}_{t['fva_int']:08x}" not in waiting]
-    print(f"{len(rows):,} open functions match. Smallest first:")
+    print(f"{len(rows):,} open functions match. " + ("Most like a matched function first:" if score else "Smallest first:"))
     for t in rows[args.skip:args.skip + args.n]:
-        print(f"  {t['bin']:<5} 0x{t['fva_int']:08X}  {int(t['size']):>5} B  {t.get('symbol', '')}")
+        near = score.get((t["bin"], t["fva_int"]))
+        tail = f"   {near[0]:.2f} like {near[1]}" if near else ""
+        print(f"  {t['bin']:<5} 0x{t['fva_int']:08X}  {int(t['size']):>5} B  {t.get('symbol', '')}{tail}")
     return 0
 
 
@@ -166,6 +183,18 @@ def cmd_packet(args) -> int:
     mates.sort(key=lambda e: (READ.grade(e.get("code", ""))["left"], -int(e.get("size", 0))))
     for e in mates[:CLASSMATES]:
         print(f"\n--- already matched in the same class: {e['symbol']} ({e['va']}, {e['size']} bytes) ---")
+        print(e.get("code", "").strip()[:5000])
+    shown = {f"{e['bin']}:{e['va']}" for e in mates[:CLASSMATES] if e.get("bin") and e.get("va")}
+    try:
+        import similar as SIM
+        near = SIM.nearest_for(b, va, size, k=NEAREST + len(shown), code=tb, floor=NEAREST_FLOOR)
+    except Exception:
+        near = []
+    near = [(s, it) for s, it in near if it["key"] not in shown][:NEAREST]
+    for s, it in near:
+        e = done.get(it["key"], {})
+        print(f"\n--- already matched, similar instructions ({s:.2f}): {e.get('symbol') or it['key']} "
+              f"({it['key']}, {e.get('size', it['size'])} bytes) ---")
         print(e.get("code", "").strip()[:5000])
     WORK.mkdir(exist_ok=True)
     out = WORK / f"{b}_{va:08X}.cpp"
@@ -300,6 +329,8 @@ def main(argv=None) -> int:
     p.add_argument("--max-size", type=int, default=10 ** 9)
     p.add_argument("-n", type=int, default=20)
     p.add_argument("--skip", type=int, default=0)
+    p.add_argument("--order", choices=("size", "similar"), default="size",
+                   help="similar: those most like an already matched function first (portal/tools/similar.py rank)")
     p.set_defaults(fn=cmd_next)
     p = sub.add_parser("packet", help="everything known about one function, and a starter file in work/")
     p.add_argument("bin", choices=sorted(BINARIES))
