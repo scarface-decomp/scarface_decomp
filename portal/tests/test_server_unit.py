@@ -442,6 +442,25 @@ def test_easy_pass_tries_each_starting_point_once(S, monkeypatch):
     monkeypatch.setattr(S, "ALL_TASKS", [big, held, done, t])
     assert [x["id"] for x in S.easy_targets("Alice", {})] == ["xb_00011000", "xb_4"]       # smallest first
     assert [x["id"] for x in S.easy_targets("Bob", {"xb:0x00011000": S.EASY_VERSION})] == ["xb_2", "xb_4"]
+    # tried under an older starter (a plain number, as before) is tried again
+    assert [x["id"] for x in S.easy_targets("Alice", {"xb:0x00011000": 4})] == ["xb_00011000", "xb_4"]
+
+
+def test_easy_version_follows_the_starter_code(S, monkeypatch, tmp_path):
+    """The easy pass's 'tried' mark is for one version of the starter code and compiler options: when
+    one of the files that make them changes, every function is tried again."""
+    tools = tmp_path / "tools"
+    tools.mkdir()
+    for name in ("disasm_synth.py", "class_merge.py", "msvc_verify.py", "lookalikes.py", "decompme.py"):
+        (tools / name).write_text("x = 1\n", encoding="utf-8")
+    monkeypatch.setattr(S, "PORTAL_DIR", tmp_path)
+    before = S._easy_version()
+    (tools / "msvc_verify.py").write_text("x = 1\r\n", encoding="utf-8")       # line endings don't count
+    assert S._easy_version() == before
+    (tools / "msvc_verify.py").write_text("x = 2\n", encoding="utf-8")         # a new flag option does
+    assert S._easy_version() != before
+    monkeypatch.setattr(S, "EASY_RELEASE", S.EASY_RELEASE + 1)
+    assert S._easy_version().startswith(f"{S.EASY_RELEASE}.")
 
 
 def test_better_names_travel_in_submissions(S, monkeypatch, tmp_path):

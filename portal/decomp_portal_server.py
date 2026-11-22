@@ -1480,7 +1480,24 @@ def catch_up_lookalikes() -> int:
 # background, and records the ones that match exactly with every address checked.
 
 EASY_TOOL = "the portal's starter code (no AI)"
-EASY_VERSION = 4                                   # raise when the starter code gets better: tried again
+EASY_RELEASE = 5                                   # raise by hand for a change the files below don't show
+
+
+def _easy_version() -> str:
+    """Which starter code and compiler options a 'tried, no match' was recorded under. It changes by itself
+    when any file that writes the starter code or picks the compiler options changes, so a better starter
+    or a new flag option (say /arch:SSE for cmov) tries everything again. A plain number raised by hand was
+    forgotten after Nov 17, and about 1,300 small functions that match today stayed marked as tried."""
+    h = hashlib.sha256(str(EASY_RELEASE).encode())
+    for name in ("disasm_synth.py", "class_merge.py", "msvc_verify.py", "lookalikes.py", "decompme.py"):
+        try:
+            h.update((PORTAL_DIR / "tools" / name).read_bytes().replace(b"\r\n", b"\n"))
+        except OSError:
+            pass
+    return f"{EASY_RELEASE}.{h.hexdigest()[:12]}"
+
+
+EASY_VERSION = _easy_version()
 EASY_MAX = int(os.environ.get("SCARFACE_EASY_MAX", "0"))    # at most this many a run (0: all of them)
 EASY_JSON = PRIVATE_DIR / "easy_pass.json"         # which functions this computer already tried (gitignored)
 EASY: dict = {"running": False, "stop": False, "total": 0, "tried": 0, "matched": 0, "by": "", "last": ""}
