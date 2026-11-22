@@ -9,8 +9,11 @@ Which matched functions does an open function look most like? Their C++ is the b
 The score is 1 minus the edit distance between the two functions' instruction sequences, divided by the
 longer length (the measure coddog uses, github.com/ethteck/coddog). An instruction is its mnemonic and the
 kind of each operand (register, memory, immediate), so register choice, offsets and addresses do not
-count: two functions that differ only in those score 1.0. Candidates are first picked by shared runs of
-three instructions, then scored exactly.
+count: two functions that differ only in those score 1.0. A memory operand also says what it is based
+on: a fixed address (a global, an imported function), the stack (an argument or a local) or another
+register (a member of `this` or of a pointer). Without that, `return m_Field18;` and `return a1->m_Field18;`
+looked the same and the nearest function was often the wrong kind to start from. Candidates are first
+picked by shared runs of three instructions, then scored exactly.
 
 The index of matched functions is cached in work/similar_index.json (read from your copy of the game;
 work/ is never committed) and rebuilt when the registry changes. `portal/agent.py packet` prints the three
@@ -38,7 +41,7 @@ CACHE = WORK / "similar_index.json"
 RANKED = WORK / "nearest_open.json"
 BINARIES = {"pc": ROOT / "binaries" / "Scarface.exe", "xb": ROOT / "binaries" / "default.xbe",
             "proto": ROOT / "binaries" / "game.xbe"}
-INDEX_VERSION = 1
+INDEX_VERSION = 2         # 2: memory operands say what they are based on
 NGRAM = 3
 COMMON_GRAM = 3000        # a run of three instructions found in more matched functions than this says little
 CANDIDATES = 40           # exact scoring for this many per query
@@ -46,14 +49,22 @@ MAX_TOKENS = 4000
 
 _REG = re.compile(r"^(?:[re]?[abcd]x|[abcd][lh]|[re]?[sd]il?|[re]?[sb]pl?|r\d+[dwb]?|[cdefgs]s|st(?:\(\d\))?|"
                   r"[xy]mm\d+|mm\d+|cr\d|dr\d)$")
+_ABS = re.compile(r"^(?:0x[0-9a-f]+|\d+)$")
+_STACK = re.compile(r"^e[sb]p\b")
 
 
 def _operand_kind(op: str) -> str:
     op = op.strip()
     if "[" in op:
         size = op.split("ptr")[0].strip() if "ptr" in op else ""
-        return "m" + {"byte": "8", "word": "16", "dword": "32", "qword": "64", "xmmword": "128",
+        kind = "m" + {"byte": "8", "word": "16", "dword": "32", "qword": "64", "xmmword": "128",
                       "tbyte": "80"}.get(size, "")
+        inner = op[op.index("[") + 1:op.rindex("]")].strip()
+        if _ABS.match(inner):
+            return kind + "a"                     # a fixed address: a global or an import
+        if _STACK.match(inner):
+            return kind + "s"                     # an argument or a local
+        return kind                               # based on another register: this, a pointer
     if _REG.match(op):
         if op.startswith(("xmm", "ymm")):
             return "x"
