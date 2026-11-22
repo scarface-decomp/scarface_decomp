@@ -3,7 +3,7 @@
 Scarface: The World Is Yours — matching-decompilation portal server.
 
     python portal/decomp_portal_server.py      (Windows; opens http://127.0.0.1:8085)
-    python3 portal/decomp_portal_server.py    (Linux/macOS; runs cl.exe under Wine)
+    python3 portal/decomp_portal_server.py    (Linux/macOS; runs cl.exe under wibo or Wine)
 
 Environment variables:
     SCARFACE_HOST         interface to listen on (default 127.0.0.1 — local only)

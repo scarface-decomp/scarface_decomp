@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 611 of 1,514 functions matched (40.36%). NOT COMPLETE YET.
-// The 903 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 612 of 1,514 functions matched (40.42%). NOT COMPLETE YET.
+// The 902 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -18834,7 +18834,29 @@ void __cdecl sub_006FD9D0(int a1)
 }
 
 // [TODO] 0x006FD9F0 SoundLoadSequence::vfunc_00 (6 B)
-// [TODO] 0x006FDA00 sub_006FDA00 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006FDA00 (0x006FDA00, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002DE790 (0x002DE790), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006FDA00
+// what: Returns the 16-bit value at +0x34.
+// tool: Claude Opus 5.5 (generated from the shape 'read short field', checked on decomp.me preset 266 by example)
+class Class_006FDA00
+{
+public:
+    unsigned short sub_006FDA00();
+    char m_pad00[0x34];
+    unsigned short m_Field34; // +0x34
+};
+
+unsigned short Class_006FDA00::sub_006FDA00()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x006FDA10 sub_006FDA10 (221 B)
 // [TODO] 0x006FDAF0 sub_006FDAF0 (24 B)
 // [TODO] 0x006FDB80 sub_006FDB80 (40 B)

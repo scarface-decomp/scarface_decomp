@@ -3,7 +3,7 @@
 
     python portal/scripts/recheck_matches.py                  # 300 matches picked at random
     python portal/scripts/recheck_matches.py --sample 2000    # more
-    python portal/scripts/recheck_matches.py --all            # every one (hours)
+    python portal/scripts/recheck_matches.py --all            # every one (about 20 minutes with wibo, hours under Wine)
     python portal/scripts/recheck_matches.py --bin xb         # one version: pc, xb or proto
 
 Every match in reports/verified_registry.json was compiled and compared when it was recorded. This

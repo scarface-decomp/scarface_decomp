@@ -20,6 +20,8 @@ workpacks/
 # The Visual C++ Toolkit 2003 is not redistributable
 portal/tools/msvc71/
 tools/msvc71/
+# wibo, downloaded by portal/scripts/setup_wibo.py (runs cl.exe on Linux)
+portal/tools/wibo/
 
 # Contributor credentials (salted hashes, but still private)
 private/

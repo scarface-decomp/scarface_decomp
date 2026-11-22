@@ -6,7 +6,7 @@ One implementation shared by the portal server (/api/verify, /api/cancel), porta
 portal/scripts/reverify_all.py, so every path applies the same rules:
 
   1. Genuine-C++ policy on the raw source AND on cl.exe's preprocessed output (portal/tools/cpp_policy.py).
-  2. Compile with MSVC 7.10 (cl.exe; under Wine on Linux/macOS) with a hard timeout.
+  2. Compile with MSVC 7.10 (cl.exe; under wibo or Wine on Linux/macOS) with a hard timeout.
   3. Pick the function by name. Never fall back to "some other function" when the name is
      ambiguous; a single-function .obj is accepted as-is.
   4. Compare EXACT length and every byte. Relocation slots are not blindly masked:
@@ -64,19 +64,45 @@ def find_msvc71_bin() -> Optional[Path]:
     return None
 
 
+def _wibo() -> Optional[str]:
+    """wibo (github.com/decompals/wibo) runs cl.exe on Linux without Wine, the way decomp.me does.
+    Used when SCARFACE_WIBO names it or it is on PATH; SCARFACE_USE_WINE=1 forces Wine instead."""
+    if os.name == "nt" or os.environ.get("SCARFACE_USE_WINE") == "1":
+        return None
+    env = os.environ.get("SCARFACE_WIBO")
+    if env:
+        return env if Path(env).exists() else None
+    local = PORTAL / "tools" / "wibo" / "wibo"       # where portal/scripts/setup_wibo.py puts it
+    if local.exists() and os.access(local, os.X_OK):
+        return str(local)
+    return shutil.which("wibo")
+
+
+def runner_name() -> str:
+    """'native', 'wibo', 'wine' or '' (nothing here can run cl.exe)."""
+    if os.name == "nt":
+        return "native"
+    if _wibo():
+        return "wibo"
+    return "wine" if shutil.which("wine") else ""
+
+
 def _runner(bin_dir: Path) -> List[str]:
     cl = str(bin_dir / "cl.exe")
     if os.name == "nt":
         return [cl]
+    wibo = _wibo()
+    if wibo:
+        return [wibo, cl]
     wine = shutil.which("wine")
     if not wine:
-        raise RuntimeError("cl.exe is a Windows program; install Wine to run it on this OS.")
+        raise RuntimeError("cl.exe is a Windows program; install wibo or Wine to run it on this OS.")
     return [wine, cl]
 
 
 def _compiler_path(p: Path) -> str:
-    """How cl.exe will spell a path in #line markers (Wine maps / to Z:\\)."""
-    if os.name == "nt":
+    """How cl.exe will spell a path in #line markers (wibo keeps host paths; Wine maps / to Z:\\)."""
+    if os.name == "nt" or _wibo():
         return str(p)
     return "Z:" + str(p).replace("/", "\\")
 
@@ -123,6 +149,10 @@ def _env(bin_dir: Path, include_dirs: Sequence[Path]) -> dict:
     env["INCLUDE"] = ";".join(_compiler_path(Path(d)) for d in include_dirs if Path(d).exists())
     env["LIB"] = ""
     env.setdefault("WINEDEBUG", "-all")
+    if _wibo():
+        # wibo 1.2.0 crashes under cl.exe 13.10 (SIGSEGV / "free(): invalid pointer") whenever TMPDIR is set,
+        # whatever its value; TMP and TEMP are fine.
+        env.pop("TMPDIR", None)
     return env
 
 
