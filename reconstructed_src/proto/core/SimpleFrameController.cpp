@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/SimpleFrameController.cpp (4 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/SimpleFrameController.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4 of 14 functions matched (28.57%). NOT COMPLETE YET.
-// The 10 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 14 functions matched (42.86%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -61,6 +61,72 @@ int SimpleFrameController::vfunc_27()
     return m_Field30;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::SimpleFrameController::vfunc_12 (0x00225180, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::SimpleFrameController::vfunc_12 (0x00273400), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00225180
+// what: Returns the number at +0x10 of the object pointed to at +0x30, or the constant at 0x0037E6C0 when there is none.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer or a default', checked on decomp.me preset 266 by example)
+extern "C" const float DAT_0037E6C0;
+
+struct Obj_00225180
+{
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+class Class_00225180
+{
+public:
+    float sub_00225180();
+    char m_pad00[0x30];
+    Obj_00225180* m_Field30; // +0x30
+};
+
+float Class_00225180::sub_00225180()
+{
+    if (m_Field30)
+        return m_Field30->m_Field10;
+    return DAT_0037E6C0;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::SimpleFrameController::vfunc_13 (0x002251A0, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::SimpleFrameController::vfunc_13 (0x00273420), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002251A0
+// what: Returns the number at +0xC of the object pointed to at +0x30, or the constant at 0x0037CD94 when there is none.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer or a default', checked on decomp.me preset 266 by example)
+extern "C" const float DAT_0037CD94;
+
+struct Obj_002251A0
+{
+    char m_pad00[0xC];
+    float m_FieldC; // +0xC
+};
+
+class Class_002251A0
+{
+public:
+    float sub_002251A0();
+    char m_pad00[0x30];
+    Obj_002251A0* m_Field30; // +0x30
+};
+
+float Class_002251A0::sub_002251A0()
+{
+    if (m_Field30)
+        return m_Field30->m_FieldC;
+    return DAT_0037CD94;
 }
 
 // ============================================================================

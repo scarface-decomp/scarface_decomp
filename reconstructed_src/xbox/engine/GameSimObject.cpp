@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GameSimObject.cpp (8 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GameSimObject.cpp (9 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 8 of 19 functions matched (42.11%). NOT COMPLETE YET.
-// The 11 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 9 of 19 functions matched (47.37%). NOT COMPLETE YET.
+// The 10 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -143,6 +143,30 @@ public:
 bool Class_0002A330::sub_0002A330()
 {
     return m_Flag1;
+}
+
+// ============================================================================
+// [VERIFIED] GameSimObject::vfunc_53 (0x0002A340, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 2 of the byte at +0xA5.
+// ============================================================================
+// bin: xb
+// va: 0x0002A340
+// what: Sets flag bit 2 of the byte at +0xA5.
+// tool: Claude Opus 5.5 (generated from the shape 'set one flag bit', checked on decomp.me preset 266 by example)
+class Class_0002A340
+{
+public:
+    void sub_0002A340(bool value);
+    char m_pad00[0xA5];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+void Class_0002A340::sub_0002A340(bool value)
+{
+    m_Flag2 = value;
 }
 
 // ============================================================================

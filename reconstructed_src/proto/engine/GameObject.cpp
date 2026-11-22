@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GameObject.cpp (7 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GameObject.cpp (8 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7 of 11 functions matched (63.64%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 8 of 11 functions matched (72.73%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -233,6 +233,39 @@ int GameObject::vfunc_27(int a1)
     t1 = *(int*)(a1 + 8);
     m_Field68 = *(int*)(a1 + 8);
     return t1;
+}
+
+// ============================================================================
+// [VERIFIED] GameObject::vfunc_33 (0x00026F70, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x00026F70
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_00026F70 (0x00026F70, 30 bytes)
+
+struct Struct_00026F70
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_00026F70
+{
+public:
+    Struct_00026F70 sub_00026F70() const;
+
+    char m_pad00[0x60];
+    Struct_00026F70 m_Field60; // +0x60
+};
+
+// Returns the stored vector by value.
+Struct_00026F70 Class_00026F70::sub_00026F70() const
+{
+    return m_Field60;
 }
 
 // ============================================================================

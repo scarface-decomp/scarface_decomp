@@ -1,13 +1,39 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/String.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/String.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 22 functions matched (9.09%). NOT COMPLETE YET.
-// The 20 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 22 functions matched (13.64%). NOT COMPLETE YET.
+// The 19 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::String::vfunc_24 (0x006E00C0, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x14 with its top bit cleared.
+// ============================================================================
+// bin: pc
+// va: 0x006E00C0
+// what: Returns the number at +0x14 with its top bit cleared.
+// tool: Claude Opus 5.5 (transplanted from proto:0x000FAB90, nearest by portal/tools/similar.py)
+// sub_006E00C0 (Proto 0x006E00C0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E00C0
+{
+public:
+    int sub_006E00C0();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Class_006E00C0::sub_006E00C0()
+{
+    return m_Field14 & 2147483647;
+}
 
 // ============================================================================
 // [VERIFIED] core::String::vfunc_03 (0x006E0540, 36 B)

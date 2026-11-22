@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dContext.cpp (61 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dContext.cpp (62 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 61 of 116 functions matched (52.59%). NOT COMPLETE YET.
-// The 55 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 62 of 116 functions matched (53.45%). NOT COMPLETE YET.
+// The 54 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -2025,6 +2025,34 @@ int d3dContext::vfunc_08(int a1)
     return t1;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dContext::vfunc_09 (0x002616A0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x8 of the object pointed to at +0x48.
+// ============================================================================
+// bin: proto
+// va: 0x002616A0
+// what: Returns the number at +0x8 of the object pointed to at +0x48.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010EE30, nearest by portal/tools/similar.py)
+struct Obj_002616A0
+{
+    char m_pad00[0x8];
+    float m_Field08; // +0x8
+};
+
+class Class_002616A0
+{
+public:
+    float sub_002616A0();
+    char m_pad00[0x48];
+    Obj_002616A0* m_Field48; // +0x48
+};
+
+float Class_002616A0::sub_002616A0()
+{
+    return m_Field48->m_Field08;
 }
 
 // ============================================================================

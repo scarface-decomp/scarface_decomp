@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/SimpleFrameController.cpp (4 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/SimpleFrameController.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4 of 14 functions matched (28.57%). NOT COMPLETE YET.
-// The 10 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 14 functions matched (42.86%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -59,6 +59,70 @@ int SimpleFrameController::vfunc_27()
     return m_Field30;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::SimpleFrameController::vfunc_12 (0x00273400, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x10 of the object pointed to at +0x30, or the constant at 0x0039F068 when there is none.
+// ============================================================================
+// bin: xb
+// va: 0x00273400
+// what: Returns the number at +0x10 of the object pointed to at +0x30, or the constant at 0x0039F068 when there is none.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer or a default', checked on decomp.me preset 266 by example)
+extern "C" const float DAT_0039F068;
+
+struct Obj_00273400
+{
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+class Class_00273400
+{
+public:
+    float sub_00273400();
+    char m_pad00[0x30];
+    Obj_00273400* m_Field30; // +0x30
+};
+
+float Class_00273400::sub_00273400()
+{
+    if (m_Field30)
+        return m_Field30->m_Field10;
+    return DAT_0039F068;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::SimpleFrameController::vfunc_13 (0x00273420, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0xC of the object pointed to at +0x30, or the constant at 0x0039D584 when there is none.
+// ============================================================================
+// bin: xb
+// va: 0x00273420
+// what: Returns the number at +0xC of the object pointed to at +0x30, or the constant at 0x0039D584 when there is none.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer or a default', checked on decomp.me preset 266 by example)
+extern "C" const float DAT_0039D584;
+
+struct Obj_00273420
+{
+    char m_pad00[0xC];
+    float m_FieldC; // +0xC
+};
+
+class Class_00273420
+{
+public:
+    float sub_00273420();
+    char m_pad00[0x30];
+    Obj_00273420* m_Field30; // +0x30
+};
+
+float Class_00273420::sub_00273420()
+{
+    if (m_Field30)
+        return m_Field30->m_FieldC;
+    return DAT_0039D584;
 }
 
 // ============================================================================

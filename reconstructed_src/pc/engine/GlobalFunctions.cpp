@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (213 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (218 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 213 of 748 functions matched (28.48%). NOT COMPLETE YET.
-// The 535 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 218 of 748 functions matched (29.14%). NOT COMPLETE YET.
+// The 530 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -270,6 +270,40 @@ public:
 void Class_006DF970::sub_006DF970()
 {
     sub_0042C0C6();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E0D10 (0x006E0D10, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// What it does: Works out how much usable room a memory block has from the header just before it, or 0 for none.
+// ============================================================================
+// bin: pc
+// va: 0x006E0D10
+// what: Works out how much usable room a memory block has from the header just before it, or 0 for none.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0024B330, nearest by portal/tools/similar.py)
+// sub_006E0D10 (Proto 0x006E0D10, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006E0D10(int a1)
+{
+    int r_eax;
+
+    if (a1) {
+        r_eax = *(int*)(a1 + -4);
+        if (((unsigned char)r_eax) & 2) {
+            r_eax &= -4;
+            r_eax -= 8;
+            return r_eax;
+        }
+        if (!(*(int*)((r_eax & -2) + a1 + -4) & 1)) goto L_29;
+        r_eax &= -4;
+        r_eax -= 4;
+        return r_eax;
+    }
+L_29:
+    r_eax = 0;
+    return r_eax;
 }
 
 // ============================================================================
@@ -1844,6 +1878,32 @@ int Class_006EB6D0::sub_006EB6D0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_006EB6E0 (0x006EB6E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a 16-bit number at +0x08.
+// ============================================================================
+// bin: pc
+// va: 0x006EB6E0
+// what: Stores a 16-bit number at +0x08.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000117E0, nearest by portal/tools/similar.py)
+// sub_006EB6E0 (0x006EB6E0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EB6E0
+{
+public:
+    void sub_006EB6E0(int a1);
+    char m_pad00[0x8];
+    unsigned short m_Field08; // +0x8
+};
+
+void Class_006EB6E0::sub_006EB6E0(int a1)
+{
+    m_Field08 = (unsigned short)a1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_006EB9B0 (0x006EB9B0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -2907,6 +2967,24 @@ bool __cdecl sub_006EF360(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_006EF970 (0x006EF970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address 12 bytes into a record.
+// ============================================================================
+// bin: pc
+// va: 0x006EF970
+// what: Returns the address 12 bytes into a record.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0029AFB0, nearest by portal/tools/similar.py)
+// sub_006EF970 (Proto 0x006EF970, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EF970(int a1)
+{
+    return a1 + 12;
+}
+
+// ============================================================================
 // [VERIFIED] sub_006EF980 (0x006EF980, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -2937,6 +3015,25 @@ int __cdecl sub_006EFB60(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_006EFB70 (0x006EFB70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a decimal number at +0x10 of a record and returns the record.
+// ============================================================================
+// bin: pc
+// va: 0x006EFB70
+// what: Stores a decimal number at +0x10 of a record and returns the record.
+// tool: Claude Opus 5.5 (transplanted from proto:0x002AB580, nearest by portal/tools/similar.py)
+// sub_006EFB70 (Proto 0x006EFB70, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EFB70(int a1, float a2)
+{
+    *(float*)(a1 + 16) = a2;
+    return a1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_006EFB80 (0x006EFB80, 12 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -2950,6 +3047,25 @@ int __cdecl sub_006EFB80(int a1, float a2)
 {
     *(float*)(a1 + 20) = a2;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EFD30 (0x006EFD30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a yes/no value at +0x0C of a record and returns it.
+// ============================================================================
+// bin: pc
+// va: 0x006EFD30
+// what: Stores a yes/no value at +0x0C of a record and returns it.
+// tool: Claude Opus 5.5 (transplanted from proto:0x002AB470, nearest by portal/tools/similar.py)
+// sub_006EFD30 (Proto 0x006EFD30, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+bool __cdecl sub_006EFD30(int a1, bool a2)
+{
+    *(bool*)(a1 + 12) = a2;
+    return a2;
 }
 
 // ============================================================================

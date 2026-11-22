@@ -1,13 +1,37 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GameSimObject.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GameSimObject.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 12 functions matched (25.00%). NOT COMPLETE YET.
-// The 9 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 12 functions matched (41.67%). NOT COMPLETE YET.
+// The 7 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] GameSimObject::vfunc_42 (0x00027A30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 2 of the byte at +0x9C.
+// ============================================================================
+// bin: proto
+// va: 0x00027A30
+// what: Reads flag bit 2 of the byte at +0x9C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00012A20, nearest by portal/tools/similar.py)
+class Class_00027A30
+{
+public:
+    bool sub_00027A30();
+    char m_pad00[0x9C];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+bool Class_00027A30::sub_00027A30()
+{
+    return m_Flag2;
+}
 
 // ============================================================================
 // [VERIFIED] GameSimObject::vfunc_00 (0x00027AC0, 6 B)
@@ -30,6 +54,29 @@ public:
 void* GameSimObject::vfunc_00()
 {
     return DAT_003F6A40;
+}
+
+// ============================================================================
+// [VERIFIED] GameSimObject::vfunc_40 (0x00027AD0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 1 of the byte at +0x9C.
+// ============================================================================
+// bin: proto
+// va: 0x00027AD0
+// what: Reads flag bit 1 of the byte at +0x9C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0002A330, nearest by portal/tools/similar.py)
+class Class_00027AD0
+{
+public:
+    bool sub_00027AD0();
+    char m_pad00[0x9C];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+};
+
+bool Class_00027AD0::sub_00027AD0()
+{
+    return m_Flag1;
 }
 
 // ============================================================================

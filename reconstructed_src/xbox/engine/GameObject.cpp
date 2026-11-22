@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GameObject.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GameObject.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 11 functions matched (54.55%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 11 functions matched (63.64%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -207,5 +207,29 @@ GameObject* GameObject::vfunc_01(int a1)
         sub_00027600((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] GameObject::vfunc_35 (0x00029570, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of the three-number vector at +0x64.
+// ============================================================================
+// bin: xb
+// va: 0x00029570
+// what: Returns a copy of the three-number vector at +0x64.
+// tool: Claude Opus 5.5 (generated from the shape 'return a vector field', checked on decomp.me preset 266 by example)
+struct Vector_00029570 { float x, y, z; };
+
+class Class_00029570
+{
+public:
+    Vector_00029570 sub_00029570();
+    char m_pad00[0x64];
+    Vector_00029570 m_Field64; // +0x64
+};
+
+Vector_00029570 Class_00029570::sub_00029570()
+{
+    return m_Field64;
 }
 

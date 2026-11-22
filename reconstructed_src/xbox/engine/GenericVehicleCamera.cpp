@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GenericVehicleCamera.cpp (4 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GenericVehicleCamera.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4 of 9 functions matched (44.44%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 9 functions matched (55.56%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -30,6 +30,30 @@ public:
 void* GenericVehicleCamera::vfunc_00()
 {
     return DAT_0042EFB4;
+}
+
+// ============================================================================
+// [VERIFIED] GenericVehicleCamera::vfunc_44 (0x00157FB0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of the three-number vector at +0x14C.
+// ============================================================================
+// bin: xb
+// va: 0x00157FB0
+// what: Returns a copy of the three-number vector at +0x14C.
+// tool: Claude Opus 5.5 (generated from the shape 'return a vector field', checked on decomp.me preset 266 by example)
+struct Vector_00157FB0 { float x, y, z; };
+
+class Class_00157FB0
+{
+public:
+    Vector_00157FB0 sub_00157FB0();
+    char m_pad00[0x14C];
+    Vector_00157FB0 m_Field14C; // +0x14C
+};
+
+Vector_00157FB0 Class_00157FB0::sub_00157FB0()
+{
+    return m_Field14C;
 }
 
 // ============================================================================

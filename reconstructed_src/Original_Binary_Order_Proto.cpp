@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,353 of 17,873 functions matched (41.14%). NOT COMPLETE YET.
-// The 10,520 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 7,428 of 17,873 functions matched (41.56%). NOT COMPLETE YET.
+// The 10,445 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -1158,7 +1158,30 @@ int __cdecl sub_000126D0(int a1, int a2)
 
 // [TODO] 0x000126F0 sub_000126F0 (113 B)
 // [TODO] 0x00012770 sub_00012770 (169 B)
-// [TODO] 0x00012820 sub_00012820 (48 B)
+// ============================================================================
+// [VERIFIED] sub_00012820 (0x00012820, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Runs a constructor on every element of an array, first to last (compiler helper "vector constructor iterator").
+// ============================================================================
+// bin: proto
+// va: 0x00012820
+// what: Runs a constructor on every element of an array, first to last (compiler helper "vector constructor iterator").
+// tool: Claude Opus 5.5 (transplanted from xb:0x00012380, nearest by portal/tools/similar.py)
+// verify: python portal/verify.py reports/to_submit/xb_00012820.cpp --va 0x00012820 --bin xb --match '??_H'
+
+// ??_H (`vector constructor iterator') has no source of its own: cl writes it into any file that
+// builds an array of a class with a constructor and no destructor. The array below is that
+// declaration; which class and array the game's copy came from is not known.
+class Class_00012820
+{
+public:
+    Class_00012820();
+
+    int m_Field00;
+};
+
+Class_00012820 g_00012820[4];
+
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_00 (0x00012850, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1240,7 +1263,37 @@ int Class_000128E0::sub_000128E0()
     return t1;
 }
 
-// [TODO] 0x000128F0 sub_000128F0 (246 B)
+// ============================================================================
+// [VERIFIED] sub_000128F0 (0x000128F0, 246 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 16-byte records so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: proto
+// va: 0x000128F0
+// what: Rotates a range of 16-byte records so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5 (transplanted from xb:0x00012450, nearest by portal/tools/similar.py)
+// verify: python portal/verify.py reports/to_submit/xb_000128F0.cpp --va 0x000128F0 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// A 16-byte record sorted by its leading float key; the other fields are not known yet.
+struct Class_000128F0
+{
+    float m_Key;
+    int m_Field04;
+    int m_Field08;
+    int m_Field0C;
+};
+
+// Records order by their key.
+inline bool operator<(const Class_000128F0 &left, const Class_000128F0 &right)
+{
+    return left.m_Key < right.m_Key;
+}
+
+// std::_Rotate for random-access iterators, instantiated for Class_000128F0.
+template void std::_Rotate<Class_000128F0 *, int, Class_000128F0>(Class_000128F0 *, Class_000128F0 *, Class_000128F0 *, int *, Class_000128F0 *);
+
 // [TODO] 0x000129F0 sub_000129F0 (49 B)
 // [TODO] 0x00012A30 sub_00012A30 (71 B)
 // [TODO] 0x00012A80 sub_00012A80 (93 B)
@@ -8709,7 +8762,31 @@ template <> void ConcreteClassRep<FEObject>::vfunc_02()
     sub_00023530((int)DAT_003F6048, (int)DAT_0037CD30, (int)sub_00021AC0, 2, 2, (int)DAT_0037CD30);
 }
 
-// [TODO] 0x000235E0 sub_000235E0 (49 B)
+// ============================================================================
+// [VERIFIED] sub_000235E0 (0x000235E0, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Runs a destructor on every element of an array, last to first (compiler helper "vector destructor iterator").
+// ============================================================================
+// bin: proto
+// va: 0x000235E0
+// what: Runs a destructor on every element of an array, last to first (compiler helper "vector destructor iterator").
+// tool: Claude Opus 5.5 (transplanted from xb:0x00025400, nearest by portal/tools/similar.py)
+// verify: python portal/verify.py reports/to_submit/xb_000235E0.cpp --va 0x000235E0 --bin xb --match '??_I' --flags "/O2 /Ot /Oy /G6 /Gd /GR /Zp4"
+
+// ??_I (`vector destructor iterator') has no source of its own: cl writes it into a file that
+// destroys an array of a class with a destructor. With /EHsc cl uses the exception-aware
+// iterator instead, so the game's copy came from a file built without /EHsc (see the verify line).
+// The array below is the declaration that needs it; which class it was is not known.
+class Class_000235E0
+{
+public:
+    ~Class_000235E0();
+
+    int m_Field00;
+};
+
+Class_000235E0 g_000235E0[4];
+
 // [TODO] 0x00023620 sub_00023620 (203 B)
 // [TODO] 0x000236F0 sub_000236F0 (82 B)
 // ============================================================================
@@ -11125,7 +11202,39 @@ int GameObject::vfunc_27(int a1)
 
 // [TODO] 0x00026F00 GameObject::vfunc_29 (51 B)
 // [TODO] 0x00026F40 GameObject::vfunc_30 (36 B)
-// [TODO] 0x00026F70 GameObject::vfunc_33 (30 B)
+// ============================================================================
+// [VERIFIED] GameObject::vfunc_33 (0x00026F70, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x00026F70
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_00026F70 (0x00026F70, 30 bytes)
+
+struct Struct_00026F70
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_00026F70
+{
+public:
+    Struct_00026F70 sub_00026F70() const;
+
+    char m_pad00[0x60];
+    Struct_00026F70 m_Field60; // +0x60
+};
+
+// Returns the stored vector by value.
+Struct_00026F70 Class_00026F70::sub_00026F70() const
+{
+    return m_Field60;
+}
+
 // [TODO] 0x00026F90 GameObject::vfunc_28 (247 B)
 // ============================================================================
 // [VERIFIED] sub_00027090 (0x00027090, 30 B)
@@ -11756,7 +11865,39 @@ GameSetObject* GameSetObject::vfunc_01(int a1)
 // [TODO] 0x000278C0 GameSimObject::vfunc_38 (43 B)
 // [TODO] 0x000278F0 GameSimObject::vfunc_39 (40 B)
 // [TODO] 0x00027920 GameSimObject::vfunc_18 (67 B)
-// [TODO] 0x00027970 sub_00027970 (30 B)
+// ============================================================================
+// [VERIFIED] sub_00027970 (0x00027970, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x00027970
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_00027970 (0x00027970, 30 bytes)
+
+struct Struct_00027970
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_00027970
+{
+public:
+    Struct_00027970 sub_00027970() const;
+
+    char m_pad00[0x78];
+    Struct_00027970 m_Field78; // +0x78
+};
+
+// Returns the stored vector by value.
+Struct_00027970 Class_00027970::sub_00027970() const
+{
+    return m_Field78;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00027990 (0x00027990, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11781,7 +11922,30 @@ int Class_00027990::sub_00027990()
 // [TODO] 0x000279A0 sub_000279A0 (43 B)
 // [TODO] 0x000279D0 sub_000279D0 (43 B)
 // [TODO] 0x00027A00 GameSimObject::vfunc_41 (43 B)
-// [TODO] 0x00027A30 GameSimObject::vfunc_42 (12 B)
+// ============================================================================
+// [VERIFIED] GameSimObject::vfunc_42 (0x00027A30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 2 of the byte at +0x9C.
+// ============================================================================
+// bin: proto
+// va: 0x00027A30
+// what: Reads flag bit 2 of the byte at +0x9C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00012A20, nearest by portal/tools/similar.py)
+class Class_00027A30
+{
+public:
+    bool sub_00027A30();
+    char m_pad00[0x9C];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+bool Class_00027A30::sub_00027A30()
+{
+    return m_Flag2;
+}
+
 // [TODO] 0x00027A40 sub_00027A40 (117 B)
 // ============================================================================
 // [VERIFIED] GameSimObject::vfunc_00 (0x00027AC0, 6 B)
@@ -11806,7 +11970,29 @@ void* GameSimObject::vfunc_00()
     return DAT_003F6A40;
 }
 
-// [TODO] 0x00027AD0 GameSimObject::vfunc_40 (11 B)
+// ============================================================================
+// [VERIFIED] GameSimObject::vfunc_40 (0x00027AD0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 1 of the byte at +0x9C.
+// ============================================================================
+// bin: proto
+// va: 0x00027AD0
+// what: Reads flag bit 1 of the byte at +0x9C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0002A330, nearest by portal/tools/similar.py)
+class Class_00027AD0
+{
+public:
+    bool sub_00027AD0();
+    char m_pad00[0x9C];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+};
+
+bool Class_00027AD0::sub_00027AD0()
+{
+    return m_Flag1;
+}
+
 // [TODO] 0x00027AE0 sub_00027AE0 (84 B)
 // [TODO] 0x00027B40 GameSimObject::vfunc_05 (302 B)
 // ============================================================================
@@ -21546,7 +21732,39 @@ void Class_00049030::sub_00049030()
     }
 }
 
-// [TODO] 0x00049060 renderer::CharacterRenderable::vfunc_13 (33 B)
+// ============================================================================
+// [VERIFIED] renderer::CharacterRenderable::vfunc_13 (0x00049060, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x00049060
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_00049060 (0x00049060, 30 bytes)
+
+struct Struct_00049060
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_00049060
+{
+public:
+    Struct_00049060 sub_00049060() const;
+
+    char m_pad00[0xAC];
+    Struct_00049060 m_FieldAC; // +0xAC
+};
+
+// Returns the stored vector by value.
+Struct_00049060 Class_00049060::sub_00049060() const
+{
+    return m_FieldAC;
+}
+
 // [TODO] 0x00049090 renderer::CharacterRenderable::vfunc_10 (16 B)
 // [TODO] 0x000490A0 sub_000490A0 (483 B)
 // [TODO] 0x00049290 sub_00049290 (81 B)
@@ -22629,7 +22847,39 @@ MaskRenderable* MaskRenderable::vfunc_03(int a1)
 
 // [TODO] 0x0004C580 sub_0004C580 (95 B)
 // [TODO] 0x0004C5E0 renderer::CharacterRenderable::vfunc_12 (32 B)
-// [TODO] 0x0004C600 renderer::NISRenderable::vfunc_13 (33 B)
+// ============================================================================
+// [VERIFIED] renderer::NISRenderable::vfunc_13 (0x0004C600, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x0004C600
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_0004C600 (0x0004C600, 30 bytes)
+
+struct Struct_0004C600
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_0004C600
+{
+public:
+    Struct_0004C600 sub_0004C600() const;
+
+    char m_pad00[0x80];
+    Struct_0004C600 m_Field80; // +0x80
+};
+
+// Returns the stored vector by value.
+Struct_0004C600 Class_0004C600::sub_0004C600() const
+{
+    return m_Field80;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0004C630 (0x0004C630, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -23611,7 +23861,39 @@ RainRenderable* RainRenderable::vfunc_03(int a1)
 // [TODO] 0x0004E9F0 sub_0004E9F0 (22 B)
 // [TODO] 0x0004EA10 sub_0004EA10 (35 B)
 // [TODO] 0x0004EA40 sub_0004EA40 (30 B)
-// [TODO] 0x0004EA60 renderer::DecalRenderable::vfunc_13 (30 B)
+// ============================================================================
+// [VERIFIED] renderer::DecalRenderable::vfunc_13 (0x0004EA60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x0004EA60
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_0004EA60 (0x0004EA60, 30 bytes)
+
+struct Struct_0004EA60
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_0004EA60
+{
+public:
+    Struct_0004EA60 sub_0004EA60() const;
+
+    char m_pad00[0x44];
+    Struct_0004EA60 m_Field44; // +0x44
+};
+
+// Returns the stored vector by value.
+Struct_0004EA60 Class_0004EA60::sub_0004EA60() const
+{
+    return m_Field44;
+}
+
 // [TODO] 0x0004EA80 renderer::CharacterRenderable::vfunc_14 (94 B)
 // [TODO] 0x0004EAE0 renderer::CharacterRenderable::vfunc_08 (90 B)
 // [TODO] 0x0004EB40 sub_0004EB40 (70 B)
@@ -44020,7 +44302,33 @@ int BoatLocomotion::vfunc_06()
 // [TODO] 0x00097150 BoatLocomotion::vfunc_11 (425 B)
 // [TODO] 0x00097300 BoatLocomotion::vfunc_01 (270 B)
 // [TODO] 0x00097410 sub_00097410 (25 B)
-// [TODO] 0x00097430 sub_00097430 (23 B)
+// ============================================================================
+// [VERIFIED] sub_00097430 (0x00097430, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000A33A0 (0x000A33A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00097430
+// what: Says whether the number at +0x20 is above the constant at 0x00383FC0.
+// tool: Claude Opus 5.5 (generated from the shape 'field above a constant', checked on decomp.me preset 266 by example)
+extern "C" const float DAT_00383FC0;
+
+class Class_00097430
+{
+public:
+    int sub_00097430();
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+int Class_00097430::sub_00097430()
+{
+    if (m_Field20 > DAT_00383FC0)
+        return 1;
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00097450 (0x00097450, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -44070,7 +44378,32 @@ void Class_00097490::sub_00097490(float value)
 }
 
 // [TODO] 0x000974A0 sub_000974A0 (48 B)
-// [TODO] 0x000974D0 sub_000974D0 (23 B)
+// ============================================================================
+// [VERIFIED] sub_000974D0 (0x000974D0, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether a timer value in an object is still above zero.
+// ============================================================================
+// bin: proto
+// va: 0x000974D0
+// what: Says whether a timer value in an object is still above zero.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0013CE60, nearest by portal/tools/similar.py)
+// sub_000974D0 (0x000974D0, 26 bytes)
+
+class Class_000974D0
+{
+public:
+    bool sub_000974D0() const;
+
+    char m_pad00[0x4];
+    float m_Field04; // +0x4
+};
+
+// True while the value is greater than zero.
+bool Class_000974D0::sub_000974D0() const
+{
+    return m_Field04 > 0.0f;
+}
+
 // [TODO] 0x000974F0 sub_000974F0 (27 B)
 // [TODO] 0x00097510 sub_00097510 (75 B)
 // [TODO] 0x00097560 sub_00097560 (73 B)
@@ -45981,8 +46314,50 @@ L_17:
 }
 
 // [TODO] 0x0009F280 sub_0009F280 (46 B)
-// [TODO] 0x0009F2B0 sub_0009F2B0 (17 B)
-// [TODO] 0x0009F2D0 sub_0009F2D0 (17 B)
+// ============================================================================
+// [VERIFIED] sub_0009F2B0 (0x0009F2B0, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x188.
+// ============================================================================
+// bin: proto
+// va: 0x0009F2B0
+// what: Stores a number at +0x188.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0005DB90, nearest by portal/tools/similar.py)
+class Class_0009F2B0
+{
+public:
+    void sub_0009F2B0(float value);
+    char m_pad00[0x188];
+    float m_Field188; // +0x188
+};
+
+void Class_0009F2B0::sub_0009F2B0(float value)
+{
+    m_Field188 = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009F2D0 (0x0009F2D0, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x18C.
+// ============================================================================
+// bin: proto
+// va: 0x0009F2D0
+// what: Stores a number at +0x18C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0005DB90, nearest by portal/tools/similar.py)
+class Class_0009F2D0
+{
+public:
+    void sub_0009F2D0(float value);
+    char m_pad00[0x18C];
+    float m_Field18C; // +0x18C
+};
+
+void Class_0009F2D0::sub_0009F2D0(float value)
+{
+    m_Field18C = value;
+}
+
 // ============================================================================
 // [VERIFIED] sub_0009F300 (0x0009F300, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -46392,7 +46767,31 @@ void Class_0009F960::sub_0009F960()
     ((Object*)(int)this + 8)->sub_0008D4C0();
 }
 
-// [TODO] 0x0009F970 sub_0009F970 (13 B)
+// ============================================================================
+// [VERIFIED] sub_0009F970 (0x0009F970, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000ABC70 (0x000ABC70), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0009F970
+// what: Passes the value at +0x8 to sub_00028120 and returns its result.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_0009F970
+{
+public:
+    int sub_0009F970();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Class_0009F970::sub_0009F970()
+{
+    return sub_00028120(m_Field8);
+}
+
 // [TODO] 0x0009F9B0 sub_0009F9B0 (41 B)
 // ============================================================================
 // [VERIFIED] sub_0009F9E0 (0x0009F9E0, 33 B)
@@ -46440,7 +46839,35 @@ L_1F:
 // [TODO] 0x0009FA10 sub_0009FA10 (184 B)
 // [TODO] 0x0009FAD0 sub_0009FAD0 (30 B)
 // [TODO] 0x0009FAF0 sub_0009FAF0 (207 B)
-// [TODO] 0x0009FBC0 sub_0009FBC0 (26 B)
+// ============================================================================
+// [VERIFIED] sub_0009FBC0 (0x0009FBC0, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets the first number of an object to 145, or to the value given when it is already 145.
+// ============================================================================
+// bin: proto
+// va: 0x0009FBC0
+// what: Sets the first number of an object to 145, or to the value given when it is already 145.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000ABF30, nearest by portal/tools/similar.py)
+// sub_0009FBC0 (0x0009FBC0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0009FBC0
+{
+public:
+    void sub_0009FBC0(int a1);
+    int m_Field00; // +0x00
+};
+
+void Class_0009FBC0::sub_0009FBC0(int a1)
+{
+    if (m_Field00 != 145) {
+        m_Field00 = 145;
+        return;
+    }
+    m_Field00 = a1;
+}
+
 // [TODO] 0x0009FBE0 sub_0009FBE0 (264 B)
 // [TODO] 0x0009FCF0 sub_0009FCF0 (128 B)
 // [TODO] 0x0009FD70 sub_0009FD70 (129 B)
@@ -48402,7 +48829,32 @@ int Class_000AB1C0::sub_000AB1C0()
 // [TODO] 0x000AB260 sub_000AB260 (728 B)
 // [TODO] 0x000AB540 sub_000AB540 (95 B)
 // [TODO] 0x000AB5A0 sub_000AB5A0 (161 B)
-// [TODO] 0x000AB650 sub_000AB650 (23 B)
+// ============================================================================
+// [VERIFIED] sub_000AB650 (0x000AB650, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether a timer value in an object is still above zero.
+// ============================================================================
+// bin: proto
+// va: 0x000AB650
+// what: Says whether a timer value in an object is still above zero.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0013CE60, nearest by portal/tools/similar.py)
+// sub_000AB650 (0x000AB650, 26 bytes)
+
+class Class_000AB650
+{
+public:
+    bool sub_000AB650() const;
+
+    char m_pad00[0x50];
+    float m_Field50; // +0x50
+};
+
+// True while the value is greater than zero.
+bool Class_000AB650::sub_000AB650() const
+{
+    return m_Field50 > 0.0f;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000AB670 (0x000AB670, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -48959,7 +49411,54 @@ float Class_000AF3F0::sub_000AF3F0()
 // [TODO] 0x000AFA50 sub_000AFA50 (470 B)
 // [TODO] 0x000AFC30 sub_000AFC30 (137 B)
 // [TODO] 0x000AFCC0 sub_000AFCC0 (377 B)
-// [TODO] 0x000AFE40 sub_000AFE40 (58 B)
+// ============================================================================
+// [VERIFIED] sub_000AFE40 (0x000AFE40, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Releases the object held at +0x1FC, if there is one, and clears the slot.
+// ============================================================================
+// bin: proto
+// va: 0x000AFE40
+// what: Releases the object held at +0x1FC, if there is one, and clears the slot.
+// tool: Claude Opus 5.5 (transplanted from proto:0x000A9150, nearest by portal/tools/similar.py)
+// Same machine code as sub_000B68C0 (0x000B68C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000AFE40 (0x000AFE40, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_000ABFE0();
+};
+
+extern "C" int __cdecl sub_00025160(int);
+extern "C" int __cdecl sub_0009EFE0(void);
+
+class Class_000AFE40
+{
+public:
+    void sub_000AFE40();
+    char m_pad00[0x1FC];
+    int m_Field1FC; // +0x1FC
+};
+
+void Class_000AFE40::sub_000AFE40()
+{
+    int r_eax, t2;
+
+    r_eax = m_Field1FC;
+    if (r_eax) {
+        r_eax = sub_0009EFE0();
+        t2 = m_Field1FC;
+        if (m_Field1FC) {
+            ((Object*)t2)->sub_000ABFE0();
+            r_eax = sub_00025160(t2);
+        }
+        m_Field1FC = 0;
+    }
+    return;
+}
+
 // [TODO] 0x000AFE80 sub_000AFE80 (124 B)
 // ============================================================================
 // [VERIFIED] sub_000AFF00 (0x000AFF00, 7 B)
@@ -49855,7 +50354,31 @@ bool Class_000B76D0::sub_000B76D0()
 
 // [TODO] 0x000B76E0 sub_000B76E0 (66 B)
 // [TODO] 0x000B7730 sub_000B7730 (110 B)
-// [TODO] 0x000B77A0 sub_000B77A0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_000B77A0 (0x000B77A0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000C5310 (0x000C5310), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000B77A0
+// what: Passes the value at +0x14 to sub_00028120 and returns its result.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_000B77A0
+{
+public:
+    int sub_000B77A0();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Class_000B77A0::sub_000B77A0()
+{
+    return sub_00028120(m_Field14);
+}
+
 // ============================================================================
 // [VERIFIED] sub_000B77B0 (0x000B77B0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -52268,7 +52791,41 @@ void NISPackage::vfunc_00()
     m_FieldB0 += 1;
 }
 
-// [TODO] 0x000BD310 NISPackage::vfunc_01 (27 B)
+// ============================================================================
+// [VERIFIED] NISPackage::vfunc_01 (0x000BD310, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Drops one use of an NIS package; on the last one it calls the object's own release with 1.
+// ============================================================================
+// bin: proto
+// va: 0x000BD310
+// what: Drops one use of an NIS package; on the last one it calls the object's own release with 1.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000CD8D0, nearest by portal/tools/similar.py)
+// NISPackage::vfunc_01 (0x000BD310, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class NISPackage
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+void NISPackage::vfunc_01()
+{
+    int r_eax, r_ecx;
+
+    r_ecx = (int)this;
+    r_eax = *(int*)(r_ecx + 176);
+    if (r_eax < 2) {
+        r_eax = *(int*)r_ecx;
+        r_eax = ((int (__stdcall*)(int))*(int*)(r_eax + 12))(1);
+        return;
+    }
+    r_eax -= 1;
+    *(int*)(r_ecx + 176) = r_eax;
+}
+
 // [TODO] 0x000BD390 sub_000BD390 (105 B)
 // [TODO] 0x000BD400 sub_000BD400 (91 B)
 // ============================================================================
@@ -53019,7 +53576,30 @@ int Class_000BEB20::sub_000BEB20(int a1)
     return r_eax;
 }
 
-// [TODO] 0x000BEB70 sub_000BEB70 (12 B)
+// ============================================================================
+// [VERIFIED] sub_000BEB70 (0x000BEB70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 2 of the byte at +0x19C.
+// ============================================================================
+// bin: proto
+// va: 0x000BEB70
+// what: Reads flag bit 2 of the byte at +0x19C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00012A20, nearest by portal/tools/similar.py)
+class Class_000BEB70
+{
+public:
+    bool sub_000BEB70();
+    char m_pad00[0x19C];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+bool Class_000BEB70::sub_000BEB70()
+{
+    return m_Flag2;
+}
+
 // [TODO] 0x000BEB80 sub_000BEB80 (28 B)
 // ============================================================================
 // [VERIFIED] sub_000BEBA0 (0x000BEBA0, 13 B)
@@ -53334,7 +53914,28 @@ bool Class_000BEFA0::sub_000BEFA0()
     return m_Field18C == 2;
 }
 
-// [TODO] 0x000BEFB0 sub_000BEFB0 (14 B)
+// ============================================================================
+// [VERIFIED] sub_000BEFB0 (0x000BEFB0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x18C is set.
+// ============================================================================
+// bin: proto
+// va: 0x000BEFB0
+// what: Says whether the pointer at +0x18C is set.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000AB070, nearest by portal/tools/similar.py)
+class Class_000BEFB0
+{
+public:
+    int sub_000BEFB0();
+    char m_pad00[0x18C];
+    void* m_Field18C; // +0x18C
+};
+
+int Class_000BEFB0::sub_000BEFB0()
+{
+    return m_Field18C != 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000BEFC0 (0x000BEFC0, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -54839,7 +55440,28 @@ L_A5:
 // [TODO] 0x000C6830 sub_000C6830 (89 B)
 // [TODO] 0x000C6890 sub_000C6890 (63 B)
 // [TODO] 0x000C68D0 sub_000C68D0 (13 B)
-// [TODO] 0x000C68E0 sub_000C68E0 (17 B)
+// ============================================================================
+// [VERIFIED] sub_000C68E0 (0x000C68E0, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x1EC.
+// ============================================================================
+// bin: proto
+// va: 0x000C68E0
+// what: Stores a number at +0x1EC.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0005DB90, nearest by portal/tools/similar.py)
+class Class_000C68E0
+{
+public:
+    void sub_000C68E0(float value);
+    char m_pad00[0x1EC];
+    float m_Field1EC; // +0x1EC
+};
+
+void Class_000C68E0::sub_000C68E0(float value)
+{
+    m_Field1EC = value;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000C6900 (0x000C6900, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -55110,7 +55732,39 @@ bool Class_000C6AE0::sub_000C6AE0(int a1, int a2)
 }
 
 // [TODO] 0x000C6B30 sub_000C6B30 (53 B)
-// [TODO] 0x000C6B70 sub_000C6B70 (33 B)
+// ============================================================================
+// [VERIFIED] sub_000C6B70 (0x000C6B70, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x000C6B70
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_000C6B70 (0x000C6B70, 30 bytes)
+
+struct Struct_000C6B70
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_000C6B70
+{
+public:
+    Struct_000C6B70 sub_000C6B70() const;
+
+    char m_pad00[0x194];
+    Struct_000C6B70 m_Field194; // +0x194
+};
+
+// Returns the stored vector by value.
+Struct_000C6B70 Class_000C6B70::sub_000C6B70() const
+{
+    return m_Field194;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000C6BB0 (0x000C6BB0, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -63991,7 +64645,39 @@ float Class_000D5300::sub_000D5300()
     return m_Field34;
 }
 
-// [TODO] 0x000D5320 sub_000D5320 (30 B)
+// ============================================================================
+// [VERIFIED] sub_000D5320 (0x000D5320, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x000D5320
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_000D5320 (0x000D5320, 30 bytes)
+
+struct Struct_000D5320
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_000D5320
+{
+public:
+    Struct_000D5320 sub_000D5320() const;
+
+    char m_pad00[0x38];
+    Struct_000D5320 m_Field38; // +0x38
+};
+
+// Returns the stored vector by value.
+Struct_000D5320 Class_000D5320::sub_000D5320() const
+{
+    return m_Field38;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000D5340 (0x000D5340, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -65145,7 +65831,39 @@ int DismemberTrack::vfunc_33()
     return DAT_00459FA8;
 }
 
-// [TODO] 0x000D6000 sub_000D6000 (30 B)
+// ============================================================================
+// [VERIFIED] sub_000D6000 (0x000D6000, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x000D6000
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_000D6000 (0x000D6000, 30 bytes)
+
+struct Struct_000D6000
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_000D6000
+{
+public:
+    Struct_000D6000 sub_000D6000() const;
+
+    char m_pad00[0x28];
+    Struct_000D6000 m_Field28; // +0x28
+};
+
+// Returns the stored vector by value.
+Struct_000D6000 Class_000D6000::sub_000D6000() const
+{
+    return m_Field28;
+}
+
 // [TODO] 0x000D6020 sub_000D6020 (61 B)
 // ============================================================================
 // [VERIFIED] DismemberTrack::vfunc_03 (0x000D6060, 46 B)
@@ -67310,7 +68028,25 @@ int Class_000D7DB0::sub_000D7DB0()
 }
 
 // [TODO] 0x000D7DE0 sub_000D7DE0 (62 B)
-// [TODO] 0x000D7F30 sub_000D7F30 (149 B)
+// ============================================================================
+// [VERIFIED] sub_000D7F30 (0x000D7F30, 149 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 4-byte elements so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: proto
+// va: 0x000D7F30
+// what: Rotates a range of 4-byte elements so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5 (transplanted from xb:0x000C4380, nearest by portal/tools/similar.py)
+// verify: python portal/verify.py reports/to_submit/xb_000D7F30.cpp --va 0x000D7F30 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// The rotated elements are 4 bytes wide; what they point to is not known yet.
+class Class_000D7F30;
+
+// std::_Rotate for random-access iterators, instantiated for an array of Class_000D7F30 pointers.
+template void std::_Rotate<Class_000D7F30 **, int, Class_000D7F30 *>(Class_000D7F30 **, Class_000D7F30 **, Class_000D7F30 **, int *, Class_000D7F30 **);
+
 // [TODO] 0x000D7FD0 sub_000D7FD0 (144 B)
 // [TODO] 0x000D8060 sub_000D8060 (144 B)
 // [TODO] 0x000D80F0 sub_000D80F0 (98 B)
@@ -69212,7 +69948,35 @@ float CheckOutToeToHead::vfunc_05()
     return DAT_00389278;
 }
 
-// [TODO] 0x000DC5E0 GlanceAtOvertakingPed::vfunc_07 (14 B)
+// ============================================================================
+// [VERIFIED] GlanceAtOvertakingPed::vfunc_07 (0x000DC5E0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GlanceAtOvertakingPed::vfunc_07 (0x000EFCF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000DC5E0
+// what: Says whether sub_000BAE80 on the member at +0x14 answers no.
+// tool: Claude Opus 5.5 (generated from the shape 'not of a member's answer', checked on decomp.me preset 266 by example)
+class Member_000DC5E0
+{
+public:
+    bool sub_000BAE80();
+};
+
+class Class_000DC5E0
+{
+public:
+    int sub_000DC5E0();
+    char m_pad00[0x14];
+    Member_000DC5E0 m_Field14; // +0x14
+};
+
+int Class_000DC5E0::sub_000DC5E0()
+{
+    return !m_Field14.sub_000BAE80();
+}
+
 // ============================================================================
 // [VERIFIED] GlanceAtVehicle::vfunc_08 (0x000DC5F0, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -69244,7 +70008,35 @@ float GlanceAtVehicle::vfunc_08()
     return DAT_00390DF4;
 }
 
-// [TODO] 0x000DC600 GlanceAbsentMindedly::vfunc_00 (14 B)
+// ============================================================================
+// [VERIFIED] GlanceAbsentMindedly::vfunc_00 (0x000DC600, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GlanceAbsentMindedly::vfunc_00 (0x000EFDE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000DC600
+// what: Says whether sub_000BAE80 on the member at +0x10 answers no.
+// tool: Claude Opus 5.5 (generated from the shape 'not of a member's answer', checked on decomp.me preset 266 by example)
+class Member_000DC600
+{
+public:
+    bool sub_000BAE80();
+};
+
+class Class_000DC600
+{
+public:
+    int sub_000DC600();
+    char m_pad00[0x10];
+    Member_000DC600 m_Field10; // +0x10
+};
+
+int Class_000DC600::sub_000DC600()
+{
+    return !m_Field10.sub_000BAE80();
+}
+
 // [TODO] 0x000DC610 GlanceAbsentMindedly::vfunc_02 (43 B)
 // [TODO] 0x000DC640 GlanceAtOvertakingPed::vfunc_02 (113 B)
 // [TODO] 0x000DC6C0 GlanceAtOvertakingPed::vfunc_01 (102 B)
@@ -71225,7 +72017,31 @@ void Class_000EB4D0::sub_000EB4D0()
 // [TODO] 0x000EB550 sub_000EB550 (73 B)
 // [TODO] 0x000EB5A0 sub_000EB5A0 (108 B)
 // [TODO] 0x000EB610 sub_000EB610 (93 B)
-// [TODO] 0x000EB670 sub_000EB670 (13 B)
+// ============================================================================
+// [VERIFIED] sub_000EB670 (0x000EB670, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00101AC0 (0x00101AC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000EB670
+// what: Passes the value at +0x18 to sub_00028120 and returns its result.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_000EB670
+{
+public:
+    int sub_000EB670();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Class_000EB670::sub_000EB670()
+{
+    return sub_00028120(m_Field18);
+}
+
 // [TODO] 0x000EB710 AICoverState::vfunc_00 (93 B)
 // [TODO] 0x000EB770 sub_000EB770 (371 B)
 // [TODO] 0x000EB8F0 AICoverState::vfunc_01 (3589 B)
@@ -72059,9 +72875,81 @@ L_25:
     return 0;
 }
 
-// [TODO] 0x000EEA80 sub_000EEA80 (19 B)
-// [TODO] 0x000EEAA0 sub_000EEAA0 (13 B)
-// [TODO] 0x000EEAB0 sub_000EEAB0 (13 B)
+// ============================================================================
+// [VERIFIED] sub_000EEA80 (0x000EEA80, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00104FA0 (0x00104FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000EEA80
+// what: Says whether sub_00028120 gives a nonzero result for the value at +0x20.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field, nonzero', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_000EEA80
+{
+public:
+    int sub_000EEA80();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int Class_000EEA80::sub_000EEA80()
+{
+    return sub_00028120(m_Field20) != 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000EEAA0 (0x000EEAA0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00104FC0 (0x00104FC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000EEAA0
+// what: Passes the value at +0x20 to sub_00028120 and returns its result.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_000EEAA0
+{
+public:
+    int sub_000EEAA0();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int Class_000EEAA0::sub_000EEAA0()
+{
+    return sub_00028120(m_Field20);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000EEAB0 (0x000EEAB0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00104FD0 (0x00104FD0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x000EEAB0
+// what: Passes the value at +0x24 to sub_00028120 and returns its result.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_000EEAB0
+{
+public:
+    int sub_000EEAB0();
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+};
+
+int Class_000EEAB0::sub_000EEAB0()
+{
+    return sub_00028120(m_Field24);
+}
+
 // [TODO] 0x000EEAC0 sub_000EEAC0 (62 B)
 // ============================================================================
 // [VERIFIED] AITask::vfunc_00 (0x000EEB00, 6 B)
@@ -75232,7 +76120,29 @@ int __cdecl sub_000F5210(void)
 }
 
 // [TODO] 0x000F5220 sub_000F5220 (91 B)
-// [TODO] 0x000F5280 sub_000F5280 (177 B)
+// ============================================================================
+// [VERIFIED] sub_000F5280 (0x000F5280, 177 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Rotates a range of 8-byte records so the middle one becomes the first (standard library helper).
+// ============================================================================
+// bin: proto
+// va: 0x000F5280
+// what: Rotates a range of 8-byte records so the middle one becomes the first (standard library helper).
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010C1F0, nearest by portal/tools/similar.py)
+// verify: python portal/verify.py reports/to_submit/xb_000F5280.cpp --va 0x000F5280 --bin xb --match '?$_Rotate@' --flags "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE"   (agent.py check cannot select a template instantiation; see the lane report)
+
+#include <algorithm>
+
+// An 8-byte record; its fields are not known yet.
+struct Class_000F5280
+{
+    int m_Field00;
+    int m_Field04;
+};
+
+// std::_Rotate for random-access iterators, instantiated for Class_000F5280.
+template void std::_Rotate<Class_000F5280 *, int, Class_000F5280>(Class_000F5280 *, Class_000F5280 *, Class_000F5280 *, int *, Class_000F5280 *);
+
 // [TODO] 0x000F5340 sub_000F5340 (59 B)
 // [TODO] 0x000F5380 sub_000F5380 (126 B)
 // [TODO] 0x000F5400 sub_000F5400 (121 B)
@@ -76323,7 +77233,34 @@ int Class_000F7920::sub_000F7920()
     return *(int*)(m_Field78 + 80);
 }
 
-// [TODO] 0x000F7930 sub_000F7930 (7 B)
+// ============================================================================
+// [VERIFIED] sub_000F7930 (0x000F7930, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x44 of the object pointed to at +0x78.
+// ============================================================================
+// bin: proto
+// va: 0x000F7930
+// what: Returns the number at +0x44 of the object pointed to at +0x78.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010EE30, nearest by portal/tools/similar.py)
+struct Obj_000F7930
+{
+    char m_pad00[0x44];
+    float m_Field44; // +0x44
+};
+
+class Class_000F7930
+{
+public:
+    float sub_000F7930();
+    char m_pad00[0x78];
+    Obj_000F7930* m_Field78; // +0x78
+};
+
+float Class_000F7930::sub_000F7930()
+{
+    return m_Field78->m_Field44;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000F7940 (0x000F7940, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -76982,7 +77919,35 @@ int FlowClient::vfunc_01(int a1, int a2)
 // [TODO] 0x000F9BF0 sub_000F9BF0 (26 B)
 // [TODO] 0x000F9C10 sub_000F9C10 (34 B)
 // [TODO] 0x000F9C40 sub_000F9C40 (26 B)
-// [TODO] 0x000F9C60 sub_000F9C60 (30 B)
+// ============================================================================
+// [VERIFIED] sub_000F9C60 (0x000F9C60, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a yes/no value in a table entry picked by a 7-bit index read from another object.
+// ============================================================================
+// bin: proto
+// va: 0x000F9C60
+// what: Stores a yes/no value in a table entry picked by a 7-bit index read from another object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x001120B0, nearest by portal/tools/similar.py)
+// sub_000F9C60 (0x000F9C60, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000F9C60
+{
+public:
+    void sub_000F9C60(int a1, bool a2);
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+void Class_000F9C60::sub_000F9C60(int a1, bool a2)
+{
+    int t1;
+
+    t1 = m_Field14;
+    *(bool*)(m_Field14 + ((((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) + (((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) * 2)) * 4) + 9) = a2;
+}
+
 // [TODO] 0x000F9C80 sub_000F9C80 (40 B)
 // [TODO] 0x000F9CB0 sub_000F9CB0 (85 B)
 // [TODO] 0x000F9D10 sub_000F9D10 (58 B)
@@ -77175,7 +78140,35 @@ void Class_000FAAB0::sub_000FAAB0(int a1)
 }
 
 // [TODO] 0x000FAAD0 sub_000FAAD0 (13 B)
-// [TODO] 0x000FAAE0 sub_000FAAE0 (21 B)
+// ============================================================================
+// [VERIFIED] sub_000FAAE0 (0x000FAAE0, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies the low four bits of a value into the number at +0x78, leaving its other bits alone.
+// ============================================================================
+// bin: proto
+// va: 0x000FAAE0
+// what: Copies the low four bits of a value into the number at +0x78, leaving its other bits alone.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00112FA0, nearest by portal/tools/similar.py)
+// sub_000FAAE0 (0x000FAAE0, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000FAAE0
+{
+public:
+    void sub_000FAAE0(int a1);
+    char m_pad00[0x78];
+    int m_Field78; // +0x78
+};
+
+void Class_000FAAE0::sub_000FAAE0(int a1)
+{
+    int t1;
+
+    t1 = (m_Field78 ^ a1) & 15;
+    m_Field78 = m_Field78 ^ ((m_Field78 ^ a1) & 15);
+}
+
 // ============================================================================
 // [VERIFIED] sub_000FAB00 (0x000FAB00, 10 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -77296,7 +78289,28 @@ int Class_000FAB90::sub_000FAB90()
     return m_Field80 & 4095;
 }
 
-// [TODO] 0x000FABA0 sub_000FABA0 (14 B)
+// ============================================================================
+// [VERIFIED] sub_000FABA0 (0x000FABA0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x84 is set.
+// ============================================================================
+// bin: proto
+// va: 0x000FABA0
+// what: Says whether the pointer at +0x84 is set.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000AB070, nearest by portal/tools/similar.py)
+class Class_000FABA0
+{
+public:
+    int sub_000FABA0();
+    char m_pad00[0x84];
+    void* m_Field84; // +0x84
+};
+
+int Class_000FABA0::sub_000FABA0()
+{
+    return m_Field84 != 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_000FABB0 (0x000FABB0, 96 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -85699,7 +86713,31 @@ int AIActionWaitForInterval::vfunc_02()
 }
 
 // [TODO] 0x001056D0 sub_001056D0 (63 B)
-// [TODO] 0x00105710 AIActionSendStimulus::vfunc_08 (13 B)
+// ============================================================================
+// [VERIFIED] AIActionSendStimulus::vfunc_08 (0x00105710, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as AIActionSendStimulus::vfunc_08 (0x00120CB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00105710
+// what: Passes the value at +0x8 to sub_000BAF50 and returns its result.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_000BAF50(int value);
+
+class Class_00105710
+{
+public:
+    int sub_00105710();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Class_00105710::sub_00105710()
+{
+    return sub_000BAF50(m_Field8);
+}
+
 // ============================================================================
 // [VERIFIED] AIActionExecuteSimpleScriptMethod::vfunc_07 (0x00105720, 24 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -91372,7 +92410,39 @@ void* AITask_IdleAction::vfunc_42()
     return &m_FieldEC;
 }
 
-// [TODO] 0x0010B5D0 AITask_MonitorCustomLoopState::vfunc_43 (33 B)
+// ============================================================================
+// [VERIFIED] AITask_MonitorCustomLoopState::vfunc_43 (0x0010B5D0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x0010B5D0
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_0010B5D0 (0x0010B5D0, 30 bytes)
+
+struct Struct_0010B5D0
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_0010B5D0
+{
+public:
+    Struct_0010B5D0 sub_0010B5D0() const;
+
+    char m_pad00[0xF8];
+    Struct_0010B5D0 m_FieldF8; // +0xF8
+};
+
+// Returns the stored vector by value.
+Struct_0010B5D0 Class_0010B5D0::sub_0010B5D0() const
+{
+    return m_FieldF8;
+}
+
 // ============================================================================
 // [VERIFIED] AITask_MonitorCustomLoopState::vfunc_44 (0x0010B600, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -105208,7 +106278,39 @@ bool GenericCharacterCamera::vfunc_39()
     return m_Field2A4;
 }
 
-// [TODO] 0x001392B0 GenericCharacterCamera::vfunc_41 (33 B)
+// ============================================================================
+// [VERIFIED] GenericCharacterCamera::vfunc_41 (0x001392B0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x001392B0
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_001392B0 (0x001392B0, 30 bytes)
+
+struct Struct_001392B0
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_001392B0
+{
+public:
+    Struct_001392B0 sub_001392B0() const;
+
+    char m_pad00[0x27C];
+    Struct_001392B0 m_Field27C; // +0x27C
+};
+
+// Returns the stored vector by value.
+Struct_001392B0 Class_001392B0::sub_001392B0() const
+{
+    return m_Field27C;
+}
+
 // [TODO] 0x001392E0 sub_001392E0 (61 B)
 // ============================================================================
 // [VERIFIED] GenericCharacterCamera::vfunc_01 (0x00139320, 36 B)
@@ -105324,7 +106426,31 @@ L_42:
 // [TODO] 0x0013A0A0 sub_0013A0A0 (365 B)
 // [TODO] 0x0013A210 sub_0013A210 (509 B)
 // [TODO] 0x0013A410 sub_0013A410 (69 B)
-// [TODO] 0x0013A460 GenericCharacterCamera::vfunc_36 (22 B)
+// ============================================================================
+// [VERIFIED] GenericCharacterCamera::vfunc_36 (0x0013A460, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GenericCharacterCamera::vfunc_38 (0x00155690), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0013A460
+// what: Says whether sub_00028120 gives a nonzero result for the value at +0x28C.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field, nonzero', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_0013A460
+{
+public:
+    int sub_0013A460();
+    char m_pad00[0x28C];
+    int m_Field28C; // +0x28C
+};
+
+int Class_0013A460::sub_0013A460()
+{
+    return sub_00028120(m_Field28C) != 0;
+}
+
 // [TODO] 0x0013A480 sub_0013A480 (94 B)
 // [TODO] 0x0013A4E0 sub_0013A4E0 (108 B)
 // ============================================================================
@@ -105394,7 +106520,39 @@ void* GenericVehicleCamera::vfunc_00()
 
 // [TODO] 0x0013CB80 sub_0013CB80 (80 B)
 // [TODO] 0x0013CBD0 GenericVehicleCamera::vfunc_40 (40 B)
-// [TODO] 0x0013CC00 GenericVehicleCamera::vfunc_41 (33 B)
+// ============================================================================
+// [VERIFIED] GenericVehicleCamera::vfunc_41 (0x0013CC00, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x0013CC00
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_0013CC00 (0x0013CC00, 30 bytes)
+
+struct Struct_0013CC00
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_0013CC00
+{
+public:
+    Struct_0013CC00 sub_0013CC00() const;
+
+    char m_pad00[0x144];
+    Struct_0013CC00 m_Field144; // +0x144
+};
+
+// Returns the stored vector by value.
+Struct_0013CC00 Class_0013CC00::sub_0013CC00() const
+{
+    return m_Field144;
+}
+
 // [TODO] 0x0013CC30 sub_0013CC30 (17 B)
 // [TODO] 0x0013CC50 sub_0013CC50 (159 B)
 // ============================================================================
@@ -105546,7 +106704,39 @@ bool Class_0013F220::sub_0013F220(bool a1)
     return a1;
 }
 
-// [TODO] 0x0013F230 NISCamera::vfunc_41 (33 B)
+// ============================================================================
+// [VERIFIED] NISCamera::vfunc_41 (0x0013F230, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x0013F230
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_0013F230 (0x0013F230, 30 bytes)
+
+struct Struct_0013F230
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_0013F230
+{
+public:
+    Struct_0013F230 sub_0013F230() const;
+
+    char m_pad00[0xC0];
+    Struct_0013F230 m_FieldC0; // +0xC0
+};
+
+// Returns the stored vector by value.
+Struct_0013F230 Class_0013F230::sub_0013F230() const
+{
+    return m_FieldC0;
+}
+
 // [TODO] 0x0013F260 sub_0013F260 (106 B)
 // [TODO] 0x0013F2D0 sub_0013F2D0 (400 B)
 // [TODO] 0x0013F460 sub_0013F460 (100 B)
@@ -106696,7 +107886,39 @@ L_10:
 // [TODO] 0x00142EF0 sub_00142EF0 (40 B)
 // [TODO] 0x00142F20 sub_00142F20 (9 B)
 // [TODO] 0x00142F30 sub_00142F30 (9 B)
-// [TODO] 0x00142F40 sub_00142F40 (33 B)
+// ============================================================================
+// [VERIFIED] sub_00142F40 (0x00142F40, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x00142F40
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_00142F40 (0x00142F40, 30 bytes)
+
+struct Struct_00142F40
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_00142F40
+{
+public:
+    Struct_00142F40 sub_00142F40() const;
+
+    char m_pad00[0x98];
+    Struct_00142F40 m_Field98; // +0x98
+};
+
+// Returns the stored vector by value.
+Struct_00142F40 Class_00142F40::sub_00142F40() const
+{
+    return m_Field98;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00142F70 (0x00142F70, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -109473,7 +110695,28 @@ float __stdcall sub_00147DE0(int a1)
     return DAT_0037CE50;
 }
 
-// [TODO] 0x00147DF0 sub_00147DF0 (14 B)
+// ============================================================================
+// [VERIFIED] sub_00147DF0 (0x00147DF0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x280 is set.
+// ============================================================================
+// bin: proto
+// va: 0x00147DF0
+// what: Says whether the pointer at +0x280 is set.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000AB070, nearest by portal/tools/similar.py)
+class Class_00147DF0
+{
+public:
+    int sub_00147DF0();
+    char m_pad00[0x280];
+    void* m_Field280; // +0x280
+};
+
+int Class_00147DF0::sub_00147DF0()
+{
+    return m_Field280 != 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00147E00 (0x00147E00, 15 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -109876,7 +111119,28 @@ void Class_00147F80::sub_00147F80()
     ((Object*)(int)this + 860)->sub_00152F00();
 }
 
-// [TODO] 0x00147FE0 sub_00147FE0 (14 B)
+// ============================================================================
+// [VERIFIED] sub_00147FE0 (0x00147FE0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x2C0 is set.
+// ============================================================================
+// bin: proto
+// va: 0x00147FE0
+// what: Says whether the pointer at +0x2C0 is set.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000AB070, nearest by portal/tools/similar.py)
+class Class_00147FE0
+{
+public:
+    int sub_00147FE0();
+    char m_pad00[0x2C0];
+    void* m_Field2C0; // +0x2C0
+};
+
+int Class_00147FE0::sub_00147FE0()
+{
+    return m_Field2C0 != 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00147FF0 (0x00147FF0, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -110502,7 +111766,28 @@ float Class_00148550::sub_00148550()
     return m_Field118;
 }
 
-// [TODO] 0x00148560 sub_00148560 (17 B)
+// ============================================================================
+// [VERIFIED] sub_00148560 (0x00148560, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x118.
+// ============================================================================
+// bin: proto
+// va: 0x00148560
+// what: Stores a number at +0x118.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0005DB90, nearest by portal/tools/similar.py)
+class Class_00148560
+{
+public:
+    void sub_00148560(float value);
+    char m_pad00[0x118];
+    float m_Field118; // +0x118
+};
+
+void Class_00148560::sub_00148560(float value)
+{
+    m_Field118 = value;
+}
+
 // [TODO] 0x00148580 sub_00148580 (24 B)
 // ============================================================================
 // [VERIFIED] sub_001485A0 (0x001485A0, 14 B)
@@ -110544,7 +111829,28 @@ float Class_001485B0::sub_001485B0()
     return m_Field10C;
 }
 
-// [TODO] 0x001485C0 sub_001485C0 (17 B)
+// ============================================================================
+// [VERIFIED] sub_001485C0 (0x001485C0, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x10C.
+// ============================================================================
+// bin: proto
+// va: 0x001485C0
+// what: Stores a number at +0x10C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0005DB90, nearest by portal/tools/similar.py)
+class Class_001485C0
+{
+public:
+    void sub_001485C0(float value);
+    char m_pad00[0x10C];
+    float m_Field10C; // +0x10C
+};
+
+void Class_001485C0::sub_001485C0(float value)
+{
+    m_Field10C = value;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001485E0 (0x001485E0, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -110566,7 +111872,28 @@ float Class_001485E0::sub_001485E0()
     return m_Field110;
 }
 
-// [TODO] 0x001485F0 sub_001485F0 (17 B)
+// ============================================================================
+// [VERIFIED] sub_001485F0 (0x001485F0, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x110.
+// ============================================================================
+// bin: proto
+// va: 0x001485F0
+// what: Stores a number at +0x110.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0005DB90, nearest by portal/tools/similar.py)
+class Class_001485F0
+{
+public:
+    void sub_001485F0(float value);
+    char m_pad00[0x110];
+    float m_Field110; // +0x110
+};
+
+void Class_001485F0::sub_001485F0(float value)
+{
+    m_Field110 = value;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00148610 (0x00148610, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -110658,7 +111985,29 @@ bool Class_001486E0::sub_001486E0(bool a1)
     return a1;
 }
 
-// [TODO] 0x001486F0 sub_001486F0 (11 B)
+// ============================================================================
+// [VERIFIED] sub_001486F0 (0x001486F0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 1 of the byte at +0x241.
+// ============================================================================
+// bin: proto
+// va: 0x001486F0
+// what: Reads flag bit 1 of the byte at +0x241.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0002A330, nearest by portal/tools/similar.py)
+class Class_001486F0
+{
+public:
+    bool sub_001486F0();
+    char m_pad00[0x241];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+};
+
+bool Class_001486F0::sub_001486F0()
+{
+    return m_Flag1;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00148700 (0x00148700, 27 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -116146,7 +117495,31 @@ int Class_0015B170::sub_0015B170()
 
 // [TODO] 0x0015B1A0 sub_0015B1A0 (73 B)
 // [TODO] 0x0015B1F0 sub_0015B1F0 (73 B)
-// [TODO] 0x0015B240 sub_0015B240 (13 B)
+// ============================================================================
+// [VERIFIED] sub_0015B240 (0x0015B240, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0017B9C0 (0x0017B9C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0015B240
+// what: Passes the value at +0x4 to sub_00028120 and returns its result.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_0015B240
+{
+public:
+    int sub_0015B240();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Class_0015B240::sub_0015B240()
+{
+    return sub_00028120(m_Field4);
+}
+
 // ============================================================================
 // [VERIFIED] sub_0015B250 (0x0015B250, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -136822,7 +138195,35 @@ int Class_00178EE0::sub_00178EE0(int a1)
 
 // [TODO] 0x00178EF0 sub_00178EF0 (113 B)
 // [TODO] 0x00178F70 sub_00178F70 (113 B)
-// [TODO] 0x00178FF0 sub_00178FF0 (29 B)
+// ============================================================================
+// [VERIFIED] sub_00178FF0 (0x00178FF0, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets or clears the lowest flag bit of the byte at +0x515.
+// ============================================================================
+// bin: proto
+// va: 0x00178FF0
+// what: Sets or clears the lowest flag bit of the byte at +0x515.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00164290, nearest by portal/tools/similar.py)
+// sub_00178FF0 (0x00178FF0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00178FF0
+{
+public:
+    void sub_00178FF0(int a1);
+    char m_pad00[0x515];
+    unsigned char m_Field515; // +0x515
+};
+
+void Class_00178FF0::sub_00178FF0(int a1)
+{
+    int t1;
+
+    t1 = ((unsigned char)(m_Field515 ^ a1)) & 1;
+    m_Field515 = (unsigned char)(m_Field515 ^ ((unsigned char)(((unsigned char)(m_Field515 ^ a1)) & 1)));
+}
+
 // [TODO] 0x00179010 sub_00179010 (27 B)
 // ============================================================================
 // [VERIFIED] sub_00179030 (0x00179030, 56 B)
@@ -153231,7 +154632,28 @@ void Class_0019C0E0::sub_0019C0E0(float value)
     m_FieldEC = value;
 }
 
-// [TODO] 0x0019C100 sub_0019C100 (17 B)
+// ============================================================================
+// [VERIFIED] sub_0019C100 (0x0019C100, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0xF0.
+// ============================================================================
+// bin: proto
+// va: 0x0019C100
+// what: Stores a number at +0xF0.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0005DB90, nearest by portal/tools/similar.py)
+class Class_0019C100
+{
+public:
+    void sub_0019C100(float value);
+    char m_pad00[0xF0];
+    float m_FieldF0; // +0xF0
+};
+
+void Class_0019C100::sub_0019C100(float value)
+{
+    m_FieldF0 = value;
+}
+
 // [TODO] 0x0019C120 TraceFireObject::vfunc_06 (76 B)
 // ============================================================================
 // [VERIFIED] sub_0019C170 (0x0019C170, 7 B)
@@ -158099,7 +159521,32 @@ int Class_001A8110::sub_001A8110()
     return m_FieldE8;
 }
 
-// [TODO] 0x001A8120 sub_001A8120 (26 B)
+// ============================================================================
+// [VERIFIED] sub_001A8120 (0x001A8120, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether a timer value in an object is still above zero.
+// ============================================================================
+// bin: proto
+// va: 0x001A8120
+// what: Says whether a timer value in an object is still above zero.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0013CE60, nearest by portal/tools/similar.py)
+// sub_001A8120 (0x001A8120, 26 bytes)
+
+class Class_001A8120
+{
+public:
+    bool sub_001A8120() const;
+
+    char m_pad00[0x114];
+    float m_Field114; // +0x114
+};
+
+// True while the value is greater than zero.
+bool Class_001A8120::sub_001A8120() const
+{
+    return m_Field114 > 0.0f;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001A8140 (0x001A8140, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -158872,7 +160319,28 @@ int Class_001AA8F0::sub_001AA8F0(int a1, bool a2)
     return a1;
 }
 
-// [TODO] 0x001AA910 sub_001AA910 (9 B)
+// ============================================================================
+// [VERIFIED] sub_001AA910 (0x001AA910, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0xA9.
+// ============================================================================
+// bin: proto
+// va: 0x001AA910
+// what: Reads flag bit 0 of the byte at +0xA9.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000CF790, nearest by portal/tools/similar.py)
+class Class_001AA910
+{
+public:
+    bool sub_001AA910();
+    char m_pad00[0xA9];
+    unsigned char m_Flag0 : 1;
+};
+
+bool Class_001AA910::sub_001AA910()
+{
+    return m_Flag0;
+}
+
 // [TODO] 0x001AA920 sub_001AA920 (120 B)
 // [TODO] 0x001AA9A0 sub_001AA9A0 (120 B)
 // [TODO] 0x001AAA20 sub_001AAA20 (120 B)
@@ -165591,8 +167059,57 @@ int MeleeWeaponStateProp::vfunc_36()
     return 0;
 }
 
-// [TODO] 0x001B53D0 sub_001B53D0 (9 B)
-// [TODO] 0x001B53E0 sub_001B53E0 (29 B)
+// ============================================================================
+// [VERIFIED] sub_001B53D0 (0x001B53D0, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x111.
+// ============================================================================
+// bin: proto
+// va: 0x001B53D0
+// what: Reads flag bit 0 of the byte at +0x111.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000CF790, nearest by portal/tools/similar.py)
+class Class_001B53D0
+{
+public:
+    bool sub_001B53D0();
+    char m_pad00[0x111];
+    unsigned char m_Flag0 : 1;
+};
+
+bool Class_001B53D0::sub_001B53D0()
+{
+    return m_Flag0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B53E0 (0x001B53E0, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets or clears the lowest flag bit of the byte at +0x111.
+// ============================================================================
+// bin: proto
+// va: 0x001B53E0
+// what: Sets or clears the lowest flag bit of the byte at +0x111.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00164290, nearest by portal/tools/similar.py)
+// sub_001B53E0 (0x001B53E0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001B53E0
+{
+public:
+    void sub_001B53E0(int a1);
+    char m_pad00[0x111];
+    unsigned char m_Field111; // +0x111
+};
+
+void Class_001B53E0::sub_001B53E0(int a1)
+{
+    int t1;
+
+    t1 = ((unsigned char)(m_Field111 ^ a1)) & 1;
+    m_Field111 = (unsigned char)(m_Field111 ^ ((unsigned char)(((unsigned char)(m_Field111 ^ a1)) & 1)));
+}
+
 // [TODO] 0x001B5400 sub_001B5400 (134 B)
 // [TODO] 0x001B5490 sub_001B5490 (59 B)
 // ============================================================================
@@ -166987,11 +168504,146 @@ int Class_001B8350::sub_001B8350()
 }
 
 // [TODO] 0x001B8370 MeleeWeaponStateProp::vfunc_63 (49 B)
-// [TODO] 0x001B83B0 sub_001B83B0 (10 B)
-// [TODO] 0x001B83C0 sub_001B83C0 (10 B)
-// [TODO] 0x001B83D0 sub_001B83D0 (10 B)
-// [TODO] 0x001B83E0 sub_001B83E0 (10 B)
-// [TODO] 0x001B83F0 sub_001B83F0 (10 B)
+// ============================================================================
+// [VERIFIED] sub_001B83B0 (0x001B83B0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x50 of the object pointed to at +0x12C.
+// ============================================================================
+// bin: proto
+// va: 0x001B83B0
+// what: Returns the number at +0x50 of the object pointed to at +0x12C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010EE30, nearest by portal/tools/similar.py)
+struct Obj_001B83B0
+{
+    char m_pad00[0x50];
+    float m_Field50; // +0x50
+};
+
+class Class_001B83B0
+{
+public:
+    float sub_001B83B0();
+    char m_pad00[0x12C];
+    Obj_001B83B0* m_Field12C; // +0x12C
+};
+
+float Class_001B83B0::sub_001B83B0()
+{
+    return m_Field12C->m_Field50;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B83C0 (0x001B83C0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x54 of the object pointed to at +0x12C.
+// ============================================================================
+// bin: proto
+// va: 0x001B83C0
+// what: Returns the number at +0x54 of the object pointed to at +0x12C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010EE30, nearest by portal/tools/similar.py)
+struct Obj_001B83C0
+{
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+class Class_001B83C0
+{
+public:
+    float sub_001B83C0();
+    char m_pad00[0x12C];
+    Obj_001B83C0* m_Field12C; // +0x12C
+};
+
+float Class_001B83C0::sub_001B83C0()
+{
+    return m_Field12C->m_Field54;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B83D0 (0x001B83D0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x58 of the object pointed to at +0x12C.
+// ============================================================================
+// bin: proto
+// va: 0x001B83D0
+// what: Returns the number at +0x58 of the object pointed to at +0x12C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010EE30, nearest by portal/tools/similar.py)
+struct Obj_001B83D0
+{
+    char m_pad00[0x58];
+    float m_Field58; // +0x58
+};
+
+class Class_001B83D0
+{
+public:
+    float sub_001B83D0();
+    char m_pad00[0x12C];
+    Obj_001B83D0* m_Field12C; // +0x12C
+};
+
+float Class_001B83D0::sub_001B83D0()
+{
+    return m_Field12C->m_Field58;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B83E0 (0x001B83E0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x5C of the object pointed to at +0x12C.
+// ============================================================================
+// bin: proto
+// va: 0x001B83E0
+// what: Returns the number at +0x5C of the object pointed to at +0x12C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010EE30, nearest by portal/tools/similar.py)
+struct Obj_001B83E0
+{
+    char m_pad00[0x5C];
+    float m_Field5C; // +0x5C
+};
+
+class Class_001B83E0
+{
+public:
+    float sub_001B83E0();
+    char m_pad00[0x12C];
+    Obj_001B83E0* m_Field12C; // +0x12C
+};
+
+float Class_001B83E0::sub_001B83E0()
+{
+    return m_Field12C->m_Field5C;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B83F0 (0x001B83F0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x60 of the object pointed to at +0x12C.
+// ============================================================================
+// bin: proto
+// va: 0x001B83F0
+// what: Returns the number at +0x60 of the object pointed to at +0x12C.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010EE30, nearest by portal/tools/similar.py)
+struct Obj_001B83F0
+{
+    char m_pad00[0x60];
+    float m_Field60; // +0x60
+};
+
+class Class_001B83F0
+{
+public:
+    float sub_001B83F0();
+    char m_pad00[0x12C];
+    Obj_001B83F0* m_Field12C; // +0x12C
+};
+
+float Class_001B83F0::sub_001B83F0()
+{
+    return m_Field12C->m_Field60;
+}
+
 // [TODO] 0x001B8400 MeleeWeaponStateProp::vfunc_64 (14 B)
 // ============================================================================
 // [VERIFIED] sub_001B8410 (0x001B8410, 28 B)
@@ -167930,7 +169582,31 @@ void Class_001BB120::sub_001BB120()
     ((Object*)(int)this + 228)->sub_0008D4C0();
 }
 
-// [TODO] 0x001BB130 sub_001BB130 (22 B)
+// ============================================================================
+// [VERIFIED] sub_001BB130 (0x001BB130, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001F6330 (0x001F6330), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001BB130
+// what: Says whether sub_00028120 gives a nonzero result for the value at +0xE0.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field, nonzero', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_001BB130
+{
+public:
+    int sub_001BB130();
+    char m_pad00[0xE0];
+    int m_FieldE0; // +0xE0
+};
+
+int Class_001BB130::sub_001BB130()
+{
+    return sub_00028120(m_FieldE0) != 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001BB150 (0x001BB150, 78 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -167968,7 +169644,31 @@ L_4A:
     return false;
 }
 
-// [TODO] 0x001BB1A0 sub_001BB1A0 (16 B)
+// ============================================================================
+// [VERIFIED] sub_001BB1A0 (0x001BB1A0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001F6390 (0x001F6390), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001BB1A0
+// what: Passes the value at +0xE0 to sub_00028120 and returns its result.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_001BB1A0
+{
+public:
+    int sub_001BB1A0();
+    char m_pad00[0xE0];
+    int m_FieldE0; // +0xE0
+};
+
+int Class_001BB1A0::sub_001BB1A0()
+{
+    return sub_00028120(m_FieldE0);
+}
+
 // [TODO] 0x001BB1B0 sub_001BB1B0 (361 B)
 // [TODO] 0x001BB320 sub_001BB320 (100 B)
 // [TODO] 0x001BB390 Targeting::vfunc_10 (57 B)
@@ -193127,7 +194827,42 @@ L_34:
 // [TODO] 0x001DD2A0 sub_001DD2A0 (54 B)
 // [TODO] 0x001DD2F0 sub_001DD2F0 (133 B)
 // [TODO] 0x001DD380 sub_001DD380 (94 B)
-// [TODO] 0x001DD400 sub_001DD400 (39 B)
+// ============================================================================
+// [VERIFIED] sub_001DD400 (0x001DD400, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a pointer at +0xC4 and, when it is set, copies the number at its +0x10 to +0xC8.
+// ============================================================================
+// bin: proto
+// va: 0x001DD400
+// what: Stores a pointer at +0xC4 and, when it is set, copies the number at its +0x10 to +0xC8.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00218F90, nearest by portal/tools/similar.py)
+// sub_001DD400 (0x001DD400, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001DD400
+{
+public:
+    void sub_001DD400(int a1);
+    char m_pad00[0xC4];
+    int m_FieldC4; // +0xC4
+    int m_FieldC8; // +0xC8
+};
+
+void Class_001DD400::sub_001DD400(int a1)
+{
+    int r_eax;
+
+    r_eax = a1;
+    m_FieldC4 = a1;
+    if (a1) {
+        r_eax = *(int*)(r_eax + 16);
+        m_FieldC8 = r_eax;
+        return;
+    }
+    m_FieldC8 = 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001DD4B0 (0x001DD4B0, 45 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -203595,7 +205330,30 @@ void Class_001FCF60::sub_001FCF60()
     sub_00025160();
 }
 
-// [TODO] 0x001FCF70 sub_001FCF70 (21 B)
+// ============================================================================
+// [VERIFIED] sub_001FCF70 (0x001FCF70, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0023F7E0 (0x0023F7E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001FCF70
+// what: Sets flag bit 1 of the byte at +0x12.
+// tool: Claude Opus 5.5 (generated from the shape 'set one flag bit', checked on decomp.me preset 266 by example)
+class Class_001FCF70
+{
+public:
+    void sub_001FCF70(bool value);
+    char m_pad00[0x12];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+};
+
+void Class_001FCF70::sub_001FCF70(bool value)
+{
+    m_Flag1 = value;
+}
+
 // [TODO] 0x001FCF90 content::LoadInventory::vfunc_04 (126 B)
 // [TODO] 0x001FD010 sub_001FD010 (76 B)
 // [TODO] 0x001FD060 sub_001FD060 (77 B)
@@ -207527,7 +209285,71 @@ int Class_00205D70::sub_00205D70(int a1)
     return a1;
 }
 
-// [TODO] 0x00205D80 FEBoxObject::vfunc_34 (25 B)
+// ============================================================================
+// [VERIFIED] FEBoxObject::vfunc_34 (0x00205D80, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies the two 16-bit numbers at +0x28 and +0x2A out to the two places given.
+// ============================================================================
+// bin: proto
+// va: 0x00205D80
+// what: Copies the two 16-bit numbers at +0x28 and +0x2A out to the two places given.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00022F40, nearest by portal/tools/similar.py)
+// FEBoxObject::vfunc_34 (0x00205D80, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class FEBoxObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34(int a1, int a2);
+    char m_pad04[0x24];
+    unsigned short m_Field28; // +0x28
+    unsigned short m_Field2A; // +0x2A
+};
+
+void FEBoxObject::vfunc_34(int a1, int a2)
+{
+    unsigned short t1;
+
+    *(unsigned short*)a1 = m_Field28;
+    t1 = m_Field2A;
+    *(unsigned short*)a2 = m_Field2A;
+}
+
 // [TODO] 0x00205DA0 sub_00205DA0 (75 B)
 // ============================================================================
 // [VERIFIED] sub_00205DF0 (0x00205DF0, 25 B)
@@ -214411,7 +216233,39 @@ Class_0021A0C0* Class_0021A0C0::sub_0021A0C0()
 }
 
 // [TODO] 0x0021A100 sub_0021A100 (62 B)
-// [TODO] 0x0021A160 sub_0021A160 (21 B)
+// ============================================================================
+// [VERIFIED] sub_0021A160 (0x0021A160, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00260B20 (0x00260B20), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0021A160
+// what: Returns the number at +0x184 of the object pointed to at +0xC, or the constant at 0x0037CD94 when there is none.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer or a default', checked on decomp.me preset 266 by example)
+extern "C" const float DAT_0037CD94;
+
+struct Obj_0021A160
+{
+    char m_pad00[0x184];
+    float m_Field184; // +0x184
+};
+
+class Class_0021A160
+{
+public:
+    float sub_0021A160();
+    char m_pad00[0xC];
+    Obj_0021A160* m_FieldC; // +0xC
+};
+
+float Class_0021A160::sub_0021A160()
+{
+    if (m_FieldC)
+        return m_FieldC->m_Field184;
+    return DAT_0037CD94;
+}
+
 // [TODO] 0x0021A180 sub_0021A180 (17 B)
 // ============================================================================
 // [VERIFIED] sub_0021A1A0 (0x0021A1A0, 33 B)
@@ -218129,8 +219983,72 @@ void AnimationFrameController::vfunc_25()
 
 // [TODO] 0x002250E0 sub_002250E0 (63 B)
 // [TODO] 0x00225120 pure3d::SimpleFrameController::vfunc_08 (95 B)
-// [TODO] 0x00225180 pure3d::SimpleFrameController::vfunc_12 (18 B)
-// [TODO] 0x002251A0 pure3d::SimpleFrameController::vfunc_13 (18 B)
+// ============================================================================
+// [VERIFIED] pure3d::SimpleFrameController::vfunc_12 (0x00225180, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::SimpleFrameController::vfunc_12 (0x00273400), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00225180
+// what: Returns the number at +0x10 of the object pointed to at +0x30, or the constant at 0x0037E6C0 when there is none.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer or a default', checked on decomp.me preset 266 by example)
+extern "C" const float DAT_0037E6C0;
+
+struct Obj_00225180
+{
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+class Class_00225180
+{
+public:
+    float sub_00225180();
+    char m_pad00[0x30];
+    Obj_00225180* m_Field30; // +0x30
+};
+
+float Class_00225180::sub_00225180()
+{
+    if (m_Field30)
+        return m_Field30->m_Field10;
+    return DAT_0037E6C0;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::SimpleFrameController::vfunc_13 (0x002251A0, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::SimpleFrameController::vfunc_13 (0x00273420), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002251A0
+// what: Returns the number at +0xC of the object pointed to at +0x30, or the constant at 0x0037CD94 when there is none.
+// tool: Claude Opus 5.5 (generated from the shape 'float through a pointer or a default', checked on decomp.me preset 266 by example)
+extern "C" const float DAT_0037CD94;
+
+struct Obj_002251A0
+{
+    char m_pad00[0xC];
+    float m_FieldC; // +0xC
+};
+
+class Class_002251A0
+{
+public:
+    float sub_002251A0();
+    char m_pad00[0x30];
+    Obj_002251A0* m_Field30; // +0x30
+};
+
+float Class_002251A0::sub_002251A0()
+{
+    if (m_Field30)
+        return m_Field30->m_FieldC;
+    return DAT_0037CD94;
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::SimpleFrameController::vfunc_17 (0x002251C0, 21 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -239453,7 +241371,34 @@ int d3dContext::vfunc_08(int a1)
 
 }
 
-// [TODO] 0x002616A0 pure3d::d3dContext::vfunc_09 (7 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dContext::vfunc_09 (0x002616A0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x8 of the object pointed to at +0x48.
+// ============================================================================
+// bin: proto
+// va: 0x002616A0
+// what: Returns the number at +0x8 of the object pointed to at +0x48.
+// tool: Claude Opus 5.5 (transplanted from xb:0x0010EE30, nearest by portal/tools/similar.py)
+struct Obj_002616A0
+{
+    char m_pad00[0x8];
+    float m_Field08; // +0x8
+};
+
+class Class_002616A0
+{
+public:
+    float sub_002616A0();
+    char m_pad00[0x48];
+    Obj_002616A0* m_Field48; // +0x48
+};
+
+float Class_002616A0::sub_002616A0()
+{
+    return m_Field48->m_Field08;
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_10 (0x002616B0, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -260296,7 +262241,33 @@ Class_00290CF0* Class_00290CF0::sub_00290CF0()
     return this;
 }
 
-// [TODO] 0x00290D20 sub_00290D20 (12 B)
+// ============================================================================
+// [VERIFIED] sub_00290D20 (0x00290D20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006EB6E0 (PC 0x006EB6E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x00290D20
+// what: Stores a 16-bit number at +0x08.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000117E0, nearest by portal/tools/similar.py)
+// sub_00290D20 (0x00290D20, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00290D20
+{
+public:
+    void sub_00290D20(int a1);
+    char m_pad00[0x8];
+    unsigned short m_Field08; // +0x8
+};
+
+void Class_00290D20::sub_00290D20(int a1)
+{
+    m_Field08 = (unsigned short)a1;
+}
+
 // [TODO] 0x00290D30 sub_00290D30 (82 B)
 // [TODO] 0x00290D90 sub_00290D90 (141 B)
 // [TODO] 0x00290E20 sub_00290E20 (80 B)
@@ -263328,8 +265299,57 @@ int Class_00296450::sub_00296450(int a1)
     return a1;
 }
 
-// [TODO] 0x00296460 sub_00296460 (29 B)
-// [TODO] 0x00296480 sub_00296480 (9 B)
+// ============================================================================
+// [VERIFIED] sub_00296460 (0x00296460, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets or clears the lowest flag bit of the byte at +0x98.
+// ============================================================================
+// bin: proto
+// va: 0x00296460
+// what: Sets or clears the lowest flag bit of the byte at +0x98.
+// tool: Claude Opus 5.5 (transplanted from xb:0x00164290, nearest by portal/tools/similar.py)
+// sub_00296460 (0x00296460, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00296460
+{
+public:
+    void sub_00296460(int a1);
+    char m_pad00[0x98];
+    unsigned char m_Field98; // +0x98
+};
+
+void Class_00296460::sub_00296460(int a1)
+{
+    int t1;
+
+    t1 = ((unsigned char)(m_Field98 ^ a1)) & 1;
+    m_Field98 = (unsigned char)(m_Field98 ^ ((unsigned char)(((unsigned char)(m_Field98 ^ a1)) & 1)));
+}
+
+// ============================================================================
+// [VERIFIED] sub_00296480 (0x00296480, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x98.
+// ============================================================================
+// bin: proto
+// va: 0x00296480
+// what: Reads flag bit 0 of the byte at +0x98.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000CF790, nearest by portal/tools/similar.py)
+class Class_00296480
+{
+public:
+    bool sub_00296480();
+    char m_pad00[0x98];
+    unsigned char m_Flag0 : 1;
+};
+
+bool Class_00296480::sub_00296480()
+{
+    return m_Flag0;
+}
+
 // [TODO] 0x00296490 sub_00296490 (27 B)
 // [TODO] 0x002964B0 sub_002964B0 (85 B)
 // ============================================================================

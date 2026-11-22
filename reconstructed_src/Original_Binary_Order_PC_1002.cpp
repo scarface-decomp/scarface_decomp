@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 612 of 1,514 functions matched (40.42%). NOT COMPLETE YET.
-// The 902 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 621 of 1,514 functions matched (41.02%). NOT COMPLETE YET.
+// The 893 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -575,7 +575,32 @@ void Class_006DF970::sub_006DF970()
 // [TODO] 0x006E0010 GameMemorySegmentCollection::vfunc_00 (5 B)
 // [TODO] 0x006E0020 core::String::vfunc_05 (110 B)
 // [TODO] 0x006E0090 core::String::vfunc_04 (36 B)
-// [TODO] 0x006E00C0 core::String::vfunc_24 (9 B)
+// ============================================================================
+// [VERIFIED] core::String::vfunc_24 (0x006E00C0, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x14 with its top bit cleared.
+// ============================================================================
+// bin: pc
+// va: 0x006E00C0
+// what: Returns the number at +0x14 with its top bit cleared.
+// tool: Claude Opus 5.5 (transplanted from proto:0x000FAB90, nearest by portal/tools/similar.py)
+// sub_006E00C0 (Proto 0x006E00C0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E00C0
+{
+public:
+    int sub_006E00C0();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Class_006E00C0::sub_006E00C0()
+{
+    return m_Field14 & 2147483647;
+}
+
 // [TODO] 0x006E00D0 core::String::vfunc_23 (100 B)
 // [TODO] 0x006E0140 core::String::vfunc_07 (160 B)
 // [TODO] 0x006E01E0 core::String::vfunc_06 (34 B)
@@ -734,7 +759,40 @@ MemoryDlAllocator::MemoryDlAllocator() {}                  // building one is wh
 // [TODO] 0x006E0AD0 sub_006E0AD0 (215 B)
 // [TODO] 0x006E0BB0 core::MemoryDlAllocator::vfunc_05 (200 B)
 // [TODO] 0x006E0C80 core::MemoryDlAllocator::vfunc_04 (133 B)
-// [TODO] 0x006E0D10 sub_006E0D10 (42 B)
+// ============================================================================
+// [VERIFIED] sub_006E0D10 (0x006E0D10, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// What it does: Works out how much usable room a memory block has from the header just before it, or 0 for none.
+// ============================================================================
+// bin: pc
+// va: 0x006E0D10
+// what: Works out how much usable room a memory block has from the header just before it, or 0 for none.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0024B330, nearest by portal/tools/similar.py)
+// sub_006E0D10 (Proto 0x006E0D10, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006E0D10(int a1)
+{
+    int r_eax;
+
+    if (a1) {
+        r_eax = *(int*)(a1 + -4);
+        if (((unsigned char)r_eax) & 2) {
+            r_eax &= -4;
+            r_eax -= 8;
+            return r_eax;
+        }
+        if (!(*(int*)((r_eax & -2) + a1 + -4) & 1)) goto L_29;
+        r_eax &= -4;
+        r_eax -= 4;
+        return r_eax;
+    }
+L_29:
+    r_eax = 0;
+    return r_eax;
+}
+
 // [TODO] 0x006E0D40 sub_006E0D40 (9 B)
 // [TODO] 0x006E11C0 sub_006E11C0 (493 B)
 // [TODO] 0x006E13B0 core::MemoryDlAllocator::vfunc_07 (117 B)
@@ -7573,7 +7631,32 @@ int Class_006EB6D0::sub_006EB6D0()
     return r_eax;
 }
 
-// [TODO] 0x006EB6E0 sub_006EB6E0 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006EB6E0 (0x006EB6E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a 16-bit number at +0x08.
+// ============================================================================
+// bin: pc
+// va: 0x006EB6E0
+// what: Stores a 16-bit number at +0x08.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000117E0, nearest by portal/tools/similar.py)
+// sub_006EB6E0 (0x006EB6E0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EB6E0
+{
+public:
+    void sub_006EB6E0(int a1);
+    char m_pad00[0x8];
+    unsigned short m_Field08; // +0x8
+};
+
+void Class_006EB6E0::sub_006EB6E0(int a1)
+{
+    m_Field08 = (unsigned short)a1;
+}
+
 // [TODO] 0x006EB6F0 sub_006EB6F0 (82 B)
 // [TODO] 0x006EB750 sub_006EB750 (8 B)
 // [TODO] 0x006EB7A0 sub_006EB7A0 (83 B)
@@ -9874,7 +9957,24 @@ bool __cdecl sub_006EF360(bool a1)
 // [TODO] 0x006EF670 sub_006EF670 (539 B)
 // [TODO] 0x006EF8F0 sub_006EF8F0 (9 B)
 // [TODO] 0x006EF900 sub_006EF900 (27 B)
-// [TODO] 0x006EF970 sub_006EF970 (8 B)
+// ============================================================================
+// [VERIFIED] sub_006EF970 (0x006EF970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the address 12 bytes into a record.
+// ============================================================================
+// bin: pc
+// va: 0x006EF970
+// what: Returns the address 12 bytes into a record.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0029AFB0, nearest by portal/tools/similar.py)
+// sub_006EF970 (Proto 0x006EF970, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EF970(int a1)
+{
+    return a1 + 12;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EF980 (0x006EF980, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9911,7 +10011,25 @@ int __cdecl sub_006EFB60(int a1)
     return *(int*)(a1 + 8);
 }
 
-// [TODO] 0x006EFB70 sub_006EFB70 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006EFB70 (0x006EFB70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a decimal number at +0x10 of a record and returns the record.
+// ============================================================================
+// bin: pc
+// va: 0x006EFB70
+// what: Stores a decimal number at +0x10 of a record and returns the record.
+// tool: Claude Opus 5.5 (transplanted from proto:0x002AB580, nearest by portal/tools/similar.py)
+// sub_006EFB70 (Proto 0x006EFB70, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EFB70(int a1, float a2)
+{
+    *(float*)(a1 + 16) = a2;
+    return a1;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EFB80 (0x006EFB80, 12 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9935,7 +10053,25 @@ int __cdecl sub_006EFB80(int a1, float a2)
 // [TODO] 0x006EFCB0 sub_006EFCB0 (44 B)
 // [TODO] 0x006EFCE0 sub_006EFCE0 (8 B)
 // [TODO] 0x006EFCF0 sub_006EFCF0 (61 B)
-// [TODO] 0x006EFD30 sub_006EFD30 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006EFD30 (0x006EFD30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a yes/no value at +0x0C of a record and returns it.
+// ============================================================================
+// bin: pc
+// va: 0x006EFD30
+// what: Stores a yes/no value at +0x0C of a record and returns it.
+// tool: Claude Opus 5.5 (transplanted from proto:0x002AB470, nearest by portal/tools/similar.py)
+// sub_006EFD30 (Proto 0x006EFD30, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+bool __cdecl sub_006EFD30(int a1, bool a2)
+{
+    *(bool*)(a1 + 12) = a2;
+    return a2;
+}
+
 // [TODO] 0x006EFD40 sub_006EFD40 (43 B)
 // [TODO] 0x006EFD70 sub_006EFD70 (143 B)
 // [TODO] 0x006EFE00 sub_006EFE00 (205 B)
@@ -21948,9 +22084,87 @@ void* d3dVehicleShader::vfunc_19()
 }
 
 // [TODO] 0x00707F30 pure3d::d3dVehicleShader::vfunc_26 (463 B)
-// [TODO] 0x00708100 pure3d::d3dVehicleShader::vfunc_31 (13 B)
-// [TODO] 0x00708110 pure3d::d3dVehicleShader::vfunc_30 (13 B)
-// [TODO] 0x00708120 pure3d::d3dVehicleShader::vfunc_28 (13 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_31 (0x00708100, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a number at +0x94 and returns it.
+// ============================================================================
+// bin: pc
+// va: 0x00708100
+// what: Stores a number at +0x94 and returns it.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0007DD30, nearest by portal/tools/similar.py)
+// sub_00708100 (Proto 0x00708100, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00708100
+{
+public:
+    int sub_00708100(int a1);
+    char m_pad00[0x94];
+    int m_Field94; // +0x94
+};
+
+int Class_00708100::sub_00708100(int a1)
+{
+    m_Field94 = a1;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_30 (0x00708110, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a number at +0x98 and returns it.
+// ============================================================================
+// bin: pc
+// va: 0x00708110
+// what: Stores a number at +0x98 and returns it.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0007DD30, nearest by portal/tools/similar.py)
+// sub_00708110 (Proto 0x00708110, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00708110
+{
+public:
+    int sub_00708110(int a1);
+    char m_pad00[0x98];
+    int m_Field98; // +0x98
+};
+
+int Class_00708110::sub_00708110(int a1)
+{
+    m_Field98 = a1;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_28 (0x00708120, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a number at +0x88 and returns it.
+// ============================================================================
+// bin: pc
+// va: 0x00708120
+// what: Stores a number at +0x88 and returns it.
+// tool: Claude Opus 5.5 (transplanted from proto:0x0007DD30, nearest by portal/tools/similar.py)
+// sub_00708120 (Proto 0x00708120, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00708120
+{
+public:
+    int sub_00708120(int a1);
+    char m_pad00[0x88];
+    int m_Field88; // +0x88
+};
+
+int Class_00708120::sub_00708120(int a1)
+{
+    m_Field88 = a1;
+    return a1;
+}
+
 // [TODO] 0x00708130 pure3d::d3dVehicleShader::vfunc_32 (115 B)
 // [TODO] 0x007081B0 pure3d::d3dVehicleShader::vfunc_33 (92 B)
 // [TODO] 0x00708210 pure3d::d3dVehicleShader::vfunc_34 (92 B)

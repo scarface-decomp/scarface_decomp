@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GenericCharacterCamera.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GenericCharacterCamera.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 11 functions matched (27.27%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 11 functions matched (45.45%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -93,6 +93,39 @@ bool GenericCharacterCamera::vfunc_39()
 }
 
 // ============================================================================
+// [VERIFIED] GenericCharacterCamera::vfunc_41 (0x001392B0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of a three-number vector kept in an object.
+// ============================================================================
+// bin: proto
+// va: 0x001392B0
+// what: Returns a copy of a three-number vector kept in an object.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000E7920, nearest by portal/tools/similar.py)
+// sub_001392B0 (0x001392B0, 30 bytes)
+
+struct Struct_001392B0
+{
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+class Class_001392B0
+{
+public:
+    Struct_001392B0 sub_001392B0() const;
+
+    char m_pad00[0x27C];
+    Struct_001392B0 m_Field27C; // +0x27C
+};
+
+// Returns the stored vector by value.
+Struct_001392B0 Class_001392B0::sub_001392B0() const
+{
+    return m_Field27C;
+}
+
+// ============================================================================
 // [VERIFIED] GenericCharacterCamera::vfunc_01 (0x00139320, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -121,5 +154,30 @@ GenericCharacterCamera* GenericCharacterCamera::vfunc_01(int a1)
         sub_00025160((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] GenericCharacterCamera::vfunc_36 (0x0013A460, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GenericCharacterCamera::vfunc_38 (0x00155690), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0013A460
+// what: Says whether sub_00028120 gives a nonzero result for the value at +0x28C.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field, nonzero', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_00028120(int value);
+
+class Class_0013A460
+{
+public:
+    int sub_0013A460();
+    char m_pad00[0x28C];
+    int m_Field28C; // +0x28C
+};
+
+int Class_0013A460::sub_0013A460()
+{
+    return sub_00028120(m_Field28C) != 0;
 }
 

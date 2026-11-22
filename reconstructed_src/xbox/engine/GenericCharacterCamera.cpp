@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GenericCharacterCamera.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GenericCharacterCamera.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 11 functions matched (27.27%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 11 functions matched (45.45%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -97,6 +97,30 @@ bool GenericCharacterCamera::vfunc_41()
 }
 
 // ============================================================================
+// [VERIFIED] GenericCharacterCamera::vfunc_44 (0x00154600, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns a copy of the three-number vector at +0x270.
+// ============================================================================
+// bin: xb
+// va: 0x00154600
+// what: Returns a copy of the three-number vector at +0x270.
+// tool: Claude Opus 5.5 (generated from the shape 'return a vector field', checked on decomp.me preset 266 by example)
+struct Vector_00154600 { float x, y, z; };
+
+class Class_00154600
+{
+public:
+    Vector_00154600 sub_00154600();
+    char m_pad00[0x270];
+    Vector_00154600 m_Field270; // +0x270
+};
+
+Vector_00154600 Class_00154600::sub_00154600()
+{
+    return m_Field270;
+}
+
+// ============================================================================
 // [VERIFIED] GenericCharacterCamera::vfunc_01 (0x00154680, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -125,5 +149,29 @@ GenericCharacterCamera* GenericCharacterCamera::vfunc_01(int a1)
         sub_00027600((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] GenericCharacterCamera::vfunc_38 (0x00155690, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_0002AC90 gives a nonzero result for the value at +0x28C.
+// ============================================================================
+// bin: xb
+// va: 0x00155690
+// what: Says whether sub_0002AC90 gives a nonzero result for the value at +0x28C.
+// tool: Claude Opus 5.5 (generated from the shape 'call with a field, nonzero', checked on decomp.me preset 266 by example)
+extern "C" int __cdecl sub_0002AC90(int value);
+
+class Class_00155690
+{
+public:
+    int sub_00155690();
+    char m_pad00[0x28C];
+    int m_Field28C; // +0x28C
+};
+
+int Class_00155690::sub_00155690()
+{
+    return sub_0002AC90(m_Field28C) != 0;
 }
 

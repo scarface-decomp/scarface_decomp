@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/CharacterObject.cpp (17 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/CharacterObject.cpp (18 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 17 of 35 functions matched (48.57%). NOT COMPLETE YET.
-// The 18 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 18 of 35 functions matched (51.43%). NOT COMPLETE YET.
+// The 17 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -82,6 +82,29 @@ public:
 void CharacterObject::vfunc_56()
 {
     vfunc_55();
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_17 (0x001632B0, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 1 of the byte at +0xA5.
+// ============================================================================
+// bin: xb
+// va: 0x001632B0
+// what: Sets flag bit 1 of the byte at +0xA5.
+// tool: Claude Opus 5.5 (generated from the shape 'set one flag bit', checked on decomp.me preset 266 by example)
+class Class_001632B0
+{
+public:
+    void sub_001632B0(bool value);
+    char m_pad00[0xA5];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+};
+
+void Class_001632B0::sub_001632B0(bool value)
+{
+    m_Flag1 = value;
 }
 
 // ============================================================================

@@ -1,9 +1,7 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/NISPackage.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/NISPackage.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 4 functions matched (75.00%). NOT COMPLETE YET.
-// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
-// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// PROGRESS: COMPLETE. All 4 functions are matched.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
@@ -28,6 +26,41 @@ public:
 void NISPackage::vfunc_00()
 {
     m_FieldB0 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] NISPackage::vfunc_01 (0x000BD310, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Drops one use of an NIS package; on the last one it calls the object's own release with 1.
+// ============================================================================
+// bin: proto
+// va: 0x000BD310
+// what: Drops one use of an NIS package; on the last one it calls the object's own release with 1.
+// tool: Claude Opus 5.5 (transplanted from xb:0x000CD8D0, nearest by portal/tools/similar.py)
+// NISPackage::vfunc_01 (0x000BD310, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class NISPackage
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+void NISPackage::vfunc_01()
+{
+    int r_eax, r_ecx;
+
+    r_ecx = (int)this;
+    r_eax = *(int*)(r_ecx + 176);
+    if (r_eax < 2) {
+        r_eax = *(int*)r_ecx;
+        r_eax = ((int (__stdcall*)(int))*(int*)(r_eax + 12))(1);
+        return;
+    }
+    r_eax -= 1;
+    *(int*)(r_ecx + 176) = r_eax;
 }
 
 // ============================================================================
