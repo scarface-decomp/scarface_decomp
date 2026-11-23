@@ -1,14 +1,14 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-22 22:17:56",
+  "updated_at": "2026-11-22 23:05:17",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 777,
-    "xb": 9091,
+    "xb": 9186,
     "proto": 8295,
     "ps2": 0,
-    "total": 9868,
-    "bytes": 362155,
+    "total": 9963,
+    "bytes": 364021,
     "ps2_bytes": 0
   },
   "readable": {
@@ -39,41 +39,32 @@
     }
   },
   "size_buckets": {
-    "1-9 B": 1982,
-    "10-19 B": 1505,
-    "20-39 B": 2864,
+    "1-9 B": 1986,
+    "10-19 B": 1548,
+    "20-39 B": 2912,
     "40-79 B": 2669,
     "80+ B": 848
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 12657,
+    "RRutherrfordd (Founder)": 12752,
     "NoahBPeterson": 5400,
     "lemiur": 106
   },
   "unattributed": 0,
   "queue": {
     "pc": 738,
-    "xb": 10429,
+    "xb": 10334,
     "proto": 9249,
     "ps2": 24297,
-    "total": 11167,
+    "total": 11072,
     "tiers": {
-      "TIER_1_QUICK": 319,
-      "TIER_2_SMALL": 1183,
+      "TIER_1_QUICK": 272,
+      "TIER_2_SMALL": 1135,
       "TIER_3_MEDIUM": 2261,
       "TIER_4_LARGE": 7404
     }
   },
   "good_first": [
-    {
-      "id": "xb_00322D90",
-      "bin": "xb",
-      "va": "0x00322D90",
-      "symbol": "sub_00322D90",
-      "size": 1,
-      "why": "matching it also matches its 3 look-alikes",
-      "kind": "group"
-    },
     {
       "id": "xb_002FBBE9",
       "bin": "xb",
@@ -90,6 +81,15 @@
       "symbol": "sub_002FD289",
       "size": 8,
       "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002E0600",
+      "bin": "xb",
+      "va": "0x002E0600",
+      "symbol": "sub_002E0600",
+      "size": 9,
+      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     },
     {
@@ -120,15 +120,6 @@
       "kind": "named"
     },
     {
-      "id": "xb_002E0600",
-      "bin": "xb",
-      "va": "0x002E0600",
-      "symbol": "sub_002E0600",
-      "size": 9,
-      "why": "matching it also matches its 2 look-alikes",
-      "kind": "group"
-    },
-    {
       "id": "pc_006E4610",
       "bin": "pc",
       "va": "PC 0x006E4610",
@@ -152,6 +143,15 @@
       "va": "0x002FE371",
       "symbol": "sub_002FE371",
       "size": 10,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002ACA40",
+      "bin": "xb",
+      "va": "0x002ACA40",
+      "symbol": "core::CementLibrary::vfunc_00",
+      "size": 11,
       "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     }
