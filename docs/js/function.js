@@ -45,6 +45,13 @@
     var e = entries[key];
     if (!e) { $('loading').hidden = true; $('missing').hidden = false; return; }
 
+    // a name worked out for a rebuilt function (reports/names.json) reads better than its placeholder
+    // (sub_00027600, Car::vfunc_01): it is shown wherever the function is, with the placeholder beside it
+    function nameOf(k) {
+      var n = names[k], sym = (entries[k] || {}).symbol || '';
+      return n && n.name && n.name !== sym ? n.name : '';
+    }
+
     // what every rebuilt function is called, per version, to link names in the code
     var bySymbol = {}, byAddr = {};
     Object.keys(entries).forEach(function (k) {
@@ -69,12 +76,18 @@
       return null;
     }
 
-    // name: class and function
+    // name: class and function (the recorded name when there is one, the code's own beside it)
     var sym = e.symbol || '';
-    var cut = sym.lastIndexOf('::');
-    $('cls').textContent = cut > 0 ? sym.slice(0, cut) + '::' : '';
-    $('name').textContent = cut > 0 ? sym.slice(cut + 2) : sym;
-    document.title = sym + ' (' + (BIN[e.bin] || e.bin) + ') | Scarface decomp';
+    var shown = nameOf(key) || sym;
+    var cut = shown.lastIndexOf('::');
+    $('cls').textContent = cut > 0 ? shown.slice(0, cut) + '::' : '';
+    $('name').textContent = cut > 0 ? shown.slice(cut + 2) : shown;
+    if (shown !== sym) {
+      var inCode = el('p', 'In the code: ', 'incode');
+      inCode.appendChild(el('code', sym));
+      $('name').parentNode.insertBefore(inCode, $('name').nextSibling);
+    }
+    document.title = shown + ' (' + (BIN[e.bin] || e.bin) + ') | Scarface decomp';
     $('crumb-ver').textContent = BIN[e.bin] || e.bin;
     var canon = document.createElement('link');
     canon.rel = 'canonical';
@@ -102,6 +115,7 @@
     fact('Rebuilt by', e.verified_by || 'early bulk work');
     if (e.verified_at) fact('Verified', String(e.verified_at).slice(0, 10));
     if (e.revised_by) fact('Cleaned up by', e.revised_by);
+    if (nameOf(key)) fact('Named by', names[key].by || 'reports/names.json');
     if (e.tool_used) fact('Helped by', e.tool_used);
     fact('Compiler', (/^ps2/.test(e.bin) ? 'CodeWarrior for PS2 3.0.1' : 'Visual C++ ' + (e.compiler || '7.10')));
     fact('Flags', e.flags || '');
@@ -121,7 +135,10 @@
     (e.refs || []).forEach(function (word) {
       var r = linkFor(word), li = el('li'), cd = el('code');
       if (!r) return;
-      if (r.key) { var a = el('a', word); a.href = r.href; cd.appendChild(a); li.appendChild(cd); li.appendChild(el('span', 'rebuilt', 's')); }
+      if (r.key) {
+        var a = el('a', nameOf(r.key) || word); a.href = r.href; a.title = word; cd.appendChild(a); li.appendChild(cd);
+        li.appendChild(el('span', 'rebuilt', 's'));
+      }
       else {
         cd.textContent = word; li.appendChild(cd); li.appendChild(el('span', 'not rebuilt yet', 's'));
         if (r.known) li.appendChild(el('span', 'Probably ' + r.known.name + (r.known.by ? ' (named by ' + r.known.by + ')' : ''), 'w'));
@@ -138,7 +155,7 @@
       if (k === key || x.bin !== e.bin) return;
       var refs = x.refs || [];
       if (own.some(function (n) { return (n.length >= 8 || n.indexOf('::') > 0) && refs.indexOf(n) >= 0; })) {
-        var li = el('li'), cd = el('code'), a = el('a', x.symbol);
+        var li = el('li'), cd = el('code'), a = el('a', nameOf(k) || x.symbol);
         a.href = pageUrl(k); cd.appendChild(a); li.appendChild(cd); li.appendChild(el('span', x.va, 's'));
         used.appendChild(li);
       }
@@ -154,7 +171,7 @@
       var k = same[p[0]], a = el('a', '', p[1]);
       a.href = pageUrl(k);
       a.appendChild(el('small', p[2] + ' in ' + (BIN[e.bin] || e.bin)));
-      a.appendChild(el('code', entries[k].symbol));
+      a.appendChild(el('code', nameOf(k) || entries[k].symbol));
       pager.appendChild(a);
     });
 

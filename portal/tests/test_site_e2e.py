@@ -125,6 +125,7 @@ def site(tmp_path_factory):
     copy_docs(d)
     (d / "data").mkdir()
     shutil.copy2(FIX / "progress.json", d / "data" / "progress.json")
+    (d / "data" / "names.json").write_text('{"schema": "scarface_names_v1", "names": {}}', encoding="utf-8")
     put_list(d, REG)
     srv, url = serve(d)
     yield d, url
@@ -674,6 +675,33 @@ def test_what_it_does_on_the_site(tmp_path, browser):
         pg.wait_for_selector("#fn:not([hidden])")
         assert pg.text_content("#what") == "Says which collision group <b>this</b> isIn plain English, by Alice"
         assert pg.get_attribute('meta[name="description"]', "content") == "Says which collision group <b>this</b> is"
+        assert not pg.errors, pg.errors
+        ctx.close()
+    finally:
+        srv.shutdown()
+
+
+def test_a_recorded_name_leads_the_function_page(tmp_path, browser):
+    """A rebuilt function named in reports/names.json shows that name (the code's placeholder beside it), and
+    who named it; the build copies names.json into data/."""
+    d = tmp_path / "site"
+    d.mkdir()
+    copy_docs(d)
+    (d / "data").mkdir()
+    put_list(d, REG)
+    shutil.copy2(FIX / "progress.json", d / "data" / "progress.json")
+    (d / "data" / "names.json").write_text(json.dumps({"schema": "scarface_names_v1", "names": {
+        "xb:0x000123B0": {"name": "CollisionBehaviourTypeGroup::GetClassRep", "by": "the matched code's own shape",
+                          "why": "Returns its class record."}}}), encoding="utf-8")
+    srv, url = serve(d)
+    try:
+        ctx, pg = open_page(browser, url + "function.html?f=xb%3A0x000123B0")
+        pg.wait_for_selector("#fn:not([hidden])")
+        assert pg.text_content("#name") == "GetClassRep" and pg.text_content("#cls") == "CollisionBehaviourTypeGroup::"
+        assert pg.text_content(".incode") == "In the code: CollisionBehaviourTypeGroup::vfunc_00"
+        assert pg.title().startswith("CollisionBehaviourTypeGroup::GetClassRep (Xbox)")
+        facts = dict(pg.eval_on_selector_all("#facts div", "ds => ds.map(d => [d.querySelector('dt').textContent, d.querySelector('dd').textContent])"))
+        assert facts["Named by"] == "the matched code's own shape"
         assert not pg.errors, pg.errors
         ctx.close()
     finally:

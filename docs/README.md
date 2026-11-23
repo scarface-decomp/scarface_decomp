@@ -45,8 +45,13 @@ So every push to `main`, including the portal's **Sync to GitHub**, updates the 
 | :--- | :--- |
 | Production branch | `main` |
 | Framework preset | None |
-| Build command | `mkdir -p docs/data && cp reports/progress.json docs/data/` |
+| Build command | `mkdir -p docs/data && cp reports/progress.json reports/names.json docs/data/` |
 | Build output directory | `docs` |
+
+Copy nothing else into `data/`: Cloudflare Pages refuses any file over 25 MiB, and
+`reports/verified_registry.json` passed that on 22 November 2026 (25.3 MiB), which failed every build until
+it was taken out of the command. The site doesn't read it: the pages use `functions.json` (no code) and
+`names.json`.
 
 ## Testing locally
 
