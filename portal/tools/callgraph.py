@@ -7,7 +7,8 @@ functions in, leaves first, and what each one touches.
 
 For every function (the registry's and the queue's):
 - calls: direct calls, and jumps to another function's start (a tail call). A function that is only a jump
-  (a thunk) is folded into its target.
+  (a thunk) is folded into its target; so is an adjustor (`sub ecx,N; jmp F` or `add ecx,-N; jmp F`, what a
+  second vtable of a class with two bases holds), listed under "adjustors" with how far it moves this.
 - virtual: calls through a vtable that can be told for certain, [target, how]:
     own   the function's own class (ecx at entry, or a register copied from it), slot = offset / 4
     base  a base-class part of this (lea ecx,[this+N], N a base's place from the class hierarchy): that
@@ -16,8 +17,9 @@ For every function (the registry's and the queue's):
   A function's class is the class whose vtable holds it (the most basic one, when several do), or the
   class its name in reports/names.json or the registry gives.
 - unresolved: calls through a register or memory that these rules can't tell.
-- globals: fixed data addresses it reads or writes; casts: the classes it dynamic_casts to (RTTI
-  type descriptors it pushes); strings: how many text constants it uses.
+- globals: fixed data addresses it reads or writes; casts: its dynamic_casts as [from, to] class pairs (the
+  two type descriptors pushed for __RTDynamicCast, whose address comes from reports/names.json);
+  strings: how many text constants it uses.
 - order: Tarjan's strongly connected components over the direct calls, leaves first (a function comes
   after everything it calls, except inside a cycle).
 
@@ -183,7 +185,7 @@ def _mem(op: str) -> Optional[Tuple[str, int]]:
 
 
 def analyse(md, img: Img, rt: Rtti, start: int, size: int, cls: Optional[str], starts: Set[int],
-            td_names: Dict[int, str]) -> dict:
+            td_names: Dict[int, str], dyn_cast: Optional[int] = None) -> dict:
     code = img.img.read(start, size) or b""
     ins = list(md.disasm(code, start))
     targets = {int(i.op_str, 16) for i in ins if i.mnemonic.startswith("j") and i.op_str.startswith("0x")}
@@ -197,11 +199,29 @@ def analyse(md, img: Img, rt: Rtti, start: int, size: int, cls: Optional[str], s
         d = i.op_str.split(",")[0].strip()
         if d in REGS32 and i.mnemonic not in ("push", "cmp", "test", "call"):
             writes[d] += 1
+    pushed: List[Optional[int]] = []                 # the last values pushed (a type descriptor, or None)
+    const: Dict[str, int] = {}                       # registers holding a type descriptor's address
     for i in ins:
         if i.address in targets:
             st = {r: v for r, v in st.items() if v[0] == "this" and r in ("ebx", "esi", "edi", "ebp")
                   and writes[r] <= 1}
         m, ops = i.mnemonic, [o.strip() for o in i.op_str.split(",")] if i.op_str else []
+        if m == "push" and ops:
+            v = int(ops[0], 16) if ops[0].startswith("0x") else const.get(ops[0])
+            pushed.append(v if v in td_names else None)
+        elif m == "mov" and len(ops) == 2 and ops[0] in REGS32:
+            if ops[1].startswith("0x") and int(ops[1], 16) in td_names:
+                const[ops[0]] = int(ops[1], 16)
+            else:
+                const.pop(ops[0], None)
+        elif m == "call":
+            if dyn_cast is not None and ops and ops[0] == f"0x{dyn_cast:x}" and len(pushed) >= 5:
+                # pushed last to first: pointer, vfDelta, from, to, isReference
+                src, dst = pushed[-3], pushed[-4]
+                if src is not None and dst is not None:
+                    casts.add((td_names[src], td_names[dst]))
+            for r in CLOBBERED:
+                const.pop(r, None)
         # constants: strings, globals, type descriptors
         for o in ops:
             for h in re.findall(r"0x[0-9a-f]{5,8}", o):
@@ -209,7 +229,7 @@ def analyse(md, img: Img, rt: Rtti, start: int, size: int, cls: Optional[str], s
                 if not img.in_data(v):
                     continue
                 if v in td_names:
-                    if m == "push":
+                    if m == "push" and dyn_cast is None:
                         casts.add(td_names[v])
                 elif "[" in o:
                     globals_.add(v)
@@ -276,7 +296,7 @@ def analyse(md, img: Img, rt: Rtti, start: int, size: int, cls: Optional[str], s
         else:
             st[dst] = new
     return {"calls": calls, "virtual": virtual, "unresolved": unresolved, "globals": sorted(globals_),
-            "casts": sorted(casts), "strings": sorted(strings)}
+            "casts": sorted(casts, key=str), "strings": sorted(strings)}
 
 
 # ---------------------------------------------------------------------------- the graph
@@ -352,6 +372,16 @@ def class_names(b: str = "xb") -> Dict[int, str]:
     return out
 
 
+def dynamic_cast_address(b: str = "xb") -> Optional[int]:
+    """Where __RTDynamicCast is, by its name in reports/names.json."""
+    try:
+        names = json.loads((ROOT / "reports" / "names.json").read_text())["names"]
+    except (OSError, ValueError, KeyError):
+        return None
+    return next((int(k.split(":")[1], 16) for k, v in names.items()
+                 if k.startswith(b + ":") and v.get("name") == "__RTDynamicCast"), None)
+
+
 def build(image, b: str = "xb") -> Tuple[dict, dict]:
     from capstone import CS_ARCH_X86, CS_MODE_32, Cs
     md = Cs(CS_ARCH_X86, CS_MODE_32)
@@ -370,13 +400,21 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
     by_name = class_names(b)
     known = {c for c, _ in rt.of_class}
     # a thunk is a function that is just a jump to another
-    thunk = {}
+    thunk, adjust = {}, {}
     for f in funcs:
-        b5 = img.img.read(f, 5)
-        if b5 and b5[0] == 0xE9:
-            t = (f + 5 + struct.unpack("<i", b5[1:])[0]) & 0xFFFFFFFF
+        b8 = img.img.read(f, 8) or b""
+        if b8[:1] == b"\xE9":
+            t = (f + 5 + struct.unpack("<i", b8[1:5])[0]) & 0xFFFFFFFF
             if t in starts and t != f:
                 thunk[f] = t
+        elif len(b8) == 8 and b8[:2] in (b"\x83\xE9", b"\x83\xC1") and b8[3] == 0xE9:
+            t = (f + 8 + struct.unpack("<i", b8[4:8])[0]) & 0xFFFFFFFF
+            n = struct.unpack("<b", b8[2:3])[0]
+            delta = -n if b8[1] == 0xE9 else n                  # sub ecx,n / add ecx,n
+            if t in starts and t != f and delta < 0:            # forward (+n) is a call on a member, not a thunk
+                thunk[f] = t
+                adjust[f] = delta
+    dyn_cast = dynamic_cast_address(b)
 
     def through(t):
         seen = set()
@@ -390,7 +428,7 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
         if f in thunk:
             continue
         cls = by_vtable.get(f) or (by_name.get(f) if by_name.get(f) in known else None)
-        a = analyse(md, img, rt, f, size, cls, starts, td_names)
+        a = analyse(md, img, rt, f, size, cls, starts, td_names, dyn_cast)
         row = {}
         calls = list(dict.fromkeys(through(t) for t in a["calls"] if t in starts and through(t) != f))
         if calls:
@@ -403,7 +441,7 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
         if a["globals"]:
             row["globals"] = [f"0x{g:08X}" for g in a["globals"]]
         if a["casts"]:
-            row["casts"] = a["casts"]
+            row["casts"] = [list(c) if isinstance(c, tuple) else c for c in a["casts"]]
         if a["strings"]:
             row["strings"] = len(a["strings"])
             strings[f"0x{f:08X}"] = a["strings"]
@@ -418,6 +456,8 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
                 "object), what is left unresolved, globals, dynamic_cast targets, how many strings; 'order' "
                 "is the strongly connected components, leaves first.",
         "functions_seen": len(out), "thunks": {f"0x{k:08X}": f"0x{through(k):08X}" for k in sorted(thunk)},
+        "adjustors": {f"0x{k:08X}": [f"0x{thunk[k]:08X}", adjust[k]] for k in sorted(adjust)},
+        "casts": sum(len(v.get("casts", [])) for v in out.values()),
         "vtables": len(rt.vtables), "classes": len(rt.bases),
         "edges_direct": sum(len(v.get("calls", [])) for v in out.values()),
         "edges_virtual": {how: sum(1 for v in out.values() for _, h in v.get("virtual", []) if h == how)
@@ -431,9 +471,10 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
 
 def write(graph: dict, path: Path) -> None:
     """One function (and one component) per line."""
-    head = {k: v for k, v in graph.items() if k not in ("functions", "order", "thunks")}
+    head = {k: v for k, v in graph.items() if k not in ("functions", "order", "thunks", "adjustors")}
     text = json.dumps(head, indent=1)[:-2] + ",\n"
     text += ' "thunks": ' + json.dumps(graph["thunks"]) + ",\n"
+    text += ' "adjustors": ' + json.dumps(graph.get("adjustors", {})) + ",\n"
     text += ' "functions": {\n' + ",\n".join(f" {json.dumps(k)}: {json.dumps(v)}" for k, v in graph["functions"].items())
     text += "\n },\n \"order\": [\n" + ",\n".join(" " + json.dumps(c) for c in graph["order"]) + "\n ]\n}\n"
     path.write_text(text, newline="\n")

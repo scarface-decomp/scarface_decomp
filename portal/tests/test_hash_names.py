@@ -42,6 +42,22 @@ def test_best_takes_certain_names_and_skips_ambiguous():
 
 
 def test_write_round_trips(tmp_path):
-    t = {"what": "w", "named": 1, "keys": {"0x80000078": {"stx": TN.stx(0x80000078), "names": [], "ambiguous": False}}}
+    t = {"what": "w", "named": 1, "engine_callbacks": [{"bit": 0, "name": "Initialize", "key": "0xAC0E9D3E"}], "keys": {"0x80000078": {"stx": TN.stx(0x80000078), "names": [], "ambiguous": False}}}
     H.write(t, tmp_path / "h.json")
     assert H.load(tmp_path / "h.json") == t
+
+
+def test_data_files_are_certain_and_short_executable_words_are_not(tmp_path):
+    (tmp_path / "default.xbe").write_bytes(b"\0mad\0PauseGetCreditsLine\0")
+    (tmp_path / "tree.dtr").write_bytes(b"\x01canFastTalk\x00")
+    (tmp_path / "a.cs").write_text('mad(); PauseGetCreditsLine(); canFastTalk();')
+    import torque_script as TS
+    cso = tmp_path / "a.cso"
+    cso.write_bytes(TS.compile_text((tmp_path / "a.cs").read_text()))
+    (tmp_path / "a.cs").unlink()
+    t = H.build(tmp_path, [cso, tmp_path / "tree.dtr"], compound=False)
+    by = {v["names"][0]["text"]: v["names"][0] for v in t["keys"].values()}
+    assert by["canFastTalk"]["source"] == "game data file" and by["canFastTalk"]["certain"]
+    assert by["PauseGetCreditsLine"]["certain"] and by["PauseGetCreditsLine"]["source"] == "default.xbe"
+    assert by["mad"]["source"] == "default.xbe" and not by["mad"]["certain"]
+    assert H.key("Initialize") == 0xAC0E9D3E
