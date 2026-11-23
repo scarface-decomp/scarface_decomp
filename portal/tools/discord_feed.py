@@ -13,6 +13,14 @@ a secret: it never goes in the repository):
 In Discord: Server Settings > Integrations > Webhooks > New Webhook, pick the channel, Copy Webhook URL.
 The first push after setting it up only notes what is already matched; posts start with the next new
 match. Anyone else can follow docs/feed.xml (an Atom feed of new matches) with a feed bot instead.
+
+On GitHub, .github/workflows/discord.yml does the same for every push to main, whoever pushed and however
+(git push, the portal, a merged pull request): it compares the registry and the names before and after the
+push and posts what is new, matches, descriptions and names, to the webhook kept in the repository's secret
+DISCORD_WEBHOOK (Settings > Secrets and variables > Actions). Use one or the other, not both, or each
+match is posted twice.
+
+    python portal/tools/discord_feed.py --old-registry OLD.json [--old-names OLD_NAMES.json] [--dry-run]
 """
 
 from __future__ import annotations
@@ -82,6 +90,34 @@ def message(new: List[dict], done: int, total: int, good: List[dict]) -> str:
     return text[:LIMIT]
 
 
+def push_message(old: dict, new: dict, old_names: dict, new_names: dict, progress: dict) -> Optional[str]:
+    """What a push brought, as one Discord message, or None when it brought nothing to say: new matches (as
+    message() writes them), then how many functions got a description or a name."""
+    before, after = old.get("entries", {}), new.get("entries", {})
+    matched = [e for k, e in after.items() if k not in before]
+    described = [k for k, e in after.items() if (e.get("what") or "").strip()
+                 and (e.get("what") or "").strip() != ((before.get(k) or {}).get("what") or "").strip()]
+    named = [k for k in new_names.get("names", {}) if k not in old_names.get("names", {})]
+    if not (matched or described or named):
+        return None
+    v, q = progress.get("verified") or {}, progress.get("queue") or {}
+    done = int(v.get("total", 0))
+    total = done + int(q.get("total", 0)) if q else 0
+    lines = []
+    if matched:
+        lines.append(message(matched, done, total, list(progress.get("good_first") or [])))
+    extra = []
+    if described:
+        how = progress.get("described") or {}
+        extra.append(f"**{len(described):,}** function{'' if len(described) == 1 else 's'} got a one-line description"
+                     + (f" ({how.get('total', 0):,} of the released game's rebuilt functions have one now)" if how else ""))
+    if named:
+        extra.append(f"**{len(named):,}** got a real name in reports/names.json")
+    if extra:
+        lines.append(("Also: " if matched else "") + "; ".join(extra) + "." + ("" if matched else f"\n<{SITE}>"))
+    return "\n".join(lines)[:LIMIT]
+
+
 def post(url: str, content: str, timeout: float = 15) -> Tuple[bool, str]:
     body = json.dumps({"content": content, "username": "Scarface decomp",
                        "allowed_mentions": {"parse": []}}).encode("utf-8")
@@ -117,3 +153,40 @@ def announce_new(base: Path, registry: dict, done: int, total: int, good: List[d
     state_path.parent.mkdir(parents=True, exist_ok=True)
     state_path.write_text(json.dumps({"announced": sorted(entries)}, indent=1) + "\n", encoding="utf-8")
     return {"posted": len(new)} if new else {"skipped": "nothing new" if not first else "first run: noted what is matched"}
+
+
+def main(argv=None) -> int:
+    import argparse
+    import sys
+    ap = argparse.ArgumentParser(description="Post what a push to main brought to the Discord webhook.")
+    ap.add_argument("--old-registry", required=True, help="reports/verified_registry.json as it was before the push")
+    ap.add_argument("--old-names", default="", help="reports/names.json as it was before the push")
+    ap.add_argument("--dry-run", action="store_true", help="print the message instead of posting it")
+    args = ap.parse_args(argv)
+    base = Path(__file__).resolve().parents[2]
+
+    def load(path) -> dict:
+        try:
+            return json.loads(Path(path).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return {}
+    text = push_message(load(args.old_registry), load(base / "reports" / "verified_registry.json"),
+                        load(args.old_names) if args.old_names else load(base / "reports" / "names.json"),
+                        load(base / "reports" / "names.json"), load(base / "reports" / "progress.json"))
+    if not text:
+        print("Nothing new to post.")
+        return 0
+    if args.dry_run:
+        print(text)
+        return 0
+    url = webhook_url(base)
+    if not url:
+        print("No Discord webhook set up (SCARFACE_DISCORD_WEBHOOK): not posted.")
+        return 0
+    ok, err = post(url, text)
+    print("Posted to Discord." if ok else f"Not posted: {err}")
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
