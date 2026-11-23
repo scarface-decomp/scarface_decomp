@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 8,298 of 17,544 functions matched (47.30%). NOT COMPLETE YET.
-// The 9,246 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 8,299 of 17,544 functions matched (47.30%). NOT COMPLETE YET.
+// The 9,245 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -301333,7 +301333,49 @@ void Class_00290D20::sub_00290D20(int a1)
 
 // [TODO] 0x00290D30 sub_00290D30 (82 B)
 // [TODO] 0x00290D90 sub_00290D90 (141 B)
-// [TODO] 0x00290E20 sub_00290E20 (80 B)
+// ============================================================================
+// [VERIFIED] sub_00290E20 (0x00290E20, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002CE3C0 (0x002CE3C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// verify: python portal/verify.py reports/to_submit/xb_00290E20.cpp --va 0x00290E20 --bin xb --match '??0String_00290E20'
+// bin: xb
+// va: 0x00290E20
+// what: Makes a string from a piece of text; with no text it shares the one empty string (counting one more user).
+// tool: Claude Opus 5.5
+
+// sub_00290E20 (0x00290E20, 80 bytes)
+
+#include <string.h>
+
+extern "C" char* DAT_00434140;                            // the shared empty text
+struct Header_00290E20 { int m_pad00; short m_Users; unsigned short m_Length; };     // the 8 bytes before the text
+
+class String_00290E20
+{
+public:
+    String_00290E20(const char* text, int a2);
+    void sub_00290D30(const char* text, int length, int capacity, int a4);
+    char* m_Text;                                         // +0x00
+    short m_Kind;                                         // +0x04
+    short m_pad06;
+    short m_Field08;                                      // +0x08
+};
+
+String_00290E20::String_00290E20(const char* text, int a2)
+{
+    if (!text) {
+        m_Text = DAT_00434140;
+        ((Header_00290E20*)DAT_00434140 - 1)->m_Users++;
+        m_Field08 = 0;
+        m_Kind = 2;
+        return;
+    }
+    int length = strlen(text);
+    sub_00290D30(text, length, length, a2);
+}
+
 // [TODO] 0x00290E70 sub_00290E70 (68 B)
 // [TODO] 0x00290EC0 sub_00290EC0 (103 B)
 // [TODO] 0x00290F30 sub_00290F30 (252 B)

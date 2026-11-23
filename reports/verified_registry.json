@@ -69749,7 +69749,11 @@
       "verified_at": "2026-11-13 06:25:28",
       "compiler": "13.10.3052",
       "code": "// sub_00024DC0 (0x00024DC0, 27 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00023290(int);\n};\n\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00024DC0(int a1, int a2, int a3)\n{\n    ((Object*)a1)->sub_00023290(sub_002FC43E(*(int*)(a3 + 8)));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command FESpriteObject::SetCurrentItem: picks which picture a menu sprite shows, by the number the script passes.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00026850": {
       "bin": "xb",
@@ -69765,7 +69769,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;\n// its addresses and names were swapped for this function's.\n// sub_00026850 (0x00026850, 27 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_000267E0(int);\n};\n\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00026850(int a1, int a2, int a3)\n{\n    ((Object*)a1)->sub_000267E0(sub_002FC43E(*(int*)(a3 + 8)));\n}",
       "note": "",
-      "ported_from": "xb_00024DC0"
+      "ported_from": "xb_00024DC0",
+      "what": "Script command Graph::SetMaxNumKeys: sets how many keys (points) a graph can hold, from the script's number.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000CA030": {
       "bin": "xb",
@@ -69781,7 +69789,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;\n// its addresses and names were swapped for this function's.\n// sub_000CA030 (0x000CA030, 27 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_000C72C0(int);\n};\n\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000CA030(int a1, int a2, int a3)\n{\n    ((Object*)a1)->sub_000C72C0(sub_002FC43E(*(int*)(a3 + 8)));\n}",
       "note": "",
-      "ported_from": "xb_00024DC0"
+      "ported_from": "xb_00024DC0",
+      "what": "Script command SaveGameController::CanWeSave: asks the save game controller whether saving is allowed now, for the slot number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000CA050": {
       "bin": "xb",
@@ -86104,7 +86116,11 @@
       "verified_at": "2026-11-13 06:32:58",
       "compiler": "13.10.3052",
       "code": "// sub_00024D50 (0x00024D50, 42 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00023650(int, int);\n};\n\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00024D50(int a1, int a2, int a3)\n{\n    int t2;\n\n    t2 = sub_002FC43E(*(int*)(a3 + 12));\n    ((Object*)a1)->sub_00023650(sub_002FC43E(*(int*)(a3 + 8)), t2);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command FEBoxObject::SetTriPosition: sets where a menu box's pointer triangle sits from the two numbers the script passes.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000CA070": {
       "bin": "xb",
@@ -86120,7 +86136,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_00024D50 (0x00024D50), which was matched first;\n// its addresses and names were swapped for this function's.\n// sub_000CA070 (0x000CA070, 42 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_000C79A0(int, int);\n};\n\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000CA070(int a1, int a2, int a3)\n{\n    int t2;\n\n    t2 = sub_002FC43E(*(int*)(a3 + 12));\n    ((Object*)a1)->sub_000C79A0(sub_002FC43E(*(int*)(a3 + 8)), t2);\n}",
       "note": "",
-      "ported_from": "xb_00024D50"
+      "ported_from": "xb_00024D50",
+      "what": "Script command SaveGameController::ActivateQueue: starts the save game controller's queued work, from the two numbers the script passes.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00119A20": {
       "bin": "xb",
@@ -86136,7 +86156,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_00024D50 (0x00024D50), which was matched first;\n// its addresses and names were swapped for this function's.\n// sub_00119A20 (0x00119A20, 42 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00104730(int, int);\n};\n\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00119A20(int a1, int a2, int a3)\n{\n    int t2;\n\n    t2 = sub_002FC43E(*(int*)(a3 + 12));\n    ((Object*)a1)->sub_00104730(sub_002FC43E(*(int*)(a3 + 8)), t2);\n}",
       "note": "",
-      "ported_from": "xb_00024D50"
+      "ported_from": "xb_00024D50",
+      "what": "Script command AIStimulusTable::AddBasicEvent: adds a basic event to the AI stimulus table, from the two numbers the script passes.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00178830": {
       "bin": "xb",
@@ -87255,7 +87279,11 @@
       "verified_at": "2026-11-13 06:33:45",
       "compiler": "13.10.3052",
       "code": "// sub_001199E0 (0x001199E0, 18 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00103FF0(int);\n};\n\nvoid __cdecl sub_001199E0(int a1, int a2, int a3)\n{\n    ((Object*)a1)->sub_00103FF0(*(int*)(a3 + 8));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command AIStimulusTable::DefineDefaultOverrideTables: sets up the AI stimulus table's default override tables from the script's argument.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0015D320": {
       "bin": "xb",
@@ -94182,7 +94210,11 @@
       "verified_at": "2026-11-13 06:38:55",
       "compiler": "13.10.3052",
       "code": "// sub_0002E0D0 (0x0002E0D0, 20 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    int sub_0002AC50();\n};\n\nint __cdecl sub_0002E0D0(int a1)\n{\n    int t1;\n\n    t1 = ((Object*)a1)->sub_0002AC50();\n    if (t1) {\n        return *(int*)(t1 + 16);\n    }\n    return 0;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command ScriptObject::GetParentGroup: returns the id of the group the object belongs to, or 0 when it is in none.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00178F00": {
       "bin": "xb",
@@ -94728,7 +94760,11 @@
       "verified_at": "2026-11-13 06:39:32",
       "compiler": "13.10.3052",
       "code": "// sub_00060820 (0x00060820, 19 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_000640E0(int, int);\n\nvoid __cdecl sub_00060820(int a1, int a2, int a3)\n{\n    sub_000640E0(*(int*)(a3 + 4), 0);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command LoadDZoneInCode: loads an interior's furniture zone (dzone), named by the script.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00060840": {
       "bin": "xb",
@@ -94744,7 +94780,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_00060820 (0x00060820), which was matched first;\n// its addresses and names were swapped for this function's.\n// sub_00060840 (0x00060840, 19 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_00064140(int, int);\n\nvoid __cdecl sub_00060840(int a1, int a2, int a3)\n{\n    sub_00064140(*(int*)(a3 + 4), 0);\n}",
       "note": "",
-      "ported_from": "xb_00060820"
+      "ported_from": "xb_00060820",
+      "what": "Script command LoadAZoneInCode: loads an outdoor pocket zone (azone), named by the script.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000653D0": {
       "bin": "xb",
@@ -95079,7 +95119,11 @@
       "verified_at": "2026-11-13 06:39:53",
       "compiler": "13.10.3052",
       "code": "// sub_00070E80 (0x00070E80, 16 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int __cdecl sub_000704E0(void);\n\nint __cdecl sub_00070E80(void)\n{\n    int t1;\n\n    t1 = sub_000704E0();\n    if (t1) {\n        return *(int*)(t1 + 16);\n    }\n    return 0;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command GetNewObjectParentGroup: returns the id of the group new script objects are put in, or 0 when there is none.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00070E90": {
       "bin": "xb",
@@ -95095,7 +95139,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_00070E80 (0x00070E80), which was matched first;\n// its addresses and names were swapped for this function's.\n// sub_00070E90 (0x00070E90, 16 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int __cdecl sub_00070500(void);\n\nint __cdecl sub_00070E90(void)\n{\n    int t1;\n\n    t1 = sub_00070500();\n    if (t1) {\n        return *(int*)(t1 + 16);\n    }\n    return 0;\n}",
       "note": "",
-      "ported_from": "xb_00070E80"
+      "ported_from": "xb_00070E80",
+      "what": "Script command GetLastRootObject: returns the id of the last object made at the top of the object tree, or 0 when there is none.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000771E0": {
       "bin": "xb",
@@ -95126,7 +95174,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_000771E0 (0x000771E0), which was matched first;\n// its addresses and names were swapped for this function's.\n// sub_000EEB80 (0x000EEB80, 41 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_000EC750(int, int);\nextern \"C\" int __cdecl sub_002FC43E(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEB80(int a1, int a2, int a3)\n{\n    int t2;\n\n    t2 = sub_002FC43E(*(int*)(a3 + 8));\n    sub_000EC750(sub_002FC43E(*(int*)(a3 + 4)), t2);\n}",
       "note": "",
-      "ported_from": "xb_000771E0"
+      "ported_from": "xb_000771E0",
+      "what": "Script command DBChangeReputationPoints: changes the player's reputation points, from the two numbers the script passes.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000802E0": {
       "bin": "xb",
@@ -108734,7 +108786,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_000648D0(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00060760(int a1, int a2, int* a3)\n{\n    sub_000648D0(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command ResourceListLoad: starts loading the resource list whose number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00060780": {
       "bin": "xb",
@@ -108750,7 +108806,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_000638B0(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00060780(int a1, int a2, int* a3)\n{\n    sub_000638B0(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command ResourceListRemove: unloads the resource list whose number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00068D10": {
       "bin": "xb",
@@ -108766,7 +108826,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_000683E0(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00068D10(int a1, int a2, int* a3)\n{\n    sub_000683E0(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command Cancel: cancels the scheduled script event whose number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00068D30": {
       "bin": "xb",
@@ -108782,7 +108846,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_00068460(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00068D30(int a1, int a2, int* a3)\n{\n    sub_00068460(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command IsEventPending: checks whether the scheduled script event whose number the script gives is still waiting to run.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00077210": {
       "bin": "xb",
@@ -108798,7 +108866,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_0007F4E0(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00077210(int a1, int a2, int* a3)\n{\n    sub_0007F4E0(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command SoundGetPOIConversationCompleteStatus: checks whether a point-of-interest conversation, by number, has finished.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00077270": {
       "bin": "xb",
@@ -108862,7 +108934,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_00091210(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_0008FB10(int a1, int a2, int* a3)\n{\n    sub_00091210(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command PushStreamerObjectOfInterest: adds the object whose id the script gives to the ones the world streaming loads around.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0008FB30": {
       "bin": "xb",
@@ -108878,7 +108954,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_00090940(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_0008FB30(int a1, int a2, int* a3)\n{\n    sub_00090940(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command PopStreamerObjectOfInterest: takes the object whose id the script gives off the ones the world streaming loads around.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0008FC40": {
       "bin": "xb",
@@ -108894,7 +108974,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_000905C0(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_0008FC40(int a1, int a2, int* a3)\n{\n    sub_000905C0(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command GetSubzoneName: gets the name of the city subzone whose number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000CA770": {
       "bin": "xb",
@@ -108926,7 +109010,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_000EC6F0(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEBF0(int a1, int a2, int* a3)\n{\n    sub_000EC6F0(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command DBSetTotalSkilledPoints: sets the player's total skill points to the number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EEC10": {
       "bin": "xb",
@@ -108942,7 +109030,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_000EC710(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEC10(int a1, int a2, int* a3)\n{\n    sub_000EC710(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command DBSetTotalMissionPoints: sets the player's total mission points to the number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EEC30": {
       "bin": "xb",
@@ -108958,7 +109050,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_000EC730(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEC30(int a1, int a2, int* a3)\n{\n    sub_000EC730(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command DBSetTotalExoticsPoints: sets the player's total exotics points to the number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EEC80": {
       "bin": "xb",
@@ -108974,7 +109070,11 @@
       "compiler": "13.10.3052",
       "code": "// Same machine code as sub_0003D840 (0x0003D840), which was matched first;\n// its addresses and names were swapped for this function's.\nextern \"C\" void __cdecl sub_000EC820(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEC80(int a1, int a2, int* a3)\n{\n    sub_000EC820(sub_002FC43E(a3[1]));\n}",
       "note": "",
-      "ported_from": "xb_0003D840"
+      "ported_from": "xb_0003D840",
+      "what": "Script command DBSetReputationLevel: sets the player's reputation level to the number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00119930": {
       "bin": "xb",
@@ -115392,7 +115492,11 @@
       "verified_at": "2026-11-13 06:59:48",
       "compiler": "13.10.3052",
       "code": "// sub_00020960 (0x00020960, 38 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_0001E430(int, int, int, int, int, int, int, int, int);\n};\n\nvoid __cdecl sub_00020960(int a1, int a2, int a3)\n{\n    ((Object*)a1)->sub_0001E430(*(int*)(a3 + 8), *(int*)(a3 + 12), 0, *(int*)(a3 + 16), 0, -1, 0, 0, 1);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command ActionMap::BindFunction: binds an input in the action map to a script function, from the script's three arguments.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00020A00": {
       "bin": "xb",
@@ -115647,7 +115751,11 @@
       "verified_at": "2026-11-13 06:59:52",
       "compiler": "13.10.3052",
       "code": "// sub_00024AC0 (0x00024AC0, 34 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_00022BB0(int, int, int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00024AC0(int a1, int a2, int a3)\n{\n    sub_00022BB0(sub_002FC43E(*(int*)(a3 + 4)), *(int*)(a3 + 8), *(int*)(a3 + 12));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command GenerateFormattedNumericString: turns a number from the script into text using the format the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00024AF0": {
       "bin": "xb",
@@ -115662,7 +115770,11 @@
       "verified_at": "2026-11-13 06:59:53",
       "compiler": "13.10.3052",
       "code": "// sub_00024AF0 (0x00024AF0, 63 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00026EC0(int);\n    void sub_00026EE0();\n};\n\nextern \"C\" void __cdecl sub_0024DA50(int, int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00024AF0(int a1, int a2, int a3)\n{\n    int local_4, t3;\n\n    ((Object*)(int)(&local_4))->sub_00026EC0(5);\n    t3 = sub_002FC43E(*(int*)(a3 + 8));\n    sub_0024DA50(sub_002FC43E(*(int*)(a3 + 4)), t3);\n    ((Object*)(int)(&local_4))->sub_00026EE0();\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command AllocateMemoryForPMGTextbibles: sets aside memory for the mission text banks, working in heap 5 while it does.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00024B40": {
       "bin": "xb",
@@ -115677,7 +115789,11 @@
       "verified_at": "2026-11-13 06:59:53",
       "compiler": "13.10.3052",
       "code": "// sub_00024B40 (0x00024B40, 21 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_0024D350(int, int);\n\nvoid __cdecl sub_00024B40(int a1, int a2, int a3)\n{\n    sub_0024D350(*(int*)(a3 + 4), *(int*)(a3 + 8));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command SetTextbibleToSpecialLoad: marks a text bank, named by the script, to be loaded the special way the script asks.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00024BB0": {
       "bin": "xb",
@@ -115692,7 +115808,11 @@
       "verified_at": "2026-11-13 06:59:53",
       "compiler": "13.10.3052",
       "code": "// sub_00024BB0 (0x00024BB0, 33 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int __cdecl sub_0024D460(int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nint __cdecl sub_00024BB0(int a1, int a2, int a3)\n{\n    int t1;\n\n    t1 = sub_002FC43E(*(int*)(a3 + 4));\n    if (t1 >= 0) {\n        return sub_0024D460(t1);\n    }\n    return 0;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command GetNumTextbibleEntriesToLoad: returns how many text bank entries are waiting to load in the given slot, or 0 for a negative slot.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00024C30": {
       "bin": "xb",
@@ -115707,7 +115827,11 @@
       "verified_at": "2026-11-13 06:59:53",
       "compiler": "13.10.3052",
       "code": "// sub_00024C30 (0x00024C30, 23 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" bool DAT_004585B8;\nextern \"C\" bool DAT_00467F20;\nextern \"C\" bool DAT_00467F21;\n\nvoid* __cdecl sub_00024C30(void)\n{\n    DAT_00467F20 = DAT_004585B8;\n    DAT_00467F21 = false;\n    return &DAT_00467F20;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command GetCurrentLanguage: copies the game's current language setting into a small result and returns it to the script.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00024E50": {
       "bin": "xb",
@@ -116586,7 +116710,11 @@
       "verified_at": "2026-11-13 07:00:06",
       "compiler": "13.10.3052",
       "code": "// sub_0002DDB0 (0x0002DDB0, 18 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    virtual void vfunc_00();\n    virtual void vfunc_01();\n    virtual void vfunc_02();\n    virtual void vfunc_03();\n    virtual void vfunc_04();\n    virtual void vfunc_05();\n    virtual void vfunc_06();\n    virtual void vfunc_07();\n    virtual void vfunc_08();\n    virtual void vfunc_09();\n    virtual void vfunc_10();\n    virtual void vfunc_11();\n    virtual void vfunc_12(int);\n};\n\nvoid __cdecl sub_0002DDB0(int a1, int a2, int a3)\n{\n    ((Object*)a1)->vfunc_12(*(int*)(a3 + 4));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command SetSubZone: tells the script object which subzone of the city it is in, passing the script's argument to the object's own setter.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0002E040": {
       "bin": "xb",
@@ -116601,7 +116729,11 @@
       "verified_at": "2026-11-13 07:00:07",
       "compiler": "13.10.3052",
       "code": "// sub_0002E040 (0x0002E040, 35 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_0002C060(int, int, int);\n};\n\nextern \"C\" int __cdecl sub_000767E0(int, int);\n\nvoid __cdecl sub_0002E040(int a1, int a2, int a3)\n{\n    ((Object*)a1)->sub_0002C060(sub_000767E0(*(int*)(a3 + 8), 0), 0, *(int*)(a3 + 12));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command ScriptObject::SetDataField: sets one of the object's named data fields (the name is turned into its key) to the script's value.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0002E080": {
       "bin": "xb",
@@ -116691,7 +116823,11 @@
       "verified_at": "2026-11-13 07:00:08",
       "compiler": "13.10.3052",
       "code": "// sub_0002E0F0 (0x0002E0F0, 22 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    virtual int vfunc_00();\n};\n\nint __cdecl sub_0002E0F0(int a1)\n{\n    ((Object*)a1)->vfunc_00();\n    return *(int*)(((Object*)a1)->vfunc_00() + 20);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command GetClass: returns the name of the object's class, read from its class record.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0002E570": {
       "bin": "xb",
@@ -118212,7 +118348,11 @@
       "verified_at": "2026-11-13 07:00:32",
       "compiler": "13.10.3052",
       "code": "// sub_00060880 (0x00060880, 30 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int __cdecl sub_00063A30(int);\n\nint __cdecl sub_00060880(int a1, int a2, int a3)\n{\n    int r_eax;\n\n    r_eax = a3;\n    r_eax = *(int*)(r_eax + 4);\n    r_eax = sub_00063A30(r_eax);\n    if (((unsigned short)r_eax) == 65535) {\n        r_eax |= -1;\n        return r_eax;\n    }\n    r_eax = (unsigned short)((unsigned short)r_eax);\n    return r_eax;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command GetResourceId: returns the id of the resource the script names, or -1 when there is no such resource.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000608A0": {
       "bin": "xb",
@@ -118227,7 +118367,11 @@
       "verified_at": "2026-11-13 07:00:32",
       "compiler": "13.10.3052",
       "code": "// sub_000608A0 (0x000608A0, 30 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int __cdecl sub_00063200(int);\n\nint __cdecl sub_000608A0(int a1, int a2, int a3)\n{\n    int r_eax;\n\n    r_eax = a3;\n    r_eax = *(int*)(r_eax + 4);\n    r_eax = sub_00063200(r_eax);\n    if (((unsigned short)r_eax) == 65535) {\n        r_eax |= -1;\n        return r_eax;\n    }\n    r_eax = (short)((unsigned short)r_eax);\n    return r_eax;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command GetInventoryId: returns the id of the inventory item the script names, or -1 when there is no such item.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00060B50": {
       "bin": "xb",
@@ -118452,7 +118596,11 @@
       "verified_at": "2026-11-13 07:00:35",
       "compiler": "13.10.3052",
       "code": "// sub_00068A00 (0x00068A00, 42 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_000674B0(int, int, int, int);\n\nvoid __cdecl sub_00068A00(int a1, int a2, int a3)\n{\n    int r_ecx, r_edx, r_esi;\n\n    r_edx = *(int*)(a3 + 4);\n    r_esi = *(int*)(a3 + 8);\n    r_ecx = 0;\n    if (a2 > 3) {\n        r_ecx = *(int*)(a3 + 12);\n    }\n    sub_000674B0(r_edx, r_esi, r_ecx, 0);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command ExecScript: runs a script file from the script's first two arguments, with an optional third when the script passes one.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0006F9B0": {
       "bin": "xb",
@@ -118482,7 +118630,11 @@
       "verified_at": "2026-11-13 07:00:35",
       "compiler": "13.10.3052",
       "code": "// sub_00070C60 (0x00070C60, 28 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nint __cdecl sub_00070C60(int a1, int a2, int a3)\n{\n    int r_eax;\n    bool t1;\n\n    r_eax = a3;\n    r_eax = *(int*)(r_eax + 4);\nL_07:\n    t1 = *(bool*)r_eax;\n    if (*(bool*)r_eax != 32) {\n        if (t1 == 10) goto L_18;\n        if (t1 != 9) goto L_1B;\n    }\nL_18:\n    r_eax += 1;\n    goto L_07;\nL_1B:\n    return r_eax;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command ltrim: returns the script's text with the spaces, tabs and line breaks at its start skipped.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00070D40": {
       "bin": "xb",
@@ -118512,7 +118664,11 @@
       "verified_at": "2026-11-13 07:00:36",
       "compiler": "13.10.3052",
       "code": "// sub_00070D60 (0x00070D60, 25 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_000702E0(int, int, int, int, int);\n\nvoid __cdecl sub_00070D60(int a1, int a2, int a3)\n{\n    sub_000702E0(*(int*)(a3 + 4), 0, 0, 1, -1);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command eval: compiles and runs the script text it is given.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00070D80": {
       "bin": "xb",
@@ -118527,7 +118683,11 @@
       "verified_at": "2026-11-13 07:00:36",
       "compiler": "13.10.3052",
       "code": "// sub_00070D80 (0x00070D80, 23 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00072590(int);\n};\n\nextern \"C\" int DAT_0047AAA8;\n\nvoid __cdecl sub_00070D80(int a1, int a2, int a3)\n{\n    ((Object*)DAT_0047AAA8 + 12)->sub_00072590(*(int*)(a3 + 4));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command deleteVariables: removes the global script variables whose names match the pattern the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00070F70": {
       "bin": "xb",
@@ -118542,7 +118702,11 @@
       "verified_at": "2026-11-13 07:00:36",
       "compiler": "13.10.3052",
       "code": "// sub_00070F70 (0x00070F70, 26 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nint __cdecl sub_00070F70(int a1, int a2, int a3)\n{\n    int r_eax, r_edx;\n    bool t1;\n\n    r_eax = a3;\n    r_eax = *(int*)(r_eax + 4);\n    r_edx = r_eax + 1;\n    do {\n        t1 = *(bool*)r_eax;\n        r_eax += 1;\n    } while (t1);\n    r_eax -= r_edx;\n    return r_eax;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command strlen: returns how many characters the script's text has.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00071BC0": {
       "bin": "xb",
@@ -119575,7 +119739,11 @@
       "verified_at": "2026-11-13 07:00:56",
       "compiler": "13.10.3052",
       "code": "// sub_0008FC60 (0x0008FC60, 44 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" bool DAT_0041B1D4;\nextern \"C\" int DAT_00481674;\nextern \"C\" int __cdecl sub_000275B0(int, int);\n\nvoid __cdecl sub_0008FC60(void)\n{\n    int r_eax;\n\n    r_eax = DAT_00481674;\n    if (!r_eax) {\n        DAT_0041B1D4 = false;\n        r_eax = sub_000275B0(256, 0);\n        DAT_00481674 = r_eax;\n        DAT_0041B1D4 = true;\n    }\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command AddMemoryHack: sets aside one 256-byte block of memory, if it has not already.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0008FC90": {
       "bin": "xb",
@@ -119590,7 +119758,11 @@
       "verified_at": "2026-11-13 07:00:56",
       "compiler": "13.10.3052",
       "code": "// sub_0008FC90 (0x0008FC90, 17 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int DAT_00481674;\nextern \"C\" int __cdecl sub_00027600(int);\n\nvoid __cdecl sub_0008FC90(void)\n{\n    int r_eax;\n\n    r_eax = DAT_00481674;\n    if (r_eax) {\n        r_eax = sub_00027600(r_eax);\n    }\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command RemoveMemoryHack: frees the block of memory AddMemoryHack set aside, if there is one.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00090460": {
       "bin": "xb",
@@ -123352,7 +123524,11 @@
       "verified_at": "2026-11-13 07:01:54",
       "compiler": "13.10.3052",
       "code": "// sub_000EB600 (0x000EB600, 31 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int DAT_004879E8;\nextern \"C\" bool __cdecl sub_00099BC0(int);\n\nvoid __cdecl sub_000EB600(int a1, int a2, int a3)\n{\n    int t1;\n\n    t1 = DAT_004879E8;\n    *(unsigned char*)(t1 + 373) = sub_00099BC0(*(int*)(a3 + 4));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command FreezeGame: freezes or unfreezes the game, by the true or false the script passes.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EB620": {
       "bin": "xb",
@@ -123367,7 +123543,11 @@
       "verified_at": "2026-11-13 07:01:54",
       "compiler": "13.10.3052",
       "code": "// sub_000EB620 (0x000EB620, 23 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int DAT_004879E8;\n\nint __cdecl sub_000EB620(void)\n{\n    int t1;\n\n    t1 = DAT_004879E8;\n    *(bool*)(DAT_004879E8 + 373) = !*(bool*)(DAT_004879E8 + 373);\n    return t1;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command ToggleFreezeGame: switches the game's freeze flag on if it was off and off if it was on.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EBF90": {
       "bin": "xb",
@@ -123517,7 +123697,11 @@
       "verified_at": "2026-11-13 07:01:59",
       "compiler": "13.10.3052",
       "code": "// sub_000EEB00 (0x000EEB00, 30 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_000EC420(int, int, int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEB00(int a1, int a2, int a3)\n{\n    sub_000EC420(18, sub_002FC43E(*(int*)(a3 + 4)), 19);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command DBChangeProduct: changes the player's amount of product (drugs) by the number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EEB20": {
       "bin": "xb",
@@ -123532,7 +123716,11 @@
       "verified_at": "2026-11-13 07:02:00",
       "compiler": "13.10.3052",
       "code": "// sub_000EEB20 (0x000EEB20, 30 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_000EC420(int, int, int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEB20(int a1, int a2, int a3)\n{\n    sub_000EC420(20, sub_002FC43E(*(int*)(a3 + 4)), 21);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command DBChangeVehicleProduct: changes the amount of product carried in the vehicle by the number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EEB40": {
       "bin": "xb",
@@ -123547,7 +123735,11 @@
       "verified_at": "2026-11-13 07:02:00",
       "compiler": "13.10.3052",
       "code": "// sub_000EEB40 (0x000EEB40, 30 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_000EC420(int, int, int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEB40(int a1, int a2, int a3)\n{\n    sub_000EC420(13, sub_002FC43E(*(int*)(a3 + 4)), 15);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command DBChangeCleanCash: changes the player's clean (banked) cash by the number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EEB60": {
       "bin": "xb",
@@ -123562,7 +123754,11 @@
       "verified_at": "2026-11-13 07:02:00",
       "compiler": "13.10.3052",
       "code": "// sub_000EEB60 (0x000EEB60, 30 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" void __cdecl sub_000EC420(int, int, int);\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_000EEB60(int a1, int a2, int a3)\n{\n    sub_000EC420(14, sub_002FC43E(*(int*)(a3 + 4)), 15);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command DBChangeDirtyCash: changes the player's dirty cash by the number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000EED60": {
       "bin": "xb",
@@ -125527,7 +125723,11 @@
       "verified_at": "2026-11-13 07:02:31",
       "compiler": "13.10.3052",
       "code": "// sub_00115300 (0x00115300, 28 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int DAT_004898B8;\nextern \"C\" bool __cdecl sub_00099BC0(int);\n\nvoid __cdecl sub_00115300(int a1, int a2, int a3)\n{\n    int t1;\n\n    t1 = DAT_004898B8;\n    *(unsigned char*)(t1 + 4) = sub_00099BC0(*(int*)(a3 + 4));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command HenchmanManager_SetFollowTony: turns on or off whether Tony's henchmen follow him, by the true or false the script passes.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00115320": {
       "bin": "xb",
@@ -125722,7 +125922,11 @@
       "verified_at": "2026-11-13 07:02:34",
       "compiler": "13.10.3052",
       "code": "// sub_00119A00 (0x00119A00, 29 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00104730(int, int);\n};\n\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_00119A00(int a1, int a2, int a3)\n{\n    ((Object*)a1)->sub_00104730(sub_002FC43E(*(int*)(a3 + 8)), 0);\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command AIStimulusTable::DetectsStimulus: makes the AI stimulus table react to the stimulus whose number the script gives.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0011AA40": {
       "bin": "xb",
@@ -125833,7 +126037,11 @@
       "verified_at": "2026-11-13 07:02:36",
       "compiler": "13.10.3052",
       "code": "// sub_0011CED0 (0x0011CED0, 33 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00114DE0(int);\n};\n\nextern \"C\" int DAT_00489828;\nextern \"C\" int __cdecl sub_002FC43E(int);\n\nvoid __cdecl sub_0011CED0(int a1, int a2, int a3)\n{\n    int t1;\n\n    t1 = DAT_00489828;\n    ((Object*)t1)->sub_00114DE0(sub_002FC43E(*(int*)(a3 + 4)));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command NME_SetDefinedTunablesCount: sets how many tunable values the NME manager has, from the script's number.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0011CF00": {
       "bin": "xb",
@@ -125848,7 +126056,11 @@
       "verified_at": "2026-11-13 07:02:36",
       "compiler": "13.10.3052",
       "code": "// sub_0011CF00 (0x0011CF00, 24 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nstruct Object\n{\n    void sub_00115220(int, int);\n};\n\nextern \"C\" int DAT_00489828;\n\nvoid __cdecl sub_0011CF00(int a1, int a2, int a3)\n{\n    ((Object*)DAT_00489828)->sub_00115220(*(int*)(a3 + 4), *(int*)(a3 + 8));\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command NME_AddDefinedTunables: adds a tunable value to the NME manager, from the script's two arguments.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x0011CF20": {
       "bin": "xb",
@@ -130159,7 +130371,11 @@
       "verified_at": "2026-11-13 07:03:47",
       "compiler": "13.10.3052",
       "code": "// sub_00178250 (0x00178250, 24 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int DAT_0048A9D8;\n\nint __cdecl sub_00178250(int a1)\n{\n    int t1;\n\n    t1 = DAT_0048A9D8;\n    if (DAT_0048A9D8) {\n        if (a1 != t1) goto L_15;\n        return 1;\n    }\nL_15:\n    return 0;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command CharacterObject::IsMainCharacter: returns 1 when the character is the player's main character (Tony), 0 otherwise.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00178270": {
       "bin": "xb",
@@ -130474,7 +130690,11 @@
       "verified_at": "2026-11-13 07:03:53",
       "compiler": "13.10.3052",
       "code": "// sub_00179050 (0x00179050, 21 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nint __cdecl sub_00179050(int a1)\n{\n    int t1;\n\n    t1 = *(int*)(a1 + 180);\n    if (*(int*)(a1 + 180)) {\n        return *(int*)(t1 + 16);\n    }\n    return 0;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command CharacterObject::GetCharacterTemplate: returns the id of the template the character was made from, or 0 when it has none.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x00179170": {
       "bin": "xb",
@@ -282129,7 +282349,11 @@
       "verified_at": "2026-11-22 20:46:36",
       "compiler": "13.10.3052",
       "code": "// bin: xb\n// va: 0x000CED60\n// what: \n// tool: the portal's starter code (no AI)\n\n// sub_000CED60 (0x000CED60, 20 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" int DAT_004870D0;\n\nint __cdecl sub_000CED60(void)\n{\n    return *(int*)(DAT_004870D0 + 624) != 0;\n}",
-      "note": ""
+      "note": "",
+      "what": "Script command NISIsPlaying: returns whether an in-game cutscene (NIS) is playing right now.",
+      "what_by": "Claude (AI) for RRutherrfordd",
+      "what_at": "2026-11-23 15:44:27",
+      "what_how": "read"
     },
     "xb:0x000D0120": {
       "bin": "xb",
@@ -289633,6 +289857,22 @@
       "note": "",
       "what": "Makes a string from a piece of text; with no text it shares the one empty string (counting one more user).",
       "what_how": "human"
+    },
+    "proto:0x00290E20": {
+      "bin": "proto",
+      "va": "0x00290E20",
+      "size": 80,
+      "symbol": "sub_00290E20",
+      "match": "sub_00290E20",
+      "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4",
+      "source": "portal",
+      "verified_by": "RRutherrfordd (Founder)",
+      "tool_used": "Claude Opus 5.5",
+      "verified_at": "2026-11-23 15:35:50",
+      "compiler": "13.10.3052",
+      "code": "// Same machine code as sub_002CE3C0 (0x002CE3C0), which was matched first;\n// its addresses and names were swapped for this function's.\n// verify: python portal/verify.py reports/to_submit/xb_00290E20.cpp --va 0x00290E20 --bin xb --match '??0String_00290E20'\n// bin: xb\n// va: 0x00290E20\n// what: Makes a string from a piece of text; with no text it shares the one empty string (counting one more user).\n// tool: Claude Opus 5.5\n\n// sub_00290E20 (0x00290E20, 80 bytes)\n\n#include <string.h>\n\nextern \"C\" char* DAT_00434140;                            // the shared empty text\nstruct Header_00290E20 { int m_pad00; short m_Users; unsigned short m_Length; };     // the 8 bytes before the text\n\nclass String_00290E20\n{\npublic:\n    String_00290E20(const char* text, int a2);\n    void sub_00290D30(const char* text, int length, int capacity, int a4);\n    char* m_Text;                                         // +0x00\n    short m_Kind;                                         // +0x04\n    short m_pad06;\n    short m_Field08;                                      // +0x08\n};\n\nString_00290E20::String_00290E20(const char* text, int a2)\n{\n    if (!text) {\n        m_Text = DAT_00434140;\n        ((Header_00290E20*)DAT_00434140 - 1)->m_Users++;\n        m_Field08 = 0;\n        m_Kind = 2;\n        return;\n    }\n    int length = strlen(text);\n    sub_00290D30(text, length, length, a2);\n}",
+      "note": "",
+      "ported_from": "xb_002CE3C0"
     }
   },
   "reset": {

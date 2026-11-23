@@ -3247,6 +3247,7 @@ L_40:
 // ============================================================================
 // [VERIFIED] sub_00020960 (0x00020960, 38 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ActionMap::BindFunction: binds an input in the action map to a script function, from the script's three arguments.
 // ============================================================================
 // sub_00020960 (0x00020960, 38 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5494,6 +5495,7 @@ void __cdecl sub_00024AB0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00024AC0 (0x00024AC0, 34 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GenerateFormattedNumericString: turns a number from the script into text using the format the script gives.
 // ============================================================================
 // sub_00024AC0 (0x00024AC0, 34 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5510,6 +5512,7 @@ void __cdecl sub_00024AC0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00024AF0 (0x00024AF0, 63 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command AllocateMemoryForPMGTextbibles: sets aside memory for the mission text banks, working in heap 5 while it does.
 // ============================================================================
 // sub_00024AF0 (0x00024AF0, 63 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5537,6 +5540,7 @@ void __cdecl sub_00024AF0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00024B40 (0x00024B40, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SetTextbibleToSpecialLoad: marks a text bank, named by the script, to be loaded the special way the script asks.
 // ============================================================================
 // sub_00024B40 (0x00024B40, 21 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5552,6 +5556,7 @@ void __cdecl sub_00024B40(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00024BB0 (0x00024BB0, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GetNumTextbibleEntriesToLoad: returns how many text bank entries are waiting to load in the given slot, or 0 for a negative slot.
 // ============================================================================
 // sub_00024BB0 (0x00024BB0, 33 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5574,6 +5579,7 @@ int __cdecl sub_00024BB0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00024C30 (0x00024C30, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GetCurrentLanguage: copies the game's current language setting into a small result and returns it to the script.
 // ============================================================================
 // sub_00024C30 (0x00024C30, 23 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5653,6 +5659,7 @@ int __cdecl sub_00024CB0(int a1)
 // ============================================================================
 // [VERIFIED] sub_00024D50 (0x00024D50, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command FEBoxObject::SetTriPosition: sets where a menu box's pointer triangle sits from the two numbers the script passes.
 // ============================================================================
 // sub_00024D50 (0x00024D50, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5676,6 +5683,7 @@ void __cdecl sub_00024D50(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00024DC0 (0x00024DC0, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command FESpriteObject::SetCurrentItem: picks which picture a menu sprite shows, by the number the script passes.
 // ============================================================================
 // sub_00024DC0 (0x00024DC0, 27 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5971,6 +5979,7 @@ int Class_000267E0::sub_000267E0(int a1)
 // ============================================================================
 // [VERIFIED] sub_00026850 (0x00026850, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command Graph::SetMaxNumKeys: sets how many keys (points) a graph can hold, from the script's number.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -8670,6 +8679,7 @@ void __cdecl sub_0002DD30(Object* object)
 // ============================================================================
 // [VERIFIED] sub_0002DDB0 (0x0002DDB0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SetSubZone: tells the script object which subzone of the city it is in, passing the script's argument to the object's own setter.
 // ============================================================================
 // sub_0002DDB0 (0x0002DDB0, 18 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -8700,6 +8710,7 @@ void __cdecl sub_0002DDB0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0002E040 (0x0002E040, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ScriptObject::SetDataField: sets one of the object's named data fields (the name is turned into its key) to the script's value.
 // ============================================================================
 // sub_0002E040 (0x0002E040, 35 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -8861,6 +8872,7 @@ int __cdecl sub_0002E0C0(int a1)
 // ============================================================================
 // [VERIFIED] sub_0002E0D0 (0x0002E0D0, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ScriptObject::GetParentGroup: returns the id of the group the object belongs to, or 0 when it is in none.
 // ============================================================================
 // sub_0002E0D0 (0x0002E0D0, 20 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -8885,6 +8897,7 @@ int __cdecl sub_0002E0D0(int a1)
 // ============================================================================
 // [VERIFIED] sub_0002E0F0 (0x0002E0F0, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GetClass: returns the name of the object's class, read from its class record.
 // ============================================================================
 // sub_0002E0F0 (0x0002E0F0, 22 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -20305,6 +20318,7 @@ L_18:
 // ============================================================================
 // [VERIFIED] sub_00060760 (0x00060760, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ResourceListLoad: starts loading the resource list whose number the script gives.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -20319,6 +20333,7 @@ void __cdecl sub_00060760(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_00060780 (0x00060780, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ResourceListRemove: unloads the resource list whose number the script gives.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -20350,6 +20365,7 @@ void __cdecl sub_000607D0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00060820 (0x00060820, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command LoadDZoneInCode: loads an interior's furniture zone (dzone), named by the script.
 // ============================================================================
 // sub_00060820 (0x00060820, 19 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -20365,6 +20381,7 @@ void __cdecl sub_00060820(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00060840 (0x00060840, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command LoadAZoneInCode: loads an outdoor pocket zone (azone), named by the script.
 // ============================================================================
 // Same machine code as sub_00060820 (0x00060820), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -20382,6 +20399,7 @@ void __cdecl sub_00060840(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00060880 (0x00060880, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GetResourceId: returns the id of the resource the script names, or -1 when there is no such resource.
 // ============================================================================
 // sub_00060880 (0x00060880, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -20407,6 +20425,7 @@ int __cdecl sub_00060880(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000608A0 (0x000608A0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GetInventoryId: returns the id of the inventory item the script names, or -1 when there is no such item.
 // ============================================================================
 // sub_000608A0 (0x000608A0, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -23412,6 +23431,7 @@ void __cdecl sub_000689D0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00068A00 (0x00068A00, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ExecScript: runs a script file from the script's first two arguments, with an optional third when the script passes one.
 // ============================================================================
 // sub_00068A00 (0x00068A00, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -23475,6 +23495,7 @@ void __cdecl sub_00068B00(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00068D10 (0x00068D10, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command Cancel: cancels the scheduled script event whose number the script gives.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -23489,6 +23510,7 @@ void __cdecl sub_00068D10(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_00068D30 (0x00068D30, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command IsEventPending: checks whether the scheduled script event whose number the script gives is still waiting to run.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -25154,6 +25176,7 @@ void __cdecl sub_00070510(int a1)
 // ============================================================================
 // [VERIFIED] sub_00070C60 (0x00070C60, 28 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ltrim: returns the script's text with the spaces, tabs and line breaks at its start skipped.
 // ============================================================================
 // sub_00070C60 (0x00070C60, 28 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -25197,6 +25220,7 @@ void __cdecl sub_00070D40(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00070D60 (0x00070D60, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command eval: compiles and runs the script text it is given.
 // ============================================================================
 // sub_00070D60 (0x00070D60, 25 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -25212,6 +25236,7 @@ void __cdecl sub_00070D60(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00070D80 (0x00070D80, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command deleteVariables: removes the global script variables whose names match the pattern the script gives.
 // ============================================================================
 // sub_00070D80 (0x00070D80, 23 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -25232,6 +25257,7 @@ void __cdecl sub_00070D80(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00070E80 (0x00070E80, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GetNewObjectParentGroup: returns the id of the group new script objects are put in, or 0 when there is none.
 // ============================================================================
 // sub_00070E80 (0x00070E80, 16 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -25253,6 +25279,7 @@ int __cdecl sub_00070E80(void)
 // ============================================================================
 // [VERIFIED] sub_00070E90 (0x00070E90, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GetLastRootObject: returns the id of the last object made at the top of the object tree, or 0 when there is none.
 // ============================================================================
 // Same machine code as sub_00070E80 (0x00070E80), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -25276,6 +25303,7 @@ int __cdecl sub_00070E90(void)
 // ============================================================================
 // [VERIFIED] sub_00070F70 (0x00070F70, 26 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command strlen: returns how many characters the script's text has.
 // ============================================================================
 // sub_00070F70 (0x00070F70, 26 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -26608,6 +26636,7 @@ void __cdecl sub_000771E0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00077210 (0x00077210, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SoundGetPOIConversationCompleteStatus: checks whether a point-of-interest conversation, by number, has finished.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33470,6 +33499,7 @@ void Class_0008F8C0::sub_0008F8C0()
 // ============================================================================
 // [VERIFIED] sub_0008FB10 (0x0008FB10, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command PushStreamerObjectOfInterest: adds the object whose id the script gives to the ones the world streaming loads around.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33484,6 +33514,7 @@ void __cdecl sub_0008FB10(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_0008FB30 (0x0008FB30, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command PopStreamerObjectOfInterest: takes the object whose id the script gives off the ones the world streaming loads around.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33564,6 +33595,7 @@ int __cdecl sub_0008FC10(void)
 // ============================================================================
 // [VERIFIED] sub_0008FC40 (0x0008FC40, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GetSubzoneName: gets the name of the city subzone whose number the script gives.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33578,6 +33610,7 @@ void __cdecl sub_0008FC40(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_0008FC60 (0x0008FC60, 44 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command AddMemoryHack: sets aside one 256-byte block of memory, if it has not already.
 // ============================================================================
 // sub_0008FC60 (0x0008FC60, 44 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -33603,6 +33636,7 @@ void __cdecl sub_0008FC60(void)
 // ============================================================================
 // [VERIFIED] sub_0008FC90 (0x0008FC90, 17 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command RemoveMemoryHack: frees the block of memory AddMemoryHack set aside, if there is one.
 // ============================================================================
 // sub_0008FC90 (0x0008FC90, 17 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -51770,6 +51804,7 @@ void __cdecl sub_000CA020(int a1)
 // ============================================================================
 // [VERIFIED] sub_000CA030 (0x000CA030, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SaveGameController::CanWeSave: asks the save game controller whether saving is allowed now, for the slot number the script gives.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -51814,6 +51849,7 @@ void __cdecl sub_000CA050(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000CA070 (0x000CA070, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SaveGameController::ActivateQueue: starts the save game controller's queued work, from the two numbers the script passes.
 // ============================================================================
 // Same machine code as sub_00024D50 (0x00024D50), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -53153,6 +53189,7 @@ void __cdecl sub_000CED20(void)
 // ============================================================================
 // [VERIFIED] sub_000CED60 (0x000CED60, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command NISIsPlaying: returns whether an in-game cutscene (NIS) is playing right now.
 // ============================================================================
 // bin: xb
 // va: 0x000CED60
@@ -62535,6 +62572,7 @@ void __cdecl sub_000EB5F0(void)
 // ============================================================================
 // [VERIFIED] sub_000EB600 (0x000EB600, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command FreezeGame: freezes or unfreezes the game, by the true or false the script passes.
 // ============================================================================
 // sub_000EB600 (0x000EB600, 31 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -62554,6 +62592,7 @@ void __cdecl sub_000EB600(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000EB620 (0x000EB620, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ToggleFreezeGame: switches the game's freeze flag on if it was off and off if it was on.
 // ============================================================================
 // sub_000EB620 (0x000EB620, 23 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -63921,6 +63960,7 @@ Class_000EDA20* Class_000EDA20::sub_000EDA20(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_000EEB00 (0x000EEB00, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBChangeProduct: changes the player's amount of product (drugs) by the number the script gives.
 // ============================================================================
 // sub_000EEB00 (0x000EEB00, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -63937,6 +63977,7 @@ void __cdecl sub_000EEB00(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000EEB20 (0x000EEB20, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBChangeVehicleProduct: changes the amount of product carried in the vehicle by the number the script gives.
 // ============================================================================
 // sub_000EEB20 (0x000EEB20, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -63953,6 +63994,7 @@ void __cdecl sub_000EEB20(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000EEB40 (0x000EEB40, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBChangeCleanCash: changes the player's clean (banked) cash by the number the script gives.
 // ============================================================================
 // sub_000EEB40 (0x000EEB40, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -63969,6 +64011,7 @@ void __cdecl sub_000EEB40(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000EEB60 (0x000EEB60, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBChangeDirtyCash: changes the player's dirty cash by the number the script gives.
 // ============================================================================
 // sub_000EEB60 (0x000EEB60, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -63985,6 +64028,7 @@ void __cdecl sub_000EEB60(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000EEB80 (0x000EEB80, 41 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBChangeReputationPoints: changes the player's reputation points, from the two numbers the script passes.
 // ============================================================================
 // Same machine code as sub_000771E0 (0x000771E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -64007,6 +64051,7 @@ void __cdecl sub_000EEB80(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000EEBF0 (0x000EEBF0, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBSetTotalSkilledPoints: sets the player's total skill points to the number the script gives.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -64021,6 +64066,7 @@ void __cdecl sub_000EEBF0(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_000EEC10 (0x000EEC10, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBSetTotalMissionPoints: sets the player's total mission points to the number the script gives.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -64035,6 +64081,7 @@ void __cdecl sub_000EEC10(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_000EEC30 (0x000EEC30, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBSetTotalExoticsPoints: sets the player's total exotics points to the number the script gives.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -64049,6 +64096,7 @@ void __cdecl sub_000EEC30(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_000EEC80 (0x000EEC80, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DBSetReputationLevel: sets the player's reputation level to the number the script gives.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -71497,6 +71545,7 @@ bool __cdecl sub_001152F0(void)
 // ============================================================================
 // [VERIFIED] sub_00115300 (0x00115300, 28 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command HenchmanManager_SetFollowTony: turns on or off whether Tony's henchmen follow him, by the true or false the script passes.
 // ============================================================================
 // sub_00115300 (0x00115300, 28 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -72060,6 +72109,7 @@ void __cdecl sub_00119930(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_001199E0 (0x001199E0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command AIStimulusTable::DefineDefaultOverrideTables: sets up the AI stimulus table's default override tables from the script's argument.
 // ============================================================================
 // sub_001199E0 (0x001199E0, 18 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -72078,6 +72128,7 @@ void __cdecl sub_001199E0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00119A00 (0x00119A00, 29 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command AIStimulusTable::DetectsStimulus: makes the AI stimulus table react to the stimulus whose number the script gives.
 // ============================================================================
 // sub_00119A00 (0x00119A00, 29 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -72098,6 +72149,7 @@ void __cdecl sub_00119A00(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00119A20 (0x00119A20, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command AIStimulusTable::AddBasicEvent: adds a basic event to the AI stimulus table, from the two numbers the script passes.
 // ============================================================================
 // Same machine code as sub_00024D50 (0x00024D50), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -72923,6 +72975,7 @@ void __cdecl sub_0011CB10(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_0011CED0 (0x0011CED0, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command NME_SetDefinedTunablesCount: sets how many tunable values the NME manager has, from the script's number.
 // ============================================================================
 // sub_0011CED0 (0x0011CED0, 33 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -72947,6 +73000,7 @@ void __cdecl sub_0011CED0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0011CF00 (0x0011CF00, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command NME_AddDefinedTunables: adds a tunable value to the NME manager, from the script's two arguments.
 // ============================================================================
 // sub_0011CF00 (0x0011CF00, 24 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -92745,6 +92799,7 @@ void __cdecl sub_00178230(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00178250 (0x00178250, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::IsMainCharacter: returns 1 when the character is the player's main character (Tony), 0 otherwise.
 // ============================================================================
 // sub_00178250 (0x00178250, 24 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -94127,6 +94182,7 @@ int __cdecl sub_00179030(int a1)
 // ============================================================================
 // [VERIFIED] sub_00179050 (0x00179050, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::GetCharacterTemplate: returns the id of the template the character was made from, or 0 when it has none.
 // ============================================================================
 // sub_00179050 (0x00179050, 21 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

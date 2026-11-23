@@ -1,5 +1,21 @@
 [
   {
+    "time": "2026-11-23 15:44:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "0 function(s) submitted by Claude (AI) for RRutherrfordd",
+    "va": "",
+    "bytes": "checked again on import"
+  },
+  {
+    "time": "2026-11-23 15:36:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002CE3C0",
+    "va": "0x002CE3C0",
+    "bytes": "same code, own addresses"
+  },
+  {
     "time": "2026-11-23 00:27:27",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1982,21 +1998,5 @@
     "symbol": "PauseMenuPageSerialize::vfunc_45",
     "va": "0x001CD4C0",
     "bytes": "69/69 B"
-  },
-  {
-    "time": "2026-11-22 21:28:45",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001CD440",
-    "va": "0x001CD440",
-    "bytes": "101/101 B"
-  },
-  {
-    "time": "2026-11-22 21:28:29",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001CC9A0",
-    "va": "0x001CC9A0",
-    "bytes": "70/70 B"
   }
 ]
