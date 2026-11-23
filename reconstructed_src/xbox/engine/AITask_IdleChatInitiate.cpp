@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AITask_IdleChatInitiate::vfunc_00 (0x0011C990, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_IdleChatInitiate's static class record (ConcreteClassRep<AITask_IdleChatInitiate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -205,6 +206,7 @@ void AITask_IdleChatInitiate::vfunc_44()
 // ============================================================================
 // [VERIFIED] AITask_IdleChatInitiate::vfunc_60 (0x001260D0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_IdleChatInitiate: Always returns 24.
 // ============================================================================
 // Same machine code as AITask_IdleChatInitiate::vfunc_57 (Proto 0x0010A6A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -473,6 +475,7 @@ void AITask_IdleChatInitiate::vfunc_59()
 // ============================================================================
 // [VERIFIED] AITask_IdleChatInitiate::vfunc_62 (0x00126670, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_IdleChatInitiate: Always returns 1500.
 // ============================================================================
 // Same machine code as AITask_IdleChatInitiate::vfunc_59 (Proto 0x0010AB00), which was matched first;
 // its addresses and names were swapped for this function's.

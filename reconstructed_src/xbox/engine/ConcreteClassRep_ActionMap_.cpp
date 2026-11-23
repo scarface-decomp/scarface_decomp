@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ActionMap>::vfunc_01 (0x00020A10, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new ActionMap for the class system: allocates 60 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<ActionMap>::vfunc_01 (0x00020A10, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> int ConcreteClassRep<ActionMap>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ActionMap>::vfunc_02 (0x00020A40, 91 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for ActionMap's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // ConcreteClassRep<ActionMap>::vfunc_02 (0x00020A40, 91 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

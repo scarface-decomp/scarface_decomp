@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Checks a loaded object's type: dynamic_cast to ravenphysics::CollisionObject (the C++ run-time cast; null if it is something else).
 // ============================================================================
 // content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

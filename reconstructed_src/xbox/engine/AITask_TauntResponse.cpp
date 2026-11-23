@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AITask_TauntResponse::vfunc_55 (0x0007ADC0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_TauntResponse: Always returns 500.
 // ============================================================================
 // AITask_TauntResponse::vfunc_55 (0x0007ADC0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -352,6 +353,7 @@ int AITask_TauntResponse::vfunc_47()
 // ============================================================================
 // [VERIFIED] AITask_TauntResponse::vfunc_00 (0x00129430, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_TauntResponse's static class record (ConcreteClassRep<AITask_TauntResponse>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -375,6 +377,7 @@ void* AITask_TauntResponse::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_TauntResponse::vfunc_01 (0x00129550, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_TauntResponse's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as AITask_TauntResponse::vfunc_01 (Proto 0x0010D920), which was matched first;
 // its addresses and names were swapped for this function's.

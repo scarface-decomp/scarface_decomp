@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AIConditionLowPriorityNPCSoundChannelsBusy::vfunc_04 (0x00121970, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition: true when the low-priority NPC sound channels are busy (the sound system reports none free).
 // ============================================================================
 // bin: xb
 // va: 0x00121970

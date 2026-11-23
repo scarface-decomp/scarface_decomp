@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] HUDMeterWithIcon::vfunc_00 (0x00198BA0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns HUDMeterWithIcon's static class record (ConcreteClassRep<HUDMeterWithIcon>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -222,6 +223,7 @@ L_3B:
 // ============================================================================
 // [VERIFIED] HUDMeterWithIcon::vfunc_01 (0x0019A7E0, 58 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: HUDMeterWithIcon's deleting destructor: releases its icon at +0x68, runs the base HUD destructor, frees itself when asked.
 // ============================================================================
 // HUDMeterWithIcon::vfunc_01 (0x0019A7E0, 58 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

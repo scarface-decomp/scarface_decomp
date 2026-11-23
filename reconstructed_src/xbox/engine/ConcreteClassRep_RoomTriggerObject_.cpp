@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<RoomTriggerObject>::vfunc_01 (0x002129C0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new RoomTriggerObject for the class system: allocates 44 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<PositionObject>::vfunc_01 (0x0002DAB0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> int ConcreteClassRep<RoomTriggerObject>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<RoomTriggerObject>::vfunc_02 (0x00212A50, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for RoomTriggerObject's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (0x00011450), which was matched first;
 // its addresses and names were swapped for this function's.

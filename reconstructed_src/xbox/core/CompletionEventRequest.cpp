@@ -41,6 +41,7 @@ int CompletionEventRequest::vfunc_01()
 // ============================================================================
 // [VERIFIED] core::CompletionEventRequest::vfunc_06 (0x002A98D0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::CompletionEventRequest: Always returns 23.
 // ============================================================================
 // core::CompletionEventRequest::vfunc_06 (0x002A98D0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

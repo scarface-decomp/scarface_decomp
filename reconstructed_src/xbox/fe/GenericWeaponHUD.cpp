@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] GenericWeaponHUD::vfunc_00 (0x00190210, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns GenericWeaponHUD's static class record (ConcreteClassRep<GenericWeaponHUD>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* GenericWeaponHUD::vfunc_00()
 // ============================================================================
 // [VERIFIED] GenericWeaponHUD::vfunc_01 (0x001903A0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GenericWeaponHUD's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -262,6 +264,7 @@ void GenericWeaponHUD::vfunc_60()
 // ============================================================================
 // [VERIFIED] GenericWeaponHUD::vfunc_04 (0x001C1BB0, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GenericWeaponHUD: just calls the shared HUD version of this slot (same as GameOverHUD's).
 // ============================================================================
 // Same machine code as SoundEntityLoader::vfunc_04 (0x00064FA0), which was matched first;
 // its addresses and names were swapped for this function's.

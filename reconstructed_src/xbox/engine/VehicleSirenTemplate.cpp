@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] VehicleSirenTemplate::vfunc_00 (0x0020D4C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns VehicleSirenTemplate's static class record (ConcreteClassRep<VehicleSirenTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* VehicleSirenTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] VehicleSirenTemplate::vfunc_01 (0x0020DB10, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehicleSirenTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as DismemberTrack::vfunc_03 (0x000E8620), which was matched first;
 // its addresses and names were swapped for this function's.

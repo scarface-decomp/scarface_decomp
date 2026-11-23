@@ -118,6 +118,7 @@ int SeqEventVarPosDist::vfunc_03()
 // ============================================================================
 // [VERIFIED] audio::SeqEventVarPosDist::vfunc_04 (0x002DBA90, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::SeqEventVarPosDist's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as SoundManager::StatePropSoundPlayer::vfunc_00 (0x00082430), which was matched first;
 // its addresses and names were swapped for this function's.

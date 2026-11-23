@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] SpawnTemplateGroup::vfunc_00 (0x001EA4E0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns SpawnTemplateGroup's static class record (ConcreteClassRep<SpawnTemplateGroup>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

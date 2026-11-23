@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] StatePropTemplate::vfunc_00 (0x002120E0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns StatePropTemplate's static class record (ConcreteClassRep<StatePropTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* StatePropTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] StatePropTemplate::vfunc_01 (0x00212380, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: StatePropTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as FireTemplate::vfunc_01 (0x00188930), which was matched first;
 // its addresses and names were swapped for this function's.

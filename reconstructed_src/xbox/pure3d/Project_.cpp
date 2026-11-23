@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] content::LoadInventory::DynamicCaster<pure3d::frontend::Project>::vfunc_00 (0x00024310, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Checks a loaded object's type: dynamic_cast to pure3d::frontend::Project (the C++ run-time cast; null if it is something else).
 // ============================================================================
 // content::LoadInventory::DynamicCaster<pure3d::frontend::Project>::vfunc_00 (0x00024310, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -77,6 +77,7 @@ int AITask_SharkInteractWithBoat::vfunc_46()
 // ============================================================================
 // [VERIFIED] AITask_SharkInteractWithBoat::vfunc_44 (0x00109E90, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_SharkInteractWithBoat: Always returns 200.
 // ============================================================================
 // Same machine code as AITask_SharkInteractWithBoat::vfunc_41 (Proto 0x000F30A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -247,6 +248,7 @@ void AITask_SharkInteractWithBoat::vfunc_48()
 // ============================================================================
 // [VERIFIED] AITask_SharkInteractWithBoat::vfunc_00 (0x0010A7C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_SharkInteractWithBoat's static class record (ConcreteClassRep<AITask_SharkInteractWithBoat>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

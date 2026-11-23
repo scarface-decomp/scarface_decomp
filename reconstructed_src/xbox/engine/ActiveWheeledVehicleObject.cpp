@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] ActiveWheeledVehicleObject::vfunc_02 (0x002139B0, 60 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wheeled vehicle update: runs the shared active-vehicle step, updates its members at +0x67C and +0x10, then a helper on its object id.
 // ============================================================================
 // ActiveWheeledVehicleObject::vfunc_02 (0x002139B0, 60 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -138,6 +139,7 @@ void ActiveWheeledVehicleObject::vfunc_10()
 // ============================================================================
 // [VERIFIED] ActiveWheeledVehicleObject::vfunc_00 (0x00213F50, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ActiveWheeledVehicleObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -244,6 +244,7 @@ int AITask_NearlyHitByCar::vfunc_47()
 // ============================================================================
 // [VERIFIED] AITask_NearlyHitByCar::vfunc_00 (0x00123420, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_NearlyHitByCar's static class record (ConcreteClassRep<AITask_NearlyHitByCar>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -267,6 +268,7 @@ void* AITask_NearlyHitByCar::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_NearlyHitByCar::vfunc_01 (0x00123430, 40 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_NearlyHitByCar's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_NearlyHitByCar::vfunc_01 (0x00123430, 40 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] WheeledVehicleTemplate::vfunc_00 (0x002116E0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns WheeledVehicleTemplate's static class record (ConcreteClassRep<WheeledVehicleTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* WheeledVehicleTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] WheeledVehicleTemplate::vfunc_01 (0x00211790, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: WheeledVehicleTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -66,6 +68,7 @@ WheeledVehicleTemplate* WheeledVehicleTemplate::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] WheeledVehicleTemplate::vfunc_11 (0x00211960, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wheeled vehicle template: refreshes the object looked up from field 0xFC, then runs the shared vehicle-template version of this step.
 // ============================================================================
 // WheeledVehicleTemplate::vfunc_11 (0x00211960, 33 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

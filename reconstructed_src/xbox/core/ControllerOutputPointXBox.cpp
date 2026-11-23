@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] core::ControllerOutputPointXBox::vfunc_05 (0x00247FC0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Xbox controller output point: returns a pointer to a static record (its type/descriptor).
 // ============================================================================
 // Same machine code as core::ControllerXBox::vfunc_05 (0x00247C10), which was matched first;
 // its addresses and names were swapped for this function's.

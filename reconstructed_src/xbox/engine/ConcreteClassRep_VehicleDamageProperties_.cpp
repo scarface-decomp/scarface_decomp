@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleDamageProperties>::vfunc_01 (0x0020A370, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new VehicleDamageProperties for the class system: allocates 212 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<AITask_CopChallenge>::vfunc_01 (0x0011B5C0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> int ConcreteClassRep<VehicleDamageProperties>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleDamageProperties>::vfunc_02 (0x0020A3A0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for VehicleDamageProperties's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (0x00011450), which was matched first;
 // its addresses and names were swapped for this function's.

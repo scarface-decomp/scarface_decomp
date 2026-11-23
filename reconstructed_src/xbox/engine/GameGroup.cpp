@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] GameGroup::vfunc_00 (0x00028FD0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns GameGroup's static class record (ConcreteClassRep<GameGroup>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* GameGroup::vfunc_00()
 // ============================================================================
 // [VERIFIED] GameGroup::vfunc_01 (0x000290E0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GameGroup's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // GameGroup::vfunc_01 (0x000290E0, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

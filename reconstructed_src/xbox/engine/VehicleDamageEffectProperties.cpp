@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] VehicleDamageEffectProperties::vfunc_00 (0x0020EE60, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns VehicleDamageEffectProperties's static class record (ConcreteClassRep<VehicleDamageEffectProperties>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* VehicleDamageEffectProperties::vfunc_00()
 // ============================================================================
 // [VERIFIED] VehicleDamageEffectProperties::vfunc_01 (0x0020F3A0, 46 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehicleDamageEffectProperties's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as VehicleDamageEffectProperties::vfunc_01 (Proto 0x001D4290), which was matched first;
 // its addresses and names were swapped for this function's.

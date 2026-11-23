@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] CubeVan::vfunc_00 (0x0021C1D0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns CubeVan's static class record (ConcreteClassRep<CubeVan>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* CubeVan::vfunc_00()
 // ============================================================================
 // [VERIFIED] CubeVan::vfunc_01 (0x0021C360, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CubeVan's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.

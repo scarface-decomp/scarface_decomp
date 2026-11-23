@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] renderer::SkidmarkContainer::vfunc_25 (0x0005A920, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: renderer::SkidmarkContainer: Always returns 67108864.
 // ============================================================================
 // renderer::SkidmarkContainer::vfunc_25 (0x0005A920, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -58,6 +59,7 @@ int SkidmarkContainer::vfunc_25()
 // ============================================================================
 // [VERIFIED] renderer::SkidmarkContainer::vfunc_03 (0x0005AC70, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: renderer::SkidmarkContainer's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as LOSManager::LOSManagerFlowClient::vfunc_00 (0x000179C0), which was matched first;
 // its addresses and names were swapped for this function's.

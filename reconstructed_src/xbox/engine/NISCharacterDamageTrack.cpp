@@ -96,6 +96,7 @@ int NISCharacterDamageTrack::vfunc_20(int a1)
 // ============================================================================
 // [VERIFIED] NISCharacterDamageTrack::vfunc_03 (0x00185EE0, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISCharacterDamageTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // NISCharacterDamageTrack::vfunc_03 (0x00185EE0, 54 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

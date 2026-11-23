@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] fight::ParamFloatConstRange<TimedFightTrack>::vfunc_00 (0x000DDEC0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamFloatConstRange<TimedFightTrack>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as om::EntityType<GlobalVehicleSound>::vfunc_00 (0x000653D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -71,6 +72,7 @@ template <> bool fight::ParamFloatConstRange<TimedFightTrack>::vfunc_02(int a1, 
 // ============================================================================
 // [VERIFIED] fight::ParamFloatConstRange<TimedFightTrack>::vfunc_01 (0x002D5930, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamFloatConstRange<TimedFightTrack>: Always returns 2.
 // ============================================================================
 // Same machine code as fight::ParamFloatConstRange<TimedFightTrack>::vfunc_01 (Proto 0x00205320), which was matched first;
 // its addresses and names were swapped for this function's.

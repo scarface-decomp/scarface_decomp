@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] renderer::VehicleContainer::vfunc_25 (0x0005D7C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: renderer::VehicleContainer: Always returns 33554432.
 // ============================================================================
 // renderer::VehicleContainer::vfunc_25 (0x0005D7C0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

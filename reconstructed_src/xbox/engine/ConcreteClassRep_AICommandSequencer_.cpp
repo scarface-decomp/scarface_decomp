@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AICommandSequencer>::vfunc_01 (0x001360F0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new AICommandSequencer for the class system: allocates 1488 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<AICommandSequencer>::vfunc_01 (0x001360F0, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> int ConcreteClassRep<AICommandSequencer>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AICommandSequencer>::vfunc_02 (0x00138130, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for AICommandSequencer's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (0x00011450), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] FireTemplate::vfunc_00 (0x001888E0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns FireTemplate's static class record (ConcreteClassRep<FireTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* FireTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] FireTemplate::vfunc_11 (0x00188910, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fire template: if it was started, stops its member at +0x24 and clears the started flag.
 // ============================================================================
 // Same machine code as FireTemplate::vfunc_12 (Proto 0x001667C0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -84,6 +86,7 @@ void FireTemplate::vfunc_11()
 // ============================================================================
 // [VERIFIED] FireTemplate::vfunc_01 (0x00188930, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FireTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // FireTemplate::vfunc_01 (0x00188930, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

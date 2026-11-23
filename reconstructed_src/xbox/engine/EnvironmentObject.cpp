@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] EnvironmentObject::vfunc_00 (0x001C8C00, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns EnvironmentObject's static class record (ConcreteClassRep<EnvironmentObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* EnvironmentObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] EnvironmentObject::vfunc_01 (0x001C8C30, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: EnvironmentObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.

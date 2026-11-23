@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::BoolChannel::vfunc_02 (0x00287D10, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::BoolChannel: Always returns 1280266050.
 // ============================================================================
 // Same machine code as pure3d::BoolChannel::vfunc_02 (Proto 0x00244010), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -37,6 +38,7 @@ int BoolChannel::vfunc_02()
 // ============================================================================
 // [VERIFIED] pure3d::BoolChannel::vfunc_00 (0x0028A740, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::BoolChannel's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
 // its addresses and names were swapped for this function's.

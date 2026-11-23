@@ -150,6 +150,7 @@ int XboxSaveDrive::vfunc_12(int a1, int a2)
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_01 (0x002BF880, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::XboxSaveDrive: Always returns 8172.
 // ============================================================================
 // Same machine code as core::XboxSaveDrive::vfunc_01 (Proto 0x00283500), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -176,6 +177,7 @@ int XboxSaveDrive::vfunc_01()
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_02 (0x002BF890, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::XboxSaveDrive: Always returns 4.
 // ============================================================================
 // Same machine code as core::XboxSaveDrive::vfunc_02 (Proto 0x002834F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -368,6 +370,7 @@ int XboxSaveDrive::vfunc_22(int a1)
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_03 (0x002C00D0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::XboxSaveDrive's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as core::ControllerSystemXBox::vfunc_03 (0x00248820), which was matched first;
 // its addresses and names were swapped for this function's.

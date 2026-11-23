@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<GenericCharacterCamera>::vfunc_01 (0x0015CF60, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new GenericCharacterCamera for the class system: allocates 696 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<GenericCharacterCamera>::vfunc_01 (0x0015CF60, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

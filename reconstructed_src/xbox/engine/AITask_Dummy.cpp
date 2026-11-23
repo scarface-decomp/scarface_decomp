@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AITask_Dummy::vfunc_00 (0x0010BDC0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_Dummy's static class record (ConcreteClassRep<AITask_Dummy>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* AITask_Dummy::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_Dummy::vfunc_40 (0x0010BDD0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_Dummy: Always returns 2147483647.
 // ============================================================================
 // Same machine code as AITask_Dummy::vfunc_37 (Proto 0x000F4EF0), which was matched first;
 // its addresses and names were swapped for this function's.

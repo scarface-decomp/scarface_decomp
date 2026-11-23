@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>::vfunc_03 (0x0023E1F0, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and retu
 // ============================================================================
 // bin: xb
 // va: 0x0023E1F0

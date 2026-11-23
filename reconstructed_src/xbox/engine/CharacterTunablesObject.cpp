@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] CharacterTunablesObject::vfunc_00 (0x001FAF00, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns CharacterTunablesObject's static class record (ConcreteClassRep<CharacterTunablesObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* CharacterTunablesObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] CharacterTunablesObject::vfunc_01 (0x001FB260, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CharacterTunablesObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as SoundPlayTrack::vfunc_03 (0x000E9E90), which was matched first;
 // its addresses and names were swapped for this function's.

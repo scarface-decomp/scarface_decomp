@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] renderer::InstanceContainer::vfunc_25 (0x00053480, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: renderer::InstanceContainer: Always returns 8388608.
 // ============================================================================
 // renderer::InstanceContainer::vfunc_25 (0x00053480, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -58,6 +59,7 @@ int InstanceContainer::vfunc_25()
 // ============================================================================
 // [VERIFIED] renderer::InstanceContainer::vfunc_03 (0x00053A50, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: renderer::InstanceContainer's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as LOSManager::LOSManagerFlowClient::vfunc_00 (0x000179C0), which was matched first;
 // its addresses and names were swapped for this function's.

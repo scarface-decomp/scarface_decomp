@@ -155,6 +155,7 @@ bool Class_00022700::sub_00022700(float value)
 // ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_03 (0x000227A0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FightTree::FightActionController<fight::EnterExitScriptTrack>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns
 // ============================================================================
 // FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_03 (0x000227A0, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -271,6 +272,7 @@ template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>:
 // ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_31 (0x001E0B70, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FightTree::FightActionController<fight::EnterExitScriptTrack>: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_31 (0x001E0B70, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

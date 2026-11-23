@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<LightsVolumeObject>::vfunc_01 (0x0021D690, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new LightsVolumeObject for the class system: allocates 36 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<SpawnTriggerObject>::vfunc_01 (0x001E7AC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> int ConcreteClassRep<LightsVolumeObject>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<LightsVolumeObject>::vfunc_02 (0x0021D6C0, 32 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for LightsVolumeObject's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<PauseMenuPageRewards>::vfunc_01 (0x001CE240, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new PauseMenuPageRewards for the class system: allocates 140 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<AITask_AvoidIncomingCar>::vfunc_01 (0x0011B4D0), which was matched first;
 // its addresses and names were swapped for this function's.

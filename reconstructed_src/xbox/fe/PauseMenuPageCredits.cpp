@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] PauseMenuPageCredits::vfunc_00 (0x001CB0A0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns PauseMenuPageCredits's static class record (ConcreteClassRep<PauseMenuPageCredits>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* PauseMenuPageCredits::vfunc_00()
 // ============================================================================
 // [VERIFIED] PauseMenuPageCredits::vfunc_01 (0x001CB130, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: PauseMenuPageCredits's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // PauseMenuPageCredits::vfunc_01 (0x001CB130, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

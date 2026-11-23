@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] BlackjackHUD::vfunc_00 (0x001898B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns BlackjackHUD's static class record (ConcreteClassRep<BlackjackHUD>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* BlackjackHUD::vfunc_00()
 // ============================================================================
 // [VERIFIED] BlackjackHUD::vfunc_01 (0x00189AF0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: BlackjackHUD's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.

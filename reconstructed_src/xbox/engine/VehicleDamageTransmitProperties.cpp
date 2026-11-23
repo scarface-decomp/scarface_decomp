@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] VehicleDamageTransmitProperties::vfunc_00 (0x0020CAC0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns VehicleDamageTransmitProperties's static class record (ConcreteClassRep<VehicleDamageTransmitProperties>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* VehicleDamageTransmitProperties::vfunc_00()
 // ============================================================================
 // [VERIFIED] VehicleDamageTransmitProperties::vfunc_01 (0x0020CBC0, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehicleDamageTransmitProperties's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as SoundPlayTrack::vfunc_03 (0x000E9E90), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -74,6 +76,7 @@ VehicleDamageTransmitProperties* VehicleDamageTransmitProperties::vfunc_01(int a
 // ============================================================================
 // [VERIFIED] VehicleDamageTransmitProperties::vfunc_04 (0x0020EF10, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Runs the base properties class's version of this step, then updates its member object at +0x20.
 // ============================================================================
 // Same machine code as BoatPitchClampProperties::vfunc_04 (0x00200E50), which was matched first;
 // its addresses and names were swapped for this function's.

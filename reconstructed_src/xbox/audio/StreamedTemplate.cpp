@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] StreamedTemplate::vfunc_00 (0x0002E650, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns StreamedTemplate's static class record (ConcreteClassRep<StreamedTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* StreamedTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] StreamedTemplate::vfunc_01 (0x0002E6A0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: StreamedTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.

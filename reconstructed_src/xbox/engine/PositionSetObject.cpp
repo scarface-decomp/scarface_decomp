@@ -312,6 +312,7 @@ int PositionSetObject::vfunc_28(int a1)
 // ============================================================================
 // [VERIFIED] PositionSetObject::vfunc_00 (0x0002A720, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns PositionSetObject's static class record (ConcreteClassRep<PositionSetObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -335,6 +336,7 @@ void* PositionSetObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] PositionSetObject::vfunc_01 (0x0002A730, 57 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: PositionSetObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // PositionSetObject::vfunc_01 (0x0002A730, 57 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

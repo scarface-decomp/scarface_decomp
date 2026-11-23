@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: SoundManager::SoundPlayerHandle's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00, 36 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

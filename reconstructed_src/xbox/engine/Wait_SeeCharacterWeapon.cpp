@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AICommandWaits::Wait_SeeCharacterWeapon::vfunc_00 (0x001387C0, 103 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wait-until-character-sees-weapon: builds its two sub-objects (a 92-byte check and a 16-byte watcher of type 6) and starts the watcher.
 // ============================================================================
 // Same machine code as AICommandWaits::Wait_SeeCharacterWeapon::vfunc_00 (Proto 0x0011D9E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -70,6 +71,7 @@ void Wait_SeeCharacterWeapon::vfunc_00(int a1, int a2)
 // ============================================================================
 // [VERIFIED] AICommandWaits::Wait_SeeCharacterWeapon::vfunc_03 (0x00138CB0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AICommandWaits::Wait_SeeCharacterWeapon's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
 // its addresses and names were swapped for this function's.

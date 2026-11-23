@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ObjectVehicleCollisionBroker::vfunc_00 (0x0001D080, 69 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Collision handler: gets the hit object's data, follows it to an owning object, calls that object's 13th virtual with the hit, then runs the broker's own step.
 // ============================================================================
 // ObjectVehicleCollisionBroker::vfunc_00 (0x0001D080, 69 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AITask_RecognizeTony>::vfunc_01 (0x0011B950, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new AITask_RecognizeTony for the class system: allocates 84 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<SaveGameObject>::vfunc_01 (0x000CA0A0), which was matched first;
 // its addresses and names were swapped for this function's.

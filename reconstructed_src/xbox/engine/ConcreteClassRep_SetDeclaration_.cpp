@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<SetDeclaration>::vfunc_01 (0x0002DC10, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new SetDeclaration for the class system: allocates 64 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<Graph>::vfunc_01 (0x00026870), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -274,6 +274,7 @@ float ExitConditionTrack::vfunc_17()
 // ============================================================================
 // [VERIFIED] ExitConditionTrack::vfunc_03 (0x000E92C0, 54 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ExitConditionTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as ExitConditionTrack::vfunc_03 (Proto 0x000D6C40), which was matched first;
 // its addresses and names were swapped for this function's.

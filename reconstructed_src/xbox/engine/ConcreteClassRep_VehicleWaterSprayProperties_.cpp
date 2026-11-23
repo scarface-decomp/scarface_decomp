@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleWaterSprayProperties>::vfunc_01 (0x0020A610, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new VehicleWaterSprayProperties for the class system: allocates 440 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<VehicleWaterSprayProperties>::vfunc_01 (0x0020A610, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> int ConcreteClassRep<VehicleWaterSprayProperties>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleWaterSprayProperties>::vfunc_02 (0x0020A640, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for VehicleWaterSprayProperties's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (0x00011450), which was matched first;
 // its addresses and names were swapped for this function's.

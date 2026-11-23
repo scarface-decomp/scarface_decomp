@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISHoldCameraPositionTrack>::vfunc_03 (0x001836E0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::TrackFactoryTemplate<NISHoldCameraPositionTrack>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> fight::TrackFactoryTemplate<NISHoldCameraPositionTrack>* fight::Trac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISHoldCameraPositionTrack>::vfunc_07 (0x00183710, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISHoldCameraPositionTrack: allocates a new one (48 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // Same machine code as fight::TrackFactoryTemplate<AnimationRewinderTrack>::vfunc_07 (0x000DEE30), which was matched first;
 // its addresses and names were swapped for this function's.

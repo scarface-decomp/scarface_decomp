@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AITask_ProvokeAnotherPed::vfunc_00 (0x0011C9F0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_ProvokeAnotherPed's static class record (ConcreteClassRep<AITask_ProvokeAnotherPed>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -62,6 +63,7 @@ void AITask_ProvokeAnotherPed::vfunc_57()
 // ============================================================================
 // [VERIFIED] AITask_ProvokeAnotherPed::vfunc_60 (0x00126140, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_ProvokeAnotherPed: Always returns 28.
 // ============================================================================
 // Same machine code as AITask_ProvokeAnotherPed::vfunc_57 (Proto 0x0010A710), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -240,6 +242,7 @@ int AITask_ProvokeAnotherPed::vfunc_47()
 // ============================================================================
 // [VERIFIED] AITask_ProvokeAnotherPed::vfunc_62 (0x001262A0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_ProvokeAnotherPed: Always returns 3000.
 // ============================================================================
 // Same machine code as AITask_ProvokeAnotherPed::vfunc_59 (Proto 0x0010A870), which was matched first;
 // its addresses and names were swapped for this function's.

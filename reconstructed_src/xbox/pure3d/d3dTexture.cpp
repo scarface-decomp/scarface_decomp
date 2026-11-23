@@ -224,6 +224,7 @@ int d3dTexture::vfunc_09()
 // ============================================================================
 // [VERIFIED] pure3d::d3dTexture::vfunc_10 (0x00299DB0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dTexture: Always returns 256.
 // ============================================================================
 // Same machine code as pure3d::d3dTexture::vfunc_10 (Proto 0x0025F230), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -304,6 +305,7 @@ int d3dTexture::vfunc_18(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::d3dTexture::vfunc_03 (0x0029A170, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dTexture's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
 // its addresses and names were swapped for this function's.

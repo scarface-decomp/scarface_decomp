@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] WheelPlayerControlProperties::vfunc_00 (0x002111B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns WheelPlayerControlProperties's static class record (ConcreteClassRep<WheelPlayerControlProperties>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

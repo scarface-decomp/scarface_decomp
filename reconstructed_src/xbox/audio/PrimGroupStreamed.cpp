@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::PrimGroupStreamed::vfunc_07 (0x00292A40, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::PrimGroupStreamed: Always returns 129.
 // ============================================================================
 // Same machine code as pure3d::PrimGroupStreamed::vfunc_07 (Proto 0x0024F300), which was matched first;
 // its addresses and names were swapped for this function's.

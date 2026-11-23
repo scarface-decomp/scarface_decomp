@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ScriptObject>::vfunc_01 (0x0002E110, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new ScriptObject for the class system: allocates 32 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<ScriptDeclaration>::vfunc_01 (0x0002DC60), which was matched first;
 // its addresses and names were swapped for this function's.

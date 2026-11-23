@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<AreFeetOnGround>::vfunc_03 (0x00183130, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ConditionFactoryTemplate<AreFeetOnGround>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> fight::ConditionFactoryTemplate<AreFeetOnGround>* fight::ConditionFa
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<AreFeetOnGround>::vfunc_07 (0x00183160, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for AreFeetOnGround: allocates a new one (16 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<IsCrouchingCondition>::vfunc_07 (0x000DE7A0), which was matched first;
 // its addresses and names were swapped for this function's.

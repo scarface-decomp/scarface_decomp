@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ExplosionObject>::vfunc_01 (0x001EDCC0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new ExplosionObject for the class system: allocates 240 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<AITask_WatchDangerSource>::vfunc_01 (0x0011B860), which was matched first;
 // its addresses and names were swapped for this function's.

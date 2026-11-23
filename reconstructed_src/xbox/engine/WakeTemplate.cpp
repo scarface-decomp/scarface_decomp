@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] WakeTemplate::vfunc_00 (0x001FF3B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns WakeTemplate's static class record (ConcreteClassRep<WakeTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* WakeTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] WakeTemplate::vfunc_10 (0x001FF3C0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wake template: marks the wake as started and copies its starting value (0x20) into the current value (0x28); returns it.
 // ============================================================================
 // Same machine code as WakeTemplate::vfunc_11 (Proto 0x001C3E60), which was matched first;
 // its addresses and names were swapped for this function's.

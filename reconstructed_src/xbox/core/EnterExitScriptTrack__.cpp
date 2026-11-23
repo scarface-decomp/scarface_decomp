@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_03 (0x00022650, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>'s deleting destructor: destroys the object, frees its memory when ask
 // ============================================================================
 // fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_03 (0x00022650, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ TrackFactoryTemplate_FightTree__FightActionController_fight__EnterExitScriptTrac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_07 (0x00022680, 61 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for FightTree::FightActionController<fight::EnterExitScriptTrack>: allocates a new one (148 bytes), constructs it, and hands it the factory's data at +8
 // ============================================================================
 // fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_07 (0x00022680, 61 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

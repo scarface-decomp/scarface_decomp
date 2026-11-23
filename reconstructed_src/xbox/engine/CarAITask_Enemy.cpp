@@ -82,6 +82,7 @@ void CarAITask_Enemy::vfunc_31()
 // ============================================================================
 // [VERIFIED] CarAITask_Enemy::vfunc_00 (0x00146D90, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns CarAITask_Enemy's static class record (ConcreteClassRep<CarAITask_Enemy>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

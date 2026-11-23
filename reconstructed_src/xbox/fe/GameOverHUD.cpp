@@ -353,6 +353,7 @@ bool GameOverHUD::vfunc_37(int a1, int a2)
 // ============================================================================
 // [VERIFIED] GameOverHUD::vfunc_00 (0x0018E690, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns GameOverHUD's static class record (ConcreteClassRep<GameOverHUD>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

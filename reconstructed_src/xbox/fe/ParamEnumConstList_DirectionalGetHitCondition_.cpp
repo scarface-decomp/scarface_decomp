@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (0x000DD640, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamEnumConstList<DirectionalGetHitCondition>: Always returns 5.
 // ============================================================================
 // Same machine code as fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (Proto 0x000CB900), which was matched first;
 // its addresses and names were swapped for this function's.

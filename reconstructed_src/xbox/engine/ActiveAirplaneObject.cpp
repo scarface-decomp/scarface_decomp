@@ -127,6 +127,7 @@ void ActiveAirplaneObject::vfunc_09()
 // ============================================================================
 // [VERIFIED] ActiveAirplaneObject::vfunc_00 (0x002135F0, 60 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ActiveAirplaneObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // ActiveAirplaneObject::vfunc_00 (0x002135F0, 60 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -171,6 +172,7 @@ ActiveAirplaneObject* ActiveAirplaneObject::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] ActiveAirplaneObject::vfunc_01 (0x002136F0, 38 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Airplane update: runs the shared vehicle-object update, passes the value to its member at +0x660, then runs the airplane's own step.
 // ============================================================================
 // ActiveAirplaneObject::vfunc_01 (0x002136F0, 38 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

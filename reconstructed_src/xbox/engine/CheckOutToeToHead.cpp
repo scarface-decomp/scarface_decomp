@@ -52,6 +52,7 @@ void CheckOutToeToHead::vfunc_06()
 // ============================================================================
 // [VERIFIED] CheckOutToeToHead::vfunc_01 (0x000EFD70, 26 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets mode 6 and gives its member at +0x14 the range 750 to 1250.
 // ============================================================================
 // CheckOutToeToHead::vfunc_01 (0x000EFD70, 26 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

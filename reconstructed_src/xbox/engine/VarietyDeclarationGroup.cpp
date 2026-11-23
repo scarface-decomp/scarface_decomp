@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] VarietyDeclarationGroup::vfunc_00 (0x00096480, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns VarietyDeclarationGroup's static class record (ConcreteClassRep<VarietyDeclarationGroup>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -95,6 +96,7 @@ void VarietyDeclarationGroup::vfunc_32()
 // ============================================================================
 // [VERIFIED] VarietyDeclarationGroup::vfunc_01 (0x000965D0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VarietyDeclarationGroup's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.

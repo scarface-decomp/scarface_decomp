@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<CarAITask_Enemy>::vfunc_01 (0x00149FB0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new CarAITask_Enemy for the class system: allocates 132 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<AITask_Patrol>::vfunc_01 (0x0011B240), which was matched first;
 // its addresses and names were swapped for this function's.

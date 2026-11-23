@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AICommands::Cmd_EnterVehicle::vfunc_04 (0x0012E600, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Enter-vehicle command check: true only when the character has a vehicle to enter and its state at +0x2E8 allows it.
 // ============================================================================
 // AICommands::Cmd_EnterVehicle::vfunc_04 (0x0012E600, 46 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

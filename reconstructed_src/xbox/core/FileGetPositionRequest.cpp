@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::FileGetPositionRequest::vfunc_06 (0x002AA050, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::FileGetPositionRequest: Always returns 7.
 // ============================================================================
 // Same machine code as core::FileGetPositionRequest::vfunc_06 (Proto 0x0026C8F0), which was matched first;
 // its addresses and names were swapped for this function's.

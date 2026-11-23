@@ -40,6 +40,7 @@ void AIStimulusDetector::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] AIStimulusDetector::vfunc_00 (0x0011DEC0, 64 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIStimulusDetector's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as AIStimulusDetector::vfunc_00 (Proto 0x00102CF0), which was matched first;
 // its addresses and names were swapped for this function's.

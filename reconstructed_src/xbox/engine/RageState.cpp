@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] RageState::vfunc_00 (0x00177530, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns RageState's static class record (ConcreteClassRep<RageState>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* RageState::vfunc_00()
 // ============================================================================
 // [VERIFIED] RageState::vfunc_01 (0x00177A80, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: RageState's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as GameGroup::vfunc_01 (0x000290E0), which was matched first;
 // its addresses and names were swapped for this function's.

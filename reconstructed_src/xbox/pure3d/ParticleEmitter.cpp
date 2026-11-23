@@ -694,6 +694,7 @@ void ParticleEmitter::vfunc_37(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::ParticleEmitter::vfunc_03 (0x0025F750, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::ParticleEmitter's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
 // its addresses and names were swapped for this function's.

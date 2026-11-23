@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] om::MetaType<SoundBank>::vfunc_00 (0x00065130, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: om::MetaType<SoundBank>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as om::MetaType<GlobalVehicleSound>::vfunc_00 (0x00064FB0), which was matched first;
 // its addresses and names were swapped for this function's.

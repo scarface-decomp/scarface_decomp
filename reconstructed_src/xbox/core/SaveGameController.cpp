@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] SaveGameController::vfunc_00 (0x000C6FF0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns SaveGameController's static class record (ConcreteClassRep<SaveGameController>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* SaveGameController::vfunc_00()
 // ============================================================================
 // [VERIFIED] SaveGameController::vfunc_01 (0x000C7D70, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: SaveGameController's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // SaveGameController::vfunc_01 (0x000C7D70, 49 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

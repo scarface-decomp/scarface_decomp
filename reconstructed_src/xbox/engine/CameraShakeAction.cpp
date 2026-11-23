@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] CameraShakeAction::vfunc_03 (0x000E3FC0, 57 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CameraShakeAction's deleting destructor: releases its child at +0x08, runs the base destructor, frees itself when asked.
 // ============================================================================
 // Same machine code as BlendAction::vfunc_03 (0x000E3ED0), which was matched first;
 // its addresses and names were swapped for this function's.

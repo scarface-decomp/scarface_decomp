@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AITask_ReactToVisibleGun::vfunc_02 (0x001276C0, 20 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: React-to-visible-gun task: passes the value to its member at +0x0C and returns it.
 // ============================================================================
 // Same machine code as AITask_ReactToVisibleGun::vfunc_02 (Proto 0x0010BD00), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -291,6 +292,7 @@ int AITask_ReactToVisibleGun::vfunc_47()
 // ============================================================================
 // [VERIFIED] AITask_ReactToVisibleGun::vfunc_00 (0x00128510, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_ReactToVisibleGun's static class record (ConcreteClassRep<AITask_ReactToVisibleGun>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -341,6 +343,7 @@ float AITask_ReactToVisibleGun::vfunc_03()
 // ============================================================================
 // [VERIFIED] AITask_ReactToVisibleGun::vfunc_01 (0x00128530, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_ReactToVisibleGun's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as AITask_Cower::vfunc_01 (Proto 0x0010C950), which was matched first;
 // its addresses and names were swapped for this function's.

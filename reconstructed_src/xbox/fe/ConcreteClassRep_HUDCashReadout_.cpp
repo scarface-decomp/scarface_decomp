@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<HUDCashReadout>::vfunc_01 (0x001BE940, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new HUDCashReadout for the class system: allocates 160 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<HUDTrackable>::vfunc_01 (0x001BE8E0), which was matched first;
 // its addresses and names were swapped for this function's.

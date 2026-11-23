@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] VehicleKamikazeProperties::vfunc_00 (0x0020EEA0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns VehicleKamikazeProperties's static class record (ConcreteClassRep<VehicleKamikazeProperties>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -68,6 +69,7 @@ void VehicleKamikazeProperties::vfunc_04(int a1)
 // ============================================================================
 // [VERIFIED] VehicleKamikazeProperties::vfunc_01 (0x0020F3D0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehicleKamikazeProperties's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.

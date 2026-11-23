@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::pddiExtInstancing::MatrixPacketList::vfunc_00 (0x0026A8E0, 47 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::pddiExtInstancing::MatrixPacketList's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // pure3d::pddiExtInstancing::MatrixPacketList::vfunc_00 (0x0026A8E0, 47 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

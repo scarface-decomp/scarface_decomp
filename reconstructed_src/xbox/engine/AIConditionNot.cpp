@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AIConditionNot::vfunc_04 (0x00121990, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition 'not': true when the condition it wraps is false.
 // ============================================================================
 // Same machine code as AIConditionNot::vfunc_04 (Proto 0x00106300), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -51,6 +52,7 @@ int AIConditionNot::vfunc_04()
 // ============================================================================
 // [VERIFIED] AIConditionNot::vfunc_03 (0x00122610, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIConditionNot's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.

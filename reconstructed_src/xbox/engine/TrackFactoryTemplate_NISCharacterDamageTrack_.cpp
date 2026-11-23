@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISCharacterDamageTrack>::vfunc_03 (0x00183590, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::TrackFactoryTemplate<NISCharacterDamageTrack>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> fight::TrackFactoryTemplate<NISCharacterDamageTrack>* fight::TrackFa
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISCharacterDamageTrack>::vfunc_07 (0x001835C0, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISCharacterDamageTrack: allocates a new one (32 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // Same machine code as fight::TrackFactoryTemplate<Animation360Track>::vfunc_07 (0x000DEDC0), which was matched first;
 // its addresses and names were swapped for this function's.

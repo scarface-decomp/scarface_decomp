@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<LoadPackage>::vfunc_01 (0x001C71B0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new LoadPackage for the class system: allocates 88 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<AITask_InVehicle>::vfunc_01 (0x0011B340), which was matched first;
 // its addresses and names were swapped for this function's.

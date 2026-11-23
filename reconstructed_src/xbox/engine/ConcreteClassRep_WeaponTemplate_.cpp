@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<WeaponTemplate>::vfunc_01 (0x001FEC50, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new WeaponTemplate for the class system: allocates 264 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<HUDHealth>::vfunc_01 (0x001BDFD0), which was matched first;
 // its addresses and names were swapped for this function's.

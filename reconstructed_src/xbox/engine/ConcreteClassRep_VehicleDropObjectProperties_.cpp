@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleDropObjectProperties>::vfunc_01 (0x00202270, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new VehicleDropObjectProperties for the class system: allocates 76 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<ScriptContextProperties>::vfunc_01 (0x000C50A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> int ConcreteClassRep<VehicleDropObjectProperties>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleDropObjectProperties>::vfunc_02 (0x002022A0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for VehicleDropObjectProperties's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (0x00011450), which was matched first;
 // its addresses and names were swapped for this function's.

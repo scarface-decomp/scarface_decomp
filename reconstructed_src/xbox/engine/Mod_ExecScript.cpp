@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AICommandMods::Mod_ExecScript::vfunc_00 (0x001350E0, 75 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AICommandMods::Mod_ExecScript's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AICommandMods::Mod_ExecScript::vfunc_00 (0x001350E0, 75 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

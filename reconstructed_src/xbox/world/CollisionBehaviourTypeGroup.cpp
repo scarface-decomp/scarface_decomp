@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns CollisionBehaviourTypeGroup's static class record (ConcreteClassRep<CollisionBehaviourTypeGroup>), the object's run-time type.
 // ============================================================================
 // CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -91,6 +92,7 @@ void CollisionBehaviourTypeGroup::vfunc_13()
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_01 (0x00013840, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CollisionBehaviourTypeGroup's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // CollisionBehaviourTypeGroup::vfunc_01 (0x00013840, 36 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -120,6 +122,7 @@ CollisionBehaviourTypeGroup* CollisionBehaviourTypeGroup::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_05 (0x00022710, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CollisionBehaviourTypeGroup: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // CollisionBehaviourTypeGroup::vfunc_05 (0x00022710, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -196,6 +199,7 @@ void CollisionBehaviourTypeGroup::vfunc_04(int a1)
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_27 (0x001284A0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CollisionBehaviourTypeGroup: Always returns 0.
 // ============================================================================
 // CollisionBehaviourTypeGroup::vfunc_27 (0x001284A0, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -242,6 +246,7 @@ int CollisionBehaviourTypeGroup::vfunc_27()
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_28 (0x0014F2D0, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CollisionBehaviourTypeGroup: Always returns 0.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_26 (Proto 0x000205D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -331,6 +336,7 @@ bool CollisionBehaviourTypeGroup::vfunc_19(int a1)
 // ============================================================================
 // [VERIFIED] CollisionBehaviourTypeGroup::vfunc_10 (0x002A9290, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CollisionBehaviourTypeGroup: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // CollisionBehaviourTypeGroup::vfunc_10 (0x002A9290, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

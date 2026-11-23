@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AITask_DummyInVehicle>::vfunc_01 (0x0011B170, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new AITask_DummyInVehicle for the class system: allocates 112 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<AITask_DummyInVehicle>::vfunc_01 (0x0011B170, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

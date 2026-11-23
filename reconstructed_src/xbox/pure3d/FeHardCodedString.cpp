@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::frontend::FeHardCodedString::vfunc_01 (0x00249350, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::frontend::FeHardCodedString's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // pure3d::frontend::FeHardCodedString::vfunc_01 (0x00249350, 53 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

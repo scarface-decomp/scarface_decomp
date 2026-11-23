@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<CarAITask>::vfunc_01 (0x00149E40, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new CarAITask for the class system: allocates 52 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<CarAITask>::vfunc_01 (0x00149E40, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

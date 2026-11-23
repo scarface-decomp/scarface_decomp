@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ExplosionTemplate>::vfunc_01 (0x001FD400, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new ExplosionTemplate for the class system: allocates 164 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<MissionFailHUD>::vfunc_01 (0x001BF580), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -159,6 +159,7 @@ int AITask_BumpReflex::vfunc_47()
 // ============================================================================
 // [VERIFIED] AITask_BumpReflex::vfunc_00 (0x00123710, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_BumpReflex's static class record (ConcreteClassRep<AITask_BumpReflex>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -182,6 +183,7 @@ void* AITask_BumpReflex::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_BumpReflex::vfunc_01 (0x001285B0, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_BumpReflex's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as AITask_BumpReflex::vfunc_01 (Proto 0x0010C9D0), which was matched first;
 // its addresses and names were swapped for this function's.

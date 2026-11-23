@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] SoundManager::SoundFlowClient::vfunc_00 (0x00078EE0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: SoundManager::SoundFlowClient's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // SoundManager::SoundFlowClient::vfunc_00 (0x00078EE0, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -44,6 +45,7 @@ SoundFlowClient* SoundFlowClient::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] SoundManager::SoundFlowClient::vfunc_02 (0x00078F10, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sound flow callback: calls a helper with 12, then either runs the stop routine (mode 1) or plays/handles the given sound, then calls the helper again.
 // ============================================================================
 // SoundManager::SoundFlowClient::vfunc_02 (0x00078F10, 53 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

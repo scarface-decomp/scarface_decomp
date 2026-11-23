@@ -86,6 +86,7 @@ int AITask_TauntTony::vfunc_47()
 // ============================================================================
 // [VERIFIED] AITask_TauntTony::vfunc_00 (0x0012A020, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_TauntTony's static class record (ConcreteClassRep<AITask_TauntTony>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

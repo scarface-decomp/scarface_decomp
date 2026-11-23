@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<SpawnTriggerObject>::vfunc_01 (0x001E7AC0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new SpawnTriggerObject for the class system: allocates 36 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<SpawnTriggerObject>::vfunc_01 (0x001E7AC0, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> int ConcreteClassRep<SpawnTriggerObject>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<SpawnTriggerObject>::vfunc_02 (0x001E7AF0, 32 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for SpawnTriggerObject's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400), which was matched first;
 // its addresses and names were swapped for this function's.

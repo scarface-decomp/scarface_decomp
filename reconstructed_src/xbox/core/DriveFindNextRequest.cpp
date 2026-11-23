@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveFindNextRequest::vfunc_06 (0x0006F9A0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveFindNextRequest: Always returns 17.
 // ============================================================================
 // core::DriveFindNextRequest::vfunc_06 (0x0006F9A0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

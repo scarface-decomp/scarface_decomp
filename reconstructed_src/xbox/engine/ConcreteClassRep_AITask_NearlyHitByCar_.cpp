@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AITask_NearlyHitByCar>::vfunc_01 (0x0011B520, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new AITask_NearlyHitByCar for the class system: allocates 124 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<AITask_NearlyHitByCar>::vfunc_01 (0x0011B520, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

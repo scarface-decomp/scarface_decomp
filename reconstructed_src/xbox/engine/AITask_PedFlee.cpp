@@ -64,6 +64,7 @@ void AITask_PedFlee::vfunc_01()
 // ============================================================================
 // [VERIFIED] AITask_PedFlee::vfunc_00 (0x001095A0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_PedFlee's static class record (ConcreteClassRep<AITask_PedFlee>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -113,6 +114,7 @@ float AITask_PedFlee::vfunc_03()
 // ============================================================================
 // [VERIFIED] AITask_PedFlee::vfunc_01 (0x001096E0, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_PedFlee's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as AITask_PedFlee::vfunc_01 (Proto 0x000F2940), which was matched first;
 // its addresses and names were swapped for this function's.

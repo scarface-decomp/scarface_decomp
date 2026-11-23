@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::prop::EffectQueue::vfunc_03 (0x002548F0, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::prop::EffectQueue's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as pure3d::frontend::Text::vfunc_03 (0x00249C40), which was matched first;
 // its addresses and names were swapped for this function's.

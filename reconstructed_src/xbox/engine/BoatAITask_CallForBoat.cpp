@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] BoatAITask_CallForBoat::vfunc_00 (0x0013C020, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns BoatAITask_CallForBoat's static class record (ConcreteClassRep<BoatAITask_CallForBoat>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<GenericSpawnObject>::vfunc_01 (0x001E73C0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new GenericSpawnObject for the class system: allocates 500 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<GenericSpawnObject>::vfunc_01 (0x001E73C0, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -134,6 +134,7 @@ L_4B:
 // ============================================================================
 // [VERIFIED] PauseMenu::vfunc_00 (0x001CA580, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns PauseMenu's static class record (ConcreteClassRep<PauseMenu>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -157,6 +158,7 @@ void* PauseMenu::vfunc_00()
 // ============================================================================
 // [VERIFIED] PauseMenu::vfunc_01 (0x001CA660, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: PauseMenu's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.

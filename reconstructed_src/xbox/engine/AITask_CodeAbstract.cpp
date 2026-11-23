@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AITask_CodeAbstract::vfunc_00 (0x00106DA0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_CodeAbstract's static class record (ConcreteClassRep<AITask_CodeAbstract>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33,6 +34,7 @@ void* AITask_CodeAbstract::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_CodeAbstract::vfunc_01 (0x0011CA10, 40 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_CodeAbstract's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as AITask_CodeAbstract::vfunc_01 (Proto 0x00101AC0), which was matched first;
 // its addresses and names were swapped for this function's.

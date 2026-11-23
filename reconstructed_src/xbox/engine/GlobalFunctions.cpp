@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] sub_00011170 (0x00011170, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00011170 (0x00011170, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -2544,6 +2545,7 @@ int __cdecl sub_0001E5D0(void)
 // ============================================================================
 // [VERIFIED] sub_0001E630 (0x0001E630, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_0001E630 (0x0001E630, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -4621,6 +4623,7 @@ void Class_00023150::sub_00023150()
 // ============================================================================
 // [VERIFIED] sub_000231B0 (0x000231B0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000231B0 (0x000231B0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5156,6 +5159,7 @@ void __cdecl sub_00023F10(void)
 // ============================================================================
 // [VERIFIED] sub_00023F20 (0x00023F20, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00023F20 (0x00023F20, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5709,6 +5713,7 @@ void __cdecl sub_00024E30(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00024E40 (0x00024E40, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -7942,6 +7947,7 @@ void __cdecl sub_0002B9E0(int a1)
 // ============================================================================
 // [VERIFIED] sub_0002B9F0 (0x0002B9F0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_0002B9F0 (0x0002B9F0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -8262,6 +8268,7 @@ int __cdecl sub_0002CAD0(void)
 // ============================================================================
 // [VERIFIED] sub_0002D390 (0x0002D390, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -8454,6 +8461,7 @@ bool __cdecl sub_0002D4F0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0002D5B0 (0x0002D5B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -8479,6 +8487,7 @@ int __cdecl sub_0002D610(int a1)
 // ============================================================================
 // [VERIFIED] sub_0002D7B0 (0x0002D7B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -8711,6 +8720,7 @@ void __cdecl sub_0002E040(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0002E070 (0x0002E070, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -9878,6 +9888,7 @@ int Class_0002F6A0::sub_0002F6A0(bool a1)
 // ============================================================================
 // [VERIFIED] sub_0002F890 (0x0002F890, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -10678,6 +10689,7 @@ L_29:
 // ============================================================================
 // [VERIFIED] sub_000356A0 (0x000356A0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000356A0 (0x000356A0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -10722,6 +10734,7 @@ int Class_00035910::sub_00035910()
 // ============================================================================
 // [VERIFIED] sub_00036CD0 (0x00036CD0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00036CD0 (0x00036CD0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -10795,6 +10808,7 @@ extern "C" Made* __cdecl sub_00038A60(void)
 // ============================================================================
 // [VERIFIED] sub_0003ADA0 (0x0003ADA0, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds one to the counter at offset 0x78 (e.g. a reference count).
 // ============================================================================
 // sub_0003ADA0 (0x0003ADA0, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -11018,6 +11032,7 @@ L_37:
 // ============================================================================
 // [VERIFIED] sub_0003D580 (0x0003D580, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_0003D580 (0x0003D580, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -13532,6 +13547,7 @@ int Class_00045F90::sub_00045F90(int a1)
 // ============================================================================
 // [VERIFIED] sub_000476A0 (0x000476A0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000476A0 (0x000476A0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -14030,6 +14046,7 @@ void __cdecl sub_00047FD0(int a1)
 // ============================================================================
 // [VERIFIED] sub_00047FE0 (0x00047FE0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00047FE0 (0x00047FE0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -14064,6 +14081,7 @@ void __cdecl sub_00048000(int a1)
 // ============================================================================
 // [VERIFIED] sub_00048010 (0x00048010, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00048010 (0x00048010, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -14453,6 +14471,7 @@ void __cdecl sub_00048480(int a1)
 // ============================================================================
 // [VERIFIED] sub_00048490 (0x00048490, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00048490 (0x00048490, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -17148,6 +17167,7 @@ L_12:
 // ============================================================================
 // [VERIFIED] sub_0004F3F0 (0x0004F3F0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_0004F3F0 (0x0004F3F0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -17305,6 +17325,7 @@ void Class_0004FDE0::sub_0004FDE0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00050020 (0x00050020, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00050020 (0x00050020, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -17375,6 +17396,7 @@ int Class_00050BA0::sub_00050BA0()
 // ============================================================================
 // [VERIFIED] sub_00050BB0 (0x00050BB0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00050BB0 (0x00050BB0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -18579,6 +18601,7 @@ L_2E:
 // ============================================================================
 // [VERIFIED] sub_00056610 (0x00056610, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00056610 (0x00056610, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -18707,6 +18730,7 @@ void Class_00057270::sub_00057270()
 // ============================================================================
 // [VERIFIED] sub_000573D0 (0x000573D0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000573D0 (0x000573D0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -19677,6 +19701,7 @@ int Class_0005D850::sub_0005D850()
 // ============================================================================
 // [VERIFIED] sub_0005D860 (0x0005D860, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_0005D860 (0x0005D860, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -20549,6 +20574,7 @@ Class_00061340* Class_00061340::sub_00061340()
 // ============================================================================
 // [VERIFIED] sub_00061630 (0x00061630, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -21122,6 +21148,7 @@ void __cdecl sub_00063CC0(void)
 // ============================================================================
 // [VERIFIED] sub_00063DA0 (0x00063DA0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00063DA0 (0x00063DA0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -21152,6 +21179,7 @@ void __cdecl sub_00064140(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_000643C0 (0x000643C0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000643C0 (0x000643C0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -22509,6 +22537,7 @@ void __cdecl sub_00066BE0(int a1)
 // ============================================================================
 // [VERIFIED] sub_00066CC0 (0x00066CC0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22521,6 +22550,7 @@ extern "C" const void* __cdecl sub_00066CC0(void)
 // ============================================================================
 // [VERIFIED] sub_00066CD0 (0x00066CD0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22533,6 +22563,7 @@ extern "C" const void* __cdecl sub_00066CD0(void)
 // ============================================================================
 // [VERIFIED] sub_00066CE0 (0x00066CE0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22545,6 +22576,7 @@ extern "C" const void* __cdecl sub_00066CE0(void)
 // ============================================================================
 // [VERIFIED] sub_00066CF0 (0x00066CF0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22557,6 +22589,7 @@ extern "C" const void* __cdecl sub_00066CF0(void)
 // ============================================================================
 // [VERIFIED] sub_00066D00 (0x00066D00, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22569,6 +22602,7 @@ extern "C" const void* __cdecl sub_00066D00(void)
 // ============================================================================
 // [VERIFIED] sub_00066D10 (0x00066D10, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22581,6 +22615,7 @@ extern "C" const void* __cdecl sub_00066D10(void)
 // ============================================================================
 // [VERIFIED] sub_00066D20 (0x00066D20, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22593,6 +22628,7 @@ extern "C" const void* __cdecl sub_00066D20(void)
 // ============================================================================
 // [VERIFIED] sub_00066D30 (0x00066D30, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22605,6 +22641,7 @@ extern "C" const void* __cdecl sub_00066D30(void)
 // ============================================================================
 // [VERIFIED] sub_00066D40 (0x00066D40, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22617,6 +22654,7 @@ extern "C" const void* __cdecl sub_00066D40(void)
 // ============================================================================
 // [VERIFIED] sub_00066D50 (0x00066D50, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22629,6 +22667,7 @@ extern "C" const void* __cdecl sub_00066D50(void)
 // ============================================================================
 // [VERIFIED] sub_00066D60 (0x00066D60, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22641,6 +22680,7 @@ extern "C" const void* __cdecl sub_00066D60(void)
 // ============================================================================
 // [VERIFIED] sub_00066D70 (0x00066D70, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22653,6 +22693,7 @@ extern "C" const void* __cdecl sub_00066D70(void)
 // ============================================================================
 // [VERIFIED] sub_00066D80 (0x00066D80, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22665,6 +22706,7 @@ extern "C" const void* __cdecl sub_00066D80(void)
 // ============================================================================
 // [VERIFIED] sub_00066D90 (0x00066D90, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22677,6 +22719,7 @@ extern "C" const void* __cdecl sub_00066D90(void)
 // ============================================================================
 // [VERIFIED] sub_00066DA0 (0x00066DA0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22689,6 +22732,7 @@ extern "C" const void* __cdecl sub_00066DA0(void)
 // ============================================================================
 // [VERIFIED] sub_00066DB0 (0x00066DB0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22701,6 +22745,7 @@ extern "C" const void* __cdecl sub_00066DB0(void)
 // ============================================================================
 // [VERIFIED] sub_00066DC0 (0x00066DC0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22713,6 +22758,7 @@ extern "C" const void* __cdecl sub_00066DC0(void)
 // ============================================================================
 // [VERIFIED] sub_00066DD0 (0x00066DD0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22725,6 +22771,7 @@ extern "C" const void* __cdecl sub_00066DD0(void)
 // ============================================================================
 // [VERIFIED] sub_00066DE0 (0x00066DE0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22737,6 +22784,7 @@ extern "C" const void* __cdecl sub_00066DE0(void)
 // ============================================================================
 // [VERIFIED] sub_00066DF0 (0x00066DF0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22749,6 +22797,7 @@ extern "C" const void* __cdecl sub_00066DF0(void)
 // ============================================================================
 // [VERIFIED] sub_00066E00 (0x00066E00, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22761,6 +22810,7 @@ extern "C" const void* __cdecl sub_00066E00(void)
 // ============================================================================
 // [VERIFIED] sub_00066E10 (0x00066E10, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22773,6 +22823,7 @@ extern "C" const void* __cdecl sub_00066E10(void)
 // ============================================================================
 // [VERIFIED] sub_00066E20 (0x00066E20, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22785,6 +22836,7 @@ extern "C" const void* __cdecl sub_00066E20(void)
 // ============================================================================
 // [VERIFIED] sub_00066E30 (0x00066E30, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22797,6 +22849,7 @@ extern "C" const void* __cdecl sub_00066E30(void)
 // ============================================================================
 // [VERIFIED] sub_00066E40 (0x00066E40, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22809,6 +22862,7 @@ extern "C" const void* __cdecl sub_00066E40(void)
 // ============================================================================
 // [VERIFIED] sub_00066E50 (0x00066E50, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22821,6 +22875,7 @@ extern "C" const void* __cdecl sub_00066E50(void)
 // ============================================================================
 // [VERIFIED] sub_00066E60 (0x00066E60, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22833,6 +22888,7 @@ extern "C" const void* __cdecl sub_00066E60(void)
 // ============================================================================
 // [VERIFIED] sub_00066E70 (0x00066E70, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22845,6 +22901,7 @@ extern "C" const void* __cdecl sub_00066E70(void)
 // ============================================================================
 // [VERIFIED] sub_00066E80 (0x00066E80, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22857,6 +22914,7 @@ extern "C" const void* __cdecl sub_00066E80(void)
 // ============================================================================
 // [VERIFIED] sub_00066E90 (0x00066E90, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22869,6 +22927,7 @@ extern "C" const void* __cdecl sub_00066E90(void)
 // ============================================================================
 // [VERIFIED] sub_00066EA0 (0x00066EA0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22881,6 +22940,7 @@ extern "C" const void* __cdecl sub_00066EA0(void)
 // ============================================================================
 // [VERIFIED] sub_00066EB0 (0x00066EB0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22893,6 +22953,7 @@ extern "C" const void* __cdecl sub_00066EB0(void)
 // ============================================================================
 // [VERIFIED] sub_00066EC0 (0x00066EC0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22905,6 +22966,7 @@ extern "C" const void* __cdecl sub_00066EC0(void)
 // ============================================================================
 // [VERIFIED] sub_00066ED0 (0x00066ED0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22917,6 +22979,7 @@ extern "C" const void* __cdecl sub_00066ED0(void)
 // ============================================================================
 // [VERIFIED] sub_00066EE0 (0x00066EE0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns its own address, which serves as a unique tag for a type.
 // ============================================================================
 // Same machine code as sub_000111A0 (0x000111A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22950,6 +23013,7 @@ void __cdecl sub_000670D0(void)
 // ============================================================================
 // [VERIFIED] sub_00067BA0 (0x00067BA0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00067BA0 (0x00067BA0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -23808,6 +23872,7 @@ Class_0006BB00* Class_0006BB00::sub_0006BB00()
 // ============================================================================
 // [VERIFIED] sub_0006BC90 (0x0006BC90, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds one to the counter at offset 0x1C (e.g. a reference count).
 // ============================================================================
 // sub_0006BC90 (0x0006BC90, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -25235,6 +25300,7 @@ int __cdecl sub_00070F70(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000711F0 (0x000711F0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000711F0 (0x000711F0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -25431,6 +25497,7 @@ L_71:
 // ============================================================================
 // [VERIFIED] sub_000720A0 (0x000720A0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000720A0 (0x000720A0, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -25571,6 +25638,7 @@ int __cdecl sub_000721B0(void)
 // ============================================================================
 // [VERIFIED] sub_000721C0 (0x000721C0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000721C0 (0x000721C0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -25583,6 +25651,7 @@ void __cdecl sub_000721C0(void)
 // ============================================================================
 // [VERIFIED] sub_00072220 (0x00072220, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds one to the counter at offset 0x24 (e.g. a reference count).
 // ============================================================================
 // sub_00072220 (0x00072220, 5 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -26250,6 +26319,7 @@ int __cdecl sub_00075940(void)
 // ============================================================================
 // [VERIFIED] sub_00075970 (0x00075970, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 283.
 // ============================================================================
 // sub_00075970 (0x00075970, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -27607,6 +27677,7 @@ void __cdecl sub_00079B30(int a1)
 // ============================================================================
 // [VERIFIED] sub_00079FC0 (0x00079FC0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00079FC0 (0x00079FC0, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -27751,6 +27822,7 @@ void Class_0007AAB0::sub_0007AAB0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_0007ABC0 (0x0007ABC0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -30091,6 +30163,7 @@ int __cdecl sub_000838E0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_00083950 (0x00083950, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -30213,6 +30286,7 @@ void Class_00083F00::sub_00083F00()
 // ============================================================================
 // [VERIFIED] sub_00083F50 (0x00083F50, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -30227,6 +30301,7 @@ void __stdcall sub_00083F50(int a1)
 // ============================================================================
 // [VERIFIED] sub_00084070 (0x00084070, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -31690,6 +31765,7 @@ void __cdecl sub_00088000(void)
 // ============================================================================
 // [VERIFIED] sub_00088060 (0x00088060, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00088060 (0x00088060, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -31827,6 +31903,7 @@ void __cdecl sub_00088130(int a1)
 // ============================================================================
 // [VERIFIED] sub_00088170 (0x00088170, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33544,6 +33621,7 @@ bool __cdecl sub_0008FD50(bool a1)
 // ============================================================================
 // [VERIFIED] sub_0008FD80 (0x0008FD80, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 2.
 // ============================================================================
 char sub_0008FD80(void)
 {
@@ -33553,6 +33631,7 @@ char sub_0008FD80(void)
 // ============================================================================
 // [VERIFIED] sub_0008FDA0 (0x0008FDA0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 5.
 // ============================================================================
 char __cdecl sub_0008FDA0(void)
 {
@@ -33562,6 +33641,7 @@ char __cdecl sub_0008FDA0(void)
 // ============================================================================
 // [VERIFIED] sub_0008FDB0 (0x0008FDB0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 15.
 // ============================================================================
 char __cdecl sub_0008FDB0(void)
 {
@@ -33912,6 +33992,7 @@ int __cdecl sub_000905C0(int a1)
 // ============================================================================
 // [VERIFIED] sub_000905D0 (0x000905D0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000905D0 (0x000905D0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -34773,6 +34854,7 @@ int Class_00096D50::sub_00096D50()
 // ============================================================================
 // [VERIFIED] sub_00097030 (0x00097030, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35578,6 +35660,7 @@ void Class_00098170::sub_00098170(int a1)
 // ============================================================================
 // [VERIFIED] sub_00098460 (0x00098460, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00098460 (0x00098460, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -35643,6 +35726,7 @@ Class_000987E0* Class_000987E0::sub_000987E0(float a1, float a2)
 // ============================================================================
 // [VERIFIED] sub_00098840 (0x00098840, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -37189,6 +37273,7 @@ L_4D:
 // ============================================================================
 // [VERIFIED] sub_0009B110 (0x0009B110, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -39387,6 +39472,7 @@ void Class_000A4900::sub_000A4900()
 // ============================================================================
 // [VERIFIED] sub_000A4A50 (0x000A4A50, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000A4A50 (0x000A4A50, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -42429,6 +42515,7 @@ int Class_000AB160::sub_000AB160(int a1)
 // ============================================================================
 // [VERIFIED] sub_000AB1B0 (0x000AB1B0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -54563,6 +54650,7 @@ int Class_000D0050::sub_000D0050(int a1)
 // ============================================================================
 // [VERIFIED] sub_000D00A0 (0x000D00A0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -55673,6 +55761,7 @@ int __cdecl sub_000D7FB0(int a1)
 // ============================================================================
 // [VERIFIED] sub_000D7FE0 (0x000D7FE0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000D7FE0 (0x000D7FE0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -57788,6 +57877,7 @@ Class_000DD370* Class_000DD370::sub_000DD370()
 // ============================================================================
 // [VERIFIED] sub_000DD3D0 (0x000DD3D0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000DD3D0 (0x000DD3D0, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -57872,6 +57962,7 @@ Class_000DD420* Class_000DD420::sub_000DD420()
 // ============================================================================
 // [VERIFIED] sub_000DD480 (0x000DD480, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000DD3D0 (0x000DD3D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -58636,6 +58727,7 @@ L_55:
 // ============================================================================
 // [VERIFIED] sub_000E3560 (0x000E3560, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000E3560 (0x000E3560, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -61451,6 +61543,7 @@ Class_000E9A40* Class_000E9A40::sub_000E9A40(int a1)
 // ============================================================================
 // [VERIFIED] sub_000E9A90 (0x000E9A90, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000E9A90 (0x000E9A90, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -61463,6 +61556,7 @@ void __cdecl sub_000E9A90(void)
 // ============================================================================
 // [VERIFIED] sub_000E9AD0 (0x000E9AD0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_000E9AD0 (0x000E9AD0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -65293,6 +65387,7 @@ Class_000F1700* Class_000F1700::sub_000F1700(int a1)
 // ============================================================================
 // [VERIFIED] sub_000F1710 (0x000F1710, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -66247,6 +66342,7 @@ void Class_000F4E60::sub_000F4E60(bool a1)
 // ============================================================================
 // [VERIFIED] sub_000F4EE0 (0x000F4EE0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000720A0 (0x000720A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -67811,6 +67907,7 @@ bool __cdecl sub_00106730(void)
 // ============================================================================
 // [VERIFIED] sub_001067A0 (0x001067A0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_001067A0 (0x001067A0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -69175,6 +69272,7 @@ void Class_0010ECA0::sub_0010ECA0()
 // ============================================================================
 // [VERIFIED] sub_0010ED50 (0x0010ED50, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds one to the counter at offset 0x88 (e.g. a reference count).
 // ============================================================================
 // sub_0010ED50 (0x0010ED50, 7 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -71737,6 +71835,7 @@ void __cdecl sub_00117EE0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_00119470 (0x00119470, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000DD3D0 (0x000DD3D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -74827,6 +74926,7 @@ Class_00120D40* Class_00120D40::sub_00120D40(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00120E10 (0x00120E10, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00120E10 (0x00120E10, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76137,6 +76237,7 @@ L_4F:
 // ============================================================================
 // [VERIFIED] sub_00126070 (0x00126070, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00126070 (0x00126070, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76183,6 +76284,7 @@ void* __cdecl sub_001261A0(void)
 // ============================================================================
 // [VERIFIED] sub_00126450 (0x00126450, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00126450 (0x00126450, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76195,6 +76297,7 @@ void __cdecl sub_00126450(void)
 // ============================================================================
 // [VERIFIED] sub_00126520 (0x00126520, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00126520 (0x00126520, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76497,6 +76600,7 @@ L_28:
 // ============================================================================
 // [VERIFIED] sub_00128A50 (0x00128A50, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00128A50 (0x00128A50, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -78470,6 +78574,7 @@ Class_001348F0* Class_001348F0::sub_001348F0(bool a1, bool a2)
 // ============================================================================
 // [VERIFIED] sub_00134940 (0x00134940, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000DD3D0 (0x000DD3D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -81193,6 +81298,7 @@ L_25:
 // ============================================================================
 // [VERIFIED] sub_001416E0 (0x001416E0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_001416E0 (0x001416E0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -82447,6 +82553,7 @@ Class_0014C4D0* Class_0014C4D0::sub_0014C4D0()
 // ============================================================================
 // [VERIFIED] sub_0014CB70 (0x0014CB70, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000E3560 (0x000E3560), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -83195,6 +83302,7 @@ int Class_00154540::sub_00154540()
 // ============================================================================
 // [VERIFIED] sub_00154560 (0x00154560, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00154560 (0x00154560, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -83886,6 +83994,7 @@ Class_0015D4C0* Class_0015D4C0::sub_0015D4C0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_0015D510 (0x0015D510, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 1.
 // ============================================================================
 // sub_0015D510 (0x0015D510, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -84068,6 +84177,7 @@ L_49:
 // ============================================================================
 // [VERIFIED] sub_0015D640 (0x0015D640, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 1.
 // ============================================================================
 // Same machine code as sub_0015D510 (0x0015D510), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -84107,6 +84217,7 @@ Vector_0015D650 Class_0015D650::sub_0015D650()
 // ============================================================================
 // [VERIFIED] sub_0015D680 (0x0015D680, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 1.
 // ============================================================================
 // Same machine code as sub_0015D510 (0x0015D510), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -84122,6 +84233,7 @@ int __cdecl sub_0015D680(void)
 // ============================================================================
 // [VERIFIED] sub_0015D6A0 (0x0015D6A0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 1.
 // ============================================================================
 // Same machine code as sub_0015D510 (0x0015D510), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -101075,6 +101187,7 @@ Class_001928B0* Class_001928B0::sub_001928B0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_00192A60 (0x00192A60, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00192A60 (0x00192A60, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -101492,6 +101605,7 @@ L_23:
 // ============================================================================
 // [VERIFIED] sub_00195940 (0x00195940, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -104978,6 +105092,7 @@ void Class_001B7330::sub_001B7330()
 // ============================================================================
 // [VERIFIED] sub_001B73AE (0x001B73AE, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_001B73AE (0x001B73AE, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -108342,6 +108457,7 @@ void __cdecl sub_001D0FA0(void)
 // ============================================================================
 // [VERIFIED] sub_001D12D0 (0x001D12D0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_001D12D0 (0x001D12D0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -109186,6 +109302,7 @@ void __cdecl sub_001D7090(int a1, int a2, int a3, int a4, int a5, int a6)
 // ============================================================================
 // [VERIFIED] sub_001D76E0 (0x001D76E0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_001D76E0 (0x001D76E0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -109198,6 +109315,7 @@ void __cdecl sub_001D76E0(void)
 // ============================================================================
 // [VERIFIED] sub_001D7720 (0x001D7720, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_001D7720 (0x001D7720, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -109860,6 +109978,7 @@ L_24:
 // ============================================================================
 // [VERIFIED] sub_001DA510 (0x001DA510, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_001DA510 (0x001DA510, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -110624,6 +110743,7 @@ int Class_001E0080::sub_001E0080(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_001E01C0 (0x001E01C0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000DD3D0 (0x000DD3D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -111984,6 +112104,7 @@ Class_001EA570* Class_001EA570::sub_001EA570(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_001EA730 (0x001EA730, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -111998,6 +112119,7 @@ void __stdcall sub_001EA730(int a1)
 // ============================================================================
 // [VERIFIED] sub_001EA880 (0x001EA880, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000DD3D0 (0x000DD3D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -114530,6 +114652,7 @@ L_46:
 // ============================================================================
 // [VERIFIED] sub_001F4CB0 (0x001F4CB0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -116013,6 +116136,7 @@ Class_001FEDD0* Class_001FEDD0::sub_001FEDD0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_001FEEC0 (0x001FEEC0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_001FEEC0 (0x001FEEC0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -120567,6 +120691,7 @@ Class_00212000* Class_00212000::sub_00212000(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_002120B0 (0x002120B0, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds one to the counter at offset 0x154 (e.g. a reference count).
 // ============================================================================
 // sub_002120B0 (0x002120B0, 7 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -123085,6 +123210,7 @@ int Class_0021C1F0::sub_0021C1F0()
 // ============================================================================
 // [VERIFIED] sub_0021C200 (0x0021C200, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds one to the counter at offset 0x108 (e.g. a reference count).
 // ============================================================================
 // sub_0021C200 (0x0021C200, 7 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -124409,6 +124535,7 @@ void __cdecl sub_0021FAF0(float value)
 // ============================================================================
 // [VERIFIED] sub_0021FB70 (0x0021FB70, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_0021FB70 (0x0021FB70, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -124421,6 +124548,7 @@ void __cdecl sub_0021FB70(void)
 // ============================================================================
 // [VERIFIED] sub_0021FBC0 (0x0021FBC0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_0021FBC0 (0x0021FBC0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -124472,6 +124600,7 @@ void __cdecl sub_0021FD00(bool a1)
 // ============================================================================
 // [VERIFIED] sub_00220050 (0x00220050, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -125008,6 +125137,7 @@ Class_00223BB0* Class_00223BB0::sub_00223BB0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00223C10 (0x00223C10, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000720A0 (0x000720A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -125022,6 +125152,7 @@ void __stdcall sub_00223C10(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00223D20 (0x00223D20, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -125067,6 +125198,7 @@ int Class_00223D30::sub_00223D30()
 // ============================================================================
 // [VERIFIED] sub_00223D60 (0x00223D60, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -126358,6 +126490,7 @@ void Class_00228550::sub_00228550()
 // ============================================================================
 // [VERIFIED] sub_0022B410 (0x0022B410, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000DD3D0 (0x000DD3D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -127471,6 +127604,7 @@ void __cdecl sub_002304B0(int a1)
 // ============================================================================
 // [VERIFIED] sub_002304E0 (0x002304E0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_002304E0 (0x002304E0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -128013,6 +128147,7 @@ int __cdecl sub_00236ADE(void)
 // ============================================================================
 // [VERIFIED] sub_00236D36 (0x00236D36, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000E3560 (0x000E3560), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -128926,6 +129061,7 @@ bool Class_0023C110::sub_0023C110()
 // ============================================================================
 // [VERIFIED] sub_0023CA90 (0x0023CA90, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -132853,6 +132989,7 @@ void Class_00244710::sub_00244710(int a1)
 // ============================================================================
 // [VERIFIED] sub_00245D00 (0x00245D00, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -132868,6 +133005,7 @@ int __cdecl sub_00245D00(void)
 // ============================================================================
 // [VERIFIED] sub_00246630 (0x00246630, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_00246630 (0x00246630, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -133202,6 +133340,7 @@ L_AD:
 // ============================================================================
 // [VERIFIED] sub_00248800 (0x00248800, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00079FC0 (0x00079FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -134077,6 +134216,7 @@ void Class_0024E180::sub_0024E180(bool a1)
 // ============================================================================
 // [VERIFIED] sub_0024E1E0 (0x0024E1E0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 448.
 // ============================================================================
 // Same machine code as sub_0020BCC0 (Proto 0x0020BCC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -134092,6 +134232,7 @@ int __cdecl sub_0024E1E0(void)
 // ============================================================================
 // [VERIFIED] sub_0024E1F0 (0x0024E1F0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 640.
 // ============================================================================
 // Same machine code as sub_0020BCD0 (Proto 0x0020BCD0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -143432,6 +143573,7 @@ void Class_0029C520::sub_0029C520()
 // ============================================================================
 // [VERIFIED] sub_0029DA50 (0x0029DA50, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_0029DA50 (0x0029DA50, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -148559,6 +148701,7 @@ int __cdecl sub_002C96C0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_002CC090 (0x002CC090, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_002CC090 (0x002CC090, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -148734,6 +148877,7 @@ int Class_002CE2A0::sub_002CE2A0()
 // ============================================================================
 // [VERIFIED] sub_002CE340 (0x002CE340, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_002CE340 (0x002CE340, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -149745,6 +149889,7 @@ int __cdecl sub_002D05C0(void)
 // ============================================================================
 // [VERIFIED] sub_002D05D0 (0x002D05D0, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds one to the counter at offset 0x28 (e.g. a reference count).
 // ============================================================================
 // sub_002D05D0 (0x002D05D0, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -149814,6 +149959,7 @@ void Class_002D05F0::sub_002D05F0()
 // ============================================================================
 // [VERIFIED] sub_002D0600 (0x002D0600, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds one to the counter at offset 0x40 (e.g. a reference count).
 // ============================================================================
 // sub_002D0600 (0x002D0600, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -152067,6 +152213,7 @@ void Class_002D7F60::sub_002D7F60()
 // ============================================================================
 // [VERIFIED] sub_002D8200 (0x002D8200, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_000720A0 (0x000720A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -155948,6 +156095,7 @@ int __cdecl sub_002EFF00(void)
 // ============================================================================
 // [VERIFIED] sub_002F0AF0 (0x002F0AF0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_002F0AF0 (0x002F0AF0, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -156540,6 +156688,7 @@ void __cdecl sub_00307802(void)
 // ============================================================================
 // [VERIFIED] sub_0030809C (0x0030809C, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 0.
 // ============================================================================
 // Same machine code as sub_00702F18 (PC 0x00702F18), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -158418,6 +158567,7 @@ void __cdecl sub_00322990(void)
 // ============================================================================
 // [VERIFIED] sub_00322D90 (0x00322D90, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00011170 (0x00011170), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -158569,6 +158719,7 @@ void __cdecl sub_00323390(void)
 // ============================================================================
 // [VERIFIED] sub_003237C1 (0x003237C1, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // sub_003237C1 (0x003237C1, 1 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -158723,6 +158874,7 @@ void __cdecl sub_00329310(void)
 // ============================================================================
 // [VERIFIED] sub_00329360 (0x00329360, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00011170 (0x00011170), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -158737,6 +158889,7 @@ void __cdecl sub_00329360(void)
 // ============================================================================
 // [VERIFIED] sub_003293B0 (0x003293B0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00011170 (0x00011170), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -158751,6 +158904,7 @@ void __cdecl sub_003293B0(void)
 // ============================================================================
 // [VERIFIED] sub_00329410 (0x00329410, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as sub_00011170 (0x00011170), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<PauseMenuPageHome>::vfunc_01 (0x001CE4E0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new PauseMenuPageHome for the class system: allocates 144 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<FireObject>::vfunc_01 (0x00188970), which was matched first;
 // its addresses and names were swapped for this function's.

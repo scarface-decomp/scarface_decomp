@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] Targeting::vfunc_00 (0x001F6240, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns Targeting's static class record (ConcreteClassRep<Targeting>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -85,6 +86,7 @@ void Targeting::vfunc_09(int a1)
 // ============================================================================
 // [VERIFIED] Targeting::vfunc_01 (0x001F62F0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Targeting's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.

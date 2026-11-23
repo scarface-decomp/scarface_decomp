@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::StringChannel::vfunc_02 (0x00287CC0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::StringChannel: Always returns 5395539.
 // ============================================================================
 // Same machine code as pure3d::StringChannel::vfunc_02 (Proto 0x00243FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -39,6 +40,7 @@ int StringChannel::vfunc_02()
 // ============================================================================
 // [VERIFIED] pure3d::StringChannel::vfunc_00 (0x0028A6E0, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::StringChannel's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
 // its addresses and names were swapped for this function's.

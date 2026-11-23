@@ -76,6 +76,7 @@ int FileCompletionRequest::vfunc_03()
 // ============================================================================
 // [VERIFIED] core::FileCompletionRequest::vfunc_00 (0x002AA6D0, 82 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: File completion request's deleting destructor: releases its two members, then returns its memory to a locked pool when asked.
 // ============================================================================
 // core::FileCompletionRequest::vfunc_00 (0x002AA6D0, 82 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

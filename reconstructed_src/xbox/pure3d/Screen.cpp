@@ -34,6 +34,7 @@ bool Class_0028D580::sub_0028D580()
 // ============================================================================
 // [VERIFIED] pure3d::frontend::Screen::vfunc_03 (0x0028D5A0, 55 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::frontend::Screen's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // pure3d::frontend::Screen::vfunc_03 (0x0028D5A0, 55 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

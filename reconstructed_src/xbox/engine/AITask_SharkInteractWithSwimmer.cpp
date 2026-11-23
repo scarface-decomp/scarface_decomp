@@ -79,6 +79,7 @@ int AITask_SharkInteractWithSwimmer::vfunc_46()
 // ============================================================================
 // [VERIFIED] AITask_SharkInteractWithSwimmer::vfunc_44 (0x00109E00, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_SharkInteractWithSwimmer: Always returns 300.
 // ============================================================================
 // Same machine code as AITask_SharkInteractWithSwimmer::vfunc_41 (Proto 0x000F3010), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -380,6 +381,7 @@ void AITask_SharkInteractWithSwimmer::vfunc_49()
 // ============================================================================
 // [VERIFIED] AITask_SharkInteractWithSwimmer::vfunc_00 (0x0010A740, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_SharkInteractWithSwimmer's static class record (ConcreteClassRep<AITask_SharkInteractWithSwimmer>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

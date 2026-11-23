@@ -39,6 +39,7 @@ void CopSpawnObject::vfunc_04()
 // ============================================================================
 // [VERIFIED] CopSpawnObject::vfunc_45 (0x001DA470, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CopSpawnObject: Always returns 32.
 // ============================================================================
 // Same machine code as CopSpawnObject::vfunc_43 (Proto 0x00214440), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -105,6 +106,7 @@ int CopSpawnObject::vfunc_45()
 // ============================================================================
 // [VERIFIED] CopSpawnObject::vfunc_00 (0x001DAE20, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns CopSpawnObject's static class record (ConcreteClassRep<CopSpawnObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -128,6 +130,7 @@ void* CopSpawnObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] CopSpawnObject::vfunc_01 (0x001DCE40, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CopSpawnObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as GameGroup::vfunc_01 (0x000290E0), which was matched first;
 // its addresses and names were swapped for this function's.

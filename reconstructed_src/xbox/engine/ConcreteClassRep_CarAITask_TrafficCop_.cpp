@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<CarAITask_TrafficCop>::vfunc_01 (0x00149EE0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new CarAITask_TrafficCop for the class system: allocates 80 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<AITask_ReactToStaggeredStim>::vfunc_01 (0x0011AF00), which was matched first;
 // its addresses and names were swapped for this function's.

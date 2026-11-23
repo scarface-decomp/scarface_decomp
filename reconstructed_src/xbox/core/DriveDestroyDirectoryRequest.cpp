@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveDestroyDirectoryRequest::vfunc_06 (0x002AA2B0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveDestroyDirectoryRequest: Always returns 15.
 // ============================================================================
 // Same machine code as core::DriveDestroyDirectoryRequest::vfunc_06 (Proto 0x0026CB60), which was matched first;
 // its addresses and names were swapped for this function's.

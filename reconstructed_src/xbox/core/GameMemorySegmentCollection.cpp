@@ -265,6 +265,7 @@ GameMemorySegmentCollection::GameMemorySegmentCollection() {}                  /
 // ============================================================================
 // [VERIFIED] GameMemorySegmentCollection::vfunc_00 (0x00026D80, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GameMemorySegmentCollection: Adds one to the counter at offset 0x0C (e.g. a reference count).
 // ============================================================================
 // GameMemorySegmentCollection::vfunc_00 (0x00026D80, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -96,6 +96,7 @@ int NISCharacterAttachTrack::vfunc_20(int a1)
 // ============================================================================
 // [VERIFIED] NISCharacterAttachTrack::vfunc_03 (0x00186030, 62 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISCharacterAttachTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // NISCharacterAttachTrack::vfunc_03 (0x00186030, 62 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

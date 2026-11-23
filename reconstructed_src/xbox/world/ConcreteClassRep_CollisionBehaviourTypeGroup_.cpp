@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_01 (0x000113D0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new CollisionBehaviourTypeGroup for the class system: allocates 136 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_01 (0x000113D0, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> int ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400, 32 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for CollisionBehaviourTypeGroup's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // ConcreteClassRep<CollisionBehaviourTypeGroup>::vfunc_02 (0x00011400, 32 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

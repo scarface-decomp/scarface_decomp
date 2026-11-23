@@ -180,6 +180,7 @@ void ActiveBoatObject::vfunc_19(int a1)
 // ============================================================================
 // [VERIFIED] ActiveBoatObject::vfunc_00 (0x00214D00, 60 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ActiveBoatObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // ActiveBoatObject::vfunc_00 (0x00214D00, 60 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

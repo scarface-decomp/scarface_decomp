@@ -174,6 +174,7 @@ void GameSimObject::vfunc_62(bool a1, bool a2)
 // ============================================================================
 // [VERIFIED] GameSimObject::vfunc_00 (0x0002A320, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns GameSimObject's static class record (ConcreteClassRep<GameSimObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -520,6 +521,7 @@ int GameSimObject::vfunc_63()
 // ============================================================================
 // [VERIFIED] GameSimObject::vfunc_01 (0x0002A5A0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GameSimObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -551,6 +553,7 @@ GameSimObject* GameSimObject::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] GameSimObject::vfunc_55 (0x0004A770, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GameSimObject: Always returns 0.
 // ============================================================================
 // GameSimObject::vfunc_55 (0x0004A770, 5 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

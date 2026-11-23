@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] FightAction::vfunc_01 (0x00021830, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FightAction: drops one reference and deletes the object (through its virtual destructor) when none are left.
 // ============================================================================
 // FightAction::vfunc_01 (0x00021830, 20 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

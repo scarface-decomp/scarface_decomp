@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AirplaneArtTemplate>::vfunc_01 (0x00201930, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new AirplaneArtTemplate for the class system: allocates 312 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<WeaponPickup>::vfunc_01 (0x001EE8B0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -73,6 +73,7 @@ void Collidable::vfunc_06()
 // ============================================================================
 // [VERIFIED] Collidable::vfunc_03 (0x00011F20, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Collidable's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Collidable::vfunc_03 (0x00011F20, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -102,6 +103,7 @@ Collidable* Collidable::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] Collidable::vfunc_04 (0x00022720, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Collidable: Always returns 0.
 // ============================================================================
 // Collidable::vfunc_04 (0x00022720, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -149,6 +151,7 @@ Collidable* Collidable::vfunc_05()
 // ============================================================================
 // [VERIFIED] Collidable::vfunc_00 (0x000CE340, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Collidable: Adds one to the counter at offset 0x04 (e.g. a reference count).
 // ============================================================================
 // Collidable::vfunc_00 (0x000CE340, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

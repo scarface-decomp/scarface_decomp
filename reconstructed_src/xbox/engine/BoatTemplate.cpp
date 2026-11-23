@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] BoatTemplate::vfunc_00 (0x002012F0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns BoatTemplate's static class record (ConcreteClassRep<BoatTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* BoatTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] BoatTemplate::vfunc_11 (0x00201300, 29 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Boat template: runs the shared vehicle-template step, then resets its member at +0xEC (if any) with zeros.
 // ============================================================================
 // BoatTemplate::vfunc_11 (0x00201300, 29 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -77,6 +79,7 @@ void BoatTemplate::vfunc_11()
 // ============================================================================
 // [VERIFIED] BoatTemplate::vfunc_01 (0x00201440, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: BoatTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.

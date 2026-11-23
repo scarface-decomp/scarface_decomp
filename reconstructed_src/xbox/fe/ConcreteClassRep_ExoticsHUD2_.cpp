@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ExoticsHUD2>::vfunc_01 (0x001BC910, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new ExoticsHUD2 for the class system: allocates 196 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<SaveGameController>::vfunc_01 (0x000CA100), which was matched first;
 // its addresses and names were swapped for this function's.

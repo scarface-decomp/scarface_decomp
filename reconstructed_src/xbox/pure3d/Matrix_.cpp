@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::pddiStack<math::Matrix>::vfunc_00 (0x0029E600, 47 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::pddiStack<math::Matrix>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // bin: xb
 // va: 0x0029E600

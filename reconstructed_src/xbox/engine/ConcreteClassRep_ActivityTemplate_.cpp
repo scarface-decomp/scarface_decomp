@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ActivityTemplate>::vfunc_01 (0x0011ADD0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new ActivityTemplate for the class system: allocates 92 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<ActivityTemplate>::vfunc_01 (0x0011ADD0, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> int ConcreteClassRep<ActivityTemplate>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ActivityTemplate>::vfunc_02 (0x0011C760, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for ActivityTemplate's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CollisionSurfaceType>::vfunc_02 (0x00011450), which was matched first;
 // its addresses and names were swapped for this function's.

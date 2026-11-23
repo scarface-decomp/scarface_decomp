@@ -406,6 +406,7 @@ int SpriteParticleEmitter::vfunc_05()
 // ============================================================================
 // [VERIFIED] pure3d::SpriteParticleEmitter::vfunc_03 (0x0025FD10, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::SpriteParticleEmitter's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -438,6 +439,7 @@ SpriteParticleEmitter* SpriteParticleEmitter::vfunc_03(unsigned int flags)
 // ============================================================================
 // [VERIFIED] pure3d::SpriteParticleEmitter::vfunc_17 (0x002957F0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::SpriteParticleEmitter: Always returns 1414680659.
 // ============================================================================
 // Same machine code as pure3d::SpriteParticleUpdater::vfunc_04 (Proto 0x002584F0), which was matched first;
 // its addresses and names were swapped for this function's.

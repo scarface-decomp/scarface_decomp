@@ -241,6 +241,7 @@ L_20:
 // ============================================================================
 // [VERIFIED] DealerSpawnObject::vfunc_00 (0x001DEA80, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns DealerSpawnObject's static class record (ConcreteClassRep<DealerSpawnObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -264,6 +265,7 @@ void* DealerSpawnObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] DealerSpawnObject::vfunc_01 (0x001DEC90, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: DealerSpawnObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as GameGroup::vfunc_01 (0x000290E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -297,6 +299,7 @@ DealerSpawnObject* DealerSpawnObject::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] DealerSpawnObject::vfunc_45 (0x0026D930, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: DealerSpawnObject: Always returns 8.
 // ============================================================================
 // Same machine code as DealerSpawnObject::vfunc_43 (Proto 0x0021E9A0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleSpawnObject>::vfunc_01 (0x001E7A60, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new VehicleSpawnObject for the class system: allocates 532 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<AITask_IdleAction>::vfunc_01 (0x0011AEB0), which was matched first;
 // its addresses and names were swapped for this function's.

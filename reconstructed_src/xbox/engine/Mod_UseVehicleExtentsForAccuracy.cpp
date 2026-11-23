@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AICommandMods::Mod_UseVehicleExtentsForAccuracy::vfunc_01 (0x00134B80, 34 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI command modifier: saves the character's 'use vehicle extents for accuracy' flag (byte 0x567) and sets it to this modifier's value.
 // ============================================================================
 // AICommandMods::Mod_UseVehicleExtentsForAccuracy::vfunc_01 (0x00134B80, 34 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] GangSpawnObject::vfunc_00 (0x001E0120, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns GangSpawnObject's static class record (ConcreteClassRep<GangSpawnObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -224,6 +225,7 @@ L_4E:
 // ============================================================================
 // [VERIFIED] GangSpawnObject::vfunc_01 (0x001E0630, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GangSpawnObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as GameGroup::vfunc_01 (0x000290E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -257,6 +259,7 @@ GangSpawnObject* GangSpawnObject::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] GangSpawnObject::vfunc_45 (0x0026D450, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GangSpawnObject: Always returns 16.
 // ============================================================================
 // Same machine code as GangSpawnObject::vfunc_43 (Proto 0x00213E60), which was matched first;
 // its addresses and names were swapped for this function's.

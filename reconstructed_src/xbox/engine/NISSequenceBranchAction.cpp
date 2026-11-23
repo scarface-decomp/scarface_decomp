@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] NISSequenceBranchAction::vfunc_03 (0x00180E00, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISSequenceBranchAction's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as NISSequenceCueAction::vfunc_03 (0x00180C30), which was matched first;
 // its addresses and names were swapped for this function's.

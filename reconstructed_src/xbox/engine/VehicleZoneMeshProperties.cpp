@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] VehicleZoneMeshProperties::vfunc_00 (0x0020D680, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns VehicleZoneMeshProperties's static class record (ConcreteClassRep<VehicleZoneMeshProperties>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* VehicleZoneMeshProperties::vfunc_00()
 // ============================================================================
 // [VERIFIED] VehicleZoneMeshProperties::vfunc_01 (0x0020E150, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehicleZoneMeshProperties's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as SoundPlayTrack::vfunc_03 (0x000E9E90), which was matched first;
 // its addresses and names were swapped for this function's.

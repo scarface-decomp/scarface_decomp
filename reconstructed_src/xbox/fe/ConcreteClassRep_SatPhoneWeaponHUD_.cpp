@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<SatPhoneWeaponHUD>::vfunc_01 (0x001BCC00, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new SatPhoneWeaponHUD for the class system: allocates 276 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<IntersectionObject>::vfunc_01 (0x0014BAE0), which was matched first;
 // its addresses and names were swapped for this function's.

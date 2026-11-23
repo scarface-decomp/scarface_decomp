@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteWheeledVehiclePhysicsTemplate<4>::vfunc_00 (0x0020BE30, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns ConcreteWheeledVehiclePhysicsTemplate<4>'s static class record (ConcreteClassRep<ConcreteWheeledVehiclePhysicsTemplate<4>>), the object's run-time type.
 // ============================================================================
 // Same machine code as ConcreteWheeledVehiclePhysicsTemplate<4>::vfunc_00 (Proto 0x001D0910), which was matched first;
 // its addresses and names were swapped for this function's.

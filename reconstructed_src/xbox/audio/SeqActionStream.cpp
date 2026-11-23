@@ -57,6 +57,7 @@ int SeqActionStream::vfunc_02(int a1, bool a2)
 // ============================================================================
 // [VERIFIED] audio::SeqActionStream::vfunc_00 (0x002DC240, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::SeqActionStream's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as SoundManager::SoundPlayerHandle::vfunc_00 (0x00077F00), which was matched first;
 // its addresses and names were swapped for this function's.

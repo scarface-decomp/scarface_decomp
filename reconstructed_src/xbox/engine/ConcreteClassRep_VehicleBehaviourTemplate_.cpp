@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleBehaviourTemplate>::vfunc_01 (0x00205BF0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new VehicleBehaviourTemplate for the class system: allocates 36 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<SpawnTriggerObject>::vfunc_01 (0x001E7AC0), which was matched first;
 // its addresses and names were swapped for this function's.

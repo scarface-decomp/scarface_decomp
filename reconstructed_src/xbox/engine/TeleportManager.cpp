@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] TeleportManager::vfunc_00 (0x00232210, 64 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: TeleportManager's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // TeleportManager::vfunc_00 (0x00232210, 64 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

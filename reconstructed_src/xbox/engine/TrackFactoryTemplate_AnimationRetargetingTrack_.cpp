@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<AnimationRetargetingTrack>::vfunc_03 (0x000DF0A0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::TrackFactoryTemplate<AnimationRetargetingTrack>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> fight::TrackFactoryTemplate<AnimationRetargetingTrack>* fight::Track
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<AnimationRetargetingTrack>::vfunc_07 (0x000DF0D0, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for AnimationRetargetingTrack: allocates a new one (60 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<AnimationRetargetingTrack>::vfunc_07 (0x000DF0D0, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

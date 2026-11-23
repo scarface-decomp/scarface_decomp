@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<TapePlayer>::vfunc_01 (0x001D78F0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new TapePlayer for the class system: allocates 68 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<BoatAITask_CallForBoat>::vfunc_01 (0x00149CD0), which was matched first;
 // its addresses and names were swapped for this function's.

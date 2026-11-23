@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] NISStreamData::vfunc_03 (0x000CEA90, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISStreamData's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // NISStreamData::vfunc_03 (0x000CEA90, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

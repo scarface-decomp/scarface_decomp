@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_03 (0x000DF490, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::TrackFactoryTemplate<DramaticCameraTrack>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> fight::TrackFactoryTemplate<DramaticCameraTrack>* fight::TrackFactor
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_07 (0x000DF4C0, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for DramaticCameraTrack: allocates a new one (116 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // Same machine code as fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_07 (Proto 0x000CD6F0), which was matched first;
 // its addresses and names were swapped for this function's.

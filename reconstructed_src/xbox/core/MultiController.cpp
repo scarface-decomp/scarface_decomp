@@ -319,6 +319,7 @@ int MultiController::vfunc_05()
 // ============================================================================
 // [VERIFIED] pure3d::MultiController::vfunc_03 (0x00272D60, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::MultiController's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
 // its addresses and names were swapped for this function's.

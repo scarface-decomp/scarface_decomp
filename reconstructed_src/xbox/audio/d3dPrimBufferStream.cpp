@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_15 (0x002AD8C0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dPrimBufferStream: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // Same machine code as pure3d::d3dPrimBufferStream::vfunc_15 (PC 0x00703DC0), which was matched first;
 // its addresses and names were swapped for this function's.

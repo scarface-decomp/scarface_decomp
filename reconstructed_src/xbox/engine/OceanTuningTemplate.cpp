@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] OceanTuningTemplate::vfunc_00 (0x00200050, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns OceanTuningTemplate's static class record (ConcreteClassRep<OceanTuningTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

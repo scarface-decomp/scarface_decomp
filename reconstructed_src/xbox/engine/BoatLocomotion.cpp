@@ -97,6 +97,7 @@ bool BoatLocomotion::vfunc_05(int a1)
 // ============================================================================
 // [VERIFIED] BoatLocomotion::vfunc_00 (0x000A1310, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: BoatLocomotion's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // BoatLocomotion::vfunc_00 (0x000A1310, 46 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AICommands::Cmd_Engage::vfunc_06 (0x0012E480, 80 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Engage command step: when it has a target, finds two parts of the character by run-time type and clears a flag on each (at +0xD4 and +0x54).
 // ============================================================================
 // AICommands::Cmd_Engage::vfunc_06 (0x0012E480, 80 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

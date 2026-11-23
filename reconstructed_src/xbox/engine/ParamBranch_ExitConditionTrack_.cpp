@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] fight::ParamBranch<ExitConditionTrack>::vfunc_01 (0x000E9300, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamBranch<ExitConditionTrack>: Always returns 9.
 // ============================================================================
 // Same machine code as fight::ParamBranch<ExitConditionTrack>::vfunc_01 (Proto 0x000D6C80), which was matched first;
 // its addresses and names were swapped for this function's.

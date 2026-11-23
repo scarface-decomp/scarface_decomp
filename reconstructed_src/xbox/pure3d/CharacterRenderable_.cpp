@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] content::LoadInventory::DynamicCaster<renderer::CharacterRenderable>::vfunc_00 (0x00049BC0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Checks a loaded object's type: dynamic_cast to renderer::CharacterRenderable (the C++ run-time cast; null if it is something else).
 // ============================================================================
 // Same machine code as content::LoadInventory::DynamicCaster<ravenphysics::CollisionObject>::vfunc_00 (0x00013900), which was matched first;
 // its addresses and names were swapped for this function's.

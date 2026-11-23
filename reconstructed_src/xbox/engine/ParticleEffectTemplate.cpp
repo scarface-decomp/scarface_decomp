@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] ParticleEffectTemplate::vfunc_00 (0x001FC100, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns ParticleEffectTemplate's static class record (ConcreteClassRep<ParticleEffectTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -75,6 +76,7 @@ void ParticleEffectTemplate::vfunc_11()
 // ============================================================================
 // [VERIFIED] ParticleEffectTemplate::vfunc_01 (0x001FC1E0, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ParticleEffectTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as FireTemplate::vfunc_01 (0x00188930), which was matched first;
 // its addresses and names were swapped for this function's.

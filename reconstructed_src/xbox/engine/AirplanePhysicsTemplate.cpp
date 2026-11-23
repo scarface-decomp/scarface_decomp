@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AirplanePhysicsTemplate::vfunc_00 (0x00200460, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AirplanePhysicsTemplate's static class record (ConcreteClassRep<AirplanePhysicsTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* AirplanePhysicsTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] AirplanePhysicsTemplate::vfunc_01 (0x00200470, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AirplanePhysicsTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AirplanePhysicsTemplate::vfunc_01 (0x00200470, 49 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

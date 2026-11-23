@@ -300,6 +300,7 @@ void PolySkin::vfunc_12(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::PolySkin::vfunc_03 (0x00277F00, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::PolySkin's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -332,6 +333,7 @@ PolySkin* PolySkin::vfunc_03(unsigned int flags)
 // ============================================================================
 // [VERIFIED] pure3d::PolySkin::vfunc_05 (0x00278110, 33 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: PolySkin: makes a new 112-byte PolySkin that is a copy of this one; null if out of memory.
 // ============================================================================
 // Same machine code as pure3d::PolySkin::vfunc_05 (Proto 0x00229B30), which was matched first;
 // its addresses and names were swapped for this function's.

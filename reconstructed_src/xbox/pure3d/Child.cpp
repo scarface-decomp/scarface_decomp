@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::frontend::Child::vfunc_03 (0x0028D4D0, 39 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::frontend::Child's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as pure3d::frontend::Drawable::vfunc_03 (0x00248C00), which was matched first;
 // its addresses and names were swapped for this function's.

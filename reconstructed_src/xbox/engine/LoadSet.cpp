@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] LoadSet::vfunc_00 (0x00061900, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: LoadSet: Adds one to the counter at offset 0x14 (e.g. a reference count).
 // ============================================================================
 // LoadSet::vfunc_00 (0x00061900, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

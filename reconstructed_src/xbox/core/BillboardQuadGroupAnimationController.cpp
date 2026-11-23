@@ -69,6 +69,7 @@ bool BillboardQuadGroupAnimationController::vfunc_28(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::BillboardQuadGroupAnimationController::vfunc_05 (0x002A8420, 79 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Billboard quad group animation controller: makes a copy of itself (56 bytes) that shares the same animated object.
 // ============================================================================
 // Same machine code as pure3d::VertexAnimController::vfunc_05 (0x002A6DF0), which was matched first;
 // its addresses and names were swapped for this function's.

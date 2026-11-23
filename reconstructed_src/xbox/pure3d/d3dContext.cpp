@@ -1355,6 +1355,7 @@ void d3dContext::vfunc_89(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_96 (0x002660A0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dContext: Always returns 2048.
 // ============================================================================
 // Same machine code as pure3d::d3dContext::vfunc_96 (Proto 0x00234DF0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -1883,6 +1884,7 @@ void d3dContext::vfunc_129(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_03 (0x0026B720, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dContext's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Branch::vfunc_03 (0x0023B160), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2324,6 +2326,7 @@ int d3dContext::vfunc_11()
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_13 (0x0029D5D0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dContext: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // pure3d::d3dContext::vfunc_13 (0x0029D5D0, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -3253,6 +3256,7 @@ int d3dContext::vfunc_31(int a1, int a2, int a3, int a4)
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_37 (0x0029D8F0, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dContext: Always returns 0.
 // ============================================================================
 // Same machine code as pure3d::d3dContext::vfunc_37 (Proto 0x00239A50), which was matched first;
 // its addresses and names were swapped for this function's.

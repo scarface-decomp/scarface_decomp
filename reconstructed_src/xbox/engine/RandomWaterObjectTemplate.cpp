@@ -45,6 +45,7 @@ void RandomWaterObjectTemplate::vfunc_04(int a1)
 // ============================================================================
 // [VERIFIED] RandomWaterObjectTemplate::vfunc_00 (0x00200D00, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns RandomWaterObjectTemplate's static class record (ConcreteClassRep<RandomWaterObjectTemplate>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -110,6 +111,7 @@ void RandomWaterObjectTemplate::vfunc_11()
 // ============================================================================
 // [VERIFIED] RandomWaterObjectTemplate::vfunc_01 (0x00200DC0, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: RandomWaterObjectTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as FireTemplate::vfunc_01 (0x00188930), which was matched first;
 // its addresses and names were swapped for this function's.

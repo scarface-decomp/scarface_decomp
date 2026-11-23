@@ -240,6 +240,7 @@ bool Class_00213560::sub_00213560()
 // ============================================================================
 // [VERIFIED] AirplaneObject::vfunc_00 (0x00213570, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AirplaneObject's static class record (ConcreteClassRep<AirplaneObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -263,6 +264,7 @@ void* AirplaneObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] AirplaneObject::vfunc_01 (0x00213690, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AirplaneObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_01 (0x00013840), which was matched first;
 // its addresses and names were swapped for this function's.

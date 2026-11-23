@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] StatePropEngine::vfunc_00 (0x000895D0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: StatePropEngine: calls a routine on the object 0x0C bytes before this interface (its owner).
 // ============================================================================
 // StatePropEngine::vfunc_00 (0x000895D0, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

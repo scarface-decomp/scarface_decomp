@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] VehicleDropObjectProperties::vfunc_04 (0x00200700, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Vehicle drop-object properties: runs the base step, then sets the value at +0x44 to the value at +0x48 times a global scale.
 // ============================================================================
 // Same machine code as VehicleDropObjectProperties::vfunc_05 (Proto 0x001C5130), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -47,6 +48,7 @@ void VehicleDropObjectProperties::vfunc_04(int a1)
 // ============================================================================
 // [VERIFIED] VehicleDropObjectProperties::vfunc_00 (0x002008B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns VehicleDropObjectProperties's static class record (ConcreteClassRep<VehicleDropObjectProperties>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

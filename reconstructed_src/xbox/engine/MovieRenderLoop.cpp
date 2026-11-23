@@ -71,6 +71,7 @@ void MovieRenderLoop::vfunc_04(int a1)
 // ============================================================================
 // [VERIFIED] MovieRenderLoop::vfunc_00 (0x000CE960, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: MovieRenderLoop: Adds one to the counter at offset 0x08 (e.g. a reference count).
 // ============================================================================
 // MovieRenderLoop::vfunc_00 (0x000CE960, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] fight::ParamVector<AnimationRetargetingTrack>::vfunc_01 (0x000E7A50, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamVector<AnimationRetargetingTrack>: Always returns 6.
 // ============================================================================
 // Same machine code as fight::ParamVector<AnimationRetargetingTrack>::vfunc_01 (Proto 0x0018B8B0), which was matched first;
 // its addresses and names were swapped for this function's.

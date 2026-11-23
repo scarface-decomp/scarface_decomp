@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] core::IMemoryAllocator::vfunc_13 (0x0006F990, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Memory allocator: always answers true (the default for this yes/no query).
 // ============================================================================
 // core::IMemoryAllocator::vfunc_13 (0x0006F990, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

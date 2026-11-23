@@ -251,6 +251,7 @@ L_2E:
 // ============================================================================
 // [VERIFIED] pure3d::d3dDisplay::vfunc_17 (0x0029AB80, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dDisplay: Always returns 0.
 // ============================================================================
 // Same machine code as pure3d::d3dDisplay::vfunc_16 (Proto 0x0025E060), which was matched first;
 // its addresses and names were swapped for this function's.

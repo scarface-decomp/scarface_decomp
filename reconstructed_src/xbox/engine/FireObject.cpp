@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] FireObject::vfunc_00 (0x001881C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns FireObject's static class record (ConcreteClassRep<FireObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -227,6 +228,7 @@ L_42:
 // ============================================================================
 // [VERIFIED] FireObject::vfunc_01 (0x00188860, 51 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FireObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // FireObject::vfunc_01 (0x00188860, 51 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

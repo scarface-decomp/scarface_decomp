@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::pddiTexture::vfunc_20 (0x002994D0, 3 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::pddiTexture: Does nothing (an empty function, e.g. a base-class default).
 // ============================================================================
 // pure3d::pddiTexture::vfunc_20 (0x002994D0, 3 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -52,6 +53,7 @@ void pddiTexture::vfunc_20(int a1, int a2, int a3, int a4, int a5, int a6, int a
 // ============================================================================
 // [VERIFIED] pure3d::pddiTexture::vfunc_03 (0x002994E0, 39 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::pddiTexture's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as fight::Param::vfunc_03 (0x00239CE0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -129,6 +129,7 @@ L_4E:
 // ============================================================================
 // [VERIFIED] AIActionTreeCreatingTask::vfunc_00 (0x000EFC10, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AIActionTreeCreatingTask's static class record (ConcreteClassRep<AIActionTreeCreatingTask>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -152,6 +153,7 @@ void* AIActionTreeCreatingTask::vfunc_00()
 // ============================================================================
 // [VERIFIED] AIActionTreeCreatingTask::vfunc_01 (0x000EFC20, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionTreeCreatingTask's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -103,6 +103,7 @@ bool Wait_HearGunShot::vfunc_01(int a1, int a2)
 // ============================================================================
 // [VERIFIED] AICommandWaits::Wait_HearGunShot::vfunc_03 (0x00138B90, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AICommandWaits::Wait_HearGunShot's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CollisionManager::CollisionManagerFlowClient::vfunc_00 (0x00016060), which was matched first;
 // its addresses and names were swapped for this function's.

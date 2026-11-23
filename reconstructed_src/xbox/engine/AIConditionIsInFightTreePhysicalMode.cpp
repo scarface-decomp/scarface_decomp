@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AIConditionIsInFightTreePhysicalMode::vfunc_04 (0x00121950, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition: true when the character's fight-tree physical mode (offset 0x41C of its target) equals the mode this condition asks for.
 // ============================================================================
 // bin: xb
 // va: 0x00121950

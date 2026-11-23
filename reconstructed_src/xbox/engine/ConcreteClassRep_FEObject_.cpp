@@ -52,6 +52,7 @@ template <> int ConcreteClassRep<FEObject>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<FEObject>::vfunc_02 (0x000253C0, 61 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for FEObject's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // ConcreteClassRep<FEObject>::vfunc_02 (0x000253C0, 61 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

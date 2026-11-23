@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] MortarObject::vfunc_00 (0x001EC7C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns MortarObject's static class record (ConcreteClassRep<MortarObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35,6 +36,7 @@ void* MortarObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] MortarObject::vfunc_01 (0x001EC930, 72 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: MortarObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // MortarObject::vfunc_01 (0x001EC930, 72 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -224,6 +224,7 @@ void d3dShadowDecalShader::vfunc_13()
 // ============================================================================
 // [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_03 (0x002C54A0, 56 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dShadowDecalShader's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as pure3d::d3dSimpleShader::vfunc_03 (0x0029FEA0), which was matched first;
 // its addresses and names were swapped for this function's.

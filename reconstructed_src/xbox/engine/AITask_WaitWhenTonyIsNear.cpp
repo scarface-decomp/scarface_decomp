@@ -151,6 +151,7 @@ void AITask_WaitWhenTonyIsNear::vfunc_39()
 // ============================================================================
 // [VERIFIED] AITask_WaitWhenTonyIsNear::vfunc_00 (0x0010E830, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns AITask_WaitWhenTonyIsNear's static class record (ConcreteClassRep<AITask_WaitWhenTonyIsNear>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -174,6 +175,7 @@ void* AITask_WaitWhenTonyIsNear::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_WaitWhenTonyIsNear::vfunc_01 (0x0010E870, 65 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wait-when-Tony-is-near task's deleting destructor: tells its driver to let go of the target, shuts the driver down, then frees itself when asked.
 // ============================================================================
 // Same machine code as AITask_ChallengeTony::vfunc_01 (0x00105D40), which was matched first;
 // its addresses and names were swapped for this function's.

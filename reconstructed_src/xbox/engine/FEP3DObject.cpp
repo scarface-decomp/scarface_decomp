@@ -35,6 +35,7 @@ void FEP3DObject::vfunc_04(unsigned char mode)
 // ============================================================================
 // [VERIFIED] FEP3DObject::vfunc_00 (0x00023170, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns FEP3DObject's static class record (ConcreteClassRep<FEP3DObject>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

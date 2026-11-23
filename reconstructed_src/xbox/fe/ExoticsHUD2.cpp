@@ -43,6 +43,7 @@ float ExoticsHUD2::vfunc_41()
 // ============================================================================
 // [VERIFIED] ExoticsHUD2::vfunc_00 (0x0018B0A0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns ExoticsHUD2's static class record (ConcreteClassRep<ExoticsHUD2>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -125,6 +126,7 @@ void ExoticsHUD2::vfunc_04(int a1)
 // ============================================================================
 // [VERIFIED] ExoticsHUD2::vfunc_01 (0x0018BD90, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ExoticsHUD2's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -42,6 +42,7 @@ void AIActionPlayAnimUsingUID::vfunc_02()
 // ============================================================================
 // [VERIFIED] AIActionPlayAnimUsingUID::vfunc_00 (0x00121240, 39 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionPlayAnimUsingUID's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionPlayAnimUsingUID::vfunc_00 (0x00121240, 39 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

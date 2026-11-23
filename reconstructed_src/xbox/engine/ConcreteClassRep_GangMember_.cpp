@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<GangMember>::vfunc_01 (0x00179F60, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new GangMember for the class system: allocates 1088 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<GangMember>::vfunc_01 (0x00179F60, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

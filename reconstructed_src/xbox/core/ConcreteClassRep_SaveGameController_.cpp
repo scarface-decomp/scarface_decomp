@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<SaveGameController>::vfunc_01 (0x000CA100, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new SaveGameController for the class system: allocates 196 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<SaveGameController>::vfunc_01 (0x000CA100, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> int ConcreteClassRep<SaveGameController>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<SaveGameController>::vfunc_02 (0x000CA130, 39 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for SaveGameController's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<SaveGameObject>::vfunc_02 (0x000CA0D0), which was matched first;
 // its addresses and names were swapped for this function's.

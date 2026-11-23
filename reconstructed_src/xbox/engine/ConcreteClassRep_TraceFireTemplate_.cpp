@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<TraceFireTemplate>::vfunc_01 (0x001FDB50, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new TraceFireTemplate for the class system: allocates 52 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CarAITask>::vfunc_01 (0x00149E40), which was matched first;
 // its addresses and names were swapped for this function's.

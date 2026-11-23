@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] fight::ParamConditionGroup<ExitConditionTrack>::vfunc_01 (0x000E9310, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamConditionGroup<ExitConditionTrack>: Always returns 10.
 // ============================================================================
 // Same machine code as fight::ParamConditionGroup<ExitConditionTrack>::vfunc_01 (Proto 0x000D6C90), which was matched first;
 // its addresses and names were swapped for this function's.

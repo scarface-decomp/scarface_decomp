@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ConditionFactoryTemplate<AnimationStateCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> fight::ConditionFactoryTemplate<AnimationStateCondition>* fight::Con
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_07 (0x000DE500, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for AnimationStateCondition: allocates a new one (20 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_07 (0x000DE500, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

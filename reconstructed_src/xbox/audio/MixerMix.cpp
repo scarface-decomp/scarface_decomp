@@ -37,6 +37,7 @@ int MixerMix::vfunc_02()
 // ============================================================================
 // [VERIFIED] audio::MixerMix::vfunc_00 (0x002D0570, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::MixerMix: Adds one to the counter at offset 0x48 (e.g. a reference count).
 // ============================================================================
 // audio::MixerMix::vfunc_00 (0x002D0570, 4 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -96,6 +97,7 @@ void MixerMix::vfunc_01()
 // ============================================================================
 // [VERIFIED] audio::MixerMix::vfunc_03 (0x002D0D70, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::MixerMix's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as SoundManager::StatePropSoundPlayer::vfunc_00 (0x00082430), which was matched first;
 // its addresses and names were swapped for this function's.

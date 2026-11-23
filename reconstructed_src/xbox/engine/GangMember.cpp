@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] GangMember::vfunc_00 (0x0016E290, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns GangMember's static class record (ConcreteClassRep<GangMember>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

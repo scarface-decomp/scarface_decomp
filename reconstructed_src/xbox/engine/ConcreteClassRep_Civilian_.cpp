@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<Civilian>::vfunc_01 (0x00179E40, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new Civilian for the class system: allocates 1072 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<CharacterObject>::vfunc_01 (0x00179120), which was matched first;
 // its addresses and names were swapped for this function's.

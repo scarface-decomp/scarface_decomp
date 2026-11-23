@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_03 (0x000DE9A0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ConditionFactoryTemplate<DirectionalGetHitCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49,6 +50,7 @@ template <> fight::ConditionFactoryTemplate<DirectionalGetHitCondition>* fight::
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_07 (0x000DE9D0, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for DirectionalGetHitCondition: allocates a new one (20 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_07 (0x000DE500), which was matched first;
 // its addresses and names were swapped for this function's.

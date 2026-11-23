@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] NISPackage::vfunc_00 (0x000CD8C0, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISPackage: Adds one to the counter at offset 0x94 (e.g. a reference count).
 // ============================================================================
 // NISPackage::vfunc_00 (0x000CD8C0, 7 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -84,6 +85,7 @@ int NISPackage::vfunc_02()
 // ============================================================================
 // [VERIFIED] NISPackage::vfunc_03 (0x000CDF30, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISPackage's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.

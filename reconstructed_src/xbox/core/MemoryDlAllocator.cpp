@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::MemoryDlAllocator::vfunc_03 (0x0028EA40, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::MemoryDlAllocator's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as core::ControllerSystemXBox::vfunc_03 (0x00248820), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -76,6 +77,7 @@ MemoryDlAllocator::MemoryDlAllocator() {}                  // building one is wh
 // ============================================================================
 // [VERIFIED] core::MemoryDlAllocator::vfunc_00 (0x0028FCF0, 4 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::MemoryDlAllocator: Adds one to the counter at offset 0x3C (e.g. a reference count).
 // ============================================================================
 // Same machine code as core::MemoryDlAllocator::vfunc_00 (Proto 0x0024B0B0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AIStimulusTable>::vfunc_01 (0x00119B80, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new AIStimulusTable for the class system: allocates 72 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // ConcreteClassRep<AIStimulusTable>::vfunc_01 (0x00119B80, 42 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -47,6 +48,7 @@ template <> int ConcreteClassRep<AIStimulusTable>::vfunc_01()
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AIStimulusTable>::vfunc_02 (0x00119BB0, 39 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for AIStimulusTable's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // ConcreteClassRep<AIStimulusTable>::vfunc_02 (0x00119BB0, 39 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

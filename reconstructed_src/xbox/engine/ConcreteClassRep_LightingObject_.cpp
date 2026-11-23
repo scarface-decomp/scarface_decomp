@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<LightingObject>::vfunc_01 (0x001D2A90, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Creates a new LightingObject for the class system: allocates 180 bytes and runs its constructor; null if the allocation fails.
 // ============================================================================
 // Same machine code as ConcreteClassRep<HUDHeatMeter>::vfunc_01 (0x001BE0F0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] DrugWarsHUD::vfunc_00 (0x00192DA0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns DrugWarsHUD's static class record (ConcreteClassRep<DrugWarsHUD>), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -191,6 +192,7 @@ L_7B:
 // ============================================================================
 // [VERIFIED] DrugWarsHUD::vfunc_01 (0x00193040, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: DrugWarsHUD's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_03 (0x00011F20), which was matched first;
 // its addresses and names were swapped for this function's.
