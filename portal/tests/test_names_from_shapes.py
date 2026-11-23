@@ -50,3 +50,38 @@ def test_the_rules():
 def test_the_destructor_takes_the_class_name_without_namespace_or_arguments():
     assert N.short("fight::ConditionFactoryTemplate<fight::AndCondition>") == "ConditionFactoryTemplate"
     assert N.short("om::MetaType<audio::ListenerEffectXBox>") == "MetaType" and N.short("Car") == "Car"
+
+
+def test_a_class_records_set_up_is_its_init():
+    found = {k: name for k, (name, _why) in N.find(entries()).items()}
+    assert found["xb:0x00030000"] == "ConcreteClassRep<Car>::Init"
+
+
+class Image:
+    """A program image with one class record: its vptr's locator names a type."""
+    def __init__(self, records):
+        import struct
+        self.mem = {}
+        for i, (at, type_name) in enumerate(records.items()):
+            vt, col, td = 0x00500000 + i * 0x100, 0x00600000 + i * 0x100, 0x00700000 + i * 0x100
+            self.mem[at] = struct.pack("<I", vt)
+            self.mem[vt - 4] = struct.pack("<I", col)
+            self.mem[col + 12] = struct.pack("<I", td)
+            self.mem[td + 8] = type_name.encode() + b"\0"
+
+    def read(self, at, n):
+        return (self.mem.get(at, b"") + b"\0" * n)[:n]
+
+
+def test_the_records_own_type_decides_a_getter():
+    """With the program file: a getter whose record's type is ConcreteClassRep<its class> is named even when the
+    record's set-up isn't matched; one returning another class's record is left alone."""
+    es = entries()
+    del es["xb:0x00030000"]                                                  # the set-up isn't matched here
+    es["xb:0x00030600"] = fn("Boat::vfunc_00", "{\n    return DAT_00400100;\n}")
+    img = Image({0x00400000: N.mangled_rep("Car"), 0x00400100: N.mangled_rep("ns::Ship")})
+    found = {k: name for k, (name, _why) in N.find(es, {"xb": img}).items()}
+    assert found["xb:0x00030100"] == "Car::GetClassRep"                     # its own record, by type
+    assert "xb:0x00030200" not in found and "xb:0x00030600" not in found      # Car's and ns::Ship's records
+    assert N.mangled_rep("ns::Ship") == ".?AV?$ConcreteClassRep@VShip@ns@@@@"
+    assert "xb:0x00030100" not in {k for k in N.find(es)}                    # without the file: not certain

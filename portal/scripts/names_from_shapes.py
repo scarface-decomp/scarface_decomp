@@ -18,9 +18,19 @@ information (RTTI) already gives them: the name says which of that class's funct
    the same class, writes: `sub_X(root, record+0x20); record+0x24 = parent record;`) is the one that hands
    it out.
 
+   With the game's program file in binaries/ (default.xbe, game.xbe), the record's own run-time type
+   information is read too (vptr -> complete object locator -> type descriptor): a getter whose record's
+   type is ConcreteClassRep<Class> is named even when the record's set-up function isn't matched yet, and
+   one whose record is another class's (a class that has no record of its own and reports its parent's)
+   is left alone whatever else says.
+
 3. Create -> ConcreteClassRep<Class>::Create, or Factory<T>::Create for the fight factories
    (fight::*FactoryTemplate<T>): allocate N bytes with the allocator the class records (or the factories)
    use, and if that worked, construct the object in it and return it.
+
+4. Set-up -> ConcreteClassRep<Class>::Init: the record's function that links its namespace under its
+   parent's (classLinkNamespaces(parent record + 0x20, this record + 0x20), named from the game's own error
+   message) and keeps the parent record at +0x24.
 
 Every name records its rule and the evidence in "why".
 """
@@ -39,6 +49,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "portal" / "tools"))
 
 import names as NAMES  # noqa: E402
+
+FILES = {"xb": "default.xbe", "proto": "game.xbe", "pc": "Scarface.exe"}
 
 BY = "the matched code's own shape (portal/scripts/names_from_shapes.py)"
 MIN_FREE = 10
@@ -74,8 +86,38 @@ def short(cls: str) -> str:
     return cls[cut:].split("<")[0]
 
 
-def find(entries: Dict[str, dict]) -> Dict[str, Tuple[str, str]]:
-    """{key: (name, why)} for every version in the registry."""
+def mangled_rep(cls: str) -> str:
+    """The type descriptor name MSVC gives ConcreteClassRep<cls> (a class without template arguments)."""
+    return ".?AV?$ConcreteClassRep@V" + "@".join(reversed(cls.split("::"))) + "@@@@"
+
+
+def record_type(img, at: int) -> str:
+    """The type descriptor name of the object at `at` (its vptr's complete object locator), or ""."""
+    import struct
+    try:
+        vt = struct.unpack("<I", img.read(at, 4))[0]
+        col = struct.unpack("<I", img.read(vt - 4, 4))[0]
+        td = struct.unpack("<I", img.read(col + 12, 4))[0]
+        return img.read(td + 8, 256).split(b"\0")[0].decode("latin-1")
+    except Exception:  # noqa: BLE001 - not an object with type information: no answer
+        return ""
+
+
+def images() -> dict:
+    """The game's program files that are here (binaries/), by version."""
+    out = {}
+    for b, name in FILES.items():
+        path = ROOT / "binaries" / name
+        if path.exists():
+            from sf_binaries import BinaryImage
+            out[b] = BinaryImage(path)
+    return out
+
+
+def find(entries: Dict[str, dict], imgs: dict = None) -> Dict[str, Tuple[str, str]]:
+    """{key: (name, why)} for every version in the registry. imgs: the game's program files by version
+    (images()), for the run-time type check of class records; without them only the code is used."""
+    imgs = imgs or {}
     out: Dict[str, Tuple[str, str]] = {}
     for b in sorted({k.split(":")[0] for k in entries}):
         mine = {k: e for k, e in entries.items() if k.startswith(b + ":")}
@@ -106,16 +148,36 @@ def find(entries: Dict[str, dict]) -> Dict[str, Tuple[str, str]]:
                     int(m.group("at24"), 16) == int(m.group("at20"), 16) + 4:
                 record_of[int(m.group("at24"), 16) - 0x24] = (s.group("cls")[len("ConcreteClassRep<"):-1], k)
         getters = defaultdict(list)
+        img = imgs.get(b)
         for k, t in texts.items():
             m, s = RETURN_DAT.match(t), SYMBOL.match(mine[k].get("symbol", ""))
-            if m and s and record_of.get(int(m.group("at"), 16), ("",))[0] == s.group("cls"):
-                getters[s.group("cls")].append((k, int(m.group("at"), 16)))
+            if not (m and s):
+                continue
+            at, cls = int(m.group("at"), 16), s.group("cls")
+            rtti = record_type(img, at) if img is not None and "<" not in cls else ""
+            if rtti and rtti != mangled_rep(cls):
+                continue                                    # another class's record: inherited, not its own
+            if record_of.get(at, ("",))[0] == cls:
+                getters[cls].append((k, at, f"its set-up function ({record_of[at][1]}) writes that record's +0x24"))
+            elif rtti:
+                getters[cls].append((k, at, f"the record's own run-time type information says {rtti}"))
         for cls, found in getters.items():
             if len(found) == 1:
-                k, at = found[0]
-                out[k] = (f"{cls}::GetClassRep",
-                          f"Returns 0x{at:08X}, the record of ConcreteClassRep<{cls}>: its set-up function "
-                          f"({record_of[at][1]}) writes that record's +0x24.")
+                k, at, how = found[0]
+                out[k] = (f"{cls}::GetClassRep", f"Returns 0x{at:08X}, the record of ConcreteClassRep<{cls}>: {how}.")
+
+        # 4. the record's set-up: link its namespace under the parent's, keep the parent record
+        for k, t in texts.items():
+            s = SYMBOL.match(mine[k].get("symbol", ""))
+            m = REP_INIT.search(t)
+            if s and m and s.group("cls").startswith("ConcreteClassRep<") and \
+                    int(m.group("at24"), 16) == int(m.group("at20"), 16) + 4:
+                cls = s.group("cls")
+                link = re.search(r"(sub_[0-9A-F]{8})\(DAT_", t).group(1)
+                out[k] = (f"{cls}::Init",
+                          f"Links the record's namespace (+0x20) under its parent record's with {link} "
+                          f"(classLinkNamespaces, named from the game's own error message) and keeps the parent "
+                          f"record at +0x24.")
 
         # 3. create(): allocate, construct, return
         for k, t in texts.items():
@@ -141,7 +203,7 @@ def main() -> int:
     path = ROOT / "reports" / "names.json"
     data = NAMES.load(path)
     names = data.setdefault("names", {})
-    found = find(entries)
+    found = find(entries, images())
     taken = defaultdict(set)
     for k, v in names.items():
         taken[k.split(":")[0]].add(v["name"])
