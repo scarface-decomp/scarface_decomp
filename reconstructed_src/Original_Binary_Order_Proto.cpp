@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 8,295 of 17,544 functions matched (47.28%). NOT COMPLETE YET.
-// The 9,249 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 8,298 of 17,544 functions matched (47.30%). NOT COMPLETE YET.
+// The 9,246 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -49782,7 +49782,35 @@ L_48:
 // [TODO] 0x0008EAE0 sub_0008EAE0 (384 B)
 // [TODO] 0x0008EC60 sub_0008EC60 (69 B)
 // [TODO] 0x0008ECB0 sub_0008ECB0 (57 B)
-// [TODO] 0x0008ECF0 sub_0008ECF0 (57 B)
+// ============================================================================
+// [VERIFIED] sub_0008ECF0 (0x0008ECF0, 57 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0009A2B0 (0x0009A2B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0008ECF0
+// what: Formats text like printf into the next of 16 reusable 1 KB buffers and returns it.
+// tool: Claude Opus 5.5
+
+// sub_0008ECF0 (0x0008ECF0, 57 bytes)
+
+#include <stdio.h>
+#include <stdarg.h>
+
+extern "C" int DAT_00458790;                       // which buffer was used last
+extern "C" char DAT_00454790[16][1024];
+
+char* __cdecl sub_0008ECF0(const char* format, ...)
+{
+    DAT_00458790 = (DAT_00458790 + 1) % 16;
+    char* text = DAT_00454790[DAT_00458790];
+    va_list args;
+    va_start(args, format);
+    vsprintf(text, format, args);
+    return text;
+}
+
 // [TODO] 0x0008EDB0 sub_0008EDB0 (96 B)
 // [TODO] 0x0008EE10 sub_0008EE10 (69 B)
 // [TODO] 0x0008EE60 sub_0008EE60 (135 B)
@@ -239655,7 +239683,52 @@ void Class_001FDB30::sub_001FDB30(int a1)
     sub_002C9710((int)this, a1, 127);
 }
 
-// [TODO] 0x001FDB50 sub_001FDB50 (59 B)
+// ============================================================================
+// [VERIFIED] sub_001FDB50 (0x001FDB50, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00240630 (0x00240630), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001FDB50
+// what: Says whether the stream's current position is still inside the current entry's range (only when that entry has data).
+// tool: Claude Opus 5.5
+
+// sub_001FDB50 (0x001FDB50, 59 bytes)
+
+struct Source_001FDB50
+{
+    unsigned int sub_000DC5C0();
+};
+
+struct Entry_001FDB50
+{
+    int m_Field00;
+    unsigned int m_Field04;                        // +0x04
+    unsigned int m_Field08;                        // +0x08
+    unsigned int m_Field0C;                        // +0x0C
+};
+
+class Class_001FDB50
+{
+public:
+    int sub_001FDB50();
+    char m_pad00[0x80];
+    Entry_001FDB50 m_Entries[32];                  // +0x80
+    int m_Index;                                   // +0x280
+    Source_001FDB50* m_Source;                     // +0x284
+};
+
+int Class_001FDB50::sub_001FDB50()
+{
+    Entry_001FDB50* e = &m_Entries[m_Index];
+    if (e->m_Field08 > e->m_Field04) {
+        if (m_Source->sub_000DC5C0() < e->m_Field0C + e->m_Field08)
+            return 1;
+    }
+    return 0;
+}
+
 // [TODO] 0x001FDB90 sub_001FDB90 (245 B)
 // ============================================================================
 // [VERIFIED] sub_001FDC90 (0x001FDC90, 168 B)
@@ -239692,7 +239765,51 @@ int Class_001FDC90::sub_001FDC90(int a1)
     return *(int*)(((m_Field280 + 8) << 4) + (int)this);
 }
 
-// [TODO] 0x001FDD40 sub_001FDD40 (73 B)
+// ============================================================================
+// [VERIFIED] sub_001FDD40 (0x001FDD40, 73 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00240820 (0x00240820), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001FDD40
+// what: Leaves the current entry: moves the stream on past whatever is left of it, then drops back to the entry before.
+// tool: Claude Opus 5.5
+
+// sub_001FDD40 (0x001FDD40, 73 bytes)
+
+struct Source_001FDD40
+{
+    unsigned int sub_000DC5C0();
+    void sub_001FD9E0(unsigned int count);
+};
+
+struct Entry_001FDD40
+{
+    int m_Field00;
+    unsigned int m_Field04;                        // +0x04
+    unsigned int m_Field08;                        // +0x08
+    unsigned int m_Field0C;                        // +0x0C
+};
+
+class Class_001FDD40
+{
+public:
+    void sub_001FDD40();
+    char m_pad00[0x80];
+    Entry_001FDD40 m_Entries[32];                  // +0x80
+    int m_Index;                                   // +0x280
+    Source_001FDD40* m_Source;                     // +0x284
+};
+
+void Class_001FDD40::sub_001FDD40()
+{
+    unsigned int length = m_Entries[m_Index].m_Field0C;
+    unsigned int start = m_Entries[m_Index].m_Field08;
+    m_Source->sub_001FD9E0(start + length - m_Source->sub_000DC5C0());
+    m_Index--;
+}
+
 // ============================================================================
 // [VERIFIED] sub_001FDD90 (0x001FDD90, 16 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

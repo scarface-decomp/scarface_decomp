@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (4868 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (4873 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4,868 of 12,757 functions matched (38.16%). NOT COMPLETE YET.
-// The 7,889 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4,873 of 12,757 functions matched (38.20%). NOT COMPLETE YET.
+// The 7,884 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -36300,6 +36300,34 @@ bool __cdecl sub_00099BC0(int a1)
     }
 L_48:
     return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009A2B0 (0x0009A2B0, 57 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Formats text like printf into the next of 16 reusable 1 KB buffers and returns it.
+// ============================================================================
+// bin: xb
+// va: 0x0009A2B0
+// what: Formats text like printf into the next of 16 reusable 1 KB buffers and returns it.
+// tool: Claude Opus 5.5
+
+// sub_0009A2B0 (0x0009A2B0, 57 bytes)
+
+#include <stdio.h>
+#include <stdarg.h>
+
+extern "C" int DAT_004860D0;                       // which buffer was used last
+extern "C" char DAT_004820D0[16][1024];
+
+char* __cdecl sub_0009A2B0(const char* format, ...)
+{
+    DAT_004860D0 = (DAT_004860D0 + 1) % 16;
+    char* text = DAT_004820D0[DAT_004860D0];
+    va_list args;
+    va_start(args, format);
+    vsprintf(text, format, args);
+    return text;
 }
 
 // ============================================================================
@@ -89965,6 +89993,73 @@ void Class_00166CB0::sub_00166CB0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00166CE0 (0x00166CE0, 65 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the object it keeps a handle to; failing that, asks its member at +0x2AC for one and uses it if that one agrees.
+// ============================================================================
+// bin: xb
+// va: 0x00166CE0
+// what: Returns the object it keeps a handle to; failing that, asks its member at +0x2AC for one and uses it if that one agrees.
+// tool: Claude Opus 5.5
+
+// sub_00166CE0 (0x00166CE0, 65 bytes)
+
+extern "C" int __cdecl sub_0002AC90(int handle);          // LookUpHandle
+
+struct Object_00166CE0
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01(); virtual void vfunc_02(); virtual void vfunc_03(); virtual void vfunc_04();
+    virtual void vfunc_05(); virtual void vfunc_06(); virtual void vfunc_07(); virtual void vfunc_08();
+    virtual void vfunc_09(); virtual void vfunc_10(); virtual void vfunc_11(); virtual void vfunc_12();
+    virtual void vfunc_13(); virtual void vfunc_14(); virtual void vfunc_15(); virtual void vfunc_16();
+    virtual void vfunc_17(); virtual void vfunc_18(); virtual void vfunc_19(); virtual void vfunc_20();
+    virtual void vfunc_21(); virtual void vfunc_22(); virtual void vfunc_23(); virtual void vfunc_24();
+    virtual void vfunc_25(); virtual void vfunc_26(); virtual void vfunc_27(); virtual void vfunc_28();
+    virtual void vfunc_29(); virtual void vfunc_30(); virtual void vfunc_31(); virtual void vfunc_32();
+    virtual void vfunc_33(); virtual void vfunc_34(); virtual void vfunc_35(); virtual void vfunc_36();
+    virtual void vfunc_37(); virtual void vfunc_38(); virtual void vfunc_39(); virtual void vfunc_40();
+    virtual void vfunc_41(); virtual void vfunc_42(); virtual void vfunc_43(); virtual void vfunc_44();
+    virtual void vfunc_45(); virtual void vfunc_46(); virtual void vfunc_47(); virtual void vfunc_48();
+    virtual void vfunc_49(); virtual void vfunc_50(); virtual void vfunc_51(); virtual void vfunc_52();
+    virtual void vfunc_53(); virtual void vfunc_54(); virtual void vfunc_55(); virtual void vfunc_56();
+    virtual void vfunc_57(); virtual void vfunc_58(); virtual void vfunc_59(); virtual void vfunc_60();
+    virtual void vfunc_61(); virtual void vfunc_62(); virtual void vfunc_63(); virtual void vfunc_64();
+    virtual void vfunc_65(); virtual void vfunc_66(); virtual void vfunc_67(); virtual void vfunc_68();
+    virtual void vfunc_69(); virtual void vfunc_70(); virtual void vfunc_71(); virtual void vfunc_72();
+    virtual void vfunc_73(); virtual void vfunc_74(); virtual void vfunc_75(); virtual void vfunc_76();
+    virtual void vfunc_77();
+    virtual bool vfunc_78();                              // +0x138
+    int sub_001F3980();
+};
+
+struct Member_00166CE0
+{
+    Object_00166CE0* sub_0017B9C0();
+};
+
+class Class_00166CE0
+{
+public:
+    int sub_00166CE0();
+    char m_pad00[0x2AC];
+    Member_00166CE0 m_Field2AC;                           // +0x2AC
+    char m_pad2AD[0x378 - 0x2AD];
+    int m_Handle;                                         // +0x378
+};
+
+int Class_00166CE0::sub_00166CE0()
+{
+    int found = sub_0002AC90(m_Handle);
+    if (found)
+        return found;
+    Object_00166CE0* o = m_Field2AC.sub_0017B9C0();
+    if (o && o->vfunc_78())
+        return o->sub_001F3980();
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00166D80 (0x00166D80, 41 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -130975,6 +131070,51 @@ void Class_00240610::sub_00240610(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00240630 (0x00240630, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the stream's current position is still inside the current entry's range (only when that entry has data).
+// ============================================================================
+// bin: xb
+// va: 0x00240630
+// what: Says whether the stream's current position is still inside the current entry's range (only when that entry has data).
+// tool: Claude Opus 5.5
+
+// sub_00240630 (0x00240630, 59 bytes)
+
+struct Source_00240630
+{
+    unsigned int sub_000EFDA0();
+};
+
+struct Entry_00240630
+{
+    int m_Field00;
+    unsigned int m_Field04;                        // +0x04
+    unsigned int m_Field08;                        // +0x08
+    unsigned int m_Field0C;                        // +0x0C
+};
+
+class Class_00240630
+{
+public:
+    int sub_00240630();
+    char m_pad00[0x80];
+    Entry_00240630 m_Entries[32];                  // +0x80
+    int m_Index;                                   // +0x280
+    Source_00240630* m_Source;                     // +0x284
+};
+
+int Class_00240630::sub_00240630()
+{
+    Entry_00240630* e = &m_Entries[m_Index];
+    if (e->m_Field08 > e->m_Field04) {
+        if (m_Source->sub_000EFDA0() < e->m_Field0C + e->m_Field08)
+            return 1;
+    }
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00240770 (0x00240770, 168 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -131009,6 +131149,50 @@ int Class_00240770::sub_00240770(int a1)
     m_Field284->sub_00240570((int)(&a1), 1, 4, 1);
     *(int*)((m_Field280 << 4) + (int)this + 136) = a1;
     return *(int*)(((m_Field280 + 8) << 4) + (int)this);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00240820 (0x00240820, 73 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Leaves the current entry: moves the stream on past whatever is left of it, then drops back to the entry before.
+// ============================================================================
+// bin: xb
+// va: 0x00240820
+// what: Leaves the current entry: moves the stream on past whatever is left of it, then drops back to the entry before.
+// tool: Claude Opus 5.5
+
+// sub_00240820 (0x00240820, 73 bytes)
+
+struct Source_00240820
+{
+    unsigned int sub_000EFDA0();
+    void sub_002404C0(unsigned int count);
+};
+
+struct Entry_00240820
+{
+    int m_Field00;
+    unsigned int m_Field04;                        // +0x04
+    unsigned int m_Field08;                        // +0x08
+    unsigned int m_Field0C;                        // +0x0C
+};
+
+class Class_00240820
+{
+public:
+    void sub_00240820();
+    char m_pad00[0x80];
+    Entry_00240820 m_Entries[32];                  // +0x80
+    int m_Index;                                   // +0x280
+    Source_00240820* m_Source;                     // +0x284
+};
+
+void Class_00240820::sub_00240820()
+{
+    unsigned int length = m_Entries[m_Index].m_Field0C;
+    unsigned int start = m_Entries[m_Index].m_Field08;
+    m_Source->sub_002404C0(start + length - m_Source->sub_000EFDA0());
+    m_Index--;
 }
 
 // ============================================================================
@@ -148950,6 +149134,48 @@ public:
 void Class_002CE350::sub_002CE350(int a1)
 {
     m_Field08 = (unsigned short)a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002CE3C0 (0x002CE3C0, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Makes a string from a piece of text; with no text it shares the one empty string (counting one more user).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CE3C0.cpp --va 0x002CE3C0 --bin xb --match '??0String_002CE3C0'
+// bin: xb
+// va: 0x002CE3C0
+// what: Makes a string from a piece of text; with no text it shares the one empty string (counting one more user).
+// tool: Claude Opus 5.5
+
+// sub_002CE3C0 (0x002CE3C0, 80 bytes)
+
+#include <string.h>
+
+extern "C" char* DAT_004630F8;                            // the shared empty text
+struct Header_002CE3C0 { int m_pad00; short m_Users; unsigned short m_Length; };     // the 8 bytes before the text
+
+class String_002CE3C0
+{
+public:
+    String_002CE3C0(const char* text, int a2);
+    void sub_002CE360(const char* text, int length, int capacity, int a4);
+    char* m_Text;                                         // +0x00
+    short m_Kind;                                         // +0x04
+    short m_pad06;
+    short m_Field08;                                      // +0x08
+};
+
+String_002CE3C0::String_002CE3C0(const char* text, int a2)
+{
+    if (!text) {
+        m_Text = DAT_004630F8;
+        ((Header_002CE3C0*)DAT_004630F8 - 1)->m_Users++;
+        m_Field08 = 0;
+        m_Kind = 2;
+        return;
+    }
+    int length = strlen(text);
+    sub_002CE360(text, length, length, a2);
 }
 
 // ============================================================================

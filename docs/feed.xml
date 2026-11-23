@@ -5,8 +5,64 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-23T00:18:36Z</updated>
+  <updated>2026-11-23T00:27:13Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>sub_002CE3C0 (Xbox, 80 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CE3C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CE3C0</id>
+    <updated>2026-11-23T00:27:13Z</updated>
+    <summary>Makes a string from a piece of text; with no text it shares the one empty string (counting one more user). 0x002CE3C0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001FDD40 (Xbox prototype, 73 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001FDD40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001FDD40</id>
+    <updated>2026-11-23T00:26:59Z</updated>
+    <summary>0x001FDD40 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00240820 (Xbox, 73 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00240820"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00240820</id>
+    <updated>2026-11-23T00:26:45Z</updated>
+    <summary>Leaves the current entry: moves the stream on past whatever is left of it, then drops back to the entry before. 0x00240820 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001FDB50 (Xbox prototype, 59 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001FDB50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001FDB50</id>
+    <updated>2026-11-23T00:26:31Z</updated>
+    <summary>0x001FDB50 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00240630 (Xbox, 59 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00240630"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00240630</id>
+    <updated>2026-11-23T00:26:17Z</updated>
+    <summary>Says whether the stream's current position is still inside the current entry's range (only when that entry has data). 0x00240630 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00166CE0 (Xbox, 65 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00166CE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00166CE0</id>
+    <updated>2026-11-23T00:26:03Z</updated>
+    <summary>Returns the object it keeps a handle to; failing that, asks its member at +0x2AC for one and uses it if that one agrees. 0x00166CE0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0008ECF0 (Xbox prototype, 57 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008ECF0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008ECF0</id>
+    <updated>2026-11-23T00:25:49Z</updated>
+    <summary>0x0008ECF0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0009A2B0 (Xbox, 57 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0009A2B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0009A2B0</id>
+    <updated>2026-11-23T00:25:35Z</updated>
+    <summary>Formats text like printf into the next of 16 reusable 1 KB buffers and returns it. 0x0009A2B0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>sub_002CE560 (Xbox, 75 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CE560"/>
@@ -300,61 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:xb:0x00319650</id>
     <updated>2026-11-22T23:02:03Z</updated>
     <summary>0x00319650 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0031CDF0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0031CDF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031CDF0</id>
-    <updated>2026-11-22T23:01:47Z</updated>
-    <summary>0x0031CDF0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0031CDD0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0031CDD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031CDD0</id>
-    <updated>2026-11-22T23:01:47Z</updated>
-    <summary>0x0031CDD0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0031CDB0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0031CDB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031CDB0</id>
-    <updated>2026-11-22T23:01:33Z</updated>
-    <summary>0x0031CDB0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0031CD90 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0031CD90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031CD90</id>
-    <updated>2026-11-22T23:01:33Z</updated>
-    <summary>0x0031CD90 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0031B800 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0031B800"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031B800</id>
-    <updated>2026-11-22T23:01:33Z</updated>
-    <summary>0x0031B800 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00317ED0 (Xbox, 22 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00317ED0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00317ED0</id>
-    <updated>2026-11-22T23:01:33Z</updated>
-    <summary>0x00317ED0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0031B7E0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0031B7E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031B7E0</id>
-    <updated>2026-11-22T23:01:18Z</updated>
-    <summary>0x0031B7E0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0031B7C0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0031B7C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031B7C0</id>
-    <updated>2026-11-22T23:01:18Z</updated>
-    <summary>0x0031B7C0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>
